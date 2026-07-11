@@ -43,14 +43,14 @@ does not claim current Perl/Rust/Dart CLI fixture identity, complete public
 capability parity, or generated-source parity; those remain global `.1.5`,
 `.1.6`, and `.3` work.
 
-`.1.5.4.0` quantified that distinction at 13/61. `.1.5.4.1` updates this checker
-to require shared help and phase-only primary stderr, adds strict UTF-8 package
-coverage, and advances the unchanged global contract to 42/61 in both option
-environments. The checker still exercises Julia's rich trace pending the
-independent canonical projection under active `.1.5.4.2`.
+`.1.5.4.0` quantified that distinction at 13/61. `.1.5.4.1` updates shared help,
+strict UTF-8, and phase-only errors; `.1.5.4.2` switches primary trace to the
+independent canonical projection. The checker now exercises canonical primary
+trace while separate package tests retain rich native trace. The unchanged
+global contract passes 61/61 in both option environments.
 
 Related facts: [[julia-primary-cli-failure-trace-routing]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-local-verification-gate]], [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[julia-scoped-parity-no-drift]],
-[[julia-global-cli-61-audit]].
+[[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]].

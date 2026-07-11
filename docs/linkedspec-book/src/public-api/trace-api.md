@@ -145,11 +145,10 @@ events. `.7.3.2.3` composes that emitter through native primary execution, and
 routed/mirrored behavior across real processes; this still does not claim
 complete backend or CLI parity.
 
-`FUTURE-PARITY-BACKLOG.1.5.4.1` now separates the portable process boundary
-from those native diagnostics: exact help, strict UTF-8 files, and phase-only
-stderr pass 42/61 shared cases in both option environments. The 19 remaining
-cases are precisely the canonical trace projection owned by active `.1.5.4.2`;
-the native emitter and APIs below remain unchanged.
+`FUTURE-PARITY-BACKLOG.1.5.4.1` separates exact help, strict UTF-8 files, and
+phase-only stderr from native diagnostics. `.1.5.4.2` now adds an adapter-local
+canonical phase recorder around native operations and closes 61/61 shared cases
+in both option environments. The native emitter and APIs below remain unchanged.
 
 The Julia control surface is:
 
@@ -246,8 +245,8 @@ The Perl reference backend ships `bin/linkedspec`, and the Julia variant ships
 project these controls through one canonical phase protocol; Perl is the current
 61-case reference after strict UTF-8 expansion. `linkedspec-rust` projects the same protocol independently of its
 richer native trace API and `.1.5.2.4` closes all 61 unchanged cases in both option environments plus recurring
-`tools/run_rust_local.sh` verification. Dart is also 61/61. Julia is 42/61 after exact boundary/error repair;
-active `.1.5.4.2` owns its 19 canonical-trace residuals under the global CLI lane.
+`tools/run_rust_local.sh` verification. Dart and Julia also independently project this protocol and pass 61/61
+default/POSIX. Active `.1.5.4.3` owns recurring four-command integration, not more trace semantics.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \

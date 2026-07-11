@@ -131,9 +131,9 @@ accumulators/returns, recursion/progress guards, registered user functions, diag
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
 stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
-passes with 1,019 assertions and status `runtime-corpus-primary-cli`. `.1.5.4.1` updates its exact help/error checks,
-adds strict UTF-8 package coverage, and advances the warmed global contract to 42/61 default/POSIX. Its 19
-remaining failures are canonical trace under `.1.5.4.2`; the checker still exercises rich native trace meanwhile.
+passes with 1,019 assertions and status `runtime-corpus-primary-cli`. `.1.5.4.1` updates exact help/errors and adds
+strict UTF-8 coverage; `.1.5.4.2` switches only primary trace to the independent canonical projection. Julia now
+passes 61/61 default/POSIX, while separate package tests continue to exercise rich native trace.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

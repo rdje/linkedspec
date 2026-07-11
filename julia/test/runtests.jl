@@ -757,9 +757,18 @@ Top::
         @test isempty(error_output)
         trace_text = read(trace_path, String)
         @test !occursin("stale trace", trace_text)
-        @test occursin("julia_frontend:parse_spec", trace_text)
-        @test occursin("julia_compiler:compile_spec", trace_text)
-        @test occursin("julia_runtime:parse", trace_text)
+        @test trace_text ==
+            "[linkedspec][low] compile:start\n" *
+            "[linkedspec][medium] request source=file input=file " *
+            "top_rule=<default> parse_mode=seek\n" *
+            "[linkedspec][high] arguments source_bytes=$(ncodeunits(spec_path)) " *
+            "input_bytes=$(ncodeunits(input_path))\n" *
+            "[linkedspec][low] compile:ok\n" *
+            "[linkedspec][low] input:start\n" *
+            "[linkedspec][high] input bytes=1\n" *
+            "[linkedspec][low] input:ok\n" *
+            "[linkedspec][low] invoke:start\n" *
+            "[linkedspec][low] invoke:ok\n"
     end
 end
 
@@ -821,12 +830,32 @@ end
     @test LinkedSpecJulia._primary_cli_fatal_error(OutOfMemoryError())
     @test LinkedSpecJulia._primary_cli_fatal_error(StackOverflowError())
     @test !LinkedSpecJulia._primary_cli_fatal_error(ArgumentError("ordinary"))
+    @test LinkedSpecJulia._primary_cli_valid_trace_level("999999999999999999999")
+    @test all(
+        value -> !LinkedSpecJulia._primary_cli_valid_trace_level(value),
+        ("+1", "-"),
+    )
+    @test LinkedSpecJulia._primary_cli_trace_level_number("med") == 200
+    @test LinkedSpecJulia._primary_cli_trace_level_number("250") == 250
+    @test LinkedSpecJulia._primary_cli_trace_level_number("999999999999999999999") > 500
+    @test LinkedSpecJulia._primary_cli_trace_field("A β\n") == "A%20%CE%B2%0A"
 
     mktempdir() do directory
         trace_path = joinpath(directory, "trace.log")
         trace_spec = _returning_spec("trace")
         base_args = ["--inline-spec", trace_spec, "--input", "x", "--trace", "high"]
         expected_json = "\"trace\"\n"
+        expected_trace =
+            "[linkedspec][low] compile:start\n" *
+            "[linkedspec][medium] request source=inline input=literal " *
+            "top_rule=<default> parse_mode=seek\n" *
+            "[linkedspec][high] arguments source_bytes=$(ncodeunits(trace_spec)) input_bytes=1\n" *
+            "[linkedspec][low] compile:ok\n" *
+            "[linkedspec][low] input:start\n" *
+            "[linkedspec][high] input bytes=1\n" *
+            "[linkedspec][low] input:ok\n" *
+            "[linkedspec][low] invoke:start\n" *
+            "[linkedspec][low] invoke:ok\n"
 
         identified_spec_path = joinpath(directory, "identified.spec")
         write(identified_spec_path, trace_spec)
@@ -844,8 +873,7 @@ end
 
         status, output, error_output = cli_run([base_args..., "--trace-mode", "stdout"])
         @test status == 0
-        @test occursin("julia_frontend:parse_spec", output)
-        @test endswith(output, expected_json)
+        @test output == expected_trace * expected_json
         @test isempty(error_output)
 
         write(trace_path, "stale\n")
@@ -859,8 +887,7 @@ end
         @test output == expected_json
         @test isempty(error_output)
         routed_trace = read(trace_path, String)
-        @test !occursin("stale", routed_trace)
-        @test occursin("julia_runtime:parse", routed_trace)
+        @test routed_trace == expected_trace
 
         status, output, error_output = cli_run([
             base_args...,
@@ -886,8 +913,7 @@ end
             "--trace-reset",
         ])
         @test status == 0
-        @test occursin("julia_compiler:compile_spec", output)
-        @test endswith(output, expected_json)
+        @test output == expected_trace * expected_json
         @test isempty(read(trace_path, String))
         @test isempty(error_output)
 
@@ -900,7 +926,7 @@ end
             "stdout",
         ])
         @test status == 0
-        @test endswith(output, expected_json)
+        @test output == expected_trace * expected_json
         @test read(trace_path, String) == "preserved\n"
         @test isempty(error_output)
 
@@ -910,8 +936,7 @@ end
             "",
         ])
         @test status == 0
-        @test occursin("julia_frontend:parse_spec", output)
-        @test endswith(output, expected_json)
+        @test output == expected_trace * expected_json
         @test isempty(error_output)
 
         status, output, error_output = cli_run([base_args..., "--trace-mode", "route"])
@@ -921,8 +946,7 @@ end
 
         status, output, error_output = cli_run([base_args..., "--trace-mode", "mirror"])
         @test status == 0
-        @test occursin("julia_runtime:parse", output)
-        @test endswith(output, expected_json)
+        @test output == expected_trace * expected_json
         @test isempty(error_output)
 
         status, output, error_output = cli_run([
@@ -936,6 +960,7 @@ end
         @test occursin("🔎 ", output)
         @test occursin("🧭 ", output)
         @test endswith(output, expected_json)
+        @test !occursin("julia_", output)
         @test isempty(error_output)
 
         status, output, error_output = cli_run([

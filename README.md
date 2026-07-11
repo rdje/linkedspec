@@ -74,7 +74,7 @@ Top-level directories and files:
   - Native Rust backend workspace. `linkedspec-core` exposes `.spec` parsing/compilation and
     `linkedspec-runtime::engine::Engine` executes compiled specs directly over Rust string/result values.
   - `linkedspec-runtime/src/bin/linkedspec-rust.rs` is the Rust primary command. Its exact argument/help/loading
-    boundary and direct-result execution are landed; canonical trace remains active convergence work.
+    boundary, direct-result execution, canonical trace, and recurring default/POSIX gate are closed.
 - `specs/`
   - LinkedSpec grammar/spec definitions (`*.spec`).
 - `t/`
@@ -164,9 +164,9 @@ Top-level directories and files:
     parsing, and failure trace on stdout. `.1.5.1.1` now adds the reusable byte-exact harness/help baseline;
     `.1.5.1.5` now closes canonical trace at 53/53 exact cases with local-gate integration. Its signoff exposed a
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
-    Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, emits phase-only primary errors, and
-    raises the current package proof to 1,019 assertions plus 99/99. Julia is 42/61 default/POSIX; active `.2`
-    owns the 19 canonical-trace residuals before the recurring four-command driver.
+    Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
+    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,019
+    assertions plus 99/99 and 61/61 default/POSIX; `.3` owns the recurring warmed four-command driver.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -203,8 +203,8 @@ Top-level project docs:
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`; Dart is also closed at 61/61. Julia is 42/61 with only canonical trace active under
-  `FUTURE-PARITY-BACKLOG.1.5.4.2`.
+  `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Active
+  `FUTURE-PARITY-BACKLOG.1.5.4.3` owns one recurring warmed four-command identity gate.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

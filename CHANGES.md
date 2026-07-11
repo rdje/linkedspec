@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.2 — add canonical Julia CLI trace
+
+**Adapter trace:** Julia's primary command now owns ADR `0024`'s deterministic compile/input/invoke phase
+recorder independently of `LinkedSpecTraceEmitter`. It implements exact named and arbitrary-size numeric levels,
+UTF-8 byte counts, uppercase percent escaping, emoji, stdout/route/mirror defaults, reset/append/persistence, and
+canonical JSON framing.
+
+**Failure/native separation:** Compile/input/invoke failures record the portable phase error while retaining exact
+stderr/exit behavior; trace setup/write failures become stable compilation failures. Native parse/compile/runtime
+APIs still accept and test the rich Julia emitter, so embedding diagnostics lose no information.
+
+**Proof/frontier:** The complete Julia gate passes 1,019 assertions, nine process families, and 99/99 corpus. All
+61 unchanged cases pass in default and POSIX environments. `.1.5.4.3` is active for warmup plus one recurring
+four-command identity driver; fixtures and native trace are unchanged.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.1 — align Julia CLI boundary
 
 **Portable boundary:** Julia now renders the exact shared help/usage bytes for `linkedspec_julia`, reads file

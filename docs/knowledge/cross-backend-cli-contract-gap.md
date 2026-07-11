@@ -1,6 +1,6 @@
 ---
 id: cross-backend-cli-contract-gap
-title: Implemented backend CLIs do not yet expose one identical user-facing interface
+title: Implemented backend CLIs pass one exact interface; recurring four-command proof remains
 answers:
   - do all LinkedSpec backend CLIs have the same options
   - are the Perl Rust Dart and Julia CLIs equivalent
@@ -11,11 +11,11 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.1 advances Julia to 42/61 with only 19 canonical-trace residuals before the final matrix."
+evidence: "Perl/Rust/Dart/Julia pass 61/61 default/POSIX after FUTURE-PARITY-BACKLOG.1.5.4.2; active .1.5.4.3 owns one warmed recurring four-command driver and lane closeout."
 reverify: "bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
 ---
 
-The implemented backend CLI surfaces are not currently interface-equivalent:
+The four implemented backend CLI surfaces now pass the same exact 61-case interface:
 
 - Perl `bin/linkedspec` parses an arbitrary named, file-backed, or inline spec against literal or file-backed
   input. It exposes top-rule, parse-mode, and trace controls, prints canonical JSON, and distinguishes runtime
@@ -27,8 +27,8 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
   through the native pipeline, emits recursively key-sorted direct JSON, renders exact shared help, rejects
-  malformed UTF-8 files, and emits phase-only primary errors. It passes 42/61 default/POSIX; the 19 remaining
-  differences are canonical trace, while native rich diagnostics/trace remain independent.
+  malformed UTF-8 files, emits phase-only primary errors, and projects canonical trace independently of rich
+  native trace. It passes 61/61 default/POSIX.
 - The Rust workspace now contains `linkedspec-rust`. Exact arguments/loading, reusable direct-result/entry/mode
   execution, and canonical CLI trace pass all 61 shared cases in both environments; its primary lane is closed.
 
@@ -40,8 +40,8 @@ repair, and honest no-drift work rather than treating 99/99 corpus execution as 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
 Perl/Rust/Dart repairs are closed; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's local repair, complete through exact
 local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate;
-`.1.5.4.0` records Julia's 13/61 baseline; `.1.5.4.1` advances it to 42/61. Active `.2` owns canonical trace and
-`.3` the warmed recurring four-command gate.
+`.1.5.4.0` records Julia's 13/61 baseline, `.1` advances it to 42/61, and `.2` closes 61/61. Active `.3` owns the
+warmed recurring four-command gate and exact CLI-lane closeout; broader capability/codegen parity remains `.1.6`/`.3`.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
@@ -52,5 +52,6 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
 [[perl-primary-cli-success-conformance]], [[perl-primary-cli-operational-failures]],
 [[primary-cli-utf8-process-boundary-gap]], [[rust-canonical-primary-cli-trace]],
-[[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]].
+[[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]],
+[[julia-canonical-primary-cli-trace]].
 Canonical trace: [[canonical-primary-cli-trace-protocol]].

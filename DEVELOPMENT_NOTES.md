@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.2 — canonical trace wraps native phases, not native events):
+  Keep the primary recorder entirely in the adapter and call native parse/compile/execute without its rich emitter.
+  Count Julia UTF-8 text with `ncodeunits`, escape field `codeunits` bytewise, and model numeric thresholds from
+  optional-minus ASCII digits using arbitrary precision rather than host `Int` limits. Emit phase outcomes around
+  native calls; trace IO failure is a stable compilation failure. This preserves rich embedding trace while making
+  all 61 process cases byte-identical.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.1 — validate bytes before trusting a host string):
   Julia `String(read(path))` preserves file bytes but can represent invalid UTF-8, so strict text boundaries must
   call `isvalid` before parsing or execution. This preserves valid BOM/newline/normalization data without guessing

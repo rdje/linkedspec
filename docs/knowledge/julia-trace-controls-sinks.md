@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes native CLI sink behavior. The current suite is 1,019 and corpus 99/99; canonical primary trace is active .1.5.4.2."
+evidence: "JULIA-BACKEND-PARITY.4.5.2 adds native trace controls/sinks; .7.3.2.1 spans the native pipeline. FUTURE-PARITY-BACKLOG.1.5.4.2 adds a separate canonical primary recorder while native APIs remain unchanged."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -45,11 +45,12 @@ At `.4.5.2`, runtime tracing emitted the top-level parse scope only. `.4.5.3`
 now adds rule, regex, dispatch, lifecycle, recursion, cursor, and source-boundary
 instrumentation while retaining this control/sink surface. `.4.5.4` closes the
 scoped runtime no-drift proof, and `.7.3.2.1` later closes the frontend/compiler/
-function-shell/staged coverage required by primary CLI trace options.
+function-shell/staged coverage retained for native embedding. `.1.5.4.2` deliberately does not route those events
+through the primary command; its independent canonical recorder provides portable command trace instead.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
 [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-canonical-primary-cli-trace]].

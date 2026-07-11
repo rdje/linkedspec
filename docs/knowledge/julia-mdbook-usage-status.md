@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, mdbook, documentation, parity, embedding, limitations, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; .7.3.2.5 documents nine-family process conformance. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the current suite to 1,019 and global CLI identity to 42/61."
+evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; FUTURE-PARITY-BACKLOG.1.5.4.2 documents canonical trace, 1,019 assertions, and 61/61 default/POSIX CLI identity."
 reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book"
 ---
 
@@ -38,8 +38,9 @@ it to the future split source-emitter lane under `FUTURE-PARITY-BACKLOG.3`. ADR 
 complete public parity. `.7.3.2.0` splits the exact primary CLI into five mechanisms; `.7.3.2.1` now closes shared-
 emitter parse/validation/compile/function-shell/staged trace coverage. `.7.3.2.2` closes exact options/resolution/
 loading, `.7.3.2.3` closes native execution/direct canonical JSON, `.7.3.2.4` closes normalized errors/exits/trace
-routing, and `.7.3.2.5` closes direct-process no-drift. `.7.3.3` closes that audit; the Julia root remains active/
-delegated to global `.1.5`, `.1.6`, and `.3` rather than being presented as complete parity. `JuliaFormatter`
+routing, and `.7.3.2.5` closes direct-process no-drift. Global `.1.5.4.1`/`.2` then close exact boundary and
+canonical trace at 61/61; `.1.5.4.3` owns recurring matrix integration. The Julia root remains delegated to
+global `.1.6` and `.3` rather than being presented as complete parity. `JuliaFormatter`
 and `JET` remain optional local tooling rather than behavior prerequisites.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],
@@ -48,4 +49,4 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generate
 [[julia-frontend-compiler-staged-trace-events]], [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
-[[julia-scoped-parity-no-drift]].
+[[julia-scoped-parity-no-drift]], [[julia-canonical-primary-cli-trace]].

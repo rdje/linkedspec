@@ -120,7 +120,8 @@ decoding, preserved BOM/code points/newlines, recursive canonical JSON, stable i
 trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; Rust `.1.5.2.4` combines its
 exact boundary, reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
 unchanged cases in default/POSIX environments and adds recurring local verification. The Rust primary-command
-milestone is closed; Dart `.1.5.3` is active.
+milestone is closed; Dart and Julia now also pass all 61 default/POSIX cases. `.1.5.4.3` owns recurring warmed
+four-command integration before the exact CLI lane closes.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
@@ -525,17 +526,17 @@ remains in the separate runner. Named specs resolve through exact current path, 
 spec-driven top-level-function source now execute through the native compiler/runtime with top-rule, parse-mode,
 and trace controls. Success prints the direct top-rule value with recursively sorted object keys and one newline.
 Source compilation precedes input-file loading. Compilation, input-load, and invocation failures use stable stderr
-headings and exit `1`; usage errors exit `2`. The existing trace emitter now composes stdout/route/mirror, reset,
-quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` locks nine real-process families with
+headings and exit `1`; usage errors exit `2`. Native trace retains stdout/route/mirror, reset, quiet, and emoji
+controls; the primary command now uses a separate canonical phase recorder. `.7.3.2.5` locks nine process families with
 exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` closes honest local no-drift; global cross-backend
 fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
 
 The global unchanged-suite audit in `FUTURE-PARITY-BACKLOG.1.5.4.0` measured warmed Julia at 13/61. `.1.5.4.1`
 now renders exact shared help, rejects malformed source/input bytes as UTF-8 without converting valid text, and
 emits only the stable phase heading on primary stderr. Native structured exceptions retain diagnostic detail.
-The unchanged suite is therefore 42/61 in default and POSIX environments. All 19 remaining differences are rich
-native trace versus the independent canonical primary protocol owned by active `.1.5.4.2`; `.3` then owns project
-warmup plus one recurring four-backend matrix. The native rich diagnostics/trace APIs remain available.
+That boundary reached 42/61. `.1.5.4.2` now projects exact levels, UTF-8 counts, escaping, emoji, sinks, file
+lifecycle, failures, and result framing independently of rich native trace, closing 61/61 default/POSIX. `.3` owns
+project warmup plus one recurring four-backend matrix. The native rich diagnostics/trace APIs remain available.
 
 The boundary claims the exact Julia-local primary CLI, but not four-backend fixture identity, complete public
 capability parity, or generated Julia source. `.7.2` deliberately defers generated Julia source to the split

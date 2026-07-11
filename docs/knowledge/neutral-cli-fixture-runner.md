@@ -29,8 +29,8 @@ PERL5LIB= perl tools/run_cli_conformance.pl \
 ```
 
 For Rust, `tools/run_rust_local.sh` builds the command and invokes this same runner in default and POSIX option
-environments. Perl, Rust, and Dart pass all 61 unchanged cases. Julia's `.1.5.4.1` repair passes 42/61 in both
-environments; all 19 residuals are canonical trace under `.1.5.4.2`, followed by the recurring driver in `.3`.
+environments. Perl, Rust, Dart, and Julia pass all 61 unchanged cases in both environments. `.1.5.4.3` now owns
+one warmed recurring four-command invocation of this unchanged contract.
 
 Schema version 1 validates unique safe ids/paths, known keys, checked-in input
 and expected files, argument arrays, channel definitions, generated-file
@@ -65,4 +65,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-strict-arguments]], [[perl-primary-cli-success-conformance]],
 [[perl-primary-cli-operational-failures]], [[canonical-primary-cli-trace-protocol]],
 [[primary-cli-utf8-process-boundary-gap]], [[primary-cli-strict-utf8-text-contract]],
-[[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]].
+[[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]],
+[[julia-canonical-primary-cli-trace]].

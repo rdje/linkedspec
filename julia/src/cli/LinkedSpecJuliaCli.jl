@@ -36,6 +36,14 @@ struct _PrimaryCliRequest
     input_path::Union{Nothing,String}
 end
 
+mutable struct _PrimaryCliCanonicalTrace
+    level::BigInt
+    file_path::Union{Nothing,String}
+    mode::Symbol
+    emoji::Bool
+    stdout_io::IO
+end
+
 const _PRIMARY_CLI_VALUE_OPTIONS = Set([
     "--spec",
     "--spec-file",
@@ -226,7 +234,7 @@ function _primary_cli_valid_trace_level(value::String)
     if value != strip(value)
         return false
     end
-    if tryparse(Int, value) !== nothing
+    if _primary_cli_numeric_trace_level(value)
         return true
     end
     return lowercase(value) in (
@@ -240,6 +248,13 @@ function _primary_cli_valid_trace_level(value::String)
         "debug",
         "verbose",
     )
+end
+
+function _primary_cli_numeric_trace_level(value::String)
+    bytes = codeunits(value)
+    first_digit = !isempty(bytes) && first(bytes) == 0x2d ? 2 : 1
+    return length(bytes) >= first_digit &&
+        all(index -> 0x30 <= bytes[index] <= 0x39, first_digit:length(bytes))
 end
 
 function _split_primary_cli_option(argument::String)
@@ -420,6 +435,120 @@ function _primary_cli_trace_emitter(options::_PrimaryCliOptions; stdout_io::IO =
     return LinkedSpecTraceEmitter(config; stdout_io = stdout_io)
 end
 
+function _primary_cli_canonical_trace(
+    options::_PrimaryCliOptions;
+    stdout_io::IO = stdout,
+    cwd::AbstractString = pwd(),
+)
+    file_path = if options.trace_file === nothing || isempty(options.trace_file)
+        nothing
+    else
+        _primary_cli_explicit_path(options.trace_file, cwd)
+    end
+    mode = if options.trace_mode !== nothing
+        Symbol(options.trace_mode)
+    elseif file_path !== nothing
+        :route
+    else
+        :stdout
+    end
+    if options.trace_reset && file_path !== nothing
+        try
+            open(file_path, "w") do _
+                nothing
+            end
+        catch
+            return nothing
+        end
+    end
+    return _PrimaryCliCanonicalTrace(
+        _primary_cli_trace_level_number(options.trace_level),
+        file_path,
+        mode,
+        options.trace_emoji,
+        stdout_io,
+    )
+end
+
+function _primary_cli_trace_level_number(value::Union{Nothing,String})
+    value === nothing && return BigInt(0)
+    if _primary_cli_numeric_trace_level(value)
+        return parse(BigInt, value)
+    end
+    level = lowercase(value)
+    level in ("none", "quiet") && return BigInt(0)
+    level == "low" && return BigInt(100)
+    level in ("medium", "med") && return BigInt(200)
+    level == "high" && return BigInt(300)
+    level == "full" && return BigInt(400)
+    level in ("debug", "verbose") && return BigInt(500)
+    throw(ArgumentError("trace level was not validated: '$value'"))
+end
+
+function _emit_primary_cli_canonical_trace(
+    trace::_PrimaryCliCanonicalTrace,
+    threshold::Int,
+    level_name::String,
+    event::String,
+)
+    trace.level < threshold && return true
+    emoji = trace.emoji ? "$(_primary_cli_trace_emoji(threshold)) " : ""
+    line = "[linkedspec][$level_name] $emoji$event\n"
+    try
+        if trace.mode in (:stdout, :mirror)
+            write(trace.stdout_io, line)
+        end
+        if trace.mode in (:route, :mirror) && trace.file_path !== nothing
+            open(trace.file_path, "a") do file
+                write(file, line)
+                flush(file)
+            end
+        end
+    catch
+        return false
+    end
+    return true
+end
+
+function _primary_cli_trace_emoji(threshold::Int)
+    threshold == 100 && return "ℹ️"
+    threshold == 200 && return "🔎"
+    threshold == 300 && return "🧭"
+    threshold == 400 && return "🐞"
+    return "🔥"
+end
+
+function _primary_cli_trace_field(value::String)
+    output = IOBuffer()
+    for byte in codeunits(value)
+        allowed = (0x30 <= byte <= 0x39) ||
+            (0x41 <= byte <= 0x5a) ||
+            (0x61 <= byte <= 0x7a) ||
+            byte in (0x5f, 0x2e, 0x3a, 0x2d)
+        if allowed
+            write(output, byte)
+        else
+            print(output, '%', uppercase(string(byte; base = 16, pad = 2)))
+        end
+    end
+    return String(take!(output))
+end
+
+function _primary_cli_trace_phase_failure(
+    err::IO,
+    trace::_PrimaryCliCanonicalTrace,
+    event::String,
+    message::String,
+)
+    emitted = _emit_primary_cli_canonical_trace(trace, 100, "low", event)
+    _print_primary_cli_runtime_error(
+        err,
+        emitted ? message : "parser compilation failed",
+        nothing,
+    )
+    return 1
+end
+
 function _parse_primary_cli_spec(
     source::AbstractString;
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
@@ -568,25 +697,74 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
         return 0
     end
 
+    trace = _primary_cli_canonical_trace(options; stdout_io = io)
+    if trace === nothing
+        _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
+        return 1
+    end
+    source_kind = options.spec !== nothing ? "named" :
+        options.spec_file !== nothing ? "file" : "inline"
+    input_kind = options.input_file !== nothing ? "file" : "literal"
+    source_argument = something(options.spec, options.spec_file, options.inline_spec, "")
+    input_argument = something(options.input_file, options.input, "")
+    top_rule = options.top_rule === nothing ? "<default>" :
+        _primary_cli_trace_field(options.top_rule)
+    parse_mode = something(options.parse_mode, "seek")
+
+    initial_events = (
+        (100, "low", "compile:start"),
+        (
+            200,
+            "medium",
+            "request source=$source_kind input=$input_kind top_rule=$top_rule parse_mode=$parse_mode",
+        ),
+        (
+            300,
+            "high",
+            "arguments source_bytes=$(ncodeunits(source_argument)) input_bytes=$(ncodeunits(input_argument))",
+        ),
+        (500, "debug", "protocol version=1"),
+    )
+    for (threshold, level_name, event) in initial_events
+        if !_emit_primary_cli_canonical_trace(trace, threshold, level_name, event)
+            _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
+            return 1
+        end
+    end
+
     request = try
         _prepare_primary_cli_request(options; load_input_file = false)
     catch error
         if _primary_cli_fatal_error(error)
             rethrow()
         end
-        _print_primary_cli_runtime_error(err, "parser compilation failed", error)
-        return 1
+        return _primary_cli_trace_phase_failure(
+            err,
+            trace,
+            "compile:error",
+            "parser compilation failed",
+        )
     end
 
-    trace = nothing
     engine = try
-        trace = _primary_cli_trace_emitter(options; stdout_io = io)
-        _compile_primary_cli_request(request; trace = trace)
+        _compile_primary_cli_request(request)
     catch error
         if _primary_cli_fatal_error(error)
             rethrow()
         end
-        _print_primary_cli_runtime_error(err, "parser compilation failed", error)
+        return _primary_cli_trace_phase_failure(
+            err,
+            trace,
+            "compile:error",
+            "parser compilation failed",
+        )
+    end
+    if !_emit_primary_cli_canonical_trace(trace, 100, "low", "compile:ok")
+        _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
+        return 1
+    end
+    if !_emit_primary_cli_canonical_trace(trace, 100, "low", "input:start")
+        _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
         return 1
     end
 
@@ -596,18 +774,50 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
         if _primary_cli_fatal_error(error)
             rethrow()
         end
-        _print_primary_cli_runtime_error(err, "input load failed", error)
-        return 1
+        return _primary_cli_trace_phase_failure(
+            err,
+            trace,
+            "input:error",
+            "input load failed",
+        )
+    end
+    input_events = (
+        (300, "high", "input bytes=$(ncodeunits(input))"),
+        (100, "low", "input:ok"),
+        (100, "low", "invoke:start"),
+    )
+    for (threshold, level_name, event) in input_events
+        if !_emit_primary_cli_canonical_trace(trace, threshold, level_name, event)
+            _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
+            return 1
+        end
     end
 
     output = try
-        result = _invoke_primary_cli_request(engine, request, input; trace = trace)
+        result = _invoke_primary_cli_request(engine, request, input)
         _primary_cli_canonical_json(result.value)
     catch error
         if _primary_cli_fatal_error(error)
             rethrow()
         end
-        _print_primary_cli_runtime_error(err, "parser invocation failed", error)
+        return _primary_cli_trace_phase_failure(
+            err,
+            trace,
+            "invoke:error",
+            "parser invocation failed",
+        )
+    end
+    if !_emit_primary_cli_canonical_trace(trace, 100, "low", "invoke:ok")
+        _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
+        return 1
+    end
+    if !_emit_primary_cli_canonical_trace(
+        trace,
+        400,
+        "full",
+        "result json_bytes=$(ncodeunits(output))",
+    )
+        _print_primary_cli_runtime_error(err, "parser compilation failed", nothing)
         return 1
     end
 

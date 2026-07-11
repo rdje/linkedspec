@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.2 — add canonical Julia CLI trace**
+  (DONE — Julia is 61/61 default/POSIX; recurring four-command gate `.1.5.4.3` active).
+
+  **Implementation:** Added adapter-local ADR `0024` phases with exact thresholds, UTF-8 counts, escaping, emoji,
+  sinks, file lifecycle, traced failures, and result framing. Rich native Julia trace remains independent.
+
+  **Proof:** The complete Julia gate passes 1,019 assertions, nine process families, and 99/99 corpus; the unchanged
+  61-case suite passes in both option environments. Docs/KM/governance/book/whitespace/cleanup agree.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.1 — align Julia CLI boundary**
   (DONE — Julia is 42/61 default/POSIX; `.1.5.4.2` active for 19 canonical-trace cases).
 

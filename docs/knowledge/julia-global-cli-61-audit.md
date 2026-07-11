@@ -28,7 +28,8 @@ phase protocol. `.1.5.4.1` owns help/strict UTF-8/phase-only errors, `.2` canoni
 
 Current progression: `.1.5.4.1` is complete. Exact shared help, raw-byte `isvalid` UTF-8 validation, and phase-only
 primary stderr pass in default and POSIX environments, advancing Julia from 13 to 42/61. The 19 remaining failures
-are exclusively canonical rich-versus-portable trace differences under active `.1.5.4.2`.
+were exclusively canonical rich-versus-portable trace differences. `.1.5.4.2` is now complete and closes Julia at
+61/61 default/POSIX; `.1.5.4.3` owns only recurring warmed four-command integration.
 
 A cold first `using LinkedSpecJulia` may print Julia precompile progress to process stderr before application code
 runs. The existing `tools/check_julia_primary_cli.sh` already warms the project explicitly. The final global driver
@@ -37,4 +38,4 @@ not silently classified as LinkedSpec stderr behavior.
 
 Related facts: [[julia-primary-cli-process-conformance]], [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-failure-trace-routing]], [[canonical-primary-cli-trace-protocol]],
-[[cross-backend-cli-contract-gap]], [[dart-primary-cli-closeout]].
+[[cross-backend-cli-contract-gap]], [[dart-primary-cli-closeout]], [[julia-canonical-primary-cli-trace]].

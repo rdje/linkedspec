@@ -15,7 +15,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, trace, protocol, deterministic, utf8, backends, ADR-0024, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; Perl is the 61/61 default/POSIX reference, and FUTURE-PARITY-BACKLOG.1.5.2.4 closes Rust against the same unchanged cases."
+evidence: "ADR 0024 defines canonical primary phase trace; Perl, Rust, Dart, and Julia now pass the same 61/61 default/POSIX cases through independent adapter projections."
 reverify: "PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && bash tools/run_rust_local.sh"
 ---
 
@@ -63,11 +63,12 @@ threshold, default route, append, UTF-8 byte counts, escaped user fields, and al
 three routed failure phases. Together with help/usage/success/failure, Perl passed
 53/53 at trace closure; eight later strict UTF-8 cases make the current suite 61/61
 in both option environments.
-`tools/run_ci_local.sh` executes this same manifest twice for the Perl reference before Phase 0. Rust `.1.5.2.4`
-closes the same 61 unchanged cases in both environments through `tools/run_rust_local.sh`.
+`tools/run_ci_local.sh` executes this same manifest twice for the Perl reference before Phase 0. Rust, Dart, and
+Julia now independently close the same 61 unchanged cases in both environments while retaining native rich trace.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[neutral-cli-fixture-runner]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]], [[perl-primary-cli-operational-failures]],
 [[cross-backend-cli-contract-gap]], [[primary-cli-utf8-process-boundary-gap]],
-[[rust-canonical-primary-cli-trace]], [[rust-local-verification-gate]].
+[[rust-canonical-primary-cli-trace]], [[rust-local-verification-gate]],
+[[julia-canonical-primary-cli-trace]].

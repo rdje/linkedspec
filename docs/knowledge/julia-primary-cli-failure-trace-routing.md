@@ -46,12 +46,12 @@ Emoji rendering is owned by the shared emitter, not the CLI adapter. The level
 threshold prefixes are `🛑`, `ℹ️`, `🔎`, `🧭`, `🐞`, and `🔥` from none through
 debug. A disabled level still emits nothing.
 
-This began as Julia-local completion. `.1.5.4.1` updates its nine real-process families to lock phase-only primary
-stderr and exact shared help while preserving rich native exceptions/trace below the adapter. The unchanged suite
-is now 42/61 default/POSIX; `.1.5.4.2` owns all 19 remaining canonical-trace cases.
+This began as Julia-local completion. `.1.5.4.1` locks phase-only primary stderr and exact shared help. `.1.5.4.2`
+now projects canonical phase trace through the primary command while preserving rich native exceptions/trace below
+the adapter. Julia passes 61/61 default/POSIX.
 
 Related facts: [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-arguments-resolution-loading]], [[julia-trace-controls-sinks]],
 [[julia-runtime-structured-diagnostics]], [[user-observable-backend-cli-parity-contract]],
-[[julia-global-cli-61-audit]].
+[[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]].
 See also [[julia-primary-cli-process-conformance]].

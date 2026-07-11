@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to nine real-process families. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the package gate to 1,019 assertions; 99/99 remains exact."
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; FUTURE-PARITY-BACKLOG.1.5.4.2 proves its 1,019 assertions, nine canonical primary process families, and 99/99 corpus after trace convergence."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -49,4 +49,5 @@ one explicit opt-in that composes the focused gate without duplicating its comma
 Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
+[[julia-canonical-primary-cli-trace]].
