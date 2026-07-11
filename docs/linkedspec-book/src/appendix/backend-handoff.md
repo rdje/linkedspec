@@ -581,7 +581,7 @@ its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl contract-v1 is admitted pass. Rust's explicit staged full-manifest classifier compiles/runs 105/105 generated fixtures; it remains partial pending zero-failure closeout and strict recurring admission. Dart and Julia have no emitter. | `.3.2.1-.2` Rust closeout/admission; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl contract-v1 is admitted pass. Rust's explicit staged full-manifest classifier compiles/runs 105/105 generated fixtures and zero-failure closeout found no repair; it remains partial pending strict recurring admission. Dart and Julia have no emitter. | `.3.2.2` Rust admission; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -603,13 +603,13 @@ and the three portable trace roles while preserving legacy accumulator/trace beh
 Perl/Rust gates and admits that baseline: census is 57/1/2, with Perl pass. `.3.2.0` subsequently adds a staged
 full-manifest classifier that prepares every fixture through interpreter-first emission, writes 105 separate
 generated modules/tests into one isolated Cargo crate, and passes host compile/run 105/105. Rust remains partial
-until `.3.2.1-.2` close classification and make that proof a strict recurring admission gate.
+Zero-failure closeout `.3.2.1` finds no repair mechanism; `.3.2.2` must make the proof a strict recurring gate.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
 family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.3` admits the aligned Perl/Rust
-baseline. `.3.2.0` classifies Rust's full manifest 105/105 green with no repair mechanisms; `.3.2.1-.2` own
-zero-failure closeout and strict recurring admission. `.3.3` and `.3.4` add equivalent Dart and Julia source
+baseline. `.3.2.0` classifies Rust's full manifest 105/105 green and `.3.2.1` closes the empty repair inventory;
+`.3.2.2` owns strict recurring admission. `.3.3` and `.3.4` add equivalent Dart and Julia source
 emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
 and observable behavior through idiomatic host APIs.

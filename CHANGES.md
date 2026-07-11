@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.2.1 — close zero-failure Rust classification
+
+Closed the explicit classification/repair-splitting leaf without behavior code. The complete `.3.2.0` report
+accounts for all 105 cases and contains no source-emitter, generated-plan, generated-executor, dependency/build,
+or fixture-contract failure. Accordingly, no recursive repair child is justified and none was invented.
+
+Kept Rust generated source partial at census 57/1/2. Activated `.3.2.2` as the sole remaining Rust breadth leaf:
+it must make the all-105 proof strict and recurring, run complete admission gates, and only then promote Rust.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.2.0 — classify all Rust generated fixtures
 
 Added an explicit full-manifest Rust generated-source classifier with deterministic terminal stages and exact

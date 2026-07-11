@@ -18,20 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.2.0` — classified all 105 Rust generated-source fixtures green.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.3` — admitted the Perl/Rust generated-source v1 baseline.
-- recent_context: Census remains 57/1/2. The scalable staged classifier prepares every fixture through interpreter-
-  first v1 emission, then one isolated crate compiles/runs 105 separate generated modules/tests: 105 pass, zero
-  failure mechanisms in 184.46s. Rust remains partial until `.3.2.1` zero-failure closeout and `.3.2.2` strict
-  recurring admission. Dart/Julia remain gaps.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.2.1` — closed the empty Rust generated repair inventory.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.2.0` — classified all 105 Rust generated-source fixtures green.
+- recent_context: Census remains 57/1/2. The staged classifier passes 105/105 in 184.46s. `.3.2.1` confirms its
+  source-emitter, plan, executor, dependency/build, and fixture-contract failure inventories are all empty, so no
+  repair child or behavior code exists. Rust remains partial only until `.3.2.2` strict recurring admission;
+  Dart/Julia remain gaps.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.2.0 - classify all Rust generated fixtures`; previous committed HEAD is
-  `3bffacad FUTURE-PARITY-BACKLOG.3.1.3.3 - admit Perl Rust generated baseline`.
+  `FUTURE-PARITY-BACKLOG.3.2.1 - close zero-failure Rust classification`; previous committed HEAD is
+  `0e38dd6f FUTURE-PARITY-BACKLOG.3.2.0 - classify all Rust generated fixtures`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.2.1`; zero-failure Rust generated classification closeout is active.
-- next_action: record that `.3.2.0` found no source-emitter, plan, executor, dependency/build, or fixture-contract
-  failure mechanism; close `.3.2.1` without behavior code and activate `.3.2.2` strict recurring-gate admission.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.2.2`; strict recurring Rust generated breadth admission is active.
+- next_action: make the all-105 classifier non-ignored and unconditionally strict, wire it into the complete Rust
+  recurring gate, rerun source/trace/interpreter/full Rust/CLI proof, promote Rust generated source to pass, close
+  `.3.2`, synchronize all durable/public state, clean generated artifacts, and commit before Dart `.3.3`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

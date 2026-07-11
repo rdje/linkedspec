@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.1 — an empty classification is an actionable result):
+  Recursive splitting doctrine does not require inventing repair work. When a complete classifier reports zero
+  failures, enumerate every requested mechanism category, record each as empty, close the repair leaf without
+  behavior code, and preserve admission as a separate act. This keeps implementation evidence distinct from a
+  recurring capability guarantee while preventing speculative changes to already-correct code.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.0 — classify breadth without multiplying dependency builds):
   A per-case isolated Cargo project gives perfect attribution but scales poorly even when dependencies share a
   target: the measured prototype took about ten seconds per fixture. Preserve per-case source/test identity while

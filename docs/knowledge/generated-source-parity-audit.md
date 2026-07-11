@@ -18,6 +18,7 @@ evidence_update_2026_07_11_rust_metadata_errors: "FUTURE-PARITY-BACKLOG.3.1.3.1 
 evidence_update_2026_07_11_rust_plan_trace: "FUTURE-PARITY-BACKLOG.3.1.3.2 adds exact neutral plan/four rejection roles, direct v1 result, and three portable trace roles while preserving legacy envelope/trace. Focused 5/5 + 10/10 and the clean complete Rust gate pass; explicit admission .3 remains before breadth."
 evidence_update_2026_07_11_baseline_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 admits the Perl/Rust contract-v1 baseline after focused and complete recurring gates. Perl promotes from partial to pass. Rust stays partial solely because generated compile/run proof names eight of 105 interpreter-manifest fixtures. The census stays 57/1/2 and active .3.2.0 owns a scalable full-manifest classifier before expansion."
 evidence_update_2026_07_11_full_manifest_classification: "FUTURE-PARITY-BACKLOG.3.2.0 replaces a measured slow per-case prototype with one isolated 105-module crate and exact staged accounting. The explicit run passes all 105 fixtures in 184.46 seconds with zero failures. No repair mechanism exists; .3.2.1-.2 own zero-failure closeout and recurring admission."
+evidence_update_2026_07_11_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 records every requested failure category as empty and closes without speculative repairs. Strict recurring admission .3.2.2 is the only remaining Rust breadth step."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
@@ -40,8 +41,8 @@ The implementation order is deliberately contract-first:
 
 1. define and admit one executable backend-neutral contract with repaired Perl
    and aligned Rust baselines (complete);
-2. classify Rust over the full manifest (105/105 complete), then close the
-   zero-failure result and make it a strict recurring gate (active);
+2. classify Rust over the full manifest (105/105 complete), close the empty
+   repair inventory (complete), then make it a strict recurring gate (active);
 3. add Dart's scaffold, direct family execution, and corpus proof;
 4. add Julia's equivalent capability and proof;
 5. admit all four implemented backends together.

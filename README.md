@@ -205,8 +205,8 @@ Top-level project docs:
   paths, and gap ownership. The current audit records 57 pass, one partial-proof, and two gap backend states;
   non-codegen `.1.6` is closed. Contract v1 `.3.1.1` is gated and Perl reconstruction/API proof `.3.1.2` is green.
   Perl/Rust v1 baseline admission is closed: Perl passes. Rust's scalable staged classifier now compiles/runs all
-  105 generated fixtures with zero failures; Rust remains partial pending `.3.2.1` zero-failure closeout and
-  `.3.2.2` strict recurring admission. Census remains 57/1/2, followed by Dart `.3.3`, Julia `.3.4`, and `.3.5`.
+  105 generated fixtures with zero failures; zero-failure closeout `.3.2.1` is complete and Rust remains partial
+  pending `.3.2.2` strict recurring admission. Census remains 57/1/2, followed by Dart `.3.3`, Julia `.3.4`, and `.3.5`.
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case
@@ -229,8 +229,8 @@ Top-level project docs:
   Dart, and Julia native APIs `.1.6.4.2-.4` pass; Perl direct proof and final admission `.1.6.4.5` close the parent.
   Dart full-pipeline trace `.1.6.5` and non-codegen closeout `.1.6.6` are closed; generated-source `.3.0` has
   audited/split the boundary; `.3.1.0` then corrected the Perl source-capture assumption and neutral executable
-  contract `.3.1` is closed; Rust full-manifest generated classification `.3.2.0` passes 105/105, and zero-failure
-  closeout `.3.2.1` is active at census 57/1/2 before strict recurring admission.
+  contract `.3.1` is closed; Rust full-manifest generated classification `.3.2.0` passes 105/105, zero-failure
+  closeout `.3.2.1` is closed, and strict recurring admission `.3.2.2` is active at census 57/1/2.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
