@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **418** facts · **2862** question keys.
+> **419** facts · **2869** question keys.
 
 ## Questions → fact
 
@@ -604,10 +604,12 @@
 - "does Lua corpus IO accept UTF-16 or UTF-32" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua detect missing and stale fixture directories" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua dispatch function body AST jobs yet" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua fall through to global functions" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua load all 105 corpus fixtures" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse ActionIR" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse spec files yet" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse spec source yet" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua parse the equals helper alias" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua parse top-level function definitions yet" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve JSON null array and harray identity" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve function body parse jobs" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -615,6 +617,7 @@
 - "does Lua project top-level user functions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua raw scan fn definitions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua reject duplicate labels and bad edge targets" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua resolve ActionIR helper contracts" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua support generic trailing codeblocks" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support single quoted ActionIR strings" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support strict syntax validation" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -1166,6 +1169,7 @@
 - "how do Julia AST types serialize to JSON" -> [julia-frontend-ast-json-contract](docs/knowledge/julia-frontend-ast-json-contract.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "how do Julia controlled fixtures parse staged function shells" -> [julia-controlled-corpus-execution](docs/knowledge/julia-controlled-corpus-execution.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "how do Lua AST nodes serialize to JSON" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how do Lua user functions resolve before helpers" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how do Perl and Rust parse :name scalar slot shorthand" -> [terse-scalar-slot-shorthand](docs/knowledge/terse-scalar-slot-shorthand.md) · 2026-07-06 · reverify: `prove -q -Iperl t/actionir_ast_parser.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core parse_retired_colon_scalar_slot_reports_bare_read_migration`
 - "how do Perl and Rust skip later block statements after return(expr)" -> [terse-expression-valued-block-early-return](docs/knowledge/terse-expression-valued-block-early-return.md) · 2026-06-30 · reverify: `perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(q{Top}, q{return({ return(\"a\"); \"b\" })}), qq{\\n}' && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_4_expression_valued_block && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
 - "how do Rust array(name) and hash(name) read scalar held typed values" -> [terse-rust-duck-typed-assignment-parity](docs/knowledge/terse-rust-duck-typed-assignment-parity.md) · 2026-07-05 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_11_3 && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_2_aggregate_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_4_assignment_expression_closure_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
@@ -1262,7 +1266,9 @@
 - "how does LinkedSpec remember whether a bare identifier is scalar array or hash" -> [terse-retired-scalar-assign-spec-surface](docs/knowledge/terse-retired-scalar-assign-spec-surface.md) · 2026-07-06 · reverify: `rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' specs tests/corpus rust/linkedspec-runtime/tests/corpus --glob '*.spec' --glob '*.md' ; rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' docs/linkedspec-book/src ; prove -q -Iperl t/phase0_regression.t ; prove -q -Iperl t/actionir_ast_parser.t ; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_2_bare_identifier_remembers_type_after_initialization`
 - "how does LinkedSpec run Lua tests" -> [lua-toolchain-package-policy](docs/knowledge/lua-toolchain-package-policy.md) · 2026-07-11 · reverify: `lua -v; luajit -v; lua -e 'print(package.searchpath(\"lpeg\",package.cpath)); for _,n in ipairs({\"cjson\",\"dkjson\",\"lunajson\"}) do print(n,pcall(require,n)) end'; rg -n 'Locked foundation policy|LUA-BACKEND-PARITY\.1\.1' docs/tasks/LUA-BACKEND-PARITY.md`
 - "how does LinkedSpec.pm dispatch into owner modules" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
+- "how does Lua canonicalize helper aliases" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua consume user_function_definition.spec output" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua diagnose unknown helper calls" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish source AST codeblocks from tables" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua handle Unicode function source spans" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua parse semicolon action statements" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -2449,6 +2455,7 @@
 - "where is the Julia user function registry" -> [julia-user-function-registry](docs/knowledge/julia-user-function-registry.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "where is the LinkedSpec backend capability matrix" -> [backend-capability-census](docs/knowledge/backend-capability-census.md) · 2026-07-10 · reverify: `perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "where is the LinkedSpec language defined in LinkedSpec itself" -> [spec-spec-self-hosted-grammar](docs/knowledge/spec-spec-self-hosted-grammar.md) · 2026-06-05 · reverify: `rg -n 'function_definition:|-> function_definition|temporary pre-bootstrap registry bridge|SPEC-FORMAT-TERSE\\.4\\.2\\.1|staged linked parsing|0012' specs/spec.spec docs/tasks/SPEC-FORMAT-TERSE.md docs/tasks/STAGED-LINKED-PARSING.md docs/decisions/0012-staged-linked-parsing-architecture.md && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm`
+- "where is the Lua ActionIR contract resolver" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "where is the Lua action AST parser" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is the Lua spec parser" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is the Lua spec validator" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -4353,9 +4360,18 @@ _Lua parses helper/action source into typed ActionIR AST nodes_
 
 - **answers:** does Lua parse ActionIR | where is the Lua action AST parser | what does parse_action_expression do in Lua | how does Lua parse semicolon action statements | does Lua support single quoted ActionIR strings | does Lua support generic trailing codeblocks | are Lua ActionIR spans Unicode characters or bytes
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua. The local gate passes 41/41 on PUC Lua and LuaJIT, covering exact separators, both quotes, four values, calls/access/assignments/controls/chains, generic final blocks, Unicode spans, typed JSON, and raw fallback.`
+- **evidence:** `LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias. The current local gate passes 46/46 on PUC Lua and LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-actionir-ast-parser.md`](docs/knowledge/lua-actionir-ast-parser.md)
+
+### lua-actionir-contract-resolver
+_Lua resolves typed ActionIR against the exact current helper contract_
+
+- **answers:** does Lua resolve ActionIR helper contracts | where is the Lua ActionIR contract resolver | how does Lua canonicalize helper aliases | how does Lua diagnose unknown helper calls | does Lua fall through to global functions | how do Lua user functions resolve before helpers | does Lua parse the equals helper alias
+- **date:** 2026-07-11 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. The local gate passes 46/46 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage.`
+- **reverify:** `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- **source:** [`docs/knowledge/lua-actionir-contract-resolver.md`](docs/knowledge/lua-actionir-contract-resolver.md)
 
 ### lua-backend-full-parity-plan
 _Lua backend planning inherits the complete LinkedSpec parity contract_
@@ -4371,7 +4387,7 @@ _Lua parses universal rule paragraphs into typed source AST nodes_
 
 - **answers:** does Lua parse spec files yet | where is the Lua spec parser | what does Lua parse_spec support | can Lua parse shipped specs | how many corpus specs does Lua parse | does Lua parse top-level function definitions yet | how does Lua parse semicolon statement separators | does Lua preserve single and double quoted strings
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection; .3.1 adds typed action parsing. The current local gate passes 41/41 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs.`
+- **evidence:** `LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection; .3.1-.3.2 add typed action parsing/contracts. The current local gate passes 46/46 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-core-spec-parser.md`](docs/knowledge/lua-core-spec-parser.md)
 
@@ -4380,7 +4396,7 @@ _Lua validates the exact 105-case corpus through strict typed JSON and UTF-8 IO_
 
 - **answers:** how does Lua validate the LinkedSpec corpus manifest | does Lua load all 105 corpus fixtures | does Lua preserve JSON null array and harray identity | does the Lua corpus runner execute parsers yet | what encoding does Lua corpus IO use | does Lua corpus IO accept UTF-16 or UTF-32 | does Lua detect missing and stale fixture directories | does the Lua backend require a JSON package
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.1.3 adds linkedspec.json and linkedspec.corpus. The current local gate passes 41/41 on PUC Lua and 41/41 on LuaJIT, loads exactly 105 checked-in fixtures, and process-validates the corpus without parser execution.`
+- **evidence:** `LUA-BACKEND-PARITY.1.3 adds linkedspec.json and linkedspec.corpus. The current local gate passes 46/46 on PUC Lua and 46/46 on LuaJIT, loads exactly 105 checked-in fixtures, and process-validates the corpus without parser execution.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-corpus-manifest-io.md`](docs/knowledge/lua-corpus-manifest-io.md)
 
@@ -4389,7 +4405,7 @@ _Lua source AST nodes round-trip the neutral provenance and body-variant contrac
 
 - **answers:** what Lua types represent parsed spec files | how do Lua AST nodes serialize to JSON | what fields does the Lua staged parse job use | where are Lua rule modes and body element types | does Lua parse spec source yet | how does Lua distinguish source AST codeblocks from tables | are Lua AST constructor lists sparse or dense
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection; .3.1 adds typed ActionIR. The current full local gate passes 41/41 on PUC Lua and 41/41 on LuaJIT.`
+- **evidence:** `LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection; .3.1-.3.2 add typed ActionIR/contracts. The current full local gate passes 46/46 on PUC Lua and 46/46 on LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-frontend-ast-json-contract.md`](docs/knowledge/lua-frontend-ast-json-contract.md)
 
@@ -4398,7 +4414,7 @@ _Lua validates parsed source ASTs and exact function-name reservations before co
 
 - **answers:** does Lua validate parsed spec ASTs | where is the Lua spec validator | what does Lua validate_spec check | does Lua support strict syntax validation | does Lua reject duplicate labels and bad edge targets | how many helper names are reserved against Lua user functions | does Lua validation execute parsers or runtime behavior
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1 adds typed ActionIR. The current local gate passes 41/41 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names.`
+- **evidence:** `LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1-.3.2 add typed ActionIR/contracts. The current local gate passes 46/46 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names.`
 - **reverify:** `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - **source:** [`docs/knowledge/lua-frontend-validation.md`](docs/knowledge/lua-frontend-validation.md)
 
@@ -4407,7 +4423,7 @@ _Lua projects spec-owned function-definition nodes without raw-scanning fn sourc
 
 - **answers:** does Lua project top-level user functions | does Lua raw scan fn definitions | how does Lua consume user_function_definition.spec output | where is Lua function definition projection | does Lua preserve function body parse jobs | how does Lua handle Unicode function source spans | does Lua dispatch function body AST jobs yet
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1 adds typed ActionIR. The local gate passes 41/41 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, errors/drift/wrappers/overlap, no raw scanner, and action parsing.`
+- **evidence:** `LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.3.2 add typed ActionIR/contracts. The local gate passes 46/46 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, and contracts.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-function-definition-shell-projection.md`](docs/knowledge/lua-function-definition-shell-projection.md)
 
@@ -4416,7 +4432,7 @@ _Lua has a dependency-free native module and dual-runtime scaffold_
 
 - **answers:** does the LinkedSpec Lua backend exist | how do I load the Lua LinkedSpec module | what does the Lua backend currently implement | does the Lua parser work yet | how is the Lua scaffold tested | what are the Lua backend command paths
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add AST, parsing, validation, and function projection; .3.1 adds typed ActionIR. The current local gate passes 41/41 on PUC Lua and 41/41 on LuaJIT plus exact primary-command stub and corpus command checks. No runtime/LPeg API is claimed.`
+- **evidence:** `LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add frontend/function projection; .3.1-.3.2 add typed ActionIR/contracts. The current local gate passes 46/46 on PUC Lua and LuaJIT plus exact process checks. No runtime/LPeg API is claimed.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-native-backend-scaffold.md`](docs/knowledge/lua-native-backend-scaffold.md)
 

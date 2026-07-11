@@ -711,10 +711,41 @@ value.func_helper_method() { return(value) }
 value.func_helper_method({ return(value) })
 ```
 
-This `.3.1` boundary parses structure only. Current-name contract resolution,
-generic unknown-call diagnostics, registered-function precedence, staged body
-dispatch, and runtime behavior remain owned by `.3.2` and later leaves. The
-dual-runtime gate passes 41/41 on PUC Lua and 41/41 on LuaJIT.
+The `.3.1` boundary parses structure only. Lua now layers typed ActionIR
+contract resolution over those nodes:
+
+```lua
+local resolution = linkedspec.resolve_action_block_contracts(block)
+assert(resolution.ok)
+
+local alias = linkedspec.resolve_action_expression_contracts(
+  linkedspec.parse_action_expression("gt(value, 0)")
+)
+assert(alias.contracts[1].source_name == "gt")
+assert(alias.contracts[1].canonical_name == "num_gt")
+assert(alias.contracts[1].family == "numeric")
+```
+
+`resolve_action_block_contracts`, `resolve_action_statement_contracts`, and
+`resolve_action_expression_contracts` walk calls, receiver methods,
+assignments, controls, nested arguments, block values, shapes, and access
+indexes. Contracts record source/canonical name, family, surface, source span,
+and positional/keyword counts. `action_contracts.to_json(value)` projects the
+same fields as Dart and Julia.
+
+`canonical_action_helper_name(name)` covers the current numeric, symbol, and
+control aliases, including `=(target, value)` to `set`. The resolver and source
+validator share the exact 239-name `action_call_names` inventory. Unknown or
+non-current calls produce generic `unknown_helper`; structural fallback
+produces `raw_perl`. Neither can fall through to a Lua global.
+
+The optional `{ function_registry = registry }` resolver input checks
+`registry:resolve_call(name, arity)` before helper fallback for ordinary
+function-call surfaces. Exact matches become `family = "user_function"`;
+registered wrong-arity calls produce `user_function_arity_mismatch`. This is
+the stable `.3.3` integration seam, not a hidden Lua closure registry. The
+concrete ordered registry and body jobs remain next. The dual-runtime gate now
+passes 46/46 on PUC Lua and 46/46 on LuaJIT.
 
 ### Julia Backend Commands, Embedding, and Status
 

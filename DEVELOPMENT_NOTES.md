@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.3.2 — share admission, classify before execution):
+  Action parsing and behavior admission are separate seams. Make the resolver consume typed nodes recursively and
+  reuse validation's single current-name inventory; a second copied allow-list will drift. Keep alias canonical
+  names, families, surfaces, source spans, and argument counts explicit so compilers do not infer contracts from
+  Lua functions. Structural controls/assignments deserve contracts even though they are not host calls. Unknown
+  and raw expressions become generic typed diagnostics and never global lookup. Reserve one registry interface
+  ahead of its concrete owner so `.3.3` can supply ordered exact-arity resolution without changing traversal.
+  Cross-check every governed symbol alias against parser reachability: that audit caught the missing current
+  `=(target, value)` callee immediately.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.3.1 — parse structure before resolving behavior):
   Keep universal action text as typed AST, never Lua source. A shared byte scanner is safe only after strict UTF-8
   validation and must project every stored span through byte-boundary-to-Unicode-character indexes. Track quote,

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (typed ActionIR AST `.3.1` closed; contract resolution `.3.2` active)
+- Last updated: `2026-07-11` (ActionIR contracts `.3.2` closed; function registry `.3.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -332,15 +332,45 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   status, and bounded memory close typed parsing and activate current ActionIR contract resolution `.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Resolve current ActionIR contracts and generic diagnostics.
   Acceptance: The governed current-name inventory drives helpers/controls/methods; aliases canonicalize; registered
     functions resolve first; unknown/non-current calls never fall through to arbitrary Lua globals.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added typed resolution/contract/diagnostic records and public block,
+    statement, and expression resolvers over the `.3.1` AST. The resolver reuses the exact 239-name
+    `action_call_names` source shared with function validation, canonicalizes numeric/symbol/current aliases,
+    assigns stable helper families/surfaces/counts, walks nested arguments/shapes/access/block values/controls,
+    records all structural assignments, and emits only generic `unknown_helper` / `raw_perl` diagnostics. An
+    optional registry interface resolves exact-arity function calls before helper fallback and reports stable
+    arity mismatches; `.3.3` owns the concrete ordered registry. The prerequisite audit repaired the governed
+    current `=(target, value)` alias missing from `.3.1`'s symbol scanner. Typed JSON matches Dart/Julia fields.
+    The local gate passes syntax/process/manifest checks and 46/46 tests on both PUC Lua and LuaJIT; exact
+    239-name cross-language coverage remains green. Full local CI also passes phase0 `1..1030`, both 61-case
+    Perl CLI environments, the 60/0/0 admitted-backend census, and all doctrine gates.
+  Commit: `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`
+
+### `LUA-BACKEND-PARITY.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.3.1` produced typed calls, controls, assignments, chains, and raw fallback but did
+  not classify current behavior or distinguish canonical, unknown, and future registered-function calls.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Direct execution or Lua-global lookup would fork semantics. Resolution must
+  share validation's governed 239-name source and traverse typed nodes before compiler/runtime ownership begins.
+  Canonical-table comparison also found `=(...)` reserved but unreachable in the completed parser.
+- [x] **FIX** — Added typed recursive contracts/diagnostics/JSON, exact alias/family classification, structural
+  assignment/control records, current-name sharing, generic unknown/raw errors, registry-first resolution seam,
+  and restored the governed `=` symbol callee.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 46/46 on PUC Lua and 46/46 on LuaJIT. Tests
+  lock nested helpers, numeric aliases, `=(...)`, all assignment forms, controls/methods, typed JSON, unknown/raw
+  ordering, exact known-name behavior, and generic final-codeblock arity through a registry stub.
+- [x] **NO REGRESSION** — `perl tools/check_language_capability_coverage.pl` remains exact at 239 current names and
+  105 fixtures. Parser/function/source/corpus/process proofs remain green; no concrete registry, arbitrary globals,
+  runtime behavior, primary CLI, capability promotion, or generated source is introduced. Full local CI passes
+  phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
+  and bounded memory close contract resolution and activate concrete ordered function registry `.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Add ordered user-function and staged body-job registries.
   Acceptance: Exact arity, eager values, fresh frames, body source/payload/job/AST, and recursion diagnostics match
     neutral semantics; no implicit caller mutation or Lua closure leakage.
@@ -531,7 +561,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 6 | `LUA-BACKEND-PARITY.2.3` | `done` | Validator/strict syntax and exact 239-name collision inventory pass. |
 | 7 | `LUA-BACKEND-PARITY.2.4` | `done` | Spec-produced function nodes/projected provenance compose without a raw scanner. |
 | 8 | `LUA-BACKEND-PARITY.3.1` | `done` | Typed ActionIR parsing passes 41/41 on PUC Lua and LuaJIT. |
-| 9 | `LUA-BACKEND-PARITY.3.2` | `active` | Resolve current helper/control/method contracts and generic diagnostics. |
+| 9 | `LUA-BACKEND-PARITY.3.2` | `done` | Typed current-name contracts and generic diagnostics pass both runtimes. |
+| 10 | `LUA-BACKEND-PARITY.3.3` | `active` | Add ordered user-function and staged body-job registries. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -579,3 +610,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.2.3` | `LUA-BACKEND-PARITY.2.3 - validate Lua source AST` | Stable source/registry/edge/regex/strict checks, exact call-name inventory, and function projection handoff. |
 | `LUA-BACKEND-PARITY.2.4` | `LUA-BACKEND-PARITY.2.4 - project Lua function shells` | Spec-owned nodes, Unicode spans, staged sidecars, no raw scanner, and ActionIR handoff. |
 | `LUA-BACKEND-PARITY.3.1` | `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR` | Structural actions, four values, access/assign/control/chains, generic final blocks, and contract-resolution handoff. |
+| `LUA-BACKEND-PARITY.3.2` | `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts` | Exact current-name contracts, aliases/families, generic diagnostics, registry-first seam, and registry handoff. |

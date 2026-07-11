@@ -61,6 +61,7 @@ local SYMBOL_CALLEES = {
   ["*"] = true,
   ["/"] = true,
   ["%"] = true,
+  ["="] = true,
   ["=="] = true,
   ["!="] = true,
   [">"] = true,

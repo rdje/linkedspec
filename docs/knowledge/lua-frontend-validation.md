@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, validation, parser, AST, strict-syntax, ActionIR, functions]
-evidence: "LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1 adds typed ActionIR. The current local gate passes 41/41 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names."
+evidence: "LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1-.3.2 add typed ActionIR/contracts. The current local gate passes 46/46 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -26,12 +26,12 @@ caller can inspect its AST before choosing validation. Validation does not compi
 
 `lua/src/linkedspec/action_call_names.lua` reserves exactly all 239 current helper/control and alias names against
 user-function definitions. `tools/check_language_capability_coverage.pl` now compares that set with Dart and Julia,
-then retains its Perl-contract, mdBook, and 105-fixture coverage checks. The module is validation data here and is
-the reusable inventory for later Lua ActionIR contracts; there is no arbitrary Lua-global fallback.
+then retains its Perl-contract, mdBook, and 105-fixture coverage checks. The module is now shared by validation and
+Lua ActionIR contracts; there is no arbitrary Lua-global fallback.
 
 Focused validation found and fixed a parser defect in empty-body header detection: labels such as `Child:` now
 start rules instead of becoming raw body text. All 21 shipped specs and all 102 rule-only corpus sources validate
 on PUC Lua and LuaJIT. Three top-level function shells remain owned by `.2.4`.
 
-Related facts: [[lua-core-spec-parser]], [[lua-frontend-ast-json-contract]],
+Related facts: [[lua-core-spec-parser]], [[lua-frontend-ast-json-contract]], [[lua-actionir-contract-resolver]],
 [[dart-frontend-validation]], [[julia-frontend-validation]], [[text-to-ast-backend-doctrine]].

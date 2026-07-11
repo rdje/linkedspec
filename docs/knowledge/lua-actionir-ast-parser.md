@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, actionir, parser, AST, Unicode, semicolon, codeblock]
-evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua. The local gate passes 41/41 on PUC Lua and LuaJIT, covering exact separators, both quotes, four values, calls/access/assignments/controls/chains, generic final blocks, Unicode spans, typed JSON, and raw fallback."
+evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias. The current local gate passes 46/46 on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -41,6 +41,6 @@ Lua source is admitted only as strict UTF-8, but stored spans are zero-based
 Unicode character offsets rather than byte offsets. `action_ast.to_json(node)`
 projects nodes through explicit JSON array/harray identities.
 
-Related facts: [[lua-core-spec-parser]], [[lua-frontend-ast-json-contract]],
+Related facts: [[lua-core-spec-parser]], [[lua-frontend-ast-json-contract]], [[lua-actionir-contract-resolver]],
 [[lua-frontend-validation]], [[dart-actionir-ast-parser]],
 [[julia-action-ast-parser]], [[text-to-ast-backend-doctrine]].

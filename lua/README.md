@@ -4,9 +4,9 @@ This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
-typed source/provenance AST data, permissive rule-level source parsing, and a
-typed structural ActionIR parser. Source validation and optional strict-unused
-checks are also available.
+typed source/provenance AST data, permissive rule-level source parsing, a typed
+structural ActionIR parser, and current-name ActionIR contract resolution.
+Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
 execution, the primary CLI
@@ -144,6 +144,30 @@ value.func_helper_method() { return(value) }
 value.func_helper_method({ return(value) })
 ```
 
-This parser is structural only. Current helper/method contract resolution,
-staged body-job dispatch, execution, and primary CLI promotion remain later
-owned layers.
+Resolve the typed tree against the exact governed current helper/control surface:
+
+```lua
+local resolution = linkedspec.resolve_action_block_contracts(action)
+assert(resolution.ok)
+
+local alias = linkedspec.resolve_action_expression_contracts(
+  linkedspec.parse_action_expression("gt(value, 0)")
+)
+assert(alias.contracts[1].canonical_name == "num_gt")
+assert(alias.contracts[1].family == "numeric")
+```
+
+The statement and expression resolver entrypoints are
+`resolve_action_statement_contracts` and
+`resolve_action_expression_contracts`. `canonical_action_helper_name(name)`
+canonicalizes current aliases, and `is_known_action_ir_call_name(name)` shares
+the same exact 239-name source used by function validation. Resolution walks
+nested arguments, shapes, blocks, access indexes, controls, assignments, and
+receiver methods. Unknown calls produce `unknown_helper`; structural parser
+fallback produces `raw_perl`. Neither path invokes a Lua global.
+
+An optional `{ function_registry = registry }` accepts the concrete `.3.3`
+registry interface (`registry:resolve_call(name, arity)`) so exact-arity user
+functions resolve before helper fallback. The resolver seam is implemented;
+the ordered production registry, staged body-job dispatch, execution, and
+primary CLI promotion remain later owned layers.

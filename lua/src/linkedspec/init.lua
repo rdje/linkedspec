@@ -6,13 +6,14 @@ local spec_validator = require("linkedspec.spec_validator")
 local function_shell = require("linkedspec.user_function_definition_shell")
 local action_ast = require("linkedspec.action_ast")
 local action_parser = require("linkedspec.action_parser")
+local action_contracts = require("linkedspec.action_contracts")
 
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "actionir_ast"
+M.PARITY_STATUS = "actionir_contracts"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -77,5 +78,11 @@ M.action_ast = action_ast
 M.parse_action_block = action_parser.parse_action_block
 M.parse_action_statement = action_parser.parse_action_statement
 M.parse_action_expression = action_parser.parse_action_expression
+M.action_contracts = action_contracts
+M.resolve_action_block_contracts = action_contracts.resolve_action_block_contracts
+M.resolve_action_statement_contracts = action_contracts.resolve_action_statement_contracts
+M.resolve_action_expression_contracts = action_contracts.resolve_action_expression_contracts
+M.canonical_action_helper_name = action_contracts.canonical_action_helper_name
+M.is_known_action_ir_call_name = action_contracts.is_known_action_ir_call_name
 
 return M

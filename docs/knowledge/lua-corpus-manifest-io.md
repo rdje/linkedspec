@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, corpus, manifest, JSON, Unicode, UTF-8, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.3 adds linkedspec.json and linkedspec.corpus. The current local gate passes 41/41 on PUC Lua and 41/41 on LuaJIT, loads exactly 105 checked-in fixtures, and process-validates the corpus without parser execution."
+evidence: "LUA-BACKEND-PARITY.1.3 adds linkedspec.json and linkedspec.corpus. The current local gate passes 46/46 on PUC Lua and 46/46 on LuaJIT, loads exactly 105 checked-in fixtures, and process-validates the corpus without parser execution."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

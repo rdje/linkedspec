@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "actionir_ast", "status parity")
+  assert_equal(first.parity, "actionir_contracts", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1130,6 +1130,130 @@ test("ActionIR uses Unicode character spans and typed JSON projection", function
   assert_error_contains(function()
     linkedspec.parse_action_expression(string.char(0xC3))
   end, "not valid UTF-8", "invalid ActionIR UTF-8")
+end)
+
+test("ActionIR contracts resolve canonical helpers through nested nodes", function()
+  local block = linkedspec.parse_action_block(table.concat({
+    "set(out, +(1, 2))",
+    'if(gt(out, 0)) { return(cat("ok", out)) }',
+    '" x ".trim().with() { return(value) }',
+  }, "\n"))
+  local resolution = linkedspec.resolve_action_block_contracts(block)
+  assert_equal(resolution.ok, true, "nested contract result")
+
+  local by_source = {}
+  for _, contract in ipairs(resolution.contracts) do
+    by_source[contract.source_name] = contract
+  end
+  assert_equal(by_source.set.canonical_name, "set", "set contract")
+  assert_equal(by_source["+"].canonical_name, "num_add", "numeric symbol canonicalization")
+  assert_equal(by_source["+"].family, "numeric", "numeric family")
+  assert_equal(linkedspec.action_contracts.canonicalized(by_source["+"]), true, "numeric canonicalized")
+  assert_equal(by_source.gt.canonical_name, "num_gt", "numeric word canonicalization")
+  assert_equal(by_source.gt.positional_arg_count, 2, "numeric argument count")
+  assert_equal(by_source["if"].surface, "control", "control surface")
+  assert_equal(by_source.trim.surface, "receiver_method", "receiver surface")
+  assert_equal(by_source.with.family, "control", "trailing block family")
+  assert_equal(#resolution.diagnostics, 0, "nested diagnostics")
+end)
+
+test("ActionIR contracts map structural assignments and current equals alias", function()
+  local block = linkedspec.parse_action_block(
+    'name = "ok"; items += name; meta[name] = [name]; ' ..
+    'payload["children"][0]["name"] = name; =(other, "value")'
+  )
+  local resolution = linkedspec.resolve_action_block_contracts(block)
+  assert_equal(resolution.ok, true, "assignment contract result")
+
+  local canonical = {}
+  for _, contract in ipairs(resolution.contracts) do
+    canonical[contract.source_name] = contract.canonical_name
+  end
+  assert_equal(canonical["="], "set", "scalar assignment contract")
+  assert_equal(canonical["+="], "push", "append assignment contract")
+  assert_equal(canonical["[]="], "set_key", "hash assignment contract")
+  assert_equal(canonical["nested_access="], "nested_access_assignment", "nested assignment contract")
+
+  local equals_call
+  for _, contract in ipairs(resolution.contracts) do
+    if contract.source_name == "=" and contract.surface == "function" then
+      equals_call = contract
+    end
+  end
+  assert_equal(equals_call.canonical_name, "set", "equals helper alias")
+  assert_equal(equals_call.positional_arg_count, 2, "equals helper arity")
+end)
+
+test("ActionIR contracts diagnose unknown helpers and raw fallback", function()
+  local block = linkedspec.parse_action_block("mystery_helper(value); @invalid")
+  local resolution = linkedspec.resolve_action_block_contracts(block)
+  assert_equal(resolution.ok, false, "diagnostic result")
+  assert_equal(#resolution.contracts, 0, "diagnostic contract count")
+  assert_equal(#resolution.diagnostics, 2, "diagnostic count")
+  assert_equal(resolution.diagnostics[1].code, "unknown_helper", "unknown diagnostic")
+  assert_equal(resolution.diagnostics[1].helper_name, "mystery_helper", "unknown helper name")
+  assert_equal(resolution.diagnostics[2].code, "raw_perl", "raw diagnostic")
+  assert_contains(resolution.diagnostics[1].message, "canonical ActionIR helper contract", "generic diagnostic")
+end)
+
+test("ActionIR contracts share the exact current names and typed JSON", function()
+  assert_equal(linkedspec.is_known_action_ir_call_name("cat"), true, "known string helper")
+  assert_equal(linkedspec.is_known_action_ir_call_name("push_back"), true, "known array helper")
+  assert_equal(linkedspec.is_known_action_ir_call_name("sorted_keys"), true, "known hash helper")
+  assert_equal(linkedspec.is_known_action_ir_call_name("capture_until_boundary"), true, "known capture helper")
+  assert_equal(linkedspec.is_known_action_ir_call_name("save_cursor"), true, "known runtime helper")
+  assert_equal(linkedspec.is_known_action_ir_call_name("BACKTRACK"), false, "retired control")
+  assert_equal(linkedspec.is_known_action_ir_call_name("mystery_helper"), false, "unknown name")
+  assert_equal(linkedspec.canonical_action_helper_name(">="), "num_ge", "comparison alias")
+
+  local resolution = linkedspec.resolve_action_expression_contracts(
+    linkedspec.parse_action_expression("gt(value, 0)")
+  )
+  local projected = linkedspec.action_contracts.to_json(resolution)
+  assert_equal(json.kind(projected), "harray", "contract JSON object")
+  assert_equal(json.kind(projected.contracts), "array", "contract JSON list")
+  assert_equal(projected.contracts[1].canonical_name, "num_gt", "contract JSON canonical name")
+  assert_equal(projected.contracts[1].canonicalized, true, "contract JSON canonicalized")
+  assert_equal(json.decode(json.encode(projected)).ok, true, "contract JSON round-trip")
+end)
+
+test("ActionIR contracts resolve registered functions before helper fallback", function()
+  local registry = {
+    resolve_call = function(_, name, arity)
+      if name ~= "normalize" then
+        return nil
+      elseif arity == 2 then
+        return { matched = true, arity_mismatch = false, expected_arities = { 2 } }
+      end
+      return { matched = false, arity_mismatch = true, expected_arities = { 2 } }
+    end,
+  }
+  local block = linkedspec.parse_action_block(table.concat({
+    'normalize("x") { return(value) }',
+    'normalize("x")',
+    'mystery("z")',
+  }, "\n"))
+  local resolution = linkedspec.resolve_action_block_contracts(block, { function_registry = registry })
+
+  local normalize_contracts = {}
+  for _, contract in ipairs(resolution.contracts) do
+    if contract.source_name == "normalize" then
+      normalize_contracts[#normalize_contracts + 1] = contract
+    end
+  end
+  assert_equal(#normalize_contracts, 1, "matched user contract count")
+  assert_equal(normalize_contracts[1].family, "user_function", "user function family")
+  assert_equal(normalize_contracts[1].positional_arg_count, 2, "final codeblock counts as argument")
+  assert_equal(resolution.diagnostics[1].code, "user_function_arity_mismatch", "user arity diagnostic")
+  assert_contains(resolution.diagnostics[1].message, "expects arity 2, got 1", "user arity message")
+  assert_equal(resolution.diagnostics[2].code, "unknown_helper", "post-registry unknown helper")
+
+  assert_error_contains(function()
+    linkedspec.resolve_action_expression_contracts(
+      linkedspec.parse_action_expression("normalize(value)"),
+      { function_registry = {} }
+    )
+  end, "must expose resolve_call", "registry interface")
 end)
 
 io.stdout:write("1..", total, "\n")

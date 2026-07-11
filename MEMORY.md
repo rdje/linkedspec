@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.3.1` — typed structural ActionIR parsing passes both Lua runtimes.
-- prior_leaf: `LUA-BACKEND-PARITY.2.4` — spec-owned function projection closes source frontend `.2`.
-- recent_context: typed blocks/statements/expressions cover exact newline/same-line-semicolon separation, both quote
-  forms, four values, calls/access/assignments/controls/chains, generic final codeblocks, Unicode spans, typed JSON,
-  and raw fallback. PUC Lua/LuaJIT 41/41 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no runtime claimed.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.3.2` — typed current-name ActionIR contract resolution passes.
+- prior_leaf: `LUA-BACKEND-PARITY.3.1` — typed structural ActionIR parsing passes both Lua runtimes.
+- recent_context: recursive contracts share exact 239 validation names, canonicalize aliases/families, record
+  controls/assignments/methods/nested values, emit generic unknown/raw diagnostics, and expose registry-first
+  resolution; `=(...)` is repaired. Lua 46x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no runtime.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`; previous committed HEAD is
-  `ae709cde LUA-BACKEND-PARITY.2.4 - project Lua function shells`.
+  `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`; previous committed HEAD is
+  `5e4be42c LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.3.2`; current ActionIR contract resolution is active.
-- next_action: Reuse the governed 239-name inventory to resolve typed calls, controls, methods, assignments,
-  nested values, and generic final-block call shapes; canonicalize aliases, reserve registered-function precedence,
-  and emit stable generic diagnostics without arbitrary Lua-global fallback.
+- active_work_unit: `LUA-BACKEND-PARITY.3.3`; ordered user-function/body-job registry is active.
+- next_action: Build the concrete ordered registry from typed function definitions, preserve body source/payload/
+  parse-job/AST, resolve exact arity through the `.3.2` seam, and lock eager arguments, fresh frames, recursion
+  diagnostics, and no implicit caller mutation or Lua closure leakage.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

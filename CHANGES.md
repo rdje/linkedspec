@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.3.2 — resolve Lua ActionIR contracts
+
+Added typed `ActionContractResolution`, `ActionResolvedContract`, and `ActionContractDiagnostic` records with
+neutral JSON projection and public block/statement/expression resolver entrypoints. Resolution recursively visits
+calls, receiver methods, all assignment shapes, controls, nested arguments, arrays/harrays/codeblocks, and access
+indexes while preserving source and Unicode span attribution.
+
+The resolver shares `action_call_names` with function validation, so exact 239-name admission has one source.
+Current numeric/symbol/control aliases canonicalize to stable families and surfaces; structural assignments map to
+`set`, `push`, `set_key`, and `nested_access_assignment`. Unknown/non-current names emit generic `unknown_helper`,
+and parser fallback emits `raw_perl`; neither can invoke a Lua global. An optional registry interface resolves
+ordinary exact-arity user calls before helper fallback and emits stable arity mismatches until `.3.3` supplies the
+concrete ordered registry.
+
+Canonical comparison found and repaired one `.3.1` prerequisite gap: governed `=(target, value)` was reserved but
+missing from the Lua symbol-callee scanner. It now parses and resolves to `set`. Syntax/process/manifest checks and
+46/46 tests pass on both PUC Lua and LuaJIT; the 239-name/105-fixture coverage gate remains exact. Status advances
+to `actionir_contracts`, and ordered function/body-job registry `.3.3` is next. Full local CI passes phase0
+`1..1030`, both 61-case CLI environments, capability state 60/0/0, generated-source/native-resolution, and doctrines.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.3.1 — parse typed Lua ActionIR
 
 Added metatable-typed ActionIR blocks, value-drop statements, expressions, positional/keyword arguments, access

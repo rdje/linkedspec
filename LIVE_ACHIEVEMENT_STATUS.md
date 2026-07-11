@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.3.2 — resolve Lua ActionIR contracts**
+  (DONE — exact current-name contracts pass both runtimes; ordered registry `.3.3` next).
+
+  **Implementation:** Typed recursive resolution shares all 239 validation names, canonicalizes aliases/families,
+  records structural contracts, emits generic unknown/raw diagnostics, and checks a registry seam before helpers.
+  The governed `=(...)` parser alias is restored; no arbitrary Lua-global fallback exists.
+
+  **Proof:** PUC Lua 46/46 and LuaJIT 46/46 plus syntax/process/105-manifest and exact 239-name coverage pass.
+  Nested controls/blocks/methods, all assignments, aliases, diagnostics, JSON, and registry-first final-block arity
+  are locked. Full CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. Concrete registry/runtime/
+  primary CLI/capability/codegen remain unclaimed.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.3.1 — parse typed Lua ActionIR**
   (DONE — structural parser passes both runtimes; current contract resolution `.3.2` next).
 
