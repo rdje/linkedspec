@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.0 — split Dart full-pipeline trace
+
+Audited Dart's public native trace and every non-runtime pipeline owner. Levels, structured events, quietness,
+stdout/route/mirror sinks, and runtime interpreter injection already pass, but parsing, validation, compilation,
+function-definition extraction/projection, staged parse jobs, and the native loader expose no optional emitter.
+The capability census therefore correctly keeps the separate full-pipeline row at `gap`.
+
+Split implementation into frontend/compiler `.1`, function-shell/staged `.2`, and composed native admission `.3`.
+Added a durable Knowledge Map fact and synchronized roadmap, task, live, README, and mdBook status. No Dart API or
+behavior changed and the 56/1/3 census remains unchanged.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.5 — admit native spec resolution parity
 
 Added public `LinkedSpec::SpecLoader` as Perl's portable counterpart to the Rust, Dart, and Julia loaders. Blessed

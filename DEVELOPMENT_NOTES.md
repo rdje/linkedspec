@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.0 — propagate one object, do not create traced variants):
+  Dart already has the correct emitter abstraction and traced runtime entrypoint. Full-pipeline parity should add
+  optional named emitter parameters to the existing parser, validator, compiler, function shell, staged registry,
+  and loader APIs, preserving source compatibility and one sink/indent state. Separate traced entrypoints or fresh
+  emitters per phase would fragment ordering, scopes, and routing. Implement frontend/compiler first, then the
+  nested function/staged pipeline, and promote only after the public loader composes the same caller-owned object
+  through compilation and runtime execution with traced/untraced identity proof.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.5 — separate portable policy from reference compatibility):
   Do not retrofit explicit request kinds and roots into `get_parser`, because its implicit `PathSearch` fallback is
   an accepted legacy extension. A separate `LinkedSpec::SpecLoader` makes the portable contract reviewable while

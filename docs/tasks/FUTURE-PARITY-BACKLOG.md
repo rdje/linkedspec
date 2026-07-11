@@ -1223,9 +1223,68 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5`
   Status: `active`
   Goal: Complete Dart native trace coverage across frontend, compiler, function-shell, and staged dispatch.
+  Children: `.1.6.5.0`, `.1.6.5.1`, `.1.6.5.2`, `.1.6.5.3`
   Acceptance: One caller-owned Dart emitter propagates through parse, validation, compile, function-definition,
     staged-job, and runtime entrypoints with balanced scopes, decisions, failures, sinks, default quietness, and
     traced/untraced identity equivalent to Perl/Rust/Julia; focused and 99-corpus gates pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.5.0`
+  Status: `done`
+  Goal: Audit and split Dart full-pipeline native trace before behavior changes.
+  Acceptance: Establish the exact current emitter boundary, compare the established Julia/Rust portable proof,
+    name every Dart propagation seam, and split implementation from final admission without overclaiming runtime-
+    only trace as full-pipeline trace.
+  Verification: Source and Knowledge Map audit confirms `LinkedSpecTraceEmitter` is public and complete for levels,
+    events, sinks, and runtime interpreter entrypoints, but is imported only by `runtime/interpreter.dart` among the
+    native pipeline owners. `parseSpec`, `validateSpec`, `compileSpec`, `UserFunctionRegistry`, function-definition
+    parsing/projection, staged registry dispatch, and `loadAndCompileSpec` have no optional emitter. Julia's admitted
+    implementation establishes the applicable optional caller-owned propagation pattern and balanced failure exits.
+    No Dart behavior changed. `.1` owns frontend/compiler, `.2` owns function-shell/staged dispatch, and `.3` owns
+    public loader composition, full proof, census promotion, and parent closeout.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace`
+
+## `FUTURE-PARITY-BACKLOG.1.6.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `rg` across Dart native owners proves trace injection begins at
+  `LinkedSpecRuntimeEngine.parse/execute`; the capability manifest therefore correctly keeps Dart at `gap` for the
+  separate frontend/compiler/function/staged row.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Public operations in `parser/spec_parser.dart`, `validation/spec_validator.dart`,
+  `compiler/compiled_spec.dart`, `action/function_registry.dart`, the two function-definition owners,
+  `parser/staged_parser_registry.dart`, and `io/spec_loader.dart` have no emitter parameter or propagation path.
+- [x] **FIX** — Split the active parent into bounded frontend/compiler `.1`, function-shell/staged `.2`, and composed
+  native admission `.3` leaves; recorded the exact boundary in a Knowledge Map fact card and public/live docs.
+- [x] **ADDRESSED (verified)** — Task-tree metadata, Knowledge Map generation/check, memory architecture, doctrines,
+  whitespace, and mdBook build pass for the audit-only slice.
+- [x] **NO REGRESSION** — No Dart parser/compiler/runtime/API behavior or capability state changed; the already-green
+  165-test, 105-corpus, and 61x2 CLI baseline remains the implementation starting point.
+- [x] **LOCKSTEP** — The split follows the admitted portable contract and Julia/Rust evidence while leaving Dart at
+  `gap` until `.3` proves the complete caller-owned path and promotes all synchronized docs/metadata.
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.5.1`
+  Status: `active`
+  Goal: Propagate one optional Dart trace emitter through source parsing, validation, and compilation.
+  Acceptance: Existing public entrypoints remain source-compatible while emitting balanced `dart_frontend:*` and
+    `dart_compiler:*` scopes, stable decisions, and failure exits through the caller's emitter; disabled/omitted
+    tracing is quiet and parsed/compiled JSON is identical.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.5.2`
+  Status: `pending`
+  Goal: Propagate the caller-owned Dart emitter through function-definition shell and staged parse dispatch.
+  Acceptance: Parser-spec construction/execution, AST projection, job normalization/order, resolve/load/compile/
+    execute, body stitching, and failures emit balanced function/staged events without changing ASTs or job results.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.5.3`
+  Status: `pending`
+  Goal: Admit and close Dart full-pipeline native trace parity.
+  Acceptance: `loadAndCompileSpec` accepts one caller-owned emitter and composes it through every frontend/function/
+    staged/compiler phase into an engine using the same emitter at execution; focused failure/sink/identity proof,
+    complete Dart/105-corpus/61x2 CLI gates, docs, and census all pass before parent closeout.
   Verification: `pending`
   Commit: `pending`
 
@@ -1474,8 +1533,9 @@ before implementation.
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `done` | Typed/JSON errors, source/top/child attribution, five focused tests, and full runtime package pass. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
 | 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `done` | All four native libraries consume exact portable resolution/loading semantics; parent admitted and closed. |
-| 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `active` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
-| 54 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
+| 53 | `FUTURE-PARITY-BACKLOG.1.6.5.0` | `done` | Audit proves injection begins at runtime and splits three bounded implementation/admission leaves. |
+| 54 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `active` | Propagate one optional emitter through Dart parse, validation, compile, and function registry. |
+| 55 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 57 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
@@ -2129,6 +2189,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.3` | Public progressive Dart loader; five direct 14/9/4 plus pipeline tests; format/analyze; full Dart gate 165 tests, 61x2 CLI, and 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart native file role and CLI delegation pass; census 55/1/4; Julia `.4` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.4` | Public progressive Julia loader; 82 direct 14/9/4 plus pipeline assertions; complete 1,110-assertion package; focused process check; 61x2 CLI; 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Julia native file role and CLI delegation pass; recursive fallback removed; census 56/1/3; admission `.5` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.5` | Public Perl portable loader; direct 14/9/4 plus pipeline proof; canonical-gate wiring; 239-name coverage; focused suites; 61x2 CLI; Phase 0 `1..1030` in 556s; prior adjacent backend gates; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Exact four-backend native resolution admitted; `.1.6.4` closes and Dart trace `.1.6.5` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.0` | Knowledge Map/source audit across Dart emitter/runtime/parser/validator/compiler/function/staged/loader owners; Julia/Rust contract comparison; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Runtime-only boundary is exact; three bounded leaves exist before trace behavior changes; `.1` active. |
 
 ## Commit Log
 
@@ -2179,9 +2240,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.4.3` | `FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution` | Public progressive loader/compiler, structured exceptions/identity, direct 14/9/4 proof, and CLI delegation. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.4` | `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution` | Public progressive loader/compiler, typed exceptions/identity, direct 14/9/4 proof, CLI delegation, and recursive-fallback removal. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.5` | `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity` | Perl portable facade/direct fixture, canonical-gate wiring, exact four-backend admission, and parent closeout. |
+| `FUTURE-PARITY-BACKLOG.1.6.5.0` | `FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace` | Exact runtime-only boundary, portable comparison, three-leaf implementation/admission split, no behavior code. |
 
 ## Changelog
 
+- `2026-07-11`: `.1.6.5.0` confirms Dart's public emitter/levels/events/sinks and runtime injection pass while
+  parser, validator, compiler, function shell, staged registry, and native loader lack propagation. It splits
+  frontend/compiler `.1`, function/staged `.2`, and composed admission `.3`; no behavior or census state changes.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

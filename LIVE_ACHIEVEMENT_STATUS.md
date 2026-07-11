@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.5.0 — split Dart full-pipeline trace**
+  (DONE — exact propagation gap recorded; frontend/compiler `.1` active).
+
+  **Finding:** Dart's public emitter, sinks, and runtime events pass, but the emitter begins at the interpreter;
+  parser, validator, compiler, function shell, staged registry, and native loader have no injection path.
+
+  **Split:** `.1` owns frontend/compiler, `.2` owns function/staged dispatch, and `.3` owns public composition,
+  complete proof, census promotion, and parent closeout. No behavior changed; census remains 56/1/3.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.5 — admit native spec resolution parity**
   (DONE — exact native resolution `.1.6.4` closed; Dart trace `.1.6.5` active).
 
