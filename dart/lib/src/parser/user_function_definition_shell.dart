@@ -1,4 +1,5 @@
 import '../ast/spec_ast.dart';
+import '../trace/trace.dart';
 import 'spec_parser.dart';
 
 final class UserFunctionDefinitionProjection {
@@ -13,23 +14,84 @@ final class UserFunctionDefinitionProjection {
 
 SpecFile parseSpecWithUserFunctionDefinitionAsts(
   String source,
-  Iterable<Object?> definitionNodes,
-) {
-  final projection = projectUserFunctionDefinitionAsts(source, definitionNodes);
+  Iterable<Object?> definitionNodes, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_frontend:function_shell_spec',
+    'source_code_units=${source.length}',
+    LinkedSpecTraceLevel.high,
+  );
   try {
-    final ruleSpec = parseSpec(projection.strippedSource);
-    return SpecFile(functions: projection.functions, rules: ruleSpec.rules);
-  } on SpecParseException catch (error) {
-    throw SpecParseException(
-      line: error.line,
-      message: 'rule parse after function extraction failed: ${error.message}',
+    final projection = projectUserFunctionDefinitionAsts(
+      source,
+      definitionNodes,
+      trace: trace,
     );
+    final SpecFile ruleSpec;
+    try {
+      ruleSpec = parseSpec(projection.strippedSource, trace: trace);
+    } on SpecParseException catch (error) {
+      throw SpecParseException(
+        line: error.line,
+        message:
+            'rule parse after function extraction failed: ${error.message}',
+      );
+    }
+    final spec = SpecFile(
+      functions: projection.functions,
+      rules: ruleSpec.rules,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok functions=${spec.functions.length} rules=${spec.rules.length}',
+      );
+    }
+    return spec;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
   }
 }
 
 UserFunctionDefinitionProjection projectUserFunctionDefinitionAsts(
   String source,
+  Iterable<Object?> definitionNodes, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_frontend:function_projection',
+    'source_code_units=${source.length}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final projection = _projectUserFunctionDefinitionAsts(
+      source,
+      definitionNodes,
+      trace,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok function_count=${projection.functions.length}',
+      );
+    }
+    return projection;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
+  }
+}
+
+UserFunctionDefinitionProjection _projectUserFunctionDefinitionAsts(
+  String source,
   Iterable<Object?> definitionNodes,
+  LinkedSpecTraceEmitter? trace,
 ) {
   final functions = <FunctionDefinition>[];
   final spans = <_AstSpan>[];
@@ -42,6 +104,13 @@ UserFunctionDefinitionProjection projectUserFunctionDefinitionAsts(
         final projected = _functionFromAst(object, source, index);
         functions.add(projected.function);
         spans.add(projected.sourceSpan);
+        trace?.traceDecision(
+          'dart_frontend:function_projection:definition',
+          true,
+          'index=$index name=${projected.function.name} '
+              'arity=${projected.function.arity}',
+          LinkedSpecTraceLevel.medium,
+        );
       case 'function_definition_error':
         throw _functionError(object, index);
       case final other:

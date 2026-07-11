@@ -1,5 +1,6 @@
 import '../action/action_parser.dart';
 import '../ast/spec_ast.dart';
+import '../trace/trace.dart';
 import 'user_function_definition_shell.dart';
 
 const String actionIrBodySpecId = 'actionir-body.spec';
@@ -88,8 +89,11 @@ final class StagedFunctionBodyDispatchResult {
   }
 }
 
-Object executeStagedParseJob(StagedParseJob job) {
-  final results = executeStagedParseJobs([job]);
+Object executeStagedParseJob(
+  StagedParseJob job, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final results = executeStagedParseJobs([job], trace: trace);
   if (results.isEmpty) {
     throw const StagedParserRegistryException(
       'staged parse dispatch produced no result',
@@ -98,83 +102,204 @@ Object executeStagedParseJob(StagedParseJob job) {
   return results.single.result;
 }
 
-List<StagedParseResult> executeStagedParseJobs(Iterable<StagedParseJob> jobs) {
-  final queue = [for (final job in jobs) _normalizeJob(job)]
-    ..sort(_compareJobs);
-
-  final results = <StagedParseResult>[];
-  for (var index = 0; index < queue.length; index += 1) {
-    final job = queue[index];
-    final resolved = _resolve(job);
-    final loaded = _load(resolved);
-    final compiled = _compile(loaded, job.topRule);
-    final result = _execute(compiled, job);
-    results.add(
-      StagedParseResult(
-        queueIndex: index,
-        job: job,
-        resolvedSpecId: resolved.resolvedSpecId,
-        registryProvider: resolved.provider,
-        cacheKey: compiled.cacheKey,
-        compiledParser: compiled.toJson(),
-        result: result,
-      ),
+List<StagedParseResult> executeStagedParseJobs(
+  Iterable<StagedParseJob> jobs, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_staged:execute_jobs',
+    'start',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final queue = [for (final job in jobs) _normalizeJob(job)]
+      ..sort(_compareJobs);
+    trace?.traceDecision(
+      'dart_staged:execute_jobs:queue',
+      true,
+      'normalized=${queue.length} sorted=1',
+      LinkedSpecTraceLevel.medium,
     );
+
+    final results = <StagedParseResult>[];
+    for (var index = 0; index < queue.length; index += 1) {
+      final job = queue[index];
+      final jobScope = trace?.enterScope(
+        'dart_staged:job',
+        'queue_index=$index job_id=${job.jobId}',
+        LinkedSpecTraceLevel.high,
+      );
+      try {
+        final resolved = _resolve(job);
+        trace?.traceDecision(
+          'dart_staged:job:resolve',
+          true,
+          'job_id=${job.jobId} resolved_spec_id=${resolved.resolvedSpecId}',
+          LinkedSpecTraceLevel.medium,
+        );
+        final loaded = _load(resolved);
+        trace?.traceDecision(
+          'dart_staged:job:load',
+          true,
+          'job_id=${job.jobId} source_kind=${loaded.sourceKind}',
+          LinkedSpecTraceLevel.medium,
+        );
+        final compiled = _compile(loaded, job.topRule);
+        trace?.traceDecision(
+          'dart_staged:job:compile',
+          true,
+          'job_id=${job.jobId} top_rule=${compiled.topRule}',
+          LinkedSpecTraceLevel.medium,
+        );
+        final result = _execute(compiled, job);
+        trace?.traceDecision(
+          'dart_staged:job:execute',
+          true,
+          'job_id=${job.jobId} result_field=${job.resultField}',
+          LinkedSpecTraceLevel.medium,
+        );
+        results.add(
+          StagedParseResult(
+            queueIndex: index,
+            job: job,
+            resolvedSpecId: resolved.resolvedSpecId,
+            registryProvider: resolved.provider,
+            cacheKey: compiled.cacheKey,
+            compiledParser: compiled.toJson(),
+            result: result,
+          ),
+        );
+        if (jobScope != null) {
+          trace?.exitScope(jobScope, 'ok');
+        }
+      } on Object catch (error) {
+        if (jobScope != null) {
+          trace?.exitScope(jobScope, 'error=$error');
+        }
+        rethrow;
+      }
+    }
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'ok result_count=${results.length}');
+    }
+    return List.unmodifiable(results);
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
   }
-  return List.unmodifiable(results);
 }
 
-StagedFunctionBodyDispatchResult dispatchFunctionBodyParseJobs(SpecFile spec) {
-  final functions = spec.functions;
-  final jobs = <StagedParseJob>[];
+StagedFunctionBodyDispatchResult dispatchFunctionBodyParseJobs(
+  SpecFile spec, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_staged:function_body_dispatch',
+    'function_count=${spec.functions.length}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final functions = spec.functions;
+    final jobs = <StagedParseJob>[];
 
-  for (var index = 0; index < functions.length; index += 1) {
-    final function = functions[index];
-    final job = function.bodyParseJob;
-    if (job == null) {
-      continue;
-    }
-    _validateFunctionBodyJob(function, index, job);
-    jobs.add(job);
-  }
-
-  final results = executeStagedParseJobs(jobs);
-  final bodyAstByIndex = <int, Object>{};
-  for (final result in results) {
-    final index = _functionIndex(result.job);
-    if (bodyAstByIndex.containsKey(index)) {
-      throw StagedParserRegistryException(
-        'duplicate staged function-body result for functions.$index.body_source',
+    for (var index = 0; index < functions.length; index += 1) {
+      final function = functions[index];
+      final job = function.bodyParseJob;
+      if (job == null) {
+        continue;
+      }
+      _validateFunctionBodyJob(function, index, job);
+      jobs.add(job);
+      trace?.traceDecision(
+        'dart_staged:function_body_dispatch:job',
+        true,
+        'function_index=$index function_name=${function.name}',
+        LinkedSpecTraceLevel.medium,
       );
     }
-    bodyAstByIndex[index] = result.result;
-  }
 
-  return StagedFunctionBodyDispatchResult(
-    spec: SpecFile(
-      functions: [
-        for (var index = 0; index < functions.length; index += 1)
-          if (bodyAstByIndex.containsKey(index))
-            _withBodyAst(functions[index], bodyAstByIndex[index])
-          else
-            functions[index],
-      ],
-      rules: spec.rules,
-    ),
-    results: results,
-  );
+    final results = executeStagedParseJobs(jobs, trace: trace);
+    final bodyAstByIndex = <int, Object>{};
+    for (final result in results) {
+      final index = _functionIndex(result.job);
+      if (bodyAstByIndex.containsKey(index)) {
+        throw StagedParserRegistryException(
+          'duplicate staged function-body result for functions.$index.body_source',
+        );
+      }
+      bodyAstByIndex[index] = result.result;
+      trace?.traceDecision(
+        'dart_staged:function_body_dispatch:stitch',
+        true,
+        'function_index=$index result_field=${result.job.resultField}',
+        LinkedSpecTraceLevel.medium,
+      );
+    }
+
+    final dispatch = StagedFunctionBodyDispatchResult(
+      spec: SpecFile(
+        functions: [
+          for (var index = 0; index < functions.length; index += 1)
+            if (bodyAstByIndex.containsKey(index))
+              _withBodyAst(functions[index], bodyAstByIndex[index])
+            else
+              functions[index],
+        ],
+        rules: spec.rules,
+      ),
+      results: results,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'ok result_count=${results.length}');
+    }
+    return dispatch;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
+  }
 }
 
-SpecFile stitchFunctionBodyParseJobs(SpecFile spec) {
-  return dispatchFunctionBodyParseJobs(spec).spec;
+SpecFile stitchFunctionBodyParseJobs(
+  SpecFile spec, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  return dispatchFunctionBodyParseJobs(spec, trace: trace).spec;
 }
 
 SpecFile parseSpecWithStagedUserFunctionDefinitionAsts(
   String source,
-  Iterable<Object?> definitionNodes,
-) {
-  final spec = parseSpecWithUserFunctionDefinitionAsts(source, definitionNodes);
-  return stitchFunctionBodyParseJobs(spec);
+  Iterable<Object?> definitionNodes, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_staged:parse_spec_with_function_asts',
+    'source_code_units=${source.length}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final spec = parseSpecWithUserFunctionDefinitionAsts(
+      source,
+      definitionNodes,
+      trace: trace,
+    );
+    final stitched = stitchFunctionBodyParseJobs(spec, trace: trace);
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok functions=${stitched.functions.length} rules=${stitched.rules.length}',
+      );
+    }
+    return stitched;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
+  }
 }
 
 final class _ResolvedParser {

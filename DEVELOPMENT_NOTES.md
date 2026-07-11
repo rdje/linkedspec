@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.2 — nested trace must not broaden diagnostic catches):
+  Thread the same emitter through parser-spec compilation, its runtime execution, projection, and staged jobs so
+  event ordering and sink state remain genuinely caller-owned. Cache hits need decisions because a warmed default
+  parser legitimately omits construction events. When adding outer scopes, preserve original catch boundaries:
+  projection happens before the narrow stripped-rule `SpecParseException` translation, otherwise a function-shell
+  diagnostic is silently relabeled as a rule-parse failure. A focused equality test now locks that distinction.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.1 — preserve source compatibility and exception identity):
   Optional named `trace:` parameters let the existing Dart operations participate in one pipeline without creating
   a parallel API family. Enter the owner scope once, nest downstream owners with the same object, and exit on every

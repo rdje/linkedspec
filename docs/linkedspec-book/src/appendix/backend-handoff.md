@@ -580,7 +580,7 @@ its 60 states are 56 pass, one partial state, and three gaps. Each non-pass stat
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
-| Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases. Dart now covers parse/validation/compiler/registry plus runtime; function/staged propagation `.2` and composed admission `.3` remain. | `.1.6.5.2` active |
+| Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases. Dart now covers frontend/compiler/function/staged/runtime; public native loader composition and final admission remain. | `.1.6.5.3` active |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-

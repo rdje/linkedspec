@@ -4,6 +4,7 @@ import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../runtime/interpreter.dart';
 import '../runtime/matching.dart';
+import '../trace/trace.dart';
 import 'spec_parser.dart';
 import 'staged_parser_registry.dart';
 
@@ -22,71 +23,147 @@ final class UserFunctionDefinitionParserException implements Exception {
 final class UserFunctionDefinitionAstParser {
   UserFunctionDefinitionAstParser._(this._compiledSpec);
 
-  factory UserFunctionDefinitionAstParser.fromSpecSource(String source) {
-    final SpecFile parserSpec;
+  factory UserFunctionDefinitionAstParser.fromSpecSource(
+    String source, {
+    LinkedSpecTraceEmitter? trace,
+  }) {
+    final traceScope = trace?.enterScope(
+      'dart_frontend:function_parser_spec',
+      'source_code_units=${source.length}',
+      LinkedSpecTraceLevel.high,
+    );
     try {
-      parserSpec = parseSpec(source);
-    } on SpecParseException catch (error) {
-      throw UserFunctionDefinitionParserException(
-        'failed to parse user_function_definition.spec: ${error.message}',
-      );
-    }
+      final SpecFile parserSpec;
+      try {
+        parserSpec = parseSpec(source, trace: trace);
+      } on SpecParseException catch (error) {
+        throw UserFunctionDefinitionParserException(
+          'failed to parse user_function_definition.spec: ${error.message}',
+        );
+      }
 
-    try {
-      return UserFunctionDefinitionAstParser._(compileSpec(parserSpec));
-    } on CompiledSpecException catch (error) {
-      throw UserFunctionDefinitionParserException(
-        'failed to compile user_function_definition.spec: ${error.message}',
-      );
+      final UserFunctionDefinitionAstParser parser;
+      try {
+        parser = UserFunctionDefinitionAstParser._(
+          compileSpec(parserSpec, trace: trace),
+        );
+      } on CompiledSpecException catch (error) {
+        throw UserFunctionDefinitionParserException(
+          'failed to compile user_function_definition.spec: ${error.message}',
+        );
+      } on Object catch (error) {
+        throw UserFunctionDefinitionParserException(
+          'failed to compile user_function_definition.spec: $error',
+        );
+      }
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'ok');
+      }
+      return parser;
     } on Object catch (error) {
-      throw UserFunctionDefinitionParserException(
-        'failed to compile user_function_definition.spec: $error',
-      );
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'error=$error');
+      }
+      rethrow;
     }
   }
 
   final CompiledSpec _compiledSpec;
 
-  List<Object?> parse(String source) {
-    final RuntimeParseResult result;
+  List<Object?> parse(String source, {LinkedSpecTraceEmitter? trace}) {
+    final traceScope = trace?.enterScope(
+      'dart_frontend:function_parser_execute',
+      'source_code_units=${source.length}',
+      LinkedSpecTraceLevel.high,
+    );
     try {
-      result = LinkedSpecRuntimeEngine(
-        _compiledSpec,
-        parseMode: LinkedSpecParseMode.seek,
-        specName: 'user_function_definition.spec',
-      ).execute(source);
-    } on RuntimeInterpreterException catch (error) {
-      throw UserFunctionDefinitionParserException(
-        'user_function_definition.spec execution failed: ${error.message}',
-      );
-    }
+      final RuntimeParseResult result;
+      try {
+        result = LinkedSpecRuntimeEngine(
+          _compiledSpec,
+          parseMode: LinkedSpecParseMode.seek,
+          specName: 'user_function_definition.spec',
+        ).execute(source, trace: trace);
+      } on RuntimeInterpreterException catch (error) {
+        throw UserFunctionDefinitionParserException(
+          'user_function_definition.spec execution failed: ${error.message}',
+        );
+      }
 
-    if (!result.matched) {
-      return const [];
+      final nodes = result.matched
+          ? definitionNodesFromUserFunctionDefinitionOutput(result.value)
+          : const <Object?>[];
+      trace?.traceDecision(
+        'dart_frontend:function_parser_execute:definitions',
+        result.matched,
+        'definition_count=${nodes.length}',
+        LinkedSpecTraceLevel.medium,
+      );
+      if (traceScope != null) {
+        trace?.exitScope(
+          traceScope,
+          'ok matched=${result.matched ? 1 : 0} '
+          'definition_count=${nodes.length}',
+        );
+      }
+      return nodes;
+    } on Object catch (error) {
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'error=$error');
+      }
+      rethrow;
     }
-    return definitionNodesFromUserFunctionDefinitionOutput(result.value);
   }
 }
 
 List<Object?> parseUserFunctionDefinitionAsts(
   String source, {
   String? parserSpecSource,
+  LinkedSpecTraceEmitter? trace,
 }) {
   final parser = parserSpecSource == null
-      ? _defaultUserFunctionDefinitionAstParser()
-      : UserFunctionDefinitionAstParser.fromSpecSource(parserSpecSource);
-  return parser.parse(source);
+      ? _defaultUserFunctionDefinitionAstParser(trace: trace)
+      : UserFunctionDefinitionAstParser.fromSpecSource(
+          parserSpecSource,
+          trace: trace,
+        );
+  return parser.parse(source, trace: trace);
 }
 
 SpecFile parseSpecWithStagedUserFunctionDefinitions(
   String source, {
   String? parserSpecSource,
+  LinkedSpecTraceEmitter? trace,
 }) {
-  final nodes = parseUserFunctionDefinitionAsts(
-    source,
-    parserSpecSource: parserSpecSource,
+  final traceScope = trace?.enterScope(
+    'dart_frontend:parse_spec_with_functions',
+    'source_code_units=${source.length}',
+    LinkedSpecTraceLevel.high,
   );
-  return parseSpecWithStagedUserFunctionDefinitionAsts(source, nodes);
+  try {
+    final nodes = parseUserFunctionDefinitionAsts(
+      source,
+      parserSpecSource: parserSpecSource,
+      trace: trace,
+    );
+    final spec = parseSpecWithStagedUserFunctionDefinitionAsts(
+      source,
+      nodes,
+      trace: trace,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok functions=${spec.functions.length} rules=${spec.rules.length}',
+      );
+    }
+    return spec;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
+  }
 }
 
 List<Object?> definitionNodesFromUserFunctionDefinitionOutput(Object? output) {
@@ -120,9 +197,28 @@ List<Object?> definitionNodesFromUserFunctionDefinitionOutput(Object? output) {
 
 UserFunctionDefinitionAstParser? _defaultParser;
 
-UserFunctionDefinitionAstParser _defaultUserFunctionDefinitionAstParser() {
-  return _defaultParser ??= UserFunctionDefinitionAstParser.fromSpecSource(
+UserFunctionDefinitionAstParser _defaultUserFunctionDefinitionAstParser({
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final cached = _defaultParser;
+  if (cached != null) {
+    trace?.traceDecision(
+      'dart_frontend:function_parser_spec:cache',
+      true,
+      'cache_hit=1',
+      LinkedSpecTraceLevel.medium,
+    );
+    return cached;
+  }
+  trace?.traceDecision(
+    'dart_frontend:function_parser_spec:cache',
+    false,
+    'cache_hit=0',
+    LinkedSpecTraceLevel.medium,
+  );
+  return _defaultParser = UserFunctionDefinitionAstParser.fromSpecSource(
     _readDefaultUserFunctionDefinitionSpecSource(),
+    trace: trace,
   );
 }
 

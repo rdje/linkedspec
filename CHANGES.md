@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.2 — trace Dart function staging
+
+Propagated the existing optional caller-owned emitter through Dart parser-spec construction/cache selection,
+function-definition runtime extraction, AST projection, stripped rule parsing, staged spec composition, queue
+normalization/order, per-job resolve/load/compile/execute, function-body dispatch, and body stitching. Balanced
+function/staged scopes and stable medium decisions reuse the nested runtime/frontend/compiler trace path.
+
+Added four focused tests covering complete topic presence and nesting balance, exact AST identity, disabled
+quietness, unchanged staged resolve failures, and original projection diagnostic preservation. The complete Dart
+gate passes formatting, strict analysis, 172 tests, 61/61 CLI in both environments, and 105/105 corpus. Capability
+stays 56/1/3 until public native composition and final admission `.3`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.1 — trace Dart frontend and compiler
 
 Added one optional caller-owned `LinkedSpecTraceEmitter` parameter to Dart source parsing, validation, compilation,

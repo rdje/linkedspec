@@ -1,6 +1,6 @@
 ---
 id: dart-full-pipeline-trace-gap
-title: "Dart native tracing reaches core frontend/compiler but not function/staged composition"
+title: "Dart native tracing reaches frontend compiler function staged and runtime phases pending loader admission"
 answers:
   - "where does Dart native trace injection currently begin"
   - "does Dart trace parsing validation and compilation"
@@ -18,16 +18,17 @@ Dart's public `LinkedSpecTraceEmitter` provides ordered levels, structured event
 quietness, and stdout/route/mirror sinks. `LinkedSpecRuntimeEngine.parse(...)` and
 `execute(...)` accept an optional caller-owned emitter and produce interpreter events.
 
-`FUTURE-PARITY-BACKLOG.1.6.5.1` now carries that same optional emitter through
+`FUTURE-PARITY-BACKLOG.1.6.5.1` carries that same optional emitter through
 `parseSpec(...)`, `validateSpec(...)`, `compileSpec(...)`, and `UserFunctionRegistry`.
-The function-definition parser/projection shell, staged job dispatch, and
-`loadAndCompileSpec(...)` do not yet expose the complete propagation path. Consequently,
-the capability census correctly distinguishes Dart's passing controls/runtime/core-
-compiler work from its still-open full-pipeline row.
+`.1.6.5.2` extends it through function-parser construction/runtime execution, projection,
+stripped-source parsing, staged queue/job phases, and body stitching. Public
+`loadAndCompileSpec(...)` does not yet compose the complete path, and final routed-sink/
+failure/no-drift admission is not complete. Consequently, the census correctly keeps the
+full-pipeline row open.
 
 `FUTURE-PARITY-BACKLOG.1.6.5` is split by mechanism: completed `.1` instruments
-frontend, validation, and compiler owners; active `.2` propagates through function
-extraction and staged dispatch; `.3` composes the public loader/runtime path, proves
+frontend, validation, and compiler owners; completed `.2` propagates through function
+extraction and staged dispatch; active `.3` composes the public loader/runtime path, proves
 traced/untraced identity, quietness, sinks, balanced failures, and full recurring no-drift
 before promotion.
 

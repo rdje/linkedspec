@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.5.2 — trace Dart function staging**
+  (DONE — function/staged propagation passes; composed admission `.3` active).
+
+  **Implementation:** One emitter spans function parser construction/cache/runtime, projection, stripped parsing,
+  staged queue/job resolve/load/compile/execute, dispatch, and stitching with balanced failures.
+
+  **Proof:** Four focused balance/identity/quiet/failure tests pass. Complete Dart gate passes formatting, strict
+  analysis, 172 tests, exact 61x2 CLI, and 105 corpus. Census remains 56/1/3 pending `.3`.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.5.1 — trace Dart frontend and compiler**
   (DONE — core frontend/compiler propagation passes; function/staged `.2` active).
 

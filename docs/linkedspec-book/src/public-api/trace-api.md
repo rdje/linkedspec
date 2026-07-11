@@ -48,9 +48,19 @@ validation, compilation, and registry scopes; rule/function/dependency decisions
 Omitting the parameter preserves the original direct path. A disabled emitter records and writes nothing, and
 focused tests compare parsed and compiled JSON exactly between traced and untraced execution.
 
-This is a deliberately partial status, not yet a full-pipeline parity claim. Function-definition extraction and
-staged parse-job dispatch still need to propagate the same emitter under `.1.6.5.2`; native loader composition and
-final recurring admission remain under `.1.6.5.3`.
+Function-definition and staged APIs now accept the same optional emitter too:
+
+- `UserFunctionDefinitionAstParser.fromSpecSource(...)` and `.parse(...)`;
+- `parseUserFunctionDefinitionAsts(...)` and `parseSpecWithStagedUserFunctionDefinitions(...)`;
+- `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`;
+- `executeStagedParseJob(s)`, `dispatchFunctionBodyParseJobs(...)`, `stitchFunctionBodyParseJobs(...)`, and
+  `parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
+
+Their `dart_frontend:function_*` and `dart_staged:*` events cover parser-spec cache/construction and runtime
+execution, projected definitions, normalized/sorted queues, per-job resolve/load/compile/execute phases, and body
+stitching. Failure exits preserve the original diagnostic classification. This is still a deliberately partial
+status rather than an admitted full-pipeline claim: public native loader composition, routed-sink/failure proof,
+and recurring promotion remain under `.1.6.5.3`.
 
 ## Rust variant trace status
 
