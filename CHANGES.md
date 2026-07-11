@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.2.2 — admit Rust generated-source breadth
+
+Made the all-105 Rust generated-source classifier an unconditional ordinary integration test. Removed both its
+ignore attribute and environment-controlled strictness bypass: any staged fixture failure now fails normal runtime
+package tests. Extended generated-source contract v1 with the exact Rust breadth-test path; its checker rejects path
+drift, a non-file target, a case-count lock other than 105, any ignore attribute, and missing unconditional failure
+rejection.
+
+Independent strict classification passes 105/105 in 186.42 seconds. The canonical complete Rust gate executes the
+same classifier automatically (105/105 in 189.42 seconds) and passes 137 unit, 105 interpreter-corpus, 196
+integration, 5 diagnostics, 5 source-emitter, 5 loader, 10 trace, docs/build, and 61x2 CLI conformance. Promoted
+Rust generated source from partial to pass; capability/contract census is now 58/0/2. Closed `.3.2` and activated
+Dart emitter scaffold `.3.3.1`.
+
+Strict Clippy still stops on the same 14 pre-existing runtime findings. Exempting only their six known lint classes
+lets `-D warnings` pass for the changed classifier, so admission introduces no new Clippy finding.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.2.1 — close zero-failure Rust classification
 
 Closed the explicit classification/repair-splitting leaf without behavior code. The complete `.3.2.0` report

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.2 — make breadth proof mechanically recurring before promotion):
+  A green diagnostic does not become a capability guarantee merely by documentation. Remove ignore and opt-in
+  strictness, let the normal backend package gate execute it, and have the neutral contract checker lock the exact
+  test path, corpus count, ordinary execution, and unconditional failure predicate. Only then promote the census.
+  Keep the compact eight-case/all-family tests too: they give faster focused localization while the full-manifest
+  test supplies exhaustive recurring breadth. The resulting Rust pass means Dart/Julia are the only remaining
+  generated-source gaps; do not reopen already-admitted Rust roles during their emitter work.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.1 — an empty classification is an actionable result):
   Recursive splitting doctrine does not require inventing repair work. When a complete classifier reports zero
   failures, enumerate every requested mechanism category, record each as empty, close the repair leaf without

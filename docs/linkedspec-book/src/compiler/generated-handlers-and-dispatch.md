@@ -71,8 +71,10 @@ family-decision, and exit roles carry source/rule/family context beside native
 Perl is pass. Rust's staged classifier now proves all 105 interpreter fixtures
 through v1 emission, one isolated host compile, and separate generated tests
 with exact direct/compatibility results. That diagnostic is 105/105 green;
-Zero-failure closeout found no repair mechanism. Rust remains partial only
-until strict recurring-gate admission under `FUTURE-PARITY-BACKLOG.3.2.2`.
+Zero-failure closeout found no repair mechanism. The classifier is now an
+unconditional ordinary runtime-package test, contract checking prevents it
+from becoming ignored or conditional, and complete admission gates pass. Rust
+generated source is therefore admitted pass.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

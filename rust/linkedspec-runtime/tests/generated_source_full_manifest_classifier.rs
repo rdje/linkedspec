@@ -1,11 +1,11 @@
 //! FUTURE-PARITY-BACKLOG.3.2.0 — full-manifest generated-source classifier.
 //!
-//! This diagnostic is ignored by the recurring gate while Rust generated-source
-//! breadth is under classification. Run it explicitly with:
+//! This strict recurring breadth gate runs with the runtime package tests. It
+//! can also be run independently with:
 //!
 //! ```text
 //! cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime \
-//!   --test generated_source_full_manifest_classifier -- --ignored --nocapture
+//!   --test generated_source_full_manifest_classifier -- --nocapture
 //! ```
 //!
 //! Every manifest case receives one deterministic terminal classification. A
@@ -279,7 +279,6 @@ fn record_failure(
 }
 
 #[test]
-#[ignore = "explicit FUTURE-PARITY-BACKLOG.3.2.0 classifier; not yet a recurring breadth gate"]
 fn classify_all_generated_source_manifest_cases() {
     let dir = corpus_dir();
     assert!(dir.is_dir(), "corpus directory missing: {}", dir.display());
@@ -351,11 +350,9 @@ fn classify_all_generated_source_manifest_cases() {
         manifest.case_count,
         "classifier silently skipped one or more manifest cases"
     );
-    if std::env::var_os("LINKEDSPEC_GENERATED_CLASSIFIER_REQUIRE_PASS").is_some() {
-        assert!(
-            failures.is_empty(),
-            "strict generated-source classifier found {} failure(s)",
-            failures.len()
-        );
-    }
+    assert!(
+        failures.is_empty(),
+        "strict generated-source classifier found {} failure(s)",
+        failures.len()
+    );
 }

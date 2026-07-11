@@ -220,7 +220,7 @@ for my $index (0 .. $#{$contract->{behavior_cases}}) {
 require_keys(
  'corpus_proof', $contract->{corpus_proof},
  [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset rust_breadth_target
-     new_backend_admission_target)], []
+     rust_full_manifest_test new_backend_admission_target)], []
 );
 my $manifest_path = repo_path('corpus_proof.interpreter_manifest', $contract->{corpus_proof}{interpreter_manifest});
 my $manifest = read_json('interpreter manifest', $manifest_path);
@@ -241,13 +241,23 @@ my @subset = qw(proof_edge_array_literal proof_edge_scalar_literal autoexist_arr
 require_exact_array('corpus_proof.accepted_subset', $contract->{corpus_proof}{accepted_subset}, @subset);
 my %manifest_case = map { $_ => 1 } @{$manifest->{cases}};
 fail("accepted subset case '$_' is absent from the interpreter manifest") for grep { !$manifest_case{$_} } @subset;
+my $rust_full_manifest_test = repo_path(
+ 'corpus_proof.rust_full_manifest_test', $contract->{corpus_proof}{rust_full_manifest_test}
+);
+fail('corpus_proof.rust_full_manifest_test must be a regular file') unless -f $rust_full_manifest_test;
+my $rust_full_manifest_text = decode('UTF-8', read_bytes($rust_full_manifest_test), FB_CROAK | LEAVE_SRC);
+fail('Rust full-manifest test must lock the 105-case count')
+ unless $rust_full_manifest_text =~ /FULL_MANIFEST_CASE_COUNT:\s*usize\s*=\s*105\s*;/;
+fail('Rust full-manifest test must not be ignored') if $rust_full_manifest_text =~ /^\s*#\[ignore/m;
+fail('Rust full-manifest test must unconditionally reject any classified failure')
+ unless $rust_full_manifest_text =~ /assert!\(\s*failures\.is_empty\(\)/s;
 fail('corpus_proof.rust_breadth_target has an unexpected value')
  unless $contract->{corpus_proof}{rust_breadth_target} eq 'full_interpreter_manifest';
 fail('corpus_proof.new_backend_admission_target has an unexpected value')
  unless $contract->{corpus_proof}{new_backend_admission_target} eq 'accepted_subset_plus_all_generated_families';
 
 require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia)], []);
-my %expected_state = (perl => 'pass', rust => 'partial', dart => 'gap', julia => 'gap');
+my %expected_state = (perl => 'pass', rust => 'pass', dart => 'gap', julia => 'gap');
 fail("current_backend_states.$_ must be $expected_state{$_}")
  for grep { $contract->{current_backend_states}{$_} ne $expected_state{$_} } keys %expected_state;
 my $capability_manifest = read_json(
@@ -262,5 +272,5 @@ for my $backend (sort keys %expected_state) {
   unless defined($actual) && $actual eq $expected_state{$backend};
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; %d/105 subset; states 57/1/2)\n",
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; %d/105 subset + strict Rust 105/105; states 58/0/2)\n",
  scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset);

@@ -39,7 +39,8 @@ The failing boundary is dependency-regex serialization:
 This invalidated the earlier `pass` classification until the repair had direct
 proof. `FUTURE-PARITY-BACKLOG.3.1` subsequently defined the neutral contract,
 repaired reconstruction, and completed explicit admission. Perl generated
-source now passes; the current census is 57 pass, one partial, and two gaps.
+source now passes; after later Rust breadth admission the current census is
+58 pass, zero partial, and two gaps.
 
 The fix rebuilds each emitted dependency alternation with `LinkedRE::oredRE`
 from canonical referenced-rule regexes at generated-module load time. Public

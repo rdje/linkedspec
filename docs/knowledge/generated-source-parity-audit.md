@@ -19,6 +19,7 @@ evidence_update_2026_07_11_rust_plan_trace: "FUTURE-PARITY-BACKLOG.3.1.3.2 adds 
 evidence_update_2026_07_11_baseline_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 admits the Perl/Rust contract-v1 baseline after focused and complete recurring gates. Perl promotes from partial to pass. Rust stays partial solely because generated compile/run proof names eight of 105 interpreter-manifest fixtures. The census stays 57/1/2 and active .3.2.0 owns a scalable full-manifest classifier before expansion."
 evidence_update_2026_07_11_full_manifest_classification: "FUTURE-PARITY-BACKLOG.3.2.0 replaces a measured slow per-case prototype with one isolated 105-module crate and exact staged accounting. The explicit run passes all 105 fixtures in 184.46 seconds with zero failures. No repair mechanism exists; .3.2.1-.2 own zero-failure closeout and recurring admission."
 evidence_update_2026_07_11_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 records every requested failure category as empty and closes without speculative repairs. Strict recurring admission .3.2.2 is the only remaining Rust breadth step."
+evidence_update_2026_07_11_rust_admission: "FUTURE-PARITY-BACKLOG.3.2.2 removes ignore/conditional bypasses, extends contract checking to enforce the exact all-105 test, passes independent and complete Rust/61x2 CLI gates, promotes Rust to pass, and closes .3.2 at census 58/0/2."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
@@ -33,17 +34,17 @@ features: generated host-language parser source. Its backend states differ:
   harness.
 - Rust v1 source identity, metadata, errors, exact neutral plan/rejections,
   direct result, portable trace roles, and compatibility adapters are admitted.
-- Rust's recurring subset still names eight fixtures, while the explicit staged
-  full-manifest classifier is now 105/105 green.
+- Rust's focused subset still names eight fixtures, while its strict recurring
+  full-manifest classifier passes 105/105 and is admitted.
 - Dart and Julia have no source-emitter implementation.
 
 The implementation order is deliberately contract-first:
 
 1. define and admit one executable backend-neutral contract with repaired Perl
    and aligned Rust baselines (complete);
-2. classify Rust over the full manifest (105/105 complete), close the empty
-   repair inventory (complete), then make it a strict recurring gate (active);
-3. add Dart's scaffold, direct family execution, and corpus proof;
+2. classify Rust over the full manifest, close the empty repair inventory, and
+   admit a strict recurring 105/105 gate (complete);
+3. add Dart's scaffold, direct family execution, and corpus proof (active);
 4. add Julia's equivalent capability and proof;
 5. admit all four implemented backends together.
 

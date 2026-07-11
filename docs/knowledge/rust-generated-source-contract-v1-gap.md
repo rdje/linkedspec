@@ -1,6 +1,6 @@
 ---
 id: rust-generated-source-contract-v1-gap
-title: Rust generated source satisfies the admitted contract-v1 baseline; breadth remains
+title: Rust generated source satisfies admitted contract v1 and strict full-manifest breadth
 answers:
   - "does Rust generated source already satisfy contract v1"
   - "what blocks Perl generated-source admission"
@@ -9,11 +9,12 @@ answers:
   - "does Rust reject an unknown generated family"
   - "does Rust emit the neutral generated trace roles"
 date: 2026-07-11
-status: current
+status: resolved
 tags: [rust, generated-source, contract, parity, diagnostics, trace, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.3.1.3.0 audited the original gap; .3.1.3.1 adds typed identity/metadata/errors. FUTURE-PARITY-BACKLOG.3.1.3.2 adds emitted GeneratedPlanRow plan()/validate_plan(), exact ten neutral families, distinct row-count/label/known-family/unknown-family rejection, direct v1 top-rule result, and generated_rule_enter/generated_family_decision/generated_rule_exit beside rich rust_runtime:generated_plan:* topics. The neutral fixture exposed the historical accumulator envelope and drove a generated-plan-aware direct-value seam; legacy parse and traced APIs retain exact envelope behavior. FUTURE-PARITY-BACKLOG.3.1.3.3 repeats focused and complete gates and admits this baseline. Rust remains partial solely for 8/105 generated compile/run breadth owned by .3.2."
 evidence_update_2026_07_11_full_manifest: "FUTURE-PARITY-BACKLOG.3.2.0 explicitly classifies all 105 generated fixtures green in 184.46 seconds. No baseline or breadth repair remains; Rust stays partial only until .3.2.1-.2 close and admit the proof as a strict recurring gate."
 evidence_update_2026_07_11_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 closes the empty repair inventory without behavior code. Only strict recurring admission .3.2.2 remains."
+evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.2.2 makes the all-105 test unconditional and contract-enforced, passes complete Rust/CLI gates, promotes Rust to pass, and closes .3.2 at census 58/0/2."
 reverify: "rg -n 'emit_rust_source|LINKEDSPEC_GENERATED_SOURCE_FORMAT|source_identity|generated_source_error|generated_plan_unknown_family|generated_rule_enter|generated_family_decision|generated_rule_exit|rust_runtime:generated_plan' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/source_emitter.rs && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
 ---
 
@@ -34,9 +35,9 @@ The completed `.3.1.3.1` observations are:
 
 Typed v1 execution returns the direct top-rule value; legacy `parse` and
 `parse_with_trace` keep the accumulator envelope. The `.3.1.3.3` admission is
-complete. The explicit `.3.2.0` classifier is 105/105 green and `.3.2.1`
-closes the empty repair inventory. Rust remains partial only until `.3.2.2`
-admits that proof as a strict recurring gate.
+complete. The `.3.2.0` classifier is 105/105 green, `.3.2.1` closes the empty
+repair inventory, and `.3.2.2` admits that proof as a strict recurring gate.
+Rust generated source passes.
 
 Related facts: [[generated-source-contract-v1]],
 [[generated-source-parity-audit]], [[rust-generated-source-family-plan]].

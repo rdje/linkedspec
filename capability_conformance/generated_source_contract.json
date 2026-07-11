@@ -145,12 +145,13 @@
       "tclite_command_subst",
       "portmap_bare"
     ],
+    "rust_full_manifest_test": "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs",
     "rust_breadth_target": "full_interpreter_manifest",
     "new_backend_admission_target": "accepted_subset_plus_all_generated_families"
   },
   "current_backend_states": {
     "perl": "pass",
-    "rust": "partial",
+    "rust": "pass",
     "dart": "gap",
     "julia": "gap"
   }
