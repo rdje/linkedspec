@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.4 — add Julia native spec resolution
+
+Added public Julia `SpecLoader.jl` with typed name/path requests, cwd and ordered roots, deterministic resolved
+origins, strict loaded source, backend-native compiled results, typed pipeline stages/codes, and structured JSON
+exceptions. `load_and_compile_spec(...)` resolves a regular file, reads bytes, strictly preserves UTF-8 text, runs
+the full staged user-function parser, validates, compiles, and can build a runtime engine carrying requested name
+and resolved path identity.
+
+Five direct-library testsets consume all 14 name, nine resolution/file-kind, and four text cases with 82
+assertions, then prove function compilation/execution, engine identity, parse versus validation stages, and exact
+missing-name JSON. The Julia primary CLI delegates named and explicit-file sources to the native API, retains
+deferred input loading and stable phase errors, and removes its non-portable sorted recursive repository fallback.
+
+The complete Julia package passes 1,110 assertions. Focused process conformance, exact 61/61 CLI cases under
+default and POSIX environments, and all 105 corpus fixtures pass. Julia promotes to pass at census 56/1/3. Final
+four-backend admission `.1.6.4.5` is next.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.3 — add Dart native spec resolution
 
 Added public Dart `spec_loader.dart` with typed `SpecRequest` name/path intent, `SpecLoadOptions` cwd and ordered

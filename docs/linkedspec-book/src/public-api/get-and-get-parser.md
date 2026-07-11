@@ -17,26 +17,26 @@ in-process data path, not identical spelling:
 | Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
-| Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
+| Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
-The inline in-memory role is implemented on all four current backends. Perl, Rust, and Dart also expose the native
-file-oriented role: Perl through `get_parser(...)`, Rust through `linkedspec_runtime::spec_loader`, and Dart
-through the public `spec_loader.dart` export. Julia still resolves named specs only inside its thin primary process
-adapter. `FUTURE-PARITY-BACKLOG.1.6.4.4-.5` owns Julia's idiomatic native equivalent and final shared admission;
-until those leaves close, Julia callers should load source explicitly and pass it to the in-memory parser.
+The inline and file-oriented roles are implemented on all four current backends: Perl through `Get(...)` and
+`get_parser(...)`, Rust through core composition and `linkedspec_runtime::spec_loader`, Dart through its public
+parser/compiler plus `spec_loader.dart`, and Julia through its staged parser/compiler plus `SpecLoader.jl`. Final
+shared admission remains under `FUTURE-PARITY-BACKLOG.1.6.4.5`.
 
-The implementation audit found that the adapters do not yet share one fallback policy. Rust and Dart stop after
-the exact working-directory path, working-directory `<name>.spec`, and repository `specs/<name>.spec`; Julia adds
-a sorted recursive repository search. Perl checks the same three local forms but then delegates a bare miss to the
+The implementation audit found that the former adapters did not share one fallback policy. Rust and Dart stopped
+after three local candidates, Julia added a sorted recursive repository search, and Perl delegated a bare miss to
 legacy `PathSearch`, whose recursively cached directory set and hash-key selection do not define portable
-duplicate-name precedence. ADR `0026` therefore makes additional search roots explicit and ordered. Perl's
-implicit recursive fallback remains a compatibility extension, not the semantic model that new variants reproduce.
+duplicate-name precedence. ADR `0026` therefore makes additional search roots explicit and ordered. The Rust,
+Dart, and Julia native APIs and their primary adapters now use that policy; Julia's recursive adapter fallback was
+removed. Perl's implicit recursive fallback remains a compatibility extension, not the semantic model that new
+variants reproduce.
 
 ### Portable file-oriented contract
 
-The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Rust
-and Dart pass it directly, while Julia rollout remains in progress. It separates two caller intents:
+The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Rust,
+Dart, and Julia pass it directly. It separates two caller intents:
 
 | Request | Resolution |
 | --- | --- |
@@ -152,7 +152,35 @@ parser, compiler, runtime, or `.spec` semantics unavailable to native library ca
 Backend tests therefore call the library directly; CLI and corpus tests add integration
 proof but do not replace host-process API proof.
 
-### Julia in-memory example
+### Julia named/file example
+
+Julia exports the progressive file stages and complete composition from `LinkedSpecJulia`:
+
+```julia
+using LinkedSpecJulia
+
+loaded = load_and_compile_spec(
+    named_spec_request("grammars/Expression"),
+    SpecLoadOptions(
+        "/work/project";
+        search_roots = ["/app/specs", "/team/specs"],
+    ),
+)
+
+println("resolved: ", loaded.loaded.resolved.path)
+println("source characters: ", length(loaded.loaded.source_text))
+
+engine = create_engine(loaded)
+value = runtime_execute(engine, "input").value
+```
+
+Use `path_spec_request("relative/or/absolute.spec")` for one exact host path. `resolve_spec(...)` selects only,
+`load_spec(...)` also reads and strictly decodes, and `load_and_compile_spec(...)` continues through the full
+staged function-aware parser, validation, and compiler. `to_json(error::SpecPipelineException)` exposes the
+neutral structured error shape. `create_engine(...)` attaches the requested name and resolved file path to later
+runtime diagnostics.
+
+### Julia inline example
 
 Rule-only `.spec` source stays entirely in the Julia process:
 

@@ -89,8 +89,8 @@ Validate the machine-readable broader census with:
 perl tools/check_capability_conformance.pl
 ```
 
-`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 55 pass, one
-partial-proof, and four gap. Every partial/gap state names a task-tree owner, every evidence path must exist, and
+`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 56 pass, one
+partial-proof, and three gap. Every partial/gap state names a task-tree owner, every evidence path must exist, and
 legacy/future exclusions are explicit. The canonical local gate runs this check before focused suites.
 
 The file-oriented native API has a separate executable resolution/loading contract:

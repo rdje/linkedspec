@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.4 — add Julia native spec resolution**
+  (DONE — Julia file-oriented native role passes; final admission `.1.6.4.5` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, typed structured exceptions, staged-function composition, attributed engine, CLI
+  delegation, and removal of recursive repository fallback.
+
+  **Proof:** Direct 14/9/4 fixture plus pipeline testsets pass 82 assertions; complete Julia package passes 1,110
+  assertions, exact 61x2 CLI and 105 corpus fixtures pass. Census 56/1/3.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.3 — add Dart native spec resolution**
   (DONE — Dart file-oriented native role passes; Julia `.1.6.4.4` active).
 

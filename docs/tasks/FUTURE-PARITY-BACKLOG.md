@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (Dart native resolution `.1.6.4.3` closed; Julia native API `.1.6.4.4` active).
+- Last updated: `2026-07-11` (Julia native resolution `.1.6.4.4` closed; final admission `.1.6.4.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1155,16 +1155,26 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.4`
-  Status: `active`
+  Status: `done`
   Goal: Add Julia native named/file resolution and compilation.
   Acceptance: Public Julia APIs consume the neutral fixture without CLI/subprocess ownership, replace the CLI-only
     recursive fallback with the portable ordered-root policy, compose strict loading through staged parse/compile,
     retain source identity, return structured exceptions, and preserve exact primary CLI behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Public `src/io/SpecLoader.jl`, included and exported by `LinkedSpecJulia`, provides typed name/path
+    requests, cwd plus ordered direct roots, deterministic candidate origins, regular-file selection, strict
+    preserved UTF-8 loading, exact source identity, progressive resolve/load/compile results, typed stages/codes,
+    structured JSON exceptions, and `create_engine(...)` attribution. The full composition uses the staged user-
+    function parser, explicit validation, and compiler. Five direct-library testsets consume all 14 name, nine
+    resolution/file-kind, and four text cases with 82 assertions, then prove staged-function execution, parse/
+    validation separation, engine identity, and exact missing-name JSON. The primary CLI delegates named/file
+    sources, removes its non-portable recursive repository fallback, retains deferred input loading, and keeps
+    exact process behavior. The complete package passes 1,110 assertions; focused process checks, exact 61/61 CLI
+    cases under default and POSIX environments, and all 105 corpus fixtures pass. Julia promotes to pass; census is
+    56/1/3.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.5`
-  Status: `pending`
+  Status: `active`
   Goal: Admit and close exact native named/file resolution parity.
   Acceptance: All four variants pass the shared direct-library fixture and their complete recurring/CLI gates;
     public docs and the capability census promote the role only after adapter no-drift; `.1.6.4` closes and the
@@ -1425,7 +1435,7 @@ before implementation.
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `done` | Audit found raw runtime `Result<_, String>` APIs and split typed implementation from admission. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `done` | Typed/JSON errors, source/top/child attribution, five focused tests, and full runtime package pass. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
-| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Audit, neutral contract, and Rust/Dart APIs are closed; Julia native resolution `.4` is active before admission. |
+| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Audit, neutral contract, and Rust/Dart/Julia APIs are closed; exact four-backend admission `.5` is active. |
 | 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
@@ -2079,6 +2089,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.1` | ADR 0026; executable 13/9/4 contract/checker; complete local gate with 61x2 Perl CLI and Phase 0 `1..1030`; capability/KM/memory/doctrine/mdBook/cleanup. | PASS. Portable resolution/loading semantics are fixed before backend implementation. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.2` | Expanded 14/9/4 contract; five direct Rust loader tests; full Rust gate 137/105/196/5/3/5/10 plus 61x2 CLI; strict Clippy classification; capability/KM/memory/doctrine/whitespace/mdBook; 2.0 GB cleanup. | PASS. Rust native file role and CLI delegation pass; census 54/1/5; Dart `.3` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.3` | Public progressive Dart loader; five direct 14/9/4 plus pipeline tests; format/analyze; full Dart gate 165 tests, 61x2 CLI, and 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart native file role and CLI delegation pass; census 55/1/4; Julia `.4` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.4` | Public progressive Julia loader; 82 direct 14/9/4 plus pipeline assertions; complete 1,110-assertion package; focused process check; 61x2 CLI; 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Julia native file role and CLI delegation pass; recursive fallback removed; census 56/1/3; admission `.5` active. |
 
 ## Commit Log
 
@@ -2127,9 +2138,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.4.1` | `FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract` | ADR 0026, executable fixture/checker, canonical-gate integration, and public docs. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.2` | `FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution` | Public progressive loader/compiler, typed errors/identity, direct fixture proof, and CLI delegation. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.3` | `FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution` | Public progressive loader/compiler, structured exceptions/identity, direct 14/9/4 proof, and CLI delegation. |
+| `FUTURE-PARITY-BACKLOG.1.6.4.4` | `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution` | Public progressive loader/compiler, typed exceptions/identity, direct 14/9/4 proof, CLI delegation, and recursive-fallback removal. |
 
 ## Changelog
 
+- `2026-07-11`: `.1.6.4.4` adds Julia's public progressive resolver/loader/compiler, 82-assertion direct 14/9/4
+  fixture proof, exact source identity, structured typed exceptions, attributed-engine construction, and primary
+  CLI delegation while removing recursive fallback. The full Julia gate passes 1,110 assertions, 61x2 CLI, and 105
+  corpus fixtures; census advances to 56/1/3 and final admission `.5` is active.
 - `2026-07-11`: `.1.6.4.3` adds Dart's public progressive resolver/loader/compiler, direct 14/9/4 fixture proof,
   exact source identity, structured exceptions, attributed-engine construction, and primary CLI delegation. The
   full Dart gate passes 165 tests, 61x2 CLI, and 105 corpus fixtures; census advances to 55/1/4 and Julia `.4` is

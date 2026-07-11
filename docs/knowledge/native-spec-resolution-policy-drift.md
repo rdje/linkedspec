@@ -13,6 +13,8 @@ tags: [resolution, pathsearch, parity, rust, dart, julia, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.0 source/test audit: Perl Resolver checks exact cwd, cwd name.spec, and module-root specs/name.spec before bare-name PathSearch fallback. PathSearch recursively caches cwd plus the repository tree, hash-deduplicates directories, and returns the first matching hash-key iteration result. Rust and Dart primary adapters stop after the three local candidates; Julia adds a sorted/pruned recursive repository fallback. All three non-Perl mechanisms are process-adapter-only."
 evidence_update_2026_07_11_contract: "FUTURE-PARITY-BACKLOG.1.6.4.1 adopts ADR 0026 and a checked executable contract: portable named identities, separate exact paths, explicit roots in declared order, no recursion, first regular file, strict preserved UTF-8, structured pipeline stages/codes, and 13/9/4 neutral cases."
 evidence_update_2026_07_11_rust: "FUTURE-PARITY-BACKLOG.1.6.4.2 expands the name proof to 14 cases for Windows-drive absolutes and makes Rust native/CLI resolution delegate to the portable policy; Dart and Julia remain active gaps."
+evidence_update_2026_07_11_dart: "FUTURE-PARITY-BACKLOG.1.6.4.3 makes Dart native/CLI resolution delegate to the portable 14/9/4 policy; Julia remains the active implementation gap."
+evidence_update_2026_07_11_julia: "FUTURE-PARITY-BACKLOG.1.6.4.4 makes Julia native/CLI resolution delegate to the portable 14/9/4 policy and removes the sorted recursive repository fallback. Only Perl's explicitly bounded legacy PathSearch extension remains outside the portable policy."
 reverify: "sed -n '1,180p' perl/PathSearch.pm && rg -n '_resolve_local_spec_path|PathSearch::go|resolve_named_spec|resolvePrimaryCliNamedSpec|_resolve_named_spec_path|_find_primary_cli_repository_spec' perl/LinkedSpec/Resolver.pm rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl"
 ---
 
@@ -26,10 +28,11 @@ with the current working directory plus a recursive repository walk, later roots
 matches are selected from hash-key iteration order. It also caches the discovered set across calls. The result is
 implicit, process-dependent discovery rather than caller-visible deterministic precedence.
 
-The native parity lane therefore separates compatibility from the portable API. New native APIs will take explicit
-ordered search roots and a checked-in fixture will own precedence, regular-file handling, strict preserved UTF-8,
-source identity, parse/compile order, and structured stages. Perl may retain implicit recursive `PathSearch` for
-legacy callers, but Rust, Dart, Julia, Lua, and future variants must not reproduce its unordered selection.
+The native parity lane therefore separates compatibility from the portable API. Rust, Dart, and Julia now take
+explicit ordered search roots, and the checked-in fixture owns precedence, regular-file handling, strict preserved
+UTF-8, source identity, parse/compile order, and structured stages. Perl may retain implicit recursive `PathSearch`
+for legacy callers, but Julia's earlier recursive adapter search is removed and future variants must not reproduce
+either extension.
 
 Related facts: [[backend-capability-census]], [[native-in-memory-backend-contract]],
 [[julia-primary-cli-arguments-resolution-loading]], [[native-spec-resolution-contract]].

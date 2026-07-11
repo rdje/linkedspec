@@ -15,6 +15,7 @@ date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
 evidence: "ADR 0006 formalized lockstep backends, ADR 0021 fixed Dart/Julia/Lua order, and ADR 0022 made native embedding primary. ADR 0023 now makes complete parity exact user-observable capability/behavior identity plus one identical primary CLI; current Dart/Julia milestones remain scoped and global FUTURE-PARITY-BACKLOG.1.5/.1.6/.3 own convergence."
+evidence_update_2026_07_11: "Exact primary CLI parity is closed at 61x2 on Perl/Rust/Dart/Julia, and all four expose native inline plus named/file roles; generated source and Dart full-pipeline trace still prevent complete parity."
 reverify: "rg -n 'Rust|Julia|Dart|Lua|backend|primary CLI|complete parity' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/decisions/0023-user-observable-backend-and-cli-parity.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -100"
 ---
 
@@ -68,10 +69,10 @@ capabilities/behavior and the same primary CLI interface.
 
 | Backend | Current primary CLI status | Web (JS) | Wasm | Mobile |
 |---------|-----|----------|------|--------|
-| Perl    | Parser command exists; neutral ADR 0023 fixture lock pending | — | — | — |
-| Rust    | Missing binary target | ✅ (wasm-bindgen future target) | ✅ future target | — |
-| Dart    | Corpus-oriented command; ADR 0023 parser interface pending | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
-| Julia   | Corpus/status command; ADR 0023 parser interface active | — | — | — |
+| Perl    | Exact ADR 0023 parser command; 61x2 pass | — | — | — |
+| Rust    | Exact `linkedspec-rust`; 61x2 pass | ✅ (wasm-bindgen future target) | ✅ future target | — |
+| Dart    | Exact Dart parser command; 61x2 pass | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
+| Julia   | Exact `linkedspec_julia`; 61x2 pass | — | — | — |
 | Lua     | Scheduled; must implement ADR 0023 from its first CLI slice | — | — | — |
 
 ## Speculated VM consideration

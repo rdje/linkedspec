@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.4 — remove discovery that the contract cannot explain):
+  Julia's sorted recursive fallback was deterministic but still backend-only implicit discovery. Delegating both
+  the public API and primary adapter to cwd/suffix/declared direct roots removes that semantic fork. The CLI keeps
+  its existing request record and stable phase projection, but native name/file preparation now retains the full
+  compiled result and avoids a second parse/compile path. Inline text remains on the traced in-memory path, and
+  input files remain deferred until compilation succeeds. Julia `String(read(path))` can carry malformed bytes,
+  so validity must still be checked explicitly before any parser sees the text.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.3 — keep CLI phase projection outside the native loader):
   The Dart native API owns precise resolution/read/decode/parse/validate/compile exceptions and retained source
   identity. The primary CLI deliberately catches those exceptions at its existing compile boundary and continues

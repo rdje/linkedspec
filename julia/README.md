@@ -8,7 +8,9 @@ library-level corpus execution, bounded CLI selection/reporting, and spec-driven
 composition plus full ordered 105-fixture library and CLI execution. Local-gate integration and native primary
 rule/function execution with direct canonical JSON, stable failure/trace routing, and nine-family direct-process
 conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
-parity closeout remain open; this status is a Julia-local milestone, not a complete backend-parity claim.
+parity closeout remain open. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
+identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
+status remains a Julia-local milestone, not a complete backend-parity claim.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -91,6 +93,38 @@ are added as dev dependencies or installed locally:
 julia --project=julia -e 'using JuliaFormatter; format("julia")'
 julia --project=julia -e 'using JET; JET.test_package("LinkedSpecJulia")'
 ```
+
+## Native Spec Resolution and Loading
+
+Use the public progressive API when a Julia application starts from a named `.spec` or exact file path:
+
+```julia
+using LinkedSpecJulia
+
+loaded = load_and_compile_spec(
+    named_spec_request("grammars/Expression"),
+    SpecLoadOptions(
+        pwd();
+        search_roots = [joinpath(pwd(), "specs")],
+    ),
+)
+
+println(loaded.loaded.resolved.path)
+engine = create_engine(loaded)
+result = runtime_execute(engine, "input")
+```
+
+`resolve_spec(...)` validates and selects a regular file. `load_spec(...)` additionally reads and strictly decodes
+UTF-8 while preserving BOM, Unicode normalization, newlines, and surrounding text. `load_and_compile_spec(...)`
+continues through the staged function-aware parser, validation, and compiler. Use
+`path_spec_request("path/to/file.spec")` for one exact absolute or cwd-relative host path with no suffix or search-
+root fallback. Named identities use `/` components and search cwd exact, cwd with `.spec`, then caller-declared
+direct roots in order; resolution never recursively scans them.
+
+Failures throw `SpecPipelineException` with typed stage/code values, request identity, optional resolved path and
+detail, and a neutral `to_json(...)` projection. `create_engine(...)` carries the requested name and resolved path
+into later runtime diagnostics. The primary CLI delegates named/file sources to this API but keeps its stable
+phase-only process errors and deferred input-file order.
 
 ## Native Trace Propagation
 
@@ -280,8 +314,9 @@ matches. Marker-form switch siblings also execute as one nesting-aware first-mat
 anonymous/named capture family now uses rule-local code-unit marks with character-based public positions and
 lengths. It covers stable/advancing slice, cursor, rest, from, and between reads; current/input-boundary, copied,
 and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND` blind-call rules surface ordered
-child returns when no explicit parent return overrides them. The current package suite passes 1,028 assertions;
-61/61 shared CLI cases in both environments and the 105/105 corpus remain green.
+child returns when no explicit parent return overrides them. Native named/file resolution adds 82 direct contract
+and pipeline assertions, bringing the current package suite to 1,110 assertions; 61/61 shared CLI cases in both
+environments and the 105/105 corpus remain green.
 
 Library example:
 

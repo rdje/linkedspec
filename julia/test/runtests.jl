@@ -9,6 +9,8 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
     Dict{String,Any},
 )
 
+include("spec_loader_test.jl")
+
 function _throws_corpus_message(call, needle)
     try
         call()
@@ -595,12 +597,19 @@ end
             cwd = repository,
             repo_root = repository,
         ) == joinpath(repository, "specs", "Priority.spec")
-        @test LinkedSpecJulia._resolve_named_spec_path(
-            "Fallback";
-            cwd = repository,
-            repo_root = repository,
-        ) == joinpath(repository, "authored", "nested", "Fallback.spec")
         fallback_error = try
+            LinkedSpecJulia._resolve_named_spec_path(
+                "Fallback";
+                cwd = repository,
+                repo_root = repository,
+            )
+            nothing
+        catch error
+            error
+        end
+        @test fallback_error isa LinkedSpecJulia._PrimaryCliLoadException
+
+        pruned_error = try
             LinkedSpecJulia._resolve_named_spec_path(
                 "Pruned";
                 cwd = repository,
@@ -610,7 +619,7 @@ end
         catch error
             error
         end
-        @test fallback_error isa LinkedSpecJulia._PrimaryCliLoadException
+        @test pruned_error isa LinkedSpecJulia._PrimaryCliLoadException
 
         explicit_error = try
             LinkedSpecJulia._resolve_named_spec_path(

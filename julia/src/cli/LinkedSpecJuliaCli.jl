@@ -32,6 +32,7 @@ struct _PrimaryCliRequest
     spec_source::String
     spec_name::String
     spec_path::Union{Nothing,String}
+    loaded_spec::Union{Nothing,LoadedCompiledSpec}
     input::Union{Nothing,String}
     input_path::Union{Nothing,String}
 end
@@ -55,17 +56,6 @@ const _PRIMARY_CLI_VALUE_OPTIONS = Set([
     "--trace",
     "--trace-file",
     "--trace-mode",
-])
-
-const _PRIMARY_CLI_SEARCH_PRUNE = Set([
-    ".git",
-    ".dart_tool",
-    "book",
-    "compiled",
-    "deps",
-    "incremental",
-    "node_modules",
-    "target",
 ])
 
 function _primary_cli_usage()
@@ -276,18 +266,28 @@ function _prepare_primary_cli_request(
     repo_root::AbstractString = _primary_cli_repo_root(),
     load_input_file::Bool = true,
 )
-    spec_source, spec_name, spec_path = if options.spec !== nothing
-        resolved = _resolve_named_spec_path(
-            options.spec;
+    spec_source, spec_name, spec_path, loaded_spec = if options.spec !== nothing
+        loaded = _load_primary_cli_spec(
+            named_spec_request(options.spec);
             cwd = cwd,
             repo_root = repo_root,
         )
-        (_read_primary_cli_file(resolved, "spec file"), options.spec, resolved)
+        (
+            loaded.loaded.source_text,
+            options.spec,
+            loaded.loaded.resolved.path,
+            loaded,
+        )
     elseif options.spec_file !== nothing
-        path = _primary_cli_explicit_path(options.spec_file, cwd)
-        (_read_primary_cli_file(path, "spec file"), basename(path), path)
+        loaded = _load_primary_cli_spec(
+            path_spec_request(options.spec_file);
+            cwd = cwd,
+            repo_root = repo_root,
+        )
+        path = loaded.loaded.resolved.path
+        (loaded.loaded.source_text, basename(path), path, loaded)
     else
-        (something(options.inline_spec, ""), "<inline>", nothing)
+        (something(options.inline_spec, ""), "<inline>", nothing, nothing)
     end
 
     input, input_path = if options.input_file !== nothing
@@ -305,9 +305,47 @@ function _prepare_primary_cli_request(
         spec_source,
         spec_name,
         spec_path,
+        loaded_spec,
         input,
         input_path,
     )
+end
+
+function _load_primary_cli_spec(
+    request::SpecRequest;
+    cwd::AbstractString,
+    repo_root::AbstractString,
+)
+    options = SpecLoadOptions(
+        cwd;
+        search_roots = [joinpath(String(repo_root), "specs")],
+    )
+    try
+        return load_and_compile_spec(request, options)
+    catch error
+        if error isa SpecPipelineException
+            throw(_primary_cli_spec_load_exception(error))
+        end
+        rethrow()
+    end
+end
+
+function _primary_cli_spec_load_exception(error::SpecPipelineException)
+    label = "spec file"
+    message = if error.code == InvalidSpecNameCode
+        "invalid spec name: expected a portable relative name"
+    elseif error.code == SpecPathNotFoundCode
+        "$label not found: '$(error.requested)'"
+    elseif error.code == SpecPathNotFileCode
+        "$label is not a file: '$(something(error.resolved_path, error.requested))'"
+    elseif error.code == InvalidUtf8Code
+        "$label is not valid UTF-8: '$(something(error.resolved_path, error.requested))'"
+    elseif error.code == SpecReadFailedCode
+        "cannot read $label '$(something(error.resolved_path, error.requested))'"
+    else
+        error.summary
+    end
+    return _PrimaryCliLoadException("spec", message)
 end
 
 function _resolve_named_spec_path(
@@ -315,61 +353,20 @@ function _resolve_named_spec_path(
     cwd::AbstractString = pwd(),
     repo_root::AbstractString = _primary_cli_repo_root(),
 )
-    name = String(spec_name)
-    if isempty(name) || isempty(strip(name)) || strip(name) != name || any(iscntrl, name)
-        throw(_PrimaryCliLoadException(
-            "spec",
-            "invalid spec name: expected a non-empty value without surrounding whitespace or control characters",
-        ))
-    end
-
-    current_root = abspath(String(cwd))
-    repository_root = abspath(String(repo_root))
-    spec_filename = endswith(name, ".spec") ? name : "$name.spec"
-    candidates = String[
-        _primary_cli_explicit_path(name, current_root),
-        _primary_cli_explicit_path(spec_filename, current_root),
-        normpath(joinpath(repository_root, "specs", spec_filename)),
-    ]
-    seen = Set{String}()
-    for candidate in candidates
-        if candidate in seen
-            continue
+    try
+        return resolve_spec(
+            named_spec_request(spec_name),
+            SpecLoadOptions(
+                cwd;
+                search_roots = [joinpath(String(repo_root), "specs")],
+            ),
+        ).path
+    catch error
+        if error isa SpecPipelineException
+            throw(_primary_cli_spec_load_exception(error))
         end
-        push!(seen, candidate)
-        if isfile(candidate)
-            return candidate
-        end
+        rethrow()
     end
-
-    explicit = occursin('/', name) || occursin('\\', name) || endswith(name, ".spec")
-    if explicit
-        throw(_PrimaryCliLoadException("spec", "spec path not found: '$name'"))
-    end
-
-    fallback = _find_primary_cli_repository_spec(repository_root, spec_filename)
-    if fallback !== nothing
-        return fallback
-    end
-    throw(_PrimaryCliLoadException("spec", "spec path not found: '$name'"))
-end
-
-function _find_primary_cli_repository_spec(repo_root::String, spec_filename::String)
-    if !isdir(repo_root)
-        return nothing
-    end
-    for (root, directories, files) in walkdir(repo_root; topdown = true, follow_symlinks = false)
-        filter!(directory -> !(directory in _PRIMARY_CLI_SEARCH_PRUNE), directories)
-        sort!(directories)
-        sort!(files)
-        if spec_filename in files
-            candidate = normpath(joinpath(root, spec_filename))
-            if isfile(candidate)
-                return candidate
-            end
-        end
-    end
-    return nothing
 end
 
 function _read_primary_cli_file(path::String, label::String)
@@ -567,6 +564,14 @@ function _compile_primary_cli_request(
     request::_PrimaryCliRequest;
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
+    if request.loaded_spec !== nothing
+        return LinkedSpecRuntimeEngine(
+            request.loaded_spec.compiled;
+            parse_mode = something(request.options.parse_mode, "seek"),
+            spec_name = request.spec_name,
+            spec_path = request.spec_path,
+        )
+    end
     spec = _parse_primary_cli_spec(request.spec_source; trace = trace)
     compiled = compile_spec(spec; trace = trace)
     return LinkedSpecRuntimeEngine(
