@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — split executable capability residuals
+
+**Corrected sources/generator seam:** Anonymous and named capture fixtures now use three `AND` slots so marks are
+saved after `A` and read after `C`; destructive anonymous reads reset from a stable origin. Marker control is
+newline-only. All six governed fixtures return exact Perl values. The oracle generator can safely load an authored
+repo-relative `source_file` with absolute/empty/dot/parent-segment rejection.
+
+**Foundational diagnostic:** Provisional 105-case generation makes strict source coverage reach 237/237. Rust,
+Dart, and Julia each pass all original 99 cases plus cursor control but fail the same five families (100/105).
+Recognition tables had hidden executable drift: common pure helper value differences, divergent empty-local-match
+projection, Rust `i`/`elif` gaps versus Dart/Julia marker-default errors, and incomplete capture/mark execution.
+
+**Safe split/no-drift:** Pure, position, marker-control, and capture/mark mechanisms are split into backend-specific
+committed leaves before code. Diagnostic generated directories/manifest entries were removed, so the mandatory
+corpus remains at its green 99-case boundary. Exact evidence is durable in the task tree, capability census,
+mdBook, and Knowledge Map; active `.1.6.1.2.2.1.1` starts Rust pure-value alignment.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.1 — terminate newline switch closure
 
 **Precise repair:** `RewritePipeline` now retains each pending lowered statement's canonical contract ID.

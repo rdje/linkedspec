@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.1` — newline switch-close termination is repaired.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.0` — the residual was audited and split before code.
-- recent_context: Pending lowered statements now carry canonical contract identity; `endswitch_flow` emits the
-  required Perl `};` before a newline-following statement while ordinary block closures remain unchanged. The
-  five-assertion control lock and full Phase 0 pass `1..1030`; corpus remains 99 and strict coverage lacks 98/237.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0` — executable capability residuals are audited/split.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.1` — newline switch-close termination is repaired.
+- recent_context: Corrected fixtures produce six exact Perl values and provisional strict coverage 237/237. Rust,
+  Dart, and Julia each pass 100/105: cursor passes; pure, position, marker, and two capture families fail. Repair is
+  split by mechanism/backend; mandatory corpus remains green at 99 until atomic final admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.1 - terminate newline switch closure`; previous committed HEAD is
-  `a8cfebda FUTURE-PARITY-BACKLOG.1.6.1.2.0 - split control-close terminator residual`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 - split executable capability residuals`; previous committed HEAD is
+  `eb3d0032 FUTURE-PARITY-BACKLOG.1.6.1.2.1 - terminate newline switch closure`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2` final current-call proof is active.
-- next_action: admit the corrected capture/mark/control and bounded pure/position/cursor fixtures, regenerate exact
-  Perl oracle values, drive 98 missing names to zero, and run the expanded corpus unchanged on Perl/Rust/Dart/Julia.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.1.1` Rust pure-value alignment is active.
+- next_action: use focused Rust fixture diagnostics to align numeric predicate results, direct-literal `flat`
+  splicing, and statement-form `uppercase_each` mutation while preserving typed booleans and value transformations.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -54,4 +54,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; strict coverage remains red until `.1.6.1.2.2`; generated backend caches are absent.
+- blockers: none. in_flight_uncommitted: none after this commit; strict mandatory coverage remains red until `.2.2.5`; generated backend caches are absent after cleanup.

@@ -62,8 +62,9 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 
 # Corpus cases. Each is a hashref:
 #   { case => '<dir>', input => '<bytes>',
-#     source => '<inline .spec>'   # authored grammar (embedded verbatim), OR
-#     spec   => '<name>' }         # shipped spec, slurped from specs/<name>.spec
+#     source      => '<inline .spec>'   # authored grammar (embedded verbatim), OR
+#     source_file => '<repo-relative>'  # governed authored grammar, OR
+#     spec        => '<name>' }         # shipped spec, slurped from specs/<name>.spec
 #
 # .7.1 GREEN PROOF SET — controlled authored grammars in the Rust-supported
 # subset (`::` rules, entry_text, assignment, push/copy/return, with a few
@@ -1203,6 +1204,7 @@ SPEC
         spec  => 'lib_reader',
         input => 'cell("foo"){ attr("bar,baz"); }',
     },
+
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);
@@ -1219,6 +1221,9 @@ for my $case (@CASES) {
     my $spec_src;
     if ( defined $case->{source} ) {
         $spec_src = $case->{source};
+    }
+    elsif ( defined $case->{source_file} ) {
+        $spec_src = slurp( source_file_path( $case->{source_file} ) );
     }
     else {
         my $spec = $case->{spec};
@@ -1279,10 +1284,12 @@ sub run_oracle {
         my $stage = 'parser build';
         my $ok    = eval {
             my $parser;
-            if ( defined $case->{source} ) {
-                my $source = $case->{source};
+            if ( defined $case->{source} || defined $case->{source_file} ) {
+                my $source = defined $case->{source}
+                    ? $case->{source}
+                    : slurp( source_file_path( $case->{source_file} ) );
                 $parser = LinkedSpec::Get( \$source );
-                die "Get(<inline $name>) did not return a CODE ref\n"
+                die "Get(<authored $name>) did not return a CODE ref\n"
                     unless ref $parser eq 'CODE';
             }
             else {
@@ -1351,6 +1358,16 @@ sub slurp {
     my $content = <$fh>;
     close $fh;
     return $content;
+}
+
+sub source_file_path {
+    my ($relative) = @_;
+    die "oracle source_file must be a non-empty repo-relative path\n"
+        unless defined($relative) && length($relative) && !File::Spec->file_name_is_absolute($relative);
+    my @parts = split m{/}, $relative, -1;
+    die "oracle source_file must not contain empty, dot, or parent segments: $relative\n"
+        if grep { $_ eq '' || $_ eq '.' || $_ eq '..' } @parts;
+    return File::Spec->catfile( $REPO, @parts );
 }
 
 sub spew {

@@ -682,9 +682,162 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2`
   Status: `active`
   Goal: Correct fixture timing, admit exhaustive current-call families, and close strict four-backend proof.
+  Children: `.1.6.1.2.2.0`, `.1.6.1.2.2.1`, `.1.6.1.2.2.2`, `.1.6.1.2.2.3`,
+    `.1.6.1.2.2.4`, `.1.6.1.2.2.5`
   Acceptance: Apply the proven three-slot capture/mark timing, use newline-only control source, register all six
     source fixtures in oracle generation, regenerate exact Perl values, make strict 237-name coverage pass, run the
     expanded corpus unchanged on Perl/Rust/Dart/Julia, update `language.current_mdbook_surface`, and close `.1.6.1`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0`
+  Status: `done`
+  Goal: Execute the corrected exhaustive fixtures, root-cause the advertised-call/runtime gap, and split repair.
+  Acceptance Checklist:
+    - REPRODUCE: run all six corrected fixture families directly on Perl and diagnostically in a generated 105-case
+      corpus on Rust, Dart, and Julia.
+    - ROOT CAUSE: distinguish call-name inventory coverage from executable semantics and classify every mismatch
+      by value, position, control, or capture/mark mechanism.
+    - FIX: define backend-specific children for each mechanism before changing backend code.
+    - ADDRESSED: retain corrected governed sources and reusable repo-relative `source_file` generator support while
+      keeping the mandatory manifest at the last green 99-case boundary.
+    - NO REGRESSION: prove the original 99 cases still pass on every backend during the diagnostic 105-case run.
+    - LOCKSTEP: update task/live/book/Knowledge Map surfaces with exact counts and owners.
+  Verification: Perl produces exact values for all six fixtures and regenerates 105/105. Strict source-name
+    coverage reaches 237/237. Rust, Dart, and Julia each pass the original 99 plus cursor control and fail the same
+    five new families (100/105), with backend-specific details: common pure-value mismatch; empty local-match
+    projection mismatch; Rust missing `i`/`elif` while Dart/Julia select marker default after a matching case; and
+    incomplete capture/mark helper execution on all three. The diagnostic six directories and manifest entries
+    were removed after evidence capture so the mandatory corpus stays green at 99 until repair closes.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 - split executable capability residuals`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1`
+  Status: `active`
+  Goal: Align exhaustive pure/aggregate helper values with the Perl reference.
+  Children: `.1.6.1.2.2.1.1`, `.1.6.1.2.2.1.2`, `.1.6.1.2.2.1.3`
+  Acceptance: Close exact predicate/comparison `1`/`0`, direct-literal `flat` splicing, and statement-form
+    `uppercase_each` mutation without weakening typed literal booleans or value-form array transformations.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1`
+  Status: `active`
+  Goal: Align Rust pure/aggregate helper value semantics.
+  Acceptance: The pure fixture returns the exact Perl hash; focused Rust locks distinguish numeric predicate results,
+    direct-literal flat splicing, and mutation-vs-value `uppercase_each`; existing 99-case corpus remains green.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2`
+  Status: `pending`
+  Goal: Align Dart pure/aggregate helper value semantics under the same exact fixture.
+  Acceptance: Match the repaired Rust/Perl value without backend-specific source or CLI behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3`
+  Status: `pending`
+  Goal: Align Julia pure/aggregate helper value semantics under the same exact fixture.
+  Acceptance: Match the repaired Rust/Perl/Dart value without backend-specific source or CLI behavior and close `.1`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2`
+  Status: `pending`
+  Goal: Align empty local-match position projection on Rust, Dart, and Julia.
+  Children: `.1.6.1.2.2.2.1`, `.1.6.1.2.2.2.2`, `.1.6.1.2.2.2.3`
+  Acceptance: Match Perl's exact null capture/length/position plus empty-map/list/has and 1-based line/column defaults
+    after entry match without inventing a local match; close one backend per committed child.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1`
+  Status: `pending`
+  Goal: Align Rust empty local-match position projection.
+  Acceptance: Exact position fixture value and existing corpus pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2`
+  Status: `pending`
+  Goal: Align Dart empty local-match position projection.
+  Acceptance: Exact position fixture value and existing corpus pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3`
+  Status: `pending`
+  Goal: Align Julia empty local-match position projection and close `.2`.
+  Acceptance: Exact position fixture value and existing corpus pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3`
+  Status: `pending`
+  Goal: Align marker aliases and matched-case/default control semantics.
+  Children: `.1.6.1.2.2.3.1`, `.1.6.1.2.2.3.2`, `.1.6.1.2.2.3.3`
+  Acceptance: Newline `i`/`elif` executes like `if`/`elseif`; a matching case excludes default; end markers preserve
+    exact control boundaries; close one backend per committed child.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1`
+  Status: `pending`
+  Goal: Align Rust marker aliases/control fixture.
+  Acceptance: Remove unknown `i`/`elif` diagnostics and return `["elif","case-b"]` without regressing switch.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2`
+  Status: `pending`
+  Goal: Align Dart marker switch selection.
+  Acceptance: Preserve alias behavior and exclude default after matching case; exact control fixture passes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3`
+  Status: `pending`
+  Goal: Align Julia marker switch selection and close `.3`.
+  Acceptance: Preserve alias behavior and exclude default after matching case; exact control fixture passes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4`
+  Status: `pending`
+  Goal: Complete anonymous/named capture-mark executable semantics.
+  Children: `.1.6.1.2.2.4.1`, `.1.6.1.2.2.4.2`, `.1.6.1.2.2.4.3`
+  Acceptance: Exact anonymous and named hashes pass, including stable/advancing reads, bridge/reset, mark metadata,
+    input boundary marks, copied marks, and two-mark advancing reads; close one backend per committed child.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1`
+  Status: `pending`
+  Goal: Complete Rust capture/mark fixture semantics.
+  Acceptance: Both exact fixture hashes pass with no unknown-helper warning and existing corpus remains green.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2`
+  Status: `pending`
+  Goal: Complete Dart capture/mark fixture semantics.
+  Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3`
+  Status: `pending`
+  Goal: Complete Julia capture/mark fixture semantics and close `.4`.
+  Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
+  Status: `pending`
+  Goal: Admit all six fixtures and close strict current-call proof.
+  Acceptance: Register governed `source_file` cases, regenerate 105 exact values, pass strict 237-name coverage,
+    run 105/105 unchanged on Perl/Rust/Dart/Julia, promote all four `language.current_mdbook_surface` states to
+    pass, close `.1.6.1.2`/`.1.6.1`, and advance to `.1.6.2`.
   Verification: `pending`
   Commit: `pending`
 
@@ -947,23 +1100,36 @@ before implementation.
 | 28 | `FUTURE-PARITY-BACKLOG.1.6.1.1` | `done` | Universal top-level newline separation repaired; Phase 0 1029 and four-backend 99/99 pass. |
 | 29 | `FUTURE-PARITY-BACKLOG.1.6.1.2.0` | `done` | Capture timing proven; residual newline `endswitch` terminator seam split before code. |
 | 30 | `FUTURE-PARITY-BACKLOG.1.6.1.2.1` | `done` | Contract-aware generated terminator repaired; Phase 0 passes 1030. |
-| 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2` | `active` | Finish exhaustive fixture admission and strict four-backend proof. |
-| 32 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
-| 33 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
-| 34 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
-| 35 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
-| 36 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
-| 37 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 38 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 39 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 40 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 41 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 42 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 43 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 44 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 45 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 46 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 47 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
+| 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0` | `done` | Corrected fixtures expose 100/105 on every non-reference backend; repair is split. |
+| 32 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` | `active` | Align Rust pure/aggregate exact values. |
+| 33 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` | `pending` | Align Dart pure/aggregate exact values. |
+| 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `pending` | Align Julia pure/aggregate exact values. |
+| 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `pending` | Align Rust empty local-match projection. |
+| 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `pending` | Align Dart empty local-match projection. |
+| 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `pending` | Align Julia empty local-match projection. |
+| 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `pending` | Align Rust marker aliases/control. |
+| 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `pending` | Align Dart marker switch selection. |
+| 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `pending` | Align Julia marker switch selection. |
+| 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `pending` | Complete Rust capture/mark semantics. |
+| 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `pending` | Complete Dart capture/mark semantics. |
+| 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `pending` | Complete Julia capture/mark semantics. |
+| 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `pending` | Admit six fixtures and close strict 105-case proof. |
+| 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
+| 46 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
+| 47 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 48 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
+| 49 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
+| 50 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 51 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 52 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 53 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 54 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 55 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 56 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 57 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 58 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 59 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 60 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 

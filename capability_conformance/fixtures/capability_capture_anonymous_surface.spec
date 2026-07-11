@@ -1,14 +1,15 @@
-Top::
- -> Value .push
- LX { return(copy(array(Top))) }
+Top::AND
+ => Value
 
 Value:AND
  /A/
  /xxB/
+ /C/
  -> Value[0] {
   start_capture_slice()
+  mark_capture_slice(origin)
  }
- -> Value[1] {
+ -> Value[2] {
   slice = capture_slice()
   slice_len = capture_slice_len()
   slice_pos = capture_slice_pos()
@@ -18,11 +19,17 @@ Value:AND
   until_cursor_len = capture_slice_until_cursor_len()
   rest = capture_rest()
   rest_len = capture_rest_len()
+  start_capture_slice_from(origin)
   take = capture_take()
+  start_capture_slice_from(origin)
   take_len = capture_take_len()
+  start_capture_slice_from(origin)
   take_until_cursor = capture_take_until_cursor()
+  start_capture_slice_from(origin)
   take_until_cursor_len = capture_take_until_cursor_len()
+  start_capture_slice_from(origin)
   take_rest = capture_take_rest()
+  start_capture_slice_from(origin)
   take_rest_len = capture_take_rest_len()
   return(hash(
    "slice", slice,

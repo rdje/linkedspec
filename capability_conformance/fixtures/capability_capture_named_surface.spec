@@ -1,17 +1,17 @@
-Top::
- -> Value .push
- LX { return(copy(array(Top))) }
+Top::AND
+ => Value
 
 Value:AND
  /A/
  /xxB/
+ /C/
  -> Value[0] {
   mark_here(origin)
   mark_input_start(input_start)
   mark_input_end(input_end)
   mark_copy(copied, origin)
  }
- -> Value[1] {
+ -> Value[2] {
   mark_here(cursor_end)
   from = capture_from(origin)
   from_len = capture_len_from(origin)

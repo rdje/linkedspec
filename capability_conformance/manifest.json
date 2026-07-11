@@ -63,10 +63,10 @@
       "sources": ["docs/linkedspec-book/src/appendix/formal-grammar.md", "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "docs/linkedspec-book/src/appendix/runtime-semantics.md"],
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.1",
       "backends": {
-        "perl": {"status": "partial", "references": ["t/phase0_regression.t", "rust/linkedspec-runtime/tests/corpus/manifest.json"], "note": "Phase 0 is broad but Perl-only; the neutral 99-case corpus is not indexed against every current mdBook contract."},
-        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/integration_test.rs"]},
-        "dart": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/runtime_interpreter_test.dart"]},
-        "julia": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/test/runtests.jl"]}
+        "perl": {"status": "partial", "references": ["t/phase0_regression.t", "capability_conformance/fixtures/capability_pure_helper_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json"], "note": "Perl produces exact values for all six exhaustive fixtures, but they remain outside the mandatory 99-case corpus until every backend repair child closes."},
+        "rust": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/integration_test.rs"], "note": "Diagnostic 105-case execution passes 100 and exposes pure-value, empty-local-match, marker-alias, and capture/mark residuals."},
+        "dart": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/runtime_interpreter_test.dart"], "note": "Diagnostic 105-case execution passes 100 and exposes pure-value, empty-local-match, switch-default, and capture/mark residuals."},
+        "julia": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/test/runtests.jl"], "note": "Diagnostic 105-case execution passes 100 and exposes pure-value, empty-local-match, switch-default, and capture/mark residuals."}
       }
     },
     {

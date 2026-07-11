@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — vocabulary identity is not semantic parity):
+  A current-call inventory proves discovery/contract-table breadth only. Pair it with exact-value execution or a
+  backend can recognize a helper while returning the wrong value kind, treating a mutation as pure, selecting the
+  wrong branch, synthesizing different empty state, or rejecting the runtime operation. Keep diagnostic fixtures
+  governed outside the mandatory manifest until they pass everywhere; then admit them atomically so main stays
+  green. Split by semantic mechanism and backend because superficially identical failures have different causes.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.1 — use canonical identity at ambiguous host boundaries):
   A lowered string beginning with `}` does not reveal whether it is a statement block closure or the end of an
   expression-shaped host wrapper. Preserve the canonical contract ID alongside pending source spans and lowered

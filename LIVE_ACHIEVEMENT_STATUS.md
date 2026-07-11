@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — split executable capability residuals**
+  (DONE — 100/105 diagnostic split; Rust pure-value `.2.2.1.1` active).
+
+  **Audit:** Corrected three-slot capture timing and newline control produce all six exact Perl values; provisional
+  105-case source coverage is 237/237. Rust, Dart, and Julia each pass 100/105, proving call recognition alone is
+  insufficient. Residuals are pure values, empty local match, marker control, and capture/mark execution.
+
+  **Ownership/safety:** Each mechanism is split into one child per backend. The reusable safe `source_file`
+  generator seam and corrected governed sources remain, while diagnostic corpus entries were removed so the
+  mandatory 99-case boundary stays green. Exact findings are in the task tree, census, book, and Knowledge Map.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.1 — terminate newline switch closure**
   (DONE — narrow Perl repair closed; final fixture/oracle proof `.1.6.1.2.2` active).
 

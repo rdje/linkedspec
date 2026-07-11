@@ -123,6 +123,20 @@ unchanged cases in default/POSIX environments and adds recurring local verificat
 milestone is closed; Dart and Julia now also pass all 61 default/POSIX cases. `.1.5.4.3` owns recurring warmed
 four-command integration and now closes the exact CLI lane with one 4x2x61 driver.
 
+### Call-name coverage versus executable parity
+
+The capability audit derives the same 237 current ActionIR call names from Dart and Julia and requires every name
+in this book and in neutral fixture source. That is a vocabulary gate, not a semantic completion claim. A
+diagnostic expansion from 99 to 105 corpus cases proved the distinction: Perl generated all six new exact values,
+while Rust, Dart, and Julia each passed 100/105. Cursor control passed everywhere; exhaustive pure values,
+empty-local-match positions, marker control, and anonymous/named capture marks exposed backend residuals.
+
+The mandatory corpus therefore remains at its last green 99-case boundary while
+`FUTURE-PARITY-BACKLOG.1.6.1.2.2.1` through `.4` repair those mechanisms one backend at a time. The six canonical
+sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
+237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
+counts as user-visible feature parity.
+
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
 

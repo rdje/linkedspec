@@ -205,7 +205,9 @@ Top-level project docs:
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
-  after newline `endswitch()`. Active `.1.6.1.2.2` completes fixture admission and strict proof.
+  after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
+  split pure, position, marker-control, and capture/mark repairs under active `.1.6.1.2.2`; the mandatory corpus
+  remains at its green 99-case boundary until final admission.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
