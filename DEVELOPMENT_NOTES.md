@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.1 — separate logical identity from host path):
+  One overloaded string cannot safely mean both a portable named spec and an arbitrary filesystem path. Named
+  identities use forward-slash components and reject absolute/traversal/host-separator forms; exact paths retain
+  host syntax but never gain suffix or root fallback. Ordered roots are direct and caller-visible. Resolution skips
+  an earlier directory when a later regular file exists, then reports the first non-file only if no file wins.
+  Also keep the layers precise: Unicode is the logical scalar-text model, while strict UTF-8 is the selected file
+  encoding. UTF-16/UTF-32 are not invalid Unicode; they simply require explicit transcoding at this API boundary.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.0 — make discovery policy caller-visible):
   A shared local-candidate prefix does not make resolvers equivalent when their fallback policy differs. Perl's
   `PathSearch` recursively caches process/repository directories and then destroys precedence through hash-key

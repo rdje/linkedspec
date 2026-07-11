@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.0` — audited and split native named/file resolution.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.2` — admitted Rust structured runtime diagnostics.
-- recent_context: Perl's bare-name PathSearch fallback recursively caches cwd/repository directories and selects
-  through hash-key order; Rust/Dart stop after three local candidates; Julia adds sorted recursive fallback. All
-  non-Perl resolution is CLI-only. Census stays 53 pass / one partial / six gap; no behavior changed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.1` — fixed the native resolution/loading contract.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.0` — audited and split native resolution.
+- recent_context: ADR 0026 plus one JSON fixture define portable names versus exact paths, cwd/suffix/declared-root
+  precedence, no traversal/recursion, first regular file, strict preserved UTF-8, source identity, and typed stages/
+  codes. Full gate passes checker 13/9/4, 239 names, focused suites, 61x2 CLI, Phase 0 1..1030 in 502s. Census stays
+  53/1/6; no backend changed.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.4.0 - split native spec resolution`; previous committed HEAD is
-  `c4749e18 FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics`.
+  `FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract`; previous committed HEAD is
+  `0b57de74 FUTURE-PARITY-BACKLOG.1.6.4.0 - split native spec resolution`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4.1` neutral native-resolution contract is active.
-- next_action: define one checked-in fixture/schema for name validation, explicit paths, ordered search roots,
-  regular files, strict preserved UTF-8, source identity, parse/compile order, and structured failure stages.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4.2` Rust native resolution API is active.
+- next_action: add typed Rust name/path requests, ordered-root resolution, strict loading plus parse/validate/compile
+  composition and errors; consume the neutral fixture directly, then delegate the CLI without byte drift.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

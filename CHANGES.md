@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.1 — define native spec resolution contract
+
+Added ADR `0026` and `capability_conformance/native_spec_resolution_contract.json` as the versioned public
+file-oriented contract. It separates portable named identities from exact host paths; fixes cwd exact, cwd suffix,
+then explicit roots in declared order; forbids recursive discovery and name traversal; chooses the first regular
+file while retaining non-file diagnostics; and defines request/source identity plus stable pipeline error fields,
+stages, and codes.
+
+The file boundary is Unicode scalar text encoded as strict preserved UTF-8. BOM, code points, normalization form,
+newlines, and surrounding text are preserved; malformed bytes and implicit UTF-16/UTF-32 detection are rejected.
+The executable fixture contains 13 name-validation, nine resolution/file-kind, and four encoding cases. Added a
+strict standalone checker and wired it into the canonical local gate. Updated the capability source, public book,
+README, roadmap, Knowledge Map, task/live docs, and current census wording. No backend behavior changed; Rust
+native API `.1.6.4.2` is next. The complete local gate passes the checker, 239-name coverage, focused suites,
+61/61 Perl CLI cases under default and POSIX environments, and Phase 0 `1..1030` in 502 wallclock seconds.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.0 — split native spec resolution
 
 Audited the actual named/file resolution seams before backend implementation. Perl checks exact cwd, cwd suffix,

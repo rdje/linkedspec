@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "contract_id": "linkedspec-native-spec-resolution-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.1.6.4",
+  "request_kinds": [
+    "name",
+    "path"
+  ],
+  "name_policy": {
+    "form": "relative_forward_slash_identity",
+    "allow_nested_components": true,
+    "forbid": [
+      "empty_or_whitespace_only",
+      "leading_or_trailing_unicode_whitespace",
+      "unicode_control_characters",
+      "absolute_paths",
+      "backslashes",
+      "empty_components",
+      "dot_components",
+      "parent_components"
+    ]
+  },
+  "candidate_order": {
+    "name": [
+      "cwd_exact",
+      "cwd_spec_suffix",
+      "search_roots_spec_suffix_in_declared_order"
+    ],
+    "path": [
+      "absolute_or_cwd_relative_exact"
+    ],
+    "deduplicate": "preserve_first_lexical_candidate",
+    "search": "direct_children_only_no_recursion",
+    "selection": "first_regular_file",
+    "non_regular_miss": "report_first_existing_non_regular_candidate_if_no_file_matches"
+  },
+  "text_boundary": {
+    "logical_model": "unicode_scalar_text",
+    "file_encoding": "strict_utf8",
+    "preserve": [
+      "utf8_bom_as_u+feff",
+      "code_points",
+      "normalization_form",
+      "newlines",
+      "leading_and_trailing_text"
+    ],
+    "forbid": [
+      "replacement_decoding",
+      "implicit_utf16_transcoding",
+      "implicit_utf32_transcoding",
+      "unicode_normalization",
+      "bom_removal",
+      "newline_conversion",
+      "trimming"
+    ]
+  },
+  "error_contract": {
+    "type": "spec_pipeline_error",
+    "required_fields": [
+      "type",
+      "stage",
+      "code",
+      "summary",
+      "request_kind",
+      "requested"
+    ],
+    "optional_fields": [
+      "resolved_path",
+      "detail"
+    ],
+    "stages": [
+      "validate_spec_name",
+      "validate_spec_path",
+      "resolve_spec_path",
+      "load_spec_content",
+      "decode_spec_content",
+      "parse_spec",
+      "validate_spec",
+      "compile_spec"
+    ],
+    "codes": [
+      "invalid_spec_name",
+      "invalid_spec_path",
+      "spec_path_not_found",
+      "spec_path_not_file",
+      "spec_read_failed",
+      "invalid_utf8",
+      "spec_parse_failed",
+      "spec_validation_failed",
+      "spec_compile_failed"
+    ]
+  },
+  "name_validation_cases": [
+    {
+      "id": "ascii_name",
+      "value": "Lispish",
+      "expect": {"status": "ok"}
+    },
+    {
+      "id": "unicode_name",
+      "value": "Grammaire_é",
+      "expect": {"status": "ok"}
+    },
+    {
+      "id": "explicit_extension_name",
+      "value": "Demo.spec",
+      "expect": {"status": "ok"}
+    },
+    {
+      "id": "nested_relative_name",
+      "value": "nested/Demo",
+      "expect": {"status": "ok"}
+    },
+    {
+      "id": "empty_name",
+      "value": "",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "whitespace_name",
+      "value": "   ",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "leading_whitespace_name",
+      "value": " Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "trailing_whitespace_name",
+      "value": "Demo\t",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "embedded_control_name",
+      "value": "De\u0007mo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "parent_traversal_name",
+      "value": "../Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "absolute_name",
+      "value": "/Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "backslash_name",
+      "value": "nested\\Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
+      "id": "empty_component_name",
+      "value": "nested//Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    }
+  ],
+  "resolution_cases": [
+    {
+      "id": "cwd_exact_precedes_everything",
+      "request": {"kind": "name", "value": "Demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a", "roots/b"],
+      "entries": [
+        {"path": "cwd/Demo", "kind": "file"},
+        {"path": "cwd/Demo.spec", "kind": "file"},
+        {"path": "roots/a/Demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "cwd/Demo", "origin": "cwd_exact"}
+    },
+    {
+      "id": "cwd_suffix_precedes_roots",
+      "request": {"kind": "name", "value": "Demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a", "roots/b"],
+      "entries": [
+        {"path": "cwd/Demo.spec", "kind": "file"},
+        {"path": "roots/a/Demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "cwd/Demo.spec", "origin": "cwd_spec_suffix"}
+    },
+    {
+      "id": "declared_root_order",
+      "request": {"kind": "name", "value": "Demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/b", "roots/a"],
+      "entries": [
+        {"path": "roots/a/Demo.spec", "kind": "file"},
+        {"path": "roots/b/Demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "roots/b/Demo.spec", "origin": "search_root:0"}
+    },
+    {
+      "id": "extension_is_not_doubled",
+      "request": {"kind": "name", "value": "Demo.spec"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "roots/a/Demo.spec", "kind": "file"},
+        {"path": "roots/a/Demo.spec.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "roots/a/Demo.spec", "origin": "search_root:0"}
+    },
+    {
+      "id": "non_regular_candidate_does_not_mask_later_file",
+      "request": {"kind": "name", "value": "Demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "cwd/Demo", "kind": "directory"},
+        {"path": "cwd/Demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "cwd/Demo.spec", "origin": "cwd_spec_suffix"}
+    },
+    {
+      "id": "first_non_regular_candidate_is_reported_after_miss",
+      "request": {"kind": "name", "value": "Demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "cwd/Demo", "kind": "directory"},
+        {"path": "roots/a/Demo.spec", "kind": "non_regular"}
+      ],
+      "expect": {
+        "status": "error",
+        "stage": "resolve_spec_path",
+        "code": "spec_path_not_file",
+        "resolved_path": "cwd/Demo"
+      }
+    },
+    {
+      "id": "named_miss_does_not_recurse",
+      "request": {"kind": "name", "value": "Deep"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "roots/a/nested/Deep.spec", "kind": "file"}
+      ],
+      "expect": {"status": "error", "stage": "resolve_spec_path", "code": "spec_path_not_found"}
+    },
+    {
+      "id": "explicit_path_is_exact",
+      "request": {"kind": "path", "value": "chosen/demo.spec"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "cwd/chosen/demo.spec", "kind": "file"},
+        {"path": "roots/a/demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "ok", "path": "cwd/chosen/demo.spec", "origin": "path_exact"}
+    },
+    {
+      "id": "explicit_path_has_no_suffix_or_root_fallback",
+      "request": {"kind": "path", "value": "chosen/demo"},
+      "cwd": "cwd",
+      "search_roots": ["roots/a"],
+      "entries": [
+        {"path": "cwd/chosen/demo.spec", "kind": "file"},
+        {"path": "roots/a/demo.spec", "kind": "file"}
+      ],
+      "expect": {"status": "error", "stage": "resolve_spec_path", "code": "spec_path_not_found"}
+    }
+  ],
+  "text_cases": [
+    {
+      "id": "preserve_bom_unicode_and_crlf",
+      "bytes_hex": "efbbbf546f703a3a0d0a202fc3a92f0d0a",
+      "expect": {"status": "ok", "text": "\uFEFFTop::\r\n /é/\r\n"}
+    },
+    {
+      "id": "preserve_decomposed_unicode",
+      "bytes_hex": "65cc81",
+      "expect": {"status": "ok", "text": "e\u0301"}
+    },
+    {
+      "id": "reject_invalid_utf8",
+      "bytes_hex": "546f703a3aff",
+      "expect": {"status": "error", "stage": "decode_spec_content", "code": "invalid_utf8"}
+    },
+    {
+      "id": "do_not_autodetect_utf16le",
+      "bytes_hex": "fffe54006f0070003a003a00",
+      "expect": {"status": "error", "stage": "decode_spec_content", "code": "invalid_utf8"}
+    }
+  ],
+  "pipeline_contract": {
+    "phase_order": [
+      "validate_request",
+      "resolve_spec_path",
+      "load_spec_content",
+      "decode_spec_content",
+      "parse_spec",
+      "validate_spec",
+      "compile_spec"
+    ],
+    "success_identity_fields": [
+      "request_kind",
+      "requested",
+      "resolved_path",
+      "source_text"
+    ],
+    "compiled_value": "backend_native_compiled_spec"
+  }
+}

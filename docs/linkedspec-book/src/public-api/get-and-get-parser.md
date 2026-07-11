@@ -30,9 +30,51 @@ The implementation audit found that the adapters do not yet share one fallback p
 the exact working-directory path, working-directory `<name>.spec`, and repository `specs/<name>.spec`; Julia adds
 a sorted recursive repository search. Perl checks the same three local forms but then delegates a bare miss to the
 legacy `PathSearch`, whose recursively cached directory set and hash-key selection do not define portable
-duplicate-name precedence. The backend-neutral API will therefore make additional search roots explicit and
-ordered. Perl's implicit recursive fallback remains a compatibility extension, not the semantic model that new
-variants reproduce.
+duplicate-name precedence. ADR `0026` therefore makes additional search roots explicit and ordered. Perl's
+implicit recursive fallback remains a compatibility extension, not the semantic model that new variants reproduce.
+
+### Portable file-oriented contract
+
+The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; the
+Rust, Dart, and Julia public API rollout remains in progress. It separates two caller intents:
+
+| Request | Resolution |
+| --- | --- |
+| named spec | cwd exact value → cwd value with `.spec` → each explicit search root in declared order |
+| explicit path | absolute path as given, or relative path joined to cwd; no suffix and no root fallback |
+
+A named identity uses `/` for optional nested components. It cannot be absolute or contain backslashes, empty
+components, `.`, or `..`; use the explicit-path request for arbitrary host filesystem syntax. Search roots are
+not recursive. Candidate deduplication preserves the first occurrence, and the first regular file wins. A
+directory at an earlier candidate does not mask a later file; if no file matches, diagnostics distinguish the
+first existing non-file from a pure miss.
+
+Conceptually, a native caller supplies:
+
+```text
+request = name("grammars/Expression")
+cwd = "/work/project"
+search_roots = ["/app/specs", "/team/specs"]
+```
+
+The candidates are exactly:
+
+```text
+/work/project/grammars/Expression
+/work/project/grammars/Expression.spec
+/app/specs/grammars/Expression.spec
+/team/specs/grammars/Expression.spec
+```
+
+The file pipeline is validate → resolve → read bytes → strict UTF-8 decode → parse → validate → compile. A
+successful native result keeps request kind/value, resolved path, and exact source text alongside its
+backend-native compiled value. A failure exposes neutral `type`, `stage`, `code`, `summary`, `request_kind`, and
+`requested` fields, with resolved path and backend detail when available.
+
+Unicode and UTF-8 are different layers here. The logical source is Unicode scalar text; UTF-8 is the selected file
+encoding. UTF-16 and UTF-32 are valid Unicode encodings generally, but this API does not guess or transcode them.
+Callers must transcode such files explicitly or pass already-decoded text to the inline API. Valid UTF-8 preserves
+BOM as U+FEFF, normalization form, code points, newlines, and surrounding text exactly.
 
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and
 service adapters may wrap these APIs. They are secondary surfaces and must not contain

@@ -579,7 +579,7 @@ its 60 states are 53 pass, one partial state, and six gaps. Each non-pass state 
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. Their fallbacks drift, so `.1.6.4.1` first defines explicit ordered roots rather than copying Perl `PathSearch` hash-order discovery. | `.1.6.4` |
+| Native named/file resolution | ADR `0026` and the 13/9/4 fixture now fix portable names, exact paths, explicit ordered roots, strict UTF-8, and typed stages. Perl owns the current native role; Rust, Dart, and Julia still keep lookup in process adapters until `.1.6.4.2-.4`. | `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
 

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (native named/file resolution `.1.6.4` audited and split; neutral contract `.1.6.4.1` active).
+- Last updated: `2026-07-11` (native resolution contract `.1.6.4.1` fixed; Rust native API `.1.6.4.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1101,14 +1101,21 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.0 - split native spec resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Define the executable backend-neutral named/file resolution contract.
   Acceptance: A checked-in schema/fixture defines name validation, explicit-path handling, deterministic candidate
     order over explicit ordered search roots, regular-file requirements, strict preserved UTF-8, source identity,
     parse/compile phase order, and structured failure stages; Perl's implicit recursive `PathSearch` remains a
     compatibility extension outside this portable API rather than silently defining duplicate-name precedence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: ADR `0026` fixes separate named/path requests, portable traversal-safe names, cwd/suffix/declared-
+    root candidate order, direct non-recursive roots, first-regular-file selection, strict preserved UTF-8, exact
+    source identity, pipeline order, and neutral typed error stages/codes. The checked-in JSON contains 13 name,
+    nine resolution/file-kind, and four text cases. Its independent Perl checker validates schema, task ownership,
+    declared semantics, every expected outcome, Unicode/BOM/normalization preservation, malformed UTF-8, and no
+    UTF-16 autodetection. The checker is wired into the canonical local gate. The complete gate passes the checker,
+    239-name coverage, focused suites, exact Perl CLI 61/61 under default and POSIX environments, and Phase 0
+    `1..1030` in 502 wallclock seconds. No backend behavior changed.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.2`
   Status: `pending`
