@@ -202,9 +202,9 @@ Top-level project docs:
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
-  paths, and gap ownership. The current audit records 57 pass, one partial-proof, and two gap backend states;
-  non-codegen `.1.6` is closed; the one partial and two gaps are generated-source states split into active neutral
-  contract `.3.1`, Rust 105-case breadth `.3.2`, Dart `.3.3`, Julia `.3.4`, and final admission `.3.5`.
+  paths, and gap ownership. The current audit records 56 pass, two partial-proof, and two gap backend states;
+  non-codegen `.1.6` is closed. `.3.1.0` proved Perl captured source is not independently equivalent, so contract
+  `.3.1.1` and Perl repair/admission precede Rust 105-case breadth `.3.2`, Dart `.3.3`, Julia `.3.4`, and `.3.5`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
@@ -222,7 +222,8 @@ Top-level project docs:
   resolution `.1.6.4` is audited and split; `.1.6.4.1` fixes its deterministic ordered-root contract, while Rust,
   Dart, and Julia native APIs `.1.6.4.2-.4` pass; Perl direct proof and final admission `.1.6.4.5` close the parent.
   Dart full-pipeline trace `.1.6.5` and non-codegen closeout `.1.6.6` are closed; generated-source `.3.0` has
-  audited/split the exact boundary and neutral executable contract `.3.1` is active.
+  audited/split the boundary; `.3.1.0` then corrected the Perl source-capture assumption and neutral executable
+  contract `.3.1.1` is active at census 56/2/2.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

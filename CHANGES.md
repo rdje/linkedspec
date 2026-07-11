@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.0 — correct Perl generated-source status
+
+Added the independent execution probe missing from the initial generated-source audit. A minimal Perl action-edge
+parser returns `"ok"` normally. Its `generate_only` + `dump_parser_source` + `parser_source_ref` text compiles in an
+isolated package but returns `undef`; debug trace shows the regex consumes input while action index zero is skipped.
+
+Reduced the failure to dependency-regex serialization. The live descriptor retains `LinkedRE::oredRE(...)`, whose
+alternative markers cooperate with lexical `$pos` inside `LinkedRE::or`. The dump stringifies that compiled regex as
+`qr/...(?{$pos=N}).../`; independent recompilation binds the marker outside that relationship, so `match_index` is
+wrong or undefined. Captured Perl source is currently diagnostic, not standalone-equivalent.
+
+Corrected Perl generated source from pass to partial and the census from 57/1/2 to 56/2/2. Split `.3.1` into neutral
+contract `.1`, Perl repair `.2`, and admission `.3` before behavior code; synchronized task, roadmap, README, live,
+book, and Knowledge Map status.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.0 — split generated-source parity
 
 Audited the only remaining capability mechanism from its canonical facts and source. Perl is the passing reference.

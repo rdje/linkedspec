@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.0 — correct Perl generated-source status**
+  (DONE — root cause and repair split recorded; neutral contract `.3.1.1` active).
+
+  **Finding:** Normal Perl generated execution returns `"ok"`; independently compiled captured source returns
+  `undef`. Stringified dependency regexes lose the `LinkedRE::or` lexical alternative index after recompilation.
+
+  **Correction:** Perl moves pass→partial and census 57/1/2→56/2/2. `.3.1.1` owns the executable contract, `.2`
+  the Perl repair, `.3` admission. Source probes, capability/KM/task/book/governance checks pass; no behavior code.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.0 — split generated-source parity**
   (DONE — exact boundary recorded; neutral contract `.3.1` active).
 

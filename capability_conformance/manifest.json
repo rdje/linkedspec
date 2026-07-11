@@ -180,7 +180,7 @@
       "sources": ["docs/decisions/0023-user-observable-backend-and-cli-parity.md", "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "docs/linkedspec-book/src/appendix/backend-handoff.md"],
       "gap_owner": "FUTURE-PARITY-BACKLOG.3",
       "backends": {
-        "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm"]},
+        "perl": {"status": "partial", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "docs/knowledge/perl-generated-source-capture-not-standalone.md"], "note": "Handler generation drives the normal parser, but independently recompiling captured source loses dependency-regex alternative indexes; neutral contract and repair are owned by FUTURE-PARITY-BACKLOG.3.1."},
         "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs"], "note": "All structural families run directly, but manifest-backed generated-source proof remains a curated subset."},
         "dart": {"status": "gap", "references": ["docs/knowledge/dart-generated-source-deferred.md"]},
         "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-deferred.md"]}

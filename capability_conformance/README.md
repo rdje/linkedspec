@@ -27,4 +27,6 @@ sets so a backend-specific serialization convention cannot silently become publi
 
 The census intentionally records proof quality separately from implementation belief. Passing the 105-case corpus
 does not by itself prove every helper and API described by the mdBook; `FUTURE-PARITY-BACKLOG.1.6.1` owns that
-coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`.
+coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`. `.3.1.0` demonstrates
+why execution proof matters: Perl captured source compiles but currently loses dependency-regex alternative indexes
+when loaded independently, so Perl is partial until `.3.1.2-.3` repair and admit it.

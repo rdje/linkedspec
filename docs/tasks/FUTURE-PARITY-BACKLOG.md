@@ -1427,20 +1427,65 @@ before implementation.
     emitter/export, its isolated compile/run harness and exact manifest subset, and Dart/Julia source trees; record
     the current 105-fixture boundary; create separate neutral-contract, Rust-breadth, Dart-emitter, Julia-emitter,
     and final-admission owners without changing parser/compiler/runtime behavior or capability status.
-  Verification: **PASS 2026-07-11.** Source-backed audit proves Perl passes; Rust publicly emits a standalone module,
+  Verification: **PASS 2026-07-11.** The then-current census classified Perl pass; Rust publicly emits a standalone module,
     validates a typed family plan, directly runs all current structural families, and compile/runs only eight named
-    manifest fixtures; Dart and Julia expose no source emitter. Knowledge Map, task/live/roadmap/book, governance,
-    whitespace, and mdBook checks pass; generated artifacts are removed. Census remains 57/1/2.
+    manifest fixtures; Dart and Julia expose no source emitter. `.3.1.0` later added the missing standalone Perl
+    execution probe and corrected that classification. Knowledge Map, task/live/roadmap/book, governance,
+    whitespace, and mdBook checks passed; generated artifacts were removed.
   Commit: `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1`
   Status: `active`
-  Goal: Define the executable backend-neutral generated-source contract before backend code.
+  Goal: Define the executable backend-neutral generated-source contract and correct the Perl reference boundary.
+  Children: `.3.1.0`, `.3.1.1`, `.3.1.2`, `.3.1.3`
   Acceptance: Ratify a versioned contract and neutral fixtures for source emission from a compiled `.spec`,
     host-language compile/load, direct generated execution, exact canonical result and diagnostic/source identity,
     trace entry, structural-family metadata, malformed-plan rejection, and manifest-backed proof. Host APIs and
     emitted bytes may remain idiomatic/backend-native under ADR `0023`; observable capability and behavior may not
-    differ. Keep the 105-case interpreter corpus as the primary oracle and prove Perl's current pass baseline.
+    differ. Keep the 105-case interpreter corpus as the primary oracle; correct and repair Perl's independently
+    compiled-source boundary before treating the reference as a pass baseline.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.0`
+  Status: `done`
+  Goal: Root-cause the Perl standalone generated-source failure and split correction before code.
+  Acceptance: Use `LinkedSpec::Get` plus `generate_only`/`dump_parser_source`/`parser_source_ref` to compare the
+    normal parser with independently compiled captured source; reduce any mismatch to the exact source mechanism;
+    correct the capability census and every public/continuity claim; create separate contract, Perl repair, and
+    admission leaves before behavior changes.
+  Verification: **PASS 2026-07-11.** A minimal action-edge parser returns `"ok"` normally; captured source compiles
+    under an isolated package but returns `undef`. Debug trace proves regex match succeeds while the expected action
+    index is skipped. The dump stringifies `LinkedRE::oredRE` into `qr/...(?{$pos=N}).../`; recompilation detaches
+    that marker from `LinkedRE::or`'s lexical index, yielding wrong/undefined `match_index`. Capability checker,
+    docs/KM/governance/whitespace/mdBook/cleanup pass at corrected census 56/2/2; no behavior code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.3.1.0 - correct Perl generated-source status`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.1`
+  Status: `active`
+  Goal: Define the versioned executable neutral generated-source contract and fixtures.
+  Acceptance: Add a strictly checked schema/fixture set for host-source emission, independent compile/load, direct
+    result, trace, diagnostic/source identity, exact family-plan validation/rejection, and the accepted manifest
+    subset. Define semantic entrypoint roles rather than identical host-language names or source bytes. Wire the
+    checker into canonical local CI before changing Perl generation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.2`
+  Status: `pending`
+  Goal: Make Perl's public captured/generated source independently compile and execute equivalently.
+  Acceptance: Preserve normal parser behavior while emitting dependency-regex reconstruction that retains exact
+    alternative indexes after independent compilation; add direct result/trace/source-identity and malformed-plan
+    locks over the neutral fixtures; keep diagnostic capture compatibility explicit and avoid host-package binding.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.3`
+  Status: `pending`
+  Goal: Admit the neutral contract baseline and corrected Perl generated-source pass.
+  Acceptance: Perl and existing Rust source emission consume the same contract roles; focused and full Perl/Rust
+    gates pass; capability checker returns Perl to pass with only Rust breadth partial plus Dart/Julia gaps; docs,
+    book, Knowledge Map, roadmap, artifact cleanup, and parent `.3.1` closeout agree before `.3.2` starts.
   Verification: `pending`
   Commit: `pending`
 
@@ -1783,12 +1828,15 @@ before implementation.
 | 56 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `done` | Native IO-through-runtime routed proof passes; Dart trace promotes to pass at census 57/1/2; parent closes. |
 | 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `done` | Exactly three generated-source states remain at 57/1/2; non-codegen `.1.6` closes and `.3` activates. |
 | 58 | `FUTURE-PARITY-BACKLOG.3.0` | `done` | Perl/Rust/Dart/Julia source evidence is audited and five implementation/admission lanes are split. |
-| 59 | `FUTURE-PARITY-BACKLOG.3.1` | `active` | Fix one executable neutral generated-source contract before backend behavior code. |
-| 60 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
-| 61 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 62 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 63 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes 57/1/2 only after every generated-source proof passes. |
-| 64 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 59 | `FUTURE-PARITY-BACKLOG.3.1.0` | `done` | Standalone Perl source recompiles but loses dependency alternative indexes; census corrects to 56/2/2. |
+| 60 | `FUTURE-PARITY-BACKLOG.3.1.1` | `active` | Fix one executable neutral generated-source contract before backend behavior code. |
+| 61 | `FUTURE-PARITY-BACKLOG.3.1.2` | `pending` | Repair Perl dependency-regex source reconstruction and prove independent execution. |
+| 62 | `FUTURE-PARITY-BACKLOG.3.1.3` | `pending` | Admit Perl/Rust contract baseline and return Perl to pass before Rust breadth. |
+| 63 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
+| 64 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 65 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 66 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 67 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2446,6 +2494,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.3` | Three direct routed/quiet/failure native tests; 22 affected tests; format; strict analysis; complete Dart gate with 175 tests, 61x2 CLI, and 105 corpus; canonical core 61x2 CLI plus Phase 0 `1..1030` in 514s; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart full-pipeline trace promotes to pass at 57/1/2; parent closes; `.1.6.6` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.6` | Direct non-pass projection; 57/1/2 checker; immediately prior complete Dart/core gates; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Only Rust/Dart/Julia generated-source states remain, all owned by `.3`; non-codegen `.1.6` closes and `.3` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.0` | Knowledge Map-first source audit of Perl reference emission, public Rust emitter/family plan/isolated crate/eight-case subset, Dart/Julia source absence, 105-case manifest boundary; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Neutral contract, Rust breadth, Dart, Julia, and admission lanes are split before behavior code; census remains 57/1/2 and `.3.1` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.0` | Toolbox `LinkedSpec::Get` normal/captured-source comparison; isolated eval/load; debug generated-branch trace; reduced `LinkedRE::oredRE` serialization/package-binding probes; source audit; 56/2/2 capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Captured Perl source is not standalone-equivalent; contract, repair, and admission are split before code and `.3.1.1` is active. |
 
 ## Commit Log
 
@@ -2502,6 +2551,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace` | Native IO-to-runtime routed/quiet/failure identity, full gates, capability promotion, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.6.6` | `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity` | Exact residual projection, generated-source-only handoff, parent closeout, no behavior change. |
 | `FUTURE-PARITY-BACKLOG.3.0` | `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity` | Source-backed current boundary and contract/Rust/Dart/Julia/admission split; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.3.1.0` | `FUTURE-PARITY-BACKLOG.3.1.0 - correct Perl generated-source status` | Root-cause of dependency-regex index loss, corrected census, and contract/repair/admission split; no behavior code. |
 
 ## Changelog
 
@@ -2520,11 +2570,14 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-11`: `.1.6.6` projects exactly three non-pass states, all generated source and all owned by `.3`. The
   strict 57/1/2 checker and adjacent full gates pass; no behavior/status value changes. Non-codegen `.1.6` closes
   without overclaiming complete parity, and generated-source `.3` becomes active.
-- `2026-07-11`: `.3.0` proves the exact generated-source boundary: Perl passes; Rust exposes a versioned standalone
-  module emitter, validated family plan, direct all-family execution, and isolated compile/run, but its manifest
-  proof names only eight of 105 cases; Dart and Julia contain no emitter. The task is split into neutral contract,
-  Rust breadth/classification, Dart, Julia, and final admission lanes. No behavior/status value changes; `.3.1` is
-  active at census 57/1/2.
+- `2026-07-11`: `.3.0` records the source-backed boundary inherited from the then-current census: Perl was classified
+  pass; Rust exposes a versioned standalone module emitter, validated family plan, direct all-family execution, and
+  isolated compile/run, but its manifest proof names only eight of 105 cases; Dart and Julia contain no emitter.
+  `.3.1.0` immediately afterward added independent Perl execution and corrected that pass assumption to partial.
+- `2026-07-11`: `.3.1.0` adds the missing independent-execution probe and corrects `.3.0`'s inherited Perl pass
+  assumption. Normal generated execution returns `"ok"`, but captured source recompiles and returns `undef` because
+  stringified `LinkedRE::oredRE` alternative markers no longer update `LinkedRE::or`'s lexical index. Census is
+  corrected to 56/2/2; `.3.1.1` contract, `.3.1.2` repair, and `.3.1.3` admission are split before behavior code.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

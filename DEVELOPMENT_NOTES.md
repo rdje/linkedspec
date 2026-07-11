@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.0 — generated text must be independently executed):
+  A compiler that generates source internally does not necessarily expose a standalone source-emitter capability.
+  Always compile/load captured text in isolation and compare it with the normal parser. Perl's dump preserved
+  syntactically valid handlers but serialized a compiled regex whose embedded `$pos` index markers depend on the
+  dynamic regex composition inside `LinkedRE::or`; stringification discarded that binding. Matching still advanced
+  the cursor, making superficial compile/match checks pass while action dispatch silently skipped. Capability
+  evidence therefore needs exact generated results and trace indexes, not source presence or successful `eval`.
+  Correct the census immediately, define the executable contract, then repair the serialization mechanism.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.0 — contract first, then classify breadth):
   Generated source is one user capability implemented in different host languages, so parity cannot mean
   byte-identical source. Under ADR `0023`, fix equivalent emission, compile/load, direct execution, results,
