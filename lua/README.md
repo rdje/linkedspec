@@ -16,7 +16,7 @@ Deterministic scalar/string helpers now include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
 lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
 text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split,
-statement scalar regex mutation, and receiver chains. The Lua gate currently passes 75/75 on
+statement scalar regex mutation, explicit array split replacement, and receiver chains. The Lua gate currently passes 76/76 on
 both PUC Lua 5.4 and LuaJIT.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
@@ -304,7 +304,8 @@ four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
 scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies exact
 cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
 mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; `.2.2.3`
-supplies scalar substitution; active `.2.2.4` owns explicit array split replacement; `.3`
+supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; active `.2.2.5` owns
+regex/split corpus and public no-drift; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
@@ -403,3 +404,9 @@ compile, and `o` is a no-op. `$0` and `$n` expand per match, including
 Unicode-safe zero-width global replacement. Unknown flags and invalid patterns
 raise rule-attributed runtime diagnostics. Numeric `substr(value,start,width?)`
 remains a pure value even when discarded.
+
+Dropped `split(array(target), source, delimiter)` replaces the named explicit
+aggregate with a copied typed split result. Literal and regex delimiters share
+the pure split policy, including preserved empty fields. A non-wrapper split
+statement is merely a discarded pure expression, and the source scalar is
+never mutated.

@@ -5,6 +5,9 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.4` adds dropped-statement dispatch for explicit
+  `split(array(target), source, delimiter)` replacement through copied pure split values. Scalar-held and source
+  values stay isolated. Both Lua ABIs pass 76/76; regex/split no-drift `.5` is active.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.3` adds dropped-statement dispatch for bare-scalar regex
   substitution, strict operation flags, `$0`/`$n`, Unicode-safe zero-width progress, and rule-attributed errors.
   Both Lua ABIs pass 75/75; explicit array split replacement `.4` is active.

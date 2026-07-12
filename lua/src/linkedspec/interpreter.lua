@@ -993,15 +993,29 @@ local function execute_regex_substitution_statement(engine, expr, ctx, accumulat
   return true
 end
 
+local function execute_array_split_statement(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind ~= "call" or action_contracts.canonical_action_helper_name(expr.name) ~= "split" or
+      #expr.args < 2 then
+    return false
+  end
+  local target = target_descriptor(argument_expr(expr.args[1]))
+  if not target or target.kind ~= "array" then return false end
+  local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+  local delimiter = ""
+  if expr.args[3] then
+    delimiter = evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state)
+  end
+  bind_array(ctx, target.name, evaluate_pure_string_helper(engine, "split", { source, delimiter }))
+  return true
+end
+
 local function execute_block(engine, block, ctx, accumulator, edge_state)
   for _, statement in ipairs(block.statements) do
-    if not (statement.drops_value and execute_regex_substitution_statement(
-      engine,
-      statement.expr,
-      ctx,
-      accumulator,
-      edge_state
-    )) then
+    local handled = statement.drops_value and (
+      execute_regex_substitution_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+      execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state)
+    )
+    if not handled then
       evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
     end
   end

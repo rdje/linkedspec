@@ -658,6 +658,11 @@ flags; `g` controls global replacement, `o` is a no-op, and `$0`/`$n` expand per
 diagnostics carry the rule label, and zero-width global replacement advances by Unicode scalar. Both Lua ABIs pass
 75/75; explicit array-target split replacement remains separately owned.
 
+The explicit-array leaf then recognizes dropped `split(array(target), source, delimiter)` before pure evaluation.
+It evaluates source and delimiter once, reuses the exact pure split policy, and replaces only the named typed array
+store with a copy. Ordinary split calls remain harmless discarded expressions and source scalars stay unchanged.
+Both Lua ABIs pass 76/76; shipped-corpus and public-surface no-drift remains the closing string-runtime leaf.
+
 ```lua
 local source = [[
 Top::

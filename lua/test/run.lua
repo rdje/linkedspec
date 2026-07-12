@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-scalar-regex-mutation", "status parity")
+  assert_equal(first.parity, "runtime-array-split-mutation", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2440,6 +2440,40 @@ Flagged::
   end)
   assert_equal(ok, false, "unknown statement regex flag fails")
   assert_equal(failure.rule_label, "Flagged", "unknown flag diagnostic attributes its rule")
+end)
+
+test("statement split replaces only explicit array targets", function()
+  local source = [[
+Top::
+ /x/
+ E {
+   raw = " left , right,,third "
+   parts = ["stale"]
+   scalar_parts = split("a,b", ",")
+   split(array(parts), raw, /\s*,\s*/)
+   split(array(literal_parts), ",a,", ",")
+   split(scalar_parts, "ignored", ",")
+   return({
+     "parts" : copy(array(parts)),
+     "literal_parts" : copy(array(literal_parts)),
+     "scalar_parts" : scalar_parts,
+     "raw_after" : raw,
+     "pure" : split("x-y", "-")
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  ).value
+  assert_equal(json.kind(result.parts), "array", "explicit target remains a typed array")
+  assert_equal(table.concat(result.parts, "|"), " left|right||third ", "regex split replaces explicit target")
+  assert_equal(#result.literal_parts, 3, "literal target split preserves empty fields")
+  assert_equal(result.literal_parts[1], "", "literal target leading empty")
+  assert_equal(result.literal_parts[3], "", "literal target trailing empty")
+  assert_equal(table.concat(result.scalar_parts, "|"), "a|b", "non-wrapper statement leaves scalar-held value")
+  assert_equal(result.raw_after, " left , right,,third ", "statement split leaves source scalar untouched")
+  assert_equal(table.concat(result.pure, "|"), "x|y", "pure split value remains available")
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

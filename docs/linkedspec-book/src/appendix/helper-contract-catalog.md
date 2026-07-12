@@ -402,6 +402,14 @@ dispatch rule.
 - **Example**: `substr(value, '"|\s', "", go)` removes quotes and whitespace from `value` in place. Single quotes
   keep the embedded double quote readable; the equivalent double-quoted pattern remains valid.
 
+### `split(array(target), source, delimiter)`
+- **Signature**: `split(array(target), source: scalar, delimiter: regex-or-scalar)`
+- **Returns**: no value; replaces the named explicit array target.
+- **Behavior**: Uses the same literal, regex, Unicode-empty-delimiter, and empty-field policy as pure
+  `split(source, delimiter)`, then stores a copied typed array. The source scalar is not mutated.
+- **Boundary**: Mutation requires both dropped-statement context and the explicit `array(target)` wrapper. An
+  ordinary dropped split call is simply a discarded pure expression.
+
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.

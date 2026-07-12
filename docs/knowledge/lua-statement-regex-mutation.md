@@ -25,4 +25,4 @@ String and typed regex patterns use the same strict PCRE2 adapter. `g` selects g
 affect compilation, and `o` is a compatibility no-op. `$0` expands the whole match and `$n` indexes the native
 full group vector. Global zero-width matching keeps separate output and search cursors, advancing search by one
 decoded UTF-8 scalar without dropping source text. Unknown flags and invalid patterns raise a runtime diagnostic
-with the active rule label. Explicit array-target split replacement remains owned by `.4.3.2.2.4`.
+with the active rule label. Explicit array-target split replacement has since landed under `.4.3.2.2.4`.

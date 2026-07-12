@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **436** facts · **2989** question keys.
+> **437** facts · **2994** question keys.
 
 ## Questions → fact
 
@@ -617,6 +617,7 @@
 - "does LinkedSpec support value-returning receiver-dot methods" -> [terse-return-type-method-chaining-split](docs/knowledge/terse-return-type-method-chaining-split.md) · 2026-07-01 · reverify: `perl -Iperl -MLinkedSpec -e 'for my $s (q{items.push_back(\"a\")}, q{items.pop_back()}, q{return(items.pop_back())}, q{set(out, items.push_back(\"a\"))}, q{items.push_back(\"a\").push_back(\"b\")}, q{return(sorted(items))}) { my $out = eval { LinkedSpec::call_spec_handler_subst(q{Top}, $s) }; $out = q{ERR:}.$@ unless defined $out; chomp $out; print qq{--- $s\\n$out\\n}; }'`
 - "does LinkedSpec support zero width lookahead boundaries" -> [cursor-boundary-lookahead-helper](docs/knowledge/cursor-boundary-lookahead-helper.md) · 2026-07-09 · reverify: `PERL5LIB= perl -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_capture_until_boundary_captures_without_consuming_boundary && cd dart && dart test test/runtime_interpreter_test.dart -n 'captures until named boundary without consuming the boundary' && cd .. && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "does Lua ActionIR preserve regex flags" -> [lua-helper-regex-split-mutation-preflight](docs/knowledge/lua-helper-regex-split-mutation-preflight.md) · 2026-07-12 · reverify: `rg -n 'kind == \"regex\"|compile_runtime_regex_alternation|execute_block|evaluate_expr|regex_subst|split' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/matching.lua docs/tasks/LUA-BACKEND-PARITY.md`
+- "does Lua array split preserve empty fields" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua copy runtime aggregates and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua corpus IO accept UTF-16 or UTF-32" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -647,9 +648,11 @@
 - "does Lua resolve ActionIR helper contracts" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua run lifecycle blocks in order" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua snapshot source before compilation" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua split array target mutate arrays" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua split empty delimiter by Unicode characters" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua split preserve trailing empty fields" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua split support regex flags" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua statement split mutate its source" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua string receiver split mutate its source" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support exit_now" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -659,6 +662,7 @@
 - "does Lua support pure split helper" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support seek and consume regex matching" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "does Lua support single quoted ActionIR strings" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua support split array target source delimiter" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support statement form substr regex substitution" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support strict syntax validation" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua support trailing codeblock arguments" -> [generic-trailing-codeblock-argument-correction](docs/knowledge/generic-trailing-codeblock-argument-correction.md) · 2026-07-10 · reverify: `perl -Iperl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(unknown(\"x\") { return(value) })}) { print LinkedSpec::call_spec_handler_subst(\"Top\", $s), qq{\\n}; }' && rg -n 'parse_optional_trailing_block_arg|name != \"with\"|parse_non_with_helper_does_not_accept|trailingBlockArg|trailing_block_arg|FUTURE-PARITY-BACKLOG\\.11' rust/linkedspec-core/src/expr.rs dart/lib/src julia/src docs/tasks/FUTURE-PARITY-BACKLOG.md`
@@ -1324,6 +1328,7 @@
 - "how does Lua diagnose user function recursion" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish arrays harrays and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "how does Lua distinguish pure split from array split mutation" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish source AST codeblocks from tables" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish substr mutation from value slicing" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua global regex replacement handle zero width" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
@@ -4510,6 +4515,15 @@ _Lua resolves typed ActionIR against the exact current helper contract_
 - **evidence:** `LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. LUA-BACKEND-PARITY.3.3-.4.1 supply registry, compiled payload, and matching consumers. The local gate passes 60/60 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage.`
 - **reverify:** `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - **source:** [`docs/knowledge/lua-actionir-contract-resolver.md`](docs/knowledge/lua-actionir-contract-resolver.md)
+
+### lua-array-split-mutation
+_Lua explicit array wrappers authorize statement split replacement_
+
+- **answers:** does Lua split array target mutate arrays | does Lua support split array target source delimiter | how does Lua distinguish pure split from array split mutation | does Lua statement split mutate its source | does Lua array split preserve empty fields
+- **date:** 2026-07-12 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.2.2.4 adds dropped-statement dispatch for split(array(target), source, delimiter) in lua/src/linkedspec/interpreter.lua. It identifies the explicit array target through target_descriptor, evaluates source/delimiter once, reuses evaluate_pure_string_helper split semantics, and stores a copied typed result through bind_array. lua/test/run.lua locks regex/literal delimiters, empty fields, stale-target replacement, source preservation, scalar-held non-wrapper isolation, and pure split. PUC Lua and LuaJIT pass 76/76.`
+- **reverify:** `bash tools/run_lua_local.sh`
+- **source:** [`docs/knowledge/lua-array-split-mutation.md`](docs/knowledge/lua-array-split-mutation.md)
 
 ### lua-backend-full-parity-plan
 _Lua backend planning inherits the complete LinkedSpec parity contract_

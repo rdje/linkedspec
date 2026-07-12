@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.4 — add Lua array split mutation
+
+Added dropped-statement dispatch for `split(array(target), source, delimiter)`. Only an explicit array wrapper
+selects mutation; source and delimiter are evaluated once, existing pure literal/regex/Unicode split semantics
+produce a fresh typed value, and the named aggregate store is replaced with a copy.
+
+Focused proof covers regex and literal delimiters, preserved empty fields, stale-target replacement, source
+non-mutation, scalar-held non-wrapper isolation, and unchanged pure split values. Full PUC Lua and LuaJIT gates
+pass 76/76; synchronized state advances to regex/split/mutation corpus and public no-drift `.2.2.5`.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.3 — add Lua scalar regex mutation
 
 Added statement-context dispatch for dropped four-argument `substr` and `regex_subst` calls with bare scalar

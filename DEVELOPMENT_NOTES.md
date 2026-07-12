@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.4 — wrapper shape spends mutation authority):
+  Statement context and the explicit `array(target)` wrapper jointly authorize replacement; a dropped ordinary
+  split call stays a harmless discarded pure expression. Reusing the pure split dispatcher prevents literal,
+  regex, Unicode, empty-field, or invalid-input policy from diverging between value and mutation forms. Binding
+  through the typed array store deliberately removes a prior scalar-held value at the same name.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.3 — spend dropped-statement context explicitly):
   Arity alone cannot distinguish overloaded `substr`: mutation requires a dropped call, four arguments, and a
   bare target. Regex replacement needs separate output/search cursors for global zero-width matches, just like

@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.4 — add Lua array split mutation**
+  (DONE — regex/split corpus and public no-drift `.4.3.2.2.5` next).
+
+  **Implementation:** Dropped `split(array(target), source, delimiter)` replaces only the explicit aggregate store
+  through copied pure literal/regex/Unicode split semantics.
+
+  **Proof:** Target replacement, empty fields, regex/literal delimiters, source preservation, scalar-held boundary,
+  and pure split pass; full PUC Lua/LuaJIT gates are 76/76.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.3 — add Lua scalar regex mutation**
   (DONE — explicit array-target split `.4.3.2.2.4` next).
 
