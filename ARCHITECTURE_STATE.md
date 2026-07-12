@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: `linkedspec-uniform-binding-v1` is adopted before backend behavior. One observable typed
+  binding is storage-neutral; `set` yields the post-assignment target value; mutable helpers yield updated targets;
+  absent target creation and wrong-kind errors are typed; static rules precede array mutation in ambiguous push;
+  two-argument split is pure and three-argument split mutates a bare target. Exact one-bare array/hash calls are
+  future-invalid with `aggregate_selector_removed`; `[value]` is the one-element array constructor, while other
+  non-selector constructors remain in v1. Perl `.12.1.2` is active.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
   `FUTURE-PARITY-BACKLOG.12.1`. Exact scans find 651 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
   tracked specs, including 227 in 15 shipped specs. The one-binding public model does not require identical host

@@ -38,7 +38,8 @@ This `README.md` is the **single entry point** to the project.
   Perl closeout `.11.3.4` is complete; the cross-backend feature is not yet current. Before backend rollout,
   active `.12.1` removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics. Inventory
   `.12.1.0` found 651 exact forms across 82 tracked specs and split neutral contract, five-backend enablement,
-  source migration, hard rejection, and no-drift; `.12.1.1` defines the executable replacement contract next.
+  source migration, hard rejection, and no-drift. `.12.1.1` now adopts the executable replacement contract;
+  Perl `.12.1.2` is its first behavior consumer.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -249,6 +250,12 @@ Top-level project docs:
   metadata-governed attached/parenthesized helper/user-function/receiver normalization pass the contract-focused
   suite; final-only `name: codeblock` and its no-drift closeout are current on Perl. Cross-backend parity remains
   future-owned after the prioritized `.12.1` selector retirement.
+- Run `python3 tools/check_uniform_binding_contract.py` to validate the adopted future selector-free binding
+  contract: one observable scalar/array/harray/codeblock value per identifier, bare typed reads and mutations,
+  post-assignment `set` results, static-rule `push` precedence, pure versus mutable `split`, typed wrong-kind and
+  removed-selector diagnostics, exact migration spellings, and constructor classification. The checker covers 11
+  migrations, seven execution cases, six invalid selectors, eight retained constructors, and deterministic future
+  fixture source/results. Current backend behavior is unchanged until Perl `.12.1.2` begins the rollout.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

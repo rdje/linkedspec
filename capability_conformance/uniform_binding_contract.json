@@ -1,0 +1,179 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-uniform-binding-v1",
+  "policy": {
+    "binding": "one observable binding per identifier holds scalar, array, harray, or codeblock",
+    "host_storage": "backend storage layout is an implementation detail and may not create observable alternate namespaces",
+    "read": "a bare identifier evaluates to its current typed value",
+    "set_result": "set(target, value) evaluates to the target binding's post-assignment typed value",
+    "mutation_result": "mutable operations evaluate to the updated typed target value unless their callable contract explicitly returns another value",
+    "unused_result": "an unused expression result is silently dropped",
+    "absent_binding": "set binds any value; array and harray mutation helpers may auto-create only their required empty target kind",
+    "wrong_kind": "mutation of an existing incompatible value fails with binding_kind_mismatch",
+    "static_precedence": "a statically registered rule name retains precedence over a variable target in ambiguous push call syntax",
+    "selector_retirement": "array(IDENTIFIER) and hash(IDENTIFIER) are removed as namespaces, typed reads, mutation targets, and mutation authority"
+  },
+  "syntax": {
+    "identifier_pattern": "[A-Za-z_][A-Za-z0-9_]*",
+    "forbidden_selector_shape": "exact array(IDENTIFIER) or hash(IDENTIFIER), allowing insignificant whitespace",
+    "bare_read": "IDENTIFIER",
+    "set": "set(IDENTIFIER, VALUE)",
+    "push": "push(IDENTIFIER, VALUE) or IDENTIFIER += VALUE",
+    "mutable_split": "split(IDENTIFIER, SOURCE, DELIMITER)",
+    "pure_split": "split(SOURCE, DELIMITER)",
+    "hash_index_set": "IDENTIFIER[KEY] = VALUE",
+    "array_literal": "[VALUE, ...]",
+    "harray_literal": "{ KEY : VALUE, ... }"
+  },
+  "constructor_policy": {
+    "canonical_empty_array": "[]",
+    "canonical_single_array": "[value]",
+    "canonical_empty_harray": "{}",
+    "canonical_harray": "{ key : value }",
+    "retained_array_calls": ["array()", "array(\"literal\")", "array(expr1, expr2)"],
+    "retained_hash_calls": ["hash()", "hash(\"key\", value)", "hash(key1, value1, key2, value2)"],
+    "forbidden_even_when_constructor_intended": ["array(value)", "hash(value)"],
+    "single_bare_array_replacement": "[value]",
+    "single_bare_harray_replacement": "use a key/value harray literal; one argument is not a valid harray constructor"
+  },
+  "diagnostics": {
+    "removed_selector": {
+      "code": "aggregate_selector_removed",
+      "message": "array(name) and hash(name) aggregate selectors are removed; use the bare typed binding",
+      "fields": ["code", "surface", "identifier", "replacement"]
+    },
+    "wrong_kind": {
+      "code": "binding_kind_mismatch",
+      "fields": ["code", "identifier", "expected_kind", "actual_kind"]
+    }
+  },
+  "migration_cases": [
+    {"id": "array_read", "before": "array(items)", "after": "items", "purpose": "typed_read"},
+    {"id": "harray_read", "before": "hash(meta)", "after": "meta", "purpose": "typed_read"},
+    {"id": "array_copy", "before": "copy(array(items))", "after": "copy(items)", "purpose": "snapshot"},
+    {"id": "harray_copy", "before": "copy(hash(meta))", "after": "copy(meta)", "purpose": "snapshot"},
+    {"id": "array_set", "before": "set(array(items), [])", "after": "set(items, [])", "purpose": "binding"},
+    {"id": "harray_set", "before": "set(hash(meta), {})", "after": "set(meta, {})", "purpose": "binding"},
+    {"id": "array_push", "before": "push(array(items), value)", "after": "push(items, value)", "purpose": "mutation"},
+    {"id": "array_split", "before": "split(array(parts), source, delimiter)", "after": "split(parts, source, delimiter)", "purpose": "mutation"},
+    {"id": "array_receiver", "before": "array(items).first()", "after": "items.first()", "purpose": "receiver"},
+    {"id": "array_return", "before": "return(array(items))", "after": "return(items)", "purpose": "typed_read"},
+    {"id": "single_value_constructor", "before": "array(value)", "after": "[value]", "purpose": "constructor"}
+  ],
+  "execution_cases": [
+    {
+      "id": "set_returns_typed_value_for_chain",
+      "initial_bindings": {},
+      "static_rules": {},
+      "steps": [
+        {"op": "set", "target": "items", "value": ["b", "a"], "save": "assigned"},
+        {"op": "sorted_first", "source_result": "assigned", "save": "answer"}
+      ],
+      "expected_bindings": {"items": ["b", "a"]},
+      "expected_results": {"assigned": ["b", "a"], "answer": "a"}
+    },
+    {
+      "id": "absent_push_creates_array_and_returns_updates",
+      "initial_bindings": {},
+      "static_rules": {},
+      "steps": [
+        {"op": "push", "target": "items", "value": "a", "save": "first"},
+        {"op": "push", "target": "items", "value": "b", "save": "second"}
+      ],
+      "expected_bindings": {"items": ["a", "b"]},
+      "expected_results": {"first": ["a"], "second": ["a", "b"]}
+    },
+    {
+      "id": "static_rule_push_precedes_variable_mutation",
+      "initial_bindings": {"items": ["unchanged"], "outputs": []},
+      "static_rules": {"items": "child-result"},
+      "steps": [
+        {"op": "push", "target": "items", "value_binding": "outputs", "save": "pushed"}
+      ],
+      "expected_bindings": {"items": ["unchanged"], "outputs": ["child-result"]},
+      "expected_results": {"pushed": ["child-result"]}
+    },
+    {
+      "id": "mutable_and_pure_split_are_distinct",
+      "initial_bindings": {},
+      "static_rules": {},
+      "steps": [
+        {"op": "split", "target": "parts", "source": "a,b", "delimiter": ",", "save": "stored"},
+        {"op": "pure_split", "source": "c,d", "delimiter": ",", "save": "pure"}
+      ],
+      "expected_bindings": {"parts": ["a", "b"]},
+      "expected_results": {"stored": ["a", "b"], "pure": ["c", "d"]}
+    },
+    {
+      "id": "hash_index_mutation_returns_updated_harray",
+      "initial_bindings": {},
+      "static_rules": {},
+      "steps": [
+        {"op": "hash_index_set", "target": "meta", "key": "stage", "value": "ok", "save": "updated"},
+        {"op": "copy", "target": "meta", "save": "snapshot"}
+      ],
+      "expected_bindings": {"meta": {"stage": "ok"}},
+      "expected_results": {"updated": {"stage": "ok"}, "snapshot": {"stage": "ok"}}
+    },
+    {
+      "id": "unused_values_drop_without_changing_binding",
+      "initial_bindings": {},
+      "static_rules": {},
+      "steps": [
+        {"op": "set", "target": "items", "value": ["a"]},
+        {"op": "read", "target": "items"},
+        {"op": "push", "target": "items", "value": "b", "save": "updated"}
+      ],
+      "expected_bindings": {"items": ["a", "b"]},
+      "expected_results": {"updated": ["a", "b"]}
+    },
+    {
+      "id": "wrong_kind_push_is_typed_failure",
+      "initial_bindings": {"items": "text"},
+      "static_rules": {},
+      "steps": [
+        {"op": "push", "target": "items", "value": "x"}
+      ],
+      "expected_error": {"code": "binding_kind_mismatch", "identifier": "items", "expected_kind": "array", "actual_kind": "scalar"}
+    }
+  ],
+  "invalid_selector_cases": [
+    {"id": "array_read", "source": "array(items)", "surface": "array", "identifier": "items", "replacement": "items"},
+    {"id": "array_whitespace", "source": "array ( items )", "surface": "array", "identifier": "items", "replacement": "items"},
+    {"id": "hash_read", "source": "hash(meta)", "surface": "hash", "identifier": "meta", "replacement": "meta"},
+    {"id": "nested_copy", "source": "copy(array(items))", "surface": "array", "identifier": "items", "replacement": "items"},
+    {"id": "set_target", "source": "set(hash(meta), {})", "surface": "hash", "identifier": "meta", "replacement": "meta"},
+    {"id": "receiver", "source": "array(items).first()", "surface": "array", "identifier": "items", "replacement": "items"}
+  ],
+  "valid_constructor_cases": [
+    {"id": "array_empty_call", "source": "array()"},
+    {"id": "array_quoted_single", "source": "array(\"items\")"},
+    {"id": "array_computed_single", "source": "array(copy(items))"},
+    {"id": "array_multiple", "source": "array(left, right)"},
+    {"id": "hash_empty_call", "source": "hash()"},
+    {"id": "hash_pair", "source": "hash(\"key\", value)"},
+    {"id": "array_literal_single", "source": "[items]"},
+    {"id": "harray_literal", "source": "{ key : value }"}
+  ],
+  "fixture": {
+    "input": "xx",
+    "initial_bindings": {},
+    "steps": [
+      {"source": "items = []", "op": "set", "target": "items", "value": []},
+      {"source": "push(items, \"b\")", "op": "push", "target": "items", "value": "b"},
+      {"source": "push(items, \"a\")", "op": "push", "target": "items", "value": "a"},
+      {"source": "parts = split(\"a,b\", \",\")", "op": "pure_split_assign", "target": "parts", "source_value": "a,b", "delimiter": ","},
+      {"source": "meta = {}", "op": "set", "target": "meta", "value": {}},
+      {"source": "meta[\"count\"] = items.count()", "op": "hash_index_set_count", "target": "meta", "key": "count", "source_binding": "items"},
+      {"source": "first = set(saved, items).sorted().first()", "op": "set_sorted_first", "target": "saved", "source_binding": "items", "result_target": "first"}
+    ],
+    "result_fields": {"items": "items", "parts": "parts", "meta": "meta", "first": "first"},
+    "spec_source": "Top::\n /x/ -> Done {\n   items = []\n   push(items, \"b\")\n   push(items, \"a\")\n   parts = split(\"a,b\", \",\")\n   meta = {}\n   meta[\"count\"] = items.count()\n   first = set(saved, items).sorted().first()\n   return({ \"items\" : items, \"parts\" : parts, \"meta\" : meta, \"first\" : first })\n }\n\nDone::\n /x/\n",
+    "expected": {
+      "items": ["b", "a"],
+      "parts": ["a", "b"],
+      "meta": {"count": 2},
+      "first": "a"
+    }
+  }
+}

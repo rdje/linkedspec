@@ -38,11 +38,12 @@ an implementation detail so long as no alternate namespace is observable.
 
 Migration cannot yet be purely mechanical. On the Perl reference, `copy(items)`, `items.first()`, and typed
 `set(items, value)` already have selector-free forms, but `push(items, value)` currently selects child-rule push
-semantics and `split(parts, source, delimiter)` is unsupported. Neutral leaf `.12.1.1` therefore fixes static-rule
+semantics and `split(parts, source, delimiter)` is unsupported. Neutral leaf `.12.1.1` now fixes static-rule
 precedence, bare mutation, three-argument mutable split, expression results, exact diagnostics, and constructor
-classification before per-backend enablement. Source migration follows only after all five backends execute those
-alternatives; hard rejection follows migration.
+classification in `linkedspec-uniform-binding-v1`. Source migration follows only after all five backends execute
+those alternatives; hard rejection follows migration.
 
 Related facts: [[uniform-expression-compatibility-retirement-doctrine]],
+[[uniform-binding-neutral-contract]],
 [[terse-duck-typed-assignment-perl-reference]], [[terse-rust-duck-typed-assignment-parity]],
 [[terse-mutation-surface-ground-truth]].

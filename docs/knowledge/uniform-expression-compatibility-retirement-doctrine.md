@@ -32,4 +32,5 @@ calls remain useful or literals replace them.
 Backward compatibility may ease migration temporarily, but every compatibility surface requires an explicit
 removal condition and owner. Settled semantics take precedence over preserving historical spellings or storage.
 
-Inventory and execution order: [[spec-facing-aggregate-selector-retirement-inventory]].
+Inventory and execution order: [[spec-facing-aggregate-selector-retirement-inventory]]. Adopted replacement
+semantics: [[uniform-binding-neutral-contract]].

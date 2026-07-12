@@ -61,6 +61,19 @@ preserves metadata plus executes equivalent attached/parenthesized helper/user-f
 Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust/Dart/Julia/Lua parity keeps
 the overall capability future-owned under the remaining backend rollout leaves.
 
+`uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
+changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns
+that binding's post-assignment typed value; mutable helpers use bare targets and return updated values; absent
+array/harray mutations create only the required kind; incompatible existing kinds fail with
+`binding_kind_mismatch`. Static rule names retain precedence for ambiguous `push(name, target)` syntax, while
+three-argument `split(name, source, delimiter)` is the mutable form and two-argument `split(source, delimiter)` is
+pure. Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls are future-invalid with
+`aggregate_selector_removed`, even when a one-element constructor was intended (`[IDENTIFIER]` is the replacement).
+Zero/multi/quoted/computed constructor calls remain separately valid under version 1. Validate 11 migrations,
+seven execution cases, six invalid selectors, eight constructor classifications, and deterministic future source/
+results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.12.1.2` is the first behavior
+consumer; current shipped/backend behavior is unchanged by the neutral contract leaf.
+
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
 execute roles, the ten structural families, plan rejection, stable generated-source errors, one direct behavior

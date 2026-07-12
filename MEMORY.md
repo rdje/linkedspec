@@ -10,17 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.0` — spec-facing aggregate-selector inventory and split.
-- latest_commit: `6fa44160` — `FUTURE-PARITY-BACKLOG.11.3.4 - close Perl callable codeblocks`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.1`; adopt the neutral selector-free binding/mutation contract.
-- next_action: define and check exact future fixtures for bare typed reads/mutations, absent binding creation,
-  static child-rule precedence for push, mutable three-argument split, post-mutation values, `set` target return,
-  portable selector diagnostic, migration spellings, and ordinary constructor classification.
-- current_proof: Exact scans find 651 selector-shaped calls in 82 tracked specs, including 227 in 15 shipped specs;
-  parent categories include copy/push/set/is_nonempty/split and 17 receiver forms. Toolbox lowering shows bare
-  copy/read/receiver/set forms but child-rule interpretation for `push(items,value)` and unsupported bare mutable
-  `split(parts,source,delimiter)`. Perl/Rust/Dart/Julia/Lua owner seams are durably split before behavior.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.1` — neutral selector-free uniform-binding contract.
+- latest_commit: `fa99a244` — `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.1 - adopt uniform binding contract`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.2`; implement the unchanged contract on Perl.
+- next_action: add focused Perl future-fixture/diagnostic probes, then make bare binding reads/mutations consume
+  typed values with static-rule push precedence, mutable three-argument split, set/mutation results, and no public
+  storage distinction; retain old selectors only until dependency-ordered source migration.
+- current_proof: Strict `linkedspec-uniform-binding-v1` checks 11 migrations, seven execution cases, six invalid
+  selectors, eight valid constructors/literals, and deterministic future source/results. It fixes storage-neutral
+  one-binding semantics, post-assignment set, updated mutations, absent/wrong-kind behavior, static push precedence,
+  pure/mutable split, `aggregate_selector_removed`, and `[value]` for one-element construction. Canonical CI passes
+  capability 60/0/0, CLI 61x2, and Phase 0 `1..1030` in 875 seconds.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -29,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; lexical codeblock
   capture (new decision only if justified); Rust/Dart/Julia codeblock parity and resumed Lua work follow `.12.1`.
-- blockers: none. in_flight_uncommitted: `.12.1.0` inventory/task/docs/Knowledge Map split is prepared for gates
+- blockers: none. in_flight_uncommitted: `.12.1.1` contract/checker/CI/docs/Knowledge Map is prepared for full gate
   and commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the selector-retirement arc.

@@ -168,6 +168,18 @@ return(payload);
 value through bare assignment, they read that value. When the name has been populated through explicit aggregate
 mutation such as `set(array(name), ...)` or `name += value`, they read the aggregate working storage.
 
+> **Retirement in progress:** those exact selector-shaped forms are current compatibility behavior, not the final
+> language. Adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
+> `hash(IDENTIFIER)` after backend enablement and source migration. The replacement is the bare typed binding:
+> `array(items)` becomes `items`, `copy(array(items))` becomes `copy(items)`, `set(array(items), [])` becomes
+> `set(items, [])`, `push(array(items), value)` becomes `push(items, value)`, and
+> `split(array(parts), source, delimiter)` becomes `split(parts, source, delimiter)`. `set(name, value)` yields the
+> post-assignment typed value of `name`, so receiver methods can chain from it. If `array(value)` was intended to
+> construct a one-element array rather than select storage, write `[value]`. Zero/multi/quoted/computed
+> `array(...)` and valid key/value `hash(...)` calls remain ordinary constructors in contract version 1. The old
+> selector forms are still documented here only because the current backends and shipped specs have not completed
+> the dependency-ordered migration yet.
+
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:
 

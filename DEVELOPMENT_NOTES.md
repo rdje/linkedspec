@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.1 — callable purpose resolves bare-target ambiguity): Do not replace
+  aggregate selectors with a new target wrapper. A bare identifier is always the binding; helper arity and purpose
+  determine whether it is read or mutated. For ambiguous `push(name, target)`, a statically registered rule keeps
+  precedence, otherwise `name` is the array binding. Two-argument split is pure; three-argument split mutates the
+  first bare binding. Both `set` and mutable operations yield typed post-operation values for chaining. Reject an
+  exact one-bare `array(name)` even when construction was intended; `[name]` is unambiguous. Keep non-selector
+  constructors in contract v1 so selector removal does not silently expand into a different language change.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.0 — remove the public namespace before refactoring host storage): One
   `.spec` identifier must expose one typed value, but that does not require every backend to collapse its internal
   maps in the same slice. Make bare reads and mutations semantically complete, migrate sources, then delete exact

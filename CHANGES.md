@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.1 — adopt uniform binding contract
+
+Added strict neutral `linkedspec-uniform-binding-v1` data and an independent checker before changing any backend.
+The contract fixes one observable scalar/array/harray/codeblock binding per identifier while leaving backend host
+storage private. Bare reads, post-assignment `set` results, updated mutation results, absent-target creation,
+wrong-kind failures, static-rule push precedence, pure two-argument versus mutable three-argument split, silent
+value drop, and exact selector retirement are explicit.
+
+Eleven migration mappings remove reads, copies, targets, receivers, returns, and one-element-constructor ambiguity.
+Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` produces `aggregate_selector_removed`; `[IDENTIFIER]` is the
+one-element constructor. Version 1 retains zero/multi/quoted/computed `array(...)` and valid key/value `hash(...)`
+calls as ordinary constructors. Seven independent execution cases, six invalid selector cases, eight valid
+constructor/literal classifications, and deterministic future fixture source/results pass. The checker is wired
+into canonical CI and the future capability ledger. The complete gate passes capability 60/0/0, both 61-case CLI
+environments, and Phase 0 `1..1030` in 875 seconds. No backend or shipped `.spec` behavior changes; Perl `.12.1.2`
+consumes the contract next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement
 
 Converted the settled removal of spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` selectors into a complete,

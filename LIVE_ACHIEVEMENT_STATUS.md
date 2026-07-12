@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.1 — adopt uniform binding contract**
+  (DONE — Perl behavior consumer `.12.1.2` active).
+
+  **Contract:** One observable typed binding, storage neutrality, bare read/mutation, post-assignment `set`, updated
+  mutation results, absent/wrong-kind behavior, static-rule push precedence, pure/mutable split, exact
+  `aggregate_selector_removed`, and `[value]` for one-element construction are fixed before backend code.
+
+  **Proof:** The strict checker passes 11 migrations, seven execution cases, six invalid selectors, eight valid
+  constructors/literals, and deterministic future source/results. Canonical CI passes capability 60/0/0, both
+  61-case CLI environments, and Phase 0 `1..1030` in 875 seconds. Backend behavior and 651 tracked compatibility
+  calls remain unchanged until the dependency-ordered rollout/migration.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement**
   (DONE — neutral selector-free contract `.12.1.1` active).
 
