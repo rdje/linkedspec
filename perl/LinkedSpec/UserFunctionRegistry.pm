@@ -173,29 +173,45 @@ sub _normalize_function_definition_ast {
   unless ($node->{kind} // '') eq 'user_function_definition';
 
  my $name = _require_identifier_field($node, 'name');
- my $params = _require_identifier_array_field($node, 'params');
- my $arity = _require_integer_field($node, 'arity');
- die "Invalid user function definition AST for '$name': arity does not match params\n"
-  unless $arity == scalar(@$params);
+ my $version = _require_integer_field($node, 'version');
+ die "Invalid user function definition AST for '$name': unsupported version $version\n"
+  unless $version == 1 || $version == 2;
+
+ my ($params, $arity, $signature);
+ if ($version == 1) {
+  $params = _require_identifier_array_field($node, 'params');
+  $arity = _require_integer_field($node, 'arity');
+  die "Invalid user function definition AST for '$name': arity does not match params\n"
+   unless $arity == scalar(@$params);
+ } else {
+  die "Invalid user function definition AST for '$name': version 2 uses signature instead of params/arity\n"
+   if exists($node->{params}) || exists($node->{arity});
+  $signature = _normalize_callable_signature($node->{signature}, "function '$name'");
+  $params = $signature->{positional_params};
+  $arity = $signature->{min_arity};
+ }
 
  my $source_span = _require_span_field($node, 'source_span');
  my $body_span = _require_span_field($node, 'body_span');
  my $body_source = _require_string_field($node, 'body_source');
- my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $params, $arity, $body_source, $body_span, $ordinal);
- my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $params, $arity, $body_source, $body_span, $ordinal);
+ my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal);
+ my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal);
 
  my %seen;
  foreach my $param (@$params) {
   _die_parse_error_at_span($source, $source_span, "duplicate parameter '$param' in function '$name'")
    if $seen{$param}++;
  }
+ if ($version == 2) {
+  my $rest_param = $signature->{rest_param};
+  _die_parse_error_at_span($source, $source_span, "duplicate parameter '$rest_param' in function '$name'")
+   if $seen{$rest_param}++;
+ }
 
  my $definition = {
   kind => 'user_function_definition',
-  version => 1,
+  version => $version,
   name => $name,
-  params => [@$params],
-  arity => $arity,
   source_text => defined($node->{source_text}) && !ref($node->{source_text}) ? $node->{source_text} : '',
   source_span => $source_span,
   body_span => $body_span,
@@ -204,16 +220,24 @@ sub _normalize_function_definition_ast {
   body_parse_job => $body_parse_job,
   body_ast => _parse_function_body_ast($name, $body_parse_job, $source, $source_span),
  };
+ if ($version == 1) {
+  $definition->{params} = [@$params];
+  $definition->{arity} = $arity;
+ } else {
+  $definition->{signature} = _clone_plain($signature);
+ }
 
  _validate_function_name($definition);
  foreach my $param (@$params) {
   _validate_parameter_name($definition, $param);
  }
+ _validate_parameter_name($definition, $signature->{rest_param})
+  if $version == 2;
  return $definition
 }
 
 sub _normalize_body_payload {
- my ($payload, $name, $params, $arity, $body_source, $body_span, $ordinal) = @_;
+ my ($payload, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal) = @_;
  die "Invalid user function definition AST: body_payload must be HASH\n"
   unless ref($payload) eq 'HASH';
  die "Invalid user function definition AST: body_payload.kind must be staged_payload\n"
@@ -226,12 +250,20 @@ sub _normalize_body_payload {
  my $payload_name = _require_string_field($payload, 'function_name');
  die "Invalid user function definition AST: body_payload function name mismatch\n"
   unless $payload_name eq $name;
- my $payload_params = _require_identifier_array_field($payload, 'params');
- die "Invalid user function definition AST: body_payload params mismatch\n"
-  unless _arrays_equal($payload_params, $params);
- my $payload_arity = _require_integer_field($payload, 'arity');
- die "Invalid user function definition AST: body_payload arity mismatch\n"
-  unless $payload_arity == $arity;
+ if ($version == 1) {
+  my $payload_params = _require_identifier_array_field($payload, 'params');
+  die "Invalid user function definition AST: body_payload params mismatch\n"
+   unless _arrays_equal($payload_params, $params);
+  my $payload_arity = _require_integer_field($payload, 'arity');
+  die "Invalid user function definition AST: body_payload arity mismatch\n"
+   unless $payload_arity == $arity;
+ } else {
+  die "Invalid user function definition AST: version 2 body_payload uses signature instead of params/arity\n"
+   if exists($payload->{params}) || exists($payload->{arity});
+  my $payload_signature = _normalize_callable_signature($payload->{signature}, 'body_payload');
+  die "Invalid user function definition AST: body_payload signature mismatch\n"
+   unless _callable_signatures_equal($payload_signature, $signature);
+ }
  my $payload_text = _require_string_field($payload, 'text');
  die "Invalid user function definition AST: body_payload text mismatch\n"
   unless $payload_text eq $body_source;
@@ -245,7 +277,7 @@ sub _normalize_body_payload {
 }
 
 sub _normalize_body_parse_job {
- my ($job, $name, $params, $arity, $body_source, $body_span, $ordinal) = @_;
+ my ($job, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal) = @_;
  die "Invalid user function definition AST: body_parse_job must be HASH\n"
   unless ref($job) eq 'HASH';
  die "Invalid user function definition AST: body_parse_job.kind must be parse_job\n"
@@ -264,12 +296,20 @@ sub _normalize_body_parse_job {
  my $job_name = _require_string_field($job, 'function_name');
  die "Invalid user function definition AST: body_parse_job function name mismatch\n"
   unless $job_name eq $name;
- my $job_params = _require_identifier_array_field($job, 'params');
- die "Invalid user function definition AST: body_parse_job params mismatch\n"
-  unless _arrays_equal($job_params, $params);
- my $job_arity = _require_integer_field($job, 'arity');
- die "Invalid user function definition AST: body_parse_job arity mismatch\n"
-  unless $job_arity == $arity;
+ if ($version == 1) {
+  my $job_params = _require_identifier_array_field($job, 'params');
+  die "Invalid user function definition AST: body_parse_job params mismatch\n"
+   unless _arrays_equal($job_params, $params);
+  my $job_arity = _require_integer_field($job, 'arity');
+  die "Invalid user function definition AST: body_parse_job arity mismatch\n"
+   unless $job_arity == $arity;
+ } else {
+  die "Invalid user function definition AST: version 2 body_parse_job uses signature instead of params/arity\n"
+   if exists($job->{params}) || exists($job->{arity});
+  my $job_signature = _normalize_callable_signature($job->{signature}, 'body_parse_job');
+  die "Invalid user function definition AST: body_parse_job signature mismatch\n"
+   unless _callable_signatures_equal($job_signature, $signature);
+ }
  my $job_text = _require_string_field($job, 'text');
  die "Invalid user function definition AST: body_parse_job text mismatch\n"
   unless $job_text eq $body_source;
@@ -293,6 +333,48 @@ sub _normalize_body_parse_job {
  $out->{parent_ast_path} = _body_parent_ast_path($ordinal);
  $out->{job_id} = _body_parse_job_id($out->{parent_ast_path}, $out->{payload_kind}, $out->{parser_spec_id}, $out->{top_rule}, $job_span);
  return $out
+}
+
+sub _normalize_callable_signature {
+ my ($signature, $owner) = @_;
+ $owner = 'callable signature' unless defined($owner) && length($owner);
+ die "Invalid user function definition AST: $owner signature must be HASH\n"
+  unless ref($signature) eq 'HASH';
+ die "Invalid user function definition AST: $owner signature kind must be callable_signature\n"
+  unless ($signature->{kind} // '') eq 'callable_signature';
+ die "Invalid user function definition AST: $owner signature version must be 1\n"
+  unless _require_integer_field($signature, 'version') == 1;
+
+ my $params = _require_identifier_array_field($signature, 'positional_params');
+ my $rest_param = _require_identifier_field($signature, 'rest_param');
+ my $min_arity = _require_integer_field($signature, 'min_arity');
+ die "Invalid user function definition AST: $owner signature min_arity mismatch\n"
+  unless $min_arity == scalar(@$params);
+ die "Invalid user function definition AST: $owner signature missing max_arity\n"
+  unless exists($signature->{max_arity});
+ die "Invalid user function definition AST: $owner variadic max_arity must be null\n"
+  if defined($signature->{max_arity});
+
+ return {
+  kind => 'callable_signature',
+  version => 1,
+  positional_params => [@$params],
+  rest_param => $rest_param,
+  min_arity => $min_arity,
+  max_arity => undef,
+ }
+}
+
+sub _callable_signatures_equal {
+ my ($left, $right) = @_;
+ return 0 unless ref($left) eq 'HASH' && ref($right) eq 'HASH';
+ return 0 unless ($left->{kind} // '') eq ($right->{kind} // '');
+ return 0 unless ($left->{version} // '') eq ($right->{version} // '');
+ return 0 unless _arrays_equal($left->{positional_params}, $right->{positional_params});
+ return 0 unless ($left->{rest_param} // '') eq ($right->{rest_param} // '');
+ return 0 unless ($left->{min_arity} // '') eq ($right->{min_arity} // '');
+ return 0 if defined($left->{max_arity}) || defined($right->{max_arity});
+ return 1
 }
 
 sub _body_parent_ast_path {

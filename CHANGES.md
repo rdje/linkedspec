@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.2.1 — implement Perl variadic functions
+
+Implemented ADR 0030's final `...rest` syntax on the Perl reference. The spec-owned shell emits version-2
+`callable_signature` records; the registry validates their fixed prefix, rest name, minimum, and open maximum and
+preserves the same record through body payloads, parse jobs, compiled state, and outward descriptors. Existing
+fixed definitions remain exact version 1 with unchanged `params`/`arity` keys.
+
+Generated Perl now evaluates every argument once from left to right, binds the fixed prefix, and creates a fresh
+scalar-held array for all extras, including an empty array. The unchanged neutral fixture preserves nested arrays,
+harrays, booleans, and `undef`, returns exact values, and continues through `.length()`. That last case exposed a
+pre-existing drift against the documented string-or-array length contract: Perl used scalar address-string length
+for array references. The shared lowerer now returns array cardinality while preserving scalar behavior.
+
+Added a recurring 66-assertion Perl test consuming the neutral JSON contract. It locks permanent/focused grammar
+ownership, v1/v2 outward and staged
+keys, generated rest binding, exact runtime output, fresh array identity, once-only ordered evaluation, seven
+invalid definitions, and fixed-extra/variadic-minimum diagnostics with no raw fallback. Rust `.4.2.2` is next.
+The first complete Phase 0 run measured exactly 13 stale expected strings in one outer subtest; after migrating
+that deterministic array-aware length shape, canonical local CI passes the 66-case adapter, both 61-case CLI
+environments, and Phase 0 `1..1030` in 710 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.1 — adopt variadic callable contract
 
 Adopted ADR `0030` and `linkedspec-callable-signature-v1`. The definition syntax is

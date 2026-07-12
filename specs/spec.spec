@@ -28,6 +28,7 @@
 #     blind_bare       `=> Child`                           -> { type: blind_edge }
 #     lifecycle_block  `Marker { code }`  (I LS LE E EX IT LX) -> { type: lifecycle }
 #     lifecycle_fluent `Marker.method(args) { blk }`        -> { type: lifecycle }
+#     variadic_function_definition `fn name(args, ...rest) { body }` -> { type: function_definition }
 #     function_definition `fn name(args) { body }`           -> { type: function_definition }
 #     split_marker     `@capture_slice` / `@mark(name)`     -> { type: split_marker }
 #     comment          `# ...`                              (skipped, like SPEC_ROOT)
@@ -87,6 +88,7 @@ spec_file::
  -> blind_bare       { push(blind_bare, current) }
  -> lifecycle_block  { push(lifecycle_block, current) }
  -> lifecycle_fluent { push(lifecycle_fluent, current) }
+ -> variadic_function_definition { push(variadic_function_definition, current) }
  -> function_definition { push(function_definition, current) }
  -> split_marker     { push(split_marker, current) }
  -> comment          { next() }
@@ -142,6 +144,24 @@ lifecycle_fluent: /(\w++)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[^()"']++|"(?:\
  I.return(hash("type", "lifecycle", "marker", entry_group(0), "fluent", "1", "raw", entry_text()))
 
 # ---- user function definition: `fn name(args) { body }` ----------------------
+variadic_function_definition: /fn[ \t]+([A-Za-z_]\w*)\s*\((?:([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*,\s*)?\.\.\.([A-Za-z_]\w*)\)\s*(?<blkVFN>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkVFN))*+\})/
+ I {
+  return({
+   "type" : "function_definition",
+   "version" : 2,
+   "name" : entry_group(0),
+   "signature" : {
+    "kind" : "callable_signature",
+    "version" : 1,
+    "positional_params" : entry_group(1).split(/\s*,\s*/).trim_each().filter_nonempty(),
+    "rest_param" : entry_group(2),
+    "min_arity" : count(entry_group(1).split(/\s*,\s*/).trim_each().filter_nonempty()),
+    "max_arity" : undef
+   },
+   "body" : entry_group(3)
+  })
+ }
+
 function_definition: /fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*(?<blkFN>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkFN))*+\})/
  I.return(hash("type", "function_definition", "name", entry_group(0), "params", entry_group(1), "body", entry_group(2)))
 

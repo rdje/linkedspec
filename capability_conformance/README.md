@@ -36,11 +36,12 @@ list also renders one backend-neutral `.spec` fixture. Validate schema, independ
 source offline with `python3 tools/check_scalar_numeric_contract.py`; backend rollout consumes the unchanged cases.
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,
+cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,
 defines version-2 signature records, binds extras as one fresh typed array, rejects keyword/overload/host-splat
 semantics, and locks representative purpose-specific helper/method arities. Validate its schema, definitions,
 bindings, diagnostics, and deterministically rendered future `.spec` fixture with
-`python3 tools/check_callable_signature_contract.py`.
+`python3 tools/check_callable_signature_contract.py`. The Perl reference consumes the unchanged source/result and
+record contract in `t/variadic_user_function_contract.t`; Rust, Dart, and Julia remain rollout work.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

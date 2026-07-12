@@ -5,10 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: the Perl reference now parses final `...rest`, validates/preserves version-2 signatures
+  through staged payload/job and outward descriptors, eagerly evaluates positional arguments once left-to-right,
+  and binds extras into a fresh scalar-held array in generated source. The unchanged neutral fixture passes all
+  results and 66 focused assertions. Its array `.length()` case exposed and corrected the shared Perl lowerer's
+  stale scalar-only implementation; scalar behavior is unchanged. Canonical CI passes 61x2 CLI plus Phase 0
+  `1..1030` in 710 seconds after one measured 13-string lock migration. Rust `.4.2.2` is active.
 - `2026-07-12` refresh: ADR 0030 and `linkedspec-callable-signature-v1` adopt final `...IDENTIFIER`, version-1
   exact functions, version-2 variadic signature records, positional eager calls, fresh typed rest arrays, and
-  stable invalid-signature/arity/keyword diagnostics. The offline checker is in canonical CI; Perl `.4.2.1` is
-  active while shipped capability remains unchanged.
+  stable invalid-signature/arity/keyword diagnostics. The offline checker is in canonical CI; Perl now consumes
+  the contract while cross-backend admission remains open.
 - `2026-07-12` refresh: variadic audit `.4.0` finds built-in helper/method open maxima already purpose-specific,
   while user-function exact `arity` is repeated through the spec-owned shell, staged payload/job, exact outward
   descriptor, compiled registries, native/generated execution, and Lua invocation frames. Neutral versioned

@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.2.1 — implement Perl variadic functions**
+  (DONE — Rust `.4.2.2` next).
+
+  **Implementation:** The Perl shell/registry/staged/outward/generated paths now preserve v1 exact versus v2
+  fixed-prefix/rest signatures. Arguments evaluate once left-to-right and extras bind to a fresh array per call.
+
+  **Proof/finding:** The unchanged neutral fixture and 66 focused assertions pass both grammar owners, descriptor, generated-source,
+  result, freshness, ordering, malformed-signature, and wrong-arity cases. Its `.length()` chain exposed scalar
+  address-string length on arrays; the shared lowerer now returns array cardinality without changing scalar length.
+  One measured Phase 0 run found only 13 stale source locks; after migration, full CI passes 61x2 CLI and
+  `1..1030` in 710 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.1 — adopt variadic callable contract**
   (DONE — Perl reference implementation `.4.2.1` next).
 

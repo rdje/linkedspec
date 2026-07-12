@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (variadic callable contract `.4.1` complete; Perl implementation `.4.2.1` active).
+- Last updated: `2026-07-12` (Perl variadic implementation `.4.2.1` complete; Rust `.4.2.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1970,17 +1970,27 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement the neutral variadic signature in the Perl reference frontend, descriptor, and generated calls.
   Dependencies: `.4.1`
   Acceptance: The spec-owned shell, registry normalization, staged records, ActionIR resolution, eager call
     lowering, fresh local binding, exact fixed-function diagnostics, public descriptor, and generated source pass
     every neutral case without broad host-Perl fallback or caller capture.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** The spec-owned shell emits version-2 function/signature records while fixed
+    version-1 records remain exact. Registry validation preserves the same signature through staged payload/job
+    and outward descriptor fields. Generated Perl evaluates every argument once left-to-right, binds fixed values,
+    and allocates one fresh rest array per invocation. The 66-assertion contract-consuming test passes both grammar
+    owners and all valid
+    neutral results, descriptor/source roles, seven malformed definitions, fixed-extra/variadic-minimum diagnostics,
+    empty/mixed rest values, fresh identity, and receiver chaining. The fixture exposed and this leaf corrected a
+    pre-existing Perl drift: documented array `.length()` used scalar address-string length; the shared lowerer now
+    returns array cardinality while preserving scalar length. The first complete Phase 0 run measured only 13
+    stale exact-source assertions in one outer subtest; after migrating those locks, canonical local CI passes the
+    recurring 66 assertions, both 61-case CLI environments, and Phase 0 `1..1030` in 710 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the unchanged neutral variadic signature in Rust native and generated execution.
   Dependencies: `.4.2.1`
   Acceptance: Parsed/compiled/described signature fields, registry-first call resolution, eager evaluation, typed
@@ -2062,6 +2072,24 @@ before implementation.
   behavior is explicitly future/owned during rollout.
 - [x] **LOCKSTEP** — ADR/index, task/index/roadmaps, README/TOOLBOX, capability data, mdBook, Knowledge Map,
   architecture/live docs, changes/notes, memory, checker, and CI agree; Perl reference `.4.2.1` is active.
+
+### `FUTURE-PARITY-BACKLOG.4.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The unchanged neutral fixture initially produced correct rest arrays but
+  `all_values(1, 2, 3).length()` returned Perl's array-reference address-string length (`18`) instead of `3`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The function shell/registry/lowerer knew only v1 `params`/`arity`; additionally,
+  the shared Perl `length` lowerer ignored the documented array value case and always invoked scalar `length`.
+- [x] **FIX** — Parse final `...rest` into v2 signatures, validate/preserve them through staged/outward records,
+  enforce min/exact arity, lower arguments to ordered temporaries, bind a fresh array from extras, and make the
+  common length helper dispatch arrays to cardinality.
+- [x] **ADDRESSED (verified)** — `t/variadic_user_function_contract.t` consumes the adopted JSON contract and passes
+  66 assertions covering both grammar owners, exact v1/v2 keys, staged signatures, generated source, valid results, fresh identity,
+  left-to-right single evaluation, seven invalid signatures, and fixed/variadic wrong-arity diagnostics.
+- [x] **NO REGRESSION** — Fixed function records retain the exact outward v1 keys and diagnostics; scalar length is
+  unchanged; canonical CI passes 66 focused assertions, 61x2 CLI, and Phase 0 `1..1030` in 710 seconds; no
+  Rust/Dart/Julia/Lua behavior or capability census status changes in this backend-local leaf.
+- [x] **LOCKSTEP** — Grammar/runtime/test/CI, task/index/roadmaps, README/TOOLBOX, mdBook, Knowledge Map, live docs,
+  changes/notes, and memory agree that Perl is implemented and Rust `.4.2.2` is active.
 
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `pending`
@@ -2348,7 +2376,8 @@ before implementation.
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4.0` | `done` | Exact arity owners and existing open-bound helpers are audited; rollout is split by neutral/backend mechanism. |
 | 67 | `FUTURE-PARITY-BACKLOG.4.1` | `done` | ADR 0030 and a gated neutral contract adopt final `...rest`, typed-array binding, and versioned records. |
-| 68 | `FUTURE-PARITY-BACKLOG.4.2.1` | `active` | Implement the unchanged v1/v2 callable contract in the Perl reference. |
+| 68 | `FUTURE-PARITY-BACKLOG.4.2.1` | `done` | Perl preserves v1 fixed records and executes v2 fixed-prefix/rest signatures through generated source. |
+| 69 | `FUTURE-PARITY-BACKLOG.4.2.2` | `active` | Implement the unchanged callable contract in Rust native and generated execution. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3025,6 +3054,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.2.1` | Permanent/focused v2 grammar; registry/staged/outward signatures; generated eager/fresh rest binding; array-aware length; 66 focused assertions; measured Phase 0 source-lock migration; canonical 61x2 CLI plus `1..1030`; docs/KM/governance/mdBook. | PASS. First Phase 0 measured only 13 stale strings in one subtest; after exact migration, the complete gate passes in 710 seconds, fixed v1 shape/diagnostics remain stable, and Rust `.4.2.2` is active. |
 
 ## Commit Log
 
@@ -3040,6 +3070,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.0` | `FUTURE-PARITY-BACKLOG.12.0 - capture compatibility retirement doctrine` | Captures uniform expressions, one duck-typed binding, and temporary-only compatibility; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.4.0` | `FUTURE-PARITY-BACKLOG.4.0 - split variadic callable signatures` | Read-only exact-arity seam audit, open-bound helper distinction, and neutral/Perl/Rust/Dart/Julia/Lua rollout split. |
 | `FUTURE-PARITY-BACKLOG.4.1` | `FUTURE-PARITY-BACKLOG.4.1 - adopt variadic callable contract` | ADR 0030, final `...rest`, v1/v2 schema, nine call cases, deterministic fixture/checker, and recurring CI gate. |
+| `FUTURE-PARITY-BACKLOG.4.2.1` | `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions` | Perl v2 grammar/registry/staged/descriptor/generated execution, exact neutral fixture, and array-aware result chaining. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.2.1 — lower arguments before binding any parameter):
+  A rest parameter is not host splat syntax. Lower every authored argument to a source-ordered temporary first,
+  then bind fixed names and allocate a new array from the remaining temporaries. This makes once-only left-to-right
+  evaluation visible and keeps the callee from affecting caller evaluation. Version-2 records must carry only
+  `signature`, including staged payload/job copies; keeping `params`/`arity` too would create two authorities.
+  Contract fixtures that return a new value kind through a receiver chain can expose older helper drift: the array
+  `.length()` case found Perl stringifying array refs despite the book's string-or-array promise. Correct the shared
+  semantic lowerer and lock both scalar preservation and array cardinality rather than special-casing the fixture.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.1 — version the new case instead of weakening the old one):
   Preserve fixed-function version 1 and its exact `params`/`arity` forever. A variadic definition is version 2 and
   carries one nested signature, so tools never guess whether `arity` means exactly or at least. `...rest` is final

@@ -1189,6 +1189,45 @@ sub _user_function_definition_for_name {
  return $definition
 }
 
+sub _user_function_call_signature {
+ my ($definition) = @_;
+ return undef unless ref($definition) eq 'HASH';
+ my $version = $definition->{version};
+ if (defined($version) && !ref($version) && $version == 1) {
+  my $params = $definition->{params};
+  my $arity = $definition->{arity};
+  return undef unless ref($params) eq 'ARRAY'
+                   && defined($arity) && !ref($arity) && $arity =~ /\A\d+\z/o
+                   && $arity == @$params;
+  return {
+   positional_params => $params,
+   rest_param => undef,
+   min_arity => 0 + $arity,
+   max_arity => 0 + $arity,
+  }
+ }
+ return undef unless defined($version) && !ref($version) && $version == 2;
+ my $signature = $definition->{signature};
+ return undef unless ref($signature) eq 'HASH'
+                  && ($signature->{kind} // '') eq 'callable_signature'
+                  && ($signature->{version} // 0) == 1;
+ my $params = $signature->{positional_params};
+ my $rest_param = $signature->{rest_param};
+ my $min_arity = $signature->{min_arity};
+ return undef unless ref($params) eq 'ARRAY'
+                  && defined($rest_param) && !ref($rest_param)
+                  && $rest_param =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+                  && defined($min_arity) && !ref($min_arity) && $min_arity =~ /\A\d+\z/o
+                  && $min_arity == @$params
+                  && exists($signature->{max_arity}) && !defined($signature->{max_arity});
+ return {
+  positional_params => $params,
+  rest_param => $rest_param,
+  min_arity => 0 + $min_arity,
+  max_arity => undef,
+ }
+}
+
 sub _user_function_call_stack_contains {
  my ($deps, $name) = @_;
  return 0 unless defined($name) && length($name);
@@ -1385,7 +1424,11 @@ sub _user_function_collect_local_decls_from_node {
 sub _user_function_local_decl_statements {
  my ($definition) = @_;
  return [] unless ref($definition) eq 'HASH';
- my %params = map { $_ => 1 } @{ref($definition->{params}) eq 'ARRAY' ? $definition->{params} : []};
+ my $signature = _user_function_call_signature($definition);
+ my @binding_names = ref($signature) eq 'HASH'
+  ? (@{$signature->{positional_params}}, defined($signature->{rest_param}) ? $signature->{rest_param} : ())
+  : ();
+ my %params = map { $_ => 1 } @binding_names;
  my %decls;
  my $body_ast = $definition->{body_ast};
  if (ref($body_ast) eq 'HASH') {
@@ -2626,9 +2669,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if _user_function_call_stack_contains($deps, $name);
 
   my $args = $node->{args} || [];
-  my $params = $definition->{params} || [];
+  my $signature = _user_function_call_signature($definition);
+  my $params = ref($signature) eq 'HASH' ? $signature->{positional_params} : undef;
+  my $rest_param = ref($signature) eq 'HASH' ? $signature->{rest_param} : undef;
   return _actionir_ast_unsupported_helper_expr($name)
-   unless ref($args) eq 'ARRAY' && ref($params) eq 'ARRAY' && @$args == @$params;
+   unless ref($args) eq 'ARRAY' && ref($params) eq 'ARRAY'
+       && @$args >= $signature->{min_arity}
+       && (!defined($signature->{max_arity}) || @$args <= $signature->{max_arity});
 
   my @lowered_args;
   foreach my $arg (@$args) {
@@ -2658,6 +2705,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $body_deps = _user_function_deps_with_call($deps, $name);
   my $local_decl_statements = _user_function_local_decl_statements($definition);
   my %scalar_value_names = map { $_ => 1 } @$params;
+  $scalar_value_names{$rest_param} = 1 if defined($rest_param);
   foreach my $decl (@$local_decl_statements) {
    $scalar_value_names{$1} = 1 if defined($decl) && $decl =~ /\Amy \$([A-Za-z_][A-Za-z0-9_]*);/o;
   }
@@ -2668,6 +2716,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   for (my $idx = 0; $idx < @$params; ++$idx) {
    push @lowered, 'my $'.$params->[$idx].' = $__ls_user_fn_arg_'.$idx.';';
+  }
+  if (defined($rest_param)) {
+   my @rest_args = map { '$__ls_user_fn_arg_'.$_ } @$params .. $#lowered_args;
+   push @lowered, 'my $'.$rest_param.' = ['.join(', ', @rest_args).'];';
   }
 
   unless (@$statements) {
@@ -4242,7 +4294,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
  $value_expr = $trim_action_ir_value->($length_args->[0]) unless defined($value_expr) && length($value_expr);
  return undef unless defined($value_expr) && length($value_expr);
 
- return 'do { my $__ls_length = '.$value_expr.'; defined($__ls_length) ? length($__ls_length) : undef }';
+ return 'do { my $__ls_length = '.$value_expr.'; defined($__ls_length) ? (ref($__ls_length) eq \'ARRAY\' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }';
 }
 if ($method_call && $method_call->{method} eq 'substr') {
  my $substr_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3);

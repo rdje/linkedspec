@@ -333,6 +333,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   user-function diagnostics, descriptor projection, or fixed/variadic helper and method signatures.
 - **HOW:** `python3 tools/check_callable_signature_contract.py`.
 - **OUTPUT:** `callable-signature-contract: OK (3 definitions; 9 calls; 7 invalid definitions)`.
+- **PERL ADAPTER:** `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` consumes the same fixture through
+  the spec-owned shell, staged/outward records, generated source, eager/fresh binding, diagnostics, and execution.
 
 ---
 
