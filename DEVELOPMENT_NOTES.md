@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.1 — contract source and expected values must derive together):
+  A neutral runtime fixture should not duplicate hand-maintained calls and results. Store structured cases, render
+  the complete `.spec` deterministically, and independently evaluate expected values in the gate. This catches
+  policy/schema/source/result drift before any backend consumes the fixture and keeps host adapters accountable to
+  one exact boundary. Separate numeric acceptance from ADR 0028 scalar-to-text conversion.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.0 — never copy host numeric coercion):
   Canonical helper names are insufficient when each backend delegates numeric parsing, booleans, arity, remainder,
   or invalid defaults to its host. A reference backend can itself contradict the public invalid-to-null rule.

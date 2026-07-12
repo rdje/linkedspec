@@ -951,14 +951,19 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Adopt a versioned neutral scalar numeric helper contract and executable fixtures.
   Dependencies: `.4.3.3.1.0`
   Acceptance: An ADR and machine-readable contract define accepted finite decimal inputs, exact/variadic arities,
     invalid-to-null behavior, numeric comparison truth, half-away rounding, min/max, clamp, division, and signed
     integer modulo without host-language fallback; an offline checker validates schema/cases and tracked inputs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** ADR `0029` and `linkedspec-scalar-numeric-v1` define 18 canonical scalar
+    helpers across 55 exact cases: strict finite decimal values, explicit arities, invalid-to-null, numeric
+    comparisons, half-away rounding, variadic scalar min/max, clamp/division fences, and floor signed modulo.
+    `tools/check_scalar_numeric_contract.py` independently evaluates every case, regenerates the complete `.spec`
+    fixture, and runs in local CI. The checker, Knowledge Map, doctrine/memory gates, and mdBook build pass. The
+    authoritative full local gate passes both 61-case CLI environments and phase0 `1..1030` in 559 seconds.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.2`
   Status: `pending`
@@ -1256,7 +1261,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `done` | Focused string mechanisms/public surfaces close at 76/76. |
 | 36 | `LUA-BACKEND-PARITY.4.3.3.0` | `done` | Audit and split scalar evaluation, receiver/alias admission, reducers, and closeout. |
 | 37 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `done` | Measure scalar numeric drift and split neutral policy from backend alignment. |
-| 38 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `pending` | Adopt the versioned neutral scalar numeric contract and executable fixture. |
+| 38 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `done` | Adopt 55-case strict scalar numeric v1 contract and offline checker. |
+| 39 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `pending` | Align Perl and Rust direct scalar numeric execution with contract v1. |
+
+### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.1.0` proved five scalar numeric semantic drift classes without a neutral owner.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Helper examples and call-name coverage documented happy paths but no strict
+  input grammar, arity table, invalid result, signed modulo, or backend-independent executable data.
+- [x] **FIX** — ADR `0029` adopts `linkedspec-scalar-numeric-v1`; one 55-case JSON contract stores policy, calls,
+  deterministic `.spec` source, and exact expected results; an independent Python evaluator checks all four.
+- [x] **ADDRESSED (verified)** — The checker reports 55 cases/18 canonical helpers and byte-matches rendered source;
+  README/capability docs/mdBook/TOOLBOX explain the contract and local CI requires/runs both tracked inputs.
+- [x] **NO REGRESSION** — No backend runtime changed; mdBook, Knowledge Map, memory, doctrine, and whitespace pass.
+  Full local CI passes both 61-case CLI environments and phase0 `1..1030` in 559 seconds.
+- [x] **LOCKSTEP** — ADR/index, task/index/roadmaps, architecture/live docs, changes/notes, memory, README, catalog,
+  capability README, checker, and CI agree; Perl/Rust alignment `.2` is the sole executable frontier.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1575,3 +1595,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity` | Dual-ABI 76/76, canonical `cat` public surfaces, parent closure, and numeric handoff. |
 | `LUA-BACKEND-PARITY.4.3.3.0` | `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms` | Read-only contract/runtime audit and four mechanism-sized implementation/closeout owners. |
 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment` | Measured five semantic drift classes and split neutral policy plus three backend rollout leaves. |
+| `LUA-BACKEND-PARITY.4.3.3.1.1` | `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract` | ADR 0029, 55-case v1 fixture, independent evaluator/source renderer, and recurring local-CI gate. |

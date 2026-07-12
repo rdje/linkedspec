@@ -39,6 +39,7 @@ changed* lives in git (layer D), not here.
 | [0026](0026-native-spec-resolution-and-loading-contract.md) | Native spec resolution uses explicit ordered roots and strict UTF-8 loading | 2026-07-11 | accepted | architecture, resolution, files, utf8, unicode, diagnostics, portability, cross-variant-parity |
 | [0027](0027-unicode-17-full-default-case-conversion.md) | Lowercase and uppercase use pinned Unicode 17 full Default Case Conversion | 2026-07-12 | accepted | architecture, unicode, casing, generation, portability, cross-variant-parity |
 | [0028](0028-portable-scalar-to-text-coercion.md) | Scalar-to-text coercion is typed and portable | 2026-07-12 | accepted | architecture, scalar, string, coercion, portability, cross-variant-parity |
+| [0029](0029-portable-scalar-numeric-helper-contract.md) | Scalar numeric helpers use one strict portable contract | 2026-07-12 | accepted | architecture, scalar, numeric, helpers, portability, cross-variant-parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

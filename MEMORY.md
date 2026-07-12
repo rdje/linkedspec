@@ -10,14 +10,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.1.0` — split scalar numeric contract alignment.
-- latest_commit: `c9b74339` — `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.1.1`; adopt a neutral executable scalar numeric helper contract.
-- next_action: write the ADR and machine-readable strict finite-decimal/arity/invalid/round/modulo contract plus an
-  offline schema/value checker before changing any backend runtime.
-- current_proof: Perl/Rust/Dart/Julia disagree on boolean input, invalid results, arity, numeric strings, and signed
-  modulo. Lua remains 76/76 on both ABIs; no numeric behavior is admitted until the neutral contract lands.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.1.1` — adopted scalar numeric helper contract v1.
+- latest_commit: `09f0012b` — `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.1.2`; align Perl and Rust scalar numeric helpers with v1.
+- next_action: make Perl/Rust consume all 55 unchanged cases, repairing booleans, invalid nulls, exact arities,
+  strict numeric strings, and signed floor modulo without changing generic scalar-to-text behavior.
+- current_proof: ADR 0029 and the offline checker lock 55 cases across 18 canonical scalar helpers; mdBook and local
+  CI wiring agree. Existing backend behavior is intentionally not admitted until `.1.2`/`.1.3` repairs land.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -26,4 +26,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; generic final
   codeblock equivalence/`with` `.11.1`; uniform binding and temporary compatibility retirement `.12.1`.
-- blockers: none. in_flight_uncommitted: scalar numeric contract-alignment split prepared for commit; artifacts clean.
+- blockers: none. in_flight_uncommitted: scalar numeric v1 contract prepared for commit; generated artifacts clean.

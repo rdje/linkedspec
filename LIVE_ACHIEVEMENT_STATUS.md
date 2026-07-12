@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.1 — adopt scalar numeric helper contract**
+  (DONE — Perl/Rust alignment `.4.3.3.1.2` next).
+
+  **Contract:** ADR `0029` / `linkedspec-scalar-numeric-v1` fixes strict finite decimals, arities, invalid nulls,
+  numeric comparisons, half-away rounding, min/max/clamp, division, and signed floor modulo.
+
+  **Proof:** Independent checker validates 55 cases/18 helpers and regenerates exact `.spec` source; mdBook,
+  Knowledge Map, memory/doctrine, and whitespace checks pass. Canonical local CI passes both 61-case CLI
+  environments and phase0 `1..1030` in 559 seconds with the checker in its recurring input set.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.0 — split scalar numeric contract alignment**
   (DONE — neutral executable contract `.4.3.3.1.1` next).
 

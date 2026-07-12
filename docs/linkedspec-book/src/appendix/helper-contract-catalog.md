@@ -997,7 +997,17 @@ dispatch rule.
 
 ## 5. Numeric Helpers
 
-All numeric helpers return `undef` if any input is missing, non-numeric, or (for division/modulo) zero-divisor, unless wrapped in `coalesce(...)`.
+All numeric helpers return `undef` if any input is missing, non-numeric, wrong-arity, non-finite, or (for
+division/modulo) a zero divisor, unless wrapped in `coalesce(...)`. Numeric inputs are finite numbers or untrimmed
+decimal strings matching `-?(?:digits(?:.digits)?|.digits)`. Booleans, null, arrays, harrays, plus/exponent/hex,
+surrounding-whitespace, and trailing-dot strings are not numeric. Comparisons return numeric `1`/`0` when valid and
+`undef` when invalid. Rounding sends exact halves away from zero; signed integer modulo uses floor/Euclidean
+remainder, so a nonzero result has the divisor's sign. These rules are versioned by
+`capability_conformance/scalar_numeric_contract.json` rather than delegated to host arithmetic APIs.
+
+`num_add`, `num_mul`, and scalar `num_min`/`num_max` accept two or more operands. `num_sub`, `num_div`, `num_mod`,
+and numeric comparisons require exactly two; unary helpers exactly one; clamp exactly three. Array-form min/max
+and aggregate reducers keep their one-array signatures below.
 
 Number receiver-dot value chains are pure value composition over this same family. Receiver methods use terse
 names and map to `num_*`: `value.abs()` -> `num_abs(value)`, `value.add(2, 3)` -> `num_add(value, 2, 3)`,

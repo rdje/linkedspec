@@ -315,6 +315,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `python3 unicode_case/generate_unicode_case_contract.py`; ordinary verification is offline.
 - **OUTPUT:** `unicode-case-contract: OK (Unicode 17.0.0; 1563 lower; 1581 upper; 158/464 property ranges; 12 fixtures)`.
 
+### 4.6 `tools/check_scalar_numeric_contract.py` — portable scalar numeric proof
+
+- **WHAT:** validates `linkedspec-scalar-numeric-v1` schema/policy, independently evaluates all structured cases,
+  and deterministically regenerates the backend-neutral `.spec` fixture and expected result object.
+- **WHEN:** changing numeric input coercion, helper arity, invalid/null behavior, comparisons, rounding, min/max,
+  clamp/division fences, or signed modulo in any backend.
+- **HOW:** `python3 tools/check_scalar_numeric_contract.py`.
+- **OUTPUT:** `scalar-numeric-contract: OK (55 cases; 18 canonical helpers)`.
+
 ---
 
 ## 5. Gates & retrieval

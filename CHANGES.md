@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.1 — adopt scalar numeric helper contract
+
+Adopted ADR `0029` and `linkedspec-scalar-numeric-v1`: strict finite decimal values, explicit fixed/variadic
+arities, invalid-to-null behavior, numeric comparison truth, half-away rounding, variadic scalar min/max,
+clamp/division fences, and floor/Euclidean signed modulo.
+
+Added a 55-case machine-readable contract with deterministic `.spec` source and exact results. Its independent
+Python evaluator regenerates/validates all representations and is required by local CI. Synced README, capability
+docs, mdBook, TOOLBOX, architecture/task/roadmap/live/KM state. Full local CI passes both 61-case CLI environments
+and phase0 `1..1030` in 559 seconds; Perl/Rust alignment `.1.2` is next.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.0 — split scalar numeric contract alignment
 
 Stopped the planned Lua scalar evaluator after a LinkedSpec reference probe and admitted-backend audit exposed

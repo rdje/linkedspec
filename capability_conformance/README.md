@@ -30,6 +30,11 @@ and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite 
 the non-text value kinds propagate null. The executable fixture covers current portable source values; codeblock is
 normatively non-text while explicit final-codeblock call syntax remains separately owned.
 
+`scalar_numeric_contract.json` fixes strict scalar numeric helper inputs, arities, invalid-to-null results, numeric
+comparison truth, half-away rounding, min/max/clamp, division, and signed integer modulo. Its deterministic case
+list also renders one backend-neutral `.spec` fixture. Validate schema, independent evaluator results, and rendered
+source offline with `python3 tools/check_scalar_numeric_contract.py`; backend rollout consumes the unchanged cases.
+
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
 execute roles, the ten structural families, plan rejection, stable generated-source errors, one direct behavior

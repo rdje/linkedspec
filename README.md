@@ -217,6 +217,10 @@ Top-level project docs:
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
   portable facade; Rust, Dart, and Julia package tests do likewise. Exact `.1.6.4` admission is closed.
+- Run `python3 tools/check_scalar_numeric_contract.py` to validate the versioned strict scalar numeric helper
+  contract: finite decimal inputs, exact/variadic arities, invalid-to-null behavior, numeric comparison truth,
+  half-away rounding, clamp/division fences, and signed integer modulo. Backend admission is tracked under
+  `LUA-BACKEND-PARITY.4.3.3.1` before Lua numeric runtime work.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
