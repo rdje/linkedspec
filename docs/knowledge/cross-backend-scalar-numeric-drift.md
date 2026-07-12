@@ -13,7 +13,8 @@ status: current
 tags: [numeric, parity, perl, rust, dart, julia, lua, helpers, contract, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.3.1.0 used LinkedSpec::Get for a direct Perl matrix and inspected rust/linkedspec-{core,runtime}, dart/lib/src/runtime/interpreter.dart, julia/src/runtime/Interpreter.jl, and their focused tests. Perl accepts booleans as numeric and maps invalid comparisons to 0; Rust also converts booleans and maps invalid comparisons/unary calls to 0. Dart/Julia reject booleans and return null/nothing. Perl rejects extra sub/div operands, Rust ignores them, and Dart/Julia fold them. Numeric string grammars and signed remainder mechanisms also differ. The public catalog says invalid numeric inputs return undef, but no executable neutral scalar contract owns these edges."
 policy_update_2026_07_12: "LUA-BACKEND-PARITY.4.3.3.1.1 and ADR 0029 adopt linkedspec-scalar-numeric-v1: strict finite decimal numbers/strings, booleans and aggregates invalid, explicit arities, invalid-to-null, numeric 1/0 comparisons, half-away rounding, and floor/Euclidean signed modulo. The 55-case neutral fixture and independent checker are recurring local-CI inputs; admitted-backend repair follows before Lua implementation."
-reverify: "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(q{Top}, q{return(num_gt(\"x\", 2))}), qq{\\n}' && rg -n 'as_number|_numValue|_runtime_number|num_sub|num_mod|num_gt' rust/linkedspec-core/src/types.rs rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl"
+implementation_update_2026_07_12: "LUA-BACKEND-PARITY.4.3.3.1.2 aligns Perl and Rust. Perl generated actions call LinkedSpec::Numeric and declare it in standalone source; Rust uses strict helper-local scalar_numeric_value/finite_numeric_result adapters. Both execute all 55 unchanged cases. Generic Perl scalar-to-text and Rust RuntimeValue::as_number remain unchanged; Dart/Julia repair is next."
+reverify: "PERL5LIB= prove -Iperl t/scalar_numeric_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test scalar_numeric_contract && rg -n 'as_number|_numValue|_runtime_number|num_sub|num_mod|num_gt' rust/linkedspec-core/src/types.rs rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl"
 ---
 
 The current happy paths agree, but scalar numeric edge behavior does not:
@@ -28,7 +29,7 @@ The current happy paths agree, but scalar numeric edge behavior does not:
   exponent, whitespace, hex, or trailing-dot forms; other hosts delegate to broader parsers.
 - Signed modulo follows different host remainder definitions unless specified explicitly.
 
-Lua must not select one of these behaviors accidentally through `tonumber`, `%`, or host truthiness. The active
-rollout first adopts a versioned neutral scalar contract (`.4.3.3.1.1`), then aligns Perl/Rust (`.2`), Dart/Julia
-(`.3`), and finally PUC Lua/LuaJIT with exact six-runtime admission (`.4`). Aggregate reducers and receiver forms
-remain in their already-separated downstream leaves.
+Lua must not select one of these behaviors accidentally through `tonumber`, `%`, or host truthiness. The rollout
+adopted the versioned neutral scalar contract (`.4.3.3.1.1`) and aligned Perl/Rust (`.2`); Dart/Julia (`.3`) and
+finally PUC Lua/LuaJIT exact six-runtime admission (`.4`) remain. Aggregate reducers and receiver forms stay in
+their already-separated downstream leaves.

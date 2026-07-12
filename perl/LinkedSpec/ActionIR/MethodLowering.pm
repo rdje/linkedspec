@@ -10,6 +10,7 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::Numeric ();
 use LinkedSpec::UnicodeCaseMapping ();
 
 use constant ACTIONIR_TRACE_OWNER => 'method_lowering';
@@ -4333,7 +4334,7 @@ if ($method_call && $method_call->{method} eq 'num_abs') {
  $value_expr = $trim_action_ir_value->($num_abs_args->[0]) unless defined($value_expr) && length($value_expr);
  return undef unless defined($value_expr) && length($value_expr);
 
- return 'do { my $__ls_num_abs_value = '.$value_expr.'; (defined($__ls_num_abs_value) && $__ls_num_abs_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_abs_value < 0 ? -$__ls_num_abs_value : $__ls_num_abs_value) : undef }';
+ return 'do { my $__ls_num_abs_value = '.$value_expr.'; LinkedSpec::Numeric::evaluate(\'num_abs\', $__ls_num_abs_value) }';
 }
 if ($method_call && $method_call->{method} eq 'num_floor') {
  my $num_floor_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4343,7 +4344,7 @@ if ($method_call && $method_call->{method} eq 'num_floor') {
  $value_expr = $trim_action_ir_value->($num_floor_args->[0]) unless defined($value_expr) && length($value_expr);
  return undef unless defined($value_expr) && length($value_expr);
 
- return 'do { my $__ls_num_floor_value = '.$value_expr.'; (defined($__ls_num_floor_value) && $__ls_num_floor_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? (($__ls_num_floor_value >= 0 || $__ls_num_floor_value == int($__ls_num_floor_value)) ? int($__ls_num_floor_value) : int($__ls_num_floor_value) - 1) : undef }';
+ return 'do { my $__ls_num_floor_value = '.$value_expr.'; LinkedSpec::Numeric::evaluate(\'num_floor\', $__ls_num_floor_value) }';
 }
 if ($method_call && $method_call->{method} eq 'num_ceil') {
  my $num_ceil_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4353,7 +4354,7 @@ if ($method_call && $method_call->{method} eq 'num_ceil') {
  $value_expr = $trim_action_ir_value->($num_ceil_args->[0]) unless defined($value_expr) && length($value_expr);
  return undef unless defined($value_expr) && length($value_expr);
 
- return 'do { my $__ls_num_ceil_value = '.$value_expr.'; (defined($__ls_num_ceil_value) && $__ls_num_ceil_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? (($__ls_num_ceil_value <= 0 || $__ls_num_ceil_value == int($__ls_num_ceil_value)) ? int($__ls_num_ceil_value) : int($__ls_num_ceil_value) + 1) : undef }';
+ return 'do { my $__ls_num_ceil_value = '.$value_expr.'; LinkedSpec::Numeric::evaluate(\'num_ceil\', $__ls_num_ceil_value) }';
 }
 if ($method_call && $method_call->{method} eq 'num_round') {
  my $num_round_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4363,7 +4364,7 @@ if ($method_call && $method_call->{method} eq 'num_round') {
  $value_expr = $trim_action_ir_value->($num_round_args->[0]) unless defined($value_expr) && length($value_expr);
  return undef unless defined($value_expr) && length($value_expr);
 
- return 'do { my $__ls_num_round_value = '.$value_expr.'; (defined($__ls_num_round_value) && $__ls_num_round_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? int($__ls_num_round_value + ($__ls_num_round_value >= 0 ? 0.5 : -0.5)) : undef }';
+ return 'do { my $__ls_num_round_value = '.$value_expr.'; LinkedSpec::Numeric::evaluate(\'num_round\', $__ls_num_round_value) }';
 }
 if ($method_call && $method_call->{method} eq 'num_sum') {
  my $num_sum_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4471,7 +4472,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    push @lowered_terms, $term_expr;
   }
 
-  return 'do { my @__ls_num_add_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }';
+  return 'do { my @__ls_num_add_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_add\', @__ls_num_add_terms) }';
  }
  if ($method_call && $method_call->{method} eq 'num_sub') {
   my $num_sub_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -4485,7 +4486,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $rhs_expr = $trim_action_ir_value->($num_sub_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
   return undef unless defined($rhs_expr) && length($rhs_expr);
 
-  return 'do { my $__ls_num_sub_lhs = '.$lhs_expr.'; my $__ls_num_sub_rhs = '.$rhs_expr.'; (defined($__ls_num_sub_lhs) && defined($__ls_num_sub_rhs) && $__ls_num_sub_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_sub_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_sub_lhs - $__ls_num_sub_rhs) : undef }';
+  return 'do { my $__ls_num_sub_lhs = '.$lhs_expr.'; my $__ls_num_sub_rhs = '.$rhs_expr.'; LinkedSpec::Numeric::evaluate(\'num_sub\', $__ls_num_sub_lhs, $__ls_num_sub_rhs) }';
  }
  if ($method_call && $method_call->{method} eq 'num_mul') {
   my $num_mul_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
@@ -4499,7 +4500,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    push @lowered_terms, $term_expr;
   }
 
-  return 'do { my @__ls_num_mul_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_mul_product = 1; my $__ls_num_mul_ok = 1; for my $__ls_num_mul_term (@__ls_num_mul_terms) { if (!(defined($__ls_num_mul_term) && $__ls_num_mul_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_mul_ok = 0; last; } $__ls_num_mul_product *= $__ls_num_mul_term; } $__ls_num_mul_ok ? $__ls_num_mul_product : undef }';
+  return 'do { my @__ls_num_mul_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_mul\', @__ls_num_mul_terms) }';
  }
  if ($method_call && $method_call->{method} eq 'num_div') {
   my $num_div_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -4513,7 +4514,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $rhs_expr = $trim_action_ir_value->($num_div_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
   return undef unless defined($rhs_expr) && length($rhs_expr);
 
- return 'do { my $__ls_num_div_lhs = '.$lhs_expr.'; my $__ls_num_div_rhs = '.$rhs_expr.'; (defined($__ls_num_div_lhs) && defined($__ls_num_div_rhs) && $__ls_num_div_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_div_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_div_rhs != 0) ? ($__ls_num_div_lhs / $__ls_num_div_rhs) : undef }';
+ return 'do { my $__ls_num_div_lhs = '.$lhs_expr.'; my $__ls_num_div_rhs = '.$rhs_expr.'; LinkedSpec::Numeric::evaluate(\'num_div\', $__ls_num_div_lhs, $__ls_num_div_rhs) }';
  }
  if ($method_call && $method_call->{method} eq 'num_mod') {
   my $num_mod_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -4527,7 +4528,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $rhs_expr = $trim_action_ir_value->($num_mod_args->[1]) unless defined($rhs_expr) && length($rhs_expr);
   return undef unless defined($rhs_expr) && length($rhs_expr);
 
- return 'do { my $__ls_num_mod_lhs = '.$lhs_expr.'; my $__ls_num_mod_rhs = '.$rhs_expr.'; (defined($__ls_num_mod_lhs) && defined($__ls_num_mod_rhs) && $__ls_num_mod_lhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs =~ /\A-?\d+\z/ && $__ls_num_mod_rhs != 0) ? ($__ls_num_mod_lhs % $__ls_num_mod_rhs) : undef }';
+ return 'do { my $__ls_num_mod_lhs = '.$lhs_expr.'; my $__ls_num_mod_rhs = '.$rhs_expr.'; LinkedSpec::Numeric::evaluate(\'num_mod\', $__ls_num_mod_lhs, $__ls_num_mod_rhs) }';
  }
  if ($method_call && $method_call->{method} =~ /^num_(eq|ne|gt|ge|lt|le)$/o) {
   my $op_name = $1;
@@ -4553,7 +4554,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   my $op = $ops{$op_name};
   return undef unless defined($op);
 
-  return 'do { my $__ls_num_cmp_lhs = '.$lhs_expr.'; my $__ls_num_cmp_rhs = '.$rhs_expr.'; (defined($__ls_num_cmp_lhs) && defined($__ls_num_cmp_rhs) && $__ls_num_cmp_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_cmp_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? (($__ls_num_cmp_lhs '.$op.' $__ls_num_cmp_rhs) ? 1 : 0) : 0 }';
+  return 'do { my $__ls_num_cmp_lhs = '.$lhs_expr.'; my $__ls_num_cmp_rhs = '.$rhs_expr.'; LinkedSpec::Numeric::evaluate(\'num_'.$op_name.'\', $__ls_num_cmp_lhs, $__ls_num_cmp_rhs) }';
  }
  if ($method_call && $method_call->{method} eq 'num_clamp') {
   my $num_clamp_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, 3);
@@ -4571,7 +4572,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $upper_expr = $trim_action_ir_value->($num_clamp_args->[2]) unless defined($upper_expr) && length($upper_expr);
   return undef unless defined($upper_expr) && length($upper_expr);
 
- return 'do { my $__ls_num_clamp_value = '.$value_expr.'; my $__ls_num_clamp_lower = '.$lower_expr.'; my $__ls_num_clamp_upper = '.$upper_expr.'; (defined($__ls_num_clamp_value) && defined($__ls_num_clamp_lower) && defined($__ls_num_clamp_upper) && $__ls_num_clamp_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_upper =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower <= $__ls_num_clamp_upper) ? ($__ls_num_clamp_value < $__ls_num_clamp_lower ? $__ls_num_clamp_lower : ($__ls_num_clamp_value > $__ls_num_clamp_upper ? $__ls_num_clamp_upper : $__ls_num_clamp_value)) : undef }';
+ return 'do { my $__ls_num_clamp_value = '.$value_expr.'; my $__ls_num_clamp_lower = '.$lower_expr.'; my $__ls_num_clamp_upper = '.$upper_expr.'; LinkedSpec::Numeric::evaluate(\'num_clamp\', $__ls_num_clamp_value, $__ls_num_clamp_lower, $__ls_num_clamp_upper) }';
  }
  if ($method_call && $method_call->{method} eq 'num_min') {
   my $num_min_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
@@ -4605,7 +4606,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    push @lowered_terms, $term_expr;
   }
 
-  return 'do { my @__ls_num_min_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@__ls_num_min_terms) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
+  return 'do { my @__ls_num_min_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_min\', @__ls_num_min_terms) }';
  }
  if ($method_call && $method_call->{method} eq 'num_max') {
   my $num_max_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
@@ -4639,7 +4640,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    push @lowered_terms, $term_expr;
   }
 
-  return 'do { my @__ls_num_max_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@__ls_num_max_terms) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
+  return 'do { my @__ls_num_max_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_max\', @__ls_num_max_terms) }';
  }
  if ($method_call && $method_call->{method} =~ /^(?:str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o) {
   my %string_compare_ops = (

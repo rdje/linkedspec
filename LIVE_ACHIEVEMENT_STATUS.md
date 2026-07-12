@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.2 — align Perl/Rust scalar numeric helpers**
+  (DONE — Dart/Julia alignment `.4.3.3.1.3` next).
+
+  **Implementation:** Perl generated actions and Rust direct runtime helpers now use dedicated strict numeric
+  adapters; general scalar coercion remains unchanged.
+
+  **Proof:** Both consume all 55 unchanged cases. Canonical local CI passes Perl CLI 61x2 and phase0 `1..1030` in
+  511 seconds; the Rust local gate passes the complete package and CLI 61x2. Rustfmt/library clippy pass with only
+  established unrelated warnings.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.1 — adopt scalar numeric helper contract**
   (DONE — Perl/Rust alignment `.4.3.3.1.2` next).
 

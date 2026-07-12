@@ -855,8 +855,8 @@ subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
         unlike($string_call, qr/__bad_(?:outer|inner)_host_call__/, 'AST helper-call lowering does not reuse fake source text for supported calls');
 
         my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(n,num_mul(2,3)))});
-        like($numeric_call, qr/\$__ls_num_add_sum/, 'AST helper-call lowering preserves the outer numeric helper output');
-        like($numeric_call, qr/\$__ls_num_mul_product/, 'AST helper-call lowering recursively lowers nested numeric helper calls');
+        like($numeric_call, qr/LinkedSpec::Numeric::evaluate\('num_add'/, 'AST helper-call lowering preserves the outer numeric helper output');
+        like($numeric_call, qr/LinkedSpec::Numeric::evaluate\('num_mul'/, 'AST helper-call lowering recursively lowers nested numeric helper calls');
         unlike($numeric_call, qr/__bad_num_(?:outer|inner)_host_call__/, 'AST helper-call lowering preserves compatibility only for unsupported argument calls');
     }
 

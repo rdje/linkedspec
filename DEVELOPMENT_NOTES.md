@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.2 — narrow adapters prevent global coercion regressions):
+  Numeric helper admission is stricter than general scalar conversion, so implement it at the helper boundary.
+  Perl generated actions share one `LinkedSpec::Numeric` evaluator; Rust uses helper-local conversion instead of
+  changing `RuntimeValue::as_number`. This aligns booleans, strict decimal text, arity, invalid results, rounding,
+  and signed modulo without silently changing unrelated string, truthiness, or runtime APIs. Executable neutral
+  fixtures that need a direct returned value should use an action edge plus child rule, not top-rule lifecycle `E`;
+  the latter has a separately governed final-value boundary and can hide the helper result on Perl.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.1 — contract source and expected values must derive together):
   A neutral runtime fixture should not duplicate hand-maintained calls and results. Store structured cases, render
   the complete `.spec` deterministically, and independently evaluate expected values in the gate. This catches

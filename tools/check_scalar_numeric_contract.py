@@ -125,7 +125,11 @@ def render_spec(cases: list[dict[str, Any]]) -> str:
     for case in cases:
         args = ", ".join(render_value(value) for value in case["args"])
         rows.append(f'     {json.dumps(case["id"])} : {case["helper"]}({args})')
-    return "Top::\n /x/\n E {\n   return({\n" + ",\n".join(rows) + "\n   })\n }\n"
+    return (
+        "Top::\n /x/ -> Done {\n   return({\n"
+        + ",\n".join(rows)
+        + "\n   })\n }\n\nDone::\n /x/\n"
+    )
 
 
 def main() -> None:

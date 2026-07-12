@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (numeric helper surface split under `.4.3.3.0`)
+- Last updated: `2026-07-12` (Perl/Rust scalar numeric v1 alignment complete; Dart/Julia `.4.3.3.1.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -966,17 +966,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Perl and Rust scalar numeric helpers with the neutral contract.
   Dependencies: `.4.3.3.1.1`
   Acceptance: Direct canonical helper execution in both backends consumes every contract case; booleans and invalid
     operands return null, arities are exact/variadic as governed, signed modulo and numeric strings match, and full
     Perl/Rust gates pass without weakening unrelated generic scalar coercion.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Perl generated actions now route canonical scalar-value paths through a
+    dedicated strict adapter, with fixed-arity/aggregate overload fences remaining in the frontend; independently
+    loadable generated source declares the dependency. Rust uses a
+    helper-local strict finite-decimal adapter without changing generic `RuntimeValue::as_number`. Both execute the
+    unchanged 55-case fixture exactly, including boolean/aggregate rejection, exact arities, invalid nulls,
+    half-away rounding, strict strings, and floor signed modulo. Canonical local CI passes both Perl 61-case CLI
+    environments and phase0 `1..1030` in 511 seconds. The Rust local gate passes the complete runtime package,
+    formatting, and both 61-case CLI environments; library clippy passes with established unrelated warnings.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align Dart and Julia scalar numeric helpers with the neutral contract.
   Dependencies: `.4.3.3.1.1`, `.4.3.3.1.2`
   Acceptance: Both native interpreters consume every unchanged contract case through direct canonical calls;
@@ -1262,7 +1269,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 36 | `LUA-BACKEND-PARITY.4.3.3.0` | `done` | Audit and split scalar evaluation, receiver/alias admission, reducers, and closeout. |
 | 37 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `done` | Measure scalar numeric drift and split neutral policy from backend alignment. |
 | 38 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `done` | Adopt 55-case strict scalar numeric v1 contract and offline checker. |
-| 39 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `pending` | Align Perl and Rust direct scalar numeric execution with contract v1. |
+| 39 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `done` | Perl/Rust consume all 55 scalar numeric v1 cases without generic coercion drift. |
+| 40 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `active` | Align Dart and Julia direct scalar numeric execution with contract v1. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1277,6 +1285,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Full local CI passes both 61-case CLI environments and phase0 `1..1030` in 559 seconds.
 - [x] **LOCKSTEP** — ADR/index, task/index/roadmaps, architecture/live docs, changes/notes, memory, README, catalog,
   capability README, checker, and CI agree; Perl/Rust alignment `.2` is the sole executable frontier.
+
+### `LUA-BACKEND-PARITY.4.3.3.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The unchanged 55-case fixture exposed boolean coercion, invalid defaults, loose Rust
+  arities, host remainder sign, and host numeric-string acceptance in direct Perl/Rust execution.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Perl inlined repeated regex/host arithmetic in generated actions; Rust reused
+  generic `RuntimeValue::as_number` and host operators. Neither seam implemented ADR `0029` as one contract.
+- [x] **FIX** — Added `LinkedSpec::Numeric` for generated Perl actions and helper-local Rust adapters for strict
+  finite decimal admission, result normalization, exact arities, half-away rounding, and floor signed modulo.
+- [x] **ADDRESSED (verified)** — Perl and Rust consume every unchanged case through direct canonical helper calls;
+  generated Perl source declares its dependency and the Rust test consumes the same checked-in JSON/source.
+- [x] **NO REGRESSION** — Canonical local CI passes Perl CLI 61x2 plus phase0 `1..1030`; the Rust local gate passes
+  its complete package and CLI 61x2; rustfmt/library clippy pass. Generic coercion paths remain unchanged.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, memory,
+  checker fixture, generated-source expectations, and recurring CI inputs agree; Dart/Julia `.3` is next.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1596,3 +1619,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.0` | `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms` | Read-only contract/runtime audit and four mechanism-sized implementation/closeout owners. |
 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment` | Measured five semantic drift classes and split neutral policy plus three backend rollout leaves. |
 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract` | ADR 0029, 55-case v1 fixture, independent evaluator/source renderer, and recurring local-CI gate. |
+| `LUA-BACKEND-PARITY.4.3.3.1.2` | `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers` | Dedicated Perl/Rust strict numeric adapters, unchanged 55-case direct proof, and Dart/Julia handoff. |

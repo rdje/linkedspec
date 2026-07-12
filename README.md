@@ -219,8 +219,9 @@ Top-level project docs:
   portable facade; Rust, Dart, and Julia package tests do likewise. Exact `.1.6.4` admission is closed.
 - Run `python3 tools/check_scalar_numeric_contract.py` to validate the versioned strict scalar numeric helper
   contract: finite decimal inputs, exact/variadic arities, invalid-to-null behavior, numeric comparison truth,
-  half-away rounding, clamp/division fences, and signed integer modulo. Backend admission is tracked under
-  `LUA-BACKEND-PARITY.4.3.3.1` before Lua numeric runtime work.
+  half-away rounding, clamp/division fences, and signed integer modulo. Perl and Rust consume all 55 cases through
+  dedicated numeric adapters; Dart/Julia alignment and then Lua six-runtime admission remain tracked under
+  `LUA-BACKEND-PARITY.4.3.3.1`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

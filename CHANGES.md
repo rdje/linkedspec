@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.2 — align Perl/Rust scalar numeric helpers
+
+Added a dedicated Perl numeric adapter and routed generated unary, arithmetic, scalar min/max, clamp, and
+comparison values through it; standalone generated source now declares the dependency. Rust gained helper-local
+strict finite-decimal and finite-result adapters while leaving generic `RuntimeValue::as_number` unchanged.
+
+Both backends execute the same 55-case scalar numeric v1 fixture exactly, covering boolean/aggregate rejection,
+strict strings, fixed/variadic arities, invalid nulls, half-away rounding, and floor signed modulo. Updated
+generated-source assertions and recurring local-CI inputs. Corrected the fixture carrier from a top-rule `E` block
+to an action edge plus child rule so the already-governed Perl lifecycle final-value boundary cannot mask results;
+the 55 calls and expected values are unchanged. Canonical local CI passes Perl CLI 61x2 and phase0 `1..1030` in
+511 seconds; the Rust local gate passes the complete package and CLI 61x2. Rustfmt and library clippy pass;
+Dart/Julia alignment `.1.3` is next.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.1 — adopt scalar numeric helper contract
 
 Adopted ADR `0029` and `linkedspec-scalar-numeric-v1`: strict finite decimal values, explicit fixed/variadic

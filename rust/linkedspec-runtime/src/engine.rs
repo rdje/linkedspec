@@ -46,6 +46,53 @@ use serde_json::Value;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
 
+fn strict_decimal_text(value: &str) -> bool {
+    let bytes = value.as_bytes();
+    if bytes.is_empty() {
+        return false;
+    }
+    let mut index = usize::from(bytes[0] == b'-');
+    if index == bytes.len() {
+        return false;
+    }
+    if bytes[index] == b'.' {
+        index += 1;
+        return index < bytes.len() && bytes[index..].iter().all(u8::is_ascii_digit);
+    }
+    let digits_start = index;
+    while index < bytes.len() && bytes[index].is_ascii_digit() {
+        index += 1;
+    }
+    if index == digits_start {
+        return false;
+    }
+    if index == bytes.len() {
+        return true;
+    }
+    if bytes[index] != b'.' {
+        return false;
+    }
+    index += 1;
+    index < bytes.len() && bytes[index..].iter().all(u8::is_ascii_digit)
+}
+
+fn scalar_numeric_value(value: &RuntimeValue) -> Option<f64> {
+    let number = match value {
+        RuntimeValue::Number(number) => *number,
+        RuntimeValue::Scalar(text) if strict_decimal_text(text) => text.parse().ok()?,
+        _ => return None,
+    };
+    number.is_finite().then_some(number)
+}
+
+fn finite_numeric_result(value: f64) -> RuntimeValue {
+    if value.is_finite() {
+        RuntimeValue::Number(if value == 0.0 { 0.0 } else { value })
+    } else {
+        RuntimeValue::Undef
+    }
+}
+
 /// Per-invocation controls for direct top-rule value execution.
 ///
 /// These options do not mutate the compiled specification. They select an
@@ -6958,12 +7005,12 @@ impl Engine {
             // ── Scalar arithmetic ──
             "num_add" | "num_mul" => {
                 if args.len() >= 2 {
-                    let nums: Option<Vec<f64>> = args.iter().map(|arg| arg.as_number()).collect();
+                    let nums: Option<Vec<f64>> = args.iter().map(scalar_numeric_value).collect();
                     match nums {
                         Some(nums) if name == "num_add" => {
-                            Ok(RuntimeValue::Number(nums.iter().sum()))
+                            Ok(finite_numeric_result(nums.iter().sum()))
                         }
-                        Some(nums) => Ok(RuntimeValue::Number(nums.iter().product())),
+                        Some(nums) => Ok(finite_numeric_result(nums.iter().product())),
                         None => Ok(RuntimeValue::Undef),
                     }
                 } else {
@@ -6971,20 +7018,20 @@ impl Engine {
                 }
             }
             "num_sub" | "num_div" | "num_mod" => {
-                if args.len() >= 2 {
-                    let a = args[0].as_number();
-                    let b = args[1].as_number();
+                if args.len() == 2 {
+                    let a = scalar_numeric_value(&args[0]);
+                    let b = scalar_numeric_value(&args[1]);
                     match (a, b) {
                         (Some(a), Some(b)) => {
                             let result = match name {
                                 "num_sub" => a - b,
                                 "num_div" if b != 0.0 => a / b,
                                 "num_mod" if b != 0.0 && a.fract() == 0.0 && b.fract() == 0.0 => {
-                                    (a as i64 % b as i64) as f64
+                                    a - (a / b).floor() * b
                                 }
                                 _ => return Ok(RuntimeValue::Undef),
                             };
-                            Ok(RuntimeValue::Number(result))
+                            Ok(finite_numeric_result(result))
                         }
                         _ => Ok(RuntimeValue::Undef),
                     }
@@ -6993,8 +7040,11 @@ impl Engine {
                 }
             }
             "num_eq" | "num_ne" | "num_gt" | "num_ge" | "num_lt" | "num_le" => {
-                if args.len() >= 2 {
-                    match (args[0].as_number(), args[1].as_number()) {
+                if args.len() == 2 {
+                    match (
+                        scalar_numeric_value(&args[0]),
+                        scalar_numeric_value(&args[1]),
+                    ) {
                         (Some(a), Some(b)) => {
                             let result = match name {
                                 "num_eq" => a == b,
@@ -7007,46 +7057,50 @@ impl Engine {
                             };
                             Ok(RuntimeValue::Number(if result { 1.0 } else { 0.0 }))
                         }
-                        _ => Ok(RuntimeValue::Number(0.0)),
+                        _ => Ok(RuntimeValue::Undef),
                     }
                 } else {
-                    Ok(RuntimeValue::Number(0.0))
+                    Ok(RuntimeValue::Undef)
                 }
             }
-            "num_abs" => Ok(RuntimeValue::Number(
-                args.first()
-                    .and_then(|a| a.as_number())
-                    .map(|n| n.abs())
-                    .unwrap_or(0.0),
-            )),
-            "num_floor" => Ok(RuntimeValue::Number(
-                args.first()
-                    .and_then(|a| a.as_number())
-                    .map(|n| n.floor())
-                    .unwrap_or(0.0),
-            )),
-            "num_ceil" => Ok(RuntimeValue::Number(
-                args.first()
-                    .and_then(|a| a.as_number())
-                    .map(|n| n.ceil())
-                    .unwrap_or(0.0),
-            )),
-            "num_round" => Ok(RuntimeValue::Number(
-                args.first()
-                    .and_then(|a| a.as_number())
-                    .map(|n| n.round())
-                    .unwrap_or(0.0),
-            )),
+            "num_abs" | "num_floor" | "num_ceil" | "num_round" => {
+                if args.len() != 1 {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let Some(value) = scalar_numeric_value(&args[0]) else {
+                    return Ok(RuntimeValue::Undef);
+                };
+                let result = match name {
+                    "num_abs" => value.abs(),
+                    "num_floor" => value.floor(),
+                    "num_ceil" => value.ceil(),
+                    "num_round" => value.round(),
+                    _ => unreachable!(),
+                };
+                Ok(finite_numeric_result(result))
+            }
             "num_min" => {
                 let values: Vec<f64> = if args.len() == 1 {
                     match self.array_consuming_arg(raw_args, args, 0, ctx) {
-                        RuntimeValue::Array(items) => {
-                            items.iter().filter_map(|item| item.as_number()).collect()
-                        }
-                        value => value.as_number().into_iter().collect(),
+                        RuntimeValue::Array(items) => match items
+                            .iter()
+                            .map(scalar_numeric_value)
+                            .collect::<Option<Vec<_>>>()
+                        {
+                            Some(values) => values,
+                            None => return Ok(RuntimeValue::Undef),
+                        },
+                        _ => Vec::new(),
                     }
                 } else {
-                    args.iter().filter_map(|a| a.as_number()).collect()
+                    match args
+                        .iter()
+                        .map(scalar_numeric_value)
+                        .collect::<Option<Vec<_>>>()
+                    {
+                        Some(values) if values.len() >= 2 => values,
+                        _ => return Ok(RuntimeValue::Undef),
+                    }
                 };
                 let min = values.iter().copied().fold(f64::INFINITY, |a, b| a.min(b));
                 if min.is_finite() {
@@ -7058,13 +7112,25 @@ impl Engine {
             "num_max" => {
                 let values: Vec<f64> = if args.len() == 1 {
                     match self.array_consuming_arg(raw_args, args, 0, ctx) {
-                        RuntimeValue::Array(items) => {
-                            items.iter().filter_map(|item| item.as_number()).collect()
-                        }
-                        value => value.as_number().into_iter().collect(),
+                        RuntimeValue::Array(items) => match items
+                            .iter()
+                            .map(scalar_numeric_value)
+                            .collect::<Option<Vec<_>>>()
+                        {
+                            Some(values) => values,
+                            None => return Ok(RuntimeValue::Undef),
+                        },
+                        _ => Vec::new(),
                     }
                 } else {
-                    args.iter().filter_map(|a| a.as_number()).collect()
+                    match args
+                        .iter()
+                        .map(scalar_numeric_value)
+                        .collect::<Option<Vec<_>>>()
+                    {
+                        Some(values) if values.len() >= 2 => values,
+                        _ => return Ok(RuntimeValue::Undef),
+                    }
                 };
                 let max = values
                     .iter()
@@ -7077,10 +7143,10 @@ impl Engine {
                 }
             }
             "num_clamp" => {
-                if args.len() >= 3 {
-                    let v = args[0].as_number();
-                    let lo = args[1].as_number();
-                    let hi = args[2].as_number();
+                if args.len() == 3 {
+                    let v = scalar_numeric_value(&args[0]);
+                    let lo = scalar_numeric_value(&args[1]);
+                    let hi = scalar_numeric_value(&args[2]);
                     match (v, lo, hi) {
                         (Some(v), Some(lo), Some(hi)) if lo <= hi => {
                             Ok(RuntimeValue::Number(v.clamp(lo, hi)))
