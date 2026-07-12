@@ -734,8 +734,12 @@ fixed-prefix/rest signatures through generated source; the 66-assertion adapter 
 
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.4.2.2` and parent `.4.2` are done. Rust carries the same signature
 through parsed/compiled/public/generated records and passes the seven-test neutral fixture suite plus core gates.
-The fixture corrected latent Rust array `length` drift without changing scalar Unicode length. Dart `.4.3.1` is
-the sole callable-signature frontier.
+The fixture corrected latent Rust array `length` drift without changing scalar Unicode length. Dart `.4.3.1`
+became the callable-signature frontier at that boundary.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.4.3.1` is done. Dart's typed v2 signature survives spec/staged,
+registry/action, descriptor, native, normalized emitted, generated-plan, and reconstructed execution paths. Six
+neutral tests and the complete 190-test/61x2/105 gate pass; Julia `.4.3.2` is the sole callable-signature frontier.
 
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral

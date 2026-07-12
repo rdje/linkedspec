@@ -120,11 +120,11 @@ fn all_values(...items) {
 The exact token is `...IDENTIFIER` with no whitespace between marker and name. It may appear once and only at the
 end of the parameter list. Calls remain positional; fixed prefix parameters bind first and all extras bind as one
 fresh typed array, empty when there are no extras. Fixed functions remain exact-arity. This syntax and its
-version-2 signature record are adopted by ADR 0030 and the neutral callable-signature contract. Perl and Rust
-implement the syntax now; Dart, Julia, and Lua remain under the active `FUTURE-PARITY-BACKLOG.4.3-.4` rollout, so
+version-2 signature record are adopted by ADR 0030 and the neutral callable-signature contract. Perl, Rust, and
+Dart implement the syntax now; Julia and Lua remain under the active `FUTURE-PARITY-BACKLOG.4.3.2-.4` rollout, so
 portable multi-backend specs must wait for those admissions.
 
-On Perl and Rust, these calls illustrate the binding boundary:
+On Perl, Rust, and Dart, these calls illustrate the binding boundary:
 
 ```text
 all_values()                  # items = []

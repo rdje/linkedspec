@@ -1,6 +1,6 @@
 ---
 id: dart-function-registry
-title: Dart user-function registry preserves staged sidecars and resolves exact-arity calls before helper fallback
+title: Dart user-function registry preserves staged sidecars and resolves fixed or variadic calls before helper fallback
 answers:
   - where is the Dart user function registry
   - how does Dart preserve function body parse jobs
@@ -9,7 +9,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, actionir, functions, staged-parsing, registry, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart, exports UserFunctionRegistry/UserFunctionEntry/UserFunctionCallResolution, and threads optional registry input through the ActionIR contract resolver. DART-BACKEND-PARITY.5.1 adds Dart staged body_ast stitching. DART-BACKEND-PARITY.5.2 makes LinkedSpecRuntimeEngine execute exact-arity registry calls. test/function_registry_test.dart verifies ordered entries, staged body_parse_job exposure, body_payload/body_ast preservation, exact match, wrong arity, missing name, and duplicate-name rejection. test/action_contracts_test.dart verifies exact-arity user calls classify before helper fallback and wrong arity reports user_function_arity_mismatch. test/staged_parser_registry_test.dart verifies body_ast stitching. test/runtime_interpreter_test.dart verifies runtime execution."
+evidence: "DART-BACKEND-PARITY.3.3/.5.1/.5.2 established exact-arity registry/staged/runtime execution. FUTURE-PARITY-BACKLOG.4.3.1 adds typed v2 signatures, minimum-arity resolution, positional-only diagnostics, and fresh rest binding while preserving fixed v1 behavior."
 reverify: "cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -18,15 +18,15 @@ Dart's user-function registry lives in
 
 `UserFunctionRegistry.fromSpec(...)` and `UserFunctionRegistry.fromFunctions(...)`
 build ordered `UserFunctionEntry` records from `FunctionDefinition` values. Each
-entry preserves the function params, arity, source/body spans, `body_payload`,
+entry preserves the function signature, normalized params/arity, source/body spans, `body_payload`,
 `body_parse_job`, and optional stitched `body_ast`. The registry exposes
 `bodyParseJobs`; the staged registry can dispatch those jobs and return a
-stitched `SpecFile`, and the runtime interpreter now executes exact-arity
-registered calls before helper fallback.
+stitched `SpecFile`, and the runtime interpreter executes fixed exact-arity or
+variadic minimum-arity registered calls before helper fallback.
 
 The ActionIR contract resolver accepts an optional `UserFunctionRegistry`. With
-that registry, exact-arity function calls classify as `user_function` before
-helper fallback. If the name is registered but the arity is wrong, the resolver
+that registry, accepted fixed or variadic function calls classify as `user_function` before
+helper fallback. Keywords diagnose as unsupported. If the name is registered but the arity is wrong, the resolver
 emits `user_function_arity_mismatch` instead of treating the call as an unknown
 helper.
 

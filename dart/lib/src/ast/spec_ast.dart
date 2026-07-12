@@ -49,6 +49,7 @@ final class FunctionDefinition {
     required this.name,
     required this.params,
     required this.arity,
+    this.signature,
     required this.bodySource,
     this.bodyPayload,
     this.bodyParseJob,
@@ -61,6 +62,7 @@ final class FunctionDefinition {
   final String name;
   final List<String> params;
   final int arity;
+  final CallableSignature? signature;
   final String bodySource;
   final Object? bodyPayload;
   final StagedParseJob? bodyParseJob;
@@ -71,10 +73,15 @@ final class FunctionDefinition {
 
   factory FunctionDefinition.fromJson(JsonObject json) {
     final parseJob = json['body_parse_job'];
+    final signatureValue = json['signature'];
+    final signature = signatureValue == null
+        ? null
+        : CallableSignature.fromJson(_jsonObject(signatureValue, 'signature'));
     return FunctionDefinition(
       name: _stringField(json, 'name'),
-      params: _stringList(json, 'params'),
-      arity: _intField(json, 'arity'),
+      params: signature?.positionalParams ?? _stringList(json, 'params'),
+      arity: signature?.minArity ?? _intField(json, 'arity'),
+      signature: signature,
       bodySource: _stringField(json, 'body_source'),
       bodyPayload: json['body_payload'],
       bodyParseJob: parseJob == null
@@ -90,8 +97,9 @@ final class FunctionDefinition {
   JsonObject toJson() {
     return {
       'name': name,
-      'params': params,
-      'arity': arity,
+      if (signature == null) 'params': params,
+      if (signature == null) 'arity': arity,
+      if (signature != null) 'signature': signature!.toJson(),
       'body_source': bodySource,
       if (bodyPayload != null) 'body_payload': bodyPayload,
       if (bodyParseJob != null) 'body_parse_job': bodyParseJob!.toJson(),
@@ -99,6 +107,46 @@ final class FunctionDefinition {
       'source': source,
       'source_span': sourceSpan.toJson(),
       'body_span': bodySpan.toJson(),
+    };
+  }
+}
+
+final class CallableSignature {
+  const CallableSignature({
+    required this.kind,
+    required this.version,
+    required this.positionalParams,
+    required this.restParam,
+    required this.minArity,
+    required this.maxArity,
+  });
+
+  final String kind;
+  final int version;
+  final List<String> positionalParams;
+  final String restParam;
+  final int minArity;
+  final int? maxArity;
+
+  factory CallableSignature.fromJson(JsonObject json) {
+    return CallableSignature(
+      kind: _stringField(json, 'kind'),
+      version: _intField(json, 'version'),
+      positionalParams: _stringList(json, 'positional_params'),
+      restParam: _stringField(json, 'rest_param'),
+      minArity: _intField(json, 'min_arity'),
+      maxArity: _optionalIntField(json, 'max_arity'),
+    );
+  }
+
+  JsonObject toJson() {
+    return {
+      'kind': kind,
+      'version': version,
+      'positional_params': positionalParams,
+      'rest_param': restParam,
+      'min_arity': minArity,
+      'max_arity': maxArity,
     };
   }
 }
@@ -163,6 +211,7 @@ final class StagedParseJob {
     this.functionName,
     this.params,
     this.arity,
+    this.signature,
     required this.text,
     required this.sourceSpan,
     required this.parserSpecId,
@@ -181,6 +230,7 @@ final class StagedParseJob {
   final String? functionName;
   final List<String>? params;
   final int? arity;
+  final CallableSignature? signature;
   final String text;
   final StagedSourceSpan sourceSpan;
   final String parserSpecId;
@@ -208,6 +258,11 @@ final class StagedParseJob {
       functionName: _optionalStringField(json, 'function_name'),
       params: _optionalStringList(json, 'params'),
       arity: _optionalIntField(json, 'arity'),
+      signature: json['signature'] == null
+          ? null
+          : CallableSignature.fromJson(
+              _jsonObject(json['signature'], 'signature'),
+            ),
       text: _stringField(json, 'text'),
       sourceSpan: StagedSourceSpan.fromJson(_objectField(json, 'source_span')),
       parserSpecId: _stringField(json, 'parser_spec_id'),
@@ -230,6 +285,7 @@ final class StagedParseJob {
       if (functionName != null) 'function_name': functionName,
       if (params != null) 'params': params,
       if (arity != null) 'arity': arity,
+      if (signature != null) 'signature': signature!.toJson(),
       'text': text,
       'source_span': sourceSpan.toJson(),
       'parser_spec_id': parserSpecId,

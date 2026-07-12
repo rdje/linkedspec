@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.3.1 — generated source should reuse normalized native state):
+  Carry one typed signature through Dart's ordinary `SpecFile.toJson`/`fromJson` union so source emission needs no
+  variadic-only code path: emitted Base64 state reconstructs the same registry and executor. Keep derived prefix
+  params/minimum arity internally for the existing runtime, but expose only `signature` in v2 staged/public records
+  and validate the two views agree. Resolve registered keywords before arity so Dart's parser-level keyword nodes
+  diagnose as positional-only rather than silently becoming host-style named arguments. Bind extras with the same
+  deep-copying function-parameter helper to guarantee a fresh typed list per invocation.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.2.2 — normalize internally, preserve the public union):
   Rust can retain derived fixed-prefix `params` and minimum `arity` inside its AST/compiled structs to reuse the
   established executor, while public and staged v2 records must expose only the authoritative `signature`. Validate

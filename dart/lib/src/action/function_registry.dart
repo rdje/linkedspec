@@ -120,6 +120,9 @@ final class UserFunctionRegistry {
       if (entry.arity == arity) {
         return entry;
       }
+      if (entry.signature != null && entry.acceptsArity(arity)) {
+        return entry;
+      }
     }
     return null;
   }
@@ -131,14 +134,18 @@ final class UserFunctionRegistry {
         name: name,
         requestedArity: arity,
         expectedArities: const [],
+        expectedArityDescriptions: const [],
       );
     }
     for (final entry in entries) {
-      if (entry.arity == arity) {
+      if (entry.acceptsArity(arity)) {
         return UserFunctionCallResolution._(
           name: name,
           requestedArity: arity,
           expectedArities: expectedAritiesFor(name),
+          expectedArityDescriptions: [
+            for (final candidate in entries) candidate.arityExpectation,
+          ],
           entry: entry,
         );
       }
@@ -147,6 +154,9 @@ final class UserFunctionRegistry {
       name: name,
       requestedArity: arity,
       expectedArities: expectedAritiesFor(name),
+      expectedArityDescriptions: [
+        for (final candidate in entries) candidate.arityExpectation,
+      ],
     );
   }
 
@@ -167,12 +177,23 @@ final class UserFunctionEntry {
   String get name => definition.name;
   List<String> get params => definition.params;
   int get arity => definition.arity;
+  CallableSignature? get signature => definition.signature;
   String get bodySource => definition.bodySource;
   Object? get bodyPayload => definition.bodyPayload;
   StagedParseJob? get bodyParseJob => definition.bodyParseJob;
   Object? get bodyAst => definition.bodyAst;
   SourceSpan get sourceSpan => definition.sourceSpan;
   SourceSpan get bodySpan => definition.bodySpan;
+
+  bool acceptsArity(int actual) {
+    final callable = signature;
+    return callable == null ? actual == arity : actual >= callable.minArity;
+  }
+
+  String get arityExpectation {
+    final callable = signature;
+    return callable == null ? '$arity' : 'at least ${callable.minArity}';
+  }
 
   JsonObject toJson() {
     return {'index': index, ...definition.toJson()};
@@ -182,10 +203,11 @@ final class UserFunctionEntry {
     return {
       'index': index,
       'kind': 'user_function_definition',
-      'version': 1,
+      'version': signature == null ? 1 : 2,
       'name': name,
-      'params': params,
-      'arity': arity,
+      if (signature == null) 'params': params,
+      if (signature == null) 'arity': arity,
+      if (signature != null) 'signature': signature!.toJson(),
       'source_text': definition.source,
       'source_span': sourceSpan.toJson(),
       'body_span': bodySpan.toJson(),
@@ -202,12 +224,14 @@ final class UserFunctionCallResolution {
     required this.name,
     required this.requestedArity,
     required this.expectedArities,
+    required this.expectedArityDescriptions,
     this.entry,
   });
 
   final String name;
   final int requestedArity;
   final List<int> expectedArities;
+  final List<String> expectedArityDescriptions;
   final UserFunctionEntry? entry;
 
   bool get nameKnown => expectedArities.isNotEmpty;

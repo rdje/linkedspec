@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.3.1 — implement Dart variadic functions
+
+Implemented ADR 0030's unchanged callable signature throughout Dart. `CallableSignature` now flows from the
+spec-defined shell through `FunctionDefinition`, staged parse jobs, semantic validation, the user-function
+registry and ActionIR resolver, exact public descriptor projection, normalized emitted JSON, generated-plan
+execution, and reconstructed generated state. Fixed functions preserve their exact v1 `params`/`arity` records;
+v2 records expose only `signature`.
+
+Registered calls reject keyword arguments instead of leaking Dart named-argument behavior. Valid positional calls
+preserve exact v1 arity or enforce the v2 fixed-prefix minimum, evaluate every argument once left-to-right in caller
+scope, and bind a newly copied list of extras in the existing fresh function-local store swap. Empty and mixed rest
+values, recursion fences, standalone discard, and returned receiver chaining compose through existing runtime
+behavior.
+
+Added six contract tests covering exact shell/staged/descriptor unions, every neutral result, ordered evaluation,
+fresh rest mutation, seven malformed definitions, keyword rejection, fixed/minimum arity diagnostics, normalized
+Base64 emitted state, generated-plan execution, and generated-state round-trip. The authoritative Dart gate passes
+format, strict analysis, 190 package tests, both CLI environments at 61/61, and all 105 corpus fixtures.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.2.2 — implement Rust variadic functions
 
 Implemented ADR 0030's unchanged callable signature in Rust. A typed `CallableSignature` now flows through parsed

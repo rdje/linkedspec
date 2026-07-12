@@ -167,7 +167,7 @@ _ProjectedFunction _functionFromAst(
   int index,
 ) {
   _assertStringField(object, 'kind', 'user_function_definition', index);
-  _intField(object, 'version', index);
+  final version = _intField(object, 'version', index);
 
   final name = _stringField(object, 'name', 'function_definition');
   if (!_isIdentifier(name)) {
@@ -176,7 +176,35 @@ _ProjectedFunction _functionFromAst(
     );
   }
 
-  final params = _stringListField(object, 'params', index);
+  final List<String> params;
+  final int arity;
+  final CallableSignature? signature;
+  switch (version) {
+    case 1:
+      if (object.containsKey('signature')) {
+        throw FormatException(
+          'function_definition node $index version 1 must not contain '
+          'signature',
+        );
+      }
+      params = _stringListField(object, 'params', index);
+      arity = _intField(object, 'arity', index);
+      signature = null;
+    case 2:
+      if (object.containsKey('params') || object.containsKey('arity')) {
+        throw FormatException(
+          'function_definition node $index version 2 must store arity only '
+          'in signature',
+        );
+      }
+      signature = _callableSignatureField(object, 'signature', index);
+      params = signature.positionalParams;
+      arity = signature.minArity;
+    default:
+      throw FormatException(
+        'function_definition node $index has unsupported version $version',
+      );
+  }
   for (final param in params) {
     if (!_isIdentifier(param)) {
       throw FormatException(
@@ -185,7 +213,6 @@ _ProjectedFunction _functionFromAst(
     }
   }
 
-  final arity = _intField(object, 'arity', index);
   if (arity != params.length) {
     throw FormatException(
       'function_definition node $index arity $arity does not match '
@@ -214,6 +241,7 @@ _ProjectedFunction _functionFromAst(
     name,
     params,
     arity,
+    signature,
     bodySource,
     bodySpan,
     index,
@@ -228,6 +256,7 @@ _ProjectedFunction _functionFromAst(
     name,
     params,
     arity,
+    signature,
     bodySource,
     bodySpan,
     index,
@@ -239,6 +268,7 @@ _ProjectedFunction _functionFromAst(
       name: name,
       params: params,
       arity: arity,
+      signature: signature,
       bodySource: bodySource,
       bodyPayload: bodyPayload,
       bodyParseJob: StagedParseJob.fromJson(
@@ -307,6 +337,7 @@ void _validateBodyPayload(
   String name,
   List<String> params,
   int arity,
+  CallableSignature? signature,
   String bodySource,
   _AstSpan bodySpan,
   int index,
@@ -325,18 +356,14 @@ void _validateBodyPayload(
       'match name',
     );
   }
-  if (!_stringListsEqual(_stringListField(object, 'params', index), params)) {
-    throw FormatException(
-      'function_definition node $index body_payload params do not match '
-      'params',
-    );
-  }
-  if (_intField(object, 'arity', index) != arity) {
-    throw FormatException(
-      'function_definition node $index body_payload arity does not match '
-      'arity',
-    );
-  }
+  _validateStagedSignature(
+    object,
+    'body_payload',
+    params,
+    arity,
+    signature,
+    index,
+  );
   if (_stringField(object, 'text', 'body_payload') != bodySource) {
     throw FormatException(
       'function_definition node $index body_payload text does not match '
@@ -356,6 +383,7 @@ void _validateBodyParseJob(
   String name,
   List<String> params,
   int arity,
+  CallableSignature? signature,
   String bodySource,
   _AstSpan bodySpan,
   int index,
@@ -380,18 +408,14 @@ void _validateBodyParseJob(
       'match name',
     );
   }
-  if (!_stringListsEqual(_stringListField(object, 'params', index), params)) {
-    throw FormatException(
-      'function_definition node $index body_parse_job params do not match '
-      'params',
-    );
-  }
-  if (_intField(object, 'arity', index) != arity) {
-    throw FormatException(
-      'function_definition node $index body_parse_job arity does not match '
-      'arity',
-    );
-  }
+  _validateStagedSignature(
+    object,
+    'body_parse_job',
+    params,
+    arity,
+    signature,
+    index,
+  );
   if (_stringField(object, 'text', 'body_parse_job') != bodySource) {
     throw FormatException(
       'function_definition node $index body_parse_job text does not match '
@@ -441,6 +465,48 @@ void _validateBodyParseJob(
     throw FormatException(
       'function_definition node $index body_parse_job diagnostic_owner must '
       'be function_body',
+    );
+  }
+}
+
+void _validateStagedSignature(
+  JsonObject object,
+  String context,
+  List<String> params,
+  int arity,
+  CallableSignature? signature,
+  int index,
+) {
+  if (signature != null) {
+    if (object.containsKey('params') || object.containsKey('arity')) {
+      throw FormatException(
+        'function_definition node $index $context version 2 must store '
+        'arity only in signature',
+      );
+    }
+    final actual = _callableSignatureField(object, 'signature', index);
+    if (!_callableSignaturesEqual(actual, signature)) {
+      throw FormatException(
+        'function_definition node $index $context signature does not match '
+        'signature',
+      );
+    }
+    return;
+  }
+  if (object.containsKey('signature')) {
+    throw FormatException(
+      'function_definition node $index $context version 1 must not contain '
+      'signature',
+    );
+  }
+  if (!_stringListsEqual(_stringListField(object, 'params', index), params)) {
+    throw FormatException(
+      'function_definition node $index $context params do not match params',
+    );
+  }
+  if (_intField(object, 'arity', index) != arity) {
+    throw FormatException(
+      'function_definition node $index $context arity does not match arity',
     );
   }
 }
@@ -586,6 +652,89 @@ List<String> _stringListField(JsonObject object, String field, int index) {
     for (var itemIndex = 0; itemIndex < value.length; itemIndex += 1)
       _stringListItem(value[itemIndex], field, index, itemIndex),
   ];
+}
+
+CallableSignature _callableSignatureField(
+  JsonObject object,
+  String field,
+  int index,
+) {
+  final signature = _jsonObject(
+    _requiredValue(object, field, index),
+    'function_definition node $index $field',
+  );
+  const expectedFields = {
+    'kind',
+    'version',
+    'positional_params',
+    'rest_param',
+    'min_arity',
+    'max_arity',
+  };
+  if (signature.length != expectedFields.length ||
+      signature.keys.any((key) => !expectedFields.contains(key))) {
+    throw FormatException(
+      "function_definition node $index field '$field' has invalid callable "
+      'signature fields',
+    );
+  }
+  _assertStringField(signature, 'kind', 'callable_signature', index);
+  final version = _intField(signature, 'version', index);
+  if (version != 1) {
+    throw FormatException(
+      "function_definition node $index field '$field' has unsupported "
+      'signature version $version',
+    );
+  }
+  final positionalParams = _stringListField(
+    signature,
+    'positional_params',
+    index,
+  );
+  for (final param in positionalParams) {
+    if (!_isIdentifier(param)) {
+      throw FormatException(
+        "function_definition node $index has invalid positional parameter "
+        "'$param'",
+      );
+    }
+  }
+  final restParam = _stringField(signature, 'rest_param', 'callable_signature');
+  if (!_isIdentifier(restParam)) {
+    throw FormatException(
+      "function_definition node $index has invalid rest parameter "
+      "'$restParam'",
+    );
+  }
+  final minArity = _intField(signature, 'min_arity', index);
+  if (minArity != positionalParams.length) {
+    throw FormatException(
+      'function_definition node $index min_arity $minArity does not match '
+      '${positionalParams.length} positional params',
+    );
+  }
+  if (!signature.containsKey('max_arity') || signature['max_arity'] != null) {
+    throw FormatException(
+      "function_definition node $index field '$field' max_arity must be null",
+    );
+  }
+  return CallableSignature(
+    kind: 'callable_signature',
+    version: version,
+    positionalParams: List.unmodifiable(positionalParams),
+    restParam: restParam,
+    minArity: minArity,
+    maxArity: null,
+  );
+}
+
+bool _callableSignaturesEqual(CallableSignature left, CallableSignature right) {
+  return left.kind == right.kind &&
+      left.version == right.version &&
+      _stringListsEqual(left.positionalParams, right.positionalParams) &&
+      left.restParam == right.restParam &&
+      left.minArity == right.minArity &&
+      left.maxArity == right.maxArity;
 }
 
 String _stringListItem(Object? value, String field, int index, int itemIndex) {

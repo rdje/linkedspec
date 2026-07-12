@@ -2841,6 +2841,13 @@ final class LinkedSpecRuntimeEngine {
         )) {
       return null;
     }
+    if (compiledSpec.functionRegistry.hasName(call.name) &&
+        call.args.any((arg) => arg is ActionKeywordArgument)) {
+      throw RuntimeInterpreterException(
+        "user function '${call.name}' accepts positional arguments only in "
+        'rule $ruleLabel',
+      );
+    }
     final functionResolution = compiledSpec.functionRegistry.resolveCall(
       call.name,
       positionalArgs.length,
@@ -2857,7 +2864,8 @@ final class LinkedSpecRuntimeEngine {
     if (functionResolution.arityMismatch) {
       throw RuntimeInterpreterException(
         "user function '${call.name}' expects "
-        '${_formatArities(functionResolution.expectedArities)} argument(s), '
+        '${functionResolution.expectedArityDescriptions.join(" or ")} '
+        'argument(s), '
         'got ${positionalArgs.length} in rule $ruleLabel',
       );
     }
@@ -3288,9 +3296,10 @@ final class LinkedSpecRuntimeEngine {
           ),
         ),
     ];
-    if (values.length != entry.arity) {
+    if (!entry.acceptsArity(values.length)) {
       throw RuntimeInterpreterException(
-        "user function '${entry.name}' expects ${entry.arity} argument(s), "
+        "user function '${entry.name}' expects ${entry.arityExpectation} "
+        'argument(s), '
         'got ${values.length} in rule $ruleLabel',
       );
     }
@@ -3323,6 +3332,13 @@ final class LinkedSpecRuntimeEngine {
     context.clearStores();
     for (var index = 0; index < entry.params.length; index += 1) {
       context.bindUserFunctionParam(entry.params[index], values[index]);
+    }
+    final signature = entry.signature;
+    if (signature != null) {
+      context.bindUserFunctionParam(
+        signature.restParam,
+        values.sublist(signature.minArity),
+      );
     }
 
     try {
@@ -7024,13 +7040,6 @@ Object? _copyValue(Object? value) {
     };
   }
   return value;
-}
-
-String _formatArities(List<int> arities) {
-  if (arities.isEmpty) {
-    return 'no';
-  }
-  return arities.join('/');
 }
 
 String _stringValue(Object? value) {

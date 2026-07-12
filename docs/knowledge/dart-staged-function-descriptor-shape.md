@@ -11,7 +11,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, descriptor, staged-parsing, user-functions, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.5.3 expands dart/test/compiled_spec_test.dart with preserves staged function descriptor shape through runtime. The test builds a spec from spec-returned function_definition nodes, dispatches body_parse_job records through parseSpecWithStagedUserFunctionDefinitionAsts, compiles the result, asserts parsed function order, compiled UserFunctionRegistry bodyParseJobs, descriptor functions records with body_payload/body_parse_job/body_ast, meta.function_order/function_count, and verifies runtime output from the same compiled state."
+evidence: "DART-BACKEND-PARITY.5.3 establishes staged descriptor preservation. FUTURE-PARITY-BACKLOG.4.3.1 adds the exact fixed-v1/variadic-v2 record union and proves typed signatures through descriptor, normalized emitted state, generated-plan execution, and reconstruction."
 reverify: "cd dart && dart test test/compiled_spec_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -33,6 +33,7 @@ The proof asserts:
 - descriptor `meta.function_order` and `meta.function_count` match registry order
 - `LinkedSpecRuntimeEngine` can execute the same compiled state and return stable
   user-function output
+- fixed v1 records expose `params`/`arity`; variadic v2 records replace them with `signature`
 
 This is a shape-preservation proof, not general public `parse_job(...)` authoring
 or full Dart corpus output parity.

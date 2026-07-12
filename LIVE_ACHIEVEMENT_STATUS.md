@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.3.1 — implement Dart variadic functions**
+  (DONE — Julia `.4.3.2` next).
+
+  **Implementation:** Dart's typed v2 signature now survives spec/staged, registry/action, descriptor, native,
+  normalized emitted, generated-plan, and reconstructed execution. Calls are positional-only, preserve fixed v1
+  exactness, enforce v2 minimum arity, and bind a fresh copied rest list after ordered eager evaluation.
+
+  **Proof:** Six neutral contract tests pass all results/shapes, malformed and keyword cases, freshness/ordering,
+  diagnostics, emitted state, generated execution, and reconstruction. The authoritative Dart gate passes strict
+  format/analyze, 190 package tests, 61/61 in both CLI environments, and 105/105 corpus fixtures.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.2.2 — implement Rust variadic functions**
   (DONE — Dart `.4.3.1` next).
 

@@ -32,8 +32,8 @@ preserving line layout, and attaches ordered `FunctionDefinition` records before
 ordinary rule parsing.
 
 `StagedParseJob` preserves the function-body sidecar metadata emitted by the
-spec (`version`, `function_name`, `params`, `arity`, and `diagnostic_owner`) in
-JSON round-trips. The projection APIs remain the pre-dispatch shell boundary:
+spec: fixed v1 jobs carry `params`/`arity`, while variadic v2 jobs carry the exact typed `signature`; both retain
+`version`, `function_name`, and `diagnostic_owner` in JSON round-trips. The projection APIs remain the pre-dispatch shell boundary:
 `parseSpecWithUserFunctionDefinitionAsts(...)` returns functions with preserved
 `body_parse_job` and no automatic `body_ast`. The staged registry added later
 provides `parseSpecWithStagedUserFunctionDefinitionAsts(...)` when callers want

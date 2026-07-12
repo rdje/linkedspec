@@ -1,6 +1,6 @@
 ---
 id: dart-user-function-runtime-execution
-title: Dart runtime executes registered exact-arity user functions
+title: Dart runtime executes registered fixed and variadic user functions
 answers:
   - "does Dart execute user-defined functions"
   - "does Dart resolve user functions before helper fallback at runtime"
@@ -13,7 +13,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, runtime, user-functions, actionir, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.5.2 updates dart/lib/src/runtime/interpreter.dart. LinkedSpecRuntimeEngine now resolves UserFunctionRegistry exact-arity calls before ordinary helper fallback, evaluates arguments eagerly in the caller, tracks active user-function calls, parses/caches function body_source as ActionIR blocks, executes bodies through the value-block evaluator, binds params into fresh function-local scalar/array/hash stores, restores caller stores, feeds returned values into receiver chains, discards standalone call results, diagnoses arity mismatches, and attaches structured recursion diagnostics. test/runtime_interpreter_test.dart covers value calls, receiver continuation, standalone discard, eager args, local-store isolation, array/hash param bindings, direct/mutual recursion, and arity mismatch diagnostics."
+evidence: "DART-BACKEND-PARITY.5.2 establishes registry-first exact calls, eager args, local stores, results, discard, and recursion diagnostics. FUTURE-PARITY-BACKLOG.4.3.1 extends the same path with v2 minimum arity, positional-only calls, and fresh typed rest lists; six neutral contract tests and the complete Dart gate pass."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -21,14 +21,14 @@ Dart user-function runtime execution lives in
 `dart/lib/src/runtime/interpreter.dart`.
 
 `LinkedSpecRuntimeEngine` checks `compiledSpec.functionRegistry.resolveCall(...)`
-inside `_evaluateCall(...)` before the ordinary runtime helper fallback. Exact
-matches execute the registered function; registered wrong-arity calls throw a
+inside `_evaluateCall(...)` before the ordinary runtime helper fallback. Fixed exact
+or variadic minimum matches execute the registered function; registered wrong-arity calls throw a
 runtime arity diagnostic instead of becoming an unknown helper.
 
 Runtime behavior:
 
 - arguments evaluate eagerly in the caller context
-- params bind into fresh function-local scalar stores
+- fixed params and one fresh variadic rest list bind into fresh function-local stores
 - list and map argument values also populate local array/hash stores for wrapper
   and receiver-chain compatibility
 - function bodies execute as ActionIR value blocks parsed from `body_source`

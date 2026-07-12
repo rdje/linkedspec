@@ -269,7 +269,7 @@ parentheses, brace-less bodies, caller-state-mutating functions, recursion,
 closures/lambdas/currying, and function namespaces are future extension topics, not
 current parser/compiler/runtime behavior.
 
-ADR 0030 adopts the next versioned signature, now implemented by Perl and Rust:
+ADR 0030 adopts the next versioned signature, now implemented by Perl, Rust, and Dart:
 
 ```text
 fn collect(prefix, ...items) {
@@ -285,9 +285,11 @@ lock this target. Perl's spec-owned shell emits the v2 record, `LinkedSpec::User
 preserves it through staged payload/job and outward descriptor projection, and generated source evaluates all
 arguments into ordered temporaries before binding fixed values and a new rest array. Rust validates one typed
 signature through parsed/compiled records, staged and public projection, serialized generated source, and native
-or generated-plan execution; its function-local runtime binds the same fresh typed array. Fixed calls still
-require exact arity; variadic calls require at least `min_arity`. Dart, Julia, and Lua remain rollout work, so this
-is implemented on both reference variants but not yet portable across every admitted backend.
+or generated-plan execution; its function-local runtime binds the same fresh typed array. Dart preserves the same
+union through its spec shell, AST/staged jobs, registry/action resolver, descriptor, normalized emitted state, and
+native/generated execution; registered keyword arguments diagnose instead of leaking Dart named-argument rules.
+Fixed calls still require exact arity; variadic calls require at least `min_arity`. Julia and Lua remain rollout
+work, so this is implemented on three variants but not yet portable across every admitted backend.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

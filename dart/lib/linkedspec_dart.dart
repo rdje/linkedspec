@@ -64,6 +64,7 @@ export 'src/ast/spec_ast.dart'
         BlindEdgeBodyElementKind,
         BodyElement,
         BodyElementKind,
+        CallableSignature,
         CodeBlockBodyElementKind,
         ConditionalBodyElementKind,
         EdgeTarget,

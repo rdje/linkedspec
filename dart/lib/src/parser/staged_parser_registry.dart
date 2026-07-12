@@ -581,15 +581,37 @@ void _validateFunctionBodyJob(
       'function ${function.name} body_parse_job function_name does not match',
     );
   }
-  if (job.params != null && !_stringListsEqual(job.params!, function.params)) {
-    throw StagedParserRegistryException(
-      'function ${function.name} body_parse_job params do not match',
-    );
-  }
-  if (job.arity != null && job.arity != function.arity) {
-    throw StagedParserRegistryException(
-      'function ${function.name} body_parse_job arity does not match',
-    );
+  final signature = function.signature;
+  if (signature != null) {
+    if (job.params != null || job.arity != null || job.signature == null) {
+      throw StagedParserRegistryException(
+        'function ${function.name} body_parse_job must store variadic arity '
+        'only in signature',
+      );
+    }
+    if (!_callableSignaturesEqual(job.signature!, signature)) {
+      throw StagedParserRegistryException(
+        'function ${function.name} body_parse_job signature does not match',
+      );
+    }
+  } else {
+    if (job.signature != null) {
+      throw StagedParserRegistryException(
+        'function ${function.name} fixed body_parse_job must not contain '
+        'signature',
+      );
+    }
+    if (job.params != null &&
+        !_stringListsEqual(job.params!, function.params)) {
+      throw StagedParserRegistryException(
+        'function ${function.name} body_parse_job params do not match',
+      );
+    }
+    if (job.arity != null && job.arity != function.arity) {
+      throw StagedParserRegistryException(
+        'function ${function.name} body_parse_job arity does not match',
+      );
+    }
   }
   if (job.text != function.bodySource) {
     throw StagedParserRegistryException(
@@ -650,6 +672,7 @@ FunctionDefinition _withBodyAst(FunctionDefinition function, Object? bodyAst) {
     name: function.name,
     params: function.params,
     arity: function.arity,
+    signature: function.signature,
     bodySource: function.bodySource,
     bodyPayload: function.bodyPayload,
     bodyParseJob: function.bodyParseJob,
@@ -670,6 +693,15 @@ bool _stringListsEqual(List<String> left, List<String> right) {
     }
   }
   return true;
+}
+
+bool _callableSignaturesEqual(CallableSignature left, CallableSignature right) {
+  return left.kind == right.kind &&
+      left.version == right.version &&
+      _stringListsEqual(left.positionalParams, right.positionalParams) &&
+      left.restParam == right.restParam &&
+      left.minArity == right.minArity &&
+      left.maxArity == right.maxArity;
 }
 
 StagedParseJob _placeholderJob(String parserSpecId, String topRule) {

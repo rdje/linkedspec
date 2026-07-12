@@ -946,10 +946,23 @@ final class _ActionContractResolver {
   }) {
     final positionalArgCount = _positionalArgCount(args);
     final keywordArgCount = _keywordArgCount(args);
-    final argCount = positionalArgCount + keywordArgCount;
     final registry = functionRegistry;
     if (surface == 'function' && registry != null) {
-      final resolution = registry.resolveCall(name, argCount);
+      if (registry.hasName(name) && keywordArgCount > 0) {
+        _diagnostics.add(
+          ActionContractDiagnostic(
+            code: 'user_function_keyword_arguments_unsupported',
+            message:
+                "user function '$name' accepts positional arguments only, "
+                'got $keywordArgCount keyword argument(s)',
+            helperName: name,
+            source: source,
+            sourceSpan: sourceSpan,
+          ),
+        );
+        return;
+      }
+      final resolution = registry.resolveCall(name, positionalArgCount);
       if (resolution.matched) {
         _contracts.add(
           ActionResolvedContract(
@@ -966,12 +979,16 @@ final class _ActionContractResolver {
         return;
       }
       if (resolution.arityMismatch) {
+        final registered = registry.lookup(name)!;
+        final expectation = registered.signature == null
+            ? 'arity ${registered.arity}'
+            : registered.arityExpectation;
         _diagnostics.add(
           ActionContractDiagnostic(
             code: 'user_function_arity_mismatch',
             message:
-                "user function '$name' expects arity "
-                '${resolution.expectedArities.join(" or ")}, got $argCount',
+                "user function '$name' expects "
+                '$expectation, got $positionalArgCount',
             helperName: name,
             source: source,
             sourceSpan: sourceSpan,

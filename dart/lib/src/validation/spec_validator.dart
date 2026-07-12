@@ -112,8 +112,25 @@ void _checkFunctionRegistry(SpecFile spec) {
       );
     }
 
+    final signature = function.signature;
+    if (signature != null &&
+        (signature.kind != 'callable_signature' ||
+            signature.version != 1 ||
+            !_stringListsEqual(signature.positionalParams, function.params) ||
+            signature.minArity != function.arity ||
+            signature.minArity != signature.positionalParams.length ||
+            signature.maxArity != null)) {
+      throw SpecValidationException(
+        "user function '$name' has an invalid variadic callable signature",
+      );
+    }
+
     final seenParams = <String>{};
-    for (final param in function.params) {
+    final allParams = [
+      ...function.params,
+      if (signature != null) signature.restParam,
+    ];
+    for (final param in allParams) {
       if (!_isIdentifier(param)) {
         throw SpecValidationException(
           "user function '$name' has invalid parameter '$param'",
@@ -146,6 +163,18 @@ void _checkMalformedRawBodyLines(SpecFile spec) {
       }
     }
   }
+}
+
+bool _stringListsEqual(List<String> left, List<String> right) {
+  if (left.length != right.length) {
+    return false;
+  }
+  for (var index = 0; index < left.length; index += 1) {
+    if (left[index] != right[index]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 void _checkMixedEdges(SpecFile spec) {

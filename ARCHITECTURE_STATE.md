@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Dart now carries ADR 0030's v2 signature through the spec-defined shell, AST/staged jobs,
+  registry/action contracts, public descriptors, native runtime, normalized emitted state, generated-plan
+  execution, and reconstruction. Calls are positional-only, fixed v1 stays exact, v2 enforces its minimum, and
+  extras bind as a fresh typed list in function-local stores after ordered eager evaluation. Six contract tests
+  and the complete 190-test/61x2/105 Dart gate pass. Julia `.4.3.2` is active.
 - `2026-07-12` refresh: Rust now carries ADR 0030's v2 `CallableSignature` through definition AST validation,
   compiled records, exact staged/public projection, serialized generated source, and native/generated-plan
   execution. Calls preserve exact v1 arity, enforce v2 minimum arity, evaluate once left-to-right, and allocate a
