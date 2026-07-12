@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.1` — four-kind stores/access and entry/match reads pass both ABIs.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.0` — complete runtime helper breadth is split by mechanism.
-- recent_context: Lua preserves scalar/array/harray/codeblock values, isolated snapshots/stores, false/null,
-  checked mixed access/assignment, current-edge `retv`, and complete entry/match captures/maps/Unicode positions.
-  Lua 69x2 passes; fixed-width lookbehind is PCRE2-locked on both ABIs and Dart spec.spec fixture passes 1/1.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.0` — scalar/string pure and regex/mutation work are split.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.1` — four-kind stores/access and entry/match reads pass both ABIs.
+- recent_context: `.4.3.2.1` owns pure scalar conversion/string functions/lexical comparisons/receivers; `.4.3.2.2`
+  owns regex matching/replacement, split bridges, flags/capture expansion, and statement mutation. No behavior
+  changed; committed Lua 69x2/full CI stays authoritative. Current Rust regex engine is RGX, not basic `regex`.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`; previous committed HEAD is
-  `ad28d1df LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families`.
+  `LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms`; previous committed HEAD is
+  `8546714e LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2`; scalar/string helper execution is active.
-- next_action: Implement definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/
-  replace, regex match/substitution flags, split bridges, lexical comparisons, mutation, and receiver forms.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1`; pure scalar/string helper execution is active.
+- next_action: Implement scalar conversion, concat/coalesce, definedness/emptiness, trim/case/length, literal
+  substring/prefix/suffix/contains/replace, lexical comparisons, null propagation, and receiver composition.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

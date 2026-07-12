@@ -618,10 +618,55 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.2`
   Status: `active`
   Goal: Implement scalar/string helpers and compatible receiver chains.
+  Children: `.4.3.2.0`, `.4.3.2.1`, `.4.3.2.2`
   Dependencies: `.4.3.1`
   Acceptance: Definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/replace,
     regex match/substitution flags, split bridges, lexical comparisons, scalar statement mutation, and receiver
-    forms match catalog examples; split again if mutation and pure transforms do not remain signoff-sized.
+    forms match catalog examples across the child leaves.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.0`
+  Status: `done`
+  Goal: Split pure scalar evaluation from regex-aware split/substitution and statement mutation before code.
+  Acceptance: The two mechanisms have ordered owners and `.4.3.2.1` is the sole executable frontier.
+  Verification: **PASS 2026-07-11.** Pure scalar/string value dispatch and compatible receivers are owned by
+    `.4.3.2.1`; regex matching/replacement flags, split bridges, and statement-only named mutation are owned by
+    `.4.3.2.2`. No code/capability changed. mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace
+    checks pass; committed `.4.3.1` remains 69/69 on both Lua ABIs with full local CI green.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms`
+
+### `LUA-BACKEND-PARITY.4.3.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.2` combined pure string values/receivers with PCRE replacement, split bridges,
+  flag semantics, and statement-only mutation even though they have different dependencies and failure modes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Pure transformations need only scalar conversion/truth/null rules; regex and
+  split mutation need the native matcher dialect, replacement expansion, named-store intent, and value-versus-
+  statement boundaries. One implementation commit would obscure those contracts.
+- [x] **FIX** — Converted `.4.3.2` into a three-child container: `.0` planning, `.1` pure scalar/string, `.2`
+  regex/split/mutation, leaving the broader `.4.3.9` exhaustive closeout unchanged.
+- [x] **ADDRESSED (verified)** — `.4.3.2.1` is the only active code frontier and every original acceptance item has
+  one ordered owner; no runtime behavior changed.
+- [x] **NO REGRESSION** — Committed `.4.3.1` remains 69/69 on both ABIs/full CI green; docs/governance gates pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, architecture/live docs, changes/notes, and memory agree.
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1`
+  Status: `active`
+  Goal: Implement pure scalar/string helpers, lexical comparisons, aliases, and compatible receiver chains.
+  Dependencies: `.4.3.1`
+  Acceptance: `concat`/`cat`, coalesce families, defined/undefined/empty predicates, trim/case/length, prefix/
+    suffix/contains/remove, literal substring/replace, explicit `str_*` comparisons, stable scalar conversion,
+    null propagation, and function/receiver composition match cross-backend examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.2`
+  Status: `pending`
+  Goal: Implement regex-aware scalar matching/substitution, split bridges, flags, and statement mutation.
+  Dependencies: `.4.3.2.1`
+  Acceptance: `matches`, regex/literal replacement, dual `substr`, scalar/array split bridges, governed flags and
+    capture expansion, pure versus statement-only mutation, invalid-pattern boundaries, and receiver composition
+    match the oracle on both Lua ABIs.
   Verification: `pending`
   Commit: `pending`
 
@@ -846,7 +891,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 13 | `LUA-BACKEND-PARITY.4.2` | `done` | First compiled-rule interpreter passes 66/66 on both runtimes. |
 | 14 | `LUA-BACKEND-PARITY.4.3.0` | `done` | Nine implementation/closeout owners cover the full helper surface. |
 | 15 | `LUA-BACKEND-PARITY.4.3.1` | `done` | Four-kind stores/access/capture reads pass 69/69 on both runtimes. |
-| 16 | `LUA-BACKEND-PARITY.4.3.2` | `active` | Implement scalar/string helpers, mutation, and receiver chains. |
+| 16 | `LUA-BACKEND-PARITY.4.3.2.0` | `done` | Pure scalar and regex/mutation mechanisms have separate owners. |
+| 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `active` | Implement pure scalar/string helpers and receiver chains. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -901,3 +947,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.2` | `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, local results/control, and helper-family split handoff. |
 | `LUA-BACKEND-PARITY.4.3.0` | `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families` | Planning-only ordered split into core values, scalar/string, numeric, array, harray, controls/blocks, stateful capture/cursor, diagnostics, and no-drift. |
 | `LUA-BACKEND-PARITY.4.3.1` | `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers` | Four-kind stores/snapshots, checked access/assignment, complete entry/match reads, and scalar/string handoff. |
+| `LUA-BACKEND-PARITY.4.3.2.0` | `LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms` | Planning-only split of pure scalar evaluation from regex/split/statement mutation. |

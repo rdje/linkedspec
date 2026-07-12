@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.0 — split Lua scalar string mechanisms
+
+Recursively split scalar/string runtime work before code. `.4.3.2.1` owns pure scalar conversion, concat/coalesce,
+definedness/emptiness, trim/case/length, literal substring/prefix/suffix/contains/replace, lexical comparisons, and
+compatible receivers. `.4.3.2.2` owns native-regex matching/replacement, split bridges, flags/capture expansion,
+and pure-versus-statement mutation boundaries.
+
+No runtime behavior or capability changed. The committed `.4.3.1` 69x2/full-CI proof remains authoritative;
+mdBook, Knowledge Map, memory, task-tree, doctrine, and whitespace checks pass. `.4.3.2.1` is next.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.3.1 — add Lua runtime value capture helpers
 
 Centralized runtime scalar/array/harray/codeblock value identity, defensive snapshots, and scalar/named aggregate

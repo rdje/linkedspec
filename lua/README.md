@@ -294,7 +294,8 @@ typed immediate runtime error. The result exposes the direct value, neutral
 one-element output wrapper, byte/code-unit and character cursors, and lifecycle
 events. Helper/value breadth beyond the narrow dispatch-facing evaluator
 remains owned by `.4.3`. That breadth is split before implementation: `.4.3.1`
-now supplies four-kind stores/access and entry/match reads; `.2` scalar/string; `.3`
+now supplies four-kind stores/access and entry/match reads; `.2.1` pure scalar/string and `.2.2` regex/split/
+mutation; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its

@@ -5,6 +5,9 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.2.0` separates pure scalar/string evaluation and receivers from
+  regex-aware replacement/split/statement mutation. `.4.3.2.1` is the sole executable frontier; no behavior or
+  capability changes at this planning boundary.
 - `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.1` adds explicit four-kind runtime identity and copied local
   stores, checked mixed access/assignment, current-edge `retv`, and the complete entry/match read family. Both Lua
   ABIs pass 69 tests. A direct portability audit confirms `spec.spec` uses fixed-width negative lookbehind;

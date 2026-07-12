@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.0 — separate pure strings from regex mutation):
+  Pure scalar conversion and string functions are deterministic value dispatch over `.4.3.1` stores. Regex-aware
+  substitution and split mutation additionally depend on dialect flags, replacement expansion, native engine
+  errors, syntactic target identity, and statement context. Keep them in ordered commits so false/null/coalesce and
+  receiver rules can be signed off independently from mutation. The global `.4.3.9` reverse coverage gate remains
+  the final defense against a name being recognized but never executed.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.3.1 — make host table intent and absence explicit):
   Lua tables cannot distinguish array, harray, codeblock, or incidental objects by shape. Route every runtime value
   through typed identity and copy helpers; use separate scalar/array/harray stores and restore them per rule. Treat

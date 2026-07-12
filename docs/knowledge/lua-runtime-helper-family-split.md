@@ -25,7 +25,8 @@ owners under `docs/tasks/LUA-BACKEND-PARITY.md` are:
 
 1. `.4.3.1`: scalar/array/harray/codeblock/null value identity, local stores,
    structural access/assignment, snapshots, and entry/match reads;
-2. `.4.3.2`: scalar/string pure and mutating helpers plus receiver chains;
+2. `.4.3.2`: scalar/string, recursively split into `.4.3.2.1` pure values/
+   comparisons/receivers and `.4.3.2.2` regex/split/statement mutation;
 3. `.4.3.3`: numeric helpers, aliases, symbol callees, reducers, and receivers;
 4. `.4.3.4`: array construction, transforms, mutation, bridges, child push, and
    numeric terminals;

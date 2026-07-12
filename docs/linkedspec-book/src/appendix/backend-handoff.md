@@ -594,8 +594,9 @@ numeric; arrays; harrays; codeblocks/controls/generic trailing blocks/tree
 callbacks; capture/mark/input/cursor state; diagnostic output; then exhaustive
 239-name and documentation no-drift. Each leaf depends only on earlier value
 mechanisms and may split again before code. This keeps recognition of a helper
-name distinct from executable parity. `.4.3.1` has since closed core values;
-scalar/string `.4.3.2` is the single current runtime frontier.
+name distinct from executable parity. `.4.3.1` has since closed core values.
+Scalar/string is recursively split: pure value transforms/comparisons/receivers
+under active `.4.3.2.1`, then regex/split/statement mutation under `.4.3.2.2`.
 
 Do not infer regex support from the host language name. Lua's native patterns
 do not support lookbehind, but LinkedSpec's PUC Lua and LuaJIT modules both use

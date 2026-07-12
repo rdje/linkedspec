@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.0 — split Lua scalar string mechanisms**
+  (DONE — pure value and regex/mutation owners are durable; `.4.3.2.1` next).
+
+  **Plan:** Pure scalar/string helpers, lexical comparisons, and receivers land before regex matching/replacement,
+  split bridges, flags, and statement-only mutation. Both remain under the original `.4.3.2` acceptance.
+
+  **Proof:** No code changed. Committed `.4.3.1` remains 69x2/full-CI green; mdBook, KM, memory, task/doctrine, and
+  whitespace checks pass.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.3.1 — add Lua runtime value capture helpers**
   (DONE — core four-kind runtime passes both ABIs; scalar/string `.4.3.2` next).
 
