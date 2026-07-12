@@ -1,4 +1,5 @@
 local action_ast = require("linkedspec.action_ast")
+local action_contracts = require("linkedspec.action_contracts")
 local action_parser = require("linkedspec.action_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
@@ -241,6 +242,252 @@ local function match_line_column(one, at_end)
   return matching.line_column_at_byte_offset(one.input, at_end and one.byte_end or one.byte_start)
 end
 
+local PURE_STRING_HELPERS = {
+  cat = true,
+  contains_substr = true,
+  ends_with = true,
+  is_defined = true,
+  is_empty = true,
+  is_nonempty = true,
+  is_undefined = true,
+  length = true,
+  replace_substr = true,
+  rm_prefix = true,
+  rm_suffix = true,
+  starts_with = true,
+  substr = true,
+  trim = true,
+}
+
+local TERMINAL_STRING_HELPERS = {
+  contains_substr = true,
+  ends_with = true,
+  is_defined = true,
+  is_empty = true,
+  is_nonempty = true,
+  is_undefined = true,
+  length = true,
+  starts_with = true,
+}
+
+local function is_string_comparison(name)
+  return name == "str_eq" or name == "str_ne" or name == "str_gt" or name == "str_ge" or
+    name == "str_lt" or name == "str_le"
+end
+
+local function is_pure_string_helper(name)
+  return PURE_STRING_HELPERS[name] or is_string_comparison(name)
+end
+
+local function stable_number_string(value)
+  if value == 0 then return "0" end
+  if value % 1 == 0 then return string.format("%.0f", value) end
+  return tostring(value)
+end
+
+local function scalar_string(value, null_as_empty)
+  if value == json.null then return null_as_empty and "" or nil end
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" or type(value) == "table" then
+    return null_as_empty and "" or nil
+  end
+  if type(value) == "boolean" then return value and "1" or "0" end
+  if type(value) == "number" then return stable_number_string(value) end
+  if type(value) == "string" then return value end
+  return nil
+end
+
+local function decode_codepoint(value, byte_index)
+  local first = value:byte(byte_index)
+  if first <= 0x7F then return first, 1 end
+  local second = value:byte(byte_index + 1)
+  if first <= 0xDF then return (first - 0xC0) * 0x40 + second - 0x80, 2 end
+  local third = value:byte(byte_index + 2)
+  if first <= 0xEF then
+    return (first - 0xE0) * 0x1000 + (second - 0x80) * 0x40 + third - 0x80, 3
+  end
+  local fourth = value:byte(byte_index + 3)
+  return (first - 0xF0) * 0x40000 + (second - 0x80) * 0x1000 +
+    (third - 0x80) * 0x40 + fourth - 0x80, 4
+end
+
+local function is_unicode_whitespace(codepoint)
+  return (codepoint >= 0x0009 and codepoint <= 0x000D) or codepoint == 0x0020 or codepoint == 0x0085 or
+    codepoint == 0x00A0 or codepoint == 0x1680 or (codepoint >= 0x2000 and codepoint <= 0x200A) or
+    codepoint == 0x2028 or codepoint == 0x2029 or codepoint == 0x202F or codepoint == 0x205F or
+    codepoint == 0x3000
+end
+
+local function trim_unicode(value)
+  local first_content
+  local last_content_end = 0
+  local byte_index = 1
+  while byte_index <= #value do
+    local codepoint, width = decode_codepoint(value, byte_index)
+    if not is_unicode_whitespace(codepoint) then
+      first_content = first_content or byte_index
+      last_content_end = byte_index + width - 1
+    end
+    byte_index = byte_index + width
+  end
+  if not first_content then return "" end
+  return value:sub(first_content, last_content_end)
+end
+
+local function runtime_integer(value)
+  if type(value) == "number" and value % 1 == 0 then return value end
+  if type(value) == "string" and value:match("^-?%d+$") then return tonumber(value) end
+  return nil
+end
+
+local function value_length(value)
+  if value == json.null then return json.null end
+  local kind = json.kind(value)
+  if kind == "array" then return #value end
+  if kind == "harray" then
+    local count = 0
+    for _ in pairs(value) do count = count + 1 end
+    return count
+  end
+  local text = scalar_string(value, false)
+  if text == nil then return json.null end
+  return matching.byte_offset_to_char_offset(text, #text)
+end
+
+local function is_empty_value(value)
+  if value == json.null then return true end
+  if type(value) == "string" then return value == "" end
+  local kind = json.kind(value)
+  if kind == "array" then return #value == 0 end
+  if kind == "harray" then return next(value) == nil end
+  return false
+end
+
+local function first_or_null(values)
+  if #values == 0 then return json.null end
+  return values[1]
+end
+
+local function string_predicate(values, predicate)
+  if #values < 2 then return 0 end
+  local value = scalar_string(values[1], false)
+  local needle = scalar_string(values[2], true)
+  if value == nil or needle == nil then return 0 end
+  return predicate(value, needle) and 1 or 0
+end
+
+local function replace_literal(value, old_value, new_value)
+  if old_value == "" then return value end
+  local result = {}
+  local position = 1
+  while true do
+    local start_at, end_at = value:find(old_value, position, true)
+    if not start_at then
+      result[#result + 1] = value:sub(position)
+      break
+    end
+    result[#result + 1] = value:sub(position, start_at - 1)
+    result[#result + 1] = new_value
+    position = end_at + 1
+  end
+  return table.concat(result)
+end
+
+local function evaluate_pure_string_helper(name, values)
+  if name == "cat" then
+    local parts = {}
+    for index, value in ipairs(values) do
+      local part = scalar_string(value, true)
+      if part == nil then return json.null end
+      parts[index] = part
+    end
+    return table.concat(parts)
+  elseif name == "contains_substr" then
+    return string_predicate(values, function(value, needle) return value:find(needle, 1, true) ~= nil end)
+  elseif name == "ends_with" then
+    return string_predicate(values, function(value, suffix)
+      return suffix == "" or value:sub(-#suffix) == suffix
+    end)
+  elseif name == "is_defined" then
+    return #values > 0 and values[1] ~= json.null
+  elseif name == "is_empty" then
+    return is_empty_value(first_or_null(values))
+  elseif name == "is_nonempty" then
+    return not is_empty_value(first_or_null(values))
+  elseif name == "is_undefined" then
+    return #values == 0 or values[1] == json.null
+  elseif name == "length" then
+    return value_length(first_or_null(values))
+  elseif name == "replace_substr" then
+    if #values < 3 then return json.null end
+    local value = scalar_string(values[1], false)
+    local old_value = scalar_string(values[2], true)
+    local new_value = scalar_string(values[3], true)
+    if value == nil or old_value == nil or new_value == nil then return json.null end
+    return replace_literal(value, old_value, new_value)
+  elseif name == "rm_prefix" or name == "rm_suffix" then
+    if #values < 2 then return json.null end
+    local value = scalar_string(values[1], false)
+    local edge = scalar_string(values[2], true)
+    if value == nil or edge == nil then return json.null end
+    if name == "rm_prefix" and value:sub(1, #edge) == edge then return value:sub(#edge + 1) end
+    if name == "rm_suffix" and (edge == "" or value:sub(-#edge) == edge) then
+      return edge == "" and value or value:sub(1, #value - #edge)
+    end
+    return value
+  elseif name == "starts_with" then
+    return string_predicate(values, function(value, prefix) return value:sub(1, #prefix) == prefix end)
+  elseif name == "substr" then
+    if #values < 2 or values[1] == json.null or values[2] == json.null then return json.null end
+    local value = scalar_string(values[1], false)
+    if value == nil then return json.null end
+    local start = math.max(0, runtime_integer(values[2]) or 0)
+    local width
+    if #values >= 3 and values[3] ~= json.null then width = math.max(0, runtime_integer(values[3]) or 0) end
+    local start_byte = matching.char_offset_to_byte_offset(value, start)
+    local end_byte = width and matching.char_offset_to_byte_offset(value, start + width) or #value
+    return value:sub(start_byte + 1, end_byte)
+  elseif name == "trim" then
+    local value = scalar_string(first_or_null(values), false)
+    return value == nil and json.null or trim_unicode(value)
+  elseif is_string_comparison(name) then
+    if #values < 2 then return json.null end
+    local left = scalar_string(values[1], false)
+    local right = scalar_string(values[2], false)
+    if left == nil or right == nil then return json.null end
+    if name == "str_eq" then return left == right end
+    if name == "str_ne" then return left ~= right end
+    if name == "str_gt" then return left > right end
+    if name == "str_ge" then return left >= right end
+    if name == "str_lt" then return left < right end
+    return left <= right
+  end
+  fail("unsupported pure string helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
+local function coalesce_accepts(value, require_nonempty)
+  return value ~= json.null and (not require_nonempty or type(value) ~= "string" or value ~= "")
+end
+
+local function evaluate_coalesce(engine, expr, ctx, accumulator, edge_state, receiver)
+  local require_nonempty = action_contracts.canonical_action_helper_name(expr.name) == "coalesce_nonempty"
+  if receiver ~= nil and coalesce_accepts(receiver, require_nonempty) then return copy_value(receiver) end
+  for _, arg in ipairs(expr.args) do
+    local value = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+    if coalesce_accepts(value, require_nonempty) then return copy_value(value) end
+  end
+  return json.null
+end
+
+local function evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, receiver)
+  local values = {}
+  if receiver ~= nil then values[1] = receiver end
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+  return evaluate_pure_string_helper(action_contracts.canonical_action_helper_name(expr.name), values)
+end
+
 local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
   local entry = name:sub(1, 6) == "entry_"
   local one
@@ -276,7 +523,12 @@ local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_
 end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
-  local name = expr.name
+  local name = action_contracts.canonical_action_helper_name(expr.name)
+  if name == "coalesce" or name == "coalesce_nonempty" then
+    return evaluate_coalesce(engine, expr, ctx, accumulator, edge_state, nil)
+  elseif is_pure_string_helper(name) then
+    return evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, nil)
+  end
   if name == "return" then
     local value = json.null
     if expr.args[1] then
@@ -486,16 +738,25 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   if kind == "call" then return evaluate_call(engine, expr, ctx, accumulator, edge_state) end
   if kind == "fluent_chain" then
     local value = evaluate_expr(engine, expr.receiver, ctx, accumulator, edge_state)
-    for _, call in ipairs(expr.calls) do
+    for index, call in ipairs(expr.calls) do
       local call_expr = { kind = "call", name = call.method, args = call.args }
-      if call.method == "push" and #call.args == 0 then
+      local canonical_name = action_contracts.canonical_action_helper_name(call.method)
+      if canonical_name == "push" and #call.args == 0 then
         accumulator[#accumulator + 1] = copy_value(value)
-      elseif call.method == "return" then
+      elseif canonical_name == "return" then
         local returned = value
         if #call.args > 0 then
           returned = evaluate_expr(engine, call.args[1].value, ctx, accumulator, edge_state)
         end
         flow("return", returned)
+      elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
+        value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
+      elseif is_pure_string_helper(canonical_name) then
+        value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
+        if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
+            index < #expr.calls then
+          return json.null
+        end
       else
         value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
       end

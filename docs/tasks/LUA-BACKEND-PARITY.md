@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (regex/match-state `.4.1` closed; rule interpreter `.4.2` active)
+- Last updated: `2026-07-11` (deterministic non-case scalar/string helpers `.4.3.2.1.1` complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -653,7 +653,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.2.1`
   Status: `active`
   Goal: Implement pure scalar/string helpers, lexical comparisons, aliases, and compatible receiver chains.
-  Children: `.4.3.2.1.0`, `.4.3.2.1.1`, `.4.3.2.1.2`
+  Children: `.4.3.2.1.0`, `.4.3.2.1.1`, `.4.3.2.1.2`, `.4.3.2.1.3`
   Dependencies: `.4.3.1`
   Acceptance: `concat`/`cat`, coalesce families, defined/undefined/empty predicates, trim/case/length, prefix/
     suffix/contains/remove, literal substring/replace, explicit `str_*` comparisons, stable scalar conversion,
@@ -675,22 +675,37 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.0 - split Unicode casing parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement deterministic pure scalar/string helpers and compatible receiver chains except case conversion.
   Dependencies: `.4.3.2.1.0`
   Acceptance: `cat`, coalesce families, defined/undefined/empty predicates, trim/length, prefix/suffix/contains/remove,
     literal substring/replace, explicit `str_*` comparisons, stable scalar conversion, null propagation, lazy fallback,
     and function/receiver composition match cross-backend examples on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Lua now executes lazy `coalesce`/`coalesce_nonempty`, `cat`, definedness/
+    emptiness, Unicode-whitespace trim and codepoint length/substrings, literal prefix/suffix/contains/remove/replace,
+    six `str_*` comparisons, reference-style stable scalar text, and compatible receiver chains. Null/false/empty
+    remain distinct; terminal string results reject later string links. One focused test adds 40 assertions and the
+    shared gate passes 70/70 on both PUC Lua and LuaJIT with owned native artifacts removed. Full CI passes phase0
+    `1..1030`, CLI 61x2, capability 60/0/0, KM/book/governance, and cleanup.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.1 - add Lua pure string helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Define and implement one versioned Unicode lower/uppercase contract across every LinkedSpec variant.
   Dependencies: `.4.3.2.1.1`
   Acceptance: Select a canonical Unicode version and simple/full/special-casing policy; add a neutral fixture covering
     ordinary non-ASCII and divergent special cases (`ß`, `İ`, and `ﬃ`); align Perl, Rust, Dart, Julia, PUC Lua, and
     LuaJIT values and receiver chains without confusing Unicode semantics with UTF-8/UTF-16 host representation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.3`
+  Status: `pending`
+  Goal: Define one scalar-to-text coercion contract and align every LinkedSpec variant.
+  Dependencies: `.4.3.2.1.2`
+  Acceptance: A neutral fixture fixes `cat`/string-helper handling for null, array, harray, codeblock, booleans,
+    integral-looking decimals, and nonintegral numbers; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT return identical
+    values and nulls. Retired `concat` remains rejected rather than becoming an accidental alias.
   Verification: `pending`
   Commit: `pending`
 
@@ -928,7 +943,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 16 | `LUA-BACKEND-PARITY.4.3.2.0` | `done` | Pure scalar and regex/mutation mechanisms have separate owners. |
 | 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `active` | Pure strings are split around the Unicode casing parity gap. |
 | 18 | `LUA-BACKEND-PARITY.4.3.2.1.0` | `done` | Measured three host policies and split deterministic helpers from casing. |
-| 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `active` | Implement deterministic non-case pure scalar/string helpers. |
+| 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `done` | Deterministic non-case strings pass 70/70 on both Lua ABIs. |
+| 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `active` | Define and align the versioned Unicode casing contract. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The Lua runtime recognized pure string calls but raised `unsupported runtime helper`
+  for all of them, and receiver calls failed because the receiver was not injected as the first helper value.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `lua/src/linkedspec/interpreter.lua` dispatched only narrow control/store/
+  capture calls. It had no pure-helper classifier, lazy fallback evaluator, stable scalar conversion, Unicode
+  codepoint slicing/trim, literal rewrite layer, or receiver-aware dispatch.
+- [x] **FIX** — Added canonical pure-string dispatch with lazy coalescing, false/null-safe coercion, explicit Unicode
+  whitespace and codepoint offsets, literal operations, lexical comparisons, and receiver/terminal-chain handling.
+- [x] **ADDRESSED (verified)** — The new runtime test covers every owned family, Unicode values, lazy skipped failure,
+  function/receiver equivalence, terminal continuation, null propagation, and Lua 5.1/5.4 identity.
+- [x] **NO REGRESSION** — 70/70 tests pass under separately built PUC Lua and LuaJIT PCRE2 modules; full CI passes.
+- [x] **LOCKSTEP** — Lua README, mdBook/status, task/index/roadmaps, KM, live docs, changes/notes, and memory agree.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.0` Acceptance Checklist
 

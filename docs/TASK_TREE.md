@@ -640,6 +640,10 @@ Index note 2026-07-11: active `LUA-BACKEND-PARITY.4.3.2.1.0` measured a previous
 contract gap: Perl/Rust, Dart, and Julia disagree on special cases such as `ß`, `İ`, and `ﬃ`. Deterministic non-case
 pure helpers move to `.4.3.2.1.1`; `.4.3.2.1.2` owns a versioned all-variant casing decision and implementation.
 
+Index note 2026-07-11: `LUA-BACKEND-PARITY.4.3.2.1.1` is done at 70/70 on PUC Lua and LuaJIT. Lazy coalesce,
+non-case scalar/string helpers, Unicode trim/length/substrings, lexical comparisons, and receiver chains execute.
+Unicode casing `.4.3.2.1.2` is active; measured scalar-to-text host drift follows under `.4.3.2.1.3`.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

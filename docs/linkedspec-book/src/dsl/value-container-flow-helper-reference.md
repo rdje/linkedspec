@@ -536,6 +536,10 @@ representations. Ordinary non-ASCII transformations work today, but special casi
 LinkedSpec contract: the current host runtimes disagree for values such as `ß`, `İ`, and `ﬃ`. Until the tracked
 all-variant casing contract lands, do not depend on those special-case results in portable specs.
 
+The variants also do not yet share one edge-case scalar-to-text coercion rule for `cat` and other string helpers:
+null/containers, booleans, and integral-looking decimals expose host differences. Pass explicit strings when
+portable output spelling matters until the tracked neutral coercion fixture and all-variant alignment land.
+
 Examples:
 
 ```text

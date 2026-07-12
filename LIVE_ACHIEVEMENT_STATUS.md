@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.1.1 — add Lua pure string helpers**
+  (DONE — 70/70 on both Lua ABIs; Unicode casing `.1.2` next).
+
+  **Implementation:** Lazy coalesce, cat, definedness/emptiness, Unicode trim/length/substrings, literal string
+  operations, six lexical comparisons, null-safe scalar conversion, and receiver/terminal chains now execute.
+
+  **Proof:** PUC Lua 70/70 and LuaJIT 70/70 pass with 40 focused assertions in the new test; full local CI passes
+  phase0 `1..1030`, CLI 61x2, capability 60/0/0, doctrines, KM, mdBook, and owned-artifact cleanup.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.1.0 — split Unicode casing parity**
   (DONE — deterministic non-case helpers `.1` are next; versioned all-variant casing is `.2`).
 

@@ -2166,6 +2166,104 @@ Top::
   assert_equal(result.value.col, 1, "absent column origin")
 end)
 
+test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
+  local source = [[
+Top::
+ /x/
+ I {
+   raw = " node-name_end "
+ }
+ E {
+   return({
+     "cat" : cat("n=", 2, false, undef),
+     "cat_negative_zero" : cat(-0.0),
+     "cat_aggregate_empty" : cat("x", [1], { "a" : 1 }, "y"),
+     "coalesce_false" : coalesce(undef, false, "bad"),
+     "coalesce_nonempty_zero" : coalesce_nonempty("", 0, "bad"),
+     "coalesce_lazy" : coalesce("kept", invented_helper()),
+     "defined" : is_defined(false),
+     "undefined" : is_undefined(undef),
+     "empty_null" : is_empty(undef),
+     "empty_array" : is_empty([]),
+     "empty_hash" : is_empty({}),
+     "nonempty_false" : is_nonempty(false),
+     "trim_unicode" : trim("   value   "),
+     "length_unicode" : length("é😀"),
+     "length_array" : length([1, 2]),
+     "length_hash" : length({ "a" : 1, "b" : 2 }),
+     "length_false" : length(false),
+     "starts" : starts_with("éclair", "é"),
+     "ends" : ends_with("éclair", "air"),
+     "contains" : contains_substr("a😀b", "😀"),
+     "replace" : replace_substr("aaaa", "aa", "b"),
+     "replace_empty" : replace_substr("abc", "", "x"),
+     "rm_prefix" : rm_prefix("node_name", "node_"),
+     "rm_suffix" : rm_suffix("name_end", "_end"),
+     "substr_unicode" : substr("aé😀z", 1, 2),
+     "substr_rest" : substr("aé😀z", 2),
+     "substr_negative" : substr("abc", -2, 2),
+     "substr_past" : substr("abc", 9, 2),
+     "str_eq" : str_eq("a", "a"),
+     "str_ne" : str_ne("a", "b"),
+     "str_gt" : str_gt("2", "10"),
+     "str_ge" : str_ge("2", "2"),
+     "str_lt" : str_lt("10", "2"),
+     "str_le" : str_le("2", "2"),
+     "str_null" : str_eq(undef, ""),
+     "chain" : raw.trim().replace_substr("-", "_").rm_prefix("node_").rm_suffix("_end").cat("!"),
+     "receiver_coalesce" : "".coalesce_nonempty(" fallback ").trim(),
+     "terminal_continuation" : "abc".length().trim(),
+     "trim_null" : trim(undef),
+     "replace_null" : replace_substr(undef, "a", "b")
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  )
+  assert_equal(result.value.cat, "n=20", "stable scalar cat conversion")
+  assert_equal(result.value.cat_negative_zero, "0", "stable negative-zero conversion")
+  assert_equal(result.value.cat_aggregate_empty, "xy", "aggregate null-as-empty cat conversion")
+  assert_equal(result.value.coalesce_false, false, "coalesce preserves false")
+  assert_equal(result.value.coalesce_nonempty_zero, 0, "coalesce_nonempty preserves zero")
+  assert_equal(result.value.coalesce_lazy, "kept", "coalesce short-circuits unevaluated fallback")
+  assert_equal(result.value.defined, true, "defined false predicate")
+  assert_equal(result.value.undefined, true, "undefined null predicate")
+  assert_equal(result.value.empty_null, true, "empty null predicate")
+  assert_equal(result.value.empty_array, true, "empty array predicate")
+  assert_equal(result.value.empty_hash, true, "empty hash predicate")
+  assert_equal(result.value.nonempty_false, true, "false is a nonempty scalar")
+  assert_equal(result.value.trim_unicode, "value", "Unicode whitespace trim")
+  assert_equal(result.value.length_unicode, 2, "Unicode scalar length")
+  assert_equal(result.value.length_array, 2, "array length")
+  assert_equal(result.value.length_hash, 2, "harray length")
+  assert_equal(result.value.length_false, 1, "boolean scalar text length")
+  assert_equal(result.value.starts, 1, "literal Unicode prefix")
+  assert_equal(result.value.ends, 1, "literal suffix")
+  assert_equal(result.value.contains, 1, "literal Unicode containment")
+  assert_equal(result.value.replace, "bb", "literal replace all")
+  assert_equal(result.value.replace_empty, "abc", "empty literal replacement source")
+  assert_equal(result.value.rm_prefix, "name", "literal prefix removal")
+  assert_equal(result.value.rm_suffix, "name", "literal suffix removal")
+  assert_equal(result.value.substr_unicode, "é😀", "Unicode substring")
+  assert_equal(result.value.substr_rest, "😀z", "substring remainder")
+  assert_equal(result.value.substr_negative, "ab", "negative substring clamp")
+  assert_equal(result.value.substr_past, "", "past-end substring")
+  assert_equal(result.value.str_eq, true, "string equality")
+  assert_equal(result.value.str_ne, true, "string inequality")
+  assert_equal(result.value.str_gt, true, "lexical string greater")
+  assert_equal(result.value.str_ge, true, "lexical string greater-equal")
+  assert_equal(result.value.str_lt, true, "lexical string less")
+  assert_equal(result.value.str_le, true, "lexical string less-equal")
+  assert_equal(result.value.str_null, json.null, "string comparison null propagation")
+  assert_equal(result.value.chain, "name!", "string receiver composition")
+  assert_equal(result.value.receiver_coalesce, "fallback", "lazy receiver coalesce composition")
+  assert_equal(result.value.terminal_continuation, json.null, "terminal string chain rejection")
+  assert_equal(result.value.trim_null, json.null, "trim null propagation")
+  assert_equal(result.value.replace_null, json.null, "replace null propagation")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.0` — Unicode casing mismatch measured and split before code.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.0` — scalar/string pure and regex/mutation work are split.
-- recent_context: Perl/Rust, Dart, and Julia disagree on special casing (`ß`, `İ`, `ﬃ`); Lua has no portable native
-  Unicode mapper. `.4.3.2.1.1` owns deterministic non-case pure helpers/receivers. `.4.3.2.1.2` owns a versioned
-  Unicode policy, neutral fixture, and all-variant alignment. `.4.3.2.2` still owns regex/split/mutation. No runtime
-  behavior changed; committed Lua 69x2/full CI stays authoritative. Current Rust regex engine is RGX, not `regex`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.1` — deterministic Lua pure strings pass both ABIs.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.0` — Unicode casing mismatch measured and split before code.
+- recent_context: Lua lazy coalesce/cat/definedness/emptiness, Unicode trim/length/substrings, literal operations,
+  six lexical comparisons, null propagation, and receivers pass 70x2. `.4.3.2.1.2` owns versioned Unicode casing;
+  `.1.3` owns measured null/container/boolean/integral-float text-coercion drift across existing hosts. `.4.3.2.2`
+  still owns regex/split/mutation. Current Rust regex engine is RGX, not the basic `regex` crate.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.2.1.0 - split Unicode casing parity`; previous committed HEAD is
-  `1834c9f8 LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms`.
+  `LUA-BACKEND-PARITY.4.3.2.1.1 - add Lua pure string helpers`; previous committed HEAD is
+  `7d394ce6 LUA-BACKEND-PARITY.4.3.2.1.0 - split Unicode casing parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.1`; deterministic non-case pure scalar/string execution is active.
-- next_action: Implement scalar conversion, cat/coalesce, definedness/emptiness, trim/length, literal substring/
-  prefix/suffix/contains/replace, lexical comparisons, null propagation, lazy fallback, and receiver composition.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2`; versioned all-variant Unicode casing is active.
+- next_action: Select the canonical Unicode version and simple/full/special-casing policy, add the neutral divergent-
+  character fixture, and align Perl/Rust/Dart/Julia/PUC Lua/LuaJIT before enabling Lua lowercase/uppercase.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

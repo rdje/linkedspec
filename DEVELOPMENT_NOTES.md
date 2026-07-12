@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.1.1 — keep pure text dispatch explicit and lazy):
+  Lua needs an explicit scalar-to-text boundary because `nil` cannot represent a stored null, tables have four
+  semantic roles, LuaJIT/PUC number rendering can differ, and byte-oriented `string` functions are not Unicode
+  semantics. Evaluate coalesce candidates one at a time, never with a pre-evaluated argument list. Implement literal
+  transforms with plain search, and derive length/substrings from validated UTF-8 codepoint offsets. Receiver calls
+  inject the receiver into the same pure dispatcher; terminal predicate/length results stop the string chain.
+  Treat host coercion agreement as a separate neutral contract: current Perl/Rust and Dart/Julia seams disagree.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.1.0 — specify Unicode casing before copying host APIs):
   Unicode text identity and Unicode case mapping are separate from UTF-8/UTF-16 storage. Host convenience methods
   are not automatically a portable DSL contract: Perl/Rust full mappings, Dart simple mappings, and Julia mappings

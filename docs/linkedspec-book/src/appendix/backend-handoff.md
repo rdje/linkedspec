@@ -624,9 +624,13 @@ zero-based compact groups, named values/presence/maps, Unicode character
 length/start/end, and 1-based start/end line/column helpers. Absent text/group/
 length/span reads are null; absent group/map collections are typed empty
 containers; named presence is zero; missing line/column uses origin `(1, 1)`.
-The same 69-test suite passes PUC Lua and LuaJIT. Scalar/string transformations
-and mutation remain the next leaf rather than being implied by these core
-stores.
+The same 69-test suite passes PUC Lua and LuaJIT. The following non-case pure
+scalar/string leaf adds lazy coalescing, definedness/emptiness, Unicode trim/
+length/substrings, literal transforms/predicates, lexical comparisons, and
+receiver chains. Its expanded suite passes 70/70 on both runtimes. Lowercase/
+uppercase remains separate because the existing hosts disagree on Unicode
+special casing; exact non-string scalar-to-text coercion is separately tracked
+for the same all-variant no-drift reason.
 
 ```lua
 local source = [[

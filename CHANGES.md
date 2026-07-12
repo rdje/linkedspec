@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.1.1 — add Lua pure string helpers
+
+Added canonical pure scalar/string dispatch to the Lua interpreter: lazy `coalesce`/`coalesce_nonempty`, `cat`,
+definedness/emptiness, Unicode White_Space trim, codepoint length/substrings, literal prefix/suffix/containment/
+removal/replacement, six lexical `str_*` comparisons, null propagation, and receiver composition. False, zero,
+null, and empty text stay distinct; terminal string results reject later string links.
+
+One focused test covers every owned family with 40 assertions. The shared gate passes 70/70 under separately built
+PUC Lua and LuaJIT modules and removes its native artifacts. A source audit also exposed pre-existing cross-variant
+scalar-to-text drift; `.4.3.2.1.3` and a Knowledge Map card now own it instead of hiding it in Lua behavior.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.1.0 — split Unicode casing parity
 
 Measured a previously unspecified cross-backend Unicode special-casing gap before implementing Lua strings.

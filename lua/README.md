@@ -12,6 +12,11 @@ available in memory. Native PCRE2 matching supplies stable seek/consume,
 captures, Unicode positions, and entry/local match registers. The first
 compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
 repetition, and direct result channels entirely in memory.
+Deterministic scalar/string helpers now include lazy fallback, definedness/
+emptiness, Unicode trim/length/substrings, literal transforms/predicates,
+lexical comparisons, and receiver chains. Lower/uppercase waits for the
+versioned all-variant Unicode casing decision rather than using byte-only Lua
+case functions.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
@@ -292,10 +297,11 @@ iteration. Rule-local writes are restored when a child returns. `return(...)`
 preserves false as distinct from `json.null`, while `exit_now(status)` raises a
 typed immediate runtime error. The result exposes the direct value, neutral
 one-element output wrapper, byte/code-unit and character cursors, and lifecycle
-events. Helper/value breadth beyond the narrow dispatch-facing evaluator
-remains owned by `.4.3`. That breadth is split before implementation: `.4.3.1`
-now supplies four-kind stores/access and entry/match reads; `.2.1` pure scalar/string and `.2.2` regex/split/
-mutation; `.3`
+events. Helper/value breadth beyond the landed families remains owned by
+`.4.3`. That breadth is split before implementation: `.4.3.1` supplies
+four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
+scalar/string helpers, while `.2.1.2` owns Unicode casing, `.2.1.3` owns exact
+cross-variant scalar-to-text coercion, and `.2.2` owns regex/split/mutation; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
@@ -340,3 +346,34 @@ groups, named captures and presence, copied maps, Unicode character lengths/
 spans, and 1-based start/end line and column values. With no match, text/group/
 length/span reads are `json.null`, groups/maps are typed empty containers,
 presence is `0`, and line/column reads use the `(1, 1)` origin.
+
+Pure string helpers execute through the same evaluator in function and receiver
+form. Coalescing is lazy, preserves `false` and zero, and `coalesce_nonempty`
+skips only null and the empty string. `trim` recognizes Unicode White_Space;
+`length` and `substr` count Unicode codepoints rather than UTF-8 bytes. Prefix,
+suffix, containment, removal, and `replace_substr` are literal operations;
+`str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` are lexical comparisons.
+
+```lua
+local result = linkedspec.runtime_parse(linkedspec.runtime_engine(
+  linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ E {
+   return(" node-name_end ".trim()
+     .replace_substr("-", "_")
+     .rm_prefix("node_")
+     .rm_suffix("_end")
+     .cat("!"))
+ }
+]]))), "x")
+
+assert(result.value == "name!")
+```
+
+Lowercase/uppercase are intentionally not executed by Lua yet: standard Lua's
+`string.lower`/`string.upper` are byte/locale operations, while current host
+variants disagree on Unicode special casing. The task-owned neutral policy and
+fixture land before that behavior. Exact non-string-to-text coercion is also a
+tracked all-variant contract; portable specs should pass strings to `cat` until
+that normalization closes.
