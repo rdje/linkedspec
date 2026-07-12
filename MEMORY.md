@@ -10,16 +10,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.4.2.1` — implemented neutral variadic functions on Perl.
-- latest_commit: `7407a27e` — `FUTURE-PARITY-BACKLOG.4.1 - adopt variadic callable contract`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.4.2.2`; implement the unchanged contract in Rust.
-- next_action: update Rust parsed/compiled/described signatures, registry-first min/exact call resolution, native
-  and generated fresh rest binding, diagnostics, and contract-consuming proof without changing the neutral JSON.
-- current_proof: Perl exact v1 and variadic v2 grammar/staged/outward/generated paths pass the unchanged neutral
-  fixture plus 66 focused assertions, including both grammar owners, fresh arrays, and once-only evaluation. The fixture
-  exposed and corrected Perl array `.length()` address-string drift; scalar length remains unchanged. Full canonical
-  CI passes 61x2 CLI and Phase 0 `1..1030` in 710 seconds after migrating 13 measured stale source locks.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.4.2.2` — implemented neutral variadic functions on Rust.
+- latest_commit: `e8f8fd23` — `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.4.2.2 - implement Rust variadic functions`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.4.3.1`; implement the unchanged contract in Dart.
+- next_action: after committing the clean Rust handoff, update Dart spec projection, registry/action contracts,
+  descriptor, native/generated rest binding, diagnostics, and contract-consuming proof without host rest semantics.
+- current_proof: Rust exact v1 and variadic v2 parsed/compiled/staged/outward/generated paths pass all seven focused
+  contract tests, including fresh arrays, once-only ordered evaluation, invalid forms, and native/generated results.
+  Core verification passes 185 unit + 3 descriptor + 8 type assertions. The fixture corrected Rust array `length`
+  from zero to cardinality while preserving scalar Unicode character count. The authoritative Rust gate passes
+  137 runtime units, interpreter/generated 105-case proofs, 197 integration tests, and both CLI matrices at 61/61.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +29,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; generic final
   codeblock equivalence/`with` `.11.1`; uniform binding and temporary compatibility retirement `.12.1`.
-- blockers: none. in_flight_uncommitted: Perl variadic grammar/registry/lowering/test/docs prepared for verification
-  and commit; generated artifacts clean. Lua scalar numeric `.4.3.3.1.4` remains ready after this activity.
+- blockers: none. in_flight_uncommitted: Rust variadic AST/compiler/descriptor/runtime/test/docs are fully verified
+  and prepared for commit. Lua scalar numeric `.4.3.3.1.4` remains ready after this activity.

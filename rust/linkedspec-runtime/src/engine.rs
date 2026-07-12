@@ -3823,7 +3823,17 @@ impl Engine {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
                 }
                 if let Some(function) = self.spec.find_function(name) {
-                    if args.len() != function.arity {
+                    if let Some(signature) = &function.signature {
+                        if args.len() < signature.min_arity {
+                            return Err(format!(
+                                "user function '{}' expects at least {} argument(s), got {} in rule '{}'",
+                                function.name,
+                                signature.min_arity,
+                                args.len(),
+                                rule_label
+                            ));
+                        }
+                    } else if args.len() != function.arity {
                         return Err(format!(
                             "user function '{}' expects {} argument(s), got {} in rule '{}'",
                             function.name,
@@ -4007,6 +4017,12 @@ impl Engine {
                 RuntimeValue::Hash(values) => ctx.set_hash(param, values),
                 _ => {}
             }
+        }
+        if let Some(signature) = &function.signature {
+            let values = args[signature.min_arity..].to_vec();
+            let rest = RuntimeValue::Array(values.clone());
+            ctx.set_scalar(&signature.rest_param, rest);
+            ctx.set_array(&signature.rest_param, values);
         }
 
         let function_label = format!("function '{}'", function.name);
@@ -6857,9 +6873,14 @@ impl Engine {
             "match_map" | "match_named_map" => Ok(named_map_to_hash(&ctx.match_named)),
             // ── Scalar transforms ──
             "length" => {
-                // Char count (Perl `length`), not byte length.
                 if let Some(arg) = args.first() {
-                    Ok(RuntimeValue::Number(arg.to_str().chars().count() as f64))
+                    let length = match arg {
+                        RuntimeValue::Array(items) => items.len(),
+                        // Scalar text uses character count (Perl `length`), not
+                        // UTF-8 byte count.
+                        value => value.to_str().chars().count(),
+                    };
+                    Ok(RuntimeValue::Number(length as f64))
                 } else {
                     Ok(RuntimeValue::Number(0.0))
                 }

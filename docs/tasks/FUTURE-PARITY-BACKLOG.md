@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl variadic implementation `.4.2.1` complete; Rust `.4.2.2` active).
+- Last updated: `2026-07-12` (Perl/Rust variadic implementation `.4.2` complete; Dart `.4.3.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1959,15 +1959,18 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.4.1 - adopt variadic callable contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement variadic user-function signatures on Perl and Rust.
   Children: `.4.2.1`, `.4.2.2`
   Dependencies: `.4.1`
   Acceptance: Both frontends, registries, staged descriptors, runtimes, generated-source paths, and diagnostics
     consume the unchanged neutral contract while preserving exact-arity fixed functions and purpose-specific
     helper/method arities; focused and complete gates pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Perl `.4.2.1` and Rust `.4.2.2` consume the unchanged neutral contract from
+    their spec-owned frontend through staged/public descriptors and native/generated execution. Fixed v1 exact
+    arity and v2 fixed-prefix/rest semantics, fresh arrays, ordered evaluation, mixed values, receiver chaining,
+    invalid definitions, and diagnostics are recurring-gate covered on both reference variants.
+  Commit: closed by child commits `.4.2.1` and `.4.2.2`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.2.1`
   Status: `done`
@@ -1990,17 +1993,28 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement the unchanged neutral variadic signature in Rust native and generated execution.
   Dependencies: `.4.2.1`
   Acceptance: Parsed/compiled/described signature fields, registry-first call resolution, eager evaluation, typed
     rest-array binding, exact fixed-function diagnostics, recursion fences, receiver continuation, source emission,
     and oracle/full gates match the Perl reference and neutral fixture.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Rust carries one typed `CallableSignature` through parsed and compiled
+    function records, exact v2 staged sidecars, public descriptor projection, serialized compiled state, emitted
+    source, and generated-plan execution. Registered variadic calls enforce the fixed-prefix minimum, eagerly
+    evaluate authored arguments once left-to-right, bind fixed values in fresh local stores, and bind every extra
+    value into a new typed rest array. The contract-consuming seven-test suite passes exact v1/v2 shapes, all
+    neutral results, mixed/empty/fresh rest values, receiver continuation, seven invalid definitions, fixed/minimum
+    arity diagnostics, compiled round-trip, emitted signature text, and generated execution. The fixture exposed a
+    pre-existing Rust drift: generic `length` stringified array values to empty text and returned zero; the shared
+    helper now returns array cardinality while retaining Unicode character count for scalar text. Core tests pass
+    185 + 3 descriptor + 8 type assertions. The authoritative Rust gate passes 137 runtime units, the 105-fixture
+    interpreter oracle, the isolated all-105 generated-source proof, 197 integration tests, all focused runtime
+    suites including 7/7 variadic cases, a fresh primary build, and both CLI environments at 61/61.
+  Commit: `FUTURE-PARITY-BACKLOG.4.2.2 - implement Rust variadic functions`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement variadic user-function signatures on Dart and Julia.
   Children: `.4.3.1`, `.4.3.2`
   Dependencies: `.4.1`, `.4.2`
@@ -2010,7 +2024,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the unchanged neutral variadic signature in Dart native and generated execution.
   Dependencies: `.4.2`
   Acceptance: Spec projection, registry/action contracts, runtime rest binding, descriptors, generated source,
@@ -2377,7 +2391,8 @@ before implementation.
 | 66 | `FUTURE-PARITY-BACKLOG.4.0` | `done` | Exact arity owners and existing open-bound helpers are audited; rollout is split by neutral/backend mechanism. |
 | 67 | `FUTURE-PARITY-BACKLOG.4.1` | `done` | ADR 0030 and a gated neutral contract adopt final `...rest`, typed-array binding, and versioned records. |
 | 68 | `FUTURE-PARITY-BACKLOG.4.2.1` | `done` | Perl preserves v1 fixed records and executes v2 fixed-prefix/rest signatures through generated source. |
-| 69 | `FUTURE-PARITY-BACKLOG.4.2.2` | `active` | Implement the unchanged callable contract in Rust native and generated execution. |
+| 69 | `FUTURE-PARITY-BACKLOG.4.2.2` | `done` | Rust v1/v2 parsed/compiled/described signatures and native/generated rest binding pass the unchanged fixture. |
+| 70 | `FUTURE-PARITY-BACKLOG.4.3.1` | `active` | Implement the unchanged callable contract in Dart native and generated execution. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -2975,8 +2990,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments and
-  105 interpreter fixtures. Executable neutral generated-source contract `.3.1` is active before backend code.
+- None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments,
+  105 interpreter fixtures, and generated-source contract. Perl/Rust variadic signatures are complete; Dart
+  `.4.3.1` is the next callable-signature frontier.
 
 ## Verification Log
 
@@ -3055,6 +3071,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.2.1` | Permanent/focused v2 grammar; registry/staged/outward signatures; generated eager/fresh rest binding; array-aware length; 66 focused assertions; measured Phase 0 source-lock migration; canonical 61x2 CLI plus `1..1030`; docs/KM/governance/mdBook. | PASS. First Phase 0 measured only 13 stale strings in one subtest; after exact migration, the complete gate passes in 710 seconds, fixed v1 shape/diagnostics remain stable, and Rust `.4.2.2` is active. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.2.2` | Typed parsed/compiled/staged/outward signature; native/generated minimum-arity and fresh-rest binding; array-aware length; 196 core tests; 7 focused contract tests; complete Rust 137/105 interpreter/105 generated/197 integration plus focused suites and 61x2 CLI; docs/KM/governance/mdBook. | PASS. Rust consumes the unchanged fixture through native, serialized, emitted, and generated-plan paths; fixed v1 stays exact, parent `.4.2` closes, and Dart `.4.3.1` is active. |
 
 ## Commit Log
 
@@ -3071,6 +3088,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.4.0` | `FUTURE-PARITY-BACKLOG.4.0 - split variadic callable signatures` | Read-only exact-arity seam audit, open-bound helper distinction, and neutral/Perl/Rust/Dart/Julia/Lua rollout split. |
 | `FUTURE-PARITY-BACKLOG.4.1` | `FUTURE-PARITY-BACKLOG.4.1 - adopt variadic callable contract` | ADR 0030, final `...rest`, v1/v2 schema, nine call cases, deterministic fixture/checker, and recurring CI gate. |
 | `FUTURE-PARITY-BACKLOG.4.2.1` | `FUTURE-PARITY-BACKLOG.4.2.1 - implement Perl variadic functions` | Perl v2 grammar/registry/staged/descriptor/generated execution, exact neutral fixture, and array-aware result chaining. |
+| `FUTURE-PARITY-BACKLOG.4.2.2` | `FUTURE-PARITY-BACKLOG.4.2.2 - implement Rust variadic functions` | Rust typed v2 parsed/compiled/staged/descriptor/native/generated execution, exact neutral fixture, and array-aware result chaining. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

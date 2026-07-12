@@ -729,6 +729,14 @@ Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.4.1` adopts ADR 0030 and the recur
 remain exact version 1, variadic definitions use version 2 signature records, and extras bind as a fresh typed
 array. Current capability remains 60/0/0 with variadic behavior future/owned; Perl `.4.2.1` is active.
 
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.4.2.1` is done. Perl preserves exact v1 records and executes v2
+fixed-prefix/rest signatures through generated source; the 66-assertion adapter and canonical gate pass.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.4.2.2` and parent `.4.2` are done. Rust carries the same signature
+through parsed/compiled/public/generated records and passes the seven-test neutral fixture suite plus core gates.
+The fixture corrected latent Rust array `length` drift without changing scalar Unicode length. Dart `.4.3.1` is
+the sole callable-signature frontier.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

@@ -224,8 +224,29 @@ fn check_function_registry(spec: &SpecFile) -> Result<()> {
             )));
         }
 
+        if let Some(signature) = &function.signature {
+            if signature.kind != "callable_signature"
+                || signature.version != 1
+                || signature.positional_params != function.params
+                || signature.min_arity != function.arity
+                || signature.min_arity != signature.positional_params.len()
+                || signature.max_arity.is_some()
+            {
+                return Err(LinkedSpecError::Validation(format!(
+                    "user function '{}' has an invalid variadic callable signature",
+                    function.name
+                )));
+            }
+        }
+
         let mut seen_params = HashSet::new();
-        for param in &function.params {
+        let all_params = function.params.iter().chain(
+            function
+                .signature
+                .iter()
+                .map(|signature| &signature.rest_param),
+        );
+        for param in all_params {
             if !is_identifier(param) {
                 return Err(LinkedSpecError::Validation(format!(
                     "user function '{}' has invalid parameter '{}'",
@@ -700,6 +721,7 @@ mod tests {
             name: name.to_string(),
             params: params.iter().map(|param| param.to_string()).collect(),
             arity: params.len(),
+            signature: None,
             body_source: "return(value)".to_string(),
             body_payload: None,
             body_parse_job: None,

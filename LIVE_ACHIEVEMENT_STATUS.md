@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.2.2 — implement Rust variadic functions**
+  (DONE — Dart `.4.3.1` next).
+
+  **Implementation:** Rust validates one typed v2 signature through parsed/compiled/staged/public/generated state.
+  Registered calls enforce minimum arity, evaluate once left-to-right, and bind a fresh typed rest array in local
+  stores; fixed v1 definitions remain exact.
+
+  **Proof/finding:** Seven neutral contract tests pass every result, shape, invalid definition, diagnostic,
+  freshness/order, serialization/emission, and generated-plan case. The fixture exposed Rust array `length`
+  returning zero; the shared helper now returns cardinality while scalar text retains Unicode character count.
+  The authoritative Rust gate passes 137 runtime units, 105 interpreter fixtures, all-105 generated source, 197
+  integration tests, all focused suites, a fresh primary build, and both CLI environments at 61/61.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.2.1 — implement Perl variadic functions**
   (DONE — Rust `.4.2.2` next).
 

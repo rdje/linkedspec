@@ -7,7 +7,7 @@
 
 use crate::engine::Engine;
 use crate::staged_parser_registry;
-use linkedspec_core::ast::{FunctionDefinition, SourceSpan, SpecFile};
+use linkedspec_core::ast::{CallableSignature, FunctionDefinition, SourceSpan, SpecFile};
 use linkedspec_core::compiler::{compile, compile_with_trace_emitter};
 use linkedspec_core::parser::{parse_spec, parse_spec_with_trace_emitter};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
@@ -287,7 +287,7 @@ fn function_from_ast(
     trace: Option<&mut TraceEmitter>,
 ) -> Result<(FunctionDefinition, AstSpan), String> {
     assert_string_field(object, "kind", "user_function_definition", idx)?;
-    usize_field(object, "version", idx)?;
+    let version = usize_field(object, "version", idx)?;
 
     let name = string_field(object, "name", "function_definition")?.to_string();
     if !is_identifier(&name) {
@@ -296,21 +296,48 @@ fn function_from_ast(
         ));
     }
 
-    let params = string_array_field(object, "params", idx)?;
+    let (params, arity, signature) = match version {
+        1 => {
+            if object.contains_key("signature") {
+                return Err(format!(
+                    "function_definition node {idx} version 1 must not contain signature"
+                ));
+            }
+            let params = string_array_field(object, "params", idx)?;
+            let arity = usize_field(object, "arity", idx)?;
+            if arity != params.len() {
+                return Err(format!(
+                    "function_definition node {idx} arity {arity} does not match {} params",
+                    params.len()
+                ));
+            }
+            (params, arity, None)
+        }
+        2 => {
+            if object.contains_key("params") || object.contains_key("arity") {
+                return Err(format!(
+                    "function_definition node {idx} version 2 must store arity only in signature"
+                ));
+            }
+            let signature = callable_signature_field(object, "signature", idx)?;
+            (
+                signature.positional_params.clone(),
+                signature.min_arity,
+                Some(signature),
+            )
+        }
+        _ => {
+            return Err(format!(
+                "function_definition node {idx} has unsupported version {version}"
+            ));
+        }
+    };
     for param in &params {
         if !is_identifier(param) {
             return Err(format!(
                 "function_definition node {idx} has invalid parameter '{param}'"
             ));
         }
-    }
-
-    let arity = usize_field(object, "arity", idx)?;
-    if arity != params.len() {
-        return Err(format!(
-            "function_definition node {idx} arity {arity} does not match {} params",
-            params.len()
-        ));
     }
 
     let source_text = string_field(object, "source_text", "function_definition")?.to_string();
@@ -338,6 +365,7 @@ fn function_from_ast(
         &name,
         &params,
         arity,
+        signature.as_ref(),
         &body_source,
         body_span,
         idx,
@@ -353,6 +381,7 @@ fn function_from_ast(
         &name,
         &params,
         arity,
+        signature.as_ref(),
         &body_source,
         body_span,
         idx,
@@ -372,6 +401,7 @@ fn function_from_ast(
             name,
             params,
             arity,
+            signature,
             body_source,
             body_payload: Some(body_payload),
             body_parse_job: Some(body_parse_job),
@@ -461,6 +491,7 @@ fn validate_body_payload(
     name: &str,
     params: &[String],
     arity: usize,
+    signature: Option<&CallableSignature>,
     body_source: &str,
     body_span: AstSpan,
     idx: usize,
@@ -478,16 +509,7 @@ fn validate_body_payload(
             "function_definition node {idx} body_payload function_name does not match name"
         ));
     }
-    if string_array_field(object, "params", idx)? != params {
-        return Err(format!(
-            "function_definition node {idx} body_payload params do not match params"
-        ));
-    }
-    if usize_field(object, "arity", idx)? != arity {
-        return Err(format!(
-            "function_definition node {idx} body_payload arity does not match arity"
-        ));
-    }
+    validate_staged_signature(object, "body_payload", params, arity, signature, idx)?;
     if string_field(object, "text", "body_payload")? != body_source {
         return Err(format!(
             "function_definition node {idx} body_payload text does not match body_source"
@@ -507,6 +529,7 @@ fn validate_body_parse_job(
     name: &str,
     params: &[String],
     arity: usize,
+    signature: Option<&CallableSignature>,
     body_source: &str,
     body_span: AstSpan,
     idx: usize,
@@ -529,16 +552,7 @@ fn validate_body_parse_job(
             "function_definition node {idx} body_parse_job function_name does not match name"
         ));
     }
-    if string_array_field(object, "params", idx)? != params {
-        return Err(format!(
-            "function_definition node {idx} body_parse_job params do not match params"
-        ));
-    }
-    if usize_field(object, "arity", idx)? != arity {
-        return Err(format!(
-            "function_definition node {idx} body_parse_job arity does not match arity"
-        ));
-    }
+    validate_staged_signature(object, "body_parse_job", params, arity, signature, idx)?;
     if string_field(object, "text", "body_parse_job")? != body_source {
         return Err(format!(
             "function_definition node {idx} body_parse_job text does not match body_source"
@@ -579,6 +593,49 @@ fn validate_body_parse_job(
         return Err(format!(
             "function_definition node {idx} body_parse_job diagnostic_owner must be function_body"
         ));
+    }
+    Ok(())
+}
+
+fn validate_staged_signature(
+    object: &Map<String, Value>,
+    context: &str,
+    params: &[String],
+    arity: usize,
+    signature: Option<&CallableSignature>,
+    idx: usize,
+) -> Result<(), String> {
+    match signature {
+        Some(expected) => {
+            if object.contains_key("params") || object.contains_key("arity") {
+                return Err(format!(
+                    "function_definition node {idx} {context} version 2 must store arity only in signature"
+                ));
+            }
+            let actual = callable_signature_field(object, "signature", idx)?;
+            if &actual != expected {
+                return Err(format!(
+                    "function_definition node {idx} {context} signature does not match signature"
+                ));
+            }
+        }
+        None => {
+            if object.contains_key("signature") {
+                return Err(format!(
+                    "function_definition node {idx} {context} version 1 must not contain signature"
+                ));
+            }
+            if string_array_field(object, "params", idx)? != params {
+                return Err(format!(
+                    "function_definition node {idx} {context} params do not match params"
+                ));
+            }
+            if usize_field(object, "arity", idx)? != arity {
+                return Err(format!(
+                    "function_definition node {idx} {context} arity does not match arity"
+                ));
+            }
+        }
     }
     Ok(())
 }
@@ -752,6 +809,77 @@ fn string_array_field(
             })
         })
         .collect()
+}
+
+fn callable_signature_field(
+    object: &Map<String, Value>,
+    field: &str,
+    idx: usize,
+) -> Result<CallableSignature, String> {
+    let signature = object
+        .get(field)
+        .and_then(Value::as_object)
+        .ok_or_else(|| {
+            format!("function_definition node {idx} is missing object field '{field}'")
+        })?;
+    let expected_fields = [
+        "kind",
+        "version",
+        "positional_params",
+        "rest_param",
+        "min_arity",
+        "max_arity",
+    ];
+    if signature.len() != expected_fields.len()
+        || signature
+            .keys()
+            .any(|key| !expected_fields.contains(&key.as_str()))
+    {
+        return Err(format!(
+            "function_definition node {idx} field '{field}' has invalid callable signature fields"
+        ));
+    }
+    assert_string_field(signature, "kind", "callable_signature", idx)?;
+    let version = usize_field(signature, "version", idx)?;
+    if version != 1 {
+        return Err(format!(
+            "function_definition node {idx} field '{field}' has unsupported signature version {version}"
+        ));
+    }
+    let positional_params = string_array_field(signature, "positional_params", idx)?;
+    for param in &positional_params {
+        if !is_identifier(param) {
+            return Err(format!(
+                "function_definition node {idx} has invalid positional parameter '{param}'"
+            ));
+        }
+    }
+    let rest_param = string_field(signature, "rest_param", "callable_signature")?.to_string();
+    if !is_identifier(&rest_param) {
+        return Err(format!(
+            "function_definition node {idx} has invalid rest parameter '{rest_param}'"
+        ));
+    }
+    let min_arity = usize_field(signature, "min_arity", idx)?;
+    if min_arity != positional_params.len() {
+        return Err(format!(
+            "function_definition node {idx} min_arity {min_arity} does not match {} positional params",
+            positional_params.len()
+        ));
+    }
+    if signature.get("max_arity") != Some(&Value::Null) {
+        return Err(format!(
+            "function_definition node {idx} field '{field}' max_arity must be null"
+        ));
+    }
+    Ok(CallableSignature {
+        kind: "callable_signature".to_string(),
+        version,
+        positional_params,
+        rest_param,
+        min_arity,
+        max_arity: None,
+    })
 }
 
 fn usize_field(object: &Map<String, Value>, field: &str, idx: usize) -> Result<usize, String> {

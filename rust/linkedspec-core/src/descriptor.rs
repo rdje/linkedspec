@@ -84,8 +84,12 @@ pub struct CompiledFunctionDescriptor {
     pub kind: String,
     pub version: usize,
     pub name: String,
-    pub params: Vec<String>,
-    pub arity: usize,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub params: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub arity: Option<usize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub signature: Option<crate::ast::CallableSignature>,
     pub source_text: String,
     pub source_span: SourceSpan,
     pub body_span: SourceSpan,
@@ -143,10 +147,14 @@ impl CompiledSpec {
                     CompiledFunctionDescriptor {
                         index,
                         kind: "user_function_definition".to_string(),
-                        version: 1,
+                        version: if function.signature.is_some() { 2 } else { 1 },
                         name: function.name.clone(),
-                        params: function.params.clone(),
-                        arity: function.arity,
+                        params: function
+                            .signature
+                            .is_none()
+                            .then(|| function.params.clone()),
+                        arity: function.signature.is_none().then_some(function.arity),
+                        signature: function.signature.clone(),
                         source_text: function.source.clone(),
                         source_span: function.source_span.clone(),
                         body_span: function.body_span.clone(),

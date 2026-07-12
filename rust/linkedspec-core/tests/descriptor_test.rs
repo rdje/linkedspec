@@ -22,6 +22,7 @@ fn projects_backend_neutral_descriptor_shape_and_staged_function_metadata() {
         name: "normalize".to_string(),
         params: vec!["value".to_string()],
         arity: 1,
+        signature: None,
         body_source: "return(trim(value))".to_string(),
         body_payload: Some(json!({
             "kind": "staged_payload",

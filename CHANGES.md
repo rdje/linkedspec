@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.2.2 — implement Rust variadic functions
+
+Implemented ADR 0030's unchanged callable signature in Rust. A typed `CallableSignature` now flows through parsed
+and compiled user-function records, validation, exact v2 staged sidecars, public descriptor projection, compiled
+JSON, emitted source, and generated-plan execution. Fixed definitions retain their exact v1 `params`/`arity`
+records; v2 descriptors expose only `signature`.
+
+Registered variadic calls enforce their fixed-prefix minimum before evaluation, then evaluate every positional
+argument once left-to-right in caller scope. Fixed values and a newly allocated typed array of extras bind into the
+existing fresh function-local stores. Zero extras produce an empty array; mixed arrays/hashes/booleans/null remain
+individual values. Exact fixed arity, recursion fences, standalone discard, and result receiver continuation are
+unchanged.
+
+Added a seven-test contract consumer covering exact parsed/staged/descriptor unions, all neutral fixture results,
+ordered evaluation, fresh rest mutation, seven malformed definitions, exact/minimum diagnostics, compiled JSON
+round-trip, emitted signature text, and generated-plan execution. The receiver fixture exposed a latent Rust
+helper drift: `length` converted array values to empty text and returned zero. It now returns array cardinality and
+retains Unicode character count for scalar text. Focused verification passes all 196 core/descriptor/type tests
+and 7/7 contract tests. The authoritative Rust gate passes 137 runtime units, the 105-fixture interpreter oracle,
+the isolated all-105 generated-source proof, 197 integration tests, all remaining focused suites, a fresh primary
+build, and both CLI environments at 61/61.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.2.1 — implement Perl variadic functions
 
 Implemented ADR 0030's final `...rest` syntax on the Perl reference. The spec-owned shell emits version-2

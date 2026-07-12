@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.2.2 — normalize internally, preserve the public union):
+  Rust can retain derived fixed-prefix `params` and minimum `arity` inside its AST/compiled structs to reuse the
+  established executor, while public and staged v2 records must expose only the authoritative `signature`. Validate
+  the derived fields against that signature before compilation, serialize the typed signature into generated
+  source, and make the runtime read `min_arity` from it. Bind rest values into both scalar and array views of the
+  fresh function-local store so ordinary value returns and aggregate mutation share one typed array. A neutral
+  result-chain fixture is also a useful semantic probe: it caught Rust's generic `length` treating arrays as text;
+  correct that shared boundary and retain scalar Unicode length rather than special-casing user functions.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.2.1 — lower arguments before binding any parameter):
   A rest parameter is not host splat syntax. Lower every authored argument to a source-ordered temporary first,
   then bind fixed names and allocate a new array from the remaining temporaries. This makes once-only left-to-right

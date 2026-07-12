@@ -225,9 +225,10 @@ Top-level project docs:
 - Run `python3 tools/check_callable_signature_contract.py` to validate the adopted variadic callable contract:
   version-1 fixed functions remain exact; version-2 `fn name(fixed, ...rest) { ... }` signatures bind extras as a
   fresh typed array, accept zero extras, reject keyword/overload/host-splat behavior, and retain purpose-specific
-  fixed versus open-bound helper/method arities. The Perl reference consumes the unchanged fixture through
-  `prove -Iperl t/variadic_user_function_contract.t`; Rust/Dart/Julia rollout remains owned by
-  `FUTURE-PARITY-BACKLOG.4`.
+  fixed versus open-bound helper/method arities. Perl consumes the unchanged fixture through
+  `prove -Iperl t/variadic_user_function_contract.t`; Rust consumes it through
+  `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract`.
+  Dart/Julia rollout remains owned by `FUTURE-PARITY-BACKLOG.4`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

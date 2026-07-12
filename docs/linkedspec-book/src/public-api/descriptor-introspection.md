@@ -218,7 +218,7 @@ model namespaces/modules, overload sets, optional-argument variants, closures, l
 curried/partial applications; those are deferred language-extension topics rather than
 descriptor fields a tool should expect today.
 
-### Variadic descriptor version (Perl reference implemented)
+### Variadic descriptor version (Perl and Rust implemented)
 
 ADR 0030 adopts a versioned union instead of changing the meaning of the current `arity` field. Fixed definitions
 remain version 1 with the exact fields documented above. A variadic definition is version 2 and
@@ -238,10 +238,11 @@ replaces top-level `params`/`arity` with:
 The same `signature` is preserved in the staged body payload and parse job. `max_arity: null` means purposefully
 unbounded; it does not mean unknown. Extras bind as one fresh typed array. Function names remain unique and calls
 remain positional-only, so tools must not infer overloads, defaults, keyword mapping, or host-language splats.
-`capability_conformance/callable_signature_contract.json` is the schema. The Perl reference currently exposes
-this v1/v2 union and its staged records exactly. The existing exact `outward_descriptor_contract.json` remains the
-four-backend fixed-function v1 admission while Rust/Dart/Julia variadic projection is still rolling out; consumers
-must branch on function-record `version`, never on field presence alone.
+`capability_conformance/callable_signature_contract.json` is the schema. Perl and Rust currently expose this v1/v2
+union and its staged records exactly. Rust's typed `CallableSignature` also survives compiled-state serialization,
+source emission, and generated-plan execution. The existing exact `outward_descriptor_contract.json` remains the
+four-backend fixed-function v1 admission while Dart/Julia variadic projection is still rolling out; consumers must
+branch on function-record `version`, never on field presence alone.
 
 ## `meta`
 

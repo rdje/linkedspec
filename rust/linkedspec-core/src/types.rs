@@ -327,6 +327,8 @@ pub struct CompiledUserFunction {
     pub name: String,
     pub params: Vec<String>,
     pub arity: usize,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub signature: Option<crate::ast::CallableSignature>,
     pub body: crate::expr::CodeBlock,
     pub body_source: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]

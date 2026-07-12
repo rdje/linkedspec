@@ -17,8 +17,13 @@ pub struct SpecFile {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FunctionDefinition {
     pub name: String,
+    /// Normalized fixed positional parameters. For variadic definitions this
+    /// mirrors `signature.positional_params` for compiler/runtime use.
     pub params: Vec<String>,
+    /// Normalized minimum arity. For fixed definitions this is exact.
     pub arity: usize,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub signature: Option<CallableSignature>,
     pub body_source: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub body_payload: Option<serde_json::Value>,
@@ -29,6 +34,18 @@ pub struct FunctionDefinition {
     pub source: String,
     pub source_span: SourceSpan,
     pub body_span: SourceSpan,
+}
+
+/// Backend-neutral signature for a variadic user-defined function.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CallableSignature {
+    pub kind: String,
+    pub version: usize,
+    pub positional_params: Vec<String>,
+    pub rest_param: String,
+    pub min_arity: usize,
+    pub max_arity: Option<usize>,
 }
 
 /// 1-based source line span metadata.

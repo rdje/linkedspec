@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Rust now carries ADR 0030's v2 `CallableSignature` through definition AST validation,
+  compiled records, exact staged/public projection, serialized generated source, and native/generated-plan
+  execution. Calls preserve exact v1 arity, enforce v2 minimum arity, evaluate once left-to-right, and allocate a
+  fresh typed rest array in function-local stores. Seven contract tests and 196 core assertions pass. The neutral
+  receiver case exposed and corrected Rust `length` returning zero for arrays; arrays now use cardinality and
+  scalar text retains Unicode character count. The complete Rust gate passes both 105-case interpreter/generated
+  proofs, 197 integration tests, and 61x2 CLI. Dart `.4.3.1` is active.
 - `2026-07-12` refresh: the Perl reference now parses final `...rest`, validates/preserves version-2 signatures
   through staged payload/job and outward descriptors, eagerly evaluates positional arguments once left-to-right,
   and binds extras into a fresh scalar-held array in generated source. The unchanged neutral fixture passes all
