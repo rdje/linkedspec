@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.0 — own Unicode casing as generated language data):
+  Signoff parity cannot depend on a host runtime's Unicode release. Pin Unicode 17.0.0 full Default Case Conversion,
+  generate every backend table from checksum-locked UnicodeData/SpecialCasing/DerivedCoreProperties inputs, and
+  byte-compare regeneration offline. Include default context rules such as Final_Sigma, exclude locale tailoring,
+  and never normalize implicitly. This gives expansions and combining outputs one durable meaning across UTF-8,
+  UTF-16, and host-native string layouts without adding ICU/utf8proc runtime dependencies.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.1.1 — keep pure text dispatch explicit and lazy):
   Lua needs an explicit scalar-to-text boundary because `nil` cannot represent a stored null, tables have four
   semantic roles, LuaJIT/PUC number rendering can differ, and byte-oriented `string` functions are not Unicode

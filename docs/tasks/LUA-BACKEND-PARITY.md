@@ -692,10 +692,62 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2`
   Status: `active`
   Goal: Define and implement one versioned Unicode lower/uppercase contract across every LinkedSpec variant.
+  Children: `.4.3.2.1.2.0`, `.4.3.2.1.2.1`, `.4.3.2.1.2.2`, `.4.3.2.1.2.3`, `.4.3.2.1.2.4`
   Dependencies: `.4.3.2.1.1`
   Acceptance: Select a canonical Unicode version and simple/full/special-casing policy; add a neutral fixture covering
     ordinary non-ASCII and divergent special cases (`ß`, `İ`, and `ﬃ`); align Perl, Rust, Dart, Julia, PUC Lua, and
     LuaJIT values and receiver chains without confusing Unicode semantics with UTF-8/UTF-16 host representation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2.0`
+  Status: `done`
+  Goal: Adopt the signoff Unicode casing policy and split its data/backend rollout before implementation.
+  Dependencies: `.4.3.2.1.1`
+  Acceptance: Record one versioned full-default locale-independent policy, normative data inputs, context behavior,
+    normalization/encoding boundaries, generated-artifact drift gates, and bounded backend rollout owners.
+  Verification: **PASS 2026-07-12.** Director authorized the expert signoff/SOTA route. ADR `0027` pins Unicode
+    17.0.0 Default Case Conversion with full mappings, standard context rules, no locale tailoring, and no implicit
+    normalization. `.1` owns official data/generator/contract; `.2` Perl/Rust; `.3` Dart/Julia; `.4` Lua and final
+    admission. No runtime behavior changed. KM, mdBook, task/roadmap/live docs, memory, doctrines, and whitespace pass.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2.1`
+  Status: `active`
+  Goal: Add the reproducible Unicode 17.0.0 data, generator, neutral contract, fixtures, and drift checker.
+  Dependencies: `.4.3.2.1.2.0`
+  Acceptance: Verified official `UnicodeData.txt`, `SpecialCasing.txt`, and `DerivedCoreProperties.txt` inputs plus
+    license/source hashes generate deterministic lower/upper maps and Cased/Case_Ignorable ranges; the executable
+    neutral fixture covers identity, expansion, combining output, supplementary characters, and Final_Sigma context;
+    regeneration and schema/count/hash checks fail closed without requiring network during ordinary gates.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2.2`
+  Status: `pending`
+  Goal: Align Perl and Rust casing helpers to the generated Unicode 17.0.0 contract.
+  Dependencies: `.4.3.2.1.2.1`
+  Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
+    versions; neutral fixture and focused/full Perl/Rust gates pass without changing null/aggregate boundaries.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2.3`
+  Status: `pending`
+  Goal: Align Dart and Julia casing helpers to the generated Unicode 17.0.0 contract.
+  Dependencies: `.4.3.2.1.2.2`
+  Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
+    versions; the same neutral fixture and focused/full Dart/Julia gates pass with exact strings.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2.4`
+  Status: `pending`
+  Goal: Enable generated Unicode casing on PUC Lua/LuaJIT and admit exact six-variant parity.
+  Dependencies: `.4.3.2.1.2.3`
+  Acceptance: Lua function/receiver lower/uppercase paths use the same generated maps/context rules without native
+    byte/locale casing; both ABIs pass, six-variant fixture outputs are byte-identical UTF-8, full gates/docs/KM pass,
+    and `.4.3.2.1.2` closes before scalar-to-text `.1.3` begins.
   Verification: `pending`
   Commit: `pending`
 
@@ -945,6 +997,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 18 | `LUA-BACKEND-PARITY.4.3.2.1.0` | `done` | Measured three host policies and split deterministic helpers from casing. |
 | 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `done` | Deterministic non-case strings pass 70/70 on both Lua ABIs. |
 | 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `active` | Define and align the versioned Unicode casing contract. |
+| 21 | `LUA-BACKEND-PARITY.4.3.2.1.2.0` | `done` | Unicode 17 full-default policy and rollout owners adopted. |
+| 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `active` | Add verified Unicode data, generator, neutral fixture, and gate. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing host APIs produce three different results for `ß`, `İ`, and `ﬃ`, and do
+  not expose a common Unicode-version guarantee.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The language contract named lower/uppercase but delegated version, full/simple,
+  contextual, locale, and normalization choices to Perl/Rust/Dart/Julia hosts; standard Lua has no Unicode mapper.
+- [x] **FIX** — ADR `0027` adopts Unicode 17.0.0 full Default Case Conversion and a generated, checksum-locked,
+  offline-gated data path shared semantically by every backend.
+- [x] **ADDRESSED (verified)** — Contract/data, Perl+Rust, Dart+Julia, and Lua+six-variant admission have ordered,
+  commit-sized child owners with no host-fallback loophole.
+- [x] **NO REGRESSION** — No runtime or fixture behavior changed; committed Lua 70x2/full-CI proof remains valid.
+- [x] **LOCKSTEP** — ADR/index, task/index, roadmaps, book, KM, live docs, changes/notes, and memory agree.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.1` Acceptance Checklist
 

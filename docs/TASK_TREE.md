@@ -644,6 +644,10 @@ Index note 2026-07-11: `LUA-BACKEND-PARITY.4.3.2.1.1` is done at 70/70 on PUC Lu
 non-case scalar/string helpers, Unicode trim/length/substrings, lexical comparisons, and receiver chains execute.
 Unicode casing `.4.3.2.1.2` is active; measured scalar-to-text host drift follows under `.4.3.2.1.3`.
 
+Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.2.0` adopts Unicode 17.0.0 full Default Case Conversion,
+locale-independent with standard context rules and no implicit normalization. Active `.1` adds verified official
+data/generation/neutral fixtures; `.2` aligns Perl/Rust, `.3` Dart/Julia, and `.4` Lua plus six-variant admission.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

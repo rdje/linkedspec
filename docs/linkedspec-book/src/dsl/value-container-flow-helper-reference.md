@@ -532,9 +532,10 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 | `length(value)` | scalar number or `undef` | measure scalar string length. |
 
 `lowercase` and `uppercase` are Unicode operations, not byte operations; UTF-8, UTF-16, and UTF-32 are only host
-representations. Ordinary non-ASCII transformations work today, but special casing is not yet one portable
-LinkedSpec contract: the current host runtimes disagree for values such as `ß`, `İ`, and `ﬃ`. Until the tracked
-all-variant casing contract lands, do not depend on those special-case results in portable specs.
+representations. The canonical contract is Unicode 17.0.0 full Default Case Conversion, locale-independent, with
+standard context rules and no implicit normalization. Thus `uppercase("ß")` is `"SS"`, `lowercase("İ")` is
+`"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. The generated-table backend rollout is active; until its
+six-variant admission closes, portable specs should not depend on the formerly divergent special cases.
 
 The variants also do not yet share one edge-case scalar-to-text coercion rule for `cat` and other string helpers:
 null/containers, booleans, and integral-looking decimals expose host differences. Pass explicit strings when

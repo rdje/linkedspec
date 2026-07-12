@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.0 — adopt Unicode casing contract**
+  (DONE — verified Unicode data/generation `.1` next).
+
+  **Decision:** ADR `0027` pins Unicode 17.0.0 full Default Case Conversion, locale-independent, with standard
+  contextual rules and no implicit normalization. Four ordered rollout commits prevent host-version drift.
+
+  **Proof:** No behavior changed; task/ADR/roadmap/book/KM/live-state alignment and governance gates pass.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.1.1 — add Lua pure string helpers**
   (DONE — 70/70 on both Lua ABIs; Unicode casing `.1.2` next).
 

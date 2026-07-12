@@ -372,8 +372,8 @@ assert(result.value == "name!")
 ```
 
 Lowercase/uppercase are intentionally not executed by Lua yet: standard Lua's
-`string.lower`/`string.upper` are byte/locale operations, while current host
-variants disagree on Unicode special casing. The task-owned neutral policy and
-fixture land before that behavior. Exact non-string-to-text coercion is also a
+`string.lower`/`string.upper` are byte/locale operations. ADR 0027 now selects
+Unicode 17.0.0 full Default Case Conversion; verified generated data and the
+ordered all-variant rollout land before Lua enables that behavior. Exact non-string-to-text coercion is also a
 tracked all-variant contract; portable specs should pass strings to `cat` until
 that normalization closes.

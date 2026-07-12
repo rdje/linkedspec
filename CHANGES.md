@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.0 — adopt Unicode casing contract
+
+Adopted the signoff casing policy in ADR `0027`: Unicode 17.0.0 full Default Case Conversion, locale-independent,
+including standard contextual rules and excluding locale tailoring or implicit normalization. Unicode scalar text
+is semantic; UTF-8/UTF-16/UTF-32 remain boundary representations.
+
+Split rollout into verified official data/generation/neutral fixtures, Perl+Rust, Dart+Julia, and Lua+six-variant
+admission commits. No runtime behavior changed; the committed Lua 70x2/full-CI proof remains authoritative.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.1.1 — add Lua pure string helpers
 
 Added canonical pure scalar/string dispatch to the Lua interpreter: lazy `coalesce`/`coalesce_nonempty`, `cat`,
