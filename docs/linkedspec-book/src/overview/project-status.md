@@ -61,13 +61,12 @@ Three backbone items tracked major structural modernization — all done:
   query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
   resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that
   model; backend AST/IR layouts and transport-specific behavior are explicitly outside the public contract.
-- **Generic trailing codeblock correction** - parked `.11.1` supersedes the narrow abstraction chosen by the
-  closed `SPEC-FORMAT-TERSE.14` MVP. Current Perl/Rust/Dart/Julia implementations support named `with` and tree
-  traversal block surfaces, not generic equivalence. The intended four-kind model is scalar, array, harray/hash,
-  and codeblock; for a signature with a final codeblock, `call(args) { block }` and
-  `call(args, { block })` must become the same call in every backend. The design will decide whether `with` remains
-  an ordinary block-taking helper or is removed. Lua parses the generic shape but has no executable trailing-block
-  helper semantics yet.
+- **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
+  closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
+  final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The
+  exact `{|` prefix distinguishes them from `{}`/`{ key : value }` harrays and eager `{ statements }` block
+  expressions. `with` remains an ordinary block-taking helper. Current implementations still support only their
+  named immediate block surfaces; neutral schema/fixtures `.11.2` are active before backend behavior changes.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

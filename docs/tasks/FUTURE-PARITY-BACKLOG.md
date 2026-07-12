@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (callable extension `.4` closed; Lua numeric `.4.3.3.1.4` resumes).
+- Last updated: `2026-07-12` (callable-codeblock design `.11.1` settled; neutral contract `.11.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2270,8 +2270,8 @@ before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.11`
   Status: `active`
-  Goal: Correct trailing code blocks from the narrow `with` MVP to the language's generic final-codeblock argument model.
-  Children: `.11.0`, `.11.1`
+  Goal: Make codeblock a first-class callable value and correct trailing blocks to the generic final-codeblock model.
+  Children: `.11.0`, `.11.1`, `.11.2`, `.11.3`, `.11.4`, `.11.5`, `.11.6`, `.11.7`
   Acceptance: The director's four-kind model—scalar, array, harray, and codeblock—is durable; a callable signature,
     not a parser hard-code for a particular helper name, decides whether its final argument may be a codeblock;
     `call(args) { block }` is semantically equivalent to `call(args, { block })`, including receiver methods and
@@ -2293,7 +2293,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.1`
-  Status: `pending`
+  Status: `done`
   Goal: Design and split generic final-codeblock argument parity before implementation.
   Acceptance: Define the four value kinds precisely, including whether public terminology is `harray` or the
     current `hash`; define the callable-signature declaration for final `codeblock`; make attached and
@@ -2301,8 +2301,146 @@ before implementation.
     context, receiver behavior, arity and non-final diagnostics, and hash-literal disambiguation; decide whether
     `with` remains as an ordinary helper, is migrated, or is removed; inventory every existing block-taking helper
     and method; split reference plus Rust/Dart/Julia/Lua parity and neutral conformance fixtures before code.
+  Verification: **PASS 2026-07-12.** The director selected `{|args| ...}` over constructor/arrow/fn alternatives
+    and selected dynamic caller context without lexical capture for the initial contract. ADR 0031 fixes exact
+    `{|` prefix disambiguation from `{}`/`{ key : value }` harrays and `{ statements }` immediate blocks; `{|| ...}`
+    is the zero-parameter literal and final `...rest` reuses ADR 0030. Codeblock construction stores typed
+    signature/body/source only and executes nothing. `cb(args)` evaluates positional arguments once left-to-right,
+    installs copied parameter/rest values as temporary bindings, executes against the caller's current nonparameter
+    stores, restores parameter names, returns the block-local result, and rejects keyword calls, non-codeblock
+    values, and recursion. Static helpers/controls/user functions retain resolution precedence over variable calls.
+    `with` remains an ordinary block-taking helper. Neutral contract, Perl, Rust, Dart, Julia, and Lua-routing/
+    closeout leaves are split before behavior code; callable checker, governance checks, and mdBook build pass.
+  Commit: `FUTURE-PARITY-BACKLOG.11.1 - design callable codeblock literals`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.2`
+  Status: `active`
+  Goal: Adopt a backend-neutral callable-codeblock syntax, AST/signature schema, and executable fixture.
+  Dependencies: `.11.1`
+  Acceptance: ADR 0031's `{|params| body }` / `{|| body }` syntax, final `...rest`, exact prefix disambiguation,
+    deferred construction, dynamic caller context, temporary copied params, ordered positional calls, block-local
+    return, result chaining/discard, recursion/non-callable/keyword diagnostics, static-name precedence, contextual
+    final-block sugar, and retained `with` behavior are machine-readable and independently checked before runtime
+    changes. The contract distinguishes explicit callable literals from harrays and immediate block expressions and
+    defines canonical AST/descriptor/generated-state fields without host closure/function objects.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.3`
+  Status: `pending`
+  Goal: Implement callable codeblock literals and generic final-codeblock calls on the Perl reference.
+  Children: `.11.3.1`, `.11.3.2`, `.11.3.3`, `.11.3.4`
+  Dependencies: `.11.2`
+  Acceptance: Perl consumes the unchanged neutral contract without broad host coderef fallback or lexical capture;
+    current hash/immediate-block semantics, user functions, helpers, receiver calls, and generated-source behavior
+    remain stable.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.3.1`
+  Status: `pending`
+  Goal: Parse and lower typed callable-codeblock literal/signature values on Perl.
+  Acceptance: `{|...|...}` is a dedicated typed AST value with exact spans/body/signature; assignment, copying,
+    function arguments/results, and generated state preserve it without executing its body or confusing brace forms.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.3.2`
+  Status: `pending`
+  Goal: Execute Perl codeblock-variable calls with dynamic caller context.
+  Acceptance: `cb(args)` resolution, ordered evaluation, copied temporary params/rest, restoration, caller-visible
+    nonparameter mutation, block-local return, chain/discard, recursion and typed failures match the neutral fixture.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.3.3`
+  Status: `pending`
+  Goal: Generalize Perl final-codeblock call syntax through callable signatures.
+  Acceptance: Attached and parenthesized contextual final blocks normalize to the same callable-codeblock AST;
+    helper/user-function/receiver signatures—not `with` name checks—govern acceptance, while `with` remains ordinary.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.3.4`
+  Status: `pending`
+  Goal: Close Perl callable-codeblock diagnostics, docs, and full-gate no-drift.
+  Acceptance: Neutral/focused/Phase-0/CLI gates pass; no raw Perl, coderef leakage, harray drift, or undocumented
+    compatibility remains before Rust parity.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.4`
+  Status: `pending`
+  Goal: Implement the unchanged callable-codeblock contract on Rust native and generated execution.
+  Children: `.11.4.1`, `.11.4.2`, `.11.4.3`
+  Dependencies: `.11.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.4.1`
+  Status: `pending`
+  Goal: Add typed Rust callable-codeblock AST/signature/compiled/serialized state.
+  Acceptance: Exact brace disambiguation, spans, signature/body data, validation, descriptors, and source emission
+    round-trip without evaluating or encoding a Rust closure.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.4.2`
+  Status: `pending`
+  Goal: Execute Rust codeblock-variable calls with neutral dynamic context and diagnostics.
+  Acceptance: Ordered values, temporary copied bindings/rest, caller nonparameter stores, results, recursion,
+    static-name precedence, and failures match Perl and the neutral fixture.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.4.3`
+  Status: `pending`
+  Goal: Close Rust generic final-block equivalence, generated execution, oracle, docs, and full gates.
+  Acceptance: Signature-governed attached/contextual forms and retained `with` pass native/generated/oracle paths.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.5`
+  Status: `pending`
+  Goal: Implement the unchanged callable-codeblock contract on Dart native and generated execution.
+  Children: `.11.5.1`, `.11.5.2`, `.11.5.3`
+  Dependencies: `.11.4`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.5.1`
+  Status: `pending`
+  Goal: Add typed Dart callable-codeblock AST/signature/serialized state and brace disambiguation.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.5.2`
+  Status: `pending`
+  Goal: Execute Dart codeblock-variable calls with neutral dynamic context and diagnostics.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.5.3`
+  Status: `pending`
+  Goal: Close Dart generic final-block equivalence, generated execution, docs, and full gates.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.6`
+  Status: `pending`
+  Goal: Implement the unchanged callable-codeblock contract on Julia native and generated execution.
+  Children: `.11.6.1`, `.11.6.2`, `.11.6.3`
+  Dependencies: `.11.5`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.6.1`
+  Status: `pending`
+  Goal: Add typed Julia callable-codeblock AST/signature/serialized state and brace disambiguation.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.6.2`
+  Status: `pending`
+  Goal: Execute Julia codeblock-variable calls with neutral dynamic context and diagnostics.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.6.3`
+  Status: `pending`
+  Goal: Close Julia generic final-block equivalence, generated execution, docs, and full gates.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.7`
+  Status: `pending`
+  Goal: Close four-backend callable-codeblock no-drift and route Lua to dependency-complete owners.
+  Dependencies: `.11.3`, `.11.4`, `.11.5`, `.11.6`
+  Acceptance: Neutral capability data, docs/book/KM, native/generated proofs, and four admitted backends agree;
+    Lua parser/value/control/function/generated obligations are added to its task tree without premature behavior
+    claims. Lexical capture remains explicitly deferred and requires a new decision/task if later justified.
+
+### `FUTURE-PARITY-BACKLOG.11.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Current braces distinguish harrays and eager block expressions, but no portable
+  initializer creates a callable codeblock variable and `cb()` cannot resolve a stored block value.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Current codeblocks are immediate/contextual AST payloads with name-gated
+  runtime consumers; no literal signature, deferred body value, dynamic variable-call resolver, or capture policy
+  crosses the spec grammar, ActionIR, descriptors, native runtimes, and generated source.
+- [x] **FIX** — ADR 0031 adopts exact `{|params| body }`, `{|| body }`, optional final `...rest`, dynamic caller
+  context, temporary copied parameter bindings, block-local return, static-name precedence, and retained `with`.
+- [x] **ADDRESSED (verified)** — Neutral contract, four admitted backend rollouts, and Lua routing/no-drift have
+  explicit dependency-ordered leaves before code; lexical capture is explicitly excluded from version 1.
+- [x] **NO REGRESSION** — Planning only: no parser, runtime, descriptor, fixture, or generated behavior changed;
+  current harray, eager block, `with`, traversal, function, CLI, corpus, and Lua numeric proofs remain authoritative.
+- [x] **LOCKSTEP** — ADR/index, task tree/index, roadmaps, README/book, Knowledge Map, changes/notes/live, and memory
+  agree that `.11.2` is the first executable-contract leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.12`
   Status: `active`
@@ -2444,13 +2582,14 @@ before implementation.
 | 71 | `FUTURE-PARITY-BACKLOG.4.3.2` | `done` | Julia typed v1/v2 native/generated execution passes 55 neutral assertions and complete gates. |
 | 72 | `FUTURE-PARITY-BACKLOG.4.4` | `done` | Four-backend no-drift closes; Lua native `.5.1`, descriptor `.5.3`, and generated `.8` obligations are explicit. |
 | 73 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `active` | Resume the existing Lua scalar numeric implementation and six-runtime admission frontier. |
+| 74 | `FUTURE-PARITY-BACKLOG.11.1` | `done` | ADR 0031 selects `{|args| ...}`, dynamic caller context, and a backend-neutral rollout split. |
+| 75 | `FUTURE-PARITY-BACKLOG.11.2` | `active` | Add the neutral callable-codeblock schema, fixtures, and independent checker before behavior code. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 75 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind generated-source convergence. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
@@ -3036,8 +3175,8 @@ Read-only evidence recorded on 2026-07-10:
 
 - None blocking `.3.1`: exact CLI and non-codegen parity are closed. Lua `.1.3` remains gated until the neutral
   generated-source contract, Rust full-manifest breadth, Dart/Julia emitters, and exact `.3.5` admission close.
-- Parked `.11.1` must decide public `harray` versus current `hash` terminology and retain/migrate/remove `with`;
-  neither question blocks `.1.5.1.6.3` and neither is silently decided by capture leaf `.11.0`.
+- ADR 0031 uses semantic term `harray` while current helper spellings may still say `hash`, and retains `with` as
+  an ordinary block-taking helper. Neutral callable-codeblock contract `.11.2` is active; no design question blocks it.
 
 ## Blockers
 
@@ -3120,6 +3259,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.5` | Contract/capability 60/0/0; focused Perl 69, Rust 5/5, Dart 6/6, Julia 58/58; adjacent complete backend gates; docs/KM/governance/mdBook; 1.23+ GB cache cleanup. | PASS. Exact four-backend generated-source parity closes without behavior change; `.3` is done and Lua plan `.1.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.3.2` | 55 focused callable assertions; complete Julia package tests; 61x2 primary CLI; 105 corpus; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. Julia exact v1/v2 spec/staged/descriptor/native/generated execution closes parent `.4.3`; no-drift/Lua routing `.4.4` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.4` | Four-backend source/test/public scan; callable/capability checkers; dual-ABI Lua gate; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. Callable extension `.4` closes; Lua native `.5.1`, descriptor `.5.3`, generated `.8.1-.3`, and admission `.8.4` own all remaining work. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.1` | Knowledge Map/ActionIR source audit; director syntax/scope agreement; ADR 0031; backend rollout split; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. `{|args| ...}` and dynamic caller context are designed before behavior code; neutral contract `.11.2` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3146,6 +3286,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.4.3.1` | `FUTURE-PARITY-BACKLOG.4.3.1 - implement Dart variadic functions` | Dart typed v2 spec/staged/registry/action/descriptor/native/generated execution with positional-only calls. |
 | `FUTURE-PARITY-BACKLOG.4.3.2` | `FUTURE-PARITY-BACKLOG.4.3.2 - implement Julia variadic functions` | Julia typed v2 spec/staged/registry/action/descriptor/native/generated execution with positional-only calls. |
 | `FUTURE-PARITY-BACKLOG.4.4` | `FUTURE-PARITY-BACKLOG.4.4 - close variadic callable routing` | Four-backend no-drift and explicit Lua native/descriptor/generated/admission ownership. |
+| `FUTURE-PARITY-BACKLOG.11.1` | `FUTURE-PARITY-BACKLOG.11.1 - design callable codeblock literals` | ADR 0031, brace-pipe literal, dynamic caller context, static resolution precedence, and backend rollout split. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

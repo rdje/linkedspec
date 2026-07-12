@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.1 — design callable codeblock literals**
+  (DONE — neutral contract `.11.2` next).
+
+  **Decision:** ADR 0031 selects `{|args| body }` / `{|| body }`, optional final `...rest`, and later `cb(args)`
+  invocation. Exact `{|` disambiguates callable data from harrays and eager brace blocks.
+
+  **Scope:** Invocation uses dynamic caller context, temporary copied params/rest, block-local return, and no
+  lexical capture. Static callables retain precedence; `with` remains ordinary. Neutral, four-backend, and Lua
+  routing leaves are split before behavior changes.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.4 — close variadic callable routing**
   (DONE — Lua scalar numeric `.4.3.3.1.4` resumes).
 

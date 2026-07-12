@@ -211,8 +211,19 @@ signature accepts a final codeblock, the intended contract is that `call(args) {
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
 functions, and receiver methods. That generic equivalence is not implemented yet: current backends special-case
 the named `with` and tree-traversal surfaces, the parenthesized final-codeblock form is not portable, and Lua is
-not implemented. `FUTURE-PARITY-BACKLOG.11.1` owns the corrective design and must decide whether `with` remains
-as an ordinary block-taking helper or is removed. Until that leaf lands, use only the current named forms above.
+not implemented. ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select an explicit future literal:
+
+```text
+cb = {|value| return(cat(value, "!")) }
+result = cb("ready")
+```
+
+`{|| ...}` is the zero-parameter form and a final `...rest` follows ordinary callable-signature rules. Construction
+is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
+`return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
+eager `{ statements }` block expressions. `with` remains an ordinary helper. This is accepted design, not shipped
+syntax: neutral contract `.11.2` and backend implementation leaves must land before using it. Until then, use only
+the current named immediate forms above.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

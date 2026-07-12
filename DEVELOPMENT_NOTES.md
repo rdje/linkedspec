@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.1 — distinguish deferred callable data at the first brace token):
+  Parse exact `{|` before the existing harray/eager-block classifier; do not infer callable intent from colons,
+  statements, assignment target, or host closure types. Store typed signature/body/source only. At `cb(args)`,
+  evaluate values first, install copied temporary params/rest, and execute against current nonparameter stores;
+  construction captures nothing. Keep static helper/control/user-function resolution stable and preserve `with`
+  as a signature-governed ordinary helper. Lexical capture requires a later explicit contract if genuine use
+  appears.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.4 — route semantics to the first executable dependency boundary):
   Lua's completed shell/registry/frame/compiled-state seams are structural, not runtime claims. Route the adopted
   v2 signature to `.5.1`, where staged body dispatch, ordered argument evaluation, and isolated execution first

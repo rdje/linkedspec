@@ -127,9 +127,10 @@ dispatch rule.
 
 > **Corrective direction:** `with` is currently a special-cased MVP, not the final syntax abstraction. The language
 > model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
-> codeblock parameter, after which `call(args) { block }` and `call(args, { block })` normalize to the same call on
-> helper, user-function, and receiver-method surfaces. Generic parsing/validation and the decision to retain or
-> remove `with` are parked under `FUTURE-PARITY-BACKLOG.11.1`; do not infer that equivalence from current behavior.
+> codeblock parameter, after which attached/contextual final-block forms normalize to the same call on helper,
+> user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
+> dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is active; do not
+> infer that future equivalence from current behavior.
 
 ## 1. Working Variables and Setup
 

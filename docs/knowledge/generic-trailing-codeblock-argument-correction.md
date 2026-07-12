@@ -44,12 +44,14 @@ Julia parse generic trailing-block nodes but runtime dispatch still accepts only
 the named supported surfaces.
 
 Therefore generic equivalence cannot currently be confirmed for any variant,
-and all-variant support cannot be claimed while Lua is absent. Parked
-`FUTURE-PARITY-BACKLOG.11.1` owns the corrective design and implementation split.
-It must also decide whether `with` remains as an ordinary block-taking helper,
-is migrated to the generic contract, or is removed; no removal decision has yet
-been made.
+and all-variant support cannot be claimed while Lua is absent. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031 now
+close the corrective design: explicit callable literals use `{|params| body }`, execute later through `cb(args)`,
+and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
+sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
+a parser exception. Neutral contract `.11.2` precedes the split backend rollout; no implementation is claimed by
+the design decision alone.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],
-[[julia-runtime-value-control-tree-helpers]], [[cross-variant-output-parity]].
+[[julia-runtime-value-control-tree-helpers]], [[cross-variant-output-parity]],
+[[callable-codeblock-literal-contract]].

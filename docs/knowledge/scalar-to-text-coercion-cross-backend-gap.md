@@ -26,6 +26,7 @@ reverify: "PERL5LIB= prove -Iperl t/scalar_text_contract.t && cargo test --manif
 
 The executable neutral fixture covers every currently portable source value on Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT. The codeblock row fixes the semantic value-kind rule without claiming that explicit final-codeblock
-call syntax is already portable; `FUTURE-PARITY-BACKLOG.11.1` still owns that syntax and call-signature work.
+call syntax is already portable. ADR 0031 settles `{|args| body }` and dynamic-context design; neutral contract
+`.11.2` and backend rollout still own behavior.
 
 `cat` is the current helper name. The old `concat` spelling remains retired and is not an alias.

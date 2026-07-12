@@ -134,6 +134,24 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
+### Accepted future callable-codeblock literal
+
+ADR 0031 adopts this unimplemented next syntax:
+
+```text
+codeblock_literal := "{|" callable_parameters? "|" action_statements "}"
+
+cb = {|left, right| return(cat(left, right)) }
+empty = {|| return("ok") }
+result = cb("a", "b")
+```
+
+The `{|` opener is exact. A final `...rest` is allowed. `{}` and `{ key : value }` remain harrays; nonempty
+`{ statements }` remains an immediately evaluated block expression. Literal construction captures no environment.
+`cb(args)` executes later in dynamic caller context with temporary copied parameter/rest bindings and block-local
+return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` and backend rollout leaves
+must land before this grammar is current portable behavior.
+
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.
 

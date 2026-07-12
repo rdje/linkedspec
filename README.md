@@ -26,8 +26,9 @@ This `README.md` is the **single entry point** to the project.
 - Evolve `.spec` toward language-agnostic action semantics over time.
 - Model scalar, array, harray/hash, and codeblock as the four portable value kinds. For callables whose signature
   accepts a final codeblock, the language direction is one canonical call behind equivalent
-  `call(args) { block }` and `call(args, { block })` spellings; current generic parity is tracked by
-  `FUTURE-PARITY-BACKLOG.11`.
+  `call(args) { block }` and contextual final-block spellings. ADR `0031` adopts callable literals as
+  `{|args| block }`, invoked by `cb(args)`, with dynamic caller context and no lexical capture in version 1.
+  This is accepted design under active neutral-contract leaf `FUTURE-PARITY-BACKLOG.11.2`, not current behavior.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

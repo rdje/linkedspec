@@ -115,6 +115,13 @@ This document is the current high-level technical reading of the project shape. 
   `call(args) { block }` and `call(args, { block })` normalize identically. Parked `.11.1` owns canonical AST/IR,
   evaluation/diagnostics/parity, terminology, and whether `with` remains an ordinary helper or is removed.
   That capture left `.1.5.1.6.2` active at the time; `.6.3` has since closed Perl and activated Rust `.1.5.2`.
+- `2026-07-12` refresh: ADR `0031` and `FUTURE-PARITY-BACKLOG.11.1` settle the callable-codeblock design.
+  `{|params| body }` is a deferred typed codeblock literal; `{|| body }` has no params and final `...rest` reuses
+  ADR `0030`. Exact `{|` recognition precedes the existing `{}`/colon harray and eager `{ statements }` block
+  classifier. `cb(args)` uses ordered positional evaluation, temporary copied parameter/rest bindings, block-local
+  return, and dynamic caller context for all nonparameter state; it captures no lexical environment. Static
+  governed callables retain precedence, recursion is initially rejected, and `with` remains ordinary. Neutral
+  schema/fixtures `.11.2` are active before Perl/Rust/Dart/Julia behavior or Lua routing changes.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

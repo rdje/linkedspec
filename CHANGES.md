@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.1 — design callable codeblock literals
+
+Adopted ADR 0031 after director agreement. A callable codeblock literal is `{|params| body }`, with `{|| body }`
+for no parameters and optional final `...rest`. Exact `{|` prefix recognition makes it distinct from `{}` and
+colon-pair harrays plus existing eager `{ statements }` block expressions. Construction records typed signature,
+body, source, and spans without execution; `cb(args)` is the future invocation form.
+
+The initial scope model is dynamic caller context, not lexical capture. Positional arguments evaluate once
+left-to-right; copied fixed/rest values bind temporarily and restore prior same-name bindings, while nonparameter
+reads and mutations use the caller's current stores. Return is block-local, results chain/drop normally, governed
+static callables retain name precedence, and non-callable/keyword/recursion failures are typed. `with` remains an
+ordinary block-taking helper. Split neutral contract, Perl, Rust, Dart, Julia, and Lua-routing leaves before code.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.4 — close variadic callable routing
 
 Closed ADR 0030 callable-signature no-drift after Perl, Rust, Dart, and Julia passed the unchanged native/generated
