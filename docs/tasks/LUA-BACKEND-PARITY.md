@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (four admitted backends pass scalar numeric v1; Lua `.4.3.3.1.4` active)
+- Last updated: `2026-07-12` (scalar numeric `.4.3.3.1.4` active; variadic user functions routed to `.5.1`/`.5.3`/`.8`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1113,9 +1113,14 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 - ID: `LUA-BACKEND-PARITY.5.1`
   Status: `pending`
-  Goal: Add staged parser registry/function-body dispatch and runtime calls.
-  Acceptance: Provider identity, ordered jobs, parse/normalize/stitch phases, exact function calls, failures, and
-    trace match the admitted variants without Lua-only queues or cache behavior.
+  Goal: Add staged parser registry/function-body dispatch and fixed-v1/variadic-v2 runtime calls.
+  Acceptance: Provider identity, ordered jobs, parse/normalize/stitch phases, failures, and trace match the admitted
+    variants without Lua-only queues or cache behavior. Consume `linkedspec-callable-signature-v1` through the
+    spec-owned shell, typed function/job records, registry-first ActionIR resolution, and isolated invocation
+    frames: fixed v1 calls remain exact; final-rest v2 calls are positional-only, require `min_arity`, evaluate once
+    left-to-right, and bind extras as one fresh typed array without Lua vararg/closure dispatch. The unchanged
+    neutral fixture, seven invalid definitions, keyword rejection, exact/minimum diagnostics, receiver continuation,
+    mixed/empty/fresh rest values, and recursion fence pass on PUC Lua and LuaJIT.
   Verification: `pending`
   Commit: `pending`
 
@@ -1130,8 +1135,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.5.3`
   Status: `pending`
   Goal: Admit exact outward descriptors, runtime diagnostics, and full-pipeline trace.
-  Acceptance: Consume shared fixtures/checkers directly and expand the capability census without changing existing
-    backend rows; no partial/gap state lacks a concrete next owner.
+  Acceptance: Consume shared fixtures/checkers directly, including the exact fixed-v1/variadic-v2 outward function
+    descriptor union and identical staged signature copies, and expand the capability census without changing
+    existing backend rows; no partial/gap state lacks a concrete next owner.
   Verification: `pending`
   Commit: `pending`
 
@@ -1204,8 +1210,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.8.1`
   Status: `pending`
   Goal: Add deterministic contract-v1 Lua emitter scaffold and isolated load/run.
-  Acceptance: Effective compiled state, stable identity/metadata/errors, Unicode/strict-UTF-8 payload boundary,
-    direct/traced entrypoints, caller-owned isolation, and cleanup pass without altering native interpreter/CLI.
+  Acceptance: Effective compiled state, including exact fixed-v1/variadic-v2 callable signatures, stable
+    identity/metadata/errors, Unicode/strict-UTF-8 payload boundary, direct/traced entrypoints, caller-owned
+    isolation, and cleanup pass without altering native interpreter/CLI.
   Verification: `pending`
   Commit: `pending`
 
@@ -1213,23 +1220,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Status: `pending`
   Goal: Add exact ten-family plan and authoritative direct generated execution.
   Acceptance: Ordered public rows, four rejections, per-root/nested family dispatch, portable trace/source identity,
-    and one isolated all-family matrix equal native values.
+    one isolated all-family matrix, and the unchanged variadic callable fixture execute independently with values
+    equal to the native interpreter; generated Lua uses reconstructed typed rest arrays, not host vararg dispatch.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.8.3`
   Status: `pending`
   Goal: Admit the exact contract-sourced generated 8/105 subset.
-  Acceptance: Interpreter-first values, independent generated load, metadata/plans/trace identity, checker-owned
-    path/order/no-skip/cleanup, and complete Lua package/CLI/corpus gates pass before capability promotion.
+  Acceptance: Interpreter-first values, independent generated load, metadata/plans/trace identity, callable-
+    signature preservation/execution, checker-owned path/order/no-skip/cleanup, and complete Lua package/CLI/corpus
+    gates pass before capability promotion.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.8.4`
   Status: `pending`
   Goal: Close Lua capability parity and backend handoff.
-  Acceptance: Expanded capability manifest is all-pass; PUC Lua primary and LuaJIT compatibility policies are
-    honest; roadmap/book/KM/live docs/local CI/cleanup pass; no outstanding Lua behavior is hidden as a limitation.
+  Acceptance: Expanded capability manifest is all-pass and retires the Lua-owned
+    `future.variadic_user_functions` entry only after native and generated callable proofs pass; PUC Lua primary and
+    LuaJIT compatibility policies are honest; roadmap/book/KM/live docs/local CI/cleanup pass; no outstanding Lua
+    behavior is hidden as a limitation.
   Verification: `pending`
   Commit: `pending`
 

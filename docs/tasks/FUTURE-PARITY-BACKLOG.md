@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl/Rust/Dart/Julia variadic implementation complete; closeout `.4.4` active).
+- Last updated: `2026-07-12` (callable extension `.4` closed; Lua numeric `.4.3.3.1.4` resumes).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1909,7 +1909,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.4`
-  Status: `active`
+  Status: `done`
   Goal: Decide and implement user-function and callable-signature extension topics beyond the MVP.
   Children: `.4.0`, `.4.1`, `.4.2`, `.4.3`, `.4.4`
   Acceptance: Fixed versus semantically variadic helper/method/function signatures are explicit; user-defined
@@ -1917,8 +1917,12 @@ before implementation.
     Recursive functions, closures/lambdas/currying, namespaces, alternate spellings, optional zero-arg parens,
     brace-less bodies, and caller-mutating forms are each accepted, rejected, or split with explicit `.spec`
     contract and parity obligations before code.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** ADR 0030 and one recurring neutral contract define the final `...rest`
+    syntax, exact-v1/variadic-v2 records, positional eager evaluation, fresh typed rest arrays, and purpose-specific
+    callable bounds. Perl, Rust, Dart, and Julia pass the unchanged native/generated fixture. `.4.4` reconciles
+    capability/roadmap/book/KM/live state and routes Lua native execution to `.5.1`, descriptor admission to `.5.3`,
+    and generated preservation/execution/admission to `.8` without claiming Lua behavior early.
+  Commit: closed by `.4.1`, backend child commits, and `.4.4`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.0`
   Status: `done`
@@ -2063,14 +2067,39 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.4.3.2 - implement Julia variadic functions`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.4`
-  Status: `active`
+  Status: `done`
   Goal: Close callable-arity no-drift and route Lua variadic parity to its dependency-complete owner.
   Dependencies: `.4.2`, `.4.3`
   Acceptance: Public docs, mdBook, Knowledge Map, neutral capability data, and four admitted backends agree on
     exact versus unbounded signatures; Lua's frontend/runtime/generated-source obligations are added to the
     existing Lua task tree at the first dependency-complete function leaf rather than claimed prematurely.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Current source/tests/descriptors and the callable checker prove exact v1 and
+    variadic v2 behavior across Perl, Rust, Dart, and Julia native/generated paths. Stale capability README/manifest,
+    roadmap, mdBook, Knowledge Map, live status, and task/index rollout text now name those four implementations.
+    Lua already owns the spec shell, exact registry, isolated invocation frame, and compiled descriptor but does not
+    dispatch function bodies; therefore `.5.1` is the first dependency-complete native variadic owner. `.5.3`
+    explicitly owns descriptor admission, `.8.1` normalized generated-state preservation, `.8.2` independent
+    generated execution of the neutral fixture, `.8.3` recurring proof, and `.8.4` capability retirement. The
+    capability checker now discovers owners from both the future and Lua task trees, so the future manifest points
+    directly at `.5.1`. The callable/capability/KM/memory/doctrine/task/whitespace/mdBook checks and unchanged
+    dual-ABI Lua gate pass.
+  Commit: `FUTURE-PARITY-BACKLOG.4.4 - close variadic callable routing`
+
+### `FUTURE-PARITY-BACKLOG.4.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The four admitted implementations were green, but capability and roadmap surfaces
+  still described Rust/Dart/Julia as rollout work and Lua had no explicit variadic obligations in its later leaves.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua's existing `.2.4` shell and `.3.3` registry deliberately stop before body
+  dispatch; routing variadic behavior there retroactively would bypass its helper/value/control dependencies.
+- [x] **FIX** — Keep Lua capability future and route native callable execution to `.5.1`, exact descriptors to
+  `.5.3`, generated preservation/execution to `.8.1-.3`, and final capability retirement to `.8.4`; let the
+  capability checker validate owner IDs from both task trees.
+- [x] **ADDRESSED (verified)** — Four backend contract tests/gates remain authoritative; the neutral checker and
+  no-drift scans agree, and every remaining Lua signature/native/generated/admission obligation has one owner.
+- [x] **NO REGRESSION** — Planning/no-drift only: no parser, registry, runtime, descriptor, fixture, or generated-
+  source behavior changed; Lua's current scalar numeric frontier and dual-ABI proof remain unchanged.
+- [x] **LOCKSTEP** — Capability data, roadmap, task trees/index, README/book, Knowledge Map, changes/notes/live,
+  and bounded memory close `.4` and return PNT to Lua `.4.3.3.1.4`.
 
 ### `FUTURE-PARITY-BACKLOG.4.0` Acceptance Checklist
 
@@ -2413,7 +2442,8 @@ before implementation.
 | 69 | `FUTURE-PARITY-BACKLOG.4.2.2` | `done` | Rust v1/v2 parsed/compiled/described signatures and native/generated rest binding pass the unchanged fixture. |
 | 70 | `FUTURE-PARITY-BACKLOG.4.3.1` | `done` | Dart v1/v2 spec/staged/descriptor/native/generated paths pass six neutral contract tests and complete gates. |
 | 71 | `FUTURE-PARITY-BACKLOG.4.3.2` | `done` | Julia typed v1/v2 native/generated execution passes 55 neutral assertions and complete gates. |
-| 72 | `FUTURE-PARITY-BACKLOG.4.4` | `active` | Close four-backend no-drift and route Lua variadic parity to its dependency-complete owner. |
+| 72 | `FUTURE-PARITY-BACKLOG.4.4` | `done` | Four-backend no-drift closes; Lua native `.5.1`, descriptor `.5.3`, and generated `.8` obligations are explicit. |
+| 73 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `active` | Resume the existing Lua scalar numeric implementation and six-runtime admission frontier. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3012,8 +3042,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments,
-  105 interpreter fixtures, generated-source contract, and variadic callable contract. Final no-drift and Lua
-  dependency-complete ownership routing `.4.4` is the next callable-signature frontier.
+  105 interpreter fixtures, generated-source contract, and variadic callable contract. Lua variadic work is
+  explicitly owned by `.5.1`/`.5.3`/`.8`; its current scalar numeric `.4.3.3.1.4` frontier resumes.
 
 ## Verification Log
 
@@ -3089,6 +3119,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.3` | Exact contract-sourced eight-case interpreter-first subset; eight namespaces in one offline host; exact values/metadata/plans/trace identity; checker path/order/no-skip/cleanup; focused 13+27+18; package 1,168 + 61x2 + 105; capability 60/0/0; docs/KM/governance/mdBook/cleanup. | PASS. Julia promotes gap→pass; `.3.4` closes and exact four-backend admission `.3.5` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.5` | Contract/capability 60/0/0; focused Perl 69, Rust 5/5, Dart 6/6, Julia 58/58; adjacent complete backend gates; docs/KM/governance/mdBook; 1.23+ GB cache cleanup. | PASS. Exact four-backend generated-source parity closes without behavior change; `.3` is done and Lua plan `.1.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.3.2` | 55 focused callable assertions; complete Julia package tests; 61x2 primary CLI; 105 corpus; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. Julia exact v1/v2 spec/staged/descriptor/native/generated execution closes parent `.4.3`; no-drift/Lua routing `.4.4` activates. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.4` | Four-backend source/test/public scan; callable/capability checkers; dual-ABI Lua gate; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. Callable extension `.4` closes; Lua native `.5.1`, descriptor `.5.3`, generated `.8.1-.3`, and admission `.8.4` own all remaining work. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3114,6 +3145,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.4.2.2` | `FUTURE-PARITY-BACKLOG.4.2.2 - implement Rust variadic functions` | Rust typed v2 parsed/compiled/staged/descriptor/native/generated execution, exact neutral fixture, and array-aware result chaining. |
 | `FUTURE-PARITY-BACKLOG.4.3.1` | `FUTURE-PARITY-BACKLOG.4.3.1 - implement Dart variadic functions` | Dart typed v2 spec/staged/registry/action/descriptor/native/generated execution with positional-only calls. |
 | `FUTURE-PARITY-BACKLOG.4.3.2` | `FUTURE-PARITY-BACKLOG.4.3.2 - implement Julia variadic functions` | Julia typed v2 spec/staged/registry/action/descriptor/native/generated execution with positional-only calls. |
+| `FUTURE-PARITY-BACKLOG.4.4` | `FUTURE-PARITY-BACKLOG.4.4 - close variadic callable routing` | Four-backend no-drift and explicit Lua native/descriptor/generated/admission ownership. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

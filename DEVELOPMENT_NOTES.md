@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.4 — route semantics to the first executable dependency boundary):
+  Lua's completed shell/registry/frame/compiled-state seams are structural, not runtime claims. Route the adopted
+  v2 signature to `.5.1`, where staged body dispatch, ordered argument evaluation, and isolated execution first
+  coexist after helper/value/control dependencies. Keep descriptor admission in `.5.3` and make generated `.8`
+  preserve and independently execute the same typed union. A capability future row should name the remaining
+  backend owner, not a closed umbrella task or already-complete backend rollout; owner validation must discover
+  every task tree whose leaf IDs are valid capability owners.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.3.2 — generated Julia should reconstruct the ordinary typed AST):
   Carry one `CallableSignature` through Julia's ordinary `SpecFile` JSON union so normalized source emission and
   generated execution reuse the native compiler/runtime. Keep derived prefix params/minimum arity internally but

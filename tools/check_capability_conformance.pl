@@ -9,7 +9,10 @@ use JSON::PP qw(decode_json);
 
 my $repo_root = abs_path(File::Spec->catdir(dirname(__FILE__), '..'));
 my $manifest_path = File::Spec->catfile($repo_root, 'capability_conformance', 'manifest.json');
-my $task_path = File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.md');
+my @task_paths = (
+ File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.md'),
+ File::Spec->catfile($repo_root, 'docs', 'tasks', 'LUA-BACKEND-PARITY.md'),
+);
 
 sub fail {
  my ($message) = @_;
@@ -69,8 +72,11 @@ fail('manifest.status_values must be [pass, partial, gap]')
  unless ref($manifest->{status_values}) eq 'ARRAY'
  && join("\0", @{$manifest->{status_values}}) eq join("\0", qw(pass partial gap));
 
-my $task_text = read_text($task_path);
-my %owner_ids = map { $_ => 1 } ($task_text =~ /^- ID: `([^`]+)`/mg);
+my %owner_ids;
+for my $task_path (@task_paths) {
+ my $task_text = read_text($task_path);
+ $owner_ids{$_} = 1 for $task_text =~ /^- ID: `([^`]+)`/mg;
+}
 $owner_ids{'FUTURE-PARITY-BACKLOG.2'} = 1;
 $owner_ids{'FUTURE-PARITY-BACKLOG.3'} = 1;
 $owner_ids{'FUTURE-PARITY-BACKLOG.6'} = 1;

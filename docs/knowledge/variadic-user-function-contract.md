@@ -15,7 +15,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [functions, arity, variadic, rest-parameter, descriptor, staged-parsing, portability, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.4.1, ADR 0030, and capability_conformance/callable_signature_contract.json adopt linkedspec-callable-signature-v1. The independent checker validates three definitions, nine call cases, seven invalid signatures, versioned descriptor roles, and a deterministic .spec fixture. FUTURE-PARITY-BACKLOG.4.2.1 implements it on Perl."
+evidence: "FUTURE-PARITY-BACKLOG.4.1, ADR 0030, and capability_conformance/callable_signature_contract.json adopt linkedspec-callable-signature-v1. The independent checker validates three definitions, nine call cases, seven invalid signatures, versioned descriptor roles, and a deterministic .spec fixture. .4.2-.3 implement it on Perl/Rust/Dart/Julia; .4.4 routes Lua to LUA-BACKEND-PARITY.5.1/.5.3/.8."
 reverify: "python3 tools/check_callable_signature_contract.py && rg -n 'variadic|rest_param|min_arity|max_arity|\.\.\.' docs/decisions/0030-variadic-callable-signature-contract.md capability_conformance/callable_signature_contract.json docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -45,5 +45,9 @@ This is not overload or host splat behavior. Function names remain unique; keywo
 not accepted; user-defined functions do not become receiver methods. Existing built-in helpers and methods keep
 their purpose-specific exact, bounded, or open arities.
 
-The Perl reference now implements the neutral contract. Until the remaining backend rollout leaves close,
-fixed-function capability remains the portable multi-backend baseline and variadic parity remains explicitly owned.
+Perl, Rust, Dart, and Julia implement the neutral contract through native and generated execution. Lua remains
+explicitly future: native execution is owned by `LUA-BACKEND-PARITY.5.1`, descriptor admission by `.5.3`, and
+generated preservation/execution/admission by `.8.1-.4`. Until those close, fixed-function behavior remains the
+portable six-runtime baseline.
+
+Related routing fact: [[lua-variadic-user-function-routing]].

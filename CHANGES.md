@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.4 — close variadic callable routing
+
+Closed ADR 0030 callable-signature no-drift after Perl, Rust, Dart, and Julia passed the unchanged native/generated
+contract. Capability manifest/README, root roadmap/README, task index/trees, mdBook, and Knowledge Map now name all
+four implementations instead of stale one- or three-backend rollout states.
+
+Audited Lua's completed function seams. Its spec-owned shell, exact registry, isolated invocation-frame copier,
+and compiled descriptor intentionally stop before staged body dispatch, so `LUA-BACKEND-PARITY.5.1` is the first
+dependency-complete native owner for fixed-v1/variadic-v2 calls. `.5.3` owns exact descriptor admission;
+`.8.1-.4` own normalized generated preservation, independent execution, recurring proof, and capability retirement.
+The capability checker now validates owner leaf IDs from both the future and Lua task trees. No parser/runtime or
+fixture changed; the existing Lua scalar numeric `.4.3.3.1.4` frontier resumes.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.3.2 — implement Julia variadic functions
 
 Implemented ADR 0030's unchanged callable signature throughout Julia. A typed `CallableSignature` now flows from

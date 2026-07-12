@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.4 — close variadic callable routing**
+  (DONE — Lua scalar numeric `.4.3.3.1.4` resumes).
+
+  **Closeout:** Perl/Rust/Dart/Julia public, staged, native, and generated surfaces agree on exact-v1 versus
+  variadic-v2 signatures. Stale capability/roadmap/book/KM rollout text is reconciled.
+
+  **Routing:** Lua native implementation belongs to dependency-complete `.5.1`, descriptors to `.5.3`, and
+  generated preservation/execution/proof/admission to `.8.1-.4`. No behavior changed or was claimed prematurely.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.3.2 — implement Julia variadic functions**
   (DONE — no-drift and Lua ownership routing `.4.4` next).
 

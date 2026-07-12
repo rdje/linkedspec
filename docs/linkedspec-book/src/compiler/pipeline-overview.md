@@ -292,7 +292,8 @@ Julia carries the same typed union through its spec projection, staged jobs, reg
 descriptor, native runtime, canonical JSON/ASCII-hex emitted state, generated-plan execution, and reconstruction.
 Its registered calls likewise reject keyword arguments and bind a newly copied vector into fresh scalar/array
 stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua remains rollout
-work, so four admitted backends implement the contract while six-runtime portability awaits Lua routing.
+work under native owner `LUA-BACKEND-PARITY.5.1`, descriptor admission `.5.3`, and generated owners `.8.1-.4`, so
+four admitted backends implement the contract while six-runtime portability awaits those leaves.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

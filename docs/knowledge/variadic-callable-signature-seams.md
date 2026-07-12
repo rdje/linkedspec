@@ -13,7 +13,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [functions, helpers, methods, arity, variadic, staged-parsing, descriptor, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.4.0 retrieved the existing function/staged facts and ADRs 0017/0023, used LinkedSpec::Get return_descriptor/runtime_ctx_ref probes, and inspected specs/user_function_definition.spec, specs/spec.spec, the exact outward descriptor contract, Perl/Rust/Dart/Julia AST/registry/runtime/generated seams, and Lua's prepared invocation frame."
+evidence: "FUTURE-PARITY-BACKLOG.4.0 audits every seam; .4.1 adopts the contract; .4.2-.3 implement it on Perl/Rust/Dart/Julia; .4.4 closes four-backend no-drift and routes Lua native/descriptor/generated work to LUA-BACKEND-PARITY.5.1/.5.3/.8."
 reverify: "rg -n 'params|arity|resolve_exact|resolveCall|resolve_user_function_call|execute_user_function|_executeUserFunction|_execute_runtime_user_function|prepare_invocation' specs/user_function_definition.spec capability_conformance/outward_descriptor_contract.json perl/LinkedSpec/UserFunctionRegistry.pm perl/LinkedSpec/ActionIR/MethodLowering.pm rust/linkedspec-core/src rust/linkedspec-runtime/src dart/lib/src julia/src lua/src/linkedspec"
 ---
 
@@ -42,7 +42,8 @@ Unrecognized rest spellings currently produce a `function_definition_error`. The
 `undef`, with `runtime_ctx_ref->{last_error}` reporting `compiler_pipeline:function_registry` and the precise
 invalid-definition detail. The critical trace is not a swallowed exception or a successful empty registry.
 
-Implementation must begin with a versioned neutral signature/schema and executable fixture. Changing only a final
-runtime length check would leave staged metadata, public descriptors, generated source, diagnostics, and other
-backends inconsistent. `FUTURE-PARITY-BACKLOG.4.1` owns the syntax and contract; `.4.2` and `.4.3` own paired
-backend rollouts; `.4.4` owns no-drift plus routing into Lua's dependency-complete function-execution leaf.
+Implementation began with the versioned neutral signature/schema and executable fixture. Perl, Rust, Dart, and
+Julia now carry it through staged metadata, public descriptors, native execution, and generated state. Lua's
+spec-owned shell, exact registry, isolated frame, and compiled descriptor deliberately precede body dispatch;
+`LUA-BACKEND-PARITY.5.1` is therefore the first dependency-complete native owner. `.5.3` owns descriptor admission,
+while `.8.1-.4` own generated preservation, execution, recurring proof, and capability retirement.

@@ -653,7 +653,8 @@ purposefully unbounded, while subtraction/division/modulo and comparisons remain
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
 array, and reject keyword/overload/host-splat semantics. Perl, Rust, Dart, and Julia now consume the unchanged
 fixture through grammar/spec projection, staged/outward records, native and generated execution, diagnostics, and
-exact results. Lua dependency-complete routing remains active, so six-runtime admission must not be claimed early.
+exact results. Lua native parity is explicitly owned by dependency-complete `.5.1`, descriptor admission by `.5.3`,
+and generated preservation/execution/admission by `.8.1-.4`, so six-runtime admission must not be claimed early.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

@@ -229,8 +229,8 @@ Top-level project docs:
   `prove -Iperl t/variadic_user_function_contract.t`; Rust consumes it through
   `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract`.
   Dart consumes it through `dart test test/variadic_user_function_contract_test.dart`; Julia consumes it through
-  the 55 assertions in `julia/test/variadic_user_function_contract_test.jl`. Final no-drift and Lua dependency
-  routing remain owned by `FUTURE-PARITY-BACKLOG.4.4`.
+  the 55 assertions in `julia/test/variadic_user_function_contract_test.jl`. Lua native parity is routed to
+  `LUA-BACKEND-PARITY.5.1`, descriptor admission to `.5.3`, and generated preservation/execution to `.8.1-.4`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

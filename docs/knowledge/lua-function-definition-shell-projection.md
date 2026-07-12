@@ -36,6 +36,11 @@ The composed API attaches ordered `FunctionDefinition` nodes to ordinary parsed 
 array result shapes. `body_parse_job` is preserved, but `body_ast` remains absent because staged registry dispatch
 belongs to `.5.1`.
 
+The completed projector currently validates exact-v1 `params`/`arity`. The adopted variadic-v2 signature is
+explicitly routed to the same dependency-complete `.5.1` implementation that will dispatch and execute function
+bodies, so shell/staged/registry/runtime evolution lands as one contract rather than a premature metadata claim.
+
 Related facts: [[spec-defined-user-function-definition-parser]], [[function-body-parse-job-sidecar]],
 [[lua-core-spec-parser]], [[lua-frontend-validation]], [[dart-function-definition-shell-projection]],
 [[julia-user-function-definition-projection]].
+See also [[lua-variadic-user-function-routing]].
