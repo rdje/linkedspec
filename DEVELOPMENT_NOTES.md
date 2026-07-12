@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.2 — separate split segment and search cursors):
+  A zero-width regex delimiter cannot use one cursor for both output boundaries and match progress. Retain the
+  segment start, advance only the search cursor by one decoded UTF-8 scalar, and emit the pending segment when the
+  zero-width boundary is after it. Literal empty delimiters are a separate direct Unicode-scalar path. Returning a
+  typed array from string `.split()` establishes the bridge without prematurely implementing the array method family.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.1 — adapt flags at the helper boundary):
   Rule regex compilation and helper regex policy share PCRE2 but not operation semantics. Normalize helper compile
   flags in deterministic order, ignore `g/o` only where the operation defines them as no-ops, and cache failed

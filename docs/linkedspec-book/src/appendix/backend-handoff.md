@@ -647,6 +647,11 @@ The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Fun
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex
 patterns, unknown flags, or invalid patterns. PUC Lua and LuaJIT pass 73/73; pure split remains separately owned.
 
+The pure-split leaf then adds fresh typed arrays for literal and PCRE2 delimiters, preserves leading/trailing empty
+fields, treats an empty literal delimiter as Unicode-scalar splitting, and advances safely around zero-width regex
+matches. Function and string-receiver forms are equivalent and non-mutating. Both Lua ABIs pass 74/74; scalar
+statement substitution remains a separate next mechanism.
+
 ```lua
 local source = [[
 Top::

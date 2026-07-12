@@ -23,4 +23,4 @@ ignores operation-only `g` and compile-once compatibility `o` for `matches`, and
 `matches(value, /pattern/flags)` searches the whole scalar value. It returns false for null/non-text input,
 non-regex patterns, unknown flags, and invalid patterns. Receiver form is equivalent, and because `matches` is a
 terminal string-family helper, a later string receiver call returns null. The behavior is identical on PUC Lua and
-LuaJIT. Pure regex/literal split is the next separate owner under `.4.3.2.2.2`.
+LuaJIT. Pure regex/literal split has since landed under `.4.3.2.2.2`.

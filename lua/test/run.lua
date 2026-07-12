@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-helper-regex-matches", "status parity")
+  assert_equal(first.parity, "runtime-pure-split", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2323,6 +2323,53 @@ b", /^a.b$/s),
   assert_equal(result.value.invalid_pattern, false, "invalid helper pattern fails closed")
   assert_equal(result.value.receiver, true, "receiver matches uses the same adapter")
   assert_equal(result.value.terminal_chain, json.null, "matches ends string receiver chains")
+end)
+
+test("pure split preserves typed literal regex Unicode and receiver boundaries", function()
+  local source = [[
+Top::
+ /x/
+ E {
+   raw = "a-b-"
+   return({
+     "literal" : split(",a,b,", ","),
+     "regex" : split("a1b22c", /\d+/go),
+     "case" : split("aXbxc", /x/i),
+     "characters" : split("🙂a", ""),
+     "zero_width" : split("abc", /(?=b)/),
+     "receiver" : raw.split("-"),
+     "invalid_pattern" : split("abc", /(/),
+     "unknown_flag" : split("abc", /b/q),
+     "null" : split(undef, ","),
+     "non_text" : split(["a"], ","),
+     "source_after" : raw,
+     "slice" : substr("🙂abc", 1, 2),
+     "literal_replace" : replace_substr("a-b-a", "a", "x")
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  ).value
+  assert_equal(json.kind(result.literal), "array", "literal split returns typed array")
+  assert_equal(#result.literal, 4, "literal split preserves leading and trailing empties")
+  assert_equal(result.literal[1], "", "literal leading empty")
+  assert_equal(result.literal[4], "", "literal trailing empty")
+  assert_equal(table.concat(result.regex, "|"), "a|b|c", "regex split uses PCRE2")
+  assert_equal(table.concat(result.case, "|"), "a|b|c", "regex split uses helper flags")
+  assert_equal(#result.characters, 2, "empty delimiter splits Unicode characters")
+  assert_equal(result.characters[1], "🙂", "Unicode split preserves scalar bytes")
+  assert_equal(table.concat(result.zero_width, "|"), "a|bc", "zero-width regex split makes progress")
+  assert_equal(#result.receiver, 3, "receiver split preserves trailing empty")
+  assert_equal(result.receiver[3], "", "receiver split trailing field")
+  assert_equal(#result.invalid_pattern, 0, "invalid regex split fails closed")
+  assert_equal(#result.unknown_flag, 0, "unknown regex flag split fails closed")
+  assert_equal(#result.null, 0, "null split returns empty array")
+  assert_equal(#result.non_text, 0, "non-text split returns empty array")
+  assert_equal(result.source_after, "a-b-", "pure receiver split does not mutate source")
+  assert_equal(result.slice, "ab", "Unicode substr remains a distinct pure value")
+  assert_equal(result.literal_replace, "x-b-x", "literal replacement remains non-regex")
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **434** facts · **2977** question keys.
+> **435** facts · **2983** question keys.
 
 ## Questions → fact
 
@@ -644,11 +644,16 @@
 - "does Lua resolve ActionIR helper contracts" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua run lifecycle blocks in order" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua snapshot source before compilation" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua split empty delimiter by Unicode characters" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua split preserve trailing empty fields" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua split support regex flags" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua string receiver split mutate its source" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support exit_now" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support generic trailing codeblocks" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support matches helper" -> [lua-helper-regex-matches](docs/knowledge/lua-helper-regex-matches.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support named captures and PCRE recursion" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "does Lua support pure split helper" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support seek and consume regex matching" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "does Lua support single quoted ActionIR strings" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support strict syntax validation" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -1323,6 +1328,7 @@
 - "how does Lua prepare user function invocation frames" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua preserve function body parse jobs" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua project descriptor JSON" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "how does Lua regex split handle zero width" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua resolve user functions before helpers" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua stitch function body ASTs" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua track entry and local match state" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
@@ -4588,6 +4594,15 @@ _Lua has a dependency-free native module and dual-runtime scaffold_
 - **evidence:** `LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add frontend/function projection; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The current local gate passes 60/60 on PUC Lua and LuaJIT plus exact process checks. Matching uses a disposable native PCRE2 adapter, not LPeg.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-native-backend-scaffold.md`](docs/knowledge/lua-native-backend-scaffold.md)
+
+### lua-pure-split-bridge
+_Lua pure split returns copied typed arrays for literal, regex, Unicode, and receiver forms_
+
+- **answers:** does Lua support pure split helper | does Lua split preserve trailing empty fields | does Lua split empty delimiter by Unicode characters | does Lua split support regex flags | how does Lua regex split handle zero width | does Lua string receiver split mutate its source
+- **date:** 2026-07-12 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.2.2.2 adds split_unicode_characters, split_literal, and split_regex in lua/src/linkedspec/interpreter.lua and admits split through function/string-receiver pure evaluation. lua/test/run.lua proves literal leading/trailing empties, PCRE2 delimiters and flags, UTF-8 scalar empty-delimiter splitting, zero-width progress, receiver typing/non-mutation, fail-closed invalid boundaries, and separate substr/replace_substr behavior. PUC Lua and LuaJIT pass 74/74.`
+- **reverify:** `bash tools/run_lua_local.sh`
+- **source:** [`docs/knowledge/lua-pure-split-bridge.md`](docs/knowledge/lua-pure-split-bridge.md)
 
 ### lua-runtime-core-value-capture-helpers
 _Lua runtime preserves four value kinds, checked local stores, and complete entry-match reads_

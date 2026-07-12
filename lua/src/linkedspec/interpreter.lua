@@ -260,6 +260,7 @@ local PURE_STRING_HELPERS = {
   replace_substr = true,
   rm_prefix = true,
   rm_suffix = true,
+  split = true,
   starts_with = true,
   substr = true,
   trim = true,
@@ -359,6 +360,57 @@ local function is_unicode_whitespace(codepoint)
     codepoint == 0x00A0 or codepoint == 0x1680 or (codepoint >= 0x2000 and codepoint <= 0x200A) or
     codepoint == 0x2028 or codepoint == 0x2029 or codepoint == 0x202F or codepoint == 0x205F or
     codepoint == 0x3000
+end
+
+local function split_unicode_characters(value)
+  local result = json.array()
+  local byte_index = 1
+  while byte_index <= #value do
+    local _, width = decode_codepoint(value, byte_index)
+    result[#result + 1] = value:sub(byte_index, byte_index + width - 1)
+    byte_index = byte_index + width
+  end
+  return result
+end
+
+local function split_literal(value, delimiter)
+  if delimiter == "" then return split_unicode_characters(value) end
+  local result = json.array()
+  local position = 1
+  while true do
+    local start_at, end_at = value:find(delimiter, position, true)
+    if not start_at then
+      result[#result + 1] = value:sub(position)
+      return result
+    end
+    result[#result + 1] = value:sub(position, start_at - 1)
+    position = end_at + 1
+  end
+end
+
+local function split_regex(value, regex)
+  local result = json.array()
+  local segment_start = 0
+  local search_cursor = 0
+  while search_cursor <= #value do
+    local one = regex:seek_match(value, search_cursor)
+    if not one then break end
+    if one.byte_end == one.byte_start then
+      if one.byte_start > segment_start then
+        result[#result + 1] = value:sub(segment_start + 1, one.byte_start)
+        segment_start = one.byte_start
+      end
+      if one.byte_start == #value then break end
+      local _, width = decode_codepoint(value, one.byte_start + 1)
+      search_cursor = one.byte_start + width
+    else
+      result[#result + 1] = value:sub(segment_start + 1, one.byte_start)
+      segment_start = one.byte_end
+      search_cursor = one.byte_end
+    end
+  end
+  result[#result + 1] = value:sub(segment_start + 1)
+  return result
 end
 
 local function trim_unicode(value)
@@ -481,6 +533,16 @@ local function evaluate_pure_string_helper(engine, name, values)
     local regex = compile_helper_regex(engine, values[2])
     if value == nil or regex == nil then return false end
     return regex:seek_match(value, 0) ~= nil
+  elseif name == "split" then
+    if #values < 2 then return json.array() end
+    local value = scalar_string(values[1], false)
+    if value == nil then return json.array() end
+    if getmetatable(values[2]) == HELPER_REGEX_MT then
+      local regex = compile_helper_regex(engine, values[2])
+      return regex == nil and json.array() or split_regex(value, regex)
+    end
+    local delimiter = scalar_string(values[2], true)
+    return delimiter == nil and json.array() or split_literal(value, delimiter)
   elseif name == "replace_substr" then
     if #values < 3 then return json.null end
     local value = scalar_string(values[1], false)

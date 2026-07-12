@@ -10,16 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.1` — strict Lua helper regex and `matches`.
-- latest_commit: `a263556d` — `LUA-BACKEND-PARITY.4.3.2.2.0 - split Lua regex string mechanisms`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.1 - add Lua helper regex matches`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.2`; implement pure literal/regex split values and string-to-array
-  receiver continuation without mutation.
-- next_action: use the typed helper-regex adapter for pure split, preserve leading/trailing empty fields, implement
-  Unicode-character empty-delimiter splitting, and continue returned arrays through compatible receiver helpers.
-- current_proof: function/terminal-receiver `matches` applies PCRE2 `i/m/s/x`, accepts no-op `g/o`, and returns
-  false for null/non-regex/unknown/invalid inputs. Full PUC Lua and LuaJIT gates pass 73/73. The Perl invalid-literal
-  generation boundary remains recorded, not treated as authorization for a reference-engine pivot.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.2` — Lua pure split bridge.
+- latest_commit: `55f5be0c` — `LUA-BACKEND-PARITY.4.3.2.2.1 - add Lua helper regex matches`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.2 - add Lua pure split bridge`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.3`; implement statement-context scalar regex substitution through
+  four-argument `substr` and `regex_subst` without changing pure character slicing.
+- next_action: add dropped-statement dispatch for a bare scalar target, operation-aware flags, global/first-only
+  replacement, and `$0`/`$n` capture expansion with rule-attributed invalid-pattern diagnostics.
+- current_proof: pure function/receiver split returns fresh typed arrays for literal, regex, Unicode empty-delimiter,
+  and zero-width patterns; invalid/non-text inputs fail closed. PUC Lua and LuaJIT pass 74/74. Downstream array
+  methods remain correctly owned by `.4.3.4`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.

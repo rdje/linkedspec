@@ -5,6 +5,9 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.2` adds copied typed split values for literal and PCRE2
+  delimiters, UTF-8 scalar empty-delimiter splitting, zero-width progress, and pure string receiver bridging.
+  Both Lua ABIs pass 74/74; statement scalar regex substitution `.3` is active.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.1` adds internal typed helper regexes and strict flag
   normalization over the existing PCRE2 owner. Function/receiver `matches` fails closed for invalid inputs and
   passes 73/73 on PUC Lua/LuaJIT; pure split `.2` is active.

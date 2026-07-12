@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.2 — add Lua pure split bridge
+
+Added fresh typed pure split values for literal and PCRE2 delimiters. Literal split preserves leading/trailing
+empty fields; an empty delimiter walks decoded UTF-8 scalars; regex split reuses strict helper flags and maintains
+separate segment/search cursors so zero-width matches advance without looping or dropping text. Function and string
+receiver forms are equivalent and do not mutate their source; invalid/non-text inputs return an empty array.
+
+Focused proof also locks Unicode pure `substr` and literal `replace_substr` as distinct operations. Full PUC Lua
+and LuaJIT gates pass 74/74; backend status and task/roadmap/KM/book/live surfaces advance to scalar statement regex
+substitution `.4.3.2.2.3`. Downstream array methods remain under dependent `.4.3.4`.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.1 — add Lua helper regex matches
 
 Added an internal Lua helper-regex value and strict compile adapter over the existing disposable native PCRE2
