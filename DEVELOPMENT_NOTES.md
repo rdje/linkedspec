@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.4 — structural parsing and semantic admission remain distinct): The
+  closeout confirms the parser may recognize receiver attached-block structure generically while callable metadata
+  remains the sole semantic gate. Exact attached/parenthesized lowering, typed descriptors, zero migration
+  telemetry, and closure-free source scans leave no Perl residue to repair. The next public-language correction is
+  settled: spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` must disappear as namespace selectors, typed reads,
+  mutation targets, and mutation authority. `.12.1` must inventory and migrate them, split backend/diagnostic/hard-
+  retirement work, and treat ordinary non-selector constructor classification as a separate question.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.2 — parse broadly, grant semantics from metadata): Receiver attached
   syntax should produce a structural call candidate without deciding which method accepts it. A shared callable
   contract then validates the final slot and arity and converts contextual `{ ... }` into one zero-positional

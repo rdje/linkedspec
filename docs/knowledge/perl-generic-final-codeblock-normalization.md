@@ -14,7 +14,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [perl, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
-evidence: "FUTURE-PARITY-BACKLOG.11.3.3.2 adds LinkedSpec::CallableContract; typed final parameter metadata in user_function_definition.spec and UserFunctionRegistry; generic receiver attached parsing; metadata-governed MethodLowering normalization; typed final-value validation; focused live and standalone generated execution."
+evidence: "FUTURE-PARITY-BACKLOG.11.3.3.2 adds LinkedSpec::CallableContract, typed final metadata, generic receiver parsing, metadata-governed normalization, typed validation, and live/standalone generated execution. Closeout .11.3.4 verifies byte-equivalent attached/parenthesized lowering, zero raw/fallback/compatibility/unresolved telemetry, no parser allowlist/captured environment/stored coderef, 100 focused tests, capability 60/0/0, CLI 61x2, and Phase 0 1..1030."
 reverify: "PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t && python3 tools/check_callable_codeblock_contract.py"
 ---
 
@@ -45,7 +45,9 @@ non-final, nested-argument-list, missing-name, and unknown-type declarations fai
 
 Current builtin contracts cover helper `with` and receiver `with`, `walk_leaves`, `map_leaves`, and
 `reduce_leaves`. Unknown attached receiver methods may parse structurally but fail callable-contract validation;
-syntax recognition no longer grants semantics.
+syntax recognition no longer grants semantics. Closeout `.11.3.4` found no raw-host fallback, stored coderef or
+captured environment, parser method allowlist, harray promotion, compatibility rewrite, or unresolved helper.
+Perl callable-codeblock behavior is closed; other backend implementations remain future.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[perl-final-codeblock-signature-declaration-gap]].

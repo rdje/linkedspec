@@ -7,8 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.4 — close Perl callable codeblocks**
+  (DONE — spec-facing aggregate-selector removal `.12.1` active before Rust codeblocks or Lua).
+
+  **Closeout:** Toolbox probes show byte-equivalent attached/parenthesized helper and receiver lowering, generic
+  parsing followed by metadata validation, and typed user-function descriptors. Source and descriptor audits find
+  no raw-host fallback, stored coderef/capture, parser method allowlist, harray drift, compatibility rewrite, or
+  unresolved helper. No behavior repair was needed.
+
+  **Proof/routing:** Four focused suites pass 100 tests; the strict checker and 60/0/0 capability census pass. The
+  immediately prior canonical gate covers both 61-case CLI environments and Phase 0 `1..1030` in 916 seconds.
+  Removal of spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` selector, typed-read, and mutation semantics is
+  settled and active under `.12.1`; only ordinary non-selector constructor classification remains separate.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.3.2 — normalize Perl final codeblocks**
-  (DONE — Perl diagnostics/docs/full-gate closeout `.11.3.4` next).
+  (DONE — Perl diagnostics/docs/full-gate closeout subsequently completed in `.11.3.4`).
 
   **Implementation:** Typed user-function/staged records preserve final `parameter_kinds`;
   `LinkedSpec::CallableContract` governs helper/receiver/user-function acceptance; receiver attached syntax is
@@ -218,13 +231,14 @@ Current execution status for interruption-safe batch workflow recovery.
   ABIs. Public active references lead with canonical `cat`; broader shipped proof remains unchanged in phase 6.
 
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.0 — capture compatibility retirement doctrine**
-  (DONE — deferred design `.12.1`; active Lua string closeout unchanged).
+  (DONE — `.12.1` has since become active after Perl callable closeout).
 
   **Doctrine:** Every construct is a four-kind expression, unused values drop silently, dispatch is duck-typed,
   trailing codeblocks are signature-governed, and backward compatibility is temporary.
 
-  **Ownership:** `.12.1` will split uniform binding and retirement of `array(name)`/`hash(name)` alternate storage
-  plus other migration surfaces. No behavior changed.
+  **Ownership:** `.12.1` must remove spec-facing `array(name)`/`hash(name)` namespace, typed-read, and mutation
+  semantics and split the required migration/diagnostic/backend/hard-retirement work. Only non-selector constructor
+  classification is separate. No behavior changed in `.12.0`.
 
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.5.0 — route Lua string corpus proof**
   (DONE — focused public no-drift `.4.3.2.2.5.1` next).

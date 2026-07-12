@@ -35,7 +35,8 @@ This `README.md` is the **single entry point** to the project.
   Perl now preserves `callback: codeblock` in function/staged metadata and normalizes attached and parenthesized
   contextual blocks for declared helpers, user functions, and receiver methods to one typed zero-argument
   `codeblock_argument`; explicit `{|params| ...}` values retain their own signatures and harrays are not promoted.
-  Perl closeout `.11.3.4` is active; the cross-backend feature is not yet current.
+  Perl closeout `.11.3.4` is complete; the cross-backend feature is not yet current. Before backend rollout,
+  active `.12.1` removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -244,7 +245,8 @@ Top-level project docs:
   dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
   deterministic fixture source/results. Perl literal construction/preservation, dynamic variable invocation, and
   metadata-governed attached/parenthesized helper/user-function/receiver normalization pass the contract-focused
-  suite; final-only `name: codeblock` is current on Perl and `.11.3.4` owns closeout.
+  suite; final-only `name: codeblock` and its no-drift closeout are current on Perl. Cross-backend parity remains
+  future-owned after the prioritized `.12.1` selector retirement.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

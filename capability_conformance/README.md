@@ -58,7 +58,8 @@ assignment/copying, user-function preservation, dynamic caller execution, tempor
 standalone discard, receiver continuation, static precedence, and typed failures pass. Generic Perl final-block
 normalization audit `.11.3.3.0` found the declaration gap, ADR 0032 closes it in `.11.3.3.1`, and `.11.3.3.2`
 preserves metadata plus executes equivalent attached/parenthesized helper/user-function/receiver contextual forms.
-Perl closeout `.11.3.4` and backend parity keep the overall capability future-owned.
+Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust/Dart/Julia/Lua parity keeps
+the overall capability future-owned under the remaining backend rollout leaves.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

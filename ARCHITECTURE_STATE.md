@@ -10,7 +10,8 @@ This document is the current high-level technical reading of the project shape. 
   method-name allowlist; lowering consults `LinkedSpec::CallableContract` and normalizes attached plus
   parenthesized contextual blocks into the same zero-positional `codeblock_argument`. Generated execution covers
   `with`, typed user functions, and tree traversal; explicit literals retain their own signatures, harrays remain
-  harrays, and invalid declarations/final values carry typed diagnostics. `.11.3.4` owns Perl closeout.
+  harrays, and invalid declarations/final values carry typed diagnostics. `.11.3.4` has closed Perl no-drift;
+  `.12.1` now removes spec-facing aggregate selectors before cross-backend rollout.
 - `2026-07-12` refresh: Perl `cb(args)` resolution now runs after governed helpers and registered user functions.
   Generated calls pass explicit references to the rule's scalar working slots into `LinkedSpec::CodeblockRuntime`,
   which evaluates the stored typed ActionIR body without adding a coderef or captured environment to the record.
@@ -149,7 +150,8 @@ This document is the current high-level technical reading of the project shape. 
   schema/fixtures `.11.2` are adopted and checked. Perl typed construction `.11.3.1` and dynamic invocation
   `.11.3.2` are complete. Audit `.11.3.3.0` found the missing declaration, and ADR 0032 now adopts final-only
   `name: codeblock`: it carries no nested argument list because explicit values own `{|params| ...}` signatures.
-  Perl normalization `.11.3.3.2` is complete; `.11.3.4` closes diagnostics/docs/no-drift before cross-backend work.
+  Perl normalization `.11.3.3.2` and diagnostics/docs/no-drift closeout `.11.3.4` are complete. Active `.12.1`
+  removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics before cross-backend work.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

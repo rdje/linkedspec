@@ -32,16 +32,13 @@ non-final codeblocks, receiver behavior, execution context, block-local return,
 and hash-literal disambiguation remain contract-validation concerns shared by
 every backend.
 
-Current behavior is narrower. Perl, Rust, Dart, and Julia implement helper
-`with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`, and selected
-tree-traversal receiver blocks. Lua is planned but not implemented. The closed
-`SPEC-FORMAT-TERSE.14` contract explicitly excluded the parenthesized final-block
-form and arbitrary block-taking callables. A Perl reference lowering probe shows
-`with("x") { return(value) }` succeeds while `with("x", { return(value) })` and
-unknown-callee forms produce unsupported-helper lowering. Rust parsing is still
-explicitly name-gated to helper `with` and selected receiver methods; Dart and
-Julia parse generic trailing-block nodes but runtime dispatch still accepts only
-the named supported surfaces.
+The pre-correction implementation was narrower: Perl, Rust, Dart, and Julia implemented named `with` and selected
+tree-traversal block forms, while Lua was absent. The closed `SPEC-FORMAT-TERSE.14` contract explicitly excluded
+the parenthesized final-block form and arbitrary block-taking callables. Its Perl probe accepted attached `with`
+but rejected the parenthesized equivalent. Perl has since replaced that limitation with metadata-governed
+helper/user-function/receiver normalization and generic structural receiver parsing. Rust remains explicitly
+name-gated; Dart and Julia parse generic trailing-block nodes but runtime dispatch still accepts only named
+supported surfaces; Lua remains planned.
 
 Historically, generic equivalence could not be confirmed for any variant, and all-variant support still cannot be
 claimed while Lua is absent. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031
@@ -53,7 +50,8 @@ schema/fixture. Perl `.11.3.1` preserves typed literal records and `.11.3.2` inv
 `.11.3.3.0` proves the parser payload shape is compatible but the declaration was missing. ADR 0032 and
 `.11.3.3.1` now adopt final-only `name: codeblock`; it has no nested argument list because explicit codeblock
 values own their `{|params| ...}` signatures. Perl behavior `.11.3.3.2` now normalizes metadata-declared helper,
-typed user-function, and receiver contextual forms; other backends remain future.
+typed user-function, and receiver contextual forms. Perl no-drift closeout `.11.3.4` is complete; other backends
+remain future.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],

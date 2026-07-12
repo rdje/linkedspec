@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.4 — close Perl callable codeblocks
+
+Closed the Perl callable-codeblock lane after a read-only residue audit. Toolbox probes produce byte-equivalent
+lowering for attached and parenthesized helper/receiver contextual forms, generic receiver syntax receives no
+semantics until callable metadata accepts it, and typed user-function descriptors preserve the final codeblock
+parameter. Descriptor telemetry is zero for raw-host dependencies, fallbacks, compatibility rewrites, and
+unresolved helpers. Source scans find no parser method allowlist, captured environment, or stored coderef field.
+
+Four focused suites pass 100 tests; the neutral checker and 60/0/0 capability census pass. The immediately prior
+canonical gate covers both 61-case CLI environments and Phase 0 `1..1030` in 916 seconds on the exact committed
+behavior, so no behavior repair was needed in this closeout. Perl `.11.3` is complete. Active `.12.1` now owns the
+settled removal of spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation
+semantics before Rust codeblock or resumed Lua work; only ordinary non-selector constructor classification is
+separate.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.3.2 — normalize Perl final codeblocks
 
 Perl now preserves exact final `name: codeblock` metadata in fixed user-function definitions, staged body
@@ -21,8 +36,8 @@ and unknown-type declarations fail before parser construction.
 The focused callable suite passes 10 top-level subtests, adjacent ActionIR/variadic/generated-source suites pass
 90 top-level tests, all touched Perl modules compile, and the neutral checker passes 7 literals, 11 calls, 9
 invalid literals, 7 invalid calls, 4 invalid declarations, and 8 contextual forms. Direct Phase 0 passes all
-1,030 top-level subtests in 966 seconds. `.11.3.4` owns the remaining Perl closeout before the prioritized
-spec-facing wrapper-removal activity. The canonical local gate also passes capability 60/0/0, both 61-case CLI
+1,030 top-level subtests in 966 seconds. `.11.3.4` has since closed Perl before the prioritized spec-facing
+selector-removal activity. The canonical local gate also passes capability 60/0/0, both 61-case CLI
 environments, and Phase 0 `1..1030` in 916 seconds.
 
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.3.1 — declare final codeblock parameters
