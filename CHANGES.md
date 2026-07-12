@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.5.1 — close Lua string helper parity
+
+Closed focused scalar/string, helper-regex, split, and scalar/array mutation parity at 76/76 on PUC Lua and LuaJIT.
+Corrected stale positive roadmap/catalog presentation of the retired helper to canonical `cat`; retirement history
+remains descriptive rather than executable. Parent string/regex leaves close and numeric `.4.3.3` activates.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.0 — capture compatibility retirement doctrine
 
 Captured the settled language doctrine: every construct is a scalar/array/harray/codeblock expression; if/switch,

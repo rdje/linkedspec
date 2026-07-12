@@ -1,6 +1,11 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.5.1 — scan executable-looking historical prose):
+  A retired helper can survive no-drift as positive roadmap history or a catalog heading even when code/spec scans
+  are clean. Current public references should lead with the canonical name; historical names remain plain
+  retirement prose so examples cannot be copied as apparently supported calls.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.0 — compatibility needs an exit condition):
   Duck typing means the value, not wrapper syntax or backend storage namespace, selects helper/method behavior.
   Compatibility scaffolding may bridge a migration but must never silently become the permanent language model;

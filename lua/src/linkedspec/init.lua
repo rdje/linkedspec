@@ -17,7 +17,7 @@ local M = {}
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "runtime-array-split-mutation"
+M.PARITY_STATUS = "runtime-string-helpers"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 

@@ -616,15 +616,17 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   live docs, changes/development notes, and memory advance to scalar/string `.4.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement scalar/string helpers and compatible receiver chains.
   Children: `.4.3.2.0`, `.4.3.2.1`, `.4.3.2.2`
   Dependencies: `.4.3.1`
-  Acceptance: Definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/replace,
+  Acceptance: Definedness/emptiness/coalesce, `cat`, trim/case/length, substring/prefix/suffix/contains/replace,
     regex match/substitution flags, split bridges, lexical comparisons, scalar statement mutation, and receiver
     forms match catalog examples across the child leaves.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Pure scalar/string, exact Unicode 17 casing, six-variant scalar text, strict
+    helper regex/matches, literal/regex/Unicode split, scalar substitution, explicit array split replacement, and
+    focused public no-drift pass. Full PUC Lua/LuaJIT gates are 76/76; numeric helpers `.4.3.3` are next.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.0`
   Status: `done`
@@ -788,15 +790,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement regex-aware scalar matching/substitution, split bridges, flags, and statement mutation.
   Children: `.4.3.2.2.0`, `.4.3.2.2.1`, `.4.3.2.2.2`, `.4.3.2.2.3`, `.4.3.2.2.4`, `.4.3.2.2.5`
   Dependencies: `.4.3.2.1`
   Acceptance: `matches`, regex/literal replacement, dual `substr`, scalar/array split bridges, governed flags and
     capture expansion, pure versus statement-only mutation, invalid-pattern boundaries, and receiver composition
     match the oracle on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Ordered children close helper regex/matches, pure split, scalar regex mutation,
+    explicit array split mutation, focused no-drift, and correct phase-6 routing for broader shipped fixtures.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.0`
   Status: `done`
@@ -874,15 +877,17 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5`
-  Status: `active`
+  Status: `done`
   Goal: Close regex/split/mutation mechanism and public-documentation no-drift.
   Children: `.4.3.2.2.5.0`, `.4.3.2.2.5.1`
   Dependencies: `.4.3.2.2.2`, `.4.3.2.2.3`, `.4.3.2.2.4`
   Acceptance: Neutral focused fixtures cover the complete landed mechanism on both ABIs; catalog/book/README/task/
     KM/live state contain no retired `concat`, helper-flag, pure-versus-mutation, or frontier drift. Exact shipped
     execution stays owned by `.6.2`, after the later helper/control/output families and executable corpus runner.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Full dual-ABI gate passes 76/76. A non-host `concat(` call-shape scan is
+    clean across current Lua/spec/capability/book/roadmap surfaces after correcting stale positive roadmap/catalog
+    prose to canonical `cat`; historical retirement text remains non-executable. Task/KM/book/status state agrees.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5.0`
   Status: `done`
@@ -895,17 +900,19 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Close focused regex/split/mutation and public-surface no-drift.
   Dependencies: `.4.3.2.2.5.0`
   Acceptance: Both Lua ABIs pass the complete focused gate; public docs explain pure versus statement mutation,
     strict flags, captures, empty fields, and the current explicit-target compatibility boundary; current authored
     surfaces contain no retired `concat`; task/roadmap/KM/book/status state agrees before numeric helpers.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** PUC Lua and LuaJIT pass 76/76; strict flag, capture, empty-field, pure/value,
+    statement-mutation, invalid-boundary, and explicit-target compatibility docs agree. Public active helper
+    reference now leads with `cat`; stale positive `concat` roadmap prose is corrected. Numeric `.4.3.3` activates.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement numeric helpers, aliases, symbol callees, reducers, and number receiver chains.
   Dependencies: `.4.3.1`
   Acceptance: Arithmetic/unary/clamp/comparison/range and aggregate min/max/sum/avg/median behavior, invalid-input
@@ -1138,7 +1145,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `done` | Dart/Julia direct, helper, receiver, and array casing use generated Unicode 17 data. |
 | 25 | `LUA-BACKEND-PARITY.4.3.2.1.2.4` | `done` | PUC Lua/LuaJIT pass 71/71 and six-variant casing is admitted. |
 | 26 | `LUA-BACKEND-PARITY.4.3.2.1.3` | `done` | One typed scalar-to-text contract passes all six runtime variants. |
-| 27 | `LUA-BACKEND-PARITY.4.3.2.2` | `active` | Implement regex/split/mutation semantics after pure scalar closure. |
+| 27 | `LUA-BACKEND-PARITY.4.3.2.2` | `done` | Regex/split/scalar/array mutation mechanisms close at 76/76. |
 | 28 | `LUA-BACKEND-PARITY.4.3.2.2.0` | `done` | Split helper regex, pure split, scalar mutation, array mutation, and no-drift. |
 | 29 | `LUA-BACKEND-PARITY.4.3.2.2.1` | `done` | Strict PCRE2 helper regex and `matches` pass 73/73 on both ABIs. |
 | 30 | `LUA-BACKEND-PARITY.4.3.2.2.2` | `done` | Pure literal/regex/Unicode split passes 74/74 on both ABIs. |
@@ -1146,7 +1153,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 32 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `done` | Explicit array-target split replacement passes 76/76 on both ABIs. |
 | 33 | `LUA-BACKEND-PARITY.4.3.2.2.5` | `active` | Close focused mechanism/public no-drift; shipped proof belongs to phase 6. |
 | 34 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `done` | Route premature shipped cases to their dependency-complete phase-6 owner. |
-| 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `active` | Close focused regex/split/mutation public no-drift. |
+| 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `done` | Focused string mechanisms/public surfaces close at 76/76. |
+| 36 | `LUA-BACKEND-PARITY.4.3.3` | `active` | Implement numeric helpers, aliases, reducers, and receiver chains. |
+
+### `LUA-BACKEND-PARITY.4.3.2.2.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Runtime mechanisms were green, but public roadmap/catalog prose still positively
+  presented the retired `concat` spelling and the string parent/frontier remained open.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Historical follow-up prose escaped the prior helper-retirement migration;
+  the public catalog led with the old name despite correctly calling `cat` canonical below it.
+- [x] **FIX** — Lead the catalog and roadmap history with canonical `cat`, keep retirement history non-executable,
+  close regex/split/string parents, and advance the runtime status/frontier to numeric helpers.
+- [x] **ADDRESSED (verified)** — Non-host retired call-shape scan is clean; flags/captures/empty fields/pure versus
+  mutation/explicit-target boundaries remain documented and focused tests pass.
+- [x] **NO REGRESSION** — Full PUC Lua and LuaJIT gates pass 76/76; exact shipped cases remain unchanged in `.6.2`.
+- [x] **LOCKSTEP** — Runtime status, task/index/roadmaps, README, mdBook, KM, changes/notes/live, and memory agree.
 
 ### `LUA-BACKEND-PARITY.4.3.2.2.5.0` Acceptance Checklist
 
@@ -1421,3 +1442,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.2.2.3` | `LUA-BACKEND-PARITY.4.3.2.2.3 - add Lua scalar regex mutation` | Statement-context scalar substitution, strict flags, capture expansion, diagnostics, and array-mutation handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation` | Explicit aggregate replacement through pure split semantics, store-boundary proof, and no-drift handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof` | Direct blocker inventory, phase-6 shipped-case routing, and focused no-drift handoff. |
+| `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity` | Dual-ABI 76/76, canonical `cat` public surfaces, parent closure, and numeric handoff. |

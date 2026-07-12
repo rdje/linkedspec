@@ -5,6 +5,8 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.5.1` closes Lua scalar/string parity at 76/76 on both ABIs,
+  corrects stale positive retired-helper prose to canonical `cat`, and advances to numeric helpers `.4.3.3`.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.4` adds dropped-statement dispatch for explicit
   `split(array(target), source, delimiter)` replacement through copied pure split values. Scalar-held and source
   values stay isolated. Both Lua ABIs pass 76/76; regex/split no-drift `.5` is active.

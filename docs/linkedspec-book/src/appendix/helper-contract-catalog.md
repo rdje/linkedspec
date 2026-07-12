@@ -249,12 +249,12 @@ dispatch rule.
   ```
   Input `xhello` -> `"updated"`.
 
-### `concat(args...)`
-- **Signature**: `concat(a: scalar, b: scalar, ...)`
+### `cat(args...)`
+- **Signature**: `cat(a: scalar, b: scalar, ...)`
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
-- **Terse spelling**: `cat(args...)` is the canonical spelling. `concat(...)` is retired and now diagnoses on current runtimes. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Retirement note**: the former `concat` spelling diagnoses on current runtimes. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Example**:
   ```text
   demo::  -> value  .push

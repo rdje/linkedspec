@@ -16,7 +16,8 @@ Deterministic scalar/string helpers now include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
 lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
 text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split,
-statement scalar regex mutation, explicit array split replacement, and receiver chains. The Lua gate currently passes 76/76 on
+statement scalar regex mutation, explicit array split replacement, and receiver chains. Scalar/string parity is
+closed, and the Lua gate passes 76/76 on
 both PUC Lua 5.4 and LuaJIT.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
@@ -304,8 +305,8 @@ four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
 scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies exact
 cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
 mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; `.2.2.3`
-supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; active `.2.2.5` owns
-regex/split corpus and public no-drift; `.3`
+supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; `.2.2.5` closes focused/public
+no-drift and routes broader shipped proof to phase 6; active `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its

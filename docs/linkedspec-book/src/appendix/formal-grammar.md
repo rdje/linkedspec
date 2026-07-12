@@ -878,7 +878,7 @@ tracking but not recommended for new `.spec` authoring:
 - `declare(...)` and declaration aliases — use auto-existing variables, assignment, and typed aggregate resets
 - `assign(...)` — use `target = value` or `set(target, value)`
 - `array_copy(...)`, `hash_copy(...)` — use `copy(...)`
-- `concat(...)` — use `cat(...)`
+- former `concat` spelling — use `cat(...)`
 - `push_value(...)` — use `push(...)`
 - `push_nonempty(...)` — use an explicit `is_nonempty(...)` guard plus `push(...)`
 - `s(...)`, `a(...)`, `h(...)` — use bare scalar reads, `array(...)`, `hash(...)`

@@ -7,6 +7,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.5.1 — close Lua string helper parity**
+  (DONE — numeric helpers `.4.3.3` next).
+
+  **Proof:** Scalar/string, Unicode/coercion, regex/matches, split, mutation, and public no-drift pass 76/76 on both
+  ABIs. Public active references lead with canonical `cat`; broader shipped proof remains unchanged in phase 6.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.0 — capture compatibility retirement doctrine**
   (DONE — deferred design `.12.1`; active Lua string closeout unchanged).
 
