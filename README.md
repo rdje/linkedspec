@@ -30,8 +30,9 @@ This `README.md` is the **single entry point** to the project.
   `{|args| block }`, invoked by `cb(args)`, with dynamic caller context and no lexical capture in version 1.
   `linkedspec-callable-codeblock-v1` now locks that accepted design. Perl preserves typed literal records and
   executes `cb(args)` with dynamic caller state, temporary copied/restored parameters, block-local return,
-  chaining/discard, static precedence, and typed failures. Generic final-block normalization remains active under
-  `FUTURE-PARITY-BACKLOG.11.3.3`; the complete cross-backend feature is not yet current behavior.
+  chaining/discard, static precedence, and typed failures. Audit `.11.3.3.0` found that no current helper,
+  user-function, or receiver signature can declare contextual final-codeblock acceptance or its callback params;
+  declaration design `.11.3.3.1` is active before behavior. The cross-backend feature is not yet current.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -239,7 +240,7 @@ Top-level project docs:
   contract: exact `{|fixed, ...rest| body }` parsing, harray/eager-block disambiguation, deferred typed AST data,
   dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
   deterministic fixture source/results. Perl literal construction/preservation and dynamic variable invocation
-  pass the contract-focused suite; generic final-block normalization remains active `.11.3.3`.
+  pass the contract-focused suite; declaration design `.11.3.3.1` precedes generic final-block behavior.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

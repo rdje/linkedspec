@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.3.0 — split final codeblock signature declaration
+
+Read-only LinkedSpec probes stopped generic final-block behavior work at a missing contract boundary. Attached and
+parenthesized final blocks already parse to equivalent `block_value` payloads, but only attached syntax is marked.
+User-function descriptors expose parameter names/arity/rest without value-kind declarations, helper arity lives in
+lowering tables, and receiver parsing hard-codes the currently admitted method names. Nothing states that a final
+call parameter accepts contextual codeblock sugar or declares the callback body's own parameters.
+
+Split backend-neutral declaration design `.11.3.3.1` from Perl implementation `.11.3.3.2`, recorded the causal fact
+in the Knowledge Map, and routed the director decision through task/roadmap/book/live state. No parser, registry,
+lowering, runtime, neutral fixture, or generated behavior changed.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.2 — execute Perl callable codeblocks dynamically
 
 Perl now resolves bound scalar calls after governed helpers and registered user functions, lowers standalone calls

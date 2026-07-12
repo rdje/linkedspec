@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.0 — arity is not a contextual-callback declaration): A call signature
+  needs two distinct facts before attached block sugar is safe: which final call parameter accepts a contextual
+  codeblock, and the callback body's own fixed/rest parameter signature. Do not infer either from an untyped final
+  parameter, calls inside a function body, a parser callee-name list, or brace contents. Current Perl records lack
+  both facts, so declaration design must precede normalization behavior.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.2 — dynamic context should be explicit dataflow, not a host closure):
   Keep the codeblock record pure data. At generated call sites, pass references to the rule's known scalar working
   slots into a narrow typed ActionIR evaluator; this makes caller visibility reviewable and lets temporary fixed/

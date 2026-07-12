@@ -69,7 +69,9 @@ Three backbone items tracked major structural modernization — all done:
   checked. Perl now preserves the typed record and executes `cb(args)` through dynamic caller bindings: arguments
   evaluate before copied fixed/rest parameters bind, prior parameter values restore, nonparameter mutation stays
   visible, return/chaining/discard work, and typed arity/keyword/not-callable/recursion failures are exposed through
-  runtime context. Generic final-block normalization `.11.3.3` and cross-backend behavior remain future.
+  runtime context. Audit `.11.3.3.0` found that current callable records cannot declare a final contextual
+  codeblock or its callback parameters. Declaration design `.11.3.3.1` now precedes normalization behavior;
+  cross-backend behavior remains future.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,
