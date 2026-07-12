@@ -3820,7 +3820,7 @@ function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "length"
         return _runtime_value_length(isempty(values) ? nothing : first(values))
     elseif helper_name == "lowercase"
-        return _runtime_string_transform(values, lowercase)
+        return _runtime_string_transform(values, unicode_lowercase)
     elseif helper_name == "matches"
         return _call_runtime_matches(values)
     elseif helper_name == "replace_substr"
@@ -3838,7 +3838,7 @@ function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "trim"
         return _runtime_string_transform(values, strip)
     elseif helper_name == "uppercase"
-        return _runtime_string_transform(values, uppercase)
+        return _runtime_string_transform(values, unicode_uppercase)
     end
     throw(RuntimeInterpreterException("unsupported pure runtime helper '$helper_name'"))
 end
@@ -3881,7 +3881,7 @@ function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
         items = _runtime_array_items(values)
         return isempty(items) ? nothing : _runtime_copy(last(items))
     elseif helper_name == "lowercase_each"
-        return _map_runtime_array_strings(values, lowercase)
+        return _map_runtime_array_strings(values, unicode_lowercase)
     elseif helper_name == "reversed"
         return Any[_runtime_copy(item) for item in reverse(_runtime_array_items(values))]
     elseif helper_name == "slice"
@@ -3903,7 +3903,7 @@ function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "uniq"
         return _call_runtime_array_uniq(values)
     elseif helper_name == "uppercase_each"
-        return _map_runtime_array_strings(values, uppercase)
+        return _map_runtime_array_strings(values, unicode_uppercase)
     end
     throw(RuntimeInterpreterException("unsupported array runtime helper '$helper_name'"))
 end

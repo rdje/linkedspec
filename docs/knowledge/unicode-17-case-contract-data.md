@@ -35,5 +35,5 @@ and generated Perl/Rust modules, validates schema/counts/order/scalar values/log
 through an independent evaluator. `tools/run_ci_local.sh` runs that checker before the other executable contracts.
 No ordinary check needs network access or a host Unicode library.
 
-Related facts: [[perl-rust-unicode-17-case-mapping]], [[unicode-case-mapping-cross-backend-gap]],
+Related facts: [[perl-rust-unicode-17-case-mapping]], [[dart-julia-unicode-17-case-mapping]], [[unicode-case-mapping-cross-backend-gap]],
 [[user-observable-backend-cli-parity-contract]].

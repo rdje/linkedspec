@@ -12,6 +12,48 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
 
+@testset "Generated Unicode 17 casing and runtime paths" begin
+    contract = JSON3.read(
+        read(joinpath(REPO_ROOT, "capability_conformance", "unicode_case_contract.json"), String),
+        Dict{String,Any},
+    )
+    @test LinkedSpecJulia.UNICODE_CASE_CONTRACT_ID == contract["contract_id"]
+    @test LinkedSpecJulia.UNICODE_CASE_VERSION == contract["unicode_version"]
+    @test LinkedSpecJulia.UNICODE_CASE_DATA_SHA256 == contract["data_sha256"]
+    for fixture in contract["fixtures"]
+        id = fixture["id"]
+        input = fixture["input"]
+        expected_lower = fixture["lower"]
+        expected_upper = fixture["upper"]
+        @test LinkedSpecJulia.unicode_lowercase(input) == expected_lower
+        @test LinkedSpecJulia.unicode_uppercase(input) == expected_upper
+        literal = JSON3.write(input)
+        source = """
+Top::
+ /x/ -> Done {
+   set(array(lower_items), [$literal])
+   lowercase_each(array(lower_items))
+   set(array(upper_items), [$literal])
+   uppercase_each(array(upper_items))
+   return([lowercase($literal), $literal.lowercase(), uppercase($literal), $literal.uppercase(), copy(array(lower_items)), copy(array(upper_items))])
+ }
+
+Done::
+ /x/
+"""
+        engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
+        result = runtime_execute(engine, "xx")
+        @test result.value == Any[
+            expected_lower,
+            expected_lower,
+            expected_upper,
+            expected_upper,
+            Any[expected_lower],
+            Any[expected_upper],
+        ]
+    end
+end
+
 function _throws_corpus_message(call, needle)
     try
         call()

@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.3 — align Dart and Julia Unicode casing
+
+Generated and byte-gated Dart/Julia Unicode 17 modules and routed scalar helper, receiver, value-array, and
+mutating-array casing through them. All 12 neutral fixtures pass every path. Full Dart passes 182 tests, CLI 61x2,
+and corpus 105/105; full Julia passes its package suite, primary CLI conformance, and corpus 105/105. Full local CI
+passes CLI 61x2 and phase0 `1..1030` in 493s plus every shared gate.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.2 — align Perl and Rust Unicode casing
 
 Extended the Unicode generator and drift checker with byte-deterministic Perl and Rust modules. Both embed the

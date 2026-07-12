@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.3 — align Dart and Julia Unicode casing**
+  (DONE — PUC Lua/LuaJIT and six-variant admission `.4` next).
+
+  **Implementation:** Generated Dart/Julia modules now own all scalar/receiver/value-array/mutating-array DSL casing.
+
+  **Proof:** Twelve fixtures pass every path. Dart passes 182 tests, CLI 61x2, corpus 105/105; Julia passes its full
+  package suite, primary CLI process conformance, and corpus 105/105. Full local CI passes phase0 `1..1030` and
+  CLI 61x2 plus every shared gate.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.2 — align Perl and Rust Unicode casing**
   (DONE — Dart/Julia generated-table consumption `.3` next).
 

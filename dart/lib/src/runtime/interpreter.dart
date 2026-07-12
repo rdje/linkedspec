@@ -9,6 +9,7 @@ import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
+import 'unicode_case_mapping.dart';
 
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
 final _leadingCommentLine = RegExp(r'[ \t]*#[^\n]*(?:\n|$)');
@@ -4958,7 +4959,7 @@ Object? _callPureHelper(String helperName, List<Object?> values) {
     'is_nonempty' => !_isEmptyValue(values.isEmpty ? null : values.first),
     'is_undefined' => values.isEmpty || values.first == null,
     'length' => _lengthValue(values.isEmpty ? null : values.first),
-    'lowercase' => _stringTransform(values, (value) => value.toLowerCase()),
+    'lowercase' => _stringTransform(values, unicodeLowercase),
     'matches' => _callMatches(values),
     'replace_substr' => _callReplaceSubstr(values),
     'rm_prefix' => _callRemoveEdge(values, prefix: true),
@@ -4970,7 +4971,7 @@ Object? _callPureHelper(String helperName, List<Object?> values) {
     ),
     'substr' => _callSubstr(values),
     'trim' => _stringTransform(values, (value) => value.trim()),
-    'uppercase' => _stringTransform(values, (value) => value.toUpperCase()),
+    'uppercase' => _stringTransform(values, unicodeUppercase),
     _ => throw RuntimeInterpreterException(
       "unsupported pure runtime helper '$helperName'",
     ),
@@ -4997,7 +4998,7 @@ Object? _callArrayHelper(String helperName, List<Object?> values) {
     'index_of' => _callIndexOf(values),
     'join_values' => _callJoinValues(values),
     'last' => _arrayItem(values, first: false),
-    'lowercase_each' => _mapStringItems(values, (value) => value.toLowerCase()),
+    'lowercase_each' => _mapStringItems(values, unicodeLowercase),
     'reversed' => _arrayTransform(values, (items) {
       return [for (final item in items.reversed) _copyValue(item)];
     }),
@@ -5018,7 +5019,7 @@ Object? _callArrayHelper(String helperName, List<Object?> values) {
     'take_last' => _callTake(values, front: false),
     'trim_each' => _mapStringItems(values, (value) => value.trim()),
     'uniq' => _callUniq(values),
-    'uppercase_each' => _mapStringItems(values, (value) => value.toUpperCase()),
+    'uppercase_each' => _mapStringItems(values, unicodeUppercase),
     _ => throw RuntimeInterpreterException(
       "unsupported array runtime helper '$helperName'",
     ),

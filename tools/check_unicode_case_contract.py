@@ -16,6 +16,8 @@ CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_case_contract.json"
 GENERATOR = ROOT / "unicode_case" / "generate_unicode_case_contract.py"
 PERL_MODULE_PATH = ROOT / "perl" / "LinkedSpec" / "UnicodeCaseMapping.pm"
 RUST_MODULE_PATH = ROOT / "rust" / "linkedspec-runtime" / "src" / "unicode_case_mapping.rs"
+DART_MODULE_PATH = ROOT / "dart" / "lib" / "src" / "runtime" / "unicode_case_mapping.dart"
+JULIA_MODULE_PATH = ROOT / "julia" / "src" / "runtime" / "UnicodeCaseMapping.jl"
 TASK_PATH = ROOT / "docs" / "tasks" / "LUA-BACKEND-PARITY.md"
 
 
@@ -119,6 +121,8 @@ def main() -> None:
         regenerated = Path(directory) / "unicode_case_contract.json"
         regenerated_perl = Path(directory) / "UnicodeCaseMapping.pm"
         regenerated_rust = Path(directory) / "unicode_case_mapping.rs"
+        regenerated_dart = Path(directory) / "unicode_case_mapping.dart"
+        regenerated_julia = Path(directory) / "UnicodeCaseMapping.jl"
         completed = subprocess.run(
             [
                 sys.executable,
@@ -129,6 +133,10 @@ def main() -> None:
                 str(regenerated_perl),
                 "--rust-output",
                 str(regenerated_rust),
+                "--dart-output",
+                str(regenerated_dart),
+                "--julia-output",
+                str(regenerated_julia),
             ],
             cwd=ROOT,
             text=True,
@@ -143,6 +151,8 @@ def main() -> None:
         for label, generated, checked in (
             ("Perl", regenerated_perl, PERL_MODULE_PATH),
             ("Rust", regenerated_rust, RUST_MODULE_PATH),
+            ("Dart", regenerated_dart, DART_MODULE_PATH),
+            ("Julia", regenerated_julia, JULIA_MODULE_PATH),
         ):
             if not checked.is_file():
                 fail(f"missing generated {label} casing module: {checked.relative_to(ROOT)}")

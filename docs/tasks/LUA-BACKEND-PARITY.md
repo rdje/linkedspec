@@ -745,16 +745,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.2 - align Perl and Rust Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart and Julia casing helpers to the generated Unicode 17.0.0 contract.
   Dependencies: `.4.3.2.1.2.2`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
     versions; the same neutral fixture and focused/full Dart/Julia gates pass with exact strings.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** The generator/checker byte-compare deterministic Dart and Julia modules.
+    Scalar helper, receiver, value-array, and mutating-array execution uses the generated Unicode 17 evaluator in
+    both backends. All 12 fixtures pass through every path (Dart focused 1 test; Julia 39 assertions). Full Dart
+    local gate passes formatter/analyzer, 182 tests, CLI 61x2, and corpus 105/105. Full Julia local gate passes the
+    package suite, primary CLI process conformance, and corpus 105/105.
+    Authoritative full local CI also passes CLI 61x2 and phase0 `1..1030` in 493s plus every shared gate.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Enable generated Unicode casing on PUC Lua/LuaJIT and admit exact six-variant parity.
   Dependencies: `.4.3.2.1.2.3`
   Acceptance: Lua function/receiver lower/uppercase paths use the same generated maps/context rules without native
@@ -1012,7 +1017,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 21 | `LUA-BACKEND-PARITY.4.3.2.1.2.0` | `done` | Unicode 17 full-default policy and rollout owners adopted. |
 | 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `done` | Verified Unicode contract and 12 fixtures pass the full gate. |
 | 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `done` | Perl/Rust direct, helper, receiver, and array casing use generated Unicode 17 data. |
-| 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `active` | Align Dart and Julia to generated Unicode 17 casing. |
+| 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `done` | Dart/Julia direct, helper, receiver, and array casing use generated Unicode 17 data. |
+| 25 | `LUA-BACKEND-PARITY.4.3.2.1.2.4` | `active` | Align PUC Lua/LuaJIT and admit six-variant Unicode parity. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The durable host-gap fact identified Dart/Julia simple/special-case divergence; source
+  inspection located host casing in each runtime's scalar and array dispatcher.
+- [x] **ROOT CAUSE (WHY + WHERE)** — DSL casing still delegated to Dart/Julia host releases instead of the pinned
+  neutral contract, while standalone array mutation delegated through those same unpinned array helpers.
+- [x] **FIX** — The shared generator/checker now emits and byte-compares Dart/Julia mapping/property/context modules;
+  every scalar, receiver, value-array, and mutating-array DSL path routes through them.
+- [x] **ADDRESSED (verified)** — All 12 fixtures pass direct/helper/receiver/array paths in both backends, including
+  expansion, combining output, supplementary scalars, Final Sigma context, and no normalization.
+- [x] **NO REGRESSION** — Full Dart gate passes 182 tests, CLI 61x2, corpus 105/105, format/analyze; full Julia gate
+  passes its package suite, primary CLI conformance, and corpus 105/105; full local CI passes CLI 61x2 and phase0
+  `1..1030` plus every shared contract/doctrine/documentation gate.
+- [x] **LOCKSTEP** — Generator/checker/CI tracked files, task/index/roadmaps, live docs, KM, and mdBook identify four
+  aligned implementation variants and PUC Lua/LuaJIT as the active final admission leaf.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.2.2` Acceptance Checklist
 

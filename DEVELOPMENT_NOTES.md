@@ -1,6 +1,11 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.3 — adapt generated scalar semantics to host string models):
+  Dart `runes` and Julia character iteration both expose Unicode scalars, so the shared mapping/context algorithm can
+  remain encoding-neutral. Generate native constant tables, preserve one scalar evaluator per backend, and make array
+  forms reuse it. Keep trace/CLI protocol casing separate: those operate on fixed ASCII option/hex tokens, not DSL text.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.2 — load generated semantics at both emission boundaries):
   Generate backend tables from the already-validated neutral object so mapping/property policy has one source.
   Route scalar and array forms through one backend evaluator; otherwise `lowercase_each` silently remains a second

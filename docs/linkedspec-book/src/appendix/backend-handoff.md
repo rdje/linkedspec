@@ -635,9 +635,9 @@ for the same all-variant no-drift reason.
 ADR `0027` now pins that casing surface to Unicode 17.0.0 full Default Case Conversion. Exact official
 UnicodeData/SpecialCasing/DerivedCoreProperties inputs generate a neutral contract with 1,563 lower and 1,581 upper
 mappings, merged Cased/Case_Ignorable ranges, Final_Sigma context, and 12 fixtures. The offline checker is part of
-the canonical local CI gate. Perl and Rust now consume generated modules for scalar helper, receiver, value-array,
-and mutating-array paths; their 12 fixtures and full backend gates pass. Dart/Julia consumption is active, then PUC
-Lua/LuaJIT follows; host case APIs are not the semantic authority.
+the canonical local CI gate. Perl, Rust, Dart, and Julia consume generated modules for scalar helper, receiver,
+value-array, and mutating-array paths; their 12 fixtures and full backend gates pass. PUC Lua/LuaJIT consumption and
+six-variant admission are active; host case APIs are not the semantic authority.
 
 ```lua
 local source = [[
