@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.1.0 — specify Unicode casing before copying host APIs):
+  Unicode text identity and Unicode case mapping are separate from UTF-8/UTF-16 storage. Host convenience methods
+  are not automatically a portable DSL contract: Perl/Rust full mappings, Dart simple mappings, and Julia mappings
+  already disagree for sharp-s, dotted-I, and ligatures. Standard Lua's byte-oriented case functions are not an
+  acceptable fallback. Pick and version one neutral case policy, lock it with cross-backend fixtures, then adapt all
+  hosts to it; keep unrelated deterministic scalar/string execution independently shippable.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.3.2.0 — separate pure strings from regex mutation):
   Pure scalar conversion and string functions are deterministic value dispatch over `.4.3.1` stores. Regex-aware
   substitution and split mutation additionally depend on dialect flags, replacement expansion, native engine

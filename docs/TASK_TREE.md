@@ -636,6 +636,10 @@ entry/match capture/map/Unicode-position helpers. Both runtimes pass 69/69; scal
 Index note 2026-07-11: `LUA-BACKEND-PARITY.4.3.2.0` is done. Pure scalar/string values, lexical comparisons, and
 receivers are owned by active `.4.3.2.1`; regex/split flags and statement-only scalar mutation are `.4.3.2.2`.
 
+Index note 2026-07-11: active `LUA-BACKEND-PARITY.4.3.2.1.0` measured a previously unspecified Unicode casing
+contract gap: Perl/Rust, Dart, and Julia disagree on special cases such as `ß`, `İ`, and `ﬃ`. Deterministic non-case
+pure helpers move to `.4.3.2.1.1`; `.4.3.2.1.2` owns a versioned all-variant casing decision and implementation.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

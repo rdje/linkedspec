@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.1.0 — split Unicode casing parity**
+  (DONE — deterministic non-case helpers `.1` are next; versioned all-variant casing is `.2`).
+
+  **Finding:** Perl/Rust, Dart, and Julia currently implement different Unicode special-casing policies for `ß`,
+  `İ`, and `ﬃ`; PUC Lua/LuaJIT have no portable built-in Unicode case mapper. The book had selected no canonical
+  version or simple/full/special-casing policy.
+
+  **Proof:** Direct host probes plus active source inspection establish the exact divergence. No behavior changed;
+  task/roadmap/book/KM/live-state alignment and governance checks pass.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.3.2.0 — split Lua scalar string mechanisms**
   (DONE — pure value and regex/mutation owners are durable; `.4.3.2.1` next).
 

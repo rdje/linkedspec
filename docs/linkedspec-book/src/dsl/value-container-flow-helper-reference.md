@@ -531,6 +531,11 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 | `cat(value, value, ...)` | scalar | build one string from scalar fragments. |
 | `length(value)` | scalar number or `undef` | measure scalar string length. |
 
+`lowercase` and `uppercase` are Unicode operations, not byte operations; UTF-8, UTF-16, and UTF-32 are only host
+representations. Ordinary non-ASCII transformations work today, but special casing is not yet one portable
+LinkedSpec contract: the current host runtimes disagree for values such as `ß`, `İ`, and `ﬃ`. Until the tracked
+all-variant casing contract lands, do not depend on those special-case results in portable specs.
+
 Examples:
 
 ```text

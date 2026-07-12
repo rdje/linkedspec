@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.1.0 — split Unicode casing parity
+
+Measured a previously unspecified cross-backend Unicode special-casing gap before implementing Lua strings.
+Perl/Rust, Dart, and Julia produce different results for `ß`, `İ`, and `ﬃ` because LinkedSpec delegates to host
+case APIs without selecting a Unicode version or simple/full/special-casing policy. Standard PUC Lua/LuaJIT add
+no portable Unicode case mapper of their own.
+
+Split deterministic non-case scalar/string helpers into `.4.3.2.1.1` and a versioned neutral contract, fixture,
+and all-variant casing repair into `.4.3.2.1.2`. Added a Knowledge Map fact and truthful mdBook portability warning.
+No runtime behavior changed; KM, mdBook, memory/task/doctrine metadata, and whitespace checks pass.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.3.2.0 — split Lua scalar string mechanisms
 
 Recursively split scalar/string runtime work before code. `.4.3.2.1` owns pure scalar conversion, concat/coalesce,

@@ -653,10 +653,44 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.2.1`
   Status: `active`
   Goal: Implement pure scalar/string helpers, lexical comparisons, aliases, and compatible receiver chains.
+  Children: `.4.3.2.1.0`, `.4.3.2.1.1`, `.4.3.2.1.2`
   Dependencies: `.4.3.1`
   Acceptance: `concat`/`cat`, coalesce families, defined/undefined/empty predicates, trim/case/length, prefix/
     suffix/contains/remove, literal substring/replace, explicit `str_*` comparisons, stable scalar conversion,
     null propagation, and function/receiver composition match cross-backend examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.0`
+  Status: `done`
+  Goal: Isolate deterministic pure-string execution from the newly measured cross-backend Unicode casing policy gap.
+  Dependencies: `.4.3.1`
+  Acceptance: Measure special-case lower/uppercase behavior through real Perl, Rust-source, Dart, and Julia paths;
+    record the root cause and exact divergent examples; give non-casing helpers and canonical Unicode casing separate
+    ordered owners before runtime code changes.
+  Verification: **PASS 2026-07-11.** Direct Perl, Dart, and Julia probes plus Rust runtime-source inspection prove
+    divergent special-case results. A Knowledge Map fact card and public warning preserve the exact evidence.
+    Deterministic non-case helpers are isolated in `.1`; version/policy/neutral fixture/all-variant repair are `.2`.
+    Knowledge Map generation/validation, mdBook build, memory/task/doctrine metadata, and whitespace checks pass.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.0 - split Unicode casing parity`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.1`
+  Status: `active`
+  Goal: Implement deterministic pure scalar/string helpers and compatible receiver chains except case conversion.
+  Dependencies: `.4.3.2.1.0`
+  Acceptance: `cat`, coalesce families, defined/undefined/empty predicates, trim/length, prefix/suffix/contains/remove,
+    literal substring/replace, explicit `str_*` comparisons, stable scalar conversion, null propagation, lazy fallback,
+    and function/receiver composition match cross-backend examples on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.1.2`
+  Status: `pending`
+  Goal: Define and implement one versioned Unicode lower/uppercase contract across every LinkedSpec variant.
+  Dependencies: `.4.3.2.1.1`
+  Acceptance: Select a canonical Unicode version and simple/full/special-casing policy; add a neutral fixture covering
+    ordinary non-ASCII and divergent special cases (`ß`, `İ`, and `ﬃ`); align Perl, Rust, Dart, Julia, PUC Lua, and
+    LuaJIT values and receiver chains without confusing Unicode semantics with UTF-8/UTF-16 host representation.
   Verification: `pending`
   Commit: `pending`
 
@@ -892,7 +926,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 14 | `LUA-BACKEND-PARITY.4.3.0` | `done` | Nine implementation/closeout owners cover the full helper surface. |
 | 15 | `LUA-BACKEND-PARITY.4.3.1` | `done` | Four-kind stores/access/capture reads pass 69/69 on both runtimes. |
 | 16 | `LUA-BACKEND-PARITY.4.3.2.0` | `done` | Pure scalar and regex/mutation mechanisms have separate owners. |
-| 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `active` | Implement pure scalar/string helpers and receiver chains. |
+| 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `active` | Pure strings are split around the Unicode casing parity gap. |
+| 18 | `LUA-BACKEND-PARITY.4.3.2.1.0` | `done` | Measured three host policies and split deterministic helpers from casing. |
+| 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `active` | Implement deterministic non-case pure scalar/string helpers. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Real host probes show `uppercase("ß")` yields `SS` in Perl, `ß` in Dart, and `ẞ`
+  in Julia; `lowercase("İ")` and `uppercase("ﬃ")` also diverge.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Existing backends delegate `lowercase`/`uppercase` to host libraries, while
+  the DSL/book selects no Unicode version or simple/full/special-casing policy. PUC Lua and LuaJIT have no portable
+  built-in Unicode case mapper, so implementing this as `string.lower`/`string.upper` would add ASCII-only drift.
+- [x] **FIX** — Split deterministic non-casing helpers into `.4.3.2.1.1` and a versioned neutral all-variant casing
+  contract/fixture/repair into `.4.3.2.1.2` before behavior code.
+- [x] **ADDRESSED (verified)** — Exact divergent examples, backend mechanisms, encoding distinction, and owner are
+  durable in `docs/knowledge/unicode-case-mapping-cross-backend-gap.md` and visible in the mdBook.
+- [x] **NO REGRESSION** — No runtime behavior changed; the committed Lua 69x2/full-CI proof remains authoritative.
+- [x] **LOCKSTEP** — Task/index, roadmaps, mdBook, Knowledge Map, live docs, changes/notes, and memory agree.
 
 ## Initial toolchain evidence (read-only planning audit)
 
