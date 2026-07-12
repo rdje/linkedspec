@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.5.0 — route Lua string corpus proof**
+  (DONE — focused public no-drift `.4.3.2.2.5.1` next).
+
+  **Finding:** Direct shipped probes stop at later-owned control, output, array, or child-flow mechanisms; the
+  official corpus runner rejects execution until phase 6.
+
+  **Routing:** Exact unchanged named cases now belong explicitly to `.6.2`; focused string mechanisms remain
+  76/76 on both ABIs. No runtime or fixture expectation changed.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.4 — add Lua array split mutation**
   (DONE — regex/split corpus and public no-drift `.4.3.2.2.5` next).
 

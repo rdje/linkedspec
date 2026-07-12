@@ -1,6 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.5.0 — route Lua string corpus proof
+
+Corrected the string no-drift owner after direct in-memory shipped-case probes showed later-family blockers:
+`control_if`, diagnostic `print`, and array/child-flow breadth. The official Lua corpus runner also deliberately
+rejects execution until phase 6. Exact unchanged named-case proof is now explicit under `.6.2`; focused dual-ABI
+string mechanism and public no-drift remains active under `.4.3.2.2.5.1`. No runtime behavior changed.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.4 — add Lua array split mutation
 
 Added dropped-statement dispatch for `split(array(target), source, delimiter)`. Only an explicit array wrapper

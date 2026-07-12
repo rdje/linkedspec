@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.4` — Lua explicit array split mutation.
-- latest_commit: `ae340db6` — `LUA-BACKEND-PARITY.4.3.2.2.3 - add Lua scalar regex mutation`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.5`; close regex/split/mutation corpus and public no-drift.
-- next_action: run the owned shipped-corpus cases through Lua execution, compare exact checked-in results, repair any
-  bounded drift, and reconcile public helper/status surfaces before closing `.4.3.2.2`.
-- current_proof: dropped `split(array(target), source, delimiter)` replaces only the explicit typed array store via
-  copied pure literal/regex split semantics; scalar-held and source values stay unchanged. PUC Lua and LuaJIT pass
-  76/76 with scalar regex mutation and pure split still green.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.5.0` — routed premature shipped string-corpus proof.
+- latest_commit: `e906af0e` — `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.5.1`; close focused regex/split/mutation public no-drift.
+- next_action: scan current authored/public surfaces for retired `concat` and mechanism/frontier drift, run the
+  dual-ABI focused gate, and close `.4.3.2.2` before numeric helpers.
+- current_proof: direct in-memory shipped probes stop at later-owned `control_if`, `print`, or array/child-flow
+  breadth; the official runner rejects execution until phase 6. Exact unchanged named cases are now owned by
+  `.6.2`; focused string mechanisms remain green at 76/76 on both ABIs.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; generic final
   codeblock equivalence/`with` `.11.1`.
-- blockers: none. in_flight_uncommitted: array split mutation implementation/docs prepared for commit; generated
+- blockers: none. in_flight_uncommitted: planning-only corpus-proof routing prepared for commit; generated
   artifacts clean.

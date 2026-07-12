@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.5.0 — route proof by first missing mechanism):
+  A shipped fixture containing a string mutation is not necessarily a string-family acceptance test. Probe the
+  whole fixture and record its first missing mechanism; if control, output, array, or child-flow execution blocks
+  the oracle, preserve the exact fixture under the later dependency-complete corpus owner and close the focused
+  family with direct mechanism tests. Never weaken expected results to manufacture early green corpus counts.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.4 — wrapper shape spends mutation authority):
   Statement context and the explicit `array(target)` wrapper jointly authorize replacement; a dropped ordinary
   split call stays a harmless discarded pure expression. Reusing the pure split dispatcher prevents literal,

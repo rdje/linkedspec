@@ -875,12 +875,32 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5`
   Status: `active`
-  Goal: Close regex/split/mutation no-drift through shipped corpus cases and public documentation.
+  Goal: Close regex/split/mutation mechanism and public-documentation no-drift.
+  Children: `.4.3.2.2.5.0`, `.4.3.2.2.5.1`
   Dependencies: `.4.3.2.2.2`, `.4.3.2.2.3`, `.4.3.2.2.4`
-  Acceptance: Neutral focused fixtures plus `portmap_constant`, `simenv_multiline_value`,
-    `ebnf_expression_rules`, `ebnf_logging_annotation`, `lib_reader_sattribute`, and `lib_reader_cattribute` match
-    checked-in oracle results; both Lua ABIs pass the expanded gate; catalog/book/README/task/KM/live state contain
-    no retired `concat`, helper-flag, pure-versus-mutation, or frontier drift.
+  Acceptance: Neutral focused fixtures cover the complete landed mechanism on both ABIs; catalog/book/README/task/
+    KM/live state contain no retired `concat`, helper-flag, pure-versus-mutation, or frontier drift. Exact shipped
+    execution stays owned by `.6.2`, after the later helper/control/output families and executable corpus runner.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.2.5.0`
+  Status: `done`
+  Goal: Diagnose and correctly route the premature shipped-corpus acceptance before closeout work.
+  Verification: **PASS 2026-07-12.** A disposable native in-memory probe showed `portmap_constant` and both EBNF
+    cases stop at later-owned `control_if`, `simenv_multiline_value` stops at later-owned `print`, and both
+    `lib_reader` cases execute but remain empty behind later array/child-flow breadth. The official corpus runner
+    deliberately rejects `--execute` until phase 6. Exact named-case proof is therefore routed to `.6.2` rather
+    than weakening fixtures or blocking scalar/string closure on unrelated families.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2.2.5.1`
+  Status: `active`
+  Goal: Close focused regex/split/mutation and public-surface no-drift.
+  Dependencies: `.4.3.2.2.5.0`
+  Acceptance: Both Lua ABIs pass the complete focused gate; public docs explain pure versus statement mutation,
+    strict flags, captures, empty fields, and the current explicit-target compatibility boundary; current authored
+    surfaces contain no retired `concat`; task/roadmap/KM/book/status state agrees before numeric helpers.
   Verification: `pending`
   Commit: `pending`
 
@@ -1007,7 +1027,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Status: `pending`
   Goal: Admit shipped-spec, recursion, function, and advanced helper windows.
   Acceptance: Expand monotonically through all named manifest families with exact failure inventories and no
-    backend-local expected files.
+    backend-local expected files. This includes exact `portmap_constant`, `simenv_multiline_value`,
+    `ebnf_expression_rules`, `ebnf_logging_annotation`, `lib_reader_sattribute`, and `lib_reader_cattribute` proof
+    after the helper/control/output owners on which those cases depend.
   Verification: `pending`
   Commit: `pending`
 
@@ -1122,7 +1144,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 30 | `LUA-BACKEND-PARITY.4.3.2.2.2` | `done` | Pure literal/regex/Unicode split passes 74/74 on both ABIs. |
 | 31 | `LUA-BACKEND-PARITY.4.3.2.2.3` | `done` | Scalar regex mutation and capture expansion pass 75/75 on both ABIs. |
 | 32 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `done` | Explicit array-target split replacement passes 76/76 on both ABIs. |
-| 33 | `LUA-BACKEND-PARITY.4.3.2.2.5` | `active` | Close regex/split/mutation corpus and public no-drift. |
+| 33 | `LUA-BACKEND-PARITY.4.3.2.2.5` | `active` | Close focused mechanism/public no-drift; shipped proof belongs to phase 6. |
+| 34 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `done` | Route premature shipped cases to their dependency-complete phase-6 owner. |
+| 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `active` | Close focused regex/split/mutation public no-drift. |
+
+### `LUA-BACKEND-PARITY.4.3.2.2.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.2.2.5` required six shipped cases before the official corpus runner or their
+  control/output/array/child-flow dependencies existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The string-family split accidentally retained full-corpus acceptance that
+  canonically belongs to phase 6; direct in-memory execution identified each first unrelated blocker.
+- [x] **FIX** — Keep focused mechanism/public no-drift in `.2.2.5.1` and route the exact unchanged named fixtures
+  to `.6.2`, after dependency-complete helper/control/output and corpus-runner work.
+- [x] **ADDRESSED (verified)** — Disposable PCRE2 execution reports `control_if`, `print`, or later flow/array
+  boundaries rather than a regex/split regression; the probe artifact was removed.
+- [x] **NO REGRESSION** — Planning/routing only: no runtime behavior or fixture expectation changes.
+- [x] **LOCKSTEP** — Task/index/roadmap/KM/memory record the corrected owner before closeout proceeds.
 
 ### `LUA-BACKEND-PARITY.4.3.2.2.4` Acceptance Checklist
 
@@ -1383,3 +1420,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.2.2.2` | `LUA-BACKEND-PARITY.4.3.2.2.2 - add Lua pure split bridge` | Literal/regex/Unicode pure split values, receiver bridge, zero-width progress, and scalar-mutation handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.3` | `LUA-BACKEND-PARITY.4.3.2.2.3 - add Lua scalar regex mutation` | Statement-context scalar substitution, strict flags, capture expansion, diagnostics, and array-mutation handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation` | Explicit aggregate replacement through pure split semantics, store-boundary proof, and no-drift handoff. |
+| `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof` | Direct blocker inventory, phase-6 shipped-case routing, and focused no-drift handoff. |
