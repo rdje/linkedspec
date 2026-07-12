@@ -11,7 +11,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, doctrine, expressions, duck-typing, compatibility, wrappers, FUTURE-PARITY-BACKLOG]
-evidence: "Director clarification 2026-07-12: every spec construct is an expression yielding scalar/array/harray/codeblock; if/switch, helper calls, user functions, and method calls participate; unused values are silently dropped; callable signatures may accept a trailing codeblock; backward compatibility is temporary and removed after settlement. The director explicitly settles removal of spec-facing array(IDENTIFIER)/hash(IDENTIFIER) namespace, typed-read, and mutation semantics. FUTURE-PARITY-BACKLOG.12.1 owns migration and hard retirement; only ordinary non-selector constructor classification is separate."
+evidence: "Director clarification 2026-07-12: every spec construct is an expression yielding scalar/array/harray/codeblock; if/switch, helper calls, user functions, and method calls participate; unused values are silently dropped; callable signatures may accept a trailing codeblock; backward compatibility is temporary and removed after settlement. The director explicitly settles removal of spec-facing array(IDENTIFIER)/hash(IDENTIFIER) namespace, typed-read, and mutation semantics. FUTURE-PARITY-BACKLOG.12.1.0 inventories 651 exact calls/82 specs and splits neutral contract, five backend enablements, migration, hard rejection, and no-drift."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG.12|VALUE_DROP|inline if|inline switch|generic final-codeblock|duck-typed' docs/tasks docs/knowledge ROADMAP.md ROADMAP_V2.md"
 ---
 
@@ -31,3 +31,5 @@ calls remain useful or literals replace them.
 
 Backward compatibility may ease migration temporarily, but every compatibility surface requires an explicit
 removal condition and owner. Settled semantics take precedence over preserving historical spellings or storage.
+
+Inventory and execution order: [[spec-facing-aggregate-selector-retirement-inventory]].

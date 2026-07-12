@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.0 — remove the public namespace before refactoring host storage): One
+  `.spec` identifier must expose one typed value, but that does not require every backend to collapse its internal
+  maps in the same slice. Make bare reads and mutations semantically complete, migrate sources, then delete exact
+  `array(IDENTIFIER)` / `hash(IDENTIFIER)` recognition so no alternate namespace remains observable. Preserve
+  static child-rule precedence when `push(name, value)` is ambiguous and define three-argument `split` as the
+  mutable bare-target form. `set(target, value)` must return the target's post-assignment typed value. Exact scans
+  find 651 selector calls/82 specs, so backend enablement must precede source migration and hard rejection.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.4 — structural parsing and semantic admission remain distinct): The
   closeout confirms the parser may recognize receiver attached-block structure generically while callable metadata
   remains the sole semantic gate. Exact attached/parenthesized lowering, typed descriptors, zero migration

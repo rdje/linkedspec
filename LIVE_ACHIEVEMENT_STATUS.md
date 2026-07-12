@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement**
+  (DONE — neutral selector-free contract `.12.1.1` active).
+
+  **Inventory:** 651 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls occur across 82 tracked specs; 227 are
+  in 15 shipped specs. Toolbox lowering proves bare reads/receivers exist but bare `push(items, value)` conflicts
+  with child-rule push and mutable `split(parts, source, delimiter)` is not yet admitted.
+
+  **Routing:** `.12.1.1` fixes neutral one-binding, mutation, result, precedence, diagnostic, and constructor
+  semantics. Perl/Rust/Dart/Julia/Lua enablement follows; then shipped/corpus/embedded sources migrate; then each
+  backend hard-rejects exact selectors; final docs/no-drift close the arc. Removal itself is not undecided.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.4 — close Perl callable codeblocks**
   (DONE — spec-facing aggregate-selector removal `.12.1` active before Rust codeblocks or Lua).
 

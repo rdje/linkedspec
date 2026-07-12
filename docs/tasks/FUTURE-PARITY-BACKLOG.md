@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl callable-codeblock `.11.3` closed; spec-facing selector removal `.12.1` active).
+- Last updated: `2026-07-12` (selector inventory/split `.12.1.0` complete; neutral retirement contract `.12.1.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2664,6 +2664,8 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.12.1`
   Status: `active`
   Goal: Split and execute uniform binding plus spec-facing aggregate-selector retirement.
+  Children: `.12.1.0`, `.12.1.1`, `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`, `.12.1.7`,
+    `.12.1.8`, `.12.1.9`
   Acceptance: Inventory every public and implementation compatibility surface and classify temporary migration
     versus current language; define one variable binding with runtime scalar/array/harray/codeblock identity; make
     pure and mutable helper/method dispatch consume that value without wrapper-selected storage;
@@ -2675,6 +2677,131 @@ before implementation.
     code.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.0`
+  Status: `done`
+  Goal: Inventory and split exact spec-facing aggregate-selector retirement before behavior code.
+  Acceptance: Count exact selector-shaped source uses separately from constructors; prove current selector-free
+    read/mutation gaps with LinkedSpec tools; locate every backend recognition/dispatch seam; split neutral contract,
+    five backend enablement leaves, source migration, hard retirement, and final no-drift before implementation.
+  Verification: **PASS 2026-07-12.** There are 651 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` occurrences in
+    82 tracked `.spec` files, including 227 occurrences across 15 shipped specs. Immediate parents include 172
+    `copy`, 158 `push`, 72 `set`, 50 `is_nonempty`, 13 `split`, and smaller mutation/read/helper families; 17 forms
+    are receiver expressions. Toolbox lowering proves bare read/method forms already exist on Perl, while
+    `push(items, value)` still selects child-rule semantics and `split(parts, source, delimiter)` is unsupported.
+    Perl owns selector recognition through `ValueExpr`/`MethodLowering`/`EmitContext`; Rust through
+    `resolve_array_target`/`resolve_hash_target` and constructor branches; Dart/Julia through their target-name
+    helpers; Lua through `target_descriptor` and constructor branches. No behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement`
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.1`
+  Status: `active`
+  Goal: Adopt a neutral one-binding and aggregate-selector retirement contract before backend changes.
+  Acceptance: Fix bare identifier read/write/mutation dispatch by runtime value, absent-binding auto-creation,
+    static-rule precedence for ambiguous `push(name, value)`, three-argument mutable `split`, expression-valued
+    mutation, and exact `set(target, value)` post-assignment target return. Reject exact selector-shaped calls as
+    the future contract while separately classifying zero/multi/quoted/computed array/hash constructors. Provide a
+    checked migration table and executable future fixtures without changing current backend behavior.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.2`
+  Status: `pending`
+  Goal: Make the Perl reference execute the neutral selector-free binding and mutation contract.
+  Acceptance: Bare reads, receivers, set, push/append, hash mutation, split, in-place collection helpers, copy,
+    controls, calls, and chaining operate on one observable typed binding; static child-rule push keeps precedence;
+    internal host storage layout remains unobservable. Old selectors stay temporary only until source migration.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.3`
+  Status: `pending`
+  Goal: Implement the unchanged selector-free binding and mutation contract on Rust.
+  Acceptance: Native/generated execution and diagnostics match the neutral fixture and Perl without exposing
+    `resolve_array_target`/`resolve_hash_target` storage selection as public semantics.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.4`
+  Status: `pending`
+  Goal: Implement the unchanged selector-free binding and mutation contract on Dart.
+  Acceptance: Bare `ActionVariableExpr` reads and all mutable/pure helper paths observe the same typed binding;
+    native/generated/current corpus proof matches the neutral contract.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.5`
+  Status: `pending`
+  Goal: Implement the unchanged selector-free binding and mutation contract on Julia.
+  Acceptance: `_read_runtime_store` remains the public read model while target/mutation paths converge on the same
+    binding; native/generated/current corpus proof matches the neutral contract.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.6`
+  Status: `pending`
+  Goal: Implement the unchanged selector-free binding and mutation contract on Lua before resuming feature parity.
+  Acceptance: Existing `lookup_binding` semantics extend through every admitted mutation/helper path; dual-ABI
+    focused proof passes without keeping selector forms as a Lua compatibility requirement.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.7`
+  Status: `pending`
+  Goal: Migrate every tracked `.spec` and embedded source away from exact aggregate selectors.
+  Children: `.12.1.7.1`, `.12.1.7.2`, `.12.1.7.3`
+  Dependencies: `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.7.1`
+  Status: `pending`
+  Goal: Migrate the 15 affected shipped specs and prove their reference/generated behavior.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.7.2`
+  Status: `pending`
+  Goal: Migrate neutral/oracle/corpus `.spec` fixtures and regenerate only derived expectations.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.7.3`
+  Status: `pending`
+  Goal: Migrate embedded test/tool/backend source strings and verify zero executable selector-shaped sources.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8`
+  Status: `pending`
+  Goal: Hard-retire exact aggregate-selector syntax with one portable diagnostic.
+  Children: `.12.1.8.1`, `.12.1.8.2`, `.12.1.8.3`, `.12.1.8.4`, `.12.1.8.5`, `.12.1.8.6`
+  Dependencies: `.12.1.7`
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.1`
+  Status: `pending`
+  Goal: Reject exact selector-shaped calls on Perl and delete selector-specific recognition/dispatch.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.2`
+  Status: `pending`
+  Goal: Reject exact selector-shaped calls on Rust and delete selector-specific recognition/dispatch.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.3`
+  Status: `pending`
+  Goal: Reject exact selector-shaped calls on Dart and delete selector-specific recognition/dispatch.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.4`
+  Status: `pending`
+  Goal: Reject exact selector-shaped calls on Julia and delete selector-specific recognition/dispatch.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.5`
+  Status: `pending`
+  Goal: Reject exact selector-shaped calls on Lua and delete selector-specific recognition/dispatch.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.8.6`
+  Status: `pending`
+  Goal: Prove the portable diagnostic and zero selector recognizers/sources across all variants.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1.9`
+  Status: `pending`
+  Goal: Close uniform-binding docs, mdBook examples, Knowledge Map, capability, and complete no-drift gates.
+  Acceptance: Public docs teach bare typed bindings and literals/retained constructors only; no compatibility
+    caveat, example, test, source, diagnostic, or backend still admits selector semantics.
+
+### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Count exact selector-shaped calls and prove that current bare alternatives are not
+  yet uniformly executable, rather than assuming source replacement is mechanical.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Locate public ambiguity and each backend's selector recognition, target
+  extraction, constructor special case, store lookup, and mutation dispatch seams.
+- [x] **FIX** — Split neutral semantics, Perl/Rust/Dart/Julia/Lua enablement, three source-migration surfaces, five
+  hard-retirement backends plus no-drift, and final public documentation before behavior code.
+- [x] **ADDRESSED (verified)** — Inventory covers 651 calls/82 specs, 227 calls/15 shipped specs, parent-helper and
+  receiver categories, toolbox lowering, and concrete backend owner locations.
+- [x] **NO REGRESSION** — Read-only inventory and task/docs/KM updates only; no grammar, lowering, runtime,
+  generated-source, fixture, or accepted `.spec` behavior changes.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, changes/notes/live, and bounded memory route
+  exact selector removal to active neutral contract `.12.1.1`; selector survival is not an open question.
 
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
@@ -2792,6 +2919,8 @@ before implementation.
 | 80 | `FUTURE-PARITY-BACKLOG.11.3.3.2` | `done` | Perl preserves final codeblock metadata and normalizes attached/parenthesized helper/user-function/receiver forms. |
 | 81 | `FUTURE-PARITY-BACKLOG.11.3.4` | `done` | Perl callable-codeblock diagnostics, docs, and full-gate no-drift are closed. |
 | 82 | `FUTURE-PARITY-BACKLOG.12.1` | `active` | Remove `.spec` aggregate-selector forms and split uniform binding retirement before Rust/Lua. |
+| 83 | `FUTURE-PARITY-BACKLOG.12.1.0` | `done` | Exact source counts, toolbox gaps, backend owners, and the complete retirement sequence are durable. |
+| 84 | `FUTURE-PARITY-BACKLOG.12.1.1` | `active` | Adopt the neutral selector-free binding, mutation, result, precedence, diagnostic, and migration contract. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3478,6 +3607,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.3.1` | Director clarification; ADR 0032/index; strict declaration schema and four invalid forms; 8 contextual helper/user-function/receiver cases; callable-codeblock checker; governance/whitespace/mdBook. | PASS. Final-only `name: codeblock` is adopted without nested signature typing; explicit values own `{|params| ...}` signatures and Perl behavior `.2` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.3.2` | Touched Perl syntax; strict callable checker; focused callable 10 subtests; adjacent ActionIR/variadic/generated-source 90 tests; capability 60/0/0; direct Phase 0; canonical 61x2 CLI plus Phase 0; Knowledge Map/memory/task/doctrine/whitespace/mdBook. | PASS. Wrapper-free typed components canonicalize to ordered public params; declared helper/user/receiver contextual forms normalize equivalently; explicit values retain signatures; harrays reject typed; immediate `with` breadth remains intact; direct Phase 0 `1..1030` passes in 966 seconds and canonical Phase 0 in 916 seconds. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.4` | Toolbox attached/parenthesized helper and receiver lowering; typed descriptor; parser/runtime/generated-source residue scans; four focused suites/100 tests; strict callable checker; capability 60/0/0; immediately prior canonical 61x2 CLI plus Phase 0 `1..1030`/916s; governance/whitespace/mdBook. | PASS. Perl callable codeblocks close without raw-host fallback, stored coderef/capture, parser method allowlist, harray drift, compatibility rewrite, or unresolved helper; `.12.1` activates spec-facing selector removal before Rust/Lua. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.0` | Knowledge Map first; tracked/shipped exact selector counts; direct-parent and receiver classification; Perl toolbox lowering for wrapped/bare set/push/split/copy/read/receiver/hash forms; Perl/Rust/Dart/Julia/Lua owner scans; governance/whitespace/mdBook. | PASS. 651 exact calls in 82 tracked specs include 227 in 15 shipped specs; bare reads exist but push/split alternatives have concrete gaps; neutral, five-backend, migration, hard-retirement, and closeout leaves are split before behavior. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3512,6 +3642,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.11.3.3.1` | `FUTURE-PARITY-BACKLOG.11.3.3.1 - declare final codeblock parameters` | ADR 0032, final-only `name: codeblock`, value-owned signatures, invalid declarations, and eight contextual cases. |
 | `FUTURE-PARITY-BACKLOG.11.3.3.2` | `FUTURE-PARITY-BACKLOG.11.3.3.2 - normalize Perl final codeblocks` | Typed callable metadata, canonical contextual arguments, generic receiver parsing, generated execution, and typed rejection. |
 | `FUTURE-PARITY-BACKLOG.11.3.4` | `FUTURE-PARITY-BACKLOG.11.3.4 - close Perl callable codeblocks` | Residue audit, focused and canonical no-drift proof, Perl parent closeout, and `.12.1` selector-removal activation. |
+| `FUTURE-PARITY-BACKLOG.12.1.0` | `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement` | Exact inventory, concrete selector-free gaps, backend ownership, and dependency-ordered removal plan. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3577,6 +3708,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.0` turns the settled selector-removal directive into an executable retirement tree. Exact
+  scans find 651 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls in 82 tracked specs, including 227 in 15 shipped
+  specs. Toolbox probes show bare reads/receivers but expose child-rule ambiguity for `push(items, value)` and an
+  unsupported bare mutable `split`. Neutral contract `.1`, five backend enablement leaves, three migration slices,
+  five hard-rejection leaves plus no-drift, and final docs/gates are ordered before Rust codeblock or Lua work.
 - `2026-07-12`: `.11.3.4` closes Perl callable codeblocks after toolbox equivalence probes, typed-descriptor
   inspection, source-residue scans, 100 focused tests, and the immediately prior canonical 60/0/0 capability,
   61x2 CLI, and Phase 0 `1..1030` proof. No behavior repair was needed. The director-settled removal of spec-facing

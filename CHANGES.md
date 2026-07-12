@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement
+
+Converted the settled removal of spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` selectors into a complete,
+dependency-ordered implementation tree. Exact tracked-source scans find 651 occurrences across 82 `.spec` files,
+including 227 across 15 shipped specs. Direct parent classification finds 172 `copy`, 158 `push`, 72 `set`, 50
+`is_nonempty`, 13 `split`, and smaller helper families; 17 forms are receiver expressions.
+
+Toolbox lowering proves the migration is not a blind replacement: selector-free `copy(items)`, `return(items)`,
+typed `set(items, value)`, and `items.first()` already exist on the Perl reference, but `push(items, value)` still
+selects child-rule push semantics and `split(parts, source, delimiter)` is unsupported. Source scans locate the
+corresponding selector/target/constructor seams in Perl, Rust, Dart, Julia, and Lua.
+
+The task tree now orders a neutral executable replacement contract, five backend enablement leaves, shipped/
+corpus/embedded-source migration, five backend hard-rejection leaves plus zero-residue proof, and final public
+documentation/no-drift. The public model is one observable typed binding; backend host storage layout remains an
+implementation detail. No grammar, lowering, runtime, fixture, or accepted `.spec` behavior changes in this slice.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.4 — close Perl callable codeblocks
 
 Closed the Perl callable-codeblock lane after a read-only residue audit. Toolbox probes produce byte-equivalent

@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
+  `FUTURE-PARITY-BACKLOG.12.1`. Exact scans find 651 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
+  tracked specs, including 227 in 15 shipped specs. The one-binding public model does not require identical host
+  storage layouts, but bare read/mutation semantics must be complete before sources migrate and selector-specific
+  recognition is hard-deleted. Active `.12.1.1` owns the neutral contract, including static-rule precedence for
+  ambiguous push, mutable three-argument split, expression results, diagnostics, and constructor classification.
 - `2026-07-12` refresh: Perl callable metadata now declares an exact final `name: codeblock` parameter for typed
   user functions and registered helper/receiver contracts. Generic receiver attached syntax parses without a
   method-name allowlist; lowering consults `LinkedSpec::CallableContract` and normalizes attached plus
