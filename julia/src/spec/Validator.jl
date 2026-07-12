@@ -165,6 +165,20 @@ function _check_function_registry(spec::SpecFile)
             throw(SpecValidationException("user function '$name' arity does not match parameter count"))
         end
 
+        signature = function_definition.signature
+        if signature !== nothing
+            if signature.kind != "callable_signature" || signature.version != 1
+                throw(SpecValidationException("user function '$name' has unsupported callable signature"))
+            end
+            if signature.positional_params != function_definition.params ||
+                    signature.min_arity != function_definition.arity || signature.max_arity !== nothing
+                throw(SpecValidationException("user function '$name' has inconsistent callable signature"))
+            end
+            if !_is_identifier(signature.rest_param)
+                throw(SpecValidationException("user function '$name' has invalid rest parameter '$(signature.rest_param)'"))
+            end
+        end
+
         seen_params = Set{String}()
         for param in function_definition.params
             if !_is_identifier(param)
@@ -176,6 +190,15 @@ function _check_function_registry(spec::SpecFile)
             push!(seen_params, param)
             if _is_reserved_runtime_symbol(param) || _is_lifecycle_marker_name(param) || _is_function_keyword(param)
                 throw(SpecValidationException("user function '$name' parameter '$param' is reserved"))
+            end
+        end
+        if signature !== nothing
+            rest_param = signature.rest_param
+            if rest_param in seen_params
+                throw(SpecValidationException("duplicate parameter '$rest_param' in function '$name'"))
+            end
+            if _is_reserved_runtime_symbol(rest_param) || _is_lifecycle_marker_name(rest_param) || _is_function_keyword(rest_param)
+                throw(SpecValidationException("user function '$name' parameter '$rest_param' is reserved"))
             end
         end
     end

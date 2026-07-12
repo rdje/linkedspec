@@ -269,7 +269,7 @@ parentheses, brace-less bodies, caller-state-mutating functions, recursion,
 closures/lambdas/currying, and function namespaces are future extension topics, not
 current parser/compiler/runtime behavior.
 
-ADR 0030 adopts the next versioned signature, now implemented by Perl, Rust, and Dart:
+ADR 0030 adopts the next versioned signature, now implemented by Perl, Rust, Dart, and Julia:
 
 ```text
 fn collect(prefix, ...items) {
@@ -288,8 +288,11 @@ signature through parsed/compiled records, staged and public projection, seriali
 or generated-plan execution; its function-local runtime binds the same fresh typed array. Dart preserves the same
 union through its spec shell, AST/staged jobs, registry/action resolver, descriptor, normalized emitted state, and
 native/generated execution; registered keyword arguments diagnose instead of leaking Dart named-argument rules.
-Fixed calls still require exact arity; variadic calls require at least `min_arity`. Julia and Lua remain rollout
-work, so this is implemented on three variants but not yet portable across every admitted backend.
+Julia carries the same typed union through its spec projection, staged jobs, registry/action resolver, outward
+descriptor, native runtime, canonical JSON/ASCII-hex emitted state, generated-plan execution, and reconstruction.
+Its registered calls likewise reject keyword arguments and bind a newly copied vector into fresh scalar/array
+stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua remains rollout
+work, so four admitted backends implement the contract while six-runtime portability awaits Lua routing.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

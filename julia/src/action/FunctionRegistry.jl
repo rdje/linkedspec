@@ -101,11 +101,21 @@ function resolve_exact_user_function(registry::UserFunctionRegistry, name::Abstr
         return nothing
     end
     for entry in entries
-        if entry.definition.arity == arity
+        if user_function_accepts_arity(entry, arity)
             return entry
         end
     end
     return nothing
+end
+
+function user_function_accepts_arity(entry::UserFunctionEntry, arity::Int)
+    signature = entry.definition.signature
+    return signature === nothing ? arity == entry.definition.arity : arity >= signature.min_arity
+end
+
+function user_function_arity_expectation(entry::UserFunctionEntry)
+    signature = entry.definition.signature
+    return signature === nothing ? string(entry.definition.arity) : "at least $(signature.min_arity)"
 end
 
 function resolve_user_function_call(registry::UserFunctionRegistry, name::AbstractString, arity::Int)
@@ -127,6 +137,7 @@ function function_definition_with_body_ast(definition::FunctionDefinition, body_
         name = definition.name,
         params = definition.params,
         arity = definition.arity,
+        signature = definition.signature,
         body_source = definition.body_source,
         body_payload = definition.body_payload,
         body_parse_job = definition.body_parse_job,
@@ -178,15 +189,19 @@ function to_descriptor_json(entry::UserFunctionEntry)
     result = Dict{String,Any}(
         "index" => entry.index,
         "kind" => "user_function_definition",
-        "version" => 1,
+        "version" => definition.signature === nothing ? 1 : 2,
         "name" => definition.name,
-        "params" => definition.params,
-        "arity" => definition.arity,
         "source_text" => definition.source,
         "source_span" => to_json(definition.source_span),
         "body_span" => to_json(definition.body_span),
         "body_source" => definition.body_source,
     )
+    if definition.signature === nothing
+        result["params"] = definition.params
+        result["arity"] = definition.arity
+    else
+        result["signature"] = to_json(definition.signature)
+    end
     _put_if_present!(result, "body_payload", definition.body_payload)
     if definition.body_parse_job !== nothing
         result["body_parse_job"] = to_json(definition.body_parse_job)

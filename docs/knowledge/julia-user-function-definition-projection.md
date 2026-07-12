@@ -23,7 +23,8 @@ It exposes `project_user_function_definition_asts(source, nodes)`,
 
 Julia does not raw-scan top-level `fn name(params) { ... }` definitions. Instead, it consumes the neutral
 `function_definition` / `function_definition_error` node shape owned by `specs/user_function_definition.spec`.
-Projection validates name/params/arity, source/body spans, `body_payload`, `body_parse_job`, parser/top-rule
+Projection validates the exact fixed-v1 `params`/`arity` or variadic-v2 `callable_signature` union, source/body
+spans, identical staged `body_payload`/`body_parse_job` signature copies, parser/top-rule
 identity, result/failure policies, and diagnostic owner. It then normalizes `parent_ast_path` and job IDs to
 `functions.<index>.body_source`, strips function-definition spans while preserving newlines, and parses the
 remaining rule source through `parse_spec(...)`.
@@ -35,4 +36,5 @@ rule-only parsing reports a source parse error. No raw function scanner is prese
 
 Related facts: [[julia-full-corpus-gate]], [[julia-spec-driven-function-shell-parser]], [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
 [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[julia-user-function-registry]],
+[[julia-variadic-user-functions]],
 [[dart-core-spec-parser]], [[rust-user-function-registry-parity]], [[text-to-ast-backend-doctrine]].

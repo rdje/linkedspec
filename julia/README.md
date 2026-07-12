@@ -155,9 +155,10 @@ The same emitter can cover spec-driven top-level functions and staged body jobs:
 ```julia
 function_source = """
 fn echo(value) { return(value) }
+fn collect(prefix, ...items) { return({ "prefix" : prefix, "items" : items }) }
 Top::
  /x/
- E { return(echo(match_text())) }
+ E { return(collect(echo(match_text()), "tail")) }
 """
 
 spec = parse_spec_with_staged_user_function_definitions(function_source; trace = trace)
@@ -199,11 +200,14 @@ block values, structured controls, and raw fallback nodes with JSON projection. 
 exposes `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
 `resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
 `is_known_action_ir_call_name(...)` for canonical helper/control contract records and generic
-unknown-helper/raw diagnostics over typed ActionIR nodes; optional `function_registry` input classifies exact-arity
-registered user calls before helper fallback and reports wrong-arity registered calls. `src/action/FunctionRegistry.jl`
+unknown-helper/raw diagnostics over typed ActionIR nodes; optional `function_registry` input classifies exact-v1 or
+fixed-prefix/rest-v2 registered calls before helper fallback, rejects keyword arguments, and reports wrong-arity
+registered calls. `src/action/FunctionRegistry.jl`
 exposes `UserFunctionRegistry`, `user_function_registry_from_spec(...)`, `body_parse_jobs(...)`,
 `resolve_user_function_call(...)`, and `stitch_function_body_ast(...)` for ordered user-function records, staged body
-parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` stitching.
+parse-job queues, exact/minimum-arity lookup, v1/v2 JSON projection, and immutable `body_ast` stitching. Variadic
+calls evaluate positional arguments once left-to-right and bind extras as one fresh typed array; generated Julia
+source preserves the same signature through canonical JSON encoded as ASCII hex.
 These parse/projection/validation APIs accept an optional caller-owned trace emitter and propagate it through
 their nested operations. `src/compiler/CompiledSpec.jl` exposes `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
 `CompiledDependencyRegexState`, `CompiledDescriptorState`, `compiled_rule(...)`, `action_payloads(...)`, and

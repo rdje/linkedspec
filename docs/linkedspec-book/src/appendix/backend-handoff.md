@@ -651,9 +651,9 @@ Lua implements and admits the contract on both Lua ABIs next. Callable arity is 
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
-array, and reject keyword/overload/host-splat semantics. The Perl reference now consumes the unchanged fixture
-through grammar, staged/outward records, generated source, diagnostics, and exact execution. Rust is the active
-next implementation; Dart, Julia, and Lua follow, so complete backend admission must not be claimed early.
+array, and reject keyword/overload/host-splat semantics. Perl, Rust, Dart, and Julia now consume the unchanged
+fixture through grammar/spec projection, staged/outward records, native and generated execution, diagnostics, and
+exact results. Lua dependency-complete routing remains active, so six-runtime admission must not be claimed early.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

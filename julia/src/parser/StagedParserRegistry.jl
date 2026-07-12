@@ -528,13 +528,25 @@ function _validate_function_body_parse_job(
         throw(StagedParserRegistryException(
             "function $(definition.name) body_parse_job function_name does not match",
         ))
-    elseif job.params !== nothing && job.params != definition.params
+    elseif definition.signature === nothing && job.signature !== nothing
+        throw(StagedParserRegistryException(
+            "function $(definition.name) version 1 body_parse_job must not contain signature",
+        ))
+    elseif definition.signature !== nothing && (job.params !== nothing || job.arity !== nothing)
+        throw(StagedParserRegistryException(
+            "function $(definition.name) version 2 body_parse_job must store arity only in signature",
+        ))
+    elseif definition.signature === nothing && job.params !== nothing && job.params != definition.params
         throw(StagedParserRegistryException(
             "function $(definition.name) body_parse_job params do not match",
         ))
-    elseif job.arity !== nothing && job.arity != definition.arity
+    elseif definition.signature === nothing && job.arity !== nothing && job.arity != definition.arity
         throw(StagedParserRegistryException(
             "function $(definition.name) body_parse_job arity does not match",
+        ))
+    elseif definition.signature !== nothing && job.signature != definition.signature
+        throw(StagedParserRegistryException(
+            "function $(definition.name) body_parse_job signature does not match",
         ))
     elseif job.text != definition.body_source
         throw(StagedParserRegistryException(

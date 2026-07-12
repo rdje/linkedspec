@@ -11,6 +11,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
+include("variadic_user_function_contract_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.3.2 — implement Julia variadic functions**
+  (DONE — no-drift and Lua ownership routing `.4.4` next).
+
+  **Implementation:** Julia's typed v2 signature now survives spec/staged, registry/action, descriptor, native,
+  canonical hex-emitted, generated-plan, and reconstructed execution. Calls are positional-only, preserve fixed v1
+  exactness, enforce the v2 minimum, and bind a newly allocated copied rest vector after ordered eager evaluation.
+
+  **Proof:** The 55 neutral assertions pass all results/shapes, malformed and keyword cases, freshness/ordering,
+  diagnostics, emitted state, generated execution, and reconstruction. The authoritative Julia gate passes all
+  package tests, 61/61 in both CLI environments, and 105/105 corpus fixtures.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.4.3.1 — implement Dart variadic functions**
   (DONE — Julia `.4.3.2` next).
 

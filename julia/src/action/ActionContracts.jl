@@ -814,7 +814,20 @@ function _resolve_helper_call!(
     keyword_arg_count = _keyword_arg_count(args)
     arg_count = positional_arg_count + keyword_arg_count
     if surface == "function" && resolver.function_registry !== nothing
-        user_resolution = resolve_user_function_call(resolver.function_registry, name, arg_count)
+        if has_user_function_name(resolver.function_registry, name) && keyword_arg_count > 0
+            push!(
+                resolver.diagnostics,
+                ActionContractDiagnostic(
+                    code = "user_function_keyword_arguments_unsupported",
+                    message = "user function '$name' accepts positional arguments only, got $keyword_arg_count keyword argument(s)",
+                    helper_name = name,
+                    source = source,
+                    source_span = source_span,
+                ),
+            )
+            return nothing
+        end
+        user_resolution = resolve_user_function_call(resolver.function_registry, name, positional_arg_count)
         if user_resolution.matched
             push!(
                 resolver.contracts,
@@ -831,12 +844,13 @@ function _resolve_helper_call!(
             )
             return nothing
         elseif user_resolution.arity_mismatch
-            expected = join(string.(user_resolution.expected_arities), " or ")
+            entry = lookup_user_function(resolver.function_registry, name)
+            expected = user_function_arity_expectation(entry)
             push!(
                 resolver.diagnostics,
                 ActionContractDiagnostic(
                     code = "user_function_arity_mismatch",
-                    message = "user function '$name' expects arity $expected, got $arg_count",
+                    message = "user function '$name' expects arity $expected, got $positional_arg_count",
                     helper_name = name,
                     source = source,
                     source_span = source_span,

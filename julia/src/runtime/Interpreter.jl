@@ -2010,7 +2010,14 @@ function _evaluate_runtime_call!(
     current_edge,
     statement_context::Bool,
 )
-    args = ActionExpr[getfield(arg, :value) for arg in call.args]
+    keyword_arg_count = count(arg -> arg isa ActionKeywordArgument, call.args)
+    if has_user_function_name(engine.compiled_spec.function_registry, call.name) && keyword_arg_count > 0
+        throw(RuntimeInterpreterException(
+            "user function '$(call.name)' accepts positional arguments only, " *
+            "got $keyword_arg_count keyword argument(s) in rule $rule_label",
+        ))
+    end
+    args = ActionExpr[getfield(arg, :value) for arg in call.args if arg isa ActionPositionalArgument]
     helper_name = canonical_action_helper_name(call.name)
 
     if helper_name == "with" && call.trailing_block_arg
@@ -2059,7 +2066,8 @@ function _evaluate_runtime_call!(
             current_edge,
         )
     elseif function_resolution.arity_mismatch
-        expected = join(function_resolution.expected_arities, " or ")
+        entry = lookup_user_function(engine.compiled_spec.function_registry, call.name)
+        expected = user_function_arity_expectation(entry)
         throw(RuntimeInterpreterException(
             "user function '$(call.name)' expects $expected argument(s), " *
             "got $(length(args)) in rule $rule_label",
@@ -2412,9 +2420,10 @@ function _execute_runtime_user_function!(
         )) for arg in arg_exprs
     ]
     definition = entry.definition
-    if length(values) != definition.arity
+    if !user_function_accepts_arity(entry, length(values))
+        expected = user_function_arity_expectation(entry)
         throw(RuntimeInterpreterException(
-            "user function '$(definition.name)' expects $(definition.arity) argument(s), " *
+            "user function '$(definition.name)' expects $expected argument(s), " *
             "got $(length(values)) in rule $rule_label",
         ))
     end
@@ -2454,6 +2463,12 @@ function _execute_runtime_user_function!(
             elseif value isa AbstractDict
                 context.hashes[name] = _runtime_as_hash(value)
             end
+        end
+        if definition.signature !== nothing
+            rest_values = Any[_runtime_copy(value) for value in values[(definition.arity + 1):end]]
+            rest_name = definition.signature.rest_param
+            context.variables[rest_name] = _runtime_copy(rest_values)
+            context.arrays[rest_name] = _runtime_as_array(rest_values)
         end
         flow = _execute_runtime_value_statements!(
             engine,

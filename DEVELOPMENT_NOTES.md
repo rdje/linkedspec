@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.3.2 — generated Julia should reconstruct the ordinary typed AST):
+  Carry one `CallableSignature` through Julia's ordinary `SpecFile` JSON union so normalized source emission and
+  generated execution reuse the native compiler/runtime. Keep derived prefix params/minimum arity internally but
+  expose only `signature` in v2 staged/public records and validate every copy. Resolve registered keywords before
+  arity to prevent host keyword dispatch from entering `.spec`. Bind extras after eager ordered evaluation into a
+  new recursively copied vector in both scalar and typed-array local views, so returns and aggregate mutation see
+  one fresh LinkedSpec array without Julia splat semantics.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.3.1 — generated source should reuse normalized native state):
   Carry one typed signature through Dart's ordinary `SpecFile.toJson`/`fromJson` union so source emission needs no
   variadic-only code path: emitted Base64 state reconstructs the same registry and executor. Keep derived prefix

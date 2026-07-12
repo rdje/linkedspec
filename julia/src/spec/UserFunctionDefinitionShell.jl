@@ -170,21 +170,44 @@ end
 
 function _function_from_definition_ast(object::Dict{String,Any}, source::String, index::Int)
     _ufd_assert_string_field(object, "kind", "user_function_definition", index)
-    _ufd_int_field(object, "version", index)
+    version = _ufd_int_field(object, "version", index)
 
     name = _ufd_string_field(object, "name", "function_definition")
     if !_is_identifier(name)
         throw(UserFunctionDefinitionException("function_definition node $index has invalid name '$name'"))
     end
 
-    params = _ufd_string_list_field(object, "params", index)
+    params = String[]
+    arity = 0
+    signature = nothing
+    if version == 1
+        if haskey(object, "signature")
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index version 1 must not contain signature",
+            ))
+        end
+        params = _ufd_string_list_field(object, "params", index)
+        arity = _ufd_int_field(object, "arity", index)
+    elseif version == 2
+        if haskey(object, "params") || haskey(object, "arity")
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index version 2 must store arity only in signature",
+            ))
+        end
+        signature = _ufd_callable_signature_field(object, "signature", index)
+        params = copy(signature.positional_params)
+        arity = signature.min_arity
+    else
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index has unsupported version $version",
+        ))
+    end
     for param in params
         if !_is_identifier(param)
             throw(UserFunctionDefinitionException("function_definition node $index has invalid parameter '$param'"))
         end
     end
 
-    arity = _ufd_int_field(object, "arity", index)
     if arity != length(params)
         throw(UserFunctionDefinitionException(
             "function_definition node $index arity $arity does not match $(length(params)) params",
@@ -203,11 +226,11 @@ function _function_from_definition_ast(object::Dict{String,Any}, source::String,
     end
 
     body_payload = _copy_json(_ufd_required_value(object, "body_payload", index))
-    _validate_body_payload(body_payload, name, params, arity, body_source, body_span, index)
+    _validate_body_payload(body_payload, name, params, arity, signature, body_source, body_span, index)
     _normalize_parent_ast_path!(body_payload, index, "body_payload")
 
     body_parse_job = _copy_json(_ufd_required_value(object, "body_parse_job", index))
-    _validate_body_parse_job(body_parse_job, name, params, arity, body_source, body_span, index)
+    _validate_body_parse_job(body_parse_job, name, params, arity, signature, body_source, body_span, index)
     _normalize_body_parse_job!(body_parse_job, index, body_span)
 
     return _ProjectedUserFunction(
@@ -215,6 +238,7 @@ function _function_from_definition_ast(object::Dict{String,Any}, source::String,
             name = name,
             params = params,
             arity = arity,
+            signature = signature,
             body_source = body_source,
             body_payload = body_payload,
             body_parse_job = from_json(StagedParseJob, _ufd_object(body_parse_job, "body_parse_job")),
@@ -268,7 +292,7 @@ function _strip_function_definition_spans(source::String, spans::Vector{_UserFun
     return String(take!(output))
 end
 
-function _validate_body_payload(payload, name::String, params::Vector{String}, arity::Int, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
+function _validate_body_payload(payload, name::String, params::Vector{String}, arity::Int, signature, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
     object = _ufd_object(payload, "function_definition node $index body_payload")
     _ufd_assert_string_field(object, "kind", "staged_payload", index)
     _ufd_assert_string_field(object, "node_kind", "function_definition", index)
@@ -279,12 +303,7 @@ function _validate_body_payload(payload, name::String, params::Vector{String}, a
             "function_definition node $index body_payload function_name does not match name",
         ))
     end
-    if _ufd_string_list_field(object, "params", index) != params
-        throw(UserFunctionDefinitionException("function_definition node $index body_payload params do not match params"))
-    end
-    if _ufd_int_field(object, "arity", index) != arity
-        throw(UserFunctionDefinitionException("function_definition node $index body_payload arity does not match arity"))
-    end
+    _validate_staged_signature(object, "body_payload", params, arity, signature, index)
     if _ufd_string_field(object, "text", "body_payload") != body_source
         throw(UserFunctionDefinitionException(
             "function_definition node $index body_payload text does not match body_source",
@@ -298,7 +317,7 @@ function _validate_body_payload(payload, name::String, params::Vector{String}, a
     return nothing
 end
 
-function _validate_body_parse_job(job, name::String, params::Vector{String}, arity::Int, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
+function _validate_body_parse_job(job, name::String, params::Vector{String}, arity::Int, signature, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
     object = _ufd_object(job, "function_definition node $index body_parse_job")
     _ufd_assert_string_field(object, "kind", "parse_job", index)
     _ufd_assert_string_field(object, "node_kind", "function_definition", index)
@@ -312,12 +331,7 @@ function _validate_body_parse_job(job, name::String, params::Vector{String}, ari
             "function_definition node $index body_parse_job function_name does not match name",
         ))
     end
-    if _ufd_string_list_field(object, "params", index) != params
-        throw(UserFunctionDefinitionException("function_definition node $index body_parse_job params do not match params"))
-    end
-    if _ufd_int_field(object, "arity", index) != arity
-        throw(UserFunctionDefinitionException("function_definition node $index body_parse_job arity does not match arity"))
-    end
+    _validate_staged_signature(object, "body_parse_job", params, arity, signature, index)
     if _ufd_string_field(object, "text", "body_parse_job") != body_source
         throw(UserFunctionDefinitionException(
             "function_definition node $index body_parse_job text does not match body_source",
@@ -351,6 +365,35 @@ function _validate_body_parse_job(job, name::String, params::Vector{String}, ari
         throw(UserFunctionDefinitionException(
             "function_definition node $index body_parse_job diagnostic_owner must be function_body",
         ))
+    end
+    return nothing
+end
+
+function _validate_staged_signature(object::Dict{String,Any}, context::String, params::Vector{String}, arity::Int, signature, index::Int)
+    if signature !== nothing
+        if haskey(object, "params") || haskey(object, "arity")
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index $context version 2 must store arity only in signature",
+            ))
+        end
+        actual = _ufd_callable_signature_field(object, "signature", index)
+        if actual != signature
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index $context signature does not match signature",
+            ))
+        end
+        return nothing
+    end
+    if haskey(object, "signature")
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index $context version 1 must not contain signature",
+        ))
+    end
+    if _ufd_string_list_field(object, "params", index) != params
+        throw(UserFunctionDefinitionException("function_definition node $index $context params do not match params"))
+    end
+    if _ufd_int_field(object, "arity", index) != arity
+        throw(UserFunctionDefinitionException("function_definition node $index $context arity does not match arity"))
     end
     return nothing
 end
@@ -477,6 +520,64 @@ function _ufd_string_list_field(object::Dict{String,Any}, field::String, index::
         push!(result, String(item))
     end
     return result
+end
+
+function _ufd_callable_signature_field(object::Dict{String,Any}, field::String, index::Int)
+    signature = _ufd_object(
+        _ufd_required_value(object, field, index),
+        "function_definition node $index $field",
+    )
+    expected_fields = Set([
+        "kind",
+        "version",
+        "positional_params",
+        "rest_param",
+        "min_arity",
+        "max_arity",
+    ])
+    if Set(keys(signature)) != expected_fields
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index field '$field' has invalid callable signature fields",
+        ))
+    end
+    _ufd_assert_string_field(signature, "kind", "callable_signature", index)
+    version = _ufd_int_field(signature, "version", index)
+    if version != 1
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index field '$field' has unsupported signature version $version",
+        ))
+    end
+    positional_params = _ufd_string_list_field(signature, "positional_params", index)
+    for param in positional_params
+        if !_is_identifier(param)
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index has invalid positional parameter '$param'",
+            ))
+        end
+    end
+    rest_param = _ufd_string_field(signature, "rest_param", "callable_signature")
+    if !_is_identifier(rest_param)
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index has invalid rest parameter '$rest_param'",
+        ))
+    end
+    min_arity = _ufd_int_field(signature, "min_arity", index)
+    if min_arity != length(positional_params)
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index min_arity $min_arity does not match " *
+            "$(length(positional_params)) positional params",
+        ))
+    end
+    if !haskey(signature, "max_arity") || signature["max_arity"] !== nothing
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index field '$field' max_arity must be null",
+        ))
+    end
+    return CallableSignature(
+        positional_params = positional_params,
+        rest_param = rest_param,
+        min_arity = min_arity,
+    )
 end
 
 function _ufd_int_field(object::Dict{String,Any}, field::String, index::Int)

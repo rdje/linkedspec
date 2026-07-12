@@ -16,6 +16,51 @@ struct StagedSourceSpan
     line_end::Int
 end
 
+struct CallableSignature
+    kind::String
+    version::Int
+    positional_params::Vector{String}
+    rest_param::String
+    min_arity::Int
+    max_arity::Union{Nothing,Int}
+end
+
+function CallableSignature(;
+    kind = "callable_signature",
+    version = 1,
+    positional_params,
+    rest_param,
+    min_arity,
+    max_arity = nothing,
+)
+    return CallableSignature(
+        String(kind),
+        version,
+        String[positional_params...],
+        String(rest_param),
+        min_arity,
+        max_arity,
+    )
+end
+
+function Base.:(==)(left::CallableSignature, right::CallableSignature)
+    return left.kind == right.kind &&
+        left.version == right.version &&
+        left.positional_params == right.positional_params &&
+        left.rest_param == right.rest_param &&
+        left.min_arity == right.min_arity &&
+        left.max_arity == right.max_arity
+end
+
+Base.hash(signature::CallableSignature, h::UInt) = hash((
+    signature.kind,
+    signature.version,
+    signature.positional_params,
+    signature.rest_param,
+    signature.min_arity,
+    signature.max_arity,
+), h)
+
 struct StagedParseJob
     version::Union{Nothing,Int}
     job_id::String
@@ -25,6 +70,7 @@ struct StagedParseJob
     function_name::Union{Nothing,String}
     params::Union{Nothing,Vector{String}}
     arity::Union{Nothing,Int}
+    signature::Union{Nothing,CallableSignature}
     text::String
     source_span::StagedSourceSpan
     parser_spec_id::String
@@ -44,6 +90,7 @@ function StagedParseJob(;
     function_name = nothing,
     params = nothing,
     arity = nothing,
+    signature = nothing,
     text,
     source_span,
     parser_spec_id,
@@ -62,6 +109,7 @@ function StagedParseJob(;
         function_name,
         params === nothing ? nothing : String[params...],
         arity,
+        signature,
         text,
         source_span,
         parser_spec_id,
@@ -77,6 +125,7 @@ struct FunctionDefinition
     name::String
     params::Vector{String}
     arity::Int
+    signature::Union{Nothing,CallableSignature}
     body_source::String
     body_payload::Any
     body_parse_job::Union{Nothing,StagedParseJob}
@@ -90,6 +139,7 @@ function FunctionDefinition(;
     name,
     params,
     arity,
+    signature = nothing,
     body_source,
     body_payload = nothing,
     body_parse_job = nothing,
@@ -102,6 +152,7 @@ function FunctionDefinition(;
         name,
         String[params...],
         arity,
+        signature,
         body_source,
         body_payload,
         body_parse_job,
@@ -277,6 +328,17 @@ end
 
 to_json(span::SourceSpan) = Dict("line_start" => span.line_start, "line_end" => span.line_end)
 
+function to_json(signature::CallableSignature)
+    return Dict{String,Any}(
+        "kind" => signature.kind,
+        "version" => signature.version,
+        "positional_params" => signature.positional_params,
+        "rest_param" => signature.rest_param,
+        "min_arity" => signature.min_arity,
+        "max_arity" => signature.max_arity,
+    )
+end
+
 function to_json(span::StagedSourceSpan)
     return Dict(
         "start" => span.start,
@@ -303,8 +365,12 @@ function to_json(job::StagedParseJob)
     )
     _put_if_present!(result, "version", job.version)
     _put_if_present!(result, "function_name", job.function_name)
-    _put_if_present!(result, "params", job.params)
-    _put_if_present!(result, "arity", job.arity)
+    if job.signature === nothing
+        _put_if_present!(result, "params", job.params)
+        _put_if_present!(result, "arity", job.arity)
+    else
+        result["signature"] = to_json(job.signature)
+    end
     _put_if_present!(result, "diagnostic_owner", job.diagnostic_owner)
     return result
 end
@@ -312,13 +378,17 @@ end
 function to_json(function_definition::FunctionDefinition)
     result = Dict{String,Any}(
         "name" => function_definition.name,
-        "params" => function_definition.params,
-        "arity" => function_definition.arity,
         "body_source" => function_definition.body_source,
         "source" => function_definition.source,
         "source_span" => to_json(function_definition.source_span),
         "body_span" => to_json(function_definition.body_span),
     )
+    if function_definition.signature === nothing
+        result["params"] = function_definition.params
+        result["arity"] = function_definition.arity
+    else
+        result["signature"] = to_json(function_definition.signature)
+    end
     _put_if_present!(result, "body_payload", function_definition.body_payload)
     if function_definition.body_parse_job !== nothing
         result["body_parse_job"] = to_json(function_definition.body_parse_job)
@@ -392,12 +462,25 @@ function from_json(::Type{StagedSourceSpan}, json)
     )
 end
 
+function from_json(::Type{CallableSignature}, json)
+    object = _ast_object(json, "signature")
+    return CallableSignature(
+        kind = _ast_string(object, "kind"),
+        version = _ast_int(object, "version"),
+        positional_params = _ast_string_list(object, "positional_params"),
+        rest_param = _ast_string(object, "rest_param"),
+        min_arity = _ast_int(object, "min_arity"),
+        max_arity = _ast_optional_int(object, "max_arity"),
+    )
+end
+
 function from_json(::Type{StagedParseJob}, json)
     object = _ast_object(json, "body_parse_job")
     kind = _ast_string(object, "kind")
     if kind != "parse_job"
         throw(SpecAstException("staged parse job kind must be parse_job, got $kind"))
     end
+    signature_json = get(object, "signature", nothing)
     return StagedParseJob(
         version = _ast_optional_int(object, "version"),
         job_id = _ast_string(object, "job_id"),
@@ -407,6 +490,7 @@ function from_json(::Type{StagedParseJob}, json)
         function_name = _ast_optional_string(object, "function_name"),
         params = _ast_optional_string_list(object, "params"),
         arity = _ast_optional_int(object, "arity"),
+        signature = signature_json === nothing ? nothing : from_json(CallableSignature, signature_json),
         text = _ast_string(object, "text"),
         source_span = from_json(StagedSourceSpan, _ast_object_field(object, "source_span")),
         parser_spec_id = _ast_string(object, "parser_spec_id"),
@@ -421,10 +505,13 @@ end
 function from_json(::Type{FunctionDefinition}, json)
     object = _ast_object(json, "function")
     parse_job = get(object, "body_parse_job", nothing)
+    signature_json = get(object, "signature", nothing)
+    signature = signature_json === nothing ? nothing : from_json(CallableSignature, signature_json)
     return FunctionDefinition(
         name = _ast_string(object, "name"),
-        params = _ast_string_list(object, "params"),
-        arity = _ast_int(object, "arity"),
+        params = signature === nothing ? _ast_string_list(object, "params") : signature.positional_params,
+        arity = signature === nothing ? _ast_int(object, "arity") : signature.min_arity,
+        signature = signature,
         body_source = _ast_string(object, "body_source"),
         body_payload = _ast_optional_json(object, "body_payload"),
         body_parse_job = parse_job === nothing ? nothing : from_json(StagedParseJob, parse_job),

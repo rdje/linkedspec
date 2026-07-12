@@ -40,8 +40,13 @@ the entire project/depot with the owning temporary directory. Native interpreter
 Exact ten-family plan/direct execution and interpreter-first manifest-backed admission are implemented under
 `FUTURE-PARITY-BACKLOG.3.4.2` and `.3.4.3`. Julia generated source is pass at census 60/0/0.
 
+`FUTURE-PARITY-BACKLOG.4.3.2` additionally proves that canonical normalized JSON preserves the exact fixed-v1 /
+variadic-v2 function union. The emitted ASCII-hex payload reconstructs typed callable signatures and executes the
+same fixed-prefix/rest semantics without Julia splat dispatch.
+
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-interpreter-first-plan]],
 [[julia-compiled-spec-state]], [[julia-full-corpus-gate]], [[native-in-memory-backend-contract]],
 [[rust-source-emitter-lane-split]], [[rust-generated-source-family-plan]],
 [[rust-generated-source-corpus-subset]], [[dart-generated-source-deferred]],
 [[julia-generated-source-family-plan]], [[julia-scoped-parity-no-drift]].
+See also [[julia-variadic-user-functions]].
