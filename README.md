@@ -32,7 +32,10 @@ This `README.md` is the **single entry point** to the project.
   executes `cb(args)` with dynamic caller state, temporary copied/restored parameters, block-local return,
   chaining/discard, static precedence, and typed failures. ADR `0032` now declares a final contextual slot as
   `name: codeblock`, with no nested argument list because the supplied `{|params| ...}` value owns its signature.
-  Perl normalization `.11.3.3.2` is active; the cross-backend feature is not yet current.
+  Perl now preserves `callback: codeblock` in function/staged metadata and normalizes attached and parenthesized
+  contextual blocks for declared helpers, user functions, and receiver methods to one typed zero-argument
+  `codeblock_argument`; explicit `{|params| ...}` values retain their own signatures and harrays are not promoted.
+  Perl closeout `.11.3.4` is active; the cross-backend feature is not yet current.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -239,8 +242,9 @@ Top-level project docs:
 - Run `python3 tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock
   contract: exact `{|fixed, ...rest| body }` parsing, harray/eager-block disambiguation, deferred typed AST data,
   dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
-  deterministic fixture source/results. Perl literal construction/preservation and dynamic variable invocation
-  pass the contract-focused suite; final-only `name: codeblock` is adopted and Perl normalization `.11.3.3.2` is active.
+  deterministic fixture source/results. Perl literal construction/preservation, dynamic variable invocation, and
+  metadata-governed attached/parenthesized helper/user-function/receiver normalization pass the contract-focused
+  suite; final-only `name: codeblock` is current on Perl and `.11.3.4` owns closeout.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

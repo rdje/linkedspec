@@ -13,7 +13,7 @@ answers:
 date: 2026-07-12
 status: accepted-design
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.2 consume its literal/invocation fixture while generic final-block behavior and backend parity remain future."
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.11.3.3.2 consume literal, invocation, and contextual-final-block behavior while backend parity remains future."
 reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -50,8 +50,10 @@ arguments and read dynamic context.
 
 `linkedspec-callable-codeblock-v1` machine-locks seven literals, eleven valid calls, sixteen invalid syntax/call
 cases, four invalid declarations, eight contextual forms, and one deterministic fixture. Perl `.11.3.1` implements typed literal
-construction/preservation and `.11.3.2` executes `cb(args)` with the neutral dynamic-context behavior. Generic
-final blocks and backend parity remain active/future, so the complete feature is not yet portable behavior.
+construction/preservation, `.11.3.2` executes `cb(args)` with the neutral dynamic-context behavior, and
+`.11.3.3.2` normalizes declared helper/user-function/receiver contextual final blocks. Backend parity remains
+future, so the complete feature is not yet portable behavior.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
-[[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]].
+[[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]],
+[[perl-generic-final-codeblock-normalization]].

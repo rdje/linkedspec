@@ -205,13 +205,14 @@ scoped block parameter in this MVP; mutations to other variable names persist af
 `with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
 surfaces.
 
-This shipped surface is narrower than the intended language abstraction. LinkedSpec's four object/value kinds are
+Across all backends this shipped surface is still narrower than the intended language abstraction. LinkedSpec's four object/value kinds are
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
 signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. That generic equivalence is not implemented yet: current backends special-case
-the named `with` and tree-traversal surfaces, the parenthesized final-codeblock form is not portable, and Lua is
-not implemented. ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select an explicit future literal:
+functions, and receiver methods. Perl now implements that equivalence for metadata-declared `with`, typed user
+functions, and receiver `with`/tree-traversal surfaces; other backends do not yet provide the generic contract, so
+the parenthesized final-codeblock form is not portable and Lua is not implemented. ADR 0031 and completed
+`FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
 cb = {|value| return(cat(value, "!")) }
@@ -240,6 +241,11 @@ source, and executes a bound value through `cb(args)`. Arguments evaluate once f
 copied fixed/rest parameters bind. Prior parameter values restore even when the body fails; nonparameter reads and
 writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the
 implicit result, compatible receiver chains may continue, and a standalone call discards only the result.
+
+On Perl, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
+zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
+supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
+`{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
 
 ```text
 state = "";

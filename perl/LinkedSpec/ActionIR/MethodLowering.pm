@@ -1203,9 +1203,63 @@ sub _user_function_definition_for_name {
  return $definition
 }
 
+sub _contextual_codeblock_contract {
+ my ($deps, $surface, $name) = @_;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::CallableContract');
+ my $contract = LinkedSpec::CallableContract::builtin_contract($surface, $name);
+ return $contract if ref($contract) eq 'HASH';
+ return undef unless $surface eq 'helper';
+ my $definition = _user_function_definition_for_name($deps, $name);
+ return LinkedSpec::CallableContract::user_function_contract($definition)
+}
+
+sub _normalize_contextual_codeblock_call_node {
+ my ($deps, $surface, $node, $name) = @_;
+ return { node => $node } unless ref($node) eq 'HASH';
+ my $args = $node->{args};
+ return { node => $node } unless ref($args) eq 'ARRAY';
+ my $contract = _contextual_codeblock_contract($deps, $surface, $name);
+ my $attached = $surface eq 'receiver'
+  ? ($node->{receiver_trailing_block_arg} ? 1 : 0)
+  : ($node->{trailing_block_arg} ? 1 : 0);
+ return { error => $name } if $attached && ref($contract) ne 'HASH';
+ return { node => $node } unless ref($contract) eq 'HASH' && @$args;
+ my $final = $args->[-1];
+ my $kind = ref($final) eq 'HASH' ? ($final->{kind} // '') : '';
+ my $before_count = @$args - 1;
+ my $accepted_count = LinkedSpec::CallableContract::accepts_argument_count($contract, $before_count);
+ if ($surface eq 'receiver' && $kind ne 'block_value' && $accepted_count) {
+  my %normalized = %$node;
+  $normalized{trailing_block_arg} = 1;
+  $normalized{receiver_trailing_block_arg} = 1;
+  return { node => \%normalized, contract => $contract }
+ }
+ return { node => $node } unless $kind eq 'block_value';
+ return { error => $name } unless $accepted_count;
+ my $argument = LinkedSpec::CallableContract::contextual_argument_from_block($final);
+ return { error => $name } unless ref($argument) eq 'HASH';
+ my %normalized = %$node;
+ my @normalized_args = @$args;
+ $normalized_args[-1] = $argument;
+ $normalized{args} = \@normalized_args;
+ $normalized{trailing_block_arg} = 1;
+ $normalized{receiver_trailing_block_arg} = 1 if $surface eq 'receiver';
+ $normalized{contextual_codeblock_arg} = 1;
+ return { node => \%normalized, contract => $contract }
+}
+
+sub _contextual_codeblock_runtime_record {
+ my ($node) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'codeblock_argument';
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::CallableContract');
+ return LinkedSpec::CallableContract::runtime_record_from_argument($node)
+}
+
 sub _codeblock_variable_call_candidate {
  my ($deps, $name) = @_;
  return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $parameter_kinds = ref($deps) eq 'HASH' ? $deps->{__user_function_parameter_kinds} : undef;
+ return 1 if ref($parameter_kinds) eq 'HASH' && ($parameter_kinds->{$name} // '') eq 'codeblock';
  return 0 unless ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE';
  return (($deps->{bare_symbol_kind}->($name) // '') eq 'scalar') ? 1 : 0
 }
@@ -1219,6 +1273,10 @@ sub _codeblock_runtime_binding_expr {
    next unless _codeblock_variable_call_candidate($deps, $name);
    $names{$name} = 1;
   }
+ }
+ if (ref($deps) eq 'HASH' && ref($deps->{__user_function_scalar_value_names}) eq 'HASH') {
+  $names{$_} = 1 for grep { defined($_) && /\A[A-Za-z_][A-Za-z0-9_]*\z/o }
+   keys %{$deps->{__user_function_scalar_value_names}};
  }
  $names{$required_name} = 1
   if defined($required_name) && $required_name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -2732,6 +2790,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $name = $node->{name};
   my $definition = _user_function_definition_for_name($deps, $name);
   return undef unless ref($definition) eq 'HASH';
+  my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $name);
+  return _actionir_ast_unsupported_helper_expr($name) if defined($normalized->{error});
+  $node = $normalized->{node};
   return _actionir_ast_unsupported_helper_expr($name)
    if _user_function_call_stack_contains($deps, $name);
 
@@ -2745,12 +2806,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
        && (!defined($signature->{max_arity}) || @$args <= $signature->{max_arity});
 
   my @lowered_args;
-  foreach my $arg (@$args) {
+  for (my $arg_idx = 0; $arg_idx < @$args; ++$arg_idx) {
+   my $arg = $args->[$arg_idx];
    my $arg_source = $lower_user_function_node_source_expr->($arg);
-   return _actionir_ast_unsupported_helper_expr($name)
-    unless defined($arg_source) && length($arg_source);
    my $arg_expr;
-   if (ref($arg) eq 'HASH'
+   if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'codeblock_argument') {
+    my $record = _contextual_codeblock_runtime_record($arg);
+    $arg_expr = _actionir_ast_plain_data_expr($record) if ref($record) eq 'HASH';
+   } elsif (ref($arg) eq 'HASH'
     && ($arg->{kind} // '') eq 'variable'
     && _user_function_scalar_value_name($deps, $arg->{name})) {
     $arg_expr = _lower_source_slot_bare_scalar_read_expr($arg->{name}, $deps);
@@ -2761,6 +2824,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return _actionir_ast_unsupported_helper_expr($name)
     unless defined($arg_expr) && length($arg_expr);
    $arg_expr = '+'.$arg_expr if $arg_expr =~ /^\s*\{/s;
+   my $parameter_kinds = $definition->{parameter_kinds};
+   if (ref($parameter_kinds) eq 'HASH'
+    && $arg_idx == $#$args
+    && ($parameter_kinds->{$params->[-1]} // '') eq 'codeblock') {
+    $arg_expr = 'do { require LinkedSpec::CodeblockRuntime; '
+     .'LinkedSpec::CodeblockRuntime::require_codeblock_value('.$arg_expr.') }';
+   }
    push @lowered_args, $arg_expr;
   }
 
@@ -2777,6 +2847,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $scalar_value_names{$1} = 1 if defined($decl) && $decl =~ /\Amy \$([A-Za-z_][A-Za-z0-9_]*);/o;
   }
   $body_deps->{__user_function_scalar_value_names} = \%scalar_value_names;
+  $body_deps->{__user_function_parameter_kinds} = { %{$definition->{parameter_kinds}} }
+   if ref($definition->{parameter_kinds}) eq 'HASH';
   my @lowered = @$local_decl_statements;
   for (my $idx = 0; $idx < @lowered_args; ++$idx) {
    push @lowered, 'my $__ls_user_fn_arg_'.$idx.' = '.$lowered_args[$idx].';';
@@ -3364,18 +3436,19 @@ my $lower_numeric_array_reducer_source_expr = sub {
  $lower_ast_with_trailing_block_call_node = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
-  return undef unless $node->{trailing_block_arg};
   my $name = $node->{name} // '';
-  return _actionir_ast_unsupported_helper_expr($name)
-   unless $name eq 'with';
+  return undef unless $name eq 'with';
+
+  my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $name);
+  return _actionir_ast_unsupported_helper_expr($name) if defined($normalized->{error});
+  $node = $normalized->{node};
 
   my $args = $node->{args} || [];
   return _actionir_ast_unsupported_helper_expr('with')
    unless ref($args) eq 'ARRAY' && (@$args == 1 || @$args == 2);
 
   my $block_node = $args->[-1];
-  return _actionir_ast_unsupported_helper_expr('with')
-   unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
+  return _actionir_ast_unsupported_helper_expr('with') unless ref($block_node) eq 'HASH';
 
   my $value_expr = 'undef';
   if (@$args == 2) {
@@ -3389,10 +3462,40 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
   }
 
-  my $block_expr = $lower_ast_block_value_node->($block_node);
-  return _actionir_ast_unsupported_helper_expr('with')
-   unless defined($block_expr) && length($block_expr);
-  return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '.$block_expr.' }'
+  my $block_kind = $block_node->{kind} // '';
+  if ($block_kind eq 'codeblock_argument') {
+   my $block_value = {
+    kind => 'block_value',
+    block => $block_node->{body_ast},
+    source => $block_node->{source_text},
+    source_span => $block_node->{source_span},
+   };
+   my $block_expr = $lower_ast_block_value_node->($block_value);
+   return _actionir_ast_unsupported_helper_expr('with')
+    unless defined($block_expr) && length($block_expr);
+   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '.$block_expr.' }'
+  }
+
+  my $record_expr;
+  if ($block_kind eq 'codeblock_literal') {
+   my $record = $block_node;
+   return _actionir_ast_unsupported_helper_expr('with') unless ref($record) eq 'HASH';
+   $record_expr = _actionir_ast_plain_data_expr($record);
+  } else {
+   my $candidate_expr = $lower_ast_value_node->($block_node, { bare_scalar_read => 1 });
+   $candidate_expr = $ast_expr_source_node->($block_node)
+    unless defined($candidate_expr) && length($candidate_expr);
+   return _actionir_ast_unsupported_helper_expr('with')
+    unless defined($candidate_expr) && length($candidate_expr);
+   $candidate_expr = '+'.$candidate_expr if $candidate_expr =~ /^\s*\{/s;
+   $record_expr = 'LinkedSpec::CodeblockRuntime::require_codeblock_value('.$candidate_expr.')';
+  }
+  my $invoke_args = $block_kind ne 'codeblock_argument' && @$args == 2
+   ? '[$__ls_with_value]' : '[]';
+  my $bindings = _codeblock_runtime_binding_expr($deps, 'value');
+  return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
+   .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
+   .$record_expr.', '.$invoke_args.', '.$bindings.', "with") }'
  };
  $lower_ast_value_node = sub {
   my ($node, $opts) = @_;
@@ -3473,11 +3576,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $lower_ast_fluent_chain_node->($node)
    if $kind eq 'fluent_chain';
   if ($kind eq 'call') {
-   if ($node->{trailing_block_arg}) {
-    my $with_call = $lower_ast_with_trailing_block_call_node->($node);
-    return $with_call if defined($with_call) && length($with_call);
-    return _actionir_ast_unsupported_helper_expr($node->{name});
-   }
+   my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $node->{name});
+   return _actionir_ast_unsupported_helper_expr($node->{name}) if defined($normalized->{error});
+   $node = $normalized->{node};
+   my $with_call = $lower_ast_with_trailing_block_call_node->($node);
+   return $with_call if defined($with_call) && length($with_call);
    my $scalar_assignment = $lower_ast_scalar_assignment_value_node->($node);
    return $scalar_assignment if defined($scalar_assignment) && length($scalar_assignment);
    my $user_function_call = $lower_ast_user_function_call_node->($node);
@@ -3605,6 +3708,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $receiver = $node->{receiver};
   my $calls = $node->{calls} || [];
   return undef unless ref($receiver) eq 'HASH' && ref($calls) eq 'ARRAY' && @$calls;
+  my @normalized_calls;
+  foreach my $call (@$calls) {
+   return undef unless ref($call) eq 'HASH';
+   my $method = $call->{method} // '';
+   my $normalized = _normalize_contextual_codeblock_call_node($deps, 'receiver', $call, $method);
+   return _actionir_ast_unsupported_helper_expr($method) if defined($normalized->{error});
+   push @normalized_calls, $normalized->{node};
+  }
+  $calls = \@normalized_calls;
 
   my $receiver_expr;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
@@ -3666,18 +3778,20 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return undef unless ref($call) eq 'HASH';
     my $method = $call->{method} // '';
     if ($call->{receiver_trailing_block_arg}) {
-     return _actionir_ast_unsupported_helper_expr($method)
-      unless $method eq 'with';
      my $args = $call->{args} || [];
      return _actionir_ast_unsupported_helper_expr('with')
       unless ref($args) eq 'ARRAY' && @$args == 1;
      my $block_node = $args->[0];
-     return _actionir_ast_unsupported_helper_expr('with')
-      unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
-     my $block_source = $block_node->{source};
+     return _actionir_ast_unsupported_helper_expr('with') unless ref($block_node) eq 'HASH';
+     my $block_kind = $block_node->{kind} // '';
+     my $block_source = $block_node->{source_text};
+     $block_source = $block_node->{source}
+      unless defined($block_source) && length($block_source);
      return _actionir_ast_unsupported_helper_expr('with')
       unless defined($block_source) && length($block_source);
-     $synthetic_expr = 'with('.$synthetic_expr.') '.$block_source;
+     $synthetic_expr = $block_kind eq 'codeblock_argument'
+      ? 'with('.$synthetic_expr.') '.$block_source
+      : 'with('.$synthetic_expr.', '.$block_source.')';
      next;
     }
     my $source = $call->{source};
@@ -3816,6 +3930,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $expected_argc = $method eq 'reduce_leaves' ? 2 : 1;
    return $unsupported->() unless @$args == $expected_argc;
    my $block_node = $args->[-1];
+   if (ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'codeblock_argument') {
+    $block_node = {
+     kind => 'block_value',
+     block => $block_node->{body_ast},
+     source => $block_node->{source_text},
+     source_span => $block_node->{source_span},
+    };
+   }
    return $unsupported->()
     unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
    my $block_expr = $lower_ast_block_value_node->($block_node);

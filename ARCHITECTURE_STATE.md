@@ -5,13 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Perl callable metadata now declares an exact final `name: codeblock` parameter for typed
+  user functions and registered helper/receiver contracts. Generic receiver attached syntax parses without a
+  method-name allowlist; lowering consults `LinkedSpec::CallableContract` and normalizes attached plus
+  parenthesized contextual blocks into the same zero-positional `codeblock_argument`. Generated execution covers
+  `with`, typed user functions, and tree traversal; explicit literals retain their own signatures, harrays remain
+  harrays, and invalid declarations/final values carry typed diagnostics. `.11.3.4` owns Perl closeout.
 - `2026-07-12` refresh: Perl `cb(args)` resolution now runs after governed helpers and registered user functions.
   Generated calls pass explicit references to the rule's scalar working slots into `LinkedSpec::CodeblockRuntime`,
   which evaluates the stored typed ActionIR body without adding a coderef or captured environment to the record.
   Arguments evaluate before copied fixed/rest binding; prior parameter values restore on success/failure;
   nonparameter writes remain caller-visible; return, discard, receiver continuation, arity/keyword/not-callable,
   and recursion behavior match the neutral fixture. ADR 0032 now defines final-only `name: codeblock` with the
-  value owning its `{|params| ...}` signature; Perl normalization `.11.3.3.2` is active.
+  value owning its `{|params| ...}` signature; Perl normalization `.11.3.3.2` has since completed.
 - `2026-07-12` refresh: Perl now parses exact `{|params| body }` before harray/eager blocks into the neutral
   eight-field typed record, including fixed/rest signature, body AST, source, and containing spans. Generated
   construction canonicalizes pure data as UTF-8 JSON/ASCII hex and decodes it at runtime; this avoids the measured
@@ -23,7 +29,7 @@ This document is the current high-level technical reading of the project shape. 
   dynamic caller stores, temporary copied/restored params, block-local results, static precedence, diagnostics,
   contextual final blocks, and one deterministic future fixture. Its independent parser/invocation checker is in
   canonical CI. Perl typed construction `.11.3.1` and invocation `.11.3.2` have since completed; ADR 0032's
-  declaration is adopted and generic final blocks remain active `.11.3.3.2` before cross-backend parity.
+  declaration is adopted and generic Perl final blocks have since completed under `.11.3.3.2` before closeout.
 - `2026-07-12` refresh: Dart now carries ADR 0030's v2 signature through the spec-defined shell, AST/staged jobs,
   registry/action contracts, public descriptors, native runtime, normalized emitted state, generated-plan
   execution, and reconstruction. Calls are positional-only, fixed v1 stays exact, v2 enforces its minimum, and
@@ -143,7 +149,7 @@ This document is the current high-level technical reading of the project shape. 
   schema/fixtures `.11.2` are adopted and checked. Perl typed construction `.11.3.1` and dynamic invocation
   `.11.3.2` are complete. Audit `.11.3.3.0` found the missing declaration, and ADR 0032 now adopts final-only
   `name: codeblock`: it carries no nested argument list because explicit values own `{|params| ...}` signatures.
-  Perl normalization `.11.3.3.2` is active before cross-backend behavior or Lua routing.
+  Perl normalization `.11.3.3.2` is complete; `.11.3.4` closes diagnostics/docs/no-drift before cross-backend work.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.3.2 — normalize Perl final codeblocks**
+  (DONE — Perl diagnostics/docs/full-gate closeout `.11.3.4` next).
+
+  **Implementation:** Typed user-function/staged records preserve final `parameter_kinds`;
+  `LinkedSpec::CallableContract` governs helper/receiver/user-function acceptance; receiver attached syntax is
+  structurally generic; and attached/parenthesized contextual blocks share one zero-positional
+  `codeblock_argument`. Typed user callbacks use the closure-free runtime, while governed immediate helper/
+  receiver forms retain their established full-breadth block lowering after canonical normalization.
+
+  **Proof:** Equivalent helper, user-function, receiver `with`, and tree traversal forms pass with explicit literal
+  preservation, harray rejection, four typed declaration failures, and standalone generated execution. Focused
+  callable proof passes 10 subtests, adjacent suites pass 90 tests, the strict neutral checker remains green, and
+  direct Phase 0 passes all `1..1030` in 966 seconds. Canonical CI passes capability 60/0/0, CLI 61x2, and Phase 0
+  `1..1030` in 916 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.3.1 — declare final codeblock parameters**
   (DONE — Perl metadata-governed normalization `.11.3.3.2` next; no behavior change).
 

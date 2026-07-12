@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.3.2 — normalize Perl final codeblocks
+
+Perl now preserves exact final `name: codeblock` metadata in fixed user-function definitions, staged body
+payloads, and staged parse jobs. The wrapper-free grammar emits typed `fixed_params` plus `codeblock_param`
+components; the registry validates all three copies and projects one ordered public `params`/`arity` record. New
+`LinkedSpec::CallableContract` records the accepted pre-codeblock arity for
+helper `with`, receiver `with`/tree traversal, and typed user functions. Receiver attached syntax parses
+generically, but lowering consults this metadata before granting semantics.
+
+Attached and parenthesized contextual blocks normalize to the same version-1 zero-positional
+`codeblock_argument`. Typed user-function callbacks execute that plain record through the closure-free dynamic
+runtime; governed immediate helpers/receiver methods adapt the canonical node back through their established
+full-breadth block lowering. Both paths work in live and standalone generated source. Explicit `{|params| ...}`
+values retain their own signatures. Harrays are not promoted by
+position and produce typed `final_argument_not_codeblock` detail; non-final, nested-argument-list, missing-name,
+and unknown-type declarations fail before parser construction.
+
+The focused callable suite passes 10 top-level subtests, adjacent ActionIR/variadic/generated-source suites pass
+90 top-level tests, all touched Perl modules compile, and the neutral checker passes 7 literals, 11 calls, 9
+invalid literals, 7 invalid calls, 4 invalid declarations, and 8 contextual forms. Direct Phase 0 passes all
+1,030 top-level subtests in 966 seconds. `.11.3.4` owns the remaining Perl closeout before the prioritized
+spec-facing wrapper-removal activity. The canonical local gate also passes capability 60/0/0, both 61-case CLI
+environments, and Phase 0 `1..1030` in 916 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.3.1 — declare final codeblock parameters
 
 Director clarification selects exact final-only `name: codeblock`. The receiving parameter declares only the

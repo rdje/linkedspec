@@ -43,8 +43,8 @@ explicitly name-gated to helper `with` and selected receiver methods; Dart and
 Julia parse generic trailing-block nodes but runtime dispatch still accepts only
 the named supported surfaces.
 
-Therefore generic equivalence cannot currently be confirmed for any variant,
-and all-variant support cannot be claimed while Lua is absent. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031 now
+Historically, generic equivalence could not be confirmed for any variant, and all-variant support still cannot be
+claimed while Lua is absent. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031
 close the corrective design: explicit callable literals use `{|params| body }`, execute later through `cb(args)`,
 and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
 sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
@@ -52,10 +52,12 @@ a parser exception. Neutral contract `.11.2` precedes the split backend rollout 
 schema/fixture. Perl `.11.3.1` preserves typed literal records and `.11.3.2` invokes them dynamically. Audit
 `.11.3.3.0` proves the parser payload shape is compatible but the declaration was missing. ADR 0032 and
 `.11.3.3.1` now adopt final-only `name: codeblock`; it has no nested argument list because explicit codeblock
-values own their `{|params| ...}` signatures. Perl behavior `.11.3.3.2` is active.
+values own their `{|params| ...}` signatures. Perl behavior `.11.3.3.2` now normalizes metadata-declared helper,
+typed user-function, and receiver contextual forms; other backends remain future.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],
 [[julia-runtime-value-control-tree-helpers]], [[perl-final-codeblock-signature-declaration-gap]],
+[[perl-generic-final-codeblock-normalization]],
 [[cross-variant-output-parity]],
 [[callable-codeblock-literal-contract]].

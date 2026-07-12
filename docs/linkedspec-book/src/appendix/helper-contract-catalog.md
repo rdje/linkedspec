@@ -103,9 +103,10 @@ dispatch rule.
 
 - **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl, Rust, Dart, and Julia support the current helper and receiver forms. Lua is not yet
-  implemented. Bare `with { ... }`, explicit receiver `.with(value) { ... }`, and the equivalent parenthesized
-  final-codeblock spelling `with(value, { ... })` are not current portable surfaces.
+- **Backend status**: Perl, Rust, Dart, and Julia support the attached helper and receiver forms. Perl additionally
+  normalizes `with(value, { ... })` and `.with({ ... })` through declared final-codeblock metadata. Lua is not yet
+  implemented. Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current surfaces; the
+  parenthesized contextual spellings are not portable until the other backends adopt the same metadata contract.
 - **Behavior**: Helper form evaluates the optional value argument, binds scoped scalar `value` while the trailing
   block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
   binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
@@ -132,8 +133,9 @@ dispatch rule.
 > dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
 > checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
 > caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
-> declaration is adopted by ADR 0032; Perl normalization remains active `.11.3.3.2`, so do not infer the behavior
-> from current named helpers yet.
+> declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
+> function, and receiver surfaces. Cross-backend parity remains future, so do not treat the parenthesized form as
+> portable yet.
 
 ## 1. Working Variables and Setup
 

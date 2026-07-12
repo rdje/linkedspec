@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.2 — parse broadly, grant semantics from metadata): Receiver attached
+  syntax should produce a structural call candidate without deciding which method accepts it. A shared callable
+  contract then validates the final slot and arity and converts contextual `{ ... }` into one zero-positional
+  `codeblock_argument`. Keep explicit `{|params| ...}` records unchanged and reject harrays at the typed call
+  boundary. User-function grammar, staged records, helper contracts, and receiver contracts must carry the same
+  final kind; reconstructing or inferring it from names/body text would create a second authority. Director
+  clarification also reaffirms that `set(target, value)` evaluates to the target's post-assignment typed value, so
+  later methods should chain from that value. The remaining `.spec`-facing `array(name)` / `hash(name)` namespace
+  and mutation forms are scheduled for removal under `.12.1`; that public-surface migration is not part of this slice.
+  Until that retirement lands, grammar-owned declaration components stay ordinary typed data and are canonicalized
+  at the registry boundary rather than using `array(name)` to gain mutation authority.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.1 — a receiving type is not a duplicate function signature): Declare
   only `name: codeblock`. An explicit `{|params| ...}` value owns its fixed/rest signature; a contextual `{ ... }`
   value has zero positional params and reads dynamic context. Reject `name: codeblock(params)` rather than adding

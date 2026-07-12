@@ -428,6 +428,12 @@ slots on every exit, and returns typed failures through the existing runtime-con
 plain serialized data—no Perl coderef or lexical environment is captured. Governed helper and registered
 user-function resolution stays in `MethodLowering` before this variable-call fallback.
 
+`LinkedSpec::CallableContract` is the Perl metadata owner for contextual final-codeblock acceptance. It declares
+the final `codeblock` slot and pre-codeblock arity for governed helpers and receiver methods, projects the same
+contract from typed user-function descriptors, and converts contextual `block_value` nodes into one
+zero-positional `codeblock_argument`. `ActionIR::AST::Parser` recognizes receiver attached syntax generically;
+`MethodLowering` consults this contract rather than a parser method-name allowlist before normalization.
+
 ## `ActionIR::*`
 
 The `LinkedSpec::ActionIR::*` subtree is where the helper DSL becomes structured semantics.

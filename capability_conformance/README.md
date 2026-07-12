@@ -56,8 +56,9 @@ leaves supply generic final-block and cross-backend evidence. Perl now consumes 
 through `prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert canonical generated data,
 assignment/copying, user-function preservation, dynamic caller execution, temporary fixed/rest restoration,
 standalone discard, receiver continuation, static precedence, and typed failures pass. Generic Perl final-block
-normalization audit `.11.3.3.0` found the declaration gap and ADR 0032 closes it in `.11.3.3.1`; Perl behavior
-`.11.3.3.2` is active.
+normalization audit `.11.3.3.0` found the declaration gap, ADR 0032 closes it in `.11.3.3.1`, and `.11.3.3.2`
+preserves metadata plus executes equivalent attached/parenthesized helper/user-function/receiver contextual forms.
+Perl closeout `.11.3.4` and backend parity keep the overall capability future-owned.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

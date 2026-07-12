@@ -68,6 +68,13 @@ sub reject_keyword_arguments {
  )
 }
 
+sub require_codeblock_value {
+ my ($value) = @_;
+ _error('final_argument_not_codeblock', value_kind => _value_kind($value))
+  unless ref($value) eq 'HASH' && ($value->{kind} // '') eq 'codeblock_literal';
+ return $value
+}
+
 sub _binding_ref {
  my ($ctx, $name) = @_;
  _error('invalid_codeblock_binding', name => defined($name) ? $name : '')

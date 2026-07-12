@@ -330,4 +330,217 @@ subtest 'typed invocation failures preserve neutral diagnostic payloads' => sub 
     is($value, 'outer', 'temporary parameter binding restores after body failure');
 };
 
+subtest 'final codeblock declarations and contextual AST normalization are metadata-owned' => sub {
+    my $source = join "\n",
+        'Top::',
+        ' /x/ -> Done { return("x") }',
+        '',
+        'Done::',
+        ' /x/',
+        '',
+        'fn apply(value, callback: codeblock) { return(callback()) }',
+        '';
+    my $descriptor = LinkedSpec::Get(\$source, return_descriptor => 1);
+    ok(ref($descriptor) eq 'HASH', 'typed-codeblock user-function descriptor builds');
+    is_deeply($descriptor->{functions}{apply}{params}, ['value', 'callback'],
+        'typed-codeblock function preserves ordered parameter names');
+    is_deeply($descriptor->{functions}{apply}{parameter_kinds}, {callback => 'codeblock'},
+        'typed-codeblock function declares only the final parameter kind');
+    is_deeply($descriptor->{functions}{apply}{body_payload}{parameter_kinds}, {callback => 'codeblock'},
+        'staged body payload preserves the final parameter kind');
+    is_deeply($descriptor->{functions}{apply}{body_parse_job}{parameter_kinds}, {callback => 'codeblock'},
+        'staged body parse job preserves the final parameter kind');
+
+    require LinkedSpec::CallableContract;
+    require LinkedSpec::ActionIR::MethodLowering;
+    my $attached = parse_expr('with("x") { return(value) }');
+    my $parenthesized = parse_expr('with("x", { return(value) })');
+    my $attached_normalized = LinkedSpec::ActionIR::MethodLowering::_normalize_contextual_codeblock_call_node(
+        {}, 'helper', $attached, 'with');
+    my $parenthesized_normalized = LinkedSpec::ActionIR::MethodLowering::_normalize_contextual_codeblock_call_node(
+        {}, 'helper', $parenthesized, 'with');
+    is($attached_normalized->{node}{args}[-1]{kind}, 'codeblock_argument',
+        'attached helper block normalizes to typed codeblock_argument');
+    is($parenthesized_normalized->{node}{args}[-1]{kind}, 'codeblock_argument',
+        'parenthesized helper block normalizes to typed codeblock_argument');
+    is_deeply(
+        {map { $_ => $attached_normalized->{node}{args}[-1]{$_} }
+            qw(kind version signature body_source body_ast)},
+        {map { $_ => $parenthesized_normalized->{node}{args}[-1]{$_} }
+            qw(kind version signature body_source body_ast)},
+        'attached and parenthesized helper forms have one canonical semantic AST payload');
+
+    my $generic_receiver = parse_expr('"x".custom() { return(value) }');
+    is($generic_receiver->{kind}, 'fluent_chain', 'receiver parser recognizes attached syntax generically');
+    ok($generic_receiver->{calls}[0]{receiver_trailing_block_arg},
+        'generic receiver syntax is marked for later callable-contract validation');
+};
+
+subtest 'helper user-function and receiver contextual forms execute equivalently' => sub {
+    my @helper_bodies = (
+        'return(with("x") { return(cat(value, "!")) })',
+        'return(with("x", { return(cat(value, "!")) }))',
+        'return(with("x", {|item| return(cat(item, "!")) }))',
+        'return("x".with() { return(cat(value, "!")) })',
+        'return("x".with({ return(cat(value, "!")) }))',
+        'return("x".with({|item| return(cat(item, "!")) }))',
+    );
+    foreach my $body (@helper_bodies) {
+        my $spec = join "\n",
+            'Top::',
+            " /x/ -> Done { $body }",
+            '',
+            'Done::',
+            ' /x/',
+            '';
+        is(run_spec($spec, 'xx'), 'x!', "$body executes through declared codeblock metadata");
+    }
+
+    my $user_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done {',
+        '   return([',
+        '     apply("a") { return(cat(value, "!")) },',
+        '     apply("b", { return(cat(value, "?")) }),',
+        '     invoke("c", {|item| return(cat(item, ".")) })',
+        '   ])',
+        ' }',
+        '',
+        'Done::',
+        ' /x/',
+        '',
+        'fn apply(value, callback: codeblock) { return(callback()) }',
+        'fn invoke(value, callback: codeblock) { return(callback(value)) }',
+        '';
+    my $expected = ['a!', 'b?', 'c.'];
+    is_deeply(run_spec($user_spec, 'xx'), $expected,
+        'typed user functions accept attached, parenthesized, and explicit-literal codeblocks');
+
+    my $generated_source = LinkedSpec::emit_generated_source(
+        \$user_spec,
+        source_identity => 'final-codeblock-user-function.spec',
+    );
+    my $package = 'LinkedSpec::FinalCodeblockUserFunctionGenerated';
+    my $loaded = eval "package $package; $generated_source; 1";
+    ok($loaded, 'standalone generated typed-callback source loads');
+    diag($@) unless $loaded;
+    if ($loaded) {
+        no strict 'refs';
+        my $input = 'xx';
+        is_deeply(&{"${package}::Execute"}(\$input), $expected,
+            'standalone generated typed-callback execution preserves all three forms');
+    }
+
+    my @tree_forms = (
+        '{ "b" : 2, "a" : 1 }.map_leaves() { return(cat(value, "!")) }',
+        '{ "b" : 2, "a" : 1 }.map_leaves({ return(cat(value, "!")) })',
+    );
+    foreach my $expr (@tree_forms) {
+        my $spec = join "\n",
+            'Top::',
+            " /x/ -> Done { return($expr) }",
+            '',
+            'Done::',
+            ' /x/',
+            '';
+        is_deeply(run_spec($spec, 'xx'), {a => '1!', b => '2!'},
+            "$expr uses the receiver callable contract");
+    }
+};
+
+subtest 'typed final-codeblock declaration and value failures stay explicit' => sub {
+    my @invalid_declarations = (
+        ['callback: codeblock(item)', 'codeblock_declaration_has_no_argument_list'],
+        ['callback: codeblock, tail', 'codeblock_parameter_must_be_final'],
+        [': codeblock', 'invalid_codeblock_parameter_name'],
+        ['callback: closure', 'unknown_parameter_type'],
+    );
+    foreach my $case (@invalid_declarations) {
+        my ($declaration, $code) = @$case;
+        my $spec = join "\n",
+            'Top::',
+            ' /x/ -> Done { return("x") }',
+            '',
+            'Done::',
+            ' /x/',
+            '',
+            "fn invalid($declaration) { return(undef) }",
+            '';
+        my %runtime_ctx;
+        my $parser = LinkedSpec::Get(\$spec, runtime_ctx_ref => \%runtime_ctx);
+        ok(!defined($parser), "$declaration is rejected before parser construction");
+        like($runtime_ctx{last_error}{detail} // '', qr/\Q$code\E/,
+            "$declaration reports $code");
+    }
+
+    my $malformed_with_harray_body = join "\n",
+        'Top::',
+        ' /x/ -> Done { return("x") }',
+        '',
+        'Done::',
+        ' /x/',
+        '',
+        'fn invalid(value,, tail) { return({ "kind" : value }) }',
+        '';
+    my %malformed_ctx;
+    my $malformed_parser = LinkedSpec::Get(\$malformed_with_harray_body, runtime_ctx_ref => \%malformed_ctx);
+    ok(!defined($malformed_parser), 'an independently malformed function header is rejected');
+    like($malformed_ctx{last_error}{detail} // '', qr/invalid user function definition/,
+        'generic malformed-header detail remains stable');
+    unlike($malformed_ctx{last_error}{detail} // '', qr/unknown_parameter_type/,
+        'a colon in the function body cannot reclassify the header diagnostic');
+
+    my $non_codeblock_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done { return(apply("x", { "value" : value })) }',
+        '',
+        'Done::',
+        ' /x/',
+        '',
+        'fn apply(value, callback: codeblock) { return(callback()) }',
+        '';
+    my ($result, $runtime_ctx) = run_spec_with_context($non_codeblock_spec, 'xx');
+    is($result, undef, 'harray in a codeblock slot returns no parser result');
+    my $detail = $runtime_ctx->{last_error}{detail};
+    isa_ok($detail, 'LinkedSpec::CodeblockRuntime::Error',
+        'harray in a codeblock slot has typed runtime detail');
+    is($detail->{code}, 'final_argument_not_codeblock',
+        'harray in a codeblock slot is not contextually promoted');
+    is($detail->{value_kind}, 'harray', 'typed rejection preserves the actual harray kind');
+
+    my $helper_non_codeblock_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done { return(with("x", { "value" : value })) }',
+        '',
+        'Done::',
+        ' /x/',
+        '';
+    my ($helper_result, $helper_runtime_ctx) = run_spec_with_context($helper_non_codeblock_spec, 'xx');
+    is($helper_result, undef, 'helper harray in a codeblock slot returns no parser result');
+    my $helper_detail = $helper_runtime_ctx->{last_error}{detail};
+    isa_ok($helper_detail, 'LinkedSpec::CodeblockRuntime::Error',
+        'helper harray in a codeblock slot has typed runtime detail');
+    is($helper_detail->{code}, 'final_argument_not_codeblock',
+        'helper harray uses the declared final-codeblock boundary');
+    is($helper_detail->{value_kind}, 'harray',
+        'helper typed rejection preserves the actual harray kind');
+
+    my $receiver_non_codeblock_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done { return("x".with({ "value" : value })) }',
+        '',
+        'Done::',
+        ' /x/',
+        '';
+    my ($receiver_result, $receiver_runtime_ctx) = run_spec_with_context($receiver_non_codeblock_spec, 'xx');
+    is($receiver_result, undef, 'receiver harray in a codeblock slot returns no parser result');
+    my $receiver_detail = $receiver_runtime_ctx->{last_error}{detail};
+    isa_ok($receiver_detail, 'LinkedSpec::CodeblockRuntime::Error',
+        'receiver harray in a codeblock slot has typed runtime detail');
+    is($receiver_detail->{code}, 'final_argument_not_codeblock',
+        'receiver harray uses the declared final-codeblock boundary');
+    is($receiver_detail->{value_kind}, 'harray',
+        'receiver typed rejection preserves the actual harray kind');
+};
+
 done_testing();

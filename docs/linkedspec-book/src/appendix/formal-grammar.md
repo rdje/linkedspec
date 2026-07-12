@@ -156,9 +156,9 @@ and a contextual `{ ... }` argument takes zero positional args while reading dyn
 capture is excluded from version 1. Neutral contract `.11.2` locks this grammar, AST schema,
 diagnostics, and fixture. Perl `.11.3.1` preserves the eight-field typed record through generated source and
 `.11.3.2` executes bound variable calls with the specified dynamic context, restoration, result, and failure
-semantics. ADR 0032 declaration `.11.3.3.1` is adopted; generic normalization `.11.3.3.2` and non-Perl backends
-remain future, so this grammar is not yet universally
-portable.
+semantics. ADR 0032 declaration `.11.3.3.1` is adopted and Perl generic normalization `.11.3.3.2` is implemented
+for metadata-declared helper, user-function, and receiver forms. Non-Perl backends remain future, so this grammar
+is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

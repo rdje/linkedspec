@@ -70,6 +70,7 @@ sub extract_and_strip_spec_source {
  foreach my $node (@$definitions) {
   _die_function_definition_error_node($source, $node)
    if _is_function_definition_error_node($node);
+  _canonicalize_codeblock_definition_ast($node);
   my $definition = _normalize_function_definition_ast($source, $node, scalar(@{$registry->{order}}));
   _record_function_definition($registry, $definition);
   my $span = $definition->{source_span};
@@ -81,6 +82,40 @@ sub extract_and_strip_spec_source {
   stripped_source => $stripped,
   registry => $registry,
  }
+}
+
+sub _canonicalize_codeblock_definition_ast {
+ my ($node) = @_;
+ return unless ref($node) eq 'HASH' && exists($node->{codeblock_param});
+ die "Invalid codeblock parameter declaration: version 1 is required\n"
+  unless defined($node->{version}) && !ref($node->{version}) && $node->{version} == 1;
+
+ my $fixed = _require_identifier_array_field($node, 'fixed_params');
+ my $codeblock_param = _require_identifier_field($node, 'codeblock_param');
+ my @params = (@$fixed, $codeblock_param);
+ _normalize_parameter_kinds($node->{parameter_kinds}, \@params, 'function definition');
+
+ foreach my $field (qw(body_payload body_parse_job)) {
+  my $record = $node->{$field};
+  die "Invalid user function definition AST: $field must be HASH\n"
+   unless ref($record) eq 'HASH';
+  my $record_fixed = _require_identifier_array_field($record, 'fixed_params');
+  my $record_codeblock_param = _require_identifier_field($record, 'codeblock_param');
+  die "Invalid user function definition AST: $field fixed_params mismatch\n"
+   unless _arrays_equal($record_fixed, $fixed);
+  die "Invalid user function definition AST: $field codeblock_param mismatch\n"
+   unless $record_codeblock_param eq $codeblock_param;
+  _normalize_parameter_kinds($record->{parameter_kinds}, \@params, $field);
+  $record->{params} = [@params];
+  $record->{arity} = scalar(@params);
+  delete $record->{fixed_params};
+  delete $record->{codeblock_param};
+ }
+
+ $node->{params} = [@params];
+ $node->{arity} = scalar(@params);
+ delete $node->{fixed_params};
+ delete $node->{codeblock_param};
 }
 
 sub validate_registry_against_rule_labels {
@@ -177,12 +212,14 @@ sub _normalize_function_definition_ast {
  die "Invalid user function definition AST for '$name': unsupported version $version\n"
   unless $version == 1 || $version == 2;
 
- my ($params, $arity, $signature);
+ my ($params, $arity, $signature, $parameter_kinds);
  if ($version == 1) {
   $params = _require_identifier_array_field($node, 'params');
   $arity = _require_integer_field($node, 'arity');
   die "Invalid user function definition AST for '$name': arity does not match params\n"
    unless $arity == scalar(@$params);
+  $parameter_kinds = _normalize_parameter_kinds($node->{parameter_kinds}, $params, "function '$name'")
+   if exists($node->{parameter_kinds});
  } else {
   die "Invalid user function definition AST for '$name': version 2 uses signature instead of params/arity\n"
    if exists($node->{params}) || exists($node->{arity});
@@ -194,8 +231,8 @@ sub _normalize_function_definition_ast {
  my $source_span = _require_span_field($node, 'source_span');
  my $body_span = _require_span_field($node, 'body_span');
  my $body_source = _require_string_field($node, 'body_source');
- my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal);
- my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal);
+ my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal);
+ my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal);
 
  my %seen;
  foreach my $param (@$params) {
@@ -223,6 +260,7 @@ sub _normalize_function_definition_ast {
  if ($version == 1) {
   $definition->{params} = [@$params];
   $definition->{arity} = $arity;
+  $definition->{parameter_kinds} = { %$parameter_kinds } if ref($parameter_kinds) eq 'HASH';
  } else {
   $definition->{signature} = _clone_plain($signature);
  }
@@ -237,7 +275,7 @@ sub _normalize_function_definition_ast {
 }
 
 sub _normalize_body_payload {
- my ($payload, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal) = @_;
+ my ($payload, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal) = @_;
  die "Invalid user function definition AST: body_payload must be HASH\n"
   unless ref($payload) eq 'HASH';
  die "Invalid user function definition AST: body_payload.kind must be staged_payload\n"
@@ -257,6 +295,13 @@ sub _normalize_body_payload {
   my $payload_arity = _require_integer_field($payload, 'arity');
   die "Invalid user function definition AST: body_payload arity mismatch\n"
    unless $payload_arity == $arity;
+  if (ref($parameter_kinds) eq 'HASH') {
+   my $payload_kinds = _normalize_parameter_kinds($payload->{parameter_kinds}, $params, 'body_payload');
+   die "Invalid user function definition AST: body_payload parameter kinds mismatch\n"
+    unless _parameter_kinds_equal($payload_kinds, $parameter_kinds);
+  } elsif (exists($payload->{parameter_kinds})) {
+   die "Invalid user function definition AST: untyped body_payload has parameter_kinds\n";
+  }
  } else {
   die "Invalid user function definition AST: version 2 body_payload uses signature instead of params/arity\n"
    if exists($payload->{params}) || exists($payload->{arity});
@@ -277,7 +322,7 @@ sub _normalize_body_payload {
 }
 
 sub _normalize_body_parse_job {
- my ($job, $name, $version, $params, $arity, $signature, $body_source, $body_span, $ordinal) = @_;
+ my ($job, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal) = @_;
  die "Invalid user function definition AST: body_parse_job must be HASH\n"
   unless ref($job) eq 'HASH';
  die "Invalid user function definition AST: body_parse_job.kind must be parse_job\n"
@@ -303,6 +348,13 @@ sub _normalize_body_parse_job {
   my $job_arity = _require_integer_field($job, 'arity');
   die "Invalid user function definition AST: body_parse_job arity mismatch\n"
    unless $job_arity == $arity;
+  if (ref($parameter_kinds) eq 'HASH') {
+   my $job_kinds = _normalize_parameter_kinds($job->{parameter_kinds}, $params, 'body_parse_job');
+   die "Invalid user function definition AST: body_parse_job parameter kinds mismatch\n"
+    unless _parameter_kinds_equal($job_kinds, $parameter_kinds);
+  } elsif (exists($job->{parameter_kinds})) {
+   die "Invalid user function definition AST: untyped body_parse_job has parameter_kinds\n";
+  }
  } else {
   die "Invalid user function definition AST: version 2 body_parse_job uses signature instead of params/arity\n"
    if exists($job->{params}) || exists($job->{arity});
@@ -333,6 +385,31 @@ sub _normalize_body_parse_job {
  $out->{parent_ast_path} = _body_parent_ast_path($ordinal);
  $out->{job_id} = _body_parse_job_id($out->{parent_ast_path}, $out->{payload_kind}, $out->{parser_spec_id}, $out->{top_rule}, $job_span);
  return $out
+}
+
+sub _normalize_parameter_kinds {
+ my ($kinds, $params, $owner) = @_;
+ $owner = 'parameter_kinds' unless defined($owner) && length($owner);
+ die "Invalid user function definition AST: $owner parameter_kinds must be HASH\n"
+  unless ref($kinds) eq 'HASH';
+ die "Invalid user function definition AST: $owner must declare exactly one parameter kind\n"
+  unless keys(%$kinds) == 1;
+ die "Invalid user function definition AST: $owner codeblock parameter must be final\n"
+  unless ref($params) eq 'ARRAY' && @$params;
+ my $name = $params->[-1];
+ die "Invalid user function definition AST: $owner final parameter must have kind codeblock\n"
+  unless ($kinds->{$name} // '') eq 'codeblock';
+ return { $name => 'codeblock' }
+}
+
+sub _parameter_kinds_equal {
+ my ($left, $right) = @_;
+ return 0 unless ref($left) eq 'HASH' && ref($right) eq 'HASH';
+ return 0 unless keys(%$left) == keys(%$right);
+ foreach my $name (keys %$left) {
+  return 0 unless exists($right->{$name}) && ($left->{$name} // '') eq ($right->{$name} // '');
+ }
+ return 1
 }
 
 sub _normalize_callable_signature {
@@ -444,6 +521,17 @@ sub _die_function_definition_error_node {
  my $message = defined($node->{message}) && !ref($node->{message}) && length($node->{message})
   ? $node->{message}
   : 'invalid user function definition';
+ my $text = defined($node->{source_text}) && !ref($node->{source_text}) ? $node->{source_text} : '';
+ my $header = $text;
+ $header =~ s/\{.*\z//s;
+ $message = 'codeblock_declaration_has_no_argument_list'
+  if $header =~ /:\s*codeblock\s*\(/;
+ $message = 'codeblock_parameter_must_be_final'
+  if $header =~ /:\s*codeblock\s*,/;
+ $message = 'invalid_codeblock_parameter_name'
+  if $header =~ /\(\s*:\s*codeblock\b/;
+ $message = 'unknown_parameter_type'
+  if $header =~ /:\s*(?!codeblock\b)[A-Za-z_][A-Za-z0-9_]*\b/;
  _die_parse_error_at_span($source, $span, $message);
 }
 

@@ -33,4 +33,4 @@ attached and parenthesized forms without hard-coding callable names. Ordinary pa
 harrays are never promoted to codeblocks by position.
 
 Related facts: [[callable-codeblock-literal-contract]], [[generic-trailing-codeblock-argument-correction]],
-[[perl-final-codeblock-signature-declaration-gap]].
+[[perl-final-codeblock-signature-declaration-gap]], [[perl-generic-final-codeblock-normalization]].

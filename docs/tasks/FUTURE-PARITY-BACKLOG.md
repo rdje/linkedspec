@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (ADR 0032 declaration `.11.3.3.1` complete; Perl normalization `.11.3.3.2` active).
+- Last updated: `2026-07-12` (Perl metadata-governed normalization `.11.3.3.2` complete; closeout `.11.3.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2404,14 +2404,29 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.3.3.1 - declare final codeblock parameters`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.3.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement signature-governed attached/parenthesized final-codeblock normalization on Perl.
   Acceptance: Perl consumes `.1` without name-gated parser exceptions; equivalent helper/user-function/receiver
     spellings share canonical AST/IR, preserve harray/immediate blocks, execute through generated source, and
     produce typed declaration/arity/final-argument diagnostics.
+  Verification: **PASS 2026-07-12.** The wrapper-free grammar emits fixed parameters plus the final codeblock name;
+    registry validation projects exact ordered `params`/`arity`, and typed definitions plus both staged records
+    preserve final `parameter_kinds`. `LinkedSpec::CallableContract` declares helper/receiver/user-function acceptance, generic
+    receiver parsing no longer grants semantics by method name, and lowering gives attached/parenthesized
+    contextual blocks one zero-positional `codeblock_argument`. Helper, typed user-function, receiver `with`, tree
+    traversal, explicit literals, harray rejection, four declaration failures, and standalone generated execution
+    pass focused proof; adjacent ActionIR/variadic/generated-source tests remain green.
+    During implementation, director clarification reaffirmed that `set(target, value)` must evaluate to the
+    target's post-assignment typed value for method chaining. Existing assignment-value probes agree, while the
+    remaining `.spec`-facing `array(name)` / `hash(name)` namespace and mutation forms are scheduled for removal
+    under `.12.1`; this leaf does not broaden into that public-surface migration.
+    Direct Phase 0 passes all `1..1030` in 966 seconds after the wrapper-free grammar and immediate-`with`
+    full-breadth preservation repairs. Canonical CI passes capability 60/0/0, CLI 61x2, and Phase 0 `1..1030` in
+    916 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.11.3.3.2 - normalize Perl final codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close Perl callable-codeblock diagnostics, docs, and full-gate no-drift.
   Acceptance: Neutral/focused/Phase-0/CLI gates pass; no raw Perl, coderef leakage, harray drift, or undocumented
     compatibility remains before Rust parity.
@@ -2578,6 +2593,22 @@ before implementation.
 - [x] **LOCKSTEP** — ADR/index, contract/README, task/index, roadmaps, README/book, KM, changes/notes/live, and
   memory agree that Perl behavior `.11.3.3.2` consumes the adopted declaration next.
 
+### `FUTURE-PARITY-BACKLOG.11.3.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Toolbox lowering accepts attached `with(args) { ... }` but rejects its parenthesized
+  equivalent; typed user-function syntax is not parsed, and receiver attached blocks are parser name-gated.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Function grammar/registry/descriptors lack final parameter kinds, ActionIR
+  leaves contextual braces as `block_value`, and helper/receiver lowering dispatches directly on method names.
+- [x] **FIX** — Preserve final `name: codeblock` metadata, normalize attached/parenthesized blocks to one typed
+  `codeblock_argument`, move helper/receiver acceptance behind callable contracts, and execute contextual user
+  callbacks as zero-positional dynamic-context codeblocks through generated source.
+- [x] **ADDRESSED (verified)** — Focused helper/user-function/receiver probes cover equivalent AST, values,
+  descriptors, explicit literals, harray rejection, typed declaration failures, and standalone generated execution.
+- [x] **NO REGRESSION** — Existing fixed/variadic functions, `with`, hash/array traversal, literal invocation,
+  ActionIR, CLI, and Phase-0 gates reach their true stops without raw Perl or name-gated parser residue.
+- [x] **LOCKSTEP** — Task/index, capability state, roadmaps, README/book, Knowledge Map, changes/notes/live, and
+  memory describe generic Perl final-block behavior as current before closeout `.11.3.4`.
+
 - ID: `FUTURE-PARITY-BACKLOG.12`
   Status: `active`
   Goal: Retire transitional compatibility surfaces after uniform expression and duck-typed binding semantics settle.
@@ -2724,7 +2755,8 @@ before implementation.
 | 77 | `FUTURE-PARITY-BACKLOG.11.3.2` | `done` | Dynamic caller-context invocation, restoration, results, precedence, and typed failures pass on Perl. |
 | 78 | `FUTURE-PARITY-BACKLOG.11.3.3.0` | `done` | Audit proves the required final-codeblock declaration is absent and splits design from behavior. |
 | 79 | `FUTURE-PARITY-BACKLOG.11.3.3.1` | `done` | ADR 0032 adopts final-only `name: codeblock`; values retain their own invocation signatures. |
-| 80 | `FUTURE-PARITY-BACKLOG.11.3.3.2` | `active` | Implement metadata-governed attached/parenthesized normalization on Perl. |
+| 80 | `FUTURE-PARITY-BACKLOG.11.3.3.2` | `done` | Perl preserves final codeblock metadata and normalizes attached/parenthesized helper/user-function/receiver forms. |
+| 81 | `FUTURE-PARITY-BACKLOG.11.3.4` | `active` | Close Perl callable-codeblock diagnostics, docs, and full-gate no-drift. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3318,12 +3350,12 @@ Read-only evidence recorded on 2026-07-10:
   generated-source contract, Rust full-manifest breadth, Dart/Julia emitters, and exact `.3.5` admission close.
 - ADR 0031 uses semantic term `harray` while current helper spellings may still say `hash`, and retains `with` as
   an ordinary block-taking helper. ADR 0032 now defines final-only `name: codeblock`; no design question blocks
-  Perl normalization `.11.3.3.2`.
+  Perl closeout `.11.3.4`.
 
 ## Blockers
 
-- None. Perl callable-codeblock construction/dynamic invocation and the final-parameter declaration are complete;
-  normalization `.11.3.3.2` is active. Lua variadic work remains explicitly owned by `.5.1`/`.5.3`/`.8`, and scalar numeric
+- None. Perl callable-codeblock construction, dynamic invocation, final-parameter declaration, and contextual
+  normalization `.11.3.3.2` are complete; `.11.3.4` owns closeout. Lua variadic work remains explicitly owned by `.5.1`/`.5.3`/`.8`, and scalar numeric
   `.4.3.3.1.4` remains ready after the director-prioritized `.11` arc.
 
 ## Verification Log
@@ -3407,6 +3439,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.2` | Exact neutral live/standalone execution; static precedence; result chaining/drop; typed invalid-call probes; focused 97 top-level tests; canonical 60/0/0 capability, 61x2 CLI, and Phase 0 `1..1030`/815s; governance/whitespace/mdBook. | PASS. Perl executes closure-free typed records through explicit dynamic caller slots with copied/restored parameters and persistent nonparameter mutation; final-block normalization `.11.3.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.3.0` | Toolbox `call_spec_handler_subst`; exact ActionIR JSON for attached/parenthesized/explicit/helper/user/receiver forms; user-function descriptor; parser/registry/lowering source-location audit; governance/whitespace/mdBook. | PASS. Payload normalization exists, declaration ownership does not. Design `.1` is active before behavior `.2`; no behavior code changed. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.3.1` | Director clarification; ADR 0032/index; strict declaration schema and four invalid forms; 8 contextual helper/user-function/receiver cases; callable-codeblock checker; governance/whitespace/mdBook. | PASS. Final-only `name: codeblock` is adopted without nested signature typing; explicit values own `{|params| ...}` signatures and Perl behavior `.2` activates. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.3.2` | Touched Perl syntax; strict callable checker; focused callable 10 subtests; adjacent ActionIR/variadic/generated-source 90 tests; capability 60/0/0; direct Phase 0; canonical 61x2 CLI plus Phase 0; Knowledge Map/memory/task/doctrine/whitespace/mdBook. | PASS. Wrapper-free typed components canonicalize to ordered public params; declared helper/user/receiver contextual forms normalize equivalently; explicit values retain signatures; harrays reject typed; immediate `with` breadth remains intact; direct Phase 0 `1..1030` passes in 966 seconds and canonical Phase 0 in 916 seconds. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3439,6 +3472,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.11.3.2` | `FUTURE-PARITY-BACKLOG.11.3.2 - execute Perl callable codeblocks` | Dynamic caller slots, copied/restored parameters, typed errors, precedence, result chaining/drop, and independent generated execution. |
 | `FUTURE-PARITY-BACKLOG.11.3.3.0` | `FUTURE-PARITY-BACKLOG.11.3.3.0 - split final codeblock signature declaration` | Read-only proof of the missing declaration/callback-signature schema and design/behavior split. |
 | `FUTURE-PARITY-BACKLOG.11.3.3.1` | `FUTURE-PARITY-BACKLOG.11.3.3.1 - declare final codeblock parameters` | ADR 0032, final-only `name: codeblock`, value-owned signatures, invalid declarations, and eight contextual cases. |
+| `FUTURE-PARITY-BACKLOG.11.3.3.2` | `FUTURE-PARITY-BACKLOG.11.3.3.2 - normalize Perl final codeblocks` | Typed callable metadata, canonical contextual arguments, generic receiver parsing, generated execution, and typed rejection. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3504,10 +3538,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.11.3.3.2` preserves final kind metadata in typed user/staged records, introduces one helper/
+  receiver/user-function callable-contract seam, removes receiver parser name gating, and normalizes contextual
+  attached/parenthesized blocks to one zero-positional `codeblock_argument`. Focused live/standalone generated
+  execution, explicit literals, harray rejection, and typed declaration failures pass; `.11.3.4` owns closeout.
 - `2026-07-12`: Director clarification closes `.11.3.3.1` with exact final-only `name: codeblock`. The receiving
   parameter carries only the codeblock value kind; it has no nested argument list, and explicit `{|params| ...}`
   values retain their own signatures. ADR 0032 and the strict checker lock four invalid declarations plus eight
-  helper/user-function/receiver contextual forms; no backend behavior changes, and Perl `.11.3.3.2` is active.
+  helper/user-function/receiver contextual forms; no backend behavior changed in that design slice.
 - `2026-07-12`: `.11.3.3.0` stops behavior work at a real contract gap. Attached and parenthesized blocks already
   have equivalent `block_value` payloads, but no helper/user-function/receiver signature declares contextual
   codeblock acceptance or the callback's own params. Design `.1` is active before Perl implementation `.2`; no

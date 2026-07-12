@@ -957,8 +957,6 @@ sub _parse_fluent_call_segment {
  return undef unless length($head_trimmed);
  $call = _parse_method_function_expr($head_trimmed);
  return undef unless ref($call) eq 'HASH' && defined($call->{method});
- return undef unless ($call->{method} // '') =~ /^(?:with|walk_leaves|map_leaves|reduce_leaves)$/o;
-
  my $open_idx = index($head_trimmed, '(');
  return undef if $open_idx < 0;
  my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
