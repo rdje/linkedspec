@@ -36,7 +36,7 @@ codeblock as the fourth object/value kind and requires attached `call(args) { bl
 parenthesized `call(args, { block })` for any callable signature accepting a final codeblock, on every backend.
 ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select `{|args| body }` callable literals, dynamic caller
 context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and checked. Perl now
-preserves inert explicit literals, but invocation `.11.3.2` and generic final-block behavior have not landed.
+preserves and dynamically invokes explicit literals, but generic final-block behavior has not landed.
 
 The MVP is an immediate callback argument, not a closure. Blocks are not assignable,
 not returnable, and not callable later. The first implementation target is helper-function form

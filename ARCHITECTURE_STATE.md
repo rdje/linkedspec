@@ -5,17 +5,24 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Perl `cb(args)` resolution now runs after governed helpers and registered user functions.
+  Generated calls pass explicit references to the rule's scalar working slots into `LinkedSpec::CodeblockRuntime`,
+  which evaluates the stored typed ActionIR body without adding a coderef or captured environment to the record.
+  Arguments evaluate before copied fixed/rest binding; prior parameter values restore on success/failure;
+  nonparameter writes remain caller-visible; return, discard, receiver continuation, arity/keyword/not-callable,
+  and recursion behavior match the neutral fixture. Generic final-block normalization `.11.3.3` is now active.
 - `2026-07-12` refresh: Perl now parses exact `{|params| body }` before harray/eager blocks into the neutral
   eight-field typed record, including fixed/rest signature, body AST, source, and containing spans. Generated
   construction canonicalizes pure data as UTF-8 JSON/ASCII hex and decodes it at runtime; this avoids the measured
   rewrite/interpolation corruption of visible dumped source strings and creates no coderef/environment capture.
-  Assignment/copy and user-function argument/results pass 126 assertions. Invocation `.11.3.2` is active.
+  Assignment/copy and user-function argument/results passed the construction boundary; dynamic invocation has
+  since landed under `.11.3.2`.
 - `2026-07-12` refresh: `linkedspec-callable-codeblock-v1` now machine-locks ADR 0031 before backend behavior:
   exact `{|...|...}` versus harray/eager-block classification, typed signature/body/source/spans without capture,
   dynamic caller stores, temporary copied/restored params, block-local results, static precedence, diagnostics,
   contextual final blocks, and one deterministic future fixture. Its independent parser/invocation checker is in
-  canonical CI. Perl typed construction `.11.3.1` has since completed; invocation `.11.3.2` is active and the
-  capability remains future.
+  canonical CI. Perl typed construction `.11.3.1` and invocation `.11.3.2` have since completed; generic final
+  blocks `.11.3.3` are active and the cross-backend capability remains future.
 - `2026-07-12` refresh: Dart now carries ADR 0030's v2 signature through the spec-defined shell, AST/staged jobs,
   registry/action contracts, public descriptors, native runtime, normalized emitted state, generated-plan
   execution, and reconstruction. Calls are positional-only, fixed v1 stays exact, v2 enforces its minimum, and
@@ -132,8 +139,8 @@ This document is the current high-level technical reading of the project shape. 
   classifier. `cb(args)` uses ordered positional evaluation, temporary copied parameter/rest bindings, block-local
   return, and dynamic caller context for all nonparameter state; it captures no lexical environment. Static
   governed callables retain precedence, recursion is initially rejected, and `with` remains ordinary. Neutral
-  schema/fixtures `.11.2` are adopted and checked. Perl typed construction `.11.3.1` has since completed and
-  invocation `.11.3.2` is active before generic/cross-backend behavior or Lua routing changes.
+  schema/fixtures `.11.2` are adopted and checked. Perl typed construction `.11.3.1` and dynamic invocation
+  `.11.3.2` are complete; generic final-block `.11.3.3` is active before cross-backend behavior or Lua routing.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

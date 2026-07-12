@@ -1203,6 +1203,56 @@ sub _user_function_definition_for_name {
  return $definition
 }
 
+sub _codeblock_variable_call_candidate {
+ my ($deps, $name) = @_;
+ return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return 0 unless ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE';
+ return (($deps->{bare_symbol_kind}->($name) // '') eq 'scalar') ? 1 : 0
+}
+
+sub _codeblock_runtime_binding_expr {
+ my ($deps, $required_name) = @_;
+ my %names;
+ if (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_names}) eq 'ARRAY') {
+  foreach my $name (@{$deps->{bare_symbol_names}}) {
+   next unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+   next unless _codeblock_variable_call_candidate($deps, $name);
+   $names{$name} = 1;
+  }
+ }
+ $names{$required_name} = 1
+  if defined($required_name) && $required_name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return '{'.join(', ', map { _actionir_ast_quote_string_source($_).' => \\$'.$_ } sort keys %names).'}'
+}
+
+sub _split_leading_call_suffix {
+ my ($source) = @_;
+ return undef unless defined($source)
+  && $source =~ /\A\s*([A-Za-z_][A-Za-z0-9_]*)\s*\(/o;
+ my $open = index($source, '(');
+ return undef if $open < 0;
+ my ($depth, $quote, $escape) = (0, '', 0);
+ for (my $idx = $open; $idx < length($source); ++$idx) {
+  my $ch = substr($source, $idx, 1);
+  if (length($quote)) {
+   if ($escape) { $escape = 0; next; }
+   if ($ch eq '\\') { $escape = 1; next; }
+   if ($ch eq $quote) { $quote = ''; }
+   next;
+  }
+  if ($ch eq '"' || $ch eq "'") { $quote = $ch; next; }
+  if ($ch eq '(') { ++$depth; next; }
+  next unless $ch eq ')';
+  --$depth;
+  next unless $depth == 0;
+  return {
+   call_source => substr($source, 0, $idx + 1),
+   suffix => substr($source, $idx + 1),
+  }
+ }
+ return undef
+}
+
 sub _user_function_call_signature {
  my ($definition) = @_;
  return undef unless ref($definition) eq 'HASH';
@@ -1475,7 +1525,9 @@ sub _actionir_ast_first_unknown_value_call_name {
   my $method = _actionir_ast_known_value_call_method($node->{name});
   my $definition = _user_function_definition_for_name($deps, $node->{name});
   return $node->{name}
-   unless (defined($method) && length($method)) || ref($definition) eq 'HASH';
+   unless (defined($method) && length($method))
+       || ref($definition) eq 'HASH'
+       || _codeblock_variable_call_candidate($deps, $node->{name});
   foreach my $arg (@{$node->{args} || []}) {
    my $unknown = _actionir_ast_first_unknown_value_call_name($arg, $deps);
    return $unknown if defined($unknown) && length($unknown);
@@ -2636,6 +2688,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $lower_ast_fluent_chain_node;
  my $lower_ast_scalar_assignment_value_node;
  my $lower_ast_user_function_call_node;
+ my $lower_ast_codeblock_variable_call_node;
  my $lower_ast_with_trailing_block_call_node;
  my $ast_expr_source_node;
  my $lower_ast_supported_call_source_node;
@@ -2813,6 +2866,42 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   return 'do { '.join(' ', @lowered).' }'
  };
+ $lower_ast_codeblock_variable_call_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  my $name = $node->{name};
+  return undef unless _codeblock_variable_call_candidate($deps, $name);
+
+  my $keyword_count = grep {
+   ref($_) eq 'HASH'
+    && ($_->{kind} // '') eq 'raw_perl'
+    && defined($_->{source})
+    && $_->{source} =~ /\A\s*[A-Za-z_][A-Za-z0-9_]*\s*:/s
+  } @{$node->{args} || []};
+  if ($keyword_count) {
+   return 'do { require LinkedSpec::CodeblockRuntime; '
+    .'LinkedSpec::CodeblockRuntime::reject_keyword_arguments('.$keyword_count.') }'
+  }
+
+  my @lowered_args;
+  foreach my $arg (@{$node->{args} || []}) {
+   my $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
+    if ref($lower_ast_value_node) eq 'CODE';
+   $arg_expr = $ast_expr_source_node->($arg)
+    if !(defined($arg_expr) && length($arg_expr)) && ref($ast_expr_source_node) eq 'CODE';
+   $arg_expr = $arg->{source}
+    if ref($arg) eq 'HASH' && !(defined($arg_expr) && length($arg_expr));
+   return _actionir_ast_unsupported_helper_expr($name)
+    unless defined($arg_expr) && length($arg_expr);
+   $arg_expr = '+'.$arg_expr if $arg_expr =~ /^\s*\{/s;
+   push @lowered_args, $arg_expr;
+  }
+
+  my $bindings = _codeblock_runtime_binding_expr($deps, $name);
+  return 'do { require LinkedSpec::CodeblockRuntime; '
+   .'LinkedSpec::CodeblockRuntime::invoke($'.$name.', ['.join(', ', @lowered_args).'], '
+   .$bindings.', '._actionir_ast_quote_string_source($name).') }'
+ };
  my $ast_string_source_node = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
@@ -2953,6 +3042,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $user_function_call if defined($user_function_call) && length($user_function_call);
    my $call_expr = $lower_ast_supported_call_source_node->($node);
    return $call_expr if defined($call_expr) && length($call_expr);
+   my $codeblock_call = $lower_ast_codeblock_variable_call_node->($node);
+   return $codeblock_call if defined($codeblock_call) && length($codeblock_call);
    my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
    return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
    my $legacy_call = $legacy_method_value_expr->($node->{source});
@@ -3395,6 +3486,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lowered_call if defined($lowered_call) && length($lowered_call);
    $lowered_call = $lower_ast_aggregate_call_node->($node);
    return $lowered_call if defined($lowered_call) && length($lowered_call);
+   my $codeblock_call = $lower_ast_codeblock_variable_call_node->($node);
+   return $codeblock_call if defined($codeblock_call) && length($codeblock_call);
    my $unsupported_call = $unsupported_ast_helper_expr->($node->{name});
    return $unsupported_call if defined($unsupported_call) && length($unsupported_call);
    my $legacy_call = $legacy_method_value_expr->($node->{source});
@@ -3516,6 +3609,37 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $receiver_expr;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
    if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
+  if (($receiver->{kind} // '') eq 'raw_perl') {
+   my $leading = _split_leading_call_suffix($receiver->{source});
+   if (ref($leading) eq 'HASH') {
+    my $call_node = _parse_method_value_ast_expr($leading->{call_source}, $deps);
+    my $call_expr = $lower_ast_codeblock_variable_call_node->($call_node)
+     if ref($call_node) eq 'HASH';
+    if (defined($call_expr) && length($call_expr)) {
+     my $suffix = $leading->{suffix};
+     if (defined($suffix) && $suffix =~ /\A\s*\[/s) {
+      my @segments;
+      pos($suffix) = 0;
+      while ($suffix =~ /\G\s*\[\s*([^\[\]]+?)\s*\]/gc) {
+       my $segment_node = _parse_method_value_ast_expr($1, $deps);
+       my $segment_expr = $lower_ast_value_node->($segment_node, { bare_scalar_read => 1 })
+        if ref($segment_node) eq 'HASH';
+       $segment_expr = $ast_expr_source_node->($segment_node)
+        if ref($segment_node) eq 'HASH' && !(defined($segment_expr) && length($segment_expr));
+       @segments = () unless defined($segment_expr) && length($segment_expr);
+       last unless defined($segment_expr) && length($segment_expr);
+       push @segments, $segment_expr;
+      }
+      if (@segments && defined(pos($suffix)) && pos($suffix) == length($suffix)) {
+       $receiver_expr = 'do { require LinkedSpec::CodeblockRuntime; '
+        .'LinkedSpec::CodeblockRuntime::read_path('.$call_expr.', ['.join(', ', @segments).']) }';
+      }
+     } else {
+      $receiver_expr = '('.$call_expr.')'.($suffix // '');
+     }
+    }
+   }
+  }
   $receiver_expr = $ast_expr_source_node->($receiver)
    unless defined($receiver_expr) && length($receiver_expr);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);

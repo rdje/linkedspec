@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.2 — dynamic context should be explicit dataflow, not a host closure):
+  Keep the codeblock record pure data. At generated call sites, pass references to the rule's known scalar working
+  slots into a narrow typed ActionIR evaluator; this makes caller visibility reviewable and lets temporary fixed/
+  rest bindings restore deterministically on every exit. Resolve governed helpers and registered functions first,
+  then treat a bound scalar call as the dynamic fallback. Use typed path access for a call result before receiver
+  continuation—Perl's `->[index]` syntax cannot guess harray versus array from a DSL `[...]` suffix.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.1 — source-bearing data must survive later source rewriting):
   Recognize `{|` before harray/eager-block classification and keep codeblock body variables out of construction-
   time declaration traversal. Do not serialize source-bearing ActionIR records as visible Perl string literals:

@@ -12,7 +12,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [perl, actionir, codeblock, callable, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.3.1 adds exact {| recognition in ActionIR AST parsing, a version-1 eight-field literal record with callable signature/body/source/spans and no environment, canonical JSON-to-ASCII-hex generated-state reconstruction, and t/callable_codeblock_literal_contract.t proof across 126 assertions. Invocation remains owned by .11.3.2."
+evidence: "FUTURE-PARITY-BACKLOG.11.3.1 adds exact {| recognition in ActionIR AST parsing, a version-1 eight-field literal record with callable signature/body/source/spans and no environment, canonical JSON-to-ASCII-hex generated-state reconstruction, and contract-focused proof. FUTURE-PARITY-BACKLOG.11.3.2 subsequently adds invocation without changing the record."
 reverify: "prove -v -Iperl t/callable_codeblock_literal_contract.t && prove -q -Iperl t/actionir_ast_parser.t"
 ---
 
@@ -39,8 +39,8 @@ decodes it back to ordinary arrays/hashes/scalars at runtime. This prevents late
 interpolation, or a host coderef from changing the body/source record. Construction is inert and captures no
 environment. Assignment/copying and user-function arguments/results preserve the record.
 
-This fact does not claim `cb(args)` support. Variable-call resolution and dynamic caller execution begin in
-`FUTURE-PARITY-BACKLOG.11.3.2`.
+Variable-call resolution and dynamic caller execution have since landed under
+`FUTURE-PARITY-BACKLOG.11.3.2`; see [[perl-callable-codeblock-dynamic-invocation]].
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-actionir-ast-block-value-lowering]],
 [[variadic-user-function-contract]].

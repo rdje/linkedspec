@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.2 — execute Perl callable codeblocks dynamically**
+  (DONE — generic Perl final-block normalization `.11.3.3` next).
+
+  **Implementation:** Bound scalar calls now enter a typed ActionIR codeblock runtime after static helper/function
+  resolution. Explicit caller slot references provide dynamic reads/writes; fixed/rest values copy temporarily and
+  restore; results chain/drop; failures retain neutral typed detail. Records stay closure-free plain data.
+
+  **Proof:** The unchanged neutral fixture matches exactly in live and standalone generated execution. Focused
+  callable/ActionIR/variadic/generated-source proof passes 97 top-level tests. Canonical CI passes the 60/0/0
+  capability census, both 61-case CLI environments, and Phase 0 `1..1030` in 815 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.1 — parse Perl callable codeblock literals**
   (DONE — dynamic variable invocation `.11.3.2` next).
 

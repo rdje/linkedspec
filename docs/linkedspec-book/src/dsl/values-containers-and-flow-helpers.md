@@ -222,11 +222,35 @@ result = cb("ready")
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract locks this design and its future fixture. The Perl reference now parses
-these literals and preserves their signature/body/source/span record through assignment, user functions, and
-generated source without executing it. That is an implementation staging boundary, not a usable callable surface:
-`cb(args)` remains active `.11.3.2` work, followed by generic final-block and cross-backend leaves. Until invocation
-lands, use only the current named immediate forms above.
+`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. The Perl reference now parses these
+literals, preserves their signature/body/source/span record through assignment, user functions, and generated
+source, and executes a bound value through `cb(args)`. Arguments evaluate once from left to right before temporary
+copied fixed/rest parameters bind. Prior parameter values restore even when the body fails; nonparameter reads and
+writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the
+implicit result, compatible receiver chains may continue, and a standalone call discards only the result.
+
+```text
+state = "";
+append_state = {|value|
+  state = cat(state, value)
+  return(state)
+};
+
+append_state("a")
+second = append_state("b")
+# state == "ab" and second == "ab"
+
+collector = {|prefix, ...items|
+  return({ "prefix" : prefix, "items" : items })
+};
+count = collector("p", "a", "b")["items"].length()
+# count == 2
+```
+
+Perl reports exact arity, keyword-call, bound-non-codeblock, and active-recursion failures as typed codeblock runtime
+details. A governed helper/control or registered user function still wins over a same-named variable. This is not
+yet portable across backends, and the generic contextual final-block spellings remain `.11.3.3+` work; use explicit
+`{|...|...}` plus `cb(...)` only when targeting the current Perl reference.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

@@ -28,9 +28,10 @@ This `README.md` is the **single entry point** to the project.
   accepts a final codeblock, the language direction is one canonical call behind equivalent
   `call(args) { block }` and contextual final-block spellings. ADR `0031` adopts callable literals as
   `{|args| block }`, invoked by `cb(args)`, with dynamic caller context and no lexical capture in version 1.
-  `linkedspec-callable-codeblock-v1` now locks that accepted design. Perl preserves inert typed literal records,
-  but `cb(args)` invocation is still active work under `FUTURE-PARITY-BACKLOG.11.3.2`; the complete feature is not
-  yet current behavior.
+  `linkedspec-callable-codeblock-v1` now locks that accepted design. Perl preserves typed literal records and
+  executes `cb(args)` with dynamic caller state, temporary copied/restored parameters, block-local return,
+  chaining/discard, static precedence, and typed failures. Generic final-block normalization remains active under
+  `FUTURE-PARITY-BACKLOG.11.3.3`; the complete cross-backend feature is not yet current behavior.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -237,8 +238,8 @@ Top-level project docs:
 - Run `python3 tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock
   contract: exact `{|fixed, ...rest| body }` parsing, harray/eager-block disambiguation, deferred typed AST data,
   dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
-  deterministic fixture source/results. Perl literal construction/preservation passes its focused contract;
-  variable invocation remains future under active Perl leaf `.11.3.2`.
+  deterministic fixture source/results. Perl literal construction/preservation and dynamic variable invocation
+  pass the contract-focused suite; generic final-block normalization remains active `.11.3.3`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

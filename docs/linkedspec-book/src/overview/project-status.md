@@ -65,10 +65,11 @@ Three backbone items tracked major structural modernization — all done:
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The
   exact `{|` prefix distinguishes them from `{}`/`{ key : value }` harrays and eager `{ statements }` block
-  expressions. `with` remains an ordinary block-taking helper. Current implementations still support only their
-  named immediate block surfaces. Neutral schema/fixtures `.11.2` are adopted and checked; Perl now preserves inert
-  typed literal records, while dynamic variable invocation `.11.3.2` remains active before generic final-block and
-  cross-backend behavior changes.
+  expressions. `with` remains an ordinary block-taking helper. Neutral schema/fixtures `.11.2` are adopted and
+  checked. Perl now preserves the typed record and executes `cb(args)` through dynamic caller bindings: arguments
+  evaluate before copied fixed/rest parameters bind, prior parameter values restore, nonparameter mutation stays
+  visible, return/chaining/discard work, and typed arity/keyword/not-callable/recursion failures are exposed through
+  runtime context. Generic final-block normalization `.11.3.3` and cross-backend behavior remain future.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

@@ -47,6 +47,17 @@ sub run_spec {
     return $parser->(\$runtime_input);
 }
 
+sub run_spec_with_context {
+    my ($source, $input) = @_;
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%runtime_ctx);
+    ok($parser && ref($parser) eq 'CODE', 'focused callable-codeblock failure spec compiles');
+    return (undef, \%runtime_ctx) unless $parser && ref($parser) eq 'CODE';
+    my $runtime_input = $input;
+    my $result = $parser->(\$runtime_input);
+    return ($result, \%runtime_ctx);
+}
+
 subtest 'neutral brace classification and valid literal AST records' => sub {
     my %perl_kind = (
         harray_literal => 'hash_literal',
@@ -168,6 +179,155 @@ subtest 'user-function arguments and results preserve codeblock records' => sub 
         'a codeblock passed through a user-function parameter remains exact typed data');
     is_deeply($result->{from_result}, parse_expr($result_source),
         'a codeblock constructed and returned by a user function remains exact typed data');
+};
+
+subtest 'neutral fixture executes with dynamic caller context' => sub {
+    my $fixture = $contract->{fixture};
+    my $result = run_spec($fixture->{spec_source}, $fixture->{input});
+    is_deeply($result, $fixture->{expected},
+        'the contract-sourced Perl fixture matches every neutral invocation result');
+
+    my $generated_source = LinkedSpec::emit_generated_source(
+        \$fixture->{spec_source},
+        source_identity => 'callable-codeblock-fixture.spec',
+    );
+    my $package = 'LinkedSpec::CallableCodeblockFixtureGenerated';
+    my $loaded = eval "package $package; $generated_source; 1";
+    ok($loaded, 'standalone generated source containing codeblock calls loads');
+    diag($@) unless $loaded;
+    if ($loaded) {
+        no strict 'refs';
+        my $input = $fixture->{input};
+        my $generated_result = &{"${package}::Execute"}(\$input);
+        is_deeply($generated_result, $fixture->{expected},
+            'standalone generated execution matches the neutral fixture');
+    }
+};
+
+subtest 'standalone discard and static callable precedence remain exact' => sub {
+    my $discard_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done {',
+        '   state = "";',
+        '   cb = {|value| state = cat(state, value); return(state) };',
+        '   cb("x");',
+        '   return(state)',
+        ' }',
+        '',
+        'Done::',
+        ' /x/',
+        '';
+    is(run_spec($discard_spec, 'xx'), 'x',
+        'a standalone codeblock call executes its side effects and discards its result');
+    my $discard_descriptor = LinkedSpec::Get(\$discard_spec, return_descriptor => 1);
+    my $discard_meta = $discard_descriptor->{spec}{Top}{meta}{action_rewriter};
+    is($discard_meta->{raw_perl_dependency_count}, 0,
+        'a standalone codeblock call introduces no raw Perl dependency');
+    ok(grep({ $_ eq 'VALUE_DROP' } @{$discard_meta->{canonical_action_ir_nodes}}),
+        'a standalone codeblock call is canonical VALUE_DROP ActionIR');
+
+    my $helper_precedence_spec = join "\n",
+        'Top::',
+        ' /x/ -> Done {',
+        '   cat = {|left, right| return("shadow") };',
+        '   return(cat("a", "b"))',
+        ' }',
+        '',
+        'Done::',
+        ' /x/',
+        '';
+    is(run_spec($helper_precedence_spec, 'xx'), 'ab',
+        'a governed helper retains precedence over a same-named codeblock binding');
+
+    my $function_precedence_spec = join "\n",
+        'fn choose() { return("static") }',
+        'Top::',
+        ' /x/ -> Done {',
+        '   choose = {|| return("shadow") };',
+        '   return(choose())',
+        ' }',
+        '',
+        'Done::',
+        ' /x/',
+        '';
+    is(run_spec($function_precedence_spec, 'xx'), 'static',
+        'a registered user function retains precedence over a same-named codeblock binding');
+};
+
+subtest 'typed invocation failures preserve neutral diagnostic payloads' => sub {
+    my @cases = (
+        {
+            name => 'fixed arity mismatch',
+            body => 'cb = {|value| return(value) }; return(cb())',
+            expected => {
+                code => 'codeblock_arity_mismatch',
+                expected => 'exactly 1',
+                got => 0,
+            },
+        },
+        {
+            name => 'keyword argument rejection',
+            body => 'cb = {|value| return(value) }; return(cb(value: "x"))',
+            expected => {
+                code => 'codeblock_keyword_arguments_unsupported',
+                expected => 'positional arguments',
+                got => 1,
+            },
+        },
+        {
+            name => 'bound scalar is not callable',
+            body => 'text = "not callable"; return(text())',
+            expected => {
+                code => 'value_not_callable',
+                value_kind => 'scalar',
+            },
+        },
+        {
+            name => 'direct recursion rejection',
+            body => 'reader = {|| return(reader()) }; return(reader())',
+            expected => {
+                code => 'codeblock_recursion_unsupported',
+                cycle => ['reader', 'reader'],
+            },
+        },
+    );
+
+    foreach my $case (@cases) {
+        my $spec = join "\n",
+            'Top::',
+            ' /x/ -> Done { ' . $case->{body} . ' }',
+            '',
+            'Done::',
+            ' /x/',
+            '';
+        my ($result, $runtime_ctx) = run_spec_with_context($spec, 'xx');
+        is($result, undef, "$case->{name} returns no parser result");
+        my $detail = $runtime_ctx->{last_error}{detail};
+        isa_ok($detail, 'LinkedSpec::CodeblockRuntime::Error', "$case->{name} has a typed runtime detail");
+        foreach my $field (sort keys %{$case->{expected}}) {
+            is_deeply($detail->{$field}, $case->{expected}{$field},
+                "$case->{name} preserves neutral $field");
+        }
+    }
+
+    my $record = parse_expr('{|value| value = cat(value, "!"); missing() }');
+    my $value = 'outer';
+    my $error;
+    eval {
+        require LinkedSpec::CodeblockRuntime;
+        LinkedSpec::CodeblockRuntime::invoke(
+            $record,
+            ['inner'],
+            {value => \$value},
+            'failing',
+        );
+        1;
+    } or $error = $@;
+    isa_ok($error, 'LinkedSpec::CodeblockRuntime::Error',
+        'a failing body reports a typed runtime error directly');
+    is($error->{code}, 'unknown_helper', 'a failing body preserves its typed cause');
+    is($error->{name}, 'missing', 'a failing body identifies the unknown call');
+    is($value, 'outer', 'temporary parameter binding restores after body failure');
 };
 
 done_testing();

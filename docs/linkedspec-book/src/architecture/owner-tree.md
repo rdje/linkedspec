@@ -90,6 +90,9 @@ LinkedSpec
             ActionIR::*
               backend-neutral helper DSL scanning, canonicalization, contracts, and lowering
 
+            CodeblockRuntime
+              typed deferred-body execution over explicit caller working-slot references
+
         HandlerVariantEmitter
           structured HandlerIR AST, 10 variant builders, backend dispatch (Perl + JSON)
               backend-neutral helper DSL scanning, canonicalization, contracts, and lowering
@@ -417,6 +420,13 @@ fields. The parser seam now also emits typed control nodes for attached and mark
 lowering now consumes typed condition and body nodes before reusing the existing branch
 engine. Switch/case/default and while still migrate family by family, so any remaining
 source-text lowering is legacy debt rather than the model for new work.
+
+`LinkedSpec::CodeblockRuntime` is the narrow Perl execution owner for version-1 callable codeblock records. The
+generated call site supplies explicit scalar working-slot references; the runtime validates the record/signature,
+copies and temporarily binds fixed/rest arguments, evaluates the stored typed ActionIR body, restores parameter
+slots on every exit, and returns typed failures through the existing runtime-context channel. The record remains
+plain serialized data—no Perl coderef or lexical environment is captured. Governed helper and registered
+user-function resolution stays in `MethodLowering` before this variable-call fallback.
 
 ## `ActionIR::*`
 

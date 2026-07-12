@@ -49,8 +49,8 @@ close the corrective design: explicit callable literals use `{|params| body }`, 
 and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
 sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
 a parser exception. Neutral contract `.11.2` precedes the split backend rollout as an adopted executable
-schema/fixture. Perl `.11.3.1` now preserves inert literal records, while active `.11.3.2` owns invocation and
-`.11.3.3` still owns the generic final-block equivalence described here.
+schema/fixture. Perl `.11.3.1` preserves typed literal records and `.11.3.2` invokes them dynamically; `.11.3.3`
+still owns the generic final-block equivalence described here.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],

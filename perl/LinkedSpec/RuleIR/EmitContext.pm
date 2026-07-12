@@ -270,6 +270,7 @@ sub _actionir_owner_default_deps {
    $owner_deps = {
     %$owner_deps,
     bare_symbol_kind => \&_bare_symbol_kind,
+    bare_symbol_names => [sort keys %$__ls_current_bare_type_memory],
    };
   }
   _trace_emit_context_exit(
@@ -798,6 +799,32 @@ sub _collect_bare_identifier_type_memory {
     next unless ref($entry) eq 'HASH';
     $collect_ast_type_node->($entry->{key});
     $collect_ast_type_node->($entry->{value});
+   }
+   return;
+  }
+  if ($kind eq 'codeblock_literal') {
+   my $signature = $node->{signature};
+   if (ref($signature) eq 'HASH') {
+    $record->($_, 'scalar') for @{$signature->{positional_params} || []};
+    $record->($signature->{rest_param}, 'scalar')
+     if defined($signature->{rest_param});
+   }
+   my $body = $node->{body_ast};
+   if (ref($body) eq 'HASH') {
+    my $collect_dynamic_names;
+    $collect_dynamic_names = sub {
+     my ($value) = @_;
+     if (ref($value) eq 'ARRAY') {
+      $collect_dynamic_names->($_) for @$value;
+      return;
+     }
+     return unless ref($value) eq 'HASH';
+     my $value_kind = $value->{kind} // '';
+     $record->($value->{name}, 'scalar') if $value_kind eq 'variable';
+     $record->($value->{name}, 'scalar') if $value_kind eq 'assign_scalar';
+     $collect_dynamic_names->($_) for values %$value;
+    };
+    $collect_dynamic_names->($body);
    }
    return;
   }
@@ -1967,6 +1994,33 @@ sub _collect_auto_working_var_decls {
     next unless ref($entry) eq 'HASH';
     $collect_ast_node_refs->($entry->{key}, 1);
     $collect_ast_node_refs->($entry->{value}, 1);
+   }
+   return;
+  }
+
+  if ($kind eq 'codeblock_literal') {
+   my $signature = $node->{signature};
+   if (ref($signature) eq 'HASH') {
+    $record->('$', $_) for @{$signature->{positional_params} || []};
+    $record->('$', $signature->{rest_param})
+     if defined($signature->{rest_param});
+   }
+   my $body = $node->{body_ast};
+   if (ref($body) eq 'HASH') {
+    my $collect_dynamic_names;
+    $collect_dynamic_names = sub {
+     my ($value) = @_;
+     if (ref($value) eq 'ARRAY') {
+      $collect_dynamic_names->($_) for @$value;
+      return;
+     }
+     return unless ref($value) eq 'HASH';
+     my $value_kind = $value->{kind} // '';
+     $record->('$', $value->{name}) if $value_kind eq 'variable';
+     $record->('$', $value->{name}) if $value_kind eq 'assign_scalar';
+     $collect_dynamic_names->($_) for values %$value;
+    };
+    $collect_dynamic_names->($body);
    }
    return;
   }

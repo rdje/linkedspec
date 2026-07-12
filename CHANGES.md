@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.2 — execute Perl callable codeblocks dynamically
+
+Perl now resolves bound scalar calls after governed helpers and registered user functions, lowers standalone calls
+as canonical value drops, and supplies explicit references to the rule's scalar working slots. The new
+`LinkedSpec::CodeblockRuntime` validates the plain typed record, evaluates its stored ActionIR body, copies fixed
+arguments and a fresh rest array, restores prior parameter values on success/failure, exposes current nonparameter
+state, and keeps return local to the invocation. The record remains eight-field serialized data with no host
+coderef or captured environment.
+
+The unchanged neutral fixture passes exact dynamic reads, persistent mutation, restored parameters, empty/mixed
+rest, early return, receiver continuation, and result discard in live and standalone generated execution. Static
+helper/user-function precedence stays exact. Runtime-context detail now carries typed arity, keyword,
+not-callable, recursion, and body-call failures. The focused callable/ActionIR/variadic/generated-source set passes
+97 top-level tests; the neutral checker and touched-owner syntax gates pass. The canonical local gate passes the
+60/0/0 capability census, both 61-case CLI environments, and Phase 0 `1..1030` in 815 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.1 — parse Perl callable codeblock literals
 
 Implemented exact `{|` recognition before Perl's existing harray/eager-block classifier. Valid literals now carry

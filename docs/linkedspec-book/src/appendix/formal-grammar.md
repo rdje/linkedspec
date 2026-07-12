@@ -134,7 +134,7 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
-### Accepted future callable-codeblock literal
+### Callable-codeblock literal (current on Perl; future cross-backend)
 
 ADR 0031 adopts this unimplemented next syntax:
 
@@ -149,10 +149,11 @@ result = cb("a", "b")
 The `{|` opener is exact. A final `...rest` is allowed. `{}` and `{ key : value }` remain harrays; nonempty
 `{ statements }` remains an immediately evaluated block expression. Literal construction captures no environment.
 `cb(args)` executes later in dynamic caller context with temporary copied parameter/rest bindings and block-local
-return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` now locks this grammar, AST
-schema, diagnostics, and a future fixture. Perl `.11.3.1` now recognizes the grammar and preserves an inert
-eight-field typed record through generated source, but active invocation `.11.3.2` and later generic/backend leaves
-must land before this grammar is current portable behavior.
+return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` locks this grammar, AST schema,
+diagnostics, and fixture. Perl `.11.3.1` preserves the eight-field typed record through generated source and
+`.11.3.2` executes bound variable calls with the specified dynamic context, restoration, result, and failure
+semantics. Generic final-block syntax and non-Perl backends remain future, so this grammar is not yet universally
+portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

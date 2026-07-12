@@ -13,7 +13,7 @@ answers:
 date: 2026-07-12
 status: accepted-design
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; FUTURE-PARITY-BACKLOG.11.1 and ADR 0031 define the design, while completed .11.2 adopts linkedspec-callable-codeblock-v1 and its independent parser/invocation/fixture checker before behavior code."
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; FUTURE-PARITY-BACKLOG.11.1 and ADR 0031 define the design, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.2 consume its literal/invocation fixture while generic final blocks and backend parity remain future."
 reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|callable codeblock|\\{\\|params|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -45,9 +45,9 @@ and generic attached/contextual final blocks normalize under callable signatures
 Lexical capture is explicitly deferred behind a new decision if a real need appears.
 
 `linkedspec-callable-codeblock-v1` machine-locks seven literals, eleven valid calls, sixteen invalid syntax/call
-cases, contextual final-block normalization, and one deterministic future fixture. Perl `.11.3.1` now implements
-only inert typed literal construction/preservation; `cb(args)` invocation remains active `.11.3.2`, so the complete
-feature is not yet current behavior.
+cases, contextual final-block normalization, and one deterministic fixture. Perl `.11.3.1` implements typed literal
+construction/preservation and `.11.3.2` executes `cb(args)` with the neutral dynamic-context behavior. Generic
+final blocks and backend parity remain active/future, so the complete feature is not yet portable behavior.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]].

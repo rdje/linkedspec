@@ -130,8 +130,9 @@ dispatch rule.
 > codeblock parameter, after which attached/contextual final-block forms normalize to the same call on helper,
 > user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
 > dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
-> checked. Perl now preserves inert literal records, but invocation `.11.3.2` is still active; do not infer future
-> call/final-block equivalence from current behavior.
+> checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
+> caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
+> equivalence is still active `.11.3.3`; do not infer it from current behavior.
 
 ## 1. Working Variables and Setup
 

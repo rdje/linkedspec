@@ -33,6 +33,20 @@ The older helper spellings `declare(...)`, declaration aliases, `assign(...)`, `
 `s(...)` / `a(...)` / `h(...)` are retired from current `.spec` authoring. The Perl reference and Rust backend now
 diagnose the remaining retired helper calls instead of executing them successfully.
 
+The Perl reference also supports explicit deferred codeblock values:
+
+```text
+decorate = {|value| return(cat(value, "!")) }
+result = decorate("ready")
+```
+
+`{|...|...}` constructs typed data without executing or capturing an environment. A later `cb(args)` call evaluates
+arguments left-to-right, temporarily binds copied fixed parameters and an optional final `...rest` array, executes
+against the caller's current nonparameter working variables, restores parameter names, and returns the block-local
+result. Standalone calls discard the result but retain other mutations. Governed helpers and registered user
+functions keep precedence over same-named variables. This explicit literal/invocation surface is current only on
+Perl; generic final-block syntax and the Rust/Dart/Julia/Lua rollout remain task-tree-owned future work.
+
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of
 their detailed emitted-Perl examples were written before the terse hard-retirement pass. Read old helper spellings

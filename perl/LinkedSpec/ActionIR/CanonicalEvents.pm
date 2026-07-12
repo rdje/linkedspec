@@ -81,6 +81,27 @@ sub _statement_is_registered_user_function_value_drop {
  return 0
 }
 
+sub _statement_is_bound_codeblock_value_drop {
+ my ($statement, $deps) = @_;
+ return 0 unless defined($statement) && length($statement);
+ return 0 unless ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE';
+
+ my $node = eval {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST::Parser');
+  LinkedSpec::ActionIR::AST::Parser::parse_action_expr($statement, { deps => $deps });
+ };
+ return 0 unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+ my $call = $kind eq 'call' ? $node
+  : $kind eq 'fluent_chain' && ref($node->{receiver}) eq 'HASH'
+  && ($node->{receiver}{kind} // '') eq 'call' ? $node->{receiver}
+  : undef;
+ return 0 unless ref($call) eq 'HASH';
+ my $name = $call->{name};
+ return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return (($deps->{bare_symbol_kind}->($name) // '') eq 'scalar') ? 1 : 0
+}
+
 sub _registered_user_function_value_drop_event {
  my ($statement) = @_;
  return {
@@ -166,6 +187,17 @@ sub _build_canonical_action_ir_events {
     context => {
      raw => $statement,
     },
+   );
+  } elsif (_statement_is_bound_codeblock_value_drop($statement, $deps)) {
+   push @canonical_events, _registered_user_function_value_drop_event($statement);
+   $canonical_events[-1]{source} = 'bound_codeblock_value_drop';
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'bound_codeblock_value_drop',
+    taken => 1,
+    context => { raw => $statement },
    );
   } else {
    push @canonical_events, {
