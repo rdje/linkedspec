@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (Perl/Rust scalar numeric v1 alignment complete; Dart/Julia `.4.3.3.1.3` active)
+- Last updated: `2026-07-12` (four admitted backends pass scalar numeric v1; Lua `.4.3.3.1.4` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -983,17 +983,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart and Julia scalar numeric helpers with the neutral contract.
   Dependencies: `.4.3.3.1.1`, `.4.3.3.1.2`
   Acceptance: Both native interpreters consume every unchanged contract case through direct canonical calls;
     numeric parsing, arity, invalid/null, signed modulo, and result normalization agree with Perl/Rust, and full
     package/CLI/corpus gates pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Dart and Julia now enforce the v1 strict finite-decimal grammar without
+    trimming or host-only forms, exact fixed/variadic arities, invalid-to-null results, half-away rounding, and
+    floor signed modulo. Each package reads the unchanged 55-case JSON/spec fixture and matches its exact expected
+    value through direct native execution. Dart's authoritative gate passes format, analyzer, 184 package tests,
+    61/61 CLI cases in default and POSIX environments, and 105/105 corpus fixtures. Julia's authoritative gate
+    passes the complete package suite, primary CLI conformance, and 105/105 corpus fixtures. The one stale Julia
+    folded-subtraction happy path was corrected to the governed exact-arity call.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement Lua scalar numeric helpers and admit exact six-runtime behavior.
   Dependencies: `.4.3.3.1.2`, `.4.3.3.1.3`
   Acceptance: One Lua evaluator consumes every neutral case for canonical helpers on PUC Lua and LuaJIT, never
@@ -1270,7 +1276,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 37 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `done` | Measure scalar numeric drift and split neutral policy from backend alignment. |
 | 38 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `done` | Adopt 55-case strict scalar numeric v1 contract and offline checker. |
 | 39 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `done` | Perl/Rust consume all 55 scalar numeric v1 cases without generic coercion drift. |
-| 40 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `active` | Align Dart and Julia direct scalar numeric execution with contract v1. |
+| 40 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `done` | Dart and Julia consume all 55 scalar numeric v1 cases; full backend gates pass. |
+| 41 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `active` | Implement Lua scalar numeric v1 and prove exact six-runtime admission. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1300,6 +1307,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   its complete package and CLI 61x2; rustfmt/library clippy pass. Generic coercion paths remain unchanged.
 - [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, memory,
   checker fixture, generated-source expectations, and recurring CI inputs agree; Dart/Julia `.3` is next.
+
+### `LUA-BACKEND-PARITY.4.3.3.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The unchanged 55-case fixture exposed trimmed/broad numeric strings, folded extra
+  fixed-arity operands, host remainder sign, and host result-normalization differences in Dart and Julia.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Both native interpreters delegated numeric admission and arithmetic edges to
+  permissive host primitives, while their existing tests covered only happy paths.
+- [x] **FIX** — Added strict decimal matching, exact governed arity checks, finite result normalization, and floor
+  signed modulo at each numeric-helper boundary; preserved the separate one-array min/max reducer overload.
+- [x] **ADDRESSED (verified)** — Dart and Julia package tests load and execute all 55 unchanged contract calls and
+  compare the complete returned object to the shared exact expectation.
+- [x] **NO REGRESSION** — Dart passes format/analyzer/184 tests/61x2 CLI/105 corpus; Julia passes its complete
+  package suite, primary CLI conformance, and 105 corpus fixtures.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, and
+  memory agree that Perl/Rust/Dart/Julia are aligned and Lua exact six-runtime admission `.4` is active.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1620,3 +1642,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment` | Measured five semantic drift classes and split neutral policy plus three backend rollout leaves. |
 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract` | ADR 0029, 55-case v1 fixture, independent evaluator/source renderer, and recurring local-CI gate. |
 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers` | Dedicated Perl/Rust strict numeric adapters, unchanged 55-case direct proof, and Dart/Julia handoff. |
+| `LUA-BACKEND-PARITY.4.3.3.1.3` | `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers` | Strict native Dart/Julia adapters, unchanged 55-case direct proof, and Lua six-runtime handoff. |

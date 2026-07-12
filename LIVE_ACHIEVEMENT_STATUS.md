@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.3 — align Dart/Julia scalar numeric helpers**
+  (DONE — director-prioritized variadic callable audit `FUTURE-PARITY-BACKLOG.4.0` next; Lua numeric `.1.4` ready).
+
+  **Implementation:** Both native interpreters now enforce strict finite-decimal admission, governed exact versus
+  variadic arities, invalid nulls, finite result normalization, half-away rounding, and floor signed modulo.
+
+  **Proof:** Both consume all 55 unchanged cases. Dart passes format/analyzer/184 tests/61x2 CLI/105 corpus; Julia
+  passes its complete package suite, primary CLI conformance, and 105 corpus fixtures.
+
+  **Director direction captured:** Callable arity must follow purpose; user-defined functions need an explicit
+  definition-time variadic form. `.4.0` owns the neutral audit/split before syntax or behavior changes.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.2 — align Perl/Rust scalar numeric helpers**
   (DONE — Dart/Julia alignment `.4.3.3.1.3` next).
 

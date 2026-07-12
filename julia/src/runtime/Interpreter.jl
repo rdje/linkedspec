@@ -4453,15 +4453,19 @@ end
 
 function _call_runtime_numeric_helper(helper_name, values)
     if helper_name == "num_add"
+        length(values) >= 2 || return nothing
         return _runtime_numeric_fold(values, +)
     elseif helper_name == "num_sub"
+        length(values) == 2 || return nothing
         return _runtime_numeric_fold(values, -)
     elseif helper_name == "num_mul"
+        length(values) >= 2 || return nothing
         return _runtime_numeric_fold(values, *)
     elseif helper_name == "num_div"
+        length(values) == 2 || return nothing
         return _runtime_numeric_fold(values, (left, right) -> right == 0 ? nothing : left / right)
     elseif helper_name == "num_mod"
-        if length(values) < 2
+        if length(values) != 2
             return nothing
         end
         left = _runtime_number(values[1])
@@ -4470,17 +4474,21 @@ function _call_runtime_numeric_helper(helper_name, values)
             return nothing
         end
         return try
-            rem(Int(left), Int(right))
+            _runtime_json_number(mod(left, right))
         catch
             nothing
         end
     elseif helper_name == "num_abs"
+        length(values) == 1 || return nothing
         return _runtime_unary_number(values, abs)
     elseif helper_name == "num_floor"
+        length(values) == 1 || return nothing
         return _runtime_unary_number(values, value -> floor(Int, value))
     elseif helper_name == "num_ceil"
+        length(values) == 1 || return nothing
         return _runtime_unary_number(values, value -> ceil(Int, value))
     elseif helper_name == "num_round"
+        length(values) == 1 || return nothing
         return _runtime_unary_number(
             values,
             value -> value >= 0 ? floor(Int, value + 0.5) : ceil(Int, value - 0.5),
@@ -4490,7 +4498,7 @@ function _call_runtime_numeric_helper(helper_name, values)
     elseif helper_name == "num_max"
         return _runtime_min_max(values, max)
     elseif helper_name == "num_clamp"
-        if length(values) < 3
+        if length(values) != 3
             return nothing
         end
         value = _runtime_number(values[1])
@@ -4570,7 +4578,7 @@ end
 function _runtime_min_max(values, select)
     numbers = if length(values) == 1 && first(values) isa AbstractVector
         _runtime_numeric_list(first(values))
-    else
+    elseif length(values) >= 2
         parsed = Real[]
         for value in values
             number = _runtime_number(value)
@@ -4580,6 +4588,8 @@ function _runtime_min_max(values, select)
             push!(parsed, number)
         end
         parsed
+    else
+        return nothing
     end
     if numbers === nothing || isempty(numbers)
         return nothing
@@ -4592,7 +4602,7 @@ function _runtime_min_max(values, select)
 end
 
 function _runtime_numeric_comparison(helper_name, values)
-    if length(values) < 2
+    if length(values) != 2
         return nothing
     end
     left = _runtime_number(values[1])
@@ -4639,15 +4649,14 @@ function _runtime_number(value)
     elseif value isa AbstractFloat
         return isfinite(value) ? value : nothing
     elseif value isa AbstractString
-        text = strip(value)
-        if isempty(text)
+        if !occursin(r"\A-?(?:\d+(?:\.\d+)?|\.\d+)\z", value)
             return nothing
         end
-        integer = tryparse(Int, text)
+        integer = tryparse(Int, value)
         if integer !== nothing
             return integer
         end
-        number = tryparse(Float64, text)
+        number = tryparse(Float64, value)
         return number !== nothing && isfinite(number) ? number : nothing
     end
     return nothing

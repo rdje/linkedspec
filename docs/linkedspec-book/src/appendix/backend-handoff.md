@@ -643,11 +643,13 @@ array, harray, or codeblock. One neutral executable fixture covers the currently
 Rust, Dart, Julia, PUC Lua, and LuaJIT; the contract also fixes codeblock as non-text without claiming that the
 separately deferred explicit final-codeblock call syntax is already portable. Lua advances to 72/72 on both ABIs.
 
-Scalar numeric rollout uses a separate `linkedspec-scalar-numeric-v1` boundary. Perl generated actions and the
-Rust runtime now use dedicated strict adapters and pass the same 55 direct canonical calls: finite decimal
+Scalar numeric rollout uses a separate `linkedspec-scalar-numeric-v1` boundary. Perl, Rust, Dart, and Julia now use
+dedicated strict helper adapters and pass the same 55 direct canonical calls: finite decimal
 numbers/strings, exact fixed or variadic arities, invalid-to-null results, numeric comparison truth, half-away
-rounding, division/clamp fences, and floor signed modulo. Their general-purpose scalar conversion paths remain
-unchanged. Dart/Julia alignment follows before Lua implements and admits the contract on both Lua ABIs.
+rounding, division/clamp fences, and floor signed modulo. General-purpose scalar conversion paths remain unchanged.
+Lua implements and admits the contract on both Lua ABIs next. Callable arity is semantic: add/multiply/min/max are
+purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. A separately owned
+language-design activity will add an explicit definition-time variadic signature to user-defined functions.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

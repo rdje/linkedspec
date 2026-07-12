@@ -10,14 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.1.2` — aligned Perl/Rust scalar numeric helper values with v1.
-- latest_commit: `09f0012b` — `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.1.3`; align Dart and Julia scalar numeric helpers with v1.
-- next_action: make Dart/Julia consume all 55 unchanged cases through direct canonical calls, repairing strict
-  numeric parsing, exact arities, invalid/null results, half-away rounding, and signed floor modulo.
-- current_proof: Perl/Rust use narrow strict adapters and pass all 55 cases. Canonical local CI passes Perl CLI
-  61x2 plus phase0 `1..1030`; the Rust local gate passes its complete package and CLI 61x2; rustfmt/clippy pass.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.1.3` — aligned Dart/Julia scalar numeric helpers with v1.
+- latest_commit: `a66d8432` — `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.4.0`; audit and split purpose-specific callable arity plus explicit
+  variadic user-defined function signatures before behavior code, per the director's 2026-07-12 directive.
+- next_action: after committing/cleaning `.1.3`, inspect the grammar, descriptor/staged-job contracts, call
+  validators, native/generated runtimes, and Lua plan; then split neutral syntax and backend rollout under `.4`.
+- current_proof: Perl/Rust/Dart/Julia all consume the unchanged 55-case scalar numeric v1 fixture. Dart passes
+  format/analyzer/184 tests/61x2 CLI/105 corpus; Julia passes its complete package, primary CLI, and 105 corpus.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -26,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; generic final
   codeblock equivalence/`with` `.11.1`; uniform binding and temporary compatibility retirement `.12.1`.
-- blockers: none. in_flight_uncommitted: Perl/Rust scalar numeric v1 alignment prepared for commit; generated
-  artifacts clean.
+- blockers: none. in_flight_uncommitted: Dart/Julia scalar numeric v1 alignment prepared for commit; generated
+  artifacts clean. Lua scalar numeric `.4.3.3.1.4` remains ready after the director-prioritized variadic audit.

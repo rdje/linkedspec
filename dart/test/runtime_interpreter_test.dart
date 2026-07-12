@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
@@ -963,6 +964,23 @@ Top::
       'bad_div': null,
       'bad_number': null,
     });
+  });
+
+  test('matches the neutral scalar numeric contract exactly', () {
+    final contract =
+        jsonDecode(
+              File(
+                '../capability_conformance/scalar_numeric_contract.json',
+              ).readAsStringSync(),
+            )
+            as Map<String, Object?>;
+
+    expect(contract['format'], 1);
+    expect(contract['contract_id'], 'linkedspec-scalar-numeric-v1');
+    expect((contract['cases']! as List<Object?>), hasLength(55));
+
+    final result = _engine(contract['spec_source']! as String).parse('xx');
+    expect(result.value, contract['expected']);
   });
 
   test(

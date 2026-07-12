@@ -5526,12 +5526,24 @@ Object? _callStringCompareHelper(String helperName, List<Object?> values) {
 Object? _callNumericHelper(String helperName, List<Object?> values) {
   switch (helperName) {
     case 'num_add':
+      if (values.length < 2) {
+        return null;
+      }
       return _numericFold(values, (left, right) => left + right);
     case 'num_sub':
+      if (values.length != 2) {
+        return null;
+      }
       return _numericFold(values, (left, right) => left - right);
     case 'num_mul':
+      if (values.length < 2) {
+        return null;
+      }
       return _numericFold(values, (left, right) => left * right);
     case 'num_div':
+      if (values.length != 2) {
+        return null;
+      }
       return _numericFold(values, (left, right) {
         if (right == 0) {
           throw const _InvalidNumericResult();
@@ -5539,7 +5551,7 @@ Object? _callNumericHelper(String helperName, List<Object?> values) {
         return left / right;
       });
     case 'num_mod':
-      if (values.length < 2) {
+      if (values.length != 2) {
         return null;
       }
       final left = _numValue(values[0]);
@@ -5551,21 +5563,33 @@ Object? _callNumericHelper(String helperName, List<Object?> values) {
           !_isInteger(right)) {
         return null;
       }
-      return left.toInt() % right.toInt();
+      return _jsonNumber(left - (left / right).floor() * right);
     case 'num_abs':
+      if (values.length != 1) {
+        return null;
+      }
       return _unaryNumber(values, (value) => value.abs());
     case 'num_floor':
+      if (values.length != 1) {
+        return null;
+      }
       return _unaryNumber(values, (value) => value.floor());
     case 'num_ceil':
+      if (values.length != 1) {
+        return null;
+      }
       return _unaryNumber(values, (value) => value.ceil());
     case 'num_round':
+      if (values.length != 1) {
+        return null;
+      }
       return _unaryNumber(values, (value) => value.round());
     case 'num_min':
       return _minMax(values, math.min);
     case 'num_max':
       return _minMax(values, math.max);
     case 'num_clamp':
-      if (values.length < 3) {
+      if (values.length != 3) {
         return null;
       }
       final value = _numValue(values[0]);
@@ -5671,11 +5695,14 @@ Object? _minMax(
     }
     return _jsonNumber(numbers.skip(1).fold<num>(numbers.first, select));
   }
+  if (values.length < 2) {
+    return null;
+  }
   return _numericFold(values, select);
 }
 
 Object? _numericCompare(String helperName, List<Object?> values) {
-  if (values.length < 2) {
+  if (values.length != 2) {
     return null;
   }
   final left = _numValue(values[0]);
@@ -5719,8 +5746,9 @@ num? _numValue(Object? value) {
   if (value is num) {
     return value.isFinite ? value : null;
   }
-  final text = '$value'.trim();
-  if (text.isEmpty) {
+  final text = '$value';
+  final match = _strictDecimalText.matchAsPrefix(text);
+  if (match == null || match.end != text.length) {
     return null;
   }
   final parsed = num.tryParse(text);
@@ -5741,7 +5769,12 @@ bool _isInteger(num value) {
   return value.isFinite && value == value.truncateToDouble();
 }
 
-Object _jsonNumber(num value) {
+final _strictDecimalText = RegExp(r'-?(?:\d+(?:\.\d+)?|\.\d+)');
+
+Object? _jsonNumber(num value) {
+  if (!value.isFinite) {
+    return null;
+  }
   if (_isInteger(value)) {
     return value.toInt();
   }

@@ -5,12 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Dart and Julia now consume all 55 scalar numeric v1 cases through strict helper-local
+  decimal, arity, result, rounding, and signed-modulo boundaries. Their authoritative package/analyzer/CLI/corpus
+  gates pass. Lua exact six-runtime numeric admission is ready; director-prioritized callable-arity audit
+  `FUTURE-PARITY-BACKLOG.4.0` is the next clean-tree frontier.
 - `2026-07-12` refresh: Perl generated actions and the Rust runtime now consume scalar numeric v1 through dedicated
   strict adapters. Both pass all 55 unchanged cases; generic Perl scalar-to-text conversion and Rust
-  `RuntimeValue::as_number` remain untouched. Dart/Julia alignment `.4.3.3.1.3` is active.
+  `RuntimeValue::as_number` remain untouched. Dart/Julia alignment `.4.3.3.1.3` is complete.
 - `2026-07-12` refresh: ADR `0029` adopts `linkedspec-scalar-numeric-v1`. A 55-case neutral fixture and independent
   offline evaluator/source renderer now own strict numeric inputs, arities, invalid/null, comparisons, rounding,
-  clamp/division, and signed modulo. Perl/Rust alignment `.4.3.3.1.2` is complete; Dart/Julia `.1.3` follows.
+  clamp/division, and signed modulo. All four admitted backends are aligned; Lua `.1.4` follows.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.5.1` closes Lua scalar/string parity at 76/76 on both ABIs,
   corrects stale positive retired-helper prose to canonical `cat`, and advances to numeric helpers `.4.3.3`.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.4` adds dropped-statement dispatch for explicit

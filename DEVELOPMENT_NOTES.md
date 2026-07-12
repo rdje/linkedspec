@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.3 — arity belongs to the callable contract):
+  Do not infer variadicity by folding arbitrary extra operands. Add/multiply/min/max are purposefully unbounded;
+  subtraction/division/modulo, unary operations, clamp, and comparisons have exact arities. Apply those decisions
+  at the helper boundary and keep aggregate overloads explicit. User-defined functions need a grammar-owned final
+  rest-parameter form and minimum-arity runtime binding; audit descriptors, staged jobs, generated source, methods,
+  and every backend before selecting syntax from a host language.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.2 — narrow adapters prevent global coercion regressions):
   Numeric helper admission is stricter than general scalar conversion, so implement it at the helper boundary.
   Perl generated actions share one `LinkedSpec::Numeric` evaluator; Rust uses helper-local conversion instead of

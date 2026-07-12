@@ -68,6 +68,19 @@ end
     @test runtime_execute(engine, "xx").value == contract["expected"]
 end
 
+@testset "Neutral scalar numeric contract" begin
+    contract = JSON3.read(
+        read(joinpath(REPO_ROOT, "capability_conformance", "scalar_numeric_contract.json"), String),
+        Dict{String,Any},
+    )
+    @test contract["format"] == 1
+    @test contract["contract_id"] == "linkedspec-scalar-numeric-v1"
+    @test length(contract["cases"]) == 55
+
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(contract["spec_source"])))
+    @test runtime_execute(engine, "xx").value == contract["expected"]
+end
+
 function _throws_corpus_message(call, needle)
     try
         call()
@@ -2459,7 +2472,7 @@ Top::
    scores += 5
    return(hash(
      "symbol_add", +(2, *(3, 4)),
-     "sub", sub(10, 3, 2),
+     "sub", sub(10, 3),
      "div", num_div(7, 2),
      "mod", 17.mod(5),
      "abs_floor", -3.2.abs().floor(),
@@ -2484,7 +2497,7 @@ Top::
 """)
     @test runtime_parse(numeric_helpers, "x").value == Dict{String,Any}(
         "symbol_add" => 14,
-        "sub" => 5,
+        "sub" => 7,
         "div" => 3.5,
         "mod" => 2,
         "abs_floor" => 3,

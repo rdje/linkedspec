@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (non-codegen capability `.1.6` closed; generated-source `.3` active).
+- Last updated: `2026-07-12` (director-prioritized variadic callable/user-function audit `.4.0` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -43,6 +43,8 @@ before implementation.
 - The trailing-codeblock correction records `codeblock` alongside scalar, array, and harray as a language value
   kind; for callables whose signature accepts a final codeblock, `call(args) { ... }` and
   `call(args, { ... })` must be equivalent on helper, user-function, and receiver-method surfaces in every variant.
+- The director's variadic-callable direction is recorded: callable purpose governs exact versus unbounded arity,
+  and user-defined functions gain one explicit grammar-owned definition-time variadic signature after audit.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -1907,11 +1909,65 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.4`
+  Status: `active`
+  Goal: Decide and implement user-function and callable-signature extension topics beyond the MVP.
+  Children: `.4.0`, `.4.1`, `.4.2`, `.4.3`, `.4.4`
+  Acceptance: Fixed versus semantically variadic helper/method/function signatures are explicit; user-defined
+    functions have one unambiguous definition-time variadic parameter form and deterministic runtime binding.
+    Recursive functions, closures/lambdas/currying, namespaces, alternate spellings, optional zero-arg parens,
+    brace-less bodies, and caller-mutating forms are each accepted, rejected, or split with explicit `.spec`
+    contract and parity obligations before code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.0`
+  Status: `active`
+  Goal: Audit callable arity ownership and split variadic user-function design before behavior code.
+  Acceptance: Inspect the `.spec` function-definition grammar, neutral descriptor/body-job shape, callable
+    contract registries, call validation, and runtime binding in Perl/Rust/Dart/Julia plus the Lua parity plan;
+    distinguish purposefully unbounded helpers/methods from exact-arity operations; record the director's
+    2026-07-12 directive durably; split neutral syntax/semantics, admitted-backend rollout, and Lua parity without
+    choosing syntax from one host language by accident.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.1`
   Status: `pending`
-  Goal: Decide and implement user-function extension topics beyond the MVP.
-  Acceptance: Recursive functions, closures/lambdas/currying, namespaces, alternate spellings,
-    optional zero-arg parens, brace-less bodies, and caller-mutating forms are each accepted,
-    rejected, or split with explicit `.spec` contract and parity obligations before code.
+  Goal: Adopt a backend-neutral variadic callable and user-function definition contract.
+  Dependencies: `.4.0`
+  Acceptance: One grammar-owned definition syntax marks at most one final variadic parameter; descriptors preserve
+    fixed parameters plus the rest binding; call validation defines minimum arity, eager ordered evaluation, empty
+    rest values, recursion/diagnostics, method receiver interaction, and collision behavior through executable
+    neutral fixtures before runtime changes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.2`
+  Status: `pending`
+  Goal: Implement variadic user-function signatures on Perl and Rust.
+  Dependencies: `.4.1`
+  Acceptance: Both frontends, registries, staged descriptors, runtimes, generated-source paths, and diagnostics
+    consume the unchanged neutral contract while preserving exact-arity fixed functions and purpose-specific
+    helper/method arities; focused and complete gates pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.3`
+  Status: `pending`
+  Goal: Implement variadic user-function signatures on Dart and Julia.
+  Dependencies: `.4.1`, `.4.2`
+  Acceptance: Both native and generated paths consume the unchanged neutral contract, preserve fixed-function
+    diagnostics, and pass package/CLI/corpus/source-emitter gates without host-language rest-argument drift.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.4`
+  Status: `pending`
+  Goal: Close callable-arity no-drift and route Lua variadic parity to its dependency-complete owner.
+  Dependencies: `.4.2`, `.4.3`
+  Acceptance: Public docs, mdBook, Knowledge Map, neutral capability data, and four admitted backends agree on
+    exact versus unbounded signatures; Lua's frontend/runtime/generated-source obligations are added to the
+    existing Lua task tree at the first dependency-complete function leaf rather than claimed prematurely.
   Verification: `pending`
   Commit: `pending`
 
@@ -2198,7 +2254,7 @@ before implementation.
 | 80 | `FUTURE-PARITY-BACKLOG.1.3` | `done` | Dedicated complete Lua parity plan exists; no implementation code changed. |
 | 81 | `LUA-BACKEND-PARITY.1.1` | `active` | Lock Lua runtime/tooling/package/test/cache choices before code. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 66 | `FUTURE-PARITY-BACKLOG.4.0` | `active` | Audit and split the director's variadic callable/user-function directive before behavior code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 68 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 69 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

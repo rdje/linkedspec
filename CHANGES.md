@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.3 — align Dart/Julia scalar numeric helpers
+
+Dart and Julia numeric helper boundaries now implement the neutral finite-decimal grammar, governed exact versus
+variadic arities, invalid-to-null results, finite normalization, half-away rounding, and floor signed modulo. The
+separate one-array min/max aggregate overload remains intact. Both packages execute the unchanged 55-case shared
+JSON/spec fixture and compare its complete exact result.
+
+Dart's authoritative gate passes format, analyzer, 184 package tests, 61x2 CLI cases, and 105/105 corpus fixtures.
+Julia's authoritative gate passes its complete package suite, primary CLI conformance, and 105/105 corpus fixtures.
+The stale Julia happy-path test that folded a third subtraction operand now uses the governed exact-arity call.
+
+Captured the director's follow-on direction that callable arity is purpose-specific and user-defined functions
+need explicit variadic definition syntax. `FUTURE-PARITY-BACKLOG.4.0` is the next clean-tree audit/split; Lua scalar
+numeric implementation `.4.3.3.1.4` remains ready.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.2 — align Perl/Rust scalar numeric helpers
 
 Added a dedicated Perl numeric adapter and routed generated unary, arithmetic, scalar min/max, clamp, and
