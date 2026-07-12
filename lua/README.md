@@ -14,13 +14,13 @@ compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
 repetition, and direct result channels entirely in memory.
 Deterministic scalar/string helpers now include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
-lexical comparisons, and receiver chains. Lower/uppercase waits for the
-versioned all-variant Unicode casing decision rather than using byte-only Lua
-case functions.
+lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
+text coercion, and receiver chains. The Lua gate currently passes 72/72 on
+both PUC Lua 5.4 and LuaJIT.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
-execution, broad helper/value semantics, the primary CLI contract, and
+execution beyond the landed helper families, the primary CLI contract, and
 generated source are deliberately not implemented yet.
 
 Run the local gate from the repository root:
@@ -300,8 +300,9 @@ one-element output wrapper, byte/code-unit and character cursors, and lifecycle
 events. Helper/value breadth beyond the landed families remains owned by
 `.4.3`. That breadth is split before implementation: `.4.3.1` supplies
 four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
-scalar/string helpers, while `.2.1.2` owns Unicode casing, `.2.1.3` owns exact
-cross-variant scalar-to-text coercion, and `.2.2` owns regex/split/mutation; `.3`
+scalar/string helpers, `.2.1.2` supplies Unicode casing, `.2.1.3` supplies exact
+cross-variant scalar-to-text coercion, and active `.2.2` owns regex/split/
+mutation; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
@@ -371,9 +372,11 @@ Top::
 assert(result.value == "name!")
 ```
 
-Lowercase/uppercase are intentionally not executed by Lua yet: standard Lua's
-`string.lower`/`string.upper` are byte/locale operations. ADR 0027 now selects
-Unicode 17.0.0 full Default Case Conversion; verified generated data and the
-ordered all-variant rollout land before Lua enables that behavior. Exact non-string-to-text coercion is also a
-tracked all-variant contract; portable specs should pass strings to `cat` until
-that normalization closes.
+Lowercase/uppercase use repository-generated Unicode 17.0.0 full Default Case
+Conversion data rather than Lua's byte/locale-sensitive case functions. `cat`
+also has one portable typed contract across all five backends: strings remain
+unchanged, booleans become `"1"`/`"0"`, finite numbers use stable shortest
+decimal text with zero normalized to `"0"`, and null/aggregate/codeblock
+arguments make the expression return null. The executable neutral fixture
+covers function and receiver form; explicit codeblock-call syntax remains in
+the future-parity backlog.

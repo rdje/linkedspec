@@ -1744,7 +1744,7 @@ The `.spec` format has migrated these helper families to terser spellings. The *
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
-| `cat(args...)` | string value expression | string concatenation. |
+| `cat(args...)` | string value expression | String concatenation through the portable scalar-to-text contract: strings unchanged, booleans `1`/`0`, stable finite decimal text (`-0.0` → `0`, `1.0` → `1`), and null for any null/array/harray/codeblock argument. Retired `concat` remains unsupported. |
 | `copy(container)` | array/hash snapshot | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is

@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.3 — align scalar text coercion**
+  (DONE — regex/split/mutation `.4.3.2.2` next).
+
+  **Implementation:** ADR `0028`, one neutral fixture, and five backend conversion seams now define typed `cat`
+  text identically while keeping codeblock syntax under its separate owner and `concat` retired.
+
+  **Proof:** Full Rust, Dart, Julia, and dual-ABI Lua gates pass; Rust/Dart are CLI 61x2 and corpus 105/105, Lua is
+  72/72 on both ABIs, and canonical local CI passes Phase 0 `1..1030` in 553s plus every shared gate.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.4 — admit six-variant Unicode casing**
   (DONE — exact scalar-to-text coercion `.1.3` next).
 

@@ -25,6 +25,11 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 Perl, Rust, Dart, and Julia descriptor tests consume the same exact top-level, metadata, and function-record field
 sets so a backend-specific serialization convention cannot silently become public API.
 
+`scalar_text_contract.json` fixes the portable `cat` conversion boundary across Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite decimal text, and makes null plus
+the non-text value kinds propagate null. The executable fixture covers current portable source values; codeblock is
+normatively non-text while explicit final-codeblock call syntax remains separately owned.
+
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
 execute roles, the ten structural families, plan rejection, stable generated-source errors, one direct behavior

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.3 — keep value kinds distinct at text boundaries):
+  Host interpolation is not a language contract. Give scalar conversion one explicit nullable result: strings,
+  booleans, and finite numbers have canonical text; null and aggregate/codeblock values do not. Make `cat`
+  propagate the non-text result instead of erasing it to an empty fragment. Preserve explicit expression-block
+  evaluation and leave generic final-codeblock call syntax under its existing owner; value-kind policy does not
+  authorize a syntax pivot. Keep retired helper names outside the repair.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.4 — keep Lua casing scalar-safe and host-independent):
   Standard Lua casing is byte/locale oriented. Decode strict UTF-8 into Unicode scalars, apply generated mappings and
   contextual properties, and encode scalars explicitly; run the identical code on PUC Lua and LuaJIT.

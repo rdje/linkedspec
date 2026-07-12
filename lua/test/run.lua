@@ -2175,7 +2175,8 @@ Top::
  }
  E {
    return({
-     "cat" : cat("n=", 2, false, undef),
+     "cat" : cat("n=", 2, false),
+     "cat_null" : cat("n=", 2, false, undef),
      "cat_negative_zero" : cat(-0.0),
      "cat_aggregate_empty" : cat("x", [1], { "a" : 1 }, "y"),
      "coalesce_false" : coalesce(undef, false, "bad"),
@@ -2224,7 +2225,8 @@ Top::
   )
   assert_equal(result.value.cat, "n=20", "stable scalar cat conversion")
   assert_equal(result.value.cat_negative_zero, "0", "stable negative-zero conversion")
-  assert_equal(result.value.cat_aggregate_empty, "xy", "aggregate null-as-empty cat conversion")
+  assert_equal(result.value.cat_null, json.null, "null propagates through cat")
+  assert_equal(result.value.cat_aggregate_empty, json.null, "aggregate propagates null through cat")
   assert_equal(result.value.coalesce_false, false, "coalesce preserves false")
   assert_equal(result.value.coalesce_nonempty_zero, 0, "coalesce_nonempty preserves zero")
   assert_equal(result.value.coalesce_lazy, "kept", "coalesce short-circuits unevaluated fallback")
@@ -2262,6 +2264,24 @@ Top::
   assert_equal(result.value.terminal_continuation, json.null, "terminal string chain rejection")
   assert_equal(result.value.trim_null, json.null, "trim null propagation")
   assert_equal(result.value.replace_null, json.null, "replace null propagation")
+end)
+
+test("cat and scalar receiver text match the neutral six-variant contract", function()
+  local handle = assert(io.open("capability_conformance/scalar_text_contract.json", "rb"))
+  local contract = json.decode(assert(handle:read("*a")))
+  assert(handle:close())
+  assert_equal(contract.format, 1, "scalar-text contract format")
+  assert_equal(contract.contract_id, "linkedspec-scalar-text-v1", "scalar-text contract id")
+  assert_equal(contract.policy.codeblock, json.null, "codeblock is non-text")
+  assert_equal(contract.retired_names[1], "concat", "concat remains retired")
+
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(contract.spec_source))),
+    "xx"
+  )
+  for key, expected in pairs(contract.expected) do
+    assert_equal(result.value[key], expected, "neutral scalar-text field " .. key)
+  end
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

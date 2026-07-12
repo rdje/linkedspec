@@ -1,57 +1,33 @@
 # MEMORY — resume pointer (memory layer A; overwrite-only, keep ≤ ~60 lines)
 
-LinkedSpec is a progressive-extraction parser DSL (Perl). This file is **layer A** of
-`MEMORY_ARCHITECTURE.md`: the bounded, overwrite-only pointer to *now* — not a log. Its
-full history lives in git (layer D); per-unit work lives in the task-trees (layer B);
-durable cross-cutting facts live in `docs/decisions/` (layer C).
+LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
+`MEMORY_ARCHITECTURE.md`: the bounded pointer to *now*, not a history log.
 
 ## How to resume
-- Read `MEMORY_ARCHITECTURE.md` (the memory system — mandatory and mechanically enforced)
-  and `README.md` (project objective/layout), then `SESSION_BOOTSTRAP.md`.
-- Work is tracked in task-trees under `docs/tasks/` (index: `docs/TASK_TREE.md`); follow
-  the commit workflow in `COMMIT.md` with the task-tree leaf id in the subject.
-- Durable facts/decisions live in `docs/decisions/` (index: `INDEX.md`); fact cards in
-  `docs/knowledge/` (retrieval index `KNOWLEDGE_MAP.md`).
-- Doctrine (non-negotiable): no change without an owning task-tree leaf first — see
-  `docs/decisions/0001-task-tree-and-commit-doctrine.md`.
-- Before committing, run `scripts/check_memory_architecture.sh` (git hooks + the local CI
-  gate `tools/run_ci_local.sh` enforce it).
+- Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
+- Work is tracked under `docs/tasks/` (index: `docs/TASK_TREE.md`); commit per `COMMIT.md`.
+- Check `KNOWLEDGE_MAP.md` before re-deriving facts; use `TOOLBOX.md` first for diagnosis.
+- No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.4` — six-variant Unicode 17 casing admitted.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.3` — Dart/Julia generated Unicode casing complete.
-- recent_context: One generated Unicode 17 full-default contract passes 12 fixtures on Perl/Rust/Dart/Julia/PUC
-  Lua/LuaJIT; Lua strict scalar UTF-8 implementation passes 71x2. Active `.1.3` owns scalar-to-text drift;
-  `.4.3.2.2` owns regex/split/mutation. Rust matching uses RGX, not basic `regex`.
-- latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`; previous committed HEAD is
-  `d37f2e3a LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`.
-- push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
-  or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.3`; six-variant scalar-to-text coercion alignment is active.
-- next_action: Define the neutral scalar-to-text fixture for null/four kinds/booleans/numbers, then align variants.
-  The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
-  `FUTURE-PARITY-BACKLOG.8.1`;
-  the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
-  generic final-codeblock equivalence and `with` disposition are parked in `.11.1`;
-  none is the next backend rollout leaf.
-- latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia source/tests,
-  full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
-  Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter source/tests/task evidence, lifecycle/retv
-  contract, Rust/Perl cursor/capture references, and final nested-value assignment contract before implementing
-  `.4.1` through `.6.1`, Dart staged registry/runtime/descriptor/corpus reference facts, and the portable staged registry contract;
-  Dart diagnostics/trace split and implementation facts, and the portable trace
-  capability contract, canonical statement-separator fact, Julia depot-aware cleanup boundary and generated-source
-  effective AST/emitter/runtime/module/test surfaces, history public-
-  parser leading-trivia fact, the director's native in-memory multi-backend rationale, four-backend CLI source/
-  target audit, public Rust source-emitter export, ADR `0023` exact interface/capability contract, and Julia
-  primary CLI argument/loading/execution/canonical JSON/failures/trace, nine direct process families, the precise
-  `runtime-corpus-primary-cli` status, the 1,020/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
-  implementations versus the director's four-kind generic final-codeblock model.
-- pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
-  or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1030`**. Rust oracle = **105** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
-- noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
-  source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; LinkedSpec-owned generated artifacts are clean.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.3` — typed scalar-to-text parity.
+- latest_commit: this block is prepared for commit
+  `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion`; previous HEAD is
+  `5a3686bd LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2`; regex-aware scalar matching/substitution, split bridges,
+  flags, replacement expansion, and statement mutation are next.
+- next_action: inspect the `.4.3.2.2` acceptance boundary and use LinkedSpec probes to split it if one signoff-level
+  implementation commit would combine distinct regex/split/mutation mechanisms.
+- current_proof: `linkedspec-scalar-text-v1` passes Perl/Rust/Dart/Julia/PUC Lua/LuaJIT. Full Rust, Dart, Julia,
+  dual-ABI Lua, and canonical local CI gates pass; Phase 0 is `1..1030`, Rust/Dart corpus is 105/105, and Lua is
+  72/72. Strings are unchanged, booleans are `1`/`0`, finite numbers have stable decimal text, and non-text kinds
+  yield null. Retired `concat` remains rejected; codeblock syntax stays under `FUTURE-PARITY-BACKLOG.11.1`.
+- latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
+  complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
+- pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
+- push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
+- environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 10-minute timeout.
+  Julia offline verification may use a writable depot stacked before the installed read-only package depot.
+- deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; generic final
+  codeblock equivalence/`with` `.11.1`.
+- blockers: none. in_flight_uncommitted: none after this commit; generated artifacts clean.

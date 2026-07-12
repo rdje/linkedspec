@@ -3798,7 +3798,7 @@ function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "cat"
         parts = String[]
         for value in values
-            part = _runtime_scalar_string(value; null_as_empty = true)
+            part = _runtime_scalar_string(value)
             if part === nothing
                 return nothing
             end
@@ -4144,6 +4144,19 @@ function _runtime_scalar_string(value; null_as_empty::Bool = false)
         return null_as_empty ? "" : nothing
     elseif value isa _RuntimeRegexValue
         return value.pattern
+    elseif value isa Bool
+        return value ? "1" : "0"
+    elseif value isa Number
+        if !isfinite(value)
+            return nothing
+        elseif iszero(value)
+            return "0"
+        elseif value isa Integer
+            return string(value)
+        elseif isinteger(value)
+            return string(trunc(BigInt, value))
+        end
+        return string(value)
     end
     return string(value)
 end

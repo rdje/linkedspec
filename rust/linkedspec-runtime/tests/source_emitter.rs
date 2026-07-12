@@ -686,7 +686,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             module: "rep_recursion_guard_case",
             spec: REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC,
             input: "abc",
-            expected: json!(["guard:"]),
+            expected: json!([null]),
             expected_family: "GeneratedRuleFamily::RepAcode",
             expected_mode: RuleMode::OrPlus,
         },

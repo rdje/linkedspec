@@ -627,16 +627,21 @@ containers; named presence is zero; missing line/column uses origin `(1, 1)`.
 The same 69-test suite passes PUC Lua and LuaJIT. The following non-case pure
 scalar/string leaf adds lazy coalescing, definedness/emptiness, Unicode trim/
 length/substrings, literal transforms/predicates, lexical comparisons, and
-receiver chains. Its expanded suite passes 70/70 on both runtimes. Lowercase/
-uppercase remains separate because the existing hosts disagree on Unicode
-special casing; exact non-string scalar-to-text coercion is separately tracked
-for the same all-variant no-drift reason.
+receiver chains. Its expanded suite passes 70/70 on both runtimes. The next two
+closed leaves replace host-dependent Unicode casing and scalar-to-text behavior
+with versioned, all-variant contracts.
 
 ADR `0027` now pins that casing surface to Unicode 17.0.0 full Default Case Conversion. Exact official
 UnicodeData/SpecialCasing/DerivedCoreProperties inputs generate a neutral contract with 1,563 lower and 1,581 upper
 mappings, merged Cased/Case_Ignorable ranges, Final_Sigma context, and 12 fixtures. The offline checker is part of
 the canonical local CI gate. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consume generated modules and pass the same
 12 fixtures. Host case APIs are not the semantic authority.
+
+The following scalar-to-text slice adds `linkedspec-scalar-text-v1`. `cat` now preserves strings, spells booleans
+as `1`/`0`, uses stable finite decimal text (`-0.0` → `0`, `1.0` → `1`), and returns null when any argument is null,
+array, harray, or codeblock. One neutral executable fixture covers the currently portable value surfaces on Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT; the contract also fixes codeblock as non-text without claiming that the
+separately deferred explicit final-codeblock call syntax is already portable. Lua advances to 72/72 on both ABIs.
 
 ```lua
 local source = [[

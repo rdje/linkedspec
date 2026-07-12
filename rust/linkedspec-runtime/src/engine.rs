@@ -5914,8 +5914,14 @@ impl Engine {
             }
             // ── Scalar/string ──
             "cat" => {
-                let result: String = args.iter().map(|a| a.to_str()).collect();
-                Ok(RuntimeValue::Scalar(result))
+                let Some(parts) = args
+                    .iter()
+                    .map(RuntimeValue::to_scalar_text)
+                    .collect::<Option<Vec<_>>>()
+                else {
+                    return Ok(RuntimeValue::Undef);
+                };
+                Ok(RuntimeValue::Scalar(parts.concat()))
             }
             "coalesce" => {
                 for a in args {

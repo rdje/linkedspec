@@ -1,0 +1,36 @@
+{
+  "contract_id": "linkedspec-scalar-text-v1",
+  "format": 1,
+  "policy": {
+    "array": null,
+    "boolean_false": "0",
+    "boolean_true": "1",
+    "codeblock": null,
+    "codeblock_surface": "semantic value-kind rule; portable explicit final-codeblock call syntax remains owned by FUTURE-PARITY-BACKLOG.11.1",
+    "finite_number": "shortest stable decimal text; negative zero is 0 and integral-looking values omit .0",
+    "harray": null,
+    "null": null,
+    "string": "unchanged"
+  },
+  "retired_names": [
+    "concat"
+  ],
+  "spec_source": "Top::\n /x/ -> Done {\n   flag_false = false\n   flag_true = true\n   integral = 1.0\n   fraction = 1.25\n   negative_zero = -0.0\n   return({\n     \"string\" : cat(\"p\", \"text\", \"q\"),\n     \"null\" : cat(\"p\", undef, \"q\"),\n     \"array\" : cat(\"p\", [1], \"q\"),\n     \"harray\" : cat(\"p\", { \"a\" : 1 }, \"q\"),\n     \"false\" : cat(\"p\", false, \"q\"),\n     \"true\" : cat(\"p\", true, \"q\"),\n     \"integral\" : cat(\"p\", 1.0, \"q\"),\n     \"fraction\" : cat(\"p\", 1.25, \"q\"),\n     \"negative_zero\" : cat(\"p\", -0.0, \"q\"),\n     \"mixed\" : cat(\"p\", true, \"/\", 1.0, \"/\", 1.25, \"q\"),\n     \"receiver_false\" : flag_false.cat(\"q\"),\n     \"receiver_true\" : flag_true.cat(\"q\"),\n     \"receiver_integral\" : integral.cat(\"q\"),\n     \"receiver_fraction\" : fraction.cat(\"q\"),\n     \"receiver_negative_zero\" : negative_zero.cat(\"q\")\n   })\n }\n\nDone::\n /x/\n",
+  "expected": {
+    "array": null,
+    "false": "p0q",
+    "fraction": "p1.25q",
+    "harray": null,
+    "integral": "p1q",
+    "mixed": "p1/1/1.25q",
+    "negative_zero": "p0q",
+    "null": null,
+    "receiver_false": "0q",
+    "receiver_fraction": "1.25q",
+    "receiver_integral": "1q",
+    "receiver_negative_zero": "0q",
+    "receiver_true": "1q",
+    "string": "ptextq",
+    "true": "p1q"
+  }
+}

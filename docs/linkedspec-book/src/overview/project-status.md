@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Unicode 17 full-default casing is exact across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT using generated modules and 12 shared fixtures. Lua passes 71/71 on both ABIs. Scalar-to-text normalization is active in `.1.3`, and regex/split/mutation remains `.4.3.2.2`.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Unicode 17 full-default casing and the typed scalar-to-text contract are exact across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua passes 72/72 on both ABIs, and regex/split/mutation is active under `.4.3.2.2`.
 - **Semantic introspection / MCP direction** - parked `.10.1` will design one versioned, deterministic semantic
   query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
   resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that

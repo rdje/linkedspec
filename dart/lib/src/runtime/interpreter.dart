@@ -5371,7 +5371,7 @@ bool _coalesceAccepts(Object? value, {required bool requireNonempty}) {
 Object? _callCat(List<Object?> values) {
   final buffer = StringBuffer();
   for (final value in values) {
-    final string = _scalarString(value, nullAsEmpty: true);
+    final string = _scalarString(value);
     if (string == null) {
       return null;
     }
@@ -5902,6 +5902,21 @@ String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
   }
   if (value is List || value is Map) {
     return nullAsEmpty ? '' : null;
+  }
+  if (value is bool) {
+    return value ? '1' : '0';
+  }
+  if (value is num) {
+    if (!value.isFinite) {
+      return null;
+    }
+    if (value == 0) {
+      return '0';
+    }
+    if (value == value.truncateToDouble()) {
+      return value.toInt().toString();
+    }
+    return value.toString();
   }
   return '$value';
 }

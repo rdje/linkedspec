@@ -54,6 +54,20 @@ Done::
     end
 end
 
+@testset "Neutral scalar-to-text contract" begin
+    contract = JSON3.read(
+        read(joinpath(REPO_ROOT, "capability_conformance", "scalar_text_contract.json"), String),
+        Dict{String,Any},
+    )
+    @test contract["format"] == 1
+    @test contract["contract_id"] == "linkedspec-scalar-text-v1"
+    @test contract["policy"]["codeblock"] === nothing
+    @test contract["retired_names"] == Any["concat"]
+
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(contract["spec_source"])))
+    @test runtime_execute(engine, "xx").value == contract["expected"]
+end
+
 function _throws_corpus_message(call, needle)
     try
         call()
@@ -2308,7 +2322,7 @@ Top::
  }
 """)
     @test runtime_parse(string_helpers, " A-B-END ").value == Dict{String,Any}(
-        "cat" => "AB",
+        "cat" => nothing,
         "trim" => "A-B-END",
         "chain" => "a_b",
         "substr" => "-B-",

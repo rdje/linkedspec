@@ -91,6 +91,7 @@ require_tracked_file capability_conformance/manifest.json
 require_tracked_file capability_conformance/generated_source_contract.json
 require_tracked_file capability_conformance/native_spec_resolution_contract.json
 require_tracked_file capability_conformance/unicode_case_contract.json
+require_tracked_file capability_conformance/scalar_text_contract.json
 require_tracked_file unicode_case/README.md
 require_tracked_file unicode_case/generate_unicode_case_contract.py
 require_tracked_file unicode_case/upstream/17.0.0/UnicodeData.txt.gz
@@ -148,6 +149,7 @@ perl -c -Iperl t/cli_conformance_runner.t
 perl -c -Iperl t/trace_cli.t
 perl -c -Iperl t/native_spec_resolution.t
 perl -c -Iperl t/generated_source_contract.t
+perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -161,6 +163,9 @@ perl tools/check_generated_source_contract.pl
 
 log "running Perl generated-source contract fixture"
 PERL5LIB= prove -Iperl t/generated_source_contract.t
+
+log "running neutral scalar-to-text contract fixture"
+PERL5LIB= prove -Iperl t/scalar_text_contract.t
 
 log "checking native named/file resolution contract"
 perl tools/check_native_spec_resolution_contract.pl

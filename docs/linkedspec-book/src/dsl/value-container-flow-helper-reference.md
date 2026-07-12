@@ -537,9 +537,18 @@ standard context rules and no implicit normalization. Thus `uppercase("ß")` is 
 `"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute generated
 tables for function, receiver, and array forms; these special cases are portable across every variant.
 
-The variants also do not yet share one edge-case scalar-to-text coercion rule for `cat` and other string helpers:
-null/containers, booleans, and integral-looking decimals expose host differences. Pass explicit strings when
-portable output spelling matters until the tracked neutral coercion fixture and all-variant alignment land.
+`cat` now uses one scalar-to-text contract on every variant. Strings are unchanged; booleans become `1` or `0`;
+finite numbers use stable decimal text, so negative zero becomes `0`, `1.0` becomes `1`, and `1.25` remains
+`1.25`. Null, array, harray, and codeblock values are not scalar text, so any such argument makes the whole `cat`
+result null rather than silently contributing an empty fragment. The codeblock rule is a value-kind contract;
+portable explicit final-codeblock call syntax remains separately tracked and is not implied here. The current
+helper is `cat`; retired `concat` remains unsupported.
+
+```text
+cat("value=", true, "/", 1.0, "/", 1.25)  # "value=1/1/1.25"
+cat("prefix", undef, "suffix")             # undef / JSON null
+cat("prefix", [1], "suffix")               # undef / JSON null
+```
 
 Examples:
 

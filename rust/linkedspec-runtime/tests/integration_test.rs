@@ -2,6 +2,7 @@
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
+use linkedspec_core::types::RuntimeValue;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::spec_parser::{
@@ -1417,6 +1418,53 @@ fn build_and_run_result(grammar: &str, input: &str) -> Result<Value, String> {
     validate(&spec).expect("validate");
     let compiled = compile(&spec).expect("compile");
     Engine::new(compiled).execute(input)
+}
+
+#[test]
+fn lua_backend_parity_4_3_2_1_3_scalar_text_contract() {
+    let contract: Value = serde_json::from_str(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../capability_conformance/scalar_text_contract.json"
+    )))
+    .expect("scalar-text contract JSON");
+    assert_eq!(contract["format"], 1);
+    assert_eq!(contract["contract_id"], "linkedspec-scalar-text-v1");
+    assert!(contract["policy"]["codeblock"].is_null());
+    assert_eq!(contract["retired_names"], serde_json::json!(["concat"]));
+
+    assert_eq!(RuntimeValue::Undef.to_scalar_text(), None);
+    assert_eq!(RuntimeValue::Array(Vec::new()).to_scalar_text(), None);
+    assert_eq!(RuntimeValue::Hash(Vec::new()).to_scalar_text(), None);
+    assert_eq!(
+        RuntimeValue::Bool(false).to_scalar_text().as_deref(),
+        Some("0")
+    );
+    assert_eq!(
+        RuntimeValue::Bool(true).to_scalar_text().as_deref(),
+        Some("1")
+    );
+    assert_eq!(
+        RuntimeValue::Number(-0.0).to_scalar_text().as_deref(),
+        Some("0")
+    );
+    assert_eq!(
+        RuntimeValue::Number(1.0).to_scalar_text().as_deref(),
+        Some("1")
+    );
+    assert_eq!(
+        RuntimeValue::Number(1.25).to_scalar_text().as_deref(),
+        Some("1.25")
+    );
+
+    let source = contract["spec_source"]
+        .as_str()
+        .expect("contract spec_source");
+    let expected = contract["expected"].clone();
+    assert_eq!(
+        build_and_run(source, "xx"),
+        Value::Array(vec![expected]),
+        "Rust cat function and receiver paths match the neutral scalar-text fixture"
+    );
 }
 
 #[test]

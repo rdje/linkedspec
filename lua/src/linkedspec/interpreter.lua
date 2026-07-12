@@ -292,6 +292,7 @@ end
 
 local function scalar_string(value, null_as_empty)
   if value == json.null then return null_as_empty and "" or nil end
+  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then return nil end
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" or type(value) == "table" then
     return null_as_empty and "" or nil
@@ -402,7 +403,7 @@ local function evaluate_pure_string_helper(name, values)
   if name == "cat" then
     local parts = {}
     for index, value in ipairs(values) do
-      local part = scalar_string(value, true)
+      local part = scalar_string(value, false)
       if part == nil then return json.null end
       parts[index] = part
     end

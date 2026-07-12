@@ -4323,7 +4323,7 @@ if ($method_call && $method_call->{method} eq 'cat') {
   push @lowered_parts, $part_expr;
  }
 
- return 'do { my @__ls_cat_parts = ('.join(', ', @lowered_parts).'); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join(\'\', @__ls_cat_parts) : undef }';
+ return 'do { my @__ls_cat_parts = ('.join(', ', @lowered_parts).'); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq \'JSON::PP::Boolean\') { $__ls_cat_part = $__ls_cat_part ? \'1\' : \'0\'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = "$__ls_cat_part"; $__ls_cat_part = \'0\' if $__ls_cat_part =~ /\A-0(?:\.0+)?\z/; } } $__ls_cat_ok ? join(\'\', @__ls_cat_parts) : undef }';
 }
 if ($method_call && $method_call->{method} eq 'num_abs') {
  my $num_abs_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

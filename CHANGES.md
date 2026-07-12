@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.3 — align scalar text coercion
+
+Added ADR `0028` and the executable `linkedspec-scalar-text-v1` contract. Perl, Rust, Dart, Julia, PUC Lua, and
+LuaJIT now give `cat` one typed conversion rule: strings unchanged, booleans `1`/`0`, stable finite decimal text,
+and null when any fragment is null, array, or harray. Codeblock is normatively non-text without claiming the
+separately deferred explicit final-codeblock call syntax; retired `concat` remains rejected.
+
+Added exact backend fixtures and core-CI contract wiring. Full Rust, Dart, Julia, and dual-ABI Lua gates pass;
+Rust/Dart each pass both 61-case CLI matrices and 105-fixture corpus gates, while PUC Lua and LuaJIT advance to
+72/72. Canonical local CI passes both CLI matrices and Phase 0 `1..1030` in 553s plus every shared gate. The mdBook,
+root guide, ADR/KM/task state, and live roadmaps now point to regex/split/mutation `.4.3.2.2`.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.4 — admit six-variant Unicode casing
 
 Generated pure-Lua Unicode 17 casing with strict UTF-8 scalar decoding/encoding, full mappings, contextual Final

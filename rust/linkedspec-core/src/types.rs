@@ -119,6 +119,24 @@ impl RuntimeValue {
         }
     }
 
+    /// Convert a scalar value to the portable LinkedSpec text spelling.
+    ///
+    /// Arrays, hashes, and undef are values but are not scalar text. Callers
+    /// such as `cat` must propagate that distinction instead of silently
+    /// replacing them with empty fragments.
+    pub fn to_scalar_text(&self) -> Option<String> {
+        match self {
+            Self::Scalar(value) => Some(value.clone()),
+            Self::Number(value) if value.is_finite() => Some(if *value == 0.0 {
+                "0".to_string()
+            } else {
+                format!("{value}")
+            }),
+            Self::Bool(value) => Some(if *value { "1" } else { "0" }.to_string()),
+            Self::Undef | Self::Array(_) | Self::Hash(_) | Self::Number(_) => None,
+        }
+    }
+
     /// Interpret this value as a numeric (f64). Returns None if not numeric.
     pub fn as_number(&self) -> Option<f64> {
         match self {

@@ -651,15 +651,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, architecture/live docs, changes/notes, and memory agree.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement pure scalar/string helpers, lexical comparisons, aliases, and compatible receiver chains.
   Children: `.4.3.2.1.0`, `.4.3.2.1.1`, `.4.3.2.1.2`, `.4.3.2.1.3`
   Dependencies: `.4.3.1`
   Acceptance: `concat`/`cat`, coalesce families, defined/undefined/empty predicates, trim/case/length, prefix/
     suffix/contains/remove, literal substring/replace, explicit `str_*` comparisons, stable scalar conversion,
     null propagation, and function/receiver composition match cross-backend examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Deterministic non-case strings, pinned Unicode 17 casing, and portable
+    scalar-to-text coercion are complete through `.1.1`, `.1.2`, and `.1.3`.
+  Commit: closed by `.4.3.2.1.3`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.0`
   Status: `done`
@@ -773,17 +774,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Define one scalar-to-text coercion contract and align every LinkedSpec variant.
   Dependencies: `.4.3.2.1.2`
   Acceptance: A neutral fixture fixes `cat`/string-helper handling for null, array, harray, codeblock, booleans,
     integral-looking decimals, and nonintegral numbers; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT return identical
     values and nulls. Retired `concat` remains rejected rather than becoming an accidental alias.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** ADR `0028` and `linkedspec-scalar-text-v1` define strings unchanged,
+    booleans as `1`/`0`, stable finite decimal text, and null for non-text kinds. One neutral executable fixture
+    passes on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; the Lua suite is 72/72 on both ABIs. Codeblock is
+    normatively non-text without preempting the explicit final-codeblock syntax owner `.11.1`; `concat` remains
+    retired. Full Rust, Dart, Julia, dual-ABI Lua, and canonical local CI gates pass.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement regex-aware scalar matching/substitution, split bridges, flags, and statement mutation.
   Dependencies: `.4.3.2.1`
   Acceptance: `matches`, regex/literal replacement, dual `substr`, scalar/array split bridges, governed flags and
@@ -1023,7 +1028,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `done` | Perl/Rust direct, helper, receiver, and array casing use generated Unicode 17 data. |
 | 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `done` | Dart/Julia direct, helper, receiver, and array casing use generated Unicode 17 data. |
 | 25 | `LUA-BACKEND-PARITY.4.3.2.1.2.4` | `done` | PUC Lua/LuaJIT pass 71/71 and six-variant casing is admitted. |
-| 26 | `LUA-BACKEND-PARITY.4.3.2.1.3` | `active` | Align scalar-to-text coercion across all variants. |
+| 26 | `LUA-BACKEND-PARITY.4.3.2.1.3` | `done` | One typed scalar-to-text contract passes all six runtime variants. |
+| 27 | `LUA-BACKEND-PARITY.4.3.2.2` | `active` | Implement regex/split/mutation semantics after pure scalar closure. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The Knowledge Map fact and `LinkedSpec::Get`/`call_spec_handler_subst` probes showed
+  Perl rejecting booleans/references while Rust/Dart/Julia/Lua erased null and containers; host boolean and decimal
+  spellings also diverged.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Perl `MethodLowering` used a ref rejection loop, Rust `RuntimeValue::to_str`
+  used empty fallback, Dart `_scalarString`, Julia `_runtime_scalar_string`, and Lua `scalar_string` inherited three
+  host policies instead of one language-owned conversion boundary.
+- [x] **FIX** — ADR `0028` plus the neutral contract define typed scalar text; every backend now converts booleans
+  and finite numbers identically, and `cat` propagates null for null/array/harray values. Codeblock is non-text but
+  its explicit portable call syntax remains correctly owned by `.11.1`; `concat` remains retired.
+- [x] **ADDRESSED (verified)** — The same contract source/expected object passes Perl, Rust, Dart, Julia, PUC Lua,
+  and LuaJIT function/receiver paths; direct Rust value tests cover every representable kind and numeric boundary.
+- [x] **NO REGRESSION** — Full Rust, Dart, Julia, and dual-ABI Lua gates pass. Rust/Dart each pass CLI 61x2 and
+  corpus 105/105; Lua passes 72/72 on both ABIs; canonical local CI passes both CLI matrices, Phase 0 `1..1030` in
+  553s, and every shared governance/contract gate.
+- [x] **LOCKSTEP** — ADR/index, neutral contract, runtime tests, task/index/roadmaps, mdBook/guide, Knowledge Map,
+  live docs, changes/notes, memory, and CI input/run wiring are aligned.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.2.4` Acceptance Checklist
 
@@ -1181,3 +1206,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.0` | `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families` | Planning-only ordered split into core values, scalar/string, numeric, array, harray, controls/blocks, stateful capture/cursor, diagnostics, and no-drift. |
 | `LUA-BACKEND-PARITY.4.3.1` | `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers` | Four-kind stores/snapshots, checked access/assignment, complete entry/match reads, and scalar/string handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.0` | `LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms` | Planning-only split of pure scalar evaluation from regex/split/statement mutation. |
+| `LUA-BACKEND-PARITY.4.3.2.1.3` | `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion` | Typed neutral coercion contract, exact six-variant fixture, and regex/split/mutation handoff. |
