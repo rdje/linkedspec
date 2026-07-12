@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.4.0 — split variadic callable signatures**
+  (DONE — neutral grammar/signature/fixture `.4.1` next).
+
+  **Finding:** Open-bound built-ins already encode semantic variadicity; receiver forms use their effective helper
+  signatures. User functions repeat exact `arity` across grammar, staged sidecars, descriptor, registries,
+  native/generated runtimes, and Lua invocation frames, with unique names and no overloads.
+
+  **Routing:** `.4.1` owns one versioned fixed-prefix-plus-rest contract; `.4.2.1-.2` Perl/Rust; `.4.3.1-.2`
+  Dart/Julia; `.4.4` no-drift and dependency-complete Lua routing. Read-only probes/source audit; no behavior code.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.3 — align Dart/Julia scalar numeric helpers**
   (DONE — director-prioritized variadic callable audit `FUTURE-PARITY-BACKLOG.4.0` next; Lua numeric `.1.4` ready).
 

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.0 — variadicity is a versioned signature, not a loose call check):
+  Built-ins already distinguish exact, bounded, and open upper arities by purpose. User-function `arity` is public
+  staged/compiler data repeated through every backend, so do not reinterpret it locally as a minimum or merely
+  relax a runtime check. Adopt one explicit final rest binding, preserve fixed positional params separately, bind
+  extras as a fresh typed array, and evolve descriptor/payload/job diagnostics and generated execution together.
+  Unique function names mean this is not overload resolution; host splat/named/default semantics stay out.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.3 — arity belongs to the callable contract):
   Do not infer variadicity by folding arbitrary extra operands. Add/multiply/min/max are purposefully unbounded;
   subtraction/division/modulo, unary operations, clamp, and comparisons have exact arities. Apply those decisions

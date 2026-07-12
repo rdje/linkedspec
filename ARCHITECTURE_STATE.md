@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: variadic audit `.4.0` finds built-in helper/method open maxima already purpose-specific,
+  while user-function exact `arity` is repeated through the spec-owned shell, staged payload/job, exact outward
+  descriptor, compiled registries, native/generated execution, and Lua invocation frames. Neutral versioned
+  signature/fixture `.4.1` is active; no behavior changed in the audit.
 - `2026-07-12` refresh: Dart and Julia now consume all 55 scalar numeric v1 cases through strict helper-local
   decimal, arity, result, rounding, and signed-modulo boundaries. Their authoritative package/analyzer/CLI/corpus
   gates pass. Lua exact six-runtime numeric admission is ready; director-prioritized callable-arity audit

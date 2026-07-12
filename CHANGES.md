@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.0 — split variadic callable signatures
+
+Audited callable arity from the spec-owned user-function shell through staged payload/job metadata, the exact
+outward descriptor schema, Perl/Rust/Dart/Julia parsed and compiled registries, ActionIR call resolution, native
+and generated execution, and Lua's prepared invocation-frame seam. Direct `LinkedSpec::Get` descriptor and
+`runtime_ctx_ref` probes confirm fixed functions expose exact arity and malformed rest syntax fails through the
+structured `compiler_pipeline:function_registry` channel.
+
+Purpose-specific unbounded helpers already use minimum/open-maximum contracts, and receiver methods consume the
+same effective helper signatures. User functions instead repeat exact `arity` at every layer and reject duplicate
+names, so variadic support is one fixed-prefix-plus-rest signature evolution rather than overload or host splat
+behavior. Split neutral syntax/fixture `.4.1`, Perl/Rust implementation `.4.2.1-.2`, Dart/Julia `.4.3.1-.2`, and
+final Lua/no-drift routing `.4.4`. Added a Knowledge Map fact; no behavior source changed.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.3 — align Dart/Julia scalar numeric helpers
 
 Dart and Julia numeric helper boundaries now implement the neutral finite-decimal grammar, governed exact versus

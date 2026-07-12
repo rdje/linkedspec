@@ -1921,18 +1921,26 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.0`
-  Status: `active`
+  Status: `done`
   Goal: Audit callable arity ownership and split variadic user-function design before behavior code.
   Acceptance: Inspect the `.spec` function-definition grammar, neutral descriptor/body-job shape, callable
     contract registries, call validation, and runtime binding in Perl/Rust/Dart/Julia plus the Lua parity plan;
     distinguish purposefully unbounded helpers/methods from exact-arity operations; record the director's
     2026-07-12 directive durably; split neutral syntax/semantics, admitted-backend rollout, and Lua parity without
     choosing syntax from one host language by accident.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Knowledge Map retrieval, ADRs `0017`/`0023`, direct
+    `LinkedSpec::Get(..., return_descriptor => 1)` plus `runtime_ctx_ref` probes, and source inspection across the
+    grammar, staged shell/payload/job, exact outward descriptor contract, registries, validators, compiled records,
+    native/generated runtimes, and Lua invocation-frame seam located every arity owner. Purposefully unbounded
+    built-ins already use minimum/open-maximum contracts; receiver methods inject the receiver into the same
+    helper contract. User functions alone hard-code exact `arity` at every layer and reject duplicate names, so
+    this is one signature evolution rather than overload resolution. Unrecognized rest syntax returns `undef` with
+    structured `compiler_pipeline:function_registry` detail, not a swallowed error. Neutral contract `.4.1`,
+    Perl/Rust `.4.2.1-.2`, Dart/Julia `.4.3.1-.2`, and final Lua/no-drift routing `.4.4` are mechanism-sized.
+  Commit: `FUTURE-PARITY-BACKLOG.4.0 - split variadic callable signatures`
 
 - ID: `FUTURE-PARITY-BACKLOG.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Adopt a backend-neutral variadic callable and user-function definition contract.
   Dependencies: `.4.0`
   Acceptance: One grammar-owned definition syntax marks at most one final variadic parameter; descriptors preserve
@@ -1945,6 +1953,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.4.2`
   Status: `pending`
   Goal: Implement variadic user-function signatures on Perl and Rust.
+  Children: `.4.2.1`, `.4.2.2`
   Dependencies: `.4.1`
   Acceptance: Both frontends, registries, staged descriptors, runtimes, generated-source paths, and diagnostics
     consume the unchanged neutral contract while preserving exact-arity fixed functions and purpose-specific
@@ -1952,12 +1961,53 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.4.2.1`
+  Status: `pending`
+  Goal: Implement the neutral variadic signature in the Perl reference frontend, descriptor, and generated calls.
+  Dependencies: `.4.1`
+  Acceptance: The spec-owned shell, registry normalization, staged records, ActionIR resolution, eager call
+    lowering, fresh local binding, exact fixed-function diagnostics, public descriptor, and generated source pass
+    every neutral case without broad host-Perl fallback or caller capture.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.2.2`
+  Status: `pending`
+  Goal: Implement the unchanged neutral variadic signature in Rust native and generated execution.
+  Dependencies: `.4.2.1`
+  Acceptance: Parsed/compiled/described signature fields, registry-first call resolution, eager evaluation, typed
+    rest-array binding, exact fixed-function diagnostics, recursion fences, receiver continuation, source emission,
+    and oracle/full gates match the Perl reference and neutral fixture.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `FUTURE-PARITY-BACKLOG.4.3`
   Status: `pending`
   Goal: Implement variadic user-function signatures on Dart and Julia.
+  Children: `.4.3.1`, `.4.3.2`
   Dependencies: `.4.1`, `.4.2`
   Acceptance: Both native and generated paths consume the unchanged neutral contract, preserve fixed-function
     diagnostics, and pass package/CLI/corpus/source-emitter gates without host-language rest-argument drift.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.3.1`
+  Status: `pending`
+  Goal: Implement the unchanged neutral variadic signature in Dart native and generated execution.
+  Dependencies: `.4.2`
+  Acceptance: Spec projection, registry/action contracts, runtime rest binding, descriptors, generated source,
+    exact fixed-function diagnostics, and complete Dart gates consume the shared contract without Dart-specific
+    optional/named/rest behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.4.3.2`
+  Status: `pending`
+  Goal: Implement the unchanged neutral variadic signature in Julia native and generated execution.
+  Dependencies: `.4.3.1`
+  Acceptance: Spec projection, registry/action contracts, runtime rest binding, descriptors, generated source,
+    exact fixed-function diagnostics, and complete Julia gates consume the shared contract without Julia splat or
+    dispatch behavior leaking into `.spec` semantics.
   Verification: `pending`
   Commit: `pending`
 
@@ -1970,6 +2020,23 @@ before implementation.
     existing Lua task tree at the first dependency-complete function leaf rather than claimed prematurely.
   Verification: `pending`
   Commit: `pending`
+
+### `FUTURE-PARITY-BACKLOG.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct descriptor and malformed-signature probes show fixed functions expose exact
+  `arity`, while unrecognized rest spellings fail in the spec-owned definition shell.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Exact arity is copied through the grammar AST, staged payload/job, outward
+  descriptor schema, every backend AST/compiled registry, call resolver, runtime frame, and generated-source state;
+  loosening one runtime length check would create descriptor/compiler/runtime drift.
+- [x] **FIX** — No behavior fix belongs in this audit. Split one neutral versioned signature/fixture owner, then
+  Perl, Rust, Dart, and Julia implementation leaves, followed by Lua dependency routing and final no-drift.
+- [x] **ADDRESSED (verified)** — Existing built-in `min,max` arity tables prove purpose-specific open maxima already
+  exist; receiver methods use effective helper arguments. User functions are unique-name, non-overloaded calls and
+  therefore need one optional final rest binding rather than host overload/splat semantics.
+- [x] **NO REGRESSION** — Read-only LinkedSpec probes and source/contract inspection only; no grammar, descriptor,
+  parser, runtime, generated-source, fixture, capability, or backend-status behavior changed.
+- [x] **LOCKSTEP** — Task/index, roadmaps, architecture/live docs, mdBook status, Knowledge Map, changes/notes, and
+  memory identify neutral contract `.4.1` as the sole active variadic frontier.
 
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `pending`
@@ -2254,7 +2321,8 @@ before implementation.
 | 80 | `FUTURE-PARITY-BACKLOG.1.3` | `done` | Dedicated complete Lua parity plan exists; no implementation code changed. |
 | 81 | `LUA-BACKEND-PARITY.1.1` | `active` | Lock Lua runtime/tooling/package/test/cache choices before code. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 66 | `FUTURE-PARITY-BACKLOG.4.0` | `active` | Audit and split the director's variadic callable/user-function directive before behavior code. |
+| 66 | `FUTURE-PARITY-BACKLOG.4.0` | `done` | Exact arity owners and existing open-bound helpers are audited; rollout is split by neutral/backend mechanism. |
+| 67 | `FUTURE-PARITY-BACKLOG.4.1` | `active` | Adopt the grammar-owned variadic signature and executable neutral contract before runtime code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 68 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 69 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -2929,6 +2997,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.3` | Exact contract-sourced eight-case interpreter-first subset; eight namespaces in one offline host; exact values/metadata/plans/trace identity; checker path/order/no-skip/cleanup; focused 13+27+18; package 1,168 + 61x2 + 105; capability 60/0/0; docs/KM/governance/mdBook/cleanup. | PASS. Julia promotes gap→pass; `.3.4` closes and exact four-backend admission `.3.5` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.5` | Contract/capability 60/0/0; focused Perl 69, Rust 5/5, Dart 6/6, Julia 58/58; adjacent complete backend gates; docs/KM/governance/mdBook; 1.23+ GB cache cleanup. | PASS. Exact four-backend generated-source parity closes without behavior change; `.3` is done and Lua plan `.1.3` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 
 ## Commit Log
 
@@ -2942,6 +3011,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.10.0` | `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction` | Captures a backend-neutral native semantic API plus thin MCP projection; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.11.0` | `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks` | Captures four-kind final-codeblock equivalence and parks `with` disposition; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.12.0` | `FUTURE-PARITY-BACKLOG.12.0 - capture compatibility retirement doctrine` | Captures uniform expressions, one duck-typed binding, and temporary-only compatibility; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.4.0` | `FUTURE-PARITY-BACKLOG.4.0 - split variadic callable signatures` | Read-only exact-arity seam audit, open-bound helper distinction, and neutral/Perl/Rust/Dart/Julia/Lua rollout split. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
