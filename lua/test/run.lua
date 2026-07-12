@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-pure-split", "status parity")
+  assert_equal(first.parity, "runtime-scalar-regex-mutation", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2370,6 +2370,76 @@ Top::
   assert_equal(result.source_after, "a-b-", "pure receiver split does not mutate source")
   assert_equal(result.slice, "ab", "Unicode substr remains a distinct pure value")
   assert_equal(result.literal_replace, "x-b-x", "literal replacement remains non-regex")
+end)
+
+test("statement regex substitution mutates bare scalars and preserves pure substr", function()
+  local source = [[
+Top::
+ /x/
+ E {
+   value = "\"bar baz\""
+   numbered = "a12b34"
+   first_only = "a1b2"
+   letters = "AbA"
+   zero_width = "🙂a"
+   untouched = "abcdef"
+   substr(value, '"|\s', "", go)
+   regex_subst(numbered, /(\d+)/, "[$1:$0]", g)
+   substr(first_only, /(\d+)/, "[$1]", o)
+   substr(letters, /a/, "x", ig)
+   regex_subst(zero_width, /(?=.)/, "-", g)
+   substr(untouched, 1, 3)
+   return({
+     "value" : value,
+     "numbered" : numbered,
+     "first_only" : first_only,
+     "letters" : letters,
+     "zero_width" : zero_width,
+     "untouched" : untouched,
+     "slice" : substr(untouched, 1, 3)
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  ).value
+  assert_equal(result.value, "barbaz", "string pattern and global/no-op flags mutate target")
+  assert_equal(result.numbered, "a[12:12]b[34:34]", "$n and $0 replacements expand")
+  assert_equal(result.first_only, "a[1]b2", "missing global flag replaces first match only")
+  assert_equal(result.letters, "xbx", "regex literal and case-insensitive global flags compose")
+  assert_equal(result.zero_width, "-🙂-a", "global zero-width substitution makes Unicode-safe progress")
+  assert_equal(result.untouched, "abcdef", "discarded numeric substr remains pure")
+  assert_equal(result.slice, "bcd", "value-form numeric substr still slices")
+
+  local invalid_source = [[
+Broken::
+ /x/
+ E { value = "abc"; regex_subst(value, "(", "", g) }
+]]
+  local ok, failure = pcall(function()
+    linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(invalid_source))),
+      "x"
+    )
+  end)
+  assert_equal(ok, false, "invalid statement regex fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "invalid regex uses runtime diagnostic")
+  assert_equal(failure.rule_label, "Broken", "invalid regex diagnostic attributes its rule")
+
+  local flag_source = [[
+Flagged::
+ /x/
+ E { value = "abc"; substr(value, /b/, "x", q) }
+]]
+  ok, failure = pcall(function()
+    linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(flag_source))),
+      "x"
+    )
+  end)
+  assert_equal(ok, false, "unknown statement regex flag fails")
+  assert_equal(failure.rule_label, "Flagged", "unknown flag diagnostic attributes its rule")
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

@@ -31,7 +31,8 @@ The missing runtime mechanisms are distinct:
    pure split values and scalar target mutation.
 
 `LUA-BACKEND-PARITY.4.3.2.2.1` through `.5` own those mechanisms in that order. `.1` has since landed the internal
-helper-regex value, strict flag adapter, and function/receiver `matches`; `.2` is active for pure split. The documented invalid helper-regex
+helper-regex value, strict flag adapter, and function/receiver `matches`; `.2` has landed pure split; `.3` has
+landed statement scalar substitution. The documented invalid helper-regex
 contract is fail-closed (`matches` false, pure split empty); a Perl syntactically invalid embedded literal can fail
 earlier during generated parser compilation. That pre-existing reference boundary is recorded for honest parity
 reasoning and does not authorize a mid-slice Perl engine change.

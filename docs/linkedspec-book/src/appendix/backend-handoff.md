@@ -652,6 +652,12 @@ fields, treats an empty literal delimiter as Unicode-scalar splitting, and advan
 matches. Function and string-receiver forms are equivalent and non-mutating. Both Lua ABIs pass 74/74; scalar
 statement substitution remains a separate next mechanism.
 
+The scalar-mutation leaf then spends dropped-statement context: four-argument `substr`/`regex_subst` with a bare
+target mutates that scalar, while numeric `substr` remains pure. String and regex patterns share strict PCRE2
+flags; `g` controls global replacement, `o` is a no-op, and `$0`/`$n` expand per match. Invalid pattern/flag
+diagnostics carry the rule label, and zero-width global replacement advances by Unicode scalar. Both Lua ABIs pass
+75/75; explicit array-target split replacement remains separately owned.
+
 ```lua
 local source = [[
 Top::

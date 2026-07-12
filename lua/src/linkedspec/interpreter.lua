@@ -413,6 +413,47 @@ local function split_regex(value, regex)
   return result
 end
 
+local function stable_helper_flags(flags)
+  local enabled = {}
+  for flag in flags:gmatch(".") do enabled[flag] = true end
+  local result = ""
+  for _, flag in ipairs({ "g", "i", "m", "o", "s", "x" }) do
+    if enabled[flag] then result = result .. flag end
+  end
+  return result
+end
+
+local function expand_regex_replacement(replacement, one)
+  return (replacement:gsub("%$(%d+)", function(raw_index)
+    local index = tonumber(raw_index)
+    if index == 0 then return one:text() end
+    return one.groups[index + 1] or ""
+  end))
+end
+
+local function replace_regex(source, regex, replacement, replace_all)
+  local result = {}
+  local output_cursor = 0
+  local search_cursor = 0
+  while search_cursor <= #source do
+    local one = regex:seek_match(source, search_cursor)
+    if not one then break end
+    result[#result + 1] = source:sub(output_cursor + 1, one.byte_start)
+    result[#result + 1] = expand_regex_replacement(replacement, one)
+    output_cursor = one.byte_end
+    if not replace_all then break end
+    if one.byte_start == one.byte_end then
+      if one.byte_start == #source then break end
+      local _, width = decode_codepoint(source, one.byte_start + 1)
+      search_cursor = one.byte_start + width
+    else
+      search_cursor = one.byte_end
+    end
+  end
+  result[#result + 1] = source:sub(output_cursor + 1)
+  return table.concat(result)
+end
+
 local function trim_unicode(value)
   local first_content
   local last_content_end = 0
@@ -892,9 +933,77 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   fail("unsupported runtime ActionIR kind '" .. tostring(kind) .. "'", { action_kind = kind })
 end
 
+local function substitution_flag_text(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind == "variable" then return expr.name end
+  local value = evaluate_expr(engine, expr, ctx, accumulator, edge_state)
+  if getmetatable(value) == HELPER_REGEX_MT then return value.pattern end
+  return scalar_string(value, true) or ""
+end
+
+local function execute_regex_substitution_statement(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind ~= "call" or #expr.args < 4 then return false end
+  local name = action_contracts.canonical_action_helper_name(expr.name)
+  if name ~= "substr" and name ~= "regex_subst" then return false end
+  local target_expr = argument_expr(expr.args[1])
+  if target_expr.kind ~= "variable" then return false end
+
+  local pattern_value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+  local pattern
+  local pattern_flags = ""
+  if getmetatable(pattern_value) == HELPER_REGEX_MT then
+    pattern = pattern_value.pattern
+    pattern_flags = pattern_value.flags
+  else
+    pattern = scalar_string(pattern_value, false)
+  end
+  if pattern == nil then return false end
+
+  local explicit_flags = substitution_flag_text(
+    engine,
+    argument_expr(expr.args[4]),
+    ctx,
+    accumulator,
+    edge_state
+  )
+  local flags = stable_helper_flags(pattern_flags .. explicit_flags)
+  if (pattern_flags .. explicit_flags):find("[^gimosx]") then
+    local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+    fail("regex substitution for '" .. target_expr.name .. "' in rule " .. rule_label ..
+      " has invalid pattern or flags", { rule_label = rule_label, target = target_expr.name })
+  end
+  local regex = compile_helper_regex(engine, helper_regex(pattern, flags))
+  if regex == nil then
+    local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+    fail("regex substitution for '" .. target_expr.name .. "' in rule " .. rule_label ..
+      " has invalid pattern or flags", { rule_label = rule_label, target = target_expr.name })
+  end
+
+  local replacement_value = evaluate_expr(
+    engine,
+    argument_expr(expr.args[3]),
+    ctx,
+    accumulator,
+    edge_state
+  )
+  local replacement = scalar_string(replacement_value, true) or ""
+  local source_value = ctx.variables[target_expr.name]
+  if source_value == nil then source_value = json.null end
+  local source = scalar_string(source_value, true) or ""
+  bind_scalar(ctx, target_expr.name, replace_regex(source, regex, replacement, flags:find("g", 1, true) ~= nil))
+  return true
+end
+
 local function execute_block(engine, block, ctx, accumulator, edge_state)
   for _, statement in ipairs(block.statements) do
-    evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
+    if not (statement.drops_value and execute_regex_substitution_statement(
+      engine,
+      statement.expr,
+      ctx,
+      accumulator,
+      edge_state
+    )) then
+      evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
+    end
   end
 end
 

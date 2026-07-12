@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.3 — add Lua scalar regex mutation
+
+Added statement-context dispatch for dropped four-argument `substr` and `regex_subst` calls with bare scalar
+targets. String and regex patterns reuse strict PCRE2 compilation; `g` selects global replacement, `i/m/s/x`
+compile, `o` is a compatibility no-op, and replacement text expands `$0` plus numbered captures. Global
+zero-width matches advance by one decoded UTF-8 scalar without dropping source text.
+
+Unknown flags and invalid patterns now raise stable rule-attributed runtime diagnostics. Focused proof also locks
+first-only and case-insensitive replacement and confirms that discarded numeric `substr` remains pure. Full PUC
+Lua and LuaJIT gates pass 75/75; synchronized state advances to explicit array-target split replacement `.2.2.4`.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.2 — add Lua pure split bridge
 
 Added fresh typed pure split values for literal and PCRE2 delimiters. Literal split preserves leading/trailing

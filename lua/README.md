@@ -15,7 +15,8 @@ repetition, and direct result channels entirely in memory.
 Deterministic scalar/string helpers now include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
 lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
-text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split, and receiver chains. The Lua gate currently passes 74/74 on
+text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split,
+statement scalar regex mutation, and receiver chains. The Lua gate currently passes 75/75 on
 both PUC Lua 5.4 and LuaJIT.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
@@ -302,7 +303,8 @@ events. Helper/value breadth beyond the landed families remains owned by
 four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
 scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies exact
 cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
-mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; active `.2.2.3` owns scalar substitution; `.3`
+mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; `.2.2.3`
+supplies scalar substitution; active `.2.2.4` owns explicit array split replacement; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
@@ -393,3 +395,11 @@ empty literal delimiter splits Unicode scalars; regex delimiters reuse the
 strict helper flag adapter and make explicit progress for zero-width matches.
 Invalid/non-text inputs return an empty array. Downstream array receiver methods
 remain owned by the later array-helper family.
+
+Dropped four-argument `substr(target, pattern, replacement, flags)` and
+`regex_subst(...)` calls mutate a bare scalar target. String and regex patterns
+share strict PCRE2 compilation: `g` selects global replacement, `i/m/s/x`
+compile, and `o` is a no-op. `$0` and `$n` expand per match, including
+Unicode-safe zero-width global replacement. Unknown flags and invalid patterns
+raise rule-attributed runtime diagnostics. Numeric `substr(value,start,width?)`
+remains a pure value even when discarded.

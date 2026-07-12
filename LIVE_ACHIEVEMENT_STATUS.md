@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.3 — add Lua scalar regex mutation**
+  (DONE — explicit array-target split `.4.3.2.2.4` next).
+
+  **Implementation:** Dropped four-argument `substr`/`regex_subst` mutate bare scalars through strict PCRE2 flags,
+  first/global replacement, `$0`/`$n`, Unicode-safe zero-width progress, and rule-attributed invalid diagnostics.
+
+  **Proof:** String/regex patterns, `g/i/o`, captures, Unicode zero-width replacement, invalid pattern/flags, and
+  pure discarded/value substr pass; full PUC Lua/LuaJIT gates are 75/75.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.2 — add Lua pure split bridge**
   (DONE — scalar regex mutation `.4.3.2.2.3` next).
 

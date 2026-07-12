@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **435** facts · **2983** question keys.
+> **436** facts · **2989** question keys.
 
 ## Questions → fact
 
@@ -223,6 +223,7 @@
 - "do Julia value position array end mutations avoid mutation" -> [julia-runtime-array-helpers](docs/knowledge/julia-runtime-array-helpers.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "do Julia value position set_key calls avoid source mutation" -> [julia-runtime-hash-helpers](docs/knowledge/julia-runtime-hash-helpers.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "do LinkedSpec CLIs have positional arguments or subcommands" -> [user-observable-backend-cli-parity-contract](docs/knowledge/user-observable-backend-cli-parity-contract.md) · 2026-07-10 · reverify: `sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md`
+- "do Lua invalid substitution patterns include the rule label" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "do Lua user functions capture caller stores or closures" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "do Perl Rust Dart and Julia expose the same descriptor shape" -> [outward-compiled-descriptor-four-backend-contract](docs/knowledge/outward-compiled-descriptor-four-backend-contract.md) · 2026-07-11 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && dart test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t`
 - "do Perl Rust Dart and Julia resolve named specs with the same fallback order" -> [native-spec-resolution-policy-drift](docs/knowledge/native-spec-resolution-policy-drift.md) · 2026-07-11 · reverify: `sed -n '1,180p' perl/PathSearch.pm && rg -n '_resolve_local_spec_path|PathSearch::go|resolve_named_spec|resolvePrimaryCliNamedSpec|_resolve_named_spec_path|_find_primary_cli_repository_spec' perl/LinkedSpec/Resolver.pm rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl`
@@ -640,6 +641,8 @@
 - "does Lua project top-level user functions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua raw scan fn definitions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua receiver matches work" -> [lua-helper-regex-matches](docs/knowledge/lua-helper-regex-matches.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua regex replacement support dollar captures" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua regex_subst mutate scalar targets" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua reject duplicate labels and bad edge targets" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua resolve ActionIR helper contracts" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua run lifecycle blocks in order" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -656,6 +659,7 @@
 - "does Lua support pure split helper" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support seek and consume regex matching" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "does Lua support single quoted ActionIR strings" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua support statement form substr regex substitution" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support strict syntax validation" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua support trailing codeblock arguments" -> [generic-trailing-codeblock-argument-correction](docs/knowledge/generic-trailing-codeblock-argument-correction.md) · 2026-07-10 · reverify: `perl -Iperl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(unknown(\"x\") { return(value) })}) { print LinkedSpec::call_spec_handler_subst(\"Top\", $s), qq{\\n}; }' && rg -n 'parse_optional_trailing_block_arg|name != \"with\"|parse_non_with_helper_does_not_accept|trailingBlockArg|trailing_block_arg|FUTURE-PARITY-BACKLOG\\.11' rust/linkedspec-core/src/expr.rs dart/lib/src julia/src docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "does Lua use string lower upper for LinkedSpec casing" -> [six-variant-unicode-17-case-parity](docs/knowledge/six-variant-unicode-17-case-parity.md) · 2026-07-12 · reverify: `python3 tools/check_unicode_case_contract.py && bash tools/run_lua_local.sh`
@@ -1321,6 +1325,8 @@
 - "how does Lua distinguish arrays harrays and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does Lua distinguish source AST codeblocks from tables" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua distinguish substr mutation from value slicing" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua global regex replacement handle zero width" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua guard recursion and zero progress" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua handle Unicode function source spans" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua parse semicolon action statements" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -4639,6 +4645,15 @@ _Lua runtime interpreter executes compiled modes, lifecycle flow, local child di
 - **evidence:** `LUA-BACKEND-PARITY.4.2 adds lua/src/linkedspec/interpreter.lua and exports runtime_engine(...), runtime_parse(...), runtime_execute(...), typed results/events/errors, and JSON projection. lua/test/run.lua locks default/AND/OR/repetition modes, action/blind children, lifecycle order, local stores, retv, return/next/exit_now, bounds, cursors, direct output, false/null identity, recursion, zero progress, and typed failures. tools/run_lua_local.sh passes 66/66 on PUC Lua and LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-runtime-rule-interpreter.md`](docs/knowledge/lua-runtime-rule-interpreter.md)
+
+### lua-statement-regex-mutation
+_Lua distinguishes dropped scalar regex mutation from pure substr slicing_
+
+- **answers:** does Lua support statement form substr regex substitution | does Lua regex_subst mutate scalar targets | how does Lua distinguish substr mutation from value slicing | does Lua regex replacement support dollar captures | how does Lua global regex replacement handle zero width | do Lua invalid substitution patterns include the rule label
+- **date:** 2026-07-12 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.2.2.3 adds dropped-statement dispatch in lua/src/linkedspec/interpreter.lua for four-argument substr/regex_subst calls with bare scalar targets. String/regex patterns share strict helper compilation; g is global, imsx compile, o is a no-op, $0/$n expand from native group vectors, and zero-width global matches advance by a decoded UTF-8 scalar. Invalid patterns/flags carry rule_label. lua/test/run.lua locks mutation and pure discarded/value substr boundaries; PUC Lua and LuaJIT pass 75/75.`
+- **reverify:** `bash tools/run_lua_local.sh`
+- **source:** [`docs/knowledge/lua-statement-regex-mutation.md`](docs/knowledge/lua-statement-regex-mutation.md)
 
 ### lua-toolchain-package-policy
 _Lua uses PUC 5.4 primary, LuaJIT secondary, repo paths, and disposable dual-ABI PCRE2 builds_

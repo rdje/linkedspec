@@ -396,7 +396,7 @@ dispatch rule.
 - **Returns**: no value; mutates the named scalar target.
 - **Behavior**: Applies regex substitution to the current scalar target value. `g` performs global replacement;
   `i`, `m`, `s`, and `x` are regex flags; `o` is accepted as a compatibility no-op. Replacement strings can use
-  capture references such as `$1`.
+  `$0` for the whole match and numbered capture references such as `$1`.
 - **Boundary**: This is the legacy statement-style mutation form used by shipped specs. It is intentionally
   separate from pure `substr(value, start, length?)` character slicing and from literal `replace_substr(...)`.
 - **Example**: `substr(value, '"|\s', "", go)` removes quotes and whitespace from `value` in place. Single quotes

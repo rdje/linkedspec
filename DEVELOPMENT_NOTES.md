@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.3 — spend dropped-statement context explicitly):
+  Arity alone cannot distinguish overloaded `substr`: mutation requires a dropped call, four arguments, and a
+  bare target. Regex replacement needs separate output/search cursors for global zero-width matches, just like
+  regex split, while `$n` must index the native full capture-group vector rather than the compact capture list.
+  In Lua, scalar lookup must test `nil` explicitly so a stored boolean `false` is not mistaken for absence.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.2 — separate split segment and search cursors):
   A zero-width regex delimiter cannot use one cursor for both output boundaries and match progress. Retain the
   segment start, advance only the search cursor by one decoded UTF-8 scalar, and emit the pending segment when the
