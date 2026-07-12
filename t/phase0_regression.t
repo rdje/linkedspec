@@ -12453,7 +12453,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
         'switch/case/default lowering stays inside EmitContext-owned lowering path');
     is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside EmitContext-owned lowering path');
-    like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{pipeline_match}, qr/LinkedSpec::UnicodeCaseMapping::lowercase\(\$_\)/, 'lowercase_each lowering stays inside EmitContext-owned lowering path');
     like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside EmitContext-owned lowering path');
 };
 subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
@@ -15987,27 +15987,27 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{set(Top, has_prefix, starts_with(lowercase(trim(raw_name)), "pre"))}),
-        q{$has_prefix = do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }},
+        q{$has_prefix = do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }},
         'assign helper accepts starts_with(normalized-scalar, prefix) source lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{set(Top, has_suffix, ends_with(lowercase(trim(raw_name)), "fix"))}),
-        q{$has_suffix = do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }},
+        q{$has_suffix = do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }},
         'assign helper accepts ends_with(normalized-scalar, suffix) source lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(starts_with(lowercase(trim(raw_name)), "pre"))}),
-        q{return do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }},
+        q{return do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }},
         'return(payload) accepts starts_with(normalized-scalar, prefix) lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(ends_with(lowercase(trim(raw_name)), "fix"))}),
-        q{return do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }},
+        q{return do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }},
         'return(payload) accepts ends_with(normalized-scalar, suffix) lowering'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{and(starts_with(lowercase(trim(raw_name)), "pre"), ends_with(lowercase(trim(raw_name)), "fix"))}),
-        q{((do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }) && (do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }))},
+        q{((do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }) && (do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }))},
         'starts_with(...) and ends_with(...) compose together inside flow conditions'
     );
     is(
@@ -16487,7 +16487,7 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))'),
-        'return [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]',
+        'return [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]',
         'general return(payload) lowers nested array-pipeline composition inside array(...) payloads'
     );
     is(
@@ -16550,22 +16550,22 @@ subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub 
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))'),
-        '@items = @IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }',
+        '@items = @IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }',
         'set(array(name), pipeline(...)) lowers nested array-pipeline initializer'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))'),
-        '@parts = @items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @items }',
+        '@parts = @items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @items }',
         'set(array(...), pipeline(...)) lowers nested array-pipeline source'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        'return {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}',
+        'return {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}',
         'nested hash payload values accept array-wrapped array-pipeline composition'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        'return ["items", [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]]',
+        'return ["items", [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]]',
         'nested array payload values accept array-wrapped array-pipeline composition'
     );
 
@@ -16602,22 +16602,22 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        '%by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }])',
+        '%by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }])',
         'set(hash(name), hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(items))), /^B/))))'),
-        '%by_name = ("A" => [@items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @items }])',
+        '%by_name = ("A" => [@items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @items }])',
         'set(hash(...), hash(... array(pipeline(...)))) lowers nested collection-valued hash source'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}',
+        'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}',
         'push accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))))'),
-        'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}]',
+        'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}]',
         'return(array(...)) accepts hash payloads with nested collection-valued array-pipeline composition'
     );
 
@@ -36243,12 +36243,12 @@ subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('lowercase(trim(entry_text()))'),
-        'do { my $__ls_lower = do { my $__ls_trim = do { $IMATCH }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }',
+        'do { my $__ls_lower = do { my $__ls_trim = do { $IMATCH }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }',
         'lowercase(...) composes directly with trim(...) inside scalar value lowering'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('uppercase(coalesce(retv["type"], "word"))'),
-        'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }',
+        'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }',
         'uppercase(...) composes directly with coalesce(...) inside scalar value lowering'
     );
 };
@@ -36481,7 +36481,7 @@ subtest 'emit_context_lowers_matches_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(lowercase(trim(raw_name)), /^pre/)'),
-        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
+        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
         'matches(normalized-scalar, /regex/) lowers into a boolean-like regex-membership expression'
     );
     is(
@@ -36491,12 +36491,12 @@ subtest 'emit_context_lowers_matches_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('matches(lowercase(trim(raw_name)), /^pre/)'),
-        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
+        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
         'matches(...) composes inside flow conditions over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("is_prefixed", matches(lowercase(trim(raw_name)), /^pre/)))'),
-        'return {"is_prefixed" => do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }}',
+        'return {"is_prefixed" => do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }}',
         'matches(...) lowers inside general return payloads'
     );
 };
@@ -36505,7 +36505,7 @@ subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(lowercase(trim(raw_name)), "fix")'),
-        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(normalized-scalar, needle) lowers into a boolean-like substring-membership expression'
     );
     is(
@@ -36515,12 +36515,12 @@ subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('contains_substr(lowercase(trim(raw_name)), "fix")'),
-        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(...) composes inside flow conditions over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_fix", contains_substr(lowercase(trim(raw_name)), "fix")))'),
-        'return {"has_fix" => do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }}',
+        'return {"has_fix" => do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }}',
         'contains_substr(...) lowers inside general return payloads'
     );
 };
@@ -36529,7 +36529,7 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(lowercase(trim(raw_name)), "-", "_")'),
-        'do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
+        'do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
         'replace_substr(normalized-scalar, needle, replacement) lowers into a pure literal substring rewrite expression'
     );
     is(
@@ -36539,12 +36539,12 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(replace_substr(lowercase(trim(raw_name)), "-", "_"), "node_item")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'replace_substr(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("normalized", replace_substr(lowercase(trim(raw_name)), "-", "_")))'),
-        'return {"normalized" => do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }}',
+        'return {"normalized" => do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }}',
         'replace_substr(...) lowers inside general return payloads'
     );
 };
@@ -36553,32 +36553,32 @@ subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix(lowercase(trim(raw_name)), "node_")'),
-        'do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }',
+        'do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }',
         'rm_prefix(normalized-scalar, prefix) lowers into a pure literal prefix-trim expression'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")'),
-        'do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }',
+        'do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }',
         'rm_suffix(...) lowers composed fallback expressions into guarded literal suffix trims'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_prefix(lowercase(trim(raw_name)), "node_"), "item_end")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }; my $__ls_str_cmp_rhs = "item_end"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }; my $__ls_str_cmp_rhs = "item_end"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'rm_prefix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end"), "node_item")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'rm_suffix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_prefix", rm_prefix(lowercase(trim(raw_name)), "node_")))'),
-        'return {"trimmed_prefix" => do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }}',
+        'return {"trimmed_prefix" => do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }}',
         'rm_prefix(...) lowers inside general return payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_suffix", rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")))'),
-        'return {"trimmed_suffix" => do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }}',
+        'return {"trimmed_suffix" => do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }}',
         'rm_suffix(...) lowers inside general return payloads'
     );
 };
@@ -36587,22 +36587,22 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(lowercase(trim(raw_name)), "_", stage)'),
-        q{do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
+        q{do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
         'cat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
-        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { $IMATCH }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
+        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { $IMATCH }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
         'cat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(cat(lowercase(trim(raw_name)), "_", stage), "node_init")'),
-        q{do { my $__ls_str_cmp_lhs = do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'cat(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", cat(lowercase(trim(raw_name)), "_", stage)))'),
-        q{return {"full_name" => do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }}},
+        q{return {"full_name" => do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }}},
         'cat(...) lowers inside general return payloads'
     );
 };
@@ -38942,12 +38942,12 @@ subtest 'emit_context_lowers_additional_composable_array_string_routines' => sub
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'lowercase_each(array(parts))'),
-        '@parts = map { lc($_) } @parts',
+        '@parts = map { LinkedSpec::UnicodeCaseMapping::lowercase($_) } @parts',
         'lowercase_each helper lowers into map lc assignment'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'uppercase_each(array(parts))'),
-        '@parts = map { uc($_) } @parts',
+        '@parts = map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @parts',
         'uppercase_each helper lowers into map uc assignment'
     );
     is(
@@ -38962,12 +38962,12 @@ subtest 'emit_context_lowers_additional_composable_array_string_routines' => sub
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'),
-        '@parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @parts }',
+        '@parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @parts }',
         'nested functional composition lowers inner-to-outer over stable target array'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'lowercase_each(Top, array(parts)); filter_match(Top, uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'),
-        '@parts = map { lc($_) } @parts; @parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @parts }',
+        '@parts = map { LinkedSpec::UnicodeCaseMapping::lowercase($_) } @parts; @parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @parts }',
         'mixed style (dot-chain scope form + nested functional composition) lowers deterministically'
     );
 
@@ -46482,7 +46482,7 @@ subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
         'array receiver chain lowers through sorted/drop_front/first helper contracts');
     like($L->('return(items.drop_back().join_values("|"))'), qr/join\("\|", \@\{\$__ls_join_values\}\)/,
         'receiver-dot join_values keeps the documented delimiter-first helper contract');
-    like($L->('return(items.filter_nonempty().lowercase_each().join_values(","))'), qr/lc\(\$_\).*join\(",", \@\{\$__ls_join_values\}\)/s,
+    like($L->('return(items.filter_nonempty().lowercase_each().join_values(","))'), qr/LinkedSpec::UnicodeCaseMapping::lowercase\(\$_\).*join\(",", \@\{\$__ls_join_values\}\)/s,
         'filter/transform receiver chains lower as array-valued helper composition');
     is($L->('return(items.push_back("a"))'), 'return items.push_back("a")',
         'push_back remains outside value-chain lowering');
@@ -46610,7 +46610,7 @@ subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
     like($L->('return(name.trim().split("-").trim_each().join_values("|"))'),
         qr/__ls_split_value.*__ls_array_pipeline_source.*join\("\|", \@\{\$__ls_join_values\}\)/s,
         'split receiver chains bridge into array receiver helper composition');
-    like($L->('return("abcdef".substr(1,3).uppercase())'), qr/__ls_substr_value = "abcdef".*uc\(\$__ls_upper\)/s,
+    like($L->('return("abcdef".substr(1,3).uppercase())'), qr/__ls_substr_value = "abcdef".*LinkedSpec::UnicodeCaseMapping::uppercase\(\$__ls_upper\)/s,
         'string-literal receiver chains lower through substr and uppercase helpers');
     like($L->('return(split("a-b","-"))'), qr/__ls_split_value = "a-b".*split /s,
         'value-form split(...) lowers as a portable helper payload');

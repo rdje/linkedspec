@@ -109,6 +109,7 @@ sub _generated_source_preamble {
   . "no strict;\n"
   . "use re 'eval';\n"
   . "use LinkedSpec::GeneratedSource ();\n"
+  . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v1';\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1;\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY = $identity_literal;\n\n"

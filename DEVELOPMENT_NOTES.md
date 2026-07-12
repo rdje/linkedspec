@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.2 — load generated semantics at both emission boundaries):
+  Generate backend tables from the already-validated neutral object so mapping/property policy has one source.
+  Route scalar and array forms through one backend evaluator; otherwise `lowercase_each` silently remains a second
+  authority. Fully qualified emitted calls are insufficient unless ordinary in-process compilation loads the module;
+  load it from both ActionIR owners and declare it in independently emitted parser preambles. A fresh-process probe
+  is the regression test for that dependency boundary. Keep generated backend files in byte-comparison CI.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.1 — preserve upstream bytes and gate logical data separately):
   Store exact Unicode inputs with deterministic gzip headers so upstream trailing whitespace survives while the repo
   whitespace gate stays meaningful. Hash decompressed bytes, record compressed sizes only as provenance, and derive a

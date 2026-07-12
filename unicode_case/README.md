@@ -28,8 +28,10 @@ python3 tools/check_unicode_case_contract.py
 The generator verifies every source hash and the two version-bearing headers before parsing. It combines simple
 UnicodeData mappings with unconditional full SpecialCasing mappings, retains the only locale-independent contextual
 rule (`Final_Sigma`), deliberately rejects changes to the locale-tailoring inventory, and derives merged `Cased` and
-`Case_Ignorable` ranges. The checker regenerates into temporary owned storage, byte-compares the checked contract,
-validates its schema/counts/order/digest, and independently executes all neutral fixtures.
+`Case_Ignorable` ranges. The same run writes the neutral JSON plus deterministic Perl and Rust modules; later rollout
+leaves add the other backends. The checker regenerates all present generated outputs into temporary owned storage,
+byte-compares them, validates the neutral schema/counts/order/digest, and independently executes every fixture.
 
-Do not edit `capability_conformance/unicode_case_contract.json` manually. A Unicode upgrade requires a new ADR,
-reviewed source hashes, regenerated artifacts, and explicit fixture-delta review.
+Do not manually edit `capability_conformance/unicode_case_contract.json`,
+`perl/LinkedSpec/UnicodeCaseMapping.pm`, or `rust/linkedspec-runtime/src/unicode_case_mapping.rs`. A Unicode upgrade
+requires a new ADR, reviewed source hashes, regenerated artifacts, and explicit fixture-delta review.

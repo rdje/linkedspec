@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.2 — align Perl and Rust Unicode casing
+
+Extended the Unicode generator and drift checker with byte-deterministic Perl and Rust modules. Both embed the
+pinned Unicode 17.0.0 version/logical digest, full mappings, merged contextual properties, and `Final_Sigma`
+evaluation. Perl generated source declares the module dependency; ordinary ActionIR owners load it directly.
+
+Replaced every owned Perl `lc`/`uc` emission and Rust `to_lowercase`/`to_uppercase` runtime call, including value and
+mutating array paths. All 12 neutral fixtures now pass through direct, helper, receiver, and array execution in both
+backends. Focused Perl passes 52 tests, phase0 passes `1..1030` in 491s, and the complete Rust runtime package passes
+its unit, 105-case oracle, generated-source, 196 integration, and adjacent suites. Authoritative full local CI also
+passes CLI 61x2 and phase0 `1..1030` in 494s plus every contract, doctrine, documentation, and cleanup gate.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.1 — add Unicode casing data contract
 
 Added exact deterministic-gzip copies of the official Unicode 17.0.0 casing/property inputs and license, with

@@ -729,16 +729,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Align Perl and Rust casing helpers to the generated Unicode 17.0.0 contract.
   Dependencies: `.4.3.2.1.2.1`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
     versions; neutral fixture and focused/full Perl/Rust gates pass without changing null/aggregate boundaries.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** The generator now byte-deterministically emits
+    `perl/LinkedSpec/UnicodeCaseMapping.pm` and `rust/linkedspec-runtime/src/unicode_case_mapping.rs` from the
+    neutral contract. Perl ActionIR scalar, receiver, value-array, and mutating-array paths and all three Rust
+    runtime casing seams use those modules; source audits find no host casing call left in the owned paths. All 12
+    fixtures pass direct/helper/receiver/array execution in both backends. Focused Perl passes 52 tests; full Perl
+    phase0 passes `1..1030` in 491s; the complete Rust runtime package passes 137 unit, 105-case oracle, full
+    generated-source classifier, 196 integration, source-emitter/loader/diagnostic/trace, and Unicode tests. The
+    authoritative local CI rerun passes CLI 61x2 and phase0 `1..1030` in 494s plus all contracts/doctrines/docs gates.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.2 - align Perl and Rust Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align Dart and Julia casing helpers to the generated Unicode 17.0.0 contract.
   Dependencies: `.4.3.2.1.2.2`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
@@ -1004,7 +1011,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `active` | Define and align the versioned Unicode casing contract. |
 | 21 | `LUA-BACKEND-PARITY.4.3.2.1.2.0` | `done` | Unicode 17 full-default policy and rollout owners adopted. |
 | 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `done` | Verified Unicode contract and 12 fixtures pass the full gate. |
-| 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `active` | Align Perl and Rust to generated Unicode 17 casing. |
+| 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `done` | Perl/Rust direct, helper, receiver, and array casing use generated Unicode 17 data. |
+| 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `active` | Align Dart and Julia to generated Unicode 17 casing. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.2.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec introspection showed Perl emitted `lc`/`uc`; source inspection showed Rust
+  called host `to_lowercase`/`to_uppercase` in scalar and both array execution seams.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Neither backend consumed the pinned neutral contract, so behavior and future
+  drift remained controlled by the installed Perl/Rust Unicode tables rather than LinkedSpec language data.
+- [x] **FIX** — One generator now emits deterministic Perl/Rust modules with full mappings, merged properties,
+  Final_Sigma evaluation, pinned version/digest metadata, and drift comparison. Every owned casing path calls them.
+- [x] **ADDRESSED (verified)** — All 12 fixtures pass direct, function, receiver, value-array, and mutating-array
+  paths in both backends; fresh-process Perl proves ordinary compilation loads the module, and generated source
+  declares its dependency explicitly.
+- [x] **NO REGRESSION** — Focused Perl 52/52, direct phase0 `1..1030`, the complete Rust runtime package, and
+  authoritative full local CI (CLI 61x2; phase0 `1..1030`) pass. The first phase0 run exposed a missing in-process
+  module load; root-cause correction and both full reruns are green.
+- [x] **LOCKSTEP** — Generator/checker/CI tracked files, task/index/roadmaps, live docs, Knowledge Map, and mdBook all
+  identify Perl/Rust as complete and Dart/Julia as the active next rollout leaf.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.2.1` Acceptance Checklist
 

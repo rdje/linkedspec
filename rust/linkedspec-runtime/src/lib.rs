@@ -18,6 +18,7 @@ pub mod source_emitter;
 pub mod spec_loader;
 pub mod spec_parser;
 pub mod staged_parser_registry;
+pub mod unicode_case_mapping;
 
 pub use diagnostic::{RuntimeDiagnostic, RuntimeExecutionError};
 pub use linkedspec_core::trace;

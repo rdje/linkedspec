@@ -2996,8 +2996,8 @@ impl Engine {
                 let value = value.to_str();
                 RuntimeValue::Scalar(match name.as_str() {
                     "trim_each" => value.trim().to_string(),
-                    "lowercase_each" => value.to_lowercase(),
-                    "uppercase_each" => value.to_uppercase(),
+                    "lowercase_each" => crate::unicode_case_mapping::lowercase(&value),
+                    "uppercase_each" => crate::unicode_case_mapping::uppercase(&value),
                     _ => unreachable!(),
                 })
             })
@@ -6123,8 +6123,8 @@ impl Engine {
                             let s = v.to_str();
                             let s = match name {
                                 "trim_each" => s.trim().to_string(),
-                                "lowercase_each" => s.to_lowercase(),
-                                "uppercase_each" => s.to_uppercase(),
+                                "lowercase_each" => crate::unicode_case_mapping::lowercase(&s),
+                                "uppercase_each" => crate::unicode_case_mapping::uppercase(&s),
                                 _ => s,
                             };
                             RuntimeValue::Scalar(s)
@@ -6818,12 +6818,12 @@ impl Engine {
             )),
             "lowercase" => Ok(RuntimeValue::Scalar(
                 args.first()
-                    .map(|a| a.to_str().to_lowercase())
+                    .map(|a| crate::unicode_case_mapping::lowercase(&a.to_str()))
                     .unwrap_or_default(),
             )),
             "uppercase" => Ok(RuntimeValue::Scalar(
                 args.first()
-                    .map(|a| a.to_str().to_uppercase())
+                    .map(|a| crate::unicode_case_mapping::uppercase(&a.to_str()))
                     .unwrap_or_default(),
             )),
             "replace_substr" => {

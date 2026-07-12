@@ -318,14 +318,16 @@ dispatch rule.
 ### `lowercase(s)`
 - **Signature**: `lowercase(value: scalar)`
 - **Returns**: scalar
-- **Behavior**: Converts to lowercase. Returns undef if input is undef.
-- **Example**: over `/(\w+)/`, `lowercase(entry_group(0))` on `HeLLo` → `["hello"]`.
+- **Behavior**: Applies Unicode 17.0.0 full Default Lowercase (R2), locale-independent, including contextual
+  `Final_Sigma`, with no implicit normalization. Returns undef if input is undef.
+- **Example**: `lowercase("ΟΣ")` → `"ος"`; `lowercase("İ")` → `"i\u{0307}"`.
 
 ### `uppercase(s)`
 - **Signature**: `uppercase(value: scalar)`
 - **Returns**: scalar
-- **Behavior**: Converts to uppercase. Returns undef if input is undef.
-- **Example**: over `/(\w+)/`, `uppercase(entry_group(0))` on `hello` → `["HELLO"]`.
+- **Behavior**: Applies Unicode 17.0.0 full Default Uppercase (R1), locale-independent, with expansion and no
+  implicit normalization. Returns undef if input is undef.
+- **Example**: `uppercase("Straße ﬃ")` → `"STRASSE FFI"`.
 
 ### `length(s)`
 - **Signature**: `length(value: scalar|array)`
@@ -777,14 +779,14 @@ dispatch rule.
 ### `lowercase_each(arr)`
 - **Signature**: `lowercase_each(arr: array)`
 - **Returns**: array
-- **Behavior**: Lowercases each element.
+- **Behavior**: Lowercases each element with the same Unicode 17 contract as `lowercase`.
 - **Example**: after `set(array(items), ["A", "bC"])`, `return(items.lowercase_each())`
   yields `[["a","bc"]]`.
 
 ### `uppercase_each(arr)`
 - **Signature**: `uppercase_each(arr: array)`
 - **Returns**: array
-- **Behavior**: Uppercases each element.
+- **Behavior**: Uppercases each element with the same Unicode 17 contract as `uppercase`.
 - **Example**: after `set(array(items), ["a", "bC"])`, `return(items.uppercase_each())`
   yields `[["A","BC"]]`.
 

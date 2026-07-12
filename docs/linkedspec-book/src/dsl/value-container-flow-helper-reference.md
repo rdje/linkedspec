@@ -534,8 +534,9 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 `lowercase` and `uppercase` are Unicode operations, not byte operations; UTF-8, UTF-16, and UTF-32 are only host
 representations. The canonical contract is Unicode 17.0.0 full Default Case Conversion, locale-independent, with
 standard context rules and no implicit normalization. Thus `uppercase("ß")` is `"SS"`, `lowercase("İ")` is
-`"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. The generated-table backend rollout is active; until its
-six-variant admission closes, portable specs should not depend on the formerly divergent special cases.
+`"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. Perl and Rust now execute generated tables for function, receiver,
+and array forms. Dart/Julia alignment is active and Lua admission follows; until six-variant admission closes,
+portable specs should not depend on the formerly divergent special cases.
 
 The variants also do not yet share one edge-case scalar-to-text coercion rule for `cat` and other string helpers:
 null/containers, booleans, and integral-looking decimals expose host differences. Pass explicit strings when
@@ -1023,8 +1024,8 @@ Array-pipeline helpers are statements or composable array-valued transformations
 | `split_each(array(target), delimiter)` | split every current array item and flatten the result back into `target`. |
 | `trim_each(array(target))` | trim every array item in place. |
 | `filter_nonempty(array(target))` | remove empty string items. |
-| `lowercase_each(array(target))` | lowercase every array item. |
-| `uppercase_each(array(target))` | uppercase every array item. |
+| `lowercase_each(array(target))` | apply the Unicode 17 full lowercase contract to every array item. |
+| `uppercase_each(array(target))` | apply the Unicode 17 full uppercase contract to every array item. |
 | `uniq(array(target))` | remove duplicates while preserving first-seen order. |
 | `filter_match(array(target), /regex/)` | keep only items that match the regex. |
 | `split_tagged_records(source, delimiter, tag, field...)` | build one tagged array record for each split source item. |

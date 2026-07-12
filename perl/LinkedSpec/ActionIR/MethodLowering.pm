@@ -10,6 +10,7 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::UnicodeCaseMapping ();
 
 use constant ACTIONIR_TRACE_OWNER => 'method_lowering';
 
@@ -2391,10 +2392,10 @@ sub _lower_method_value_expr {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { defined($_) && length($_) } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'lowercase_each') {
-   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? lc($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::lowercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'uppercase_each') {
-   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? uc($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::uppercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'uniq') {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_key = defined($_) ? "S$_" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
@@ -4220,7 +4221,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   $value_expr = $trim_action_ir_value->($lower_args->[0]) unless defined($value_expr) && length($value_expr);
   return undef unless defined($value_expr) && length($value_expr);
 
-  return 'do { my $__ls_lower = '.$value_expr.'; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }';
+  return 'do { my $__ls_lower = '.$value_expr.'; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }';
  }
  if ($method_call && $method_call->{method} eq 'uppercase') {
   my $upper_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4230,7 +4231,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   $value_expr = $trim_action_ir_value->($upper_args->[0]) unless defined($value_expr) && length($value_expr);
   return undef unless defined($value_expr) && length($value_expr);
 
-  return 'do { my $__ls_upper = '.$value_expr.'; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }';
+  return 'do { my $__ls_upper = '.$value_expr.'; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }';
  }
  if ($method_call && $method_call->{method} eq 'length') {
   my $length_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

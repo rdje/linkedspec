@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.1` — offline Unicode 17 data contract/gate complete.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.0` — Unicode 17 full-default policy/rollout adopted.
-- recent_context: Exact compressed UCD inputs generate 1,563 lower/1,581 upper maps, 158 Cased/464 Case_Ignorable
-  ranges, Final_Sigma, and 12 fixtures. Independent checker is in full CI; phase0 1..1030 and CLI 61x2 pass. Active
-  `.4.3.2.1.2.2` aligns Perl/Rust; `.3` Dart/Julia and `.4` Lua/six-variant admission follow. `.1.3` separately owns
-  scalar-to-text drift; `.4.3.2.2` owns regex/split/mutation. Rust matching uses RGX, not basic `regex`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.2` — Perl/Rust generated Unicode casing complete.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.1` — offline Unicode 17 data contract/gate complete.
+- recent_context: Generator/checker now own deterministic Perl/Rust modules. All scalar/receiver/value-array/mutating-
+  array paths use them; 12 fixtures, Perl 52 + phase0 1..1030, and full Rust runtime package pass. Active `.3` aligns
+  Dart/Julia; `.4` Lua/six-variant admission follows. `.1.3` separately owns scalar-to-text drift; `.4.3.2.2` owns
+  regex/split/mutation. Rust matching uses RGX, not basic `regex`.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`; previous committed HEAD is
-  `d103ee33 LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`.
+  `LUA-BACKEND-PARITY.4.3.2.1.2.2 - align Perl and Rust Unicode casing`; previous committed HEAD is
+  `f615c8e1 LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2.2`; Perl/Rust Unicode 17 casing alignment is active.
-- next_action: Extend generation with deterministic Perl/Rust tables and wire lowercase/uppercase function/receiver
-  paths to the pinned mappings/context evaluator; run the same 12 fixtures plus focused/full backend gates.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2.3`; Dart/Julia Unicode 17 casing alignment is active.
+- next_action: Extend deterministic generation with Dart/Julia modules, route scalar/receiver/array casing paths
+  through them, and run the same 12 fixtures plus focused/full backend gates.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

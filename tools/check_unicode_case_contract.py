@@ -14,6 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_case_contract.json"
 GENERATOR = ROOT / "unicode_case" / "generate_unicode_case_contract.py"
+PERL_MODULE_PATH = ROOT / "perl" / "LinkedSpec" / "UnicodeCaseMapping.pm"
+RUST_MODULE_PATH = ROOT / "rust" / "linkedspec-runtime" / "src" / "unicode_case_mapping.rs"
 TASK_PATH = ROOT / "docs" / "tasks" / "LUA-BACKEND-PARITY.md"
 
 
@@ -115,8 +117,19 @@ def main() -> None:
         fail(f"missing {CONTRACT_PATH.relative_to(ROOT)}")
     with tempfile.TemporaryDirectory(prefix="linkedspec-unicode-case-") as directory:
         regenerated = Path(directory) / "unicode_case_contract.json"
+        regenerated_perl = Path(directory) / "UnicodeCaseMapping.pm"
+        regenerated_rust = Path(directory) / "unicode_case_mapping.rs"
         completed = subprocess.run(
-            [sys.executable, str(GENERATOR), "--output", str(regenerated)],
+            [
+                sys.executable,
+                str(GENERATOR),
+                "--output",
+                str(regenerated),
+                "--perl-output",
+                str(regenerated_perl),
+                "--rust-output",
+                str(regenerated_rust),
+            ],
             cwd=ROOT,
             text=True,
             stdout=subprocess.PIPE,
@@ -127,6 +140,14 @@ def main() -> None:
             fail(f"generator failed: {completed.stderr.strip() or completed.stdout.strip()}")
         if regenerated.read_bytes() != CONTRACT_PATH.read_bytes():
             fail("checked contract is stale; run unicode_case/generate_unicode_case_contract.py")
+        for label, generated, checked in (
+            ("Perl", regenerated_perl, PERL_MODULE_PATH),
+            ("Rust", regenerated_rust, RUST_MODULE_PATH),
+        ):
+            if not checked.is_file():
+                fail(f"missing generated {label} casing module: {checked.relative_to(ROOT)}")
+            if generated.read_bytes() != checked.read_bytes():
+                fail(f"checked {label} casing module is stale; run {GENERATOR.relative_to(ROOT)}")
 
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     required = {

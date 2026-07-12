@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.2 — align Perl and Rust Unicode casing**
+  (DONE — Dart/Julia generated-table consumption `.3` next).
+
+  **Implementation:** Deterministic generated Perl/Rust modules now own full lower/upper mappings, contextual
+  Final Sigma, and pinned metadata. Scalar helper, receiver, value-array, and mutating-array paths all consume them.
+
+  **Proof:** All 12 fixtures pass every owned path; Perl 52 focused + phase0 `1..1030` pass, and the complete Rust
+  runtime package passes unit, 105-case oracle, generated-source classifier, 196 integration, and adjacent suites.
+  Full local CI passes CLI 61x2, phase0 `1..1030` in 494s, all contracts, doctrines, KM/book, and cleanup.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.1 — add Unicode casing data contract**
   (DONE — Perl/Rust generated-table consumption `.2` next).
 

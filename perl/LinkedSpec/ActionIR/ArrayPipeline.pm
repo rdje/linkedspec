@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::UnicodeCaseMapping ();
 
 use constant ACTIONIR_TRACE_OWNER => 'array_pipeline';
 
@@ -303,9 +304,9 @@ sub _lower_array_pipeline_expr {
   } elsif ($name eq 'filter_nonempty') {
    $list_expr = 'grep { length($_) } '.$list_expr;
   } elsif ($name eq 'lowercase_each') {
-   $list_expr = 'map { lc($_) } '.$list_expr;
+   $list_expr = 'map { LinkedSpec::UnicodeCaseMapping::lowercase($_) } '.$list_expr;
   } elsif ($name eq 'uppercase_each') {
-   $list_expr = 'map { uc($_) } '.$list_expr;
+   $list_expr = 'map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } '.$list_expr;
   } elsif ($name eq 'uniq') {
    $list_expr = 'do { my %seen; grep { !$seen{$_}++ } '.$list_expr.' }';
   } elsif ($name eq 'filter_match') {

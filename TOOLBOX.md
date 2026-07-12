@@ -307,8 +307,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.5 `tools/check_unicode_case_contract.py` — pinned Unicode casing proof
 
 - **WHAT:** verifies exact decompressed Unicode 17.0.0 source hashes, regenerates the neutral full-casing contract
-  into owned temporary storage, byte-compares it, validates schema/counts/order/scalars/digest, and independently
-  executes expansions, combining output, supplementary characters, `Final_Sigma`, and no-normalization fixtures.
+  and generated backend modules into owned temporary storage, byte-compares them, validates the neutral
+  schema/counts/order/scalars/digest, and independently executes expansions, combining output, supplementary
+  characters, `Final_Sigma`, and no-normalization fixtures.
 - **WHEN:** changing `lowercase`/`uppercase`, Unicode data, generated backend tables, or diagnosing a casing mismatch.
 - **HOW:** `python3 tools/check_unicode_case_contract.py`. Regenerate deliberately with
   `python3 unicode_case/generate_unicode_case_contract.py`; ordinary verification is offline.

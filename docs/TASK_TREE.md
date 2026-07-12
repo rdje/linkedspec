@@ -652,6 +652,9 @@ Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.2.1` is done. Exact gzip-pres
 1,563 lower/1,581 upper mappings, 158/464 merged property ranges, Final_Sigma, and 12 fixtures; the offline checker
 is in full CI. Active `.2` now aligns Perl and Rust without host-Unicode fallback.
 
+Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.2.2` is done. Generated Perl/Rust modules now own scalar,
+receiver, and array casing with all 12 fixtures and full backend gates green; active `.3` aligns Dart and Julia.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,
