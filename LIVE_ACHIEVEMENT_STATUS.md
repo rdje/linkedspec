@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.1 — add Unicode casing data contract**
+  (DONE — Perl/Rust generated-table consumption `.2` next).
+
+  **Implementation:** Exact compressed UCD inputs, hashes/license, deterministic generator, neutral mapping/property/
+  context schema, 12 fixtures, independent checker, TOOLBOX entry, and canonical CI integration are complete.
+
+  **Proof:** Contract checker reports Unicode 17.0.0, 1,563/1,581 maps, 158/464 ranges, one context rule, 12 fixtures;
+  full CI passes CLI 61x2 and phase0 `1..1030` in 495s. No backend runtime behavior changed.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.0 — adopt Unicode casing contract**
   (DONE — verified Unicode data/generation `.1` next).
 

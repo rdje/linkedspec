@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.1 — add Unicode casing data contract
+
+Added exact deterministic-gzip copies of the official Unicode 17.0.0 casing/property inputs and license, with
+uncompressed SHA-256 verification. A zero-dependency generator produces the neutral full-casing contract: 1,563
+lower and 1,581 upper mappings, 158 `Cased` and 464 `Case_Ignorable` ranges, one `Final_Sigma` rule, and 12 fixtures.
+
+Added an independent offline checker that byte-compares regeneration, validates structure/count/order/scalars/digest,
+and executes every fixture. The canonical local CI gate now audits and runs it. Full CI passes CLI 61x2, phase0
+`1..1030` in 495 seconds, capability 60/0/0, adjacent contracts, doctrines, and cleanup. No backend runtime changed.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.0 — adopt Unicode casing contract
 
 Adopted the signoff casing policy in ADR `0027`: Unicode 17.0.0 full Default Case Conversion, locale-independent,

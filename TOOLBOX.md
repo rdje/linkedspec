@@ -69,6 +69,7 @@ check, not proof that the cited commands were run.
 | "Watch the parser/compiler explain itself (enter/decision/mark)" | [§3 Trace framework](#3-the-trace-framework-linkedspecs-own-observability) |
 | "Inspect what a `.spec` compiles to" | [§4.1 `inspect_spec_codegen.pl`](#41-toolsinspect_spec_codegenpl--codegen-inspection) |
 | "Cross-variant / self-host parity (oracle ↔ candidate, Perl ↔ Rust)" | [§4.2 cross-check / oracle corpus](#42-toolscross_check_spec_parserspl--toolsgen_oracle_corpuspl) |
+| "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -302,6 +303,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
   `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`.
+
+### 4.5 `tools/check_unicode_case_contract.py` — pinned Unicode casing proof
+
+- **WHAT:** verifies exact decompressed Unicode 17.0.0 source hashes, regenerates the neutral full-casing contract
+  into owned temporary storage, byte-compares it, validates schema/counts/order/scalars/digest, and independently
+  executes expansions, combining output, supplementary characters, `Final_Sigma`, and no-normalization fixtures.
+- **WHEN:** changing `lowercase`/`uppercase`, Unicode data, generated backend tables, or diagnosing a casing mismatch.
+- **HOW:** `python3 tools/check_unicode_case_contract.py`. Regenerate deliberately with
+  `python3 unicode_case/generate_unicode_case_contract.py`; ordinary verification is offline.
+- **OUTPUT:** `unicode-case-contract: OK (Unicode 17.0.0; 1563 lower; 1581 upper; 158/464 property ranges; 12 fixtures)`.
 
 ---
 

@@ -42,3 +42,6 @@ decision remain independently implementable under `.4.3.2.1.1`.
 ADR `0027` now selects the repair contract: Unicode 17.0.0 full Default Case Conversion, locale-independent, with
 standard context rules and no implicit normalization. The gap remains observable until the ordered backend rollout
 finishes; host case APIs are no longer the intended semantic authority.
+
+The neutral data layer is now complete under [[unicode-17-case-contract-data]]. Backend behavior remains divergent
+until the Perl/Rust, Dart/Julia, and Lua rollout leaves consume it.

@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.0` — Unicode 17 full-default policy/rollout adopted.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.1` — deterministic Lua pure strings pass both ABIs.
-- recent_context: ADR `0027` pins Unicode 17.0.0 full Default Case Conversion, locale-independent, standard context
-  rules, no implicit normalization. `.4.3.2.1.2.1` owns verified UCD inputs/generator/neutral fixture/gate; `.2`
-  Perl/Rust, `.3` Dart/Julia, `.4` Lua/six-variant admission. Lua non-case strings remain 70x2 green. `.1.3` owns
-  separate scalar-to-text drift; `.4.3.2.2` owns regex/split/mutation. Rust matching uses RGX, not basic `regex`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.1` — offline Unicode 17 data contract/gate complete.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.0` — Unicode 17 full-default policy/rollout adopted.
+- recent_context: Exact compressed UCD inputs generate 1,563 lower/1,581 upper maps, 158 Cased/464 Case_Ignorable
+  ranges, Final_Sigma, and 12 fixtures. Independent checker is in full CI; phase0 1..1030 and CLI 61x2 pass. Active
+  `.4.3.2.1.2.2` aligns Perl/Rust; `.3` Dart/Julia and `.4` Lua/six-variant admission follow. `.1.3` separately owns
+  scalar-to-text drift; `.4.3.2.2` owns regex/split/mutation. Rust matching uses RGX, not basic `regex`.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`; previous committed HEAD is
-  `0ef7dabf LUA-BACKEND-PARITY.4.3.2.1.1 - add Lua pure string helpers`.
+  `LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`; previous committed HEAD is
+  `d103ee33 LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2.1`; reproducible Unicode casing contract data is active.
-- next_action: Add and hash official Unicode 17 UnicodeData/SpecialCasing/DerivedCoreProperties inputs and license;
-  implement deterministic neutral/backend-table generation, divergent/context fixtures, and offline drift checks.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2.2`; Perl/Rust Unicode 17 casing alignment is active.
+- next_action: Extend generation with deterministic Perl/Rust tables and wire lowercase/uppercase function/receiver
+  paths to the pinned mappings/context evaluator; run the same 12 fixtures plus focused/full backend gates.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

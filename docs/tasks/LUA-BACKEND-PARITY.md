@@ -713,18 +713,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Add the reproducible Unicode 17.0.0 data, generator, neutral contract, fixtures, and drift checker.
   Dependencies: `.4.3.2.1.2.0`
   Acceptance: Verified official `UnicodeData.txt`, `SpecialCasing.txt`, and `DerivedCoreProperties.txt` inputs plus
     license/source hashes generate deterministic lower/upper maps and Cased/Case_Ignorable ranges; the executable
     neutral fixture covers identity, expansion, combining output, supplementary characters, and Final_Sigma context;
     regeneration and schema/count/hash checks fail closed without requiring network during ordinary gates.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Exact official bytes are stored as deterministic gzip under
+    `unicode_case/upstream/17.0.0/` and verified after decompression against four pinned SHA-256 values. The neutral
+    contract contains 1,563 lower mappings, 1,581 upper mappings, 158 Cased and 464 Case_Ignorable merged ranges,
+    one Final_Sigma rule, and 12 exact fixtures. Generator/checker regeneration is byte-identical and independently
+    executes all fixtures. Full local CI passes the new tracked contract step, CLI 61x2, phase0 `1..1030` in 495s,
+    capability 60/0/0, generated/native contracts, doctrines, KM/book, whitespace, and owned cleanup.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align Perl and Rust casing helpers to the generated Unicode 17.0.0 contract.
   Dependencies: `.4.3.2.1.2.1`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
@@ -998,7 +1003,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `done` | Deterministic non-case strings pass 70/70 on both Lua ABIs. |
 | 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `active` | Define and align the versioned Unicode casing contract. |
 | 21 | `LUA-BACKEND-PARITY.4.3.2.1.2.0` | `done` | Unicode 17 full-default policy and rollout owners adopted. |
-| 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `active` | Add verified Unicode data, generator, neutral fixture, and gate. |
+| 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `done` | Verified Unicode contract and 12 fixtures pass the full gate. |
+| 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `active` | Align Perl and Rust to generated Unicode 17 casing. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Host case libraries do not expose one pinned mapping/version, and the repository had
+  no authoritative data artifact from which every backend could be generated.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Case semantics lived implicitly in backend host calls; no checksum-locked UCD
+  inputs, neutral map/property schema, context evaluator, or generated-artifact checker existed.
+- [x] **FIX** — Added exact gzip-preserved Unicode 17 inputs, deterministic neutral generation, full lower/upper maps,
+  merged Cased/Case_Ignorable ranges, explicit Final_Sigma, 12 fixtures, and the offline CI drift checker.
+- [x] **ADDRESSED (verified)** — `python3 tools/check_unicode_case_contract.py` passes with 1,563 lower, 1,581 upper,
+  158/464 property ranges, one context rule, 12 independently executed fixtures, and byte-identical regeneration.
+- [x] **NO REGRESSION** — No backend runtime path changed; `bash tools/run_ci_local.sh` passes phase0 `1..1030`,
+  CLI 61x2, capability 60/0/0, every adjacent contract, and the new pinned Unicode check.
+- [x] **LOCKSTEP** — ADR `0027`, the task owner, Unicode data README, contract metadata, and CI tracked-input audit
+  share the exact version, source hashes, policy, generator path, and fixture count.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.2.0` Acceptance Checklist
 

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.1 — preserve upstream bytes and gate logical data separately):
+  Store exact Unicode inputs with deterministic gzip headers so upstream trailing whitespace survives while the repo
+  whitespace gate stays meaningful. Hash decompressed bytes, record compressed sizes only as provenance, and derive a
+  separate logical-data digest over sorted mappings/properties/rules. Make the checker independently parse and execute
+  the generated JSON rather than trusting the generator's evaluator. Guard the conditional-rule inventory so a future
+  Unicode release cannot silently add a default context or turn locale tailoring into universal behavior.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.0 — own Unicode casing as generated language data):
   Signoff parity cannot depend on a host runtime's Unicode release. Pin Unicode 17.0.0 full Default Case Conversion,
   generate every backend table from checksum-locked UnicodeData/SpecialCasing/DerivedCoreProperties inputs, and

@@ -632,6 +632,12 @@ uppercase remains separate because the existing hosts disagree on Unicode
 special casing; exact non-string scalar-to-text coercion is separately tracked
 for the same all-variant no-drift reason.
 
+ADR `0027` now pins that casing surface to Unicode 17.0.0 full Default Case Conversion. Exact official
+UnicodeData/SpecialCasing/DerivedCoreProperties inputs generate a neutral contract with 1,563 lower and 1,581 upper
+mappings, merged Cased/Case_Ignorable ranges, Final_Sigma context, and 12 fixtures. The offline checker is part of
+the canonical local CI gate. Backend consumption proceeds Perl/Rust, Dart/Julia, then PUC Lua/LuaJIT; host case APIs
+are not the semantic authority.
+
 ```lua
 local source = [[
 Top::
