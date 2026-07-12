@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.1 — adapt flags at the helper boundary):
+  Rule regex compilation and helper regex policy share PCRE2 but not operation semantics. Normalize helper compile
+  flags in deterministic order, ignore `g/o` only where the operation defines them as no-ops, and cache failed
+  compilation as deliberately as successful compilation. Keep the regex value internal: it transports parsed
+  pattern/flag identity into `matches` without becoming a fifth public LinkedSpec value kind.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.0 — split regex values from statement mutation):
   Preserving a regex literal in ActionIR is not the same mechanism as executing it. Route helper patterns through
   the existing PCRE2 owner, but keep helper flag policy in a strict adapter. Do not teach ordinary value evaluation

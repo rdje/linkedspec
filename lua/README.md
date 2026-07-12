@@ -15,7 +15,7 @@ repetition, and direct result channels entirely in memory.
 Deterministic scalar/string helpers now include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
 lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
-text coercion, and receiver chains. The Lua gate currently passes 72/72 on
+text coercion, strict PCRE2-backed `matches`, and receiver chains. The Lua gate currently passes 73/73 on
 both PUC Lua 5.4 and LuaJIT.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
@@ -302,7 +302,7 @@ events. Helper/value breadth beyond the landed families remains owned by
 four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
 scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies exact
 cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
-mechanism; active `.2.2.1` owns helper-regex values, flags, and `matches`; `.3`
+mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`, while active `.2.2.2` owns pure split; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
@@ -380,3 +380,9 @@ decimal text with zero normalized to `"0"`, and null/aggregate/codeblock
 arguments make the expression return null. The executable neutral fixture
 covers function and receiver form; explicit codeblock-call syntax remains in
 the future-parity backlog.
+
+`matches(value, /pattern/flags)` and receiver `.matches(...)` reuse the native
+PCRE2 owner in seek mode. `i`, `m`, `s`, and `x` affect compilation; `g` and
+`o` are accepted predicate no-ops. Null/non-text inputs, non-regex patterns,
+unknown flags, and invalid patterns return false. `matches` is terminal in a
+string receiver chain.

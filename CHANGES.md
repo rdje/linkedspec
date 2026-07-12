@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.1 — add Lua helper regex matches
+
+Added an internal Lua helper-regex value and strict compile adapter over the existing disposable native PCRE2
+owner. Deterministic `i/m/s/x` flags affect compilation, `g/o` are predicate no-ops, successful and failed
+compilations are cached, and `matches` executes in function and terminal receiver form. Null/non-text input,
+non-regex patterns, unknown flags, and invalid patterns return false per the public contract.
+
+Focused coverage includes actual-newline multiline/dotall behavior, extended mode, receiver equivalence, and
+terminal-chain rejection. The full PUC Lua and LuaJIT gates pass 73/73; backend status and all task/roadmap/KM/
+book/live surfaces advance to pure split `.4.3.2.2.2`.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.0 — split Lua regex string mechanisms
 
 Split the broad regex/split/mutation remainder into five dependency-ordered implementation leaves: strict helper

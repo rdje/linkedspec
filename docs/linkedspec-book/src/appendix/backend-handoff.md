@@ -643,6 +643,10 @@ array, harray, or codeblock. One neutral executable fixture covers the currently
 Rust, Dart, Julia, PUC Lua, and LuaJIT; the contract also fixes codeblock as non-text without claiming that the
 separately deferred explicit final-codeblock call syntax is already portable. Lua advances to 72/72 on both ABIs.
 
+The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
+`matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex
+patterns, unknown flags, or invalid patterns. PUC Lua and LuaJIT pass 73/73; pure split remains separately owned.
+
 ```lua
 local source = [[
 Top::

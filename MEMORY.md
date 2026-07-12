@@ -10,17 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.0` — regex/split/mutation mechanism split.
-- latest_commit: `59e6f977` — `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.0 - split Lua regex string mechanisms`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.1`; add typed helper-regex values, governed flags, and `matches`
-  through the existing in-process PCRE2 owner on both Lua ABIs.
-- next_action: implement a strict helper-regex adapter (`i/m/s/x`, no-op `g/o`, reject unknown), evaluate regex
-  ActionIR values, then lock function/terminal-receiver `matches` including null and invalid boundaries.
-- current_proof: planning probes show Lua ActionIR already preserves regex patterns/flags and mutation targets;
-  `interpreter.lua` lacks regex value evaluation and statement-context dispatch, while `matching.lua` already owns
-  PCRE2 compilation. Runtime remains 72/72 on both ABIs from the prior leaf. The documented invalid-pattern
-  fail-closed contract versus Perl generated-literal compile failure is recorded under active `.2.2.1`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.2.1` — strict Lua helper regex and `matches`.
+- latest_commit: `a263556d` — `LUA-BACKEND-PARITY.4.3.2.2.0 - split Lua regex string mechanisms`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.2.2.1 - add Lua helper regex matches`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.2.2`; implement pure literal/regex split values and string-to-array
+  receiver continuation without mutation.
+- next_action: use the typed helper-regex adapter for pure split, preserve leading/trailing empty fields, implement
+  Unicode-character empty-delimiter splitting, and continue returned arrays through compatible receiver helpers.
+- current_proof: function/terminal-receiver `matches` applies PCRE2 `i/m/s/x`, accepts no-op `g/o`, and returns
+  false for null/non-regex/unknown/invalid inputs. Full PUC Lua and LuaJIT gates pass 73/73. The Perl invalid-literal
+  generation boundary remains recorded, not treated as authorization for a reference-engine pivot.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.

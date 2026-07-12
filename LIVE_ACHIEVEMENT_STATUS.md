@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.1 — add Lua helper regex matches**
+  (DONE — pure split/receiver `.4.3.2.2.2` next).
+
+  **Implementation:** Internal helper-regex values feed deterministic flags into the existing PCRE2 owner;
+  function and terminal-receiver `matches` share one fail-closed path.
+
+  **Proof:** Plain search, `i/m/s/x`, no-op `g/o`, null/non-regex/unknown/invalid boundaries, receiver equivalence,
+  and terminal-chain rejection pass; full PUC Lua and LuaJIT gates are 73/73.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.0 — split Lua regex string mechanisms**
   (DONE — helper-regex/`matches` `.4.3.2.2.1` next).
 

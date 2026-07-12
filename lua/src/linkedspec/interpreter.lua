@@ -13,6 +13,7 @@ local FLOW_MT = { __tostring = function(value) return "RuntimeActionFlow: " .. v
 local ENGINE_MT = { __runtime_interpreter_type = "LinkedSpecRuntimeEngine" }
 local RESULT_MT = { __runtime_interpreter_type = "RuntimeParseResult" }
 local EVENT_MT = { __runtime_interpreter_type = "RuntimeLifecycleEvent" }
+local HELPER_REGEX_MT = { __runtime_interpreter_type = "RuntimeHelperRegex" }
 
 local function fail(message, fields)
   fields = fields or {}
@@ -86,6 +87,7 @@ function M.runtime_engine(compiled, options)
     parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
     max_iterations = max_iterations,
     regex_cache = {},
+    helper_regex_cache = {},
   }, ENGINE_MT)
 end
 
@@ -254,6 +256,7 @@ local PURE_STRING_HELPERS = {
   length = true,
   lowercase = true,
   lowercase_each = true,
+  matches = true,
   replace_substr = true,
   rm_prefix = true,
   rm_suffix = true,
@@ -272,6 +275,7 @@ local TERMINAL_STRING_HELPERS = {
   is_nonempty = true,
   is_undefined = true,
   length = true,
+  matches = true,
   starts_with = true,
 }
 
@@ -301,6 +305,39 @@ local function scalar_string(value, null_as_empty)
   if type(value) == "number" then return stable_number_string(value) end
   if type(value) == "string" then return value end
   return nil
+end
+
+local function helper_regex(pattern, flags)
+  return setmetatable({ pattern = pattern, flags = flags or "" }, HELPER_REGEX_MT)
+end
+
+local function compile_helper_regex(engine, value)
+  if getmetatable(value) ~= HELPER_REGEX_MT then return nil end
+  local enabled = {}
+  for flag in value.flags:gmatch(".") do
+    if flag == "i" or flag == "m" or flag == "s" or flag == "x" then
+      enabled[flag] = true
+    elseif flag ~= "g" and flag ~= "o" then
+      return nil
+    end
+  end
+  local compile_flags = ""
+  for _, flag in ipairs({ "i", "m", "s", "x" }) do
+    if enabled[flag] then compile_flags = compile_flags .. flag end
+  end
+  local key = compile_flags .. "\0" .. value.pattern
+  local cached = engine.helper_regex_cache[key]
+  if cached == false then return nil end
+  if cached then return cached end
+  local effective_pattern = compile_flags == "" and value.pattern or
+    "(?" .. compile_flags .. ")" .. value.pattern
+  local ok, compiled = pcall(matching.compile_runtime_regex_alternation, { effective_pattern })
+  if not ok then
+    engine.helper_regex_cache[key] = false
+    return nil
+  end
+  engine.helper_regex_cache[key] = compiled
+  return compiled
 end
 
 local function decode_codepoint(value, byte_index)
@@ -399,7 +436,7 @@ local function replace_literal(value, old_value, new_value)
   return table.concat(result)
 end
 
-local function evaluate_pure_string_helper(name, values)
+local function evaluate_pure_string_helper(engine, name, values)
   if name == "cat" then
     local parts = {}
     for index, value in ipairs(values) do
@@ -438,6 +475,12 @@ local function evaluate_pure_string_helper(name, values)
         (name == "lowercase_each" and unicode_case.lowercase(value) or unicode_case.uppercase(value))
     end
     return result
+  elseif name == "matches" then
+    if #values < 2 then return false end
+    local value = scalar_string(values[1], false)
+    local regex = compile_helper_regex(engine, values[2])
+    if value == nil or regex == nil then return false end
+    return regex:seek_match(value, 0) ~= nil
   elseif name == "replace_substr" then
     if #values < 3 then return json.null end
     local value = scalar_string(values[1], false)
@@ -505,7 +548,7 @@ local function evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_
   for _, arg in ipairs(expr.args) do
     values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
   end
-  return evaluate_pure_string_helper(action_contracts.canonical_action_helper_name(expr.name), values)
+  return evaluate_pure_string_helper(engine, action_contracts.canonical_action_helper_name(expr.name), values)
 end
 
 local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
@@ -657,6 +700,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   local kind = expr.kind
   if kind == "string" or kind == "number" or kind == "boolean" then return expr.value end
   if kind == "undef" then return json.null end
+  if kind == "regex" then return helper_regex(expr.pattern, expr.flags) end
   if kind == "variable" then
     if expr.name == "retv" then
       if edge_state then return copy_value(dispatch_edge_child(engine, edge_state, ctx).value) end

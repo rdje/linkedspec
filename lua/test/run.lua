@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime_core_values", "status parity")
+  assert_equal(first.parity, "runtime-helper-regex-matches", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2282,6 +2282,47 @@ test("cat and scalar receiver text match the neutral six-variant contract", func
   for key, expected in pairs(contract.expected) do
     assert_equal(result.value[key], expected, "neutral scalar-text field " .. key)
   end
+end)
+
+test("helper regex flags and matches are strict in function and receiver form", function()
+  local source = [[
+Top::
+ /x/
+ E {
+   return({
+     "plain" : matches("prefix-42", /\d+$/),
+     "case" : matches("AbC", /^abc$/i),
+     "case_noops" : matches("AbC", /^abc$/igo),
+     "multiline" : matches("x
+Y", /^y$/im),
+     "dotall" : matches("a
+b", /^a.b$/s),
+     "extended" : matches("a b", /^ a \s+ b $/x),
+     "null" : matches(undef, /x/),
+     "non_regex" : matches("abc", "abc"),
+     "unknown_flag" : matches("abc", /^abc$/q),
+     "invalid_pattern" : matches("abc", /(/),
+     "receiver" : "AbC".matches(/^abc$/io),
+     "terminal_chain" : "abc".matches(/a/).lowercase()
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  )
+  assert_equal(result.value.plain, true, "plain helper regex searches")
+  assert_equal(result.value.case, true, "case-insensitive helper regex")
+  assert_equal(result.value.case_noops, true, "g and o are predicate no-ops")
+  assert_equal(result.value.multiline, true, "multiline helper flag")
+  assert_equal(result.value.dotall, true, "dotall helper flag")
+  assert_equal(result.value.extended, true, "extended helper flag")
+  assert_equal(result.value.null, false, "null helper input fails closed")
+  assert_equal(result.value.non_regex, false, "non-regex pattern fails closed")
+  assert_equal(result.value.unknown_flag, false, "unknown helper flag fails closed")
+  assert_equal(result.value.invalid_pattern, false, "invalid helper pattern fails closed")
+  assert_equal(result.value.receiver, true, "receiver matches uses the same adapter")
+  assert_equal(result.value.terminal_chain, json.null, "matches ends string receiver chains")
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

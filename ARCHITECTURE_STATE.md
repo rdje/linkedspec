@@ -5,8 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
-- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.0` splits regex/split/mutation by runtime mechanism. Active
-  `.1` owns typed helper regex values, governed flags, and `matches`; `.2` pure split/receiver bridging; `.3`
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.1` adds internal typed helper regexes and strict flag
+  normalization over the existing PCRE2 owner. Function/receiver `matches` fails closed for invalid inputs and
+  passes 73/73 on PUC Lua/LuaJIT; pure split `.2` is active.
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.0` splits regex/split/mutation by runtime mechanism. `.1`
+  owns typed helper regex values, governed flags, and `matches`; `.2` pure split/receiver bridging; `.3`
   scalar substitution; `.4` explicit array split replacement; `.5` corpus/public no-drift.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.1.3` closes pure scalar/string parity with one typed
   scalar-to-text boundary. Perl generated lowering, Rust `RuntimeValue::to_scalar_text`, Dart `_scalarString`,
