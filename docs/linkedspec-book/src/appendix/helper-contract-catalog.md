@@ -411,7 +411,7 @@ dispatch rule.
   be receivers too: `"abcdef".substr(1, 3).uppercase()` is equivalent to
   `uppercase(substr("abcdef", 1, 3))`.
 - **Allowed string-returning links**: `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`,
-  `rm_suffix`, `substr`, `concat`, `cat`, and `coalesce_nonempty`.
+  `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`. The old `concat` spelling is retired.
 - **Allowed array bridge**: `split(delim)` returns an array and may continue through compatible array
   receiver helpers, for example `raw.trim().split("-").trim_each().lowercase_each().join_values("|")`.
 - **Allowed terminal links**: `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` return

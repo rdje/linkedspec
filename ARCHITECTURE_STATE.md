@@ -5,10 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.0` splits regex/split/mutation by runtime mechanism. Active
+  `.1` owns typed helper regex values, governed flags, and `matches`; `.2` pure split/receiver bridging; `.3`
+  scalar substitution; `.4` explicit array split replacement; `.5` corpus/public no-drift.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.1.3` closes pure scalar/string parity with one typed
   scalar-to-text boundary. Perl generated lowering, Rust `RuntimeValue::to_scalar_text`, Dart `_scalarString`,
   Julia `_runtime_scalar_string`, and Lua `scalar_string` now give `cat` identical string/boolean/finite-number
-  spelling and null propagation for non-text values. Regex/split/mutation `.4.3.2.2` is next.
+  spelling and null propagation for non-text values. Regex/split/mutation `.4.3.2.2` follows.
 - `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.2.0` separates pure scalar/string evaluation and receivers from
   regex-aware replacement/split/statement mutation. `.4.3.2.1` is the sole executable frontier; no behavior or
   capability changes at this planning boundary.

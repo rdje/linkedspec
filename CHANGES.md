@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.0 — split Lua regex string mechanisms
+
+Split the broad regex/split/mutation remainder into five dependency-ordered implementation leaves: strict helper
+regex values and `matches`, pure split/receiver bridging, statement scalar regex substitution, explicit array split
+replacement, and corpus/public no-drift. Lua ActionIR projections and LinkedSpec lowering/runtime probes locate the
+existing parser/PCRE2 seams and the missing value-versus-statement evaluator boundary without changing runtime code.
+
+Added a Knowledge Map preflight card, synchronized the task/index/roadmap/architecture/Lua README/book/live
+frontier, and removed one stale mdBook receiver list mention of retired `concat`. The invalid helper-pattern
+fail-closed book contract versus Perl generated-literal compile failure is recorded under active `.2.2.1` rather
+than silently expanding this planning slice into a reference-engine change.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.3 — align scalar text coercion
 
 Added ADR `0028` and the executable `linkedspec-scalar-text-v1` contract. Perl, Rust, Dart, Julia, PUC Lua, and

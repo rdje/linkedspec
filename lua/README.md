@@ -300,9 +300,9 @@ one-element output wrapper, byte/code-unit and character cursors, and lifecycle
 events. Helper/value breadth beyond the landed families remains owned by
 `.4.3`. That breadth is split before implementation: `.4.3.1` supplies
 four-kind stores/access and entry/match reads; `.2.1.1` supplies non-case pure
-scalar/string helpers, `.2.1.2` supplies Unicode casing, `.2.1.3` supplies exact
-cross-variant scalar-to-text coercion, and active `.2.2` owns regex/split/
-mutation; `.3`
+scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies exact
+cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
+mechanism; active `.2.2.1` owns helper-regex values, flags, and `matches`; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its

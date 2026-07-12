@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.0 — split Lua regex string mechanisms**
+  (DONE — helper-regex/`matches` `.4.3.2.2.1` next).
+
+  **Plan:** `.1` owns typed helper regex/flags and `matches`; `.2` pure split/receiver; `.3` scalar regex mutation;
+  `.4` explicit array split replacement; `.5` corpus/public no-drift.
+
+  **Proof:** Lua ActionIR JSON preserves patterns, flags, bare targets, and array wrappers; LinkedSpec lowering and
+  runtime probes distinguish pure values from both statement mutation forms. No runtime code changed.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.3 — align scalar text coercion**
   (DONE — regex/split/mutation `.4.3.2.2` next).
 

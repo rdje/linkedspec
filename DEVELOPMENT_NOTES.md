@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.0 — split regex values from statement mutation):
+  Preserving a regex literal in ActionIR is not the same mechanism as executing it. Route helper patterns through
+  the existing PCRE2 owner, but keep helper flag policy in a strict adapter. Do not teach ordinary value evaluation
+  to infer mutation from a call name: statement context plus arity and target shape distinguish pure `substr`/
+  `split` values from scalar substitution and explicit array replacement. Scalar and aggregate mutation remain
+  separate leaves because they cross different stores and snapshot rules.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.3 — keep value kinds distinct at text boundaries):
   Host interpolation is not a language contract. Give scalar conversion one explicit nullable result: strings,
   booleans, and finite numbers have canonical text; null and aggregate/codeblock values do not. Make `cat`

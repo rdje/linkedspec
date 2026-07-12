@@ -665,6 +665,10 @@ Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.3` closes pure scalar/string 
 neutral fixture align typed `cat` coercion across Perl/Rust/Dart/Julia/PUC Lua/LuaJIT; Lua passes 72/72 on both
 ABIs. Regex/split/mutation `.4.3.2.2` is active.
 
+Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.2.0` splits the remaining string runtime work by mechanism.
+Active `.1` owns typed helper-regex values, governed flags, and `matches`; `.2` owns pure split/receiver bridging;
+`.3` scalar regex mutation; `.4` explicit array split replacement; `.5` corpus/public no-drift.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

@@ -14,7 +14,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. No implementation behavior changes; .4.3.1 becomes the sole executable frontier."
+evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. LUA-BACKEND-PARITY.4.3.2.2.0 later splits the regex/string remainder into helper regex/matches, pure split/receiver, scalar regex mutation, array split mutation, and corpus/public no-drift."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -36,6 +36,10 @@ owners under `docs/tasks/LUA-BACKEND-PARITY.md` are:
 7. `.4.3.7`: capture slices, named marks, input views, and explicit cursor state;
 8. `.4.3.8`: parse-result-neutral diagnostic output over a caller-owned event seam;
 9. `.4.3.9`: exhaustive 239-name execution/API/book/status no-drift.
+
+The regex/split/mutation child `.4.3.2.2` is itself ordered as `.1` helper regex values and `matches`, `.2` pure
+split/receiver bridging, `.3` scalar regex substitution, `.4` explicit array split replacement, and `.5` corpus/
+public no-drift. This keeps PCRE2 policy, value typing, scalar mutation, and aggregate mutation in separate commits.
 
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
