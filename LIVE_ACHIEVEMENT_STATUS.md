@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.0 — split scalar numeric contract alignment**
+  (DONE — neutral executable contract `.4.3.3.1.1` next).
+
+  **Surprise:** Perl/Rust/Dart/Julia disagree on boolean numeric input, invalid comparisons/unary results, extra
+  subtraction/division operands, numeric string grammar, and signed modulo. Happy-path name coverage hid the gap.
+
+  **Routing:** `.1` neutral policy/data; `.2` Perl/Rust; `.3` Dart/Julia; `.4` PUC Lua/LuaJIT plus exact six-runtime
+  admission. No runtime behavior changed; Lua remains green at 76/76 on both ABIs.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.0 — split Lua numeric helper mechanisms**
   (DONE — strict scalar numeric evaluation `.4.3.3.1` next).
 

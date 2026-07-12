@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.0 — never copy host numeric coercion):
+  Canonical helper names are insufficient when each backend delegates numeric parsing, booleans, arity, remainder,
+  or invalid defaults to its host. A reference backend can itself contradict the public invalid-to-null rule.
+  Measure the whole admitted set, write one executable neutral contract, repair existing variants in bounded pairs,
+  and only then add a new backend. Keep generic scalar-to-text conversion separate from numeric input acceptance.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.0 — canonical names are not runtime semantics):
   The Lua frontend already maps numeric words and symbols onto `num_*`, but the evaluator still needs an explicit
   finite-decimal boundary, invalid arithmetic fences, receiver injection, comparison terminal handling, and typed

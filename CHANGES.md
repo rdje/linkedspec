@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.0 — split scalar numeric contract alignment
+
+Stopped the planned Lua scalar evaluator after a LinkedSpec reference probe and admitted-backend audit exposed
+five unowned semantic drift classes: typed booleans, invalid comparisons/unary values, extra call operands, numeric
+string grammar, and signed modulo. Perl, Rust, Dart, and Julia currently produce incompatible outcomes.
+
+Split neutral policy/executable data `.1`, Perl/Rust repair `.2`, Dart/Julia repair `.3`, and Lua plus exact
+six-runtime admission `.4`. Added a Knowledge Map drift card and advanced the sole frontier to `.1`; no runtime or
+public documentation behavior changed, and the committed Lua 76/76 baseline remains clean.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.0 — split Lua numeric helper mechanisms
 
 Audited the governed numeric catalog against Perl/Rust/Dart/Julia implementations and the Lua ActionIR/runtime

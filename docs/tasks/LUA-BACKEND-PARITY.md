@@ -931,12 +931,62 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement strict scalar numeric helper evaluation.
+  Children: `.4.3.3.1.0`, `.4.3.3.1.1`, `.4.3.3.1.2`, `.4.3.3.1.3`, `.4.3.3.1.4`
   Dependencies: `.4.3.3.0`
   Acceptance: Canonical unary, variadic arithmetic, integer modulo, clamp, scalar min/max, and comparisons accept
     only portable finite decimal values; invalid/missing/aggregate/boolean inputs, zero divisors, non-integer
     modulo operands, inverted bounds, and non-finite results return null identically on PUC Lua and LuaJIT.
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1.0`
+  Status: `done`
+  Goal: Measure cross-backend scalar numeric drift and split neutral policy from backend implementation.
+  Dependencies: `.4.3.3.0`
+  Verification: **PASS 2026-07-12.** LinkedSpec `Get` probes plus direct Perl/Rust/Dart/Julia runtime/test/source
+    inspection found incompatible boolean, invalid-comparison, call-arity, numeric-string, and signed-modulo
+    behavior. No backend is a complete accidental contract: the public book says invalid numeric inputs return
+    null, while Perl remains the reference for fixed-versus-variadic lowering and modulo sign. Neutral policy/data,
+    admitted-backend repair, and Lua implementation require separate signoff leaves before receiver work.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1.1`
+  Status: `pending`
+  Goal: Adopt a versioned neutral scalar numeric helper contract and executable fixtures.
+  Dependencies: `.4.3.3.1.0`
+  Acceptance: An ADR and machine-readable contract define accepted finite decimal inputs, exact/variadic arities,
+    invalid-to-null behavior, numeric comparison truth, half-away rounding, min/max, clamp, division, and signed
+    integer modulo without host-language fallback; an offline checker validates schema/cases and tracked inputs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1.2`
+  Status: `pending`
+  Goal: Align Perl and Rust scalar numeric helpers with the neutral contract.
+  Dependencies: `.4.3.3.1.1`
+  Acceptance: Direct canonical helper execution in both backends consumes every contract case; booleans and invalid
+    operands return null, arities are exact/variadic as governed, signed modulo and numeric strings match, and full
+    Perl/Rust gates pass without weakening unrelated generic scalar coercion.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1.3`
+  Status: `pending`
+  Goal: Align Dart and Julia scalar numeric helpers with the neutral contract.
+  Dependencies: `.4.3.3.1.1`, `.4.3.3.1.2`
+  Acceptance: Both native interpreters consume every unchanged contract case through direct canonical calls;
+    numeric parsing, arity, invalid/null, signed modulo, and result normalization agree with Perl/Rust, and full
+    package/CLI/corpus gates pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1.4`
+  Status: `pending`
+  Goal: Implement Lua scalar numeric helpers and admit exact six-runtime behavior.
+  Dependencies: `.4.3.3.1.2`, `.4.3.3.1.3`
+  Acceptance: One Lua evaluator consumes every neutral case for canonical helpers on PUC Lua and LuaJIT, never
+    delegates syntax/rounding/modulo policy to host accident, full dual-ABI tests pass, and one six-runtime checker
+    proves exact results before aliases/receivers `.4.3.3.2`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1205,7 +1255,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 34 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `done` | Route premature shipped cases to their dependency-complete phase-6 owner. |
 | 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `done` | Focused string mechanisms/public surfaces close at 76/76. |
 | 36 | `LUA-BACKEND-PARITY.4.3.3.0` | `done` | Audit and split scalar evaluation, receiver/alias admission, reducers, and closeout. |
-| 37 | `LUA-BACKEND-PARITY.4.3.3.1` | `pending` | Implement strict scalar numeric helper evaluation and invalid-result fences. |
+| 37 | `LUA-BACKEND-PARITY.4.3.3.1.0` | `done` | Measure scalar numeric drift and split neutral policy from backend alignment. |
+| 38 | `LUA-BACKEND-PARITY.4.3.3.1.1` | `pending` | Adopt the versioned neutral scalar numeric contract and executable fixture. |
+
+### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — A direct Perl `Get` matrix and admitted-backend source/tests disagree on booleans,
+  invalid comparisons/unary calls, extra subtraction/division operands, numeric strings, and signed modulo.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Numeric semantics were copied from host coercion/arithmetic APIs without one
+  executable neutral contract; call-name identity and happy-path examples never exercised the divergent edges.
+- [x] **FIX** — Split neutral policy/data `.1`, Perl/Rust alignment `.2`, Dart/Julia alignment `.3`, and Lua plus
+  six-runtime admission `.4` before aliases/receiver work.
+- [x] **ADDRESSED (verified)** — The measured matrix and exact source seams are durable in Knowledge Map card
+  `cross-backend-scalar-numeric-drift`; each repair family has an explicit acceptance owner.
+- [x] **NO REGRESSION** — Read-only probes and planning/docs only; the committed Lua 76/76 dual-ABI gate is clean.
+- [x] **LOCKSTEP** — Task/index/roadmaps, Knowledge Map, changes/notes/live status, and memory advance to neutral
+  contract `.1`; no backend behavior or mdBook claim changed during discovery.
 
 ### `LUA-BACKEND-PARITY.4.3.3.0` Acceptance Checklist
 
@@ -1509,3 +1574,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof` | Direct blocker inventory, phase-6 shipped-case routing, and focused no-drift handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity` | Dual-ABI 76/76, canonical `cat` public surfaces, parent closure, and numeric handoff. |
 | `LUA-BACKEND-PARITY.4.3.3.0` | `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms` | Read-only contract/runtime audit and four mechanism-sized implementation/closeout owners. |
+| `LUA-BACKEND-PARITY.4.3.3.1.0` | `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment` | Measured five semantic drift classes and split neutral policy plus three backend rollout leaves. |
