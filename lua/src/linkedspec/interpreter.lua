@@ -1,3 +1,5 @@
+local action_ast = require("linkedspec.action_ast")
+local action_parser = require("linkedspec.action_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local matching = require("linkedspec.matching")
@@ -39,6 +41,11 @@ end
 
 local function copy_value(value, active)
   if value == nil or value == json.null or type(value) ~= "table" then return value end
+  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then
+    local copied = action_parser.parse_action_expression(value.source)
+    if copied.kind ~= "block_value" then fail("runtime codeblock source no longer parses as a codeblock") end
+    return copied
+  end
   local kind = json.kind(value)
   if kind ~= "array" and kind ~= "harray" then return value end
   active = active or {}
@@ -48,6 +55,16 @@ local function copy_value(value, active)
   for key, item in pairs(value) do result[key] = copy_value(item, active) end
   active[value] = nil
   return result
+end
+
+function M.runtime_value_kind(value)
+  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then return "codeblock" end
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" then return kind end
+  if value == json.null or type(value) == "string" or type(value) == "number" or type(value) == "boolean" then
+    return "scalar"
+  end
+  fail("runtime value is not scalar, array, harray, or codeblock")
 end
 
 local function rule_result(matched, value)
@@ -106,12 +123,156 @@ local function target_name(expr)
   return nil
 end
 
+local function lookup_binding(ctx, name)
+  if ctx.variables[name] ~= nil then return ctx.variables[name], "variable" end
+  if ctx.arrays[name] ~= nil then return ctx.arrays[name], "array" end
+  if ctx.harrays[name] ~= nil then return ctx.harrays[name], "harray" end
+  return json.null, nil
+end
+
+local function bind_scalar(ctx, name, value)
+  ctx.variables[name] = copy_value(value)
+  ctx.arrays[name] = nil
+  ctx.harrays[name] = nil
+  return copy_value(ctx.variables[name])
+end
+
+local function bind_array(ctx, name, value)
+  local stored = json.kind(value) == "array" and copy_value(value) or json.array()
+  ctx.variables[name] = nil
+  ctx.harrays[name] = nil
+  ctx.arrays[name] = stored
+  return copy_value(stored)
+end
+
+local function bind_harray(ctx, name, value)
+  local stored = json.kind(value) == "harray" and copy_value(value) or json.harray()
+  ctx.variables[name] = nil
+  ctx.arrays[name] = nil
+  ctx.harrays[name] = stored
+  return copy_value(stored)
+end
+
+local function store_binding(ctx, name, storage, value)
+  if storage == "array" then return bind_array(ctx, name, value) end
+  if storage == "harray" then return bind_harray(ctx, name, value) end
+  return bind_scalar(ctx, name, value)
+end
+
+local function target_descriptor(expr)
+  local name = target_name(expr)
+  if name then return { kind = "scalar", name = name } end
+  if expr.kind == "call" and (expr.name == "array" or expr.name == "hash" or expr.name == "harray") and
+      #expr.args == 1 then
+    name = target_name(argument_expr(expr.args[1]))
+    if name then
+      return { kind = expr.name == "array" and "array" or "harray", name = name }
+    end
+  end
+  return nil
+end
+
+local function read_index(root, key)
+  local kind = json.kind(root)
+  if kind == "array" then
+    if type(key) ~= "number" or key % 1 ~= 0 or key < 0 then return json.null end
+    local value = root[key + 1]
+    return value == nil and json.null or copy_value(value)
+  elseif kind == "harray" then
+    local value = root[tostring(key)]
+    return value == nil and json.null or copy_value(value)
+  end
+  return json.null
+end
+
+local function write_index(root, key, value)
+  local kind = json.kind(root)
+  local stored = copy_value(value)
+  if kind == "array" then
+    if type(key) ~= "number" or key % 1 ~= 0 or key < 0 or key > #root then return false end
+    root[key + 1] = stored
+    return true, stored
+  elseif kind == "harray" then
+    root[tostring(key)] = stored
+    return true, stored
+  end
+  return false
+end
+
 local function dispatch_edge_child(engine, edge_state, ctx)
   if edge_state.child_dispatched then return edge_state.child_result end
   edge_state.child_dispatched = true
   edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
   ctx.retv = copy_value(edge_state.child_result.value)
   return edge_state.child_result
+end
+
+local function match_capture(one, index)
+  if not one or type(index) ~= "number" or index % 1 ~= 0 or index < 0 then return json.null end
+  local value = one.captures[index + 1]
+  return value == nil and json.null or value
+end
+
+local function match_captures(one)
+  local result = json.array()
+  if one then
+    for index, value in ipairs(one.captures) do result[index] = value end
+  end
+  return result
+end
+
+local function match_named_map(one)
+  local result = json.harray()
+  if one then
+    for key, value in pairs(one.named) do result[key] = value end
+  end
+  return result
+end
+
+local function capture_name(engine, expr, ctx, accumulator, edge_state)
+  local name = target_name(expr)
+  if name then return name end
+  local value = evaluate_expr(engine, expr, ctx, accumulator, edge_state)
+  return tostring(value == json.null and "" or value)
+end
+
+local function match_line_column(one, at_end)
+  if not one then return { line = 1, column = 1 } end
+  return matching.line_column_at_byte_offset(one.input, at_end and one.byte_end or one.byte_start)
+end
+
+local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
+  local entry = name:sub(1, 6) == "entry_"
+  local one
+  if entry then one = ctx.registers.entry_match else one = ctx.registers.local_match end
+  local suffix = name:sub(7)
+  if suffix == "text" then return one and one:text() or json.null end
+  if suffix == "group" then
+    local index = expr.args[1] and evaluate_expr(
+      engine,
+      argument_expr(expr.args[1]),
+      ctx,
+      accumulator,
+      edge_state
+    ) or json.null
+    return match_capture(one, index)
+  end
+  if suffix == "groups" then return match_captures(one) end
+  if suffix == "named" or suffix == "has" then
+    if not one or not expr.args[1] then return suffix == "has" and 0 or json.null end
+    local key = capture_name(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
+    if suffix == "has" then return one.named[key] ~= nil and 1 or 0 end
+    return one.named[key] == nil and json.null or one.named[key]
+  end
+  if suffix == "map" then return match_named_map(one) end
+  if suffix == "len" then return one and one:char_length() or json.null end
+  if suffix == "start_pos" then return one and one:char_start() or json.null end
+  if suffix == "end_pos" then return one and one:char_end() or json.null end
+  local at_end = suffix:sub(1, 4) == "end_"
+  local position = match_line_column(one, at_end)
+  if suffix == "line" or suffix == "start_line" or suffix == "end_line" then return position.line end
+  if suffix == "col" or suffix == "start_col" or suffix == "end_col" then return position.column end
+  return nil
 end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
@@ -167,23 +328,55 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     accumulator[#accumulator + 1] = copy_value(value)
     return value
   elseif name == "set" or name == "=" then
-    local key = expr.args[1] and target_name(argument_expr(expr.args[1]))
-    if not key or not expr.args[2] then fail("set expects target and value") end
+    local target = expr.args[1] and target_descriptor(argument_expr(expr.args[1]))
+    if not target or not expr.args[2] then fail("set expects target and value") end
     local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
-    ctx.variables[key] = copy_value(value)
-    return value
+    if target.kind == "array" then return bind_array(ctx, target.name, value) end
+    if target.kind == "harray" then return bind_harray(ctx, target.name, value) end
+    return bind_scalar(ctx, target.name, value)
   elseif name == "array" then
     if not expr.args[1] then return json.array() end
-    local key = target_name(argument_expr(expr.args[1]))
-    return key and (ctx.arrays[key] or ctx.variables[key] or json.array()) or json.array()
+    if #expr.args == 1 then
+      local key = target_name(argument_expr(expr.args[1]))
+      if key then
+        local value = ctx.variables[key]
+        if json.kind(value) == "array" then return copy_value(value) end
+        return copy_value(ctx.arrays[key] or json.array())
+      end
+    end
+    local result = json.array()
+    for index, arg in ipairs(expr.args) do
+      result[index] = copy_value(evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state))
+    end
+    return result
   elseif name == "hash" or name == "harray" then
     if not expr.args[1] then return json.harray() end
-    local key = target_name(argument_expr(expr.args[1]))
-    return key and (ctx.harrays[key] or ctx.variables[key] or json.harray()) or json.harray()
-  elseif name == "entry_text" then
-    return ctx.registers.entry_match and ctx.registers.entry_match:text() or json.null
-  elseif name == "match_text" then
-    return ctx.registers.local_match and ctx.registers.local_match:text() or json.null
+    if #expr.args == 1 then
+      local key = target_name(argument_expr(expr.args[1]))
+      if key then
+        local value = ctx.variables[key]
+        if json.kind(value) == "harray" then return copy_value(value) end
+        return copy_value(ctx.harrays[key] or json.harray())
+      end
+    end
+    local result = json.harray()
+    local index = 1
+    while index <= #expr.args do
+      local key = evaluate_expr(engine, argument_expr(expr.args[index]), ctx, accumulator, edge_state)
+      local value = json.null
+      if expr.args[index + 1] then
+        value = evaluate_expr(engine, argument_expr(expr.args[index + 1]), ctx, accumulator, edge_state)
+      end
+      result[tostring(key == json.null and "" or key)] = copy_value(value)
+      index = index + 2
+    end
+    return result
+  elseif name == "copy" then
+    if not expr.args[1] then return json.null end
+    return copy_value(evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state))
+  elseif name:match("^entry_") or name:match("^match_") then
+    local value = evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
+    if value ~= nil then return value end
   end
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end
@@ -193,11 +386,15 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   if kind == "string" or kind == "number" or kind == "boolean" then return expr.value end
   if kind == "undef" then return json.null end
   if kind == "variable" then
-    if expr.name == "retv" then return ctx.retv end
-    if ctx.variables[expr.name] ~= nil then return ctx.variables[expr.name] end
-    if ctx.arrays[expr.name] ~= nil then return ctx.arrays[expr.name] end
-    if ctx.harrays[expr.name] ~= nil then return ctx.harrays[expr.name] end
-    return json.null
+    if expr.name == "retv" then
+      if edge_state then return copy_value(dispatch_edge_child(engine, edge_state, ctx).value) end
+      return copy_value(ctx.retv)
+    end
+    local value = lookup_binding(ctx, expr.name)
+    return copy_value(value)
+  end
+  if kind == "block_value" then
+    return copy_value(expr)
   end
   if kind == "array_literal" then
     local result = json.array()
@@ -216,15 +413,75 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "assign_scalar" then
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
-    ctx.variables[expr.name] = copy_value(value)
-    return value
+    return bind_scalar(ctx, expr.name, value)
   end
   if kind == "assign_array_append" then
-    local values = ctx.arrays[expr.name]
-    if not values then values = json.array(); ctx.arrays[expr.name] = values end
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
+    local current, storage = lookup_binding(ctx, expr.name)
+    local values = json.kind(current) == "array" and copy_value(current) or json.array()
     values[#values + 1] = copy_value(value)
-    return copy_value(values)
+    if storage == "variable" then return bind_scalar(ctx, expr.name, values) end
+    return bind_array(ctx, expr.name, values)
+  end
+  if kind == "indexed_var" then
+    local root = lookup_binding(ctx, expr.name)
+    local key = evaluate_expr(engine, expr.index, ctx, accumulator, edge_state)
+    return read_index(root, key)
+  end
+  if kind == "nested_access" then
+    local value = lookup_binding(ctx, expr.base)
+    for _, segment in ipairs(expr.segments) do
+      local key = segment.kind == "key" and segment.value or evaluate_expr(
+        engine,
+        segment.expr,
+        ctx,
+        accumulator,
+        edge_state
+      )
+      value = read_index(value, key)
+      if value == json.null then break end
+    end
+    return copy_value(value)
+  end
+  if kind == "assign_hash_index" then
+    local key = evaluate_expr(engine, expr.key, ctx, accumulator, edge_state)
+    local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
+    local current, storage = lookup_binding(ctx, expr.name)
+    local root
+    if json.kind(current) == "array" or json.kind(current) == "harray" then
+      root = copy_value(current)
+    else
+      root = json.harray()
+      storage = "harray"
+    end
+    if not write_index(root, key, value) then return json.null end
+    return store_binding(ctx, expr.name, storage, root)
+  end
+  if kind == "assign_nested_access" then
+    local current, storage = lookup_binding(ctx, expr.base)
+    if json.kind(current) ~= "array" and json.kind(current) ~= "harray" then return json.null end
+    local root = copy_value(current)
+    local target = root
+    for index, segment in ipairs(expr.segments) do
+      local key = segment.kind == "key" and segment.value or evaluate_expr(
+        engine,
+        segment.expr,
+        ctx,
+        accumulator,
+        edge_state
+      )
+      if index == #expr.segments then
+        local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
+        if not write_index(target, key, value) then return json.null end
+      else
+        local next_value = read_index(target, key)
+        if json.kind(next_value) ~= "array" and json.kind(next_value) ~= "harray" then return json.null end
+        local written, copied = write_index(target, key, next_value)
+        if not written then return json.null end
+        target = copied
+      end
+    end
+    return store_binding(ctx, expr.base, storage, root)
   end
   if kind == "call" then return evaluate_call(engine, expr, ctx, accumulator, edge_state) end
   if kind == "fluent_chain" then

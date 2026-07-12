@@ -247,7 +247,9 @@ The adapter is a narrow repository-owned PCRE2 binding, built separately for
 PUC Lua and LuaJIT. LPeg is deliberately not used: it constructs PEG patterns
 but does not parse the governed PCRE dialect. The matcher accepts inline/scoped
 flags, POSIX classes, named captures, possessive quantifiers, recursion, and
-other PCRE2 syntax without a Lua-specific rewrite.
+fixed-width positive/negative lookbehind (including `spec.spec`'s `(?<!\\)`),
+plus other PCRE2 syntax without a Lua-specific rewrite. Both PUC Lua and LuaJIT
+load ABI-specific bindings to that same PCRE2 semantic provider.
 
 `seek` selects the earliest match at or after the UTF-8 byte cursor, breaking
 same-position ties by the lower source alternative. `consume` anchors at the
@@ -292,8 +294,48 @@ typed immediate runtime error. The result exposes the direct value, neutral
 one-element output wrapper, byte/code-unit and character cursors, and lifecycle
 events. Helper/value breadth beyond the narrow dispatch-facing evaluator
 remains owned by `.4.3`. That breadth is split before implementation: `.4.3.1`
-owns four-kind stores/access and entry/match reads; `.2` scalar/string; `.3`
+now supplies four-kind stores/access and entry/match reads; `.2` scalar/string; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
 tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
 mechanism cannot remain signoff-sized.
+
+Runtime values have exactly four public kinds: `scalar`, `array`, `harray`, and
+`codeblock`. `runtime_value_kind(value)` reports those names; null, booleans,
+numbers, and strings are scalar values. Aggregate and codeblock reads return
+defensive snapshots. Bare assignment stores scalar-held typed values, while
+`set(array(name), value)` and `set(hash(name), value)` select named aggregate
+stores. Array indexes are zero-based at the DSL boundary and harray keys are
+strings. Direct and nested access returns `json.null` for a missing or wrong-
+kind path; nested assignment never creates missing intermediate containers.
+
+```lua
+local result = linkedspec.runtime_parse(linkedspec.runtime_engine(
+  linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /(?<name>\w+)=(\d+)/
+ I {
+   items = [{ "name" : "old" }]
+   items[0]["name"] = "new"
+ }
+ E {
+   return({
+     "item" : items[0]["name"],
+     "captures" : entry_groups(),
+     "named" : match_map(),
+     "start" : entry_start_pos()
+   })
+ }
+]]))), "key=42")
+
+assert(linkedspec.runtime_value_kind(result.value) == "harray")
+assert(result.value.item == "new")
+assert(result.value.captures[1] == "key")
+assert(result.value.named.name == "key")
+```
+
+The `entry_*` and `match_*` families expose text, zero-based compact capture
+groups, named captures and presence, copied maps, Unicode character lengths/
+spans, and 1-based start/end line and column values. With no match, text/group/
+length/span reads are `json.null`, groups/maps are typed empty containers,
+presence is `0`, and line/column reads use the `(1, 1)` origin.

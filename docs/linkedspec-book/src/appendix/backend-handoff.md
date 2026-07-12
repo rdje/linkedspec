@@ -594,8 +594,38 @@ numeric; arrays; harrays; codeblocks/controls/generic trailing blocks/tree
 callbacks; capture/mark/input/cursor state; diagnostic output; then exhaustive
 239-name and documentation no-drift. Each leaf depends only on earlier value
 mechanisms and may split again before code. This keeps recognition of a helper
-name distinct from executable parity and makes `.4.3.1` the single current
-runtime frontier.
+name distinct from executable parity. `.4.3.1` has since closed core values;
+scalar/string `.4.3.2` is the single current runtime frontier.
+
+Do not infer regex support from the host language name. Lua's native patterns
+do not support lookbehind, but LinkedSpec's PUC Lua and LuaJIT modules both use
+PCRE2 and permanently pass positive and fixed-width negative lookbehind. The
+`spec.spec` form is the one-character assertion `(?<!\\)`. Dart's `RegExp`
+implements ECMAScript semantics, and the real `spec_spec_minimal_rule` fixture
+containing that pattern passes through Dart parse/compile/runtime. Rust's basic
+`regex` crate needed a compatibility path only at an earlier milestone. The
+current Rust parser, validator, and runtime use RGX, the project's roughly 98%
+PCRE2-compatible engine with lookaround/backreference/subroutine support; the
+historical basic-crate limitation does not describe current Rust behavior and
+does not imply a Dart or Lua gap.
+
+The first helper leaf now makes Lua's four value kinds explicit through
+`runtime_value_kind(...)`: null/boolean/number/string scalars, arrays, harrays,
+and codeblocks. Stores and reads copy mutable values. Bare assignment retains a
+typed value in the scalar slot; `set(array(name), value)` and
+`set(hash(name), value)` select named aggregate slots. Zero-based array and
+string-key harray access, append/hash-index assignment, and copy-on-write mixed
+nested assignment are implemented without intermediate autovivification.
+Current-edge `retv` dispatches its child before returning.
+
+Lua also implements the complete entry/local match read family: text,
+zero-based compact groups, named values/presence/maps, Unicode character
+length/start/end, and 1-based start/end line/column helpers. Absent text/group/
+length/span reads are null; absent group/map collections are typed empty
+containers; named presence is zero; missing line/column uses origin `(1, 1)`.
+The same 69-test suite passes PUC Lua and LuaJIT. Scalar/string transformations
+and mutation remain the next leaf rather than being implied by these core
+stores.
 
 ```lua
 local source = [[

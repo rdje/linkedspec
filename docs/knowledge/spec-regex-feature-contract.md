@@ -1,12 +1,14 @@
 ---
 id: spec-regex-feature-contract
-title: "A backend must support slash regex literals, seek and consume anchoring, branch identification, compacted numbered captures, and named captures"
+title: "A backend must support governed regex anchoring, branch/capture identity, and required lookaround"
 answers:
   - "what regex features must a LinkedSpec backend support"
   - "what is the .spec regex feature set"
   - "are regex flags part of the .spec contract"
   - "how do numbered capture groups work in .spec"
   - "does entry_group(0) mean the whole match"
+  - "does the spec regex contract require lookbehind"
+  - "why does spec.spec use negative lookbehind"
 date: 2026-07-08
 status: confirmed
 tags: [spec-language, regex, backend-contract, captures, SPEC-LANG-REFERENCE]
@@ -33,6 +35,8 @@ The required surface is:
 - compacted numbered captures: non-participating groups are removed from the
   list and can shift later indices;
 - named captures with read and presence-test helpers.
+- governed zero-width lookahead and fixed-width lookbehind, including
+  `spec.spec`'s one-character negative `(?<!\\)` assertion.
 
 Use `entry_text()` / `match_text()` for the whole match. Use
 `entry_group(N)` / `match_group(N)` for numbered captures. Prefer named captures
@@ -43,3 +47,4 @@ when optional groups would make numbered capture compaction ambiguous.
 - Task tree: [[SPEC-LANG-REFERENCE]] (leaf `.7`; original book work `.2`)
 - Book contract: `docs/linkedspec-book/src/user-model/regex-in-spec.md`
 - Related: [[rust-capture-group-helper-indexing]], [[entry-match-divergence-verified-shape]]
+- Lookbehind engine proof: [[dart-lua-fixed-lookbehind-support]]

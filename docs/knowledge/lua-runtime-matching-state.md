@@ -7,6 +7,7 @@ answers:
   - why does Lua LinkedSpec not use LPeg for regexes
   - does Lua support seek and consume regex matching
   - does Lua support named captures and PCRE recursion
+  - do both Lua runtimes support fixed width lookbehind
   - how does Lua track entry and local match state
   - are Lua match positions bytes or Unicode characters
   - how does Lua distinguish no match from zero width at offset zero
@@ -25,6 +26,8 @@ binding `lua/native/regex_pcre2.c`. LPeg was evaluated but rejected because it
 constructs PEGs and does not parse LinkedSpec's governed PCRE dialect. PCRE2
 directly accepts inline/scoped flags, POSIX classes, Python/angle named captures,
 possessive quantifiers, recursion, and `\K` without Lua-specific rewriting.
+The shared PUC Lua/LuaJIT gate also locks positive and fixed-width negative
+lookbehind, including the one-character form used by `spec.spec`.
 
 `tools/build_lua_native.sh` compiles the same binding separately for PUC Lua and
 LuaJIT. `tools/run_lua_local.sh` writes both modules below one unique owned
@@ -49,3 +52,4 @@ Related facts: [[lua-toolchain-package-policy]], [[spec-regex-feature-contract]]
 [[lua-compiled-spec-state]], [[julia-runtime-matching-state]],
 [[dart-runtime-matching-state]], [[rust-entry-match-separation]],
 [[rust-match-presence-is-not-an-offset-sentinel]].
+See also [[dart-lua-fixed-lookbehind-support]].

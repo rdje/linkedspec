@@ -214,6 +214,12 @@ same observable behavior (the Rust runtime, for example, builds these on the `rg
 4. **Numbered capture groups** — 0-based, **captures only** (the whole match is read
    separately), with **non-participating groups compacted out** of the list.
 5. **Named capture groups** — read by name, with presence testable.
+6. **Lookaround used by governed specs** — zero-width lookahead and fixed-width
+   positive/negative lookbehind must execute where they occur. In particular,
+   `spec.spec` uses the one-character negative assertion `(?<!\\)` to reject an
+   escaped regex delimiter. PUC Lua/LuaJIT provide this through PCRE2, Dart
+   through ECMAScript `RegExp`, and current Rust through RGX rather than Rust's
+   default basic `regex` crate.
 
 Determinism is required throughout: first-match-wins for alternation, and no reliance on
 engine-specific group-iteration order. The [Backend Handoff](../appendix/backend-handoff.md)

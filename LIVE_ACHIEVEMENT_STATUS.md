@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.3.1 — add Lua runtime value capture helpers**
+  (DONE — core four-kind runtime passes both ABIs; scalar/string `.4.3.2` next).
+
+  **Implementation:** Explicit scalar/array/harray/codeblock identity, isolated stores/snapshots, checked mixed
+  access/assignment, current-edge `retv`, and complete entry/match capture/map/Unicode-position reads now execute.
+
+  **Proof:** PUC Lua 69/69 and LuaJIT 69/69 plus syntax/process/manifest/name checks pass. Positive and fixed-width
+  negative lookbehind are permanently locked on both Lua ABIs; Dart's real spec.spec corpus fixture passes 1/1.
+  Full CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. Runtime status is
+  `runtime_core_values`; later helper families remain unclaimed.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.3.0 — split Lua runtime helper families**
   (DONE — nine implementation/closeout owners are durable; core four-kind runtime `.4.3.1` next).
 

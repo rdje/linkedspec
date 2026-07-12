@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.3.1 — add Lua runtime value capture helpers
+
+Centralized runtime scalar/array/harray/codeblock value identity, defensive snapshots, and scalar/named aggregate
+stores. Added bare and typed reads, scalar/append/hash-index writes, zero-based array/string-key harray access,
+checked copy-on-write mixed nested assignment without intermediate autovivification, and current-edge `retv`
+dispatch. `runtime_value_kind(...)` exposes the exact four public kinds while preserving false versus null.
+
+Added complete `entry_*` / `match_*` text, compact group, named/presence/map, Unicode character length/span, and
+start/end line/column helpers, including absent null/empty/origin behavior. A director-raised portability audit
+confirmed `spec.spec` uses fixed-width `(?<!\\)`; both Lua ABIs share PCRE2 and now permanently test positive and
+negative lookbehind, while the real Dart `spec_spec_minimal_rule` corpus fixture passes 1/1 on the installed VM.
+
+Syntax/native-build/process/manifest checks and 69/69 tests pass on both PUC Lua and LuaJIT. Full local CI passes
+phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. Status advances to `runtime_core_values`; scalar/string
+helper leaf `.4.3.2` is next.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.3.0 — split Lua runtime helper families
 
 Split the governed Lua runtime surface before broad implementation. Nine ordered leaves now own core four-kind

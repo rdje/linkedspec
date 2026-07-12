@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime_dispatch", "status parity")
+  assert_equal(first.parity, "runtime_core_values", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1671,6 +1671,12 @@ test("native PCRE2 adapter covers the governed regex dialect", function()
   local reset_match = reset:consume_match("prefixvalue", 0)
   assert_equal(reset_match:text(), "value", "match-start reset text")
   assert_equal(reset_match.byte_start, 6, "match-start reset offset")
+
+  local negative_lookbehind = linkedspec.compile_runtime_regex_alternation({ [[(?<!\\)/]] })
+  assert_equal(negative_lookbehind:seek_match("/", 0):text(), "/", "negative lookbehind match")
+  assert_equal(negative_lookbehind:seek_match([[\/]], 0), nil, "negative lookbehind rejection")
+  local positive_lookbehind = linkedspec.compile_runtime_regex_alternation({ [[(?<=a)b]] })
+  assert_equal(positive_lookbehind:seek_match("ab", 0):text(), "b", "positive lookbehind match")
 end)
 
 test("runtime alternation preserves seek consume and source-order identity", function()
@@ -1804,6 +1810,20 @@ Child:
   assert_equal(result.value, "child", "retv result")
   assert_equal(result.cursor_code_unit, 2, "child cursor")
   assert_equal(result.output[1], "child", "direct output")
+
+  local current_edge = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /a/ -> Child { return(retv) }
+
+Child:
+ /b/
+ E { return("edge-child") }
+]]))),
+    "ab"
+  )
+  assert_equal(current_edge.value, "edge-child", "current-edge retv dispatch")
+  assert_equal(current_edge.cursor_code_unit, 2, "current-edge child cursor")
 end)
 
 test("runtime blind AND and OR dispatch preserve mode behavior", function()
@@ -1962,6 +1982,188 @@ Top::
   assert_equal(linkedspec.is_runtime_interpreter_error(exit_error), true, "exit_now typed error")
   assert_equal(exit_error.message, "exit_now(7) in rule Top", "exit_now detail")
   assert_equal(exit_error.status, 7, "exit_now status")
+end)
+
+test("runtime core values stores snapshots and checked access preserve four kinds", function()
+  local source = [[
+Top::
+ /x/
+ I {
+   scalar_value = false
+   items = [1, { "name" : "old" }]
+   meta = { "kind" : "base" }
+   set(array(named_items), ["a"])
+   set(hash(named_meta), { "x" : 1 })
+   items += 3
+   meta["added"] = false
+   items[1]["name"] = "new"
+   items_snapshot = copy(items)
+   meta_snapshot = copy(meta)
+   items += 4
+   meta["kind"] = "changed"
+   items[8]["name"] = "forbidden"
+ }
+ E {
+   return({
+     "scalar_kind" : scalar_value,
+     "items" : items,
+     "meta" : meta,
+     "items_snapshot" : items_snapshot,
+     "meta_snapshot" : meta_snapshot,
+     "named_items" : array(named_items),
+     "named_meta" : hash(named_meta),
+     "nested" : items[1]["name"],
+     "indexed" : meta["added"],
+     "missing" : items[8]
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "x"
+  )
+  assert_equal(linkedspec.runtime_value_kind(result.value), "harray", "result harray kind")
+  assert_equal(result.value.scalar_kind, false, "false scalar identity")
+  assert_equal(json.kind(result.value.items), "array", "scalar-held array identity")
+  assert_equal(#result.value.items, 4, "array append count")
+  assert_equal(result.value.items[2].name, "new", "nested array-harray assignment")
+  assert_equal(result.value.meta.kind, "changed", "hash-index assignment")
+  assert_equal(result.value.meta.added, false, "false hash value")
+  assert_equal(#result.value.items_snapshot, 3, "array snapshot isolation")
+  assert_equal(result.value.meta_snapshot.kind, "base", "harray snapshot isolation")
+  assert_equal(result.value.named_items[1], "a", "named array store")
+  assert_equal(result.value.named_meta.x, 1, "named harray store")
+  assert_equal(result.value.nested, "new", "nested access")
+  assert_equal(result.value.indexed, false, "indexed false access")
+  assert_equal(result.value.missing, json.null, "checked missing access")
+
+  local codeblock_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ I { callback = { return("later") } }
+ E { return(callback) }
+]]))),
+    "x"
+  )
+  assert_equal(linkedspec.runtime_value_kind(codeblock_result.value), "codeblock", "codeblock value kind")
+  assert_equal(codeblock_result.value.kind, "block_value", "codeblock structural identity")
+  assert_equal(#codeblock_result.value.block.statements, 1, "codeblock body preserved")
+  assert_equal(codeblock_result.value ~= codeblock_result.output[1], true, "codeblock output snapshot isolation")
+  assert_equal(linkedspec.runtime_value_kind(json.null), "scalar", "null scalar kind")
+  assert_equal(linkedspec.runtime_value_kind(json.array()), "array", "empty array kind")
+end)
+
+test("runtime entry and match helper families expose captures and Unicode positions", function()
+  local source = [[
+Top::
+ /(?<name>\w+)=(\d+)/
+ E {
+   return({
+     "entry_text" : entry_text(),
+     "match_text" : match_text(),
+     "entry_group_0" : entry_group(0),
+     "match_group_1" : match_group(1),
+     "entry_groups" : entry_groups(),
+     "match_groups" : match_groups(),
+     "entry_named" : entry_named(name),
+     "match_named" : match_named(name),
+     "entry_has" : entry_has(name),
+     "match_has" : match_has(name),
+     "entry_map" : entry_map(),
+     "match_map" : match_map(),
+     "entry_len" : entry_len(),
+     "match_len" : match_len(),
+     "entry_start" : entry_start_pos(),
+     "entry_end" : entry_end_pos(),
+     "match_start" : match_start_pos(),
+     "match_end" : match_end_pos(),
+     "entry_line" : entry_line(),
+     "entry_col" : entry_col(),
+     "entry_start_line" : entry_start_line(),
+     "entry_start_col" : entry_start_col(),
+     "entry_end_line" : entry_end_line(),
+     "entry_end_col" : entry_end_col(),
+     "match_line" : match_line(),
+     "match_col" : match_col(),
+     "match_start_line" : match_start_line(),
+     "match_start_col" : match_start_col(),
+     "match_end_line" : match_end_line(),
+     "match_end_col" : match_end_col()
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "é\nkey=42"
+  )
+  assert_equal(result.value.entry_text, "key=42", "entry text")
+  assert_equal(result.value.match_text, "key=42", "match text")
+  assert_equal(result.value.entry_group_0, "key", "entry compact capture")
+  assert_equal(result.value.match_group_1, "42", "match compact capture")
+  assert_equal(table.concat(result.value.entry_groups, ","), "key,42", "entry capture list")
+  assert_equal(table.concat(result.value.match_groups, ","), "key,42", "match capture list")
+  assert_equal(result.value.entry_named, "key", "entry named capture")
+  assert_equal(result.value.match_named, "key", "match named capture")
+  assert_equal(result.value.entry_has, 1, "entry named presence")
+  assert_equal(result.value.match_has, 1, "match named presence")
+  assert_equal(result.value.entry_map.name, "key", "entry named map")
+  assert_equal(result.value.match_map.name, "key", "match named map")
+  assert_equal(result.value.entry_len, 6, "entry character length")
+  assert_equal(result.value.match_len, 6, "match character length")
+  assert_equal(result.value.entry_start, 2, "entry character start")
+  assert_equal(result.value.entry_end, 8, "entry character end")
+  assert_equal(result.value.match_start, 2, "match character start")
+  assert_equal(result.value.match_end, 8, "match character end")
+  assert_equal(result.value.entry_line, 2, "entry line alias")
+  assert_equal(result.value.entry_col, 1, "entry column alias")
+  assert_equal(result.value.entry_start_line, 2, "entry start line")
+  assert_equal(result.value.entry_start_col, 1, "entry start column")
+  assert_equal(result.value.entry_end_line, 2, "entry end line")
+  assert_equal(result.value.entry_end_col, 7, "entry end column")
+  assert_equal(result.value.match_line, 2, "match line alias")
+  assert_equal(result.value.match_col, 1, "match column alias")
+  assert_equal(result.value.match_start_line, 2, "match start line")
+  assert_equal(result.value.match_start_col, 1, "match start column")
+  assert_equal(result.value.match_end_line, 2, "match end line")
+  assert_equal(result.value.match_end_col, 7, "match end column")
+end)
+
+test("runtime absent match helpers preserve null empty and origin distinctions", function()
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ I {
+   return({
+     "text" : match_text(),
+     "group" : match_group(0),
+     "groups" : match_groups(),
+     "named" : match_named(name),
+     "has" : match_has(name),
+     "map" : match_map(),
+     "len" : match_len(),
+     "start" : match_start_pos(),
+     "end" : match_end_pos(),
+     "line" : match_line(),
+     "col" : match_col()
+   })
+ }
+]]))),
+    "x"
+  )
+  assert_equal(result.value.text, json.null, "absent match text")
+  assert_equal(result.value.group, json.null, "absent match group")
+  assert_equal(json.kind(result.value.groups), "array", "absent groups type")
+  assert_equal(#result.value.groups, 0, "absent groups empty")
+  assert_equal(result.value.named, json.null, "absent named capture")
+  assert_equal(result.value.has, 0, "absent named presence")
+  assert_equal(json.kind(result.value.map), "harray", "absent map type")
+  assert_equal(result.value.len, json.null, "absent match length")
+  assert_equal(result.value.start, json.null, "absent start")
+  assert_equal(result.value["end"], json.null, "absent end")
+  assert_equal(result.value.line, 1, "absent line origin")
+  assert_equal(result.value.col, 1, "absent column origin")
 end)
 
 io.stdout:write("1..", total, "\n")

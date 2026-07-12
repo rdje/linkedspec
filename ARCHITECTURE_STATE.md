@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.1` adds explicit four-kind runtime identity and copied local
+  stores, checked mixed access/assignment, current-edge `retv`, and the complete entry/match read family. Both Lua
+  ABIs pass 69 tests. A direct portability audit confirms `spec.spec` uses fixed-width negative lookbehind;
+  PCRE2-backed PUC/LuaJIT tests and Dart's real spec.spec corpus path pass, so no current gap is routed.
 - `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.0` splits Lua's admitted 239-name runtime breadth by mechanism:
   core four-kind values/stores/access and entry/match reads, scalar/string, numeric, arrays, harrays,
   codeblocks/controls/callbacks, stateful capture/mark/input/cursor, diagnostic output, and exhaustive no-drift.

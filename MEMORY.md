@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.0` — complete runtime helper breadth is split by mechanism.
-- prior_leaf: `LUA-BACKEND-PARITY.4.2` — compiled rule dispatch and result/control flow pass both runtimes.
-- recent_context: Lua helper execution now has nine ordered owners: four-kind stores/access/entry-match; scalar/
-  string; numeric; array; harray; codeblock/control/callback; capture/mark/input/cursor; diagnostic output; and
-  exhaustive no-drift. The committed `.4.2` 66x2/full-CI proof remains authoritative; no capability changed.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.1` — four-kind stores/access and entry/match reads pass both ABIs.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.0` — complete runtime helper breadth is split by mechanism.
+- recent_context: Lua preserves scalar/array/harray/codeblock values, isolated snapshots/stores, false/null,
+  checked mixed access/assignment, current-edge `retv`, and complete entry/match captures/maps/Unicode positions.
+  Lua 69x2 passes; fixed-width lookbehind is PCRE2-locked on both ABIs and Dart spec.spec fixture passes 1/1.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families`; previous committed HEAD is
-  `c9c9ce87 LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter`.
+  `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`; previous committed HEAD is
+  `ad28d1df LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.1`; four-kind stores/access/entry-match execution is active.
-- next_action: Centralize scalar/array/harray/codeblock/null value identity, local store reads/writes and snapshots,
-  checked direct/nested assignment, and complete entry/match text/group/map/position helpers with focused parity tests.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2`; scalar/string helper execution is active.
+- next_action: Implement definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/
+  replace, regex match/substitution flags, split bridges, lexical comparisons, mutation, and receiver forms.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

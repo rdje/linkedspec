@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.3.1 — make host table intent and absence explicit):
+  Lua tables cannot distinguish array, harray, codeblock, or incidental objects by shape. Route every runtime value
+  through typed identity and copy helpers; use separate scalar/array/harray stores and restore them per rule. Treat
+  DSL array indexes as zero-based, never autovivify missing nested intermediates, and return copied updated roots
+  from assignment expressions. Do not use Lua `and/or` fallback where false is a legitimate value. Capture helpers
+  must distinguish absent match, present zero-width match, empty collections, and the `(1,1)` no-match line/column
+  origin. A regex portability claim must name the actual backend engine: both Lua ABIs use PCRE2, and Dart uses
+  ECMAScript `RegExp`; their real fixed-width lookbehind paths pass even though native Lua patterns do not provide
+  the same dialect. Current Rust uses RGX—the roughly 98% PCRE2-compatible engine—not its historical basic
+  `regex`-crate path.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.3.0 — split by runtime mechanism, not catalog page count):
   A 239-name recognized surface is not an executable surface. Sequence Lua helper work from value/store identity
   into pure scalar and numeric evaluation, then aggregate mechanisms, then codeblock/control callbacks, then

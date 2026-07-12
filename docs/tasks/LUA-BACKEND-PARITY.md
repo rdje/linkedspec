@@ -576,17 +576,47 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   docs, changes/development notes, and bounded memory record the same ordered split.
 
 - ID: `LUA-BACKEND-PARITY.4.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Centralize Lua's four-kind runtime stores, structural access/assignment, snapshots, and entry/match reads.
   Dependencies: `.4.2`
   Acceptance: Scalar/array/harray/codeblock/null/boolean/number values retain typed identity; named and bare store
     reads/writes, append/hash-index/nested assignment without autovivification, copy/array/hash snapshots, and all
     `entry_*` / `match_*` text/group/map/position helpers pass focused cross-backend examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added public four-kind runtime classification and defensive codeblock
+    snapshots; centralized scalar/array/harray stores with competing-slot replacement and per-rule copy/restore;
+    implemented bare/typed snapshots, scalar/append/hash-index assignment, zero-based array and string-key harray
+    reads, checked nested mixed access/assignment with no intermediate autovivification, and current-edge `retv`
+    dispatch. Added all `entry_*` / `match_*` text, compact group, named/presence/map, Unicode length/span, and
+    start/end line/column helpers with absent-match null/empty/origin distinctions. Focused gate passes 69/69 on
+    PUC Lua and LuaJIT; positive/fixed-width negative lookbehind now have permanent dual-ABI proof, and Dart's real
+    `spec_spec_minimal_rule` fixture passes 1/1. Prior source/ActionIR/compiler/matching/dispatch/process/manifest
+    proofs remain green.
+  Commit: `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`
+
+### `LUA-BACKEND-PARITY.4.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.2` could retain a few scalar locals and literal shapes but lacked one four-kind
+  store/access owner, aggregate snapshot isolation, checked nested assignment, codeblock copying, and most governed
+  entry/match reads.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` used truthy fallback and direct table paths around a narrow
+  dispatcher. Lua tables do not identify arrays, harrays, codeblocks, absence, or storage intent without explicit
+  typed routing, and current-edge `retv` had to dispatch its child before reading.
+- [x] **FIX** — Added explicit four-kind classification/copy, scalar/array/harray binding helpers, typed target and
+  access routing, checked copy-on-write mixed paths, named/compact capture projections, Unicode positions, and
+  absent-match contracts; exported `runtime_value_kind(...)`.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 69/69 on both runtimes. New cases prove stored
+  scalar/array/harray/codeblock values, false/null identity, named stores, append/hash/nested mutation, snapshot
+  isolation, failed-path no-autovivification, current-edge `retv`, full entry/match families, Unicode lines/spans,
+  and absent null/empty/origin behavior.
+- [x] **NO REGRESSION** — Existing 66 interpreter tests plus frontend/registry/compiler/matcher/process/manifest/
+  exact-name checks remain green. The director-raised `spec.spec` lookbehind concern is resolved by actual engine/
+  corpus proof rather than host-language assumptions; scalar/string pure helpers and later families remain owners.
+  Full local CI passes phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrines.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, Lua API README, mdBook handoff/status, Knowledge Map, architecture/
+  live docs, changes/development notes, and memory advance to scalar/string `.4.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement scalar/string helpers and compatible receiver chains.
   Dependencies: `.4.3.1`
   Acceptance: Definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/replace,
@@ -815,7 +845,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 12 | `LUA-BACKEND-PARITY.4.1` | `done` | Dual-ABI PCRE2 matching and neutral registers pass 60/60 on both runtimes. |
 | 13 | `LUA-BACKEND-PARITY.4.2` | `done` | First compiled-rule interpreter passes 66/66 on both runtimes. |
 | 14 | `LUA-BACKEND-PARITY.4.3.0` | `done` | Nine implementation/closeout owners cover the full helper surface. |
-| 15 | `LUA-BACKEND-PARITY.4.3.1` | `active` | Implement four-kind stores, access, snapshots, and entry/match reads. |
+| 15 | `LUA-BACKEND-PARITY.4.3.1` | `done` | Four-kind stores/access/capture reads pass 69/69 on both runtimes. |
+| 16 | `LUA-BACKEND-PARITY.4.3.2` | `active` | Implement scalar/string helpers, mutation, and receiver chains. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -869,3 +900,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.1` | `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching` | Disposable dual-ABI PCRE2 adapter, neutral matches/registers, and rule-runtime handoff. |
 | `LUA-BACKEND-PARITY.4.2` | `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, local results/control, and helper-family split handoff. |
 | `LUA-BACKEND-PARITY.4.3.0` | `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families` | Planning-only ordered split into core values, scalar/string, numeric, array, harray, controls/blocks, stateful capture/cursor, diagnostics, and no-drift. |
+| `LUA-BACKEND-PARITY.4.3.1` | `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers` | Four-kind stores/snapshots, checked access/assignment, complete entry/match reads, and scalar/string handoff. |
