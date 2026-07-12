@@ -10,15 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.1` — designed callable codeblock literals and backend rollout.
-- latest_commit: `571de2ab` — `FUTURE-PARITY-BACKLOG.4.4 - close variadic callable routing`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.11.1 - design callable codeblock literals`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.11.2`; adopt neutral callable-codeblock schema and fixtures.
-- next_action: after committing the design handoff, create the machine-readable `{|args| ...}` syntax/AST/runtime
-  contract, deterministic fixture, and independent checker before any backend parser/runtime behavior changes.
-- current_proof: ADR 0031 records director agreement on exact `{|` literals, `{||}` zero params, final `...rest`,
-  `cb(args)`, dynamic caller context, temporary copied params, block-local return, static name precedence, retained
-  `with`, no lexical capture, and deterministic separation from harrays/eager blocks. Behavior is not yet claimed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.2` — adopted neutral callable-codeblock contract and fixture.
+- latest_commit: `f3c3d116` — `FUTURE-PARITY-BACKLOG.11.1 - design callable codeblock literals`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.11.2 - adopt callable codeblock contract`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.11.3.1`; parse/lower typed deferred literals on Perl.
+- next_action: after committing `.11.2`, use the Knowledge Map/toolbox to locate Perl ActionIR brace parsing and
+  value-preservation seams, then add exact `{|...|...}` typed parsing without invocation behavior.
+- current_proof: `linkedspec-callable-codeblock-v1` independently checks 7 literals, 11 calls, 9 malformed
+  literals, 7 invalid calls, 4 contextual forms, exact brace classification/AST fields, and a deterministic future
+  fixture under dynamic caller context. Canonical CI passes 61x2 CLI plus Phase 0 `1..1030`/716s; no backend
+  behavior is claimed yet.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; lexical codeblock
   capture (new decision only if justified); uniform binding and temporary compatibility retirement `.12.1`.
-- blockers: none. in_flight_uncommitted: callable-codeblock design/ADR/task split is documentation-only and being
-  prepared for commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the director-prioritized `.11` arc.
+- blockers: none. in_flight_uncommitted: `.11.2` neutral JSON/checker, CI wiring, and synchronized durable docs are
+  being prepared for commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the prioritized `.11` arc.

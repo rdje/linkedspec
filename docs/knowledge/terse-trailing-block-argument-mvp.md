@@ -35,7 +35,8 @@ future design by [[generic-trailing-codeblock-argument-correction]]. Director cl
 codeblock as the fourth object/value kind and requires attached `call(args) { block }` to be equivalent to
 parenthesized `call(args, { block })` for any callable signature accepting a final codeblock, on every backend.
 ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select `{|args| body }` callable literals, dynamic caller
-context without lexical capture, and retained `with`. Neutral contract `.11.2` is active; behavior has not landed.
+context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and checked; Perl typed
+parsing `.11.3.1` is active, and behavior has not landed.
 
 The MVP is an immediate callback argument, not a closure. Blocks are not assignable,
 not returnable, and not callable later. The first implementation target is helper-function form

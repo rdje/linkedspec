@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.2 — adopt callable codeblock contract
+
+Added strict `linkedspec-callable-codeblock-v1` before backend behavior. The machine-readable contract fixes exact
+brace classification, deferred typed AST fields, ADR 0030 signature reuse, caller-time dynamic context, temporary
+copied/restored parameters, block-local results, static call precedence, typed failures, contextual final blocks,
+and retained `with` semantics. Seven literals, eleven valid calls, nine malformed literals, seven invalid calls,
+and four contextual forms cover the boundary.
+
+An independent Python checker parses/classifies the syntax, evaluates the neutral dynamic-store model without host
+closure objects, validates every diagnostic, and reproduces the deterministic future `.spec` source and expected
+result. It is a required tracked input in canonical local CI. The capability remains future-owned by active Perl
+typed-literal leaf `.11.3.1`; no parser/runtime behavior changed in this slice. The full local gate passes both
+61/61 Perl CLI environments and Phase 0 `1..1030` in 716 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.1 — design callable codeblock literals
 
 Adopted ADR 0031 after director agreement. A callable codeblock literal is `{|params| body }`, with `{|| body }`

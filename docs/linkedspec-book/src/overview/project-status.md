@@ -66,7 +66,8 @@ Three backbone items tracked major structural modernization — all done:
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The
   exact `{|` prefix distinguishes them from `{}`/`{ key : value }` harrays and eager `{ statements }` block
   expressions. `with` remains an ordinary block-taking helper. Current implementations still support only their
-  named immediate block surfaces; neutral schema/fixtures `.11.2` are active before backend behavior changes.
+  named immediate block surfaces. Neutral schema/fixtures `.11.2` are now adopted and checked; Perl typed parsing
+  `.11.3.1` is active before invocation and cross-backend behavior changes.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

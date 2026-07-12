@@ -13,8 +13,8 @@ answers:
 date: 2026-07-12
 status: accepted-design
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; FUTURE-PARITY-BACKLOG.11.1 and ADR 0031 define syntax, scope, invocation, disambiguation, resolution, and backend rollout before behavior code."
-reverify: "rg -n '0031|callable codeblock|\\{\\|params|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; FUTURE-PARITY-BACKLOG.11.1 and ADR 0031 define the design, while completed .11.2 adopts linkedspec-callable-codeblock-v1 and its independent parser/invocation/fixture checker before behavior code."
+reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|callable codeblock|\\{\\|params|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The accepted callable codeblock literal is:
@@ -44,8 +44,9 @@ Bound non-codeblocks diagnose as not callable; recursion is initially rejected. 
 and generic attached/contextual final blocks normalize under callable signatures rather than name-gated parsing.
 Lexical capture is explicitly deferred behind a new decision if a real need appears.
 
-This is accepted design, not implemented behavior. Neutral executable contract `.11.2` is active before backend
-changes.
+This is accepted design, not implemented behavior. `linkedspec-callable-codeblock-v1` now machine-locks seven
+literals, eleven valid calls, sixteen invalid syntax/call cases, contextual final-block normalization, and one
+deterministic future fixture. Perl typed-literal parsing `.11.3.1` is active before invocation/backend changes.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]].

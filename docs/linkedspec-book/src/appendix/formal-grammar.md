@@ -149,8 +149,9 @@ result = cb("a", "b")
 The `{|` opener is exact. A final `...rest` is allowed. `{}` and `{ key : value }` remain harrays; nonempty
 `{ statements }` remains an immediately evaluated block expression. Literal construction captures no environment.
 `cb(args)` executes later in dynamic caller context with temporary copied parameter/rest bindings and block-local
-return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` and backend rollout leaves
-must land before this grammar is current portable behavior.
+return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` now locks this grammar, AST
+schema, diagnostics, and a future fixture; active Perl parsing `.11.3.1` and later runtime/backend leaves must land
+before this grammar is current portable behavior.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

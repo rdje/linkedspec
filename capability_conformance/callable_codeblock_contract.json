@@ -1,0 +1,174 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-callable-codeblock-v1",
+  "policy": {
+    "construction": "{|params| body } constructs deferred typed codeblock data and does not execute body",
+    "invocation": "a bound codeblock variable is invoked as cb(args) with positional once-only left-to-right evaluation",
+    "context": "nonparameter reads and mutations use caller stores at invocation time; construction captures no environment",
+    "parameters": "fixed and final-rest values are recursively copied into temporary bindings and prior same-name bindings are restored",
+    "results": "return is block-local; otherwise the final expression yields; results may chain or be discarded",
+    "resolution": "governed helpers controls and registered user functions precede same-named codeblock variables",
+    "failures": "keyword calls non-callable values unknown names arity mismatches and recursion diagnose without host fallback",
+    "trailing_blocks": "callable signatures govern attached and contextual final-codeblock normalization; with remains an ordinary helper",
+    "closures": "lexical capture by reference or snapshot is excluded from version 1"
+  },
+  "syntax": {
+    "opener": "{|",
+    "opener_whitespace": false,
+    "signature_closer": "|",
+    "literal_closer": "}",
+    "zero_parameter_form": "{|| body }",
+    "parameter_separator": ",",
+    "rest_form": "...IDENTIFIER",
+    "rest_position": "final"
+  },
+  "brace_classification": [
+    {"id": "empty_harray", "source": "{}", "expected_kind": "harray_literal"},
+    {"id": "keyed_harray", "source": "{ \"kind\" : value }", "expected_kind": "harray_literal"},
+    {"id": "dynamic_key_harray", "source": "{ key : value }", "expected_kind": "harray_literal"},
+    {"id": "immediate_block", "source": "{ state = \"now\"; state }", "expected_kind": "block_value"},
+    {"id": "zero_arg_codeblock", "source": "{|| return(state) }", "expected_kind": "codeblock_literal"},
+    {"id": "fixed_codeblock", "source": "{|left, right| return(cat(left, right)) }", "expected_kind": "codeblock_literal"},
+    {"id": "rest_codeblock", "source": "{|prefix, ...items| return(items) }", "expected_kind": "codeblock_literal"}
+  ],
+  "ast_schema": {
+    "kind": "codeblock_literal",
+    "version": 1,
+    "fields": [
+      "kind",
+      "version",
+      "signature",
+      "body_source",
+      "body_ast",
+      "source_text",
+      "source_span",
+      "body_span"
+    ],
+    "signature_contract": "capability_conformance/callable_signature_contract.json:signature_schema",
+    "captured_environment_field": null
+  },
+  "resolution_precedence": [
+    "control",
+    "helper",
+    "registered_user_function",
+    "bound_codeblock_variable",
+    "bound_non_codeblock_diagnostic",
+    "unknown_call_diagnostic"
+  ],
+  "literals": [
+    {
+      "id": "join_fixed",
+      "variable": "joiner",
+      "signature_source": "left, right",
+      "source": "{|left, right| return(cat(left, right)) }",
+      "body_source": " return(cat(left, right)) ",
+      "behavior": "join_fixed"
+    },
+    {
+      "id": "read_dynamic",
+      "variable": "reader",
+      "signature_source": "",
+      "source": "{|| return(state) }",
+      "body_source": " return(state) ",
+      "behavior": "read_dynamic"
+    },
+    {
+      "id": "mutate_dynamic",
+      "variable": "append_state",
+      "signature_source": "value",
+      "source": "{|value| state = cat(state, value); return(state) }",
+      "body_source": " state = cat(state, value); return(state) ",
+      "behavior": "mutate_dynamic"
+    },
+    {
+      "id": "restore_parameter",
+      "variable": "decorate",
+      "signature_source": "value",
+      "source": "{|value| value = cat(value, \"!\"); return(value) }",
+      "body_source": " value = cat(value, \"!\"); return(value) ",
+      "behavior": "restore_parameter"
+    },
+    {
+      "id": "collect_rest",
+      "variable": "collector",
+      "signature_source": "prefix, ...items",
+      "source": "{|prefix, ...items| return({ \"prefix\" : prefix, \"items\" : items }) }",
+      "body_source": " return({ \"prefix\" : prefix, \"items\" : items }) ",
+      "behavior": "collect_rest"
+    },
+    {
+      "id": "early_return",
+      "variable": "stop_early",
+      "signature_source": "",
+      "source": "{|| return(\"done\"); state = \"wrong\" }",
+      "body_source": " return(\"done\"); state = \"wrong\" ",
+      "behavior": "early_return"
+    },
+    {
+      "id": "shadow_static",
+      "variable": "cat",
+      "signature_source": "left, right",
+      "source": "{|left, right| return(\"shadow\") }",
+      "body_source": " return(\"shadow\") ",
+      "behavior": "shadow_static"
+    }
+  ],
+  "call_cases": [
+    {"id": "construction_is_deferred", "literal": "mutate_dynamic", "initial_state": {"state": "before"}, "operation": "construct", "expected": {"state": "before"}},
+    {"id": "fixed_exact", "literal": "join_fixed", "initial_state": {}, "arguments": [{"kind": "positional", "value": "a"}, {"kind": "positional", "value": "b"}], "expected": {"result": "ab", "state": {}}},
+    {"id": "dynamic_read_uses_call_time_state", "literal": "read_dynamic", "construction_state": {"state": "initial"}, "initial_state": {"state": "later"}, "arguments": [], "expected": {"result": "later", "state": {"state": "later"}}},
+    {"id": "nonparameter_mutation_persists", "literal": "mutate_dynamic", "initial_state": {"state": ""}, "calls": [[{"kind": "positional", "value": "a"}], [{"kind": "positional", "value": "b"}]], "expected": {"results": ["a", "ab"], "state": {"state": "ab"}}},
+    {"id": "parameter_binding_restores", "literal": "restore_parameter", "initial_state": {"value": "outer"}, "arguments": [{"kind": "positional", "value": "inner"}], "expected": {"result": "inner!", "state": {"value": "outer"}}},
+    {"id": "rest_empty", "literal": "collect_rest", "initial_state": {}, "arguments": [{"kind": "positional", "value": "p"}], "expected": {"result": {"prefix": "p", "items": []}, "state": {}}},
+    {"id": "rest_mixed", "literal": "collect_rest", "initial_state": {}, "arguments": [{"kind": "positional", "value": "p"}, {"kind": "positional", "value": 1}, {"kind": "positional", "value": [2]}, {"kind": "positional", "value": {"k": 3}}, {"kind": "positional", "value": false}, {"kind": "positional", "value": null}], "expected": {"result": {"prefix": "p", "items": [1, [2], {"k": 3}, false, null]}, "state": {}}},
+    {"id": "rest_result_receiver_chain", "literal": "collect_rest", "initial_state": {}, "arguments": [{"kind": "positional", "value": "p"}, {"kind": "positional", "value": "a"}, {"kind": "positional", "value": "b"}], "result_chain": "items.length", "expected": {"result": 2, "state": {}}},
+    {"id": "block_local_return", "literal": "early_return", "initial_state": {"state": "right"}, "arguments": [], "expected": {"result": "done", "state": {"state": "right"}}},
+    {"id": "standalone_discard_keeps_effects", "literal": "mutate_dynamic", "initial_state": {"state": ""}, "arguments": [{"kind": "positional", "value": "x"}], "discard_result": true, "expected": {"result": null, "state": {"state": "x"}}},
+    {"id": "static_name_precedence", "literal": "shadow_static", "initial_state": {}, "callee": "cat", "arguments": [{"kind": "positional", "value": "a"}, {"kind": "positional", "value": "b"}], "expected": {"result": "ab", "state": {}}}
+  ],
+  "invalid_literal_cases": [
+    {"id": "whitespace_after_brace", "source": "{ |value| return(value) }", "expected_code": "invalid_codeblock_opener"},
+    {"id": "missing_signature_closer", "source": "{|value return(value) }", "expected_code": "missing_codeblock_signature_closer"},
+    {"id": "empty_parameter", "source": "{|left, , right| return(left) }", "expected_code": "invalid_parameter"},
+    {"id": "invalid_parameter", "source": "{|1value| return(1) }", "expected_code": "invalid_parameter"},
+    {"id": "rest_not_final", "source": "{|...items, tail| return(items) }", "expected_code": "rest_parameter_must_be_final"},
+    {"id": "missing_rest_name", "source": "{|...| return(undef) }", "expected_code": "invalid_rest_parameter"},
+    {"id": "rest_marker_name_whitespace", "source": "{|... items| return(items) }", "expected_code": "invalid_rest_parameter"},
+    {"id": "duplicate_parameter", "source": "{|item, ...item| return(item) }", "expected_code": "duplicate_parameter"},
+    {"id": "reserved_parameter", "source": "{|return| return(undef) }", "expected_code": "reserved_parameter"}
+  ],
+  "invalid_call_cases": [
+    {"id": "fixed_missing", "literal": "join_fixed", "arguments": [{"kind": "positional", "value": "a"}], "expected_error": {"code": "codeblock_arity_mismatch", "expected": "exactly 2", "got": 1}},
+    {"id": "fixed_extra", "literal": "join_fixed", "arguments": [{"kind": "positional", "value": "a"}, {"kind": "positional", "value": "b"}, {"kind": "positional", "value": "c"}], "expected_error": {"code": "codeblock_arity_mismatch", "expected": "exactly 2", "got": 3}},
+    {"id": "rest_missing_fixed", "literal": "collect_rest", "arguments": [], "expected_error": {"code": "codeblock_arity_mismatch", "expected": "at least 1", "got": 0}},
+    {"id": "keyword_argument", "literal": "restore_parameter", "arguments": [{"kind": "keyword", "name": "value", "value": "x"}], "expected_error": {"code": "codeblock_keyword_arguments_unsupported", "expected": "positional arguments", "got": 1}},
+    {"id": "bound_non_codeblock", "binding": "text", "value": "not callable", "arguments": [], "expected_error": {"code": "value_not_callable", "value_kind": "scalar"}},
+    {"id": "unknown_call", "binding": "missing", "arguments": [], "expected_error": {"code": "unknown_helper", "name": "missing"}},
+    {"id": "direct_recursion", "literal": "read_dynamic", "active_codeblocks": ["reader"], "arguments": [], "expected_error": {"code": "codeblock_recursion_unsupported", "cycle": ["reader", "reader"]}}
+  ],
+  "contextual_final_block_cases": [
+    {"id": "attached", "source": "with(\"x\") { return(value) }", "canonical_kind": "call", "final_argument_kind": "codeblock_argument", "parameter_source": "callable_contract"},
+    {"id": "parenthesized", "source": "with(\"x\", { return(value) })", "canonical_kind": "call", "final_argument_kind": "codeblock_argument", "parameter_source": "callable_contract"},
+    {"id": "explicit_literal", "source": "with(\"x\", {|value| return(value) })", "canonical_kind": "call", "final_argument_kind": "codeblock_literal", "parameter_source": "literal"},
+    {"id": "harray_not_promoted", "source": "with(\"x\", { \"value\" : value })", "expected_error": "final_argument_not_codeblock"}
+  ],
+  "fixture": {
+    "literal_ids": ["join_fixed", "read_dynamic", "mutate_dynamic", "restore_parameter", "collect_rest", "early_return"],
+    "result_case_ids": ["construction_is_deferred", "fixed_exact", "dynamic_read_uses_call_time_state", "nonparameter_mutation_persists", "parameter_binding_restores", "rest_empty", "rest_mixed", "rest_result_receiver_chain", "block_local_return"],
+    "input": "xx",
+    "spec_source": "Top::\n /x/ -> Done {\n   state = \"initial\";\n   joiner = {|left, right| return(cat(left, right)) };\n   reader = {|| return(state) };\n   append_state = {|value| state = cat(state, value); return(state) };\n   decorate = {|value| value = cat(value, \"!\"); return(value) };\n   collector = {|prefix, ...items| return({ \"prefix\" : prefix, \"items\" : items }) };\n   stop_early = {|| return(\"done\"); state = \"wrong\" };\n   construction_state = state;\n   state = \"later\";\n   dynamic_read = reader();\n   state = \"\";\n   mutation_first = append_state(\"a\");\n   mutation_second = append_state(\"b\");\n   value = \"outer\";\n   decorated = decorate(\"inner\");\n   return({\n     \"construction_is_deferred\" : construction_state,\n     \"fixed_exact\" : joiner(\"a\", \"b\"),\n     \"dynamic_read_uses_call_time_state\" : dynamic_read,\n     \"nonparameter_mutation_results\" : [mutation_first, mutation_second],\n     \"nonparameter_mutation_state\" : state,\n     \"parameter_binding_result\" : decorated,\n     \"parameter_binding_restored\" : value,\n     \"rest_empty\" : collector(\"p\"),\n     \"rest_mixed\" : collector(\"p\", 1, [2], { \"k\" : 3 }, false, undef),\n     \"rest_result_receiver_chain\" : collector(\"p\", \"a\", \"b\")[\"items\"].length(),\n     \"block_local_return\" : stop_early()\n   })\n }\n\nDone::\n /x/\n",
+    "expected": {
+      "construction_is_deferred": "initial",
+      "fixed_exact": "ab",
+      "dynamic_read_uses_call_time_state": "later",
+      "nonparameter_mutation_results": ["a", "ab"],
+      "nonparameter_mutation_state": "ab",
+      "parameter_binding_result": "inner!",
+      "parameter_binding_restored": "outer",
+      "rest_empty": {"prefix": "p", "items": []},
+      "rest_mixed": {"prefix": "p", "items": [1, [2], {"k": 3}, false, null]},
+      "rest_result_receiver_chain": 2,
+      "block_local_return": "done"
+    }
+  }
+}

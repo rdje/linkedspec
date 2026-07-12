@@ -28,7 +28,8 @@ This `README.md` is the **single entry point** to the project.
   accepts a final codeblock, the language direction is one canonical call behind equivalent
   `call(args) { block }` and contextual final-block spellings. ADR `0031` adopts callable literals as
   `{|args| block }`, invoked by `cb(args)`, with dynamic caller context and no lexical capture in version 1.
-  This is accepted design under active neutral-contract leaf `FUTURE-PARITY-BACKLOG.11.2`, not current behavior.
+  `linkedspec-callable-codeblock-v1` now locks that accepted design; Perl typed-literal leaf
+  `FUTURE-PARITY-BACKLOG.11.3.1` is active. This is still not current behavior.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -232,6 +233,10 @@ Top-level project docs:
   Dart consumes it through `dart test test/variadic_user_function_contract_test.dart`; Julia consumes it through
   the 55 assertions in `julia/test/variadic_user_function_contract_test.jl`. Lua native parity is routed to
   `LUA-BACKEND-PARITY.5.1`, descriptor admission to `.5.3`, and generated preservation/execution to `.8.1-.4`.
+- Run `python3 tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock
+  contract: exact `{|fixed, ...rest| body }` parsing, harray/eager-block disambiguation, deferred typed AST data,
+  dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
+  deterministic fixture source/results. Backend behavior remains future under active Perl leaf `.11.3.1`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

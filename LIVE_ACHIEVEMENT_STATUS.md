@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.2 — adopt callable codeblock contract**
+  (DONE — Perl typed-literal parsing `.11.3.1` next).
+
+  **Contract:** Strict JSON fixes exact brace classification, typed deferred AST data, signature reuse, dynamic
+  caller context, temporary copied/restored params, results, precedence, diagnostics, and contextual final blocks.
+
+  **Proof:** The independent checker passes 7 literals, 11 calls, 9 malformed literals, 7 invalid calls, 4
+  contextual cases, and exact future fixture source/results. Canonical CI owns the checker and passes 61x2 CLI plus
+  Phase 0 `1..1030` in 716 seconds; no behavior is admitted.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.1 — design callable codeblock literals**
   (DONE — neutral contract `.11.2` next).
 

@@ -44,6 +44,15 @@ bindings, diagnostics, and deterministically rendered future `.spec` fixture wit
 source/result/record contract through native and generated execution. Lua remains explicitly future under
 `LUA-BACKEND-PARITY.5.1`, with descriptor admission in `.5.3` and generated preservation/execution in `.8`.
 
+`callable_codeblock_contract.json` adopts the future first-class callable-codeblock boundary without claiming
+backend support early. Exact `{|fixed, ...rest| body }` syntax constructs deferred typed codeblock data; `cb(args)`
+uses caller-time stores, temporary copied parameter bindings, block-local return, and static callable precedence.
+Ordinary `{ statements }` remains an eager block value, while empty and top-level-colon brace forms remain harray
+literals. The contract also fixes diagnostics, contextual final-block normalization, and a deterministic future
+`.spec` fixture. Validate the schema, parser/classifier model, neutral invocation model, and fixture offline with
+`python3 tools/check_callable_codeblock_contract.py`. Backend admission remains future until the owned rollout
+leaves supply native and generated execution evidence.
+
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
 execute roles, the ten structural families, plan rejection, stable generated-source errors, one direct behavior

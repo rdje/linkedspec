@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.2 — model scope explicitly before choosing host machinery):
+  Keep the neutral codeblock record as signature/body/source/spans with no captured environment field. Verify
+  dynamic caller reads, persistent nonparameter mutation, temporary parameter restoration, block-local return,
+  recursion fences, and static name precedence in a small independent evaluator before any backend can encode a
+  host closure shortcut. Classify exact `{|` first; keep harray and eager-block classification separately locked.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.1 — distinguish deferred callable data at the first brace token):
   Parse exact `{|` before the existing harray/eager-block classifier; do not infer callable intent from colons,
   statements, assignment target, or host closure types. Store typed signature/body/source only. At `cb(args)`,

@@ -48,8 +48,8 @@ and all-variant support cannot be claimed while Lua is absent. `FUTURE-PARITY-BA
 close the corrective design: explicit callable literals use `{|params| body }`, execute later through `cb(args)`,
 and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
 sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
-a parser exception. Neutral contract `.11.2` precedes the split backend rollout; no implementation is claimed by
-the design decision alone.
+a parser exception. Neutral contract `.11.2` now precedes the split backend rollout as an adopted executable
+schema/fixture; active Perl parser leaf `.11.3.1` is the first behavior owner, so no implementation is claimed yet.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],

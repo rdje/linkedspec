@@ -129,8 +129,8 @@ dispatch rule.
 > model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
 > codeblock parameter, after which attached/contextual final-block forms normalize to the same call on helper,
 > user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
-> dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is active; do not
-> infer that future equivalence from current behavior.
+> dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
+> checked, with Perl typed parsing `.11.3.1` active; do not infer future equivalence from current behavior.
 
 ## 1. Working Variables and Setup
 
