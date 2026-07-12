@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.0 — canonical names are not runtime semantics):
+  The Lua frontend already maps numeric words and symbols onto `num_*`, but the evaluator still needs an explicit
+  finite-decimal boundary, invalid arithmetic fences, receiver injection, comparison terminal handling, and typed
+  aggregate reducers. Keep scalar number composition separate from array-consuming terminals so later array helper
+  breadth does not become an accidental dependency. Route full shipped proof to phase 6, not the focused family.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.5.1 — scan executable-looking historical prose):
   A retired helper can survive no-drift as positive roadmap history or a catalog heading even when code/spec scans
   are clean. Current public references should lead with the canonical name; historical names remain plain

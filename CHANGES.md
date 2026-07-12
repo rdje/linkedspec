@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.0 — split Lua numeric helper mechanisms
+
+Audited the governed numeric catalog against Perl/Rust/Dart/Julia implementations and the Lua ActionIR/runtime
+seams. Lua already canonicalizes word aliases and symbol callees, but runtime numeric values, receiver injection,
+aggregate reducers, and terminal policies remain unimplemented.
+
+Split the broad parent into strict scalar evaluation `.1`, alias/symbol/number receivers `.2`, aggregate reducers
+and array terminals `.3`, and focused public no-drift `.4`. Added a Knowledge Map preflight card and advanced the
+sole executable frontier to `.4.3.3.1`; no runtime or public capability behavior changed. The full Lua local gate
+passes 76/76 on both PUC Lua and LuaJIT.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.5.1 — close Lua string helper parity
 
 Closed focused scalar/string, helper-regex, split, and scalar/array mutation parity at 76/76 on PUC Lua and LuaJIT.

@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.0 — split Lua numeric helper mechanisms**
+  (DONE — strict scalar numeric evaluation `.4.3.3.1` next).
+
+  **Finding:** Lua already canonicalizes numeric word aliases and symbol callees, but runtime scalar evaluation,
+  receiver injection/terminal handling, and aggregate reducers are distinct missing seams.
+
+  **Plan:** `.1` scalar values/fences; `.2` aliases/symbols/number receivers; `.3` reducers/array terminals; `.4`
+  focused dual-ABI/public no-drift. No runtime behavior changed; the prior 76/76 proof remains authoritative.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.5.1 — close Lua string helper parity**
   (DONE — numeric helpers `.4.3.3` next).
 

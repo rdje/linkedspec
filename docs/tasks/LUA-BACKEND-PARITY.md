@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (deterministic non-case scalar/string helpers `.4.3.2.1.1` complete)
+- Last updated: `2026-07-12` (numeric helper surface split under `.4.3.3.0`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -914,9 +914,59 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.3`
   Status: `active`
   Goal: Implement numeric helpers, aliases, symbol callees, reducers, and number receiver chains.
+  Children: `.4.3.3.0`, `.4.3.3.1`, `.4.3.3.2`, `.4.3.3.3`, `.4.3.3.4`
   Dependencies: `.4.3.1`
   Acceptance: Arithmetic/unary/clamp/comparison/range and aggregate min/max/sum/avg/median behavior, invalid-input
     null propagation, division/modulo fences, word aliases, symbol callees, and receiver forms match the oracle.
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.0`
+  Status: `done`
+  Goal: Audit the neutral numeric contract and split implementation by runtime mechanism before code.
+  Verification: **PASS 2026-07-12.** Knowledge Map cards, the public helper catalog, Perl/Rust/Dart/Julia runtime
+    seams and focused tests, Lua ActionIR contracts, and the current Lua evaluator were inspected. Canonical alias
+    and symbol resolution already exists in `action_contracts.lua`; Lua still lacks numeric value dispatch,
+    receiver injection/terminal handling, and aggregate reducer execution. Scalar evaluation, receiver admission,
+    reducers, and closeout are independently verifiable and now have separate children. The full Lua local gate
+    passes 76/76 on both PUC Lua and LuaJIT after the planning-only split.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.1`
+  Status: `pending`
+  Goal: Implement strict scalar numeric helper evaluation.
+  Dependencies: `.4.3.3.0`
+  Acceptance: Canonical unary, variadic arithmetic, integer modulo, clamp, scalar min/max, and comparisons accept
+    only portable finite decimal values; invalid/missing/aggregate/boolean inputs, zero divisors, non-integer
+    modulo operands, inverted bounds, and non-finite results return null identically on PUC Lua and LuaJIT.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.2`
+  Status: `pending`
+  Goal: Admit numeric word aliases, symbol callees, and number receiver chains through the scalar evaluator.
+  Dependencies: `.4.3.3.1`
+  Acceptance: All governed word/symbol spellings canonicalize to the same evaluator; integer/float/bare-scalar
+    receivers inject exactly one first argument; number-returning links compose; comparison links return numeric
+    truth values and terminate later receiver continuation on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.3`
+  Status: `pending`
+  Goal: Implement aggregate numeric reducers and array receiver terminals.
+  Dependencies: `.4.3.3.1`, `.4.3.3.2`
+  Acceptance: `num_sum`/`avg`/`median`/`range` and one-array `min`/`max` preserve typed arrays, reject any
+    non-numeric element, implement the governed empty-array results, leave source values unchanged, and execute
+    equivalent explicit-array, bare-array, and terminal receiver forms on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3.4`
+  Status: `pending`
+  Goal: Close focused numeric helper and public-surface no-drift.
+  Dependencies: `.4.3.3.1`, `.4.3.3.2`, `.4.3.3.3`
+  Acceptance: Focused canonical/alias/symbol/receiver/reducer/invalid-boundary proof passes the full dual-ABI gate;
+    Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, and runtime status agree before
+    array helpers `.4.3.4`; exact shipped-corpus proof remains owned by dependency-complete phase 6.
   Verification: `pending`
   Commit: `pending`
 
@@ -1151,10 +1201,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 30 | `LUA-BACKEND-PARITY.4.3.2.2.2` | `done` | Pure literal/regex/Unicode split passes 74/74 on both ABIs. |
 | 31 | `LUA-BACKEND-PARITY.4.3.2.2.3` | `done` | Scalar regex mutation and capture expansion pass 75/75 on both ABIs. |
 | 32 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `done` | Explicit array-target split replacement passes 76/76 on both ABIs. |
-| 33 | `LUA-BACKEND-PARITY.4.3.2.2.5` | `active` | Close focused mechanism/public no-drift; shipped proof belongs to phase 6. |
+| 33 | `LUA-BACKEND-PARITY.4.3.2.2.5` | `done` | Focused mechanism/public no-drift closed; shipped proof belongs to phase 6. |
 | 34 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `done` | Route premature shipped cases to their dependency-complete phase-6 owner. |
 | 35 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `done` | Focused string mechanisms/public surfaces close at 76/76. |
-| 36 | `LUA-BACKEND-PARITY.4.3.3` | `active` | Implement numeric helpers, aliases, reducers, and receiver chains. |
+| 36 | `LUA-BACKEND-PARITY.4.3.3.0` | `done` | Audit and split scalar evaluation, receiver/alias admission, reducers, and closeout. |
+| 37 | `LUA-BACKEND-PARITY.4.3.3.1` | `pending` | Implement strict scalar numeric helper evaluation and invalid-result fences. |
+
+### `LUA-BACKEND-PARITY.4.3.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua contracts already canonicalize numeric names, but runtime calls still reach the
+  generic unsupported-helper boundary and receiver chains do not inject numeric or array receiver values.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` has only string-specific pure dispatch. Scalar numeric
+  coercion/fences, terminal comparison handling, and aggregate reducers cross different evaluator/type seams.
+- [x] **FIX** — Split `.4.3.3` into scalar evaluation `.1`, alias/symbol/number-receiver admission `.2`, aggregate
+  reducers/array terminals `.3`, and focused public no-drift `.4` before touching runtime code.
+- [x] **ADDRESSED (verified)** — Public catalog plus Perl/Rust/Dart/Julia implementations/tests define exact
+  unary/arithmetic/comparison/reducer/receiver behavior; Lua parser/contracts already preserve every call shape.
+- [x] **NO REGRESSION** — Planning/KM/docs only; the full Lua local gate passes 76/76 on PUC Lua and LuaJIT.
+- [x] **LOCKSTEP** — Task/index/roadmaps, Knowledge Map, changes/notes/live status, and memory identify `.1` as the
+  sole executable numeric frontier; no premature runtime or mdBook capability claim is made.
 
 ### `LUA-BACKEND-PARITY.4.3.2.2.5.1` Acceptance Checklist
 
@@ -1443,3 +1508,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.2.2.4` | `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation` | Explicit aggregate replacement through pure split semantics, store-boundary proof, and no-drift handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.5.0` | `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof` | Direct blocker inventory, phase-6 shipped-case routing, and focused no-drift handoff. |
 | `LUA-BACKEND-PARITY.4.3.2.2.5.1` | `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity` | Dual-ABI 76/76, canonical `cat` public surfaces, parent closure, and numeric handoff. |
+| `LUA-BACKEND-PARITY.4.3.3.0` | `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms` | Read-only contract/runtime audit and four mechanism-sized implementation/closeout owners. |
