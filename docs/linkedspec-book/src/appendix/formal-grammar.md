@@ -136,23 +136,28 @@ collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 
 ### Callable-codeblock literal (current on Perl; future cross-backend)
 
-ADR 0031 adopts this unimplemented next syntax:
+ADR 0031 adopts callable literals; ADR 0032 adds a final contextual-codeblock parameter declaration:
 
 ```text
 codeblock_literal := "{|" callable_parameters? "|" action_statements "}"
+codeblock_parameter := IDENTIFIER ":" "codeblock"  # final parameter only
 
 cb = {|left, right| return(cat(left, right)) }
 empty = {|| return("ok") }
 result = cb("a", "b")
+fn apply(value, callback: codeblock) { return(callback()) }
 ```
 
 The `{|` opener is exact. A final `...rest` is allowed. `{}` and `{ key : value }` remain harrays; nonempty
 `{ statements }` remains an immediately evaluated block expression. Literal construction captures no environment.
 `cb(args)` executes later in dynamic caller context with temporary copied parameter/rest bindings and block-local
-return. Lexical closure capture is excluded from version 1. Neutral contract `.11.2` locks this grammar, AST schema,
+return. `callback: codeblock` declares only the value kind; explicit literals own their `{|params| ...}` signature,
+and a contextual `{ ... }` argument takes zero positional args while reading dynamic context. Lexical closure
+capture is excluded from version 1. Neutral contract `.11.2` locks this grammar, AST schema,
 diagnostics, and fixture. Perl `.11.3.1` preserves the eight-field typed record through generated source and
 `.11.3.2` executes bound variable calls with the specified dynamic context, restoration, result, and failure
-semantics. Generic final-block syntax and non-Perl backends remain future, so this grammar is not yet universally
+semantics. ADR 0032 declaration `.11.3.3.1` is adopted; generic normalization `.11.3.3.2` and non-Perl backends
+remain future, so this grammar is not yet universally
 portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,

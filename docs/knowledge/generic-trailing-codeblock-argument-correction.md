@@ -50,8 +50,9 @@ and use dynamic caller context without lexical capture. Attached/contextual fina
 sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
 a parser exception. Neutral contract `.11.2` precedes the split backend rollout as an adopted executable
 schema/fixture. Perl `.11.3.1` preserves typed literal records and `.11.3.2` invokes them dynamically. Audit
-`.11.3.3.0` proves the parser payload shape is compatible but no helper/user-function/receiver signature declares
-final contextual codeblock acceptance or its callback params. Design `.11.3.3.1` precedes behavior `.11.3.3.2`.
+`.11.3.3.0` proves the parser payload shape is compatible but the declaration was missing. ADR 0032 and
+`.11.3.3.1` now adopt final-only `name: codeblock`; it has no nested argument list because explicit codeblock
+values own their `{|params| ...}` signatures. Perl behavior `.11.3.3.2` is active.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],

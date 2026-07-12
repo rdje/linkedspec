@@ -10,16 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.3.3.0` — audited and split missing final-codeblock declaration.
-- latest_commit: `b2e998e9` — `FUTURE-PARITY-BACKLOG.11.3.2 - execute Perl callable codeblocks`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.11.3.3.0 - split final codeblock signature declaration`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.11.3.3.1`; define the contextual final-codeblock declaration/schema.
-- next_action: obtain the director's choice for source/schema declaration of a final contextual codeblock parameter
-  and its callback fixed/rest params; then update ADR 0031 and the neutral contract before Perl behavior `.2`.
-- current_proof: attached and parenthesized forms already carry equivalent final `block_value` payloads, but only
-  attached syntax is flagged. User functions expose names/arity/rest only, helper contracts are lowering-local,
-  and receiver parsing is name-gated; no schema declares contextual acceptance or callback params. Read-only
-  toolbox/ActionIR/descriptor/source probes establish the gap; `.11.3.2` canonical CI remains authoritative.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.3.3.1` — adopted final-only `name: codeblock` declaration.
+- latest_commit: `edf1b953` — `FUTURE-PARITY-BACKLOG.11.3.3.0 - split final codeblock signature declaration`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.11.3.3.1 - declare final codeblock parameters`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.11.3.3.2`; implement Perl contextual final-block normalization.
+- next_action: after committing `.1`, extend function/helper/receiver callable metadata and normalize attached plus
+  parenthesized contextual blocks through final `codeblock` kind rather than parser name checks.
+- current_proof: ADR 0032 selects final-only `name: codeblock`, no nested argument list, value-owned explicit
+  `{|params| ...}` signatures, and zero-positional contextual blocks with dynamic context. The strict checker passes
+  7 literals, 11 calls, 9 invalid literals, 7 invalid calls, 4 invalid declarations, and 8 contextual forms.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; lexical codeblock
   capture (new decision only if justified); uniform binding and temporary compatibility retirement `.12.1`.
-- blockers: director decision required by `.11.3.3.1`; in_flight_uncommitted: `.11.3.3.0` read-only audit/split and
-  synchronized durable docs await commit. Lua scalar numeric `.4.3.3.1.4` remains ready after prioritized `.11`.
+- blockers: none. in_flight_uncommitted: `.11.3.3.1` ADR/contract/checker/docs are prepared for verification and
+  commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the prioritized `.11` arc.

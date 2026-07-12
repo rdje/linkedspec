@@ -34,8 +34,8 @@ bound non-codeblock values, active recursion, and unsupported body calls. The ex
 places that object in `runtime_ctx_ref->{last_error}{detail}`. Static helpers and registered user functions retain
 precedence over same-named codeblock bindings.
 
-This fact is Perl-specific. Generic attached/contextual final-block normalization is split: declaration design
-`.11.3.3.1` precedes Perl behavior `.11.3.3.2`, followed by
+This fact is Perl-specific. ADR 0032 declaration `.11.3.3.1` is complete; generic attached/contextual final-block
+behavior `.11.3.3.2` is active, followed by
 Perl closeout and Rust/Dart/Julia parity.
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],

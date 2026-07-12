@@ -61,6 +61,8 @@ closure capture, captured snapshots, or execution against the caller's current c
    contextual parenthesized final-block spelling normalize to the same canonical codeblock-argument node when the
    callable contract accepts it. An explicit `{|params| body }` can also be passed as a value. Harray literals are
    never promoted to codeblocks. `with` remains an ordinary block-taking helper rather than a parser exception.
+   ADR 0032 later supplies the missing declaration: a final `name: codeblock` parameter, with no nested argument
+   list; the supplied codeblock value owns its own `{|params| ...}` signature.
 9. Lexical closure capture is not part of version 1. Adding capture-by-reference or capture-by-snapshot semantics
    requires a new decision, task-tree owner, neutral fixtures, and every-backend parity proof.
 
@@ -84,4 +86,5 @@ closure capture, captured snapshots, or execution against the caller's current c
 - Prior variadic signature: ADR `0030`
 - Existing immediate callback record: `docs/knowledge/terse-trailing-block-argument-mvp.md`
 - Existing generic correction: `docs/knowledge/generic-trailing-codeblock-argument-correction.md`
+- Final parameter declaration clarification: ADR `0032`
 - Existing brace ground truth: `docs/knowledge/terse-expression-valued-blocks-ground-truth.md`

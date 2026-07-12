@@ -1,11 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
-- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.0 — arity is not a contextual-callback declaration): A call signature
-  needs two distinct facts before attached block sugar is safe: which final call parameter accepts a contextual
-  codeblock, and the callback body's own fixed/rest parameter signature. Do not infer either from an untyped final
-  parameter, calls inside a function body, a parser callee-name list, or brace contents. Current Perl records lack
-  both facts, so declaration design must precede normalization behavior.
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.1 — a receiving type is not a duplicate function signature): Declare
+  only `name: codeblock`. An explicit `{|params| ...}` value owns its fixed/rest signature; a contextual `{ ... }`
+  value has zero positional params and reads dynamic context. Reject `name: codeblock(params)` rather than adding
+  static higher-order typing to a duck-typed language.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.3.0 — arity is not a contextual-callback declaration): A callable record
+  needs one additional fact before attached block sugar is safe: which final call parameter has kind `codeblock`.
+  Do not infer it from an untyped final parameter, body calls, parser callee-name lists, or brace contents. The audit
+  initially overreached by asking the slot to duplicate callback params; `.1` corrects that design.
 
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.2 — dynamic context should be explicit dataflow, not a host closure):
   Keep the codeblock record pure data. At generated call sites, pass references to the rule's known scalar working

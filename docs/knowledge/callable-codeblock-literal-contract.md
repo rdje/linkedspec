@@ -13,8 +13,8 @@ answers:
 date: 2026-07-12
 status: accepted-design
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; FUTURE-PARITY-BACKLOG.11.1 and ADR 0031 define the design, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.2 consume its literal/invocation fixture while generic final blocks and backend parity remain future."
-reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|callable codeblock|\\{\\|params|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.2 consume its literal/invocation fixture while generic final-block behavior and backend parity remain future."
+reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The accepted callable codeblock literal is:
@@ -44,8 +44,12 @@ Bound non-codeblocks diagnose as not callable; recursion is initially rejected. 
 and generic attached/contextual final blocks normalize under callable signatures rather than name-gated parsing.
 Lexical capture is explicitly deferred behind a new decision if a real need appears.
 
+ADR 0032 declares only the receiving value kind: a final `callback: codeblock` parameter. It has no argument list;
+explicit `{|params| ...}` values own their signatures, while contextual `{ ... }` values take zero positional
+arguments and read dynamic context.
+
 `linkedspec-callable-codeblock-v1` machine-locks seven literals, eleven valid calls, sixteen invalid syntax/call
-cases, contextual final-block normalization, and one deterministic fixture. Perl `.11.3.1` implements typed literal
+cases, four invalid declarations, eight contextual forms, and one deterministic fixture. Perl `.11.3.1` implements typed literal
 construction/preservation and `.11.3.2` executes `cb(args)` with the neutral dynamic-context behavior. Generic
 final blocks and backend parity remain active/future, so the complete feature is not yet portable behavior.
 

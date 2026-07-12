@@ -127,12 +127,13 @@ dispatch rule.
 
 > **Corrective direction:** `with` is currently a special-cased MVP, not the final syntax abstraction. The language
 > model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
-> codeblock parameter, after which attached/contextual final-block forms normalize to the same call on helper,
+> codeblock parameter using exact final-only `name: codeblock`, after which attached/contextual final-block forms normalize to the same call on helper,
 > user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
 > dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
 > checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
 > caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
-> equivalence is still active `.11.3.3`; do not infer it from current behavior.
+> declaration is adopted by ADR 0032; Perl normalization remains active `.11.3.3.2`, so do not infer the behavior
+> from current named helpers yet.
 
 ## 1. Working Variables and Setup
 

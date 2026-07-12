@@ -7,14 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.3.1 — declare final codeblock parameters**
+  (DONE — Perl metadata-governed normalization `.11.3.3.2` next; no behavior change).
+
+  **Decision:** ADR 0032 selects final-only `name: codeblock`. The receiving slot has no nested argument list;
+  explicit values own `{|params| ...}` signatures and contextual blocks use zero positional args plus dynamic state.
+
+  **Proof:** The strict checker passes unchanged 7 literals/11 calls/9 invalid literals/7 invalid calls plus four
+  declaration failures and eight helper/user-function/receiver contextual forms.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.3.0 — split final codeblock signature declaration**
-  (DONE — director declaration choice `.11.3.3.1` active; no behavior change).
+  (DONE — director declaration choice later closed by `.11.3.3.1`; no behavior change).
 
   **Finding:** Attached and parenthesized blocks already share a typed final `block_value`, but no current helper,
-  user-function, or receiver signature declares contextual codeblock acceptance or the callback's own parameters.
-  User functions have names/arity/rest only; helper contracts are lowering-local; receiver parsing is name-gated.
+  user-function, or receiver signature declares contextual codeblock acceptance. User functions have names/arity/
+  rest only; helper contracts are lowering-local; receiver parsing is name-gated. The audit initially over-proposed
+  nested callback params; `.1` correctly leaves the signature on the supplied value.
 
-  **Routing:** Backend-neutral declaration design `.1` now precedes Perl behavior `.2`. The gap is task-tree and
+  **Routing:** Backend-neutral declaration `.1` now precedes Perl behavior `.2`. The gap is task-tree and
   Knowledge-Map durable; read-only toolbox/AST/descriptor/source probes changed no runtime behavior.
 
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.2 — execute Perl callable codeblocks dynamically**

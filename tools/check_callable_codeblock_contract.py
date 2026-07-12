@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -70,6 +71,24 @@ def has_top_level_colon(source: str) -> bool:
         elif character == ":" and depth == 0:
             return True
     return False
+
+
+def parse_final_codeblock_parameter(source: str) -> dict[str, str]:
+    if not isinstance(source, str):
+        fail("invalid_codeblock_parameter_declaration", "declaration must be text")
+    if re.fullmatch(r"\s*:\s*codeblock\s*", source):
+        fail("invalid_codeblock_parameter_name", "codeblock parameter needs a name")
+    if re.fullmatch(r"\s*[A-Za-z_][A-Za-z0-9_]*\s*:\s*codeblock\s*\([^)]*\)\s*", source):
+        fail("codeblock_declaration_has_no_argument_list", "the codeblock value owns its signature")
+    if re.fullmatch(r"\s*[A-Za-z_][A-Za-z0-9_]*\s*:\s*codeblock\s*,.*", source):
+        fail("codeblock_parameter_must_be_final", "codeblock parameter must be final")
+    match = re.fullmatch(r"\s*([A-Za-z_][A-Za-z0-9_]*)\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*", source)
+    if match is None:
+        fail("invalid_codeblock_parameter_declaration", "invalid parameter declaration")
+    name, value_kind = match.groups()
+    if value_kind != "codeblock":
+        fail("unknown_parameter_type", f"unknown parameter type {value_kind}")
+    return {"name": name, "value_kind": value_kind}
 
 
 def parse_literal(source: str) -> dict[str, Any]:
@@ -248,7 +267,8 @@ def main() -> None:
     expected_top = {
         "format", "contract_id", "policy", "syntax", "brace_classification", "ast_schema",
         "resolution_precedence", "literals", "call_cases", "invalid_literal_cases",
-        "invalid_call_cases", "contextual_final_block_cases", "fixture",
+        "invalid_call_cases", "final_codeblock_parameter_declaration",
+        "contextual_final_block_cases", "fixture",
     }
     if set(contract) != expected_top or contract["format"] != 1 or contract["contract_id"] != "linkedspec-callable-codeblock-v1":
         fail("invalid_contract", "top-level fields, format, or id drifted")
@@ -265,6 +285,33 @@ def main() -> None:
         "rest_position": "final",
     }:
         fail("invalid_contract", "syntax policy drifted")
+    declaration = contract["final_codeblock_parameter_declaration"]
+    if set(declaration) != {
+        "value_kind", "source", "parameter_name", "position", "callback_signature_owner",
+        "contextual_block_invocation", "rest_parameter_after", "invalid",
+    }:
+        fail("invalid_contract", "final-codeblock declaration fields drifted")
+    if declaration != {
+        "value_kind": "codeblock",
+        "source": "callback: codeblock",
+        "parameter_name": "callback",
+        "position": "final",
+        "callback_signature_owner": "codeblock_value",
+        "contextual_block_invocation": "zero positional arguments with dynamic caller context",
+        "rest_parameter_after": False,
+        "invalid": declaration["invalid"],
+    } or parse_final_codeblock_parameter(declaration["source"]) != {"name": "callback", "value_kind": "codeblock"}:
+        fail("invalid_contract", "final-codeblock declaration policy drifted")
+    for case in declaration["invalid"]:
+        if set(case) != {"id", "source", "expected_code"}:
+            fail("invalid_contract", "invalid declaration case fields drifted")
+        try:
+            parse_final_codeblock_parameter(case["source"])
+        except ContractError as error:
+            if error.code != case["expected_code"]:
+                fail("diagnostic_mismatch", f"{case['id']}: expected {case['expected_code']}, got {error.code}")
+        else:
+            fail("diagnostic_mismatch", f"{case['id']} declaration unexpectedly parsed")
     schema = contract["ast_schema"]
     if set(schema) != {"kind", "version", "fields", "signature_contract", "captured_environment_field"}:
         fail("invalid_contract", "AST schema fields drifted")
@@ -329,16 +376,26 @@ def main() -> None:
             fail("diagnostic_mismatch", f"{case['id']}: expected {case['expected_error']!r}, got {actual!r}")
 
     expected_contextual = {
-        "attached": ("call", "codeblock_argument", "callable_contract"),
-        "parenthesized": ("call", "codeblock_argument", "callable_contract"),
-        "explicit_literal": ("call", "codeblock_literal", "literal"),
+        "helper_attached": ("helper", "call", "codeblock_argument"),
+        "helper_parenthesized": ("helper", "call", "codeblock_argument"),
+        "user_function_attached": ("user_function", "call", "codeblock_argument"),
+        "user_function_parenthesized": ("user_function", "call", "codeblock_argument"),
+        "receiver_attached": ("receiver", "fluent_chain", "codeblock_argument"),
+        "receiver_parenthesized": ("receiver", "fluent_chain", "codeblock_argument"),
+        "explicit_literal": ("helper", "call", "codeblock_literal"),
     }
     for case in contract["contextual_final_block_cases"]:
         if case["id"] == "harray_not_promoted":
+            if set(case) != {"id", "surface", "source", "parameter_declaration", "expected_error"}:
+                fail("contextual_block_mismatch", case["id"])
             if classify_braces('{ "value" : value }') != "harray_literal" or case["expected_error"] != "final_argument_not_codeblock":
                 fail("contextual_block_mismatch", case["id"])
             continue
-        actual = (case["canonical_kind"], case["final_argument_kind"], case["parameter_source"])
+        if set(case) != {"id", "surface", "source", "parameter_declaration", "canonical_kind", "final_argument_kind"}:
+            fail("contextual_block_mismatch", case["id"])
+        if parse_final_codeblock_parameter(case["parameter_declaration"])["value_kind"] != "codeblock":
+            fail("contextual_block_mismatch", case["id"])
+        actual = (case["surface"], case["canonical_kind"], case["final_argument_kind"])
         if actual != expected_contextual[case["id"]]:
             fail("contextual_block_mismatch", case["id"])
 
@@ -358,7 +415,9 @@ def main() -> None:
         "callable-codeblock-contract: OK "
         f"({len(literals)} literals; {len(calls)} calls; "
         f"{len(contract['invalid_literal_cases'])} invalid literals; "
-        f"{len(contract['invalid_call_cases'])} invalid calls)"
+        f"{len(contract['invalid_call_cases'])} invalid calls; "
+        f"{len(contract['final_codeblock_parameter_declaration']['invalid'])} invalid declarations; "
+        f"{len(contract['contextual_final_block_cases'])} contextual forms)"
     )
 
 

@@ -218,6 +218,18 @@ cb = {|value| return(cat(value, "!")) }
 result = cb("ready")
 ```
 
+ADR 0032 supplies the final-parameter declaration without introducing a nested function type:
+
+```text
+fn apply(value, callback: codeblock) {
+  return(callback())
+}
+```
+
+Only the value kind is declared. `callback: codeblock(item)` is invalid because an explicit `{|item| ...}` value
+already owns and enforces its invocation signature. A contextual `{ ... }` final argument has no positional
+parameters, is invoked with zero arguments, and reads the callable's current dynamic context.
+
 `{|| ...}` is the zero-parameter form and a final `...rest` follows ordinary callable-signature rules. Construction
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current

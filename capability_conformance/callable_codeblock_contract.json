@@ -22,6 +22,21 @@
     "rest_form": "...IDENTIFIER",
     "rest_position": "final"
   },
+  "final_codeblock_parameter_declaration": {
+    "value_kind": "codeblock",
+    "source": "callback: codeblock",
+    "parameter_name": "callback",
+    "position": "final",
+    "callback_signature_owner": "codeblock_value",
+    "contextual_block_invocation": "zero positional arguments with dynamic caller context",
+    "rest_parameter_after": false,
+    "invalid": [
+      {"id": "non_final", "source": "callback: codeblock, tail", "expected_code": "codeblock_parameter_must_be_final"},
+      {"id": "argument_list", "source": "callback: codeblock(item)", "expected_code": "codeblock_declaration_has_no_argument_list"},
+      {"id": "missing_name", "source": ": codeblock", "expected_code": "invalid_codeblock_parameter_name"},
+      {"id": "unknown_type", "source": "callback: closure", "expected_code": "unknown_parameter_type"}
+    ]
+  },
   "brace_classification": [
     {"id": "empty_harray", "source": "{}", "expected_kind": "harray_literal"},
     {"id": "keyed_harray", "source": "{ \"kind\" : value }", "expected_kind": "harray_literal"},
@@ -147,10 +162,14 @@
     {"id": "direct_recursion", "literal": "read_dynamic", "active_codeblocks": ["reader"], "arguments": [], "expected_error": {"code": "codeblock_recursion_unsupported", "cycle": ["reader", "reader"]}}
   ],
   "contextual_final_block_cases": [
-    {"id": "attached", "source": "with(\"x\") { return(value) }", "canonical_kind": "call", "final_argument_kind": "codeblock_argument", "parameter_source": "callable_contract"},
-    {"id": "parenthesized", "source": "with(\"x\", { return(value) })", "canonical_kind": "call", "final_argument_kind": "codeblock_argument", "parameter_source": "callable_contract"},
-    {"id": "explicit_literal", "source": "with(\"x\", {|value| return(value) })", "canonical_kind": "call", "final_argument_kind": "codeblock_literal", "parameter_source": "literal"},
-    {"id": "harray_not_promoted", "source": "with(\"x\", { \"value\" : value })", "expected_error": "final_argument_not_codeblock"}
+    {"id": "helper_attached", "surface": "helper", "source": "with(\"x\") { return(value) }", "parameter_declaration": "callback: codeblock", "canonical_kind": "call", "final_argument_kind": "codeblock_argument"},
+    {"id": "helper_parenthesized", "surface": "helper", "source": "with(\"x\", { return(value) })", "parameter_declaration": "callback: codeblock", "canonical_kind": "call", "final_argument_kind": "codeblock_argument"},
+    {"id": "user_function_attached", "surface": "user_function", "source": "apply(\"x\") { return(value) }", "parameter_declaration": "callback: codeblock", "canonical_kind": "call", "final_argument_kind": "codeblock_argument"},
+    {"id": "user_function_parenthesized", "surface": "user_function", "source": "apply(\"x\", { return(value) })", "parameter_declaration": "callback: codeblock", "canonical_kind": "call", "final_argument_kind": "codeblock_argument"},
+    {"id": "receiver_attached", "surface": "receiver", "source": "\"x\".with() { return(value) }", "parameter_declaration": "callback: codeblock", "canonical_kind": "fluent_chain", "final_argument_kind": "codeblock_argument"},
+    {"id": "receiver_parenthesized", "surface": "receiver", "source": "\"x\".with({ return(value) })", "parameter_declaration": "callback: codeblock", "canonical_kind": "fluent_chain", "final_argument_kind": "codeblock_argument"},
+    {"id": "explicit_literal", "surface": "helper", "source": "with(\"x\", {|value| return(value) })", "parameter_declaration": "callback: codeblock", "canonical_kind": "call", "final_argument_kind": "codeblock_literal"},
+    {"id": "harray_not_promoted", "surface": "helper", "source": "with(\"x\", { \"value\" : value })", "parameter_declaration": "callback: codeblock", "expected_error": "final_argument_not_codeblock"}
   ],
   "fixture": {
     "literal_ids": ["join_fixed", "read_dynamic", "mutate_dynamic", "restore_parameter", "collect_rest", "early_return"],
