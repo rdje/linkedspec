@@ -1,4 +1,15 @@
 # DEVELOPMENT NOTES
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.3 — centralize typed mutation, not private storage): Rust can retain
+  separate scalar/array/hash maps internally while exposing one `.spec` binding only if every bare mutation first
+  reads `get_bare_value`, checks the actual `RuntimeValue` kind, and writes back through one kind-preserving seam.
+  Updating only expression evaluation is insufficient: statement dispatch may intercept the same AST first. The
+  full oracle caught exactly that split for `items += value`; both statement and value forms now delegate to
+  `eval_array_append_expression`. Static rule lookup must happen before ordinary bare push dispatch, and generated
+  execution must consume the same `Engine`, so neither path invents a second binding model. Temporary selector
+  compatibility remains a migration input, not authority for future behavior or a reason to expose host maps.
+  Historical tests that explicitly assert statement-only mutation results are contract locks, not incidental test
+  text; migrate them to the adopted expression result instead of weakening the new implementation around them.
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.2 — return a new typed value from mutable operations): Perl references

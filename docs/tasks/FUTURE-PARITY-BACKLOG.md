@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl uniform-binding consumer `.12.1.2` complete; Rust `.12.1.3` active).
+- Last updated: `2026-07-12` (Perl/Rust uniform-binding consumers complete; Dart `.12.1.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2726,10 +2726,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement the unchanged selector-free binding and mutation contract on Rust.
   Acceptance: Native/generated execution and diagnostics match the neutral fixture and Perl without exposing
     `resolve_array_target`/`resolve_hash_target` storage selection as public semantics.
+  Verification: **PASS 2026-07-12.** `RuntimeContext` now owns narrow kind-checked bare array/harray mutation
+    seams; native and generated-plan execution pass the future fixture, all seven neutral cases, saved independent
+    updates, append, array-end result chaining/collection rebinding, static-rule precedence, and stable wrong-kind
+    fields in 9 integration tests. Baseline proof found `undef` push results, missing collection rebinding, and
+    silent wrong-kind retagging. The first full oracle then localized a statement-only append bypass; routing it
+    through the same typed value seam restores the existing `["a", "b"]` fixture. The broad suite then exposed
+    exactly one superseded statement-only array-end result lock, now migrated to the adopted updated-value contract.
+    Complete Rust gates pass 137 unit, 105/105 oracle, 105/105 generated classification, 197 integration, focused
+    suites/build, and CLI 61x2; strict Clippy has 16 pre-existing findings outside changed hunks. Canonical CI passes
+    doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 786 seconds. Knowledge Map,
+    mdBook, continuity, and whitespace checks pass. No selector source migrates; Dart `.12.1.4` activates.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.4`
   Status: `pending`
@@ -2850,6 +2862,25 @@ before implementation.
   doctrines, Knowledge Map, whitespace, and mdBook reach their true stops before source migration.
 - [x] **LOCKSTEP** — Code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory describe Perl
   selector-free enablement as current while exact selector rejection remains deferred until `.12.1.8.1`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and the seven binding/mutation cases through Rust
+  native and generated execution, retaining exact failures for bare push, mutable split, hash update, chaining,
+  static precedence, or wrong-kind diagnostics.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace bare reads and mutation ownership through parsed ActionIR,
+  `RuntimeContext`, `execute_call`, receiver dispatch, target resolvers, generated plans, and diagnostic projection;
+  distinguish public binding semantics from private scalar/array/hash stores.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/collection mutations observe and return one
+  `RuntimeValue`, auto-create only missing required kinds, reject incompatible existing kinds, preserve static-rule
+  push precedence, and retain selectors solely as migration compatibility.
+- [x] **ADDRESSED (verified)** — Focused Rust native/generated fixtures match the neutral expected values and error
+  fields, including saved mutation results, `set(...).sorted().first()`, array-end result continuation, pure versus
+  mutable split, and silent drop.
+- [x] **NO REGRESSION** — Core/runtime/integration/oracle/generated-source/CLI/capability/doctrine/Knowledge Map/
+  whitespace/mdBook gates reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Rust code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  Rust as the second enabled backend and Dart `.12.1.4` as next.
 
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
@@ -3697,6 +3728,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.0` | `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement` | Exact inventory, concrete selector-free gaps, backend ownership, and dependency-ordered removal plan. |
 | `FUTURE-PARITY-BACKLOG.12.1.1` | `FUTURE-PARITY-BACKLOG.12.1.1 - adopt uniform binding contract` | Strict neutral schema/checker, migration table, execution/results, diagnostics, constructor classification, and fixture. |
 | `FUTURE-PARITY-BACKLOG.12.1.2` | `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings` | Typed bare mutations/results, static precedence, mutable split, diagnostics, wrapper compatibility, and full-gate proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.3` | `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings` | Native/generated typed bare mutations/results, static precedence, diagnostics, oracle bridge, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3762,6 +3794,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.3` makes Rust the second executable uniform-binding backend. Native/generated execution
+  passes the future fixture and all seven neutral cases plus bare append and collection rebinding. Private runtime
+  stores remain internal; bare mutations validate and return the current typed value, static rules keep push
+  precedence, and wrong kinds expose stable fields. The first full oracle caught a statement-append bypass and the
+  shared mutation seam repaired it. Complete gates pass without migrating selector sources; Dart `.12.1.4` is active.
 - `2026-07-12`: `.12.1.2` makes Perl the first executable uniform-binding backend. Bare push/append, mutable split,
   hash/index updates, array end/collection mutations, reads, copies, receivers, controls, calls, and chains use one
   typed binding and return independent updated values; `set` chains from its assignment value. Registered rules

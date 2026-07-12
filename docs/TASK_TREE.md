@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Neutral uniform-binding contract `.12.1.1` is adopted; active Perl `.12.1.2` implements bare typed mutation/results before cross-backend enablement and source migration. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Perl `.12.1.2` and Rust `.12.1.3` execute the uniform-binding contract; Dart `.12.1.4` is active before source migration and selector rejection. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | String helpers close at 76/76; scalar numeric `.4.3.3.1.4` is active. Future variadic native/descriptor/generated obligations are explicit in `.5.1`/`.5.3`/`.8`. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `JULIA-BACKEND-PARITY` | `active` (delegated global obligations) | `Overall roadmap - future backend parity (Julia second)` | Current proof is 1,110 assertions/nine processes/105 fixtures plus exact 61x2 CLI. Non-codegen `.1.6` is closed; only generated-source `.3` and later Lua remain. | [docs/tasks/JULIA-BACKEND-PARITY.md](docs/tasks/JULIA-BACKEND-PARITY.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -805,13 +805,20 @@ Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.1` adopts `linkedspec-uniform
 11 migrations, seven execution cases, six exact selector failures, eight valid constructor/literal cases, and one
 deterministic future fixture. Bare typed bindings, post-assignment `set`, updated mutation results, absent/wrong-
 kind behavior, static-rule push precedence, pure/mutable split, and `aggregate_selector_removed` are fixed before
-behavior. Perl `.12.1.2` is active; current sources still use compatibility forms until all backends are enabled.
+behavior. Perl `.12.1.2` was the first consumer; current sources still use compatibility forms until all backends
+are enabled.
 
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.2` makes Perl the first executable consumer. Bare set/push/
 append/split/hash/index/collection mutations, reads, copies, receivers, calls, controls, and chains share one typed
 binding; mutations return independent updated values, absent targets auto-create, wrong kinds are typed failures,
 and registered rules keep ambiguous-push precedence. Temporary selectors remain compatible only until migration;
-Rust `.12.1.3` is next.
+the Rust handoff is now complete under `.12.1.3`, and Dart `.12.1.4` is the current consumer.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.3` makes Rust the second executable consumer. Native and
+generated-plan execution pass the neutral fixture plus all seven execution cases: post-assignment `set`, saved
+push results, static-rule precedence, mutable/pure split, hash update/snapshot, silent value drop, and wrong-kind
+fields. Bare append, array-end, and standalone collection mutations share the typed value path. An existing oracle
+caught and locked the statement-append bridge. Dart `.12.1.4` is next; selector migration/rejection remains ordered.
 
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral

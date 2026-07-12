@@ -149,24 +149,23 @@ set(items, []);                     # replaces items with an empty array value
 set(meta, {});                      # replaces meta with an empty hash value
 ```
 
-Use an explicit aggregate target when the intent is aggregate working-variable storage:
+Older sources may use explicit aggregate selectors:
 
 ```text
 set(array(items), [value]);
 set(hash(meta), { field : value });
 ```
 
-Use a bare working variable when the source should visibly read the current value or when the target should bind the
-typed RHS value. A bare variable may hold an array or hash value:
+Those exact selector shapes are migration-only. New source uses a bare binding for reads, assignment, and mutation;
+a bare variable may hold an array or harray value:
 
 ```text
 set(payload, [value]);
 return(payload);
 ```
 
-`array(name)` and `hash(name)` are typed views/snapshots at use sites. When `name` currently holds an array or hash
-value through bare assignment, they read that value. When the name has been populated through explicit aggregate
-mutation such as `set(array(name), ...)` or `name += value`, they read the aggregate working storage.
+While compatibility remains enabled, `array(name)` and `hash(name)` read the corresponding typed value/storage so
+old and partially migrated sources continue to run. They do not define a second future namespace or authoring model.
 
 > **Retirement in progress:** those exact selector-shaped forms are current compatibility behavior, not the final
 > language. Adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
@@ -180,20 +179,21 @@ mutation such as `set(array(name), ...)` or `name += value`, they read the aggre
 > selector forms are still documented here only because the current backends and shipped specs have not completed
 > the dependency-ordered migration yet.
 
-The Perl reference now executes those selector-free replacements. Its bare array/harray mutations auto-create an
-absent target of the required kind, return the updated typed binding, and fail an existing incompatible binding with
-`binding_kind_mismatch`. Mutation results are independent snapshots, so saving an earlier result does not let a
-later mutation retroactively change it:
+The Perl and Rust backends now execute those selector-free replacements on native and generated paths. Their bare
+array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and fail
+an existing incompatible binding with `binding_kind_mismatch`. Mutation results are independent snapshots, so
+saving an earlier result does not let a later mutation retroactively change it:
 
 ```text
 first = push(items, "a");          # first == ["a"]
 second = push(items, "b");         # second == ["a", "b"], items == ["a", "b"]
+size = items.push_back("c").count(); # size == 3, items == ["a", "b", "c"]
 parts = split("a,b", ",");         # pure split
 split(stored_parts, "c,d", ",");  # mutable split; stored_parts == ["c", "d"]
 answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 ```
 
-Exact selector rejection is intentionally later than this Perl enablement: Rust, Dart, Julia, and Lua must first
+Exact selector rejection is intentionally later than the backend enablement slices: Dart, Julia, and Lua must first
 execute the same bare forms, then tracked sources migrate, and only then does each backend reject
 `array(IDENTIFIER)` / `hash(IDENTIFIER)`. This ordering is migration safety, not an unresolved language decision.
 

@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.3 — enable Rust uniform bindings
+
+Rust native and generated-plan execution now consume `linkedspec-uniform-binding-v1`. Narrow `RuntimeContext`
+operations read, validate, update, and return bare array/harray `RuntimeValue`s without making its private
+scalar/array/hash maps public semantics. Bare push/append, three-argument mutable split, hash-index update, array
+end methods, and standalone collection transforms auto-create an absent required kind, reject an incompatible
+existing kind with stable `binding_kind_mismatch` fields, and return independent updated values. `set` keeps its
+assigned-value result for chaining; updated array-end results can continue into value methods such as
+`items.push_back(value).count()`; registered static rules retain precedence in ambiguous `push` calls.
+
+The permanent integration suite runs the future fixture and all seven neutral execution cases on both native and
+generated paths, plus selector-free collection and append coverage. Its baseline proved the intended gaps: push
+results were `undef`, standalone collection calls did not rebind, and wrong-kind push silently retagged. The first
+full oracle then found a mixed-migration defect: statement `items += value` still wrote the old aggregate map after
+bare push created a scalar-held array. Routing statement and expression append through the same typed mutation
+seam restores the existing `terse_1_3_2_push_alias_array` result `["a", "b"]`. The broad integration suite then
+identified one superseded statement-only array-end assertion; its replacement locks the updated value in a value
+slot, while the new contract suite locks continuation into `.count()`.
+
+Exact `array(name)` / `hash(name)` forms remain accepted only as scheduled migration input; no tracked selector
+source changes in this backend leaf. Dart `.12.1.4` is next, followed by Julia/Lua enablement, tracked migration,
+and hard rejection. Focused native/generated proof passes 9/9. The complete Rust gate passes 137 unit, 105/105
+oracle, 105/105 generated classification, 197 integration, all focused contract/diagnostic/source/trace suites,
+build, and CLI 61x2. Strict Clippy reports 16 pre-existing findings outside changed hunks. Canonical local CI passes
+all doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 786 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.2 — enable Perl uniform bindings
 
 The Perl reference now executes `linkedspec-uniform-binding-v1` through one observable typed value per `.spec`

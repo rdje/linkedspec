@@ -355,6 +355,13 @@ fn array_mutation_target_arg(arg: &Arg) -> Option<String> {
     }
 }
 
+fn bare_variable_target_arg(arg: &Arg) -> Option<&str> {
+    match arg.value() {
+        Expr::Variable { name } => Some(name.as_str()),
+        _ => None,
+    }
+}
+
 fn split_statement_call_parts(raw_args: &[Arg]) -> Option<(String, usize, usize)> {
     if raw_args.len() >= 4
         && let Some(target) = array_mutation_target_arg(&raw_args[1])
@@ -3017,39 +3024,67 @@ impl Engine {
         };
         if !matches!(
             name.as_str(),
-            "trim_each" | "lowercase_each" | "uppercase_each"
+            "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
         ) || args.len() != 1
         {
             return Ok(false);
         }
-        let Some(Arg::Positional(Expr::Call {
-            name: wrapper,
-            args: wrapper_args,
-        })) = args.first()
-        else {
-            return Ok(false);
+        let (target, bare_target) = match args.first() {
+            Some(Arg::Positional(Expr::Variable { name })) => (name.as_str(), true),
+            Some(Arg::Positional(Expr::Call {
+                name: wrapper,
+                args: wrapper_args,
+            })) if wrapper == "array" => {
+                let [Arg::Positional(Expr::Variable { name })] = wrapper_args.as_slice() else {
+                    return Ok(false);
+                };
+                (name.as_str(), false)
+            }
+            _ => return Ok(false),
         };
-        let [Arg::Positional(Expr::Variable { name: target })] = wrapper_args.as_slice() else {
-            return Ok(false);
-        };
-        if wrapper != "array" {
-            return Ok(false);
-        }
 
-        let transformed = ctx
-            .get_array(target)
-            .iter()
-            .map(|value| {
-                let value = value.to_str();
-                RuntimeValue::Scalar(match name.as_str() {
-                    "trim_each" => value.trim().to_string(),
-                    "lowercase_each" => crate::unicode_case_mapping::lowercase(&value),
-                    "uppercase_each" => crate::unicode_case_mapping::uppercase(&value),
-                    _ => unreachable!(),
+        let source = if bare_target {
+            match ctx.get_bare_value(target) {
+                RuntimeValue::Array(values) => values,
+                RuntimeValue::Undef if ctx.bare_kind(target).is_none() => Vec::new(),
+                actual => {
+                    return Err(format!(
+                        "binding_kind_mismatch identifier={target} expected_kind=array actual_kind={}",
+                        match actual {
+                            RuntimeValue::Hash(_) => "harray",
+                            RuntimeValue::Array(_) => "array",
+                            _ => "scalar",
+                        }
+                    ));
+                }
+            }
+        } else {
+            ctx.get_array(target)
+        };
+        let transformed = if name == "filter_nonempty" {
+            source
+                .into_iter()
+                .filter(RuntimeValue::is_nonempty)
+                .collect()
+        } else {
+            source
+                .iter()
+                .map(|value| {
+                    let value = value.to_str();
+                    RuntimeValue::Scalar(match name.as_str() {
+                        "trim_each" => value.trim().to_string(),
+                        "lowercase_each" => crate::unicode_case_mapping::lowercase(&value),
+                        "uppercase_each" => crate::unicode_case_mapping::uppercase(&value),
+                        _ => unreachable!(),
+                    })
                 })
-            })
-            .collect();
-        ctx.set_array(target, transformed);
+                .collect()
+        };
+        if bare_target {
+            let _ = ctx.replace_bare_array(target, transformed)?;
+        } else {
+            ctx.set_array(target, transformed);
+        }
         ctx.trace_decision(
             "rust_runtime:engine:array_string_transform_statement",
             true,
@@ -3319,8 +3354,7 @@ impl Engine {
         let Expr::AssignArrayAppend { name, value } = expr else {
             return Ok(false);
         };
-        let evaluated = self.eval_expr(value, ctx, rule_label)?;
-        ctx.push_array_value(name, evaluated);
+        let _ = self.eval_array_append_expression(name, value, ctx, rule_label)?;
         Ok(true)
     }
 
@@ -3368,8 +3402,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
-        ctx.push_array_value(name, evaluated);
-        Ok(RuntimeValue::Array(ctx.get_array(name)))
+        ctx.push_bare_array_value(name, evaluated)
     }
 
     fn eval_hash_index_assignment_expression(
@@ -3380,52 +3413,37 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        if matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
-            let mut root = ctx.get_scalar(name);
-            match root {
-                RuntimeValue::Hash(ref mut entries) => {
-                    let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
-                    let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-                    if let Some((_, existing)) = entries
-                        .iter_mut()
-                        .find(|(candidate, _)| candidate == &evaluated_key)
-                    {
-                        *existing = evaluated_value;
-                    } else {
-                        entries.push((evaluated_key, evaluated_value));
-                    }
-                    ctx.set_scalar(name, root.clone());
-                    return Ok(root);
-                }
-                RuntimeValue::Array(ref mut items) => {
-                    if matches!(key, linkedspec_core::expr::Expr::StringLiteral { .. }) {
-                        return Ok(RuntimeValue::Undef);
-                    }
-                    let idx_val = self.eval_expr(key, ctx, rule_label)?;
-                    let idx_number = idx_val.as_number().unwrap_or(0.0);
-                    let idx = if idx_number.is_finite() && idx_number >= 0.0 {
-                        idx_number as usize
-                    } else {
-                        usize::MAX
-                    };
-                    let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-                    if idx < items.len() {
-                        items[idx] = evaluated_value;
-                    } else if idx == items.len() {
-                        items.push(evaluated_value);
-                    } else {
-                        return Ok(RuntimeValue::Undef);
-                    }
-                    ctx.set_scalar(name, root.clone());
-                    return Ok(root);
-                }
-                _ => return Ok(RuntimeValue::Undef),
+        if matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar))
+            && matches!(ctx.get_scalar(name), RuntimeValue::Array(_))
+        {
+            let RuntimeValue::Array(mut items) = ctx.get_scalar(name) else {
+                unreachable!("scalar-held array kind checked before indexed mutation");
+            };
+            if matches!(key, linkedspec_core::expr::Expr::StringLiteral { .. }) {
+                return Ok(RuntimeValue::Undef);
             }
+            let idx_val = self.eval_expr(key, ctx, rule_label)?;
+            let idx_number = idx_val.as_number().unwrap_or(0.0);
+            let idx = if idx_number.is_finite() && idx_number >= 0.0 {
+                idx_number as usize
+            } else {
+                usize::MAX
+            };
+            let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+            if idx < items.len() {
+                items[idx] = evaluated_value;
+            } else if idx == items.len() {
+                items.push(evaluated_value);
+            } else {
+                return Ok(RuntimeValue::Undef);
+            }
+            let updated = RuntimeValue::Array(items);
+            ctx.set_scalar(name, updated.clone());
+            return Ok(updated);
         }
         let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
         let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-        ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
-        Ok(RuntimeValue::Hash(ctx.get_hash(name)))
+        ctx.set_bare_hash_entry(name, evaluated_key, evaluated_value)
     }
 
     fn eval_nested_access_assignment_expression(
@@ -3547,38 +3565,79 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<bool, String> {
+        Ok(self
+            .eval_array_end_mutation_method(expr, ctx, rule_label)?
+            .is_some())
+    }
+
+    fn eval_array_end_mutation_method(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Option<RuntimeValue>, String> {
         use linkedspec_core::expr::Expr;
         let Expr::FluentChain { receiver, calls } = expr else {
-            return Ok(false);
+            return Ok(None);
         };
         let [call] = calls.as_slice() else {
-            return Ok(false);
+            return Ok(None);
         };
-        let Some(target) = Self::array_receiver_target(receiver) else {
-            return Ok(false);
-        };
+        self.eval_array_end_mutation_call(receiver, call, ctx, rule_label)
+    }
 
-        match call.method.as_str() {
+    fn eval_array_end_mutation_call(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        call: &linkedspec_core::expr::FluentCall,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Option<RuntimeValue>, String> {
+        use linkedspec_core::expr::Expr;
+
+        let Some(target) = Self::array_receiver_target(receiver) else {
+            return Ok(None);
+        };
+        let bare_target = matches!(receiver, Expr::Variable { .. });
+
+        let updated = match call.method.as_str() {
             "push_back" if call.args.len() == 1 => {
                 let value = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
-                ctx.push_array_value(&target, value);
-                Ok(true)
+                if bare_target {
+                    ctx.push_bare_array_value(&target, value)?
+                } else {
+                    ctx.push_array_value(&target, value);
+                    RuntimeValue::Array(ctx.get_array(&target))
+                }
             }
             "push_front" if call.args.len() == 1 => {
                 let value = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
-                ctx.push_front_value(&target, value);
-                Ok(true)
+                if bare_target {
+                    ctx.push_front_bare_array_value(&target, value)?
+                } else {
+                    ctx.push_front_value(&target, value);
+                    RuntimeValue::Array(ctx.get_array(&target))
+                }
             }
             "pop_back" if call.args.is_empty() => {
-                let _ = ctx.pop_back_value(&target);
-                Ok(true)
+                if bare_target {
+                    ctx.pop_back_bare_array_value(&target)?
+                } else {
+                    let _ = ctx.pop_back_value(&target);
+                    RuntimeValue::Array(ctx.get_array(&target))
+                }
             }
             "pop_front" if call.args.is_empty() => {
-                let _ = ctx.pop_front_value(&target);
-                Ok(true)
+                if bare_target {
+                    ctx.pop_front_bare_array_value(&target)?
+                } else {
+                    let _ = ctx.pop_front_value(&target);
+                    RuntimeValue::Array(ctx.get_array(&target))
+                }
             }
-            _ => Ok(false),
-        }
+            _ => return Ok(None),
+        };
+        Ok(Some(updated))
     }
 
     fn array_receiver_target(receiver: &linkedspec_core::expr::Expr) -> Option<String> {
@@ -3633,7 +3692,11 @@ impl Engine {
             .eval_expr(effective_args[1].value(), ctx, rule_label)?
             .to_str();
         let value = self.eval_expr(effective_args[2].value(), ctx, rule_label)?;
-        ctx.set_hash_entry(&hash_name, &key, value);
+        if bare_variable_target_arg(&effective_args[0]).is_some() {
+            let _ = ctx.set_bare_hash_entry(&hash_name, key, value)?;
+        } else {
+            ctx.set_hash_entry(&hash_name, &key, value);
+        }
         Ok(true)
     }
 
@@ -3643,13 +3706,22 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<bool, String> {
+        Ok(self.eval_push_child_call(expr, ctx, rule_label)?.is_some())
+    }
+
+    fn eval_push_child_call(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Option<RuntimeValue>, String> {
         use linkedspec_core::expr::{Arg, Expr};
 
         let Expr::Call { name, args } = expr else {
-            return Ok(false);
+            return Ok(None);
         };
         if name != "push" || args.is_empty() || args.len() > 3 {
-            return Ok(false);
+            return Ok(None);
         }
 
         let Some(child_label) = args.first().and_then(|arg| match arg {
@@ -3658,12 +3730,12 @@ impl Engine {
             }
             _ => None,
         }) else {
-            return Ok(false);
+            return Ok(None);
         };
 
         if matches!(args.as_slice(), [_child, _target, index_arg] if Self::literal_usize_arg(index_arg).is_none())
         {
-            return Ok(false);
+            return Ok(None);
         }
 
         let child_value = if let Some(value) = ctx.action_edge_call_result(child_label) {
@@ -3672,13 +3744,15 @@ impl Engine {
             self.execute_child_rule(child_label, 0, ctx)?
         };
 
-        match args.as_slice() {
+        let updated = match args.as_slice() {
             [_child] => {
                 ctx.push_array_value(rule_label, child_value);
+                RuntimeValue::Array(ctx.get_array(rule_label))
             }
             [_child, second] => {
                 if let Some(index) = Self::literal_usize_arg(second) {
                     ctx.push_array_value(rule_label, Self::array_index_value(&child_value, index));
+                    RuntimeValue::Array(ctx.get_array(rule_label))
                 } else {
                     let target_value = self.eval_expr(second.value(), ctx, rule_label)?;
                     let target = self.resolve_array_target(
@@ -3686,7 +3760,12 @@ impl Engine {
                         &target_value,
                         true,
                     );
-                    ctx.push_array_value(&target, child_value);
+                    if bare_variable_target_arg(second).is_some() {
+                        ctx.push_bare_array_value(&target, child_value)?
+                    } else {
+                        ctx.push_array_value(&target, child_value);
+                        RuntimeValue::Array(ctx.get_array(&target))
+                    }
                 }
             }
             [_child, target_arg, index_arg] => {
@@ -3698,12 +3777,18 @@ impl Engine {
                     &target_value,
                     true,
                 );
-                ctx.push_array_value(&target, Self::array_index_value(&child_value, index));
+                let value = Self::array_index_value(&child_value, index);
+                if bare_variable_target_arg(target_arg).is_some() {
+                    ctx.push_bare_array_value(&target, value)?
+                } else {
+                    ctx.push_array_value(&target, value);
+                    RuntimeValue::Array(ctx.get_array(&target))
+                }
             }
-            _ => return Ok(false),
-        }
+            _ => return Ok(None),
+        };
 
-        Ok(true)
+        Ok(Some(updated))
     }
 
     fn literal_usize_arg(arg: &linkedspec_core::expr::Arg) -> Option<usize> {
@@ -3822,6 +3907,11 @@ impl Engine {
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
                 }
+                if name == "push"
+                    && let Some(value) = self.eval_push_child_call(expr, ctx, rule_label)?
+                {
+                    return Ok(value);
+                }
                 if let Some(function) = self.spec.find_function(name) {
                     if let Some(signature) = &function.signature {
                         if args.len() < signature.min_arity {
@@ -3937,6 +4027,33 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
+                if let Some(first) = calls.first()
+                    && Self::is_statement_only_array_end_mutation_method(&first.method)
+                {
+                    let Some(mut current) =
+                        self.eval_array_end_mutation_call(receiver, first, ctx, rule_label)?
+                    else {
+                        return Ok(RuntimeValue::Undef);
+                    };
+                    for (index, call) in calls.iter().enumerate().skip(1) {
+                        current = self.eval_receiver_dynamic_value_chain_call(
+                            current,
+                            call,
+                            calls.get(index + 1),
+                            index + 1 == calls.len(),
+                            ctx,
+                            rule_label,
+                        )?;
+                    }
+                    return Ok(current);
+                }
+                if calls
+                    .iter()
+                    .skip(1)
+                    .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
+                {
+                    return Ok(RuntimeValue::Undef);
+                }
                 if calls
                     .iter()
                     .any(Self::is_receiver_trailing_block_surface_call)
@@ -3968,13 +4085,6 @@ impl Engine {
                     .is_some_and(|call| Self::is_number_receiver_value_chain_method(&call.method))
                 {
                     return self.eval_number_receiver_value_chain(receiver, calls, ctx, rule_label);
-                }
-                if calls
-                    .iter()
-                    .any(|call| Self::is_statement_only_array_end_mutation_method(&call.method))
-                {
-                    self.eval_expr(receiver, ctx, rule_label)?;
-                    return Ok(RuntimeValue::Undef);
                 }
                 self.eval_expr(receiver, ctx, rule_label)?;
                 for call in calls {
@@ -5936,7 +6046,15 @@ impl Engine {
             "push" => {
                 if args.len() >= 2 {
                     let arr_name = self.resolve_array_target(raw_args, &args[0], true);
+                    if raw_args
+                        .first()
+                        .and_then(bare_variable_target_arg)
+                        .is_some()
+                    {
+                        return ctx.push_bare_array_value(&arr_name, args[1].clone());
+                    }
                     ctx.push_array_value(&arr_name, args[1].clone());
+                    return Ok(RuntimeValue::Array(ctx.get_array(&arr_name)));
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -6153,8 +6271,15 @@ impl Engine {
                         .cloned()
                         .unwrap_or(RuntimeValue::Undef);
                     let parts = split_string_for_arg(&source, raw_args, delimiter_idx, &delimiter)?;
-                    ctx.set_array(&target, parts);
-                    return Ok(RuntimeValue::Undef);
+                    if raw_args
+                        .get(source_idx.saturating_sub(1))
+                        .and_then(bare_variable_target_arg)
+                        .is_some()
+                    {
+                        return ctx.replace_bare_array(&target, parts);
+                    }
+                    ctx.set_array(&target, parts.clone());
+                    return Ok(RuntimeValue::Array(parts));
                 }
                 if args.len() >= 2 {
                     let s = args[0].to_str();

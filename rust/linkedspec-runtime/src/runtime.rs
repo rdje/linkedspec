@@ -416,6 +416,129 @@ impl RuntimeContext {
         self.bare_kinds.get(name).copied()
     }
 
+    fn binding_value_kind(value: &RuntimeValue) -> &'static str {
+        match value {
+            RuntimeValue::Array(_) => "array",
+            RuntimeValue::Hash(_) => "harray",
+            RuntimeValue::Undef
+            | RuntimeValue::Scalar(_)
+            | RuntimeValue::Number(_)
+            | RuntimeValue::Bool(_) => "scalar",
+        }
+    }
+
+    fn binding_kind_mismatch(name: &str, expected_kind: &str, actual: &RuntimeValue) -> String {
+        format!(
+            "binding_kind_mismatch identifier={name} expected_kind={expected_kind} actual_kind={}",
+            Self::binding_value_kind(actual)
+        )
+    }
+
+    fn bare_array_for_mutation(
+        &self,
+        name: &str,
+    ) -> Result<(Option<RuntimeVarKind>, Vec<RuntimeValue>), String> {
+        let kind = self.bare_kind(name);
+        let value = self.get_bare_value(name);
+        match (kind, value) {
+            (None, RuntimeValue::Undef) => Ok((None, Vec::new())),
+            (Some(RuntimeVarKind::Array), RuntimeValue::Array(values)) => Ok((kind, values)),
+            (Some(RuntimeVarKind::Scalar), RuntimeValue::Array(values)) => Ok((kind, values)),
+            (_, actual) => Err(Self::binding_kind_mismatch(name, "array", &actual)),
+        }
+    }
+
+    fn store_bare_array(
+        &mut self,
+        name: &str,
+        prior_kind: Option<RuntimeVarKind>,
+        values: Vec<RuntimeValue>,
+    ) -> RuntimeValue {
+        let updated = RuntimeValue::Array(values.clone());
+        if matches!(prior_kind, Some(RuntimeVarKind::Array)) {
+            self.set_array(name, values);
+        } else {
+            self.set_scalar(name, updated.clone());
+        }
+        updated
+    }
+
+    pub(crate) fn replace_bare_array(
+        &mut self,
+        name: &str,
+        values: Vec<RuntimeValue>,
+    ) -> Result<RuntimeValue, String> {
+        let (prior_kind, _) = self.bare_array_for_mutation(name)?;
+        Ok(self.store_bare_array(name, prior_kind, values))
+    }
+
+    pub(crate) fn push_bare_array_value(
+        &mut self,
+        name: &str,
+        value: RuntimeValue,
+    ) -> Result<RuntimeValue, String> {
+        let (prior_kind, mut values) = self.bare_array_for_mutation(name)?;
+        values.push(value);
+        Ok(self.store_bare_array(name, prior_kind, values))
+    }
+
+    pub(crate) fn push_front_bare_array_value(
+        &mut self,
+        name: &str,
+        value: RuntimeValue,
+    ) -> Result<RuntimeValue, String> {
+        let (prior_kind, mut values) = self.bare_array_for_mutation(name)?;
+        values.insert(0, value);
+        Ok(self.store_bare_array(name, prior_kind, values))
+    }
+
+    pub(crate) fn pop_back_bare_array_value(&mut self, name: &str) -> Result<RuntimeValue, String> {
+        let (prior_kind, mut values) = self.bare_array_for_mutation(name)?;
+        let _ = values.pop();
+        Ok(self.store_bare_array(name, prior_kind, values))
+    }
+
+    pub(crate) fn pop_front_bare_array_value(
+        &mut self,
+        name: &str,
+    ) -> Result<RuntimeValue, String> {
+        let (prior_kind, mut values) = self.bare_array_for_mutation(name)?;
+        if !values.is_empty() {
+            values.remove(0);
+        }
+        Ok(self.store_bare_array(name, prior_kind, values))
+    }
+
+    pub(crate) fn set_bare_hash_entry(
+        &mut self,
+        name: &str,
+        key: String,
+        value: RuntimeValue,
+    ) -> Result<RuntimeValue, String> {
+        let kind = self.bare_kind(name);
+        let current = self.get_bare_value(name);
+        let mut entries = match (kind, current) {
+            (None, RuntimeValue::Undef) => Vec::new(),
+            (Some(RuntimeVarKind::Hash), RuntimeValue::Hash(values))
+            | (Some(RuntimeVarKind::Scalar), RuntimeValue::Hash(values)) => values,
+            (_, actual) => {
+                return Err(Self::binding_kind_mismatch(name, "harray", &actual));
+            }
+        };
+        if let Some((_, existing)) = entries.iter_mut().find(|(candidate, _)| candidate == &key) {
+            *existing = value;
+        } else {
+            entries.push((key, value));
+        }
+        let updated = RuntimeValue::Hash(entries.clone());
+        if matches!(kind, Some(RuntimeVarKind::Hash)) {
+            self.set_hash(name, entries);
+        } else {
+            self.set_scalar(name, updated.clone());
+        }
+        Ok(updated)
+    }
+
     pub(crate) fn descriptor_scalar_bare_read(&self, name: &str) -> bool {
         self.descriptor_scalar_bare_reads.contains(name)
     }

@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.3 — enable Rust uniform bindings**
+  (DONE — Dart consumer `.12.1.4` active).
+
+  **Implementation:** Rust bare push/append/mutable split/hash-index/array-end/collection mutations use one typed
+  value seam, return independent updates, auto-create absent required kinds, and reject wrong kinds. `set` chains
+  from the assigned value; registered rules retain ambiguous-push precedence. Native and generated execution share
+  the same engine behavior; compatibility selectors remain only until dependency-ordered migration.
+
+  **Proof:** The permanent suite passes the future fixture, seven neutral cases, collection rebinding, mutation
+  continuation, and append bridge on native/generated paths. The complete Rust gate passes 137 unit, 105/105
+  oracle, 105/105 generated classification, 197 integration, focused suites, build, and CLI 61x2. Canonical CI
+  passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 786 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.2 — enable Perl uniform bindings**
   (DONE — Rust consumer `.12.1.3` active).
 

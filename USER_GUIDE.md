@@ -1571,19 +1571,21 @@ all emit a short input excerpt plus a caret on the next line under the stored po
 ## Strong Recommendations for New Specs
 If backend neutrality matters, these are the defaults you should follow.
 
-1. Prefer auto-existing working variables with `name = value`, `set(...)`, `set(array(name), [])`, and `set(hash(name), {})` over raw `my` declarations.
+1. Prefer auto-existing typed bindings with `name = value` or `set(name, value)` over raw `my` declarations or aggregate selector wrappers.
 2. Prefer `target = value` or `set(target, value)` over raw assignment wrappers.
 3. Prefer `retv = call(rule)` over `$retv = call(rule)`.
-4. Prefer `push(array(target), value)` or `target += value` over raw `push @target, ...` when you already have a value expression.
+4. Prefer `push(target, value)` or `target += value` over raw `push @target, ...` when you already have a value expression.
 5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `copy(array(name))` for snapshot array payloads, prefer `copy(hash(name))` for snapshot object payloads, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
+7. Prefer `copy(name)` for a typed array/harray snapshot, and use `flat_array(...)` / `flat_hash(...)` for explicit list-context insertion.
 8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances
 - `return(payload)` is the preferred general return form. Method-chain `.return(...)` now recognizes the common structured payload families plus direct immediate-match, anonymous capture-reader, and explicit whole-input slice payloads such as `entry_text()`, `capture_slice_len()`, and `input_slice(start, width)`; use `return_descriptor` metadata when trying a less common direct reader shape.
 - Helper shells can still contain raw backend expressions; this is sometimes practical, but it is less portable than pure helper-only authoring.
-- Legacy compatibility wrappers are still important because many existing specs depend on them. Keep them in mind when reading old specs, but do not default to them in new code.
+- Exact `array(name)` / `hash(name)` selectors remain temporarily readable in old specs while the five backends and
+  tracked sources migrate. Their removal is settled; never introduce them in new code. Perl and Rust already execute
+  the selector-free mutation/result contract, with Dart, Julia, and Lua following before hard rejection.
 - Some old specs are still extraction-oriented and permissive; that is part of LinkedSpec's intended character, not automatically a bug.
 
 ## Versioning and Compatibility

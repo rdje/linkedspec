@@ -155,7 +155,14 @@ A June 2026 audit of the then-20 shipped `.spec` files (88 total accumulator ope
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)` and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. New examples should use direct assignments and typed wrappers. See [Working Variables and Setup](declaration-helper-reference.md#auto-existing-variables).
+> **Working variables auto-exist.** A bare `name` reads its current scalar, array, harray, or codeblock value.
+> `set(name, value)` and `name = value` bind the evaluated typed RHS; `push(name, value)` / `name += value` mutate
+> an array; `set_key(name, key, value)` / `name[key] = value` mutate an harray; and `copy(name)` snapshots a
+> container. Exact `array(name)` and `hash(name)` remain accepted only while old sources migrate and must not be
+> introduced in new `.spec` code. Perl and Rust already execute the bare replacement contract; Dart, Julia, and
+> Lua enablement precedes tracked migration and hard rejection. Quoted/computed constructor calls such as
+> `array("items")` and valid key/value `hash("key", value)` remain ordinary values. See
+> [Working Variables and Setup](declaration-helper-reference.md#auto-existing-variables).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value

@@ -3356,12 +3356,12 @@ fn terse_2_3_5_1_array_receiver_value_chains_run() {
 }
 
 #[test]
-fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
+fn future_parity_backlog_12_1_3_array_end_mutations_return_updated_values() {
     let grammar = "Top::\n /x/ -> Done { items.push_back(\"seed\"); return(array(items.push_back(\"value\"), copy(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[null, ["seed"]]]),
-        "push_back remains statement-only when it appears in a value expression"
+        serde_json::json!([[["seed", "value"], ["seed", "value"]]]),
+        "push_back returns the updated typed binding when it appears in a value expression"
     );
 }
 
