@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (neutral uniform-binding contract `.12.1.1` adopted; Perl consumer `.12.1.2` active).
+- Last updated: `2026-07-12` (Perl uniform-binding consumer `.12.1.2` complete; Rust `.12.1.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2712,14 +2712,21 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.1 - adopt uniform binding contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Make the Perl reference execute the neutral selector-free binding and mutation contract.
   Acceptance: Bare reads, receivers, set, push/append, hash mutation, split, in-place collection helpers, copy,
     controls, calls, and chaining operate on one observable typed binding; static child-rule push keeps precedence;
     internal host storage layout remains unobservable. Old selectors stay temporary only until source migration.
+  Verification: **PASS 2026-07-12.** `LinkedSpec::BindingRuntime` provides copy-on-write typed mutations, absent-
+    target creation, and stable mismatch fields. Live and standalone generated fixtures cover set chaining, saved
+    mutation results, push/append, mutable/pure split, hash/index updates, collection transforms, static-rule
+    precedence, wrong-kind failure, and temporary wrapper compatibility. Focused ActionIR/contract proof passes 38
+    tests; the neutral checker passes 11/7/6/8 cases; canonical CI passes doctrines, capability 60/0/0, both 61-case
+    CLI environments, and Phase 0 `1..1030` in 821 seconds. No tracked selector source migrates in this leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the unchanged selector-free binding and mutation contract on Rust.
   Acceptance: Native/generated execution and diagnostics match the neutral fixture and Perl without exposing
     `resolve_array_target`/`resolve_hash_target` storage selection as public semantics.
@@ -2825,6 +2832,24 @@ before implementation.
   generated source, shipped specs, corpus fixtures, and current capability census remain unchanged.
 - [x] **LOCKSTEP** — Contract README, task/index, roadmaps, README/book, Knowledge Map, changes/notes/live, memory,
   and canonical CI identify Perl `.12.1.2` as the first behavior consumer.
+
+### `FUTURE-PARITY-BACKLOG.12.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Consume the neutral future fixture and focused bare set/push/split/hash/read/chaining/
+  static-precedence/wrong-kind cases on live and standalone generated Perl, preserving measured failure evidence.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Remove observable bare-target dependence across `MethodLowering`,
+  `ArrayPipeline`, `Contracts`, `ControlFlow`, `FlowExpr`, and `EmitContext` type/declaration memory while preserving
+  static child-rule push precedence and temporary wrapper compatibility.
+- [x] **FIX** — Lower bare typed mutations through one scalar-held value binding (or an observationally identical
+  private representation), return post-operation values, auto-create absent required kinds, reject wrong kinds,
+  and make three-argument bare split mutate without changing pure two-argument split.
+- [x] **ADDRESSED (verified)** — Neutral checker plus focused live/generated proof cover all seven execution cases,
+  deterministic fixture, expression chaining/drop, static precedence, diagnostics, compatibility selectors, and
+  current constructor classification.
+- [x] **NO REGRESSION** — Shipped specs, wrapper-era Phase-0 locks, ActionIR, generated source, CLI, capability,
+  doctrines, Knowledge Map, whitespace, and mdBook reach their true stops before source migration.
+- [x] **LOCKSTEP** — Code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory describe Perl
+  selector-free enablement as current while exact selector rejection remains deferred until `.12.1.8.1`.
 
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
@@ -2944,7 +2969,8 @@ before implementation.
 | 82 | `FUTURE-PARITY-BACKLOG.12.1` | `active` | Remove `.spec` aggregate-selector forms and split uniform binding retirement before Rust/Lua. |
 | 83 | `FUTURE-PARITY-BACKLOG.12.1.0` | `done` | Exact source counts, toolbox gaps, backend owners, and the complete retirement sequence are durable. |
 | 84 | `FUTURE-PARITY-BACKLOG.12.1.1` | `done` | Neutral selector-free binding, mutation, result, precedence, diagnostic, and migration semantics are executable. |
-| 85 | `FUTURE-PARITY-BACKLOG.12.1.2` | `active` | Make the Perl reference consume the unchanged selector-free contract before source migration. |
+| 85 | `FUTURE-PARITY-BACKLOG.12.1.2` | `done` | Perl live/generated execution consumes the selector-free contract without source migration. |
+| 86 | `FUTURE-PARITY-BACKLOG.12.1.3` | `active` | Implement the unchanged one-binding contract on Rust before tracked source migration. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3633,6 +3659,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.4` | Toolbox attached/parenthesized helper and receiver lowering; typed descriptor; parser/runtime/generated-source residue scans; four focused suites/100 tests; strict callable checker; capability 60/0/0; immediately prior canonical 61x2 CLI plus Phase 0 `1..1030`/916s; governance/whitespace/mdBook. | PASS. Perl callable codeblocks close without raw-host fallback, stored coderef/capture, parser method allowlist, harray drift, compatibility rewrite, or unresolved helper; `.12.1` activates spec-facing selector removal before Rust/Lua. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.0` | Knowledge Map first; tracked/shipped exact selector counts; direct-parent and receiver classification; Perl toolbox lowering for wrapped/bare set/push/split/copy/read/receiver/hash forms; Perl/Rust/Dart/Julia/Lua owner scans; governance/whitespace/mdBook. | PASS. 651 exact calls in 82 tracked specs include 227 in 15 shipped specs; bare reads exist but push/split alternatives have concrete gaps; neutral, five-backend, migration, hard-retirement, and closeout leaves are split before behavior. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.1` | Strict uniform-binding JSON/checker; 11 migrations; seven execution cases; six invalid selectors; eight valid constructors/literals; deterministic future fixture; capability future owner; canonical CI with 60/0/0, 61x2 CLI, and Phase 0 `1..1030`/875s; governance/whitespace/mdBook. | PASS. One observable typed binding, storage neutrality, set/mutation results, absent/wrong-kind behavior, static push precedence, pure/mutable split, exact future rejection, and constructor classification are adopted before Perl behavior `.12.1.2`. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.2` | Perl typed-binding runtime; live/standalone future fixture; 38 focused tests; neutral 11/7/6/8 checker; canonical doctrines, capability 60/0/0, 61x2 CLI, and Phase 0 `1..1030`/821s; Knowledge Map/whitespace/mdBook. | PASS. Bare mutations, reads, receivers, results, chaining, diagnostics, and static precedence share one observable binding; compatibility wrappers remain only until migration; Rust `.12.1.3` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3669,6 +3696,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.11.3.4` | `FUTURE-PARITY-BACKLOG.11.3.4 - close Perl callable codeblocks` | Residue audit, focused and canonical no-drift proof, Perl parent closeout, and `.12.1` selector-removal activation. |
 | `FUTURE-PARITY-BACKLOG.12.1.0` | `FUTURE-PARITY-BACKLOG.12.1.0 - split aggregate selector retirement` | Exact inventory, concrete selector-free gaps, backend ownership, and dependency-ordered removal plan. |
 | `FUTURE-PARITY-BACKLOG.12.1.1` | `FUTURE-PARITY-BACKLOG.12.1.1 - adopt uniform binding contract` | Strict neutral schema/checker, migration table, execution/results, diagnostics, constructor classification, and fixture. |
+| `FUTURE-PARITY-BACKLOG.12.1.2` | `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings` | Typed bare mutations/results, static precedence, mutable split, diagnostics, wrapper compatibility, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3734,6 +3762,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.2` makes Perl the first executable uniform-binding backend. Bare push/append, mutable split,
+  hash/index updates, array end/collection mutations, reads, copies, receivers, controls, calls, and chains use one
+  typed binding and return independent updated values; `set` chains from its assignment value. Registered rules
+  keep ambiguous-push precedence; absent targets auto-create; wrong kinds report stable fields. Canonical CI passes
+  60/0/0 capability, 61x2 CLI, and Phase 0 `1..1030`/821s. Compatibility selectors remain only until migration;
+  Rust `.12.1.3` is active.
 - `2026-07-12`: `.12.1.1` adopts `linkedspec-uniform-binding-v1`. Eleven migration mappings, seven independent
   execution cases, six exact invalid selectors, eight valid constructor/literal classifications, and deterministic
   future fixture bytes fix bare typed reads/mutations, post-assignment `set`, updated mutation results, absent/

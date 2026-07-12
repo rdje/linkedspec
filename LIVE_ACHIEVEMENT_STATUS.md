@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.2 — enable Perl uniform bindings**
+  (DONE — Rust consumer `.12.1.3` active).
+
+  **Implementation:** Perl bare set/push/append/split/hash/index/array-end/collection mutations, reads, copies,
+  receiver chains, controls, calls, and user-function locals share one typed binding. Mutations return independent
+  updated values, absent targets auto-create, wrong kinds expose stable neutral fields, and registered rules retain
+  ambiguous-push precedence. Compatibility wrappers remain executable only until migration.
+
+  **Proof:** Live and standalone generated neutral fixtures plus focused ActionIR/contract suites pass 38 tests;
+  the neutral checker remains 11/7/6/8. Canonical CI passes all doctrines, capability 60/0/0, both 61-case CLI
+  environments, and Phase 0 `1..1030` in 821 seconds. No tracked selector source migrated in this slice.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.1 — adopt uniform binding contract**
   (DONE — Perl behavior consumer `.12.1.2` active).
 

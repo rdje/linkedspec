@@ -610,10 +610,18 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
         is($scalar, '$name = [$value]', 'scalar assignment operator lowers RHS from AST fields');
 
         my $append = LinkedSpec::call_spec_handler_subst('Top', q{items += poison});
-        is($append, 'push @items, $value', 'array append operator lowers RHS from AST fields');
+        is(
+            $append,
+            'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }',
+            'array append operator lowers RHS into the uniform binding mutation'
+        );
 
         my $hash_assign = LinkedSpec::call_spec_handler_subst('Top', q{meta[poison_key] = { poison_key : poison_value }});
-        is($hash_assign, '$meta{$key} = {$key => $value}', 'hash-index assignment lowers key/RHS from AST fields');
+        is(
+            $hash_assign,
+            'do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, {$key => $value}) }',
+            'hash-index assignment lowers key/RHS into the uniform binding mutation'
+        );
 
         my $all = join("\n", $scalar, $append, $hash_assign);
         unlike($all, qr/poison|__bad_/, 'assignment/mutation statement lowering does not reuse fake AST source or original poison text');
@@ -666,17 +674,17 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(items += value)}),
-        q{return do { push @items, $value; [@items] }},
-        'array append expression returns the updated array snapshot'
+        q{return do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }},
+        'array append expression returns the updated typed binding'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(meta[key] = value)}),
-        q{return do { $meta{$key} = $value; +{%meta} }},
-        'hash-index assignment expression returns the updated hash snapshot'
+        q{return do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, $value) }},
+        'hash-index assignment expression returns the updated typed binding'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())}),
-        q{return do { my $__ls_count = do { push @items, $value; [@items] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }},
+        q{return do { my $__ls_count = do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }},
         'array append expression can feed an aggregate receiver chain'
     );
 };
@@ -735,7 +743,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         is($assign, '$name = [$value]', 'set statement lowers from AST call args');
 
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
-        is($set_key, '$meta{$key} = $value', 'set_key statement lowers target/key/value from AST call args');
+        is(
+            $set_key,
+            'do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, $value) }',
+            'set_key statement lowers target/key/value into the uniform binding update'
+        );
 
         my $push = LinkedSpec::call_spec_handler_subst('Top', q{push(array(items), poison)});
         is($push, 'push @items, $value', 'push statement lowers explicit append from AST call args');
@@ -747,7 +759,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         is($return_undef, 'return undef', 'return_undef statement lowers from AST call arity');
 
         my $push_back = LinkedSpec::call_spec_handler_subst('Top', q{items.push_back(poison)});
-        is($push_back, 'push @items, $value', 'array end-mutation statement lowers from AST receiver/call fields');
+        is(
+            $push_back,
+            'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::array_end_mutation($items, "items", "push_back", $value) }',
+            'array end-mutation statement lowers into the uniform binding mutation'
+        );
 
         my $all = join("\n", $assign, $set_key, $push, $return, $return_undef, $push_back);
         unlike($all, qr/poison|__bad_/, 'statement helper-call lowering does not reuse fake AST source or original poison text');
@@ -984,7 +1000,7 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
 
         my $merge = LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(hash(base),set_key(hash(overlay),"stage",cat("a","b"))))});
         like($merge, qr/%base/, 'AST aggregate lowering preserves merge_hash hash source slots');
-        like($merge, qr/\\%overlay/, 'AST aggregate lowering preserves nested set_key hash source slots');
+        like($merge, qr/\$overlay/, 'AST aggregate lowering preserves the nested set_key typed-binding source');
         like($merge, qr/\@__ls_cat_parts/, 'AST aggregate lowering composes nested value-only helper slots');
 
         my $has_key = LinkedSpec::call_spec_handler_subst('Top', q{return(has_key(pick_keys(hash(meta),"a"),"a"))});

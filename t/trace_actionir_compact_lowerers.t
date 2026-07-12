@@ -91,10 +91,10 @@ subtest 'ArrayPipeline and DeclareMethod trace plan and assignment decisions' =>
 	  q{set(name, "x")},
  );
 
- is($array, '@items = grep { $_ =~ /^a/ } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @items', 'array pipeline lowering is unchanged');
+ is($array, 'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::array_transform($items, "items", "trim_each"); $items = LinkedSpec::BindingRuntime::array_transform($items, "items", "filter_match", qr/^a/); $items }', 'bare array pipeline lowers through the uniform typed binding');
  like($array_trace, qr/DECISION actionir:array_pipeline:build_array_pipeline_plan_from_expr:expr:append_unary_op => TAKEN/, 'trace reports unary pipeline op');
  like($array_trace, qr/DECISION actionir:array_pipeline:build_array_pipeline_plan_from_expr:expr:append_filter_match_op => TAKEN/, 'trace reports filter-match op');
- like($array_trace, qr/DECISION actionir:array_pipeline:lower_array_pipeline_expr:expr:pipeline_lowered => TAKEN/, 'trace reports pipeline lowering success');
+ like($array_trace, qr/DECISION actionir:array_pipeline:lower_array_pipeline_expr:expr:binding_pipeline_lowered => TAKEN/, 'trace reports uniform binding pipeline lowering success');
  is($set, '$name = "x"', 'set assignment lowering is unchanged');
  like($set_trace, qr/DECISION actionir:declare_method:lower_assign_method_statement:expr:ast_set_lowered => TAKEN/, 'trace reports AST set assignment lowering');
 };

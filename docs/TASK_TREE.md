@@ -807,6 +807,12 @@ deterministic future fixture. Bare typed bindings, post-assignment `set`, update
 kind behavior, static-rule push precedence, pure/mutable split, and `aggregate_selector_removed` are fixed before
 behavior. Perl `.12.1.2` is active; current sources still use compatibility forms until all backends are enabled.
 
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.2` makes Perl the first executable consumer. Bare set/push/
+append/split/hash/index/collection mutations, reads, copies, receivers, calls, controls, and chains share one typed
+binding; mutations return independent updated values, absent targets auto-create, wrong kinds are typed failures,
+and registered rules keep ambiguous-push precedence. Temporary selectors remain compatible only until migration;
+Rust `.12.1.3` is next.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

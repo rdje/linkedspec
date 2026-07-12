@@ -59,9 +59,9 @@ The current helper surface is broad, but it is easier to learn in families. Each
 
 Construct and transform values during parsing:
 
-- `name` — read the named scalar working variable
-- `array(name)` — read a named array value
-- `hash(name)` — read a named hash value
+- `name` — read the named typed working value (scalar, array, harray, or codeblock)
+- `array(name)` / `hash(name)` — temporary aggregate-selector compatibility forms scheduled for removal; do not
+  use them in new `.spec` source
 - `flat_array(...)` — flatten arguments into an array
 - `flat_hash(...)` — flatten key/value arguments into a hash
 - `copy(...)` — shallow-copy a container
@@ -77,7 +77,7 @@ Working variables auto-exist when they are first used through a typed position:
 - `name = value` — bind the typed RHS value to `name`
 - `items = []` — bind an array value to `items`
 - `meta = { "kind" : value }` — bind a hash value to `meta`
-- `items += value` or `push(array(items), value)` — append to an array
+- `items += value` or `push(items, value)` — append to an array binding
 - `meta[key] = value` — mutate a hash
 
 Working-variable setup policy is documented in [Working Variables and Setup](declaration-helper-reference.md).
@@ -87,13 +87,16 @@ New examples should use the terse forms above.
 
 Write values into declared variables or containers:
 
-- `set(target, value)` — write a value; `target = value` is the preferred operator form. Bare assignments bind the evaluated typed value and yield it in value positions.
+- `set(target, value)` — write a value and yield the post-assignment typed target value; `target = value` is the preferred operator form
 - `name = value` — terse assignment operator; scalar, array, and hash RHS values all bind as the current typed value of `name`
 - `=(name, value)` — operator-call spelling for the same assignment value expression
-- `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot
+- `items += value` — terse array append operator; in value positions it yields the updated array value
 - `push(container, value)` — append to an array
-- `push(array(name), value)` — named-array push
-- `if(is_nonempty(value)) { push(array(name), value) }` — named-array push with an explicit non-empty filter
+- `push(name, value)` — append to the bare array binding; if `name` is a statically registered rule, child-rule
+  dispatch keeps precedence
+- `if(is_nonempty(value)) { push(name, value) }` — named-binding push with an explicit non-empty filter
+- `split(name, source, delimiter)` — replace the bare array binding and yield the updated value; the two-argument
+  `split(source, delimiter)` remains pure
 - `set_key(name, key, value)` — set one key in a named working hash
 - `name[key] = value` — terse hash-index assignment operator, equivalent to `set_key(name, key, value)` when the key and value are explicit expressions; in value positions it yields the updated hash snapshot
 - `payload["items"][0]["name"] = value` — nested value-path assignment into a scalar-held array/hash payload; intermediate containers must already exist, final hash keys may be created, and final array indexes may replace or append at len

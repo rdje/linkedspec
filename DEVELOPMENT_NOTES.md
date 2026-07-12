@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.2 — return a new typed value from mutable operations): Perl references
+  make an apparently returned array/hash value alias later in-place changes unless the mutation boundary copies.
+  Uniform binding mutations therefore copy the current array/harray, apply the update, bind the copy, and return
+  it. This preserves the neutral contract's saved intermediate results and makes chaining predictable. Keep
+  backend host storage private: wrapper-era source probes may still lower through host aggregates when no rule type
+  memory exists, but generated rules with a known typed binding must harmonize reads and mutations. For ambiguous
+  two-bare push, inspect the registered descriptor entry at runtime and accept either direct CODE or handler record;
+  static rule purpose wins, otherwise mutate the first binding. Array reducers and receiver helpers must consult
+  the remembered scalar-held kind before taking `@name`/`%name` fast paths.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.1 — callable purpose resolves bare-target ambiguity): Do not replace
   aggregate selectors with a new target wrapper. A bare identifier is always the binding; helper arity and purpose
   determine whether it is read or mutated. For ambiguous `push(name, target)`, a statically registered rule keeps

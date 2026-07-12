@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.2 — enable Perl uniform bindings
+
+The Perl reference now executes `linkedspec-uniform-binding-v1` through one observable typed value per `.spec`
+identifier. New `LinkedSpec::BindingRuntime` centralizes copy-on-write array/harray updates, absent-target creation,
+and deterministic `binding_kind_mismatch` diagnostics. Bare `push`/`+=`, three-argument mutable `split`, hash-index
+and `set_key` updates, array end mutations, in-place collection transforms, copies, reads, receiver chains, and
+user-function locals use the same binding and return updated typed values. `set(target, value)` retains Perl
+assignment-value semantics, so its result feeds receiver chains directly.
+
+Ambiguous two-bare `push(rule_or_target, destination_or_value)` checks the descriptor's registered static rule
+handler first; without one it appends the second binding value to the first binding. Pure two-argument split remains
+unchanged. Array and harray mutation results are independent values rather than aliases to a later-mutated host
+reference. Compatibility `array(name)` / `hash(name)` forms remain executable only for the scheduled migration;
+generated rules harmonize them with the uniform binding when type memory establishes that alias. Exact selector
+rejection remains owned by `.12.1.8.1` after all backends and tracked sources migrate.
+
+Focused live and standalone generated tests consume the neutral fixture and cover saved mutation results, static
+rule precedence, wrong-kind fields, `set(...).sorted().first()`, mutable/pure split, collection transforms, and
+temporary wrapper compatibility. Modified modules compile and the focused 38-test ActionIR/contract group passes.
+Canonical CI passes doctrines, capability 60/0/0, both 61-case CLI environments, and Phase 0 `1..1030` in 821
+seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.1 — adopt uniform binding contract
 
 Added strict neutral `linkedspec-uniform-binding-v1` data and an independent checker before changing any backend.

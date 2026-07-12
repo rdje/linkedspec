@@ -62,7 +62,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
      Active `.12.1` removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics before Rust
      codeblock parity or resumed Lua work. Inventory `.12.1.0` counts 651 exact forms in 82 tracked specs and
      splits neutral contract `.1`, five backend enablement leaves, source migration, hard rejection, and no-drift.
-     The contract is adopted; Perl consumer `.12.1.2` is active without source migration yet.
+     The contract is adopted and Perl consumer `.12.1.2` executes the bare typed-binding behavior; Rust `.12.1.3`
+     is next. Source migration and hard rejection remain dependency-ordered after all five backends are enabled.
 7. Treat documentation clarity as a product contract:
    - prioritize readability over cleverness,
    - remove ambiguity instead of hand-waving over it,

@@ -721,6 +721,7 @@ sub _collect_bare_identifier_type_memory {
  }
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{acode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{call} : () } @{$rule_ir->{bcode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
 
  my %kind_by_name;
@@ -729,6 +730,7 @@ sub _collect_bare_identifier_type_memory {
   return unless defined($name) && $name =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   return unless defined($kind) && $kind =~ /^(?:scalar|array|hash)$/o;
   return if _bare_type_memory_reserved_name($name);
+  return if (($kind_by_name{$name} // '') eq 'scalar') && $kind ne 'scalar';
   $kind_by_name{$name} = $kind;
  };
  my $node_source_expr = sub {
@@ -755,8 +757,8 @@ sub _collect_bare_identifier_type_memory {
              && ref($target_args->[0]) eq 'HASH'
              && ($target_args->[0]{kind} // '') eq 'variable';
   my $name = $target_args->[0]{name};
-  $record->($name, 'array') if $target_name eq 'array';
-  $record->($name, 'hash') if $target_name eq 'hash';
+  $record->($name, 'scalar') if $target_name eq 'array';
+  $record->($name, 'scalar') if $target_name eq 'hash';
   $record->($name, 'scalar') if $target_name eq 'scalar';
  };
  my $collect_ast_type_node;
@@ -770,13 +772,12 @@ sub _collect_bare_identifier_type_memory {
    return;
   }
   if ($kind eq 'assign_array_append') {
-   $record->($node->{name}, 'array');
+   $record->($node->{name}, 'scalar');
    $collect_ast_type_node->($node->{value});
    return;
   }
   if ($kind eq 'assign_hash_index') {
-   $record->($node->{name}, 'hash')
-    unless (($kind_by_name{$node->{name}} // '') eq 'scalar');
+   $record->($node->{name}, 'scalar');
    $collect_ast_type_node->($node->{key});
    $collect_ast_type_node->($node->{value});
    return;
@@ -829,7 +830,7 @@ sub _collect_bare_identifier_type_memory {
    return;
   }
   if ($kind eq 'indexed_var') {
-   $record->($node->{name}, 'hash');
+   $record->($node->{name}, 'scalar');
    $collect_ast_type_node->($node->{index});
    return;
   }
@@ -849,26 +850,47 @@ sub _collect_bare_identifier_type_memory {
        && ($args->[0]{kind} // '') eq 'variable') {
     return;
    }
-   if (($name eq 'push' || $name eq 'split') && ref($args) eq 'ARRAY' && @$args) {
+   if (ref($args) eq 'ARRAY'
+    && (($name eq 'split' && @$args) || ($name eq 'push' && @$args >= 2))) {
     my $target = $node_source_expr->($args->[0]);
     if (defined($target) && $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
-     $record->($1, 'array');
+     $record->($1, 'scalar');
     } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
-     $record->($1, 'array');
+     $record->($1, 'scalar');
+    }
+    if ($name eq 'push'
+     && @$args == 2
+     && ref($args->[0]) eq 'HASH'
+     && ref($args->[1]) eq 'HASH'
+     && ($args->[0]{kind} // '') eq 'variable'
+     && ($args->[1]{kind} // '') eq 'variable') {
+     $record->($args->[1]{name}, 'scalar');
     }
    }
    if ($name eq 'set_key' && ref($args) eq 'ARRAY' && @$args) {
     my $target = $node_source_expr->($args->[0]);
     if (defined($target) && $target =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
-     $record->($1, 'hash');
+     $record->($1, 'scalar');
     } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
-     $record->($1, 'hash');
+     $record->($1, 'scalar');
     }
    }
    $collect_ast_type_node->($_) for @$args;
    return;
   }
   if ($kind eq 'fluent_chain') {
+   my $receiver = $node->{receiver};
+   if (ref($receiver) eq 'HASH' && ($receiver->{kind} // '') eq 'variable') {
+    foreach my $call (@{$node->{calls} || []}) {
+     next unless ref($call) eq 'HASH' && ($call->{method} // '') eq 'push';
+     my $args = $call->{args} || [];
+     next unless ref($args) eq 'ARRAY'
+              && @$args == 1
+              && ref($args->[0]) eq 'HASH'
+              && ($args->[0]{kind} // '') eq 'variable';
+     $record->($args->[0]{name}, 'scalar');
+    }
+   }
    $collect_ast_type_node->($node->{receiver});
    foreach my $call (@{$node->{calls} || []}) {
     next unless ref($call) eq 'HASH';
@@ -903,6 +925,19 @@ sub _collect_bare_identifier_type_memory {
   return ref($node) eq 'HASH' ? $node : undef
  };
 
+ for my $entry (@{$rule_ir->{bcode_entries} || []}) {
+  next unless ref($entry) eq 'HASH';
+  my $call = $entry->{call} // '';
+  my $code = $entry->{code} // '';
+  if ($code =~ /^\s*push\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\s*$/o) {
+   $record->($1, 'scalar');
+  } elsif ($code =~ /^\s*push\s*\(\s*\Q$call\E\s*,\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\s*$/o) {
+   $record->($1, 'scalar');
+  } elsif ($code =~ /^\s*\Q$call\E\s*\.\s*push\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\s*$/o) {
+   $record->($1, 'scalar');
+  }
+ }
+
  for my $block (@raw_blocks) {
   next unless defined($block) && length($block);
   for my $statement (@{_split_action_ir_statements($block)}) {
@@ -912,7 +947,7 @@ sub _collect_bare_identifier_type_memory {
    $collect_ast_type_node->($ast_node) if ref($ast_node) eq 'HASH';
 
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*/s) {
-   $record->($1, 'array');
+   $record->($1, 'scalar');
    next;
   }
   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
@@ -920,7 +955,7 @@ sub _collect_bare_identifier_type_memory {
    next if ref($ast_node) eq 'HASH'
         && ($ast_node->{kind} // '') eq 'assign_hash_index'
         && (($kind_by_name{$1} // '') eq 'scalar');
-   $record->($1, 'hash');
+   $record->($1, 'scalar');
    next;
   }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
@@ -929,7 +964,7 @@ sub _collect_bare_identifier_type_memory {
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\.\s*(?:push_back|push_front|pop_back|pop_front)\s*\(/s) {
-    $record->($1, 'array');
+    $record->($1, 'scalar');
     next;
    }
 
@@ -944,21 +979,27 @@ sub _collect_bare_identifier_type_memory {
     $record->($name, $kind);
     next;
    }
-   if (($method eq 'push' || $method eq 'split') && @$args) {
+   if (($method eq 'split' && @$args) || ($method eq 'push' && @$args >= 2)) {
     my $target = _trim_action_ir_value($args->[0]);
     if (defined($target) && $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
-     $record->($1, 'array');
+     $record->($1, 'scalar');
     } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
-     $record->($1, 'array');
+     $record->($1, 'scalar');
+    }
+    if ($method eq 'push' && @$args == 2) {
+     my $destination_or_value = _trim_action_ir_value($args->[1]);
+     $record->($1, 'scalar')
+      if defined($destination_or_value)
+      && $destination_or_value =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
     }
     next;
    }
    if ($method eq 'set_key' && @$args) {
     my $target = _trim_action_ir_value($args->[0]);
     if (defined($target) && $target =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
-     $record->($1, 'hash');
+     $record->($1, 'scalar');
     } elsif (defined($target) && $target =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
-     $record->($1, 'hash');
+     $record->($1, 'scalar');
     }
     next;
    }
@@ -1651,6 +1692,7 @@ sub _collect_auto_working_var_decls {
  }
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{acode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{call} : () } @{$rule_ir->{bcode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
 
  # Collect ordered-unique (sigil, name) working-variable references from the
@@ -1922,11 +1964,13 @@ sub _collect_auto_working_var_decls {
              && ($target_args->[0]{kind} // '') eq 'variable';
   my $name = $target_args->[0]{name};
 	  if ($target_name eq 'array') {
-   $record->('@', $name);
+   my $kind = _bare_symbol_kind($name);
+   $record->((defined($kind) && $kind eq 'scalar') ? '$' : '@', $name);
    return;
   }
   if ($target_name eq 'hash') {
-   $record->('%', $name);
+   my $kind = _bare_symbol_kind($name);
+   $record->((defined($kind) && $kind eq 'scalar') ? '$' : '%', $name);
    return;
   }
  };
@@ -1961,7 +2005,7 @@ sub _collect_auto_working_var_decls {
   }
 
   if ($kind eq 'assign_array_append') {
-   $record->('@', $node->{name});
+   $record->('$', $node->{name});
    $collect_ast_node_refs->($node->{value}, 1);
    return;
   }
@@ -2026,7 +2070,7 @@ sub _collect_auto_working_var_decls {
   }
 
   if ($kind eq 'indexed_var') {
-   $record->('%', $node->{name});
+   $record->('$', $node->{name});
    $collect_ast_node_refs->($node->{index}, 1);
    return;
   }
@@ -2047,6 +2091,23 @@ sub _collect_auto_working_var_decls {
    if ($is_assignment_call && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_assignment_target->($args->[0], $args->[1]);
     $collect_ast_node_refs->($args->[1], 1);
+    return;
+   }
+   if (ref($args) eq 'ARRAY'
+    && (($name eq 'split' && @$args) || ($name eq 'push' && @$args >= 2))) {
+    my $target = $args->[0];
+    if (ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable') {
+     $record->('$', $target->{name});
+    }
+    $collect_ast_node_refs->($args->[$_], 1) for 1 .. $#$args;
+    return;
+   }
+   if ($name eq 'set_key' && ref($args) eq 'ARRAY' && @$args) {
+    my $target = $args->[0];
+    if (ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable') {
+     $record->('$', $target->{name});
+    }
+    $collect_ast_node_refs->($args->[$_], 1) for 1 .. $#$args;
     return;
    }
    if (($name eq 'array' || $name eq 'hash')
@@ -2159,7 +2220,7 @@ sub _collect_auto_working_var_decls {
     my $value_expr = _trim_action_ir_value($2);
     my $lowered_append = _lower_array_append_operator_statement($trimmed);
     next unless defined($lowered_append) && length($lowered_append);
-    $record->('@', $target_expr);
+    $record->('$', $target_expr);
     $collect_value_position_scalar_reads->($value_expr);
     next;
    }
@@ -2167,7 +2228,7 @@ sub _collect_auto_working_var_decls {
    if ($parsed_array_end) {
     my $lowered_array_end = _lower_array_end_mutation_method_statement($trimmed);
     next unless defined($lowered_array_end) && length($lowered_array_end);
-    $record->('@', $parsed_array_end->{target});
+    $record->('$', $parsed_array_end->{target});
     if (defined($parsed_array_end->{value})) {
      my $value_expr = _trim_action_ir_value($parsed_array_end->{value});
      $collect_value_position_scalar_reads->($value_expr);
@@ -2211,7 +2272,7 @@ sub _collect_auto_working_var_decls {
    my $lowered_set_key = _lower_set_key_statement($trimmed);
    next unless defined($lowered_set_key) && length($lowered_set_key);
    my $target_expr = _trim_action_ir_value($args->[0]);
-   $record->('%', $target_expr) if defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   $record->('$', $target_expr) if defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    for my $slot_index (1, 2) {
    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
    $collect_value_position_scalar_reads->($slot_expr);
@@ -2225,8 +2286,7 @@ sub _collect_auto_working_var_decls {
    my $target_expr = _trim_action_ir_value($args->[0]);
    my $value_expr = _trim_action_ir_value($args->[1]);
    next unless defined($target_expr) && $target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
-   next if defined($value_expr) && $value_expr =~ /^\w+$/o;   # all-bare child-call form
-   $record->('@', $target_expr);
+   $record->('$', $target_expr);
    $collect_value_position_scalar_reads->($value_expr);
   }
  }
@@ -2243,6 +2303,18 @@ sub _collect_auto_working_var_decls {
   push @decls, "my $sigil$name;";
  }
  return \@decls
+}
+
+sub _harmonize_scalar_binding_child_pushes {
+ my ($code) = @_;
+ return $code unless defined($code) && length($code);
+ $code =~ s{\bpush\s+\@(\w+)\s*,\s*(&\{\$\$descr\{spec\}\{\w+\}\{handler\}\}\(\$descr,\s*\$STRING,\s*\$minfo\)(?:->\[\s*\d+\s*\])?)}{
+  my ($matched, $target, $value) = ($&, $1, $2);
+  ((_bare_symbol_kind($target) // '') eq 'scalar')
+   ? 'do { require LinkedSpec::BindingRuntime; $'.$target.' = LinkedSpec::BindingRuntime::push_value($'.$target.', "'.$target.'", '.$value.') }'
+   : $matched
+ }gex;
+ return $code
 }
 
 #------------------------------------------------------------------------------
@@ -2337,6 +2409,14 @@ sub build_rule_ir_emit_context {
   $rewrite_diag_acc,
   $rewrite_rules,
  );
+
+ $acodes = [map { _harmonize_scalar_binding_child_pushes($_) } @{$acodes || []}];
+ if (ref($bcodes) eq 'HASH') {
+  $bcodes->{$_} = _harmonize_scalar_binding_child_pushes($bcodes->{$_}) for keys %$bcodes;
+ }
+ $and_icode = _harmonize_scalar_binding_child_pushes($and_icode);
+ $lifecycle_code->{$_} = _harmonize_scalar_binding_child_pushes($lifecycle_code->{$_})
+  for keys %$lifecycle_code;
 
   my %ab_count = (
   ACODE => scalar(@{$rule_ir->{acode_entries}}),

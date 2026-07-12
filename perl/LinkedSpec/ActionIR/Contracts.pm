@@ -25,6 +25,31 @@ sub _is_primitive_literal_token {
  return 0
 }
 
+sub _lower_two_bare_push_contract {
+ my ($matched, $rule_or_target, $destination_or_value) = @_;
+ return $matched if _is_primitive_literal_token($destination_or_value);
+ return 'do { require LinkedSpec::BindingRuntime; '
+  .'my $__ls_push_entry = $$descr{spec}{'.$rule_or_target.'}; '
+  .'my $__ls_push_handler = ref($__ls_push_entry) eq "CODE" ? $__ls_push_entry : '
+  .'ref($__ls_push_entry) eq "HASH" ? $__ls_push_entry->{handler} : undef; '
+  .'if (ref($__ls_push_handler) eq "CODE") { '
+  .'$'.$destination_or_value.' = LinkedSpec::BindingRuntime::push_value($'.$destination_or_value.', "'.$destination_or_value.'", '
+  .'$__ls_push_handler->($descr, $STRING, $minfo)) '
+  .'} else { $'.$rule_or_target.' = LinkedSpec::BindingRuntime::push_value($'.$rule_or_target.', "'.$rule_or_target.'", $'.$destination_or_value.') } }'
+}
+
+sub _lower_child_call_push_builtin {
+ my ($target, $callee, $index, $bare_symbol_kind) = @_;
+ my $value = '&{$$descr{spec}{'.$callee.'}{handler}}($descr, $STRING, $minfo)';
+ $value .= '->['.$index.']' if defined $index;
+ if (ref($bare_symbol_kind) eq 'CODE'
+  && (($bare_symbol_kind->($target) // '') eq 'scalar')) {
+  return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
+   .'LinkedSpec::BindingRuntime::push_value($'.$target.', "'.$target.'", '.$value.') }';
+ }
+ return 'push @'.$target.', '.$value
+}
+
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default contracts dependency bundle for one owner
@@ -155,7 +180,10 @@ sub _build_column_read_expr {
 # Purpose : Contracts that dispatch/call parser handlers and push results.
 #------------------------------------------------------------------------------
 sub _build_call_and_dispatch_contracts {
- my ($label) = @_;
+ my ($label, $deps) = @_;
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
  return [
   {
    id                 => 'call',
@@ -197,7 +225,7 @@ sub _build_call_and_dispatch_contracts {
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)/_is_primitive_literal_token($2) ? $& : "push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)"/ge;
+    $code =~ s/\bpush\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)/_lower_two_bare_push_contract($&, $1, $2)/ge;
     return $code
    },
   },
@@ -255,7 +283,7 @@ sub _build_call_and_dispatch_contracts {
    unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)\s*->\s*\[\s*\d+\s*\]/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)\s*->\s*\[\s*(\d+)\s*\]/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)->[$3]/g;
+    $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)\s*->\s*\[\s*(\d+)\s*\]/_lower_child_call_push_builtin($1, $2, $3, $bare_symbol_kind)/ge;
     return $code
    },
   },
@@ -267,7 +295,7 @@ sub _build_call_and_dispatch_contracts {
    unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)(?!\s*->\s*\[)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)(?!\s*->\s*\[)/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)(?!\s*->\s*\[)/_lower_child_call_push_builtin($1, $2, undef, $bare_symbol_kind)/ge;
     return $code
    },
   },
@@ -1849,7 +1877,7 @@ sub _build_assignment_and_regex_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_assign_method_statement};
-    $code =~ s/\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?!\s*\.)/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -2220,7 +2248,7 @@ sub build_action_lowering_contracts {
  my ($label, $deps) = @_;
  my $d = _require_lowering_deps($deps);
  return [
-  @{_build_call_and_dispatch_contracts($label)},
+  @{_build_call_and_dispatch_contracts($label, $deps)},
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_cursor_contracts($label, $d)},
   @{_build_passthrough_ir_contracts()},

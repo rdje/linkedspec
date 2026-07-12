@@ -1029,11 +1029,6 @@ sub _lower_ast_scalar_held_hash_index_assignment_value_node {
  my $target = $node->{name};
  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
 
- my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
-  ? $deps->{bare_symbol_kind}
-  : sub { return undef };
- return undef unless (($bare_symbol_kind->($target) // '') eq 'scalar');
-
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1056,18 +1051,7 @@ sub _lower_ast_scalar_held_hash_index_assignment_value_node {
  return undef unless defined($key_lowered) && length($key_lowered);
  my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
  return undef unless defined($value_lowered) && length($value_lowered);
- my $can_index = (ref($node->{key}) eq 'HASH' && (($node->{key}{kind} // '') eq 'string')) ? 0 : 1;
-
- return 'do { '
-      . 'my $__ls_path_key_0 = '.$key_lowered.'; '
-      . 'my $__ls_path_idx_0 = int(($__ls_path_key_0) // 0); '
-      . 'my $__ls_path_value = '.$value_lowered.'; '
-      . 'my $__ls_path_ok = 0; '
-      . 'if (ref($'.$target.') eq "HASH") { $'.$target.'->{$__ls_path_key_0} = $__ls_path_value; $__ls_path_ok = 1; } '
-      . 'elsif ('.$can_index.' && ref($'.$target.') eq "ARRAY" && $__ls_path_idx_0 >= 0 && $__ls_path_idx_0 <= @{$'.$target.'}) { '
-      . 'if ($__ls_path_idx_0 == @{$'.$target.'}) { push @{$'.$target.'}, $__ls_path_value; } else { splice @{$'.$target.'}, $__ls_path_idx_0, 1, $__ls_path_value; } '
-      . '$__ls_path_ok = 1; } '
-      . '$__ls_path_ok ? $'.$target.' : undef }'
+ return _uniform_binding_hash_index_set_expr($target, $key_lowered, $value_lowered)
 }
 
 sub _actionir_ast_unsupported_helper_expr {
@@ -1081,6 +1065,58 @@ sub _actionir_ast_unsupported_helper_expr {
   context => { method => $method },
  );
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
+}
+
+sub _uniform_binding_array_push_expr {
+ my ($target, $value_expr) = @_;
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($value_expr) && length($value_expr);
+ return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
+  .'LinkedSpec::BindingRuntime::push_value($'.$target.', "'.$target.'", '.$value_expr.') }'
+}
+
+sub _uniform_binding_target_symbol {
+ my ($target_expr, $container, $deps) = @_;
+ return undef unless defined($target_expr) && defined($container);
+ return $1 if $target_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
+ return undef unless $target_expr =~ /^\Q$container\E\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o;
+ my $name = $1;
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
+ return (($bare_symbol_kind->($name) // '') eq 'scalar') ? $name : undef
+}
+
+sub _uniform_binding_hash_index_set_expr {
+ my ($target, $key_expr, $value_expr) = @_;
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($key_expr) && length($key_expr);
+ return undef unless defined($value_expr) && length($value_expr);
+ return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
+  .'LinkedSpec::BindingRuntime::index_set($'.$target.', "'.$target.'", '.$key_expr.', '.$value_expr.') }'
+}
+
+sub _uniform_binding_array_end_expr {
+ my ($target, $operation, $value_expr) = @_;
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($operation) && $operation =~ /\A(?:push_front|push_back|pop_front|pop_back)\z/o;
+ my $args = (defined($value_expr) && length($value_expr)) ? ', '.$value_expr : '';
+ return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
+  .'LinkedSpec::BindingRuntime::array_end_mutation($'.$target.', "'.$target.'", "'.$operation.'"'.$args.') }'
+}
+
+sub _uniform_binding_ambiguous_push_expr {
+ my ($rule_or_target, $destination_or_value) = @_;
+ return undef unless defined($rule_or_target) && $rule_or_target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($destination_or_value) && $destination_or_value =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return 'do { require LinkedSpec::BindingRuntime; '
+  .'my $__ls_push_entry = $$descr{spec}{'.$rule_or_target.'}; '
+  .'my $__ls_push_handler = ref($__ls_push_entry) eq "CODE" ? $__ls_push_entry : '
+  .'ref($__ls_push_entry) eq "HASH" ? $__ls_push_entry->{handler} : undef; '
+  .'if (ref($__ls_push_handler) eq "CODE") { '
+  .'$'.$destination_or_value.' = LinkedSpec::BindingRuntime::push_value($'.$destination_or_value.', "'.$destination_or_value.'", '
+  .'$__ls_push_handler->($descr, $STRING, $minfo)) '
+  .'} else { $'.$rule_or_target.' = LinkedSpec::BindingRuntime::push_value($'.$rule_or_target.', "'.$rule_or_target.'", $'.$destination_or_value.') } }'
 }
 
 sub _actionir_ast_retired_colon_scalar_slot_expr {
@@ -1378,8 +1414,11 @@ sub _user_function_record_local_decl {
  return unless defined($sigil) && $sigil =~ /\A[\$\@\%]\z/o;
  return unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  return if _is_reserved_actionir_value_symbol($name);
- return if $sigil eq '$' && ref($params) eq 'HASH' && $params->{$name};
- $decls->{$sigil.$name} = { sigil => $sigil, name => $name };
+ return if ref($params) eq 'HASH' && $params->{$name};
+ return if ref($decls->{$name}) eq 'HASH'
+        && $decls->{$name}{sigil} eq '$'
+        && $sigil ne '$';
+ $decls->{$name} = { sigil => $sigil, name => $name };
 }
 
 sub _user_function_collect_local_decls_from_node {
@@ -1399,7 +1438,7 @@ sub _user_function_collect_local_decls_from_node {
  }
 
  if ($kind eq 'indexed_var') {
-  _user_function_record_local_decl($decls, $params, '%', $node->{name});
+  _user_function_record_local_decl($decls, $params, '$', $node->{name});
   _user_function_collect_local_decls_from_node($node->{index}, $decls, $params);
   return;
  }
@@ -1420,13 +1459,13 @@ sub _user_function_collect_local_decls_from_node {
  }
 
  if ($kind eq 'assign_array_append') {
-  _user_function_record_local_decl($decls, $params, '@', $node->{name});
+  _user_function_record_local_decl($decls, $params, '$', $node->{name});
   _user_function_collect_local_decls_from_node($node->{value}, $decls, $params);
   return;
  }
 
  if ($kind eq 'assign_hash_index') {
-  _user_function_record_local_decl($decls, $params, '%', $node->{name});
+  _user_function_record_local_decl($decls, $params, '$', $node->{name});
   _user_function_collect_local_decls_from_node($node->{key}, $decls, $params);
   _user_function_collect_local_decls_from_node($node->{value}, $decls, $params);
   return;
@@ -1456,9 +1495,9 @@ sub _user_function_collect_local_decls_from_node {
      if (ref($target_args) eq 'ARRAY' && @$target_args) {
       my $target_arg = $target_args->[0];
       if (ref($target_arg) eq 'HASH' && ($target_arg->{kind} // '') eq 'variable') {
-       _user_function_record_local_decl($decls, $params, '@', $target_arg->{name})
+       _user_function_record_local_decl($decls, $params, '$', $target_arg->{name})
         if $target_name eq 'array';
-       _user_function_record_local_decl($decls, $params, '%', $target_arg->{name})
+       _user_function_record_local_decl($decls, $params, '$', $target_arg->{name})
         if $target_name eq 'hash';
       }
      }
@@ -1467,30 +1506,30 @@ sub _user_function_collect_local_decls_from_node {
   } elsif ($name eq 'set_key' && ref($args) eq 'ARRAY' && @$args >= 1) {
    my $target = $args->[0];
    if (ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable') {
-    _user_function_record_local_decl($decls, $params, '%', $target->{name});
+    _user_function_record_local_decl($decls, $params, '$', $target->{name});
    }
   } elsif ($name eq 'push' && ref($args) eq 'ARRAY' && @$args >= 1) {
    my $target = $args->[0];
    if (ref($target) eq 'HASH') {
     if (($target->{kind} // '') eq 'variable') {
-     _user_function_record_local_decl($decls, $params, '@', $target->{name});
+     _user_function_record_local_decl($decls, $params, '$', $target->{name});
     } elsif (($target->{kind} // '') eq 'call' && ($target->{name} // '') eq 'array') {
      my $target_args = $target->{args} || [];
      my $target_arg = ref($target_args) eq 'ARRAY' ? $target_args->[0] : undef;
-     _user_function_record_local_decl($decls, $params, '@', $target_arg->{name})
+     _user_function_record_local_decl($decls, $params, '$', $target_arg->{name})
       if ref($target_arg) eq 'HASH' && ($target_arg->{kind} // '') eq 'variable';
     }
    }
   } elsif ($name =~ /^(?:array|flat_array|copy)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
    my $arg = $args->[0];
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'variable') {
-    _user_function_record_local_decl($decls, $params, '@', $arg->{name});
+    _user_function_record_local_decl($decls, $params, '$', $arg->{name});
     return;
    }
   } elsif ($name =~ /^(?:hash|flat_hash)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
    my $arg = $args->[0];
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'variable') {
-    _user_function_record_local_decl($decls, $params, '%', $arg->{name});
+    _user_function_record_local_decl($decls, $params, '$', $arg->{name});
     return;
    }
   }
@@ -1803,6 +1842,9 @@ sub _lower_ast_call_statement {
   my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($value_lowered) && length($value_lowered);
+  my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'hash', $deps);
+  return _uniform_binding_hash_index_set_expr($binding_symbol, $key_lowered, $value_lowered)
+   if defined($binding_symbol);
   return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
  }
 
@@ -1830,9 +1872,12 @@ sub _lower_ast_call_statement {
   my $first_expr = $trim_action_ir_value->($effective_args->[0]);
   my $second_expr = $trim_action_ir_value->($effective_args->[1]);
   my $second_literal = $lower_primitive_literal_expr->($second_expr);
-  return undef if defined($first_expr) && defined($second_expr)
-             && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
-             && !defined($second_literal);
+  if (defined($first_expr) && defined($second_expr)
+   && $first_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+   && $second_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+   && !defined($second_literal)) {
+   return _uniform_binding_ambiguous_push_expr($first_expr, $second_expr)
+  }
 
   my $target_expr = $trim_action_ir_value->($effective_args->[0]);
   return _actionir_ast_unsupported_helper_expr($method)
@@ -1848,6 +1893,9 @@ sub _lower_ast_call_statement {
    unless defined($value_expr) && length($value_expr);
   my $lowered_value = _lower_method_value_expr($value_expr, $deps);
   $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
+  my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'array', $deps);
+  return _uniform_binding_array_push_expr($binding_symbol, $lowered_value)
+   if defined($binding_symbol);
   return "push \@$target_symbol, $lowered_value"
  }
 
@@ -1903,9 +1951,15 @@ sub _lower_ast_array_end_mutation_method_statement {
   my $lowered_value = _lower_mutation_slot_value_expr($value_expr, $deps);
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($lowered_value) && length($lowered_value);
+  my $binding_symbol = _uniform_binding_target_symbol($receiver_expr, 'array', $deps);
+  return _uniform_binding_array_end_expr($binding_symbol, $method, $lowered_value)
+   if defined($binding_symbol);
   return ($method eq 'push_back' ? 'push @' : 'unshift @').$target_symbol.', '.$lowered_value
  }
 
+ my $binding_symbol = _uniform_binding_target_symbol($receiver_expr, 'array', $deps);
+ return _uniform_binding_array_end_expr($binding_symbol, $method, undef)
+  if defined($binding_symbol);
  return 'pop @'.$target_symbol if $method eq 'pop_back';
  return 'shift @'.$target_symbol if $method eq 'pop_front';
  return undef
@@ -1972,7 +2026,7 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($value) && length($value);
   my $lowered_value = _lower_mutation_slot_value_expr($value, $deps);
   return undef unless defined($lowered_value) && length($lowered_value);
-  return "push \@$target, $lowered_value"
+  return _uniform_binding_array_push_expr($target, $lowered_value)
  }
 
  if ($kind eq 'assign_hash_index') {
@@ -2053,9 +2107,14 @@ sub _lower_method_value_expr {
  my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
  my $strip_literal_delimiters = $require_dep->('strip_literal_delimiters');
- my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+ my $base_bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
   ? $deps->{bare_symbol_kind}
   : sub { return undef };
+ my $bare_symbol_kind = sub {
+  my ($name) = @_;
+  return 'scalar' if _user_function_scalar_value_name($deps, $name);
+  return $base_bare_symbol_kind->($name)
+ };
  my $extract_array_symbol_name = sub {
   my ($candidate_expr) = @_;
   my $candidate = $trim_action_ir_value->($candidate_expr);
@@ -2235,6 +2294,10 @@ sub _lower_method_value_expr {
    return undef unless defined($container_expr) && length($container_expr);
 
    if ($container_expr =~ $array_container_prefix_re) {
+    if ($container_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+     && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+     return 'do { my $__ls_flat_array = $'.$1.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
+    }
     my $array_symbol = $extract_array_symbol_name->($container_expr);
     return '@'.$array_symbol if defined($array_symbol) && length($array_symbol);
    }
@@ -2244,6 +2307,10 @@ sub _lower_method_value_expr {
     return 'do { my $__ls_flat_array = '.$lowered_array.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
    }
    if ($container_expr =~ $hash_container_prefix_re) {
+    if ($container_expr =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+     && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+     return 'do { my $__ls_flat_hash = $'.$1.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
+    }
     my $hash_symbol = $extract_hash_symbol_name->($container_expr);
     return '%'.$hash_symbol if defined($hash_symbol) && length($hash_symbol);
    }
@@ -2260,6 +2327,10 @@ sub _lower_method_value_expr {
    return undef unless $flat_args;
    my $array_expr = $trim_action_ir_value->($flat_args->[0]);
    return undef unless defined($array_expr) && length($array_expr);
+   if ($array_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+    return 'do { my $__ls_flat_array = $'.$1.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
+   }
    my $array_symbol = $extract_array_symbol_name->($array_expr);
    return '@'.$array_symbol if defined($array_symbol) && length($array_symbol);
    return undef unless $looks_like_array_value_expr->($array_expr);
@@ -2273,6 +2344,10 @@ sub _lower_method_value_expr {
    return undef unless $flat_args;
    my $hash_expr = $trim_action_ir_value->($flat_args->[0]);
    return undef unless defined($hash_expr) && length($hash_expr);
+   if ($hash_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+    return 'do { my $__ls_flat_hash = $'.$1.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
+   }
    my $hash_symbol = $extract_hash_symbol_name->($hash_expr);
    return '%'.$hash_symbol if defined($hash_symbol) && length($hash_symbol);
    return undef unless $looks_like_hash_value_expr->($hash_expr);
@@ -3159,7 +3234,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($value_source) && length($value_source);
    my $lowered_value = _lower_mutation_slot_value_expr($value_source, $deps);
    return undef unless defined($lowered_value) && length($lowered_value);
-   return 'do { push @'.$target.', '.$lowered_value.'; [@'.$target.'] }'
+   return _uniform_binding_array_push_expr($target, $lowered_value)
   }
 
   if ($kind eq 'assign_hash_index') {
@@ -3215,6 +3290,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
      && ($target_args->[0]{kind} // '') eq 'variable') {
      $target_name = $target_args->[0]{name};
      $target_sigil = ($target_node->{name} // '') eq 'array' ? '@' : '%';
+     my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+      ? $deps->{bare_symbol_kind}
+      : sub { return undef };
+     $target_sigil = '$' if (($bare_symbol_kind->($target_name) // '') eq 'scalar');
     }
    }
 
@@ -3654,6 +3733,22 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
 
+  if ($method eq 'copy' && @$args == 1 && ref($args->[0]) eq 'HASH'
+   && ($args->[0]{kind} // '') eq 'call') {
+   my $container = $args->[0];
+   my $container_args = $container->{args} || [];
+   if (ref($container_args) eq 'ARRAY'
+    && @$container_args == 1
+    && ref($container_args->[0]) eq 'HASH'
+    && ($container_args->[0]{kind} // '') eq 'variable'
+    && (($bare_symbol_kind->($container_args->[0]{name}) // '') eq 'scalar')) {
+    return $lower_scalar_bound_array_snapshot_expr->($container_args->[0]{name})
+     if ($container->{name} // '') eq 'array';
+    return $lower_scalar_bound_hash_snapshot_expr->($container_args->[0]{name})
+     if ($container->{name} // '') eq 'hash';
+   }
+  }
+
   my @arg_exprs;
   my @internal_array_pipeline_arg_exprs;
   foreach my $arg (@$args) {
@@ -3697,6 +3792,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $pipeline_reducer if defined($pipeline_reducer) && length($pipeline_reducer);
   }
 
+  if (@$args == 1
+   && ref($args->[0]) eq 'HASH'
+   && ($args->[0]{kind} // '') eq 'variable'
+   && (($bare_symbol_kind->($args->[0]{name}) // '') eq 'scalar')) {
+   return $lower_scalar_bound_array_snapshot_expr->($args->[0]{name}) if $method eq 'array';
+   return $lower_scalar_bound_hash_snapshot_expr->($args->[0]{name}) if $method eq 'hash';
+  }
+
   return '['.join(', ', @arg_exprs).']'
    if $method eq 'array' && @arg_exprs != 1;
 
@@ -3721,6 +3824,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $receiver_expr;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
    if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
+  $receiver_expr = $lower_ast_scalar_assignment_value_node->($receiver)
+   if ($receiver->{kind} // '') eq 'call'
+   && (($receiver->{name} // '') eq 'set' || ($receiver->{name} // '') eq '=');
   if (($receiver->{kind} // '') eq 'raw_perl') {
    my $leading = _split_leading_call_suffix($receiver->{source});
    if (ref($leading) eq 'HASH') {
@@ -3851,6 +3957,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
     return undef unless @$arg_exprs == 0;
     return [$method.'('.$current_expr.')', 'terminal'];
+   }
+   if (($method eq 'sorted' || $method eq 'reversed') && $current_expr =~ /^do\s*\{/s) {
+    return undef unless @$arg_exprs == 0;
+    return [
+     'do { require LinkedSpec::BindingRuntime; LinkedSpec::BindingRuntime::array_transform('
+      .$current_expr.', "<receiver>", "'.$method.'") }',
+     'array',
+    ];
    }
    if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
     return ['__array_value_'.$method.'('.join(', ', ($current_expr, @$arg_exprs)).')', 'array'];
@@ -4019,7 +4133,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
       return undef unless @$arg_exprs == 0;
-      $current_expr = 'hash(flat_hash('.$current_expr.'))';
+      $current_expr = 'copy('.$current_expr.')';
      } else {
       $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
      }
@@ -4077,7 +4191,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
       return undef unless @$arg_exprs == 0;
-      $current_expr = 'hash(flat_hash('.$current_expr.'))';
+      $current_expr = 'copy('.$current_expr.')';
      } else {
       $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
      }
@@ -4905,7 +5019,10 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+   if (defined($array_symbol)
+    && length($array_symbol)
+    && $target_expr =~ $array_symbol_expr_re
+    && (($bare_symbol_kind->($array_symbol) // '') ne 'scalar')) {
     return 'do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@'.$array_symbol.') { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
    }
 
@@ -4939,7 +5056,10 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+   if (defined($array_symbol)
+    && length($array_symbol)
+    && $target_expr =~ $array_symbol_expr_re
+    && (($bare_symbol_kind->($array_symbol) // '') ne 'scalar')) {
     return 'do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@'.$array_symbol.') { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
    }
 
@@ -5052,13 +5172,25 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   my $empty_expr;
   if ($target_expr =~ $array_container_prefix_re) {
+   if ($target_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+    my $name = $1;
+    $empty_expr = 'do { my $__ls_is_empty_array = $'.$name.'; (!defined($__ls_is_empty_array) || ref($__ls_is_empty_array) ne \'ARRAY\' || !@{$__ls_is_empty_array}) ? 1 : 0 }';
+   } else {
    my $array_symbol = $extract_array_symbol_name->($target_expr);
    return undef unless defined($array_symbol) && length($array_symbol);
    $empty_expr = '((!@'.$array_symbol.') ? 1 : 0)';
+   }
   } elsif ($target_expr =~ $hash_container_prefix_re) {
+   if ($target_expr =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+    my $name = $1;
+    $empty_expr = 'do { my $__ls_is_empty_hash = $'.$name.'; (!defined($__ls_is_empty_hash) || ref($__ls_is_empty_hash) ne \'HASH\' || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }';
+   } else {
    my $hash_symbol = $extract_hash_symbol_name->($target_expr);
    return undef unless defined($hash_symbol) && length($hash_symbol);
    $empty_expr = '((!scalar(keys %'.$hash_symbol.')) ? 1 : 0)';
+   }
   } else {
    my $scalar_symbol = $extract_scalar_symbol_name->($target_expr);
    if (defined($scalar_symbol) && length($scalar_symbol)) {
@@ -5367,7 +5499,6 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   my $target_expr = $trim_action_ir_value->($sorted_args->[0]);
   return undef unless defined($target_expr) && length($target_expr);
-  return undef unless $looks_like_array_value_expr->($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
@@ -5386,7 +5517,6 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   my $target_expr = $trim_action_ir_value->($reversed_args->[0]);
   return undef unless defined($target_expr) && length($target_expr);
-  return undef unless $looks_like_array_value_expr->($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
@@ -6156,6 +6286,19 @@ sub _lower_assign_statement {
   return $finish->(undef, 'bare_value_target_failed', { target => $target_trimmed }) unless defined($source_expr) && length($source_expr);
   return $finish->("\$$target_trimmed = $source_expr", 'bare_value_target', { target => $target_trimmed });
  }
+ if (defined($target_trimmed)
+  && $target_trimmed =~ /^(?:array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
+  my $target_name = $1;
+  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+   ? $deps->{bare_symbol_kind}
+   : sub { return undef };
+  if (($bare_symbol_kind->($target_name) // '') eq 'scalar') {
+   my $source_expr = _lower_value_binding_source_expr($source, $deps);
+   return $finish->(undef, 'scalar_held_wrapper_target_failed', { target => $target_name })
+    unless defined($source_expr) && length($source_expr);
+   return $finish->('$'.$target_name.' = '.$source_expr, 'scalar_held_wrapper_target', { target => $target_name });
+  }
+ }
 
  my $symbol = $extract_scalar_symbol_name->($target);
  if (defined $symbol) {
@@ -6285,7 +6428,7 @@ sub _lower_array_append_operator_statement {
   taken => 1,
   context => { target => $target_symbol },
  );
- return "push \@$target_symbol, $lowered_value"
+ return _uniform_binding_array_push_expr($target_symbol, $lowered_value)
 }
 
 sub _split_receiver_dot_method_expr {
@@ -6777,7 +6920,7 @@ sub _normalize_hash_receiver_value_chain_expr {
     $current_expr = 'copy('.$current_expr.')';
    } elsif ($method eq 'flat_hash') {
     return undef unless @args == 0;
-    $current_expr = 'hash(flat_hash('.$current_expr.'))';
+    $current_expr = 'copy('.$current_expr.')';
    } else {
     $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
    }
@@ -6903,6 +7046,9 @@ sub _lower_array_end_mutation_method_statement {
    taken => 1,
    context => { target => $parsed->{target} },
   );
+  my $binding_symbol = _uniform_binding_target_symbol($parsed->{receiver}, 'array', $deps);
+  return _uniform_binding_array_end_expr($binding_symbol, 'push_back', $lowered_value)
+   if defined($binding_symbol);
   return 'push @'.$parsed->{target}.', '.$lowered_value;
  }
  if ($parsed->{method} eq 'push_front') {
@@ -6915,6 +7061,9 @@ sub _lower_array_end_mutation_method_statement {
    taken => 1,
    context => { target => $parsed->{target} },
   );
+  my $binding_symbol = _uniform_binding_target_symbol($parsed->{receiver}, 'array', $deps);
+  return _uniform_binding_array_end_expr($binding_symbol, 'push_front', $lowered_value)
+   if defined($binding_symbol);
   return 'unshift @'.$parsed->{target}.', '.$lowered_value;
  }
  if ($parsed->{method} eq 'pop_back') {
@@ -6925,6 +7074,9 @@ sub _lower_array_end_mutation_method_statement {
    taken => 1,
    context => { target => $parsed->{target} },
   );
+  my $binding_symbol = _uniform_binding_target_symbol($parsed->{receiver}, 'array', $deps);
+  return _uniform_binding_array_end_expr($binding_symbol, 'pop_back', undef)
+   if defined($binding_symbol);
   return 'pop @'.$parsed->{target};
  }
  if ($parsed->{method} eq 'pop_front') {
@@ -6935,6 +7087,9 @@ sub _lower_array_end_mutation_method_statement {
    taken => 1,
    context => { target => $parsed->{target} },
   );
+  my $binding_symbol = _uniform_binding_target_symbol($parsed->{receiver}, 'array', $deps);
+  return _uniform_binding_array_end_expr($binding_symbol, 'pop_front', undef)
+   if defined($binding_symbol);
   return 'shift @'.$parsed->{target};
  }
  return undef
@@ -7081,7 +7236,7 @@ sub _lower_hash_index_assignment_operator_statement {
   taken => 1,
   context => { target => $parsed->{target} },
  );
- return '$'.$parsed->{target}.'{'.$key_lowered.'} = '.$value_lowered
+ return _uniform_binding_hash_index_set_expr($parsed->{target}, $key_lowered, $value_lowered)
 }
 
 #------------------------------------------------------------------------------
@@ -7149,6 +7304,9 @@ sub _lower_set_key_statement {
   taken => 1,
   context => { target => $hash_symbol },
  );
+ my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'hash', $deps);
+ return _uniform_binding_hash_index_set_expr($binding_symbol, $key_lowered, $value_lowered)
+  if defined($binding_symbol);
  return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
 }
 
@@ -7206,9 +7364,12 @@ sub _lower_push_statement {
  my $first_expr = $trim_action_ir_value->($effective_args->[0]);
  my $second_expr = $trim_action_ir_value->($effective_args->[1]);
  my $second_literal = $lower_primitive_literal_expr->($second_expr);
- return undef if defined($first_expr) && defined($second_expr)
-            && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
-            && !defined($second_literal);
+ if (defined($first_expr) && defined($second_expr)
+  && $first_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+  && $second_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+  && !defined($second_literal)) {
+  return _uniform_binding_ambiguous_push_expr($first_expr, $second_expr)
+ }
  return undef unless $effective_args;
 
  my $target_expr = $trim_action_ir_value->($effective_args->[0]);
@@ -7230,6 +7391,9 @@ sub _lower_push_statement {
   taken => 1,
   context => { target => $target_symbol, method => $call->{method} },
  );
+ my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'array', $deps);
+ return _uniform_binding_array_push_expr($binding_symbol, $lowered_value)
+  if defined($binding_symbol);
  return "push \@$target_symbol, $lowered_value"
 }
 

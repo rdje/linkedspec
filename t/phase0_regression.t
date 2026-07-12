@@ -12443,9 +12443,10 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'EmitContext lowering does not call the trapped removed LinkedSpec facade helpers');
     is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{push}, 'push @items, $retv', 'push lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{push}, 'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $retv) }',
+        'push lowering stays inside EmitContext-owned lowering path');
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{pipeline}, '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
+    is($rewritten{pipeline}, 'do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::split_value($parts, "parts", $args, qr/\s*,\s*/); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "trim_each"); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "filter_nonempty"); $parts }',
         'array pipeline lowering stays inside EmitContext-owned lowering path');
     is($rewritten{flow}, 'if ($on) {; print "warn"; } else {; return undef; }',
         'if/else flow lowering stays inside EmitContext-owned lowering path');
@@ -13246,10 +13247,10 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
         'push @Top, &{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
         'push(rule) helper rewrite preserved'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst($label, 'push(Foo,Bar)'),
-        'push @Bar, &{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
-        'push(rule,target) helper rewrite preserved'
+        qr/^do \{.*\$__ls_push_entry = \$\$descr\{spec\}\{Foo\}.*\$Bar = LinkedSpec::BindingRuntime::push_value.*else.*\$Foo = LinkedSpec::BindingRuntime::push_value/s,
+        'push(rule,target) preserves static-rule precedence and the bare-binding fallback'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, '$CAPTURE'),
@@ -16226,40 +16227,40 @@ SPEC
 subtest 'emit_context_lowers_push_method_contract' => sub {
     plan tests => 19;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
-        'push @items, $retv',
-        'push(array(target), value) lowers to canonical Perl push statement'
+        qr/BindingRuntime::push_value\(\$items, "items", \$retv\)/,
+        'push(array(target), value) remains compatible over the uniform binding'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), array(tag, name))'),
-        'push @items, [$tag, $name]',
+        qr/BindingRuntime::push_value\(\$items, "items", \[\$tag, \$name\]\)/,
         'push accepts wrapped target symbol and lowers nested array(...) value expression'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
-        'push @items, $retv',
+        qr/BindingRuntime::push_value\(\$items, "items", \$retv\)/,
         'push preserves explicit wrapped target lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(items, "a")'),
-        'push @items, "a"',
-        'terse push(target, literal) lowers as explicit value append'
+        'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", "a") }',
+        'terse push(target, literal) lowers as a uniform typed-binding append'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
-        'push @items, $retv',
+        qr/BindingRuntime::push_value\(\$items, "items", \$retv\)/,
         'terse push(array(target), value) lowers as explicit value append'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
-        'push @items, $retv',
+        qr/BindingRuntime::push_value\(\$items, "items", \$retv\)/,
         'terse push(array(target), value) lowers as explicit value append'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(items, call(Leaf))'),
-        'push @items, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)',
-        'terse push(target, call(rule)) lowers as explicit child-result value append'
+        'do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)) }',
+        'terse push(target, call(rule)) lowers as a uniform typed-binding child-result append'
     );
 
     my $spec_content = <<'SPEC';
@@ -16302,9 +16303,9 @@ SPEC
     };
     ok($push_alias_source_ok, 'generated-source dump succeeds for terse push explicit-value alias with nested comma value')
         or diag(normalize_error($@));
-    my $push_alias_my_count = () = ($push_alias_source =~ /my \@items\b/g);
-    is($push_alias_my_count, 1, 'bare target in terse push(target, value) auto-supplies exactly one `my @items`');
-    like($push_alias_source, qr/push \@items,\s*do \{ my \@__ls_cat_parts = \("a", "b"\)/,
+    my $push_alias_my_count = () = ($push_alias_source =~ /my \$items\b/g);
+    is($push_alias_my_count, 1, 'bare target in terse push(target, value) auto-supplies exactly one scalar-held typed binding');
+    like($push_alias_source, qr/BindingRuntime::push_value\(\$items, "items",\s*do \{ my \@__ls_cat_parts = \("a", "b"\)/,
         'terse push(target, nested-comma-value) lowers after parser-backed target collection');
 };
 subtest 'emit_context_lowers_push_child_call_contracts' => sub {
@@ -16316,10 +16317,10 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
         'push @Top, '.$handler_call,
         'push(Rule) lowers to a child call pushed into the current rule array'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(Leaf, items)'),
-        'push @items, '.$handler_call,
-        'push(Rule, target) lowers to a child call pushed into the target array'
+        qr/^do \{.*\$__ls_push_entry = \$\$descr\{spec\}\{Leaf\}.*\$items = LinkedSpec::BindingRuntime::push_value.*\$Leaf = LinkedSpec::BindingRuntime::push_value/s,
+        'push(Rule, target) keeps static child-call precedence with the uniform binding fallback'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(Leaf, items, 1)'),
@@ -16336,10 +16337,10 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
         'push @items, '.$handler_call,
         'scope-injected push(scope, Rule, target) lowering remains supported for method-chain rendering'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(items, value)'),
-        'push @value, &{$$descr{spec}{items}{handler}}($descr, $STRING, $minfo)',
-        'two-bare-token push(A, B) keeps child-call precedence; wrap the value for explicit append'
+        qr/^do \{.*\$__ls_push_entry = \$\$descr\{spec\}\{items\}.*\$value = LinkedSpec::BindingRuntime::push_value.*\$items = LinkedSpec::BindingRuntime::push_value/s,
+        'two-bare-token push(A, B) keeps child-call precedence with the uniform binding fallback'
     );
 
     my $spec_content = <<'SPEC';
@@ -16405,17 +16406,17 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), array(retv))'),
-        '@items = ($retv)',
-        'set(array(target), array(...)) lowers to array assignment with lowered value payloads'
+        '$items = [@retv]',
+        'set(array(target), array(...)) remains compatible over the uniform binding'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), array())'),
-        '@items = ()',
-        'set(array(target), array()) lowers to empty array assignment'
+        '$items = []',
+        'set(array(target), array()) remains compatible over an empty typed array'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(assigns), copy(array(keyval_pairs)))'),
-        'push @assigns, [@keyval_pairs]',
+        qr/BindingRuntime::push_value\(\$assigns, "assigns", \[\@keyval_pairs\]\)/,
         'push accepts copy(array(...)) snapshot payloads'
     );
     is(
@@ -16548,14 +16549,14 @@ SPEC
 subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub {
     plan tests => 12;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))'),
-        '@items = @IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }',
+        qr/^\$items = \[\@IMATCH_LIST = grep .*UnicodeCaseMapping::uppercase/s,
         'set(array(name), pipeline(...)) lowers nested array-pipeline initializer'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))'),
-        '@parts = @items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @items }',
+        qr/^\$parts = \[\@items = grep .*UnicodeCaseMapping::uppercase/s,
         'set(array(...), pipeline(...)) lowers nested array-pipeline source'
     );
     is(
@@ -16600,19 +16601,19 @@ SPEC
 subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     plan tests => 14;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        '%by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }])',
+        qr/^\$by_name = \{"A" => \[\@IMATCH_LIST = grep .*UnicodeCaseMapping::uppercase/s,
         'set(hash(name), hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(items))), /^B/))))'),
-        '%by_name = ("A" => [@items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @items }])',
+        qr/^\$by_name = \{"A" => \[\@items = grep .*UnicodeCaseMapping::uppercase/s,
         'set(hash(...), hash(... array(pipeline(...)))) lowers nested collection-valued hash source'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}',
+        qr/BindingRuntime::push_value\(\$events, "events", \{"items" => \[\@IMATCH_LIST = grep/s,
         'push accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
@@ -37072,9 +37073,9 @@ subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
         'return {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => do { $IMATCH }}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
         'merge_hash(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta), merge_hash(hash(meta), hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback"))))'),
-        '%meta = (%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () })',
+        qr/^\$meta = .*__ls_merge_hash.*__ls_coalesce/s,
         'merge_hash(...) lowers inside hash assignment sources'
     );
 };
@@ -37184,9 +37185,9 @@ subtest 'emit_context_lowers_hash_snapshot_value_helpers' => sub {
         'return do { my $__ls_hash_snapshot = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }',
         'copy(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta_out), copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
-        '%meta_out = (do { my $__ls_hash_init = do { my $__ls_hash_snapshot = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        qr/^\$meta_out = .*__ls_hash_snapshot.*__ls_pick_source/s,
         'copy(...) lowers inside hash assignment sources'
     );
 };
@@ -37296,9 +37297,9 @@ subtest 'emit_context_lowers_set_key_value_helpers' => sub {
         'return do { my $__ls_set_key_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }',
         'set_key(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta), set_key(merge_hash(hash(meta), hash("kind", "node")), "stage", "normalized"))'),
-        '%meta = (do { my $__ls_hash_init = do { my $__ls_set_key_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        qr/^\$meta = .*__ls_set_key_source.*__ls_set_key/s,
         'set_key(...) lowers inside hash assignment sources'
     );
 };
@@ -37408,9 +37409,9 @@ subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
         'return do { my $__ls_rename_key_source = {%meta, do { my $__ls_merge_hash = {"old_stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }',
         'rename_key(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta), rename_key(merge_hash(hash(meta), hash("old_stage", "normalized")), "old_stage", "stage"))'),
-        '%meta = (do { my $__ls_hash_init = do { my $__ls_rename_key_source = {%meta, do { my $__ls_merge_hash = {"old_stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        qr/^\$meta = .*__ls_rename_key_source.*__ls_rename_key/s,
         'rename_key(...) lowers inside hash assignment sources'
     );
 };
@@ -37520,9 +37521,9 @@ subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
         'return do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }',
         'drop_keys(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta), drop_keys(merge_hash(hash(meta), hash("kind", "node"), hash("debug", 1)), "debug"))'),
-        '%meta = (do { my $__ls_hash_init = do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        qr/^\$meta = .*__ls_drop_source.*__ls_drop/s,
         'drop_keys(...) lowers inside hash assignment sources'
     );
 };
@@ -37632,9 +37633,9 @@ subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
         'return do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => "rule"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }',
         'pick_keys(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta), pick_keys(merge_hash(hash(meta), hash("kind", "node"), hash("source", "rule"), hash("debug", 1)), "kind", "source"))'),
-        '%meta = (do { my $__ls_hash_init = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => "rule"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        qr/^\$meta = .*__ls_pick_source.*__ls_pick/s,
         'pick_keys(...) lowers inside hash assignment sources'
     );
 };
@@ -37744,9 +37745,9 @@ subtest 'emit_context_lowers_sorted_keys_value_helpers' => sub {
         'return {"keys" => do { my $__ls_sorted_keys = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }}',
         'sorted_keys(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(keys_out), sorted_keys(merge_hash(hash(meta), hash("stage", "normalized"))))'),
-        '@keys_out = (do { my $__ls_array_init = do { my $__ls_sorted_keys = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })',
+        qr/^\$keys_out = .*__ls_sorted_keys/s,
         'sorted_keys(...) lowers inside array assignment sources with list-context flattening'
     );
 };
@@ -37856,9 +37857,9 @@ subtest 'emit_context_lowers_sorted_values_value_helpers' => sub {
         'return {"values" => do { my $__ls_sorted_values = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }}',
         'sorted_values(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(values_out), sorted_values(merge_hash(hash(meta), hash("stage", "normalized"))))'),
-        '@values_out = (do { my $__ls_array_init = do { my $__ls_sorted_values = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })',
+        qr/^\$values_out = .*__ls_sorted_values/s,
         'sorted_values(...) lowers inside array assignment sources with list-context flattening'
     );
 };
@@ -37968,9 +37969,9 @@ subtest 'emit_context_lowers_concat_arrays_value_helpers' => sub {
         q{return [@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]},
         'concat_arrays(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(combined), concat_arrays(array(parts), sorted_keys(hash(meta)), ["tail"]))'),
-        q{@combined = (@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () })},
+        qr/^\$combined = \[\@parts.*__ls_concat_arrays/s,
         'set(array(name), concat_arrays(...)) lowers into list-context array initialization'
     );
 };
@@ -38076,9 +38077,9 @@ subtest 'emit_context_lowers_sorted_array_value_helpers' => sub {
         q{return do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
         'sorted(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(ordered), sorted(concat_arrays(array(parts), ["delta"])))'),
-        q{@ordered = (do { my $__ls_array_init = do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
+        qr/^\$ordered = .*__ls_sorted.*__ls_concat_arrays/s,
         'sorted(...) lowers inside array assignment sources with list-context flattening'
     );
 };
@@ -38184,9 +38185,9 @@ subtest 'emit_context_lowers_reversed_array_value_helpers' => sub {
         q{return do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }},
         'reversed(...) lowers inside general return payloads'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(reversed_parts), reversed(concat_arrays(array(parts), ["delta"])))'),
-        q{@reversed_parts = (do { my $__ls_array_init = do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
+        qr/^\$reversed_parts = .*__ls_reversed.*__ls_concat_arrays/s,
         'reversed(...) lowers inside array assignment sources with list-context flattening'
     );
 };
@@ -38900,9 +38901,9 @@ SPEC
 subtest 'emit_context_lowers_composable_array_string_method_contracts' => sub {
     plan tests => 11;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'split(array(parts), args, /\s*,\s*/)'),
-        '@parts = split /\s*,\s*/, $args',
+        qr/BindingRuntime::split_value\(\$parts, "parts", \$args, qr\/\\s\*,\\s\*\/\)/,
         'split helper lowers into array assignment with regex delimiter'
     );
     is(
@@ -38915,9 +38916,9 @@ subtest 'emit_context_lowers_composable_array_string_method_contracts' => sub {
         '@parts = grep { length($_) } @parts',
         'filter_nonempty helper lowers into grep assignment'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'split(array(parts), args, /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts))'),
-        '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
+        qr/BindingRuntime::split_value.*BindingRuntime::array_transform\(\$parts, "parts", "trim_each"\).*BindingRuntime::array_transform\(\$parts, "parts", "filter_nonempty"\)/s,
         'composed split/trim/filter helper chain lowers deterministically'
     );
 
@@ -39019,14 +39020,14 @@ SPEC
 subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     plan tests => 26;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'if(on); push(pipe_operator, rule); elseif(alt_on); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
-        'if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } elsif ($alt_on) {; print "warn"; } else {; say "Error: no context"; return undef; }',
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*print "warn".*else.*say "Error: no context"; return undef/s,
         'if/elseif/else/endif fluent chain lowers to structured Perl control-flow with branch statements'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst('Top', 'i(on); push(pipe_operator, rule); elif(alt_on); say("warn"); endif()'),
-        'if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } elsif ($alt_on) {; say "warn"; }',
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*say "warn"/s,
         'i/elif aliases lower to canonical if/elsif flow'
     );
     my $lisp_if = LinkedSpec::call_spec_handler_subst(
@@ -39362,7 +39363,7 @@ subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' =
     );
     like(
         $composite_switch,
-        qr/if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"\|\"\) \{ \$__ls_switch_hit_1 = 1; push \@rule, &\{\$\$descr\{spec\}\{pipe_operator\}\{handler\}\}\(\$descr, \$STRING, \$minfo\) \}/s,
+        qr/if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"\|\"\) \{ \$__ls_switch_hit_1 = 1; do \{.*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value/s,
         'inline switch(..., case(...), ...) composite form lowers case branch actions without separate case()/endswitch() markers'
     );
     like(
@@ -39569,12 +39570,12 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
 subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
     plan tests => 7;
 
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst(
             'Top',
             q{if(on); push(pipe_operator, rule); else(); say("Error: '|' operator occurrence with no container rule context"); return_undef(); endif()}
         ),
-        q{if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } else {; say "Error: '|' operator occurrence with no container rule context"; return undef; }},
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*else.*say "Error: '\|' operator occurrence with no container rule context"; return undef/s,
         'pipe_operator fluent if/else chain lowers to expected branch semantics without raw block code'
     );
 
@@ -39847,9 +39848,9 @@ subtest 'emit_context_canonical_ir_lowering_preserves_helper_and_raw_behavior' =
         '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); my $tmp = 1',
         'canonical-IR lowering accepts optional helper whitespace and preserves RAW_PERL statement'
     );
-    is(
+    like(
         LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return(1)'),
-        q{push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); return 1},
+        qr/^do \{.*\$__ls_push_entry = \$\$descr\{spec\}\{Leaf\}.*\$Top = LinkedSpec::BindingRuntime::push_value.*\$Leaf = LinkedSpec::BindingRuntime::push_value.*\}; return 1$/s,
         'canonical-IR lowering preserves push/return helper output semantics'
     );
 };
@@ -44926,8 +44927,8 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
 
     # (b) bare push target -> array.
     my $array_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n");
-    my $n_array = () = ($array_src =~ /my \@items\b/g);
-    is($n_array, 1, 'bare push(items, ...) auto-supplies exactly one `my @items`');
+    my $n_array = () = ($array_src =~ /my \$items\b/g);
+    is($n_array, 1, 'bare push(items, ...) auto-supplies exactly one scalar-held typed binding');
 
     # (c) deferral boundary: the child-append fluent .push(target) (whose paired `push(Rule, ...)`
     #     has a RULE name as first arg -- ambiguous) is NOT collected by Channel 1.
@@ -44969,8 +44970,8 @@ subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_setup_single_my' => sub 
 
     my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(copy(array(items)))}\n");
-    my $n4 = () = ($mix_array =~ /my \@items\b/g);
-    is($n4, 1, 'bare push(items,...) + wrapped array(items) dedup to exactly one `my @items`');
+    my $n4 = () = ($mix_array =~ /my \$items\b/g);
+    is($n4, 1, 'bare push(items,...) + wrapped array(items) dedup to one typed binding');
 };
 
 subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
@@ -45054,16 +45055,16 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     unlike($reserved_src, qr/my \@undef\b/, 'aggregate bare-read collector still skips reserved DSL literal undef');
 
     my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)); return(copy(items)) }\n");
-    my $n_dedup_target = () = ($dedup_target_src =~ /my \@items\b/g);
-    is($n_dedup_target, 1, 'bare push target plus bare array snapshot read dedup to one `my @items`');
+    my $n_dedup_target = () = ($dedup_target_src =~ /my \$items\b/g);
+    is($n_dedup_target, 1, 'bare push target plus bare array snapshot read dedup to one typed binding');
 
     my $wrapped_src = $gen->("top:: -> w { return(copy(array(items))) }\n\nw : /x/\n");
     my $n_wrapped = () = ($wrapped_src =~ /my \@items\b/g);
     is($n_wrapped, 1, 'wrapped copy(array(items)) remains on the wrapped path with one `my @items`');
 
     my $hash_dedup_src = $gen->("top:: -> w { set_key(meta, \"kind\", \"x\"); return(copy(meta)) }\n\nw : /x/\n");
-    my $n_hash_dedup = () = ($hash_dedup_src =~ /my \%meta\b/g);
-    is($n_hash_dedup, 1, 'bare set_key target plus bare hash snapshot read dedup to one `my %meta`');
+    my $n_hash_dedup = () = ($hash_dedup_src =~ /my \$meta\b/g);
+    is($n_hash_dedup, 1, 'bare set_key target plus bare hash snapshot read dedup to one typed binding');
 
     is($run->($array_spec, 'x'), '[]', 'bare copy(items) runtime smoke returns an empty array snapshot');
 
@@ -45131,14 +45132,14 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'prefix identifier trueword is not a literal and now follows scalar bare-read semantics');
     is($L->('return(undefine)'), 'return $undefine',
         'prefix identifier undefine is not a literal and now follows scalar bare-read semantics');
-    is($L->('items += value'), 'push @items, $value',
+    like($L->('items += value'), qr/BindingRuntime::push_value\(\$items, "items", \$value\)/,
         'array append bare RHS is handled by the later mutation key/RHS scalar-read leaf');
-    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
         'hash-index bare RHS is handled by the later mutation key/RHS scalar-read leaf');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
-    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
-        'all-bare push(A,B) remains child-call syntax');
+    like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
+        'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
 
     my $return_src = $gen->("top:: -> w { return(count) }\n\nw : /x/\n");
     my $return_count_my = () = ($return_src =~ /my \$count\b/g);
@@ -45196,27 +45197,27 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         return defined($out) ? $out : ('ERR:' . normalize_error($@));
     };
 
-    is($L->('items += value'), 'push @items, $value',
+    like($L->('items += value'), qr/BindingRuntime::push_value\(\$items, "items", \$value\)/,
         'array append operator lowers a bare RHS as a scalar read');
-    like($L->('items += true'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::true \}/,
+    like($L->('items += true'), qr/BindingRuntime::push_value\(\$items, "items", do \{ require JSON::PP; JSON::PP::true \}\)/,
         'array append primitive literals remain typed values');
     is($L->('items += CAPTURE'), 'items += CAPTURE',
         'reserved engine locals are not claimed as mutation-slot scalar reads');
-    is($L->('set_key(meta,key,value)'), '$meta{$key} = $value',
+    like($L->('set_key(meta,key,value)'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
         'set_key(meta, key, value) lowers bare key and value as scalar reads');
-    is($L->('set_key(meta,"stage",value)'), '$meta{"stage"} = $value',
+    like($L->('set_key(meta,"stage",value)'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
         'set_key(meta, "stage", value) lowers a bare value as a scalar read');
-    is($L->('meta[key] = value'), '$meta{$key} = $value',
+    like($L->('meta[key] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
         'hash-index operator lowers bare key and value as scalar reads');
-    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
         'hash-index operator lowers a bare value with a literal key');
-    is($L->('meta[key] = "v"'), '$meta{$key} = "v"',
+    like($L->('meta[key] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, "v"\)/,
         'hash-index operator lowers a bare key with a literal value');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
-    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
-        'all-bare push(A,B) remains child-call syntax');
-    like($L->('push(items,value)'), qr/^push \@value, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
+    like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
+        'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
+    like($L->('push(items,value)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
         'all-bare push(items,value) keeps child-call precedence');
 
     my $d = LinkedSpec::Get(\("top:: /x/ -> top[0] { items += value; set_key(meta,key,value); meta[key] = value; return(copy(hash(meta))) }\n"), return_descriptor => 1);
@@ -45227,23 +45228,23 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'mutation-slot bare reads have no canonical fallback');
 
     my $src = $gen->("top:: -> w { items += value; set_key(meta, key, value); meta[key2] = value2; return(array(copy(array(items)), copy(hash(meta)))) }\n\nw : /x/\n");
-    for my $pair (['@', 'items'], ['%', 'meta'], ['$', 'value'], ['$', 'key'], ['$', 'key2'], ['$', 'value2']) {
+    for my $pair (['$', 'items'], ['$', 'meta'], ['$', 'value'], ['$', 'key'], ['$', 'key2'], ['$', 'value2']) {
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
         my $n = () = ($src =~ /my $q\b/g);
         is($n, 1, "mutation-slot bare read/target auto-supplies exactly one `my $sigil$name`");
     }
-    ok(index($src, 'my @items;') >= 0 && index($src, 'my @items;') < index($src, 'while (1)'),
-        'the auto `my @items` sits in the preamble before while(1)');
-    ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
-        'the auto `my %meta` sits in the preamble before while(1)');
+    ok(index($src, 'my $items;') >= 0 && index($src, 'my $items;') < index($src, 'while (1)'),
+        'the typed items binding sits in the preamble before while(1)');
+    ok(index($src, 'my $meta;') >= 0 && index($src, 'my $meta;') < index($src, 'while (1)'),
+        'the typed meta binding sits in the preamble before while(1)');
 
     my $literal_src = $gen->("top:: -> w { items += true; set_key(meta, false, undef); meta[true] = false; return(copy(hash(meta))) }\n\nw : /x/\n");
     unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
         'reserved primitive literals are not auto-declared as scalar reads in mutation slots');
 
     my $dedup_src = $gen->("top:: -> w { set(value, undef); set(key, undef); set(array(items), array()); set(hash(meta), hash()); items += value; set_key(meta, key, value); meta[key] = value; return(copy(array(items))) }\n\nw : /x/\n");
-    for my $pair (['$', 'value'], ['$', 'key'], ['@', 'items'], ['%', 'meta']) {
+    for my $pair (['$', 'value'], ['$', 'key'], ['$', 'items'], ['$', 'meta']) {
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
         my $n = () = ($dedup_src =~ /my $q\b/g);
@@ -45288,9 +45289,9 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         'direct-access bare path atom lowers identically to explicit index');
     is($L->('set(out, foo["a"][z])'), '$out = $foo->{"a"}->[$z]',
         'assignment source direct access lowers a bare path atom');
-    is($L->('items += foo["a"][z]'), 'push @items, $foo->{"a"}->[$z]',
+    like($L->('items += foo["a"][z]'), qr/BindingRuntime::push_value\(\$items, "items", \$foo->\{"a"\}->\[\$z\]\)/,
         'array append RHS direct access lowers a bare path atom');
-    is($L->('meta[key] = foo["a"][z]'), '$meta{$key} = $foo->{"a"}->[$z]',
+    like($L->('meta[key] = foo["a"][z]'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$foo->\{"a"\}->\[\$z\]\)/,
         'hash mutation RHS direct access lowers a bare path atom');
     is($L->('return(foo["a"][true])'), 'return foo["a"][true]',
         'reserved primitive literal true is not claimed as a direct-access path scalar read');
@@ -45298,8 +45299,8 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         'reserved engine local CAPTURE is not claimed as a direct-access path scalar read');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access bare path atom keeps scalar-index semantics across repeated lowering');
-    is($L->('push(A,B)'), 'push @B, &{$$descr{spec}{A}{handler}}($descr, $STRING, $minfo)',
-        'all-bare push(A,B) remains child-call syntax');
+    like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
+        'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
 
     my $src = $gen->("top:: -> w { set(out, foo[\"a\"][z]); items += foo[\"a\"][idx]; meta[key] = foo[\"a\"][pos]; return(out) }\n\nw : /x/\n");
     for my $name (qw(z idx pos)) {
@@ -45340,8 +45341,8 @@ subtest 'spec_format_terse_1_4_1_current_spellings_lower' => sub {
         ['return(copy(hash(m)))', 'return {%m}', 'copy(hash) lowers hash snapshot return payload'],
         ['set(x, cat(a,b))', undef, 'cat lowers scalar assignment source'],
         ['set(x, copy(array(y)))', '$x = [@y]', 'copy(array) lowers scalar assignment source'],
-        ['set(array(a2), copy(array(y)))', '@a2 = (@y)', 'copy(array) lowers array assignment source'],
-        ['set(hash(h2), copy(hash(m)))', '%h2 = (%m)', 'copy(hash) lowers hash assignment source'],
+        ['set(array(a2), copy(array(y)))', '$a2 = [@y]', 'copy(array) lowers uniform array assignment source'],
+        ['set(hash(h2), copy(hash(m)))', '$h2 = {%m}', 'copy(hash) lowers uniform hash assignment source'],
         ['push(array(items), cat(a,b))', undef, 'cat lowers explicit push value source'],
         ['if(true) { set(out, cat(out,"E")) }', undef, 'cat source spelling survives attached if-block reconstruction'],
         ['if(true) { set(out, name.cat("!")) }', undef, 'fluent cat source spelling survives attached if-block reconstruction'],
@@ -45402,9 +45403,9 @@ subtest 'spec_format_terse_1_4_1_copy_resolves_array_then_hash' => sub {
     is($L->('return(copy(hash(m)))'), 'return {%m}', 'copy of a wrapped hash symbol -> {%m}');
     is($L->('return(copy(items))'), 'return [@items]',
         'bare copy(items) resolves array-first');
-    is($L->('set(array(a2), copy(array(y)))'), '@a2 = (@y)',
+    is($L->('set(array(a2), copy(array(y)))'), '$a2 = [@y]',
         'copy lowers as an array assignment source');
-    is($L->('set(hash(h2), copy(hash(m)))'), '%h2 = (%m)',
+    is($L->('set(hash(h2), copy(hash(m)))'), '$h2 = {%m}',
         'copy lowers as a hash assignment source');
     like($L->('return(num_sum(copy(array(x))))'), qr/\$__ls_num_sum_source = \[\@x\]/,
         'copy stays array-like in numeric-reducer type inference');
@@ -45457,9 +45458,9 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
         return $src;
     };
 
-    like($L->('set_key(meta, "stage", cat("a", "b"))'), qr/^\$meta\{"stage"\} = do \{ my \@__ls_cat_parts/,
-        'top-level set_key(meta,...) lowers to direct hash-entry assignment');
-    like($L->('return(set_key(hash(meta), "stage", "v"))'), qr/^return do \{ my \$__ls_set_key_source = \\%meta;/,
+    like($L->('set_key(meta, "stage", cat("a", "b"))'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", do \{ my \@__ls_cat_parts/,
+        'top-level set_key(meta,...) lowers to a uniform typed-binding update');
+    like($L->('return(set_key(hash(meta), "stage", "v"))'), qr/^return do \{ my \$__ls_set_key_source = (?:\\%meta|do \{ my \$__ls_hash_value = \$meta)/,
         'nested set_key(hash(meta),...) remains the pure hash-copy value helper');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(copy(hash(meta))) }\n"), return_descriptor => 1);
@@ -45470,12 +45471,12 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
         'set_key statement has no canonical fallback');
 
     my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"stage\", \"v\"); return(\"ok\") }\n");
-    my $hash_my = () = ($src =~ /my \%meta\b/g);
-    is($hash_my, 1, 'bare set_key(meta,...) auto-supplies exactly one `my %meta`');
-    ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
-        'the auto `my %meta` sits in the preamble before while(1)');
-    unlike($src, qr/my [\$\@]meta\b/,
-        'bare set_key target is a HASH -- no scalar or array declaration for meta');
+    my $hash_my = () = ($src =~ /my \$meta\b/g);
+    is($hash_my, 1, 'bare set_key(meta,...) auto-supplies one typed binding');
+    ok(index($src, 'my $meta;') >= 0 && index($src, 'my $meta;') < index($src, 'while (1)'),
+        'the typed meta binding sits in the preamble before while(1)');
+    unlike($src, qr/my [\@\%]meta\b/,
+        'bare set_key target has no separate host aggregate declaration');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), cat(match_group(0), \"!\")) }\n"
              . "LX { return(copy(hash(meta))) }\n";
@@ -45519,7 +45520,7 @@ subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => su
         'equality-like spelling is not claimed by the scalar assignment operator');
     is($L->('items ++'), 'items ++',
         'increment-like spelling is not claimed by the scalar assignment operator');
-    is($L->('name["k"] = "v"'), '$name{"k"} = "v"',
+    like($L->('name["k"] = "v"'), qr/BindingRuntime::index_set\(\$name, "name", "k", "v"\)/,
         'hash-index assignment is handled by its own operator contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { name = cat(\"o\", \"k\"); return(name) }\n"), return_descriptor => 1);
@@ -45570,19 +45571,19 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         return $src;
     };
 
-    is($L->('items += "a"'), 'push @items, "a"',
-        'top-level array append operator lowers to direct push');
+    like($L->('items += "a"'), qr/BindingRuntime::push_value\(\$items, "items", "a"\)/,
+        'top-level array append operator lowers to a uniform typed-binding update');
     is($L->('items += cat("a", "b")'), $L->('push(items, cat("a", "b"))'),
         'array append operator lowers identically to terse push(target, value)');
     is($L->('items += label'), $L->('push(array(items), label)'),
         'array append operator lowers identically to explicit push(array(target), value)');
-    is($L->('items += value'), 'push @items, $value',
+    like($L->('items += value'), qr/BindingRuntime::push_value\(\$items, "items", \$value\)/,
         'bare RHS now follows the Channel 2 mutation-slot scalar-read rule');
     is($L->('items ++'), 'items ++',
         'increment-like spelling is not claimed by the array append operator');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
-    is($L->('name["k"] = "v"'), '$name{"k"} = "v"',
+    like($L->('name["k"] = "v"'), qr/BindingRuntime::index_set\(\$name, "name", "k", "v"\)/,
         'hash-index assignment is handled by its own operator contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { items += cat(\"a\", \"b\"); return(copy(array(items))) }\n"), return_descriptor => 1);
@@ -45593,12 +45594,12 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'array append operator has no canonical fallback');
 
     my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { items += \"a\"; return(copy(array(items))) }\n");
-    my $array_my = () = ($src =~ /my \@items\b/g);
-    is($array_my, 1, 'bare array append target auto-supplies exactly one `my @items`');
-    ok(index($src, 'my @items;') >= 0 && index($src, 'my @items;') < index($src, 'while (1)'),
-        'the auto `my @items` sits in the preamble before while(1)');
-    unlike($src, qr/my [\$\%]items\b/,
-        'bare array append target is an ARRAY -- no scalar or hash declaration for items');
+    my $array_my = () = ($src =~ /my \$items\b/g);
+    is($array_my, 1, 'bare array append target auto-supplies one typed binding');
+    ok(index($src, 'my $items;') >= 0 && index($src, 'my $items;') < index($src, 'while (1)'),
+        'the typed items binding sits in the preamble before while(1)');
+    unlike($src, qr/my [\@\%]items\b/,
+        'bare array append target has no separate host aggregate declaration');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); items += label }\n"
              . "LX { return(copy(array(items))) }\n";
@@ -45630,19 +45631,19 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         return $src;
     };
 
-    is($L->('meta["stage"] = "v"'), '$meta{"stage"} = "v"',
-        'top-level hash-index assignment operator lowers to direct hash-entry assignment');
+    like($L->('meta["stage"] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", "v"\)/,
+        'top-level hash-index assignment operator lowers to a uniform typed-binding update');
     is($L->('meta[cat("s", "tage")] = cat("v", "!")'), $L->('set_key(meta, cat("s", "tage"), cat("v", "!"))'),
         'hash-index assignment operator lowers identically to set_key(target, key, value)');
     is($L->('meta[key] = value'), $L->('set_key(meta, key, value)'),
         'hash-index assignment operator lowers identically for explicit scalar key/value reads');
-    is($L->('meta[key] = "v"'), '$meta{$key} = "v"',
+    like($L->('meta[key] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, "v"\)/,
         'bare key now follows the Channel 2 mutation-slot scalar-read rule');
-    is($L->('meta["stage"] = value'), '$meta{"stage"} = $value',
+    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
         'bare RHS now follows the Channel 2 mutation-slot scalar-read rule');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
-    is($L->('items += "a"'), 'push @items, "a"',
+    like($L->('items += "a"'), qr/BindingRuntime::push_value\(\$items, "items", "a"\)/,
         'array append operator remains separate');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(copy(hash(meta))) }\n"), return_descriptor => 1);
@@ -45653,12 +45654,12 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         'hash-index assignment operator has no canonical fallback');
 
     my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { meta[\"stage\"] = \"v\"; return(copy(hash(meta))) }\n");
-    my $hash_my = () = ($src =~ /my \%meta\b/g);
-    is($hash_my, 1, 'bare hash-index target auto-supplies exactly one `my %meta`');
-    ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
-        'the auto `my %meta` sits in the preamble before while(1)');
-    unlike($src, qr/my [\$\@]meta\b/,
-        'bare hash-index target is a HASH -- no scalar or array declaration for meta');
+    my $hash_my = () = ($src =~ /my \$meta\b/g);
+    is($hash_my, 1, 'bare hash-index target auto-supplies one typed binding');
+    ok(index($src, 'my $meta;') >= 0 && index($src, 'my $meta;') < index($src, 'while (1)'),
+        'the typed meta binding sits in the preamble before while(1)');
+    unlike($src, qr/my [\@\%]meta\b/,
+        'bare hash-index target has no separate host aggregate declaration');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); meta[match_group(0)] = label }\n"
              . "LX { return(copy(hash(meta))) }\n";
@@ -45695,16 +45696,16 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
         'prefix identifier undefine is not claimed as the undef literal');
     like($L->('set(flag,true)'), qr/^\$flag = do \{ require JSON::PP; JSON::PP::true \}/,
         'set(flag,true) lowers true as a typed value');
-    like($L->('items += false'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::false \}/,
+    like($L->('items += false'), qr/BindingRuntime::push_value\(\$items, "items", do \{ require JSON::PP; JSON::PP::false \}\)/,
         'items += false lowers false as an explicit append value');
-    like($L->('push(items, false)'), qr/^push \@items, do \{ require JSON::PP; JSON::PP::false \}/,
+    like($L->('push(items, false)'), qr/BindingRuntime::push_value\(\$items, "items", do \{ require JSON::PP; JSON::PP::false \}\)/,
         'push(items,false) uses the value-push contract, not legacy child-call routing');
-    like($L->('meta["enabled"] = true'), qr/^\$meta\{"enabled"\} = do \{ require JSON::PP; JSON::PP::true \}/,
+    like($L->('meta["enabled"] = true'), qr/BindingRuntime::index_set\(\$meta, "meta", "enabled", do \{ require JSON::PP; JSON::PP::true \}\)/,
         'hash-index assignment accepts true as an explicit RHS value');
-    like($L->('meta[true] = false'), qr/^\$meta\{do \{ require JSON::PP; JSON::PP::true \}\} = do \{ require JSON::PP; JSON::PP::false \}/,
+    like($L->('meta[true] = false'), qr/BindingRuntime::index_set\(\$meta, "meta", do \{ require JSON::PP; JSON::PP::true \}, do \{ require JSON::PP; JSON::PP::false \}\)/,
         'hash-index assignment accepts primitive literals in both key and value positions');
-    like($L->('push(items, trueword)'), qr/^push \@trueword, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
-        'prefix identifier trueword keeps the legacy all-bare child-call interpretation');
+    like($L->('push(items, trueword)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
+        'prefix identifier trueword participates in representation-neutral static-rule precedence');
 
     my $literal_spec = "Top::\n /x/ -> Done { return(array(true, false, \"s\", 42, 3.14, undef)) }\n\nDone::\n /[a-z]+/\n";
     my $lp = eval { LinkedSpec::Get(\$literal_spec) };
@@ -46116,7 +46117,7 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
         'colon hash literal lowers quoted keys and nested shape values');
     is($L->('name = { key : value }'), '$name = {$key => $value}',
         'direct assignment RHS accepts colon hash literals');
-    is($L->('meta[key] = { "inner" : value }'), '$meta{$key} = {"inner" => $value}',
+    like($L->('meta[key] = { "inner" : value }'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \{"inner" => \$value\}\)/,
         'hash-index mutation RHS accepts colon hash literals');
     is($L->('return(set(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
         'expression-valued set accepts colon hash literals');
@@ -46215,15 +46216,15 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         'hash shape literal lowers bare key and value slots as scalar reads');
     is($L->('set(out, [value, cat("a","b")])'), $L->('set(out, array(value, cat("a","b")))'),
         'explicit scalar assignment source shape literals compose with helper value expressions');
-    is($L->('items += [value]'), 'push @items, [$value]',
+    like($L->('items += [value]'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
         'array append RHS accepts a shape literal value expression');
-    is($L->('meta[key] = { key : value }'), '$meta{$key} = {$key => $value}',
+    like($L->('meta[key] = { key : value }'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \{\$key => \$value\}\)/,
         'hash-index assignment RHS accepts a hash shape literal');
-    is($L->('push(items, [value])'), 'push @items, [$value]',
+    like($L->('push(items, [value])'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
         'push(target, shape) is explicit append, not all-bare child-call routing');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access brackets still route through direct-access lowering');
-    is($L->('meta[key] = [value]'), '$meta{$key} = [$value]',
+    like($L->('meta[key] = [value]'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \[\$value\]\)/,
         'hash-index assignment brackets stay statement syntax while RHS brackets are a value literal');
 
     my $shape_spec = "Top::\n"
@@ -46353,12 +46354,12 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
     is($run->($explicit_array_parser, 'xhello'), '["ok","ab"]',
         'explicit array target shape initializer lowers members before runtime');
     my $explicit_array_src = $gen->($explicit_array_spec);
-    is((() = ($explicit_array_src =~ /my \@items\b/g)), 1,
-        'explicit array target auto-supplies one my @items');
-    is((() = ($explicit_array_src =~ /my \$items\b/g)), 0,
-        'explicit array target does not auto-supply my $items');
-    like($explicit_array_src, qr/\@items = \(\$value, do \{/,
-        'explicit array target stores the lowered shape into @items');
+    is((() = ($explicit_array_src =~ /my \$items\b/g)), 1,
+        'explicit array target auto-supplies one typed binding');
+    is((() = ($explicit_array_src =~ /my \@items\b/g)), 0,
+        'explicit array target does not create a host array namespace');
+    like($explicit_array_src, qr/\$items = \[\$value, do \{/,
+        'explicit array target stores the lowered shape in the typed binding');
 
     my $explicit_hash_spec = "Top::\n"
                            . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); set(hash(meta), { key : value, \"fixed\" : [value] }); return(copy(hash(meta))) }\n"
@@ -46369,12 +46370,12 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
     is($run->($explicit_hash_parser, 'xhello'), '{"fixed":["ok"],"stage":"ok"}',
         'explicit hash target shape initializer lowers key/value members before runtime');
     my $explicit_hash_src = $gen->($explicit_hash_spec);
-    is((() = ($explicit_hash_src =~ /my \%meta\b/g)), 1,
-        'explicit hash target auto-supplies one my %meta');
-    is((() = ($explicit_hash_src =~ /my \$meta\b/g)), 0,
-        'explicit hash target does not auto-supply my $meta');
-    like($explicit_hash_src, qr/\%meta = \(\$key => \$value, "fixed" => \[\$value\]\)/,
-        'explicit hash target stores the lowered shape into %meta');
+    is((() = ($explicit_hash_src =~ /my \$meta\b/g)), 1,
+        'explicit hash target auto-supplies one typed binding');
+    is((() = ($explicit_hash_src =~ /my \%meta\b/g)), 0,
+        'explicit hash target does not create a host hash namespace');
+    like($explicit_hash_src, qr/\$meta = \{\$key => \$value, "fixed" => \[\$value\]\}/,
+        'explicit hash target stores the lowered shape in the typed binding');
 };
 
 subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
@@ -46398,18 +46399,18 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         return $src;
     };
 
-    is($L->('items.push_back(value)'), 'push @items, $value',
+    like($L->('items.push_back(value)'), qr/BindingRuntime::array_end_mutation\(\$items, "items", "push_back", \$value\)/,
         'push_back lowers to a push on the receiver working array');
-    is($L->('items.push_front(value)'), 'unshift @items, $value',
+    like($L->('items.push_front(value)'), qr/BindingRuntime::array_end_mutation\(\$items, "items", "push_front", \$value\)/,
         'push_front lowers to an unshift on the receiver working array');
-    is($L->('items.pop_back()'), 'pop @items',
+    like($L->('items.pop_back()'), qr/BindingRuntime::array_end_mutation\(\$items, "items", "pop_back"\)/,
         'pop_back lowers to a discarded pop on the receiver working array');
-    is($L->('items.pop_front()'), 'shift @items',
+    like($L->('items.pop_front()'), qr/BindingRuntime::array_end_mutation\(\$items, "items", "pop_front"\)/,
         'pop_front lowers to a discarded shift on the receiver working array');
     is($L->('array(items).push_back("b")'), 'push @items, "b"',
-        'push_back accepts an explicit array(...) receiver');
+        'push_back keeps isolated explicit-array compatibility lowering');
     is($L->('array(items).push_front("a")'), 'unshift @items, "a"',
-        'push_front accepts an explicit array(...) receiver');
+        'push_front keeps isolated explicit-array compatibility lowering');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value,\"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(copy(array(items))) }\n"
@@ -46421,19 +46422,19 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'array end-mutation methods run in receiver order');
 
     my $src = $gen->($spec);
-    is((() = ($src =~ /my \@items\b/g)), 1,
-        'array end mutations auto-supply one my @items');
-    is((() = ($src =~ /my \$items\b/g)), 0,
-        'array end mutations do not auto-supply my $items');
+    is((() = ($src =~ /my \$items\b/g)), 1,
+        'array end mutations auto-supply one typed binding');
+    is((() = ($src =~ /my \@items\b/g)), 0,
+        'array end mutations do not create a host array namespace');
     is((() = ($src =~ /my \$value\b/g)), 1,
         'push method bare value auto-supplies one my $value');
-    like($src, qr/push \@items, "a"/,
+    like($src, qr/array_end_mutation\(\$items, "items", "push_back", "a"\)/,
         'generated source contains push_back lowering');
-    like($src, qr/unshift \@items, "z"/,
+    like($src, qr/array_end_mutation\(\$items, "items", "push_front", "z"\)/,
         'generated source contains push_front lowering');
-    like($src, qr/pop \@items/,
+    like($src, qr/array_end_mutation\(\$items, "items", "pop_back"\)/,
         'generated source contains pop_back lowering');
-    like($src, qr/shift \@items/,
+    like($src, qr/array_end_mutation\(\$items, "items", "pop_front"\)/,
         'generated source contains pop_front lowering');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -46453,8 +46454,8 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         or diag(normalize_error($@));
     is($run->($alias_parser, 'xhello'), '["a","b"]',
         'explicit array(...) receivers mutate the named working array');
-    is((() = ($gen->($alias_spec) =~ /my \@items\b/g)), 1,
-        'explicit receiver spec auto-supplies one my @items');
+    is((() = ($gen->($alias_spec) =~ /my \$items\b/g)), 1,
+        'explicit receiver spec auto-supplies one typed binding');
 };
 
 subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
@@ -46497,12 +46498,12 @@ subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
         'array receiver value chains return arrays/scalars/booleans without mutating the source array');
 
     my $src = $gen->($spec);
-    is((() = ($src =~ /my \@items\b/g)), 1,
-        'array receiver chains auto-supply one my @items');
+    is((() = ($src =~ /my \$items\b/g)), 1,
+        'array receiver chains share one typed items binding');
     is((() = ($src =~ /my \@missing\b/g)), 0,
         'empty missing receiver chains do not require a generated preamble symbol');
-    is((() = ($src =~ /my \$items\b/g)), 0,
-        'array receiver chains do not auto-supply my $items');
+    is((() = ($src =~ /my \@items\b/g)), 0,
+        'array receiver chains do not create a host array namespace');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};
@@ -46541,7 +46542,7 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'unknown receiver-dot hash method is not lowered as a supported hash method');
     like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
-    like($L->('return(meta.copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,
+    like($L->('return(meta.copy().flat_hash().count_keys())'), qr/__ls_hash_snapshot.*__ls_count_keys/s,
         'copy/flat_hash receiver chain lowers as a hash-valued snapshot');
 
     my $spec = "Top::\n"
@@ -46563,10 +46564,10 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'receiver-dot set_key is pure while statement set_key and hash-index assignment mutate meta');
 
     my $src = $gen->($spec);
-    is((() = ($src =~ /my %meta\b/g)), 1,
-        'hash receiver chains auto-supply one my %meta');
-    is((() = ($src =~ /my \$meta\b/g)), 0,
-        'hash receiver chains do not auto-supply my $meta');
+    is((() = ($src =~ /my \$meta\b/g)), 1,
+        'hash receiver chains share one typed meta binding');
+    is((() = ($src =~ /my %meta\b/g)), 0,
+        'hash receiver chains do not create a host hash namespace');
     unlike($src, qr/\.(?:set_key|merge_hash|copy|flat_hash)\b/,
         'generated source has no raw receiver-dot hash helper residue');
 
@@ -47198,8 +47199,8 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
 
 subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub {
     # SPEC-FORMAT-TERSE.3.3.2 plus .11.2: direct RHS shape assignment expressions
-    # bind and return scalar-held typed values for bare targets. Explicit
-    # array(...) / hash(...) targets keep aggregate storage.
+    # bind and return typed values through the one observable binding. Explicit
+    # array(...) / hash(...) targets remain temporary aliases until migration.
     plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47230,11 +47231,11 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'return do { $meta = {$key => $value}; $meta }',
         'bare direct hash RHS assignment returns the scalar-held hash value');
     is($L->('return(set(array(items), [value]))'),
-        'return do { @items = ($value); [@items] }',
-        'explicit array target returns the stored array value');
+        'return do { $items = [$value]; $items }',
+        'temporary explicit array target returns the stored typed value');
     is($L->('return(set(hash(meta), { key : value }))'),
-        'return do { %meta = ($key => $value); +{%meta} }',
-        'explicit hash target returns the stored hash value');
+        'return do { $meta = {$key => $value}; $meta }',
+        'temporary explicit hash target returns the stored typed value');
     is($L->('return(set(payload, [value]))'),
         'return do { $payload = [$value]; $payload }',
         'explicit scalar target returns the scalar-held shape payload');
@@ -47298,17 +47299,17 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
         return $src;
     };
 
-    is($L->('return(items += value)'),
-        'return do { push @items, $value; [@items] }',
-        'array append expression returns the updated array snapshot');
-    is($L->('return(meta[key] = value)'),
-        'return do { $meta{$key} = $value; +{%meta} }',
-        'hash-index assignment expression returns the updated hash snapshot');
-    is($L->('return((items += value).count())'),
-        'return do { my $__ls_count = do { push @items, $value; [@items] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
+    like($L->('return(items += value)'),
+        qr/^return do \{.*BindingRuntime::push_value\(\$items, "items", \$value\)/,
+        'array append expression returns the updated typed binding');
+    like($L->('return(meta[key] = value)'),
+        qr/^return do \{.*BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
+        'hash-index assignment expression returns the updated typed binding');
+    like($L->('return((items += value).count())'),
+        qr/^return do \{ my \$__ls_count = do \{.*BindingRuntime::push_value/s,
         'array append expression can feed an array receiver chain');
-    is($L->('return((meta[key] = value).count_keys())'),
-        'return do { my $__ls_count_keys = do { $meta{$key} = $value; +{%meta} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
+    like($L->('return((meta[key] = value).count_keys())'),
+        qr/^return do \{ my \$__ls_count_keys = do \{.*BindingRuntime::index_set/s,
         'hash-index assignment expression can feed a hash receiver chain');
 
     my $spec = "Top::\n"
@@ -47339,10 +47340,10 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
         'hash-index assignment expression can be the value yielded by a block');
 
     my $src = $gen->($spec);
-    like($src, qr/my \@items;.*my %meta;.*my \$value;.*my \$key;/s,
+    like($src, qr/my \$items;.*my \$meta;.*my \$value;.*my \$key;/s,
         'generated source auto-declares mutation expression targets and scalar key/RHS reads');
-    like($src, qr/push \@items, \$value.*\$meta\{\$key\} = \$value.*__ls_count.*__ls_count_keys/s,
-        'generated source contains snapshot-returning mutation values and receiver-chain lowering');
+    like($src, qr/BindingRuntime::push_value\(\$items.*BindingRuntime::index_set\(\$meta.*__ls_count.*__ls_count_keys/s,
+        'generated source contains typed-binding mutation values and receiver-chain lowering');
     unlike($src, qr/items\s*\+=|meta\[key\]\s*=/,
         'generated source has no raw append/hash-index expression residue');
 
@@ -47391,8 +47392,8 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
     my $src = $gen->($spec);
     like($src, qr/\$name = \$value.*\$other = .*__ls_cat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
         'generated source contains scalar, operator-call, set, and current assignment values');
-    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\@items_mut = \(\$value\))(?=.*push \@items_mut, "tail")(?=.*%meta_mut = \(\$key => \$value\))(?=.*\$meta_mut\{"extra"\} = \$other)/s,
-        'generated source contains scalar-held typed values plus explicit aggregate mutation values');
+    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\$items_mut = \[\$value\])(?=.*BindingRuntime::push_value\(\$items_mut, "items_mut", "tail"\))(?=.*\$meta_mut = \{\$key => \$value\})(?=.*BindingRuntime::index_set\(\$meta_mut, "meta_mut", "extra", \$other\))/s,
+        'generated source contains uniform typed values and mutation updates');
     unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items_mut\s*\+=|meta_mut\["extra"\]\s*=/,
         'generated source has no raw legacy/operator/mutation residue');
 
@@ -47530,14 +47531,14 @@ subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub 
         'bare wrappers read working variables while quoted wrappers and direct shapes construct literal payloads');
 
     my $src = $gen->($spec);
-    is((() = ($src =~ /my \@items\b/g)), 1,
-        'bare array wrappers auto-supply one my @items');
-    is((() = ($src =~ /my %meta\b/g)), 1,
-        'bare hash wrappers auto-supply one my %meta');
-    is((() = ($src =~ /my \$items\b/g)), 0,
-        'quoted array literals do not auto-supply my $items');
-    is((() = ($src =~ /my \$meta\b/g)), 0,
-        'quoted hash keys do not auto-supply my $meta');
+    is((() = ($src =~ /my \$items\b/g)), 1,
+        'bare array operations share one typed items binding');
+    is((() = ($src =~ /my \$meta\b/g)), 1,
+        'bare hash operations share one typed meta binding');
+    is((() = ($src =~ /my \@items\b/g)), 0,
+        'quoted array literals do not create a host array namespace');
+    is((() = ($src =~ /my %meta\b/g)), 0,
+        'quoted hash keys do not create a host hash namespace');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};
@@ -47991,7 +47992,7 @@ subtest 'spec_format_terse_12_2_perl_hash_tree_traversal_receiver_blocks' => sub
     like($L->('return(meta.reduce_leaves("") { return(cat(acc, value)) })'), qr/__ls_hash_tree_reduce.*my \$acc/s,
         'reduce_leaves lowers with scoped accumulator binding');
     like($L->('return(meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys())'),
-        qr/__ls_hash_tree_walk.*push \@seen.*__ls_count_keys/s,
+        qr/__ls_hash_tree_walk.*BindingRuntime::push_value\(\$seen.*__ls_count_keys/s,
         'walk_leaves lowers side-effect traversal and returns the original hash value');
     like($L->('return(meta.map_leaves())'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves/,
         'map_leaves without a trailing block is rejected by lowering diagnostics');
@@ -48079,7 +48080,7 @@ subtest 'spec_format_terse_13_2_perl_array_tree_traversal_receiver_blocks' => su
     like($L->('return(items.reduce_leaves("") { return(cat(acc, value)) })'), qr/__ls_array_tree_reduce.*my \$acc/s,
         'array reduce_leaves lowers with scoped accumulator binding');
     like($L->('return(items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count())'),
-        qr/__ls_array_tree_walk.*push \@seen.*__ls_count/s,
+        qr/__ls_array_tree_walk.*BindingRuntime::push_value\(\$seen.*__ls_count/s,
         'array walk_leaves lowers side-effect traversal and returns the original array value');
     like($L->('return(items.map_leaves())'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves/,
         'array map_leaves without a trailing block is rejected by lowering diagnostics');

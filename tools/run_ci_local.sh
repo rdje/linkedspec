@@ -121,7 +121,9 @@ require_tracked_file t/generated_source_contract.t
 require_tracked_file t/scalar_numeric_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
+require_tracked_file t/uniform_binding_contract.t
 require_tracked_file perl/LinkedSpec.pm
+require_tracked_file perl/LinkedSpec/BindingRuntime.pm
 require_tracked_file perl/LinkedSpec/SpecLoader.pm
 require_tracked_file perl/LinkedSpec/GeneratedSource.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
@@ -165,6 +167,8 @@ perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
+perl -c -Iperl t/uniform_binding_contract.t
+perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -184,6 +188,9 @@ python3 tools/check_callable_codeblock_contract.py
 
 log "checking portable uniform-binding and aggregate-selector retirement contract"
 python3 tools/check_uniform_binding_contract.py
+
+log "running Perl uniform-binding behavior contract fixture"
+PERL5LIB= prove -Iperl t/uniform_binding_contract.t
 
 log "running Perl callable-codeblock literal contract fixture"
 PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t

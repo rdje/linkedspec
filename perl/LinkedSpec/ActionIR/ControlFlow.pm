@@ -1627,6 +1627,14 @@ sub _lower_print_each_statement {
  return undef unless defined($array_expr) && length($array_expr);
  my $array_symbol = $extract_array_symbol_name->($array_expr, $deps);
  return undef unless defined($array_symbol) && length($array_symbol);
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
+ my $iterable_expr = '@'.$array_symbol;
+ if ($array_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+  && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+  $iterable_expr = '@{$'.$1.' // []}';
+ }
 
  my $prefix_expr = _lower_control_flow_value_expr($effective_args->[1], $deps);
  return undef unless defined($prefix_expr) && length($prefix_expr);
@@ -1638,7 +1646,7 @@ sub _lower_print_each_statement {
   push @parts, $suffix_expr;
  }
 
- return 'print '.join(', ', @parts).' foreach (@'.$array_symbol.')'
+ return 'print '.join(', ', @parts).' foreach ('.$iterable_expr.')'
 }
 
 1;

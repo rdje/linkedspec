@@ -234,17 +234,30 @@ sub _lower_is_empty_expr {
  my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
  my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
 
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
  return undef unless defined($trimmed) && length($trimmed);
 
  if ($trimmed =~ /^array\s*\(/o) {
+  if ($trimmed =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+   && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+   my $name = $1;
+   return 'do { my $__ls_empty_array = $'.$name.'; (!defined($__ls_empty_array) || ref($__ls_empty_array) ne \'ARRAY\' || !@{$__ls_empty_array}) }';
+  }
   my $array_symbol = $extract_array_symbol_name->($trimmed);
   return "(!\@$array_symbol)" if defined $array_symbol;
  }
 
  if ($trimmed =~ /^hash\s*\(/o) {
+  if ($trimmed =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+   && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+   my $name = $1;
+   return 'do { my $__ls_empty_hash = $'.$name.'; (!defined($__ls_empty_hash) || ref($__ls_empty_hash) ne \'HASH\' || !scalar(keys %{$__ls_empty_hash})) }';
+  }
   my $hash_symbol = $extract_hash_symbol_name->($trimmed);
   return "(!scalar(keys %$hash_symbol))" if defined $hash_symbol;
  }

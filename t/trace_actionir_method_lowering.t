@@ -159,12 +159,12 @@ subtest 'MethodLowering traces assignment and mutation decisions' => sub {
  like($assign_trace, qr/EXIT LinkedSpec::ActionIR::MethodLowering::lower_assign_statement:assignment/, 'trace reports lower_assign_statement exit scope');
  is($scalar, q{$name = "x"}, 'scalar assignment operator lowering is unchanged');
  like($scalar_trace, qr/DECISION actionir:method_lowering:lower_scalar_assignment_operator_statement:assignment:ast_scalar_assignment_operator => TAKEN/, 'trace reports AST scalar assignment operator');
- is($append, q{push @items, $name}, 'array append operator lowering is unchanged');
+ is($append, q{do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $name) }}, 'array append operator lowers through the uniform typed binding');
  like($append_trace, qr/DECISION actionir:method_lowering:lower_array_append_operator_statement:assignment:ast_array_append_operator => TAKEN/, 'trace reports AST array append operator');
  like($append_trace, qr/DECISION actionir:method_lowering:lower_mutation_slot_value_expr:value:bare_scalar_read => TAKEN/, 'trace reports mutation slot scalar read');
- is($hash_assign, q{$meta{"k"} = $name}, 'hash-index assignment operator lowering is unchanged');
+ is($hash_assign, q{do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", "k", $name) }}, 'hash-index assignment operator lowers through the uniform typed binding');
  like($hash_assign_trace, qr/DECISION actionir:method_lowering:lower_hash_index_assignment_operator_statement:assignment:ast_hash_or_nested_access_assignment => TAKEN/, 'trace reports AST hash-index assignment');
- is($array_end, q{push @items, $name}, 'array end-mutation method lowering is unchanged');
+ is($array_end, q{do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::array_end_mutation($items, "items", "push_back", $name) }}, 'array end-mutation method lowers through the uniform typed binding');
  like($array_end_trace, qr/DECISION actionir:method_lowering:lower_ast_array_end_mutation_method_statement:fluent_chain:ast_array_end_push_back => TAKEN/, 'trace reports AST array end-mutation method');
  like($array_end_trace, qr/DECISION actionir:method_lowering:lower_array_end_mutation_method_statement:fluent_chain:ast_array_end_mutation => TAKEN/, 'trace reports lowered array end-mutation wrapper');
 };

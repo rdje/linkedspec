@@ -158,13 +158,25 @@ sub _build_array_pipeline_plan_from_expr {
   : undef;
  die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'extract_scalar_symbol_name'"
   unless ref($extract_scalar_symbol_name) eq 'CODE';
-
  return $finish->(undef, 'missing_expr', {}) unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
 
  my $target_symbol = $extract_array_symbol_name->($trimmed);
- return $finish->({target_symbol => $target_symbol, ops => []}, 'target_symbol', { target_symbol => $target_symbol })
+ my $target_plan = { target_symbol => $target_symbol, ops => [] };
+ my $binding_target = ($trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) ? 1 : 0;
+ if (!$binding_target && $trimmed =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
+  my $bare_symbol_kind = (ref($deps->{bare_symbol_kind}) eq 'CODE')
+   ? $deps->{bare_symbol_kind}
+   : sub { return undef };
+  $binding_target = 1 if (($bare_symbol_kind->($1) // '') eq 'scalar');
+ }
+ $target_plan->{binding_target} = 1 if $binding_target;
+ return $finish->(
+  $target_plan,
+  'target_symbol',
+  { target_symbol => $target_symbol },
+ )
   if defined $target_symbol;
 
  my $call = $parse_method_function_expr->($trimmed);
@@ -184,17 +196,20 @@ sub _build_array_pipeline_plan_from_expr {
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
   return $finish->(undef, 'split_target_failed', {}) unless $pipeline;
 
-  my $source_symbol = $extract_scalar_symbol_name->($effective_args[1]);
-  return $finish->(undef, 'split_source_failed', {}) unless defined $source_symbol;
+  my $source_expr = $trim_action_ir_value->($effective_args[1]);
+  if (defined($source_expr) && $source_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   $source_expr = '$'.$1;
+  }
+  return $finish->(undef, 'split_source_failed', {}) unless defined($source_expr) && length($source_expr);
   my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[2], $deps);
   return $finish->(undef, 'split_delimiter_failed', {}) unless defined $delimiter_expr;
 
   push @{$pipeline->{ops}}, {
    op             => 'split',
-   source_symbol  => $source_symbol,
+   source_expr    => $source_expr,
    delimiter_expr => $delimiter_expr,
   };
-  return $finish->($pipeline, 'append_split_op', { source_symbol => $source_symbol, delimiter_expr => $delimiter_expr })
+  return $finish->($pipeline, 'append_split_op', { source_expr => $source_expr, delimiter_expr => $delimiter_expr })
  }
  if ($method eq 'split_each') {
   my @effective_args = @$args;
@@ -285,6 +300,43 @@ sub _lower_array_pipeline_expr {
  return $finish->(undef, 'plan_has_no_ops', { target_symbol => $pipeline->{target_symbol} }) unless @{$pipeline->{ops} || []};
 
  my $target_symbol = $pipeline->{target_symbol};
+ if ($pipeline->{binding_target}) {
+  my @statements = ('require LinkedSpec::BindingRuntime');
+  foreach my $op (@{$pipeline->{ops}}) {
+   my $name = $op->{op} // '';
+   if ($name eq 'split') {
+    my $delimiter_expr = $op->{delimiter_expr};
+    $delimiter_expr = 'qr'.$delimiter_expr
+     if defined($delimiter_expr) && $delimiter_expr =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+    push @statements,
+     '$'.$target_symbol.' = LinkedSpec::BindingRuntime::split_value($'.$target_symbol.', "'.$target_symbol.'", '
+     .$op->{source_expr}.', '.$delimiter_expr.')';
+    next;
+   }
+   my @args;
+   if ($name eq 'split_each') {
+    my $delimiter_expr = $op->{delimiter_expr};
+    $delimiter_expr = 'qr'.$delimiter_expr
+     if defined($delimiter_expr) && $delimiter_expr =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+    push @args, $delimiter_expr;
+   }
+   if ($name eq 'filter_match') {
+    my $pattern_expr = $op->{pattern_expr};
+    $pattern_expr = 'qr'.$pattern_expr
+     if defined($pattern_expr) && $pattern_expr =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+    push @args, $pattern_expr;
+   }
+   my $suffix = @args ? ', '.join(', ', @args) : '';
+   push @statements,
+    '$'.$target_symbol.' = LinkedSpec::BindingRuntime::array_transform($'.$target_symbol.', "'.$target_symbol.'", "'.$name.'"'.$suffix.')';
+  }
+  push @statements, '$'.$target_symbol;
+  return $finish->(
+   'do { '.join('; ', @statements).' }',
+   'binding_pipeline_lowered',
+   { target_symbol => $target_symbol, op_count => scalar(@{$pipeline->{ops}}) },
+  )
+ }
  my $list_expr = '@'.$target_symbol;
  foreach my $op (@{$pipeline->{ops}}) {
   my $name = $op->{op} // '';
@@ -296,7 +348,7 @@ sub _lower_array_pipeline_expr {
    context => { target_symbol => $target_symbol, op => $name },
   );
   if ($name eq 'split') {
-   $list_expr = 'split '.$op->{delimiter_expr}.', $'.$op->{source_symbol};
+   $list_expr = 'split '.$op->{delimiter_expr}.', '.$op->{source_expr};
   } elsif ($name eq 'split_each') {
    $list_expr = 'map { split '.$op->{delimiter_expr}.', $_ } '.$list_expr;
   } elsif ($name eq 'trim_each') {
