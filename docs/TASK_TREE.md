@@ -689,6 +689,11 @@ Index note 2026-07-12: `.4.3.2.2.5.0` routes premature shipped proof correctly. 
 `control_if`, `print`, or array/child-flow breadth, and the official runner rejects execution until phase 6. Exact
 named cases now sit in `.6.2`; focused string public no-drift `.5.1` is active.
 
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.0` captures the director's settled doctrine that every construct
+is a four-kind expression, unused values drop silently, dispatch is duck-typed, trailing codeblocks are signature-
+governed, and backward compatibility is temporary. `.12.1` owns eventual wrapper/storage compatibility retirement;
+Lua string closeout `.4.3.2.2.5.1` remains the execution frontier.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

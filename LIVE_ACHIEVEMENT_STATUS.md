@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.0 — capture compatibility retirement doctrine**
+  (DONE — deferred design `.12.1`; active Lua string closeout unchanged).
+
+  **Doctrine:** Every construct is a four-kind expression, unused values drop silently, dispatch is duck-typed,
+  trailing codeblocks are signature-governed, and backward compatibility is temporary.
+
+  **Ownership:** `.12.1` will split uniform binding and retirement of `array(name)`/`hash(name)` alternate storage
+  plus other migration surfaces. No behavior changed.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.2.5.0 — route Lua string corpus proof**
   (DONE — focused public no-drift `.4.3.2.2.5.1` next).
 

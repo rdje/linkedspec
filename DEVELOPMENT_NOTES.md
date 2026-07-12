@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.0 — compatibility needs an exit condition):
+  Duck typing means the value, not wrapper syntax or backend storage namespace, selects helper/method behavior.
+  Compatibility scaffolding may bridge a migration but must never silently become the permanent language model;
+  record its removal condition before relying on it. Statement syntax is value-drop context over expressions, not
+  a second semantic universe.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.2.5.0 — route proof by first missing mechanism):
   A shipped fixture containing a string mutation is not necessarily a string-family acceptance test. Probe the
   whole fixture and record its first missing mechanism; if control, output, array, or child-flow execution blocks

@@ -2066,6 +2066,52 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.12`
+  Status: `active`
+  Goal: Retire transitional compatibility surfaces after uniform expression and duck-typed binding semantics settle.
+  Children: `.12.0`, `.12.1`
+  Acceptance: Backward compatibility is temporary migration scaffolding, never a permanent language constraint;
+    every retained compatibility surface has an explicit removal condition and owner. Bare variables carry one of
+    scalar/array/harray/codeblock, calls and controls are expressions, runtime value type drives dispatch, and
+    `array(name)`/`hash(name)` may not survive as alternate namespaces, type assertions, or mutation authority.
+
+- ID: `FUTURE-PARITY-BACKLOG.12.0`
+  Status: `done`
+  Goal: Capture the director's uniform-expression, duck-typing, and compatibility-retirement doctrine.
+  Acceptance: Record the doctrine and current wrapper/storage contradiction without changing active runtime
+    behavior or pivoting mid-slice; keep Lua string closeout `.4.3.2.2.5.1` as the execution frontier.
+  Verification: **PASS 2026-07-12.** Existing records already own expression-valued assignment, inline if/switch,
+    user/helper calls, value-drop, and generic final-codeblock design. Audit confirms the remaining contradiction is
+    the legacy scalar-slot versus aggregate-store split selected by `array(name)`/`hash(name)`. This planning slice
+    creates the missing retirement owner; no runtime behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.12.0 - capture compatibility retirement doctrine`
+
+- ID: `FUTURE-PARITY-BACKLOG.12.1`
+  Status: `pending`
+  Goal: Design and split uniform binding plus compatibility retirement before implementation.
+  Acceptance: Inventory every public/internal compatibility surface and classify temporary migration versus current
+    language; define one variable binding with runtime scalar/array/harray/codeblock identity; make pure and mutable
+    helper/method dispatch consume that value without wrapper-selected storage; decide whether `array(...)` and
+    `hash(...)` remain only ordinary constructors or are fully retired in favor of literals; migrate wrapper-based
+    targets such as `split(array(parts),...)` to unambiguous bare-target semantics; specify expression-valued
+    if/switch/calls and silent value drop as universal invariants; assign Perl/Rust/Dart/Julia/Lua, corpus, mdBook,
+    diagnostics, hard-retirement, and final no-drift leaves before behavior code.
+  Verification: `pending`
+  Commit: `pending`
+
+### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Duck-typed values coexist with legacy wrapper-selected scalar/aggregate namespaces,
+  while earlier expression and trailing-codeblock doctrine was distributed across several completed trees.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Generated-Perl compatibility preserved `$name` beside `@name`/`%name`; later
+  variants mirrored that target distinction even after bare assignments became typed value bindings.
+- [x] **FIX** — Capture one uniform-expression doctrine and create `.12.1` to design/split removal of temporary
+  compatibility, especially `array(name)`/`hash(name)` as type or mutation authority.
+- [x] **ADDRESSED (verified)** — Existing records prove assignment, inline if/switch, user/helper calls, VALUE_DROP,
+  and generic trailing-codeblock ownership; the new card joins them and states the missing retirement contract.
+- [x] **NO REGRESSION** — Planning-only: no parser, compiler, runtime, fixture, or active Lua frontier changed.
+- [x] **LOCKSTEP** — Future task, index, roadmaps, mdBook status, KM, changes/notes/live, and memory agree.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -2764,6 +2810,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.10.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; Knowledge Map generation/check; doctrine; task-tree metadata; `mdbook build docs/linkedspec-book`; cleanup | PASS. Semantic introspection/MCP is durably parked with native-API ownership and transport separation; no implementation or active-frontier change. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.11.0` | Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; whitespace; `mdbook build docs/linkedspec-book`; generated-book cleanup; LinkedSpec lowering probes | PASS. Four-kind generic final-codeblock correction is parked with `with` disposition undecided; no behavior or active-frontier change. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.0` | Existing expression/duck-typing/KM audit; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; whitespace; mdBook build | PASS. Temporary-only compatibility and uniform four-kind expression doctrine are durable; `.12.1` owns later design/retirement; no behavior or active-frontier change. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
@@ -2838,6 +2885,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.10.0` | `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction` | Captures a backend-neutral native semantic API plus thin MCP projection; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.11.0` | `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks` | Captures four-kind final-codeblock equivalence and parks `with` disposition; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.12.0` | `FUTURE-PARITY-BACKLOG.12.0 - capture compatibility retirement doctrine` | Captures uniform expressions, one duck-typed binding, and temporary-only compatibility; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

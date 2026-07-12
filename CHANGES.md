@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.0 — capture compatibility retirement doctrine
+
+Captured the settled language doctrine: every construct is a scalar/array/harray/codeblock expression; if/switch,
+helper calls, user functions, and methods participate; unused values drop silently; trailing codeblocks are governed
+by callable signatures; runtime value type drives one variable binding. Backward compatibility is temporary.
+
+Added `.12.1` to design and split retirement of wrapper-selected alternate storage and other migration surfaces.
+No runtime behavior changed, and active Lua string closeout remains unchanged.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.2.5.0 — route Lua string corpus proof
 
 Corrected the string no-drift owner after direct in-memory shipped-case probes showed later-family blockers:
