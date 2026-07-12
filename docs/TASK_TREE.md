@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | `linkedspec-callable-codeblock-v1` locks `{|args| ...}`, dynamic caller context, diagnostics, and a future fixture; Perl typed parsing `.11.3.1` is active. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Perl now preserves inert `{|args| ...}` typed records through generated source; dynamic variable invocation `.11.3.2` is active. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | String helpers close at 76/76; scalar numeric `.4.3.3.1.4` is active. Future variadic native/descriptor/generated obligations are explicit in `.5.1`/`.5.3`/`.8`. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `JULIA-BACKEND-PARITY` | `active` (delegated global obligations) | `Overall roadmap - future backend parity (Julia second)` | Current proof is 1,110 assertions/nine processes/105 fixtures plus exact 61x2 CLI. Non-codegen `.1.6` is closed; only generated-source `.3` and later Lua remain. | [docs/tasks/JULIA-BACKEND-PARITY.md](docs/tasks/JULIA-BACKEND-PARITY.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -760,7 +760,12 @@ Perl, Rust, Dart, Julia, and Lua-routing leaves are split before parser/runtime 
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.11.2` adopts `linkedspec-callable-codeblock-v1`. Its independent
 checker locks exact brace classification, typed deferred AST data, dynamic caller invocation/restoration,
 diagnostics, contextual final blocks, and one deterministic future fixture before backend code. Perl typed-literal
-parsing `.11.3.1` is active; capability remains future.
+parsing `.11.3.1` became active there and has since completed; capability remains future.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.11.3.1` implements Perl typed literal construction only. Exact
+AST/signature/body/spans, malformed codes, assignment/copying, user-function argument/results, and canonical
+JSON-to-ASCII-hex generated preservation pass 126 assertions without host closures or execution. Dynamic
+`cb(args)` invocation remains active `.11.3.2`; capability stays future.
 
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.1 — source-bearing data must survive later source rewriting):
+  Recognize `{|` before harray/eager-block classification and keep codeblock body variables out of construction-
+  time declaration traversal. Do not serialize source-bearing ActionIR records as visible Perl string literals:
+  later compatibility passes can rewrite their contents, and double-quoted dumps can interpolate caller variables.
+  Canonical UTF-8 JSON encoded as ASCII hex keeps generated state inert, deterministic, and closure-free. Decode
+  only at runtime into ordinary data; defer all call resolution/execution to `.11.3.2`.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.2 — model scope explicitly before choosing host machinery):
   Keep the neutral codeblock record as signature/body/source/spans with no captured environment field. Verify
   dynamic caller reads, persistent nonparameter mutation, temporary parameter restoration, block-local return,

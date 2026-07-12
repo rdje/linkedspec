@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.3.1 — parse Perl callable codeblock literals
+
+Implemented exact `{|` recognition before Perl's existing harray/eager-block classifier. Valid literals now carry
+the neutral eight-field `codeblock_literal` record: versioned callable signature, exact body/source text, typed
+ActionIR body, and exact containing-expression source/body spans. Fixed, zero-parameter, and final-rest forms pass;
+all nine malformed neutral forms retain typed error nodes with their exact contract codes.
+
+Lowering constructs inert plain data and never executes the body or creates a Perl coderef. A generated-source
+probe exposed an unsafe first serialization shape: ordinary dumped Perl strings could be changed by later rewrite
+passes or `$name` interpolation. The final path canonicalizes the record as UTF-8 JSON, embeds only ASCII hex, and
+decodes it at runtime, preserving every source byte without capture. Assignment/copying and user-function
+arguments/results round-trip the exact record.
+
+Added a contract-consuming 126-assertion focused suite and canonical-CI wiring. The focused contract plus existing
+ActionIR parser suite pass 26 top-level tests. The full gate passes both 61-case CLI environments and Phase 0
+`1..1030` in 575 seconds. This slice does not implement `cb(args)`; active `.11.3.2` owns dynamic caller invocation.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.11.2 — adopt callable codeblock contract
 
 Added strict `linkedspec-callable-codeblock-v1` before backend behavior. The machine-readable contract fixes exact

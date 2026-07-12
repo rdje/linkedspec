@@ -826,6 +826,14 @@ sub _actionir_ast_quote_string_source {
  return $quote.$value.$quote
 }
 
+sub _actionir_ast_plain_data_expr {
+ my ($value) = @_;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'JSON::PP');
+ my $json = JSON::PP->new->canonical(1)->allow_nonref(1)->utf8(1);
+ my $hex = unpack('H*', $json->encode($value));
+ return 'do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack("H*", "'.$hex.'")) }'
+}
+
 sub _actionir_ast_value_source_expr {
  my ($node) = @_;
  return undef unless ref($node) eq 'HASH';
@@ -849,6 +857,12 @@ sub _actionir_ast_value_source_expr {
   && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  return _actionir_ast_retired_hash_literal_fat_arrow_expr()
   if $kind eq 'hash_literal_fat_arrow_removed';
+ return $node->{source_text}
+  if $kind eq 'codeblock_literal'
+  && defined($node->{source_text})
+  && length($node->{source_text});
+ return _actionir_ast_unsupported_helper_expr($node->{code})
+  if $kind eq 'codeblock_literal_error';
  if ($kind eq 'indexed_var') {
   return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $index = _actionir_ast_value_source_expr($node->{index});
@@ -2847,6 +2861,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   return _actionir_ast_retired_hash_literal_fat_arrow_expr()
    if $kind eq 'hash_literal_fat_arrow_removed';
+  return $node->{source_text}
+   if $kind eq 'codeblock_literal'
+   && defined($node->{source_text})
+   && length($node->{source_text});
+  return _actionir_ast_unsupported_helper_expr($node->{code})
+   if $kind eq 'codeblock_literal_error';
   if ($kind eq 'assign_scalar') {
    return undef unless defined($node->{name}) && $node->{name} =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $value_expr = $ast_expr_source_node->($node->{value});
@@ -3323,6 +3343,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
 	   && defined($node->{name}) && length($node->{name});
   return _actionir_ast_retired_hash_literal_fat_arrow_expr()
    if $kind eq 'hash_literal_fat_arrow_removed';
+  return _actionir_ast_plain_data_expr($node)
+   if $kind eq 'codeblock_literal';
+  return _actionir_ast_unsupported_helper_expr($node->{code})
+   if $kind eq 'codeblock_literal_error';
   return $lower_ast_scalar_assignment_value_node->($node)
    if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index' || $kind eq 'assign_nested_access';
   return $lower_ast_direct_access_node->($node)

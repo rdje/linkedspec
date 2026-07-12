@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (neutral callable-codeblock contract `.11.2` adopted; Perl parsing `.11.3.1` active).
+- Last updated: `2026-07-12` (Perl typed callable-codeblock construction `.11.3.1` complete; invocation `.11.3.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2341,13 +2341,21 @@ before implementation.
     remain stable.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Parse and lower typed callable-codeblock literal/signature values on Perl.
   Acceptance: `{|...|...}` is a dedicated typed AST value with exact spans/body/signature; assignment, copying,
     function arguments/results, and generated state preserve it without executing its body or confusing brace forms.
+  Verification: **PASS 2026-07-12.** Exact `{|` recognition precedes current harray/eager-block classification.
+    Valid literals expose only the neutral eight fields with typed body/signature and containing-expression spans;
+    all nine malformed contract forms retain their exact codes. Canonical UTF-8 JSON serialized as ASCII hex
+    reconstructs inert plain data in generated Perl, avoiding host closures, interpolation, and later rewrite
+    mutation. Assignment/copy and user-function argument/result round trips pass 126 focused assertions; existing
+    ActionIR parser tests remain green. Canonical CI passes 61x2 CLI and Phase 0 `1..1030`/575s. `cb(args)` remains
+    intentionally owned by `.11.3.2`.
+  Commit: `FUTURE-PARITY-BACKLOG.11.3.1 - parse Perl callable codeblock literals`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute Perl codeblock-variable calls with dynamic caller context.
   Acceptance: `cb(args)` resolution, ordered evaluation, copied temporary params/rest, restoration, caller-visible
     nonparameter mutation, block-local return, chain/discard, recursion and typed failures match the neutral fixture.
@@ -2461,6 +2469,22 @@ before implementation.
   leaf `.11.3.1`, and current harray/eager-block/named-immediate behavior remains authoritative.
 - [x] **LOCKSTEP** — Contract README, capability owner, task/index, roadmaps, README/book, KM, live docs, and memory
   identify the adopted contract and active Perl implementation frontier.
+
+### `FUTURE-PARITY-BACKLOG.11.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct ActionIR parsing classified `{|...|...}` as an immediate block and generated
+  lowering had no inert typed value representation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `AST/Parser.pm::_parse_brace_expr` only chose harray versus `block_value`, and
+  `MethodLowering.pm` had no pure-data `codeblock_literal` branch. A first Data::Dumper prototype also proved unsafe:
+  later rewrite/interpolation changed embedded source strings, so generated source could not preserve exact data.
+- [x] **FIX** — Parse exact `{|` first into the neutral eight-field AST/signature record; preserve containing spans;
+  emit canonical UTF-8 JSON as ASCII hex and decode to plain data at runtime; retain typed invalid-literal nodes.
+- [x] **ADDRESSED (verified)** — The unchanged neutral contract drives 7 valid literals, 9 malformed forms, brace
+  classification, inert construction, assignment/copy, and user-function argument/result checks (126 assertions).
+- [x] **NO REGRESSION** — Existing ActionIR parser plus the new focused suite pass 26 top-level tests; harray and
+  eager block cases retain their kinds; no variable-call invocation or dynamic execution is admitted in this leaf.
+- [x] **LOCKSTEP** — Capability owner, task/index, roadmaps, README/book, KM, changes/notes/live, and memory route
+  the remaining Perl invocation semantics to active `.11.3.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.12`
   Status: `active`
@@ -2604,7 +2628,8 @@ before implementation.
 | 73 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `active` | Resume the existing Lua scalar numeric implementation and six-runtime admission frontier. |
 | 74 | `FUTURE-PARITY-BACKLOG.11.1` | `done` | ADR 0031 selects `{|args| ...}`, dynamic caller context, and a backend-neutral rollout split. |
 | 75 | `FUTURE-PARITY-BACKLOG.11.2` | `done` | Exact syntax/AST/dynamic-context cases and future fixture are independently checked in canonical CI. |
-| 76 | `FUTURE-PARITY-BACKLOG.11.3.1` | `active` | Parse and preserve typed deferred callable-codeblock literals on the Perl reference. |
+| 76 | `FUTURE-PARITY-BACKLOG.11.3.1` | `done` | Perl parses/preserves inert eight-field codeblock records through generated source and user functions. |
+| 77 | `FUTURE-PARITY-BACKLOG.11.3.2` | `active` | Execute codeblock-variable calls through dynamic caller context and neutral diagnostics. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3202,8 +3227,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. The callable-codeblock neutral contract is adopted without claiming behavior; Perl typed literal parsing
-  `.11.3.1` is active. Lua variadic work remains explicitly owned by `.5.1`/`.5.3`/`.8`, and scalar numeric
+- None. Perl callable-codeblock construction/preservation is complete without invocation; dynamic variable calls
+  `.11.3.2` are active. Lua variadic work remains explicitly owned by `.5.1`/`.5.3`/`.8`, and scalar numeric
   `.4.3.3.1.4` remains ready after the director-prioritized `.11` arc.
 
 ## Verification Log
@@ -3283,6 +3308,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.4` | Four-backend source/test/public scan; callable/capability checkers; dual-ABI Lua gate; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. Callable extension `.4` closes; Lua native `.5.1`, descriptor `.5.3`, generated `.8.1-.3`, and admission `.8.4` own all remaining work. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.1` | Knowledge Map/ActionIR source audit; director syntax/scope agreement; ADR 0031; backend rollout split; memory/Knowledge Map/doctrine/task-tree/whitespace/mdBook checks. | PASS. `{|args| ...}` and dynamic caller context are designed before behavior code; neutral contract `.11.2` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.2` | Strict callable-codeblock JSON/checker; 7 literals/11 calls/9 malformed literals/7 invalid calls/4 contextual forms; independent fixture rendering/evaluation; full local gate with 61x2 CLI and Phase 0 `1..1030`/716s; capability/KM/governance/whitespace/mdBook. | PASS. Neutral syntax, typed AST, dynamic context, restoration, diagnostics, precedence, and future fixture are locked before behavior; Perl `.11.3.1` activates. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.11.3.1` | Exact Perl brace/signature/body/span AST; canonical JSON/ASCII-hex generated state; 126 focused assertions; existing ActionIR parser; full local gate with 61x2 CLI and Phase 0 `1..1030`/575s; contract/capability/governance/whitespace/mdBook. | PASS. Inert construction, assignment/copy, malformed codes, and user-function argument/results preserve typed data without closures; invocation `.11.3.2` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3311,6 +3337,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.4.4` | `FUTURE-PARITY-BACKLOG.4.4 - close variadic callable routing` | Four-backend no-drift and explicit Lua native/descriptor/generated/admission ownership. |
 | `FUTURE-PARITY-BACKLOG.11.1` | `FUTURE-PARITY-BACKLOG.11.1 - design callable codeblock literals` | ADR 0031, brace-pipe literal, dynamic caller context, static resolution precedence, and backend rollout split. |
 | `FUTURE-PARITY-BACKLOG.11.2` | `FUTURE-PARITY-BACKLOG.11.2 - adopt callable codeblock contract` | Strict schema/checker, neutral parser and invocation model, diagnostics, contextual forms, and future fixture. |
+| `FUTURE-PARITY-BACKLOG.11.3.1` | `FUTURE-PARITY-BACKLOG.11.3.1 - parse Perl callable codeblock literals` | Exact Perl AST/spans/signatures, inert generated data, malformed codes, assignment/copy/function preservation. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |

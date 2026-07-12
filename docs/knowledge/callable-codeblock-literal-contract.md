@@ -44,9 +44,10 @@ Bound non-codeblocks diagnose as not callable; recursion is initially rejected. 
 and generic attached/contextual final blocks normalize under callable signatures rather than name-gated parsing.
 Lexical capture is explicitly deferred behind a new decision if a real need appears.
 
-This is accepted design, not implemented behavior. `linkedspec-callable-codeblock-v1` now machine-locks seven
-literals, eleven valid calls, sixteen invalid syntax/call cases, contextual final-block normalization, and one
-deterministic future fixture. Perl typed-literal parsing `.11.3.1` is active before invocation/backend changes.
+`linkedspec-callable-codeblock-v1` machine-locks seven literals, eleven valid calls, sixteen invalid syntax/call
+cases, contextual final-block normalization, and one deterministic future fixture. Perl `.11.3.1` now implements
+only inert typed literal construction/preservation; `cb(args)` invocation remains active `.11.3.2`, so the complete
+feature is not yet current behavior.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]].

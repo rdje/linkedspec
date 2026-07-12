@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.11.3.1 — parse Perl callable codeblock literals**
+  (DONE — dynamic variable invocation `.11.3.2` next).
+
+  **Implementation:** Exact `{|` parses to the neutral eight-field signature/body/source/span record. Generated
+  construction uses canonical UTF-8 JSON encoded as ASCII hex, reconstructs plain inert data, and captures nothing.
+
+  **Proof/finding:** 126 assertions cover all literals/malformed codes, exact nested spans, non-execution,
+  assignment/copy, and user-function argument/results. A probe rejected visible Perl-string dumping because later
+  rewrites/interpolation corrupted embedded source; the final hex representation preserves it exactly. Canonical
+  CI passes 61x2 CLI plus Phase 0 `1..1030` in 575 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.11.2 — adopt callable codeblock contract**
   (DONE — Perl typed-literal parsing `.11.3.1` next).
 

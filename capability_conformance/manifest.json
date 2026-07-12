@@ -190,7 +190,7 @@
     {"id": "legacy.perl_plugin_registry", "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.", "owner": "FUTURE-PARITY-BACKLOG.6"},
     {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
     {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
-    {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus linkedspec-callable-codeblock-v1 adopt callable {|args| body } literals, dynamic caller context, and retained with; backend implementation is not yet current behavior.", "owner": "FUTURE-PARITY-BACKLOG.11.3.1"},
+    {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus linkedspec-callable-codeblock-v1 are adopted, and Perl now preserves inert typed literals; variable invocation, generic final blocks, and backend parity are not yet current behavior.", "owner": "FUTURE-PARITY-BACKLOG.11.3.2"},
     {"id": "future.variadic_user_functions", "reason": "The neutral fixed-prefix plus final-rest signature is implemented on Perl, Rust, Dart, and Julia; Lua native, descriptor, generated-source, and final admission remain future.", "owner": "LUA-BACKEND-PARITY.5.1"},
     {"id": "future.lua_backend", "reason": "Lua follows convergence of the four implemented backends.", "owner": "FUTURE-PARITY-BACKLOG.1.3"}
   ]

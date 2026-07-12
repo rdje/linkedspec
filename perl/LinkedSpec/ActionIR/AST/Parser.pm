@@ -110,6 +110,7 @@ sub parse_action_block {
  my ($code, $deps) = @_;
  $code = '' unless defined $code;
  $deps = {} unless ref($deps) eq 'HASH';
+ my $base_start = defined($deps->{base_start}) ? $deps->{base_start} : 0;
  my $trim_action_ir_value = _trim_cb($deps);
 
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit');
@@ -125,7 +126,7 @@ sub parse_action_block {
   my $pos = _find_piece_offset($code, $statement, $search_pos);
   $pos = $search_pos unless defined $pos;
   my $end = $pos + length($statement);
-  push @statement_spans, @{_split_ast_newline_statement_text($statement, $pos)};
+  push @statement_spans, @{_split_ast_newline_statement_text($statement, $base_start + $pos)};
   $search_pos = $end;
  }
 
@@ -136,8 +137,8 @@ sub parse_action_block {
  return _node(
   'action_block',
   $code,
-  0,
-  length($code),
+  $base_start,
+  $base_start + length($code),
   statements => \@statements,
  )
 }
@@ -608,12 +609,108 @@ sub _parse_array_literal_expr {
 sub _parse_brace_expr {
  my ($trimmed, $start, $end) = @_;
  return undef unless _outer_delimiter_is_balanced($trimmed, '{', '}');
+ return _parse_codeblock_literal_expr($trimmed, $start, $end)
+  if substr($trimmed, 0, 2) eq '{|';
  my $payload = substr($trimmed, 1, length($trimmed) - 2);
+ return _codeblock_literal_error_node($trimmed, $start, $end, 'invalid_codeblock_opener')
+  if $payload =~ /\A\s+\|/s;
  if (_fallback_trim($payload) eq '' || _has_top_level_hash_pair_separator($payload)) {
   return _parse_hash_literal_expr($trimmed, $payload, $start, $end);
  }
  my $block = parse_action_block($payload);
  return _node('block_value', $trimmed, $start, $end, block => $block)
+}
+
+sub _parse_codeblock_literal_expr {
+ my ($source_text, $start, $end) = @_;
+ my $signature_end = index($source_text, '|', 2);
+ return _codeblock_literal_error_node(
+  $source_text,
+  $start,
+  $end,
+  'missing_codeblock_signature_closer',
+ ) if $signature_end < 0;
+
+ my $signature_source = substr($source_text, 2, $signature_end - 2);
+ my ($signature, $error_code) = _parse_codeblock_signature($signature_source);
+ return _codeblock_literal_error_node($source_text, $start, $end, $error_code)
+  unless ref($signature) eq 'HASH';
+
+ my $body_start = $start + $signature_end + 1;
+ my $body_end = $end - 1;
+ my $body_source = substr($source_text, $signature_end + 1, length($source_text) - $signature_end - 2);
+ my $body_ast = parse_action_block($body_source, { base_start => $body_start });
+ return LinkedSpec::ActionIR::AST::node(
+  'codeblock_literal',
+  version => 1,
+  signature => $signature,
+  body_source => $body_source,
+  body_ast => $body_ast,
+  source_text => $source_text,
+  source_span => _span($start, $end),
+  body_span => _span($body_start, $body_end),
+ )
+}
+
+sub _parse_codeblock_signature {
+ my ($source) = @_;
+ $source = '' unless defined $source;
+ my @parts = length($source) ? split(/,/, $source, -1) : ();
+ @parts = map { _fallback_trim($_) } @parts;
+ return (undef, 'invalid_parameter') if grep { !defined($_) || !length($_) } @parts;
+
+ my @positional_params;
+ my $rest_param;
+ my %seen;
+ for (my $idx = 0; $idx < @parts; ++$idx) {
+  my $part = $parts[$idx];
+  my $name;
+  if (substr($part, 0, 3) eq '...') {
+   return (undef, 'rest_parameter_must_be_final') if $idx != $#parts;
+   return (undef, 'invalid_rest_parameter')
+    unless $part =~ /\A\.\.\.([A-Za-z_][A-Za-z0-9_]*)\z/o;
+   $name = $1;
+   $rest_param = $name;
+  } else {
+   return (undef, 'invalid_parameter')
+    unless $part =~ /\A([A-Za-z_][A-Za-z0-9_]*)\z/o;
+   $name = $1;
+   push @positional_params, $name;
+  }
+  return (undef, 'duplicate_parameter') if $seen{$name}++;
+  return (undef, 'reserved_parameter') if _codeblock_parameter_is_reserved($name);
+ }
+
+ return ({
+  kind => 'callable_signature',
+  version => 1,
+  positional_params => \@positional_params,
+  rest_param => $rest_param,
+  min_arity => scalar(@positional_params),
+  max_arity => defined($rest_param) ? undef : scalar(@positional_params),
+ }, undef)
+}
+
+sub _codeblock_parameter_is_reserved {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ state %reserved = map { $_ => 1 } qw(
+  fn return I LS LE E EX IT LX STRING descr minfo LSPOS LEPOS LMATCH LSMATCH IMATCH
+  IMATCH_LIST LMATCH_LIST IMATCH_HASH LMATCH_HASH SELF this ctx runtime_ctx
+ );
+ return $reserved{$name} ? 1 : 0
+}
+
+sub _codeblock_literal_error_node {
+ my ($source, $start, $end, $code) = @_;
+ $code = 'invalid_codeblock_literal' unless defined($code) && length($code);
+ return _node(
+  'codeblock_literal_error',
+  $source,
+  $start,
+  $end,
+  code => $code,
+ )
 }
 
 sub _parse_hash_literal_expr {

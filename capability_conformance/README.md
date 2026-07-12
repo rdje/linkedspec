@@ -51,7 +51,10 @@ Ordinary `{ statements }` remains an eager block value, while empty and top-leve
 literals. The contract also fixes diagnostics, contextual final-block normalization, and a deterministic future
 `.spec` fixture. Validate the schema, parser/classifier model, neutral invocation model, and fixture offline with
 `python3 tools/check_callable_codeblock_contract.py`. Backend admission remains future until the owned rollout
-leaves supply native and generated execution evidence.
+leaves supply native and generated execution evidence. Perl now consumes the literal/schema subset through
+`prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert construction, canonical hex-encoded
+generated data, assignment/copying, and user-function argument/results pass. Variable invocation remains active
+under `FUTURE-PARITY-BACKLOG.11.3.2`.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

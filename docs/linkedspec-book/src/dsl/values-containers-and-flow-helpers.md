@@ -222,9 +222,11 @@ result = cb("ready")
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract now locks this accepted design and its future fixture, but this remains
-unshipped syntax: Perl typed-literal work starts at `.11.3.1`, followed by runtime and cross-backend leaves. Until
-then, use only the current named immediate forms above.
+`linkedspec-callable-codeblock-v1` contract locks this design and its future fixture. The Perl reference now parses
+these literals and preserves their signature/body/source/span record through assignment, user functions, and
+generated source without executing it. That is an implementation staging boundary, not a usable callable surface:
+`cb(args)` remains active `.11.3.2` work, followed by generic final-block and cross-backend leaves. Until invocation
+lands, use only the current named immediate forms above.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each
