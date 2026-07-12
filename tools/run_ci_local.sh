@@ -103,6 +103,7 @@ require_tracked_file rust/linkedspec-runtime/tests/unicode_case_mapping.rs
 require_tracked_file dart/lib/src/runtime/unicode_case_mapping.dart
 require_tracked_file dart/test/unicode_case_mapping_test.dart
 require_tracked_file julia/src/runtime/UnicodeCaseMapping.jl
+require_tracked_file lua/src/linkedspec/unicode_case_mapping.lua
 require_tracked_file cli_conformance/manifest.json
 require_tracked_file t/cli_conformance_runner.t
 require_tracked_file t/trace_cli.t

@@ -7,6 +7,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.4 — admit six-variant Unicode casing**
+  (DONE — exact scalar-to-text coercion `.1.3` next).
+
+  **Proof:** Twelve fixtures pass all Lua casing paths; PUC Lua and LuaJIT pass 71/71. All six variants now consume
+  one generated Unicode 17 full-default contract.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.2.1.2.3 — align Dart and Julia Unicode casing**
   (DONE — PUC Lua/LuaJIT and six-variant admission `.4` next).
 

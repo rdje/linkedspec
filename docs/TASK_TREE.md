@@ -658,6 +658,9 @@ receiver, and array casing with all 12 fixtures and full backend gates green; ac
 Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.2.3` is done. Generated Dart/Julia modules pass all 12 fixtures
 and full local gates; active `.4` aligns PUC Lua/LuaJIT and admits exact six-variant Unicode casing.
 
+Index note 2026-07-12: `LUA-BACKEND-PARITY.4.3.2.1.2.4` closes Unicode casing. PUC Lua/LuaJIT pass 71/71 and all
+six variants share 12 exact fixtures; active `.4.3.2.1.3` aligns scalar-to-text coercion.
+
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral
 corpus. Bounded Perl fixtures expose a common physical-newline separator/lowering gap for capture assignments,

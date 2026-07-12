@@ -1,6 +1,12 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.4 — admit six-variant Unicode casing
+
+Generated pure-Lua Unicode 17 casing with strict UTF-8 scalar decoding/encoding, full mappings, contextual Final
+Sigma, and no normalization. All 12 fixtures pass direct/helper/receiver/array paths; PUC Lua and LuaJIT pass 71/71.
+The same fixture now admits exact casing across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.2.1.2.3 — align Dart and Julia Unicode casing
 
 Generated and byte-gated Dart/Julia Unicode 17 modules and routed scalar helper, receiver, value-array, and

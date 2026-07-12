@@ -18,20 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.3` — Dart/Julia generated Unicode casing complete.
-- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.2` — Perl/Rust generated Unicode casing complete.
-- recent_context: Generator/checker own deterministic Perl/Rust/Dart/Julia modules. All scalar/receiver/value-array/
-  mutating-array paths use them; 12 fixtures and every backend full gate pass. Active `.4` aligns PUC Lua/LuaJIT and
-  admits six-variant parity. `.1.3` separately owns scalar-to-text drift; `.4.3.2.2` owns regex/split/mutation. Rust
-  matching uses RGX, not basic `regex`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.4` — six-variant Unicode 17 casing admitted.
+- prior_leaf: `LUA-BACKEND-PARITY.4.3.2.1.2.3` — Dart/Julia generated Unicode casing complete.
+- recent_context: One generated Unicode 17 full-default contract passes 12 fixtures on Perl/Rust/Dart/Julia/PUC
+  Lua/LuaJIT; Lua strict scalar UTF-8 implementation passes 71x2. Active `.1.3` owns scalar-to-text drift;
+  `.4.3.2.2` owns regex/split/mutation. Rust matching uses RGX, not basic `regex`.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`; previous committed HEAD is
-  `49ec16d8 LUA-BACKEND-PARITY.4.3.2.1.2.2 - align Perl and Rust Unicode casing`.
+  `LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`; previous committed HEAD is
+  `d37f2e3a LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.2.4`; Lua Unicode 17 casing and six-variant admission are active.
-- next_action: Generate the Lua mapping/property module, route PUC Lua/LuaJIT scalar/receiver/array casing through
-  it, run the 12 fixtures on both ABIs, then execute exact six-variant admission and full gates.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.2.1.3`; six-variant scalar-to-text coercion alignment is active.
+- next_action: Define the neutral scalar-to-text fixture for null/four kinds/booleans/numbers, then align variants.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

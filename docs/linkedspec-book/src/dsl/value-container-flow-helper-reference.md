@@ -534,9 +534,8 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 `lowercase` and `uppercase` are Unicode operations, not byte operations; UTF-8, UTF-16, and UTF-32 are only host
 representations. The canonical contract is Unicode 17.0.0 full Default Case Conversion, locale-independent, with
 standard context rules and no implicit normalization. Thus `uppercase("ß")` is `"SS"`, `lowercase("İ")` is
-`"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. Perl, Rust, Dart, and Julia execute generated tables for function,
-receiver, and array forms. PUC Lua/LuaJIT admission is active; until six-variant admission closes,
-portable specs should not depend on the formerly divergent special cases.
+`"i\u{0307}"`, and `uppercase("ﬃ")` is `"FFI"`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute generated
+tables for function, receiver, and array forms; these special cases are portable across every variant.
 
 The variants also do not yet share one edge-case scalar-to-text coercion rule for `cat` and other string helpers:
 null/containers, booleans, and integral-looking decimals expose host differences. Pass explicit strings when

@@ -2264,6 +2264,34 @@ Top::
   assert_equal(result.value.replace_null, json.null, "replace null propagation")
 end)
 
+test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()
+  local handle = assert(io.open("capability_conformance/unicode_case_contract.json", "rb"))
+  local contract = json.decode(assert(handle:read("*a")))
+  assert(handle:close())
+  local unicode_case = require("linkedspec.unicode_case_mapping")
+  assert_equal(unicode_case.contract_id, contract.contract_id, "Unicode contract id")
+  assert_equal(unicode_case.unicode_version, contract.unicode_version, "Unicode version")
+  assert_equal(unicode_case.data_sha256, contract.data_sha256, "Unicode data digest")
+  for _, fixture in ipairs(contract.fixtures) do
+    assert_equal(unicode_case.lowercase(fixture.input), fixture.lower, fixture.id .. " direct lowercase")
+    assert_equal(unicode_case.uppercase(fixture.input), fixture.upper, fixture.id .. " direct uppercase")
+    local literal = json.encode(fixture.input)
+    local source = "Top::\n /x/ -> Done { return([lowercase(" .. literal .. "), " .. literal ..
+      ".lowercase(), uppercase(" .. literal .. "), " .. literal .. ".uppercase(), [" .. literal ..
+      "].lowercase_each(), [" .. literal .. "].uppercase_each()]) }\n\nDone::\n /x/\n"
+    local result = linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+      "xx"
+    ).value
+    assert_equal(result[1], fixture.lower, fixture.id .. " helper lowercase")
+    assert_equal(result[2], fixture.lower, fixture.id .. " receiver lowercase")
+    assert_equal(result[3], fixture.upper, fixture.id .. " helper uppercase")
+    assert_equal(result[4], fixture.upper, fixture.id .. " receiver uppercase")
+    assert_equal(result[5][1], fixture.lower, fixture.id .. " array lowercase")
+    assert_equal(result[6][1], fixture.upper, fixture.id .. " array uppercase")
+  end
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

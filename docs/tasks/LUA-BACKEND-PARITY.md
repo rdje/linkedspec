@@ -690,15 +690,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.1 - add Lua pure string helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Define and implement one versioned Unicode lower/uppercase contract across every LinkedSpec variant.
   Children: `.4.3.2.1.2.0`, `.4.3.2.1.2.1`, `.4.3.2.1.2.2`, `.4.3.2.1.2.3`, `.4.3.2.1.2.4`
   Dependencies: `.4.3.2.1.1`
   Acceptance: Select a canonical Unicode version and simple/full/special-casing policy; add a neutral fixture covering
     ordinary non-ASCII and divergent special cases (`ß`, `İ`, and `ﬃ`); align Perl, Rust, Dart, Julia, PUC Lua, and
     LuaJIT values and receiver chains without confusing Unicode semantics with UTF-8/UTF-16 host representation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Unicode 17 full-default behavior is generated from one checksum-locked contract
+    and passes the same 12 fixtures on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+  Commit: closed by `.4.3.2.1.2.4`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.0`
   Status: `done`
@@ -759,17 +760,20 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Enable generated Unicode casing on PUC Lua/LuaJIT and admit exact six-variant parity.
   Dependencies: `.4.3.2.1.2.3`
   Acceptance: Lua function/receiver lower/uppercase paths use the same generated maps/context rules without native
     byte/locale casing; both ABIs pass, six-variant fixture outputs are byte-identical UTF-8, full gates/docs/KM pass,
     and `.4.3.2.1.2` closes before scalar-to-text `.1.3` begins.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Generated pure-Lua maps/properties plus strict UTF-8 scalar decode/encode pass
+    all 12 fixtures through direct, helper, receiver, and array-value paths. PUC Lua and LuaJIT each pass 71/71;
+    six-variant expected UTF-8 outputs are identical by the shared neutral fixture. Full local CI passes CLI 61x2
+    and phase0 `1..1030` in 490s plus every shared gate.
+  Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Define one scalar-to-text coercion contract and align every LinkedSpec variant.
   Dependencies: `.4.3.2.1.2`
   Acceptance: A neutral fixture fixes `cat`/string-helper handling for null, array, harray, codeblock, booleans,
@@ -1010,15 +1014,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 14 | `LUA-BACKEND-PARITY.4.3.0` | `done` | Nine implementation/closeout owners cover the full helper surface. |
 | 15 | `LUA-BACKEND-PARITY.4.3.1` | `done` | Four-kind stores/access/capture reads pass 69/69 on both runtimes. |
 | 16 | `LUA-BACKEND-PARITY.4.3.2.0` | `done` | Pure scalar and regex/mutation mechanisms have separate owners. |
-| 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `active` | Pure strings are split around the Unicode casing parity gap. |
+| 17 | `LUA-BACKEND-PARITY.4.3.2.1` | `done` | Deterministic and Unicode pure string helpers are complete. |
 | 18 | `LUA-BACKEND-PARITY.4.3.2.1.0` | `done` | Measured three host policies and split deterministic helpers from casing. |
 | 19 | `LUA-BACKEND-PARITY.4.3.2.1.1` | `done` | Deterministic non-case strings pass 70/70 on both Lua ABIs. |
-| 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `active` | Define and align the versioned Unicode casing contract. |
+| 20 | `LUA-BACKEND-PARITY.4.3.2.1.2` | `done` | Unicode 17 casing is exact across all six runtime variants. |
 | 21 | `LUA-BACKEND-PARITY.4.3.2.1.2.0` | `done` | Unicode 17 full-default policy and rollout owners adopted. |
 | 22 | `LUA-BACKEND-PARITY.4.3.2.1.2.1` | `done` | Verified Unicode contract and 12 fixtures pass the full gate. |
 | 23 | `LUA-BACKEND-PARITY.4.3.2.1.2.2` | `done` | Perl/Rust direct, helper, receiver, and array casing use generated Unicode 17 data. |
 | 24 | `LUA-BACKEND-PARITY.4.3.2.1.2.3` | `done` | Dart/Julia direct, helper, receiver, and array casing use generated Unicode 17 data. |
-| 25 | `LUA-BACKEND-PARITY.4.3.2.1.2.4` | `active` | Align PUC Lua/LuaJIT and admit six-variant Unicode parity. |
+| 25 | `LUA-BACKEND-PARITY.4.3.2.1.2.4` | `done` | PUC Lua/LuaJIT pass 71/71 and six-variant casing is admitted. |
+| 26 | `LUA-BACKEND-PARITY.4.3.2.1.3` | `active` | Align scalar-to-text coercion across all variants. |
+
+### `LUA-BACKEND-PARITY.4.3.2.1.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Standard Lua has no portable Unicode casing API and the runtime deliberately rejected
+  the casing helpers rather than falling back to byte/locale `string.lower`/`string.upper`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The pure dispatcher omitted casing and Lua lacked generated tables plus a
+  Unicode-scalar UTF-8 boundary implementation.
+- [x] **FIX** — Generation/checking now includes a pure-Lua module with strict UTF-8 decode/encode, full mappings,
+  merged contextual properties, and Final Sigma; helper/receiver/array-value paths reuse it.
+- [x] **ADDRESSED (verified)** — All 12 fixtures pass direct/helper/receiver/array paths on PUC Lua and LuaJIT.
+- [x] **NO REGRESSION** — The dual-ABI Lua gate passes 71/71 and removes its disposable native adapters.
+- [x] **LOCKSTEP** — One neutral fixture and byte-checked generated modules establish exact six-variant behavior;
+  task/roadmap/live docs/KM/book close casing before `.1.3` becomes active.
 
 ### `LUA-BACKEND-PARITY.4.3.2.1.2.3` Acceptance Checklist
 

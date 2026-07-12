@@ -1,6 +1,10 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.4 — keep Lua casing scalar-safe and host-independent):
+  Standard Lua casing is byte/locale oriented. Decode strict UTF-8 into Unicode scalars, apply generated mappings and
+  contextual properties, and encode scalars explicitly; run the identical code on PUC Lua and LuaJIT.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.2.1.2.3 — adapt generated scalar semantics to host string models):
   Dart `runes` and Julia character iteration both expose Unicode scalars, so the shared mapping/context algorithm can
   remain encoding-neutral. Generate native constant tables, preserve one scalar evaluator per backend, and make array

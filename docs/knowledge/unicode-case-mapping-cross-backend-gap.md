@@ -1,6 +1,6 @@
 ---
 id: unicode-case-mapping-cross-backend-gap
-title: Unicode special casing is not yet behaviorally identical across LinkedSpec variants
+title: Unicode special casing is behaviorally identical across LinkedSpec variants
 answers:
   - do all LinkedSpec variants lowercase Unicode identically
   - do all LinkedSpec variants uppercase Unicode identically
@@ -21,7 +21,7 @@ reverify: "perl -CS -Mutf8 -e 'for my $s (\"é\", \"ß\", \"İ\", \"Σ\", \"ﬃ\
 
 ## Fact
 
-The current variants do not define one identical result for every Unicode special-casing character. This is a
+Historical host behavior did not define one identical result for every Unicode special-casing character. This was a
 semantic gap, not an encoding gap: a host may store the same Unicode scalar text as UTF-8, UTF-16, or another
 encoding without changing which case mapping the DSL intends.
 
@@ -47,4 +47,4 @@ finishes; host case APIs are no longer the intended semantic authority.
 
 The neutral data layer is complete under [[unicode-17-case-contract-data]]. Perl/Rust consume it under
 [[perl-rust-unicode-17-case-mapping]], and Dart/Julia under [[dart-julia-unicode-17-case-mapping]]. Backend behavior
-remains divergent only until the PUC Lua/LuaJIT admission leaf closes.
+is now exact across all six variants under [[six-variant-unicode-17-case-parity]].

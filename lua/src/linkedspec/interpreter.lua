@@ -4,6 +4,7 @@ local action_parser = require("linkedspec.action_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local matching = require("linkedspec.matching")
+local unicode_case = require("linkedspec.unicode_case_mapping")
 
 local M = {}
 
@@ -251,12 +252,16 @@ local PURE_STRING_HELPERS = {
   is_nonempty = true,
   is_undefined = true,
   length = true,
+  lowercase = true,
+  lowercase_each = true,
   replace_substr = true,
   rm_prefix = true,
   rm_suffix = true,
   starts_with = true,
   substr = true,
   trim = true,
+  uppercase = true,
+  uppercase_each = true,
 }
 
 local TERMINAL_STRING_HELPERS = {
@@ -418,6 +423,20 @@ local function evaluate_pure_string_helper(name, values)
     return #values == 0 or values[1] == json.null
   elseif name == "length" then
     return value_length(first_or_null(values))
+  elseif name == "lowercase" or name == "uppercase" then
+    local value = scalar_string(first_or_null(values), false)
+    if value == nil then return json.null end
+    return name == "lowercase" and unicode_case.lowercase(value) or unicode_case.uppercase(value)
+  elseif name == "lowercase_each" or name == "uppercase_each" then
+    local source = first_or_null(values)
+    local result = json.array()
+    if json.kind(source) ~= "array" then return result end
+    for index, item in ipairs(source) do
+      local value = scalar_string(item, false)
+      result[index] = value == nil and json.null or
+        (name == "lowercase_each" and unicode_case.lowercase(value) or unicode_case.uppercase(value))
+    end
+    return result
   elseif name == "replace_substr" then
     if #values < 3 then return json.null end
     local value = scalar_string(values[1], false)
