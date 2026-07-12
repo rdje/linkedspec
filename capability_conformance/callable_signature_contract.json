@@ -1,0 +1,124 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-callable-signature-v1",
+  "policy": {
+    "variadic_definition": "fn name(fixed, ...rest) { body } with at most one final rest parameter",
+    "fixed_definition": "version-1 fn definitions retain exact params plus arity",
+    "arguments": "user-function calls accept positional arguments only and evaluate them once left-to-right in caller scope",
+    "rest_binding": "extra values bind as one fresh typed LinkedSpec array; zero extras bind an empty typed array",
+    "call_resolution": "fixed definitions require exact arity; variadic definitions require at least their fixed positional count and have no upper bound",
+    "receiver_methods": "a receiver is prepended to the effective built-in helper arguments; user-defined functions do not become receiver methods",
+    "overloads": "function names remain unique; variadic signatures do not introduce overload sets, defaults, named arguments, or host splat dispatch",
+    "results": "function results remain ordinary values and may feed compatible receiver chains"
+  },
+  "syntax": {
+    "rest_marker": "...",
+    "rest_form": "...IDENTIFIER",
+    "rest_position": "final",
+    "marker_name_whitespace": false,
+    "zero_fixed_parameters": true,
+    "empty_rest_values": true
+  },
+  "signature_schema": {
+    "kind": "callable_signature",
+    "version": 1,
+    "fields": [
+      "kind",
+      "version",
+      "positional_params",
+      "rest_param",
+      "min_arity",
+      "max_arity"
+    ]
+  },
+  "definition_versions": {
+    "fixed": {
+      "function_version": 1,
+      "record_fields_source": "capability_conformance/outward_descriptor_contract.json:function_record_keys",
+      "signature_storage": ["params", "arity"]
+    },
+    "variadic": {
+      "function_version": 2,
+      "record_fields": [
+        "index",
+        "kind",
+        "version",
+        "name",
+        "signature",
+        "source_text",
+        "source_span",
+        "body_span",
+        "body_source",
+        "body_payload",
+        "body_parse_job",
+        "body_ast"
+      ],
+      "signature_storage": ["signature"]
+    }
+  },
+  "purpose_examples": [
+    {"name": "num_add", "surface": "helper", "min_arity": 2, "max_arity": null},
+    {"name": "num_sub", "surface": "helper", "min_arity": 2, "max_arity": 2},
+    {"name": "cat", "surface": "helper", "min_arity": 2, "max_arity": null},
+    {"name": "array", "surface": "helper", "min_arity": 0, "max_arity": null},
+    {"name": "add", "canonical_name": "num_add", "surface": "receiver_method", "receiver_injection": "prepend", "authored_min_arity": 1, "authored_max_arity": null},
+    {"name": "sub", "canonical_name": "num_sub", "surface": "receiver_method", "receiver_injection": "prepend", "authored_min_arity": 1, "authored_max_arity": 1}
+  ],
+  "definitions": [
+    {
+      "id": "fixed_pair",
+      "name": "pair",
+      "function_version": 1,
+      "signature": {"kind": "callable_signature", "version": 1, "positional_params": ["left", "right"], "rest_param": null, "min_arity": 2, "max_arity": 2},
+      "behavior": "return_fixed_array"
+    },
+    {
+      "id": "rest_all",
+      "name": "all_values",
+      "function_version": 2,
+      "signature": {"kind": "callable_signature", "version": 1, "positional_params": [], "rest_param": "items", "min_arity": 0, "max_arity": null},
+      "behavior": "return_rest_array"
+    },
+    {
+      "id": "rest_prefix",
+      "name": "collect",
+      "function_version": 2,
+      "signature": {"kind": "callable_signature", "version": 1, "positional_params": ["prefix"], "rest_param": "items", "min_arity": 1, "max_arity": null},
+      "behavior": "return_prefix_rest_object"
+    }
+  ],
+  "call_cases": [
+    {"id": "fixed_exact", "function": "pair", "arguments": [{"kind": "positional", "value": "left"}, {"kind": "positional", "value": "right"}], "expected": ["left", "right"]},
+    {"id": "rest_only_empty", "function": "all_values", "arguments": [], "expected": []},
+    {"id": "rest_only_mixed_values", "function": "all_values", "arguments": [{"kind": "positional", "value": 1}, {"kind": "positional", "value": [2]}, {"kind": "positional", "value": {"k": 3}}, {"kind": "positional", "value": false}, {"kind": "positional", "value": null}], "expected": [1, [2], {"k": 3}, false, null]},
+    {"id": "fixed_prefix_empty_rest", "function": "collect", "arguments": [{"kind": "positional", "value": "p"}], "expected": {"prefix": "p", "items": []}},
+    {"id": "fixed_prefix_nonempty_rest", "function": "collect", "arguments": [{"kind": "positional", "value": "p"}, {"kind": "positional", "value": "a"}, {"kind": "positional", "value": "b"}], "expected": {"prefix": "p", "items": ["a", "b"]}},
+    {"id": "rest_result_receiver_chain", "function": "all_values", "arguments": [{"kind": "positional", "value": 1}, {"kind": "positional", "value": 2}, {"kind": "positional", "value": 3}], "result_chain": "length", "expected": 3},
+    {"id": "invalid_fixed_extra", "function": "pair", "arguments": [{"kind": "positional", "value": 1}, {"kind": "positional", "value": 2}, {"kind": "positional", "value": 3}], "expected_error": {"code": "user_function_arity_mismatch", "expected": "exactly 2", "got": 3}},
+    {"id": "invalid_variadic_missing_fixed", "function": "collect", "arguments": [], "expected_error": {"code": "user_function_arity_mismatch", "expected": "at least 1", "got": 0}},
+    {"id": "invalid_keyword_argument", "function": "collect", "arguments": [{"kind": "keyword", "name": "prefix", "value": "p"}], "expected_error": {"code": "user_function_keyword_arguments_unsupported", "expected": "positional arguments", "got": 1}}
+  ],
+  "invalid_definition_cases": [
+    {"id": "rest_not_final", "signature_source": "...items, tail", "expected_code": "rest_parameter_must_be_final"},
+    {"id": "multiple_rest", "signature_source": "...left, ...right", "expected_code": "rest_parameter_must_be_final"},
+    {"id": "missing_rest_name", "signature_source": "...", "expected_code": "invalid_rest_parameter"},
+    {"id": "suffix_rest_marker", "signature_source": "items...", "expected_code": "invalid_parameter"},
+    {"id": "rest_marker_name_whitespace", "signature_source": "... items", "expected_code": "invalid_rest_parameter"},
+    {"id": "duplicate_rest_name", "signature_source": "item, ...item", "expected_code": "duplicate_parameter"},
+    {"id": "reserved_rest_name", "signature_source": "...return", "expected_code": "reserved_parameter"}
+  ],
+  "fixture": {
+    "definition_ids": ["fixed_pair", "rest_all", "rest_prefix"],
+    "result_case_ids": ["fixed_exact", "rest_only_empty", "rest_only_mixed_values", "fixed_prefix_empty_rest", "fixed_prefix_nonempty_rest", "rest_result_receiver_chain"],
+    "input": "xx",
+    "spec_source": "fn pair(left, right) { return([left, right]) }\nfn all_values(...items) { return(items) }\nfn collect(prefix, ...items) { return({ \"prefix\" : prefix, \"items\" : items }) }\n\nTop::\n /x/ -> Done {\n   return({\n     \"fixed_exact\" : pair(\"left\", \"right\"),\n     \"rest_only_empty\" : all_values(),\n     \"rest_only_mixed_values\" : all_values(1, [2], { \"k\" : 3 }, false, undef),\n     \"fixed_prefix_empty_rest\" : collect(\"p\"),\n     \"fixed_prefix_nonempty_rest\" : collect(\"p\", \"a\", \"b\"),\n     \"rest_result_receiver_chain\" : all_values(1, 2, 3).length()\n   })\n }\n\nDone::\n /x/\n",
+    "expected": {
+      "fixed_exact": ["left", "right"],
+      "rest_only_empty": [],
+      "rest_only_mixed_values": [1, [2], {"k": 3}, false, null],
+      "fixed_prefix_empty_rest": {"prefix": "p", "items": []},
+      "fixed_prefix_nonempty_rest": {"prefix": "p", "items": ["a", "b"]},
+      "rest_result_receiver_chain": 3
+    }
+  }
+}

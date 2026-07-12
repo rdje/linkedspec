@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.1 — adopt variadic callable contract
+
+Adopted ADR `0030` and `linkedspec-callable-signature-v1`. The definition syntax is
+`fn name(fixed, ...rest) { ... }`: one final marker/name token, zero or more fixed params, positional eager calls,
+and one fresh typed array containing all extras (empty when no extras exist). Fixed functions retain exact
+version-1 `params`/`arity`; only variadic definitions use version-2 `callable_signature` records with fixed params,
+rest name, minimum arity, and null/unbounded maximum. Keyword/default/overload/host-splat/user-method semantics are
+explicitly excluded.
+
+Added a strict neutral JSON contract and independent Python checker covering three definition forms, nine
+binding/receiver/diagnostic calls, seven malformed signatures, versioned outward/staged roles, mixed-value rest
+preservation, and purpose-specific helper/method arities. The checker renders the complete future `.spec` fixture
+and exact result and is required by canonical local CI. Capability census stays 60/0/0 for current behavior with
+variadic functions future/owned; synced README, TOOLBOX, mdBook, Knowledge Map, task/roadmap/live state. Canonical
+local CI passes the new checker, both 61-case Perl CLI environments, and Phase 0 `1..1030` in 668 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.4.0 — split variadic callable signatures
 
 Audited callable arity from the spec-owned user-function shell through staged payload/job metadata, the exact

@@ -648,8 +648,11 @@ dedicated strict helper adapters and pass the same 55 direct canonical calls: fi
 numbers/strings, exact fixed or variadic arities, invalid-to-null results, numeric comparison truth, half-away
 rounding, division/clamp fences, and floor signed modulo. General-purpose scalar conversion paths remain unchanged.
 Lua implements and admits the contract on both Lua ABIs next. Callable arity is semantic: add/multiply/min/max are
-purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. A separately owned
-language-design activity will add an explicit definition-time variadic signature to user-defined functions.
+purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
+`fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a
+neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
+array, and reject keyword/overload/host-splat semantics. The neutral fixture is gated; backend admission remains
+active and must not be claimed early.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

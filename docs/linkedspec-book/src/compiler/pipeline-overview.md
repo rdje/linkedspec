@@ -269,6 +269,21 @@ parentheses, brace-less bodies, caller-state-mutating functions, recursion,
 closures/lambdas/currying, and function namespaces are future extension topics, not
 current parser/compiler/runtime behavior.
 
+ADR 0030 now adopts the next versioned signature without claiming backend support early:
+
+```text
+fn collect(prefix, ...items) {
+  return({ "prefix": prefix, "items": items })
+}
+```
+
+Version-1 fixed definitions keep exact `params`/`arity`. A version-2 variadic definition carries a neutral
+`callable_signature` with fixed `positional_params`, one final `rest_param`, `min_arity`, and an unbounded
+`max_arity`. Calls stay positional and eagerly evaluated; extras bind as one fresh typed array, including an empty
+array when there are no extras. `capability_conformance/callable_signature_contract.json` and its offline checker
+lock this target before Perl/Rust/Dart/Julia implementation. Until those rollout leaves close, only the exact-arity
+MVP above is current executable behavior.
+
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl
 host calls. Retired helpers and non-DSL host-shaped statements remain explicit

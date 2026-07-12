@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.4.1 — version the new case instead of weakening the old one):
+  Preserve fixed-function version 1 and its exact `params`/`arity` forever. A variadic definition is version 2 and
+  carries one nested signature, so tools never guess whether `arity` means exactly or at least. `...rest` is final
+  and positional-only; bind extras as an ordinary typed array so existing value/method dispatch works without a
+  host rest-parameter object. Keep current capability green and list the feature as owned future until every
+  admitted backend consumes the same fixture.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.4.0 — variadicity is a versioned signature, not a loose call check):
   Built-ins already distinguish exact, bounded, and open upper arities by purpose. User-function `arity` is public
   staged/compiler data repeated through every backend, so do not reinterpret it locally as a minimum or merely

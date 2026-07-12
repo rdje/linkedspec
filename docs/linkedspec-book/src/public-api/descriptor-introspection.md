@@ -218,6 +218,29 @@ model namespaces/modules, overload sets, optional-argument variants, closures, l
 curried/partial applications; those are deferred language-extension topics rather than
 descriptor fields a tool should expect today.
 
+### Adopted variadic descriptor version (implementation pending)
+
+ADR 0030 adopts a versioned union instead of changing the meaning of the current `arity` field. Fixed definitions
+remain version 1 with the exact fields documented above. A future admitted variadic definition is version 2 and
+replaces top-level `params`/`arity` with:
+
+```json
+"signature": {
+  "kind": "callable_signature",
+  "version": 1,
+  "positional_params": ["prefix"],
+  "rest_param": "items",
+  "min_arity": 1,
+  "max_arity": null
+}
+```
+
+The same `signature` is preserved in the staged body payload and parse job. `max_arity: null` means purposefully
+unbounded; it does not mean unknown. Extras bind as one fresh typed array. Function names remain unique and calls
+remain positional-only, so tools must not infer overloads, defaults, keyword mapping, or host-language splats.
+`capability_conformance/callable_signature_contract.json` is the target schema; the existing exact
+`outward_descriptor_contract.json` remains the current four-backend v1 admission until rollout completes.
+
 ## `meta`
 
 `meta` carries descriptor-level metadata.

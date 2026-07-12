@@ -222,6 +222,10 @@ Top-level project docs:
   half-away rounding, clamp/division fences, and signed integer modulo. Perl, Rust, Dart, and Julia consume all 55
   cases through strict numeric adapters; Lua six-runtime admission remains tracked under
   `LUA-BACKEND-PARITY.4.3.3.1.4`.
+- Run `python3 tools/check_callable_signature_contract.py` to validate the adopted variadic callable contract:
+  version-1 fixed functions remain exact; version-2 `fn name(fixed, ...rest) { ... }` signatures bind extras as a
+  fresh typed array, accept zero extras, reject keyword/overload/host-splat behavior, and retain purpose-specific
+  fixed versus open-bound helper/method arities. Backend rollout remains owned by `FUTURE-PARITY-BACKLOG.4`.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

@@ -191,6 +191,7 @@
     {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
     {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
     {"id": "future.generic_final_codeblock", "reason": "Generic final-codeblock equivalence and with disposition are not yet current language behavior.", "owner": "FUTURE-PARITY-BACKLOG.11.1"},
+    {"id": "future.variadic_user_functions", "reason": "The neutral fixed-prefix plus final-rest signature is adopted; backend implementation and admission remain active.", "owner": "FUTURE-PARITY-BACKLOG.4"},
     {"id": "future.lua_backend", "reason": "Lua follows convergence of the four implemented backends.", "owner": "FUTURE-PARITY-BACKLOG.1.3"}
   ]
 }

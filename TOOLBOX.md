@@ -324,6 +324,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `python3 tools/check_scalar_numeric_contract.py`.
 - **OUTPUT:** `scalar-numeric-contract: OK (55 cases; 18 canonical helpers)`.
 
+### 4.7 `tools/check_callable_signature_contract.py` — portable variadic signature proof
+
+- **WHAT:** validates `linkedspec-callable-signature-v1`, the chosen `...rest` definition syntax, version-1 fixed
+  versus version-2 variadic descriptor shapes, positional call binding/diagnostics, purpose-specific open-bound
+  helpers and effective receiver arity, and the deterministic future `.spec` fixture.
+- **WHEN:** changing function-definition syntax, staged function metadata, call resolution, rest-array binding,
+  user-function diagnostics, descriptor projection, or fixed/variadic helper and method signatures.
+- **HOW:** `python3 tools/check_callable_signature_contract.py`.
+- **OUTPUT:** `callable-signature-contract: OK (3 definitions; 9 calls; 7 invalid definitions)`.
+
 ---
 
 ## 5. Gates & retrieval

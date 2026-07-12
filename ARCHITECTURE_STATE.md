@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: ADR 0030 and `linkedspec-callable-signature-v1` adopt final `...IDENTIFIER`, version-1
+  exact functions, version-2 variadic signature records, positional eager calls, fresh typed rest arrays, and
+  stable invalid-signature/arity/keyword diagnostics. The offline checker is in canonical CI; Perl `.4.2.1` is
+  active while shipped capability remains unchanged.
 - `2026-07-12` refresh: variadic audit `.4.0` finds built-in helper/method open maxima already purpose-specific,
   while user-function exact `arity` is repeated through the spec-owned shell, staged payload/job, exact outward
   descriptor, compiled registries, native/generated execution, and Lua invocation frames. Neutral versioned
