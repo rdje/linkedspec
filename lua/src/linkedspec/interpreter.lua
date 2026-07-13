@@ -730,6 +730,12 @@ local PURE_ARRAY_HELPERS = {
 local ARRAY_SPLICE_HELPERS = {
   flat = true,
   flat_array = true,
+  flat_hash = true,
+}
+
+local HASH_SPLICE_HELPERS = {
+  flat = true,
+  flat_hash = true,
 }
 
 local function is_array_splice_expr(expr)
@@ -743,13 +749,40 @@ local function is_array_splice_expr(expr)
   return false
 end
 
+local function is_hash_splice_expr(expr)
+  if expr.kind == "call" then
+    return HASH_SPLICE_HELPERS[action_contracts.canonical_action_helper_name(expr.name)] == true
+  end
+  if expr.kind == "fluent_chain" and #expr.calls > 0 then
+    local last = expr.calls[#expr.calls]
+    return HASH_SPLICE_HELPERS[action_contracts.canonical_action_helper_name(last.method)] == true
+  end
+  return false
+end
+
+local function sorted_harray_keys(value)
+  local keys = {}
+  for key in pairs(value) do keys[#keys + 1] = key end
+  table.sort(keys)
+  return keys
+end
+
 local function append_array_value(result, value, splice)
   if splice and json.kind(value) == "array" then
     for _, item in ipairs(value) do result[#result + 1] = copy_value(item) end
+  elseif splice and json.kind(value) == "harray" then
+    for _, key in ipairs(sorted_harray_keys(value)) do
+      result[#result + 1] = key
+      result[#result + 1] = copy_value(value[key])
+    end
   else
     result[#result + 1] = copy_value(value)
   end
 end
+
+local PURE_HASH_HELPERS = {
+  flat_hash = true,
+}
 
 local ARRAY_END_MUTATIONS = {
   pop_back = true,
@@ -773,6 +806,7 @@ local function evaluate_array_helper(engine, name, values)
   if name == "flat" then
     local value = values[1]
     if value == nil then return json.array({ json.null }) end
+    if json.kind(value) == "harray" then return copy_value(value) end
     if json.kind(value) == "array" then return copy_value(value) end
     return json.array({ copy_value(value) })
   end
@@ -921,6 +955,28 @@ local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state,
   return evaluate_array_helper(engine, name, values)
 end
 
+local function evaluate_hash_helper(name, values)
+  if name == "flat_hash" then
+    local result = json.harray()
+    for _, value in ipairs(values) do
+      if json.kind(value) == "harray" then
+        for key, item in pairs(value) do result[key] = copy_value(item) end
+      end
+    end
+    return result
+  end
+  fail("unsupported harray helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
+local function evaluate_hash_values(engine, expr, ctx, accumulator, edge_state, receiver)
+  local values = {}
+  if receiver ~= nil then values[1] = receiver end
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+  return evaluate_hash_helper(action_contracts.canonical_action_helper_name(expr.name), values)
+end
+
 local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, receiver)
   local values = {}
   if receiver ~= nil then values[1] = receiver end
@@ -995,6 +1051,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, nil)
   elseif PURE_ARRAY_HELPERS[name] then
     return evaluate_array_values(engine, expr, ctx, accumulator, edge_state, nil)
+  elseif PURE_HASH_HELPERS[name] then
+    return evaluate_hash_values(engine, expr, ctx, accumulator, edge_state, nil)
   elseif scalar_numeric.supports_reducer(name) and
       (not scalar_numeric.supports(name) or #expr.args == 1) then
     return evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, edge_state, name, nil)
@@ -1102,16 +1160,22 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return result
   elseif name == "hash" or name == "harray" then
     if not expr.args[1] then return json.harray() end
+    local tokens = json.array()
+    for _, arg in ipairs(expr.args) do
+      local item_expr = argument_expr(arg)
+      local value = evaluate_expr(engine, item_expr, ctx, accumulator, edge_state)
+      append_array_value(tokens, value, is_hash_splice_expr(item_expr))
+    end
     local result = json.harray()
     local index = 1
-    while index <= #expr.args do
-      local key = evaluate_expr(engine, argument_expr(expr.args[index]), ctx, accumulator, edge_state)
-      local value = json.null
-      if expr.args[index + 1] then
-        value = evaluate_expr(engine, argument_expr(expr.args[index + 1]), ctx, accumulator, edge_state)
-      end
-      result[tostring(key == json.null and "" or key)] = copy_value(value)
+    while index + 1 <= #tokens do
+      local key = tokens[index]
+      result[tostring(key == json.null and "" or key)] = copy_value(tokens[index + 1])
       index = index + 2
+    end
+    if #tokens % 2 == 1 then
+      local key = tokens[#tokens]
+      result[tostring(key == json.null and "" or key)] = json.null
     end
     return result
   elseif name == "copy" then
@@ -1292,6 +1356,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       elseif PURE_ARRAY_HELPERS[canonical_name] then
         value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
         if canonical_name == "join_values" and index < #expr.calls then return json.null end
+      elseif PURE_HASH_HELPERS[canonical_name] then
+        value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
       else
         value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
       end

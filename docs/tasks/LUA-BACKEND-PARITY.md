@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (harray mechanisms split by `.4.3.5.0`; construction/splicing `.4.3.5.1` active)
+- Last updated: `2026-07-13` (copied harray construction/splicing `.4.3.5.1` done; deterministic views `.4.3.5.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1221,17 +1221,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement copied harray construction, explicit flat splicing, and identity boundaries.
   Dependencies: `.4.3.5.0`
   Acceptance: `hash(...)`, harray literals, `copy`, `flat`, and `flat_hash` evaluate once, preserve ordinary nested
     harray values, splice only explicit direct/terminal flat ASTs in hash-constructor context, never alias sources,
     and leave odd-arity normalization with `FUTURE-PARITY-BACKLOG.5`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Lua now dispatches `flat(...)` by runtime kind, returns copied harray values
+    from direct/receiver `flat_hash(...)`, and recognizes only explicit direct or terminal `flat`/`flat_hash` ASTs
+    as harray-constructor splices. Ordinary harray values remain nested copied fields. Explicit harray flattening
+    into `array(...)` or `[...]` emits deterministic sorted key/value pairs. A focused end-to-end case proves
+    left-to-right one-time evaluation, direct and receiver forms, nested-map preservation, copied isolation after
+    deep source mutation, and unchanged Lua odd-arity behavior. PUC Lua and LuaJIT pass 100/100 plus exact
+    manifest/CLI scaffolding; cross-backend odd-arity normalization remains `FUTURE-PARITY-BACKLOG.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement copied deterministic harray views and membership terminals.
   Dependencies: `.4.3.5.1`
   Acceptance: `count_keys`, `sorted_keys`, `sorted_values`, and `has_key` return exact typed zero/array/boolean
@@ -1461,7 +1467,8 @@ Global delegation note: selector-free uniform bindings and exact selector reject
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
 All 34 ordinary array helper names and six numeric terminals are routed; only the three callback methods remain
 under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
-mechanisms plus closeout, and construction/splicing/identity `.4.3.5.1` is active.
+mechanisms plus closeout. Copied construction/splicing/identity `.4.3.5.1` passes 100/100 on both Lua ABIs, and
+deterministic views/membership `.4.3.5.2` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1517,7 +1524,8 @@ mechanisms plus closeout, and construction/splicing/identity `.4.3.5.1` is activ
 | 50 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Typed tagged records, one-time carried fields, governed splits, and receiver composition pass 99/99. |
 | 51 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
 | 52 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split construction, views, transforms, mutation, and no-drift before behavior code. |
-| 53 | `LUA-BACKEND-PARITY.4.3.5.1` | `active` | Implement copied harray construction, explicit splicing, and identity boundaries. |
+| 53 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied construction, explicit flat splicing, nested identity, and isolation pass 100/100. |
+| 54 | `LUA-BACKEND-PARITY.4.3.5.2` | `active` | Implement deterministic copied key/value views and membership terminals. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1754,6 +1762,24 @@ mechanisms plus closeout, and construction/splicing/identity `.4.3.5.1` is activ
   uniform-binding, selector, Knowledge Map, mdBook, doctrine, cleanup, and whitespace gates pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook/backend status, Knowledge Map, architecture/live
   docs, and memory close `.4.3.5.0` and activate construction/splicing/identity `.4.3.5.1`.
+
+### `LUA-BACKEND-PARITY.4.3.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Execute harray `flat`/`flat_hash`, receiver forms, ordinary nested constructor
+  fields, explicit constructor splices, array list-context splices, ordered side effects, and later source updates.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `flat` was routed unconditionally through the array evaluator, Lua had no
+  copied hash-helper dispatcher, `hash(...)` paired every argument without inspecting authored splice syntax, and
+  array splicing only expanded array values.
+- [x] **FIX** — Dispatch generic `flat` by evaluated array/harray kind, add copied `flat_hash` function/receiver
+  evaluation, classify direct/terminal flat ASTs for hash context, preserve ordinary nested values, and emit
+  deterministic sorted key/value pairs when an explicit harray flatten feeds array context.
+- [x] **ADDRESSED (verified)** — One end-to-end fixture proves direct/receiver construction, generic/hash splices,
+  deterministic call/literal list splices, nested map preservation, exact one-time evaluation, and deep isolation.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 100/100 plus exact manifest/CLI scaffolding; the pre-existing Lua
+  odd-arity result remains unchanged, and cross-backend arity/list-order normalization stays owned by
+  `FUTURE-PARITY-BACKLOG.5`.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook/backend status, Knowledge Map, architecture/live
+  docs, changes/notes, and memory close construction `.4.3.5.1` and activate deterministic views `.4.3.5.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -2087,3 +2113,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.4.5` | `LUA-BACKEND-PARITY.4.3.4.5 - add Lua tagged record construction` | Governed split reuse, exact typed record shapes, copied carried fields, one-time evaluation, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.4.6` | `LUA-BACKEND-PARITY.4.3.4.6 - close Lua array helper parity` | Exact 34-name ordinary array inventory, public result repair/guard, parent closure, and harray handoff. |
 | `LUA-BACKEND-PARITY.4.3.5.0` | `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms` | Read-only 16-name audit and six executable construction/view/transform/mutation/closeout owners. |
+| `LUA-BACKEND-PARITY.4.3.5.1` | `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing` | Runtime-kind flat, copied flat_hash, explicit hash/list splices, nested preservation, and isolation. |

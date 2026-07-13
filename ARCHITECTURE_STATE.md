@@ -4,7 +4,13 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-12`
+- Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua harray construction separates runtime identity from parent splice intent. Generic
+  `flat` returns a copied array or harray according to evaluated kind; direct/receiver `flat_hash` returns a copied
+  harray. Only authored direct or terminal flat ASTs splice hash entries, ordinary harray values stay nested, and
+  array list context sorts keys before emitting alternating key/value values. One-time evaluation, nested copies,
+  deep source isolation, and unchanged odd-arity behavior pass 100/100 on PUC Lua and LuaJIT; deterministic views
+  `.4.3.5.2` are active.
 - `2026-07-12` refresh: Lua's 16-name hash family splits into 13 ordinary helpers plus three callbacks. Existing
   runtime support covers typed harray literals/constructors/copy and checked direct/nested assignment, but there is
   no general hash helper/receiver dispatcher and shared `flat` always takes the array route. `.4.3.5.1-.5` own

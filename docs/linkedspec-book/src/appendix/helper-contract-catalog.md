@@ -876,6 +876,9 @@ dispatch rule.
 - **Signature**: `flat_hash(h: hash)`
 - **Returns**: list (splices into parent context)
 - **Behavior**: Flattens a hash into alternating key/value list context for insertion into `hash(...)` or `array(...)`.
+- **Ordering boundary**: Do not currently depend on the order of key/value pairs when a harray is flattened into an
+  array. Lua sorts keys for deterministic output, while the admitted backends do not yet share one portable map-
+  iteration sequence. `FUTURE-PARITY-BACKLOG.5` owns normalization.
 
 ### `hash_copy(h)`
 - **Signature**: `hash_copy(h: hash)`

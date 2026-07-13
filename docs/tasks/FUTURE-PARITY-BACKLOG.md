@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Lua harray mechanisms split by `.4.3.5.0`; construction/splicing `.4.3.5.1` active).
+- Last updated: `2026-07-13` (Lua harray construction/splicing `.4.3.5.1` done at 100/100; views `.4.3.5.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2175,8 +2175,11 @@ before implementation.
     for a non-array scalar and null for a missing/null source, while Rust, Dart, and Julia stringify a scalar and
     return an empty string for a missing source. Normalize implicit child-push expression results too: a direct
     Perl `push(Child)` leaks the host push count while Lua returns the updated implicit accumulator; explicit-target
-    child push already returns the governed updated target. Finish with backend locks and mdBook/KM updates rather
-    than silently selecting one host's behavior.
+    child push already returns the governed updated target. Include harray flatten context: Perl direct harray
+    `flat`/`flat_hash` exposes host list/scalar context, shipped `hash(flat_array(defs))` is not recognized uniformly
+    by newer typed runtimes, and harray-to-array key/value order differs across unordered/insertion-ordered hosts;
+    Lua sorts keys locally for deterministic output, but that is not yet a portable sequence guarantee. Finish with
+    backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
 
@@ -3670,8 +3673,9 @@ before implementation.
 | 126 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
 | 127 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
 | 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
-| 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `active` | Implement copied harray construction, explicit splicing, and identity boundaries. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat arity, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
+| 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied harray construction, explicit splicing, and identity pass 100/100. |
+| 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `active` | Implement deterministic copied harray views and membership terminals. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity and harray order, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

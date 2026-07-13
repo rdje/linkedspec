@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.1 — add Lua harray construction splicing
+
+Added runtime-kind-aware `flat`, copied direct/receiver `flat_hash`, and AST-classified explicit harray splicing.
+Ordinary harray fields remain nested; hash constructor splices accept only direct or terminal `flat`/`flat_hash`,
+while explicit harray flattening into array calls/literals emits deterministic sorted key/value pairs. One focused
+case locks left-to-right one-time evaluation, nested preservation, deep isolation, direct/receiver forms, and the
+unchanged Lua odd-arity boundary. PUC Lua and LuaJIT pass 100/100; deterministic views `.4.3.5.2` are active.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.5.0 — split Lua harray helper mechanisms
 
 Audited all 16 admitted hash-family names before behavior code. Lua already has typed harray literals/

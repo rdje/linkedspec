@@ -2991,6 +2991,69 @@ Done::
   }), "copied array construction")
 end)
 
+test("runtime copied harray construction splices only explicit flat values", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(step, 0)
+   set(source, { "b" : 2, "a" : { "nested" : 1 } })
+   constructed = hash(
+     "left",
+     set(step, add(step, 1)),
+     flat_hash(set(extra, { "x" : set(step, add(step, 1)) }))
+   )
+   nested = hash("payload", source)
+   flat_copy = flat(source)
+   flat_hash_copy = source.flat_hash()
+   generic_splice = hash("kind", "root", flat(source))
+   hash_splice = hash("kind", "root", source.flat_hash())
+   positioned_splice = hash(flat_hash({ "a" : 1 }), "b", 2, flat({ "a" : 3 }), "c", 4)
+   array_pair_splice = hash(flat(["p", 3, "missing"]))
+   odd = hash("present", 1, "missing")
+   call_list_splice = array("tag", flat_hash(source))
+   literal_list_splice = ["tag", source.flat()]
+   source["b"] = 9
+   source["a"]["nested"] = 7
+   extra["x"] = 99
+   return({
+     "step" : step,
+     "constructed" : constructed,
+     "nested" : nested,
+     "flat_copy" : flat_copy,
+     "flat_hash_copy" : flat_hash_copy,
+     "generic_splice" : generic_splice,
+     "hash_splice" : hash_splice,
+     "positioned_splice" : positioned_splice,
+     "array_pair_splice" : array_pair_splice,
+     "odd" : odd,
+     "call_list_splice" : call_list_splice,
+     "literal_list_splice" : literal_list_splice,
+     "source" : source,
+     "extra" : extra
+   })
+ }
+Done::
+ /x/
+]])
+  local original = json.harray({ a = json.harray({ nested = 1 }), b = 2 })
+  assert_json_equal(result, json.harray({
+    step = 2,
+    constructed = json.harray({ left = 1, x = 2 }),
+    nested = json.harray({ payload = original }),
+    flat_copy = original,
+    flat_hash_copy = original,
+    generic_splice = json.harray({ a = json.harray({ nested = 1 }), b = 2, kind = "root" }),
+    hash_splice = json.harray({ a = json.harray({ nested = 1 }), b = 2, kind = "root" }),
+    positioned_splice = json.harray({ a = 3, b = 2, c = 4 }),
+    array_pair_splice = json.harray({ p = 3, missing = json.null }),
+    odd = json.harray({ present = 1, missing = json.null }),
+    call_list_splice = json.array({ "tag", "a", json.harray({ nested = 1 }), "b", 2 }),
+    literal_list_splice = json.array({ "tag", "a", json.harray({ nested = 1 }), "b", 2 }),
+    source = json.harray({ a = json.harray({ nested = 7 }), b = 9 }),
+    extra = json.harray({ x = 99 }),
+  }), "copied harray construction")
+end)
+
 test("runtime copied array selection ordering membership and uniqueness", function()
   local result = execute_uniform_binding_source([[
 Top::

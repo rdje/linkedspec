@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.1 — flattening needs both syntax and runtime-kind evidence): A returned
+  harray alone cannot tell whether its parent should preserve it as one nested field or splice its entries. Lua
+  therefore evaluates arguments once, dispatches `flat` by the resulting array/harray kind, but uses only the
+  authored direct/terminal `flat` or `flat_hash` AST to authorize constructor splicing. Array list context sorts
+  harray keys before emitting alternating key/value values because Lua tables do not preserve portable insertion
+  order. Other hosts do not yet share that sequence, so portable ordering remains backlog `.5`. The constructor
+  rewrite also explicitly retains Lua's prior odd-arity result instead of leaking normalization into this slice.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.5.0 — harray parity crosses syntax and runtime-kind seams): `hash(...)`
   constructor splicing must inspect the authored AST, while `flat(...)` must dispatch by the evaluated value kind;
   treating either as only a generic hash call loses ordinary nested maps or sends harrays through the array path.

@@ -30,10 +30,12 @@ their source. Delimiter-first `join_values`, literal/PCRE2 `split_each`, PCRE2 `
 pipelines, and all seven Perl-reference dropped transform rebindings share those copied values.
 `split_tagged_records(source, delimiter, tag, fields...)` reuses literal/PCRE2 split policy, evaluates every input
 once, and returns fresh `[tag, item, fields...]` records whose carried values are copied. Direct and receiver forms
-compose with array terminals. The Lua gate passes 99/99 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric
-v1 cases still match Perl, Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals
-are closed under `.4.3.4`. Harray audit `.4.3.5.0` splits construction/splicing, deterministic views, copied
-transforms/receivers, named mutation, and no-drift; construction/identity `.4.3.5.1` is active.
+compose with array terminals. Harray construction now makes generic `flat` preserve copied array/harray identity,
+supports copied direct and receiver `flat_hash`, preserves ordinary nested map fields, and splices only explicit
+direct or terminal flat ASTs. Explicit harray flattening into `array(...)` or `[...]` emits deterministic sorted
+key/value pairs. The Lua gate passes 100/100 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases
+still match Perl, Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are
+closed under `.4.3.4`; harray construction `.4.3.5.1` is done and deterministic views `.4.3.5.2` are active.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by `.4.3.6`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

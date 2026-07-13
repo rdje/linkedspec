@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.1 — add Lua harray construction splicing**
+  (DONE — 100/100 on both ABIs; deterministic views/membership `.4.3.5.2` active).
+
+  **Implementation:** Generic `flat` now preserves copied array/harray identity; direct/receiver `flat_hash` and
+  explicit AST-classified hash/list splicing preserve ordinary nested values and deterministic key/value order.
+
+  **Proof:** Direct/receiver forms, one-time ordered evaluation, nested maps, deep source isolation, explicit-only
+  splicing, and unchanged odd-arity behavior pass PUC Lua and LuaJIT 100/100 plus manifest/CLI scaffolding.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.5.0 — split Lua harray helper mechanisms**
   (DONE — planning/audit only; construction/splicing `.4.3.5.1` active).
 
