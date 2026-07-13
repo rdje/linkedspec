@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (numeric reducers/array terminals pass 91/91; focused closeout is active)
+- Last updated: `2026-07-12` (numeric parent closed at 91/91; general array helper family is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -912,12 +912,18 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement numeric helpers, aliases, symbol callees, reducers, and number receiver chains.
   Children: `.4.3.3.0`, `.4.3.3.1`, `.4.3.3.2`, `.4.3.3.3`, `.4.3.3.4`
   Dependencies: `.4.3.1`
   Acceptance: Arithmetic/unary/clamp/comparison/range and aggregate min/max/sum/avg/median behavior, invalid-input
     null propagation, division/modulo fences, word aliases, symbol callees, and receiver forms match the oracle.
+  Verification: **PASS 2026-07-12.** The strict 55-case scalar contract is exact across six runtime variants.
+    Lua canonical calls, every word/symbol alias, numeric receiver composition/comparison terminality, strict
+    copied-array reducers, and all six array receiver terminals pass 91/91 on PUC Lua and LuaJIT. Focused closeout
+    proves every reducer canonical/alias spelling directly, aligns public/status surfaces, and preserves exact
+    shipped-corpus execution under dependency-complete phase 6.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.0`
   Status: `done`
@@ -1044,17 +1050,20 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Close focused numeric helper and public-surface no-drift.
   Dependencies: `.4.3.3.1`, `.4.3.3.2`, `.4.3.3.3`
   Acceptance: Focused canonical/alias/symbol/receiver/reducer/invalid-boundary proof passes the full dual-ABI gate;
     Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, and runtime status agree before
     array helpers `.4.3.4`; exact shipped-corpus proof remains owned by dependency-complete phase 6.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** The focused fixture now directly executes all reducer canonical and alias
+    spellings in addition to the complete scalar canonical/word/symbol/receiver and invalid-boundary coverage.
+    PUC Lua and LuaJIT pass 91/91; the unchanged six-runtime scalar contract remains 55/55. Lua README, mdBook,
+    task/index/roadmaps, Knowledge Map, architecture/live docs, memory, and `runtime-numeric-reducers` agree.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement array construction, pure helpers, mutation, bridges, reducers, and receiver chains.
   Dependencies: `.4.3.1`, `.4.3.2`, `.4.3.3`
   Acceptance: Typed construction/copy/flatten/concat, selection/order/membership/join/split/filter/map-style
@@ -1262,8 +1271,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Current frontier
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
-Scalar numeric calls/receivers and aggregate reducers now pass 91/91 on PUC Lua and LuaJIT and report
-`runtime-numeric-reducers`. Focused numeric/public no-drift `.4.3.3.4` is active.
+Numeric helper parent `.4.3.3` is closed at 91/91 on PUC Lua and LuaJIT with exact 55-case six-runtime scalar
+proof and `runtime-numeric-reducers`. Array helper family `.4.3.4` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1310,7 +1319,8 @@ Scalar numeric calls/receivers and aggregate reducers now pass 91/91 on PUC Lua 
 | 41 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `done` | All six runtime variants match scalar numeric v1 across all 55 cases. |
 | 42 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | All numeric word/symbol calls and scalar number receiver chains pass both ABIs. |
 | 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict array reducers and six terminal receiver forms pass both ABIs. |
-| 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `active` | Close focused numeric helper and public-surface no-drift. |
+| 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `done` | Numeric proof/public no-drift closed at 91/91 on both ABIs. |
+| 45 | `LUA-BACKEND-PARITY.4.3.4` | `active` | Audit and implement general array helper mechanisms. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1400,6 +1410,20 @@ Scalar numeric calls/receivers and aggregate reducers now pass 91/91 on PUC Lua 
   dual-ABI Lua gate, exact manifest/CLI scaffold, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, Lua README/book, Knowledge Map, changes/notes/live, and memory activate
   focused numeric/public no-drift `.4.3.3.4` without beginning general array helpers `.4.3.4`.
+
+### `LUA-BACKEND-PARITY.4.3.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Inventory every canonical helper, word alias, symbol callee, number receiver,
+  aggregate reducer, array receiver terminal, and invalid boundary against the focused dual-ABI tests.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify any gap between runtime admission, focused proof, runtime status,
+  Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, and phase-6 corpus ownership.
+- [x] **FIX** — Close only numeric proof or public-state drift; do not begin general array helper behavior.
+- [x] **ADDRESSED (verified)** — Every numeric spelling/mechanism is directly covered and all current public/status
+  surfaces agree on the 91/91 milestone, strict reducer boundaries, and next array-helper frontier.
+- [x] **NO REGRESSION** — Complete PUC Lua/LuaJIT gate, unchanged 55-case six-runtime contract, docs/KM/doctrines/
+  mdBook/cleanup/whitespace, and focused public scans pass.
+- [x] **LOCKSTEP** — Numeric parent `.4.3.3` closes and the single frontier advances to array helpers `.4.3.4`;
+  exact shipped-corpus execution remains correctly routed to dependency-complete phase 6.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1724,3 +1748,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `LUA-BACKEND-PARITY.4.3.3.1.4 - implement Lua scalar numeric helpers` | Portable Lua evaluator, dual-ABI 55-case proof, and exact six-runtime admission. |
 | `LUA-BACKEND-PARITY.4.3.3.2` | `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms` | Exact word/symbol calls, scalar receiver composition/terminality, and slash/regex disambiguation. |
 | `LUA-BACKEND-PARITY.4.3.3.3` | `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers` | Strict copied-array reducers, empty/invalid boundaries, and six terminal receiver forms. |
+| `LUA-BACKEND-PARITY.4.3.3.4` | `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity` | Complete canonical/alias/mechanism proof, public no-drift, parent closure, and array handoff. |

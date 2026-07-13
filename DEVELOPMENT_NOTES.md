@@ -1,5 +1,11 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.4 — closeout proof must enumerate overload spellings): Aggregate reducer
+  behavior was complete, but the first focused fixture paired canonical and alias coverage across the family
+  instead of invoking every spelling directly. Closeout now locks all six canonical reducer calls, all six word
+  aliases, all six terminal array receiver methods, exact-one-array arity, invalid elements/kinds, empty policy,
+  source preservation, and terminal continuation without beginning general array helper behavior.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.3): One-array min/max must dispatch before scalar variadic min/max without
   weakening scalar v1 arity. Reducers parse elements through the same strict numeric admission, copy before median
   sorting, normalize results, and make every array receiver reducer terminal.

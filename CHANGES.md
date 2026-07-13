@@ -1,5 +1,12 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.4 — close Lua numeric helper parity
+
+Closed numeric helper and public-surface no-drift at 91/91 on both Lua ABIs. The focused reducer fixture now
+executes every canonical and alias spelling directly, while the unchanged scalar contract remains exact across
+all six runtime variants. Runtime status, Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture,
+live status, and memory agree; general array helpers `.4.3.4` are active and shipped-corpus proof stays in phase 6.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.3 — add Lua numeric aggregate reducers
 
 Added strict copied-array sum, average, odd/even median, range, and one-array min/max. Explicit arrays, bare typed

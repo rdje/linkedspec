@@ -10,13 +10,13 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.3` — strict array numeric reducers and receiver terminals.
-- latest_commit: `8123502c` — `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.4`; focused numeric/public no-drift closeout.
-- next_action: audit numeric source/tests/public surfaces, lock focused no-drift, and hand off to array helpers.
-- current_proof: strict sum/avg/median/range/array min/max agree across explicit, bare, alias, and receiver forms;
-  PUC Lua and LuaJIT each pass 91/91 plus exact manifest/CLI scaffolding.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.4` — numeric helper/public no-drift and parent closure.
+- latest_commit: `3c103a63` — `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.4`; general array helper family.
+- next_action: audit the array catalog/runtime seams and split `.4.3.4` into safe mechanism-sized leaves.
+- current_proof: every scalar/reducer canonical, alias, symbol, receiver, terminal, and invalid numeric boundary is
+  directly covered; PUC Lua and LuaJIT pass 91/91 and all six runtime variants match scalar v1 at 55/55.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -26,5 +26,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.3.3` commit. Numeric closeout `.4.3.3.4`
+- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.3.4` commit. Array helper split `.4.3.4`
   is next. Oracle timeout calibration remains deferred to `.7.0`.

@@ -8,7 +8,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [lua, luajit, numeric, arrays, reducers, receivers, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.3.3 adds strict copied-array sum/avg/median/range/min/max in scalar_numeric.lua and function/receiver dispatch in interpreter.lua. Explicit, bare-binding, alias, invalid/empty, source-preservation, and terminal receiver cases pass 91/91 on PUC Lua and LuaJIT."
+evidence: "LUA-BACKEND-PARITY.4.3.3.3 adds strict copied-array sum/avg/median/range/min/max in scalar_numeric.lua and function/receiver dispatch in interpreter.lua. Closeout .4 directly covers all six canonical calls, all six aliases, all six terminal receivers, invalid/empty/wrong-arity boundaries, and source preservation at 91/91 on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

@@ -8,6 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.4 — close Lua numeric helper parity**
+  (DONE — numeric parent `.4.3.3` closed at 91/91 on both ABIs; array helpers `.4.3.4` active).
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.3 — add Lua numeric aggregate reducers**
   (DONE — 91/91 on both ABIs; focused numeric/public no-drift `.4.3.3.4` active).
 

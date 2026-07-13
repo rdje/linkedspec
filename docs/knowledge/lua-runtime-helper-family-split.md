@@ -14,7 +14,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. LUA-BACKEND-PARITY.4.3.2.2.0 later splits the regex/string remainder into helper regex/matches, pure split/receiver, scalar regex mutation, array split mutation, and corpus/public no-drift."
+evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. String `.4.3.2` and numeric `.4.3.3` are closed; array family `.4.3.4` is active."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 

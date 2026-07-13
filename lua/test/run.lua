@@ -2577,6 +2577,11 @@ empty = []
 invalid = [1, true]
 return({
   "explicit_sum" : num_sum([1, "2", 3]),
+  "canonical_avg" : num_avg([2, 4, 6]),
+  "canonical_range" : num_range([3, 9, 1, 7]),
+  "canonical_max" : num_max([8, 3, 5]),
+  "alias_sum" : sum([1, 2, 3]),
+  "alias_min" : min([8, 3, 5]),
   "bare_avg" : avg(scores),
   "median_odd" : median([5, 1, 3]),
   "median_even" : num_median([4, 1, 3, 2]),
@@ -2605,7 +2610,9 @@ return({
 ]])
   local expected = json.decode([[
 {
-  "explicit_sum": 6, "bare_avg": 3, "median_odd": 3, "median_even": 2.5,
+  "explicit_sum": 6, "canonical_avg": 4, "canonical_range": 8,
+  "canonical_max": 8, "alias_sum": 6, "alias_min": 3,
+  "bare_avg": 3, "median_odd": 3, "median_even": 2.5,
   "range": 8, "array_min": 3, "array_max": 8, "empty_sum": 0,
   "empty_avg": null, "empty_median": null, "empty_range": null,
   "empty_min": null, "empty_max": null, "invalid_element": null,

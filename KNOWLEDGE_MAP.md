@@ -5000,7 +5000,7 @@ _Lua numeric aggregate reducers are strict copied-array terminals_
 
 - **answers:** does Lua support sum avg median range min max on arrays | what do Lua numeric reducers return for empty arrays | are Lua array numeric reducer receivers terminal
 - **date:** 2026-07-12 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.4.3.3.3 adds strict copied-array sum/avg/median/range/min/max in scalar_numeric.lua and function/receiver dispatch in interpreter.lua. Explicit, bare-binding, alias, invalid/empty, source-preservation, and terminal receiver cases pass 91/91 on PUC Lua and LuaJIT.`
+- **evidence:** `LUA-BACKEND-PARITY.4.3.3.3 adds strict copied-array sum/avg/median/range/min/max in scalar_numeric.lua and function/receiver dispatch in interpreter.lua. Closeout .4 directly covers all six canonical calls, all six aliases, all six terminal receivers, invalid/empty/wrong-arity boundaries, and source preservation at 91/91 on PUC Lua and LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-numeric-aggregate-reducers.md`](docs/knowledge/lua-numeric-aggregate-reducers.md)
 
@@ -5018,7 +5018,7 @@ _Lua numeric helpers require separate scalar, receiver, aggregate, and closeout 
 
 - **answers:** how is Lua numeric helper parity split | does Lua already canonicalize numeric aliases and symbol callees | where should Lua number receiver chains be implemented | which Lua leaf owns numeric aggregate reducers | what is next after Lua string helper parity
 - **date:** 2026-07-12 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.4.3.3.1.4-.3 implement strict scalar evaluation, calls/number receivers, and copied-array reducers at 91/91 on both ABIs. .4 owns focused public no-drift.`
+- **evidence:** `LUA-BACKEND-PARITY.4.3.3.1.4-.3 implement strict scalar evaluation, calls/number receivers, and copied-array reducers at 91/91 on both ABIs. .4 closes complete spelling/mechanism proof and public no-drift before array helpers.`
 - **reverify:** `bash tools/check_scalar_numeric_six_runtime.sh && rg -n 'ALIAS_CANONICAL_NAMES|fluent_chain' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - **source:** [`docs/knowledge/lua-numeric-helper-preflight.md`](docs/knowledge/lua-numeric-helper-preflight.md)
 
@@ -5045,7 +5045,7 @@ _Lua runtime helper parity is split into nine ordered implementation and no-drif
 
 - **answers:** how is Lua runtime helper work split | what comes after the Lua rule interpreter | which Lua task owns scalar and string helpers | which Lua task owns numeric helpers | which Lua task owns arrays and harrays | which Lua task owns codeblocks controls and trailing blocks | which Lua task owns capture marks input and cursor helpers | which Lua task owns diagnostic output helpers | how will Lua prove all 239 helpers execute
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. LUA-BACKEND-PARITY.4.3.2.2.0 later splits the regex/string remainder into helper regex/matches, pure split/receiver, scalar regex mutation, array split mutation, and corpus/public no-drift.`
+- **evidence:** `LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. String `.4.3.2` and numeric `.4.3.3` are closed; array family `.4.3.4` is active.`
 - **reverify:** `bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh`
 - **source:** [`docs/knowledge/lua-runtime-helper-family-split.md`](docs/knowledge/lua-runtime-helper-family-split.md)
 

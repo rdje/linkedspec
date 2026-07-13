@@ -5,10 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua numeric helper parent `.4.3.3` is closed. The recurring proof combines the unchanged
+  55-case six-runtime scalar contract with direct dual-ABI execution of every word/symbol call, number receiver,
+  reducer canonical/alias spelling, terminal array receiver, and invalid boundary. Public/status surfaces agree at
+  91/91; general array helper family `.4.3.4` is active and shipped-corpus proof remains under phase 6.
 - `2026-07-12` refresh: Lua now has one strict copied-array numeric reducer owner for sum, average, odd/even
   median, range, and one-array min/max. Explicit arrays, bare typed bindings, aliases, and terminal array receiver
-  methods agree; empty/invalid policy is exact and sources remain unchanged. Both ABIs pass 91/91; numeric no-drift
-  `.4.3.3.4` is active.
+  methods agree; empty/invalid policy is exact and sources remain unchanged. Both ABIs pass 91/91 for the reducer
+  slice.
 - `2026-07-12` refresh: Lua numeric word aliases and all 11 arithmetic/comparison symbol callees now reach the
   strict scalar evaluator; fluent integer, float, and bare-scalar values inject as operand one, number-returning
   links compose, and comparisons terminate later links. The first full test exposed `/` callee versus regex-start

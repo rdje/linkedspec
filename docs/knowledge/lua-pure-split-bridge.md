@@ -25,4 +25,4 @@ inputs produce an empty typed array.
 Regex split keeps separate segment and search cursors. A zero-width delimiter advances the search cursor by one
 decoded Unicode scalar while retaining the segment boundary, matching lookahead-style splits without looping or
 dropping text. String receiver `.split(...)` returns the same typed array. Downstream array methods are deliberately
-owned by `.4.3.4`; statement scalar regex mutation is active under `.4.3.2.2.3`.
+owned by active `.4.3.4`; statement scalar regex mutation is closed under `.4.3.2.2.3`.

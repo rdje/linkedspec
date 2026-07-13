@@ -661,7 +661,8 @@ One composed checker proves the exact expected fixture value on all six runtime 
 arithmetic/comparison symbol callees, and integer/float/bare-scalar receiver chains now share the evaluator;
 number-returning links compose and comparison links are terminal. The focused gate is 90/90 on both ABIs.
 Strict copied-array sum/avg/median/range/min/max now work through explicit, bare-binding, and terminal receiver
-forms on both Lua ABIs; the focused gate is 91/91. Callable arity is semantic: add/multiply/min/max are
+forms on both Lua ABIs; the focused gate is 91/91 and numeric public no-drift is closed before general array
+helpers. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
