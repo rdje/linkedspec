@@ -124,7 +124,7 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
     #
     # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced
-    # through a typed wrapper -- NAME/array(NAME) -- be used without a
+    # through a typed wrapper -- NAME/NAME -- be used without a
     # declaration helper. These cases prove the Rust backend reproduces that
     # behavior under the universal-contract obligation (ADR 0006): each grammar
     # uses a working variable with no declaration helper in the divergence-free edge-action
@@ -133,7 +133,7 @@ SPEC
     # Rust agree exactly (modulo the one-level accumulator wrap). The historical
     # `*_declare` case names now carry the current initializer/reset forms for
     # continuity; `undef_literal` guards that the
-    # `undef` LITERAL inside array(undef) is not mistaken for a variable.
+    # `undef` LITERAL inside [undef] is not mistaken for a variable.
     # The recursive/REP auto-exist idiom the Perl phase0 locks use does NOT yet
     # reproduce on Rust -- that is the separately-owned RUST-PARITY recursive-grammar
     # gap, NOT auto-existence (see docs/knowledge/working-vars-no-strict-need-my-lexical.md).
@@ -161,7 +161,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -171,7 +171,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(array(items), []); push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
+ /x/ -> Done { set(items, []); push(items, "a"); push(items, "b"); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -181,7 +181,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(array(undef)) }
+ /x/ -> Done { return([undef]) }
 
 Done::
  /[a-z]+/
@@ -192,7 +192,7 @@ SPEC
     # kind -- the assignment target is a scalar, the push(...) target is an array.
     # Same divergence-free proof class as the wrapped autoexist_* cases above (the bare
     # target is the only difference), so the Rust backend must produce the identical
-    # reference value. The value is read back through a wrapper (v/array(items)) --
+    # reference value. The value is read back through a wrapper (v/items) --
     # bare value-position reads are Channel 2, not this leaf.
     {   case   => 'autoexist_scalar_bare_arg',
         input  => 'xhello',
@@ -208,7 +208,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(array(items))) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -238,7 +238,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "stage", "v"); return(copy(hash(meta))) }
+ /x/ -> Done { set_key(meta, "stage", "v"); return(copy(meta)) }
 
 Done::
  /[a-z]+/
@@ -258,7 +258,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "stage", "v"); return(copy(hash(meta))) }
+ /x/ -> Done { set_key(meta, "stage", "v"); return(copy(meta)) }
 
 Done::
  /[a-z]+/
@@ -295,7 +295,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "payload"); set(key, "stage"); set(idx, 1); set(foo, hash("a", array("zero", "one"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(copy(array(items)), copy(hash(meta)), foo["a"][idx])) }
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); set(idx, 1); set(foo, hash("a", array("zero", "one"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(copy(items), copy(meta), foo["a"][idx])) }
 
 Done::
  /[a-z]+/
@@ -321,7 +321,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key : value }; return(array(copy(array(items)), copy(hash(meta)))) }
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key : value }; return(array(copy(items), copy(meta))) }
 
 Done::
  /[a-z]+/
@@ -338,7 +338,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key : value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key : value }; return(array(items, items, copy(items), items.count(), items.first(), meta, meta, copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
 
 Done::
  /[a-z]+/
@@ -348,7 +348,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); thing = "text"; first = thing; thing = [value]; second = array(thing); thing = { key : value }; third = hash(thing); thing = "done"; set(array(items_mut), [value]); items_mut += "tail"; set(hash(meta_mut), { key : value }); meta_mut["extra"] = "yes"; return(array(first, second, third, thing, array(items_mut), hash(meta_mut))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); thing = "text"; first = thing; thing = [value]; second = thing; thing = { key : value }; third = thing; thing = "done"; set(items_mut, [value]); items_mut += "tail"; set(meta_mut, { key : value }); meta_mut["extra"] = "yes"; return(array(first, second, third, thing, items_mut, meta_mut)) }
 
 Done::
  /[a-z]+/
@@ -376,7 +376,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(array(payload)), snapshot)) }
+ /x/ -> Done { set(value, "ok"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(payload), snapshot)) }
 
 Done::
  /[a-z]+/
@@ -393,7 +393,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = cat("a", "b"); push(array(items), label); return(copy(array(items))) }
+ /x/ -> Done { label = cat("a", "b"); push(items, label); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -403,7 +403,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(copy(hash(m))) }
+ /x/ -> Done { m = {}; return(copy(m)) }
 
 Done::
  /[a-z]+/
@@ -419,7 +419,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(label, "b"); push(items, "a"); items += label; return(copy(array(items))) }
+ /x/ -> Done { set(label, "b"); push(items, "a"); items += label; return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -435,7 +435,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "stage", cat("a", "b")); return(copy(hash(meta))) }
+ /x/ -> Done { set_key(meta, "stage", cat("a", "b")); return(copy(meta)) }
 
 Done::
  /[a-z]+/
@@ -467,7 +467,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = "b"; items += "a"; items += label; return(copy(array(items))) }
+ /x/ -> Done { label = "b"; items += "a"; items += label; return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -483,7 +483,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { meta[cat("s", "tage")] = cat("a", "b"); return(copy(hash(meta))) }
+ /x/ -> Done { meta[cat("s", "tage")] = cat("a", "b"); return(copy(meta)) }
 
 Done::
  /[a-z]+/
@@ -509,7 +509,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(flag, copy(array(items)), copy(hash(meta)))); endif() }
+ /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(flag, copy(items), copy(meta))); endif() }
 
 Done::
  /[a-z]+/
@@ -687,7 +687,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(hash(base), hash(overlay)))))) }
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(base, overlay))))) }
 
 Done::
  /[a-z]+/
@@ -704,7 +704,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay))))) }
+ /x/ -> Done { set_key(base, "b", 2); set_key(base, "a", 1); set_key(overlay, "c", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }
 
 Done::
  /[a-z]+/
@@ -772,7 +772,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { items += "b"; items += "a"; items += "c"; items += "a"; phrases += "aa-b"; phrases += "c-aa"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().index_of("c"), items.drop_back().join_values("|"), items.uniq().join_values(","), items.filter_match(/^a$/).count(), phrases.split_each("-").filter_match(/^aa$/).count())) }
+ /x/ -> Done { items += "b"; items += "a"; items += "c"; items += "a"; phrases += "aa-b"; phrases += "c-aa"; return(array(items.sorted().drop_front(2).first(), items.reversed().take(2).last(), items.sorted().index_of("c"), items.drop_back().join_values("|"), items.uniq().join_values(","), items.filter_match(/^a$/).count(), phrases.split_each("-").filter_match(/^aa$/).count())) }
 
 Done::
  /[a-z]+/
@@ -792,7 +792,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(layered, merge_hash(meta, extra)); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), layered.pick_keys("a").sorted_values().first(), meta.rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -840,7 +840,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(array(scores)), num_max(array(scores)), min(scores), max(scores))) }
+ /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(scores), num_max(scores), min(scores), max(scores))) }
 
 Done::
  /[a-z]+/
@@ -948,7 +948,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key : value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(items), set(meta, { key : value }), copy(meta), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -964,7 +964,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(hash(meta)), (items += "x").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -980,7 +980,7 @@ SPEC
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key : value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key : value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], items, set(meta, { key : value }), meta, set(items_mut, [value]), items_mut += "tail", copy(items_mut), set(meta_mut, { key : value }), meta_mut["extra"] = other, copy(meta_mut), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -1059,7 +1059,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] }; nonhash = "x".map_leaves() { seen += "bad" }; return(array(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) }, meta.reduce_leaves("") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(), array(seen), if(is_undefined(nonhash), "undef", else("bad")))) }
+ /x/ -> Done { meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] }; nonhash = "x".map_leaves() { seen += "bad" }; return(array(meta.map_leaves() { return(cat(join_values("/", path), "=", coalesce_nonempty(join_values("", value), value))) }, meta.reduce_leaves("") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values("/", path); return(value) }.count_keys(), seen, if(is_undefined(nonhash), "undef", else("bad")))) }
 
 Done::
  /[a-z]+/
@@ -1074,7 +1074,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { items = ["a", ["b", "c"], { "h" : "H" }]; scalar = "x"; nonarray = scalar.map_leaves() { seen += "bad" }; return(array(items.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)))) }, items.reduce_leaves("") { return(cat(acc, join_values("/", array(path)), ":", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)), ";")) }, items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count(), array(seen), if(is_undefined(nonarray), "undef", else("bad")))) }
+ /x/ -> Done { items = ["a", ["b", "c"], { "h" : "H" }]; scalar = "x"; nonarray = scalar.map_leaves() { seen += "bad" }; return(array(items.map_leaves() { return(cat(join_values("/", path), "=", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)))) }, items.reduce_leaves("") { return(cat(acc, join_values("/", path), ":", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)), ";")) }, items.walk_leaves() { seen += join_values("/", path); return(value) }.count(), seen, if(is_undefined(nonarray), "undef", else("bad")))) }
 
 Done::
  /[a-z]+/
@@ -1089,7 +1089,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(array(items)), count(array("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" : 1 }), count_keys(hash(meta)), count_keys(hash("meta", 1)))) }
+ /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(items), count(array("items")), count(array('items')), count(items), count(array("items")), count(["items"]), count(array("literal", "value")), count_keys(meta), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" : 1 }), count_keys(meta), count_keys(hash("meta", 1)))) }
 
 Done::
  /[a-z]+/
@@ -1102,7 +1102,7 @@ SPEC
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
     # ── TOP-RULE-AS-NORMAL.3.2 — recursive top-rule value parity ──
     #
-    # SPEC-FORMAT-TERSE.8.4 makes `set(array(items), [])` the current rule-local
+    # SPEC-FORMAT-TERSE.8.4 makes `set(items, [])` the current rule-local
     # recursive accumulator reset classified in the integration tests.
     {
         case   => 'top_rule_body_recursion_sexpr',
@@ -1111,10 +1111,10 @@ SPEC
 top::
  -> sexpr { return(call(sexpr)) }
 
-sexpr: /\(/ /\)/  I { set(array(items), []) }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
+sexpr: /\(/ /\)/  I { items = [] }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC
@@ -1123,11 +1123,11 @@ SPEC
         case   => 'top_rule_lx_recursion_nested',
         input  => '(a(b)c)',
         source => <<'SPEC',
-sexpr:: /\(/ /\)/  I { set(array(items), []) }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
-LX { return(copy(array(items))) }
+sexpr:: /\(/ /\)/  I { items = [] }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
+LX { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC
@@ -1136,11 +1136,11 @@ SPEC
         case   => 'top_rule_lx_recursion_sequence',
         input  => '(a) (b)',
         source => <<'SPEC',
-sexpr:: /\(/ /\)/  I { set(array(items), []) }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
-LX { return(copy(array(items))) }
+sexpr:: /\(/ /\)/  I { items = [] }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
+LX { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC

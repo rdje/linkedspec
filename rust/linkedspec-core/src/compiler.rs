@@ -603,7 +603,7 @@ mod tests {
 
     #[test]
     fn compile_lifecycle_blocks() {
-        let src = "Top::\n /x/ I { set(array(results), []) } LE { push(array(results), retv) } E { return(copy(array(results))) }";
+        let src = "Top::\n /x/ I { set(results, []) } LE { push(results, retv) } E { return(copy(results)) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         assert!(compiled.rules[0].preamble.is_some()); // I-block
@@ -658,7 +658,7 @@ mod tests {
 
     #[test]
     fn compile_serialize_deserialize() {
-        let src = "Top::\n /x/ I { set(array(r), []) } LE { push(array(r), retv) } E { return(copy(array(r))) }";
+        let src = "Top::\n /x/ I { set(r, []) } LE { push(r, retv) } E { return(copy(r)) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let json = serde_json::to_string(&compiled).unwrap();
@@ -803,7 +803,7 @@ mod tests {
 
     #[test]
     fn compile_header_rest_action_edge_with_fluent_chain() {
-        let src = "Wrapper::->child.push\nLX { return(copy(array(Wrapper))) }\n\nchild: /x/";
+        let src = "Wrapper::->child.push\nLX { return(copy(Wrapper)) }\n\nchild: /x/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = compiled.find("Wrapper").unwrap();

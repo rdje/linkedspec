@@ -10,10 +10,12 @@ answers:
   - "are array name and hash name rejected on Perl yet"
   - "why did migrated bare join values read an empty Perl array"
   - "do Perl pure helpers read the same bare typed binding as mutations"
+  - "why did copy inside a Perl user function become an unsupported helper"
+  - "how does Perl distinguish an implicit rule accumulator from an untyped copy binding"
 date: 2026-07-12
 status: current
 tags: [perl, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. FUTURE-PARITY-BACKLOG.12.1.7.1 then proves pure array/hash helpers, emptiness flow, and print_each consume those same scalar-held typed values after shipped selector migration; the original Lispish join_values failure came from legacy @name fast-path reads diverging from $name mutation writes. Bare mutation/chaining, static precedence, missing-target creation, and binding_kind_mismatch remain locked."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. FUTURE-PARITY-BACKLOG.12.1.7.1 then proves pure array/hash helpers, emptiness flow, and print_each consume those same scalar-held typed values after shipped selector migration; the original Lispish join_values failure came from legacy @name fast-path reads diverging from $name mutation writes. FUTURE-PARITY-BACKLOG.12.1.7.3 removes embedded selector sources and closes two final lowering seams: aggregate AST arguments inside user functions preserve the spec-level bare name until runtime typed-value lowering, while each rule label is recorded as its implicit internal array accumulator unless explicitly rebound. Bare mutation/chaining, static precedence, missing-target creation, and binding_kind_mismatch remain locked."
 reverify: "prove -Iperl t/uniform_binding_contract.t t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t"
 ---
 
@@ -34,9 +36,8 @@ target fails deterministically with `binding_kind_mismatch` plus identifier, exp
 For ambiguous `push(rule_or_target, destination_or_value)`, a registered static rule handler wins; otherwise the
 first bare name is the array binding.
 
-Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. All backend enablement
-leaves are complete, and all 15 affected shipped specs are selector-free. Remaining tracked-source migration is
-active; Perl hard rejection follows in
+Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. Backend enablement and
+all file-backed/embedded source migration are complete. Perl hard rejection follows immediately in
 `FUTURE-PARITY-BACKLOG.12.1.8.1`.
 
 The Perl lowering invariant is now explicit: uniform bindings live in scalar-held typed values, so mutation and
@@ -45,6 +46,14 @@ legacy `@word` after `push(word, value)` had updated `$word`; that split produce
 array/hash helper lowering, generic typed emptiness checks, and `print_each` now all use the scalar-held value when
 the rule's bare-name memory identifies a uniform binding. Generated Perl sigils remain private host machinery and
 do not create a second `.spec` namespace.
+
+Embedded-source migration exposed two related ownership boundaries. A user-function local such as `items` is a
+scalar-held runtime typed value; the aggregate AST bridge must pass the spec-level name into `copy(items)` and let
+the aggregate lowerer produce the runtime kind check, rather than prematurely constructing the host spelling
+`copy($items)`. Conversely, every generated rule has a private implicit array accumulator named after its label.
+Type memory records that known ownership so `copy(rule_label)` snapshots `@rule_label`; an explicit authored
+binding of the same name still overrides it as a scalar-held typed value. This replaces the old array-first guess
+with explicit ownership at both boundaries.
 
 Related facts: [[uniform-binding-neutral-contract]],
 [[spec-facing-aggregate-selector-retirement-inventory]],

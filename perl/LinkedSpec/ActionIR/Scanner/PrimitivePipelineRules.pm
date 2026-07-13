@@ -103,7 +103,8 @@ while ($code =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\
   $effective_args = $raw_args;
  } elsif (@$raw_args == 3) {
   my $scoped_target_expr = _trim_action_ir_value($raw_args->[1]);
-  next unless defined($scoped_target_expr) && $scoped_target_expr =~ /^array\s*\(\s*\w+\s*\)$/o;
+  next unless defined($scoped_target_expr)
+           && $scoped_target_expr =~ /^(?:[A-Za-z_][A-Za-z0-9_]*|array\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\))$/o;
   $effective_args = [ $raw_args->[1], $raw_args->[2] ];
  } else {
   next;

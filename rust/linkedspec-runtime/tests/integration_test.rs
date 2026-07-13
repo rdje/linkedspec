@@ -13,9 +13,9 @@ use serde_json::Value;
 
 const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child
- I { set(array(results), []) }
- LE { push(array(results), retv) }
- E { return(array("?results:", copy(array(results)))) }
+ I { set(results, []) }
+ LE { push(results, retv) }
+ E { return(array("?results:", copy(results))) }
 
 Child::
  /hello[ \t]+(\w+)/
@@ -471,8 +471,8 @@ Done:
 fn function_body_staged_prototype_end_to_end_shape_and_runtime() {
     let grammar = r#"fn normalize(value) { return(trim(value)) }
 fn join_pair(left, right) { return(cat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
-fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
+fn mk_items(first, second) { items += first; items += second; return(copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(meta)) }
 
 Top::
  /x/ -> Done { stage_meta = mk_meta("k","v"); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
@@ -662,12 +662,12 @@ fn corpus_recursive_grammar() {
  /\d+/
  /\(/
  /\)/
- I { set(array(results), []) }
- LE { push(array(results), entry_text()) }
+ I { set(results, []) }
+ LE { push(results, entry_text()) }
  -> Expr
  -> Expr[1]
  -> Expr[2]
- E { return(copy(array(results))) }
+ E { return(copy(results)) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -681,10 +681,10 @@ fn corpus_recursive_grammar() {
 fn corpus_lifecycle_ordered_output() {
     let grammar = r#"OrderedParser::OR{1,1}
  /(\w+)/
- I { set(array(log), []); push(array(log), "I") }
- LS { push(array(log), "LS") }
- LE { push(array(log), entry_group(0)) }
- E { push(array(log), "E"); return(copy(array(log))) }
+ I { set(log, []); push(log, "I") }
+ LS { push(log, "LS") }
+ LE { push(log, entry_group(0)) }
+ E { push(log, "E"); return(copy(log)) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -703,18 +703,18 @@ fn corpus_lifecycle_ordered_output() {
 #[test]
 fn corpus_blind_call_and_rule() {
     let grammar = r#"Top::AND
- I { set(array(log), []) }
+ I { set(log, []) }
  => ChildA
  => ChildB
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 
 ChildA:
  /a/
- I { push(array(log), "A") }
+ I { push(log, "A") }
 
 ChildB:
  /b/
- I { push(array(log), "B") }
+ I { push(log, "B") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -732,9 +732,9 @@ ChildB:
 fn corpus_rep_with_bounds() {
     let grammar = r#"Repeater::OR{1,3}
  /(\w+)/
- I { set(array(words), []) }
- LE { push(array(words), entry_group(0)) }
- E { return(copy(array(words))) }
+ I { set(words, []) }
+ LE { push(words, entry_group(0)) }
+ E { return(copy(words)) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -997,11 +997,11 @@ Child:
 #[test]
 fn regression_edge_only_with_lifecycle_blocks() {
     let grammar = r#"LifecycleParser::OR{1,1}
- I { set(array(log), []); push(array(log), "I") }
- LS { push(array(log), "LS") }
- LE { push(array(log), "LE") }
+ I { set(log, []); push(log, "I") }
+ LS { push(log, "LS") }
+ LE { push(log, "LE") }
  -> Child
- E { push(array(log), "E"); return(copy(array(log))) }
+ E { push(log, "E"); return(copy(log)) }
 
 Child:
  /hello/
@@ -1065,9 +1065,9 @@ fn regression_self_recursive_edge_only_compiler_output() {
 fn retv_5_1_action_edge_propagates_child_return_into_le() {
     let grammar = r#"Parent::
  /open/ -> Child
- I { set(array(results), []) }
- LE { push(array(results), retv) }
- E { return(copy(array(results))) }
+ I { set(results, []) }
+ LE { push(results, retv) }
+ E { return(copy(results)) }
 
 Child:
  /close/
@@ -1092,9 +1092,9 @@ Child:
 #[test]
 fn retv_5_1_blind_call_edge_propagates_child_return() {
     let grammar = r#"Top::AND
- I { set(array(collected), []) }
+ I { set(collected, []) }
  => Child
- E { push(array(collected), retv); return(copy(array(collected))) }
+ E { push(collected, retv); return(copy(collected)) }
 
 Child:
  /go/
@@ -1120,9 +1120,9 @@ Child:
 fn retv_5_1_rep_dispatch_collects_each_child_return_via_retv() {
     let grammar = r#"List::OR+
  /(\w+)/ -> Item
- I { set(array(out), []) }
- LE { push(array(out), retv) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ LE { push(out, retv) }
+ E { return(copy(out)) }
 
 Item:
  /unused/
@@ -1191,9 +1191,9 @@ Sub:
 fn match_5_2_child_entry_is_dispatcher_match_local_is_own() {
     let grammar = r#"Parent::
  /(open)/ -> Child
- I { set(array(results), []) }
- LE { push(array(results), retv) }
- E { return(copy(array(results))) }
+ I { set(results, []) }
+ LE { push(results, retv) }
+ E { return(copy(results)) }
 
 Child:
  /(close)/
@@ -1221,9 +1221,9 @@ Child:
 fn match_5_2_parent_local_match_survives_child_dispatch() {
     let grammar = r#"Parent::
  /(open)/ -> Child
- I { set(array(results), []) }
- LE { push(array(results), match_text()) }
- E { return(copy(array(results))) }
+ I { set(results, []) }
+ LE { push(results, match_text()) }
+ E { return(copy(results)) }
 
 Child:
  /(close)/
@@ -1309,14 +1309,14 @@ fn top_rule_as_normal_3_1_no_consume_recursion_terminates() {
 // test remains the narrow termination/shape guard from .3.1.
 #[test]
 fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
-    // `set(array(items), [])` is retained intentionally for recursive
+    // `set(items, [])` is retained intentionally for recursive
     // per-invocation accumulator scope; the helper spelling migration below
     // keeps only current append/snapshot helpers.
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
-                   sexpr: /\\(/ /\\)/  I { set(array(items), []) }\n\
-                    -> sexpr     { push(array(items), call(sexpr)) }\n\
-                    -> atom      { push(array(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(copy(array(items))) }\n\n\
+                   sexpr: /\\(/ /\\)/  I { set(items, []) }\n\
+                    -> sexpr     { push(items, call(sexpr)) }\n\
+                    -> atom      { push(items, call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(items)) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
@@ -1337,16 +1337,16 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
 // ordinary recursive rule when authored with the standard LX accumulator-return
 // idiom. The remaining Rust gap was value shape: recursive child invocations
 // shared the same working-variable stores. SPEC-FORMAT-TERSE.8.4 makes the
-// current aggregate reset form `set(array(items), [])` rule-local, so a nested
+// current aggregate reset form `set(items, [])` rule-local, so a nested
 // `sexpr` frame no longer leaks its local `items` array into its parent while
 // ordinary undeclared mutations keep their existing shared behavior.
 #[test]
 fn top_rule_as_normal_3_2_body_recursion_value_parity() {
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
-                   sexpr: /\\(/ /\\)/  I { set(array(items), []) }\n\
-                    -> sexpr     { push(array(items), call(sexpr)) }\n\
-                    -> atom      { push(array(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(copy(array(items))) }\n\n\
+                   sexpr: /\\(/ /\\)/  I { set(items, []) }\n\
+                    -> sexpr     { push(items, call(sexpr)) }\n\
+                    -> atom      { push(items, call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(items)) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "(a(b)c)"),
@@ -1357,11 +1357,11 @@ fn top_rule_as_normal_3_2_body_recursion_value_parity() {
 
 #[test]
 fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
-    let grammar = "sexpr:: /\\(/ /\\)/  I { set(array(items), []) }\n\
-                    -> sexpr     { push(array(items), call(sexpr)) }\n\
-                    -> atom      { push(array(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(copy(array(items))) }\n\
-                    LX { return(copy(array(items))) }\n\n\
+    let grammar = "sexpr:: /\\(/ /\\)/  I { set(items, []) }\n\
+                    -> sexpr     { push(items, call(sexpr)) }\n\
+                    -> atom      { push(items, call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(items)) }\n\
+                    LX { return(copy(items)) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "(a(b)c)"),
@@ -1379,7 +1379,7 @@ fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
 // ── variables: Rust lockstep parity with the Perl reference (.1.1.1).        ──
 //
 // The Perl reference now lets a working variable referenced through the current
-// typed spelling -- `NAME` for scalar slots and `array(NAME)` for arrays -- be
+// typed spelling -- `NAME` for scalar slots and `NAME` for arrays -- be
 // used without a declaration helper. In Perl that needed an engine change: generated
 // handlers run non-strict, so an undeclared bare var would silently become a
 // leaky package global (KM working-vars-no-strict-need-my-lexical), and the fix
@@ -1481,9 +1481,9 @@ fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
 
 #[test]
 fn terse_1_1_2_auto_existing_array_var_works_without_declare() {
-    // array(items) is pushed to and copied with NO set(array(items), []) -- it
+    // items is pushed to and copied with NO set(items, []) -- it
     // auto-exists. Perl returns ["a","b"]; Rust wraps one level.
-    let grammar = "Top::\n /x/ -> Done { push(array(items), \"a\"); push(array(items), \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -1505,8 +1505,9 @@ fn terse_1_1_2_current_initializer_form_matches_no_declare() {
         "scalar: explicit initialization and no-initializer forms produce identical output"
     );
 
-    let array_no = "Top::\n /x/ -> Done { push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let array_reset = "Top::\n /x/ -> Done { set(array(items), []); push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array_no =
+        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let array_reset = "Top::\n /x/ -> Done { set(items, []); push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(array_no, "xhello"),
         build_and_run(array_reset, "xhello"),
@@ -1533,7 +1534,7 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
         "scalar var is per-parse, not leaked across executes"
     );
 
-    let array = "Top::\n /x/ -> Done { push(array(items), \"a\"); push(array(items), \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1569,7 +1570,7 @@ fn terse_1_2_2_bare_scalar_arg_auto_exists() {
 #[test]
 fn terse_1_2_2_bare_array_arg_auto_exists() {
     // push(items, ...) with a BARE target.
-    let grammar = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -1577,7 +1578,7 @@ fn terse_1_2_2_bare_array_arg_auto_exists() {
     );
     // The old filtered append behavior is modeled with an explicit current
     // nonempty guard around push.
-    let ne = "Top::\n /x/ -> Done { if(is_nonempty(\"a\"), push(items, \"a\")); if(is_nonempty(\"\"), push(items, \"\")); if(is_nonempty(\"b\"), push(items, \"b\")); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let ne = "Top::\n /x/ -> Done { if(is_nonempty(\"a\"), push(items, \"a\")); if(is_nonempty(\"\"), push(items, \"\")); if(is_nonempty(\"b\"), push(items, \"b\")); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(ne, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -1606,8 +1607,10 @@ fn terse_1_2_2_bare_matches_wrapped_and_current_initializer() {
         "scalar: bare arg == current initializer form"
     );
 
-    let bare_a = "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_a = "Top::\n /x/ -> Done { push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let bare_a =
+        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_a =
+        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(bare_a, "xhello"),
         build_and_run(wrapped_a, "xhello"),
@@ -1631,7 +1634,7 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
         "bare scalar arg var is per-parse, not leaked across executes"
     );
 
-    let array = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1646,12 +1649,12 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
 
 // ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
 // aggregate bare value reads are type-implying snapshot positions for arrays.
-// Hash snapshots use the explicit current `copy(hash(NAME))` spelling.
+// Hash snapshots use the explicit current `copy(NAME)` spelling.
 
 #[test]
 fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
     let bare = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(bare, "xhello");
     assert_eq!(
         actual,
@@ -1661,18 +1664,18 @@ fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
     assert_eq!(
         actual,
         build_and_run(wrapped, "xhello"),
-        "copy(items) == copy(array(items)) on Rust"
+        "copy(items) == copy(items) on Rust"
     );
 }
 
 #[test]
 fn terse_1_2_3_2_hash_copy_read_uses_explicit_hash_wrapper() {
-    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(wrapped, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([{"stage": "v"}]),
-        "copy(hash(meta)) reads the hash working variable under the Perl output shape"
+        "copy(meta) reads the hash working variable under the Perl output shape"
     );
 }
 
@@ -1680,7 +1683,8 @@ fn terse_1_2_3_2_hash_copy_read_uses_explicit_hash_wrapper() {
 fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
     let bare_array =
         "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_array = "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_array =
+        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let actual_array = build_and_run(bare_array, "xhello");
     assert_eq!(
         actual_array,
@@ -1690,21 +1694,21 @@ fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
     assert_eq!(
         actual_array,
         build_and_run(wrapped_array, "xhello"),
-        "copy(items) == copy(array(items)) on Rust"
+        "copy(items) == copy(items) on Rust"
     );
 
-    let wrapped_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
-    let current_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let current_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let actual_hash = build_and_run(wrapped_hash, "xhello");
     assert_eq!(
         actual_hash,
         serde_json::json!([{"stage": "v"}]),
-        "copy(hash(meta)) clones the named hash working variable"
+        "copy(meta) clones the named hash working variable"
     );
     assert_eq!(
         actual_hash,
         build_and_run(current_hash, "xhello"),
-        "copy(hash(meta)) is stable on Rust"
+        "copy(meta) is stable on Rust"
     );
 }
 
@@ -1725,7 +1729,7 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
         "bare array read is isolated to the fresh RuntimeContext per execute"
     );
 
-    let hash = "Top::\n /([ab])/ -> Done { set_key(meta, match_group(0), \"seen\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let hash = "Top::\n /([ab])/ -> Done { set_key(meta, match_group(0), \"seen\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(hash).expect("parse hash");
     validate(&spec).expect("validate hash");
     let engine = Engine::new(compile(&spec).expect("compile hash"));
@@ -1748,7 +1752,7 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
 
 #[test]
 fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
-    let terse = "Top::\n /x/ -> Done { set(label, cat(\"a\", \"b\")); push(array(items), label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(label, cat(\"a\", \"b\")); push(items, label); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1759,11 +1763,11 @@ fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
 
 #[test]
 fn terse_1_4_2_copy_hash_matches_copy() {
-    let terse = "Top::\n /x/ -> Done { return(copy(hash(m))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { m = {}; return(copy(m)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(terse, "xhello"),
         serde_json::json!([{}]),
-        "copy(hash(m)) produces the Perl empty-hash reference value wrapped one level"
+        "copy(m) produces the Perl empty-hash reference value wrapped one level"
     );
 
     let value_terse =
@@ -1777,7 +1781,7 @@ fn terse_1_4_2_copy_hash_matches_copy() {
 
 #[test]
 fn terse_1_3_2_push_alias_matches_push() {
-    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1788,7 +1792,7 @@ fn terse_1_3_2_push_alias_matches_push() {
 
 #[test]
 fn terse_1_3_3_set_key_statement_mutates_hash() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1807,11 +1811,11 @@ fn terse_1_3_3_set_key_statement_mutates_hash() {
 
 #[test]
 fn terse_1_3_3_set_key_value_helper_stays_pure_copy() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"existing\", \"old\"); set(snapshot, set_key(hash(meta), \"stage\", \"v\")); return(array(copy(hash(meta)), snapshot)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"existing\", \"old\"); set(snapshot, set_key(meta, \"stage\", \"v\")); return(array(copy(meta), snapshot)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[{"existing": "old"}, {"existing": "old", "stage": "v"}]]),
-        "nested set_key(hash(meta), key, value) returns a copied hash and does not mutate meta"
+        "nested set_key(meta, key, value) returns a copied hash and does not mutate meta"
     );
 }
 
@@ -1849,8 +1853,8 @@ fn terse_1_3_4_1_scalar_assignment_target_is_per_parse() {
 
 #[test]
 fn terse_1_3_4_2_array_append_operator_matches_push() {
-    let operator = "Top::\n /x/ -> Done { label = \"b\"; items += \"a\"; items += label; return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let operator = "Top::\n /x/ -> Done { label = \"b\"; items += \"a\"; items += label; return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(operator, "xhello");
     assert_eq!(
         actual,
@@ -1867,7 +1871,7 @@ fn terse_1_3_4_2_array_append_operator_matches_push() {
 #[test]
 fn terse_1_3_4_2_array_append_target_is_per_parse() {
     let grammar =
-        "Top::\n /x/ -> Done { items += \"a\"; return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+        "Top::\n /x/ -> Done { items += \"a\"; return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1879,8 +1883,8 @@ fn terse_1_3_4_2_array_append_target_is_per_parse() {
 
 #[test]
 fn terse_1_3_4_3_hash_index_assignment_operator_matches_set_key() {
-    let operator = "Top::\n /x/ -> Done { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set_key(meta, cat(\"s\", \"tage\"), cat(\"a\", \"b\")); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let operator = "Top::\n /x/ -> Done { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let canonical = "Top::\n /x/ -> Done { set_key(meta, cat(\"s\", \"tage\"), cat(\"a\", \"b\")); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(operator, "xhello");
     assert_eq!(
         actual,
@@ -1896,7 +1900,7 @@ fn terse_1_3_4_3_hash_index_assignment_operator_matches_set_key() {
 
 #[test]
 fn terse_1_3_4_3_hash_index_assignment_target_is_per_parse() {
-    let grammar = "Top::\n /x/ -> Done { meta[\"stage\"] = \"v\"; return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { meta[\"stage\"] = \"v\"; return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1940,7 +1944,7 @@ fn terse_1_5_2_primitive_literals_return_typed_values() {
 
 #[test]
 fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
-    let grammar = "Top::\n /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; if(false); return(\"bad\"); else(); return(array(flag, copy(array(items)), copy(hash(meta)))); endif() }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; if(false); return(\"bad\"); else(); return(array(flag, copy(items), copy(meta))); endif() }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[true, [false, true], {"enabled": true}]]),
@@ -2014,7 +2018,7 @@ fn terse_1_2_3_4_scalar_source_slot_bare_reads_run() {
 
 #[test]
 fn terse_1_2_3_4_mutation_and_direct_access_bare_reads_run() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); set(idx, 1); set(foo, hash(\"a\", array(\"zero\", \"one\"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(copy(array(items)), copy(hash(meta)), foo[\"a\"][idx])) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); set(idx, 1); set(foo, hash(\"a\", array(\"zero\", \"one\"))); items += value; set_key(meta, key, value); meta[key] = value; return(array(copy(items), copy(meta), foo[\"a\"][idx])) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["payload"], {"stage": "payload"}, "one"]]),
@@ -2027,7 +2031,7 @@ fn terse_1_2_3_4_mutation_and_direct_access_bare_reads_run() {
 
 #[test]
 fn terse_1_6_array_end_mutation_methods_run_in_order() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a"]]),
@@ -2037,7 +2041,7 @@ fn terse_1_6_array_end_mutation_methods_run_in_order() {
 
 #[test]
 fn terse_1_6_explicit_array_receiver_runs() {
-    let grammar = "Top::\n /x/ -> Done { array(items).push_back(\"b\"); array(items).push_front(\"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items.push_back(\"b\"); items.push_front(\"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -2064,7 +2068,7 @@ fn terse_1_2_3_5_3_shape_literal_values_return_typed_nested_payload() {
 
 #[test]
 fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); items += [value]; meta[key] = { key : value }; return(array(copy(array(items)), copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); items += [value]; meta[key] = { key : value }; return(array(copy(items), copy(meta))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[[["payload"]], {"stage": {"stage": "payload"}}]]),
@@ -2079,7 +2083,7 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
 
 #[test]
 fn terse_9_3_colon_hash_literals_parse_and_run() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); direct = { key : value, \"fixed\" : [value], \"outer\" : { \"nested\" : value } }; meta[key] = { key : value }; set(assigned, { key : value }); set(expr_set, set(tmp, { key : value })); set(expr_op, =(tmp2, { key : value })); return(array(direct, copy(hash(meta)), assigned, expr_set, expr_op, [value, { key : value }], { key : value }.count_keys(), { set(x, \"a\"); x })) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); direct = { key : value, \"fixed\" : [value], \"outer\" : { \"nested\" : value } }; meta[key] = { key : value }; set(assigned, { key : value }); set(expr_set, set(tmp, { key : value })); set(expr_op, =(tmp2, { key : value })); return(array(direct, copy(meta), assigned, expr_set, expr_op, [value, { key : value }], { key : value }.count_keys(), { set(x, \"a\"); x })) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[
@@ -2120,7 +2124,7 @@ fn terse_9_5_hash_literal_fat_arrow_is_retired() {
 
 #[test]
 fn terse_11_3_shape_assignment_binds_scalar_held_array_values() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(name, array(name), copy(name), name.count(), name.first())) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(name, name, copy(name), name.count(), name.first())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], ["ok"], ["ok"], 1, "ok"]]),
@@ -2130,7 +2134,7 @@ fn terse_11_3_shape_assignment_binds_scalar_held_array_values() {
 
 #[test]
 fn terse_11_3_assignment_can_replace_scalar_array_hash_values() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); thing = \"text\"; first = thing; thing = [value]; second = array(thing); thing = { key : value }; third = hash(thing); thing = \"done\"; return(array(first, second, third, thing)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); thing = \"text\"; first = thing; thing = [value]; second = thing; thing = { key : value }; third = thing; thing = \"done\"; return(array(first, second, third, thing)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["text", ["ok"], {"stage": "ok"}, "done"]]),
@@ -2140,7 +2144,7 @@ fn terse_11_3_assignment_can_replace_scalar_array_hash_values() {
 
 #[test]
 fn terse_11_3_set_shape_rhs_binds_bare_targets_as_values() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key : value }); return(array(array(items), hash(meta), items, meta)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key : value }); return(array(items, meta, items, meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], {"stage": "ok"}]]),
@@ -2150,7 +2154,7 @@ fn terse_11_3_set_shape_rhs_binds_bare_targets_as_values() {
 
 #[test]
 fn terse_11_3_explicit_typed_targets_remain_aggregate_storage() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key : value }); set(payload, [value]); return(array(copy(array(items)), copy(hash(meta)), payload, copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key : value }); set(payload, [value]); return(array(copy(items), copy(meta), payload, copy(payload))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], ["ok"]]]),
@@ -2194,7 +2198,7 @@ fn terse_11_4_nested_assignment_expression_returns_root_or_undef() {
 
 #[test]
 fn terse_15_4_bare_reads_replace_scalar_slot_shorthand() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(array(payload)), snapshot)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(payload), snapshot)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["ok", ["ok"], ["ok"], ["ok"]]]),
@@ -2412,14 +2416,13 @@ fn terse_15_2_3_bare_switch_case_labels_are_literal_tags() {
 }
 
 #[test]
-fn terse_15_2_4_descriptor_scalar_bare_read_survives_same_name_array_accumulator() {
+fn terse_15_2_4_descriptor_scalar_bare_read_composes_with_distinct_array_accumulator() {
     let grammar = r#"Top::
-I { rule = undef }
+I { rule = undef; rule_items = [] }
 -> Header {
   if(rule);
-  set(array(rule), array());
-  push(array(rule), array("word", "Term"));
-  return(array(rule, flat_array(rule)))
+  push(rule_items, array("word", "Term"));
+  return(array(rule, flat_array(rule_items)))
   endif()
 }
 
@@ -2428,7 +2431,7 @@ Header: /\w+/ I.return(array("rule", entry_text()))
     assert_eq!(
         build_and_run(grammar, "Expr Term"),
         serde_json::json!([[["rule", "Expr"], ["word", "Term"]]]),
-        "descriptor-tag scalar reads stay distinct from same-name aggregate wrapper reads"
+        "descriptor-tag scalar reads compose with a distinctly named typed accumulator"
     );
 }
 
@@ -2572,7 +2575,7 @@ fn terse_14_4_receiver_with_trailing_block_restores_outer_value_binding() {
 
 #[test]
 fn terse_12_3_hash_tree_receiver_blocks_map_reduce_walk() {
-    let grammar = "Top::\n /x/ -> Done { meta = { \"b\" : { \"y\" : \"B\" }, \"a\" : \"A\", \"arr\" : [\"u\", \"v\"] }; return(array(meta.map_leaves() { return(cat(join_values(\"/\", array(path)), \"=\", if(count(array(value)), join_values(\"\", array(value)), else(value)))) }, meta.reduce_leaves(\"\") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values(\"/\", array(path)); return(value) }.count_keys(), array(seen))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { meta = { \"b\" : { \"y\" : \"B\" }, \"a\" : \"A\", \"arr\" : [\"u\", \"v\"] }; return(array(meta.map_leaves() { return(cat(join_values(\"/\", path), \"=\", coalesce_nonempty(join_values(\"\", value), value))) }, meta.reduce_leaves(\"\") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values(\"/\", path); return(value) }.count_keys(), seen)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[{"a": "a=A", "arr": "arr=uv", "b": {"y": "b/y=B"}}, "aarry", 3, ["a", "arr", "b/y"]]]),
@@ -2582,7 +2585,7 @@ fn terse_12_3_hash_tree_receiver_blocks_map_reduce_walk() {
 
 #[test]
 fn terse_12_3_hash_tree_receiver_blocks_empty_tree_and_non_hash() {
-    let grammar = "Top::\n /x/ -> Done { empty = {}; scalar = \"x\"; return(array(empty.map_leaves() { touched += \"bad\" }.count_keys(), empty.reduce_leaves(\"seed\") { return(cat(acc, key)) }, empty.walk_leaves() { touched += \"bad\" }.count_keys(), array(touched), is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), array(touched))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { empty = {}; scalar = \"x\"; touched = []; return(array(empty.map_leaves() { touched += \"bad\" }.count_keys(), empty.reduce_leaves(\"seed\") { return(cat(acc, key)) }, empty.walk_leaves() { touched += \"bad\" }.count_keys(), touched, is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), touched)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[0, "seed", 0, [], true, true, true, []]]),
@@ -2629,7 +2632,7 @@ fn terse_12_3_hash_tree_receiver_blocks_reject_malformed_calls() {
 
 #[test]
 fn terse_13_3_array_tree_receiver_blocks_map_reduce_walk() {
-    let grammar = "Top::\n /x/ -> Done { items = [\"a\", [\"b\", \"c\"], { \"h\" : \"H\" }]; return(array(items.map_leaves() { return(cat(join_values(\"/\", array(path)), \"=\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)))) }, items.reduce_leaves(\"\") { return(cat(acc, join_values(\"/\", array(path)), \":\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)), \";\")) }, items.walk_leaves() { seen += join_values(\"/\", array(path)); return(value) }.count(), array(seen))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items = [\"a\", [\"b\", \"c\"], { \"h\" : \"H\" }]; return(array(items.map_leaves() { return(cat(join_values(\"/\", path), \"=\", if(count(value.sorted_keys()), cat(\"{\", value.sorted_keys().join_values(\",\"), \"}\"), else(value)))) }, items.reduce_leaves(\"\") { return(cat(acc, join_values(\"/\", path), \":\", if(count(value.sorted_keys()), cat(\"{\", value.sorted_keys().join_values(\",\"), \"}\"), else(value)), \";\")) }, items.walk_leaves() { seen += join_values(\"/\", path); return(value) }.count(), seen)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[
@@ -2644,7 +2647,7 @@ fn terse_13_3_array_tree_receiver_blocks_map_reduce_walk() {
 
 #[test]
 fn terse_13_3_array_tree_receiver_blocks_empty_tree_and_non_array() {
-    let grammar = "Top::\n /x/ -> Done { items = []; scalar = \"x\"; return(array(items.map_leaves() { touched += \"bad\" }.count(), items.reduce_leaves(\"seed\") { return(\"bad\") }, items.walk_leaves() { touched += \"bad\" }.count(), array(touched), is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), array(touched))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items = []; scalar = \"x\"; touched = []; return(array(items.map_leaves() { touched += \"bad\" }.count(), items.reduce_leaves(\"seed\") { return(\"bad\") }, items.walk_leaves() { touched += \"bad\" }.count(), touched, is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), touched)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[0, "seed", 0, [], true, true, true, []]]),
@@ -2736,7 +2739,7 @@ fn terse_2_3_2_action_edge_return_exits_before_lx() {
 
 #[test]
 fn terse_2_3_2_child_rule_capture_slice_starts_after_entry_match() {
-    let grammar = "Top::\n -> Body .push\n E { return(copy(array(Top))) }\n\nBody: /\\{/ /\\}/\n -> Body[1] { return(capture_slice()) }\n";
+    let grammar = "Top::\n -> Body .push\n E { return(copy(Top)) }\n\nBody: /\\{/ /\\}/\n -> Body[1] { return(capture_slice()) }\n";
     assert_eq!(
         build_and_run(grammar, "{abc}"),
         serde_json::json!([["abc"]]),
@@ -2761,7 +2764,7 @@ fn terse_2_3_2_expression_block_return_inside_lifecycle_stays_local() {
 
 #[test]
 fn terse_2_3_3_1_action_edge_fluent_push_appends_child_return() {
-    let grammar = "top::\n -> item .push\n E { return(copy(array(top))) }\n\nitem:\n /x/\n I { return(entry_text()) }\n";
+    let grammar = "top::\n -> item .push\n E { return(copy(top)) }\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([["x"]]),
@@ -2771,8 +2774,7 @@ fn terse_2_3_3_1_action_edge_fluent_push_appends_child_return() {
 
 #[test]
 fn rust_parity_7_3_4_1_header_rest_action_edge_allows_compact_arrow_spacing() {
-    let grammar =
-        "top::->item.push\nE{return(copy(array(top)))}\n\nitem:/x/I.return(entry_text())\n";
+    let grammar = "top::->item.push\nE{return(copy(top))}\n\nitem:/x/I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([["x"]]),
@@ -2782,7 +2784,7 @@ fn rust_parity_7_3_4_1_header_rest_action_edge_allows_compact_arrow_spacing() {
 
 #[test]
 fn rust_parity_7_3_4_4_dependency_edge_child_entry_captures() {
-    let grammar = "top::\n -> item .push\n E { return(copy(array(top))) }\n\nitem:\n /\\b(\\w+)=(\\w+)/\n I { return(array(\"ITEM\", entry_group(0), entry_group(1))) }\n";
+    let grammar = "top::\n -> item .push\n E { return(copy(top)) }\n\nitem:\n /\\b(\\w+)=(\\w+)/\n I { return(array(\"ITEM\", entry_group(0), entry_group(1))) }\n";
     assert_eq!(
         build_and_run(grammar, "foo=bar"),
         serde_json::json!([[["ITEM", "foo", "bar"]]]),
@@ -2794,11 +2796,11 @@ fn rust_parity_7_3_4_4_dependency_edge_child_entry_captures() {
 fn rust_parity_7_3_4_4_regex_subst_mutates_scalar_targets() {
     let grammar = r#"Top::
  -> Item .push
- E { return(copy(array(Top))) }
+ E { return(copy(Top)) }
 
 Item:
  /("[^"]+")/
- I { raw = entry_group(0); substr(raw, "\"", "", go); bracket = "[42]"; substr(bracket, /^\[(\d+)\]$/, "$1", o); csv = "a,b"; parts = []; split(array(parts), csv, /,/); return(array(raw, bracket, copy(array(parts)))) }
+ I { raw = entry_group(0); substr(raw, "\"", "", go); bracket = "[42]"; substr(bracket, /^\[(\d+)\]$/, "$1", o); csv = "a,b"; parts = []; split(parts, csv, /,/); return(array(raw, bracket, copy(parts))) }
 "#;
     assert_eq!(
         build_and_run(grammar, "\"abc\""),
@@ -2837,7 +2839,7 @@ fn rust_parity_7_3_4_2_array_constructor_splices_flattening_helpers() {
     let grammar = r#"Top::
  /x/
  I {
-   set(array(parts), array("a", "b"));
+   set(parts, array("a", "b"));
    return(array("?node:", array(flat_array(parts)), copy(parts)));
  }
 "#;
@@ -2942,10 +2944,10 @@ fn rust_parity_7_3_4_3_scoped_fluent_push_keeps_current_token_match() {
 
 LX {
   if(header);
-    push(array(rules), array(header, flat_array(words)));
+    push(rules, array(header, flat_array(words)));
   endif();
 
-  return(copy(array(rules)))
+  return(copy(rules))
 }
 
 -> Header { header = call(Header); on = 1 }
@@ -2972,7 +2974,7 @@ Word: /\b[A-Z][a-z]*\b/ I.return(array("word", entry_text()))
 fn rust_parity_7_3_4_3_action_block_push_child_index_uses_edge_match() {
     let grammar = r#"Top::
 -> Pair { push(Pair, 1) }
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Pair: /(\w+):(\w+)/ I.return(array(entry_group(0), entry_group(1)))
 "#;
@@ -2988,7 +2990,7 @@ Pair: /(\w+):(\w+)/ I.return(array(entry_group(0), entry_group(1)))
 fn rust_parity_7_3_4_3_ebnf_grammar_rule_header_regex_matches() {
     let grammar = r#"Top::
 -> grammar_rule .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/ I.return(array("rule", entry_group(0)))
 "#;
@@ -3071,7 +3073,7 @@ fn rust_parity_7_3_4_3_ebnf_logging_annotation_payloads_are_preserved() {
 
 #[test]
 fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
-    let grammar = "top::\n -> box .push\n E { return(copy(array(top))) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", copy(array(box))))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
+    let grammar = "top::\n -> box .push\n E { return(copy(top)) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", copy(box)))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(
         build_and_run(grammar, "[x]"),
         serde_json::json!([[["?box:", ["x"]]]]),
@@ -3175,7 +3177,7 @@ fn terse_2_3_3_3_1_inline_lifecycle_compact_chain_executes() {
 
 #[test]
 fn terse_2_3_3_3_2_action_edge_fluent_push_target_appends_child_return() {
-    let grammar = "top::\n I { set(array(out), []) }\n -> item.push(out)\n E { return(copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    let grammar = "top::\n I { set(out, []) }\n -> item.push(out)\n E { return(copy(out)) }\n\nitem: /x/ I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([["x"]]),
@@ -3185,7 +3187,7 @@ fn terse_2_3_3_3_2_action_edge_fluent_push_target_appends_child_return() {
 
 #[test]
 fn terse_2_3_3_3_2_action_edge_fluent_flow_push_child_target_true_branch() {
-    let grammar = "top::\n I { set(array(out), []); set(on, true) }\n -> item\n  .if(on)\n    .push(item, out)\n  .else()\n    .return_undef()\n  .endif()\n E { return(copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    let grammar = "top::\n I { set(out, []); set(on, true) }\n -> item\n  .if(on)\n    .push(item, out)\n  .else()\n    .return_undef()\n  .endif()\n E { return(copy(out)) }\n\nitem: /x/ I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([["x"]]),
@@ -3195,7 +3197,7 @@ fn terse_2_3_3_3_2_action_edge_fluent_flow_push_child_target_true_branch() {
 
 #[test]
 fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
-    let grammar = "top::\n I { set(array(out), []); set(on, false) }\n -> item\n  .if(on)\n    .push(item, out)\n  .else()\n    .say(\"missing item\")\n    .return_undef()\n  .endif()\n E { return(copy(array(out))) }\n\nitem: /x/ I.return(entry_text())\n";
+    let grammar = "top::\n I { set(out, []); set(on, false) }\n -> item\n  .if(on)\n    .push(item, out)\n  .else()\n    .say(\"missing item\")\n    .return_undef()\n  .endif()\n E { return(copy(out)) }\n\nitem: /x/ I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "x"),
         serde_json::json!([]),
@@ -3207,25 +3209,25 @@ fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
 
 #[test]
 fn terse_2_3_4_1_bare_hash_merge_arg_matches_wrapped() {
-    let bare = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay))))) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), hash(overlay)))))) }\n\nDone::\n /[a-z]+/\n";
+    let bare = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(bare, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([2]),
-        "merge_hash(copy(hash(base)), overlay) reads overlay as a hash snapshot"
+        "merge_hash(copy(base), overlay) reads overlay as a hash snapshot"
     );
     assert_eq!(
         actual,
         build_and_run(wrapped, "xhello"),
-        "bare hash helper argument matches the explicit hash(overlay) wrapper"
+        "bare hash helper argument matches the explicit overlay wrapper"
     );
 }
 
 #[test]
 fn terse_2_3_4_1_hash_consumers_accept_bare_hash_arg() {
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "c", 3); return(array(sorted_keys(set_key(meta, "c", 3)), sorted_keys(rename_key(meta, "a", "aa")), sorted_keys(drop_keys(meta, "b")), sorted_keys(pick_keys(meta, "a")), has_key(meta, "a"), hash(meta).pick_keys("b").sorted_values().first(), count_keys(flat_hash(meta, extra)))) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "c", 3); return(array(sorted_keys(set_key(meta, "c", 3)), sorted_keys(rename_key(meta, "a", "aa")), sorted_keys(drop_keys(meta, "b")), sorted_keys(pick_keys(meta, "a")), has_key(meta, "a"), meta.pick_keys("b").sorted_values().first(), count_keys(flat_hash(meta, extra)))) }
 
 Done::
  /[a-z]+/
@@ -3285,7 +3287,7 @@ Done::
 #[test]
 fn unknown_receiver_method_returns_undef() {
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "a", 1); return(hash(meta).unknown_hash_method("a")) }
+ /x/ -> Done { set_key(meta, "a", 1); return(meta.unknown_hash_method("a")) }
 
 Done::
  /[a-z]+/
@@ -3299,21 +3301,21 @@ Done::
 
 #[test]
 fn rust_parity_7_5_2_explicit_array_wrapper_replaces_array_value() {
-    let grammar = "Top::\n /x/ -> Done { push(array(word), \"x\"); set(array(word), []); push(array(word), \"y\"); return(copy(array(word))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { push(word, \"x\"); set(word, []); push(word, \"y\"); return(copy(word)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["y"]]),
-        "set(array(name), []) replaces the working array while bare name = [] stays scalar-held"
+        "set(name, []) replaces the working array while bare name = [] stays scalar-held"
     );
 }
 
 #[test]
 fn rust_parity_7_5_2_set_hash_wrapper_replaces_hash_value() {
-    let grammar = "Top::\n /x/ -> Done { set_key(hash(meta), \"old\", \"x\"); set(hash(meta), hash(\"new\", \"y\")); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"old\", \"x\"); set(meta, hash(\"new\", \"y\")); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([{"new": "y"}]),
-        "set(hash(name), hash(...)) replaces the working hash instead of assigning a scalar"
+        "set(name, hash(...)) replaces the working hash instead of assigning a scalar"
     );
 }
 
@@ -3347,7 +3349,7 @@ fn terse_2_3_4_1_array_consumers_accept_bare_array_arg() {
 
 #[test]
 fn terse_2_3_5_1_array_receiver_value_chains_run() {
-    let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().contains(\"c\"), items.sorted().index_of(\"c\"), items.drop_back().join_values(\"|\"), items.uniq().join_values(\",\"), items.filter_match(/^a$/).count(), phrases.split_each(\"-\").filter_match(/^aa$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), items.reversed().take(2).last(), items.sorted().contains(\"c\"), items.sorted().index_of(\"c\"), items.drop_back().join_values(\"|\"), items.uniq().join_values(\",\"), items.filter_match(/^a$/).count(), phrases.split_each(\"-\").filter_match(/^aa$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["b", "c", 1, 3, "b|a|c", "b,a,c", 2, 2, true, true]]),
@@ -3371,7 +3373,7 @@ fn future_parity_backlog_12_1_3_array_end_mutations_return_updated_values() {
 fn terse_2_3_5_2_hash_receiver_value_chains_run() {
     // Hash receiver chains use `.copy()` as the current hash snapshot method.
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(layered, merge_hash(meta, extra)); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), layered.pick_keys("a").sorted_values().first(), meta.rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3385,7 +3387,7 @@ Done::
 
 #[test]
 fn terse_2_3_5_2_hash_statement_mutations_remain_statement_level() {
-    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"a\", 1); set(snapshot, meta.set_key(\"b\", 2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(hash(meta))), count_keys(snapshot))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set_key(meta, \"a\", 1); set(snapshot, meta.set_key(\"b\", 2)); meta[\"c\"] = 3; return(array(join_values(\",\", sorted_keys(meta)), count_keys(snapshot))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a,c", 2]]),
@@ -3452,7 +3454,7 @@ fn terse_2_3_5_4_number_terminal_methods_end_chains() {
 
 #[test]
 fn terse_7_3_array_numeric_reducer_receiver_methods_run() {
-    let grammar = "Top::\n /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(array(scores)), num_max(array(scores)), min(scores), max(scores))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(scores), num_max(scores), min(scores), max(scores))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[14, 3.5, 4, 4, 1, 5, 3, 9, 1, 5, 1, 5]]),
@@ -3553,7 +3555,7 @@ Done::
 #[test]
 fn terse_3_3_2_aggregate_assignment_expressions_run() {
     let grammar = r#"Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key : value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(items), set(meta, { key : value }), copy(meta), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -3570,7 +3572,7 @@ Done::
 #[test]
 fn terse_3_3_3_mutation_assignment_expressions_run() {
     let grammar = r#"Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(hash(meta)), (items += "x").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3588,7 +3590,7 @@ Done::
 fn terse_3_3_4_assignment_expression_closure_run() {
     let grammar = r#"fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key : value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key : value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], items, set(meta, { key : value }), meta, set(items_mut, [value]), items_mut += "tail", copy(items_mut), set(meta_mut, { key : value }), meta_mut["extra"] = other, copy(meta_mut), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3754,7 +3756,7 @@ fn terse_2_3_5_5_block_valued_receiver_chains_run() {
 
 #[test]
 fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
-    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" : 1 }))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(items), count(array(\"items\")), count(array('items')), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(meta), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" : 1 }))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[2, 1, 1, 1, 2, 2, 1, 1, 1]]),
@@ -3764,11 +3766,11 @@ fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
 
 #[test]
 fn terse_2_3_5_6_quoted_names_are_not_runtime_indirect_lookups() {
-    let grammar = "Top::\n /x/ -> Done { set(alias, \"items\"); items += \"a\"; set(hash_alias, \"meta\"); set_key(meta, \"a\", 1); return(array(count(array(\"alias\")), count(array(alias)), count(array(items)), count_keys(hash(\"hash_alias\", 1)), count_keys(hash(hash_alias)), count_keys(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(alias, \"items\"); items += \"a\"; set(hash_alias, \"meta\"); set_key(meta, \"a\", 1); return(array(count(array(\"alias\")), count(alias), count(items), count_keys(hash(\"hash_alias\", 1)), count_keys(hash_alias), count_keys(meta))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[1, 0, 1, 1, 0, 1]]),
-        "quoted wrapper arguments are literal constructor payloads, not scalar-indirect aggregate names"
+        serde_json::json!([[1, 5, 1, 1, 0, 1]]),
+        "quoted constructor arguments stay literal while bare bindings keep their runtime kinds"
     );
 }
 

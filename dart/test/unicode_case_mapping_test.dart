@@ -34,11 +34,11 @@ void main() {
           '''
 Top::
  /x/ -> Done {
-   set(array(lower_items), [$literal])
-   lowercase_each(array(lower_items))
-   set(array(upper_items), [$literal])
-   uppercase_each(array(upper_items))
-   return([lowercase($literal), $literal.lowercase(), uppercase($literal), $literal.uppercase(), copy(array(lower_items)), copy(array(upper_items))])
+   set(lower_items, [$literal])
+   lowercase_each(lower_items)
+   set(upper_items, [$literal])
+   uppercase_each(upper_items)
+   return([lowercase($literal), $literal.lowercase(), uppercase($literal), $literal.uppercase(), copy(lower_items), copy(upper_items)])
  }
 
 Done::

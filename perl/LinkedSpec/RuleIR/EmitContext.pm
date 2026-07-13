@@ -733,6 +733,11 @@ sub _collect_bare_identifier_type_memory {
   return if (($kind_by_name{$name} // '') eq 'scalar') && $kind ne 'scalar';
   $kind_by_name{$name} = $kind;
  };
+ # A rule label names that handler's implicit array accumulator unless the
+ # authored rule explicitly rebinds the same identifier as a scalar-held typed
+ # value later in this scan. Record the internal ownership instead of relying on
+ # the retired array-first interpretation of an otherwise untyped `copy(name)`.
+ $record->($label, 'array');
  my $node_source_expr = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
@@ -2181,15 +2186,18 @@ sub _collect_auto_working_var_decls {
   # are statement-level array/hash mutations; `.1.2.3.3.2` additionally collects
   # the accepted bare scalar key/RHS reads in those mutation slots.
   # (c) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
-  #     aggregate value reads. Current `copy(NAME)` follows remembered bare-name
-  #     kind before the untyped array fallback.
+  #     aggregate value reads. Names with known internal aggregate ownership
+  #     (including implicit rule accumulators) retain their private host
+  #     declaration; an untyped ordinary name defaults to the one runtime-typed
+  #     scalar binding instead of the historical array-first fallback.
   while ($masked =~ /\bcopy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    my $name = $1;
+   next if _bare_type_memory_reserved_name($name);
    my $kind = _bare_symbol_kind($name);
    $record->(
-    defined($kind) && $kind eq 'scalar' ? '$'
+    defined($kind) && $kind eq 'array' ? '@'
     : defined($kind) && $kind eq 'hash' ? '%'
-    : '@',
+    : '$',
     $name,
    );
   }

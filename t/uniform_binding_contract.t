@@ -230,10 +230,10 @@ subtest 'compatibility selectors remain temporary until scheduled source migrati
  my $spec = <<'SPEC';
 Top::
  /x/ -> Done {
-   set(array(legacy), ["a"])
-   push(array(legacy), "b")
-   set(hash(oldmeta), { "stage" : "ok" })
-   return([copy(array(legacy)), copy(hash(oldmeta))])
+   set(legacy, ["a"])
+   push(legacy, "b")
+   set(oldmeta, { "stage" : "ok" })
+   return([copy(legacy), copy(oldmeta)])
  }
 Done::
  /x/

@@ -41,8 +41,8 @@ This `README.md` is the **single entry point** to the project.
   source migration, hard rejection, and no-drift. `.12.1.1` now adopts the executable replacement contract;
   Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` now execute bare typed
   mutations, results, chaining, diagnostics, and static-rule precedence. All five backends are enabled; shipped
-  source migration `.12.1.7.1-.2` has removed all 600 exact selectors from the 82 tracked `.spec` files. Embedded
-  test/tool/backend source strings migrate next under `.12.1.7.3`, before hard selector rejection.
+  source migration `.12.1.7.1-.3` has removed all 600 exact selectors from the 82 tracked `.spec` files and all
+  1,356 positive occurrences from embedded test/tool/backend sources. Perl hard rejection `.12.1.8.1` is next.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -259,7 +259,7 @@ Top-level project docs:
   removed-selector diagnostics, exact migration spellings, and constructor classification. The checker covers 11
   migrations, seven execution cases, six invalid selectors, eight retained constructors, and deterministic future
   fixture source/results. Perl, Rust, Dart, Julia, and Lua execute the replacement contract; every tracked `.spec`
-  file is now selector-free, with embedded source strings and hard rejection still dependency-ordered.
+  file and executable embedded source is now selector-free; hard rejection remains dependency-ordered.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

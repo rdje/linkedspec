@@ -34,8 +34,9 @@ The complete package gate exposed two historical namespace locks. Value-position
 and `merge_hash(meta, overlay)` expected only the overlay after wrapper and bare hash mutations mixed stores. Both
 now assert the adopted updated-value and single-binding behavior.
 
-Exact `array(name)` and `hash(name)` remain parsed only while tracked sources migrate; Lua now supports the bare
-replacements. Julia rejects and deletes those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.4`.
+Exact `array(name)` and `hash(name)` remain parsed only until hard rejection; all tracked sources have migrated and
+Lua supports the bare replacements. Julia rejects and deletes those selector paths in
+`FUTURE-PARITY-BACKLOG.12.1.8.4`.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-uniform-binding-runtime]],

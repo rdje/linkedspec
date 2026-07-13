@@ -66,7 +66,7 @@ subtest 'trace can be routed to a file without changing parser JSON stdout' => s
  my $spec = <<'SPEC';
 top::
  -> word .push
-LX { return(copy(array(top))) }
+LX { return(copy(top)) }
 
 word:
  /(\w+)/ I { return(entry_text()) }

@@ -186,13 +186,13 @@ subtest 'structured control forms parse as typed AST nodes' => sub {
     is($if->{body}{kind}, 'action_block', 'control_if owns its attached body block');
     is($if->{body}{statements}[0]{expr}{name}, 'set', 'control_if body statements are parsed');
 
-    my $when = parse_expr('when(is_nonempty(array(items)))');
+    my $when = parse_expr('when(is_nonempty(items))');
     is($when->{kind}, 'control_if', 'marker when parses through the if-family control node');
     is($when->{keyword}, 'when', 'when preserves its alias keyword');
     is($when->{canonical_keyword}, 'if', 'when canonicalizes to if');
     is($when->{condition}{name}, 'is_nonempty', 'when condition is parsed as a call');
 
-    my $elseif = parse_expr('elseif(has_key(hash(meta),"tag")) { return("tagged") }');
+    my $elseif = parse_expr('elseif(has_key(meta,"tag")) { return("tagged") }');
     is($elseif->{kind}, 'control_if', 'attached elseif parses through the if-family control node');
     is($elseif->{branch_role}, 'elseif', 'elseif branch role is explicit');
     is($elseif->{canonical_keyword}, 'elseif', 'elseif keeps its canonical keyword');
@@ -721,11 +721,8 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
             if ($expr eq 'set(name, [poison])') {
                 return $call->('set', $var->('name'), $array->($var->('value')));
             }
-            if ($expr eq 'set_key(hash(meta), poison_key, poison_value)') {
+            if ($expr eq 'set_key(meta, poison_key, poison_value)') {
                 return $call->('set_key', $call->('hash', $var->('meta')), $var->('key'), $var->('value'));
-            }
-            if ($expr eq 'push(array(items), poison)') {
-                return $call->('push', $call->('array', $var->('items')), $var->('value'));
             }
             if ($expr eq 'return([poison])') {
                 return $call->('return', $array->($var->('value')));
@@ -742,15 +739,12 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         my $assign = LinkedSpec::call_spec_handler_subst('Top', q{set(name, [poison])});
         is($assign, '$name = [$value]', 'set statement lowers from AST call args');
 
-        my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
+        my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(meta, poison_key, poison_value)});
         is(
             $set_key,
             'do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, $value) }',
             'set_key statement lowers target/key/value into the uniform binding update'
         );
-
-        my $push = LinkedSpec::call_spec_handler_subst('Top', q{push(array(items), poison)});
-        is($push, 'push @items, $value', 'push statement lowers explicit append from AST call args');
 
         my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
         is($return, 'return [$value]', 'return statement lowers payload from AST call args');
@@ -765,11 +759,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
             'array end-mutation statement lowers into the uniform binding mutation'
         );
 
-        my $all = join("\n", $assign, $set_key, $push, $return, $return_undef, $push_back);
+        my $all = join("\n", $assign, $set_key, $return, $return_undef, $push_back);
         unlike($all, qr/poison|__bad_/, 'statement helper-call lowering does not reuse fake AST source or original poison text');
     }
 
-    ok($parse_calls >= 6, 'statement helper calls entered through the AST parser');
+    ok($parse_calls >= 5, 'statement helper calls entered through the AST parser');
 };
 
 subtest 'receiver chains accept all expression receivers' => sub {
@@ -904,27 +898,6 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
-            if ($expr eq 'copy(array(items))') {
-                return $call->(
-                    'copy',
-                    '__bad_array_snapshot_host_call__()',
-                    $call->('array', '__bad_array_wrapper_host_call__()', $var->('items')),
-                );
-            }
-            if ($expr eq 'copy(hash(meta))') {
-                return $call->(
-                    'copy',
-                    '__bad_hash_snapshot_host_call__()',
-                    $call->('hash', '__bad_hash_wrapper_host_call__()', $var->('meta')),
-                );
-            }
-            if ($expr eq 'copy(hash(meta))') {
-                return $call->(
-                    'copy',
-                    '__bad_copy_host_call__()',
-                    $call->('hash', '__bad_copy_hash_wrapper_host_call__()', $var->('meta')),
-                );
-            }
             if ($expr eq 'count(array("items"))') {
                 return $call->(
                     'count',
@@ -932,86 +905,77 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
                     $call->('array', '__bad_quoted_array_wrapper_host_call__()', $str->('items')),
                 );
             }
-            if ($expr eq 'num_sum(array(items))') {
+            if ($expr eq 'num_sum(items)') {
                 return $call->(
                     'num_sum',
                     '__bad_num_sum_host_call__()',
-                    $call->('array', '__bad_num_sum_array_wrapper_host_call__()', $var->('items')),
+                    $var->('items'),
                 );
             }
-            if ($expr eq 'merge_hash(hash(base),set_key(hash(overlay),"stage",cat("a","b")))') {
+            if ($expr eq 'merge_hash(base,set_key(overlay,"stage",cat("a","b")))') {
                 return $call->(
                     'merge_hash',
                     '__bad_merge_hash_host_call__()',
-                    $call->('hash', '__bad_base_hash_wrapper_host_call__()', $var->('base')),
+                    $var->('base'),
                     $call->(
                         'set_key',
                         '__bad_set_key_host_call__()',
-                        $call->('hash', '__bad_overlay_hash_wrapper_host_call__()', $var->('overlay')),
+                        $var->('overlay'),
                         $str->('stage'),
                         $call->('cat', '__bad_cat_host_call__()', $str->('a'), $str->('b')),
                     ),
                 );
             }
-            if ($expr eq 'has_key(pick_keys(hash(meta),"a"),"a")') {
+            if ($expr eq 'has_key(pick_keys(meta,"a"),"a")') {
                 return $call->(
                     'has_key',
                     '__bad_has_key_host_call__()',
                     $call->(
                         'pick_keys',
                         '__bad_pick_keys_host_call__()',
-                        $call->('hash', '__bad_pick_hash_wrapper_host_call__()', $var->('meta')),
+                        $var->('meta'),
                         $str->('a'),
                     ),
                     $str->('a'),
                 );
             }
-            if ($expr eq 'take(array(items),1)') {
+            if ($expr eq 'take(items,1)') {
                 return $call->(
                     'take',
                     '__bad_take_host_call__()',
-                    $call->('array', '__bad_take_array_wrapper_host_call__()', $var->('items')),
+                    $var->('items'),
                     $num->(1),
                 );
             }
             return $orig_parse_action_expr->($expr, @rest);
         };
 
-        my $array_snapshot = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(array(items)))});
-        is($array_snapshot, q{return [@items]}, 'AST aggregate lowering preserves copy(array(items)) output');
-
-        my $hash_snapshot = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(hash(meta)))});
-        is($hash_snapshot, q{return {%meta}}, 'AST aggregate lowering preserves copy(hash(meta)) output');
-
-        my $copy_hash = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(hash(meta)))});
-        is($copy_hash, q{return {%meta}}, 'AST aggregate lowering preserves copy(hash(meta)) array/hash resolution');
-
         my $quoted_count = LinkedSpec::call_spec_handler_subst('Top', q{return(count(array("items")))});
         like($quoted_count, qr/\["items"\]/, 'AST aggregate lowering preserves quoted array wrapper literal payloads');
         unlike($quoted_count, qr/\@items\b/, 'AST aggregate lowering does not turn quoted wrapper payloads into array symbols');
 
-        my $sum = LinkedSpec::call_spec_handler_subst('Top', q{return(num_sum(array(items)))});
+        my $sum = LinkedSpec::call_spec_handler_subst('Top', q{return(num_sum(items))});
         like($sum, qr/\$__ls_num_sum_total/, 'AST aggregate lowering preserves numeric reducer output');
         like($sum, qr/\@items\b/, 'AST aggregate lowering preserves array symbol slots for numeric reducers');
 
-        my $take = LinkedSpec::call_spec_handler_subst('Top', q{return(take(array(items),1))});
+        my $take = LinkedSpec::call_spec_handler_subst('Top', q{return(take(items,1))});
         like($take, qr/\@items\b/, 'AST aggregate lowering preserves array collection symbol slots');
         like($take, qr/\$__ls_take_count = 1\b/, 'AST aggregate lowering preserves collection count value slots');
 
-        my $merge = LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(hash(base),set_key(hash(overlay),"stage",cat("a","b"))))});
+        my $merge = LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(base,set_key(overlay,"stage",cat("a","b"))))});
         like($merge, qr/%base/, 'AST aggregate lowering preserves merge_hash hash source slots');
         like($merge, qr/\$overlay/, 'AST aggregate lowering preserves the nested set_key typed-binding source');
         like($merge, qr/\@__ls_cat_parts/, 'AST aggregate lowering composes nested value-only helper slots');
 
-        my $has_key = LinkedSpec::call_spec_handler_subst('Top', q{return(has_key(pick_keys(hash(meta),"a"),"a"))});
+        my $has_key = LinkedSpec::call_spec_handler_subst('Top', q{return(has_key(pick_keys(meta,"a"),"a"))});
         like($has_key, qr/\$__ls_pick_source/, 'AST aggregate lowering preserves nested pick_keys hash helper output');
         like($has_key, qr/\$__ls_has_key/, 'AST aggregate lowering preserves has_key terminal output');
 
-        my $all = join("\n", $array_snapshot, $hash_snapshot, $copy_hash, $quoted_count, $sum, $take, $merge, $has_key);
+        my $all = join("\n", $quoted_count, $sum, $take, $merge, $has_key);
         unlike($all, qr/__bad_/, 'AST aggregate lowering does not reuse fake source text for supported calls');
     }
 
-    ok($parse_calls >= 8, 'aggregate helper calls entered through the AST parser');
+    ok($parse_calls >= 5, 'aggregate helper calls entered through the AST parser');
 };
 
 subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {

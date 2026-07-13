@@ -28,14 +28,14 @@ What this does:
 
 Accepted snippet forms:
   1) Lifecycle chain:
-     I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
+     I.lowercase_each(parts).filter_match(uniq(uppercase_each(parts)), /^[A-Z_]+$/)
   2) Lifecycle block:
      I { x = 1; return(x) }
   3) Action edge:
-     /a/ -> Top .lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
+     /a/ -> Top .lowercase_each(parts).filter_match(uniq(uppercase_each(parts)), /^[A-Z_]+$/)
      /a/ -> Top { return(retv) }
   4) Raw helper/expression:
-     filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
+     filter_match(uniq(uppercase_each(parts)), /^[A-Z_]+$/)
 
 Options:
   --label <name>         Default label context for non-edge snippets (default: Top)

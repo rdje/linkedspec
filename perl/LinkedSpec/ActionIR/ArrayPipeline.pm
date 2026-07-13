@@ -164,7 +164,10 @@ sub _build_array_pipeline_plan_from_expr {
 
  my $target_symbol = $extract_array_symbol_name->($trimmed);
  my $target_plan = { target_symbol => $target_symbol, ops => [] };
- my $binding_target = ($trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) ? 1 : 0;
+ my $binding_target = (
+  $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
+  && $trimmed !~ /^(?:IMATCH_LIST|LMATCH_LIST)$/o
+ ) ? 1 : 0;
  if (!$binding_target && $trimmed =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
   my $bare_symbol_kind = (ref($deps->{bare_symbol_kind}) eq 'CODE')
    ? $deps->{bare_symbol_kind}
@@ -186,7 +189,7 @@ sub _build_array_pipeline_plan_from_expr {
 
  if ($method eq 'split') {
   my @effective_args = @$args;
-  if ((@effective_args == 3 || @effective_args == 4) && $is_bare_method_scope_token->($effective_args[0])) {
+  if (@effective_args == 4 && $is_bare_method_scope_token->($effective_args[0])) {
    my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
    shift @effective_args if $scope_target_probe;
   }

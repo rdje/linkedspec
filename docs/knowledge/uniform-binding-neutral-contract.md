@@ -44,7 +44,7 @@ non-selector constructor calls such as `array()`, `array("literal")`, `array(exp
 `hash("key", value)`; literals remain canonical.
 
 Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` consume the unchanged cases.
-All backend alternatives execute; tracked source migration `.12.1.7` is active, and hard rejection follows it.
+All backend alternatives execute; tracked source migration `.12.1.7` is complete, and hard rejection follows it.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],
 [[uniform-expression-compatibility-retirement-doctrine]], [[terse-mutation-surface-ground-truth]].

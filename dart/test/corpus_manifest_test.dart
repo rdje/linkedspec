@@ -389,10 +389,10 @@ Done::
         'rule_dispatch_output',
         specSource: r'''
 Top::AND
- I { set(array(out), []) }
- => First { push(array(out), retv) }
- => Second { push(array(out), retv) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ => First { push(out, retv) }
+ => Second { push(out, retv) }
+ E { return(copy(out)) }
 
 First:
  /a/
@@ -410,14 +410,14 @@ Second:
         'lifecycle_output_shape',
         specSource: r'''
 Top::OR{1}
- I { push(array(events), "I") }
- LS { push(array(events), "LS") }
+ I { push(events, "I") }
+ LS { push(events, "LS") }
  /x/
- LE { push(array(events), "LE") }
- IT { push(array(events), "IT") }
- EX { push(array(events), "EX") }
- LX { push(array(events), "LX") }
- E { return(hash("cursor", cursor_pos(), "events", copy(array(events)))) }
+ LE { push(events, "LE") }
+ IT { push(events, "IT") }
+ EX { push(events, "EX") }
+ LX { push(events, "LX") }
+ E { return(hash("cursor", cursor_pos(), "events", copy(events))) }
 ''',
         inputText: 'x',
         expectedJson: {

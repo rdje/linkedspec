@@ -27,10 +27,10 @@ end
 
 const _GENERATED_FAMILY_MATRIX_SOURCE = raw"""
 DefaultRoot::
- I { set(array(words), []) }
+ I { set(words, []) }
  /hello[ \t]+(\w+)/
- LE { push(array(words), match_group(0)) }
- E { return(copy(array(words))) }
+ LE { push(words, match_group(0)) }
+ E { return(copy(words)) }
 
 OrAcode:OR
  /go/ -> OrDone { return("or-acode") }
@@ -61,37 +61,37 @@ OrBlindA: /a/ E { return("A") }
 OrBlindB: /b/ E { return("B") }
 
 RepAcode:OR{2,3}
- I { set(array(rep_acode), []) }
- /a/ -> RepA { push(array(rep_acode), match_text()) }
- /b/ -> RepB { push(array(rep_acode), match_text()) }
- E { return(copy(array(rep_acode))) }
+ I { set(rep_acode, []) }
+ /a/ -> RepA { push(rep_acode, match_text()) }
+ /b/ -> RepB { push(rep_acode, match_text()) }
+ E { return(copy(rep_acode)) }
 RepA: /a/
 RepB: /b/
 
 RepBcode:OR{2,3}
- I { set(array(rep_bcode), []) }
+ I { set(rep_bcode, []) }
  => RepBlindA
  => RepBlindB
- LE { push(array(rep_bcode), retv) }
- E { return(copy(array(rep_bcode))) }
+ LE { push(rep_bcode, retv) }
+ E { return(copy(rep_bcode)) }
 RepBlindA:& /a/ LE { return("A") }
 RepBlindB:& /b/ LE { return("B") }
 
 RepAndAcode:AND{2}
- I { set(array(rep_and_acode), []); set(array(rep_and_acode_pair), []) }
- /a/ -> RepAndA { push(array(rep_and_acode_pair), match_text()) }
- /b/ -> RepAndB { push(array(rep_and_acode_pair), match_text()) }
- IT { push(array(rep_and_acode), copy(array(rep_and_acode_pair))); set(array(rep_and_acode_pair), []) }
- E { return(copy(array(rep_and_acode))) }
+ I { set(rep_and_acode, []); set(rep_and_acode_pair, []) }
+ /a/ -> RepAndA { push(rep_and_acode_pair, match_text()) }
+ /b/ -> RepAndB { push(rep_and_acode_pair, match_text()) }
+ IT { push(rep_and_acode, copy(rep_and_acode_pair)); set(rep_and_acode_pair, []) }
+ E { return(copy(rep_and_acode)) }
 RepAndA: /a/
 RepAndB: /b/
 
 RepAndBcode:AND{2}
- I { set(array(rep_and_bcode), []); set(array(rep_and_bcode_group), []) }
- => RepAndBlindA { push(array(rep_and_bcode_group), retv) }
- => RepAndBlindB { push(array(rep_and_bcode_group), retv) }
- IT { push(array(rep_and_bcode), copy(array(rep_and_bcode_group))); set(array(rep_and_bcode_group), []) }
- E { return(copy(array(rep_and_bcode))) }
+ I { set(rep_and_bcode, []); set(rep_and_bcode_group, []) }
+ => RepAndBlindA { push(rep_and_bcode_group, retv) }
+ => RepAndBlindB { push(rep_and_bcode_group, retv) }
+ IT { push(rep_and_bcode, copy(rep_and_bcode_group)); set(rep_and_bcode_group, []) }
+ E { return(copy(rep_and_bcode)) }
 RepAndBlindA:& /a/ LE { return("A") }
 RepAndBlindB:& /b/ LE { return("B") }
 """

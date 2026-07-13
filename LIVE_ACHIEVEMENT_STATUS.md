@@ -8,6 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.3 — migrate embedded selector sources**
+  (DONE — all selector source migration complete; Perl hard rejection `.12.1.8.1` is next).
+
+  **Outcome:** Removed all 1,356 positive exact `array(name)` / `hash(name)` occurrences from 25 embedded
+  test/tool/backend source owners. A recurring classifier now reports zero executable positives and 25 exact
+  implementation/recognition occurrences, which are owned exclusively by the hard-retirement leaves.
+
+  **Runtime closure:** Migration exposed and closed backend rule-local initializer and accumulator assumptions,
+  Perl canonical-arity/optional-scope ordering, bare scoped push, internal array-pipeline ownership, and dynamic
+  `copy(name)` behavior in ordinary and user-function scopes. Known implicit rule accumulators retain private
+  array ownership without restoring a public namespace.
+
+  **Proof:** Complete Rust, Dart, Julia, and dual-ABI Lua gates pass; focused Perl and generated user-function
+  probes pass; the regenerated oracle contains 105 fixtures. Standalone Phase 0 passes `1..1031` in 920 seconds;
+  canonical capability 60/0/0, CLI 61x2, and Phase 0 `1..1031` pass in 918 seconds. The exact public forms are not
+  an open design issue: implementation rejection begins next.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate file-backed selector fixtures**
   (DONE — embedded source-string migration `.12.1.7.3` active).
 

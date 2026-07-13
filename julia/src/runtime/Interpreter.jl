@@ -1005,6 +1005,13 @@ function _execute_runtime_lifecycle!(
             for statement in payload.action_ast.statements
                 if statement.expr isa ActionAssignScalarExpr
                     _record_runtime_rule_local_binding!(context, statement.expr.name)
+                elseif statement.expr isa ActionCallExpr &&
+                        statement.expr.name == "set" &&
+                        !isempty(statement.expr.args)
+                    target = _runtime_variable_name(first(statement.expr.args).value)
+                    if target !== nothing
+                        _record_runtime_rule_local_binding!(context, target)
+                    end
                 end
             end
         end

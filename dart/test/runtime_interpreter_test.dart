@@ -8,10 +8,10 @@ void main() {
   test('executes regex repetition with lifecycle collection', () {
     final engine = _engine(r'''
 Top::
- I { set(array(words), []) }
+ I { set(words, []) }
  /hello[ \t]+(\w+)/
- LE { push(array(words), match_group(0)) }
- E { return(copy(array(words))) }
+ LE { push(words, match_group(0)) }
+ E { return(copy(words)) }
 ''');
 
     final result = engine.parse('hello one hello two');
@@ -34,7 +34,7 @@ Top::
       final engine = _engine(r'''
 top::
  -> item .push
- E { return(copy(array(top))) }
+ E { return(copy(top)) }
 
 item:
  /x/
@@ -54,7 +54,7 @@ item:
     final engine = _engine(r'''
 Top::
  -> Item { push(Item) }
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Item: /x/ I { return("item") }
 ''');
@@ -71,9 +71,9 @@ Item: /x/ I { return("item") }
     final engine = _engine(r'''
 Top::
  I { cur = undef; items = [] }
- LX { return(array(cur[1], copy(array(items)))) }
+ LX { return(array(cur[1], copy(items))) }
  -> object { cur = call(object) }
- -> version { push(array(items), call(version)) }
+ -> version { push(items, call(version)) }
 
 object: /(?i)\nobject:\s+(\S+)/ I.return(array("?object:", flat_array(entry_groups())))
 version: /(?i)\nversion:\s+(\S+)/ I.return(array("?version:", flat_array(entry_groups())))
@@ -107,7 +107,7 @@ Top::
  -> Item { push(Item, 1) }
  -> Comma
  -> Item { push(Item, 1) }
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Item: /"([^"]*)"/ I { return(array("item", entry_group(0))) }
 Comma: /,/ I { return(entry_text()) }
@@ -125,11 +125,11 @@ Comma: /,/ I { return(entry_text()) }
     final engine = _engine(r'''
 Top::
  -> Quote .push
- LX.return(array("top", copy(array(Top))))
+ LX.return(array("top", copy(Top)))
 
 Quote: /"/
  -> Text .push
- -> Quote .return(array("quote", copy(array(Quote))))
+ -> Quote .return(array("quote", copy(Quote)))
 
 Text: /x/
 ''');
@@ -148,12 +148,12 @@ Text: /x/
     final engine = _engine(r'''
 Top::
  -> Pair .push
- LX.return(array("top", copy(array(Top))))
+ LX.return(array("top", copy(Top)))
 
 Pair: /\[/ /\]/
  -> Other .push
  -> Another .push
- -> Pair[1] .return(array("pair", copy(array(Pair))))
+ -> Pair[1] .return(array("pair", copy(Pair)))
 
 Other: /x/
 Another: /y/
@@ -174,10 +174,10 @@ Another: /y/
 top::
  -> sexpr { return(call(sexpr)) }
 
-sexpr: /\(/ /\)/  I { set(array(items), []) }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
+sexpr: /\(/ /\)/  I { set(items, []) }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 ''');
@@ -196,8 +196,8 @@ atom: /[A-Za-z0-9]+/   I.return(entry_text())
 Top::
  I { items = [] }
  /x/
- LE { push(array(items), "head"); items += "tail" }
- LX { return(copy(array(items))) }
+ LE { push(items, "head"); items += "tail" }
+ LX { return(copy(items)) }
 ''');
 
     final result = engine.parse('x');
@@ -207,11 +207,11 @@ Top::
 
   test('preserves recursive top-rule LX sequence values', () {
     final engine = _engine(r'''
-sexpr:: /\(/ /\)/  I { set(array(items), []) }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
-LX { return(copy(array(items))) }
+sexpr:: /\(/ /\)/  I { set(items, []) }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
+LX { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 ''');
@@ -235,9 +235,9 @@ atom: /[A-Za-z0-9]+/   I.return(entry_text())
   test('keeps undeclared child array mutations caller visible', () {
     final engine = _engine(r'''
 Top::
- -> Child { call(Child); return(copy(array(items))) }
+ -> Child { call(Child); return(copy(items)) }
 
-Child: /x/ I { push(array(items), "child") }
+Child: /x/ I { push(items, "child") }
 ''');
 
     final result = engine.parse('x');
@@ -248,10 +248,10 @@ Child: /x/ I { push(array(items), "child") }
   test('executes AND blind-call dispatch in sequence', () {
     final engine = _engine(r'''
 Top::AND
- I { set(array(log), []) }
- => ChildA { push(array(log), retv) }
- => ChildB { push(array(log), retv) }
- E { return(copy(array(log))) }
+ I { set(log, []) }
+ => ChildA { push(log, retv) }
+ => ChildB { push(log, retv) }
+ E { return(copy(log)) }
 
 ChildA:
  /a/
@@ -355,10 +355,10 @@ ChildB::
   test('honors bounded OR repetition over action-edge alternatives', () {
     final engine = _engine(r'''
 Top::OR{2,3}
- I { set(array(out), []) }
- /a/ -> A { push(array(out), match_text()) }
- /b/ -> B { push(array(out), match_text()) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ /a/ -> A { push(out, match_text()) }
+ /b/ -> B { push(out, match_text()) }
+ E { return(copy(out)) }
 
 A:
  /a/
@@ -376,10 +376,10 @@ B:
   test('cuts zero-progress repetition after one successful iteration', () {
     final engine = _engine(r'''
 Top::OR+
- I { set(array(iters), []) }
+ I { set(iters, []) }
  /x*/
- LE { push(array(iters), "i") }
- E { return(copy(array(iters))) }
+ LE { push(iters, "i") }
+ E { return(copy(iters)) }
 ''');
 
     final result = engine.parse('abc');
@@ -391,14 +391,14 @@ Top::OR+
   test('records repeated lifecycle order around loop exhaustion', () {
     final engine = _engine(r'''
 Top::OR{1}
- I { push(array(events), "I") }
- LS { push(array(events), "LS") }
+ I { push(events, "I") }
+ LS { push(events, "LS") }
  /a/
- LE { push(array(events), "LE") }
- IT { push(array(events), "IT") }
- EX { push(array(events), "EX") }
- LX { push(array(events), "LX") }
- E { return(copy(array(events))) }
+ LE { push(events, "LE") }
+ IT { push(events, "IT") }
+ EX { push(events, "EX") }
+ LX { push(events, "LX") }
+ E { return(copy(events)) }
 ''');
 
     final result = engine.parse('a');
@@ -418,25 +418,25 @@ Top::OR{1}
   test('rewinds cursor through explicit match and entry helpers', () {
     final entryRewindEngine = _engine(r'''
 Top::AND
- I { set(array(log), []) }
- /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ I { set(log, []) }
+ /ab/ -> Top[0] { push(log, hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
    rewind_entry_start();
-   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+   push(log, hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 ''');
     final matchRewindEngine = _engine(r'''
 Top::AND
- I { set(array(log), []) }
- /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ I { set(log, []) }
+ /ab/ -> Top[0] { push(log, hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
    rewind_match_start();
-   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+   push(log, hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 ''');
 
     final entryRewindResult = entryRewindEngine.parse('abcd');
@@ -486,9 +486,9 @@ Top::AND
   test('captures until named boundary without consuming the boundary', () {
     final engine = _engine(r'''
 Top::
- I { set(array(out), []) }
+ I { set(out, []) }
  -> Annotation.push(out)
- LX { return(copy(array(out))) }
+ LX { return(copy(out)) }
 
 Annotation: /@(\w+):[ \t]*/
  I { body = capture_until_boundary(Annotation, Boundary); return(hash("kind", "annotation", "name", entry_group(0), "body", trim(body), "cursor", cursor_pos(), "rest", cursor_rest())) }
@@ -653,14 +653,14 @@ Top::
  /x/
  E {
    set(value, "ok");
-   set(array(items), ["a"]);
+   set(items, ["a"]);
    items += value;
-   set(hash(meta), { "k" : "v" });
+   set(meta, { "k" : "v" });
    meta["n"] = 2;
    payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] };
    return(hash(
-     "items", copy(array(items)),
-     "meta", copy(hash(meta)),
+     "items", copy(items),
+     "meta", copy(meta),
      "name", payload["children"][1]["name"]
    ))
  }
@@ -686,9 +686,9 @@ Top::
    return(array(
      items[0],
      copy(items),
-     copy(array(items)),
-     hash(meta),
-     copy(hash(meta)),
+     copy(items),
+     meta,
+     copy(meta),
      meta["key"]
    ))
  }
@@ -717,9 +717,9 @@ Top::
    set(key, "stage");
    return(array(
      items = [value],
-     copy(array(items)),
+     copy(items),
      set(meta, { key : value }),
-     copy(hash(meta))
+     copy(meta)
    ))
  }
 ''');
@@ -847,7 +847,7 @@ Top::
  /(.+)/
  E {
    raw = entry_group(0);
-   set(array(tmp), ["x"]);
+   set(tmp, ["x"]);
    missing = tmp[5];
    return(hash(
      "trim", trim(raw),
@@ -996,10 +996,10 @@ Top::
    items += "a";
    phrases += "aa-b";
    phrases += "cc-aa";
-   set(array(public), [" x ", "", "Y"]);
+   set(public, [" x ", "", "Y"]);
    return(hash(
      "sorted_drop_first", items.sorted().drop_front(2).first(),
-     "reverse_take_last", array(items).reversed().take(2).last(),
+     "reverse_take_last", items.reversed().take(2).last(),
      "contains", items.sorted().contains("c"),
      "index", items.sorted().index_of("c"),
      "drop_join", items.drop_back().join_values("|"),
@@ -1015,7 +1015,7 @@ Top::
      "concat", concat_arrays(array("x"), array("y", "z")),
      "sum", array(2, 4, 6).sum(),
      "avg", array(2, 4, 6).avg(),
-     "source", copy(array(items)),
+     "source", copy(items),
      "empty_missing", missing.sorted().is_empty()
    ))
  }
@@ -1056,19 +1056,19 @@ Top::
  /x/
  E {
    raw = " left , right,,third ";
-   split(array(parts), raw, /\s*,\s*/);
+   split(parts, raw, /\s*,\s*/);
    items.push_back("a");
    items.push_back("b");
    items.push_front("z");
    items.pop_back();
    items.pop_front();
-   array(items).push_back("c");
+   items.push_back("c");
    return(hash(
-     "parts", copy(array(parts)),
+     "parts", copy(parts),
      "receiver_split", "a, b".split(/\s*,\s*/),
-     "items", copy(array(items)),
+     "items", copy(items),
      "value_push", items.push_back("bad"),
-     "after_value_push", copy(array(items)),
+     "after_value_push", copy(items),
      "tagged", split_tagged_records("a,b", /,/, "?tag:", "field")
    ))
  }
@@ -1099,8 +1099,8 @@ Top::
    parts = []
    substr(value, "\"|\\s", "", go)
    regex_subst(numbered, /(\d+)/, "[$1]", g)
-   split(array(parts), value, /,/)
-   return(hash("value", value, "numbered", numbered, "parts", copy(array(parts))))
+   split(parts, value, /,/)
+   return(hash("value", value, "numbered", numbered, "parts", copy(parts)))
  }
 ''');
 
@@ -1121,7 +1121,7 @@ Top::
    set_key(meta, "b", 2)
    set_key(meta, "a", 1)
    set_key(meta, "drop", 0)
-   set_key(hash(meta), "stmt_hash", 4)
+   set_key(meta, "stmt_hash", 4)
    set_key(overlay, "a", 10)
    set_key(overlay, "c", 3)
    value_set = set_key(meta, "value_only", 9)
@@ -1132,18 +1132,18 @@ Top::
      "count", meta.count_keys(),
      "has_a", meta.has_key("a"),
      "drop_pick", meta.drop_keys("drop").pick_keys("a", "stmt_hash").sorted_values(),
-     "rename", hash(meta).rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
-     "merged", merge_hash(copy(hash(meta)), overlay).sorted_values(),
+     "rename", meta.rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
+     "merged", merge_hash(copy(meta), overlay).sorted_values(),
      "bare_first_merge", merge_hash(meta, overlay).sorted_keys(),
      "value_set_has", value_set.has_key("value_only"),
      "receiver_set_has", receiver_set.has_key("receiver_only"),
-     "after_value_set", copy(hash(meta)).has_key("value_only"),
-     "after_receiver_set", copy(hash(meta)).has_key("receiver_only"),
+     "after_value_set", copy(meta).has_key("value_only"),
+     "after_receiver_set", copy(meta).has_key("receiver_only"),
      "index_value", meta["expr"] = "E",
-     "after_index_value", copy(hash(meta)).has_key("expr"),
-     "flat_splice", hash("z", 0, flat(hash(meta))).sorted_keys().join_values(","),
+     "after_index_value", copy(meta).has_key("expr"),
+     "flat_splice", hash("z", 0, flat(meta)).sorted_keys().join_values(","),
      "flat_hash_splice", hash("z", 0, meta.flat_hash()).sorted_keys().join_values(","),
-     "map_field", hash("nested", copy(hash(meta))).pick_keys("nested")
+     "map_field", hash("nested", copy(meta)).pick_keys("nested")
    ))
  }
 ''');
@@ -1224,14 +1224,14 @@ Top::
   test('treats empty aggregate returns as successful matches', () {
     final hashEngine = _engine(r'''
 Top::
- /x/ -> Done { return(copy(hash(m))) }
+ /x/ -> Done { m = {}; return(copy(m)) }
 
 Done::
  /[a-z]+/
 ''');
     final arrayEngine = _engine(r'''
 Top::
- /x/ -> Done { return(copy(array(items))) }
+ /x/ -> Done { items = []; return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -1260,7 +1260,7 @@ Top::
    if(false);
    return("bad");
    else();
-   return(array(flag, copy(array(items)), copy(hash(meta))));
+   return(array(flag, copy(items), copy(meta)));
    endif()
  }
 ''');
@@ -1284,13 +1284,13 @@ Top::
    nonhash = "x".map_leaves() { seen += "bad" };
    nonarray = "x".walk_leaves() { seen += "bad" };
    return(array(
-     meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) },
+     meta.map_leaves() { return(cat(join_values("/", path), "=", coalesce_nonempty(join_values("", value), value))) },
      meta.reduce_leaves("") { return(cat(acc, key)) },
-     meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(),
-     items.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)))) },
-     items.reduce_leaves("") { return(cat(acc, join_values("/", array(path)), ":", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)), ";")) },
-     items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count(),
-     array(seen),
+     meta.walk_leaves() { seen += join_values("/", path); return(value) }.count_keys(),
+     items.map_leaves() { return(cat(join_values("/", path), "=", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)))) },
+     items.reduce_leaves("") { return(cat(acc, join_values("/", path), ":", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)), ";")) },
+     items.walk_leaves() { seen += join_values("/", path); return(value) }.count(),
+     seen,
      is_undefined(nonhash),
      is_undefined(nonarray)
    ))
@@ -1366,7 +1366,7 @@ Top::
  /x/
  E {
    set(value, "caller");
-   set(array(items), ["caller"]);
+   set(items, ["caller"]);
    discard("ignored");
    normalize(" A-B ").lowercase();
    eager = echo(set(value, "arg"));
@@ -1376,7 +1376,7 @@ Top::
      "eager", eager,
      "normal", normalize(" A-B ").lowercase().replace_substr("-", "_"),
      "shaped", shaped,
-     "items", copy(array(items))
+     "items", copy(items)
    ))
  }
 ''',
@@ -1390,9 +1390,9 @@ Top::
           'use_shapes',
           const ['items', 'meta'],
           [
-            'set(array(items), items.sorted())',
-            'set_key(hash(meta), "extra", "ok")',
-            'return(hash("first", items.first(), "meta", copy(hash(meta))))',
+            'set(items, items.sorted())',
+            'set_key(meta, "extra", "ok")',
+            'return(hash("first", items.first(), "meta", copy(meta)))',
           ].join('; '),
         ),
       ],

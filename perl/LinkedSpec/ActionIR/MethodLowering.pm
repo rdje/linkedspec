@@ -1863,7 +1863,8 @@ sub _lower_ast_call_statement {
   } elsif ($method eq 'push' && @$args == 3) {
    my $scoped_target_expr = $trim_action_ir_value->($args->[1]);
    return undef unless defined($scoped_target_expr) && length($scoped_target_expr);
-   return undef unless defined($extract_array_symbol_name->($scoped_target_expr));
+   return undef unless defined($extract_array_symbol_name->($scoped_target_expr))
+                    || $scoped_target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    $effective_args = [ $args->[1], $args->[2] ];
   } else {
    return _actionir_ast_unsupported_helper_expr($method);
@@ -2097,6 +2098,14 @@ sub _lower_method_value_expr {
  my $split_action_ir_statements = $require_dep->('split_action_ir_statements');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $normalize_collection_args = sub {
+  my ($args, $min_arity, $max_arity) = @_;
+  return undef unless ref($args) eq 'ARRAY';
+  my $count = scalar(@$args);
+  return [@$args]
+   if $count >= $min_arity && (!defined($max_arity) || $count <= $max_arity);
+  return $normalize_method_args_with_optional_scope->($args, $min_arity, $max_arity)
+ };
  my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
  my $raw_extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
  my $raw_extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
@@ -2339,8 +2348,8 @@ sub _lower_method_value_expr {
    }
    my $array_symbol = $extract_array_symbol_name->($array_expr);
    return '@'.$array_symbol if defined($array_symbol) && length($array_symbol);
-   return undef unless $looks_like_array_value_expr->($array_expr);
    my $lowered_array = _lower_method_value_expr($array_expr, $deps);
+   $lowered_array = $array_expr unless defined($lowered_array) && length($lowered_array);
    return undef unless defined($lowered_array) && length($lowered_array);
    return 'do { my $__ls_flat_array = '.$lowered_array.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
   }
@@ -2356,8 +2365,8 @@ sub _lower_method_value_expr {
    }
    my $hash_symbol = $extract_hash_symbol_name->($hash_expr);
    return '%'.$hash_symbol if defined($hash_symbol) && length($hash_symbol);
-   return undef unless $looks_like_hash_value_expr->($hash_expr);
    my $lowered_hash = _lower_method_value_expr($hash_expr, $deps);
+   $lowered_hash = $hash_expr unless defined($lowered_hash) && length($lowered_hash);
    return undef unless defined($lowered_hash) && length($lowered_hash);
    return 'do { my $__ls_flat_hash = '.$lowered_hash.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
   }
@@ -2493,9 +2502,9 @@ sub _lower_method_value_expr {
    return $saw_array_like ? 1 : 0;
   }
 
-  # SPEC-FORMAT-TERSE.1.4.1 — the unified terse `copy(X)` is array-like iff X names an array
-  # symbol (mirrors the lowering dispatch's array-first resolution); a bare `copy(x)` is
-  # array-like. This keeps `copy` first-class in array type-inference (e.g. num_sum(copy(array(x)))).
+  # `copy(X)` remains admissible to array-consuming helpers when X is known as
+  # an array or is not statically typed; the emitted copy itself still checks
+  # the one runtime binding's actual reference kind.
   if ($candidate_method eq 'copy') {
    my $copy_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 1, 1);
    return 0 unless $copy_args;
@@ -2552,9 +2561,9 @@ sub _lower_method_value_expr {
    return $saw_hash_like ? 1 : 0;
   }
 
-  # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does NOT
-  # resolve as an array (array-first precedence, mirroring the lowering dispatch), so a bare
-  # `copy(x)` / `copy(array(x))` stays array-only and is never double-classified.
+  # Hash-consuming contexts accept `copy(X)` when X is statically known as a
+  # hash. Untyped copies remain runtime-checked and explicit `flat_hash(...)`
+  # supplies the hash-consuming context when needed.
   if ($candidate_method eq 'copy') {
    my $copy_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 1, 1);
    return 0 unless $copy_args;
@@ -3760,6 +3769,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
   foreach my $arg (@$args) {
    my $arg_expr = $lower_ast_scalar_assignment_value_node->($arg);
    my $internal_array_pipeline_arg_expr;
+   if (!(defined($arg_expr) && length($arg_expr))
+       && ref($arg) eq 'HASH'
+       && ($arg->{kind} // '') eq 'variable'
+       && _user_function_scalar_value_name($deps, $arg->{name})) {
+    # Aggregate helpers own the runtime typed-value interpretation of a bare
+    # binding. Preserve its spec-level name here instead of exposing the Perl
+    # scalar spelling to the compatibility lowerer.
+    $arg_expr = $arg->{name};
+   }
    if (!(defined($arg_expr) && length($arg_expr))
        && ref($arg) eq 'HASH'
        && ($arg->{kind} // '') eq 'call'
@@ -5278,7 +5296,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_last = '.$lowered_target.'; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }';
  }
  if ($method_call && $method_call->{method} eq 'drop_front') {
-  my $tail_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
+  my $tail_args = $normalize_collection_args->($method_call->{args} || [], 1, 2);
   return undef unless $tail_args;
 
   my $target_expr = $trim_action_ir_value->($tail_args->[0]);
@@ -5308,7 +5326,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_tail = '.$lowered_target.'; if (defined($__ls_tail) && ref($__ls_tail) eq \'ARRAY\') { my $__ls_tail_skip = '.$tail_skip_expr.'; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'take') {
-  my $take_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
+  my $take_args = $normalize_collection_args->($method_call->{args} || [], 1, 2);
   return undef unless $take_args;
 
   my $target_expr = $trim_action_ir_value->($take_args->[0]);
@@ -5338,7 +5356,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
  return 'do { my $__ls_take = '.$lowered_target.'; if (defined($__ls_take) && ref($__ls_take) eq \'ARRAY\') { my $__ls_take_count = '.$take_count_expr.'; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'slice') {
-  my $slice_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3);
+  my $slice_args = $normalize_collection_args->($method_call->{args} || [], 2, 3);
   return undef unless $slice_args;
 
   my $target_expr = $trim_action_ir_value->($slice_args->[0]);
@@ -5372,7 +5390,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_slice = '.$lowered_target.'; if (defined($__ls_slice) && ref($__ls_slice) eq \'ARRAY\') { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = '.$slice_count_expr.'; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'take_last') {
-  my $take_last_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
+  my $take_last_args = $normalize_collection_args->($method_call->{args} || [], 1, 2);
   return undef unless $take_last_args;
 
   my $target_expr = $trim_action_ir_value->($take_last_args->[0]);
@@ -5402,7 +5420,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_take_last = '.$lowered_target.'; if (defined($__ls_take_last) && ref($__ls_take_last) eq \'ARRAY\') { my $__ls_take_last_count = '.$take_last_count_expr.'; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'drop_back') {
-  my $drop_last_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
+  my $drop_last_args = $normalize_collection_args->($method_call->{args} || [], 1, 2);
   return undef unless $drop_last_args;
 
   my $target_expr = $trim_action_ir_value->($drop_last_args->[0]);
@@ -5432,7 +5450,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
  return 'do { my $__ls_drop_last = '.$lowered_target.'; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq \'ARRAY\') { my $__ls_drop_last_count = '.$drop_last_count_expr.'; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'concat_arrays') {
-  my $concat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
+  my $concat_args = $normalize_collection_args->($method_call->{args} || [], 1, undef);
   return undef unless $concat_args && @$concat_args >= 1;
 
   my @parts;
@@ -5445,8 +5463,6 @@ if ($method_call && $method_call->{method} eq 'num_add') {
     push @parts, '@'.$array_symbol;
     next;
    }
-
-   return undef unless $looks_like_array_value_expr->($target_expr);
 
    my $lowered_target = _lower_method_value_expr($target_expr, $deps);
    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
@@ -5665,7 +5681,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return 'do { my $__ls_has_key = '.$lowered_target.'; defined($__ls_has_key) ? ((exists $__ls_has_key->{'.$key_lowered.'}) ? 1 : 0) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'merge_hash') {
-  my $merge_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
+  my $merge_args = $normalize_collection_args->($method_call->{args} || [], 1, undef);
   return undef unless $merge_args && @$merge_args >= 1;
 
   my @parts;
@@ -5747,7 +5763,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return 'do { my $__ls_rename_key_source = '.$lowered_target.'; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{'.$old_key_lowered.'}) { my $__ls_rename_key_value = delete $__ls_rename_key{'.$old_key_lowered.'}; $__ls_rename_key{'.$new_key_lowered.'} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'drop_keys') {
-  my $drop_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $drop_args = $normalize_collection_args->($method_call->{args} || [], 2, undef);
   return undef unless $drop_args && @$drop_args >= 2;
 
   my $target_expr = $trim_action_ir_value->($drop_args->[0]);
@@ -5775,7 +5791,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{'.join(', ', @lowered_keys).'}; \%__ls_drop } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'pick_keys') {
-  my $pick_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $pick_args = $normalize_collection_args->($method_call->{args} || [], 2, undef);
   return undef unless $pick_args && @$pick_args >= 2;
 
   my $target_expr = $trim_action_ir_value->($pick_args->[0]);
@@ -5872,9 +5888,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  }
  my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
  return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);
- # Current `copy(NAME)` keeps explicit
- # `array(NAME)` / `hash(NAME)` meanings and lets initialized bare names use their
- # remembered kind before the array-first fallback for untyped bare names.
+ # `copy(NAME)` snapshots the one runtime-typed binding. Temporary selector
+ # recognition remains below only until the hard-retirement leaf removes it.
  if ($method_call && $method_call->{method} eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $copy_args;
@@ -5891,7 +5906,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    my $array_symbol = $extract_array_symbol_name->($container_expr);
    return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol);
   }
-  if (defined($remembered_kind) && $remembered_kind eq 'scalar'
+  if ((!defined($remembered_kind) || $remembered_kind eq 'scalar')
       && $container_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
    my $name = $1;
    return 'do { my $__ls_copy_value = $'.$name.'; '
@@ -7370,7 +7385,8 @@ sub _lower_push_statement {
  } elsif (@$raw_args == 3) {
   my $scoped_target_expr = $trim_action_ir_value->($raw_args->[1]);
   return undef unless defined($scoped_target_expr) && length($scoped_target_expr);
-  return undef unless defined($extract_array_symbol_name->($scoped_target_expr));
+  return undef unless defined($extract_array_symbol_name->($scoped_target_expr))
+                   || $scoped_target_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $effective_args = [ $raw_args->[1], $raw_args->[2] ];
  } else {
   return undef;

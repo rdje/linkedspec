@@ -52,12 +52,12 @@ foreach my $fixture (@{$contract->{fixtures}}) {
  my $literal = spec_quote($fixture->{input});
  my $spec = "Top::\n"
   . " /x/ -> Done {\n"
-  . "   set(array(lower_items), [$literal])\n"
-  . "   lowercase_each(array(lower_items))\n"
-  . "   set(array(upper_items), [$literal])\n"
-  . "   uppercase_each(array(upper_items))\n"
+  . "   set(lower_items, [$literal])\n"
+  . "   lowercase_each(lower_items)\n"
+  . "   set(upper_items, [$literal])\n"
+  . "   uppercase_each(upper_items)\n"
   . "   return(array(lowercase($literal), $literal.lowercase(), uppercase($literal), "
-  . "$literal.uppercase(), copy(array(lower_items)), copy(array(upper_items))))\n"
+  . "$literal.uppercase(), copy(lower_items), copy(upper_items)))\n"
   . " }\n\n"
   . "Done::\n /x/\n";
  my $parser = LinkedSpec::Get(\$spec, parse_mode => 'consume');

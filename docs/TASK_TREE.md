@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | File-backed migration `.12.1.7.2` removes the remaining 390 exact forms from 67 fixtures/corpora; every tracked `.spec` file is selector-free and embedded-source migration `.12.1.7.3` is active. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Source migration `.12.1.7.1-.3` is complete at zero executable selector positives; Perl hard rejection `.12.1.8.1` is next. Toolbox inspector repair `.13.1` is queued behind the selector arc. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | Global uniform-binding delegation passes 85/85 on PUC Lua and LuaJIT; scalar numeric `.4.3.3.1.4` resumes after selector retirement. Future variadic/native/descriptor/generated obligations remain explicit. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `JULIA-BACKEND-PARITY` | `active` (delegated global obligations) | `Overall roadmap - future backend parity (Julia second)` | Current proof is 1,311 package assertions, 105 fixtures, and exact CLI 61x2. Uniform-binding delegation `.12.1.5` is complete; only later explicitly delegated language evolution remains. | [docs/tasks/JULIA-BACKEND-PARITY.md](docs/tasks/JULIA-BACKEND-PARITY.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -848,6 +848,17 @@ Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.7.2` removes the remaining 39
 file-backed capability/oracle/corpus specs. Every tracked `*.spec` file now scans at zero; five-backend proof
 preserves expected behavior, and embedded test/tool/backend source strings are active under `.12.1.7.3` before
 hard syntax rejection.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.7.3` removes all 1,356 positive exact selectors from 25
+embedded test/tool/backend source owners. The recurring classifier reports zero executable positives and 25
+implementation/recognition occurrences reserved for hard retirement. Complete backend gates, the regenerated
+105-fixture oracle, standalone Phase 0 `1..1031`/920s, and canonical Phase 0 `1..1031`/918s pass. Source migration
+is complete; Perl rejection `.12.1.8.1` is next.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.13.1` records a toolbox regression discovered during `.12.1.7.3`:
+`tools/inspect_spec_codegen.pl` still calls private methods through the Phase 1A-thinned facade, so plugin AUTOLOAD
+reports `_rewrite_action_code_with_diagnostics` / `_render_method_call_chain` as unknown plugins. Repair and a
+recurring smoke lock are queued after selector retirement; they do not interrupt the active `.12.1` arc.
 
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral

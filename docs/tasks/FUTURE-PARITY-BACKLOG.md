@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (all file-backed `.spec` selector migration `.12.1.7.2` complete; embedded-source `.12.1.7.3` active).
+- Last updated: `2026-07-12` (all selector-shaped source migration `.12.1.7` complete; Perl hard rejection `.12.1.8.1` is next).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,7 +26,8 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The eleven backlog directions are represented as owned task-tree lanes.
+- The thirteen backlog directions are represented as owned task-tree lanes, including compatibility retirement and
+  repair of the codegen-inspector toolbox regression discovered while proving selector-source migration.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
@@ -55,7 +56,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -2800,7 +2801,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7`
-  Status: `active`
+  Status: `done`
   Goal: Migrate every tracked `.spec` and embedded source away from exact aggregate selectors.
   Children: `.12.1.7.1`, `.12.1.7.2`, `.12.1.7.3`
   Dependencies: `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`
@@ -2831,8 +2832,16 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.7.2 - migrate file-backed selector fixtures`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7.3`
-  Status: `active`
+  Status: `done`
   Goal: Migrate embedded test/tool/backend source strings and verify zero executable selector-shaped sources.
+  Verification: **PASS 2026-07-12.** All 1,356 positive exact occurrences are removed from 25 embedded
+    test/tool/backend source owners. The recurring executable-source checker reports zero positives and 25
+    mechanically classified implementation/recognition occurrences reserved for hard retirement. Complete
+    Rust, Dart, Julia, and dual-ABI Lua gates pass; focused Perl contracts and generated user-function probes
+    pass; the regenerated oracle corpus contains all 105 fixtures. Standalone Phase 0 passes `1..1031` in 920
+    seconds, and the canonical local gate passes capability 60/0/0, CLI 61x2, and Phase 0 `1..1031` in 918
+    seconds. Knowledge Map, doctrines, task metadata, mdBook, and whitespace checks pass.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8`
   Status: `pending`
@@ -2869,6 +2878,20 @@ before implementation.
   Goal: Close uniform-binding docs, mdBook examples, Knowledge Map, capability, and complete no-drift gates.
   Acceptance: Public docs teach bare typed bindings and literals/retained constructors only; no compatibility
     caveat, example, test, source, diagnostic, or backend still admits selector semantics.
+
+- ID: `FUTURE-PARITY-BACKLOG.13`
+  Status: `pending`
+  Goal: Restore the codegen-inspector toolbox to the current thin-facade owner architecture.
+  Children: `.13.1`
+  Dependencies: `.12.1`
+  Acceptance: `tools/inspect_spec_codegen.pl` invokes explicit owner APIs rather than facade AUTOLOAD/plugin
+    fallback, all four documented snippet forms execute, and a recurring smoke test prevents owner extraction from
+    silently breaking the inspector again.
+
+- ID: `FUTURE-PARITY-BACKLOG.13.1`
+  Status: `pending`
+  Goal: Rewire and regression-lock `tools/inspect_spec_codegen.pl` after the Phase 1A facade extraction.
+  Dependencies: `.12.1`
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3027,6 +3050,40 @@ before implementation.
 - [x] **LOCKSTEP** — Corpus inputs/derived expectations/task/index, roadmaps, README/book, KM, changes/notes/live,
   and memory identify file-backed migration complete and embedded source-string migration `.12.1.7.3` as next.
 
+### `FUTURE-PARITY-BACKLOG.12.1.7.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the boundary-correct baseline of 1,356 positive exact occurrences across 25
+  test/tool/backend files or test-only source sections, separated from 28 implementation/neutral-contract
+  occurrences in recognizers, diagnostics, comments, two explicit compatibility-path tests, and the removed-syntax
+  checker; exclude four dotted Lua host `json.array(...)` calls, documentation/history, and ordinary constructors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify tests and tools that still compile or execute legacy selector source,
+  distinguish source assertions from host implementation text, and preserve the hard-rejection evidence owned by
+  `.12.1.8` without allowing compatibility syntax to remain an executable positive fixture.
+- [x] **FIX** — Migrate every positive embedded test/tool/backend spec source to bare typed bindings and literals;
+  update derived AST/source expectations only where those embedded inputs genuinely change.
+- [x] **ADDRESSED (verified)** — A boundary-correct executable-source scan reaches zero positive selector inputs;
+  any remaining exact spellings are mechanically classified as implementation recognition/diagnostic text,
+  neutral rejection/migration contract data, or non-executable historical documentation.
+- [x] **NO REGRESSION** — Focused Perl/Rust/Dart/Julia/Lua parser/runtime/generated-source tests, complete backend
+  gates, uniform/capability contracts, canonical CI, doctrines/KM/mdBook/whitespace, and artifact cleanup pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify all source
+  migration complete and Perl hard rejection `.12.1.8.1` as next.
+
+### `FUTURE-PARITY-BACKLOG.13.1` Acceptance Checklist
+
+- [ ] **REPRODUCE / ISSUE** — Preserve exact raw-expression and lifecycle/action-chain inspector failures showing
+  plugin AUTOLOAD receives `_rewrite_action_code_with_diagnostics` and `_render_method_call_chain`.
+- [ ] **ROOT CAUSE (WHY + WHERE)** — Confirm current implementations/ownership, thin-facade history, tool callers,
+  and whether any supported public probe seam should replace direct private-owner calls.
+- [ ] **FIX** — Route all four documented snippet forms through explicit current owners or one deliberate stable
+  inspection API; do not expose unrelated internals through the public facade.
+- [ ] **ADDRESSED (verified)** — Raw helper, lifecycle block, lifecycle chain, and action-edge block/chain examples
+  print generated Perl plus canonical diagnostics without plugin dispatch.
+- [ ] **NO REGRESSION** — Add a recurring smoke test and pass focused tool/ActionIR, Phase-0, doctrine/KM/mdBook,
+  whitespace, and canonical local gates.
+- [ ] **LOCKSTEP** — Task/index, TOOLBOX/README, Knowledge Map, changes/notes/live, and memory identify the restored
+  inspector contract and next PNT frontier.
+
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Duck-typed values coexist with legacy wrapper-selected scalar/aggregate namespaces,
@@ -3150,10 +3207,10 @@ before implementation.
 | 87 | `FUTURE-PARITY-BACKLOG.12.1.4` | `done` | Dart native/generated execution consumes the one-binding contract. |
 | 88 | `FUTURE-PARITY-BACKLOG.12.1.5` | `done` | Julia native/generated execution consumes the one-binding contract. |
 | 89 | `FUTURE-PARITY-BACKLOG.12.1.6` | `done` | Both Lua ABIs consume the one-binding contract before tracked source migration. |
-| 90 | `FUTURE-PARITY-BACKLOG.12.1.7` | `active` | All backends are enabled; migrate every tracked selector-shaped source before hard rejection. |
+| 90 | `FUTURE-PARITY-BACKLOG.12.1.7` | `done` | All 1,956 tracked selector-shaped sources are migrated; hard rejection is next. |
 | 91 | `FUTURE-PARITY-BACKLOG.12.1.7.1` | `done` | All 210 exact shipped occurrences are removed; reference/generated behavior and full canonical gates pass. |
 | 92 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `done` | All 390 exact file-backed occurrences are removed from 67 capability/oracle/corpus specs; all tracked `.spec` files scan at zero. |
-| 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `active` | Migrate embedded test/tool/backend source strings and prove zero executable selector sources. |
+| 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `done` | All 1,356 positive embedded occurrences are removed; recurring scan reports zero positives and 25 classified recognizer occurrences. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3847,6 +3904,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.6` | Nine exact uniform-binding cases; complete PUC Lua and LuaJIT 85/85; exact 105-case manifest/scaffold CLI; immediately prior canonical doctrines/contracts, 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030`/865s; KM/governance/whitespace/mdBook. | PASS. Lua is the fifth enabled backend; bare mutations/results, precedence, diagnostics, and chaining pass before shipped-source migration `.12.1.7.1`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.1` | Boundary-correct inventory; 15 shipped specs; Perl pure-helper read seam; focused live/generated contract; all descriptors; CLI 61x2; canonical doctrines/contracts/capability and Phase 0 `1..1031`/573s; mdBook/KM/whitespace. | PASS. Shipped exact selectors fall 210 to zero; 390 tracked occurrences remain for `.12.1.7.2-.3`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.2` | 390 exact forms/67 file-backed specs; three `[undef]` constructions; Perl live EBNF/recursive/traversal probes; Rust native/generated 105 corpora and full gate; Dart/Julia full gates and 105 corpora; Lua dual-ABI 85/85 plus 105-manifest validation; canonical 60/0/0, CLI 61x2, Phase 0 `1..1031`/574s; docs/KM/governance. | PASS. Every tracked `.spec` file is selector-free; exposed initializer/accumulator/fluent-push/descriptor seams are permanently locked and embedded-source `.12.1.7.3` is active. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.3` | 1,356 exact positive forms/25 embedded source owners; recurring executable-source classifier at 0 positive/25 recognition; focused Perl generated/function/runtime proof; complete Rust/Dart/Julia/Lua gates; regenerated 105-fixture oracle; standalone Phase 0 `1..1031`/920s; canonical capability 60/0/0, CLI 61x2, Phase 0 `1..1031`/918s; docs/KM/governance/mdBook/whitespace. | PASS. All tracked source migration is complete; implementation recognition remains only for dependency-ordered hard rejection beginning with Perl `.12.1.8.1`. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |

@@ -33,11 +33,11 @@ include("uniform_binding_contract_test.jl")
         source = """
 Top::
  /x/ -> Done {
-   set(array(lower_items), [$literal])
-   lowercase_each(array(lower_items))
-   set(array(upper_items), [$literal])
-   uppercase_each(array(upper_items))
-   return([lowercase($literal), $literal.lowercase(), uppercase($literal), $literal.uppercase(), copy(array(lower_items)), copy(array(upper_items))])
+   set(lower_items, [$literal])
+   lowercase_each(lower_items)
+   set(upper_items, [$literal])
+   uppercase_each(upper_items)
+   return([lowercase($literal), $literal.lowercase(), uppercase($literal), $literal.uppercase(), copy(lower_items), copy(upper_items)])
  }
 
 Done::
@@ -1089,15 +1089,15 @@ end
 
 @testset "Action AST parser" begin
     block = parse_action_block(
-        "set(array(results), []); push(array(results), retv)\n" *
-        "return(copy(array(results)))",
+        "set(results, []); push(results, retv)\n" *
+        "return(copy(results))",
     )
     @test block.kind == "action_block"
     @test length(block.statements) == 3
     @test all(statement -> statement.drops_value, block.statements)
     @test block.statements[1].expr isa ActionCallExpr
     @test block.statements[1].expr.name == "set"
-    @test block.statements[1].expr.args[1].value isa ActionCallExpr
+    @test block.statements[1].expr.args[1].value isa ActionVariableExpr
     @test block.statements[1].expr.args[2].value isa ActionArrayLiteralExpr
     @test block.statements[2].expr.name == "push"
     @test block.statements[2].expr.args[2].value isa ActionVariableExpr
@@ -1148,7 +1148,7 @@ end
     @test assignment_chain.receiver isa ActionAssignArrayAppendExpr
     @test only(assignment_chain.calls).method == "count"
 
-    call_with_assignment = parse_action_expression("array(items = [value], copy(array(items)))")
+    call_with_assignment = parse_action_expression("array(items = [value], copy(items))")
     @test call_with_assignment isa ActionCallExpr
     @test call_with_assignment.args[1] isa ActionPositionalArgument
     @test call_with_assignment.args[1].value isa ActionAssignScalarExpr
@@ -1830,11 +1830,11 @@ end
 Top::
  I {
    cur = undef
-   set(array(items), [])
+   set(items, [])
  }
  -> object { cur = call(object) }
- -> version { push(array(items), call(version)) }
- LX { return(array(cur[1], copy(array(items)))) }
+ -> version { push(items, call(version)) }
+ LX { return(array(cur[1], copy(items))) }
 
 object: /(?i)\nobject:\s+(\S+)/ I { return(array("?object:", flat_array(entry_groups()))) }
 version: /(?i)\nversion:\s+(\S+)/ I { return(array("?version:", flat_array(entry_groups()))) }
@@ -1857,10 +1857,10 @@ Top::
 
     repetition = runtime_engine(raw"""
 Top::
- I { set(array(words), []) }
+ I { set(words, []) }
  /hello[ \t]+(\w+)/
- LE { push(array(words), match_group(0)) }
- E { return(copy(array(words))) }
+ LE { push(words, match_group(0)) }
+ E { return(copy(words)) }
 """)
     repetition_result = runtime_parse(repetition, "hello one hello two")
     @test repetition_result.matched
@@ -1874,7 +1874,7 @@ Top::
     action_edge = runtime_engine(raw"""
 top::
  -> item .push
- E { return(copy(array(top))) }
+ E { return(copy(top)) }
 
 item:
  /x/
@@ -1896,10 +1896,10 @@ Item:
 
     action_retv = runtime_engine(raw"""
 Top::
- I { set(array(out), []) }
- -> A { push(array(out), retv) }
- -> B { push(array(out), retv) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ -> A { push(out, retv) }
+ -> B { push(out, retv) }
+ E { return(copy(out)) }
 
 A: /a/ I { return("A") }
 B: /b/ I { return("B") }
@@ -1919,10 +1919,10 @@ Item: /x/
 
     blind_and = runtime_engine(raw"""
 Top::AND
- I { set(array(log), []) }
- => ChildA { push(array(log), retv) }
- => ChildB { push(array(log), retv) }
- E { return(copy(array(log))) }
+ I { set(log, []) }
+ => ChildA { push(log, retv) }
+ => ChildB { push(log, retv) }
+ E { return(copy(log)) }
 
 ChildA:
  /a/
@@ -1957,10 +1957,10 @@ ChildB::
 
     bounded_or = runtime_engine(raw"""
 Top::OR{2,3}
- I { set(array(out), []) }
- /a/ -> A { push(array(out), match_text()) }
- /b/ -> B { push(array(out), match_text()) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ /a/ -> A { push(out, match_text()) }
+ /b/ -> B { push(out, match_text()) }
+ E { return(copy(out)) }
 
 A: /a/
 B: /b/
@@ -1971,10 +1971,10 @@ B: /b/
 
     zero_width = runtime_engine(raw"""
 Top::OR+
- I { set(array(iters), []) }
+ I { set(iters, []) }
  /x*/
- LE { push(array(iters), "i") }
- E { return(copy(array(iters))) }
+ LE { push(iters, "i") }
+ E { return(copy(iters)) }
 """)
     zero_width_result = runtime_parse(zero_width, "abc")
     @test zero_width_result.value == Any["i"]
@@ -1982,14 +1982,14 @@ Top::OR+
 
     lifecycle = runtime_engine(raw"""
 Top::OR{1}
- I { push(array(events), "I") }
- LS { push(array(events), "LS") }
+ I { push(events, "I") }
+ LS { push(events, "LS") }
  /a/
- LE { push(array(events), "LE") }
- IT { push(array(events), "IT") }
- EX { push(array(events), "EX") }
- LX { push(array(events), "LX") }
- E { return(copy(array(events))) }
+ LE { push(events, "LE") }
+ IT { push(events, "IT") }
+ EX { push(events, "EX") }
+ LX { push(events, "LX") }
+ E { return(copy(events)) }
 """)
     lifecycle_result = runtime_parse(lifecycle, "a")
     @test lifecycle_result.value == Any["I", "LS", "LE", "IT", "EX", "LX"]
@@ -2034,24 +2034,24 @@ Loop::OR
     rule_local_resets = runtime_engine(raw"""
 Top::
  I {
-   set(array(items), ["outer"])
-   set(hash(meta), { "scope" : "outer" })
+   set(items, ["outer"])
+   set(meta, { "scope" : "outer" })
  }
  -> Child {
    inner = call(Child)
    return(hash(
      "inner", inner,
-     "outer_items", copy(array(items)),
-     "outer_meta", copy(hash(meta))
+     "outer_items", copy(items),
+     "outer_meta", copy(meta)
    ))
  }
 
 Child:
  /x/
  I {
-   set(array(items), ["inner"])
-   set(hash(meta), { "scope" : "inner" })
-   return(hash("items", copy(array(items)), "meta", copy(hash(meta))))
+   set(items, ["inner"])
+   set(meta, { "scope" : "inner" })
+   return(hash("items", copy(items), "meta", copy(meta)))
  }
 """)
     @test runtime_parse(rule_local_resets, "x").value == Dict{String,Any}(
@@ -2065,16 +2065,16 @@ Child:
 
     shared_mutation = runtime_engine(raw"""
 Top::
- I { set(array(items), []) }
+ I { set(items, []) }
  -> Child {
    call(Child)
-   return(copy(array(items)))
+   return(copy(items))
  }
 
 Child:
  /x/
  I {
-   push(array(items), "child")
+   push(items, "child")
    return("done")
  }
 """)
@@ -2082,15 +2082,15 @@ Child:
 
     child_push_forms = runtime_engine(raw"""
 Parent::
- I { set(array(explicit), []) }
+ I { set(explicit, []) }
  -> Child {
    push(Child)
    push(Child, explicit)
    push(Child, 1)
    push(Child, explicit, 0)
    return(hash(
-     "implicit", copy(array(Parent)),
-     "explicit", copy(array(explicit))
+     "implicit", copy(Parent),
+     "explicit", copy(explicit)
    ))
  }
 
@@ -2128,16 +2128,16 @@ Top::
  /x/
  E {
    set(value, "ok")
-   set(array(items), ["a"])
+   set(items, ["a"])
    items += value
-   set(hash(meta), { "k" : "v" })
+   set(meta, { "k" : "v" })
    meta["n"] = 2
    payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] }
    return(hash(
      "scalar", value,
-     "items", copy(array(items)),
+     "items", copy(items),
      "bare_items", items,
-     "meta", copy(hash(meta)),
+     "meta", copy(meta),
      "bare_meta", meta,
      "name", payload["children"][1]["name"],
      "shapes", array(undef, false, 3, 2.5)
@@ -2165,10 +2165,10 @@ Top::
    return(array(
      items[0],
      copy(items),
-     copy(array(items)),
+     copy(items),
      meta[key],
-     hash(meta),
-     copy(hash(meta))
+     meta,
+     copy(meta)
    ))
  }
 """)
@@ -2293,7 +2293,7 @@ Top::
  /(.+)/
  E {
    raw = entry_group(0)
-   set(array(tmp), ["x"])
+   set(tmp, ["x"])
    missing = tmp[5]
    eager = "before"
    eager_or = or(true, eager = "after")
@@ -2381,7 +2381,7 @@ Top::
    items = ["a", "b"]
    print("prefix=", "x")
    say(" line")
-   print_each(array(items), "item:", "!")
+   print_each(items, "item:", "!")
    return("ok")
  }
 """)
@@ -2535,10 +2535,10 @@ Top::
    items += "a"
    phrases += "aa-b"
    phrases += "cc-aa"
-   set(array(public), [" x ", "", "Y"])
+   set(public, [" x ", "", "Y"])
    return(hash(
      "sorted_drop_first", items.sorted().drop_front(2).first(),
-     "reverse_take_last", array(items).reversed().take(2).last(),
+     "reverse_take_last", items.reversed().take(2).last(),
      "contains", items.sorted().contains("c"),
      "index", items.sorted().index_of("c"),
      "drop_join", items.drop_back().join_values("|"),
@@ -2554,7 +2554,7 @@ Top::
      "concat", concat_arrays(array("x"), array("y", "z")),
      "sum", array(2, 4, 6).sum(),
      "avg", array(2, 4, 6).avg(),
-     "source", copy(array(items)),
+     "source", copy(items),
      "empty_missing", missing.sorted().is_empty()
    ))
  }
@@ -2586,22 +2586,22 @@ Top::
  /x/
  E {
    raw = " left , right,,third "
-   split(array(parts), raw, /\s*,\s*/)
+   split(parts, raw, /\s*,\s*/)
    items.push_back("a")
    items.push_back("b")
    items.push_front("z")
    items.pop_back()
    items.pop_front()
-   array(items).push_back("c")
+   items.push_back("c")
    scalar_items = ["s"]
    scalar_items.push_back("t")
    return(hash(
-     "parts", copy(array(parts)),
+     "parts", copy(parts),
      "receiver_split", "a, b".split(/\s*,\s*/),
-     "items", copy(array(items)),
+     "items", copy(items),
      "scalar_items", scalar_items,
      "value_push", items.push_back("bad"),
-     "after_value_push", copy(array(items)),
+     "after_value_push", copy(items),
      "tagged", split_tagged_records("a,b", /,/, "?tag:", "field")
    ))
  }
@@ -2625,7 +2625,7 @@ Top::
    set_key(meta, "b", 2)
    set_key(meta, "a", 1)
    set_key(meta, "drop", 0)
-   set_key(hash(meta), "stmt_hash", 4)
+   set_key(meta, "stmt_hash", 4)
    set_key(overlay, "a", 10)
    set_key(overlay, "c", 3)
    value_set = set_key(meta, "value_only", 9)
@@ -2636,18 +2636,18 @@ Top::
      "count", meta.count_keys(),
      "has_a", meta.has_key("a"),
      "drop_pick", meta.drop_keys("drop").pick_keys("a", "stmt_hash").sorted_values(),
-     "rename", hash(meta).rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
-     "merged", merge_hash(copy(hash(meta)), overlay).sorted_values(),
+     "rename", meta.rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
+     "merged", merge_hash(copy(meta), overlay).sorted_values(),
      "bare_first_merge", merge_hash(meta, overlay).sorted_keys(),
      "value_set_has", value_set.has_key("value_only"),
      "receiver_set_has", receiver_set.has_key("receiver_only"),
-     "after_value_set", copy(hash(meta)).has_key("value_only"),
-     "after_receiver_set", copy(hash(meta)).has_key("receiver_only"),
+     "after_value_set", copy(meta).has_key("value_only"),
+     "after_receiver_set", copy(meta).has_key("receiver_only"),
      "index_value", meta["expr"] = "E",
-     "after_index_value", copy(hash(meta)).has_key("expr"),
-     "flat_splice", hash("z", 0, flat(hash(meta))).sorted_keys().join_values(","),
+     "after_index_value", copy(meta).has_key("expr"),
+     "flat_splice", hash("z", 0, flat(meta)).sorted_keys().join_values(","),
      "flat_hash_splice", hash("z", 0, meta.flat_hash()).sorted_keys().join_values(","),
-     "map_field", hash("nested", copy(hash(meta))).pick_keys("nested")
+     "map_field", hash("nested", copy(meta)).pick_keys("nested")
    ))
  }
 """)))
@@ -3041,9 +3041,9 @@ return(value)
             "use_shapes",
             ["items", "meta"];
             body_source = raw"""
-set(array(items), items.sorted())
-set_key(hash(meta), "extra", "ok")
-return(hash("first", items.first(), "meta", copy(hash(meta))))
+set(items, items.sorted())
+set_key(meta, "extra", "ok")
+return(hash("first", items.first(), "meta", copy(meta)))
 """,
             index = 3,
         ),
@@ -3060,7 +3060,7 @@ Top::
  E {
    value = "caller"
    marker = "caller"
-   set(array(items), ["caller"])
+   set(items, ["caller"])
    discard(value = "discard-arg")
    after_discard = value
    eager = echo(value = "arg")
@@ -3074,7 +3074,7 @@ Top::
      "normal", normalize(" A-B ").lowercase().replace_substr("-", "_"),
      "captured", captured,
      "shaped", shaped,
-     "items", copy(array(items))
+     "items", copy(items)
    ))
  }
 """, functions)
@@ -3185,20 +3185,20 @@ Top::
    nonarray = "x".walk_leaves() { seen += "bad" }
    nonreduce = "x".reduce_leaves(seen += "bad") { return(acc) }
    return(array(
-     meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) },
+     meta.map_leaves() { return(cat(join_values("/", path), "=", coalesce_nonempty(join_values("", value), value))) },
      meta.reduce_leaves("") { return(cat(acc, key)) },
-     meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(),
-     items.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)))) },
-     items.reduce_leaves("") { return(cat(acc, join_values("/", array(path)), ":", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)), ";")) },
-     items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count(),
-     array(seen),
+     meta.walk_leaves() { seen += join_values("/", path); return(value) }.count_keys(),
+     items.map_leaves() { return(cat(join_values("/", path), "=", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)))) },
+     items.reduce_leaves("") { return(cat(acc, join_values("/", path), ":", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)), ";")) },
+     items.walk_leaves() { seen += join_values("/", path); return(value) }.count(),
+     seen,
      is_undefined(nonhash),
      is_undefined(nonarray),
      is_undefined(nonreduce),
      value,
      key,
      index,
-     array(path),
+     path,
      depth,
      acc
    ))
@@ -3935,7 +3935,7 @@ end
 
     edges = parse_spec(raw"""
 Top::->Child.push
- -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> Child[1] .return(array("?child:", copy(Child)))
  -> A | B { return(entry_text()) }
  =>Helper.trim()
 
@@ -3954,7 +3954,7 @@ Helper: /h/
     @test indexed isa ActionEdgeBodyElementKind
     @test indexed.targets[1].index == 1
     @test indexed.fluent_chain[1].method == "return"
-    @test indexed.fluent_chain[1].args == "array(\"?child:\", copy(array(Child)))"
+    @test indexed.fluent_chain[1].args == "array(\"?child:\", copy(Child))"
 
     grouped = top.body[3].kind
     @test grouped isa ActionEdgeBodyElementKind
@@ -4389,10 +4389,10 @@ Done::
             "rule_dispatch_output";
             spec_source = raw"""
 Top::AND
- I { set(array(out), []) }
- => First { push(array(out), retv) }
- => Second { push(array(out), retv) }
- E { return(copy(array(out))) }
+ I { set(out, []) }
+ => First { push(out, retv) }
+ => Second { push(out, retv) }
+ E { return(copy(out)) }
 
 First:
  /a/
@@ -4410,14 +4410,14 @@ Second:
             "lifecycle_output_shape";
             spec_source = raw"""
 Top::OR{1}
- I { push(array(events), "I") }
- LS { push(array(events), "LS") }
+ I { push(events, "I") }
+ LS { push(events, "LS") }
  /x/
- LE { push(array(events), "LE") }
- IT { push(array(events), "IT") }
- EX { push(array(events), "EX") }
- LX { push(array(events), "LX") }
- E { return(hash("cursor", cursor_pos(), "events", copy(array(events)))) }
+ LE { push(events, "LE") }
+ IT { push(events, "IT") }
+ EX { push(events, "EX") }
+ LX { push(events, "LX") }
+ E { return(hash("cursor", cursor_pos(), "events", copy(events))) }
 """,
             input_text = "x",
             expected_json = Dict{String,Any}(

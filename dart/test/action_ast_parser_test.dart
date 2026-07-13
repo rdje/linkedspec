@@ -4,8 +4,8 @@ import 'package:test/test.dart';
 void main() {
   test('parses action blocks into value-drop statements and calls', () {
     final block = parseActionBlock(
-      'set(array(results), []); push(array(results), retv)\n'
-      'return(copy(array(results)))',
+      'set(results, []); push(results, retv)\n'
+      'return(copy(results))',
     );
 
     expect(block.kind, 'action_block');
@@ -14,7 +14,7 @@ void main() {
 
     final setCall = block.statements[0].expr as ActionCallExpr;
     expect(setCall.name, 'set');
-    expect(setCall.args[0].value, isA<ActionCallExpr>());
+    expect(setCall.args[0].value, isA<ActionVariableExpr>());
     expect(setCall.args[1].value, isA<ActionArrayLiteralExpr>());
 
     final pushCall = block.statements[1].expr as ActionCallExpr;
@@ -85,7 +85,7 @@ void main() {
     expect(chain.calls.single.method, 'count');
 
     final call =
-        parseActionExpression('array(items = [value], copy(array(items)))')
+        parseActionExpression('array(items = [value], copy(items))')
             as ActionCallExpr;
     expect(call.args.first, isA<ActionPositionalArgument>());
     expect(call.args.first.value, isA<ActionAssignScalarExpr>());

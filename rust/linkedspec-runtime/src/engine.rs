@@ -2888,6 +2888,14 @@ impl Engine {
                 if let linkedspec_core::expr::Expr::AssignScalar { name, .. } = &statement.expr {
                     ctx.record_rule_local_binding(name);
                 }
+                if let linkedspec_core::expr::Expr::Call { name, args } = &statement.expr
+                    && name == "set"
+                    && let Some(linkedspec_core::expr::Arg::Positional(
+                        linkedspec_core::expr::Expr::Variable { name },
+                    )) = args.first()
+                {
+                    ctx.record_rule_local_binding(name);
+                }
             }
         }
         let result = self.execute_block(block, ctx, rule_label);
@@ -7875,9 +7883,9 @@ mod tests {
 
     const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child
- I { set(array(results), []) }
- LE { push(array(results), retv) }
- E { return(array("?results:", copy(array(results)))) }
+ I { set(results, []) }
+ LE { push(results, retv) }
+ E { return(array("?results:", copy(results))) }
 
 Child::
  /hello[ \t]+(\w+)/
@@ -7975,13 +7983,13 @@ Done::
         // Grammar that exercises all 7 lifecycle markers with REP (* mode).
         let grammar = r#"Top::*
  /hello/
- I { set(array(log), []); push(array(log), "I") }
- LS { push(array(log), "LS") }
- LE { push(array(log), "LE") }
- IT { push(array(log), "IT") }
- LX { push(array(log), "LX") }
- EX { push(array(log), "EX") }
- E { push(array(log), "E"); return(copy(array(log))) }
+ I { set(log, []); push(log, "I") }
+ LS { push(log, "LS") }
+ LE { push(log, "LE") }
+ IT { push(log, "IT") }
+ LX { push(log, "LX") }
+ EX { push(log, "EX") }
+ E { push(log, "E"); return(copy(log)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8008,10 +8016,10 @@ Done::
         // Use * (0 or more) so that zero matches is valid; LX fires on first no-match.
         let grammar = r#"Top::*
  /hello/
- I { set(array(log), []); push(array(log), "I") }
- LS { push(array(log), "LS") }
- LX { push(array(log), "LX") }
- E { push(array(log), "E"); return(copy(array(log))) }
+ I { set(log, []); push(log, "I") }
+ LS { push(log, "LS") }
+ LX { push(log, "LX") }
+ E { push(log, "E"); return(copy(log)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8031,7 +8039,7 @@ Done::
     fn default_mode_repeats_action_edge_choices_and_allows_zero_matches() {
         let grammar = r#"Top::
  -> Item .push
- LX.return(array("top", copy(array(Top))))
+ LX.return(array("top", copy(Top)))
 
 Item: /x/ I.return("x")
 "#;
@@ -8071,9 +8079,9 @@ Item: /x/ I.return("x")
         // OR{,1} — at most 1 match
         let grammar = r#"Top::OR{,1}
  /hello/
- I { set(array(log), []) }
- LE { push(array(log), "match") }
- E { return(copy(array(log))) }
+ I { set(log, []) }
+ LE { push(log, "match") }
+ E { return(copy(log)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8111,18 +8119,18 @@ Item: /x/ I.return("x")
         // Child dispatch is still allowed to mutate caller-visible working
         // variables when the child does not bind the same name locally.
         let grammar = r#"Top::AND
- I { set(array(log), []) }
+ I { set(log, []) }
  => ChildA
  => ChildB
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 
 ChildA:
  /a/
- I { push(array(log), "A") }
+ I { push(log, "A") }
 
 ChildB:
  /b/
- I { push(array(log), "B") }
+ I { push(log, "B") }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8151,11 +8159,11 @@ ChildB:
  /[A-Za-z_]\w*/
  /"(?:[^"\\]|\\.)*"/
  /\d+/
- I { set(array(results), []) }
+ I { set(results, []) }
  -> A
  -> A[1]
  -> A[2]
- E { return(copy(array(results))) }
+ E { return(copy(results)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8173,9 +8181,9 @@ ChildB:
         let grammar = r#"DemoParser::
  /pattern1/ -> ChildA
  /pattern2/ -> ChildB
- I { set(array(results), []) }
- LE { push(array(results), retv) }
- E { return(array("?results:", copy(array(results)))) }
+ I { set(results, []) }
+ LE { push(results, retv) }
+ E { return(array("?results:", copy(results))) }
 
 ChildA:
  /hello/
@@ -8272,9 +8280,9 @@ ChildB:
     fn helpers_5_1_declare_array_push_value_copy() {
         let grammar = r#"Top::
  /(\w+)/
- I { set(array(results), []) }
- LE { push(array(results), entry_group(0)) }
- E { return(copy(array(results))) }
+ I { set(results, []) }
+ LE { push(results, entry_group(0)) }
+ E { return(copy(results)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8290,9 +8298,9 @@ ChildB:
     fn helpers_5_1_return_value_and_count() {
         let grammar = r#"Top::
  /(\w+)/
- I { set(array(items), []); item_count = undef }
- LE { push(array(items), entry_group(0)) }
- E { item_count = count(array(items)); return(item_count) }
+ I { set(items, []); item_count = undef }
+ LE { push(items, entry_group(0)) }
+ E { item_count = count(items); return(item_count) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8308,9 +8316,9 @@ ChildB:
     fn helpers_5_1_explicit_nonempty_guarded_push() {
         let grammar = r#"Top::
  /(\w+)/
- I { set(array(items), []) }
- LE { if(is_nonempty(entry_group(0)), push(array(items), entry_group(0))) }
- E { return(copy(array(items))) }
+ I { set(items, []) }
+ LE { if(is_nonempty(entry_group(0)), push(items, entry_group(0))) }
+ E { return(copy(items)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8327,8 +8335,8 @@ ChildB:
         // Use hash() constructor and copy() for roundtrip
         let grammar = r#"Top::
  /(\w+)=(\d+)/
- I { set(hash(config), hash()) }
- LE { set_key(hash(config), entry_group(0), entry_group(1)) }
+ I { set(config, hash()) }
+ LE { set_key(config, entry_group(0), entry_group(1)) }
  E { return(entry_group(0)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -8359,11 +8367,11 @@ ChildB:
                 serde_json::json!([null]),
             ),
             (
-                "return(unknown_array_copy_helper(array(items)))",
+                "return(unknown_array_copy_helper(items))",
                 serde_json::json!([null]),
             ),
             (
-                "return(unknown_hash_copy_helper(hash(meta)))",
+                "return(unknown_hash_copy_helper(meta))",
                 serde_json::json!([null]),
             ),
             (
@@ -8371,11 +8379,11 @@ ChildB:
                 serde_json::json!([null]),
             ),
             (
-                "unknown_push_value_helper(array(items), \"a\"); return(copy(array(items)))",
+                "unknown_push_value_helper(items, \"a\"); return(copy(items))",
                 serde_json::json!([[]]),
             ),
             (
-                "unknown_push_nonempty_helper(array(items), \"a\"); return(copy(array(items)))",
+                "unknown_push_nonempty_helper(items, \"a\"); return(copy(items))",
                 serde_json::json!([[]]),
             ),
             (
@@ -8581,9 +8589,9 @@ ChildB:
     fn helpers_5_3_return_undef_skips_accumulator() {
         let grammar = r#"Top::
  /(\w+)/
- I { set(array(items), []) }
- LE { push(array(items), entry_group(0)) }
- E { return(copy(array(items))); return_undef() }
+ I { set(items, []) }
+ LE { push(items, entry_group(0)) }
+ E { return(copy(items)); return_undef() }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8931,11 +8939,11 @@ ChildB:
         // save_cursor saves position; restore_cursor restores it
         let grammar = r#"Top::
  /(hello) (world)/
- I { set(array(log), []); save_cursor() }
- LE { push(array(log), cursor_pos()) }
- E { push(array(log), cursor_pos());
-      restore_cursor(); push(array(log), cursor_pos());
-      return(copy(array(log))) }
+ I { set(log, []); save_cursor() }
+ LE { push(log, cursor_pos()) }
+ E { push(log, cursor_pos());
+      restore_cursor(); push(log, cursor_pos());
+      return(copy(log)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -8952,24 +8960,24 @@ ChildB:
     #[test]
     fn cursor_rewinds_to_entry_or_match_start() {
         let entry_grammar = r#"Top::AND
- I { set(array(log), []) }
- /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ I { set(log, []) }
+ /ab/ -> Top[0] { push(log, hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
    rewind_entry_start();
-   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+   push(log, hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 "#;
         let match_grammar = r#"Top::AND
- I { set(array(log), []) }
- /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ I { set(log, []) }
+ /ab/ -> Top[0] { push(log, hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
    rewind_match_start();
-   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+   push(log, hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
- E { return(copy(array(log))) }
+ E { return(copy(log)) }
 "#;
         let entry_engine = Engine::new(compile(&parse_spec(entry_grammar).unwrap()).unwrap());
         let match_engine = Engine::new(compile(&parse_spec(match_grammar).unwrap()).unwrap());
@@ -9138,9 +9146,9 @@ ChildB:
         // broke after 100 iterations, so it would have collected 100+ entries.
         let grammar = r#"Top::OR+
  /x*/
- I { set(array(iters), []) }
- LE { push(array(iters), "i") }
- E { return(copy(array(iters))) }
+ I { set(iters, []) }
+ LE { push(iters, "i") }
+ E { return(copy(iters)) }
 "#;
         let acc = run_5_3(grammar, "abc");
         let iters = acc.last().unwrap().as_array().unwrap();
@@ -9663,9 +9671,9 @@ ChildB:
     #[test]
     fn helpers_capture_until_boundary_captures_without_consuming_boundary() {
         let g = r#"Top::
- I { set(array(out), []) }
+ I { set(out, []) }
  -> Annotation.push(out)
- LX { return(copy(array(out))) }
+ LX { return(copy(out)) }
 
 Annotation: /@(\w+):[ \t]*/
  I { body = capture_until_boundary(Annotation, Boundary); return(hash("kind", "annotation", "name", entry_group(0), "body", trim(body), "cursor", cursor_pos(), "rest", cursor_rest())) }

@@ -1094,7 +1094,7 @@ Done:
 
     #[test]
     fn parse_code_block() {
-        let src = "Top::\n /a/ I {\n  set(array(results), [])\n}\n E { return(42) }";
+        let src = "Top::\n /a/ I {\n  set(results, [])\n}\n E { return(42) }";
         let spec = parse_spec(src).unwrap();
         assert_eq!(spec.rules.len(), 1);
         let body = &spec.rules[0].body;
@@ -1113,14 +1113,14 @@ Done:
 
     #[test]
     fn parse_lifecycle_block_content() {
-        let src = "Top::\n /x/ I { set(array(results), []) }";
+        let src = "Top::\n /x/ I { set(results, []) }";
         let spec = parse_spec(src).unwrap();
         let iblock = spec.rules[0].body.iter().find(|e| {
             matches!(&e.kind, BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I")
         }).unwrap();
         match &iblock.kind {
             BodyElementKind::CodeBlock { code, .. } => {
-                assert!(code.contains("set(array(results), [])"));
+                assert!(code.contains("set(results, [])"));
             }
             _ => panic!("expected CodeBlock"),
         }
@@ -1128,12 +1128,12 @@ Done:
 
     #[test]
     fn parse_multiline_code_block() {
-        let src = "Top::\n /a/ I {\n  set(array(results), [])\n  count = 0\n}";
+        let src = "Top::\n /a/ I {\n  set(results, [])\n  count = 0\n}";
         let spec = parse_spec(src).unwrap();
         match &spec.rules[0].body[1].kind {
             BodyElementKind::CodeBlock { code, lifecycle } => {
                 assert_eq!(lifecycle, "I");
-                assert!(code.contains("set(array(results), [])"));
+                assert!(code.contains("set(results, [])"));
                 assert!(code.contains("count = 0"));
             }
             _ => panic!("expected CodeBlock"),
@@ -1167,7 +1167,7 @@ Done:
     fn parse_action_edge_with_fluent_chain() {
         let src = r#"Top::
  -> Child .push
- -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> Child[1] .return(array("?child:", copy(Child)))
 
 Child: /x/ /y/
 "#;
@@ -1206,10 +1206,7 @@ Child: /x/ /y/
                 assert!(code.is_none());
                 assert_eq!(fluent_chain.len(), 1);
                 assert_eq!(fluent_chain[0].method, "return");
-                assert_eq!(
-                    fluent_chain[0].args,
-                    r#"array("?child:", copy(array(Child)))"#
-                );
+                assert_eq!(fluent_chain[0].args, r#"array("?child:", copy(Child))"#);
             }
             _ => panic!("expected ActionEdge"),
         }

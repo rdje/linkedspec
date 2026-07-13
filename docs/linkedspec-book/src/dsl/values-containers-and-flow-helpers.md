@@ -176,8 +176,8 @@ old and partially migrated sources continue to run. They do not define a second 
 > post-assignment typed value of `name`, so receiver methods can chain from it. If `array(value)` was intended to
 > construct a one-element array rather than select storage, write `[value]`. Zero/multi/quoted/computed
 > `array(...)` and valid key/value `hash(...)` calls remain ordinary constructors in contract version 1. The old
-> selector forms are shown here only to explain compatibility while embedded test/tool/backend source strings
-> complete migration under `.12.1.7.3`. Every tracked `.spec` file is already selector-free.
+> selector forms are shown here only to explain the short-lived compatibility path before hard rejection. Every
+> tracked `.spec` file and executable embedded source is already selector-free.
 
 The Perl, Rust, Dart, Julia, and Lua backends now execute those selector-free replacements. Their
 bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
@@ -194,9 +194,9 @@ answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 ```
 
 Exact selector rejection is intentionally later than backend enablement: all five backends now execute the same
-bare forms and every tracked `.spec` file has migrated. Embedded source strings migrate next, and only then does
-each backend reject
-`array(IDENTIFIER)` / `hash(IDENTIFIER)`. This ordering is migration safety, not an unresolved language decision.
+bare forms, and every tracked `.spec` file and executable embedded source has migrated. The backend sequence now
+hard-rejects `array(IDENTIFIER)` / `hash(IDENTIFIER)`, beginning with Perl. This ordering is migration safety, not
+an unresolved language decision.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:

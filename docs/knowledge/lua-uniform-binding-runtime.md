@@ -30,8 +30,8 @@ Registered compiled rules retain precedence for ambiguous `push(name, target)`: 
 appended to the target binding. Otherwise the first name is the array binding. Minimal pure array dispatch supplies
 the continuations required by the neutral fixture and mutation chains.
 
-Exact `array(name)` and `hash(name)` remain parsed only while tracked sources migrate. Lua rejects and deletes those
-selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.5`.
+Exact `array(name)` and `hash(name)` remain parsed only until hard rejection; all tracked sources have migrated.
+Lua rejects and deletes those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.5`.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-uniform-binding-runtime]], [[julia-uniform-binding-runtime]],

@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.3 finding — a thin facade can turn a missing internal method into a
+  misleading plugin error): `tools/inspect_spec_codegen.pl` still invokes
+  `LinkedSpec::_rewrite_action_code_with_diagnostics` and `LinkedSpec::_render_method_call_chain`, but Phase 1A
+  moved those implementations to `RuleIR::EmitContext` and `BootstrapSpec::Core`. Facade AUTOLOAD then routes the
+  missing names through `PPlugin`, yielding `Unknown plugin` rather than a missing-method diagnostic. Git history
+  ties the inspector to `2984fb50` and the uncoordinated facade removal to `e964d9a4`. Keep the repair out of the
+  dirty selector leaf; `FUTURE-PARITY-BACKLOG.13.1` owns explicit-owner routing plus a recurring four-form smoke
+  test after selector retirement.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.3 — preserve spec-level binding names until aggregate ownership is
+  known): Embedded-source migration exposed two opposite mistakes hidden by the same old array-first fallback. A
+  user-function local is a scalar-held runtime typed value, so the aggregate AST bridge must pass bare `items` to
+  `copy(items)` instead of prematurely manufacturing the Perl-only `copy($items)` spelling. A rule label, however,
+  owns a real private implicit array accumulator unless the rule explicitly rebinds that same identifier. Seed that
+  ownership in type memory so `copy(rule_label)` snapshots `@rule_label`; let an authored scalar binding override
+  it. This is explicit ownership, not revival of a public aggregate namespace.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.3 — helper arity precedes optional legacy scope stripping): Once
+  embedded sources use bare collection arguments, a canonical first argument may look exactly like the old
+  injected scope token. For helpers whose supplied argument count already satisfies the current contract, keep the
+  entire list; consult optional-scope normalization only when canonical arity does not fit. Otherwise `take(items,
+  count)`, `pick_keys(meta, key)`, and similar calls silently lose their actual target. The same rule applies to
+  three-argument mutable split and scoped fluent push recognition.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate complete file-backed behavior, not just syntax): Moving all
   390 remaining selectors out of 67 file-backed specs showed where wrappers had hidden runtime assumptions. An
   `I { name = [] }` assignment is rule-invocation-local just like the prior explicit reset; a bare compiled rule

@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.3 — migrate embedded selector sources
+
+Removed all 1,356 positive exact aggregate-selector occurrences from 25 embedded test/tool/backend source owners.
+The new recurring executable-source checker distinguishes executable positives from comments, implementation
+recognizers/diagnostics, the neutral future-rejection contract, and two exact compatibility-path assertions. It
+reports zero positives and 25 classified implementation/recognition occurrences; those remaining code paths are
+owned by the immediately following hard-retirement leaves, not by language design.
+
+Migration breadth exposed several wrapper-hidden assumptions. Rust, Dart, and Julia now record bare `set(name,
+value)` initializers as rule-local lifecycle bindings. Perl collection helpers preserve canonical arguments before
+trying legacy optional-scope normalization; fluent scoped push recognizes a bare target; internal
+`IMATCH_LIST`/`LMATCH_LIST` pipelines remain host accumulators; and `copy(name)` uses one runtime-typed binding in
+ordinary/user-function scopes. Known implicit rule accumulators retain explicit private array ownership, replacing
+the old untyped array-first guess without restoring a public namespace.
+
+Complete Rust, Dart, Julia, and dual-ABI Lua gates pass over the migrated embedded sources. Focused Perl contracts
+and generated user-function probes pass, the executable selector checker remains zero-positive, and Phase 0 passes
+all `1..1031` tests in 920 seconds after one measured failure run closed stale code-shape locks and the implicit
+rule-accumulator seam. Full oracle regeneration produces all 105 fixtures; canonical local CI passes capability
+60/0/0, CLI 61x2, and all `1..1031` Phase 0 tests in 918 seconds.
+
+A toolbox smoke check also found that `tools/inspect_spec_codegen.pl` still routes removed private facade methods
+through plugin AUTOLOAD. The causal/history audit is durable in the Knowledge Map and queued as
+`FUTURE-PARITY-BACKLOG.13.1` after selector retirement; no unrelated toolbox repair is bundled here.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate file-backed selector fixtures
 
 Removed the remaining 390 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` selectors from 67 file-backed capability,

@@ -50,7 +50,7 @@ void main() {
   test('parses action and blind edges with blocks and fluent chains', () {
     final spec = parseSpec(r'''
 Top::->Child.push
- -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> Child[1] .return(array("?child:", copy(Child)))
  -> A | B { return(entry_text()) }
  =>Helper.trim()
 
@@ -69,10 +69,7 @@ Helper: /h/
     final indexed = top.body[1].kind as ActionEdgeBodyElementKind;
     expect(indexed.targets.single.index, 1);
     expect(indexed.fluentChain.single.method, 'return');
-    expect(
-      indexed.fluentChain.single.args,
-      'array("?child:", copy(array(Child)))',
-    );
+    expect(indexed.fluentChain.single.args, 'array("?child:", copy(Child))');
 
     final grouped = top.body[2].kind as ActionEdgeBodyElementKind;
     expect(grouped.targets.map((target) => target.label), ['A', 'B']);

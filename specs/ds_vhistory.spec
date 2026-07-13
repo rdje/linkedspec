@@ -5,7 +5,7 @@
 # --------------------------------------------
 
 vhistory::  I {
-vhistory = [];
+vhistory_items = [];
 capt = [];
 object_hier = [];
 cur_object = undef;
@@ -26,10 +26,10 @@ LX  {
 
  if(is_nonempty(object_hier));
   current_object_name = cur_object[1];
-  push(vhistory, array("?object:", current_object_name, copy(object_hier)));
+  push(vhistory_items, array("?object:", current_object_name, copy(object_hier)));
  endif();
 
- return(array("?ds_vhistory:", copy(vhistory)))
+ return(array("?ds_vhistory:", copy(vhistory_items)))
 } 
 
 -> object             {
@@ -47,7 +47,7 @@ LX  {
 
   if(is_nonempty(object_hier));
    current_object_name = cur_object[1];
-   push(vhistory, array("?object:", current_object_name, copy(object_hier)));
+   push(vhistory_items, array("?object:", current_object_name, copy(object_hier)));
    set(object_hier, array());
   endif();
 

@@ -172,15 +172,15 @@ Top::
   test('runtime trace covers branch lifecycle cursor and boundary events', () {
     final engine = _engine(r'''
 Top::
- I { set(array(out), []) }
+ I { set(out, []) }
  /@(\w+):[ \t]*/ -> Boundary {
    save_cursor();
    body = capture_until_boundary(Boundary);
-   push(array(out), hash("name", match_group(0), "body", trim(body), "cursor", cursor_pos()));
+   push(out, hash("name", match_group(0), "body", trim(body), "cursor", cursor_pos()));
    restore_cursor();
    rewind_match_start()
  }
- E { return(copy(array(out))) }
+ E { return(copy(out)) }
 
 Boundary: /END/
 ''');

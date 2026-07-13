@@ -482,7 +482,7 @@ end)
 test("source parser handles action blind grouped indexed and fluent edges", function()
   local parsed = linkedspec.parse_spec([[
 Top::->Child.push
- -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> Child[1] .return(array("?child:", copy(Child)))
  -> A | B { return(entry_text()) }
  =>Helper.trim()
 
@@ -494,7 +494,7 @@ Helper: /h/
   assert_equal(body_kind(top, 1).targets[1].label, "Child", "compact target")
   assert_equal(body_kind(top, 1).fluent_chain[1].method, "push", "compact fluent")
   assert_equal(body_kind(top, 2).targets[1].index, 1, "indexed target")
-  assert_equal(body_kind(top, 2).fluent_chain[1].args, 'array("?child:", copy(array(Child)))', "nested args")
+  assert_equal(body_kind(top, 2).fluent_chain[1].args, 'array("?child:", copy(Child))', "nested args")
   assert_equal(body_kind(top, 3).targets[2].label, "B", "grouped target")
   assert_equal(body_kind(top, 3).code, "return(entry_text())", "grouped code")
   assert_equal(body_kind(top, 4).target, "Helper", "blind target")
@@ -985,7 +985,7 @@ end)
 
 test("ActionIR blocks use newline and same-line semicolon separators", function()
   local block = linkedspec.parse_action_block(
-    'set(array(results), []); push(array(results), retv)\nreturn(copy(array(results)))'
+    'set(results, []); push(results, retv)\nreturn(copy(results))'
   )
   assert_equal(linkedspec.action_ast.node_type(block), "ActionBlock", "block type")
   assert_equal(#block.statements, 3, "statement count")
@@ -1057,7 +1057,7 @@ test("ActionIR parses access assignments nested calls and keyword arguments", fu
     "nested assignment"
   )
 
-  local nested_call = linkedspec.parse_action_expression("array(items = [value], copy(array(items)))")
+  local nested_call = linkedspec.parse_action_expression("array(items = [value], copy(items))")
   assert_equal(nested_call.kind, "call", "nested call kind")
   assert_equal(nested_call.args[1].value.kind, "assign_scalar", "assignment argument")
   assert_equal(nested_call.args[2].value.kind, "call", "nested call argument")
@@ -1992,8 +1992,8 @@ Top::
    scalar_value = false
    items = [1, { "name" : "old" }]
    meta = { "kind" : "base" }
-   set(array(named_items), ["a"])
-   set(hash(named_meta), { "x" : 1 })
+   set(named_items, ["a"])
+   set(named_meta, { "x" : 1 })
    items += 3
    meta["added"] = false
    items[1]["name"] = "new"
@@ -2010,8 +2010,8 @@ Top::
      "meta" : meta,
      "items_snapshot" : items_snapshot,
      "meta_snapshot" : meta_snapshot,
-     "named_items" : array(named_items),
-     "named_meta" : hash(named_meta),
+     "named_items" : named_items,
+     "named_meta" : named_meta,
      "nested" : items[1]["name"],
      "indexed" : meta["added"],
      "missing" : items[8]
@@ -2450,12 +2450,12 @@ Top::
    raw = " left , right,,third "
    parts = ["stale"]
    scalar_parts = split("a,b", ",")
-   split(array(parts), raw, /\s*,\s*/)
-   split(array(literal_parts), ",a,", ",")
+   split(parts, raw, /\s*,\s*/)
+   split(literal_parts, ",a,", ",")
    split(scalar_parts, "ignored", ",")
    return({
-     "parts" : copy(array(parts)),
-     "literal_parts" : copy(array(literal_parts)),
+     "parts" : copy(parts),
+     "literal_parts" : copy(literal_parts),
      "scalar_parts" : scalar_parts,
      "raw_after" : raw,
      "pure" : split("x-y", "-")

@@ -993,6 +993,15 @@ final class LinkedSpecRuntimeEngine {
           if (statement.expr case ActionAssignScalarExpr(:final name)) {
             context.recordRuleLocalBinding(name);
           }
+          final expr = statement.expr;
+          if (expr is ActionCallExpr &&
+              expr.name == 'set' &&
+              expr.args.isNotEmpty) {
+            final name = _variableName(expr.args.first.value);
+            if (name != null) {
+              context.recordRuleLocalBinding(name);
+            }
+          }
         }
       }
       final result = _executeActionBlock(

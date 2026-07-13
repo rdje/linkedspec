@@ -1697,7 +1697,7 @@ mod tests {
 
     #[test]
     fn parse_simple_call() {
-        let code = r#"set(array(results), [])"#;
+        let code = r#"set(results, [])"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 1);
         match &block.statements[0].expr {
@@ -1724,7 +1724,7 @@ mod tests {
 
     #[test]
     fn parse_nested_calls() {
-        let code = r#"push(array(results), retv)"#;
+        let code = r#"push(results, retv)"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -2209,7 +2209,7 @@ mod tests {
 
     #[test]
     fn parse_array_append_statement() {
-        let code = r#"items += cat("a", "b"); return(copy(array(items)))"#;
+        let code = r#"items += cat("a", "b"); return(copy(items))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -2229,7 +2229,7 @@ mod tests {
 
     #[test]
     fn parse_hash_index_assignment_statement() {
-        let code = r#"meta[cat("s", "tage")] = value; return(copy(hash(meta)))"#;
+        let code = r#"meta[cat("s", "tage")] = value; return(copy(meta))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -2564,8 +2564,8 @@ mod tests {
 
     #[test]
     fn parse_deeply_nested_5_levels() {
-        // 5+ levels: return → array → copy → array → scalar
-        let code = r#"return(array("?results:", copy(array(results))))"#;
+        // 5+ levels: return → array → copy → sorted → variable
+        let code = r#"return(array("?results:", copy(sorted(results))))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 1);
         // Verify the nesting depth is correct
@@ -2583,7 +2583,7 @@ mod tests {
                                 assert_eq!(a3.len(), 1);
                                 match a3[0].value() {
                                     Expr::Call { name, args: a4 } => {
-                                        assert_eq!(name, "array");
+                                        assert_eq!(name, "sorted");
                                         assert_eq!(a4.len(), 1);
                                         match a4[0].value() {
                                             Expr::Variable { name } => {
@@ -2607,8 +2607,7 @@ mod tests {
 
     #[test]
     fn parse_multiple_statements() {
-        let code =
-            r#"set(array(results), []); push(array(results), retv); return(copy(array(results)))"#;
+        let code = r#"set(results, []); push(results, retv); return(copy(results))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
     }
@@ -2905,7 +2904,7 @@ mod tests {
 
     #[test]
     fn parse_fluent_chain_multiple_dots() {
-        let code = "push(array(items), retv).return(copy(array(items))).endif()";
+        let code = "push(items, retv).return(copy(items)).endif()";
         let block = CodeBlock::parse(code).unwrap();
         let first = &block.statements[0].expr;
         match first {
@@ -2943,10 +2942,9 @@ mod tests {
 
     #[test]
     fn parse_array_end_mutation_fluent_receivers() {
-        let block = CodeBlock::parse(
-            "items.push_back(value); array(items).pop_front(); array(items).push_front(\"a\")",
-        )
-        .unwrap();
+        let block =
+            CodeBlock::parse("items.push_back(value); items.pop_front(); items.push_front(\"a\")")
+                .unwrap();
         assert_eq!(block.statements.len(), 3);
 
         match &block.statements[0].expr {
@@ -2961,7 +2959,7 @@ mod tests {
 
         match &block.statements[1].expr {
             Expr::FluentChain { receiver, calls } => {
-                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "array"));
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "items"));
                 assert_eq!(calls.len(), 1);
                 assert_eq!(calls[0].method, "pop_front");
                 assert!(calls[0].args.is_empty());
@@ -2971,7 +2969,7 @@ mod tests {
 
         match &block.statements[2].expr {
             Expr::FluentChain { receiver, calls } => {
-                assert!(matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "array"));
+                assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "items"));
                 assert_eq!(calls.len(), 1);
                 assert_eq!(calls[0].method, "push_front");
             }
@@ -3154,12 +3152,12 @@ mod tests {
 
     #[test]
     fn roundtrip_simple_call() {
-        assert_roundtrip("set(array(results), [])");
+        assert_roundtrip("set(results, [])");
     }
 
     #[test]
     fn roundtrip_nested_calls() {
-        assert_roundtrip("push(array(results), retv)");
+        assert_roundtrip("push(results, retv)");
     }
 
     #[test]
@@ -3169,7 +3167,7 @@ mod tests {
 
     #[test]
     fn roundtrip_deeply_nested() {
-        assert_roundtrip(r#"return(array("?results:", copy(array(results))))"#);
+        assert_roundtrip(r#"return(array("?results:", copy(sorted(results))))"#);
     }
 
     #[test]
@@ -3274,7 +3272,7 @@ mod tests {
 
     #[test]
     fn roundtrip_fluent_chain_multi() {
-        let code = "push(array(items), retv).return(copy(array(items))).endif()";
+        let code = "push(items, retv).return(copy(items)).endif()";
         let block1 = CodeBlock::parse(code).unwrap();
         let displayed = block1.statements[0].expr.to_string();
         let block2 = CodeBlock::parse(&displayed).unwrap();
@@ -3334,25 +3332,25 @@ mod tests {
     #[test]
     fn parse_newline_separated_statements_without_semicolons() {
         // Newlines are the implicit separator for method-only statements.
-        let code = r#"set(array(results), [])
-push(array(results), retv)
-return(copy(array(results)))"#;
+        let code = r#"set(results, [])
+push(results, retv)
+return(copy(results))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
     }
 
     #[test]
     fn parse_statements_with_semicolons() {
-        let code = r#"set(array(results), []);
-push(array(results), retv);
-return(copy(array(results)));"#;
+        let code = r#"set(results, []);
+push(results, retv);
+return(copy(results));"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
     }
 
     #[test]
     fn parse_same_line_statements_require_semicolons() {
-        let result = CodeBlock::parse("set(array(results), []) push(array(results), retv)");
+        let result = CodeBlock::parse("set(results, []) push(results, retv)");
         assert!(result.is_err());
         assert!(result.unwrap_err().contains("expected ';' or newline"));
     }
@@ -3581,7 +3579,7 @@ return(copy(array(results)));"#;
 
     #[test]
     fn serde_roundtrip_codeblock() {
-        let code = r#"push(array(results), retv)"#;
+        let code = r#"push(results, retv)"#;
         let block = CodeBlock::parse(code).unwrap();
         let json = serde_json::to_string(&block).unwrap();
         let _back: CodeBlock = serde_json::from_str(&json).unwrap();

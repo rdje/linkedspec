@@ -34,12 +34,12 @@ fn execute_fixture(fixture: &Fixture) -> Value {
     let literal = serde_json::to_string(&fixture.input).expect("fixture string must encode");
     let grammar = format!(
         "Top::\n /x/ -> Done {{\n\
-           set(array(lower_items), [{literal}])\n\
-           lowercase_each(array(lower_items))\n\
-           set(array(upper_items), [{literal}])\n\
-           uppercase_each(array(upper_items))\n\
+           set(lower_items, [{literal}])\n\
+           lowercase_each(lower_items)\n\
+           set(upper_items, [{literal}])\n\
+           uppercase_each(upper_items)\n\
            return(array(lowercase({literal}), {literal}.lowercase(), uppercase({literal}), \
-           {literal}.uppercase(), copy(array(lower_items)), copy(array(upper_items))))\n\
+           {literal}.uppercase(), copy(lower_items), copy(upper_items)))\n\
          }}\n\nDone::\n /x/\n"
     );
     let spec = parse_spec(&grammar).unwrap_or_else(|error| panic!("{} parse: {error}", fixture.id));

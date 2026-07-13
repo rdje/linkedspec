@@ -11,13 +11,15 @@ This document is the current high-level technical reading of the project shape. 
   two-argument split is pure and three-argument split mutates a bare target. Exact one-bare array/hash calls are
   future-invalid with `aggregate_selector_removed`; `[value]` is the one-element array constructor, while other
   non-selector constructors remain in v1. Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and
-  Lua `.12.1.6` execute the replacement contract; shipped-source migration `.12.1.7.1` is active.
+  Lua `.12.1.6` execute the replacement contract. Migration `.12.1.7.1-.3` removed all 600 file-backed exact
+  selectors and all 1,356 positive embedded-source occurrences; Perl hard rejection `.12.1.8.1` is next.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
   `FUTURE-PARITY-BACKLOG.12.1`. Boundary-correct exact scans find 600 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
   tracked specs, including 210 in 15 shipped specs. The one-binding public model does not require identical host
   storage layouts, but bare read/mutation semantics must be complete before sources migrate and selector-specific
-  recognition is hard-deleted. Active `.12.1.1` owns the neutral contract, including static-rule precedence for
-  ambiguous push, mutable three-argument split, expression results, diagnostics, and constructor classification.
+  recognition is hard-deleted. Neutral contract `.12.1.1`, all five backend consumers `.12.1.2-.6`, and all source
+  migration `.12.1.7.1-.3` are complete. Hard retirement now begins at Perl `.12.1.8.1`; the public-language
+  decision is settled.
 - `2026-07-12` refresh: Perl callable metadata now declares an exact final `name: codeblock` parameter for typed
   user functions and registered helper/receiver contracts. Generic receiver attached syntax parses without a
   method-name allowlist; lowering consults `LinkedSpec::CallableContract` and normalizes attached plus
