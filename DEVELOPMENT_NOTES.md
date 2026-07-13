@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.0 — later neutral contracts supersede earlier slice boundaries): The
+  original array-end method slice was deliberately statement-only, but `linkedspec-uniform-binding-v1` later
+  adopted updated typed values for every mutation unless explicitly overridden. Perl, Rust, Dart, Julia, and Lua
+  now support end-mutation continuation and independent saved snapshots. Public/KM text that still presents the
+  earlier result boundary as current is contract drift, not an implementation choice; `.12.1.11` owns repair and
+  a recurring guard before Lua array breadth uses the result rule.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.4 — closeout proof must enumerate overload spellings): Aggregate reducer
   behavior was complete, but the first focused fixture paired canonical and alias coverage across the family
   instead of invoking every spelling directly. Closeout now locks all six canonical reducer calls, all six word

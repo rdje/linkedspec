@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.0 — split Lua array helper mechanisms
+
+Split Lua array parity into copied construction/splicing, selection/order/membership, scalar/regex transforms,
+mutation/child flow, tagged records, and no-drift closeout. The audit found a cross-cutting public contradiction:
+the adopted uniform-binding contract and all five runtimes return updated typed values from array-end mutations,
+while older current-facing book/KM/backend prose still says statement-only/no-value. Follow-up
+`FUTURE-PARITY-BACKLOG.12.1.11` is active before array runtime work begins.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.4 — close Lua numeric helper parity
 
 Closed numeric helper and public-surface no-drift at 91/91 on both Lua ABIs. The focused reducer fixture now

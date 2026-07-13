@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (numeric parent closed at 91/91; general array helper family is active)
+- Last updated: `2026-07-12` (array mechanisms split; uniform-binding result-doc repair is active before code)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1065,10 +1065,85 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.4`
   Status: `active`
   Goal: Implement array construction, pure helpers, mutation, bridges, reducers, and receiver chains.
+  Children: `.4.3.4.0`, `.4.3.4.1`, `.4.3.4.2`, `.4.3.4.3`, `.4.3.4.4`, `.4.3.4.5`, `.4.3.4.6`
   Dependencies: `.4.3.1`, `.4.3.2`, `.4.3.3`
   Acceptance: Typed construction/copy/flatten/concat, selection/order/membership/join/split/filter/map-style
     transforms, append/end mutations, child push/index reuse, numeric terminals, and snapshot isolation match the
     catalog without false/null or empty-array drift.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.0`
+  Status: `done`
+  Goal: Audit current Lua array mechanisms and split the family before behavior code.
+  Acceptance: Inventory every governed array helper against Lua call admission, runtime dispatch, focused tests,
+    earlier Dart/Julia rollouts, and current binding semantics; distinguish construction/splicing, copied
+    selection, scalar/regex transforms, mutations/child flow, tagged records, and closeout; route any cross-cutting
+    contract drift before implementation.
+  Verification: **PASS 2026-07-12.** Lua already has array literals/constructors/copy, minimal copied
+    count/first/sorted/filter/trim/case helpers, bare push/append/split/transform rebinding, end mutations, and
+    receiver dispatch from earlier core/string/uniform-binding leaves. Missing breadth divides into six executable
+    children. The audit also proves the later adopted `linkedspec-uniform-binding-v1` updated-value rule supersedes
+    older statement-only array-end prose; `FUTURE-PARITY-BACKLOG.12.1.11` owns that public/KM repair before `.1`.
+  Commit: `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.1`
+  Status: `pending`
+  Goal: Implement copied array construction, explicit flatten splicing, concatenation, and copy boundaries.
+  Dependencies: `.4.3.4.0`, `FUTURE-PARITY-BACKLOG.12.1.11`
+  Acceptance: `array`, literals, `copy`, `flat`, `flat_array`, and `concat_arrays` evaluate in order, splice only
+    explicit flat values in constructor context, preserve ordinary nested arrays, reject/empty invalid inputs per
+    catalog, and never alias source containers on either Lua ABI.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.2`
+  Status: `pending`
+  Goal: Implement copied selection, slicing, ordering, membership, and uniqueness helpers plus receivers.
+  Dependencies: `.4.3.4.1`
+  Acceptance: `count`, `first`, `last`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`,
+    `reversed`, `contains`, `index_of`, and `uniq` match zero-based/default/empty/invalid policy, preserve sources,
+    and compose through bare, literal, function, and receiver forms on both ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.3`
+  Status: `pending`
+  Goal: Implement scalar/regex array transforms, joins, split pipelines, and standalone rebinding.
+  Dependencies: `.4.3.2`, `.4.3.4.1`, `.4.3.4.2`
+  Acceptance: Delimiter-first `join_values`, `split_each`, `trim_each`, `filter_nonempty`, `filter_match`,
+    `lowercase_each`, and `uppercase_each` reuse governed scalar/PCRE2/Unicode policy; pure calls and receivers copy,
+    dropped bare transform calls rebind and return updated targets under uniform binding, and sources stay exact.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.4`
+  Status: `pending`
+  Goal: Close append, end-mutation, mutable split, and child-push/index execution through one binding seam.
+  Dependencies: `.4.3.4.0`, `.4.3.4.2`, `FUTURE-PARITY-BACKLOG.12.1.11`
+  Acceptance: `push`/`+=`, three-argument split, push/pop end methods, action-edge push, static-rule precedence,
+    implicit/explicit accumulators, and zero-based child-result selection mutate or append exactly once, return
+    independent updated values where governed, diagnose wrong kinds, and preserve pure two-argument split.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.5`
+  Status: `pending`
+  Goal: Implement tagged-record construction and remaining array-to-array/scalar bridges.
+  Dependencies: `.4.3.4.1`, `.4.3.4.3`
+  Acceptance: `split_tagged_records(source, delimiter, tag, fields...)` evaluates its source and carried fields
+    once, preserves regex/literal split policy and typed record shapes, composes with array values/receivers, and
+    matches shipped helper examples without beginning tree callbacks owned by `.4.3.6`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4.6`
+  Status: `pending`
+  Goal: Close complete Lua array helper, receiver, mutation, and public-surface no-drift.
+  Dependencies: `.4.3.4.1`, `.4.3.4.2`, `.4.3.4.3`, `.4.3.4.4`, `.4.3.4.5`
+  Acceptance: Focused construction/selection/transform/mutation/tagged/receiver/invalid proof passes both Lua
+    ABIs; numeric terminals remain exact; Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live
+    docs, runtime status, cleanup, and doctrines agree before hash helpers `.4.3.5`; tree callbacks stay `.4.3.6`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1272,7 +1347,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` is closed at 91/91 on PUC Lua and LuaJIT with exact 55-case six-runtime scalar
-proof and `runtime-numeric-reducers`. Array helper family `.4.3.4` is active.
+proof and `runtime-numeric-reducers`. Array split `.4.3.4.0` is done; cross-cutting uniform-binding result-doc
+repair `FUTURE-PARITY-BACKLOG.12.1.11` is active before array construction `.4.3.4.1`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1320,7 +1396,8 @@ proof and `runtime-numeric-reducers`. Array helper family `.4.3.4` is active.
 | 42 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | All numeric word/symbol calls and scalar number receiver chains pass both ABIs. |
 | 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict array reducers and six terminal receiver forms pass both ABIs. |
 | 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `done` | Numeric proof/public no-drift closed at 91/91 on both ABIs. |
-| 45 | `LUA-BACKEND-PARITY.4.3.4` | `active` | Audit and implement general array helper mechanisms. |
+| 45 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Split six array mechanisms and route superseded mutation-result prose. |
+| 46 | `LUA-BACKEND-PARITY.4.3.4.1` | `pending` | Begin copied construction/splicing after external `.12.1.11` closes. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1424,6 +1501,21 @@ proof and `runtime-numeric-reducers`. Array helper family `.4.3.4` is active.
   mdBook/cleanup/whitespace, and focused public scans pass.
 - [x] **LOCKSTEP** — Numeric parent `.4.3.3` closes and the single frontier advances to array helpers `.4.3.4`;
   exact shipped-corpus execution remains correctly routed to dependency-complete phase 6.
+
+### `LUA-BACKEND-PARITY.4.3.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Inventory the full array catalog against Lua call admission, runtime branches,
+  focused tests, prior Dart/Julia rollout facts, and uniform-binding behavior before broad code changes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Separate six runtime mechanisms and prove older statement-only array-end
+  result prose was superseded by the later admitted updated-mutation-value contract across all five backends.
+- [x] **FIX** — Create construction/splicing, copied selection, scalar/regex transform, mutation/child-flow,
+  tagged-record, and closeout children; route cross-cutting result-doc drift to `FUTURE-PARITY-BACKLOG.12.1.11`.
+- [x] **ADDRESSED (verified)** — Every governed helper and existing collateral Lua mechanism has exactly one child
+  owner; tree callbacks remain under `.4.3.6`, and the external documentation repair blocks array behavior `.1`.
+- [x] **NO REGRESSION** — Planning only: both Lua ABIs remain 91/91; task metadata, Knowledge Map, doctrines,
+  mdBook, cleanup, and whitespace pass without new array runtime behavior.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, architecture/live docs, and memory activate `.12.1.11`
+  while preserving `.4.3.4.1` as the next Lua array implementation leaf after that repair.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1749,3 +1841,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.2` | `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms` | Exact word/symbol calls, scalar receiver composition/terminality, and slash/regex disambiguation. |
 | `LUA-BACKEND-PARITY.4.3.3.3` | `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers` | Strict copied-array reducers, empty/invalid boundaries, and six terminal receiver forms. |
 | `LUA-BACKEND-PARITY.4.3.3.4` | `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity` | Complete canonical/alias/mechanism proof, public no-drift, parent closure, and array handoff. |
+| `LUA-BACKEND-PARITY.4.3.4.0` | `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms` | Existing-seam audit, six executable children, mutation-result supersession finding, and external repair routing. |

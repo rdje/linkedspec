@@ -10,13 +10,13 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.4` — numeric helper/public no-drift and parent closure.
-- latest_commit: `3c103a63` — `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.4`; general array helper family.
-- next_action: audit the array catalog/runtime seams and split `.4.3.4` into safe mechanism-sized leaves.
-- current_proof: every scalar/reducer canonical, alias, symbol, receiver, terminal, and invalid numeric boundary is
-  directly covered; PUC Lua and LuaJIT pass 91/91 and all six runtime variants match scalar v1 at 55/55.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.4.0` — audit and split Lua array runtime mechanisms.
+- latest_commit: `1622970c` — `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.11`; uniform-binding array-end result documentation repair.
+- next_action: reconcile current statement-only/no-value claims, add recurring no-drift, then resume `.4.3.4.1`.
+- current_proof: uniform binding and all five runtimes return independent updated array-end mutation values; older
+  current-facing mdBook/KM/backend summaries still contradict that adopted contract. Lua remains 91/91 both ABIs.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -26,5 +26,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.3.4` commit. Array helper split `.4.3.4`
-  is next. Oracle timeout calibration remains deferred to `.7.0`.
+- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.4.0` commit. `.12.1.11` is next; Lua array
+  construction `.4.3.4.1` waits. Oracle timeout calibration remains deferred to `.7.0`.

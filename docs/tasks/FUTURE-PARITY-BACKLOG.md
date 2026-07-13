@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (backend README follow-up `.12.1.10` re-closes selector-retirement public no-drift).
+- Last updated: `2026-07-12` (array audit activates `.12.1.11` mutation-result documentation repair).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2659,16 +2659,17 @@ before implementation.
   the director-prioritized removal of `.spec` `array(name)` / `hash(name)` semantics to `.12.1` before Rust/Lua.
 
 - ID: `FUTURE-PARITY-BACKLOG.12`
-  Status: `done`
+  Status: `active`
   Goal: Retire transitional compatibility surfaces after uniform expression and duck-typed binding semantics settle.
   Children: `.12.0`, `.12.1`
   Acceptance: Backward compatibility is temporary migration scaffolding, never a permanent language constraint;
     every retained compatibility surface has an explicit removal condition and owner. Bare variables carry one of
     scalar/array/harray/codeblock, calls and controls are expressions, runtime value type drives dispatch, and
     `array(name)`/`hash(name)` may not survive as alternate namespaces, type assertions, or mutation authority.
-  Verification: **PASS 2026-07-12.** `.12.1.10` closes the only later-found admission omission: all immediate
-    component READMEs are now discovered and current selector guidance is zero across 56 public files.
-  Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
+  Verification: `.12.1.0-.10` retain their complete behavior/retirement/public proof. Array audit
+    `LUA-BACKEND-PARITY.4.3.4.0` found stale pre-contract statement-only mutation-result prose; `.12.1.11` is the
+    bounded active follow-up before this parent re-closes.
+  Commit: `pending .12.1.11 closeout`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.0`
   Status: `done`
@@ -2682,10 +2683,10 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.0 - capture compatibility retirement doctrine`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1`
-  Status: `done`
+  Status: `active`
   Goal: Split and execute uniform binding plus spec-facing aggregate-selector retirement.
   Children: `.12.1.0`, `.12.1.1`, `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`, `.12.1.7`,
-    `.12.1.8`, `.12.1.9`, `.12.1.10`
+    `.12.1.8`, `.12.1.9`, `.12.1.10`, `.12.1.11`
   Acceptance: Inventory every public and implementation compatibility surface and classify temporary migration
     versus current language; define one variable binding with runtime scalar/array/harray/codeblock identity; make
     pure and mutable helper/method dispatch consume that value without wrapper-selected storage;
@@ -2695,10 +2696,10 @@ before implementation.
     specify expression-valued if/switch/calls and silent value drop as universal invariants; assign
     Perl/Rust/Dart/Julia/Lua, corpus, mdBook, diagnostics, hard-retirement, and final no-drift leaves before behavior
     code.
-  Verification: **PASS 2026-07-12.** `.12.1.0-.9` retain their recorded behavior/source/mdBook/capability proof.
-    Follow-up `.12.1.10` removes 14 backend-README positives and expands recurring public coverage from 47 to 56
-    files with stable inventory and backend bare-binding anchors.
-  Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
+  Verification: `.12.1.0-.10` retain their recorded behavior/source/mdBook/capability proof. Follow-up `.12.1.11`
+    is active because multiple current book/KM/backend-status sentences still teach the superseded statement-only
+    array-end result rule despite the admitted contract and all five runtimes returning updated typed targets.
+  Commit: `pending .12.1.11 closeout`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.0`
   Status: `done`
@@ -3016,6 +3017,19 @@ before implementation.
     executable-positive/19-classified proof plus capability 60/0/0; docs/KM/doctrines/mdBook pass.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
 
+- ID: `FUTURE-PARITY-BACKLOG.12.1.11`
+  Status: `active`
+  Goal: Reconcile array-end mutation result documentation with the adopted uniform-binding contract.
+  Dependencies: `.12.1.10`, `LUA-BACKEND-PARITY.4.3.4.0`
+  Acceptance: Inventory every current public/KM/backend statement that says `push_back`/`push_front`/`pop_back`/
+    `pop_front` are statement-only or return null/no value; preserve dated historical slice evidence while marking
+    it superseded; document that all four methods mutate and yield an independent updated typed target, pop still
+    discards the removed element, and continuations consume the updated array; add a recurring checker against
+    future normative drift; pass uniform-binding/five-backend/public/mdBook/KM/doctrine/cleanup/whitespace gates;
+    re-close `.12.1`/`.12` and return to `LUA-BACKEND-PARITY.4.3.4.1`.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `FUTURE-PARITY-BACKLOG.13`
   Status: `pending`
   Goal: Restore the codegen-inspector toolbox to the current thin-facade owner architecture.
@@ -3259,6 +3273,21 @@ before implementation.
   mdBook, artifact cleanup, and whitespace all pass with no runtime or fixture behavior change.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/backend README/book, architecture, Knowledge Map, changes/notes/live,
   and memory re-close `.12.1`/`.12` and resume Lua numeric alias/receiver `.4.3.3.2`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.11` Acceptance Checklist
+
+- [ ] **REPRODUCE / ISSUE** — Inventory all current statement-only/no-value array-end result claims against the
+  adopted contract, five backend implementation facts/tests, and public examples that already chain updates.
+- [ ] **ROOT CAUSE (WHY + WHERE)** — Distinguish valid dated history from current normative drift introduced when
+  `.12.1.1-.6` superseded the earlier terse slice without revisiting every book/KM/backend summary.
+- [ ] **FIX** — Correct public/KM/backend semantics, preserve explicit supersession provenance, and add a recurring
+  checker that rejects future current-facing statement-only array-end result claims.
+- [ ] **ADDRESSED (verified)** — Public guidance says all four end methods mutate and return independent updated
+  arrays, pop discards only the removed element, saved results stay isolated, and receiver continuations consume
+  the update; historical cards identify their original slice and later supersession.
+- [ ] **NO REGRESSION** — Uniform-binding checker, five backend focused tests, public checker, mdBook, KM,
+  doctrines, cleanup, and whitespace pass.
+- [ ] **LOCKSTEP** — `.12.1`/`.12` re-close and the single frontier returns to Lua array construction `.4.3.4.1`.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3603,7 +3632,9 @@ before implementation.
 | 116 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | Lua numeric aliases, symbol callees, and number receiver chains pass both ABIs. |
 | 117 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict aggregate numeric reducers and array receiver terminals pass both ABIs. |
 | 118 | `LUA-BACKEND-PARITY.4.3.3.4` | `done` | Numeric helper/public no-drift closed at 91/91 on both ABIs. |
-| 119 | `LUA-BACKEND-PARITY.4.3.4` | `active` | Audit and implement general array helper mechanisms. |
+| 119 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Six array mechanisms split; stale mutation-result prose root-caused. |
+| 120 | `FUTURE-PARITY-BACKLOG.12.1.11` | `active` | Align array-end result docs/KM with adopted updated-value semantics. |
+| 121 | `LUA-BACKEND-PARITY.4.3.4.1` | `pending` | Implement copied array construction/splicing after `.12.1.11`. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
