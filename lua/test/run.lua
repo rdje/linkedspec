@@ -2983,6 +2983,81 @@ Done::
   }), "copied array selection")
 end)
 
+test("runtime copied array transforms joins split pipelines and rebinding", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(source, [" A:A ", "", "c:d", "z:q", "AA"])
+   snapshot = copy(source)
+   pure_trim = trim_each(source)
+   pure_split = split_each(source, ":")
+   set(mutating, copy(source))
+   trim_each(mutating)
+   filter_nonempty(mutating)
+   lowercase_each(mutating)
+   split_each(mutating, ":")
+   filter_match(mutating, /^[acd]/)
+   uniq(mutating)
+   uppercase_each(mutating)
+   return({
+     "source" : source,
+     "snapshot" : snapshot,
+     "pure_trim" : pure_trim,
+     "pure_split" : pure_split,
+     "mutating" : mutating,
+     "direct_join" : join_values("|", ["a", 2, undef]),
+     "receiver_join" : ["a", "b"].join_values("|"),
+     "scalar_join" : join_values("-", "ab"),
+     "missing_join" : join_values("|"),
+     "null_join" : join_values("|", undef),
+     "regex_split" : ["a, B", "c ,d"].split_each(/\s*,\s*/i),
+     "regex_filter" : ["Alpha", "beta", "ALTO"].filter_match(/^a/i),
+     "invalid_filter" : filter_match(["a"], "not-a-regex"),
+     "invalid_transform" : trim_each("text"),
+     "chain" : [" A ", "", "B"].trim_each().filter_nonempty().lowercase_each().join_values("|"),
+     "terminal_join" : ["a"].join_values(",").uppercase()
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    source = json.array({ " A:A ", "", "c:d", "z:q", "AA" }),
+    snapshot = json.array({ " A:A ", "", "c:d", "z:q", "AA" }),
+    pure_trim = json.array({ "A:A", "", "c:d", "z:q", "AA" }),
+    pure_split = json.array({ " A", "A ", "", "c", "d", "z", "q", "AA" }),
+    mutating = json.array({ "A", "C", "D", "AA" }),
+    direct_join = "a|2|",
+    receiver_join = "a|b",
+    scalar_join = "",
+    missing_join = json.null,
+    null_join = json.null,
+    regex_split = json.array({ "a", "B", "c", "d" }),
+    regex_filter = json.array({ "Alpha", "ALTO" }),
+    invalid_filter = json.array(),
+    invalid_transform = json.array(),
+    chain = "a|b",
+    terminal_join = json.null,
+  }), "copied array transforms")
+end)
+
+test("uniform-binding dropped array transform rejects wrong kind", function()
+  local ok, failure = pcall(function()
+    execute_uniform_binding_source([[
+Top::
+ /x/ -> Done { items = "text"; split_each(items, ":"); return(items) }
+Done::
+ /x/
+]])
+  end)
+  assert_equal(ok, false, "wrong-kind transform fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed transform error")
+  assert_equal(failure.code, "binding_kind_mismatch", "transform error code")
+  assert_equal(failure.identifier, "items", "transform error identifier")
+  assert_equal(failure.expected_kind, "array", "transform expected kind")
+  assert_equal(failure.actual_kind, "scalar", "transform actual kind")
+end)
+
 test("uniform-binding wrong-kind mutation reports neutral fields", function()
   local ok, failure = pcall(function()
     execute_uniform_binding_source([[

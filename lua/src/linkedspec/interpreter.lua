@@ -687,15 +687,18 @@ local PURE_ARRAY_HELPERS = {
   count = true,
   drop_back = true,
   drop_front = true,
+  filter_match = true,
   filter_nonempty = true,
   first = true,
   flat = true,
   flat_array = true,
   index_of = true,
+  join_values = true,
   last = true,
   reversed = true,
   slice = true,
   sorted = true,
+  split_each = true,
   take = true,
   take_last = true,
   trim_each = true,
@@ -744,7 +747,7 @@ local function scalar_array_key(value)
   return scalar_string(value, true) or ""
 end
 
-local function evaluate_array_helper(name, values)
+local function evaluate_array_helper(engine, name, values)
   if name == "flat" then
     local value = values[1]
     if value == nil then return json.array({ json.null }) end
@@ -821,6 +824,36 @@ local function evaluate_array_helper(name, values)
     end
     return result
   end
+  if name == "join_values" then
+    local delimiter = scalar_string(values[1] == nil and "" or values[1], true) or ""
+    local source = values[2]
+    if source == nil or source == json.null then return json.null end
+    if json.kind(source) ~= "array" then return "" end
+    local parts = {}
+    for index, item in ipairs(source) do parts[index] = scalar_string(item, true) or "" end
+    return table.concat(parts, delimiter)
+  end
+  if name == "split_each" then
+    local delimiter = values[2] == nil and "" or values[2]
+    local result = json.array()
+    for _, item in ipairs(items) do
+      local parts = evaluate_pure_string_helper(engine, "split", { item, delimiter })
+      for _, part in ipairs(parts) do result[#result + 1] = copy_value(part) end
+    end
+    return result
+  end
+  if name == "filter_match" then
+    local regex = values[2] == nil and nil or compile_helper_regex(engine, values[2])
+    local result = json.array()
+    if regex == nil then return result end
+    for _, item in ipairs(items) do
+      local value = scalar_string(item, false)
+      if value ~= nil and regex:seek_match(value, 0) ~= nil then
+        result[#result + 1] = copy_value(item)
+      end
+    end
+    return result
+  end
   local result = json.array()
   if name == "filter_nonempty" then
     for _, item in ipairs(items) do
@@ -840,11 +873,18 @@ end
 
 local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state, receiver)
   local values = {}
-  if receiver ~= nil then values[1] = receiver end
-  for _, arg in ipairs(expr.args) do
-    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  local name = action_contracts.canonical_action_helper_name(expr.name)
+  if receiver ~= nil and name == "join_values" then
+    values[1] = expr.args[1] and
+      evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state) or ""
+    values[2] = receiver
+  else
+    if receiver ~= nil then values[1] = receiver end
+    for _, arg in ipairs(expr.args) do
+      values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+    end
   end
-  return evaluate_array_helper(action_contracts.canonical_action_helper_name(expr.name), values)
+  return evaluate_array_helper(engine, name, values)
 end
 
 local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, receiver)
@@ -1194,6 +1234,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
         if scalar_numeric.is_comparison(canonical_name) and index < #expr.calls then return json.null end
       elseif PURE_ARRAY_HELPERS[canonical_name] then
         value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
+        if canonical_name == "join_values" and index < #expr.calls then return json.null end
       else
         value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
       end
@@ -1277,10 +1318,12 @@ local function execute_array_split_statement(engine, expr, ctx, accumulator, edg
 end
 
 local function execute_array_transform_statement(engine, expr, ctx, accumulator, edge_state)
-  if expr.kind ~= "call" or #expr.args ~= 1 then return false end
+  if expr.kind ~= "call" then return false end
   local name = action_contracts.canonical_action_helper_name(expr.name)
-  if name ~= "trim_each" and name ~= "filter_nonempty" and name ~= "lowercase_each" and
-      name ~= "uppercase_each" then
+  local unary = name == "trim_each" or name == "filter_nonempty" or name == "lowercase_each" or
+    name == "uppercase_each" or name == "uniq"
+  local binary = name == "split_each" or name == "filter_match"
+  if (not unary and not binary) or (unary and #expr.args ~= 1) or (binary and #expr.args ~= 2) then
     return false
   end
   local target = binding_target_descriptor(argument_expr(expr.args[1]))
@@ -1290,7 +1333,11 @@ local function execute_array_transform_statement(engine, expr, ctx, accumulator,
   if name == "lowercase_each" or name == "uppercase_each" then
     transformed = evaluate_pure_string_helper(engine, name, { current })
   else
-    transformed = evaluate_array_helper(name, { current })
+    local values = { current }
+    if expr.args[2] then
+      values[2] = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+    end
+    transformed = evaluate_array_helper(engine, name, values)
   end
   store_array_mutation(ctx, target, storage, transformed)
   return true

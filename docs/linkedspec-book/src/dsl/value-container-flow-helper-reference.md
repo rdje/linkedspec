@@ -1071,11 +1071,12 @@ set(public_fields, filter_match(uniq(uppercase_each(fields)), /^[A-Z_]+$/));
 lowercase_each(public_fields);
 ```
 
-When `trim_each(name)`, `lowercase_each(name)`, or
-`uppercase_each(name)` appears as a standalone statement, it writes the transformed
-items back to that explicit working array. In a value expression or receiver chain, the same
-helper returns a transformed array value and does not mutate its input. This statement/value
-distinction is part of the portable contract.
+When `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`,
+`lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` appears as a standalone statement, it writes the
+transformed items back to that explicit working array. In a value expression or receiver chain, the same helper
+returns a transformed array value and does not mutate its input. This statement/value distinction is the reference
+contract. Perl and Lua currently implement all seven statement forms; Rust, Dart, and Julia currently omit
+write-back for `split_each`, `filter_match`, and `uniq`, with repair owned by `FUTURE-PARITY-BACKLOG.5`.
 
 Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
 

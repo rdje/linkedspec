@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (copied array selection closed at 93/93; transforms `.4.3.4.3` active)
+- Last updated: `2026-07-12` (array transform pipelines closed at 95/95; mutation/child flow `.4.3.4.4` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1119,17 +1119,26 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement scalar/regex array transforms, joins, split pipelines, and standalone rebinding.
   Dependencies: `.4.3.2`, `.4.3.4.1`, `.4.3.4.2`
   Acceptance: Delimiter-first `join_values`, `split_each`, `trim_each`, `filter_nonempty`, `filter_match`,
     `lowercase_each`, and `uppercase_each` reuse governed scalar/PCRE2/Unicode policy; pure calls and receivers copy,
-    dropped bare transform calls rebind and return updated targets under uniform binding, and sources stay exact.
-  Verification: `pending`
-  Commit: `pending`
+    dropped bare calls for all seven array-returning transforms, including `.4.3.4.2`'s `uniq`, rebind and return
+    updated targets under uniform binding, and sources stay exact. Pre-existing Rust/Dart/Julia omission of dropped
+    `split_each`/`filter_match`/`uniq` rebinding is explicitly routed to `FUTURE-PARITY-BACKLOG.5`, not copied into
+    Lua.
+  Verification: **PASS 2026-07-12.** Lua now shares copied direct/receiver evaluation for delimiter-first
+    `join_values`, literal/PCRE2 `split_each`, PCRE2 `filter_match`, trim/filter/case transforms, and stable `uniq`;
+    seven dropped bare transform calls rebind their named typed array, while value forms preserve sources and
+    wrong-kind targets emit neutral fields. Direct, literal, receiver, chained, invalid, missing/null join,
+    terminal join, Unicode, regex-flag, isolation, and rebinding cases pass 95/95 on PUC Lua and LuaJIT plus
+    manifest/CLI scaffolding. Toolbox proof routes pre-existing Rust/Dart/Julia dropped-transform and invalid-join
+    drift to `FUTURE-PARITY-BACKLOG.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close append, end-mutation, mutable split, and child-push/index execution through one binding seam.
   Dependencies: `.4.3.4.0`, `.4.3.4.2`, `FUTURE-PARITY-BACKLOG.12.1.11`
   Acceptance: `push`/`+=`, three-argument split, push/pop end methods, action-edge push, static-rule precedence,
@@ -1357,9 +1366,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Current frontier
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
-Numeric helper parent `.4.3.3`, construction/splicing `.4.3.4.1`, and copied selection/order/membership
-`.4.3.4.2` now pass 93/93 on PUC Lua and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result
-alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; scalar/regex transforms and joins `.4.3.4.3` are active.
+Numeric helper parent `.4.3.3`, construction/splicing `.4.3.4.1`, selection `.4.3.4.2`, and transform/join
+pipelines `.4.3.4.3` now pass 95/95 on PUC Lua and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding
+result alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; mutation and child-result flow `.4.3.4.4` are active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1410,7 +1419,8 @@ alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; scalar/regex transforms and 
 | 45 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Split six array mechanisms and route superseded mutation-result prose. |
 | 46 | `LUA-BACKEND-PARITY.4.3.4.1` | `done` | Ordered copied construction, explicit splicing, concat, and isolation pass 92/92. |
 | 47 | `LUA-BACKEND-PARITY.4.3.4.2` | `done` | Copied selection/order/membership/uniq pass 93/93 on both ABIs. |
-| 48 | `LUA-BACKEND-PARITY.4.3.4.3` | `active` | Implement scalar/regex transforms, joins, split pipelines, and rebinding. |
+| 48 | `LUA-BACKEND-PARITY.4.3.4.3` | `done` | Copied transforms, joins, PCRE2 pipelines, and seven rebindings pass 95/95. |
+| 49 | `LUA-BACKEND-PARITY.4.3.4.4` | `active` | Close append, end mutation, split, and child-result flow through one binding seam. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1559,6 +1569,24 @@ alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; scalar/regex transforms and 
   cross-backend drift is routed to `.5`; governance, Knowledge Map, mdBook, cleanup, and whitespace pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs, and
   memory close `.4.3.4.2` and activate scalar/regex transforms and joins `.4.3.4.3`.
+
+### `LUA-BACKEND-PARITY.4.3.4.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prove Lua's minimal array dispatcher rejects `join_values`, `split_each`, and
+  `filter_match`, cannot chain joins, and rebinds only four of the seven Perl-reference dropped transforms.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `PURE_ARRAY_HELPERS`, `evaluate_array_helper`, receiver injection, and the
+  dropped-statement allowlist lacked join ordering, governed split/regex dispatch, terminality, and complete
+  `BindingRuntime::array_transform` parity.
+- [x] **FIX** — Add delimiter-first join injection, copied literal/PCRE2 split/filter paths, terminal receiver join,
+  and kind-checked rebinding for split/trim/filter/case/uniq while reusing established scalar, PCRE2, and Unicode
+  evaluators.
+- [x] **ADDRESSED (verified)** — Direct, literal, receiver, chained, invalid, missing/null, regex-flag, Unicode,
+  source-isolation, all-seven-rebinding, and wrong-kind cases execute on both Lua ABIs.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 95/95 plus manifest/CLI scaffolding; Perl toolbox proof routes
+  Rust/Dart/Julia dropped-transform and invalid-join drift to `.5`; KM, mdBook, doctrines, cleanup, and whitespace
+  pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, helper reference and backend mdBook, Knowledge Map,
+  architecture/live docs, and memory close `.4.3.4.3` and activate mutation/child flow `.4.3.4.4`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1887,3 +1915,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.4.0` | `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms` | Existing-seam audit, six executable children, mutation-result supersession finding, and external repair routing. |
 | `LUA-BACKEND-PARITY.4.3.4.1` | `LUA-BACKEND-PARITY.4.3.4.1 - add Lua array construction splicing` | Ordered constructors/literals, explicit AST-context splices, copied flat/concat values, and dual-ABI isolation proof. |
 | `LUA-BACKEND-PARITY.4.3.4.2` | `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection` | Copied take/drop/slice/order/membership/uniq, receiver chains, invalid boundaries, and dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.4.3` | `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines` | Delimiter-first joins, PCRE2 split/filter, Unicode transforms, seven rebindings, isolation, and dual-ABI proof. |

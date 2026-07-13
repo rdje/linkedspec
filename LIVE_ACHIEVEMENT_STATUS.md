@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.3 — add Lua array transform pipelines**
+  (DONE — 95/95 on both ABIs; mutation/child flow `.4.3.4.4` active).
+
+  **Implementation:** Delimiter-first joins, literal/PCRE2 split pipelines, PCRE2 filters, Unicode transforms,
+  terminal join receivers, copied value paths, and seven kind-checked dropped-call rebindings share one runtime.
+
+  **Proof:** Direct, literal, receiver, chained, invalid, missing/null, regex-flag, isolation, all-rebinding, and
+  wrong-kind cases pass PUC Lua and LuaJIT 95/95 plus manifest/CLI scaffolding. Toolbox proof routes the discovered
+  Rust/Dart/Julia dropped-transform and invalid-join drift to `FUTURE-PARITY-BACKLOG.5`.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.2 — add Lua copied array selection**
   (DONE — 93/93 on both ABIs; scalar/regex transform pipelines `.4.3.4.3` active).
 

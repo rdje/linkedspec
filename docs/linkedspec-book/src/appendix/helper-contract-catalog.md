@@ -737,7 +737,9 @@ dispatch rule.
 - **Signature**: `join_values(delim: scalar, arr: array)`
 - **Returns**: scalar
 - **Behavior**: Joins array elements into a string with the delimiter between each element. Accepts composed array-valued expressions.
-- **Edge cases**: Returns empty string for empty array. Returns undef for non-array input.
+- **Edge cases**: Returns empty string for an empty array and undef for a missing/undef array on the reference and
+  Lua backends. Do not rely on a non-array source: Perl/Lua and Rust/Dart/Julia currently differ, with normalization
+  owned by `FUTURE-PARITY-BACKLOG.5`.
 
 ### `split(s, delim)`
 - **Signature**: `split(value: scalar, delim: scalar)`
@@ -760,9 +762,10 @@ dispatch rule.
   returns an array value for expression and receiver-chain use.
 
 ### `split_each(arr, delim)`
-- **Signature**: `split_each(arr: array, delim: scalar)`
+- **Signature**: `split_each(arr: array, delim: regex-or-scalar)`
 - **Returns**: array
-- **Behavior**: Splits each element of the array on the delimiter. Results are concatenated into a single flat array.
+- **Behavior**: Splits each element with the governed literal/regex split policy. Results are concatenated into a
+  single flat array.
 - **Example**: after `set(items, ["a:b", "c:d"])`, `return(items.split_each(":"))`
   yields `[["a","b","c","d"]]`.
 
@@ -1756,7 +1759,7 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `trim_each(name)`, `lowercase_each(name)`, or `uppercase_each(name)` call is a statement form and writes its result back to that explicit working array. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
+Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` call is a statement form and writes its result back to that explicit working array on the Perl reference and Lua backend. Rust, Dart, and Julia currently omit write-back for `split_each`, `filter_match`, and `uniq`; `FUTURE-PARITY-BACKLOG.5` owns repair. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
 
 ### Canonical Terse Forms
 The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**:

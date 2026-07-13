@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.3 — array value and dropped-statement forms need one explicit boundary):
+  Lua can share copied transform evaluation across functions and receivers, but `join_values` needs delimiter-first
+  receiver injection and dropped bare transforms need a separate kind-checked write-back seam. Reference probes
+  establish seven rebinding helpers: split/trim/filter/case plus `uniq`. Rust, Dart, and Julia currently intercept
+  only four, silently dropping three updated results; they also stringify invalid join sources differently.
+  `FUTURE-PARITY-BACKLOG.5` owns that cross-backend drift rather than letting Lua inherit it.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.2 — copied selection needs an explicit index/count policy): Lua uses one
   nonnegative integer adapter for take/drop and zero-based slice, copies every returned container, compares
   membership through the portable scalar-text boundary, and preserves first occurrence order in `uniq`. The

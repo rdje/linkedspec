@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.3 — add Lua array transform pipelines
+
+Added delimiter-first `join_values`, literal/PCRE2 `split_each`, PCRE2 `filter_match`, terminal join receivers,
+and copied trim/filter/Unicode-case pipelines. Pure calls and receivers preserve their sources; all seven
+Perl-reference dropped array transforms rebind a named typed target and wrong kinds retain neutral diagnostics.
+PUC Lua and LuaJIT pass 95/95 plus manifest/CLI scaffolding. Toolbox proof found Rust/Dart/Julia omit dropped
+`split_each`/`filter_match`/`uniq` rebinding and disagree on invalid joins; `FUTURE-PARITY-BACKLOG.5` owns repair.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.2 — add Lua copied array selection
 
 Added copied `last`, take/drop defaults and counts, zero-based `slice`, lexical `sorted`, `reversed`, scalar-text

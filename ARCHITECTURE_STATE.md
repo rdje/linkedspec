@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua copied array transforms now cover delimiter-first terminal joins, literal/PCRE2
+  split-and-flatten, PCRE2 filters, trim/filter/case/uniq pipelines, and all seven Perl-reference dropped-call
+  rebindings through one kind-checked seam. Both Lua ABIs pass 95/95; mutation/child flow `.4.3.4.4` is active.
+  Toolbox proof found Rust/Dart/Julia omit three rebindings and disagree on invalid joins; `.5` owns repair.
 - `2026-07-12` refresh: Lua copied array selection now covers last/take/drop defaults, zero-based slice, lexical
   order/reverse, scalar-text membership/index, and stable first-occurrence uniqueness through function and
   receiver chains without mutating sources. PUC Lua and LuaJIT pass 93/93; scalar/regex transforms `.4.3.4.3` are
