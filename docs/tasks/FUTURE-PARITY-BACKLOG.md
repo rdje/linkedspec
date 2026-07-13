@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua if/switch statement controls pass 107/107 through `.4.3.6.3.2`; attached while
-  `.4.3.6.3.3` active; switch comparison/range, alias-shape, and truthiness drift join helper-caveat owner `.5`).
+- Last updated: `2026-07-13` (Lua statement controls pass 108/108 through attached while `.4.3.6.3.3`; built-in
+  final blocks/scoped with `.4.3.6.4` active; switch, alias, truthiness, and loop drift join caveat owner `.5`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2199,6 +2199,11 @@ before implementation.
     statements before the first branch and after explicit `endcase()`, while Rust/Dart/Julia/Lua skip them.
     Either reject the ambiguous placement everywhere or adopt one explicit execution rule; portable specs keep
     every executable statement inside a branch meanwhile.
+    Normalize attached-while guard and `next()` boundaries too. Perl/Rust re-evaluate the condition after the
+    final allowed body and succeed if it is then false, while Dart/Julia throw immediately after that body; Lua
+    follows Perl/Rust. Perl/Lua treat statement `next()` inside the body as inner-loop continue, Rust treats it as
+    a no-op, and Dart/Julia propagate it to rule repetition. Choose one exact limit and flow rule before portable
+    specs rely on either boundary.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
@@ -3708,12 +3713,12 @@ before implementation.
 | 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected branches, one-time switch subjects, literal labels, arity diagnostics, and fluent returns pass 105/105. |
 | 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
-| 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `active` | Execute attached while statements with deterministic guard behavior. |
-| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Execute current built-in final blocks and scoped with. |
+| 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
+| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `active` | Execute current built-in final blocks and scoped with. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, and control aliases. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

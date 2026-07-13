@@ -42,7 +42,7 @@ merge arguments override earlier keys. Lua deterministically lets the renamed ol
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
 Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
 absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
-an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 107/107
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 108/108
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
@@ -62,7 +62,12 @@ comparison for now: null equals empty text, booleans spell as `0/1`, and aggrega
 Boolean/number and aggregate comparison drift in other backends is owned by backlog `.5`; portable specs avoid
 those case boundaries. Portable marker switches also keep every executable statement inside a branch: Lua joins
 Rust/Dart/Julia in skipping outside-range statements, while Perl executes them; backlog `.5` owns that boundary.
-Attached `while` execution `.4.3.6.3.3` is active.
+`.4.3.6.3.3` executes attached `while(condition) { ... }`: the condition re-evaluates before each body, body
+mutations feed the next condition, false initially runs zero bodies, and return follows its containing action or
+expression-block boundary. The configurable guard allows exactly `max_iterations` bodies, rechecks the condition,
+then raises typed code/keyword/kind/limit/rule fields if it is still true. Lua follows Perl by treating `next()`
+inside the body as inner-loop continue. Exact-limit and `next()` behavior differs elsewhere and remains backlog
+`.5`; current built-in final blocks/scoped `with` `.4.3.6.4` are active.
 General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,

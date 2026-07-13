@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.3 — execute Lua attached while controls
+
+Lua now executes typed attached `while(condition) { ... }` through the indexed statement executor. It validates
+the required body before evaluating the condition, re-evaluates before every body, exposes body mutations to the
+next check, preserves false-initial execution and action/expression-block return boundaries, and catches only
+`next()` as Perl-reference inner-loop continue.
+
+The existing configurable runtime threshold now permits exactly that many bodies, rechecks the condition, and
+raises a typed `while_iteration_limit_exceeded` error with keyword, ActionIR kind, limit, and rule attribution if
+it remains true. PUC Lua and LuaJIT pass 108/108 plus manifest/CLI scaffolding. Perl/Rust versus Dart/Julia exact-
+limit timing and the three current `next()` behaviors are routed to `FUTURE-PARITY-BACKLOG.5`; built-in final
+blocks/scoped with `.4.3.6.4` are active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.2 — execute Lua switch statement controls
 
 Lua now executes attached and marker `switch`/`case`/`default` statements through the indexed statement-range

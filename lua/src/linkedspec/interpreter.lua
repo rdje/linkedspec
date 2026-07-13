@@ -1955,6 +1955,36 @@ local function execute_attached_switch(engine, expr, ctx, accumulator, edge_stat
   end
 end
 
+local function while_iteration_limit_failure(engine, expr, ctx)
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  fail("LinkedSpec while iteration safety limit exceeded after " .. engine.max_iterations .. " iterations", {
+    code = "while_iteration_limit_exceeded",
+    control_keyword = expr.keyword or "while",
+    action_kind = expr.kind,
+    max_iterations = engine.max_iterations,
+    rule_label = rule_label,
+  })
+end
+
+local function execute_while_body(engine, body, ctx, accumulator, edge_state)
+  local ok, value = pcall(execute_block, engine, body, ctx, accumulator, edge_state)
+  if ok then return end
+  if getmetatable(value) == FLOW_MT and value.kind == "next" then return end
+  error(value, 0)
+end
+
+local function execute_attached_while(engine, expr, ctx, accumulator, edge_state)
+  if expr.keyword ~= "while" then statement_control_failure(expr, ctx, "expected while") end
+  if expr.body == nil then statement_control_failure(expr, ctx, "attached while requires a body") end
+
+  local iterations = 0
+  while runtime_truthy(evaluate_expr(engine, expr.condition, ctx, accumulator, edge_state)) do
+    if iterations >= engine.max_iterations then while_iteration_limit_failure(engine, expr, ctx) end
+    iterations = iterations + 1
+    execute_while_body(engine, expr.body, ctx, accumulator, edge_state)
+  end
+end
+
 local function select_marker_switch_chain(engine, statements, start_index, stop_index, ctx, accumulator, edge_state)
   local first = statements[start_index].expr
   if first.keyword ~= "switch" then statement_control_failure(first, ctx, "expected switch") end
@@ -2097,6 +2127,10 @@ execute_statement_at = function(engine, statements, index, stop_index, ctx, accu
     end
     return close_index
   end
+  if expr.kind == "control_while" then
+    execute_attached_while(engine, expr, ctx, accumulator, edge_state)
+    return index
+  end
   if expr.kind == "control_if" or expr.kind == "control_else" or expr.kind == "control_endif" or
       expr.kind == "control_case" or expr.kind == "control_default" or expr.kind == "control_endcase" or
       expr.kind == "control_endswitch" then
@@ -2122,7 +2156,8 @@ evaluate_block_value = function(engine, block, ctx, accumulator, edge_state)
     local next_index = index
     local returned, value = evaluate_block_step(function()
       if statement.expr.kind == "control_if" or statement.expr.kind == "control_else" or
-          statement.expr.kind == "control_endif" or statement.expr.kind == "control_switch" or
+          statement.expr.kind == "control_endif" or statement.expr.kind == "control_while" or
+          statement.expr.kind == "control_switch" or
           statement.expr.kind == "control_case" or statement.expr.kind == "control_default" or
           statement.expr.kind == "control_endcase" or statement.expr.kind == "control_endswitch" then
         next_index = execute_statement_at(

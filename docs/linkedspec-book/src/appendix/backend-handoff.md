@@ -695,11 +695,15 @@ bare labels, nested boundaries, empty bodies, and local return remain exact; mal
 typed. Inline and statement switch share Perl-reference scalar equality: null equals empty text, booleans use
 `0/1`, and aggregates are noncomparable. Rust/Dart/Julia boolean or aggregate drift joins backlog `.5`. Perl also
 executes marker statements outside every branch while Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary.
-Attached while `.4.3.6.3.3` is active. This also corrects the earlier Lua-only inert assignment scaffold expectation.
+Attached while then raises the gate to 108/108: its condition sees body mutation, false initial runs no body,
+return remains owned by its action/expression block, Perl-reference `next` continues the loop, and a typed
+rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
+timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are active.
+This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
-child-push expression results, rename-to-existing-key policy, scalar/aggregate condition truthiness, and
-boolean/number or aggregate switch equality differ;
+child-push expression results, rename-to-existing-key policy, scalar/aggregate condition truthiness,
+boolean/number or aggregate switch equality, and while guard/`next` behavior differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a

@@ -2889,6 +2889,108 @@ return({
   end
 end)
 
+test("runtime attached while controls re-evaluate state and enforce bounded safety", function()
+  local source = uniform_binding_action_source([[
+events = []
+condition_calls = []
+count = 0
+while({ push(condition_calls, count); num_lt(count, 3) }) {
+  push(events, count)
+  count = num_add(count, 1)
+}
+while(false) { exit_now(70) }
+next_count = 0
+while(num_lt(next_count, 3)) {
+  next_count = num_add(next_count, 1)
+  next()
+  exit_now(71)
+}
+local_value = {
+  local_count = 0
+  while(num_lt(local_count, 3)) {
+    local_count = num_add(local_count, 1)
+    if(num_eq(local_count, 2)) { return(["local", local_count]) }
+  }
+  exit_now(72)
+}
+return({
+  "events" : copy(events),
+  "condition_calls" : copy(condition_calls),
+  "count" : count,
+  "next_count" : next_count,
+  "local_value" : local_value
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_json_equal(result.events, json.decode("[0,1,2]"), "while body observes each prior condition state")
+  assert_json_equal(
+    result.condition_calls,
+    json.decode("[0,1,2,3]"),
+    "while condition re-evaluates once after the final body"
+  )
+  assert_equal(result.count, 3, "while body mutation reaches the next condition")
+  assert_equal(result.next_count, 3, "next continues the attached while body")
+  assert_json_equal(result.local_value, json.decode('["local",2]'), "while return stays expression-block local")
+
+  local action_return = execute_uniform_binding_source(uniform_binding_action_source([[
+while(true) {
+  return("action-return")
+  exit_now(73)
+}
+exit_now(74)
+]]))
+  assert_equal(action_return, "action-return", "while body return exits the surrounding action")
+
+  local exact_limit = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(
+      linkedspec.compile_spec(linkedspec.parse_spec(uniform_binding_action_source([[
+count = 0
+while(num_lt(count, 3)) { count = num_add(count, 1) }
+return(count)
+]]))),
+      { max_iterations = 3 }
+    ),
+    "xx"
+  ).value
+  assert_equal(exact_limit, 3, "condition becoming false after the final allowed body succeeds")
+
+  local ok, failure = pcall(function()
+    linkedspec.runtime_parse(
+      linkedspec.runtime_engine(
+        linkedspec.compile_spec(linkedspec.parse_spec(uniform_binding_action_source([[
+count = 0
+while(num_lt(count, 4)) { count = num_add(count, 1) }
+return(count)
+]]))),
+        { max_iterations = 3 }
+      ),
+      "xx"
+    )
+  end)
+  assert_equal(ok, false, "truthful condition after the final allowed body fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "while limit is a typed runtime failure")
+  assert_equal(failure.code, "while_iteration_limit_exceeded", "while limit diagnostic code")
+  assert_equal(failure.control_keyword, "while", "while limit diagnostic keyword")
+  assert_equal(failure.action_kind, "control_while", "while limit diagnostic ActionIR kind")
+  assert_equal(failure.max_iterations, 3, "while limit diagnostic threshold")
+  assert_equal(failure.rule_label, "Top", "while limit diagnostic rule")
+  assert_equal(
+    failure.message,
+    "LinkedSpec while iteration safety limit exceeded after 3 iterations",
+    "while limit diagnostic message"
+  )
+
+  local bodyless_ok, bodyless_failure = pcall(function()
+    execute_uniform_binding_source(uniform_binding_action_source('while(exit_now(75)); return("bad")'))
+  end)
+  assert_equal(bodyless_ok, false, "bodyless while fails before evaluating its condition")
+  assert_equal(linkedspec.is_runtime_interpreter_error(bodyless_failure), true, "bodyless while failure is typed")
+  assert_equal(bodyless_failure.code, "malformed_statement_control", "bodyless while diagnostic code")
+  assert_equal(bodyless_failure.control_keyword, "while", "bodyless while diagnostic keyword")
+  assert_equal(bodyless_failure.reason, "attached while requires a body", "bodyless while diagnostic reason")
+  assert_equal(bodyless_failure.rule_label, "Top", "bodyless while diagnostic rule")
+end)
+
 test("Lua matches the neutral scalar numeric contract exactly", function()
   local contract = json.decode(read_file("capability_conformance/scalar_numeric_contract.json"))
   assert_equal(contract.format, 1, "scalar numeric contract format")

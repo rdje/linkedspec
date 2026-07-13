@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.3 — a bounded while must recheck before declaring runaway): Reuse the
+  indexed statement executor, but keep one loop-specific boundary around the body. Validate the attached body
+  first; evaluate the condition; if true beyond the configured completed-body count, fail before another body;
+  otherwise execute and repeat. This matches generated Perl and Rust: a loop that becomes false exactly after the
+  final allowed body succeeds. Dart/Julia currently throw without that recheck. The same boundary must intercept
+  Lua's rule-level `next` flow so it continues the inner loop, matching generated Perl; Rust makes `next` a no-op
+  and Dart/Julia propagate it to rule repetition. Those are explicit backlog `.5` decisions, not hidden parity.
+  Return is not intercepted, so the surrounding action or expression-block boundary remains its owner. Typed
+  rule-attributed guard failures and bodyless pre-evaluation rejection pass 108/108 on both Lua ABIs.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.2 — validate switch ranges before spending the subject): Attached
   switch stores branches inside one typed body, while marker switch stores them as sibling statement ranges with
   optional `endcase` and nested `endswitch` boundaries. Reusing the if leaf's indexed executor keeps those two

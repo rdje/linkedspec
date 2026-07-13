@@ -1286,11 +1286,15 @@ table because its runtime behavior is to terminate the parser process.
 ### `while(cond) { ... }`
 - **Signature**: Attached-block statement form.
 - **Returns**: no value of its own; body statements provide side effects or `return(...)` values.
-- **Behavior**: Perl and Rust evaluate `cond` before every iteration and execute the body while the condition
-  stays true. A `return(expr)` inside the body returns from the surrounding rule/action.
-- **Safety**: Each lowered loop has a deterministic 10000-iteration guard. A non-terminating loop fails the
-  rule instead of hanging the generated parser.
-- **Portability status**: Portable on Perl and Rust as of `SPEC-FORMAT-TERSE.2.2.6.2`.
+- **Behavior**: Perl, Rust, Dart, Julia, and Lua evaluate `cond` before every iteration and expose body mutation to
+  the next condition. A `return(expr)` exits the surrounding action, or stays local when the loop is inside an
+  expression-valued block.
+- **Safety**: The default deterministic guard is 10000 body executions. Perl/Rust/Lua recheck the condition after
+  the final allowed body and fail only if it remains true; Dart/Julia currently fail immediately. Lua's typed
+  failure includes code, keyword, ActionIR kind, configured limit, and rule.
+- **Portability boundary**: Do not rely on `next()` inside the body yet. Perl/Lua treat it as inner-loop continue,
+  Rust treats it as a no-op, and Dart/Julia propagate it to rule repetition. Backlog `.5` owns guard/flow
+  normalization.
 
 ### `case(val, body)`
 - **Signature**: Inline switch branch.

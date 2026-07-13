@@ -10,16 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.3.2` — attached/marker switch-family statement controls.
-- latest_commit: `d3ba7f97` — `LUA-BACKEND-PARITY.4.3.6.3.1 - execute Lua if statement controls`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.3.2 - execute Lua switch statement controls`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.3.3`; execute attached while statements.
-- next_action: inventory Lua attached-while ActionIR and the Perl/Rust iteration-safety contract, then implement
-  condition re-evaluation, body-state visibility, return propagation, and the deterministic maximum guard.
-- current_proof: attached and marker switch validates structure before one-time subject evaluation, executes the
-  first scalar-equal case/default range, preserves nested markers/literal labels/local return, and reports typed
-  malformed/orphaned controls at 107/107 on both ABIs. Switch equality and outside-branch range drift remain
-  backlog `.5`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.3.3` — attached while statement controls.
+- latest_commit: `dec65021` — `LUA-BACKEND-PARITY.4.3.6.3.2 - execute Lua switch statement controls`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.4`; execute current built-in final blocks and scoped with.
+- next_action: inventory current built-in codeblock signatures and helper/receiver `with` binding snapshots, then
+  implement equivalent trailing/explicit block consumption with restoration on success, return, and failure.
+- current_proof: attached while re-evaluates stateful conditions, preserves false-initial/action/local-return and
+  Perl-reference inner-loop next, and enforces a typed rule-attributed post-limit recheck at 108/108 on both ABIs.
+  Exact-limit and next-flow drift remain backlog `.5`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -29,6 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: `.4.3.6.3.2` runtime/test, scalar-equality drift routing, KM facts,
-  task/live docs, and mdBook synchronization await their prepared commit. Oracle timeout calibration remains
-  `.7.0`.
+- blockers: none. in_flight_uncommitted: `.4.3.6.3.3` runtime/test, guard/next drift routing, KM facts, task/live
+  docs, and mdBook synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.

@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (attached/marker if/switch controls pass 107/107 through `.4.3.6.3.2`;
-  attached while execution `.4.3.6.3.3` active; control comparison/range/alias/truthiness drift routed to backlog
-  `.5`)
+- Last updated: `2026-07-13` (attached/marker controls and attached while pass 108/108 through `.4.3.6.3.3`;
+  current built-in final blocks/scoped with `.4.3.6.4` active; control comparison/range/alias/truthiness/loop drift
+  routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1444,17 +1444,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.2 - execute Lua switch statement controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Execute attached `while` statements through a deterministic loop-control seam.
   Dependencies: `.4.3.6.3.2`
   Acceptance: Conditions re-evaluate before each body, false initially runs zero bodies, body state is visible to
     the next condition, local return exits only the current block contract, and the governed runaway guard fails
     deterministically with rule attribution.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** The indexed statement executor now dispatches typed attached while nodes,
+    validates the required body before spending the condition, re-evaluates the condition before every body,
+    exposes body mutations to the next condition, preserves false-initial and empty-body behavior, treats
+    Perl-reference `next()` as inner-loop continue, and propagates return through the action or expression-block
+    boundary that owns it. The configurable guard permits exactly `max_iterations` bodies, rechecks once, and
+    emits typed code/keyword/kind/limit/rule fields only if that next condition remains true. One focused case
+    passes 108/108 on PUC Lua and LuaJIT. Exact-limit and `next()` drift is routed to backlog `.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.4`
-  Status: `pending`
+  Status: `active`
   Goal: Execute signature-governed built-in final blocks and scoped `with`.
   Dependencies: `.4.3.6.1`
   Acceptance: For current built-ins declaring a final `codeblock` parameter, `call(args) { ... }` and
@@ -1754,7 +1760,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected payloads, one-time switch subjects, literal labels, and fluent returns pass 105/105. |
 | 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
-| 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `active` | Execute attached while statements with deterministic guard behavior. |
+| 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
+| 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `active` | Execute current built-in final blocks and scoped with. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1913,6 +1920,25 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   inspection exposes remaining boolean/aggregate drift, now owned by backlog `.5`.
 - [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
   Map, changes/notes, and memory close switch-family statements and activate attached while `.4.3.6.3.3`.
+
+### `LUA-BACKEND-PARITY.4.3.6.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua preserved typed `control_while` condition/body nodes but routed them to the
+  unsupported ActionIR path; bodyless parser-shape nodes could otherwise spend condition side effects.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The indexed statement executor did not dispatch `control_while`, and rule
+  repetition's `next` flow must be intercepted at the inner loop boundary to reproduce generated Perl semantics.
+  Existing `engine.max_iterations` provided the threshold but not the attached-loop check or typed attribution.
+- [x] **FIX** — Add one attached while executor that validates first, evaluates condition/body lazily, catches only
+  `next` as loop continue, propagates return/error flows, and checks the guard after each condition but before a
+  body beyond the limit with typed rule-attributed diagnostics.
+- [x] **ADDRESSED (verified)** — Focused coverage locks condition/body order, state visibility, false initial,
+  action and expression-block return boundaries, `next` continuation, exact-limit success, next-truthful failure,
+  configurable diagnostic fields, and bodyless pre-evaluation rejection.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 108/108 plus parser CLI/corpus scaffolding. Perl lowering and Rust
+  source confirm exact-limit recheck; Dart/Julia throw after the final allowed body. Perl continues inner-loop
+  `next`, while Rust/Dart/Julia differ; backlog `.5` owns both normalizations.
+- [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
+  Map, changes/notes, and memory close statement controls and activate built-in final blocks/scoped with `.4.3.6.4`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

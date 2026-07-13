@@ -1353,8 +1353,8 @@ Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / 
 
 ## Attached `while` flow
 
-The Perl reference and Rust backend accept attached-block `while` for repeated statement bodies. The condition
-is evaluated before each iteration, and body statements can update the values used by that condition:
+All five current backends accept attached-block `while` for repeated statement bodies. The condition is evaluated
+before each iteration, and body statements can update the values used by the next condition:
 
 ```text
 set(count, 0);
@@ -1364,9 +1364,11 @@ while(num_lt(count, 3)) {
 return(count);
 ```
 
-`return(expr)` inside the loop returns from the surrounding rule/action. Each loop has a deterministic
-10000-iteration guard so a non-terminating loop fails instead of hanging the generated parser or Rust
-interpreter execution.
+`return(expr)` inside the loop returns from the surrounding action; inside an expression-valued block it remains
+local to that block. The default deterministic guard is 10000 body executions. Perl, Rust, and Lua recheck the
+condition after the final allowed body and succeed if it has become false; Dart and Julia currently throw at that
+boundary. Avoid `next()` inside portable loop bodies too: Perl/Lua continue the inner loop, Rust treats it as a
+no-op, and Dart/Julia propagate it to rule repetition. `FUTURE-PARITY-BACKLOG.5` owns both normalizations.
 
 ## Debug output helpers
 

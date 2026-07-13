@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua's indexed statement executor now dispatches attached while through a dedicated lazy
+  loop seam. Body validation precedes condition evaluation; body mutations feed the next condition; false initial,
+  action return, expression-block-local return, and Perl-reference inner-loop `next()` are exact. The configured
+  limit permits that many bodies, rechecks once, and reports typed code/keyword/kind/limit/rule fields only if the
+  condition stays true. Both Lua ABIs pass 108/108. Dart/Julia exact-limit timing and Rust/Dart/Julia `next` drift
+  are routed to backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are active.
 - `2026-07-13` refresh: Lua's same indexed statement executor now consumes attached and marker switch chains.
   Structural validation happens before the subject runs; the subject runs once; first matching case or one default
   executes through the shared range/block seam; nested marker switches and optional `endcase` boundaries remain
@@ -12,7 +18,7 @@ This document is the current high-level technical reading of the project shape. 
   marker forms share Perl-reference scalar equality: null equals empty text, booleans spell as `0/1`, and
   aggregates are not scalar-comparable. PUC Lua and LuaJIT pass 107/107; cross-backend boolean/number and aggregate
   comparison drift is routed to backlog `.5`. Perl also executes marker statements outside every branch while
-  Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary too. Attached while `.4.3.6.3.3` is active.
+  Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary too.
 - `2026-07-13` refresh: Lua's indexed statement executor now consumes attached if chains and nesting-aware marker
   ranges, evaluates conditions only until one branch is selected, preserves empty bodies and block-local return,
   and emits typed malformed/orphaned diagnostics with authored keyword, reason, ActionIR kind, and rule. Portable

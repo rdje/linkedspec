@@ -16,6 +16,7 @@ tags: [lua, runtime, codeblock, controls, callbacks, user-functions, planning, L
 evidence: "LUA-BACKEND-PARITY.4.3.6.0 audits lua/src/linkedspec/action_parser.lua, action_contracts.lua, interpreter.lua, and user_function_registry.lua. Parser/resolver support is structural; runtime block/control/callback execution is absent, and general user-function dispatch remains LUA-BACKEND-PARITY.5.1."
 evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 executes ordinary no-pair brace values, consumes block-local return, preserves harray classification, and corrects the earlier Lua-only inert assignment expectation at 104/104 on both ABIs."
 evidence_update_2026_07_13_inline_controls: "LUA-BACKEND-PARITY.4.3.6.2 executes lazy inline if/switch values, selected expression blocks, one-time switch subjects, literal bare case labels, and fluent returns at 105/105 on both ABIs; statement/attached aliases remain structural."
+evidence_update_2026_07_13_statement_controls: "LUA-BACKEND-PARITY.4.3.6.3.1-.3 execute attached/marker if, attached/marker switch, and attached while at 108/108. Current built-in final blocks/with remain .4; callbacks remain .5."
 reverify: "rg -n 'block_value|control_if|control_switch|control_while|prepare_invocation' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/user_function_registry.lua && bash scripts/check_task_tree_metadata.sh"
 ---
 
@@ -26,9 +27,8 @@ and structured control nodes, and it appends both attached `call(args) { ... }`
 and parenthesized `call(args, { ... })` blocks as final positional block values.
 The contract resolver traverses those nodes without deciding their behavior.
 
-The interpreter currently copies a `block_value` as inert typed data. It has no
-expression-valued block executor, control-node dispatcher, scoped `with`, or
-walk/map/reduce callback frame. The user-function registry can prepare an
+The interpreter now executes eager `block_value`, inline controls, attached/marker if and switch, and attached
+while through `.4.3.6.1-.3.3`. It still has no scoped `with` or walk/map/reduce callback frame. The user-function registry can prepare an
 invocation, but the interpreter does not yet call it; general staged-function
 runtime dispatch is explicitly owned by `LUA-BACKEND-PARITY.5.1`.
 

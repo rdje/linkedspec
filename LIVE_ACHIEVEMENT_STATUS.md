@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.3.3 — execute Lua attached while controls**
+  (DONE — 108/108 on both ABIs; built-in final blocks/scoped with `.4.3.6.4` active).
+
+  **Implementation:** Typed attached while nodes validate their body before spending the condition, re-evaluate
+  against body mutations, preserve false-initial and both return boundaries, treat Perl-reference `next()` as
+  inner-loop continue, and raise typed rule-attributed failures only when the post-limit condition remains true.
+
+  **Finding and proof:** Perl/Rust recheck after the final allowed body; Dart/Julia throw immediately. Perl/Lua
+  continue inner-loop `next`, Rust treats it as a no-op, and Dart/Julia propagate it to rule repetition. Backlog
+  `.5` owns both normalizations. PUC Lua and LuaJIT pass 108/108 plus CLI/corpus scaffolding.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.3.2 — execute Lua switch statement controls**
   (DONE — 107/107 on both ABIs; attached while `.4.3.6.3.3` active).
 
