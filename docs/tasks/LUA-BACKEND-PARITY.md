@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (eager blocks and lazy inline controls pass 105/105 through `.4.3.6.2`;
-  attached/marker if-family execution `.4.3.6.3.1` active; truthiness drift routed to backlog `.5`)
+- Last updated: `2026-07-13` (attached/marker if-family controls pass 106/106 through `.4.3.6.3.1`;
+  switch-family statement execution `.4.3.6.3.2` active; alias-shape and truthiness drift routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1410,16 +1410,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Execute attached and marker `if`/`elseif`/`else` plus `when`/`otherwise` statement forms.
   Dependencies: `.4.3.6.1`
   Acceptance: Exactly one selected branch executes, condition aliases and marker boundaries match ActionIR order,
     empty branches are neutral, and malformed/orphaned control nodes retain structured diagnostics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** One nesting-aware statement-range executor now selects exactly one attached
+    or marker branch, skips later conditions and all unselected bodies, preserves empty branches and block-local
+    return, and attributes malformed/orphaned chains with `malformed_statement_control`, authored keyword,
+    reason, ActionIR kind, and rule. The portable alias matrix is explicit: attached `when/otherwise`, marker
+    `i/elif`; broader Perl/Dart/Julia acceptance is non-portable and routed to `FUTURE-PARITY-BACKLOG.5`. One
+    end-to-end case covers nested markers, both alias families, skipped fatal paths, empty branches, local returns,
+    mixed forms, orphan markers, missing `endif`, duplicate `else`, and `elseif` after `else`. PUC Lua and LuaJIT
+    pass 106/106.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.3.1 - execute Lua if statement controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute attached and marker `switch`/`case`/`default` statement forms.
   Dependencies: `.4.3.6.3.1`
   Acceptance: The switch subject evaluates once; the first matching case or one default executes; later cases are
@@ -1736,7 +1743,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 60 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Parser-ahead block/control/callback work is split from user-function and callable-value owners. |
 | 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receivers pass 104/104. |
 | 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected payloads, one-time switch subjects, literal labels, and fluent returns pass 105/105. |
-| 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `active` | Execute attached/marker if-family statements. |
+| 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
+| 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `active` | Execute attached/marker switch-family statements. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1857,6 +1865,24 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   real Perl/Rust/Dart/Julia drift; Lua follows the Perl oracle and `FUTURE-PARITY-BACKLOG.5` owns normalization.
 - [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, mdBook, Knowledge Map, live docs,
   changes/notes, and memory close inline controls and activate `.4.3.6.3.1`.
+
+### `LUA-BACKEND-PARITY.4.3.6.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Attached and marker if-family nodes parsed and resolved, but Lua evaluated each as an
+  unsupported ActionIR kind; no branch selection, nesting boundary, or orphan diagnostic owner existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `execute_block` iterated statements independently, while marker chains need a
+  nesting-aware range selector and attached chains need consecutive-branch consumption. Perl toolbox probes also
+  exposed broader alias-shape acceptance than Rust's portable parser surface.
+- [x] **FIX** — Add one shared indexed statement executor for attached and marker branches, lazy ordered condition
+  selection, nested `endif` scanning, empty/local-return preservation, the portable alias matrix, and typed
+  malformed/orphaned diagnostics before generic expression dispatch.
+- [x] **ADDRESSED (verified)** — One end-to-end case covers canonical and portable alias forms, skipped fatal
+  conditions/bodies, empty branches, nested marker chains, attached/marker local return, orphan branches/markers,
+  missing closure, duplicate/following branches, and attached/marker mixing.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 106/106 plus parser CLI/corpus scaffolding. Perl probes and
+  Rust/Dart/Julia source seams establish the extra alias-shape drift; backlog `.5` owns normalization.
+- [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
+  Map, changes/notes, and memory close if-family statements and activate switch-family `.4.3.6.3.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

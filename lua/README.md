@@ -42,7 +42,7 @@ merge arguments override earlier keys. Lua deterministically lets the renamed ol
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
 Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
 absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
-an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 105/105
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 106/106
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
@@ -52,8 +52,11 @@ callbacks. `.4.3.6.1` now executes ordinary non-pair `{ ... }` values once, yiel
 block-local `return`, preserves empty/keyed harray precedence, and continues yielded receivers. `.4.3.6.2` adds
 lazy inline `if`/`switch`, selected block payloads, one-time switch subjects, literal bare case labels, generic
 arity diagnostics, and assignment/fluent-return composition. `i`/`elif` remain marker aliases and
-`when`/`otherwise` remain attached-block aliases rather than inline values. Attached/marker if-family execution
-`.4.3.6.3.1` is active. General user-function final blocks remain `.5.1`, while
+`when`/`otherwise` remain attached-block aliases rather than inline values. `.4.3.6.3.1` now executes exactly one
+attached or marker if-family branch, preserves nested marker ranges, empty branches, and block-local return, and
+reports orphaned/malformed chains with typed keyword/reason/rule fields. Broader alias/shape combinations accepted
+by some backends are non-portable pending backlog `.5`. Switch-family statement execution `.4.3.6.3.2` is active.
+General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

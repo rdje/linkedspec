@@ -681,12 +681,16 @@ harray mutation are implemented and public-result guarded. Codeblock/control/tre
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks
 remain `.5.1`; explicit callable codeblock values remain future `.11.7`.
-Eager blocks plus lazy inline controls now pass 105/105: ordinary no-pair braces yield their last/local-return
+Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch
 subjects once, treats bare case labels literally, and composes in assignment and fluent return slots. Structural
-`i`/`elif` and `when`/`otherwise` aliases do not become inline values. This corrects the earlier Lua-only inert
-assignment scaffold expectation; attached/marker if-family execution `.4.3.6.3.1` is active.
+`i`/`elif` and `when`/`otherwise` aliases do not become inline values. Attached/marker if-family statements then
+raise the gate to 106/106: one selected branch executes, nested marker boundaries and empty branches remain exact,
+block-local return is preserved, and malformed/orphaned controls expose typed keyword/reason/rule fields. Portable
+authoring keeps `i`/`elif` marker-only and `when`/`otherwise` attached-only; extra alias-shape acceptance in
+Perl/Dart/Julia versus Rust is backlog `.5`. Switch-family statement execution `.4.3.6.3.2` is active. This also
+corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results, rename-to-existing-key policy, and scalar/aggregate condition truthiness differ;

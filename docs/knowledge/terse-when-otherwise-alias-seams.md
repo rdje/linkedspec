@@ -7,6 +7,7 @@ answers:
   - "why is Perl when not acceptable for LinkedSpec when otherwise"
   - "does when otherwise lower through ActionIR today"
   - "does Rust need a new runtime for when otherwise"
+  - "are marker when otherwise forms portable"
 date: 2026-06-30
 status: current
 tags: [spec-format-terse, control-flow, actionir, rust-parity, aliases]
@@ -30,3 +31,8 @@ The implementation normalizes to existing control-flow concepts:
 On Perl, the aliases live at the statement-splitting, scanner/contract, and `ControlFlow` dispatch seams that
 already own attached `if/else`. On Rust, the attached-if parser starts on `when`, accepts `otherwise`, and emits
 the existing `if`/`else`/`endif` statements. The Rust runtime does not need a new branch engine.
+
+The portable contract remains this attached shape. A 2026-07-13 direct Perl probe found that the reference also
+lowers marker `when(...); otherwise(); endif()`, and Dart/Julia ActionIR seams accept the broader shape, while Rust
+does not. Those extra combinations are backend extensions under `FUTURE-PARITY-BACKLOG.5`, not current authoring
+guidance.

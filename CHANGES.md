@@ -1,5 +1,14 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.1 — execute Lua if statement controls
+
+Added one indexed Lua statement executor for consecutive attached if branches and nesting-aware marker ranges.
+Conditions stop after the selected branch; skipped bodies never run; empty branches and block-local return are
+preserved. Orphan branches/markers, missing `endif`, duplicate/following branches, and mixed carriers produce
+typed `malformed_statement_control` fields. Portable `when/otherwise` attached aliases and `i/elif` marker aliases
+pass 106/106 on both Lua ABIs. Direct probes found broader Perl/Dart/Julia alias-shape acceptance than Rust;
+backlog `.5` owns normalization and the book keeps the portable intersection.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.2 — execute Lua lazy inline controls
 
 Added lazy inline `if`/`elseif`/`else` and `switch`/`case`/`default` evaluation before Lua's eager helper path.

@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua's indexed statement executor now consumes attached if chains and nesting-aware marker
+  ranges, evaluates conditions only until one branch is selected, preserves empty bodies and block-local return,
+  and emits typed malformed/orphaned diagnostics with authored keyword, reason, ActionIR kind, and rule. Portable
+  `when/otherwise` attached aliases and `i/elif` marker aliases pass 106/106 on both ABIs; broader alias-shape
+  acceptance in Perl/Dart/Julia versus Rust is routed to backlog `.5`. Switch statements `.4.3.6.3.2` are active.
 - `2026-07-13` refresh: Lua now executes ordinary no-pair brace values eagerly at 104/104 on both ABIs. Non-final
   statements reuse dropped-statement mutation; final expressions yield values; local return catches only the
   block's return flow; empty/keyed braces remain harrays; yielded values continue through receivers. This corrects
   the earlier Lua-only `callback = { return(...) }` inert-storage scaffold expectation. Contextual trailing blocks
-  remain structural, explicit callable values remain future `.11.7`, and lazy inline controls `.4.3.6.2` are active.
+  remain structural, explicit callable values remain future `.11.7`, and lazy inline controls `.4.3.6.2` are done.
 - `2026-07-13` refresh: Lua's ActionIR parser/resolver already preserves eager blocks, generic final block
   arguments, and structured controls, but the interpreter currently returns inert block copies and has no
   control/callback executor. `.4.3.6.0` splits eager values, inline controls, statement controls, current built-in

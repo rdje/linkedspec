@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.1 — statement control owns statement ranges, not individual nodes):
+  Attached branches arrive as consecutive ActionIR nodes with nested bodies, while marker branches delimit ranges
+  in the surrounding block and require nested `endif` accounting. One indexed executor now owns both shapes and
+  reuses the same block/dropped-statement seam, so selected `return` propagates to a rule block but remains local
+  when the enclosing expression block catches it. Structural validation precedes marker condition evaluation;
+  authored keyword/reason/rule fields survive malformed paths. A toolbox/source audit also found that Perl,
+  Dart, and Julia admit more alias/shape pairings than Rust. Lua deliberately implements the documented portable
+  intersection and backlog `.5` owns any future enlargement or aligned rejection.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.2 — structural control aliases must not leak into value dispatch): Lua's
   contract canonicalizer maps `i`/`when` to `if` and `elif`/`otherwise` to later branch names because all are
   governed calls, but that map alone does not grant identical semantics. `i`/`elif` belong to marker statement

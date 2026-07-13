@@ -774,7 +774,9 @@ return(array(...))       — return array
 ```
 
 `i`/`elif` are aliases only for the marker statement family, and `when`/`otherwise` only for the attached-block
-family; they are not aliases for inline value-form calls.
+family; they are not aliases for inline value-form calls. Perl, Dart, and Julia currently accept additional
+alias/shape combinations that Rust rejects. Those are backend extensions, not portable grammar; backlog `.5`
+owns alignment.
 
 ### 7.7 Capture/Mark Helpers
 ```

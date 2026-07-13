@@ -1229,7 +1229,9 @@ Inline `if(...)` and `switch(...)` are portable value expressions when simple br
 `return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch.
 Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
 The short `i`/`elif` spellings are statement-marker aliases, while `when`/`otherwise` are attached-block aliases;
-they are not alternate names for these inline value helpers.
+they are not alternate names for these inline value helpers. Some backends currently accept the aliases in the
+opposite statement shape as an extension, but Rust does not; portable specs use only the documented pairing until
+`FUTURE-PARITY-BACKLOG.5` normalizes acceptance.
 
 | Helper | Meaning |
 | --- | --- |

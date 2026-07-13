@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.2` — lazy inline if/switch value controls.
-- latest_commit: `bbd4162b` — `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.3.1`; execute attached/marker if-family statements.
-- next_action: inventory exact attached/marker if-chain AST order and mature-backend statement-state seams, then
-  implement one selected branch with alias/orphan diagnostics over the shared block executor.
-- current_proof: lazy inline if/switch evaluates only selected payloads, preserves false/null and local return,
-  evaluates switch subjects once, keeps bare case labels literal, and composes in assignment/fluent return at
-  105/105 on both ABIs. Structural aliases stay non-inline; Lua follows Perl truthiness pending backlog `.5`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.3.1` — attached/marker if-family statement controls.
+- latest_commit: `839c22ff` — `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.3.1 - execute Lua if statement controls`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.3.2`; execute attached/marker switch-family statements.
+- next_action: inventory exact attached/marker switch ActionIR order and scalar-equality seams, then implement a
+  one-time subject selector with first-case/default range execution over the shared statement executor.
+- current_proof: attached and marker if-family statements execute one selected branch with nested boundaries,
+  empty-body neutrality, local return, portable aliases, and typed malformed/orphaned diagnostics at 106/106 on
+  both ABIs. Alias-shape and truthiness drift remain backlog `.5`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,6 +28,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: `.4.3.6.2` runtime/test, alias-boundary correction, truthiness routing,
+- blockers: none. in_flight_uncommitted: `.4.3.6.3.1` runtime/test, portable alias enforcement and drift routing,
   KM facts, task/live docs, and mdBook synchronization await their prepared commit. Oracle timeout calibration
   remains `.7.0`.

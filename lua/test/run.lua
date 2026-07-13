@@ -2611,6 +2611,120 @@ Done::
   assert_equal(unless_resolution.diagnostics[1].helper_name, "unless", "unless diagnostic stays source-attributed")
 end)
 
+test("runtime statement if controls execute one attached or marker branch", function()
+  local source = uniform_binding_action_source([[
+events = []
+if(false) { exit_now(31) }
+elseif(true) { push(events, "attached-elseif") }
+elseif(exit_now(32)) { exit_now(33) }
+else { exit_now(34) }
+when(false) { exit_now(35) } otherwise { push(events, "attached-otherwise") }
+when(true) {} otherwise { exit_now(36) }
+push(events, "after-attached-empty")
+i(false)
+  exit_now(37)
+elif(true)
+  push(events, "marker-elif")
+elseif(exit_now(38))
+  exit_now(39)
+else()
+  exit_now(40)
+endif()
+if(false)
+  exit_now(41)
+else()
+  push(events, "marker-else")
+endif()
+if(true)
+elseif(exit_now(42))
+  exit_now(43)
+endif()
+push(events, "after-marker-empty")
+if(true)
+  if(false)
+    exit_now(44)
+  else()
+    push(events, "nested-marker")
+  endif()
+else()
+  exit_now(45)
+endif()
+attached_value = { if(false) { return("bad") } elseif(true) { return("attached-local") } else { return("bad") } }
+marker_value = { i(false); return("bad"); elif(true); return("marker-local"); else(); return("bad"); endif() }
+return({ "events" : copy(events), "attached_value" : attached_value, "marker_value" : marker_value })
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_json_equal(result.events, json.decode([[
+[
+  "attached-elseif",
+  "attached-otherwise",
+  "after-attached-empty",
+  "marker-elif",
+  "marker-else",
+  "after-marker-empty",
+  "nested-marker"
+]
+]]), "attached and marker branches preserve ActionIR order")
+  assert_equal(result.attached_value, "attached-local", "attached branch return stays block-local")
+  assert_equal(result.marker_value, "marker-local", "marker branch return stays block-local")
+
+  local action_return = execute_uniform_binding_source(uniform_binding_action_source([[
+if(false)
+  return("bad")
+else()
+  return("marker-action-return")
+endif()
+exit_now(46)
+]]))
+  assert_equal(action_return, "marker-action-return", "selected marker return exits the surrounding action block")
+
+  for _, malformed in ipairs({
+    { source = 'elseif(true); return("bad")', keyword = "elseif", reason = "orphaned branch or marker" },
+    { source = 'otherwise(); return("bad")', keyword = "otherwise", reason = "orphaned branch or marker" },
+    { source = 'endif(); return("bad")', keyword = "endif", reason = "orphaned branch or marker" },
+    { source = 'if(true); return("bad")', keyword = "if", reason = "missing endif" },
+    { source = 'if(false); else(); else(); endif()', keyword = "else", reason = "duplicate else" },
+    { source = 'if(false); else(); elif(true); endif()', keyword = "elif", reason = "elseif follows else" },
+    {
+      source = 'if(false) { return("bad") } elseif(true); return("mixed"); endif()',
+      keyword = "elseif",
+      reason = "cannot mix attached and marker branches",
+    },
+    { source = 'i(true) { return("bad") }', keyword = "i", reason = "expected if/when" },
+    {
+      source = 'if(false) { return("bad") } elif(true) { return("bad") }',
+      keyword = "elif",
+      reason = "expected elseif",
+    },
+    { source = 'when(true); return("bad"); endif()', keyword = "when", reason = "expected if/i" },
+    {
+      source = 'if(false); otherwise(); return("bad"); endif()',
+      keyword = "otherwise",
+      reason = "expected else",
+    },
+    {
+      source = 'if(true) {} else {} otherwise {}',
+      keyword = "otherwise",
+      reason = "duplicate else",
+    },
+    {
+      source = 'if(false) {} else {} elseif(true) {}',
+      keyword = "elseif",
+      reason = "elseif follows else",
+    },
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(malformed.source))
+    end)
+    assert_equal(ok, false, malformed.keyword .. " malformed control fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.keyword .. " typed control failure")
+    assert_equal(failure.code, "malformed_statement_control", malformed.keyword .. " control diagnostic code")
+    assert_equal(failure.control_keyword, malformed.keyword, malformed.keyword .. " diagnostic keyword")
+    assert_equal(failure.reason, malformed.reason, malformed.keyword .. " diagnostic reason")
+    assert_equal(failure.rule_label, "Top", malformed.keyword .. " diagnostic rule")
+  end
+end)
+
 test("Lua matches the neutral scalar numeric contract exactly", function()
   local contract = json.decode(read_file("capability_conformance/scalar_numeric_contract.json"))
   assert_equal(contract.format, 1, "scalar numeric contract format")

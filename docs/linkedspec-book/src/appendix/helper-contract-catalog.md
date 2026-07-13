@@ -1244,6 +1244,8 @@ table because its runtime behavior is to terminate the parser process.
 - **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
 - **Behavior**: Equivalent to `if(cond) { ... } else { ... }`. The Perl reference and Rust backend
   normalize the aliases to canonical `if`/`else` control flow; they are not host-language `when` blocks.
+- **Portability boundary**: Use `when/otherwise` only in this attached shape and `i/elif` only in marker chains.
+  Perl, Dart, and Julia currently accept more combinations than Rust; backlog `.5` owns normalization.
 
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.

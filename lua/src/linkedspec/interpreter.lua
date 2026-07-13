@@ -123,6 +123,7 @@ end
 local execute_rule
 local evaluate_expr
 local evaluate_block_value
+local execute_block
 
 local function argument_expr(arg) return arg.value end
 
@@ -1735,25 +1736,237 @@ local function evaluate_block_step(callback)
   error(value, 0)
 end
 
+local ATTACHED_IF_START_KEYWORDS = { ["if"] = true, when = true }
+local ATTACHED_ELSEIF_KEYWORDS = { ["elseif"] = true }
+local ATTACHED_ELSE_KEYWORDS = { ["else"] = true, otherwise = true }
+local MARKER_IF_START_KEYWORDS = { ["if"] = true, i = true }
+local MARKER_ELSEIF_KEYWORDS = { ["elseif"] = true, elif = true }
+local MARKER_ELSE_KEYWORDS = { ["else"] = true }
+
+local function statement_control_failure(expr, ctx, reason)
+  local keyword = expr.keyword or expr.canonical_keyword or expr.kind
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  fail("malformed statement control '" .. tostring(keyword) .. "' in rule " .. tostring(rule_label) ..
+    ": " .. reason, {
+      code = "malformed_statement_control",
+      control_keyword = keyword,
+      reason = reason,
+      action_kind = expr.kind,
+      rule_label = rule_label,
+    })
+end
+
+local function is_marker_if_start(expr)
+  return expr.kind == "control_if" and expr.branch_role == "if" and expr.body == nil
+end
+
+local function is_marker_elseif(expr)
+  return expr.kind == "control_if" and expr.branch_role == "elseif" and expr.body == nil
+end
+
+local function is_marker_else(expr)
+  return expr.kind == "control_else" and expr.body == nil
+end
+
+local function is_marker_endif(expr)
+  return expr.kind == "control_endif" and expr.body == nil
+end
+
+local function validate_if_keyword(expr, ctx, expected, allowed)
+  if allowed[expr.keyword] then return end
+  statement_control_failure(expr, ctx, "expected " .. expected)
+end
+
+local function execute_attached_if_chain(engine, statements, start_index, stop_index, ctx, accumulator, edge_state)
+  local first = statements[start_index].expr
+  validate_if_keyword(first, ctx, "if/when", ATTACHED_IF_START_KEYWORDS)
+
+  local branches = {}
+  local next_index = start_index
+  local cursor = start_index
+  while cursor < stop_index do
+    local expr = statements[cursor].expr
+    if cursor == start_index then
+      branches[#branches + 1] = { condition = expr.condition, body = expr.body }
+    elseif expr.kind == "control_if" and expr.branch_role == "elseif" then
+      if expr.body == nil then
+        statement_control_failure(expr, ctx, "cannot mix attached and marker branches")
+      end
+      validate_if_keyword(expr, ctx, "elseif", ATTACHED_ELSEIF_KEYWORDS)
+      branches[#branches + 1] = { condition = expr.condition, body = expr.body }
+    elseif expr.kind == "control_else" then
+      if expr.body == nil then
+        statement_control_failure(expr, ctx, "cannot mix attached and marker branches")
+      end
+      validate_if_keyword(expr, ctx, "else/otherwise", ATTACHED_ELSE_KEYWORDS)
+      branches[#branches + 1] = { body = expr.body }
+    else
+      break
+    end
+    next_index = cursor
+    if expr.kind == "control_else" then
+      local following = statements[cursor + 1]
+      if following and following.expr.kind == "control_else" then
+        statement_control_failure(following.expr, ctx, "duplicate else")
+      end
+      if following and following.expr.kind == "control_if" and following.expr.branch_role == "elseif" then
+        statement_control_failure(following.expr, ctx, "elseif follows else")
+      end
+      break
+    end
+    cursor = cursor + 1
+  end
+
+  for _, branch in ipairs(branches) do
+    if branch.condition == nil or
+        runtime_truthy(evaluate_expr(engine, branch.condition, ctx, accumulator, edge_state)) then
+      execute_block(engine, branch.body, ctx, accumulator, edge_state)
+      break
+    end
+  end
+  return next_index
+end
+
+local function select_marker_if_chain(engine, statements, start_index, stop_index, ctx, accumulator, edge_state)
+  local first = statements[start_index].expr
+  validate_if_keyword(first, ctx, "if/i", MARKER_IF_START_KEYWORDS)
+
+  local branches = { { condition = first.condition, start_index = start_index + 1 } }
+  local frames = { { saw_else = false } }
+  local close_index
+  local cursor = start_index + 1
+  while cursor < stop_index do
+    local expr = statements[cursor].expr
+    if is_marker_if_start(expr) then
+      validate_if_keyword(expr, ctx, "if/i", MARKER_IF_START_KEYWORDS)
+      frames[#frames + 1] = { saw_else = false }
+    elseif is_marker_elseif(expr) then
+      validate_if_keyword(expr, ctx, "elseif/elif", MARKER_ELSEIF_KEYWORDS)
+      local frame = frames[#frames]
+      if frame.saw_else then statement_control_failure(expr, ctx, "elseif follows else") end
+      if #frames == 1 then
+        branches[#branches].stop_index = cursor
+        branches[#branches + 1] = { condition = expr.condition, start_index = cursor + 1 }
+      end
+    elseif is_marker_else(expr) then
+      validate_if_keyword(expr, ctx, "else", MARKER_ELSE_KEYWORDS)
+      local frame = frames[#frames]
+      if frame.saw_else then statement_control_failure(expr, ctx, "duplicate else") end
+      frame.saw_else = true
+      if #frames == 1 then
+        branches[#branches].stop_index = cursor
+        branches[#branches + 1] = { start_index = cursor + 1 }
+      end
+    elseif is_marker_endif(expr) then
+      if #frames > 1 then
+        frames[#frames] = nil
+      else
+        branches[#branches].stop_index = cursor
+        close_index = cursor
+        break
+      end
+    end
+    cursor = cursor + 1
+  end
+
+  if close_index == nil then statement_control_failure(first, ctx, "missing endif") end
+
+  for _, branch in ipairs(branches) do
+    if branch.condition == nil or
+        runtime_truthy(evaluate_expr(engine, branch.condition, ctx, accumulator, edge_state)) then
+      return branch.start_index, branch.stop_index, close_index
+    end
+  end
+  return nil, nil, close_index
+end
+
+local execute_statement_at
+local execute_statement_range
+
+execute_statement_at = function(engine, statements, index, stop_index, ctx, accumulator, edge_state)
+  local expr = statements[index].expr
+  if expr.kind == "control_if" and expr.branch_role == "if" then
+    if expr.body ~= nil then
+      return execute_attached_if_chain(
+        engine,
+        statements,
+        index,
+        stop_index,
+        ctx,
+        accumulator,
+        edge_state
+      )
+    end
+    local selected_start, selected_stop, close_index = select_marker_if_chain(
+      engine,
+      statements,
+      index,
+      stop_index,
+      ctx,
+      accumulator,
+      edge_state
+    )
+    if selected_start ~= nil then
+      execute_statement_range(
+        engine,
+        statements,
+        selected_start,
+        selected_stop,
+        ctx,
+        accumulator,
+        edge_state
+      )
+    end
+    return close_index
+  end
+  if expr.kind == "control_if" or expr.kind == "control_else" or expr.kind == "control_endif" then
+    statement_control_failure(expr, ctx, "orphaned branch or marker")
+  end
+  execute_dropped_statement(engine, statements[index], ctx, accumulator, edge_state)
+  return index
+end
+
+execute_statement_range = function(engine, statements, start_index, stop_index, ctx, accumulator, edge_state)
+  local index = start_index
+  while index < stop_index do
+    index = execute_statement_at(engine, statements, index, stop_index, ctx, accumulator, edge_state) + 1
+  end
+end
+
 evaluate_block_value = function(engine, block, ctx, accumulator, edge_state)
   if #block.statements == 0 then return json.null end
-  for index, statement in ipairs(block.statements) do
+  local index = 1
+  while index <= #block.statements do
+    local statement = block.statements[index]
     local is_last = index == #block.statements
+    local next_index = index
     local returned, value = evaluate_block_step(function()
+      if statement.expr.kind == "control_if" or statement.expr.kind == "control_else" or
+          statement.expr.kind == "control_endif" then
+        next_index = execute_statement_at(
+          engine,
+          block.statements,
+          index,
+          #block.statements + 1,
+          ctx,
+          accumulator,
+          edge_state
+        )
+        return json.null
+      end
       if is_last then
         return evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
       end
       return execute_dropped_statement(engine, statement, ctx, accumulator, edge_state)
     end)
     if returned or is_last then return copy_value(value) end
+    index = next_index + 1
   end
   return json.null
 end
 
-local function execute_block(engine, block, ctx, accumulator, edge_state)
-  for _, statement in ipairs(block.statements) do
-    execute_dropped_statement(engine, statement, ctx, accumulator, edge_state)
-  end
+execute_block = function(engine, block, ctx, accumulator, edge_state)
+  execute_statement_range(engine, block.statements, 1, #block.statements + 1, ctx, accumulator, edge_state)
 end
 
 local function lifecycle(engine, rule, name, ctx, accumulator)
