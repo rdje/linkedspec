@@ -434,6 +434,34 @@ intermediate generic receiver segments, and condition-bearing headers keep paren
 `if condition { ... }` and `while condition { ... }` are not accepted aliases for `if(condition) { ... }` and
 `while(condition) { ... }`; that separate design idea remains deferred pending an ambiguity audit.
 
+The adopted neutral contract makes the intended equivalences and boundaries executable before backend rollout:
+
+```text
+else                         == else()
+endif                        == endif()
+next                         == next()
+text.trim                    == text.trim()
+values.sorted().first        == values.sorted().first()
+```
+
+Here `sorted()` remains parenthesized because it is not the final segment. A terminal method that requires an
+argument still receives zero authored arguments and therefore has exactly the same contract outcome as its
+parenthesized zero-argument spelling: `values.drop_front` equals `values.drop_front()`, not
+`values.drop_front(1)`. The following do not become calls under ADR 0033:
+
+```text
+return value                 # general helper call still requires return(value)
+values.sorted.count()        # generic bare intermediate segment is not admitted
+value.with { ... }           # contextual final block keeps .with() { ... }
+if flag { ... }              # condition header keeps if(flag) { ... }
+while flag { ... }           # condition header keeps while(flag) { ... }
+```
+
+The versioned source of truth is
+`capability_conformance/punctuation_light_zero_arg_contract.json`, checked independently by
+`tools/check_punctuation_light_zero_arg_contract.py`. It remains a future-admission contract until
+`FUTURE-PARITY-BACKLOG.16.2-.16.7` close.
+
 ### 3.8 Conditional Markers
 
 ```

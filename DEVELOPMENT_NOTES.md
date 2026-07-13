@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.1` — neutral contract before parser edits): A punctuation-light spelling
+  is safest when its boundary is executable independently of every backend. The v1 contract treats only the six
+  named standalone markers as governed aliases and permits a bare generic receiver call only in the final segment.
+  The latter supplies zero authored arguments; it does not bypass the existing method arity resolver. Thus
+  `values.count` matches `values.count()`, while `values.drop_front` receives the same existing rejection as
+  `values.drop_front()`. Ordinary bare identifiers remain value reads. Parenthesis-free condition headers,
+  general calls, argument-bearing calls, intermediate bare receiver segments, and receiver trailing blocks remain
+  separate invalid classes. The future fixture exercises all six markers without depending on unresolved `next`
+  runtime drift: `next` is parsed in an unentered `while(false)` body. Three checker mutations prove that marker
+  membership, final-only receiver position, and condition-header parentheses cannot silently broaden.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.0` — punctuation-light zero-argument audit): The director clarified that
   removing `()` applies to zero-argument markers such as `else`, `endif`, `default`, `endcase`, `endswitch`, and
   `next`, not to condition-bearing `if`/`while` headers. Source audit shows two distinct parser surfaces: every

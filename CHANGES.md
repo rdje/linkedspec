@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.1 — adopt zero-argument syntax contract
+
+Added the strict backend-neutral `linkedspec-punctuation-light-zero-arg-v1` contract and an independent checker.
+It fixes equivalent ASTs for six bare standalone markers and four final bare receiver calls, preserves three
+ordinary identifiers as value reads, classifies six excluded forms, delegates zero/nonzero arity to the existing
+method contract, and renders/evaluates one deterministic future fixture.
+
+The contract explicitly keeps `if(condition)` and `while(condition)`, general `callee(args)`, intermediate
+receiver-call parentheses, and receiver trailing-block `()` syntax. Three mutation checks prevent marker loss,
+receiver-position broadening, or condition-header drift. Canonical CI passes capability 60/0/0, primary CLI
+61/61 in both environments, and Phase 0 `1..1031` in 604 seconds. No backend behavior changed; Perl `.16.2` is
+next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.0 — ratify zero-argument call aliases
 
 **Change:** Audited rule/lifecycle suffix parsing and typed ActionIR parsing across Perl, Rust, Dart, Julia, and

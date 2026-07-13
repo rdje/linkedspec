@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.0` — exact zero-argument syntax audit and ADR 0033 ratification.
-- latest_commit: `67e423ad` — `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.16.1`; define the reusable neutral positive/negative contract.
-- next_action: encode the six standalone aliases, final generic receiver alias, retained parenthesized forms, and
-  excluded condition-header/argument/intermediate-receiver cases in one backend-neutral contract before parsers.
-- current_proof: all rule/lifecycle suffix parsers already preserve bare zero-argument suffixes; typed ActionIR
-  support differs, no backend recognizes bare `next`, and only Lua accepts generic bare receiver segments. ADR
-  0033 keeps this a narrow exception and defers parenthesis-free `if`/`while` condition headers.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.1` — executable neutral zero-argument syntax contract.
+- latest_commit: `1812aa83` — `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.16.2`; implement the unchanged contract on the Perl reference.
+- next_action: use LinkedSpec toolbox probes, then align Perl statement/control/next and final-only receiver parsing;
+  regression-lock neutral AST, generated source, execution, arity, and excluded-syntax behavior.
+- current_proof: strict v1 contract/checker passes 6 standalone, 4 receiver, 3 retained-value, 6 invalid, 2 arity,
+  exact fixture, and 3 mutation cases; canonical CI passes capability 60/0/0, CLI 61x2, and Phase 0 `1..1031`/604s.
+  No backend behavior changed; `if(condition)`/`while(condition)` and general calls retain parentheses.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua built-in final blocks `.4.3.6.4`; parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.16.0` ADR/task/roadmap/book/KM/live-doc planning synchronization awaits
-  its prepared commit; no parser/compiler/runtime behavior changed. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: `.16.1` neutral contract/checker/CI/docs synchronization awaits its
+  prepared commit; no parser/compiler/runtime behavior changed. Oracle timeout calibration remains `.7.0`.

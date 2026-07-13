@@ -60,15 +60,17 @@ Three backbone items tracked major structural modernization — all done:
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close at 108/108 through
   `.4.3.6.3.3`; built-in final blocks/scoped with `.4.3.6.4` are queued at a clean handoff while
-  `FUTURE-PARITY-BACKLOG.16.1` owns the director-requested syntax contract.
+  the director-requested syntax lane runs. Its neutral contract `.16.1` is complete and Perl `.16.2` is next.
   Implicit child-push side effects are included in the closed Lua array family, but their expression result is not
   yet portable: Perl exposes its host push count and Lua exposes the updated implicit accumulator. Backlog `.5`
   owns normalization; current authoring uses implicit child push as a statement.
 - **Punctuation-light zero-argument calls** - ADR 0033 and `FUTURE-PARITY-BACKLOG.16.0` preserve the general
   `callee(args)` grammar while adopting a bounded convergence target: bare standalone `else`, `endif`, `default`,
   `endcase`, `endswitch`, and `next`, plus a final zero-argument receiver segment. The audit found partial existing
-  support rather than five-backend parity, so `.16.1-.16.7` own the neutral contract, backend implementation, and
-  generated/public closeout. Parenthesis-free `if`/`while` condition headers are explicitly outside this lane.
+  support rather than five-backend parity. Neutral contract `.16.1` now locks six standalone and four receiver
+  equivalences, retained value reads, exclusions, arity delegation, and one future fixture; `.16.2-.16.7` own
+  backend implementation and generated/public closeout. Parenthesis-free `if`/`while` condition headers are
+  explicitly outside this lane.
 - **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` now gate all 56 root/component/mdBook files at zero current examples.
 - **Structural, progressive, and staged authoring clarification** - typical `.spec` authoring uses small readable
   zero/one/two-regex rules for coordination, leaves, and entry/exit boundaries; deep recursion belongs in linked

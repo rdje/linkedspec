@@ -1,6 +1,6 @@
 ---
 id: punctuation-light-zero-argument-calls
-title: "ADR 0033 and FUTURE-PARITY-BACKLOG.16.0 — zero-argument punctuation-light syntax is a narrow alias contract, not a general parenthesis-free call grammar."
+title: "ADR 0033 and FUTURE-PARITY-BACKLOG.16.0-.16.1 — zero-argument punctuation-light syntax is a narrow executable alias contract, not a general parenthesis-free call grammar."
 answers:
   - "can else endif default endcase endswitch omit parentheses"
   - "can next be written without parentheses"
@@ -9,11 +9,12 @@ answers:
   - "can if and while conditions omit parentheses"
   - "which backends already parse bare control markers"
   - "what owns punctuation light zero argument calls"
+  - "where is the punctuation light zero argument neutral contract"
 date: 2026-07-13
 status: confirmed
 tags: [dsl, actionir, calls, control-flow, syntax, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.16.0 read-only source audit and ADR 0033. All five rule-edge/lifecycle suffix parsers already record a missing argument list as zero arguments. On typed ActionIR paths, Perl/Dart/Julia normalize bare else/endif/default/endcase/endswitch; Rust leaves bare words as value reads outside attached-control synthesis; Lua normalizes only else/otherwise/default. No backend currently treats bare next as next(). Perl/Rust/Dart/Julia require parentheses on every ActionIR receiver segment, while Lua accepts a bare identifier in every segment. ADR 0033 adopts six standalone marker aliases and a generic bare final receiver segment, preserves normal arity validation and all parenthesized forms, and excludes intermediate generic bare calls, calls with arguments, arbitrary helper/user-function calls, attached final-codeblock calls, and parenthesis-free if/while condition headers. Implementation is owned by .16.1-.16.7."
-reverify: "rg -n '_normalize_bare_zero_arg_flow_marker_expr|_normalizeControlHead|_action_normalize_control_head|parse_control|parse_fluent_chain|parse_fluent_call' perl/LinkedSpec rust/linkedspec-core/src dart/lib/src julia/src lua/src/linkedspec"
+evidence: "FUTURE-PARITY-BACKLOG.16.0 read-only source audit and ADR 0033 establish the narrow decision. FUTURE-PARITY-BACKLOG.16.1 adds linkedspec-punctuation-light-zero-arg-v1: six standalone AST-equivalence cases, four terminal receiver cases, three retained identifiers, six negative syntax cases, two method-resolution cases, and a deterministic future fixture returning {result: yes, picked: a, count: 2}. Its independent checker proves bare/parenthesized normalization, final-only receiver recognition, condition/helper/trailing-block exclusions, ordinary-identifier retention, existing method-contract delegation, exact fixture rendering/evaluation, and three drift mutations. Canonical local CI owns the checker. Backend admission remains future under .16.2-.16.7."
+reverify: "python3 tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl"
 ---
 
 # Punctuation-light zero-argument calls
@@ -33,8 +34,12 @@ control-marker fluent suffixes remain their own established exception.
 The audit found backend drift, so the target contract must not be described as fully implemented until
 `FUTURE-PARITY-BACKLOG.16.2-.16.7` close.
 
+`capability_conformance/punctuation_light_zero_arg_contract.json` is the versioned neutral source. It contains
+both spellings, their canonical AST projection, exact excluded forms, and a future `.spec` fixture. The offline
+checker is `tools/check_punctuation_light_zero_arg_contract.py` and is wired into canonical local CI.
+
 ## Links
 
 - ADR: `docs/decisions/0033-punctuation-light-zero-argument-calls.md`
-- Tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md`, leaf `.16.0`
+- Tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md`, design leaf `.16.0` and contract leaf `.16.1`
 - Related: [[terse-call-spacing-contract]]

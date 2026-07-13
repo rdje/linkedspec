@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.1 — adopt zero-argument syntax contract**
+  (DONE — reusable executable contract; Perl reference implementation `.16.2` next).
+
+  **Result:** One strict neutral artifact now locks six standalone aliases, four terminal receiver aliases, three
+  retained ordinary value reads, six invalid syntax classes, two method-arity outcomes, and an exact future
+  fixture. Bare/parenthesized ASTs are equal, generic receiver omission is final-only, and `if(condition)` /
+  `while(condition)` remain unchanged. Three mutation tests prevent accidental grammar broadening. Canonical CI
+  passes capability 60/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 604 seconds. No backend behavior changed;
+  Lua `.4.3.6.4` remains cleanly queued.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.0 — ratify zero-argument call aliases**
   (DONE — exact five-backend parser audit and ADR 0033; neutral contract `.16.1` next).
 

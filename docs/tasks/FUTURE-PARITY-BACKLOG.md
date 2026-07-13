@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (ADR 0033 and `.16.0` ratify director-requested punctuation-light zero-argument
-  syntax; neutral contract `.16.1` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at
-  a clean handoff point).
+- Last updated: `2026-07-13` (`.16.1` adopts the executable neutral punctuation-light zero-argument contract;
+  Perl reference implementation `.16.2` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain
+  queued at a clean handoff point).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3204,14 +3204,20 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add one backend-neutral syntax/AST/diagnostic fixture contract for the ratified zero-argument aliases.
   Dependencies: `.16.0`
   Acceptance: Positive cases cover all six standalone markers and terminal `.method`; negative cases preserve
     parentheses on condition headers, argument-bearing calls, non-final bare receiver segments, and nonzero-arity
     terminal methods; the contract is reusable by native and generated backends.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Strict contract `linkedspec-punctuation-light-zero-arg-v1` fixes six
+    standalone equivalences, four terminal-receiver equivalences, three retained bare value reads, six invalid
+    syntax classes, two arity-resolution cases, and one deterministic future fixture. The independent checker
+    proves bare/parenthesized AST equality, final-only receiver recognition, unchanged condition-header/general-
+    call/trailing-block boundaries, existing method-contract delegation, exact fixture rendering/evaluation, and
+    three mutation failures. Canonical local CI passes capability 60/0/0, primary CLI 61/61 twice, and Phase 0
+    `1..1031` in 604 seconds. No backend parser/runtime behavior changed and the capability remains future-owned.
+  Commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.2`
   Status: `pending`
@@ -3312,6 +3318,22 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 - [x] **NO REGRESSION** — Planning only: no parser/compiler/runtime/fixture behavior source changes.
 - [x] **LOCKSTEP** — Task tree, ADR, roadmaps, mdBook status/grammar correction, Knowledge Map, live docs, and
   resume pointer all identify `.16.1` as the next leaf; parked Lua `.4.3.6.4` remains clean and recoverable.
+
+### `FUTURE-PARITY-BACKLOG.16.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The ratified syntax had no backend-neutral executable artifact capable of rejecting
+  accidental general parenthesis-free calls or premature backend-specific interpretations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Existing fixtures exercise backend behavior, while this language boundary
+  requires a parser-independent contract for equivalence, terminality, arity delegation, and negative classes.
+- [x] **FIX** — Add `punctuation_light_zero_arg_contract.json` and an independent strict checker covering six
+  standalone aliases, four final receiver aliases, three retained value reads, six invalid forms, two arity
+  outcomes, and one deterministic future fixture; wire both into canonical CI.
+- [x] **ADDRESSED (verified)** — Bare and parenthesized forms produce identical neutral ASTs; the future fixture
+  renders exactly and evaluates to `{result: "yes", picked: "a", count: 2}`; all three contract mutations fail.
+- [x] **NO REGRESSION** — Capability remains excluded/future-owned at 60/0/0; canonical CLI passes 61/61 twice and
+  Phase 0 passes `1..1031` in 604 seconds; no backend parser/compiler/runtime behavior changes in this leaf.
+- [x] **LOCKSTEP** — Contract README, capability manifest, mdBook grammar, Knowledge Map, task/live/roadmap docs,
+  and CI agree; Perl implementation `.16.2` is the sole next leaf while Lua `.4.3.6.4` stays cleanly queued.
 
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
@@ -3863,7 +3885,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
-| 148 | `FUTURE-PARITY-BACKLOG.16.1` | `pending` | Establish one neutral positive/negative syntax and diagnostic contract. |
+| 148 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
 | 149 | `FUTURE-PARITY-BACKLOG.16.2` | `pending` | Align the Perl reference parser and execution surface. |
 | 150 | `FUTURE-PARITY-BACKLOG.16.3` | `pending` | Align Rust native, oracle, and generated paths. |
 | 151 | `FUTURE-PARITY-BACKLOG.16.4` | `pending` | Align Dart native and generated paths. |
@@ -4482,6 +4504,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.1` | Strict neutral checker: 6 standalone, 4 receiver, 3 retained-value, 6 invalid, 2 arity, exact fixture, and 3 mutation cases; capability 60/0/0; canonical CLI 61x2; Phase 0 `1..1031`/604s; docs/KM/governance/whitespace. | PASS. The executable syntax/AST/diagnostic boundary is stable before backend behavior; Perl `.16.2` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.0` | Knowledge Map retrieval; five ActionIR parser and five rule/lifecycle suffix-parser source audits; existing Perl bare-control AST tests; ADR 0033; task/roadmap/live/book/KM synchronization; memory/doctrine/task metadata/whitespace/mdBook gates. | PASS. Existing and missing surfaces are exact, no behavior code changed, parenthesis-free condition headers remain deferred, and `.16.1` owns the neutral contract. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
@@ -4591,6 +4614,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.1` | `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract` | Strict reusable neutral contract/checker, deterministic future fixture, CI integration, and Perl handoff; no backend behavior. |
 | `FUTURE-PARITY-BACKLOG.16.0` | `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases` | ADR 0033, exact five-backend parser audit, narrow exclusions, and implementation/no-drift split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
@@ -4700,6 +4724,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.1` makes ADR 0033 executable without changing a backend. Contract
+  `linkedspec-punctuation-light-zero-arg-v1` locks six standalone aliases, four final receiver aliases, three
+  retained ordinary identifiers, six excluded syntax classes, existing zero/nonzero method-arity behavior, and
+  a deterministic future fixture. Its independent checker verifies identical neutral ASTs, exact rendering and
+  result, final-only recognition, and mutation sensitivity in canonical CI. Capability remains future-owned at
+  60/0/0; CLI 61x2 and Phase 0 `1..1031`/604s pass. Perl `.16.2` is next; Lua `.4.3.6.4` remains queued.
 - `2026-07-13`: `.16.0` audits the director-requested punctuation-light zero-argument surface and ratifies ADR
   `0033`. Rule/lifecycle suffix parsers already accept bare zero-argument suffixes, but standalone ActionIR support
   differs: Perl/Dart/Julia normalize the five existing control markers, Rust does not, Lua recognizes only the

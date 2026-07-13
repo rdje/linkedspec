@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-punctuation-light-zero-arg-v1",
+  "policy": {
+    "general_call_grammar": "callee(args)",
+    "standalone_aliases": "else, endif, default, endcase, endswitch, and next may omit an empty argument list where their zero-argument statement calls are valid",
+    "terminal_receiver_alias": "the final ActionIR receiver segment may omit an empty argument list",
+    "arity": "a bare final receiver segment supplies zero authored arguments and remains subject to the existing method contract",
+    "parenthesized_forms": "all existing parenthesized spellings remain valid",
+    "rule_suffixes": "existing punctuation-light control-marker suffixes on rule-edge and lifecycle fluent chains remain valid",
+    "excluded_headers": "condition-bearing if and while headers retain parentheses",
+    "excluded_calls": "calls with arguments, ordinary helper and user-function calls, attached final-codeblock calls, and intermediate generic receiver calls do not gain parenthesis-free syntax"
+  },
+  "syntax": {
+    "standalone_markers": ["else", "endif", "default", "endcase", "endswitch", "next"],
+    "bare_receiver_position": "final",
+    "bare_receiver_authored_arguments": 0,
+    "general_call_form": "IDENTIFIER(ARGUMENTS)",
+    "receiver_call_form": ".IDENTIFIER(ARGUMENTS)",
+    "bare_receiver_form": ".IDENTIFIER",
+    "condition_headers": ["if(CONDITION)", "while(CONDITION)"],
+    "trailing_codeblock_receiver_form": ".IDENTIFIER() { BLOCK }"
+  },
+  "ast_schema": {
+    "standalone_fields": ["kind", "canonical_name", "args"],
+    "receiver_fields": ["kind", "receiver_source", "calls"],
+    "receiver_call_fields": ["method", "args"],
+    "zero_args": []
+  },
+  "standalone_cases": [
+    {"id": "else", "bare": "else", "parenthesized": "else()", "expected_ast": {"kind": "control_else", "canonical_name": "else", "args": []}},
+    {"id": "endif", "bare": "endif", "parenthesized": "endif()", "expected_ast": {"kind": "control_endif", "canonical_name": "endif", "args": []}},
+    {"id": "default", "bare": "default", "parenthesized": "default()", "expected_ast": {"kind": "control_default", "canonical_name": "default", "args": []}},
+    {"id": "endcase", "bare": "endcase", "parenthesized": "endcase()", "expected_ast": {"kind": "control_endcase", "canonical_name": "endcase", "args": []}},
+    {"id": "endswitch", "bare": "endswitch", "parenthesized": "endswitch()", "expected_ast": {"kind": "control_endswitch", "canonical_name": "endswitch", "args": []}},
+    {"id": "next", "bare": "next", "parenthesized": "next()", "expected_ast": {"kind": "call", "canonical_name": "next", "args": []}}
+  ],
+  "receiver_cases": [
+    {"id": "variable_trim", "bare": "text.trim", "parenthesized": "text.trim()", "expected_ast": {"kind": "fluent_chain", "receiver_source": "text", "calls": [{"method": "trim", "args": []}]}},
+    {"id": "variable_count", "bare": "values.count", "parenthesized": "values.count()", "expected_ast": {"kind": "fluent_chain", "receiver_source": "values", "calls": [{"method": "count", "args": []}]}},
+    {"id": "parenthesized_prefix_final_first", "bare": "values.sorted().first", "parenthesized": "values.sorted().first()", "expected_ast": {"kind": "fluent_chain", "receiver_source": "values", "calls": [{"method": "sorted", "args": []}, {"method": "first", "args": []}]}},
+    {"id": "call_receiver_final_count", "bare": "copy(values).count", "parenthesized": "copy(values).count()", "expected_ast": {"kind": "fluent_chain", "receiver_source": "copy(values)", "calls": [{"method": "count", "args": []}]}}
+  ],
+  "retained_noncall_cases": [
+    {"id": "ordinary_identifier", "source": "finish", "expected_ast": {"kind": "variable", "name": "finish"}},
+    {"id": "helper_name_identifier", "source": "copy", "expected_ast": {"kind": "variable", "name": "copy"}},
+    {"id": "user_function_name_identifier", "source": "normalize", "expected_ast": {"kind": "variable", "name": "normalize"}}
+  ],
+  "invalid_syntax_cases": [
+    {"id": "if_condition_without_call", "source": "if flag { return(\"bad\") }", "expected_code": "condition_header_parentheses_required"},
+    {"id": "while_condition_without_call", "source": "while flag { next }", "expected_code": "condition_header_parentheses_required"},
+    {"id": "ordinary_helper_without_call", "source": "return value", "expected_code": "call_parentheses_required"},
+    {"id": "argument_call_without_parentheses", "source": "copy values", "expected_code": "call_parentheses_required"},
+    {"id": "intermediate_generic_receiver", "source": "values.sorted.count()", "expected_code": "nonfinal_receiver_parentheses_required"},
+    {"id": "receiver_trailing_block_without_call", "source": "value.with { return(value) }", "expected_code": "receiver_trailing_block_parentheses_required"}
+  ],
+  "method_contract_cases": [
+    {"id": "zero_arg_method", "bare": "values.count", "parenthesized": "values.count()", "authored_args": 0, "method_min_authored_arity": 0, "method_max_authored_arity": 0, "expected_resolution": "accepted"},
+    {"id": "nonzero_arg_method", "bare": "values.drop_front", "parenthesized": "values.drop_front()", "authored_args": 0, "method_min_authored_arity": 1, "method_max_authored_arity": 1, "expected_resolution": "same_rejection_as_parenthesized"}
+  ],
+  "future_fixture": {
+    "input": "xx",
+    "model": {"values": ["b", "a"], "label": "  yes  ", "if_condition": false, "switch_case": "yes", "while_condition": false},
+    "spec_source": "Top::\n /x/ -> Done {\n   values = [\"b\", \"a\"]\n   label = \"  yes  \"\n   if(false)\n     return(\"bad-if\")\n   else\n     result = label.trim\n   endif\n   switch(result)\n   case(no)\n     return(\"bad-case\")\n   endcase\n   case(yes)\n     picked = values.sorted().first\n   endcase\n   default\n     return(\"bad-default\")\n   endswitch\n   while(false) {\n     next\n   }\n   return({ \"result\" : result, \"picked\" : picked, \"count\" : values.count })\n }\n\nDone::\n /x/\n",
+    "expected": {"result": "yes", "picked": "a", "count": 2}
+  }
+}

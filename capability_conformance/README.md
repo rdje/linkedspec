@@ -62,6 +62,14 @@ preserves metadata plus executes equivalent attached/parenthesized helper/user-f
 Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust/Dart/Julia/Lua parity keeps
 the overall capability future-owned under the remaining backend rollout leaves.
 
+`punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
+into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare
+final receiver segments, exact normalized AST equivalence with parenthesized forms, ordinary-identifier retention,
+condition/helper/intermediate-receiver/trailing-block exclusions, existing method-contract resolution, and one
+deterministically rendered future `.spec` fixture. Validate the 6 standalone, 4 receiver, 6 invalid, and fixture
+cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`. Backend admission remains future
+under `FUTURE-PARITY-BACKLOG.16.2-.16.7`; `.16.1` defines the neutral contract only.
+
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
 changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns
 that binding's post-assignment typed value; mutable helpers use bare targets and return updated values; absent
