@@ -34,9 +34,10 @@ destination, matching Perl and Julia. Dart and Rust currently retain the
 pre-existing destination instead. Portable `.spec` files should rename only to
 an absent key until `FUTURE-PARITY-BACKLOG.5` normalizes this caveat.
 
-Standalone named `set_key(target, key, value)` mutation remains owned by
-`LUA-BACKEND-PARITY.4.3.5.4`; receiver/value forms in this fact are pure.
+Standalone named `set_key(target, key, value)` mutation is now implemented by
+`LUA-BACKEND-PARITY.4.3.5.4`; receiver/value forms in this fact remain pure.
 
 Related facts: [[lua-runtime-harray-views]],
 [[lua-runtime-harray-construction]], [[lua-runtime-harray-helper-split]],
-[[terse-hash-receiver-value-chains]], [[terse-merge-hash-bare-overlay-boundary]].
+[[lua-runtime-named-harray-mutation]], [[terse-hash-receiver-value-chains]],
+[[terse-merge-hash-bare-overlay-boundary]].

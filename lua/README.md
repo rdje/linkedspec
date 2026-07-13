@@ -40,9 +40,12 @@ Copied `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_
 support bare typed operands and compatible receivers, keep sources unchanged, and isolate saved results. Later
 merge arguments override earlier keys. Lua deterministically lets the renamed old value replace an existing
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
-The Lua gate passes 102/102 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
+Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
+absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 103/103
+on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
-harray construction/views/transforms `.4.3.5.1-.3` are done and named mutation `.4.3.5.4` is active.
+harray construction/views/transforms/mutation `.4.3.5.1-.4` are done and no-drift closeout `.4.3.5.5` is active.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by `.4.3.6`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

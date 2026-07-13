@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.4 — add Lua named harray mutation**
+  (DONE — 103/103 on both ABIs; non-callback harray closeout `.4.3.5.5` active).
+
+  **Implementation:** Dropped statement `set_key` and direct harray assignment share kind-checked lookup/store;
+  pure assigned/function/receiver `set_key` and numeric array-index assignment retain their distinct behavior.
+
+  **Proof:** Existing/absent targets, scalar/array conflicts, stable diagnostic fields, copied direct snapshots,
+  nested isolation, and pure-form source preservation pass on PUC Lua and LuaJIT.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.3.1 — add Lua copied harray transforms**
   (DONE — 102/102 on both ABIs; named set-key/direct mutation `.4.3.5.4` active).
 

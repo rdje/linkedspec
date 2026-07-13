@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua dropped-statement `set_key(target, key, value)` and direct harray assignment now share
+  kind-checked lookup/store functions. Absent targets create harrays; incompatible targets raise neutral
+  `binding_kind_mismatch` fields; saved direct-assignment results remain isolated after nested writes. Assigned/
+  function/receiver `set_key` remains pure, and numeric array-index assignment is preserved. Both ABIs pass
+  103/103; non-callback harray closeout `.4.3.5.5` is active.
 - `2026-07-13` refresh: Lua copied harray transforms evaluate bare operands once, deep-copy nested results, merge
   in argument order with later override, and reuse harray/array-view receiver dispatch. Pure set/rename/drop/pick
   never mutate sources; invalid/missing boundaries are locked. Both ABIs pass 102/102. Rename collision probes

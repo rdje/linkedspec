@@ -2899,6 +2899,99 @@ Done::
   }), "harray update")
 end)
 
+test("runtime named harray mutation shares one binding seam and preserves pure forms", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(existing, { "seed" : { "nested" : 1 } })
+   set_key(existing, "statement", { "nested" : 2 })
+   statement_snapshot = (existing["operator"] = { "nested" : 3 })
+   set_key(created, "first", 1)
+   direct_snapshot = (direct_created["first"] = { "nested" : 4 })
+   set(indexed, ["a"])
+   indexed_snapshot = (indexed[1] = "b")
+   pure_call = set_key(existing, "pure_call", 5)
+   pure_receiver = existing.set_key("pure_receiver", 6)
+   existing["statement"]["nested"] = 9
+   existing["later"] = 7
+   direct_created["first"]["nested"] = 8
+   indexed[0] = "changed"
+   return({
+     "existing" : existing,
+     "created" : created,
+     "direct_created" : direct_created,
+     "statement_snapshot" : statement_snapshot,
+     "direct_snapshot" : direct_snapshot,
+     "indexed" : indexed,
+     "indexed_snapshot" : indexed_snapshot,
+     "pure_call" : pure_call,
+     "pure_receiver" : pure_receiver
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    existing = json.harray({
+      later = 7,
+      operator = json.harray({ nested = 3 }),
+      seed = json.harray({ nested = 1 }),
+      statement = json.harray({ nested = 9 }),
+    }),
+    created = json.harray({ first = 1 }),
+    direct_created = json.harray({ first = json.harray({ nested = 8 }) }),
+    statement_snapshot = json.harray({
+      operator = json.harray({ nested = 3 }),
+      seed = json.harray({ nested = 1 }),
+      statement = json.harray({ nested = 2 }),
+    }),
+    direct_snapshot = json.harray({ first = json.harray({ nested = 4 }) }),
+    indexed = json.array({ "changed", "b" }),
+    indexed_snapshot = json.array({ "a", "b" }),
+    pure_call = json.harray({
+      operator = json.harray({ nested = 3 }),
+      pure_call = 5,
+      seed = json.harray({ nested = 1 }),
+      statement = json.harray({ nested = 2 }),
+    }),
+    pure_receiver = json.harray({
+      operator = json.harray({ nested = 3 }),
+      pure_receiver = 6,
+      seed = json.harray({ nested = 1 }),
+      statement = json.harray({ nested = 2 }),
+    }),
+  }), "named harray mutation")
+
+  for _, case in ipairs({
+    { source = [[
+Top::
+ /x/ -> Done { set(wrong, "text"); set_key(wrong, "key", 1) }
+Done::
+ /x/
+]], actual_kind = "scalar" },
+    { source = [[
+Top::
+ /x/ -> Done { set(wrong, 17); wrong["key"] = "value" }
+Done::
+ /x/
+]], actual_kind = "scalar" },
+    { source = [[
+Top::
+ /x/ -> Done { set(wrong, ["array"]); set_key(wrong, "key", "value") }
+Done::
+ /x/
+]], actual_kind = "array" },
+  }) do
+    local ok, failure = pcall(function() execute_uniform_binding_source(case.source) end)
+    assert_equal(ok, false, "wrong-kind harray mutation fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed harray mutation error")
+    assert_equal(failure.code, "binding_kind_mismatch", "harray mutation error code")
+    assert_equal(failure.identifier, "wrong", "harray mutation error identifier")
+    assert_equal(failure.expected_kind, "harray", "harray mutation expected kind")
+    assert_equal(failure.actual_kind, case.actual_kind, "harray mutation actual kind")
+  end
+end)
+
 test("uniform-binding unused values are dropped", function()
   local result = execute_uniform_binding_source([[
 Top::

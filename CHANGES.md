@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.4 — add Lua named harray mutation
+
+Added a statement-context `set_key(target, key, value)` mutation path and shared it with direct harray assignment
+through kind-checked binding lookup/store helpers. Absent targets create harrays, incompatible values expose
+stable neutral error fields, direct assignment returns isolated updated snapshots, and assigned/function/receiver
+`set_key` stays pure. Numeric array-index assignment remains intact. Both Lua ABIs pass 103/103; non-callback
+harray closeout `.4.3.5.5` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.3.1 — add Lua copied harray transforms
 
 Added deep-copied `merge_hash`, value `set_key`, `rename_key`, `drop_keys`, and `pick_keys` with bare typed

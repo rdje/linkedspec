@@ -899,8 +899,11 @@ dispatch rule.
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
-- **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly.
-- **Operator form**: `name[key] = value` mutates the same named working hash directly, and yields the updated hash snapshot in value positions; bare key/RHS identifiers in the mutation slot read scalar working variables.
+- **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly. An absent target
+  starts as an empty harray; an incompatible existing value fails with `binding_kind_mismatch`.
+- **Operator form**: `name[key] = value` mutates the same named working hash directly, and yields an independent
+  updated hash snapshot in value positions; bare key/RHS identifiers in the mutation slot read scalar working
+  variables. Receiver-dot `name.set_key(key, value)` remains pure.
 
 ### `name[key] = value`
 - **Signature**: `target[key_expr] = value_expr`

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (copied harray transforms/receiver chains `.4.3.5.3.1` pass 102/102;
-  named mutation `.4.3.5.4` active)
+- Last updated: `2026-07-13` (named set-key/direct harray mutation `.4.3.5.4` passes 103/103;
+  non-callback harray closeout `.4.3.5.5` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1300,17 +1300,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.4`
-  Status: `active`
+  Status: `done`
   Goal: Close named harray mutation and direct assignment through one binding seam.
   Dependencies: `.4.3.5.3`
   Acceptance: Standalone `set_key(target, key, value)` and direct `target[key] = value` mutate named typed harrays,
     return independent updated snapshots, create only permitted absent targets, reject wrong kinds with neutral
     fields, and leave pure function/receiver transforms non-mutating.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Statement-context `set_key(target, key, value)` and direct
+    `target[key] = value` now share one kind-checked harray binding seam. Absent targets create harrays;
+    scalar/array conflicts raise `binding_kind_mismatch` with stable identifier, expected-kind, and actual-kind
+    fields; existing scalar-held harrays preserve their binding. Direct assignment yields an independent updated
+    snapshot, later nested writes do not alias saved values, and assigned/function/receiver `set_key` remains a
+    copied pure transform. PUC Lua and LuaJIT pass 103/103 plus exact manifest/CLI scaffolding.
+  Commit: `LUA-BACKEND-PARITY.4.3.5.4 - add Lua named harray mutation`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.5`
-  Status: `pending`
+  Status: `active`
   Goal: Close complete Lua non-callback harray helper and public-surface no-drift.
   Dependencies: `.4.3.5.1`, `.4.3.5.2`, `.4.3.5.3`, `.4.3.5.4`
   Acceptance: Focused construction/view/transform/mutation/receiver/invalid proof passes both ABIs; Lua README,
@@ -1512,7 +1517,8 @@ Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` p
 All 34 ordinary array helper names and six numeric terminals are routed; only the three callback methods remain
 under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
 mechanisms plus closeout. Construction/splicing, deterministic views/membership, and copied transforms/receiver
-chains pass 102/102 on both Lua ABIs; named mutation/direct assignment `.4.3.5.4` is active.
+chains and named mutation/direct assignment pass 103/103 on both Lua ABIs; non-callback harray closeout
+`.4.3.5.5` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1573,7 +1579,8 @@ chains pass 102/102 on both Lua ABIs; named mutation/direct assignment `.4.3.5.4
 | 55 | `LUA-BACKEND-PARITY.4.3.5.3` | `done` | Revalidated copied transforms and receiver chains pass 102/102. |
 | 56 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Bare base/overlay and pure transform contracts revalidated after uniform binding. |
 | 57 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
-| 58 | `LUA-BACKEND-PARITY.4.3.5.4` | `active` | Close named set-key and direct hash-index mutation through one binding seam. |
+| 58 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct mutation share one binding seam and pass 103/103. |
+| 59 | `LUA-BACKEND-PARITY.4.3.5.5` | `active` | Close complete non-callback harray behavior and public no-drift. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1607,6 +1614,24 @@ chains pass 102/102 on both Lua ABIs; named mutation/direct assignment `.4.3.5.4
 - [x] **LOCKSTEP** — Task/index/roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs,
   changes/notes, and memory close `.4.3.5.3` and activate named mutation `.4.3.5.4`; rename collision drift is
   durably owned by backlog `.5`.
+
+### `LUA-BACKEND-PARITY.4.3.5.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — A dropped standalone `set_key(target, key, value)` reached the pure harray helper,
+  returned a copied value that was discarded, and left the named binding unchanged; direct assignment had a
+  separate update path.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `execute_block` had statement-context handlers for mutable split, regex
+  substitution, and dropped array transforms, but no named harray handler or shared harray mutation functions.
+- [x] **FIX** — Add kind-checked harray lookup/store helpers, route direct harray assignment through them while
+  preserving numeric array-index assignment, and intercept only dropped three-argument `set_key` calls whose
+  first argument is a bare target.
+- [x] **ADDRESSED (verified)** — One end-to-end case covers existing and absent targets, standalone and direct
+  mutation, nested saved-result isolation, pure assigned/function/receiver forms, and scalar/array wrong-kind
+  diagnostics with neutral fields.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 103/103 plus manifest/CLI scaffolding; selector/mutation/
+  capability, Knowledge Map, mdBook, memory/doctrine, cleanup, and whitespace gates pass.
+- [x] **LOCKSTEP** — Task/index/roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs,
+  changes/notes, and memory close named mutation `.4.3.5.4` and activate non-callback closeout `.4.3.5.5`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -2215,3 +2240,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.5.2` | `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views` | Lexical keys, values-by-key, count/membership terminals, copied isolation, and receiver bridges. |
 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts` | Corrects pre-uniform-binding bare-merge guidance and locks the current cross-backend transform contract. |
 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms` | Deep-copied merge/set/rename/drop/pick values, receiver chains, collision routing, and dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.5.4` | `LUA-BACKEND-PARITY.4.3.5.4 - add Lua named harray mutation` | Shared named set-key/direct harray mutation, copied snapshots, pure-form separation, and neutral wrong-kind proof. |

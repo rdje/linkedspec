@@ -211,6 +211,18 @@ local function store_array_mutation(ctx, target, storage, value)
   return bind_scalar(ctx, target.name, value)
 end
 
+local function harray_binding_for_mutation(ctx, name)
+  local value, storage = lookup_binding(ctx, name)
+  if storage == nil then return json.harray(), nil end
+  if json.kind(value) ~= "harray" then binding_kind_mismatch(name, "harray", value) end
+  return copy_value(value), storage
+end
+
+local function store_harray_mutation(ctx, target, storage, value)
+  if storage == "harray" then return bind_harray(ctx, target.name, value) end
+  return bind_scalar(ctx, target.name, value)
+end
+
 local function append_array_binding(ctx, target, value)
   local values, storage = array_binding_for_mutation(ctx, target.name)
   values[#values + 1] = copy_value(value)
@@ -1325,17 +1337,15 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     local key = evaluate_expr(engine, expr.key, ctx, accumulator, edge_state)
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
     local current, storage = lookup_binding(ctx, expr.name)
-    local root
-    if json.kind(current) == "array" or json.kind(current) == "harray" then
-      root = copy_value(current)
-    elseif storage == nil then
-      root = json.harray()
-      storage = "harray"
-    else
-      binding_kind_mismatch(expr.name, "harray", current)
+    if json.kind(current) == "array" then
+      local root = copy_value(current)
+      if not write_index(root, key, value) then return json.null end
+      return store_binding(ctx, expr.name, storage, root)
     end
+    local root
+    root, storage = harray_binding_for_mutation(ctx, expr.name)
     if not write_index(root, key, value) then return json.null end
-    return store_binding(ctx, expr.name, storage, root)
+    return store_harray_mutation(ctx, { kind = "scalar", name = expr.name }, storage, root)
   end
   if kind == "assign_nested_access" then
     local current, storage = lookup_binding(ctx, expr.base)
@@ -1542,12 +1552,28 @@ local function execute_array_transform_statement(engine, expr, ctx, accumulator,
   return true
 end
 
+local function execute_hash_set_key_statement(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind ~= "call" or action_contracts.canonical_action_helper_name(expr.name) ~= "set_key" or
+      #expr.args ~= 3 then
+    return false
+  end
+  local target = binding_target_descriptor(argument_expr(expr.args[1]))
+  if not target then return false end
+  local key_value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+  local value = evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state)
+  local updated, storage = harray_binding_for_mutation(ctx, target.name)
+  updated[scalar_string(key_value, true) or ""] = copy_value(value)
+  store_harray_mutation(ctx, target, storage, updated)
+  return true
+end
+
 local function execute_block(engine, block, ctx, accumulator, edge_state)
   for _, statement in ipairs(block.statements) do
     local handled = statement.drops_value and (
       execute_regex_substitution_statement(engine, statement.expr, ctx, accumulator, edge_state) or
       execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state) or
-      execute_array_transform_statement(engine, statement.expr, ctx, accumulator, edge_state)
+      execute_array_transform_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+      execute_hash_set_key_statement(engine, statement.expr, ctx, accumulator, edge_state)
     )
     if not handled then
       evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)

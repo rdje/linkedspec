@@ -61,7 +61,8 @@ This `README.md` is the **single entry point** to the project.
   callback names remain explicitly owned by `.4.3.6`. Copied harray construction, runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
-  102/102 through `.4.3.5.3.1`. Named mutation `.4.3.5.4` is active. Implicit child-push expression results differ between Perl's
+  103/103 through named `set_key`/direct mutation `.4.3.5.4`; non-callback harray closeout `.4.3.5.5` is active.
+  Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator, and rename-to-existing-key policy also differs; portable authoring
   avoids those value/collision boundaries until backlog `.5` normalizes them.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications

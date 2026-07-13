@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.4 — statement context is the mutation discriminator): A three-argument
+  `set_key` call cannot be classified as mutating from its arguments alone because assigned/nested and receiver
+  forms are deliberately pure copied transforms. Lua now intercepts only a dropped top-level call with a bare
+  first target, then uses the same harray lookup/store seam as direct assignment. The seam preserves the private
+  storage class, auto-creates only absent harrays, and reports stable wrong-kind fields. Direct bracket assignment
+  retains its pre-existing numeric array path, and every returned mutation snapshot is copied before later writes.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.3.1 — copy transforms can share dispatch without sharing mutation):
   Ordered operand evaluation and receiver injection already existed; the missing seam was the harray transform
   evaluator. Sorting source keys makes Lua traversal deterministic, while argument order alone governs merge

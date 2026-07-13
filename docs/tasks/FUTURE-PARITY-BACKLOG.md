@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua copied harray transforms `.4.3.5.3.1` pass 102/102; rename collision drift is
-  routed to helper caveats `.5`; named mutation `.4.3.5.4` active).
+- Last updated: `2026-07-13` (Lua named set-key/direct harray mutation `.4.3.5.4` passes 103/103; rename collision
+  drift remains under helper caveats `.5`; non-callback harray closeout `.4.3.5.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3681,7 +3681,8 @@ before implementation.
 | 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `done` | Revalidated copied harray transforms and receiver chains pass 102/102. |
 | 132 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Revalidated bare base/overlay and pure transform contracts after uniform binding. |
 | 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
-| 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `active` | Close named set-key and direct hash-index mutation through one binding seam. |
+| 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct harray mutation share one seam and pass 103/103. |
+| 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `active` | Close complete non-callback harray behavior and public no-drift. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity, harray order/rename collisions, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
