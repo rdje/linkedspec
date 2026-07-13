@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.3.2 — execute Lua switch statement controls**
+  (DONE — 107/107 on both ABIs; attached while `.4.3.6.3.3` active).
+
+  **Implementation:** One-time subjects and first-case/default selection now execute attached branch bodies and
+  nesting-aware marker ranges through the shared indexed statement executor. Bare labels remain literal, empty
+  bodies and local return stay exact, and orphaned/missing/duplicate/order/mixed controls remain typed.
+
+  **Finding and proof:** Inline, attached, and marker switch use Perl-reference scalar comparison: null equals
+  empty text, booleans spell as `0/1`, and aggregates do not collapse to scalar text. Rust, Dart, and Julia differ
+  at boolean/number or aggregate boundaries. Perl also executes marker statements outside branches while the four
+  newer runtimes skip them. Backlog `.5` owns both normalizations. PUC Lua and LuaJIT pass 107/107 plus CLI/corpus
+  scaffolding.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.3.1 — execute Lua if statement controls**
   (DONE — 106/106 on both ABIs; switch-family statements `.4.3.6.3.2` active).
 

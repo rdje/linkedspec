@@ -1287,6 +1287,12 @@ Here `kind` reads the scalar working variable, while `case(word, ...)` matches t
 `case("word", ...)` when teaching fixed labels; the bare-label form is kept for parity with attached
 `case(word) { ... }` labels.
 
+Switch equality is currently portable for normalized scalar text and for null versus empty text. Do not rely on
+boolean/number cross-kind or aggregate comparisons yet: Perl, Rust, and Lua make `false` match numeric zero while
+Dart and Julia do not; Perl and Lua exclude arrays/harrays from scalar comparison, Rust collapses them to empty
+text, and Dart/Julia retain host container spellings. Normalize those subjects explicitly before `switch` until
+`FUTURE-PARITY-BACKLOG.5` fixes one typed-equality contract.
+
 Expression-valued branch blocks are allowed in selected branches:
 
 ```text
@@ -1320,8 +1326,28 @@ switch(kind) {
 }
 ```
 
-The attached statement form is portable on Perl and Rust. It uses first-match semantics and runs `default`
-only when no case matched.
+The attached statement form is implemented on Perl, Rust, Dart, Julia, and Lua. It uses first-match semantics and
+runs `default` only when no case matched.
+
+Marker-delimited switch is the equivalent statement-range form:
+
+```text
+switch(kind)
+case(word)
+  return(hash("kind", "word", "text", text))
+endcase()
+case(space)
+  return(hash("kind", "space", "text", text))
+endcase()
+default()
+  return(hash("kind", "unknown", "text", text))
+endswitch()
+```
+
+The subject evaluates once. `endcase()` is optional when the next same-depth marker already bounds the branch;
+nested marker switches keep their own `endswitch()` boundary. All five current backends implement this form.
+Keep every executable statement inside a `case/default` range. Perl currently executes ordinary statements before
+the first branch or after `endcase()`, while Rust, Dart, Julia, and Lua skip them; backlog `.5` owns normalization.
 
 Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / `elseif(...)` when each branch asks a different question.
 

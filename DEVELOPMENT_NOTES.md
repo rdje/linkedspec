@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.2 — validate switch ranges before spending the subject): Attached
+  switch stores branches inside one typed body, while marker switch stores them as sibling statement ranges with
+  optional `endcase` and nested `endswitch` boundaries. Reusing the if leaf's indexed executor keeps those two
+  carriers separate without duplicating body execution. Validate the whole chain first so a malformed structure
+  cannot spend subject or case side effects; then evaluate the subject once, stop at the first scalar-equal case,
+  and execute only its bounded range. One shared equality seam now governs inline, attached, and marker switch.
+  Perl toolbox probes establish the current Lua target: null equals empty, false equals numeric zero, and
+  aggregate values do not enter scalar comparison. Source audits show this is not yet a six-backend contract:
+  Rust collapses aggregates to empty text, while Dart/Julia retain host boolean/container spellings. Backlog `.5`
+  owns the typed equality decision. A final Perl lowering probe exposed a second marker boundary: Perl executes
+  ordinary statements before the first case and after `endcase`, while Rust's inactive frame and Dart/Julia/Lua
+  range selectors skip them. Lock the four-backend skip in Lua, require portable authoring to keep statements
+  inside branches, and route the final decision to `.5`. Both Lua ABIs pass 107/107; attached while `.4.3.6.3.3`
+  is next.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.1 — statement control owns statement ranges, not individual nodes):
   Attached branches arrive as consecutive ActionIR nodes with nested bodies, while marker branches delimit ranges
   in the surrounding block and require nested `endif` accounting. One indexed executor now owns both shapes and

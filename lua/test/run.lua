@@ -2551,7 +2551,10 @@ return({
   "subject_once" : subject_once,
   "selector_calls" : count(selector_calls),
   "dynamic" : dynamic,
-  "switch_null" : switch("missing", case(tag, exit_now(18)))
+  "switch_null" : switch("missing", case(tag, exit_now(18))),
+  "switch_null_match" : switch(undef, case("", "null-match"), default(exit_now(19))),
+  "switch_bool_number" : switch(false, case(0, "bool-number"), default(exit_now(20))),
+  "switch_aggregate" : switch([], case("", exit_now(21)), default("aggregate-default"))
 })
 ]])
   local result = execute_uniform_binding_source(source)
@@ -2566,6 +2569,9 @@ return({
   assert_equal(result.selector_calls, 1, "switch subject evaluates exactly once")
   assert_equal(result.dynamic, "dynamic-hit", "compound case expression reads a binding")
   assert_equal(result.switch_null, json.null, "unmatched switch without default yields null")
+  assert_equal(result.switch_null_match, "null-match", "null shares the governed empty scalar switch spelling")
+  assert_equal(result.switch_bool_number, "bool-number", "false shares the governed numeric zero spelling")
+  assert_equal(result.switch_aggregate, "aggregate-default", "aggregate values do not collapse to empty scalar text")
 
   local fluent = linkedspec.runtime_parse(
     linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
@@ -2722,6 +2728,164 @@ exit_now(46)
     assert_equal(failure.control_keyword, malformed.keyword, malformed.keyword .. " diagnostic keyword")
     assert_equal(failure.reason, malformed.reason, malformed.keyword .. " diagnostic reason")
     assert_equal(failure.rule_label, "Top", malformed.keyword .. " diagnostic rule")
+  end
+end)
+
+test("runtime statement switch controls select one attached or marker branch", function()
+  local source = uniform_binding_action_source([[
+events = []
+subject_calls = []
+kind = "b"
+switch({ push(subject_calls, "attached"); kind }) {
+  case(a) { exit_now(51) }
+  case(b) { push(events, "attached-bare") }
+  case(exit_now(52)) { exit_now(53) }
+  default { exit_now(54) }
+}
+switch("dynamic") {
+  case(cat("dyna", "mic")) { push(events, "attached-dynamic") }
+  default { exit_now(55) }
+}
+switch(undef) { case("") { push(events, "attached-null") } default { exit_now(56) } }
+switch(false) { case(0) { push(events, "attached-bool-number") } default { exit_now(57) } }
+switch([]) { case("") { exit_now(58) } default { push(events, "attached-aggregate-default") } }
+switch("missing") { case(no) { exit_now(59) } default {} }
+push(events, "after-attached-empty")
+switch({ push(subject_calls, "marker"); kind })
+case(a)
+  exit_now(60)
+endcase()
+case(b)
+  push(events, "marker-bare")
+endcase()
+case(exit_now(61))
+  exit_now(62)
+endcase()
+default()
+  exit_now(63)
+endswitch()
+switch("outer")
+case(outer)
+  switch("inner")
+  case(inner)
+    push(events, "nested-marker-switch")
+  endcase()
+  default()
+    exit_now(64)
+  endswitch()
+endcase()
+default()
+  exit_now(65)
+endswitch()
+switch("missing")
+case(no)
+  exit_now(66)
+endcase()
+default()
+  push(events, "marker-default")
+endswitch()
+switch("outside")
+  exit_now(68)
+case(outside)
+  push(events, "marker-outside-skipped")
+endcase()
+exit_now(69)
+endswitch()
+attached_value = { switch("yes") { case(no) { return("bad") } case(yes) { return("attached-local") } default { return("bad") } } }
+marker_value = {
+  switch("yes")
+  case(no)
+    return("bad")
+  endcase()
+  case(yes)
+    return("marker-local")
+  endcase()
+  default()
+    return("bad")
+  endswitch()
+}
+return({
+  "events" : copy(events),
+  "subject_calls" : copy(subject_calls),
+  "attached_value" : attached_value,
+  "marker_value" : marker_value
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_json_equal(result.events, json.decode([[
+[
+  "attached-bare",
+  "attached-dynamic",
+  "attached-null",
+  "attached-bool-number",
+  "attached-aggregate-default",
+  "after-attached-empty",
+  "marker-bare",
+  "nested-marker-switch",
+  "marker-default",
+  "marker-outside-skipped"
+]
+]]), "attached and marker switch branches preserve ActionIR order")
+  assert_json_equal(result.subject_calls, json.decode('["attached","marker"]'), "switch subjects run once")
+  assert_equal(result.attached_value, "attached-local", "attached switch return stays block-local")
+  assert_equal(result.marker_value, "marker-local", "marker switch return stays block-local")
+
+  for _, malformed in ipairs({
+    { source = 'case(x); return("bad")', keyword = "case", reason = "orphaned branch or marker" },
+    { source = 'default(); return("bad")', keyword = "default", reason = "orphaned branch or marker" },
+    { source = 'endcase(); return("bad")', keyword = "endcase", reason = "orphaned branch or marker" },
+    { source = 'endswitch(); return("bad")', keyword = "endswitch", reason = "orphaned branch or marker" },
+    { source = 'switch(exit_now(67)); case(x); return("bad")', keyword = "switch", reason = "missing endswitch" },
+    {
+      source = 'switch(x); default(); return("bad"); default(); return("bad"); endswitch()',
+      keyword = "default",
+      reason = "duplicate default",
+    },
+    {
+      source = 'switch(x); default(); return("bad"); case(x); return("bad"); endswitch()',
+      keyword = "case",
+      reason = "case follows default",
+    },
+    {
+      source = 'switch(x); endcase(); default(); return("bad"); endswitch()',
+      keyword = "endcase",
+      reason = "endcase without open branch",
+    },
+    {
+      source = 'switch(x); case(x); endcase(); endcase(); endswitch()',
+      keyword = "endcase",
+      reason = "endcase without open branch",
+    },
+    {
+      source = 'switch(x); case(x) { return("bad") }; endswitch()',
+      keyword = "case",
+      reason = "cannot mix attached and marker branches",
+    },
+    {
+      source = 'switch(x) { set(out, "bad"); default { return("bad") } }',
+      keyword = "call",
+      reason = "expected attached case/default branch",
+    },
+    {
+      source = 'switch(x) { default { return("bad") } default { return("bad") } }',
+      keyword = "default",
+      reason = "duplicate default",
+    },
+    {
+      source = 'switch(x) { default { return("bad") } case(x) { return("bad") } }',
+      keyword = "case",
+      reason = "case follows default",
+    },
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(malformed.source))
+    end)
+    assert_equal(ok, false, malformed.keyword .. " malformed switch fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.keyword .. " typed switch failure")
+    assert_equal(failure.code, "malformed_statement_control", malformed.keyword .. " switch diagnostic code")
+    assert_equal(failure.control_keyword, malformed.keyword, malformed.keyword .. " switch diagnostic keyword")
+    assert_equal(failure.reason, malformed.reason, malformed.keyword .. " switch diagnostic reason")
+    assert_equal(failure.rule_label, "Top", malformed.keyword .. " switch diagnostic rule")
   end
 end)
 

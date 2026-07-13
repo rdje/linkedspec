@@ -689,11 +689,17 @@ subjects once, treats bare case labels literally, and composes in assignment and
 raise the gate to 106/106: one selected branch executes, nested marker boundaries and empty branches remain exact,
 block-local return is preserved, and malformed/orphaned controls expose typed keyword/reason/rule fields. Portable
 authoring keeps `i`/`elif` marker-only and `when`/`otherwise` attached-only; extra alias-shape acceptance in
-Perl/Dart/Julia versus Rust is backlog `.5`. Switch-family statement execution `.4.3.6.3.2` is active. This also
-corrects the earlier Lua-only inert assignment scaffold expectation.
+Perl/Dart/Julia versus Rust is backlog `.5`. Attached and marker switch statements then raise the gate to 107/107:
+complete structure validates before one-time subject evaluation; first matching case/default ranges execute;
+bare labels, nested boundaries, empty bodies, and local return remain exact; malformed/orphaned controls stay
+typed. Inline and statement switch share Perl-reference scalar equality: null equals empty text, booleans use
+`0/1`, and aggregates are noncomparable. Rust/Dart/Julia boolean or aggregate drift joins backlog `.5`. Perl also
+executes marker statements outside every branch while Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary.
+Attached while `.4.3.6.3.3` is active. This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
-child-push expression results, rename-to-existing-key policy, and scalar/aggregate condition truthiness differ;
+child-push expression results, rename-to-existing-key policy, scalar/aggregate condition truthiness, and
+boolean/number or aggregate switch equality differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a

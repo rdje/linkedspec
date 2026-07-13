@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua if-family statement controls pass 106/106 under `.4.3.6.3.1`; switch-family
-  statements `.4.3.6.3.2` active; alias-shape and truthiness drift join helper-caveat owner `.5`).
+- Last updated: `2026-07-13` (Lua if/switch statement controls pass 107/107 through `.4.3.6.3.2`; attached while
+  `.4.3.6.3.3` active; switch comparison/range, alias-shape, and truthiness drift join helper-caveat owner `.5`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2190,6 +2190,15 @@ before implementation.
     `when`/`otherwise` for attached chains, while direct probes/source seams show Perl, Dart, and Julia accept all
     four aliases in both shapes and Rust accepts only the documented portable intersection. Either align rejection
     or formally enlarge the language with cross-backend tests; do not rely on the extra forms meanwhile.
+    Normalize switch scalar comparison too: all variants make null match empty text, but Perl/Rust/Lua stringify
+    booleans as `0/1` so `false` matches numeric zero, while Dart/Julia compare `false` to `0` as distinct text.
+    Aggregate subjects/candidates are also not governed: Perl/Lua reject aggregate scalar comparison, Rust
+    collapses arrays/hashes to empty text, and Dart/Julia stringify host containers. Select an explicit typed
+    equality policy for inline, attached, and marker switch together.
+    Normalize ordinary marker-switch statements outside a `case/default` range: direct Perl lowering executes
+    statements before the first branch and after explicit `endcase()`, while Rust/Dart/Julia/Lua skip them.
+    Either reject the ambiguous placement everywhere or adopt one explicit execution rule; portable specs keep
+    every executable statement inside a branch meanwhile.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
@@ -3698,13 +3707,13 @@ before implementation.
 | 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receiver dispatch pass 104/104. |
 | 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected branches, one-time switch subjects, literal labels, arity diagnostics, and fluent returns pass 105/105. |
 | 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
-| 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `active` | Execute attached/marker switch-family statements. |
-| 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `pending` | Execute attached while statements with deterministic guard behavior. |
+| 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
+| 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `active` | Execute attached while statements with deterministic guard behavior. |
 | 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Execute current built-in final blocks and scoped with. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, and control-alias shapes. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, and control aliases. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

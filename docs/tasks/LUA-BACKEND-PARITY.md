@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (attached/marker if-family controls pass 106/106 through `.4.3.6.3.1`;
-  switch-family statement execution `.4.3.6.3.2` active; alias-shape and truthiness drift routed to backlog `.5`)
+- Last updated: `2026-07-13` (attached/marker if/switch controls pass 107/107 through `.4.3.6.3.2`;
+  attached while execution `.4.3.6.3.3` active; control comparison/range/alias/truthiness drift routed to backlog
+  `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1426,16 +1427,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.1 - execute Lua if statement controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute attached and marker `switch`/`case`/`default` statement forms.
   Dependencies: `.4.3.6.3.1`
   Acceptance: The switch subject evaluates once; the first matching case or one default executes; later cases are
     skipped; comparison and null behavior reuse governed scalar equality without host-table coercion.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Attached switch validates nested `case/default` bodies; marker switch scans
+    nested `endswitch` depth and optional `endcase` boundaries before evaluating its subject once. Both select the
+    first matching case or one default, execute through the shared statement range/block seam, preserve empty and
+    local-return bodies, keep bare labels literal, and skip all later candidate/body side effects. Inline,
+    attached, and marker forms now share Perl-oracle scalar comparison: null equals empty text, booleans use `0/1`,
+    and aggregates are not scalar-comparable. Orphan/missing/duplicate/mixed controls retain typed diagnostics.
+    One focused case plus expanded inline assertions pass 107/107 on PUC Lua and LuaJIT. Cross-backend boolean/
+    aggregate switch-comparison and marker outside-branch execution drift is routed to
+    `FUTURE-PARITY-BACKLOG.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.3.2 - execute Lua switch statement controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Execute attached `while` statements through a deterministic loop-control seam.
   Dependencies: `.4.3.6.3.2`
   Acceptance: Conditions re-evaluate before each body, false initially runs zero bodies, body state is visible to
@@ -1744,7 +1753,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receivers pass 104/104. |
 | 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected payloads, one-time switch subjects, literal labels, and fluent returns pass 105/105. |
 | 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
-| 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `active` | Execute attached/marker switch-family statements. |
+| 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
+| 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `active` | Execute attached while statements with deterministic guard behavior. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1883,6 +1893,26 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   Rust/Dart/Julia source seams establish the extra alias-shape drift; backlog `.5` owns normalization.
 - [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
   Map, changes/notes, and memory close if-family statements and activate switch-family `.4.3.6.3.2`.
+
+### `LUA-BACKEND-PARITY.4.3.6.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua preserved typed attached/marker switch nodes but routed them to unsupported
+  ActionIR kinds. Inline switch also collapsed aggregate values to empty text, unlike the Perl reference.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Attached branches are nested control bodies; marker branches are sibling
+  ranges with optional `endcase` and nested `endswitch` boundaries. The inline evaluator owned its comparison
+  locally and used null-as-empty coercion for host tables as well as scalar values.
+- [x] **FIX** — Share one literal-label evaluator and scalar switch equality across all three switch forms; add
+  attached branch validation plus nesting-aware marker range selection over the indexed statement executor;
+  retain typed orphan/missing/duplicate/order/mixed diagnostics.
+- [x] **ADDRESSED (verified)** — Focused coverage locks subject-once, bare/dynamic labels, first-match/default,
+  skipped fatal candidates/bodies, null/boolean/aggregate comparison, empty branches, nested marker switches,
+  local return, skipped marker statements outside branches, and thirteen malformed/orphaned structures; inline
+  comparison assertions share the same seam.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 107/107 plus parser CLI/corpus scaffolding. Perl attached/marker
+  toolbox probes confirm null/empty, false/zero, and aggregate/non-scalar behavior. Dart/Julia and Rust source
+  inspection exposes remaining boolean/aggregate drift, now owned by backlog `.5`.
+- [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
+  Map, changes/notes, and memory close switch-family statements and activate attached while `.4.3.6.3.3`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

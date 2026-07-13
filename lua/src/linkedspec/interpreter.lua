@@ -677,18 +677,36 @@ local function validate_inline_switch(expr)
   end
 end
 
+local function evaluate_switch_case_match(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind == "variable" then return expr.name end
+  return evaluate_expr(engine, expr, ctx, accumulator, edge_state)
+end
+
+local function switch_scalar_text(value)
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" or
+      (action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value") then
+    return nil
+  end
+  return scalar_string(value, true)
+end
+
+local function switch_values_equal(left, right)
+  local left_text = switch_scalar_text(left)
+  local right_text = switch_scalar_text(right)
+  return left_text ~= nil and right_text ~= nil and left_text == right_text
+end
+
 local function evaluate_inline_switch(engine, expr, ctx, accumulator, edge_state)
   validate_inline_switch(expr)
   local subject = evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
-  local subject_text = scalar_string(subject, true) or ""
   local default_expr
   for index = 2, #expr.args do
     local branch = argument_expr(expr.args[index])
     if branch.name == "case" then
       local case_expr = argument_expr(branch.args[1])
-      local candidate = case_expr.kind == "variable" and case_expr.name or
-        evaluate_expr(engine, case_expr, ctx, accumulator, edge_state)
-      if (scalar_string(candidate, true) or "") == subject_text then
+      local candidate = evaluate_switch_case_match(engine, case_expr, ctx, accumulator, edge_state)
+      if switch_values_equal(candidate, subject) then
         return evaluate_expr(engine, argument_expr(branch.args[2]), ctx, accumulator, edge_state)
       end
     else
@@ -1772,6 +1790,26 @@ local function is_marker_endif(expr)
   return expr.kind == "control_endif" and expr.body == nil
 end
 
+local function is_marker_switch_start(expr)
+  return expr.kind == "control_switch" and expr.body == nil
+end
+
+local function is_marker_case(expr)
+  return expr.kind == "control_case" and expr.body == nil
+end
+
+local function is_marker_default(expr)
+  return expr.kind == "control_default" and expr.body == nil
+end
+
+local function is_marker_endcase(expr)
+  return expr.kind == "control_endcase" and expr.body == nil
+end
+
+local function is_marker_endswitch(expr)
+  return expr.kind == "control_endswitch" and expr.body == nil
+end
+
 local function validate_if_keyword(expr, ctx, expected, allowed)
   if allowed[expr.keyword] then return end
   statement_control_failure(expr, ctx, "expected " .. expected)
@@ -1880,6 +1918,119 @@ local function select_marker_if_chain(engine, statements, start_index, stop_inde
   return nil, nil, close_index
 end
 
+local function execute_attached_switch(engine, expr, ctx, accumulator, edge_state)
+  if expr.keyword ~= "switch" then statement_control_failure(expr, ctx, "expected switch") end
+
+  local branches = {}
+  local saw_default = false
+  for _, statement in ipairs(expr.body.statements) do
+    local branch = statement.expr
+    if branch.kind == "control_case" then
+      if branch.body == nil then
+        statement_control_failure(branch, ctx, "cannot mix attached and marker branches")
+      end
+      if saw_default then statement_control_failure(branch, ctx, "case follows default") end
+      branches[#branches + 1] = { match = branch.match, body = branch.body }
+    elseif branch.kind == "control_default" then
+      if branch.body == nil then
+        statement_control_failure(branch, ctx, "cannot mix attached and marker branches")
+      end
+      if saw_default then statement_control_failure(branch, ctx, "duplicate default") end
+      saw_default = true
+      branches[#branches + 1] = { body = branch.body }
+    else
+      statement_control_failure(branch, ctx, "expected attached case/default branch")
+    end
+  end
+
+  local subject = evaluate_expr(engine, expr.source_expr, ctx, accumulator, edge_state)
+  for _, branch in ipairs(branches) do
+    if branch.match == nil or switch_values_equal(
+        evaluate_switch_case_match(engine, branch.match, ctx, accumulator, edge_state),
+        subject
+      ) then
+      execute_block(engine, branch.body, ctx, accumulator, edge_state)
+      break
+    end
+  end
+end
+
+local function select_marker_switch_chain(engine, statements, start_index, stop_index, ctx, accumulator, edge_state)
+  local first = statements[start_index].expr
+  if first.keyword ~= "switch" then statement_control_failure(first, ctx, "expected switch") end
+  if #first.cases ~= 0 or first.default ~= nil then
+    statement_control_failure(first, ctx, "cannot mix attached and marker branches")
+  end
+
+  local branches = {}
+  local frames = { { saw_default = false, branch_open = false } }
+  local close_index
+  local cursor = start_index + 1
+  while cursor < stop_index do
+    local expr = statements[cursor].expr
+    if is_marker_switch_start(expr) then
+      if #expr.cases ~= 0 or expr.default ~= nil then
+        statement_control_failure(expr, ctx, "cannot mix attached and marker branches")
+      end
+      frames[#frames + 1] = { saw_default = false, branch_open = false }
+    elseif is_marker_case(expr) then
+      local frame = frames[#frames]
+      if frame.saw_default then statement_control_failure(expr, ctx, "case follows default") end
+      frame.branch_open = true
+      if #frames == 1 then
+        if branches[#branches] and branches[#branches].stop_index == nil then
+          branches[#branches].stop_index = cursor
+        end
+        branches[#branches + 1] = { match = expr.match, start_index = cursor + 1 }
+      end
+    elseif is_marker_default(expr) then
+      local frame = frames[#frames]
+      if frame.saw_default then statement_control_failure(expr, ctx, "duplicate default") end
+      frame.saw_default = true
+      frame.branch_open = true
+      if #frames == 1 then
+        if branches[#branches] and branches[#branches].stop_index == nil then
+          branches[#branches].stop_index = cursor
+        end
+        branches[#branches + 1] = { start_index = cursor + 1 }
+      end
+    elseif is_marker_endcase(expr) then
+      local frame = frames[#frames]
+      if not frame.branch_open then statement_control_failure(expr, ctx, "endcase without open branch") end
+      frame.branch_open = false
+      if #frames == 1 and branches[#branches] and branches[#branches].stop_index == nil then
+        branches[#branches].stop_index = cursor
+      end
+    elseif is_marker_endswitch(expr) then
+      if #frames > 1 then
+        frames[#frames] = nil
+      else
+        if branches[#branches] and branches[#branches].stop_index == nil then
+          branches[#branches].stop_index = cursor
+        end
+        close_index = cursor
+        break
+      end
+    elseif (expr.kind == "control_case" or expr.kind == "control_default") and expr.body ~= nil then
+      statement_control_failure(expr, ctx, "cannot mix attached and marker branches")
+    end
+    cursor = cursor + 1
+  end
+
+  if close_index == nil then statement_control_failure(first, ctx, "missing endswitch") end
+
+  local subject = evaluate_expr(engine, first.source_expr, ctx, accumulator, edge_state)
+  for _, branch in ipairs(branches) do
+    if branch.match == nil or switch_values_equal(
+        evaluate_switch_case_match(engine, branch.match, ctx, accumulator, edge_state),
+        subject
+      ) then
+      return branch.start_index, branch.stop_index, close_index
+    end
+  end
+  return nil, nil, close_index
+end
+
 local execute_statement_at
 local execute_statement_range
 
@@ -1919,7 +2070,36 @@ execute_statement_at = function(engine, statements, index, stop_index, ctx, accu
     end
     return close_index
   end
-  if expr.kind == "control_if" or expr.kind == "control_else" or expr.kind == "control_endif" then
+  if expr.kind == "control_switch" then
+    if expr.body ~= nil then
+      execute_attached_switch(engine, expr, ctx, accumulator, edge_state)
+      return index
+    end
+    local selected_start, selected_stop, close_index = select_marker_switch_chain(
+      engine,
+      statements,
+      index,
+      stop_index,
+      ctx,
+      accumulator,
+      edge_state
+    )
+    if selected_start ~= nil then
+      execute_statement_range(
+        engine,
+        statements,
+        selected_start,
+        selected_stop,
+        ctx,
+        accumulator,
+        edge_state
+      )
+    end
+    return close_index
+  end
+  if expr.kind == "control_if" or expr.kind == "control_else" or expr.kind == "control_endif" or
+      expr.kind == "control_case" or expr.kind == "control_default" or expr.kind == "control_endcase" or
+      expr.kind == "control_endswitch" then
     statement_control_failure(expr, ctx, "orphaned branch or marker")
   end
   execute_dropped_statement(engine, statements[index], ctx, accumulator, edge_state)
@@ -1942,7 +2122,9 @@ evaluate_block_value = function(engine, block, ctx, accumulator, edge_state)
     local next_index = index
     local returned, value = evaluate_block_step(function()
       if statement.expr.kind == "control_if" or statement.expr.kind == "control_else" or
-          statement.expr.kind == "control_endif" then
+          statement.expr.kind == "control_endif" or statement.expr.kind == "control_switch" or
+          statement.expr.kind == "control_case" or statement.expr.kind == "control_default" or
+          statement.expr.kind == "control_endcase" or statement.expr.kind == "control_endswitch" then
         next_index = execute_statement_at(
           engine,
           block.statements,

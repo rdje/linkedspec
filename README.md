@@ -60,17 +60,21 @@ This `README.md` is the **single entry point** to the project.
   numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, while the
   three tree-callback names remain explicitly owned by active parent `.4.3.6`. Audit `.4.3.6.0` splits eager
   blocks, inline and statement controls, contextual built-ins/`with`, and deterministic tree callbacks before
-  behavior code. Eager blocks, lazy inline `if`/`switch`, and attached/marker if-family statements now pass
-  106/106 on both Lua ABIs through `.4.3.6.3.1`: only selected branches execute, nested marker boundaries and
-  empty branches are exact, block-local return is preserved, and malformed/orphaned controls are typed.
-  Switch-family statement execution `.4.3.6.3.2` is active. General user-function final blocks remain `.5.1`,
+  behavior code. Eager blocks, lazy inline `if`/`switch`, attached/marker if-family statements, and attached/marker
+  switch-family statements now pass 107/107 on both Lua ABIs through `.4.3.6.3.2`: only selected branches execute,
+  nested marker boundaries and empty branches are exact, block-local return is preserved, switch subjects run
+  once, bare case labels stay literal, and malformed/orphaned controls are typed. Attached `while` execution
+  `.4.3.6.3.3` is active. General user-function final blocks remain `.5.1`,
   and explicit callable codeblock values remain future `.11.7`. Copied harray construction,
   runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
   103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks and lazy controls raise the gate to
-  106/106. Portable aliases remain `i`/`elif` for marker chains and `when`/`otherwise` for attached chains; broader
-  Perl/Dart/Julia acceptance and scalar/aggregate truthiness drift are owned by `FUTURE-PARITY-BACKLOG.5`.
+  107/107. Portable aliases remain `i`/`elif` for marker chains and `when`/`otherwise` for attached chains; broader
+  Perl/Dart/Julia acceptance, scalar/aggregate truthiness, and switch scalar-equality drift are owned by
+  `FUTURE-PARITY-BACKLOG.5`. Portable switch labels avoid boolean-versus-number and aggregate comparisons until
+  that equality policy is normalized, and marker-switch executable statements stay inside `case/default` ranges
+  because Perl executes outside-range statements while Rust/Dart/Julia/Lua skip them.
   Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator, and rename-to-existing-key policy also differs; portable authoring
   avoids those value/collision boundaries until backlog `.5` normalizes them.

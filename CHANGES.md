@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.2 — execute Lua switch statement controls
+
+Lua now executes attached and marker `switch`/`case`/`default` statements through the indexed statement-range
+executor. It validates complete branch structure before evaluating the subject once, selects the first matching
+case or one default, preserves nested switch boundaries, optional `endcase`, empty bodies, bare literal labels,
+and block-local return, and rejects orphaned/missing/duplicate/order/mixed structures with typed diagnostics.
+
+Inline, attached, and marker switch now share one Perl-reference scalar comparison seam: null matches empty text,
+booleans use `0/1`, and arrays/harrays/codeblocks are not scalar-comparable. Focused tests cover skipped fatal
+candidates/bodies and all structural boundaries; PUC Lua and LuaJIT pass 107/107 plus manifest/CLI scaffolding.
+Rust, Dart, and Julia differ at boolean/number or aggregate comparison boundaries, so normalization is durably
+owned by `FUTURE-PARITY-BACKLOG.5`. A toolbox probe also found that Perl executes marker-switch statements outside
+every branch whereas Rust/Dart/Julia/Lua skip them; portable placement and normalization are recorded under the
+same owner. Attached while `.4.3.6.3.3` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.1 — execute Lua if statement controls
 
 Added one indexed Lua statement executor for consecutive attached if branches and nesting-aware marker ranges.

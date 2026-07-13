@@ -1254,8 +1254,12 @@ table because its runtime behavior is to terminate the parser process.
   selected branch payload. A bare switch subject such as `switch(kind, ...)` reads scalar `kind`; a bare case
   value such as `case(foo, body)` is a literal tag named `foo`, matching attached-switch case labels.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
-  fluent `.return(...)` value positions. The same pending truthiness normalization applies to any branch
-  conditions.
+  fluent `.return(...)` value positions.
+- **Comparison boundary**: Null matches empty text on all current backends. Boolean/number and aggregate
+  comparison are not yet portable: Perl/Rust/Lua make `false` match numeric `0`; Dart/Julia do not. Perl/Lua do
+  not scalar-compare arrays/harrays, Rust currently collapses them to empty text, and Dart/Julia stringify host
+  containers. Use text/number predicates to normalize a subject before switching when these kinds are possible;
+  `FUTURE-PARITY-BACKLOG.5` owns the final typed-equality policy.
 
 ### `switch(expr) { case(val) { ... } default { ... } }`
 - **Signature**: Attached-block statement form.
@@ -1265,6 +1269,19 @@ table because its runtime behavior is to terminate the parser process.
   bare case label is a literal tag, so `switch(kind) { case(foo) { ... } }` compares scalar `kind` to `"foo"`.
 - **Sugar**: `default() { ... }` is equivalent to `default { ... }`. A following same-line statement still
   needs the normal semicolon separator after the final `}`.
+- **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua. It shares the inline form's pending
+  boolean/number and aggregate comparison boundary above.
+
+### `switch(expr); case(val); ...; endcase(); default(); ...; endswitch()`
+- **Signature**: Marker-delimited statement form.
+- **Returns**: no value of its own; selected branch statements provide side effects or `return(...)` values.
+- **Behavior**: Evaluates `expr` once, selects the first matching `case` or one `default`, and skips every later
+  candidate and body. `endcase()` is an optional explicit branch boundary; the next same-depth `case`, `default`,
+  or `endswitch()` also closes the current branch. Nested marker switches own their inner markers.
+- **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua. Bare labels and the comparison boundary
+  are identical to inline and attached switch. Keep every executable statement inside a case/default range:
+  Perl currently executes statements outside all ranges, while Rust/Dart/Julia/Lua skip them. Backlog `.5` owns
+  normalization.
 
 ### `while(cond) { ... }`
 - **Signature**: Attached-block statement form.

@@ -5,11 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua's same indexed statement executor now consumes attached and marker switch chains.
+  Structural validation happens before the subject runs; the subject runs once; first matching case or one default
+  executes through the shared range/block seam; nested marker switches and optional `endcase` boundaries remain
+  bounded; bare labels stay literal; and malformed/orphaned controls expose typed fields. Inline, attached, and
+  marker forms share Perl-reference scalar equality: null equals empty text, booleans spell as `0/1`, and
+  aggregates are not scalar-comparable. PUC Lua and LuaJIT pass 107/107; cross-backend boolean/number and aggregate
+  comparison drift is routed to backlog `.5`. Perl also executes marker statements outside every branch while
+  Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary too. Attached while `.4.3.6.3.3` is active.
 - `2026-07-13` refresh: Lua's indexed statement executor now consumes attached if chains and nesting-aware marker
   ranges, evaluates conditions only until one branch is selected, preserves empty bodies and block-local return,
   and emits typed malformed/orphaned diagnostics with authored keyword, reason, ActionIR kind, and rule. Portable
   `when/otherwise` attached aliases and `i/elif` marker aliases pass 106/106 on both ABIs; broader alias-shape
-  acceptance in Perl/Dart/Julia versus Rust is routed to backlog `.5`. Switch statements `.4.3.6.3.2` are active.
+  acceptance in Perl/Dart/Julia versus Rust is routed to backlog `.5`.
 - `2026-07-13` refresh: Lua now executes ordinary no-pair brace values eagerly at 104/104 on both ABIs. Non-final
   statements reuse dropped-statement mutation; final expressions yield values; local return catches only the
   block's return flow; empty/keyed braces remain harrays; yielded values continue through receivers. This corrects
