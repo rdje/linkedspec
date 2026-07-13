@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.4 — close Lua array mutation flow**
+  (DONE — 98/98 on both ABIs; tagged records/remaining bridges `.4.3.4.5` active).
+
+  **Implementation:** Typed rule accumulators, cached action-edge child results, whole/indexed implicit/explicit
+  child push, and fluent push now share the uniform append/end/split binding and copied-result seam.
+
+  **Proof:** Four block forms, two fluent forms, absent compiled-rule arrays, static precedence, saved updates,
+  mutable/pure split, and wrong-kind fields pass PUC Lua and LuaJIT 98/98 plus manifest/CLI scaffolding. Perl
+  lifecycle-returned whole/indexed results match exactly.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.3 — add Lua array transform pipelines**
   (DONE — 95/95 on both ABIs; mutation/child flow `.4.3.4.4` active).
 

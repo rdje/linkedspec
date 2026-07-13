@@ -10,14 +10,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.4.3` — copied transform/join/PCRE2 pipelines and rebinding.
-- latest_commit: `92cde542` — `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.4.4`; append/end mutation/mutable split/child-result flow.
-- next_action: audit the existing binding/child dispatch seams, then implement and boundary-test `.4.3.4.4` only.
-- current_proof: delimiter-first joins, literal/PCRE2 split/filter, Unicode transforms, terminal receivers, source
-  isolation, seven standalone rebindings, and wrong-kind diagnostics pass 95/95 on PUC Lua and LuaJIT. Flat/
-  concat arity, negative counts, newer-backend dropped transforms, and invalid joins are owned by `.5`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.4.4` — typed mutation, accumulator, and child-result flow.
+- latest_commit: `3264063c` — `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.4.4 - close Lua array mutation flow`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.4.5`; tagged records and remaining array/scalar bridges.
+- next_action: audit the existing tagged-record reference/backend paths, then implement `.4.3.4.5` only.
+- current_proof: typed implicit/compiled-rule accumulators, cached whole/indexed child push, fluent implicit/explicit
+  targets, wrong-kind fields, and uniform append/end/split behavior pass 98/98 on PUC Lua and LuaJIT. Flat/concat
+  arity, negative counts, newer-backend dropped transforms, and invalid joins remain owned by `.5`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.4.3` commit. Lua mutation/child flow
-  `.4.3.4.4` is next. Oracle timeout calibration remains deferred to `.7.0`.
+- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.4.4` commit. Lua tagged records/remaining
+  bridges `.4.3.4.5` are next. Oracle timeout calibration remains deferred to `.7.0`.

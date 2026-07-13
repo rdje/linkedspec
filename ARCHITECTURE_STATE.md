@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua rule accumulators are typed arrays visible through uniform binding. Action-edge child
+  push reuses one cached result and supports whole or zero-based indexed append into implicit/explicit targets;
+  fluent push, ordinary append/end mutation, and mutable split share the same kind-checked copied-result seam.
+  Both Lua ABIs pass 98/98; tagged records/remaining bridges `.4.3.4.5` are active.
 - `2026-07-12` refresh: Lua copied array transforms now cover delimiter-first terminal joins, literal/PCRE2
   split-and-flatten, PCRE2 filters, trim/filter/case/uniq pipelines, and all seven Perl-reference dropped-call
   rebindings through one kind-checked seam. Both Lua ABIs pass 95/95; mutation/child flow `.4.3.4.4` is active.

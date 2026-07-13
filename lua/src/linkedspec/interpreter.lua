@@ -100,7 +100,7 @@ local function default_top(engine)
   return engine.compiled_spec.compiled_rule_order[1]
 end
 
-local function context(input, top_rule)
+local function context(input, top_rule, compiled_rules)
   local valid, position = json.validate_utf8(input)
   if not valid then fail("runtime input is not valid UTF-8 at byte " .. (position - 1)) end
   return {
@@ -114,6 +114,8 @@ local function context(input, top_rule)
     active = {},
     lifecycle_events = {},
     rule_stack = {},
+    accumulator_stack = {},
+    compiled_rules = compiled_rules,
     top_rule = top_rule,
   }
 end
@@ -133,6 +135,9 @@ local function lookup_binding(ctx, name)
   if ctx.variables[name] ~= nil then return ctx.variables[name], "variable" end
   if ctx.arrays[name] ~= nil then return ctx.arrays[name], "array" end
   if ctx.harrays[name] ~= nil then return ctx.harrays[name], "harray" end
+  local frame = ctx.accumulator_stack[#ctx.accumulator_stack]
+  if frame and frame.label == name then return frame.values, "implicit_accumulator" end
+  if ctx.compiled_rules[name] then return json.array(), "implicit_rule_accumulator" end
   return json.null, nil
 end
 
@@ -194,6 +199,15 @@ end
 
 local function store_array_mutation(ctx, target, storage, value)
   if storage == "array" then return bind_array(ctx, target.name, value) end
+  if storage == "implicit_accumulator" then
+    local frame = ctx.accumulator_stack[#ctx.accumulator_stack]
+    if not frame or frame.label ~= target.name then
+      fail("implicit accumulator is not active", { identifier = target.name })
+    end
+    for index = #frame.values, 1, -1 do frame.values[index] = nil end
+    for index, item in ipairs(value) do frame.values[index] = copy_value(item) end
+    return copy_value(frame.values)
+  end
   return bind_scalar(ctx, target.name, value)
 end
 
@@ -214,6 +228,13 @@ local function read_index(root, key)
     return value == nil and json.null or copy_value(value)
   end
   return json.null
+end
+
+local function literal_nonnegative_index(expr)
+  if expr.kind ~= "number" or type(expr.value) ~= "number" or expr.value % 1 ~= 0 or expr.value < 0 then
+    return nil
+  end
+  return expr.value
 end
 
 local function write_index(root, key, value)
@@ -1001,34 +1022,57 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   elseif name == "push" then
     local first_target = expr.args[1] and binding_target_descriptor(argument_expr(expr.args[1])) or nil
     local first_name = first_target and first_target.name or nil
-    if #expr.args >= 2 and first_name and engine.compiled_spec.rules_by_label[first_name] then
-      local child = execute_rule(engine, first_name, 0, ctx)
-      ctx.retv = copy_value(child.value)
-      local output_target = binding_target_descriptor(argument_expr(expr.args[2]))
-      if not output_target then fail("push output target must be a bare binding") end
-      return append_array_binding(ctx, output_target, child.value)
-    elseif #expr.args >= 2 and first_target then
+    local child_rule = first_name and engine.compiled_spec.rules_by_label[first_name] or nil
+    if child_rule and #expr.args >= 1 and #expr.args <= 3 then
+      local output_target
+      local child_index
+      if #expr.args == 1 then
+        output_target = { kind = "scalar", name = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule }
+      elseif #expr.args == 2 then
+        child_index = literal_nonnegative_index(argument_expr(expr.args[2]))
+        if child_index ~= nil then
+          output_target = { kind = "scalar", name = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule }
+        else
+          output_target = binding_target_descriptor(argument_expr(expr.args[2]))
+        end
+      else
+        output_target = binding_target_descriptor(argument_expr(expr.args[2]))
+        child_index = literal_nonnegative_index(argument_expr(expr.args[3]))
+        if child_index == nil then output_target = nil end
+      end
+      if output_target then
+        local child = edge_state and first_name == edge_state.target.label and
+          dispatch_edge_child(engine, edge_state, ctx) or execute_rule(engine, first_name, 0, ctx)
+        ctx.retv = copy_value(child.value)
+        local value = child_index == nil and child.value or read_index(child.value, child_index)
+        return append_array_binding(ctx, output_target, value)
+      end
+    end
+    if child_rule then fail("push child form has invalid target or index", { helper_name = "push" }) end
+    if #expr.args >= 2 and first_target then
       local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
       return append_array_binding(ctx, first_target, value)
     end
-    local value
     if #expr.args == 0 and edge_state then
-      value = dispatch_edge_child(engine, edge_state, ctx).value
-    elseif #expr.args == 1 then
+      local child = dispatch_edge_child(engine, edge_state, ctx)
+      local output_target = { kind = "scalar", name = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule }
+      return append_array_binding(ctx, output_target, child.value)
+    end
+    if #expr.args == 1 and edge_state then
+      local output_target = binding_target_descriptor(argument_expr(expr.args[1]))
+      if not output_target then fail("push output target must be a bare binding") end
+      local child = dispatch_edge_child(engine, edge_state, ctx)
+      return append_array_binding(ctx, output_target, child.value)
+    end
+    local value
+    if #expr.args == 1 then
       local candidate = argument_expr(expr.args[1])
-      local label = target_name(candidate)
-      if label and engine.compiled_spec.rules_by_label[label] then
-        local child = execute_rule(engine, label, 0, ctx)
-        ctx.retv = copy_value(child.value)
-        value = child.value
-      else
-        value = evaluate_expr(engine, candidate, ctx, accumulator, edge_state)
-      end
+      value = evaluate_expr(engine, candidate, ctx, accumulator, edge_state)
     else
       value = ctx.retv
     end
-    accumulator[#accumulator + 1] = copy_value(value)
-    return value
+    local output_target = { kind = "scalar", name = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule }
+    return append_array_binding(ctx, output_target, value)
   elseif name == "set" or name == "=" then
     local target = expr.args[1] and target_descriptor(argument_expr(expr.args[1]))
     if not target or not expr.args[2] then fail("set expects target and value") end
@@ -1471,7 +1515,8 @@ execute_rule = function(engine, label, entry_index, ctx)
   ctx.arrays = copy_store(saved_arrays)
   ctx.harrays = copy_store(saved_harrays)
   ctx.rule_stack[#ctx.rule_stack + 1] = label
-  local accumulator = {}
+  local accumulator = json.array()
+  ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
   local ok, result_or_flow = pcall(function()
     lifecycle(engine, rule, "I", ctx, accumulator)
     local minimum = rule.mode_metadata.rep_min
@@ -1531,6 +1576,7 @@ execute_rule = function(engine, label, entry_index, ctx)
     lifecycle(engine, rule, "E", ctx, accumulator)
     return rule_result(count > 0, finish_value(accumulator, ctx.retv))
   end)
+  ctx.accumulator_stack[#ctx.accumulator_stack] = nil
   ctx.rule_stack[#ctx.rule_stack] = nil
   ctx.registers = saved_registers
   ctx.variables = saved_variables
@@ -1551,7 +1597,7 @@ function M.runtime_parse(engine, input, options)
   options = options or {}
   local top = options.top_rule or default_top(engine)
   if not top then fail("compiled spec does not contain any rules") end
-  local ctx = context(input, top)
+  local ctx = context(input, top, engine.compiled_spec.rules_by_label)
   local result = execute_rule(engine, top, 0, ctx)
   local output = json.array({ copy_value(result.value) })
   return setmetatable({

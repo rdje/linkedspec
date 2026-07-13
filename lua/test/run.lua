@@ -2788,6 +2788,80 @@ Done::
   }), "static rule precedence")
 end)
 
+test("runtime child push reuses action edge and selects zero based results", function()
+  local forms = execute_uniform_binding_source([[
+Parent::
+ I { set(explicit, []) }
+ -> Child {
+   push(Child)
+   push(Child, explicit)
+   push(Child, 1)
+   push(Child, explicit, 0)
+ }
+ LX {
+   return({
+     "implicit" : copy(Parent),
+     "explicit" : copy(explicit),
+     "absent_rule" : copy(Other)
+   })
+ }
+
+Child:
+ /x/
+ I { return(["zero", "one"]) }
+
+Other: /z/
+]], "x")
+  assert_json_equal(forms, json.harray({
+    implicit = json.array({ json.array({ "zero", "one" }), "one" }),
+    explicit = json.array({ json.array({ "zero", "one" }), "zero" }),
+    absent_rule = json.array(),
+  }), "child push forms")
+end)
+
+test("runtime fluent child push fills implicit and explicit accumulators", function()
+  local implicit = execute_uniform_binding_source([[
+top::
+ -> item .push
+ E { return(copy(top)) }
+
+item:
+ /x/
+ I { return(entry_text()) }
+]], "xx")
+  assert_json_equal(implicit, json.array({ "x", "x" }), "fluent implicit child push")
+
+  local explicit = execute_uniform_binding_source([[
+Top::
+ I { set(out, []) }
+ -> Item.push(out)
+ E { return(copy(out)) }
+
+Item:
+ /x/
+ I { return(entry_text()) }
+]], "xx")
+  assert_json_equal(explicit, json.array({ "x", "x" }), "fluent explicit child push")
+end)
+
+test("runtime child push rejects wrong kind explicit accumulator", function()
+  local ok, failure = pcall(function()
+    execute_uniform_binding_source([[
+Parent::
+ I { explicit = "text" }
+ -> Child { push(Child, explicit) }
+
+Child: /x/ I { return("child") }
+]], "x")
+  end)
+  assert_equal(ok, false, "wrong-kind child push fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed child push error")
+  assert_equal(failure.code, "binding_kind_mismatch", "child push error code")
+  assert_equal(failure.identifier, "explicit", "child push error identifier")
+  assert_equal(failure.expected_kind, "array", "child push expected kind")
+  assert_equal(failure.actual_kind, "scalar", "child push actual kind")
+end)
+
 test("uniform-binding mutable and pure split remain distinct", function()
   local result = execute_uniform_binding_source([[
 Top::

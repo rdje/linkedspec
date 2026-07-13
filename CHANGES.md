@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.4 — close Lua array mutation flow
+
+Unified Lua append, end-mutation, mutable split, and action-edge child push around typed array bindings. Rule
+accumulators now have array identity and current/absent compiled-rule reads; child push reuses the cached edge
+result and supports whole or zero-based indexed values in implicit and explicit targets. Fluent push, all four
+block forms, static precedence, independent updates, pure split, and wrong-kind diagnostics pass 98/98 on PUC Lua
+and LuaJIT plus manifest/CLI scaffolding. Perl lifecycle-returned reference results match exactly.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.3 — add Lua array transform pipelines
 
 Added delimiter-first `join_values`, literal/PCRE2 `split_each`, PCRE2 `filter_match`, terminal join receivers,

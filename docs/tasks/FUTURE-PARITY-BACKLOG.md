@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Lua transform pipelines `.4.3.4.3` close at 95/95; mutation flow `.4.3.4.4` active).
+- Last updated: `2026-07-12` (Lua mutation/child flow `.4.3.4.4` closes at 98/98; tagged records `.4.3.4.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3663,7 +3663,8 @@ before implementation.
 | 121 | `LUA-BACKEND-PARITY.4.3.4.1` | `done` | Ordered copied construction and explicit splicing pass 92/92 on both ABIs. |
 | 122 | `LUA-BACKEND-PARITY.4.3.4.2` | `done` | Copied selection, ordering, membership, and uniqueness pass 93/93. |
 | 123 | `LUA-BACKEND-PARITY.4.3.4.3` | `done` | Copied transforms, joins, PCRE2 pipelines, and seven rebindings pass 95/95. |
-| 124 | `LUA-BACKEND-PARITY.4.3.4.4` | `active` | Close append, end mutations, mutable split, and child-result flow. |
+| 124 | `LUA-BACKEND-PARITY.4.3.4.4` | `done` | Typed accumulators and complete cached child-push flow pass 98/98. |
+| 125 | `LUA-BACKEND-PARITY.4.3.4.5` | `active` | Implement tagged records and remaining array-to-array/scalar bridges. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat arity, negative counts, dropped transforms, and invalid joins. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

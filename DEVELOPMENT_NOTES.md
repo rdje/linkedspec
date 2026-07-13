@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.4 — implicit accumulators are typed bindings, not host scratch lists):
+  Action-edge `.push` and block child-push forms must reuse `edge_state.child_result`; re-running the child after
+  the parent edge consumed its token is both duplicate work and semantically wrong. The current rule accumulator
+  therefore enters `lookup_binding` as a typed array, child rule names take static precedence, literal nonnegative
+  indexes disambiguate before target names, and selected values use the ordinary append seam. The first test exposed
+  the causal host leak directly: a plain Lua table could accumulate values but failed runtime kind checks once read.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.3 — array value and dropped-statement forms need one explicit boundary):
   Lua can share copied transform evaluation across functions and receivers, but `join_values` needs delimiter-first
   receiver injection and dropped bare transforms need a separate kind-checked write-back seam. Reference probes
