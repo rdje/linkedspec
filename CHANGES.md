@@ -1,5 +1,17 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.4 — implement Lua scalar numeric helpers
+
+Added one portable Lua scalar-numeric evaluator and routed all 18 canonical helpers through it. The module owns
+strict finite-decimal strings, exact versus variadic arities, invalid/null and non-finite result fences, half-away
+rounding, floor signed modulo, scalar min/max/clamp, numeric comparison truth, and negative-zero normalization;
+generic scalar conversion and the downstream alias/receiver/reducer mechanisms remain unchanged.
+
+Lua now consumes the unchanged 55-case `linkedspec-scalar-numeric-v1` fixture directly. PUC Lua and LuaJIT each
+pass the complete 89/89 gate plus the exact 105-manifest/CLI scaffold. A new composed admission checker runs the
+neutral fixture through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT and proves exact six-runtime agreement. Scalar
+parent `.4.3.3.1` closes; alias/symbol/number-receiver admission `.4.3.3.2` is active.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.9 — admit selector-free public surface
 
 Uniform-binding selector retirement is fully admitted. A new canonical checker scans 47 root, capability, and

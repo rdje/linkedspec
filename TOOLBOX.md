@@ -324,7 +324,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `python3 tools/check_scalar_numeric_contract.py`.
 - **OUTPUT:** `scalar-numeric-contract: OK (55 cases; 18 canonical helpers)`.
 
-### 4.7 `tools/check_callable_signature_contract.py` — portable variadic signature proof
+### 4.7 `tools/check_scalar_numeric_six_runtime.sh` — exact six-runtime numeric admission
+
+- **WHAT:** composes the neutral checker with direct unchanged-fixture execution through Perl, Rust, Dart, Julia,
+  PUC Lua, and LuaJIT.
+- **WHEN:** changing a scalar numeric adapter, its dispatch seam, or the neutral fixture; use it before claiming
+  cross-runtime admission rather than inferring agreement from backend-local happy paths.
+- **HOW:** `bash tools/check_scalar_numeric_six_runtime.sh`.
+- **OUTPUT:** `[scalar-numeric-six] all six runtimes match all 55 cases` after every focused leg and the complete
+  dual-ABI Lua gate pass.
+
+### 4.8 `tools/check_callable_signature_contract.py` — portable variadic signature proof
 
 - **WHAT:** validates `linkedspec-callable-signature-v1`, the chosen `...rest` definition syntax, version-1 fixed
   versus version-2 variadic descriptor shapes, positional call binding/diagnostics, purpose-specific open-bound

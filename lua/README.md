@@ -12,13 +12,16 @@ available in memory. Native PCRE2 matching supplies stable seek/consume,
 captures, Unicode positions, and entry/local match registers. The first
 compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
 repetition, and direct result channels entirely in memory.
-Deterministic scalar/string helpers now include lazy fallback, definedness/
+Deterministic scalar/string helpers include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
 lexical comparisons, Unicode 17.0.0 full default casing, portable scalar-to-
 text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split,
-statement scalar regex mutation, explicit array split replacement, and receiver chains. Scalar/string parity is
-closed, and the Lua gate passes 76/76 on
-both PUC Lua 5.4 and LuaJIT.
+statement scalar regex mutation, explicit array split replacement, and receiver chains. Bare typed bindings are
+uniform, and retired aggregate selectors reject at compiled-state admission. Canonical scalar numeric helpers use
+one strict finite-decimal evaluator for governed arity, invalid/null handling, rounding, signed modulo, and result
+normalization. The Lua gate passes 89/89 on both PUC Lua 5.4 and LuaJIT; all 55 scalar numeric v1 cases also match
+Perl, Rust, Dart, and Julia exactly. Numeric aliases, symbol callees, receiver chains, and aggregate reducers remain
+separately owned downstream.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus

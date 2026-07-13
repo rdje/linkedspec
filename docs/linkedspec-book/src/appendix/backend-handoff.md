@@ -653,11 +653,13 @@ array, harray, or codeblock. One neutral executable fixture covers the currently
 Rust, Dart, Julia, PUC Lua, and LuaJIT; the contract also fixes codeblock as non-text without claiming that the
 separately deferred explicit final-codeblock call syntax is already portable. Lua advances to 72/72 on both ABIs.
 
-Scalar numeric rollout uses a separate `linkedspec-scalar-numeric-v1` boundary. Perl, Rust, Dart, and Julia now use
-dedicated strict helper adapters and pass the same 55 direct canonical calls: finite decimal
+Scalar numeric rollout uses a separate `linkedspec-scalar-numeric-v1` boundary. Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT use dedicated strict helper adapters and pass the same 55 direct canonical calls: finite decimal
 numbers/strings, exact fixed or variadic arities, invalid-to-null results, numeric comparison truth, half-away
 rounding, division/clamp fences, and floor signed modulo. General-purpose scalar conversion paths remain unchanged.
-Lua implements and admits the contract on both Lua ABIs next. Callable arity is semantic: add/multiply/min/max are
+One composed checker proves the exact expected fixture value on all six runtime variants; Lua's complete focused
+gate is 89/89 on both ABIs. Numeric aliases, symbol callees, and number receiver chains remain the next Lua leaf,
+not part of scalar evaluator admission. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed

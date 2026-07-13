@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.4 — numeric policy must be helper-local and host-independent): Lua's
+  `tonumber`, arithmetic, and comparison operators are useful only after LinkedSpec has enforced its own decimal
+  grammar, value kinds, and arities. Signed modulo must use `a - floor(a / b) * b`, rounding must be explicitly
+  half-away from zero, and every result must be finite and normalize negative zero. Keeping those decisions in one
+  `scalar_numeric.lua` evaluator prevents generic scalar conversion from broadening numeric calls and keeps both
+  Lua ABIs on the same contract. A composed checker is necessary because six separately green tests would not by
+  themselves prove that every runtime consumed the same 55 cases and exact expected value.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.9 — executable retirement does not automatically retire public prose):
   Runtime/source gates were complete, yet public status still called exact selectors “future-invalid,” referred to
   remaining backend recognizers, preserved old positive examples without historical qualification, and retained a

@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.4 — implement Lua scalar numeric helpers**
+  (DONE — scalar parent `.4.3.3.1` closed; alias/symbol/number-receiver admission `.4.3.3.2` is active).
+
+  **Implementation:** One portable Lua evaluator owns all 18 canonical scalar numeric helpers, strict decimal
+  parsing, governed arities, invalid/null/non-finite fences, half-away rounding, floor signed modulo, comparison
+  truth, and result normalization. Generic scalar conversion and downstream aliases/receivers/reducers stay
+  separate.
+
+  **Proof:** PUC Lua and LuaJIT each pass 89/89 plus the exact 105-manifest/CLI scaffold. The unchanged 55-case
+  fixture matches exactly in Lua, and the composed checker proves the same result through Perl, Rust, Dart, Julia,
+  PUC Lua, and LuaJIT.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.9 — admit selector-free public surface**
   (DONE — retirement `.12.1` and compatibility parent `.12` closed; active Lua scalar-numeric `.4.3.3.1.4` resumes).
 

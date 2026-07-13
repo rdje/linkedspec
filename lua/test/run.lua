@@ -41,6 +41,7 @@ local linkedspec = require("linkedspec")
 local corpus_runner = require("linkedspec.corpus_runner")
 local json = linkedspec.json
 local ast = linkedspec.spec_ast
+local scalar_numeric = require("linkedspec.scalar_numeric")
 
 local function shell_quote(value)
   return "'" .. value:gsub("'", "'\\''") .. "'"
@@ -126,7 +127,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-uniform-bindings", "status parity")
+  assert_equal(first.parity, "runtime-scalar-numeric", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2490,6 +2491,15 @@ end
 local function uniform_binding_action_source(action)
   return "Top::\n /x/ -> Done { " .. action .. " }\nDone::\n /x/\n"
 end
+
+test("Lua matches the neutral scalar numeric contract exactly", function()
+  local contract = json.decode(read_file("capability_conformance/scalar_numeric_contract.json"))
+  assert_equal(contract.format, 1, "scalar numeric contract format")
+  assert_equal(contract.contract_id, scalar_numeric.CONTRACT_ID, "scalar numeric contract id")
+  assert_equal(#contract.cases, 55, "scalar numeric contract cases")
+  local actual = execute_uniform_binding_source(contract.spec_source)
+  assert_json_equal(actual, contract.expected, "all scalar numeric cases")
+end)
 
 local function selector_diagnostic(surface, identifier)
   return "aggregate_selector_removed surface=" .. surface ..

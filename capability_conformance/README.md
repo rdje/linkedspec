@@ -33,7 +33,8 @@ normatively non-text while explicit final-codeblock call syntax remains separate
 `scalar_numeric_contract.json` fixes strict scalar numeric helper inputs, arities, invalid-to-null results, numeric
 comparison truth, half-away rounding, min/max/clamp, division, and signed integer modulo. Its deterministic case
 list also renders one backend-neutral `.spec` fixture. Validate schema, independent evaluator results, and rendered
-source offline with `python3 tools/check_scalar_numeric_contract.py`; backend rollout consumes the unchanged cases.
+source offline with `python3 tools/check_scalar_numeric_contract.py`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+consume the unchanged 55 cases; `bash tools/check_scalar_numeric_six_runtime.sh` is the composed admission proof.
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,

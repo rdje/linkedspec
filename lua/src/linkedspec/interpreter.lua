@@ -4,6 +4,7 @@ local action_parser = require("linkedspec.action_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local matching = require("linkedspec.matching")
+local scalar_numeric = require("linkedspec.scalar_numeric")
 local unicode_case = require("linkedspec.unicode_case_mapping")
 
 local M = {}
@@ -732,6 +733,14 @@ local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state,
   return evaluate_array_helper(action_contracts.canonical_action_helper_name(expr.name), values)
 end
 
+local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name)
+  local values = {}
+  for index, arg in ipairs(expr.args) do
+    values[index] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+  return scalar_numeric.evaluate(name, values)
+end
+
 local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)
   array_binding_for_mutation(ctx, target.name)
   local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
@@ -788,6 +797,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, nil)
   elseif PURE_ARRAY_HELPERS[name] then
     return evaluate_array_values(engine, expr, ctx, accumulator, edge_state, nil)
+  elseif scalar_numeric.supports(name) then
+    return evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name)
   end
   if name == "return" then
     local value = json.null

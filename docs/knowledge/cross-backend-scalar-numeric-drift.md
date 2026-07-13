@@ -1,6 +1,6 @@
 ---
 id: cross-backend-scalar-numeric-drift
-title: Scalar numeric helper edges drift across admitted backends without a neutral executable contract
+title: Scalar numeric helper drift is resolved by one executable six-runtime contract
 answers:
   - "do scalar numeric helpers behave identically across Perl Rust Dart and Julia"
   - "are booleans valid numeric helper inputs"
@@ -8,16 +8,17 @@ answers:
   - "are subtraction and division variadic"
   - "how does signed modulo behave across backends"
   - "why must Lua numeric helpers wait for a neutral contract"
+  - "do scalar numeric helpers match across all six runtime variants"
 date: 2026-07-12
 status: current
 tags: [numeric, parity, perl, rust, dart, julia, lua, helpers, contract, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.3.1.0 used LinkedSpec::Get for a direct Perl matrix and inspected rust/linkedspec-{core,runtime}, dart/lib/src/runtime/interpreter.dart, julia/src/runtime/Interpreter.jl, and their focused tests. Perl accepts booleans as numeric and maps invalid comparisons to 0; Rust also converts booleans and maps invalid comparisons/unary calls to 0. Dart/Julia reject booleans and return null/nothing. Perl rejects extra sub/div operands, Rust ignores them, and Dart/Julia fold them. Numeric string grammars and signed remainder mechanisms also differ. The public catalog says invalid numeric inputs return undef, but no executable neutral scalar contract owns these edges."
 policy_update_2026_07_12: "LUA-BACKEND-PARITY.4.3.3.1.1 and ADR 0029 adopt linkedspec-scalar-numeric-v1: strict finite decimal numbers/strings, booleans and aggregates invalid, explicit arities, invalid-to-null, numeric 1/0 comparisons, half-away rounding, and floor/Euclidean signed modulo. The 55-case neutral fixture and independent checker are recurring local-CI inputs; admitted-backend repair follows before Lua implementation."
-implementation_update_2026_07_12: "LUA-BACKEND-PARITY.4.3.3.1.2-.3 align all four admitted backends. Perl generated actions call LinkedSpec::Numeric; Rust uses strict helper-local adapters; Dart and Julia enforce the same decimal grammar, exact/variadic arities, finite results, half-away rounding, and floor signed modulo. All four execute all 55 unchanged cases. Generic scalar conversion remains separate; Lua exact six-runtime admission is next."
-reverify: "PERL5LIB= prove -Iperl t/scalar_numeric_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test scalar_numeric_contract && cd dart && dart test test/runtime_interpreter_test.dart && cd ../ && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
+implementation_update_2026_07_12: "LUA-BACKEND-PARITY.4.3.3.1.2-.4 align every runtime variant. Perl generated actions call LinkedSpec::Numeric; Rust, Dart, Julia, and Lua use strict helper-local adapters. All six variants enforce the same decimal grammar, exact/variadic arities, finite results, half-away rounding, floor signed modulo, and exact 55-case result. Generic scalar conversion remains separate."
+reverify: "bash tools/check_scalar_numeric_six_runtime.sh"
 ---
 
-The current happy paths agree, but scalar numeric edge behavior does not:
+Before the neutral contract, scalar numeric edge behavior differed:
 
 - Perl and Rust coerce typed booleans to `1`/`0`; Dart and Julia reject booleans. The public helper catalog calls
   non-numeric inputs invalid, while primitive-literal doctrine treats booleans as a distinct typed scalar.
@@ -29,7 +30,7 @@ The current happy paths agree, but scalar numeric edge behavior does not:
   exponent, whitespace, hex, or trailing-dot forms; other hosts delegate to broader parsers.
 - Signed modulo follows different host remainder definitions unless specified explicitly.
 
-Lua must not select one of these behaviors accidentally through `tonumber`, `%`, or host truthiness. The rollout
-adopted the versioned neutral scalar contract (`.4.3.3.1.1`) and aligned Perl/Rust (`.2`) plus Dart/Julia (`.3`);
-PUC Lua/LuaJIT exact six-runtime admission (`.4`) remains. Aggregate reducers and receiver forms stay in
-their already-separated downstream leaves.
+The rollout adopted the versioned neutral scalar contract (`.4.3.3.1.1`), aligned Perl/Rust (`.2`) and Dart/Julia
+(`.3`), then implemented Lua without delegating syntax, modulo, rounding, or invalid policy to `tonumber`, `%`, or
+host truthiness (`.4`). The composed checker now proves all 55 exact cases across all six runtime variants.
+Aggregate reducers and receiver forms stay in their already-separated downstream leaves.

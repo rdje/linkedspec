@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua now routes canonical scalar numeric calls through one helper-local evaluator that owns
+  strict finite-decimal admission, governed fixed/variadic arities, invalid/null and non-finite fences, half-away
+  rounding, floor signed modulo, clamp/min/max, comparisons, and negative-zero normalization independently of host
+  accidents. PUC Lua and LuaJIT each pass 89/89 and the unchanged 55-case fixture; the composed checker proves exact
+  agreement across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Alias/symbol/number-receiver admission
+  `.4.3.3.2` is active.
 - `2026-07-12` refresh: Director clarification joins the existing ADR 0012 staged parse graph with the missing
   `.spec` authoring doctrine. Typical rules use zero/one/two small readable regexes for coordination, leaves, or
   entry/exit boundaries; deep recursion belongs in action-edge OR and blind-call AND rule connections.

@@ -244,9 +244,9 @@ Top-level project docs:
   portable facade; Rust, Dart, and Julia package tests do likewise. Exact `.1.6.4` admission is closed.
 - Run `python3 tools/check_scalar_numeric_contract.py` to validate the versioned strict scalar numeric helper
   contract: finite decimal inputs, exact/variadic arities, invalid-to-null behavior, numeric comparison truth,
-  half-away rounding, clamp/division fences, and signed integer modulo. Perl, Rust, Dart, and Julia consume all 55
-  cases through strict numeric adapters; Lua six-runtime admission remains tracked under
-  `LUA-BACKEND-PARITY.4.3.3.1.4`.
+  half-away rounding, clamp/division fences, and signed integer modulo. Perl, Rust, Dart, Julia, PUC Lua, and
+  LuaJIT consume all 55 cases through strict numeric adapters. Run `bash tools/check_scalar_numeric_six_runtime.sh`
+  for the composed exact six-runtime admission proof.
 - Run `python3 tools/check_callable_signature_contract.py` to validate the adopted variadic callable contract:
   version-1 fixed functions remain exact; version-2 `fn name(fixed, ...rest) { ... }` signatures bind extras as a
   fresh typed array, accept zero extras, reject keyword/overload/host-splat behavior, and retain purpose-specific
