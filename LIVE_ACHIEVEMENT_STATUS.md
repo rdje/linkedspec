@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.1 — add Lua array construction splicing**
+  (DONE — 92/92 on both ABIs; copied selection/order/membership `.4.3.4.2` active).
+
+  **Implementation:** `array(...)` and literals evaluate left-to-right and splice only explicit direct or terminal
+  receiver `flat`/`flat_array` ASTs. Ordinary arrays/copies remain nested; flat/concat/copy results are isolated.
+
+  **Proof:** Function, literal, receiver, nested, variadic, concat, empty/null, ordered-side-effect, and saved-
+  source cases pass PUC Lua and LuaJIT 92/92 plus manifest/CLI scaffolding. Perl versus newer-runtime zero/variadic
+  flat/concat drift is durably routed to helper-caveat owner `FUTURE-PARITY-BACKLOG.5`.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.11 — align array end mutation results**
   (DONE — `.12.1`/`.12` re-closed; Lua copied array construction `.4.3.4.1` active).
 

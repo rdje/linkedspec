@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **476** facts · **3253** question keys.
+> **477** facts · **3258** question keys.
 
 ## Questions → fact
 
@@ -266,6 +266,7 @@
 - "do Julia value position array end mutations avoid mutation" -> [julia-runtime-array-helpers](docs/knowledge/julia-runtime-array-helpers.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "do Julia value position set_key calls avoid source mutation" -> [julia-runtime-hash-helpers](docs/knowledge/julia-runtime-hash-helpers.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "do LinkedSpec CLIs have positional arguments or subcommands" -> [user-observable-backend-cli-parity-contract](docs/knowledge/user-observable-backend-cli-parity-contract.md) · 2026-07-10 · reverify: `sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md`
+- "do Lua array copy and concat results alias their sources" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "do Lua invalid substitution patterns include the rule label" -> [lua-statement-regex-mutation](docs/knowledge/lua-statement-regex-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "do Lua user functions capture caller stores or closures" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "do Perl Rust Dart and Julia expose the same descriptor shape" -> [outward-compiled-descriptor-four-backend-contract](docs/knowledge/outward-compiled-descriptor-four-backend-contract.md) · 2026-07-11 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && dart test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t`
@@ -684,6 +685,7 @@
 - "does LinkedSpec support zero width lookahead boundaries" -> [cursor-boundary-lookahead-helper](docs/knowledge/cursor-boundary-lookahead-helper.md) · 2026-07-09 · reverify: `PERL5LIB= perl -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_capture_until_boundary_captures_without_consuming_boundary && cd dart && dart test test/runtime_interpreter_test.dart -n 'captures until named boundary without consuming the boundary' && cd .. && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "does Lua ActionIR preserve regex flags" -> [lua-helper-regex-split-mutation-preflight](docs/knowledge/lua-helper-regex-split-mutation-preflight.md) · 2026-07-12 · reverify: `rg -n 'kind == \"regex\"|compile_runtime_regex_alternation|execute_block|evaluate_expr|regex_subst|split' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/matching.lua docs/tasks/LUA-BACKEND-PARITY.md`
 - "does Lua already canonicalize numeric aliases and symbol callees" -> [lua-numeric-helper-preflight](docs/knowledge/lua-numeric-helper-preflight.md) · 2026-07-12 · reverify: `bash tools/check_scalar_numeric_six_runtime.sh && rg -n 'ALIAS_CANONICAL_NAMES|fluent_chain' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
+- "does Lua array construction preserve evaluation order" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua array split preserve empty fields" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua bare three argument split mutate its target" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -725,6 +727,7 @@
 - "does Lua statement split mutate its source" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua string receiver split mutate its source" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua support array flat flat_array and concat_arrays" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua support exit_now" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support generic trailing codeblocks" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support integer and float number receiver chains" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
@@ -1452,6 +1455,7 @@
 - "how does Lua diagnose user function recursion" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish arrays harrays and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish division symbol calls from regex literals" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
+- "how does Lua distinguish flat splicing from nested arrays" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does Lua distinguish pure split from array split mutation" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish push rule dispatch from binding mutation" -> [lua-uniform-binding-runtime](docs/knowledge/lua-uniform-binding-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
@@ -2120,6 +2124,7 @@
 - "what does exact LinkedSpec backend parity mean" -> [user-observable-backend-cli-parity-contract](docs/knowledge/user-observable-backend-cli-parity-contract.md) · 2026-07-10 · reverify: `sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md`
 - "what does execute_corpus_fixtures return" -> [julia-controlled-corpus-execution](docs/knowledge/julia-controlled-corpus-execution.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "what does execute_rule return in the Rust engine" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-07-02 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
+- "what does flat with no arguments return in Lua" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "what does green CI mean here" -> [hosted-ci-disabled-run-local-gate](docs/knowledge/hosted-ci-disabled-run-local-gate.md) · 2026-07-10 · reverify: `grep -n 'workflow_dispatch' .github/workflows/ci.yml && rg -n 'LINKEDSPEC_RUN_(RUST|DART|JULIA)' tools/run_ci_local.sh`
 - "what does input_end_line and input_end_col compute in the Rust engine" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "what does mark_input_start / mark_input_end store in the Rust engine" -> [rust-mark-based-capture-family](docs/knowledge/rust-mark-based-capture-family.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n '\"capture_from\"\\|\"capture_len_from\"\\|\"capture_between\"\\|\"mark_copy\"\\|fn span_text' linkedspec-runtime/src/engine.rs | head`
@@ -5035,6 +5040,15 @@ _Lua pure split returns copied typed arrays for literal, regex, Unicode, and rec
 - **evidence:** `LUA-BACKEND-PARITY.4.3.2.2.2 adds split_unicode_characters, split_literal, and split_regex in lua/src/linkedspec/interpreter.lua and admits split through function/string-receiver pure evaluation. lua/test/run.lua proves literal leading/trailing empties, PCRE2 delimiters and flags, UTF-8 scalar empty-delimiter splitting, zero-width progress, receiver typing/non-mutation, fail-closed invalid boundaries, and separate substr/replace_substr behavior. PUC Lua and LuaJIT pass 74/74.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-pure-split-bridge.md`](docs/knowledge/lua-pure-split-bridge.md)
+
+### lua-runtime-array-construction
+_Lua copied array construction and explicit splicing_
+
+- **answers:** does Lua support array flat flat_array and concat_arrays | how does Lua distinguish flat splicing from nested arrays | does Lua array construction preserve evaluation order | do Lua array copy and concat results alias their sources | what does flat with no arguments return in Lua
+- **date:** 2026-07-12 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.4.1 adds flat/flat_array/concat_arrays dispatch and constructor-context splice classification to lua/src/linkedspec/interpreter.lua. lua/test/run.lua executes direct-call, array-literal, terminal receiver, nested copy, variadic scalar/array, zero-argument, ordered set side-effect, and later-source-update isolation cases. PUC Lua 5.4 and LuaJIT both pass 92/92 through tools/run_lua_local.sh.`
+- **reverify:** `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
+- **source:** [`docs/knowledge/lua-runtime-array-construction.md`](docs/knowledge/lua-runtime-array-construction.md)
 
 ### lua-runtime-core-value-capture-helpers
 _Lua runtime preserves four value kinds, checked local stores, and complete entry-match reads_

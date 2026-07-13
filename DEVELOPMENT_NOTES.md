@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.1 — splicing is syntax context, not an array runtime tag): A computed array
+  alone cannot say whether its parent should retain it as one nested value or insert its members. Lua therefore
+  classifies only the authored argument/item AST—a direct `flat`/`flat_array` call or fluent chain ending in one—
+  as a splice, then copies the evaluated value. Evaluation remains exactly once in source order. Toolbox follow-up
+  found a separate pre-existing boundary: Perl rejects direct zero/variadic flat/concat forms that Rust, Dart,
+  Julia, and Lua currently return as copied lists. `FUTURE-PARITY-BACKLOG.5` owns normalization; this Lua slice does
+  not conceal the divergence or reinterpret ordinary arrays as implicit splices.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.11 — a runtime contract is not proven by statement-only tests): Perl's
   array-end runtime primitive already returned an independent updated array, but value-position ActionIR still
   excluded the four method names. That mismatch survived because earlier proof exercised dropped statements and

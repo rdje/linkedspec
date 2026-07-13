@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua array constructors/literals now evaluate once left-to-right and preserve ordinary
+  nested arrays while explicit direct/terminal-receiver `flat`/`flat_array` ASTs splice one level. Copied flat,
+  concat, and saved-source values are isolated; PUC Lua and LuaJIT pass 92/92 and selection `.4.3.4.2` is active.
+  Toolbox proof found Perl direct zero/variadic flat/concat rejection versus copied results on all newer runtimes;
+  existing helper-caveat owner `FUTURE-PARITY-BACKLOG.5` now owns the normalization decision.
 - `2026-07-12` refresh: Uniform-binding array-end mutation results are aligned. Perl's runtime primitive already
   returned copied updates, but the ActionIR fluent value path explicitly excluded all four end methods, leaving
   value-position generated calls raw. Named binding mutations now assign and return the copied update, feed

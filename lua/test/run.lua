@@ -2859,6 +2859,64 @@ Done::
   }), "collection rebinding")
 end)
 
+test("runtime copied array construction splices only explicit flat values", function()
+  local result = execute_uniform_binding_source([=[
+Top::
+ /x/ -> Done {
+   set(source, ["a", ["b"]])
+   nested_call = array("tag", source)
+   nested_literal = ["tag", copy(source)]
+   call_splice = array("tag", flat_array(source), "tail")
+   literal_splice = ["tag", flat(source), "tail"]
+   receiver_splice = array("tag", source.flat(), "tail")
+   concatenated = concat_arrays(["x"], ["y", "z"])
+   flattened = flat_array(["p", "q"], "r", ["s"])
+   snapshot = copy(source)
+   source.push_back("c")
+   ordered_call = array(set(step, 1), set(step, 2), step)
+   ordered_literal = [set(step, 3), set(step, 4), step]
+   return({
+     "source" : source,
+     "snapshot" : snapshot,
+     "nested_call" : nested_call,
+     "nested_literal" : nested_literal,
+     "call_splice" : call_splice,
+     "literal_splice" : literal_splice,
+     "receiver_splice" : receiver_splice,
+     "concatenated" : concatenated,
+     "flattened" : flattened,
+     "empty_array" : array(),
+     "empty_flattened" : flat_array(),
+     "empty_concatenated" : concat_arrays(),
+     "missing_flat" : flat(),
+     "missing_copy" : copy(),
+     "ordered_call" : ordered_call,
+     "ordered_literal" : ordered_literal
+   })
+ }
+Done::
+ /x/
+]=])
+  assert_json_equal(result, json.harray({
+    source = json.array({ "a", json.array({ "b" }), "c" }),
+    snapshot = json.array({ "a", json.array({ "b" }) }),
+    nested_call = json.array({ "tag", json.array({ "a", json.array({ "b" }) }) }),
+    nested_literal = json.array({ "tag", json.array({ "a", json.array({ "b" }) }) }),
+    call_splice = json.array({ "tag", "a", json.array({ "b" }), "tail" }),
+    literal_splice = json.array({ "tag", "a", json.array({ "b" }), "tail" }),
+    receiver_splice = json.array({ "tag", "a", json.array({ "b" }), "tail" }),
+    concatenated = json.array({ "x", "y", "z" }),
+    flattened = json.array({ "p", "q", "r", "s" }),
+    empty_array = json.array(),
+    empty_flattened = json.array(),
+    empty_concatenated = json.array(),
+    missing_flat = json.array({ json.null }),
+    missing_copy = json.null,
+    ordered_call = json.array({ 1, 2, 2 }),
+    ordered_literal = json.array({ 3, 4, 4 }),
+  }), "copied array construction")
+end)
+
 test("uniform-binding wrong-kind mutation reports neutral fields", function()
   local ok, failure = pcall(function()
     execute_uniform_binding_source([[

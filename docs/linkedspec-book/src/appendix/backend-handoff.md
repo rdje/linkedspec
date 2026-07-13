@@ -661,10 +661,11 @@ One composed checker proves the exact expected fixture value on all six runtime 
 arithmetic/comparison symbol callees, and integer/float/bare-scalar receiver chains now share the evaluator;
 number-returning links compose and comparison links are terminal. The focused gate is 90/90 on both ABIs.
 Strict copied-array sum/avg/median/range/min/max now work through explicit, bare-binding, and terminal receiver
-forms on both Lua ABIs; the focused gate is 91/91 and numeric public no-drift is closed before general array
-helpers. Array work is split into construction, selection, transform, mutation/child-flow, tagged-record, and
-closeout mechanisms; cross-cutting uniform-binding mutation-result documentation repair `.12.1.11` runs before
-construction code. Callable arity is semantic: add/multiply/min/max are
+forms on both Lua ABIs. Ordered `array(...)`/literal construction, explicit `flat`/`flat_array` call or terminal-
+receiver splicing, ordinary nested array preservation, copied concatenation, and saved-source isolation raise the
+focused gate to 92/92. Construction `.4.3.4.1` is closed and copied selection/order/membership `.4.3.4.2` is
+active. Perl's direct-value/arity boundary for zero or variadic flat/concat calls differs from Rust, Dart, Julia,
+and Lua; `FUTURE-PARITY-BACKLOG.5` owns that explicit normalization decision. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed

@@ -682,12 +682,39 @@ local function evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_
 end
 
 local PURE_ARRAY_HELPERS = {
+  concat_arrays = true,
   count = true,
   filter_nonempty = true,
   first = true,
+  flat = true,
+  flat_array = true,
   sorted = true,
   trim_each = true,
 }
+
+local ARRAY_SPLICE_HELPERS = {
+  flat = true,
+  flat_array = true,
+}
+
+local function is_array_splice_expr(expr)
+  if expr.kind == "call" then
+    return ARRAY_SPLICE_HELPERS[action_contracts.canonical_action_helper_name(expr.name)] == true
+  end
+  if expr.kind == "fluent_chain" and #expr.calls > 0 then
+    local last = expr.calls[#expr.calls]
+    return ARRAY_SPLICE_HELPERS[action_contracts.canonical_action_helper_name(last.method)] == true
+  end
+  return false
+end
+
+local function append_array_value(result, value, splice)
+  if splice and json.kind(value) == "array" then
+    for _, item in ipairs(value) do result[#result + 1] = copy_value(item) end
+  else
+    result[#result + 1] = copy_value(value)
+  end
+end
 
 local ARRAY_END_MUTATIONS = {
   pop_back = true,
@@ -697,6 +724,19 @@ local ARRAY_END_MUTATIONS = {
 }
 
 local function evaluate_array_helper(name, values)
+  if name == "flat" then
+    local value = values[1]
+    if value == nil then return json.array({ json.null }) end
+    if json.kind(value) == "array" then return copy_value(value) end
+    return json.array({ copy_value(value) })
+  end
+  if name == "flat_array" or name == "concat_arrays" then
+    local result = json.array()
+    for _, value in ipairs(values) do
+      append_array_value(result, value, json.kind(value) == "array")
+    end
+    return result
+  end
   local source = values[1]
   local items = json.kind(source) == "array" and copy_value(source) or json.array()
   if name == "count" then return #items end
@@ -883,8 +923,10 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   elseif name == "array" then
     if not expr.args[1] then return json.array() end
     local result = json.array()
-    for index, arg in ipairs(expr.args) do
-      result[index] = copy_value(evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state))
+    for _, arg in ipairs(expr.args) do
+      local item_expr = argument_expr(arg)
+      local value = evaluate_expr(engine, item_expr, ctx, accumulator, edge_state)
+      append_array_value(result, value, is_array_splice_expr(item_expr))
     end
     return result
   elseif name == "hash" or name == "harray" then
@@ -929,8 +971,9 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "array_literal" then
     local result = json.array()
-    for index, item in ipairs(expr.items) do
-      result[index] = copy_value(evaluate_expr(engine, item, ctx, accumulator, edge_state))
+    for _, item in ipairs(expr.items) do
+      local value = evaluate_expr(engine, item, ctx, accumulator, edge_state)
+      append_array_value(result, value, is_array_splice_expr(item))
     end
     return result
   end

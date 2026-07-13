@@ -21,11 +21,13 @@ uniform, and retired aggregate selectors reject at compiled-state admission. Can
 one strict finite-decimal evaluator for governed arity, invalid/null handling, rounding, signed modulo, and result
 normalization. Numeric word aliases, arithmetic/comparison symbol callees, and integer/float/bare-scalar receiver
 chains share that evaluator; number-returning links compose and comparisons terminate later links. Strict copied-
-array sum/avg/median/range/min/max reducers work in explicit, bare-binding, and terminal array receiver forms. The
-Lua gate passes 91/91 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl, Rust,
-Dart, and Julia exactly. Focused numeric public no-drift is closed; general array helpers are the active frontier.
-The array family is split by construction, selection, transform, mutation/child-flow, tagged-record, and closeout
-mechanisms. Uniform-binding mutation-result documentation repair `.12.1.11` runs before construction behavior.
+array sum/avg/median/range/min/max reducers work in explicit, bare-binding, and terminal array receiver forms.
+`array(...)` and literals evaluate left-to-right; only explicit `flat`/`flat_array` calls or terminal receivers
+splice into their parent, while ordinary arrays and `copy(...)` remain nested copied values. `concat_arrays`
+returns a fresh concatenation. The Lua gate passes 92/92 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric
+v1 cases still match Perl, Rust, Dart, and Julia exactly. Construction/splicing `.4.3.4.1` is closed; copied
+selection/order/membership `.4.3.4.2` is active. Zero/variadic flatten direct-value differences between Perl and
+the four newer runtimes remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than hidden as settled parity.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
@@ -419,3 +421,20 @@ Dropped `split(target, source, delimiter)` replaces the bare typed array target
 with a copied split result. Literal and regex delimiters share the pure split
 policy, including preserved empty fields. Two-argument split remains a pure
 value expression, and the source scalar is never mutated.
+
+Array constructors and literals evaluate each element once from left to right.
+Ordinary array values remain nested; only explicit `flat(...)` / `flat_array(...)`
+calls, including a receiver chain ending in `.flat()`, splice one level into the
+surrounding constructor. `copy(...)`, `flat_array(...)`, and `concat_arrays(...)`
+all return fresh values, so later binding updates do not change saved results.
+
+```text
+items = ["a", ["b"]]
+nested = ["tag", copy(items)]
+spliced = array("tag", flat_array(items), "tail")
+receiver_spliced = ["tag", items.flat(), "tail"]
+joined = concat_arrays(["x"], ["y", "z"])
+```
+
+Here `nested` is `["tag", ["a", ["b"]]]`, both spliced values are
+`["tag", "a", ["b"], "tail"]`, and `joined` is `["x", "y", "z"]`.

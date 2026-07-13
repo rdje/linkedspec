@@ -1,5 +1,14 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.1 — add Lua array construction splicing
+
+Added copied `flat`, variadic `flat_array`, and `concat_arrays` evaluation plus context-sensitive splicing for
+`array(...)` and array literals. Constructors evaluate once left-to-right; only explicit direct or terminal
+receiver flat ASTs splice, while ordinary arrays and `copy(...)` stay nested. The focused fixture locks nesting,
+call/literal/receiver splices, concat, empty/null boundaries, ordered side effects, and saved-source isolation at
+92/92 on PUC Lua and LuaJIT. A measured Perl versus newer-runtime direct zero/variadic arity difference is routed
+to existing helper-caveat owner `FUTURE-PARITY-BACKLOG.5`; selection/order/membership `.4.3.4.2` is active.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.11 — align array end mutation results
 
 Aligned `push_back`, `push_front`, `pop_back`, and `pop_front` with the adopted uniform-binding result contract:
