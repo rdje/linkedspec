@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.3 — implement Rust zero-argument aliases**
+  (DONE — exact Rust typed/native/serialized/emitted/generated consumption; Dart `.16.4` next).
+
+  **Result:** Exact statement-boundary recognition maps all six standalone aliases to their parenthesized typed
+  calls, and final-only receiver omission maps to the existing empty-argument fluent node. Value reads and all
+  exclusions remain narrow. The fixture returns `{"count":2,"picked":"a","result":"yes"}` on every Rust path
+  and from rebuilt CLI twins. The complete Rust gate passes 137 runtime unit, 105 oracle, 105 generated-source,
+  197 integration, focused suites, and CLI 61x2. Rust's pre-existing `.contains()` missing-argument default is
+  root-caused and delegated to helper owner `.5`; this syntax leaf preserves its parenthesized outcome.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.2.1 — implement Perl zero-argument aliases**
   (DONE — exact Perl typed/live/generated consumption; Rust `.16.3` next).
 

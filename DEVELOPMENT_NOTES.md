@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.3` — preserve newline evidence before generic expression parsing): Rust's
+  generic variable parser permits whitespace before call/index lookahead, so post-normalizing a parsed bare marker
+  is too late: it has already consumed the newline needed by statement-separator accounting. The narrow parser
+  seam is an exact statement-boundary recognizer before generic expressions. It consumes only the marker name and
+  synthesizes the existing empty-argument call; value-position names remain variables. Terminal receiver omission
+  is independently local to `parse_fluent_chain` and stops after adding the empty-argument segment. This leaves
+  `if(condition)` / `while(condition)` and every excluded grammar class unchanged. Native, serialized, emitted,
+  generated, and rebuilt-CLI paths all consume that same typed AST. A separate preflight found Rust `contains`
+  defaults an absent needle instead of enforcing Perl's arity; preserving that parenthesized outcome is correct
+  for this syntax leaf, while helper owner `.5` holds the semantic normalization.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.2.1` — syntax aliases normalize at existing typed seams): The narrow
   Perl implementation required no new runtime operation. Exact standalone bare `next` is normalized to the
   existing zero-argument call only in statement position, then routed through canonical `next_stmt`; this keeps

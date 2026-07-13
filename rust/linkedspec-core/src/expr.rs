@@ -20,7 +20,7 @@
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
 //! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and tree traversal receiver methods)
-//! method_call → name '(' args? ')' trailing_block?
+//! method_call → name '(' args? ')' trailing_block? | final_name
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
 //! literal     → string | number | boolean | regex | undef | array | hash
@@ -506,6 +506,10 @@ impl<'a> Parser<'a> {
 
     fn parse_statement_expr(&mut self) -> Result<Expr, String> {
         let start = self.pos;
+        if let Some(expr) = self.try_parse_bare_zero_arg_statement_marker() {
+            return Ok(expr);
+        }
+        self.pos = start;
         if let Some(expr) = self.try_parse_hash_index_assignment_statement()? {
             return Ok(expr);
         }
@@ -519,6 +523,39 @@ impl<'a> Parser<'a> {
         }
         self.pos = start;
         self.parse_expr()
+    }
+
+    fn try_parse_bare_zero_arg_statement_marker(&mut self) -> Option<Expr> {
+        let start = self.pos;
+        let name = self.parse_name();
+        if !Self::is_bare_zero_arg_statement_marker(&name) {
+            self.pos = start;
+            return None;
+        }
+
+        let mut boundary = self.pos;
+        while matches!(self.src.as_bytes().get(boundary), Some(b' ' | b'\t')) {
+            boundary += 1;
+        }
+        if !matches!(
+            self.src.as_bytes().get(boundary),
+            None | Some(b';' | b'\n' | b'\r')
+        ) {
+            self.pos = start;
+            return None;
+        }
+
+        Some(Expr::Call {
+            name,
+            args: Vec::new(),
+        })
+    }
+
+    fn is_bare_zero_arg_statement_marker(name: &str) -> bool {
+        matches!(
+            name,
+            "else" | "endif" | "default" | "endcase" | "endswitch" | "next"
+        )
     }
 
     fn try_parse_attached_if_chain(&mut self) -> Result<Option<Vec<Stmt>>, String> {
@@ -1566,6 +1603,13 @@ impl<'a> Parser<'a> {
             let method = self.parse_name();
             self.skip_inline_whitespace();
             if self.peek() != Some('(') {
+                if !method.is_empty() && self.bare_fluent_method_is_terminal() {
+                    calls.push(FluentCall {
+                        method,
+                        args: Vec::new(),
+                    });
+                    break;
+                }
                 return Err(format!(
                     "expected '(' after fluent method '{}' at position {}",
                     method, self.pos
@@ -1592,6 +1636,11 @@ impl<'a> Parser<'a> {
             receiver: Box::new(receiver),
             calls,
         })
+    }
+
+    fn bare_fluent_method_is_terminal(&self) -> bool {
+        self.peek()
+            .is_none_or(|ch| matches!(ch, ',' | ';' | ')' | ']' | '}' | ':' | '\n' | '\r'))
     }
 
     fn parse_optional_fluent_trailing_block_arg(
@@ -1810,6 +1859,31 @@ mod tests {
             }
             _ => panic!("expected Call"),
         }
+    }
+
+    #[test]
+    fn punctuation_light_standalone_markers_match_parenthesized_calls() {
+        for name in ["else", "endif", "default", "endcase", "endswitch", "next"] {
+            let bare = CodeBlock::parse(name).unwrap();
+            let parenthesized = CodeBlock::parse(&format!("{name}()")).unwrap();
+            assert_eq!(bare, parenthesized, "standalone {name}");
+        }
+
+        let value_position = CodeBlock::parse("return(next)").unwrap();
+        let Expr::Call { args, .. } = &value_position.statements[0].expr else {
+            panic!("expected return call");
+        };
+        assert!(matches!(
+            args.first(),
+            Some(Arg::Positional(Expr::Variable { name })) if name == "next"
+        ));
+
+        let bare_sequence = CodeBlock::parse("else\nendif\ndefault\nendcase\nendswitch\nnext")
+            .expect("newline-separated bare markers parse as six statements");
+        let parenthesized_sequence =
+            CodeBlock::parse("else()\nendif()\ndefault()\nendcase()\nendswitch()\nnext()")
+                .expect("newline-separated parenthesized markers parse as six statements");
+        assert_eq!(bare_sequence, parenthesized_sequence);
     }
 
     #[test]
@@ -3031,6 +3105,22 @@ mod tests {
     }
 
     #[test]
+    fn punctuation_light_terminal_receiver_matches_parenthesized_call() {
+        for (bare, parenthesized) in [
+            ("text.trim", "text.trim()"),
+            ("values.count", "values.count()"),
+            ("values.sorted().first", "values.sorted().first()"),
+            ("copy(values).count", "copy(values).count()"),
+        ] {
+            assert_eq!(
+                CodeBlock::parse(bare).unwrap(),
+                CodeBlock::parse(parenthesized).unwrap(),
+                "terminal receiver {bare}"
+            );
+        }
+    }
+
+    #[test]
     fn parse_array_end_mutation_fluent_receivers() {
         let block =
             CodeBlock::parse("items.push_back(value); items.pop_front(); items.push_front(\"a\")")
@@ -3411,8 +3501,15 @@ mod tests {
     }
 
     #[test]
-    fn error_fluent_chain_missing_paren() {
-        let result = CodeBlock::parse("results.return");
+    fn error_intermediate_fluent_chain_missing_paren() {
+        let result = CodeBlock::parse("results.sorted.count()");
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("expected '('"));
+    }
+
+    #[test]
+    fn error_receiver_trailing_block_missing_paren() {
+        let result = CodeBlock::parse("value.with { return(value) }");
         assert!(result.is_err());
         assert!(result.unwrap_err().contains("expected '('"));
     }

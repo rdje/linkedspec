@@ -423,10 +423,10 @@ Rule-edge and lifecycle fluent control-flow markers accept bare-keyword suffix f
 .else   .endif   .default   .endcase   .endswitch
 ```
 
-These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl reference typed
-ActionIR parser now accepts standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a
-final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence for Rust, Dart,
-Julia, and Lua. Until that lane closes, parenthesized standalone markers and generic receiver calls remain the
+These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl and Rust typed
+ActionIR parsers now accept standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a
+final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence for Dart, Julia,
+and Lua. Until that lane closes, parenthesized standalone markers and generic receiver calls remain the
 universal spelling.
 
 ADR 0033 deliberately keeps the exception narrow. Calls with arguments, general helper/user-function calls,
@@ -459,9 +459,11 @@ while flag { ... }           # condition header keeps while(flag) { ... }
 
 The versioned source of truth is
 `capability_conformance/punctuation_light_zero_arg_contract.json`, checked independently by
-`tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes that unchanged contract through
-`t/punctuation_light_zero_arg_contract.t`; complete admission remains future until
-`FUTURE-PARITY-BACKLOG.16.3-.16.7` close.
+`tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes it through
+`t/punctuation_light_zero_arg_contract.t`; Rust consumes its syntax/AST and execution cases through
+`rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`. Rust's pre-existing zero-argument
+`.contains()` fallback is separately owned by helper-normalization backlog `.5`. Complete admission remains future
+until `FUTURE-PARITY-BACKLOG.16.4-.16.7` close.
 
 ### 3.8 Conditional Markers
 

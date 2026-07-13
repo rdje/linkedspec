@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.3 — implement Rust zero-argument aliases
+
+Rust now recognizes standalone `else`, `endif`, `default`, `endcase`, `endswitch`, and `next` only at exact
+statement boundaries, and permits an omitted empty argument list only on the final generic receiver segment.
+Bare and parenthesized spellings produce identical typed AST nodes. Value-position `next`, condition-bearing
+headers, ordinary helpers, argument-bearing calls, intermediate bare receiver segments, and receiver trailing
+blocks retain their previous meanings or failures.
+
+The unchanged neutral fixture returns `{"count":2,"picked":"a","result":"yes"}` through native execution,
+compiled-state serialization, emitted-source validation, generated-plan execution, and rebuilt CLI runs for both
+spellings. The complete Rust gate passes 137 runtime unit tests, the 105-fixture Perl oracle, all 105 generated-
+source classifications, 197 integration tests, the new 5-test contract, focused suites, and CLI 61/61 twice.
+
+Preflight exposed one pre-existing helper difference: Rust `.contains()` defaults a missing needle to empty text
+and returns `0`, whereas Perl rejects the missing authored argument. The punctuation-light alias preserves its
+parenthesized Rust twin; helper-normalization owner `.5` now records the cross-backend decision. Dart `.16.4` is
+next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.2.1 — implement Perl zero-argument aliases
 
 The Perl reference now consumes the unchanged punctuation-light v1 contract. Standalone `else`, `endif`,

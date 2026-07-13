@@ -6,11 +6,13 @@ answers:
   - "does drop_front require an authored receiver argument"
   - "how is receiver method authored arity derived from helper arity"
   - "which receiver method demonstrates missing argument rejection"
+  - "does Rust reject contains with no receiver argument"
+  - "why does Rust contains without a needle return zero"
 date: 2026-07-13
 status: confirmed
 tags: [dsl, actionir, receiver, arity, contract, perl-reference, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.16.2.0 used LinkedSpec::call_spec_handler_subst plus perl/LinkedSpec/ActionIR/MethodLowering.pm's canonical %ast_aggregate_call_arity table. Function-form drop_front is [1,2], so its implicit receiver leaves zero or one authored arguments and values.drop_front() validly drops one. Function-form contains is [2,2], so its implicit receiver leaves exactly one authored argument and values.contains() takes the established unsupported-helper rejection path. The neutral contract therefore uses values.contains / values.contains() for same-rejection proof without changing syntax policy or backend behavior."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(values.drop_front())},q{return(values.contains())}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$s),qq{\\n} }' && python3 tools/check_punctuation_light_zero_arg_contract.py"
+evidence: "FUTURE-PARITY-BACKLOG.16.2.0 used LinkedSpec::call_spec_handler_subst plus perl/LinkedSpec/ActionIR/MethodLowering.pm's canonical %ast_aggregate_call_arity table. Function-form drop_front is [1,2], so its implicit receiver leaves zero or one authored arguments and values.drop_front() validly drops one. Function-form contains is [2,2], so its implicit receiver leaves exactly one authored argument and values.contains() takes the established Perl unsupported-helper rejection path. FUTURE-PARITY-BACKLOG.16.3 then proved pre-existing Rust drift: validation recognizes contains but does not enforce arity, and engine.rs defaults args[1] to empty text, so both values.contains and values.contains() return numeric 0 for [a,b]. The syntax alias correctly preserves its parenthesized Rust twin; FUTURE-PARITY-BACKLOG.5 owns helper normalization."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(values.drop_front())},q{return(values.contains())}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$s),qq{\\n} }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test punctuation_light_zero_arg_contract terminal_alias_preserves_existing_rust_method_resolution && python3 tools/check_punctuation_light_zero_arg_contract.py"
 ---
 
 # Receiver arity calibration
@@ -23,7 +25,10 @@ authored receiver arity is the canonical function-form arity minus that receiver
 
 The punctuation-light rule remains unchanged: a final `.method` supplies zero authored arguments and must behave
 exactly like `.method()`. The neutral contract uses `contains` only because it is a truthful required-argument
-example; it does not add or remove a helper.
+example on the Perl reference; it does not add or remove a helper. Rust currently does not enforce that helper
+arity: `engine.rs` substitutes empty text when the second argument is absent, so `.contains()` returns `0` for a
+nonempty array with no empty element. That pre-existing semantic difference is owned by
+`FUTURE-PARITY-BACKLOG.5`; the punctuation-light spelling preserves it rather than silently changing the helper.
 
 ## Links
 
