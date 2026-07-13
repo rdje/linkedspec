@@ -71,8 +71,8 @@ The important point is not that every file has equal maturity. It does not.
 All 15 shipped specs that previously used exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` storage selectors are now migrated to
 bare typed bindings. That migration removed 210 selector occurrences while preserving constructor calls such as
 `array(value1, value2)` and `hash(key, value)`. The shipped directory therefore demonstrates the future authoring
-model already. Non-shipped fixtures, corpora, and executable embedded sources have now migrated as well; temporary
-Perl rejects the old forms before lowering; the remaining backend recognizers have scheduled hard-rejection leaves.
+model already. Non-shipped fixtures, corpora, and executable embedded sources have migrated as well. All five
+backends reject the removed forms before execution, and recurring gates prevent their reintroduction.
 
 The important point is that these files collectively exercise the system:
 

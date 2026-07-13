@@ -60,8 +60,8 @@ The current helper surface is broad, but it is easier to learn in families. Each
 Construct and transform values during parsing:
 
 - `name` — read the named typed working value (scalar, array, harray, or codeblock)
-- `array(IDENTIFIER)` / `hash(IDENTIFIER)` — removed aggregate-selector forms. Perl rejects them before lowering; remaining
-  backends retire them in the active parity sequence. Use the bare typed binding.
+- `array(IDENTIFIER)` / `hash(IDENTIFIER)` — removed aggregate-selector forms. All five backends reject them before
+  execution. Use the bare typed binding.
 - `flat_array(...)` — flatten arguments into an array
 - `flat_hash(...)` — flatten key/value arguments into a hash
 - `copy(...)` — shallow-copy a container

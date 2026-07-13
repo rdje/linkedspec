@@ -1,0 +1,195 @@
+#!/usr/bin/env python3
+"""Enforce final public admission of selector-free typed bindings."""
+
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+EXACT_SELECTOR = re.compile(
+    r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
+)
+CODE_SELECTOR = re.compile(
+    r"(?<![A-Za-z0-9_])(?:array|hash)[ \t]*\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
+)
+NEGATIVE_CONTEXT = re.compile(
+    r"\b(?:former|historical|invalid|migrat\w*|must\s+not|"
+    r"no\s+exact|previously|reject\w*|remov\w*|retir\w*|supersed\w*)\b",
+    re.IGNORECASE,
+)
+
+
+def fail(message: str) -> None:
+    raise SystemExit(f"public-aggregate-selector-surface: {message}")
+
+
+def read(relative: str) -> str:
+    path = ROOT / relative
+    if not path.is_file():
+        fail(f"required file is missing: {relative}")
+    return path.read_text(encoding="utf-8")
+
+
+def public_markdown_paths() -> list[Path]:
+    fixed = [
+        ROOT / "README.md",
+        ROOT / "ROADMAP.md",
+        ROOT / "ROADMAP_V2.md",
+        ROOT / "ARCHITECTURE_STATE.md",
+        ROOT / "capability_conformance/README.md",
+    ]
+    book = sorted((ROOT / "docs/linkedspec-book/src").rglob("*.md"))
+    paths = fixed + book
+    missing = [path for path in paths if not path.is_file()]
+    if missing:
+        fail(f"public markdown path is missing: {missing[0].relative_to(ROOT)}")
+    return paths
+
+
+def sentence_at(source: str, start: int, end: int) -> str:
+    boundaries = ("\n\n", ". ", "? ", "! ")
+    left = max(source.rfind(mark, 0, start) for mark in boundaries)
+    right_candidates = [
+        position
+        for mark in boundaries
+        if (position := source.find(mark, end)) >= 0
+    ]
+    right = min(right_candidates) if right_candidates else len(source)
+    return source[left + 1 : right + 1]
+
+
+def check_exact_references(paths: list[Path]) -> int:
+    reference_count = 0
+    for path in paths:
+        source = path.read_text(encoding="utf-8")
+        relative = path.relative_to(ROOT)
+        locations = {(match.start(), match.end()) for match in EXACT_SELECTOR.finditer(source)}
+        for code in re.finditer(r"`([^`\n]+)`", source):
+            locations.update(
+                (code.start(1) + match.start(), code.start(1) + match.end())
+                for match in CODE_SELECTOR.finditer(code.group(1))
+            )
+        for code in re.finditer(r"```[^\n]*\n(.*?)```", source, flags=re.DOTALL):
+            locations.update(
+                (code.start(1) + match.start(), code.start(1) + match.end())
+                for match in CODE_SELECTOR.finditer(code.group(1))
+            )
+        for start, end in sorted(locations):
+            reference_count += 1
+            sentence = sentence_at(source, start, end)
+            if not NEGATIVE_CONTEXT.search(sentence):
+                line = source.count("\n", 0, start) + 1
+                fail(
+                    f"{relative}:{line} presents {source[start:end]!r} without explicit "
+                    "removed/rejected/migrated historical context"
+                )
+    return reference_count
+
+
+def check_stale_status(paths: list[Path]) -> None:
+    forbidden = (
+        r"future-invalid",
+        r"active\s+parity\s+sequence",
+        r"remaining\s+backend\s+recognizers",
+        r"remaining\s+backends?[^\n.]{0,120}(?:reject|retir|recogniz)",
+        r"temporary\s+Perl\s+rejects",
+        r"final\s+public\s+admission[^\n.]{0,100}(?:active|follows|next|remain)",
+        r"\.12\.1\.9[^\n.]{0,80}(?:active|follows|next|remain)",
+    )
+    for path in paths:
+        source = path.read_text(encoding="utf-8")
+        relative = path.relative_to(ROOT)
+        for pattern in forbidden:
+            match = re.search(pattern, source, flags=re.IGNORECASE)
+            if match:
+                line = source.count("\n", 0, match.start()) + 1
+                fail(f"{relative}:{line} retains stale retirement status: {match.group(0)!r}")
+
+
+def require_public_anchors() -> None:
+    required = {
+        "README.md": (
+            "Selector retirement is complete",
+            "set(items, [])",
+            "push(items, value)",
+        ),
+        "ROADMAP.md": ("Uniform-binding selector retirement `.12.1` is complete",),
+        "ARCHITECTURE_STATE.md": ("Aggregate-selector retirement is admitted",),
+        "capability_conformance/README.md": (
+            "The uniform-binding selector retirement is admitted",
+        ),
+        "docs/linkedspec-book/src/overview/project-status.md": (
+            "Uniform-binding selector retirement is complete",
+        ),
+        "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md": (
+            "All five backends reject",
+            "set(items, [])",
+            "push(items, value)",
+            "copy(items)",
+        ),
+    }
+    for relative, markers in required.items():
+        source = read(relative)
+        missing = [marker for marker in markers if marker not in source]
+        if missing:
+            fail(f"{relative} is missing final-admission marker(s): {', '.join(missing)}")
+
+
+def check_capability_admission() -> None:
+    manifest = json.loads(read("capability_conformance/manifest.json"))
+    excluded = manifest.get("excluded_or_future")
+    if not isinstance(excluded, list):
+        fail("capability excluded_or_future must be an array")
+    ids = {entry.get("id") for entry in excluded if isinstance(entry, dict)}
+    if "future.uniform_binding_selector_retirement" in ids:
+        fail("capability manifest still classifies selector retirement as future")
+
+
+def run_check(command: list[str], label: str) -> str:
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        sys.stderr.write(result.stderr)
+        sys.stdout.write(result.stdout)
+        fail(f"composed {label} check failed")
+    return result.stdout.strip()
+
+
+def main() -> int:
+    paths = public_markdown_paths()
+    reference_count = check_exact_references(paths)
+    check_stale_status(paths)
+    require_public_anchors()
+    check_capability_admission()
+    aggregate = run_check(
+        [sys.executable, "tools/check_aggregate_selector_retirement.py"],
+        "aggregate-selector retirement",
+    )
+    capability = run_check(
+        ["perl", "tools/check_capability_conformance.pl"],
+        "capability conformance",
+    )
+    if aggregate:
+        print(aggregate)
+    if capability:
+        print(capability)
+    print(
+        "public-aggregate-selector-surface: OK "
+        f"({len(paths)} public files; {reference_count} classified removed/history references; "
+        "0 current examples; capability admitted)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

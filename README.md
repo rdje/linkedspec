@@ -40,8 +40,8 @@ This `README.md` is the **single entry point** to the project.
   Perl now preserves `callback: codeblock` in function/staged metadata and normalizes attached and parenthesized
   contextual blocks for declared helpers, user functions, and receiver methods to one typed zero-argument
   `codeblock_argument`; explicit `{|params| ...}` values retain their own signatures and harrays are not promoted.
-  Perl closeout `.11.3.4` is complete; the cross-backend feature is not yet current. Before backend rollout,
-  active `.12.1` removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics. Inventory
+  Perl closeout `.11.3.4` is complete; the cross-backend feature is not yet current. Selector retirement is complete:
+  `.12.1` removed spec-facing `array(name)` / `hash(name)` selector and mutation semantics. Inventory
   `.12.1.0` found 600 exact forms across 82 tracked specs (corrected from a boundary-less 651 count) and split neutral contract, five-backend enablement,
   source migration, hard rejection, and no-drift. `.12.1.1` now adopts the executable replacement contract;
   Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` now execute bare typed
@@ -50,7 +50,9 @@ This `README.md` is the **single entry point** to the project.
   1,356 positive occurrences from embedded test/tool/backend sources. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart
   `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5` reject exact selectors before execution with the portable
   `aggregate_selector_removed` fields. Cross-variant `.12.1.8.6` locks those boundaries and zero runtime selector
-  compatibility in canonical CI; final public admission `.12.1.9` is next.
+  compatibility in canonical CI, and `.12.1.9` admits the public surface. Current authoring uses bare typed bindings,
+  for example `set(items, [])`, `push(items, value)`, and `copy(items)`. The paused Lua scalar-numeric frontier now
+  resumes.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

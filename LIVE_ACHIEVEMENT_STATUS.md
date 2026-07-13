@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.9 — admit selector-free public surface**
+  (DONE — retirement `.12.1` and compatibility parent `.12` closed; active Lua scalar-numeric `.4.3.3.1.4` resumes).
+
+  **Outcome:** One canonical checker scans 47 public root/capability/mdBook files, classifies 31 exact mentions only
+  as removed/rejected/migrated history, requires bare set/push/copy guidance, forbids stale rollout wording, and
+  reports zero current selector examples. The capability future exclusion is removed at 60/0/0.
+
+  **Proof:** Composed five-backend checks report six invalid selectors, eight retained classes, zero runtime
+  compatibility, and zero executable positives/19 classified rejection occurrences. Canonical CI passes CLI 61x2
+  and Phase 0 `1..1031` in 626 seconds; mdBook and governance gates pass.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.6 — enforce selector retirement no-drift**
   (DONE — hard-retirement parent `.12.1.8` closed; final public admission `.12.1.9` is next).
 

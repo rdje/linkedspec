@@ -12,26 +12,26 @@ This document is the current high-level technical reading of the project shape. 
   staged parsing refines selected fields after an AST level returns. Only the narrow function-body
   `body_parse_job` family is currently proven end to end; general in-parse composition, multiple parser families,
   public parse jobs, and recursive queues are future-owned by `FUTURE-PARITY-BACKLOG.14.1-.14.4`.
-- `2026-07-12` refresh: `linkedspec-uniform-binding-v1` is adopted before backend behavior. One observable typed
+- `2026-07-12` refresh: Aggregate-selector retirement is admitted. `linkedspec-uniform-binding-v1` defines one observable typed
   binding is storage-neutral; `set` yields the post-assignment target value; mutable helpers yield updated targets;
   absent target creation and wrong-kind errors are typed; static rules precede array mutation in ambiguous push;
   two-argument split is pure and three-argument split mutates a bare target. Exact one-bare array/hash calls are
-  future-invalid with `aggregate_selector_removed`; `[value]` is the one-element array constructor, while other
+  removed and reject with `aggregate_selector_removed`; `[value]` is the one-element array constructor, while other
   non-selector constructors remain in v1. Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and
   Lua `.12.1.6` execute the replacement contract. Migration `.12.1.7.1-.3` removed all 600 file-backed exact
   selectors and all 1,356 positive embedded-source occurrences. Perl `.12.1.8.1` rejects exact selectors at the
   canonical ActionIR boundary before lowering; Rust `.12.1.8.2` and Dart `.12.1.8.3` validate complete compiled
   ActionIR before native or generated execution. Julia `.12.1.8.4` and Lua `.12.1.8.5` do the same. Cross-variant
-  `.12.1.8.6` now locks all five boundary implementations and zero runtime selector compatibility in canonical CI;
-  final public admission `.12.1.9` is next.
+  `.12.1.8.6` locks all five boundary implementations and zero runtime selector compatibility in canonical CI;
+  `.12.1.9` admits the final public surface.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
-  `FUTURE-PARITY-BACKLOG.12.1`. Boundary-correct exact scans find 600 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
+  `FUTURE-PARITY-BACKLOG.12.1`. Boundary-correct pre-migration scans found 600 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
   tracked specs, including 210 in 15 shipped specs. The one-binding public model does not require identical host
   storage layouts, but bare read/mutation semantics must be complete before sources migrate and selector-specific
   recognition is hard-deleted. Neutral contract `.12.1.1`, all five backend consumers `.12.1.2-.6`, and all source
   migration `.12.1.7.1-.3` are complete. Perl hard retirement `.12.1.8.1`, Rust `.12.1.8.2`, and Dart
-  `.12.1.8.3`, Julia `.12.1.8.4`, Lua `.12.1.8.5`, and cross-variant no-drift `.12.1.8.6` are complete. Final
-  public admission `.12.1.9` is active.
+  `.12.1.8.3`, Julia `.12.1.8.4`, Lua `.12.1.8.5`, cross-variant no-drift `.12.1.8.6`, and public admission
+  `.12.1.9` are complete.
   The public-language decision is settled.
 - `2026-07-12` refresh: Perl callable metadata now declares an exact final `name: codeblock` parameter for typed
   user functions and registered helper/receiver contracts. Generic receiver attached syntax parses without a
@@ -97,8 +97,9 @@ This document is the current high-level technical reading of the project shape. 
   clamp/division, and signed modulo. All four admitted backends are aligned; Lua `.1.4` follows.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.5.1` closes Lua scalar/string parity at 76/76 on both ABIs,
   corrects stale positive retired-helper prose to canonical `cat`, and advances to numeric helpers `.4.3.3`.
-- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.4` adds dropped-statement dispatch for explicit
-  `split(array(target), source, delimiter)` replacement through copied pure split values. Scalar-held and source
+- `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.4` originally added dropped-statement dispatch for the
+  now-removed explicit aggregate selector; uniform-binding retirement later moved this to
+  `split(target, source, delimiter)` through copied pure split values. Scalar-held and source
   values stay isolated. Both Lua ABIs pass 76/76; regex/split no-drift `.5` is active.
 - `2026-07-12` refresh: `LUA-BACKEND-PARITY.4.3.2.2.3` adds dropped-statement dispatch for bare-scalar regex
   substitution, strict operation flags, `$0`/`$n`, Unicode-safe zero-width progress, and rule-attributed errors.
@@ -179,8 +180,8 @@ This document is the current high-level technical reading of the project shape. 
   `.11.3.2` are complete. Audit `.11.3.3.0` found the missing declaration, and ADR 0032 now adopts final-only
   `name: codeblock`: it carries no nested argument list because explicit values own `{|params| ...}` signatures.
   Perl normalization `.11.3.3.2` and diagnostics/docs/no-drift closeout `.11.3.4` are complete. Active `.12.1`
-  has removed spec-facing aggregate selectors from all five backends and closed cross-variant no-drift; final
-  public admission remains.
+  has removed spec-facing aggregate selectors from all five backends, closed cross-variant no-drift, and admitted
+  the public surface.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

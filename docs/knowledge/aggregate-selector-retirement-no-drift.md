@@ -6,11 +6,12 @@ answers:
   - "which checker prevents selector runtime compatibility from returning"
   - "do all five backends consume the six invalid selector cases"
   - "what locks aggregate selector diagnostic fields and compile boundaries"
+  - "is aggregate selector public documentation admitted"
 date: 2026-07-12
 status: current
 tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py to canonical local CI. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Focused proof passed Perl 11, Rust 15/15, Dart 15/15, Julia 59/59, and Lua 88/88 on both PUC Lua and LuaJIT."
-reverify: "python3 tools/check_aggregate_selector_retirement.py"
+evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Focused proof passed Perl 11, Rust 15/15, Dart 15/15, Julia 59/59, and Lua 88/88 on both PUC Lua and LuaJIT. Final admission .12.1.9 composes this checker under tools/check_public_aggregate_selector_surface.py and removes the capability future exclusion."
+reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 
 # Aggregate-selector retirement no-drift
@@ -31,6 +32,7 @@ diagnostics, and classified historical/documentation evidence. Generated Perl `$
 implementation details and are not spec-facing selector forms.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],
-[[uniform-binding-neutral-contract]], [[perl-aggregate-selector-compile-rejection]],
+[[aggregate-selector-public-admission]], [[uniform-binding-neutral-contract]],
+[[perl-aggregate-selector-compile-rejection]],
 [[rust-aggregate-selector-compile-rejection]], [[dart-aggregate-selector-compile-rejection]],
 [[julia-aggregate-selector-compile-rejection]], [[lua-aggregate-selector-compile-rejection]].

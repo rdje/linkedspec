@@ -135,15 +135,16 @@ return(array(
 
 For new specs, prefer `push(...)` for child-call appends. Prefer explicit targets when there is any chance the reader would wonder which collection is being mutated.
 
-### Convention health (2026 audit)
+### Historical convention audit
 
-A June 2026 audit of the then-20 shipped `.spec` files (88 total accumulator operations) confirmed the convention is healthy and idiomatic:
+A June 2026 pre-migration audit of the then-20 shipped `.spec` files counted 88 accumulator operations. The table
+preserves that historical evidence; its selector-wrapped rows are removed syntax, not current authoring examples:
 
 | Form | Count | Share |
 | --- | --- | --- |
-| `push(array(…), …)` | 63 | 71.6% |
+| removed selector-wrapped `push` form | 63 | 71.6% |
 | Fluent `.push(…)` with explicit target | 19 | 21.6% |
-| explicit `is_nonempty(...)` guard + `push(array(…), …)` | 2 | 2.3% |
+| explicit `is_nonempty(...)` guard + removed selector-wrapped `push` form | 2 | 2.3% |
 | Convention-based `push(Child)` | 4 | 4.5% |
 
 **95.5% of accumulator operations already use explicit targets.** The four remaining convention-based uses (across `regdef`, `tkgui`, and `ebnf`) are idiomatic — the rule name is the clearest name for the collection.
@@ -158,8 +159,8 @@ These helpers are the entry point into local working state and structured values
 > `set(name, value)` and `name = value` bind the evaluated typed RHS; `push(name, value)` / `name += value` mutate
 > an array; `set_key(name, key, value)` / `name[key] = value` mutate an harray; and `copy(name)` snapshots a
 > container. Exact `array(IDENTIFIER)` and `hash(IDENTIFIER)` are removed language forms and must not be introduced in `.spec`
-> code. Perl rejects them before lowering; Rust, Dart, Julia, and Lua execute the bare replacement contract and
-> retire their recognizers in the active parity sequence. All tracked source has migrated. Quoted/computed constructor calls such as
+> code. All five backends reject them before execution and execute the bare replacement contract. All tracked
+> source has migrated. Quoted/computed constructor calls such as
 > `array("items")` and valid key/value `hash("key", value)` remain ordinary values. See
 > [Working Variables and Setup](declaration-helper-reference.md#auto-existing-variables).
 

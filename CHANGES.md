@@ -1,5 +1,17 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.9 — admit selector-free public surface
+
+Uniform-binding selector retirement is fully admitted. A new canonical checker scans 47 root, capability, and
+mdBook public files; every exact selector-shaped mention must be explicitly removed, rejected, migrated, or
+historical. It classifies 31 such references, requires current bare `set`/`push`/`copy` examples, forbids stale
+future/remaining-backend wording, and reports zero current selector examples.
+
+The checker composes the five-backend runtime/source retirement proof and capability validation. The completed
+feature is removed from `excluded_or_future`; the census remains 60/0/0. Canonical CI passes CLI 61x2 and Phase 0
+`1..1031` in 626 seconds. Retirement `.12.1` and compatibility parent `.12` close; the existing active Lua scalar-
+numeric leaf `.4.3.3.1.4` resumes.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.6 — enforce selector retirement no-drift
 
 Aggregate-selector hard retirement now has one canonical cross-variant guard. The checker requires all five

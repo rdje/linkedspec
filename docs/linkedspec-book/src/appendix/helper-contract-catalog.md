@@ -635,8 +635,8 @@ dispatch rule.
 - **Behavior**: Constructs an array from evaluated values. Quoted strings are literal payloads, so
   `array("items")` constructs `["items"]`; zero and multiple arguments are also valid constructors.
 - **Boundary**: Exact `array(IDENTIFIER)` is a removed selector shape, not a one-element constructor. Use the bare
-  identifier to read its typed value or `[identifier]` to construct one element. Perl rejects the removed shape
-  before lowering; the remaining backends follow in the active retirement sequence.
+  identifier to read its typed value or `[identifier]` to construct one element. All five backends reject the
+  removed shape before execution.
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
@@ -860,8 +860,8 @@ dispatch rule.
   valid. Arguments are interpreted as alternating keys and values. Accepts
   `flat_array(...)` and `flat_hash(...)` for list-context insertion.
 - **Boundary**: Exact `hash(IDENTIFIER)` is a removed selector shape. Use the bare identifier to read its harray
-  value or `{ identifier : value }` / `{ "identifier" : value }` to construct a field. Perl rejects the removed
-  selector before lowering; remaining backends follow in the active retirement sequence.
+  value or `{ identifier : value }` / `{ "identifier" : value }` to construct a field. All five backends reject
+  the removed selector before execution.
 - **Edge cases**: Duplicate keys: last value wins. Direct multi-argument constructor calls should pass paired
   key/value arguments; use an explicit `undef` value for a null-valued trailing key.
 

@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.9 — executable retirement does not automatically retire public prose):
+  Runtime/source gates were complete, yet public status still called exact selectors “future-invalid,” referred to
+  remaining backend recognizers, preserved old positive examples without historical qualification, and retained a
+  future capability exclusion. Final admission therefore needs its own composed gate: scan every root/capability/
+  mdBook public file, require explicit removed/rejected/migrated context for exact mentions, require current bare
+  examples, forbid stale rollout status, prove the future exclusion absent, then compose runtime/source and
+  capability checks. This preserves legitimate boundary/history evidence without teaching removed syntax.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.6 — cross-variant retirement needs a composed recurring guard): Five
   strong backend rejection suites do not by themselves prevent shared-contract drift or the return of a runtime
   compatibility branch. The canonical checker therefore owns the invariant as a composition: exact neutral case

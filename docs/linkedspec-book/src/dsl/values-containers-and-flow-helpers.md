@@ -163,10 +163,10 @@ set(payload, [value]);
 return(payload);
 ```
 
-> **Retirement status:** adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
-> `hash(IDENTIFIER)`. Perl, Rust, Dart, Julia, and Lua reject them structurally before execution with
-> `aggregate_selector_removed`; one canonical no-drift gate locks all five boundaries and zero runtime selector
-> compatibility. Final public admission is the remaining retirement gate. The
+> **Retirement complete:** adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
+> `hash(IDENTIFIER)`. All five backends reject them structurally before execution with
+> `aggregate_selector_removed`; one canonical no-drift gate locks all five boundaries, zero runtime selector
+> compatibility, and the admitted public surface. The
 > replacement is the bare typed binding:
 > `items` becomes `items`, `copy(items)` becomes `copy(items)`, `set(items, [])` becomes
 > `set(items, [])`, `push(items, value)` becomes `push(items, value)`, and

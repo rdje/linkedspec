@@ -67,7 +67,7 @@ that binding's post-assignment typed value; mutable helpers use bare targets and
 array/harray mutations create only the required kind; incompatible existing kinds fail with
 `binding_kind_mismatch`. Static rule names retain precedence for ambiguous `push(name, target)` syntax, while
 three-argument `split(name, source, delimiter)` is the mutable form and two-argument `split(source, delimiter)` is
-pure. Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls are future-invalid with
+pure. Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls are removed and reject with
 `aggregate_selector_removed`, even when a one-element constructor was intended (`[IDENTIFIER]` is the replacement).
 Zero/multi/quoted/computed constructor calls remain separately valid under version 1. Validate 11 migrations,
 seven execution cases, six invalid selectors, eight constructor classifications, and deterministic future source/
@@ -75,7 +75,7 @@ results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.1
 `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` execute the contract. All tracked file-backed and embedded sources
 are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5`
 hard-reject the removed exact selectors before execution. Cross-variant `.12.1.8.6` locks their shared contract,
-boundaries, and zero runtime compatibility; final public admission `.12.1.9` follows.
+boundaries, and zero runtime compatibility. The uniform-binding selector retirement is admitted by `.12.1.9`.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
