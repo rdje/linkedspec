@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.5 — tagged records are a split-to-array bridge, not a new parser):
+  `split_tagged_records` should reuse the governed pure split evaluator rather than duplicate literal/PCRE2 rules.
+  The generic call path already evaluates arguments once; construction then copies every carried value into each
+  fresh typed record. The exact shape is one outer result array containing one `[tag, item, fields...]` array per
+  split item—there is no extra record wrapper. Receiver injection naturally supplies the source and preserves
+  downstream array chaining; tree callbacks remain a separate later family.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.4 — implicit accumulators are typed bindings, not host scratch lists):
   Action-edge `.push` and block child-push forms must reuse `edge_state.child_result`; re-running the child after
   the parent edge consumed its token is both duplicate work and semantically wrong. The current rule accumulator

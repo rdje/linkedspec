@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (array mutation/child flow closed at 98/98; tagged records `.4.3.4.5` active)
+- Last updated: `2026-07-12` (tagged record construction closed at 99/99; array closeout `.4.3.4.6` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1153,17 +1153,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.4.4 - close Lua array mutation flow`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.5`
-  Status: `active`
+  Status: `done`
   Goal: Implement tagged-record construction and remaining array-to-array/scalar bridges.
   Dependencies: `.4.3.4.1`, `.4.3.4.3`
   Acceptance: `split_tagged_records(source, delimiter, tag, fields...)` evaluates its source and carried fields
     once, preserves regex/literal split policy and typed record shapes, composes with array values/receivers, and
     matches shipped helper examples without beginning tree callbacks owned by `.4.3.6`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Lua now evaluates the source, delimiter, tag, and every carried field once,
+    reuses the governed literal/PCRE2 split evaluator, and emits fresh typed records shaped exactly as
+    `[tag, item, fields...]`. Direct and scalar-receiver calls compose with array terminals; empty literal fields,
+    regex delimiters, missing arity, invalid sources, carried-container isolation, and one-time side effects pass
+    99/99 on PUC Lua and LuaJIT plus manifest/CLI scaffolding. Tree callbacks remain untouched for `.4.3.6`.
+  Commit: `LUA-BACKEND-PARITY.4.3.4.5 - add Lua tagged record construction`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.6`
-  Status: `pending`
+  Status: `active`
   Goal: Close complete Lua array helper, receiver, mutation, and public-surface no-drift.
   Dependencies: `.4.3.4.1`, `.4.3.4.2`, `.4.3.4.3`, `.4.3.4.4`, `.4.3.4.5`
   Acceptance: Focused construction/selection/transform/mutation/tagged/receiver/invalid proof passes both Lua
@@ -1372,9 +1376,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3`, construction/splicing `.4.3.4.1`, selection `.4.3.4.2`, transforms `.4.3.4.3`,
-and mutation/child-result flow `.4.3.4.4` now pass 98/98 on PUC Lua and LuaJIT. Array split `.4.3.4.0` and
-cross-cutting uniform-binding result alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; tagged record construction
-and remaining bridges `.4.3.4.5` are active.
+mutation/child-result flow `.4.3.4.4`, and tagged record construction `.4.3.4.5` now pass 99/99 on PUC Lua and
+LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result alignment
+`FUTURE-PARITY-BACKLOG.12.1.11` are done; complete array helper/public no-drift `.4.3.4.6` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1427,7 +1431,8 @@ and remaining bridges `.4.3.4.5` are active.
 | 47 | `LUA-BACKEND-PARITY.4.3.4.2` | `done` | Copied selection/order/membership/uniq pass 93/93 on both ABIs. |
 | 48 | `LUA-BACKEND-PARITY.4.3.4.3` | `done` | Copied transforms, joins, PCRE2 pipelines, and seven rebindings pass 95/95. |
 | 49 | `LUA-BACKEND-PARITY.4.3.4.4` | `done` | Typed accumulators and complete cached child-push flow pass 98/98. |
-| 50 | `LUA-BACKEND-PARITY.4.3.4.5` | `active` | Implement tagged records and remaining array-to-array/scalar bridges. |
+| 50 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Typed tagged records, one-time carried fields, governed splits, and receiver composition pass 99/99. |
+| 51 | `LUA-BACKEND-PARITY.4.3.4.6` | `active` | Close complete array helper, receiver, mutation, and public-surface no-drift. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1612,6 +1617,22 @@ and remaining bridges `.4.3.4.5` are active.
   proof matches exact implicit/explicit whole/indexed results; KM, mdBook, doctrines, cleanup, and whitespace pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook/backend status, Knowledge Map, architecture/live
   docs, and memory close `.4.3.4.4` and activate tagged records/remaining bridges `.4.3.4.5`.
+
+### `LUA-BACKEND-PARITY.4.3.4.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prove the governed call is admitted by ActionIR but Lua's pure-array dispatcher has
+  no `split_tagged_records` branch, so direct and receiver forms reach the unsupported-helper boundary.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The existing array split evaluator already owns literal/PCRE2 semantics, but
+  `PURE_ARRAY_HELPERS` and `evaluate_array_helper` lacked the small bridge that wraps each item with a tag and
+  copied carried fields.
+- [x] **FIX** — Evaluate arguments once through the generic array call path, reuse pure split, coerce the tag
+  through the portable scalar-text seam, and construct fresh typed `[tag, item, fields...]` arrays.
+- [x] **ADDRESSED (verified)** — Direct literal and regex calls, empty items, receiver chaining, missing arity,
+  invalid sources, one-time source/field side effects, and carried-array isolation execute on both Lua ABIs.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 99/99 plus exact manifest/CLI scaffolding; scalar numeric remains
+  55/55 across six runtime variants, and no tree callback owned by `.4.3.6` changed.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs, and
+  memory close `.4.3.4.5` and activate complete array helper/public no-drift `.4.3.4.6`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1942,3 +1963,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.4.2` | `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection` | Copied take/drop/slice/order/membership/uniq, receiver chains, invalid boundaries, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.4.3` | `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines` | Delimiter-first joins, PCRE2 split/filter, Unicode transforms, seven rebindings, isolation, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.4.4` | `LUA-BACKEND-PARITY.4.3.4.4 - close Lua array mutation flow` | Typed implicit accumulators, cached child push, zero-based selection, binding reuse, and dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.4.5` | `LUA-BACKEND-PARITY.4.3.4.5 - add Lua tagged record construction` | Governed split reuse, exact typed record shapes, copied carried fields, one-time evaluation, and dual-ABI proof. |

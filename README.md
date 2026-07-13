@@ -55,9 +55,9 @@ This `README.md` is the **single entry point** to the project.
   checker to all 56 root/component/mdBook files. Current authoring uses bare typed bindings, for example
   `set(items, [])`, `push(items, value)`, and `copy(items)`. Lua numeric canonical/alias/symbol calls, number
   receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
-  copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, and typed mutation/child-result
-  flow pass 98/98 on both ABIs. Array mechanisms are split under `.4.3.4.0`; mutation flow `.4.3.4.4` is closed
-  and tagged record/remaining bridges `.4.3.4.5` are active.
+  copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
+  and exact copied tagged-record construction pass 99/99 on both ABIs. Array mechanisms are split under
+  `.4.3.4.0`; tagged records `.4.3.4.5` are closed and complete array/public no-drift `.4.3.4.6` is active.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

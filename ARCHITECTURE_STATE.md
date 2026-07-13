@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua `split_tagged_records` evaluates source and carried fields once, reuses the governed
+  literal/PCRE2 split evaluator, and constructs fresh typed `[tag, item, fields...]` records. Direct and scalar-
+  receiver forms compose with array terminals and copied carried containers do not alias later updates. Both Lua
+  ABIs pass 99/99; complete array/public no-drift `.4.3.4.6` is active.
 - `2026-07-12` refresh: Lua rule accumulators are typed arrays visible through uniform binding. Action-edge child
   push reuses one cached result and supports whole or zero-based indexed append into implicit/explicit targets;
   fluent push, ordinary append/end mutation, and mutable split share the same kind-checked copied-result seam.

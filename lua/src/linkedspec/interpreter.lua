@@ -720,6 +720,7 @@ local PURE_ARRAY_HELPERS = {
   slice = true,
   sorted = true,
   split_each = true,
+  split_tagged_records = true,
   take = true,
   take_last = true,
   trim_each = true,
@@ -872,6 +873,18 @@ local function evaluate_array_helper(engine, name, values)
       if value ~= nil and regex:seek_match(value, 0) ~= nil then
         result[#result + 1] = copy_value(item)
       end
+    end
+    return result
+  end
+  if name == "split_tagged_records" then
+    local result = json.array()
+    if #values < 3 then return result end
+    local parts = evaluate_pure_string_helper(engine, "split", { values[1], values[2] })
+    local tag = scalar_string(values[3], true) or ""
+    for _, item in ipairs(parts) do
+      local record = json.array({ tag, copy_value(item) })
+      for index = 4, #values do record[#record + 1] = copy_value(values[index]) end
+      result[#result + 1] = record
     end
     return result
   end

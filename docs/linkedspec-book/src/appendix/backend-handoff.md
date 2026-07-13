@@ -668,8 +668,9 @@ chains raise it to 93/93 without mutating their source. Copied selection `.4.3.4
 transform pipelines add delimiter-first terminal joins, literal/PCRE2 split, PCRE2 filtering, Unicode transforms,
 and seven dropped-call rebindings at 95/95. `.4.3.4.3` is closed.
 Typed rule accumulators, cached action-edge child reuse, whole/indexed implicit/explicit push, and uniform
-append/end/split flow raise the dual-ABI gate to 98/98. `.4.3.4.4` is closed and tagged record/remaining bridges
-`.4.3.4.5` are active. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
+append/end/split flow raise the dual-ABI gate to 98/98. Exact tagged-record construction reuses governed split,
+evaluates carried fields once, copies nested values, returns `[tag, item, fields...]`, and raises the gate to 99/99.
+`.4.3.4.5` is closed and complete array/public no-drift `.4.3.4.6` is active. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, and invalid join sources differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts

@@ -1100,7 +1100,20 @@ return(split_tagged_records(
 ))
 ```
 
-That lowers to the traditional `map { [tag, item, ...] } split ...` shape while keeping the authoring surface helper-based.
+For `identifier_list = "a, b"`, `subtype_indication = "integer"`, `signal_kind = "register"`, and
+`expression = "0"`, the exact value is:
+
+```json
+[
+  ["?signal_declaration:", "a", "integer", "register", "0"],
+  ["?signal_declaration:", "b", "integer", "register", "0"]
+]
+```
+
+The outer array holds all records; each inner array is one record, with no extra wrapper. Source, tag, and carried
+fields are evaluated once, then carried arrays or harrays are copied into every record. A scalar receiver supplies
+the source, so `"a,b".split_tagged_records(",", "?item:").count()` returns `2`. This lowers to the traditional
+`map { [tag, item, ...] } split ...` shape while keeping the authoring surface helper-based.
 
 ## Boolean composition
 

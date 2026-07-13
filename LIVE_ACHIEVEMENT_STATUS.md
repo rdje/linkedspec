@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.5 — add Lua tagged record construction**
+  (DONE — 99/99 on both ABIs; complete array/public no-drift `.4.3.4.6` active).
+
+  **Implementation:** `split_tagged_records` reuses literal/PCRE2 split, evaluates source and carried fields once,
+  and copies exact `[tag, item, fields...]` records across direct and receiver value paths.
+
+  **Proof:** Empty items, regex delimiters, missing arity, invalid sources, receiver chaining, side-effect counts,
+  and nested carried-array isolation pass PUC Lua and LuaJIT 99/99 plus manifest/CLI scaffolding.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.4 — close Lua array mutation flow**
   (DONE — 98/98 on both ABIs; tagged records/remaining bridges `.4.3.4.5` active).
 

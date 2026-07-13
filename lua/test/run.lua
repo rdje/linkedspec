@@ -3115,6 +3115,59 @@ Done::
   }), "copied array transforms")
 end)
 
+test("runtime split tagged records preserves copied fields and pipelines", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(source_calls, 0)
+   set(field_calls, 0)
+   set(field, ["x"])
+   set(meta, { "k" : "v" })
+   tagged = split_tagged_records(
+     cat("a,,b", substr(set(source_calls, add(source_calls, 1)), 0, 0)),
+     ",",
+     "?item:",
+     set(field_calls, add(field_calls, 1)),
+     field,
+     meta
+   )
+   field.push_back("y")
+   meta["k"] = "changed"
+   return({
+     "tagged" : tagged,
+     "regex" : split_tagged_records("a, b", /\s*,\s*/o, "?node:", "field"),
+     "receiver_count" : "a,b".split_tagged_records(",", "?item:").count(),
+     "missing_tag" : split_tagged_records("a,b", ","),
+     "invalid_source" : split_tagged_records(["a"], ",", "?item:"),
+     "source_calls" : source_calls,
+     "field_calls" : field_calls,
+     "field" : field,
+     "meta" : meta
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    tagged = json.array({
+      json.array({ "?item:", "a", 1, json.array({ "x" }), json.harray({ k = "v" }) }),
+      json.array({ "?item:", "", 1, json.array({ "x" }), json.harray({ k = "v" }) }),
+      json.array({ "?item:", "b", 1, json.array({ "x" }), json.harray({ k = "v" }) }),
+    }),
+    regex = json.array({
+      json.array({ "?node:", "a", "field" }),
+      json.array({ "?node:", "b", "field" }),
+    }),
+    receiver_count = 2,
+    missing_tag = json.array(),
+    invalid_source = json.array(),
+    source_calls = 1,
+    field_calls = 1,
+    field = json.array({ "x", "y" }),
+    meta = json.harray({ k = "changed" }),
+  }), "split tagged records")
+end)
+
 test("uniform-binding dropped array transform rejects wrong kind", function()
   local ok, failure = pcall(function()
     execute_uniform_binding_source([[

@@ -27,10 +27,12 @@ splice into their parent, while ordinary arrays and `copy(...)` remain nested co
 returns a fresh concatenation. Copied `take`/`drop`/zero-based `slice`, lexical `sorted`, `reversed`, scalar-text
 `contains`/`index_of`, and stable first-occurrence `uniq` work in function and receiver chains without mutating
 their source. Delimiter-first `join_values`, literal/PCRE2 `split_each`, PCRE2 `filter_match`, trim/filter/case
-pipelines, and all seven Perl-reference dropped transform rebindings share those copied values. The Lua gate
-passes 98/98 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl, Rust, Dart, and
-Julia exactly. Transform pipelines `.4.3.4.3` and mutation/child flow `.4.3.4.4` are closed; tagged records and
-remaining bridges `.4.3.4.5` are active. Zero/variadic
+pipelines, and all seven Perl-reference dropped transform rebindings share those copied values.
+`split_tagged_records(source, delimiter, tag, fields...)` reuses literal/PCRE2 split policy, evaluates every input
+once, and returns fresh `[tag, item, fields...]` records whose carried values are copied. Direct and receiver forms
+compose with array terminals. The Lua gate passes 99/99 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric
+v1 cases still match Perl, Rust, Dart, and Julia exactly. Tagged records `.4.3.4.5` are closed; complete
+array/public no-drift `.4.3.4.6` is active. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, and invalid-join differences
 remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than hidden as settled parity.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge

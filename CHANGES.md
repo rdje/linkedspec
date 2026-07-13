@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.5 — add Lua tagged record construction
+
+Added `split_tagged_records(source, delimiter, tag, fields...)` through Lua's pure-array dispatcher. The helper
+evaluates every argument once, reuses governed literal/PCRE2 split semantics, and returns fresh exact
+`[tag, item, fields...]` records with copied carried values. Direct/receiver composition, empty items, regex
+delimiters, invalid boundaries, one-time side effects, and nested-array isolation pass 99/99 on PUC Lua and LuaJIT
+plus manifest/CLI scaffolding. Complete array/public no-drift `.4.3.4.6` is active.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.4 — close Lua array mutation flow
 
 Unified Lua append, end-mutation, mutable split, and action-edge child push around typed array bindings. Rule
