@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.2.1` — syntax aliases normalize at existing typed seams): The narrow
+  Perl implementation required no new runtime operation. Exact standalone bare `next` is normalized to the
+  existing zero-argument call only in statement position, then routed through canonical `next_stmt`; this keeps
+  value-position `next` a variable and preserves labeled `next LABEL` compatibility. Generic bare receiver
+  parsing is similarly contextual: only the terminal identifier-only segment synthesizes the existing empty
+  argument list, so ordinary method-contract/arity lowering remains authoritative. The six excluded grammar
+  classes retain their prior raw/invalid reasons. This seam-local normalization is what keeps `if(condition)` /
+  `while(condition)` and the general parenthesized call language untouched.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.2.0` — receiver arity must exclude the implicit receiver): The neutral
   contract initially used `.drop_front()` as a required-argument rejection example. A required toolbox preflight
   disproved that assumption: `call_spec_handler_subst` lowers it as the established default-one operation.

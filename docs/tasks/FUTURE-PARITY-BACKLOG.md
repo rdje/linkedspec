@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (`.16.2.0` calibrates the neutral receiver-arity example against measured Perl
-  behavior; Perl implementation `.16.2.1` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain
-  queued at a clean handoff point).
+- Last updated: `2026-07-13` (Perl consumes the unchanged punctuation-light contract through completed `.16.2.1`;
+  Rust implementation `.16.3` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at a
+  clean handoff point).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3220,7 +3220,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement and regression-lock the ratified aliases on the Perl reference backend after calibrating the
     neutral arity example against the existing helper contract.
   Dependencies: `.16.1`
@@ -3228,8 +3228,11 @@ before implementation.
   Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
     aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
     receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Arity calibration `.16.2.0` and Perl implementation `.16.2.1` close the
+    parent. The Perl reference consumes all six standalone aliases and four terminal receiver cases while keeping
+    general calls, intermediate receiver segments, receiver trailing blocks, and condition-bearing `if`/`while`
+    headers unchanged. Live and standalone generated execution match the neutral fixture exactly.
+  Commit: completed by `.16.2.0` and `.16.2.1`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.2.0`
   Status: `done`
@@ -3249,17 +3252,24 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement the unchanged punctuation-light contract on the Perl reference backend.
   Dependencies: `.16.2.0`
   Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
     aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
     receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** The Perl typed parser maps all six standalone bare forms to the same semantic
+    ASTs as their parenthesized calls and accepts a bare generic receiver identifier only as the final segment.
+    Exact bare `next` scans as canonical `NEXT`, lowers identically to `next()`, and no longer enters compatibility
+    metadata; labeled `next LABEL` remains separately compatible. Ordinary value-position `next` stays a variable,
+    all six neutral exclusions retain their existing raw/invalid reasons, and method resolution remains unchanged.
+    The deterministic fixture returns `{result: "yes", picked: "a", count: 2}` in live and standalone generated
+    Perl. Focused AST/contract tests pass; canonical CI passes capability 60/0/0, CLI 61/61 twice, and Phase 0
+    `1..1031` in 611 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.16.2.1 - implement Perl zero-argument aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.3`
-  Status: `pending`
+  Status: `in_progress`
   Goal: Implement and regression-lock the ratified aliases on the Rust backend and Rust oracle/generated paths.
   Dependencies: `.16.1`, `.16.2`
   Acceptance: Rust ActionIR parsing emits the same typed calls/controls for aliases and parenthesized forms,
@@ -3379,6 +3389,24 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
   `1..1031` in 605 seconds; no parser/compiler/runtime source changed.
 - [x] **LOCKSTEP** — Contract, formal grammar, task/live/roadmap docs, Knowledge Map, and resume pointer agree;
   Perl implementation `.16.2.1` is next while Lua `.4.3.6.4` remains cleanly queued.
+
+### `FUTURE-PARITY-BACKLOG.16.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Toolbox AST/lowering probes showed exact bare `next` was a variable plus legacy
+  compatibility event and generic final bare receivers were invalid, unlike the ratified parenthesized twins.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Standalone statement parsing, statement splitting, scanner contract routing,
+  and fluent-segment parsing are separate Perl ActionIR seams; the old `next_bare` scanner also claimed exact
+  `next` before canonical lowering could own it.
+- [x] **FIX** — Normalize the six named standalone markers in statement/control scanning, route exact bare `next`
+  through canonical `next_stmt` while retaining labeled `next LABEL`, and admit an identifier-only generic
+  receiver segment solely when it is terminal.
+- [x] **ADDRESSED (verified)** — The neutral Perl contract proves six statement and four receiver semantic-AST
+  equivalences, retained value reads, all six unchanged exclusions, delegated arity outcomes, canonical `NEXT`,
+  and exact live plus standalone generated fixture output.
+- [x] **NO REGRESSION** — Focused AST/contract suites pass; capability stays 60/0/0, CLI passes 61/61 in both
+  environments, and canonical Phase 0 passes `1..1031` in 611 seconds. Labeled `next LOOP` remains compatible.
+- [x] **LOCKSTEP** — CI, capability README, formal grammar/helper guidance, task/live/roadmap docs, Knowledge Map,
+  and resume pointer agree; Rust `.16.3` is next while parenthesis-free `if`/`while` headers stay deferred.
 
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
@@ -3931,10 +3959,10 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
 | 148 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
-| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `active` | Align the Perl reference parser and execution surface through calibrated children. |
+| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `done` | Calibrated arity and aligned the Perl reference parser and execution surface. |
 | 150 | `FUTURE-PARITY-BACKLOG.16.2.0` | `done` | Replaced invalid drop_front arity example with measured required-argument contains behavior. |
-| 151 | `FUTURE-PARITY-BACKLOG.16.2.1` | `pending` | Implement the unchanged aliases on Perl after contract calibration. |
-| 152 | `FUTURE-PARITY-BACKLOG.16.3` | `pending` | Align Rust native, oracle, and generated paths. |
+| 151 | `FUTURE-PARITY-BACKLOG.16.2.1` | `done` | Perl consumes the unchanged standalone/final-receiver contract with exact live/generated behavior. |
+| 152 | `FUTURE-PARITY-BACKLOG.16.3` | `in_progress` | Align Rust native, oracle, and generated paths. |
 | 153 | `FUTURE-PARITY-BACKLOG.16.4` | `pending` | Align Dart native and generated paths. |
 | 154 | `FUTURE-PARITY-BACKLOG.16.5` | `pending` | Align Julia native and generated paths. |
 | 155 | `FUTURE-PARITY-BACKLOG.16.6` | `pending` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
@@ -4555,6 +4583,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.2.1` | LinkedSpec AST/lowering/descriptor probes; 7-subtest neutral Perl contract with live/generated execution; focused 29-test AST pair; capability 60/0/0; CLI 61x2; Phase 0 `1..1031`/611s; docs/KM/governance/whitespace. | PASS. Perl consumes the unchanged contract, exclusions remain narrow, parent `.16.2` closes, and Rust `.16.3` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.2.0` | Toolbox lowering probes for drop_front/contains; canonical MethodLowering arity table; strict contract/mutations; capability 60/0/0; CLI 61x2; Phase 0 `1..1031`/605s; docs/KM/governance/whitespace. | PASS. Required-argument example is truthful, no syntax/behavior changed, and Perl `.16.2.1` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.1` | Strict neutral checker: 6 standalone, 4 receiver, 3 retained-value, 6 invalid, 2 arity, exact fixture, and 3 mutation cases; capability 60/0/0; canonical CLI 61x2; Phase 0 `1..1031`/604s; docs/KM/governance/whitespace. | PASS. The executable syntax/AST/diagnostic boundary is stable before backend behavior; Perl `.16.2` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.0` | Knowledge Map retrieval; five ActionIR parser and five rule/lifecycle suffix-parser source audits; existing Perl bare-control AST tests; ADR 0033; task/roadmap/live/book/KM synchronization; memory/doctrine/task metadata/whitespace/mdBook gates. | PASS. Existing and missing surfaces are exact, no behavior code changed, parenthesis-free condition headers remain deferred, and `.16.1` owns the neutral contract. |
@@ -4666,6 +4695,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.2.1` | `FUTURE-PARITY-BACKLOG.16.2.1 - implement Perl zero-argument aliases` | Perl typed AST, scanner/lowering, final-only receivers, exact neutral live/generated fixture, and narrow exclusions. |
 | `FUTURE-PARITY-BACKLOG.16.2.0` | `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture` | Replace invalid drop_front required-argument example with measured contains behavior; no syntax/backend change. |
 | `FUTURE-PARITY-BACKLOG.16.1` | `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract` | Strict reusable neutral contract/checker, deterministic future fixture, CI integration, and Perl handoff; no backend behavior. |
 | `FUTURE-PARITY-BACKLOG.16.0` | `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases` | ADR 0033, exact five-backend parser audit, narrow exclusions, and implementation/no-drift split; no behavior code. |
@@ -4777,6 +4807,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.2.1` makes Perl consume the unchanged neutral punctuation-light contract. Six standalone
+  bare markers and four terminal receiver aliases share their parenthesized typed ASTs; exact bare `next` is
+  canonical `NEXT`, value-position `next` remains a variable, labeled `next LABEL` remains compatible, and all
+  exclusions plus method-arity outcomes stay unchanged. Live and standalone generated execution return the exact
+  fixture result. Capability 60/0/0, CLI 61x2, and Phase 0 `1..1031`/611s pass; parent `.16.2` closes and Rust
+  `.16.3` becomes active.
 - `2026-07-13`: `.16.2.0` catches and corrects a neutral-contract assumption before backend code. The Perl
   reference proves `.drop_front()` is valid because the receiver occupies the required array slot and count is
   optional. `contains` has one genuinely required authored receiver argument, so `.contains` and `.contains()`

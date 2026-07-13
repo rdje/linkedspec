@@ -360,7 +360,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `set_key(name, key, value)` | set one hash field | a named working hash should be updated in place. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
-| `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
+| `next()`; Perl also accepts `next` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
 Canonical child-result pattern:
 
@@ -1390,7 +1390,7 @@ print_each(matches, "match:<<", ">>\n")
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
-Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator:
+Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator. The Perl reference also accepts the punctuation-light standalone alias `next`; keep `next()` in cross-backend source until the parity lane closes:
 
 ```text
 -> comment {next()}

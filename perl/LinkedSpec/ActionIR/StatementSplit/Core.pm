@@ -56,7 +56,7 @@ sub _is_bare_zero_arg_flow_marker_statement {
  my ($statement, $trim_action_ir_value) = @_;
  my $trimmed = $trim_action_ir_value->($statement);
  return 0 unless defined($trimmed) && length($trimmed);
- return 1 if $trimmed =~ /^(?:else|otherwise|endif|default|endcase|endswitch)$/o;
+ return 1 if $trimmed =~ /^(?:else|otherwise|endif|default|endcase|endswitch|next)$/o;
  return 0
 }
 

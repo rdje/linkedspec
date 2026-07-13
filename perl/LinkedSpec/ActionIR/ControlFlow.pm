@@ -154,7 +154,7 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
  return undef unless defined($trimmed) && length($trimmed);
 
  return 'else()' if $trimmed eq 'otherwise';
- return "$1()" if $trimmed =~ /^(else|endif|default|endcase|endswitch)$/o;
+ return "$1()" if $trimmed =~ /^(else|endif|default|endcase|endswitch|next)$/o;
  return $trimmed
 }
 

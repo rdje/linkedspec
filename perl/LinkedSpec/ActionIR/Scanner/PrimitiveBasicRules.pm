@@ -202,7 +202,7 @@ sub _scan_contract_next_bare {
 foreach my $statement (@{_split_action_ir_statements($code)}) {
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
- next unless $trimmed =~ /^next(?:\s+\w+)?$/o;
+ next unless $trimmed =~ /^next\s+\w+$/o;
  push @events, {raw => $trimmed, args => {}};
 }
  return \@events

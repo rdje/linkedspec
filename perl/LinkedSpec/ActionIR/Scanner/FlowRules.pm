@@ -41,7 +41,7 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
  $expr =~ s/^\s+|\s+$//go;
  return undef unless length $expr;
  return 'else()' if $expr eq 'otherwise';
- return "$1()" if $expr =~ /^(else|endif|default|endcase|endswitch)$/o;
+ return "$1()" if $expr =~ /^(else|endif|default|endcase|endswitch|next)$/o;
  return $expr
 }
 
@@ -312,9 +312,12 @@ while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"]
 sub _scan_contract_next_stmt {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>next\s*\(\s*\))/g) {
- push @events, {raw => $+{expr}, args => {}};
-}
+ foreach my $statement (@{_split_action_ir_statements($code)}) {
+  my $trimmed = _trim_action_ir_value($statement);
+  next unless defined($trimmed) && length($trimmed);
+  next unless $trimmed =~ /^next(?:\s*\(\s*\))?$/o;
+  push @events, {raw => $trimmed, args => {}};
+ }
  return \@events
 }
 

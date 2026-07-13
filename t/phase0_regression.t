@@ -40373,16 +40373,20 @@ SPEC
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'exit_now helper does not create compatibility-surface summary entries');
     is_deeply($meta->{compatibility_surface_contract_ids}, [], 'exit_now helper exposes no compatibility-surface contract ids');
 };
-subtest 'method_like_next_helper_lowers_without_compatibility_surface' => sub {
-    plan tests => 10;
+subtest 'method_like_bare_and_parenthesized_next_lower_without_compatibility_surface' => sub {
+    plan tests => 14;
 
-    my $spec_content = <<'SPEC';
+    my $bare_spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { next() }
+ /a/ -> Top { next }
 SPEC
+    (my $parenthesized_spec_content = $bare_spec_content) =~ s/next/next()/;
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for next helper check');
+    my $descr = LinkedSpec::Get(\$bare_spec_content, return_descriptor => 1);
+    my $parenthesized_descr = LinkedSpec::Get(\$parenthesized_spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare next helper check');
+    ok(defined($parenthesized_descr) && ref($parenthesized_descr) eq 'HASH', 'descriptor build succeeds for parenthesized next helper check');
+    is_deeply($descr->{spec}{Top}{ACODE}, $parenthesized_descr->{spec}{Top}{ACODE}, 'bare and parenthesized next share identical ACODE');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0, 'next helper avoids canonical action-IR fallback');
@@ -40391,8 +40395,14 @@ SPEC
     is($meta->{compatibility_surface_count}, 0, 'next helper is not compatibility-surface syntax');
     ok(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include NEXT for next helper coverage');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'next()');
-    is($rewritten, 'next', 'next helper lowers to the runtime next statement');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'next');
+    is($rewritten, 'next', 'bare next helper lowers to the runtime next statement');
+    is($rewritten, LinkedSpec::call_spec_handler_subst('Top', 'next()'), 'bare and parenthesized next lower identically');
+    is_deeply(
+        $meta->{canonical_action_ir_nodes},
+        $parenthesized_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes},
+        'bare and parenthesized next preserve identical canonical node coverage',
+    );
     is($meta->{language_agnostic_action_ir_ready}, 1, 'next-helper-only rule remains language-agnostic action-IR ready');
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'next helper does not create compatibility-surface summary entries');
     is_deeply($meta->{compatibility_surface_contract_ids}, [], 'next helper exposes no compatibility-surface contract ids');

@@ -200,7 +200,9 @@ sub parse_action_statement {
  $opts = {} unless ref($opts) eq 'HASH';
  my $base_start = defined($opts->{base_start}) ? $opts->{base_start} : 0;
  my ($trimmed, $start, $end) = _trim_with_offsets($statement, $base_start);
- my $expr = parse_action_expr($trimmed, { base_start => $start, deps => $opts->{deps} || {} });
+ my $expr = $trimmed eq 'next'
+  ? _node('call', $trimmed, $start, $end, name => 'next', source_method => 'next', args => [])
+  : parse_action_expr($trimmed, { base_start => $start, deps => $opts->{deps} || {} });
  return _node(
   'action_stmt',
   $trimmed,
@@ -915,6 +917,7 @@ sub _parse_fluent_chain_expr {
    $seg->{text},
    $start + $seg->{start},
    $start + $seg->{end},
+   $idx == $#$segments,
   );
   return _raw_node($trimmed, $start, $end, 'invalid_fluent_chain')
    unless ref($call) eq 'HASH';
@@ -932,8 +935,20 @@ sub _parse_fluent_chain_expr {
 }
 
 sub _parse_fluent_call_segment {
- my ($text, $start, $end) = @_;
+ my ($text, $start, $end, $allow_bare_zero_arg) = @_;
  return undef unless defined($text) && length($text);
+
+ if ($allow_bare_zero_arg && $text =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  my $bare_call = _parse_method_function_expr("$text()");
+  return undef unless ref($bare_call) eq 'HASH' && defined($bare_call->{method});
+  return {
+   method => $bare_call->{method},
+   source_method => $bare_call->{source_method},
+   args => [],
+   source => $text,
+   source_span => _span($start, $end),
+  }
+ }
 
  my $call = _parse_method_function_expr($text);
  if (ref($call) eq 'HASH' && defined($call->{method})) {

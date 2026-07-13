@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | ADR 0033 and `.16.0` ratify narrow punctuation-light zero-argument aliases after an exact five-backend parser audit; `.16.1` locks the neutral contract, `.16.2.0` calibrates its receiver-arity example, and Perl `.16.2.1` is next. Parenthesis-free `if`/`while` headers are excluded. Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at a clean handoff. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | ADR 0033 and `.16.0` ratify narrow punctuation-light zero-argument aliases after an exact five-backend parser audit; `.16.1` locks the neutral contract, `.16.2.0` calibrates its receiver-arity example, and Perl `.16.2.1` consumes it exactly. Rust `.16.3` is next. Parenthesis-free `if`/`while` headers are excluded. Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at a clean handoff. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | Eager/inline controls, attached/marker if and switch, and attached while pass 108/108 through `.4.3.6.3.3`; built-in final blocks/scoped with `.4.3.6.4` are queued while director-requested syntax lane `FUTURE-PARITY-BACKLOG.16` runs from a clean pivot. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `JULIA-BACKEND-PARITY` | `active` (delegated global obligations) | `Overall roadmap - future backend parity (Julia second)` | Current proof is 1,339 package assertions, 105 fixtures, and exact CLI 61x2. Uniform-binding execution and selector rejection are complete; only later explicitly delegated language evolution remains. | [docs/tasks/JULIA-BACKEND-PARITY.md](docs/tasks/JULIA-BACKEND-PARITY.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -1036,16 +1036,18 @@ and malformed/orphaned structures stay typed. Boolean/number and aggregate switc
 outside-branch marker execution drift are routed to backlog `.5`. Attached while `.4.3.6.3.3` then passes 108/108
 with condition re-evaluation, state-visible bodies, action/expression-block return, Perl-reference inner-loop
 `next`, and typed exact-limit rule attribution. Guard timing and `next` drift join backlog `.5`; built-in final
-blocks/scoped with `.4.3.6.4` are queued while `FUTURE-PARITY-BACKLOG.16.1` owns the director-requested neutral
-syntax contract after a clean pivot. That contract is now complete and Perl implementation `.16.2` is next.
+blocks/scoped with `.4.3.6.4` are queued while `FUTURE-PARITY-BACKLOG.16` owns the director-requested neutral
+syntax contract and backend rollout after a clean pivot. The contract and Perl implementation are complete; Rust
+`.16.3` is next.
 
 Index note 2026-07-13: `FUTURE-PARITY-BACKLOG.16.0` is done. ADR `0033` preserves the general parenthesized call
 grammar while adopting six standalone zero-argument aliases plus a final zero-argument ActionIR receiver segment.
 The five-backend audit distinguishes already-supported rule/lifecycle suffixes from inconsistent typed ActionIR
 paths. Parenthesis-free condition-bearing `if`/`while` headers remain explicitly deferred. `.16.1` now locks six
 standalone aliases, final-only receiver omission, retained value reads, exclusions, arity delegation, and one
-future fixture. `.16.2.0` corrects its receiver-arity example against measured Perl behavior; the next frontier is
-Perl `.16.2.1`. Lua `.4.3.6.4` remains cleanly queued.
+future fixture. `.16.2.0` corrects its receiver-arity example against measured Perl behavior, and `.16.2.1`
+implements the unchanged contract on Perl with exact live/generated execution. Rust `.16.3` is next; Lua
+`.4.3.6.4` remains cleanly queued.
 
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.7.0` owns a verification-tool calibration found while closing Rust
 selector retirement. The current shipped VHDL parser builds in 19.627 seconds and parses its input in 0.001 seconds,

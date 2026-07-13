@@ -67,8 +67,11 @@ into a general parenthesis-free call language. It locks six standalone bare zero
 final receiver segments, exact normalized AST equivalence with parenthesized forms, ordinary-identifier retention,
 condition/helper/intermediate-receiver/trailing-block exclusions, existing method-contract resolution, and one
 deterministically rendered future `.spec` fixture. Validate the 6 standalone, 4 receiver, 6 invalid, and fixture
-cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`. Backend admission remains future
-under `FUTURE-PARITY-BACKLOG.16.2-.16.7`; `.16.1` defines the neutral contract only.
+cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes the unchanged
+contract through `prove -Iperl t/punctuation_light_zero_arg_contract.t`, covering typed AST equivalence,
+final-only receiver parsing, unchanged exclusions and method resolution, canonical `next` lowering, and live plus
+standalone generated execution. Complete backend admission remains future under
+`FUTURE-PARITY-BACKLOG.16.3-.16.7`.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
 changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns

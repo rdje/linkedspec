@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.2.1 — implement Perl zero-argument aliases
+
+The Perl reference now consumes the unchanged punctuation-light v1 contract. Standalone `else`, `endif`,
+`default`, `endcase`, `endswitch`, and `next` parse as the same zero-argument typed statements as their
+parenthesized forms. A generic receiver identifier may omit `()` only in the final chain segment, so
+`values.sorted().first` is admitted while `values.sorted.count()` remains invalid.
+
+Exact bare `next` now uses canonical `NEXT` scanning/lowering instead of compatibility metadata; labeled
+`next LABEL` remains a separate compatibility form. Value-position `next` remains an ordinary binding read,
+method arity still comes from the existing resolver, and parenthesis-free conditions, general calls, intermediate
+bare receiver methods, and receiver trailing blocks remain excluded. The neutral fixture returns the exact result
+in live and standalone generated Perl. Canonical CI passes capability 60/0/0, CLI 61/61 twice, and Phase 0
+`1..1031` in 611 seconds. Rust `.16.3` is next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.2.0 — calibrate receiver arity fixture
 
 Corrected the neutral punctuation-light contract's required-argument receiver example before backend parser work.

@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.2.1 — implement Perl zero-argument aliases**
+  (DONE — exact Perl typed/live/generated consumption; Rust `.16.3` next).
+
+  **Result:** All six standalone bare markers and four terminal receiver aliases share their parenthesized
+  semantic ASTs. Bare `next` is canonical `NEXT` with zero compatibility metadata; labeled `next LABEL` remains
+  compatible and value-position `next` remains a variable. Final-only receiver omission, existing arity outcomes,
+  and all six exclusions are locked. The exact neutral fixture passes live and standalone generated Perl.
+  Capability remains 60/0/0; CLI passes 61/61 twice and Phase 0 `1..1031` in 611 seconds. Parent `.16.2` closes.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.2.0 — calibrate receiver arity fixture**
   (DONE — measured contract correction; Perl implementation `.16.2.1` next).
 

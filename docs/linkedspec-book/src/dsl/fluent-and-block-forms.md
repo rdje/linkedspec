@@ -190,9 +190,10 @@ The fluent equivalent chains the markers with dots:
 ```
 
 The parenthesized spellings are currently universal. Bare control-marker suffixes are established on rule-edge and
-lifecycle fluent chains; standalone typed ActionIR parser coverage still differs by backend and is explicitly owned
-by `FUTURE-PARITY-BACKLOG.16`. That lane also owns bare `next` and a generic final zero-argument receiver segment,
-without changing `if(condition)` / `while(condition)` headers or the general parenthesized call grammar. Action-edge
+lifecycle fluent chains. The Perl reference additionally accepts the six standalone aliases `else`, `endif`,
+`default`, `endcase`, `endswitch`, and `next`, plus a generic final zero-argument receiver segment such as `.trim`;
+the remaining backend rollout is explicitly owned by `FUTURE-PARITY-BACKLOG.16`. This narrow surface does not
+change `if(condition)` / `while(condition)` headers or the general parenthesized call grammar. Action-edge
 fluent continuations are portable on the Perl reference and Rust for the edge-scoped child-return
 surface: no-arg `.push`, `.return(expr)`, `.return_undef()`, explicit-target `.push(target)`, and
 `.push(child,target)` inside fluent control chains. Multiline dotted continuations remain attached

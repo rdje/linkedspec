@@ -423,11 +423,11 @@ Rule-edge and lifecycle fluent control-flow markers accept bare-keyword suffix f
 .else   .endif   .default   .endcase   .endswitch
 ```
 
-These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. Standalone typed ActionIR
-parsers are not yet consistent across all five backends: `FUTURE-PARITY-BACKLOG.16` owns convergence for bare
-`else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a final zero-argument receiver segment such as
-`.trim`. Until that lane closes, parenthesized standalone markers and generic receiver calls are the universal
-spelling.
+These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl reference typed
+ActionIR parser now accepts standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a
+final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence for Rust, Dart,
+Julia, and Lua. Until that lane closes, parenthesized standalone markers and generic receiver calls remain the
+universal spelling.
 
 ADR 0033 deliberately keeps the exception narrow. Calls with arguments, general helper/user-function calls,
 intermediate generic receiver segments, and condition-bearing headers keep parentheses. In particular,
@@ -459,8 +459,9 @@ while flag { ... }           # condition header keeps while(flag) { ... }
 
 The versioned source of truth is
 `capability_conformance/punctuation_light_zero_arg_contract.json`, checked independently by
-`tools/check_punctuation_light_zero_arg_contract.py`. It remains a future-admission contract until
-`FUTURE-PARITY-BACKLOG.16.2-.16.7` close.
+`tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes that unchanged contract through
+`t/punctuation_light_zero_arg_contract.t`; complete admission remains future until
+`FUTURE-PARITY-BACKLOG.16.3-.16.7` close.
 
 ### 3.8 Conditional Markers
 
@@ -804,7 +805,7 @@ switch(expr, case(val, body), default(body))           — portable lazy value f
 case(val, body)
 default(body)
 exit_now(status)         — exit parser immediately
-next()                   — skip to next repetition (consume/recognize without append)
+next()                   — skip to next repetition (consume/recognize without append; Perl also accepts bare next)
 return(value)            — return value (canonical form)
 return_undef()           — return undef
 return(array(...))       — return array
@@ -989,7 +990,7 @@ tracking but not recommended for new `.spec` authoring:
 - `capture_slice_here()` — use `start_capture_slice()`
 - `capture_from_rule_start()` — use `capture_slice()`
 - `capture_slice_length()` — use `capture_slice_len()`
-- Bare `return`, bare `next`, bare `exit` — use `return_undef()`, `next()`, `exit_now(1)`
+- Bare `return`, bare `exit` — use `return_undef()`, `exit_now(1)`
 
 All 21 shipped `.spec` files compile with zero compatibility-surface rules.
 New `.spec` files must maintain this invariant.

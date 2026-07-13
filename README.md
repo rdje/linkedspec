@@ -67,7 +67,8 @@ This `README.md` is the **single entry point** to the project.
   Current built-in final blocks and scoped `with` `.4.3.6.4` are queued at a clean handoff while ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
-  required-argument example; Perl implementation `.16.2.1` is next.
+  required-argument example, and Perl implementation `.16.2.1` now consumes the unchanged contract through typed
+  AST, canonical `next`, and exact live/generated execution. Rust `.16.3` is next.
   Parenthesis-free condition-bearing `if`/`while` headers remain excluded. General user-function final blocks remain
   `.5.1`,
   and explicit callable codeblock values remain future `.11.7`. Copied harray construction,

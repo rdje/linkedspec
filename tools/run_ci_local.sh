@@ -122,6 +122,7 @@ require_tracked_file t/trace_cli.t
 require_tracked_file t/native_spec_resolution.t
 require_tracked_file t/generated_source_contract.t
 require_tracked_file t/scalar_numeric_contract.t
+require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
@@ -171,6 +172,7 @@ perl -c -Iperl t/native_spec_resolution.t
 perl -c -Iperl t/generated_source_contract.t
 perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
+perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
@@ -194,6 +196,9 @@ python3 tools/check_callable_codeblock_contract.py
 
 log "checking punctuation-light zero-argument syntax contract"
 python3 tools/check_punctuation_light_zero_arg_contract.py
+
+log "running Perl punctuation-light zero-argument behavior contract fixture"
+PERL5LIB= prove -Iperl t/punctuation_light_zero_arg_contract.t
 
 log "checking portable uniform-binding and aggregate-selector retirement contract"
 python3 tools/check_uniform_binding_contract.py
