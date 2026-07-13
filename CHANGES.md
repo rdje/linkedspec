@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.14.0 — capture structural progressive parsing doctrine
+
+Captured the director's complete `.spec` authoring model without changing parser behavior. Typical rules use
+zero/one/two small readable regexes for coordination, leaves, or entry/exit boundaries; recursive structure belongs
+in action-edge OR and blind-call AND rule connections rather than recursive regexes. Progressive parsing invokes
+loaded spec parsers over cursor-relative extracted text during an active parse, while staged parsing refines
+selected extracted fields after an AST level returns.
+
+Knowledge Map retrieval confirmed this extends rather than replaces ADR `0012` and the closed
+`STAGED-LINKED-PARSING` tree. The existing function-body `body_parse_job` is the only narrow end-to-end prototype;
+general public `parse_job(...)`, arbitrary in-parse parser composition, multiple parser families, and recursive
+queues remain future work. `.14.1-.14.4` now own doctrine/examples, progressive composition, staged AST enrichment,
+and final implementation/no-drift closure. Current EBNF recursive-regex and portmap complex-regex walkthrough
+wording is explicitly tracked as audit/migration evidence. Perl selector hard rejection `.12.1.8.1` remains next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.3 — migrate embedded selector sources
 
 Removed all 1,356 positive exact aggregate-selector occurrences from 25 embedded test/tool/backend source owners.

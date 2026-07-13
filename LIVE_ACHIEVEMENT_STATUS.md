@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.14.0 — capture structural progressive parsing doctrine**
+  (DONE — planning-only capture; Perl selector hard rejection `.12.1.8.1` remains next).
+
+  **Outcome:** Captured the director's simple-regex/linked-rule authoring doctrine and separated progressive
+  active-parse composition from post-AST staged enrichment. The existing ADR 0012 parse graph and narrow
+  function-body prototype remain the base; `.14.1-.14.4` own public guidance and full implementation audits.
+
+  **Measured boundary:** General `parse_job(...)`, arbitrary in-parse multi-spec composition, multiple parser
+  families, and recursive queues are not yet generally shipped. The EBNF recursive-regex and portmap complex-regex
+  walkthroughs are recorded as explicit reconciliation evidence. No parser, runtime, grammar, fixture, or accepted
+  behavior changed.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.3 — migrate embedded selector sources**
   (DONE — all selector source migration complete; Perl hard rejection `.12.1.8.1` is next).
 

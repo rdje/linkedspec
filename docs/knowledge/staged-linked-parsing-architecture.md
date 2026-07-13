@@ -17,6 +17,8 @@ answers:
   - "how are staged parse jobs dispatched"
   - "does spec.spec remain the first .spec grammar"
   - "what is the import composition contract for staged parsing"
+  - "what is the difference between progressive and staged parsing"
+  - "does current staged parsing support arbitrary in-parse parser invocation"
 date: 2026-07-02
 status: current
 tags: [architecture, staged-parsing, parser-composition, language-neutral, spec-spec]
@@ -67,3 +69,12 @@ language.
 For `.spec` language evolution, `specs/spec.spec` is the first authoritative grammar.
 Other `.spec` parsing stages derive from that self-hosted path rather than a competing
 permanent bootstrap grammar.
+
+The director's 2026-07-12 clarification distinguishes progressive composition from the
+post-AST staged queue. Progressive parsing is the intended ability of an active parser
+to capture text relative to reliable cursor anchors and invoke an appropriate loaded
+spec parser over that text. Staged parsing selects extracted fields from a returned AST
+level and refines them through later spec parsers. ADR 0012's parse graph remains the
+neutral umbrella, but the current implementation proves only the narrow function-body
+`body_parse_job` family; arbitrary in-parse composition, multiple public parser families,
+and recursive queues remain future work under `FUTURE-PARITY-BACKLOG.14.2-.14.4`.

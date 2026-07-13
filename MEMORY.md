@@ -10,16 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.7.3` — embedded aggregate-selector source migration.
-- latest_commit: `a2fab3ae` — `FUTURE-PARITY-BACKLOG.12.1.7.2 - migrate file-backed selector fixtures`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.0` — structural/progressive/staged authoring-doctrine capture.
+- latest_commit: `3326ae17` — `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.14.0 - capture structural progressive parsing doctrine`.
 - active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.8.1`; hard-reject exact selectors on Perl after this commit.
 - next_action: commit `.12.1.7.3`, verify the tree clean, then activate `.12.1.8.1` and replace Perl selector
   recognition/dispatch with the adopted portable rejection diagnostic.
-- current_proof: `.12.1.7.3` removes 1,356 positive exact forms from 25 embedded source owners; the recurring
-  classifier reports 0 executable positives and 25 implementation/recognition occurrences. Complete
-  Rust/Dart/Julia/Lua gates and the regenerated 105-fixture oracle pass. Standalone Phase 0 passes `1..1031`/920s;
-  canonical capability 60/0/0, CLI 61x2, and Phase 0 `1..1031`/918s pass.
+- current_proof: `.14.0` extends ADR 0012 with simple boundary-regex/linked-rule recursion and distinguishes
+  progressive in-parse composition from returned-AST staged enrichment. The function-body `body_parse_job` is the
+  current narrow prototype; `.14.1-.14.4` own public guidance and general implementation proof. No behavior changed.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; lexical codeblock capture (new decision only if justified); resumed Lua work follows `.12.1`.
-- blockers: none. in_flight_uncommitted: `.12.1.7.3` migration/runtime repairs/tests/docs passed all gates and await
-  commit. Lua scalar numeric `.4.3.3.1.4` remains ready after selector retirement.
+- blockers: none. in_flight_uncommitted: `.14.0` planning/docs/KM alignment awaits governance checks and commit;
+  `.12.1.8.1` remains the immediate implementation frontier. Lua scalar numeric `.4.3.3.1.4` follows retirement.

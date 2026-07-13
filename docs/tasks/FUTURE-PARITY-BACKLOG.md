@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (all selector-shaped source migration `.12.1.7` complete; Perl hard rejection `.12.1.8.1` is next).
+- Last updated: `2026-07-12` (director's linked-rule/progressive/staged parsing doctrine captured under `.14.0`; Perl hard rejection `.12.1.8.1` resumes immediately after this planning slice).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,8 +26,9 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The thirteen backlog directions are represented as owned task-tree lanes, including compatibility retirement and
-  repair of the codegen-inspector toolbox regression discovered while proving selector-source migration.
+- The fourteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+  repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
+  director's structural linked-rule plus progressive/staged parser-composition authoring model.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
@@ -46,6 +47,9 @@ before implementation.
   `call(args, { ... })` must be equivalent on helper, user-function, and receiver-method surfaces in every variant.
 - The director's variadic-callable direction is recorded: callable purpose governs exact versus unbounded arity,
   and user-defined functions gain one explicit grammar-owned definition-time variadic signature after audit.
+- The director's parser-authoring doctrine is recorded: simple zero/one/two-regex rules form a linked structural
+  graph; recursion belongs in rule connections rather than recursive regexes; cursor-relative extraction enables
+  in-parse parser composition; and returned AST fields may be parsed again by later spec-driven stages.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -56,7 +60,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -2893,6 +2897,63 @@ before implementation.
   Goal: Rewire and regression-lock `tools/inspect_spec_codegen.pl` after the Phase 1A facade extraction.
   Dependencies: `.12.1`
 
+- ID: `FUTURE-PARITY-BACKLOG.14`
+  Status: `pending`
+  Goal: Ratify, document, and implementation-audit LinkedSpec's structural linked-rule and progressive/staged
+    parser-composition authoring model.
+  Children: `.14.0`, `.14.1`, `.14.2`, `.14.3`, `.14.4`
+  Acceptance: Public guidance teaches small readable boundary regexes and connected recursive rule structure;
+    progressive parsing composes dynamically loaded spec parsers over cursor-relative extracted text; staged
+    parsing can enrich selected returned-AST fields with later spec-driven parses; examples and implementation
+    claims remain proof-backed rather than aspirationally overstated.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.0`
+  Status: `done`
+  Goal: Capture the director's complete authoring model and split doctrine, progressive composition, staged AST
+    enrichment, and implementation/no-drift audit before changing behavior or public claims.
+  Verification: **PASS 2026-07-12.** ADR 0012 and the closed `STAGED-LINKED-PARSING` tree already own neutral
+    parse jobs, many-next-spec dispatch design, and one narrow function-body prototype. The director's clarification
+    adds the missing simple-regex/linked-rule authoring doctrine and distinguishes active in-parse progressive
+    composition from later returned-AST staged enrichment. Current public `parse_job(...)`, multiple parser
+    families, arbitrary in-parse composition, and recursive queues remain unimplemented/future. The mdBook's
+    portmap praise for one complex regex and EBNF recursive-regex description are explicit `.14.1/.14.4` audit
+    evidence rather than silently accepted target idioms. No parser/runtime behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.14.0 - capture structural progressive parsing doctrine`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.1`
+  Status: `pending`
+  Goal: Ratify and teach simple-regex linked-rule structure, including zero/one/two-regex authoring roles and
+    recursion through action-edge OR dispatch plus blind-call AND composition.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2`
+  Status: `pending`
+  Goal: Specify and audit progressive in-parse extraction plus dynamic multi-spec parser invocation over captured
+    text at arbitrary safe parsing points.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3`
+  Status: `pending`
+  Goal: Specify and audit staged AST enrichment where later loaded specs parse selected extracted fields returned
+    by an earlier AST level.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.4`
+  Status: `pending`
+  Goal: Close examples, implementation gaps, mdBook/Knowledge Map/tooling alignment, and complete no-drift proof
+    for the structural/progressive/staged authoring model.
+
+### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the director's exact distinction between linked-rule structural recursion,
+  progressive in-parse parser composition, and staged post-AST enrichment without collapsing them into regex work.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Locate current canonical architecture, mdBook, toolbox, capture/extraction,
+  spec-loading/invocation, and staged-dispatch evidence before making implementation-completeness claims.
+- [x] **FIX** — Create ordered doctrine, progressive-composition, staged-enrichment, and final audit leaves; make
+  explicit that later behavior or public examples require proof against the current implementation.
+- [x] **ADDRESSED (verified)** — The task tree preserves simple zero/one/two-regex roles, graph-owned recursion,
+  cursor-relative extraction, any-number spec composition as the intended contract, and multi-level AST parsing.
+- [x] **NO REGRESSION** — Planning only: no parser, runtime, grammar, fixture, or accepted behavior changes.
+- [x] **LOCKSTEP** — Task/index, roadmap, Knowledge Map/live docs, memory, and mdBook status point at the durable
+  future owner while Perl selector hard rejection remains the immediate implementation frontier.
+
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Count exact selector-shaped calls and prove that current bare alternatives are not
@@ -3211,6 +3272,14 @@ before implementation.
 | 91 | `FUTURE-PARITY-BACKLOG.12.1.7.1` | `done` | All 210 exact shipped occurrences are removed; reference/generated behavior and full canonical gates pass. |
 | 92 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `done` | All 390 exact file-backed occurrences are removed from 67 capability/oracle/corpus specs; all tracked `.spec` files scan at zero. |
 | 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `done` | All 1,356 positive embedded occurrences are removed; recurring scan reports zero positives and 25 classified recognizer occurrences. |
+| 94 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `pending` | Immediate implementation frontier: hard-reject exact selectors on Perl and delete their recognition/dispatch. |
+| 95 | `FUTURE-PARITY-BACKLOG.13.1` | `pending` | Restore the codegen inspector after selector retirement. |
+| 96 | `FUTURE-PARITY-BACKLOG.14` | `pending` | Extend the existing staged architecture with structural authoring and complete progressive/staged composition audits. |
+| 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
+| 98 | `FUTURE-PARITY-BACKLOG.14.1` | `pending` | Ratify and teach simple-regex linked-rule structural recursion. |
+| 99 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Audit and implement intended in-parse progressive multi-spec composition. |
+| 100 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Audit and implement later-stage AST-field enrichment. |
+| 101 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Close examples, implementation gaps, tooling, and no-drift. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3905,6 +3974,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.1` | Boundary-correct inventory; 15 shipped specs; Perl pure-helper read seam; focused live/generated contract; all descriptors; CLI 61x2; canonical doctrines/contracts/capability and Phase 0 `1..1031`/573s; mdBook/KM/whitespace. | PASS. Shipped exact selectors fall 210 to zero; 390 tracked occurrences remain for `.12.1.7.2-.3`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.2` | 390 exact forms/67 file-backed specs; three `[undef]` constructions; Perl live EBNF/recursive/traversal probes; Rust native/generated 105 corpora and full gate; Dart/Julia full gates and 105 corpora; Lua dual-ABI 85/85 plus 105-manifest validation; canonical 60/0/0, CLI 61x2, Phase 0 `1..1031`/574s; docs/KM/governance. | PASS. Every tracked `.spec` file is selector-free; exposed initializer/accumulator/fluent-push/descriptor seams are permanently locked and embedded-source `.12.1.7.3` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.3` | 1,356 exact positive forms/25 embedded source owners; recurring executable-source classifier at 0 positive/25 recognition; focused Perl generated/function/runtime proof; complete Rust/Dart/Julia/Lua gates; regenerated 105-fixture oracle; standalone Phase 0 `1..1031`/920s; canonical capability 60/0/0, CLI 61x2, Phase 0 `1..1031`/918s; docs/KM/governance/mdBook/whitespace. | PASS. All tracked source migration is complete; implementation recognition remains only for dependency-ordered hard rejection beginning with Perl `.12.1.8.1`. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |

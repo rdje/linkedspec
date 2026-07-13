@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.14.0 — distinguish structural, progressive, and staged composition): The
+  authoring model has three separable layers. Small regexes identify lexical leaves or entry/exit boundaries;
+  linked action-edge OR and blind-call AND rules own deep recursive structure. Progressive parsing is active-parse
+  composition: capture an awkward region relative to reliable cursor anchors and invoke the appropriate loaded
+  spec parser over the extracted text. Staged parsing is post-AST composition: preserve bounded raw fields with
+  provenance, then let later spec parsers refine selected fields into a richer AST level. ADR 0012 remains the
+  umbrella parse-graph architecture, but the current function-body `body_parse_job` proves only one narrow family.
+  General public parse jobs, arbitrary in-parse composition, multiple parser families, and recursive queues must
+  not be documented as shipped until `.14.2-.14.4` prove them. The current EBNF walkthrough explicitly uses
+  recursive regex definitions and the portmap walkthrough praises one complex regex; `.14.1/.14.4` must reconcile
+  those examples with the target idiom rather than letting exceptions silently define authoring guidance.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.3 finding — a thin facade can turn a missing internal method into a
   misleading plugin error): `tools/inspect_spec_codegen.pl` still invokes
   `LinkedSpec::_rewrite_action_code_with_diagnostics` and `LinkedSpec::_render_method_call_chain`, but Phase 1A

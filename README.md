@@ -23,6 +23,11 @@ This `README.md` is the **single entry point** to the project.
 ## Project Objective
 - Provide a robust, trustworthy parser-prototyping platform that is intentionally different from strict EBNF-centric tooling.
 - Preserve LinkedSpec strengths (recursive parsing + multi-pass extraction workflows).
+- Keep `.spec` authoring structural: small readable regexes identify leaf or entry/exit boundaries; linked rules
+  own deep recursion. Progressive parsing isolates text relative to cursor anchors and composes loaded spec
+  parsers during a parse; staged parsing refines selected fields after an AST level returns. ADR `0012` and the
+  function-body prototype provide the current base, while complete authoring guidance and general multi-spec
+  execution remain owned by `FUTURE-PARITY-BACKLOG.14.1-.14.4` rather than being overstated as fully shipped.
 - Evolve `.spec` toward language-agnostic action semantics over time.
 - Model scalar, array, harray/hash, and codeblock as the four portable value kinds. For callables whose signature
   accepts a final codeblock, the language direction is one canonical call behind equivalent

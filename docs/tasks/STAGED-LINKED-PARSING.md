@@ -496,7 +496,9 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 
 - General public `parse_job(...)` authoring, import/provider search roots,
   multiple payload parser families, recursive staged queues, and cycle
-  diagnostics remain future work. They need new leaves before implementation.
+  diagnostics remain future work. The director's 2026-07-12 clarification adds
+  arbitrary in-parse progressive composition and the simple-regex/linked-rule
+  authoring doctrine; `FUTURE-PARITY-BACKLOG.14.1-.14.4` now owns those leaves.
 
 ## Blockers
 

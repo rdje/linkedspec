@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Director clarification joins the existing ADR 0012 staged parse graph with the missing
+  `.spec` authoring doctrine. Typical rules use zero/one/two small readable regexes for coordination, leaves, or
+  entry/exit boundaries; deep recursion belongs in action-edge OR and blind-call AND rule connections.
+  Progressive parsing invokes loaded specs over cursor-relative extracted text during an active parse, while
+  staged parsing refines selected fields after an AST level returns. Only the narrow function-body
+  `body_parse_job` family is currently proven end to end; general in-parse composition, multiple parser families,
+  public parse jobs, and recursive queues are future-owned by `FUTURE-PARITY-BACKLOG.14.1-.14.4`.
 - `2026-07-12` refresh: `linkedspec-uniform-binding-v1` is adopted before backend behavior. One observable typed
   binding is storage-neutral; `set` yields the post-assignment target value; mutable helpers yield updated targets;
   absent target creation and wrong-kind errors are typed; static rules precede array mutation in ambiguous push;
