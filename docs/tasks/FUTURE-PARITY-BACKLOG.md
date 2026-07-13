@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (`.16.1` adopts the executable neutral punctuation-light zero-argument contract;
-  Perl reference implementation `.16.2` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain
+- Last updated: `2026-07-13` (`.16.2.0` calibrates the neutral receiver-arity example against measured Perl
+  behavior; Perl implementation `.16.2.1` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain
   queued at a clean handoff point).
 - Owner: repo-local workflow
 
@@ -3220,9 +3220,38 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.2`
-  Status: `pending`
-  Goal: Implement and regression-lock the ratified aliases on the Perl reference backend.
+  Status: `active`
+  Goal: Implement and regression-lock the ratified aliases on the Perl reference backend after calibrating the
+    neutral arity example against the existing helper contract.
   Dependencies: `.16.1`
+  Children: `.16.2.0`, `.16.2.1`
+  Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
+    aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
+    receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2.0`
+  Status: `done`
+  Goal: Correct the neutral nonzero-arity receiver example exposed by the Perl reference preflight before parser
+    behavior changes.
+  Dependencies: `.16.1`
+  Acceptance: LinkedSpec toolbox output and the canonical helper-arity table prove `drop_front` has zero-or-one
+    authored receiver arguments; replace it with an actually required-argument receiver method without changing
+    the ratified terminal-call rule, fixture, or any backend parser/runtime; update durable facts and rerun the
+    strict contract plus canonical gates.
+  Verification: **PASS 2026-07-13.** `call_spec_handler_subst` proves `.drop_front()` lowers as the established
+    default-one operation and `.contains()` follows the missing-argument unsupported-helper path. The canonical
+    `%ast_aggregate_call_arity` table records function-form `drop_front` `[1,2]` and `contains` `[2,2]`, hence
+    authored receiver arities `[0,1]` and `[1,1]`. The neutral required-argument example now uses `contains`; the
+    strict checker and mutations pass unchanged, capability remains 60/0/0, CLI passes 61/61 twice, and Phase 0
+    passes `1..1031` in 605 seconds. No backend parser/compiler/runtime behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2.1`
+  Status: `pending`
+  Goal: Implement the unchanged punctuation-light contract on the Perl reference backend.
+  Dependencies: `.16.2.0`
   Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
     aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
     receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
@@ -3334,6 +3363,22 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
   Phase 0 passes `1..1031` in 604 seconds; no backend parser/compiler/runtime behavior changes in this leaf.
 - [x] **LOCKSTEP** — Contract README, capability manifest, mdBook grammar, Knowledge Map, task/live/roadmap docs,
   and CI agree; Perl implementation `.16.2` is the sole next leaf while Lua `.4.3.6.4` stays cleanly queued.
+
+### `FUTURE-PARITY-BACKLOG.16.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec `call_spec_handler_subst` lowers `return(values.drop_front())` as a valid
+  default-one operation, contradicting the neutral contract's required-argument example.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `perl/LinkedSpec/ActionIR/MethodLowering.pm` records function-form
+  `drop_front` arity `[1,2]`; subtracting the implicit receiver yields authored method arity `[0,1]`. `contains`
+  is `[2,2]`, hence authored method arity `[1,1]`, and its zero-argument form takes the existing rejection path.
+- [x] **FIX** — Replace only the method-resolution example with `values.contains` / `values.contains()`; preserve
+  the syntax policy, AST cases, future fixture, and every backend implementation.
+- [x] **ADDRESSED (verified)** — The strict contract/checker remains green with 6 standalone, 4 receiver, 6
+  invalid, exact future fixture, and all mutation checks; the new fact card makes receiver-slot subtraction durable.
+- [x] **NO REGRESSION** — Capability remains 60/0/0; canonical CLI passes 61/61 twice and Phase 0 passes
+  `1..1031` in 605 seconds; no parser/compiler/runtime source changed.
+- [x] **LOCKSTEP** — Contract, formal grammar, task/live/roadmap docs, Knowledge Map, and resume pointer agree;
+  Perl implementation `.16.2.1` is next while Lua `.4.3.6.4` remains cleanly queued.
 
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
@@ -3886,12 +3931,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
 | 148 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
-| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `pending` | Align the Perl reference parser and execution surface. |
-| 150 | `FUTURE-PARITY-BACKLOG.16.3` | `pending` | Align Rust native, oracle, and generated paths. |
-| 151 | `FUTURE-PARITY-BACKLOG.16.4` | `pending` | Align Dart native and generated paths. |
-| 152 | `FUTURE-PARITY-BACKLOG.16.5` | `pending` | Align Julia native and generated paths. |
-| 153 | `FUTURE-PARITY-BACKLOG.16.6` | `pending` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
-| 154 | `FUTURE-PARITY-BACKLOG.16.7` | `pending` | Close examples, book, grammar, KM, generated, capability, and no-drift alignment. |
+| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `active` | Align the Perl reference parser and execution surface through calibrated children. |
+| 150 | `FUTURE-PARITY-BACKLOG.16.2.0` | `done` | Replaced invalid drop_front arity example with measured required-argument contains behavior. |
+| 151 | `FUTURE-PARITY-BACKLOG.16.2.1` | `pending` | Implement the unchanged aliases on Perl after contract calibration. |
+| 152 | `FUTURE-PARITY-BACKLOG.16.3` | `pending` | Align Rust native, oracle, and generated paths. |
+| 153 | `FUTURE-PARITY-BACKLOG.16.4` | `pending` | Align Dart native and generated paths. |
+| 154 | `FUTURE-PARITY-BACKLOG.16.5` | `pending` | Align Julia native and generated paths. |
+| 155 | `FUTURE-PARITY-BACKLOG.16.6` | `pending` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
+| 156 | `FUTURE-PARITY-BACKLOG.16.7` | `pending` | Close examples, book, grammar, KM, generated, capability, and no-drift alignment. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4356,6 +4403,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Decisions
 
+- `2026-07-13`: `.16.2.0` corrects, rather than changes, the neutral receiver-arity example. Receiver-authored
+  arity subtracts the implicit receiver slot from canonical function-form helper arity. `drop_front` therefore
+  permits zero authored arguments; `contains` truthfully demonstrates one required authored argument. The
+  punctuation-light syntax decision and every backend behavior remain unchanged.
 - `2026-07-13`: ADR `0033` adopts a narrow punctuation-light exception to the general `callee(args)` grammar:
   bare `else`/`endif`/`default`/`endcase`/`endswitch`/`next` where their zero-argument statement calls are valid,
   plus a generic bare final ActionIR receiver segment. It explicitly excludes parenthesis-free condition headers,
@@ -4504,6 +4555,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.2.0` | Toolbox lowering probes for drop_front/contains; canonical MethodLowering arity table; strict contract/mutations; capability 60/0/0; CLI 61x2; Phase 0 `1..1031`/605s; docs/KM/governance/whitespace. | PASS. Required-argument example is truthful, no syntax/behavior changed, and Perl `.16.2.1` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.1` | Strict neutral checker: 6 standalone, 4 receiver, 3 retained-value, 6 invalid, 2 arity, exact fixture, and 3 mutation cases; capability 60/0/0; canonical CLI 61x2; Phase 0 `1..1031`/604s; docs/KM/governance/whitespace. | PASS. The executable syntax/AST/diagnostic boundary is stable before backend behavior; Perl `.16.2` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.0` | Knowledge Map retrieval; five ActionIR parser and five rule/lifecycle suffix-parser source audits; existing Perl bare-control AST tests; ADR 0033; task/roadmap/live/book/KM synchronization; memory/doctrine/task metadata/whitespace/mdBook gates. | PASS. Existing and missing surfaces are exact, no behavior code changed, parenthesis-free condition headers remain deferred, and `.16.1` owns the neutral contract. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
@@ -4614,6 +4666,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.2.0` | `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture` | Replace invalid drop_front required-argument example with measured contains behavior; no syntax/backend change. |
 | `FUTURE-PARITY-BACKLOG.16.1` | `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract` | Strict reusable neutral contract/checker, deterministic future fixture, CI integration, and Perl handoff; no backend behavior. |
 | `FUTURE-PARITY-BACKLOG.16.0` | `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases` | ADR 0033, exact five-backend parser audit, narrow exclusions, and implementation/no-drift split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
@@ -4724,6 +4777,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.2.0` catches and corrects a neutral-contract assumption before backend code. The Perl
+  reference proves `.drop_front()` is valid because the receiver occupies the required array slot and count is
+  optional. `contains` has one genuinely required authored receiver argument, so `.contains` and `.contains()`
+  share the existing rejection and now own the arity example. Contract/checker, capability 60/0/0, CLI 61x2, and
+  Phase 0 `1..1031`/605s pass without parser/runtime edits. Perl `.16.2.1` is next.
 - `2026-07-13`: `.16.1` makes ADR 0033 executable without changing a backend. Contract
   `linkedspec-punctuation-light-zero-arg-v1` locks six standalone aliases, four final receiver aliases, three
   retained ordinary identifiers, six excluded syntax classes, existing zero/nonzero method-arity behavior, and

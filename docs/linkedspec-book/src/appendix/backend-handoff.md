@@ -700,7 +700,7 @@ return remains owned by its action/expression block, Perl-reference `next` conti
 rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
 timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued
 while ADR `0033` and `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases after a clean pivot. Neutral
-contract `.16.1` is complete; Perl reference implementation `.16.2` is next.
+contract `.16.1` and arity calibration `.16.2.0` are complete; Perl reference implementation `.16.2.1` is next.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit

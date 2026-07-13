@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.1` — executable neutral zero-argument syntax contract.
-- latest_commit: `1812aa83` — `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.16.2`; implement the unchanged contract on the Perl reference.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.2.0` — calibrated neutral receiver-arity example.
+- latest_commit: `1b87445f` — `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.16.2.1`; implement the unchanged contract on the Perl reference.
 - next_action: use LinkedSpec toolbox probes, then align Perl statement/control/next and final-only receiver parsing;
   regression-lock neutral AST, generated source, execution, arity, and excluded-syntax behavior.
-- current_proof: strict v1 contract/checker passes 6 standalone, 4 receiver, 3 retained-value, 6 invalid, 2 arity,
-  exact fixture, and 3 mutation cases; canonical CI passes capability 60/0/0, CLI 61x2, and Phase 0 `1..1031`/604s.
-  No backend behavior changed; `if(condition)`/`while(condition)` and general calls retain parentheses.
+- current_proof: toolbox and canonical arity table prove drop_front receiver arity `[0,1]` and contains `[1,1]`;
+  corrected strict contract passes unchanged, capability stays 60/0/0, CLI passes 61x2, and Phase 0
+  `1..1031`/605s. No backend behavior changed; `if(condition)`/`while(condition)` retain parentheses.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua built-in final blocks `.4.3.6.4`; parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.16.1` neutral contract/checker/CI/docs synchronization awaits its
-  prepared commit; no parser/compiler/runtime behavior changed. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: `.16.2.0` contract-calibration/task/book/KM/live-doc synchronization
+  awaits its prepared commit; no parser/compiler/runtime behavior changed. Oracle timeout calibration remains `.7.0`.

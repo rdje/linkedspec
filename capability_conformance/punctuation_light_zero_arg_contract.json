@@ -56,7 +56,7 @@
   ],
   "method_contract_cases": [
     {"id": "zero_arg_method", "bare": "values.count", "parenthesized": "values.count()", "authored_args": 0, "method_min_authored_arity": 0, "method_max_authored_arity": 0, "expected_resolution": "accepted"},
-    {"id": "nonzero_arg_method", "bare": "values.drop_front", "parenthesized": "values.drop_front()", "authored_args": 0, "method_min_authored_arity": 1, "method_max_authored_arity": 1, "expected_resolution": "same_rejection_as_parenthesized"}
+    {"id": "nonzero_arg_method", "bare": "values.contains", "parenthesized": "values.contains()", "authored_args": 0, "method_min_authored_arity": 1, "method_max_authored_arity": 1, "expected_resolution": "same_rejection_as_parenthesized"}
   ],
   "future_fixture": {
     "input": "xx",

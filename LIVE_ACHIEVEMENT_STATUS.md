@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.2.0 — calibrate receiver arity fixture**
+  (DONE — measured contract correction; Perl implementation `.16.2.1` next).
+
+  **Finding and result:** A toolbox preflight disproved the contract's original `drop_front` required-argument
+  example. Function-form arity `[1,2]` becomes receiver-authored `[0,1]`, so `.drop_front()` validly defaults to
+  one. `contains` is `[2,2]` / receiver-authored `[1,1]` and now truthfully demonstrates that `.contains` equals
+  the existing rejection of `.contains()`. The syntax rule and future fixture are unchanged. Capability remains
+  60/0/0; CLI passes 61/61 twice and Phase 0 `1..1031` in 605 seconds. No backend behavior changed.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.1 — adopt zero-argument syntax contract**
   (DONE — reusable executable contract; Perl reference implementation `.16.2` next).
 

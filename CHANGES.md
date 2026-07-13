@@ -1,5 +1,16 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.2.0 — calibrate receiver arity fixture
+
+Corrected the neutral punctuation-light contract's required-argument receiver example before backend parser work.
+The Perl reference arity table defines function-form `drop_front` as `[1,2]`; after the implicit receiver slot,
+`.drop_front()` validly accepts zero authored arguments and defaults to dropping one. The contract now uses
+`values.contains` / `values.contains()`: function-form `contains` is `[2,2]`, so both zero-argument receiver
+spellings share the existing missing-argument rejection.
+
+LinkedSpec lowering probes confirm both outcomes, the strict contract remains green, and the ratified syntax,
+future fixture, and all backend behavior remain unchanged. The Perl parser implementation moves to `.16.2.1`.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.1 — adopt zero-argument syntax contract
 
 Added the strict backend-neutral `linkedspec-punctuation-light-zero-arg-v1` contract and an independent checker.

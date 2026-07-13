@@ -446,8 +446,8 @@ values.sorted().first        == values.sorted().first()
 
 Here `sorted()` remains parenthesized because it is not the final segment. A terminal method that requires an
 argument still receives zero authored arguments and therefore has exactly the same contract outcome as its
-parenthesized zero-argument spelling: `values.drop_front` equals `values.drop_front()`, not
-`values.drop_front(1)`. The following do not become calls under ADR 0033:
+parenthesized zero-argument spelling: `values.contains` equals `values.contains()`, not
+`values.contains("x")`. The following do not become calls under ADR 0033:
 
 ```text
 return value                 # general helper call still requires return(value)

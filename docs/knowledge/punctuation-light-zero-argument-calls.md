@@ -13,7 +13,7 @@ answers:
 date: 2026-07-13
 status: confirmed
 tags: [dsl, actionir, calls, control-flow, syntax, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.16.0 read-only source audit and ADR 0033 establish the narrow decision. FUTURE-PARITY-BACKLOG.16.1 adds linkedspec-punctuation-light-zero-arg-v1: six standalone AST-equivalence cases, four terminal receiver cases, three retained identifiers, six negative syntax cases, two method-resolution cases, and a deterministic future fixture returning {result: yes, picked: a, count: 2}. Its independent checker proves bare/parenthesized normalization, final-only receiver recognition, condition/helper/trailing-block exclusions, ordinary-identifier retention, existing method-contract delegation, exact fixture rendering/evaluation, and three drift mutations. Canonical local CI owns the checker. Backend admission remains future under .16.2-.16.7."
+evidence: "FUTURE-PARITY-BACKLOG.16.0 read-only source audit and ADR 0033 establish the narrow decision. FUTURE-PARITY-BACKLOG.16.1 adds linkedspec-punctuation-light-zero-arg-v1: six standalone AST-equivalence cases, four terminal receiver cases, three retained identifiers, six negative syntax cases, two method-resolution cases, and a deterministic future fixture returning {result: yes, picked: a, count: 2}. Its independent checker proves bare/parenthesized normalization, final-only receiver recognition, condition/helper/trailing-block exclusions, ordinary-identifier retention, existing method-contract delegation, exact fixture rendering/evaluation, and three drift mutations. FUTURE-PARITY-BACKLOG.16.2.0 calibrates the required-argument method case to contains after proving drop_front permits zero authored receiver arguments. Canonical local CI owns the checker. Backend admission remains future under .16.2.1-.16.7."
 reverify: "python3 tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl"
 ---
 
@@ -43,3 +43,4 @@ checker is `tools/check_punctuation_light_zero_arg_contract.py` and is wired int
 - ADR: `docs/decisions/0033-punctuation-light-zero-argument-calls.md`
 - Tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md`, design leaf `.16.0` and contract leaf `.16.1`
 - Related: [[terse-call-spacing-contract]]
+- Arity calibration: [[punctuation-light-receiver-arity-calibration]]

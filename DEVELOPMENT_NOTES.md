@@ -1,11 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.2.0` — receiver arity must exclude the implicit receiver): The neutral
+  contract initially used `.drop_front()` as a required-argument rejection example. A required toolbox preflight
+  disproved that assumption: `call_spec_handler_subst` lowers it as the established default-one operation.
+  `MethodLowering.pm` records function-form `drop_front` arity `[1,2]`, which becomes authored receiver arity
+  `[0,1]` after subtracting the value left of the dot. `contains` is function-form `[2,2]`, hence receiver arity
+  `[1,1]`, and `.contains()` follows the existing unsupported-helper rejection. The v1 contract now uses
+  `contains`; no syntax rule, fixture, helper behavior, or backend code changed. This is why executable neutral
+  examples must be calibrated against the reference contract table before a backend consumes them.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.1` — neutral contract before parser edits): A punctuation-light spelling
   is safest when its boundary is executable independently of every backend. The v1 contract treats only the six
   named standalone markers as governed aliases and permits a bare generic receiver call only in the final segment.
   The latter supplies zero authored arguments; it does not bypass the existing method arity resolver. Thus
-  `values.count` matches `values.count()`, while `values.drop_front` receives the same existing rejection as
-  `values.drop_front()`. Ordinary bare identifiers remain value reads. Parenthesis-free condition headers,
+  `values.count` matches `values.count()`, while `values.contains` receives the same existing rejection as
+  `values.contains()`. Ordinary bare identifiers remain value reads. Parenthesis-free condition headers,
   general calls, argument-bearing calls, intermediate bare receiver segments, and receiver trailing blocks remain
   separate invalid classes. The future fixture exercises all six markers without depending on unresolved `next`
   runtime drift: `next` is parsed in an unentered `while(false)` body. Three checker mutations prove that marker
