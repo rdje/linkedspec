@@ -149,14 +149,14 @@ set(items, []);                     # replaces items with an empty array value
 set(meta, {});                      # replaces meta with an empty hash value
 ```
 
-Older sources may use explicit aggregate selectors:
+Temporary compatibility parsing still recognizes the retired aggregate-selector spellings:
 
 ```text
 set(array(items), [value]);
 set(hash(meta), { field : value });
 ```
 
-Those exact selector shapes are migration-only. New source uses a bare binding for reads, assignment, and mutation;
+Those exact selector shapes are migration-only and no tracked `.spec` file uses them. New source uses a bare binding for reads, assignment, and mutation;
 a bare variable may hold an array or harray value:
 
 ```text
@@ -176,8 +176,8 @@ old and partially migrated sources continue to run. They do not define a second 
 > post-assignment typed value of `name`, so receiver methods can chain from it. If `array(value)` was intended to
 > construct a one-element array rather than select storage, write `[value]`. Zero/multi/quoted/computed
 > `array(...)` and valid key/value `hash(...)` calls remain ordinary constructors in contract version 1. The old
-> selector forms are still documented here only because non-shipped tracked fixtures and corpora have not completed
-> the dependency-ordered migration yet. The 15 affected shipped specs are already selector-free.
+> selector forms are shown here only to explain compatibility while embedded test/tool/backend source strings
+> complete migration under `.12.1.7.3`. Every tracked `.spec` file is already selector-free.
 
 The Perl, Rust, Dart, Julia, and Lua backends now execute those selector-free replacements. Their
 bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
@@ -194,8 +194,8 @@ answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 ```
 
 Exact selector rejection is intentionally later than backend enablement: all five backends now execute the same
-bare forms and the 15 affected shipped specs have migrated; remaining tracked fixtures/corpora migrate next, and
-only then does each backend reject
+bare forms and every tracked `.spec` file has migrated. Embedded source strings migrate next, and only then does
+each backend reject
 `array(IDENTIFIER)` / `hash(IDENTIFIER)`. This ordering is migration safety, not an unresolved language decision.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is

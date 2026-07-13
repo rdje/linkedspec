@@ -4,10 +4,10 @@ substitute_top::   I        {retv = undef; word_items = []}
  -> raw_string              {retv = call(raw_string)}
  -> substitute_statement2[1] {print("(HLinkSubst) -E- Dangling closing bracket\n"); exit_now(1)}
 
- LE {push(array(word_items), retv)}
+ LE {push(word_items, retv)}
  LX {
-     if(is_nonempty(array(word_items)));
-       return(copy(array(word_items)));
+     if(is_nonempty(word_items));
+       return(copy(word_items));
      else();
        return_undef();
      endif()

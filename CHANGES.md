@@ -1,4 +1,19 @@
 # CHANGES
+
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate file-backed selector fixtures
+
+Removed the remaining 390 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` selectors from 67 file-backed capability,
+oracle, and corpus specs. All tracked `*.spec` files now scan at zero exact selectors; capability fixtures and
+their Rust mirrors remain byte-identical, and the three intentional one-element constructions now use `[undef]`.
+
+Full-corpus execution exposed migration seams that focused enablement could not: rule-local `I` initializer state,
+implicit empty rule accumulators, Rust action-edge fluent push storage, static rule-name precedence, and explicit
+typed bindings versus descriptor aliases. Rust, Dart, and Julia now preserve these selector-free behaviors with
+permanent uniform-binding tests. Perl live probes preserve the affected EBNF, recursive, and traversal results;
+Rust passes both 105-case interpreted and generated corpora, Dart and Julia pass their complete 105-case gates,
+and PUC Lua/LuaJIT retain 85/85 while validating the exact manifest. Embedded source strings remain owned by
+`.12.1.7.3`; the language decision is complete and hard rejection follows migration. Canonical capability remains
+60/0/0, CLI passes 61x2, and Phase 0 passes `1..1031` in 574 seconds.
 Detailed technical history of changes prepared for commit.
 
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.1 — migrate shipped aggregate selectors

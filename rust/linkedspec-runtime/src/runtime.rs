@@ -832,6 +832,11 @@ impl RuntimeContext {
         let Some(name) = Self::descriptor_scalar_name(value) else {
             return;
         };
+        if matches!(self.bare_kinds.get(name), Some(RuntimeVarKind::Scalar))
+            && !matches!(self.get_scalar(name), RuntimeValue::Undef)
+        {
+            return;
+        }
         self.scalars.insert(name.to_string(), value.clone());
         self.descriptor_scalar_bare_reads.insert(name.to_string());
     }

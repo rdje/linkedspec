@@ -1,17 +1,18 @@
 ---
 id: julia-recursive-rule-local-reset-scope
-title: Julia scopes explicit aggregate resets per recursive rule invocation
+title: Julia scopes typed initializers per recursive rule invocation
 answers:
   - why did Julia recursive sexpr leak child values into parent accumulators
   - does Julia set array reset stay local to a rule invocation
   - does Julia set hash reset stay local to a rule invocation
   - do Julia undeclared child mutations remain caller visible
+  - does Julia treat a missing compiled rule name as an empty accumulator
   - how did Julia close the recursive top rule corpus fixtures
   - what does JULIA-BACKEND-PARITY.6.2.4.3 prove
 date: 2026-07-10
 status: current
 tags: [julia, runtime, recursion, rule-scope, stores, corpus, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.4.3 traces Julia's recursive sexpr frames and proves each I-block set(array(items), []) overwrote one shared typed-store binding. _RuntimeExecutionContext now carries a first-write snapshot map per _execute_runtime_rule! invocation. Explicit set(array(name), ...), set(hash(name), ...), and split(array(name), source, delimiter) replacement capture prior scalar/array/hash representations and restore them on rule exit. Ordinary undeclared push/append mutations remain caller-visible; active registered user functions skip this tracker because they already swap whole stores. Focused array/hash reset and shared-mutation tests pass; all three recursive top-rule fixtures pass; full Pkg.test() passes with 785 assertions; the shipped-smoke window is 21/31; status is runtime-corpus-recursive-rule-scope."
+evidence: "JULIA-BACKEND-PARITY.6.2.4.3 proves recursive aggregate reset scope through a first-write snapshot map per rule invocation. FUTURE-PARITY-BACKLOG.12.1.7.2 migrates recursive fixtures to bare I assignments and extends that scope to direct initializer assignment; an otherwise absent binding named for a compiled rule reads as its empty implicit array accumulator. Permanent uniform-binding tests, the complete package gate, and all 105 corpus cases pass."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case top_rule_body_recursion_sexpr --case top_rule_lx_recursion_nested --case top_rule_lx_recursion_sequence"
 ---
 
@@ -24,6 +25,10 @@ The runtime now creates a binding-snapshot map for each rule invocation. On the 
 name, it records every existing scalar/array/hash representation. Rule exit removes the local value and restores
 the caller snapshot. The reset seam includes explicit array/hash `set(...)` and explicit array-target `split(...)`
 replacement.
+
+Selector-free recursive sources now use `I { items = [] }`; direct initializer assignments enter the same
+rule-invocation snapshot scope. When a compiled rule name has no explicit binding, a bare read yields the rule's
+empty implicit array accumulator rather than an unrelated missing scalar.
 
 The boundary is intentionally narrow:
 

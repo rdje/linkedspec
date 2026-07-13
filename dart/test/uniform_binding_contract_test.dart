@@ -194,6 +194,40 @@ Done::
       ],
     );
   });
+
+  test('I assignment scopes recursive typed bindings per invocation', () {
+    _expectNativeAndGenerated(
+      r'''
+top::
+ -> sexpr { return(call(sexpr)) }
+
+sexpr: /\(/ /\)/ I { items = [] }
+ -> sexpr { push(items, call(sexpr)) }
+ -> atom { push(items, call(atom)) }
+ -> sexpr[1] { return(copy(items)) }
+
+atom: /[A-Za-z0-9]+/ I.return(entry_text())
+''',
+      [
+        'a',
+        ['b'],
+        'c',
+      ],
+      input: '(a(b)c)',
+    );
+  });
+
+  test('bare empty rule accumulator reads as an array value', () {
+    _expectNativeAndGenerated(
+      r'''
+Top::
+ -> Child { return(copy(Child)) }
+Child: /x/
+''',
+      <Object?>[],
+      input: 'x',
+    );
+  });
 }
 
 CompiledSpec _compile(String source) => compileSpec(parseSpec(source));

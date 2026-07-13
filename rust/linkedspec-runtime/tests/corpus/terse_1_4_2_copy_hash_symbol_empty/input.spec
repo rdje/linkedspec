@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { return(copy(hash(m))) }
+ /x/ -> Done { m = {}; return(copy(m)) }
 
 Done::
  /[a-z]+/

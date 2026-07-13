@@ -988,6 +988,13 @@ final class LinkedSpecRuntimeEngine {
             'cursor=${context.cursorCodeUnit}',
         LinkedSpecTraceLevel.high,
       );
+      if (lifecycle == 'I') {
+        for (final statement in payload.actionAst.statements) {
+          if (statement.expr case ActionAssignScalarExpr(:final name)) {
+            context.recordRuleLocalBinding(name);
+          }
+        }
+      }
       final result = _executeActionBlock(
         payload.actionAst,
         context,
@@ -6679,6 +6686,9 @@ Object? _bindingValueFor(_RuntimeExecutionContext context, String name) {
   }
   if (context.hashes.containsKey(name)) {
     return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
+  }
+  if (context.engine.compiledSpec.rule(name) != null) {
+    return const <Object?>[];
   }
   return null;
 }

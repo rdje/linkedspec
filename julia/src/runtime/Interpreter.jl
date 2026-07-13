@@ -1001,6 +1001,13 @@ function _execute_runtime_lifecycle!(
             "rule=$(rule.label) lifecycle=$lifecycle line=$(payload.line) cursor=$(context.cursor_codeunit)",
             LinkedSpecTraceHigh,
         )
+        if lifecycle == "I"
+            for statement in payload.action_ast.statements
+                if statement.expr isa ActionAssignScalarExpr
+                    _record_runtime_rule_local_binding!(context, statement.expr.name)
+                end
+            end
+        end
         action_return = _execute_runtime_action_block!(
             engine,
             payload.action_ast,
@@ -1811,7 +1818,12 @@ function _evaluate_runtime_action_expr!(
         if expr.name == "retv"
             return _read_runtime_retv!(engine, context, current_edge)
         end
-        return _runtime_copy(_read_runtime_store(context, expr.name))
+        value = _read_runtime_store(context, expr.name)
+        if value === nothing && !_runtime_binding_present(context, expr.name) &&
+                compiled_rule(engine.compiled_spec, expr.name) !== nothing
+            return Any[]
+        end
+        return _runtime_copy(value)
     elseif expr isa ActionArrayLiteralExpr
         result = Any[]
         for item in expr.items
@@ -5332,7 +5344,12 @@ end
 function _copy_runtime_argument(engine, expr, context, rule_label, current_edge)
     name = _runtime_variable_name(expr)
     if name !== nothing
-        return _runtime_copy(_read_runtime_store(context, name))
+        value = _read_runtime_store(context, name)
+        if value === nothing && !_runtime_binding_present(context, name) &&
+                compiled_rule(engine.compiled_spec, name) !== nothing
+            return Any[]
+        end
+        return _runtime_copy(value)
     end
     return _runtime_copy(_evaluate_runtime_action_expr!(
         engine,

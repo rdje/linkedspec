@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(items)) }
 
 Done::
  /[a-z]+/

@@ -233,4 +233,32 @@ Done::
             Any["a", Any["b", "a"]],
         )
     end
+
+    @testset "I assignment scopes recursive typed bindings per invocation" begin
+        _expect_uniform_binding_native_and_generated(
+            raw"""top::
+ -> sexpr { return(call(sexpr)) }
+
+sexpr: /\(/ /\)/ I { items = [] }
+ -> sexpr { push(items, call(sexpr)) }
+ -> atom { push(items, call(atom)) }
+ -> sexpr[1] { return(copy(items)) }
+
+atom: /[A-Za-z0-9]+/ I.return(entry_text())
+""",
+            Any["a", Any["b"], "c"];
+            input = "(a(b)c)",
+        )
+    end
+
+    @testset "bare empty rule accumulator reads as an array value" begin
+        _expect_uniform_binding_native_and_generated(
+            raw"""Top::
+ -> Child { return(copy(Child)) }
+Child: /x/
+""",
+            Any[];
+            input = "x",
+        )
+    end
 end

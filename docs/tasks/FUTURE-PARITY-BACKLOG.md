@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (shipped selector migration `.12.1.7.1` complete; neutral/oracle/corpus `.12.1.7.2` active).
+- Last updated: `2026-07-12` (all file-backed `.spec` selector migration `.12.1.7.2` complete; embedded-source `.12.1.7.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2816,11 +2816,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.7.1 - migrate shipped aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7.2`
-  Status: `active`
+  Status: `done`
   Goal: Migrate neutral/oracle/corpus `.spec` fixtures and regenerate only derived expectations.
+  Verification: **PASS 2026-07-12.** The boundary-correct 390 occurrences in 67 files are removed: five in two
+    capability fixtures, 366 in 62 Rust-oracle inputs, and 19 in three legacy corpus inputs. All tracked `*.spec`
+    files now scan at zero exact selectors, capability mirrors are byte-identical, and the three intended
+    one-element constructions use `[undef]`. Full migration exposed and repaired rule-local `I` initializer scope
+    and empty implicit rule accumulators on Rust/Dart/Julia, plus Rust fluent action push and explicit-binding versus
+    descriptor-alias behavior; permanent uniform-binding tests lock those seams. Perl live probes preserve the
+    EBNF, recursive, and traversal values; Rust passes 105/105 interpreted and 105/105 generated corpus cases plus
+    its full package gate; Dart and Julia pass their complete gates and 105/105 corpora; PUC Lua and LuaJIT each
+    pass 85/85 while validating the exact 105-case manifest. Canonical doctrines/contracts, capability 60/0/0,
+    CLI 61x2, and Phase 0 `1..1031` pass in 574 seconds; mdBook/KM/whitespace pass.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.7.2 - migrate file-backed selector fixtures`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7.3`
-  Status: `pending`
+  Status: `active`
   Goal: Migrate embedded test/tool/backend source strings and verify zero executable selector-shaped sources.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8`
@@ -2998,6 +3009,24 @@ before implementation.
 - [x] **LOCKSTEP** — Shipped specs/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
   shipped migration complete and neutral/oracle/corpus migration `.12.1.7.2` as next.
 
+### `FUTURE-PARITY-BACKLOG.12.1.7.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the boundary-correct 390-occurrence/67-file baseline: five occurrences in
+  two capability fixtures, 366 in 62 neutral Rust-oracle inputs, and 19 in three legacy corpus inputs; identify
+  intended `[undef]` one-element construction separately from binding selectors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Treat capability fixtures and their mirrored oracle inputs as one source
+  contract, preserve quoted/multi/computed constructors, and distinguish scalar-held typed array/harray reads from
+  explicit construction before mechanical replacement.
+- [x] **FIX** — Remove every exact selector from file-backed capability/oracle/corpus `.spec` inputs, using bare
+  bindings for reads/targets/receivers and `[undef]` for the three intended one-element arrays; regenerate only
+  expectations or classifications whose derived bytes genuinely change.
+- [x] **ADDRESSED (verified)** — All tracked file-backed `.spec` inputs scan at zero exact selectors; capability
+  mirrors agree; Perl/Rust/Dart/Julia/Lua corpus results preserve their expected values.
+- [x] **NO REGRESSION** — Strict uniform/capability/generated/native contracts, full corpus and generated-source
+  breadth, CLI, doctrines/KM/mdBook/whitespace, and the canonical local gate reach their true stops.
+- [x] **LOCKSTEP** — Corpus inputs/derived expectations/task/index, roadmaps, README/book, KM, changes/notes/live,
+  and memory identify file-backed migration complete and embedded source-string migration `.12.1.7.3` as next.
+
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Duck-typed values coexist with legacy wrapper-selected scalar/aggregate namespaces,
@@ -3123,7 +3152,8 @@ before implementation.
 | 89 | `FUTURE-PARITY-BACKLOG.12.1.6` | `done` | Both Lua ABIs consume the one-binding contract before tracked source migration. |
 | 90 | `FUTURE-PARITY-BACKLOG.12.1.7` | `active` | All backends are enabled; migrate every tracked selector-shaped source before hard rejection. |
 | 91 | `FUTURE-PARITY-BACKLOG.12.1.7.1` | `done` | All 210 exact shipped occurrences are removed; reference/generated behavior and full canonical gates pass. |
-| 92 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `active` | Migrate neutral/oracle/corpus sources and regenerate only derived expectations. |
+| 92 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `done` | All 390 exact file-backed occurrences are removed from 67 capability/oracle/corpus specs; all tracked `.spec` files scan at zero. |
+| 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `active` | Migrate embedded test/tool/backend source strings and prove zero executable selector sources. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3816,6 +3846,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.5` | Permanent native/generated 27-assertion contract; complete Julia 1,311 assertions, CLI 61x2, and 105 corpus; canonical doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030`/865s; KM/governance/whitespace/mdBook. | PASS. Julia mutations use one typed binding, return updated values, preserve static precedence, and reject wrong kinds; Lua `.12.1.6` activates without selector migration. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.6` | Nine exact uniform-binding cases; complete PUC Lua and LuaJIT 85/85; exact 105-case manifest/scaffold CLI; immediately prior canonical doctrines/contracts, 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030`/865s; KM/governance/whitespace/mdBook. | PASS. Lua is the fifth enabled backend; bare mutations/results, precedence, diagnostics, and chaining pass before shipped-source migration `.12.1.7.1`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.1` | Boundary-correct inventory; 15 shipped specs; Perl pure-helper read seam; focused live/generated contract; all descriptors; CLI 61x2; canonical doctrines/contracts/capability and Phase 0 `1..1031`/573s; mdBook/KM/whitespace. | PASS. Shipped exact selectors fall 210 to zero; 390 tracked occurrences remain for `.12.1.7.2-.3`. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.2` | 390 exact forms/67 file-backed specs; three `[undef]` constructions; Perl live EBNF/recursive/traversal probes; Rust native/generated 105 corpora and full gate; Dart/Julia full gates and 105 corpora; Lua dual-ABI 85/85 plus 105-manifest validation; canonical 60/0/0, CLI 61x2, Phase 0 `1..1031`/574s; docs/KM/governance. | PASS. Every tracked `.spec` file is selector-free; exposed initializer/accumulator/fluent-push/descriptor seams are permanently locked and embedded-source `.12.1.7.3` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |

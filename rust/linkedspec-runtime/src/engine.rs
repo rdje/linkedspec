@@ -2803,11 +2803,12 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
-        let (child_label, child_regex_idx, target_label) = match args.len() {
+        let (child_label, child_regex_idx, target_label, bare_target) = match args.len() {
             0 => (
                 entry.child_label.clone(),
                 entry.child_regex_idx,
                 rule_label.to_string(),
+                false,
             ),
             1 => {
                 let target_value = self.eval_expr(args[0].value(), ctx, rule_label)?;
@@ -2815,6 +2816,7 @@ impl Engine {
                     entry.child_label.clone(),
                     entry.child_regex_idx,
                     self.resolve_array_target(args, &target_value, true),
+                    bare_variable_target_arg(&args[0]).is_some(),
                 )
             }
             _ => {
@@ -2830,13 +2832,18 @@ impl Engine {
                     child_label,
                     child_regex_idx,
                     self.resolve_array_target(&args[1..], &target_value, true),
+                    bare_variable_target_arg(&args[1]).is_some(),
                 )
             }
         };
 
         let child_retv = self.execute_action_edge_child_rule(&child_label, child_regex_idx, ctx)?;
         ctx.set_retv(child_retv.clone());
-        ctx.push_array_value(&target_label, child_retv);
+        if bare_target {
+            let _ = ctx.push_bare_array_value(&target_label, child_retv)?;
+        } else {
+            ctx.push_array_value(&target_label, child_retv);
+        }
         Ok(())
     }
 
@@ -2876,6 +2883,13 @@ impl Engine {
             format!("rule={rule_label} phase={phase} pos={}", ctx.pos),
             TraceLevel::MEDIUM,
         );
+        if phase == "I" {
+            for statement in &block.statements {
+                if let linkedspec_core::expr::Expr::AssignScalar { name, .. } = &statement.expr {
+                    ctx.record_rule_local_binding(name);
+                }
+            }
+        }
         let result = self.execute_block(block, ctx, rule_label);
         match &result {
             Ok(()) => {

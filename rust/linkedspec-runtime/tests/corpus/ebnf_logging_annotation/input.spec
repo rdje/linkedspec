@@ -12,7 +12,7 @@ grammar_file:: I {
 
 LX {
   if(rule_header);
-    push(array(rules), array(rule_header, flat_array(rule)));
+    push(rules, array(rule_header, flat_array(rule)));
   endif();
 
   return(array(flat_array(includes), flat_array(rules)))
@@ -23,11 +23,11 @@ LX {
 
 -> grammar_rule   {
   if(rule_header);
-    push(array(rules), array(rule_header, flat_array(rule)));
+    push(rules, array(rule_header, flat_array(rule)));
   endif();
 
-  set(array(rule), array(flat_array(semantic_annotations)));
-  set(array(semantic_annotations), array());
+  set(rule, array(flat_array(semantic_annotations)));
+  set(semantic_annotations, array());
 
   rule_header = call(grammar_rule);
   on = 1
@@ -184,8 +184,8 @@ probability: /@\d+%?/             I {value = entry_text(); substr(value, "@|%", 
 regex: /(?<!\\)\/.+?(?<!\\)\//    I {value = entry_text(); substr(value, "^/|/$", "", go); return(array("regex", value))}
 whitespace: /\s+/
 comment: /#.*/
-include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(args, "^\s*(?:include_)?dir\(\s*", "", g); substr(args, "\s*\)\s*$", "", g); parts = []; split(array(parts), args, /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array("include_dir", copy(array(parts))))}
-include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(args, "^\s*(?:include(?:_file)?|file)\(\s*", "", g); substr(args, "\s*\)\s*$", "", g); parts = []; split(array(parts), args, /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array("include_file", copy(array(parts))))}
+include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(args, "^\s*(?:include_)?dir\(\s*", "", g); substr(args, "\s*\)\s*$", "", g); parts = []; split(parts, args, /\s*,\s*/); trim_each(parts); filter_nonempty(parts); return(array("include_dir", copy(parts)))}
+include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(args, "^\s*(?:include(?:_file)?|file)\(\s*", "", g); substr(args, "\s*\)\s*$", "", g); parts = []; split(parts, args, /\s*,\s*/); trim_each(parts); filter_nonempty(parts); return(array("include_file", copy(parts)))}
 
 semantic_annotation: /@(\w+)\s*:\s*/
 I {c = capture_until_boundary(semantic_annotation, grammar_rule); substr(c, "\s*$", "", o); substr(c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), c)))}
@@ -199,16 +199,16 @@ logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*
 -> comma {
   logging_annotation_part = trim(capture_slice());
   if(is_nonempty(logging_annotation_part));
-    push(array(logging_annotation), logging_annotation_part);
+    push(logging_annotation, logging_annotation_part);
   endif();
   start_capture_slice()
 }
 -> logging_annotation[1] {
   logging_annotation_part = trim(capture_slice());
   if(is_nonempty(logging_annotation_part));
-    push(array(logging_annotation), logging_annotation_part);
+    push(logging_annotation, logging_annotation_part);
   endif();
-  return(array("logging_annotation", array(logging_name, copy(array(logging_annotation)))))
+  return(array("logging_annotation", array(logging_name, copy(logging_annotation))))
 }
 
 comma: /\s*,\s*/

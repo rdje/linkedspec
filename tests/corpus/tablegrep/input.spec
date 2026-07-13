@@ -10,7 +10,7 @@ I {
 }
 
 LX {
- if(is_empty(array(internal)));
+ if(is_empty(internal));
   return_undef();
  endif();
  return(copy(internal))
@@ -26,7 +26,7 @@ LE {
   exit_now(1);
  endif();
  
- push(array(internal), retv);
+ push(internal, retv);
  prev_node_type = retv["type"]
 }
 #======== End Of grep ========
@@ -38,11 +38,11 @@ group:	/\(/ /\)/
  -> or_op		{retv = call(or_op)}
  -> and_op		{retv = call(and_op)}
  -> group[1]		{
-  if(is_empty(array(internal)));
+  if(is_empty(internal));
    print("\\nERROR: ** Empty **  GROUP\\n");
    exit_now(2);
   endif();
-  return({ "type" : "GROUP", "group" : array(internal) })
+  return({ "type" : "GROUP", "group" : internal })
  }
 
 I {
@@ -61,7 +61,7 @@ LE {
   exit_now(1);
  endif();
 
- push(array(internal), retv);
+ push(internal, retv);
  prev_node_type = retv["type"]
 }
 #==========

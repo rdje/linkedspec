@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { return(array(undef)) }
+ /x/ -> Done { return([undef]) }
 
 Done::
  /[a-z]+/

@@ -277,3 +277,68 @@ Done::
 
     assert_native_and_generated(source, TOP_DONE_PLAN, json!(["a", ["b", "a"]]));
 }
+
+#[test]
+fn action_edge_fluent_push_updates_the_bare_typed_binding() {
+    let source = r#"Top:: I { items = [] }
+ -> Word.push(Word, items)
+ -> Reset { set(items, []) }
+ -> Word.push(Word, items)
+ LX { return(items) }
+Word: /x/ I.return(entry_text())
+Reset: /,/
+"#;
+
+    let plan = &[
+        GeneratedPlanRow {
+            label: "Top",
+            family: "default",
+        },
+        GeneratedPlanRow {
+            label: "Word",
+            family: "default",
+        },
+        GeneratedPlanRow {
+            label: "Reset",
+            family: "default",
+        },
+    ];
+    let expected = json!(["x"]);
+    assert_eq!(
+        Engine::new(compile_source(source))
+            .execute_value("x,x", &ExecutionOptions::new())
+            .expect("native action-edge fluent push fixture"),
+        expected
+    );
+    let compiled_json = serde_json::to_string(&compile_source(source)).expect("serialize fixture");
+    assert_eq!(
+        execute_generated_parser_v1(
+            &compiled_json,
+            plan,
+            "x,x",
+            "uniform-binding-action-edge-push.spec"
+        )
+        .expect("generated action-edge fluent push fixture"),
+        expected
+    );
+}
+
+#[test]
+fn explicit_binding_wins_over_an_implicit_descriptor_tag() {
+    let source = r#"Top:: I { rule = [] }
+ /x/ -> Child { child = call(Child); push(rule, "kept"); return(rule) }
+Child::
+ /x/ I.return(["rule", "descriptor"])
+"#;
+    let plan = &[
+        GeneratedPlanRow {
+            label: "Top",
+            family: "default",
+        },
+        GeneratedPlanRow {
+            label: "Child",
+            family: "default",
+        },
+    ];
+    assert_native_and_generated(source, plan, json!(["kept"]));
+}

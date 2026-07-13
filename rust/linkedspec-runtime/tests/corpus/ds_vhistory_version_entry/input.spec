@@ -5,7 +5,7 @@
 # --------------------------------------------
 
 vhistory::  I {
-vhistory = [];
+vhistory_items = [];
 capt = [];
 object_hier = [];
 cur_object = undef;
@@ -14,41 +14,41 @@ entry_tag = undef;
 current_object_name = undef
 }
 LX  {
- if(is_nonempty(array(capt)));
-  first_capt = array(capt).first();
+ if(is_nonempty(capt));
+  first_capt = capt.first();
   if(str_eq(first_capt[0], "?branch:"));
    entry_tag = "?branch_entry:";
   else();
    entry_tag = "?version_entry:";
   endif();
-  push(array(object_hier), array(entry_tag, copy(array(capt))));
+  push(object_hier, array(entry_tag, copy(capt)));
  endif();
 
- if(is_nonempty(array(object_hier)));
+ if(is_nonempty(object_hier));
   current_object_name = cur_object[1];
-  push(array(vhistory), array("?object:", current_object_name, copy(array(object_hier))));
+  push(vhistory_items, array("?object:", current_object_name, copy(object_hier)));
  endif();
 
- return(array("?ds_vhistory:", copy(array(vhistory))))
+ return(array("?ds_vhistory:", copy(vhistory_items)))
 } 
 
 -> object             {
-  if(is_nonempty(array(capt)));
-   first_capt = array(capt).first();
+  if(is_nonempty(capt));
+   first_capt = capt.first();
    if(str_eq(first_capt[0], "?branch:"));
     entry_tag = "?branch_entry:";
    else();
     entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(entry_tag, copy(array(capt))));
-   set(array(capt), array());
+   push(object_hier, array(entry_tag, copy(capt)));
+   set(capt, array());
 
   endif();
 
-  if(is_nonempty(array(object_hier)));
+  if(is_nonempty(object_hier));
    current_object_name = cur_object[1];
-   push(array(vhistory), array("?object:", current_object_name, copy(array(object_hier))));
-   set(array(object_hier), array());
+   push(vhistory_items, array("?object:", current_object_name, copy(object_hier)));
+   set(object_hier, array());
   endif();
 
   cur_object = call(object);
@@ -57,28 +57,28 @@ LX  {
 
 
 -> separator          {
-  if(is_nonempty(array(capt)));
-   first_capt = array(capt).first();
+  if(is_nonempty(capt));
+   first_capt = capt.first();
    if(str_eq(first_capt[0], "?branch:"));
     entry_tag = "?branch_entry:";
    else();
     entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(entry_tag, copy(array(capt))));
-   set(array(capt), array());
+   push(object_hier, array(entry_tag, copy(capt)));
+   set(capt, array());
   endif();
 }
 
 
--> branch             {push(array(capt), call(branch))}
--> version            {push(array(capt), call(version))}
--> branch_tags        {push(array(capt), call(branch_tags))}
--> version_tags       {push(array(capt), call(version_tags))}
--> date               {push(array(capt), call(date))}
--> author             {push(array(capt), call(author))}
--> comment            {push(array(capt), call(comment))}
--> manifest           {push(array(capt), call(manifest))}
--> derived_from       {push(array(capt), call(derived_from))}
+-> branch             {push(capt, call(branch))}
+-> version            {push(capt, call(version))}
+-> branch_tags        {push(capt, call(branch_tags))}
+-> version_tags       {push(capt, call(version_tags))}
+-> date               {push(capt, call(date))}
+-> author             {push(capt, call(author))}
+-> comment            {push(capt, call(comment))}
+-> manifest           {push(capt, call(manifest))}
+-> derived_from       {push(capt, call(derived_from))}
 
 
 

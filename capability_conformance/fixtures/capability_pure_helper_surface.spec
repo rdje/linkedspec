@@ -1,12 +1,12 @@
 Top::
  -> Value .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Value:
  /x/
  I {
-  set(array(upper), ["a", "Bc"])
-  uppercase_each(array(upper))
+  set(upper, ["a", "Bc"])
+  uppercase_each(upper)
   return(hash(
    "coalesce", coalesce(undef, "fallback"),
    "concat_arrays", concat_arrays([1, 2], [3]),
@@ -18,7 +18,7 @@ Value:
    "has_key", has_key({ "a" : 1 }, "a"),
    "slice", slice(["a", "b", "c", "d"], 1, 2),
    "take_last", take_last(["a", "b", "c"], 2),
-   "uppercase_each", copy(array(upper)),
+   "uppercase_each", copy(upper),
    "num_abs", num_abs(-3),
    "num_avg", num_avg([2, 4, 6]),
    "num_ceil", num_ceil(2.2),

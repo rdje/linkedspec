@@ -1,16 +1,17 @@
 ---
 id: dart-recursive-dispatch-rule-local-scope
-title: Dart resolves edge-only action regex dispatch and scopes explicit aggregate resets per rule invocation
+title: Dart resolves edge-only action dispatch and scopes typed initializers per rule invocation
 answers:
   - "why do Dart tclite fixtures pass"
   - "how does Dart resolve action edge regex indices"
   - "does Dart scope set array resets per recursive rule invocation"
   - "does Dart preserve undeclared child mutations across rule calls"
+  - "does Dart treat a missing compiled rule name as an empty accumulator"
   - "what does DART-BACKEND-PARITY.6.2.4.3 prove"
 date: 2026-07-09
 status: current
 tags: [dart, runtime, compiler, recursion, corpus, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.3 ports the Rust/Perl action-edge dependency model into Dart compiled state: every compiled action edge records regex_index, child_regex_index, and has_parent_regex; edge-only child regexes are resolved into the parent alternation; runtime dispatch executes every edge for the matched regex index. The same leaf makes explicit aggregate resets through set(array(name), ...) and set(hash(name), ...) rule-local by snapshotting the prior binding on first reset and restoring it on rule exit, while ordinary undeclared child mutations remain caller-visible. Focused compiler/runtime tests pass and the shipped parser-smoke window moves to 7/31 green with tclite_command_subst, tclite_double_quote, top_rule_body_recursion_sexpr, top_rule_lx_recursion_nested, top_rule_lx_recursion_sequence, pplugin_empty, and tkgui_empty passing."
+evidence: "DART-BACKEND-PARITY.6.2.4.3 ports the Rust/Perl action-edge dependency model and scopes explicit aggregate resets per rule invocation. FUTURE-PARITY-BACKLOG.12.1.7.2 migrates the recursive fixtures to bare I assignments and extends the same first-write scope to direct initializer assignment; an otherwise absent binding named for a compiled rule reads as its empty implicit array accumulator. Permanent native/generated uniform-binding tests and the complete 105-case corpus pass."
 reverify: "cd dart && dart test test/compiled_spec_test.dart test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true"
 ---
 
@@ -33,6 +34,10 @@ The rule-local aggregate reset boundary is deliberately narrow:
   caller-visible.
 - User functions keep their existing whole-store local execution model and do
   not participate in the enclosing rule-local reset tracker.
+
+Selector-free recursive sources use `I { items = [] }`; direct initializer assignments now enter that same
+rule-invocation scope. When a compiled rule name has no explicit binding yet, reading it yields the rule's empty
+implicit array accumulator, preserving accumulator-oriented rule bodies without a selector.
 
 Remaining failures after this leaf are not the tclite/default-mode or recursive
 top-rule value gap. Lispish still hits a deeper recursive PCRE `(?R)` construct

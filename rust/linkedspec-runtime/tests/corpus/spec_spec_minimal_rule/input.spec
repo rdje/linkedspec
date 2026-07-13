@@ -66,14 +66,14 @@
 
 spec_file::
  I {
-  set(array(paragraphs), array());
-  set(array(current), array());
+  set(paragraphs, array());
+  set(current, array());
   started = 0
  }
  -> rule_header {
   if(started) {
-   push(array(paragraphs), copy(array(current)));
-   set(array(current), array())
+   push(paragraphs, copy(current));
+   set(current, array())
   }
   started = 1;
   push(rule_header, current)
@@ -92,9 +92,9 @@ spec_file::
  -> comment          { next() }
  LX {
   if(started) {
-   push(array(paragraphs), copy(array(current)))
+   push(paragraphs, copy(current))
   }
-  return(copy(array(paragraphs)))
+  return(copy(paragraphs))
  }
 
 # ---- rule header: `Name:` (body rule) or `Name::` (top rule) + optional mode --

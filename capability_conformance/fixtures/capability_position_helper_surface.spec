@@ -1,6 +1,6 @@
 Top::
  -> Value .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Value:
  /(?<word>ab)/

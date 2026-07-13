@@ -1,4 +1,5 @@
 # LIVE ACHIEVEMENT STATUS
+
 Current execution status for interruption-safe batch workflow recovery.
 
 ## Active Batch
@@ -7,8 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate file-backed selector fixtures**
+  (DONE — embedded source-string migration `.12.1.7.3` active).
+
+  **Outcome:** Removed 390 exact selectors from 67 capability/oracle/corpus specs; every tracked `*.spec` file now
+  scans at zero. Three intentional one-element values use `[undef]`; capability mirrors remain byte-identical.
+
+  **Runtime closure:** Permanent Rust/Dart/Julia tests lock rule-local bare `I` initializers and implicit empty rule
+  accumulators; Rust additionally locks fluent action-edge push and explicit typed-binding precedence over a
+  descriptor alias. Static rule-name precedence remains intact.
+
+  **Proof:** Perl live probes preserve EBNF/recursive/traversal values; Rust passes 105/105 interpreted and generated
+  corpora plus its full gate; Dart and Julia pass complete gates and 105/105 corpora; PUC Lua and LuaJIT pass 85/85
+  while validating the 105-case manifest. Canonical capability is 60/0/0, CLI is 61x2, and Phase 0 passes
+  `1..1031` in 574 seconds. Embedded sources are the only migration surface left before rejection.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.1 — migrate shipped aggregate selectors**
-  (DONE — neutral/oracle/corpus migration `.12.1.7.2` active).
+  (DONE — handed off 390 file-backed occurrences to the now-complete `.12.1.7.2`).
 
   **Implementation:** All 210 exact forms are removed from the 15 affected shipped specs. Bare reads/mutations,
   `[undef]` one-element construction, and the VHDL scalar/array scratch split preserve intent. Perl pure helpers,
@@ -16,7 +32,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Proof:** Shipped scan is zero; all 21 descriptors compile with zero blockers/compatibility surfaces; focused
   live/generated binding proof passes; CLI passes 61x2; canonical doctrines/contracts/capability and Phase 0
-  `1..1031` pass in 573 seconds; mdBook/KM pass. Correct inventory is 600 baseline, 390 remaining.
+  `1..1031` pass in 573 seconds; mdBook/KM pass. Correct inventory was 600 baseline, with 390 then handed off.
 
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.6 — enable Lua uniform bindings**
   (DONE — all five backends enabled; shipped migration `.12.1.7.1` active).

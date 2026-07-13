@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.2 — migrate complete file-backed behavior, not just syntax): Moving all
+  390 remaining selectors out of 67 file-backed specs showed where wrappers had hidden runtime assumptions. An
+  `I { name = [] }` assignment is rule-invocation-local just like the prior explicit reset; a bare compiled rule
+  name may supply its empty implicit accumulator when otherwise unbound; static rule dispatch still precedes an
+  ambiguous bare `push`; and an explicit non-undef typed binding must not be overwritten by a descriptor alias.
+  Rust action-edge fluent mutation must use the same typed binding as ordinary mutation. Keep recursive fixtures
+  canonical with bare initializers and shape literals, avoid binding/rule name collisions, and use value-level
+  composition rather than resurrecting a selector to branch on a value kind.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.1 — pure reads must follow uniform mutation storage): Shipped-source
   migration proved that enabling bare mutations is insufficient if read-only helper fast paths still select host
   aggregates. In generated Perl, `$name` is the scalar-held typed binding; `@name`/`%name` are private legacy
