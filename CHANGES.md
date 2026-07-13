@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.5 — implement Julia zero-argument aliases
+
+Julia now recognizes exact bare `next` only as a complete statement and permits an omitted empty argument list
+only on the final generic receiver segment. Its existing control-head normalization already covers standalone
+`else`, `endif`, `default`, `endcase`, and `endswitch`. Bare and parenthesized spellings produce identical semantic
+typed AST nodes; value-position `next`, condition headers, ordinary calls, intermediate receiver segments, and
+receiver trailing blocks retain their prior meanings or failures.
+
+The unchanged neutral fixture returns `{"count":2,"picked":"a","result":"yes"}` through native execution,
+generated-plan execution, emitted ASCII-hex state reconstruction, and CLI runs for both spellings. The complete
+Julia gate passes 1,394 package assertions, primary CLI conformance, and corpus 105/105.
+
+Julia's pre-existing `.contains()` missing-argument result is `0`, as for `.contains()`; the punctuation-light
+alias preserves that outcome. Helper-normalization owner `.5` now records Rust, Dart, and Julia drift from Perl's
+arity rejection. Lua `.16.6` is next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.4 — implement Dart zero-argument aliases
 
 Dart now recognizes exact bare `next` only as a complete statement and permits an omitted empty argument list only

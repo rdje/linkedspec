@@ -1317,7 +1317,7 @@ table because its runtime behavior is to terminate the parser process.
 - **Signature**: `next()`
 - **Returns**: control flow — skips to next repetition.
 - **Behavior**: Skip the current repetition and advance to the next in repeated-rule loops. Consumes/recognizes input without appending a value.
-- **Syntax**: Perl, Rust, and Dart also accept standalone bare `next`; it is the same zero-argument operation as `next()`.
+- **Syntax**: Perl, Rust, Dart, and Julia also accept standalone bare `next`; it is the same zero-argument operation as `next()`.
   Keep `next()` in cross-backend source until `FUTURE-PARITY-BACKLOG.16` closes.
 
 ### `return(value)`

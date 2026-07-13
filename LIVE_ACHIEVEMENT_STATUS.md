@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.5 — implement Julia zero-argument aliases**
+  (DONE — exact Julia typed/native/generated/emitted/CLI consumption; Lua `.16.6` next).
+
+  **Result:** Exact statement-context recognition maps bare `next` to its parenthesized typed call while preserving
+  value-position `next`; existing control normalization supplies the other five standalone aliases. Final-only
+  receiver omission maps to the existing empty-argument fluent node and all exclusions remain narrow. The fixture
+  returns `{"count":2,"picked":"a","result":"yes"}` through native, generated-plan, emitted-state, and CLI
+  twins. The complete Julia gate passes 1,394 package assertions, primary CLI conformance, and corpus 105/105.
+  Julia's pre-existing `.contains()` result is delegated with Rust/Dart drift to helper owner `.5`.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.4 — implement Dart zero-argument aliases**
   (DONE — exact Dart typed/native/generated/emitted/CLI consumption; Julia `.16.5` next).
 

@@ -9,11 +9,12 @@ answers:
   - how is generated Julia source loaded in isolation
   - what generated-source work remains for Julia
   - what task owns Julia generated family execution
-date: 2026-07-11
+  - does Julia generated source preserve punctuation light aliases
+date: 2026-07-13
 status: current
 tags: [julia, codegen, source-emitter, unicode, utf8, embedding, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.3.4.1 adds julia/src/source/SourceEmitter.jl and julia/test/source_emitter_test.jl. Public compatibility/v1 emitters reconstruct effective ordered AST state, encode canonical JSON as strict UTF-8 bytes represented by ASCII hex, and emit a native module with metadata, direct execution, traced execution, and typed errors. An 18-assertion test loads valid/corrupt modules in caller-owned temporary projects with private writable depots and compiled modules disabled. .3.4.2 adds exact family-plan/direct execution and .3.4.3 adds exact accepted-subset admission; Julia passes at census 60/0/0."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\")'"
+evidence: "FUTURE-PARITY-BACKLOG.3.4.1 adds julia/src/source/SourceEmitter.jl and julia/test/source_emitter_test.jl. Public compatibility/v1 emitters reconstruct effective ordered AST state, encode canonical JSON as strict UTF-8 bytes represented by ASCII hex, and emit a native module with metadata, direct execution, traced execution, and typed errors. An 18-assertion test loads valid/corrupt modules in caller-owned temporary projects with private writable depots and compiled modules disabled. .3.4.2 adds exact family-plan/direct execution and .3.4.3 adds exact accepted-subset admission. FUTURE-PARITY-BACKLOG.16.5 proves punctuation-light typed AST equivalence plus exact native, generated-plan, emitted-state reconstruction, and CLI results; the complete 1,394/primary-CLI/105 gate passes."
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")'"
 ---
 
 Julia's public generated-source implementation starts in `julia/src/source/SourceEmitter.jl`.
@@ -43,6 +44,10 @@ Exact ten-family plan/direct execution and interpreter-first manifest-backed adm
 `FUTURE-PARITY-BACKLOG.4.3.2` additionally proves that canonical normalized JSON preserves the exact fixed-v1 /
 variadic-v2 function union. The emitted ASCII-hex payload reconstructs typed callable signatures and executes the
 same fixed-prefix/rest semantics without Julia splat dispatch.
+
+Punctuation-light zero-argument aliases reuse the same typed state rather than creating generated-only syntax.
+The `.16.5` contract reconstructs emitted ASCII-hex normalized state and returns the same exact fixture value as
+the native and generated-plan paths.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-interpreter-first-plan]],
 [[julia-compiled-spec-state]], [[julia-full-corpus-gate]], [[native-in-memory-backend-contract]],

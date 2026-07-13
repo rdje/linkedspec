@@ -63,7 +63,17 @@ end
 function parse_action_statement(source::AbstractString, base_start::Int = 0)
     text = String(source)
     trimmed = _action_trim_with_offsets(text, base_start)
-    expr = parse_action_expression(trimmed.text, trimmed.start)
+    expr = if trimmed.text == "next"
+        ActionCallExpr(
+            source = trimmed.text,
+            source_span = ActionSourceSpan(trimmed.start, trimmed.stop),
+            name = "next",
+            source_method = "next",
+            args = ActionArgument[],
+        )
+    else
+        parse_action_expression(trimmed.text, trimmed.start)
+    end
     return ActionStatement(
         source = trimmed.text,
         source_span = ActionSourceSpan(trimmed.start, trimmed.stop),
@@ -697,8 +707,14 @@ function _action_parse_fluent_chain(text::String, start::Int)
     receiver_segment = first(segments)
     receiver = _action_parse_expr_without_chain(receiver_segment.text, start + receiver_segment.start)
     calls = ActionFluentCall[]
-    for segment in segments[2:end]
-        call = _action_parse_fluent_call_segment(segment.text, start + segment.start, start + segment.stop)
+    for index in 2:length(segments)
+        segment = segments[index]
+        call = _action_parse_fluent_call_segment(
+            segment.text,
+            start + segment.start,
+            start + segment.stop;
+            allow_bare_identifier = index == length(segments),
+        )
         if call === nothing
             return ActionRawExpr(
                 source = text,
@@ -716,13 +732,28 @@ function _action_parse_fluent_chain(text::String, start::Int)
     )
 end
 
-function _action_parse_fluent_call_segment(text::String, start::Int, stop::Int)
+function _action_parse_fluent_call_segment(
+    text::String,
+    start::Int,
+    stop::Int;
+    allow_bare_identifier::Bool = false,
+)
     parsed = _action_parse_callee(text)
     if parsed !== nothing
         return ActionFluentCall(
             method = parsed.name,
             source_method = parsed.source_method,
             args = _action_parse_arguments(parsed.payload, start + parsed.payload_start),
+            source = text,
+            source_span = ActionSourceSpan(start, stop),
+        )
+    end
+    bare = strip(text)
+    if allow_bare_identifier && _action_is_identifier(bare)
+        return ActionFluentCall(
+            method = bare,
+            source_method = bare,
+            args = ActionArgument[],
             source = text,
             source_span = ActionSourceSpan(start, stop),
         )

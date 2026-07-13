@@ -700,9 +700,9 @@ return remains owned by its action/expression block, Perl-reference `next` conti
 rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
 timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued
 while ADR `0033` and `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases after a clean pivot. Neutral
-contract `.16.1`, Perl reference `.16.2`, Rust `.16.3`, and Dart `.16.4` implementations are complete; Julia
-`.16.5` is next. Rust and Dart's pre-existing `.contains()` missing-argument outcomes are separately owned by
-helper backlog `.5`.
+contract `.16.1`, Perl reference `.16.2`, Rust `.16.3`, Dart `.16.4`, and Julia `.16.5` implementations are
+complete; Lua `.16.6` is next. Rust, Dart, and Julia's pre-existing `.contains()` missing-argument outcomes are
+separately owned by helper backlog `.5`.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
