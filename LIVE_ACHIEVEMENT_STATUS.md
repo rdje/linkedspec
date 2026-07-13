@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.5 — enable Julia uniform bindings**
+  (DONE — Lua consumer `.12.1.6` active).
+
+  **Implementation:** Julia bare reads and kind-checked array/harray mutations now share one typed value across
+  native/generated execution. Mutations return independent updates, chain, auto-create absent required kinds, and
+  reject wrong kinds; static rules keep push precedence. Wrapper mutations bridge the same value only for migration.
+
+  **Proof:** The future fixture and all neutral/extension cases pass 27/27 assertions natively and generated. The
+  complete Julia gate passes 1,311 package assertions, CLI 61x2, and 105/105 corpus. Canonical CI
+  passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 865 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.4 — enable Dart uniform bindings**
   (DONE — Julia consumer `.12.1.5` active).
 

@@ -179,7 +179,7 @@ old and partially migrated sources continue to run. They do not define a second 
 > selector forms are still documented here only because the current backends and shipped specs have not completed
 > the dependency-ordered migration yet.
 
-The Perl, Rust, and Dart backends now execute those selector-free replacements on native and generated paths. Their
+The Perl, Rust, Dart, and Julia backends now execute those selector-free replacements on native and generated paths. Their
 bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
 fail an existing incompatible binding with `binding_kind_mismatch`. Mutation results are independent snapshots, so
 saving an earlier result does not let a later mutation retroactively change it:
@@ -193,7 +193,7 @@ split(stored_parts, "c,d", ",");  # mutable split; stored_parts == ["c", "d"]
 answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 ```
 
-Exact selector rejection is intentionally later than the backend enablement slices: Julia and Lua must first
+Exact selector rejection is intentionally later than the backend enablement slices: Lua must first
 execute the same bare forms, then tracked sources migrate, and only then does each backend reject
 `array(IDENTIFIER)` / `hash(IDENTIFIER)`. This ordering is migration safety, not an unresolved language decision.
 

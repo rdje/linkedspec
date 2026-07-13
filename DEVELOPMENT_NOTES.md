@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.5 — mutation authority follows `_read_runtime_store`): Julia's
+  `variables`, `arrays`, and `hashes` maps remain private migration machinery, but mutation must resolve the same
+  value as a bare read before validating its kind. Central array/harray mutation and bare-store seams eliminate
+  silent retagging, return copied post-operation values, and let array-end results continue through fluent methods.
+  Full-package locks again showed why wrapper/bare mixing must expose one value: value-position mutation and bare
+  hash merge previously encoded the obsolete namespace split.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.4 — migration stores must converge at every read and mutation): Dart's
   `variables`, `arrays`, and `hashes` maps may remain private compatibility machinery, but `ActionVariableExpr`
   cannot read only one map and mutations cannot silently create another. Central typed read/array/harray mutation

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.5 — enable Julia uniform bindings
+
+Julia native and generated execution now consume `linkedspec-uniform-binding-v1` through one observable typed
+value per identifier. Bare assignment and `set` replace competing private stores; kind-checked seams update and
+return push/append, mutable split, hash/index, set-key, array-end, and standalone collection mutations. Missing
+targets create only the required kind, incompatible values fail with stable `binding_kind_mismatch` fields,
+mutation results are independent snapshots, and `set`/array-end values chain. Static rules retain push precedence.
+
+The permanent 9-subtest suite passes 27 assertions through native and generated execution. Its unchanged baseline
+passed 11 and failed eight exact assertions across array-end results, mutable split, collection rebinding, and
+wrong-kind rejection. Complete package testing then exposed two stale locks: value-position `push_back` expected no
+mutation, and bare-first hash merge expected only an overlay after wrapper/bare mutation. Both now assert the adopted
+one-binding behavior.
+
+Exact selectors remain accepted only as scheduled migration input; no tracked source changes here. The complete
+Julia gate passes 1,311 package assertions, CLI 61x2, and 105/105 corpus fixtures. Canonical CI passes
+doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 865 seconds. Lua `.12.1.6` is next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.4 — enable Dart uniform bindings
 
 Dart native and generated-plan execution now consume `linkedspec-uniform-binding-v1` through one observable typed

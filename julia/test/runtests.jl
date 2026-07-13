@@ -12,6 +12,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
 include("variadic_user_function_contract_test.jl")
+include("uniform_binding_contract_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(
@@ -2610,8 +2611,8 @@ Top::
         "receiver_split" => Any["a", "b"],
         "items" => Any["a", "c"],
         "scalar_items" => Any["s", "t"],
-        "value_push" => nothing,
-        "after_value_push" => Any["a", "c"],
+        "value_push" => Any["a", "c", "bad"],
+        "after_value_push" => Any["a", "c", "bad"],
         "tagged" => Any[Any["?tag:", "a", "field"], Any["?tag:", "b", "field"]],
     )
 end
@@ -2659,7 +2660,7 @@ Top::
         "drop_pick" => Any[1, 4],
         "rename" => "aa,b,stmt_hash,z",
         "merged" => Any[10, 2, 3, 0, 4],
-        "bare_first_merge" => Any["a", "c"],
+        "bare_first_merge" => Any["a", "b", "c", "drop", "stmt_hash"],
         "value_set_has" => 1,
         "receiver_set_has" => 1,
         "after_value_set" => 0,

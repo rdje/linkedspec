@@ -71,8 +71,8 @@ pure. Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls are future-invalid wi
 `aggregate_selector_removed`, even when a one-element constructor was intended (`[IDENTIFIER]` is the replacement).
 Zero/multi/quoted/computed constructor calls remain separately valid under version 1. Validate 11 migrations,
 seven execution cases, six invalid selectors, eight constructor classifications, and deterministic future source/
-results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.12.1.2`, Rust `.12.1.3`, and Dart
-`.12.1.4` execute the contract on native/generated paths; Julia `.12.1.5` is the next backend consumer. Existing
+results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.12.1.2`, Rust `.12.1.3`, Dart
+`.12.1.4`, and Julia `.12.1.5` execute the contract on native/generated paths; Lua `.12.1.6` is the next consumer. Existing
 selector-shaped sources remain scheduled compatibility until all backends are enabled and migration completes.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes

@@ -159,7 +159,7 @@ These helpers are the entry point into local working state and structured values
 > `set(name, value)` and `name = value` bind the evaluated typed RHS; `push(name, value)` / `name += value` mutate
 > an array; `set_key(name, key, value)` / `name[key] = value` mutate an harray; and `copy(name)` snapshots a
 > container. Exact `array(name)` and `hash(name)` remain accepted only while old sources migrate and must not be
-> introduced in new `.spec` code. Perl, Rust, and Dart already execute the bare replacement contract; Julia and Lua
+> introduced in new `.spec` code. Perl, Rust, Dart, and Julia already execute the bare replacement contract; Lua
 > enablement precedes tracked migration and hard rejection. Quoted/computed constructor calls such as
 > `array("items")` and valid key/value `hash("key", value)` remain ordinary values. See
 > [Working Variables and Setup](declaration-helper-reference.md#auto-existing-variables).

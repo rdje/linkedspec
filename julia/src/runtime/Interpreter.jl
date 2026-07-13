@@ -1852,8 +1852,7 @@ function _evaluate_runtime_action_expr!(
             rule_label,
             current_edge,
         ))
-        context.variables[expr.name] = value
-        return _runtime_copy(value)
+        return _store_runtime_bare_binding!(context, expr.name, value)
     elseif expr isa ActionAssignArrayAppendExpr
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
@@ -2093,7 +2092,7 @@ function _evaluate_runtime_call!(
             )
         return nothing
     end
-    if statement_context && _execute_runtime_array_string_transform_statement!(
+    if statement_context && _execute_runtime_array_transform_statement!(
             engine,
             helper_name,
             args,
@@ -2806,8 +2805,7 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     end
     variable_target = _runtime_variable_name(args[1])
     if variable_target !== nothing
-        context.variables[variable_target] = value
-        return _runtime_copy(value)
+        return _store_runtime_bare_binding!(context, variable_target, value)
     end
     throw(RuntimeInterpreterException(
         "set target in rule $rule_label must be a variable, array(name), or hash(name)",
@@ -3140,15 +3138,6 @@ function _evaluate_runtime_fluent_chain!(
     current_edge,
     statement_context::Bool,
 )
-    if statement_context && _execute_runtime_array_end_mutation!(
-            engine,
-            chain,
-            context,
-            rule_label,
-            current_edge,
-        )
-        return nothing
-    end
     value = _evaluate_runtime_action_expr!(
         engine,
         chain.receiver,
@@ -3156,10 +3145,24 @@ function _evaluate_runtime_fluent_chain!(
         rule_label,
         current_edge,
     )
-    for call in chain.calls
+    for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
         if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
-            return nothing
+            if call_index != 1
+                return nothing
+            end
+            value = _execute_runtime_array_end_mutation!(
+                engine,
+                chain.receiver,
+                call,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if value === nothing
+                return nothing
+            end
+            continue
         end
         if helper_name == "with" && call.receiver_trailing_block_arg
             value = _call_runtime_receiver_with_trailing_block!(
@@ -3592,27 +3595,24 @@ end
 
 function _execute_runtime_array_end_mutation!(
     engine,
-    chain,
+    receiver,
+    call,
     context,
     rule_label,
     current_edge,
 )
-    if length(chain.calls) != 1
-        return false
-    end
-    call = only(chain.calls)
     helper_name = canonical_action_helper_name(call.method)
     if !(helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES)
-        return false
+        return nothing
     end
-    target = _runtime_array_receiver_target_name(chain.receiver)
+    target = _runtime_array_receiver_target_name(receiver)
     if target === nothing
-        return false
+        return nothing
     end
 
     if helper_name == "push_back" || helper_name == "push_front"
         if length(call.args) != 1
-            return false
+            return nothing
         end
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
@@ -3621,25 +3621,23 @@ function _execute_runtime_array_end_mutation!(
             rule_label,
             current_edge,
         ))
-        _mutate_runtime_array_storage!(context, target) do items
+        return _mutate_runtime_array_storage!(context, target) do items
             if helper_name == "push_back"
                 push!(items, value)
             else
                 pushfirst!(items, value)
             end
         end
-        return true
     end
 
     if !isempty(call.args)
-        return false
+        return nothing
     end
-    _mutate_runtime_array_storage!(context, target) do items
+    return _mutate_runtime_array_storage!(context, target) do items
         if !isempty(items)
             helper_name == "pop_back" ? pop!(items) : popfirst!(items)
         end
     end
-    return true
 end
 
 function _runtime_array_receiver_target_name(expr)
@@ -3679,9 +3677,9 @@ function _execute_runtime_set_key_statement!(
         rule_label,
         current_edge,
     ))
-    delete!(context.variables, target)
-    delete!(context.arrays, target)
-    get!(context.hashes, target, Dict{String,Any}())[key] = value
+    updated = _runtime_hash_binding_for_mutation(context, target)
+    updated[key] = value
+    _store_runtime_bare_binding!(context, target, updated)
     return true
 end
 
@@ -3691,23 +3689,15 @@ function _runtime_hash_receiver_target_name(expr)
 end
 
 function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionContext, name::String)
-    variable = get(context.variables, name, nothing)
-    if variable isa AbstractVector
-        updated = _runtime_as_array(variable)
-        mutator(updated)
-        context.variables[name] = updated
-        if haskey(context.arrays, name)
-            context.arrays[name] = _runtime_as_array(updated)
-        end
-        return nothing
-    end
-    target = get!(context.arrays, name, Any[])
-    mutator(target)
-    return nothing
+    updated = _runtime_array_binding_for_mutation(context, name)
+    mutator(updated)
+    return _store_runtime_bare_binding!(context, name, updated)
 end
 
 function _call_runtime_split_from_expressions!(engine, args, context, rule_label, current_edge)
-    target = isempty(args) ? nothing : _runtime_array_target_name(first(args))
+    wrapper_target = isempty(args) ? nothing : _runtime_array_target_name(first(args))
+    bare_target = length(args) == 3 ? _runtime_variable_name(first(args)) : nothing
+    target = wrapper_target === nothing ? bare_target : wrapper_target
     if target !== nothing && length(args) >= 2
         source = _evaluate_runtime_action_expr!(
             engine,
@@ -3724,11 +3714,9 @@ function _call_runtime_split_from_expressions!(engine, args, context, rule_label
             current_edge,
         ) : ""
         parts = _call_runtime_split(Any[source, delimiter])
+        _runtime_array_binding_for_mutation(context, target)
         _record_runtime_rule_local_binding!(context, target)
-        delete!(context.variables, target)
-        delete!(context.hashes, target)
-        context.arrays[target] = _runtime_as_array(parts)
-        return _runtime_copy(context.arrays[target])
+        return _store_runtime_bare_binding!(context, target, parts)
     end
 
     values = Any[
@@ -3743,7 +3731,7 @@ function _call_runtime_split_from_expressions!(engine, args, context, rule_label
     return _call_runtime_split(values)
 end
 
-function _execute_runtime_array_string_transform_statement!(
+function _execute_runtime_array_transform_statement!(
     engine,
     helper_name,
     args,
@@ -3751,11 +3739,13 @@ function _execute_runtime_array_string_transform_statement!(
     rule_label,
     current_edge,
 )
-    if !(helper_name in ("trim_each", "lowercase_each", "uppercase_each")) ||
+    if !(helper_name in ("trim_each", "filter_nonempty", "lowercase_each", "uppercase_each")) ||
             length(args) != 1
         return false
     end
-    target = _runtime_array_target_name(only(args))
+    wrapper_target = _runtime_array_target_name(only(args))
+    bare_target = _runtime_variable_name(only(args))
+    target = wrapper_target === nothing ? bare_target : wrapper_target
     if target === nothing
         return false
     end
@@ -3767,10 +3757,9 @@ function _execute_runtime_array_string_transform_statement!(
         current_edge,
     ))
     transformed = _call_runtime_array_helper(helper_name, Any[value])
+    _runtime_array_binding_for_mutation(context, target)
     _record_runtime_rule_local_binding!(context, target)
-    delete!(context.variables, target)
-    delete!(context.hashes, target)
-    context.arrays[target] = _runtime_as_array(transformed)
+    _store_runtime_bare_binding!(context, target, transformed)
     return true
 end
 
@@ -5261,19 +5250,72 @@ _runtime_variable_name(expr) = expr isa ActionVariableExpr ? expr.name : nothing
 
 function _append_runtime_array_value!(context::_RuntimeExecutionContext, name::String, value)
     stored = _runtime_copy(value)
-    variable = get(context.variables, name, nothing)
-    if variable isa AbstractVector
-        updated = _runtime_as_array(variable)
-        push!(updated, stored)
-        context.variables[name] = updated
-        if haskey(context.arrays, name)
-            context.arrays[name] = _runtime_as_array(updated)
-        end
-        return _runtime_copy(updated)
+    updated = _runtime_array_binding_for_mutation(context, name)
+    push!(updated, stored)
+    return _store_runtime_bare_binding!(context, name, updated)
+end
+
+function _runtime_binding_present(context::_RuntimeExecutionContext, name::String)
+    return haskey(context.variables, name) || haskey(context.arrays, name) ||
+           haskey(context.hashes, name)
+end
+
+function _runtime_binding_kind(value)
+    if value isa AbstractVector
+        return "array"
+    elseif value isa AbstractDict
+        return "harray"
     end
-    target = get!(context.arrays, name, Any[])
-    push!(target, stored)
-    return _runtime_copy(target)
+    return "scalar"
+end
+
+function _runtime_binding_kind_mismatch(name::String, expected_kind::String, value)
+    actual_kind = _runtime_binding_kind(value)
+    return RuntimeInterpreterException(
+        "binding_kind_mismatch identifier=$name expected_kind=$expected_kind " *
+        "actual_kind=$actual_kind",
+    )
+end
+
+function _runtime_array_binding_for_mutation(
+    context::_RuntimeExecutionContext,
+    name::String,
+)
+    if !_runtime_binding_present(context, name)
+        return Any[]
+    end
+    value = _read_runtime_store(context, name)
+    if !(value isa AbstractVector)
+        throw(_runtime_binding_kind_mismatch(name, "array", value))
+    end
+    return _runtime_as_array(value)
+end
+
+function _runtime_hash_binding_for_mutation(
+    context::_RuntimeExecutionContext,
+    name::String,
+)
+    if !_runtime_binding_present(context, name)
+        return Dict{String,Any}()
+    end
+    value = _read_runtime_store(context, name)
+    if !(value isa AbstractDict)
+        throw(_runtime_binding_kind_mismatch(name, "harray", value))
+    end
+    return _runtime_as_hash(value)
+end
+
+function _store_runtime_bare_binding!(
+    context::_RuntimeExecutionContext,
+    name::String,
+    value,
+)
+    stored = _runtime_copy(value)
+    delete!(context.variables, name)
+    delete!(context.arrays, name)
+    delete!(context.hashes, name)
+    context.variables[name] = stored
+    return _runtime_copy(stored)
 end
 
 function _read_runtime_store(context::_RuntimeExecutionContext, name::String)
@@ -5396,7 +5438,7 @@ function _assign_runtime_index!(
             context.variables[name] = updated
             return _runtime_copy(updated)
         end
-        return nothing
+        throw(_runtime_binding_kind_mismatch(name, "harray", root))
     end
 
     key = _runtime_string(_evaluate_runtime_action_expr!(
@@ -5413,9 +5455,9 @@ function _assign_runtime_index!(
         rule_label,
         current_edge,
     ))
-    target = get!(context.hashes, name, Dict{String,Any}())
+    target = _runtime_hash_binding_for_mutation(context, name)
     target[key] = value
-    return _runtime_copy(target)
+    return _store_runtime_bare_binding!(context, name, target)
 end
 
 function _assign_runtime_nested!(
