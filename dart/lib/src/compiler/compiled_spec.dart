@@ -84,6 +84,7 @@ CompiledSpec compileSpec(
       functionRegistry: functionRegistry,
       dependencyRegexState: dependencyRegexState,
     );
+    validateNoRemovedAggregateSelectors(compiled);
     if (traceScope != null) {
       trace?.exitScope(
         traceScope,
@@ -146,6 +147,67 @@ final class CompiledSpec {
   }
 
   JsonObject toDescriptorJson() => descriptorState.toJson();
+}
+
+/// Reject removed public aggregate selectors in every executable part of a
+/// compiled specification.
+///
+/// Generated-source adapters call this public boundary as well so they do not
+/// trust a caller-constructed [CompiledSpec].
+void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
+  void validateBlock(ActionBlock block, String context) {
+    final selector = findRemovedAggregateSelectorInBlock(block);
+    if (selector != null) {
+      throw CompiledSpecException('$context: ${selector.diagnostic}');
+    }
+  }
+
+  void validateFluentCalls(List<FluentCall> calls, String context) {
+    for (final (index, call) in calls.indexed) {
+      final args = call.args.trim();
+      final source = args.isEmpty
+          ? '${call.method}()'
+          : '${call.method}($args)';
+      try {
+        validateBlock(parseActionBlock(source), '$context fluent call $index');
+      } on CompiledSpecException {
+        rethrow;
+      } on Object {
+        // Fluent syntax historically remains runtime-parsed. Do not turn an
+        // unrelated deferred parse failure into a new compile-time change.
+      }
+    }
+  }
+
+  for (final function in compiled.functions) {
+    try {
+      validateBlock(
+        parseActionBlock(function.bodySource),
+        "function '${function.name}' body",
+      );
+    } on CompiledSpecException {
+      rethrow;
+    } on Object {
+      // Preserve the existing runtime timing for unrelated function-body parse
+      // failures while still rejecting structurally valid removed selectors.
+    }
+  }
+
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label]!;
+    for (final payload in rule.actionPayloads) {
+      validateBlock(
+        payload.actionAst,
+        "rule '$label' ${payload.role} line ${payload.line}",
+      );
+    }
+    for (final (index, edge) in rule.actionEdges.indexed) {
+      validateFluentCalls(edge.fluentChain, "rule '$label' action edge $index");
+    }
+    for (final (index, edge) in rule.blindEdges.indexed) {
+      validateFluentCalls(edge.fluentChain, "rule '$label' blind edge $index");
+    }
+  }
 }
 
 final class CompiledRule {

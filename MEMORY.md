@@ -10,17 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.8.2` — Rust exact aggregate-selector hard rejection.
-- latest_commit: `ac217f6c` — `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.8.2`; verified and awaiting final governance/docs checks and
-  commit. Dart `.12.1.8.3` is the recorded next frontier.
-- next_action: finish governance/docs checks, commit `.12.1.8.2`, verify clean, then begin Dart `.12.1.8.3`.
-- current_proof: Rust rejects all six neutral exact-selector cases across full compiled/generated state, including
-  dead/nested code, deferred fluent arguments, and unused functions; eight retained classes pass. Focused proof is
-  15/15, scanner 0 positive/13 classified, core 185+3+8, integration 197/197, interpreted/generated corpus 105,
-  CLI 61x2, and canonical CI including Phase 0 `1..1031` pass. The 30-second-bound oracle emits 105 fixtures and
-  the final post-rename generated full-manifest classifier passes in 329.32 seconds.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.8.3.1` — Dart exact aggregate-selector rejection implementation.
+- latest_commit: `055ab378` — `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.8.3.1 - hard-reject Dart aggregate selectors`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.8.3.1`; focused-verified and awaiting docs/governance/commit.
+- next_action: commit `.12.1.8.3.1`, verify clean, then activate `.12.1.8.3.2` to add exact variadic `blkVFN`
+  structural matching and rerun the complete Dart gate before Julia.
+- current_proof: Dart rejects all six exact-selector cases across complete compiled/generated state, including dead
+  code, deferred fluent calls, unused functions, and caller-constructed payloads; eight retained classes pass.
+  Focused proof is 15/15, strict analysis clean, and scanner 0 positive/14 classified. The complete package leg
+  reaches 203 passes; only two aggregated `spec_spec_*` failures remain from fixed-`blkFN` bridge drift.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -29,6 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; lexical codeblock capture (new decision only if justified); resumed Lua work follows `.12.1`.
-- blockers: none. in_flight_uncommitted: `.12.1.8.2` implementation/tests/corpus rename/docs await final checks and
-  commit. Oracle timeout-default calibration is durably deferred to `.7.0`; the
-  documented 30-second override is sufficient now. Dart `.12.1.8.3` follows.
+- blockers: none. in_flight_uncommitted: `.12.1.8.3.1` implementation/tests/docs await governance and commit;
+  `.12.1.8.3.2` is the exact full-gate prerequisite. Oracle timeout calibration remains deferred to `.7.0`.

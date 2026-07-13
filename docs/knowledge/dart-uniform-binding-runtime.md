@@ -11,7 +11,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [dart, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.4 centralizes Dart bare typed reads and kind-checked array/harray mutations in dart/lib/src/runtime/interpreter.dart. Native/generated integration proof covers the future fixture, all seven neutral cases, collection rebinding, append, mutation continuation, static precedence, and wrong-kind fields. Temporary wrapper mutations alias the same current value for mixed-source migration; Dart format/analyze, 199 tests, 105 corpus fixtures, and CLI 61x2 pass."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.4 centralizes Dart bare typed reads and kind-checked array/harray mutations in dart/lib/src/runtime/interpreter.dart. Native/generated integration proof covers the future fixture, all seven neutral cases, collection rebinding, append, mutation continuation, static precedence, and wrong-kind fields. Temporary wrapper mutations aliased the same current value for migration. FUTURE-PARITY-BACKLOG.12.1.8.3.1 now rejects exact selector calls across complete compiled/generated state and deletes those wrapper runtime branches; focused proof passes 15/15 with clean strict analysis."
 reverify: "cd dart && dart test test/uniform_binding_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -35,10 +35,10 @@ bare `merge_hash(meta, overlay)` saw only the overlay after wrapper/bare mutatio
 contract replaces the first assertion; temporary wrapper mutations now bridge to the same typed binding, fixing
 the second without making selectors permanent.
 
-Exact `array(name)` and `hash(name)` remain parsed only until hard rejection; all tracked sources have migrated and
-all backends support bare replacements. Dart rejects and deletes those selector paths in
-`FUTURE-PARITY-BACKLOG.12.1.8.3`.
+Exact `array(name)` and `hash(name)` are now rejected across Dart's compiled/generated boundaries; all tracked
+sources already use bare replacements. Selector-specific runtime read, target, assignment, receiver, and split
+dispatch is deleted under `FUTURE-PARITY-BACKLOG.12.1.8.3.1`.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-runtime-core-value-capture-helpers]],
-[[spec-facing-aggregate-selector-retirement-inventory]].
+[[spec-facing-aggregate-selector-retirement-inventory]], [[dart-aggregate-selector-compile-rejection]].

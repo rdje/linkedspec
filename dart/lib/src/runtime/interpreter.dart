@@ -3561,26 +3561,10 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       ),
     );
-    final arrayTarget = _arrayTargetName(args[0]);
-    if (arrayTarget != null) {
-      context.recordRuleLocalBinding(arrayTarget);
-      context.variables.remove(arrayTarget);
-      context.hashes.remove(arrayTarget);
-      context.arrays[arrayTarget] = _asArray(value);
-      return List<Object?>.unmodifiable(context.arrayFor(arrayTarget));
-    }
-    final hashTarget = _hashTargetName(args[0]);
-    if (hashTarget != null) {
-      context.recordRuleLocalBinding(hashTarget);
-      context.variables.remove(hashTarget);
-      context.arrays.remove(hashTarget);
-      context.hashes[hashTarget] = _asHash(value);
-      return Map<String, Object?>.unmodifiable(context.hashFor(hashTarget));
-    }
     final variableTarget = _variableName(args[0]);
     if (variableTarget == null) {
       throw RuntimeInterpreterException(
-        'set target in rule $ruleLabel must be a variable or array(name)',
+        'set target in rule $ruleLabel must be a variable',
       );
     }
     context.variables[variableTarget] = value;
@@ -3605,10 +3589,8 @@ final class LinkedSpecRuntimeEngine {
         args.length != 1) {
       return false;
     }
-    final wrapperTarget = _arrayTargetName(args.single);
     final bareTarget = _variableName(args.single);
-    final target = wrapperTarget ?? bareTarget;
-    if (target == null) {
+    if (bareTarget == null) {
       return false;
     }
     final transformed = _callArrayHelperFromExpressions(
@@ -3618,14 +3600,7 @@ final class LinkedSpecRuntimeEngine {
       ruleLabel,
       currentEdge,
     );
-    if (bareTarget != null) {
-      _replaceBareArrayValue(context, target, _asArray(transformed));
-    } else {
-      context.recordRuleLocalBinding(target);
-      context.variables.remove(target);
-      context.hashes.remove(target);
-      context.arrays[target] = _asArray(transformed);
-    }
+    _replaceBareArrayValue(context, bareTarget, _asArray(transformed));
     return true;
   }
 
@@ -3649,10 +3624,10 @@ final class LinkedSpecRuntimeEngine {
         context.retv = child.value;
         return _appendArrayValue(context, ruleLabel, child.value);
       }
-      final target = _arrayTargetName(args[0]) ?? _variableName(args[0]);
+      final target = _variableName(args[0]);
       if (target == null) {
         throw RuntimeInterpreterException(
-          'push target in rule $ruleLabel must be array(name) or a variable',
+          'push target in rule $ruleLabel must be a variable',
         );
       }
       final child = _executeActionEdgeChild(currentEdge, context);
@@ -3662,7 +3637,7 @@ final class LinkedSpecRuntimeEngine {
 
     if (args.length >= 2) {
       final firstName = _variableName(args[0]);
-      final secondTarget = _arrayTargetName(args[1]) ?? _variableName(args[1]);
+      final secondTarget = _variableName(args[1]);
       if (currentEdge != null &&
           firstName != null &&
           compiledSpec.rule(firstName) != null) {
@@ -3683,10 +3658,10 @@ final class LinkedSpecRuntimeEngine {
         }
       }
 
-      final target = _arrayTargetName(args[0]) ?? _variableName(args[0]);
+      final target = _variableName(args[0]);
       if (target == null) {
         throw RuntimeInterpreterException(
-          'push target in rule $ruleLabel must be array(name) or a variable',
+          'push target in rule $ruleLabel must be a variable',
         );
       }
       final value = _copyValue(
@@ -3709,12 +3684,6 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (args.length == 1) {
-      final name = _variableName(args.first);
-      if (name != null) {
-        return List<Object?>.unmodifiable(_arrayValueFor(context, name));
-      }
-    }
     final values = <Object?>[];
     for (final arg in args) {
       final value = _evaluateExpression(
@@ -3738,13 +3707,6 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (args.length == 1) {
-      final name = _variableName(args.first);
-      if (name != null) {
-        return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
-      }
-    }
-
     final entries = <String, Object?>{};
     final values = [
       for (final arg in args)
@@ -3920,12 +3882,11 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    final wrapperTarget = _arrayTargetName(receiver);
     final bareTarget = _variableName(receiver);
-    final target = wrapperTarget ?? bareTarget;
-    if (target == null) {
+    if (bareTarget == null) {
       return null;
     }
+    final target = bareTarget;
     switch (call.method) {
       case 'push_back':
       case 'push_front':
@@ -3982,12 +3943,11 @@ final class LinkedSpecRuntimeEngine {
     if (args.length != 3) {
       return false;
     }
-    final wrapperTarget = _hashTargetName(args[0]);
     final bareTarget = _variableName(args[0]);
-    final target = wrapperTarget ?? bareTarget;
-    if (target == null || target.isEmpty) {
+    if (bareTarget == null || bareTarget.isEmpty) {
       return false;
     }
+    final target = bareTarget;
     final key = _stringValue(
       _evaluateExpression(
         args[1],
@@ -4079,11 +4039,8 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    final wrapperTarget = args.isEmpty ? null : _arrayTargetName(args.first);
     final bareTarget = args.length >= 3 ? _variableName(args.first) : null;
-    final target = wrapperTarget ?? bareTarget;
-    if (target != null &&
-        (wrapperTarget != null ? args.length >= 2 : args.length >= 3)) {
+    if (bareTarget != null) {
       final source = _evaluateExpression(
         args[1],
         context,
@@ -4104,9 +4061,7 @@ final class LinkedSpecRuntimeEngine {
         delimiter,
         regexDelimiter: delimiterExpr is ActionRegexLiteralExpr,
       );
-      return bareTarget == null
-          ? _replaceArrayValue(context, target, parts)
-          : _replaceBareArrayValue(context, target, parts);
+      return _replaceBareArrayValue(context, bareTarget, parts);
     }
 
     final values = _evaluateValues(args, context, ruleLabel, currentEdge);
@@ -6594,15 +6549,6 @@ String _ruleNameFromExpr(
   return _stringValue(evaluated);
 }
 
-String? _arrayTargetName(ActionExpr expr) {
-  if (expr is! ActionCallExpr ||
-      expr.name != 'array' ||
-      expr.args.length != 1) {
-    return null;
-  }
-  return _variableName(expr.args.single.value);
-}
-
 String? _scalarTargetName(ActionExpr expr) {
   final variable = _variableName(expr);
   if (variable != null) {
@@ -6618,13 +6564,6 @@ String? _scalarTargetName(ActionExpr expr) {
 
 bool _hasArrayValue(_RuntimeExecutionContext context, String name) {
   return context.arrays.containsKey(name) || context.variables[name] is List;
-}
-
-String? _hashTargetName(ActionExpr expr) {
-  if (expr is! ActionCallExpr || expr.name != 'hash' || expr.args.length != 1) {
-    return null;
-  }
-  return _variableName(expr.args.single.value);
 }
 
 bool _hasHashValue(_RuntimeExecutionContext context, String name) {
@@ -6762,19 +6701,6 @@ List<Object?> _appendArrayValue(
   final stored = _copyValue(value);
   final updated = _bareArrayForMutation(context, name)..add(stored);
   return _storeBareArray(context, name, updated);
-}
-
-List<Object?> _replaceArrayValue(
-  _RuntimeExecutionContext context,
-  String name,
-  List<Object?> values,
-) {
-  context.recordRuleLocalBinding(name);
-  final updated = [for (final item in values) _copyValue(item)];
-  context.variables.remove(name);
-  context.hashes.remove(name);
-  context.arrays[name] = updated;
-  return List<Object?>.unmodifiable(updated);
 }
 
 List<Object?> _replaceBareArrayValue(

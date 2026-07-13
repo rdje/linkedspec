@@ -13,6 +13,129 @@ void main() {
           )
           as Map<String, Object?>;
 
+  test('exact aggregate selectors fail at the Dart compile boundary', () {
+    final cases = (contract['invalid_selector_cases']! as List)
+        .cast<Map<String, Object?>>();
+    for (final item in cases) {
+      final source = item['source']! as String;
+      final expected = _selectorDiagnostic(item);
+      expect(
+        () => _compile(_actionSource(source)),
+        throwsA(
+          isA<CompiledSpecException>().having(
+            (error) => error.message,
+            'message',
+            contains(expected),
+          ),
+        ),
+        reason: item['id']! as String,
+      );
+    }
+  });
+
+  test('dead fluent and unused function selectors also fail compilation', () {
+    final deadSource = _actionSource(
+      'if(false) { return(array(items)) }; return([])', // selector-rejection fixture
+    );
+    expect(
+      () => _compile(deadSource),
+      throwsA(_selectorCompileError('array', 'items')),
+    );
+
+    const fluentSource =
+        'Top::\n -> Done.return(hash(meta))\nDone::\n /x/\n'; // selector-rejection fixture
+    expect(
+      () => _compile(fluentSource),
+      throwsA(_selectorCompileError('hash', 'meta')),
+    );
+
+    const unusedFunctionSource =
+        'fn retired() { return(array(items)) }\nTop::\n /x/ -> Done { return([]) }\nDone::\n /x/\n'; // selector-rejection fixture
+    expect(
+      () => compileSpec(
+        parseSpecWithStagedUserFunctionDefinitions(unusedFunctionSource),
+      ),
+      throwsA(_selectorCompileError('array', 'items')),
+    );
+  });
+
+  test('generated boundaries reject caller-constructed selector AST', () {
+    final invalid = _compiledWithSelectorPayload();
+    final plan = buildGeneratedRulePlan(invalid);
+
+    expect(
+      () => emitDartSourceV1(invalid, 'selector-generated.spec'),
+      throwsA(
+        isA<GeneratedSourceException>()
+            .having(
+              (error) => error.stage,
+              'stage',
+              GeneratedSourceStage.emitSource,
+            )
+            .having(
+              (error) => error.code,
+              'code',
+              GeneratedSourceCode.generatedSourceEmitFailed,
+            )
+            .having(
+              (error) => error.detail,
+              'detail',
+              contains(_selectorDiagnosticParts('array', 'items')),
+            ),
+      ),
+    );
+
+    expect(
+      () =>
+          validateGeneratedRulePlanV1(invalid, plan, 'selector-generated.spec'),
+      throwsA(
+        isA<GeneratedSourceException>()
+            .having(
+              (error) => error.stage,
+              'stage',
+              GeneratedSourceStage.compileOrLoadGeneratedSource,
+            )
+            .having(
+              (error) => error.code,
+              'code',
+              GeneratedSourceCode.generatedSourceCompileFailed,
+            )
+            .having(
+              (error) => error.detail,
+              'detail',
+              contains(_selectorDiagnosticParts('array', 'items')),
+            ),
+      ),
+    );
+  });
+
+  test('retained aggregate constructors and literals still execute', () {
+    _expectNativeAndGenerated(
+      _actionSource(r'''
+items = ["x"]
+left = "l"
+right = "r"
+key = "key"
+value = "r"
+return([array(), array("items"), array(copy(items)), array(left, right), hash(), hash("key", value), [items], { key : value }])
+'''),
+      [
+        <Object?>[],
+        ['items'],
+        [
+          ['x'],
+        ],
+        ['l', 'r'],
+        <String, Object?>{},
+        {'key': 'r'},
+        [
+          ['x'],
+        ],
+        {'key': 'r'},
+      ],
+    );
+  });
+
   test('future fixture runs natively and through generated plan', () {
     expect(contract['contract_id'], 'linkedspec-uniform-binding-v1');
     final fixture = (contract['fixture']! as Map).cast<String, Object?>();
@@ -231,6 +354,73 @@ Child: /x/
 }
 
 CompiledSpec _compile(String source) => compileSpec(parseSpec(source));
+
+String _actionSource(String action) {
+  return 'Top::\n /x/ -> Done { $action }\nDone::\n /x/\n';
+}
+
+String _selectorDiagnostic(Map<String, Object?> item) {
+  return _selectorDiagnosticParts(
+    item['surface']! as String,
+    item['identifier']! as String,
+  );
+}
+
+String _selectorDiagnosticParts(String surface, String identifier) {
+  return 'aggregate_selector_removed surface=$surface '
+      'identifier=$identifier replacement=$identifier';
+}
+
+Matcher _selectorCompileError(String surface, String identifier) {
+  return isA<CompiledSpecException>().having(
+    (error) => error.message,
+    'message',
+    contains(_selectorDiagnosticParts(surface, identifier)),
+  );
+}
+
+CompiledSpec _compiledWithSelectorPayload() {
+  final compiled = _compile(_actionSource('return([])'));
+  final original = compiled.rulesByLabel['Top']!;
+  final actionAst = parseActionBlock(
+    'array'
+    '(items)',
+  ); // selector-rejection fixture: array(items)
+  final invalidPayload = CompiledActionPayload(
+    role: 'lifecycle',
+    line: 1,
+    source: 'array selector rejection fixture',
+    code: actionAst.source,
+    actionAst: actionAst,
+    contracts: resolveActionBlockContracts(
+      actionAst,
+      functionRegistry: compiled.functionRegistry,
+    ),
+  );
+  final invalidRule = CompiledRule(
+    label: original.label,
+    header: original.header,
+    modeMetadata: original.modeMetadata,
+    regexPatterns: original.regexPatterns,
+    dependencyRefs: original.dependencyRefs,
+    actionEdges: original.actionEdges,
+    blindEdges: original.blindEdges,
+    lifecycleActionPayloads: [
+      ...original.lifecycleActionPayloads,
+      invalidPayload,
+    ],
+    plainActionPayloads: original.plainActionPayloads,
+    bodyElements: original.bodyElements,
+  );
+  return CompiledSpec(
+    definitionOrder: compiled.definitionOrder,
+    compiledRuleOrder: compiled.compiledRuleOrder,
+    rulesByLabel: {...compiled.rulesByLabel, 'Top': invalidRule},
+    redefinedRuleLabels: compiled.redefinedRuleLabels,
+    functionRegistry: compiled.functionRegistry,
+    dependencyRegexState: compiled.dependencyRegexState,
+  );
+}
 
 void _expectNativeAndGenerated(
   String source,

@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.3.1 — hard-reject Dart aggregate selectors
+
+Dart now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls across its complete compiled ActionIR
+state. One recursive visitor covers calls, assignments, nested access, literals, value/control blocks, receivers,
+and fluent arguments. Whole-`CompiledSpec` validation additionally parses unused function bodies and deferred
+edge-fluent calls. Normal compilation, generated-source emission, and generated-plan validation expose the neutral
+`aggregate_selector_removed surface=<...> identifier=<...> replacement=<...>` detail.
+
+Selector-specific runtime reads, set/push/set-key/split targets, and array-end receivers are deleted; bare typed
+bindings own those operations. Zero/multi/quoted/computed constructors and direct literals remain. The focused
+uniform-binding suite passes 15/15 over all six invalid cases, dead code, fluent edges, unused functions, caller-
+constructed compiled state, and eight retained classes. Strict analysis is clean and the scanner is zero-positive/
+14 classified.
+
+The complete Dart test leg reaches 203 passes and exposes only two aggregate `spec_spec_*` failures. Knowledge Map
+retrieval identifies exact pre-existing bridge drift: the bounded structural matcher recognizes fixed `blkFN`,
+while the shipped variadic function-definition regex now uses `blkVFN`. Follow-up `.12.1.8.3.2` owns that bounded
+capture-preserving repair and full 105-corpus/CLI no-drift before the Dart parent closes.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.2 — hard-reject Rust aggregate selectors
 
 Rust now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls after typed ActionIR compilation and

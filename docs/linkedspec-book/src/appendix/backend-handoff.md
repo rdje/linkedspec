@@ -208,7 +208,7 @@ scalar normalization, string predicate/composition, coalesce/concat, and scalar-
 numeric helpers. It also lowers retained aggregate-constructor, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
 Bare typed reads are the destination surface. Exact one-identifier aggregate selectors are retired and report
-`aggregate_selector_removed` on Perl and Rust before execution; Dart, Julia, and Lua follow in dependency order.
+`aggregate_selector_removed` on Perl, Rust, and Dart before execution; Julia and Lua follow in dependency order.
 Retired short aliases `s(...)`/`a(...)`/`h(...)` remain ordinary unresolved helpers rather than normalized.
 Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language

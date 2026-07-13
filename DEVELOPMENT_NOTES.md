@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.3.1 — validate deferred Dart ActionIR without changing unrelated
+  parse timing): Dart rule payloads are typed during compilation, but unused user-function bodies and edge fluent
+  arguments remain source strings until runtime. Whole-compiled-state retirement must parse those valid deferred
+  surfaces solely for structural selector detection and preserve existing runtime timing for unrelated parse
+  failures. Repeat validation at generated emission and plan-validation boundaries because public constructors can
+  assemble a `CompiledSpec`. Once that boundary rejects the exact shape, delete runtime wrapper reads/targets/
+  receivers/split branches; retained one-argument quoted/computed constructors remain values.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.3.1 full-gate finding — exact bounded regex bridges must evolve with
+  their shipped pattern owners): Dart's structural PCRE bridge intentionally recognizes exact shipped families.
+  The complete test leg reached 203 passes but four `spec_spec_*` executions aggregated into two failures because
+  fixed function definitions use `blkFN` while the later variadic pattern uses `blkVFN`. This is not a general
+  recursive-regex gap and not caused by selector retirement. Pending `.12.1.8.3.2` must add the exact variadic
+  prefix/capture shape, lock both fixed and variadic forms, and rerun the complete Dart gate.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.2 finding — time parser construction separately from parsing): Two
   complete oracle regenerations died at `vhdl_library_use` under the generator's default 15-second process bound.
   A direct split measurement showed healthy `get_parser('vhdl')` construction at 19.627 seconds and fixture parsing

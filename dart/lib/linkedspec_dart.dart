@@ -33,11 +33,14 @@ export 'src/action/action_ast.dart'
         ActionPositionalArgument,
         ActionRawExpr,
         ActionRegexLiteralExpr,
+        RemovedAggregateSelector,
         ActionSourceSpan,
         ActionStatement,
         ActionStringLiteralExpr,
         ActionUndefExpr,
-        ActionVariableExpr;
+        ActionVariableExpr,
+        findRemovedAggregateSelectorInBlock,
+        findRemovedAggregateSelectorInExpr;
 export 'src/action/action_contracts.dart'
     show
         ActionContractDiagnostic,
@@ -96,7 +99,8 @@ export 'src/compiler/compiled_spec.dart'
         CompiledSpec,
         CompiledSpecException,
         DependencyRef,
-        compileSpec;
+        compileSpec,
+        validateNoRemovedAggregateSelectors;
 export 'src/corpus/manifest_runner.dart'
     show
         CorpusExecutionResult,

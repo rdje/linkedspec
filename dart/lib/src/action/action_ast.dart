@@ -737,3 +737,177 @@ final class ActionRawExpr extends ActionExpr {
   @override
   ActionJsonObject toJson() => {...baseJson(), 'reason': reason};
 }
+
+/// An exact aggregate-selector call removed from the public ActionIR surface.
+///
+/// Zero-argument, multi-argument, quoted, and computed `array(...)` / `hash(...)`
+/// calls remain constructors. Only the former one-bare-identifier selector
+/// shape is rejected.
+final class RemovedAggregateSelector {
+  const RemovedAggregateSelector({
+    required this.surface,
+    required this.identifier,
+  });
+
+  final String surface;
+  final String identifier;
+
+  String get diagnostic {
+    return 'aggregate_selector_removed surface=$surface '
+        'identifier=$identifier replacement=$identifier';
+  }
+
+  @override
+  String toString() => diagnostic;
+}
+
+/// Return the first removed aggregate selector in [block], if any.
+RemovedAggregateSelector? findRemovedAggregateSelectorInBlock(
+  ActionBlock block,
+) {
+  for (final statement in block.statements) {
+    final selector = findRemovedAggregateSelectorInExpr(statement.expr);
+    if (selector != null) {
+      return selector;
+    }
+  }
+  return null;
+}
+
+/// Return the first removed aggregate selector anywhere below [expr].
+RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
+  RemovedAggregateSelector? inArgs(List<ActionArgument> args) {
+    for (final arg in args) {
+      final selector = findRemovedAggregateSelectorInExpr(arg.value);
+      if (selector != null) {
+        return selector;
+      }
+    }
+    return null;
+  }
+
+  RemovedAggregateSelector? inBlock(ActionBlock? block) {
+    return block == null ? null : findRemovedAggregateSelectorInBlock(block);
+  }
+
+  RemovedAggregateSelector? inSegments(List<ActionAccessSegment> segments) {
+    for (final segment in segments) {
+      if (segment is ActionIndexAccessSegment) {
+        final selector = findRemovedAggregateSelectorInExpr(segment.expr);
+        if (selector != null) {
+          return selector;
+        }
+      }
+    }
+    return null;
+  }
+
+  switch (expr) {
+    case ActionCallExpr(:final name, :final args):
+      if ((name == 'array' || name == 'hash') && args.length == 1) {
+        final arg = args.single;
+        if (arg is ActionPositionalArgument &&
+            arg.value is ActionVariableExpr) {
+          return RemovedAggregateSelector(
+            surface: name,
+            identifier: (arg.value as ActionVariableExpr).name,
+          );
+        }
+      }
+      return inArgs(args);
+    case ActionFluentChainExpr(:final receiver, :final calls):
+      final receiverSelector = findRemovedAggregateSelectorInExpr(receiver);
+      if (receiverSelector != null) {
+        return receiverSelector;
+      }
+      for (final call in calls) {
+        final selector = inArgs(call.args);
+        if (selector != null) {
+          return selector;
+        }
+      }
+      return null;
+    case ActionAssignScalarExpr(:final value):
+    case ActionAssignArrayAppendExpr(:final value):
+      return findRemovedAggregateSelectorInExpr(value);
+    case ActionAssignHashIndexExpr(:final key, :final value):
+      return findRemovedAggregateSelectorInExpr(key) ??
+          findRemovedAggregateSelectorInExpr(value);
+    case ActionAssignNestedAccessExpr(:final segments, :final value):
+      return inSegments(segments) ?? findRemovedAggregateSelectorInExpr(value);
+    case ActionIndexedVarExpr(:final index):
+      return findRemovedAggregateSelectorInExpr(index);
+    case ActionNestedAccessExpr(:final segments):
+      return inSegments(segments);
+    case ActionArrayLiteralExpr(:final items):
+      for (final item in items) {
+        final selector = findRemovedAggregateSelectorInExpr(item);
+        if (selector != null) {
+          return selector;
+        }
+      }
+      return null;
+    case ActionHashLiteralExpr(:final entries):
+      for (final entry in entries) {
+        final selector =
+            findRemovedAggregateSelectorInExpr(entry.key) ??
+            findRemovedAggregateSelectorInExpr(entry.value);
+        if (selector != null) {
+          return selector;
+        }
+      }
+      return null;
+    case ActionBlockValueExpr(:final block):
+      return findRemovedAggregateSelectorInBlock(block);
+    case ActionControlIfExpr(:final condition, :final args, :final body):
+      return findRemovedAggregateSelectorInExpr(condition) ??
+          inArgs(args) ??
+          inBlock(body);
+    case ActionControlElseExpr(:final args, :final body):
+      return inArgs(args) ?? inBlock(body);
+    case ActionControlMarkerExpr(:final args):
+      return inArgs(args);
+    case ActionControlWhileExpr(:final condition, :final args, :final body):
+      return findRemovedAggregateSelectorInExpr(condition) ??
+          inArgs(args) ??
+          inBlock(body);
+    case ActionControlSwitchExpr(
+      :final sourceExpr,
+      :final args,
+      :final cases,
+      :final defaultCase,
+      :final body,
+    ):
+      final direct =
+          findRemovedAggregateSelectorInExpr(sourceExpr) ??
+          inArgs(args) ??
+          inBlock(body);
+      if (direct != null) {
+        return direct;
+      }
+      for (final item in cases) {
+        final selector = findRemovedAggregateSelectorInExpr(item);
+        if (selector != null) {
+          return selector;
+        }
+      }
+      return defaultCase == null
+          ? null
+          : findRemovedAggregateSelectorInExpr(defaultCase);
+    case ActionControlCaseExpr(:final match, :final args, :final body):
+      return findRemovedAggregateSelectorInExpr(match) ??
+          inArgs(args) ??
+          inBlock(body);
+    case ActionControlDefaultExpr(:final args, :final body):
+      return inArgs(args) ?? inBlock(body);
+    case ActionVariableExpr():
+    case ActionStringLiteralExpr():
+    case ActionNumberLiteralExpr():
+    case ActionBooleanLiteralExpr():
+    case ActionRegexLiteralExpr():
+    case ActionUndefExpr():
+    case ActionRawExpr():
+      return null;
+  }
+  return null;
+}

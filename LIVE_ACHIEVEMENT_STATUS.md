@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.3.1 — hard-reject Dart aggregate selectors**
+  (DONE — selector implementation complete; bounded bridge/full-gate `.12.1.8.3.2` is next).
+
+  **Outcome:** Dart rejects exact selector calls across complete compiled/generated state with the portable fields,
+  including dead code, unused functions, deferred edge fluents, and caller-constructed compiled payloads. Runtime
+  selector reads/targets/receivers/split dispatch is deleted; all eight retained constructor/literal classes pass.
+
+  **Proof and handoff:** Focused proof passes 15/15, strict analysis is clean, and the scanner is zero-positive/14
+  classified. The complete package leg reaches 203 passes; its only two aggregate failures are four `spec_spec_*`
+  smokes whose bounded Dart bridge recognizes fixed `blkFN` but not the shipped variadic `blkVFN`. Exact repair and
+  the full Dart/CLI/105-corpus gate are owned by `.12.1.8.3.2` before Julia.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.2 — hard-reject Rust aggregate selectors**
   (DONE — Rust rejection complete; Dart `.12.1.8.3` is next).
 

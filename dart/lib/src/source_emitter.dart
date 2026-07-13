@@ -319,6 +319,16 @@ String emitDartSourceV1(CompiledSpec compiled, String sourceIdentity) {
   }
 
   try {
+    validateNoRemovedAggregateSelectors(compiled);
+  } on CompiledSpecException catch (error) {
+    throw GeneratedSourceException.emitFailed(
+      sourceIdentity,
+      'Failed to emit generated Dart source from invalid compiled spec',
+      detail: error.message,
+    );
+  }
+
+  try {
     final normalizedSpec = SpecFile(
       functions: [
         for (final function in compiled.functions) function.definition,
@@ -439,6 +449,12 @@ Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV1(
   List<GeneratedPlanRow> generatedPlan,
   String sourceIdentity,
 ) {
+  try {
+    validateNoRemovedAggregateSelectors(compiled);
+  } on CompiledSpecException catch (error) {
+    throw GeneratedSourceException.compileFailed(sourceIdentity, error.message);
+  }
+
   if (compiled.compiledRuleOrder.length != generatedPlan.length) {
     throw GeneratedSourceException(
       stage: GeneratedSourceStage.validateGeneratedPlan,
