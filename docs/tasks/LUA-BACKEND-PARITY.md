@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (scalar numeric v1 passes 55/55 on all six runtimes; aliases/receivers are active)
+- Last updated: `2026-07-12` (numeric aliases/symbols/receivers pass 90/90 on both ABIs; reducers are active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1014,17 +1014,23 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.4 - implement Lua scalar numeric helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Admit numeric word aliases, symbol callees, and number receiver chains through the scalar evaluator.
   Dependencies: `.4.3.3.1`
   Acceptance: All governed word/symbol spellings canonicalize to the same evaluator; integer/float/bare-scalar
     receivers inject exactly one first argument; number-returning links compose; comparison links return numeric
     truth values and terminate later receiver continuation on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** All 18 governed word aliases and 11 arithmetic/comparison symbol callees
+    execute through the existing scalar evaluator. Integer, float, and bare-scalar receivers inject their value;
+    number-returning links compose; all six numeric comparison links are terminal. Baseline probes proved function
+    aliases/symbols already returned canonical values while receivers returned null. The first full run exposed `/`
+    callee versus regex-start ambiguity inside harray values; structural slash-call detection fixes it while grouped,
+    character-class, zero-width, and invalid regex literals remain locked. PUC Lua and LuaJIT pass 90/90 plus the
+    exact manifest/CLI scaffold; the unchanged 55-case six-runtime scalar contract passes.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement aggregate numeric reducers and array receiver terminals.
   Dependencies: `.4.3.3.1`, `.4.3.3.2`
   Acceptance: `num_sum`/`avg`/`median`/`range` and one-array `min`/`max` preserve typed arrays, reject any
@@ -1252,8 +1258,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Current frontier
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
-Scalar numeric `.4.3.3.1.4` now adds the strict v1 evaluator and exact six-runtime admission; PUC Lua and LuaJIT
-pass 89/89 and report `runtime-scalar-numeric`. Alias/symbol/number-receiver admission `.4.3.3.2` is active.
+Scalar numeric `.4.3.3.1.4` plus call/receiver admission `.4.3.3.2` now pass 90/90 on PUC Lua and LuaJIT and report
+`runtime-numeric-receivers`. Aggregate reducer/array receiver terminal `.4.3.3.3` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1298,7 +1304,8 @@ pass 89/89 and report `runtime-scalar-numeric`. Alias/symbol/number-receiver adm
 | 39 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `done` | Perl/Rust consume all 55 scalar numeric v1 cases without generic coercion drift. |
 | 40 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `done` | Dart and Julia consume all 55 scalar numeric v1 cases; full backend gates pass. |
 | 41 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `done` | All six runtime variants match scalar numeric v1 across all 55 cases. |
-| 42 | `LUA-BACKEND-PARITY.4.3.3.2` | `active` | Admit numeric aliases, symbol callees, and number receiver chains. |
+| 42 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | All numeric word/symbol calls and scalar number receiver chains pass both ABIs. |
+| 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `active` | Implement aggregate numeric reducers and array receiver terminals. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1358,6 +1365,21 @@ pass 89/89 and report `runtime-scalar-numeric`. Alias/symbol/number-receiver adm
   docs/KM/doctrines/mdBook/cleanup/whitespace all pass without beginning aliases/receivers or aggregate reducers.
 - [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, changes/notes/live, capability status, and
   memory close scalar evaluator `.1` and activate alias/symbol/number-receiver admission `.4.3.3.2`.
+
+### `LUA-BACKEND-PARITY.4.3.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run governed word aliases, arithmetic/comparison symbol callees, integer/float/bare-
+  scalar receivers, composed number-returning links, and terminal comparison continuations on both Lua ABIs.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Distinguish already-present call-name canonicalization from missing receiver
+  injection and terminal-result policy; locate the exact generic fluent-chain boundary before behavior code.
+- [x] **FIX** — Route every governed alias/symbol spelling through the existing scalar evaluator and add numeric
+  receiver injection/composition/terminal handling without changing scalar policy or aggregate reducers.
+- [x] **ADDRESSED (verified)** — Function aliases/symbols and integer/float/bare-scalar receiver cases produce the
+  same exact values as canonical calls; number links compose and comparison links terminate later continuations.
+- [x] **NO REGRESSION** — Focused numeric proof, unchanged 55-case six-runtime contract, complete 90/90 dual-ABI
+  Lua gate, exact manifest/CLI scaffold, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, Lua README/book, Knowledge Map, changes/notes/live, and memory activate
+  aggregate numeric reducers/array receiver terminals `.4.3.3.3` without claiming them early.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1680,3 +1702,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.1.2` | `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers` | Dedicated Perl/Rust strict numeric adapters, unchanged 55-case direct proof, and Dart/Julia handoff. |
 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers` | Strict native Dart/Julia adapters, unchanged 55-case direct proof, and Lua six-runtime handoff. |
 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `LUA-BACKEND-PARITY.4.3.3.1.4 - implement Lua scalar numeric helpers` | Portable Lua evaluator, dual-ABI 55-case proof, and exact six-runtime admission. |
+| `LUA-BACKEND-PARITY.4.3.3.2` | `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms` | Exact word/symbol calls, scalar receiver composition/terminality, and slash/regex disambiguation. |

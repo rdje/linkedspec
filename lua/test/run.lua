@@ -127,7 +127,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-scalar-numeric", "status parity")
+  assert_equal(first.parity, "runtime-numeric-receivers", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2499,6 +2499,75 @@ test("Lua matches the neutral scalar numeric contract exactly", function()
   assert_equal(#contract.cases, 55, "scalar numeric contract cases")
   local actual = execute_uniform_binding_source(contract.spec_source)
   assert_json_equal(actual, contract.expected, "all scalar numeric cases")
+end)
+
+test("numeric aliases symbols and receiver chains share the scalar evaluator", function()
+  local grouped_regex = linkedspec.parse_action_expression("/(foo),bar/")
+  local class_regex = linkedspec.parse_action_expression("/([)])/")
+  assert_equal(grouped_regex.kind, "regex", "grouped comma regex stays a regex")
+  assert_equal(grouped_regex.pattern, "(foo),bar", "grouped comma regex payload")
+  assert_equal(class_regex.kind, "regex", "class closing parenthesis stays a regex")
+  assert_equal(class_regex.pattern, "([)])", "class closing parenthesis regex payload")
+  local source = uniform_binding_action_source([[
+score = -2.5
+return({
+  "word_abs" : abs(-4),
+  "word_add" : add(1, 2, 3),
+  "word_ceil" : ceil(-3.2),
+  "word_clamp" : clamp(12, 0, 10),
+  "word_div" : div(7, 2),
+  "word_eq" : eq(2, 2),
+  "word_floor" : floor(-3.2),
+  "word_ge" : ge(2, 2),
+  "word_gt" : gt(3, 2),
+  "word_le" : le(2, 2),
+  "word_lt" : lt(1, 2),
+  "word_max" : max(2, 5, 3),
+  "word_min" : min(2, 5, 3),
+  "word_mod" : mod(7, 3),
+  "word_mul" : mul(2, 3, 4),
+  "word_ne" : ne(2, 3),
+  "word_round" : round(-2.5),
+  "word_sub" : sub(10, 3),
+  "symbol_add" : +(2, 3),
+  "symbol_sub" : -(5, 3),
+  "symbol_mul" : *(3, 4),
+  "symbol_div" : /(7, 2),
+  "symbol_mod" : %(7, 3),
+  "symbol_eq" : ==(2, 2),
+  "symbol_ne" : !=(2, 3),
+  "symbol_gt" : >(3, 2),
+  "symbol_ge" : >=(2, 2),
+  "symbol_lt" : <(1, 2),
+  "symbol_le" : <=(2, 2),
+  "integer_receiver" : 5.mod(2),
+  "float_chain" : 3.5.floor().add(1),
+  "bare_scalar_chain" : score.abs().mul(2),
+  "comparison_receiver" : 5.gt(2),
+  "terminal_eq" : 2.eq(2).add(1),
+  "terminal_ne" : 2.ne(3).add(1),
+  "terminal_gt" : 5.gt(2).add(1),
+  "terminal_ge" : 2.ge(2).add(1),
+  "terminal_lt" : 1.lt(2).add(1),
+  "terminal_le" : 2.le(2).add(1)
+})
+]])
+  local expected = json.decode([[
+{
+  "word_abs": 4, "word_add": 6, "word_ceil": -3, "word_clamp": 10,
+  "word_div": 3.5, "word_eq": 1, "word_floor": -4, "word_ge": 1,
+  "word_gt": 1, "word_le": 1, "word_lt": 1, "word_max": 5,
+  "word_min": 2, "word_mod": 1, "word_mul": 24, "word_ne": 1,
+  "word_round": -3, "word_sub": 7,
+  "symbol_add": 5, "symbol_sub": 2, "symbol_mul": 12, "symbol_div": 3.5,
+  "symbol_mod": 1, "symbol_eq": 1, "symbol_ne": 1, "symbol_gt": 1,
+  "symbol_ge": 1, "symbol_lt": 1, "symbol_le": 1,
+  "integer_receiver": 1, "float_chain": 4, "bare_scalar_chain": 5,
+  "comparison_receiver": 1, "terminal_eq": null, "terminal_ne": null,
+  "terminal_gt": null, "terminal_ge": null, "terminal_lt": null, "terminal_le": null
+}
+]])
+  assert_json_equal(execute_uniform_binding_source(source), expected, "numeric call and receiver surfaces")
 end)
 
 local function selector_diagnostic(surface, identifier)

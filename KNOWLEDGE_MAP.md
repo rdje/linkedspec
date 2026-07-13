@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **473** facts · **3241** question keys.
+> **474** facts · **3245** question keys.
 
 ## Questions → fact
 
@@ -33,6 +33,7 @@
 - "are Lua ActionIR spans Unicode characters or bytes" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua DSL array indexes zero based" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua match positions bytes or Unicode characters" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "are Lua numeric comparison receiver methods terminal" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
 - "are Lua rule stores local across child calls" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua selectors rejected inside dead code" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
 - "are Lua selectors rejected inside unused user functions" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
@@ -723,8 +724,10 @@
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support exit_now" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support generic trailing codeblocks" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua support integer and float number receiver chains" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
 - "does Lua support matches helper" -> [lua-helper-regex-matches](docs/knowledge/lua-helper-regex-matches.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support named captures and PCRE recursion" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "does Lua support numeric word aliases and symbol callees" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
 - "does Lua support pure split helper" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support seek and consume regex matching" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "does Lua support selector free push split and hash mutation" -> [lua-uniform-binding-runtime](docs/knowledge/lua-uniform-binding-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
@@ -1444,6 +1447,7 @@
 - "how does Lua diagnose unknown helper calls" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua diagnose user function recursion" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish arrays harrays and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua distinguish division symbol calls from regex literals" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does Lua distinguish pure split from array split mutation" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua distinguish push rule dispatch from binding mutation" -> [lua-uniform-binding-runtime](docs/knowledge/lua-uniform-binding-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
@@ -4988,12 +4992,21 @@ _Lua has a dependency-free native module and dual-runtime scaffold_
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-native-backend-scaffold.md`](docs/knowledge/lua-native-backend-scaffold.md)
 
+### lua-numeric-call-receiver-runtime
+_Lua numeric calls and number receivers share one strict evaluator_
+
+- **answers:** does Lua support numeric word aliases and symbol callees | does Lua support integer and float number receiver chains | are Lua numeric comparison receiver methods terminal | how does Lua distinguish division symbol calls from regex literals
+- **date:** 2026-07-12 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.3.2 routes all 18 scalar numeric word aliases and 11 arithmetic/comparison symbol callees through scalar_numeric.lua. interpreter.lua injects integer/float/bare-scalar fluent receivers, composes numeric results, and terminates comparison continuations. action_parser.lua distinguishes a complete parenthesized slash callee from regex start after harray colons. The focused fixture plus grouped/class/zero-width/invalid regex regression cases pass 90/90 on PUC Lua and LuaJIT.`
+- **reverify:** `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
+- **source:** [`docs/knowledge/lua-numeric-call-receiver-runtime.md`](docs/knowledge/lua-numeric-call-receiver-runtime.md)
+
 ### lua-numeric-helper-preflight
 _Lua numeric helpers require separate scalar, receiver, aggregate, and closeout mechanisms_
 
 - **answers:** how is Lua numeric helper parity split | does Lua already canonicalize numeric aliases and symbol callees | where should Lua number receiver chains be implemented | which Lua leaf owns numeric aggregate reducers | what is next after Lua string helper parity
 - **date:** 2026-07-12 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.4.3.3.0 audited the public helper catalog, Perl/Rust/Dart/Julia runtime tests, lua/src/linkedspec/action_contracts.lua, and lua/src/linkedspec/interpreter.lua. Lua already mapped numeric word and symbol spellings to num_* contracts. LUA-BACKEND-PARITY.4.3.3.1.4 adds the strict canonical scalar evaluator and closes .1 at 89/89 on both ABIs plus exact six-runtime 55-case proof. Numeric receiver injection/terminal policy remains .2; aggregate reducer dispatch remains .3; .4 owns focused public no-drift.`
+- **evidence:** `LUA-BACKEND-PARITY.4.3.3.0 audited the public helper catalog, Perl/Rust/Dart/Julia runtime tests, lua/src/linkedspec/action_contracts.lua, and lua/src/linkedspec/interpreter.lua. LUA-BACKEND-PARITY.4.3.3.1.4 adds the strict canonical scalar evaluator at 89/89 and exact six-runtime 55-case proof. LUA-BACKEND-PARITY.4.3.3.2 admits every word/symbol call and numeric receiver composition/terminality at 90/90 on both ABIs, including slash-callee/regex disambiguation. Aggregate reducer dispatch remains .3; .4 owns focused public no-drift.`
 - **reverify:** `bash tools/check_scalar_numeric_six_runtime.sh && rg -n 'ALIAS_CANONICAL_NAMES|fluent_chain' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - **source:** [`docs/knowledge/lua-numeric-helper-preflight.md`](docs/knowledge/lua-numeric-helper-preflight.md)
 
@@ -5047,7 +5060,7 @@ _Lua scalar numeric v1 has one portable evaluator and exact six-runtime proof_
 
 - **answers:** how does Lua implement scalar numeric v1 | does Lua match all 55 scalar numeric cases | how is six-runtime scalar numeric parity checked | how does Lua avoid tonumber modulo and rounding drift
 - **date:** 2026-07-12 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.4.3.3.1.4 adds lua/src/linkedspec/scalar_numeric.lua and canonical dispatch in interpreter.lua. The unchanged linkedspec-scalar-numeric-v1 fixture is executed directly by lua/test/run.lua. PUC Lua and LuaJIT each pass 89/89 plus the exact 105-manifest/CLI scaffold. tools/check_scalar_numeric_six_runtime.sh proves the same 55-case expected value through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.`
+- **evidence:** `LUA-BACKEND-PARITY.4.3.3.1.4 adds lua/src/linkedspec/scalar_numeric.lua and canonical dispatch in interpreter.lua. LUA-BACKEND-PARITY.4.3.3.2 adds word/symbol call admission and numeric receiver composition/terminality. The unchanged linkedspec-scalar-numeric-v1 fixture is executed directly by lua/test/run.lua. PUC Lua and LuaJIT each pass 90/90 plus the exact 105-manifest/CLI scaffold. tools/check_scalar_numeric_six_runtime.sh proves the same 55-case expected value through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.`
 - **reverify:** `bash tools/check_scalar_numeric_six_runtime.sh`
 - **source:** [`docs/knowledge/lua-scalar-numeric-runtime.md`](docs/knowledge/lua-scalar-numeric-runtime.md)
 

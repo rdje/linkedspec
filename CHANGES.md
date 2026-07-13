@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.2 — add Lua numeric call and receiver forms
+
+Admitted all 18 scalar numeric word aliases and 11 arithmetic/comparison symbol callees through the existing strict
+evaluator. Numeric fluent chains now inject the integer, float, or bare-scalar receiver as operand one;
+number-returning links compose, while all six comparison links return numeric truth and terminate later receiver
+continuations. The focused fixture covers every word/symbol spelling and representative receiver/terminal paths.
+
+The first full run exposed a parser boundary hidden by standalone symbol tests: `/` after an harray colon was
+always treated as regex start, so a nested division-symbol call became raw fallback. Structural slash-call
+recognition now distinguishes a complete parenthesized callee while preserving grouped, character-class,
+zero-width, and invalid regex literals. PUC Lua and LuaJIT pass 90/90 plus the exact manifest/CLI scaffold; the
+unchanged 55-case six-runtime scalar contract remains exact. Aggregate numeric reducers/array receiver terminals
+`.4.3.3.3` are active.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.10 — close backend README selector drift
 
 Corrected the public-surface omission left by `.12.1.9`: its curated 47-file inventory covered root docs,

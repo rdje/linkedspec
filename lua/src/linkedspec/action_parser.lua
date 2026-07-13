@@ -27,7 +27,70 @@ local function skip_space(text, position)
   return position
 end
 
+local function regex_closer_follows_group(text, position)
+  local escaped = false
+  for cursor = position + 1, #text do
+    local character = text:sub(cursor, cursor)
+    if character == "\n" then return false end
+    if escaped then
+      escaped = false
+    elseif character == "\\" then
+      escaped = true
+    elseif character == "/" then
+      local suffix = cursor + 1
+      while text:sub(suffix, suffix):match("[A-Za-z]") do suffix = suffix + 1 end
+      suffix = skip_space(text, suffix)
+      if suffix > #text then return true end
+      return text:sub(suffix, suffix):match("[,%)%]%}%.;]") ~= nil
+    end
+  end
+  return false
+end
+
+local function looks_slash_symbol_callee(text, position)
+  local open_position = skip_space(text, position + 1)
+  if text:sub(open_position, open_position) ~= "(" then return false end
+  local depth = 0
+  local bracket_depth = 0
+  local quote
+  local escaped = false
+  for cursor = open_position, #text do
+    local character = text:sub(cursor, cursor)
+    if quote then
+      if escaped then
+        escaped = false
+      elseif character == "\\" then
+        escaped = true
+      elseif character == quote then
+        quote = nil
+      end
+    elseif character == '"' or character == "'" then
+      quote = character
+    elseif character == "/" then
+      local nested_open = skip_space(text, cursor + 1)
+      if text:sub(nested_open, nested_open) ~= "(" then return false end
+    elseif character == "[" then
+      bracket_depth = bracket_depth + 1
+    elseif character == "]" then
+      bracket_depth = math.max(0, bracket_depth - 1)
+    elseif character == "(" and bracket_depth == 0 then
+      depth = depth + 1
+    elseif character == ")" and bracket_depth == 0 then
+      depth = depth - 1
+      if depth == 0 then
+        local next_position = skip_space(text, cursor + 1)
+        if text:sub(cursor + 1, next_position - 1):find("\n", 1, true) then return true end
+        if next_position > #text then return true end
+        if regex_closer_follows_group(text, cursor) then return false end
+        return text:sub(next_position, next_position):match("[,%)%]%}%.;]") ~= nil
+      end
+    end
+  end
+  return false
+end
+
 local function looks_regex_start(text, position)
+  if looks_slash_symbol_callee(text, position) then return false end
   local previous = position - 1
   while previous >= 1 and text:sub(previous, previous):match("%s") do
     previous = previous - 1

@@ -28,7 +28,7 @@ unchanged neutral fixture on PUC Lua and LuaJIT. This is LinkedSpec typed-array 
 The remaining projections have explicit later owners: `.5.3` admits exact outward descriptors; `.8.1` preserves
 the union in normalized emitted state; `.8.2` independently executes the neutral fixture; `.8.3` makes the proof
 recurring; and `.8.4` removes the future capability entry only after native and generated paths pass. The current
-Lua execution frontier is numeric alias/symbol/number-receiver admission `.4.3.3.2`.
+Lua execution frontier is aggregate numeric reducer/array receiver admission `.4.3.3.3`.
 
 Related facts: [[lua-user-function-registry]], [[lua-function-definition-shell-projection]],
 [[variadic-user-function-contract]], [[variadic-callable-signature-seams]].

@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.2 — canonical call support does not imply receiver or nested symbol
+  support): Alias resolution already made direct word/symbol calls work, but the generic fluent fallback evaluated
+  method arguments without injecting the receiver. Numeric chains need an explicit evaluator branch and comparison
+  terminal fence. Separately, a slash callee inside an harray follows `:`, which is also a legal regex-start context;
+  scanner disambiguation must recognize the complete parenthesized `/` call without classifying `/pattern/flags`,
+  zero-width lookarounds, character classes containing `)`, or deliberately invalid regex fixtures as calls.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.10 — public inventories must discover component documentation): A
   hand-curated root/capability/mdBook list can report zero current examples while backend README files still teach
   removed syntax. Public no-drift therefore discovers all immediate component READMEs, locks the resulting file

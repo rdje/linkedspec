@@ -92,6 +92,10 @@ function M.supports(name)
   return SUPPORTED[name] == true
 end
 
+function M.is_comparison(name)
+  return COMPARISON[name] == true
+end
+
 function M.evaluate(name, args)
   if not M.supports(name) then
     error("unsupported scalar numeric helper '" .. tostring(name) .. "'", 2)

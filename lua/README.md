@@ -19,9 +19,10 @@ text coercion, strict PCRE2-backed `matches`, pure literal/regex/Unicode split,
 statement scalar regex mutation, explicit array split replacement, and receiver chains. Bare typed bindings are
 uniform, and retired aggregate selectors reject at compiled-state admission. Canonical scalar numeric helpers use
 one strict finite-decimal evaluator for governed arity, invalid/null handling, rounding, signed modulo, and result
-normalization. The Lua gate passes 89/89 on both PUC Lua 5.4 and LuaJIT; all 55 scalar numeric v1 cases also match
-Perl, Rust, Dart, and Julia exactly. Numeric aliases, symbol callees, receiver chains, and aggregate reducers remain
-separately owned downstream.
+normalization. Numeric word aliases, arithmetic/comparison symbol callees, and integer/float/bare-scalar receiver
+chains share that evaluator; number-returning links compose and comparisons terminate later links. The Lua gate
+passes 90/90 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl, Rust, Dart, and
+Julia exactly. Aggregate reducers and array receiver terminals remain separately owned downstream.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus

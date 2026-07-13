@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.2 — add Lua numeric call and receiver forms**
+  (DONE — aggregate numeric reducers/array receiver terminals `.4.3.3.3` are active).
+
+  **Implementation:** Every scalar numeric word alias and arithmetic/comparison symbol callee shares the strict
+  evaluator. Integer/float/bare-scalar receivers inject operand one, numeric links compose, and comparisons
+  terminate later links. Structural slash-call detection fixes nested `/(...)` without weakening regex literals.
+
+  **Proof:** The focused fixture covers 18 word aliases, 11 symbol callees, literal/bare receiver chains, and
+  comparison terminality. Grouped/class/zero-width/invalid regex cases remain green. PUC Lua and LuaJIT each pass
+  90/90 plus the exact manifest/CLI scaffold; all six runtimes still match the unchanged 55-case scalar contract.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.10 — close backend README selector drift**
   (DONE — selector retirement `.12.1` and compatibility parent `.12` re-closed; Lua numeric `.4.3.3.2` resumes).
 

@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua numeric word aliases and all 11 arithmetic/comparison symbol callees now reach the
+  strict scalar evaluator; fluent integer, float, and bare-scalar values inject as operand one, number-returning
+  links compose, and comparisons terminate later links. The first full test exposed `/` callee versus regex-start
+  ambiguity after harray colons; structural slash-call detection preserves grouped, class, zero-width, and invalid
+  regex literals. Both ABIs pass 90/90; aggregate reducers/array terminals `.4.3.3.3` are active.
 - `2026-07-12` refresh: Selector-retirement public no-drift now includes every immediate component README. The
   earlier 47-file root/capability/mdBook inventory omitted Rust, Dart, Julia, and Lua backend READMEs, allowing 14
   current positive selector forms to survive `.12.1.9`. Follow-up `.12.1.10` migrates those forms, discovers all
