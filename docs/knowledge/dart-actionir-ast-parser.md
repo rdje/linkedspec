@@ -8,11 +8,14 @@ answers:
   - does Dart parse receiver chains
   - does Dart parse attached control flow
   - does Dart use text to AST for helper code
-date: 2026-07-09
+  - does Dart support punctuation light zero argument calls
+  - can Dart receiver methods omit final parentheses
+  - is bare next a statement or variable in Dart
+date: 2026-07-13
 status: current
 tags: [dart, actionir, ast, parser, text-to-ast]
-evidence: "DART-BACKEND-PARITY.3.1 adds dart/lib/src/action/action_ast.dart, dart/lib/src/action/action_parser.dart, and test/action_ast_parser_test.dart. The parser entrypoints parseActionBlock/parseActionStatement/parseActionExpression cover calls, positional and keyword args, literals, variables, indexed/nested access, array/hash literals, scalar/array/hash/nested assignments, block values, attached controls, receiver chains, trailing block args, value-drop statements, and structural raw_perl fallback."
-reverify: "cd dart && dart test test/action_ast_parser_test.dart && dart analyze --fatal-infos --fatal-warnings"
+evidence: "DART-BACKEND-PARITY.3.1 adds dart/lib/src/action/action_ast.dart, dart/lib/src/action/action_parser.dart, and test/action_ast_parser_test.dart. The parser entrypoints parseActionBlock/parseActionStatement/parseActionExpression cover calls, positional and keyword args, literals, variables, indexed/nested access, array/hash literals, scalar/array/hash/nested assignments, block values, attached controls, receiver chains, trailing block args, value-drop statements, and structural raw_perl fallback. FUTURE-PARITY-BACKLOG.16.4 adds exact statement-context bare next and final-only bare receiver normalization, with equal typed ASTs and unchanged exclusions proved by punctuation_light_zero_arg_contract_test.dart."
+reverify: "cd dart && dart test test/action_ast_parser_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart helper/action text now has a typed ActionIR parser seam:
@@ -28,6 +31,11 @@ scalar assignment, array append, hash-index assignment, nested-access assignment
 expression-valued blocks, receiver-dot fluent chains, trailing block arguments,
 and attached `if`/`when`/`elseif`/`else`/`otherwise`, `while`, and
 `switch`/`case`/`default` controls.
+
+The punctuation-light seam is deliberately contextual. Exact bare `next` becomes a zero-argument call only when
+parsed as a complete statement; expression/value-position `next` remains a variable. A generic bare receiver
+identifier becomes the existing empty-argument fluent call only in the final chain segment. Intermediate receiver
+segments, condition headers, general calls, and trailing-block receivers retain their parenthesized grammar.
 
 Unsupported expressions stay as explicit `raw_perl` nodes. This preserves the
 frontend shape for diagnostics without doing text-to-text rewriting or host-code

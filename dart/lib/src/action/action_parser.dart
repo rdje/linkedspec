@@ -32,7 +32,15 @@ final class _ActionParser {
 
   ActionStatement parseStatement() {
     final trimmed = _trimWithOffsets(source, baseStart);
-    final expr = _ActionParser(trimmed.text, trimmed.start).parseExpression();
+    final expr = trimmed.text == 'next'
+        ? ActionCallExpr(
+            source: trimmed.text,
+            sourceSpan: _span(trimmed.start, trimmed.end),
+            name: 'next',
+            sourceMethod: 'next',
+            args: const [],
+          )
+        : _ActionParser(trimmed.text, trimmed.start).parseExpression();
     return ActionStatement(
       source: trimmed.text,
       sourceSpan: _span(trimmed.start, trimmed.end),
@@ -723,11 +731,13 @@ final class _ActionParser {
           start + receiverSegment.start,
         );
     final calls = <ActionFluentCall>[];
-    for (final segment in segments.skip(1)) {
+    for (var index = 1; index < segments.length; index += 1) {
+      final segment = segments[index];
       final call = _parseFluentCallSegment(
         segment.text,
         start + segment.start,
         start + segment.end,
+        allowBareIdentifier: index == segments.length - 1,
       );
       if (call == null) {
         return ActionRawExpr(
@@ -746,13 +756,28 @@ final class _ActionParser {
     );
   }
 
-  ActionFluentCall? _parseFluentCallSegment(String text, int start, int end) {
+  ActionFluentCall? _parseFluentCallSegment(
+    String text,
+    int start,
+    int end, {
+    required bool allowBareIdentifier,
+  }) {
     final parsed = _parseCallee(text);
     if (parsed != null) {
       return ActionFluentCall(
         method: parsed.name,
         sourceMethod: parsed.sourceMethod,
         args: _parseArguments(parsed.payload, start + parsed.payloadStart),
+        source: text,
+        sourceSpan: _span(start, end),
+      );
+    }
+    final bare = text.trim();
+    if (allowBareIdentifier && _isIdentifier(bare)) {
+      return ActionFluentCall(
+        method: bare,
+        sourceMethod: bare,
+        args: const [],
         source: text,
         sourceSpan: _span(start, end),
       );

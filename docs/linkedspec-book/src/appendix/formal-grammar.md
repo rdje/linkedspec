@@ -423,9 +423,9 @@ Rule-edge and lifecycle fluent control-flow markers accept bare-keyword suffix f
 .else   .endif   .default   .endcase   .endswitch
 ```
 
-These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl and Rust typed
-ActionIR parsers now accept standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a
-final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence for Dart, Julia,
+These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl, Rust, and Dart
+typed ActionIR parsers now accept standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`,
+plus a final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence for Julia
 and Lua. Until that lane closes, parenthesized standalone markers and generic receiver calls remain the
 universal spelling.
 
@@ -461,9 +461,10 @@ The versioned source of truth is
 `capability_conformance/punctuation_light_zero_arg_contract.json`, checked independently by
 `tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes it through
 `t/punctuation_light_zero_arg_contract.t`; Rust consumes its syntax/AST and execution cases through
-`rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`. Rust's pre-existing zero-argument
-`.contains()` fallback is separately owned by helper-normalization backlog `.5`. Complete admission remains future
-until `FUTURE-PARITY-BACKLOG.16.4-.16.7` close.
+`rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`; Dart consumes it through
+`dart/test/punctuation_light_zero_arg_contract_test.dart`. Rust and Dart's pre-existing zero-argument
+`.contains()` outcomes are separately owned by helper-normalization backlog `.5`. Complete admission remains
+future until `FUTURE-PARITY-BACKLOG.16.5-.16.7` close.
 
 ### 3.8 Conditional Markers
 

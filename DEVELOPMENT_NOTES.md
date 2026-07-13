@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.4` — reuse Dart's existing statement and terminal-chain contexts): Dart
+  already normalized five structural control heads, so adding a grammar-wide bare-call production would have
+  broadened the language unnecessarily. Exact trimmed `next` is synthesized as the existing zero-argument call
+  only by statement parsing; expression/value parsing still yields a variable. Fluent-chain iteration already
+  knows which segment is final, so only that segment may synthesize an empty argument list from a bare identifier.
+  This preserves all six excluded classes and makes native, generated-plan, emitted-state, and CLI paths consume
+  the same typed AST. Dart `_callArrayContains` separately returns `0` when the needle argument is absent; syntax
+  parity preserves the parenthesized outcome and leaves helper normalization to `.5`.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.3` — preserve newline evidence before generic expression parsing): Rust's
   generic variable parser permits whitespace before call/index lookahead, so post-normalizing a parsed bare marker
   is too late: it has already consumed the newline needed by statement-separator accounting. The narrow parser

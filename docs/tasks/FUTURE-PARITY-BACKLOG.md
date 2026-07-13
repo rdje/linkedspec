@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Perl and Rust consume the punctuation-light alias contract through completed `.16.3`;
-  Dart implementation `.16.4` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at a
+- Last updated: `2026-07-13` (Perl, Rust, and Dart consume the punctuation-light alias contract through completed
+  `.16.4`; Julia implementation `.16.5` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at a
   clean handoff point).
 - Owner: repo-local workflow
 
@@ -2209,8 +2209,8 @@ before implementation.
     a no-op, and Dart/Julia propagate it to rule repetition. Choose one exact limit and flow rule before portable
     specs rely on either boundary.
     Normalize required receiver-helper arity too: Perl rejects `.contains()` because the implicit receiver still
-    leaves one required authored argument, while Rust currently defaults the absent needle to empty text and
-    returns numeric `0`. This is pre-existing helper semantics, not permission for a punctuation-light alias to
+    leaves one required authored argument, while Rust and Dart currently default or otherwise accept the absent
+    needle and return numeric `0`. This is pre-existing helper semantics, not permission for a punctuation-light alias to
     differ from its parenthesized twin.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
@@ -3293,17 +3293,26 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.3 - implement Rust zero-argument aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.4`
-  Status: `in_progress`
+  Status: `done`
   Goal: Implement and regression-lock the ratified aliases on the Dart backend and generated path.
   Dependencies: `.16.1`, `.16.2`
   Acceptance: Dart normalizes all six standalone forms and final generic receiver form to the same typed AST,
     retains the negative boundaries and diagnostics, and passes native plus generated execution of the unchanged
     neutral contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Dart's statement parser recognizes exact bare `next` only in statement
+    context, preserving expression/value-position `next` as a variable, while its existing control-head
+    normalization already covers the other five standalone markers. Fluent parsing admits a generic bare
+    identifier only in the terminal receiver segment and synthesizes the same empty-argument typed call as `()`.
+    The neutral contract proves six statement and four receiver semantic-AST equivalences, ordinary identifier
+    retention, all six unchanged exclusions, and existing arity outcomes. The fixture returns
+    `{result: "yes", picked: "a", count: 2}` through native execution, generated-plan execution, emitted-state
+    reconstruction, and exact bare/parenthesized CLI twins. The complete Dart gate passes format, strict analysis,
+    211 package tests, CLI 61/61 twice, and corpus 105/105. Dart's pre-existing `.contains()` missing-argument
+    result matches its parenthesized twin at `0`; helper normalization remains owned by `.5`.
+  Commit: `FUTURE-PARITY-BACKLOG.16.4 - implement Dart zero-argument aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.5`
-  Status: `pending`
+  Status: `in_progress`
   Goal: Implement and regression-lock the ratified aliases on the Julia backend and generated path.
   Dependencies: `.16.1`, `.16.2`
   Acceptance: Julia normalizes all six standalone forms and final generic receiver form to the same typed AST,
@@ -3438,6 +3447,21 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
   classifications, 197 integration tests, focused contract/source/loader/trace/Unicode suites, and CLI 61x2.
 - [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Dart `.16.4`; the pre-existing
   Rust `.contains()` missing-argument default is recorded under helper-normalization owner `.5`, not changed here.
+
+### `FUTURE-PARITY-BACKLOG.16.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Dart already normalized five standalone control markers, but bare `next` remained a
+  value expression and every generic receiver segment still required `()`; the bare neutral CLI fixture failed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_parser.dart` has distinct statement, control-head, expression, and
+  fluent-segment seams. The terminal segment position was already explicit, so no grammar-wide lookahead was needed.
+- [x] **FIX** — Normalize exact bare `next` only in `parseStatement()` and allow an identifier-only fluent segment
+  only when it is the final segment, synthesizing the existing empty argument list.
+- [x] **ADDRESSED (verified)** — The neutral Dart contract proves six statement and four receiver typed-AST
+  equivalences, retained value reads, six unchanged exclusions, and exact native/generated/emitted/CLI fixture output.
+- [x] **NO REGRESSION** — The complete Dart gate passes format, strict analysis, 211 package tests, CLI 61x2, and
+  corpus 105/105. Parenthesized syntax and all excluded grammar classes are unchanged.
+- [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Julia `.16.5`; Dart's pre-existing
+  `.contains()` zero-argument result is recorded with Rust under helper-normalization owner `.5`, not changed here.
 
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
@@ -3994,8 +4018,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 150 | `FUTURE-PARITY-BACKLOG.16.2.0` | `done` | Replaced invalid drop_front arity example with measured required-argument contains behavior. |
 | 151 | `FUTURE-PARITY-BACKLOG.16.2.1` | `done` | Perl consumes the unchanged standalone/final-receiver contract with exact live/generated behavior. |
 | 152 | `FUTURE-PARITY-BACKLOG.16.3` | `done` | Rust aliases and native/oracle/generated paths are exact; helper drift is delegated to `.5`. |
-| 153 | `FUTURE-PARITY-BACKLOG.16.4` | `in_progress` | Align Dart native and generated paths. |
-| 154 | `FUTURE-PARITY-BACKLOG.16.5` | `pending` | Align Julia native and generated paths. |
+| 153 | `FUTURE-PARITY-BACKLOG.16.4` | `done` | Dart aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
+| 154 | `FUTURE-PARITY-BACKLOG.16.5` | `in_progress` | Align Julia native and generated paths. |
 | 155 | `FUTURE-PARITY-BACKLOG.16.6` | `pending` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
 | 156 | `FUTURE-PARITY-BACKLOG.16.7` | `pending` | Close examples, book, grammar, KM, generated, capability, and no-drift alignment. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
@@ -4462,6 +4486,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Decisions
 
+- `2026-07-13`: `.16.4` uses Dart's explicit statement and terminal-segment contexts rather than adding a new
+  general call production. Bare `next` is a call only as a complete statement; value-position `next` remains a
+  variable. A generic receiver identifier becomes a zero-argument call only when final. Dart's existing
+  `.contains()` no-needle result remains `0`, matching `.contains()` and staying owned with Rust's drift by `.5`.
 - `2026-07-13`: `.16.3` keeps syntax convergence separate from pre-existing helper semantics. Rust bare and
   parenthesized terminal calls share one typed empty-argument node and therefore the same runtime outcome.
   Rust `.contains()` currently defaults the absent needle and returns `0`, unlike Perl's arity rejection; `.5`
@@ -4618,6 +4646,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.4` | Dart typed-AST/negative contract; exact bare/parenthesized CLI twins; native/generated-plan/emitted-state fixture; format; strict analysis; complete 211-package/CLI 61x2/corpus 105 gate; docs/KM/governance/whitespace. | PASS. Dart consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Julia `.16.5` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.3` | Rust typed-AST/negative contract; exact rebuilt-CLI twins; native/serialized/emitted/generated fixture; complete 137/105-oracle/105-generated/197-integration/focused suites/CLI 61x2 gate; docs/KM/governance/whitespace. | PASS. Rust consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Dart `.16.4` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.2.1` | LinkedSpec AST/lowering/descriptor probes; 7-subtest neutral Perl contract with live/generated execution; focused 29-test AST pair; capability 60/0/0; CLI 61x2; Phase 0 `1..1031`/611s; docs/KM/governance/whitespace. | PASS. Perl consumes the unchanged contract, exclusions remain narrow, parent `.16.2` closes, and Rust `.16.3` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.2.0` | Toolbox lowering probes for drop_front/contains; canonical MethodLowering arity table; strict contract/mutations; capability 60/0/0; CLI 61x2; Phase 0 `1..1031`/605s; docs/KM/governance/whitespace. | PASS. Required-argument example is truthful, no syntax/behavior changed, and Perl `.16.2.1` activates. |
@@ -4731,6 +4760,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.4` | `FUTURE-PARITY-BACKLOG.16.4 - implement Dart zero-argument aliases` | Dart typed AST, statement-only bare next, final-only receivers, native/generated/emitted/CLI fixture, and helper-drift routing. |
 | `FUTURE-PARITY-BACKLOG.16.3` | `FUTURE-PARITY-BACKLOG.16.3 - implement Rust zero-argument aliases` | Rust typed AST, exact statement boundaries, final-only receivers, native/serialized/emitted/generated fixture, and helper-drift routing. |
 | `FUTURE-PARITY-BACKLOG.16.2.1` | `FUTURE-PARITY-BACKLOG.16.2.1 - implement Perl zero-argument aliases` | Perl typed AST, scanner/lowering, final-only receivers, exact neutral live/generated fixture, and narrow exclusions. |
 | `FUTURE-PARITY-BACKLOG.16.2.0` | `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture` | Replace invalid drop_front required-argument example with measured contains behavior; no syntax/backend change. |
@@ -4844,6 +4874,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.4` makes Dart consume the punctuation-light aliases at its typed parser seam. Existing
+  control-head normalization covers five markers; exact statement-context `next` adds the sixth without changing
+  expression/value reads. Final generic receiver identifiers synthesize the same empty argument list as `()`,
+  while intermediate segments and all other exclusions remain invalid. The neutral fixture returns the exact
+  object through native, generated-plan, emitted-state reconstruction, and bare/parenthesized CLI paths. The
+  complete Dart gate passes format, strict analysis, 211 package tests, CLI 61x2, and corpus 105/105. Dart's
+  pre-existing `.contains()` missing-argument result is delegated with Rust's drift to helper owner `.5`; Julia
+  `.16.5` becomes active.
 - `2026-07-13`: `.16.3` makes Rust consume the punctuation-light aliases at its typed parser seam. The six
   standalone names normalize only at exact statement boundaries, final generic receiver identifiers synthesize
   the same empty argument list as `()`, value-position `next` remains a variable, and all excluded forms remain

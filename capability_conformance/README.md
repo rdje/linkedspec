@@ -72,9 +72,11 @@ cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`.
 parsing, unchanged exclusions and method resolution, canonical `next` lowering, and live plus standalone
 generated execution. Rust consumes the same syntax/AST cases through
 `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`, including exact native, serialized,
-emitted-source, generated-plan, and rebuilt-CLI fixture results. Its pre-existing `.contains()` missing-argument
-fallback remains helper drift owned by `FUTURE-PARITY-BACKLOG.5`; both spellings preserve the same Rust outcome.
-Complete backend admission remains future under `FUTURE-PARITY-BACKLOG.16.4-.16.7`.
+emitted-source, generated-plan, and rebuilt-CLI fixture results. Dart consumes the same cases through
+`dart/test/punctuation_light_zero_arg_contract_test.dart`, including exact native, generated-plan, emitted-state,
+and CLI fixture results. Rust and Dart's pre-existing `.contains()` missing-argument outcomes remain helper drift
+owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome. Complete backend
+admission remains future under `FUTURE-PARITY-BACKLOG.16.5-.16.7`.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
 changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns

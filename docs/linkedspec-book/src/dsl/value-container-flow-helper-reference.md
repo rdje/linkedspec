@@ -1390,7 +1390,7 @@ print_each(matches, "match:<<", ">>\n")
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
-Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator. Perl and Rust also accept the punctuation-light standalone alias `next`; keep `next()` in cross-backend source until the Dart/Julia/Lua parity lane closes:
+Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator. Perl, Rust, and Dart also accept the punctuation-light standalone alias `next`; keep `next()` in cross-backend source until the Julia/Lua parity lane closes:
 
 ```text
 -> comment {next()}

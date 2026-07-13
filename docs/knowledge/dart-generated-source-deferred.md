@@ -9,11 +9,12 @@ answers:
   - "is generated Dart source required for Dart parity"
   - "how does Dart embed Unicode generated spec state"
   - "where is the Dart generated-source compile run harness"
-date: 2026-07-11
+  - "does Dart generated source preserve punctuation light aliases"
+date: 2026-07-13
 status: current
 tags: [dart, codegen, source-emitter, corpus, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.2 deferred codegen; FUTURE-PARITY-BACKLOG.3.3 later closes deterministic source, family routing, isolation, and admission. FUTURE-PARITY-BACKLOG.4.3.1 carries typed variadic signatures through normalized emitted Base64 state, generated-plan execution, and reconstruction; the complete 190/61x2/105 gate passes."
-reverify: "cd dart && dart test test/source_emitter_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.3\\.3|emitDartSourceV1|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
+evidence: "DART-BACKEND-PARITY.7.2 deferred codegen; FUTURE-PARITY-BACKLOG.3.3 later closes deterministic source, family routing, isolation, and admission. FUTURE-PARITY-BACKLOG.4.3.1 carries typed variadic signatures through normalized emitted Base64 state, generated-plan execution, and reconstruction. FUTURE-PARITY-BACKLOG.16.4 proves punctuation-light typed AST equivalence plus exact native, generated-plan, emitted-state reconstruction, and CLI results; the complete 211/61x2/105 gate passes."
+reverify: "cd dart && dart test test/source_emitter_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.3\\.3|emitDartSourceV1|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
 ---
 
 Generated Dart source now exists as a public scaffold. It was not required for
@@ -42,6 +43,10 @@ gap. Dart and Julia now pass the complete generated-source capability census.
 
 Variadic functions reuse this normalized-state path: the v2 signature is embedded in the Base64 JSON, reconstructed
 into `FunctionDefinition`, and executed without host Dart rest or named-argument semantics.
+
+Punctuation-light zero-argument aliases reuse the same typed state rather than creating generated-only syntax.
+The `.16.4` contract reconstructs emitted Base64 normalized state and returns the same exact fixture value as the
+native and generated-plan paths.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[dart-backend-interpreter-first-plan]], [[rust-source-emitter-lane-split]],
