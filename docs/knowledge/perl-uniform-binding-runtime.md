@@ -32,9 +32,9 @@ target fails deterministically with `binding_kind_mismatch` plus identifier, exp
 For ambiguous `push(rule_or_target, destination_or_value)`, a registered static rule handler wins; otherwise the
 first bare name is the array binding.
 
-Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. Their removal is
-already decided: the backend enablement leaves precede tracked-source migration, followed by Perl hard rejection
-in `FUTURE-PARITY-BACKLOG.12.1.8.1`.
+Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. All backend enablement
+leaves are complete and tracked-source migration is active; Perl hard rejection follows in
+`FUTURE-PARITY-BACKLOG.12.1.8.1`.
 
 Related facts: [[uniform-binding-neutral-contract]],
 [[spec-facing-aggregate-selector-retirement-inventory]],

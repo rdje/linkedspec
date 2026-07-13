@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (scalar numeric `.4.3.3.1.4` active; variadic user functions routed to `.5.1`/`.5.3`/`.8`)
+- Last updated: `2026-07-12` (global uniform-binding delegation passes 85/85 on both ABIs; scalar numeric resumes after selector retirement)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1245,6 +1245,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 ## Current frontier
+
+Global delegation note: `FUTURE-PARITY-BACKLOG.12.1.6` adds selector-free uniform bindings, updated mutation
+results/chaining, static push precedence, wrong-kind fields, and the minimal array continuations needed by the
+neutral contract. PUC Lua and LuaJIT pass 85/85 and report `runtime-uniform-bindings`. This does not close or reorder
+the local parity tree: `.4.3.3.1.4` resumes after global selector migration/rejection.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |

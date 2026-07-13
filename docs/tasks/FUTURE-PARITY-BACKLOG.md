@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl/Rust/Dart/Julia uniform-binding consumers complete; Lua `.12.1.6` active).
+- Last updated: `2026-07-12` (all five uniform-binding consumers complete; shipped-source migration `.12.1.7.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2780,19 +2780,32 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.5 - enable Julia uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.6`
-  Status: `active`
+  Status: `done`
   Goal: Implement the unchanged selector-free binding and mutation contract on Lua before resuming feature parity.
   Acceptance: Existing `lookup_binding` semantics extend through every admitted mutation/helper path; dual-ABI
     focused proof passes without keeping selector forms as a Lua compatibility requirement.
+  Verification: **PASS 2026-07-12.** Lua now uses `lookup_binding` plus kind-checked array mutation seams for bare
+    push/append, three-argument mutable split, array-end methods, and standalone collection rebinding; hash-index
+    mutation rejects incompatible existing values, missing targets create only the required kind, and every mutation
+    returns a copied updated binding. Static compiled rules retain ambiguous-push precedence. Minimal pure array
+    dispatch supplies the unchanged fixture's `count`/`sorted`/`first`/`trim_each`/`filter_nonempty` continuations.
+    Baseline dual-ABI proof passed two and failed seven of the nine exact cases; after repair all nine pass. The first
+    full gate exposed one stale lock that required `array(target)` for statement split; it now asserts bare
+    three-argument mutation while two-argument split remains pure. PUC Lua and LuaJIT each pass 85/85, the 105-case
+    manifest remains exact, the CLI remains explicitly scaffolded, and backend status is
+    `runtime-uniform-bindings`. The immediately prior canonical gate passes doctrines/contracts, capability 60/0/0,
+    Perl CLI 61x2, and Phase 0 `1..1030` in 865 seconds. No selector source migrates in this leaf; `.12.1.7.1`
+    activates.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7`
-  Status: `pending`
+  Status: `active`
   Goal: Migrate every tracked `.spec` and embedded source away from exact aggregate selectors.
   Children: `.12.1.7.1`, `.12.1.7.2`, `.12.1.7.3`
   Dependencies: `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7.1`
-  Status: `pending`
+  Status: `active`
   Goal: Migrate the 15 affected shipped specs and prove their reference/generated behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.7.2`
@@ -2940,6 +2953,23 @@ before implementation.
 - [x] **LOCKSTEP** — Julia code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
   Julia as the fourth enabled backend and Lua `.12.1.6` as next.
 
+### `FUTURE-PARITY-BACKLOG.12.1.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and all seven binding/mutation cases through PUC Lua
+  and LuaJIT, preserving exact push/split/hash/result/chaining/precedence/wrong-kind gaps.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace variable reads, `lookup_binding`, scalar/array/harray stores,
+  `target_descriptor`, call/statement interception, fluent dispatch, and diagnostic projection; separate one public
+  typed binding from private migration storage.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/array-end/collection mutations read, validate,
+  update, and return one typed value; auto-create only absent required kinds; preserve static-rule push precedence;
+  keep exact selectors solely as temporary migration input.
+- [x] **ADDRESSED (verified)** — Both Lua ABIs match neutral result/error fields, saved snapshots,
+  `set(...).sorted().first()`, mutation continuation, pure/mutable split, collection rebinding, and silent drop.
+- [x] **NO REGRESSION** — Dual-ABI Lua package/corpus/CLI plus neutral/capability/doctrine/KM/mdBook/whitespace gates
+  reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Lua code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify all
+  five enabled backends and source migration `.12.1.7.1` as next.
+
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Duck-typed values coexist with legacy wrapper-selected scalar/aggregate namespaces,
@@ -3062,7 +3092,9 @@ before implementation.
 | 86 | `FUTURE-PARITY-BACKLOG.12.1.3` | `done` | Rust native/generated execution consumes the one-binding contract. |
 | 87 | `FUTURE-PARITY-BACKLOG.12.1.4` | `done` | Dart native/generated execution consumes the one-binding contract. |
 | 88 | `FUTURE-PARITY-BACKLOG.12.1.5` | `done` | Julia native/generated execution consumes the one-binding contract. |
-| 89 | `FUTURE-PARITY-BACKLOG.12.1.6` | `active` | Implement the unchanged one-binding contract on Lua before tracked source migration. |
+| 89 | `FUTURE-PARITY-BACKLOG.12.1.6` | `done` | Both Lua ABIs consume the one-binding contract before tracked source migration. |
+| 90 | `FUTURE-PARITY-BACKLOG.12.1.7` | `active` | All backends are enabled; migrate every tracked selector-shaped source before hard rejection. |
+| 91 | `FUTURE-PARITY-BACKLOG.12.1.7.1` | `active` | Migrate and verify the 15 affected shipped specs first. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3753,6 +3785,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.1` | Strict uniform-binding JSON/checker; 11 migrations; seven execution cases; six invalid selectors; eight valid constructors/literals; deterministic future fixture; capability future owner; canonical CI with 60/0/0, 61x2 CLI, and Phase 0 `1..1030`/875s; governance/whitespace/mdBook. | PASS. One observable typed binding, storage neutrality, set/mutation results, absent/wrong-kind behavior, static push precedence, pure/mutable split, exact future rejection, and constructor classification are adopted before Perl behavior `.12.1.2`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.2` | Perl typed-binding runtime; live/standalone future fixture; 38 focused tests; neutral 11/7/6/8 checker; canonical doctrines, capability 60/0/0, 61x2 CLI, and Phase 0 `1..1030`/821s; Knowledge Map/whitespace/mdBook. | PASS. Bare mutations, reads, receivers, results, chaining, diagnostics, and static precedence share one observable binding; compatibility wrappers remain only until migration; Rust `.12.1.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.5` | Permanent native/generated 27-assertion contract; complete Julia 1,311 assertions, CLI 61x2, and 105 corpus; canonical doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030`/865s; KM/governance/whitespace/mdBook. | PASS. Julia mutations use one typed binding, return updated values, preserve static precedence, and reject wrong kinds; Lua `.12.1.6` activates without selector migration. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.6` | Nine exact uniform-binding cases; complete PUC Lua and LuaJIT 85/85; exact 105-case manifest/scaffold CLI; immediately prior canonical doctrines/contracts, 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030`/865s; KM/governance/whitespace/mdBook. | PASS. Lua is the fifth enabled backend; bare mutations/results, precedence, diagnostics, and chaining pass before shipped-source migration `.12.1.7.1`. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.1` | ADR 0030; strict callable-signature JSON/checker; three definitions/nine calls/seven invalid signatures; deterministic future spec/expected values; canonical-CI integration; 60/0/0 census; docs/KM/governance/whitespace/mdBook. | PASS. Final `...rest`, v1 fixed/v2 variadic records, typed rest arrays, positional diagnostics, and backend rollout are locked before behavior code; Perl `.4.2.1` is active. |
@@ -3793,6 +3826,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.3` | `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings` | Native/generated typed bare mutations/results, static precedence, diagnostics, oracle bridge, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.4` | `FUTURE-PARITY-BACKLOG.12.1.4 - enable Dart uniform bindings` | Native/generated typed bare mutations/results, wrapper bridge, diagnostics, corpus, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.5` | `FUTURE-PARITY-BACKLOG.12.1.5 - enable Julia uniform bindings` | Native/generated typed mutations/results, wrapper bridge, diagnostics, package/corpus/CLI, and full-gate proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.6` | `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings` | Dual-ABI typed mutations/results, static precedence, diagnostics, minimal array continuations, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3858,11 +3892,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.6` makes Lua the fifth executable uniform-binding backend on both ABIs. Bare typed
+  push/append, mutable split, hash update, array-end methods, collection rebinding, results/chaining, static
+  precedence, and wrong-kind fields pass all nine exact cases. PUC Lua and LuaJIT each pass 85/85; selector sources
+  remain unchanged here, and shipped migration `.12.1.7.1` activates immediately.
 - `2026-07-12`: `.12.1.5` makes Julia the fourth executable uniform-binding backend. `_read_runtime_store` remains
   the public read seam while kind-checked mutations update and return one typed value across native/generated paths.
   The 27-assertion focused contract, 1,311 package assertions, CLI 61x2, 105 corpus fixtures, and canonical
   Phase 0 `1..1030`/865s pass. Two stale array-end/hash-namespace locks now assert the adopted behavior. No selector
-  source migrates; Lua `.12.1.6` is active.
+  source migrates; the Lua handoff later completed.
 - `2026-07-12`: `.12.1.4` makes Dart the third executable uniform-binding backend. Bare reads and kind-checked
   mutations share one typed value across native/generated paths, including saved results and continuation. Mixed
   wrapper/bare mutations bridge the same binding only for migration. Format/analyze, 199 tests, generated packages,

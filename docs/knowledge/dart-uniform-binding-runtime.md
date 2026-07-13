@@ -35,8 +35,8 @@ bare `merge_hash(meta, overlay)` saw only the overlay after wrapper/bare mutatio
 contract replaces the first assertion; temporary wrapper mutations now bridge to the same typed binding, fixing
 the second without making selectors permanent.
 
-Exact `array(name)` and `hash(name)` remain parsed only until all backends support bare replacements and tracked
-sources migrate. Dart rejects and deletes those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.3`.
+Exact `array(name)` and `hash(name)` remain parsed only while tracked sources migrate; all backends support bare
+replacements. Dart rejects and deletes those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.3`.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-runtime-core-value-capture-helpers]],

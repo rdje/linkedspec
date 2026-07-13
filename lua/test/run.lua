@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-string-helpers", "status parity")
+  assert_equal(first.parity, "runtime-uniform-bindings", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2442,7 +2442,7 @@ Flagged::
   assert_equal(failure.rule_label, "Flagged", "unknown flag diagnostic attributes its rule")
 end)
 
-test("statement split replaces only explicit array targets", function()
+test("statement split distinguishes bare mutable and pure forms", function()
   local source = [[
 Top::
  /x/
@@ -2471,9 +2471,171 @@ Top::
   assert_equal(#result.literal_parts, 3, "literal target split preserves empty fields")
   assert_equal(result.literal_parts[1], "", "literal target leading empty")
   assert_equal(result.literal_parts[3], "", "literal target trailing empty")
-  assert_equal(table.concat(result.scalar_parts, "|"), "a|b", "non-wrapper statement leaves scalar-held value")
+  assert_equal(table.concat(result.scalar_parts, "|"), "ignored", "bare three-argument split replaces target")
   assert_equal(result.raw_after, " left , right,,third ", "statement split leaves source scalar untouched")
   assert_equal(table.concat(result.pure, "|"), "x|y", "pure split value remains available")
+end)
+
+local function execute_uniform_binding_source(source, input)
+  return linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    input or "xx"
+  ).value
+end
+
+local function assert_json_equal(actual, expected, label)
+  assert_equal(json.encode(actual), json.encode(expected), label)
+end
+
+test("uniform-binding future fixture executes", function()
+  local handle = assert(io.open("capability_conformance/uniform_binding_contract.json", "rb"))
+  local contract = json.decode(assert(handle:read("*a")))
+  assert(handle:close())
+  assert_equal(contract.contract_id, "linkedspec-uniform-binding-v1", "contract id")
+  assert_json_equal(
+    execute_uniform_binding_source(contract.fixture.spec_source, contract.fixture.input),
+    contract.fixture.expected,
+    "future fixture"
+  )
+end)
+
+test("uniform-binding absent push and array-end mutation return independent updates", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   first_push = push(items, "a")
+   second_push = push(items, "b")
+   items += "c"
+   count = items.push_back("d").count()
+   return({ "items" : items, "first_push" : first_push, "second_push" : second_push, "count" : count })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    items = json.array({ "a", "b", "c", "d" }),
+    first_push = json.array({ "a" }),
+    second_push = json.array({ "a", "b" }),
+    count = 4,
+  }), "updated arrays")
+end)
+
+test("uniform-binding registered rule keeps ambiguous push precedence", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ I { items = ["unchanged"]; outputs = [] }
+ /x/ -> Done { pushed = push(items, outputs); return([items, outputs, pushed]) }
+items::
+ /x/ I { return("child-result") }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.array({
+    json.array({ "unchanged" }),
+    json.array({ "child-result" }),
+    json.array({ "child-result" }),
+  }), "static rule precedence")
+end)
+
+test("uniform-binding mutable and pure split remain distinct", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   stored = split(parts, "a,b", ",")
+   pure = split("c,d", ",")
+   return({ "parts" : parts, "stored" : stored, "pure" : pure })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    parts = json.array({ "a", "b" }),
+    stored = json.array({ "a", "b" }),
+    pure = json.array({ "c", "d" }),
+  }), "split forms")
+end)
+
+test("uniform-binding hash-index mutation returns the updated harray", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   updated = (meta["stage"] = "ok")
+   snapshot = copy(meta)
+   return({ "meta" : meta, "updated" : updated, "snapshot" : snapshot })
+ }
+Done::
+ /x/
+]])
+  local expected = json.harray({ stage = "ok" })
+  assert_json_equal(result, json.harray({
+    meta = expected,
+    updated = expected,
+    snapshot = expected,
+  }), "harray update")
+end)
+
+test("uniform-binding unused values are dropped", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(items, ["a"])
+   copy(items)
+   updated = push(items, "b")
+   return({ "items" : items, "updated" : updated })
+ }
+Done::
+ /x/
+]])
+  local expected = json.array({ "a", "b" })
+  assert_json_equal(result, json.harray({ items = expected, updated = expected }), "dropped values")
+end)
+
+test("uniform-binding bare collection statements rebind the typed array", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   trimmed = trim_each(set(words, [" a ", "", "b"]))
+   trim_each(words)
+   filter_nonempty(words)
+   return({ "trimmed" : trimmed, "words" : words })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    trimmed = json.array({ "a", "", "b" }),
+    words = json.array({ "a", "b" }),
+  }), "collection rebinding")
+end)
+
+test("uniform-binding wrong-kind mutation reports neutral fields", function()
+  local ok, failure = pcall(function()
+    execute_uniform_binding_source([[
+Top::
+ /x/ -> Done { items = "text"; push(items, "x"); return(items) }
+Done::
+ /x/
+]])
+  end)
+  assert_equal(ok, false, "wrong-kind push fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed runtime error")
+  assert_equal(failure.code, "binding_kind_mismatch", "error code")
+  assert_equal(failure.identifier, "items", "error identifier")
+  assert_equal(failure.expected_kind, "array", "expected kind")
+  assert_equal(failure.actual_kind, "scalar", "actual kind")
+end)
+
+test("uniform-binding set returns the assigned value for receiver chaining", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   first = set(items, ["b", "a"]).sorted().first()
+   return([first, items])
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.array({ "a", json.array({ "b", "a" }) }), "set chain")
 end)
 
 test("generated Unicode 17 casing matches all neutral fixtures and runtime paths", function()

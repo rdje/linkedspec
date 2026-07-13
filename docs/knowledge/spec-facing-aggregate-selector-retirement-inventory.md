@@ -12,7 +12,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, compatibility, retirement, FUTURE-PARITY-BACKLOG]
-evidence: "Director clarification 2026-07-12 settles removal. FUTURE-PARITY-BACKLOG.12.1.0 inventory finds 651 exact selector-shaped calls across 82 tracked .spec files, including 227 across 15 shipped specs. Parent calls include copy/push/set/is_nonempty/split plus receiver forms. LinkedSpec toolbox lowering proves bare reads and receivers already exist on Perl, but push(items,value) still takes child-rule semantics and split(parts,source,delimiter) is unsupported. Backend owner scans locate Perl ValueExpr/MethodLowering/EmitContext, Rust target resolvers and constructor branches, Dart/Julia target-name helpers, and Lua target_descriptor/constructor branches."
+evidence: "Director clarification 2026-07-12 settles removal. FUTURE-PARITY-BACKLOG.12.1.0 inventory finds 651 exact selector-shaped calls across 82 tracked .spec files, including 227 across 15 shipped specs. Leaves .12.1.2-.6 now enable bare reads/mutations/results on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; shipped-source migration .12.1.7.1 is active."
 reverify: "git grep -E -o 'array\\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\\)|hash\\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\\)' -- '*.spec' | wc -l && perl -Iperl -MLinkedSpec -e 'for my $s (q{push(array(items), value)}, q{push(items, value)}, q{split(array(parts), raw, /,/)}, q{split(parts, raw, /,/)}) { print "$s => ", LinkedSpec::call_spec_handler_subst("Top", $s), "\\n" }'"
 ---
 
@@ -36,12 +36,11 @@ bindings auto-create only where the contract says so. `set(name, value)` returns
 `name`. This public model does not require a backend to use one physical host map: internal storage is permitted as
 an implementation detail so long as no alternate namespace is observable.
 
-Migration cannot yet be purely mechanical. On the Perl reference, `copy(items)`, `items.first()`, and typed
-`set(items, value)` already have selector-free forms, but `push(items, value)` currently selects child-rule push
-semantics and `split(parts, source, delimiter)` is unsupported. Neutral leaf `.12.1.1` now fixes static-rule
-precedence, bare mutation, three-argument mutable split, expression results, exact diagnostics, and constructor
-classification in `linkedspec-uniform-binding-v1`. Source migration follows only after all five backends execute
-those alternatives; hard rejection follows migration.
+Neutral leaf `.12.1.1` fixes static-rule precedence, bare mutation, three-argument mutable split, expression results,
+exact diagnostics, and constructor classification in `linkedspec-uniform-binding-v1`. Perl/Rust/Dart/Julia/Lua
+leaves `.12.1.2` through `.12.1.6` now execute those alternatives. Migration remains ordered rather than blind
+because selector-shaped one-argument calls must be classified as reads/targets versus intended constructors;
+shipped-source migration `.12.1.7.1` is active, and hard rejection follows all tracked migration.
 
 Related facts: [[uniform-expression-compatibility-retirement-doctrine]],
 [[uniform-binding-neutral-contract]],

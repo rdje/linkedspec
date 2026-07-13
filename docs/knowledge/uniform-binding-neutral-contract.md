@@ -43,8 +43,8 @@ identifier for the value. Use `[identifier]` when a one-element array constructo
 non-selector constructor calls such as `array()`, `array("literal")`, `array(expr1, expr2)`, `hash()`, and
 `hash("key", value)`; literals remain canonical.
 
-This contract is adopted before behavior. Perl `.12.1.2`, then Rust/Dart/Julia/Lua, consume the unchanged cases;
-tracked sources migrate only after those alternatives execute, and hard rejection follows migration.
+Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` consume the unchanged cases.
+All backend alternatives execute; tracked source migration `.12.1.7` is active, and hard rejection follows it.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],
 [[uniform-expression-compatibility-retirement-doctrine]], [[terse-mutation-surface-ground-truth]].

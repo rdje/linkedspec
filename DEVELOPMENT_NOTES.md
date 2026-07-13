@@ -1,5 +1,11 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.6 — static names precede typed binding mutation): Lua's existing
+  `lookup_binding` already provided the correct read seam, but `push` was still accumulator/rule-only and mutable
+  split required a wrapper. Resolve a registered rule first; otherwise mutate the bare target's runtime array kind.
+  The same array seam must serve `+=`, split, array-end methods, and standalone transforms, return copied updates,
+  and reject incompatible values. The first full gate correctly identified the old bare-split no-op lock.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.5 — mutation authority follows `_read_runtime_store`): Julia's
   `variables`, `arrays`, and `hashes` maps remain private migration machinery, but mutation must resolve the same
   value as a bare read before validating its kind. Central array/harray mutation and bare-store seams eliminate

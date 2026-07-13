@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.6 — enable Lua uniform bindings**
+  (DONE — all five backends enabled; shipped migration `.12.1.7.1` active).
+
+  **Implementation:** Lua `lookup_binding` now owns kind-checked bare push/append, mutable split, hash update,
+  array-end, and collection rebinding. Mutations return copied updated values, missing targets create the required
+  kind, wrong kinds fail with neutral fields, and static rules keep ambiguous-push precedence.
+
+  **Proof:** All nine exact cases pass on PUC Lua and LuaJIT; each full gate is 85/85, with the 105-case manifest and
+  explicit CLI scaffold unchanged. The immediately prior canonical gate passes doctrines/contracts, capability
+  60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 865 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.5 — enable Julia uniform bindings**
   (DONE — Lua consumer `.12.1.6` active).
 

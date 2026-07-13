@@ -176,6 +176,43 @@ local function target_descriptor(expr)
   return nil
 end
 
+local function binding_target_descriptor(expr)
+  if expr.kind == "variable" then return { kind = "scalar", name = expr.name } end
+  if expr.kind == "call" and (expr.name == "array" or expr.name == "hash" or expr.name == "harray") and
+      #expr.args == 1 then
+    local name = target_name(argument_expr(expr.args[1]))
+    if name then return { kind = expr.name == "array" and "array" or "harray", name = name } end
+  end
+  return nil
+end
+
+local function binding_kind_mismatch(name, expected_kind, value)
+  fail("binding_kind_mismatch", {
+    code = "binding_kind_mismatch",
+    identifier = name,
+    expected_kind = expected_kind,
+    actual_kind = M.runtime_value_kind(value),
+  })
+end
+
+local function array_binding_for_mutation(ctx, name)
+  local value, storage = lookup_binding(ctx, name)
+  if storage == nil then return json.array(), nil end
+  if json.kind(value) ~= "array" then binding_kind_mismatch(name, "array", value) end
+  return copy_value(value), storage
+end
+
+local function store_array_mutation(ctx, target, storage, value)
+  if target.kind == "array" or storage == "array" then return bind_array(ctx, target.name, value) end
+  return bind_scalar(ctx, target.name, value)
+end
+
+local function append_array_binding(ctx, target, value)
+  local values, storage = array_binding_for_mutation(ctx, target.name)
+  values[#values + 1] = copy_value(value)
+  return store_array_mutation(ctx, target, storage, values)
+end
+
 local function read_index(root, key)
   local kind = json.kind(root)
   if kind == "array" then
@@ -654,6 +691,68 @@ local function evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_
   return evaluate_pure_string_helper(engine, action_contracts.canonical_action_helper_name(expr.name), values)
 end
 
+local PURE_ARRAY_HELPERS = {
+  count = true,
+  filter_nonempty = true,
+  first = true,
+  sorted = true,
+  trim_each = true,
+}
+
+local ARRAY_END_MUTATIONS = {
+  pop_back = true,
+  pop_front = true,
+  push_back = true,
+  push_front = true,
+}
+
+local function evaluate_array_helper(name, values)
+  local source = values[1]
+  local items = json.kind(source) == "array" and copy_value(source) or json.array()
+  if name == "count" then return #items end
+  if name == "first" then return #items == 0 and json.null or copy_value(items[1]) end
+  if name == "sorted" then
+    table.sort(items, function(left, right)
+      return (scalar_string(left, true) or "") < (scalar_string(right, true) or "")
+    end)
+    return items
+  end
+  local result = json.array()
+  if name == "filter_nonempty" then
+    for _, item in ipairs(items) do
+      if not is_empty_value(item) then result[#result + 1] = copy_value(item) end
+    end
+    return result
+  end
+  if name == "trim_each" then
+    for index, item in ipairs(items) do
+      local value = scalar_string(item, false)
+      result[index] = value == nil and json.null or trim_unicode(value)
+    end
+    return result
+  end
+  fail("unsupported array helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
+local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state, receiver)
+  local values = {}
+  if receiver ~= nil then values[1] = receiver end
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+  return evaluate_array_helper(action_contracts.canonical_action_helper_name(expr.name), values)
+end
+
+local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)
+  array_binding_for_mutation(ctx, target.name)
+  local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+  local delimiter = expr.args[3] and
+    evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state) or ""
+  local result = evaluate_pure_string_helper(engine, "split", { source, delimiter })
+  local _, storage = lookup_binding(ctx, target.name)
+  return store_array_mutation(ctx, target, storage, result)
+end
+
 local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
   local entry = name:sub(1, 6) == "entry_"
   local one
@@ -690,10 +789,17 @@ end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   local name = action_contracts.canonical_action_helper_name(expr.name)
-  if name == "coalesce" or name == "coalesce_nonempty" then
+  local split_target = name == "split" and expr.args[1] and
+    binding_target_descriptor(argument_expr(expr.args[1])) or nil
+  if split_target and ((split_target.kind == "array" and #expr.args >= 2) or
+      (split_target.kind == "scalar" and #expr.args == 3)) then
+    return evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, split_target)
+  elseif name == "coalesce" or name == "coalesce_nonempty" then
     return evaluate_coalesce(engine, expr, ctx, accumulator, edge_state, nil)
   elseif is_pure_string_helper(name) then
     return evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, nil)
+  elseif PURE_ARRAY_HELPERS[name] then
+    return evaluate_array_values(engine, expr, ctx, accumulator, edge_state, nil)
   end
   if name == "return" then
     local value = json.null
@@ -727,6 +833,18 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     ctx.retv = copy_value(child.value)
     return child.value
   elseif name == "push" then
+    local first_target = expr.args[1] and binding_target_descriptor(argument_expr(expr.args[1])) or nil
+    local first_name = first_target and first_target.name or nil
+    if #expr.args >= 2 and first_name and engine.compiled_spec.rules_by_label[first_name] then
+      local child = execute_rule(engine, first_name, 0, ctx)
+      ctx.retv = copy_value(child.value)
+      local output_target = binding_target_descriptor(argument_expr(expr.args[2]))
+      if not output_target then fail("push output target must be a bare binding") end
+      return append_array_binding(ctx, output_target, child.value)
+    elseif #expr.args >= 2 and first_target then
+      local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+      return append_array_binding(ctx, first_target, value)
+    end
     local value
     if #expr.args == 0 and edge_state then
       value = dispatch_edge_child(engine, edge_state, ctx).value
@@ -836,11 +954,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "assign_array_append" then
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
-    local current, storage = lookup_binding(ctx, expr.name)
-    local values = json.kind(current) == "array" and copy_value(current) or json.array()
-    values[#values + 1] = copy_value(value)
-    if storage == "variable" then return bind_scalar(ctx, expr.name, values) end
-    return bind_array(ctx, expr.name, values)
+    return append_array_binding(ctx, { kind = "scalar", name = expr.name }, value)
   end
   if kind == "indexed_var" then
     local root = lookup_binding(ctx, expr.name)
@@ -869,9 +983,11 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     local root
     if json.kind(current) == "array" or json.kind(current) == "harray" then
       root = copy_value(current)
-    else
+    elseif storage == nil then
       root = json.harray()
       storage = "harray"
+    else
+      binding_kind_mismatch(expr.name, "harray", current)
     end
     if not write_index(root, key, value) then return json.null end
     return store_binding(ctx, expr.name, storage, root)
@@ -908,7 +1024,25 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     for index, call in ipairs(expr.calls) do
       local call_expr = { kind = "call", name = call.method, args = call.args }
       local canonical_name = action_contracts.canonical_action_helper_name(call.method)
-      if canonical_name == "push" and #call.args == 0 then
+      if ARRAY_END_MUTATIONS[canonical_name] then
+        local target = index == 1 and binding_target_descriptor(expr.receiver) or nil
+        if not target then return json.null end
+        local items, storage = array_binding_for_mutation(ctx, target.name)
+        if canonical_name == "push_back" or canonical_name == "push_front" then
+          if #call.args ~= 1 then return json.null end
+          local added = evaluate_expr(engine, argument_expr(call.args[1]), ctx, accumulator, edge_state)
+          if canonical_name == "push_back" then
+            items[#items + 1] = copy_value(added)
+          else
+            table.insert(items, 1, copy_value(added))
+          end
+        elseif #call.args ~= 0 then
+          return json.null
+        elseif #items > 0 then
+          table.remove(items, canonical_name == "pop_back" and #items or 1)
+        end
+        value = store_array_mutation(ctx, target, storage, items)
+      elseif canonical_name == "push" and #call.args == 0 then
         accumulator[#accumulator + 1] = copy_value(value)
       elseif canonical_name == "return" then
         local returned = value
@@ -924,6 +1058,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
             index < #expr.calls then
           return json.null
         end
+      elseif PURE_ARRAY_HELPERS[canonical_name] then
+        value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
       else
         value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
       end
@@ -998,14 +1134,31 @@ local function execute_array_split_statement(engine, expr, ctx, accumulator, edg
       #expr.args < 2 then
     return false
   end
-  local target = target_descriptor(argument_expr(expr.args[1]))
-  if not target or target.kind ~= "array" then return false end
-  local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
-  local delimiter = ""
-  if expr.args[3] then
-    delimiter = evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state)
+  local target = binding_target_descriptor(argument_expr(expr.args[1]))
+  if not target or (target.kind ~= "array" and not (target.kind == "scalar" and #expr.args == 3)) then
+    return false
   end
-  bind_array(ctx, target.name, evaluate_pure_string_helper(engine, "split", { source, delimiter }))
+  evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)
+  return true
+end
+
+local function execute_array_transform_statement(engine, expr, ctx, accumulator, edge_state)
+  if expr.kind ~= "call" or #expr.args ~= 1 then return false end
+  local name = action_contracts.canonical_action_helper_name(expr.name)
+  if name ~= "trim_each" and name ~= "filter_nonempty" and name ~= "lowercase_each" and
+      name ~= "uppercase_each" then
+    return false
+  end
+  local target = binding_target_descriptor(argument_expr(expr.args[1]))
+  if not target then return false end
+  local current, storage = array_binding_for_mutation(ctx, target.name)
+  local transformed
+  if name == "lowercase_each" or name == "uppercase_each" then
+    transformed = evaluate_pure_string_helper(engine, name, { current })
+  else
+    transformed = evaluate_array_helper(name, { current })
+  end
+  store_array_mutation(ctx, target, storage, transformed)
   return true
 end
 
@@ -1013,7 +1166,8 @@ local function execute_block(engine, block, ctx, accumulator, edge_state)
   for _, statement in ipairs(block.statements) do
     local handled = statement.drops_value and (
       execute_regex_substitution_statement(engine, statement.expr, ctx, accumulator, edge_state) or
-      execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state)
+      execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+      execute_array_transform_statement(engine, statement.expr, ctx, accumulator, edge_state)
     )
     if not handled then
       evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)

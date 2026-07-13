@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.6 — enable Lua uniform bindings
+
+Lua now consumes `linkedspec-uniform-binding-v1` on both supported ABIs. `lookup_binding` plus one kind-checked
+array mutation seam drives bare push/append, three-argument mutable split, array-end methods, and standalone
+collection rebinding; hash-index mutation rejects incompatible existing values. Missing targets create only their
+required kind, mutations return copied updated values for chaining, and registered rules retain push precedence.
+Minimal pure array continuations provide the unchanged fixture's count/order/selection/transform behavior.
+
+The nine exact cases initially passed two and failed seven, localizing push, split, array methods, collection
+rebinding, and diagnostics. After repair all nine pass. The first complete gate exposed one stale statement-split
+lock that required `array(target)`; it now asserts bare three-argument mutation and two-argument purity.
+
+PUC Lua and LuaJIT each pass 85/85; the exact 105-case manifest and explicit parser-CLI scaffold remain unchanged.
+The immediately prior canonical gate passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0
+`1..1030` in 865 seconds. All five backends are enabled; shipped-source migration `.12.1.7.1` is next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.5 — enable Julia uniform bindings
 
 Julia native and generated execution now consume `linkedspec-uniform-binding-v1` through one observable typed

@@ -37,8 +37,8 @@ then statement `items += value` used the old aggregate-map path and lost the fir
 and expression append through the same bare mutation method repaired the causal defect; the existing oracle
 fixture now returns `["a", "b"]`.
 
-Exact `array(name)` and `hash(name)` are still parsed temporarily so existing sources can migrate after every
-backend supports the replacement. This is scheduled compatibility, not an unresolved language choice. Rust
+Exact `array(name)` and `hash(name)` are still parsed temporarily while tracked sources migrate; every backend now
+supports the replacement. This is scheduled compatibility, not an unresolved language choice. Rust
 deletes and rejects those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.2` after source migration.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
