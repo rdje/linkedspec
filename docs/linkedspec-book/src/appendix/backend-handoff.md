@@ -205,10 +205,10 @@ consumer has started using that AST for non-call value expressions: primitive li
 scoped bare scalar reads, direct indexed/nested access, shape literals, and block
 values. It also lowers value-only helper-call composition from AST `call` nodes for
 scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
-numeric helpers. It also lowers aggregate-wrapper, collection/reducer, and hash helper
+numeric helpers. It also lowers retained aggregate-constructor, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
-Bare scalar reads plus canonical aggregate wrappers `array(...)`/`hash(...)` remain the destination
-surface; short wrapper aliases `s(...)`/`a(...)`/`h(...)` are retired and should be reported
+Bare typed reads are the destination surface; exact one-identifier aggregate selectors and short aliases
+`s(...)`/`a(...)`/`h(...)` are retired and should be reported
 as unresolved helpers rather than normalized. Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language
 calls. Receiver-dot value chains now lower from AST `fluent_chain` nodes for the array,
@@ -613,8 +613,8 @@ does not imply a Dart or Lua gap.
 The first helper leaf now makes Lua's four value kinds explicit through
 `runtime_value_kind(...)`: null/boolean/number/string scalars, arrays, harrays,
 and codeblocks. Stores and reads copy mutable values. Bare assignment retains a
-typed value in the scalar slot; `set(array(name), value)` and
-`set(hash(name), value)` select named aggregate slots. Zero-based array and
+typed value in one observable binding; `set(name, value)` binds the evaluated scalar, array, harray, or codeblock
+value. Zero-based array and
 string-key harray access, append/hash-index assignment, and copy-on-write mixed
 nested assignment are implemented without intermediate autovivification.
 Current-edge `retv` dispatches its child before returning.
@@ -671,7 +671,7 @@ flags; `g` controls global replacement, `o` is a no-op, and `$0`/`$n` expand per
 diagnostics carry the rule label, and zero-width global replacement advances by Unicode scalar. Both Lua ABIs pass
 75/75; explicit array-target split replacement remains separately owned.
 
-The explicit-array leaf then recognizes dropped `split(array(target), source, delimiter)` before pure evaluation.
+The explicit-array leaf then recognizes dropped `split(target, source, delimiter)` before pure evaluation.
 It evaluates source and delimiter once, reuses the exact pure split policy, and replaces only the named typed array
 store with a copy. Ordinary split calls remain harmless discarded expressions and source scalars stay unchanged.
 Both Lua ABIs pass 76/76; shipped-corpus and public-surface no-drift remains the closing string-runtime leaf.
@@ -781,7 +781,7 @@ local block = linkedspec.parse_action_block([[
 set_key(meta, "b", 2)
 set_key(meta, "a", 1)
 set_key(meta, "drop", 0)
-set_key(hash(meta), "stmt_hash", 4)
+set_key(meta, "stmt_hash", 4)
 set_key(overlay, "a", 10)
 set_key(overlay, "c", 3)
 value_set = set_key(meta, "value_only", 9)
@@ -1696,8 +1696,7 @@ dispatch, and executes marker-form `if(...)` / `elseif(...)` / `else()` /
 expressions inside helper arguments, supports plain fallback values in inline
 `if(...)`, evaluates single-argument numeric aggregate reducers through
 aggregate-aware reads, and follows scalar-held list/map readback for
-`array(name)`, `hash(name)`, and `copy(name)` unless explicit aggregate writes
-supersede the scalar-held value. It now also executes explicit cursor
+bare `name` and `copy(name)` through that same typed value. It now also executes explicit cursor
 controls: `save_cursor()` / `restore_cursor()` for stack-based cursor restore,
 `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds,
 `capture_until_boundary(rule[, ...])` for non-consuming structural boundary

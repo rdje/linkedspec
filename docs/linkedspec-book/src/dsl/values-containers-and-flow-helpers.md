@@ -4,22 +4,21 @@ This chapter gives the public mental model for LinkedSpec’s value and control-
 
 For the method-by-method public reference, read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter. This chapter explains how to think about the surface before diving into exact helper choices.
 
-## Containers: `scalar`, `array`, and `hash`
+## Typed values and constructors
 
-The core container helpers are:
+The core typed working-value reads are bare identifiers:
 
 ```text
 name
-array(items)
-hash(meta)
+items
+meta
 ```
 
 These are DSL spellings. They are not Perl sigils. Public examples and migrated specs use the canonical
 forms above.
 
-For aggregate wrappers, a single **bare** name token names a working variable: `array(items)` reads the
-array/list working variable `items`, and `hash(meta)` reads the hash/associative-array working variable
-`meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
+`items` reads the array/list value currently bound to `items`, and `meta` reads the harray value currently bound
+to `meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
 payload containing the string `"items"`, and `hash("key", value)` constructs a key/value hash. Prefer direct
 shape literals (`["literal"]`, `{ "key" : value }`, `[]`, `{}`) as the terse constructor spellings in new
 examples.
@@ -48,12 +47,12 @@ Use this convention when the rule name is the best name for the collection. If a
 
 ```text
 push(Child, children)
-push(array(children), child)
+push(children, child)
 child_text = trim(capture_slice())
-if(is_nonempty(child_text)) { push(array(children), child_text) }
+if(is_nonempty(child_text)) { push(children, child_text) }
 ```
 
-Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `array(Parent)`, `push(array(Parent), value)`, or `return(hash("children", copy(array(Parent))))`.
+Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `Parent`, `push(Parent, value)`, or `return(hash("children", copy(Parent)))`.
 
 ## Assignment
 
@@ -94,19 +93,19 @@ expression; the root path check and mutation happen after both.
 
 ## Pushing values
 
-Use `push(array(target), value)` when you want to append.
+Use `push(target, value)` when you want to append.
 
 Example:
 
 ```text
 child = call(Child);
-push(array(items), child);
+push(items, child);
 ```
 
 Do not use whole-array assignment when you mean append.
 
 ```text
-set(array(items), array(child));
+set(items, child);
 ```
 
 That replaces the whole array. It does not append to it.
@@ -119,7 +118,7 @@ Examples:
 
 ```text
 return(hash("kind", "token", "text", entry_text()));
-return(array("?node:", name, copy(array(children))));
+return(array("?node:", name, copy(children)));
 return({ "kind" : "token", "text" : entry_text(), "tags" : [tag, true] });
 ```
 
@@ -149,35 +148,33 @@ set(items, []);                     # replaces items with an empty array value
 set(meta, {});                      # replaces meta with an empty hash value
 ```
 
-Temporary compatibility parsing still recognizes the retired aggregate-selector spellings:
+The retired aggregate-selector spellings are not current authoring:
 
 ```text
-set(array(items), [value]);
-set(hash(meta), { field : value });
+set(items, [value]);
+set(meta, { field : value });
 ```
 
-Those exact selector shapes are migration-only and no tracked `.spec` file uses them. New source uses a bare binding for reads, assignment, and mutation;
-a bare variable may hold an array or harray value:
+No tracked `.spec` or executable embedded source uses those shapes. New source uses a bare binding for reads,
+assignment, and mutation; a bare variable may hold an array or harray value:
 
 ```text
 set(payload, [value]);
 return(payload);
 ```
 
-While compatibility remains enabled, `array(name)` and `hash(name)` read the corresponding typed value/storage so
-old and partially migrated sources continue to run. They do not define a second future namespace or authoring model.
-
-> **Retirement in progress:** those exact selector-shaped forms are current compatibility behavior, not the final
-> language. Adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
-> `hash(IDENTIFIER)` after backend enablement and source migration. The replacement is the bare typed binding:
-> `array(items)` becomes `items`, `copy(array(items))` becomes `copy(items)`, `set(array(items), [])` becomes
-> `set(items, [])`, `push(array(items), value)` becomes `push(items, value)`, and
-> `split(array(parts), source, delimiter)` becomes `split(parts, source, delimiter)`. `set(name, value)` yields the
-> post-assignment typed value of `name`, so receiver methods can chain from it. If `array(value)` was intended to
+> **Retirement status:** adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
+> `hash(IDENTIFIER)`. Perl now rejects them structurally before ActionIR lowering with
+> `aggregate_selector_removed`; Rust, Dart, Julia, and Lua still have dependency-ordered rejection leaves. The
+> replacement is the bare typed binding:
+> `items` becomes `items`, `copy(items)` becomes `copy(items)`, `set(items, [])` becomes
+> `set(items, [])`, `push(items, value)` becomes `push(items, value)`, and
+> `split(parts, source, delimiter)` becomes `split(parts, source, delimiter)`. `set(name, value)` yields the
+> post-assignment typed value of `name`, so receiver methods can chain from it. If `value` was intended to
 > construct a one-element array rather than select storage, write `[value]`. Zero/multi/quoted/computed
 > `array(...)` and valid key/value `hash(...)` calls remain ordinary constructors in contract version 1. The old
-> selector forms are shown here only to explain the short-lived compatibility path before hard rejection. Every
-> tracked `.spec` file and executable embedded source is already selector-free.
+> selector forms are shown here only as migration examples. Every tracked `.spec` file and executable embedded
+> source is already selector-free.
 
 The Perl, Rust, Dart, Julia, and Lua backends now execute those selector-free replacements. Their
 bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
@@ -195,7 +192,7 @@ answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 
 Exact selector rejection is intentionally later than backend enablement: all five backends now execute the same
 bare forms, and every tracked `.spec` file and executable embedded source has migrated. The backend sequence now
-hard-rejects `array(IDENTIFIER)` / `hash(IDENTIFIER)`, beginning with Perl. This ordering is migration safety, not
+hard-rejects `IDENTIFIER` / `IDENTIFIER`, beginning with Perl. This ordering is migration safety, not
 an unresolved language decision.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
@@ -313,15 +310,15 @@ callback.
 tree = { "a" : "A", "b" : { "y" : "B" }, "arr" : ["u", "v"] };
 
 return(tree.map_leaves() {
-  leaf_text = if(count(array(value)), join_values("", array(value)), else(value));
-  return(cat(join_values("/", array(path)), "=", leaf_text))
+  leaf_text = if(count(value), join_values("", value), else(value));
+  return(cat(join_values("/", path), "=", leaf_text))
 });
 
-set(array(paths), []);
+set(paths, []);
 tree.walk_leaves() {
-  paths += join_values("/", array(path))
+  paths += join_values("/", path)
 };
-return(copy(array(paths)));  # ["a", "arr", "b/y"]
+return(copy(paths));  # ["a", "arr", "b/y"]
 
 return(tree.reduce_leaves(0) {
   return(acc.add(1))
@@ -341,11 +338,11 @@ index. Callback blocks get scoped `value`, `index`, `path`, `depth`, and reducti
 items = ["a", ["b", "c"], { "h" : "H" }];
 
 return(items.map_leaves() {
-  return(cat(join_values("/", array(path)), "=", value))
+  return(cat(join_values("/", path), "=", value))
 });
 
 items.walk_leaves() {
-  paths += join_values("/", array(path))
+  paths += join_values("/", path)
 };
 
 return(items.reduce_leaves(0) {
@@ -358,10 +355,10 @@ return(items.reduce_leaves(0) {
 Use explicit helpers when you need a snapshot or derived collection:
 
 ```text
-copy(array(items))
-copy(hash(meta))
-flat_array(array(parts))
-join_values("", array(tokens))
+copy(items)
+copy(meta)
+flat_array(parts)
+join_values("", tokens)
 tokens.uniq().join_values("")
 items.sorted().drop_front(2).first()
 meta.set_key("stage", "normalized").sorted_keys().join_values(",")
@@ -370,7 +367,7 @@ raw.trim().lowercase().replace_substr("-", "_")
 raw.trim().split("-").trim_each().filter_nonempty()
 raw.trim().split("-").lowercase_each().join_values("_")
 score.abs().ceil().add(2).clamp(0, 10)
-count(array(parts)).gt(0)
+count(parts).gt(0)
 split_tagged_records(identifier_list, /\s*,\s*/o, "?node:", type_name)
 ```
 
@@ -381,7 +378,7 @@ receivers can flow through hash helpers and then array helpers through `sorted_k
 string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers.
 `split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with
 array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or
-`join_values(delim)`. Numeric comparisons such as `count(array(parts)).gt(0)` are terminal values; they do not
+`join_values(delim)`. Numeric comparisons such as `count(parts).gt(0)` are terminal values; they do not
 continue into later number methods.
 Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the
 selected helper family consumes the yielded value.
@@ -391,9 +388,9 @@ selected helper family consumes the yielded value.
 Hash helpers make metadata shaping explicit:
 
 ```text
-set(hash(meta), hash("kind", "rule", "name", name));
+set(meta, hash("kind", "rule", "name", name));
 set_key(meta, "line", entry_line());
-set(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
+set(meta, merge_hash(meta, hash("source", "spec")));
 public_fields = meta.drop_keys("debug").sorted_keys().join_values(",");
 ```
 
@@ -430,7 +427,7 @@ Here is a compact token-node pattern:
 ```text
 Top::
  -> Token .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Token: /(\w+)/
  I {

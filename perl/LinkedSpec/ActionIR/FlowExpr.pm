@@ -182,8 +182,8 @@ sub _looks_like_hash_value_expr {
  my $method = $call->{method} // '';
  return 1 if $method =~ /^(?:hash|merge_hash|set_key|rename_key|drop_keys|pick_keys)$/o;
 
- # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does not
- # resolve as an array (array-first precedence), so a bare `copy(x)` / `copy(array(x))` stays array-only.
+ # `copy(X)` follows the remembered bare binding kind; unknown values are
+ # resolved by the surrounding helper/method family.
  if ($method eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
   return 0 unless $copy_args;

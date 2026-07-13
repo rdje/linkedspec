@@ -13,7 +13,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, mutation, diagnostics, compatibility, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts capability_conformance/uniform_binding_contract.json and tools/check_uniform_binding_contract.py. The independent checker validates 11 migration mappings, seven binding/mutation execution cases, six exact invalid-selector cases, eight valid constructor/literal classifications, and deterministic future fixture source/results. Canonical local CI runs the checker before backend behavior changes."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts capability_conformance/uniform_binding_contract.json and tools/check_uniform_binding_contract.py. The independent checker validates 11 migration mappings, seven binding/mutation execution cases, six exact invalid-selector cases, eight valid constructor/literal classifications, and deterministic future fixture source/results. FUTURE-PARITY-BACKLOG.12.1.8.1 makes the six invalid cases compile-time failures on Perl while preserving the eight retained classes."
 reverify: "python3 tools/check_uniform_binding_contract.py"
 ---
 
@@ -44,7 +44,9 @@ non-selector constructor calls such as `array()`, `array("literal")`, `array(exp
 `hash("key", value)`; literals remain canonical.
 
 Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` consume the unchanged cases.
-All backend alternatives execute; tracked source migration `.12.1.7` is complete, and hard rejection follows it.
+All backend alternatives execute and tracked source migration `.12.1.7` is complete. Perl `.12.1.8.1` now enforces
+the invalid-selector contract before lowering; Rust/Dart/Julia/Lua follow under `.12.1.8.2-.5`.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],
-[[uniform-expression-compatibility-retirement-doctrine]], [[terse-mutation-surface-ground-truth]].
+[[perl-aggregate-selector-compile-rejection]], [[uniform-expression-compatibility-retirement-doctrine]],
+[[terse-mutation-surface-ground-truth]].

@@ -48,10 +48,10 @@ edge action** and the `match_*` family:
 Pair::AND
  I { pair = {} }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
-   set(hash(pair), set_key(hash(pair), "name", match_group(0)));
+   set(pair, set_key(pair, "name", match_group(0)));
  }
  /([^,\n]+)/ -> Pair[1] {
-   return(set_key(hash(pair), "value", match_group(0)));
+   return(set_key(pair, "value", match_group(0)));
  }
 ```
 
@@ -76,12 +76,12 @@ an `LX` block to surface its accumulator when the input is exhausted:
 ```text
 top::
  -> sexpr .push
-LX { return(copy(array(top))) }
+LX { return(copy(top)) }
 
 sexpr: /\(/ /\)/  I { items = [] }
- -> sexpr     { push(array(items), call(sexpr)) }
- -> atom      { push(array(items), call(atom)) }
- -> sexpr[1]  { return(copy(array(items))) }
+ -> sexpr     { push(items, call(sexpr)) }
+ -> atom      { push(items, call(atom)) }
+ -> sexpr[1]  { return(copy(items)) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 ```
@@ -98,7 +98,7 @@ fault.
 Top::
  -> Word .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Word:
  /foo/ I {
@@ -148,7 +148,7 @@ Top::
  -> Item .push
  -> Next .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Item:
  /a/ I {
@@ -197,7 +197,7 @@ LinkedSpec supports compact same-line authoring:
 
 ```text
 Top:: -> Word .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 Word: /foo/ I { return(hash("kind", "word", "text", entry_text())) }
 ```
 
@@ -207,7 +207,7 @@ It also supports the clearer multiline style:
 Top::
  -> Word .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Word:
  /foo/

@@ -8,8 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.1 — hard-reject Perl aggregate selectors**
+  (DONE — Perl rejection complete; Rust `.12.1.8.2` is next).
+
+  **Outcome:** Exact one-bare-identifier `array(...)` / `hash(...)` calls now fail at the canonical Perl ActionIR
+  boundary with `aggregate_selector_removed` and portable surface/identifier/replacement fields. Rejection covers
+  nested/dead rule code and unused user-function bodies before lowering; live and generated-source paths agree.
+
+  **Preserved surface:** Empty, multi-argument, quoted, and computed constructors plus direct array/harray literals
+  remain valid. The whitespace-aware embedded-source scanner reports zero positives and 19 classified recognition
+  sites. Focused Perl tests pass 41, the regenerated 105-case oracle and Rust 3-test corpus replay pass, and Phase 0
+  passes all `1..1031` tests in 934 seconds both standalone and inside canonical CI; capability is 60/0/0 and CLI
+  is 61x2.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.14.0 — capture structural progressive parsing doctrine**
-  (DONE — planning-only capture; Perl selector hard rejection `.12.1.8.1` remains next).
+  (DONE — planning-only capture; selector execution later resumed and Perl rejection is now complete).
 
   **Outcome:** Captured the director's simple-regex/linked-rule authoring doctrine and separated progressive
   active-parse composition from post-AST staged enrichment. The existing ADR 0012 parse graph and narrow
@@ -21,7 +34,7 @@ Current execution status for interruption-safe batch workflow recovery.
   behavior changed.
 
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.3 — migrate embedded selector sources**
-  (DONE — all selector source migration complete; Perl hard rejection `.12.1.8.1` is next).
+  (DONE — all selector source migration complete; Perl rejection later completed in `.12.1.8.1`).
 
   **Outcome:** Removed all 1,356 positive exact `array(name)` / `hash(name)` occurrences from 25 embedded
   test/tool/backend source owners. A recurring classifier now reports zero executable positives and 25 exact

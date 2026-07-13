@@ -21,9 +21,9 @@ they execute as the same ordered lifecycle statements as the equivalent `{ ... }
 /[A-Za-z_, ]+/ -> FieldList
   .set(parts, [])
   .set(raw, entry_text())
-  .split(array(parts), raw, /,/)
-  .filter_nonempty(array(parts))
-  .return(hash("kind", "field_list", "fields", copy(array(parts))));
+  .split(parts, raw, /,/)
+  .filter_nonempty(parts)
+  .return(hash("kind", "field_list", "fields", copy(parts)));
 ```
 
 **Structured style** places calls inside a lifecycle block:
@@ -91,8 +91,8 @@ the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
 ```text
 rule:AND+
  I   { acc = []; n = 0; }
- E   { push(array(acc), call(child)); n = num_add(n, 1); }
- LX  { return(hash("items", copy(array(acc)), "count", n)); }
+ E   { push(acc, call(child)); n = num_add(n, 1); }
+ LX  { return(hash("items", copy(acc), "count", n)); }
 ```
 
 ## Statement separators
@@ -157,11 +157,11 @@ rule:AND+
  }
  -> child {
    if(on);
-   push(array(acc), call(child));
-   elseif(is_nonempty(array(tmp)));
-   push(array(acc), first(array(tmp)));
+   push(acc, call(child));
+   elseif(is_nonempty(tmp));
+   push(acc, first(tmp));
    else();
-   push(array(acc), "default");
+   push(acc, "default");
    endif();
  }
 ```
@@ -170,10 +170,10 @@ Zero-argument markers can drop parentheses for a lighter look:
 
 ```text
 -> child {
-  if(is_nonempty(array(src)));
-  push(array(acc), first(array(src)));
+  if(is_nonempty(src));
+  push(acc, first(src));
   else;
-  push(array(acc), "default");
+  push(acc, "default");
   endif;
 }
 ```
@@ -182,10 +182,10 @@ The fluent equivalent chains the markers with dots:
 
 ```text
 -> child
-  .if(is_nonempty(array(src)))
-  .push(array(acc), first(array(src)))
+  .if(is_nonempty(src))
+  .push(acc, first(src))
   .else
-  .push(array(acc), "default")
+  .push(acc, "default")
   .endif;
 ```
 
@@ -203,12 +203,12 @@ same control markers as marker style, with an implicit `endif()` at the end of t
 
 ```text
 -> child {
-  if(is_nonempty(array(src))) {
-    push(array(acc), first(array(src)))
+  if(is_nonempty(src)) {
+    push(acc, first(src))
   } elseif(is_defined(fallback)) {
-    push(array(acc), fallback)
+    push(acc, fallback)
   } else {
-    push(array(acc), "default")
+    push(acc, "default")
   }
 }
 ```
@@ -218,8 +218,8 @@ same control markers as marker style, with an implicit `endif()` at the end of t
 
 ```text
 -> child {
-  when(is_nonempty(array(src))) {
-    return(first(array(src)))
+  when(is_nonempty(src)) {
+    return(first(src))
   } otherwise {
     return("default")
   }
@@ -234,8 +234,8 @@ The same branch shape can also be written as a fluent block chain on an action e
 
 ```text
 -> child
-  .when(is_nonempty(array(src))) {
-    return(first(array(src)))
+  .when(is_nonempty(src)) {
+    return(first(src))
   }.otherwise {
     return("default")
   }
@@ -245,8 +245,8 @@ The fallback can also be written as a no-dot continuation after the first block:
 
 ```text
 -> child
-  .when(is_nonempty(array(src))) {
-    return(first(array(src)))
+  .when(is_nonempty(src)) {
+    return(first(src))
   } otherwise {
     return("default")
   }
@@ -275,8 +275,8 @@ payload:
 ```text
 set(result,
   if(on,
-    first(array(acc)),
-    elseif(is_nonempty(array(tmp)), first(array(tmp))),
+    first(acc),
+    elseif(is_nonempty(tmp), first(tmp)),
     else("default")
   )
 );
@@ -287,9 +287,9 @@ The portable attached-block spelling writes the selected value from branch state
 ```text
 I {
   if(on) {
-    set(result, first(array(acc)))
-  } elseif(is_nonempty(array(tmp))) {
-    set(result, first(array(tmp)))
+    set(result, first(acc))
+  } elseif(is_nonempty(tmp)) {
+    set(result, first(tmp))
   } else {
     set(result, "default")
   }
@@ -301,8 +301,8 @@ The fluent `.return(if(...))` spelling follows the same portability boundary:
 ```text
 -> child
   .return(if(on,
-    first(array(acc)),
-    elseif(is_nonempty(array(tmp)), first(array(tmp))),
+    first(acc),
+    elseif(is_nonempty(tmp), first(tmp)),
     else("default")
   ));
 ```
@@ -315,12 +315,12 @@ same-line `} elseif/else {` continuations and lowers to the same branch-control 
 ```text
 -> child {
   if(on) {
-    push(array(acc), call(child));
-  } elseif(is_nonempty(array(tmp))) {
-    found = first(array(tmp));
-    push(array(acc), found);
+    push(acc, call(child));
+  } elseif(is_nonempty(tmp)) {
+    found = first(tmp);
+    push(acc, found);
   } else {
-    push(array(acc), "default");
+    push(acc, "default");
   }
 }
 ```
@@ -387,7 +387,7 @@ LX {
       return(cat("token: ", name));
     }
     case("list") {
-      return(cat("list: ", count(array(items))));
+      return(cat("list: ", count(items)));
     }
     default {
       return("unknown");
@@ -408,7 +408,7 @@ LX {
       return(cat("token: ", name));
     }
     case("list") {
-      return(cat("list: ", count(array(items))));
+      return(cat("list: ", count(items)));
     }
     default {
       return("unknown");
@@ -437,8 +437,8 @@ LX {
 
 ```text
 -> child {
-  while(is_nonempty(array(queue))) {
-    return(first(array(queue)));
+  while(is_nonempty(queue)) {
+    return(first(queue));
   }
   return("empty");
 }
@@ -489,29 +489,29 @@ Items::
  }
  -> Item {
    retv = call(Item);
-   push(array(acc), retv);
+   push(acc, retv);
    next();
  }
  LX {
-   if(is_empty(array(acc)));
+   if(is_empty(acc));
    return(hash("kind", kind, "items", array()));
    else();
-   switch(count(array(acc))) {
+   switch(count(acc)) {
      case(1) {
-       return(hash("kind", "singleton", "item", first(array(acc))))
+       return(hash("kind", "singleton", "item", first(acc)))
      }
      case(2) {
        return(hash(
          "kind", "pair",
-         "first", first(array(acc)),
-         "second", first(drop_front(array(acc)))
+         "first", first(acc),
+         "second", first(drop_front(acc))
        ))
      }
      default {
        return(hash(
          "kind", kind,
-         "items", copy(array(acc)),
-         "count", count(array(acc))
+         "items", copy(acc),
+         "count", count(acc)
        ))
      }
    }

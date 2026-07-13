@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.1 — reject authored selectors at the canonical AST boundary): A
+  generated-code sentinel such as `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` is not a hard compiler error; it can
+  compile and silently yield `undef`. Exact aggregate selectors therefore need structural validation immediately
+  after canonical ActionIR parsing and before lowering. Walk the AST rather than searching raw text so whitespace,
+  nesting, dead branches, and method continuations are covered without rejecting quoted/computed/multi-argument
+  constructors. Validate user-function bodies while building the registry as well, because an unused function is
+  otherwise never lowered. Preserve the neutral surface/identifier/replacement fields through live compilation and
+  generated-source failure. Keep generated Perl `$name`/`@name`/`%name` out of the public-language analysis.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.1 — executable-source scans must accept layout whitespace): The first
+  full Phase 0 rejection run found `array (items)` / `hash (meta)` embedded residues missed by a scanner that
+  allowed whitespace inside parentheses but required `array(` / `hash(` to be adjacent. Source classifiers for
+  optional-call-spacing languages must include `\s*` before `(`. The corrected scan found and migrated the Perl
+  call-spacing fixture, its Rust mirror, and the oracle generator; it now reports zero positives/19 classified
+  recognition sites. Regenerating the oracle also refreshed five already-stale source-backed input fixtures; always
+  compare generated inputs to their canonical `specs/*.spec` owner rather than discarding such drift as noise.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.14.0 — distinguish structural, progressive, and staged composition): The
   authoring model has three separable layers. Small regexes identify lexical leaves or entry/exit boundaries;
   linked action-edge OR and blind-call AND rules own deep recursive structure. Progressive parsing is active-parse

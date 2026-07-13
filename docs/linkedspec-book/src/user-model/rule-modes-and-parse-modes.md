@@ -94,7 +94,7 @@ For a top-level stream parser, wrap a regex-bearing baseline matcher with a no-r
 ```text
 Top::
  -> Token .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Token:
  /[A-Za-z_]\w*/ I.return(entry_text())
@@ -136,10 +136,10 @@ slot's match with the `match_*` family:
 Pair:AND
  I { pair = {} }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
-   set(hash(pair), set_key(hash(pair), "name", match_group(0)));
+   set(pair, set_key(pair, "name", match_group(0)));
  }
  /([^,\n]+)/ -> Pair[1] {
-   return(set_key(hash(pair), "value", match_group(0)));
+   return(set_key(pair, "value", match_group(0)));
  }
 ```
 
@@ -443,7 +443,7 @@ Example:
 ```text
 Top::
  -> Word .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Word:
  /foo/ I.return(entry_text())
@@ -466,7 +466,7 @@ The same spec:
 ```text
 Top::
  -> Word .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Word:
  /foo/ I.return(entry_text())

@@ -112,7 +112,7 @@ subtest 'MethodLowering traces receiver-chain family transitions' => sub {
  is($number_chain, q{num_gt(num_add(count, 1), 5)}, 'number receiver chain normalization uses bare reads');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_receiver_chain => TAKEN/, 'trace reports number receiver chain');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_chain_step => TAKEN/, 'trace reports number chain step');
- is($hash_chain, q{join_values(",", sorted_keys(hash(meta)))}, 'hash receiver chain normalization preserves the internal compatibility bridge');
+ is($hash_chain, q{join_values(",", sorted_keys(meta))}, 'hash receiver chain normalization keeps the bare typed binding');
  like($hash_trace, qr/DECISION actionir:method_lowering:normalize_hash_receiver_value_chain_expr:receiver_chain:hash_receiver_chain => TAKEN/, 'trace reports hash receiver chain');
  like($hash_trace, qr/DECISION actionir:method_lowering:normalize_hash_receiver_value_chain_expr:receiver_chain:hash_chain_step => TAKEN/, 'trace reports hash chain step');
  is($array_chain, q{join_values(",", sorted(items))}, 'array receiver chain normalization is unchanged');

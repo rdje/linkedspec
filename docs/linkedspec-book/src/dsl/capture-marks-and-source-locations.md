@@ -29,7 +29,7 @@ Example:
 ```text
 Top::
  -> Body .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Body: /BEGIN/ /END/
  -> Body[1] { return(hash("body", trim(capture_slice()))) }
@@ -142,7 +142,7 @@ They **diverge** when a rule's action runs against a local match that is not the
 ```text
 Top::
  -> Name .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Name:AND
  /(?<head>name)/

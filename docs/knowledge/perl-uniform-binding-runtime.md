@@ -15,7 +15,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [perl, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. FUTURE-PARITY-BACKLOG.12.1.7.1 then proves pure array/hash helpers, emptiness flow, and print_each consume those same scalar-held typed values after shipped selector migration; the original Lispish join_values failure came from legacy @name fast-path reads diverging from $name mutation writes. FUTURE-PARITY-BACKLOG.12.1.7.3 removes embedded selector sources and closes two final lowering seams: aggregate AST arguments inside user functions preserve the spec-level bare name until runtime typed-value lowering, while each rule label is recorded as its implicit internal array accumulator unless explicitly rebound. Bare mutation/chaining, static precedence, missing-target creation, and binding_kind_mismatch remain locked."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. FUTURE-PARITY-BACKLOG.12.1.7.1 then proves pure array/hash helpers, emptiness flow, and print_each consume those same scalar-held typed values after shipped selector migration; the original Lispish join_values failure came from legacy @name fast-path reads diverging from $name mutation writes. FUTURE-PARITY-BACKLOG.12.1.7.3 removes embedded selector sources and closes two final lowering seams: aggregate AST arguments inside user functions preserve the spec-level bare name until runtime typed-value lowering, while each rule label is recorded as its implicit internal array accumulator unless explicitly rebound. FUTURE-PARITY-BACKLOG.12.1.8.1 then rejects exact selector nodes before Perl lowering with the neutral diagnostic while retaining non-selector constructors."
 reverify: "prove -Iperl t/uniform_binding_contract.t t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t"
 ---
 
@@ -36,9 +36,10 @@ target fails deterministically with `binding_kind_mismatch` plus identifier, exp
 For ambiguous `push(rule_or_target, destination_or_value)`, a registered static rule handler wins; otherwise the
 first bare name is the array binding.
 
-Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. Backend enablement and
-all file-backed/embedded source migration are complete. Perl hard rejection follows immediately in
-`FUTURE-PARITY-BACKLOG.12.1.8.1`.
+Exact `array(name)` and `hash(name)` are rejected on Perl before lowering with `aggregate_selector_removed` and
+portable surface/identifier/replacement fields. This includes nested/dead rule code and unused user-function
+bodies. Empty, quoted, computed, and multi-argument constructors remain values. See
+[[perl-aggregate-selector-compile-rejection]].
 
 The Perl lowering invariant is now explicit: uniform bindings live in scalar-held typed values, so mutation and
 read-only helper paths must both consume `$name`. During shipped migration, `join_values("", word)` initially read
@@ -55,6 +56,6 @@ Type memory records that known ownership so `copy(rule_label)` snapshots `@rule_
 binding of the same name still overrides it as a scalar-held typed value. This replaces the old array-first guess
 with explicit ownership at both boundaries.
 
-Related facts: [[uniform-binding-neutral-contract]],
+Related facts: [[uniform-binding-neutral-contract]], [[perl-aggregate-selector-compile-rejection]],
 [[spec-facing-aggregate-selector-retirement-inventory]],
 [[uniform-expression-compatibility-retirement-doctrine]].

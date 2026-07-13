@@ -31,6 +31,81 @@ sub _rewrite_exact_retired_colon_scalar_slot {
  return _retired_colon_scalar_slot_diagnostic_expr()
 }
 
+sub _collect_aggregate_selector_nodes {
+ my ($value, $found) = @_;
+ $found ||= [];
+ if (ref($value) eq 'ARRAY') {
+  _collect_aggregate_selector_nodes($_, $found) for @$value;
+  return $found
+ }
+ return $found unless ref($value) eq 'HASH';
+
+ if (($value->{kind} // '') eq 'call'
+  && (($value->{name} // '') eq 'array' || ($value->{name} // '') eq 'hash')) {
+  my $args = $value->{args};
+  if (ref($args) eq 'ARRAY'
+   && @$args == 1
+   && ref($args->[0]) eq 'HASH'
+   && ($args->[0]{kind} // '') eq 'variable'
+   && defined($args->[0]{name})
+   && $args->[0]{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   push @$found, {
+    surface => $value->{name},
+    identifier => $args->[0]{name},
+    replacement => $args->[0]{name},
+    source_start => ref($value->{source_span}) eq 'HASH'
+     ? ($value->{source_span}{start} // 0)
+     : 0,
+   };
+  }
+ }
+
+ foreach my $key (sort keys %$value) {
+  next if $key eq 'source' || $key eq 'source_span';
+  _collect_aggregate_selector_nodes($value->{$key}, $found);
+ }
+ return $found
+}
+
+sub _find_aggregate_selector_in_action_code {
+ my ($code) = @_;
+ return undef unless defined($code) && length($code);
+ LinkedSpec::OwnerDispatch::require_pkg(
+  __PACKAGE__,
+  'LinkedSpec::ActionIR::AST',
+ );
+ my $block = LinkedSpec::ActionIR::AST::parse_action_block($code);
+ my $found = _collect_aggregate_selector_nodes($block, []);
+ return undef unless ref($found) eq 'ARRAY' && @$found;
+ my ($first) = sort {
+  ($a->{source_start} // 0) <=> ($b->{source_start} // 0)
+ } @$found;
+ return $first
+}
+
+sub _reject_removed_aggregate_selector {
+ my ($selector) = @_;
+ return unless ref($selector) eq 'HASH';
+ my $surface = $selector->{surface};
+ my $identifier = $selector->{identifier};
+ my $replacement = $selector->{replacement};
+ return unless defined($surface) && $surface =~ /\A(?:array|hash)\z/o;
+ return unless defined($identifier) && $identifier =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ $replacement = $identifier unless defined($replacement) && length($replacement);
+ die 'aggregate_selector_removed'
+  .' surface='.$surface
+  .' identifier='.$identifier
+  .' replacement='.$replacement
+  ."\n"
+}
+
+sub _reject_removed_aggregate_selectors_in_action_code {
+ my ($code) = @_;
+ my $selector = _find_aggregate_selector_in_action_code($code);
+ _reject_removed_aggregate_selector($selector) if ref($selector) eq 'HASH';
+ return 1
+}
+
 sub _event_continues_implicit_if_flow {
  my ($event) = @_;
  my $contract_id = $event->{contract_id} // '';
@@ -289,6 +364,23 @@ sub _lower_action_code_from_canonical_ir {
     : 0,
   },
  );
+
+ my $removed_selector = _find_aggregate_selector_in_action_code($code);
+ if (ref($removed_selector) eq 'HASH') {
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'lower_action_code_from_canonical_ir',
+   label => $label,
+   decision => 'aggregate_selector_removed',
+   taken => 1,
+   context => {
+    surface => $removed_selector->{surface},
+    identifier => $removed_selector->{identifier},
+    replacement => $removed_selector->{replacement},
+   },
+  );
+  _reject_removed_aggregate_selector($removed_selector);
+ }
 
  my %rewrite_by_id = map { $_->{id} => $_ } @$rewrite_rules;
  my $rewritten = $code;

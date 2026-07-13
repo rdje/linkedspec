@@ -102,8 +102,8 @@ sub _normalize_split_delimiter_expr {
 
 #------------------------------------------------------------------------------
 # Function: _build_array_pipeline_plan_from_expr
-# Purpose : Build recursive array-pipeline operation plan from composable
-#           method expression forms like `filter_match(uniq(array(x)), /.../)`.
+# Purpose : Build recursive array-pipeline operation plans from composable
+#           method expressions over bare typed bindings.
 # Args    : ($expr, $deps)
 # Returns : hashref { target_symbol => ..., ops => [...] } or undef
 #------------------------------------------------------------------------------

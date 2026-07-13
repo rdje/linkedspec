@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.1 — hard-reject Perl aggregate selectors
+
+Perl now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls at the canonical ActionIR boundary
+before any compatibility lowering. The neutral diagnostic is
+`aggregate_selector_removed surface=<array|hash> identifier=<name> replacement=<name>`. It is preserved through
+direct lowering, compiler-pipeline failure, and generated-source emission. AST-wide validation catches nested or
+unreachable occurrences, and function-registry validation rejects selector syntax in unused user-function bodies.
+
+The rejection remains exact. `array()`, `array("items")`, `array(copy(items))`, multi-argument arrays, `hash()`,
+valid key/value hashes, and direct array/harray literals retain constructor/value behavior. A constructor-only
+EmitContext path preserves standalone constructor values without reviving selector fallback. Generated Perl sigils
+remain private backend storage and are outside the `.spec` surface contract.
+
+The first full Phase 0 run exposed spaced selector residues in the call-spacing fixture, Rust mirror, and oracle
+generator. They are migrated to `copy(items)` / `copy(meta)`, and the recurring executable-source regex now accepts
+whitespace before `(` so the omission cannot recur. It reports zero positives and 19 classified recognition sites.
+Oracle regeneration completes all 105 cases with the documented 30-second bound, refreshing the corrected
+call-spacing source plus five already-stale generated inputs from their committed canonical specs. Rust corpus
+replay passes 3/3; focused Perl proof passes 41 tests; standalone Phase 0 passes all `1..1031` tests in 934 seconds.
+Canonical local CI also passes capability 60/0/0, CLI 61x2, and Phase 0 `1..1031` in 934 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.14.0 — capture structural progressive parsing doctrine
 
 Captured the director's complete `.spec` authoring model without changing parser behavior. Typical rules use

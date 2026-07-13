@@ -177,8 +177,8 @@ with several function bodies such as:
 ```text
 fn normalize(value) { return(trim(value)) }
 fn join_pair(left, right) { return(cat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
-fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
+fn mk_items(first, second) { items += first; items += second; return(copy(items)) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(meta)) }
 
 Top::
  -> Done {
@@ -211,10 +211,10 @@ direct indexed/nested access, shape literals, and block values lower from AST no
 Value-only helper-call composition now also consumes AST `call` nodes recursively before
 reusing the existing Perl helper catalog, covering scalar normalization, string
 predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Aggregate
-helper-call families now consume AST `call` nodes too: bare scalar reads, canonical aggregate wrappers
-(`array(...)`/`hash(...)`), current `copy(...)`, collection
+helper-call families now consume AST `call` nodes too: bare typed reads, retained aggregate constructors,
+current `copy(...)`, collection
 helpers, numeric reducers over aggregate operands, and hash helpers rebuild their helper
-surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
+surface from typed AST fields while preserving symbol slots and quoted-constructor literal
 boundaries before reusing the existing Perl helper catalog. Unsupported covered helper
 forms now report through the existing unresolved-helper metadata instead of leaking as
 generated host-language calls. Receiver-dot value chains now also consume AST
@@ -239,8 +239,8 @@ lowering now consumes typed source, match, body, branch-list, and end-marker nod
 reusing the existing switch stack engine. Attached `while(cond) { ... }` statement
 lowering now consumes typed condition/body nodes before reusing the existing loop lowerer
 and its deterministic 10000-iteration safety guard. Bodyless `while(...)` marker nodes
-remain parser shape only because the current DSL has no `endwhile` product syntax. The
-wrapper forms remain compatibility syntax, not the canonical destination surface.
+remain parser shape only because the current DSL has no `endwhile` product syntax. Exact one-bare-identifier
+aggregate selectors are rejected on Perl at this typed boundary before lowering.
 Standalone supported value statements now lower through the same typed AST value
 traversal and produce canonical `VALUE_DROP` events: their value is computed with the
 covered helper/receiver semantics and then intentionally discarded. For example,

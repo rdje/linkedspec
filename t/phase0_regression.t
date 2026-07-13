@@ -45797,7 +45797,7 @@ subtest 'spec_format_terse_1_5_3_call_spacing_and_parentheses_locks' => sub {
         'no-paren scalar read spelling is not claimed as a helper call');
 
     my $spacing_spec = "Top::\n"
-                     . " /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, copy (array (items)), copy (hash (meta)))) }\n"
+                     . " /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, copy (items), copy (meta))) }\n"
                      . "\nDone::\n /[a-z]+/\n";
     my $sp = eval { LinkedSpec::Get(\$spacing_spec) };
     ok(ref($sp) eq 'CODE', 'call-spacing spec compiles to a parser')

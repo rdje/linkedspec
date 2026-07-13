@@ -1,6 +1,7 @@
 # Working Variables and Setup
 
-Working variables auto-exist when a rule uses them through a typed or type-implying position. New `.spec` files should initialize state with direct assignment, aggregate reset forms, and mutation helpers.
+Working variables auto-exist when a rule uses them through a typed or type-implying position. New `.spec` files
+initialize state with direct assignment, bare `set(...)`, and mutation helpers.
 
 Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper DSL direction is new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) for the value expressions that feed assignments, returns, appends, and flow helpers.
 
@@ -14,19 +15,20 @@ count = num_add(coalesce(count, 0), 1);
 payload = { "kind" : "node", "name" : name };
 ```
 
-Use explicit aggregate targets when later helpers should read or mutate named aggregate storage:
+Bind an array or harray value directly when later helpers should read or mutate it:
 
 ```text
-set(array(items), []);
-push(array(items), value);
-return(copy(array(items)));
+set(items, []);
+push(items, value);
+return(copy(items));
 
-set(hash(meta), {});
+set(meta, {});
 meta[key] = value;
-return(copy(hash(meta)));
+return(copy(meta));
 ```
 
-That distinction matters. `items = []` stores one array value in the scalar slot named `items`; `set(array(items), [])` resets the named array storage that `array(items)` and `push(array(items), ...)` use.
+`items = []` and `set(items, [])` both bind one array value to `items`; operator and helper spelling do not create
+separate namespaces. Later `items` reads and `push(items, ...)` mutations observe that same typed binding.
 
 ## Auto-Existing Variables
 
@@ -39,22 +41,23 @@ return(count);
 
 # array target/read positions
 items += entry_text();
-push(array(items), entry_text());
-return(copy(array(items)));
+push(items, entry_text());
+return(copy(items));
 
 # hash target/read positions
 meta["kind"] = "token";
 set_key(meta, "line", cursor_line());
-return(copy(hash(meta)));
+return(copy(meta));
 ```
 
-The working value is fresh for the rule invocation. It does not carry state across parser runs or recursive re-entry. For recursive accumulators, reset aggregate storage in the lifecycle setup path:
+The working value is fresh for the rule invocation. It does not carry state across parser runs or recursive
+re-entry. For recursive accumulators, bind a fresh container in the lifecycle setup path:
 
 ```text
 Node::AND
- I { set(array(items), []) }
+ I { set(items, []) }
  -> Atom { items += entry_text() }
- LX { return(copy(array(items))) }
+ LX { return(copy(items)) }
 ```
 
 ## Worked Example
@@ -62,18 +65,18 @@ Node::AND
 ```text
 List::
  I {
-   set(array(items), []);
+   set(items, []);
    retv = undef;
  }
  -> Item {
    retv = call(Item);
-   push(array(items), retv);
+   push(items, retv);
  }
  LX {
    return(hash(
      "kind", "list",
-     "items", copy(array(items)),
-     "item_count", count(array(items))
+     "items", copy(items),
+     "item_count", count(items)
    ));
  }
 
@@ -85,6 +88,6 @@ On input `alpha beta`, this returns `{"kind":"list","items":[{"text":"alpha"},{"
 
 The state choices are explicit:
 
-- `set(array(items), [])` resets the named array accumulator for this rule invocation.
+- `set(items, [])` binds a fresh array accumulator for this rule invocation.
 - `retv = undef` makes the scratch scalar visible before action edges use it.
-- `push(array(items), retv)` appends one computed child result.
+- `push(items, retv)` appends one computed child result.

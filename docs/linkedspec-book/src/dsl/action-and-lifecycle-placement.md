@@ -65,9 +65,9 @@ Example:
 ```text
 Token: /[A-Za-z_]+/
  I {
-   set(hash(meta), { "kind" : "token" });
+   set(meta, { "kind" : "token" });
    text = lowercase(trim(entry_text()));
-   return(set_key(hash(meta), "text", text));
+   return(set_key(meta, "text", text));
  }
 ```
 
@@ -102,7 +102,7 @@ Action bodies should use helper statements:
 
 ```text
 name = match_text();
-push(array(items), retv);
+push(items, retv);
 return(hash("kind", "name", "value", name));
 ```
 
@@ -140,7 +140,7 @@ Action-edge continuations are also portable when they stay edge-scoped:
 -> Item .push
 -> Item .push(items)
 -> Item .if(on).push(Item, items).else().return_undef().endif()
--> Item[1] .return(array("?items:", copy(array(Item))))
+-> Item[1] .return(array("?items:", copy(Item)))
 ```
 
 `-> Item .push` dispatches the matched child and appends the child rule return to the
@@ -264,7 +264,7 @@ In new public examples, prefer the more explicit child-result pattern unless the
 
 ```text
 retv = call(Child);
-push(array(children), retv);
+push(children, retv);
 ```
 
 That pattern makes the dataflow visible.
@@ -368,13 +368,13 @@ Example:
 
 ```text
 MaybeName:OR
- I { set(hash(meta), { "kind" : "maybe_name" }); }
+ I { set(meta, { "kind" : "maybe_name" }); }
  LX {
    return(hash("kind", "missing_name"));
  }
  /[A-Za-z_]+/
  -> MaybeName[0] {
-   return(set_key(hash(meta), "name", match_text()));
+   return(set_key(meta, "name", match_text()));
  }
 ```
 
@@ -407,10 +407,10 @@ Items:*
    item = match_text();
  }
  IT {
-   push(array(items), item);
+   push(items, item);
  }
  E {
-   return(hash("kind", "items", "items", copy(array(items))));
+   return(hash("kind", "items", "items", copy(items)));
  }
 ```
 
@@ -474,10 +474,10 @@ Use this as the default decision guide:
 | Goal | Prefer |
 | --- | --- |
 | Initialize state shared by the rule | `I { items = []; retv = undef }` |
-| Initialize metadata shared by return paths | `I { set(hash(meta), { "kind" : "node" }) }` |
+| Initialize metadata shared by return paths | `I { set(meta, { "kind" : "node" }) }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
-| Append repeated child results | `push(array(items), retv)` inside action/iteration logic |
+| Append repeated child results | `push(items, retv)` inside action/iteration logic |
 | Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
 | Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
 | Return a shaped optional fallback | `LX { return(...) }`, used sparingly |
@@ -488,7 +488,7 @@ Use this as the default decision guide:
 ```text
 Block:AND
  I {
-   set(hash(meta), { "kind" : "block" });
+   set(meta, { "kind" : "block" });
    body = undef;
    body_text = undef;
  }
@@ -503,9 +503,9 @@ Block:AND
  }
  -> Block[2] {
    body = capture_from(body_start);
-   set(hash(meta), set_key(hash(meta), "body", body));
-   set(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
-   return(copy(hash(meta)));
+   set(meta, set_key(meta, "body", body));
+   set(meta, set_key(meta, "body_start_line", mark_line(body_start)));
+   return(copy(meta));
  }
 ```
 

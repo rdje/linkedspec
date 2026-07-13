@@ -251,7 +251,7 @@ my $spec = <<'SPEC';
 top::
  -> word .push
 
-LX { return(copy(array(top))) }
+LX { return(copy(top)) }
 
 word:
  /foo/ I {

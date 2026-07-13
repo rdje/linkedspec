@@ -110,15 +110,15 @@ Top::AND
  => Tuple
 
 Tuple:AND
- I { set(array(parts), []); }
+ I { set(parts, []); }
  /\(/
  /[^,]+/
  /,/
  /[^)]+/
  /\)/
  -> Tuple[0] { start_capture_slice() }
- -> Tuple[2] { push(array(parts), capture_take()) }
- -> Tuple[4] { push(array(parts), capture_slice()); return(array("?Tuple:", copy(array(parts)))) }
+ -> Tuple[2] { push(parts, capture_take()) }
+ -> Tuple[4] { push(parts, capture_slice()); return(array("?Tuple:", copy(parts))) }
 ```
 
 Reading this example:
@@ -414,7 +414,7 @@ zero-width match has length `0` and concrete start/end positions, even when both
 ```text
 Top::
  -> Name .push
- LX { return(copy(array(Top))) }
+ LX { return(copy(Top)) }
 
 Name:AND
  /(?<head>name)/
@@ -454,9 +454,9 @@ The following older helpers remain useful when reading or migrating legacy specs
 | Helper | Preferred modern direction |
 | --- | --- |
 | `$CAPTURE` | `capture_slice()` or `name = capture_slice()` |
-| `capture(label)` | `push(array(target), capture_slice())` when the target is explicit |
-| `capture_if(label)` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(target), part) }` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
-| `CAPTURE_IF()` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(current_rule), part) }` when replacing the legacy current-rule append shape |
+| `capture(label)` | `push(target, capture_slice())` when the target is explicit |
+| `capture_if(label)` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(target, part) }` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
+| `CAPTURE_IF()` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(current_rule, part) }` when replacing the legacy current-rule append shape |
 
 The `label` argument on the legacy capture helpers is compatibility syntax. The active lowering uses the current rule context, not a new independent target selected by that label text. For `capture(label)`, `capture_if(label)`, and `CAPTURE_IF()`, that means the captured value is appended to the rule-local default accumulator array named after the current rule. New docs and examples should normally prefer explicit helper composition.
 

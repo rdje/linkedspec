@@ -1958,7 +1958,7 @@ fn terse_1_5_2_boolean_literals_work_in_mutations_and_flow() {
 
 #[test]
 fn terse_1_5_3_call_spacing_runs_like_tight_calls() {
-    let grammar = "Top::\n /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, copy (array (items)), copy (hash (meta)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, copy (items), copy (meta))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["ab", ["cd"], {"stage": "ab"}]]),

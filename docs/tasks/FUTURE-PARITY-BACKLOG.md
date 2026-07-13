@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (director's linked-rule/progressive/staged parsing doctrine captured under `.14.0`; Perl hard rejection `.12.1.8.1` resumes immediately after this planning slice).
+- Last updated: `2026-07-12` (Perl exact aggregate-selector hard rejection `.12.1.8.1` complete; Rust `.12.1.8.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2848,17 +2848,26 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8`
-  Status: `pending`
+  Status: `active`
   Goal: Hard-retire exact aggregate-selector syntax with one portable diagnostic.
   Children: `.12.1.8.1`, `.12.1.8.2`, `.12.1.8.3`, `.12.1.8.4`, `.12.1.8.5`, `.12.1.8.6`
   Dependencies: `.12.1.7`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.1`
-  Status: `pending`
-  Goal: Reject exact selector-shaped calls on Perl and delete selector-specific recognition/dispatch.
+  Status: `done`
+  Goal: Reject exact selector-shaped calls at the Perl `.spec` boundary and remove public compatibility dispatch.
+  Verification: **PASS 2026-07-12.** The canonical Perl ActionIR boundary now rejects every exact one-bare-
+    identifier `array(...)` / `hash(...)` node with `aggregate_selector_removed surface=<...>
+    identifier=<...> replacement=<...>` before lowering, including nested/dead rule code and unused user-function
+    bodies. Live compilation reports compiler-pipeline failure; generated-source emission preserves the same
+    detail. Zero/multi/quoted/computed constructors and direct literals remain valid. Focused Perl proof passes 41
+    tests; the whitespace-aware executable-source scanner reports zero positives/19 classified recognizers; the
+    regenerated 105-case oracle and Rust corpus replay pass; standalone and canonical Phase 0 each pass `1..1031`
+    in 934 seconds, with canonical capability 60/0/0 and CLI 61x2.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.2`
-  Status: `pending`
+  Status: `active`
   Goal: Reject exact selector-shaped calls on Rust and delete selector-specific recognition/dispatch.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.3`
@@ -2953,6 +2962,25 @@ before implementation.
 - [x] **NO REGRESSION** — Planning only: no parser, runtime, grammar, fixture, or accepted behavior changes.
 - [x] **LOCKSTEP** — Task/index, roadmap, Knowledge Map/live docs, memory, and mdBook status point at the durable
   future owner while Perl selector hard rejection remains the immediate implementation frontier.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — With all positive executable sources migrated, prove exact one-bare-identifier
+  `array(name)` / `hash(name)` calls still enter Perl compatibility recognition and can still execute as selectors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Use the Knowledge Map and LinkedSpec toolbox/tests to identify every Perl
+  parser/scanner/lowering/runtime recognition and diagnostic seam that distinguishes selector calls from retained
+  constructors; do not confuse generated Perl sigils with `.spec` language surface.
+- [x] **FIX** — Emit the adopted `aggregate_selector_removed` diagnostic for both exact forms and delete public
+  selector acceptance/dispatch while retaining non-selector constructors, literals, bare typed bindings,
+  `flat_array(...)`, `flat_hash(...)`, and ordinary private host-language storage/normalization.
+- [x] **ADDRESSED (verified)** — Exact selector calls fail deterministically through live and generated Perl paths;
+  no authored selector node crosses the canonical lowering boundary, and retained constructor/control cases still
+  execute. Private generated-Perl storage machinery is not a `.spec` surface and remains separately classified.
+- [x] **NO REGRESSION** — Neutral uniform-binding and executable-source checkers, focused parser/ActionIR/runtime/
+  generated-source suites, capability contracts, CLI 61x2, Phase 0, doctrines/KM/mdBook/whitespace, and artifact
+  cleanup pass at their true stopping points.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  identify Perl hard rejection complete and Rust `.12.1.8.2` as next.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3272,7 +3300,7 @@ before implementation.
 | 91 | `FUTURE-PARITY-BACKLOG.12.1.7.1` | `done` | All 210 exact shipped occurrences are removed; reference/generated behavior and full canonical gates pass. |
 | 92 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `done` | All 390 exact file-backed occurrences are removed from 67 capability/oracle/corpus specs; all tracked `.spec` files scan at zero. |
 | 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `done` | All 1,356 positive embedded occurrences are removed; recurring scan reports zero positives and 25 classified recognizer occurrences. |
-| 94 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `pending` | Immediate implementation frontier: hard-reject exact selectors on Perl and delete their recognition/dispatch. |
+| 94 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `done` | Perl rejects authored exact selectors before lowering; live/generated diagnostics and retained constructors are locked. |
 | 95 | `FUTURE-PARITY-BACKLOG.13.1` | `pending` | Restore the codegen inspector after selector retirement. |
 | 96 | `FUTURE-PARITY-BACKLOG.14` | `pending` | Extend the existing staged architecture with structural authoring and complete progressive/staged composition audits. |
 | 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
@@ -3280,6 +3308,7 @@ before implementation.
 | 99 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Audit and implement intended in-parse progressive multi-spec composition. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Audit and implement later-stage AST-field enrichment. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Close examples, implementation gaps, tooling, and no-drift. |
+| 102 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `active` | Hard-reject exact selectors on Rust and delete their recognition/dispatch. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -3974,6 +4003,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.1` | Boundary-correct inventory; 15 shipped specs; Perl pure-helper read seam; focused live/generated contract; all descriptors; CLI 61x2; canonical doctrines/contracts/capability and Phase 0 `1..1031`/573s; mdBook/KM/whitespace. | PASS. Shipped exact selectors fall 210 to zero; 390 tracked occurrences remain for `.12.1.7.2-.3`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.2` | 390 exact forms/67 file-backed specs; three `[undef]` constructions; Perl live EBNF/recursive/traversal probes; Rust native/generated 105 corpora and full gate; Dart/Julia full gates and 105 corpora; Lua dual-ABI 85/85 plus 105-manifest validation; canonical 60/0/0, CLI 61x2, Phase 0 `1..1031`/574s; docs/KM/governance. | PASS. Every tracked `.spec` file is selector-free; exposed initializer/accumulator/fluent-push/descriptor seams are permanently locked and embedded-source `.12.1.7.3` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.3` | 1,356 exact positive forms/25 embedded source owners; recurring executable-source classifier at 0 positive/25 recognition; focused Perl generated/function/runtime proof; complete Rust/Dart/Julia/Lua gates; regenerated 105-fixture oracle; standalone Phase 0 `1..1031`/920s; canonical capability 60/0/0, CLI 61x2, Phase 0 `1..1031`/918s; docs/KM/governance/mdBook/whitespace. | PASS. All tracked source migration is complete; implementation recognition remains only for dependency-ordered hard rejection beginning with Perl `.12.1.8.1`. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.1` | Exact six-case compile/generated/direct rejection; unused-function and dead-code coverage; eight retained constructors/literals; focused Perl 41 tests; whitespace-aware executable scan 0/19; regenerated 105 fixtures; Rust corpus replay 3/3; standalone Phase 0 `1..1031`/934s; docs/KM/governance/mdBook/whitespace. | PASS. Perl rejects exact aggregate selectors at the canonical ActionIR boundary with portable fields before lowering, while constructor/literal behavior remains; Rust `.12.1.8.2` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
@@ -4016,6 +4046,10 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.4` | `FUTURE-PARITY-BACKLOG.12.1.4 - enable Dart uniform bindings` | Native/generated typed bare mutations/results, wrapper bridge, diagnostics, corpus, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.5` | `FUTURE-PARITY-BACKLOG.12.1.5 - enable Julia uniform bindings` | Native/generated typed mutations/results, wrapper bridge, diagnostics, package/corpus/CLI, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.6` | `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings` | Dual-ABI typed mutations/results, static precedence, diagnostics, minimal array continuations, and full-gate proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.7.1` | `FUTURE-PARITY-BACKLOG.12.1.7.1 - migrate shipped aggregate selectors` | Removes 210 shipped exact selectors and preserves reference/generated behavior. |
+| `FUTURE-PARITY-BACKLOG.12.1.7.2` | `FUTURE-PARITY-BACKLOG.12.1.7.2 - migrate file-backed selector fixtures` | Removes 390 exact selectors from 67 capability/oracle/corpus specs. |
+| `FUTURE-PARITY-BACKLOG.12.1.7.3` | `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources` | Removes 1,356 embedded positives and adds the recurring executable-source classifier. |
+| `FUTURE-PARITY-BACKLOG.12.1.8.1` | `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors` | Compile-time portable rejection, retained constructors/literals, and full Perl/corpus proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -4081,6 +4115,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.8.1` hard-retires exact aggregate selectors on Perl. Canonical ActionIR validation rejects
+  direct, nested, dead, and unused-function occurrences before lowering with the neutral diagnostic fields; live
+  compilation and generated-source emission fail deterministically. Valid constructors/literals remain. The
+  embedded-source scanner now recognizes whitespace before `(` and caught/migrated three spaced fixture/generator
+  residues. Focused Perl 41, regenerated oracle 105, Rust corpus 3/3, and Phase 0 `1..1031`/934s pass; Rust
+  `.12.1.8.2` activates.
 - `2026-07-12`: `.12.1.6` makes Lua the fifth executable uniform-binding backend on both ABIs. Bare typed
   push/append, mutable split, hash update, array-end methods, collection rebinding, results/chaining, static
   precedence, and wrong-kind fields pass all nine exact cases. PUC Lua and LuaJIT each pass 85/85; selector sources

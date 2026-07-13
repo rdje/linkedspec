@@ -40,7 +40,7 @@ marker, and a top rule is an ordinary rule that *may* carry a regex or recurse �
 Top::
  -> Pair .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Pair:
  /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
@@ -54,14 +54,14 @@ Pair:
 Top::
  -> Pair .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 ```
 
 `Top::` is the entry rule. The double-colon `::` label marks the single top rule of the spec —
 the rule a backend starts from. It carries **no regex of its own**. Instead it runs a dispatch
 loop: it repeatedly hands off to the `Pair` matcher (`-> Pair`) and `.push`es each result onto
 its own accumulator. When the input is exhausted, the `LX { ... }` lifecycle block returns a
-snapshot of that accumulator with `copy(array(Top))` — that snapshot (a list) is the parser's
+snapshot of that accumulator with `copy(Top)` — that snapshot (a list) is the parser's
 result. (The accumulator and output-shape model is covered in
 [Runtime Semantics](../appendix/runtime-semantics.md).)
 
@@ -154,7 +154,7 @@ my $spec = <<'SPEC';
 Top::
  -> Pair .push
 
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Pair:
  /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
@@ -342,7 +342,7 @@ This small example demonstrates the default authoring loop:
 - Use regex capture groups when the payload is already local to one match.
 - Use `entry_group(...)` to read the capture groups of the match that entered a dispatched rule.
 - Use helper expressions such as `trim(...)`, `hash(...)`, and `return(...)` rather than raw host-language payload construction.
-- Let the entry rule collect each returned payload (`-> Pair .push`) and return the snapshot (`LX { return(copy(array(Top))) }`).
+- Let the entry rule collect each returned payload (`-> Pair .push`) and return the snapshot (`LX { return(copy(Top)) }`).
 - Choose `consume` for strict parser behavior.
 - Choose `seek` for extraction behavior.
 - Use `return_descriptor => 1` when tooling needs compiler output instead of a parser coderef.

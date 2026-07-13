@@ -111,11 +111,10 @@ The same ActionIR boundary is where the Perl reference is moving from source-tex
 rewrites to typed helper/action AST consumption. `LinkedSpec::ActionIR::AST` is the
 parser seam. `MethodLowering::_lower_method_value_expr(...)` now consumes that seam for
 non-call value nodes, value-only helper-call composition, and aggregate/helper families
-with slot-sensitive policy. Bare scalar reads plus canonical aggregate wrappers
-`array(...)` and `hash(...)` now enter through AST nodes together with
+with slot-sensitive policy. Bare typed reads plus retained aggregate constructors enter through AST nodes together with
 current `copy(...)`, collection helpers, numeric reducers over aggregate
 operands, and hash helpers; their AST bridge preserves aggregate symbol slots and quoted
-wrapper literal payloads before reusing the Perl helper catalog. Unsupported covered
+constructor literal payloads before reusing the Perl helper catalog. Unsupported covered
 helper forms now report unresolved-helper metadata instead of leaking as generated
 host-language calls. Receiver-dot value chains now consume AST `fluent_chain` nodes for
 the supported array, hash, string, and number receiver families. Return payloads now
@@ -126,7 +125,7 @@ consume AST target/key/value fields, helper-call statements and returns consume 
 fields before legacy fallback. Expression-valued block internals now consume AST
 `block_value` / `action_block` / `action_stmt` fields for side effects, block-local
 return payloads, and final expressions before legacy fallback.
-Those wrappers are not the canonical destination syntax.
+Exact one-bare-identifier aggregate selectors are not destination syntax and are rejected before Perl lowering.
 
 ## The facade owns routing, not semantics
 

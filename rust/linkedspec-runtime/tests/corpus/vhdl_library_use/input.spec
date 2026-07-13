@@ -303,19 +303,19 @@ LE {start_capture_slice()}
    push(capt, input_slice(pos1, -(pos2, pos1)))
 }
 -> downto_or_to           {
-   msi_lsi = undef;
-   msi_lsi = join_values("", capt);
-   substr(msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
-   push(msi_lsi, msi_lsi);
+   msi_lsi_value = undef;
+   msi_lsi_value = join_values("", capt);
+   substr(msi_lsi_value, /^\s+|\n\s*|\s+$/, //, goi);
+   push(msi_lsi, msi_lsi_value);
    set(capt, array())
 } 
 -> signal_decl_range[1]   {
    if(not(is_empty(capt)));
-    msi_lsi = undef;
-    msi_lsi = join_values("", capt);
-    if(msi_lsi);
-     substr(msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
-     push(msi_lsi, msi_lsi);
+    msi_lsi_value = undef;
+    msi_lsi_value = join_values("", capt);
+    if(msi_lsi_value);
+     substr(msi_lsi_value, /^\s+|\n\s*|\s+$/, //, goi);
+     push(msi_lsi, msi_lsi_value);
     endif();
    endif();
 

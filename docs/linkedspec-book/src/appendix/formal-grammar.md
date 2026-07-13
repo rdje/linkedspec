@@ -25,7 +25,7 @@ Function definitions are also recognized only at top level.
 ```text
 Top::
  -> Next .push
- LX { return(array("?Top:", copy(array(Top)))) }
+ LX { return(array("?Top:", copy(Top))) }
 
 Next: /a/
  I { return(array("?Next:", entry_text())) }
@@ -588,8 +588,7 @@ set(name, [value])            — bind the array payload as the typed value of n
 Use the bare spelling when the value must visibly come from a working variable.
 Bare direct-shape assignment binds the typed value to the bare variable:
 `set(name, [value])` stores an array value in `name`.
-Use `set(array(name), ...)` or `set(hash(name), ...)` only when aggregate
-working storage is intended.
+Use `set(name, ...)` with an array or harray RHS when that typed value is intended.
 
 ### 7.1 Working-Variable Helpers
 ```
@@ -632,7 +631,7 @@ string_expr.split(delim).trim_each().join_values(delim)
 
 ### 7.3 Array Helpers
 ```
-array(name)            — read array working variable name when name is bare
+name            — read array working variable name when name is bare
 array(e1, e2, ...)     — construct an array; prefer [...] for terse literals
 copy(arr)        — shallow copy
 array_values(arr)      — retired alias of copy(do not use; see Helper Contract Catalog §Compatibility-Aliases)
@@ -673,7 +672,7 @@ is_empty(arr)           — true if array/hash is empty
 is_nonempty(arr)        — true if array/hash has elements
 join_values(delim, arr) — join array elements with delimiter
 split(s, delim)         — split string into array
-split(array(target), source, delim)
+split(target, source, delim)
                         — replace target array with split source pieces
 split_each(arr, delim)  — split each element
 trim_each(arr)          — trim each element
@@ -687,7 +686,7 @@ print_each(arr)         — debug output each element
 
 ### 7.4 Hash Helpers
 ```
-hash(name)              — read hash working variable name when name is bare
+name              — read hash working variable name when name is bare
 hash(k1, v1, k2, v2)    — construct a hash from flat key/value pairs
 flat_hash(h)             — flatten hash into list context
 copy(h)             — shallow copy
@@ -839,17 +838,17 @@ two styles below differ only in how the **edge's own action code** is written.
 Top::
  I { results = [] }
  -> Child {
-   push(array(results), call(Child))
+   push(results, call(Child))
  }
- LX { return(copy(array(results))) }
+ LX { return(copy(results)) }
 ```
 
 ### 8.2 Fluent Chain Form
 ```
 Top::
  I { results = [] }
- -> Child .push(array(results), call(Child))
- LX { return(copy(array(results))) }
+ -> Child .push(results, call(Child))
+ LX { return(copy(results)) }
 ```
 
 Both forms lower to identical ActionIR and produce identical parser behavior.
@@ -961,11 +960,11 @@ DemoParser::
  LS { retv = undef }
  -> Child {
    retv = call(Child);
-   push(array(results), retv);
+   push(results, retv);
    next();
  }
  LE { retv = undef }
- LX { return(array("?result:", copy(array(results)))) }
+ LX { return(array("?result:", copy(results))) }
 
 Child: /\s*hello[ \t]+(\w+)/
  I { name = entry_group(0); return(name) }
@@ -976,7 +975,7 @@ SecondChild:OR+
 ThirdChild:AND
  -> First .push
  -> Second .push
- LX { return(array("?third:", copy(array(ThirdChild)))) }
+ LX { return(array("?third:", copy(ThirdChild))) }
 
 First: /first/
  I { return(entry_text()) }

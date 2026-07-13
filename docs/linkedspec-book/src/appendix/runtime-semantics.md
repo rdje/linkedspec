@@ -206,7 +206,7 @@ the rule's own accumulator array.
 ```text
 Foo::
  -> Bar {push(Bar)}    # push(Child) appends Bar's result to the implicit accumulator @Foo
-LX {return(copy(array(Foo)))}
+LX {return(copy(Foo))}
 ```
 
 The `I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX` lifecycle blocks are **top-level rule-paragraph
@@ -221,26 +221,26 @@ surrounding rule return channel. This is separate from expression-valued blocks 
 
 ### 5.3 Explicit Accumulation
 
-`push(array(target), value)` targets a named accumulator explicitly. The terse
+`push(target, value)` targets a named accumulator explicitly. The terse
 spelling `push(target, value)` is equivalent when the value position is
 unambiguous:
 
 ```text
 Foo::
  I { results = [] }
- -> Bar {push(array(results), retv)}
-E {return(copy(array(results)))}
+ -> Bar {push(results, retv)}
+E {return(copy(results))}
 ```
 
 ```text
 Foo::
  -> Bar {results += retv}
-E {return(copy(array(results)))}
+E {return(copy(results))}
 ```
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`items += value` or `push(array(results), value)`.
+`items += value` or `push(results, value)`.
 Bare scalar reads are currently supported in return and assignment-like source slots such as
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
@@ -251,8 +251,8 @@ value, so they can appear inside `return(...)`, helper arguments, expression-val
 and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct shape RHS assignments participate
 in the same value contract as typed value binding: `items = [value]`, `set(items, [value])`, and
 `=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key : value }`
-binds a hash value and evaluates to that stored hash value. Explicit `set(array(items), ...)` and
-`set(hash(meta), ...)` targets remain aggregate-storage mutation forms. Mutation assignments also have expression
+binds a hash value and evaluates to that stored hash value. `set(items, ...)` and `set(meta, ...)` bind the same
+observable typed values as bare assignment. Mutation assignments also have expression
 values: `items += value` appends to the named array and evaluates to the updated array snapshot, while
 `meta[key] = value` updates the named hash and evaluates to the updated hash snapshot.
 
@@ -266,7 +266,7 @@ expressions are evaluated before the RHS value expression; the root path check a
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
 removes the last element, and `items.pop_front()` removes the first element. The receiver
-may be bare (`items`) or explicitly typed (`array(items)`). Push values use
+may be bare (`items`) or explicitly typed (`items`). Push values use
 the same mutation-slot expression rules as `items += value`, so a bare value reads the
 scalar working variable (`$value` on the Perl reference). The pop methods discard the
 removed value; value-returning forms such as `return(items.pop_back())` are not part of
@@ -293,7 +293,7 @@ does the same through string helpers and the explicit `split` array bridge.
 
 Named hash mutation updates a working hash in place. `set_key(meta, "stage", "normalized")` and
 `meta["stage"] = "normalized"` both update the working hash `meta`. The hash target auto-exists just like a
-declared `hash(meta)` working variable. In mutation slots, bare key/RHS identifiers read scalar working variables:
+declared `meta` working variable. In mutation slots, bare key/RHS identifiers read scalar working variables:
 `set_key(meta, key, value)` and `meta[key] = value` use `$key` and `$value`. When `meta[key] = value` is used as an
 expression, it yields the updated hash snapshot after the field write.
 
@@ -303,7 +303,7 @@ The rule's portable return value is whatever an explicit `return(...)` in an act
 lifecycle block yields. Lifecycle blocks are statement blocks: a final `set(...)`,
 helper call, or value expression is not a portable implicit return. A rule that should
 surface an accumulator should say so directly, for example
-`return(copy(array(accumulator)))`.
+`return(copy(accumulator))`.
 
 ### 5.5 What a Parser Returns (Top-Level Output)
 
@@ -414,15 +414,15 @@ Two distinct mechanisms produce a rule's data; do not conflate them:
   that rule. It is the rule's value channel, separate from the accumulator.
 
 A child rule's `return(...)` becomes that child's value for the parent to consume
-**explicitly** (for example `push(array(results), call(Child))`); it is **not**
+**explicitly** (for example `push(results, call(Child))`); it is **not**
 auto-appended to the parent's accumulator. A common top-level pattern uses both — collect
 children into the accumulator, then return a snapshot of it:
 
 ```text
-... return(array("?ds_vhistory:", copy(array(vhistory)))) ...
+... return(array("?ds_vhistory:", copy(vhistory))) ...
 ```
 
-(from `ds_vhistory.spec`), where `copy(array(vhistory))` snapshots the rule's
+(from `ds_vhistory.spec`), where `copy(vhistory)` snapshots the rule's
 `vhistory` accumulator; the `"?ds_vhistory:"` tag here is just the optional convention
 from §5.6 — the author could return the snapshot in any shape.
 

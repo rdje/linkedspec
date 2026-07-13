@@ -226,7 +226,115 @@ SPEC
  like($detail, qr/actual_kind=scalar/, 'wrong-kind push reports the actual kind');
 };
 
-subtest 'compatibility selectors remain temporary until scheduled source migration' => sub {
+subtest 'exact aggregate selectors hard-reject at Perl compile and generated-source boundaries' => sub {
+ foreach my $case (@{$contract->{invalid_selector_cases}}) {
+  my $source = $case->{source};
+  my $surface = $case->{surface};
+  my $identifier = $case->{identifier};
+  my $replacement = $case->{replacement};
+  my $expected = qr/aggregate_selector_removed surface=\Q$surface\E identifier=\Q$identifier\E replacement=\Q$replacement\E/;
+
+  my $lowered = eval { LinkedSpec::call_spec_handler_subst('Top', $source) };
+  my $lower_error = $@;
+  ok(!defined($lowered), "$case->{id} has no compatibility lowering result");
+  like($lower_error, $expected, "$case->{id} direct lowering reports the neutral diagnostic fields");
+
+  my $spec = "Top::\n /x/ -> Done { $source }\n\nDone::\n /x/\n";
+  my %runtime_ctx;
+  my $parser;
+  my $compile_noise = '';
+  {
+   open my $sink, '>', \$compile_noise or die "Could not open compile-noise sink: $!";
+   local *STDERR = $sink;
+   local *STDOUT = $sink;
+   $parser = LinkedSpec::Get(\$spec, runtime_ctx_ref => \%runtime_ctx);
+  }
+  ok(ref($parser) ne 'CODE', "$case->{id} is rejected while compiling a live parser");
+  is($runtime_ctx{last_error}{type}, 'compiler_pipeline', "$case->{id} live rejection is compiler-owned");
+  like($runtime_ctx{last_error}{detail} // '', $expected, "$case->{id} live diagnostic preserves neutral fields");
+
+  my ($generated, $generated_error);
+  my $generated_noise = '';
+  {
+   open my $sink, '>', \$generated_noise or die "Could not open generated-noise sink: $!";
+   local *STDERR = $sink;
+   local *STDOUT = $sink;
+   $generated = eval {
+    LinkedSpec::emit_generated_source(\$spec, source_identity => "removed-$case->{id}.spec")
+   };
+   $generated_error = $@;
+  }
+  ok(!defined($generated), "$case->{id} cannot emit standalone generated source");
+  is(ref($generated_error), 'HASH', "$case->{id} generated-source rejection is structured");
+  is($generated_error->{code}, 'generated_source_emit_failed', "$case->{id} generated-source rejection has the stable outer code");
+  like($generated_error->{detail} // '', $expected, "$case->{id} generated-source detail preserves neutral fields");
+ }
+
+ my $unused_function_spec = <<'SPEC';
+fn retired_inside_unused() { return(array(items)) }
+
+Top::
+ /x/ -> Done { return("ok") }
+Done::
+ /x/
+SPEC
+ my %function_ctx;
+ my $function_parser;
+ my $function_noise = '';
+ {
+  open my $sink, '>', \$function_noise or die "Could not open function-noise sink: $!";
+  local *STDERR = $sink;
+  local *STDOUT = $sink;
+  $function_parser = LinkedSpec::Get(\$unused_function_spec, runtime_ctx_ref => \%function_ctx);
+ }
+ ok(ref($function_parser) ne 'CODE', 'unused user-function body cannot hide a removed selector');
+ is($function_ctx{last_error}{type}, 'compiler_pipeline', 'unused function rejection is compiler-owned');
+ is($function_ctx{last_error}{stage}, 'function_registry', 'unused function rejects while building the staged function registry');
+ like(
+  $function_ctx{last_error}{detail} // '',
+  qr/aggregate_selector_removed surface=array identifier=items replacement=items/,
+  'unused function rejection preserves the neutral selector fields',
+ );
+};
+
+subtest 'retained aggregate constructors and literals remain distinct from removed selectors' => sub {
+ foreach my $case (@{$contract->{valid_constructor_cases}}) {
+  my $lowered = eval { LinkedSpec::call_spec_handler_subst('Top', $case->{source}) };
+  my $error = $@;
+  ok(defined($lowered) && length($lowered), "$case->{id} still lowers");
+  is($error, '', "$case->{id} does not enter removed-selector rejection");
+ }
+
+ my $spec = <<'SPEC';
+Top::
+ /x/ -> Done {
+   items = ["x"]
+   left = "l"
+   right = "r"
+   return([
+     array(),
+     array("items"),
+     array(copy(items)),
+     array(left, right),
+     hash(),
+     hash("key", right),
+     [items],
+     { "key" : left }
+   ])
+ }
+Done::
+ /x/
+SPEC
+ my ($result, $ctx) = run_spec($spec, 'xx', 'retained aggregate constructor fixture');
+ is_deeply(
+  $result,
+  [[], ['items'], [['x']], ['l', 'r'], {}, {key => 'r'}, [['x']], {key => 'l'}],
+  'empty, quoted/computed/multi constructors and literals retain their distinct values',
+ );
+ ok(!exists($ctx->{last_error}), 'retained aggregate constructors leave structured runtime error clear');
+};
+
+subtest 'selector-free source remains behavior-compatible after migration' => sub {
  my $spec = <<'SPEC';
 Top::
  /x/ -> Done {
@@ -239,8 +347,8 @@ Done::
  /x/
 SPEC
  my ($result, $ctx) = run_spec($spec, 'xx', 'temporary selector compatibility fixture');
- is_deeply($result, [['a', 'b'], {stage => 'ok'}], 'existing selectors remain behavior-compatible before migration');
- ok(!exists($ctx->{last_error}), 'temporary selector compatibility leaves structured runtime error clear');
+ is_deeply($result, [['a', 'b'], {stage => 'ok'}], 'bare typed bindings preserve the former compatibility result');
+ ok(!exists($ctx->{last_error}), 'selector-free compatibility result leaves structured runtime error clear');
 };
 
 done_testing();

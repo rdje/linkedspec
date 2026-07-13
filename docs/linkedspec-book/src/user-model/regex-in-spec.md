@@ -37,7 +37,7 @@ A minimal no-regex entry rule that dispatches to a keyword matcher:
 ```text
 Top::
  -> Keyword .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Keyword:
  /foo/ I.return(entry_text())
@@ -107,7 +107,7 @@ rule's own regex slot reads the local slot with `match_group(N)`. The
 ```text
 Top::
  -> Pair .push
-LX { return(copy(array(Top))) }
+LX { return(copy(Top)) }
 
 Pair:
  /(\w+)=(\w+)/ I.return(hash("key", entry_group(0), "val", entry_group(1)))

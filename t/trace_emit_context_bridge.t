@@ -78,21 +78,26 @@ subtest 'compat rewrite traces retired colon scalar-slot diagnostic' => sub {
  unlike($trace, qr/scalar_slot_fallback/, 'trace no longer reports the removed scalar-slot fallback path');
 };
 
-subtest 'compat rewrite traces aggregate fallback and canonical pipeline paths' => sub {
- plan tests => 7;
+subtest 'compat rewrite hard-rejects removed aggregate selectors and preserves canonical paths' => sub {
+ plan tests => 9;
 
  my $aggregate_trace_path = _debug_trace_path();
- my $aggregate = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'array(items)');
- is($aggregate, '[@items]', 'aggregate compatibility fallback still lowers to an array copy');
+ my $aggregate = eval {
+  LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'array(items)')
+ };
+ my $aggregate_error = $@;
+ ok(!defined($aggregate), 'removed aggregate selector has no compatibility lowering result');
+ like($aggregate_error, qr/aggregate_selector_removed/, 'removed aggregate selector reports the neutral code');
+ like($aggregate_error, qr/surface=array identifier=items replacement=items/, 'removed aggregate selector reports all neutral fields');
  my $aggregate_trace = _slurp($aggregate_trace_path);
  like($aggregate_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:retired_colon_scalar_slot => SKIPPED/, 'trace reports skipped retired-colon path for aggregate wrapper');
- like($aggregate_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:aggregate_wrapper_fallback => TAKEN/, 'trace reports aggregate wrapper fallback');
+ like($aggregate_trace, qr/DECISION actionir:rewrite_pipeline:lower_action_code_from_canonical_ir:Top:aggregate_selector_removed => TAKEN/, 'trace reports hard rejection at the canonical ActionIR boundary');
+ unlike($aggregate_trace, qr/aggregate_wrapper_fallback/, 'removed aggregate compatibility fallback is absent');
 
  my $pipeline_trace_path = _debug_trace_path();
  my $pipeline = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return(name)');
  is($pipeline, 'return $name', 'canonical rewrite pipeline still lowers bare return(name)');
  my $pipeline_trace = _slurp($pipeline_trace_path);
- like($pipeline_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:aggregate_wrapper_fallback => SKIPPED/, 'trace reports skipped aggregate fallback before pipeline use');
  like($pipeline_trace, qr/ENTER LinkedSpec::RuleIR::EmitContext::rewrite_action_code_with_diagnostics:Top/, 'trace enters the diagnostic rewrite boundary');
  like($pipeline_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:canonical_rewrite_pipeline => TAKEN/, 'trace reports canonical pipeline use');
 };

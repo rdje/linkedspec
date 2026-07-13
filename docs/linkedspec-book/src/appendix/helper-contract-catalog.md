@@ -68,8 +68,8 @@ items = [value, cat("a", "b")];      # items holds an array value
 meta = { key : value };             # meta holds a hash value
 set(items, []);                      # items holds an empty array value
 set(meta, {});                       # meta holds an empty hash value
-set(array(items), []);               # explicit aggregate array reset
-set(hash(meta), {});                 # explicit aggregate hash reset
+set(items, []);               # explicit aggregate array reset
+set(meta, {});                 # explicit aggregate hash reset
 ```
 
 Bare working-variable reads and targets are the current scalar surface:
@@ -139,45 +139,40 @@ dispatch rule.
 
 ## 1. Working Variables and Setup
 
-> **Working variables auto-exist.** Referencing a variable through a typed aggregate wrapper
-> (`array(name)` / `hash(name)`) or a bare scalar read/target position auto-creates it as a
-> per-invocation working variable of that kind. The wrapper is also optional in a
-> **type-implying argument position**: the scalar target of `set(name, ...)` and the assignment
+> **Working variables auto-exist.** Referencing a bare variable in a read, assignment, or type-implying helper
+> position creates a per-invocation binding. The target of `set(name, ...)` and the assignment
 > operator `name = value`, which bind scalar, array, or hash RHS values as the variable's current
-> typed value; explicit aggregate targets such as `set(array(name), ...)` and `set(hash(name), ...)`;
+> typed value;
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of
 > `push(name, ...)` and the array append operator `name += value`; and the hash target of
 > `set_key(name, key, value)` and hash-index assignment `name[key] = value` auto-exist from a
-> **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
-> `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)` are also type-implying
-> read positions. A backend MUST supply the same auto-existence: a wrapper- or
-> position-referenced variable is a fresh working slot for the parse, not a value carried across
-> parses. Recursive re-entry uses explicit aggregate reset forms:
-> `set(array(name), [])` and `set(hash(name), {})` establish rule-local aggregate bindings before
+> **bare** name too, with the kind fixed by that position. `copy(name)` snapshots the current array or harray
+> value. A backend MUST supply the same auto-existence: a position-referenced variable is a fresh working slot for
+> the parse, not a value carried across parses. Recursive re-entry uses explicit fresh-container bindings:
+> `set(name, [])` and `set(name, {})` establish rule-local aggregate bindings before
 > mutation. New specs should use direct assignment initializers such as `name = value` or explicit
-> aggregate resets such as `set(array(items), [])` and `set(hash(meta), {})`.
+> aggregate resets such as `set(items, [])` and `set(meta, {})`.
 > The DSL literals `undef`/`true`/`false` and the engine's own handler locals are never treated as
-> working-variable names (so `array(undef)` builds an array holding the `undef` literal, not a
-> variable `undef`).
+> working-variable names. Use `[undef]` to construct an array containing the `undef` literal.
 
 ### `name = value` assignment operator
 - **Signature**: `name = value`
 - **Returns**: In statement position, the stored value is ignored. In value position, it yields the typed value stored in the target.
 - **Behavior**: Sets the working variable `name` to the evaluated RHS value. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable. Later assignments may replace a scalar with an array/hash value, or replace an array/hash value with a scalar.
-- **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key : value }` binds a hash value. Use `set(array(name), [value])` or `set(hash(name), { key : value })` for aggregate working storage. In scalar assignment source slots, a bare source name reads the working scalar: `out = value`.
+- **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key : value }` binds a hash value. In scalar assignment source slots, a bare source name reads the current typed working value: `out = value`.
 - **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, assignments store and yield the stored typed value. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Worked example**:
   ```text
   demo::
    -> value .push
-   LX { return(copy(array(demo))) }
+   LX { return(copy(demo)) }
 
   value : /(\w+)/
    I {
      value = entry_group(0)
-     set(array(items), [value, cat(value, "!")])
-     set(hash(meta), { "value" : value })
-     return(array(value, array(items), hash(meta), name = value, name))
+     set(items, [value, cat(value, "!")])
+     set(meta, { "value" : value })
+     return(array(value, items, meta, name = value, name))
    }
   ```
   Input `ok` returns `[["ok",["ok","ok!"],{"value":"ok"},"ok","ok"]]`.
@@ -196,7 +191,7 @@ dispatch rule.
 >
 > ```text
 > demo::  -> value  .push
-> LX { return(copy(array(demo))) }
+> LX { return(copy(demo)) }
 >
 > value : /<regex>/  I.return( <helper-expression> )
 > ```
@@ -264,7 +259,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(copy(array(demo))) }
+  LX { return(copy(demo)) }
 
   value : /(\w+) (\w+)/  I.return( cat(entry_group(0), "-", entry_group(1)) )
   ```
@@ -294,7 +289,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(copy(array(demo))) }
+  LX { return(copy(demo)) }
 
   value : /(\w+)/  I { if (is_defined(entry_group(0))) { return("present") } else { return("absent") } }
   ```
@@ -315,7 +310,7 @@ dispatch rule.
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(copy(array(demo))) }
+  LX { return(copy(demo)) }
 
   value : /\[([^\]]*)\]/  I.return( trim(entry_group(0)) )
   ```
@@ -408,20 +403,20 @@ dispatch rule.
 - **Example**: `substr(value, '"|\s', "", go)` removes quotes and whitespace from `value` in place. Single quotes
   keep the embedded double quote readable; the equivalent double-quoted pattern remains valid.
 
-### `split(array(target), source, delimiter)`
-- **Signature**: `split(array(target), source: scalar, delimiter: regex-or-scalar)`
+### `split(target, source, delimiter)`
+- **Signature**: `split(target, source: scalar, delimiter: regex-or-scalar)`
 - **Returns**: no value; replaces the named explicit array target.
 - **Behavior**: Uses the same literal, regex, Unicode-empty-delimiter, and empty-field policy as pure
   `split(source, delimiter)`, then stores a copied typed array. The source scalar is not mutated.
-- **Boundary**: Mutation requires both dropped-statement context and the explicit `array(target)` wrapper. An
+- **Boundary**: Three arguments select target mutation; two arguments remain the pure split expression. An
   ordinary dropped split call is simply a discarded pure expression.
 
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.
 - **Behavior**: A compatible string receiver feeds into the first pure string helper, and each helper's return
-  value feeds the next compatible helper. A bare receiver such as `raw.trim()` reads the scalar working
-  variable `raw`; an explicit receiver such as `raw.trim()` has the same value. String literals may
+  value feeds the next compatible helper. A bare receiver such as `raw.trim()` reads the working value `raw`.
+  String literals may
   be receivers too: `"abcdef".substr(1, 3).uppercase()` is equivalent to
   `uppercase(substr("abcdef", 1, 3))`.
 - **Allowed string-returning links**: `trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`,
@@ -444,7 +439,7 @@ dispatch rule.
 > ```text
 > demo::
 >  -> value .push
->  LX { return(copy(array(demo))) }
+>  LX { return(copy(demo)) }
 >
 > value : /<regex>/
 >  I { return(<array-expression>) }
@@ -470,23 +465,23 @@ dispatch rule.
 | Emptiness | `is_empty([])` / `is_nonempty(["a"])` | `x` | `[1]` / `[1]` |
 | Join | `join_values(",", array("a", "b", "c"))` | `x` | `["a,b,c"]` |
 | Split bridge | `entry_group(0).split(",")` over `/(.+)/` | `a,b,c` | `[["a","b","c"]]` |
-| Receiver chain | `items.sorted().drop_front(1).first()` after `set(array(items), ["b", "a", "b", "c"])` | `x` | `["b"]` |
-| Pipeline receiver | `items.trim_each().filter_nonempty().join_values("|")` after `set(array(items), [" a ", "", " b "])` | `x` | `["a|b"]` |
+| Receiver chain | `items.sorted().drop_front(1).first()` after `set(items, ["b", "a", "b", "c"])` | `x` | `["b"]` |
+| Pipeline receiver | `items.trim_each().filter_nonempty().join_values("|")` after `set(items, [" a ", "", " b "])` | `x` | `["a|b"]` |
 
 **Verified mutation/pipeline examples:**
 
 | Body inside `value`'s `I { ... }` block | Input | Output |
 | --- | --- | --- |
-| `set(source, entry_group(0)); split(array(items), source, /,/); return(copy(array(items)))` over `/(.+)/` | `a,b,c` | `[["a","b","c"]]` |
-| `set(array(items), ["a:b", "c:d"]); split_each(array(items), ":"); return(copy(array(items)))` | `x` | `[["a","b","c","d"]]` |
-| `set(array(items), [" a ", " b"]); trim_each(array(items)); return(copy(array(items)))` | `x` | `[["a","b"]]` |
-| `set(array(items), ["a", "", undef, "0", "b"]); filter_nonempty(array(items)); return(copy(array(items)))` | `x` | `[["a","0","b"]]` |
-| `set(array(items), ["alpha", "beta", "atom"]); filter_match(array(items), /^a/); return(copy(array(items)))` | `x` | `[["alpha","atom"]]` |
-| `set(array(items), ["a", "b", "a", "c", "b"]); uniq(array(items)); return(copy(array(items)))` | `x` | `[["a","b","c"]]` |
-| `set(array(items), ["A", "bC"]); lowercase_each(array(items)); return(copy(array(items)))` | `x` | `[["a","bc"]]` |
-| `set(array(items), ["a", "bC"]); uppercase_each(array(items)); return(copy(array(items)))` | `x` | `[["A","BC"]]` |
-| `set(value, entry_group(0)); push(array(items), value); items += "tail"; return(copy(array(items)))` over `/(\w+)/` | `head` | `[["head","tail"]]` |
-| `set(value, entry_group(0)); if(is_nonempty(value)) { push(array(items), value) }; set(value, ""); if(is_nonempty(value)) { push(array(items), value) }; return(copy(array(items)))` over `/(\w+)/` | `keep` | `[["keep"]]` |
+| `set(source, entry_group(0)); split(items, source, /,/); return(copy(items))` over `/(.+)/` | `a,b,c` | `[["a","b","c"]]` |
+| `set(items, ["a:b", "c:d"]); split_each(items, ":"); return(copy(items))` | `x` | `[["a","b","c","d"]]` |
+| `set(items, [" a ", " b"]); trim_each(items); return(copy(items))` | `x` | `[["a","b"]]` |
+| `set(items, ["a", "", undef, "0", "b"]); filter_nonempty(items); return(copy(items))` | `x` | `[["a","0","b"]]` |
+| `set(items, ["alpha", "beta", "atom"]); filter_match(items, /^a/); return(copy(items))` | `x` | `[["alpha","atom"]]` |
+| `set(items, ["a", "b", "a", "c", "b"]); uniq(items); return(copy(items))` | `x` | `[["a","b","c"]]` |
+| `set(items, ["A", "bC"]); lowercase_each(items); return(copy(items))` | `x` | `[["a","bc"]]` |
+| `set(items, ["a", "bC"]); uppercase_each(items); return(copy(items))` | `x` | `[["A","BC"]]` |
+| `set(value, entry_group(0)); push(items, value); items += "tail"; return(copy(items))` over `/(\w+)/` | `head` | `[["head","tail"]]` |
+| `set(value, entry_group(0)); if(is_nonempty(value)) { push(items, value) }; set(value, ""); if(is_nonempty(value)) { push(items, value) }; return(copy(items))` over `/(\w+)/` | `keep` | `[["keep"]]` |
 
 > **Current Perl caveats.** For `split(value, delim)`, prefer receiver form
 > `value.split(delim)` or block form `I { return(split(value, delim)) }`. Compact
@@ -494,7 +489,7 @@ dispatch rule.
 > shorthand shape on the Perl reference. For array pipeline helpers (`split_each`,
 > `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and
 > `filter_match`), return a receiver chain (`items.trim_each()`) or assign/copy the
-> named target as shown above; a direct `return(split_each(array(items), ":"))` is
+> named target as shown above; a direct `return(split_each(items, ":"))` is
 > shape-sensitive on current Perl and does not document the portable array value.
 
 ### `array(e1, e2, ...)`
@@ -507,7 +502,9 @@ dispatch rule.
 - **Returns**: array
 - **Behavior**: Returns a shallow copy of the array. The new array contains the same elements but is a distinct container.
 - **Compatibility**: `array_values(...)` and `array_copy(...)` are retired on current runtimes — use `copy(...)`.
-- **Terse spelling**: `copy(arr)` is the canonical spelling — one unified `copy(...)` subsumes both legacy array and hash copy forms, resolving array-vs-hash by the wrapped symbol kind (array first). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `copy(arr)` is the canonical spelling — one unified `copy(...)` subsumes both legacy array
+  and hash copy forms and dispatches from the current runtime value kind. See
+  [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `flat_array(arr)`
 - **Signature**: `flat_array(arr: array)`
@@ -536,22 +533,28 @@ dispatch rule.
 - **Signature**: `push(target: array, value: expr)`
 - **Returns**: void
 - **Behavior**: Terse explicit-value append. Lowers identically to the legacy explicit-value append helper for unambiguous value expressions.
-- **Examples**: `push(items, "a")`, `push(array(items), value)`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value` or wrap the target as `push(array(items), value)`.
+- **Examples**: `push(items, "a")`, `push(items, value)`, `push(items, cat("a", "b"))`, and `push(items, call(Child))`.
+- **Disambiguation**: For `push(A, B)` with two bare identifiers, a registered static rule `A` keeps child-call
+  precedence. Otherwise `A` is the array binding and `B` is the appended working value. `items += value` is the
+  unambiguous operator spelling when the author wants to emphasize mutation.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
 - **Returns**: updated array snapshot in value positions; side-effect-only behavior when used as a statement.
 - **Behavior**: Array append operator. Lowers/runs identically to explicit append forms, mutates the named working array, and reads a bare RHS identifier as a scalar working variable. In value positions it evaluates to the updated array snapshot after the push.
-- **Examples**: `items += "a"`, `items += cat("a", "b")`, `items += value`, `items += value`.
-- **Edge cases**: The target is still an array working variable and auto-exists as `@target`. A bare RHS such as `items += value` reads `$value`; reserved literals such as `true`, `false`, and `undef` keep their literal meaning.
+- **Examples**: `items += "a"`, `items += cat("a", "b")`, and `items += value`.
+- **Edge cases**: The target is an array working value and auto-exists when the mutation contract permits creation.
+  A bare RHS such as `items += value` reads the current typed value of `value`; reserved literals such as `true`,
+  `false`, and `undef` keep their literal meaning.
 
 ### `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()`
 - **Signature**: `target.push_back(value: expr)`, `target.push_front(value: expr)`, `target.pop_back()`, `target.pop_front()`
 - **Returns**: void
 - **Behavior**: Statement-level array end mutations on a named working array. `push_back` appends, `push_front` prepends, `pop_back` removes the last element, and `pop_front` removes the first element. Pop methods discard the removed value.
-- **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `array(items).pop_back()`, `array(items).pop_front()`.
-- **Edge cases**: The receiver may be a bare array working variable (`items`) or an explicit array receiver (`array(items)`), and it auto-exists as an array. A bare push value reads a scalar working variable, just like `items += value`. These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
+- **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`.
+- **Edge cases**: The receiver is the bare array working value (`items`) and auto-exists as an array when the
+  mutation contract permits creation. A bare push value reads a working variable, just like `items += value`.
+  These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
 - **Worked example**:
   ```text
   Top::
@@ -562,7 +565,7 @@ dispatch rule.
     items.push_front("z")
     items.pop_back()
     items.pop_front()
-    return(copy(array(items)))
+    return(copy(items))
    }
 
   Done:
@@ -626,17 +629,14 @@ dispatch rule.
 - **Returns**: array
 - **Behavior**: Returns a new array in reverse order. Does not mutate the input.
 
-### `array(name)` / `array(e1, e2, ...)`
-- **Signature**: `array(name: name-token)` or `array(values: expr...)`
+### `array(e1, e2, ...)`
+- **Signature**: `array(values: expr...)`
 - **Returns**: array
-- **Behavior**: With exactly one bare name token, reads the named array/list working variable:
-  `array(items)` reads the working array `items`. Quoted strings are literal constructor payloads, so
-  `array("items")` constructs an array containing the string `"items"`. With zero or multiple arguments it
-  constructs an array from the evaluated values.
-- **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
-  lookup. `array(alias)` reads the working array named `alias`; it does not read scalar `alias` and then use
-  that scalar as another variable name. Prefer direct shape literals such as `["items"]` as the terse
-  constructor spelling in new examples.
+- **Behavior**: Constructs an array from evaluated values. Quoted strings are literal payloads, so
+  `array("items")` constructs `["items"]`; zero and multiple arguments are also valid constructors.
+- **Boundary**: Exact `array(IDENTIFIER)` is a removed selector shape, not a one-element constructor. Use the bare
+  identifier to read its typed value or `[identifier]` to construct one element. Perl rejects the removed shape
+  before lowering; the remaining backends follow in the active retirement sequence.
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
@@ -696,13 +696,13 @@ dispatch rule.
   initial accumulator expression. `walk_leaves()` and `map_leaves()` can feed later compatible array receiver links
   such as `.count()`. `reduce_leaves(...)` is terminal.
 - **Examples**:
-  - After `set(array(items), ["a", ["b", "c"]])`,
-    `return(items.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
+  - After `set(items, ["a", ["b", "c"]])`,
+    `return(items.map_leaves() { return(cat(join_values("/", path), "=", value)) })`
     yields `[["0=a",["1/0=b","1/1=c"]]]` through the standard `demo::` wrapper.
-  - After `set(array(items), ["a", ["b", "c"]])`,
-    `set(out, items.walk_leaves() { paths += join_values("/", array(path)); return(value) }); return(copy(array(paths)))`
+  - After `set(items, ["a", ["b", "c"]])`,
+    `set(out, items.walk_leaves() { paths += join_values("/", path); return(value) }); return(copy(paths))`
     yields `[["0","1/0","1/1"]]`.
-  - After `set(array(items), ["a", ["b", "c"]])`,
+  - After `set(items, ["a", ["b", "c"]])`,
     `return(items.reduce_leaves(0) { return(acc.add(1)) })` yields `[3]`.
   - `return(items.map_leaves() { return(value) }.count())` yields `[2]`: the top-level mapped array has two
     elements, even though traversal visited three leaves.
@@ -747,8 +747,8 @@ dispatch rule.
   `I { return(split(value, delim)) }` in runnable examples. Compact `I.return(split(...))`
   currently surfaces an older tagged shorthand shape in the Perl reference.
 
-### `split(array(target), source, delimiter)`
-- **Signature**: `split(array(target), source, delimiter: regex-or-scalar)`
+### `split(target, source, delimiter)`
+- **Signature**: `split(target, source, delimiter: regex-or-scalar)`
 - **Returns**: no value; mutates the named array target.
 - **Behavior**: Splits `source` on `delimiter` and replaces `target` with the resulting list. Regex delimiters
   split by regex match; scalar delimiters split literally.
@@ -759,49 +759,49 @@ dispatch rule.
 - **Signature**: `split_each(arr: array, delim: scalar)`
 - **Returns**: array
 - **Behavior**: Splits each element of the array on the delimiter. Results are concatenated into a single flat array.
-- **Example**: after `set(array(items), ["a:b", "c:d"])`, `return(items.split_each(":"))`
+- **Example**: after `set(items, ["a:b", "c:d"])`, `return(items.split_each(":"))`
   yields `[["a","b","c","d"]]`.
 
 ### `trim_each(arr)`
 - **Signature**: `trim_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Trims whitespace from each element of the array.
-- **Example**: after `set(array(items), [" a ", " b"])`, `return(items.trim_each())`
+- **Example**: after `set(items, [" a ", " b"])`, `return(items.trim_each())`
   yields `[["a","b"]]`.
 
 ### `filter_nonempty(arr)`
 - **Signature**: `filter_nonempty(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array with empty/undef elements removed.
-- **Example**: after `set(array(items), ["a", "", undef, "0", "b"])`,
+- **Example**: after `set(items, ["a", "", undef, "0", "b"])`,
   `return(items.filter_nonempty())` yields `[["a","0","b"]]`.
 
 ### `filter_match(arr, /pattern/)`
 - **Signature**: `filter_match(arr: array, pattern: regex)`
 - **Returns**: array
 - **Behavior**: Returns elements matching the regex pattern.
-- **Example**: after `set(array(items), ["alpha", "beta", "atom"])`,
+- **Example**: after `set(items, ["alpha", "beta", "atom"])`,
   `return(items.filter_match(/^a/))` yields `[["alpha","atom"]]`.
 
 ### `uniq(arr)`
 - **Signature**: `uniq(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array with duplicates removed. Order of first occurrence is preserved.
-- **Example**: after `set(array(items), ["a", "b", "a", "c", "b"])`,
+- **Example**: after `set(items, ["a", "b", "a", "c", "b"])`,
   `return(items.uniq())` yields `[["a","b","c"]]`.
 
 ### `lowercase_each(arr)`
 - **Signature**: `lowercase_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Lowercases each element with the same Unicode 17 contract as `lowercase`.
-- **Example**: after `set(array(items), ["A", "bC"])`, `return(items.lowercase_each())`
+- **Example**: after `set(items, ["A", "bC"])`, `return(items.lowercase_each())`
   yields `[["a","bc"]]`.
 
 ### `uppercase_each(arr)`
 - **Signature**: `uppercase_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Uppercases each element with the same Unicode 17 contract as `uppercase`.
-- **Example**: after `set(array(items), ["a", "bC"])`, `return(items.uppercase_each())`
+- **Example**: after `set(items, ["a", "bC"])`, `return(items.uppercase_each())`
   yields `[["A","BC"]]`.
 
 ### `print_each(arr)`
@@ -816,7 +816,7 @@ dispatch rule.
 > ```text
 > demo::
 >  -> value .push
->  LX { return(copy(array(demo))) }
+>  LX { return(copy(demo)) }
 >
 > value : /<regex>/
 >  I { <statements>; return(<hash-or-derived-value>) }
@@ -831,19 +831,19 @@ dispatch rule.
 | Construct | `return(hash("b", 2, "a", 1))` | `x` | `[{"a":1,"b":2}]` |
 | Explicit null value | `return(hash("a", 1, "missing", undef))` | `x` | `[{"a":1,"missing":null}]` |
 | Splice count | `return(count(array(flat_hash(hash("a", 1, "b", 2)))))` | `x` | `[4]` |
-| Copy snapshot | `set(hash(meta), { "a" : 1 }); set(hash(saved), copy(hash(meta))); meta["b"] = 2; return(array(count_keys(hash(meta)), count_keys(hash(saved))))` | `x` | `[[2,1]]` |
+| Copy snapshot | `set(meta, { "a" : 1 }); set(saved, copy(meta)); meta["b"] = 2; return(array(count_keys(meta), count_keys(saved)))` | `x` | `[[2,1]]` |
 | Merge override | `return(merge_hash(hash("a", 1, "b", 2), hash("b", 9, "c", 3)))` | `x` | `[{"a":1,"b":9,"c":3}]` |
-| Pure `set_key` | `set(hash(meta), { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(hash(meta))))` | `x` | `[[2,1]]` |
-| Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(hash(meta)))` | `x` | `[{"a":1,"b":2}]` |
-| Hash-index assignment | `key = "stage"; value = "ok"; meta[key] = value; return(copy(hash(meta)))` | `x` | `[{"stage":"ok"}]` |
+| Pure `set_key` | `set(meta, { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(meta)))` | `x` | `[[2,1]]` |
+| Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(meta))` | `x` | `[{"a":1,"b":2}]` |
+| Hash-index assignment | `key = "stage"; value = "ok"; meta[key] = value; return(copy(meta))` | `x` | `[{"stage":"ok"}]` |
 | Rename/drop/pick | `return(rename_key(hash("old", 1, "keep", 2), "old", "new"))` / `return(drop_keys(hash("a", 1, "b", 2, "c", 3), "b", "c"))` / `return(pick_keys(hash("a", 1, "b", 2, "c", 3), "b", "missing"))` | `x` | `[{"keep":2,"new":1}]` / `[{"a":1}]` / `[{"b":2}]` |
 | Membership/count | `return(array(has_key(hash("a", 1), "a"), has_key(hash("a", 1), "missing")))` / `return(count_keys(hash("a", 1, "b", 2)))` | `x` | `[[1,0]]` / `[2]` |
 | Sorted views | `return(sorted_keys(hash("b", 2, "a", 1)))` / `return(sorted_values(hash("b", 2, "a", 1)))` | `x` | `[["a","b"]]` / `[[1,2]]` |
 | Receiver chain | `set_key(meta, "b", 2); set_key(meta, "a", 1); return(meta.set_key("c", 3).sorted_keys().join_values(","))` | `x` | `["a,b,c"]` |
 | Block receiver | `return({ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","))` | `x` | `["a,b"]` |
-| Hash-tree map | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })` | `x` | `[{"a":"a=A","b":{"y":"b/y=B"}}]` |
-| Hash-tree walk | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(array(meta.walk_leaves() { paths += join_values("/", array(path)); return(value) }.count_keys(), array(paths)))` | `x` | `[[2,["a","b/y"]]]` |
-| Hash-tree reduce | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(meta.reduce_leaves("") { return(cat(acc, key)) })` | `x` | `["ay"]` |
+| Hash-tree map | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(meta.map_leaves() { return(cat(join_values("/", path), "=", value)) })` | `x` | `[{"a":"a=A","b":{"y":"b/y=B"}}]` |
+| Hash-tree walk | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(array(meta.walk_leaves() { paths += join_values("/", path); return(value) }.count_keys(), paths))` | `x` | `[[2,["a","b/y"]]]` |
+| Hash-tree reduce | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(meta.reduce_leaves("") { return(cat(acc, key)) })` | `x` | `["ay"]` |
 
 > **Current Perl caveat.** Direct odd-arity constructor calls such as
 > `hash("a", 1, "missing")` are not the portable "trailing undef" spelling on the
@@ -855,15 +855,13 @@ dispatch rule.
 ### `hash(k1, v1, k2, v2, ...)`
 - **Signature**: `hash(keys_and_values: scalar...)`
 - **Returns**: hash
-- **Behavior**: With exactly one bare name token, reads the named hash/associative-array working variable:
-  `hash(meta)` reads the working hash `meta`. Quoted strings are literal constructor payloads, so
-  `hash("key", value)` constructs a hash entry whose key is `"key"`. With zero or multiple arguments it
-  constructs a hash from flat key/value pairs. Arguments are interpreted as alternating keys and values. Accepts
+- **Behavior**: Constructs a hash from flat key/value pairs. Quoted strings are literal constructor payloads, so
+  `hash("key", value)` constructs a hash entry whose key is `"key"`. Zero and paired multi-argument calls are
+  valid. Arguments are interpreted as alternating keys and values. Accepts
   `flat_array(...)` and `flat_hash(...)` for list-context insertion.
-- **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
-  lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
-  that scalar as another variable name. Prefer direct shape literals such as `{ "alias" : value }` as the
-  terse constructor spelling in new examples.
+- **Boundary**: Exact `hash(IDENTIFIER)` is a removed selector shape. Use the bare identifier to read its harray
+  value or `{ identifier : value }` / `{ "identifier" : value }` to construct a field. Perl rejects the removed
+  selector before lowering; remaining backends follow in the active retirement sequence.
 - **Edge cases**: Duplicate keys: last value wins. Direct multi-argument constructor calls should pass paired
   key/value arguments; use an explicit `undef` value for a null-valued trailing key.
 
@@ -944,14 +942,14 @@ dispatch rule.
 - **Behavior**: A compatible hash receiver feeds into the first pure hash helper, and each helper's return
   value feeds the next compatible helper. For example,
   `meta.set_key("stage", "normalized").count_keys()` is equivalent to
-  `count_keys(set_key(hash(meta), "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
+  `count_keys(set_key(meta, "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
   derives the sorted key array, then continues through the array receiver-chain family.
 - **Allowed hash-returning links**: `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
   `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
   compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
-  Field reads from a named working hash use `hash(name).pick_keys(key).sorted_values().first()` after storing
+  Field reads from a named working hash use `name.pick_keys(key).sorted_values().first()` after storing
   expression receivers in a named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref
   payloads, not working-hash value reads.
 - **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
@@ -992,13 +990,13 @@ dispatch rule.
   receiver links such as `.count_keys()`. `reduce_leaves(...)` is terminal. These are immediate receiver block
   methods, not closures or delayed callbacks.
 - **Examples**:
-  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
-    `return(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
+  - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,
+    `return(meta.map_leaves() { return(cat(join_values("/", path), "=", value)) })`
     yields `[{"a":"a=A","b":{"y":"b/y=B"}}]` through the standard `demo::` wrapper.
-  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
-    `return(array(meta.walk_leaves() { paths += join_values("/", array(path)); return(value) }.count_keys(), array(paths)))`
+  - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,
+    `return(array(meta.walk_leaves() { paths += join_values("/", path); return(value) }.count_keys(), paths))`
     yields `[[2,["a","b/y"]]]`.
-  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
+  - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,
     `return(meta.reduce_leaves("") { return(cat(acc, key)) })` yields `["ay"]`.
 
 ## 5. Numeric Helpers
@@ -1053,7 +1051,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(copy(array(demo))) }
+  LX { return(copy(demo)) }
 
   value : /(\d+)\+(\d+)/  I.return( num_add(entry_group(0), entry_group(1)) )
   ```
@@ -1132,7 +1130,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**:
   ```text
   demo::  -> value  .push
-  LX { return(copy(array(demo))) }
+  LX { return(copy(demo)) }
 
   value : /(\d+),(\d+),(\d+),(\d+)/  I.return( num_sum(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )
   ```
@@ -1180,7 +1178,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 ```text
 demo::
  -> value .push
- LX { return(copy(array(demo))) }
+ LX { return(copy(demo)) }
 
 value : /(keep|skip|take)\s*/
  I { if(str_eq(entry_group(0), "skip")) { next() } else { return(entry_group(0)) } }
@@ -1322,7 +1320,7 @@ Anonymous capture cursor:
 ```text
 demo::
  -> body .push
- LX { return(copy(array(demo))) }
+ LX { return(copy(demo)) }
 
 body: /BEGIN/ /END/
  -> body[1] {
@@ -1534,7 +1532,7 @@ These helpers read from the **current match** — the regex capture that trigger
 > ```text
 > demo::
 >  -> value .push
->  LX { return(copy(array(demo))) }
+>  LX { return(copy(demo)) }
 >
 > value:AND
 >  /(?<head>name)/
@@ -1631,7 +1629,7 @@ These helpers read from the **current match** — the regex capture that trigger
 > ```text
 > demo::
 >  -> value .push
->  LX { return(copy(array(demo))) }
+>  LX { return(copy(demo)) }
 >
 > value : /.+/
 >  I {
@@ -1695,22 +1693,21 @@ These helpers read from the **current match** — the regex capture that trigger
 ### Composition Guarantee
 Pure value helpers support **unlimited nested composition**. Example:
 ```
-count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay))))
+count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))
 ```
 Any portable pure helper that accepts an array can receive the output of an array-returning helper. Any
 portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Hash-consuming
-later helper argument slots accept bare hash working variables as snapshots, so `merge_hash(copy(hash(base)), overlay)`
-is equivalent to the explicit `hash(overlay)` form for the overlay argument. Array-consuming helper argument slots likewise accept bare
+later helper argument slots accept bare hash working variables as snapshots, so `merge_hash(copy(base), overlay)`
+is equivalent to the explicit `overlay` form for the overlay argument. Array-consuming helper argument slots likewise accept bare
 array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Array receiver-dot
 value chains are the same composition written from the receiver side, so
 `items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Hash receiver-dot
 value chains apply the same rule to hash helpers, so
 `meta.set_key("stage", "normalized").sorted_keys().join_values(",")` is portable and pure. String receiver-dot
 chains apply the same rule to scalar string helpers, so `raw.trim().lowercase().substr(0, 12)` is portable,
-and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly into the array family. Use explicit
-aggregate wrappers such as `array(name)` and `hash(name)` anywhere a helper contract does not say a bare
-aggregate read is accepted; quoted strings are literal constructor payloads, not aggregate-name aliases or
-scalar-indirect lookup. Mutation statement forms remain available, and assignment/mutation operators also have
+and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly into the array family. Bare typed
+bindings are accepted anywhere the helper contract admits the runtime value kind; quoted strings are literal
+constructor payloads, not aliases or indirect lookup. Mutation statement forms remain available, and assignment/mutation operators also have
 expression values where documented: `name = value` yields the stored value, `items += value` yields the updated
 array snapshot, and `name[key] = value` yields the updated hash snapshot. Array end mutations such as
 `items.push_back(value)` remain statement-only. Inline value `if`/`switch` is portable in the supported
@@ -1755,21 +1752,21 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `trim_each(array(name))`, `lowercase_each(array(name))`, or `uppercase_each(array(name))` call is a statement form and writes its result back to that explicit working array. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
+Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `trim_each(name)`, `lowercase_each(name)`, or `uppercase_each(name)` call is a statement form and writes its result back to that explicit working array. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
 
 ### Canonical Terse Forms
 The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**:
 
 | Canonical form | Related form | Notes |
 |---|---|---|
-| `set(target, value)` | `target = value` | typed value assignment. Bare assignments bind scalar, array, or hash RHS values and yield the stored value in value positions. Explicit `array(...)` / `hash(...)` targets keep aggregate storage. A bare scalar source `set(out, name)` reads `name`. |
+| `set(target, value)` | `target = value` | typed value assignment. Both spellings bind scalar, array, harray, or codeblock RHS values and yield the stored value in value positions. A bare source `set(out, name)` reads `name`. |
 | `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
-| `items += value` | `push(array(items), value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
-| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
+| `items += value` | `push(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
+| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver is a bare array binding; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
 | `cat(args...)` | string value expression | String concatenation through the portable scalar-to-text contract: strings unchanged, booleans `1`/`0`, stable finite decimal text (`-0.0` → `0`, `1.0` → `1`), and null for any null/array/harray/codeblock argument. Retired `concat` remains unsupported. |
-| `copy(container)` | array/hash snapshot | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
+| `copy(container)` | array/harray snapshot | one unified `copy(...)` dispatches from the current runtime value kind. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested

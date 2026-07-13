@@ -1304,43 +1304,39 @@ sub rewrite_action_code_for_compat {
 	    raw => defined($trimmed) ? $trimmed : '<undef>',
    },
   );
-  if (
-   defined($trimmed) &&
-   length($trimmed) &&
-   $trimmed =~ /^(?:array|hash)\s*\(/o
-  ) {
+  if (defined($trimmed) && length($trimmed)) {
    my $call = _parse_method_function_expr($trimmed);
    if ($call && ($call->{method} // '') =~ /^(?:array|hash)$/o) {
-    my $lowered = _lower_method_value_expr($trimmed);
-    if (defined($lowered) && length($lowered)) {
-     _trace_emit_context_decision(
-      phase => 'rewrite_action_code_for_compat',
-      label => $label,
-      decision => 'aggregate_wrapper_fallback',
-      taken => 1,
-      context => {
-       raw => $trimmed,
-       lowered => $lowered,
-       method => $call->{method},
-      },
-     );
-     _trace_emit_context_exit(
-      $scope,
-      { status => 'ok', label => $label, path => 'aggregate_wrapper_fallback', rewritten_len => length($lowered) },
-     );
-     return $lowered
+    my $args = $call->{args} || [];
+    my $removed_selector = (
+     ref($args) eq 'ARRAY'
+     && @$args == 1
+     && defined($args->[0])
+     && $args->[0] =~ /^\s*[A-Za-z_][A-Za-z0-9_]*\s*$/o
+    ) ? 1 : 0;
+    if (!$removed_selector) {
+     my $lowered = _lower_method_value_expr($trimmed);
+     if (defined($lowered) && length($lowered)) {
+      _trace_emit_context_decision(
+       phase => 'rewrite_action_code_for_compat',
+       label => $label,
+       decision => 'aggregate_constructor_value',
+       taken => 1,
+       context => {
+        raw => $trimmed,
+        lowered => $lowered,
+        method => $call->{method},
+       },
+      );
+      _trace_emit_context_exit(
+       $scope,
+       { status => 'ok', label => $label, path => 'aggregate_constructor_value', rewritten_len => length($lowered) },
+      );
+      return $lowered
+     }
     }
    }
   }
-  _trace_emit_context_decision(
-   phase => 'rewrite_action_code_for_compat',
-   label => $label,
-   decision => 'aggregate_wrapper_fallback',
-   taken => 0,
-   context => {
-    raw => defined($trimmed) ? $trimmed : '<undef>',
-   },
-  );
   my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
   _trace_emit_context_decision(
    phase => 'rewrite_action_code_for_compat',
@@ -1556,22 +1552,8 @@ sub _build_action_rewriter_meta {
  return $action_rewriter_meta
 }
 
-# Wrapper-helper -> Perl sigil for auto-existing working variables (SPEC-FORMAT-TERSE.1.1.1).
-# scalar -> $, array -> @, hash -> %. Used for the WRAPPED-form references; the
-# sigil is taken from the wrapper. Bare (un-wrapped) names in type-implying helper arg
-# positions take a POSITION-implied sigil instead — SPEC-FORMAT-TERSE.1.2.1, Channel 1.
-# Bare aggregate value reads take their lowering-implied sigil — SPEC-FORMAT-TERSE.1.2.3.1,
-# Channel 2 aggregate subset. Bare assignment targets are scalar value bindings as of
-# SPEC-FORMAT-TERSE.11.2; direct RHS shape no longer chooses @/% target storage.
-my %AUTO_WORKING_VAR_WRAPPER_SIGIL = (
- scalar => '$',
- array  => '@',
- hash   => '%',
-);
-
 # Names that must NEVER be auto-declared as working variables. Two groups:
-#  (1) DSL literals — `array(undef)` is the array constructor wrapping the
-#      undef literal, NOT a reference to a variable named "undef" (likewise true/false).
+#  (1) DSL literals — undef/true/false are values, not working-variable names.
 #  (2) Engine-reserved handler locals declared by the preamble template
 #      (_build_handler_preamble) and the variant scaffolding ($descr/$STRING/$info, the
 #      $IMATCH*/$IPOS/$IINDEX set, the per-iteration $minfo/$LMATCH*/$LSPOS/$LINDEX set,
@@ -1640,12 +1622,7 @@ sub _mask_action_code_literals {
 #           supply so each variable is a per-invocation lexical rather than a leaky
 #           package global (generated handlers are non-strict — see KM card
 #           working-vars-no-strict-need-my-lexical). Three reference forms are collected:
-#             (a) SPEC-FORMAT-TERSE.1.1.1 / .11.2 — WRAPPED aggregate-wrapper refs
-#                 array(NAME)/hash(NAME) with a single bare-identifier argument. If
-#                 the name is scalar-bound by assignment, the wrapper reads the typed
-#                 value from `$NAME`; otherwise the wrapper keeps the legacy aggregate
-#                 storage view and declares @NAME/%NAME.
-#             (b) SPEC-FORMAT-TERSE.1.2.1 / .11.2, Channel 1 — BARE (un-wrapped)
+#             (a) SPEC-FORMAT-TERSE.1.2.1 / .11.2, Channel 1 — BARE
 #                 names in type-implying helper arg positions: set(NAME, VALUE) and
 #                 NAME = VALUE bind the scalar value slot regardless of RHS shape,
 #                 while statement-level set_key(NAME, KEY, VALUE) and
@@ -1656,27 +1633,27 @@ sub _mask_action_code_literals {
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
 #                 (all-bare child-call shape) and bare hash value-position reads
 #                 are deliberately NOT collected here.
-#             (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
+#             (b) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
 #                 aggregate value reads that lower to a sigiled aggregate:
 #                 current copy(NAME) -> remembered kind / @NAME fallback.
-#             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
+#             (c) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), set(out, NAME), and `out = NAME` -> $NAME.
-#             (e) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
+#             (d) SPEC-FORMAT-TERSE.1.2.3.3.2, Channel 2 mutation key/RHS subset —
 #                 BARE scalar reads in mutation slots:
 #                 items += VALUE, set_key(meta, KEY, VALUE), and meta[KEY] = VALUE.
-#             (f) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
+#             (e) SPEC-FORMAT-TERSE.1.2.3.3.3, Channel 2 direct-access subset —
 #                 BARE path atoms in accepted direct access value slots:
 #                 foo["a"][INDEX] -> $foo->{"a"}->[$INDEX].
-#             (g) SPEC-FORMAT-TERSE.1.2.3.5.1, Channel 2 shape-literal subset —
+#             (f) SPEC-FORMAT-TERSE.1.2.3.5.1, Channel 2 shape-literal subset —
 #                 BARE scalar reads directly inside accepted [] / {} value literals:
 #                 [VALUE] -> [$VALUE], { KEY => VALUE } -> {$KEY => $VALUE}.
-#             (h) SPEC-FORMAT-TERSE.11.2 — direct [] / {} RHS literals are typed
+#             (g) SPEC-FORMAT-TERSE.11.2 — direct [] / {} RHS literals are typed
 #                 values stored in the scalar value slot for bare assignment targets:
 #                 NAME = [VALUE] -> $NAME = [...], NAME = {KEY => VALUE} -> $NAME = {...}.
-#             (i) SPEC-FORMAT-TERSE.1.6 — receiver-dot array end mutations:
+#             (h) SPEC-FORMAT-TERSE.1.6 — receiver-dot array end mutations:
 #                 NAME.push_back(VALUE), NAME.push_front(VALUE), NAME.pop_back(), NAME.pop_front().
-#             (j) SPEC-FORMAT-TERSE.2.3.4.2 — inline value-control payloads:
+#             (i) SPEC-FORMAT-TERSE.2.3.4.2 — inline value-control payloads:
 #                 return(if(...)) / set(out, switch(...)) branches recurse through the
 #                 same scalar-read, shape-literal, direct-access, and block-value discovery.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
@@ -2115,17 +2092,6 @@ sub _collect_auto_working_var_decls {
     $collect_ast_node_refs->($args->[$_], 1) for 1 .. $#$args;
     return;
    }
-   if (($name eq 'array' || $name eq 'hash')
-    && ref($args) eq 'ARRAY'
-    && @$args == 1
-    && ref($args->[0]) eq 'HASH'
-    && ($args->[0]{kind} // '') eq 'variable') {
-    my $arg_name = $args->[0]{name};
-    my $arg_kind = _bare_symbol_kind($arg_name);
-    my $sigil = (defined($arg_kind) && $arg_kind eq 'scalar') ? '$' : $name eq 'array' ? '@' : '%';
-    $record->($sigil, $arg_name);
-    return;
-   }
    $collect_ast_node_refs->($_, 0) for @$args;
    return;
   }
@@ -2163,29 +2129,18 @@ sub _collect_auto_working_var_decls {
   next unless defined($block) && length($block);
   my $masked = _mask_action_code_literals($block);
 
-  # (a) SPEC-FORMAT-TERSE.1.1.1 / .11.2 — WRAPPED aggregate-wrapper refs.
-  #     If the name is scalar-bound by assignment, the wrapper reads the typed
-  #     value from `$NAME`; otherwise the wrapper keeps the aggregate
-  #     storage view and declares @NAME/%NAME.
-  while ($masked =~ /\b(array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   my ($wrapper, $name) = ($1, $2);
-   my $kind = _bare_symbol_kind($name);
-   $record->((defined($kind) && $kind eq 'scalar') ? '$' : $AUTO_WORKING_VAR_WRAPPER_SIGIL{$wrapper}, $name);
-  }
-
-  # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
+  # (a) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
   #     (set -> $NAME;
   #     push -> @NAME) but otherwise gets no preamble `my`. The
-  #     `\s*,` after the name means a WRAPPED target (array(x), whose name is
-  #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
+  #     Identifier boundaries prevent nested call payloads from being mistaken for targets.
   # A bare `set(NAME, ...)` target follows the same scalar value-binding rule as operator
   # assignment. The scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1)
   # is likewise statement-level and no longer infers @/% for direct shape RHS literals. The array append operator
   # (`NAME += VALUE`) and hash-index assignment operator (`NAME[KEY] = VALUE`)
   # are statement-level array/hash mutations; `.1.2.3.3.2` additionally collects
   # the accepted bare scalar key/RHS reads in those mutation slots.
-  # (c) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
+  # (b) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
   #     aggregate value reads. Names with known internal aggregate ownership
   #     (including implicit rule accumulators) retain their private host
   #     declaration; an untyped ordinary name defaults to the one runtime-typed

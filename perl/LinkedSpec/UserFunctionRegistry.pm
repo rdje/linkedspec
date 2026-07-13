@@ -233,6 +233,7 @@ sub _normalize_function_definition_ast {
  my $body_source = _require_string_field($node, 'body_source');
  my $body_payload = _normalize_body_payload($node->{body_payload}, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal);
  my $body_parse_job = _normalize_body_parse_job($node->{body_parse_job}, $name, $version, $params, $arity, $signature, $parameter_kinds, $body_source, $body_span, $ordinal);
+ _validate_function_body_action_surface($name, $body_source, $source, $source_span);
 
  my %seen;
  foreach my $param (@$params) {
@@ -506,6 +507,26 @@ sub _parse_function_body_ast {
   _die_parse_error_at_span($source, $source_span, "could not dispatch staged body parse job for function '$name': $error");
  }
  return $body_ast
+}
+
+sub _validate_function_body_action_surface {
+ my ($name, $body_source, $source, $source_span) = @_;
+ my $ok = eval {
+  LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__,
+   'LinkedSpec::ActionIR::RewritePipeline',
+   '_reject_removed_aggregate_selectors_in_action_code',
+   $body_source,
+  );
+  1
+ };
+ return 1 if $ok;
+ my $error = $@;
+ _die_parse_error_at_span(
+  $source,
+  $source_span,
+  "invalid ActionIR body for function '$name': $error",
+ )
 }
 
 sub _is_function_definition_error_node {

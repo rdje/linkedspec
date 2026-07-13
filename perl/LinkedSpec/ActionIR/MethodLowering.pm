@@ -6924,9 +6924,6 @@ sub _normalize_hash_receiver_value_chain_expr {
  );
 
  my $current_expr = $receiver_expr;
- if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-  $current_expr = 'hash('.$current_expr.')';
- }
  my $current_family = 'hash';
  for (my $idx = 0; $idx < @calls; ++$idx) {
   my $call = $calls[$idx];

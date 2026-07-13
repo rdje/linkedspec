@@ -25,8 +25,8 @@ Instead of asking readers to understand a substring expression, a mutable array 
 
 ```text
 name = entry_group(0);
-push(array(items), name);
-return(hash("kind", "names", "items", copy(array(items))));
+push(items, name);
+return(hash("kind", "names", "items", copy(items)));
 ```
 
 That is still compact, but it is more self-describing.
@@ -53,7 +53,7 @@ Public `.spec` actions should use the current helper surface:
 
 ```text
 retv = call(Child);
-push(array(items), retv);
+push(items, retv);
 ```
 
 Deleted helper names are not part of the contract resolver. A backend may still report

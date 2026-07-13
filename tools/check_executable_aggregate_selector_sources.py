@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SELECTOR = re.compile(
-    r"(?<![A-Za-z0-9_.])(?:array|hash)\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)"
+    r"(?<![A-Za-z0-9_.])(?:array|hash)\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)"
 )
 EXCLUDED_SUFFIXES = {
     ".json",
@@ -44,12 +44,12 @@ def classified_compatibility(path: str, line: str) -> bool:
         return True
     if path == "tools/check_uniform_binding_contract.py":
         return True
-    if path == "t/trace_actionir_method_lowering.t" and (
-        "internal compatibility bridge" in line
-    ):
-        return True
     if path == "t/trace_emit_context_bridge.t" and (
         "rewrite_action_code_for_compat" in line
+    ):
+        return True
+    if path == "t/uniform_binding_contract.t" and (
+        "retired_inside_unused" in line
     ):
         return True
     return False

@@ -271,10 +271,10 @@ A blind call can include post-call code:
 
 ```text
 Wrapper::AND
- => Child { return(array("?Wrapper:", copy(array(Wrapper)))) }
+ => Child { return(array("?Wrapper:", copy(Wrapper))) }
 
 Child:
- /child/ -> Child { return(array("?Child:", copy(array(Child)))) }
+ /child/ -> Child { return(array("?Child:", copy(Child))) }
 ```
 
 The lowering model is:
@@ -289,17 +289,17 @@ Fluent post-call chains are compact sugar over the same idea:
 
 ```text
 Wrapper::AND
- => Child .return(array("?Wrapper:", copy(array(Wrapper))))
+ => Child .return(array("?Wrapper:", copy(Wrapper)))
 
 Child:
- /child/ -> Child { return(array("?Child:", copy(array(Child)))) }
+ /child/ -> Child { return(array("?Child:", copy(Child))) }
 ```
 
 The fluent example above is equivalent in lowered meaning to the explicit block form:
 
 ```text
 Wrapper::AND
- => Child { return(array("?Wrapper:", copy(array(Wrapper)))) }
+ => Child { return(array("?Wrapper:", copy(Wrapper))) }
 ```
 
 Use fluent post-call chains only when they remain short and obvious. Use an explicit block when the post-call logic needs more than one or two steps.
@@ -314,8 +314,8 @@ Parent:AND
  }
  /child-anchor/ -> Parent[0] {
    retv = call(Child);
-   push(array(children), retv);
-   return(hash("kind", "parent", "children", copy(array(children))));
+   push(children, retv);
+   return(hash("kind", "parent", "children", copy(children)));
  }
 ```
 
