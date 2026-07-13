@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua's 16-name hash family splits into 13 ordinary helpers plus three callbacks. Existing
+  runtime support covers typed harray literals/constructors/copy and checked direct/nested assignment, but there is
+  no general hash helper/receiver dispatcher and shared `flat` always takes the array route. `.4.3.5.1-.5` own
+  construction/splicing, deterministic views, copied transforms, mutation, and no-drift; callbacks stay `.4.3.6`.
 - `2026-07-12` refresh: Lua's 37-name ActionIR array family is fully routed before callbacks: 34 ordinary names
   plus six numeric terminals pass 99/99; `walk_leaves`/`map_leaves`/`reduce_leaves` remain `.4.3.6`. Closeout
   corrected public invalid count/take results, push result descriptions, and a residual statement-only end-

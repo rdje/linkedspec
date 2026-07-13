@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.5.0 — split Lua harray helper mechanisms
+
+Audited all 16 admitted hash-family names before behavior code. Lua already has typed harray literals/
+constructors/copy, bare storage, and checked direct/nested assignment, but no general copied hash-helper or
+receiver dispatcher; shared `flat` always takes the array route. Split 13 ordinary names into construction/
+splicing, deterministic views, copied transforms/receivers, named mutation, and no-drift; three callbacks remain
+`.4.3.6`. Odd-arity `hash(...)` remains backlog `.5`. The unchanged dual-ABI gate is 99/99.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.6 — close Lua array helper parity
 
 Closed all 34 non-callback ActionIR array names plus six numeric array terminals at 99/99 on both Lua ABIs. The

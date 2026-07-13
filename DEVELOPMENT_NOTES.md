@@ -1,5 +1,11 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.5.0 — harray parity crosses syntax and runtime-kind seams): `hash(...)`
+  constructor splicing must inspect the authored AST, while `flat(...)` must dispatch by the evaluated value kind;
+  treating either as only a generic hash call loses ordinary nested maps or sends harrays through the array path.
+  Deterministic views bridge into array receivers, copied transforms preserve nested values, named `set_key`
+  needs a separate mutation seam, and block callbacks belong later. Those boundaries require separate commits.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.6 — closeout must compare duplicate public summaries): The detailed
   helper-catalog end-mutation section was correct, but a later canonical table on the same page still said
   statement-level only; punctuation let it evade the original prose guard. Array closeout now inventories all 37

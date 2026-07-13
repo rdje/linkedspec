@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (complete Lua non-callback array family closes at 99/99; harray helpers `.4.3.5` active).
+- Last updated: `2026-07-12` (Lua harray mechanisms split by `.4.3.5.0`; construction/splicing `.4.3.5.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3669,6 +3669,8 @@ before implementation.
 | 125 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Exact tagged record shapes, copied carried fields, governed splits, and receiver composition pass 99/99. |
 | 126 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
 | 127 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
+| 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
+| 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `active` | Implement copied harray construction, explicit splicing, and identity boundaries. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat arity, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

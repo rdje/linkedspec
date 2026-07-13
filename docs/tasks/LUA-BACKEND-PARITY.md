@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (complete non-callback array family closed at 99/99; hash helpers `.4.3.5` active)
+- Last updated: `2026-07-12` (harray mechanisms split by `.4.3.5.0`; construction/splicing `.4.3.5.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1194,10 +1194,78 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.5`
   Status: `active`
   Goal: Implement harray construction, pure helpers, mutation, views, and receiver chains.
+  Children: `.4.3.5.0`, `.4.3.5.1`, `.4.3.5.2`, `.4.3.5.3`, `.4.3.5.4`, `.4.3.5.5`
   Dependencies: `.4.3.1`, `.4.3.4`
   Acceptance: Typed hash/harray construction/copy/flatten, key/value views, merge/pick/drop/rename/set-key,
     hash-index assignment, scalar-held maps, deterministic ordering, receiver forms, and nested-map preservation
     match the catalog.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.0`
+  Status: `done`
+  Goal: Audit current Lua harray mechanisms and split the family before behavior code.
+  Dependencies: `.4.3.1`, `.4.3.4`
+  Acceptance: Inventory all 16 ActionIR hash names against Lua runtime dispatch, typed stores/access, focused
+    tests, current Perl/catalog behavior, later Dart/Julia implementations, receiver routing, constructor splice
+    classification, deterministic ordering, mutations, callbacks, and existing caveat owners; create executable
+    children before changing runtime behavior.
+  Verification: **PASS 2026-07-12.** The 16-name `HASH_HELPERS` set contains 13 ordinary names plus three tree
+    callbacks already owned by `.4.3.6`. Lua currently has typed harray literals/`hash(...)`, defensive `copy`,
+    direct hash-index/nested assignment, and uniform bare storage, but no copied hash-helper dispatcher or receiver
+    family. `flat` currently always enters array dispatch, so harray identity and constructor splicing need one
+    syntax-plus-runtime mechanism; count/sorted views/membership are deterministic terminals/bridges; merge/
+    set/rename/drop/pick are copied transforms; named `set_key` and direct assignment need one mutation boundary;
+    public no-drift is separate. Direct odd-arity `hash(...)` divergence is already owned by
+    `FUTURE-PARITY-BACKLOG.5`; callbacks stay untouched.
+  Commit: `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.1`
+  Status: `active`
+  Goal: Implement copied harray construction, explicit flat splicing, and identity boundaries.
+  Dependencies: `.4.3.5.0`
+  Acceptance: `hash(...)`, harray literals, `copy`, `flat`, and `flat_hash` evaluate once, preserve ordinary nested
+    harray values, splice only explicit direct/terminal flat ASTs in hash-constructor context, never alias sources,
+    and leave odd-arity normalization with `FUTURE-PARITY-BACKLOG.5`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.2`
+  Status: `pending`
+  Goal: Implement copied deterministic harray views and membership terminals.
+  Dependencies: `.4.3.5.1`
+  Acceptance: `count_keys`, `sorted_keys`, `sorted_values`, and `has_key` return exact typed zero/array/boolean
+    boundaries, sort values by key, preserve nested values, and compose through function and receiver forms.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.3`
+  Status: `pending`
+  Goal: Implement copied harray transforms and receiver chains.
+  Dependencies: `.4.3.5.1`, `.4.3.5.2`
+  Acceptance: `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` copy inputs, preserve
+    deterministic override/order semantics and nested values, accept governed bare typed operands, and continue
+    through compatible harray or array-view receiver chains.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.4`
+  Status: `pending`
+  Goal: Close named harray mutation and direct assignment through one binding seam.
+  Dependencies: `.4.3.5.3`
+  Acceptance: Standalone `set_key(target, key, value)` and direct `target[key] = value` mutate named typed harrays,
+    return independent updated snapshots, create only permitted absent targets, reject wrong kinds with neutral
+    fields, and leave pure function/receiver transforms non-mutating.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.5`
+  Status: `pending`
+  Goal: Close complete Lua non-callback harray helper and public-surface no-drift.
+  Dependencies: `.4.3.5.1`, `.4.3.5.2`, `.4.3.5.3`, `.4.3.5.4`
+  Acceptance: Focused construction/view/transform/mutation/receiver/invalid proof passes both ABIs; Lua README,
+    mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, cleanup, and doctrines agree before
+    callbacks `.4.3.6`; cross-backend caveats stay explicitly owned rather than silently normalized.
   Verification: `pending`
   Commit: `pending`
 
@@ -1392,7 +1460,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
 All 34 ordinary array helper names and six numeric terminals are routed; only the three callback methods remain
-under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray helpers `.4.3.5` are active.
+under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
+mechanisms plus closeout, and construction/splicing/identity `.4.3.5.1` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1447,7 +1516,8 @@ under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray h
 | 49 | `LUA-BACKEND-PARITY.4.3.4.4` | `done` | Typed accumulators and complete cached child-push flow pass 98/98. |
 | 50 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Typed tagged records, one-time carried fields, governed splits, and receiver composition pass 99/99. |
 | 51 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
-| 52 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
+| 52 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split construction, views, transforms, mutation, and no-drift before behavior code. |
+| 53 | `LUA-BACKEND-PARITY.4.3.5.1` | `active` | Implement copied harray construction, explicit splicing, and identity boundaries. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1668,6 +1738,22 @@ under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray h
   uniform-binding/selector gates, KM, mdBook, doctrines, and whitespace pass.
 - [x] **LOCKSTEP** — Array parent `.4.3.4`, task/index, roadmaps, root/Lua README, mdBook, Knowledge Map,
   architecture/live docs, and memory close together and activate harray helpers `.4.3.5`.
+
+### `LUA-BACKEND-PARITY.4.3.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Inventory all 16 hash-family ActionIR names against Lua dispatch/tests, current
+  typed stores/access, Perl/catalog behavior, Dart/Julia rollout seams, receiver families, and callback ownership.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua has harray values, constructors/copy, and checked assignment but no
+  general hash helper/receiver dispatcher; shared `flat` currently enters array dispatch regardless of runtime
+  kind, while views, copied transforms, mutations, and callbacks have distinct result/control boundaries.
+- [x] **FIX** — Split `.4.3.5` into audit `.0`, construction/splicing `.1`, deterministic views `.2`, copied
+  transforms/receivers `.3`, named mutation `.4`, and public no-drift `.5`; keep callbacks in `.4.3.6`.
+- [x] **ADDRESSED (verified)** — Every ordinary hash name has one future owner, dependencies preserve reusable
+  seams, odd-arity hash drift remains backlog `.5`, and no runtime behavior changed during the split.
+- [x] **NO REGRESSION** — The unchanged PUC Lua/LuaJIT gate passes 99/99 plus manifest/CLI scaffolding; capability,
+  uniform-binding, selector, Knowledge Map, mdBook, doctrine, cleanup, and whitespace gates pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook/backend status, Knowledge Map, architecture/live
+  docs, and memory close `.4.3.5.0` and activate construction/splicing/identity `.4.3.5.1`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -2000,3 +2086,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.4.4` | `LUA-BACKEND-PARITY.4.3.4.4 - close Lua array mutation flow` | Typed implicit accumulators, cached child push, zero-based selection, binding reuse, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.4.5` | `LUA-BACKEND-PARITY.4.3.4.5 - add Lua tagged record construction` | Governed split reuse, exact typed record shapes, copied carried fields, one-time evaluation, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.4.6` | `LUA-BACKEND-PARITY.4.3.4.6 - close Lua array helper parity` | Exact 34-name ordinary array inventory, public result repair/guard, parent closure, and harray handoff. |
+| `LUA-BACKEND-PARITY.4.3.5.0` | `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms` | Read-only 16-name audit and six executable construction/view/transform/mutation/closeout owners. |

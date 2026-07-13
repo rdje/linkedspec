@@ -58,7 +58,8 @@ This `README.md` is the **single entry point** to the project.
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
   and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
   numeric terminals are closed under `.4.3.4`; harray helpers `.4.3.5` are active, while the three array-tree
-  callback names remain explicitly owned by `.4.3.6`. Implicit child-push expression results differ between Perl's
+  callback names remain explicitly owned by `.4.3.6`. Harray audit `.4.3.5.0` splits construction/splicing,
+  deterministic views, copied transforms/receivers, named mutation, and no-drift; `.4.3.5.1` is active. Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator; portable authoring uses the statement form until backlog `.5` normalizes it.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters

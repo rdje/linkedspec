@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.5.0 — split Lua harray helper mechanisms**
+  (DONE — planning/audit only; construction/splicing `.4.3.5.1` active).
+
+  **Implementation:** Audited 16 admitted hash names and split 13 ordinary helpers into construction/splicing,
+  deterministic views, copied transforms/receivers, named mutation, and no-drift; callbacks remain `.4.3.6`.
+
+  **Proof:** Existing typed harray construction/copy/assignment versus missing hash dispatch and array-only `flat`
+  are source-verified; PUC Lua and LuaJIT remain 99/99 plus manifest/CLI scaffolding with no behavior change.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.6 — close Lua array helper parity**
   (DONE — complete non-callback array family at 99/99; harray helpers `.4.3.5` active).
 

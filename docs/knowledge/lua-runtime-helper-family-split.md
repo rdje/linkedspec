@@ -15,6 +15,7 @@ date: 2026-07-11
 status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. String `.4.3.2` and numeric `.4.3.3` are closed; array family `.4.3.4` is active."
+evidence_update_2026_07_12_harray_split: "Array family .4.3.4 is now closed at 99/99. LUA-BACKEND-PARITY.4.3.5.0 splits the active harray family into construction/splicing .1, deterministic views .2, copied transforms/receivers .3, named mutation .4, and no-drift .5. Tree callbacks remain .4.3.6."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -40,6 +41,9 @@ owners under `docs/tasks/LUA-BACKEND-PARITY.md` are:
 The regex/split/mutation child `.4.3.2.2` is itself ordered as `.1` helper regex values and `matches`, `.2` pure
 split/receiver bridging, `.3` scalar regex substitution, `.4` explicit array split replacement, and `.5` corpus/
 public no-drift. This keeps PCRE2 policy, value typing, scalar mutation, and aggregate mutation in separate commits.
+
+The array family is closed. Harray parent `.4.3.5` is now split into `.0` audit, `.1` construction/splicing,
+`.2` deterministic views, `.3` copied transforms/receivers, `.4` named mutation, and `.5` no-drift.
 
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
