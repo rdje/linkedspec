@@ -16,6 +16,7 @@ status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. String `.4.3.2` and numeric `.4.3.3` are closed; array family `.4.3.4` is active."
 evidence_update_2026_07_13_harray_closeout: "Array family .4.3.4 is closed at 99/99. LUA-BACKEND-PARITY.4.3.5.5 closes all 13 ordinary harray names at 103/103 after construction/splicing .1, deterministic views .2, copied transforms/receivers .3, and named mutation .4. Codeblock/control/tree-callback parent .4.3.6 is active."
+evidence_update_2026_07_13_block_split: "LUA-BACKEND-PARITY.4.3.6.0 splits eager blocks, inline controls, statement controls, contextual built-ins/with, tree callbacks, and closeout. General user-function blocks remain .5.1; explicit callable values remain FUTURE-PARITY-BACKLOG.11.7."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -32,8 +33,8 @@ owners under `docs/tasks/LUA-BACKEND-PARITY.md` are:
 4. `.4.3.4`: array construction, transforms, mutation, bridges, child push, and
    numeric terminals;
 5. `.4.3.5`: harray/hash construction, views, transforms, mutation, and receivers;
-6. `.4.3.6`: codeblock values, structured controls, generic final-codeblock
-   equivalence, scoped `with`, and array/harray tree callbacks;
+6. `.4.3.6`: eager codeblock values, inline/statement controls, current built-in
+   final-codeblock equivalence, scoped `with`, and array/harray tree callbacks;
 7. `.4.3.7`: capture slices, named marks, input views, and explicit cursor state;
 8. `.4.3.8`: parse-result-neutral diagnostic output over a caller-owned event seam;
 9. `.4.3.9`: exhaustive 239-name execution/API/book/status no-drift.
@@ -42,8 +43,10 @@ The regex/split/mutation child `.4.3.2.2` is itself ordered as `.1` helper regex
 split/receiver bridging, `.3` scalar regex substitution, `.4` explicit array split replacement, and `.5` corpus/
 public no-drift. This keeps PCRE2 policy, value typing, scalar mutation, and aggregate mutation in separate commits.
 
-The array family is closed. Harray parent `.4.3.5` is now split into `.0` audit, `.1` construction/splicing,
-`.2` deterministic views, `.3` copied transforms/receivers, `.4` named mutation, and `.5` no-drift.
+The array and harray families are closed. Codeblock/control parent `.4.3.6` is split into `.0` audit, `.1` eager
+block execution, `.2` inline value controls, `.3` statement controls, `.4` built-in contextual blocks/`with`, `.5`
+tree callbacks, and `.6` no-drift. General user-function contextual blocks remain `.5.1`; explicit callable
+codeblock values remain `FUTURE-PARITY-BACKLOG.11.7`.
 
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
@@ -51,4 +54,4 @@ separate from executable parity.
 
 Related facts: [[lua-runtime-rule-interpreter]], [[lua-actionir-contract-resolver]],
 [[lua-actionir-ast-parser]], [[spec-lifecycle-retv-order]],
-[[generic-trailing-codeblock-argument-correction]].
+[[generic-trailing-codeblock-argument-correction]], [[lua-runtime-block-control-callback-split]].

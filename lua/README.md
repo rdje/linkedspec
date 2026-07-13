@@ -46,7 +46,10 @@ an independent updated snapshot. Assigned/function/receiver `set_key` remains pu
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
-`walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by active parent `.4.3.6`. Zero/variadic
+`walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by active parent `.4.3.6`. Audit `.4.3.6.0`
+splits eager expression blocks, inline and statement controls, current built-in final blocks/`with`, and tree
+callbacks; expression-valued blocks `.4.3.6.1` are active. General user-function final blocks remain `.5.1`, while
+explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
@@ -341,8 +344,9 @@ cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
 mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; `.2.2.3`
 supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; `.2.2.5` closes focused/public
 no-drift and routes broader shipped proof to phase 6; active `.3`
-numeric; `.4` arrays; `.5` harrays; `.6` codeblocks/controls/trailing blocks/
-tree callbacks; `.7` capture/mark/input/cursor state; `.8` diagnostic output;
+numeric; `.4` arrays; `.5` harrays; `.6` eager codeblocks/controls/contextual built-in blocks/
+tree callbacks (split into `.0` audit, `.1` eager values, `.2` inline controls, `.3` statement controls, `.4`
+current built-ins/`with`, `.5` callbacks, and `.6` closeout); `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
 mechanism cannot remain signoff-sized.
 

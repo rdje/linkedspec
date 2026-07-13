@@ -1,5 +1,14 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.0 — split Lua block control callback mechanisms
+
+Audited Lua's parser, contract resolver, interpreter, function registry, backend precedents, and callable-codeblock
+contract before behavior code. The parser/resolver already preserve eager blocks, generic attached/parenthesized
+final blocks, and structured controls; runtime still treats blocks as inert data and has no control/callback
+dispatcher. Split `.4.3.6` into eager values, inline controls, statement controls, current built-in contextual
+blocks/`with`, tree callbacks, and no-drift. General user-function final blocks remain `.5.1`; explicit callable
+codeblock values remain future `.11.7`. The dual-ABI behavior boundary remains unchanged at 103/103.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.5 — close Lua harray helper parity
 
 Closed all 13 ordinary harray names at the 103/103 dual-ABI boundary after inventorying constructor/generic,

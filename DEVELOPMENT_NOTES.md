@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.0 — parser support is not runtime ownership): Lua already emits and
+  resolves `block_value` and control nodes, including callable-name-agnostic attached final blocks, but its
+  interpreter only copies block records. Eager block execution, value controls, statement controls, scoped
+  built-ins, and traversal callbacks therefore need separate runtime leaves. Connecting `prepare_invocation` is
+  general function work under `.5.1`; explicit `{|params| ...}` values and dynamic calls remain future `.11.7`.
+  Keeping these owners distinct prevents a local built-in callback implementation from becoming a false claim of
+  complete user-function or first-class callable parity.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.5 — closeout must inventory routes, not just names): The 13 ordinary
   harray calls do not live in one dispatcher: `hash`, `copy`, and runtime-kind `flat` use constructor/generic
   paths; ten names use `PURE_HASH_HELPERS`; statement `set_key` and direct assignment add a mutation context.

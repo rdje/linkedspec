@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (all 13 ordinary harray names close at 103/103 under `.4.3.5.5`;
-  codeblock/control/tree-callback parent `.4.3.6` active)
+- Last updated: `2026-07-13` (`.4.3.6.0` splits immediate block values, value/statement controls, contextual
+  built-in blocks, and tree callbacks; expression-valued blocks `.4.3.6.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1335,11 +1335,136 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 - ID: `LUA-BACKEND-PARITY.4.3.6`
   Status: `active`
-  Goal: Execute codeblock values, structured controls, generic trailing blocks, and tree callbacks.
+  Goal: Execute immediate codeblock values, structured controls, contextual built-in blocks, and tree callbacks.
+  Children: `.4.3.6.0`, `.4.3.6.1`, `.4.3.6.2`, `.4.3.6.3`, `.4.3.6.4`, `.4.3.6.5`, `.4.3.6.6`
   Dependencies: `.4.3.1`-`.4.3.5`
-  Acceptance: Codeblock last values and local return, attached/marker/inline if/switch/while, helper/function/method
-    final-codeblock equivalence, scoped `with`, and deterministic array/harray walk/map/reduce callbacks match the
-    governed surface; unsupported block arities fail generically.
+  Acceptance: Immediate blocks return their last values and support block-local return; attached/marker/inline
+    if/switch/while forms, signature-governed built-in final-codeblock equivalence, scoped `with`, and deterministic
+    array/harray walk/map/reduce callbacks match the governed surface; unsupported built-in block arities fail
+    generically. General user-function invocation and its contextual final-codeblock path remain owned by `.5.1`;
+    explicit callable literals and dynamic codeblock-variable calls remain owned by `FUTURE-PARITY-BACKLOG.11.7`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.0`
+  Status: `done`
+  Goal: Audit and split Lua block, control, contextual-callback, and traversal mechanisms before behavior code.
+  Dependencies: `.4.3.1`-`.4.3.5`
+  Acceptance: Current Knowledge Map contracts, ActionIR parser/resolver nodes, interpreter dispatch, backend tests,
+    callable-codeblock decisions, and staged-function ownership identify each missing execution seam; executable
+    leaves are dependency ordered, and no child claims general user-function execution before `.5.1` or explicit
+    callable-codeblock v1 before `FUTURE-PARITY-BACKLOG.11.7`.
+  Verification: **PASS 2026-07-13.** Lua already parses and resolves eager `block_value`, generic attached and
+    parenthesized final blocks, inline and structured control nodes, but the interpreter preserves blocks as inert
+    values and has no control/callback executor. `user_function_registry.prepare_invocation` is not connected to
+    runtime dispatch, and `.5.1` owns that connection. The work is split into eager value blocks, inline controls,
+    statement controls, contextual built-ins/`with`, tree callbacks, and a no-drift/dependency closeout.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.1`
+  Status: `active`
+  Goal: Execute immediate expression-valued blocks with block-local return.
+  Dependencies: `.4.3.6.0`
+  Acceptance: Eager no-pair brace blocks evaluate statements once in order, return the last expression or null for
+    an empty/no-value path, and consume local `return` without leaking it to the enclosing rule. Harray literals
+    remain pair-classified, and trailing contextual block arguments remain inert until their callable consumes them.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.2`
+  Status: `pending`
+  Goal: Execute lazy inline value controls over the expression-valued block seam.
+  Dependencies: `.4.3.6.1`
+  Acceptance: Inline `if`/`unless` and `switch`/case aliases evaluate only the selected value branch, preserve
+    false/null distinctions and block-local return, diagnose malformed arity generically, and compose as helper,
+    assignment, and receiver operands on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.3`
+  Status: `pending`
+  Goal: Execute attached and marker-delimited statement controls.
+  Children: `.4.3.6.3.1`, `.4.3.6.3.2`, `.4.3.6.3.3`
+  Dependencies: `.4.3.6.1`
+  Acceptance: If-family, switch-family, and while-family statements share the scoped block executor, preserve
+    parser order and local return, and never evaluate unselected branches or an extra loop body.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.3.1`
+  Status: `pending`
+  Goal: Execute attached and marker `if`/`elseif`/`else` plus `when`/`otherwise` statement forms.
+  Dependencies: `.4.3.6.1`
+  Acceptance: Exactly one selected branch executes, condition aliases and marker boundaries match ActionIR order,
+    empty branches are neutral, and malformed/orphaned control nodes retain structured diagnostics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.3.2`
+  Status: `pending`
+  Goal: Execute attached and marker `switch`/`case`/`default` statement forms.
+  Dependencies: `.4.3.6.3.1`
+  Acceptance: The switch subject evaluates once; the first matching case or one default executes; later cases are
+    skipped; comparison and null behavior reuse governed scalar equality without host-table coercion.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.3.3`
+  Status: `pending`
+  Goal: Execute attached `while` statements through a deterministic loop-control seam.
+  Dependencies: `.4.3.6.3.2`
+  Acceptance: Conditions re-evaluate before each body, false initially runs zero bodies, body state is visible to
+    the next condition, local return exits only the current block contract, and the governed runaway guard fails
+    deterministically with rule attribution.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.4`
+  Status: `pending`
+  Goal: Execute signature-governed built-in final blocks and scoped `with`.
+  Dependencies: `.4.3.6.1`
+  Acceptance: For current built-ins declaring a final `codeblock` parameter, `call(args) { ... }` and
+    `call(args, { ... })` are identical in helper and receiver form; `with` installs copied temporary bindings and
+    restores all prior/absent bindings on success, local return, and error. This leaf does not claim general
+    user-function dispatch, which remains `.5.1`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5`
+  Status: `pending`
+  Goal: Execute deterministic harray and array leaf callbacks.
+  Children: `.4.3.6.5.1`, `.4.3.6.5.2`
+  Dependencies: `.4.3.6.1`, `.4.3.6.4`
+  Acceptance: `walk_leaves`, `map_leaves`, and `reduce_leaves` use one scoped callback frame, deterministic paths,
+    copied inputs/results, exact continuation, and generic invalid-kind/block-arity boundaries.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5.1`
+  Status: `pending`
+  Goal: Implement the scoped callback frame and deterministic harray leaf traversal.
+  Dependencies: `.4.3.6.4`
+  Acceptance: Lexically sorted harray keys produce stable path/value bindings; walk side effects, mapped copies,
+    and typed reduce accumulation match the governed contract without leaking callback locals or aliasing sources.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5.2`
+  Status: `pending`
+  Goal: Extend leaf traversal to arrays and close mixed-tree callback continuation.
+  Dependencies: `.4.3.6.5.1`
+  Acceptance: Zero-based array path components preserve element order across arrays, harrays, and mixed nesting;
+    walk/map/reduce return exact terminal kinds, receiver continuation is exact, and invalid inputs stay neutral.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.6`
+  Status: `pending`
+  Goal: Close Lua immediate-block/control/contextual-built-in/tree-callback no-drift and dependency routing.
+  Dependencies: `.4.3.6.2`, `.4.3.6.3`, `.4.3.6.4`, `.4.3.6.5`
+  Acceptance: Focused dual-ABI proof, catalog/README/mdBook/KM/task/live state, and unsupported-block diagnostics
+    agree; general user-function contextual blocks are explicitly handed to `.5.1`, explicit callable literals and
+    dynamic codeblock calls to `FUTURE-PARITY-BACKLOG.11.7`, with no premature parity claim.
   Verification: `pending`
   Commit: `pending`
 
@@ -1590,7 +1715,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 57 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
 | 58 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct mutation share one binding seam and pass 103/103. |
 | 59 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Complete 13-name ordinary harray/public surface closes at 103/103. |
-| 60 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Split codeblock values, controls, trailing blocks, and tree callbacks before behavior code. |
+| 60 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Parser-ahead block/control/callback work is split from user-function and callable-value owners. |
+| 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `active` | Execute eager expression-valued blocks and block-local return. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1660,6 +1786,22 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   capability, Knowledge Map, mdBook, memory/doctrine, cleanup, and whitespace gates pass.
 - [x] **LOCKSTEP** — Parent `.4.3.5`, task/index/roadmaps, root/Lua README, mdBook, Knowledge Map,
   architecture/live docs, changes/notes, and memory close together; `.4.3.6` is the sole next runtime parent.
+
+### `LUA-BACKEND-PARITY.4.3.6.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Parent `.4.3.6` combined eager values, two control families, contextual calls,
+  scoped binding, callbacks, and general user-function wording in one unsafe implementation slice.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_parser.lua` and the resolver already preserve block/control structure,
+  but `interpreter.lua` returns inert block copies and has no control/callback dispatch; function invocation is
+  separately absent behind `.5.1`.
+- [x] **FIX** — Split eager blocks, inline controls, statement controls, contextual built-ins/`with`, tree
+  callbacks, and no-drift; route user-function blocks to `.5.1` and explicit callable values to future `.11.7`.
+- [x] **ADDRESSED (verified)** — Source and Knowledge Map audit identifies every parser, resolver, interpreter,
+  registry, backend-reference, and callable-contract seam without changing behavior.
+- [x] **NO REGRESSION** — Planning only: the dual-ABI runtime remains 103/103 and existing harray/callback
+  delegation is unchanged; task/KM/docs/memory/doctrine gates pass.
+- [x] **LOCKSTEP** — Task/index/roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, and
+  memory agree that expression-valued blocks `.4.3.6.1` are the sole next leaf.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

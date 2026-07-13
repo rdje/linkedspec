@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (all 13 ordinary Lua harray names close at 103/103 under `.4.3.5.5`; rename collision
-  drift remains under helper caveats `.5`; codeblock/control/tree-callback parent `.4.3.6` active).
+- Last updated: `2026-07-13` (Lua `.4.3.6.0` splits eager blocks, controls, contextual built-ins, and callbacks;
+  expression-valued blocks `.4.3.6.1` active; general user-function/callable-codeblock obligations stay routed).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2547,8 +2547,10 @@ before implementation.
   Goal: Close four-backend callable-codeblock no-drift and route Lua to dependency-complete owners.
   Dependencies: `.11.3`, `.11.4`, `.11.5`, `.11.6`
   Acceptance: Neutral capability data, docs/book/KM, native/generated proofs, and four admitted backends agree;
-    Lua parser/value/control/function/generated obligations are added to its task tree without premature behavior
-    claims. Lexical capture remains explicitly deferred and requires a new decision/task if later justified.
+    Lua eager value/control/current-built-in work is acknowledged under `.4.3.6`, general user-function contextual
+    block execution is routed through `.5.1`, and explicit callable literals/dynamic calls/generated obligations
+    are added to dependency-complete Lua leaves without premature behavior claims. Lexical capture remains
+    explicitly deferred and requires a new decision/task if later justified.
 
 ### `FUTURE-PARITY-BACKLOG.11.1` Acceptance Checklist
 
@@ -3683,7 +3685,17 @@ before implementation.
 | 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
 | 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct harray mutation share one seam and pass 103/103. |
 | 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Exact ordinary inventory, public result guard, and callback handoff close at 103/103. |
-| 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Split codeblock values, controls, trailing blocks, and tree callbacks before behavior code. |
+| 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Execute eager blocks, controls, contextual built-ins, and tree callbacks without preempting user-function/callable owners. |
+| 137 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Split parser-ahead runtime work into six mechanisms plus no-drift/dependency handoff. |
+| 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `active` | Execute eager expression-valued blocks and block-local return. |
+| 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `pending` | Execute lazy inline value controls. |
+| 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `pending` | Execute attached/marker if-family statements. |
+| 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `pending` | Execute attached/marker switch-family statements. |
+| 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `pending` | Execute attached while statements with deterministic guard behavior. |
+| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Execute current built-in final blocks and scoped with. |
+| 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
+| 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
+| 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity, harray order/rename collisions, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

@@ -58,7 +58,10 @@ This `README.md` is the **single entry point** to the project.
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
   and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
   numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, while the
-  three tree-callback names remain explicitly owned by active parent `.4.3.6`. Copied harray construction,
+  three tree-callback names remain explicitly owned by active parent `.4.3.6`. Audit `.4.3.6.0` splits eager
+  blocks, inline and statement controls, contextual built-ins/`with`, and deterministic tree callbacks before
+  behavior code; expression-valued blocks `.4.3.6.1` are active. General user-function final blocks remain `.5.1`,
+  and explicit callable codeblock values remain future `.11.7`. Copied harray construction,
   runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass

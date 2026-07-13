@@ -10,16 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.5.5` — complete ordinary harray/public no-drift closeout.
-- latest_commit: `0b500084` — `LUA-BACKEND-PARITY.4.3.5.4 - add Lua named harray mutation`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.6`; split codeblock/control/trailing-block/tree-callback mechanisms.
-- next_action: split `.4.3.6` into safe task-tree children before behavior code, using current ActionIR/runtime
-  inventory and keeping generic block semantics separate from array/harray tree traversal.
-- current_proof: all 13 ordinary Lua harray names route through constructor/generic, copied dispatcher, or shared
-  uniform-mutation seams; the three block-bearing callbacks remain `.4.3.6`. PUC Lua and LuaJIT pass 103/103.
-  Public guards lock independent hash-index snapshots, pure receiver set-key, selector retirement, and explicit
-  ownership of odd-arity/order/rename-collision caveats under backlog `.5`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.0` — block/control/callback mechanism and dependency split.
+- latest_commit: `da2311d4` — `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.1`; execute eager expression blocks and block-local return.
+- next_action: implement one eager block executor in Lua, keep contextual trailing block arguments inert until
+  consumed, add focused last-value/empty/local-return/harray-boundary proof, and run dual-ABI plus doc gates.
+- current_proof: parser/resolver already preserve block/control/final-argument structure; interpreter returns inert
+  block copies and has no control/callback dispatch. `.4.3.6` is split by runtime mechanism. General user-function
+  final blocks stay `.5.1`; explicit callable values stay future `.11.7`. Existing dual-ABI behavior is 103/103.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -29,5 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: `.4.3.5.5` inventory, public guard, KM fact, task-tree, live docs, and
-  mdBook synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: `.4.3.6.0` task split, dependency routing, KM fact, live docs, and mdBook
+  synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.

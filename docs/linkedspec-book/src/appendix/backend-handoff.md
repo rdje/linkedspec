@@ -678,7 +678,9 @@ function/receiver/array-chain forms and return `0`/`[]` for missing or wrong-kin
 All 13 ordinary harray names close at 103/103 through `.4.3.5.5`: bare merge operands, later override, copied
 set/rename/drop/pick values, deep source isolation, harray/array-view receiver chains, and named `set_key`/direct
 harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
-active and must split before behavior code.
+now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
+contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks
+remain `.5.1`; explicit callable codeblock values remain future `.11.7`. Eager block execution `.4.3.6.1` is active.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results and rename-to-existing-key policy differ;

@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.0 — split Lua block control callback mechanisms**
+  (DONE — planning/audit only; eager expression blocks `.4.3.6.1` active).
+
+  **Finding and split:** Lua already parses/resolves eager blocks, generic final block arguments, and controls,
+  but runtime execution is absent. Six mechanisms plus closeout now separate eager blocks, inline/statement
+  controls, current built-ins/`with`, and tree callbacks.
+
+  **Dependency boundary:** General user-function final blocks remain `.5.1`; explicit callable codeblock values
+  remain future `.11.7`. The unchanged PUC Lua/LuaJIT runtime proof is 103/103.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.5 — close Lua harray helper parity**
   (DONE — all 13 ordinary names close at 103/103; `.4.3.6` active).
 
