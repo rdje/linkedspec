@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Lua tagged records `.4.3.4.5` close at 99/99; array closeout `.4.3.4.6` active).
+- Last updated: `2026-07-12` (complete Lua non-callback array family closes at 99/99; harray helpers `.4.3.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2173,8 +2173,10 @@ before implementation.
     rebind only `trim_each`, `filter_nonempty`, `lowercase_each`, and `uppercase_each` and silently discard the
     other three pure results. Normalize `join_values` invalid-source behavior as well: Perl returns an empty string
     for a non-array scalar and null for a missing/null source, while Rust, Dart, and Julia stringify a scalar and
-    return an empty string for a missing source. Finish with backend locks and mdBook/KM updates rather than
-    silently selecting one host's behavior.
+    return an empty string for a missing source. Normalize implicit child-push expression results too: a direct
+    Perl `push(Child)` leaks the host push count while Lua returns the updated implicit accumulator; explicit-target
+    child push already returns the governed updated target. Finish with backend locks and mdBook/KM updates rather
+    than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
 
@@ -3665,8 +3667,9 @@ before implementation.
 | 123 | `LUA-BACKEND-PARITY.4.3.4.3` | `done` | Copied transforms, joins, PCRE2 pipelines, and seven rebindings pass 95/95. |
 | 124 | `LUA-BACKEND-PARITY.4.3.4.4` | `done` | Typed accumulators and complete cached child-push flow pass 98/98. |
 | 125 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Exact tagged record shapes, copied carried fields, governed splits, and receiver composition pass 99/99. |
-| 126 | `LUA-BACKEND-PARITY.4.3.4.6` | `active` | Close complete Lua array helper, receiver, mutation, and public-surface no-drift. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat arity, negative counts, dropped transforms, and invalid joins. |
+| 126 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
+| 127 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat arity, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

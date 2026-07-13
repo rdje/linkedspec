@@ -41,9 +41,12 @@ REQUIRED_ANCHORS = {
     "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": [
         "`items.push_back(value).count()` yields the new count",
         "Array end mutations yield updated arrays too",
+        "named array end mutations. They mutate a bare array binding",
+        "the implicit form has no portable expression result yet",
     ],
     "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": [
         "return independent updated arrays",
+        "Their append behavior is portable, but their expression results are not yet",
     ],
     "docs/knowledge/perl-uniform-binding-runtime.md": [
         "array end/transform methods all update that binding and yield its post-operation typed value",
@@ -73,6 +76,10 @@ FORBIDDEN = [
     ),
     re.compile(
         r"\b(?:array\s+)?end mutations?\s+(?:remain|are|is)\s+statement-only\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\barray\s+end-mutation\s+methods?\s*;\s*statement-level\s+only\b",
         re.IGNORECASE,
     ),
     re.compile(

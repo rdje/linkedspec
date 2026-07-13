@@ -82,6 +82,10 @@ push(Child, 1)  # append call(Child)->[1] into @Parent
 
 LinkedSpec standardizes child-call appends on `push(...)`: the first argument is the child rule being called, the optional second bare-word argument is the target array, and a numeric final argument selects one indexed element from the child return.
 
+Use implicit `push(Child)` and `push(Child, index)` as statements. Their append behavior is portable, but their
+expression results are not yet: Perl currently exposes the host push count, while Lua exposes the updated implicit
+accumulator. Explicit-target child push returns the updated target. `FUTURE-PARITY-BACKLOG.5` owns normalization.
+
 Use the convention when the rule itself is the natural accumulator:
 
 ```text

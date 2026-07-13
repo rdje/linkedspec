@@ -11,6 +11,7 @@ date: 2026-07-12
 status: current
 tags: [language, uniform-binding, arrays, mutation, results, documentation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts linkedspec-uniform-binding-v1: mutable operations yield independent updated typed targets unless a callable explicitly returns something else. .12.1.2-.6 established the backend runtime primitives and general mutation contract. LUA-BACKEND-PARITY.4.3.4.0 then found older mdBook and Knowledge Map sentences still teaching the superseded statement-only/null-result boundary. Five-backend value-position proof in FUTURE-PARITY-BACKLOG.12.1.11 exposed one accompanying Perl lowering defect: BindingRuntime::array_end_mutation already returned the independent update, but ActionIR::MethodLowering's fluent-chain value path explicitly excluded all four methods, leaving generated Perl to call an undefined SpecEntry helper. The .12.1.11 repair admits the first array-end mutation only on a named typed binding, assigns and returns its copied update, and permits compatible array continuations; literal/helper temporaries remain invalid mutation targets."
+evidence_update_2026_07_12_lua_array_closeout: "LUA-BACKEND-PARITY.4.3.4.6 found one residual current helper-catalog table row saying array end-mutation methods were statement-level only even though the detailed section on the same page was correct. The row and formal-grammar summaries now name updated snapshots; the recurring surface checker forbids the semicolon-shaped stale phrase and requires the corrected canonical-table anchor. The same closeout aligns count(non-array) to 0, take(non-array) to [], and all push mutation result descriptions with runtime/toolbox proof."
 reverify: "python3 tools/check_uniform_binding_mutation_result_surface.py && python3 tools/check_uniform_binding_contract.py && PERL5LIB= prove -Iperl t/uniform_binding_contract.t"
 ---
 
@@ -26,3 +27,7 @@ guidance. The array audit found stale current-facing statement-only/no-value cla
 reference, backend summaries, and Dart/Julia/terse Knowledge Map cards. Its five-backend proof also caught the
 Perl value-position lowering exclusion described in the evidence above. `FUTURE-PARITY-BACKLOG.12.1.11`
 reconciles both surfaces before Lua array implementation continues.
+
+Lua array-family closeout later caught one residual canonical-table row whose punctuation evaded the original
+forbidden patterns. The current checker now rejects that exact `array end-mutation methods; statement-level only`
+shape and requires the corrected updated-snapshot table anchor.

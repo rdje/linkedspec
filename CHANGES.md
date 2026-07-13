@@ -1,5 +1,15 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.6 — close Lua array helper parity
+
+Closed all 34 non-callback ActionIR array names plus six numeric array terminals at 99/99 on both Lua ABIs. The
+public audit corrected invalid `count`/`take` results, updated all `push` return descriptions, repaired a residual
+statement-only array-end table row, and expanded the recurring mutation-result guard to catch that punctuation-
+shaped drift. Direct implicit child-push results differ—Perl host count versus Lua updated accumulator—so value
+use is explicitly non-portable under backlog `.5`; explicit-target push keeps its updated result. Only
+`walk_leaves`/`map_leaves`/`reduce_leaves` remain for `.4.3.6`; harray helpers `.4.3.5` are active. Capability
+stays 60/0/0.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.5 — add Lua tagged record construction
 
 Added `split_tagged_records(source, delimiter, tag, fields...)` through Lua's pure-array dispatcher. The helper

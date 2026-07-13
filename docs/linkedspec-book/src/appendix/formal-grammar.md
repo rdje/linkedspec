@@ -641,10 +641,10 @@ push(arr, child)        — append child to accumulator
 push(arr, child, index) — append child at index
 push(arr, value)  — append value to accumulator
 push_nonempty(arr, val) — retired on current Perl/Rust runtimes; prefer val = expr; if(is_nonempty(val)) { push(arr, val) }
-target.push_back(value) — append value to named working array (statement)
-target.push_front(value) — prepend value to named working array (statement)
-target.pop_back()       — remove last item from named working array (statement)
-target.pop_front()      — remove first item from named working array (statement)
+target.push_back(value) — append to named array; value form returns updated snapshot
+target.push_front(value) — prepend to named array; value form returns updated snapshot
+target.pop_back()       — remove last item; value form returns updated snapshot
+target.pop_front()      — remove first item; value form returns updated snapshot
 count(arr)              — number of elements
 first(arr)              — first element
 last(arr)               — last element

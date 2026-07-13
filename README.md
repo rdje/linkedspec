@@ -56,8 +56,10 @@ This `README.md` is the **single entry point** to the project.
   `set(items, [])`, `push(items, value)`, and `copy(items)`. Lua numeric canonical/alias/symbol calls, number
   receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
-  and exact copied tagged-record construction pass 99/99 on both ABIs. Array mechanisms are split under
-  `.4.3.4.0`; tagged records `.4.3.4.5` are closed and complete array/public no-drift `.4.3.4.6` is active.
+  and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
+  numeric terminals are closed under `.4.3.4`; harray helpers `.4.3.5` are active, while the three array-tree
+  callback names remain explicitly owned by `.4.3.6`. Implicit child-push expression results differ between Perl's
+  host count and Lua's updated accumulator; portable authoring uses the statement form until backlog `.5` normalizes it.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

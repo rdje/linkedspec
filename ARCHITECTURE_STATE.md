@@ -5,10 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua's 37-name ActionIR array family is fully routed before callbacks: 34 ordinary names
+  plus six numeric terminals pass 99/99; `walk_leaves`/`map_leaves`/`reduce_leaves` remain `.4.3.6`. Closeout
+  corrected public invalid count/take results, push result descriptions, and a residual statement-only end-
+  mutation table row, then expanded the recurring guard. Direct implicit child-push expression results differ
+  between Perl's host count and Lua's updated accumulator and are explicitly routed to backlog `.5`. Harray
+  helpers `.4.3.5` are active.
 - `2026-07-12` refresh: Lua `split_tagged_records` evaluates source and carried fields once, reuses the governed
   literal/PCRE2 split evaluator, and constructs fresh typed `[tag, item, fields...]` records. Direct and scalar-
   receiver forms compose with array terminals and copied carried containers do not alias later updates. Both Lua
-  ABIs pass 99/99; complete array/public no-drift `.4.3.4.6` is active.
+  ABIs pass 99/99; complete array/public no-drift `.4.3.4.6` has since closed.
 - `2026-07-12` refresh: Lua rule accumulators are typed arrays visible through uniform binding. Action-edge child
   push reuses one cached result and supports whole or zero-based indexed append into implicit/explicit targets;
   fluent push, ordinary append/end mutation, and mutable split share the same kind-checked copied-result seam.

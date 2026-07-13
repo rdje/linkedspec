@@ -30,6 +30,11 @@ After `-> Child`, fluent `.push` and `.push(target)` reuse that action edge's ca
 first argument retains static child-call precedence; numeric disambiguation requires a literal nonnegative integer.
 Wrong-kind explicit targets raise neutral `binding_kind_mismatch` fields.
 
+Use implicit `push(Child)` and `push(Child, index)` as statements. Their append side effects are portable, but
+their expression results are not yet: Lua returns the updated implicit accumulator while the Perl reference leaks
+the host push count. Explicit-target child push returns the updated target. `FUTURE-PARITY-BACKLOG.5` owns the
+cross-backend result decision.
+
 Ordinary `push`/`+=`, three-argument mutable split, and array-end push/pop already share the same binding seam and
 return independent updated arrays where the uniform-binding contract requires them. Pure two-argument `split`
 remains copied and non-mutating.

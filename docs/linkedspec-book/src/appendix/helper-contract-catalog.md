@@ -518,21 +518,21 @@ dispatch rule.
 
 ### `push(Child)` / `push(Child, target)`
 - **Signature**: `push(child_rule: rule[, target: array])`
-- **Returns**: void
-- **Behavior**: Calls `Child` and appends the child result to an accumulator array. With one argument, the target is the current rule's implicit accumulator; with a second bare identifier, that identifier is the target accumulator.
+- **Returns**: explicit-target form returns an updated array snapshot; the implicit form has no portable expression result yet
+- **Behavior**: Calls `Child` and appends the child result to an accumulator array. With one argument, the target is the current rule's implicit accumulator; with a second bare identifier, that identifier is the target accumulator. Use `push(Child)` as a statement: Perl currently leaks the host push count while Lua returns the updated implicit accumulator. `push(Child, target)` evaluates to an independent snapshot of the updated explicit target.
 - **Convention**: The all-bare child-call forms keep precedence: `push(Child)`, `push(Child, target)`, `push(Child, index)`, and `push(Child, target, index)` are parser child-call helpers.
 - **Action-edge fluent form**: after `-> Child`, `.push(target)` uses the edge's `Child` as the child rule and appends its return value to `target`; `.push(Child, target)` is the explicit child-and-target spelling used inside gated fluent chains.
 
 ### `push(Child, index)` / `push(Child, target, index)`
 - **Signature**: `push(child_rule: rule, index: int)` or `push(child_rule: rule, target: array, index: int)`
-- **Returns**: void
-- **Behavior**: Calls `Child`, selects one element from the child result, and appends that element to the implicit or explicit accumulator.
+- **Returns**: explicit-target form returns an updated array snapshot; the implicit form has no portable expression result yet
+- **Behavior**: Calls `Child`, selects one element from the child result, and appends that element to the implicit or explicit accumulator. Use implicit indexed push as a statement; the explicit-target result is an independent snapshot of the updated accumulator.
 - **Edge cases**: The disambiguation relies on integer matching before bare target-name matching. `push(Child, 0)` means index 0 into `Child`'s result; `push(Child, target, 0)` appends index 0 to `target`.
 
 ### `push(arr, value)`
 - **Signature**: `push(target: array, value: expr)`
-- **Returns**: void
-- **Behavior**: Terse explicit-value append. Lowers identically to the legacy explicit-value append helper for unambiguous value expressions.
+- **Returns**: updated array snapshot
+- **Behavior**: Terse explicit-value append. Lowers identically to the array append operator for unambiguous value expressions, mutates the named target, and evaluates to an independent snapshot of the update.
 - **Examples**: `push(items, "a")`, `push(items, value)`, `push(items, cat("a", "b"))`, and `push(items, call(Child))`.
 - **Disambiguation**: For `push(A, B)` with two bare identifiers, a registered static rule `A` keeps child-call
   precedence. Otherwise `A` is the array binding and `B` is the appended working value. `items += value` is the
@@ -580,7 +580,7 @@ dispatch rule.
 ### `count(arr)`
 - **Signature**: `count(arr: array)`
 - **Returns**: int
-- **Behavior**: Returns the number of elements in the array. Returns undef for non-array or undef input.
+- **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input.
 
 ### `first(arr)`
 - **Signature**: `first(arr: array)`
@@ -596,7 +596,7 @@ dispatch rule.
 - **Signature**: `take(arr: array, n: int = 1)`
 - **Returns**: array
 - **Behavior**: Returns the first `n` elements as a new array. When `n` is omitted, returns the first element as an array.
-- **Edge cases**: If `n` > array length, returns the entire array. Returns undef for non-array input.
+- **Edge cases**: If `n` > array length, returns the entire array. Returns an empty array for non-array input.
 
 ### `take_last(arr, n)`
 - **Signature**: `take_last(arr: array, n: int = 1)`
@@ -1769,7 +1769,7 @@ The `.spec` format has migrated these helper families to terser spellings. The *
 | `set(target, value)` | `target = value` | typed value assignment. Both spellings bind scalar, array, harray, or codeblock RHS values and yield the stored value in value positions. A bare source `set(out, name)` reads `name`. |
 | `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
 | `items += value` | `push(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
-| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver is a bare array binding; pop methods discard the removed value. |
+| `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | named array end mutations. They mutate a bare array binding and evaluate to an independent updated snapshot; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
 | `cat(args...)` | string value expression | String concatenation through the portable scalar-to-text contract: strings unchanged, booleans `1`/`0`, stable finite decimal text (`-0.0` → `0`, `1.0` → `1`), and null for any null/array/harray/codeblock argument. Retired `concat` remains unsupported. |

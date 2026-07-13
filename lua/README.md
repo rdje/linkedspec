@@ -31,10 +31,12 @@ pipelines, and all seven Perl-reference dropped transform rebindings share those
 `split_tagged_records(source, delimiter, tag, fields...)` reuses literal/PCRE2 split policy, evaluates every input
 once, and returns fresh `[tag, item, fields...]` records whose carried values are copied. Direct and receiver forms
 compose with array terminals. The Lua gate passes 99/99 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric
-v1 cases still match Perl, Rust, Dart, and Julia exactly. Tagged records `.4.3.4.5` are closed; complete
-array/public no-drift `.4.3.4.6` is active. Zero/variadic
-flatten calls, negative selection counts, newer-backend dropped-transform omissions, and invalid-join differences
-remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than hidden as settled parity.
+v1 cases still match Perl, Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals
+are closed under `.4.3.4`; harray helpers `.4.3.5` are active. `walk_leaves`/`map_leaves`/`reduce_leaves` remain
+separately owned by `.4.3.6`. Zero/variadic
+flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
+and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
+hidden as settled parity.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge
 `.push`/`.push(target)` and block `push(Child[, target][, index])` reuse the cached child result, select zero-based
 items when requested, and retain neutral wrong-kind diagnostics.

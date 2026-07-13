@@ -670,8 +670,10 @@ and seven dropped-call rebindings at 95/95. `.4.3.4.3` is closed.
 Typed rule accumulators, cached action-edge child reuse, whole/indexed implicit/explicit push, and uniform
 append/end/split flow raise the dual-ABI gate to 98/98. Exact tagged-record construction reuses governed split,
 evaluates carried fields once, copies nested values, returns `[tag, item, fields...]`, and raises the gate to 99/99.
-`.4.3.4.5` is closed and complete array/public no-drift `.4.3.4.6` is active. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
-selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, and invalid join sources differ;
+All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`; harray helpers `.4.3.5` are
+active and the three array-tree callbacks remain `.4.3.6`. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
+selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
+child-push expression results differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a

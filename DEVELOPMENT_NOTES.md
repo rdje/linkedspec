@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.6 — closeout must compare duplicate public summaries): The detailed
+  helper-catalog end-mutation section was correct, but a later canonical table on the same page still said
+  statement-level only; punctuation let it evade the original prose guard. Array closeout now inventories all 37
+  admitted names, routes the 34 non-callback names and six numeric terminals, and compares repeated result
+  summaries. The guard forbids the exact residual shape and requires the corrected table anchor. The same audit
+  aligned `count`/`take` invalid inputs and ordinary/explicit-target `push` results. A direct toolbox probe also
+  proved implicit child-push expression drift: Perl returns the host push count while Lua returns the updated
+  accumulator. That result must remain non-portable under `.5`; statement side effects are the current contract.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.5 — tagged records are a split-to-array bridge, not a new parser):
   `split_tagged_records` should reuse the governed pure split evaluator rather than duplicate literal/PCRE2 rules.
   The generic call path already evaluates arguments once; construction then copies every carried value into each

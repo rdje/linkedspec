@@ -12,6 +12,7 @@ date: 2026-07-12
 status: current
 tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Final admission .12.1.9 composes this under tools/check_public_aggregate_selector_surface.py and removes the capability future exclusion. Follow-up .12.1.10 removes 14 missed Rust/Dart/Julia/Lua README positives and expands public proof to 56 root/component/mdBook files, 31 classified references, and zero current examples."
+evidence_update_2026_07_12_lua_array_closeout: "The public inventory remains 56 files and zero current examples; its corrected classified count is 27 after four `array (statement)` formal-grammar prose false positives were removed. Runtime/source retirement counts are unchanged."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 

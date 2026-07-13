@@ -78,7 +78,7 @@ are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1
 hard-reject the removed exact selectors before execution. Cross-variant `.12.1.8.6` locks their shared contract,
 boundaries, and zero runtime compatibility. The uniform-binding selector retirement is admitted by `.12.1.9`.
 Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs: 56 public files are
-locked at 31 classified removed/history references and zero current examples, including explicit bare-binding
+locked at 27 genuine classified removed/history references and zero current examples, including explicit bare-binding
 anchors in the Rust, Dart, Julia, and Lua READMEs.
 Closed follow-up `.12.1.11` reconciles older statement-only array-end result prose and Perl value-position lowering
 with the already-admitted updated-value contract. `python3 tools/check_uniform_binding_mutation_result_surface.py`

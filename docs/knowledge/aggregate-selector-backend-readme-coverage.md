@@ -10,6 +10,7 @@ date: 2026-07-12
 status: current
 tags: [language, bindings, retirement, documentation, readme, no-drift, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.10 found 14 current positive exact selector forms in rust/README.md, dart/README.md, julia/README.md, and lua/README.md after .12.1.9 had reported zero examples across a curated 47-file root/capability/mdBook list. The four READMEs now use bare typed bindings. tools/check_public_aggregate_selector_surface.py discovers every immediate component README, asserts 56 files and 31 classified removed/history references, requires four backend bare-binding anchors, and reports zero current examples."
+evidence_update_2026_07_12_lua_array_closeout: "The 56-file inventory remains exact, but its classified count is now 27. Four former matches were `array (statement)` prose fragments inside a formal-grammar code block, not removed selector references; LUA-BACKEND-PARITY.4.3.4.6 replaced them with accurate updated-snapshot descriptions and corrected the expected count."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 

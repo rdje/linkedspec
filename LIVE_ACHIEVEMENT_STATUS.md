@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.6 — close Lua array helper parity**
+  (DONE — complete non-callback array family at 99/99; harray helpers `.4.3.5` active).
+
+  **Implementation:** Audited 37 ActionIR array names, closed all 34 non-callback runtime routes and six numeric
+  terminals, aligned count/take/ordinary and explicit-target push/end-mutation public results, expanded the
+  recurring mutation prose guard, and routed implicit child-push result drift to backlog `.5`.
+
+  **Proof:** PUC Lua and LuaJIT pass 99/99 plus manifest/CLI scaffolding; capability remains 60/0/0, public
+  uniform-binding and selector gates pass, and only three explicitly delegated tree callbacks remain `.4.3.6`.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.5 — add Lua tagged record construction**
   (DONE — 99/99 on both ABIs; complete array/public no-drift `.4.3.4.6` active).
 
