@@ -418,12 +418,21 @@ portability is guaranteed for structured marker/attached-block forms, receiver-f
 gate those calls, and compact lifecycle-marker chains such as `I.return(expr)` or
 `I.set(...).return(...)`.
 
-Zero-arg fluent control-flow markers accept bare-keyword form:
+Rule-edge and lifecycle fluent control-flow markers accept bare-keyword suffix form:
 ```
 .else   .endif   .default   .endcase   .endswitch
 ```
 
-These are equivalent to their parenthesized forms `.else()`, `.endif()`, etc.
+These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. Standalone typed ActionIR
+parsers are not yet consistent across all five backends: `FUTURE-PARITY-BACKLOG.16` owns convergence for bare
+`else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a final zero-argument receiver segment such as
+`.trim`. Until that lane closes, parenthesized standalone markers and generic receiver calls are the universal
+spelling.
+
+ADR 0033 deliberately keeps the exception narrow. Calls with arguments, general helper/user-function calls,
+intermediate generic receiver segments, and condition-bearing headers keep parentheses. In particular,
+`if condition { ... }` and `while condition { ... }` are not accepted aliases for `if(condition) { ... }` and
+`while(condition) { ... }`; that separate design idea remains deferred pending an ambiguity audit.
 
 ### 3.8 Conditional Markers
 

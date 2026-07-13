@@ -698,7 +698,8 @@ executes marker statements outside every branch while Rust/Dart/Julia/Lua skip t
 Attached while then raises the gate to 108/108: its condition sees body mutation, false initial runs no body,
 return remains owned by its action/expression block, Perl-reference `next` continues the loop, and a typed
 rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
-timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are active.
+timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued
+while ADR `0033` and `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases after a clean pivot.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit

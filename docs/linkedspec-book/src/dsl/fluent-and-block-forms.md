@@ -189,7 +189,10 @@ The fluent equivalent chains the markers with dots:
   .endif;
 ```
 
-The parenthesized and bare marker spellings are the portable structured marker forms. Action-edge
+The parenthesized spellings are currently universal. Bare control-marker suffixes are established on rule-edge and
+lifecycle fluent chains; standalone typed ActionIR parser coverage still differs by backend and is explicitly owned
+by `FUTURE-PARITY-BACKLOG.16`. That lane also owns bare `next` and a generic final zero-argument receiver segment,
+without changing `if(condition)` / `while(condition)` headers or the general parenthesized call grammar. Action-edge
 fluent continuations are portable on the Perl reference and Rust for the edge-scoped child-return
 surface: no-arg `.push`, `.return(expr)`, `.return_undef()`, explicit-target `.push(target)`, and
 `.push(child,target)` inside fluent control chains. Multiline dotted continuations remain attached

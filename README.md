@@ -64,7 +64,8 @@ This `README.md` is the **single entry point** to the project.
   `while` now pass 108/108 on both Lua ABIs through `.4.3.6.3.3`: only selected branches execute, nested marker
   boundaries and empty branches are exact, block-local return is preserved, switch subjects run once, bare case
   labels stay literal, loop conditions re-evaluate against body state, and malformed/runaway controls are typed.
-  Current built-in final blocks and scoped `with` `.4.3.6.4` are active. General user-function final blocks remain
+  Current built-in final blocks and scoped `with` `.4.3.6.4` are queued at a clean handoff while ADR `0033` and
+  `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. General user-function final blocks remain
   `.5.1`,
   and explicit callable codeblock values remain future `.11.7`. Copied harray construction,
   runtime-kind `flat`, direct/

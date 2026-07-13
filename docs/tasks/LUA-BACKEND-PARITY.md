@@ -7,7 +7,8 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (attached/marker controls and attached while pass 108/108 through `.4.3.6.3.3`;
-  current built-in final blocks/scoped with `.4.3.6.4` active; control comparison/range/alias/truthiness/loop drift
+  built-in final blocks/scoped with `.4.3.6.4` are queued at a clean handoff while director-requested syntax
+  leaf `FUTURE-PARITY-BACKLOG.16.0` is active; control comparison/range/alias/truthiness/loop drift
   routed to backlog `.5`)
 - Owner: repo-local workflow
 
@@ -1460,7 +1461,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.4`
-  Status: `active`
+  Status: `pending`
   Goal: Execute signature-governed built-in final blocks and scoped `with`.
   Dependencies: `.4.3.6.1`
   Acceptance: For current built-ins declaring a final `codeblock` parameter, `call(args) { ... }` and
@@ -1761,7 +1762,7 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
-| 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `active` | Execute current built-in final blocks and scoped with. |
+| 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Resume built-in final blocks and scoped with after the clean director-requested syntax pivot. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 

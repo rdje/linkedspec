@@ -43,6 +43,7 @@ changed* lives in git (layer D), not here.
 | [0030](0030-variadic-callable-signature-contract.md) | Variadic user functions use one explicit final rest parameter and typed array binding | 2026-07-12 | accepted | architecture, functions, helpers, methods, arity, variadic, staged-parsing, descriptor, portability |
 | [0031](0031-callable-codeblock-literal-and-dynamic-context.md) | Codeblock values use `{|params| body }` literals and dynamic caller context | 2026-07-12 | accepted | architecture, codeblock, callable, literal, dynamic-scope, functions, hash, actionir, portability |
 | [0032](0032-final-codeblock-parameter-declaration.md) | A final contextual codeblock parameter is declared as `name: codeblock` | 2026-07-12 | accepted | architecture, codeblock, callable, parameters, functions, helpers, methods, actionir, portability |
+| [0033](0033-punctuation-light-zero-argument-calls.md) | Punctuation-light zero-argument calls are narrow aliases | 2026-07-13 | accepted | dsl, actionir, calls, control-flow, syntax, portability, cross-variant-parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

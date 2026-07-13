@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.0 — ratify zero-argument call aliases**
+  (DONE — exact five-backend parser audit and ADR 0033; neutral contract `.16.1` next).
+
+  **Result:** The general call grammar remains `callee(args)`. The accepted narrow target is bare standalone
+  `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a final generic zero-argument receiver
+  segment. Existing parenthesized forms stay valid. Parenthesis-free condition-bearing `if`/`while` headers,
+  argument-bearing calls, intermediate generic bare receiver segments, arbitrary helper/user-function calls, and
+  attached final-codeblock calls remain outside the lane. Existing backend support is partial, so no implementation
+  parity is claimed yet. No parser/compiler/runtime behavior changed; Lua `.4.3.6.4` remains cleanly queued.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.3.3 — execute Lua attached while controls**
   (DONE — 108/108 on both ABIs; built-in final blocks/scoped with `.4.3.6.4` active).
 

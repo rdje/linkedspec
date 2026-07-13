@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.0` — punctuation-light zero-argument audit): The director clarified that
+  removing `()` applies to zero-argument markers such as `else`, `endif`, `default`, `endcase`, `endswitch`, and
+  `next`, not to condition-bearing `if`/`while` headers. Source audit shows two distinct parser surfaces: every
+  rule/lifecycle dotted-suffix parser already treats missing parentheses as zero arguments, while typed ActionIR
+  parsers differ. Perl/Dart/Julia normalize the existing five control markers, Rust does not outside synthetic
+  attached controls, Lua recognizes only `else`/`otherwise`/`default`, and none recognizes bare `next`. Generic
+  bare receiver segments are rejected by Perl/Rust/Dart/Julia but accepted in every Lua segment. ADR `0033`
+  therefore admits only the six standalone aliases and a generic final receiver segment; existing arity checking
+  remains authoritative. Calls with arguments, intermediate generic segments, final-codeblock calls, general
+  helpers/user functions, and parenthesis-free `if`/`while` headers remain excluded. `.16.1` owns a neutral
+  positive/negative contract before backend code; Lua `.4.3.6.4` is cleanly queued.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.3.3 — a bounded while must recheck before declaring runaway): Reuse the
   indexed statement executor, but keep one loop-specific boundary around the body. Validate the attached body
   first; evaluate the condition; if true beyond the configured completed-body count, fail before another body;

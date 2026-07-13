@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.0 — ratify zero-argument call aliases
+
+**Change:** Audited rule/lifecycle suffix parsing and typed ActionIR parsing across Perl, Rust, Dart, Julia, and
+Lua before behavior code. ADR `0033` preserves general `callee(args)` syntax while adopting a narrow convergence
+target: bare standalone `else`, `endif`, `default`, `endcase`, `endswitch`, and `next`, plus a final generic
+zero-argument receiver segment. Parenthesized spellings remain valid. Calls with arguments, intermediate generic
+bare receiver calls, ordinary helper/user-function calls, attached final-codeblock calls, and parenthesis-free
+`if`/`while` condition headers are excluded.
+
+**Audit result:** All five rule/lifecycle suffix parsers already accept bare zero-argument suffixes. On standalone
+ActionIR paths, Perl/Dart/Julia normalize the existing five markers, Rust does not, Lua normalizes only branch
+markers, no backend treats bare `next` as a call, and Lua alone accepts generic bare receiver segments broadly.
+One neutral contract plus Perl/Rust/Dart/Julia/Lua and no-drift leaves now own convergence. No behavior source
+changed. Lua `.4.3.6.4` remains queued at the clean pivot; `.16.1` is next.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.3.3 — execute Lua attached while controls
 
 Lua now executes typed attached `while(condition) { ... }` through the indexed statement executor. It validates

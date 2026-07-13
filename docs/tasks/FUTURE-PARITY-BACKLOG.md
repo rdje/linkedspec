@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua statement controls pass 108/108 through attached while `.4.3.6.3.3`; built-in
-  final blocks/scoped with `.4.3.6.4` active; switch, alias, truthiness, and loop drift join caveat owner `.5`).
+- Last updated: `2026-07-13` (ADR 0033 and `.16.0` ratify director-requested punctuation-light zero-argument
+  syntax; neutral contract `.16.1` is next, and Lua built-in final blocks/scoped with `.4.3.6.4` remain queued at
+  a clean handoff point).
 - Owner: repo-local workflow
 
 ## Goal
@@ -24,10 +25,12 @@ before implementation.
 - Do not weaken the universal `.spec` contract or create per-backend dialects.
 - Do not treat Perl plugin machinery as part of the backend-neutral contract.
 - Do not normalize documented behavior caveats until their own leaves are activated.
+- Do not infer parenthesis-free condition headers such as `if condition { ... }` or `while condition { ... }`
+  from punctuation-light zero-argument markers; that separate idea remains deferred pending an ambiguity audit.
 
 ## Acceptance Criteria
 
-- The fifteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+- The sixteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
   repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
   director's structural linked-rule plus progressive/staged parser-composition authoring model and rule-level bare
   lifecycle-block shorthand.
@@ -62,7 +65,8 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`,
+  `.15`, `.16`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -3169,6 +3173,146 @@ before implementation.
   Status: `pending`
   Goal: Align Dart, Julia, Lua, generated paths, public examples, Knowledge Map, and complete no-drift proof.
 
+- ID: `FUTURE-PARITY-BACKLOG.16`
+  Status: `active`
+  Goal: Complete the deliberately narrow punctuation-light zero-argument call surface without creating a general
+    parenthesis-free call grammar.
+  Children: `.16.0`, `.16.1`, `.16.2`, `.16.3`, `.16.4`, `.16.5`, `.16.6`, `.16.7`
+  Acceptance: Standalone zero-argument flow markers accept `else`, `endif`, `default`, `endcase`, `endswitch`,
+    and `next` wherever their parenthesized forms are valid; the final call in an ActionIR receiver chain may use
+    `.method` exactly when it has no authored arguments; existing parenthesized forms remain valid; intermediate
+    receiver calls, calls with arguments, ordinary helper/user-function calls, and condition-bearing `if`/`while`
+    headers retain parentheses. All five backends, generated paths, diagnostics, examples, and public contracts
+    agree.
+
+- ID: `FUTURE-PARITY-BACKLOG.16.0`
+  Status: `done`
+  Goal: Audit and ratify the exact existing/missing punctuation-light zero-argument surfaces before behavior code.
+  Acceptance: Distinguish rule-edge/lifecycle fluent suffix parsing from ActionIR expression parsing; inventory
+    bare `else`/`endif`/`default`/`endcase`/`endswitch` and `next` across Perl, Rust, Dart, Julia, and Lua; inventory
+    final bare receiver parsing and contract resolution; prove the final-segment boundary is unambiguous; record
+    exclusions for intermediate bare calls, attached final-codeblock calls, arbitrary helpers/user functions, and
+    parenthesis-free condition headers; split backend and no-drift leaves from source-backed evidence.
+  Verification: **PASS 2026-07-13.** Source-backed audit distinguishes established rule-edge/lifecycle fluent
+    suffix handling from the five ActionIR parsers. Perl, Dart, and Julia normalize the five existing bare control
+    markers; Rust parses them as variables outside attached-control synthesis; Lua normalizes only bare
+    `else`/`otherwise`/`default`. No backend recognizes bare `next` as the current call. Perl, Rust, Dart, and Julia
+    require parentheses for every ActionIR receiver segment; Lua currently accepts a bare identifier in every
+    segment. All five rule/lifecycle suffix parsers already preserve zero-argument bare suffixes. ADR 0033 adopts
+    the narrow six-marker plus final-receiver contract, keeps condition headers/calls-with-arguments/general calls
+    parenthesized, and splits one neutral contract plus five backend and no-drift leaves. No behavior source changed.
+  Commit: `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.1`
+  Status: `pending`
+  Goal: Add one backend-neutral syntax/AST/diagnostic fixture contract for the ratified zero-argument aliases.
+  Dependencies: `.16.0`
+  Acceptance: Positive cases cover all six standalone markers and terminal `.method`; negative cases preserve
+    parentheses on condition headers, argument-bearing calls, non-final bare receiver segments, and nonzero-arity
+    terminal methods; the contract is reusable by native and generated backends.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2`
+  Status: `pending`
+  Goal: Implement and regression-lock the ratified aliases on the Perl reference backend.
+  Dependencies: `.16.1`
+  Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
+    aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
+    receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.3`
+  Status: `pending`
+  Goal: Implement and regression-lock the ratified aliases on the Rust backend and Rust oracle/generated paths.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Rust ActionIR parsing emits the same typed calls/controls for aliases and parenthesized forms,
+    preserves final-only receiver and condition-header boundaries, executes the neutral contract identically,
+    and passes native, oracle, and generated-source proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.4`
+  Status: `pending`
+  Goal: Implement and regression-lock the ratified aliases on the Dart backend and generated path.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Dart normalizes all six standalone forms and final generic receiver form to the same typed AST,
+    retains the negative boundaries and diagnostics, and passes native plus generated execution of the unchanged
+    neutral contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.5`
+  Status: `pending`
+  Goal: Implement and regression-lock the ratified aliases on the Julia backend and generated path.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Julia normalizes all six standalone forms and final generic receiver form to the same typed AST,
+    retains the negative boundaries and diagnostics, and passes native plus generated execution of the unchanged
+    neutral contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.6`
+  Status: `pending`
+  Goal: Align Lua's parser-ahead bare receiver behavior with the final-only contract and add all standalone aliases
+    on both PUC Lua and LuaJIT without preempting the parked runtime leaf.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Lua normalizes all six standalone forms; generic bare receiver calls are accepted only in the final
+    segment; existing rule/lifecycle control-marker suffixes and attached `else`/`default` remain valid; both ABIs
+    pass the neutral native/generated contract and negative diagnostics without changing `.4.3.6.4` runtime scope.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.7`
+  Status: `pending`
+  Goal: Migrate current examples where useful and close mdBook, grammar, Knowledge Map, roadmap, generated-source,
+    corpus, capability, and complete no-drift alignment.
+  Dependencies: `.16.2`, `.16.3`, `.16.4`, `.16.5`, `.16.6`
+  Acceptance: Current examples prefer the punctuation-light spelling where it improves readability; all public
+    text clearly preserves parentheses for the general call grammar and condition headers; recurring scans and
+    complete backend gates prove no parser, generated, diagnostic, or documentation drift; `.16` closes.
+  Verification: `pending`
+  Commit: `pending`
+
+## `FUTURE-PARITY-BACKLOG.16.0` Read-only audit
+
+The parser inventory intentionally separates two surfaces that previously looked like one feature:
+
+| Surface | Perl | Rust | Dart | Julia | Lua |
+| --- | --- | --- | --- | --- | --- |
+| Rule-edge/lifecycle dotted suffix without `()` | already parsed as zero-argument suffix | already parsed | already parsed | already parsed | already parsed |
+| Standalone bare five control markers | all five normalize to calls/typed controls | bare words remain value reads outside attached-control synthesis | all five normalize | all five normalize | only `else`/`otherwise`/`default` normalize |
+| Standalone bare `next` | not a call | not a call | not a call | not a call | not a call |
+| Bare ActionIR receiver segment | rejected | rejected | rejected | rejected | accepted in every segment |
+
+Source owners are Perl `ActionIR/ControlFlow.pm`, `StatementSplit/Core.pm`, and `AST/Parser.pm`; Rust
+`linkedspec-core/src/expr.rs` plus the separate `parser.rs` suffix parser; Dart and Julia ActionParser/spec-parser
+pairs; and Lua `action_parser.lua` plus `spec_parser.lua`. The existing mdBook statement that bare fluent control
+markers are equivalent is accurate for rule/lifecycle suffix parsing but overstated for standalone typed ActionIR
+paths across every backend.
+
+ADR `0033` resolves the scope without expanding the grammar: six enumerated standalone zero-argument markers,
+plus a bare final receiver segment lowered to an ordinary zero-argument call and checked by the existing arity
+resolver. A generic bare receiver segment followed by another dot remains invalid; existing control-marker fluent
+syntax is the named exception. A following `(...)`, `{ ... }`, or another dot preserves the existing productions,
+so final-segment recognition needs no condition-expression lookahead. `if(condition)` and `while(condition)` keep
+their parentheses; `if condition { ... }` / `while condition { ... }` remain a separate deferred design candidate.
+
+### `FUTURE-PARITY-BACKLOG.16.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing docs promise bare marker aliases, but source inspection finds differing
+  standalone ActionIR support and no bare `next`; Lua alone accepts generic bare receiver segments broadly.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Rule/lifecycle suffix parsers already encode missing parentheses as empty
+  arguments, while typed ActionIR parsers use separate control normalization and receiver-call productions.
+- [x] **FIX / SPLIT** — ADR 0033 fixes the narrow target; `.16.1` owns the neutral contract, `.16.2-.16.6` own
+  Perl/Rust/Dart/Julia/Lua alignment, and `.16.7` owns generated/public/no-drift closeout.
+- [x] **ADDRESSED (verified)** — Exact positive and excluded forms, terminality, arity behavior, retained
+  parenthesized syntax, and parenthesis-free-header deferral are durable before parser behavior changes.
+- [x] **NO REGRESSION** — Planning only: no parser/compiler/runtime/fixture behavior source changes.
+- [x] **LOCKSTEP** — Task tree, ADR, roadmaps, mdBook status/grammar correction, Knowledge Map, live docs, and
+  resume pointer all identify `.16.1` as the next leaf; parked Lua `.4.3.6.4` remains clean and recoverable.
+
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Preserve the director's exact distinction between linked-rule structural recursion,
@@ -3714,10 +3858,18 @@ before implementation.
 | 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
-| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `active` | Execute current built-in final blocks and scoped with. |
+| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Resume current built-in final blocks and scoped with after the clean director-requested syntax pivot. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
+| 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
+| 148 | `FUTURE-PARITY-BACKLOG.16.1` | `pending` | Establish one neutral positive/negative syntax and diagnostic contract. |
+| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `pending` | Align the Perl reference parser and execution surface. |
+| 150 | `FUTURE-PARITY-BACKLOG.16.3` | `pending` | Align Rust native, oracle, and generated paths. |
+| 151 | `FUTURE-PARITY-BACKLOG.16.4` | `pending` | Align Dart native and generated paths. |
+| 152 | `FUTURE-PARITY-BACKLOG.16.5` | `pending` | Align Julia native and generated paths. |
+| 153 | `FUTURE-PARITY-BACKLOG.16.6` | `pending` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
+| 154 | `FUTURE-PARITY-BACKLOG.16.7` | `pending` | Close examples, book, grammar, KM, generated, capability, and no-drift alignment. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4182,6 +4334,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Decisions
 
+- `2026-07-13`: ADR `0033` adopts a narrow punctuation-light exception to the general `callee(args)` grammar:
+  bare `else`/`endif`/`default`/`endcase`/`endswitch`/`next` where their zero-argument statement calls are valid,
+  plus a generic bare final ActionIR receiver segment. It explicitly excludes parenthesis-free condition headers,
+  calls with arguments, intermediate generic bare receiver calls, general helper/user-function calls, and attached
+  final-codeblock calls. Existing parenthesized spellings remain valid.
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
   then Lua, with the goal of full parity with Perl5 and Rust. ADR `0021` records the durable
   scope change and supersedes the earlier "Lua blocked pending decision" wording.
@@ -4325,6 +4482,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.0` | Knowledge Map retrieval; five ActionIR parser and five rule/lifecycle suffix-parser source audits; existing Perl bare-control AST tests; ADR 0033; task/roadmap/live/book/KM synchronization; memory/doctrine/task metadata/whitespace/mdBook gates. | PASS. Existing and missing surfaces are exact, no behavior code changed, parenthesis-free condition headers remain deferred, and `.16.1` owns the neutral contract. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.2` | `git diff --check`; stale handoff/frontier `rg` scan; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning only; created `JULIA-BACKEND-PARITY` and no Julia package or implementation code. |
@@ -4433,6 +4591,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.0` | `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases` | ADR 0033, exact five-backend parser audit, narrow exclusions, and implementation/no-drift split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.2` | `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan` | Creates `JULIA-BACKEND-PARITY`; no implementation code. |
@@ -4541,6 +4700,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.0` audits the director-requested punctuation-light zero-argument surface and ratifies ADR
+  `0033`. Rule/lifecycle suffix parsers already accept bare zero-argument suffixes, but standalone ActionIR support
+  differs: Perl/Dart/Julia normalize the five existing control markers, Rust does not, Lua recognizes only the
+  branch markers, no backend treats bare `next` as the call, and Lua alone accepts generic bare receiver segments
+  beyond the final position. The accepted target is six standalone markers plus final generic `.method`, with
+  condition headers and the general call grammar unchanged. `.16.1` is next; Lua `.4.3.6.4` is cleanly queued.
 - `2026-07-12`: `.12.1.10` corrects the public-admission omission left by `.12.1.9`. Rust, Dart, Julia, and Lua
   READMEs contained 14 current positive selector forms because the curated 47-file checker did not include backend
   entry docs. All four now teach bare typed bindings. Immediate component README discovery, exact 56-file and
