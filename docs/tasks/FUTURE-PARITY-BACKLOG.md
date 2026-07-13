@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua named set-key/direct harray mutation `.4.3.5.4` passes 103/103; rename collision
-  drift remains under helper caveats `.5`; non-callback harray closeout `.4.3.5.5` active).
+- Last updated: `2026-07-13` (all 13 ordinary Lua harray names close at 103/103 under `.4.3.5.5`; rename collision
+  drift remains under helper caveats `.5`; codeblock/control/tree-callback parent `.4.3.6` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3674,7 +3674,7 @@ before implementation.
 | 124 | `LUA-BACKEND-PARITY.4.3.4.4` | `done` | Typed accumulators and complete cached child-push flow pass 98/98. |
 | 125 | `LUA-BACKEND-PARITY.4.3.4.5` | `done` | Exact tagged record shapes, copied carried fields, governed splits, and receiver composition pass 99/99. |
 | 126 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
-| 127 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
+| 127 | `LUA-BACKEND-PARITY.4.3.5` | `done` | Complete 13-name ordinary harray family closes at 103/103. |
 | 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
 | 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied harray construction, explicit splicing, and identity pass 100/100. |
 | 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Deterministic copied harray views and membership pass 101/101. |
@@ -3682,7 +3682,8 @@ before implementation.
 | 132 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Revalidated bare base/overlay and pure transform contracts after uniform binding. |
 | 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
 | 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct harray mutation share one seam and pass 103/103. |
-| 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `active` | Close complete non-callback harray behavior and public no-drift. |
+| 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Exact ordinary inventory, public result guard, and callback handoff close at 103/103. |
+| 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Split codeblock values, controls, trailing blocks, and tree callbacks before behavior code. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity, harray order/rename collisions, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

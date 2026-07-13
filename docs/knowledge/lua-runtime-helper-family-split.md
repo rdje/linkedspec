@@ -15,7 +15,7 @@ date: 2026-07-11
 status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.4.3.9 with explicit dependencies and acceptance: core four-kind stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback, capture/mark/input/cursor, diagnostic output, and exhaustive no-drift. String `.4.3.2` and numeric `.4.3.3` are closed; array family `.4.3.4` is active."
-evidence_update_2026_07_12_harray_split: "Array family .4.3.4 is now closed at 99/99. LUA-BACKEND-PARITY.4.3.5.0 splits the active harray family into construction/splicing .1, deterministic views .2, copied transforms/receivers .3, named mutation .4, and no-drift .5. Tree callbacks remain .4.3.6."
+evidence_update_2026_07_13_harray_closeout: "Array family .4.3.4 is closed at 99/99. LUA-BACKEND-PARITY.4.3.5.5 closes all 13 ordinary harray names at 103/103 after construction/splicing .1, deterministic views .2, copied transforms/receivers .3, and named mutation .4. Codeblock/control/tree-callback parent .4.3.6 is active."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 

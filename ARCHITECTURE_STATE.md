@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua's ordinary harray family is closed at 103/103. All 13 names route through typed
+  constructor/generic paths, the copied harray dispatcher, or uniform named/direct mutation; public guards lock
+  updated direct snapshots and pure receiver set-key. `walk_leaves`/`map_leaves`/`reduce_leaves` remain the three
+  block-bearing names under active codeblock/control/tree-callback parent `.4.3.6`. Cross-backend odd arity,
+  flattened order, and rename-collision caveats remain backlog `.5`.
 - `2026-07-13` refresh: Lua dropped-statement `set_key(target, key, value)` and direct harray assignment now share
   kind-checked lookup/store functions. Absent targets create harrays; incompatible targets raise neutral
   `binding_kind_mismatch` fields; saved direct-assignment results remain isolated after nested writes. Assigned/

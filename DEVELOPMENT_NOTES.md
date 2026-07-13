@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.5 — closeout must inventory routes, not just names): The 13 ordinary
+  harray calls do not live in one dispatcher: `hash`, `copy`, and runtime-kind `flat` use constructor/generic
+  paths; ten names use `PURE_HASH_HELPERS`; statement `set_key` and direct assignment add a mutation context.
+  Exact route inventory plus existing mechanism tests closes the family without pretending the three callback
+  names already execute. Public no-drift now guards the subtle statement/value distinction and independent direct
+  snapshots, while odd arity, map-list order, and rename collision remain explicit backlog decisions.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.4 — statement context is the mutation discriminator): A three-argument
   `set_key` call cannot be classified as mutating from its arguments alone because assigned/nested and receiver
   forms are deliberately pure copied transforms. Lua now intercepts only a dropped top-level call with a bare

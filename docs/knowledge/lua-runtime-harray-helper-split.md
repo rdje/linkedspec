@@ -12,7 +12,7 @@ answers:
 date: 2026-07-13
 status: current
 tags: [lua, runtime, harray, hash, helpers, planning, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.5.0 audits and splits 16 hash-family names into 13 ordinary names plus walk_leaves/map_leaves/reduce_leaves. Leaves .1-.4 now implement copied construction/splicing, deterministic views, copied transforms/receiver chains, and named set-key/direct mutation at 103/103 on both Lua ABIs. Non-callback closeout .5 remains active, callbacks .4.3.6, and cross-backend arity/order/rename-collision caveats FUTURE-PARITY-BACKLOG.5."
+evidence: "LUA-BACKEND-PARITY.4.3.5.0 audits and splits 16 hash-family names into 13 ordinary names plus walk_leaves/map_leaves/reduce_leaves. Leaves .1-.5 now implement and close copied construction/splicing, deterministic views, copied transforms/receiver chains, named set-key/direct mutation, and public no-drift at 103/103 on both Lua ABIs. Callbacks .4.3.6 are active, and cross-backend arity/order/rename-collision caveats remain FUTURE-PARITY-BACKLOG.5."
 reverify: "bash tools/run_lua_local.sh && rg -n 'local HASH_HELPERS|name == \"hash\"|name == \"harray\"|flat_hash|count_keys|merge_hash|set_key' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua"
 ---
 
@@ -31,7 +31,7 @@ The 16 admitted hash-family names divide into 13 ordinary helpers plus the three
 - `.4.3.5.3` (done): copied `merge_hash`, value `set_key`, `rename_key`, `drop_keys`, `pick_keys`, and receiver
   chains.
 - `.4.3.5.4` (done): named statement `set_key` plus direct harray assignment through uniform binding.
-- `.4.3.5.5` (active): complete non-callback public/runtime no-drift closeout.
+- `.4.3.5.5` (done): complete non-callback public/runtime no-drift closeout.
 
 Hash-tree callbacks remain `.4.3.6`. Direct odd-arity `hash(...)` differs from the Perl reference and is already
 owned by `FUTURE-PARITY-BACKLOG.5`; no construction child may silently normalize it.
@@ -39,5 +39,6 @@ owned by `FUTURE-PARITY-BACKLOG.5`; no construction child may silently normalize
 Related facts: [[lua-runtime-core-value-capture-helpers]], [[lua-uniform-binding-runtime]],
 [[lua-runtime-harray-construction]], [[lua-runtime-harray-views]], [[lua-runtime-harray-transforms]],
 [[lua-runtime-named-harray-mutation]],
+[[lua-runtime-harray-helper-closeout]],
 [[dart-runtime-hash-helpers]], [[julia-runtime-hash-helpers]],
 [[hash-helper-odd-arity-current-behavior]], [[lua-runtime-array-helper-closeout]].

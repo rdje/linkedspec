@@ -45,8 +45,8 @@ absent targets become harrays, incompatible existing values report neutral field
 an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 103/103
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
-harray construction/views/transforms/mutation `.4.3.5.1-.4` are done and no-drift closeout `.4.3.5.5` is active.
-`walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by `.4.3.6`. Zero/variadic
+all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
+`walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by active parent `.4.3.6`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reject public array-end result prose superseded by uniform binding v1."""
+"""Reject public mutation-result prose superseded by uniform binding v1."""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ REQUIRED_ANCHORS = {
     "capability_conformance/uniform_binding_contract.json": [
         '"mutation_result": "mutable operations evaluate to the updated typed target value',
     ],
-    "README.md": ["updated-value end mutations"],
+    "README.md": ["updated-value end mutations", "all 13 ordinary harray names are closed under `.4.3.5`"],
     "dart/README.md": ["updated-value array end mutations"],
     "julia/README.md": ["updated-value named/scalar-held end mutations"],
     "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": [
@@ -43,10 +43,14 @@ REQUIRED_ANCHORS = {
         "Array end mutations yield updated arrays too",
         "named array end mutations. They mutate a bare array binding",
         "the implicit form has no portable expression result yet",
+        "yields an independent updated hash snapshot in value positions",
+        "Receiver-dot `name.set_key(key, value)` remains pure",
     ],
     "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": [
         "return independent updated arrays",
         "Their append behavior is portable, but their expression results are not yet",
+        "form yields the updated hash snapshot in value positions",
+        "Receiver-dot `meta.set_key(key, value)` is a pure derived value unless assigned back",
     ],
     "docs/knowledge/perl-uniform-binding-runtime.md": [
         "array end/transform methods all update that binding and yield its post-operation typed value",
@@ -61,7 +65,11 @@ REQUIRED_ANCHORS = {
         "an array-end update can continue into methods such as `.count()`",
     ],
     "docs/knowledge/lua-uniform-binding-runtime.md": [
-        "array-end methods, and standalone collection transforms validate the current runtime kind",
+        "statement set-key mutation, array-end methods, and standalone collection transforms",
+    ],
+    "docs/knowledge/lua-runtime-named-harray-mutation.md": [
+        "Direct `target[key] = value` harray assignment uses that same binding seam",
+        "Statement context is the semantic boundary",
     ],
     "docs/knowledge/uniform-binding-array-end-result-supersession.md": [
         "The current contract is not statement-only",
@@ -88,6 +96,14 @@ FORBIDDEN = [
     ),
     re.compile(
         r"\b(?:value-slot|value-position)\b.{0,160}\b(?:array[- ]end|end mutation|push_back|push_front|pop_back|pop_front)\b.{0,100}\b(?:no-op|null|undef|nothing|do not mutate)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bhash-index assignment\b.{0,140}\b(?:returns?|evaluates? to)\s+(?:void|undef|null|nothing)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\breceiver(?:-dot)?\b.{0,80}\b[A-Za-z_]\w*\.set_key\b.{0,100}\bmutates?\s+(?:the\s+)?(?:source|named|working)\b",
         re.IGNORECASE,
     ),
 ]

@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.5 — close Lua harray helper parity
+
+Closed all 13 ordinary harray names at the 103/103 dual-ABI boundary after inventorying constructor/generic,
+copied-dispatch, receiver, and uniform-mutation routes. Kept the three block-bearing tree helpers under `.4.3.6`
+and all cross-backend arity/order/rename caveats under backlog `.5`. Expanded the recurring public mutation-result
+guard to require independent hash-index snapshots and pure receiver set-key; task, book, Knowledge Map, and live
+surfaces now close parent `.4.3.5` together.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.4 — add Lua named harray mutation
 
 Added a statement-context `set_key(target, key, value)` mutation path and shared it with direct harray assignment

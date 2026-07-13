@@ -57,11 +57,12 @@ This `README.md` is the **single entry point** to the project.
   receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
   and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
-  numeric terminals are closed under `.4.3.4`; harray helpers `.4.3.5` are active, while the three array-tree
-  callback names remain explicitly owned by `.4.3.6`. Copied harray construction, runtime-kind `flat`, direct/
+  numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, while the
+  three tree-callback names remain explicitly owned by active parent `.4.3.6`. Copied harray construction,
+  runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
-  103/103 through named `set_key`/direct mutation `.4.3.5.4`; non-callback harray closeout `.4.3.5.5` is active.
+  103/103 through the `.4.3.5.5` public/no-drift closeout.
   Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator, and rename-to-existing-key policy also differs; portable authoring
   avoids those value/collision boundaries until backlog `.5` normalizes them.

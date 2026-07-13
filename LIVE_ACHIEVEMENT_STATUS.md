@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.5 — close Lua harray helper parity**
+  (DONE — all 13 ordinary names close at 103/103; `.4.3.6` active).
+
+  **Inventory:** Constructor/generic, ten copied-dispatch, receiver, and uniform-mutation routes cover the full
+  ordinary family; three block-bearing tree helpers remain explicitly delegated.
+
+  **Proof and guard:** Existing focused mechanisms pass both Lua ABIs. The recurring public checker now requires
+  independent hash-index snapshots and pure receiver set-key; explicit helper caveats remain backlog `.5`.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.4 — add Lua named harray mutation**
   (DONE — 103/103 on both ABIs; non-callback harray closeout `.4.3.5.5` active).
 

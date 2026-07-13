@@ -675,9 +675,10 @@ All 34 non-callback array names and six numeric terminals are closed under `.4.3
 nested maps intact, and splices only explicit flat ASTs; explicit harray-to-array list context uses deterministic
 sorted key/value pairs. Lexical keys, copied values ordered by key, count, and null-aware membership compose through
 function/receiver/array-chain forms and return `0`/`[]` for missing or wrong-kind sources. Both Lua ABIs pass
-103/103 through `.4.3.5.4`: bare merge operands, later override, copied set/rename/drop/pick values, deep source
-isolation, harray/array-view receiver chains, and named `set_key`/direct harray mutation are implemented.
-Non-callback harray closeout `.4.3.5.5` is active and tree callbacks remain `.4.3.6`.
+All 13 ordinary harray names close at 103/103 through `.4.3.5.5`: bare merge operands, later override, copied
+set/rename/drop/pick values, deep source isolation, harray/array-view receiver chains, and named `set_key`/direct
+harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
+active and must split before behavior code.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results and rename-to-existing-key policy differ;
