@@ -20,15 +20,15 @@ This document is the current high-level technical reading of the project shape. 
   non-selector constructors remain in v1. Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and
   Lua `.12.1.6` execute the replacement contract. Migration `.12.1.7.1-.3` removed all 600 file-backed exact
   selectors and all 1,356 positive embedded-source occurrences. Perl `.12.1.8.1` rejects exact selectors at the
-  canonical ActionIR boundary before lowering; Rust `.12.1.8.2` and Dart `.12.1.8.3.1` validate complete compiled
-  ActionIR before native or generated execution. Dart full-gate bridge repair `.12.1.8.3.2` is active before Julia.
+  canonical ActionIR boundary before lowering; Rust `.12.1.8.2` and Dart `.12.1.8.3` validate complete compiled
+  ActionIR before native or generated execution. Julia `.12.1.8.4` is next.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
   `FUTURE-PARITY-BACKLOG.12.1`. Boundary-correct exact scans find 600 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
   tracked specs, including 210 in 15 shipped specs. The one-binding public model does not require identical host
   storage layouts, but bare read/mutation semantics must be complete before sources migrate and selector-specific
   recognition is hard-deleted. Neutral contract `.12.1.1`, all five backend consumers `.12.1.2-.6`, and all source
   migration `.12.1.7.1-.3` are complete. Perl hard retirement `.12.1.8.1`, Rust `.12.1.8.2`, and Dart
-  implementation `.12.1.8.3.1` are complete; Dart bridge/full-gate `.12.1.8.3.2` is active.
+  `.12.1.8.3` are complete; Julia `.12.1.8.4` is active.
   The public-language decision is settled.
 - `2026-07-12` refresh: Perl callable metadata now declares an exact final `name: codeblock` parameter for typed
   user functions and registered helper/receiver contracts. Generic receiver attached syntax parses without a
@@ -176,8 +176,7 @@ This document is the current high-level technical reading of the project shape. 
   `.11.3.2` are complete. Audit `.11.3.3.0` found the missing declaration, and ADR 0032 now adopts final-only
   `name: codeblock`: it carries no nested argument list because explicit values own `{|params| ...}` signatures.
   Perl normalization `.11.3.3.2` and diagnostics/docs/no-drift closeout `.11.3.4` are complete. Active `.12.1`
-  has removed spec-facing aggregate selectors from Perl, Rust, and Dart; Dart full-gate closure plus Julia and Lua
-  hard rejection remain.
+  has removed spec-facing aggregate selectors from Perl, Rust, and Dart; Julia and Lua hard rejection remain.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

@@ -128,6 +128,32 @@ void main() {
       0,
     )!;
     expect(fn.captures, ['norm', 'value', '{ return(trim(value)) }']);
+
+    final zero = function.consumeMatch(r'''fn zero() { return("zero") }''', 0)!;
+    expect(zero.captures, ['zero', '', r'''{ return("zero") }''']);
+    expect(zero.namedCapture('blkFN'), r'''{ return("zero") }''');
+
+    final variadicFunction = RuntimeRegexAlternation.compile([
+      r'''fn[ \t]+([A-Za-z_]\w*)\s*\((?:([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*,\s*)?\.\.\.([A-Za-z_]\w*)\)\s*(?<blkVFN>\{(?:[^{}"']+|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkVFN))*\})''',
+    ]);
+    final variadic = variadicFunction.consumeMatch(
+      r'''fn collect(prefix, ...items) { return(items) }''',
+      0,
+    )!;
+    expect(variadic.captures, [
+      'collect',
+      'prefix',
+      'items',
+      '{ return(items) }',
+    ]);
+    expect(variadic.namedCapture('blkVFN'), '{ return(items) }');
+
+    final restOnly = variadicFunction.consumeMatch(
+      r'''fn gather(...items) { return(items) }''',
+      0,
+    )!;
+    expect(restOnly.captures, ['gather', '', 'items', '{ return(items) }']);
+    expect(restOnly.namedCapture('blkVFN'), '{ return(items) }');
   });
 
   test('keeps local and entry match registers separate', () {

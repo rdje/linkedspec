@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.3.2 — a bounded regex bridge must preserve capture shape, not only
+  recognize the new pattern): Adding `blkVFN` to the detector is insufficient. The variadic function regex has a
+  different prefix and four consumed captures—name, optional fixed parameters, rest parameter, and body—versus
+  three for fixed `blkFN`. Because runtime capture lists omit null groups, materialize an empty optional-parameter
+  placeholder so later rest/body indices remain stable. Select the prefix and capture list from the named-block
+  family, preserve the matching
+  named capture, and lock both paths together. The resulting adapter restores all four `spec_spec_*` cases and the
+  complete 205-test/61x2/105 Dart gate without pretending Dart RegExp gained general recursion.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.3.1 — validate deferred Dart ActionIR without changing unrelated
   parse timing): Dart rule payloads are typed during compilation, but unused user-function bodies and edge fluent
   arguments remain source strings until runtime. Whole-compiled-state retirement must parse those valid deferred

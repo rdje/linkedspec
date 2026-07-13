@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.3.2 — close Dart selector retirement
+
+Closed the independent full-gate regression exposed by selector signoff. Dart's bounded shipped-PCRE bridge now
+recognizes both fixed `blkFN` and the exact variadic `blkVFN` function-definition pattern. Separate prefix matchers
+preserve fixed behavior while the variadic path returns function name, optional fixed parameters, rest parameter,
+body, and the `blkVFN` named capture. Absent optional fixed parameters produce an empty placeholder so positional
+`entry_group(n)` indices do not shift for `fn zero()` or `fn gather(...items)`. This remains a bounded
+shipped-pattern adapter, not a general recursive-PCRE
+implementation claim.
+
+Focused runtime-matching plus selector proof passes 22/22, and the four real `spec_spec_*` corpus cases move from
+0/4 to 4/4. The authoritative Dart gate passes format, strict analysis, all 205 package tests, CLI 61/61 in default
+and POSIX environments, and all 105 corpus fixtures. Dart selector parent `.12.1.8.3` is closed; Julia hard
+rejection `.12.1.8.4` is next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.3.1 — hard-reject Dart aggregate selectors
 
 Dart now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls across its complete compiled ActionIR

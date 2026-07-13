@@ -459,8 +459,9 @@ action edges carry resolved regex-dispatch metadata, edge-only child regexes are
 folded into the parent alternation, and explicit aggregate resets are scoped to
 the current rule invocation. The structural regex leaf is now closed too:
 bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
-`(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
-action-edge `push(child, index)` preserves indexed child payloads. The Dart-specific
+`(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms. Fixed `blkFN` and variadic `blkVFN`
+function-definition capture shapes are both preserved; this is a bounded shipped-pattern bridge, not a claim of
+general recursive-PCRE support. Action-edge `push(child, index)` preserves indexed child payloads. The Dart-specific
 corpus CLI implementation is done, and `DART-BACKEND-PARITY.7.5` closed the scoped
 interpreter-first milestone. A later strict-interface audit has shown that this
 corpus-oriented command is not yet equivalent to the Perl parser CLI; it is not the

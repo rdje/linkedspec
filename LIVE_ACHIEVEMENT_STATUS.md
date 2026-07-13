@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.3.2 — close Dart selector retirement**
+  (DONE — Dart parent complete; Julia `.12.1.8.4` is next).
+
+  **Outcome:** Dart's bounded shipped-PCRE bridge now supports both fixed `blkFN` and exact variadic `blkVFN`
+  function definitions with the correct name/fixed/rest/body and named-block captures. All four `spec_spec_*`
+  smokes recover without adding a general recursive-regex claim.
+
+  **Proof:** Focused matching+selector tests pass 22/22; format and strict analysis are clean. The authoritative
+  Dart gate passes all 205 package tests, CLI 61x2, and 105/105 corpus. Combined with committed selector rejection
+  `abddf1aa`, Dart `.12.1.8.3` is fully closed.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.3.1 — hard-reject Dart aggregate selectors**
   (DONE — selector implementation complete; bounded bridge/full-gate `.12.1.8.3.2` is next).
 

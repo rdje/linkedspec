@@ -6,13 +6,15 @@ answers:
   - "how does Dart handle Lispish (?R)"
   - "how does Dart handle EBNF \\K and DEFINE regexes"
   - "how does Dart handle spec.spec recursive block regexes"
+  - "how does Dart handle spec.spec variadic function definition regexes"
+  - "what are blkFN and blkVFN in the Dart regex bridge"
   - "what does push(child,index) mean in Dart action-edge blocks"
   - "which leaf closed lispish ebnf and spec.spec parser-smoke fixtures"
   - "why did ebnf_logging_annotation lose its args on Dart"
 date: 2026-07-09
 status: current
 tags: [dart, regex, parser-smoke, action-edge, ebnf, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and (?(DEFINE)...), and spec.spec recursive action/blind/lifecycle/function block forms. The same leaf updates dart/lib/src/runtime/interpreter.dart so action-edge push(child, numeric-index) executes the child, reads the indexed item from its return value, and appends that payload to the current rule accumulator. Focused matching/interpreter tests and corpus_manifest_test lock the behavior; the 31-fixture parser-smoke command reports 31 passed, 0 failed."
+evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and (?(DEFINE)...), and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. Absent optional fixed parameters materialize an empty capture placeholder so zero-parameter and rest-only definitions retain positional entry_group indices. Focused matching+selector tests pass 22, all four spec_spec smokes pass, and the authoritative Dart gate passes 205 tests, CLI 61x2, and 105 corpus."
 reverify: "cd dart && dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
@@ -25,7 +27,8 @@ the current specs and routes them through bounded scanners:
 - EBNF return scalar/array/object patterns that use `\K`, `(?&name)`, and
   `(?(DEFINE)...)`.
 - spec.spec recursive action, blind-call, lifecycle, fluent, and
-  `function_definition` block patterns.
+  `function_definition` block patterns. Fixed `blkFN` and variadic `blkVFN`
+  use separate prefixes and preserve their respective capture shapes.
 
 The matchers preserve the surfaces the existing runtime consumes: group 0,
 captures, named captures, match start/end, and seek/consume behavior.

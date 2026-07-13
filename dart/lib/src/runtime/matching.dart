@@ -309,7 +309,8 @@ enum _StructuralRegexKind {
     if (pattern.startsWith(r'(\w++)(?<chLF>')) {
       return _StructuralRegexKind.specLifecycleFluent;
     }
-    if (pattern.startsWith(r'fn[ \t]+') && pattern.contains('(?<blkFN>')) {
+    if (pattern.startsWith(r'fn[ \t]+') &&
+        (pattern.contains('(?<blkFN>') || pattern.contains('(?<blkVFN>'))) {
       return _StructuralRegexKind.specFunctionDefinition;
     }
     return null;
@@ -593,7 +594,10 @@ final class _StructuralRegExp implements RegExp {
   }
 
   _StructuralRegExpMatch? _matchSpecFunction(String input, int start) {
-    final prefix = _specFunctionPrefix.matchAsPrefix(input, start);
+    final variadic = pattern.contains('(?<blkVFN>');
+    final prefix =
+        (variadic ? _specVariadicFunctionPrefix : _specFunctionPrefix)
+            .matchAsPrefix(input, start);
     if (prefix == null) {
       return null;
     }
@@ -603,17 +607,26 @@ final class _StructuralRegExp implements RegExp {
       return null;
     }
     final block = input.substring(blockStart, blockEnd);
+    final groups = variadic
+        ? [
+            input.substring(start, blockEnd),
+            prefix.group(1),
+            prefix.group(2) ?? '',
+            prefix.group(3),
+            block,
+          ]
+        : [
+            input.substring(start, blockEnd),
+            prefix.group(1),
+            prefix.group(2) ?? '',
+            block,
+          ];
     return _match(
       input,
       start,
       blockEnd,
-      [
-        input.substring(start, blockEnd),
-        prefix.group(1),
-        prefix.group(2),
-        block,
-      ],
-      named: {'blkFN': block},
+      groups,
+      named: {variadic ? 'blkVFN' : 'blkFN': block},
     );
   }
 
@@ -1332,6 +1345,9 @@ final _specLifecycleBlockPrefix = RegExp(r'(\w+)[ \t]*');
 final _specLifecycleFluentPrefix = RegExp(r'(\w+)');
 final _specFunctionPrefix = RegExp(
   r'fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*',
+);
+final _specVariadicFunctionPrefix = RegExp(
+  r'fn[ \t]+([A-Za-z_]\w*)\s*\((?:([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*,\s*)?\.\.\.([A-Za-z_]\w*)\)\s*',
 );
 
 const _lineFeed = 0x0a;

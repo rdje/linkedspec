@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Dart selector rejection `.12.1.8.3.1` complete; variadic bridge/full-gate `.12.1.8.3.2` active).
+- Last updated: `2026-07-12` (Dart selector retirement `.12.1.8.3` complete; Julia `.12.1.8.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2892,7 +2892,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.3`
-  Status: `active`
+  Status: `done`
   Goal: Reject exact selector-shaped calls on Dart and close the complete Dart no-drift gate.
   Children: `.12.1.8.3.1`, `.12.1.8.3.2`
 
@@ -2907,15 +2907,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.8.3.1 - hard-reject Dart aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Restore Dart `spec.spec` variadic function-definition structural matching and close the complete gate.
   Acceptance: Extend the existing bounded shipped-pattern bridge from fixed `blkFN` to the exact variadic
     `blkVFN` family, preserving capture/named-capture shape; add focused matching proof; pass all four
     `spec_spec_*` smokes, the full Dart test/CLI/105-corpus gate, and selector retirement no-drift without adding a
     general recursive-regex claim.
+  Verification: **PASS 2026-07-12.** The real four-case runner reproduced `blkVFN` as the sole invalid group.
+    The bounded bridge now recognizes fixed `blkFN` and exact variadic `blkVFN`, uses separate fixed/variadic
+    prefixes, returns name/fixed/rest/body captures, materializes empty optional-parameter slots so indices do not
+    shift for zero/rest-only definitions, and exposes the matching named block. Focused matching plus
+    selector tests pass 22; all four `spec_spec_*` cases pass. The authoritative Dart gate passes format, strict
+    analysis, all 205 package tests, CLI 61x2, and all 105 corpus cases. Neutral/source checks remain green.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.8.3.2 - close Dart selector retirement`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.4`
-  Status: `pending`
+  Status: `active`
   Goal: Reject exact selector-shaped calls on Julia and delete selector-specific recognition/dispatch.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.5`
@@ -3086,6 +3093,21 @@ before implementation.
   are the independently root-caused variadic `spec.spec` bridge drift owned by `.12.1.8.3.2`, not selector code.
 - [x] **LOCKSTEP** — Task/index, live docs, Knowledge Map, changes/notes, and memory identify selector implementation
   complete, full Dart no-drift pending `.12.1.8.3.2`, and Julia `.12.1.8.4` only after the parent closes.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Reproduce all four `spec_spec_*` failures through the real Dart corpus runner and
+  capture the exact invalid recursive group after the shipped function-definition pattern became variadic.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve the bounded structural-regex bridge fact and prove its detector,
+  prefix matcher, capture list, and named-capture map know fixed `blkFN` only while `spec.spec` now emits `blkVFN`.
+- [x] **FIX** — Extend only the exact shipped variadic family with fixed/rest captures and `blkVFN` named block;
+  preserve the existing fixed family and avoid claiming general recursive-PCRE support.
+- [x] **ADDRESSED (verified)** — Focused runtime matching locks fixed and variadic definitions, and all four
+  `spec_spec_*` corpus cases execute with unchanged expected outputs.
+- [x] **NO REGRESSION** — Format/analyze, complete Dart tests, CLI 61x2, all 105 corpus cases, selector focused/
+  neutral/source gates, docs/KM/doctrines/mdBook/whitespace, and cleanup pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  close Dart `.12.1.8.3` and identify Julia `.12.1.8.4` as next.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3414,14 +3436,15 @@ before implementation.
 | 100 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Audit and implement later-stage AST-field enrichment. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Close examples, implementation gaps, tooling, and no-drift. |
 | 102 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `done` | Rust rejects exact selectors across compiled/generated boundaries and has no selector runtime dispatch. |
-| 103 | `FUTURE-PARITY-BACKLOG.12.1.8.3` | `active` | Dart rejection is implemented; bounded variadic bridge/full-gate closure is active. |
+| 103 | `FUTURE-PARITY-BACKLOG.12.1.8.3` | `done` | Dart exact-selector rejection and complete bounded-bridge no-drift are closed. |
 | 104 | `FUTURE-PARITY-BACKLOG.7.0` | `pending` | Recalibrate the oracle generator's default hard timeout from measured shipped-spec build costs. |
 | 105 | `FUTURE-PARITY-BACKLOG.15` | `pending` | Normalize any standalone/dangling rule-level block to the existing `I` lifecycle. |
 | 106 | `FUTURE-PARITY-BACKLOG.15.0` | `pending` | Confirm the currently unused dangling-brace slot and ratify anywhere-in-rule normalization. |
 | 107 | `FUTURE-PARITY-BACKLOG.15.1` | `pending` | Implement the shorthand on Perl and Rust after design ratification. |
 | 108 | `FUTURE-PARITY-BACKLOG.15.2` | `pending` | Align remaining backends, generated paths, docs, and no-drift proof. |
 | 109 | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | `done` | Exact selectors fail across Dart compiled/generated boundaries; runtime dispatch is deleted. |
-| 110 | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | `active` | Extend the bounded Dart structural bridge to variadic `blkVFN` and close full no-drift. |
+| 110 | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | `done` | Exact variadic `blkVFN` capture parity restores the 205-test/61x2/105 Dart gate. |
+| 111 | `FUTURE-PARITY-BACKLOG.12.1.8.4` | `active` | Hard-reject exact selectors on Julia and delete their recognition/dispatch. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4119,6 +4142,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.1` | Exact six-case compile/generated/direct rejection; unused-function and dead-code coverage; eight retained constructors/literals; focused Perl 41 tests; whitespace-aware executable scan 0/19; regenerated 105 fixtures; Rust corpus replay 3/3; standalone Phase 0 `1..1031`/934s; docs/KM/governance/mdBook/whitespace. | PASS. Perl rejects exact aggregate selectors at the canonical ActionIR boundary with portable fields before lowering, while constructor/literal behavior remains; Rust `.12.1.8.2` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.2` | Exact six-case typed-AST/whole-compiled-state rejection; dead/nested/unused-function/deferred-fluent coverage; native/generated/decoded-plan boundaries; eight retained classes; focused 15/15; executable scan 0/13; complete Rust core/runtime/CLI, 105 interpreted corpus, post-rename 105 generated classifier/329.32s, integration 197/197; canonical local CI including Phase 0 `1..1031`; docs/KM/governance/mdBook/whitespace. | PASS. Rust selector dispatch is deleted and every compiled/generated entry rejects the neutral diagnostic shape; Dart `.12.1.8.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | Six neutral exact cases; recursive typed ActionIR/whole-compiled-state validation; dead/unused-function/deferred-fluent coverage; generated emission/plan boundaries; eight retained classes; focused 15/15; strict analysis; executable scan 0/14; complete package leg 203 pass/two aggregate failures. | PASS for selector implementation. All selector paths pass and dispatch is deleted. The only full-gate failures are four `spec_spec_*` smokes root-caused to fixed `blkFN` versus shipped variadic `blkVFN`; `.12.1.8.3.2` activates before parent closeout. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | Real four-case FAIL reproduction; Knowledge Map bounded-bridge retrieval; exact fixed/variadic detector and prefix/capture/named-block proof; focused matching+selector 22; four `spec_spec_*` PASS; complete format/analyze/205 tests/61x2 CLI/105 corpus. | PASS. `blkVFN` is supported without general recursive-PCRE claims; Dart `.12.1.8.3` closes and Julia `.12.1.8.4` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
@@ -4167,6 +4191,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors` | Compile-time portable rejection, retained constructors/literals, and full Perl/corpus proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors` | Whole-compiled-state native/generated rejection, selector-dispatch deletion, retained constructors/literals, and full Rust/corpus proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | `FUTURE-PARITY-BACKLOG.12.1.8.3.1 - hard-reject Dart aggregate selectors` | Whole-compiled-state/generated rejection, runtime-dispatch deletion, retained values, and explicit full-gate bridge handoff. |
+| `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | `FUTURE-PARITY-BACKLOG.12.1.8.3.2 - close Dart selector retirement` | Exact variadic `blkVFN` bridge parity, complete Dart gate, parent closeout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -4232,6 +4257,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.8.3.2` closes Dart selector retirement by repairing the independently exposed bounded
+  `spec.spec` bridge. The matcher retains fixed `blkFN` and adds exact variadic `blkVFN` detection, prefix parsing,
+  name/fixed/rest/body captures, and named-block identity. Focused matching+selector proof passes 22, all four
+  `spec_spec_*` smokes pass, and the authoritative Dart gate passes format, strict analysis, 205 tests, CLI 61x2,
+  and 105/105 corpus. Parent `.12.1.8.3` closes; Julia `.12.1.8.4` activates.
 - `2026-07-12`: `.12.1.8.3.1` hard-retires exact aggregate selectors on Dart. Typed recursive detection covers
   every rule payload, unused function body, and deferred edge fluent; generated emission/plan validation repeats
   the boundary. Runtime selector dispatch is deleted while eight retained classes pass. Focused proof is 15/15,
