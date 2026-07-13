@@ -12,23 +12,21 @@ answers:
   - does Dart runtime support entry_named and match_named
   - does Dart runtime support entry_map and match_map
   - does Dart runtime support capture position helpers
-date: 2026-07-09
+date: 2026-07-13
 status: current
 tags: [dart, runtime, helpers, values, captures, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values. DART-BACKEND-PARITY.4.3.6 closes helper/value no-drift by aligning Dart nested value-path assignment with the Perl/Rust contract: successful writes return the updated root, missing/wrong intermediate paths return null without mutation, segment index expressions evaluate before the RHS value expression, final array writes may replace or append exactly at len, and no missing intermediate container is autovivified."
+evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values. DART-BACKEND-PARITY.4.3.6 closes helper/value no-drift by aligning Dart nested value-path assignment with the Perl/Rust contract. FUTURE-PARITY-BACKLOG.12.1 later replaced the public typed-wrapper snapshot model with uniform bare bindings and hard-rejected exact aggregate selectors."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime core value and capture helper execution lives in
 `dart/lib/src/runtime/interpreter.dart`.
 
-`LinkedSpecRuntimeEngine` now maintains scalar, array, and hash working stores.
-The evaluator preserves scalar, array, hash, `null`, boolean, and number shapes
-through scalar assignment, array append, hash-index mutation, shape literals, and
-typed wrapper snapshots. `set(hash(name), value)` writes hash storage, while
-`hash(name)` and `copy(hash(name))` snapshot it. `array(name)` / `hash(name)` can
-also snapshot variable-held list/map values, and `copy(name)` snapshots aggregate
-stores when the bare name is a type-implying read.
+`LinkedSpecRuntimeEngine` may retain private scalar/array/hash stores, but a
+`.spec` name exposes one current typed value. The evaluator preserves scalar,
+array, harray, `null`, boolean, and number shapes through bare assignment,
+array append, hash-index mutation, shape literals, bare reads, and `copy(name)`.
+Exact `array(name)` and `hash(name)` selectors are rejected before execution.
 
 Indexed and nested reads support array indexes plus string-key map access, so
 forms such as `meta["key"]` and `payload["children"][1]["name"]` evaluate inside

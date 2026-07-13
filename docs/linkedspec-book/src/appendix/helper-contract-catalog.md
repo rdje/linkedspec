@@ -891,6 +891,9 @@ dispatch rule.
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
 - **Returns**: hash
 - **Behavior**: Merges `h2` into `h1`. Keys in `h2` override keys in `h1`. Neither input is mutated — returns a new hash.
+- **Bare bindings**: Both positions accept bare typed harray bindings, so `merge_hash(base, overlay)` is canonical.
+  `merge_hash(copy(base), overlay)` is equivalent when an explicit source snapshot makes the intent clearer; no
+  aggregate-selector wrapper is required or accepted.
 
 ### `set_key(h, key, value)`
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
@@ -1707,8 +1710,9 @@ count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))
 ```
 Any portable pure helper that accepts an array can receive the output of an array-returning helper. Any
 portable pure helper that accepts a scalar can receive the output of a scalar-returning helper. Hash-consuming
-later helper argument slots accept bare hash working variables as snapshots, so `merge_hash(copy(base), overlay)`
-is equivalent to the explicit `overlay` form for the overlay argument. Array-consuming helper argument slots likewise accept bare
+helper argument slots accept bare harray working variables as snapshots, including both arguments of
+`merge_hash(base, overlay)`. `copy(base)` is optional explicit-copy composition; removed single-name aggregate-
+selector syntax is not a required type marker. Array-consuming helper argument slots likewise accept bare
 array working variables as snapshots, so `count(drop_front(sorted(items)))` is portable. Array receiver-dot
 value chains are the same composition written from the receiver side, so
 `items.sorted().drop_front(2).first()` and `items.filter_match(/^a$/).count()` are portable. Hash receiver-dot

@@ -6,7 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (deterministic harray views `.4.3.5.2` done at 101/101; copied transforms `.4.3.5.3` active)
+- Last updated: `2026-07-13` (bare merge/transform contract `.4.3.5.3.0` revalidated after uniform binding;
+  Lua transform implementation `.4.3.5.3.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1253,10 +1254,38 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.5.3`
   Status: `active`
   Goal: Implement copied harray transforms and receiver chains.
+  Children: `.4.3.5.3.0`, `.4.3.5.3.1`
   Dependencies: `.4.3.5.1`, `.4.3.5.2`
   Acceptance: `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` copy inputs, preserve
     deterministic override/order semantics and nested values, accept governed bare typed operands, and continue
     through compatible harray or array-view receiver chains.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.3.0`
+  Status: `done`
+  Goal: Revalidate the harray-transform contract after uniform binding and aggregate-selector retirement.
+  Dependencies: `.4.3.5.2`, `FUTURE-PARITY-BACKLOG.12.1`
+  Acceptance: Toolbox and neutral-corpus probes establish current Perl/Rust/Dart/Julia behavior for bare-first
+    `merge_hash(base, overlay)`, `copy(base)`, removed selector spelling, override/collision rules, pure transform
+    boundaries, and compatible receiver chains; stale current-facing Knowledge Map/mdBook/runtime fact claims are
+    corrected and the Lua implementation leaf receives one exact contract.
+  Verification: **PASS 2026-07-13.** Current Perl returns `2` for both bare-first
+    `merge_hash(base, overlay)` and `merge_hash(copy(base), overlay)`, and lowers the bare form to
+    `{%base, %overlay}`; exact `hash(base)` now rejects as a removed selector. The checked-in neutral corpus already
+    carries bare-first merge with expected `2`; its selected case passes Dart and Julia, and Rust passes the full
+    105-case oracle including both merge fixtures. Current backend tests also lock later-argument override, copied
+    pure value/receiver transforms, collision replacement, source isolation, and harray-to-array receiver bridges.
+    Corrected the obsolete July 4 merge card, composability/receiver/core runtime facts, and mdBook contract; the
+    executable Lua leaf now owns the current bare typed binding contract.
+  Commit: `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5.3.1`
+  Status: `active`
+  Goal: Implement the revalidated copied harray transforms and receiver chains in Lua.
+  Dependencies: `.4.3.5.3.0`
+  Acceptance: Implement and focus-test the parent transform contract on PUC Lua and LuaJIT without crossing the
+    named-mutation boundary owned by `.4.3.5.4`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1531,7 +1560,26 @@ copied harray transforms/receiver chains `.4.3.5.3` are active.
 | 52 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split construction, views, transforms, mutation, and no-drift before behavior code. |
 | 53 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied construction, explicit flat splicing, nested identity, and isolation pass 100/100. |
 | 54 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Lexical keys, key-ordered copied values, count, membership, and receiver bridges pass 101/101. |
-| 55 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Implement copied harray transforms and compatible receiver chains. |
+| 55 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Container for revalidated copied harray transforms and receiver chains. |
+| 56 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Bare base/overlay and pure transform contracts revalidated after uniform binding. |
+| 57 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `active` | Implement the revalidated transform and receiver contract on Lua. |
+
+### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The current Knowledge Map claimed bare-first `merge_hash(base, overlay)` returned an
+  empty result and recommended `copy(hash(base))`; today the exact probe returns `2`, while `hash(base)` rejects.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The July 4 fact predated July 12 uniform binding and aggregate-selector
+  retirement. Perl now lowers bare merge to `{%base, %overlay}`; the neutral corpus and later backend tests already
+  consume bare typed base and overlay values.
+- [x] **FIX** — Split this contract leaf before Lua behavior code; replace current merge/composition/receiver/core
+  facts and mdBook guidance with bare typed operands, optional `copy(base)`, later-argument override, and removed-
+  selector rejection.
+- [x] **ADDRESSED (verified)** — Perl toolbox probes, Dart/Julia selected neutral-corpus runs, Rust's 105-case oracle,
+  and current focused backend test sources agree on pure transforms, receiver composition, and source isolation.
+- [x] **NO REGRESSION** — No runtime code changed; public selector/mutation/capability checks, Knowledge Map,
+  mdBook, memory/doctrine, task metadata, and whitespace gates pass.
+- [x] **LOCKSTEP** — Task/index/roadmaps, README/book, Knowledge Map facts, architecture/live docs, changes/notes,
+  and memory agree that Lua implementation `.4.3.5.3.1` is the sole next leaf.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -2138,3 +2186,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.5.0` | `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms` | Read-only 16-name audit and six executable construction/view/transform/mutation/closeout owners. |
 | `LUA-BACKEND-PARITY.4.3.5.1` | `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing` | Runtime-kind flat, copied flat_hash, explicit hash/list splices, nested preservation, and isolation. |
 | `LUA-BACKEND-PARITY.4.3.5.2` | `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views` | Lexical keys, values-by-key, count/membership terminals, copied isolation, and receiver bridges. |
+| `LUA-BACKEND-PARITY.4.3.5.3.0` | `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts` | Corrects pre-uniform-binding bare-merge guidance and locks the current cross-backend transform contract. |

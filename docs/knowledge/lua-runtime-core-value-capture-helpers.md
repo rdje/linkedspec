@@ -11,10 +11,10 @@ answers:
   - does Lua current-edge retv dispatch the child
   - which entry and match helpers execute in Lua
   - what do Lua match helpers return when no match exists
-date: 2026-07-11
+date: 2026-07-13
 status: current
 tags: [lua, runtime, values, stores, access, captures, positions, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.1 extends lua/src/linkedspec/interpreter.lua with runtime_value_kind, defensive four-kind copies, scalar/array/harray binding, checked direct/nested access and assignment, current-edge retv dispatch, and all entry_*/match_* reads. Three focused runtime cases plus the existing interpreter suite pass in the 69-test PUC Lua and LuaJIT gate."
+evidence: "LUA-BACKEND-PARITY.4.3.1 extends lua/src/linkedspec/interpreter.lua with runtime_value_kind, defensive four-kind copies, scalar/array/harray binding, checked direct/nested access and assignment, current-edge retv dispatch, and all entry_*/match_* reads. FUTURE-PARITY-BACKLOG.12.1.6 later routes every public bare mutation/read through one observable typed binding, and .12.1.8.5 hard-rejects exact aggregate selectors."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -26,11 +26,12 @@ are scalar values. Arrays/harrays use the typed JSON metatables; codeblocks are
 typed ActionIR `block_value` nodes. Reads and result projection defensively copy
 mutable aggregates and reparse codeblock source into independent typed nodes.
 
-Runtime context keeps scalar, array, and harray stores separate. Bare assignment
-can hold any typed value in the scalar slot; `set(array(name), value)` and
-`set(hash(name), value)` choose aggregate stores. A write replaces competing
-slots. Rules receive copied local stores and restore their caller's stores on
-exit. `retv` inside an action edge dispatches that edge child before reading.
+Runtime context may keep scalar, array, and harray stores separately, but a
+`.spec` name exposes one current typed value. Bare assignment and `set(name,
+value)` can hold any kind; a write replaces competing slots. Exact
+`array(name)` and `hash(name)` selectors reject before execution. Rules receive
+copied local stores and restore their caller's stores on exit. `retv` inside an
+action edge dispatches that edge child before reading.
 
 DSL array indexes are zero-based; harray keys are strings. Direct and mixed
 nested reads return null for missing/wrong-kind paths. Nested writes are

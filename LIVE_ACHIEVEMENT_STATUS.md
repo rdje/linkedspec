@@ -8,8 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.3.0 — revalidate harray transform contracts**
+  (DONE — pre-uniform-binding merge guidance corrected; Lua implementation `.4.3.5.3.1` active).
+
+  **Finding and correction:** Bare `merge_hash(base, overlay)` now consumes both typed harray bindings and later
+  keys override earlier ones. `copy(base)` is optional; exact `hash(base)` is a rejected selector. Updated the
+  stale merge/composability/receiver/core facts and the mdBook contract without changing runtime code.
+
+  **Proof:** Perl returns `2` and lowers the bare call to `{%base, %overlay}`. The checked-in neutral case with
+  expected `2` passes Dart and Julia selection, and Rust passes all 105 oracle fixtures including both merge cases.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.2 — add Lua deterministic harray views**
-  (DONE — 101/101 on both ABIs; copied transforms/receiver chains `.4.3.5.3` active).
+  (DONE — 101/101 on both ABIs; transform contract revalidation `.4.3.5.3.0` followed).
 
   **Implementation:** Lexical keys, copied values-by-key, count, and null-aware membership now execute through
   function/receiver forms; sorted arrays bridge onward and numeric membership/count results are terminal.

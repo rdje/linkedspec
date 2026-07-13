@@ -11,7 +11,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [rust, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.3 adds RuntimeContext bare-array/harray mutation methods and native/generated proof. FUTURE-PARITY-BACKLOG.12.1.7.2 then migrates all file-backed specs and closes exposed seams: action-edge fluent push uses the same bare typed binding, direct I assignments are rule-invocation-local, otherwise absent compiled-rule names read as empty implicit accumulators, and an explicit non-undef typed binding wins over a descriptor alias. Rust passes 105/105 interpreted and generated corpus cases plus permanent focused tests. FUTURE-PARITY-BACKLOG.12.1.7.3 completes embedded-source migration; wrapper forms remain accepted only until Rust hard rejection."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.3 adds RuntimeContext bare-array/harray mutation methods and native/generated proof. FUTURE-PARITY-BACKLOG.12.1.7.2 then migrates all file-backed specs and closes exposed seams: action-edge fluent push uses the same bare typed binding, direct I assignments are rule-invocation-local, otherwise absent compiled-rule names read as empty implicit accumulators, and an explicit non-undef typed binding wins over a descriptor alias. Rust passes 105/105 interpreted and generated corpus cases plus permanent focused tests. FUTURE-PARITY-BACKLOG.12.1.7.3 completes embedded-source migration, and .12.1.8.2 hard-rejects exact aggregate selectors."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test uniform_binding_contract"
 ---
 
@@ -42,9 +42,9 @@ updates the bare typed binding; direct `I` assignments are scoped to the current
 absent compiled-rule name reads as its empty implicit accumulator; and descriptor tags do not overwrite an
 explicitly initialized non-undef typed binding. Focused native/generated tests preserve these behaviors.
 
-Exact `array(name)` and `hash(name)` are still parsed temporarily, but all file-backed and embedded executable
-sources are now selector-free. This is scheduled compatibility, not an unresolved language choice. Rust deletes
-and rejects those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.2` after the Perl retirement leaf.
+Exact `array(name)` and `hash(name)` selectors are rejected across Rust's compiled and generated boundaries with
+the portable `aggregate_selector_removed` diagnostic. Empty, multi-argument, quoted, and computed constructor
+forms remain distinct accepted surfaces.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[spec-facing-aggregate-selector-retirement-inventory]], [[terse-rust-duck-typed-assignment-parity]].

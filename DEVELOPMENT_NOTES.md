@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.3.0 — dated facts must be reverified after language migrations): The
+  July 4 bare-merge boundary was correct when recorded, but July 12 uniform binding changed the underlying value
+  path and selector retirement invalidated its recommended `copy(hash(base))` spelling. Current Perl lowering is
+  `{%base, %overlay}`; `merge_hash(base, overlay)` and `merge_hash(copy(base), overlay)` both return the expected
+  result, while `hash(base)` rejects. The neutral corpus had already advanced and all three later runtimes pass its
+  bare-first case. Runtime work must therefore reverify dated KM facts at their `reverify` seam after foundational
+  migrations, and facts must record supersession instead of preserving obsolete current guidance.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.2 — one sorted key list must own both public views): Computing
   `sorted_values` independently from host iteration can detach values from their documented key order. Lua now
   derives one lexical key list and uses it for both views, copying each selected nested value. `has_key` checks

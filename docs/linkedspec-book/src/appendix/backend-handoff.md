@@ -675,7 +675,9 @@ All 34 non-callback array names and six numeric terminals are closed under `.4.3
 nested maps intact, and splices only explicit flat ASTs; explicit harray-to-array list context uses deterministic
 sorted key/value pairs. Lexical keys, copied values ordered by key, count, and null-aware membership compose through
 function/receiver/array-chain forms and return `0`/`[]` for missing or wrong-kind sources. Both Lua ABIs pass
-101/101 through `.4.3.5.2`; copied transforms `.4.3.5.3` are active and tree callbacks remain `.4.3.6`. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
+101/101 through `.4.3.5.2`. Bare base/overlay transforms were revalidated across the admitted backends after
+uniform binding in `.4.3.5.3.0`; Lua implementation `.4.3.5.3.1` is active and tree callbacks remain `.4.3.6`.
+Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
@@ -1716,7 +1718,7 @@ breadth, bare array working-variable receiver chains, regex split/filter
 bridges, delimiter-first `join_values`, array numeric reducers, and
 updated-value array end mutations. It also executes hash helper family breadth,
 bare hash working-variable receiver chains, statement/value mutation boundaries,
-direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
+direct hash-index assignment values, bare typed base/overlay `merge_hash`, and explicit
 flat-style hash splicing inside `hash(...)`. It also executes expression-valued
 blocks with block-local `return(...)`, attached and inline structured controls,
 helper/receiver `with` trailing blocks, and hash/array tree traversal receiver

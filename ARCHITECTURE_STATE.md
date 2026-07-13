@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Uniform binding supersedes the pre-July-12 `merge_hash` bare-base exception. Bare typed
+  `base` and `overlay` values are accepted in their respective transform slots; later arguments override earlier
+  keys; `copy(base)` is optional pure composition; the removed single-name selector remains rejected. Perl toolbox proof,
+  selected Dart/Julia neutral-corpus runs, and Rust's 105-case oracle agree. Current Knowledge Map/runtime facts
+  and mdBook guidance are corrected; Lua transform implementation `.4.3.5.3.1` is active.
 - `2026-07-13` refresh: Lua harray views share one lexical key order. `sorted_keys` returns that array;
   `sorted_values` copies values in the same order; count and null-aware membership return numeric terminals.
   Function/receiver forms, array continuations, missing/wrong-kind `0`/`[]`, and source isolation pass 101/101 on
   both Lua ABIs. A Perl toolbox matrix corrected the public catalog's stale non-harray count result from undef to
-  zero; copied transforms `.4.3.5.3` are active.
+  zero; the transform contract has since been revalidated and implementation `.4.3.5.3.1` is active.
 - `2026-07-13` refresh: Lua harray construction separates runtime identity from parent splice intent. Generic
   `flat` returns a copied array or harray according to evaluated kind; direct/receiver `flat_hash` returns a copied
   harray. Only authored direct or terminal flat ASTs splice hash entries, ordinary harray values stay nested, and

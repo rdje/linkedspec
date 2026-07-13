@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.3.0 — revalidate harray transform contracts
+
+Superseded the July 4 claim that a bare first `merge_hash(base, overlay)` loses its base. Uniform binding now makes
+both operands typed harray reads: Perl returns `2` and lowers to `{%base, %overlay}`; the checked-in bare-first
+neutral case passes Dart, Julia, and Rust. Exact `hash(base)` is now a rejected selector, while optional
+`copy(base)` is equivalent pure composition. Corrected the merge/composability/receiver/core Knowledge Map facts
+and mdBook guidance; no runtime code changed. Lua transform implementation `.4.3.5.3.1` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.2 — add Lua deterministic harray views
 
 Added lexical `sorted_keys`, copied `sorted_values` in the same key order, exact `count_keys`, and presence-based

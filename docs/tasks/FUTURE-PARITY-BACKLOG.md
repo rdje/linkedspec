@@ -6,7 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua deterministic harray views `.4.3.5.2` done at 101/101; transforms `.4.3.5.3` active).
+- Last updated: `2026-07-13` (bare harray transform contract `.4.3.5.3.0` revalidated after uniform binding;
+  Lua implementation `.4.3.5.3.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3675,7 +3676,9 @@ before implementation.
 | 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
 | 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied harray construction, explicit splicing, and identity pass 100/100. |
 | 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Deterministic copied harray views and membership pass 101/101. |
-| 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Implement copied harray transforms and compatible receiver chains. |
+| 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Container for copied harray transforms and compatible receiver chains. |
+| 132 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Revalidated bare base/overlay and pure transform contracts after uniform binding. |
+| 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `active` | Implement the revalidated transform and receiver contract on Lua. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity and harray order, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

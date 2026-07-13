@@ -10,21 +10,21 @@ answers:
   - does Julia nested assignment return the updated root
   - does Julia runtime support entry_map and match_map
   - does Julia runtime expose capture positions and line columns
-date: 2026-07-10
+date: 2026-07-13
 status: current
 tags: [julia, runtime, helpers, values, captures, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.3.1 extends julia/src/runtime/Interpreter.jl with scalar, array, and hash stores; typed array/hash wrappers; copied bare reads; structural literals, assignments, indexed/nested reads, and final no-autovivification nested writes; plus entry/match named maps, existence, length, character-position, and line-column helpers. Four focused end-to-end cases in julia/test/runtests.jl and the full 554-assertion Pkg.test() run prove JSON-safe shapes, variable-held aggregates, successful updated-root writes, unchanged roots after path failures, bare capture names, multibyte offsets, and named capture maps."
+evidence: "JULIA-BACKEND-PARITY.4.3.1 extends julia/src/runtime/Interpreter.jl with scalar, array, and hash stores; copied bare reads; structural literals, assignments, indexed/nested reads, and final no-autovivification nested writes; plus entry/match named maps, existence, length, character-position, and line-column helpers. Focused end-to-end cases prove JSON-safe shapes, variable-held aggregates, successful updated-root writes, unchanged roots after path failures, bare capture names, multibyte offsets, and named capture maps. FUTURE-PARITY-BACKLOG.12.1 later replaced the public typed-wrapper snapshot model with uniform bare bindings and hard-rejected exact aggregate selectors."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia core runtime value execution lives in `julia/src/runtime/Interpreter.jl`.
 
-`_RuntimeExecutionContext` keeps scalar, array, and hash stores. Bare reads and
-`copy(...)` resolve those stores to copied values, while `array(name)` and
-`hash(name)` snapshot both typed stores and compatible variable-held aggregate
-values. Array/hash literals, scalar assignment, append, hash-index assignment,
-indexed reads, and mixed nested reads preserve strings, numbers, booleans,
-`nothing`, arrays, and string-keyed dictionaries without host-specific wrappers.
+`_RuntimeExecutionContext` may retain private scalar/array/hash stores, but a
+`.spec` name exposes one current typed value. Bare reads and `copy(...)` resolve
+that binding to copied values. Exact `array(name)` and `hash(name)` selectors
+reject before execution. Array/harray literals, assignment, append, hash-index
+assignment, indexed reads, and mixed nested reads preserve strings, numbers,
+booleans, `nothing`, arrays, and string-keyed dictionaries without host wrappers.
 
 Nested value-path writes use the final portable contract: segment expressions
 evaluate before the RHS; the root is copied and mutated only after the complete
