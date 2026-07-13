@@ -191,7 +191,7 @@ pub enum BodyElementKind {
         /// Fluent chain methods on this edge, if any.
         fluent_chain: Vec<FluentCall>,
     },
-    /// A lifecycle code block: `I { set(array(results), []) }`
+    /// A lifecycle code block: `I { set(results, []) }`
     #[serde(rename = "code_block")]
     CodeBlock {
         /// The lifecycle marker: I, LS, LE, E, EX, IT, LX

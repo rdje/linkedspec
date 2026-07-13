@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Source migration is complete at zero executable selector positives; Perl `.12.1.8.1` now hard-rejects exact selectors before lowering, and Rust `.12.1.8.2` is active. Toolbox repair `.13.1` and structural/progressive/staged authoring arc `.14.1-.4` remain queued behind selector retirement. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Source migration is complete at zero executable selector positives; Perl and Rust now hard-reject exact selectors, and Dart `.12.1.8.3` is active. Toolbox repair `.13.1` and structural/progressive/staged authoring arc `.14.1-.4` remain queued behind selector retirement. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | Global uniform-binding delegation passes 85/85 on PUC Lua and LuaJIT; scalar numeric `.4.3.3.1.4` resumes after selector retirement. Future variadic/native/descriptor/generated obligations remain explicit. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `JULIA-BACKEND-PARITY` | `active` (delegated global obligations) | `Overall roadmap - future backend parity (Julia second)` | Current proof is 1,311 package assertions, 105 fixtures, and exact CLI 61x2. Uniform-binding delegation `.12.1.5` is complete; only later explicitly delegated language evolution remains. | [docs/tasks/JULIA-BACKEND-PARITY.md](docs/tasks/JULIA-BACKEND-PARITY.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -862,6 +862,19 @@ constructors/literals still execute. A whitespace-aware scanner closed three mis
 now reports zero positives/19 classified recognizers. Focused Perl 41, regenerated oracle 105, Rust corpus 3/3,
 and standalone Phase 0 `1..1031`/934s pass. Rust `.12.1.8.2` is active.
 
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.8.2` hard-retires exact aggregate selectors on Rust. One
+recursive typed-AST detector and whole-compiled-state validator cover normal/traced compilation, nested/dead code,
+unused functions, deferred edge-fluent arguments, generated emission, decoded v1 plans, and legacy adapters. The
+focused suite passes 15/15, the scanner reports zero positives/13 classified rejection sites, and complete Rust,
+105 interpreted/generated corpus, integration 197/197, CLI, and canonical local gates pass. Selector-specific
+runtime dispatch is deleted; Dart `.12.1.8.3` is active.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.7.0` owns a verification-tool calibration found while closing Rust
+selector retirement. The current shipped VHDL parser builds in 19.627 seconds and parses its input in 0.001 seconds,
+so the generator's 15-second default kills healthy construction. Complete regeneration remains available through
+the documented `ORACLE_TIMEOUT=30` override; the pending leaf must recalibrate the default while preserving the
+per-case fork/`SIGKILL` guard and zero-timeout kill proof.
+
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.13.1` records a toolbox regression discovered during `.12.1.7.3`:
 `tools/inspect_spec_codegen.pl` still calls private methods through the Phase 1A-thinned facade, so plugin AUTOLOAD
 reports `_rewrite_action_code_with_diagnostics` / `_render_method_call_chain` as unknown plugins. Repair and a
@@ -870,9 +883,18 @@ recurring smoke lock are queued after selector retirement; they do not interrupt
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.14.0` captures the director's complete authoring model. Typical
 zero/one/two-regex roles keep boundaries simple while recursion lives in action-edge OR and blind-call AND rule
 connections. Progressive parsing invokes loaded specs over cursor-relative extracted text during a parse; staged
-parsing refines selected fields from a returned AST level. ADR 0012 and the function-body prototype remain the
-base, while general in-parse composition, public parse jobs, multiple parser families, recursive queues, and two
-contradictory walkthrough idioms are owned by queued `.14.1-.14.4`. Perl selector rejection remains next.
+parsing refines selected fields from a returned AST level. In the function-body prototype, the outer `.spec`
+extracts the bounded body and the `actionir-body.spec` job identity resolves to a built-in backend-native ActionIR
+parser adapter, not another owning `.spec`; it therefore proves staging but not spec-loading-spec. ADR 0012 remains
+the base, while general in-parse composition, public parse jobs, multiple parser families, recursive queues, and
+two contradictory walkthrough idioms are owned by queued `.14.1-.14.4` behind selector retirement.
+
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.15.0-.15.2` own the director's equivalence between any standalone/
+dangling rule-level `{ ... }` block and `I { ... }`. There is currently no dangling-brace rule-body form. Edge code
+blocks are not dangling because the action-edge or blind-call production precedes and owns them; nested expression/
+callable blocks are owned after code parsing begins. The shorthand may therefore occur anywhere as a top-level
+rule-body item in every rule kind and normalize to the existing I-lifecycle AST, inheriting explicit-I order and
+duplicate behavior rather than adding runtime semantics. Implementation remains queued behind selector retirement.
 
 Index note 2026-07-10: active `FUTURE-PARITY-BACKLOG.1.6.1.0` derives an identical 237-name current ActionIR
 inventory from Dart and Julia. All names occur in the mdBook, while 98 do not yet occur in the 99-fixture neutral

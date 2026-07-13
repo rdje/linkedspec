@@ -29,7 +29,7 @@
 
 use crate::ast::{BodyElementKind, Rule, SpecFile};
 use crate::error::{LinkedSpecError, Result};
-use crate::expr::CodeBlock;
+use crate::expr::{CodeBlock, RemovedAggregateSelector};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
@@ -48,6 +48,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
         rules.push(compile_rule(rule)?);
     }
     let mut compiled = CompiledSpec { functions, rules };
+    validate_no_removed_aggregate_selectors(&compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     Ok(compiled)
 }
@@ -152,6 +153,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     }
 
     let mut compiled = CompiledSpec { functions, rules };
+    validate_no_removed_aggregate_selectors(&compiled)?;
     let edge_only_entries = compiled
         .rules
         .iter()
@@ -212,6 +214,92 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     dependency_result?;
 
     Ok(compiled)
+}
+
+fn removed_aggregate_selector_error(
+    context: &str,
+    selector: RemovedAggregateSelector,
+) -> LinkedSpecError {
+    LinkedSpecError::Compile(format!("{context}: {selector}"))
+}
+
+fn validate_code_block(
+    block: &CodeBlock,
+    context: &str,
+) -> std::result::Result<(), LinkedSpecError> {
+    if let Some(selector) = block.find_removed_aggregate_selector() {
+        return Err(removed_aggregate_selector_error(context, selector));
+    }
+    Ok(())
+}
+
+fn validate_compiled_fluent_chain(
+    chain: &[(String, String)],
+    context: &str,
+) -> std::result::Result<(), LinkedSpecError> {
+    for (index, (method, args)) in chain.iter().enumerate() {
+        let source = format!("{method}({args})");
+        let Ok(block) = CodeBlock::parse(&source) else {
+            // Fluent syntax historically remains runtime-parsed. This validator
+            // must not turn an unrelated deferred parse failure into a new
+            // compile-time language change.
+            continue;
+        };
+        validate_code_block(&block, &format!("{context} fluent call {index}"))?;
+    }
+    Ok(())
+}
+
+/// Reject removed public aggregate selectors in every executable part of a
+/// compiled specification.
+///
+/// This validator is public so serialized/generated `CompiledSpec` adapters can
+/// enforce the same boundary before execution instead of trusting their payload.
+pub fn validate_no_removed_aggregate_selectors(spec: &CompiledSpec) -> Result<()> {
+    for function in &spec.functions {
+        validate_code_block(
+            &function.body,
+            &format!("function '{}' body", function.name),
+        )?;
+    }
+
+    for rule in &spec.rules {
+        for (kind, block) in [
+            ("I", rule.preamble.as_ref()),
+            ("LX", rule.lxcode.as_ref()),
+            ("LS", rule.lscode.as_ref()),
+            ("LE", rule.lecode.as_ref()),
+            ("E", rule.ecode.as_ref()),
+            ("EX", rule.excode.as_ref()),
+            ("IT", rule.itcode.as_ref()),
+        ] {
+            if let Some(block) = block {
+                validate_code_block(block, &format!("rule '{}' {kind}-block", rule.label))?;
+            }
+        }
+
+        for (index, entry) in rule.acode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_code_block(block, &format!("rule '{}' action edge {index}", rule.label))?;
+            }
+            validate_compiled_fluent_chain(
+                &entry.fluent_chain,
+                &format!("rule '{}' action edge {index}", rule.label),
+            )?;
+        }
+
+        for (index, entry) in rule.bcode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_code_block(block, &format!("rule '{}' blind edge {index}", rule.label))?;
+            }
+            validate_compiled_fluent_chain(
+                &entry.fluent_chain,
+                &format!("rule '{}' blind edge {index}", rule.label),
+            )?;
+        }
+    }
+
+    Ok(())
 }
 
 fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<CompiledUserFunction> {

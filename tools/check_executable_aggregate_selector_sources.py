@@ -52,6 +52,10 @@ def classified_compatibility(path: str, line: str) -> bool:
         "retired_inside_unused" in line
     ):
         return True
+    if path == "rust/linkedspec-runtime/tests/uniform_binding_contract.rs" and (
+        "selector-rejection fixture" in line
+    ):
+        return True
     return False
 
 

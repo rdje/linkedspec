@@ -1,5 +1,5 @@
 //! Expression AST for lifecycle code — parsed from code strings like
-//! `push(array(results), retv)` and interpreted at runtime.
+//! `push(results, retv)` and interpreted at runtime.
 //!
 //! This is the Rust-native replacement for Perl's eval-based code generation.
 //! Lifecycle code is parsed into expression trees once at compile time,
@@ -77,7 +77,7 @@ pub struct HashLiteralEntry {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind")]
 pub enum Expr {
-    /// A helper function call: `push(array(results), retv)`
+    /// A helper function call: `push(results, retv)`
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
     /// A scalar assignment operator: `name = value`
@@ -167,6 +167,89 @@ impl Arg {
         match self {
             Arg::Positional(e) => e,
             Arg::Keyword { value, .. } => value,
+        }
+    }
+}
+
+/// An exact aggregate-selector call removed from the public ActionIR surface.
+///
+/// Zero-argument, multi-argument, quoted, and computed `array(...)` / `hash(...)`
+/// calls remain constructors. Only the former one-bare-identifier selector shape
+/// is rejected.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct RemovedAggregateSelector {
+    /// Removed call name (`array` or `hash`).
+    pub surface: String,
+    /// Bare identifier that replaces the removed selector call.
+    pub identifier: String,
+}
+
+impl std::fmt::Display for RemovedAggregateSelector {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            formatter,
+            "aggregate_selector_removed surface={} identifier={} replacement={}",
+            self.surface, self.identifier, self.identifier
+        )
+    }
+}
+
+impl Expr {
+    /// Return the first removed aggregate selector found anywhere below this node.
+    pub fn find_removed_aggregate_selector(&self) -> Option<RemovedAggregateSelector> {
+        let in_args = |args: &[Arg]| {
+            args.iter()
+                .find_map(|arg| arg.value().find_removed_aggregate_selector())
+        };
+        let in_segments = |segments: &[AccessSegment]| {
+            segments.iter().find_map(|segment| match segment {
+                AccessSegment::Key { .. } => None,
+                AccessSegment::Index { expr } => expr.find_removed_aggregate_selector(),
+            })
+        };
+
+        match self {
+            Expr::Call { name, args } => {
+                if matches!(name.as_str(), "array" | "hash")
+                    && let [Arg::Positional(Expr::Variable { name: identifier })] = args.as_slice()
+                {
+                    return Some(RemovedAggregateSelector {
+                        surface: name.clone(),
+                        identifier: identifier.clone(),
+                    });
+                }
+                in_args(args)
+            }
+            Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
+                value.find_removed_aggregate_selector()
+            }
+            Expr::AssignHashIndex { key, value, .. } => key
+                .find_removed_aggregate_selector()
+                .or_else(|| value.find_removed_aggregate_selector()),
+            Expr::AssignNestedAccess {
+                segments, value, ..
+            } => in_segments(segments).or_else(|| value.find_removed_aggregate_selector()),
+            Expr::IndexedVar { index, .. } => index.find_removed_aggregate_selector(),
+            Expr::NestedAccess { segments, .. } => in_segments(segments),
+            Expr::ArrayLiteral { items } => {
+                items.iter().find_map(Expr::find_removed_aggregate_selector)
+            }
+            Expr::HashLiteral { entries } => entries.iter().find_map(|entry| {
+                entry
+                    .key
+                    .find_removed_aggregate_selector()
+                    .or_else(|| entry.value.find_removed_aggregate_selector())
+            }),
+            Expr::BlockValue { block } => block.find_removed_aggregate_selector(),
+            Expr::FluentChain { receiver, calls } => receiver
+                .find_removed_aggregate_selector()
+                .or_else(|| calls.iter().find_map(|call| in_args(&call.args))),
+            Expr::Variable { .. }
+            | Expr::StringLiteral { .. }
+            | Expr::NumberLiteral { .. }
+            | Expr::BooleanLiteral { .. }
+            | Expr::RegexLiteral { .. }
+            | Expr::Undef => None,
         }
     }
 }
@@ -305,6 +388,13 @@ impl CodeBlock {
     pub fn parse(source: &str) -> Result<Self, String> {
         let mut parser = Parser::new(source);
         parser.parse_block()
+    }
+
+    /// Return the first removed aggregate selector in this complete code block.
+    pub fn find_removed_aggregate_selector(&self) -> Option<RemovedAggregateSelector> {
+        self.statements
+            .iter()
+            .find_map(|stmt| stmt.expr.find_removed_aggregate_selector())
     }
 }
 

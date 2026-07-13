@@ -9,6 +9,7 @@
 
 use crate::engine::Engine;
 use linkedspec_core::ast::RuleMode;
+use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
 use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
 use serde::Serialize;
@@ -246,6 +247,16 @@ pub fn emit_rust_source_v1(
         .with_detail("source_identity is required"));
     }
 
+    validate_no_removed_aggregate_selectors(compiled).map_err(|error| {
+        GeneratedSourceError::new(
+            GeneratedSourceStage::EmitSource,
+            GeneratedSourceCode::GeneratedSourceEmitFailed,
+            "Failed to emit generated Rust source from invalid compiled spec",
+            source_identity,
+        )
+        .with_detail(error.to_string())
+    })?;
+
     let spec_json = serde_json::to_string(compiled).map_err(|error| {
         GeneratedSourceError::new(
             GeneratedSourceStage::EmitSource,
@@ -428,12 +439,16 @@ fn decode_generated_compiled_spec_v1(
     compiled_spec_json: &str,
     source_identity: &str,
 ) -> Result<CompiledSpec, GeneratedSourceError> {
-    serde_json::from_str(compiled_spec_json).map_err(|error| {
+    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
         GeneratedSourceError::compile_failed(
             source_identity,
             format!("generated CompiledSpec JSON is invalid: {error}"),
         )
-    })
+    })?;
+    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
+        GeneratedSourceError::compile_failed(source_identity, error.to_string())
+    })?;
+    Ok(compiled)
 }
 
 fn generated_top_context(compiled: &CompiledSpec) -> Option<(String, &'static str)> {
@@ -481,6 +496,7 @@ pub fn execute_generated_parser(
 ) -> Result<serde_json::Value, String> {
     let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
         .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
+    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| error.to_string())?;
     validate_generated_rule_plan(&compiled, generated_rules)?;
     Engine::new(compiled).execute_generated_with_plan(generated_rules, input)
 }
@@ -494,6 +510,7 @@ pub fn execute_generated_parser_with_trace(
 ) -> Result<serde_json::Value, String> {
     let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
         .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
+    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| error.to_string())?;
     validate_generated_rule_plan(&compiled, generated_rules)?;
     Engine::new(compiled).execute_generated_with_plan_with_trace(
         generated_rules,

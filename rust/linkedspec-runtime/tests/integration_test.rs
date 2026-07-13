@@ -1587,10 +1587,9 @@ fn terse_1_2_2_bare_array_arg_auto_exists() {
 }
 
 #[test]
-fn terse_1_2_2_bare_matches_wrapped_and_current_initializer() {
-    // The bare assignment form produces the same value as the explicit scalar-slot form and the
-    // direct-initializer form: the explicit slot marker or initializer is
-    // optional in these positions.
+fn terse_1_2_2_bare_matches_set_and_current_initializer() {
+    // Bare assignment, `set`, and explicit initialization produce the same
+    // scalar binding value.
     let bare = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     let explicit_slot = "Top::\n /x/ -> Done { set(v, \"ok\"); return(v) }\n\nDone::\n /[a-z]+/\n";
     let initialized =
@@ -1605,16 +1604,6 @@ fn terse_1_2_2_bare_matches_wrapped_and_current_initializer() {
         b,
         build_and_run(initialized, "xhello"),
         "scalar: bare arg == current initializer form"
-    );
-
-    let bare_a =
-        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_a =
-        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    assert_eq!(
-        build_and_run(bare_a, "xhello"),
-        build_and_run(wrapped_a, "xhello"),
-        "array: bare push target == wrapped"
     );
 }
 
@@ -1649,29 +1638,23 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
 
 // ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
 // aggregate bare value reads are type-implying snapshot positions for arrays.
-// Hash snapshots use the explicit current `copy(NAME)` spelling.
+// Hash snapshots use the same current `copy(NAME)` spelling.
 
 #[test]
-fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
-    let bare = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let actual = build_and_run(bare, "xhello");
+fn terse_1_2_3_2_bare_array_copy_read_returns_snapshot() {
+    let source = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(source, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([["a", "b"]]),
         "copy(items) reads the array working variable under the Perl output shape"
     );
-    assert_eq!(
-        actual,
-        build_and_run(wrapped, "xhello"),
-        "copy(items) == copy(items) on Rust"
-    );
 }
 
 #[test]
-fn terse_1_2_3_2_hash_copy_read_uses_explicit_hash_wrapper() {
-    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
-    let actual = build_and_run(wrapped, "xhello");
+fn terse_1_2_3_2_bare_hash_copy_read_returns_snapshot() {
+    let source = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(source, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([{"stage": "v"}]),
@@ -1680,35 +1663,17 @@ fn terse_1_2_3_2_hash_copy_read_uses_explicit_hash_wrapper() {
 }
 
 #[test]
-fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
-    let bare_array =
-        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_array =
-        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let actual_array = build_and_run(bare_array, "xhello");
+fn terse_1_2_3_2_copy_bare_array_and_hash_in_one_block() {
+    let source = "Top::\n /x/ -> Done { push(items, \"a\"); set_key(meta, \"stage\", \"v\"); return([copy(items), copy(meta)]) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
-        actual_array,
-        serde_json::json!([["a"]]),
-        "copy(items) follows the documented array-first aggregate bare-read rule"
-    );
-    assert_eq!(
-        actual_array,
-        build_and_run(wrapped_array, "xhello"),
-        "copy(items) == copy(items) on Rust"
-    );
-
-    let wrapped_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
-    let current_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
-    let actual_hash = build_and_run(wrapped_hash, "xhello");
-    assert_eq!(
-        actual_hash,
-        serde_json::json!([{"stage": "v"}]),
-        "copy(meta) clones the named hash working variable"
-    );
-    assert_eq!(
-        actual_hash,
-        build_and_run(current_hash, "xhello"),
-        "copy(meta) is stable on Rust"
+        build_and_run(source, "xhello"),
+        serde_json::json!([
+            [
+                ["a"],
+                {"stage": "v"}
+            ]
+        ]),
+        "the engine accumulator wraps the returned array; copy reads both typed bindings"
     );
 }
 
@@ -3208,19 +3173,13 @@ fn terse_2_3_3_3_2_action_edge_fluent_flow_return_undef_false_branch() {
 // ── SPEC-FORMAT-TERSE.2.3.4.1 — Rust aggregate-helper bare args:
 
 #[test]
-fn terse_2_3_4_1_bare_hash_merge_arg_matches_wrapped() {
-    let bare = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
-    let actual = build_and_run(bare, "xhello");
+fn terse_2_3_4_1_bare_hash_merge_arg_reads_typed_binding() {
+    let source = "Top::\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys(merge_hash(copy(base), overlay))))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(source, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([2]),
         "merge_hash(copy(base), overlay) reads overlay as a hash snapshot"
-    );
-    assert_eq!(
-        actual,
-        build_and_run(wrapped, "xhello"),
-        "bare hash helper argument matches the explicit overlay wrapper"
     );
 }
 
@@ -3300,7 +3259,7 @@ Done::
 }
 
 #[test]
-fn rust_parity_7_5_2_explicit_array_wrapper_replaces_array_value() {
+fn rust_parity_7_5_2_set_array_value_rebinds_array() {
     let grammar = "Top::\n /x/ -> Done { push(word, \"x\"); set(word, []); push(word, \"y\"); return(copy(word)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
@@ -3310,7 +3269,7 @@ fn rust_parity_7_5_2_explicit_array_wrapper_replaces_array_value() {
 }
 
 #[test]
-fn rust_parity_7_5_2_set_hash_wrapper_replaces_hash_value() {
+fn rust_parity_7_5_2_set_hash_value_rebinds_hash() {
     let grammar = "Top::\n /x/ -> Done { set_key(meta, \"old\", \"x\"); set(meta, hash(\"new\", \"y\")); return(copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),

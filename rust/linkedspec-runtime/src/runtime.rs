@@ -31,7 +31,7 @@ pub struct RuntimeContext {
     /// Remembered bare identifier kind after declaration or assignment.
     bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
     /// Descriptor-tag scalars that must stay bare-readable even when a same-name
-    /// aggregate accumulator is mutated through `array(name)` / `hash(name)`.
+    /// aggregate accumulator is mutated through a type-implying helper.
     descriptor_scalar_bare_reads: std::collections::HashSet<String>,
     /// The rule's main accumulator (return value).
     pub accumulator: Vec<RuntimeValue>,

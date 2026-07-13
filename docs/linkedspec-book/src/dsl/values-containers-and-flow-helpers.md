@@ -164,8 +164,8 @@ return(payload);
 ```
 
 > **Retirement status:** adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
-> `hash(IDENTIFIER)`. Perl now rejects them structurally before ActionIR lowering with
-> `aggregate_selector_removed`; Rust, Dart, Julia, and Lua still have dependency-ordered rejection leaves. The
+> `hash(IDENTIFIER)`. Perl and Rust now reject them structurally before execution with
+> `aggregate_selector_removed`; Dart, Julia, and Lua still have dependency-ordered rejection leaves. The
 > replacement is the bare typed binding:
 > `items` becomes `items`, `copy(items)` becomes `copy(items)`, `set(items, [])` becomes
 > `set(items, [])`, `push(items, value)` becomes `push(items, value)`, and

@@ -254,7 +254,7 @@ Done::
  /[a-z]+/
 SPEC
     },
-    {   case   => 'terse_1_2_3_2_copy_wrapped_hash',
+    {   case   => 'terse_1_2_3_2_copy_bare_hash',
         input  => 'xhello',
         source => <<'SPEC',
 Top::

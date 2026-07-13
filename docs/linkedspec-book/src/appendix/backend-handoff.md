@@ -207,9 +207,10 @@ values. It also lowers value-only helper-call composition from AST `call` nodes 
 scalar normalization, string predicate/composition, coalesce/concat, and scalar-argument
 numeric helpers. It also lowers retained aggregate-constructor, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
-Bare typed reads are the destination surface; exact one-identifier aggregate selectors and short aliases
-`s(...)`/`a(...)`/`h(...)` are retired and should be reported
-as unresolved helpers rather than normalized. Unsupported covered helper
+Bare typed reads are the destination surface. Exact one-identifier aggregate selectors are retired and report
+`aggregate_selector_removed` on Perl and Rust before execution; Dart, Julia, and Lua follow in dependency order.
+Retired short aliases `s(...)`/`a(...)`/`h(...)` remain ordinary unresolved helpers rather than normalized.
+Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language
 calls. Receiver-dot value chains now lower from AST `fluent_chain` nodes for the array,
 hash, string, and number receiver families before the legacy receiver-dot text normalizers

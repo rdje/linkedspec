@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.2 — hard-reject Rust aggregate selectors
+
+Rust now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls after typed ActionIR compilation and
+before native or generated execution. One recursive AST visitor covers nested arguments, assignments, access
+indices, shape literals, value blocks, receivers, and fluent arguments. Whole-`CompiledSpec` validation includes
+all lifecycle/edge blocks, deferred action/blind-edge fluent arguments, dead branches, and unused user functions.
+The diagnostic matches the neutral contract:
+`aggregate_selector_removed surface=<array|hash> identifier=<name> replacement=<name>`.
+
+Generated-source emission validates before serializing, while v1 and legacy generated adapters validate decoded
+compiled JSON before plan checking or execution. Selector-specific runtime reads, mutation targets, assignment
+targets, and receiver dispatch are deleted; bare typed bindings now own those operations. Zero/multi/quoted/
+computed constructors and direct literals remain valid.
+
+The focused uniform-binding suite passes 15/15 across all six neutral invalid cases, dead code, unused functions,
+edge fluent arguments, generated emission/decode, and eight retained constructor/literal classes. The recurring
+executable-source checker remains at zero positives and drops to 13 classified implementation/rejection sites.
+Wrapper-era Rust test/corpus identifiers are renamed to bare-binding terminology, and migration-created
+same-source comparisons are replaced with direct typed array/harray assertions. Complete Rust core/runtime/CLI,
+105 interpreted corpus, the final post-rename 105-case generated classifier in 329.32 seconds, integration 197/197,
+and canonical local CI gates pass.
+
+Final oracle regeneration also exposed an independently owned timeout-budget defect: the shipped VHDL parser
+builds in 19.627 seconds and parses its fixture in 0.001 seconds, beyond the generator's 15-second default. The
+documented `ORACLE_TIMEOUT=30` override completes governed regeneration; pending
+`FUTURE-PARITY-BACKLOG.7.0` owns recalibrating the default while preserving the process hard-kill guard.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.1 — hard-reject Perl aggregate selectors
 
 Perl now rejects exact one-bare-identifier `array(...)` and `hash(...)` calls at the canonical ActionIR boundary

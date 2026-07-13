@@ -13,7 +13,7 @@
       "terse_1_2_3_2_array_copy_bare_read",
       "terse_1_2_3_2_hash_copy_bare_read",
       "terse_1_2_3_2_copy_bare_array_first",
-      "terse_1_2_3_2_copy_wrapped_hash",
+      "terse_1_2_3_2_copy_bare_hash",
       "terse_1_2_3_4_return_bare_scalar",
       "terse_1_2_3_4_assignment_source_bare_reads",
       "terse_1_2_3_4_mutation_direct_bare_reads",

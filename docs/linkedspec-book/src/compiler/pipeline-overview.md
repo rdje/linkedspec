@@ -240,7 +240,9 @@ reusing the existing switch stack engine. Attached `while(cond) { ... }` stateme
 lowering now consumes typed condition/body nodes before reusing the existing loop lowerer
 and its deterministic 10000-iteration safety guard. Bodyless `while(...)` marker nodes
 remain parser shape only because the current DSL has no `endwhile` product syntax. Exact one-bare-identifier
-aggregate selectors are rejected on Perl at this typed boundary before lowering.
+aggregate selectors are rejected on Perl at this typed boundary before lowering. Rust performs the equivalent
+structural walk over every compiled ActionIR block and deferred edge-fluent argument before native or generated
+execution, including dead code and unused user functions.
 Standalone supported value statements now lower through the same typed AST value
 traversal and produce canonical `VALUE_DROP` events: their value is computed with the
 covered helper/receiver semantics and then intentionally discarded. For example,

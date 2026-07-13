@@ -14,6 +14,8 @@ answers:
   - "how does gen_oracle_corpus enforce hard timeouts"
   - "does the oracle timeout cover parser construction"
   - "does the oracle timeout cover parser build"
+  - "why does default oracle generation time out on vhdl"
+  - "what timeout does current vhdl parser construction need"
   - "does the oracle generator still rely on alarm for catastrophic regex timeouts"
   - "is the RTLUtils oracle timeout still live"
   - "why does the Rust engine output wrap the Perl reference value one level"
@@ -66,7 +68,8 @@ evidence_update_2026_07_08_12_3: "SPEC-FORMAT-TERSE.12.3 added `terse_12_3_hash_
 evidence_update_2026_07_08_13_3: "SPEC-FORMAT-TERSE.13.3 added `terse_13_3_array_tree_traversal_receiver_blocks` after Rust parser/runtime support for array-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 97 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 97 fixtures."
 evidence_update_2026_07_08_spec_source_closeout: "SPEC-SOURCE-TERSE-CLOSEOUT.1 migrated `specs/hlink_substitution.spec` bracket payloads from the historical Perl scalar-reference shape to neutral `capture_slice()` strings, added `hlink_bracket_body` and `hlink_mixed_bracket_brace` to tools/gen_oracle_corpus.pl, regenerated the checked-in corpus to 99 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture` passes over all 99 fixtures."
 evidence_update_2026_07_10_capability_admission: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 adds six governed current-surface fixtures for cursor control, pure helpers, positions, marker control, anonymous captures, and named captures. Perl regeneration emits 105 exact fixtures; Rust, Dart, and Julia execute all 105 unchanged outputs."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 105|capability_capture_named_surface' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
+evidence_update_2026_07_12_timeout_calibration: "While closing FUTURE-PARITY-BACKLOG.12.1.8.2, two complete regeneration attempts failed at vhdl_library_use under the default 15-second hard bound. A direct split measurement found get_parser('vhdl') construction took 19.627 seconds while parsing the fixture took 0.001 seconds. ORACLE_TIMEOUT=30 completes the same governed regeneration without weakening the process guard. Pending FUTURE-PARITY-BACKLOG.7.0 owns changing the default, preserving fork+SIGKILL and the ORACLE_TIMEOUT=0 kill proof."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; ORACLE_TIMEOUT=30 perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 105|capability_capture_named_surface' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
@@ -80,7 +83,7 @@ frozen output; `cargo test` validates the Rust backend against it with no Perl i
 
 - **Generator** `tools/gen_oracle_corpus.pl` — for each `(spec, input)` case it builds the
   Perl reference parser and runs the parse in a child process under a hard wall-clock
-  timeout (default 15s). The parent kills the child with `SIGKILL` on timeout,
+  timeout (currently default 15s). The parent kills the child with `SIGKILL` on timeout,
   deliberately avoiding `alarm()` because catastrophic regex backtracking can defer Perl
   safe signals. It writes one corpus directory per case:
   `rust/linkedspec-runtime/tests/corpus/<case>/{input.spec,input.txt,expected.json}` plus
@@ -211,9 +214,13 @@ a literal edge return and an action-less child), so both backends agree exactly.
 ## Regenerating
 
 ```sh
-perl tools/gen_oracle_corpus.pl            # default 15s hard per-case build+parse timeout
-ORACLE_TIMEOUT=30 perl tools/gen_oracle_corpus.pl
+ORACLE_TIMEOUT=30 perl -Iperl tools/gen_oracle_corpus.pl
 ```
+
+The current 15-second default is below the measured cost of the shipped VHDL parser: construction took 19.627
+seconds while parsing the oracle input took 0.001 seconds on 2026-07-12. Until pending
+`FUTURE-PARITY-BACKLOG.7.0` recalibrates that default, use the explicit 30-second override for a complete governed
+regeneration. This is a timeout-budget defect, not evidence of a VHDL parse hang.
 
 The historic `RTLUtils` catastrophic-backtrack timeout is retired with the deleted
 legacy VHDL/RTL/FSM subsystem. The process-level guard now covers both parser construction

@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.2 finding — time parser construction separately from parsing): Two
+  complete oracle regenerations died at `vhdl_library_use` under the generator's default 15-second process bound.
+  A direct split measurement showed healthy `get_parser('vhdl')` construction at 19.627 seconds and fixture parsing
+  at 0.001 seconds. Use `ORACLE_TIMEOUT=30 perl -Iperl tools/gen_oracle_corpus.pl` for current complete
+  regeneration. Pending `.7.0` owns a measured default adjustment while retaining the per-case fork/`SIGKILL`
+  boundary and `ORACLE_TIMEOUT=0` kill proof; do not misclassify parser-build budget as a regex/parse hang.
+
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.2 — validate complete compiled state, not only parser entry): Rust
+  lifecycle code is typed during compilation, but action/blind-edge fluent arguments remain serialized strings
+  until runtime. Hard language retirement therefore needs a recursive `Expr`/`CodeBlock` detector plus one
+  whole-`CompiledSpec` validator that reparses those deferred arguments. Run it after every function and rule is
+  compiled, and again at generated-source serialization/deserialization boundaries so dead code, unused functions,
+  and untrusted compiled JSON cannot bypass the rule. Once validation owns compatibility failure, delete selector-
+  specific runtime read/target/assignment/receiver branches; bare typed bindings are the only public authority.
+  Keep rejection shape-exact so zero/multi/quoted/computed constructors and direct literals remain values.
+  Source migration can leave test names and two-sided assertions describing wrappers after both sides became the
+  same bare source. Rename the identifiers and replace identical comparisons with direct mixed-kind binding proof;
+  otherwise internal terminology continues teaching a language surface that no longer exists.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.1 — reject authored selectors at the canonical AST boundary): A
   generated-code sentinel such as `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` is not a hard compiler error; it can
   compile and silently yield `undef`. Exact aggregate selectors therefore need structural validation immediately

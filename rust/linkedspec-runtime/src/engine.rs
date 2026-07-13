@@ -192,12 +192,6 @@ struct StatementSwitchFrame {
     switch_value: String,
 }
 
-#[derive(Clone, Copy)]
-enum ShapeLiteralKind {
-    Array,
-    Hash,
-}
-
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum StatementBlockFlow {
     Continue,
@@ -346,10 +340,6 @@ fn regex_subst_call_parts(raw_args: &[Arg]) -> Option<(String, usize, usize, usi
 
 fn array_mutation_target_arg(arg: &Arg) -> Option<String> {
     match arg.value() {
-        Expr::Call { name, args } if name == "array" && args.len() == 1 => match args[0].value() {
-            Expr::Variable { name } => Some(name.clone()),
-            _ => None,
-        },
         Expr::Variable { name } => Some(name.clone()),
         _ => None,
     }
@@ -3578,9 +3568,8 @@ impl Engine {
 
     /// Execute statement-level receiver-dot array end mutations.
     ///
-    /// `items.push_back(value)` and `array(items).push_front(value)` name the
-    /// working array on the receiver side; these are not value-returning fluent
-    /// expressions in this slice.
+    /// `items.push_back(value)` names the working array on the receiver side;
+    /// this is not a value-returning fluent expression in this slice.
     fn execute_array_end_mutation_method_statement(
         &self,
         expr: &linkedspec_core::expr::Expr,
@@ -3663,13 +3652,9 @@ impl Engine {
     }
 
     fn array_receiver_target(receiver: &linkedspec_core::expr::Expr) -> Option<String> {
-        use linkedspec_core::expr::{Arg, Expr};
+        use linkedspec_core::expr::Expr;
         match receiver {
             Expr::Variable { name } => Some(name.clone()),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-                _ => None,
-            },
             _ => None,
         }
     }
@@ -3830,53 +3815,6 @@ impl Engine {
                 values.get(index).cloned().unwrap_or(RuntimeValue::Undef)
             }
             _ => RuntimeValue::Undef,
-        }
-    }
-
-    fn aggregate_wrapper_assignment_target(
-        raw_target: &linkedspec_core::expr::Arg,
-        value: &RuntimeValue,
-    ) -> Option<(ShapeLiteralKind, String)> {
-        use linkedspec_core::expr::{Arg, Expr};
-        let Arg::Positional(Expr::Call { name, args }) = raw_target else {
-            return None;
-        };
-        if args.len() != 1 {
-            return None;
-        }
-        let Arg::Positional(Expr::Variable { name: target }) = &args[0] else {
-            return None;
-        };
-        match (name.as_str(), value) {
-            ("array", RuntimeValue::Array(_)) => Some((ShapeLiteralKind::Array, target.clone())),
-            ("hash", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
-            _ => None,
-        }
-    }
-
-    fn store_aggregate_assignment(
-        target: &str,
-        kind: ShapeLiteralKind,
-        value: RuntimeValue,
-        ctx: &mut RuntimeContext,
-    ) -> Result<RuntimeValue, String> {
-        match (kind, value) {
-            (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
-                let stored = RuntimeValue::Array(values.clone());
-                ctx.record_rule_local_binding(target);
-                ctx.set_array(target, values);
-                Ok(stored)
-            }
-            (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
-                let stored = RuntimeValue::Hash(values.clone());
-                ctx.record_rule_local_binding(target);
-                ctx.set_hash(target, values);
-                Ok(stored)
-            }
-            (_, other) => Err(format!(
-                "aggregate assignment evaluated to unexpected value kind: {:?}",
-                other
-            )),
         }
     }
 
@@ -4268,8 +4206,6 @@ impl Engine {
         use linkedspec_core::expr::Expr;
 
         match receiver {
-            Expr::Call { name, args } if name == "hash" && args.len() == 1 => return true,
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => return false,
             Expr::Variable { name } => match ctx.bare_kind(name) {
                 Some(RuntimeVarKind::Hash) => return true,
                 Some(RuntimeVarKind::Array) => return false,
@@ -5103,14 +5039,6 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_array_snapshot(ctx, name)
                 .map(RuntimeValue::Array)
                 .unwrap_or_else(|| RuntimeValue::Array(ctx.array_snapshot(name))),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => {
-                    Self::scalar_held_array_snapshot(ctx, name)
-                        .map(RuntimeValue::Array)
-                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_snapshot(name)))
-                }
-                _ => self.eval_expr(receiver, ctx, rule_label)?,
-            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Array;
@@ -5187,14 +5115,6 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_hash_snapshot(ctx, name)
                 .map(RuntimeValue::Hash)
                 .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_snapshot(name))),
-            Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => {
-                    Self::scalar_held_hash_snapshot(ctx, name)
-                        .map(RuntimeValue::Hash)
-                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_snapshot(name)))
-                }
-                _ => self.eval_expr(receiver, ctx, rule_label)?,
-            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Hash;
@@ -5731,11 +5651,6 @@ impl Engine {
     }
 
     /// Resolve an array target name from the first arg of a helper call.
-    ///
-    /// In Perl LinkedSpec, `array(results)` is a CONTAINER SPECIFICATION meaning
-    /// "the array named results", not a constructor. When raw_arg is a `Call`
-    /// with name `"array"` and one argument, extract the inner
-    /// variable name. Falls back to the evaluated value's `to_str()`.
     fn resolve_array_target(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
@@ -5743,14 +5658,6 @@ impl Engine {
         allow_bare: bool,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        // Check if the raw arg is `array(variable)`.
-        if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if name == "array" && args.len() == 1 {
-                if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
-                    return var_name.clone();
-                }
-            }
-        }
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): in a type-implying
         // array-TARGET position (`push`), a BARE (un-wrapped) name
         // IS the working array — mirrors the Perl reference's `^(\w+)$` fallback in
@@ -5767,12 +5674,6 @@ impl Engine {
     }
 
     /// Resolve a hash target name from the first arg of a helper call.
-    ///
-    /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)`
-    /// names the runtime hash `name`, while constructor forms such as
-    /// `hash("key", value)` stay value expressions handled by the `hash` helper.
-    /// When `allow_bare` is true, `copy(hash(NAME))` may name the hash directly;
-    /// scalar-like bare value reads stay outside this resolver.
     fn resolve_hash_target(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
@@ -5780,17 +5681,6 @@ impl Engine {
         allow_bare: bool,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
-            Arg::Positional(Expr::Call { name, args }) if name == "hash" && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => Some(name),
-                    _ => None,
-                }
-            }
-            _ => None,
-        }) {
-            return var_name.clone();
-        }
         if let (true, Some(Arg::Positional(Expr::Variable { name: var_name }))) =
             (allow_bare, raw_args.first())
         {
@@ -5986,16 +5876,6 @@ impl Engine {
         match name {
             "set" | "=" => {
                 if args.len() >= 2 {
-                    if let Some((kind, target)) =
-                        Self::aggregate_wrapper_assignment_target(&raw_args[0], &args[1])
-                    {
-                        return Self::store_aggregate_assignment(
-                            &target,
-                            kind,
-                            args[1].clone(),
-                            ctx,
-                        );
-                    }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());
                     return Ok(args[1].clone());
@@ -6004,19 +5884,6 @@ impl Engine {
             }
             // ── Array constructors ──
             "array" => {
-                // Container reference: `array(varname)` with single bare variable
-                // returns the named array, not a constructed array.
-                if args.len() == 1 && raw_args.len() == 1 {
-                    if let linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Variable { name: var_name },
-                    ) = &raw_args[0]
-                    {
-                        if let Some(values) = Self::scalar_held_array_snapshot(ctx, var_name) {
-                            return Ok(RuntimeValue::Array(values));
-                        }
-                        return Ok(RuntimeValue::Array(ctx.get_array(var_name)));
-                    }
-                }
                 // General constructor: `array(val1, val2, ...)`. Explicit
                 // flattening helpers are list-context splices in the Perl
                 // lowering, so `array(flat_array(items))` opens `items` into
@@ -7512,18 +7379,6 @@ impl Engine {
             )),
             // ── Hash helpers ──
             "hash" => {
-                if let (
-                    true,
-                    Some(linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Variable { name: var_name },
-                    )),
-                ) = (args.len() == 1 && raw_args.len() == 1, raw_args.first())
-                {
-                    if let Some(values) = Self::scalar_held_hash_snapshot(ctx, var_name) {
-                        return Ok(RuntimeValue::Hash(values));
-                    }
-                    return Ok(RuntimeValue::Hash(ctx.get_hash(var_name)));
-                }
                 let mut entries = Vec::new();
                 let mut i = 0;
                 while i + 1 < args.len() {

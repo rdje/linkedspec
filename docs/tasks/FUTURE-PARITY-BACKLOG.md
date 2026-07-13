@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl exact aggregate-selector hard rejection `.12.1.8.1` complete; Rust `.12.1.8.2` active).
+- Last updated: `2026-07-12` (Rust exact aggregate-selector hard rejection `.12.1.8.2` complete; Dart `.12.1.8.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,9 +26,10 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The fourteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+- The fifteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
   repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
-  director's structural linked-rule plus progressive/staged parser-composition authoring model.
+  director's structural linked-rule plus progressive/staged parser-composition authoring model and rule-level bare
+  lifecycle-block shorthand.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
@@ -2179,9 +2180,20 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.7`
   Status: `pending`
   Goal: Promote richer legacy/shipped-spec Rust oracle candidates safely.
+  Children: `.7.0`
   Acceptance: Triage richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`, single-line `simenv`,
     VHDL port-clause, `ds_vhistory` branch, and placeholder `verilog` candidates; promote only
     JSON-safe, portable fixtures or split root-cause leaves.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.7.0`
+  Status: `pending`
+  Goal: Calibrate the oracle generator's default process timeout to current shipped-spec parser-build costs.
+  Acceptance: Measure the slowest current shipped-spec parser construction separately from input parsing; select
+    a documented default with bounded headroom so the complete 105-case generator succeeds without an environment
+    override; retain the per-case fork plus `SIGKILL` guard and the `ORACLE_TIMEOUT=0` hard-kill proof; update the
+    Knowledge Map, generator usage, corpus documentation, and recurring verification command together.
   Verification: `pending`
   Commit: `pending`
 
@@ -2867,11 +2879,20 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.2`
-  Status: `active`
-  Goal: Reject exact selector-shaped calls on Rust and delete selector-specific recognition/dispatch.
+  Status: `done`
+  Goal: Reject exact selector-shaped calls at the Rust `.spec` boundary and remove public compatibility dispatch.
+  Verification: **PASS 2026-07-12.** Recursive typed-AST detection plus whole-`CompiledSpec` validation rejects
+    all six neutral exact-selector cases through ordinary/traced compilation, native execution, generated-source
+    emission, v1 decode, and legacy generated adapters. Coverage includes dead/nested blocks, unused functions,
+    and deferred edge-fluent arguments. The 15-case focused suite preserves all eight constructor/literal classes;
+    the executable-source scanner reports zero positives/13 classified rejection sites. Full core/runtime/CLI,
+    105 interpreted corpus, final 105 generated classification in 329.32 seconds, integration 197/197, canonical doctrines/capability/
+    CLI/Phase 0, Knowledge Map, mdBook, formatting, and whitespace gates pass. Selector-specific Rust runtime
+    read/target/assignment/receiver dispatch is gone, and wrapper-era test/corpus terminology is retired.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.3`
-  Status: `pending`
+  Status: `active`
   Goal: Reject exact selector-shaped calls on Dart and delete selector-specific recognition/dispatch.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.4`
@@ -2921,7 +2942,10 @@ before implementation.
   Goal: Capture the director's complete authoring model and split doctrine, progressive composition, staged AST
     enrichment, and implementation/no-drift audit before changing behavior or public claims.
   Verification: **PASS 2026-07-12.** ADR 0012 and the closed `STAGED-LINKED-PARSING` tree already own neutral
-    parse jobs, many-next-spec dispatch design, and one narrow function-body prototype. The director's clarification
+    parse jobs, many-next-spec dispatch design, and one narrow function-body prototype. In that prototype the
+    user-function `.spec` owns the outer definition and bounded body extraction, while the `actionir-body.spec`
+    job identity resolves to a built-in backend-native ActionIR parser adapter rather than an owning `.spec` file;
+    it is staged parsing, not evidence that one `.spec` loads another. The director's clarification
     adds the missing simple-regex/linked-rule authoring doctrine and distinguishes active in-parse progressive
     composition from later returned-AST staged enrichment. Current public `parse_job(...)`, multiple parser
     families, arbitrary in-parse composition, and recursive queues remain unimplemented/future. The mdBook's
@@ -2949,6 +2973,32 @@ before implementation.
   Goal: Close examples, implementation gaps, mdBook/Knowledge Map/tooling alignment, and complete no-drift proof
     for the structural/progressive/staged authoring model.
 
+- ID: `FUTURE-PARITY-BACKLOG.15`
+  Status: `pending`
+  Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
+  Children: `.15.0`, `.15.1`, `.15.2`
+  Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
+    normalize it to the existing `I` lifecycle AST rather than adding runtime semantics. Action-edge and blind-call
+    blocks remain owned by their preceding edge productions and therefore are not standalone/dangling; nested
+    expression/callable blocks remain owned after entering code parsing. Apply the same rule to OR, AND, zero-regex,
+    one-regex, and two-regex rules; preserve explicit `I { ... }`; inherit its ordering/duplicate behavior; align
+    all admitted backends, source generation, diagnostics, examples, and complete gates.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.0`
+  Status: `pending`
+  Goal: Audit and ratify the anywhere-in-rule standalone-block normalization contract before behavior code.
+  Acceptance: Use parser/toolbox evidence to confirm there is currently no dangling `{ ... }` rule-body form and
+    enumerate the non-dangling brace owners: action-edge/blind-call suffix blocks and nested code/callable blocks.
+    Record direct normalization to `I`, inherited duplicate/order behavior, source spans, and malformed forms.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.1`
+  Status: `pending`
+  Goal: Implement the ratified bare rule-level lifecycle shorthand on the Perl reference and Rust backend.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.2`
+  Status: `pending`
+  Goal: Align Dart, Julia, Lua, generated paths, public examples, Knowledge Map, and complete no-drift proof.
+
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — Preserve the director's exact distinction between linked-rule structural recursion,
@@ -2961,7 +3011,7 @@ before implementation.
   cursor-relative extraction, any-number spec composition as the intended contract, and multi-level AST parsing.
 - [x] **NO REGRESSION** — Planning only: no parser, runtime, grammar, fixture, or accepted behavior changes.
 - [x] **LOCKSTEP** — Task/index, roadmap, Knowledge Map/live docs, memory, and mdBook status point at the durable
-  future owner while Perl selector hard rejection remains the immediate implementation frontier.
+  future owner; the arc remains queued behind selector retirement while Dart `.12.1.8.3` is active.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.8.1` Acceptance Checklist
 
@@ -2981,6 +3031,24 @@ before implementation.
   cleanup pass at their true stopping points.
 - [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
   identify Perl hard rejection complete and Rust `.12.1.8.2` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Consume the neutral six invalid-selector cases and prove Rust still parses/executes
+  exact one-bare-identifier `array(...)` / `hash(...)` calls after all executable sources migrated.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify the typed AST/compiler/runtime/generated-plan seams that distinguish
+  exact selectors from retained zero/multi/quoted/computed constructors; keep private runtime maps out of the
+  public-language decision.
+- [x] **FIX** — Reject exact selector nodes with `aggregate_selector_removed` plus portable surface/identifier/
+  replacement fields before native or generated execution, and remove public selector dispatch while retaining
+  bare bindings, constructors, literals, `flat_array(...)`, `flat_hash(...)`, and private host storage.
+- [x] **ADDRESSED (verified)** — Direct parser/compiler, native execution, serialized/generated-plan, dead/nested,
+  and unused-function paths reject deterministically; the eight retained constructor/literal classes still pass.
+- [x] **NO REGRESSION** — Neutral/executable checkers, focused core/runtime/generated suites, complete Rust package,
+  105 interpreted/generated corpus, CLI 61x2 where warranted, docs/KM/doctrines/mdBook/whitespace, and artifact
+  cleanup pass at their true stopping points.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  identify Rust hard rejection complete and Dart `.12.1.8.3` as next.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3308,7 +3376,13 @@ before implementation.
 | 99 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Audit and implement intended in-parse progressive multi-spec composition. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Audit and implement later-stage AST-field enrichment. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Close examples, implementation gaps, tooling, and no-drift. |
-| 102 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `active` | Hard-reject exact selectors on Rust and delete their recognition/dispatch. |
+| 102 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `done` | Rust rejects exact selectors across compiled/generated boundaries and has no selector runtime dispatch. |
+| 103 | `FUTURE-PARITY-BACKLOG.12.1.8.3` | `active` | Hard-reject exact selectors on Dart and delete their recognition/dispatch. |
+| 104 | `FUTURE-PARITY-BACKLOG.7.0` | `pending` | Recalibrate the oracle generator's default hard timeout from measured shipped-spec build costs. |
+| 105 | `FUTURE-PARITY-BACKLOG.15` | `pending` | Normalize any standalone/dangling rule-level block to the existing `I` lifecycle. |
+| 106 | `FUTURE-PARITY-BACKLOG.15.0` | `pending` | Confirm the currently unused dangling-brace slot and ratify anywhere-in-rule normalization. |
+| 107 | `FUTURE-PARITY-BACKLOG.15.1` | `pending` | Implement the shorthand on Perl and Rust after design ratification. |
+| 108 | `FUTURE-PARITY-BACKLOG.15.2` | `pending` | Align remaining backends, generated paths, docs, and no-drift proof. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4004,6 +4078,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.2` | 390 exact forms/67 file-backed specs; three `[undef]` constructions; Perl live EBNF/recursive/traversal probes; Rust native/generated 105 corpora and full gate; Dart/Julia full gates and 105 corpora; Lua dual-ABI 85/85 plus 105-manifest validation; canonical 60/0/0, CLI 61x2, Phase 0 `1..1031`/574s; docs/KM/governance. | PASS. Every tracked `.spec` file is selector-free; exposed initializer/accumulator/fluent-push/descriptor seams are permanently locked and embedded-source `.12.1.7.3` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.7.3` | 1,356 exact positive forms/25 embedded source owners; recurring executable-source classifier at 0 positive/25 recognition; focused Perl generated/function/runtime proof; complete Rust/Dart/Julia/Lua gates; regenerated 105-fixture oracle; standalone Phase 0 `1..1031`/920s; canonical capability 60/0/0, CLI 61x2, Phase 0 `1..1031`/918s; docs/KM/governance/mdBook/whitespace. | PASS. All tracked source migration is complete; implementation recognition remains only for dependency-ordered hard rejection beginning with Perl `.12.1.8.1`. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.1` | Exact six-case compile/generated/direct rejection; unused-function and dead-code coverage; eight retained constructors/literals; focused Perl 41 tests; whitespace-aware executable scan 0/19; regenerated 105 fixtures; Rust corpus replay 3/3; standalone Phase 0 `1..1031`/934s; docs/KM/governance/mdBook/whitespace. | PASS. Perl rejects exact aggregate selectors at the canonical ActionIR boundary with portable fields before lowering, while constructor/literal behavior remains; Rust `.12.1.8.2` activates. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.2` | Exact six-case typed-AST/whole-compiled-state rejection; dead/nested/unused-function/deferred-fluent coverage; native/generated/decoded-plan boundaries; eight retained classes; focused 15/15; executable scan 0/13; complete Rust core/runtime/CLI, 105 interpreted corpus, post-rename 105 generated classifier/329.32s, integration 197/197; canonical local CI including Phase 0 `1..1031`; docs/KM/governance/mdBook/whitespace. | PASS. Rust selector dispatch is deleted and every compiled/generated entry rejects the neutral diagnostic shape; Dart `.12.1.8.3` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
@@ -4050,6 +4125,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.7.2` | `FUTURE-PARITY-BACKLOG.12.1.7.2 - migrate file-backed selector fixtures` | Removes 390 exact selectors from 67 capability/oracle/corpus specs. |
 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `FUTURE-PARITY-BACKLOG.12.1.7.3 - migrate embedded selector sources` | Removes 1,356 embedded positives and adds the recurring executable-source classifier. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `FUTURE-PARITY-BACKLOG.12.1.8.1 - hard-reject Perl aggregate selectors` | Compile-time portable rejection, retained constructors/literals, and full Perl/corpus proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.8.2` | `FUTURE-PARITY-BACKLOG.12.1.8.2 - hard-reject Rust aggregate selectors` | Whole-compiled-state native/generated rejection, selector-dispatch deletion, retained constructors/literals, and full Rust/corpus proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -4115,6 +4191,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.8.2` hard-retires exact aggregate selectors on Rust. Recursive typed-AST detection and
+  whole-`CompiledSpec` validation cover ordinary/traced compilation, dead and unused code, deferred edge-fluent
+  arguments, generated emission, decoded v1 plans, and legacy generated adapters. Selector-specific runtime read,
+  target, assignment, and receiver dispatch is deleted; eight retained constructor/literal classes pass. Focused
+  proof is 15/15, the source scan is zero-positive/13 classified, complete Rust/native/generated/CLI/corpus gates
+  and canonical CI pass, and Dart `.12.1.8.3` activates. A separately owned `.7.0` follow-up will recalibrate the
+  oracle generator's 15-second default after VHDL parser construction measured 19.627 seconds while parsing took
+  0.001 seconds; current complete regeneration uses the documented `ORACLE_TIMEOUT=30` override.
 - `2026-07-12`: `.12.1.8.1` hard-retires exact aggregate selectors on Perl. Canonical ActionIR validation rejects
   direct, nested, dead, and unused-function occurrences before lowering with the neutral diagnostic fields; live
   compilation and generated-source emission fail deterministically. Valid constructors/literals remain. The

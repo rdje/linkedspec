@@ -125,7 +125,8 @@ consume AST target/key/value fields, helper-call statements and returns consume 
 fields before legacy fallback. Expression-valued block internals now consume AST
 `block_value` / `action_block` / `action_stmt` fields for side effects, block-local
 return payloads, and final expressions before legacy fallback.
-Exact one-bare-identifier aggregate selectors are not destination syntax and are rejected before Perl lowering.
+Exact one-bare-identifier aggregate selectors are not destination syntax. Perl rejects them before lowering, and
+Rust rejects them while validating complete compiled ActionIR before native or generated execution.
 
 ## The facade owns routing, not semantics
 

@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.2 — hard-reject Rust aggregate selectors**
+  (DONE — Rust rejection complete; Dart `.12.1.8.3` is next).
+
+  **Outcome:** Exact one-bare-identifier `array(...)` / `hash(...)` calls now fail across Rust's whole compiled
+  ActionIR boundary with the portable `aggregate_selector_removed` fields. Dead/nested code, unused functions,
+  deferred edge-fluent arguments, generated emission, decoded v1 plans, and legacy generated adapters are covered;
+  selector-specific runtime read/target/assignment/receiver dispatch is deleted.
+
+  **Preserved surface and proof:** Eight zero/multi/quoted/computed constructor and direct-literal classes remain.
+  Focused proof passes 15/15, the scanner is zero-positive/13 classified, complete core/runtime/CLI, 105 interpreted
+  and generated corpus, integration 197/197, canonical local CI, mdBook, and governance gates pass. Wrapper-era
+  test/corpus naming is gone. A measured oracle-default issue is queued under `.7.0`; current regeneration uses the
+  documented 30-second override without weakening its hard-kill guard.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.1 — hard-reject Perl aggregate selectors**
   (DONE — Perl rejection complete; Rust `.12.1.8.2` is next).
 

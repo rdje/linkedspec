@@ -1,10 +1,11 @@
 use linkedspec_core::compiler::compile;
+use linkedspec_core::expr::CodeBlock;
 use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, GeneratedSourceError, execute_generated_parser_v1,
-    validate_generated_parser_plan_v1,
+    GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError, GeneratedSourceStage,
+    emit_rust_source_v1, execute_generated_parser_v1, validate_generated_parser_plan_v1,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
@@ -66,6 +67,126 @@ fn assert_native_and_generated(source: &str, plan: &[GeneratedPlanRow], expected
         execute_generated_value(source, plan).expect("generated execution"),
         expected,
         "generated execution"
+    );
+}
+
+fn compile_error(source: &str) -> String {
+    let parsed = parse_spec_with_user_functions(source).expect("parse rejection fixture");
+    validate(&parsed).expect("validate rejection fixture");
+    match compile(&parsed) {
+        Ok(_) => panic!("selector-shaped source compiled successfully: {source}"),
+        Err(error) => error.to_string(),
+    }
+}
+
+fn action_source(action: &str) -> String {
+    format!("Top::\n /x/ -> Done {{ {action} }}\nDone::\n /x/\n")
+}
+
+#[test]
+fn exact_aggregate_selectors_fail_at_the_rust_compile_boundary() {
+    let contract: Value =
+        serde_json::from_str(CONTRACT_JSON).expect("uniform-binding contract JSON");
+    for case in contract["invalid_selector_cases"]
+        .as_array()
+        .expect("invalid selector cases")
+    {
+        let source = case["source"].as_str().expect("selector source");
+        let surface = case["surface"].as_str().expect("selector surface");
+        let identifier = case["identifier"].as_str().expect("selector identifier");
+        let replacement = case["replacement"].as_str().expect("selector replacement");
+        let error = compile_error(&action_source(source));
+        let expected = format!(
+            "aggregate_selector_removed surface={surface} identifier={identifier} replacement={replacement}"
+        );
+        assert!(error.contains(&expected), "{}: {error}", case["id"]);
+    }
+}
+
+#[test]
+fn dead_fluent_and_unused_function_selectors_also_fail_compilation() {
+    let dead_error = compile_error(&action_source(
+        "if(false) { return(array(items)) }; return([])", // selector-rejection fixture
+    ));
+    assert!(
+        dead_error.contains(
+            "aggregate_selector_removed surface=array identifier=items replacement=items"
+        ),
+        "{dead_error}"
+    );
+
+    let fluent_error = compile_error("Top::\n -> Done.return(hash(meta))\nDone::\n /x/\n"); // selector-rejection fixture
+    assert!(
+        fluent_error
+            .contains("aggregate_selector_removed surface=hash identifier=meta replacement=meta"),
+        "{fluent_error}"
+    );
+
+    let unused_error = compile_error(
+        "fn retired() { return(array(items)) }\nTop::\n /x/ -> Done { return([]) }\nDone::\n /x/\n", // selector-rejection fixture
+    );
+    assert!(
+        unused_error.contains(
+            "aggregate_selector_removed surface=array identifier=items replacement=items"
+        ),
+        "{unused_error}"
+    );
+}
+
+#[test]
+fn generated_compiled_spec_decode_rejects_selector_ast() {
+    let mut compiled = compile_source(&action_source("return([])"));
+    compiled.rules[0].preamble =
+        Some(CodeBlock::parse("array(items)").expect("parse synthetic selector code block")); // selector-rejection fixture
+
+    let emit_error = emit_rust_source_v1(&compiled, "selector-generated.spec")
+        .expect_err("generated source emission must reject selector AST");
+    assert_eq!(emit_error.stage, GeneratedSourceStage::EmitSource);
+    assert_eq!(
+        emit_error.code,
+        GeneratedSourceCode::GeneratedSourceEmitFailed
+    );
+    assert!(
+        emit_error.detail.as_deref().unwrap_or_default().contains(
+            "aggregate_selector_removed surface=array identifier=items replacement=items"
+        ),
+        "{emit_error:?}"
+    );
+
+    let compiled_json = serde_json::to_string(&compiled).expect("serialize synthetic fixture");
+    let error =
+        validate_generated_parser_plan_v1(&compiled_json, TOP_DONE_PLAN, "selector-generated.spec")
+            .expect_err("generated plan must reject selector AST");
+    assert_eq!(
+        error.stage,
+        GeneratedSourceStage::CompileOrLoadGeneratedSource
+    );
+    assert_eq!(
+        error.code,
+        GeneratedSourceCode::GeneratedSourceCompileFailed
+    );
+    assert!(
+        error.detail.as_deref().unwrap_or_default().contains(
+            "aggregate_selector_removed surface=array identifier=items replacement=items"
+        ),
+        "{error:?}"
+    );
+}
+
+#[test]
+fn retained_aggregate_constructors_and_literals_execute() {
+    let source = action_source(
+        r#"items = ["x"]
+left = "l"
+right = "r"
+key = "key"
+value = "r"
+return([array(), array("items"), array(copy(items)), array(left, right), hash(), hash("key", value), [items], { key : value }])"#,
+    );
+    assert_native_and_generated(
+        &source,
+        TOP_DONE_PLAN,
+        json!([[], ["items"], [["x"]], ["l", "r"], {}, {"key": "r"}, [["x"]], {"key": "r"}]),
     );
 }
 
