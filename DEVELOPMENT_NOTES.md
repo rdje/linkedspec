@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.7.1 — pure reads must follow uniform mutation storage): Shipped-source
+  migration proved that enabling bare mutations is insufficient if read-only helper fast paths still select host
+  aggregates. In generated Perl, `$name` is the scalar-held typed binding; `@name`/`%name` are private legacy
+  machinery, not a second `.spec` namespace. Bare helper inputs with remembered uniform-binding ownership must
+  therefore bypass aggregate-symbol fast paths and lower through `$name`; flow emptiness must inspect scalar,
+  ARRAY, and HASH values, and `print_each` must avoid treating its first bare argument as an optional scope token.
+  Exact inventory regexes must also require a left identifier boundary: without it, `flat_array(name)` falsely
+  contributes an `array(name)` suffix (51 overall, 17 shipped).
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.6 — static names precede typed binding mutation): Lua's existing
   `lookup_binding` already provided the correct read seam, but `push` was still accumulator/rule-only and mutable
   split required a wrapper. Resolve a registered rule first; otherwise mutate the bare target's runtime array kind.
@@ -58,7 +67,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `array(IDENTIFIER)` / `hash(IDENTIFIER)` recognition so no alternate namespace remains observable. Preserve
   static child-rule precedence when `push(name, value)` is ambiguous and define three-argument `split` as the
   mutable bare-target form. `set(target, value)` must return the target's post-assignment typed value. Exact scans
-  find 651 selector calls/82 specs, so backend enablement must precede source migration and hard rejection.
+  find 600 selector calls/82 specs after requiring a left identifier boundary; the earlier 651 count included 51
+  `flat_array(name)` suffixes. Backend enablement must precede source migration and hard rejection.
 
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.11.3.4 — structural parsing and semantic admission remain distinct): The
   closeout confirms the parser may recognize receiver attached-block structure generically while callable metadata

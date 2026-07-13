@@ -4,13 +4,13 @@ top::            I {blocks = []; retv = undef}
  -> begin_end_blocks          {
 	                       retv = call(begin_end_blocks);
 	                       if(retv);
-	                         push(array(blocks), retv);
+	                         push(blocks, retv);
 	                       endif()
 		              }
 
 LX {
-     if(is_nonempty(array(blocks)));
-       return(copy(array(blocks)));
+     if(is_nonempty(blocks));
+       return(copy(blocks));
      else();
        return_undef();
      endif()
@@ -21,15 +21,15 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
 
  -> comments
  -> anyvariable                       {
-                                       if(is_nonempty(array(keyval_pairs)));
-                                         push(array(assigns), copy(array(keyval_pairs)));
+                                       if(is_nonempty(keyval_pairs));
+                                         push(assigns, copy(keyval_pairs));
                                        endif();
 	                                       retv = call(anyvariable);
-                                       set(array(keyval_pairs), [retv])
+                                       set(keyval_pairs, [retv])
                                       }
 
- -> multiline_value                   {push(array(keyval_pairs), call(multiline_value))}
- -> singleline_value                  {push(array(keyval_pairs), call(singleline_value))}
+ -> multiline_value                   {push(keyval_pairs, call(multiline_value))}
+ -> singleline_value                  {push(keyval_pairs, call(singleline_value))}
  -> begin_end_blocks[1]               {
                                        block_namee = match_text();
 	                                       substr(block_namee, /^.*\s+/, "", o);
@@ -40,12 +40,12 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
 	                                         exit_now();
                                        endif();
 
-                                       if(is_nonempty(array(keyval_pairs)));
-                                         push(array(assigns), copy(array(keyval_pairs)));
+                                       if(is_nonempty(keyval_pairs));
+                                         push(assigns, copy(keyval_pairs));
                                        endif();
                                        print("begin_end_blocks: END    (", match_text(), "\n");
-                                       if(is_nonempty(array(assigns)));
-	                                         return(hash("name", block_namei, "content", copy(array(assigns))));
+                                       if(is_nonempty(assigns));
+	                                         return(hash("name", block_namei, "content", copy(assigns)));
                                        else();
                                          return_undef();
                                        endif()
@@ -75,25 +75,25 @@ multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
 
 
 singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> perl_command_substitution          {push(array(matches), call(perl_command_substitution));   last_pos = cursor_pos()}
- -> command_substitution               {push(array(matches), call(command_substitution));        last_pos = cursor_pos()}
- -> bvariable_substitution             {push(array(matches), call(bvariable_substitution));      last_pos = cursor_pos()}
- -> variable_substitution              {push(array(matches), call(variable_substitution));       last_pos = cursor_pos()}
- -> squotes                            {push(array(matches), call(squotes));                     last_pos = cursor_pos()}
- -> dquotes                            {push(array(matches), call(dquotes));                     last_pos = cursor_pos()}
- -> perl_squotes                       {push(array(matches), call(perl_squotes));                last_pos = cursor_pos()}
- -> perl_dquotes                       {push(array(matches), call(perl_dquotes));                last_pos = cursor_pos()}
- -> bs_nl                              {push(array(matches), call(bs_nl));                       last_pos = cursor_pos()}
+ -> perl_command_substitution          {push(matches, call(perl_command_substitution));   last_pos = cursor_pos()}
+ -> command_substitution               {push(matches, call(command_substitution));        last_pos = cursor_pos()}
+ -> bvariable_substitution             {push(matches, call(bvariable_substitution));      last_pos = cursor_pos()}
+ -> variable_substitution              {push(matches, call(variable_substitution));       last_pos = cursor_pos()}
+ -> squotes                            {push(matches, call(squotes));                     last_pos = cursor_pos()}
+ -> dquotes                            {push(matches, call(dquotes));                     last_pos = cursor_pos()}
+ -> perl_squotes                       {push(matches, call(perl_squotes));                last_pos = cursor_pos()}
+ -> perl_dquotes                       {push(matches, call(perl_dquotes));                last_pos = cursor_pos()}
+ -> bs_nl                              {push(matches, call(bs_nl));                       last_pos = cursor_pos()}
  -> singleline_value[1]     {print("singleline_value: END\n");  print("<", capture_slice(), ">\n");
-	 print_each(array(matches), "singleline_value:<<", ">>\n");
-	 if(is_nonempty(array(matches)));
-	   return(hash("type", "singleline_value", "content", copy(array(matches))));
+	 print_each(matches, "singleline_value:<<", ">>\n");
+	 if(is_nonempty(matches));
+	   return(hash("type", "singleline_value", "content", copy(matches)));
 	 else();
 	   return(hash("type", "singleline_value", "content", undef));
 	 endif()
    }
 
- LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), hash("type", "verbatim", "content", input_slice(last_pos, shift))); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(matches, hash("type", "verbatim", "content", input_slice(last_pos, shift))); endif()}
  LX {print("(simenv) -E- End of Line not found for *singleline_value* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -110,17 +110,17 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
      exit_now()}
 
 dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
- -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> bvariable_substitution                    {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> variable_substitution                     {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
  -> dquotes[1]                                {print("dquotes: END\n");  print("<", capture_slice(), ">\n");
-	 print_each(array(matches), "perl_dquotes:<<", ">>\n");
-         if(is_nonempty(array(matches)));
-           return(hash("type", "dquotes", "content", copy(array(matches))));
+	 print_each(matches, "perl_dquotes:<<", ">>\n");
+         if(is_nonempty(matches));
+           return(hash("type", "dquotes", "content", copy(matches)));
          else();
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(matches, input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -138,51 +138,51 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
 
 perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
  -> parenthesis
- -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
- -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> bvariable_substitution                    {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> variable_substitution                     {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
  -> perl_dquotes[1]                           {print("perl_dquotes: END\n"); print("<", capture_slice(), ">\n");
-	 print_each(array(matches), "perl_dquotes:<<", ">>\n");
-         if(is_nonempty(array(matches)));
-           return(hash("type", "dquotes", "content", copy(array(matches))));
+	 print_each(matches, "perl_dquotes:<<", ">>\n");
+         if(is_nonempty(matches));
+           return(hash("type", "dquotes", "content", copy(matches)));
          else();
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(matches, input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 
 command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution                    {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
- -> variable_substitution                     {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> bvariable_substitution                    {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> variable_substitution                     {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
  -> command_substitution[1]                   {
 	                                       print("command_substitution: END\n"); print("<", capture_slice(), ">\n");
-	                                       print_each(array(matches), "command_substitution:<<", ">>\n");
-                                               if(is_nonempty(array(matches)));
-                                                 return(hash("type", "command_substitution", "content", copy(array(matches))));
+	                                       print_each(matches, "command_substitution:<<", ">>\n");
+                                               if(is_nonempty(matches));
+                                                 return(hash("type", "command_substitution", "content", copy(matches)));
                                                else();
                                                  return(hash("type", "command_substitution", "content", undef));
                                                endif()
 				              }
 
- LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(matches, input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Unmatched back-tick for *command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 
 perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
- -> bvariable_substitution		      {push(array(matches), call(bvariable_substitution));   last_pos = cursor_pos()}
- -> variable_substitution                     {push(array(matches), call(variable_substitution));    last_pos = cursor_pos()}
+ -> bvariable_substitution		      {push(matches, call(bvariable_substitution));   last_pos = cursor_pos()}
+ -> variable_substitution                     {push(matches, call(variable_substitution));    last_pos = cursor_pos()}
  -> perl_command_substitution[1]              {print("perl_command_substitution: END\n"); print("<", capture_slice(), ">\n");
-	 print_each(array(matches), "perl_command_substitution:<<", ">>\n");
-	 if(is_nonempty(array(matches)));
-	   return(hash("type", "command_substitution", "content", copy(array(matches))));
+	 print_each(matches, "perl_command_substitution:<<", ">>\n");
+	 if(is_nonempty(matches));
+	   return(hash("type", "command_substitution", "content", copy(matches)));
 	 else();
 	   return(hash("type", "command_substitution", "content", undef));
 	 endif()}
 
- LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(matches, input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
  

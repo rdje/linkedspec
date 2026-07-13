@@ -1583,10 +1583,10 @@ If backend neutrality matters, these are the defaults you should follow.
 ## Known Caveats and Nuances
 - `return(payload)` is the preferred general return form. Method-chain `.return(...)` now recognizes the common structured payload families plus direct immediate-match, anonymous capture-reader, and explicit whole-input slice payloads such as `entry_text()`, `capture_slice_len()`, and `input_slice(start, width)`; use `return_descriptor` metadata when trying a less common direct reader shape.
 - Helper shells can still contain raw backend expressions; this is sometimes practical, but it is less portable than pure helper-only authoring.
-- Exact `array(name)` / `hash(name)` selectors remain temporarily readable in old specs while the five backends and
-  tracked sources migrate. Their removal is settled; never introduce them in new code. Perl, Rust, Dart, Julia, and
-  Lua all execute the selector-free mutation/result contract; shipped and tracked source migration is now active
-  before hard rejection.
+- Exact `array(name)` / `hash(name)` selectors remain temporarily readable in old non-shipped fixtures/corpora
+  while tracked-source migration finishes. Their removal is settled; never introduce them in new code. Perl,
+  Rust, Dart, Julia, and Lua all execute the selector-free mutation/result contract, and all 15 affected shipped
+  specs are now selector-free. Remaining tracked sources migrate before hard rejection.
 - Some old specs are still extraction-oriented and permissive; that is part of LinkedSpec's intended character, not automatically a bug.
 
 ## Versioning and Compatibility

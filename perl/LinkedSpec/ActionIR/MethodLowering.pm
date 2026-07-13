@@ -2118,6 +2118,9 @@ sub _lower_method_value_expr {
  my $extract_array_symbol_name = sub {
   my ($candidate_expr) = @_;
   my $candidate = $trim_action_ir_value->($candidate_expr);
+  if (defined($candidate) && $candidate =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   return undef if (($bare_symbol_kind->($1) // '') eq 'scalar');
+  }
   if (defined($candidate) && $candidate =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
    return undef if (($bare_symbol_kind->($1) // '') eq 'scalar');
   }
@@ -2126,6 +2129,9 @@ sub _lower_method_value_expr {
  my $extract_hash_symbol_name = sub {
   my ($candidate_expr) = @_;
   my $candidate = $trim_action_ir_value->($candidate_expr);
+  if (defined($candidate) && $candidate =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   return undef if (($bare_symbol_kind->($1) // '') eq 'scalar');
+  }
   if (defined($candidate) && $candidate =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
    return undef if (($bare_symbol_kind->($1) // '') eq 'scalar');
   }
@@ -5194,7 +5200,11 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   } else {
    my $scalar_symbol = $extract_scalar_symbol_name->($target_expr);
    if (defined($scalar_symbol) && length($scalar_symbol)) {
-    $empty_expr = '((!defined($'.$scalar_symbol.') || $'.$scalar_symbol.' eq \'\') ? 1 : 0)';
+    $empty_expr = 'do { my $__ls_is_empty_value = $'.$scalar_symbol.'; '
+     .'(!defined($__ls_is_empty_value) '
+     .'|| (ref($__ls_is_empty_value) eq \'ARRAY\' && !@{$__ls_is_empty_value}) '
+     .'|| (ref($__ls_is_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_is_empty_value})) '
+     .'|| (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq \'\')) ? 1 : 0 }';
    } else {
     my $lowered_target = _lower_method_value_expr($target_expr, $deps);
     $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
@@ -5984,6 +5994,11 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    defined($lowered_arg) && length($lowered_arg) ? $lowered_arg : $_;
   } @$args;
   return '['.join(', ', @lowered).']';
+ }
+
+ if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+  && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+  return '$'.$1;
  }
 
  return $trimmed

@@ -306,8 +306,8 @@ The lifecycle exit block finalizes the last open rule and returns the public pay
 
 ```text
 LX {
-  if(rule);
-    push(array(rules), array(rule, flat_array(rule)));
+  if(rule_header);
+    push(rules, array(rule_header, flat_array(rule)));
   endif();
 
   return(array(flat_array(includes), flat_array(rules)))
@@ -321,9 +321,8 @@ Read this as:
 
 The helper names matter:
 
-- `rule` reads the scalar variable `rule`.
-- `array(rules)` reads the array variable `rules`.
-- `push(...)` appends one constructed value into an array variable.
+- `rule_header`, `rule`, and `rules` are bare typed bindings.
+- `push(rules, ...)` updates and returns the typed `rules` array value.
 - `flat_array(rule)` expands the current rule array into a returned entry.
 - `return(array(...))` returns an array payload.
 
@@ -335,14 +334,14 @@ The `grammar_file` rule starts a new rule entry through this action edge:
 
 ```text
 -> grammar_rule   {
-  if(rule);
-    push(array(rules), array(rule, flat_array(rule)));
+  if(rule_header);
+    push(rules, array(rule_header, flat_array(rule)));
   endif();
 
-  set(array(rule), array(flat_array(semantic_annotations)));
-  set(array(semantic_annotations), array());
+  set(rule, array(flat_array(semantic_annotations)));
+  set(semantic_annotations, array());
 
-  $rule = call(grammar_rule);
+  rule_header = call(grammar_rule);
   on = 1
 }
 ```
@@ -632,16 +631,16 @@ and then:
 -> comma {
   logging_annotation_part = trim(capture_slice());
   if(is_nonempty(logging_annotation_part));
-    push(array(logging_annotation), logging_annotation_part);
+    push(logging_annotation, logging_annotation_part);
   endif();
   start_capture_slice()
 }
 -> logging_annotation[1] {
   logging_annotation_part = trim(capture_slice());
   if(is_nonempty(logging_annotation_part));
-    push(array(logging_annotation), logging_annotation_part);
+    push(logging_annotation, logging_annotation_part);
   endif();
-  return(array("logging_annotation", array(logging_name, copy(array(logging_annotation)))))
+  return(array("logging_annotation", array(logging_name, copy(logging_annotation))))
 }
 ```
 
@@ -660,7 +659,7 @@ The current regression suite locks this runtime behavior because the optional co
 ```text
 logging_annotation_part = trim(capture_slice());
 if(is_nonempty(logging_annotation_part));
-  push(array(logging_annotation), logging_annotation_part);
+  push(logging_annotation, logging_annotation_part);
 endif();
 ```
 

@@ -264,7 +264,11 @@ sub _lower_is_empty_expr {
 
  my $scalar_symbol = $extract_scalar_symbol_name->($trimmed);
  if (defined $scalar_symbol) {
-  return "(!defined(\$$scalar_symbol) || \$$scalar_symbol eq '')";
+  return 'do { my $__ls_empty_value = $'.$scalar_symbol.'; '
+   .'(!defined($__ls_empty_value) '
+   .'|| (ref($__ls_empty_value) eq \'ARRAY\' && !@{$__ls_empty_value}) '
+   .'|| (ref($__ls_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_empty_value})) '
+   .'|| (!ref($__ls_empty_value) && $__ls_empty_value eq \'\')) }';
  }
 
  my $lowered = $lower_direct_nested_access_value_expr->($trimmed);

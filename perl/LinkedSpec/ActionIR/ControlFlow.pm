@@ -1620,7 +1620,19 @@ sub _lower_print_each_statement {
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'print_each';
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 3);
+ my $raw_args = $call->{args} || [];
+ my $effective_args = (
+  ref($raw_args) eq 'ARRAY'
+  && @$raw_args >= 2
+  && @$raw_args <= 3
+  && !(
+   @$raw_args == 3
+   && defined($raw_args->[0])
+   && $raw_args->[0] =~ /^\s*[A-Za-z_][A-Za-z0-9_]*\s*$/o
+   && defined($raw_args->[1])
+   && $raw_args->[1] =~ /^\s*array\s*\(/o
+  )
+ ) ? $raw_args : $normalize_method_args_with_optional_scope->($raw_args, 2, 3);
  return undef unless $effective_args && @$effective_args >= 2;
 
  my $array_expr = $trim_action_ir_value->($effective_args->[0]);
@@ -1631,7 +1643,8 @@ sub _lower_print_each_statement {
   ? $deps->{bare_symbol_kind}
   : sub { return undef };
  my $iterable_expr = '@'.$array_symbol;
- if ($array_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+ if (($array_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+      || $array_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o)
   && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
   $iterable_expr = '@{$'.$1.' // []}';
  }

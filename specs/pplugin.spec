@@ -4,12 +4,12 @@ pplugin_top::   I {defs = []; retv = undef}
 
 LE {
     if(is_defined(retv));
-      set(array(defs), array(flat_array(defs), retv[0], retv[1]));
+      set(defs, array(flat_array(defs), retv[0], retv[1]));
     else();
       return_undef();
     endif()
 }
-LX {return(hash(flat_array(array(defs))))}
+LX {return(hash(flat_array(defs)))}
 
 
 subdef: /(?<subname>\w\S*)\s*(?<!\\)\{/ /(?<!\\)\}/

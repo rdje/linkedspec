@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.6` — Lua selector-free uniform-binding execution.
-- latest_commit: `0178e9f9` — `FUTURE-PARITY-BACKLOG.12.1.5 - enable Julia uniform bindings`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.7.1`; migrate the 15 affected shipped specs after this commit.
-- next_action: replace exact aggregate selectors in shipped `specs/*.spec` with verified bare bindings/literals,
-  regenerate only derived expectations, and prove reference/generated behavior before other tracked sources.
-- current_proof: Lua all nine cases pass; PUC Lua and LuaJIT each pass 85/85 with exact 105-case manifest and
-  scaffold CLI. Immediately prior canonical CI passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and
-  Phase 0 `1..1030` in 865 seconds; docs/KM/governance pass.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.7.1` — shipped aggregate-selector migration.
+- latest_commit: `55cab4bf` — `FUTURE-PARITY-BACKLOG.12.1.6 - enable Lua uniform bindings`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.7.1 - migrate shipped aggregate selectors`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.7.2`; migrate neutral/oracle/corpus `.spec` fixtures next.
+- next_action: inventory the remaining 390 boundary-correct exact forms by neutral/oracle/corpus ownership, migrate
+  only `.12.1.7.2` sources, regenerate derived expectations, and prove every backend corpus path.
+- current_proof: all 210 exact shipped forms are removed; 15-file scan is zero; all 21 descriptors have zero
+  blockers/compatibility surfaces; focused live/generated uniform-binding proof and mdBook/KM pass. Canonical CI
+  passes doctrines/contracts, capability 60/0/0, CLI 61x2, and Phase 0 `1..1031` in 573 seconds.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; lexical codeblock
   capture (new decision only if justified); Rust/Dart/Julia codeblock parity and resumed Lua work follow `.12.1`.
-- blockers: none. in_flight_uncommitted: `.12.1.6` Lua code/tests/docs/Knowledge Map passed final gates and awaits
-  commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the selector-retirement arc.
+- blockers: none. in_flight_uncommitted: `.12.1.7.1` shipped migration/runtime repair/tests/docs/Knowledge Map
+  passed final gates and awaits commit. Lua scalar numeric `.4.3.3.1.4` remains ready after selector retirement.

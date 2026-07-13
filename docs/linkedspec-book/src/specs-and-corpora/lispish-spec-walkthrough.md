@@ -224,23 +224,23 @@ The closing parenthesis edge finalizes the current form:
 -> parenthesis[1] {
   ...
   if(has_head);
-   if(is_nonempty(array(tail)));
-    return(array(head, copy(array(tail))));
+   if(is_nonempty(tail));
+    return(array(head, copy(tail)));
    else();
     return(array(head, undef));
    endif();
   else();
-   return(array(undef));
+   return([undef]);
   endif()
 }
 ```
 
-The canonical wrappers matter:
+The value forms matter:
 
-- `head` means scalar variable `head`.
-- `array(tail)` means array variable `tail`.
-- `copy(array(tail))` snapshots the tail elements into the returned array shape.
+- `head` and `tail` are bare typed bindings; their runtime values determine their kinds.
+- `copy(tail)` snapshots the tail elements into the returned array shape.
 - `return(array(...))` returns an array payload.
+- `[undef]` is the unambiguous one-element array literal; it is not a storage selector.
 
 This is a good real example of why helper DSL matters. The rule contains recursion, accumulation, conditional flow, child calls, array pushes, and structured returns without falling back to ad hoc raw Perl for the core dataflow.
 

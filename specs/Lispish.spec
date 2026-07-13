@@ -7,60 +7,60 @@ parenthesis: /\(/ /\)/
 I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
  -> parenthesis       {
-   if(is_nonempty(array(word)));
+   if(is_nonempty(word));
     if(is_empty(has_head));
-     head = join_values("", array(word));
+     head = join_values("", word);
      has_head = 1;
     else();
-     push(array(tail), join_values("", array(word)));
+     push(tail, join_values("", word));
     endif();
-    set(array(word), array());
+    set(word, array());
    endif();
    retv = call(parenthesis);
    if(is_empty(has_head));
     head = retv;
     has_head = 1;
    else();
-    push(array(tail), retv);
+    push(tail, retv);
    endif()
 }
 
  -> spaces            {
    call(spaces);
-   if(is_nonempty(array(word)));
+   if(is_nonempty(word));
     if(is_empty(has_head));
-     head = join_values("", array(word));
+     head = join_values("", word);
      has_head = 1;
     else();
-     push(array(tail), join_values("", array(word)));
+     push(tail, join_values("", word));
     endif();
-    set(array(word), array());
+    set(word, array());
    endif()
 }
- -> dquotes           {retv = call(dquotes); push(array(word), retv["content"])}
- -> sbrackets         {retv = call(sbrackets); push(array(word), retv["content"])}
- -> curlyb            {retv = call(curlyb); push(array(word), retv["content"])}
- -> others            {retv = call(others); push(array(word), retv["content"])}
+ -> dquotes           {retv = call(dquotes); push(word, retv["content"])}
+ -> sbrackets         {retv = call(sbrackets); push(word, retv["content"])}
+ -> curlyb            {retv = call(curlyb); push(word, retv["content"])}
+ -> others            {retv = call(others); push(word, retv["content"])}
  -> comments          {call(comments)}
 
  -> parenthesis[1]    {
-   if(is_nonempty(array(word)));
+   if(is_nonempty(word));
     if(is_empty(has_head));
-     head = join_values("", array(word));
+     head = join_values("", word);
      has_head = 1;
     else();
-     push(array(tail), join_values("", array(word)));
+     push(tail, join_values("", word));
     endif();
    endif();
 
    if(has_head);
-    if(is_nonempty(array(tail)));
-     return(array(head, copy(array(tail))));
+    if(is_nonempty(tail));
+     return(array(head, copy(tail)));
     else();
      return(array(head, undef));
     endif();
    else();
-    return(array(undef));
+    return([undef]);
    endif()
 }
 

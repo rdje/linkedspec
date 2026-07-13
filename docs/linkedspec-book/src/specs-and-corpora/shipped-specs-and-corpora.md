@@ -68,6 +68,11 @@ At the time of this book slice, it contains these public examples and regression
 
 The important point is not that every file has equal maturity. It does not.
 
+All 15 shipped specs that previously used exact `array(name)` / `hash(name)` storage selectors are now migrated to
+bare typed bindings. That migration removed 210 selector occurrences while preserving constructor calls such as
+`array(value1, value2)` and `hash(key, value)`. The shipped directory therefore demonstrates the future authoring
+model already, even though non-shipped tracked fixtures/corpora still temporarily exercise compatibility input.
+
 The important point is that these files collectively exercise the system:
 
 - top-level rule paragraphs,

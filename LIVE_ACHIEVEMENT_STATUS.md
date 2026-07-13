@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.7.1 — migrate shipped aggregate selectors**
+  (DONE — neutral/oracle/corpus migration `.12.1.7.2` active).
+
+  **Implementation:** All 210 exact forms are removed from the 15 affected shipped specs. Bare reads/mutations,
+  `[undef]` one-element construction, and the VHDL scalar/array scratch split preserve intent. Perl pure helpers,
+  typed emptiness, and `print_each` now read the same scalar-held typed binding that mutations update.
+
+  **Proof:** Shipped scan is zero; all 21 descriptors compile with zero blockers/compatibility surfaces; focused
+  live/generated binding proof passes; CLI passes 61x2; canonical doctrines/contracts/capability and Phase 0
+  `1..1031` pass in 573 seconds; mdBook/KM pass. Correct inventory is 600 baseline, 390 remaining.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.6 — enable Lua uniform bindings**
   (DONE — all five backends enabled; shipped migration `.12.1.7.1` active).
 
@@ -74,14 +85,15 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Proof:** The strict checker passes 11 migrations, seven execution cases, six invalid selectors, eight valid
   constructors/literals, and deterministic future source/results. Canonical CI passes capability 60/0/0, both
-  61-case CLI environments, and Phase 0 `1..1030` in 875 seconds. Backend behavior and 651 tracked compatibility
-  calls remain unchanged until the dependency-ordered rollout/migration.
+  61-case CLI environments, and Phase 0 `1..1030` in 875 seconds. Backend behavior and tracked compatibility calls
+  remained unchanged until the dependency-ordered rollout/migration.
 
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement**
   (DONE — neutral selector-free contract `.12.1.1` active).
 
-  **Inventory:** 651 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls occur across 82 tracked specs; 227 are
-  in 15 shipped specs. Toolbox lowering proves bare reads/receivers exist but bare `push(items, value)` conflicts
+  **Inventory (corrected by `.12.1.7.1`):** 600 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls occur across
+  82 tracked specs; 210 are in 15 shipped specs. The original boundary-less scan included 51/17
+  `flat_array(name)` suffixes. Toolbox lowering proves bare reads/receivers exist but bare `push(items, value)` conflicts
   with child-rule push and mutable `split(parts, source, delimiter)` is not yet admitted.
 
   **Routing:** `.12.1.1` fixes neutral one-binding, mutation, result, precedence, diagnostic, and constructor

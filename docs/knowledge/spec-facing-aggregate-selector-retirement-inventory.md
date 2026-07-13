@@ -12,8 +12,8 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, compatibility, retirement, FUTURE-PARITY-BACKLOG]
-evidence: "Director clarification 2026-07-12 settles removal. FUTURE-PARITY-BACKLOG.12.1.0 inventory finds 651 exact selector-shaped calls across 82 tracked .spec files, including 227 across 15 shipped specs. Leaves .12.1.2-.6 now enable bare reads/mutations/results on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; shipped-source migration .12.1.7.1 is active."
-reverify: "git grep -E -o 'array\\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\\)|hash\\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\\)' -- '*.spec' | wc -l && perl -Iperl -MLinkedSpec -e 'for my $s (q{push(array(items), value)}, q{push(items, value)}, q{split(array(parts), raw, /,/)}, q{split(parts, raw, /,/)}) { print "$s => ", LinkedSpec::call_spec_handler_subst("Top", $s), "\\n" }'"
+evidence: "Director clarification 2026-07-12 settles removal. FUTURE-PARITY-BACKLOG.12.1.7.1 corrects the original boundary-less inventory: 600 exact selector-shaped calls occur across 82 tracked .spec files, including 210 across 15 shipped specs; the earlier 651/227 figures included 51/17 flat_array(name) suffixes. Leaves .12.1.2-.6 enable bare behavior on every backend, and .12.1.7.1 removes all 210 shipped occurrences, leaving 390 tracked occurrences."
+reverify: "git grep -o -P '\\b(?:array|hash)\\(\\s*[A-Za-z_][A-Za-z0-9_]*\\s*\\)' -- '*.spec' | wc -l && perl -Iperl -MLinkedSpec -e 'for my $s (q{push(array(items), value)}, q{push(items, value)}, q{split(array(parts), raw, /,/)}, q{split(parts, raw, /,/)}) { print "$s => ", LinkedSpec::call_spec_handler_subst("Top", $s), "\\n" }'"
 ---
 
 # Spec-facing aggregate-selector retirement inventory
@@ -25,8 +25,11 @@ non-selector constructor calls remains separately classified.
 
 The current tracked surface is large enough to require ordered migration rather than blind replacement:
 
-- 651 exact selector-shaped occurrences across 82 tracked `.spec` files;
-- 227 occurrences across 15 shipped `specs/*.spec` files;
+- 600 exact selector-shaped occurrences across 82 tracked `.spec` files at the pre-migration baseline;
+- 210 occurrences across 15 shipped `specs/*.spec` files, all removed by `.12.1.7.1`;
+- 390 occurrences remain in tracked fixture/corpus/embedded `.spec` sources;
+- the original 651/227 counts were 51/17 too high because their regex also matched the `array(name)` suffix inside
+  ordinary `flat_array(name)` calls;
 - common direct parents are `copy` (172), `push` (158), `set` (72), `is_nonempty` (50), and `split` (13);
 - 17 occurrences are direct receiver expressions.
 
@@ -40,7 +43,8 @@ Neutral leaf `.12.1.1` fixes static-rule precedence, bare mutation, three-argume
 exact diagnostics, and constructor classification in `linkedspec-uniform-binding-v1`. Perl/Rust/Dart/Julia/Lua
 leaves `.12.1.2` through `.12.1.6` now execute those alternatives. Migration remains ordered rather than blind
 because selector-shaped one-argument calls must be classified as reads/targets versus intended constructors;
-shipped-source migration `.12.1.7.1` is active, and hard rejection follows all tracked migration.
+shipped-source migration `.12.1.7.1` is complete, remaining tracked-source `.12.1.7.2` is next, and hard rejection
+follows all tracked migration.
 
 Related facts: [[uniform-expression-compatibility-retirement-doctrine]],
 [[uniform-binding-neutral-contract]],

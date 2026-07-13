@@ -39036,13 +39036,13 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     );
     like(
         $lisp_if,
-        qr/\$on.*\|\|.*\$off.*&&.*!defined\(\$name\).*say \"ok\"/s,
+        qr/\$on.*\|\|.*\$off.*&&.*\$__ls_empty_value = \$name.*!defined\(\$__ls_empty_value\).*say \"ok\"/s,
         'if(...) condition supports nested Lisp-style boolean expressions (or/and/not/is_empty)'
     );
     like(
         $lisp_if,
-        qr/\$name eq ''/s,
-        'is_empty(scalar(...)) lowers to scalar emptiness check in fluent conditions'
+        qr/ref\(\$__ls_empty_value\) eq 'ARRAY'.*ref\(\$__ls_empty_value\) eq 'HASH'.*!ref\(\$__ls_empty_value\).*eq ''/s,
+        'is_empty(...) lowers to typed scalar/array/hash emptiness in fluent conditions'
     );
     my $indexed_scalar_if = LinkedSpec::call_spec_handler_subst(
         'Top',
@@ -39354,7 +39354,7 @@ subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' =
     );
     like(
         $lisp_switch,
-        qr/my \$__ls_switch_value_1 = .*\$op_ready.*\|\|.*\$op_blocked.*&&.*!defined\(\$op_alt\)/s,
+        qr/my \$__ls_switch_value_1 = .*\$op_ready.*\|\|.*\$op_blocked.*&&.*\$__ls_empty_value = \$op_alt.*!defined\(\$__ls_empty_value\)/s,
         'switch(...) condition supports nested Lisp-style boolean expressions through unified lowering'
     );
     my $composite_switch = LinkedSpec::call_spec_handler_subst(
@@ -41518,7 +41518,7 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ebnf exposes no prioritized blocked-rule list after compatibility cleanup');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after compatibility cleanup');
 };
-subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band' => sub {
+subtest 'ebnf_spec_prefers_bare_typed_bindings_in_core_method_dsl_band' => sub {
     plan tests => 4;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
@@ -41527,7 +41527,7 @@ subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band'
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for wrapper migration inspection');
     like($source_content, qr/\.if\(on\)/, 'ebnf core method-DSL band now prefers bare on in fluent guard checks');
     like($source_content, qr/I\.return\(array\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now uses the canonical array constructor');
-    like($source_content, qr/push\(array\(rules\), array\(rule_header, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus bare rule_header and array(rule) wrappers');
+    like($source_content, qr/push\(rules, array\(rule_header, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band uses the bare typed rules binding');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 16;
@@ -41566,18 +41566,18 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ds_vhistory exposes no prioritized blocked-rule list after vhistory migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
-subtest 'ds_vhistory_spec_prefers_canonical_container_wrappers_in_vhistory_band' => sub {
+subtest 'ds_vhistory_spec_prefers_bare_typed_bindings_in_vhistory_band' => sub {
     plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for wrapper migration inspection');
-    like($source_content, qr/first_capt = array\(capt\)\.first\(\);/, 'ds_vhistory vhistory band now uses direct assignment plus array(capt).first() in first captured-entry reads');
-    like($source_content, qr/push\(array\(object_hier\), array\(entry_tag, copy\(array\(capt\)\)\)\)/, 'ds_vhistory vhistory band now uses push(...) plus bare entry_tag and copy in object_hier pushes');
+    like($source_content, qr/first_capt = capt\.first\(\);/, 'ds_vhistory vhistory band reads the first captured entry from the bare typed binding');
+    like($source_content, qr/push\(object_hier, array\(entry_tag, copy\(capt\)\)\)/, 'ds_vhistory vhistory band pushes through bare typed bindings');
     like($source_content, qr/cur_object = call\(object\)/, 'ds_vhistory object edge now prefers direct call assignment instead of compatibility assignment');
-    like($source_content, qr/push\(array\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push(array(capt), call(...))');
-    ok(index($source_content, 'return(array("?ds_vhistory:", copy(array(vhistory))))') >= 0, 'ds_vhistory vhistory band now uses the canonical array wrapper plus copy in top-level return construction');
+    like($source_content, qr/push\(capt, call\(branch\)\)/, 'ds_vhistory child capture edges push into the bare capt binding');
+    ok(index($source_content, 'return(array("?ds_vhistory:", copy(vhistory)))') >= 0, 'ds_vhistory top-level return snapshots the bare vhistory binding');
     unlike($source_content, qr/\$cur_object\s*=\s*call\(object\)/, 'ds_vhistory object edge no longer uses compatibility assignment syntax');
     unlike($source_content, qr/push \@capt, call\(/, 'ds_vhistory child capture edges no longer use raw-looking push-call wrappers');
 };
@@ -41682,8 +41682,8 @@ subtest 'regdef_token_readers_prefer_entry_groups' => sub {
     like($source_content, qr/-> reg_def\s+\{push\(reg_def\)\}/, 'regdef top aggregation now prefers push(reg_def)');
     like($source_content, qr/-> reg_fld\s+\{push\(reg_fld\)\}/, 'regdef nested aggregation now prefers push(reg_fld)');
     unlike($source_content, qr/push \@capt, call\(/, 'regdef migrated aggregators no longer use raw push-call wrappers');
-    like($source_content, qr/LX \{return\(array\("\?regdef_top:", copy\(array\(regdef_top\)\)\)\)\}/, 'regdef top LX now returns helper-form top payload with copy');
-    like($source_content, qr/-> reg_def\[1\]\s+\{return\(array\("\?reg_def:", flat_array\(entry_groups\(\)\), copy\(array\(reg_def\)\)\)\)\}/, 'regdef reg_def return now prefers helper-form entry_groups() plus copy');
+    like($source_content, qr/LX \{return\(array\("\?regdef_top:", copy\(regdef_top\)\)\)\}/, 'regdef top LX returns a snapshot of the bare typed binding');
+    like($source_content, qr/-> reg_def\[1\]\s+\{return\(array\("\?reg_def:", flat_array\(entry_groups\(\)\), copy\(reg_def\)\)\)\}/, 'regdef reg_def return uses entry_groups() plus the bare typed binding');
     like($source_content, qr/reg_fld: .*?I\.return\(array\("\?reg_fld:", flat_array\(entry_groups\(\)\)\)\)/, 'regdef reg_fld return now prefers fluent helper-form entry_groups()');
     like($source_content, qr/-> ob_cb\[1\]\s+\{return\(1\)\}/, 'regdef ob_cb completion now uses helper-form return(1)');
     unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
@@ -41784,7 +41784,7 @@ subtest 'tablegrep_core_flow_prefers_structured_helpers' => sub {
     like($source_content, qr/-> re_term\s+\{retv = call\(re_term\)\}/, 'tablegrep grep child calls now capture through direct call assignment');
     like($source_content, qr/-> group\s+\{retv = call\(group\)\}/, 'tablegrep group child calls now capture through direct call assignment');
     like($source_content, qr/LS \{retv = undef\}/, 'tablegrep loop-start retv reset now uses terse scalar assignment');
-    like($source_content, qr/return\(copy\(array\(internal\)\)\)/, 'tablegrep top lifecycle return now uses helper-form array snapshot return');
+    like($source_content, qr/return\(copy\(internal\)\)/, 'tablegrep top lifecycle returns a snapshot of the bare internal binding');
     like($source_content, qr/exit_now\(1\)/, 'tablegrep operator guard exits now use exit_now(1)');
     unlike($source_content, qr/\$retv\s*=\s*call\(/, 'tablegrep no longer uses compatibility child-call assignment wrappers');
     unlike($source_content, qr/\b(?:exit\s+\d+|my\s+\$retv|return\s+\@internal)/, 'tablegrep no longer uses bare exit/my/conditional-return compatibility spellings in the migrated flow');
@@ -41937,9 +41937,9 @@ subtest 'vhdl_accumulator_and_flat_returns_prefer_helper_source' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for accumulator-return helper inspection');
-    like($source_content, qr/LX \{return\(copy\(array\(vhdl_file\)\)\)\}/, 'vhdl top lifecycle now returns an explicit vhdl_file array snapshot');
-    like($source_content, qr/-> architecture_body\[2\]\s+\{return\(copy\(array\(architecture_statement_part\)\)\)\}/, 'vhdl architecture_statement_part terminal return now uses an explicit array snapshot');
-    like($source_content, qr/signal_decl_range: .*?return\(flat_array\(array\(msi_lsi\)\)\)/s, 'vhdl signal_decl_range now uses flat_array(array(msi_lsi)) for the list-context range return');
+    like($source_content, qr/LX \{return\(copy\(vhdl_file\)\)\}/, 'vhdl top lifecycle returns a vhdl_file snapshot through its bare binding');
+    like($source_content, qr/-> architecture_body\[2\]\s+\{return\(copy\(architecture_statement_part\)\)\}/, 'vhdl architecture_statement_part terminal return snapshots its bare binding');
+    like($source_content, qr/signal_decl_range: .*?return\(flat_array\(msi_lsi\)\)/s, 'vhdl signal_decl_range flattens its bare list binding');
     unlike($source_content, qr/return \\\@vhdl_file/, 'vhdl top lifecycle no longer returns a raw accumulator reference');
     unlike($source_content, qr/return \[\@architecture_statement_part\]/, 'vhdl architecture_statement_part no longer returns a raw accumulator copy');
     unlike($source_content, qr/return \@msi_lsi/, 'vhdl signal_decl_range no longer uses bare list return compatibility syntax');
@@ -42009,7 +42009,7 @@ subtest 'vhdl_remaining_cursor_and_capture_boundary_reads_prefer_phase4_helpers'
     unlike($source_content, qr/process_statement\[1\]\s+\{assign\(scalar\(pos_begin\), pos \$\$STRING\)\}/, 'vhdl process_statement no longer uses the raw pos $$STRING begin-position read');
     like($source_content, qr/subprogram_body\[1\]\s+\{pos_begin = cursor_pos\(\)\}/, 'vhdl subprogram_body now prefers direct cursor_pos() assignment for the live begin-position read');
     unlike($source_content, qr/subprogram_body\[1\]\s+\{assign\(scalar\(pos_begin\), pos \$\$STRING\)\}/, 'vhdl subprogram_body no longer uses the raw pos $$STRING begin-position read');
-    like($source_content, qr/signal_decl_range: .*?LS \{push\(array\(capt\), capture_slice\(\)\)\}/s, 'vhdl signal_decl_range now prefers push plus capture_slice() for the anonymous capture-boundary read');
+    like($source_content, qr/signal_decl_range: .*?LS \{push\(capt, capture_slice\(\)\)\}/s, 'vhdl signal_decl_range pushes capture slices into its bare binding');
     like($source_content, qr/signal_decl_range: .*?LE \{start_capture_slice\(\)\}/s, 'vhdl signal_decl_range now prefers start_capture_slice() for the anonymous capture-boundary write');
     unlike($source_content, qr/signal_decl_range: .*?LE \{assign\(scalar\(IPOS\), pos \$\$STRING\)\}/s, 'vhdl signal_decl_range no longer uses the raw IPOS assignment plus pos $$STRING write');
 };
@@ -42032,8 +42032,8 @@ subtest 'vhdl_package_rules_prefer_entry_group' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for package-name helper inspection');
-    like($source_content, qr/set\(array\(imatch_copy\), array\(entry_group\(0\)\)\);/, 'vhdl package_declaration now prefers set plus entry_group(0) for the package-name snapshot');
-    like($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", entry_group\(0\), copy\(array\(package_body\)\)\)\)/, 'vhdl package_body now prefers entry_group(0) and copy for the package-name return');
+    like($source_content, qr/set\(imatch_copy, array\(entry_group\(0\)\)\);/, 'vhdl package_declaration sets the bare imatch_copy binding');
+    like($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", entry_group\(0\), copy\(package_body\)\)\)/, 'vhdl package_body uses entry_group(0) and the bare package_body binding');
     unlike($source_content, qr/assign\(array\(imatch_copy\), array\(scalar\(IMATCH_LIST, 0\)\)\);/, 'vhdl package_declaration no longer uses scalar(IMATCH_LIST, 0)');
     unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_(?:values|copy)\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
 };
@@ -42055,8 +42055,8 @@ subtest 'vhdl_interface_port_decl_prefers_helper_array_flow' => sub {
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for interface port helper-array inspection');
     like($source_content, qr/interface_signal_declaration: .*?\nI \{port_decl_parts = \[\]\}/s, 'vhdl interface_signal_declaration now initializes a terse helper array for port declaration parts');
-    like($source_content, qr/-> signal_decl_range\s+\{set\(array\(port_decl_parts\), entry_groups\(\)\); push\(array\(port_decl_parts\), call\(signal_decl_range\)\)\}/, 'vhdl interface_signal_declaration now snapshots entry_groups() before appending the optional signal_decl_range child result');
-    like($source_content, qr/-> interface_signal_declaration\[1\]\s+\{set\(array\(port_decl_parts\), entry_groups\(\)\); return\(array\("\?port_decl:", copy\(array\(port_decl_parts\)\)\)\)\}/, 'vhdl interface_signal_declaration now returns the helper copy instead of raw @IMATCH_LIST');
+    like($source_content, qr/-> signal_decl_range\s+\{set\(port_decl_parts, entry_groups\(\)\); push\(port_decl_parts, call\(signal_decl_range\)\)\}/, 'vhdl interface_signal_declaration snapshots and appends through one bare typed binding');
+    like($source_content, qr/-> interface_signal_declaration\[1\]\s+\{set\(port_decl_parts, entry_groups\(\)\); return\(array\("\?port_decl:", copy\(port_decl_parts\)\)\)\}/, 'vhdl interface_signal_declaration returns a copy of its bare typed binding');
     unlike($source_content, qr/-> signal_decl_range\s+\{push \@IMATCH_LIST, call\(signal_decl_range\)\}/, 'vhdl interface_signal_declaration no longer pushes child results directly into raw @IMATCH_LIST');
 };
 subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
@@ -42095,9 +42095,9 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for helper-return entry_groups migration inspection');
     like($source_content, qr/subprogram_declaration: .*?I\.return\(array\("\?subprogram_declaration:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl subprogram_declaration now prefers entry_groups() in its helper return');
-    like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), copy\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() and copy in its helper return');
+    like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), copy\(subprogram_statement_tokens\)\)\)/, 'vhdl subprogram_body uses entry_groups() and the bare token binding');
     like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), type_definition\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
-    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), copy\(array\(process_statement\)\), process_statement_part\)\)/, 'vhdl process_statement now prefers entry_groups() and copy in its helper return');
+    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), copy\(process_statement\), process_statement_part\)\)/, 'vhdl process_statement uses entry_groups() and the bare process binding');
     unlike($source_content, qr/subprogram_declaration: .*?flat_array\(IMATCH_LIST\)/, 'vhdl subprogram_declaration no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
@@ -42113,12 +42113,12 @@ subtest 'vhdl_explicit_payload_returns' => sub {
     unlike($source_content, qr/flat_array\(IMATCH_LIST\)/, 'vhdl source no longer uses raw IMATCH_LIST flattening for migrated helper returns');
     like($source_content, qr/dquote_string:\s+.*?I\.return\(array\("\?dquote_string:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl dquote_string uses an explicit entry_groups payload');
     like($source_content, qr/library_clause:\s+.*?I\.return\(array\("\?library_clause:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl library_clause uses an explicit entry_groups payload');
-    like($source_content, qr/-> generate_statement\[1\]\s+\.return\(array\("\?generate_statement:", flat_array\(entry_groups\(\)\), copy\(array\(generate_statement\)\)\)\)/, 'vhdl generate_statement uses explicit entry_groups plus accumulator payload');
-    like($source_content, qr/-> generic_map_aspect\[1\]\s+\.return\(array\("\?generic_map_aspect:", copy\(array\(generic_map_aspect\)\)\)\)/, 'vhdl generic_map_aspect uses an explicit accumulator payload');
-    like($source_content, qr/-> port_map_aspect\[1\]\s+\.return\(array\("\?port_map_aspect:", copy\(array\(port_map_aspect\)\)\)\)/, 'vhdl port_map_aspect uses an explicit accumulator payload');
+    like($source_content, qr/-> generate_statement\[1\]\s+\.return\(array\("\?generate_statement:", flat_array\(entry_groups\(\)\), copy\(generate_statement\)\)\)/, 'vhdl generate_statement uses entry_groups plus its bare accumulator');
+    like($source_content, qr/-> generic_map_aspect\[1\]\s+\.return\(array\("\?generic_map_aspect:", copy\(generic_map_aspect\)\)\)/, 'vhdl generic_map_aspect uses its bare accumulator');
+    like($source_content, qr/-> port_map_aspect\[1\]\s+\.return\(array\("\?port_map_aspect:", copy\(port_map_aspect\)\)\)/, 'vhdl port_map_aspect uses its bare accumulator');
     like($source_content, qr/association_element: .*?I\.return\(array\("\?association_element:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl association_element uses an explicit entry_groups payload');
-    like($source_content, qr/-> component_declaration\[1\]\s+\.return\(array\("\?component_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(component_declaration\)\)\)\)/, 'vhdl component_declaration uses explicit entry_groups plus accumulator payload');
-    like($source_content, qr/-> configuration_declaration\[1\]\s+\.return\(array\("\?configuration_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(configuration_declaration\)\)\)\)/, 'vhdl configuration_declaration uses explicit entry_groups plus accumulator payload');
+    like($source_content, qr/-> component_declaration\[1\]\s+\.return\(array\("\?component_declaration:", flat_array\(entry_groups\(\)\), copy\(component_declaration\)\)\)/, 'vhdl component_declaration uses entry_groups plus its bare accumulator');
+    like($source_content, qr/-> configuration_declaration\[1\]\s+\.return\(array\("\?configuration_declaration:", flat_array\(entry_groups\(\)\), copy\(configuration_declaration\)\)\)/, 'vhdl configuration_declaration uses entry_groups plus its bare accumulator');
 };
 subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
     plan tests => 5;
@@ -42127,9 +42127,9 @@ subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for lowercase helper-return inspection');
-    ok(index($source_content, "set(array(entity_header_parts), entry_groups());\n   lowercase_each(array(entity_header_parts));\n   return(array(\"?entity_declaration:\", flat_array(entity_header_parts), copy(array(entity_declaration))))") >= 0, 'vhdl entity_declaration now prefers set, entry_groups(), lowercase_each(), and copy for the tagged accumulator shape');
-    ok(index($source_content, "set(array(architecture_header_parts), entry_groups());\n   lowercase_each(array(architecture_header_parts));\n   return(array(flat_array(architecture_header_parts), copy(array(architecture_body)), call(architecture_statement_part)))") >= 0, 'vhdl architecture_body now prefers set, entry_groups(), lowercase_each(), and copy for the lowercase header return');
-    ok(index($source_content, "set(array(instantiation_parts), entry_groups());\n   lowercase_each(array(instantiation_parts));\n   return(array(\"?component_instantiation_statement:\", flat_array(instantiation_parts), copy(array(component_instantiation_statement))))") >= 0, 'vhdl component_instantiation_statement now prefers set, entry_groups(), lowercase_each(), and copy for the tagged accumulator shape');
+    ok(index($source_content, "set(entity_header_parts, entry_groups());\n   lowercase_each(entity_header_parts);\n   return(array(\"?entity_declaration:\", flat_array(entity_header_parts), copy(entity_declaration)))") >= 0, 'vhdl entity_declaration uses one bare typed header binding');
+    ok(index($source_content, "set(architecture_header_parts, entry_groups());\n   lowercase_each(architecture_header_parts);\n   return(array(flat_array(architecture_header_parts), copy(architecture_body), call(architecture_statement_part)))") >= 0, 'vhdl architecture_body uses one bare typed header binding');
+    ok(index($source_content, "set(instantiation_parts, entry_groups());\n   lowercase_each(instantiation_parts);\n   return(array(\"?component_instantiation_statement:\", flat_array(instantiation_parts), copy(component_instantiation_statement)))") >= 0, 'vhdl component instantiation uses one bare typed header binding');
     ok(index($source_content, '.return ((map {lc} @IMATCH_LIST), \@architecture_body, call(architecture_statement_part))') < 0, 'vhdl architecture_body no longer uses raw map {lc} @IMATCH_LIST in its architecture header return');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
@@ -42453,7 +42453,7 @@ subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
     like($source_content, qr/LX \{print\("\(HLinkSubst\) -E- Unmatched closing brace\\n"\); exit_now\(2\)\}/, 'hlink_substitution brace syntax-error path now uses exit_now(2)');
     unlike($source_content, qr/\bexit 2\b/, 'hlink_substitution delimiter syntax-error paths no longer use bare exit compatibility syntax');
 };
-subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_band' => sub {
+subtest 'hlink_substitution_spec_prefers_bare_typed_bindings_in_top_band' => sub {
     plan tests => 6;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
@@ -42461,8 +42461,8 @@ subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_ban
 
     ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for wrapper migration inspection');
     like($source_content, qr/retv = call\(substitute_statement2\)/, 'hlink_substitution top band now uses direct bare retv-compatible call assignment');
-    like($source_content, qr/push\(array\(word_items\), retv\)/, 'hlink_substitution top band now uses push(...) plus array(word_items) and bare retv in accumulator pushes');
-    ok(index($source_content, 'return(copy(array(word_items)));') >= 0, 'hlink_substitution top band now uses array(word_items) plus copy in aggregate return flow');
+    like($source_content, qr/push\(word_items, retv\)/, 'hlink_substitution top band pushes through the bare word_items binding');
+    ok(index($source_content, 'return(copy(word_items));') >= 0, 'hlink_substitution top band snapshots the bare word_items binding');
     like($source_content, qr/-> substitute_statement2\[1\] \{print\("\(HLinkSubst\) -E- Dangling closing bracket\\n"\); exit_now\(1\)\}/, 'hlink_substitution top dangling-bracket path now uses exit_now(1)');
     unlike($source_content, qr/\bexit 1\b/, 'hlink_substitution top dangling-bracket path no longer uses bare exit compatibility syntax');
 };
@@ -42549,7 +42549,7 @@ subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     ok(!defined($runtime_ctx{last_error}), 'lib_reader entry_group migration leaves runtime_ctx last_error clear on success');
     ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
-subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' => sub {
+subtest 'lib_reader_spec_prefers_bare_typed_bindings_in_reader_band' => sub {
     plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'lib_reader.spec');
@@ -42557,11 +42557,11 @@ subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' =>
 
     ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for wrapper migration inspection');
     ok(index($source_content, 'substr(groupname, "\"", "", go)') >= 0, 'lib_reader group reader now uses bare groupname in regex-subst cleanup');
-    ok(index($source_content, 'LX          {return(copy(array(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
-    like($source_content, qr/\.return\(array\("GROUP", grouptype, groupname, copy\(array\(group\)\)\)\)/, 'lib_reader group return now uses bare reads plus copy');
+    ok(index($source_content, 'LX          {return(copy(lib_file))}') >= 0, 'lib_reader top lifecycle snapshots its bare binding');
+    like($source_content, qr/\.return\(array\("GROUP", grouptype, groupname, copy\(group\)\)\)/, 'lib_reader group return uses bare reads plus copy');
     like($source_content, qr/LX \{say\("GROUP <", grouptype, ">\(", groupname, "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
     like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
-    like($source_content, qr/split\(array\(value_items\), value, \/,\//, 'lib_reader cattribute splitter now uses canonical array wrapper and a bare value read');
+    like($source_content, qr/split\(value_items, value, \/,\//, 'lib_reader cattribute splitter targets the bare typed binding');
     unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
@@ -42612,7 +42612,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'sdce exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
-subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
+subtest 'sdce_spec_prefers_bare_typed_bindings_in_split_band' => sub {
     plan tests => 17;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
@@ -42621,17 +42621,17 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     ok(defined($source_content) && length($source_content), 'sdce source spec text is available for wrapper migration inspection');
     like($source_content, qr/sdc_esplit:: I \{pieces = \[\]; retv = undef; start_capture_slice\(\)\}/, 'sdce top band now prefers terse initialization plus start_capture_slice() for explicit anonymous capture-boundary initialization');
     unlike($source_content, qr/assign\(scalar\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
-    like($source_content, qr/LS\s+\{retv = capture_slice\(\); push\(array\(pieces\), retv\)\}/, 'sdce top split band now prefers capture_slice() plus terse assignment/push for anonymous capture-boundary reads');
+    like($source_content, qr/LS\s+\{retv = capture_slice\(\); push\(pieces, retv\)\}/, 'sdce top split band pushes capture slices through the bare pieces binding');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
     unlike($source_content, qr/assign\(scalar\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
-    like($source_content, qr/LX\s+\{retv = capture_rest\(\); push\(array\(pieces\), retv\); return\(copy\(array\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus terse assignment/push/copy for anonymous capture-boundary tail reads');
-    like($source_content, qr/push\(array\(pieces\), retv\)/, 'sdce top band now uses push(...) plus array(pieces) and bare retv in accumulator pushes');
+    like($source_content, qr/LX\s+\{retv = capture_rest\(\); push\(pieces, retv\); return\(copy\(pieces\)\)\}/, 'sdce trailing split band uses the bare pieces binding throughout');
+    like($source_content, qr/push\(pieces, retv\)/, 'sdce top band pushes into the bare pieces binding');
     like($source_content, qr/segment = input_slice\(match_end_pos\(\), call\(oc_brace\)\)/, 'sdce get_pinport brace segment read now prefers direct assignment plus input_slice() with an explicit match-end start');
     unlike($source_content, qr/substr\(\$\$STRING, \$LSPOS, call\(oc_brace\)\)/, 'sdce get_pinport brace segment read no longer uses raw whole-input substr with LSPOS');
     like($source_content, qr/segment = capture_slice\(\)/, 'sdce nested split band now prefers direct assignment plus capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(scalar\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
-    ok(index($source_content, 'split(array(segment_parts), segment, /\s+/)') >= 0, 'sdce get_pinport now uses canonical wrappers in split source and target positions');
-    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(entry_groups\(\)\), copy\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus copy in its helper return');
+    ok(index($source_content, 'split(segment_parts, segment, /\s+/)') >= 0, 'sdce get_pinport splits into the bare segment_parts binding');
+    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(entry_groups\(\)\), copy\(pieces\)\)\)\}/, 'sdce get_pinport uses entry_groups() plus the bare pieces binding');
     unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     like($source_content, qr/oc_brace: .*?\{return\(capture_slice_len\(\)\)\}/, 'sdce oc_brace now prefers capture_slice_len() for brace-body width reads');
     unlike($source_content, qr/\$LSPOS - \$IPOS - 1/, 'sdce oc_brace no longer uses raw cursor arithmetic for brace-body width reads');
@@ -42648,9 +42648,9 @@ subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
     like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
     unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
-    like($source_content, qr/-> comma \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(array\(logging_annotation\), logging_annotation_part\);\s+endif\(\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation appends nonempty comma spans through explicit filter flow');
-    like($source_content, qr/-> logging_annotation\[1\] \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(array\(logging_annotation\), logging_annotation_part\);\s+endif\(\);\s+return\(array\("logging_annotation", array\(logging_name, copy\(array\(logging_annotation\)\)\)\)\)\s+\}/, 'ebnf logging_annotation appends the closing span through explicit filter flow before returning');
-    like($source_content, qr/return\(array\("logging_annotation", array\(logging_name, copy\(array\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
+    like($source_content, qr/-> comma \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(logging_annotation, logging_annotation_part\);\s+endif\(\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging annotation appends comma spans through its bare binding');
+    like($source_content, qr/-> logging_annotation\[1\] \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(logging_annotation, logging_annotation_part\);\s+endif\(\);\s+return\(array\("logging_annotation", array\(logging_name, copy\(logging_annotation\)\)\)\)\s+\}/, 'ebnf logging annotation appends and returns through its bare binding');
+    like($source_content, qr/return\(array\("logging_annotation", array\(logging_name, copy\(logging_annotation\)\)\)\)/, 'ebnf logging annotation returns a snapshot of its bare binding');
     unlike($source_content, qr/\$IMATCH =~ s\/\@\|\\s\*\\\(\//, 'ebnf logging_annotation no longer mutates $IMATCH with raw regex substitution');
     unlike($source_content, qr/return \['logging_annotation', \[\$IMATCH, \[\@logging_annotation\]\]\]/, 'ebnf logging_annotation no longer uses bare arrayref return syntax');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
@@ -42741,18 +42741,18 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
         is_deeply($ast, $expected, "portmap classification matches expected AST for `$input`");
     }
 };
-subtest 'portmap_spec_prefers_canonical_container_wrappers_in_bare_bit_slice_band' => sub {
+subtest 'portmap_spec_prefers_bare_typed_bindings_in_bare_bit_slice_band' => sub {
     plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'portmap.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'portmap source spec text is available for wrapper migration inspection');
-    like($source_content, qr/set\(array\(entry_parts\), entry_groups\(\)\);/, 'portmap bare_bit_slice now uses set plus array(entry_parts) for immediate group snapshot assignment');
-    like($source_content, qr/if\(num_eq\(count\(array\(portmap\)\), 1\)\)\s*\n/, 'portmap top lifecycle now branches through helper-form count comparison without a redundant marker separator');
-    like($source_content, qr/return\(array\(portmap\)\.first\(\)\);/, 'portmap top lifecycle now returns singleton entries through the array receiver first() helper');
-    like($source_content, qr/return\(array\("\?multi:", copy\(array\(portmap\)\)\)\);/, 'portmap top lifecycle now builds multi-entry return payload through helper-form copy');
-    like($source_content, qr/return\(array\("\?concatenation:", copy\(array\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concatenation payload through helper-form copy');
+    like($source_content, qr/set\(entry_parts, entry_groups\(\)\);/, 'portmap bare_bit_slice sets the bare entry_parts binding');
+    like($source_content, qr/if\(num_eq\(count\(portmap\), 1\)\)\s*\n/, 'portmap top lifecycle counts its bare binding');
+    like($source_content, qr/return\(portmap\.first\(\)\);/, 'portmap top lifecycle reads its bare binding as a receiver');
+    like($source_content, qr/return\(array\("\?multi:", copy\(portmap\)\)\);/, 'portmap top lifecycle snapshots its bare binding');
+    like($source_content, qr/return\(array\("\?concatenation:", copy\(concatenation\)\)\)/, 'portmap concatenation snapshots its bare binding');
     like($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now uses nested canonical array wrappers');
     like($source_content, qr/return\(array\("\?bare:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now uses nested canonical array wrappers');
     unlike($source_content, qr/(?:^|\n)\s*(?:if|elseif)\(.*\);\s*(?:\n|$)|(?:^|\n)\s*else\(\);/m, 'portmap flow markers no longer keep redundant standalone separators');
@@ -42831,7 +42831,7 @@ PPLUGIN
     is($registry->{foo}->(), 3, 'PPlugin foo coderef preserves evaluated body behavior');
     is($registry->{bar}->(), 'ok', 'PPlugin bar coderef preserves evaluated body behavior');
 };
-subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_band' => sub {
+subtest 'pplugin_spec_prefers_bare_typed_bindings_in_top_aggregation_band' => sub {
     plan tests => 13;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'pplugin.spec');
@@ -42842,9 +42842,9 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
     like($source_content, qr/-> subdef\s+\{retv = call\(subdef\)\}/, 'pplugin subdef edge now uses direct call assignment');
     like($source_content, qr/if\(is_defined\(retv\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
-    like($source_content, qr/set\(array\(defs\), array\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)/, 'pplugin top aggregation now uses canonical array wrappers and direct access in set and constructor positions');
+    like($source_content, qr/set\(defs, array\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)/, 'pplugin top aggregation sets the bare defs binding');
     like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
-    like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
+    like($source_content, qr/^LX \{return\(hash\(flat_array\(defs\)\)\)\}/m, 'pplugin top LX builds the returned definition hash from its bare binding');
     like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), capture_slice\(\)\)\)\}/, 'pplugin subdef body now returns parsed plugin body text through capture_slice()');
     like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
     unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');
@@ -42923,9 +42923,9 @@ subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
-    like($source_content, qr/-> sub_gui\s+\{set\(hash\(sub_gui_list\),\s*merge_hash\(hash\(sub_gui_list\),\s*call\(sub_gui\)\)\)\}/, 'tkgui top aggregation now merges child hash fragments through helper-form assignment');
-    like($source_content, qr/I \{set\(hash\(sub_gui_list\),\s*\{\}\)\}/, 'tkgui top lifecycle initializes explicit hash accumulator storage');
-    like($source_content, qr/LX \{return\(copy\(hash\(sub_gui_list\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated hash through helper-form copy construction');
+    like($source_content, qr/-> sub_gui\s+\{set\(sub_gui_list,\s*merge_hash\(sub_gui_list,\s*call\(sub_gui\)\)\)\}/, 'tkgui top aggregation merges into one bare typed binding');
+    like($source_content, qr/I \{set\(sub_gui_list,\s*\{\}\)\}/, 'tkgui top lifecycle initializes its bare hash binding');
+    like($source_content, qr/LX \{return\(copy\(sub_gui_list\)\)\}/, 'tkgui top lifecycle snapshots its bare hash binding');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'tkgui comment skips now use the helper-form next statement');
     unlike($source_content, qr/push \@sub_guis, call\(/, 'tkgui top aggregation no longer uses a raw push-call wrapper');
     like($source_content, qr/subgui_name = entry_group\(0\);/, 'tkgui sub_gui now prefers direct assignment plus entry_group(0) for the entry-point name read');
@@ -43094,11 +43094,11 @@ subtest 'simenv_remaining_compatibility_source_prefers_helpers' => sub {
     ok(defined($source_content) && length($source_content), 'simenv source spec text is available for final compatibility-source inspection');
     like($source_content, qr/top::\s+I \{blocks = \[\]; retv = undef\}/, 'simenv top now initializes working state through terse assignments');
     like($source_content, qr/retv = call\(begin_end_blocks\)/, 'simenv top now assigns child block calls through direct call assignment');
-    like($source_content, qr/push\(array\(keyval_pairs\), call\(multiline_value\)\)/, 'simenv begin_end_blocks now appends multiline values through push');
+    like($source_content, qr/push\(keyval_pairs, call\(multiline_value\)\)/, 'simenv begin_end_blocks appends through its bare keyval_pairs binding');
     like($source_content, qr/last_pos = capture_slice_pos\(\); shift = undef/, 'simenv substitution readers initialize position tracking with terse capture_slice_pos() assignment');
     like($source_content, qr/last_pos = cursor_pos\(\)/, 'simenv substitution readers advance position tracking with cursor_pos()');
     like($source_content, qr/input_slice\(last_pos, shift\)/, 'simenv verbatim slices now use input_slice()');
-    like($source_content, qr/print_each\(array\(matches\), "perl_command_substitution:<<", ">>\\n"\)/, 'simenv debug match loops now use print_each()');
+    like($source_content, qr/print_each\(matches, "perl_command_substitution:<<", ">>\\n"\)/, 'simenv debug match loops iterate the bare matches binding');
     like($source_content, qr/substr\(block_namei, \/\^\.\*\\s\+\/, "", o\)/, 'simenv BEGIN block-name cleanup uses a regex literal for whitespace stripping');
     unlike($source_content, qr/my \$last_pos=\$IPOS|my \@matches|pos\(\$\$STRING\)|push \@matches|print ".*?" foreach \(\@matches\)|\bexit\b|return \{type=>|return \{name=>/s, 'simenv source no longer uses the old compatibility position/loop/return/exit forms');
     like($source_content, qr/return_undef\(\)/, 'simenv void completion paths now use return_undef()');
@@ -43194,21 +43194,37 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
-subtest 'lispish_spec_prefers_canonical_container_wrappers_in_parenthesis_and_reader_band' => sub {
+subtest 'lispish_spec_prefers_bare_typed_bindings_in_parenthesis_and_reader_band' => sub {
     plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for wrapper migration inspection');
-    like($source_content, qr/if\(is_nonempty\(array\(word\)\)\);/, 'Lispish parenthesis band now uses array(word) in aggregate flow guards');
-    like($source_content, qr/head = join_values\("", array\(word\)\);/, 'Lispish parenthesis band now uses direct assignment plus array(word) in head assignment');
-    like($source_content, qr/return\(array\(head, copy\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path now uses bare reads plus copy');
+    like($source_content, qr/if\(is_nonempty\(word\)\);/, 'Lispish parenthesis band tests the bare word binding');
+    like($source_content, qr/head = join_values\("", word\);/, 'Lispish parenthesis band joins the bare word binding');
+    like($source_content, qr/return\(array\(head, copy\(tail\)\)\);/, 'Lispish parenthesis return path snapshots the bare tail binding');
     like($source_content, qr/I\.return\(hash\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now use the canonical hash constructor');
     like($source_content, qr/-> parenthesis\s+\{return\(call\(parenthesis\)\)\}/, 'Lispish top child-return edge now uses helper-form return(call(...))');
     like($source_content, qr/-> parenthesis\[1\]\s+\{say\("\(Lispish\) -E- Syntax Error"\); exit_now\(1\)\}/, 'Lispish top syntax-error edge now uses exit_now(1)');
     unlike($source_content, qr/return\s+call\(parenthesis\)/, 'Lispish top child-return edge no longer uses compatibility return-call spelling');
     unlike($source_content, qr/\bexit\s+1\b/, 'Lispish top syntax-error edge no longer uses bare exit compatibility spelling');
+};
+subtest 'migrated_shipped_specs_have_no_exact_collection_selectors' => sub {
+    my @migrated = qw(
+        Lispish ds_vhistory ebnf hlink_substitution lib_reader portmap pplugin regdef
+        sdce simenv spec tablegrep tclite tkgui vhdl
+    );
+    plan tests => scalar(@migrated);
+
+    for my $name (@migrated) {
+        my $source_content = slurp(File::Spec->catfile($spec_dir, "$name.spec"));
+        unlike(
+            $source_content,
+            qr/\b(?:array|hash)\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)/,
+            "$name shipped source has no exact array(name)/hash(name) selector",
+        );
+    }
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');

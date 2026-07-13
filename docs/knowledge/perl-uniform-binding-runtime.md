@@ -8,10 +8,12 @@ answers:
   - "does a saved Perl mutation result change after a later mutation"
   - "how does Perl distinguish push rule dispatch from binding mutation"
   - "are array name and hash name rejected on Perl yet"
+  - "why did migrated bare join values read an empty Perl array"
+  - "do Perl pure helpers read the same bare typed binding as mutations"
 date: 2026-07-12
 status: current
 tags: [perl, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. Bare push/append, mutable split, hash/index update, array end mutation, in-place collection transforms, reads, receivers, copies, and chaining use scalar-held typed values; set chains from its assigned value; ambiguous two-bare push checks the static rule registry first; missing mutation targets auto-create; wrong kinds report binding_kind_mismatch. Wrapper forms remain accepted only until the scheduled source migration and Perl hard-rejection leaf."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.2 adds LinkedSpec::BindingRuntime and focused live/standalone generated execution locks. FUTURE-PARITY-BACKLOG.12.1.7.1 then proves pure array/hash helpers, emptiness flow, and print_each consume those same scalar-held typed values after shipped selector migration; the original Lispish join_values failure came from legacy @name fast-path reads diverging from $name mutation writes. Bare mutation/chaining, static precedence, missing-target creation, and binding_kind_mismatch remain locked."
 reverify: "prove -Iperl t/uniform_binding_contract.t t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t"
 ---
 
@@ -33,8 +35,16 @@ For ambiguous `push(rule_or_target, destination_or_value)`, a registered static 
 first bare name is the array binding.
 
 Exact `array(name)` and `hash(name)` remain accepted temporarily for source compatibility. All backend enablement
-leaves are complete and tracked-source migration is active; Perl hard rejection follows in
+leaves are complete, and all 15 affected shipped specs are selector-free. Remaining tracked-source migration is
+active; Perl hard rejection follows in
 `FUTURE-PARITY-BACKLOG.12.1.8.1`.
+
+The Perl lowering invariant is now explicit: uniform bindings live in scalar-held typed values, so mutation and
+read-only helper paths must both consume `$name`. During shipped migration, `join_values("", word)` initially read
+legacy `@word` after `push(word, value)` had updated `$word`; that split produced empty Lispish words. Central
+array/hash helper lowering, generic typed emptiness checks, and `print_each` now all use the scalar-held value when
+the rule's bare-name memory identifies a uniform binding. Generated Perl sigils remain private host machinery and
+do not create a second `.spec` namespace.
 
 Related facts: [[uniform-binding-neutral-contract]],
 [[spec-facing-aggregate-selector-retirement-inventory]],

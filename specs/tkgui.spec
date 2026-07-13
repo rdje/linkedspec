@@ -1,9 +1,9 @@
 sub_gui_list::
- -> sub_gui	{set(hash(sub_gui_list), merge_hash(hash(sub_gui_list), call(sub_gui)))}
+ -> sub_gui	{set(sub_gui_list, merge_hash(sub_gui_list, call(sub_gui)))}
  -> comment	{next()}
 
- I {set(hash(sub_gui_list), {})}
- LX {return(copy(hash(sub_gui_list)))}
+ I {set(sub_gui_list, {})}
+ LX {return(copy(sub_gui_list))}
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {

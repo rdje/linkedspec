@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.7.1 — migrate shipped aggregate selectors
+
+All 210 exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` occurrences are removed from the 15 affected shipped
+`specs/*.spec` files. Reads, mutation targets, receivers, and copies now use bare typed bindings; Lispish's intended
+one-element result uses `[undef]`. VHDL's same-name scalar/array scratch collision is made explicit as
+`msi_lsi_value` versus the `msi_lsi` array binding. Constructor calls remain unchanged.
+
+The migrated Lispish CLI exposed a Perl lowering split: uniform mutations updated scalar-held `$name` values while
+pure helper fast paths still read legacy `@name` / `%name`. Central method-value lowering, typed emptiness flow,
+and `print_each` now consume the same scalar-held typed value. Focused live/generated tests lock `is_empty`,
+`join_values`, `count`, `first`, `sorted`, `count_keys`, and iterable output after mutations.
+
+The source recount also corrects the original inventory. Requiring a left identifier boundary yields 600 exact
+forms/82 tracked specs, not 651; 51 false positives were `flat_array(name)` suffixes. The shipped baseline is 210,
+not 227, for the same 17-suffix reason. After this slice, shipped sources are at zero and 390 exact forms remain in
+tracked fixtures, corpora, and embedded sources for `.12.1.7.2-.3`.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.6 — enable Lua uniform bindings
 
 Lua now consumes `linkedspec-uniform-binding-v1` on both supported ABIs. `lookup_binding` plus one kind-checked
@@ -124,8 +141,9 @@ consumes the contract next.
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.0 — split aggregate selector retirement
 
 Converted the settled removal of spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` selectors into a complete,
-dependency-ordered implementation tree. Exact tracked-source scans find 651 occurrences across 82 `.spec` files,
-including 227 across 15 shipped specs. Direct parent classification finds 172 `copy`, 158 `push`, 72 `set`, 50
+dependency-ordered implementation tree. A later boundary-correct recount in `.12.1.7.1` establishes 600 exact
+occurrences across 82 `.spec` files, including 210 across 15 shipped specs; the original 651/227 scan included
+51/17 `flat_array(name)` suffixes. Direct parent classification finds 172 `copy`, 158 `push`, 72 `set`, 50
 `is_nonempty`, 13 `split`, and smaller helper families; 17 forms are receiver expressions.
 
 Toolbox lowering proves the migration is not a blind replacement: selector-free `copy(items)`, `return(items)`,

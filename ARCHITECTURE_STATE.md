@@ -13,8 +13,8 @@ This document is the current high-level technical reading of the project shape. 
   non-selector constructors remain in v1. Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and
   Lua `.12.1.6` execute the replacement contract; shipped-source migration `.12.1.7.1` is active.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
-  `FUTURE-PARITY-BACKLOG.12.1`. Exact scans find 651 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
-  tracked specs, including 227 in 15 shipped specs. The one-binding public model does not require identical host
+  `FUTURE-PARITY-BACKLOG.12.1`. Boundary-correct exact scans find 600 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
+  tracked specs, including 210 in 15 shipped specs. The one-binding public model does not require identical host
   storage layouts, but bare read/mutation semantics must be complete before sources migrate and selector-specific
   recognition is hard-deleted. Active `.12.1.1` owns the neutral contract, including static-rule precedence for
   ambiguous push, mutable three-argument split, expression results, diagnostics, and constructor classification.

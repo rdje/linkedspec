@@ -37,11 +37,12 @@ This `README.md` is the **single entry point** to the project.
   `codeblock_argument`; explicit `{|params| ...}` values retain their own signatures and harrays are not promoted.
   Perl closeout `.11.3.4` is complete; the cross-backend feature is not yet current. Before backend rollout,
   active `.12.1` removes spec-facing `array(name)` / `hash(name)` selector and mutation semantics. Inventory
-  `.12.1.0` found 651 exact forms across 82 tracked specs and split neutral contract, five-backend enablement,
+  `.12.1.0` found 600 exact forms across 82 tracked specs (corrected from a boundary-less 651 count) and split neutral contract, five-backend enablement,
   source migration, hard rejection, and no-drift. `.12.1.1` now adopts the executable replacement contract;
   Perl `.12.1.2`, Rust `.12.1.3`, Dart `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` now execute bare typed
   mutations, results, chaining, diagnostics, and static-rule precedence. All five backends are enabled; shipped
-  source migration `.12.1.7.1` is active before hard selector rejection.
+  shipped-source migration `.12.1.7.1` has removed 210 exact selectors from all 15 affected shipped specs; the
+  remaining tracked fixtures/corpora migrate next, before hard selector rejection.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

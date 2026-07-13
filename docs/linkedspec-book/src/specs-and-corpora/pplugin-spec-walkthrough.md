@@ -48,7 +48,8 @@ On the Perl reference backend, the parser returns a hash from subroutine name to
 ```
 
 The parser returns a flat hash where each value is the captured plugin body. The hash is built by the `LX` block's
-`return(hash(flat_array(array(defs))))` call. `perl/PPlugin.pm` then normalizes that parsed payload into the
+`return(hash(flat_array(defs)))` call. Here `defs` is the one bare typed binding accumulated by the rule;
+`perl/PPlugin.pm` then normalizes that parsed payload into the
 legacy name-to-coderef registry consumed by older plugin callers.
 
 ## Rule inventory

@@ -130,6 +130,66 @@ SPEC
  ok(!exists($ctx->{last_error}), 'set chaining fixture leaves structured runtime error clear');
 };
 
+subtest 'pure helpers read the same scalar-held typed binding that mutations update' => sub {
+ my $spec = <<'SPEC';
+Top::
+ /x/ -> Done {
+   items = []
+   empty_before = is_empty(items)
+   push(items, "b")
+   push(items, "a")
+   joined = join_values(",", items)
+   item_count = count(items)
+   first_item = first(items)
+   ordered = sorted(items)
+   meta = {}
+   empty_meta_before = is_empty(meta)
+   meta["stage"] = "ok"
+   key_count = count_keys(meta)
+   return({
+     "empty_before" : empty_before,
+     "joined" : joined,
+     "item_count" : item_count,
+     "first_item" : first_item,
+     "ordered" : ordered,
+     "empty_meta_before" : empty_meta_before,
+     "key_count" : key_count
+   })
+ }
+Done::
+ /x/
+SPEC
+ my ($result, $ctx) = run_spec($spec, 'xx', 'pure uniform-binding helper fixture');
+ is_deeply(
+  $result,
+  {
+   empty_before => 1,
+   joined => 'b,a',
+   item_count => 2,
+   first_item => 'b',
+   ordered => ['a', 'b'],
+   empty_meta_before => 1,
+   key_count => 1,
+  },
+  'pure array/hash helpers observe mutation updates through the one bare typed binding',
+ );
+ ok(!exists($ctx->{last_error}), 'pure uniform-binding helper fixture leaves structured runtime error clear');
+
+ my $print_each_spec = <<'SPEC';
+Top::
+ I { items = []; push(items, "x") }
+ /x/ -> Done { print_each(items, "<", ">") }
+Done::
+ /x/
+SPEC
+ my $print_each_source = LinkedSpec::emit_generated_source(\$print_each_spec);
+ like(
+  $print_each_source,
+  qr/foreach \(\@\{\$items \/\/ \[\]\}\)/,
+  'print_each iterates the scalar-held bare array binding',
+ );
+};
+
 subtest 'static rule push keeps precedence over a same-named binding' => sub {
  my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'push(items, outputs)');
  like($lowered, qr/\$\$descr\{spec\}\{items\}/, 'ambiguous push resolves the potential static-rule entry');
