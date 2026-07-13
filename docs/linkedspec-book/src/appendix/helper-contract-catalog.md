@@ -918,6 +918,9 @@ dispatch rule.
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
 - **Returns**: hash
 - **Behavior**: Returns a new hash with the key renamed. The value is preserved. If the old key does not exist, the hash is returned unchanged.
+- **Portable collision boundary**: Keep `new_key` absent from the source. When it already exists, Perl/Julia keep
+  the renamed old value while Dart/Rust keep the pre-existing destination; Lua currently follows Perl/Julia.
+  `FUTURE-PARITY-BACKLOG.5` owns normalization.
 
 ### `drop_keys(h, k1, k2, ...)`
 - **Signature**: `drop_keys(h: hash, keys: string...)`

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (bare harray transform contract `.4.3.5.3.0` revalidated after uniform binding;
-  Lua implementation `.4.3.5.3.1` active).
+- Last updated: `2026-07-13` (Lua copied harray transforms `.4.3.5.3.1` pass 102/102; rename collision drift is
+  routed to helper caveats `.5`; named mutation `.4.3.5.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2179,8 +2179,10 @@ before implementation.
     child push already returns the governed updated target. Include harray flatten context: Perl direct harray
     `flat`/`flat_hash` exposes host list/scalar context, shipped `hash(flat_array(defs))` is not recognized uniformly
     by newer typed runtimes, and harray-to-array key/value order differs across unordered/insertion-ordered hosts;
-    Lua sorts keys locally for deterministic output, but that is not yet a portable sequence guarantee. Finish with
-    backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
+    Lua sorts keys locally for deterministic output, but that is not yet a portable sequence guarantee. Normalize
+    `rename_key(source, old, new)` when `new` already exists too: direct CLI probes return the renamed old value on
+    Perl/Julia but the pre-existing destination value on Dart/Rust, and the current catalog does not select either.
+    Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
 
@@ -3676,10 +3678,11 @@ before implementation.
 | 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
 | 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied harray construction, explicit splicing, and identity pass 100/100. |
 | 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Deterministic copied harray views and membership pass 101/101. |
-| 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Container for copied harray transforms and compatible receiver chains. |
+| 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `done` | Revalidated copied harray transforms and receiver chains pass 102/102. |
 | 132 | `LUA-BACKEND-PARITY.4.3.5.3.0` | `done` | Revalidated bare base/overlay and pure transform contracts after uniform binding. |
-| 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `active` | Implement the revalidated transform and receiver contract on Lua. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity and harray order, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
+| 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
+| 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `active` | Close named set-key and direct hash-index mutation through one binding seam. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity, harray order/rename collisions, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.3.1 — add Lua copied harray transforms**
+  (DONE — 102/102 on both ABIs; named set-key/direct mutation `.4.3.5.4` active).
+
+  **Implementation:** Copied merge/set/rename/drop/pick values accept bare typed operands, preserve nested/null
+  values, apply later merge override, and continue through compatible harray and array-view receivers.
+
+  **Proof and caveat:** Deep isolation, pure source behavior, invalid boundaries, and receiver chains pass 102/102.
+  Rename collisions are old-value-wins on Perl/Julia/Lua but destination-wins on Dart/Rust; backlog `.5` owns it.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.3.0 — revalidate harray transform contracts**
   (DONE — pre-uniform-binding merge guidance corrected; Lua implementation `.4.3.5.3.1` active).
 

@@ -3109,6 +3109,153 @@ Done::
   }), "deterministic harray views")
 end)
 
+test("runtime copied harray transforms preserve overrides isolation and receiver flow", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(base, {
+     "b" : 2,
+     "a" : { "nested" : 1 },
+     "same" : "base",
+     "old" : 7,
+     "new" : 9,
+     "drop" : 0,
+     "null" : undef
+   })
+   set(overlay, { "c" : 3, "same" : "overlay", "a" : { "nested" : 4 } })
+   merged = merge_hash(base, overlay)
+   receiver_merged = base.merge_hash(overlay).drop_keys("drop").set_key("z", 5)
+   value_set = set_key(base, "added", { "value" : 8 })
+   renamed = rename_key(base, "old", "renamed")
+   collision = rename_key(base, "old", "new")
+   same_rename = rename_key(base, "old", "old")
+   dropped = drop_keys(base, "drop", "missing")
+   picked = pick_keys(base, "a", "same", "null", "missing")
+   base["a"]["nested"] = 99
+   overlay["a"]["nested"] = 88
+   return({
+     "merged" : merged,
+     "merged_chain" : merged.sorted_keys().join_values(","),
+     "receiver_merged" : receiver_merged,
+     "receiver_chain" : base.rename_key("old", "renamed").drop_keys("drop").set_key("z", 5).sorted_keys().join_values(","),
+     "value_set" : value_set,
+     "renamed" : renamed,
+     "collision" : collision,
+     "same_rename" : same_rename,
+     "dropped" : dropped,
+     "picked" : picked,
+     "source_base" : base,
+     "source_overlay" : overlay,
+     "source_has_added" : base.has_key("added"),
+     "source_has_renamed" : base.has_key("renamed"),
+     "invalid_set" : set_key("text", "x", 1),
+     "missing_set_value" : set_key(base, "x"),
+     "invalid_rename" : rename_key("text", "old", "new"),
+     "missing_rename_value" : rename_key(base, "old"),
+     "invalid_drop" : drop_keys("text", "x"),
+     "missing_drop" : drop_keys(),
+     "invalid_pick" : pick_keys("text", "x"),
+     "missing_pick" : pick_keys(),
+     "empty_pick" : pick_keys(base),
+     "empty_merge" : merge_hash()
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    merged = json.harray({
+      a = json.harray({ nested = 4 }),
+      b = 2,
+      c = 3,
+      drop = 0,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "overlay",
+    }),
+    merged_chain = "a,b,c,drop,new,null,old,same",
+    receiver_merged = json.harray({
+      a = json.harray({ nested = 4 }),
+      b = 2,
+      c = 3,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "overlay",
+      z = 5,
+    }),
+    receiver_chain = "a,b,new,null,renamed,same,z",
+    value_set = json.harray({
+      a = json.harray({ nested = 1 }),
+      added = json.harray({ value = 8 }),
+      b = 2,
+      drop = 0,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "base",
+    }),
+    renamed = json.harray({
+      a = json.harray({ nested = 1 }),
+      b = 2,
+      drop = 0,
+      new = 9,
+      null = json.null,
+      renamed = 7,
+      same = "base",
+    }),
+    collision = json.harray({
+      a = json.harray({ nested = 1 }),
+      b = 2,
+      drop = 0,
+      new = 7,
+      null = json.null,
+      same = "base",
+    }),
+    same_rename = json.harray({
+      a = json.harray({ nested = 1 }),
+      b = 2,
+      drop = 0,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "base",
+    }),
+    dropped = json.harray({
+      a = json.harray({ nested = 1 }),
+      b = 2,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "base",
+    }),
+    picked = json.harray({ a = json.harray({ nested = 1 }), null = json.null, same = "base" }),
+    source_base = json.harray({
+      a = json.harray({ nested = 99 }),
+      b = 2,
+      drop = 0,
+      new = 9,
+      null = json.null,
+      old = 7,
+      same = "base",
+    }),
+    source_overlay = json.harray({ a = json.harray({ nested = 88 }), c = 3, same = "overlay" }),
+    source_has_added = 0,
+    source_has_renamed = 0,
+    invalid_set = "text",
+    missing_set_value = json.null,
+    invalid_rename = "text",
+    missing_rename_value = json.null,
+    invalid_drop = "text",
+    missing_drop = json.null,
+    invalid_pick = json.null,
+    missing_pick = json.null,
+    empty_pick = json.harray(),
+    empty_merge = json.harray(),
+  }), "copied harray transforms")
+end)
+
 test("runtime copied array selection ordering membership and uniqueness", function()
   local result = execute_uniform_binding_source([[
 Top::

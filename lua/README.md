@@ -36,9 +36,13 @@ direct or terminal flat ASTs. Explicit harray flattening into `array(...)` or `[
 key/value pairs. `count_keys`, lexical `sorted_keys`, copied values in the same key order, and presence-based
 `has_key` work through functions and receivers; sorted arrays continue through array helpers, while count and
 membership are terminal. Wrong-kind/missing sources return `0` or `[]`, and null-valued fields remain present.
-The Lua gate passes 101/101 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
+Copied `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` preserve nested values,
+support bare typed operands and compatible receivers, keep sources unchanged, and isolate saved results. Later
+merge arguments override earlier keys. Lua deterministically lets the renamed old value replace an existing
+destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
+The Lua gate passes 102/102 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
-harray construction/views `.4.3.5.1-.2` are done and copied transforms/receivers `.4.3.5.3` are active.
+harray construction/views/transforms `.4.3.5.1-.3` are done and named mutation `.4.3.5.4` is active.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by `.4.3.6`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

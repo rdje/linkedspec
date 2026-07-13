@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.3.1 — add Lua copied harray transforms
+
+Added deep-copied `merge_hash`, value `set_key`, `rename_key`, `drop_keys`, and `pick_keys` with bare typed
+operands and compatible harray/array receiver chains. Later merge arguments override; sources and saved nested
+results remain isolated. Lua lets a renamed old value replace an existing destination, matching Perl/Julia;
+Dart/Rust keep the destination, so the mdBook warns and backlog `.5` owns normalization. Both Lua ABIs pass
+102/102; named mutation `.4.3.5.4` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.3.0 — revalidate harray transform contracts
 
 Superseded the July 4 claim that a bare first `merge_hash(base, overlay)` loses its base. Uniform binding now makes

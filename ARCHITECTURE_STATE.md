@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua copied harray transforms evaluate bare operands once, deep-copy nested results, merge
+  in argument order with later override, and reuse harray/array-view receiver dispatch. Pure set/rename/drop/pick
+  never mutate sources; invalid/missing boundaries are locked. Both ABIs pass 102/102. Rename collision probes
+  split Perl/Julia old-value-wins from Dart/Rust destination-wins; Lua follows the reference and backlog `.5` owns
+  normalization. Named set-key/direct mutation `.4.3.5.4` is active.
 - `2026-07-13` refresh: Uniform binding supersedes the pre-July-12 `merge_hash` bare-base exception. Bare typed
   `base` and `overlay` values are accepted in their respective transform slots; later arguments override earlier
   keys; `copy(base)` is optional pure composition; the removed single-name selector remains rejected. Perl toolbox proof,

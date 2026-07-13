@@ -10,14 +10,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.5.3.0` — revalidate current harray transform contracts.
-- latest_commit: `5be724de` — `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.5.3.1`; implement copied Lua harray transforms/receiver chains.
-- next_action: implement `.4.3.5.3.1` only: merge/set/rename/drop/pick copied values and receiver composition.
-- current_proof: July 12 uniform binding supersedes the old bare-first merge exception. Perl returns `2` for
-  `merge_hash(base, overlay)` and `merge_hash(copy(base), overlay)`; exact `hash(base)` rejects. The bare-first
-  neutral case passes Dart/Julia selection and Rust's 105-case oracle. Current KM/runtime facts and mdBook agree.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.5.3.1` — copied harray transforms and receiver composition.
+- latest_commit: `722ee8ff` — `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.5.4`; add named harray mutation and direct-assignment coverage.
+- next_action: implement `.4.3.5.4` only: statement `set_key`, direct key assignment, typed-store preservation,
+  wrong-kind errors, and independent returned snapshots.
+- current_proof: Lua `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` now return
+  deep-copied harray values and compose through receivers; later merge arguments override earlier keys. The Lua
+  harness passes 102/102 on PUC Lua and LuaJIT. Rename collisions remain a known cross-backend difference:
+  Perl/Julia preserve the renamed old value, Dart/Rust preserve the existing destination; backlog leaf `.5`
+  owns normalization and portable specs currently rename only to absent keys.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: `.4.3.5.3.0` contract/doc correction awaiting its prepared commit; no
-  runtime behavior changed. Lua implementation `.4.3.5.3.1` is next. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: `.4.3.5.3.1` implementation, tests, KM fact, task-tree, live docs, and
+  mdBook synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.

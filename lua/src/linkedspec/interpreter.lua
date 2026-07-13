@@ -782,8 +782,13 @@ end
 
 local PURE_HASH_HELPERS = {
   count_keys = true,
+  drop_keys = true,
   flat_hash = true,
   has_key = true,
+  merge_hash = true,
+  pick_keys = true,
+  rename_key = true,
+  set_key = true,
   sorted_keys = true,
   sorted_values = true,
 }
@@ -978,8 +983,58 @@ local function evaluate_hash_helper(name, values)
     local result = json.harray()
     for _, value in ipairs(values) do
       if json.kind(value) == "harray" then
-        for key, item in pairs(value) do result[key] = copy_value(item) end
+        for _, key in ipairs(sorted_harray_keys(value)) do result[key] = copy_value(value[key]) end
       end
+    end
+    return result
+  end
+  if name == "merge_hash" then
+    local result = json.harray()
+    for _, value in ipairs(values) do
+      if json.kind(value) == "harray" then
+        for _, key in ipairs(sorted_harray_keys(value)) do result[key] = copy_value(value[key]) end
+      end
+    end
+    return result
+  end
+  if name == "set_key" then
+    if #values < 3 then return json.null end
+    if json.kind(source) ~= "harray" then return copy_value(source) end
+    local result = copy_value(source)
+    local key = scalar_string(values[2], true) or ""
+    result[key] = copy_value(values[3])
+    return result
+  end
+  if name == "rename_key" then
+    if #values < 3 then return json.null end
+    if json.kind(source) ~= "harray" then return copy_value(source) end
+    local result = copy_value(source)
+    local old_key = scalar_string(values[2], true) or ""
+    local new_key = scalar_string(values[3], true) or ""
+    if old_key ~= new_key and result[old_key] ~= nil then
+      local renamed = result[old_key]
+      result[old_key] = nil
+      result[new_key] = renamed
+    end
+    return result
+  end
+  if name == "drop_keys" then
+    if source == nil then return json.null end
+    if json.kind(source) ~= "harray" then return copy_value(source) end
+    local result = copy_value(source)
+    for index = 2, #values do
+      local key = scalar_string(values[index], true) or ""
+      result[key] = nil
+    end
+    return result
+  end
+  if name == "pick_keys" then
+    if json.kind(source) ~= "harray" then return json.null end
+    local selected = {}
+    for index = 2, #values do selected[scalar_string(values[index], true) or ""] = true end
+    local result = json.harray()
+    for _, key in ipairs(sorted_harray_keys(source)) do
+      if selected[key] then result[key] = copy_value(source[key]) end
     end
     return result
   end

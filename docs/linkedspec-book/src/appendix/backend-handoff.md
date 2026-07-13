@@ -675,11 +675,12 @@ All 34 non-callback array names and six numeric terminals are closed under `.4.3
 nested maps intact, and splices only explicit flat ASTs; explicit harray-to-array list context uses deterministic
 sorted key/value pairs. Lexical keys, copied values ordered by key, count, and null-aware membership compose through
 function/receiver/array-chain forms and return `0`/`[]` for missing or wrong-kind sources. Both Lua ABIs pass
-101/101 through `.4.3.5.2`. Bare base/overlay transforms were revalidated across the admitted backends after
-uniform binding in `.4.3.5.3.0`; Lua implementation `.4.3.5.3.1` is active and tree callbacks remain `.4.3.6`.
+102/102 through `.4.3.5.3.1`: bare merge operands, later override, copied set/rename/drop/pick values, deep source
+isolation, and harray/array-view receiver chains are implemented. Named mutation `.4.3.5.4` is active and tree
+callbacks remain `.4.3.6`.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
-child-push expression results differ;
+child-push expression results and rename-to-existing-key policy differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a

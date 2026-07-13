@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.3.1 — copy transforms can share dispatch without sharing mutation):
+  Ordered operand evaluation and receiver injection already existed; the missing seam was the harray transform
+  evaluator. Sorting source keys makes Lua traversal deterministic, while argument order alone governs merge
+  override. Every selected nested value is copied before return, so later source writes cannot alter saved views.
+  A direct collision probe found an ungoverned edge: Perl/Julia let the renamed old value win, Dart/Rust keep the
+  destination. Lua follows the reference locally; public guidance forbids collision dependence and backlog `.5`
+  owns the cross-backend decision. Named statement mutation stays separate in `.4.3.5.4`.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.3.0 — dated facts must be reverified after language migrations): The
   July 4 bare-merge boundary was correct when recorded, but July 12 uniform binding changed the underlying value
   path and selector retirement invalidated its recommended `copy(hash(base))` spelling. Current Perl lowering is
