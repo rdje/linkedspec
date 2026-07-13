@@ -115,6 +115,44 @@ SPEC
  ok(!exists($ctx->{last_error}), 'bare collection mutation leaves structured runtime error clear');
 };
 
+subtest 'all array-end methods return independent updated arrays' => sub {
+ my $spec = <<'SPEC';
+Top::
+ /x/ -> Done {
+   items = ["a", "b", "c"]
+   after_push_back = items.push_back("d")
+   after_push_front = items.push_front("z")
+   after_pop_back = items.pop_back()
+   after_pop_front = items.pop_front()
+   count = items.push_back("e").count()
+   return({
+     "items" : items,
+     "after_push_back" : after_push_back,
+     "after_push_front" : after_push_front,
+     "after_pop_back" : after_pop_back,
+     "after_pop_front" : after_pop_front,
+     "count" : count
+   })
+ }
+Done::
+ /x/
+SPEC
+ my ($result, $ctx) = run_spec($spec, 'xx', 'array-end result fixture');
+ is_deeply(
+  $result,
+  {
+   items => ['a', 'b', 'c', 'e'],
+   after_push_back => ['a', 'b', 'c', 'd'],
+   after_push_front => ['z', 'a', 'b', 'c', 'd'],
+   after_pop_back => ['z', 'a', 'b', 'c'],
+   after_pop_front => ['a', 'b', 'c'],
+   count => 4,
+  },
+  'push/pop end methods return saved updates and continuations consume the current array',
+ );
+ ok(!exists($ctx->{last_error}), 'array-end result fixture leaves structured runtime error clear');
+};
+
 subtest 'set returns the post-assignment typed value for receiver chaining' => sub {
  my $spec = <<'SPEC';
 Top::

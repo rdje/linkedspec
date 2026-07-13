@@ -549,12 +549,15 @@ dispatch rule.
 
 ### `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()`
 - **Signature**: `target.push_back(value: expr)`, `target.push_front(value: expr)`, `target.pop_back()`, `target.pop_front()`
-- **Returns**: void
-- **Behavior**: Statement-level array end mutations on a named working array. `push_back` appends, `push_front` prepends, `pop_back` removes the last element, and `pop_front` removes the first element. Pop methods discard the removed value.
+- **Returns**: an independent updated array snapshot.
+- **Behavior**: Array end mutations on a named working array. `push_back` appends, `push_front` prepends,
+  `pop_back` removes the last element, and `pop_front` removes the first element. Pop methods discard the removed
+  value; their expression result is the updated array, not the removed item. An unused result is silently dropped.
 - **Examples**: `items.push_back("tail")`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`.
 - **Edge cases**: The receiver is the bare array working value (`items`) and auto-exists as an array when the
   mutation contract permits creation. A bare push value reads a working variable, just like `items += value`.
-  These are statement-only mutations; value-returning forms such as `return(items.pop_back())` are outside this contract.
+  An existing non-array target raises `binding_kind_mismatch`. Saved results are independent snapshots, and a
+  compatible continuation consumes the update; for example, `items.push_back(value).count()` yields the new count.
 - **Worked example**:
   ```text
   Top::
@@ -656,8 +659,9 @@ dispatch rule.
   array-consuming terminal links over the same numeric aggregate helper family.
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
   string being split. Numeric reducer terminals do not continue through later array methods; compose the helper
-  form explicitly when another numeric operation is needed. Statement-only end mutations (`push_back`,
-  `push_front`, `pop_back`, `pop_front`) remain mutations, not value-chain links. The portable contract does not
+  form explicitly when another numeric operation is needed. Named end mutations (`push_back`, `push_front`,
+  `pop_back`, `pop_front`) update their binding and may feed a compatible continuation from the returned array.
+  They are not pure links over arbitrary temporary array receivers. The portable contract does not
   promise every possible pipeline-to-pure continuation; use verified chains such as
   `items.uniq().join_values(",")`, `items.filter_match(/^a/).count()`, or pure chains such as
   `items.sorted().drop_front(1).first()`.
@@ -1709,8 +1713,8 @@ and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly
 bindings are accepted anywhere the helper contract admits the runtime value kind; quoted strings are literal
 constructor payloads, not aliases or indirect lookup. Mutation statement forms remain available, and assignment/mutation operators also have
 expression values where documented: `name = value` yields the stored value, `items += value` yields the updated
-array snapshot, and `name[key] = value` yields the updated hash snapshot. Array end mutations such as
-`items.push_back(value)` remain statement-only. Inline value `if`/`switch` is portable in the supported
+array snapshot, and `name[key] = value` yields the updated hash snapshot. Array end mutations likewise yield an
+independent updated array and can continue through compatible receivers. Inline value `if`/`switch` is portable in the supported
 value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
 specific compatibility tag string.
@@ -1779,7 +1783,7 @@ The current helper aliases above lower within their supported statement/helper f
 target receives a scalar, array, or hash RHS value. Mutation assignment operators also compose as value
 expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated hash
 snapshot; nested value-path assignment yields the updated root value on success and `undef` on failed path checks.
-Array end mutations remain statement-only.
+Array end mutations yield updated arrays too; pop methods still discard the removed element.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.
 

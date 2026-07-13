@@ -46487,8 +46487,9 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
 subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.1: array receiver-dot value chains feed the
     # receiver into the existing pure helper contracts. The .1.6 end-mutation
-    # methods remain statement-only and are not made value-returning here.
-    plan tests => 11;
+    # methods were originally statement-only; the later uniform-binding
+    # contract makes their independent updated arrays valid value receivers.
+    plan tests => 12;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -46511,8 +46512,12 @@ subtest 'spec_format_terse_2_3_5_1_array_receiver_value_chains' => sub {
         'receiver-dot join_values keeps the documented delimiter-first helper contract');
     like($L->('return(items.filter_nonempty().lowercase_each().join_values(","))'), qr/LinkedSpec::UnicodeCaseMapping::lowercase\(\$_\).*join\(",", \@\{\$__ls_join_values\}\)/s,
         'filter/transform receiver chains lower as array-valued helper composition');
-    is($L->('return(items.push_back("a"))'), 'return items.push_back("a")',
-        'push_back remains outside value-chain lowering');
+    like($L->('return(items.push_back("a"))'),
+        qr/return do \{ require LinkedSpec::BindingRuntime; \$items = LinkedSpec::BindingRuntime::array_end_mutation\(\$items, "items", "push_back", "a"\) \}/,
+        'push_back returns the independent uniform-binding update');
+    like($L->('return([1].push_back("a"))'),
+        qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_back/,
+        'array-end mutation rejects a temporary receiver instead of inventing a target');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(sep,\"|\"); items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), items.reversed().take(2).last(), items.sorted().index_of(\"c\"), items.drop_back().join_values(sep), items.uniq().join_values(\",\"), items.filter_match(/^a\$/).count(), phrases.split_each(\"-\").filter_match(/^aa\$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n"

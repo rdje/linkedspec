@@ -10,8 +10,8 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, uniform-binding, arrays, mutation, results, documentation, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts linkedspec-uniform-binding-v1: mutable operations yield independent updated typed targets unless a callable explicitly returns something else. .12.1.2-.6 make Perl, Rust, Dart, Julia, and Lua execute that rule; each backend's permanent facts/tests include array-end result continuation. LUA-BACKEND-PARITY.4.3.4.0 found older mdBook and Knowledge Map sentences still teaching the superseded statement-only/null-result boundary. FUTURE-PARITY-BACKLOG.12.1.11 owns repair and recurring no-drift."
-reverify: "python3 tools/check_uniform_binding_contract.py && rg -n 'push_back.*count|array-end.*updated|mutation_result' capability_conformance/uniform_binding_contract.json t rust dart julia lua docs/tasks/FUTURE-PARITY-BACKLOG.md docs/knowledge/*uniform-binding*"
+evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts linkedspec-uniform-binding-v1: mutable operations yield independent updated typed targets unless a callable explicitly returns something else. .12.1.2-.6 established the backend runtime primitives and general mutation contract. LUA-BACKEND-PARITY.4.3.4.0 then found older mdBook and Knowledge Map sentences still teaching the superseded statement-only/null-result boundary. Five-backend value-position proof in FUTURE-PARITY-BACKLOG.12.1.11 exposed one accompanying Perl lowering defect: BindingRuntime::array_end_mutation already returned the independent update, but ActionIR::MethodLowering's fluent-chain value path explicitly excluded all four methods, leaving generated Perl to call an undefined SpecEntry helper. The .12.1.11 repair admits the first array-end mutation only on a named typed binding, assigns and returns its copied update, and permits compatible array continuations; literal/helper temporaries remain invalid mutation targets."
+reverify: "python3 tools/check_uniform_binding_mutation_result_surface.py && python3 tools/check_uniform_binding_contract.py && PERL5LIB= prove -Iperl t/uniform_binding_contract.t"
 ---
 
 The current contract is not statement-only. `push_back`, `push_front`, `pop_back`, and `pop_front` mutate one typed
@@ -23,5 +23,6 @@ not alias a later update.
 This supersedes the narrower `SPEC-FORMAT-TERSE.1.6` result boundary recorded before uniform binding was adopted.
 That older card remains valid history for what the original slice shipped, but it is not current normative
 guidance. The array audit found stale current-facing statement-only/no-value claims in the helper catalog, helper
-reference, backend summaries, and Dart/Julia/terse Knowledge Map cards. `FUTURE-PARITY-BACKLOG.12.1.11` must
-reconcile those surfaces before Lua array implementation continues.
+reference, backend summaries, and Dart/Julia/terse Knowledge Map cards. Its five-backend proof also caught the
+Perl value-position lowering exclusion described in the evidence above. `FUTURE-PARITY-BACKLOG.12.1.11`
+reconciles both surfaces before Lua array implementation continues.

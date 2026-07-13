@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.11 — align array end mutation results**
+  (DONE — `.12.1`/`.12` re-closed; Lua copied array construction `.4.3.4.1` active).
+
+  **Implementation:** All four array-end methods now return independent updated arrays in Perl value positions,
+  including saved results and compatible continuations. The repair reuses the existing runtime primitive, admits
+  only named typed bindings, preserves push/pop arity, and diagnoses temporary receivers. Public/backend/mdBook/KM
+  prose identifies the later uniform-binding contract as superseding the original statement-only slice.
+
+  **Proof:** The recurring surface checker passes 48 files, 12 current anchors, and nine classified historical
+  cards. Focused suites pass Perl 12, Rust 16, Dart 16, Julia 61, and Lua 91/91 on both ABIs; selector retirement
+  stays zero-positive and capability remains 60/0/0. Canonical CI passes CLI 61x2 and Phase 0 `1..1031` in 631
+  seconds; mdBook, Knowledge Map, doctrines, cleanup, and whitespace pass.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.0 — split Lua array helper mechanisms**
   (DONE — six array owners fixed; uniform-binding result-doc repair `.12.1.11` active before code).
 

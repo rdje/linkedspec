@@ -249,6 +249,43 @@ Done::
 }
 
 #[test]
+fn all_array_end_methods_return_independent_updated_arrays() {
+    let source = r#"Top::
+ /x/ -> Done {
+   items = ["a", "b", "c"]
+   after_push_back = items.push_back("d")
+   after_push_front = items.push_front("z")
+   after_pop_back = items.pop_back()
+   after_pop_front = items.pop_front()
+   count = items.push_back("e").count()
+   return({
+     "items" : items,
+     "after_push_back" : after_push_back,
+     "after_push_front" : after_push_front,
+     "after_pop_back" : after_pop_back,
+     "after_pop_front" : after_pop_front,
+     "count" : count
+   })
+ }
+Done::
+ /x/
+"#;
+
+    assert_native_and_generated(
+        source,
+        TOP_DONE_PLAN,
+        json!({
+            "items": ["a", "b", "c", "e"],
+            "after_push_back": ["a", "b", "c", "d"],
+            "after_push_front": ["z", "a", "b", "c", "d"],
+            "after_pop_back": ["z", "a", "b", "c"],
+            "after_pop_front": ["a", "b", "c"],
+            "count": 4
+        }),
+    );
+}
+
+#[test]
 fn registered_rule_keeps_ambiguous_push_precedence() {
     let source = r#"Top::
  I { items = ["unchanged"]; outputs = [] }

@@ -485,7 +485,7 @@ and match-state tracking. `.4.2` has added first compiled-rule dispatch, and `.4
 runtime mechanism. `.4.3.1` has added core scalar/array/hash stores, typed snapshots, assignments/access, checked
 nested writes, and capture maps/positions. `.4.3.2` has added string/scalar and numeric helpers, regex flags,
 aliases/symbol callees, invalid-input boundaries, and compatible receiver chains. `.4.3.3` has added copied array
-pipelines, split/flatten/reducer bridges, and statement-only end mutations. `.4.3.4` has added copied hash views
+pipelines, split/flatten/reducer bridges, and updated-value end mutations. `.4.3.4` has added copied hash views
 and transformations, statement-only named set-key mutation, direct hash-index assignment, merge-slot resolution,
 and explicit flat-style splicing. `.4.3.5` has added expression-valued blocks, attached/marker/inline controls,
 deterministic while guards, immediate helper/receiver with-blocks, and scoped hash/array tree callbacks. The
@@ -1244,7 +1244,7 @@ no-autovivification nested writes, and entry/local capture maps/positions pass f
 implemented too: current string/scalar and numeric helpers share canonical function/receiver dispatch, retain
 regex flags, normalize JSON numbers, and return `nothing` for invalid arithmetic. `.4.3.3` is now implemented as
 well: copied array helper/receiver pipelines, regex and split bridges, explicit flatten splicing, numeric reducer
-terminals, typed split replacement, and statement-only end mutations pass focused tests. `.4.3.4` is now
+terminals, typed split replacement, and updated-value end mutations pass focused tests. `.4.3.4` is now
 implemented too: copied hash views and pure transformations, compatible receiver chains, statement-only named
 set-key mutation, direct hash-index assignment, merge-slot resolution, explicit flat-style splicing, and nested-map
 preservation pass focused tests. `.4.3.5` is now implemented too: expression-valued blocks with local returns,
@@ -1700,7 +1700,7 @@ helpers, numeric word aliases, arithmetic/comparison symbol callees, and
 compatible string/number receiver chains. It also executes array helper family
 breadth, bare array working-variable receiver chains, regex split/filter
 bridges, delimiter-first `join_values`, array numeric reducers, and
-statement-only array end mutations. It also executes hash helper family breadth,
+updated-value array end mutations. It also executes hash helper family breadth,
 bare hash working-variable receiver chains, statement/value mutation boundaries,
 direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
 flat-style hash splicing inside `hash(...)`. It also executes expression-valued

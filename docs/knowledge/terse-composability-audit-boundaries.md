@@ -18,7 +18,7 @@ answers:
 date: 2026-06-30
 status: current
 tags: [spec-format-terse, composability, rust, perl, mdbook, oracle]
-evidence: "SPEC-FORMAT-TERSE.2.3.4 audit on 2026-06-30 showed pure value-helper composition lowers cleanly with explicit aggregate wrappers: `count(drop_front(sorted_keys(merge_hash(copy(hash(base)), hash(overlay)))))` returns 2 with ActionIR ready metadata, and `terse_2_3_4_deep_pure_helper_composition` locked that boundary. The same audit found Rust returned 1 for the old-helper form `merge_hash(hash_copy(base), overlay)` because bare `overlay` was evaluated as a scalar before `merge_hash` saw evaluated hash args. SPEC-FORMAT-TERSE.2.3.4.1 fixed that Rust parity gap by snapshotting bare working variables only in hash-consuming and array-consuming helper slots; `terse_2_3_4_1_bare_hash_helper_arg_composition` and `terse_2_3_4_1_bare_array_helper_arg_composition` now pass. SPEC-FORMAT-TERSE.2.3.4.2 fixed the Perl inline value-control gap: `return(if(...))`, assignment RHS `if(...)`, `return(switch(...))`, assignment RHS `switch(...)`, and fluent `.return(if(...))` / `.return(switch(...))` now return the selected branch payload on the Perl reference, including nested helper predicates/branches and expression-valued block branches. The new `terse_2_3_4_2_inline_if_value_control` and `terse_2_3_4_2_inline_switch_value_control` oracle fixtures pass, and Rust corpus_oracle passes with 46 fixtures. The portable assertion is the selected payload value, not any mandatory `?...:` tag string. Receiver-dot array mutations remain statement-only and are tracked separately by SPEC-FORMAT-TERSE.2.3.5."
+evidence: "SPEC-FORMAT-TERSE.2.3.4/.1/.2 establish pure aggregate composition and inline value-control boundaries. The original audit routed then-statement-only array-end methods separately. FUTURE-PARITY-BACKLOG.12.1.1-.6 later supersede that result boundary with updated arrays and compatible continuation across all five backends."
 reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $json=JSON::PP->new->canonical(1)->allow_nonref(1); for my $expr (q{return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), overlay)))))}, q{return(count(drop_front(sorted_keys(merge_hash(copy(hash(base)), hash(overlay))))))}, q{return(count(drop_front(sorted(items))))}, q{return(if(1, \"yes\", else(\"no\")))}, q{return(switch(\"a\", case(\"a\", \"yes\"), default(\"no\")))}) { print \"$expr => \", LinkedSpec::call_spec_handler_subst(\"Top\", $expr), \"\\n\" }' && cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture"
 ---
 
@@ -53,4 +53,5 @@ Closed and remaining splits:
 
 Still separate:
 
-- `.2.3.5`: value-returning/chained receiver-dot methods. Existing array end methods are statement-only.
+- `.2.3.5`: value-returning/chained receiver-dot methods. Its original statement-only array-end boundary was later
+  superseded by uniform binding; see [[uniform-binding-array-end-result-supersession]].

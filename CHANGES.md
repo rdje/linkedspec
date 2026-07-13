@@ -1,5 +1,15 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.11 — align array end mutation results
+
+Aligned `push_back`, `push_front`, `pop_back`, and `pop_front` with the adopted uniform-binding result contract:
+each mutates its named typed binding and evaluates to an independent updated array; pop discards the removed
+element, and compatible continuations consume the update. The documentation audit also exposed a Perl lowering
+defect: `BindingRuntime::array_end_mutation` already returned the correct value, but the fluent value path excluded
+all four methods and left generated value-position calls raw. Named receiver lowering, saved-result/continuation
+proof across all five backends, historical supersession notes, and a recurring 48-file public checker now close
+that gap. Lua copied array construction `.4.3.4.1` resumes at the unchanged 91/91 dual-ABI baseline.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.0 — split Lua array helper mechanisms
 
 Split Lua array parity into copied construction/splicing, selection/order/membership, scalar/regex transforms,

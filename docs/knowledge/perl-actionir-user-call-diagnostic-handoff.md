@@ -30,5 +30,5 @@ compatibility boundary for host-shaped statements.
 
 Known DSL and compatibility helper names are fenced before the unknown-call diagnostic.
 That preserves existing behavior for declaration aliases, source-boundary helpers,
-retired return helpers, internal trace calls, and statement-only array mutation methods
-such as `push_back`.
+retired return helpers, internal trace calls, and known array mutation methods such as `push_back`. Uniform binding
+later governs the updated-array result of those methods independently of this unknown-call diagnostic seam.

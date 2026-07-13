@@ -80,6 +80,9 @@ boundaries, and zero runtime compatibility. The uniform-binding selector retirem
 Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs: 56 public files are
 locked at 31 classified removed/history references and zero current examples, including explicit bare-binding
 anchors in the Rust, Dart, Julia, and Lua READMEs.
+Closed follow-up `.12.1.11` reconciles older statement-only array-end result prose and Perl value-position lowering
+with the already-admitted updated-value contract. `python3 tools/check_uniform_binding_mutation_result_surface.py`
+gates the public book/backend summaries, current backend fact anchors, and explicitly classified historical cards.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

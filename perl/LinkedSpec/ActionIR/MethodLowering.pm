@@ -4177,6 +4177,64 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lower_synthetic_chain_expr->($current_expr)
   }
 
+  if ($first_method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_array_end_mutation_value_chain',
+    taken => 1,
+    context => { first_method => $first_method, steps => scalar(@$calls) },
+   );
+
+   # Array-end mutation is meaningful only for a named typed binding: the
+   # result is both assigned back to that binding and returned as the value of
+   # the expression. Do not silently invent mutation semantics for a literal,
+   # helper result, or other temporary receiver.
+   return _actionir_ast_unsupported_helper_expr($first_method)
+    unless ($receiver->{kind} // '') eq 'variable';
+   my $target = $receiver->{name};
+   return _actionir_ast_unsupported_helper_expr($first_method)
+    unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+   my $first_args = $calls->[0]{args} || [];
+   return _actionir_ast_unsupported_helper_expr($first_method)
+    unless ref($first_args) eq 'ARRAY';
+   my $mutation_expr;
+   if ($first_method =~ /^push_/o) {
+    return _actionir_ast_unsupported_helper_expr($first_method) unless @$first_args == 1;
+    my $value_source = _actionir_ast_value_source_expr($first_args->[0]);
+    return _actionir_ast_unsupported_helper_expr($first_method)
+     unless defined($value_source) && length($value_source);
+    my $value_expr = _lower_mutation_slot_value_expr($value_source, $deps);
+    return _actionir_ast_unsupported_helper_expr($first_method)
+     unless defined($value_expr) && length($value_expr);
+    $mutation_expr = _uniform_binding_array_end_expr($target, $first_method, $value_expr);
+   } else {
+    return _actionir_ast_unsupported_helper_expr($first_method) unless @$first_args == 0;
+    $mutation_expr = _uniform_binding_array_end_expr($target, $first_method, undef);
+   }
+   return undef unless defined($mutation_expr) && length($mutation_expr);
+
+   my $current_expr = $mutation_expr;
+   my $current_family = 'array';
+   for (my $idx = 1; $idx < @$calls; ++$idx) {
+    my $call = $calls->[$idx];
+    my $method = $call->{method} // '';
+    if (_is_tree_traversal_receiver_method($method)) {
+     my $return_family = $tree_receiver_return_family->($method, $current_expr, $calls, $idx);
+     my $applied = $lower_tree_receiver_block_call->($method, $current_expr, $call, $return_family);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+    } else {
+     my $applied = $append_array_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+    }
+    return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+   }
+   return $lower_synthetic_chain_expr->($current_expr)
+  }
+
   if (_is_hash_receiver_value_chain_method($first_method)
    && ($first_method ne 'copy' || $copy_starts_hash_receiver_chain->($receiver_expr, $calls))) {
    _trace_method_decision(

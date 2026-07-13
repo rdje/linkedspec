@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.11 — a runtime contract is not proven by statement-only tests): Perl's
+  array-end runtime primitive already returned an independent updated array, but value-position ActionIR still
+  excluded the four method names. That mismatch survived because earlier proof exercised dropped statements and
+  general mutation results without executing all four saved results plus a receiver continuation in generated
+  Perl. Mutation-result parity must therefore lock the full route: named receiver lowering, assignment/rebinding,
+  returned snapshot, later-update isolation, continuation family, invalid temporary receiver, and backend docs.
+  The recurring surface checker separately preserves dated slice history while rejecting it as current guidance.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.0 — later neutral contracts supersede earlier slice boundaries): The
   original array-end method slice was deliberately statement-only, but `linkedspec-uniform-binding-v1` later
   adopted updated typed values for every mutation unless explicitly overridden. Perl, Rust, Dart, Julia, and Lua

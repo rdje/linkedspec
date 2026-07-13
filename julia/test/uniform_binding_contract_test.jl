@@ -285,6 +285,39 @@ Done::
         )
     end
 
+    @testset "all array-end methods return independent updated arrays" begin
+        _expect_uniform_binding_native_and_generated(
+            raw"""Top::
+ /x/ -> Done {
+   items = ["a", "b", "c"]
+   after_push_back = items.push_back("d")
+   after_push_front = items.push_front("z")
+   after_pop_back = items.pop_back()
+   after_pop_front = items.pop_front()
+   count = items.push_back("e").count()
+   return({
+     "items" : items,
+     "after_push_back" : after_push_back,
+     "after_push_front" : after_push_front,
+     "after_pop_back" : after_pop_back,
+     "after_pop_front" : after_pop_front,
+     "count" : count
+   })
+ }
+Done::
+ /x/
+""",
+            Dict{String,Any}(
+                "items" => Any["a", "b", "c", "e"],
+                "after_push_back" => Any["a", "b", "c", "d"],
+                "after_push_front" => Any["z", "a", "b", "c", "d"],
+                "after_pop_back" => Any["z", "a", "b", "c"],
+                "after_pop_front" => Any["a", "b", "c"],
+                "count" => 4,
+            ),
+        )
+    end
+
     @testset "registered rule keeps ambiguous push precedence" begin
         _expect_uniform_binding_native_and_generated(
             raw"""Top::

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (array mechanisms split; uniform-binding result-doc repair is active before code)
+- Last updated: `2026-07-12` (uniform-binding result repair closed; array construction `.4.3.4.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1088,7 +1088,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement copied array construction, explicit flatten splicing, concatenation, and copy boundaries.
   Dependencies: `.4.3.4.0`, `FUTURE-PARITY-BACKLOG.12.1.11`
   Acceptance: `array`, literals, `copy`, `flat`, `flat_array`, and `concat_arrays` evaluate in order, splice only
@@ -1347,8 +1347,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` is closed at 91/91 on PUC Lua and LuaJIT with exact 55-case six-runtime scalar
-proof and `runtime-numeric-reducers`. Array split `.4.3.4.0` is done; cross-cutting uniform-binding result-doc
-repair `FUTURE-PARITY-BACKLOG.12.1.11` is active before array construction `.4.3.4.1`.
+proof and `runtime-numeric-reducers`. Array split `.4.3.4.0` and cross-cutting uniform-binding result alignment
+`FUTURE-PARITY-BACKLOG.12.1.11` are done; copied construction/splicing `.4.3.4.1` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1397,7 +1397,7 @@ repair `FUTURE-PARITY-BACKLOG.12.1.11` is active before array construction `.4.3
 | 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict array reducers and six terminal receiver forms pass both ABIs. |
 | 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `done` | Numeric proof/public no-drift closed at 91/91 on both ABIs. |
 | 45 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Split six array mechanisms and route superseded mutation-result prose. |
-| 46 | `LUA-BACKEND-PARITY.4.3.4.1` | `pending` | Begin copied construction/splicing after external `.12.1.11` closes. |
+| 46 | `LUA-BACKEND-PARITY.4.3.4.1` | `active` | Implement copied construction/splicing after external `.12.1.11` closed. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

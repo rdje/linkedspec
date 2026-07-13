@@ -846,8 +846,9 @@ Array helpers are pure value helpers unless you use `set(...)` to store their re
 
 Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper
 argument, except `join_values`, where `items.join_values(delim)` maps to the canonical
-`join_values(delim, items)` contract. The mutating end methods `items.push_back(value)`,
-`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` remain statement-only. An
+`join_values(delim, items)` contract. The named mutating end methods `items.push_back(value)`,
+`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` return independent updated arrays; pop
+discards the removed element, and a continuation such as `.count()` consumes the update. An
 array-yielding expression-valued block can be the receiver too:
 `{ [3, 1, 2] }.sorted().join_values(",")`.
 

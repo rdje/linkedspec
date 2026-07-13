@@ -30,6 +30,7 @@ Rust.
   compatible receiver chains such as `(items += value).count()` and `(meta[key] = value).count_keys()`.
 - Statement behavior is unchanged: using the same forms as statements still mutates the named working target.
 
-This closes the append/hash-index part of the `.3.3` assignment-expression split. Array end mutation methods such
-as `items.push_back(value)` and `items.pop_back()` remain statement-only. `SPEC-FORMAT-TERSE.3.3.4` later closed
-the parent docs/oracle compatibility contract; see [[terse-assignment-expression-closure]].
+This closes the append/hash-index part of the `.3.3` assignment-expression split. At that time array end methods
+remained statement-only; uniform binding later superseded that boundary and made them return updated arrays.
+`SPEC-FORMAT-TERSE.3.3.4` later closed the parent docs/oracle compatibility contract; see
+[[terse-assignment-expression-closure]] and [[uniform-binding-array-end-result-supersession]].

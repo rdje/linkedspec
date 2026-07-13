@@ -13,18 +13,23 @@ date: 2026-07-01
 status: current
 tags: [spec-format-terse, method-chaining, receiver-dot, array, rust-parity, mdbook]
 evidence: "SPEC-FORMAT-TERSE.2.3.5 completed the design/split before code. Perl TOOLBOX probes show statement-only receiver-dot array mutations lower today (`items.push_back(\"a\")` -> `push @items, \"a\"`, `items.pop_back()` -> `pop @items`), while value-position/chained receiver forms are not implemented (`return(items.pop_back())` remains raw, `set(out, items.push_back(\"a\"))` remains raw, and `items.push_back(\"a\").push_back(\"b\")` remains raw). Runtime probes compile the statement form and return [\"a\"], but value/chained forms hit undefined generated helper calls and return null. Rust source read shows `Expr::FluentChain` parsing exists, `execute_array_end_mutation_method_statement` handles only single-call statement mutations, and generic `eval_expr` for a fluent chain returns `undef`. The accepted future model is receiver-as-first-argument value chaining split by return family: `.2.3.5.1` array, `.2.3.5.2` hash, `.2.3.5.3` string, `.2.3.5.4` number. Existing `.1.6` mutating `push_back`/`push_front`/`pop_back`/`pop_front` behavior remains statement-only until an array child explicitly designs any destructive value-returning variant."
+evidence_update_2026_07_12: "FUTURE-PARITY-BACKLOG.12.1.1-.6 supersede the measured array-end result boundary after this design split. Named push/pop end mutations now return independent updated arrays across all five backends and can feed compatible continuations; pop still discards the removed element."
 reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{items.push_back(\"a\")}, q{items.pop_back()}, q{return(items.pop_back())}, q{set(out, items.push_back(\"a\"))}, q{items.push_back(\"a\").push_back(\"b\")}, q{return(sorted(items))}) { my $out = eval { LinkedSpec::call_spec_handler_subst(q{Top}, $s) }; $out = q{ERR:}.$@ unless defined $out; chomp $out; print qq{--- $s\\n$out\\n}; }'"
 ---
 
 `SPEC-FORMAT-TERSE.2.3.5` is a completed design/split leaf, not a runtime implementation.
 
-Current ground truth:
+Ground truth at the time of this split:
 
 - `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` are
   statement-level mutations over a named working array.
 - Pop methods discard the removed value in that statement contract.
 - `return(items.pop_back())`, `set(out, items.push_back("a"))`, and
-  `items.push_back("a").push_back("b")` are not supported value/chained receiver forms today.
+  `items.push_back("a").push_back("b")` were not supported value/chained receiver forms in that measured state.
+
+Current update: uniform binding later superseded that result boundary. All four named end mutations now return
+updated arrays, and compatible continuations such as `.count()` are current. This card preserves the planning
+history; see [[uniform-binding-array-end-result-supersession]] for the current contract.
 
 Accepted split:
 

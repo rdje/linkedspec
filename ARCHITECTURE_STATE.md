@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Uniform-binding array-end mutation results are aligned. Perl's runtime primitive already
+  returned copied updates, but the ActionIR fluent value path explicitly excluded all four end methods, leaving
+  value-position generated calls raw. Named binding mutations now assign and return the copied update, feed
+  compatible array continuations, preserve exact arity, and reject temporary receivers. Five focused backends and
+  the recurring 48-file public/KM checker pass; `.12.1`/`.12` re-close and Lua construction `.4.3.4.1` is active.
 - `2026-07-12` refresh: Lua array parity is split by runtime mechanism: explicit construction/splicing, copied
   selection/order/membership, scalar/regex transforms and rebinding, mutations/child-result routing, tagged
-  records, and final no-drift. The audit found older statement-only array-end result prose contradicts the later
-  admitted uniform-binding updated-value contract already executed by all five backends. `.12.1.11` owns public/KM
-  repair and a recurring guard before Lua array behavior `.4.3.4.1`.
+  records, and final no-drift. This audit found older statement-only array-end result prose contradicting the
+  later admitted uniform-binding updated-value contract and routed the now-closed `.12.1.11` repair before Lua
+  array behavior `.4.3.4.1`.
 - `2026-07-12` refresh: Lua numeric helper parent `.4.3.3` is closed. The recurring proof combines the unchanged
   55-case six-runtime scalar contract with direct dual-ABI execution of every word/symbol call, number receiver,
   reducer canonical/alias spelling, terminal array receiver, and invalid boundary. Public/status surfaces agree at

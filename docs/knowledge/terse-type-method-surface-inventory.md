@@ -34,9 +34,10 @@ Current receiver families:
 Booleans and flow-result values are terminal today. Expression-valued blocks and pure user-function returns do not
 own separate method tables; the yielded value selects the compatible receiver family.
 
-Function-only or statement-only boundaries include mutation forms, lifecycle/control helpers, child dispatch,
-capture/entry/match/input/mark readers, declaration helpers, and compatibility aliases. They stay explicit unless
-a later task defines safe receiver semantics.
+Most mutation forms, lifecycle/control helpers, child dispatch, capture/entry/match/input/mark readers,
+declaration helpers, and compatibility aliases remain explicit non-pure surfaces. Uniform binding later makes
+named array end mutations the result-valued exception: they return updated arrays and may feed compatible
+continuations. See [[uniform-binding-array-end-result-supersession]].
 
 The next leaf is `SPEC-FORMAT-TERSE.7.2`, which starts by verifying the existing string `substr()` receiver method
 and only then backfills any genuinely missing string/scalar method surface.

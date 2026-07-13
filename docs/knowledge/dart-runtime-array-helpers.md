@@ -12,7 +12,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.4.3.3 extends dart/lib/src/runtime/interpreter.dart, dart/lib/src/action/action_contracts.dart, test/runtime_interpreter_test.dart, and test/action_contracts_test.dart. Focused tests prove array receiver chains, regex split/filter bridges, delimiter-first join_values, transform/filter pipelines, flat_array/concat_arrays, split_tagged_records, terminal array numeric reducers, statement-only end mutations, and value-slot no-op behavior for end mutations."
+evidence: "DART-BACKEND-PARITY.4.3.3 adds array pipelines and originally locks statement-only end mutations. Later FUTURE-PARITY-BACKLOG.12.1.4 supersedes that result boundary under linkedspec-uniform-binding-v1: array-end mutations return independent updated arrays and may feed receiver continuations. Current focused uniform-binding tests cover the adopted behavior."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -37,10 +37,9 @@ Regex delimiters and regex filters use Dart `RegExp` over the stored regex
 literal pattern. Adjacent delimiters preserve empty fields; `filter_nonempty`
 remains the explicit cleanup step.
 
-Statement-level `items.push_back(value)`, `items.push_front(value)`,
-`items.pop_back()`, and `items.pop_front()` mutate named working arrays. The
-same method calls in value positions return `null` and do not mutate, matching
-the statement-only end-mutation contract.
+`items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` mutate named
+working arrays and return independent updated array snapshots. Pop discards the removed element. A compatible
+continuation such as `.count()` consumes the updated array; an unused result is silently dropped.
 
 `DART-BACKEND-PARITY.4.3.4` has since landed hash helper breadth and hash
 receiver/mutation behavior. `DART-BACKEND-PARITY.4.3.5` has since landed value

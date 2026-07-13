@@ -55,8 +55,8 @@ This `README.md` is the **single entry point** to the project.
   checker to all 56 root/component/mdBook files. Current authoring uses bare typed bindings, for example
   `set(items, [])`, `push(items, value)`, and `copy(items)`. Lua numeric canonical/alias/symbol calls, number
   receivers, and strict aggregate reducers pass 91/91 on both ABIs; numeric no-drift is closed. Array mechanisms
-  are split under `.4.3.4.0`, with uniform-binding mutation-result documentation repair `.12.1.11` active before
-  copied construction `.4.3.4.1`.
+  are split under `.4.3.4.0`; uniform-binding mutation-result behavior/docs/no-drift `.12.1.11` is closed and
+  copied construction `.4.3.4.1` is active.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.
@@ -142,7 +142,7 @@ Top-level directories and files:
     scalar/array/hash stores, typed snapshots, structural assignments/access, checked nested writes, and
     entry/local capture maps/positions are implemented. Current string/scalar and numeric helpers, aliases/symbol
     callees, invalid-input boundaries, and compatible receiver chains are implemented too. Copied array pipelines,
-    string/regex/split bridges, flattening, reducer terminals, and statement-only end mutations are now green.
+    string/regex/split bridges, flattening, reducer terminals, and updated-value end mutations are now green.
     Copied hash views/transforms, explicit hash splicing, direct assignment, and statement-only named set-key
     mutation are now green. Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks,
     and scoped hash/array tree callbacks are now green too. Helper/value no-drift is closed. Explicit cursor
@@ -273,7 +273,10 @@ Top-level project docs:
   removed-selector diagnostics, exact migration spellings, and constructor classification. The checker covers 11
   migrations, seven execution cases, six invalid selectors, eight retained constructors, and deterministic future
   fixture source/results. Perl, Rust, Dart, Julia, and Lua execute the replacement contract; every tracked `.spec`
-  file and executable embedded source is now selector-free; hard rejection remains dependency-ordered.
+  file and executable embedded source is now selector-free. Run
+  `python3 tools/check_uniform_binding_mutation_result_surface.py` to lock the current array-end result rule:
+  push/pop end methods return independent updated arrays, pop discards the removed element, and compatible
+  continuations consume the update.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator

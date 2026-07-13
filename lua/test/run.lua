@@ -2740,16 +2740,33 @@ Top::
    first_push = push(items, "a")
    second_push = push(items, "b")
    items += "c"
-   count = items.push_back("d").count()
-   return({ "items" : items, "first_push" : first_push, "second_push" : second_push, "count" : count })
+   after_push_back = items.push_back("d")
+   after_push_front = items.push_front("z")
+   after_pop_back = items.pop_back()
+   after_pop_front = items.pop_front()
+   count = items.push_back("e").count()
+   return({
+     "items" : items,
+     "first_push" : first_push,
+     "second_push" : second_push,
+     "after_push_back" : after_push_back,
+     "after_push_front" : after_push_front,
+     "after_pop_back" : after_pop_back,
+     "after_pop_front" : after_pop_front,
+     "count" : count
+   })
  }
 Done::
  /x/
 ]])
   assert_json_equal(result, json.harray({
-    items = json.array({ "a", "b", "c", "d" }),
+    items = json.array({ "a", "b", "c", "e" }),
     first_push = json.array({ "a" }),
     second_push = json.array({ "a", "b" }),
+    after_push_back = json.array({ "a", "b", "c", "d" }),
+    after_push_front = json.array({ "z", "a", "b", "c", "d" }),
+    after_pop_back = json.array({ "z", "a", "b", "c" }),
+    after_pop_front = json.array({ "a", "b", "c" }),
     count = 4,
   }), "updated arrays")
 end)

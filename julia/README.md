@@ -230,7 +230,7 @@ named maps/existence, character spans, and line-column helpers. `.4.3.2` execute
 transforms, predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-input boundaries, and
 compatible string/number receiver chains through one canonical dispatcher. `.4.3.3` executes copied array
 pipelines, string/regex/split bridges, flatten/concat and explicit constructor splicing, numeric reducer terminals,
-typed split replacement, and statement-only named/scalar-held end mutations. `.4.3.4` executes copied hash views
+typed split replacement, and updated-value named/scalar-held end mutations. `.4.3.4` executes copied hash views
 and pure transformations, base/overlay-aware merge resolution, direct hash-index assignment, explicit flat-style
 splicing, and statement-only named set-key mutation. `.4.3.5` executes expression-valued blocks with local returns,
 attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, and scoped

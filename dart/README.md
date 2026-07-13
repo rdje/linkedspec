@@ -127,7 +127,7 @@ string/scalar helpers, explicit `str_*` lexical comparisons, numeric
 arithmetic/reducer/comparison helpers, numeric aliases and symbol callees, and
 compatible string/number receiver chains. It now also executes array helpers,
 array receiver chains, regex split/filter bridges, delimiter-first
-`join_values`, array numeric reducers, and statement-only array end mutations.
+`join_values`, array numeric reducers, and updated-value array end mutations with receiver continuation.
 It now also executes hash helpers, hash receiver chains, statement/value
 `set_key` boundaries, bare-overlay `merge_hash`, direct hash-index assignment
 values, and explicit flat-style hash splicing inside `hash(...)`. It now also

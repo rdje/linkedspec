@@ -25,11 +25,13 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{set(name,\"ok\")},q{name
 
 ## Current State
 
-Update 2026-07-02: the original `.1.3` statement-mutation contracts still hold, but later assignment-expression
-work broadened value use. `SPEC-FORMAT-TERSE.3.3.1` made scalar assignment yield the stored scalar value, and
+Update 2026-07-12: the original `.1.3` statement-mutation contracts still hold, but later expression and uniform-
+binding work broadened value use. `FUTURE-PARITY-BACKLOG.12.1.1-.6` make array end mutations yield independent
+updated arrays across all five backends, including receiver continuation, and superseded the earlier result
+boundary. Earlier assignment-expression
+work also broadened operator values: `SPEC-FORMAT-TERSE.3.3.1` made scalar assignment yield the stored value, and
 `SPEC-FORMAT-TERSE.3.3.3` made `items += value` yield the updated array snapshot and `meta[key] = value` yield the
-updated hash snapshot when those mutation operators are used as expressions. Array end mutations such as
-`items.push_back(value)` remain statement-only.
+updated hash snapshot when those mutation operators are used as expressions.
 
 - **Scalar function form is satisfied by `set(name, value)`.** Perl `.1.4.1` added the `set` recognition sites
   and Rust `.1.4.2` added runtime parity. Historical `assign(name, value)` compatibility was retired from
