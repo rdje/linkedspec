@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (copied array construction/splicing closed at 92/92; selection `.4.3.4.2` active)
+- Last updated: `2026-07-12` (copied array selection closed at 93/93; transforms `.4.3.4.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1104,17 +1104,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.4.1 - add Lua array construction splicing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement copied selection, slicing, ordering, membership, and uniqueness helpers plus receivers.
   Dependencies: `.4.3.4.1`
   Acceptance: `count`, `first`, `last`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`,
     `reversed`, `contains`, `index_of`, and `uniq` match zero-based/default/empty/invalid policy, preserve sources,
     and compose through bare, literal, function, and receiver forms on both ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** Lua now copies `last`, take/drop defaults and explicit counts, zero-based
+    `slice`, `reversed`, scalar-text `contains`/`index_of`, and stable `uniq` through function and receiver forms;
+    existing `count`/`first`/`sorted` share the same non-array/empty policy. Literal, bare-binding, chained,
+    omitted/invalid count, past-end, missing membership/index, and source-isolation cases pass 93/93 on PUC Lua
+    and LuaJIT plus manifest/CLI scaffolding. Cross-backend negative-count drift is routed to
+    `FUTURE-PARITY-BACKLOG.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection`
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement scalar/regex array transforms, joins, split pipelines, and standalone rebinding.
   Dependencies: `.4.3.2`, `.4.3.4.1`, `.4.3.4.2`
   Acceptance: Delimiter-first `join_values`, `split_each`, `trim_each`, `filter_nonempty`, `filter_match`,
@@ -1352,9 +1357,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Current frontier
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
-Numeric helper parent `.4.3.3` is closed and copied construction/splicing `.4.3.4.1` now passes 92/92 on PUC Lua
-and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result alignment
-`FUTURE-PARITY-BACKLOG.12.1.11` are done; copied selection/order/membership `.4.3.4.2` is active.
+Numeric helper parent `.4.3.3`, construction/splicing `.4.3.4.1`, and copied selection/order/membership
+`.4.3.4.2` now pass 93/93 on PUC Lua and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result
+alignment `FUTURE-PARITY-BACKLOG.12.1.11` are done; scalar/regex transforms and joins `.4.3.4.3` are active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1404,7 +1409,8 @@ and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result alig
 | 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `done` | Numeric proof/public no-drift closed at 91/91 on both ABIs. |
 | 45 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Split six array mechanisms and route superseded mutation-result prose. |
 | 46 | `LUA-BACKEND-PARITY.4.3.4.1` | `done` | Ordered copied construction, explicit splicing, concat, and isolation pass 92/92. |
-| 47 | `LUA-BACKEND-PARITY.4.3.4.2` | `active` | Implement copied selection, slicing, ordering, membership, and uniqueness. |
+| 47 | `LUA-BACKEND-PARITY.4.3.4.2` | `done` | Copied selection/order/membership/uniq pass 93/93 on both ABIs. |
+| 48 | `LUA-BACKEND-PARITY.4.3.4.3` | `active` | Implement scalar/regex transforms, joins, split pipelines, and rebinding. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1538,6 +1544,21 @@ and LuaJIT. Array split `.4.3.4.0` and cross-cutting uniform-binding result alig
   Map, mdBook, cleanup, and whitespace gates pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs, and
   memory close `.4.3.4.1` and activate copied selection/order/membership `.4.3.4.2`.
+
+### `LUA-BACKEND-PARITY.4.3.4.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Audit the minimal `count`/`first`/`sorted` branch and prove ten additional selection/
+  order/membership helpers, including `uniq`, still fall through as unsupported runtime calls.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `PURE_ARRAY_HELPERS` and `evaluate_array_helper` contained only the earlier
+  minimal transform slice; no shared nonnegative count, zero-based slice, membership, or stable uniqueness path.
+- [x] **FIX** — Add copied last/take/drop/slice/reverse/membership/index/uniq dispatch with safe default counts,
+  zero-based results, scalar-text comparison, stable first occurrence, and function/receiver composition.
+- [x] **ADDRESSED (verified)** — Bare, literal, function, receiver, chained, default/invalid count, empty/wrong-kind,
+  past-end, missing index/membership, stable uniqueness, and source preservation cases all execute.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 93/93 plus exact manifest/CLI scaffolding; negative-count
+  cross-backend drift is routed to `.5`; governance, Knowledge Map, mdBook, cleanup, and whitespace pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs, and
+  memory close `.4.3.4.2` and activate scalar/regex transforms and joins `.4.3.4.3`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1865,3 +1886,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.4` | `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity` | Complete canonical/alias/mechanism proof, public no-drift, parent closure, and array handoff. |
 | `LUA-BACKEND-PARITY.4.3.4.0` | `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms` | Existing-seam audit, six executable children, mutation-result supersession finding, and external repair routing. |
 | `LUA-BACKEND-PARITY.4.3.4.1` | `LUA-BACKEND-PARITY.4.3.4.1 - add Lua array construction splicing` | Ordered constructors/literals, explicit AST-context splices, copied flat/concat values, and dual-ABI isolation proof. |
+| `LUA-BACKEND-PARITY.4.3.4.2` | `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection` | Copied take/drop/slice/order/membership/uniq, receiver chains, invalid boundaries, and dual-ABI proof. |

@@ -683,13 +683,23 @@ end
 
 local PURE_ARRAY_HELPERS = {
   concat_arrays = true,
+  contains = true,
   count = true,
+  drop_back = true,
+  drop_front = true,
   filter_nonempty = true,
   first = true,
   flat = true,
   flat_array = true,
+  index_of = true,
+  last = true,
+  reversed = true,
+  slice = true,
   sorted = true,
+  take = true,
+  take_last = true,
   trim_each = true,
+  uniq = true,
 }
 
 local ARRAY_SPLICE_HELPERS = {
@@ -723,6 +733,17 @@ local ARRAY_END_MUTATIONS = {
   push_front = true,
 }
 
+local function nonnegative_array_count(value, default)
+  local number = value
+  if type(number) == "string" and number:match("^-?%d+$") then number = tonumber(number) end
+  if type(number) ~= "number" or number ~= number or number % 1 ~= 0 then return default end
+  return math.max(0, number)
+end
+
+local function scalar_array_key(value)
+  return scalar_string(value, true) or ""
+end
+
 local function evaluate_array_helper(name, values)
   if name == "flat" then
     local value = values[1]
@@ -741,11 +762,64 @@ local function evaluate_array_helper(name, values)
   local items = json.kind(source) == "array" and copy_value(source) or json.array()
   if name == "count" then return #items end
   if name == "first" then return #items == 0 and json.null or copy_value(items[1]) end
+  if name == "last" then return #items == 0 and json.null or copy_value(items[#items]) end
+  if name == "take" or name == "take_last" or name == "drop_front" or name == "drop_back" then
+    local count = nonnegative_array_count(values[2], 1)
+    local first = 1
+    local last = #items
+    if name == "take" then
+      last = math.min(last, count)
+    elseif name == "take_last" then
+      first = math.max(1, #items - count + 1)
+      if count == 0 then first = #items + 1 end
+    elseif name == "drop_front" then
+      first = math.min(#items + 1, count + 1)
+    else
+      last = math.max(0, #items - count)
+    end
+    local result = json.array()
+    for index = first, last do result[#result + 1] = copy_value(items[index]) end
+    return result
+  end
+  if name == "slice" then
+    local start = nonnegative_array_count(values[2], 0)
+    local width = nonnegative_array_count(values[3], #items)
+    local result = json.array()
+    if start >= #items then return result end
+    local last = math.min(#items, start + width)
+    for index = start + 1, last do result[#result + 1] = copy_value(items[index]) end
+    return result
+  end
   if name == "sorted" then
     table.sort(items, function(left, right)
       return (scalar_string(left, true) or "") < (scalar_string(right, true) or "")
     end)
     return items
+  end
+  if name == "reversed" then
+    local result = json.array()
+    for index = #items, 1, -1 do result[#result + 1] = copy_value(items[index]) end
+    return result
+  end
+  if name == "contains" or name == "index_of" then
+    if values[2] == nil then return name == "contains" and 0 or json.null end
+    local needle = scalar_array_key(values[2])
+    for index, item in ipairs(items) do
+      if scalar_array_key(item) == needle then return name == "contains" and 1 or index - 1 end
+    end
+    return name == "contains" and 0 or json.null
+  end
+  if name == "uniq" then
+    local result = json.array()
+    local seen = {}
+    for _, item in ipairs(items) do
+      local key = scalar_array_key(item)
+      if not seen[key] then
+        seen[key] = true
+        result[#result + 1] = copy_value(item)
+      end
+    end
+    return result
   end
   local result = json.array()
   if name == "filter_nonempty" then

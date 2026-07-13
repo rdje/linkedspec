@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.2 — copied selection needs an explicit index/count policy): Lua uses one
+  nonnegative integer adapter for take/drop and zero-based slice, copies every returned container, compares
+  membership through the portable scalar-text boundary, and preserves first occurrence order in `uniq`. The
+  focused proof exposed pre-existing negative-count drift: Lua and Dart clamp to zero, Julia falls back to a
+  default, and Rust can turn a signed negative into an oversized count. That is a cross-backend contract decision
+  for `FUTURE-PARITY-BACKLOG.5`, not a reason to import one host accident into this bounded Lua slice.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.4.1 — splicing is syntax context, not an array runtime tag): A computed array
   alone cannot say whether its parent should retain it as one nested value or insert its members. Lua therefore
   classifies only the authored argument/item AST—a direct `flat`/`flat_array` call or fluent chain ending in one—

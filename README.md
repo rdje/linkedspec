@@ -54,9 +54,9 @@ This `README.md` is the **single entry point** to the project.
   removed 14 stale positive forms from the Rust, Dart, Julia, and Lua READMEs and expanded the recurring public
   checker to all 56 root/component/mdBook files. Current authoring uses bare typed bindings, for example
   `set(items, [])`, `push(items, value)`, and `copy(items)`. Lua numeric canonical/alias/symbol calls, number
-  receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing, and array
-  concatenation pass 92/92 on both ABIs. Array mechanisms are split under `.4.3.4.0`; copied construction
-  `.4.3.4.1` is closed and copied selection/order/membership `.4.3.4.2` is active.
+  receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
+  and copied selection/order/membership/uniqueness pass 93/93 on both ABIs. Array mechanisms are split under
+  `.4.3.4.0`; copied selection `.4.3.4.2` is closed and scalar/regex transform pipelines `.4.3.4.3` are active.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

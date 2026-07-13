@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Lua copied array selection now covers last/take/drop defaults, zero-based slice, lexical
+  order/reverse, scalar-text membership/index, and stable first-occurrence uniqueness through function and
+  receiver chains without mutating sources. PUC Lua and LuaJIT pass 93/93; scalar/regex transforms `.4.3.4.3` are
+  active. Pre-existing backend disagreement over negative counts is explicitly owned by helper-caveat leaf `.5`.
 - `2026-07-12` refresh: Lua array constructors/literals now evaluate once left-to-right and preserve ordinary
   nested arrays while explicit direct/terminal-receiver `flat`/`flat_array` ASTs splice one level. Copied flat,
   concat, and saved-source values are isolated; PUC Lua and LuaJIT pass 92/92 and selection `.4.3.4.2` is active.

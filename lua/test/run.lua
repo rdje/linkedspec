@@ -2917,6 +2917,72 @@ Done::
   }), "copied array construction")
 end)
 
+test("runtime copied array selection ordering membership and uniqueness", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(items, ["b", "a", "c", "a"])
+   source = copy(items)
+   return({
+     "count" : count(items),
+     "first" : first(items),
+     "last" : last(items),
+     "take_default" : take(items),
+     "take_two" : take(items, 2),
+     "take_last_two" : take_last(items, 2),
+     "drop_front_default" : drop_front(items),
+     "drop_back_two" : drop_back(items, 2),
+     "slice_width" : slice(items, 1, 2),
+     "slice_tail" : slice(items, 2),
+     "slice_past_end" : slice(items, 99, 2),
+     "sorted" : sorted(items),
+     "reversed_literal" : [1, 2, 3].reversed(),
+     "contains" : contains(items, "a"),
+     "missing_contains" : items.contains("z"),
+     "index" : index_of(items, "c"),
+     "missing_index" : items.index_of("z"),
+     "uniq" : uniq(items),
+     "chain" : items.sorted().drop_front(2).first(),
+     "invalid_count_default" : items.take("bad"),
+     "invalid_count" : count(undef),
+     "invalid_first" : first("text"),
+     "invalid_sorted" : sorted("text"),
+     "source" : source,
+     "items" : items
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    count = 4,
+    first = "b",
+    last = "a",
+    take_default = json.array({ "b" }),
+    take_two = json.array({ "b", "a" }),
+    take_last_two = json.array({ "c", "a" }),
+    drop_front_default = json.array({ "a", "c", "a" }),
+    drop_back_two = json.array({ "b", "a" }),
+    slice_width = json.array({ "a", "c" }),
+    slice_tail = json.array({ "c", "a" }),
+    slice_past_end = json.array(),
+    sorted = json.array({ "a", "a", "b", "c" }),
+    reversed_literal = json.array({ 3, 2, 1 }),
+    contains = 1,
+    missing_contains = 0,
+    index = 2,
+    missing_index = json.null,
+    uniq = json.array({ "b", "a", "c" }),
+    chain = "b",
+    invalid_count_default = json.array({ "b" }),
+    invalid_count = 0,
+    invalid_first = json.null,
+    invalid_sorted = json.array(),
+    source = json.array({ "b", "a", "c", "a" }),
+    items = json.array({ "b", "a", "c", "a" }),
+  }), "copied array selection")
+end)
+
 test("uniform-binding wrong-kind mutation reports neutral fields", function()
   local ok, failure = pcall(function()
     execute_uniform_binding_source([[

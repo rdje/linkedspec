@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Lua construction `.4.3.4.1` closes; selection `.4.3.4.2` active).
+- Last updated: `2026-07-12` (Lua copied selection `.4.3.4.2` closes at 93/93; transforms `.4.3.4.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2166,8 +2166,10 @@ before implementation.
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
     accepts the catalog-sized one/two-argument forms but rejects zero/variadic direct forms, while Rust, Dart,
-    Julia, and Lua currently return copied list values for those forms. Finish with backend locks and mdBook/KM
-    updates rather than silently selecting one host's behavior.
+    Julia, and Lua currently return copied list values for those forms; normalize negative `take`/`drop`/`slice`
+    counts too, because Dart clamps them to zero, Julia defaults invalid negatives, and Rust's signed-to-unsigned
+    path can produce oversized counts. Finish with backend locks and mdBook/KM updates rather than silently
+    selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
 
@@ -3654,8 +3656,9 @@ before implementation.
 | 119 | `LUA-BACKEND-PARITY.4.3.4.0` | `done` | Six array mechanisms split; stale mutation-result prose root-caused. |
 | 120 | `FUTURE-PARITY-BACKLOG.12.1.11` | `done` | Array-end updated results align across Perl behavior, five backends, docs/KM, and no-drift. |
 | 121 | `LUA-BACKEND-PARITY.4.3.4.1` | `done` | Ordered copied construction and explicit splicing pass 92/92 on both ABIs. |
-| 122 | `LUA-BACKEND-PARITY.4.3.4.2` | `active` | Implement copied selection, ordering, membership, and uniqueness. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats, including measured flat/concat direct-value arity drift. |
+| 122 | `LUA-BACKEND-PARITY.4.3.4.2` | `done` | Copied selection, ordering, membership, and uniqueness pass 93/93. |
+| 123 | `LUA-BACKEND-PARITY.4.3.4.3` | `active` | Implement scalar/regex transforms, joins, split pipelines, and rebinding. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats, including flat/concat arity and negative selection-count drift. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

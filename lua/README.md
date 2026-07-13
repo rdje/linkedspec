@@ -24,10 +24,12 @@ chains share that evaluator; number-returning links compose and comparisons term
 array sum/avg/median/range/min/max reducers work in explicit, bare-binding, and terminal array receiver forms.
 `array(...)` and literals evaluate left-to-right; only explicit `flat`/`flat_array` calls or terminal receivers
 splice into their parent, while ordinary arrays and `copy(...)` remain nested copied values. `concat_arrays`
-returns a fresh concatenation. The Lua gate passes 92/92 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric
-v1 cases still match Perl, Rust, Dart, and Julia exactly. Construction/splicing `.4.3.4.1` is closed; copied
-selection/order/membership `.4.3.4.2` is active. Zero/variadic flatten direct-value differences between Perl and
-the four newer runtimes remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than hidden as settled parity.
+returns a fresh concatenation. Copied `take`/`drop`/zero-based `slice`, lexical `sorted`, `reversed`, scalar-text
+`contains`/`index_of`, and stable first-occurrence `uniq` work in function and receiver chains without mutating
+their source. The Lua gate passes 93/93 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still
+match Perl, Rust, Dart, and Julia exactly. Copied selection `.4.3.4.2` is closed; scalar/regex transform pipelines
+`.4.3.4.3` are active. Zero/variadic flatten direct-value and negative selection-count differences remain
+explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than hidden as settled parity.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus

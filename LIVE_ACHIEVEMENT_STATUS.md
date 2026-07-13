@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.2 — add Lua copied array selection**
+  (DONE — 93/93 on both ABIs; scalar/regex transform pipelines `.4.3.4.3` active).
+
+  **Implementation:** Copied last/take/drop/zero-based slice/order/reverse/membership/index/uniq share one array
+  dispatcher across function, literal, bare-binding, and receiver/chained forms without mutating their source.
+
+  **Proof:** Default/invalid counts, past-end slice, empty/wrong-kind input, missing membership/index, stable
+  uniqueness, source isolation, and chaining pass PUC Lua and LuaJIT 93/93 plus manifest/CLI scaffolding.
+  Negative-count policy drift is durably routed to helper-caveat owner `FUTURE-PARITY-BACKLOG.5`.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.4.1 — add Lua array construction splicing**
   (DONE — 92/92 on both ABIs; copied selection/order/membership `.4.3.4.2` active).
 

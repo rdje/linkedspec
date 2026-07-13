@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.2 — add Lua copied array selection
+
+Added copied `last`, take/drop defaults and counts, zero-based `slice`, lexical `sorted`, `reversed`, scalar-text
+`contains`/`index_of`, and stable first-occurrence `uniq`. Function, literal, bare-binding, and receiver/chained
+forms preserve their sources and return the documented null/zero/empty boundaries. PUC Lua and LuaJIT pass 93/93
+plus manifest/CLI scaffolding. Existing negative-count disagreement across newer backends is routed to
+`FUTURE-PARITY-BACKLOG.5`; scalar/regex transform pipelines `.4.3.4.3` are active.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.4.1 — add Lua array construction splicing
 
 Added copied `flat`, variadic `flat_array`, and `concat_arrays` evaluation plus context-sensitive splicing for
