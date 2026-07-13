@@ -3601,7 +3601,8 @@ before implementation.
 | 114 | `FUTURE-PARITY-BACKLOG.12.1.9` | `done` | Public checker locks 47 files at zero current examples and capability admission. |
 | 115 | `FUTURE-PARITY-BACKLOG.12.1.10` | `done` | All 56 public files are gated and backend READMEs teach only bare typed bindings. |
 | 116 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | Lua numeric aliases, symbol callees, and number receiver chains pass both ABIs. |
-| 117 | `LUA-BACKEND-PARITY.4.3.3.3` | `active` | Implement aggregate numeric reducers and array receiver terminals. |
+| 117 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict aggregate numeric reducers and array receiver terminals pass both ABIs. |
+| 118 | `LUA-BACKEND-PARITY.4.3.3.4` | `active` | Close focused numeric helper and public-surface no-drift. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

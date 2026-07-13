@@ -9,7 +9,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [lua, luajit, numeric, helpers, runtime, contract, parity, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.3.1.4 adds lua/src/linkedspec/scalar_numeric.lua and canonical dispatch in interpreter.lua. LUA-BACKEND-PARITY.4.3.3.2 adds word/symbol call admission and numeric receiver composition/terminality. The unchanged linkedspec-scalar-numeric-v1 fixture is executed directly by lua/test/run.lua. PUC Lua and LuaJIT each pass 90/90 plus the exact 105-manifest/CLI scaffold. tools/check_scalar_numeric_six_runtime.sh proves the same 55-case expected value through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT."
+evidence: "LUA-BACKEND-PARITY.4.3.3.1.4 adds lua/src/linkedspec/scalar_numeric.lua and canonical dispatch in interpreter.lua. LUA-BACKEND-PARITY.4.3.3.2 adds word/symbol call admission and numeric receiver composition/terminality; .4.3.3.3 adds separately dispatched copied-array reducers. The unchanged linkedspec-scalar-numeric-v1 fixture is executed directly by lua/test/run.lua. PUC Lua and LuaJIT each pass 91/91 plus the exact 105-manifest/CLI scaffold. tools/check_scalar_numeric_six_runtime.sh proves the same 55-case expected value through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT."
 reverify: "bash tools/check_scalar_numeric_six_runtime.sh"
 ---
 
@@ -21,7 +21,8 @@ typed null. It implements half-away rounding directly and floor signed modulo as
 
 `lua/src/linkedspec/interpreter.lua` evaluates canonical call arguments and delegates to that module. Generic scalar
 conversion is unchanged. Numeric aliases, symbol call spellings, and first-argument number receiver injection are
-now admitted through the same evaluator; aggregate reducers remain a separate downstream mechanism.
+now admitted through the same evaluator. Aggregate reducers use a separate typed-array entry point in the same
+module, so their one-array contract does not weaken scalar helper arity.
 
 The Lua test reads `capability_conformance/scalar_numeric_contract.json`, executes its exact `spec_source`, and
 compares the complete returned JSON value with `expected`. The composed checker then runs the same contract through

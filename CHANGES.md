@@ -1,5 +1,11 @@
 # CHANGES
 
+## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.3 — add Lua numeric aggregate reducers
+
+Added strict copied-array sum, average, odd/even median, range, and one-array min/max. Explicit arrays, bare typed
+bindings, word aliases, and terminal array receiver methods agree; sum of empty is zero, other empty/invalid cases
+are null, and sources remain unchanged. PUC Lua and LuaJIT pass 91/91; focused numeric no-drift `.4.3.3.4` is active.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.2 — add Lua numeric call and receiver forms
 
 Admitted all 18 scalar numeric word aliases and 11 arithmetic/comparison symbol callees through the existing strict

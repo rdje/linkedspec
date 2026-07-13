@@ -10,14 +10,13 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.2` — Lua numeric word/symbol calls and number receivers.
-- latest_commit: `b68061bb` — `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.3`; aggregate numeric reducers and array receiver terminals.
-- next_action: implement strict typed-array sum/avg/median/range/min/max and equivalent explicit/bare/receiver forms.
-- current_proof: all 18 numeric word aliases, 11 symbol callees, numeric receiver composition, and comparison
-  terminality pass. PUC Lua and LuaJIT each reach 90/90 plus exact manifest/CLI scaffolding; the unchanged
-  six-runtime scalar fixture remains 55/55.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.3.3` — strict array numeric reducers and receiver terminals.
+- latest_commit: `8123502c` — `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.3.4`; focused numeric/public no-drift closeout.
+- next_action: audit numeric source/tests/public surfaces, lock focused no-drift, and hand off to array helpers.
+- current_proof: strict sum/avg/median/range/array min/max agree across explicit, bare, alias, and receiver forms;
+  PUC Lua and LuaJIT each pass 91/91 plus exact manifest/CLI scaffolding.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +26,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.3.2` commit. Numeric aggregate reducers
-  `.4.3.3.3` are next. Oracle timeout calibration remains deferred to `.7.0`.
+- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.3.3` commit. Numeric closeout `.4.3.3.4`
+  is next. Oracle timeout calibration remains deferred to `.7.0`.

@@ -1,5 +1,9 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.3): One-array min/max must dispatch before scalar variadic min/max without
+  weakening scalar v1 arity. Reducers parse elements through the same strict numeric admission, copy before median
+  sorting, normalize results, and make every array receiver reducer terminal.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.2 — canonical call support does not imply receiver or nested symbol
   support): Alias resolution already made direct word/symbol calls work, but the generic fluent fallback evaluated
   method arguments without injecting the receiver. Numeric chains need an explicit evaluator branch and comparison

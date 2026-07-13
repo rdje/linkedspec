@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-12` (numeric aliases/symbols/receivers pass 90/90 on both ABIs; reducers are active)
+- Last updated: `2026-07-12` (numeric reducers/array terminals pass 91/91; focused closeout is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1030,17 +1030,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement aggregate numeric reducers and array receiver terminals.
   Dependencies: `.4.3.3.1`, `.4.3.3.2`
   Acceptance: `num_sum`/`avg`/`median`/`range` and one-array `min`/`max` preserve typed arrays, reject any
     non-numeric element, implement the governed empty-array results, leave source values unchanged, and execute
     equivalent explicit-array, bare-array, and terminal receiver forms on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-12.** One strict copied-array evaluator implements sum/avg/odd-even median/range
+    and one-array min/max through the scalar numeric admission grammar. Explicit arrays, bare typed arrays, word
+    aliases, and six terminal receiver methods agree; sum(empty) is zero, other empty/invalid cases are null, and
+    source values remain unchanged. PUC Lua and LuaJIT pass 91/91 plus exact manifest/CLI scaffolding; the unchanged
+    six-runtime 55-case scalar contract remains exact.
+  Commit: `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close focused numeric helper and public-surface no-drift.
   Dependencies: `.4.3.3.1`, `.4.3.3.2`, `.4.3.3.3`
   Acceptance: Focused canonical/alias/symbol/receiver/reducer/invalid-boundary proof passes the full dual-ABI gate;
@@ -1258,8 +1262,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Current frontier
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
-Scalar numeric `.4.3.3.1.4` plus call/receiver admission `.4.3.3.2` now pass 90/90 on PUC Lua and LuaJIT and report
-`runtime-numeric-receivers`. Aggregate reducer/array receiver terminal `.4.3.3.3` is active.
+Scalar numeric calls/receivers and aggregate reducers now pass 91/91 on PUC Lua and LuaJIT and report
+`runtime-numeric-reducers`. Focused numeric/public no-drift `.4.3.3.4` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1305,7 +1309,8 @@ Scalar numeric `.4.3.3.1.4` plus call/receiver admission `.4.3.3.2` now pass 90/
 | 40 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `done` | Dart and Julia consume all 55 scalar numeric v1 cases; full backend gates pass. |
 | 41 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `done` | All six runtime variants match scalar numeric v1 across all 55 cases. |
 | 42 | `LUA-BACKEND-PARITY.4.3.3.2` | `done` | All numeric word/symbol calls and scalar number receiver chains pass both ABIs. |
-| 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `active` | Implement aggregate numeric reducers and array receiver terminals. |
+| 43 | `LUA-BACKEND-PARITY.4.3.3.3` | `done` | Strict array reducers and six terminal receiver forms pass both ABIs. |
+| 44 | `LUA-BACKEND-PARITY.4.3.3.4` | `active` | Close focused numeric helper and public-surface no-drift. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1380,6 +1385,21 @@ Scalar numeric `.4.3.3.1.4` plus call/receiver admission `.4.3.3.2` now pass 90/
   Lua gate, exact manifest/CLI scaffold, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, Lua README/book, Knowledge Map, changes/notes/live, and memory activate
   aggregate numeric reducers/array receiver terminals `.4.3.3.3` without claiming them early.
+
+### `LUA-BACKEND-PARITY.4.3.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run canonical/alias reducers over explicit arrays, bare typed bindings, and array
+  receivers; cover empty, odd/even median, strict decimal strings, invalid elements/kinds, and later continuations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Prove scalar `min`/`max` ownership cannot accept one array without weakening
+  v1 arity, and locate the absent aggregate reducer plus array-terminal dispatch seams.
+- [x] **FIX** — Add one strict copied-array reducer evaluator for sum/avg/median/range/array min/max and route
+  function aliases plus terminal array receivers through it without mutating sources or changing scalar helpers.
+- [x] **ADDRESSED (verified)** — Explicit, bare, and receiver forms agree; sum(empty) is zero; other empty/invalid
+  cases are null; even median averages middle values; all reducer receiver continuations terminate.
+- [x] **NO REGRESSION** — Focused reducer proof, unchanged 55-case six-runtime scalar contract, complete 91/91
+  dual-ABI Lua gate, exact manifest/CLI scaffold, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, Lua README/book, Knowledge Map, changes/notes/live, and memory activate
+  focused numeric/public no-drift `.4.3.3.4` without beginning general array helpers `.4.3.4`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -1703,3 +1723,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.3.1.3` | `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers` | Strict native Dart/Julia adapters, unchanged 55-case direct proof, and Lua six-runtime handoff. |
 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `LUA-BACKEND-PARITY.4.3.3.1.4 - implement Lua scalar numeric helpers` | Portable Lua evaluator, dual-ABI 55-case proof, and exact six-runtime admission. |
 | `LUA-BACKEND-PARITY.4.3.3.2` | `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms` | Exact word/symbol calls, scalar receiver composition/terminality, and slash/regex disambiguation. |
+| `LUA-BACKEND-PARITY.4.3.3.3` | `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers` | Strict copied-array reducers, empty/invalid boundaries, and six terminal receiver forms. |

@@ -742,6 +742,15 @@ local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, ed
   return scalar_numeric.evaluate(name, values)
 end
 
+local function evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, edge_state, name, receiver)
+  local values = {}
+  if receiver ~= nil then values[1] = receiver end
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+  return scalar_numeric.evaluate_reducer(name, values)
+end
+
 local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)
   array_binding_for_mutation(ctx, target.name)
   local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
@@ -798,6 +807,9 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_pure_string_values(engine, expr, ctx, accumulator, edge_state, nil)
   elseif PURE_ARRAY_HELPERS[name] then
     return evaluate_array_values(engine, expr, ctx, accumulator, edge_state, nil)
+  elseif scalar_numeric.supports_reducer(name) and
+      (not scalar_numeric.supports(name) or #expr.args == 1) then
+    return evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, edge_state, name, nil)
   elseif scalar_numeric.supports(name) then
     return evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, nil)
   end
@@ -1040,6 +1052,18 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
             index < #expr.calls then
           return json.null
         end
+      elseif scalar_numeric.supports_reducer(canonical_name) and
+          (json.kind(value) == "array" or not scalar_numeric.supports(canonical_name)) then
+        value = evaluate_numeric_reducer_values(
+          engine,
+          call_expr,
+          ctx,
+          accumulator,
+          edge_state,
+          canonical_name,
+          value
+        )
+        if index < #expr.calls then return json.null end
       elseif scalar_numeric.supports(canonical_name) then
         value = evaluate_scalar_numeric_values(
           engine,

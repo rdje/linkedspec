@@ -33,6 +33,15 @@ local COMPARISON = {
   num_le = true,
 }
 
+local REDUCER = {
+  num_sum = true,
+  num_avg = true,
+  num_median = true,
+  num_range = true,
+  num_min = true,
+  num_max = true,
+}
+
 local SUPPORTED = {}
 for name in pairs(UNARY) do SUPPORTED[name] = true end
 for name in pairs(VARIADIC) do SUPPORTED[name] = true end
@@ -94,6 +103,35 @@ end
 
 function M.is_comparison(name)
   return COMPARISON[name] == true
+end
+
+function M.supports_reducer(name)
+  return REDUCER[name] == true
+end
+
+function M.evaluate_reducer(name, args)
+  if not M.supports_reducer(name) then
+    error("unsupported numeric reducer '" .. tostring(name) .. "'", 2)
+  end
+  if type(args) ~= "table" or #args ~= 1 or json.kind(args[1]) ~= "array" then return json.null end
+  local values = numeric_args(args[1])
+  if values == nil then return json.null end
+  if #values == 0 then return name == "num_sum" and 0 or json.null end
+
+  local total = 0
+  for _, value in ipairs(values) do total = total + value end
+  if name == "num_sum" then return normalize(total) end
+  if name == "num_avg" then return normalize(total / #values) end
+
+  table.sort(values)
+  if name == "num_median" then
+    local middle = math.floor(#values / 2) + 1
+    if #values % 2 == 1 then return normalize(values[middle]) end
+    return normalize((values[middle - 1] + values[middle]) / 2)
+  end
+  if name == "num_range" then return normalize(values[#values] - values[1]) end
+  if name == "num_min" then return normalize(values[1]) end
+  return normalize(values[#values])
 end
 
 function M.evaluate(name, args)

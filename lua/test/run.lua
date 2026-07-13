@@ -127,7 +127,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-numeric-receivers", "status parity")
+  assert_equal(first.parity, "runtime-numeric-reducers", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -2568,6 +2568,54 @@ return({
 }
 ]])
   assert_json_equal(execute_uniform_binding_source(source), expected, "numeric call and receiver surfaces")
+end)
+
+test("numeric aggregate reducers preserve arrays and terminate receiver chains", function()
+  local source = uniform_binding_action_source([[
+scores = [1, "2", 5, 4]
+empty = []
+invalid = [1, true]
+return({
+  "explicit_sum" : num_sum([1, "2", 3]),
+  "bare_avg" : avg(scores),
+  "median_odd" : median([5, 1, 3]),
+  "median_even" : num_median([4, 1, 3, 2]),
+  "range" : range([3, 9, 1, 7]),
+  "array_min" : num_min([8, 3, 5]),
+  "array_max" : max([8, 3, 5]),
+  "empty_sum" : sum(empty),
+  "empty_avg" : avg(empty),
+  "empty_median" : median(empty),
+  "empty_range" : range(empty),
+  "empty_min" : min(empty),
+  "empty_max" : max(empty),
+  "invalid_element" : sum(invalid),
+  "invalid_kind" : sum(3),
+  "wrong_arity" : sum([1], [2]),
+  "source_after" : scores,
+  "receiver_sum" : scores.sum(),
+  "receiver_avg" : scores.avg(),
+  "receiver_median" : scores.median(),
+  "receiver_range" : scores.range(),
+  "receiver_min" : scores.min(),
+  "receiver_max" : scores.max(),
+  "receiver_wrong_arity" : scores.sum(1),
+  "receiver_terminal" : scores.sum().add(1)
+})
+]])
+  local expected = json.decode([[
+{
+  "explicit_sum": 6, "bare_avg": 3, "median_odd": 3, "median_even": 2.5,
+  "range": 8, "array_min": 3, "array_max": 8, "empty_sum": 0,
+  "empty_avg": null, "empty_median": null, "empty_range": null,
+  "empty_min": null, "empty_max": null, "invalid_element": null,
+  "invalid_kind": null, "wrong_arity": null, "source_after": [1, "2", 5, 4],
+  "receiver_sum": 12, "receiver_avg": 3, "receiver_median": 3,
+  "receiver_range": 4, "receiver_min": 1, "receiver_max": 5,
+  "receiver_wrong_arity": null, "receiver_terminal": null
+}
+]])
+  assert_json_equal(execute_uniform_binding_source(source), expected, "numeric aggregate reducer surfaces")
 end)
 
 local function selector_diagnostic(surface, identifier)
