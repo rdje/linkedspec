@@ -76,6 +76,7 @@ end
 
 function M.runtime_engine(compiled, options)
   if compiled_spec.node_type(compiled) ~= "CompiledSpec" then fail("runtime engine expects CompiledSpec") end
+  compiled_spec.validate_no_removed_aggregate_selectors(compiled)
   options = options or {}
   if type(options) ~= "table" then fail("runtime engine options must be a table") end
   local max_iterations = options.max_iterations or 10000
@@ -166,23 +167,11 @@ end
 local function target_descriptor(expr)
   local name = target_name(expr)
   if name then return { kind = "scalar", name = name } end
-  if expr.kind == "call" and (expr.name == "array" or expr.name == "hash" or expr.name == "harray") and
-      #expr.args == 1 then
-    name = target_name(argument_expr(expr.args[1]))
-    if name then
-      return { kind = expr.name == "array" and "array" or "harray", name = name }
-    end
-  end
   return nil
 end
 
 local function binding_target_descriptor(expr)
   if expr.kind == "variable" then return { kind = "scalar", name = expr.name } end
-  if expr.kind == "call" and (expr.name == "array" or expr.name == "hash" or expr.name == "harray") and
-      #expr.args == 1 then
-    local name = target_name(argument_expr(expr.args[1]))
-    if name then return { kind = expr.name == "array" and "array" or "harray", name = name } end
-  end
   return nil
 end
 
@@ -203,7 +192,7 @@ local function array_binding_for_mutation(ctx, name)
 end
 
 local function store_array_mutation(ctx, target, storage, value)
-  if target.kind == "array" or storage == "array" then return bind_array(ctx, target.name, value) end
+  if storage == "array" then return bind_array(ctx, target.name, value) end
   return bind_scalar(ctx, target.name, value)
 end
 
@@ -791,8 +780,7 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   local name = action_contracts.canonical_action_helper_name(expr.name)
   local split_target = name == "split" and expr.args[1] and
     binding_target_descriptor(argument_expr(expr.args[1])) or nil
-  if split_target and ((split_target.kind == "array" and #expr.args >= 2) or
-      (split_target.kind == "scalar" and #expr.args == 3)) then
+  if split_target and #expr.args == 3 then
     return evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, split_target)
   elseif name == "coalesce" or name == "coalesce_nonempty" then
     return evaluate_coalesce(engine, expr, ctx, accumulator, edge_state, nil)
@@ -867,19 +855,9 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     local target = expr.args[1] and target_descriptor(argument_expr(expr.args[1]))
     if not target or not expr.args[2] then fail("set expects target and value") end
     local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
-    if target.kind == "array" then return bind_array(ctx, target.name, value) end
-    if target.kind == "harray" then return bind_harray(ctx, target.name, value) end
     return bind_scalar(ctx, target.name, value)
   elseif name == "array" then
     if not expr.args[1] then return json.array() end
-    if #expr.args == 1 then
-      local key = target_name(argument_expr(expr.args[1]))
-      if key then
-        local value = ctx.variables[key]
-        if json.kind(value) == "array" then return copy_value(value) end
-        return copy_value(ctx.arrays[key] or json.array())
-      end
-    end
     local result = json.array()
     for index, arg in ipairs(expr.args) do
       result[index] = copy_value(evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state))
@@ -887,14 +865,6 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return result
   elseif name == "hash" or name == "harray" then
     if not expr.args[1] then return json.harray() end
-    if #expr.args == 1 then
-      local key = target_name(argument_expr(expr.args[1]))
-      if key then
-        local value = ctx.variables[key]
-        if json.kind(value) == "harray" then return copy_value(value) end
-        return copy_value(ctx.harrays[key] or json.harray())
-      end
-    end
     local result = json.harray()
     local index = 1
     while index <= #expr.args do
@@ -1135,7 +1105,7 @@ local function execute_array_split_statement(engine, expr, ctx, accumulator, edg
     return false
   end
   local target = binding_target_descriptor(argument_expr(expr.args[1]))
-  if not target or (target.kind ~= "array" and not (target.kind == "scalar" and #expr.args == 3)) then
+  if not target or #expr.args ~= 3 then
     return false
   end
   evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)

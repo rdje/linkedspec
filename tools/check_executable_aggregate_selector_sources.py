@@ -64,6 +64,8 @@ def classified_compatibility(path: str, line: str) -> bool:
         "selector-rejection fixture" in line
     ):
         return True
+    if path == "lua/test/run.lua" and "selector-rejection fixture" in line:
+        return True
     return False
 
 

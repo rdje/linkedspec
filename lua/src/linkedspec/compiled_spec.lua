@@ -319,6 +319,55 @@ local function build_dependency_regex_state(order, rules_by_label)
   return setmetatable({ dependency_regex_map = dependency_regex_map }, DEPENDENCY_STATE_MT)
 end
 
+local function validate_selector_block(block, context)
+  local selector = action_ast.find_removed_aggregate_selector(block)
+  if not selector then return end
+  local diagnostic = action_ast.removed_aggregate_selector_diagnostic(selector)
+  fail(context .. ": " .. diagnostic, {
+    code = "aggregate_selector_removed",
+    surface = selector.surface,
+    identifier = selector.identifier,
+    replacement = selector.identifier,
+  })
+end
+
+local function validate_deferred_selector_source(source, context)
+  local ok, block = pcall(action_parser.parse_action_block, source)
+  if ok then validate_selector_block(block, context) end
+end
+
+local function validate_fluent_selectors(calls, context)
+  for index, call in ipairs(calls) do
+    local args = call.args:match("^%s*(.-)%s*$")
+    local source = args == "" and (call.method .. "()") or (call.method .. "(" .. args .. ")")
+    validate_deferred_selector_source(source, context .. " fluent call " .. (index - 1))
+  end
+end
+
+local function validate_no_removed_aggregate_selectors(compiled)
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    validate_deferred_selector_source(
+      entry.definition.body_source,
+      "function '" .. entry.definition.name .. "' body"
+    )
+  end
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local rule = compiled.rules_by_label[label]
+    for _, payload in ipairs(M.action_payloads(rule)) do
+      validate_selector_block(
+        payload.action_ast,
+        "rule '" .. label .. "' " .. payload.role .. " line " .. payload.line
+      )
+    end
+    for index, edge in ipairs(rule.action_edges) do
+      validate_fluent_selectors(edge.fluent_chain, "rule '" .. label .. "' action edge " .. (index - 1))
+    end
+    for index, edge in ipairs(rule.blind_edges) do
+      validate_fluent_selectors(edge.fluent_chain, "rule '" .. label .. "' blind edge " .. (index - 1))
+    end
+  end
+end
+
 function M.compile_spec(spec, options)
   if spec_ast.node_type(spec) ~= "SpecFile" then fail("compile_spec expects SpecFile") end
   options = options or {}
@@ -353,7 +402,7 @@ function M.compile_spec(spec, options)
   local compiled_rule_order = last_definition_order(definition_order)
   local resolved = resolve_action_edge_dependency_regexes(compiled_rule_order, rules_by_label)
   local dependency_state = build_dependency_regex_state(compiled_rule_order, resolved)
-  return setmetatable({
+  local compiled = setmetatable({
     definition_order = definition_order,
     compiled_rule_order = compiled_rule_order,
     rules_by_label = resolved,
@@ -361,6 +410,8 @@ function M.compile_spec(spec, options)
     function_registry = registry,
     dependency_regex_state = dependency_state,
   }, COMPILED_SPEC_MT)
+  validate_no_removed_aggregate_selectors(compiled)
+  return compiled
 end
 
 function CompiledSpecMethods:rule(label)
@@ -399,6 +450,13 @@ function M.action_payloads(rule)
   for _, payload in ipairs(rule.lifecycle_action_payloads) do result[#result + 1] = payload end
   for _, payload in ipairs(rule.plain_action_payloads) do result[#result + 1] = payload end
   return result
+end
+
+function M.validate_no_removed_aggregate_selectors(compiled)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("validate_no_removed_aggregate_selectors expects CompiledSpec")
+  end
+  validate_no_removed_aggregate_selectors(compiled)
 end
 
 local function dependency_ref_to_json(ref)

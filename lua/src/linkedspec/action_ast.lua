@@ -85,6 +85,111 @@ function M.fluent_call(method, args, source, source_span, fields)
   return node("ActionFluentCall", fields)
 end
 
+function M.removed_aggregate_selector_diagnostic(selector)
+  return "aggregate_selector_removed surface=" .. selector.surface ..
+    " identifier=" .. selector.identifier .. " replacement=" .. selector.identifier
+end
+
+local find_removed_aggregate_selector
+
+local function find_in_args(args)
+  for _, argument in ipairs(args or {}) do
+    local selector = find_removed_aggregate_selector(argument.value)
+    if selector then return selector end
+  end
+  return nil
+end
+
+local function find_in_block(block)
+  if not block then return nil end
+  for _, statement in ipairs(block.statements or {}) do
+    local selector = find_removed_aggregate_selector(statement.expr)
+    if selector then return selector end
+  end
+  return nil
+end
+
+local function find_in_segments(segments)
+  for _, segment in ipairs(segments or {}) do
+    if segment.kind == "index" then
+      local selector = find_removed_aggregate_selector(segment.expr)
+      if selector then return selector end
+    end
+  end
+  return nil
+end
+
+find_removed_aggregate_selector = function(value)
+  if type(value) ~= "table" then return nil end
+  if value.kind == "action_block" then return find_in_block(value) end
+
+  local kind = value.kind
+  if kind == "call" then
+    if (value.name == "array" or value.name == "hash") and #value.args == 1 then
+      local argument = value.args[1]
+      if argument.argument_kind == "positional" and argument.value and argument.value.kind == "variable" then
+        return { surface = value.name, identifier = argument.value.name }
+      end
+    end
+    return find_in_args(value.args)
+  elseif kind == "fluent_chain" then
+    local selector = find_removed_aggregate_selector(value.receiver)
+    if selector then return selector end
+    for _, call in ipairs(value.calls or {}) do
+      selector = find_in_args(call.args)
+      if selector then return selector end
+    end
+    return nil
+  elseif kind == "assign_scalar" or kind == "assign_array_append" then
+    return find_removed_aggregate_selector(value.value)
+  elseif kind == "assign_hash_index" then
+    return find_removed_aggregate_selector(value.key) or find_removed_aggregate_selector(value.value)
+  elseif kind == "assign_nested_access" then
+    return find_in_segments(value.segments) or find_removed_aggregate_selector(value.value)
+  elseif kind == "indexed_var" then
+    return find_removed_aggregate_selector(value.index)
+  elseif kind == "nested_access" then
+    return find_in_segments(value.segments)
+  elseif kind == "array_literal" then
+    for _, item in ipairs(value.items or {}) do
+      local selector = find_removed_aggregate_selector(item)
+      if selector then return selector end
+    end
+    return nil
+  elseif kind == "hash_literal" then
+    for _, entry in ipairs(value.entries or {}) do
+      local selector = find_removed_aggregate_selector(entry.key) or
+        find_removed_aggregate_selector(entry.value)
+      if selector then return selector end
+    end
+    return nil
+  elseif kind == "block_value" then
+    return find_in_block(value.block)
+  elseif kind == "control_if" or kind == "control_while" then
+    return find_removed_aggregate_selector(value.condition) or find_in_args(value.args) or find_in_block(value.body)
+  elseif kind == "control_switch" then
+    local selector = find_removed_aggregate_selector(value.source_expr) or find_in_args(value.args) or
+      find_in_block(value.body)
+    if selector then return selector end
+    for _, case_expr in ipairs(value.cases or {}) do
+      selector = find_removed_aggregate_selector(case_expr)
+      if selector then return selector end
+    end
+    return find_removed_aggregate_selector(value.default)
+  elseif kind == "control_case" then
+    return find_removed_aggregate_selector(value.match) or find_in_args(value.args) or find_in_block(value.body)
+  elseif kind == "control_else" or kind == "control_default" then
+    return find_in_args(value.args) or find_in_block(value.body)
+  elseif kind and kind:match("^control_") then
+    return find_in_args(value.args)
+  end
+  return nil
+end
+
+function M.find_removed_aggregate_selector(value)
+  return find_removed_aggregate_selector(value)
+end
+
 local project
 
 local function project_list(values)

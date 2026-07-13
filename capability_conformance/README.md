@@ -73,8 +73,8 @@ Zero/multi/quoted/computed constructor calls remain separately valid under versi
 seven execution cases, six invalid selectors, eight constructor classifications, and deterministic future source/
 results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.12.1.2`, Rust `.12.1.3`, Dart
 `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` execute the contract. All tracked file-backed and embedded sources
-are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, and Julia `.12.1.8.4` hard-reject the removed
-exact selectors before execution with complete gates; Lua follows in dependency order.
+are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5`
+hard-reject the removed exact selectors before execution; cross-variant no-drift `.12.1.8.6` follows.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
 compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-

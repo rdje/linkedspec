@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.5 — Lua needs validation at both compile and runtime-engine admission):
+  Lua compiled state is mutable by host code and contains typed rule ActionIR beside deferred function/fluent source.
+  Compile-time inspection must therefore cover typed nodes and every valid deferred source, while engine construction
+  must repeat the check so a caller cannot mutate a compiled payload after compilation. Once those two admission
+  points own portable rejection, wrapper-aware target descriptors and special array/hash read/set/push/receiver/
+  split/transform branches can be deleted without leaving a bypass. Both PUC Lua and LuaJIT pass 88/88 plus exact
+  105-manifest/CLI-scaffold checks.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.4 — Julia selector rejection must validate both typed and deferred
   executable state): Julia compiles rule action blocks to typed ActionIR, but user-function bodies and raw fluent
   arguments retain deferred source until runtime. Recursive typed inspection alone would therefore leave unused

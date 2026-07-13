@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Julia selector retirement `.12.1.8.4` complete; Lua `.12.1.8.5` active).
+- Last updated: `2026-07-12` (Lua selector retirement `.12.1.8.5` complete; cross-variant no-drift `.12.1.8.6` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2941,11 +2941,25 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.8.4 - hard-reject Julia aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.5`
-  Status: `active`
+  Status: `done`
   Goal: Reject exact selector-shaped calls on Lua and delete selector-specific recognition/dispatch.
+  Acceptance: Reject all six neutral exact-selector cases with portable code/surface/identifier/replacement fields
+    across complete compiled state, including dead control bodies, valid deferred fluent calls, and any registered
+    unused user-function bodies; revalidate runtime-engine input so caller-mutated compiled tables cannot bypass
+    rejection; retain all eight neutral constructor/literal classes; delete selector-only read, set/push/receiver,
+    split/transform, and target-descriptor recognition; pass PUC Lua and LuaJIT focused/full suites, executable
+    source scan, exact 105-manifest validation, docs/Knowledge Map/doctrine, mdBook, cleanup, and whitespace gates.
+  Verification: **PASS 2026-07-12.** All six neutral exact cases move from compiling to portable typed rejection.
+    Recursive ActionIR inspection covers every expression family; whole-compiled-state validation also parses valid
+    deferred user-function bodies and fluent calls without changing unrelated parse failures. Compile and runtime-
+    engine boundaries both validate, including caller-mutated compiled payloads. Selector-only array/hash reads,
+    set/push/receiver targets, mutable split/transform wrappers, and descriptor branches are deleted. Both PUC Lua
+    and LuaJIT pass 88/88 with all eight retained classes; the exact 105-manifest and CLI-scaffold checks pass;
+    executable scan is zero-positive/19 classified.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.8.5 - hard-reject Lua aggregate selectors`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.8.6`
-  Status: `pending`
+  Status: `active`
   Goal: Prove the portable diagnostic and zero selector recognizers/sources across all variants.
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.9`
@@ -3138,6 +3152,21 @@ before implementation.
   105 corpus, canonical local CI, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
 - [x] **LOCKSTEP** — Task/index, live docs, roadmaps, README/book, architecture, Knowledge Map, changes/notes, and
   memory close Julia and identify Lua `.12.1.8.5` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prove all six exact selector-shaped neutral cases still compile on Lua, including
+  whitespace, nested, target, and receiver shapes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve the Lua uniform-binding fact and trace compatibility through typed
+  ActionIR, deferred function/fluent source, runtime-engine admission, and every wrapper dispatch branch.
+- [x] **FIX** — Add recursive whole-compiled-state rejection at compile/runtime-engine boundaries and delete every
+  selector-only runtime recognition/dispatch branch.
+- [x] **ADDRESSED (verified)** — Lock all six neutral cases, dead/fluent/function and caller-mutation coverage, and
+  all eight retained constructor/literal classes on both PUC Lua and LuaJIT.
+- [x] **NO REGRESSION** — Dual-ABI 88/88 full tests, zero-positive executable scan, exact 105-manifest/CLI scaffold,
+  docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, live docs, roadmaps, README/book, architecture, Knowledge Map, changes/notes, and
+  memory close Lua and activate cross-variant no-drift `.12.1.8.6`.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3475,7 +3504,8 @@ before implementation.
 | 109 | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | `done` | Exact selectors fail across Dart compiled/generated boundaries; runtime dispatch is deleted. |
 | 110 | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | `done` | Exact variadic `blkVFN` capture parity restores the 205-test/61x2/105 Dart gate. |
 | 111 | `FUTURE-PARITY-BACKLOG.12.1.8.4` | `done` | Julia rejects exact selectors across native/generated boundaries and has no selector runtime dispatch. |
-| 112 | `FUTURE-PARITY-BACKLOG.12.1.8.5` | `active` | Hard-reject exact selectors on Lua and delete their recognition/dispatch. |
+| 112 | `FUTURE-PARITY-BACKLOG.12.1.8.5` | `done` | Lua rejects exact selectors at compile/runtime-engine admission and has no selector runtime dispatch. |
+| 113 | `FUTURE-PARITY-BACKLOG.12.1.8.6` | `active` | Prove portable diagnostics and zero selector recognizers/sources across all variants. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4175,6 +4205,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | Six neutral exact cases; recursive typed ActionIR/whole-compiled-state validation; dead/unused-function/deferred-fluent coverage; generated emission/plan boundaries; eight retained classes; focused 15/15; strict analysis; executable scan 0/14; complete package leg 203 pass/two aggregate failures. | PASS for selector implementation. All selector paths pass and dispatch is deleted. The only full-gate failures are four `spec_spec_*` smokes root-caused to fixed `blkFN` versus shipped variadic `blkVFN`; `.12.1.8.3.2` activates before parent closeout. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | Real four-case FAIL reproduction; Knowledge Map bounded-bridge retrieval; exact fixed/variadic detector and prefix/capture/named-block proof; focused matching+selector 22; four `spec_spec_*` PASS; complete format/analyze/205 tests/61x2 CLI/105 corpus. | PASS. `blkVFN` is supported without general recursive-PCRE claims; Dart `.12.1.8.3` closes and Julia `.12.1.8.4` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.4` | Six neutral FAIL-before/PASS-after compile cases; recursive typed ActionIR and complete compiled-state validation; dead/deferred-fluent/unused-function coverage; caller-constructed generated emission/plan rejection; eight retained classes; focused 59/59; executable scan 0/15; complete 1,339 package assertions/61x2 CLI/105 corpus; canonical local CI including Phase 0 `1..1031`/601s; docs/KM/governance/mdBook/whitespace. | PASS. Julia selector runtime dispatch is deleted and every native/generated compiled boundary rejects the portable diagnostic shape; Lua `.12.1.8.5` activates. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.5` | Six neutral FAIL-before/PASS-after compile cases; recursive ActionIR/whole-compiled-state validation; dead/deferred-fluent/unused-function coverage; caller-mutated runtime-engine rejection; eight retained classes; PUC Lua 88/88; LuaJIT 88/88; executable scan 0/19; exact 105-manifest and CLI-scaffold checks; docs/KM/governance/mdBook/whitespace. | PASS. Lua selector dispatch is deleted and compile/runtime-engine admission rejects the portable typed fields; cross-variant no-drift `.12.1.8.6` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
@@ -4225,6 +4256,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.8.3.1` | `FUTURE-PARITY-BACKLOG.12.1.8.3.1 - hard-reject Dart aggregate selectors` | Whole-compiled-state/generated rejection, runtime-dispatch deletion, retained values, and explicit full-gate bridge handoff. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.3.2` | `FUTURE-PARITY-BACKLOG.12.1.8.3.2 - close Dart selector retirement` | Exact variadic `blkVFN` bridge parity, complete Dart gate, parent closeout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.4` | `FUTURE-PARITY-BACKLOG.12.1.8.4 - hard-reject Julia aggregate selectors` | Whole-compiled-state/generated rejection, runtime-dispatch deletion, retained values, and complete Julia proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.8.5` | `FUTURE-PARITY-BACKLOG.12.1.8.5 - hard-reject Lua aggregate selectors` | Whole-compiled-state/runtime-engine rejection, runtime-dispatch deletion, retained values, and dual-ABI proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -4290,6 +4322,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.8.5` hard-retires exact aggregate selectors on Lua. Recursive ActionIR inspection and
+  whole-compiled-state validation cover rule payloads, valid deferred fluent calls, unused function bodies, and
+  caller-mutated compiled tables at runtime-engine admission. Selector-only reads, set/push/receiver targets,
+  mutable split/transform wrappers, and descriptor branches are deleted while all eight retained classes pass.
+  PUC Lua and LuaJIT each pass 88/88; the exact 105-manifest/CLI scaffold and zero-positive/19-classified scan pass.
+  Cross-variant no-drift `.12.1.8.6` activates.
 - `2026-07-12`: `.12.1.8.4` hard-retires exact aggregate selectors on Julia. Recursive typed-ActionIR inspection
   and whole-compiled-state validation cover all rule payloads, valid deferred fluent calls, unused function bodies,
   generated emission, and generated plan/execution entry. Selector-only runtime reads, set/push/receiver targets,

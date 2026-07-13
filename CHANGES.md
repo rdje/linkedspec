@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.5 — hard-reject Lua aggregate selectors
+
+Lua now rejects every exact one-bare-identifier `array(...)` / `hash(...)` selector at complete compiled-state
+admission with portable code/surface/identifier/replacement fields. Recursive ActionIR inspection covers dead
+control bodies; valid deferred fluent calls and unused registered function bodies are parsed and inspected without
+changing unrelated parse-error timing. Runtime-engine construction repeats validation for caller-mutated compiled
+tables.
+
+Selector-specific array/hash reads, `set`/`push` and receiver targets, mutable split/transform wrappers, and target-
+descriptor branches are deleted. All eight retained constructor/literal classes pass. PUC Lua and LuaJIT each pass
+88/88, the exact 105-fixture manifest and CLI-scaffold checks pass, and the executable scan reports zero positive /
+19 classified rejection occurrences. Cross-variant no-drift `.12.1.8.6` is next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.4 — hard-reject Julia aggregate selectors
 
 Julia now rejects every exact one-bare-identifier `array(...)` / `hash(...)` selector at the complete compiled

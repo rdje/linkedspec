@@ -1260,8 +1260,8 @@ test("ActionIR contracts resolve registered functions before helper fallback", f
   end, "must expose resolve_call", "registry interface")
 end)
 
-local function registry_function(name, params, index, body_ast)
-  local body_source = "return(value)"
+local function registry_function(name, params, index, body_ast, body_source_override)
+  local body_source = body_source_override or "return(value)"
   local path = { "functions", tostring(index), "body_source" }
   return ast.function_definition({
     name = name,
@@ -2486,6 +2486,106 @@ end
 local function assert_json_equal(actual, expected, label)
   assert_equal(json.encode(actual), json.encode(expected), label)
 end
+
+local function uniform_binding_action_source(action)
+  return "Top::\n /x/ -> Done { " .. action .. " }\nDone::\n /x/\n"
+end
+
+local function selector_diagnostic(surface, identifier)
+  return "aggregate_selector_removed surface=" .. surface ..
+    " identifier=" .. identifier .. " replacement=" .. identifier
+end
+
+local function assert_selector_compile_error(source, surface, identifier, label, spec_override)
+  local ok, compile_error = pcall(function()
+    return linkedspec.compile_spec(spec_override or linkedspec.parse_spec(source))
+  end)
+  assert_equal(ok, false, label .. " rejects")
+  assert_equal(linkedspec.is_compiled_spec_error(compile_error), true, label .. " error type")
+  assert_contains(compile_error.message, selector_diagnostic(surface, identifier), label .. " diagnostic")
+  assert_equal(compile_error.code, "aggregate_selector_removed", label .. " code")
+  assert_equal(compile_error.surface, surface, label .. " surface")
+  assert_equal(compile_error.identifier, identifier, label .. " identifier")
+  assert_equal(compile_error.replacement, identifier, label .. " replacement")
+end
+
+test("uniform-binding exact aggregate selectors fail compilation", function()
+  local handle = assert(io.open("capability_conformance/uniform_binding_contract.json", "rb"))
+  local contract = json.decode(assert(handle:read("*a")))
+  assert(handle:close())
+  for _, case in ipairs(contract.invalid_selector_cases) do
+    assert_selector_compile_error(
+      uniform_binding_action_source(case.source),
+      case.surface,
+      case.identifier,
+      case.id
+    )
+  end
+end)
+
+test("uniform-binding dead fluent function and caller-mutated selectors reject", function()
+  assert_selector_compile_error(
+    uniform_binding_action_source("if(false) { return(array(items)) }; return([])"), -- selector-rejection fixture
+    "array",
+    "items",
+    "dead selector"
+  )
+  assert_selector_compile_error(
+    "Top::\n -> Done.return(hash(meta))\nDone::\n /x/\n", -- selector-rejection fixture
+    "hash",
+    "meta",
+    "fluent selector"
+  )
+
+  local parsed = linkedspec.parse_spec(uniform_binding_action_source("return([])"))
+  local definition = registry_function(
+    "retired",
+    {},
+    0,
+    nil,
+    "return(array(items))" -- selector-rejection fixture
+  )
+  local function_spec = ast.spec_file({ functions = { definition }, rules = parsed.rules })
+  assert_selector_compile_error("", "array", "items", "unused function selector", function_spec)
+
+  local compiled = linkedspec.compile_spec(parsed)
+  local payload = linkedspec.compiled_spec.action_payloads(compiled.rules_by_label.Top)[1]
+  payload.action_ast = linkedspec.parse_action_block("array" .. "(items)") -- selector-rejection fixture: array(items)
+  local ok, runtime_error = pcall(function() return linkedspec.runtime_engine(compiled) end)
+  assert_equal(ok, false, "caller-mutated selector rejects")
+  assert_equal(linkedspec.is_compiled_spec_error(runtime_error), true, "caller-mutated error type")
+  assert_contains(runtime_error.message, selector_diagnostic("array", "items"), "caller-mutated diagnostic")
+end)
+
+test("uniform-binding retained aggregate constructors and literals execute", function()
+  local result = execute_uniform_binding_source(uniform_binding_action_source([[
+items = ["x"]
+left = "l"
+right = "r"
+key = "key"
+value = "r"
+return([
+  array(),
+  array("items"),
+  array(copy(items)),
+  array(left, right),
+  hash(),
+  hash("key", value),
+  [items],
+  { key : value }
+])
+]]))
+  assert_json_equal(result, json.array({
+    json.array(),
+    json.array({ "items" }),
+    json.array({ json.array({ "x" }) }),
+    json.array({ "l", "r" }),
+    json.harray(),
+    json.harray({ key = "r" }),
+    json.array({ json.array({ "x" }) }),
+    json.harray({ key = "r" }),
+  }), "retained aggregate forms")
+end)
 
 test("uniform-binding future fixture executes", function()
   local handle = assert(io.open("capability_conformance/uniform_binding_contract.json", "rb"))

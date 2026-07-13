@@ -11,7 +11,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [lua, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.12.1.6 centralizes Lua kind-checked array mutation around lookup_binding in lua/src/linkedspec/interpreter.lua. Nine permanent cases cover the neutral fixture, saved results, split, hash update, collection rebinding, array-end chaining, static precedence, and wrong-kind fields. PUC Lua and LuaJIT pass 85/85."
+evidence: "FUTURE-PARITY-BACKLOG.12.1.6 centralizes Lua kind-checked array mutation around lookup_binding in lua/src/linkedspec/interpreter.lua. Nine permanent cases cover the neutral fixture, saved results, split, hash update, collection rebinding, array-end chaining, static precedence, and wrong-kind fields. FUTURE-PARITY-BACKLOG.12.1.8.5 rejects exact selectors across typed/deferred compiled state and caller-mutated runtime-engine input, then deletes their runtime dispatch. PUC Lua and LuaJIT pass 88/88."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -30,8 +30,8 @@ Registered compiled rules retain precedence for ambiguous `push(name, target)`: 
 appended to the target binding. Otherwise the first name is the array binding. Minimal pure array dispatch supplies
 the continuations required by the neutral fixture and mutation chains.
 
-Exact `array(name)` and `hash(name)` remain parsed only until hard rejection; all tracked sources have migrated.
-Lua rejects and deletes those selector paths in `FUTURE-PARITY-BACKLOG.12.1.8.5`.
+Exact one-bare-identifier aggregate selectors are rejected before execution; all tracked sources have migrated.
+Lua's selector recognition and runtime dispatch are deleted by `FUTURE-PARITY-BACKLOG.12.1.8.5`.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-uniform-binding-runtime]], [[julia-uniform-binding-runtime]],

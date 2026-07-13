@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.5 — hard-reject Lua aggregate selectors**
+  (DONE — all five backends reject; cross-variant no-drift `.12.1.8.6` is next).
+
+  **Outcome:** Lua rejects exact selectors across complete compiled state, valid deferred function/fluent source,
+  and caller-mutated runtime-engine input with portable fields. Selector-specific reads, targets, receivers, split/
+  transform wrappers, and descriptors are deleted; all eight retained classes pass.
+
+  **Proof:** PUC Lua and LuaJIT each pass 88/88. Exact 105-manifest and CLI-scaffold checks pass, and the executable
+  source scan is zero-positive/19 classified.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.4 — hard-reject Julia aggregate selectors**
   (DONE — Julia rejection complete; Lua `.12.1.8.5` is next).
 

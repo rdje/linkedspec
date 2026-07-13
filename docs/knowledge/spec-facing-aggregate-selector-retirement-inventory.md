@@ -1,6 +1,6 @@
 ---
 id: spec-facing-aggregate-selector-retirement-inventory
-title: "Exact array(name) and hash(name) selectors are migrated everywhere and hard-rejected on Perl, Rust, and Dart"
+title: "Exact array(name) and hash(name) selectors are migrated and hard-rejected on all five backends"
 answers:
   - "are array name and hash name selector forms going away"
   - "is aggregate selector removal still unresolved"
@@ -14,7 +14,7 @@ answers:
 date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, compatibility, retirement, FUTURE-PARITY-BACKLOG]
-evidence: "Director clarification 2026-07-12 settles removal. The corrected baseline is 600 exact selector-shaped calls across 82 tracked .spec files, including 210 across 15 shipped specs; earlier 651/227 figures included 51/17 flat_array(name) suffixes. Leaves .12.1.2-.6 enable bare behavior on every backend, .12.1.7.1 removes 210 shipped occurrences, .12.1.7.2 removes the remaining 390 from 67 file-backed fixtures/corpora, and .12.1.7.3 removes 1,356 positive occurrences from 25 embedded test/tool/backend source owners. FUTURE-PARITY-BACKLOG.12.1.8.1, .12.1.8.2, and .12.1.8.3.1 hard-reject exact selector nodes on Perl, Rust, and Dart. The executable scanner reports zero positives and 14 classified rejection-test/implementation occurrences."
+evidence: "Director clarification 2026-07-12 settles removal. The corrected baseline is 600 exact selector-shaped calls across 82 tracked .spec files, including 210 across 15 shipped specs; earlier 651/227 figures included 51/17 flat_array(name) suffixes. Leaves .12.1.2-.6 enable bare behavior on every backend, .12.1.7.1 removes 210 shipped occurrences, .12.1.7.2 removes the remaining 390 from 67 file-backed fixtures/corpora, and .12.1.7.3 removes 1,356 positive occurrences from 25 embedded test/tool/backend source owners. FUTURE-PARITY-BACKLOG.12.1.8.1-.5 hard-reject exact selector nodes on Perl, Rust, Dart, Julia, and Lua. The executable scanner reports zero positives and 19 classified rejection-test/implementation occurrences."
 reverify: "python3 tools/check_executable_aggregate_selector_sources.py && prove -Iperl t/uniform_binding_contract.t t/trace_emit_context_bridge.t"
 ---
 
@@ -48,13 +48,14 @@ Neutral leaf `.12.1.1` fixes static-rule precedence, bare mutation, three-argume
 exact diagnostics, and constructor classification in `linkedspec-uniform-binding-v1`. Perl/Rust/Dart/Julia/Lua
 leaves `.12.1.2` through `.12.1.6` now execute those alternatives. Migration remains ordered rather than blind
 because selector-shaped one-argument calls must be classified as reads/targets versus intended constructors;
-source migration `.12.1.7.1-.3` is complete. Perl `.12.1.8.1`, Rust `.12.1.8.2`, and Dart `.12.1.8.3.1` now
-hard-reject exact selector nodes; Julia/Lua rejection remains dependency-ordered under `.12.1.8.4-.5` after Dart
-full-gate closure.
+source migration `.12.1.7.1-.3` is complete. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia
+`.12.1.8.4`, and Lua `.12.1.8.5` hard-reject exact selector nodes; only cross-variant no-drift and final admission
+remain.
 
 Related facts: [[uniform-expression-compatibility-retirement-doctrine]],
 [[uniform-binding-neutral-contract]],
 [[perl-aggregate-selector-compile-rejection]],
 [[rust-aggregate-selector-compile-rejection]], [[dart-aggregate-selector-compile-rejection]],
+[[julia-aggregate-selector-compile-rejection]], [[lua-aggregate-selector-compile-rejection]],
 [[terse-duck-typed-assignment-perl-reference]], [[terse-rust-duck-typed-assignment-parity]],
 [[terse-mutation-surface-ground-truth]].

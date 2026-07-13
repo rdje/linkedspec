@@ -208,10 +208,12 @@ scalar normalization, string predicate/composition, coalesce/concat, and scalar-
 numeric helpers. It also lowers retained aggregate-constructor, collection/reducer, and hash helper
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
 Bare typed reads are the destination surface. Exact one-identifier aggregate selectors are retired and report
-`aggregate_selector_removed` on Perl, Rust, Dart, and Julia before execution; Lua follows in dependency order.
+`aggregate_selector_removed` on Perl, Rust, Dart, Julia, and Lua before execution.
 Julia's boundary recursively inspects typed rule ActionIR, parses valid deferred function bodies and fluent calls,
 and repeats validation for generated emission and plan execution, so unused or caller-constructed state cannot
 bypass rejection. Selector-specific Julia runtime dispatch is gone.
+Lua likewise inspects typed and valid deferred compiled state, repeats validation when a runtime engine accepts its
+mutable compiled table, and has no selector-specific read, target, receiver, split, or transform dispatch.
 Retired short aliases `s(...)`/`a(...)`/`h(...)` remain ordinary unresolved helpers rather than normalized.
 Unsupported covered helper
 forms now report unresolved-helper metadata instead of leaking as generated host-language
