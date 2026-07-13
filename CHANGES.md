@@ -1,5 +1,14 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.1 — execute Lua eager block values
+
+Added one Lua expression-block executor: non-final statements retain dropped-statement mutation, the final
+expression yields the block value, and local `return`/`return()` skips later statements without escaping the
+surrounding rule. Harray braces keep precedence and block results continue through receiver dispatch. Corrected
+the earlier Lua-only expectation that `callback = { return("later") }` stores an inert codeblock; portable ordinary
+braces are eager and store `"later"`, while contextual trailing blocks remain structural and future explicit
+callables use `{|params| ...}`. Both Lua ABIs pass 104/104; Perl lowering and focused Rust tests agree.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.0 — split Lua block control callback mechanisms
 
 Audited Lua's parser, contract resolver, interpreter, function registry, backend precedents, and callable-codeblock

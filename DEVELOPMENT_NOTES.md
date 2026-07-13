@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.1 — brace syntax needs evaluation context, not one AST meaning): Lua uses
+  `block_value` structurally for both ordinary expression blocks and contextual final arguments. Ordinary value
+  evaluation must execute it; a consuming block-taking callable must instead receive the raw final AST. The eager
+  evaluator shares dropped-statement mutation for every non-final statement, evaluates the last statement in
+  value context, and catches only `FLOW_MT` return so `next`/errors still propagate. The `.4.3.1` inert assignment
+  fixture was scaffold drift: explicit deferred values are `{|params| ...}`, while contextual trailing blocks are
+  inert only until their signature-governed callable executes them.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.0 — parser support is not runtime ownership): Lua already emits and
   resolves `block_value` and control nodes, including callable-name-agnostic attached final blocks, but its
   interpreter only copies block records. Eager block execution, value controls, statement controls, scoped

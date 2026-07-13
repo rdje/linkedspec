@@ -14,6 +14,7 @@ date: 2026-07-13
 status: current
 tags: [lua, runtime, codeblock, controls, callbacks, user-functions, planning, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.6.0 audits lua/src/linkedspec/action_parser.lua, action_contracts.lua, interpreter.lua, and user_function_registry.lua. Parser/resolver support is structural; runtime block/control/callback execution is absent, and general user-function dispatch remains LUA-BACKEND-PARITY.5.1."
+evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 executes ordinary no-pair brace values, consumes block-local return, preserves harray classification, and corrects the earlier Lua-only inert assignment expectation at 104/104 on both ABIs."
 reverify: "rg -n 'block_value|control_if|control_switch|control_while|prepare_invocation' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/user_function_registry.lua && bash scripts/check_task_tree_metadata.sh"
 ---
 
@@ -48,4 +49,5 @@ dynamic codeblock-variable calls remain the later Lua obligation routed by
 
 Related facts: [[lua-actionir-ast-parser]], [[lua-runtime-helper-family-split]],
 [[generic-trailing-codeblock-argument-correction]],
-[[callable-codeblock-literal-contract]], [[terse-expression-valued-block-early-return]].
+[[callable-codeblock-literal-contract]], [[terse-expression-valued-block-early-return]],
+[[lua-runtime-eager-block-values]].

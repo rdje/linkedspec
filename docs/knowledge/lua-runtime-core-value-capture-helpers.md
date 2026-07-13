@@ -15,6 +15,7 @@ date: 2026-07-13
 status: current
 tags: [lua, runtime, values, stores, access, captures, positions, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.1 extends lua/src/linkedspec/interpreter.lua with runtime_value_kind, defensive four-kind copies, scalar/array/harray binding, checked direct/nested access and assignment, current-edge retv dispatch, and all entry_*/match_* reads. FUTURE-PARITY-BACKLOG.12.1.6 later routes every public bare mutation/read through one observable typed binding, and .12.1.8.5 hard-rejects exact aggregate selectors."
+evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 corrects the earlier Lua-only callback = { return(...) } storage fixture: ordinary no-pair braces are eager values. Structural codeblock identity remains for contextual final arguments, registry frames, and future explicit callable values."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -22,9 +23,14 @@ reverify: "bash tools/run_lua_local.sh"
 
 Lua exposes exactly four runtime value kinds through `runtime_value_kind(...)`:
 `scalar`, `array`, `harray`, and `codeblock`. Null, boolean, number, and string
-are scalar values. Arrays/harrays use the typed JSON metatables; codeblocks are
-typed ActionIR `block_value` nodes. Reads and result projection defensively copy
-mutable aggregates and reparse codeblock source into independent typed nodes.
+are scalar values. Arrays/harrays use the typed JSON metatables; contextual and
+explicit codeblocks use typed ActionIR records. Structural reads defensively copy
+mutable aggregates and reparse block source into independent typed nodes.
+
+An ordinary authored no-pair `{ statements }` expression is not an inert stored
+codeblock: it executes eagerly and yields its final/local-return value. Typed
+block records remain observable at contextual final-argument and registry-frame
+boundaries; future explicit callable values use `{|params| ...}`.
 
 Runtime context may keep scalar, array, and harray stores separately, but a
 `.spec` name exposes one current typed value. Bare assignment and `set(name,
@@ -45,4 +51,4 @@ are typed empty containers, named presence is `0`, and line/column is `(1, 1)`.
 
 Related facts: [[lua-runtime-rule-interpreter]], [[lua-runtime-matching-state]],
 [[lua-runtime-helper-family-split]], [[spec-lifecycle-retv-order]],
-[[lua-actionir-ast-parser]].
+[[lua-actionir-ast-parser]], [[lua-runtime-eager-block-values]].

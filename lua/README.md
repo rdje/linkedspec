@@ -42,17 +42,22 @@ merge arguments override earlier keys. Lua deterministically lets the renamed ol
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
 Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
 absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
-an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 103/103
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 104/104
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by active parent `.4.3.6`. Audit `.4.3.6.0`
 splits eager expression blocks, inline and statement controls, current built-in final blocks/`with`, and tree
-callbacks; expression-valued blocks `.4.3.6.1` are active. General user-function final blocks remain `.5.1`, while
+callbacks. `.4.3.6.1` now executes ordinary non-pair `{ ... }` values once, yields their final expression, catches
+block-local `return`, preserves empty/keyed harray precedence, and continues yielded receivers. Inline value
+controls `.4.3.6.2` are active. General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
+Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
+codeblock. A trailing block remains structural until its signature-governed callable consumes it; future explicit
+first-class codeblocks use `{|params| ...}`.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge
 `.push`/`.push(target)` and block `push(Child[, target][, index])` reuse the cached child result, select zero-based
 items when requested, and retain neutral wrong-kind diagnostics.

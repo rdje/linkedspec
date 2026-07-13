@@ -122,6 +122,7 @@ end
 
 local execute_rule
 local evaluate_expr
+local evaluate_block_value
 
 local function argument_expr(arg) return arg.value end
 
@@ -1287,7 +1288,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return copy_value(value)
   end
   if kind == "block_value" then
-    return copy_value(expr)
+    return evaluate_block_value(engine, expr.block, ctx, accumulator, edge_state)
   end
   if kind == "array_literal" then
     local result = json.array()
@@ -1567,17 +1568,44 @@ local function execute_hash_set_key_statement(engine, expr, ctx, accumulator, ed
   return true
 end
 
+local function execute_dropped_statement(engine, statement, ctx, accumulator, edge_state)
+  local handled = statement.drops_value and (
+    execute_regex_substitution_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+    execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+    execute_array_transform_statement(engine, statement.expr, ctx, accumulator, edge_state) or
+    execute_hash_set_key_statement(engine, statement.expr, ctx, accumulator, edge_state)
+  )
+  if handled then return json.null end
+  return evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
+end
+
+local function evaluate_block_step(callback)
+  local ok, value = pcall(callback)
+  if ok then return false, value end
+  if getmetatable(value) == FLOW_MT and value.kind == "return" then
+    return true, copy_value(value.value)
+  end
+  error(value, 0)
+end
+
+evaluate_block_value = function(engine, block, ctx, accumulator, edge_state)
+  if #block.statements == 0 then return json.null end
+  for index, statement in ipairs(block.statements) do
+    local is_last = index == #block.statements
+    local returned, value = evaluate_block_step(function()
+      if is_last then
+        return evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
+      end
+      return execute_dropped_statement(engine, statement, ctx, accumulator, edge_state)
+    end)
+    if returned or is_last then return copy_value(value) end
+  end
+  return json.null
+end
+
 local function execute_block(engine, block, ctx, accumulator, edge_state)
   for _, statement in ipairs(block.statements) do
-    local handled = statement.drops_value and (
-      execute_regex_substitution_statement(engine, statement.expr, ctx, accumulator, edge_state) or
-      execute_array_split_statement(engine, statement.expr, ctx, accumulator, edge_state) or
-      execute_array_transform_statement(engine, statement.expr, ctx, accumulator, edge_state) or
-      execute_hash_set_key_statement(engine, statement.expr, ctx, accumulator, edge_state)
-    )
-    if not handled then
-      evaluate_expr(engine, statement.expr, ctx, accumulator, edge_state)
-    end
+    execute_dropped_statement(engine, statement, ctx, accumulator, edge_state)
   end
 end
 

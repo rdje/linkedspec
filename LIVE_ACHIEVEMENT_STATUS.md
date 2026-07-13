@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.1 — execute Lua eager block values**
+  (DONE — 104/104 on both ABIs; lazy inline controls `.4.3.6.2` active).
+
+  **Implementation:** One value-block executor reuses dropped-statement mutation for non-final statements,
+  evaluates the final expression as a value, and consumes only block-local return flow. Harray classification and
+  yielded-value receiver continuation remain exact.
+
+  **Correction and proof:** Ordinary `callback = { return("later") }` is eager and stores `"later"`; the earlier
+  Lua-only inert scaffold expectation is superseded. PUC Lua/LuaJIT, Perl lowering, and focused Rust tests agree;
+  contextual trailing blocks stay structural and first-class callable values remain future `.11.7`.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.0 — split Lua block control callback mechanisms**
   (DONE — planning/audit only; eager expression blocks `.4.3.6.1` active).
 

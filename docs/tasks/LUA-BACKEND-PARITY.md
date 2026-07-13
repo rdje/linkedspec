@@ -7,7 +7,7 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (`.4.3.6.0` splits immediate block values, value/statement controls, contextual
-  built-in blocks, and tree callbacks; expression-valued blocks `.4.3.6.1` active)
+  built-in blocks, and tree callbacks; eager block values `.4.3.6.1` pass 104/104; inline controls `.4.3.6.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -592,6 +592,10 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     PUC Lua and LuaJIT; positive/fixed-width negative lookbehind now have permanent dual-ABI proof, and Dart's real
     `spec_spec_minimal_rule` fixture passes 1/1. Prior source/ActionIR/compiler/matching/dispatch/process/manifest
     proofs remain green.
+  Correction 2026-07-13: `.4.3.6.1` establishes that ordinary authored `{ statements }` values execute eagerly,
+    including assignment RHS positions; the earlier codeblock-storage fixture was a Lua scaffold contradiction,
+    not a portable authoring contract. Structural `block_value` copying/classification remains required for
+    contextual final block arguments, registry frames, and future explicit callable values.
   Commit: `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`
 
 ### `LUA-BACKEND-PARITY.4.3.1` Acceptance Checklist
@@ -606,9 +610,10 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   access routing, checked copy-on-write mixed paths, named/compact capture projections, Unicode positions, and
   absent-match contracts; exported `runtime_value_kind(...)`.
 - [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 69/69 on both runtimes. New cases prove stored
-  scalar/array/harray/codeblock values, false/null identity, named stores, append/hash/nested mutation, snapshot
-  isolation, failed-path no-autovivification, current-edge `retv`, full entry/match families, Unicode lines/spans,
-  and absent null/empty/origin behavior.
+  scalar/array/harray values, structurally supplied codeblock classification/copying, false/null identity, named
+  stores, append/hash/nested mutation, snapshot isolation, failed-path no-autovivification, current-edge `retv`,
+  full entry/match families, Unicode lines/spans, and absent null/empty/origin behavior. `.4.3.6.1` later corrects
+  ordinary authored brace assignment from inert scaffold behavior to eager evaluation.
 - [x] **NO REGRESSION** — Existing 66 interpreter tests plus frontend/registry/compiler/matcher/process/manifest/
   exact-name checks remain green. The director-raised `spec.spec` lookbehind concern is resolved by actual engine/
   corpus proof rather than host-language assumptions; scalar/string pure helpers and later families remain owners.
@@ -1362,17 +1367,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.1`
-  Status: `active`
+  Status: `done`
   Goal: Execute immediate expression-valued blocks with block-local return.
   Dependencies: `.4.3.6.0`
   Acceptance: Eager no-pair brace blocks evaluate statements once in order, return the last expression or null for
     an empty/no-value path, and consume local `return` without leaking it to the enclosing rule. Harray literals
     remain pair-classified, and trailing contextual block arguments remain inert until their callable consumes them.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** `evaluate_block_value` executes non-final statements through the existing
+    dropped-statement mutation seam, evaluates the final expression as a value, and catches only local return flow.
+    One end-to-end case covers scalar last values, early harray return, skipped writes, no-argument null, non-final
+    mutation, block receiver dispatch, empty/keyed harray precedence, and inert trailing-block AST preservation.
+    The prior `callback = { return("later") }` Lua-only scaffold expectation is corrected to the portable eager
+    scalar result. PUC Lua and LuaJIT pass 104/104; Perl toolbox lowering and three focused Rust block tests agree.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute lazy inline value controls over the expression-valued block seam.
   Dependencies: `.4.3.6.1`
   Acceptance: Inline `if`/`unless` and `switch`/case aliases evaluate only the selected value branch, preserve
@@ -1716,7 +1726,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 58 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct mutation share one binding seam and pass 103/103. |
 | 59 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Complete 13-name ordinary harray/public surface closes at 103/103. |
 | 60 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Parser-ahead block/control/callback work is split from user-function and callable-value owners. |
-| 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `active` | Execute eager expression-valued blocks and block-local return. |
+| 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receivers pass 104/104. |
+| 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `active` | Execute lazy inline value controls over the eager block seam. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1802,6 +1813,22 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   delegation is unchanged; task/KM/docs/memory/doctrine gates pass.
 - [x] **LOCKSTEP** — Task/index/roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, and
   memory agree that expression-valued blocks `.4.3.6.1` are the sole next leaf.
+
+### `LUA-BACKEND-PARITY.4.3.6.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua returned inert `block_value` records from ordinary authored braces and even
+  expected `callback = { return("later") }` to store one, contradicting the eager block contract.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.3.1` added structural four-kind copying before block execution existed;
+  `evaluate_expr` therefore used `copy_value(expr)` for every block without distinguishing eager value use from a
+  contextual final argument that its callable will later consume.
+- [x] **FIX** — Add one eager block evaluator, reuse dropped-statement mutation for non-final statements, evaluate
+  the final statement in value context, catch only local return flow, and retain structural parser arguments.
+- [x] **ADDRESSED (verified)** — Last values, early aggregate/null returns, skipped writes, mutation, receiver
+  chaining, and harray precedence pass; the prior Lua-only assignment expectation is corrected and annotated.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 104/104; Perl toolbox output and focused Rust expression-block
+  tests agree; parser, registry, compiler, matching, process, manifest, Knowledge Map, mdBook, and doctrines pass.
+- [x] **LOCKSTEP** — Task/index/roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, and
+  memory close eager blocks and activate lazy inline controls `.4.3.6.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

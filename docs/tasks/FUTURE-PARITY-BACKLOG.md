@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua `.4.3.6.0` splits eager blocks, controls, contextual built-ins, and callbacks;
-  expression-valued blocks `.4.3.6.1` active; general user-function/callable-codeblock obligations stay routed).
+- Last updated: `2026-07-13` (Lua eager block values pass 104/104 under `.4.3.6.1`; lazy inline controls
+  `.4.3.6.2` active; general user-function/callable-codeblock obligations stay routed).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3687,8 +3687,8 @@ before implementation.
 | 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Exact ordinary inventory, public result guard, and callback handoff close at 103/103. |
 | 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Execute eager blocks, controls, contextual built-ins, and tree callbacks without preempting user-function/callable owners. |
 | 137 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Split parser-ahead runtime work into six mechanisms plus no-drift/dependency handoff. |
-| 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `active` | Execute eager expression-valued blocks and block-local return. |
-| 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `pending` | Execute lazy inline value controls. |
+| 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receiver dispatch pass 104/104. |
+| 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `active` | Execute lazy inline value controls. |
 | 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `pending` | Execute attached/marker if-family statements. |
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `pending` | Execute attached/marker switch-family statements. |
 | 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `pending` | Execute attached while statements with deterministic guard behavior. |

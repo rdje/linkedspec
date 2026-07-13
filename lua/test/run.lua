@@ -1386,12 +1386,13 @@ test("user function registry stitches body AST without mutating the source spec"
   end, "not found", nil, "missing stitch job")
 end)
 
-test("user function invocation frames copy eager four-kind values into fresh stores", function()
+test("user function invocation frames copy supplied four-kind values into fresh stores", function()
   local definition = registry_function("bind_all", { "scalar", "items", "meta", "callback" }, 0)
   local registry = linkedspec.user_function_registry_from_functions({ definition })
   local source_items = json.array({ "a", json.harray({ nested = true }) })
   local source_meta = json.harray({ key = json.array({ 1, 2 }) })
   local source_block = linkedspec.parse_action_expression("{ return(value) }")
+  assert_equal(linkedspec.runtime_value_kind(source_block), "codeblock", "supplied structural codeblock kind")
   local frame = linkedspec.prepare_user_function_invocation(
     registry,
     "bind_all",
@@ -1985,7 +1986,7 @@ Top::
   assert_equal(exit_error.status, 7, "exit_now status")
 end)
 
-test("runtime core values stores snapshots and checked access preserve four kinds", function()
+test("runtime core stores snapshots and checked access preserve typed values", function()
   local source = [[
 Top::
  /x/
@@ -2038,7 +2039,7 @@ Top::
   assert_equal(result.value.indexed, false, "indexed false access")
   assert_equal(result.value.missing, json.null, "checked missing access")
 
-  local codeblock_result = linkedspec.runtime_parse(
+  local eager_block_result = linkedspec.runtime_parse(
     linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
 Top::
  /x/
@@ -2047,10 +2048,8 @@ Top::
 ]]))),
     "x"
   )
-  assert_equal(linkedspec.runtime_value_kind(codeblock_result.value), "codeblock", "codeblock value kind")
-  assert_equal(codeblock_result.value.kind, "block_value", "codeblock structural identity")
-  assert_equal(#codeblock_result.value.block.statements, 1, "codeblock body preserved")
-  assert_equal(codeblock_result.value ~= codeblock_result.output[1], true, "codeblock output snapshot isolation")
+  assert_equal(linkedspec.runtime_value_kind(eager_block_result.value), "scalar", "ordinary block is eager")
+  assert_equal(eager_block_result.value, "later", "ordinary block returns its local payload")
   assert_equal(linkedspec.runtime_value_kind(json.null), "scalar", "null scalar kind")
   assert_equal(linkedspec.runtime_value_kind(json.array()), "array", "empty array kind")
 end)
@@ -2491,6 +2490,42 @@ end
 local function uniform_binding_action_source(action)
   return "Top::\n /x/ -> Done { " .. action .. " }\nDone::\n /x/\n"
 end
+
+test("runtime eager blocks return last values and consume local return", function()
+  local source = uniform_binding_action_source([[
+items = [" raw "]
+last_value = { set(x, "a"); x }
+early_value = { set(y, "before"); return({ "stage" : y }); set(y, "after"); "bad" }
+null_value = { return() }
+trimmed = { trim_each(items); items[0] }
+receiver_value = { [3, 1, 2] }.sorted().join_values(",")
+return({
+  "last" : last_value,
+  "early" : early_value,
+  "y_after" : y,
+  "null" : null_value,
+  "trimmed" : trimmed,
+  "receiver" : receiver_value,
+  "empty_hash" : {},
+  "keyed_hash" : { "k" : "v" }
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_equal(result.last, "a", "final block expression is the value")
+  assert_equal(json.kind(result.early), "harray", "local return preserves harray payload")
+  assert_equal(result.early.stage, "before", "local return payload is exact")
+  assert_equal(result.y_after, "before", "local return skips later block statements")
+  assert_equal(result.null, json.null, "no-argument local return yields null")
+  assert_equal(result.trimmed, "raw", "non-final dropped mutation executes before final value")
+  assert_equal(result.receiver, "1,2,3", "yielded block value enters receiver dispatch")
+  assert_equal(json.kind(result.empty_hash), "harray", "empty braces remain an harray")
+  assert_equal(json.kind(result.keyed_hash), "harray", "keyed braces remain an harray")
+  assert_equal(result.keyed_hash.k, "v", "keyed harray value is preserved")
+
+  local trailing = linkedspec.parse_action_expression('with("x") { return(value) }')
+  assert_equal(trailing.args[#trailing.args].value.kind, "block_value", "trailing block remains structural")
+  assert_equal(#trailing.args[#trailing.args].value.block.statements, 1, "trailing block body remains inert")
+end)
 
 test("Lua matches the neutral scalar numeric contract exactly", function()
   local contract = json.decode(read_file("capability_conformance/scalar_numeric_contract.json"))

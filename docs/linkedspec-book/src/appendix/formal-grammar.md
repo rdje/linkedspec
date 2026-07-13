@@ -392,7 +392,7 @@ Lifecycle blocks are not expression-valued blocks: ordinary final statement valu
 discarded, and only an explicit top-level `return(expr)` writes the rule return channel.
 
 In value positions, a non-empty `{ ... }` payload without a top-level hash pair separator is an
-expression-valued block on the Perl reference and Rust backend. It returns the final
+expression-valued block on every current native backend. It returns the final
 expression unless a `return(expr)` statement is reached earlier; that `return(expr)`
 exits only the expression-valued block, skips later statements in that block, and
 yields `expr` as the block value. Empty `{}` and top-level hash-pair forms such as `{ key : value }`
@@ -400,6 +400,7 @@ remain hash literals. Direct hash literals use `:` as their key/value separator;
 ActionIR value syntax is retired and diagnoses as `hash_literal_use_colon`. Because the block is a value expression, it may also be the
 receiver of a compatible receiver-dot chain, such as `{ [3, 1, 2] }.sorted().join_values(",")`
 or `{ " a-b " }.trim().split("-").count()`.
+Ordinary assignment evaluates this form immediately; deferred first-class codeblocks use `{|params| ...}`.
 
 ### 3.7 Fluent Chains
 

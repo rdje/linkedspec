@@ -278,7 +278,9 @@ expression unless a `return(expr)` statement is reached earlier. That `return(ex
 exits only the expression-valued block, skips later statements in that block, and
 yields `expr` as the block value; it does not set the surrounding rule's return
 channel. Empty `{}` and top-level hash-pair `{ key : value }` forms remain hash
-shape literals on both the Perl reference and Rust backend.
+shape literals on every current native backend. Ordinary assignment does not defer the block:
+`callback = { return("later") }` stores `"later"`. Contextual trailing blocks and explicit
+`{|params| ...}` callable values are separate codeblock paths.
 
 ```text
 return({ set(name, "ok"); name })          # "ok"

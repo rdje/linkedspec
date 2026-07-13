@@ -680,7 +680,10 @@ set/rename/drop/pick values, deep source isolation, harray/array-view receiver c
 harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks
-remain `.5.1`; explicit callable codeblock values remain future `.11.7`. Eager block execution `.4.3.6.1` is active.
+remain `.5.1`; explicit callable codeblock values remain future `.11.7`.
+Eager block execution now passes 104/104: ordinary no-pair braces yield their last/local-return value, non-final
+statement mutation is preserved, harray braces retain precedence, and yielded values enter receiver dispatch.
+This corrects the earlier Lua-only inert assignment scaffold expectation; lazy inline controls `.4.3.6.2` are active.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results and rename-to-existing-key policy differ;

@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua now executes ordinary no-pair brace values eagerly at 104/104 on both ABIs. Non-final
+  statements reuse dropped-statement mutation; final expressions yield values; local return catches only the
+  block's return flow; empty/keyed braces remain harrays; yielded values continue through receivers. This corrects
+  the earlier Lua-only `callback = { return(...) }` inert-storage scaffold expectation. Contextual trailing blocks
+  remain structural, explicit callable values remain future `.11.7`, and lazy inline controls `.4.3.6.2` are active.
 - `2026-07-13` refresh: Lua's ActionIR parser/resolver already preserves eager blocks, generic final block
   arguments, and structured controls, but the interpreter currently returns inert block copies and has no
   control/callback executor. `.4.3.6.0` splits eager values, inline controls, statement controls, current built-in
   contextual blocks/`with`, callbacks, and no-drift. General user-function final blocks remain `.5.1`; explicit
-  callable codeblock values remain future `.11.7`; eager block execution `.4.3.6.1` is active.
+  callable codeblock values remain future `.11.7`; the next refresh records eager block completion.
 - `2026-07-13` refresh: Lua's ordinary harray family is closed at 103/103. All 13 names route through typed
   constructor/generic paths, the copied harray dispatcher, or uniform named/direct mutation; public guards lock
   updated direct snapshots and pure receiver set-key. `walk_leaves`/`map_leaves`/`reduce_leaves` remain the three

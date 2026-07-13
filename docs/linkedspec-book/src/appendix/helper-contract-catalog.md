@@ -78,11 +78,15 @@ working variable named `name`.
 Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
-The Perl reference and Rust backend accept expression-valued blocks in value-consuming sites. A non-empty
+All current native backends accept expression-valued blocks in value-consuming sites. A non-empty
 brace payload with no top-level hash-pair delimiter evaluates its statements and yields the final expression. A
 `return(expr)` anywhere in the block exits only that expression-valued block, skips later block statements,
 and yields `expr` as the block value. Hash literals keep precedence: `{}` and `{ key : value }`
 remain hash shapes; old `{ key => value }` is retired and is not a block fallback.
+
+Ordinary braces are eager even on an assignment RHS: `callback = { return("later") }` stores the scalar
+`"later"`. Deferred first-class codeblocks use the distinct `{|params| ...}` form; a contextual trailing block
+remains structural until the receiving callable executes it.
 
 ```text
 return({ set(x, "a"); x });                    # "a"

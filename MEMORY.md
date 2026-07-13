@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.0` — block/control/callback mechanism and dependency split.
-- latest_commit: `da2311d4` — `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.1`; execute eager expression blocks and block-local return.
-- next_action: implement one eager block executor in Lua, keep contextual trailing block arguments inert until
-  consumed, add focused last-value/empty/local-return/harray-boundary proof, and run dual-ABI plus doc gates.
-- current_proof: parser/resolver already preserve block/control/final-argument structure; interpreter returns inert
-  block copies and has no control/callback dispatch. `.4.3.6` is split by runtime mechanism. General user-function
-  final blocks stay `.5.1`; explicit callable values stay future `.11.7`. Existing dual-ABI behavior is 103/103.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.1` — eager expression blocks and block-local return.
+- latest_commit: `a3c7e71f` — `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.6.2`; execute lazy inline value controls.
+- next_action: inventory exact inline if/switch AST shapes and backend truth/branch contracts, then implement lazy
+  selected-branch evaluation over the eager block seam with focused dual-ABI proof.
+- current_proof: ordinary no-pair braces execute once, yield last/local-return values, preserve dropped mutation,
+  harray precedence, and receiver dispatch at 104/104 on both ABIs. Earlier inert assignment scaffold drift is
+  corrected; contextual blocks stay structural and explicit callable values stay future `.11.7`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -28,5 +28,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: `.4.3.6.0` task split, dependency routing, KM fact, live docs, and mdBook
-  synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: `.4.3.6.1` runtime/test, historical correction, KM fact, task/live docs,
+  and mdBook synchronization await their prepared commit. Oracle timeout calibration remains `.7.0`.
