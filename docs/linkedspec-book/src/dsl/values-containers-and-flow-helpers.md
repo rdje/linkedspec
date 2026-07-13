@@ -165,7 +165,8 @@ return(payload);
 
 > **Retirement status:** adopted neutral contract `linkedspec-uniform-binding-v1` removes `array(IDENTIFIER)` and
 > `hash(IDENTIFIER)`. Perl, Rust, Dart, Julia, and Lua reject them structurally before execution with
-> `aggregate_selector_removed`; cross-variant no-drift is the remaining retirement gate. The
+> `aggregate_selector_removed`; one canonical no-drift gate locks all five boundaries and zero runtime selector
+> compatibility. Final public admission is the remaining retirement gate. The
 > replacement is the bare typed binding:
 > `items` becomes `items`, `copy(items)` becomes `copy(items)`, `set(items, [])` becomes
 > `set(items, [])`, `push(items, value)` becomes `push(items, value)`, and
@@ -190,10 +191,10 @@ split(stored_parts, "c,d", ",");  # mutable split; stored_parts == ["c", "d"]
 answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
 ```
 
-Exact selector rejection is intentionally later than backend enablement: all five backends now execute the same
-bare forms, and every tracked `.spec` file and executable embedded source has migrated. The backend sequence now
-hard-rejects `IDENTIFIER` / `IDENTIFIER`, beginning with Perl. This ordering is migration safety, not
-an unresolved language decision.
+Exact selector rejection intentionally followed backend enablement: all five backends execute the same bare forms,
+every tracked `.spec` file and executable embedded source has migrated, and all five structurally reject the
+removed `array(IDENTIFIER)` / `hash(IDENTIFIER)` forms. This ordering is migration safety, not an unresolved
+language decision.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:

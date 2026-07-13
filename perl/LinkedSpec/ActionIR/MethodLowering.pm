@@ -5888,8 +5888,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  }
  my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
  return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);
- # `copy(NAME)` snapshots the one runtime-typed binding. Temporary selector
- # recognition remains below only until the hard-retirement leaf removes it.
+ # `copy(NAME)` snapshots the one runtime-typed binding.
  if ($method_call && $method_call->{method} eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $copy_args;

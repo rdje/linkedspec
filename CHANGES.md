@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.6 — enforce selector retirement no-drift
+
+Aggregate-selector hard retirement now has one canonical cross-variant guard. The checker requires all five
+backend suites to consume the same six invalid-selector cases and portable diagnostic fields, verifies their
+compiled-state validation boundaries and all eight retained constructor/literal classes, forbids the known
+selector-only runtime symbols/patterns, and composes the executable-source scanner. The audit also removed one
+stale Perl compatibility comment.
+
+Focused proof passes Perl 11, Rust 15/15, Dart 15/15, Julia 59/59, and Lua 88/88 on both PUC Lua and LuaJIT. The
+checker reports five backends, six rejected selectors, eight retained classes, zero runtime compatibility, and
+zero executable positives/19 classified rejection occurrences. Canonical CI passes capability 60/0/0, CLI 61x2,
+and Phase 0 `1..1031` in 616 seconds. Hard-retirement parent `.12.1.8` is closed; final public admission `.12.1.9`
+is next.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.5 — hard-reject Lua aggregate selectors
 
 Lua now rejects every exact one-bare-identifier `array(...)` / `hash(...)` selector at complete compiled-state

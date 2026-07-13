@@ -894,6 +894,13 @@ and caller-mutated compiled tables at runtime-engine admission. Selector-only ru
 split/transform dispatch is deleted. PUC Lua and LuaJIT each pass 88/88; the exact 105-manifest/CLI scaffold and
 zero-positive/19-classified source scan pass. Cross-variant no-drift `.12.1.8.6` is active.
 
+Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.12.1.8.6` closes aggregate-selector hard retirement. One canonical
+checker requires all five backends to consume the six invalid cases and portable diagnostic fields, locks each
+compiled-state validation boundary and all eight retained constructor/literal classes, forbids known selector-only
+runtime mechanisms, and composes the executable-source scan. It reports zero runtime compatibility and zero
+executable positives/19 classified rejection occurrences. Focused proof passes Perl 11, Rust 15/15, Dart 15/15,
+Julia 59/59, and Lua 88/88 on both ABIs. Final public admission `.12.1.9` is active.
+
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.7.0` owns a verification-tool calibration found while closing Rust
 selector retirement. The current shipped VHDL parser builds in 19.627 seconds and parses its input in 0.001 seconds,
 so the generator's 15-second default kills healthy construction. Complete regeneration remains available through

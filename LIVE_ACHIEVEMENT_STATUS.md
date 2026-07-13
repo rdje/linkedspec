@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.6 — enforce selector retirement no-drift**
+  (DONE — hard-retirement parent `.12.1.8` closed; final public admission `.12.1.9` is next).
+
+  **Outcome:** One canonical checker now requires all five shared six-case/portable-field rejection suites and
+  compiled-state boundaries, locks all eight retained classes, forbids known selector-only runtime mechanisms, and
+  composes the executable-source scan. The only audit residue was one stale compatibility comment, now removed.
+
+  **Proof:** Perl 11, Rust 15/15, Dart 15/15, Julia 59/59, and Lua 88/88 on both ABIs pass. The checker reports zero
+  runtime compatibility and zero executable positives/19 classified rejection occurrences. Canonical CI passes
+  capability 60/0/0, CLI 61x2, and Phase 0 `1..1031` in 616 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.5 — hard-reject Lua aggregate selectors**
   (DONE — all five backends reject; cross-variant no-drift `.12.1.8.6` is next).
 

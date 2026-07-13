@@ -209,6 +209,9 @@ numeric helpers. It also lowers retained aggregate-constructor, collection/reduc
 calls from AST `call` nodes while preserving their existing symbol/value slot policy.
 Bare typed reads are the destination surface. Exact one-identifier aggregate selectors are retired and report
 `aggregate_selector_removed` on Perl, Rust, Dart, Julia, and Lua before execution.
+`tools/check_aggregate_selector_retirement.py` is the canonical cross-variant guard: it requires the shared six
+invalid cases, portable fields, all five compiled-state admission boundaries, eight retained constructor/literal
+classes, and zero known selector-only runtime dispatch.
 Julia's boundary recursively inspects typed rule ActionIR, parses valid deferred function bodies and fluent calls,
 and repeats validation for generated emission and plan execution, so unused or caller-constructed state cannot
 bypass rejection. Selector-specific Julia runtime dispatch is gone.

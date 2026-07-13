@@ -122,6 +122,7 @@ require_tracked_file t/scalar_numeric_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
+require_tracked_file tools/check_aggregate_selector_retirement.py
 require_tracked_file tools/check_executable_aggregate_selector_sources.py
 require_tracked_file perl/LinkedSpec.pm
 require_tracked_file perl/LinkedSpec/BindingRuntime.pm
@@ -190,8 +191,8 @@ python3 tools/check_callable_codeblock_contract.py
 log "checking portable uniform-binding and aggregate-selector retirement contract"
 python3 tools/check_uniform_binding_contract.py
 
-log "checking embedded executable sources are aggregate-selector free"
-python3 tools/check_executable_aggregate_selector_sources.py
+log "checking cross-variant aggregate-selector retirement and embedded sources"
+python3 tools/check_aggregate_selector_retirement.py
 
 log "running Perl uniform-binding behavior contract fixture"
 PERL5LIB= prove -Iperl t/uniform_binding_contract.t

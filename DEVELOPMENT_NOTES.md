@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.6 — cross-variant retirement needs a composed recurring guard): Five
+  strong backend rejection suites do not by themselves prevent shared-contract drift or the return of a runtime
+  compatibility branch. The canonical checker therefore owns the invariant as a composition: exact neutral case
+  and field consumption, backend-specific compiled-state admission anchors, eight retained constructor/literal
+  classes, a denylist of removed runtime mechanisms, and the executable-source classifier. This catches both
+  admission drift and implementation resurrection. The closing audit found only one stale compatibility comment;
+  runtime compatibility remains zero across all five backends.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.5 — Lua needs validation at both compile and runtime-engine admission):
   Lua compiled state is mutable by host code and contains typed rule ActionIR beside deferred function/fluent source.
   Compile-time inspection must therefore cover typed nodes and every valid deferred source, while engine construction
