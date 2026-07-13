@@ -304,7 +304,7 @@ DSL helper surface consistency note:
   adopted; Perl typed construction `.11.3.1`, dynamic invocation `.11.3.2`, ADR 0032 declaration `.11.3.3.1`, and
   metadata-governed generic final blocks `.11.3.3.2` and Perl closeout `.11.3.4` are complete. Active `.12.1`
   removes spec-facing aggregate selectors before cross-backend rollout; Perl `.12.1.2` now executes the neutral
-  bare typed-binding contract; Rust `.12.1.3` now matches it and Dart `.12.1.4` is next. `SPEC-FORMAT-TERSE.10` is closed by `.10.1`, which ratified dynamic/computed hash-literal keys
+  bare typed-binding contract; Rust `.12.1.3` and Dart `.12.1.4` now match it, and Julia `.12.1.5` is next. `SPEC-FORMAT-TERSE.10` is closed by `.10.1`, which ratified dynamic/computed hash-literal keys
   without parser/runtime changes. The user explicitly reactivated `.13`; `.13.1` split the array-tree traversal
   work before code, `.13.2` landed Perl reference support for array-valued `walk_leaves`, `map_leaves`, and
   `reduce_leaves(initial)` receiver blocks, `.13.3` landed Rust/oracle parity with

@@ -2631,7 +2631,7 @@ final class LinkedSpecRuntimeEngine {
         if (name == 'retv') {
           return _readRetv(context, currentEdge);
         }
-        return context.variables[name];
+        return _bindingValueFor(context, name);
       case ActionArrayLiteralExpr(:final items):
         final values = <Object?>[];
         for (final item in items) {
@@ -2677,6 +2677,8 @@ final class LinkedSpecRuntimeEngine {
           ),
         );
         context.variables[name] = stored;
+        context.arrays.remove(name);
+        context.hashes.remove(name);
         return _copyValue(stored);
       case ActionAssignArrayAppendExpr(:final name, :final value):
         final stored = _copyValue(
@@ -2768,6 +2770,33 @@ final class LinkedSpecRuntimeEngine {
             ruleLabel,
             currentEdge: currentEdge,
           );
+        }
+        if (const {
+          'push_back',
+          'push_front',
+          'pop_back',
+          'pop_front',
+        }.contains(calls.first.method)) {
+          Object? value = _evaluateArrayEndMutationCall(
+            receiver,
+            calls.first,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+          if (value == null) {
+            return null;
+          }
+          for (final call in calls.skip(1)) {
+            value = _evaluateFluentCall(
+              value,
+              call,
+              context,
+              ruleLabel,
+              currentEdge: currentEdge,
+            );
+          }
+          return value;
         }
         var value = _evaluateFluentReceiver(
           receiver,
@@ -3539,6 +3568,8 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     context.variables[variableTarget] = value;
+    context.arrays.remove(variableTarget);
+    context.hashes.remove(variableTarget);
     return _copyValue(value);
   }
 
@@ -3551,13 +3582,16 @@ final class LinkedSpecRuntimeEngine {
   ) {
     if (!const {
           'trim_each',
+          'filter_nonempty',
           'lowercase_each',
           'uppercase_each',
         }.contains(helperName) ||
         args.length != 1) {
       return false;
     }
-    final target = _arrayTargetName(args.single);
+    final wrapperTarget = _arrayTargetName(args.single);
+    final bareTarget = _variableName(args.single);
+    final target = wrapperTarget ?? bareTarget;
     if (target == null) {
       return false;
     }
@@ -3568,10 +3602,14 @@ final class LinkedSpecRuntimeEngine {
       ruleLabel,
       currentEdge,
     );
-    context.recordRuleLocalBinding(target);
-    context.variables.remove(target);
-    context.hashes.remove(target);
-    context.arrays[target] = _asArray(transformed);
+    if (bareTarget != null) {
+      _replaceBareArrayValue(context, target, _asArray(transformed));
+    } else {
+      context.recordRuleLocalBinding(target);
+      context.variables.remove(target);
+      context.hashes.remove(target);
+      context.arrays[target] = _asArray(transformed);
+    }
     return true;
   }
 
@@ -3849,15 +3887,34 @@ final class LinkedSpecRuntimeEngine {
       return false;
     }
     final call = expr.calls.single;
-    final target = _arrayReceiverTargetName(expr.receiver);
+    return _evaluateArrayEndMutationCall(
+          expr.receiver,
+          call,
+          context,
+          ruleLabel,
+          currentEdge,
+        ) !=
+        null;
+  }
+
+  List<Object?>? _evaluateArrayEndMutationCall(
+    ActionExpr receiver,
+    ActionFluentCall call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final wrapperTarget = _arrayTargetName(receiver);
+    final bareTarget = _variableName(receiver);
+    final target = wrapperTarget ?? bareTarget;
     if (target == null) {
-      return false;
+      return null;
     }
     switch (call.method) {
       case 'push_back':
       case 'push_front':
         if (call.args.length != 1) {
-          return false;
+          return null;
         }
         final value = _copyValue(
           _evaluateExpression(
@@ -3867,19 +3924,19 @@ final class LinkedSpecRuntimeEngine {
             currentEdge: currentEdge,
           ),
         );
-        final array = context.arrayFor(target);
+        final array = _bareArrayForMutation(context, target);
         if (call.method == 'push_back') {
           array.add(value);
         } else {
           array.insert(0, value);
         }
-        return true;
+        return _storeBareArray(context, target, array);
       case 'pop_back':
       case 'pop_front':
         if (call.args.isNotEmpty) {
-          return false;
+          return null;
         }
-        final array = context.arrayFor(target);
+        final array = _bareArrayForMutation(context, target);
         if (array.isNotEmpty) {
           if (call.method == 'pop_back') {
             array.removeLast();
@@ -3887,9 +3944,9 @@ final class LinkedSpecRuntimeEngine {
             array.removeAt(0);
           }
         }
-        return true;
+        return _storeBareArray(context, target, array);
       default:
-        return false;
+        return null;
     }
   }
 
@@ -3909,7 +3966,9 @@ final class LinkedSpecRuntimeEngine {
     if (args.length != 3) {
       return false;
     }
-    final target = _hashReceiverTargetName(args[0]);
+    final wrapperTarget = _hashTargetName(args[0]);
+    final bareTarget = _variableName(args[0]);
+    final target = wrapperTarget ?? bareTarget;
     if (target == null || target.isEmpty) {
       return false;
     }
@@ -3929,9 +3988,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       ),
     );
-    context.variables.remove(target);
-    context.arrays.remove(target);
-    context.hashFor(target)[key] = value;
+    _setBareHashEntry(context, target, key, value);
     return true;
   }
 
@@ -4006,8 +4063,11 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    final target = args.isEmpty ? null : _arrayTargetName(args.first);
-    if (target != null && args.length >= 2) {
+    final wrapperTarget = args.isEmpty ? null : _arrayTargetName(args.first);
+    final bareTarget = args.length >= 3 ? _variableName(args.first) : null;
+    final target = wrapperTarget ?? bareTarget;
+    if (target != null &&
+        (wrapperTarget != null ? args.length >= 2 : args.length >= 3)) {
       final source = _evaluateExpression(
         args[1],
         context,
@@ -4028,7 +4088,9 @@ final class LinkedSpecRuntimeEngine {
         delimiter,
         regexDelimiter: delimiterExpr is ActionRegexLiteralExpr,
       );
-      return _replaceArrayValue(context, target, parts);
+      return bareTarget == null
+          ? _replaceArrayValue(context, target, parts)
+          : _replaceBareArrayValue(context, target, parts);
     }
 
     final values = _evaluateValues(args, context, ruleLabel, currentEdge);
@@ -6525,14 +6587,6 @@ String? _arrayTargetName(ActionExpr expr) {
   return _variableName(expr.args.single.value);
 }
 
-String? _arrayReceiverTargetName(ActionExpr expr) {
-  final variable = _variableName(expr);
-  if (variable != null) {
-    return variable;
-  }
-  return _arrayTargetName(expr);
-}
-
 String? _scalarTargetName(ActionExpr expr) {
   final variable = _variableName(expr);
   if (variable != null) {
@@ -6555,14 +6609,6 @@ String? _hashTargetName(ActionExpr expr) {
     return null;
   }
   return _variableName(expr.args.single.value);
-}
-
-String? _hashReceiverTargetName(ActionExpr expr) {
-  final variable = _variableName(expr);
-  if (variable != null) {
-    return variable;
-  }
-  return _hashTargetName(expr);
 }
 
 bool _hasHashValue(_RuntimeExecutionContext context, String name) {
@@ -6624,24 +6670,79 @@ List<Object?> _arrayValueFor(_RuntimeExecutionContext context, String name) {
   return <Object?>[];
 }
 
+Object? _bindingValueFor(_RuntimeExecutionContext context, String name) {
+  if (context.variables.containsKey(name)) {
+    return _copyValue(context.variables[name]);
+  }
+  if (context.arrays.containsKey(name)) {
+    return List<Object?>.unmodifiable(_arrayValueFor(context, name));
+  }
+  if (context.hashes.containsKey(name)) {
+    return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
+  }
+  return null;
+}
+
+Never _bindingKindMismatch(String name, String expectedKind, Object? actual) {
+  final actualKind = switch (actual) {
+    List() => 'array',
+    Map() => 'harray',
+    _ => 'scalar',
+  };
+  throw RuntimeInterpreterException(
+    'binding_kind_mismatch identifier=$name '
+    'expected_kind=$expectedKind actual_kind=$actualKind',
+  );
+}
+
+List<Object?> _bareArrayForMutation(
+  _RuntimeExecutionContext context,
+  String name,
+) {
+  if (context.variables.containsKey(name)) {
+    final value = context.variables[name];
+    if (value is List) {
+      return _asArray(value);
+    }
+    _bindingKindMismatch(name, 'array', value);
+  }
+  if (context.arrays.containsKey(name)) {
+    return _arrayValueFor(context, name);
+  }
+  if (context.hashes.containsKey(name)) {
+    _bindingKindMismatch(name, 'array', context.hashes[name]);
+  }
+  return <Object?>[];
+}
+
+List<Object?> _storeBareArray(
+  _RuntimeExecutionContext context,
+  String name,
+  List<Object?> values,
+) {
+  final updated = [for (final item in values) _copyValue(item)];
+  if (context.arrays.containsKey(name) &&
+      !context.variables.containsKey(name)) {
+    context.arrays[name] = updated;
+    context.hashes.remove(name);
+  } else {
+    context.variables[name] = updated;
+    context.arrays.remove(name);
+    context.hashes.remove(name);
+  }
+  return List<Object?>.unmodifiable([
+    for (final item in updated) _copyValue(item),
+  ]);
+}
+
 List<Object?> _appendArrayValue(
   _RuntimeExecutionContext context,
   String name,
   Object? value,
 ) {
   final stored = _copyValue(value);
-  final variable = context.variables[name];
-  if (variable is List) {
-    final updated = [for (final item in variable) _copyValue(item), stored];
-    context.variables[name] = updated;
-    if (context.arrays.containsKey(name)) {
-      context.arrays[name] = [for (final item in updated) _copyValue(item)];
-    }
-    return List<Object?>.unmodifiable(updated);
-  }
-  final array = context.arrayFor(name);
-  array.add(stored);
-  return List<Object?>.unmodifiable(array);
+  final updated = _bareArrayForMutation(context, name)..add(stored);
+  return _storeBareArray(context, name, updated);
 }
 
 List<Object?> _replaceArrayValue(
@@ -6655,6 +6756,15 @@ List<Object?> _replaceArrayValue(
   context.hashes.remove(name);
   context.arrays[name] = updated;
   return List<Object?>.unmodifiable(updated);
+}
+
+List<Object?> _replaceBareArrayValue(
+  _RuntimeExecutionContext context,
+  String name,
+  List<Object?> values,
+) {
+  _bareArrayForMutation(context, name);
+  return _storeBareArray(context, name, values);
 }
 
 Map<String, Object?> _hashValueFor(
@@ -6672,6 +6782,55 @@ Map<String, Object?> _hashValueFor(
     };
   }
   return <String, Object?>{};
+}
+
+Map<String, Object?> _bareHashForMutation(
+  _RuntimeExecutionContext context,
+  String name,
+) {
+  if (context.variables.containsKey(name)) {
+    final value = context.variables[name];
+    if (value is Map) {
+      return _asHash(value);
+    }
+    _bindingKindMismatch(name, 'harray', value);
+  }
+  if (context.hashes.containsKey(name)) {
+    return _hashValueFor(context, name);
+  }
+  if (context.arrays.containsKey(name)) {
+    _bindingKindMismatch(name, 'harray', context.arrays[name]);
+  }
+  return <String, Object?>{};
+}
+
+Map<String, Object?> _storeBareHash(
+  _RuntimeExecutionContext context,
+  String name,
+  Map<String, Object?> values,
+) {
+  final updated = _asHash(values);
+  if (context.hashes.containsKey(name) &&
+      !context.variables.containsKey(name)) {
+    context.hashes[name] = updated;
+    context.arrays.remove(name);
+  } else {
+    context.variables[name] = updated;
+    context.arrays.remove(name);
+    context.hashes.remove(name);
+  }
+  return Map<String, Object?>.unmodifiable(_asHash(updated));
+}
+
+Map<String, Object?> _setBareHashEntry(
+  _RuntimeExecutionContext context,
+  String name,
+  String key,
+  Object? value,
+) {
+  final updated = _bareHashForMutation(context, name);
+  updated[key] = _copyValue(value);
+  return _storeBareHash(context, name, updated);
 }
 
 Object? _readNested(
@@ -6726,7 +6885,6 @@ Object? _assignHashIndex(
   if (context.variables.containsKey(name)) {
     final root = context.variables[name];
     if (root is Map) {
-      final hash = _asHash(root);
       final storedKey = _stringValue(
         context.engine._evaluateExpression(
           key,
@@ -6743,9 +6901,7 @@ Object? _assignHashIndex(
           currentEdge: currentEdge,
         ),
       );
-      hash[storedKey] = storedValue;
-      context.variables[name] = hash;
-      return _copyValue(hash);
+      return _setBareHashEntry(context, name, storedKey, storedValue);
     }
     if (root is List) {
       if (key is ActionStringLiteralExpr) {
@@ -6778,7 +6934,7 @@ Object? _assignHashIndex(
       context.variables[name] = list;
       return _copyValue(list);
     }
-    return null;
+    _bindingKindMismatch(name, 'harray', root);
   }
 
   final storedKey = _stringValue(
@@ -6797,8 +6953,7 @@ Object? _assignHashIndex(
       currentEdge: currentEdge,
     ),
   );
-  context.hashFor(name)[storedKey] = storedValue;
-  return Map<String, Object?>.unmodifiable(context.hashFor(name));
+  return _setBareHashEntry(context, name, storedKey, storedValue);
 }
 
 _NestedWriteRoot? _rootStorageForWrite(

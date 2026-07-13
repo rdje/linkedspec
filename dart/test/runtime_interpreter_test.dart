@@ -1050,7 +1050,7 @@ Top::
     },
   );
 
-  test('executes array split bridges and statement-only end mutations', () {
+  test('executes array split bridges and value-returning end mutations', () {
     final engine = _engine(r'''
 Top::
  /x/
@@ -1080,8 +1080,8 @@ Top::
       'parts': [' left', 'right', '', 'third '],
       'receiver_split': ['a', 'b'],
       'items': ['a', 'c'],
-      'value_push': null,
-      'after_value_push': ['a', 'c'],
+      'value_push': ['a', 'c', 'bad'],
+      'after_value_push': ['a', 'c', 'bad'],
       'tagged': [
         ['?tag:', 'a', 'field'],
         ['?tag:', 'b', 'field'],
@@ -1158,7 +1158,7 @@ Top::
       'drop_pick': [1, 4],
       'rename': 'aa,b,stmt_hash,z',
       'merged': [10, 2, 3, 0, 4],
-      'bare_first_merge': ['a', 'c'],
+      'bare_first_merge': ['a', 'b', 'c', 'drop', 'stmt_hash'],
       'value_set_has': 1,
       'receiver_set_has': 1,
       'after_value_set': 0,

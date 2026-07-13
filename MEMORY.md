@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.3` — Rust selector-free uniform-binding execution.
-- latest_commit: `c939df95` — `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.4`; implement the unchanged contract on Dart after this commit.
-- next_action: consume the neutral fixture on Dart native/generated execution; unify bare push/append/mutable split/
-  hash/index/collection mutation and results while preserving static-rule precedence and temporary selector input.
-- current_proof: Rust focused 9/9; full gate passes 137 unit, 105 oracle, 105 generated classification, 197
-  integration, remaining suites/build, and CLI 61x2. Canonical CI passes doctrines/contracts, capability 60/0/0,
-  Perl CLI 61x2, and Phase 0 `1..1030` in 786 seconds. Strict Clippy has 16 pre-existing untouched findings.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.12.1.4` — Dart selector-free uniform-binding execution.
+- latest_commit: `db1cd83d` — `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.12.1.4 - enable Dart uniform bindings`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.12.1.5`; implement the unchanged contract on Julia after this commit.
+- next_action: consume the neutral fixture on Julia native/generated execution; unify bare push/append/mutable
+  split/hash/index/collection mutation/results while preserving static precedence and temporary selector input.
+- current_proof: Dart focused 9/9; format/analyze and all 199 tests pass, including generated packages. Corpus is
+  105/105 and CLI is 61x2. Canonical CI passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0
+  `1..1030` in 892 seconds; docs/KM/governance pass.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; lexical codeblock
   capture (new decision only if justified); Rust/Dart/Julia codeblock parity and resumed Lua work follow `.12.1`.
-- blockers: none. in_flight_uncommitted: `.12.1.3` Rust code/tests/docs/Knowledge Map passed final gates and awaits
+- blockers: none. in_flight_uncommitted: `.12.1.4` Dart code/tests/docs/Knowledge Map passed final gates and awaits
   commit. Lua scalar numeric `.4.3.3.1.4` remains ready after the selector-retirement arc.

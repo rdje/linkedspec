@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.4 — migration stores must converge at every read and mutation): Dart's
+  `variables`, `arrays`, and `hashes` maps may remain private compatibility machinery, but `ActionVariableExpr`
+  cannot read only one map and mutations cannot silently create another. Central typed read/array/harray mutation
+  seams make absent creation, kind mismatch, copy-return, and wrapper bridging consistent. Statement interception
+  must delegate to the same value-returning array-end operation used by expression chains. Static rule lookup stays
+  before bare push. A full-gate bare `merge_hash` lock proved that wrapper/bare mixing must alias one current value
+  until selectors are migrated, not merely make the new syntax work in isolation.
+
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.3 — centralize typed mutation, not private storage): Rust can retain
   separate scalar/array/hash maps internally while exposing one `.spec` binding only if every bare mutation first
   reads `get_bare_value`, checks the actual `RuntimeValue` kind, and writes back through one kind-preserving seam.

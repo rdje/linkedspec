@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.4 — enable Dart uniform bindings**
+  (DONE — Julia consumer `.12.1.5` active).
+
+  **Implementation:** Dart bare reads and kind-checked array/harray mutations now share one typed value across
+  native/generated execution. Mutations return independent updates, chain, auto-create absent required kinds, and
+  reject wrong kinds; static rules keep push precedence. Wrapper mutations bridge the same value only for migration.
+
+  **Proof:** The future fixture, seven neutral cases, and extension locks pass 9/9 natively and generated. Dart
+  format/analyze, all 199 tests, isolated generated packages, 105/105 corpus, and CLI 61x2 pass. Canonical CI passes
+  doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 892 seconds.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.3 — enable Rust uniform bindings**
   (DONE — Dart consumer `.12.1.4` active).
 

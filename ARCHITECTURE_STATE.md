@@ -10,8 +10,8 @@ This document is the current high-level technical reading of the project shape. 
   absent target creation and wrong-kind errors are typed; static rules precede array mutation in ambiguous push;
   two-argument split is pure and three-argument split mutates a bare target. Exact one-bare array/hash calls are
   future-invalid with `aggregate_selector_removed`; `[value]` is the one-element array constructor, while other
-  non-selector constructors remain in v1. Perl `.12.1.2` and Rust `.12.1.3` execute the replacement contract;
-  Dart `.12.1.4` is active.
+  non-selector constructors remain in v1. Perl `.12.1.2`, Rust `.12.1.3`, and Dart `.12.1.4` execute the replacement
+  contract; Julia `.12.1.5` is active.
 - `2026-07-12` refresh: Spec-facing aggregate-selector removal is fully split under
   `FUTURE-PARITY-BACKLOG.12.1`. Exact scans find 651 `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls across 82
   tracked specs, including 227 in 15 shipped specs. The one-binding public model does not require identical host

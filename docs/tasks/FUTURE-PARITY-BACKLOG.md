@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (Perl/Rust uniform-binding consumers complete; Dart `.12.1.4` active).
+- Last updated: `2026-07-12` (Perl/Rust/Dart uniform-binding consumers complete; Julia `.12.1.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2744,10 +2744,21 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: Implement the unchanged selector-free binding and mutation contract on Dart.
   Acceptance: Bare `ActionVariableExpr` reads and all mutable/pure helper paths observe the same typed binding;
     native/generated/current corpus proof matches the neutral contract.
+  Verification: **PASS 2026-07-12.** Dart bare reads now resolve the current typed value across private migration
+    stores; kind-checked array/harray seams own push/append, mutable split, hash/index, array-end, and collection
+    mutations with independent updated results, absent creation, stable mismatch fields, `set`/mutation chaining,
+    and static-rule precedence. Native/generated proof passes the future fixture, seven neutral cases, and two
+    extension cases in 9 tests. The first full gate exposed exactly two old boundaries: value-position array-end
+    mutation expected `null`, and mixed wrapper/bare hash mutation hid the binding from bare merge. Both locks now
+    assert the adopted value/alias semantics. Format/analyze, all 199 tests, generated packages, 105/105 corpus, and
+    CLI 61x2 pass. Canonical CI passes doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0
+    `1..1030` in 892 seconds; docs/KM/governance/whitespace pass. No selector source migrates; Julia `.12.1.5`
+    activates.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.4 - enable Dart uniform bindings`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.5`
   Status: `pending`
@@ -2881,6 +2892,23 @@ before implementation.
   whitespace/mdBook gates reach their true stops without migrating or rejecting tracked selector sources.
 - [x] **LOCKSTEP** — Rust code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
   Rust as the second enabled backend and Dart `.12.1.4` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and all seven binding/mutation cases through Dart
+  native and generated-plan execution, preserving exact push/split/hash/result/chaining/precedence/wrong-kind gaps.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace `ActionVariableExpr`, statement interception, `_RuntimeExecutionContext`
+  variable/array/hash stores, target-name helpers, fluent dispatch, generated plans, and diagnostic projection;
+  separate one public typed binding from private migration storage.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/array-end/collection mutations read, validate,
+  update, and return one typed value; auto-create only absent required kinds; preserve static-rule push precedence;
+  keep exact selectors solely as temporary migration input.
+- [x] **ADDRESSED (verified)** — Native/generated fixtures match the neutral result/error fields, saved snapshots,
+  `set(...).sorted().first()`, mutation continuation, pure/mutable split, collection rebinding, and silent drop.
+- [x] **NO REGRESSION** — Dart format/analyze/unit/corpus/generated/CLI plus neutral/capability/doctrine/KM/mdBook/
+  whitespace gates reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Dart code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  Dart as the third enabled backend and Julia `.12.1.5` as next.
 
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 
@@ -3729,6 +3757,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.12.1.1` | `FUTURE-PARITY-BACKLOG.12.1.1 - adopt uniform binding contract` | Strict neutral schema/checker, migration table, execution/results, diagnostics, constructor classification, and fixture. |
 | `FUTURE-PARITY-BACKLOG.12.1.2` | `FUTURE-PARITY-BACKLOG.12.1.2 - enable Perl uniform bindings` | Typed bare mutations/results, static precedence, mutable split, diagnostics, wrapper compatibility, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.12.1.3` | `FUTURE-PARITY-BACKLOG.12.1.3 - enable Rust uniform bindings` | Native/generated typed bare mutations/results, static precedence, diagnostics, oracle bridge, and full-gate proof. |
+| `FUTURE-PARITY-BACKLOG.12.1.4` | `FUTURE-PARITY-BACKLOG.12.1.4 - enable Dart uniform bindings` | Native/generated typed bare mutations/results, wrapper bridge, diagnostics, corpus, and full-gate proof. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -3794,6 +3823,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.4` makes Dart the third executable uniform-binding backend. Bare reads and kind-checked
+  mutations share one typed value across native/generated paths, including saved results and continuation. Mixed
+  wrapper/bare mutations bridge the same binding only for migration. Format/analyze, 199 tests, generated packages,
+  105 corpus fixtures, and CLI 61x2 pass without migrating selector sources; Julia `.12.1.5` is active.
 - `2026-07-12`: `.12.1.3` makes Rust the second executable uniform-binding backend. Native/generated execution
   passes the future fixture and all seven neutral cases plus bare append and collection rebinding. Private runtime
   stores remain internal; bare mutations validate and return the current typed value, static rules keep push

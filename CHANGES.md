@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.4 — enable Dart uniform bindings
+
+Dart native and generated-plan execution now consume `linkedspec-uniform-binding-v1` through one observable typed
+value per identifier. Bare `ActionVariableExpr` reads resolve the current value across private migration stores;
+kind-checked helpers update and return bare push/append, mutable split, hash-index, array-end, and standalone
+collection mutations. Missing targets create only the required kind, incompatible targets fail with stable
+`binding_kind_mismatch` fields, mutation results are independent snapshots, and `set`/array-end values chain.
+Static compiled rules retain ambiguous-push precedence.
+
+The permanent 9-test suite runs the future fixture, all seven neutral cases, collection rebinding, and mutation
+continuation through native and generated plans. Baseline proof found five exact gaps: bare aggregate readback,
+mutable split, collection rebinding, wrong-kind rejection, and array-end result continuation. The first full gate
+then exposed two stale boundaries. Value-position `push_back` still expected `null`, while a wrapper mutation after
+bare mutation opened a second hash/array store. The tests now lock updated values, and temporary wrapper mutations
+bridge the same binding so partially migrated sources cannot observe two namespaces.
+
+Exact selectors remain accepted only as scheduled migration input; no tracked source changes here. Dart
+format/analyze, 199 tests, isolated generated packages, 105/105 corpus, and CLI 61x2 pass. Canonical CI passes all
+doctrines/contracts, capability 60/0/0, Perl CLI 61x2, and Phase 0 `1..1030` in 892 seconds. Julia `.12.1.5` is next.
+
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.3 — enable Rust uniform bindings
 
 Rust native and generated-plan execution now consume `linkedspec-uniform-binding-v1`. Narrow `RuntimeContext`
