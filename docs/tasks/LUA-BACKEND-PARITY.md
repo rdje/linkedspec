@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (copied harray construction/splicing `.4.3.5.1` done; deterministic views `.4.3.5.2` active)
+- Last updated: `2026-07-13` (deterministic harray views `.4.3.5.2` done at 101/101; copied transforms `.4.3.5.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1237,16 +1237,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement copied deterministic harray views and membership terminals.
   Dependencies: `.4.3.5.1`
   Acceptance: `count_keys`, `sorted_keys`, `sorted_values`, and `has_key` return exact typed zero/array/boolean
     boundaries, sort values by key, preserve nested values, and compose through function and receiver forms.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Lua now returns exact lexical `sorted_keys`, key-ordered copied
+    `sorted_values`, `count_keys`, and presence-based `has_key` results through function and receiver forms.
+    Sorted array views continue through array receiver helpers; count/membership results are terminal. Null-valued
+    fields remain present, nested values are copied, and wrong-kind/missing sources return `0` or `[]`. A Perl
+    toolbox matrix confirms those invalid boundaries and exposed one stale mdBook catalog `undef` claim, now
+    corrected to `0`. PUC Lua and LuaJIT pass 101/101 plus exact manifest/CLI scaffolding.
+  Commit: `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views`
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement copied harray transforms and receiver chains.
   Dependencies: `.4.3.5.1`, `.4.3.5.2`
   Acceptance: `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` copy inputs, preserve
@@ -1467,8 +1472,8 @@ Global delegation note: selector-free uniform bindings and exact selector reject
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
 All 34 ordinary array helper names and six numeric terminals are routed; only the three callback methods remain
 under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
-mechanisms plus closeout. Copied construction/splicing/identity `.4.3.5.1` passes 100/100 on both Lua ABIs, and
-deterministic views/membership `.4.3.5.2` is active.
+mechanisms plus closeout. Construction/splicing and deterministic views/membership pass 101/101 on both Lua ABIs;
+copied harray transforms/receiver chains `.4.3.5.3` are active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1525,7 +1530,8 @@ deterministic views/membership `.4.3.5.2` is active.
 | 51 | `LUA-BACKEND-PARITY.4.3.4.6` | `done` | Complete 34-name non-callback array/public surface closes at 99/99. |
 | 52 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split construction, views, transforms, mutation, and no-drift before behavior code. |
 | 53 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied construction, explicit flat splicing, nested identity, and isolation pass 100/100. |
-| 54 | `LUA-BACKEND-PARITY.4.3.5.2` | `active` | Implement deterministic copied key/value views and membership terminals. |
+| 54 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Lexical keys, key-ordered copied values, count, membership, and receiver bridges pass 101/101. |
+| 55 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Implement copied harray transforms and compatible receiver chains. |
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -1780,6 +1786,23 @@ deterministic views/membership `.4.3.5.2` is active.
   `FUTURE-PARITY-BACKLOG.5`.
 - [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook/backend status, Knowledge Map, architecture/live
   docs, changes/notes, and memory close construction `.4.3.5.1` and activate deterministic views `.4.3.5.2`.
+
+### `LUA-BACKEND-PARITY.4.3.5.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Execute count, lexical key order, values-by-key order, null-valued membership,
+  wrong-kind/missing inputs, copied nested values, function forms, receiver forms, array continuations, and scalar
+  terminal continuations; probe the same invalid boundaries through the Perl toolbox.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua's copied hash dispatcher admitted only `flat_hash`; no view helpers were
+  routed, and one mdBook catalog row still said non-harray `count_keys` returned undef despite the detailed guide,
+  Perl reference, Rust, Dart, and Julia all using zero.
+- [x] **FIX** — Reuse sorted harray keys for deterministic keys and copied values, add exact count/presence paths,
+  bridge returned arrays into array receivers, fence count/membership terminal results, and repair the catalog.
+- [x] **ADDRESSED (verified)** — One end-to-end fixture returns `a,b,c`, values in the same key order, counts three
+  fields, recognizes a present null field, rejects absent/wrong-kind membership, and preserves pre-mutation copies.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 101/101 plus exact manifest/CLI scaffolding; selector/public,
+  capability, Knowledge Map, mdBook, memory, doctrine, cleanup, and whitespace gates pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/Lua README, mdBook, Knowledge Map, architecture/live docs,
+  changes/notes, and memory close deterministic views `.4.3.5.2` and activate copied transforms `.4.3.5.3`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.0` Acceptance Checklist
 
@@ -2114,3 +2137,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.4.6` | `LUA-BACKEND-PARITY.4.3.4.6 - close Lua array helper parity` | Exact 34-name ordinary array inventory, public result repair/guard, parent closure, and harray handoff. |
 | `LUA-BACKEND-PARITY.4.3.5.0` | `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms` | Read-only 16-name audit and six executable construction/view/transform/mutation/closeout owners. |
 | `LUA-BACKEND-PARITY.4.3.5.1` | `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing` | Runtime-kind flat, copied flat_hash, explicit hash/list splices, nested preservation, and isolation. |
+| `LUA-BACKEND-PARITY.4.3.5.2` | `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views` | Lexical keys, values-by-key, count/membership terminals, copied isolation, and receiver bridges. |

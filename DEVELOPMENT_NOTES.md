@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.2 — one sorted key list must own both public views): Computing
+  `sorted_values` independently from host iteration can detach values from their documented key order. Lua now
+  derives one lexical key list and uses it for both views, copying each selected nested value. `has_key` checks
+  table entry presence rather than value definedness, so a stored JSON null is present. A direct Perl toolbox
+  matrix is necessary at invalid boundaries: it proved `count_keys` returns zero—not the stale catalog `undef`—
+  and that both sorted views return empty arrays for missing/wrong-kind sources.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.5.1 — flattening needs both syntax and runtime-kind evidence): A returned
   harray alone cannot tell whether its parent should preserve it as one nested field or splice its entries. Lua
   therefore evaluates arguments once, dispatches `flat` by the resulting array/harray kind, but uses only the

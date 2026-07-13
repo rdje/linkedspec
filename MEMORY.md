@@ -10,14 +10,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.5.1` — add copied Lua harray construction and explicit splicing.
-- latest_commit: `56c3685d` — `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing`.
-- active_work_unit: `LUA-BACKEND-PARITY.4.3.5.2`; deterministic copied harray views and membership terminals.
-- next_action: implement `.4.3.5.2` only: `count_keys`, sorted key/value views, `has_key`, and receiver bridges.
-- current_proof: generic `flat` preserves copied array/harray identity; direct/receiver `flat_hash` returns copied
-  harrays; only explicit direct/terminal flat ASTs splice hash/list context; ordinary nested maps and later source
-  updates remain isolated. PUC Lua and LuaJIT pass 100/100; odd-arity normalization stays backlog `.5`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.5.2` — add deterministic Lua harray views and membership.
+- latest_commit: `bb444bc1` — `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views`.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.5.3`; copied harray transforms and compatible receiver chains.
+- next_action: implement `.4.3.5.3` only: merge/set/rename/drop/pick copied values and receiver composition.
+- current_proof: lexical `sorted_keys`, copied values in the same order, count, and null-aware membership work in
+  function/receiver forms; sorted arrays bridge onward while count/membership terminate. Missing/wrong-kind inputs
+  return `0`/`[]`; PUC Lua and LuaJIT pass 101/101. Perl toolbox proof corrected a stale catalog `undef` claim.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -27,5 +27,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`; semantic/MCP `.10.1`; toolbox inspector
   repair `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle shorthand `.15`; lexical codeblock
   capture (new decision only if justified).
-- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.5.1` commit. Lua deterministic harray
-  views/membership `.4.3.5.2` are next. Oracle timeout calibration remains deferred to `.7.0`.
+- blockers: none. in_flight_uncommitted: none after the prepared `.4.3.5.2` commit. Lua copied harray transforms/
+  receiver chains `.4.3.5.3` are next. Oracle timeout calibration remains deferred to `.7.0`.

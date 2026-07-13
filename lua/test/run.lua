@@ -3054,6 +3054,61 @@ Done::
   }), "copied harray construction")
 end)
 
+test("runtime deterministic harray views preserve key order and copied values", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   set(meta, { "c" : 3, "a" : undef, "b" : { "nested" : 2 } })
+   keys = sorted_keys(meta)
+   values = meta.sorted_values()
+   nested_from_chain = meta.sorted_values().drop_front().first()
+   meta["b"]["nested"] = 9
+   return({
+     "count" : count_keys(meta),
+     "receiver_count" : meta.count_keys(),
+     "keys" : keys,
+     "key_chain" : meta.sorted_keys().join_values(","),
+     "values" : values,
+     "nested_from_chain" : nested_from_chain,
+     "has_null" : has_key(meta, "a"),
+     "receiver_has" : meta.has_key("b"),
+     "missing_key" : has_key(meta, "missing"),
+     "missing_key_arg" : has_key(meta),
+     "invalid_count" : count_keys("text"),
+     "missing_count" : count_keys(),
+     "invalid_keys" : sorted_keys(undef),
+     "missing_values" : sorted_values(),
+     "invalid_has" : has_key("text", "a"),
+     "terminal_count" : meta.count_keys().add(1),
+     "terminal_has" : meta.has_key("a").add(1),
+     "meta" : meta
+   })
+ }
+Done::
+ /x/
+]])
+  assert_json_equal(result, json.harray({
+    count = 3,
+    receiver_count = 3,
+    keys = json.array({ "a", "b", "c" }),
+    key_chain = "a,b,c",
+    values = json.array({ json.null, json.harray({ nested = 2 }), 3 }),
+    nested_from_chain = json.harray({ nested = 2 }),
+    has_null = 1,
+    receiver_has = 1,
+    missing_key = 0,
+    missing_key_arg = 0,
+    invalid_count = 0,
+    missing_count = 0,
+    invalid_keys = json.array(),
+    missing_values = json.array(),
+    invalid_has = 0,
+    terminal_count = json.null,
+    terminal_has = json.null,
+    meta = json.harray({ a = json.null, b = json.harray({ nested = 9 }), c = 3 }),
+  }), "deterministic harray views")
+end)
+
 test("runtime copied array selection ordering membership and uniqueness", function()
   local result = execute_uniform_binding_source([[
 Top::

@@ -59,8 +59,8 @@ This `README.md` is the **single entry point** to the project.
   and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
   numeric terminals are closed under `.4.3.4`; harray helpers `.4.3.5` are active, while the three array-tree
   callback names remain explicitly owned by `.4.3.6`. Copied harray construction, runtime-kind `flat`, direct/
-  receiver `flat_hash`, ordinary nested-map preservation, and explicit deterministic key/value splicing pass
-  100/100 under `.4.3.5.1`; deterministic views/membership `.4.3.5.2` are active. Implicit child-push expression results differ between Perl's
+  receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
+  null-aware membership pass 101/101 through `.4.3.5.2`; copied transforms/receivers `.4.3.5.3` are active. Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator; portable authoring uses the statement form until backlog `.5` normalizes it.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters

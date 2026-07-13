@@ -18,14 +18,15 @@ reverify: "bash tools/run_lua_local.sh && rg -n 'local HASH_HELPERS|name == \"ha
 
 Lua already preserves harray identity, copies nested values, binds bare typed harrays, and supports checked direct
 and nested assignment. Construction leaf `.4.3.5.1` now adds runtime-kind `flat`, copied direct/receiver
-`flat_hash`, ordinary nested-map preservation, and explicit hash/list-context splicing. Deterministic views,
-copied transforms, and named mutation remain in the later children below.
+`flat_hash`, ordinary nested-map preservation, and explicit hash/list-context splicing. View leaf `.4.3.5.2` adds
+lexical copied key/value views plus count/membership terminals. Copied transforms and named mutation remain in the
+later children below.
 
 The 16 admitted hash-family names divide into 13 ordinary helpers plus the three block-bearing callbacks
 `walk_leaves`, `map_leaves`, and `reduce_leaves`. The executable split is:
 
 - `.4.3.5.1` (done): `hash`, literals, `copy`, `flat`, `flat_hash`, explicit constructor splicing, and isolation.
-- `.4.3.5.2`: `count_keys`, `sorted_keys`, `sorted_values`, and `has_key`.
+- `.4.3.5.2` (done): `count_keys`, `sorted_keys`, `sorted_values`, and `has_key`.
 - `.4.3.5.3`: copied `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, and receiver chains.
 - `.4.3.5.4`: named statement `set_key` plus direct harray assignment through uniform binding.
 - `.4.3.5.5`: complete non-callback public/runtime no-drift closeout.
@@ -34,5 +35,5 @@ Hash-tree callbacks remain `.4.3.6`. Direct odd-arity `hash(...)` differs from t
 owned by `FUTURE-PARITY-BACKLOG.5`; no construction child may silently normalize it.
 
 Related facts: [[lua-runtime-core-value-capture-helpers]], [[lua-uniform-binding-runtime]],
-[[dart-runtime-hash-helpers]], [[julia-runtime-hash-helpers]],
+[[lua-runtime-harray-construction]], [[lua-runtime-harray-views]], [[dart-runtime-hash-helpers]], [[julia-runtime-hash-helpers]],
 [[hash-helper-odd-arity-current-behavior]], [[lua-runtime-array-helper-closeout]].

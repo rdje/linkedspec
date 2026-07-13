@@ -33,9 +33,12 @@ once, and returns fresh `[tag, item, fields...]` records whose carried values ar
 compose with array terminals. Harray construction now makes generic `flat` preserve copied array/harray identity,
 supports copied direct and receiver `flat_hash`, preserves ordinary nested map fields, and splices only explicit
 direct or terminal flat ASTs. Explicit harray flattening into `array(...)` or `[...]` emits deterministic sorted
-key/value pairs. The Lua gate passes 100/100 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases
-still match Perl, Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are
-closed under `.4.3.4`; harray construction `.4.3.5.1` is done and deterministic views `.4.3.5.2` are active.
+key/value pairs. `count_keys`, lexical `sorted_keys`, copied values in the same key order, and presence-based
+`has_key` work through functions and receivers; sorted arrays continue through array helpers, while count and
+membership are terminal. Wrong-kind/missing sources return `0` or `[]`, and null-valued fields remain present.
+The Lua gate passes 101/101 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
+Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
+harray construction/views `.4.3.5.1-.2` are done and copied transforms/receivers `.4.3.5.3` are active.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by `.4.3.6`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

@@ -1,5 +1,13 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.2 — add Lua deterministic harray views
+
+Added lexical `sorted_keys`, copied `sorted_values` in the same key order, exact `count_keys`, and presence-based
+`has_key` through function and receiver paths. Sorted arrays continue through array helpers; count/membership are
+terminal. Missing/wrong-kind inputs return `0`/`[]`, null-valued fields remain present, and saved nested values do
+not alias later mutations. A Perl toolbox matrix confirmed those boundaries and corrected one stale catalog
+`undef` claim. PUC Lua and LuaJIT pass 101/101; copied harray transforms `.4.3.5.3` are active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.5.1 — add Lua harray construction splicing
 
 Added runtime-kind-aware `flat`, copied direct/receiver `flat_hash`, and AST-classified explicit harray splicing.

@@ -934,7 +934,7 @@ dispatch rule.
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
 - **Returns**: int
-- **Behavior**: Returns the number of keys in the hash. Returns undef for non-hash input.
+- **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

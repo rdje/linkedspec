@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua harray construction/splicing `.4.3.5.1` done at 100/100; views `.4.3.5.2` active).
+- Last updated: `2026-07-13` (Lua deterministic harray views `.4.3.5.2` done at 101/101; transforms `.4.3.5.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3674,7 +3674,8 @@ before implementation.
 | 127 | `LUA-BACKEND-PARITY.4.3.5` | `active` | Implement harray construction, pure helpers, mutation, views, and receiver chains. |
 | 128 | `LUA-BACKEND-PARITY.4.3.5.0` | `done` | Split harray construction, views, transforms, mutation, and no-drift before behavior code. |
 | 129 | `LUA-BACKEND-PARITY.4.3.5.1` | `done` | Copied harray construction, explicit splicing, and identity pass 100/100. |
-| 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `active` | Implement deterministic copied harray views and membership terminals. |
+| 130 | `LUA-BACKEND-PARITY.4.3.5.2` | `done` | Deterministic copied harray views and membership pass 101/101. |
+| 131 | `LUA-BACKEND-PARITY.4.3.5.3` | `active` | Implement copied harray transforms and compatible receiver chains. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity and harray order, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

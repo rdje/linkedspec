@@ -673,8 +673,9 @@ evaluates carried fields once, copies nested values, returns `[tag, item, fields
 All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`. Copied harray construction
 `.4.3.5.1` makes generic `flat` preserve runtime array/harray kind, adds direct/receiver `flat_hash`, keeps ordinary
 nested maps intact, and splices only explicit flat ASTs; explicit harray-to-array list context uses deterministic
-sorted key/value pairs. Both Lua ABIs pass 100/100, deterministic views `.4.3.5.2` are active, and tree callbacks
-remain `.4.3.6`. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
+sorted key/value pairs. Lexical keys, copied values ordered by key, count, and null-aware membership compose through
+function/receiver/array-chain forms and return `0`/`[]` for missing or wrong-kind sources. Both Lua ABIs pass
+101/101 through `.4.3.5.2`; copied transforms `.4.3.5.3` are active and tree callbacks remain `.4.3.6`. Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
 child-push expression results differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are

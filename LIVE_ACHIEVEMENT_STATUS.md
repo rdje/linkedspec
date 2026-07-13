@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.2 — add Lua deterministic harray views**
+  (DONE — 101/101 on both ABIs; copied transforms/receiver chains `.4.3.5.3` active).
+
+  **Implementation:** Lexical keys, copied values-by-key, count, and null-aware membership now execute through
+  function/receiver forms; sorted arrays bridge onward and numeric membership/count results are terminal.
+
+  **Proof:** Missing/wrong-kind `0`/`[]`, present-null membership, nested-value isolation, receiver chaining, and
+  terminal fences pass PUC Lua and LuaJIT 101/101. A Perl toolbox matrix corrected one stale catalog result.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.5.1 — add Lua harray construction splicing**
   (DONE — 100/100 on both ABIs; deterministic views/membership `.4.3.5.2` active).
 

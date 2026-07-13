@@ -781,7 +781,11 @@ local function append_array_value(result, value, splice)
 end
 
 local PURE_HASH_HELPERS = {
+  count_keys = true,
   flat_hash = true,
+  has_key = true,
+  sorted_keys = true,
+  sorted_values = true,
 }
 
 local ARRAY_END_MUTATIONS = {
@@ -956,6 +960,20 @@ local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state,
 end
 
 local function evaluate_hash_helper(name, values)
+  local source = values[1]
+  local keys = json.kind(source) == "harray" and sorted_harray_keys(source) or {}
+  if name == "count_keys" then return #keys end
+  if name == "sorted_keys" then return json.array(keys) end
+  if name == "sorted_values" then
+    local result = json.array()
+    for _, key in ipairs(keys) do result[#result + 1] = copy_value(source[key]) end
+    return result
+  end
+  if name == "has_key" then
+    if json.kind(source) ~= "harray" or values[2] == nil then return 0 end
+    local key = scalar_string(values[2], true) or ""
+    return source[key] ~= nil and 1 or 0
+  end
   if name == "flat_hash" then
     local result = json.harray()
     for _, value in ipairs(values) do
@@ -1358,6 +1376,9 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
         if canonical_name == "join_values" and index < #expr.calls then return json.null end
       elseif PURE_HASH_HELPERS[canonical_name] then
         value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
+        if (canonical_name == "count_keys" or canonical_name == "has_key") and index < #expr.calls then
+          return json.null
+        end
       else
         value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
       end
