@@ -773,6 +773,9 @@ return_undef()           — return undef
 return(array(...))       — return array
 ```
 
+`i`/`elif` are aliases only for the marker statement family, and `when`/`otherwise` only for the attached-block
+family; they are not aliases for inline value-form calls.
+
 ### 7.7 Capture/Mark Helpers
 ```
 capture_slice()                    — text from anonymous start cursor to current position

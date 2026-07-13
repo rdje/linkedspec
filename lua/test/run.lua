@@ -2527,6 +2527,90 @@ return({
   assert_equal(#trailing.args[#trailing.args].value.block.statements, 1, "trailing block body remains inert")
 end)
 
+test("runtime inline value controls select one lazy payload", function()
+  local source = uniform_binding_action_source([[
+selector_calls = []
+kind = "tag"
+tag = "dynamic"
+assigned = if(false, exit_now(7), elseif(true, { return("elseif") }), else(exit_now(8)))
+subject_once = switch(
+  { push(selector_calls, "seen"); kind },
+  case(other, exit_now(9)),
+  case(tag, { return("literal") }),
+  default(exit_now(10))
+)
+dynamic = switch("dynamic", case(cat(tag, ""), "dynamic-hit"), default(exit_now(11)))
+return({
+  "true" : if(true, false, exit_now(12)),
+  "null" : if(false, exit_now(13)),
+  "plain" : if(0, exit_now(14), "fallback"),
+  "zero_string" : if("0", exit_now(15), "zero"),
+  "empty_array" : if([], "array-reference", exit_now(16)),
+  "empty_harray" : if({}, "harray-reference", exit_now(17)),
+  "assigned" : assigned,
+  "subject_once" : subject_once,
+  "selector_calls" : count(selector_calls),
+  "dynamic" : dynamic,
+  "switch_null" : switch("missing", case(tag, exit_now(18)))
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_equal(result["true"], false, "selected false payload is preserved")
+  assert_equal(result.null, json.null, "missing if fallback yields null")
+  assert_equal(result.plain, "fallback", "plain fallback is selected lazily")
+  assert_equal(result.zero_string, "zero", "Perl-oracle string zero is false")
+  assert_equal(result.empty_array, "array-reference", "empty array value remains reference-truthful")
+  assert_equal(result.empty_harray, "harray-reference", "empty harray value remains reference-truthful")
+  assert_equal(result.assigned, "elseif", "selected elseif block returns locally")
+  assert_equal(result.subject_once, "literal", "bare case label stays literal")
+  assert_equal(result.selector_calls, 1, "switch subject evaluates exactly once")
+  assert_equal(result.dynamic, "dynamic-hit", "compound case expression reads a binding")
+  assert_equal(result.switch_null, json.null, "unmatched switch without default yields null")
+
+  local fluent = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/ -> Done.return(if(false, "bad", "fluent"))
+Done::
+ /x/
+]]))),
+    "xx"
+  ).value
+  assert_equal(fluent, "fluent", "inline control composes in fluent return")
+
+  for _, malformed in ipairs({
+    { source = "return(if())", helper = "if" },
+    { source = 'return(if(false, "x", elseif(true, "y", "z")))', helper = "elseif" },
+    { source = "return(switch())", helper = "switch" },
+    { source = 'return(switch("x", case()))', helper = "case" },
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(malformed.source))
+    end)
+    assert_equal(ok, false, malformed.helper .. " malformed arity fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.helper .. " typed failure")
+    assert_equal(failure.code, "helper_arity_mismatch", malformed.helper .. " generic arity code")
+    assert_equal(failure.helper_name, malformed.helper, malformed.helper .. " diagnostic helper")
+  end
+
+  for _, structural_alias in ipairs({ "i", "elif", "when", "otherwise" }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(
+        'return(' .. structural_alias .. '(true, "yes", "no"))'
+      ))
+    end)
+    assert_equal(ok, false, structural_alias .. " does not become an inline value alias")
+    assert_equal(failure.helper_name, structural_alias, structural_alias .. " stays source-attributed")
+  end
+
+  local unless_resolution = linkedspec.resolve_action_expression_contracts(
+    linkedspec.parse_action_expression('unless(true, "yes", "no")')
+  )
+  assert_equal(unless_resolution.ok, false, "unless remains outside the governed helper surface")
+  assert_equal(unless_resolution.diagnostics[1].code, "unknown_helper", "unless uses generic unknown diagnostic")
+  assert_equal(unless_resolution.diagnostics[1].helper_name, "unless", "unless diagnostic stays source-attributed")
+end)
+
 test("Lua matches the neutral scalar numeric contract exactly", function()
   local contract = json.decode(read_file("capability_conformance/scalar_numeric_contract.json"))
   assert_equal(contract.format, 1, "scalar numeric contract format")

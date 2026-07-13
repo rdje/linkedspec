@@ -60,13 +60,16 @@ This `README.md` is the **single entry point** to the project.
   numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, while the
   three tree-callback names remain explicitly owned by active parent `.4.3.6`. Audit `.4.3.6.0` splits eager
   blocks, inline and statement controls, contextual built-ins/`with`, and deterministic tree callbacks before
-  behavior code. Eager last values, block-local return, mutation, harray precedence, and receiver dispatch pass
-  104/104 on both Lua ABIs through `.4.3.6.1`; inline value controls `.4.3.6.2` are active. General user-function final blocks remain `.5.1`,
+  behavior code. Eager blocks plus lazy inline `if`/`switch` selected-value control, one-time switch subjects,
+  literal case labels, and fluent return composition pass 105/105 on both Lua ABIs through `.4.3.6.2`;
+  attached/marker if-family controls `.4.3.6.3.1` are active. General user-function final blocks remain `.5.1`,
   and explicit callable codeblock values remain future `.11.7`. Copied harray construction,
   runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
-  103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks raise the gate to 104/104.
+  103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks and lazy controls raise the gate to
+  105/105. Lua follows Perl-oracle truthiness; the discovered scalar/aggregate drift in Rust/Dart/Julia is owned
+  by `FUTURE-PARITY-BACKLOG.5`.
   Implicit child-push expression results differ between Perl's
   host count and Lua's updated accumulator, and rename-to-existing-key policy also differs; portable authoring
   avoids those value/collision boundaries until backlog `.5` normalizes them.

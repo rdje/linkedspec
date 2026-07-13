@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (`.4.3.6.0` splits immediate block values, value/statement controls, contextual
-  built-in blocks, and tree callbacks; eager block values `.4.3.6.1` pass 104/104; inline controls `.4.3.6.2` active)
+- Last updated: `2026-07-13` (eager blocks and lazy inline controls pass 105/105 through `.4.3.6.2`;
+  attached/marker if-family execution `.4.3.6.3.1` active; truthiness drift routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1382,17 +1382,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute lazy inline value controls over the expression-valued block seam.
   Dependencies: `.4.3.6.1`
-  Acceptance: Inline `if`/`unless` and `switch`/case aliases evaluate only the selected value branch, preserve
-    false/null distinctions and block-local return, diagnose malformed arity generically, and compose as helper,
-    assignment, and receiver operands on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Inline `if` with `elseif`/`else` branches and inline `switch` with `case`/`default` branches
+    evaluate only the selected value branch, preserve false/null distinctions, one-time switch subjects, literal
+    bare case labels, and block-local return, diagnose malformed arity generically, and compose as helper,
+    assignment, and fluent-return operands on both Lua ABIs. `i`/`elif` remain statement-marker aliases,
+    `when`/`otherwise` remain attached-block aliases, and retired/non-surface `unless` remains unknown.
+  Verification: **PASS 2026-07-13.** Lua now validates and lazily executes inline `if`/`elseif`/`else` and
+    `switch`/`case`/`default`, evaluates only selected payloads, evaluates the switch subject once, preserves
+    false/null results and block-local return, and distinguishes literal bare case labels from compound value
+    expressions. Generic typed arity failures cover unambiguous malformed call shapes. Structural-only aliases
+    are rejected as inline values. Assignment and action-edge fluent return composition pass 105/105 on PUC Lua
+    and LuaJIT. Lua follows Perl-oracle condition truthiness; cross-backend scalar/aggregate truthiness drift is
+    durably routed to `FUTURE-PARITY-BACKLOG.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3`
-  Status: `pending`
+  Status: `active`
   Goal: Execute attached and marker-delimited statement controls.
   Children: `.4.3.6.3.1`, `.4.3.6.3.2`, `.4.3.6.3.3`
   Dependencies: `.4.3.6.1`
@@ -1402,7 +1410,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Execute attached and marker `if`/`elseif`/`else` plus `when`/`otherwise` statement forms.
   Dependencies: `.4.3.6.1`
   Acceptance: Exactly one selected branch executes, condition aliases and marker boundaries match ActionIR order,
@@ -1727,7 +1735,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 59 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Complete 13-name ordinary harray/public surface closes at 103/103. |
 | 60 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Parser-ahead block/control/callback work is split from user-function and callable-value owners. |
 | 61 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receivers pass 104/104. |
-| 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `active` | Execute lazy inline value controls over the eager block seam. |
+| 62 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected payloads, one-time switch subjects, literal labels, and fluent returns pass 105/105. |
+| 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `active` | Execute attached/marker if-family statements. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1829,6 +1838,25 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   tests agree; parser, registry, compiler, matching, process, manifest, Knowledge Map, mdBook, and doctrines pass.
 - [x] **LOCKSTEP** — Task/index/roadmaps, README/book, Knowledge Map, architecture/live docs, changes/notes, and
   memory close eager blocks and activate lazy inline controls `.4.3.6.2`.
+
+### `LUA-BACKEND-PARITY.4.3.6.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua recognized inline control names but routed them to unsupported eager helper
+  dispatch. A Perl toolbox probe also showed that treating `i`/`when` as ordinary value aliases shifts arguments
+  through structural-control parsing instead of producing inline `if` semantics.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The parser intentionally shares governed names across inline calls,
+  marker controls, and attached controls, while `action_contracts.lua` canonicalizes their aliases without
+  conferring runtime surface equivalence. `interpreter.lua` had no raw-AST lazy branch seam.
+- [x] **FIX** — Validate exact authored inline branch forms before eager dispatch; evaluate conditions/subjects
+  once and only selected payloads; preserve literal bare case labels, compound dynamic labels, block-local
+  return, false/null, assignment, and fluent-return results; reject structural-only aliases as inline values.
+- [x] **ADDRESSED (verified)** — One end-to-end test locks skipped fatal branches, `elseif` and plain fallback,
+  reference truthiness, selected blocks, one-time switch side effects, literal/dynamic labels, null fallthrough,
+  fluent return, generic arity diagnostics, and alias rejection.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 105/105 plus CLI/corpus scaffolding. The truthiness audit found
+  real Perl/Rust/Dart/Julia drift; Lua follows the Perl oracle and `FUTURE-PARITY-BACKLOG.5` owns normalization.
+- [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, mdBook, Knowledge Map, live docs,
+  changes/notes, and memory close inline controls and activate `.4.3.6.3.1`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 
@@ -2439,3 +2467,6 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms` | Deep-copied merge/set/rename/drop/pick values, receiver chains, collision routing, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.5.4` | `LUA-BACKEND-PARITY.4.3.5.4 - add Lua named harray mutation` | Shared named set-key/direct harray mutation, copied snapshots, pure-form separation, and neutral wrong-kind proof. |
 | `LUA-BACKEND-PARITY.4.3.5.5` | `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity` | Exact 13-name ordinary harray inventory, public result guard, parent closure, and callback handoff. |
+| `LUA-BACKEND-PARITY.4.3.6.0` | `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms` | Parser-ahead runtime work split from general function and callable-value owners. |
+| `LUA-BACKEND-PARITY.4.3.6.1` | `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values` | Last/local-return values, mutation, harray precedence, receiver dispatch, and contextual-block separation. |
+| `LUA-BACKEND-PARITY.4.3.6.2` | `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls` | Selected-only if/switch values, one-time subjects, literal labels, diagnostics, truthiness routing, and fluent return. |

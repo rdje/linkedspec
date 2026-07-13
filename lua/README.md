@@ -42,19 +42,24 @@ merge arguments override earlier keys. Lua deterministically lets the renamed ol
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
 Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
 absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
-an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 104/104
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 105/105
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
 `walk_leaves`/`map_leaves`/`reduce_leaves` remain separately owned by active parent `.4.3.6`. Audit `.4.3.6.0`
 splits eager expression blocks, inline and statement controls, current built-in final blocks/`with`, and tree
 callbacks. `.4.3.6.1` now executes ordinary non-pair `{ ... }` values once, yields their final expression, catches
-block-local `return`, preserves empty/keyed harray precedence, and continues yielded receivers. Inline value
-controls `.4.3.6.2` are active. General user-function final blocks remain `.5.1`, while
+block-local `return`, preserves empty/keyed harray precedence, and continues yielded receivers. `.4.3.6.2` adds
+lazy inline `if`/`switch`, selected block payloads, one-time switch subjects, literal bare case labels, generic
+arity diagnostics, and assignment/fluent-return composition. `i`/`elif` remain marker aliases and
+`when`/`otherwise` remain attached-block aliases rather than inline values. Attached/marker if-family execution
+`.4.3.6.3.1` is active. General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
+Lua currently follows Perl-oracle condition truthiness, including false scalar `"0"` and truthful empty
+array/harray reference values. Cross-backend truthiness normalization is explicitly owned by backlog `.5`.
 Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
 codeblock. A trailing block remains structural until its signature-governed callable consumes it; future explicit
 first-class codeblocks use `{|params| ...}`.

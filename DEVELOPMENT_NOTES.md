@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.2 — structural control aliases must not leak into value dispatch): Lua's
+  contract canonicalizer maps `i`/`when` to `if` and `elif`/`otherwise` to later branch names because all are
+  governed calls, but that map alone does not grant identical semantics. `i`/`elif` belong to marker statement
+  control and `when`/`otherwise` to attached blocks. Inline evaluation must therefore inspect authored names
+  before canonical eager dispatch, validate branch AST shapes without evaluating payloads, and consume only exact
+  `if`/`elseif`/`else` or `switch`/`case`/`default` forms. The same audit exposed an ungoverned truthiness split:
+  Perl/Rust make scalar `"0"` false, Dart/Julia make it true; Perl makes empty reference aggregates true while
+  Rust/Dart/Julia make them false. Lua follows the Perl oracle and backlog `.5` owns the language-level decision.
+
 - 2026-07-13 (LUA-BACKEND-PARITY.4.3.6.1 — brace syntax needs evaluation context, not one AST meaning): Lua uses
   `block_value` structurally for both ordinary expression blocks and contextual final arguments. Ordinary value
   evaluation must execute it; a consuming block-taking callable must instead receive the raw final AST. The eager

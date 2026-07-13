@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua eager block values pass 104/104 under `.4.3.6.1`; lazy inline controls
-  `.4.3.6.2` active; general user-function/callable-codeblock obligations stay routed).
+- Last updated: `2026-07-13` (Lua lazy inline controls pass 105/105 under `.4.3.6.2`; attached/marker if-family
+  controls `.4.3.6.3.1` active; cross-backend truthiness joins helper-caveat owner `.5`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2182,6 +2182,10 @@ before implementation.
     Lua sorts keys locally for deterministic output, but that is not yet a portable sequence guarantee. Normalize
     `rename_key(source, old, new)` when `new` already exists too: direct CLI probes return the renamed old value on
     Perl/Julia but the pre-existing destination value on Dart/Rust, and the current catalog does not select either.
+    Normalize condition/logical truthiness too: Perl and Rust treat scalar `"0"` as false while Dart and Julia
+    treat every non-empty string as true; Perl treats empty array/hash reference values as true while Rust, Dart,
+    and Julia treat empty aggregates as false. Lua follows the Perl reference pending this decision. Define one
+    language-level truth table and lock it across lazy controls plus eager `and`/`or`/`not` helpers.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
@@ -3688,15 +3692,15 @@ before implementation.
 | 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Execute eager blocks, controls, contextual built-ins, and tree callbacks without preempting user-function/callable owners. |
 | 137 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Split parser-ahead runtime work into six mechanisms plus no-drift/dependency handoff. |
 | 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receiver dispatch pass 104/104. |
-| 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `active` | Execute lazy inline value controls. |
-| 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `pending` | Execute attached/marker if-family statements. |
+| 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected branches, one-time switch subjects, literal labels, arity diagnostics, and fluent returns pass 105/105. |
+| 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `active` | Execute attached/marker if-family statements. |
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `pending` | Execute attached/marker switch-family statements. |
 | 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `pending` | Execute attached while statements with deterministic guard behavior. |
 | 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Execute current built-in final blocks and scoped with. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: flat/concat/hash arity, harray order/rename collisions, negative counts, dropped transforms, invalid joins, and implicit child-push results. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructor/transform/join/push drift, harray order/collisions, and scalar/aggregate truthiness. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |

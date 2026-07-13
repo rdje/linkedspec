@@ -560,6 +560,146 @@ local function is_empty_value(value)
   return false
 end
 
+local function runtime_truthy(value)
+  if value == json.null then return false end
+  if type(value) == "boolean" then return value end
+  if type(value) == "number" then return value ~= 0 end
+  if type(value) == "string" then return value ~= "" and value ~= "0" end
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" then return true end
+  return true
+end
+
+local function invalid_helper_arity(name, expected, actual)
+  fail("helper '" .. name .. "' expects " .. expected .. ", got " .. actual, {
+    code = "helper_arity_mismatch",
+    helper_name = name,
+    expected_arity = expected,
+    actual_arity = actual,
+  })
+end
+
+local function inline_branch_call(expr, name)
+  return expr.kind == "call" and expr.name == name
+end
+
+local function validate_positional_arguments(name, args)
+  for _, arg in ipairs(args) do
+    if arg.argument_kind ~= "positional" then
+      invalid_helper_arity(name, "positional arguments only", #args)
+    end
+  end
+end
+
+local function validate_inline_if(expr)
+  validate_positional_arguments("if", expr.args)
+  if #expr.args < 2 then
+    invalid_helper_arity("if", "at least 2 positional arguments", #expr.args)
+  end
+  for index = 3, #expr.args do
+    local branch = argument_expr(expr.args[index])
+    if inline_branch_call(branch, "elseif") then
+      validate_positional_arguments("elseif", branch.args)
+      if #branch.args ~= 2 then
+        invalid_helper_arity("elseif", "exactly 2 positional arguments", #branch.args)
+      end
+    elseif inline_branch_call(branch, "else") then
+      validate_positional_arguments("else", branch.args)
+      if #branch.args ~= 1 then
+        invalid_helper_arity("else", "exactly 1 positional argument", #branch.args)
+      end
+      if index ~= #expr.args then
+        invalid_helper_arity("if", "no arguments after else(...)", #expr.args)
+      end
+    elseif index ~= #expr.args then
+      invalid_helper_arity("if", "one final plain fallback argument", #expr.args)
+    end
+  end
+end
+
+local function evaluate_inline_if(engine, expr, ctx, accumulator, edge_state)
+  validate_inline_if(expr)
+  local condition = evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
+  if runtime_truthy(condition) then
+    return evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
+  end
+  for index = 3, #expr.args do
+    local branch = argument_expr(expr.args[index])
+    if inline_branch_call(branch, "elseif") then
+      local branch_condition = evaluate_expr(
+        engine,
+        argument_expr(branch.args[1]),
+        ctx,
+        accumulator,
+        edge_state
+      )
+      if runtime_truthy(branch_condition) then
+        return evaluate_expr(engine, argument_expr(branch.args[2]), ctx, accumulator, edge_state)
+      end
+    elseif inline_branch_call(branch, "else") then
+      return evaluate_expr(engine, argument_expr(branch.args[1]), ctx, accumulator, edge_state)
+    else
+      return evaluate_expr(engine, branch, ctx, accumulator, edge_state)
+    end
+  end
+  return json.null
+end
+
+local function validate_inline_switch(expr)
+  validate_positional_arguments("switch", expr.args)
+  if #expr.args == 0 then
+    invalid_helper_arity("switch", "at least 1 positional argument", 0)
+  end
+  local saw_default = false
+  for index = 2, #expr.args do
+    local branch = argument_expr(expr.args[index])
+    if inline_branch_call(branch, "case") then
+      validate_positional_arguments("case", branch.args)
+      if saw_default then
+        invalid_helper_arity("switch", "case(...) branches before default(...)", #expr.args)
+      end
+      if #branch.args ~= 2 then
+        invalid_helper_arity("case", "exactly 2 positional arguments", #branch.args)
+      end
+    elseif inline_branch_call(branch, "default") then
+      validate_positional_arguments("default", branch.args)
+      if saw_default or index ~= #expr.args then
+        invalid_helper_arity("switch", "one final default(...) branch", #expr.args)
+      end
+      if #branch.args ~= 1 then
+        invalid_helper_arity("default", "exactly 1 positional argument", #branch.args)
+      end
+      saw_default = true
+    else
+      invalid_helper_arity("switch", "only case(...) and default(...) branches", #expr.args)
+    end
+  end
+end
+
+local function evaluate_inline_switch(engine, expr, ctx, accumulator, edge_state)
+  validate_inline_switch(expr)
+  local subject = evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
+  local subject_text = scalar_string(subject, true) or ""
+  local default_expr
+  for index = 2, #expr.args do
+    local branch = argument_expr(expr.args[index])
+    if branch.name == "case" then
+      local case_expr = argument_expr(branch.args[1])
+      local candidate = case_expr.kind == "variable" and case_expr.name or
+        evaluate_expr(engine, case_expr, ctx, accumulator, edge_state)
+      if (scalar_string(candidate, true) or "") == subject_text then
+        return evaluate_expr(engine, argument_expr(branch.args[2]), ctx, accumulator, edge_state)
+      end
+    else
+      default_expr = argument_expr(branch.args[1])
+    end
+  end
+  if default_expr then
+    return evaluate_expr(engine, default_expr, ctx, accumulator, edge_state)
+  end
+  return json.null
+end
+
 local function first_or_null(values)
   if #values == 0 then return json.null end
   return values[1]
@@ -1126,6 +1266,13 @@ local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_
 end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
+  if expr.name == "if" then
+    return evaluate_inline_if(engine, expr, ctx, accumulator, edge_state)
+  elseif expr.name == "switch" then
+    return evaluate_inline_switch(engine, expr, ctx, accumulator, edge_state)
+  elseif expr.name == "i" or expr.name == "elif" or expr.name == "when" or expr.name == "otherwise" then
+    fail("unsupported runtime helper '" .. expr.name .. "'", { helper_name = expr.name })
+  end
   local name = action_contracts.canonical_action_helper_name(expr.name)
   local split_target = name == "split" and expr.args[1] and
     binding_target_descriptor(argument_expr(expr.args[1])) or nil

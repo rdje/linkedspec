@@ -1228,6 +1228,8 @@ when(matches(kind, /^node_/)) {
 Inline `if(...)` and `switch(...)` are portable value expressions when simple branch payloads need to feed
 `return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch.
 Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
+The short `i`/`elif` spellings are statement-marker aliases, while `when`/`otherwise` are attached-block aliases;
+they are not alternate names for these inline value helpers.
 
 | Helper | Meaning |
 | --- | --- |
@@ -1292,6 +1294,13 @@ return(if(
   else("fallback")
 ))
 ```
+
+Perl-reference condition truthiness treats null, false, numeric zero, `""`, and `"0"` as false. Array and harray
+values are references and therefore true even when empty. Lua follows that reference boundary. Rust currently
+also treats `"0"` as false but treats empty aggregates as false; Dart and Julia treat every non-empty string as
+true and empty aggregates as false. Until `FUTURE-PARITY-BACKLOG.5` selects and locks one six-backend truth table,
+portable conditions should use explicit predicates such as `is_empty`, `is_nonempty`, `is_defined`, and numeric
+or string comparisons at those disputed boundaries.
 
 Use attached-block `switch` for portable branch logic:
 

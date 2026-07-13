@@ -15,6 +15,7 @@ status: current
 tags: [lua, runtime, codeblock, controls, callbacks, user-functions, planning, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.6.0 audits lua/src/linkedspec/action_parser.lua, action_contracts.lua, interpreter.lua, and user_function_registry.lua. Parser/resolver support is structural; runtime block/control/callback execution is absent, and general user-function dispatch remains LUA-BACKEND-PARITY.5.1."
 evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 executes ordinary no-pair brace values, consumes block-local return, preserves harray classification, and corrects the earlier Lua-only inert assignment expectation at 104/104 on both ABIs."
+evidence_update_2026_07_13_inline_controls: "LUA-BACKEND-PARITY.4.3.6.2 executes lazy inline if/switch values, selected expression blocks, one-time switch subjects, literal bare case labels, and fluent returns at 105/105 on both ABIs; statement/attached aliases remain structural."
 reverify: "rg -n 'block_value|control_if|control_switch|control_while|prepare_invocation' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/user_function_registry.lua && bash scripts/check_task_tree_metadata.sh"
 ---
 

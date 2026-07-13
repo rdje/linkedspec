@@ -1,5 +1,14 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.2 — execute Lua lazy inline controls
+
+Added lazy inline `if`/`elseif`/`else` and `switch`/`case`/`default` evaluation before Lua's eager helper path.
+Only selected payloads execute; false/null and block-local return survive, switch subjects run once, bare case
+labels stay literal, compound labels stay dynamic, and results compose through assignment and action-edge fluent
+return. Generic arity failures cover malformed call shapes. `i`/`elif` remain marker aliases and
+`when`/`otherwise` remain attached aliases, not inline values. Lua follows Perl-oracle truthiness; discovered
+Rust/Dart/Julia scalar/aggregate drift is routed to `FUTURE-PARITY-BACKLOG.5`. Both Lua ABIs pass 105/105.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.1 — execute Lua eager block values
 
 Added one Lua expression-block executor: non-final statements retain dropped-statement mutation, the final

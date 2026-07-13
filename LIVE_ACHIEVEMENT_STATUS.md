@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.2 — execute Lua lazy inline controls**
+  (DONE — 105/105 on both ABIs; attached/marker if-family `.4.3.6.3.1` active).
+
+  **Implementation:** Inline `if`/`switch` validates authored branch shapes before eager helper dispatch, evaluates
+  conditions/subjects once, executes only the selected payload, preserves false/null and local return, keeps bare
+  case labels literal, and composes through assignment and action-edge fluent return.
+
+  **Finding and proof:** `i`/`elif` stay marker aliases and `when`/`otherwise` stay attached aliases, not inline
+  values. Lua follows Perl-oracle truthiness; the discovered Rust/Dart/Julia scalar/aggregate drift is tracked by
+  backlog `.5`. PUC Lua and LuaJIT pass 105/105 plus CLI/corpus scaffolding.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.1 — execute Lua eager block values**
   (DONE — 104/104 on both ABIs; lazy inline controls `.4.3.6.2` active).
 

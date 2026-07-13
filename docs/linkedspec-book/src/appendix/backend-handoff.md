@@ -681,12 +681,15 @@ harray mutation are implemented and public-result guarded. Codeblock/control/tre
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks
 remain `.5.1`; explicit callable codeblock values remain future `.11.7`.
-Eager block execution now passes 104/104: ordinary no-pair braces yield their last/local-return value, non-final
-statement mutation is preserved, harray braces retain precedence, and yielded values enter receiver dispatch.
-This corrects the earlier Lua-only inert assignment scaffold expectation; lazy inline controls `.4.3.6.2` are active.
+Eager blocks plus lazy inline controls now pass 105/105: ordinary no-pair braces yield their last/local-return
+value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
+receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch
+subjects once, treats bare case labels literally, and composes in assignment and fluent return slots. Structural
+`i`/`elif` and `when`/`otherwise` aliases do not become inline values. This corrects the earlier Lua-only inert
+assignment scaffold expectation; attached/marker if-family execution `.4.3.6.3.1` is active.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
-child-push expression results and rename-to-existing-key policy differ;
+child-push expression results, rename-to-existing-key policy, and scalar/aggregate condition truthiness differ;
 `FUTURE-PARITY-BACKLOG.5` owns those explicit normalization decisions. Callable arity is semantic: add/multiply/min/max are
 purposefully unbounded, while subtraction/division/modulo and comparisons remain exact-arity. ADR 0030 now adopts
 `fn name(fixed, ...rest) { ... }`: version-1 fixed functions stay exact; version-2 variadic definitions preserve a

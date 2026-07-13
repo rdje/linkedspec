@@ -1220,8 +1220,9 @@ table because its runtime behavior is to terminate the parser process.
 - **Behavior**: Evaluates conditions left-to-right and evaluates only the selected branch payload. First true
   condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
   returned. If no fallback matches, returns `undef`.
-- **Portability status**: Portable on Perl and Rust in `return(...)`, assignment RHS, and fluent
-  `.return(...)` value positions.
+- **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
+  fluent `.return(...)` value positions. Scalar `"0"` and empty-aggregate condition truthiness still differ;
+  `FUTURE-PARITY-BACKLOG.5` owns normalization.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.
@@ -1250,8 +1251,9 @@ table because its runtime behavior is to terminate the parser process.
 - **Behavior**: Evaluates `expr` once, compares it to each `case(val)` in order, and evaluates only the
   selected branch payload. A bare switch subject such as `switch(kind, ...)` reads scalar `kind`; a bare case
   value such as `case(foo, body)` is a literal tag named `foo`, matching attached-switch case labels.
-- **Portability status**: Portable on Perl and Rust in `return(...)`, assignment RHS, and fluent
-  `.return(...)` value positions.
+- **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
+  fluent `.return(...)` value positions. The same pending truthiness normalization applies to any branch
+  conditions.
 
 ### `switch(expr) { case(val) { ... } default { ... } }`
 - **Signature**: Attached-block statement form.
