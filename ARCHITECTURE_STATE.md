@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-12`
+- `2026-07-12` refresh: Selector-retirement public no-drift now includes every immediate component README. The
+  earlier 47-file root/capability/mdBook inventory omitted Rust, Dart, Julia, and Lua backend READMEs, allowing 14
+  current positive selector forms to survive `.12.1.9`. Follow-up `.12.1.10` migrates those forms, discovers all
+  component READMEs, requires exact 56-file/31-classified-reference inventories and backend bare-binding anchors,
+  and re-closes `.12.1`/`.12` with zero current examples.
 - `2026-07-12` refresh: Lua now routes canonical scalar numeric calls through one helper-local evaluator that owns
   strict finite-decimal admission, governed fixed/variadic arities, invalid/null and non-finite fences, half-away
   rounding, floor signed modulo, clamp/min/max, comparisons, and negative-zero normalization independently of host

@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.10 — public inventories must discover component documentation): A
+  hand-curated root/capability/mdBook list can report zero current examples while backend README files still teach
+  removed syntax. Public no-drift therefore discovers all immediate component READMEs, locks the resulting file
+  count, and requires backend-specific current anchors in addition to scanning negative historical references.
+  This turns adding a new component README into a deliberate inventory update and prevents runtime/source
+  retirement from being declared publicly complete while a backend's own entry document contradicts it.
+
 - 2026-07-12 (LUA-BACKEND-PARITY.4.3.3.1.4 — numeric policy must be helper-local and host-independent): Lua's
   `tonumber`, arithmetic, and comparison operators are useful only after LinkedSpec has enforced its own decimal
   grammar, value kinds, and arities. Signed modulo must use `a - floor(a / b) * b`, rounding must be explicitly

@@ -11,6 +11,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+EXPECTED_PUBLIC_FILE_COUNT = 56
+EXPECTED_CLASSIFIED_REFERENCE_COUNT = 31
 EXACT_SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
 )
@@ -43,8 +45,12 @@ def public_markdown_paths() -> list[Path]:
         ROOT / "ARCHITECTURE_STATE.md",
         ROOT / "capability_conformance/README.md",
     ]
+    component_readmes = sorted(ROOT.glob("*/README.md"))
     book = sorted((ROOT / "docs/linkedspec-book/src").rglob("*.md"))
-    paths = fixed + book
+    paths = sorted(
+        set(fixed + component_readmes + book),
+        key=lambda path: path.relative_to(ROOT).as_posix(),
+    )
     missing = [path for path in paths if not path.is_file()]
     if missing:
         fail(f"public markdown path is missing: {missing[0].relative_to(ROOT)}")
@@ -123,6 +129,10 @@ def require_public_anchors() -> None:
         "capability_conformance/README.md": (
             "The uniform-binding selector retirement is admitted",
         ),
+        "rust/README.md": ("Bare typed bindings", "set(items, [])"),
+        "dart/README.md": ("bare typed bindings", "set(items, [])"),
+        "julia/README.md": ("bare typed bindings", "set(items, [])"),
+        "lua/README.md": ("Bare typed bindings", "set(items, [])"),
         "docs/linkedspec-book/src/overview/project-status.md": (
             "Uniform-binding selector retirement is complete",
         ),
@@ -167,7 +177,17 @@ def run_check(command: list[str], label: str) -> str:
 
 def main() -> int:
     paths = public_markdown_paths()
+    if len(paths) != EXPECTED_PUBLIC_FILE_COUNT:
+        fail(
+            f"public markdown inventory has {len(paths)} files, "
+            f"expected {EXPECTED_PUBLIC_FILE_COUNT}"
+        )
     reference_count = check_exact_references(paths)
+    if reference_count != EXPECTED_CLASSIFIED_REFERENCE_COUNT:
+        fail(
+            f"classified reference inventory has {reference_count} occurrences, "
+            f"expected {EXPECTED_CLASSIFIED_REFERENCE_COUNT}"
+        )
     check_stale_status(paths)
     require_public_anchors()
     check_capability_admission()

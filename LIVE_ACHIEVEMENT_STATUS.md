@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.10 — close backend README selector drift**
+  (DONE — selector retirement `.12.1` and compatibility parent `.12` re-closed; Lua numeric `.4.3.3.2` resumes).
+
+  **Finding and fix:** The admitted 47-file checker omitted backend READMEs, where 14 positive selector forms
+  survived across Rust, Dart, Julia, and Lua. All four now teach bare typed bindings; the checker discovers every
+  immediate component README, requires exact 56-file/31-classified inventories, and locks backend bare-binding
+  anchors.
+
+  **Proof:** The expanded public checker reports zero current examples and composes five backends, six invalid
+  selectors, eight retained classes, zero runtime compatibility, zero executable positives/19 classified
+  rejection occurrences, and capability 60/0/0. mdBook and governance gates pass.
+
 - 2026-07-12: **LUA-BACKEND-PARITY.4.3.3.1.4 — implement Lua scalar numeric helpers**
   (DONE — scalar parent `.4.3.3.1` closed; alias/symbol/number-receiver admission `.4.3.3.2` is active).
 

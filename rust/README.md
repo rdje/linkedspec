@@ -149,7 +149,7 @@ On no-match: `I → LS → no match → LX → E`
 
 The engine implements 80+ helpers covering:
 
-- **Working variables and assignment**: auto-existing scalar/array/hash variables, `name = value`, `set(target, value)`, `set(array(name), [])`, `set(hash(name), {})`
+- **Working variables and assignment**: Bare typed bindings carry scalar, array, harray, or codeblock values; use `name = value` or `set(name, value)`, including `set(items, [])` and `set(meta, {})`
 - **Unknown helper fallback**: helper-looking calls outside the current contract return `undef` through the generic unknown-helper path rather than a name-specific retired-helper implementation
 - **Arrays**: `array`, `copy`, `push`, explicit `is_nonempty(...)` guard plus `push(...)`, `count`
 - **Scalars**: bare scalar reads, `coalesce`, `coalesce_nonempty`, `cat`

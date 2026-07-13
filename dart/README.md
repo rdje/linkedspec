@@ -144,15 +144,14 @@ marker-form `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains
 as grouped branches. It also preserves assignment expressions inside helper
 argument lists, supports plain fallback values in inline `if(...)`, evaluates
 single-argument numeric aggregate reducers through aggregate-aware reads, and
-uses scalar-held list/map values for `array(name)`, `hash(name)`, and `copy(name)`
-unless an explicit aggregate write supersedes the scalar-held value.
-Append-style mutations such as `push(array(name), value)` and `items += value`
-now update a current scalar-held list before falling back to aggregate storage,
-and `call(...)` refreshes the runtime `retv` channel with the child result.
+uses bare typed bindings for scalar, array, harray, or codeblock values.
+`set(items, [])`, `copy(items)`, `push(items, value)`, and `items += value`
+all resolve the same typed binding; exact retired selectors reject before
+execution. `call(...)` refreshes the runtime `retv` channel with the child result.
 Statement-form `substr(...)` and `regex_subst(...)` now mutate scalar targets,
 replacement strings expand `$n` capture placeholders, explicit
-`split(array(target), ...)` replaces the named aggregate target, and entry/local
-regex start line/column helpers are available.
+`split(target, source, delimiter)` replaces the bare typed array target, and
+entry/local regex start line/column helpers are available.
 Rule regexes and helper regex values now share a runtime compiler that normalizes
 POSIX character classes, inline `i`/`m`/`s` flags, scoped flag groups by lifting
 their options to the compiled Dart `RegExp`, possessive quantifier
@@ -167,8 +166,8 @@ Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
 and helper-call parsing preserves literal delimiters inside quoted arguments.
 Compiled action edges now carry resolved regex-dispatch metadata, edge-only child
 regexes are folded into the parent alternation, and runtime action dispatch uses
-that metadata directly. Explicit aggregate resets through `set(array(name), ...)`
-and `set(hash(name), ...)` are scoped to the current rule invocation, preserving
+that metadata directly. Aggregate resets through `set(items, [])` and
+`set(meta, {})` are scoped to the current rule invocation, preserving
 recursive parser value parity while ordinary undeclared child mutations remain
 caller-visible.
 Runtime failures now expose `RuntimeDiagnostic` payloads through

@@ -133,7 +133,7 @@ Parse helper/action source without rewriting it to Lua:
 local action = linkedspec.parse_action_block([[
 set_key(meta, "b", 2)
 set_key(meta, "a", 1)
-set_key(hash(meta), "stmt_hash", 4)
+set_key(meta, "stmt_hash", 4)
 value_set = set_key(meta, "value_only", 9)
 receiver_set = meta.set_key("receiver_only", 5)
 ]])
@@ -318,11 +318,13 @@ mechanism cannot remain signoff-sized.
 Runtime values have exactly four public kinds: `scalar`, `array`, `harray`, and
 `codeblock`. `runtime_value_kind(value)` reports those names; null, booleans,
 numbers, and strings are scalar values. Aggregate and codeblock reads return
-defensive snapshots. Bare assignment stores scalar-held typed values, while
-`set(array(name), value)` and `set(hash(name), value)` select named aggregate
-stores. Array indexes are zero-based at the DSL boundary and harray keys are
-strings. Direct and nested access returns `json.null` for a missing or wrong-
-kind path; nested assignment never creates missing intermediate containers.
+defensive snapshots. Bare typed bindings carry every value kind: `set(items, [])`
+rebinds `items` as an array, `set(meta, {})` rebinds `meta` as an harray, and
+runtime value type governs later reads and mutations. Retired aggregate selectors
+reject at compiled-state admission. Array indexes are zero-based at the DSL
+boundary and harray keys are strings. Direct and nested access returns `json.null`
+for a missing or wrong-kind path; nested assignment never creates missing
+intermediate containers.
 
 ```lua
 local result = linkedspec.runtime_parse(linkedspec.runtime_engine(
@@ -409,8 +411,7 @@ Unicode-safe zero-width global replacement. Unknown flags and invalid patterns
 raise rule-attributed runtime diagnostics. Numeric `substr(value,start,width?)`
 remains a pure value even when discarded.
 
-Dropped `split(array(target), source, delimiter)` replaces the named explicit
-aggregate with a copied typed split result. Literal and regex delimiters share
-the pure split policy, including preserved empty fields. A non-wrapper split
-statement is merely a discarded pure expression, and the source scalar is
-never mutated.
+Dropped `split(target, source, delimiter)` replaces the bare typed array target
+with a copied split result. Literal and regex delimiters share the pure split
+policy, including preserved empty fields. Two-argument split remains a pure
+value expression, and the source scalar is never mutated.

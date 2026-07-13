@@ -223,8 +223,9 @@ quantifiers, and recursive patterns directly.
 AND, OR, and bounded/unbounded repetition families; action/blind child edges; lifecycle order; `retv`; explicit
 returns; narrow array accumulators/capture reads; recursion guards; and zero-progress cutoffs in seek or consume
 mode. The embedded ActionIR evaluator now preserves scalar/array/hash/null/boolean/number shapes through separate
-stores, bare reads, typed `array(name)` / `hash(name)` snapshots, `copy(...)`, literals, assignments, indexed and
-nested reads, and checked no-autovivification nested writes. It also exposes entry/local capture text, groups,
+stores and bare typed bindings: `set(items, [])`, `set(meta, {})`, `copy(items)`, literals, assignments, indexed and
+nested reads all resolve by runtime value kind, while exact retired selectors reject before execution. It also
+exposes entry/local capture text, groups,
 named maps/existence, character spans, and line-column helpers. `.4.3.2` executes current string/scalar and numeric
 transforms, predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-input boundaries, and
 compatible string/number receiver chains through one canonical dispatcher. `.4.3.3` executes copied array

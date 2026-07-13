@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-12` (uniform-binding selector retirement `.12.1` complete; active Lua scalar-numeric frontier resumes).
+- Last updated: `2026-07-12` (backend README follow-up `.12.1.10` re-closes selector-retirement public no-drift).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2666,10 +2666,9 @@ before implementation.
     every retained compatibility surface has an explicit removal condition and owner. Bare variables carry one of
     scalar/array/harray/codeblock, calls and controls are expressions, runtime value type drives dispatch, and
     `array(name)`/`hash(name)` may not survive as alternate namespaces, type assertions, or mutation authority.
-  Verification: **PASS 2026-07-12.** Doctrine `.12.0` and complete implementation/admission `.12.1` close every
-    child. One observable typed binding is current; aggregate selectors are migrated, rejected on five backends,
-    absent from runtime dispatch and current public examples, and removed from future capability exclusions.
-  Commit: `FUTURE-PARITY-BACKLOG.12.1.9 - admit selector-free public surface`
+  Verification: **PASS 2026-07-12.** `.12.1.10` closes the only later-found admission omission: all immediate
+    component READMEs are now discovered and current selector guidance is zero across 56 public files.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.0`
   Status: `done`
@@ -2686,7 +2685,7 @@ before implementation.
   Status: `done`
   Goal: Split and execute uniform binding plus spec-facing aggregate-selector retirement.
   Children: `.12.1.0`, `.12.1.1`, `.12.1.2`, `.12.1.3`, `.12.1.4`, `.12.1.5`, `.12.1.6`, `.12.1.7`,
-    `.12.1.8`, `.12.1.9`
+    `.12.1.8`, `.12.1.9`, `.12.1.10`
   Acceptance: Inventory every public and implementation compatibility surface and classify temporary migration
     versus current language; define one variable binding with runtime scalar/array/harray/codeblock identity; make
     pure and mutable helper/method dispatch consume that value without wrapper-selected storage;
@@ -2696,10 +2695,10 @@ before implementation.
     specify expression-valued if/switch/calls and silent value drop as universal invariants; assign
     Perl/Rust/Dart/Julia/Lua, corpus, mdBook, diagnostics, hard-retirement, and final no-drift leaves before behavior
     code.
-  Verification: **PASS 2026-07-12.** Neutral contract, five backend enablement leaves, all 1,956 source migrations,
-    five hard-rejection implementations, cross-variant runtime/source no-drift, and final public/capability
-    admission pass. Canonical closeout is capability 60/0/0, CLI 61x2, and Phase 0 `1..1031`/626s.
-  Commit: `FUTURE-PARITY-BACKLOG.12.1.9 - admit selector-free public surface`
+  Verification: **PASS 2026-07-12.** `.12.1.0-.9` retain their recorded behavior/source/mdBook/capability proof.
+    Follow-up `.12.1.10` removes 14 backend-README positives and expands recurring public coverage from 47 to 56
+    files with stable inventory and backend bare-binding anchors.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
 
 - ID: `FUTURE-PARITY-BACKLOG.12.1.0`
   Status: `done`
@@ -2999,6 +2998,24 @@ before implementation.
     Phase 0 `1..1031` in 626 seconds. Existing active Lua scalar-numeric leaf `.4.3.3.1.4` resumes.
   Commit: `FUTURE-PARITY-BACKLOG.12.1.9 - admit selector-free public surface`
 
+- ID: `FUTURE-PARITY-BACKLOG.12.1.10`
+  Status: `done`
+  Goal: Remove selector syntax from backend READMEs and close the public-checker coverage omission.
+  Dependencies: `.12.1.9`
+  Acceptance: Inventory every tracked backend README for exact selector-shaped guidance; classify history versus
+    current examples; migrate current Rust/Dart/Julia/Lua authoring prose and snippets to bare typed bindings;
+    expand the canonical public checker to discover backend READMEs from the repository rather than relying on a
+    root/capability/mdBook-only list; require the expanded file count and zero current examples; preserve legitimate
+    removed/rejected history; pass the composed selector/runtime/capability gate, relevant backend docs/tests,
+    mdBook/Knowledge Map/doctrines/cleanup/whitespace, then re-close `.12.1`/`.12` and resume Lua numeric `.4.3.3.2`.
+  Verification: **PASS 2026-07-12.** A commit-baseline scan found 14 exact positive forms across Rust, Dart,
+    Julia, and Lua READMEs. Their runtime descriptions and examples now use bare typed set/copy/push/set-key/split
+    forms. The canonical checker discovers all immediate component READMEs, asserts 56 public files and 31
+    classified removed/history references, requires bare-binding anchors in all four backend documents, and
+    reports zero current examples. It composes five-backend six-invalid/eight-retained/zero-runtime and zero-
+    executable-positive/19-classified proof plus capability 60/0/0; docs/KM/doctrines/mdBook pass.
+  Commit: `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift`
+
 - ID: `FUTURE-PARITY-BACKLOG.13`
   Status: `pending`
   Goal: Restore the codegen-inspector toolbox to the current thin-facade owner architecture.
@@ -3227,6 +3244,21 @@ before implementation.
   docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
 - [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
   close `.12.1` and point at the next dependency-correct PNT leaf.
+
+### `FUTURE-PARITY-BACKLOG.12.1.10` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Scan every backend README and prove current positive selector examples survived the
+  admitted 47-file public gate while executable sources and the root/capability/mdBook set remain clean.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Show that `check_public_aggregate_selector_surface.py` enumerates a curated
+  root/capability/mdBook set but does not discover tracked backend READMEs, allowing public language drift.
+- [x] **FIX** — Migrate current backend README prose/snippets and extend the checker with deterministic backend
+  README discovery plus stable classification/count assertions.
+- [x] **ADDRESSED (verified)** — Every backend README teaches bare typed bindings and exact selectors occur only in
+  explicit removed/rejected/history evidence accepted by the canonical classifier.
+- [x] **NO REGRESSION** — Expanded public/runtime/capability checker, relevant backend gates, docs/KM/doctrines,
+  mdBook, artifact cleanup, and whitespace all pass with no runtime or fixture behavior change.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/backend README/book, architecture, Knowledge Map, changes/notes/live,
+  and memory re-close `.12.1`/`.12` and resume Lua numeric alias/receiver `.4.3.3.2`.
 
 ### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
 
@@ -3525,7 +3557,7 @@ before implementation.
 | 70 | `FUTURE-PARITY-BACKLOG.4.3.1` | `done` | Dart v1/v2 spec/staged/descriptor/native/generated paths pass six neutral contract tests and complete gates. |
 | 71 | `FUTURE-PARITY-BACKLOG.4.3.2` | `done` | Julia typed v1/v2 native/generated execution passes 55 neutral assertions and complete gates. |
 | 72 | `FUTURE-PARITY-BACKLOG.4.4` | `done` | Four-backend no-drift closes; Lua native `.5.1`, descriptor `.5.3`, and generated `.8` obligations are explicit. |
-| 73 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `active` | Resume the existing Lua scalar numeric implementation and six-runtime admission frontier. |
+| 73 | `LUA-BACKEND-PARITY.4.3.3.1.4` | `done` | Lua scalar numeric v1 and exact six-runtime admission are complete. |
 | 74 | `FUTURE-PARITY-BACKLOG.11.1` | `done` | ADR 0031 selects `{|args| ...}`, dynamic caller context, and a backend-neutral rollout split. |
 | 75 | `FUTURE-PARITY-BACKLOG.11.2` | `done` | Exact syntax/AST/dynamic-context cases and future fixture are independently checked in canonical CI. |
 | 76 | `FUTURE-PARITY-BACKLOG.11.3.1` | `done` | Perl parses/preserves inert eight-field codeblock records through generated source and user functions. |
@@ -3567,6 +3599,8 @@ before implementation.
 | 112 | `FUTURE-PARITY-BACKLOG.12.1.8.5` | `done` | Lua rejects exact selectors at compile/runtime-engine admission and has no selector runtime dispatch. |
 | 113 | `FUTURE-PARITY-BACKLOG.12.1.8.6` | `done` | One canonical checker locks all five diagnostics/boundaries and zero runtime selector compatibility. |
 | 114 | `FUTURE-PARITY-BACKLOG.12.1.9` | `done` | Public checker locks 47 files at zero current examples and capability admission. |
+| 115 | `FUTURE-PARITY-BACKLOG.12.1.10` | `done` | All 56 public files are gated and backend READMEs teach only bare typed bindings. |
+| 116 | `LUA-BACKEND-PARITY.4.3.3.2` | `active` | Admit Lua numeric aliases, symbol callees, and number receiver chains. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4269,6 +4303,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.5` | Six neutral FAIL-before/PASS-after compile cases; recursive ActionIR/whole-compiled-state validation; dead/deferred-fluent/unused-function coverage; caller-mutated runtime-engine rejection; eight retained classes; PUC Lua 88/88; LuaJIT 88/88; executable scan 0/19; exact 105-manifest and CLI-scaffold checks; docs/KM/governance/mdBook/whitespace. | PASS. Lua selector dispatch is deleted and compile/runtime-engine admission rejects the portable typed fields; cross-variant no-drift `.12.1.8.6` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.8.6` | Cross-variant retirement checker; exact six-case/eight-retained-class neutral contract; five focused suites (Perl 11, Rust 15/15, Dart 15/15, Julia 59/59, Lua 88/88 on both ABIs); executable scan 0/19; runtime-compatibility scan 0; canonical capability 60/0/0, CLI 61x2, Phase 0 `1..1031`/616s; docs/KM/governance/mdBook/whitespace. | PASS. One recurring gate now locks all five diagnostic and compiled-state boundaries and forbids known selector-only runtime dispatch; `.12.1.8` closes and final public admission `.12.1.9` activates. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.9` | Public checker over 47 files/31 classified removed-history references/0 current examples; capability future exclusion absent and 60/0/0; composed five-backend six-case/eight-retained/0-runtime/0-positive-19-classified checks; canonical CLI 61x2 and Phase 0 `1..1031`/626s; mdBook/KM/governance/cleanup/whitespace. | PASS. Selector retirement `.12.1` and compatibility parent `.12` close; existing active Lua scalar-numeric `.4.3.3.1.4` resumes. |
+| `2026-07-12` | `FUTURE-PARITY-BACKLOG.12.1.10` | Baseline 14 positive forms/four backend READMEs; migrated bare-binding prose/snippets; expanded 56-file/31-classified/0-current public checker; composed five-backend 6-invalid/8-retained/0-runtime/0-positive-19-classified and capability 60/0/0; mdBook/KM/governance/cleanup/whitespace. | PASS. Public checker omission is closed; `.12.1`/`.12` re-close and Lua numeric `.4.3.3.2` resumes. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.14.0` | Director clarification; Knowledge Map retrieval; ADR 0012 and closed staged tree; mdBook design/pipeline/walkthrough audit; new canonical doctrine card; task split; governance/mdBook/whitespace. | PASS. Structural recursion belongs in linked rules with simple boundary regexes; progressive in-parse composition and post-AST staged enrichment are distinct; the narrow function-body prototype is current while general composition remains explicitly future-owned. No behavior changed; Perl `.12.1.8.1` resumes. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 | `2026-07-12` | `FUTURE-PARITY-BACKLOG.4.0` | Knowledge Map and ADR 0017/0023 retrieval; `LinkedSpec::Get` descriptor plus `runtime_ctx_ref` malformed-signature probes; grammar/staged/descriptor/registry/compiler/native/generated/Lua source audit; docs/KM/governance/whitespace/mdBook. | PASS. Exact arity ownership is complete, open-bound helpers are distinct, rollout is mechanism-sized, and no behavior code changed; `.4.1` is active. |
@@ -4383,10 +4418,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.5` | `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity` | Exact 60/0/0 four-backend signoff, `.3` closeout, and Lua activation. |
 | `FUTURE-PARITY-BACKLOG.12.1.8.6` | `FUTURE-PARITY-BACKLOG.12.1.8.6 - enforce selector retirement no-drift` | Five-backend recurring contract/boundary/runtime-deletion lock and `.12.1.9` handoff. |
 | `FUTURE-PARITY-BACKLOG.12.1.9` | `FUTURE-PARITY-BACKLOG.12.1.9 - admit selector-free public surface` | 47-file public/capability admission, `.12.1` closeout, and Lua resume. |
+| `FUTURE-PARITY-BACKLOG.12.1.10` | `FUTURE-PARITY-BACKLOG.12.1.10 - close backend README selector drift` | Four backend README migrations and deterministic 56-file public no-drift coverage. |
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
 
+- `2026-07-12`: `.12.1.10` corrects the public-admission omission left by `.12.1.9`. Rust, Dart, Julia, and Lua
+  READMEs contained 14 current positive selector forms because the curated 47-file checker did not include backend
+  entry docs. All four now teach bare typed bindings. Immediate component README discovery, exact 56-file and
+  31-classified-reference inventories, and backend anchor requirements make the zero-current-example claim
+  recurring. Selector-retirement `.12.1` and compatibility parent `.12` re-close; Lua numeric `.4.3.3.2` resumes.
 - `2026-07-12`: `.12.1.9` admits the selector-free public surface and closes `.12.1` plus compatibility parent
   `.12`. One canonical checker scans 47 public root/capability/mdBook files, classifies 31 exact mentions only as
   removed/rejected/migrated history, requires bare set/push/copy guidance, and reports zero current examples. It

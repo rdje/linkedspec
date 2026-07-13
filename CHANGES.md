@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.10 — close backend README selector drift
+
+Corrected the public-surface omission left by `.12.1.9`: its curated 47-file inventory covered root docs,
+capability docs, and the mdBook but not backend READMEs. Rust, Dart, Julia, and Lua READMEs therefore retained 14
+positive selector forms despite complete runtime/source retirement. Their current prose and snippets now use bare
+typed bindings for reads, resets, copy, push, set-key, and mutable split; no backend README retains an exact form.
+
+The canonical public checker now discovers every immediate component README, requires exact 56-file and
+31-classified-reference inventories, and requires bare-binding anchors in all four backend READMEs. The composed
+runtime/source/capability proof remains five backends, six invalid cases, eight retained classes, zero runtime
+compatibility, zero executable positives/19 classified rejection occurrences, capability 60/0/0, and zero current
+public examples. Selector-retirement `.12.1` and compatibility parent `.12` re-close; Lua numeric `.4.3.3.2`
+resumes.
+
 ## 2026-07-12 — LUA-BACKEND-PARITY.4.3.3.1.4 — implement Lua scalar numeric helpers
 
 Added one portable Lua scalar-numeric evaluator and routed all 18 canonical helpers through it. The module owns
