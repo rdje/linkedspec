@@ -123,6 +123,11 @@ function validate_generated_rule_plan_v1(
     source_identity::AbstractString,
 )
     identity = String(source_identity)
+    try
+        validate_no_removed_aggregate_selectors(compiled)
+    catch error
+        throw(generated_source_compile_failed(identity, error))
+    end
     if length(plan) != length(compiled.compiled_rule_order)
         throw(GeneratedSourceException(
             ValidateGeneratedPlanStage,
@@ -388,6 +393,7 @@ function emit_julia_source_v1(compiled::CompiledSpec, source_identity::AbstractS
     end
 
     try
+        validate_no_removed_aggregate_selectors(compiled)
         normalized_spec = _generated_effective_spec(compiled)
         spec_json = _generated_canonical_json(to_json(normalized_spec))
         identity_hex = bytes2hex(codeunits(identity))

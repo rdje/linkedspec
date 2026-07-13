@@ -84,7 +84,175 @@ function _expect_uniform_binding_wrong_kind(
     end
 end
 
+function _uniform_binding_action_source(action::AbstractString)
+    return "Top::\n /x/ -> Done { $action }\nDone::\n /x/\n"
+end
+
+function _uniform_binding_selector_diagnostic(surface, identifier)
+    return "aggregate_selector_removed surface=$surface " *
+           "identifier=$identifier replacement=$identifier"
+end
+
+function _expect_uniform_binding_selector_compile_error(
+    source::AbstractString,
+    surface::AbstractString,
+    identifier::AbstractString;
+    staged_functions::Bool = false,
+)
+    error = try
+        spec = staged_functions ?
+               parse_spec_with_staged_user_function_definitions(source) : parse_spec(source)
+        validate_spec(spec)
+        compile_spec(spec)
+        nothing
+    catch caught
+        caught
+    end
+    @test error isa CompiledSpecException
+    if error isa CompiledSpecException
+        @test occursin(
+            _uniform_binding_selector_diagnostic(surface, identifier),
+            error.message,
+        )
+    end
+end
+
+function _uniform_binding_compiled_with_selector_payload()
+    compiled = _compile_uniform_binding_source(
+        _uniform_binding_action_source("return([])"),
+    )
+    original = compiled.rules_by_label["Top"]
+    action_ast = parse_action_block("array" * "(items)") # selector-rejection fixture: array(items)
+    invalid_payload = CompiledActionPayload(
+        role = "lifecycle",
+        line = 1,
+        source = "array selector rejection fixture",
+        code = action_ast.source,
+        action_ast = action_ast,
+        contracts = resolve_action_block_contracts(
+            action_ast;
+            function_registry = compiled.function_registry,
+        ),
+    )
+    invalid_rule = CompiledRule(
+        label = original.label,
+        header = original.header,
+        mode_metadata = original.mode_metadata,
+        regex_patterns = original.regex_patterns,
+        dependency_refs = original.dependency_refs,
+        action_edges = original.action_edges,
+        blind_edges = original.blind_edges,
+        lifecycle_action_payloads = [original.lifecycle_action_payloads..., invalid_payload],
+        plain_action_payloads = original.plain_action_payloads,
+        body_elements = original.body_elements,
+    )
+    return CompiledSpec(
+        definition_order = compiled.definition_order,
+        compiled_rule_order = compiled.compiled_rule_order,
+        rules_by_label = Dict(compiled.rules_by_label..., "Top" => invalid_rule),
+        redefined_rule_labels = compiled.redefined_rule_labels,
+        function_registry = compiled.function_registry,
+        dependency_regex_state = compiled.dependency_regex_state,
+    )
+end
+
 @testset "Julia uniform-binding contract" begin
+    @testset "exact aggregate selectors fail at the Julia compile boundary" begin
+        for case in UNIFORM_BINDING_CONTRACT["invalid_selector_cases"]
+            _expect_uniform_binding_selector_compile_error(
+                _uniform_binding_action_source(case["source"]),
+                case["surface"],
+                case["identifier"],
+            )
+        end
+    end
+
+    @testset "dead fluent and unused function selectors also fail compilation" begin
+        _expect_uniform_binding_selector_compile_error(
+            _uniform_binding_action_source(
+                "if(false) { return(array(items)) }; return([])", # selector-rejection fixture
+            ),
+            "array",
+            "items",
+        )
+        _expect_uniform_binding_selector_compile_error(
+            "Top::\n -> Done.return(hash(meta))\nDone::\n /x/\n", # selector-rejection fixture
+            "hash",
+            "meta",
+        )
+        _expect_uniform_binding_selector_compile_error(
+            "fn retired() { return(array(items)) }\n" * # selector-rejection fixture
+            "Top::\n /x/ -> Done { return([]) }\nDone::\n /x/\n",
+            "array",
+            "items";
+            staged_functions = true,
+        )
+    end
+
+    @testset "generated boundaries reject caller-constructed selector AST" begin
+        invalid = _uniform_binding_compiled_with_selector_payload()
+        plan = build_generated_rule_plan(invalid)
+        diagnostic = _uniform_binding_selector_diagnostic("array", "items")
+
+        emit_error = try
+            emit_julia_source_v1(invalid, "selector-generated.spec")
+            nothing
+        catch caught
+            caught
+        end
+        @test emit_error isa GeneratedSourceException
+        if emit_error isa GeneratedSourceException
+            @test emit_error.stage == EmitSourceStage
+            @test emit_error.code == GeneratedSourceEmitFailedCode
+            @test occursin(diagnostic, something(emit_error.detail, ""))
+        end
+
+        plan_error = try
+            validate_generated_rule_plan_v1(invalid, plan, "selector-generated.spec")
+            nothing
+        catch caught
+            caught
+        end
+        @test plan_error isa GeneratedSourceException
+        if plan_error isa GeneratedSourceException
+            @test plan_error.stage == CompileOrLoadGeneratedSourceStage
+            @test plan_error.code == GeneratedSourceCompileFailedCode
+            @test occursin(diagnostic, something(plan_error.detail, ""))
+        end
+    end
+
+    @testset "retained aggregate constructors and literals still execute" begin
+        _expect_uniform_binding_native_and_generated(
+            _uniform_binding_action_source(raw"""
+items = ["x"]
+left = "l"
+right = "r"
+key = "key"
+value = "r"
+return([
+  array(),
+  array("items"),
+  array(copy(items)),
+  array(left, right),
+  hash(),
+  hash("key", value),
+  [items],
+  { key : value }
+])
+"""),
+            Any[
+                Any[],
+                Any["items"],
+                Any[Any["x"]],
+                Any["l", "r"],
+                Dict{String,Any}(),
+                Dict{String,Any}("key" => "r"),
+                Any[Any["x"]],
+                Dict{String,Any}("key" => "r"),
+            ],
+        )
+    end
+
     @testset "future fixture runs natively and through generated execution" begin
         @test UNIFORM_BINDING_CONTRACT["contract_id"] == "linkedspec-uniform-binding-v1"
         fixture = UNIFORM_BINDING_CONTRACT["fixture"]

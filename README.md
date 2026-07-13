@@ -49,7 +49,7 @@ This `README.md` is the **single entry point** to the project.
   source migration `.12.1.7.1-.3` has removed all 600 exact selectors from the 82 tracked `.spec` files and all
   1,356 positive occurrences from embedded test/tool/backend sources. Perl `.12.1.8.1` and Rust `.12.1.8.2` now
   reject exact selectors before execution with the portable `aggregate_selector_removed` fields. Dart bounded
-  bridge/full-gate closeout `.12.1.8.3.2` is complete; Julia `.12.1.8.4` is next.
+  bridge/full-gate closeout `.12.1.8.3.2` and Julia `.12.1.8.4` are complete; Lua `.12.1.8.5` is next.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
   must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
   whose distinct executable names expose one identical user-facing command contract.

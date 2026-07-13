@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.4 — hard-reject Julia aggregate selectors
+
+Julia now rejects every exact one-bare-identifier `array(...)` / `hash(...)` selector at the complete compiled
+ActionIR boundary with `aggregate_selector_removed`, including selectors in dead control bodies, valid deferred
+edge fluents, and unused user-function bodies. Recursive typed-AST inspection is repeated for caller-constructed
+compiled state at generated emission and plan/execution entry. Zero/multi/quoted/computed constructors and array/
+harray literals remain valid.
+
+Selector-specific runtime reads, `set`/`push` targets, receiver targets, mutable split/transform wrappers, and
+target recognizers are deleted. Focused proof passes 59/59, the executable scan reports zero positive and 15
+classified rejection/recognition occurrences, and the authoritative Julia gate passes all 1,339 package
+assertions, CLI 61/61 in default and POSIX environments, and all 105 corpus fixtures. Lua hard rejection
+`.12.1.8.5` is next. Canonical local CI also passes Phase 0 `1..1031` in 601 seconds.
+
 ## 2026-07-12 — FUTURE-PARITY-BACKLOG.12.1.8.3.2 — close Dart selector retirement
 
 Closed the independent full-gate regression exposed by selector signoff. Dart's bounded shipped-PCRE bridge now

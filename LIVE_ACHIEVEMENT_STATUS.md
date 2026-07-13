@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.4 — hard-reject Julia aggregate selectors**
+  (DONE — Julia rejection complete; Lua `.12.1.8.5` is next).
+
+  **Outcome:** Julia rejects exact selectors across complete compiled/generated state with portable fields,
+  including dead code, valid deferred edge fluents, unused user functions, and caller-constructed compiled
+  payloads. Selector-specific runtime reads, targets, receivers, split/transform wrappers, and recognizers are
+  deleted; all eight retained constructor/literal classes pass.
+
+  **Proof:** Focused proof passes 59/59, the executable scan is zero-positive/15 classified, and the authoritative
+  Julia gate passes all 1,339 package assertions, CLI 61x2, and 105/105 corpus. Canonical local CI, mdBook, and
+  governance gates pass.
+
 - 2026-07-12: **FUTURE-PARITY-BACKLOG.12.1.8.3.2 — close Dart selector retirement**
   (DONE — Dart parent complete; Julia `.12.1.8.4` is next).
 

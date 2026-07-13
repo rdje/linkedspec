@@ -60,6 +60,10 @@ def classified_compatibility(path: str, line: str) -> bool:
         "selector-rejection fixture" in line
     ):
         return True
+    if path == "julia/test/uniform_binding_contract_test.jl" and (
+        "selector-rejection fixture" in line
+    ):
+        return True
     return False
 
 

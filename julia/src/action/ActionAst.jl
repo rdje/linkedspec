@@ -594,6 +594,147 @@ function ActionRawExpr(; source, source_span, reason)
     return ActionRawExpr("raw_perl", String(source), source_span, String(reason))
 end
 
+struct RemovedAggregateSelector
+    surface::String
+    identifier::String
+end
+
+function removed_aggregate_selector_diagnostic(selector::RemovedAggregateSelector)
+    return "aggregate_selector_removed surface=$(selector.surface) " *
+           "identifier=$(selector.identifier) replacement=$(selector.identifier)"
+end
+
+"""Return the first removed aggregate selector in `block`, if any."""
+function find_removed_aggregate_selector(block::ActionBlock)
+    for statement in block.statements
+        selector = find_removed_aggregate_selector(statement.expr)
+        if selector !== nothing
+            return selector
+        end
+    end
+    return nothing
+end
+
+function _find_removed_aggregate_selector_in_args(args)
+    for arg in args
+        selector = find_removed_aggregate_selector(arg.value)
+        if selector !== nothing
+            return selector
+        end
+    end
+    return nothing
+end
+
+function _find_removed_aggregate_selector_in_block(block)
+    return block === nothing ? nothing : find_removed_aggregate_selector(block)
+end
+
+function _find_removed_aggregate_selector_in_segments(segments)
+    for segment in segments
+        if segment isa ActionIndexAccessSegment
+            selector = find_removed_aggregate_selector(segment.expr)
+            if selector !== nothing
+                return selector
+            end
+        end
+    end
+    return nothing
+end
+
+"""Return the first removed one-bare-identifier aggregate selector below `expr`."""
+function find_removed_aggregate_selector(expr::ActionExpr)
+    if expr isa ActionCallExpr
+        if expr.name in ("array", "hash") && length(expr.args) == 1
+            arg = only(expr.args)
+            if arg isa ActionPositionalArgument && arg.value isa ActionVariableExpr
+                return RemovedAggregateSelector(expr.name, arg.value.name)
+            end
+        end
+        return _find_removed_aggregate_selector_in_args(expr.args)
+    elseif expr isa ActionFluentChainExpr
+        selector = find_removed_aggregate_selector(expr.receiver)
+        if selector !== nothing
+            return selector
+        end
+        for call in expr.calls
+            selector = _find_removed_aggregate_selector_in_args(call.args)
+            if selector !== nothing
+                return selector
+            end
+        end
+        return nothing
+    elseif expr isa ActionAssignScalarExpr || expr isa ActionAssignArrayAppendExpr
+        return find_removed_aggregate_selector(expr.value)
+    elseif expr isa ActionAssignHashIndexExpr
+        selector = find_removed_aggregate_selector(expr.key)
+        return selector === nothing ? find_removed_aggregate_selector(expr.value) : selector
+    elseif expr isa ActionAssignNestedAccessExpr
+        selector = _find_removed_aggregate_selector_in_segments(expr.segments)
+        return selector === nothing ? find_removed_aggregate_selector(expr.value) : selector
+    elseif expr isa ActionIndexedVarExpr
+        return find_removed_aggregate_selector(expr.index)
+    elseif expr isa ActionNestedAccessExpr
+        return _find_removed_aggregate_selector_in_segments(expr.segments)
+    elseif expr isa ActionArrayLiteralExpr
+        for item in expr.items
+            selector = find_removed_aggregate_selector(item)
+            if selector !== nothing
+                return selector
+            end
+        end
+        return nothing
+    elseif expr isa ActionHashLiteralExpr
+        for entry in expr.entries
+            selector = find_removed_aggregate_selector(entry.key)
+            if selector === nothing
+                selector = find_removed_aggregate_selector(entry.value)
+            end
+            if selector !== nothing
+                return selector
+            end
+        end
+        return nothing
+    elseif expr isa ActionBlockValueExpr
+        return find_removed_aggregate_selector(expr.block)
+    elseif expr isa ActionControlIfExpr
+        selector = find_removed_aggregate_selector(expr.condition)
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_args(expr.args))
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_block(expr.body))
+        return selector
+    elseif expr isa ActionControlElseExpr || expr isa ActionControlDefaultExpr
+        selector = _find_removed_aggregate_selector_in_args(expr.args)
+        return selector === nothing ? _find_removed_aggregate_selector_in_block(expr.body) : selector
+    elseif expr isa ActionControlMarkerExpr
+        return _find_removed_aggregate_selector_in_args(expr.args)
+    elseif expr isa ActionControlWhileExpr
+        selector = find_removed_aggregate_selector(expr.condition)
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_args(expr.args))
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_block(expr.body))
+        return selector
+    elseif expr isa ActionControlSwitchExpr
+        selector = find_removed_aggregate_selector(expr.source_expr)
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_args(expr.args))
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_block(expr.body))
+        if selector !== nothing
+            return selector
+        end
+        for case_expr in expr.cases
+            selector = find_removed_aggregate_selector(case_expr)
+            if selector !== nothing
+                return selector
+            end
+        end
+        return expr.default_case === nothing ?
+               nothing : find_removed_aggregate_selector(expr.default_case)
+    elseif expr isa ActionControlCaseExpr
+        selector = find_removed_aggregate_selector(expr.match)
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_args(expr.args))
+        selector === nothing && (selector = _find_removed_aggregate_selector_in_block(expr.body))
+        return selector
+    end
+    return nothing
+end
+
 to_json(span::ActionSourceSpan) = Dict("start" => span.start, "end" => span.stop)
 
 function _action_base_json(node)

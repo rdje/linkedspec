@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.4 — Julia selector rejection must validate both typed and deferred
+  executable state): Julia compiles rule action blocks to typed ActionIR, but user-function bodies and raw fluent
+  arguments retain deferred source until runtime. Recursive typed inspection alone would therefore leave unused
+  functions and some edge fluents as bypasses. Whole-compiled-state validation parses and inspects valid deferred
+  sources while deliberately preserving the historical timing of unrelated parse failures; generated emission and
+  plan entry repeat the validator for caller-constructed compiled state. After this boundary is authoritative, all
+  runtime selector read/target/receiver/split/transform recognition can be deleted. Focused proof is 59/59 and the
+  complete 1,339-assertion/61x2/105 Julia gate passes.
+
 - 2026-07-12 (FUTURE-PARITY-BACKLOG.12.1.8.3.2 — a bounded regex bridge must preserve capture shape, not only
   recognize the new pattern): Adding `blkVFN` to the detector is insufficient. The variadic function regex has a
   different prefix and four consumed captures—name, optional fixed parameters, rest parameter, and body—versus

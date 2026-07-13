@@ -242,6 +242,69 @@ struct CompiledDescriptorState
     dependency_regex_state::CompiledDependencyRegexState
 end
 
+"""Reject removed aggregate selectors in every executable compiled surface."""
+function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
+    function validate_block(block::ActionBlock, context::String)
+        selector = find_removed_aggregate_selector(block)
+        if selector !== nothing
+            throw(CompiledSpecException(
+                "$context: $(removed_aggregate_selector_diagnostic(selector))",
+            ))
+        end
+        return nothing
+    end
+
+    function validate_fluent_calls(calls, context::String)
+        for (index, call) in enumerate(calls)
+            args = strip(call.args)
+            source = isempty(args) ? "$(call.method)()" : "$(call.method)($args)"
+            try
+                validate_block(parse_action_block(source), "$context fluent call $(index - 1)")
+            catch error
+                if error isa CompiledSpecException
+                    rethrow()
+                end
+                # Deferred fluent syntax historically remains runtime-parsed.
+                # Preserve unrelated parse-failure timing.
+            end
+        end
+        return nothing
+    end
+
+    for entry in compiled.function_registry.entries
+        definition = entry.definition
+        try
+            validate_block(
+                parse_action_block(definition.body_source),
+                "function '$(definition.name)' body",
+            )
+        catch error
+            if error isa CompiledSpecException
+                rethrow()
+            end
+            # Preserve unrelated user-function body parse-failure timing while
+            # rejecting structurally valid removed selectors.
+        end
+    end
+
+    for label in compiled.compiled_rule_order
+        rule = compiled.rules_by_label[label]
+        for payload in action_payloads(rule)
+            validate_block(
+                payload.action_ast,
+                "rule '$label' $(payload.role) line $(payload.line)",
+            )
+        end
+        for (index, edge) in enumerate(rule.action_edges)
+            validate_fluent_calls(edge.fluent_chain, "rule '$label' action edge $(index - 1)")
+        end
+        for (index, edge) in enumerate(rule.blind_edges)
+            validate_fluent_calls(edge.fluent_chain, "rule '$label' blind edge $(index - 1)")
+        end
+    end
+    return nothing
+end
+
 function compile_spec(
     spec::SpecFile;
     validate_source::Bool = true,
@@ -394,7 +457,7 @@ function _compile_spec(
         rethrow()
     end
 
-    return CompiledSpec(
+    compiled = CompiledSpec(
         definition_order = definition_order,
         compiled_rule_order = compiled_rule_order,
         rules_by_label = resolved_rules,
@@ -402,6 +465,8 @@ function _compile_spec(
         function_registry = function_registry,
         dependency_regex_state = dependency_regex_state,
     )
+    validate_no_removed_aggregate_selectors(compiled)
+    return compiled
 end
 
 compiled_rule(compiled::CompiledSpec, label::AbstractString) = get(compiled.rules_by_label, String(label), nothing)

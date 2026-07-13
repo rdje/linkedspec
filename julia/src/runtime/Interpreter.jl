@@ -2806,28 +2806,12 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
         rule_label,
         current_edge,
     ))
-    array_target = _runtime_array_target_name(args[1])
-    if array_target !== nothing
-        _record_runtime_rule_local_binding!(context, array_target)
-        delete!(context.variables, array_target)
-        delete!(context.hashes, array_target)
-        context.arrays[array_target] = _runtime_as_array(value)
-        return _runtime_copy(context.arrays[array_target])
-    end
-    hash_target = _runtime_hash_target_name(args[1])
-    if hash_target !== nothing
-        _record_runtime_rule_local_binding!(context, hash_target)
-        delete!(context.variables, hash_target)
-        delete!(context.arrays, hash_target)
-        context.hashes[hash_target] = _runtime_as_hash(value)
-        return _runtime_copy(context.hashes[hash_target])
-    end
     variable_target = _runtime_variable_name(args[1])
     if variable_target !== nothing
         return _store_runtime_bare_binding!(context, variable_target, value)
     end
     throw(RuntimeInterpreterException(
-        "set target in rule $rule_label must be a variable, array(name), or hash(name)",
+        "set target in rule $rule_label must be a variable",
     ))
 end
 
@@ -2846,8 +2830,7 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
         target = if length(args) == 1 || (length(args) == 2 && index !== nothing)
             rule_label
         else
-            candidate = _runtime_array_target_name(args[2])
-            candidate === nothing ? _runtime_variable_name(args[2]) : candidate
+            _runtime_variable_name(args[2])
         end
         valid_shape = target !== nothing && (length(args) < 3 || index !== nothing)
         if valid_shape
@@ -2874,13 +2857,10 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
             context.retv = child.value
             return _append_runtime_array_value!(context, rule_label, child.value)
         end
-        target = _runtime_array_target_name(first(args))
-        if target === nothing
-            target = _runtime_variable_name(first(args))
-        end
+        target = _runtime_variable_name(first(args))
         if target === nothing
             throw(RuntimeInterpreterException(
-                "push target in rule $rule_label must be array(name) or a variable",
+                "push target in rule $rule_label must be a variable",
             ))
         end
         child = _execute_runtime_action_edge_child!(engine, current_edge, context)
@@ -2889,13 +2869,10 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
     end
 
     if length(args) >= 2
-        target = _runtime_array_target_name(args[1])
-        if target === nothing
-            target = _runtime_variable_name(args[1])
-        end
+        target = _runtime_variable_name(args[1])
         if target === nothing
             throw(RuntimeInterpreterException(
-                "push target in rule $rule_label must be array(name) or a variable",
+                "push target in rule $rule_label must be a variable",
             ))
         end
         value = _runtime_copy(_evaluate_runtime_action_expr!(
@@ -2918,16 +2895,6 @@ function _runtime_literal_nonnegative_int(expr)
 end
 
 function _call_runtime_array(engine, args, context, rule_label, current_edge)
-    if length(args) == 1
-        name = _runtime_variable_name(first(args))
-        if name !== nothing
-            variable = get(context.variables, name, nothing)
-            if variable isa AbstractVector
-                return _runtime_as_array(variable)
-            end
-            return _runtime_copy(get(context.arrays, name, Any[]))
-        end
-    end
     result = Any[]
     for arg in args
         value = _runtime_copy(_evaluate_runtime_action_expr!(
@@ -2957,17 +2924,6 @@ function _append_runtime_array_argument!(result, expr, value)
 end
 
 function _call_runtime_hash(engine, args, context, rule_label, current_edge)
-    if length(args) == 1
-        name = _runtime_variable_name(first(args))
-        if name !== nothing
-            variable = get(context.variables, name, nothing)
-            if variable isa AbstractDict
-                return _runtime_as_hash(variable)
-            end
-            return _runtime_copy(get(context.hashes, name, Dict{String,Any}()))
-        end
-    end
-
     values = Any[]
     for arg in args
         push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
@@ -3660,8 +3616,7 @@ function _execute_runtime_array_end_mutation!(
 end
 
 function _runtime_array_receiver_target_name(expr)
-    name = _runtime_variable_name(expr)
-    return name === nothing ? _runtime_array_target_name(expr) : name
+    return _runtime_variable_name(expr)
 end
 
 function _execute_runtime_set_key_statement!(
@@ -3703,8 +3658,7 @@ function _execute_runtime_set_key_statement!(
 end
 
 function _runtime_hash_receiver_target_name(expr)
-    name = _runtime_variable_name(expr)
-    return name === nothing ? _runtime_hash_target_name(expr) : name
+    return _runtime_variable_name(expr)
 end
 
 function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionContext, name::String)
@@ -3714,10 +3668,8 @@ function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionConte
 end
 
 function _call_runtime_split_from_expressions!(engine, args, context, rule_label, current_edge)
-    wrapper_target = isempty(args) ? nothing : _runtime_array_target_name(first(args))
-    bare_target = length(args) == 3 ? _runtime_variable_name(first(args)) : nothing
-    target = wrapper_target === nothing ? bare_target : wrapper_target
-    if target !== nothing && length(args) >= 2
+    target = length(args) == 3 ? _runtime_variable_name(first(args)) : nothing
+    if target !== nothing
         source = _evaluate_runtime_action_expr!(
             engine,
             args[2],
@@ -3762,9 +3714,7 @@ function _execute_runtime_array_transform_statement!(
             length(args) != 1
         return false
     end
-    wrapper_target = _runtime_array_target_name(only(args))
-    bare_target = _runtime_variable_name(only(args))
-    target = wrapper_target === nothing ? bare_target : wrapper_target
+    target = _runtime_variable_name(only(args))
     if target === nothing
         return false
     end
@@ -5245,24 +5195,6 @@ function _runtime_rule_name_from_expr(engine, expr, context, rule_label, current
         rule_label,
         current_edge,
     ))
-end
-
-function _runtime_array_target_name(expr)
-    if !(expr isa ActionCallExpr) ||
-            canonical_action_helper_name(expr.name) != "array" ||
-            length(expr.args) != 1
-        return nothing
-    end
-    return _runtime_variable_name(getfield(only(expr.args), :value))
-end
-
-function _runtime_hash_target_name(expr)
-    if !(expr isa ActionCallExpr) ||
-            canonical_action_helper_name(expr.name) != "hash" ||
-            length(expr.args) != 1
-        return nothing
-    end
-    return _runtime_variable_name(getfield(only(expr.args), :value))
 end
 
 _runtime_variable_name(expr) = expr isa ActionVariableExpr ? expr.name : nothing
