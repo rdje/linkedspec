@@ -89,8 +89,11 @@ character values, returned text and numbers continue through compatible receiver
 a void mutation. Both ABIs pass 116/116. `.4.3.7.5` now resolves bare/quoted usable boundary rules into a separate
 compiled-alternation cache, always seeks regardless of surrounding parse mode, captures before the earliest match
 without consuming it, falls back to EOF, and leaves the cursor unchanged when every rule is unresolved or
-regex-free. Both ABIs pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`;
-complete named-mark `.17.1` is next. General user-function final `callback: codeblock` declaration
+regex-free. Both ABIs pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`.
+Complete named-mark `.17.4` now adds parse-scoped rule-label buckets, byte-safe storage, Unicode public
+positions/locations, symbolic names, and the exact seven staged helpers through native plus serialized execution
+at 119/119 on both ABIs. The remaining governed named spans/bridges continue in `.4.3.7.3`; shared admission
+remains `.17.5`. General user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
@@ -275,10 +278,11 @@ nested arguments, shapes, blocks, access indexes, controls, assignments, and
 receiver methods. Unknown calls produce `unknown_helper`; structural parser
 fallback produces `raw_perl`. Neither path invokes a Lua global.
 
-That 239-name table is the governed cross-backend inventory, not an enumeration of every historical/current Perl
-contract mentioned by the public helper reference. The capture/cursor audit currently tracks seven documented
-mark helpers outside it—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`—
-for cross-backend inventory resolution before Lua can claim complete named-mark parity.
+That 239-name table remains the governed legacy cross-backend inventory until final admission; it is not an
+enumeration of every historical/current Perl contract mentioned by the public helper reference. Lua now resolves
+the seven documented complete-mark helpers—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`,
+`mark_col`, and `clear_mark`—through a separate exact staged set, as Dart and Julia do. `.17.5` admits those names
+once across backends and adds an independent public-current omission guard.
 
 Build the concrete registry directly from a typed spec or function list:
 

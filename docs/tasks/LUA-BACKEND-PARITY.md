@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-14` (non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs;
-  complete named-mark Perl/Rust/Dart/Julia `.17.1-.17.3` are done with canonical proof; Lua `.17.4` is active
-  before `.4.3.7.3`)
+- Last updated: `2026-07-14` (complete named-mark rollout `.17.1-.17.4` is done across all five backends; Lua
+  passes the exact contract at 119/119 on both ABIs and `.4.3.7.3` is dependency-ready after `.17.5` admission)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1669,14 +1668,15 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.7.3`
   Status: `pending`
   Goal: Implement the governed current rule-local named marks, named spans, and anonymous/named bridges.
-  Dependencies: `.4.3.7.2`
+  Dependencies: `.4.3.7.2`, `FUTURE-PARITY-BACKLOG.17.4`
   Acceptance: Current/input-boundary/anonymous mark writers, copy/existence/position readers, match-start/live-
     cursor/end-of-input/two-mark stable and advancing spans, and both bridge directions match the governed
-    reference; bare mark identifiers remain symbolic, mark state is isolated per rule invocation, and the exact
-    anonymous/named fixture passes unchanged. Before this leaf activates, the `.4.3.7.0` finding that seven
-    documented current mark helpers (`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and
-    `clear_mark`) are absent from the governed 239-name inventory must have a clean-pivot cross-backend owner;
-    this Lua leaf consumes that resolution rather than creating a Lua-only dialect.
+    reference; bare mark identifiers remain symbolic, mark state is isolated by rule label for the parser
+    execution, and the exact anonymous/named fixture passes unchanged. `FUTURE-PARITY-BACKLOG.17.4` already
+    supplies the parse-scoped rule-label mark store plus `mark_entry_start/end`, `mark_match_start/end`,
+    `mark_line`, `mark_col`, and `clear_mark`; this leaf extends that implementation for the remaining governed
+    named writers, spans, and bridges rather than creating a Lua-only dialect or parallel mark frame. Final
+    shared-inventory admission `.17.5` precedes this leaf's complete-family parity claim.
   Verification: `pending`
   Commit: `pending`
 
@@ -1902,9 +1902,11 @@ chains and named mutation/direct assignment close all 13 ordinary harray names a
 Codeblock/control/tree-callback parent `.4.3.6` closes at 114/114 with later function/callable obligations routed
 explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls
 `.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs. Complete
-named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` also
-matches it through native/generated/CLI routes with complete backend and canonical proof. Julia `.17.3` now does
-the same; Lua `.17.4` is the active dependency frontier before `.4.3.7.3` consumes the shared implementation.
+named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` and
+Julia `.17.3` match it through native/generated/CLI routes with complete backend and canonical proof. Lua `.17.4`
+now consumes the unchanged contract through native/serialized routes at 119/119 on both ABIs. Final admission
+`.17.5` is active; `.4.3.7.3` is then dependency-ready to extend that same store and dispatcher across the
+remaining governed named-span and bridge family.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1984,6 +1986,7 @@ the same; Lua `.17.4` is the active dependency frontier before `.4.3.7.3` consum
 | 74 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit save/restore/rewind controls pass 115/115 on both ABIs. |
 | 75 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls share byte-safe state and pass 116/116 on both ABIs. |
 | 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Non-consuming earliest usable boundary and EOF/no-op cases pass 117/117 on both ABIs. |
+| 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `pending` | After `.17.5`, extend the `.17.4` rule-label mark store across governed named writers, spans, and bridges. |
 
 ### `LUA-BACKEND-PARITY.4.3.7.5` Acceptance Checklist
 

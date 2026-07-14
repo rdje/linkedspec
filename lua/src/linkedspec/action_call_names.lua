@@ -242,8 +242,34 @@ local CURRENT_CALL_NAMES = {
   ["when"] = true,
 }
 
+-- Staged separately until FUTURE-PARITY-BACKLOG.17.5 admits the complete
+-- public-current inventory across every backend. These names are known to the
+-- Lua validator/runtime now, but count() must continue to report the shared
+-- 239-name comparison set while that final admission leaf remains pending.
+local COMPLETE_NAMED_MARK_CALL_NAMES = {
+  ["clear_mark"] = true,
+  ["mark_col"] = true,
+  ["mark_entry_end"] = true,
+  ["mark_entry_start"] = true,
+  ["mark_line"] = true,
+  ["mark_match_end"] = true,
+  ["mark_match_start"] = true,
+}
+
 function M.is_known(name)
+  return CURRENT_CALL_NAMES[name] == true or COMPLETE_NAMED_MARK_CALL_NAMES[name] == true
+end
+
+function M.is_shared_inventory_name(name)
   return CURRENT_CALL_NAMES[name] == true
+end
+
+function M.complete_named_mark_names()
+  local result = {}
+  for name in pairs(COMPLETE_NAMED_MARK_CALL_NAMES) do
+    result[name] = true
+  end
+  return result
 end
 
 function M.count()

@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-14 (`FUTURE-PARITY-BACKLOG.17.4` — stage names separately, but do not stage state twice): Lua's match
+  registers and cursor already use UTF-8 byte offsets, so the complete named-mark contract belongs in one new
+  parse-scoped `rule label -> mark name -> byte offset` store. Entry/local writers reuse the immutable match
+  snapshots, location readers reuse `line_column_at_byte_offset`, and public positions convert only at the DSL
+  boundary. Rule-label scope—not a transient child-call snapshot—is the established five-backend contract, so a
+  child can reuse a name without overwriting its parent's bucket while later calls in the same rule still see the
+  checkpoint. Inventory staging stays orthogonal: seven names join known-call and capture/mark resolution through
+  a private exact set but do not change the shared 239-name count before `.17.5`. The focused fixture passes native
+  and serialized `SpecFile` reconstruction on PUC Lua and LuaJIT at 119/119; its pre-existing-inventory
+  `mark_input_end`, `mark_pos`, and `mark_exists` calls are the necessary observation bridges into the new store.
+  Lua `.4.3.7.3` must extend this same store and dispatcher for the remaining governed named spans/bridges rather
+  than introduce a parallel frame. Canonical CI preserves capability 64/0/0 and shared coverage 239/105, passes
+  CLI 61x2 and Phase 0 `1..1031` in 627 seconds, and clears every doctrine/documentation gate.
+
 - 2026-07-14 (`FUTURE-PARITY-BACKLOG.17.3` — preserve one mark store and one eventual admission point): Julia's
   existing architecture already matches the neutral storage model: `rule label -> mark name -> code-unit offset`,
   with Unicode-character conversion only at the `.spec` boundary. The complete helpers therefore reuse that

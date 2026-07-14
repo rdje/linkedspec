@@ -179,9 +179,11 @@ Named marks are stable, rule-local checkpoints. Use them when one anonymous roll
 | `start_capture_slice_from(name)` | bridge | reset the anonymous capture boundary from a named mark when it exists. |
 
 The four entry/local writers, both location readers, and `clear_mark` have one exact neutral contract. Perl, Rust,
-Dart, and Julia consume that contract through their native and available generated routes; Lua rollout remains
-tracked under `FUTURE-PARITY-BACKLOG.17.4`, followed by shared inventory admission in `.17.5`. Public
-positions count characters even when a backend stores UTF-8 byte or code-unit offsets internally.
+Dart, Julia, and Lua consume that contract through their native and available generated or serialized routes.
+Lua keeps marks as UTF-8 byte offsets in parse-scoped rule-label buckets, then converts only public positions and
+locations to Unicode characters; PUC Lua and LuaJIT pass the unchanged fixture at 119/119. The seven names remain
+staged outside the legacy shared backend inventory until final admission in `FUTURE-PARITY-BACKLOG.17.5`;
+canonical coverage therefore remains the honest 239-name/105-fixture baseline during rollout.
 
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 

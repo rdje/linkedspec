@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-14: **FUTURE-PARITY-BACKLOG.17.4 — align Lua complete named marks**
+  (DONE — exact native/serialized contract passes 119/119 on both Lua ABIs; final admission `.17.5` next).
+
+  **Result:** Lua now stores named marks in parse-scoped rule-label buckets as UTF-8 byte offsets, reuses existing
+  entry/local match registers and Unicode projection helpers, preserves symbolic bare names, and clears only the
+  current rule bucket. A same-name child checkpoint cannot overwrite its parent's value. The exact seven-helper
+  staged set participates in known-call and capture/mark contract resolution while the governed shared inventory
+  remains 239 names pending `.17.5`. Native execution and serialized `SpecFile` reconstruction return the
+  unchanged neutral result on PUC Lua and LuaJIT; the complete Lua gate passes 119/119 plus syntax, CLI scaffold,
+  and all 105 manifest checks. Lua `.4.3.7.3` can now consume this foundation for the remaining named spans and
+  bridges. Canonical CI passes capability 64/0/0, shared coverage 239/105, CLI 61/61 twice, Phase 0 `1..1031` in
+  627 seconds, and every doctrine/documentation gate.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.17.2 — align Dart complete named marks**
   (DONE — exact seven-helper native/generated/emitted/CLI behavior passes; Julia `.17.3` next).
 

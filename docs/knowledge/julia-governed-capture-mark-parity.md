@@ -35,9 +35,9 @@ are 1-based Unicode-character locations. Native execution, generated-plan execut
 reconstruction, and the primary CLI return the exact neutral parent/child fixture.
 
 The seven names live in `COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES` and participate in Julia's known-call boundary,
-but remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Lua must consume the
-unchanged contract before `.17.5` admits all seven into the shared inventory and hardens the checker against
-another symmetric omission.
+but remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Lua `.17.4` now
+consumes the unchanged contract on both ABIs; `.17.5` admits all seven into the shared inventory and hardens the
+checker against another symmetric omission.
 
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that

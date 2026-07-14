@@ -113,6 +113,7 @@ local function context(input, top_rule, compiled_rules)
     variables = {},
     arrays = {},
     harrays = {},
+    mark_buckets = {},
     active = {},
     lifecycle_events = {},
     rule_stack = {},
@@ -1549,6 +1550,19 @@ local ANONYMOUS_CAPTURE_HELPERS = {
   start_capture_slice = true,
 }
 
+local NAMED_MARK_HELPERS = {
+  clear_mark = true,
+  mark_col = true,
+  mark_entry_end = true,
+  mark_entry_start = true,
+  mark_exists = true,
+  mark_input_end = true,
+  mark_line = true,
+  mark_match_end = true,
+  mark_match_start = true,
+  mark_pos = true,
+}
+
 local function set_live_cursor(ctx, byte_cursor)
   ctx.registers = ctx.registers:with_cursor_byte(byte_cursor)
   ctx.cursor_byte = ctx.registers.cursor_byte
@@ -1607,6 +1621,55 @@ local function evaluate_anonymous_capture_helper(name, expr, ctx)
     set_capture_start(ctx, #ctx.input)
   end
   return result
+end
+
+local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
+  if #expr.args ~= 1 then invalid_helper_arity(name, "exactly 1 positional argument", #expr.args) end
+  local mark_name = capture_name(
+    engine,
+    argument_expr(expr.args[1]),
+    ctx,
+    accumulator,
+    edge_state
+  )
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  local marks = ctx.mark_buckets[rule_label]
+
+  if name == "clear_mark" then
+    if marks ~= nil then marks[mark_name] = nil end
+    return json.null
+  end
+
+  if marks == nil then
+    marks = {}
+    ctx.mark_buckets[rule_label] = marks
+  end
+  if name == "mark_input_end" then
+    marks[mark_name] = #ctx.input
+    return json.null
+  elseif name == "mark_entry_start" or name == "mark_entry_end" then
+    local one = ctx.registers.entry_match
+    if one ~= nil then
+      marks[mark_name] = name == "mark_entry_start" and one.byte_start or one.byte_end
+    end
+    return json.null
+  elseif name == "mark_match_start" or name == "mark_match_end" then
+    local one = ctx.registers.local_match
+    if one ~= nil then
+      marks[mark_name] = name == "mark_match_start" and one.byte_start or one.byte_end
+    end
+    return json.null
+  elseif name == "mark_exists" then
+    return marks[mark_name] ~= nil and 1 or 0
+  end
+
+  local byte_offset = marks[mark_name]
+  if byte_offset == nil then return json.null end
+  if name == "mark_pos" then
+    return matching.byte_offset_to_char_offset(ctx.input, byte_offset)
+  end
+  local position = matching.line_column_at_byte_offset(ctx.input, byte_offset)
+  return name == "mark_line" and position.line or position.column
 end
 
 local function boundary_rule_name(engine, arg, ctx, accumulator, edge_state)
@@ -1747,6 +1810,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, edge_state, name, nil)
   elseif scalar_numeric.supports(name) then
     return evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, nil)
+  elseif NAMED_MARK_HELPERS[name] then
+    return evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
   end
   if name == "return" then
     local value = json.null

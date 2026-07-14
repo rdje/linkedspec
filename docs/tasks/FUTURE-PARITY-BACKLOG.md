@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-14` (Julia `.17.3` consumes the exact seven-helper contract through native,
-  generated-plan, emitted-state, and CLI routes with complete backend/canonical proof; Lua `.17.4` is active).
+- Last updated: `2026-07-14` (Lua `.17.4` consumes the exact seven-helper contract through native and serialized
+  routes at 119/119 on both ABIs while shared coverage stays 239 names; final admission `.17.5` is active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3453,17 +3453,24 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.17.3 - align Julia complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.4`
-  Status: `active`
+  Status: `done`
   Goal: Align Lua complete named-mark execution and inventory without a backend-only dialect.
   Dependencies: `.17.1`, `.17.2`, `.17.3`, `LUA-BACKEND-PARITY.4.3.7.2`
   Acceptance: Lua consumes the unchanged neutral contract on PUC Lua and LuaJIT through its rule-local named-mark
     frame and Unicode projection seam; the seven calls join the shared inventory only with all established
     backends aligned, and `LUA-BACKEND-PARITY.4.3.7.3` consumes rather than duplicates the implementation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-14.** Lua resolves exactly the seven staged calls through a parse-scoped
+    rule-label/mark-name/UTF-8-byte-offset store, existing entry/local match registers, and Unicode public
+    projections. Bare names remain symbolic, clear is rule-local, and a same-name child mark cannot replace its
+    parent's checkpoint. Native and serialized `SpecFile` reconstruction return the unchanged neutral value.
+    `bash tools/run_lua_local.sh` passes 119/119 on separately built PUC Lua and LuaJIT adapters plus syntax,
+    CLI-scaffold, and exact 105-fixture manifest checks. The legacy shared inventory remains exactly 239 names.
+    Canonical CI passes capability 64/0/0, shared coverage 239/105, CLI 61/61 twice, and Phase 0 `1..1031` in
+    627 seconds; doctrine, Knowledge Map, mdBook, and whitespace checks also pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.5`
-  Status: `pending`
+  Status: `active`
   Goal: Admit complete named-mark inventory and close the symmetric-omission gate weakness.
   Dependencies: `.17.1`, `.17.2`, `.17.3`, `.17.4`
   Acceptance: Coverage derives or checks the complete public-current contract set independently of corpus seeding;
@@ -4114,6 +4121,25 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 - [x] **LOCKSTEP** — Source, test, capability README, task/index/roadmap/live docs, mdBook, Knowledge Map, and
   governance agree; Lua `.17.4` is the next backend consumer after the prepared commit and clean pivot.
 
+### `FUTURE-PARITY-BACKLOG.17.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The unchanged Unicode parent/child fixture proves Lua had no runtime named-mark
+  bucket or dispatch for the four entry/local writers, two location readers, and explicit clear, even though its
+  match registers and byte/character projection seams were already sufficient.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` routed no governed named-mark helpers and execution context
+  owned no rule-label mark store; `action_call_names.lua` also lacked the seven staged names. Directly changing the
+  legacy shared 239-name set would prematurely perform `.17.5` admission.
+- [x] **FIX** — Add one parse-scoped rule-label/name/byte-offset store; route the exact seven calls through existing
+  match snapshots and Unicode projections; preserve symbolic bare names; and expose a disjoint staged known-call
+  set without changing the shared count.
+- [x] **ADDRESSED (verified)** — Native and serialized `SpecFile` reconstruction return the exact neutral value,
+  including same-name child/parent isolation, missing undef, clear/existence, and 1-based character locations.
+- [x] **NO REGRESSION** — The complete Lua gate passes 119/119 on PUC Lua and LuaJIT plus syntax, CLI scaffold,
+  and all 105 manifest checks; canonical CI passes capability 64/0/0, shared coverage 239/105, CLI 61x2, Phase 0
+  `1..1031` in 627 seconds, and every doctrine/documentation gate.
+- [x] **LOCKSTEP** — Source, focused tests, capability README, task/index/roadmap/live docs, mdBook, and Knowledge
+  Map agree; `.17.5` is the next clean-pivot admission/hardening leaf and Lua `.4.3.7.3` consumes this foundation.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -4301,7 +4327,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 164 | `FUTURE-PARITY-BACKLOG.17.1` | `done` | Seven-helper Unicode/rule-local contract and Perl/Rust live/generated execution are exact. |
 | 165 | `FUTURE-PARITY-BACKLOG.17.2` | `done` | Dart consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
 | 166 | `FUTURE-PARITY-BACKLOG.17.3` | `done` | Julia consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
-| 167 | `FUTURE-PARITY-BACKLOG.17.4` | `active` | Make Lua consume the unchanged complete named-mark contract on both ABIs without a backend-only dialect. |
+| 167 | `FUTURE-PARITY-BACKLOG.17.4` | `done` | Lua consumes the unchanged native/serialized contract at 119/119 on both ABIs without changing the shared inventory. |
+| 168 | `FUTURE-PARITY-BACKLOG.17.5` | `active` | Admit the exact seven names once and close symmetric public-current omission hardening. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4943,6 +4970,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.4` | Exact staged 7-name set/family resolution; native/serialized `SpecFile` contract; complete PUC Lua 119/LuaJIT 119/syntax/CLI scaffold/corpus manifest 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/627s; docs/KM/doctrines/book/whitespace. | PASS. One rule-label/mark-name/byte-offset store serves all seven calls, public positions remain character-based, parent/child names stay isolated, and `.17.5` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.3` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; focused 13; complete Julia 1,414 package/shared CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/614s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state serves all seven calls, absent values remain undef, the shared inventory remains honest, and Lua `.17.4` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.2` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; format; fatal analysis; focused 68; complete Dart 214 package/CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/1,061s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state now serves all seven calls, absent positions remain undef, the shared inventory remains honest, and Julia `.17.3` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.1` | Neutral 7-helper/3-mutation contract; Perl live/standalone generated; Rust native/serialized/emitted/generated plus 188 core/137 runtime/105 oracle/105 generated/197 integration; capability 64/0/0; CLI 61x2; Phase 0 `1..1031`/983s; docs/KM/governance/book/whitespace. | PASS. Perl/Rust consume one Unicode/rule-local result; generated Perl trace ownership and Rust mark scope/absent reads are corrected; Dart `.17.2` activates. |

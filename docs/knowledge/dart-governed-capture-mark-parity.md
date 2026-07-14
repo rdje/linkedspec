@@ -35,9 +35,9 @@ are 1-based Unicode-character locations. Native execution, generated-plan execut
 reconstruction, and the primary CLI return the exact neutral parent/child fixture.
 
 The seven names live in `completeNamedMarkActionIrCallNames` and participate in Dart's known-call boundary, but
-remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Julia subsequently
-consumes the unchanged contract under `.17.3`; Lua must follow before `.17.5` admits all seven into the shared
-inventory and hardens the checker against another symmetric omission.
+remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Julia `.17.3` and Lua
+`.17.4` subsequently consume the unchanged contract; `.17.5` admits all seven into the shared inventory and
+hardens the checker against another symmetric omission.
 
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that

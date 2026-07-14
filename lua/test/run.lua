@@ -741,6 +741,29 @@ test("source validator locks all 239 helper and control names", function()
   assert_equal(action_names.is_known("not_a_helper"), false, "unknown name")
 end)
 
+test("complete named marks stage exactly seven names outside the shared inventory", function()
+  local action_names = require("linkedspec.action_call_names")
+  local contract = json.decode(read_file("capability_conformance/complete_named_mark_contract.json"))
+  local staged = action_names.complete_named_mark_names()
+  local count = 0
+  for _, helper in ipairs(contract.helpers) do
+    count = count + 1
+    assert_equal(staged[helper.name], true, helper.name .. " staged")
+    assert_equal(action_names.is_known(helper.name), true, helper.name .. " known")
+    assert_equal(action_names.is_shared_inventory_name(helper.name), false, helper.name .. " not yet shared")
+    local resolution = linkedspec.resolve_action_expression_contracts(
+      linkedspec.parse_action_expression(helper.name .. "(probe)")
+    )
+    assert_equal(resolution.ok, true, helper.name .. " contract")
+    assert_equal(resolution.contracts[1].family, "capture_mark", helper.name .. " family")
+  end
+  local staged_count = 0
+  for _ in pairs(staged) do staged_count = staged_count + 1 end
+  assert_equal(count, 7, "contract helper count")
+  assert_equal(staged_count, 7, "staged helper count")
+  assert_equal(action_names.count(), 239, "shared inventory remains unchanged")
+end)
+
 test("source validator checks function registry records", function()
   assert_equal(linkedspec.validate_spec(spec_with_functions({ validation_function("normalize", { "value" }) })), nil)
   assert_validation_error(function()
@@ -2517,6 +2540,33 @@ EmptyBoundary:AND
   assert_equal(unusable.missing, json.null, "unresolved and regex-free boundaries are neutral")
   assert_equal(unusable.after, 4, "unusable boundaries preserve cursor")
   assert_equal(unusable.rest, "tail", "unusable boundaries preserve remainder")
+end)
+
+test("runtime complete named marks match the neutral Unicode rule-local contract", function()
+  local contract = json.decode(read_file("capability_conformance/complete_named_mark_contract.json"))
+  assert_equal(contract.contract_id, "linkedspec-complete-named-mark-v1", "named-mark contract id")
+  local parsed = linkedspec.parse_spec(contract.fixture.spec_source)
+  local compiled = linkedspec.compile_spec(parsed)
+  local result = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), contract.fixture.input)
+  assert_equal(
+    json.encode(result.value),
+    json.encode(contract.fixture.expected),
+    "complete named-mark fixture"
+  )
+
+  local serialized = json.encode(linkedspec.spec_ast.to_json(parsed))
+  local reconstructed = linkedspec.compile_spec(
+    linkedspec.spec_ast.from_json("SpecFile", json.decode(serialized))
+  )
+  local reconstructed_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(reconstructed),
+    contract.fixture.input
+  )
+  assert_equal(
+    json.encode(reconstructed_result.value),
+    json.encode(contract.fixture.expected),
+    "serialized named-mark fixture"
+  )
 end)
 
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()

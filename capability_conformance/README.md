@@ -74,9 +74,12 @@ standalone generated execution. Rust consumes it through
 native, serialized, emitted-plan, and generated execution. Dart consumes the same artifact through
 `cd dart && dart test test/complete_named_mark_contract_test.dart`, including native, generated-plan,
 emitted-state reconstruction, and primary-CLI execution. Its seven names are staged separately from the legacy
-shared 239-name inventory until Julia and Lua align. Julia now consumes the same artifact through
-`LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh` plus its focused exact contract;
-Lua and final independent inventory admission remain owned by `FUTURE-PARITY-BACKLOG.17.4-.17.5`.
+shared 239-name inventory until final admission. Julia now consumes the same artifact through
+`LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh` plus its focused exact contract. Lua
+consumes it through `bash tools/run_lua_local.sh`, including native and serialized `SpecFile` reconstruction on
+PUC Lua and LuaJIT. All five backends therefore resolve the seven helpers, but Dart/Julia/Lua keep their exact
+staged sets outside the legacy shared inventory until final independent admission and omission hardening under
+`FUTURE-PARITY-BACKLOG.17.5`.
 
 `punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare

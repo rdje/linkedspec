@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-14 — FUTURE-PARITY-BACKLOG.17.4 — align Lua complete named marks
+
+Lua now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. One parse-scoped
+rule-label bucket stores named marks as zero-based UTF-8 byte offsets; the four entry/local writers read the
+existing match registers, `mark_line` and `mark_col` reuse the Unicode projection seam, `clear_mark` deletes only
+from the current rule bucket, and bare mark identifiers remain symbolic. The unchanged parent/child fixture proves
+that a child's identically named checkpoint cannot overwrite the parent's value. Its already-governed
+`mark_input_end`, `mark_pos`, and `mark_exists` bridge calls now execute through that same store so the exact
+fixture can observe write, read, clear, and isolation behavior without a test-only path.
+
+The exact seven names participate in Lua's known-call and capture/mark contract boundaries through a separate
+staged set. The legacy shared Dart/Julia/Lua inventory remains exactly 239 names until `.17.5` performs one
+cross-backend admission and adds an independent public-current omission guard.
+
+One focused contract test locks the staged inventory, unchanged shared count, exact helper-family resolution, and
+the neutral value through native execution plus serialized `SpecFile` reconstruction. The complete Lua gate
+passes 119/119 on separately built PUC Lua and LuaJIT adapters plus syntax, CLI-scaffold, and exact 105-fixture
+manifest checks. Lua `.4.3.7.3` now consumes this implementation for the remaining named writers, spans, and
+anonymous/named bridges instead of creating another mark store. Canonical CI passes capability 64/0/0, unchanged
+shared coverage 239/105, CLI 61/61 twice, and Phase 0 `1..1031` in 627 seconds; doctrines, Knowledge Map, mdBook,
+and whitespace checks also pass.
+
 ## 2026-07-14 — FUTURE-PARITY-BACKLOG.17.3 — align Julia complete named marks
 
 Julia now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. The runtime writes

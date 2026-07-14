@@ -74,7 +74,8 @@ This `README.md` is the **single entry point** to the project.
   own root kind, and raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent and
   advances capture/mark/input/cursor helpers `.4.3.7`. Audit `.4.3.7.0` splits those mechanisms and finds seven
   documented current mark helpers outside every governed backend inventory; `FUTURE-PARITY-BACKLOG.17` owns the
-  neutral/five-backend correction and independent gate hardening before Lua named-mark closure. ADR `0033` and
+  neutral/five-backend correction and independent gate hardening. Lua `.17.4` now consumes the exact contract on
+  PUC Lua and LuaJIT at 119/119; final shared admission remains `.17.5`. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -292,8 +293,10 @@ Top-level project docs:
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.
 - Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
   its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
-  live plus generated execution; Dart, Julia, Lua, and final inventory admission remain under
-  `FUTURE-PARITY-BACKLOG.17.2-.17.5`.
+  live plus generated execution; Dart and Julia consume it through native/generated/CLI routes; and Lua consumes
+  it through native plus serialized `SpecFile` reconstruction on PUC Lua and LuaJIT. The seven names remain staged
+  outside the legacy shared 239-name inventory until final admission and independent omission hardening in
+  `FUTURE-PARITY-BACKLOG.17.5`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
