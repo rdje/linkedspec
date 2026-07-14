@@ -7,7 +7,8 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs;
-  complete named-mark Perl/Rust `.17.1` is done, and Dart/Julia `.17.2-.17.3` precede Lua `.17.4`/`.4.3.7.3`)
+  complete named-mark Perl/Rust `.17.1` and Dart `.17.2` are done, and active Julia `.17.3` precedes Lua
+  `.17.4`/`.4.3.7.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1901,8 +1902,9 @@ chains and named mutation/direct assignment close all 13 ordinary harray names a
 Codeblock/control/tree-callback parent `.4.3.6` closes at 114/114 with later function/callable obligations routed
 explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls
 `.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs. Complete
-named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` and
-Julia `.17.3` are the dependency frontier before Lua consumes `.17.4` in `.4.3.7.3`.
+named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` also
+matches it through native/generated/CLI routes with complete backend and canonical proof. Julia `.17.3` is the
+active dependency frontier before Lua consumes `.17.4` in `.4.3.7.3`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |

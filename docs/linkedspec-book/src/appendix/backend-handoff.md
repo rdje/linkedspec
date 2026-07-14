@@ -716,9 +716,11 @@ consume-mode matching observes the synchronized rewound cursor. Anonymous captur
 location, and advancing reads over the same byte-safe registers, with character-unit results, valid-only mutation,
 and a void setter. Independent earliest-boundary `.4.3.7.5` then adds cached compiled-rule seek, earliest
 selection, non-consumption, EOF fallback, and unresolved/regex-free no-op behavior. PUC Lua and LuaJIT pass
-117/117. Named-mark `.17.1` now adopts the exact seven-helper contract and aligns Perl live/generated plus Rust
-native/serialized/emitted/generated execution; Dart `.17.2`, Julia `.17.3`, and Lua `.17.4` precede final
-admission `.17.5` and Lua's `.4.3.7.3` consumer. General user-function final
+117/117. Named-mark `.17.1` adopts the exact seven-helper contract and aligns Perl live/generated plus Rust
+native/serialized/emitted/generated execution; Dart `.17.2` now consumes the same fixture through native,
+generated-plan, emitted-state, and primary-CLI routes, with a staged exact seven-name set and complete 214-test,
+61x2-CLI, 105-corpus proof. Julia `.17.3` and Lua `.17.4` precede final admission `.17.5` and Lua's `.4.3.7.3`
+consumer. General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

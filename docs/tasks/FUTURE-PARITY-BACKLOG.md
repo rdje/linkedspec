@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (complete named-mark `.17.1` adopts the exact seven-helper contract and aligns
-  Perl/Rust live plus generated execution; Dart `.17.2` is active).
+- Last updated: `2026-07-13` (Dart `.17.2` consumes the exact seven-helper contract through native,
+  generated-plan, emitted-state, and CLI routes and is fully verified; Julia `.17.3` is active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3423,18 +3423,24 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.2`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart complete named-mark execution and inventory.
   Dependencies: `.17.1`
   Acceptance: Dart consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
     preserves code-unit storage with character-based public values, and adds exactly the seven current names.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** The exact staged seven-name inventory is
+    exported and folded into Dart's known-call/capture-mark boundaries while remaining disjoint from the legacy
+    shared 239-name set. Native, generated-plan, emitted-state reconstruction, and primary-CLI execution return
+    the unchanged Unicode parent/child value. Format and fatal analysis pass; the focused compatibility set passes
+    68 tests, and the complete Dart gate passes all 214 package tests, CLI 61/61 twice, and corpus 105/105. The
+    canonical repository gate passes capability 64/0/0, the unchanged shared 239-name/105-fixture coverage check,
+    CLI 61/61 twice, and Phase 0 `1..1031` in 1,061 seconds; docs/KM/governance/book/whitespace also pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align Julia complete named-mark execution and inventory.
-  Dependencies: `.17.1`
+  Dependencies: `.17.2`
   Acceptance: Julia consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
     preserves code-unit storage with character-based public values, and adds exactly the seven current names.
   Verification: `pending`
@@ -4062,6 +4068,26 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 - [x] **LOCKSTEP** — The exact contract, CI wiring, public helper reference/example, task/index/roadmap/live state,
   Knowledge Map evidence, and backend handoff agree; Dart `.17.2` is the next backend consumer after commit.
 
+### `FUTURE-PARITY-BACKLOG.17.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The neutral fixture proves Dart's existing rule-local/code-unit mark store lacks the
+  four entry/local writers, two location readers, and clear dispatch, while absent `mark_pos` incorrectly becomes
+  public character position zero.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The runtime dispatch and capture/mark contract set omit all seven calls; the
+  existing store and Unicode projection seams are otherwise correct. Direct admission to the legacy shared
+  239-name set would also make the exact Dart/Julia/Lua inventory comparison fail before Julia/Lua alignment.
+- [x] **FIX** — Route all seven calls through the current rule bucket and match registers, preserve code-unit
+  storage plus character public values, return undef for missing positions/locations, and expose a separate exact
+  staged inventory folded into Dart's known-call boundary.
+- [x] **ADDRESSED (verified)** — One contract test returns the unchanged exact value through native execution,
+  generated-plan execution, emitted-state reconstruction, and the primary CLI; it also locks exactly seven staged
+  names and their deliberate disjointness from the legacy shared inventory.
+- [x] **NO REGRESSION** — Focused format/analyze/68 and complete 214-package/CLI-61x2/corpus-105 gates pass; the
+  canonical repository gate passes capability 64/0/0, shared inventory 239/105, CLI 61x2, and Phase 0 `1..1031`
+  in 1,061 seconds.
+- [x] **LOCKSTEP** — Source, test, capability README, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+  governance agree; Julia `.17.3` is the next backend consumer after the prepared commit and clean pivot.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -4247,7 +4273,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 162 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls pass 116/116 over one byte-safe state seam. |
 | 163 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Earliest usable boundary lookahead passes 117/117 without consuming the boundary. |
 | 164 | `FUTURE-PARITY-BACKLOG.17.1` | `done` | Seven-helper Unicode/rule-local contract and Perl/Rust live/generated execution are exact. |
-| 165 | `FUTURE-PARITY-BACKLOG.17.2` | `active` | Make Dart consume the unchanged complete named-mark contract and add exactly seven inventory names. |
+| 165 | `FUTURE-PARITY-BACKLOG.17.2` | `done` | Dart consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
+| 166 | `FUTURE-PARITY-BACKLOG.17.3` | `active` | Make Julia consume the unchanged complete named-mark contract and stage exactly seven names. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4889,6 +4916,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.2` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; format; fatal analysis; focused 68; complete Dart 214 package/CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/1,061s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state now serves all seven calls, absent positions remain undef, the shared inventory remains honest, and Julia `.17.3` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.1` | Neutral 7-helper/3-mutation contract; Perl live/standalone generated; Rust native/serialized/emitted/generated plus 188 core/137 runtime/105 oracle/105 generated/197 integration; capability 64/0/0; CLI 61x2; Phase 0 `1..1031`/983s; docs/KM/governance/book/whitespace. | PASS. Perl/Rust consume one Unicode/rule-local result; generated Perl trace ownership and Rust mark scope/absent reads are corrected; Dart `.17.2` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.0` | Exact 131-Perl/239-backend identifier comparison; 16-name semantic classification; still-green 239-name/105-fixture report; docs/KM/memory/task/doctrine/mdBook/whitespace. | PASS. Seven public current marks have neutral/backend/admission owners; no behavior/inventory changed; Lua `.4.3.7.1` resumes. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.7` | Neutral 6/4/6 contract; Perl 7; Rust 5; Dart 5; Julia 55; PUC Lua 109/LuaJIT 109; capability and generated checker 64/0/0; public/condition/generated-owner scans; docs/KM/governance/mdBook/whitespace. | PASS. Punctuation-light `.16` is admitted and closed; generated Lua stays `.8`; clean pivot returns to Lua `.4.3.6.4`. |
@@ -5008,6 +5036,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.17.2` | `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks` | Dart rule-local seven-helper execution, staged inventory, exact native/generated/emitted/CLI fixture, and complete backend/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.1` | `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks` | Exact seven-helper contract; Perl generated trace repair; Rust rule-local marks and seven helpers; Unicode live/generated proof. |
 | `FUTURE-PARITY-BACKLOG.17.0` | `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity` | Sixteen-name classification, exact seven-helper neutral/backend/admission owners, and clean Lua input/cursor return. |
 | `FUTURE-PARITY-BACKLOG.16.7` | `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases` | Capability 64/0/0, selected public examples, composed five-backend/two-Lua-ABI recurring proof, and parent `.16` closeout. |
@@ -5127,6 +5156,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.17.2` makes Dart consume the unchanged seven-helper complete named-mark artifact through its
+  existing rule-local code-unit store. Entry/local writers read the established match registers; line/column
+  projections remain Unicode-character based; clear affects only the current rule; and absent `mark_pos` now
+  returns undef. The exact seven names are staged separately but folded into Dart's known-call boundary so the
+  legacy shared 239-name comparison stays honest until Julia/Lua alignment and `.17.5` admission. Native,
+  generated-plan, emitted-state, and CLI results agree; strict analysis, focused 68, package 214, CLI 61x2, and
+  corpus 105/105 pass. Canonical CI also passes capability 64/0/0, shared coverage 239/105, CLI 61x2, and Phase 0
+  `1..1031` in 1,061 seconds; Julia `.17.3` becomes active after the prepared commit and clean pivot.
 - `2026-07-13`: `.17.1` adopts the exact seven-helper complete named-mark contract. One unchanged multibyte
   parent/child fixture proves entry/local edges, character positions, 1-based locations, missing undef,
   clear/existence, symbolic names, and rule-label isolation. Perl live/standalone-generated and Rust

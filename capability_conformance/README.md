@@ -71,8 +71,11 @@ fixture rendering, and three drift mutations with `python3 tools/check_complete_
 consumes the unchanged fixture through `prove -Iperl t/complete_named_mark_contract.t`, including live and
 standalone generated execution. Rust consumes it through
 `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract`, including
-native, serialized, emitted-plan, and generated execution. Dart, Julia, Lua, and final independent inventory
-admission remain owned by `FUTURE-PARITY-BACKLOG.17.2-.17.5`.
+native, serialized, emitted-plan, and generated execution. Dart consumes the same artifact through
+`cd dart && dart test test/complete_named_mark_contract_test.dart`, including native, generated-plan,
+emitted-state reconstruction, and primary-CLI execution. Its seven names are staged separately from the legacy
+shared 239-name inventory until Julia and Lua align; Julia, Lua, and final independent inventory admission remain
+owned by `FUTURE-PARITY-BACKLOG.17.3-.17.5`.
 
 `punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare

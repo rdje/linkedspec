@@ -3160,10 +3160,17 @@ final class LinkedSpecRuntimeEngine {
       case 'mark_here':
       case 'mark_input_start':
       case 'mark_input_end':
+      case 'mark_entry_start':
+      case 'mark_entry_end':
+      case 'mark_match_start':
+      case 'mark_match_end':
       case 'mark_copy':
       case 'mark_capture_slice':
       case 'mark_exists':
       case 'mark_pos':
+      case 'mark_line':
+      case 'mark_col':
+      case 'clear_mark':
       case 'capture_from':
       case 'capture_len_from':
       case 'capture_until_cursor_from':
@@ -4519,6 +4526,34 @@ final class LinkedSpecRuntimeEngine {
           marks[name] = inputEnd;
         }
         return null;
+      case 'mark_entry_start':
+        final name = markName(0);
+        final offset = context.registers.entryMatch?.codeUnitStart;
+        if (name != null && offset != null) {
+          marks[name] = offset;
+        }
+        return null;
+      case 'mark_entry_end':
+        final name = markName(0);
+        final offset = context.registers.entryMatch?.codeUnitEnd;
+        if (name != null && offset != null) {
+          marks[name] = offset;
+        }
+        return null;
+      case 'mark_match_start':
+        final name = markName(0);
+        final offset = context.registers.localMatch?.codeUnitStart;
+        if (name != null && offset != null) {
+          marks[name] = offset;
+        }
+        return null;
+      case 'mark_match_end':
+        final name = markName(0);
+        final offset = context.registers.localMatch?.codeUnitEnd;
+        if (name != null && offset != null) {
+          marks[name] = offset;
+        }
+        return null;
       case 'mark_copy':
         final target = markName(0);
         final source = markName(1);
@@ -4543,7 +4578,27 @@ final class LinkedSpecRuntimeEngine {
       case 'mark_pos':
         final name = markName(0);
         final offset = name == null ? null : marks[name];
-        return codeUnitOffsetToCharOffset(context.input, offset ?? 0);
+        return offset == null
+            ? null
+            : codeUnitOffsetToCharOffset(context.input, offset);
+      case 'mark_line':
+        final name = markName(0);
+        final offset = name == null ? null : marks[name];
+        return offset == null
+            ? null
+            : lineColumnAtCodeUnitOffset(context.input, offset).line;
+      case 'mark_col':
+        final name = markName(0);
+        final offset = name == null ? null : marks[name];
+        return offset == null
+            ? null
+            : lineColumnAtCodeUnitOffset(context.input, offset).column;
+      case 'clear_mark':
+        final name = markName(0);
+        if (name != null) {
+          marks.remove(name);
+        }
+        return null;
       case 'capture_from':
       case 'capture_len_from':
       case 'capture_until_cursor_from':

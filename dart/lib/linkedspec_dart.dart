@@ -47,6 +47,7 @@ export 'src/action/action_contracts.dart'
         ActionContractResolution,
         ActionResolvedContract,
         canonicalActionHelperName,
+        completeNamedMarkActionIrCallNames,
         isKnownActionIrCallName,
         knownActionIrCallNames,
         resolveActionBlockContracts,

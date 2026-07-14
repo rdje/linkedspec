@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Dart consumes the complete seven-helper named-mark contract over its existing rule-local
+  code-unit store. Entry/local writers use the established match registers; line/column values reuse the Unicode
+  projection seam; clear is rule-local; and absent `mark_pos` now remains undef instead of becoming position zero.
+  Native, generated-plan, emitted-state reconstruction, and primary-CLI execution agree with the Perl/Rust exact
+  fixture. The seven names are staged in `completeNamedMarkActionIrCallNames`, folded into Dart's known-call
+  boundary but kept outside the legacy shared 239-name set until Julia/Lua align and `.17.5` admits them once.
 - `2026-07-13` refresh: Complete named marks now have one exact seven-helper neutral contract. Its multibyte
   parent/child fixture distinguishes entry/local edges, character positions, 1-based line/column values, missing
   undef, clear/existence, symbolic bare names, and rule-label isolation. Perl consumes it live and from standalone
   generated source; the generated preamble now delegates optional mark tracing through `GeneratedSource` instead
   of referencing a compiler-private callback. Rust stores marks as rule-label/name/byte-offset buckets, converts
   only public projections to characters, and returns undef rather than zero for absent `mark_pos`; native,
-  serialized, emitted-plan, and generated execution agree. `.17.2-.17.5` retain Dart/Julia/Lua/admission work.
+  serialized, emitted-plan, and generated execution agree. `.17.2` subsequently aligns Dart; `.17.3-.17.5`
+  retain Julia/Lua/admission work.
 - `2026-07-13` refresh: Lua input/live-cursor `.4.3.7.1` keeps one zero-based UTF-8 byte cursor internally and
   converts only at the DSL boundary for character-unit positions, lengths, slices, lines, and columns. One
   synchronized mutation seam preserves entry/local match snapshots while updating both live and register cursor.

@@ -10,20 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.17.1` — align Perl/Rust complete named marks.
-- latest_commit: `bb4fa9ee` — `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`.
-- active_work_unit: `.17.1` is fully implemented and verified; its exact seven-helper contract aligns Perl
-  live/generated and Rust native/serialized/emitted-plan/generated execution and awaits only the prepared commit.
-- next_action: commit `.17.1`, clear the brief, verify clean, then activate and implement Dart named marks `.17.2`.
-- current_proof: The unchanged `é\nAβ\nZ` fixture proves entry/local edge writers, character positions, 1-based
-  line/column reads, absent undef, clear/existence, symbolic bare names, and same-name parent/child isolation. The
-  neutral checker passes 7 helpers plus 3 rejection mutations; Perl live/standalone-generated and the focused Rust
-  contract pass. The complete Rust core/runtime package gate passes 188 core, 137 runtime, 105 oracle, 105
-  generated-corpus, 197 integration, and all focused suites. After a measured 19-string Phase-0 source-lock
-  migration, canonical CI passes capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
-- latest_bootstrap_read: 2026-07-13 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
-  complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.17.2` — align Dart complete named marks.
+- latest_commit: `6708485c` — `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks`.
+- active_work_unit: `.17.2` is fully implemented, synchronized, and verified; it awaits only the prepared commit,
+  brief cleanup, and clean-tree check. Julia complete named marks `.17.3` is the recorded next frontier.
+- next_action: commit `.17.2`, clear `git_message_brief.txt`, verify a clean tree, then inspect Julia `.17.3` from
+  its existing rule-local/code-unit mark seam before any implementation change.
+- current_proof: The unchanged `é\nAβ\nZ` fixture passes Dart native, generated-plan, emitted-state reconstruction,
+  and primary-CLI execution. All seven calls use the existing rule-local code-unit store with character public
+  positions/locations; absent `mark_pos` stays undef. Exact staged inventory, strict analysis, focused 68, all 214
+  package tests, CLI 61/61 twice, and corpus 105/105 pass. Canonical CI passes capability 64/0/0, unchanged shared
+  coverage 239/105, CLI 61/61 twice, and Phase 0 `1..1031` in 1,061 seconds.
+- latest_bootstrap_read: 2026-07-13 — README, roadmap, full codebase, mdBook, memory architecture, task-tree,
+  decisions, Knowledge Map, and relevant Dart capture/mark/runtime/inventory surfaces read and understood.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 20-minute timeout.
@@ -31,5 +31,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: fully verified `.17.1` source/tests/docs await the prepared commit only;
+- blockers: none. in_flight_uncommitted: fully verified `.17.2` source/test/docs/KM await the prepared commit only;
   do not pivot before it lands and the tree is clean. Oracle timeout calibration remains future backlog `.7.0`.

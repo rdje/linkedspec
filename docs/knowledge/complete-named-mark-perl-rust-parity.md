@@ -35,11 +35,12 @@ The contract exposed two implementation mechanisms that older fixtures did not c
   `LinkedSpec::GeneratedSource::trace_mark_event`; trace arguments also use the cursor when no local match exists,
   so preamble mark writes do not evaluate an undefined left edge.
 
-Dart, Julia, and Lua remain under `.17.2-.17.4`; `.17.5` owns final shared-inventory admission and the independent
-symmetric-omission guard.
+Dart subsequently consumes the same artifact under `.17.2`; Julia and Lua remain under `.17.3-.17.4`. `.17.5`
+owns final shared-inventory admission and the independent symmetric-omission guard.
 
 ## Links
 
 - Owner: [[FUTURE-PARITY-BACKLOG]] `.17.1`.
 - Originating gap: [[complete-current-mark-inventory-gap]].
+- Dart continuation: [[dart-governed-capture-mark-parity]].
 - Family taxonomy: [[spec-capture-mark-family-taxonomy]].

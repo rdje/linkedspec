@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.2` — stage backend rollout names without weakening the shared gate):
+  Dart already had the correct hard part: marks were stored as `rule label -> name -> code-unit offset`, with
+  character projection at the public boundary. The seven-helper implementation therefore belongs in that seam,
+  not in a second mark store: entry/local writers read the existing match registers, location readers reuse
+  `lineColumnAtCodeUnitOffset`, and clear removes from the current rule bucket. The fixture also corrected the
+  prior absent-`mark_pos` fallback from character position zero to `undef`. Inventory rollout needs different
+  discipline. Adding the seven names directly to Dart's legacy `supportedActionIrCallNames` would break the
+  intentionally exact 239-name Dart/Julia/Lua comparison before the other two backends implement the behavior.
+  `completeNamedMarkActionIrCallNames` is therefore a public staged set folded into Dart's known-call boundary but
+  kept disjoint from the legacy shared set; `.17.5` remains the single admission point after Julia/Lua alignment.
+  Native, generated-plan, emitted-state reconstruction, and primary-CLI routes return the unchanged neutral value.
+  Strict analysis, 68 focused compatibility tests, all 214 package tests, CLI 61x2, and corpus 105/105 pass.
+  Canonical CI additionally proves capability 64/0/0, unchanged shared coverage 239/105, CLI 61x2, and Phase 0
+  `1..1031` in 1,061 seconds. Julia `.17.3` is the next clean-pivot consumer.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.1` — mark scope and generated ownership must be tested together): The
   seven omitted helpers looked like dispatcher additions, but the unchanged parent/child fixture exposed three
   deeper seams. (1) A named checkpoint is keyed by both rule label and mark name. Rust's former global name map

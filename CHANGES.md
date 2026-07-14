@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.2 — align Dart complete named marks
+
+Dart now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. The runtime writes
+entry/local start and end marks from its existing match registers, projects `mark_line` and `mark_col` from the
+rule-local code-unit store as 1-based Unicode-character locations, deletes only the current rule's mark through
+`clear_mark`, and returns `undef` rather than character position zero for an absent `mark_pos`.
+
+The seven calls are exported as `completeNamedMarkActionIrCallNames` and participate in Dart's known-call and
+capture/mark contract boundaries. They deliberately remain separate from the legacy shared 239-name inventory:
+Julia and Lua consume the unchanged artifact in `.17.3-.17.4`, then `.17.5` performs one shared admission and
+adds the independent symmetric-omission guard.
+
+One contract test locks the exact staged inventory and unchanged result through native execution, generated-plan
+execution, emitted-state reconstruction, and the primary CLI. Focused analysis and 68 compatibility tests pass;
+the complete Dart gate passes strict formatting/analysis, all 214 package tests, 61/61 CLI cases in both option
+environments, and all 105 corpus fixtures. Canonical CI also passes capability 64/0/0, the unchanged shared
+239-name/105-fixture coverage check, CLI 61/61 twice, and Phase 0 `1..1031` in 1,061 seconds.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.1 — align Perl Rust complete named marks
 
 Adopted `linkedspec-complete-named-mark-v1`, an exact seven-helper contract for `mark_entry_start/end`,

@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.17.2 — align Dart complete named marks**
+  (DONE — exact seven-helper native/generated/emitted/CLI behavior passes; Julia `.17.3` next).
+
+  **Result:** Dart now routes the four entry/local mark writers, `mark_line`, `mark_col`, and `clear_mark` through
+  its existing rule-local code-unit store and Unicode projection seam; absent `mark_pos` remains undef rather than
+  becoming position zero. One exported staged seven-name set participates in known-call and capture/mark contract
+  resolution while remaining disjoint from the legacy shared 239-name inventory until Julia/Lua alignment and
+  `.17.5` admission. The unchanged neutral value passes native, generated-plan, emitted-state reconstruction, and
+  primary-CLI routes. Strict analysis, focused 68, all 214 package tests, Dart CLI 61/61 twice, and corpus 105/105
+  pass. Canonical CI passes capability 64/0/0, shared coverage 239 names/105 fixtures, CLI 61/61 twice, and Phase 0
+  `1..1031` in 1,061 seconds.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.17.1 — align Perl/Rust complete named marks**
   (DONE — exact seven-helper Unicode/rule-local contract passes live and generated paths; Dart `.17.2` next).
 
