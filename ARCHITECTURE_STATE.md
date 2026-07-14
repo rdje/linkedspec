@@ -4,7 +4,16 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-14`
+- Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Complete named-mark admission closes at one aligned 246-name Dart/Julia/Lua inventory.
+  The coverage gate no longer relies on corpus discovery for reverse completeness: it derives 131 identifier-
+  shaped Perl contracts, subtracts an exact classified set of nine compatibility/legacy/internal contracts, and
+  requires all 122 public contracts in every backend inventory. The 105 corpus fixtures remain the broad behavior
+  source and the exact named-mark fixture supplies the seven newly admitted calls. A simultaneous three-inventory
+  `clear_mark` deletion is caught by both the exact-family and independent-public checks. Exact backend family
+  views remain useful without being staging sets. Parent `.17` closes; Lua `.4.3.7.3` now extends the same admitted
+  mark store instead of defining another backend-local surface. Canonical CI passes capability 64/0/0, coverage
+  246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 633 seconds.
 - `2026-07-14` refresh: Lua consumes the unchanged complete seven-helper named-mark contract through a parse-
   scoped `rule label -> mark name -> UTF-8 byte offset` store. Entry/local writers use the existing match
   registers; line, column, and position reads project to Unicode characters only at the public boundary; clear

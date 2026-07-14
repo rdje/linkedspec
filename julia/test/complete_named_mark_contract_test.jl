@@ -26,7 +26,7 @@ end
     @test COMPLETE_NAMED_MARK_CONTRACT["contract_id"] ==
           "linkedspec-complete-named-mark-v1"
 
-    @testset "stages exactly seven complete named-mark inventory names" begin
+    @testset "admits exactly seven complete named-mark inventory names" begin
         names = Set{String}(
             String(helper["name"])
             for helper in COMPLETE_NAMED_MARK_CONTRACT["helpers"]
@@ -34,10 +34,10 @@ end
         @test COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES == names
         @test length(COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES) == 7
         @test all(is_known_action_ir_call_name, COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES)
-        @test isempty(intersect(
+        @test intersect(
             COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES,
             LinkedSpecJulia._SUPPORTED_ACTION_IR_CALL_NAMES,
-        ))
+        ) == names
     end
 
     @testset "matches native, generated-plan, and emitted-state routes" begin

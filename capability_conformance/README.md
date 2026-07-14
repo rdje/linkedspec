@@ -73,13 +73,14 @@ standalone generated execution. Rust consumes it through
 `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract`, including
 native, serialized, emitted-plan, and generated execution. Dart consumes the same artifact through
 `cd dart && dart test test/complete_named_mark_contract_test.dart`, including native, generated-plan,
-emitted-state reconstruction, and primary-CLI execution. Its seven names are staged separately from the legacy
-shared 239-name inventory until final admission. Julia now consumes the same artifact through
+emitted-state reconstruction, and primary-CLI execution. Its seven-name exact family view is retained after all
+seven names join the aligned 246-name shared inventory. Julia consumes the same artifact through
 `LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh` plus its focused exact contract. Lua
 consumes it through `bash tools/run_lua_local.sh`, including native and serialized `SpecFile` reconstruction on
-PUC Lua and LuaJIT. All five backends therefore resolve the seven helpers, but Dart/Julia/Lua keep their exact
-staged sets outside the legacy shared inventory until final independent admission and omission hardening under
-`FUTURE-PARITY-BACKLOG.17.5`.
+PUC Lua and LuaJIT. All five backends therefore resolve the seven helpers, and `.17.5` admits them into the shared
+inventory. `tools/check_language_capability_coverage.pl` now supplements the 105 corpus fixtures with this exact
+fixture, independently checks all 122 public identifier-shaped Perl contracts, and rejects nine explicitly
+classified compatibility, legacy, and internal names so a symmetric omission cannot remain invisible.
 
 `punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare

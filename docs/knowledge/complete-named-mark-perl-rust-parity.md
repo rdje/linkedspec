@@ -10,7 +10,7 @@ answers:
   - why did generated Perl named mark execution fail
   - how are named mark positions exposed over Unicode input
 date: 2026-07-13
-status: current-partial-rollout
+status: current
 tags: [actionir, capture, marks, perl, rust, generated-source, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.1 adds linkedspec-complete-named-mark-v1 and its exact Unicode parent/child fixture. Perl live/generated execution and Rust native/serialized/emitted-plan/generated execution return the same value. The fixture proves four entry/local writers, line/column reads, clear/existence, symbolic bare names, absent undef, and same-name parent/child isolation."
 reverify: "python3 tools/check_complete_named_mark_contract.py && prove -Iperl t/complete_named_mark_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract"
@@ -35,9 +35,9 @@ The contract exposed two implementation mechanisms that older fixtures did not c
   `LinkedSpec::GeneratedSource::trace_mark_event`; trace arguments also use the cursor when no local match exists,
   so preamble mark writes do not evaluate an undefined left edge.
 
-Dart and Julia subsequently consume the same artifact under `.17.2-.17.3`; Lua `.17.4` now consumes it on both
-ABIs through native and serialized execution. `.17.5` owns final shared-inventory admission and the independent
-symmetric-omission guard.
+Dart and Julia subsequently consume the same artifact under `.17.2-.17.3`; Lua `.17.4` consumes it on both ABIs
+through native and serialized execution. `.17.5` admits the seven into the aligned 246-name inventory and adds the
+independent 122-public-contract symmetric-omission guard.
 
 ## Links
 

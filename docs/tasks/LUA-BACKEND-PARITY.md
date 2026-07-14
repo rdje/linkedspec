@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-14` (complete named-mark rollout `.17.1-.17.4` is done across all five backends; Lua
-  passes the exact contract at 119/119 on both ABIs and `.4.3.7.3` is dependency-ready after `.17.5` admission)
+- Last updated: `2026-07-15` (complete named-mark rollout and `.17.5` admission are done at 246 shared names with
+  122 public Perl contracts independently checked; Lua `.4.3.7.3` is the active executable frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -44,7 +44,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   trace, native named/file loading, descriptors, and generated source implement the same contracts as the four
   admitted backends.
 - The runtime passes the complete checked-in 105-case interpreter manifest with exact expected JSON values and the
-  current 239-name non-legacy ActionIR surface checks.
+  current 246-name public ActionIR surface checks.
 - `linkedspec-lua` passes the same 61 primary CLI cases under default and POSIX option environments: identical
   options/meanings, zero positionals/subcommands, canonical output/error/trace bytes, and exit codes.
 - Generated Lua source implements contract v1: deterministic compiled-state-plus-identity emission, Unicode text
@@ -1666,9 +1666,9 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the governed current rule-local named marks, named spans, and anonymous/named bridges.
-  Dependencies: `.4.3.7.2`, `FUTURE-PARITY-BACKLOG.17.4`
+  Dependencies: `.4.3.7.2`, `FUTURE-PARITY-BACKLOG.17.5`
   Acceptance: Current/input-boundary/anonymous mark writers, copy/existence/position readers, match-start/live-
     cursor/end-of-input/two-mark stable and advancing spans, and both bridge directions match the governed
     reference; bare mark identifiers remain symbolic, mark state is isolated by rule label for the parser
@@ -1676,7 +1676,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     supplies the parse-scoped rule-label mark store plus `mark_entry_start/end`, `mark_match_start/end`,
     `mark_line`, `mark_col`, and `clear_mark`; this leaf extends that implementation for the remaining governed
     named writers, spans, and bridges rather than creating a Lua-only dialect or parallel mark frame. Final
-    shared-inventory admission `.17.5` precedes this leaf's complete-family parity claim.
+    shared-inventory admission `.17.5` is complete before this leaf's complete-family parity claim.
   Verification: `pending`
   Commit: `pending`
 
@@ -1736,7 +1736,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Goal: Close exhaustive Lua helper/value/control/method no-drift.
   Dependencies: `.4.3.1`-`.4.3.8`
   Acceptance: Every governed current name is execution-covered or has a later explicit non-helper owner; exact
-    239-name admission, mdBook examples, both runtime gates, statuses, API docs, task trees, Knowledge Map, and
+    246-name admission, mdBook examples, both runtime gates, statuses, API docs, task trees, Knowledge Map, and
     capability claims agree with zero hidden partial surface before `.4.4`.
   Verification: `pending`
   Commit: `pending`
@@ -1905,8 +1905,8 @@ explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115
 named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` and
 Julia `.17.3` match it through native/generated/CLI routes with complete backend and canonical proof. Lua `.17.4`
 now consumes the unchanged contract through native/serialized routes at 119/119 on both ABIs. Final admission
-`.17.5` is active; `.4.3.7.3` is then dependency-ready to extend that same store and dispatcher across the
-remaining governed named-span and bridge family.
+`.17.5` closes at 246 shared names with all 122 public Perl contracts independently checked; `.4.3.7.3` is active
+to extend that same store and dispatcher across the remaining governed named-span and bridge family.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1986,7 +1986,7 @@ remaining governed named-span and bridge family.
 | 74 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit save/restore/rewind controls pass 115/115 on both ABIs. |
 | 75 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls share byte-safe state and pass 116/116 on both ABIs. |
 | 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Non-consuming earliest usable boundary and EOF/no-op cases pass 117/117 on both ABIs. |
-| 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `pending` | After `.17.5`, extend the `.17.4` rule-label mark store across governed named writers, spans, and bridges. |
+| 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `active` | Extend the admitted `.17.4` rule-label mark store across governed named writers, spans, and bridges. |
 
 ### `LUA-BACKEND-PARITY.4.3.7.5` Acceptance Checklist
 

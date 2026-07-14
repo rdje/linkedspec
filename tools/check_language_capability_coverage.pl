@@ -78,6 +78,20 @@ for my $name (@dart) {
  fail("duplicate current call name '$name'") if $seen{$name}++;
 }
 
+my $complete_mark_contract = decode_json(read_text('capability_conformance/complete_named_mark_contract.json'));
+fail('complete named-mark helpers must be an array')
+ unless ref($complete_mark_contract->{helpers}) eq 'ARRAY';
+my @complete_mark_names = map {
+ fail('complete named-mark helper must be an object') unless ref($_) eq 'HASH';
+ my $name = $_->{name};
+ fail('complete named-mark helper name must be an identifier')
+  if !defined($name) || ref($name) || $name !~ /^[A-Za-z_]\w*\z/;
+ $name;
+} @{$complete_mark_contract->{helpers}};
+fail('complete named-mark contract must contain exactly seven helpers')
+ unless @complete_mark_names == 7;
+my @missing_complete_mark = grep { !$seen{$_} } @complete_mark_names;
+
 my $perl_contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts('Top');
 my %perl_current_contract;
 for my $contract (@{$perl_contracts}) {
@@ -85,6 +99,35 @@ for my $contract (@{$perl_contracts}) {
  my $name = $contract->{diag_name};
  $perl_current_contract{$name} = 1 if defined($name) && $name =~ /^[A-Za-z_]\w*\z/;
 }
+
+# These nine identifier-shaped diagnostics are deliberately not public current
+# calls. Keeping the classification next to the independent reverse check means
+# a newly added Perl current contract cannot disappear symmetrically from every
+# backend inventory merely because no corpus fixture happens to call it.
+my %classified_non_public_perl_contract = (
+ array_append_operator => 'internal lowering operation',
+ array_end_mutation_method => 'internal lowering operation',
+ capture => 'legacy capture surface',
+ capture_macro => 'legacy capture surface',
+ entry_named_map => 'documented compatibility alias',
+ hash_index_assignment_operator => 'internal lowering operation',
+ match_named_map => 'documented compatibility alias',
+ scalar_assignment_operator => 'internal lowering operation',
+ value_drop => 'internal lowering operation',
+);
+my @classified_name_missing_from_perl = grep {
+ !$perl_current_contract{$_}
+} sort keys %classified_non_public_perl_contract;
+my @classified_name_admitted = grep {
+ $seen{$_}
+} sort keys %classified_non_public_perl_contract;
+my @public_perl_contract = grep {
+ !$classified_non_public_perl_contract{$_}
+} sort keys %perl_current_contract;
+my @missing_public_perl_contract = grep { !$seen{$_} } @public_perl_contract;
+my @complete_mark_missing_from_perl = grep {
+ !$perl_current_contract{$_}
+} @complete_mark_names;
 
 my $book_source = '';
 my $book_root = File::Spec->catdir($repo_root, 'docs', 'linkedspec-book', 'src');
@@ -106,8 +149,14 @@ for my $case (@{$manifest->{cases}}) {
  $corpus_source .= read_text("rust/linkedspec-runtime/tests/corpus/$case/input.spec");
  $corpus_source .= "\n";
 }
+fail('complete named-mark fixture must be an object')
+ unless ref($complete_mark_contract->{fixture}) eq 'HASH';
+my $complete_mark_source = $complete_mark_contract->{fixture}{spec_source};
+fail('complete named-mark fixture spec_source must be a non-empty string')
+ if !defined($complete_mark_source) || ref($complete_mark_source) || $complete_mark_source eq '';
+my $governed_fixture_source = $corpus_source . $complete_mark_source . "\n";
 
-my (@missing_book, @missing_corpus);
+my (@missing_book, @missing_governed_fixture);
 for my $name (@dart) {
  my $quoted = quotemeta($name);
  my $word_prefix = $name =~ /^[A-Za-z_]/ ? '\\b' : '';
@@ -116,7 +165,7 @@ for my $name (@dart) {
  my $corpus_pattern = $name eq 'otherwise'
   ? qr/$word_prefix$quoted$word_suffix/
   : qr/$word_prefix$quoted\s*\(/;
- push @missing_corpus, $name unless $corpus_source =~ $corpus_pattern;
+ push @missing_governed_fixture, $name unless $governed_fixture_source =~ $corpus_pattern;
 }
 
 my %neutral_perl_contract_call;
@@ -127,22 +176,42 @@ while ($corpus_source =~ /\b([A-Za-z_]\w*)\s*\(/g) {
 my @missing_reference_contract = grep { !$seen{$_} } sort keys %neutral_perl_contract_call;
 
 if ($report_only) {
- printf "language-capability-coverage: REPORT (%d current call names; %d neutral fixtures)\n",
+ printf "language-capability-coverage: REPORT (%d current call names; %d neutral corpus fixtures + 1 exact named-mark fixture)\n",
   scalar(@dart), scalar(@{$manifest->{cases}});
  printf "  missing from mdBook: %d%s\n", scalar(@missing_book),
   @missing_book ? ' (' . join(', ', @missing_book) . ')' : '';
- printf "  missing from neutral corpus source: %d%s\n", scalar(@missing_corpus),
-  @missing_corpus ? ' (' . join(', ', @missing_corpus) . ')' : '';
+ printf "  missing from governed fixture sources: %d%s\n", scalar(@missing_governed_fixture),
+  @missing_governed_fixture ? ' (' . join(', ', @missing_governed_fixture) . ')' : '';
+ printf "  complete named-mark contract calls missing from backend inventories: %d%s\n",
+  scalar(@missing_complete_mark),
+  @missing_complete_mark ? ' (' . join(', ', @missing_complete_mark) . ')' : '';
+ printf "  independently derived public Perl contracts missing from backend inventories: %d/%d%s\n",
+  scalar(@missing_public_perl_contract), scalar(@public_perl_contract),
+  @missing_public_perl_contract ? ' (' . join(', ', @missing_public_perl_contract) . ')' : '';
+ printf "  classified non-public Perl names admitted by backend inventories: %d%s\n",
+  scalar(@classified_name_admitted),
+  @classified_name_admitted ? ' (' . join(', ', @classified_name_admitted) . ')' : '';
  printf "  neutral Perl contract calls missing from backend inventories: %d%s\n",
   scalar(@missing_reference_contract),
   @missing_reference_contract ? ' (' . join(', ', @missing_reference_contract) . ')' : '';
  exit 0;
 }
 
+fail('complete named-mark calls missing from backend inventories: ' . join(', ', @missing_complete_mark))
+ if @missing_complete_mark;
+fail('complete named-mark calls missing from Perl current contracts: ' .
+ join(', ', @complete_mark_missing_from_perl)) if @complete_mark_missing_from_perl;
+fail('classified non-public names missing from Perl current contracts: ' .
+ join(', ', @classified_name_missing_from_perl)) if @classified_name_missing_from_perl;
+fail('classified non-public Perl names admitted by backend inventories: ' .
+ join(', ', @classified_name_admitted)) if @classified_name_admitted;
+fail('independently derived public Perl contracts missing from backend inventories: ' .
+ join(', ', @missing_public_perl_contract)) if @missing_public_perl_contract;
 fail('current call names missing from the mdBook: ' . join(', ', @missing_book)) if @missing_book;
-fail('current call names missing from neutral corpus source: ' . join(', ', @missing_corpus)) if @missing_corpus;
+fail('current call names missing from governed fixture sources: ' .
+ join(', ', @missing_governed_fixture)) if @missing_governed_fixture;
 fail('neutral current Perl contract calls missing from Dart/Julia inventories: ' .
  join(', ', @missing_reference_contract)) if @missing_reference_contract;
 
-printf "language-capability-coverage: OK (%d current call names documented and present in %d neutral fixtures)\n",
- scalar(@dart), scalar(@{$manifest->{cases}});
+printf "language-capability-coverage: OK (%d current call names; %d corpus + 1 exact named-mark fixture; %d public Perl contracts independently covered)\n",
+ scalar(@dart), scalar(@{$manifest->{cases}}), scalar(@public_perl_contract);

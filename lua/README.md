@@ -90,10 +90,11 @@ a void mutation. Both ABIs pass 116/116. `.4.3.7.5` now resolves bare/quoted usa
 compiled-alternation cache, always seeks regardless of surrounding parse mode, captures before the earliest match
 without consuming it, falls back to EOF, and leaves the cursor unchanged when every rule is unresolved or
 regex-free. Both ABIs pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`.
-Complete named-mark `.17.4` now adds parse-scoped rule-label buckets, byte-safe storage, Unicode public
-positions/locations, symbolic names, and the exact seven staged helpers through native plus serialized execution
-at 119/119 on both ABIs. The remaining governed named spans/bridges continue in `.4.3.7.3`; shared admission
-remains `.17.5`. General user-function final `callback: codeblock` declaration
+Complete named-mark `.17.4` adds parse-scoped rule-label buckets, byte-safe storage, Unicode public
+positions/locations, symbolic names, and the exact seven helpers through native plus serialized execution at
+119/119 on both ABIs. `.17.5` admits them into the aligned 246-name shared inventory and independently checks all
+122 public Perl contracts. The remaining governed named spans/bridges continue in active `.4.3.7.3`. General
+user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
@@ -273,16 +274,16 @@ The statement and expression resolver entrypoints are
 `resolve_action_statement_contracts` and
 `resolve_action_expression_contracts`. `canonical_action_helper_name(name)`
 canonicalizes current aliases, and `is_known_action_ir_call_name(name)` shares
-the same exact 239-name source used by function validation. Resolution walks
+the same exact 246-name source used by function validation. Resolution walks
 nested arguments, shapes, blocks, access indexes, controls, assignments, and
 receiver methods. Unknown calls produce `unknown_helper`; structural parser
 fallback produces `raw_perl`. Neither path invokes a Lua global.
 
-That 239-name table remains the governed legacy cross-backend inventory until final admission; it is not an
-enumeration of every historical/current Perl contract mentioned by the public helper reference. Lua now resolves
-the seven documented complete-mark helpers—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`,
-`mark_col`, and `clear_mark`—through a separate exact staged set, as Dart and Julia do. `.17.5` admits those names
-once across backends and adds an independent public-current omission guard.
+That 246-name table is the governed public-current cross-backend inventory; it is intentionally narrower than
+every historical Perl diagnostic contract mentioned by the public helper reference. Lua resolves the seven
+documented complete-mark helpers—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and
+`clear_mark`—through the shared inventory while retaining a separate exact family view, as Dart and Julia do.
+Coverage independently checks all 122 public Perl contracts and rejects nine classified non-public names.
 
 Build the concrete registry directly from a typed spec or function list:
 

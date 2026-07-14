@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.17.5 — admit complete named-mark inventory
+
+Dart, Julia, and Lua now expose the seven complete named-mark helpers through their aligned shared inventories,
+raising the governed current surface from 239 to 246 names. Their exact seven-name family views remain available
+for focused contract tests, but are no longer staging mechanisms.
+
+The coverage gate now combines the 105-case corpus with the exact named-mark fixture and independently derives
+the public-current set from Perl lowering contracts. It requires all 122 public identifier-shaped contracts while
+locking nine compatibility, legacy, and internal names as deliberate exclusions. A mutation that removes
+`clear_mark` from all three backend inventories simultaneously is reported by both the exact-family check and the
+independent public-contract reverse check, closing the symmetric-omission weakness.
+
+Exact neutral, Perl, and Rust proofs pass. Complete Dart, Julia, Lua, and Rust local gates pass, including Dart
+214 tests, Julia 1,414 assertions, Lua 119/119 on each ABI, all 105 corpus cases, and both 61-case primary CLI
+environments where applicable. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2, and
+Phase 0 `1..1031` in 633 seconds. Parent `.17` closes and Lua `.4.3.7.3` becomes the active executable frontier.
+
 ## 2026-07-14 — FUTURE-PARITY-BACKLOG.17.4 — align Lua complete named marks
 
 Lua now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. One parse-scoped

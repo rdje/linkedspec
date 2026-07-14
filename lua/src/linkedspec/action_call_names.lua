@@ -37,6 +37,7 @@ local CURRENT_CALL_NAMES = {
   ["capture_until_cursor_len_from"] = true,
   ["case"] = true,
   ["cat"] = true,
+  ["clear_mark"] = true,
   ["coalesce"] = true,
   ["coalesce_nonempty"] = true,
   ["concat_arrays"] = true,
@@ -103,11 +104,17 @@ local CURRENT_CALL_NAMES = {
   ["lowercase_each"] = true,
   ["map_leaves"] = true,
   ["mark_capture_slice"] = true,
+  ["mark_col"] = true,
   ["mark_copy"] = true,
+  ["mark_entry_end"] = true,
+  ["mark_entry_start"] = true,
   ["mark_exists"] = true,
   ["mark_here"] = true,
   ["mark_input_end"] = true,
   ["mark_input_start"] = true,
+  ["mark_line"] = true,
+  ["mark_match_end"] = true,
+  ["mark_match_start"] = true,
   ["mark_pos"] = true,
   ["match_col"] = true,
   ["match_end_col"] = true,
@@ -242,10 +249,9 @@ local CURRENT_CALL_NAMES = {
   ["when"] = true,
 }
 
--- Staged separately until FUTURE-PARITY-BACKLOG.17.5 admits the complete
--- public-current inventory across every backend. These names are known to the
--- Lua validator/runtime now, but count() must continue to report the shared
--- 239-name comparison set while that final admission leaf remains pending.
+-- Exact contract view retained after FUTURE-PARITY-BACKLOG.17.5 admits these
+-- names into CURRENT_CALL_NAMES. Keeping the governed family view avoids
+-- reconstructing it from the larger shared inventory in focused tests.
 local COMPLETE_NAMED_MARK_CALL_NAMES = {
   ["clear_mark"] = true,
   ["mark_col"] = true,

@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.17.5 — admit complete named-mark inventory**
+  (DONE — 246 shared names and an independent 122-public-contract reverse check close parent `.17`).
+
+  **Result:** Dart, Julia, and Lua admit the exact seven complete named-mark helpers into their equal shared
+  inventories while retaining exact family views. Coverage now uses 105 corpus fixtures plus the exact named-mark
+  fixture, independently requires all 122 public identifier-shaped Perl contracts, and rejects nine classified
+  compatibility/legacy/internal names. A symmetric three-inventory `clear_mark` deletion is detected. Exact
+  neutral/Perl/Rust tests and complete Dart, Julia, Lua, and Rust local gates pass. Canonical CI passes capability
+  64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 633 seconds. Lua `.4.3.7.3` is the active next
+  slice over the already-aligned mark store.
+
 - 2026-07-14: **FUTURE-PARITY-BACKLOG.17.4 — align Lua complete named marks**
   (DONE — exact native/serialized contract passes 119/119 on both Lua ABIs; final admission `.17.5` next).
 

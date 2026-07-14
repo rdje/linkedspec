@@ -22,7 +22,7 @@ CompiledSpec _compileSource(String source) {
 }
 
 void main() {
-  test('stages exactly seven complete named-mark inventory names', () {
+  test('admits exactly seven complete named-mark inventory names', () {
     final contract = _contract();
     expect(contract['contract_id'], 'linkedspec-complete-named-mark-v1');
 
@@ -40,8 +40,8 @@ void main() {
       completeNamedMarkActionIrCallNames.intersection(
         supportedActionIrCallNames,
       ),
-      isEmpty,
-      reason: 'shared 239-name admission remains FUTURE-PARITY-BACKLOG.17.5',
+      names,
+      reason: 'FUTURE-PARITY-BACKLOG.17.5 admits the exact contract set',
     );
   });
 

@@ -126,7 +126,6 @@ bool isKnownActionIrCallName(String name) {
 
 const knownActionIrCallNames = <String>{
   ...supportedActionIrCallNames,
-  ...completeNamedMarkActionIrCallNames,
   ...numericAliasActionIrCallNames,
   ...currentAliasActionIrCallNames,
 };
@@ -178,6 +177,7 @@ const supportedActionIrCallNames = <String>{
   'capture_until_cursor_len_from',
   'case',
   'cat',
+  'clear_mark',
   'coalesce',
   'coalesce_nonempty',
   'concat_arrays',
@@ -244,11 +244,17 @@ const supportedActionIrCallNames = <String>{
   'lowercase_each',
   'map_leaves',
   'mark_capture_slice',
+  'mark_col',
   'mark_copy',
+  'mark_entry_end',
+  'mark_entry_start',
   'mark_exists',
   'mark_here',
   'mark_input_end',
   'mark_input_start',
+  'mark_line',
+  'mark_match_end',
+  'mark_match_start',
   'mark_pos',
   'match_col',
   'match_end_col',

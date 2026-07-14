@@ -6,7 +6,7 @@ answers:
   - "does Julia pass the exhaustive named mark fixture"
   - "does Julia implement mark entry start and mark match end"
   - "does Julia implement mark line mark col and clear mark"
-  - "why are Julia complete named mark names staged outside the shared 239 name inventory"
+  - "are Julia complete named mark names in the shared 246 name inventory"
   - "how does Julia store LinkedSpec marks"
   - "are Julia capture positions and lengths character based"
   - "does Julia preserve bare mark names symbolically"
@@ -34,10 +34,10 @@ that same rule-local code-unit store. Missing positions and locations remain `un
 are 1-based Unicode-character locations. Native execution, generated-plan execution, emitted-state
 reconstruction, and the primary CLI return the exact neutral parent/child fixture.
 
-The seven names live in `COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES` and participate in Julia's known-call boundary,
-but remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Lua `.17.4` now
-consumes the unchanged contract on both ABIs; `.17.5` admits all seven into the shared inventory and hardens the
-checker against another symmetric omission.
+The seven names now live in `_SUPPORTED_ACTION_IR_CALL_NAMES`, while
+`COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES` remains an exact focused-family view. Lua `.17.4` consumes the
+unchanged contract on both ABIs; `.17.5` admits all seven at 246 shared names and independently reverse-checks all
+122 public Perl contracts so another symmetric omission fails.
 
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that

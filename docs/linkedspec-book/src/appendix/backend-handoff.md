@@ -578,7 +578,7 @@ by spec-returned projection `.2.4`. Source validation is now also public:
 raw syntax, edge families/targets/slots, and regex structure;
 `validate_spec(spec, { strict_syntax = true })` adds unused-rule rejection. All
 21 shipped and 102 rule-only corpus sources validate on both runtimes. The
-helper/control reservation inventory is exactly the current 239 names and is
+helper/control reservation inventory is exactly the current 246 public names and is
 checked equal to Dart/Julia. Function-shell projection now consumes explicitly
 typed `function_definition` / `function_definition_error` nodes returned by
 `specs/user_function_definition.spec`; Lua does not raw-scan `fn` source.
@@ -718,14 +718,15 @@ and a void setter. Independent earliest-boundary `.4.3.7.5` then adds cached com
 selection, non-consumption, EOF fallback, and unresolved/regex-free no-op behavior. PUC Lua and LuaJIT pass
 117/117. Named-mark `.17.1` adopts the exact seven-helper contract and aligns Perl live/generated plus Rust
 native/serialized/emitted/generated execution; Dart `.17.2` now consumes the same fixture through native,
-generated-plan, emitted-state, and primary-CLI routes, with a staged exact seven-name set and complete 214-test,
+generated-plan, emitted-state, and primary-CLI routes, with an exact seven-name family view and complete 214-test,
 61x2-CLI, 105-corpus proof. Julia `.17.3` consumes that same artifact through native, generated-plan,
-emitted-state, and primary-CLI routes with staged seven-name, 1,414-assertion, 61x2-CLI, and 105-corpus proof.
+emitted-state, and primary-CLI routes with an exact seven-name family view, 1,414-assertion, 61x2-CLI, and
+105-corpus proof.
 Lua `.17.4` now uses one parse-scoped rule-label/byte-offset store and returns the unchanged native/serialized
-result at 119/119 on PUC Lua and LuaJIT. All five backends therefore resolve the seven calls while the shared
-inventory remains 239 names; `.17.5` owns final admission and the independent omission guard before Lua
-`.4.3.7.3` extends the same store across the remaining named spans and bridges. Canonical CI also preserves
-capability 64/0/0 and shared coverage 239/105 while passing CLI 61x2 and Phase 0 `1..1031` in 627 seconds.
+result at 119/119 on PUC Lua and LuaJIT. `.17.5` admits the seven calls into the aligned 246-name shared inventory,
+combines 105 corpus fixtures with the exact named-mark fixture, independently requires all 122 public Perl
+contracts, and locks nine non-public exclusions. Parent `.17` closes; active Lua `.4.3.7.3` extends the same store
+across the remaining named spans and bridges.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

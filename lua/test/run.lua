@@ -732,25 +732,25 @@ test("source validator supports strict unused-rule behavior", function()
   )
 end)
 
-test("source validator locks all 239 helper and control names", function()
+test("source validator locks all 246 helper and control names", function()
   local action_names = require("linkedspec.action_call_names")
-  assert_equal(action_names.count(), 239, "current call-name count")
+  assert_equal(action_names.count(), 246, "current call-name count")
   assert_equal(action_names.is_known("trim"), true, "trim reservation")
   assert_equal(action_names.is_known("with"), true, "with reservation")
   assert_equal(action_names.is_known("otherwise"), true, "alias reservation")
   assert_equal(action_names.is_known("not_a_helper"), false, "unknown name")
 end)
 
-test("complete named marks stage exactly seven names outside the shared inventory", function()
+test("complete named marks admit exactly seven names into the shared inventory", function()
   local action_names = require("linkedspec.action_call_names")
   local contract = json.decode(read_file("capability_conformance/complete_named_mark_contract.json"))
   local staged = action_names.complete_named_mark_names()
   local count = 0
   for _, helper in ipairs(contract.helpers) do
     count = count + 1
-    assert_equal(staged[helper.name], true, helper.name .. " staged")
+    assert_equal(staged[helper.name], true, helper.name .. " contract name")
     assert_equal(action_names.is_known(helper.name), true, helper.name .. " known")
-    assert_equal(action_names.is_shared_inventory_name(helper.name), false, helper.name .. " not yet shared")
+    assert_equal(action_names.is_shared_inventory_name(helper.name), true, helper.name .. " shared")
     local resolution = linkedspec.resolve_action_expression_contracts(
       linkedspec.parse_action_expression(helper.name .. "(probe)")
     )
@@ -760,8 +760,8 @@ test("complete named marks stage exactly seven names outside the shared inventor
   local staged_count = 0
   for _ in pairs(staged) do staged_count = staged_count + 1 end
   assert_equal(count, 7, "contract helper count")
-  assert_equal(staged_count, 7, "staged helper count")
-  assert_equal(action_names.count(), 239, "shared inventory remains unchanged")
+  assert_equal(staged_count, 7, "complete named-mark helper count")
+  assert_equal(action_names.count(), 246, "shared inventory includes complete named marks")
 end)
 
 test("source validator checks function registry records", function()

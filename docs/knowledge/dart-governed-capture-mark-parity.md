@@ -6,7 +6,7 @@ answers:
   - "does Dart pass the exhaustive named mark fixture"
   - "does Dart implement mark entry start and mark match end"
   - "does Dart implement mark line mark col and clear mark"
-  - "why are Dart complete named mark names staged outside the shared 239 name inventory"
+  - "are Dart complete named mark names in the shared 246 name inventory"
   - "how does Dart store LinkedSpec marks"
   - "are Dart capture positions and lengths character based"
   - "does Dart preserve bare mark names symbolically"
@@ -34,10 +34,10 @@ that same rule-local code-unit store. Missing positions and locations remain `un
 are 1-based Unicode-character locations. Native execution, generated-plan execution, emitted-state
 reconstruction, and the primary CLI return the exact neutral parent/child fixture.
 
-The seven names live in `completeNamedMarkActionIrCallNames` and participate in Dart's known-call boundary, but
-remain disjoint from the legacy shared 239-name set. This is deliberate rollout staging: Julia `.17.3` and Lua
-`.17.4` subsequently consume the unchanged contract; `.17.5` admits all seven into the shared inventory and
-hardens the checker against another symmetric omission.
+The seven names now live in the shared `supportedActionIrCallNames` inventory, while
+`completeNamedMarkActionIrCallNames` remains an exact focused-family view. Julia `.17.3` and Lua `.17.4` consume
+the unchanged contract; `.17.5` admits all seven at 246 shared names and independently reverse-checks all 122
+public Perl contracts so another symmetric omission fails.
 
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that

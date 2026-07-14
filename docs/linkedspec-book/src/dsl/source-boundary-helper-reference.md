@@ -181,9 +181,9 @@ Named marks are stable, rule-local checkpoints. Use them when one anonymous roll
 The four entry/local writers, both location readers, and `clear_mark` have one exact neutral contract. Perl, Rust,
 Dart, Julia, and Lua consume that contract through their native and available generated or serialized routes.
 Lua keeps marks as UTF-8 byte offsets in parse-scoped rule-label buckets, then converts only public positions and
-locations to Unicode characters; PUC Lua and LuaJIT pass the unchanged fixture at 119/119. The seven names remain
-staged outside the legacy shared backend inventory until final admission in `FUTURE-PARITY-BACKLOG.17.5`;
-canonical coverage therefore remains the honest 239-name/105-fixture baseline during rollout.
+locations to Unicode characters; PUC Lua and LuaJIT pass the unchanged fixture at 119/119. The seven names are
+admitted into the aligned 246-name backend inventories. Canonical coverage combines the 105-case corpus with the
+exact named-mark fixture and independently requires all 122 public identifier-shaped Perl contracts.
 
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 

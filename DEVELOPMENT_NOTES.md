@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.17.5` — equality is not completeness): Exact equality between backend
+  inventories prevents one-sided drift but cannot detect a name omitted everywhere. The former reverse check also
+  discovered Perl calls only from the same corpus used as occurrence evidence, so a symmetric corpus omission
+  stayed invisible. The hardened gate separates those concerns: 105 corpus fixtures plus the exact named-mark
+  fixture prove governed source occurrence, while all identifier-shaped Perl contracts independently define a
+  122-name public set after subtracting nine explicit compatibility/legacy/internal exclusions. Exact seven-name
+  family views remain alongside the now-246-name shared inventories because focused semantic ownership is useful
+  even after staging ends. A three-backend `clear_mark` deletion proves both independent guards fail correctly.
+  All complete backend gates pass; Lua `.4.3.7.3` consumes the admitted store and dispatcher next.
+
 - 2026-07-14 (`FUTURE-PARITY-BACKLOG.17.4` — stage names separately, but do not stage state twice): Lua's match
   registers and cursor already use UTF-8 byte offsets, so the complete named-mark contract belongs in one new
   parse-scoped `rule label -> mark name -> byte offset` store. Entry/local writers reuse the immutable match

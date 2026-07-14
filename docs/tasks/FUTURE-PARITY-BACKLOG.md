@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-14` (Lua `.17.4` consumes the exact seven-helper contract through native and serialized
-  routes at 119/119 on both ABIs while shared coverage stays 239 names; final admission `.17.5` is active).
+- Last updated: `2026-07-15` (final named-mark admission `.17.5` closes the parent at 246 shared names, one
+  exact supplemental fixture, and an independent 122-public-contract reverse check; Lua `.4.3.7.3` is active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3384,7 +3384,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.17`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile the complete documented current named-mark helper surface across every backend and its coverage
     inventory.
   Children: `.17.0`, `.17.1`, `.17.2`, `.17.3`, `.17.4`, `.17.5`
@@ -3392,6 +3392,12 @@ before implementation.
     `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`—have one neutral exact contract and execute
     identically on Perl, Rust, Dart, Julia, and Lua; generated paths preserve them where available; inventory and
     coverage gates cannot pass through a symmetric omission; public docs, capabilities, KM, and task state agree.
+  Verification: **PASS 2026-07-15.** One exact contract and five-backend execution rollout admit the seven names
+    into the aligned 246-name inventories. Coverage supplements the 105-case corpus with the exact named-mark
+    fixture, independently derives all 122 public Perl contracts, and rejects the exact nine classified
+    compatibility/legacy/internal names. A simultaneous three-inventory `clear_mark` mutation is detected by both
+    the exact-family and independent reverse checks. Complete backend and canonical gates pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.0`
   Status: `done`
@@ -3470,14 +3476,21 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.5`
-  Status: `active`
+  Status: `done`
   Goal: Admit complete named-mark inventory and close the symmetric-omission gate weakness.
   Dependencies: `.17.1`, `.17.2`, `.17.3`, `.17.4`
   Acceptance: Coverage derives or checks the complete public-current contract set independently of corpus seeding;
     inventories, neutral fixtures, exact outputs, all available generated paths, mdBook, capability census, KM,
     roadmaps, and complete local gates agree; `.17` closes and Lua `.4.3.7.3` may claim full named-mark parity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Dart, Julia, and Lua admit the exact seven names into equal 246-name shared
+    inventories while retaining exact family views. The coverage gate now uses 105 corpus fixtures plus the
+    complete named-mark fixture, independently checks all 122 public identifier-shaped Perl contracts, and locks
+    nine compatibility/legacy/internal exclusions. A simultaneous three-backend `clear_mark` deletion reports it
+    through both the exact-family and independent-public checks. Exact contract and Perl/Rust focused proofs pass;
+    complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 on both ABIs, and the full
+    Rust package/CLI 61x2 gates pass. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2,
+    and Phase 0 `1..1031` in 633 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory`
 
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
@@ -4140,6 +4153,23 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 - [x] **LOCKSTEP** — Source, focused tests, capability README, task/index/roadmap/live docs, mdBook, and Knowledge
   Map agree; `.17.5` is the next clean-pivot admission/hardening leaf and Lua `.4.3.7.3` consumes this foundation.
 
+### `FUTURE-PARITY-BACKLOG.17.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The former checker stayed green when one current public call was omitted from every
+  backend inventory and every corpus fixture because its Perl reverse check was seeded only by corpus source.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `tools/check_language_capability_coverage.pl` had no independent definition
+  of the public Perl contract set and treated the 105-case corpus as both coverage evidence and discovery input.
+- [x] **FIX** — Admit the exact seven helpers into all three shared inventories; supplement the corpus with the
+  exact named-mark fixture; independently derive 122 public Perl contracts; and lock the exact nine excluded
+  compatibility, legacy, and internal lowering names.
+- [x] **ADDRESSED (verified)** — A simultaneous Dart/Julia/Lua deletion of `clear_mark` is reported by both the
+  exact seven-helper family check and the independent 122-contract reverse check, even though backend equality is
+  preserved by the mutation.
+- [x] **NO REGRESSION** — The exact neutral/Perl/Rust proofs and complete Dart, Julia, Lua, and Rust local gates
+  pass; shared coverage reports 246 names, 105 corpus fixtures plus one exact fixture, and 122/122 public contracts.
+- [x] **LOCKSTEP** — Source, tests, capability material, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+  canonical CI agree; parent `.17` is closed and Lua `.4.3.7.3` is the next active executable leaf.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -4328,7 +4358,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 165 | `FUTURE-PARITY-BACKLOG.17.2` | `done` | Dart consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
 | 166 | `FUTURE-PARITY-BACKLOG.17.3` | `done` | Julia consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
 | 167 | `FUTURE-PARITY-BACKLOG.17.4` | `done` | Lua consumes the unchanged native/serialized contract at 119/119 on both ABIs without changing the shared inventory. |
-| 168 | `FUTURE-PARITY-BACKLOG.17.5` | `active` | Admit the exact seven names once and close symmetric public-current omission hardening. |
+| 168 | `FUTURE-PARITY-BACKLOG.17.5` | `done` | Admitted 246 names and independently locks 122 public contracts plus nine explicit exclusions. |
+| 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `active` | Extend the admitted `.17.4` mark store across remaining named writers, spans, and bridges. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4970,6 +5001,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.4` | Exact staged 7-name set/family resolution; native/serialized `SpecFile` contract; complete PUC Lua 119/LuaJIT 119/syntax/CLI scaffold/corpus manifest 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/627s; docs/KM/doctrines/book/whitespace. | PASS. One rule-label/mark-name/byte-offset store serves all seven calls, public positions remain character-based, parent/child names stay isolated, and `.17.5` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.3` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; focused 13; complete Julia 1,414 package/shared CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/614s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state serves all seven calls, absent values remain undef, the shared inventory remains honest, and Lua `.17.4` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.2` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; format; fatal analysis; focused 68; complete Dart 214 package/CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/1,061s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state now serves all seven calls, absent positions remain undef, the shared inventory remains honest, and Julia `.17.3` activates. |
@@ -5092,6 +5124,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.17.5` | `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory` | 246-name admission, 105+1 occurrence proof, independent 122-public-contract reverse check, nine exclusions, and symmetric mutation proof. |
+| `FUTURE-PARITY-BACKLOG.17.4` | `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks` | Lua rule-label/byte-offset store, exact seven-helper native/serialized fixture, and complete dual-ABI/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.3` | `FUTURE-PARITY-BACKLOG.17.3 - align Julia complete named marks` | Julia rule-local seven-helper execution, staged inventory, exact native/generated/emitted/CLI fixture, and complete backend/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.2` | `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks` | Dart rule-local seven-helper execution, staged inventory, exact native/generated/emitted/CLI fixture, and complete backend/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.1` | `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks` | Exact seven-helper contract; Perl generated trace repair; Rust rule-local marks and seven helpers; Unicode live/generated proof. |

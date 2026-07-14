@@ -74,8 +74,9 @@ This `README.md` is the **single entry point** to the project.
   own root kind, and raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent and
   advances capture/mark/input/cursor helpers `.4.3.7`. Audit `.4.3.7.0` splits those mechanisms and finds seven
   documented current mark helpers outside every governed backend inventory; `FUTURE-PARITY-BACKLOG.17` owns the
-  neutral/five-backend correction and independent gate hardening. Lua `.17.4` now consumes the exact contract on
-  PUC Lua and LuaJIT at 119/119; final shared admission remains `.17.5`. ADR `0033` and
+  neutral/five-backend correction and independent gate hardening. Lua `.17.4` consumes the exact contract on PUC
+  Lua and LuaJIT at 119/119; `.17.5` admits all seven at 246 shared names and independently checks all 122 public
+  Perl contracts. Lua `.4.3.7.3` is now active. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -294,9 +295,9 @@ Top-level project docs:
 - Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
   its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
   live plus generated execution; Dart and Julia consume it through native/generated/CLI routes; and Lua consumes
-  it through native plus serialized `SpecFile` reconstruction on PUC Lua and LuaJIT. The seven names remain staged
-  outside the legacy shared 239-name inventory until final admission and independent omission hardening in
-  `FUTURE-PARITY-BACKLOG.17.5`.
+  it through native plus serialized `SpecFile` reconstruction on PUC Lua and LuaJIT. The seven names are admitted
+  into the aligned 246-name shared inventories. The coverage gate combines the 105-case corpus with this exact
+  fixture and independently reverse-checks all 122 public Perl contracts while locking nine explicit exclusions.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
@@ -337,9 +338,10 @@ Top-level project docs:
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
   after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
   split pure, position, marker-control, and capture/mark repairs under `.1.6.1.2.2`. Those repairs and final
-  admission are closed: the corrected shared inventory contains 239 current names, every name is present in the
-  mdBook and neutral source, current Perl contract calls are reverse-checked, and all four backends pass the
-  expanded 105-case corpus exactly. Exact descriptor identity, typed Rust projection, and one shared canonical
+  admission are closed: the corrected shared inventory now contains 246 current names, every name is present in
+  the mdBook and one of 105 corpus fixtures plus the exact named-mark fixture, all 122 public Perl contracts are
+  independently reverse-checked, and all four corpus backends pass the expanded 105-case corpus exactly. Exact
+  descriptor identity, typed Rust projection, and one shared canonical
   outer function-record contract are closed under `.1.6.2`. Typed Rust diagnostic errors, source/top/child
   attribution, compatibility adapters, and final recurring admission are closed under `.1.6.3`. Native named/file
   resolution `.1.6.4` is audited and split; `.1.6.4.1` fixes its deterministic ordered-root contract, while Rust,
@@ -360,7 +362,7 @@ Top-level project docs:
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
-  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and governed 239-name/105-fixture
+  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution
   native resolution `.1.6.4`, Dart full-pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only

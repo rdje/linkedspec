@@ -8,11 +8,11 @@ answers:
   - are Lua named mark positions character based
   - are bare Lua mark names symbolic
   - are Lua named marks isolated between parent and child rules
-  - why are Lua complete named mark names staged outside the shared 239 name inventory
+  - are Lua complete named mark names in the shared 246 name inventory
 date: 2026-07-14
 status: current
 tags: [lua, capture, marks, unicode, inventory, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.17.4 adds one parse-scoped rule-label/name/UTF-8-byte-offset store and exact staged seven-name set. lua/test/run.lua proves the unchanged linkedspec-complete-named-mark-v1 value through native and serialized SpecFile reconstruction. tools/run_lua_local.sh passes 119/119 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks."
+evidence: "FUTURE-PARITY-BACKLOG.17.4 adds one parse-scoped rule-label/name/UTF-8-byte-offset store and exact seven-name family view. lua/test/run.lua proves the unchanged linkedspec-complete-named-mark-v1 value through native and serialized SpecFile reconstruction. FUTURE-PARITY-BACKLOG.17.5 admits the names into the shared 246-name inventory. tools/run_lua_local.sh passes 119/119 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks."
 reverify: "python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -30,10 +30,10 @@ The input `é\nAβ\nZ` makes byte and character offsets differ. A child writes i
 replacing the parent's position 6, proving rule-label isolation. Native execution and reconstruction from public
 serialized `SpecFile` state return the exact same value on PUC Lua and LuaJIT.
 
-The exact seven names participate in known-call and capture/mark contract resolution through a staged set that is
-disjoint from the legacy shared 239-name inventory. This preserves honest cross-backend equality until `.17.5`
-admits all seven once and adds an independent public-current omission guard. Lua `.4.3.7.3` must extend this same
-store and dispatcher for the remaining governed named spans and anonymous/named bridges.
+The exact seven names participate directly in the shared 246-name known-call inventory; a separate exact family
+view remains for focused capture/mark contract tests. `.17.5` independently checks all 122 public Perl contracts
+and locks nine non-public exclusions. Lua `.4.3.7.3` extends this same store and dispatcher for the remaining
+governed named spans and anonymous/named bridges.
 
 ## Links
 
