@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua now consults copied built-in callable metadata before evaluating a final structural
+  `block_value`. Helper/receiver `with` consume attached and parenthesized forms identically; optional values and
+  receivers evaluate before scope entry; copied aggregate values/results remain isolated; and compatible receiver
+  chains continue. A protected scoped-binding module snapshots all private stores before mutation, copies the
+  temporary uniform `value` and result inside `pcall`, restores exact prior/absent state unconditionally, then
+  rethrows the original failure. This distinguishes contextual blocks from ordinary eager braces without changing
+  parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback behavior reuses the metadata/scope seam under
+  active `.4.3.6.5.1`; user-function blocks and first-class callable values keep their separate owners.
 - `2026-07-13` refresh: Lua's indexed statement executor now dispatches attached while through a dedicated lazy
   loop seam. Body validation precedes condition evaluation; body mutations feed the next condition; false initial,
   action return, expression-block-local return, and Perl-reference inner-loop `next()` are exact. The configured
   limit permits that many bodies, rechecks once, and reports typed code/keyword/kind/limit/rule fields only if the
   condition stays true. Both Lua ABIs pass 108/108. Dart/Julia exact-limit timing and Rust/Dart/Julia `next` drift
-  are routed to backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued while
-  `FUTURE-PARITY-BACKLOG.16` aligns narrow zero-argument aliases after a clean pivot.
+  are routed to backlog `.5`; built-in final blocks/scoped `with` later close through `.4.3.6.4`.
 - `2026-07-13` refresh: Lua's same indexed statement executor now consumes attached and marker switch chains.
   Structural validation happens before the subject runs; the subject runs once; first matching case or one default
   executes through the shared range/block seam; nested marker switches and optional `endcase` boundaries remain

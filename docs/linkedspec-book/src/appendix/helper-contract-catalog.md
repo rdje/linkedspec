@@ -107,28 +107,31 @@ dispatch rule.
 
 - **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl, Rust, Dart, and Julia support the attached helper and receiver forms. Perl additionally
-  normalizes `with(value, { ... })` and `.with({ ... })` through declared final-codeblock metadata. Lua is not yet
-  implemented. Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current surfaces; the
-  parenthesized contextual spellings are not portable until the other backends adopt the same metadata contract.
-- **Behavior**: Helper form evaluates the optional value argument, binds scoped scalar `value` while the trailing
+- **Backend status**: Perl, Rust, Dart, Julia, and Lua support the attached helper and receiver forms. Perl and Lua
+  additionally normalize `with(value, { ... })` and `.with({ ... })` through declared final-codeblock metadata.
+  Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current surfaces; the parenthesized
+  contextual spellings are not portable until the remaining backends adopt the same metadata contract.
+- **Behavior**: Helper form evaluates the optional value argument, binds scoped working value `value` while the trailing
   block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
   binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
   `value`, and yields the block result as the terminal value or as the input to later compatible receiver-family
   links.
 - **Execution context**: The block runs immediately in the caller's current action/runtime context. Captures,
   `retv`, cursor state, helper/function visibility, and ordinary working-variable side effects are shared with the
-  call site. Only the scalar binding `value` is portable as the scoped block parameter in this MVP; mutations to
+  call site. Only the working binding `value` is portable as the scoped block parameter in this MVP; mutations to
   other variable names persist after `with` returns.
 - **Return semantics**: `return(expr)` inside the trailing block is block-local, exactly like expression-valued
   blocks: it yields `expr` from the block and skips later block statements; it does not return from the surrounding
   rule/action.
 - **Examples**:
   - `return(with("x") { return(cat(value, "!")) })` yields `"x!"`.
+  - `return(with("x", { return(cat(value, "!")) }))` is the same call on Perl and Lua.
   - `return(with() { return(is_undefined(value)) })` yields true.
   - `return(" x ".with() { return(cat(value, "!")) }.trim())` yields `"x !"`.
   - `return(" a-b ".trim().with() { return(value.split("-")) }.count())` yields `2`.
   - `set(value, "outer"); return(array(with("inner") { return(value) }, value))` yields `["inner", "outer"]`.
+  - On Lua, array/harray values are copied into `value`; the exact prior or absent uniform binding is restored even
+    when the block or result copy fails.
 
 > **Corrective direction:** `with` is currently a special-cased MVP, not the final syntax abstraction. The language
 > model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
@@ -138,8 +141,9 @@ dispatch rule.
 > checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
 > caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
 > declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
-> function, and receiver surfaces. Cross-backend parity remains future, so do not treat the parenthesized form as
-> portable yet.
+> function, and receiver surfaces. Lua `.4.3.6.4` now consumes the same declaration for built-in helper/receiver
+> `with`, with cleanup-safe copied scope. Cross-backend parity remains future, so do not treat the parenthesized
+> form as portable yet.
 
 ## 1. Working Variables and Setup
 

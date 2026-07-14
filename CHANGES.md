@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.4 — execute Lua built-in final blocks
+
+Lua now uses one copied callable-metadata registry for every current built-in final `codeblock` slot: helper
+`with`, receiver `with`, receiver `walk_leaves`/`map_leaves`, and receiver `reduce_leaves`. Attached and
+parenthesized helper/receiver `with` spellings consume the same raw final block, evaluate the optional value or
+receiver before scope entry, preserve block-local return, and continue compatible receiver chains. Tree callback
+behavior remains owned by `.4.3.6.5` rather than being claimed early.
+
+A new protected scoped-binding seam copies the temporary uniform `value` binding and result, hides every prior
+private store, then restores the exact prior or absent state after success, local return, callback failure, or
+result-copy failure. Aggregate inputs and results remain isolated. Missing/non-codeblock finals and unsupported
+authored counts report typed generic fields; empty/keyed harrays are never promoted. Focused contract, scope,
+runtime, invalid, and Perl-oracle coverage raises PUC Lua and LuaJIT from 109/109 to 112/112. Callback-frame and
+deterministic harray traversal `.4.3.6.5.1` are next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.7 — admit punctuation-light aliases
 
 The narrow zero-argument syntax is now a current capability rather than a future exclusion. The four established

@@ -127,6 +127,42 @@ local RUNTIME_HELPERS = make_set({
 
 local OUTPUT_HELPERS = make_set({ "print", "print_each", "say" })
 
+local BUILTIN_FINAL_CODEBLOCK_CONTRACTS = {
+  helper = {
+    with = { min_before_codeblock = 0, max_before_codeblock = 1 },
+  },
+  receiver = {
+    with = { min_before_codeblock = 0, max_before_codeblock = 0 },
+    walk_leaves = { min_before_codeblock = 0, max_before_codeblock = 0 },
+    map_leaves = { min_before_codeblock = 0, max_before_codeblock = 0 },
+    reduce_leaves = { min_before_codeblock = 1, max_before_codeblock = 1 },
+  },
+}
+
+local function clone_final_codeblock_contract(contract)
+  if contract == nil then return nil end
+  return {
+    min_before_codeblock = contract.min_before_codeblock,
+    max_before_codeblock = contract.max_before_codeblock,
+    final_parameter = { name = "callback", kind = "codeblock" },
+  }
+end
+
+function M.builtin_final_codeblock_contract(surface, name)
+  local contracts = BUILTIN_FINAL_CODEBLOCK_CONTRACTS[surface]
+  if contracts == nil then return nil end
+  return clone_final_codeblock_contract(contracts[name])
+end
+
+function M.accepts_final_codeblock_argument_count(contract, before_count)
+  return type(contract) == "table" and
+    type(contract.final_parameter) == "table" and contract.final_parameter.kind == "codeblock" and
+    type(contract.min_before_codeblock) == "number" and contract.min_before_codeblock % 1 == 0 and
+    type(contract.max_before_codeblock) == "number" and contract.max_before_codeblock % 1 == 0 and
+    type(before_count) == "number" and before_count % 1 == 0 and
+    before_count >= contract.min_before_codeblock and before_count <= contract.max_before_codeblock
+end
+
 function M.canonical_action_helper_name(name)
   if type(name) ~= "string" then
     error("ActionContractException: helper name must be a string", 0)

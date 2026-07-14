@@ -6,10 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (attached/marker controls and attached while pass 108/108 through `.4.3.6.3.3`;
-  built-in final blocks/scoped with `.4.3.6.4` are queued at a clean handoff while director-requested syntax
-  leaf `FUTURE-PARITY-BACKLOG.16.0` is active; control comparison/range/alias/truthiness/loop drift
-  routed to backlog `.5`)
+- Last updated: `2026-07-13` (signature-governed built-in final blocks and copied/restored scoped `with` pass
+  112/112 through `.4.3.6.4`; scoped callback frames and deterministic harray traversal `.4.3.6.5.1` are active;
+  control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1402,14 +1401,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3`
-  Status: `active`
+  Status: `done`
   Goal: Execute attached and marker-delimited statement controls.
   Children: `.4.3.6.3.1`, `.4.3.6.3.2`, `.4.3.6.3.3`
   Dependencies: `.4.3.6.1`
   Acceptance: If-family, switch-family, and while-family statements share the scoped block executor, preserve
     parser order and local return, and never evaluate unselected branches or an extra loop body.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Children `.1`-`.3` execute attached/marker if and switch plus attached while
+    through one nesting-aware statement executor. PUC Lua and LuaJIT passed 108/108 before the independent
+    punctuation-light syntax slice; callback-bearing built-ins remain owned by `.4` and `.5`.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.3.1` through `.4.3.6.3.3` child commits
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.1`
   Status: `done`
@@ -1461,18 +1462,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.4`
-  Status: `pending`
+  Status: `done`
   Goal: Execute signature-governed built-in final blocks and scoped `with`.
   Dependencies: `.4.3.6.1`
   Acceptance: For current built-ins declaring a final `codeblock` parameter, `call(args) { ... }` and
     `call(args, { ... })` are identical in helper and receiver form; `with` installs copied temporary bindings and
     restores all prior/absent bindings on success, local return, and error. This leaf does not claim general
     user-function dispatch, which remains `.5.1`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** One copied metadata registry declares helper/receiver `with` plus receiver
+    walk/map/reduce final-codeblock signatures. Attached and parenthesized helper/receiver `with` execute the same
+    raw final block without eager pre-execution, evaluate the optional value/receiver first, and restore the prior
+    or absent uniform `value` binding across scalar/array/harray stores after normal completion, block-local
+    return, callback/result-copy failure, or runtime error. Aggregate inputs/results are isolated, compatible
+    receiver chains continue, harrays are not promoted, and malformed block type/arity stays typed. Tree
+    callbacks reuse the registry but remain behavior-owned by `.5`. PUC Lua and LuaJIT pass 112/112.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.4 - execute Lua built-in final blocks`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5`
-  Status: `pending`
+  Status: `active`
   Goal: Execute deterministic harray and array leaf callbacks.
   Children: `.4.3.6.5.1`, `.4.3.6.5.2`
   Dependencies: `.4.3.6.1`, `.4.3.6.4`
@@ -1482,7 +1489,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the scoped callback frame and deterministic harray leaf traversal.
   Dependencies: `.4.3.6.4`
   Acceptance: Lexically sorted harray keys produce stable path/value bindings; walk side effects, mapped copies,
@@ -1693,7 +1700,9 @@ All 34 ordinary array helper names and six numeric terminals are routed; only th
 under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
 mechanisms plus closeout. Construction/splicing, deterministic views/membership, and copied transforms/receiver
 chains and named mutation/direct assignment close all 13 ordinary harray names at 103/103 on both Lua ABIs.
-Codeblock/control/tree-callback parent `.4.3.6` is active and must split before behavior code.
+Codeblock/control/tree-callback parent `.4.3.6` is active. Eager blocks, control statements, signature-governed
+built-in final blocks, and scoped `with` are complete; the shared scoped callback frame and deterministic harray
+leaf traversal are the current executable frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1762,7 +1771,8 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
 | 63 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
-| 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Resume built-in final blocks and scoped with after the clean director-requested syntax pivot. |
+| 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with`, copied scope, restoration, chaining, and typed failures pass 112/112. |
+| 67 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `active` | Implement the shared scoped callback frame and deterministic harray leaf traversal. |
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -1940,6 +1950,26 @@ Codeblock/control/tree-callback parent `.4.3.6` is active and must split before 
   `next`, while Rust/Dart/Julia differ; backlog `.5` owns both normalizations.
 - [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, architecture/live docs, mdBook, Knowledge
   Map, changes/notes, and memory close statement controls and activate built-in final blocks/scoped with `.4.3.6.4`.
+
+### `LUA-BACKEND-PARITY.4.3.6.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua parsed attached and parenthesized final blocks generically, but ordinary
+  expression evaluation executed `block_value` eagerly and `with` remained an unsupported runtime helper.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_contracts.lua` had only a name/family inventory, while
+  `interpreter.lua` had no final-parameter metadata or cleanup-safe temporary-binding seam. Runtime dispatch could
+  not distinguish a contextual final block from an ordinary eager brace expression.
+- [x] **FIX** — Add copied helper/receiver final-codeblock contracts, consume the final raw block only through that
+  metadata, execute helper/receiver `with` through one protected scoped-binding module, and reserve the same
+  metadata for behavior-owned tree callbacks.
+- [x] **ADDRESSED (verified)** — Focused coverage locks attached/parenthesized helper and receiver equivalence,
+  zero/one-value forms, evaluation order, nested scope, aggregate copy isolation, result chaining, block-local
+  return, absent/prior scalar/array/harray restoration, callback-error cleanup, harray non-promotion, and generic
+  malformed arity/type fields.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 112/112 plus parser CLI/corpus scaffolding. Perl toolbox lowering
+  and execution probes agree for all six helper/receiver spellings and scoped restoration.
+- [x] **LOCKSTEP** — Runtime/tests, task/index/roadmaps, root/Lua README, capability wording, mdBook, Knowledge Map,
+  changes/notes, and memory close built-in final blocks/scoped `with` and activate callback-frame/harray traversal
+  `.4.3.6.5.1`.
 
 ### `LUA-BACKEND-PARITY.4.3.3.1.1` Acceptance Checklist
 

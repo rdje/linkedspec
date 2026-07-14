@@ -61,10 +61,14 @@ This `README.md` is the **single entry point** to the project.
   three tree-callback names remain explicitly owned by active parent `.4.3.6`. Audit `.4.3.6.0` splits eager
   blocks, inline and statement controls, contextual built-ins/`with`, and deterministic tree callbacks before
   behavior code. Eager blocks, lazy inline `if`/`switch`, attached/marker if and switch statements, and attached
-  `while` now pass 108/108 on both Lua ABIs through `.4.3.6.3.3`: only selected branches execute, nested marker
+  `while` pass through `.4.3.6.3.3`: only selected branches execute, nested marker
   boundaries and empty branches are exact, block-local return is preserved, switch subjects run once, bare case
   labels stay literal, loop conditions re-evaluate against body state, and malformed/runaway controls are typed.
-  Current built-in final blocks and scoped `with` `.4.3.6.4` are queued at a clean handoff while ADR `0033` and
+  `.4.3.6.4` now adds copied final-codeblock metadata and executes attached/parenthesized helper/receiver `with`
+  through one cleanup-safe uniform `value` scope. Optional values and receivers evaluate first; aggregate inputs
+  and results are isolated; exact prior/absent bindings restore after success, local return, and error; compatible
+  receiver chains continue; and malformed final kinds/counts stay typed. Both Lua ABIs pass 112/112. Scoped
+  callback-frame and deterministic harray traversal `.4.3.6.5.1` are active. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -81,8 +85,9 @@ This `README.md` is the **single entry point** to the project.
   runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
-  103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks and lazy controls raise the gate to
-  108/108. Portable aliases remain `i`/`elif` for marker chains and `when`/`otherwise` for attached chains; broader
+  103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks and controls raise the gate to
+  108/108 and built-in final blocks/scoped `with` raise it to 112/112. Portable aliases remain `i`/`elif` for
+  marker chains and `when`/`otherwise` for attached chains; broader
   Perl/Dart/Julia acceptance, scalar/aggregate truthiness, and switch scalar-equality drift are owned by
   `FUTURE-PARITY-BACKLOG.5`. Portable switch labels avoid boolean-versus-number and aggregate comparisons until
   that equality policy is normalized, and marker-switch executable statements stay inside `case/default` ranges

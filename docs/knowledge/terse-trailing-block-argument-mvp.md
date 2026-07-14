@@ -22,7 +22,7 @@ evidence: "docs/tasks/SPEC-FORMAT-TERSE.md .14/.14.1/.14.2/.14.3/.14.4/.14.5; RO
 reverify: "rg -n 'SPEC-FORMAT-TERSE\\.14\\.5|receiver_trailing_block_arg|spec_format_terse_14_4|terse_14_4|\\.with\\(\\) \\{' docs/tasks/SPEC-FORMAT-TERSE.md ROADMAP_V2.md perl/LinkedSpec/ActionIR/AST/Parser.pm perl/LinkedSpec/ActionIR/MethodLowering.pm t/actionir_ast_parser.t t/phase0_regression.t rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/integration_test.rs docs/linkedspec-book/src && rg -n '\"case_count\" : 99|terse_14_4_receiver_with_trailing_block' rust/linkedspec-runtime/tests/corpus/manifest.json"
 ---
 
-`SPEC-FORMAT-TERSE.14` owns trailing code blocks as final helper-function or receiver-method arguments.
+`SPEC-FORMAT-TERSE.14` owns the original trailing code blocks as final helper-function or receiver-method arguments.
 It was reactivated by the user on 2026-07-07 and split before code in `.14.1`.
 `.14.2` shipped the Perl reference helper-function form surface, `.14.3` shipped the
 Rust helper-function parity surface plus an oracle fixture, `.14.4` shipped
@@ -36,16 +36,18 @@ codeblock as the fourth object/value kind and requires attached `call(args) { bl
 parenthesized `call(args, { block })` for any callable signature accepting a final codeblock, on every backend.
 ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select `{|args| body }` callable literals, dynamic caller
 context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and checked. Perl now
-preserves and dynamically invokes explicit literals, but generic final-block behavior has not landed.
+preserves and dynamically invokes explicit literals and normalizes declared generic final blocks. Lua now executes
+metadata-governed helper/receiver `with` in attached and parenthesized contextual form; complete generic callable
+parity remains separately owned.
 
 The MVP is an immediate callback argument, not a closure. Blocks are not assignable,
 not returnable, and not callable later. The first implementation target is helper-function form
-`with(value) { ... }`: evaluate `value`, bind scoped scalar `value` during immediate
+`with(value) { ... }`: evaluate `value`, bind scoped working value `value` during immediate
 block execution, restore any prior binding afterward, and return the block result.
 `with() { ... }` binds `value` to `undef`. `return(expr)` inside the block is
 block-local. The trailing block executes in the caller's current action/runtime
 context: captures, `retv`, cursor state, helper/function visibility, and ordinary
-working-variable side effects are shared with the call site. Only the scalar
+working-variable side effects are shared with the call site. Only the working
 binding `value` is portable as the scoped block parameter in the MVP; mutations
 to other variable names persist.
 The AST parser flags helper-function form trailing-block calls with `trailing_block_arg`;
@@ -56,8 +58,8 @@ the runtime evaluates `with` lazily, binds scoped `value`, restores the prior
 same-name stores afterward, and uses existing expression-valued block return
 semantics.
 
-Receiver `.with() { ... }` is also current on Perl and Rust. It evaluates the
-receiver first, exposes that receiver value as scoped scalar `value` while the
+Receiver `.with() { ... }` is also current on Perl, Rust, Dart, Julia, and Lua. It evaluates the
+receiver first, exposes that receiver value as scoped working binding `value` while the
 block executes immediately, restores the surrounding binding afterward, and
 returns the block result. The result can be terminal or can continue into later
 compatible receiver-family links, such as a string result flowing into `.trim()`

@@ -211,7 +211,7 @@ When a block is used as a receiver, its yielded value enters the same compatible
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
 array, string, hash, and number contracts.
 
-Perl, Rust, Dart, and Julia currently accept trailing block arguments for helper-form `with(value) { ... }` and
+Perl, Rust, Dart, Julia, and Lua currently accept trailing block arguments for helper-form `with(value) { ... }` and
 receiver-form `.with() { ... }`:
 
 ```text
@@ -221,14 +221,14 @@ return(entry_group(0).with() { return(cat(value, "!")) });
 return(" a-b ".trim().with() { return(value.split("-")) }.count());
 ```
 
-`with(value) { ... }` evaluates the value, binds a scoped scalar `value` for immediate block execution, and returns
+`with(value) { ... }` evaluates the value, binds a scoped working value `value` for immediate block execution, and returns
 the block result. `with() { ... }` binds that scoped `value` to `undef`. Receiver `.with() { ... }` evaluates its
 receiver first, exposes that receiver value through the same scoped `value` binding, and yields the block result;
 the yielded result can be the terminal value or can feed later compatible receiver-family links. The binding is
 local to the block, so an outer working variable named `value` is visible again after the `with` expression
 finishes. The block is not a closure, assignable value, returnable value, or delayed callback. It runs in the
 caller's current action/runtime context: captures, `retv`, cursor state, helper/function visibility, and ordinary
-working-variable side effects are the same as the call site. Only the scalar binding `value` is portable as the
+working-variable side effects are the same as the call site. Only the working binding `value` is portable as the
 scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare
 `with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
 surfaces.
@@ -237,9 +237,11 @@ Across all backends this shipped surface is still narrower than the intended lan
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
 signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl now implements that equivalence for metadata-declared `with`, typed user
-functions, and receiver `with`/tree-traversal surfaces; other backends do not yet provide the generic contract, so
-the parenthesized final-codeblock form is not portable and Lua is not implemented. ADR 0031 and completed
+functions, and receiver methods. Perl implements that equivalence for metadata-declared `with`, typed user
+functions, and receiver `with`/tree-traversal surfaces. Lua implements it for built-in helper/receiver `with`,
+including copied aggregate scope, exact restoration after errors, and result chaining; Lua tree callback behavior,
+general user functions, and explicit callable values remain separately owned. Other backends do not yet provide
+the generic contract, so the parenthesized final-codeblock form is not portable. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text

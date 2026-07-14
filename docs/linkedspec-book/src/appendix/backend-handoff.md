@@ -695,11 +695,14 @@ bare labels, nested boundaries, empty bodies, and local return remain exact; mal
 typed. Inline and statement switch share Perl-reference scalar equality: null equals empty text, booleans use
 `0/1`, and aggregates are noncomparable. Rust/Dart/Julia boolean or aggregate drift joins backlog `.5`. Perl also
 executes marker statements outside every branch while Rust/Dart/Julia/Lua skip them; `.5` owns that range boundary.
-Attached while then raises the gate to 108/108: its condition sees body mutation, false initial runs no body,
+Attached while raises the gate to 108/108: its condition sees body mutation, false initial runs no body,
 return remains owned by its action/expression block, Perl-reference `next` continues the loop, and a typed
 rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
-timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued
-while ADR `0033` and `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases after a clean pivot. Neutral
+timing and Rust/Dart/Julia `next` drift join backlog `.5`. Built-in final blocks/scoped `with` then raise both Lua
+ABIs to 112/112: copied signature metadata admits attached and parenthesized helper/receiver forms; the optional
+value or receiver evaluates first; copied results continue through compatible receiver chains; and exact prior or
+absent uniform bindings restore after success, local return, and error. Scoped callback-frame/harray traversal
+`.4.3.6.5.1` is active. ADR `0033` and `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`
 are complete at 64/0/0 with one recurring five-backend/two-Lua-ABI command. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
 separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs; generated
@@ -1079,7 +1082,7 @@ boundaries remain below as rollout history, not as live gaps:
 | Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 64/0/0 |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
-codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
+codeblock equivalence, and the not-yet-complete Lua backend are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming

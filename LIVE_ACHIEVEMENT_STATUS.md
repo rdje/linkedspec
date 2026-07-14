@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.4 — execute Lua built-in final blocks**
+  (DONE — metadata-governed helper/receiver `with` and cleanup-safe scope pass 112/112 on both ABIs;
+  callback-frame/harray traversal `.4.3.6.5.1` active).
+
+  **Result:** One copied registry declares current helper/receiver final-codeblock signatures. Attached and
+  parenthesized `with` consume the same raw block, evaluate the optional value or receiver before scope entry,
+  preserve block-local return, isolate aggregate inputs/results, and continue compatible receiver chains. One
+  protected scoped-binding seam restores every prior or absent private store after normal completion, callback or
+  result-copy error. Typed kind/arity failures prevent harray promotion and premature tree-callback execution.
+  Perl toolbox probes agree; PUC Lua and LuaJIT pass 112/112 plus corpus/CLI scaffolding.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.7 — admit punctuation-light aliases**
   (DONE — parent `.16` closed at capability 64/0/0; clean pivot returns to Lua `.4.3.6.4`).
 

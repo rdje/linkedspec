@@ -42,7 +42,7 @@ merge arguments override earlier keys. Lua deterministically lets the renamed ol
 destination, matching Perl/Julia; Dart/Rust differ, so portable specs avoid that collision until backlog `.5`.
 Standalone `set_key(target, key, value)` and direct `target[key] = value` share a kind-checked mutation seam:
 absent targets become harrays, incompatible existing values report neutral fields, and direct assignment returns
-an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 108/108
+an independent updated snapshot. Assigned/function/receiver `set_key` remains pure. The Lua gate passes 112/112
 on both PUC Lua 5.4 and LuaJIT, while all 55 scalar numeric v1 cases still match Perl,
 Rust, Dart, and Julia exactly. All 34 non-callback array names and six numeric terminals are closed under `.4.3.4`;
 all 13 ordinary harray names close at 103/103 through `.4.3.5.5`.
@@ -67,7 +67,10 @@ mutations feed the next condition, false initially runs zero bodies, and return 
 expression-block boundary. The configurable guard allows exactly `max_iterations` bodies, rechecks the condition,
 then raises typed code/keyword/kind/limit/rule fields if it is still true. Lua follows Perl by treating `next()`
 inside the body as inner-loop continue. Exact-limit and `next()` behavior differs elsewhere and remains backlog
-`.5`; current built-in final blocks/scoped `with` `.4.3.6.4` are active.
+`.5`. `.4.3.6.4` now executes metadata-governed helper/receiver `with` in both attached and parenthesized final-
+block form. The optional value or receiver evaluates first; Lua copies it into the temporary uniform `value`
+binding, copies the result, restores every prior/absent private store after success, block-local return, or error,
+and continues compatible receiver chains. Tree callback frame/harray traversal `.4.3.6.5.1` is active.
 General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
@@ -76,8 +79,10 @@ hidden as settled parity.
 Lua currently follows Perl-oracle condition truthiness, including false scalar `"0"` and truthful empty
 array/harray reference values. Cross-backend truthiness normalization is explicitly owned by backlog `.5`.
 Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
-codeblock. A trailing block remains structural until its signature-governed callable consumes it; future explicit
-first-class codeblocks use `{|params| ...}`.
+codeblock. A trailing block remains structural until its signature-governed callable consumes it. For example,
+`with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are
+`"x".with() { return(value) }` and `"x".with({ return(value) })`. Future explicit first-class codeblocks use
+`{|params| ...}`.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge
 `.push`/`.push(target)` and block `push(Child[, target][, index])` reuse the cached child result, select zero-based
 items when requested, and retain neutral wrong-kind diagnostics.
@@ -368,10 +373,10 @@ scalar/string helpers, `.2.1.2` supplies Unicode casing, and `.2.1.3` supplies e
 cross-variant scalar-to-text coercion. Regex/split/mutation `.2.2` is split by
 mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2` supplies pure split; `.2.2.3`
 supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; `.2.2.5` closes focused/public
-no-drift and routes broader shipped proof to phase 6; active `.3`
+no-drift and routes broader shipped proof to phase 6; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` eager codeblocks/controls/contextual built-in blocks/
-tree callbacks (split into `.0` audit, `.1` eager values, `.2` inline controls, `.3` statement controls, `.4`
-current built-ins/`with`, `.5` callbacks, and `.6` closeout); `.7` capture/mark/input/cursor state; `.8` diagnostic output;
+tree callbacks (split into `.0` audit, `.1` eager values, `.2` inline controls, `.3` statement controls, completed
+`.4` current built-ins/`with`, active `.5` callbacks, and `.6` closeout); `.7` capture/mark/input/cursor state; `.8` diagnostic output;
 and `.9` exhaustive no-drift. A broad leaf may split again before code if its
 mechanism cannot remain signoff-sized.
 

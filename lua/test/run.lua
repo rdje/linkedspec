@@ -2617,6 +2617,224 @@ return({
   assert_equal(#trailing.args[#trailing.args].value.block.statements, 1, "trailing block body remains inert")
 end)
 
+test("built-in final codeblock contracts are exact and copied", function()
+  local expected = {
+    { surface = "helper", name = "with", minimum = 0, maximum = 1 },
+    { surface = "receiver", name = "with", minimum = 0, maximum = 0 },
+    { surface = "receiver", name = "walk_leaves", minimum = 0, maximum = 0 },
+    { surface = "receiver", name = "map_leaves", minimum = 0, maximum = 0 },
+    { surface = "receiver", name = "reduce_leaves", minimum = 1, maximum = 1 },
+  }
+  for _, item in ipairs(expected) do
+    local contract = linkedspec.action_contracts.builtin_final_codeblock_contract(item.surface, item.name)
+    assert_equal(type(contract), "table", item.name .. " contract")
+    assert_equal(contract.min_before_codeblock, item.minimum, item.name .. " minimum")
+    assert_equal(contract.max_before_codeblock, item.maximum, item.name .. " maximum")
+    assert_equal(contract.final_parameter.name, "callback", item.name .. " parameter name")
+    assert_equal(contract.final_parameter.kind, "codeblock", item.name .. " parameter kind")
+    assert_equal(
+      linkedspec.action_contracts.accepts_final_codeblock_argument_count(contract, item.minimum),
+      true,
+      item.name .. " minimum accepted"
+    )
+    assert_equal(
+      linkedspec.action_contracts.accepts_final_codeblock_argument_count(contract, item.maximum),
+      true,
+      item.name .. " maximum accepted"
+    )
+    assert_equal(
+      linkedspec.action_contracts.accepts_final_codeblock_argument_count(contract, item.maximum + 1),
+      false,
+      item.name .. " excess rejected"
+    )
+  end
+  assert_equal(
+    linkedspec.action_contracts.builtin_final_codeblock_contract("helper", "trim"),
+    nil,
+    "ordinary helpers have no final codeblock contract"
+  )
+  local mutated = linkedspec.action_contracts.builtin_final_codeblock_contract("helper", "with")
+  mutated.final_parameter.kind = "broken"
+  assert_equal(
+    linkedspec.action_contracts.builtin_final_codeblock_contract("helper", "with").final_parameter.kind,
+    "codeblock",
+    "callers cannot mutate registry metadata"
+  )
+
+  for _, source in ipairs({
+    'return([].walk_leaves("extra", { return(value) }))',
+    'return({}.map_leaves("extra", { return(value) }))',
+    'return([].reduce_leaves({ return(value) }))',
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(source))
+    end)
+    assert_equal(ok, false, source .. " fails before callback execution")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, source .. " typed failure")
+    assert_equal(failure.code, "helper_arity_mismatch", source .. " generic arity code")
+  end
+end)
+
+test("scoped runtime bindings restore every store on success and error", function()
+  local runtime_scoped_binding = require("linkedspec.runtime_scoped_binding")
+  local function scoped_copy(value)
+    if type(value) ~= "table" then return value end
+    return json.decode(json.encode(value))
+  end
+
+  local input = json.array({ "inner" })
+  local context = {
+    variables = { value = false },
+    arrays = { value = json.array({ "prior-array" }) },
+    harrays = { value = json.harray({ state = "prior-harray" }) },
+  }
+  local result = runtime_scoped_binding.run(context, "value", input, scoped_copy, function()
+    assert_equal(json.kind(context.variables.value), "array", "temporary value kind")
+    assert_equal(context.variables.value == input, false, "temporary value is copied")
+    assert_equal(context.arrays.value, nil, "prior array store is hidden")
+    assert_equal(context.harrays.value, nil, "prior harray store is hidden")
+    context.variables.value[#context.variables.value + 1] = "scoped"
+    context.arrays.value = json.array({ "temporary-array" })
+    context.harrays.value = json.harray({ state = "temporary-harray" })
+    return context.variables.value
+  end)
+  assert_json_equal(result, json.decode('["inner","scoped"]'), "scoped result is copied before restore")
+  assert_json_equal(input, json.decode('["inner"]'), "caller input remains isolated")
+  assert_equal(context.variables.value, false, "false scalar binding restores exactly")
+  assert_json_equal(context.arrays.value, json.decode('["prior-array"]'), "array store restores")
+  assert_json_equal(
+    context.harrays.value,
+    json.decode('{"state":"prior-harray"}'),
+    "harray store restores"
+  )
+
+  local absent = { variables = {}, arrays = {}, harrays = {} }
+  local marker = {}
+  local ok, failure = pcall(function()
+    runtime_scoped_binding.run(absent, "value", "temporary", scoped_copy, function()
+      absent.variables.value = "changed"
+      absent.arrays.value = json.array({ "changed" })
+      absent.harrays.value = json.harray({ changed = true })
+      error(marker, 0)
+    end)
+  end)
+  assert_equal(ok, false, "callback error propagates")
+  assert_equal(failure, marker, "callback error identity is preserved")
+  assert_equal(absent.variables.value, nil, "absent scalar binding remains absent after error")
+  assert_equal(absent.arrays.value, nil, "absent array binding remains absent after error")
+  assert_equal(absent.harrays.value, nil, "absent harray binding remains absent after error")
+end)
+
+test("runtime with executes equivalent final codeblock spellings in copied scope", function()
+  local source = uniform_binding_action_source([[
+missing_result = with("first") { value = cat(value, "!"); return(value) }
+missing_after = value
+value = "outer"
+evaluated_before_scope = with(cat(value, "-inner")) { return(value) }
+helper_attached = with("attached") { value = cat(value, "!"); return(value) }
+helper_explicit = with("explicit", { value = cat(value, "!"); return(value) })
+receiver_attached = "receiver-a".with() { return(value) }
+receiver_explicit = "receiver-b".with({ return(value) })
+receiver_chain = " padded ".with({ return(value) }).trim()
+zero_attached = with() { return(value) }
+zero_explicit = with({ return(value) })
+scalar_restored = value
+source_items = ["source"]
+copied_items = with(source_items) { value += "scoped"; return(value) }
+source_items_after = copy(source_items)
+value = ["outer-array"]
+array_result = with(["inner-array"]) { value += "added"; return(value) }
+array_restored = copy(value)
+value = { "state" : "outer-harray" }
+harray_result = with({ "state" : "inner-harray" }) { value["state"] = "changed"; return(value) }
+harray_restored = copy(value)
+value = "outer-final"
+nested = with("outer-scope") {
+  inner = with("inner-scope", { value = cat(value, "!"); return(value) })
+  return([inner, value])
+}
+nested_restored = value
+events = []
+local_return = with("local") { return(value); push(events, "bad") }
+return({
+  "missing_result" : missing_result,
+  "missing_after" : missing_after,
+  "evaluated_before_scope" : evaluated_before_scope,
+  "helper_attached" : helper_attached,
+  "helper_explicit" : helper_explicit,
+  "receiver_attached" : receiver_attached,
+  "receiver_explicit" : receiver_explicit,
+  "receiver_chain" : receiver_chain,
+  "zero_attached" : zero_attached,
+  "zero_explicit" : zero_explicit,
+  "scalar_restored" : scalar_restored,
+  "copied_items" : copied_items,
+  "source_items_after" : source_items_after,
+  "array_result" : array_result,
+  "array_restored" : array_restored,
+  "harray_result" : harray_result,
+  "harray_restored" : harray_restored,
+  "nested" : nested,
+  "nested_restored" : nested_restored,
+  "local_return" : local_return,
+  "events" : events
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  local expected = json.decode([[
+{
+  "missing_result": "first!", "missing_after": null,
+  "evaluated_before_scope": "outer-inner",
+  "helper_attached": "attached!", "helper_explicit": "explicit!",
+  "receiver_attached": "receiver-a", "receiver_explicit": "receiver-b",
+  "receiver_chain": "padded", "zero_attached": null, "zero_explicit": null,
+  "scalar_restored": "outer",
+  "copied_items": ["source", "scoped"], "source_items_after": ["source"],
+  "array_result": ["inner-array", "added"], "array_restored": ["outer-array"],
+  "harray_result": {"state": "changed"}, "harray_restored": {"state": "outer-harray"},
+  "nested": ["inner-scope!", "outer-scope"], "nested_restored": "outer-final",
+  "local_return": "local", "events": []
+}
+]])
+  assert_json_equal(result, expected, "helper receiver and scope behavior")
+
+  for _, invalid in ipairs({
+    { source = 'return(with())', code = "final_argument_not_codeblock", kind = "missing" },
+    { source = 'return(with("x"))', code = "final_argument_not_codeblock", kind = "scalar" },
+    { source = 'return(with("x", {}))', code = "final_argument_not_codeblock", kind = "harray" },
+    {
+      source = 'return(with("x", "extra", { return(value) }))',
+      code = "helper_arity_mismatch",
+      actual = 2,
+    },
+    { source = 'return("x".with())', code = "final_argument_not_codeblock", kind = "missing" },
+    {
+      source = 'return("x".with("extra", { return(value) }))',
+      code = "helper_arity_mismatch",
+      actual = 1,
+    },
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(invalid.source))
+    end)
+    assert_equal(ok, false, invalid.source .. " fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, invalid.source .. " typed failure")
+    assert_equal(failure.code, invalid.code, invalid.source .. " diagnostic code")
+    assert_equal(failure.helper_name, "with", invalid.source .. " helper attribution")
+    if invalid.kind then assert_equal(failure.value_kind, invalid.kind, invalid.source .. " value kind") end
+    if invalid.actual then assert_equal(failure.actual_arity, invalid.actual, invalid.source .. " authored arity") end
+  end
+
+  local error_ok, error_failure = pcall(function()
+    execute_uniform_binding_source(uniform_binding_action_source(
+      'value = "outer"; return(with("inner", { value = "changed"; exit_now(86) }))'
+    ))
+  end)
+  assert_equal(error_ok, false, "with callback errors propagate")
+  assert_equal(linkedspec.is_runtime_interpreter_error(error_failure), true, "with callback failure stays typed")
+  assert_equal(error_failure.status, 86, "with callback failure stays exact")
+end)
+
 test("runtime inline value controls select one lazy payload", function()
   local source = uniform_binding_action_source([[
 selector_calls = []

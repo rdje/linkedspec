@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.4` — context decides whether braces execute eagerly): Lua's parser uses
+  the same structural `block_value` for an ordinary expression block and a contextual final argument. The runtime
+  must therefore consult callable signature metadata before generic argument evaluation: helper/receiver `with`
+  consumes the raw final block, while ordinary braces keep the eager `.4.3.6.1` semantics. One copied registry
+  also records the later tree callback signatures without prematurely executing them. Scoped cleanup is isolated
+  in a small protected module: snapshot every private store before mutation, copy the temporary uniform `value`
+  and callback result inside `pcall`, restore snapshots unconditionally, then rethrow the original failure. This
+  ordering covers callback and result-copy errors and preserves false values as present bindings. PUC Lua and
+  LuaJIT pass 112/112; `.4.3.6.5.1` can now reuse the same scope/metadata seam for callback frames.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.7` — admit current syntax without overstating the Lua product): The
   capability census intentionally covers the four established full backends, while Lua's syntax proof is already
   real at typed AST, serialized `SpecFile`, and native dual-ABI boundaries. Admission therefore adds one 4-pass

@@ -4,6 +4,7 @@ local action_parser = require("linkedspec.action_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local matching = require("linkedspec.matching")
+local runtime_scoped_binding = require("linkedspec.runtime_scoped_binding")
 local scalar_numeric = require("linkedspec.scalar_numeric")
 local unicode_case = require("linkedspec.unicode_case_mapping")
 
@@ -590,6 +591,53 @@ local function validate_positional_arguments(name, args)
       invalid_helper_arity(name, "positional arguments only", #args)
     end
   end
+end
+
+local function authored_value_kind(expr)
+  if expr.kind == "block_value" then return "codeblock" end
+  if expr.kind == "array_literal" then return "array" end
+  if expr.kind == "hash_literal" then return "harray" end
+  if expr.kind == "string" or expr.kind == "number" or expr.kind == "boolean" or expr.kind == "undef" then
+    return "scalar"
+  end
+  return "unknown"
+end
+
+local function final_codeblock_argument(name, surface, args)
+  validate_positional_arguments(name, args)
+  local contract = action_contracts.builtin_final_codeblock_contract(surface, name)
+  if contract == nil then return nil end
+  if #args == 0 then
+    fail("helper '" .. name .. "' requires a final codeblock argument", {
+      code = "final_argument_not_codeblock",
+      helper_name = name,
+      value_kind = "missing",
+    })
+  end
+  local block_expr = argument_expr(args[#args])
+  if action_ast.node_type(block_expr) ~= "ActionExpr" or block_expr.kind ~= "block_value" then
+    fail("helper '" .. name .. "' final argument must be a codeblock", {
+      code = "final_argument_not_codeblock",
+      helper_name = name,
+      value_kind = authored_value_kind(block_expr),
+    })
+  end
+  local before_count = #args - 1
+  if not action_contracts.accepts_final_codeblock_argument_count(contract, before_count) then
+    local minimum = contract.min_before_codeblock
+    local maximum = contract.max_before_codeblock
+    local expected = minimum == maximum and
+      ("exactly " .. minimum .. " argument(s) before the final codeblock") or
+      (minimum .. " to " .. maximum .. " arguments before the final codeblock")
+    invalid_helper_arity(name, expected, before_count)
+  end
+  return block_expr, before_count
+end
+
+local function evaluate_with_block(engine, block_expr, scoped_value, ctx, accumulator, edge_state)
+  return runtime_scoped_binding.run(ctx, "value", scoped_value, copy_value, function()
+    return evaluate_block_value(engine, block_expr.block, ctx, accumulator, edge_state)
+  end)
 end
 
 local function validate_inline_if(expr)
@@ -1293,6 +1341,14 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     fail("unsupported runtime helper '" .. expr.name .. "'", { helper_name = expr.name })
   end
   local name = action_contracts.canonical_action_helper_name(expr.name)
+  if name == "with" then
+    local block_expr, before_count = final_codeblock_argument(name, "helper", expr.args)
+    local scoped_value = json.null
+    if before_count == 1 then
+      scoped_value = evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
+    end
+    return evaluate_with_block(engine, block_expr, scoped_value, ctx, accumulator, edge_state)
+  end
   local split_target = name == "split" and expr.args[1] and
     binding_target_descriptor(argument_expr(expr.args[1])) or nil
   if split_target and #expr.args == 3 then
@@ -1546,7 +1602,15 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     for index, call in ipairs(expr.calls) do
       local call_expr = { kind = "call", name = call.method, args = call.args }
       local canonical_name = action_contracts.canonical_action_helper_name(call.method)
-      if ARRAY_END_MUTATIONS[canonical_name] then
+      if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
+        local block_expr = final_codeblock_argument(canonical_name, "receiver", call.args)
+        if canonical_name ~= "with" then
+          fail("unsupported runtime helper '" .. tostring(canonical_name) .. "'", {
+            helper_name = canonical_name,
+          })
+        end
+        value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
+      elseif ARRAY_END_MUTATIONS[canonical_name] then
         local target = index == 1 and binding_target_descriptor(expr.receiver) or nil
         if not target then return json.null end
         local items, storage = array_binding_for_mutation(ctx, target.name)

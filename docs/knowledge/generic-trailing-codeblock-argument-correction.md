@@ -33,15 +33,18 @@ and hash-literal disambiguation remain contract-validation concerns shared by
 every backend.
 
 The pre-correction implementation was narrower: Perl, Rust, Dart, and Julia implemented named `with` and selected
-tree-traversal block forms, while Lua was absent. The closed `SPEC-FORMAT-TERSE.14` contract explicitly excluded
+tree-traversal block forms, while Lua was absent. Lua now executes metadata-governed helper/receiver `with` in
+both attached and parenthesized form; its tree callbacks, user functions, and explicit callable values remain
+separately owned. The closed `SPEC-FORMAT-TERSE.14` contract explicitly excluded
 the parenthesized final-block form and arbitrary block-taking callables. Its Perl probe accepted attached `with`
 but rejected the parenthesized equivalent. Perl has since replaced that limitation with metadata-governed
 helper/user-function/receiver normalization and generic structural receiver parsing. Rust remains explicitly
 name-gated; Dart and Julia parse generic trailing-block nodes but runtime dispatch still accepts only named
-supported surfaces; Lua remains planned.
+supported surfaces; Lua's complete generic callable parity remains planned beyond its current built-in `with`.
 
-Historically, generic equivalence could not be confirmed for any variant, and all-variant support still cannot be
-claimed while Lua is absent. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031
+Historically, generic equivalence could not be confirmed for any variant. Full all-callable/all-variant support
+still cannot be claimed; Lua's current `with` slice does not include tree callback execution, general user
+functions, or first-class callable values. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031
 close the corrective design: explicit callable literals use `{|params| body }`, execute later through `cb(args)`,
 and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
 sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
