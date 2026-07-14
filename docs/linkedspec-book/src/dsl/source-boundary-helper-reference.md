@@ -178,6 +178,11 @@ Named marks are stable, rule-local checkpoints. Use them when one anonymous roll
 | `mark_col(name)` | read | return the stored mark column, or `undef`. |
 | `start_capture_slice_from(name)` | bridge | reset the anonymous capture boundary from a named mark when it exists. |
 
+The four entry/local writers, both location readers, and `clear_mark` have one exact neutral contract. Perl and
+Rust currently consume that contract through live and generated execution; Dart, Julia, and Lua rollout remains
+tracked under `FUTURE-PARITY-BACKLOG.17.2-.17.4`, followed by shared inventory admission in `.17.5`. Public
+positions count characters even when a backend stores UTF-8 byte or code-unit offsets internally.
+
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 
 | Helper | Result | Right edge | Boundary movement |
@@ -220,6 +225,43 @@ Paren:AND
 ```
 
 `mark_here(body_start)` stores the cursor just after the opening delimiter. `capture_from(body_start)` later reads from that mark to the left edge of the closing delimiter, excluding the delimiter itself.
+
+### Example: entry/local edges and rule-local isolation
+
+The same mark name may safely occur in a caller and a child. In this example `Top.shared` remains the end of the
+whole input after `Child` writes its own `shared` at the right edge of `β`:
+
+```text
+Top::
+ I { mark_input_end(shared) }
+ /é\nA/ -> Top {
+   child = call(Child)
+   return(hash(
+     "child", child,
+     "parent_shared", mark_pos(shared)
+   ))
+ }
+
+Child::
+ /β/ -> Child {
+   mark_entry_start(entry_start)
+   mark_entry_end(entry_end)
+   mark_match_start(match_start)
+   mark_match_end(match_end)
+   mark_match_end(shared)
+   return(hash(
+     "entry", array(mark_pos(entry_start), mark_pos(entry_end)),
+     "local", array(mark_pos(match_start), mark_pos(match_end)),
+     "local_line", mark_line(match_start),
+     "local_col", mark_col(match_start)
+   ))
+ }
+```
+
+For input `é\nAβ\nZ`, the child returns entry edges `[0, 3]`, local edges `[3, 4]`, line `2`, and column `2`.
+The parent still reads `shared == 6`. All positions are character offsets: the multibyte `é` and `β` each count
+as one. `clear_mark(name)` removes only the current rule's mark; afterwards `mark_exists(name)` is `0`, while
+`mark_pos(name)`, `mark_line(name)`, and `mark_col(name)` return `undef`.
 
 ### Example: two explicit marks
 

@@ -229,7 +229,7 @@ sub _build_mark_trace_stmt {
   ."mark_name => '$args{mark_name}', "
   ."string_ref => \$STRING, "
   ."mark_pos => $args{mark_pos_expr}, "
-  ."left_edge => \$LSPOS - length \$LMATCH, "
+  ."left_edge => (defined(\$LSPOS) && defined(\$LMATCH) ? \$LSPOS - length \$LMATCH : pos \$\$STRING), "
   ."parser_pos => pos \$\$STRING"
   .')'
 }

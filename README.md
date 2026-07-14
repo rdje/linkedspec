@@ -290,6 +290,10 @@ Top-level project docs:
 - Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
   the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.
+- Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
+  its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
+  live plus generated execution; Dart, Julia, Lua, and final inventory admission remain under
+  `FUTURE-PARITY-BACKLOG.17.2-.17.5`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public

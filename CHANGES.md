@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.1 — align Perl Rust complete named marks
+
+Adopted `linkedspec-complete-named-mark-v1`, an exact seven-helper contract for `mark_entry_start/end`,
+`mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`. Its unchanged `é\nAβ\nZ` parent/child fixture
+locks character positions, 1-based line/column values, missing undef, clear/existence, symbolic bare names, and
+same-name rule isolation.
+
+Perl live and standalone-generated execution now return the exact fixture. Standalone generated source defines a
+safe optional mark-trace delegate instead of referring to the compiler package's private callback, and trace-edge
+metadata falls back to the live cursor when an `I` preamble has no local match. The first full gate measured two
+stale Phase-0 source-lock subtests; exactly 19 expected guarded trace expressions were migrated.
+
+Rust now stores named marks by rule label, routes every existing named capture operation through that scope,
+implements the seven helpers, projects public positions/locations in Unicode characters, and returns undef for an
+absent `mark_pos`. Native, serialized, emitted-plan, and generated execution agree with Perl. Dart, Julia, and Lua
+remain owned by `.17.2-.17.4`; shared inventory admission and symmetric-omission hardening remain `.17.5`.
+
+Verification passes the neutral 7-helper/3-mutation checker, Perl 3-test fixture, complete Rust package (188 core,
+137 runtime, 105 oracle, 105 generated corpus, 197 integration, and specialized suites), capability 64/0/0, CLI
+61/61 in both option environments, and Phase 0 `1..1031` in 983 seconds.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.5 — add Lua boundary capture
 
 Lua now executes `capture_until_boundary(rule[, ...])` through a boundary-specific compiled-alternation cache.

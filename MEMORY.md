@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.7.5` — add Lua boundary capture.
-- latest_commit: `10f10ddd` — `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`.
-- active_work_unit: verified `.4.3.7.5` executes non-consuming earliest usable compiled-rule boundary lookahead
-  with consume-mode independence, EOF fallback, and state-preserving unusable behavior.
-- next_action: commit `.4.3.7.5`, clear the brief, verify a clean tree, then cleanly pivot to neutral plus Perl/Rust
-  complete named-mark `FUTURE-PARITY-BACKLOG.17.1`.
-- current_proof: One multibyte test locks bare/quoted rules, reversed argument order, unresolved/regex-free targets,
-  Unicode cursor values, unconsumed rest, receiver continuation, EOF fallback, and zero/all-unusable no-op. The
-  dual-ABI Lua gate passes 117/117 plus syntax/process/manifest checks. Toolbox probing routes Perl's zero-argument
-  undefined-handler failure versus typed-backend null to `.5`; no inventory/corpus/generated/capability changed.
-  Full local CI passes capability 64/0/0, CLI 61/61 twice, and phase0 `1..1031` in 862 seconds.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.17.1` — align Perl/Rust complete named marks.
+- latest_commit: `bb4fa9ee` — `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`.
+- active_work_unit: `.17.1` is fully implemented and verified; its exact seven-helper contract aligns Perl
+  live/generated and Rust native/serialized/emitted-plan/generated execution and awaits only the prepared commit.
+- next_action: commit `.17.1`, clear the brief, verify clean, then activate and implement Dart named marks `.17.2`.
+- current_proof: The unchanged `é\nAβ\nZ` fixture proves entry/local edge writers, character positions, 1-based
+  line/column reads, absent undef, clear/existence, symbolic bare names, and same-name parent/child isolation. The
+  neutral checker passes 7 helpers plus 3 rejection mutations; Perl live/standalone-generated and the focused Rust
+  contract pass. The complete Rust core/runtime package gate passes 188 core, 137 runtime, 105 oracle, 105
+  generated-corpus, 197 integration, and all focused suites. After a measured 19-string Phase-0 source-lock
+  migration, canonical CI passes capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
 - latest_bootstrap_read: 2026-07-13 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -31,5 +31,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.4.3.7.5` runtime/test/docs passed final gates and await the
-  prepared commit. Oracle timeout calibration remains future backlog `.7.0`.
+- blockers: none. in_flight_uncommitted: fully verified `.17.1` source/tests/docs await the prepared commit only;
+  do not pivot before it lands and the tree is clean. Oracle timeout calibration remains future backlog `.7.0`.

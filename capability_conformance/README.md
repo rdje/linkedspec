@@ -62,6 +62,18 @@ preserves metadata plus executes equivalent attached/parenthesized helper/user-f
 Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust/Dart/Julia/Lua parity keeps
 the overall capability future-owned under the remaining backend rollout leaves.
 
+`complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
+every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The
+contract requires symbolic bare mark names, rule-label isolation, character-based public positions and locations,
+and undef/zero behavior for absent reads and existence checks. Its exact Unicode parent/child fixture also proves
+that a child cannot overwrite an identically named parent mark. Validate the schema, independent location model,
+fixture rendering, and three drift mutations with `python3 tools/check_complete_named_mark_contract.py`. Perl
+consumes the unchanged fixture through `prove -Iperl t/complete_named_mark_contract.t`, including live and
+standalone generated execution. Rust consumes it through
+`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract`, including
+native, serialized, emitted-plan, and generated execution. Dart, Julia, Lua, and final independent inventory
+admission remain owned by `FUTURE-PARITY-BACKLOG.17.2-.17.5`.
+
 `punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare
 final receiver segments, exact normalized AST equivalence with parenthesized forms, ordinary-identifier retention,

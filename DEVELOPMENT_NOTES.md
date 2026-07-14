@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.1` — mark scope and generated ownership must be tested together): The
+  seven omitted helpers looked like dispatcher additions, but the unchanged parent/child fixture exposed three
+  deeper seams. (1) A named checkpoint is keyed by both rule label and mark name. Rust's former global name map
+  made a child's `shared` overwrite its parent's; one nested same-name case now protects every mark-based capture
+  helper because all reads/writes go through the rule bucket. (2) Missing positions are data absence, not position
+  zero. `mark_pos`, `mark_line`, and `mark_col` therefore return undef when absent, while `mark_exists` alone
+  returns numeric zero. (3) Standalone emitted code cannot call a compiler-private trace subroutine. Generated
+  source now owns a safe delegate, and its trace arguments are valid even when an `I` preamble runs before any
+  local match: the trace left edge falls back to the live cursor. Arguments are evaluated before a no-op trace
+  call, so guarding only inside the trace handler would still warn. The first canonical gate proved the resulting
+  Phase-0 delta was exactly two top-level source-lock subtests; migrating their 19 expected strings and rerunning
+  produced `1..1031` PASS in 983 seconds. Neutral, Perl live/generated, Rust native/serialized/emitted/generated,
+  complete Rust package, capability 64/0/0, CLI 61x2, doctrine, KM, and book gates pass. Dart `.17.2` is next.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.5` — structural lookahead is not ordinary rule execution): A boundary
   helper must ignore surrounding consume mode, inspect every usable target without dispatching it, choose the
   earliest left edge, and move only to that edge. Reusing the ordinary rule cache/execution path would couple

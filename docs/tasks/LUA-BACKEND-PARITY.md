@@ -7,7 +7,7 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs;
-  complete named-mark rollout `FUTURE-PARITY-BACKLOG.17.1` is next before Lua consumes `.17.4` in `.4.3.7.3`)
+  complete named-mark Perl/Rust `.17.1` is done, and Dart/Julia `.17.2-.17.3` precede Lua `.17.4`/`.4.3.7.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1900,9 +1900,9 @@ mechanisms plus closeout. Construction/splicing, deterministic views/membership,
 chains and named mutation/direct assignment close all 13 ordinary harray names at 103/103 on both Lua ABIs.
 Codeblock/control/tree-callback parent `.4.3.6` closes at 114/114 with later function/callable obligations routed
 explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls
-`.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs. Remaining
-named-mark/marker/no-drift leaves are dependency-gated by the shared `.17` rollout, so cross-backend neutral plus
-Perl/Rust named-mark leaf `FUTURE-PARITY-BACKLOG.17.1` is the next PNT frontier.
+`.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs. Complete
+named marks now have an exact neutral contract and aligned Perl/Rust execution through `.17.1`; Dart `.17.2` and
+Julia `.17.3` are the dependency frontier before Lua consumes `.17.4` in `.4.3.7.3`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2001,7 +2001,7 @@ Perl/Rust named-mark leaf `FUTURE-PARITY-BACKLOG.17.1` is the next PNT frontier.
   64/0/0, CLI 61/61 twice, phase0 `1..1031` in 862 seconds, and every contract/doctrine/documentation gate.
 - [x] **LOCKSTEP** — Public/KM/live state adds Lua to the existing portable boundary contract without changing
   helper inventory, corpus, generated-source, or capability claims; zero-argument Perl/typed-backend drift is
-  routed to `.5`, and PNT advances to cross-backend named-mark `.17.1` before Lua `.4.3.7.3`.
+  routed to `.5`, and the shared named-mark `.17` rollout precedes Lua `.4.3.7.3`.
 
 ### `LUA-BACKEND-PARITY.4.3.7.2` Acceptance Checklist
 

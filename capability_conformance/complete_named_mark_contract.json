@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-complete-named-mark-v1",
+  "policy": {
+    "scope": "named marks are isolated by rule label for the duration of one parser execution",
+    "storage": "backends may store native offsets internally, but public positions, lines, and columns are character-based",
+    "names": "an unquoted identifier in a mark-name argument is the symbolic mark name rather than a working-variable read",
+    "missing": "mark_pos, mark_line, and mark_col return undef for an absent mark; mark_exists returns 0",
+    "clear": "clear_mark deletes only the named mark in the current rule and returns undef",
+    "entry": "entry writers snapshot the immediate entry-match left and right edges",
+    "local": "match writers snapshot the current local-match left and right edges"
+  },
+  "helper_schema": {
+    "fields": ["name", "kind", "args", "position"],
+    "symbolic_mark_arg": "mark_name",
+    "public_location_base": 1
+  },
+  "helpers": [
+    {"name": "mark_entry_start", "kind": "write", "args": ["mark_name"], "position": "entry_start"},
+    {"name": "mark_entry_end", "kind": "write", "args": ["mark_name"], "position": "entry_end"},
+    {"name": "mark_match_start", "kind": "write", "args": ["mark_name"], "position": "match_start"},
+    {"name": "mark_match_end", "kind": "write", "args": ["mark_name"], "position": "match_end"},
+    {"name": "mark_line", "kind": "read", "args": ["mark_name"], "position": "stored_mark_line"},
+    {"name": "mark_col", "kind": "read", "args": ["mark_name"], "position": "stored_mark_column"},
+    {"name": "clear_mark", "kind": "delete", "args": ["mark_name"], "position": "stored_mark"}
+  ],
+  "fixture": {
+    "input": "é\nAβ\nZ",
+    "parent_match": "é\nA",
+    "child_match": "β",
+    "spec_source": "Top::\n I { mark_input_end(shared) }\n /é\\nA/ -> Top {\n  return(hash(\n   \"child\", call(Child),\n   \"parent_shared\", mark_pos(shared),\n   \"parent_line\", mark_line(shared),\n   \"parent_col\", mark_col(shared)\n  ))\n }\n\nChild::\n /β/ -> Child {\n  mark_entry_start(entry_start)\n  mark_entry_end(entry_end)\n  mark_match_start(match_start)\n  mark_match_end(match_end)\n  mark_match_end(shared)\n  mark_match_end(clearable)\n  before_clear = mark_exists(clearable)\n  clear_mark(clearable)\n  return(hash(\n   \"entry_start\", array(mark_pos(entry_start), mark_line(entry_start), mark_col(entry_start)),\n   \"entry_end\", array(mark_pos(entry_end), mark_line(entry_end), mark_col(entry_end)),\n   \"match_start\", array(mark_pos(match_start), mark_line(match_start), mark_col(match_start)),\n   \"match_end\", array(mark_pos(match_end), mark_line(match_end), mark_col(match_end)),\n   \"symbolic\", mark_exists(entry_start),\n   \"before_clear\", before_clear,\n   \"after_clear\", mark_exists(clearable),\n   \"cleared_pos\", mark_pos(clearable),\n   \"missing_pos\", mark_pos(missing),\n   \"missing_line\", mark_line(missing),\n   \"missing_col\", mark_col(missing)\n  ))\n }\n",
+    "expected": {
+      "child": {
+        "entry_start": [0, 1, 1],
+        "entry_end": [3, 2, 2],
+        "match_start": [3, 2, 2],
+        "match_end": [4, 2, 3],
+        "symbolic": 1,
+        "before_clear": 1,
+        "after_clear": 0,
+        "cleared_pos": null,
+        "missing_pos": null,
+        "missing_line": null,
+        "missing_col": null
+      },
+      "parent_shared": 6,
+      "parent_line": 3,
+      "parent_col": 2
+    }
+  }
+}

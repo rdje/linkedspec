@@ -55,8 +55,12 @@ pub struct RuntimeContext {
     /// Exposed to the DSL as char offsets by `match_start_pos`/`match_end_pos`.
     pub match_start_byte: usize,
     pub match_end_byte: usize,
-    /// Marks — named positions in the input (**byte** offsets).
-    pub marks: std::collections::HashMap<String, usize>,
+    /// Marks — rule label → named position (**byte** offset) in the input.
+    ///
+    /// Perl stores marks in `$info->{marks}{$rule_label}{$mark_name}`. Keeping
+    /// the rule bucket explicit prevents a child rule from observing or
+    /// replacing an identically named parent checkpoint.
+    pub marks: std::collections::HashMap<String, std::collections::HashMap<String, usize>>,
     /// Anonymous capture-slice start position.
     pub capture_start: Option<usize>,
     /// Exit flag — set by exit_now(status).
@@ -203,6 +207,32 @@ impl RuntimeContext {
     /// Return the per-execution override or the rule's compiled fallback mode.
     pub fn effective_parse_mode(&self, fallback: ParseMode) -> ParseMode {
         self.parse_mode_override.unwrap_or(fallback)
+    }
+
+    pub(crate) fn mark_get(&self, rule_label: &str, name: &str) -> Option<usize> {
+        self.marks
+            .get(rule_label)
+            .and_then(|bucket| bucket.get(name))
+            .copied()
+    }
+
+    pub(crate) fn mark_set(&mut self, rule_label: &str, name: String, position: usize) {
+        self.marks
+            .entry(rule_label.to_string())
+            .or_default()
+            .insert(name, position);
+    }
+
+    pub(crate) fn mark_remove(&mut self, rule_label: &str, name: &str) {
+        if let Some(bucket) = self.marks.get_mut(rule_label) {
+            bucket.remove(name);
+        }
+    }
+
+    pub(crate) fn mark_exists(&self, rule_label: &str, name: &str) -> bool {
+        self.marks
+            .get(rule_label)
+            .is_some_and(|bucket| bucket.contains_key(name))
     }
 
     pub(crate) fn set_diagnostic_top_rule(&mut self, label: impl Into<String>) {

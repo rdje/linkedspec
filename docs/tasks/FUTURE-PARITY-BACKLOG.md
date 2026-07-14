@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Lua capture/cursor audit exposes a seven-helper current-mark inventory blind spot;
-  new cross-backend lane `.17` owns complete documented-mark parity without a Lua-only extension).
+- Last updated: `2026-07-13` (complete named-mark `.17.1` adopts the exact seven-helper contract and aligns
+  Perl/Rust live plus generated execution; Dart `.17.2` is active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3408,17 +3408,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.1`
-  Status: `active`
+  Status: `done`
   Goal: Adopt the exact seven-helper neutral contract and align Perl/Rust execution.
   Dependencies: `.17.0`
   Acceptance: One unchanged fixture covers entry/local start/end mark writes, Unicode position/line/column reads,
     clear/existence behavior, symbolic bare names, absent marks, rule-local isolation, and generated preservation;
     Perl proves the reference result and Rust native/oracle/generated paths match it.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** The strict neutral checker locks seven helpers, the unchanged Unicode
+    parent/child fixture, and three rejected drift mutations. Perl live and standalone-generated execution match;
+    Rust native, serialized, emitted-plan, and generated execution match the same value. The complete Rust package
+    passes 188 core, 137 runtime, 105 oracle, 105 generated-corpus, 197 integration, and all specialized suites.
+    The first canonical gate measured only two stale Phase-0 top-level source-lock subtests; migrating their exact
+    19 guarded trace-edge strings produces capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align Dart complete named-mark execution and inventory.
   Dependencies: `.17.1`
   Acceptance: Dart consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
@@ -4035,8 +4040,27 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
   seven names, affected surfaces, dependency order, and clean return to Lua `.4.3.7.1`.
 - [x] **NO REGRESSION** — Planning changes no parser/compiler/runtime/inventory/corpus/capability behavior; focused
   coverage, memory, task, doctrine, Knowledge Map, book, and whitespace checks pass.
-- [x] **LOCKSTEP** — `.17` remains pending implementation, `.17.0` closes only the tracking/audit slice, and Lua
-  input/cursor `.4.3.7.1` resumes without a false named-mark parity claim.
+- [x] **LOCKSTEP** — `.17` remains owned by its implementation leaves, `.17.0` closes only the tracking/audit slice,
+  and Lua input/cursor `.4.3.7.1` resumes without a false named-mark parity claim.
+
+### `FUTURE-PARITY-BACKLOG.17.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The exact Unicode parent/child fixture shows that Perl already has the seven public
+  helpers, while Rust lacks their dispatch and keeps all mark names in one execution-global bucket; standalone
+  generated Perl also fails when emitted mark writers call a trace delegate absent from the generated package.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `LinkedSpec::call_spec_handler_subst` and generated-handler source inspection
+  prove the Perl lowerings and missing generated delegate; the Rust runtime/engine audit proves global mark storage,
+  absent `mark_pos` coercion to zero, and missing entry/local/location/delete helper arms.
+- [x] **FIX** — Adopt one strict seven-helper contract and unchanged fixture; make Perl generated source provide the
+  safe trace delegate; make Rust store marks by rule label, preserve every named capture operation through that
+  bucket, expose character locations, return undef when absent, and implement all seven helpers.
+- [x] **ADDRESSED (verified)** — The neutral checker rejects three semantic drifts; Perl live and standalone-generated
+  execution and Rust native/serialized/emitted-plan/generated execution return the exact same nested value.
+- [x] **NO REGRESSION** — Focused Perl and Rust contracts pass; the complete Rust core/runtime package gate passes
+  188 core, 137 runtime, 105 oracle, 105 generated-corpus, 197 integration, and all specialized suites. The
+  canonical repository gate passes capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
+- [x] **LOCKSTEP** — The exact contract, CI wiring, public helper reference/example, task/index/roadmap/live state,
+  Knowledge Map evidence, and backend handoff agree; Dart `.17.2` is the next backend consumer after commit.
 
 ## Current Frontier
 
@@ -4222,7 +4246,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit controls pass 115/115 on both ABIs. |
 | 162 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls pass 116/116 over one byte-safe state seam. |
 | 163 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Earliest usable boundary lookahead passes 117/117 without consuming the boundary. |
-| 164 | `FUTURE-PARITY-BACKLOG.17.1` | `active` | Adopt seven-helper neutral named-mark contract and align Perl/Rust before Lua consumes `.17.4`. |
+| 164 | `FUTURE-PARITY-BACKLOG.17.1` | `done` | Seven-helper Unicode/rule-local contract and Perl/Rust live/generated execution are exact. |
+| 165 | `FUTURE-PARITY-BACKLOG.17.2` | `active` | Make Dart consume the unchanged complete named-mark contract and add exactly seven inventory names. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4864,6 +4889,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.1` | Neutral 7-helper/3-mutation contract; Perl live/standalone generated; Rust native/serialized/emitted/generated plus 188 core/137 runtime/105 oracle/105 generated/197 integration; capability 64/0/0; CLI 61x2; Phase 0 `1..1031`/983s; docs/KM/governance/book/whitespace. | PASS. Perl/Rust consume one Unicode/rule-local result; generated Perl trace ownership and Rust mark scope/absent reads are corrected; Dart `.17.2` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.0` | Exact 131-Perl/239-backend identifier comparison; 16-name semantic classification; still-green 239-name/105-fixture report; docs/KM/memory/task/doctrine/mdBook/whitespace. | PASS. Seven public current marks have neutral/backend/admission owners; no behavior/inventory changed; Lua `.4.3.7.1` resumes. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.7` | Neutral 6/4/6 contract; Perl 7; Rust 5; Dart 5; Julia 55; PUC Lua 109/LuaJIT 109; capability and generated checker 64/0/0; public/condition/generated-owner scans; docs/KM/governance/mdBook/whitespace. | PASS. Punctuation-light `.16` is admitted and closed; generated Lua stays `.8`; clean pivot returns to Lua `.4.3.6.4`. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.6` | Lua typed-AST/negative contract; public SpecFile JSON reconstruction; exact native fixture; `luac -p`; complete PUC Lua 109/LuaJIT 109/corpus-validation/scaffold gate; docs/KM/governance/whitespace. | PASS. Lua consumes/narrows the aliases without grammar broadening; `.contains()` drift is owned by `.5`; absent generated source remains `.8`; closeout `.16.7` activates. |
@@ -4982,6 +5008,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.17.1` | `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks` | Exact seven-helper contract; Perl generated trace repair; Rust rule-local marks and seven helpers; Unicode live/generated proof. |
 | `FUTURE-PARITY-BACKLOG.17.0` | `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity` | Sixteen-name classification, exact seven-helper neutral/backend/admission owners, and clean Lua input/cursor return. |
 | `FUTURE-PARITY-BACKLOG.16.7` | `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases` | Capability 64/0/0, selected public examples, composed five-backend/two-Lua-ABI recurring proof, and parent `.16` closeout. |
 | `FUTURE-PARITY-BACKLOG.16.6` | `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases` | Lua typed AST, statement-only bare next, terminal-only receiver narrowing, serialized/native dual-ABI fixture, and honest generated/helper routing. |
@@ -5100,6 +5127,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.17.1` adopts the exact seven-helper complete named-mark contract. One unchanged multibyte
+  parent/child fixture proves entry/local edges, character positions, 1-based locations, missing undef,
+  clear/existence, symbolic names, and rule-label isolation. Perl live/standalone-generated and Rust
+  native/serialized/emitted/generated routes agree. Generated Perl now owns a safe optional mark-trace delegate;
+  Rust uses rule-label mark buckets and no longer maps absent `mark_pos` to zero. A measured 19-string Phase-0
+  source-lock migration closes the guarded preamble trace edge; Dart `.17.2` becomes active.
 - `2026-07-13`: `.17.0` classifies the 16-name difference between identifier-shaped non-compatibility Perl
   contract diagnostics and the aligned backend inventories. Seven are public current marks, two compatibility map
   aliases, two legacy capture names, and five internal lowering operations. `.17.1-.17.5` now own the exact

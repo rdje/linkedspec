@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.17.1 — align Perl/Rust complete named marks**
+  (DONE — exact seven-helper Unicode/rule-local contract passes live and generated paths; Dart `.17.2` next).
+
+  **Result:** One strict neutral artifact covers entry/local start/end writers, line/column reads, clear/existence,
+  symbolic bare names, absent undef, and same-name parent/child isolation. It exposed and fixed standalone Perl
+  generated source's missing mark-trace delegate plus unsafe preamble trace edge, and Rust's execution-global mark
+  map plus absent-`mark_pos == 0` drift. Perl live/generated and Rust native/serialized/emitted-plan/generated
+  execution now return the same multibyte fixture. The shared Dart/Julia/Lua inventory remains unchanged until
+  `.17.2-.17.4` consume the exact artifact; `.17.5` still owns independent symmetric-omission hardening. Complete
+  Rust proof passes 188 core, 137 runtime, 105 oracle, 105 generated-corpus, and 197 integration tests. The first
+  canonical gate measured only two stale Phase-0 source-lock subtests; after the exact 19-string migration, the
+  full gate passes capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.5 — add Lua boundary capture**
   (DONE — earliest structural boundary passes 117/117 on both ABIs; cross-backend named-mark `.17.1` next).
 

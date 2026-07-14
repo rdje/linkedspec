@@ -30,6 +30,15 @@ my %FAMILY = map { $_ => 1 } qw(
  rep_and_bcode
 );
 
+sub trace_mark_event {
+ my (%args) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  return undef unless exists $INC{'LinkedSpec/Trace.pm'};
+  return undef unless LinkedSpec::Trace::should_dump(300);
+  return LinkedSpec::Trace::trace_mark_event(%args, caller_depth => 4);
+ })
+}
+
 sub emit_source {
  my ($spec_content_ref, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';

@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -83,6 +83,7 @@ require_tracked_file tools/run_primary_cli_matrix.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file tools/check_callable_codeblock_contract.py
 require_tracked_file tools/check_callable_signature_contract.py
+require_tracked_file tools/check_complete_named_mark_contract.py
 require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
 require_tracked_file tools/check_uniform_binding_contract.py
@@ -97,6 +98,7 @@ require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
 require_tracked_file capability_conformance/callable_codeblock_contract.json
 require_tracked_file capability_conformance/callable_signature_contract.json
+require_tracked_file capability_conformance/complete_named_mark_contract.json
 require_tracked_file capability_conformance/punctuation_light_zero_arg_contract.json
 require_tracked_file capability_conformance/uniform_binding_contract.json
 require_tracked_file capability_conformance/generated_source_contract.json
@@ -124,6 +126,7 @@ require_tracked_file t/native_spec_resolution.t
 require_tracked_file t/generated_source_contract.t
 require_tracked_file t/scalar_numeric_contract.t
 require_tracked_file t/punctuation_light_zero_arg_contract.t
+require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
@@ -174,6 +177,7 @@ perl -c -Iperl t/generated_source_contract.t
 perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/punctuation_light_zero_arg_contract.t
+perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
@@ -194,6 +198,12 @@ python3 tools/check_callable_signature_contract.py
 
 log "checking portable callable-codeblock contract"
 python3 tools/check_callable_codeblock_contract.py
+
+log "checking complete named-mark helper contract"
+python3 tools/check_complete_named_mark_contract.py
+
+log "running Perl complete named-mark behavior contract fixture"
+PERL5LIB= prove -Iperl t/complete_named_mark_contract.t
 
 log "checking punctuation-light zero-argument syntax contract"
 python3 tools/check_punctuation_light_zero_arg_contract.py

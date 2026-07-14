@@ -4347,8 +4347,15 @@ impl Engine {
                 | "mark_exists"
                 | "mark_input_start"
                 | "mark_input_end"
+                | "mark_entry_start"
+                | "mark_entry_end"
+                | "mark_match_start"
+                | "mark_match_end"
                 | "mark_copy"
                 | "mark_capture_slice"
+                | "mark_line"
+                | "mark_col"
+                | "clear_mark"
                 | "capture_from"
                 | "capture_len_from"
                 | "capture_until_cursor_from"
@@ -6325,7 +6332,7 @@ impl Engine {
             }
             "start_capture_slice_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                if let Some(mark) = ctx.marks.get(&name).copied() {
+                if let Some(mark) = ctx.mark_get(rule_label, &name) {
                     ctx.capture_start = Some(mark);
                 }
                 Ok(RuntimeValue::Undef)
@@ -6508,24 +6515,28 @@ impl Engine {
             "mark_here" => {
                 if !args.is_empty() {
                     let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.marks.insert(name, ctx.pos);
+                    ctx.mark_set(rule_label, name, ctx.pos);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_pos" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                let byte = ctx.marks.get(&name).copied().unwrap_or(0);
-                Ok(RuntimeValue::Number(
-                    byte_to_char_offset(&ctx.input, byte) as f64
-                ))
+                Ok(match ctx.mark_get(rule_label, &name) {
+                    Some(byte) => {
+                        RuntimeValue::Number(byte_to_char_offset(&ctx.input, byte) as f64)
+                    }
+                    None => RuntimeValue::Undef,
+                })
             }
             "mark_exists" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(RuntimeValue::Number(if ctx.marks.contains_key(&name) {
-                    1.0
-                } else {
-                    0.0
-                }))
+                Ok(RuntimeValue::Number(
+                    if ctx.mark_exists(rule_label, &name) {
+                        1.0
+                    } else {
+                        0.0
+                    },
+                ))
             }
             // ── RUST-PARITY.5.5.3: mark-based capture family ──
             // Authoritative contract: `perl/LinkedSpec/ActionIR/Contracts.pm`
@@ -6544,7 +6555,7 @@ impl Engine {
                 // Store the absolute start-of-input position (0) under the mark.
                 if !args.is_empty() {
                     let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.marks.insert(name, 0);
+                    ctx.mark_set(rule_label, name, 0);
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -6553,7 +6564,35 @@ impl Engine {
                 if !args.is_empty() {
                     let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                     let end = ctx.input.len();
-                    ctx.marks.insert(name, end);
+                    ctx.mark_set(rule_label, name, end);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_entry_start" => {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.mark_set(rule_label, name, ctx.entry_start_byte);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_entry_end" => {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.mark_set(rule_label, name, ctx.entry_end_byte);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_match_start" => {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.mark_set(rule_label, name, ctx.match_start_byte);
+                }
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_match_end" => {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.mark_set(rule_label, name, ctx.match_end_byte);
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -6564,12 +6603,12 @@ impl Engine {
                 // corrected in .5.5.3.
                 let target = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let source = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                match ctx.marks.get(&source).copied() {
+                match ctx.mark_get(rule_label, &source) {
                     Some(pos) => {
-                        ctx.marks.insert(target, pos);
+                        ctx.mark_set(rule_label, target, pos);
                     }
                     None => {
-                        ctx.marks.remove(&target);
+                        ctx.mark_remove(rule_label, &target);
                     }
                 }
                 Ok(RuntimeValue::Undef)
@@ -6577,15 +6616,40 @@ impl Engine {
             "mark_capture_slice" => {
                 if !args.is_empty() {
                     let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.marks.insert(name, ctx.capture_start.unwrap_or(0));
+                    ctx.mark_set(rule_label, name, ctx.capture_start.unwrap_or(0));
                 }
                 Ok(RuntimeValue::Undef)
+            }
+            "clear_mark" => {
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                ctx.mark_remove(rule_label, &name);
+                Ok(RuntimeValue::Undef)
+            }
+            "mark_line" => {
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(match ctx.mark_get(rule_label, &name) {
+                    Some(byte) => {
+                        let (line, _) = line_col_at_byte_offset(&ctx.input, byte);
+                        RuntimeValue::Number(line as f64)
+                    }
+                    None => RuntimeValue::Undef,
+                })
+            }
+            "mark_col" => {
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(match ctx.mark_get(rule_label, &name) {
+                    Some(byte) => {
+                        let (_, column) = line_col_at_byte_offset(&ctx.input, byte);
+                        RuntimeValue::Number(column as f64)
+                    }
+                    None => RuntimeValue::Undef,
+                })
             }
             "capture_from" => {
                 // mark → match-START (was match-END before .5.5.3; fixed for Perl
                 // parity — `capture_from` is a non-cursor reader).
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_text(&ctx.input, mark, ctx.match_start_byte)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
@@ -6594,7 +6658,7 @@ impl Engine {
             }
             "capture_len_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_char_len(&ctx.input, mark, ctx.match_start_byte)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
@@ -6604,7 +6668,7 @@ impl Engine {
             "capture_until_cursor_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_text(&ctx.input, mark, cursor)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
@@ -6614,7 +6678,7 @@ impl Engine {
             "capture_until_cursor_len_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_char_len(&ctx.input, mark, cursor)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
@@ -6624,10 +6688,10 @@ impl Engine {
             "capture_take_until_cursor_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                match ctx.marks.get(&name).copied() {
+                match ctx.mark_get(rule_label, &name) {
                     Some(mark) => match span_text(&ctx.input, mark, cursor) {
                         Some(text) => {
-                            ctx.marks.insert(name, cursor);
+                            ctx.mark_set(rule_label, name, cursor);
                             Ok(RuntimeValue::Scalar(text))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6638,10 +6702,10 @@ impl Engine {
             "capture_take_until_cursor_len_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                match ctx.marks.get(&name).copied() {
+                match ctx.mark_get(rule_label, &name) {
                     Some(mark) => match span_char_len(&ctx.input, mark, cursor) {
                         Some(n) => {
-                            ctx.marks.insert(name, cursor);
+                            ctx.mark_set(rule_label, name, cursor);
                             Ok(RuntimeValue::Number(n as f64))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6655,10 +6719,10 @@ impl Engine {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 let end = ctx.match_start_byte;
-                match ctx.marks.get(&name).copied() {
+                match ctx.mark_get(rule_label, &name) {
                     Some(mark) => match span_char_len(&ctx.input, mark, end) {
                         Some(n) => {
-                            ctx.marks.insert(name, cursor);
+                            ctx.mark_set(rule_label, name, cursor);
                             Ok(RuntimeValue::Number(n as f64))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6669,7 +6733,7 @@ impl Engine {
             "capture_rest_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_text(&ctx.input, mark, end)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
@@ -6679,7 +6743,7 @@ impl Engine {
             "capture_rest_len_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                Ok(match ctx.marks.get(&name).copied() {
+                Ok(match ctx.mark_get(rule_label, &name) {
                     Some(mark) => span_char_len(&ctx.input, mark, end)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
@@ -6689,10 +6753,10 @@ impl Engine {
             "capture_take_rest_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                match ctx.marks.get(&name).copied() {
+                match ctx.mark_get(rule_label, &name) {
                     Some(mark) => match span_text(&ctx.input, mark, end) {
                         Some(text) => {
-                            ctx.marks.insert(name, end);
+                            ctx.mark_set(rule_label, name, end);
                             Ok(RuntimeValue::Scalar(text))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6703,10 +6767,10 @@ impl Engine {
             "capture_take_rest_len_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                match ctx.marks.get(&name).copied() {
+                match ctx.mark_get(rule_label, &name) {
                     Some(mark) => match span_char_len(&ctx.input, mark, end) {
                         Some(n) => {
-                            ctx.marks.insert(name, end);
+                            ctx.mark_set(rule_label, name, end);
                             Ok(RuntimeValue::Number(n as f64))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6717,8 +6781,8 @@ impl Engine {
             "capture_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.marks.get(&a).copied();
-                let end = ctx.marks.get(&b).copied();
+                let start = ctx.mark_get(rule_label, &a);
+                let end = ctx.mark_get(rule_label, &b);
                 Ok(match (start, end) {
                     (Some(s), Some(e)) => span_text(&ctx.input, s, e)
                         .map(RuntimeValue::Scalar)
@@ -6729,8 +6793,8 @@ impl Engine {
             "capture_len_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.marks.get(&a).copied();
-                let end = ctx.marks.get(&b).copied();
+                let start = ctx.mark_get(rule_label, &a);
+                let end = ctx.mark_get(rule_label, &b);
                 Ok(match (start, end) {
                     (Some(s), Some(e)) => span_char_len(&ctx.input, s, e)
                         .map(|n| RuntimeValue::Number(n as f64))
@@ -6741,12 +6805,12 @@ impl Engine {
             "capture_take_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.marks.get(&a).copied();
-                let end = ctx.marks.get(&b).copied();
+                let start = ctx.mark_get(rule_label, &a);
+                let end = ctx.mark_get(rule_label, &b);
                 match (start, end) {
                     (Some(s), Some(e)) => match span_text(&ctx.input, s, e) {
                         Some(text) => {
-                            ctx.marks.insert(a, e);
+                            ctx.mark_set(rule_label, a, e);
                             Ok(RuntimeValue::Scalar(text))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -6757,12 +6821,12 @@ impl Engine {
             "capture_take_between_len" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.marks.get(&a).copied();
-                let end = ctx.marks.get(&b).copied();
+                let start = ctx.mark_get(rule_label, &a);
+                let end = ctx.mark_get(rule_label, &b);
                 match (start, end) {
                     (Some(s), Some(e)) => match span_char_len(&ctx.input, s, e) {
                         Some(n) => {
-                            ctx.marks.insert(a, e);
+                            ctx.mark_set(rule_label, a, e);
                             Ok(RuntimeValue::Number(n as f64))
                         }
                         None => Ok(RuntimeValue::Undef),

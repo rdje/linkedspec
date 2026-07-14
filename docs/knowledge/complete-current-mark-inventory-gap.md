@@ -10,8 +10,8 @@ answers:
 date: 2026-07-13
 status: confirmed-gap
 tags: [actionir, capture, marks, inventory, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.17.0 compares identifier-shaped non-compatibility Perl contract diagnostics with the aligned Dart/Julia/Lua 239-name inventories. Sixteen names differ: seven documented current mark helpers, two documented compatibility map aliases, two legacy capture names, and five internal lowering operations. tools/check_language_capability_coverage.pl reverse-checks only Perl contract calls found in the neutral corpus, so the seven current calls are invisible when every backend inventory omits them identically."
-reverify: "perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_entry_end|mark_match_start|mark_match_end|mark_line|mark_col|clear_mark' perl/LinkedSpec/ActionIR/Contracts.pm docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl"
+evidence: "FUTURE-PARITY-BACKLOG.17.0 compares identifier-shaped non-compatibility Perl contract diagnostics with the aligned Dart/Julia/Lua 239-name inventories. Sixteen names differ: seven documented current mark helpers, two documented compatibility map aliases, two legacy capture names, and five internal lowering operations. tools/check_language_capability_coverage.pl reverse-checks only Perl contract calls found in the neutral corpus, so the seven current calls are invisible when every backend inventory omits them identically. FUTURE-PARITY-BACKLOG.17.1 adds the exact contract and aligns Perl/Rust without prematurely changing the shared inventory."
+reverify: "python3 tools/check_complete_named_mark_contract.py && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_entry_end|mark_match_start|mark_match_end|mark_line|mark_col|clear_mark' perl/LinkedSpec/ActionIR/Contracts.pm docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl"
 ---
 
 # Complete Current Mark Inventory Gap
@@ -36,9 +36,14 @@ every governed fixture. `FUTURE-PARITY-BACKLOG.17` owns a neutral exact contract
 and final independent public-current inventory hardening. Lua capture leaf `.4.3.7.3` must consume that shared
 resolution rather than inventing a backend-specific extension.
 
+`.17.1` now supplies the exact seven-helper contract and aligns Perl plus Rust live/generated execution. The
+symmetric inventory omission remains open until Dart, Julia, and Lua consume the same artifact and `.17.5`
+introduces the independent public-current source of truth.
+
 ## Links
 
 - Owner: [[FUTURE-PARITY-BACKLOG]] `.17`.
 - Initiating Lua audit: [[lua-capture-cursor-runtime-audit]].
 - Existing governed-inventory lesson: [[governed-capture-helpers-missing-shared-inventory]].
+- First backend rollout: [[complete-named-mark-perl-rust-parity]].
 - Why names alone are insufficient: [[current-call-name-inventory-does-not-prove-runtime-semantics]].
