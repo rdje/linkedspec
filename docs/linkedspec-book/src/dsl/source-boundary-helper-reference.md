@@ -504,6 +504,15 @@ contract as of `JULIA-BACKEND-PARITY.4.4`, including character-based public
 offsets over its internal UTF-8 code-unit cursor and consume-mode continuation
 from explicitly restored or rewound positions.
 
+Lua implements the same boundary behavior as of `LUA-BACKEND-PARITY.4.3.7.5`:
+it caches usable compiled rule alternations, always seeks regardless of surrounding
+parse mode, and passes the shared semantics on PUC Lua and LuaJIT.
+
+The public signature requires at least one rule. Do not rely on a zero-argument
+call: Perl currently leaves it unresolved until a generated-handler failure,
+while Rust, Dart, Julia, and Lua return `undef` without moving. Cross-backend
+normalization belongs to `FUTURE-PARITY-BACKLOG.5`.
+
 ## Choosing the smallest helper
 
 Use this rule of thumb:

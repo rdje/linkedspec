@@ -9,10 +9,11 @@ answers:
   - which documented current mark helpers are missing from backend inventories
   - why is capture until boundary separate from capture slices
   - does Lua execute input cursor helpers and cursor controls
+  - does Lua execute capture_until_boundary
 date: 2026-07-13
 status: confirmed
 tags: [lua, runtime, capture, marks, cursor, inventory, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, governed fixtures, Lua state seams, and shipped markers. LUA-BACKEND-PARITY.4.3.7.1 then implemented all input/live-cursor projections plus explicit save/restore/rewind controls over Lua's byte-safe registers; its focused Unicode/LIFO/consume test passes in the 115/115 PUC Lua and LuaJIT gates. Capture/mark helpers and split-marker AST execution remain later leaves. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
+evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, governed fixtures, Lua state seams, and shipped markers. `.4.3.7.1` implements input/cursor controls at 115/115, `.4.3.7.2` implements all 16 anonymous capture calls at 116/116, and `.4.3.7.5` implements non-consuming earliest-boundary lookahead at 117/117 on PUC Lua and LuaJIT. Named marks and split-marker AST execution remain later leaves. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen"
 ---
 
@@ -30,8 +31,9 @@ reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_c
 Lua stores internal positions as UTF-8 byte offsets in immutable runtime match registers. Those registers carry
 the live cursor, entry/local matches, and anonymous capture start, and expose byte-to-character and line/column
 conversion helpers. `.4.3.7.1` adds a parse-scoped cursor stack and executes the input/live-cursor and explicit
-cursor-control families through one live/register synchronization seam. The interpreter still has no named-mark
-frame and falls through for the remaining capture/mark helpers. `spec_parser.lua` preserves
+cursor-control families through one live/register synchronization seam; `.4.3.7.2` adds anonymous capture reads;
+and `.4.3.7.5` adds compiled-rule boundary lookahead. The interpreter still has no named-mark frame and falls
+through for named capture/mark helpers. `spec_parser.lua` preserves
 `@capture_slice`, `@capture_from_here`, `@move_pos`, and `@mark(name)` as typed split-marker nodes, but
 `compiled_spec.lua` and `interpreter.lua` do not consume those nodes. Current shipped source includes `@move_pos`
 in `rgx/subs/pgen/specs/ebnf.spec`, so marker execution needs an explicit native owner.
@@ -55,13 +57,15 @@ complete documented current mark inventory before Lua `.4.3.7.3` can claim full 
 invent an isolated extension.
 
 `capture_until_boundary` stays separate from ordinary capture spans: it resolves compiled regex-bearing rules,
-seeks all usable candidates from the live cursor, chooses the earliest boundary, and leaves that boundary
-unconsumed. If every supplied rule is unresolved or unusable it returns null without moving; if at least one is
-usable but none matches later, it captures to end-of-input.
+seeks all usable candidates from the live cursor through a boundary-specific alternation cache, chooses the
+earliest boundary, and leaves that boundary unconsumed. If every supplied rule is unresolved or unusable it
+returns null without moving; if at least one is usable but none matches later, it captures to end-of-input.
+`.4.3.7.5` executes this on both Lua ABIs independent of surrounding seek/consume mode. Zero arguments are a
+neutral no-op on Rust/Dart/Julia/Lua but a generated-handler failure on Perl; `.5` owns normalization.
 
 ## Links
 
-- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0` audit and `.4.3.7.1` input/cursor implementation.
+- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0` audit plus `.4.3.7.1`, `.4.3.7.2`, and `.4.3.7.5` implementations.
 - State taxonomy: [[spec-capture-mark-family-taxonomy]].
 - Marker timing: [[split-boundary-marker-action-timing]].
 - Coverage limitation: [[current-call-name-inventory-does-not-prove-runtime-semantics]].

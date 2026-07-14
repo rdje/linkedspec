@@ -2434,6 +2434,91 @@ Value:AND
   end
 end)
 
+test("runtime boundary capture seeks earliest usable rule without consuming it", function()
+  local source = [[
+Top::AND
+ /é🙂:[ \t]*/
+ -> Top[0] {
+   body = capture_until_boundary(EndBoundary, MissingBoundary, NextBoundary)
+   return({
+     "body" : body,
+     "cursor" : cursor_pos(),
+     "rest" : cursor_rest()
+   })
+ }
+
+NextBoundary: /@b:/
+EndBoundary: /END/
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(
+      linkedspec.compile_spec(linkedspec.parse_spec(source)),
+      { parse_mode = "consume" }
+    ),
+    "é🙂: α @b: tail END"
+  ).value
+  assert_equal(result.body, "α ", "earliest boundary capture")
+  assert_equal(result.cursor, 6, "boundary cursor uses Unicode character position")
+  assert_equal(result.rest, "@b: tail END", "boundary token remains unconsumed")
+
+  local chained = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::AND
+ /é🙂:[ \t]*/
+ -> Top[0] { return(capture_until_boundary("NextBoundary").trim()) }
+
+NextBoundary: /@b:/
+]]))),
+    "é🙂: α @b: tail"
+  ).value
+  assert_equal(chained, "α", "quoted boundary result receiver continuation")
+
+  local eof = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::AND
+ /é🙂:[ \t]*/
+ -> Top[0] {
+   body = capture_until_boundary(EndBoundary)
+   return({ "body" : body, "cursor" : cursor_pos(), "rest" : cursor_rest() })
+ }
+
+EndBoundary: /END/
+]]))),
+    "é🙂: tail🙂"
+  ).value
+  assert_equal(eof.body, "tail🙂", "usable missing boundary captures to input end")
+  assert_equal(eof.cursor, 9, "EOF fallback moves cursor to character end")
+  assert_equal(eof.rest, "", "EOF fallback leaves empty remainder")
+
+  local unusable = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::AND
+ /é🙂:[ \t]*/
+ -> Top[0] {
+   before = cursor_pos()
+   zero = capture_until_boundary()
+   missing = capture_until_boundary(MissingBoundary, EmptyBoundary)
+   return({
+     "before" : before,
+     "zero" : zero,
+     "missing" : missing,
+     "after" : cursor_pos(),
+     "rest" : cursor_rest()
+   })
+ }
+
+EmptyBoundary:AND
+ I { return("unused") }
+]]))),
+    "é🙂: tail"
+  ).value
+  assert_equal(unusable.before, 4, "unusable boundary start position")
+  assert_equal(unusable.zero, json.null, "zero boundaries are neutral pending arity normalization")
+  assert_equal(unusable.missing, json.null, "unresolved and regex-free boundaries are neutral")
+  assert_equal(unusable.after, 4, "unusable boundaries preserve cursor")
+  assert_equal(unusable.rest, "tail", "unusable boundaries preserve remainder")
+end)
+
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
   local source = [[
 Top::

@@ -1464,6 +1464,10 @@ new start for `right`, and the closing-bracket action records the final right ed
 - **Returns**: scalar or undef
 - **Behavior**: Treats each argument as a named boundary rule, quoted or bare. From the current live cursor, seeks for the earliest match of any valid boundary rule, returns the text from the original cursor to that boundary start, and moves the live cursor to that boundary start. The boundary match itself is not consumed. If at least one valid boundary rule exists but no boundary is found, captures through end-of-input and moves the cursor to end-of-input. If no requested boundary rule can be resolved to a pattern, returns `undef` and leaves the cursor unchanged.
 - **Use it when**: an open-ended body should stop at the next structural token and that token must remain available to the normal rule path. This is different from `save_cursor()` / `restore_cursor()` and from `rewind_match_start()` / `rewind_entry_start()`: those helpers move an already-consumed cursor, while `capture_until_boundary(...)` avoids consuming the structural boundary in the first place.
+- **Backend status**: Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement the named-rule boundary behavior. Lua
+  uses a boundary-specific compiled-alternation cache and unconditional seek, so consume mode does not anchor the
+  lookahead. The signature requires at least one rule; zero-argument behavior is not portable and is owned by
+  `FUTURE-PARITY-BACKLOG.5`.
 
 ### `capture_take()`
 - **Signature**: `capture_take()`

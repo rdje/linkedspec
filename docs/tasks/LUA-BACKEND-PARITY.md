@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (all 16 anonymous capture-boundary calls `.4.3.7.2` pass 116/116 on both Lua ABIs;
-  earliest-boundary `.4.3.7.5` is next while the seven-helper documented-mark rollout remains owned by
-  `FUTURE-PARITY-BACKLOG.17` before named-mark `.4.3.7.3`)
+- Last updated: `2026-07-13` (non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs;
+  complete named-mark rollout `FUTURE-PARITY-BACKLOG.17.1` is next before Lua consumes `.17.4` in `.4.3.7.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1691,15 +1690,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.5`
-  Status: `active`
+  Status: `done`
   Goal: Implement non-consuming earliest-boundary capture.
   Dependencies: `.4.3.7.1`
   Acceptance: `capture_until_boundary(rule[, ...])` seeks all usable compiled regex-bearing rules from the live
     cursor, selects the earliest match independent of surrounding parse mode, returns text before the boundary,
     leaves the boundary unconsumed, captures to end-of-input when usable rules have no later match, and returns
-    null without cursor movement when every supplied rule is unresolved or unusable.
-  Verification: `pending`
-  Commit: `pending`
+    null without cursor movement when every supplied rule is unresolved or unusable. Until helper-caveat owner
+    `FUTURE-PARITY-BACKLOG.5` normalizes the public minimum arity, a zero-argument call follows Rust/Dart/Julia by
+    returning null without movement rather than copying Perl's generated-handler undefined-subroutine failure.
+  Verification: **PASS 2026-07-13.** Lua resolves bare and quoted rule names, ignores unresolved and regex-free
+    rules, caches usable compiled alternations separately from ordinary rule matching, and always seeks from the
+    live cursor regardless of parse mode. The focused Unicode test locks argument-order-independent earliest
+    selection, consume-mode operation, unconsumed boundary rest, character cursor projection, returned-text
+    receiver continuation, EOF fallback, all-unusable and zero-argument neutral no-op behavior. `bash
+    tools/run_lua_local.sh` passes 117/117 on separately built PUC Lua and LuaJIT adapters plus syntax,
+    CLI-scaffold, and exact 105-fixture manifest checks. Full local CI passes capability 64/0/0, CLI 61/61 in
+    both option environments, phase0 `1..1031` in 862 seconds, and every contract/doctrine/documentation gate.
+  Commit: `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.6`
   Status: `pending`
@@ -1891,9 +1899,10 @@ All 34 ordinary array helper names and six numeric terminals are routed. Cross-c
 mechanisms plus closeout. Construction/splicing, deterministic views/membership, and copied transforms/receiver
 chains and named mutation/direct assignment close all 13 ordinary harray names at 103/103 on both Lua ABIs.
 Codeblock/control/tree-callback parent `.4.3.6` closes at 114/114 with later function/callable obligations routed
-explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115 on both Lua ABIs; all 16 anonymous
-capture-boundary calls `.4.3.7.2` pass 116/116. Named marks remain dependency-gated by the shared `.17` rollout,
-so independent non-consuming earliest-boundary helper `.4.3.7.5` is the current executable frontier.
+explicitly. Unicode input/live-cursor views and controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls
+`.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on both Lua ABIs. Remaining
+named-mark/marker/no-drift leaves are dependency-gated by the shared `.17` rollout, so cross-backend neutral plus
+Perl/Rust named-mark leaf `FUTURE-PARITY-BACKLOG.17.1` is the next PNT frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1972,7 +1981,27 @@ so independent non-consuming earliest-boundary helper `.4.3.7.5` is the current 
 | 73 | `LUA-BACKEND-PARITY.4.3.7.0` | `done` | Split six runtime mechanisms plus no-drift and exposed the symmetric documented-mark inventory gap. |
 | 74 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit save/restore/rewind controls pass 115/115 on both ABIs. |
 | 75 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls share byte-safe state and pass 116/116 on both ABIs. |
-| 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `active` | Implement non-consuming earliest-boundary capture while named marks wait on `.17`. |
+| 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Non-consuming earliest usable boundary and EOF/no-op cases pass 117/117 on both ABIs. |
+
+### `LUA-BACKEND-PARITY.4.3.7.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua admitted `capture_until_boundary(...)` and compiled all target rule patterns,
+  but its interpreter had no path from symbolic rule arguments to independent lookahead or synchronized movement.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Ordinary matching obeys the engine's seek/consume mode and consumes through
+  a match; structural boundary capture instead needs a dedicated compiled-alternation cache and unconditional seek
+  from the current cursor, followed by movement only to the selected left edge.
+- [x] **FIX** — Resolve bare/quoted names, skip unresolved and regex-free targets, cache usable alternations,
+  choose the earliest candidate, capture to that edge or EOF, and synchronize live/register cursor state without
+  consuming the boundary.
+- [x] **ADDRESSED (verified)** — One multibyte test covers consume-mode independence, reversed argument order,
+  unresolved interleaving, character cursor values, unconsumed rest, quoted-name receiver continuation, EOF
+  fallback, regex-free/all-unresolved no-op, and the tracked zero-argument neutral edge.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 117/117 under separately built PUC Lua and LuaJIT
+  PCRE2 adapters plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. Full local CI passes capability
+  64/0/0, CLI 61/61 twice, phase0 `1..1031` in 862 seconds, and every contract/doctrine/documentation gate.
+- [x] **LOCKSTEP** — Public/KM/live state adds Lua to the existing portable boundary contract without changing
+  helper inventory, corpus, generated-source, or capability claims; zero-argument Perl/typed-backend drift is
+  routed to `.5`, and PNT advances to cross-backend named-mark `.17.1` before Lua `.4.3.7.3`.
 
 ### `LUA-BACKEND-PARITY.4.3.7.2` Acceptance Checklist
 
@@ -2937,3 +2966,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.0` | `LUA-BACKEND-PARITY.4.3.7.0 - split Lua capture cursor mechanisms` | Source-backed state/timing split, symmetric documented-mark inventory finding, and input/cursor handoff. |
 | `LUA-BACKEND-PARITY.4.3.7.1` | `LUA-BACKEND-PARITY.4.3.7.1 - add Lua input cursor controls` | Unicode input/cursor projections, LIFO save/restore, entry/local rewinds, consume continuation, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.2` | `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers` | Sixteen byte-safe stable/location/advancing calls, Unicode values, valid-only mutation, and dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.7.5` | `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture` | Earliest usable rule lookahead, non-consumption, EOF/no-op edges, caching, and dual-ABI proof. |

@@ -2214,6 +2214,10 @@ before implementation.
     Remove the Perl-only result leak from `start_capture_slice()` too: the public helper catalog and Rust/Dart/Julia/Lua
     define this boundary mutation as void, while current Perl lowering exposes its internal assignment expression; keep
     the source-boundary reference aligned with the void contract and add a five-backend lock.
+    Normalize `capture_until_boundary()` minimum arity too: its public signature requires at least one rule, but a
+    direct reference probe leaves the zero-argument call raw and fails later as an undefined generated-handler
+    subroutine, while Rust/Dart/Julia and Lua return null without moving the cursor. Select one typed boundary and
+    lock compile/runtime diagnostics or neutral behavior across all backends.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
@@ -3380,7 +3384,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.17`
-  Status: `pending`
+  Status: `active`
   Goal: Reconcile the complete documented current named-mark helper surface across every backend and its coverage
     inventory.
   Children: `.17.0`, `.17.1`, `.17.2`, `.17.3`, `.17.4`, `.17.5`
@@ -3404,7 +3408,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.17.1`
-  Status: `pending`
+  Status: `active`
   Goal: Adopt the exact seven-helper neutral contract and align Perl/Rust execution.
   Dependencies: `.17.0`
   Acceptance: One unchanged fixture covers entry/local start/end mark writes, Unicode position/line/column reads,
@@ -4217,7 +4221,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 160 | `FUTURE-PARITY-BACKLOG.17.0` | `done` | Classified 16 differences and split the exact seven-helper public parity/gate correction. |
 | 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit controls pass 115/115 on both ABIs. |
 | 162 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls pass 116/116 over one byte-safe state seam. |
-| 163 | `LUA-BACKEND-PARITY.4.3.7.5` | `active` | Implement independent earliest-boundary lookahead while named marks wait on `.17`. |
+| 163 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Earliest usable boundary lookahead passes 117/117 without consuming the boundary. |
+| 164 | `FUTURE-PARITY-BACKLOG.17.1` | `active` | Adopt seven-helper neutral named-mark contract and align Perl/Rust before Lua consumes `.17.4`. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

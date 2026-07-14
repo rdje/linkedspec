@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.5 — add Lua boundary capture
+
+Lua now executes `capture_until_boundary(rule[, ...])` through a boundary-specific compiled-alternation cache.
+Bare and quoted rule names resolve symbolically; unresolved and regex-free rules are ignored. Every usable rule
+is sought from the live cursor regardless of the surrounding parse mode, the earliest match wins, returned text
+ends before that match, and synchronized cursor state moves to—but does not consume—the boundary.
+
+If usable rules have no later match, Lua captures through EOF and moves there. If every rule is unusable, it
+returns null without movement. A focused multibyte consume-mode test covers reversed argument order, an interleaved
+unknown rule, character cursor projection, unconsumed rest, quoted-name receiver continuation, EOF fallback,
+regex-free/all-unresolved no-op, and the zero-argument edge. Both PUC Lua and LuaJIT pass 117/117 plus syntax,
+CLI-scaffold, and exact 105-fixture manifest checks.
+
+The authoritative full local gate also passes capability 64/0/0, CLI 61/61 in both option environments, phase0
+`1..1031` in 862 seconds, and every contract/doctrine/documentation check.
+
+The zero-argument probe exposed a pre-existing portability gap: the public signature requires a rule, Perl leaves
+the call raw and later reports an undefined generated-handler subroutine, while Rust/Dart/Julia/Lua return null
+without moving. `FUTURE-PARITY-BACKLOG.5` now owns normalization. No inventory, corpus, generated-source, or
+capability claim changes. Cross-backend complete named-mark `.17.1` is next before Lua `.17.4`/`.4.3.7.3`.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.2 — add Lua anonymous capture helpers
 
 Lua now executes all 16 current anonymous capture calls through its existing immutable match-register boundary.

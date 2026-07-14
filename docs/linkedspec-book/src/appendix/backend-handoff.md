@@ -714,8 +714,9 @@ neutral contract, five-backend rollout, and independent gate hardening. Input/li
 all character-unit input and cursor projections plus parse-scoped LIFO save/restore and entry/local anchor rewinds;
 consume-mode matching observes the synchronized rewound cursor. Anonymous capture `.4.3.7.2` adds all 16 stable,
 location, and advancing reads over the same byte-safe registers, with character-unit results, valid-only mutation,
-and a void setter. PUC Lua and LuaJIT pass 116/116; independent earliest-boundary `.4.3.7.5` is next while named
-marks wait for the shared `.17` rollout. General user-function final
+and a void setter. Independent earliest-boundary `.4.3.7.5` then adds cached compiled-rule seek, earliest
+selection, non-consumption, EOF fallback, and unresolved/regex-free no-op behavior. PUC Lua and LuaJIT pass
+117/117; named-mark `.17.1` is next before Lua consumes `.17.4` in `.4.3.7.3`. General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

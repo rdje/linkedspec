@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.5 — add Lua boundary capture**
+  (DONE — earliest structural boundary passes 117/117 on both ABIs; cross-backend named-mark `.17.1` next).
+
+  **Result:** Bare/quoted usable rules compile into a boundary-only alternation cache and always use seek semantics.
+  The earliest left edge ends the returned text and becomes the live/register cursor without consuming its token;
+  no later match falls back to EOF, and all-unusable rules leave state unchanged. A multibyte consume-mode test
+  covers argument ordering, unknown/regex-free targets, quoted receiver flow, EOF, Unicode cursor values, and the
+  zero-argument edge. Both Lua ABIs pass 117/117 plus syntax/CLI/manifest checks. The discovered zero-argument
+  Perl failure versus typed-backend null result is tracked under `.5`; no capability/inventory/corpus claim moves.
+  Full local CI passes capability 64/0/0, both CLI environments at 61/61, and phase0 `1..1031` in 862 seconds.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.2 — add Lua anonymous capture helpers**
   (DONE — all 16 calls pass 116/116 on both ABIs; independent earliest-boundary `.4.3.7.5` next).
 

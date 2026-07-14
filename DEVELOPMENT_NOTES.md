@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.5` — structural lookahead is not ordinary rule execution): A boundary
+  helper must ignore surrounding consume mode, inspect every usable target without dispatching it, choose the
+  earliest left edge, and move only to that edge. Reusing the ordinary rule cache/execution path would couple
+  lookahead to rule repetition, actions, or mode. Lua therefore owns a separate label-keyed compiled-alternation
+  cache and calls `seek_match` directly, then uses the shared cursor synchronization seam. The multibyte test
+  locks non-consumption, EOF fallback, and unusable no-op behavior at 117/117 on both ABIs. A toolbox probe also
+  found zero-argument drift: Perl leaves a raw undefined helper in generated execution while typed backends return
+  null; `.5` owns the language-level minimum-arity decision. The full local gate passes capability 64/0/0, both
+  61-case CLI environments, and phase0 `1..1031` in 862 seconds. Named-mark `.17.1` is the next dependency frontier.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.2` — classify the right edge before reading or mutating): Anonymous
   capture helpers share one rolling left edge but not one right edge. Plain slice/take ends at the current local
   match start, until-cursor ends at the live cursor, and rest ends at input end. Lua keeps every endpoint in UTF-8

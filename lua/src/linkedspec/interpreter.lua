@@ -90,6 +90,7 @@ function M.runtime_engine(compiled, options)
     parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
     max_iterations = max_iterations,
     regex_cache = {},
+    boundary_regex_cache = {},
     helper_regex_cache = {},
   }, ENGINE_MT)
 end
@@ -1608,6 +1609,43 @@ local function evaluate_anonymous_capture_helper(name, expr, ctx)
   return result
 end
 
+local function boundary_rule_name(engine, arg, ctx, accumulator, edge_state)
+  local boundary_expr = argument_expr(arg)
+  local symbolic_name = target_name(boundary_expr)
+  if symbolic_name ~= nil then return symbolic_name end
+  local value = evaluate_expr(engine, boundary_expr, ctx, accumulator, edge_state)
+  return scalar_string(value, true) or ""
+end
+
+local function evaluate_capture_until_boundary(engine, expr, ctx, accumulator, edge_state)
+  local saw_usable_boundary = false
+  local boundary_start
+  for _, arg in ipairs(expr.args) do
+    local label = boundary_rule_name(engine, arg, ctx, accumulator, edge_state)
+    local rule = engine.compiled_spec.rules_by_label[label]
+    if rule ~= nil and #rule.regex_patterns > 0 then
+      saw_usable_boundary = true
+      local alternation = engine.boundary_regex_cache[label]
+      if alternation == nil then
+        alternation = matching.compile_runtime_regex_alternation(rule)
+        engine.boundary_regex_cache[label] = alternation
+      end
+      local candidate = alternation:seek_match(ctx.input, ctx.cursor_byte)
+      if candidate ~= nil and (boundary_start == nil or candidate.byte_start < boundary_start) then
+        boundary_start = candidate.byte_start
+      end
+    end
+  end
+  if not saw_usable_boundary then return json.null end
+
+  local capture_start = ctx.cursor_byte
+  local capture_end = boundary_start or #ctx.input
+  if capture_end < capture_start or capture_end > #ctx.input then return json.null end
+  local captured = ctx.input:sub(capture_start + 1, capture_end)
+  set_live_cursor(ctx, capture_end)
+  return captured
+end
+
 local function evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
   if name == "input_slice" then
     if #expr.args ~= 2 then invalid_helper_arity(name, "exactly 2 positional arguments", #expr.args) end
@@ -1836,6 +1874,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
   elseif CURSOR_CONTROL_HELPERS[name] then
     return evaluate_cursor_control(name, expr, ctx)
+  elseif name == "capture_until_boundary" then
+    return evaluate_capture_until_boundary(engine, expr, ctx, accumulator, edge_state)
   elseif ANONYMOUS_CAPTURE_HELPERS[name] then
     return evaluate_anonymous_capture_helper(name, expr, ctx)
   elseif name:match("^entry_") or name:match("^match_") then

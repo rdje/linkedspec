@@ -86,8 +86,11 @@ starts at the new position. Exact arity errors remain typed. `.4.3.7.2` adds all
 the same byte-safe register state. Stable reads end at local-match start, the live cursor, or input end; advancing
 forms update the rolling rule-local boundary only after a valid read. Public positions and lengths remain Unicode
 character values, returned text and numbers continue through compatible receivers, and `start_capture_slice()` is
-a void mutation. Both ABIs pass 116/116; earliest-boundary helper `.4.3.7.5` is next while named-mark closure waits
-for the cross-backend `.17` rollout. General user-function final `callback: codeblock` declaration
+a void mutation. Both ABIs pass 116/116. `.4.3.7.5` now resolves bare/quoted usable boundary rules into a separate
+compiled-alternation cache, always seeks regardless of surrounding parse mode, captures before the earliest match
+without consuming it, falls back to EOF, and leaves the cursor unchanged when every rule is unresolved or
+regex-free. Both ABIs pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`;
+complete named-mark `.17.1` is next. General user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
