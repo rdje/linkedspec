@@ -1551,16 +1551,36 @@ local ANONYMOUS_CAPTURE_HELPERS = {
 }
 
 local NAMED_MARK_HELPERS = {
+  capture_between = true,
+  capture_from = true,
+  capture_len_between = true,
+  capture_len_from = true,
+  capture_rest_from = true,
+  capture_rest_len_from = true,
+  capture_take_between = true,
+  capture_take_between_len = true,
+  capture_take_len_from = true,
+  capture_take_rest_from = true,
+  capture_take_rest_len_from = true,
+  capture_take_until_cursor_from = true,
+  capture_take_until_cursor_len_from = true,
+  capture_until_cursor_from = true,
+  capture_until_cursor_len_from = true,
   clear_mark = true,
+  mark_capture_slice = true,
   mark_col = true,
+  mark_copy = true,
   mark_entry_end = true,
   mark_entry_start = true,
   mark_exists = true,
+  mark_here = true,
   mark_input_end = true,
+  mark_input_start = true,
   mark_line = true,
   mark_match_end = true,
   mark_match_start = true,
   mark_pos = true,
+  start_capture_slice_from = true,
 }
 
 local function set_live_cursor(ctx, byte_cursor)
@@ -1624,19 +1644,33 @@ local function evaluate_anonymous_capture_helper(name, expr, ctx)
 end
 
 local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
-  if #expr.args ~= 1 then invalid_helper_arity(name, "exactly 1 positional argument", #expr.args) end
-  local mark_name = capture_name(
-    engine,
-    argument_expr(expr.args[1]),
-    ctx,
-    accumulator,
-    edge_state
-  )
+  validate_positional_arguments(name, expr.args)
+  local two_mark_helper = name == "mark_copy" or name == "capture_between" or
+    name == "capture_len_between" or name == "capture_take_between" or
+    name == "capture_take_between_len"
+  local expected_arity = two_mark_helper and 2 or 1
+  if #expr.args ~= expected_arity then
+    local expectation = expected_arity == 1 and
+      "exactly 1 positional argument" or "exactly 2 positional arguments"
+    invalid_helper_arity(name, expectation, #expr.args)
+  end
+
+  local function mark_name(index)
+    return capture_name(
+      engine,
+      argument_expr(expr.args[index]),
+      ctx,
+      accumulator,
+      edge_state
+    )
+  end
+
   local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
   local marks = ctx.mark_buckets[rule_label]
+  local first_mark_name = mark_name(1)
 
   if name == "clear_mark" then
-    if marks ~= nil then marks[mark_name] = nil end
+    if marks ~= nil then marks[first_mark_name] = nil end
     return json.null
   end
 
@@ -1644,32 +1678,95 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
     marks = {}
     ctx.mark_buckets[rule_label] = marks
   end
-  if name == "mark_input_end" then
-    marks[mark_name] = #ctx.input
+  if name == "start_capture_slice_from" then
+    local byte_offset = marks[first_mark_name]
+    if byte_offset ~= nil then set_capture_start(ctx, byte_offset) end
+    return json.null
+  elseif name == "mark_here" then
+    marks[first_mark_name] = ctx.cursor_byte
+    return json.null
+  elseif name == "mark_input_start" then
+    marks[first_mark_name] = 0
+    return json.null
+  elseif name == "mark_input_end" then
+    marks[first_mark_name] = #ctx.input
     return json.null
   elseif name == "mark_entry_start" or name == "mark_entry_end" then
     local one = ctx.registers.entry_match
     if one ~= nil then
-      marks[mark_name] = name == "mark_entry_start" and one.byte_start or one.byte_end
+      marks[first_mark_name] = name == "mark_entry_start" and one.byte_start or one.byte_end
     end
     return json.null
   elseif name == "mark_match_start" or name == "mark_match_end" then
     local one = ctx.registers.local_match
     if one ~= nil then
-      marks[mark_name] = name == "mark_match_start" and one.byte_start or one.byte_end
+      marks[first_mark_name] = name == "mark_match_start" and one.byte_start or one.byte_end
+    end
+    return json.null
+  elseif name == "mark_copy" then
+    local source_name = mark_name(2)
+    if marks[source_name] == nil then
+      marks[first_mark_name] = nil
+    else
+      marks[first_mark_name] = marks[source_name]
+    end
+    return json.null
+  elseif name == "mark_capture_slice" then
+    local capture_start = ctx.registers.capture_start_byte
+    if capture_start == nil then
+      marks[first_mark_name] = nil
+    else
+      marks[first_mark_name] = capture_start
     end
     return json.null
   elseif name == "mark_exists" then
-    return marks[mark_name] ~= nil and 1 or 0
+    return marks[first_mark_name] ~= nil and 1 or 0
   end
 
-  local byte_offset = marks[mark_name]
-  if byte_offset == nil then return json.null end
+  local byte_offset = marks[first_mark_name]
   if name == "mark_pos" then
+    if byte_offset == nil then return json.null end
     return matching.byte_offset_to_char_offset(ctx.input, byte_offset)
+  elseif name == "mark_line" or name == "mark_col" then
+    if byte_offset == nil then return json.null end
+    local position = matching.line_column_at_byte_offset(ctx.input, byte_offset)
+    return name == "mark_line" and position.line or position.column
   end
-  local position = matching.line_column_at_byte_offset(ctx.input, byte_offset)
-  return name == "mark_line" and position.line or position.column
+
+  if two_mark_helper then
+    local end_byte = marks[mark_name(2)]
+    local length_only = name == "capture_len_between" or name == "capture_take_between_len"
+    local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only)
+    if result ~= json.null and (name == "capture_take_between" or name == "capture_take_between_len") then
+      marks[first_mark_name] = end_byte
+    end
+    return result
+  end
+
+  local end_byte
+  if name == "capture_from" or name == "capture_len_from" or name == "capture_take" or
+      name == "capture_take_len_from" then
+    local one = ctx.registers.local_match
+    end_byte = one and one.byte_start or nil
+  elseif name == "capture_until_cursor_from" or name == "capture_until_cursor_len_from" or
+      name == "capture_take_until_cursor_from" or name == "capture_take_until_cursor_len_from" then
+    end_byte = ctx.cursor_byte
+  else
+    end_byte = #ctx.input
+  end
+
+  local length_only = name == "capture_len_from" or name == "capture_until_cursor_len_from" or
+    name == "capture_rest_len_from" or name == "capture_take_len_from" or
+    name == "capture_take_until_cursor_len_from" or name == "capture_take_rest_len_from"
+  local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only)
+  if result ~= json.null and name:sub(1, 12) == "capture_take" then
+    if name == "capture_take_rest_from" or name == "capture_take_rest_len_from" then
+      marks[first_mark_name] = #ctx.input
+    else
+      marks[first_mark_name] = ctx.cursor_byte
+    end
+  end
+  return result
 end
 
 local function boundary_rule_name(engine, arg, ctx, accumulator, edge_state)
@@ -1810,7 +1907,7 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, edge_state, name, nil)
   elseif scalar_numeric.supports(name) then
     return evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, nil)
-  elseif NAMED_MARK_HELPERS[name] then
+  elseif NAMED_MARK_HELPERS[name] or (name == "capture_take" and #expr.args > 0) then
     return evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
   end
   if name == "return" then

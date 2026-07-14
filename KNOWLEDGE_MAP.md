@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **511** facts · **3517** question keys.
+> **512** facts · **3525** question keys.
 
 ## Questions → fact
 
@@ -46,6 +46,7 @@
 - "are Lua hash values recursed inside array traversal" -> [lua-runtime-array-tree-callbacks](docs/knowledge/lua-runtime-array-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'tree_children|new_tree_container|set_tree_child|evaluate_tree_leaf_block|evaluate_tree_receiver_block|runtime array traversal' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "are Lua inline control branch payloads lazy" -> [lua-runtime-lazy-inline-controls](docs/knowledge/lua-runtime-lazy-inline-controls.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua match positions bytes or Unicode characters" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "are Lua named capture positions and lengths Unicode characters" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "are Lua named mark positions character based" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "are Lua named marks isolated between parent and child rules" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "are Lua numeric comparison receiver methods terminal" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
@@ -355,6 +356,7 @@
 - "do generated Rust parse entrypoints remain compatible" -> [rust-generated-source-v1-metadata-errors](docs/knowledge/rust-generated-source-v1-metadata-errors.md) · 2026-07-11 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture && rg -n 'emit_rust_source_v1|GeneratedSourceMetadata|GeneratedSourceError|compile_failed|pub fn metadata|pub fn execute|pub fn parse' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs`
 - "do generated linkedspec rule handlers run under use strict" -> [working-vars-no-strict-need-my-lexical](docs/knowledge/working-vars-no-strict-need-my-lexical.md) · 2026-06-23 · reverify: `grep -c 'use strict' perl/LinkedSpec/SpecEntry.pm   # 0 -> generated handlers are non-strict; then dump a current terse spec such as items += value; return(copy(array(items))) via dump_parser_source to see `my @items ;` once in the preamble`
 - "do if-family controls still use original source text" -> [perl-actionir-ast-if-control-lowering](docs/knowledge/perl-actionir-ast-if-control-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
+- "do invalid or reversed Lua named spans move marks" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "do items.pop_back() and items.pop_front() work" -> [terse-array-end-mutation-methods](docs/knowledge/terse-array-end-mutation-methods.md) · 2026-06-29 · reverify: `prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_6 && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
 - "do items.push_back(value) and items.push_front(value) work" -> [terse-array-end-mutation-methods](docs/knowledge/terse-array-end-mutation-methods.md) · 2026-06-29 · reverify: `prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_6 && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
 - "do lowercase_each uppercase_each use pinned Unicode data" -> [perl-rust-unicode-17-case-mapping](docs/knowledge/perl-rust-unicode-17-case-mapping.md) · 2026-07-12 · reverify: `python3 tools/check_unicode_case_contract.py && prove -q -Iperl t/unicode_case_mapping.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_case_mapping`
@@ -752,6 +754,7 @@
 - "does Lua array construction preserve evaluation order" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua array split preserve empty fields" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua bare three argument split mutate its target" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua bridge anonymous capture boundaries to named marks" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua copy runtime aggregates and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua corpus IO accept UTF-16 or UTF-32" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -772,6 +775,7 @@
 - "does Lua execute marker switch case default endcase endswitch statements" -> [lua-runtime-switch-statement-controls](docs/knowledge/lua-runtime-switch-statement-controls.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash knowledge-map/scripts/check_knowledge_map.sh`
 - "does Lua execute split markers" -> [lua-capture-cursor-runtime-audit](docs/knowledge/lua-capture-cursor-runtime-audit.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen`
 - "does Lua execute the anonymous capture helper family" -> [lua-runtime-anonymous-capture-helpers](docs/knowledge/lua-runtime-anonymous-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua execute the exhaustive governed named capture fixture" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua execute with trailing blocks" -> [lua-runtime-builtin-final-codeblocks-with](docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && PERL5LIB=perl perl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(\"x\".with() { return(value) })}, q{return(\"x\".with({ return(value) }))}) { print LinkedSpec::call_spec_handler_subst(q{Top},$s), qq{\\n}; }'`
 - "does Lua expose an implicit rule accumulator" -> [lua-runtime-array-mutation-child-flow](docs/knowledge/lua-runtime-array-mutation-child-flow.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'accumulator_stack|literal_nonnegative_index|runtime child push' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua fall through to global functions" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -779,6 +783,9 @@
 - "does Lua harray construction evaluate arguments once" -> [lua-runtime-harray-construction](docs/knowledge/lua-runtime-harray-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'HASH_SPLICE_HELPERS|sorted_harray_keys|evaluate_hash_helper|runtime copied harray construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua has_key recognize a null valued field" -> [lua-runtime-harray-views](docs/knowledge/lua-runtime-harray-views.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'count_keys|sorted_keys|sorted_values|has_key|runtime deterministic harray views' lua/src/linkedspec/interpreter.lua lua/test/run.lua docs/linkedspec-book/src/appendix/helper-contract-catalog.md`
 - "does Lua have compile_spec" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua implement capture from named marks" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
+- "does Lua implement capture take with a named mark" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
+- "does Lua implement mark copy and mark here" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua implement mark entry start and mark match end" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua implement mark line mark col and clear mark" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua implement punctuation light zero argument calls" -> [punctuation-light-zero-argument-calls](docs/knowledge/punctuation-light-zero-argument-calls.md) · 2026-07-13 · reverify: `bash tools/check_punctuation_light_five_backend.sh && perl tools/check_capability_conformance.pl`
@@ -1586,6 +1593,7 @@
 - "how does Lua diagnose unknown helper calls" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua diagnose user function recursion" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish arrays harrays and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua distinguish capture take anonymous and named overloads" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "how does Lua distinguish division symbol calls from regex literals" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
 - "how does Lua distinguish flat splicing from nested arrays" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
@@ -5265,7 +5273,7 @@ _Lua compile_spec builds ordered rule, dependency-regex, payload, and exact desc
 - **source:** [`docs/knowledge/lua-compiled-spec-state.md`](docs/knowledge/lua-compiled-spec-state.md)
 
 ### lua-complete-named-mark-parity
-_Lua executes the complete seven-helper named-mark contract on both ABIs_
+_Lua executes the complete seven-helper named-mark contract on PUC Lua and LuaJIT_
 
 - **answers:** does Lua implement mark entry start and mark match end | does Lua implement mark line mark col and clear mark | how does Lua store named marks | are Lua named mark positions character based | are bare Lua mark names symbolic | are Lua named marks isolated between parent and child rules | are Lua complete named mark names in the shared 246 name inventory
 - **date:** 2026-07-14 · **status:** current
@@ -5317,6 +5325,15 @@ _Lua projects spec-owned function-definition nodes without raw-scanning fn sourc
 - **evidence:** `LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The local gate passes 60/60 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, contracts, registry, descriptor, and matching preservation.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-function-definition-shell-projection.md`](docs/knowledge/lua-function-definition-shell-projection.md)
+
+### lua-governed-named-span-parity
+_Lua executes governed named writers spans and anonymous bridges through one rule-local store_
+
+- **answers:** does Lua execute the exhaustive governed named capture fixture | does Lua implement capture from named marks | does Lua implement capture take with a named mark | how does Lua distinguish capture take anonymous and named overloads | does Lua implement mark copy and mark here | does Lua bridge anonymous capture boundaries to named marks | do invalid or reversed Lua named spans move marks | are Lua named capture positions and lengths Unicode characters
+- **date:** 2026-07-15 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.3.7.3 extends lua/src/linkedspec/interpreter.lua over the FUTURE-PARITY-BACKLOG.17.4 parse-scoped rule-label/name/UTF-8-byte-offset store. lua/test/run.lua executes capability_capture_named_surface.spec unchanged through native and serialized SpecFile reconstruction and adds a multibyte bridge/edge/arity proof. tools/run_lua_local.sh passes 120/120 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks.`
+- **reverify:** `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
+- **source:** [`docs/knowledge/lua-governed-named-span-parity.md`](docs/knowledge/lua-governed-named-span-parity.md)
 
 ### lua-helper-regex-matches
 _Lua matches uses strict helper flags over the existing in-process PCRE2 owner_

@@ -185,6 +185,12 @@ locations to Unicode characters; PUC Lua and LuaJIT pass the unchanged fixture a
 admitted into the aligned 246-name backend inventories. Canonical coverage combines the 105-case corpus with the
 exact named-mark fixture and independently requires all 122 public identifier-shaped Perl contracts.
 
+Lua also executes the complete governed writer/span/bridge family through that same store on PUC Lua and LuaJIT.
+The unchanged exhaustive named fixture passes both native execution and reconstruction from public serialized
+`SpecFile` state at 120/120. Internal endpoints remain UTF-8 byte offsets, public positions and lengths use
+Unicode characters, and absent or reversed spans return `undef` without advancing a mark. The overloads remain
+deliberate: `capture_take()` uses the anonymous capture boundary, while `capture_take(name)` uses a named mark.
+
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 
 | Helper | Result | Right edge | Boundary movement |

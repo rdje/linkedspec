@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.3 — execute Lua named mark spans**
+  (DONE — governed writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT).
+
+  **Result:** Lua extends its admitted parse-scoped rule-label/name/UTF-8-byte-offset store across current,
+  input-start, anonymous, and copied writers; stable and valid-only advancing reads to match-start, live cursor,
+  input end, or a second mark; existence/location reads; and both anonymous/named bridge directions. Missing,
+  invalid, and reversed spans remain neutral. `capture_take()` stays anonymous and `capture_take(name)` selects
+  the named overload. The unchanged governed named fixture passes native and public-state reconstruction, and a
+  supplemental multibyte case locks Unicode projection, bridge/deletion behavior, no-op edges, void writers, and
+  exact arity. Full Lua and canonical gates pass capability 64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0
+  `1..1031` in 637 seconds without helper, fixture, inventory, or capability changes. Placement-sensitive
+  split/mark event execution `.4.3.7.4` is next.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.17.5 — admit complete named-mark inventory**
   (DONE — 246 shared names and an independent 122-public-contract reverse check close parent `.17`).
 

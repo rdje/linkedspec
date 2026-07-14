@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.3` — overload at dispatch, share state and span validation): The admitted
+  named-mark family did not need another frame: every writer, reader, two-mark span, and bridge extends the
+  existing parse-scoped `rule label -> name -> UTF-8 byte offset` store. One guarded byte-span seam validates both
+  endpoints before slicing or mutating; public positions and widths convert to Unicode characters only at the DSL
+  boundary. Advancing forms therefore change a mark only after a valid read, so absent or reversed spans are
+  neutral. The only name collision is semantic rather than lexical: zero-argument `capture_take()` is anonymous,
+  while one-argument `capture_take(name)` is named. Route that overload before anonymous dispatch and retain the
+  existing arity-specific diagnostics. The unchanged governed fixture plus a supplemental multibyte bridge/edge
+  case pass native and reconstructed execution; the full Lua gate is 120/120 on PUC Lua and LuaJIT. No inventory
+  or fixture changed. Placement-sensitive marker execution remains a distinct timing mechanism under `.4.3.7.4`.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.17.5` — equality is not completeness): Exact equality between backend
   inventories prevents one-sided drift but cannot detect a name omitted everywhere. The former reverse check also
   discovered Perl calls only from the same corpus used as occurrence evidence, so a symmetric corpus omission

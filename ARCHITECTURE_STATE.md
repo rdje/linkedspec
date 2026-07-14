@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now executes all governed rule-local named writers, stable/advancing spans, two-mark
+  spans, and anonymous/named bridges over the single parse-scoped rule-label/name/UTF-8-byte-offset store. One
+  guarded span seam enforces null/no-mutation behavior for missing, invalid, or reversed endpoints; public
+  positions and lengths project to Unicode characters. Dispatch distinguishes anonymous `capture_take()` from
+  named `capture_take(name)` without changing the shared 246-name inventory. The unchanged governed fixture
+  passes native and reconstructed execution, the complete Lua gate passes 120/120 on PUC Lua and LuaJIT, and
+  canonical CI preserves capability 64/0/0 and coverage 246/105+1/122, passes CLI 61x2 and Phase 0 `1..1031` in
+  637 seconds, and clears every doctrine/documentation gate. Only placement-sensitive split/mark event execution
+  remains active in `.4.3.7.4` before capture/cursor no-drift closure.
 - `2026-07-15` refresh: Complete named-mark admission closes at one aligned 246-name Dart/Julia/Lua inventory.
   The coverage gate no longer relies on corpus discovery for reverse completeness: it derives 131 identifier-
   shaped Perl contracts, subtracts an exact classified set of nine compatibility/legacy/internal contracts, and

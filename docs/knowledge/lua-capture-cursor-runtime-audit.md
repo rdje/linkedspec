@@ -14,7 +14,7 @@ date: 2026-07-13
 status: confirmed
 tags: [lua, runtime, capture, marks, cursor, inventory, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, governed fixtures, Lua state seams, and shipped markers. `.4.3.7.1` implements input/cursor controls at 115/115, `.4.3.7.2` implements all 16 anonymous capture calls at 116/116, and `.4.3.7.5` implements non-consuming earliest-boundary lookahead at 117/117 on PUC Lua and LuaJIT. Named marks and split-marker AST execution remain later leaves. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
-evidence_update_2026_07_14: "FUTURE-PARITY-BACKLOG.17.4 adds Lua's parse-scoped rule-label/name/byte-offset mark store and exact seven-call family view. Native and serialized SpecFile execution pass 119/119 on PUC Lua and LuaJIT. FUTURE-PARITY-BACKLOG.17.5 admits the calls at 246 shared names and independently checks all 122 public Perl contracts. Remaining governed named writers/spans/bridges are active under .4.3.7.3; placement markers stay .4.3.7.4."
+evidence_update_2026_07_15: "FUTURE-PARITY-BACKLOG.17.4 adds Lua's parse-scoped rule-label/name/byte-offset mark store and exact seven-call family view at 119/119. FUTURE-PARITY-BACKLOG.17.5 admits the calls at 246 shared names and independently checks all 122 public Perl contracts. LUA-BACKEND-PARITY.4.3.7.3 extends that store across governed named writers/spans/bridges and passes native/serialized execution at 120/120 on PUC Lua and LuaJIT. Placement markers remain active under .4.3.7.4."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen"
 ---
 
@@ -34,9 +34,9 @@ the live cursor, entry/local matches, and anonymous capture start, and expose by
 conversion helpers. `.4.3.7.1` adds a parse-scoped cursor stack and executes the input/live-cursor and explicit
 cursor-control families through one live/register synchronization seam; `.4.3.7.2` adds anonymous capture reads;
 and `.4.3.7.5` adds compiled-rule boundary lookahead. `FUTURE-PARITY-BACKLOG.17.4` then adds one parse-scoped
-rule-label/name/byte-offset mark store and executes the exact seven complete-mark helpers at 119/119 on both Lua
-ABIs. The remaining governed named writers, spans, and anonymous/named bridges still fall through until
-`.4.3.7.3`. `spec_parser.lua` preserves
+rule-label/name/byte-offset mark store and executes the exact seven complete-mark helpers at 119/119 on PUC Lua
+and LuaJIT. `.4.3.7.3` extends that store across governed named writers, stable/advancing spans, two-mark spans,
+and anonymous/named bridges at 120/120. `spec_parser.lua` preserves
 `@capture_slice`, `@capture_from_here`, `@move_pos`, and `@mark(name)` as typed split-marker nodes, but
 `compiled_spec.lua` and `interpreter.lua` do not consume those nodes. Current shipped source includes `@move_pos`
 in `rgx/subs/pgen/specs/ebnf.spec`, so marker execution needs an explicit native owner.
@@ -57,20 +57,22 @@ and Lua 239-name inventories; Rust's earlier parity audit also recorded the entr
 The former coverage checker could not discover that symmetric omission because its reverse direction began with
 calls present in the neutral corpus. `FUTURE-PARITY-BACKLOG.17.1-.17.4` implements the exact seven-helper contract
 on all five backends; `.17.5` admits all seven into the shared 246-name inventory, adds the exact fixture to
-governed occurrence sources, and independently checks all 122 public Perl contracts. `.4.3.7.3` is now active for
-full-family named-mark parity.
+governed occurrence sources, and independently checks all 122 public Perl contracts. `.4.3.7.3` closes full-
+family named-mark parity without changing the admitted inventory. Placement-sensitive split/mark rule-member
+execution `.4.3.7.4` is active next.
 
 `capture_until_boundary` stays separate from ordinary capture spans: it resolves compiled regex-bearing rules,
 seeks all usable candidates from the live cursor through a boundary-specific alternation cache, chooses the
 earliest boundary, and leaves that boundary unconsumed. If every supplied rule is unresolved or unusable it
 returns null without moving; if at least one is usable but none matches later, it captures to end-of-input.
-`.4.3.7.5` executes this on both Lua ABIs independent of surrounding seek/consume mode. Zero arguments are a
+`.4.3.7.5` executes this on PUC Lua and LuaJIT independent of surrounding seek/consume mode. Zero arguments are a
 neutral no-op on Rust/Dart/Julia/Lua but a generated-handler failure on Perl; `.5` owns normalization.
 
 ## Links
 
-- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0` audit plus `.4.3.7.1`, `.4.3.7.2`, and `.4.3.7.5`; complete seven-
-  helper Lua execution is [[lua-complete-named-mark-parity]].
+- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0` audit plus `.4.3.7.1-.3` and `.4.3.7.5`; complete seven-helper Lua
+  execution is [[lua-complete-named-mark-parity]] and full named-span execution is
+  [[lua-governed-named-span-parity]].
 - State taxonomy: [[spec-capture-mark-family-taxonomy]].
 - Marker timing: [[split-boundary-marker-action-timing]].
 - Coverage limitation: [[current-call-name-inventory-does-not-prove-runtime-semantics]].

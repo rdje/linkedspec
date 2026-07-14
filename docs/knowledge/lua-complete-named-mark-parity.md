@@ -1,6 +1,6 @@
 ---
 id: lua-complete-named-mark-parity
-title: Lua executes the complete seven-helper named-mark contract on both ABIs
+title: Lua executes the complete seven-helper named-mark contract on PUC Lua and LuaJIT
 answers:
   - does Lua implement mark entry start and mark match end
   - does Lua implement mark line mark col and clear mark
@@ -32,8 +32,9 @@ serialized `SpecFile` state return the exact same value on PUC Lua and LuaJIT.
 
 The exact seven names participate directly in the shared 246-name known-call inventory; a separate exact family
 view remains for focused capture/mark contract tests. `.17.5` independently checks all 122 public Perl contracts
-and locks nine non-public exclusions. Lua `.4.3.7.3` extends this same store and dispatcher for the remaining
-governed named spans and anonymous/named bridges.
+and locks nine non-public exclusions. Lua `.4.3.7.3` extends this same store and dispatcher across the complete
+governed named writer/span/bridge family at 120/120 on PUC Lua and LuaJIT; see
+[[lua-governed-named-span-parity]].
 
 ## Links
 

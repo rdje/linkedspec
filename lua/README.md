@@ -89,11 +89,15 @@ character values, returned text and numbers continue through compatible receiver
 a void mutation. Both ABIs pass 116/116. `.4.3.7.5` now resolves bare/quoted usable boundary rules into a separate
 compiled-alternation cache, always seeks regardless of surrounding parse mode, captures before the earliest match
 without consuming it, falls back to EOF, and leaves the cursor unchanged when every rule is unresolved or
-regex-free. Both ABIs pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`.
+regex-free. PUC Lua and LuaJIT pass 117/117. Zero arguments are neutral pending cross-backend normalization under `.5`.
 Complete named-mark `.17.4` adds parse-scoped rule-label buckets, byte-safe storage, Unicode public
 positions/locations, symbolic names, and the exact seven helpers through native plus serialized execution at
-119/119 on both ABIs. `.17.5` admits them into the aligned 246-name shared inventory and independently checks all
-122 public Perl contracts. The remaining governed named spans/bridges continue in active `.4.3.7.3`. General
+119/119 on PUC Lua and LuaJIT. `.17.5` admits them into the aligned 246-name shared inventory and independently
+checks all 122 public Perl contracts. `.4.3.7.3` extends the same store across current/input/anonymous/copy
+writers, match-start/live-cursor/input-end/two-mark stable and valid-only advancing spans, and both anonymous/named
+bridges. Public positions and lengths use Unicode characters; missing/reversed spans are neutral; anonymous
+`capture_take()` and named `capture_take(name)` remain distinct overloads. Both supported runtimes pass 120/120.
+Placement-sensitive split/mark execution continues in active `.4.3.7.4`. General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic

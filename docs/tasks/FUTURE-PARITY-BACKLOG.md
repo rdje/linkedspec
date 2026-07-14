@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (final named-mark admission `.17.5` closes the parent at 246 shared names, one
-  exact supplemental fixture, and an independent 122-public-contract reverse check; Lua `.4.3.7.3` is active).
+- Last updated: `2026-07-15` (Lua governed named writers, spans, and bridges `.4.3.7.3` pass 120/120 on PUC Lua
+  and LuaJIT; placement-sensitive split/mark execution `.4.3.7.4` is active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4359,7 +4359,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 166 | `FUTURE-PARITY-BACKLOG.17.3` | `done` | Julia consumes the exact contract through native/generated/CLI routes with complete backend/canonical proof. |
 | 167 | `FUTURE-PARITY-BACKLOG.17.4` | `done` | Lua consumes the unchanged native/serialized contract at 119/119 on both ABIs without changing the shared inventory. |
 | 168 | `FUTURE-PARITY-BACKLOG.17.5` | `done` | Admitted 246 names and independently locks 122 public contracts plus nine explicit exclusions. |
-| 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `active` | Extend the admitted `.17.4` mark store across remaining named writers, spans, and bridges. |
+| 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT. |
+| 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `active` | Execute placement-sensitive split and named-mark rule members at their matched action sites. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5002,6 +5003,7 @@ Read-only evidence recorded on 2026-07-10:
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
+| `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.3` | Unchanged governed named-capture fixture native/reconstructed; supplemental multibyte writers/bridges/stable+advancing spans/missing+reversed/overload/arity; Lua 120/120 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/637s; docs/KM/doctrines/book/whitespace. | PASS. Full governed named-span parity closes without surface drift; placement-sensitive `.4.3.7.4` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.4` | Exact staged 7-name set/family resolution; native/serialized `SpecFile` contract; complete PUC Lua 119/LuaJIT 119/syntax/CLI scaffold/corpus manifest 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/627s; docs/KM/doctrines/book/whitespace. | PASS. One rule-label/mark-name/byte-offset store serves all seven calls, public positions remain character-based, parent/child names stay isolated, and `.17.5` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.3` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; focused 13; complete Julia 1,414 package/shared CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/614s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state serves all seven calls, absent values remain undef, the shared inventory remains honest, and Lua `.17.4` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.2` | Exact staged 7-name set; native/generated-plan/emitted-state/CLI contract; format; fatal analysis; focused 68; complete Dart 214 package/CLI 61x2/corpus 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/1,061s; docs/KM/governance/book/whitespace. | PASS. Existing rule-local/code-unit state now serves all seven calls, absent positions remain undef, the shared inventory remains honest, and Julia `.17.3` activates. |
@@ -5125,6 +5127,7 @@ Read-only evidence recorded on 2026-07-10:
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.17.5` | `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory` | 246-name admission, 105+1 occurrence proof, independent 122-public-contract reverse check, nine exclusions, and symmetric mutation proof. |
+| `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed named writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
 | `FUTURE-PARITY-BACKLOG.17.4` | `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks` | Lua rule-label/byte-offset store, exact seven-helper native/serialized fixture, and complete dual-ABI/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.3` | `FUTURE-PARITY-BACKLOG.17.3 - align Julia complete named marks` | Julia rule-local seven-helper execution, staged inventory, exact native/generated/emitted/CLI fixture, and complete backend/canonical proof. |
 | `FUTURE-PARITY-BACKLOG.17.2` | `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks` | Dart rule-local seven-helper execution, staged inventory, exact native/generated/emitted/CLI fixture, and complete backend/canonical proof. |

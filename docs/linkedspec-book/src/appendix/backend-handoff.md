@@ -725,8 +725,9 @@ emitted-state, and primary-CLI routes with an exact seven-name family view, 1,41
 Lua `.17.4` now uses one parse-scoped rule-label/byte-offset store and returns the unchanged native/serialized
 result at 119/119 on PUC Lua and LuaJIT. `.17.5` admits the seven calls into the aligned 246-name shared inventory,
 combines 105 corpus fixtures with the exact named-mark fixture, independently requires all 122 public Perl
-contracts, and locks nine non-public exclusions. Parent `.17` closes; active Lua `.4.3.7.3` extends the same store
-across the remaining named spans and bridges.
+contracts, and locks nine non-public exclusions. Parent `.17` closes. Lua `.4.3.7.3` extends the same store across
+governed current/input/anonymous/copy writers, stable and valid-only advancing named spans, two-mark reads, and
+both anonymous/named bridges at 120/120. Placement-sensitive split/mark execution `.4.3.7.4` is active.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

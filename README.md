@@ -76,7 +76,10 @@ This `README.md` is the **single entry point** to the project.
   documented current mark helpers outside every governed backend inventory; `FUTURE-PARITY-BACKLOG.17` owns the
   neutral/five-backend correction and independent gate hardening. Lua `.17.4` consumes the exact contract on PUC
   Lua and LuaJIT at 119/119; `.17.5` admits all seven at 246 shared names and independently checks all 122 public
-  Perl contracts. Lua `.4.3.7.3` is now active. ADR `0033` and
+  Perl contracts. Lua `.4.3.7.3` then executes the governed named writers, stable/advancing spans, two-mark reads,
+  and anonymous/named bridges through that same store at 120/120 on PUC Lua and LuaJIT. Missing/reversed spans are
+  neutral, public positions/lengths are character-based, and `capture_take()` versus `capture_take(name)` retains
+  the anonymous/named overload split. Placement-sensitive split/mark execution `.4.3.7.4` is now active. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume

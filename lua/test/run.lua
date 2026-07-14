@@ -2569,6 +2569,156 @@ test("runtime complete named marks match the neutral Unicode rule-local contract
   )
 end)
 
+test("runtime governed named spans and anonymous bridges are exact", function()
+  local governed_source = read_file("capability_conformance/fixtures/capability_capture_named_surface.spec")
+  local governed_parsed = linkedspec.parse_spec(governed_source)
+  local governed_expected = json.decode([[
+[
+  {
+    "between": "xxBC", "between_len": 4, "copied_pos": 1,
+    "from": "xxB", "from_len": 3, "origin_exists": 1, "origin_pos": 1,
+    "rest": "xxBC", "rest_len": 4,
+    "take_between": "xxBC", "take_between_len": 4, "take_len": 3,
+    "take_rest": "xxBC", "take_rest_len": 4,
+    "take_until_cursor": "xxBC", "take_until_cursor_len": 4,
+    "until_cursor": "xxBC", "until_cursor_len": 4,
+    "whole_input": "AxxBC"
+  }
+]
+]])
+  local governed_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(governed_parsed)),
+    "AxxBC"
+  )
+  assert_equal(
+    json.encode(governed_result.value),
+    json.encode(governed_expected),
+    "governed named-span fixture"
+  )
+
+  local governed_serialized = json.encode(linkedspec.spec_ast.to_json(governed_parsed))
+  local governed_reconstructed = linkedspec.compile_spec(
+    linkedspec.spec_ast.from_json("SpecFile", json.decode(governed_serialized))
+  )
+  local governed_reconstructed_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(governed_reconstructed),
+    "AxxBC"
+  )
+  assert_equal(
+    json.encode(governed_reconstructed_result.value),
+    json.encode(governed_expected),
+    "serialized governed named-span fixture"
+  )
+
+  local bridge_source = [[
+Top::AND
+ => Value
+
+Value:AND
+ /é\n/
+ /ab🙂/
+ /Z/
+ -> Value[0] {
+   here_result = mark_here(origin)
+   input_start_result = mark_input_start(input_start)
+   start_capture_slice()
+   bridge_result = mark_capture_slice(bridge)
+   mark_here(cleared)
+   clear_result = mark_copy(cleared, missing)
+ }
+ -> Value[2] {
+   stable_named = capture_from(origin)
+   named_take = capture_take(origin)
+   after_take = mark_pos(origin)
+   start_capture_slice_from(bridge)
+   bridged = capture_slice()
+   mark_capture_slice(roundtrip)
+   start_capture_slice()
+   start_capture_slice_from(missing)
+   missing_bridge_pos = capture_slice_pos()
+   mark_input_end(reverse_start)
+   mark_input_start(reverse_end)
+   invalid_between = capture_take_between(reverse_start, reverse_end)
+   return({
+     "here_result" : here_result,
+     "input_start_result" : input_start_result,
+     "bridge_result" : bridge_result,
+     "clear_result" : clear_result,
+     "cleared_exists" : mark_exists(cleared),
+     "stable_named" : stable_named,
+     "named_take" : named_take,
+     "after_take" : after_take,
+     "bridged" : bridged,
+     "roundtrip_pos" : mark_pos(roundtrip),
+     "missing_bridge_pos" : missing_bridge_pos,
+     "invalid_between" : invalid_between,
+     "reverse_after" : mark_pos(reverse_start)
+   })
+ }
+]]
+  local bridge_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(bridge_source))),
+    "é\nab🙂Ztail"
+  ).value[1]
+  local bridge_expected = json.harray({
+    here_result = json.null,
+    input_start_result = json.null,
+    bridge_result = json.null,
+    clear_result = json.null,
+    cleared_exists = 0,
+    stable_named = "ab🙂",
+    named_take = "ab🙂",
+    after_take = 6,
+    bridged = "ab🙂",
+    roundtrip_pos = 2,
+    missing_bridge_pos = 6,
+    invalid_between = json.null,
+    reverse_after = 10,
+  })
+  assert_equal(
+    json.encode(bridge_result),
+    json.encode(bridge_expected),
+    "Unicode named/anonymous bridge behavior"
+  )
+
+  for _, malformed in ipairs({
+    { call = "mark_here()", helper = "mark_here", expected = "exactly 1 positional argument", actual = 0 },
+    { call = "mark_copy(one)", helper = "mark_copy", expected = "exactly 2 positional arguments", actual = 1 },
+    {
+      call = "capture_between(one)",
+      helper = "capture_between",
+      expected = "exactly 2 positional arguments",
+      actual = 1,
+    },
+    {
+      call = "capture_from(one, two)",
+      helper = "capture_from",
+      expected = "exactly 1 positional argument",
+      actual = 2,
+    },
+    {
+      call = "capture_take(one, two)",
+      helper = "capture_take",
+      expected = "exactly 1 positional argument",
+      actual = 2,
+    },
+  }) do
+    local invalid_source = "Top::\n /x/ I { return(" .. malformed.call .. ") }\n"
+    local ok, failure = pcall(function()
+      linkedspec.runtime_parse(
+        linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(invalid_source))),
+        "x"
+      )
+    end)
+    assert_equal(ok, false, malformed.helper .. " malformed arity fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.helper .. " typed failure")
+    assert_equal(failure.code, "helper_arity_mismatch", malformed.helper .. " diagnostic code")
+    assert_equal(failure.helper_name, malformed.helper, malformed.helper .. " helper attribution")
+    assert_equal(failure.expected_arity, malformed.expected, malformed.helper .. " expected arity")
+    assert_equal(failure.actual_arity, malformed.actual, malformed.helper .. " actual arity")
+  end
+end)
+
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
   local source = [[
 Top::

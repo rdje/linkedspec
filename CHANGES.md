@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.3 — execute Lua named mark spans
+
+Lua now executes the complete governed rule-local named writer, span, and anonymous/named bridge family through
+the parse-scoped rule-label mark store introduced by `.17.4`. Current/input/anonymous writers, copy/delete,
+existence/location reads, match-start/live-cursor/input-end/two-mark stable and advancing spans, and both bridge
+directions share one UTF-8-byte-offset state seam. Public positions and lengths remain Unicode-character values;
+missing, invalid, or reversed reads return null without mutation. `capture_take()` remains the anonymous call,
+while `capture_take(name)` selects the named overload.
+
+The unchanged governed named-capture fixture passes native Lua execution and public `SpecFile` reconstruction. A
+supplemental multibyte test locks the bridge, deletion, overload, void-writer, valid-only mutation, neutral edge,
+and typed exact-arity contracts. The complete Lua gate passes 120/120 on separately built PUC Lua and LuaJIT
+adapters plus syntax, CLI-scaffold, and all 105 manifest checks. Canonical CI passes capability 64/0/0, coverage
+246/105+1/122, CLI 61x2, Phase 0 `1..1031` in 637 seconds, and all doctrine/documentation gates. No helper, fixture, inventory,
+or capability surface changed; placement-sensitive split/mark rule members `.4.3.7.4` become active.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.17.5 — admit complete named-mark inventory
 
 Dart, Julia, and Lua now expose the seven complete named-mark helpers through their aligned shared inventories,
