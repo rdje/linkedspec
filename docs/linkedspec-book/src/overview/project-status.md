@@ -64,7 +64,9 @@ Three backbone items tracked major structural modernization — all done:
   Lua `.16.6`, and public/capability admission `.16.7` are complete at 64/0/0 with one recurring
   five-backend/two-Lua-ABI command. Lua callback work is split at `.4.3.6.5.1.0`; reference authored-value repair
   `.1.1` is done, harray execution `.1.2` passes 113/113, and shared root-kind array execution `.5.2` closes at
-  114/114. No-drift/dependency routing `.4.3.6.6` closes the parent; capture/cursor `.4.3.7` is active.
+  114/114. No-drift/dependency routing `.4.3.6.6` closes the parent. Capture/cursor audit `.4.3.7.0` splits six
+  executable mechanisms plus no-drift; input/cursor `.4.3.7.1` is next, and seven documented mark helpers need a
+  cross-backend inventory owner before named-mark closure.
   Implicit child-push side effects are included in the closed Lua array family, but their expression result is not
   yet portable: Perl exposes its host push count and Lua exposes the updated implicit accumulator. Backlog `.5`
   owns normalization; current authoring uses implicit child push as a statement.

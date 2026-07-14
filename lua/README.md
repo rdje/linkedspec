@@ -262,6 +262,11 @@ nested arguments, shapes, blocks, access indexes, controls, assignments, and
 receiver methods. Unknown calls produce `unknown_helper`; structural parser
 fallback produces `raw_perl`. Neither path invokes a Lua global.
 
+That 239-name table is the governed cross-backend inventory, not an enumeration of every historical/current Perl
+contract mentioned by the public helper reference. The capture/cursor audit currently tracks seven documented
+mark helpers outside it—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`—
+for cross-backend inventory resolution before Lua can claim complete named-mark parity.
+
 Build the concrete registry directly from a typed spec or function list:
 
 ```lua

@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.0 — split Lua capture cursor mechanisms**
+  (DONE — six runtime mechanisms plus no-drift are owned; input/cursor `.4.3.7.1` next).
+
+  **Result:** Canonical Perl/Rust/Dart/Julia contracts, governed fixtures, Lua register/parser/compiler/runtime
+  seams, Knowledge Map facts, and shipped marker usage were audited before behavior changes. Lua already has
+  byte-safe match/capture registers and Unicode projection helpers, but no cursor stack, named-mark frame, helper
+  execution, or compiled split-marker events. Input/cursor, anonymous capture, governed named marks/bridges,
+  placement markers, earliest boundary, and no-drift now have ordered owners. The audit also proves the aligned
+  239-name inventories omit seven documented current mark helpers because the reverse checker is corpus-seeded;
+  `.4.3.7.3` requires a cross-backend owner before full named-mark closure. No runtime changed.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.6 — close Lua block control callback parity**
   (DONE — parent `.4.3.6` closes at 114/114 on both ABIs; capture/cursor `.4.3.7` active).
 

@@ -706,7 +706,11 @@ absent uniform bindings restore after success, local return, and error. Callback
 and sorted harray walk/map/reduce at 113/113. `.5.2` shares the dispatcher with zero-based array-root traversal,
 recurse-only-same-kind semantics, and exact Perl-oracle behavior at 114/114 on both Lua ABIs. Tree callbacks are
 closed; no-drift/dependency routing `.4.3.6.6` closes the parent and advances capture-slice/mark/input/cursor
-helpers `.4.3.7`. General user-function final `callback: codeblock` declaration and contextual execution remain
+helpers `.4.3.7`. Audit `.4.3.7.0` splits input/cursor controls, anonymous capture, governed named marks/bridges,
+placement-sensitive marker members, earliest-boundary lookahead, and no-drift. It also finds seven helpers in the
+public mark reference outside the governed 239-name backend inventories; named-mark closure must resolve that
+cross-backend inventory gap instead of creating a Lua-only extension. General user-function final
+`callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral

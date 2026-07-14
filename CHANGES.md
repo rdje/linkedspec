@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.0 — split Lua capture cursor mechanisms
+
+Audited the canonical capture/mark/input/cursor contract before runtime changes and split the broad Lua parent
+into six executable mechanisms plus no-drift: Unicode input/live-cursor views and explicit controls, anonymous
+capture boundaries, governed rule-local named marks and bridges, placement-sensitive split/mark rule members,
+compiled-rule earliest-boundary lookahead, and closeout. The split follows distinct state ownership, endpoint,
+mutation-timing, and compiled-rule dependencies rather than treating every admitted helper as one dispatcher case.
+
+The audit also found a cross-backend inventory blind spot. Seven helpers advertised as current by the public
+source-boundary reference and implemented by the Perl reference—`mark_entry_start/end`, `mark_match_start/end`,
+`mark_line`, `mark_col`, and `clear_mark`—are absent from the aligned 239-name backend inventories. The coverage
+checker reverse-checks only current Perl contract calls already present in the neutral corpus, so an identical
+omission passes. Lua `.4.3.7.3` now requires a clean-pivot cross-backend owner before named-mark closure rather than
+creating a Lua-only dialect. No parser/compiler/runtime behavior changed; `.4.3.7.1` is the next Lua mechanism.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.6 — close Lua block control callback parity
 
 Closed the Lua immediate-block/control/contextual-built-in/tree-callback parent without changing runtime code.

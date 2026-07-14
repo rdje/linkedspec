@@ -10,17 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.6` — closed Lua block/control/callback parity and later routing.
-- latest_commit: `b841c09a` — `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`.
-- active_work_unit: verified docs-only `.4.3.6.6` closeout; capture-slice/mark/input/cursor family `.4.3.7` is the
-  prepared clean-pivot frontier.
-- next_action: commit `.4.3.6.6`, verify a clean tree and zero-byte brief, then audit and split or implement the
-  dependency-ready capture/cursor helper family under `.4.3.7`.
-- current_proof: Eager blocks, inline/statement controls, metadata-governed `with`, and same-root-kind harray/array
-  callbacks pass 114/114 on PUC Lua and LuaJIT. Callable-codeblock and punctuation-light checkers pass; capability
-  census is 64/0/0; preceding full CI passes CLI 61/61 twice and phase0 `1..1031` in 987 seconds. `.5.1` explicitly
-  owns final `callback: codeblock` user-function execution; explicit callable literals/dynamic calls remain `.11.7`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.7.0` — audited and split Lua capture/cursor runtime mechanisms.
+- latest_commit: `6e752117` — `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.0 - split Lua capture cursor mechanisms`.
+- active_work_unit: docs/KM/task-owned `.4.3.7.0` split; no parser/compiler/runtime behavior changed. Input/cursor
+  `.4.3.7.1` is dependency-ready after the clean-pivot inventory finding is durably task-owned.
+- next_action: finish and commit `.4.3.7.0`, verify a clean tree/zero-byte brief, create and commit the cross-backend
+  task owner for the seven documented current mark helpers missing from all governed 239-name inventories, then
+  return to Lua input/cursor implementation `.4.3.7.1`.
+- current_proof: Source audit confirms immutable byte-offset registers plus Unicode projection seams, no Lua cursor
+  stack/named-mark frame/helper execution, parsed-but-uncompiled split-marker nodes, and shipped `@move_pos` usage.
+  The coverage checker is corpus-seeded in reverse, so seven symmetric current-mark omissions remain invisible.
+  PUC Lua and LuaJIT remain 114/114; KM/memory/task/doctrine/book/whitespace checks pass; census remains 64/0/0.
 - latest_bootstrap_read: 2026-07-13 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -30,5 +31,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: docs-only `.4.3.6.6` task/book/KM/live closeout awaits its prepared commit
-  before clean pivot to `.4.3.7`. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: verified planning-only `.4.3.7.0` task/book/KM/live split awaits its
+  prepared commit. Oracle timeout calibration remains future backlog `.7.0`.

@@ -6,10 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (block/control/contextual-built-in/tree-callback parent `.4.3.6` closes through
-  no-drift/dependency leaf `.4.3.6.6` at 114/114 on both ABIs; user-function final `callback: codeblock` execution
-  is explicit in `.5.1`, callable literals/dynamic calls remain `.11.7`, and capture/cursor family `.4.3.7` is
-  active; control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
+- Last updated: `2026-07-13` (capture/cursor audit `.4.3.7.0` splits six executable mechanisms plus no-drift,
+  records the seven-helper documented-mark inventory gap, and advances Unicode input/cursor `.4.3.7.1`; block/
+  control/contextual-built-in/tree-callback parent `.4.3.6` remains closed at 114/114 on both ABIs)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1608,10 +1607,92 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.7`
   Status: `active`
   Goal: Implement capture-slice, named-mark, input, and explicit cursor-state helper families.
+  Children: `.4.3.7.0`, `.4.3.7.1`, `.4.3.7.2`, `.4.3.7.3`, `.4.3.7.4`, `.4.3.7.5`, `.4.3.7.6`
   Dependencies: `.4.3.1`, `.4.3.6`
   Acceptance: Capture anchors/slices/boundaries, rule-local named marks, Unicode character positions/lengths,
     input views, save/restore and entry/local rewinds, consume continuation, earliest boundary selection, and
     unresolved-rule behavior match the runtime contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.0`
+  Status: `done`
+  Goal: Audit the canonical capture/cursor state model and split it into mechanism-sized executable owners.
+  Dependencies: `.4.3.1`, `.4.3.6`
+  Acceptance: Contract sources, toolbox probes, Knowledge Map facts, governed fixtures, current Lua state seams,
+    split-marker compilation, Unicode projections, and dependency order are inspected before behavior changes;
+    every discovered obligation has one explicit child owner and the first executable leaf is dependency-ready.
+  Verification: **PASS 2026-07-13.** Canonical Perl/Rust/Dart/Julia sources, four governed fixtures, Lua match
+    registers/parser/compiler/interpreter seams, Knowledge Map facts, and shipped marker use were inspected. The
+    parent is split into six dependency-ordered mechanisms plus no-drift. A new fact card records byte-offset/
+    Unicode seams, unexecuted split-marker nodes, and the corpus-seeded 239-name checker blind spot that omits seven
+    documented current mark helpers identically across backends. PUC Lua and LuaJIT remain 114/114; Knowledge Map,
+    memory architecture, task metadata, all doctrines, mdBook build, and whitespace checks pass.
+  Commit: `LUA-BACKEND-PARITY.4.3.7.0 - split Lua capture cursor mechanisms`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.1`
+  Status: `active`
+  Goal: Implement absolute input/live-cursor views and explicit cursor save/restore/rewind controls.
+  Dependencies: `.4.3.7.0`
+  Acceptance: Input text/length/slice/end position/line/column and cursor position/line/column/rest/rest length use
+    Unicode character units at the DSL boundary; cursor save/restore is LIFO and entry/local rewinds preserve
+    register snapshots while changing only the live cursor; consume-mode continuation observes the restored cursor.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.2`
+  Status: `pending`
+  Goal: Implement the anonymous capture-boundary helper family.
+  Dependencies: `.4.3.7.1`
+  Acceptance: Start/current position/line/column, match-start, live-cursor, and end-of-input stable/length/advancing
+    reads share one byte-safe state seam and expose text widths/positions in Unicode characters; invalid spans are
+    neutral, advancing forms mutate only after a valid read, and receiver continuation/terminality is exact.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.3`
+  Status: `pending`
+  Goal: Implement the governed current rule-local named marks, named spans, and anonymous/named bridges.
+  Dependencies: `.4.3.7.2`
+  Acceptance: Current/input-boundary/anonymous mark writers, copy/existence/position readers, match-start/live-
+    cursor/end-of-input/two-mark stable and advancing spans, and both bridge directions match the governed
+    reference; bare mark identifiers remain symbolic, mark state is isolated per rule invocation, and the exact
+    anonymous/named fixture passes unchanged. Before this leaf activates, the `.4.3.7.0` finding that seven
+    documented current mark helpers (`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and
+    `clear_mark`) are absent from the governed 239-name inventory must have a clean-pivot cross-backend owner;
+    this Lua leaf consumes that resolution rather than creating a Lua-only dialect.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.4`
+  Status: `pending`
+  Goal: Execute placement-sensitive split and named-mark rule members.
+  Dependencies: `.4.3.7.2`, `.4.3.7.3`
+  Acceptance: `@capture_slice`, compatibility capture-boundary aliases, and `@mark(name)` compile into explicit
+    rule-slot events whose mutations become visible after that matched action site; helper calls remain available
+    for in-block timing, malformed names stay typed, and the shipped `@move_pos` source has an executable owner.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.5`
+  Status: `pending`
+  Goal: Implement non-consuming earliest-boundary capture.
+  Dependencies: `.4.3.7.1`
+  Acceptance: `capture_until_boundary(rule[, ...])` seeks all usable compiled regex-bearing rules from the live
+    cursor, selects the earliest match independent of surrounding parse mode, returns text before the boundary,
+    leaves the boundary unconsumed, captures to end-of-input when usable rules have no later match, and returns
+    null without cursor movement when every supplied rule is unresolved or unusable.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7.6`
+  Status: `pending`
+  Goal: Close exhaustive Lua capture/cursor helper and public-surface no-drift.
+  Dependencies: `.4.3.7.1`-`.4.3.7.5`
+  Acceptance: Helper inventory, governed fixtures, marker timing, dual-ABI runtime gates, API docs, mdBook,
+    Knowledge Map, task/live state, and later capability routing agree with no premature generated-source or
+    capability claim; the documented-mark inventory gap has an explicit cross-backend disposition; parent
+    `.4.3.7` closes and diagnostic helper `.4.3.8` becomes the sole active frontier.
   Verification: `pending`
   Commit: `pending`
 
@@ -1871,6 +1952,25 @@ frontier.
 | 70 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `done` | Root-kind array traversal and zero-based scoped callbacks pass 114/114 on both ABIs. |
 | 71 | `LUA-BACKEND-PARITY.4.3.6.6` | `done` | Closed block/control/callback no-drift and routed later function/callable obligations exactly. |
 | 72 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
+| 73 | `LUA-BACKEND-PARITY.4.3.7.0` | `done` | Split six runtime mechanisms plus no-drift and exposed the symmetric documented-mark inventory gap. |
+| 74 | `LUA-BACKEND-PARITY.4.3.7.1` | `active` | Implement Unicode input/live-cursor views and explicit save/restore/rewind controls. |
+
+### `LUA-BACKEND-PARITY.4.3.7.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The parent combines input/cursor reads, mutable cursor controls, anonymous capture,
+  rule-local named marks, placement-sensitive marker members, and compiled-rule boundary lookahead while Lua only
+  admits their names and parses marker nodes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — These families share byte-offset storage but differ in ownership, mutation
+  timing, right-edge selection, Unicode projection, and compiled-rule dependencies, so one implementation leaf
+  would hide distinct failure modes and make placement markers look like ordinary helper calls.
+- [x] **FIX** — Record the canonical state taxonomy and split cursor/input, anonymous capture, named marks/bridges,
+  rule-slot markers, earliest-boundary lookahead, and final no-drift into ordered child leaves `.1` through `.6`.
+- [x] **ADDRESSED (verified)** — Contract lowering/runtime sources, governed neutral fixtures, Knowledge Map cards,
+  Lua parser/compiler/interpreter seams, and shipped marker usage are all cited in one durable audit fact card.
+- [x] **NO REGRESSION** — Planning changes no parser/runtime behavior; memory architecture, task-tree, Knowledge Map,
+  book, and focused Lua baseline checks remain green.
+- [x] **LOCKSTEP** — Roadmap/task/live/book/KM state agrees that `.4.3.7.1` is next and later capability/generated
+  admission remains outside this native helper implementation parent.
 
 ### `LUA-BACKEND-PARITY.4.3.6.6` Acceptance Checklist
 
@@ -2779,3 +2879,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks` | Atomic callback frames, sorted copied harray walk/map/reduce, exact Perl result, and array-root handoff. |
 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks` | Shared root-kind traversal, zero-based array callbacks, exact Perl result, and no-drift handoff. |
 | `LUA-BACKEND-PARITY.4.3.6.6` | `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity` | Dual-ABI no-drift, explicit user-function/callable/generated routing, parent closure, and capture/cursor handoff. |
+| `LUA-BACKEND-PARITY.4.3.7.0` | `LUA-BACKEND-PARITY.4.3.7.0 - split Lua capture cursor mechanisms` | Source-backed state/timing split, symmetric documented-mark inventory finding, and input/cursor handoff. |

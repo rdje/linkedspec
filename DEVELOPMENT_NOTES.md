@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.0` — inventory agreement can preserve the same omission): The exact
+  239-name gate proves that Dart, Julia, and Lua share one governed inventory, that every inventoried name appears
+  in the book/corpus, and that neutral-corpus calls matching current Perl contracts occur in the inventories. Its
+  reverse direction starts from the corpus, however; it does not enumerate every non-compatibility Perl contract
+  or every public helper in the book. Consequently all aligned inventories omit the same seven documented current
+  mark helpers (`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, `clear_mark`) and still
+  pass. Lua must not paper over that structural gap locally. The capture/cursor parent is now split by mechanism,
+  and its named-mark leaf requires a clean-pivot cross-backend resolution before claiming full parity. Separately,
+  typed parsing of `@capture_slice`, `@capture_from_here`, `@move_pos`, and `@mark(name)` does not imply runtime
+  marker support: Lua's compiler/interpreter currently ignore split-marker nodes, while shipped EBNF source still
+  uses `@move_pos`. Marker timing therefore has its own leaf after helper state exists.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.6` — a dependency handoff is incomplete until the destination acceptance
   names the obligation): `.4.3.6` already said general user-function contextual blocks belonged to `.5.1`, but
   `.5.1` described fixed/rest runtime calls without naming final `callback: codeblock` metadata or equivalent

@@ -18,6 +18,7 @@ evidence: "LUA-BACKEND-PARITY.4.3.0 converts the broad helper leaf into .4.3.1-.
 evidence_update_2026_07_13_harray_closeout: "Array family .4.3.4 is closed at 99/99. LUA-BACKEND-PARITY.4.3.5.5 closes all 13 ordinary harray names at 103/103 after construction/splicing .1, deterministic views .2, copied transforms/receivers .3, and named mutation .4. Codeblock/control/tree-callback parent .4.3.6 is active."
 evidence_update_2026_07_13_block_split: "LUA-BACKEND-PARITY.4.3.6.0 splits eager blocks, inline controls, statement controls, contextual built-ins/with, tree callbacks, and closeout. General user-function blocks remain .5.1; explicit callable values remain FUTURE-PARITY-BACKLOG.11.7."
 evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 closes eager expression-valued blocks and local return at 104/104 on both Lua ABIs; inline value controls .4.3.6.2 are active."
+evidence_update_2026_07_13_capture_split: "LUA-BACKEND-PARITY.4.3.7.0 splits input/cursor controls, anonymous capture, governed named marks, placement markers, boundary lookahead, and no-drift. The audit also finds seven documented current mark helpers outside the aligned 239-name inventories; a cross-backend owner is required before named-mark closure."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -49,6 +50,12 @@ block execution, `.2` inline value controls, `.3` statement controls, `.4` built
 tree callbacks, and `.6` no-drift. General user-function contextual blocks remain `.5.1`; explicit callable
 codeblock values remain `FUTURE-PARITY-BACKLOG.11.7`.
 
+Capture/cursor parent `.4.3.7` is split into `.0` audit, `.1` input/cursor reads and explicit controls, `.2`
+anonymous boundaries, `.3` governed named marks/bridges, `.4` placement-sensitive marker members, `.5` earliest-
+boundary lookahead, and `.6` no-drift. The 239-name inventory is the governed executable subset, not proof that
+every helper advertised by the source-boundary reference is inventoried; seven documented mark helpers require a
+separate cross-backend resolution before `.3` can close full named-mark parity.
+
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
 separate from executable parity.
@@ -56,3 +63,4 @@ separate from executable parity.
 Related facts: [[lua-runtime-rule-interpreter]], [[lua-actionir-contract-resolver]],
 [[lua-actionir-ast-parser]], [[spec-lifecycle-retv-order]],
 [[generic-trailing-codeblock-argument-correction]], [[lua-runtime-block-control-callback-split]].
+See also [[lua-capture-cursor-runtime-audit]].
