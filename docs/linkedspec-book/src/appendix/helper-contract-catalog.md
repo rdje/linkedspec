@@ -693,7 +693,8 @@ dispatch rule.
     callback result.
   - `reduce_leaves` returns the final accumulator.
 - **Backend status**: Perl reference support landed under `SPEC-FORMAT-TERSE.13.2`; Rust interpreter and
-  generated-oracle parity landed under `SPEC-FORMAT-TERSE.13.3`.
+  generated-oracle parity landed under `SPEC-FORMAT-TERSE.13.3`. Dart, Julia, and Lua also support the contract;
+  Lua's shared root-kind dispatcher and exact Perl oracle proof pass 114/114 on both Lua ABIs.
 - **Tree shape**: The receiver must be an array. Nested arrays are interior nodes. Scalar values and hash values
   are leaves; hash values are not traversed recursively by this surface.
 - **Traversal order**: Depth-first by zero-based array index. For `["a", ["b", "c"], { "h" : "H" }]`, callbacks
@@ -706,9 +707,11 @@ dispatch rule.
   - `depth`: number of path segments.
   - `acc`: current accumulator for `reduce_leaves` only.
 - **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
-  completes. Mutations to other working variables are ordinary side effects and persist.
-- **Edge cases**: A non-array/non-hash scalar receiver yields `undef` and does not execute the callback. Empty
-  arrays run no callbacks; `reduce_leaves(initial)` returns the initial accumulator. `walk_leaves()` and
+  completes, including callback errors. Inputs, paths, mapped results, and accumulator values are copied, so
+  callback mutation cannot alias the source. Mutations to other working variables are ordinary side effects and
+  persist.
+- **Edge cases**: A non-array receiver yields `undef` and does not execute the callback or evaluate the reduce
+  initial. Empty arrays run no callbacks; `reduce_leaves(initial)` returns the initial accumulator. `walk_leaves()` and
   `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
   initial accumulator expression. `walk_leaves()` and `map_leaves()` can feed later compatible array receiver links
   such as `.count()`. `reduce_leaves(...)` is terminal.
@@ -999,9 +1002,9 @@ dispatch rule.
   - `walk_leaves` returns the original hash tree after running callbacks.
   - `map_leaves` returns a new hash tree with each leaf replaced by the callback result.
   - `reduce_leaves` returns the final accumulator.
-- **Backend status**: Perl, Rust, Dart, Julia, and Lua support this hash-root contract. Lua's focused dual-ABI
-  proof passes 113/113 and locks the exact Perl callback result; Lua array-root and mixed-tree recursion remain the
-  separate active `.4.3.6.5.2` extension.
+- **Backend status**: Perl, Rust, Dart, Julia, and Lua support this hash-root contract. Lua's harray proof passes
+  113/113 and locks the exact Perl callback result; the shared root-kind dispatcher then closes array roots without
+  changing hash semantics and passes 114/114 on both Lua ABIs.
 - **Tree shape**: The receiver must be a hash. Nested hashes are interior nodes. Every non-hash value is a leaf,
   including arrays.
 - **Traversal order**: Sorted-key depth-first traversal. For `{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`,
@@ -1792,7 +1795,8 @@ Receiver-dot methods are available for the value families that have a typed rece
   and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
   `reduce_leaves` are immediate block-bearing links with their own scoped callback bindings.
 - **Array-tree traversal** uses the same block-bearing receiver method names on array-valued receivers, with
-  Perl reference support from `SPEC-FORMAT-TERSE.13.2` and Rust/oracle parity from `SPEC-FORMAT-TERSE.13.3`.
+  Perl reference support from `SPEC-FORMAT-TERSE.13.2`, Rust/oracle parity from `SPEC-FORMAT-TERSE.13.3`, and
+  Dart/Julia/Lua parity. Lua's shared root-kind proof passes 114/114 on both ABIs.
 - **Number** receivers support terse numeric links such as `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
   `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
   comparisons.

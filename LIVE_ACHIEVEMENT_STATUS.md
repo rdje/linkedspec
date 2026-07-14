@@ -8,8 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.2 — execute Lua array callbacks**
+  (DONE — shared root-kind array walk/map/reduce pass 114/114 on both ABIs; no-drift `.4.3.6.6` active).
+
+  **Result:** One root-kind dispatcher now enumerates lexical harray keys or source-order array offsets translated
+  to zero-based indexes, recursing only through children of the same kind. Array callbacks atomically scope copied
+  `value`, `index`, `path`, `depth`, and reduce-only `acc`; harrays inside arrays remain leaves. Walk/map preserve
+  array continuation, reduce stays terminal, invalid/empty paths are lazy, and exact prior bindings restore. The
+  checked-in Perl oracle result matches, the prior harray test remains green, and PUC Lua/LuaJIT pass 114/114 plus
+  syntax, corpus, and process checks. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary
+  CLI environments at 61/61, and phase0 passing all 1,031 tests in 987 seconds. Tree-callback parent `.4.3.6.5`
+  closes.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.2 — execute Lua harray callbacks**
-  (DONE — sorted atomic-frame harray walk/map/reduce pass 113/113 on both ABIs; array/mixed `.4.3.6.5.2` active).
+  (DONE — sorted atomic-frame harray walk/map/reduce pass 113/113 on both ABIs; array-root `.4.3.6.5.2` later closed).
 
   **Result:** One multi-binding scope transaction copies and restores `value`, `key`, `path`, `depth`, and
   reduce-only `acc` across every private store and failure path. Sorted depth-first harray recursion treats arrays

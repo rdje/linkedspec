@@ -46,10 +46,11 @@ An absent/non-codeblock final argument produces typed `final_argument_not_codebl
 use the generic `helper_arity_mismatch` path. Empty/keyed harrays are not promoted to codeblocks.
 
 This leaf supplies the signature and scoped execution seam, not every callback behavior. Harray tree traversal now
-consumes the same registry and an extended atomic frame through `LUA-BACKEND-PARITY.4.3.6.5.1`; array-root and
-mixed-tree recursion remain `.4.3.6.5.2`. General user-function dispatch remains `.5.1`, and explicit first-class
+consumes the same registry and an extended atomic frame through `LUA-BACKEND-PARITY.4.3.6.5.1`; array-root
+traversal shares the receiver-root-kind dispatcher through `.4.3.6.5.2`, with cross-kind aggregates staying
+leaves. General user-function dispatch remains `.5.1`, and explicit first-class
 `{|params| ...}` values remain `FUTURE-PARITY-BACKLOG.11.7`.
 
 Related facts: [[lua-runtime-block-control-callback-split]], [[lua-runtime-eager-block-values]],
 [[generic-trailing-codeblock-argument-correction]], [[final-codeblock-parameter-declaration]],
-[[lua-runtime-harray-tree-callbacks]].
+[[lua-runtime-harray-tree-callbacks]], [[lua-runtime-array-tree-callbacks]].

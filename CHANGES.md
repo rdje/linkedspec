@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.2 — execute Lua array callbacks
+
+Lua now executes array-root `walk_leaves`, `map_leaves`, and `reduce_leaves` through the same callback machinery as
+harray roots. One dispatcher selects the receiver root kind, enumerates lexical harray keys or array elements in
+source order, translates Lua's one-based offsets into zero-based `index` and `path` values, and recurses only into
+children of the same kind. A harray inside an array is therefore a leaf, just as an array inside a harray remains a
+leaf; the contract does not perform cross-kind recursion.
+
+The shared copied/restored frame binds `value`, `index`, `path`, `depth`, and reduce-only `acc` for array callbacks.
+Walk returns an isolated source copy and keeps array continuation, map rebuilds a typed array and can continue, and
+reduce threads copied results and remains terminal. Empty arrays execute no callbacks. Invalid receivers return
+null without evaluating callbacks or reduce initials. Exact prior/absent callback bindings restore after success
+or error.
+
+The focused array fixture locks zero-based depth-first order, opaque hash leaves, copied isolation, empty/invalid
+laziness, continuation/terminality, and exact outer-frame restoration. It reproduces the checked-in Perl oracle
+result; the existing sorted harray test remains green under the generalized dispatcher. `bash tools/run_lua_local.sh`
+passes 114/114 on PUC Lua and LuaJIT plus syntax, corpus, and process checks. Tree-callback parent `.4.3.6.5` closes;
+the mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and
+phase0 `1..1031` green in 987 seconds. No-drift/dependency handoff `.4.3.6.6` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.2 — execute Lua harray callbacks
 
 Lua now executes harray `walk_leaves`, `map_leaves`, and `reduce_leaves` through the already-declared final
@@ -17,7 +38,7 @@ The focused test locks aggregate isolation, exact frame restoration, determinist
 continuation, and the exact direct Perl result. `bash tools/run_lua_local.sh` passes 113/113 on PUC Lua and 113/113
 on LuaJIT plus corpus/process checks. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary
 CLI environments at 61/61, and phase0 `1..1031` green in 983 seconds. Harray parent `.4.3.6.5.1` closes;
-array-root and mixed-tree extension `.4.3.6.5.2` is active.
+array-root extension `.4.3.6.5.2` subsequently closes the shared root-kind dispatcher.
 
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.1 — preserve authored callback values
 

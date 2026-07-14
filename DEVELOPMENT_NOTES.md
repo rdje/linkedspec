@@ -1,13 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.2` — dispatch traversal by root kind, not by a synthetic mixed tree):
+  The canonical array and harray methods share names and callback mechanics but do not share interior-node kinds.
+  A hash root recurses only through hashes; an array root recurses only through arrays. Cross-kind aggregates are
+  leaf values. Encoding that rule as one `tree_kind` selected from the receiver avoids duplicating walk/map/reduce
+  control while keeping child enumeration and result construction explicit: lexical keys for harrays, source-order
+  Lua offsets translated to zero-based indexes for arrays. The callback frame stays one transaction and chooses
+  only its selector binding (`key` or `index`). This also makes regression proof stronger: the old harray fixture
+  exercises the same dispatcher as the new array fixture. Both Lua ABIs pass 114/114 with the exact checked-in Perl
+  result. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61,
+  and phase0 `1..1031` green in 987 seconds.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.1.2` — scope the callback frame atomically): Nested one-name scope
   calls could have restored callback names correctly, but each layer would also copy the callback result and hide
   the one logical frame. `runtime_scoped_binding.run_frame` instead validates all distinct names, snapshots all
   scalar/array/harray stores before any mutation, installs copied uniform scalar-held values, copies the result
   once, and restores in reverse frame order through one protected boundary. The original `run` delegates to this
   seam, keeping `with` behavior unchanged. Harray traversal builds a fresh path per edge, recurses only when the
-  runtime kind is harray, and keeps arrays as leaf values; this preserves the separate zero-based array/mixed owner
-  `.4.3.6.5.2`. Receiver-kind validation precedes reduce-initial evaluation, matching Perl's invalid-receiver
+  runtime kind is harray, and keeps arrays as leaf values; this preserves the separate zero-based array-root owner
+  `.4.3.6.5.2`, which later closes without cross-kind recursion. Receiver-kind validation precedes reduce-initial evaluation, matching Perl's invalid-receiver
   short circuit. Direct Perl and Lua outputs agree; both Lua ABIs pass 113/113. The mandatory full local CI gate
   exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green in 983
   seconds.

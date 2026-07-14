@@ -18,7 +18,8 @@ evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 executes or
 evidence_update_2026_07_13_inline_controls: "LUA-BACKEND-PARITY.4.3.6.2 executes lazy inline if/switch values, selected expression blocks, one-time switch subjects, literal bare case labels, and fluent returns at 105/105 on both ABIs; statement/attached aliases remain structural."
 evidence_update_2026_07_13_statement_controls: "LUA-BACKEND-PARITY.4.3.6.3.1-.3 execute attached/marker if, attached/marker switch, and attached while at 108/108. Current built-in final blocks/with remain .4; callbacks remain .5."
 evidence_update_2026_07_13_builtin_blocks: "LUA-BACKEND-PARITY.4.3.6.4 executes metadata-governed helper/receiver with in attached and parenthesized form through copied/restored scope at 112/112; tree callback behavior remains .5."
-evidence_update_2026_07_13_harray_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.1.2 executes sorted harray walk/map/reduce through one copied/restored value/key/path/depth/acc frame at 113/113 on both Lua ABIs; array-root and mixed-tree recursion remain .5.2."
+evidence_update_2026_07_13_harray_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.1.2 executes sorted harray walk/map/reduce through one copied/restored value/key/path/depth/acc frame at 113/113 on both Lua ABIs; array-root traversal was then owned by .5.2."
+evidence_update_2026_07_13_array_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.2 generalizes the dispatcher by receiver root kind and executes zero-based array walk/map/reduce at 114/114 on both Lua ABIs; cross-kind aggregates remain leaves."
 reverify: "rg -n 'block_value|control_if|control_switch|control_while|prepare_invocation' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/user_function_registry.lua && bash scripts/check_task_tree_metadata.sh"
 ---
 
@@ -30,8 +31,8 @@ and parenthesized `call(args, { ... })` blocks as final positional block values.
 The contract resolver traverses those nodes without deciding their behavior.
 
 The interpreter now executes eager `block_value`, inline controls, attached/marker if and switch, attached while,
-signature-governed helper/receiver `with`, and hash-root walk/map/reduce callbacks through `.4.3.6.1-.5.1`.
-Array-root and mixed-tree callback recursion remains active `.4.3.6.5.2`. The user-function registry can prepare an
+signature-governed helper/receiver `with`, and root-kind hash/array walk/map/reduce callbacks through
+`.4.3.6.1-.5.2`. The user-function registry can prepare an
 invocation, but the interpreter does not yet call it; general staged-function
 runtime dispatch is explicitly owned by `LUA-BACKEND-PARITY.5.1`.
 
@@ -41,8 +42,8 @@ runtime dispatch is explicitly owned by `LUA-BACKEND-PARITY.5.1`.
 2. `.2`: lazy inline value controls;
 3. `.3.1-.3.3`: attached/marker if, switch, and while statements;
 4. `.4`: signature-governed current built-in block arguments and scoped `with`;
-5. `.5.1`: deterministic harray callbacks (done); `.5.2`: array-root and mixed-tree callbacks (active);
-6. `.6`: no-drift and explicit dependency handoff.
+5. `.5.1`: deterministic harray callbacks; `.5.2`: root-kind array callbacks (both done);
+6. `.6`: no-drift and explicit dependency handoff (active).
 
 This split preserves, rather than weakens, the generic final-codeblock model.
 Current built-in `with` consumes contextual codeblocks through `.4.3.6.4`.
@@ -55,4 +56,4 @@ Related facts: [[lua-actionir-ast-parser]], [[lua-runtime-helper-family-split]],
 [[generic-trailing-codeblock-argument-correction]],
 [[callable-codeblock-literal-contract]], [[terse-expression-valued-block-early-return]],
 [[lua-runtime-eager-block-values]], [[lua-runtime-builtin-final-codeblocks-with]],
-[[lua-runtime-harray-tree-callbacks]].
+[[lua-runtime-harray-tree-callbacks]], [[lua-runtime-array-tree-callbacks]].

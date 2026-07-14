@@ -11,12 +11,12 @@ answers:
   - does Lua restore callback bindings after an error
   - are arrays leaves inside Lua harray traversal
   - does Lua evaluate reduce initial on an invalid receiver
-  - which task owns Lua array root tree traversal
+  - does Lua use one dispatcher for hash and array tree traversal
 date: 2026-07-13
 status: current
 tags: [lua, luajit, runtime, harray, tree, callbacks, scope, copy, determinism, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.6.5.1.2 adds runtime_scoped_binding.run_frame plus sorted harray walk/map/reduce dispatch in lua/src/linkedspec/interpreter.lua. The focused case locks copied value/key/path/depth/acc scope, root depth 1, arrays as leaves, source/result isolation, walk continuation, terminal reduce, empty/invalid boundaries, typed malformed calls, and the exact direct Perl LinkedSpec::Get result. tools/run_lua_local.sh passes 113/113 on PUC Lua and LuaJIT; the mandatory full local CI gate passes capability 64/0/0, CLI 61/61 twice, and phase0 1..1031."
-reverify: "bash tools/run_lua_local.sh && rg -n 'run_frame|evaluate_hash_tree_receiver_block|exact Perl reference callback result|runtime harray traversal' lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua"
+evidence: "LUA-BACKEND-PARITY.4.3.6.5.1.2 adds runtime_scoped_binding.run_frame plus sorted harray walk/map/reduce dispatch in lua/src/linkedspec/interpreter.lua. LUA-BACKEND-PARITY.4.3.6.5.2 generalizes it to one receiver-root-kind dispatcher without changing harray semantics. The focused cases lock copied callback scope, root depth 1, arrays as harray leaves, source/result isolation, walk continuation, terminal reduce, empty/invalid boundaries, typed malformed calls, and exact Perl results. tools/run_lua_local.sh passes 114/114 on PUC Lua and LuaJIT."
+reverify: "bash tools/run_lua_local.sh && rg -n 'run_frame|evaluate_tree_receiver_block|exact Perl reference callback result|runtime harray traversal' lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua"
 ---
 
 Lua evaluates `walk_leaves`, `map_leaves`, and `reduce_leaves` only after the existing receiver callable metadata
@@ -36,9 +36,9 @@ side effects on names outside the callback frame persist normally.
 `walk_leaves` ignores callback results and returns a copy of the receiver, so hash-family continuation remains
 valid. `map_leaves` rebuilds a typed harray with each leaf replaced by its copied callback result. `reduce_leaves`
 evaluates its initial value once for a valid harray, threads each copied callback result, and is terminal in a
-receiver chain. Array-root and mixed harray/array recursion are deliberately not inferred here; active
-`LUA-BACKEND-PARITY.4.3.6.5.2` owns that separate zero-based-index contract.
+receiver chain. The later array-root leaf reuses this dispatcher but does not create cross-kind recursion: the
+receiver root kind selects the only interior-node kind, so arrays remain leaves under a harray root.
 
 Related facts: [[perl-hash-tree-traversal-callback-frame]], [[rust-hash-tree-traversal-receiver-blocks]],
 [[hash-tree-callback-append-scope-collision]], [[lua-runtime-builtin-final-codeblocks-with]],
-[[lua-runtime-block-control-callback-split]].
+[[lua-runtime-block-control-callback-split]], [[lua-runtime-array-tree-callbacks]].

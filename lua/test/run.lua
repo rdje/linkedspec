@@ -2990,6 +2990,124 @@ return([
   end
 end)
 
+test("runtime array traversal is indexed scoped copied and root-kind exact", function()
+  local source = uniform_binding_action_source([=[
+value = "outer-value"
+index = "outer-index"
+path = "outer-path"
+depth = "outer-depth"
+acc = "outer-acc"
+source = ["A", ["B", "C"], { "h" : "H" }, []]
+mapped = source.map_leaves() {
+  callback_label = cat(join_values("/", path), "@", depth)
+  callback_index = index
+  callback_path = copy(path)
+  if(num_eq(index, 2)) { value["h"] = "callback" }
+  index = 99
+  path = ["inner-path"]
+  depth = 99
+  return({ "label" : callback_label, "index" : callback_index, "path" : callback_path, "value" : value })
+}
+map_count = source.map_leaves() { return(value) }.count()
+seen = []
+walk_count = source.walk_leaves() {
+  seen += join_values("/", path)
+  value = "walk-local"
+  index = 88
+  path = ["walk-path"]
+  depth = 88
+  return(value)
+}.count()
+reduced = source.reduce_leaves([]) {
+  acc += cat(join_values("/", path), "@", depth)
+  return(acc)
+}
+reduce_continuation_is_null = is_undefined(source.reduce_leaves("") { return(acc) }.trim())
+empty = []
+seed = ["seed"]
+empty_map = empty.map_leaves() { return(exit_now(81)) }
+empty_reduce = empty.reduce_leaves(seed) { return(exit_now(82)) }
+empty_reduce += "result-only"
+empty_walk_count = empty.walk_leaves() { return(exit_now(83)) }.count()
+return({
+  "mapped" : mapped,
+  "map_count" : map_count,
+  "seen" : seen,
+  "walk_count" : walk_count,
+  "reduced" : reduced,
+  "reduce_continuation_is_null" : reduce_continuation_is_null,
+  "source" : source,
+  "outer_value" : value,
+  "outer_index" : index,
+  "outer_path" : path,
+  "outer_depth" : depth,
+  "outer_acc" : acc,
+  "empty_map" : empty_map,
+  "empty_reduce" : empty_reduce,
+  "empty_walk_count" : empty_walk_count,
+  "seed" : seed
+})
+]=])
+  local result = execute_uniform_binding_source(source)
+  assert_json_equal(result, json.harray({
+    mapped = json.array({
+      json.harray({ label = "0@1", index = 0, path = json.array({ 0 }), value = "A" }),
+      json.array({
+        json.harray({ label = "1/0@2", index = 0, path = json.array({ 1, 0 }), value = "B" }),
+        json.harray({ label = "1/1@2", index = 1, path = json.array({ 1, 1 }), value = "C" }),
+      }),
+      json.harray({
+        label = "2@1",
+        index = 2,
+        path = json.array({ 2 }),
+        value = json.harray({ h = "callback" }),
+      }),
+      json.array(),
+    }),
+    map_count = 4,
+    seen = json.array({ "0", "1/0", "1/1", "2" }),
+    walk_count = 4,
+    reduced = json.array({ "0@1", "1/0@2", "1/1@2", "2@1" }),
+    reduce_continuation_is_null = true,
+    source = json.array({ "A", json.array({ "B", "C" }), json.harray({ h = "H" }), json.array() }),
+    outer_value = "outer-value",
+    outer_index = "outer-index",
+    outer_path = "outer-path",
+    outer_depth = "outer-depth",
+    outer_acc = "outer-acc",
+    empty_map = json.array(),
+    empty_reduce = json.array({ "seed", "result-only" }),
+    empty_walk_count = 0,
+    seed = json.array({ "seed" }),
+  }), "array traversal behavior")
+
+  local reference_result = execute_uniform_binding_source(uniform_binding_action_source([[
+items = ["a", ["b", "c"], { "h" : "H" }]
+scalar = "x"
+nonarray = scalar.map_leaves() { seen += "bad" }
+return([
+  items.map_leaves() {
+    return(cat(join_values("/", path), "=", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value))))
+  },
+  items.reduce_leaves("") {
+    return(cat(acc, join_values("/", path), ":", if(count(value.sorted_keys()), cat("{", value.sorted_keys().join_values(","), "}"), else(value)), ";"))
+  },
+  items.walk_leaves() { seen += join_values("/", path); return(value) }.count(),
+  seen,
+  if(is_undefined(nonarray), "undef", else("bad"))
+])
+]]))
+  assert_json_equal(reference_result, json.decode([[
+[
+  ["0=a",["1/0=b","1/1=c"],"2={h}"],
+  "0:a;1/0:b;1/1:c;2:{h};",
+  3,
+  ["0","1/0","1/1","2"],
+  "undef"
+]
+]]), "exact Perl array-tree reference result")
+end)
+
 test("runtime inline value controls select one lazy payload", function()
   local source = uniform_binding_action_source([[
 selector_calls = []

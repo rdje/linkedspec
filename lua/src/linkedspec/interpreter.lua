@@ -1270,18 +1270,52 @@ local function evaluate_hash_values(engine, expr, ctx, accumulator, edge_state, 
   return evaluate_hash_helper(action_contracts.canonical_action_helper_name(expr.name), values)
 end
 
-local function hash_tree_child_path(path, key)
+local function tree_child_path(path, part)
   local result = json.array()
-  for index, part in ipairs(path) do result[index] = part end
-  result[#result + 1] = key
+  for index, existing in ipairs(path) do result[index] = existing end
+  result[#result + 1] = part
   return result
 end
 
-local function evaluate_hash_tree_leaf_block(
+local function tree_children(node, tree_kind)
+  if tree_kind == "harray" then
+    local keys = sorted_harray_keys(node)
+    local offset = 0
+    return function()
+      offset = offset + 1
+      local key = keys[offset]
+      if key == nil then return nil end
+      return key, node[key]
+    end
+  end
+
+  local offset = 0
+  return function()
+    offset = offset + 1
+    if offset > #node then return nil end
+    return offset - 1, node[offset]
+  end
+end
+
+local function new_tree_container(tree_kind)
+  if tree_kind == "harray" then return json.harray() end
+  return json.array()
+end
+
+local function set_tree_child(container, tree_kind, selector, value)
+  if tree_kind == "harray" then
+    container[selector] = value
+  else
+    container[selector + 1] = value
+  end
+end
+
+local function evaluate_tree_leaf_block(
   engine,
   block_expr,
   value,
-  key,
+  selector_name,
+  selector,
   path,
   acc,
   bind_acc,
@@ -1292,7 +1326,7 @@ local function evaluate_hash_tree_leaf_block(
   local bindings = {}
   if bind_acc then bindings[#bindings + 1] = { name = "acc", value = acc } end
   bindings[#bindings + 1] = { name = "value", value = value }
-  bindings[#bindings + 1] = { name = "key", value = key }
+  bindings[#bindings + 1] = { name = selector_name, value = selector }
   bindings[#bindings + 1] = { name = "path", value = path }
   bindings[#bindings + 1] = { name = "depth", value = #path }
   return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
@@ -1300,7 +1334,7 @@ local function evaluate_hash_tree_leaf_block(
   end)
 end
 
-local function evaluate_hash_tree_receiver_block(
+local function evaluate_tree_receiver_block(
   engine,
   name,
   call_expr,
@@ -1310,22 +1344,24 @@ local function evaluate_hash_tree_receiver_block(
   accumulator,
   edge_state
 )
-  if json.kind(receiver) ~= "harray" then return json.null end
+  local tree_kind = json.kind(receiver)
+  if tree_kind ~= "harray" and tree_kind ~= "array" then return json.null end
+  local selector_name = tree_kind == "harray" and "key" or "index"
 
   if name == "walk_leaves" then
     local walk
     walk = function(node, path)
-      for _, key in ipairs(sorted_harray_keys(node)) do
-        local value = node[key]
-        local next_path = hash_tree_child_path(path, key)
-        if json.kind(value) == "harray" then
+      for selector, value in tree_children(node, tree_kind) do
+        local next_path = tree_child_path(path, selector)
+        if json.kind(value) == tree_kind then
           walk(value, next_path)
         else
-          evaluate_hash_tree_leaf_block(
+          evaluate_tree_leaf_block(
             engine,
             block_expr,
             value,
-            key,
+            selector_name,
+            selector,
             next_path,
             nil,
             false,
@@ -1343,18 +1379,19 @@ local function evaluate_hash_tree_receiver_block(
   if name == "map_leaves" then
     local map
     map = function(node, path)
-      local result = json.harray()
-      for _, key in ipairs(sorted_harray_keys(node)) do
-        local value = node[key]
-        local next_path = hash_tree_child_path(path, key)
-        if json.kind(value) == "harray" then
-          result[key] = map(value, next_path)
+      local result = new_tree_container(tree_kind)
+      for selector, value in tree_children(node, tree_kind) do
+        local next_path = tree_child_path(path, selector)
+        local mapped
+        if json.kind(value) == tree_kind then
+          mapped = map(value, next_path)
         else
-          result[key] = evaluate_hash_tree_leaf_block(
+          mapped = evaluate_tree_leaf_block(
             engine,
             block_expr,
             value,
-            key,
+            selector_name,
+            selector,
             next_path,
             nil,
             false,
@@ -1363,6 +1400,7 @@ local function evaluate_hash_tree_receiver_block(
             edge_state
           )
         end
+        set_tree_child(result, tree_kind, selector, mapped)
       end
       return result
     end
@@ -1379,17 +1417,17 @@ local function evaluate_hash_tree_receiver_block(
     ))
     local reduce
     reduce = function(node, path)
-      for _, key in ipairs(sorted_harray_keys(node)) do
-        local value = node[key]
-        local next_path = hash_tree_child_path(path, key)
-        if json.kind(value) == "harray" then
+      for selector, value in tree_children(node, tree_kind) do
+        local next_path = tree_child_path(path, selector)
+        if json.kind(value) == tree_kind then
           reduce(value, next_path)
         else
-          reduced = evaluate_hash_tree_leaf_block(
+          reduced = evaluate_tree_leaf_block(
             engine,
             block_expr,
             value,
-            key,
+            selector_name,
+            selector,
             next_path,
             reduced,
             true,
@@ -1404,7 +1442,7 @@ local function evaluate_hash_tree_receiver_block(
     return copy_value(reduced)
   end
 
-  fail("unsupported harray traversal helper '" .. tostring(name) .. "'", { helper_name = name })
+  fail("unsupported tree traversal helper '" .. tostring(name) .. "'", { helper_name = name })
 end
 
 local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, receiver)
@@ -1744,7 +1782,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
         if canonical_name == "with" then
           value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
         else
-          value = evaluate_hash_tree_receiver_block(
+          value = evaluate_tree_receiver_block(
             engine,
             canonical_name,
             call_expr,

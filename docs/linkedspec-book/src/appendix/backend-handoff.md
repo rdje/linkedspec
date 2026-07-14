@@ -703,7 +703,9 @@ ABIs to 112/112: copied signature metadata admits attached and parenthesized hel
 value or receiver evaluates first; copied results continue through compatible receiver chains; and exact prior or
 absent uniform bindings restore after success, local return, and error. Callback work is split at
 `.4.3.6.5.1.0`: reference authored-value repair `.1.1` is done; `.1.2` adds atomic copied/restored callback frames
-and sorted harray walk/map/reduce at 113/113 on both Lua ABIs; array-root and mixed-tree extension `.5.2` is active.
+and sorted harray walk/map/reduce at 113/113. `.5.2` shares the dispatcher with zero-based array-root traversal,
+recurse-only-same-kind semantics, and exact Perl-oracle behavior at 114/114 on both Lua ABIs. Tree callbacks are
+closed; no-drift/dependency routing `.4.3.6.6` is active.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`

@@ -74,7 +74,9 @@ and continues compatible receiver chains. Tree callbacks are split by `.4.3.6.5.
 append-RHS scope collision is repaired in `.4.3.6.5.1.1`; `.4.3.6.5.1.2` then adds one atomic copied/restored
 `value`/`key`/`path`/`depth`/`acc` frame and sorted harray `walk_leaves`/`map_leaves`/`reduce_leaves`. Arrays remain
 leaves, root depth is 1, walk/map keep hash-family continuation, reduce is terminal, and both ABIs pass 113/113
-with the exact Perl callback result. Array-root and mixed-tree recursion remain active `.4.3.6.5.2`.
+with the exact Perl callback result. `.4.3.6.5.2` then shares the dispatcher with array roots: Lua offsets become
+zero-based `index`/`path` values, nested arrays recurse in source order, harrays stay leaves, and typed walk/map/
+reduce behavior raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` is active.
 General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,

@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua array-root `walk_leaves`/`map_leaves`/`reduce_leaves` now reuse the harray callback
+  frame through one receiver-root-kind dispatcher. Array children are visited by source order with Lua offsets
+  translated to zero-based `index` and `path`; only nested arrays recurse, so harrays remain opaque leaves just as
+  arrays remain leaves below harray roots. Kind-specific result construction preserves typed trees while shared
+  walk/map/reduce control retains copied scope, continuation, terminality, and lazy invalid/empty boundaries. The
+  exact checked-in Perl oracle result matches, the prior harray case remains green, and PUC Lua/LuaJIT pass 114/114.
+  Tree-callback parent `.4.3.6.5` closes and no-drift/dependency handoff `.4.3.6.6` is active.
 - `2026-07-13` refresh: Lua harray `walk_leaves`/`map_leaves`/`reduce_leaves` now execute through one atomic
   multi-binding scope frame. Lexically sorted keys drive depth-first recursion through harray interiors; arrays
   remain leaves; callback `path` is copied and `depth == count(path)`; `walk` preserves side effects and returns a
   source copy, `map` rebuilds a copied harray, and `reduce` threads copied typed results and stays terminal. Empty
   trees run no callbacks, non-harray receivers return null before initial/callback evaluation, and exact prior or
   absent `value`/`key`/`path`/`depth`/`acc` stores restore after success or error. The exact Perl result is locked;
-  PUC Lua and LuaJIT pass 113/113. Array-root and mixed-tree recursion `.4.3.6.5.2` is active.
+  PUC Lua and LuaJIT pass 113/113. Array-root traversal was then closed separately by `.4.3.6.5.2`.
 - `2026-07-13` refresh: Current value-helper lowering now gives an already-valid authored argument list priority
   over the legacy optional-scope heuristic. The AST was already correct; `MethodExpr` now exposes the explicit
   precedence mode, and `MethodLowering`/`FlowExpr` use it for `cat`, variadic arithmetic/min/max, coalescing,
