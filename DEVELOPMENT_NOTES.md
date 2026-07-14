@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.1` — keep one internal offset unit and convert only at the DSL boundary):
+  Lua's regex engine, match records, and immutable registers already use zero-based UTF-8 byte offsets. Adding a
+  second character-offset cursor would create synchronization risk. The runtime therefore keeps one byte cursor
+  and uses `matching.byte_offset_to_char_offset`, `char_offset_to_byte_offset`, and
+  `line_column_at_byte_offset` only for public projections and whole-input slices. One `set_live_cursor` seam
+  updates both `ctx.cursor_byte` and the register cursor while preserving the entry/local/capture snapshots.
+  Cursor saves store byte offsets on one parse-scoped LIFO stack; empty pop and absent-anchor rewinds are no-ops.
+  The focused Unicode probe also locks a subtle execution consequence: consume-mode matching must read the
+  changed live cursor, not a stale register field. Both Lua ABIs pass 115/115; anonymous capture `.4.3.7.2` can
+  reuse the same conversion/state seam without changing cursor-control semantics. The full local CI gate passes
+  capability 64/0/0, CLI 61/61 twice, phase0 `1..1031` in 918 seconds, and all doctrine/contract/book checks.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.0` — compare semantics before turning a set difference into inventory):
   Sixteen identifier-shaped, non-compatibility Perl contract diagnostic names are outside the aligned 239-name
   inventories, but only seven are missing public current calls. Two are documented compatibility aliases, two are

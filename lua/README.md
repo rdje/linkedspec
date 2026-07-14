@@ -76,8 +76,14 @@ append-RHS scope collision is repaired in `.4.3.6.5.1.1`; `.4.3.6.5.1.2` then ad
 leaves, root depth is 1, walk/map keep hash-family continuation, reduce is terminal, and both ABIs pass 113/113
 with the exact Perl callback result. `.4.3.6.5.2` then shares the dispatcher with array roots: Lua offsets become
 zero-based `index`/`path` values, nested arrays recurse in source order, harrays stay leaves, and typed walk/map/
-reduce behavior raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent; capture-
-slice/mark/input/cursor helpers `.4.3.7` are next. General user-function final `callback: codeblock` declaration
+reduce behavior raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent.
+`.4.3.7.1` adds `input_text`, `input_len`, `input_slice`, all three input-end coordinates, the five live-cursor
+views, and explicit `save_cursor` / `restore_cursor` / entry/local rewind controls. Internal state remains a UTF-8
+byte offset, while every public position, length, slice boundary, line, and column uses Unicode character units.
+Cursor saves form one parse-scoped LIFO stack; an empty restore or a rewind without its corresponding match is a
+no-op; rewinds preserve match snapshots and synchronize the live/register cursor so consume-mode continuation
+starts at the new position. Exact arity errors remain typed. Both ABIs pass 115/115; anonymous capture-boundary
+helpers `.4.3.7.2` are next. General user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,

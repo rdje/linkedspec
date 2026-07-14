@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua input/live-cursor `.4.3.7.1` keeps one zero-based UTF-8 byte cursor internally and
+  converts only at the DSL boundary for character-unit positions, lengths, slices, lines, and columns. One
+  synchronized mutation seam preserves entry/local match snapshots while updating both live and register cursor.
+  Parse-scoped cursor saves are LIFO; empty restore and absent-anchor rewinds are no-ops; consume continuation
+  observes the changed cursor. PUC Lua and LuaJIT pass 115/115; full local CI passes CLI 61/61 twice and phase0
+  `1..1031` in 918 seconds; anonymous capture-boundary `.4.3.7.2` is next.
 - `2026-07-13` refresh: Lua block/control/contextual-built-in/tree-callback parent `.4.3.6` closes through
   no-drift/dependency leaf `.4.3.6.6`. The focused dual-ABI gate remains 114/114; independent callable-codeblock
   and punctuation-light contracts pass; capability census remains 64/0/0; and the preceding mandatory full local
   gate passes CLI 61/61 twice plus phase0 `1..1031`. Current built-in final blocks remain metadata-governed by one
   final `callback: codeblock` slot. General user-function declarations and contextual execution are explicitly
   handed to `.5.1`, `{|params| ...}` literals/dynamic calls stay `.11.7`, generated preservation stays `.8.1-.8.4`,
-  and capture-slice/mark/input/cursor helpers `.4.3.7` are the next dependency-ready runtime family.
+  and capture-slice/mark/input/cursor helpers `.4.3.7` become the next dependency-ready runtime family; its first
+  input/cursor leaf subsequently closes at 115/115.
 - `2026-07-13` refresh: Lua array-root `walk_leaves`/`map_leaves`/`reduce_leaves` now reuse the harray callback
   frame through one receiver-root-kind dispatcher. Array children are visited by source order with Lua offsets
   translated to zero-based `index` and `path`; only nested arrays recurse, so harrays remain opaque leaves just as

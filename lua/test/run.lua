@@ -2166,6 +2166,143 @@ Top::
   assert_equal(result.value.col, 1, "absent column origin")
 end)
 
+test("runtime input cursor views and explicit controls are Unicode exact", function()
+  local source = [[
+Top::AND
+ => Value
+
+Value:AND
+ /é/
+ /ab🙂/
+ -> Value[1] {
+   after_match = cursor_pos()
+   line = cursor_line()
+   col = cursor_col()
+   rest = cursor_rest()
+   rest_len = cursor_rest_len()
+   rest_upper = cursor_rest().uppercase()
+   whole = input_text()
+   whole_len = input_len()
+   slice = input_slice(1, 4)
+   end_pos = input_end_pos()
+   end_line = input_end_line()
+   end_col = input_end_col()
+   invalid_slice = input_slice("bad", 2)
+   negative_start = input_slice(-2, 3)
+   negative_width = input_slice(1, -2)
+   past_slice = input_slice(99, 2)
+   save_cursor()
+   rewind_match_start()
+   match_start = cursor_pos()
+   match_rest = cursor_rest()
+   save_cursor()
+   rewind_entry_start()
+   entry_start = cursor_pos()
+   restore_cursor()
+   restored_match = cursor_pos()
+   restore_cursor()
+   restored_original = cursor_pos()
+   restore_cursor()
+   empty_restore = cursor_pos()
+   return({
+     "after_match" : after_match,
+     "line" : line,
+     "col" : col,
+     "rest" : rest,
+     "rest_len" : rest_len,
+     "rest_upper" : rest_upper,
+     "whole" : whole,
+     "whole_len" : whole_len,
+     "slice" : slice,
+     "end_pos" : end_pos,
+     "end_line" : end_line,
+     "end_col" : end_col,
+     "invalid_slice" : invalid_slice,
+     "negative_start" : negative_start,
+     "negative_width" : negative_width,
+     "past_slice" : past_slice,
+     "match_start" : match_start,
+     "match_rest" : match_rest,
+     "entry_start" : entry_start,
+     "restored_match" : restored_match,
+     "restored_original" : restored_original,
+     "empty_restore" : empty_restore
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "é\nab🙂z"
+  )
+  local value = result.value[1]
+  assert_equal(value.after_match, 5, "cursor character position")
+  assert_equal(value.line, 2, "cursor line")
+  assert_equal(value.col, 4, "cursor column")
+  assert_equal(value.rest, "z", "cursor remainder")
+  assert_equal(value.rest_len, 1, "cursor remainder character length")
+  assert_equal(value.rest_upper, "Z", "cursor remainder receiver chain")
+  assert_equal(value.whole, "é\nab🙂z", "whole input")
+  assert_equal(value.whole_len, 6, "whole input character length")
+  assert_equal(value.slice, "\nab🙂", "whole input character slice")
+  assert_equal(value.end_pos, 6, "input end character position")
+  assert_equal(value.end_line, 2, "input end line")
+  assert_equal(value.end_col, 5, "input end column")
+  assert_equal(value.invalid_slice, json.null, "invalid input slice boundary")
+  assert_equal(value.negative_start, "é\na", "negative input slice start clamps to zero")
+  assert_equal(value.negative_width, "", "negative input slice width clamps to zero")
+  assert_equal(value.past_slice, "", "past-end input slice")
+  assert_equal(value.match_start, 2, "local-match rewind")
+  assert_equal(value.match_rest, "ab🙂z", "local-match rewind remainder")
+  assert_equal(value.entry_start, 0, "entry-match rewind")
+  assert_equal(value.restored_match, 2, "nested cursor restore")
+  assert_equal(value.restored_original, 5, "outer cursor restore")
+  assert_equal(value.empty_restore, 5, "empty cursor restore is a no-op")
+
+  local consume_source = [[
+Top::AND
+ /ab/
+ /ab/
+ -> Top[0] { rewind_match_start() }
+ -> Top[1] { return(cursor_pos()) }
+]]
+  local consume = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(
+      linkedspec.compile_spec(linkedspec.parse_spec(consume_source)),
+      { parse_mode = "consume" }
+    ),
+    "ab"
+  )
+  assert_equal(consume.value, 2, "rewound cursor controls consume continuation")
+
+  local absent_rewind = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ I { rewind_match_start(); rewind_entry_start(); return(cursor_pos()) }
+]]))),
+    "x"
+  )
+  assert_equal(absent_rewind.value, 0, "absent-anchor rewinds are no-ops")
+
+  for _, malformed in ipairs({
+    { action = "return(input_slice(0))", helper = "input_slice", actual = 1 },
+    { action = "save_cursor(1)", helper = "save_cursor", actual = 1 },
+  }) do
+    local invalid_source = "Top::\n /x/ I { " .. malformed.action .. " }\n"
+    local ok, failure = pcall(function()
+      linkedspec.runtime_parse(
+        linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(invalid_source))),
+        "x"
+      )
+    end)
+    assert_equal(ok, false, malformed.helper .. " malformed arity fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.helper .. " typed failure")
+    assert_equal(failure.code, "helper_arity_mismatch", malformed.helper .. " diagnostic code")
+    assert_equal(failure.helper_name, malformed.helper, malformed.helper .. " helper attribution")
+    assert_equal(failure.actual_arity, malformed.actual, malformed.helper .. " actual arity")
+  end
+end)
+
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
   local source = [[
 Top::

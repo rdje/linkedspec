@@ -116,6 +116,7 @@ local function context(input, top_rule, compiled_rules)
     lifecycle_events = {},
     rule_stack = {},
     accumulator_stack = {},
+    cursor_stack = {},
     compiled_rules = compiled_rules,
     top_rule = top_rule,
   }
@@ -1507,6 +1508,99 @@ local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_
   return nil
 end
 
+local INPUT_CURSOR_HELPERS = {
+  cursor_col = true,
+  cursor_line = true,
+  cursor_pos = true,
+  cursor_rest = true,
+  cursor_rest_len = true,
+  input_end_col = true,
+  input_end_line = true,
+  input_end_pos = true,
+  input_len = true,
+  input_slice = true,
+  input_text = true,
+}
+
+local CURSOR_CONTROL_HELPERS = {
+  restore_cursor = true,
+  rewind_entry_start = true,
+  rewind_match_start = true,
+  save_cursor = true,
+}
+
+local function set_live_cursor(ctx, byte_cursor)
+  ctx.registers = ctx.registers:with_cursor_byte(byte_cursor)
+  ctx.cursor_byte = ctx.registers.cursor_byte
+end
+
+local function evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
+  if name == "input_slice" then
+    if #expr.args ~= 2 then invalid_helper_arity(name, "exactly 2 positional arguments", #expr.args) end
+    local start_value = evaluate_expr(
+      engine,
+      argument_expr(expr.args[1]),
+      ctx,
+      accumulator,
+      edge_state
+    )
+    local width_value = evaluate_expr(
+      engine,
+      argument_expr(expr.args[2]),
+      ctx,
+      accumulator,
+      edge_state
+    )
+    local start = runtime_integer(start_value)
+    local width = runtime_integer(width_value)
+    if start == nil or width == nil then return json.null end
+    start = math.max(0, start)
+    width = math.max(0, width)
+    local start_byte = matching.char_offset_to_byte_offset(ctx.input, start)
+    local end_byte = matching.char_offset_to_byte_offset(ctx.input, start + width)
+    return ctx.input:sub(start_byte + 1, end_byte)
+  end
+
+  if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
+  if name == "input_text" then return ctx.input end
+  if name == "input_len" or name == "input_end_pos" then
+    return matching.byte_offset_to_char_offset(ctx.input, #ctx.input)
+  end
+  if name == "input_end_line" or name == "input_end_col" then
+    local position = matching.line_column_at_byte_offset(ctx.input, #ctx.input)
+    return name == "input_end_line" and position.line or position.column
+  end
+  if name == "cursor_pos" then return matching.byte_offset_to_char_offset(ctx.input, ctx.cursor_byte) end
+  if name == "cursor_line" or name == "cursor_col" then
+    local position = matching.line_column_at_byte_offset(ctx.input, ctx.cursor_byte)
+    return name == "cursor_line" and position.line or position.column
+  end
+  if name == "cursor_rest" then return ctx.input:sub(ctx.cursor_byte + 1) end
+  if name == "cursor_rest_len" then
+    return matching.byte_offset_to_char_offset(ctx.input, #ctx.input) -
+      matching.byte_offset_to_char_offset(ctx.input, ctx.cursor_byte)
+  end
+  fail("unsupported input/cursor helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
+local function evaluate_cursor_control(name, expr, ctx)
+  if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
+  if name == "save_cursor" then
+    ctx.cursor_stack[#ctx.cursor_stack + 1] = ctx.cursor_byte
+  elseif name == "restore_cursor" then
+    local saved = ctx.cursor_stack[#ctx.cursor_stack]
+    if saved ~= nil then
+      ctx.cursor_stack[#ctx.cursor_stack] = nil
+      set_live_cursor(ctx, saved)
+    end
+  elseif name == "rewind_match_start" then
+    if ctx.registers.local_match then set_live_cursor(ctx, ctx.registers.local_match.byte_start) end
+  elseif name == "rewind_entry_start" then
+    if ctx.registers.entry_match then set_live_cursor(ctx, ctx.registers.entry_match.byte_start) end
+  end
+  return json.null
+end
+
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   if expr.name == "if" then
     return evaluate_inline_if(engine, expr, ctx, accumulator, edge_state)
@@ -1664,6 +1758,10 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   elseif name == "copy" then
     if not expr.args[1] then return json.null end
     return copy_value(evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state))
+  elseif INPUT_CURSOR_HELPERS[name] then
+    return evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
+  elseif CURSOR_CONTROL_HELPERS[name] then
+    return evaluate_cursor_control(name, expr, ctx)
   elseif name:match("^entry_") or name:match("^match_") then
     local value = evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
     if value ~= nil then return value end

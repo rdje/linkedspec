@@ -8,11 +8,12 @@ answers:
   - are all documented mark helpers in the 239 name inventory
   - which documented current mark helpers are missing from backend inventories
   - why is capture until boundary separate from capture slices
+  - does Lua execute input cursor helpers and cursor controls
 date: 2026-07-13
 status: confirmed
 tags: [lua, runtime, capture, marks, cursor, inventory, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, the governed capture/cursor fixtures, Lua matching/parser/compiler/interpreter sources, and current shipped marker usage. Lua has byte-safe immutable match registers and recognizes the governed 239 names, but does not execute capture/mark/input/cursor-control helpers or split-marker AST nodes. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
-reverify: "perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen"
+evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, governed fixtures, Lua state seams, and shipped markers. LUA-BACKEND-PARITY.4.3.7.1 then implemented all input/live-cursor projections plus explicit save/restore/rewind controls over Lua's byte-safe registers; its focused Unicode/LIFO/consume test passes in the 115/115 PUC Lua and LuaJIT gates. Capture/mark helpers and split-marker AST execution remain later leaves. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
+reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen"
 ---
 
 # Lua Capture/Cursor Runtime Audit
@@ -26,13 +27,20 @@ reverify: "perl tools/check_language_capability_coverage.pl --report && rg -n 'm
 5. compiled-rule earliest-boundary lookahead; and
 6. final inventory/public no-drift.
 
-Lua already stores internal positions as UTF-8 byte offsets in immutable runtime match registers. Those registers
-carry the live cursor, entry/local matches, and anonymous capture start, and already expose byte-to-character and
-line/column conversion helpers. The interpreter still has no cursor stack or named-mark frame, and its helper
-dispatcher falls through for all capture/mark/input/cursor-control names. `spec_parser.lua` preserves
+Lua stores internal positions as UTF-8 byte offsets in immutable runtime match registers. Those registers carry
+the live cursor, entry/local matches, and anonymous capture start, and expose byte-to-character and line/column
+conversion helpers. `.4.3.7.1` adds a parse-scoped cursor stack and executes the input/live-cursor and explicit
+cursor-control families through one live/register synchronization seam. The interpreter still has no named-mark
+frame and falls through for the remaining capture/mark helpers. `spec_parser.lua` preserves
 `@capture_slice`, `@capture_from_here`, `@move_pos`, and `@mark(name)` as typed split-marker nodes, but
 `compiled_spec.lua` and `interpreter.lua` do not consume those nodes. Current shipped source includes `@move_pos`
 in `rgx/subs/pgen/specs/ebnf.spec`, so marker execution needs an explicit native owner.
+
+The `.4.3.7.1` public boundary is character-based even though internal cursors remain byte offsets. `input_slice`
+converts its nonnegative character start and width to UTF-8-safe byte endpoints; invalid numeric boundaries return
+null and past-end spans return empty text. Cursor saves are LIFO across the parse, empty restore and absent-anchor
+rewind are no-ops, and rewinds change the synchronized cursor without replacing entry/local match snapshots. A
+consume-mode test proves the next regex starts from the rewound cursor.
 
 The governed exact fixtures cover cursor/input values, explicit cursor control, anonymous captures, and a named
 subset: `mark_here`, input-boundary marks, copy/existence/position, anonymous/named bridges, and stable/advancing
@@ -53,7 +61,7 @@ usable but none matches later, it captures to end-of-input.
 
 ## Links
 
-- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0`.
+- Owner: [[LUA-BACKEND-PARITY]] `.4.3.7.0` audit and `.4.3.7.1` input/cursor implementation.
 - State taxonomy: [[spec-capture-mark-family-taxonomy]].
 - Marker timing: [[split-boundary-marker-action-timing]].
 - Coverage limitation: [[current-call-name-inventory-does-not-prove-runtime-semantics]].

@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.1 — add Lua input cursor controls**
+  (DONE — Unicode input/cursor views and explicit controls pass 115/115 on both ABIs; anonymous capture `.4.3.7.2`
+  next).
+
+  **Result:** All six whole-input helpers, five live-cursor readers, and four save/restore/rewind controls execute
+  over one byte-safe runtime seam while exposing Unicode character units to `.spec` code. Cursor saves are
+  parse-scoped LIFO; empty restores and absent anchors are no-ops; entry/local rewinds preserve match snapshots and
+  synchronize consume continuation. One multibyte test covers all names, receiver continuation, invalid/past-end
+  slices, nested restores, distinct anchors, typed arity diagnostics, and a consume rewind. The dual-ABI Lua gate
+  passes 115/115 plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. No named-mark, split-marker,
+  generated-source, or capability claim changed. Full local CI passes capability 64/0/0, both CLI environments at
+  61/61, phase0 `1..1031` in 918 seconds, and every contract/doctrine/documentation gate.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.17.0 — split complete named mark parity**
   (DONE — exact seven-helper cross-backend owners recorded; Lua input/cursor `.4.3.7.1` resumes).
 

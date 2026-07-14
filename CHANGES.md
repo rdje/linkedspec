@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.1 — add Lua input cursor controls
+
+Lua now executes every current whole-input and live-cursor projection plus `save_cursor`, `restore_cursor`,
+`rewind_match_start`, and `rewind_entry_start`. Runtime storage remains a zero-based UTF-8 byte offset, while DSL
+positions, lengths, slices, lines, and columns are projected in Unicode character units. One synchronization seam
+updates the live and register cursor without replacing the entry/local match snapshots.
+
+The cursor stack is parse-scoped and LIFO. Empty restore and absent-anchor rewinds are no-ops; nested restores are
+exact, and consume-mode continuation starts from the rewound cursor. `input_slice` evaluates exactly two values,
+converts clamped character boundaries to byte-safe endpoints, returns null for nonnumeric boundaries, and returns
+empty text past end-of-input. Exact helper arity failures remain typed and receiver chaining works for cursor text.
+
+The focused multibyte test covers all 15 helper/control names, distinct entry/local anchors, nested/empty restores,
+invalid and past-end slices, receiver continuation, and consume-mode rewind. `bash tools/run_lua_local.sh` passes
+115/115 on both PUC Lua and LuaJIT plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. Anonymous
+capture-boundary helpers `.4.3.7.2` are next; no named-mark, split-marker, generated-source, or capability claim is
+made. The authoritative full local CI gate also passes capability 64/0/0, CLI 61/61 in both option environments,
+phase0 `1..1031` in 918 seconds, and every contract/doctrine/documentation gate.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.0 — split complete named mark parity
 
 Created a cross-backend owner for the seven documented current named-mark helpers excluded from the governed
