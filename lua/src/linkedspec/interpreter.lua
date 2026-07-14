@@ -1529,9 +1529,83 @@ local CURSOR_CONTROL_HELPERS = {
   save_cursor = true,
 }
 
+local ANONYMOUS_CAPTURE_HELPERS = {
+  capture_rest = true,
+  capture_rest_len = true,
+  capture_slice = true,
+  capture_slice_col = true,
+  capture_slice_len = true,
+  capture_slice_line = true,
+  capture_slice_pos = true,
+  capture_slice_until_cursor = true,
+  capture_slice_until_cursor_len = true,
+  capture_take = true,
+  capture_take_len = true,
+  capture_take_rest = true,
+  capture_take_rest_len = true,
+  capture_take_until_cursor = true,
+  capture_take_until_cursor_len = true,
+  start_capture_slice = true,
+}
+
 local function set_live_cursor(ctx, byte_cursor)
   ctx.registers = ctx.registers:with_cursor_byte(byte_cursor)
   ctx.cursor_byte = ctx.registers.cursor_byte
+end
+
+local function set_capture_start(ctx, byte_cursor)
+  ctx.registers = ctx.registers:with_capture_start_byte(byte_cursor)
+end
+
+local function anonymous_capture_span(ctx, start_byte, end_byte, length_only)
+  if start_byte == nil or end_byte == nil or start_byte < 0 or start_byte > #ctx.input or
+      end_byte < start_byte or end_byte > #ctx.input then
+    return json.null
+  end
+  if length_only then
+    return matching.byte_offset_to_char_offset(ctx.input, end_byte) -
+      matching.byte_offset_to_char_offset(ctx.input, start_byte)
+  end
+  return ctx.input:sub(start_byte + 1, end_byte)
+end
+
+local function evaluate_anonymous_capture_helper(name, expr, ctx)
+  if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
+  if name == "start_capture_slice" then
+    set_capture_start(ctx, ctx.cursor_byte)
+    return json.null
+  end
+
+  local start_byte = ctx.registers.capture_start_byte
+  if start_byte == nil then return json.null end
+  if name == "capture_slice_pos" then
+    return matching.byte_offset_to_char_offset(ctx.input, start_byte)
+  end
+  if name == "capture_slice_line" or name == "capture_slice_col" then
+    local position = matching.line_column_at_byte_offset(ctx.input, start_byte)
+    return name == "capture_slice_line" and position.line or position.column
+  end
+
+  local end_byte
+  if name == "capture_rest" or name == "capture_rest_len" or
+      name == "capture_take_rest" or name == "capture_take_rest_len" then
+    end_byte = #ctx.input
+  elseif name == "capture_slice_until_cursor" or name == "capture_slice_until_cursor_len" or
+      name == "capture_take_until_cursor" or name == "capture_take_until_cursor_len" then
+    end_byte = ctx.cursor_byte
+  elseif ctx.registers.local_match ~= nil then
+    end_byte = ctx.registers.local_match.byte_start
+  end
+
+  local result = anonymous_capture_span(ctx, start_byte, end_byte, name:sub(-4) == "_len")
+  if result == json.null then return result end
+  if name == "capture_take" or name == "capture_take_len" or
+      name == "capture_take_until_cursor" or name == "capture_take_until_cursor_len" then
+    set_capture_start(ctx, ctx.cursor_byte)
+  elseif name == "capture_take_rest" or name == "capture_take_rest_len" then
+    set_capture_start(ctx, #ctx.input)
+  end
+  return result
 end
 
 local function evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
@@ -1762,6 +1836,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator, edge_state)
   elseif CURSOR_CONTROL_HELPERS[name] then
     return evaluate_cursor_control(name, expr, ctx)
+  elseif ANONYMOUS_CAPTURE_HELPERS[name] then
+    return evaluate_anonymous_capture_helper(name, expr, ctx)
   elseif name:match("^entry_") or name:match("^match_") then
     local value = evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
     if value ~= nil then return value end

@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.2 — add Lua anonymous capture helpers**
+  (DONE — all 16 calls pass 116/116 on both ABIs; independent earliest-boundary `.4.3.7.5` next).
+
+  **Result:** Local-match/live-cursor/input-end capture spans now share one byte-safe register seam with Unicode
+  public positions and widths. Stable reads preserve the rolling rule-local boundary; advancing reads move it
+  only after a valid span. The focused multibyte test covers every call, text/numeric receiver continuation,
+  void setter semantics, reversed-span non-mutation, and typed zero-argument diagnostics. The dual-ABI Lua gate
+  passes 116/116 plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. Public docs now reject Perl's
+  incidental setter result as portable behavior, with correction owned by backlog `.5`. No named-mark, marker,
+  generated-source, corpus, inventory, or capability claim changes; named marks remain gated by `.17`. Full local
+  CI passes capability 64/0/0, CLI 61/61 twice, phase0 `1..1031` in 766 seconds, and all gates.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.1 — add Lua input cursor controls**
   (DONE — Unicode input/cursor views and explicit controls pass 115/115 on both ABIs; anonymous capture `.4.3.7.2`
   next).

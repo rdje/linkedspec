@@ -69,7 +69,7 @@ The anonymous capture boundary is the simplest stateful capture tool: one rollin
 | Helper | Result | Boundary movement | Use it when |
 | --- | --- | --- | --- |
 | `@capture_slice` | no returned value | moves the anonymous boundary at a rule slot marker | a grammar slot should become the new anonymous slice start. |
-| `start_capture_slice()` | stored boundary position expression | moves the anonymous boundary to the live cursor | an action block should begin a new anonymous slice now. |
+| `start_capture_slice()` | no returned value | moves the anonymous boundary to the live cursor | an action block should begin a new anonymous slice now. |
 | `capture_slice()` | text | none | read from the anonymous boundary to the current local-match left edge. |
 | `capture_slice_len()` | width | none | read that same span width without materializing text. |
 | `capture_slice_pos()` | position | none | expose or compare the current anonymous boundary. |
@@ -87,6 +87,10 @@ The anonymous capture boundary is the simplest stateful capture tool: one rollin
 | `capture_take_len()` | width | advances anonymous boundary to the live cursor | record that current-edge width and roll forward. |
 
 Anonymous capture readers can be returned directly. For example, `return(capture_slice_len())` and fluent `.return(capture_slice_len())` both return the current anonymous capture span width without materializing the text.
+
+`start_capture_slice()` is a boundary mutation, not a position reader. Use `capture_slice_pos()` after it when the
+stored character position is needed. Current Perl lowering still exposes its internal assignment-expression result;
+portable `.spec` files must not depend on that implementation leak while `FUTURE-PARITY-BACKLOG.5` removes it.
 
 Compatibility aliases:
 

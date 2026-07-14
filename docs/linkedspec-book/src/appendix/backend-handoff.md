@@ -712,8 +712,10 @@ public mark reference outside the governed 239-name backend inventories; named-m
 cross-backend inventory gap instead of creating a Lua-only extension. `FUTURE-PARITY-BACKLOG.17` now owns the
 neutral contract, five-backend rollout, and independent gate hardening. Input/live-cursor `.4.3.7.1` now executes
 all character-unit input and cursor projections plus parse-scoped LIFO save/restore and entry/local anchor rewinds;
-consume-mode matching observes the synchronized rewound cursor. PUC Lua and LuaJIT pass 115/115, and anonymous
-capture-boundary `.4.3.7.2` is next. General user-function final
+consume-mode matching observes the synchronized rewound cursor. Anonymous capture `.4.3.7.2` adds all 16 stable,
+location, and advancing reads over the same byte-safe registers, with character-unit results, valid-only mutation,
+and a void setter. PUC Lua and LuaJIT pass 116/116; independent earliest-boundary `.4.3.7.5` is next while named
+marks wait for the shared `.17` rollout. General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

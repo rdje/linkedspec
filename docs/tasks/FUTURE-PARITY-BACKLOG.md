@@ -2211,6 +2211,9 @@ before implementation.
     leaves one required authored argument, while Rust, Dart, Julia, and Lua currently default or otherwise accept the absent
     needle and return numeric `0`. This is pre-existing helper semantics, not permission for a punctuation-light alias to
     differ from its parenthesized twin.
+    Remove the Perl-only result leak from `start_capture_slice()` too: the public helper catalog and Rust/Dart/Julia/Lua
+    define this boundary mutation as void, while current Perl lowering exposes its internal assignment expression; keep
+    the source-boundary reference aligned with the void contract and add a five-backend lock.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
@@ -4212,7 +4215,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 158 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
 | 159 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
 | 160 | `FUTURE-PARITY-BACKLOG.17.0` | `done` | Classified 16 differences and split the exact seven-helper public parity/gate correction. |
-| 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `active` | Resume Unicode input/live-cursor views and explicit cursor controls. |
+| 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit controls pass 115/115 on both ABIs. |
+| 162 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls pass 116/116 over one byte-safe state seam. |
+| 163 | `LUA-BACKEND-PARITY.4.3.7.5` | `active` | Implement independent earliest-boundary lookahead while named marks wait on `.17`. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

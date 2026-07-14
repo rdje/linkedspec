@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.2` — classify the right edge before reading or mutating): Anonymous
+  capture helpers share one rolling left edge but not one right edge. Plain slice/take ends at the current local
+  match start, until-cursor ends at the live cursor, and rest ends at input end. Lua keeps every endpoint in UTF-8
+  bytes and converts only public positions/widths, so multibyte text does not split state ownership. Stable and
+  advancing forms share one validated span function; mutation happens only after a non-null result. The setter is
+  intentionally void, as in the catalog and Rust/Dart/Julia. Perl's position result is an assignment-expression
+  leak, now durably routed to `FUTURE-PARITY-BACKLOG.5` instead of copied into Lua. Both Lua ABIs pass 116/116;
+  named marks still wait on `.17`, so `.4.3.7.5` can independently add earliest-boundary lookahead next. Full
+  local CI passes capability 64/0/0, CLI 61/61 twice, phase0 `1..1031` in 766 seconds, and all gates.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.1` — keep one internal offset unit and convert only at the DSL boundary):
   Lua's regex engine, match records, and immutable registers already use zero-based UTF-8 byte offsets. Adding a
   second character-offset cursor would create synchronization risk. The runtime therefore keeps one byte cursor

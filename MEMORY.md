@@ -10,18 +10,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.7.1` — add Lua input cursor controls.
-- latest_commit: `6b243820` — `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.1 - add Lua input cursor controls`.
-- active_work_unit: verified `.4.3.7.1` implements all whole-input/live-cursor projections and parse-scoped LIFO
-  save/restore plus entry/local rewinds over the byte-safe Lua runtime seam.
-- next_action: run final docs/doctrine/full local gates, commit `.4.3.7.1`, clear the brief, verify a clean tree,
-  then implement anonymous capture-boundary helpers `.4.3.7.2`.
-- current_proof: Multibyte coverage locks character-unit input/cursor positions, lengths, slices, lines/columns,
-  receiver continuation, invalid/past-end spans, nested/empty restore, distinct entry/local rewinds, typed arity,
-  and consume continuation. `tools/run_lua_local.sh` passes 115/115 on PUC Lua and LuaJIT plus syntax/process/
-  manifest checks. Full CI passes capability 64/0/0, CLI 61/61 twice, phase0 `1..1031` in 918 seconds, and all
-  doctrine/contract/book gates. No named-mark, marker, generated-source, inventory, corpus, or capability changed.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.7.2` — add Lua anonymous capture helpers.
+- latest_commit: `e306b814` — `LUA-BACKEND-PARITY.4.3.7.1 - add Lua input cursor controls`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers`.
+- active_work_unit: verified `.4.3.7.2` executes all 16 anonymous capture calls through one byte-safe rolling
+  rule-local boundary with Unicode public values and valid-only advancing mutation.
+- next_action: run final docs/doctrine/full local gates, commit `.4.3.7.2`, clear the brief, verify a clean tree,
+  then implement independent earliest-boundary helper `.4.3.7.5` while named marks wait on `.17`.
+- current_proof: One multibyte test covers local-match/live-cursor/input-end endpoints, all stable/location/
+  advancing calls, text/numeric receiver continuation, void setter behavior, reversed-span non-mutation, and
+  typed exact arity. `tools/run_lua_local.sh` passes 116/116 on PUC Lua and LuaJIT plus syntax/process/manifest
+  checks. Full CI passes capability 64/0/0, CLI 61/61 twice, phase0 `1..1031` in 766 seconds, and all gates. Public
+  docs route Perl's incidental setter result to backlog `.5`; no named-mark, marker, generated-source, inventory,
+  corpus, or capability changed.
 - latest_bootstrap_read: 2026-07-13 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -31,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.4.3.7.1` runtime/test/docs await final gates and prepared
+- blockers: none. in_flight_uncommitted: verified `.4.3.7.2` runtime/test/docs await final gates and prepared
   commit. Oracle timeout calibration remains future backlog `.7.0`.

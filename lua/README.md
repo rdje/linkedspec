@@ -82,8 +82,12 @@ views, and explicit `save_cursor` / `restore_cursor` / entry/local rewind contro
 byte offset, while every public position, length, slice boundary, line, and column uses Unicode character units.
 Cursor saves form one parse-scoped LIFO stack; an empty restore or a rewind without its corresponding match is a
 no-op; rewinds preserve match snapshots and synchronize the live/register cursor so consume-mode continuation
-starts at the new position. Exact arity errors remain typed. Both ABIs pass 115/115; anonymous capture-boundary
-helpers `.4.3.7.2` are next. General user-function final `callback: codeblock` declaration
+starts at the new position. Exact arity errors remain typed. `.4.3.7.2` adds all 16 anonymous capture helpers over
+the same byte-safe register state. Stable reads end at local-match start, the live cursor, or input end; advancing
+forms update the rolling rule-local boundary only after a valid read. Public positions and lengths remain Unicode
+character values, returned text and numbers continue through compatible receivers, and `start_capture_slice()` is
+a void mutation. Both ABIs pass 116/116; earliest-boundary helper `.4.3.7.5` is next while named-mark closure waits
+for the cross-backend `.17` rollout. General user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,

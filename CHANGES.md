@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.2 — add Lua anonymous capture helpers
+
+Lua now executes all 16 current anonymous capture calls through its existing immutable match-register boundary.
+Stable and advancing spans select the current local-match start, live cursor, or input end as specified; positions,
+line/column values, and lengths expose Unicode characters while internal offsets remain UTF-8 bytes. Reversed or
+otherwise invalid spans return null, and advancing forms mutate only after a valid read.
+
+`start_capture_slice()` is a void mutation, matching the public helper catalog plus Rust, Dart, and Julia. The
+source-boundary mdBook table no longer promotes Perl's incidental assignment-expression result; cross-backend
+removal and a permanent five-backend lock are explicitly owned by `FUTURE-PARITY-BACKLOG.5`.
+
+One multibyte focused test covers every call, all three endpoints, text/numeric receiver continuation, six
+advancing forms, reversed-span non-mutation, void setter behavior, and typed arity fields. `bash
+tools/run_lua_local.sh` passes 116/116 on both PUC Lua and LuaJIT plus syntax, CLI-scaffold, and exact 105-fixture
+manifest checks. No named-mark, placement-marker, generated-source, corpus, inventory, or capability claim changes;
+independent earliest-boundary `.4.3.7.5` is next while named marks wait on the shared `.17` rollout. The
+authoritative full local gate passes capability 64/0/0, CLI 61/61 in both option environments, phase0 `1..1031`
+in 766 seconds, and every contract/doctrine/documentation check.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.1 — add Lua input cursor controls
 
 Lua now executes every current whole-input and live-cursor projection plus `save_cursor`, `restore_cursor`,

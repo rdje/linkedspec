@@ -2303,6 +2303,137 @@ Top::
   end
 end)
 
+test("runtime anonymous capture helpers share one Unicode-exact rolling boundary", function()
+  local source = [[
+Top::AND
+ => Value
+
+Value:AND
+ /é\n/
+ /body🙂/
+ /Z/
+ -> Value[0] { setter_result = start_capture_slice() }
+ -> Value[2] {
+   return({
+     "setter_result" : setter_result,
+     "slice" : capture_slice(),
+     "slice_len" : capture_slice_len(),
+     "slice_upper" : capture_slice().uppercase(),
+     "slice_len_plus_one" : capture_slice_len().add(1),
+     "pos" : capture_slice_pos(),
+     "pos_plus_three" : capture_slice_pos().add(3),
+     "line" : capture_slice_line(),
+     "col" : capture_slice_col(),
+     "until_cursor" : capture_slice_until_cursor(),
+     "until_cursor_len" : capture_slice_until_cursor_len(),
+     "rest" : capture_rest(),
+     "rest_len" : capture_rest_len()
+   })
+ }
+]]
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "é\nbody🙂Ztail"
+  )
+  local value = result.value[1]
+  assert_equal(value.setter_result, json.null, "capture setter is void")
+  assert_equal(value.slice, "body🙂", "capture to local-match start")
+  assert_equal(value.slice_len, 5, "capture local span character length")
+  assert_equal(value.slice_upper, "BODY🙂", "capture text receiver continuation")
+  assert_equal(value.slice_len_plus_one, 6, "capture length receiver continuation")
+  assert_equal(value.pos, 2, "capture start character position")
+  assert_equal(value.pos_plus_three, 5, "capture position receiver continuation")
+  assert_equal(value.line, 2, "capture start line")
+  assert_equal(value.col, 1, "capture start column")
+  assert_equal(value.until_cursor, "body🙂Z", "capture through live cursor")
+  assert_equal(value.until_cursor_len, 6, "capture through-cursor character length")
+  assert_equal(value.rest, "body🙂Ztail", "capture through input end")
+  assert_equal(value.rest_len, 10, "capture rest character length")
+
+  local advancing_cases = {
+    { helper = "capture_take", expected = "body🙂", pos = 8, rest = "tail" },
+    { helper = "capture_take_len", expected = 5, pos = 8, rest = "tail" },
+    { helper = "capture_take_until_cursor", expected = "body🙂Z", pos = 8, rest = "tail" },
+    { helper = "capture_take_until_cursor_len", expected = 6, pos = 8, rest = "tail" },
+    { helper = "capture_take_rest", expected = "body🙂Ztail", pos = 12, rest = "" },
+    { helper = "capture_take_rest_len", expected = 10, pos = 12, rest = "" },
+  }
+  for _, case in ipairs(advancing_cases) do
+    local advancing_source = [[
+Top::AND
+ => Value
+
+Value:AND
+ /é\n/
+ /body🙂/
+ /Z/
+ -> Value[0] { start_capture_slice() }
+ -> Value[2] {
+   captured = ]] .. case.helper .. [[()
+   return({
+     "captured" : captured,
+     "pos" : capture_slice_pos(),
+     "rest" : capture_rest()
+   })
+ }
+]]
+    local advancing = linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(advancing_source))),
+      "é\nbody🙂Ztail"
+    ).value[1]
+    assert_equal(advancing.captured, case.expected, case.helper .. " result")
+    assert_equal(advancing.pos, case.pos, case.helper .. " advances only its boundary")
+    assert_equal(advancing.rest, case.rest, case.helper .. " remaining text")
+  end
+
+  local invalid = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::AND
+ => Value
+
+Value:AND
+ /é\n/
+ /body🙂/
+ /Z/
+ -> Value[0] {
+   start_capture_slice()
+   invalid_take = capture_take()
+   start_after_invalid = capture_slice_pos()
+ }
+ -> Value[2] {
+   return({
+     "invalid_take" : invalid_take,
+     "start_after_invalid" : start_after_invalid,
+     "slice_after_invalid" : capture_slice()
+   })
+ }
+]]))),
+    "é\nbody🙂Ztail"
+  ).value[1]
+  assert_equal(invalid.invalid_take, json.null, "reversed capture span is neutral")
+  assert_equal(invalid.start_after_invalid, 2, "invalid take preserves boundary")
+  assert_equal(invalid.slice_after_invalid, "body🙂", "valid read survives invalid take")
+
+  for _, malformed in ipairs({
+    { call = "capture_slice(1)", helper = "capture_slice" },
+    { call = "start_capture_slice(1)", helper = "start_capture_slice" },
+  }) do
+    local invalid_source = "Top::\n /x/ I { return(" .. malformed.call .. ") }\n"
+    local ok, failure = pcall(function()
+      linkedspec.runtime_parse(
+        linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(invalid_source))),
+        "x"
+      )
+    end)
+    assert_equal(ok, false, malformed.helper .. " malformed arity fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, malformed.helper .. " typed failure")
+    assert_equal(failure.code, "helper_arity_mismatch", malformed.helper .. " diagnostic code")
+    assert_equal(failure.helper_name, malformed.helper, malformed.helper .. " helper attribution")
+    assert_equal(failure.expected_arity, "exactly 0 positional arguments", malformed.helper .. " expected arity")
+    assert_equal(failure.actual_arity, 1, malformed.helper .. " actual arity")
+  end
+end)
+
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
   local source = [[
 Top::
