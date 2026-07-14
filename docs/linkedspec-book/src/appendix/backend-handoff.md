@@ -719,8 +719,11 @@ selection, non-consumption, EOF fallback, and unresolved/regex-free no-op behavi
 117/117. Named-mark `.17.1` adopts the exact seven-helper contract and aligns Perl live/generated plus Rust
 native/serialized/emitted/generated execution; Dart `.17.2` now consumes the same fixture through native,
 generated-plan, emitted-state, and primary-CLI routes, with a staged exact seven-name set and complete 214-test,
-61x2-CLI, 105-corpus proof. Julia `.17.3` and Lua `.17.4` precede final admission `.17.5` and Lua's `.4.3.7.3`
-consumer. General user-function final
+61x2-CLI, 105-corpus proof. Julia `.17.3` now consumes that same artifact through native, generated-plan,
+emitted-state, and primary-CLI routes with staged seven-name, 1,414-assertion, 61x2-CLI, and 105-corpus proof;
+canonical proof also preserves capability 64/0/0 and shared coverage 239/105 while passing Phase 0 `1..1031`.
+Lua `.17.4` is active before final admission `.17.5` and Lua's `.4.3.7.3` consumer.
+General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

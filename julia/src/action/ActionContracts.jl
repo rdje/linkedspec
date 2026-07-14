@@ -129,6 +129,16 @@ end
 
 is_known_action_ir_call_name(name::AbstractString) = String(name) in _KNOWN_ACTION_IR_CALL_NAMES
 
+const COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES = Set{String}([
+    "clear_mark",
+    "mark_col",
+    "mark_entry_end",
+    "mark_entry_start",
+    "mark_line",
+    "mark_match_end",
+    "mark_match_start",
+])
+
 const _SUPPORTED_ACTION_IR_CALL_NAMES = Set{String}([
     "and",
     "array",
@@ -379,6 +389,7 @@ const _CURRENT_ALIAS_ACTION_IR_CALL_NAMES = Set{String}([
 
 const _KNOWN_ACTION_IR_CALL_NAMES = union(
     _SUPPORTED_ACTION_IR_CALL_NAMES,
+    COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES,
     _NUMERIC_ALIAS_ACTION_IR_CALL_NAMES,
     _CURRENT_ALIAS_ACTION_IR_CALL_NAMES,
 )
@@ -558,12 +569,19 @@ const _CAPTURE_MARK_HELPERS = Set{String}([
     "capture_take_until_cursor_len_from",
     "capture_until_cursor_from",
     "capture_until_cursor_len_from",
+    "clear_mark",
     "mark_capture_slice",
+    "mark_col",
     "mark_copy",
+    "mark_entry_end",
+    "mark_entry_start",
     "mark_exists",
     "mark_here",
     "mark_input_end",
     "mark_input_start",
+    "mark_line",
+    "mark_match_end",
+    "mark_match_start",
     "mark_pos",
     "start_capture_slice",
     "start_capture_slice_from",

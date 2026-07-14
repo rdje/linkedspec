@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred/future work. Lua input/live-cursor controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls `.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on PUC Lua and LuaJIT with Unicode public values, consume-mode-independent seek, EOF fallback, and unresolved-rule no-op behavior. Complete named-mark `.17.1` gives Perl and Rust one exact seven-helper Unicode/rule-local contract across live and generated paths; Dart `.17.2` returns that same value through native, generated-plan, emitted-state, and primary-CLI routes, with all 214 package tests, CLI 61x2, corpus 105/105, and canonical Phase 0 `1..1031` green. Julia `.17.3` is active before Lua/admission `.17.4-.17.5`. Existing scalar/string/numeric/array/harray/block/control/callback parity remains unchanged and capability stays 64/0/0. Helper-caveat owner `.5` retains truthiness, switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument `capture_until_boundary()` normalization. General user-function final `callback: codeblock` declaration/execution remains `.5.1`; first-class callable block values remain `.11.7`; generated Lua preservation/execution remains `.8.1-.4`.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred/future work. Lua input/live-cursor controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls `.4.3.7.2` pass 116/116, and non-consuming earliest-boundary `.4.3.7.5` passes 117/117 on PUC Lua and LuaJIT with Unicode public values, consume-mode-independent seek, EOF fallback, and unresolved-rule no-op behavior. Complete named-mark `.17.1` gives Perl and Rust one exact seven-helper Unicode/rule-local contract across live and generated paths; Dart `.17.2` closes the same native/generated/CLI contract with canonical proof. Julia `.17.3` now closes that value through native, generated-plan, emitted-state, and primary-CLI routes, with 1,414 package assertions, shared CLI 61x2, corpus 105/105, and canonical Phase 0 `1..1031` green; Lua `.17.4` is active before shared admission `.17.5`. Existing scalar/string/numeric/array/harray/block/control/callback parity remains unchanged and capability stays 64/0/0. Helper-caveat owner `.5` retains truthiness, switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument `capture_until_boundary()` normalization. General user-function final `callback: codeblock` declaration/execution remains `.5.1`; first-class callable block values remain `.11.7`; generated Lua preservation/execution remains `.8.1-.4`.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through
@@ -69,8 +69,8 @@ Three backbone items tracked major structural modernization — all done:
   on both Lua ABIs. All 16 anonymous capture helpers `.4.3.7.2` then pass 116/116 with byte-safe state and
   character-unit public values; earliest-boundary `.4.3.7.5` passes 117/117. Seven documented mark helpers need a
   cross-backend inventory owner before named-mark closure. `FUTURE-PARITY-BACKLOG.17` owns that exact neutral and
-  five-backend parity/gate-hardening work; `.17.1` aligns Perl/Rust and `.17.2` aligns Dart while Julia `.17.3`
-  is the next backend consumer after clean closure.
+  five-backend parity/gate-hardening work; `.17.1-.17.3` align Perl/Rust/Dart/Julia with canonical proof, and Lua
+  `.17.4` is active.
   Implicit child-push side effects are included in the closed Lua array family, but their expression result is not
   yet portable: Perl exposes its host push count and Lua exposes the updated implicit accumulator. Backlog `.5`
   owns normalization; current authoring uses implicit child push as a statement.
@@ -282,8 +282,8 @@ Three backbone items tracked major structural modernization — all done:
   is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. The later governed current-surface
   gate is now 239 names and 105/105 exact fixtures across all four variants. Audit `.17.0` has since shown that
   seven additional helpers advertised by the current named-mark reference are outside those inventories and
-  corpus fixtures; `.17.1` aligns Perl/Rust, `.17.2` aligns Dart through native/generated/CLI routes, and
-  `.17.3-.17.5` retain Julia/Lua plus independent inventory hardening. Public
+  corpus fixtures; `.17.1` aligns Perl/Rust, `.17.2` aligns Dart, `.17.3` aligns Julia through
+  native/generated/CLI routes, and `.17.4-.17.5` retain Lua plus independent inventory hardening. Public
   generated source remains
   deferred to `.3`; global CLI identity `.1.5` and language-surface `.1.6.1` are closed, while remaining outward
   API capability leaves under `.1.6` still block a complete Julia capability-parity claim.

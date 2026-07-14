@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-14 (`FUTURE-PARITY-BACKLOG.17.3` — preserve one mark store and one eventual admission point): Julia's
+  existing architecture already matches the neutral storage model: `rule label -> mark name -> code-unit offset`,
+  with Unicode-character conversion only at the `.spec` boundary. The complete helpers therefore reuse that
+  store and the existing entry/local match registers; location reads reuse `line_column_at_codeunit_offset`, and
+  clear deletes only from the current rule bucket. As with Dart, adding the names directly to Julia's private
+  `_SUPPORTED_ACTION_IR_CALL_NAMES` would prematurely break the exact legacy 239-name Dart/Julia/Lua comparison.
+  The public `COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES` set is folded into known-call resolution while remaining
+  disjoint from the shared set; `.17.5` admits once after Lua alignment. A 13-assertion exact contract covers
+  staged inventory plus native/generated-plan/emitted-state/CLI behavior. The full Julia gate passes 1,414 package
+  assertions, shared CLI 61x2, and corpus 105/105. Canonical CI additionally proves capability 64/0/0, unchanged
+  shared coverage 239/105, CLI 61x2, and Phase 0 `1..1031` in 614 seconds; Lua `.17.4` is the next clean-pivot
+  consumer.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.2` — stage backend rollout names without weakening the shared gate):
   Dart already had the correct hard part: marks were stored as `rule label -> name -> code-unit offset`, with
   character projection at the public boundary. The seven-helper implementation therefore belongs in that seam,

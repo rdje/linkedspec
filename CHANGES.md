@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-14 — FUTURE-PARITY-BACKLOG.17.3 — align Julia complete named marks
+
+Julia now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. The runtime writes
+entry/local start and end marks from its existing match registers, projects `mark_line` and `mark_col` from the
+rule-local code-unit store as 1-based Unicode-character locations, deletes only the current rule's mark through
+`clear_mark`, and preserves `undef` for absent position/location reads.
+
+The seven calls are exported as `COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES` and participate in Julia's known-call
+and capture/mark contract boundaries. They remain separate from the legacy shared 239-name inventory until Lua
+consumes the same artifact and `.17.5` performs one shared admission plus independent omission hardening.
+
+One 13-assertion contract test locks the exact staged inventory and unchanged result through native execution,
+generated-plan execution, emitted-state reconstruction, and the primary CLI. The complete Julia gate passes all
+1,414 package assertions, both shared 61-case CLI environments, and all 105 corpus fixtures. Canonical CI passes
+capability 64/0/0, the unchanged shared 239-name/105-fixture coverage check, CLI 61/61 twice, and Phase 0
+`1..1031` in 614 seconds; doctrines, Knowledge Map, mdBook, and whitespace checks also pass.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.2 — align Dart complete named marks
 
 Dart now consumes `linkedspec-complete-named-mark-v1` without changing the neutral fixture. The runtime writes

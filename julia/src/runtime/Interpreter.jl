@@ -3076,12 +3076,19 @@ const _RUNTIME_NAMED_CAPTURE_HELPER_NAMES = Set{String}([
     "capture_take_until_cursor_len_from",
     "capture_until_cursor_from",
     "capture_until_cursor_len_from",
+    "clear_mark",
     "mark_capture_slice",
+    "mark_col",
     "mark_copy",
+    "mark_entry_end",
+    "mark_entry_start",
     "mark_exists",
     "mark_here",
     "mark_input_end",
     "mark_input_start",
+    "mark_line",
+    "mark_match_end",
+    "mark_match_start",
     "mark_pos",
     "start_capture_slice_from",
 ])
@@ -4926,6 +4933,34 @@ function _call_runtime_named_capture_helper!(
             marks[name] = input_end
         end
         return nothing
+    elseif helper_name == "mark_entry_start"
+        name = mark_name(1)
+        one_match = context.registers.entry_match
+        if name !== nothing && one_match !== nothing
+            marks[name] = one_match.codeunit_start
+        end
+        return nothing
+    elseif helper_name == "mark_entry_end"
+        name = mark_name(1)
+        one_match = context.registers.entry_match
+        if name !== nothing && one_match !== nothing
+            marks[name] = one_match.codeunit_end
+        end
+        return nothing
+    elseif helper_name == "mark_match_start"
+        name = mark_name(1)
+        one_match = context.registers.local_match
+        if name !== nothing && one_match !== nothing
+            marks[name] = one_match.codeunit_start
+        end
+        return nothing
+    elseif helper_name == "mark_match_end"
+        name = mark_name(1)
+        one_match = context.registers.local_match
+        if name !== nothing && one_match !== nothing
+            marks[name] = one_match.codeunit_end
+        end
+        return nothing
     elseif helper_name == "mark_copy"
         target = mark_name(1)
         source = mark_name(2)
@@ -4952,6 +4987,22 @@ function _call_runtime_named_capture_helper!(
         offset = name === nothing ? nothing : get(marks, name, nothing)
         return offset === nothing ? nothing :
             codeunit_offset_to_char_offset(context.input, offset)
+    elseif helper_name == "mark_line"
+        name = mark_name(1)
+        offset = name === nothing ? nothing : get(marks, name, nothing)
+        return offset === nothing ? nothing :
+            line_column_at_codeunit_offset(context.input, offset).line
+    elseif helper_name == "mark_col"
+        name = mark_name(1)
+        offset = name === nothing ? nothing : get(marks, name, nothing)
+        return offset === nothing ? nothing :
+            line_column_at_codeunit_offset(context.input, offset).column
+    elseif helper_name == "clear_mark"
+        name = mark_name(1)
+        if name !== nothing
+            delete!(marks, name)
+        end
+        return nothing
     elseif helper_name in (
             "capture_from",
             "capture_len_from",
