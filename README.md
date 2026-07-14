@@ -68,8 +68,8 @@ This `README.md` is the **single entry point** to the project.
   through one cleanup-safe uniform `value` scope. Optional values and receivers evaluate first; aggregate inputs
   and results are isolated; exact prior/absent bindings restore after success, local return, and error; compatible
   receiver chains continue; and malformed final kinds/counts stay typed. Both Lua ABIs pass 112/112. Scoped
-  callback work is split at `.4.3.6.5.1.0`: reference append-RHS scope repair `.4.3.6.5.1.1` is active before
-  Lua harray implementation `.4.3.6.5.1.2`. ADR `0033` and
+  callback work is split at `.4.3.6.5.1.0`: reference authored-value precedence repair `.4.3.6.5.1.1` is done,
+  and Lua harray implementation `.4.3.6.5.1.2` is active. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume

@@ -263,6 +263,11 @@ dispatch rule.
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
+- **Argument boundary**: Every argument in an already-valid current value-helper call is an authored value. A bare
+  first value is never consumed as a legacy scope label: `cat(key, "@", depth)` reads all three values. The same
+  rule applies to variadic arithmetic/coalescing helpers and to the optional-width form
+  `substr(value, start, width)`. Legacy optional-scope compatibility is considered only when the raw argument count
+  would otherwise be invalid.
 - **Retirement note**: the former `concat` spelling diagnoses on current runtimes. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Example**:
   ```text
@@ -857,8 +862,8 @@ dispatch rule.
 | Receiver chain | `set_key(meta, "b", 2); set_key(meta, "a", 1); return(meta.set_key("c", 3).sorted_keys().join_values(","))` | `x` | `["a,b,c"]` |
 | Block receiver | `return({ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","))` | `x` | `["a,b"]` |
 | Hash-tree map | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(meta.map_leaves() { return(cat(join_values("/", path), "=", value)) })` | `x` | `[{"a":"a=A","b":{"y":"b/y=B"}}]` |
-| Hash-tree walk | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(array(meta.walk_leaves() { paths += join_values("/", path); return(value) }.count_keys(), paths))` | `x` | `[[2,["a","b/y"]]]` |
-| Hash-tree reduce | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(meta.reduce_leaves("") { return(cat(acc, key)) })` | `x` | `["ay"]` |
+| Hash-tree walk | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(array(meta.walk_leaves() { paths += cat(key, "@", depth); return(value) }.count_keys(), paths))` | `x` | `[[2,["a@1","y@2"]]]` |
+| Hash-tree reduce | `set(meta, { "b" : { "y" : "B" }, "a" : "A" }); return(meta.reduce_leaves("") { return(cat(acc, key, "@", depth, ";")) })` | `x` | `["a@1;y@2;"]` |
 
 > **Current Perl caveat.** Direct odd-arity constructor calls such as
 > `hash("a", 1, "missing")` are not the portable "trailing undef" spelling on the
@@ -1021,10 +1026,10 @@ dispatch rule.
     `return(meta.map_leaves() { return(cat(join_values("/", path), "=", value)) })`
     yields `[{"a":"a=A","b":{"y":"b/y=B"}}]` through the standard `demo::` wrapper.
   - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,
-    `return(array(meta.walk_leaves() { paths += join_values("/", path); return(value) }.count_keys(), paths))`
-    yields `[[2,["a","b/y"]]]`.
+    `return(array(meta.walk_leaves() { paths += cat(key, "@", depth); return(value) }.count_keys(), paths))`
+    yields `[[2,["a@1","y@2"]]]`.
   - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,
-    `return(meta.reduce_leaves("") { return(cat(acc, key)) })` yields `["ay"]`.
+    `return(meta.reduce_leaves("") { return(cat(acc, key, "@", depth, ";")) })` yields `["a@1;y@2;"]`.
 
 ## 5. Numeric Helpers
 

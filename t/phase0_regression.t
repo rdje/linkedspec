@@ -48008,7 +48008,7 @@ subtest 'spec_format_terse_12_2_perl_hash_tree_traversal_receiver_blocks' => sub
     # SPEC-FORMAT-TERSE.12.2: hash-tree traversal receiver methods use
     # immediate attached blocks. Traversal is sorted depth-first; arrays are
     # leaves; callback bindings are scoped.
-    plan tests => 19;
+    plan tests => 20;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -48025,30 +48025,33 @@ subtest 'spec_format_terse_12_2_perl_hash_tree_traversal_receiver_blocks' => sub
         return $src;
     };
 
-    my $map_lowered = $L->('return(meta.map_leaves() { return(cat(join_values("/", path), "=", value)) }.count_keys())');
+    my $map_lowered = $L->('return(meta.map_leaves() { return(cat(key, "@", depth, "=", value)) }.count_keys())');
     like($map_lowered, qr/__ls_hash_tree_map.*sort keys.*__ls_count_keys/s,
         'map_leaves lowers as sorted hash-tree traversal and can feed count_keys');
+    like($map_lowered, qr/my \@__ls_cat_parts = \(\$key, "\@", \$depth, "=", \$value\)/,
+        'map callback preserves a bare first cat value and the complete authored argument order');
     unlike($map_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
         'map_leaves lowering has no unsupported-helper sentinel');
-    like($L->('return(meta.reduce_leaves("") { return(cat(acc, value)) })'), qr/__ls_hash_tree_reduce.*my \$acc/s,
+    like($L->('return(meta.reduce_leaves("") { return(cat(acc, key, "@", depth, ";")) })'),
+        qr/__ls_hash_tree_reduce.*my \$acc.*my \@__ls_cat_parts = \(\$acc, \$key, "\@", \$depth, ";"\)/s,
         'reduce_leaves lowers with scoped accumulator binding');
-    like($L->('return(meta.walk_leaves() { seen += join_values("/", path); return(value) }.count_keys())'),
-        qr/__ls_hash_tree_walk.*BindingRuntime::push_value\(\$seen.*__ls_count_keys/s,
-        'walk_leaves lowers side-effect traversal and returns the original hash value');
+    like($L->('return(meta.walk_leaves() { seen += cat(key, "@", depth); return(value) }.count_keys())'),
+        qr/__ls_hash_tree_walk.*BindingRuntime::push_value\(\$seen.*my \@__ls_cat_parts = \(\$key, "\@", \$depth\).*__ls_count_keys/s,
+        'walk_leaves preserves callback values in append side effects and returns the original hash value');
     like($L->('return(meta.map_leaves())'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves/,
         'map_leaves without a trailing block is rejected by lowering diagnostics');
     like($L->('return(meta.reduce_leaves() { return(value) })'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves/,
         'reduce_leaves requires an initial accumulator argument');
 
     my $main_spec = "Top::\n"
-                  . " /x/ -> Done { meta = { \"b\" : { \"y\" : \"B\" }, \"a\" : \"A\", \"arr\" : [\"u\",\"v\"] }; return(array(meta.map_leaves() { return(cat(join_values(\"/\", path), \"=\", if(count(value), join_values(\"\", value), else(value)))) }, meta.reduce_leaves(\"\") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values(\"/\", path); return(value) }.count_keys(), seen)) }\n"
+                  . " /x/ -> Done { meta = { \"b\" : { \"y\" : \"B\" }, \"a\" : \"A\", \"arr\" : [\"u\",\"v\"] }; return(array(meta.map_leaves() { return(cat(key, \"@\", depth, \"=\", if(count(value), join_values(\"\", value), else(value)))) }, meta.reduce_leaves(\"\") { return(cat(acc, key, \"@\", depth, \";\")) }, meta.walk_leaves() { seen += cat(key, \"@\", depth); return(value) }.count_keys(), seen)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $main_parser = eval { LinkedSpec::Get(\$main_spec) };
     ok(ref($main_parser) eq 'CODE', 'hash-tree traversal spec compiles')
         or diag(normalize_error($@));
     is($run->($main_parser, 'xhello'),
-        '[{"a":"a=A","arr":"arr=uv","b":{"y":"b/y=B"}},"aarry",3,["a","arr","b/y"]]',
-        'map/reduce/walk traverse sorted leaves, treat arrays as leaves, and expose path/key/value');
+        '[{"a":"a@1=A","arr":"arr@1=uv","b":{"y":"y@2=B"}},"a@1;arr@1;y@2;",3,["a@1","arr@1","y@2"]]',
+        'map/reduce/walk preserve authored callback values and expose path-length depth');
 
     my $empty_spec = "Top::\n"
                    . " /x/ -> Done { meta = {}; seen = []; return(array(meta.map_leaves() { return(\"bad\") }.count_keys(), meta.reduce_leaves(\"seed\") { return(\"bad\") }, meta.walk_leaves() { seen += \"bad\"; return(value) }.count_keys(), seen)) }\n"

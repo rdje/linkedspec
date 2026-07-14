@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.1.1` — resolve optional metadata only after value arity): Bare working
+  values make a purely lexical "first identifier means scope" rule ambiguous. The safe precedence is mechanical:
+  first validate the raw authored list against the current value helper's min/max arity; if valid, preserve it
+  byte-for-slot; only if invalid may legacy scope removal be attempted. `MethodExpr` owns the opt-in mode, while
+  `MethodLowering` and `FlowExpr` select it for the affected variadic/range and family-inference paths. Existing
+  collection normalization already followed this rule and now uses the same central implementation. A fixed-
+  arity test proves compatibility fallback still works when the unstripped list is invalid. Runtime callback proof
+  deliberately puts bare `key`/`acc` first in multi-argument helpers, so future regressions cannot hide behind
+  literal or nested-call first operands. Focused AST tests pass; the mandatory full local CI gate exits 0 with
+  capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.1.0` — a callback-looking loss can be a generic arity normalizer):
   `parse_action_expr` proves `seen += cat(key, "@", depth)` retains `key` in the nested call AST. The later `cat`
   lowerer invokes `_normalize_method_args_with_optional_scope(..., 2, undef)`, whose count-based rule strips any

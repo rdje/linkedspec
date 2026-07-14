@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.1 — preserve authored callback values**
+  (DONE — Perl reference repair passes focused AST proof and phase0 `1..1031`; Lua `.4.3.6.5.1.2` active).
+
+  **Result:** Valid current value-helper argument lists now outrank optional-scope fallback. `cat`, variadic
+  numeric/coalescing helpers, optional-width `substr`, collection values, and coalesce family inference retain bare
+  first values; invalid raw counts can still use scope compatibility. The hash-tree runtime case consumes leading
+  `key`/`acc` values throughout map/reduce/walk and observes root depth 1/nested depth 2. The public catalog and KM
+  are aligned. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at
+  61/61, and phase0 passing all 1,031 tests.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.0 — split callback append scope repair**
   (DONE — root cause and two commit-sized owners recorded; reference repair `.4.3.6.5.1.1` active).
 

@@ -4088,21 +4088,22 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 140 | `LUA-BACKEND-PARITY.4.3.6.3.1` | `done` | Nested attached/marker if-family controls and typed malformed diagnostics pass 106/106. |
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
-| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Resume current built-in final blocks and scoped with after the clean director-requested syntax pivot. |
+| 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with` and cleanup-safe scope pass 112/112 on both Lua ABIs. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Split the reproduced reference append-RHS scope collision from Lua harray traversal. |
-| 145 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `active` | Preserve authored callback values before Lua harray implementation `.1.2`. |
-| 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
-| 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
-| 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
-| 148 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
-| 149 | `FUTURE-PARITY-BACKLOG.16.2` | `done` | Calibrated arity and aligned the Perl reference parser and execution surface. |
-| 150 | `FUTURE-PARITY-BACKLOG.16.2.0` | `done` | Replaced invalid drop_front arity example with measured required-argument contains behavior. |
-| 151 | `FUTURE-PARITY-BACKLOG.16.2.1` | `done` | Perl consumes the unchanged standalone/final-receiver contract with exact live/generated behavior. |
-| 152 | `FUTURE-PARITY-BACKLOG.16.3` | `done` | Rust aliases and native/oracle/generated paths are exact; helper drift is delegated to `.5`. |
-| 153 | `FUTURE-PARITY-BACKLOG.16.4` | `done` | Dart aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
-| 154 | `FUTURE-PARITY-BACKLOG.16.5` | `done` | Julia aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
-| 155 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
-| 156 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
+| 145 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Preserve authored helper values before optional-scope fallback; phase0 1,031 passes. |
+| 146 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `active` | Implement deterministic scoped Lua harray callback execution. |
+| 147 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
+| 148 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
+| 149 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
+| 150 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
+| 151 | `FUTURE-PARITY-BACKLOG.16.2` | `done` | Calibrated arity and aligned the Perl reference parser and execution surface. |
+| 152 | `FUTURE-PARITY-BACKLOG.16.2.0` | `done` | Replaced invalid drop_front arity example with measured required-argument contains behavior. |
+| 153 | `FUTURE-PARITY-BACKLOG.16.2.1` | `done` | Perl consumes the unchanged standalone/final-receiver contract with exact live/generated behavior. |
+| 154 | `FUTURE-PARITY-BACKLOG.16.3` | `done` | Rust aliases and native/oracle/generated paths are exact; helper drift is delegated to `.5`. |
+| 155 | `FUTURE-PARITY-BACKLOG.16.4` | `done` | Dart aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
+| 156 | `FUTURE-PARITY-BACKLOG.16.5` | `done` | Julia aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
+| 157 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
+| 158 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

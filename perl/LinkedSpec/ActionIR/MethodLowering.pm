@@ -2100,11 +2100,7 @@ sub _lower_method_value_expr {
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $normalize_collection_args = sub {
   my ($args, $min_arity, $max_arity) = @_;
-  return undef unless ref($args) eq 'ARRAY';
-  my $count = scalar(@$args);
-  return [@$args]
-   if $count >= $min_arity && (!defined($max_arity) || $count <= $max_arity);
-  return $normalize_method_args_with_optional_scope->($args, $min_arity, $max_arity)
+  return $normalize_method_args_with_optional_scope->($args, $min_arity, $max_arity, 1)
  };
  my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
  my $raw_extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
@@ -2441,7 +2437,7 @@ sub _lower_method_value_expr {
   }
 
   if ($exit_method eq 'coalesce') {
-   my $exit_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 2, undef);
+   my $exit_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 2, undef, 1);
    return 0 unless $exit_args && @$exit_args;
    foreach my $arg (@$exit_args) {
     next unless defined $arg;
@@ -2490,7 +2486,7 @@ sub _lower_method_value_expr {
   return 1 if $candidate_method =~ /^(?:array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
 
   if ($candidate_method eq 'coalesce') {
-   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
+   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef, 1);
    return 0 unless $candidate_args && @$candidate_args;
 
    my $saw_array_like = 0;
@@ -2549,7 +2545,7 @@ sub _lower_method_value_expr {
   return 1 if $candidate_method =~ /^(?:hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
 
   if ($candidate_method eq 'coalesce') {
-   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
+   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef, 1);
    return 0 unless $candidate_args && @$candidate_args;
 
    my $saw_hash_like = 0;
@@ -4763,7 +4759,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
  return 'do { my $__ls_length = '.$value_expr.'; defined($__ls_length) ? (ref($__ls_length) eq \'ARRAY\' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }';
 }
 if ($method_call && $method_call->{method} eq 'substr') {
- my $substr_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3);
+ my $substr_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3, 1);
  return undef unless $substr_args;
 
  my $value_expr = _lower_method_value_expr($substr_args->[0], $deps);
@@ -4831,7 +4827,7 @@ if ($method_call && $method_call->{method} eq 'rm_suffix') {
  return 'do { my $__ls_rm_suffix_value = '.$value_expr.'; my $__ls_rm_suffix_suffix = '.$suffix_expr.'; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }';
 }
 if ($method_call && $method_call->{method} eq 'cat') {
- my $cat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+ my $cat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
  return undef unless $cat_args && @$cat_args >= 2;
 
  my @lowered_parts = ();
@@ -4979,7 +4975,7 @@ if ($method_call && $method_call->{method} eq 'num_range') {
  return 'do { my $__ls_num_range_source = '.$lowered_target.'; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq \'ARRAY\') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }';
 }
 if ($method_call && $method_call->{method} eq 'num_add') {
-  my $num_add_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $num_add_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
   return undef unless $num_add_args && @$num_add_args;
 
   my @lowered_terms;
@@ -5007,7 +5003,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_num_sub_lhs = '.$lhs_expr.'; my $__ls_num_sub_rhs = '.$rhs_expr.'; LinkedSpec::Numeric::evaluate(\'num_sub\', $__ls_num_sub_lhs, $__ls_num_sub_rhs) }';
  }
  if ($method_call && $method_call->{method} eq 'num_mul') {
-  my $num_mul_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $num_mul_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
   return undef unless $num_mul_args && @$num_mul_args;
 
   my @lowered_terms;
@@ -5093,7 +5089,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
  return 'do { my $__ls_num_clamp_value = '.$value_expr.'; my $__ls_num_clamp_lower = '.$lower_expr.'; my $__ls_num_clamp_upper = '.$upper_expr.'; LinkedSpec::Numeric::evaluate(\'num_clamp\', $__ls_num_clamp_value, $__ls_num_clamp_lower, $__ls_num_clamp_upper) }';
  }
  if ($method_call && $method_call->{method} eq 'num_min') {
-  my $num_min_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
+  my $num_min_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef, 1);
   return undef unless $num_min_args && @$num_min_args;
 
   if (@$num_min_args == 1) {
@@ -5130,7 +5126,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my @__ls_num_min_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_min\', @__ls_num_min_terms) }';
  }
  if ($method_call && $method_call->{method} eq 'num_max') {
-  my $num_max_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
+  my $num_max_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef, 1);
   return undef unless $num_max_args && @$num_max_args;
 
   if (@$num_max_args == 1) {
@@ -5897,7 +5893,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return 'do { my $__ls_join_values = '.$lowered_array.'; defined($__ls_join_values) ? join('.$delimiter_expr.', @{$__ls_join_values}) : $__ls_join_values }';
  }
  if ($method_call && $method_call->{method} eq 'coalesce') {
-  my $coalesce_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $coalesce_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
   return undef unless $coalesce_args && @$coalesce_args >= 2;
 
   my @lowered_args;
@@ -5921,7 +5917,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return $build_coalesce_expr->(@lowered_args);
  }
  if ($method_call && $method_call->{method} eq 'coalesce_nonempty') {
-  my $coalesce_nonempty_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $coalesce_nonempty_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
   return undef unless $coalesce_nonempty_args && @$coalesce_nonempty_args >= 2;
 
   my @lowered_args;

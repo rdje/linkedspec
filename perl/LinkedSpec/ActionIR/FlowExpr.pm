@@ -126,7 +126,7 @@ sub _looks_like_array_value_expr {
  }
 
  if ($method eq 'coalesce') {
-  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
+  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef, 1);
   return 0 unless $effective_args && @$effective_args;
 
   my $saw_array_like = 0;
@@ -197,7 +197,7 @@ sub _looks_like_hash_value_expr {
  }
 
  if ($method eq 'coalesce') {
-  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
+  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef, 1);
   return 0 unless $effective_args && @$effective_args;
 
   my $saw_hash_like = 0;

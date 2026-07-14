@@ -256,16 +256,27 @@ sub _is_bare_method_scope_token {
 #------------------------------------------------------------------------------
 # Function: _normalize_method_args_with_optional_scope
 # Purpose : Normalize method argument lists by stripping optional leading scope
-#           token when present and validating min/max arity.
-# Args    : ($args, $min_arity, $max_arity)
+#           token when present and validating min/max arity. Current value
+#           helpers may request authored-value precedence: an already-valid
+#           argument list is then returned intact before scope fallback.
+# Args    : ($args, $min_arity, $max_arity, $authored_values_take_precedence)
 # Returns : arrayref effective args or undef
 #------------------------------------------------------------------------------
 sub _normalize_method_args_with_optional_scope {
- my ($args, $min_arity, $max_arity) = @_;
+ my ($args, $min_arity, $max_arity, $authored_values_take_precedence) = @_;
  return undef unless ref($args) eq 'ARRAY';
 
  $min_arity = 0 unless defined $min_arity;
  $max_arity = 10**9 unless defined $max_arity;
+
+ my $authored_count = scalar(@$args);
+ if (
+  $authored_values_take_precedence
+  && $authored_count >= $min_arity
+  && $authored_count <= $max_arity
+ ) {
+  return [@$args];
+ }
 
  my @effective = @$args;
  if (

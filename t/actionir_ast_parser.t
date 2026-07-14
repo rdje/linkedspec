@@ -630,6 +630,70 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
     ok($parse_calls >= 3, 'assignment/mutation statements entered through the AST parser');
 };
 
+subtest 'authored value arity outranks legacy optional scope fallback' => sub {
+    is_deeply(
+        LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(
+            [qw(key separator depth)], 2, undef, 1
+        ),
+        [qw(key separator depth)],
+        'an already-valid value argument list remains intact when authored values take precedence'
+    );
+    is_deeply(
+        LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(
+            [qw(Top value)], 1, 1, 1
+        ),
+        ['value'],
+        'an otherwise-invalid fixed-arity list still uses the optional-scope compatibility fallback'
+    );
+
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', 'return('.$_[0].')') };
+    like(
+        $L->(q{cat(key,"@",depth)}),
+        qr/my \@__ls_cat_parts = \(\$key, "\@", \$depth\)/,
+        'variadic cat preserves the authored bare first value'
+    );
+    like(
+        $L->(q{num_add(acc,value,depth)}),
+        qr/my \@__ls_num_add_terms = \(\$acc, \$value, \$depth\)/,
+        'variadic num_add preserves the authored bare first value'
+    );
+    like(
+        $L->(q{num_mul(acc,value,depth)}),
+        qr/my \@__ls_num_mul_terms = \(\$acc, \$value, \$depth\)/,
+        'variadic num_mul preserves the authored bare first value'
+    );
+    like(
+        $L->(q{num_min(acc,value)}),
+        qr/my \@__ls_num_min_terms = \(\$acc, \$value\)/,
+        'variadic num_min preserves the authored bare first value'
+    );
+    like(
+        $L->(q{num_max(acc,value)}),
+        qr/my \@__ls_num_max_terms = \(\$acc, \$value\)/,
+        'variadic num_max preserves the authored bare first value'
+    );
+    like(
+        $L->(q{coalesce(value,key,"fallback")}),
+        qr/my \$__ls_coalesce = \$value;.*my \$__ls_coalesce = \$key/s,
+        'variadic coalesce preserves authored bare candidates in order'
+    );
+    like(
+        $L->(q{coalesce_nonempty(value,key,"fallback")}),
+        qr/my \$__ls_coalesce_nonempty = \$value;.*my \$__ls_coalesce_nonempty = \$key/s,
+        'variadic coalesce_nonempty preserves authored bare candidates in order'
+    );
+    like(
+        $L->(q{substr(value,start,width)}),
+        qr/my \$__ls_substr_value = \$value; my \$__ls_substr_start = \$start; my \$__ls_substr_len = \$width;/,
+        'optional-width substr preserves all three authored bare values'
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst('Top', q{seen += cat(key,"@",depth)}),
+        qr/BindingRuntime::push_value\(\$seen, "seen", do \{ my \@__ls_cat_parts = \(\$key, "\@", \$depth\)/,
+        'append RHS lowering preserves the same complete cat value list'
+    );
+};
+
 subtest 'assignment expression lowering consumes AST nodes' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(name = "ok")}),

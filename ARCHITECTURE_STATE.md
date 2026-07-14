@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Current value-helper lowering now gives an already-valid authored argument list priority
+  over the legacy optional-scope heuristic. The AST was already correct; `MethodExpr` now exposes the explicit
+  precedence mode, and `MethodLowering`/`FlowExpr` use it for `cat`, variadic arithmetic/min/max, coalescing,
+  optional-width `substr`, aggregate collection values, and coalesce family inference. Invalid raw counts may
+  still fall back to optional-scope compatibility. Focused AST/lowering tests and phase0 `1..1031` pass. The hash-
+  tree runtime proof now consumes `key`/`depth` as leading callback values; Lua harray execution `.4.3.6.5.1.2`
+  is active.
 - `2026-07-13` refresh: Lua now consults copied built-in callable metadata before evaluating a final structural
   `block_value`. Helper/receiver `with` consume attached and parenthesized forms identically; optional values and
   receivers evaluate before scope entry; copied aggregate values/results remain isolated; and compatible receiver
@@ -12,8 +19,8 @@ This document is the current high-level technical reading of the project shape. 
   temporary uniform `value` and result inside `pcall`, restores exact prior/absent state unconditionally, then
   rethrows the original failure. This distinguishes contextual blocks from ordinary eager braces without changing
   parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback work is split under `.4.3.6.5.1.0`: Perl
-  append-RHS scope repair `.4.3.6.5.1.1` precedes Lua harray execution
-  `.4.3.6.5.1.2`; user-function blocks and first-class callable values keep their separate owners.
+  append-RHS scope repair `.4.3.6.5.1.1` precedes Lua harray execution `.4.3.6.5.1.2`; the repair is now done and
+  Lua execution active. User-function blocks and first-class callable values keep their separate owners.
 - `2026-07-13` refresh: Lua's indexed statement executor now dispatches attached while through a dedicated lazy
   loop seam. Body validation precedes condition evaluation; body mutations feed the next condition; false initial,
   action return, expression-block-local return, and Perl-reference inner-loop `next()` are exact. The configured

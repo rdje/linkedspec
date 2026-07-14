@@ -7,9 +7,9 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (signature-governed built-in final blocks and copied/restored scoped `with` pass
-  112/112 through `.4.3.6.4`; `.4.3.6.5.1.0` splits a newly reproduced Perl callback append-RHS defect from
-  Lua harray traversal, with reference repair `.4.3.6.5.1.1` active; control comparison/range/alias/truthiness/
-  loop drift remains routed to backlog `.5`)
+  112/112 through `.4.3.6.4`; `.4.3.6.5.1.1` repairs authored-value/optional-scope precedence on the Perl
+  reference with focused AST plus full 1,031-test phase0 proof; Lua scoped harray execution `.4.3.6.5.1.2` is
+  active; control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1513,17 +1513,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Stop callback append RHS values from being consumed as legacy optional scope labels.
   Dependencies: `.4.3.6.5.1.0`
   Acceptance: `cat(key, ...)` and comparable value helpers retain every authored bare first argument inside
     `+=` callback side effects; direct helper behavior stays unchanged, typed AST/lowering/runtime tests lock the
     exact source location, and accepted optional-scope forms outside the affected value-helper path do not change.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** `MethodExpr` now accepts an explicit authored-value-precedence mode: if the
+    raw list already satisfies helper arity it is copied intact, and legacy optional-scope stripping remains only
+    the invalid-count fallback. `cat`, `num_add`, `num_mul`, scalar `num_min`/`num_max`, `coalesce`,
+    `coalesce_nonempty`, optional-width `substr`, and coalesce family inference consume that mode; existing
+    collection helpers share the same centralized rule. Typed AST/lowering tests lock every family plus the
+    original append RHS. The executable hash-tree test now maps/reduces/walks with `key`/`depth` as first values
+    and returns root depth 1/nested depth 2. Focused AST tests pass, and the mandatory full local CI gate exits 0
+    with capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the shared scoped callback frame and deterministic Lua harray leaf traversal.
   Dependencies: `.4.3.6.5.1.1`
   Acceptance: Lexically sorted harray keys produce stable copied `value`/`key`/`path`/`depth` bindings; walk side
@@ -1808,7 +1815,26 @@ leaf traversal are the current executable frontier.
 | 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
 | 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with`, copied scope, restoration, chaining, and typed failures pass 112/112. |
 | 67 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Root-cause and split callback append scope repair from Lua harray traversal. |
-| 68 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `active` | Preserve authored bare first values in callback append RHS helpers. |
+| 68 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Valid authored value lists outrank optional-scope fallback; phase0 1,031 passes. |
+| 69 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `active` | Implement scoped deterministic Lua harray callback execution. |
+
+### `LUA-BACKEND-PARITY.4.3.6.5.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Variadic/current value helpers silently removed a first bare value whenever the
+  remainder still met minimum arity; callback `seen += cat(key, "@", depth)` exposed the generic collision.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `MethodExpr::_normalize_method_args_with_optional_scope` spent its legacy
+  scope heuristic before asking whether the raw authored value list was already valid. The AST and callback frame
+  were correct.
+- [x] **FIX** — Added opt-in authored-value precedence to the shared normalizer and routed all affected variadic
+  scalar helpers, optional-width `substr`, coalesce family inference, and existing collection-value normalization
+  through it. Scope stripping remains a fallback for invalid raw counts.
+- [x] **ADDRESSED (verified)** — Focused tests cover `cat`, arithmetic folds/min/max, coalescing, substring, the
+  original append RHS, and fixed-arity fallback. Hash-tree runtime proof consumes `key`/`depth` in map/reduce/walk.
+- [x] **NO REGRESSION** — Module/test syntax and `t/actionir_ast_parser.t` pass. The mandatory full local CI gate
+  exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green; doctrine,
+  book, memory, Knowledge Map, task metadata, and whitespace closeout gates pass before commit.
+- [x] **LOCKSTEP** — The helper catalog teaches authored-value precedence and callback examples exercise root 1 /
+  nested 2 depth. Lua implementation `.4.3.6.5.1.2` is next.
 
 ### `LUA-BACKEND-PARITY.4.3.6.5.1.0` Acceptance Checklist
 
@@ -2636,3 +2662,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.6.1` | `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values` | Last/local-return values, mutation, harray precedence, receiver dispatch, and contextual-block separation. |
 | `LUA-BACKEND-PARITY.4.3.6.2` | `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls` | Selected-only if/switch values, one-time subjects, literal labels, diagnostics, truthiness routing, and fluent return. |
 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair` | Root cause, separate reference/Lua owners, corrected path-length depth contract, and no behavior change. |
+| `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values` | Central authored-value precedence, affected helper repair, callback runtime proof, and Lua handoff. |

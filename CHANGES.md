@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.1 — preserve authored callback values
+
+Current value-helper calls now decide arity before considering the legacy optional-scope heuristic. When the raw
+argument list is already valid, every item is an authored value; only an otherwise-invalid count may fall back to
+stripping a leading scope token. The centralized opt-in is consumed by `cat`, variadic add/multiply/min/max,
+`coalesce`, `coalesce_nonempty`, optional-width `substr`, existing collection-value helpers, and coalesce family
+inference. Thus `cat(key, "@", depth)` keeps `key`, while unrelated fixed-arity scope compatibility remains intact.
+
+Focused AST/lowering coverage locks the normalizer, every affected family, and the original append RHS. The Perl
+hash-tree runtime test now uses leading bare `key`/`acc` values in map/reduce/walk callbacks and proves path-length
+depth (root 1, nested 2). Module/test syntax and focused `t/actionir_ast_parser.t` pass. The mandatory full local CI
+gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green. The public
+helper catalog teaches the precedence rule and exercises the corrected callback spellings. Lua harray execution
+`.4.3.6.5.1.2` is next.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.0 — split callback append scope repair
 
 Lua harray traversal preflight exposed a reference lowering defect before the new backend could copy it. The typed
