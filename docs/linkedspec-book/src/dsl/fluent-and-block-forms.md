@@ -15,7 +15,8 @@ action-edge and lifecycle-marker surfaces. Compact lifecycle receiver chains suc
 `I.return(...)` and `I.set(...).return(...)` are also portable on lifecycle-marker surfaces:
 they execute as the same ordered lifecycle statements as the equivalent `{ ... }` block.
 
-**Fluent style** chains calls on action edges with `.method()`:
+**Fluent style** chains calls on action edges with `.method(args)`. A final zero-argument receiver method may use
+the punctuation-light `.method` spelling:
 
 ```text
 /[A-Za-z_, ]+/ -> FieldList
@@ -86,7 +87,7 @@ return channel.
 Expression-valued blocks are the separate value form used inside value-consuming
 expressions. They can also be receiver-dot receivers when their yielded value matches
 the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
-`{ " a-b " }.trim().split("-").count()`.
+`{ " a-b " }.trim().split("-").count`.
 
 ```text
 rule:AND+
@@ -123,10 +124,10 @@ This applies equally to function-style helpers, assignment statements, cursor/ca
 operations, and marker-style control statements. Newlines nested inside parentheses,
 brackets, blocks, quoted strings, or regex payloads remain part of the surrounding statement.
 
-Marker-style `endswitch()` follows the same rule. When another statement starts on the next
+Marker-style `endswitch` (or `endswitch()`) follows the same rule. When another statement starts on the next
 line, the compiler preserves the newline as the LinkedSpec separator and emits whatever
 host-language boundary its switch representation requires. Authors do not add a trailing
-semicolon merely because the statement is `endswitch()`.
+semicolon merely because the statement is `endswitch`.
 
 ## Control-flow expression forms
 
@@ -160,13 +161,16 @@ rule:AND+
    push(acc, call(child));
    elseif(is_nonempty(tmp));
    push(acc, first(tmp));
-   else();
+   else;
    push(acc, "default");
-   endif();
+   endif;
  }
 ```
 
-Zero-argument markers can drop parentheses for a lighter look:
+The parenthesized `else()` / `endif()` spellings remain valid. The same block can therefore be written with
+either spelling; new examples prefer the lighter form shown above.
+
+The compact form remains readable even when adjacent statements use semicolon separators:
 
 ```text
 -> child {
@@ -189,7 +193,7 @@ The fluent equivalent chains the markers with dots:
   .endif;
 ```
 
-The parenthesized spellings remain valid and universal. Bare control-marker suffixes are established on rule-edge
+The parenthesized spellings remain valid. Bare control-marker suffixes are established on rule-edge
 and lifecycle fluent chains. Perl, Rust, Dart, Julia, and Lua accept the six standalone aliases `else`, `endif`,
 `default`, `endcase`, `endswitch`, and `next`, plus a generic final zero-argument receiver segment such as `.trim`.
 This narrow surface does not

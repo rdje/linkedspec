@@ -66,7 +66,7 @@ the overall capability future-owned under the remaining backend rollout leaves.
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare
 final receiver segments, exact normalized AST equivalence with parenthesized forms, ordinary-identifier retention,
 condition/helper/intermediate-receiver/trailing-block exclusions, existing method-contract resolution, and one
-deterministically rendered future `.spec` fixture. Validate the 6 standalone, 4 receiver, 6 invalid, and fixture
+deterministically rendered portable `.spec` fixture. Validate the 6 standalone, 4 receiver, 6 invalid, and fixture
 cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes the contract through
 `prove -Iperl t/punctuation_light_zero_arg_contract.t`, covering typed AST equivalence, final-only receiver
 parsing, unchanged exclusions and method resolution, canonical `next` lowering, and live plus standalone
@@ -80,8 +80,11 @@ and CLI fixture results. Rust, Dart, and Julia's pre-existing `.contains()` miss
 drift owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome. Lua consumes
 the same AST/negative/native fixture cases inside `lua/test/run.lua` on PUC Lua and LuaJIT, including public
 SpecFile JSON reconstruction; its matching `.contains()` drift is also owned by `.5`. Generated Lua source does
-not exist yet and remains owned by `LUA-BACKEND-PARITY.8.1-.8.4`. Final public/capability admission remains future
-under `FUTURE-PARITY-BACKLOG.16.7`.
+not exist yet and remains owned by `LUA-BACKEND-PARITY.8.1-.8.4`. The current syntax is admitted as
+`language.punctuation_light_zero_argument_aliases` in the four-backend capability census. The composed recurring
+proof is `bash tools/check_punctuation_light_five_backend.sh`; it additionally exercises Lua on both ABIs without
+pretending that generated Lua exists.
+The JSON key `future_fixture` is retained as the version-1 schema name; the fixture itself is now admitted current.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
 changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns

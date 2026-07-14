@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.7 — admit punctuation-light aliases
+
+The narrow zero-argument syntax is now a current capability rather than a future exclusion. The four established
+census backends add one passing language row, advancing the census from 60/0/0 to 64/0/0. A new recurring
+five-backend command composes the neutral boundary with Perl 7, Rust 5, Dart 5, Julia 55, PUC Lua 109, and LuaJIT
+109 checks, including every available generated path and Lua's public serialized/native paths. The generated-
+source checker and current census summaries no longer hard-code the former 15/60 total; the checker derives and
+reports the manifest's live 64/0/0 states.
+
+Current public examples selectively prefer bare `else`, `endif`, `default`, `endcase`, `endswitch`, `next`, and
+terminal receiver methods where they improve readability. Parenthesized twins remain valid, exact shipped-source
+walkthroughs stay truthful, and `if(condition)` / `while(condition)` plus general/intermediate/block calls retain
+parentheses. Generated Lua remains separately owned by `LUA-BACKEND-PARITY.8.1-.8.4`; parent `.16` closes and the
+clean PNT pivot returns to Lua `.4.3.6.4`.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.6 — implement Lua zero-argument aliases
 
 Lua now recognizes exact bare `next` only as a complete statement, extends standalone control normalization to

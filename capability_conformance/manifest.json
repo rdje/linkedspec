@@ -66,6 +66,18 @@
       }
     },
     {
+      "id": "language.punctuation_light_zero_argument_aliases",
+      "category": "language-proof",
+      "contract": "Six standalone zero-argument markers and a terminal zero-argument receiver segment normalize to their parenthesized typed calls without broadening general calls or condition headers.",
+      "sources": ["docs/decisions/0033-punctuation-light-zero-argument-calls.md", "capability_conformance/punctuation_light_zero_arg_contract.json", "docs/linkedspec-book/src/appendix/formal-grammar.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["t/punctuation_light_zero_arg_contract.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs"]},
+        "dart": {"status": "pass", "references": ["dart/test/punctuation_light_zero_arg_contract_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/test/punctuation_light_zero_arg_contract_test.jl"]}
+      }
+    },
+    {
       "id": "language.user_functions_staged_bodies",
       "category": "language-runtime",
       "contract": "Top-level exact-arity functions use the neutral definition shell, staged body job, ActionIR body AST, and runtime registry behavior.",
@@ -192,7 +204,6 @@
     {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
     {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl construction, invocation, declared helper/user-function/receiver normalization, and closeout are current, while Rust/Dart/Julia/Lua parity remains future.", "owner": "FUTURE-PARITY-BACKLOG.11.4.3"},
     {"id": "future.variadic_user_functions", "reason": "The neutral fixed-prefix plus final-rest signature is implemented on Perl, Rust, Dart, and Julia; Lua native, descriptor, generated-source, and final admission remain future.", "owner": "LUA-BACKEND-PARITY.5.1"},
-    {"id": "future.punctuation_light_zero_arg", "reason": "ADR 0033 and linkedspec-punctuation-light-zero-arg-v1 are adopted; five-backend typed ActionIR and generated/public admission remain future.", "owner": "FUTURE-PARITY-BACKLOG.16.7"},
     {"id": "future.lua_backend", "reason": "Lua follows convergence of the four implemented backends.", "owner": "FUTURE-PARITY-BACKLOG.1.3"}
   ]
 }

@@ -700,8 +700,8 @@ return remains owned by its action/expression block, Perl-reference `next` conti
 rule-attributed guard fails only when the condition remains true after the configured body limit. Dart/Julia guard
 timing and Rust/Dart/Julia `next` drift join backlog `.5`; built-in final blocks/scoped with `.4.3.6.4` are queued
 while ADR `0033` and `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases after a clean pivot. Neutral
-contract `.16.1` and all five backend implementations through Lua `.16.6` are complete; public/capability
-closeout `.16.7` is next. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
+contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`
+are complete at 64/0/0 with one recurring five-backend/two-Lua-ABI command. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
 separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs; generated
 Lua source remains correctly owned by `.8.1-.8.4` because no emitter exists yet.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
@@ -1068,22 +1068,23 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 15 capabilities x four implemented backends. After strict recurring Rust generated-
-source admission, its 60 states are 58 pass, zero partial states, and two gaps. Each gap has one durable owner:
+The current audit contains 16 capabilities x four implemented backends. All 64 states pass. Earlier non-pass
+boundaries remain below as rollout history, not as live gaps:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
 | Generated parser source | Perl, Rust, Dart, and Julia pass contract v1. Rust compiles/runs 105/105. Dart and Julia pass deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Julia also locks Unicode-safe strict-UTF-8/hex payloads and typed metadata/errors. | closed `.3.5`; census 60/0/0 |
+| Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 64/0/0 |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
 
-`FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming complete backend parity. Its 57/1/2
-boundary first advanced to 58/0/2 through strict recurring Rust generated-source admission, when Dart and Julia
-were the two gaps. Dart admission has since advanced the live census to 59/0/1.
+During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
+complete backend parity. Its 57/1/2 boundary first advanced to 58/0/2 through strict recurring Rust generated-
+source admission, when Dart and Julia were the two gaps; Dart admission then advanced it to 59/0/1.
 
 That 57/1/2 statement was the source-audit boundary. `.3.1.0` added the missing independent Perl compile/run probe:
 the captured text compiles, but stringifying/recompiling `LinkedRE::oredRE` detaches its `(?{$pos=N})` alternative
@@ -1108,7 +1109,8 @@ metadata/errors, direct/traced generated entrypoints, and an 18-assertion isolat
 `.3.4.2` then adds exact typed ten-family classification, four plan rejections, family-authoritative per-rule
 dispatch, portable trace roles, and one isolated emitted all-family module. `.3.4.3` consumes the exact contract
 subset, proves all eight interpreter values before emission, independently loads eight namespaced modules with
-exact metadata/plans/trace identity, and promotes Julia. The live census is 60/0/0.
+exact metadata/plans/trace identity, and promotes Julia. The then-live census was 60/0/0; punctuation-light
+admission `.16.7` later advances the broader current census to 64/0/0.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,

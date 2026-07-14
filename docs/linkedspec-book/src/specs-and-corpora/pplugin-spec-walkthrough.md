@@ -9,7 +9,7 @@ It demonstrates:
 - the plugin-family DSL (subroutine definitions with `subname { ... }` syntax),
 - recursive bracket-matching for nested `{ }` blocks,
 - string-literal skipping (`dquotes`, `squotes`, `curlyb`),
-- the `next()` control-flow helper for skipping ignored matches,
+- the `next` / `next()` control-flow helper for skipping ignored matches,
 - `entry_named(...)` for accessing named regex capture groups,
 - host-language plugin-body execution kept outside the `.spec` parser, in the Perl reference runtime adapter.
 
@@ -59,7 +59,7 @@ legacy name-to-coderef registry consumed by older plugin callers.
 | `pplugin_top::` | Top (entry) | Entry point. Collects subroutine definitions. |
 | `subdef` | `/\w\S*\s*(?<!\\)\{/` / `/(?<!\\)}/` bounded regex | Subroutine definition with named capture `subname`. |
 | `curlyb` | `/(?<!\\)\{/` / `/(?<!\\)}/` bounded regex | Bare curly-brace block (skipped content). |
-| `comment` | `/#.*/` | Comment line (consumed by `next()`). |
+| `comment` | `/#.*/` | Comment line (consumed by the shipped `next()` spelling). |
 | `dquotes` | `/(?<!\\)".*?(?<!\\)"/` | Double-quoted string literal. |
 | `squotes` | `/(?<!\\)'.*?(?<!\\)'/` | Single-quoted string literal. |
 
@@ -69,7 +69,10 @@ legacy name-to-coderef registry consumed by older plugin callers.
 
 **Named capture for subroutine names.** The `subdef` rule's opening regex uses `(?<subname>\w\S*)` to capture the subroutine name. The closing edge accesses it via `entry_named(subname)` — a cleaner alternative to positional `entry_group(N)`.
 
-**`next()` for comments.** The `pplugin_top` rule lists `-> comment { next() }` as its first alternative. `next()` is the LinkedSpec equivalent of Perl's `next` statement — it skips the current match and tries the next one. This means comments are silently consumed without affecting the accumulated `defs` array.
+**`next` for comments.** The shipped `pplugin_top` rule currently lists `-> comment { next() }` as its first
+alternative. The punctuation-light `-> comment { next }` spelling is equivalent and is preferred in new specs.
+The operation skips the current match and tries the next one, so comments are silently consumed without affecting
+the accumulated `defs` array.
 
 **`LX` accumulator pattern.** The `pplugin_top` rule accumulates `[name, body_text]` pairs in `I { defs = [] }`. Each `LE` hook pushes `[subname, body_text]` via `flat_array`. On exit (`LX`), the accumulated pairs are converted to a flat hash. This is the same accumulator pattern used by `tablegrep.spec`.
 
@@ -94,5 +97,5 @@ states that the parser rules are descriptor-ready under the current ActionIR mig
 ## Why this spec is interesting
 
 Pplugin shows LinkedSpec parsing one of its historical source formats. The recursive bracket-matching with
-string-literal awareness is a pattern that scales to any nested-delimiter grammar. And the `next()` helper shows how
+string-literal awareness is a pattern that scales to any nested-delimiter grammar. And the `next` helper shows how
 LinkedSpec handles "skip this, try the next alternative" without needing a separate tokenizer pass.

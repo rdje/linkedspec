@@ -185,10 +185,10 @@ saving an earlier result does not let a later mutation retroactively change it:
 ```text
 first = push(items, "a");          # first == ["a"]
 second = push(items, "b");         # second == ["a", "b"], items == ["a", "b"]
-size = items.push_back("c").count(); # size == 3, items == ["a", "b", "c"]
+size = items.push_back("c").count; # size == 3, items == ["a", "b", "c"]
 parts = split("a,b", ",");         # pure split
 split(stored_parts, "c,d", ",");  # mutable split; stored_parts == ["c", "d"]
-answer = set(saved, ["b", "a"]).sorted().first();  # answer == "a"
+answer = set(saved, ["b", "a"]).sorted().first;  # answer == "a"
 ```
 
 Exact selector rejection intentionally followed backend enablement: all five backends execute the same bare forms,
@@ -207,7 +207,7 @@ return(payload);
 The `return(expr)` inside the block is block-local: it yields the block value and skips later statements in
 that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
 When a block is used as a receiver, its yielded value enters the same compatible receiver-dot helper family:
-`{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count()`,
+`{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count`,
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
 array, string, hash, and number contracts.
 

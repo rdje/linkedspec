@@ -195,8 +195,9 @@ emission. One fresh offline host loads the eight modules in separate namespaces
 and checks exact values, metadata, ordered plans, trace roles, and source
 identity before recursive cleanup. Contract checking locks the proof path,
 count, ordering, independent load, tracing, cleanup, and absence of skips.
-Julia generated source is admitted pass; all four implemented backends now pass
-at census 60/0/0.
+Julia generated source was admitted pass with all four implemented backends at
+the then-current census 60/0/0. The broader live census may grow as later
+capabilities are admitted.
 
 ## Why this matters
 

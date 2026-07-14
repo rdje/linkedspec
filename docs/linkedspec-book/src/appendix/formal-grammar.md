@@ -465,7 +465,8 @@ The versioned source of truth is
 `julia/test/punctuation_light_zero_arg_contract_test.jl`; Lua consumes it inside `lua/test/run.lua` on both ABIs.
 Rust, Dart, Julia, and Lua's pre-existing zero-argument `.contains()` outcomes are separately owned by helper-
 normalization backlog `.5`. Lua proves public SpecFile JSON reconstruction rather than nonexistent generated
-source; `LUA-BACKEND-PARITY.8.1-.8.4` owns its future emitter. Final admission remains `.16.7`.
+source; `LUA-BACKEND-PARITY.8.1-.8.4` owns its future emitter. The current syntax is admitted by `.16.7`; the
+recurring five-backend/two-Lua-ABI proof is `bash tools/check_punctuation_light_five_backend.sh`.
 
 ### 3.8 Conditional Markers
 

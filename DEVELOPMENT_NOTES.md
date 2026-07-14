@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.7` — admit current syntax without overstating the Lua product): The
+  capability census intentionally covers the four established full backends, while Lua's syntax proof is already
+  real at typed AST, serialized `SpecFile`, and native dual-ABI boundaries. Admission therefore adds one 4-pass
+  census row and removes the syntax's future exclusion, while the recurring composed command separately runs all
+  five implementations and both Lua ABIs. This keeps capability at 64/0/0 without inventing generated Lua. Public
+  example migration is selective: prefer bare markers and terminal receiver methods in current teaching examples,
+  retain parenthesized twins as valid documentation, and preserve literal walkthrough spellings when describing a
+  checked-in spec. The neutral invalid/mutation cases remain the grammar-broadening guard. Admission also exposed
+  a hard-coded `60/0/0` status string in the generated-source checker; it now derives all census totals from the
+  manifest so later capability additions cannot silently stale the gate output again.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.6` — narrow Lua's parser-ahead fallback at its existing context): Lua's
   fluent parser already accepted any identifier-only receiver segment, so the safe change was to pass segment
   terminality into that fallback and reject both intermediate omissions and attached blocks. Exact trimmed `next`

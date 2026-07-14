@@ -70,7 +70,8 @@ This `README.md` is the **single entry point** to the project.
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
   the aliases through typed AST plus exact native execution; Rust also proves serialized/emitted-source paths,
   Dart and Julia prove emitted-state reconstruction, and Lua proves serialized SpecFile state on both ABIs.
-  Public/capability closeout `.16.7` is next. Rust, Dart, Julia, and Lua's pre-existing `.contains()`
+  Public/capability closeout `.16.7` now admits the current syntax at census 64/0/0 and adds one recurring
+  five-backend/two-Lua-ABI proof command. Parent `.16` is complete. Rust, Dart, Julia, and Lua's pre-existing `.contains()`
   missing-argument outcomes remain a helper-semantics gap owned by `.5`, not a syntax
   exception.
   Lua generated-source preservation remains with its existing `.8.1-.8.4` emitter/admission owner.
@@ -265,17 +266,17 @@ Top-level project docs:
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
-- Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
-  paths, and gap ownership. The current audit records 59 pass, zero partial-proof, and one gap backend state;
-  non-codegen `.1.6` is closed. Contract v1 `.3.1.1` is gated and Perl reconstruction/API proof `.3.1.2` is green.
-  Perl/Rust v1 baseline admission is closed. Rust's all-105 classifier is unconditional and recurring; complete
-  Rust gates pass and generated source promotes. Dart now exports a deterministic
-  v1 emitter/executor plus exact eight-case interpreter-first host proof; complete 181-test/61x2/105 gates pass.
-  Dart promotes to pass at 59/0/1. Julia `.3.4.1` and final `.3.5` follow.
+- Run `perl tools/check_capability_conformance.pl` to validate the current 16-capability/four-backend census,
+  evidence paths, and future ownership. The live census is 64 pass, zero partial, and zero gap states. Generated
+  source reached the earlier 60/0/0 milestone under `.3`; punctuation-light admission `.16.7` adds the current
+  four passing states. Lua remains outside this full-backend census until its dedicated parity tree completes.
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case
   primary interpreter oracle.
+- Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
+  the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
+  available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public

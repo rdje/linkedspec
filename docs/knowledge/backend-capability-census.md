@@ -1,6 +1,6 @@
 ---
 id: backend-capability-census
-title: A validated 15-capability census owns every remaining four-backend parity residual
+title: A validated 16-capability census is fully green across the four established backends
 answers:
   - where is the LinkedSpec backend capability matrix
   - how many backend capabilities are in the parity census
@@ -11,7 +11,8 @@ answers:
   - do Rust Dart and Julia have native named spec resolution
   - does Dart trace frontend compiler and staged phases
   - what did FUTURE-PARITY-BACKLOG 1.6.0 audit
-date: 2026-07-10
+  - does the generated source checker derive capability census totals
+date: 2026-07-13
 status: current
 tags: [parity, capability, matrix, public-api, rust, dart, julia, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.0 adds capability_conformance/manifest.json and tools/check_capability_conformance.pl: 15 capabilities x four backends classify 47 pass, five partial-proof, and eight gap states, each non-pass state with an explicit owner."
@@ -36,13 +37,14 @@ evidence_update_2026_07_11_rust_full_manifest_classification: "FUTURE-PARITY-BAC
 evidence_update_2026_07_11_rust_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 closes all five empty repair-mechanism inventories without behavior code. Census remains 57/1/2 and only strict recurring Rust admission .3.2.2 remains before promotion."
 evidence_update_2026_07_11_rust_generated_admission: "FUTURE-PARITY-BACKLOG.3.2.2 makes the all-105 classifier unconditional and contract-gated, passes it independently and inside the complete Rust package/61x2 CLI gate, and promotes Rust generated source to pass. The census is now 58 pass, zero partial, and two gaps; only Dart/Julia generated source remains."
 evidence_update_2026_07_11_dart_generated_admission: "FUTURE-PARITY-BACKLOG.3.3.3 consumes the contract's exact eight-case subset, proves interpreter values before v1 emission, independently analyzes/runs all generated libraries with exact metadata/plans/trace identity, passes complete 181/61x2/105 gates, and promotes Dart. Census is 59 pass, zero partial, one gap; only Julia generated source remains."
-reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_07_13_punctuation_admission: "FUTURE-PARITY-BACKLOG.16.7 adds language.punctuation_light_zero_argument_aliases as four passing states, removes its future exclusion, and advances the live census from 15/60 to 16 capabilities and 64/0/0 states. tools/check_generated_source_contract.pl now derives census totals from the manifest instead of hard-coding 60/0/0."
+reverify: "perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After Dart generated-source admission, its 15 rows and 60 backend states classify
-60 pass, zero partial, and zero gaps.
+exclusions. After punctuation-light admission `.16.7`, its 16 rows and 64 backend states classify
+64 pass, zero partial, and zero gaps.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -59,9 +61,13 @@ The audit distinguishes implementation gaps from proof gaps:
   105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
-Generated-source `.3.5` is closed at 60/0/0. Deprecated Perl plugins and not-yet-current general parse jobs,
+Generated-source `.3.5` closed the then-current census at 60/0/0; punctuation-light `.16.7` later adds four
+passing states. Deprecated Perl plugins and not-yet-current general parse jobs,
 semantic introspection/MCP, generic final-codeblock behavior, and Lua are explicit exclusions/future owners, not
 omitted rows.
+
+`tools/check_generated_source_contract.pl` validates its own capability row and derives the live pass/partial/gap
+totals from `manifest.json`; it does not freeze the census size in an output string.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
 [[perl-native-spec-resolution]], [[dart-native-spec-resolution]], [[julia-native-spec-resolution]],

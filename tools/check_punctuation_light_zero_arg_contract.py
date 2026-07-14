@@ -418,7 +418,7 @@ def main() -> None:
         "punctuation-light-zero-arg: OK "
         f"({len(contract['standalone_cases'])} standalone, "
         f"{len(contract['receiver_cases'])} receiver, "
-        f"{len(contract['invalid_syntax_cases'])} invalid, future fixture exact)"
+        f"{len(contract['invalid_syntax_cases'])} invalid, contract fixture exact)"
     )
 
 

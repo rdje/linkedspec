@@ -322,5 +322,16 @@ for my $backend (sort keys %expected_state) {
   unless defined($actual) && $actual eq $expected_state{$backend};
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart/Julia %d/105 + strict Rust 105/105; states 60/0/0)\n",
- scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset);
+my %census = (pass => 0, partial => 0, gap => 0);
+for my $capability (@{$capability_manifest->{capabilities} || []}) {
+ for my $backend (@{$capability_manifest->{backends} || []}) {
+  my $state = $capability->{backends}{$backend}{status};
+  fail("capability '$capability->{id}' has unknown census state '$state'")
+   unless defined($state) && exists $census{$state};
+  $census{$state}++;
+ }
+}
+
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart/Julia %d/105 + strict Rust 105/105; census states %d/%d/%d)\n",
+ scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset),
+ @census{qw(pass partial gap)};

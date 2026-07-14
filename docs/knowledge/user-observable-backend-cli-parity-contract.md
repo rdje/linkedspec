@@ -11,10 +11,10 @@ answers:
   - can corpus and status commands be in the primary CLI
   - is generated source required for complete backend parity
   - what task owns cross backend CLI parity
-date: 2026-07-10
+date: 2026-07-13
 status: accepted
 tags: [cli, parity, public-api, backends, ADR-0023, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 is now closed at recurring 4x2x61; .1.6 owns a validated 15-capability census and non-codegen convergence; .3 owns generated source."
+evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 closes recurring 4x2x61 CLI identity; .1.6 and .3 close the original capability/generated rollout; .16.7 advances the live census to 16 capabilities and 64/0/0 states."
 reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
 ---
 
@@ -35,15 +35,15 @@ Success/help exits `0`; normalized compilation/input/runtime failure exits `1`; 
 parsing prints one canonical JSON value plus one newline. A neutral fixture suite compares stdout, stderr, and exit
 status across variants. Corpus runners and status tools remain separate developer commands.
 
-`FUTURE-PARITY-BACKLOG.1.5` closes current Perl/Rust/Dart/Julia CLI convergence, `.1.6` owns the complete public
-capability census, and `.3` owns generated-source parity. Because Rust publicly exports `source_emitter`, generated
+`FUTURE-PARITY-BACKLOG.1.5` closes current Perl/Rust/Dart/Julia CLI convergence, `.1.6` establishes the public
+capability census, and `.3` closes generated-source parity. Because Rust publicly exports `source_emitter`, generated
 source is required before another active backend can claim complete user-visible parity, even though interpreter
 corpus execution remains the primary correctness oracle. Julia `.7.3.2.1` closes the missing parser/compiler/
 function-shell/staged trace meaning required by the shared trace options. `.7.3.2.2` closes exact options and
 loading; `.7.3.2.3` closes native execution/direct canonical JSON, `.7.3.2.4` closes local errors/exits/trace
 routing, and `.7.3.2.5` closes direct-process no-drift. Julia's local completion
-now composes into the closed global cross-backend fixture comparison. The broader capability census is validated
-from `capability_conformance/manifest.json`; current residual mechanisms remain owned by `.1.6.1`–`.1.6.5` and `.3`.
+now composes into the closed global cross-backend fixture comparison. The broader 16-capability/64-state census is
+validated from `capability_conformance/manifest.json`; all four established backend columns currently pass.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[variant-specific-cli-requirement]],
 [[native-in-memory-backend-contract]], [[julia-generated-source-scaffold]], [[rust-source-emitter-lane-split]].

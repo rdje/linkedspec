@@ -33,7 +33,9 @@ ordinary helper or user-function calls, attached final-codeblock calls, or condi
   ActionIR expression. A following dot, argument list, or block leaves the existing grammar in control.
 - A terminal method that requires arguments parses as a zero-argument call and fails through the normal typed
   arity/contract diagnostic; the syntax alias does not bypass method signatures.
-- All five backends and generated paths must converge on the same AST and diagnostics.
+- All five typed/native backends and every available generated path must converge on the same AST and diagnostics.
+  The future Lua emitter must preserve the already-admitted normalized state when
+  `LUA-BACKEND-PARITY.8.1-.8.4` implements that separate product surface.
 - The older general `callee(args)` contract remains true, with these explicitly enumerated exceptions.
 - Parenthesis-free `if`/`while` headers remain deferred until a separate ambiguity audit and decision authorize
   them.
@@ -43,3 +45,12 @@ ordinary helper or user-function calls, attached final-codeblock calls, or condi
 - Task tree: `FUTURE-PARITY-BACKLOG.16`
 - Audit/split: `FUTURE-PARITY-BACKLOG.16.0`
 - Related: ADR 0007, `docs/knowledge/terse-call-spacing-contract.md`
+
+## Implementation status
+
+`FUTURE-PARITY-BACKLOG.16.2-.16.6` implement the exact boundary on Perl,
+Rust, Dart, Julia, and Lua. Perl/Rust/Dart/Julia also prove their available
+generated paths; Lua proves public `SpecFile` serialization/reconstruction and
+native execution on PUC Lua and LuaJIT. `.16.7` admits the syntax in the
+four-backend capability census and retains generated Lua under its existing
+`.8.1-.8.4` owner.

@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.7 — admit punctuation-light aliases**
+  (DONE — parent `.16` closed at capability 64/0/0; clean pivot returns to Lua `.4.3.6.4`).
+
+  **Result:** One current language capability replaces the future exclusion, and one recurring command composes
+  the exact neutral boundary with Perl 7, Rust 5, Dart 5, Julia 55, PUC Lua 109, and LuaJIT 109 checks. Public
+  examples selectively prefer bare markers and terminal receiver calls while retaining parenthesized twins and
+  condition-header parentheses. Every available generated path is exact; Lua serialized/native proof remains
+  honest and its future emitter stays `.8.1-.8.4`. The syntax lane is closed without helper-arity scope creep.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.6 — implement Lua zero-argument aliases**
   (DONE — exact Lua typed/serialized/native consumption on both ABIs; cross-backend `.16.7` next).
 

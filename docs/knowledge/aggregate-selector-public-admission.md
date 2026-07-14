@@ -29,7 +29,7 @@ source retirement checker so public and executable admission cannot diverge. Its
 removed/history references; four earlier counted occurrences were prose false positives shaped as
 `array (statement)` inside the formal-grammar code block.
 
-The capability census already proves every current language surface on all four census backends at 60/0/0; the
+The capability census already proves every current language surface on all four census backends at 64/0/0; the
 separate Lua rejection proof is locked by the aggregate-retirement checker. Therefore selector retirement is no
 longer listed under `excluded_or_future`.
 

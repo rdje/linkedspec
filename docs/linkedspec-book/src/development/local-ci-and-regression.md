@@ -80,6 +80,14 @@ matrix explicitly:
 LINKEDSPEC_RUN_CLI_MATRIX=1 bash tools/run_ci_local.sh
 ```
 
+The admitted punctuation-light syntax has a narrower composed matrix that also includes PUC Lua and LuaJIT:
+
+```bash
+bash tools/check_punctuation_light_five_backend.sh
+# or as an optional local-CI leg
+LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1 bash tools/run_ci_local.sh
+```
+
 ## Capability Census Gate
 
 The exact CLI and interpreter corpus are necessary but do not enumerate every public API and mdBook contract.
@@ -89,11 +97,10 @@ Validate the machine-readable broader census with:
 perl tools/check_capability_conformance.pl
 ```
 
-`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 57 pass, one
-partial-proof, and two gaps. Every partial/gap state names a task-tree owner, every evidence path must exist, and
-legacy/future exclusions are explicit. The canonical local gate runs this check before focused suites.
-`FUTURE-PARITY-BACKLOG.1.6.6` confirms all three non-pass states belong only to generated parser source and active
-`.3`; every non-codegen capability passes across the four implemented variants.
+`capability_conformance/manifest.json` currently contains 16 capabilities and 64 backend states: all 64 pass.
+Every evidence path must exist, and legacy/future exclusions remain explicit and task-owned. The canonical local
+gate runs this check before focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light
+admission `.16.7` adds the four current passing states.
 
 The file-oriented native API has a separate executable resolution/loading contract:
 

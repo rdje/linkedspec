@@ -185,7 +185,7 @@ flag = true;
 items += false;
 push(items, true);
 meta["enabled"] = true;
-if(false); return("unreachable"); else(); return("reachable"); endif()
+if(false); return("unreachable"); else; return("reachable"); endif
 ```
 
 > **Shape literals are value expressions on the Perl reference and Rust backend.** Direct array and hash literals are
@@ -204,15 +204,15 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
 > hash-pair delimiter can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
 > selected by the method being called: `{ [3, 1, 2] }.sorted().join_values(",")` uses the array family,
-> `{ " a-b " }.trim().split("-").count()` uses string helpers and the explicit `split` array bridge,
+> `{ " a-b " }.trim().split("-").count` uses string helpers and the explicit `split` array bridge,
 > `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")` uses hash then array helpers, and
 > `{ 3.5 }.floor().add(2)` uses the number family. `return(expr)` inside the block is still block-local.
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `name` | scalar value | read the working scalar `name`. |
-| `items.drop_front(index).first()` | scalar value or `undef` | read one zero-based element from an array value. |
-| `meta.pick_keys(key).sorted_values().first()` | scalar value or `undef` | read one field from a hash value. |
+| `items.drop_front(index).first` | scalar value or `undef` | read one zero-based element from an array value. |
+| `meta.pick_keys(key).sorted_values().first` | scalar value or `undef` | read one field from a hash value. |
 | `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
 | `array(...)` | array value | construct an empty or argument-list array payload; prefer `[...]` as the terse constructor spelling in new examples. |
 | `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" : undef }` for a one-field literal hash with no value. |
@@ -1167,8 +1167,8 @@ Use marker-style `if` flow when the branch body is more than a trivial expressio
 | `i(condition)` | short alias for `if(condition)`. |
 | `elseif(condition)` | open a later conditional branch. |
 | `elif(condition)` | short alias for `elseif(condition)`. |
-| `else()` | open the fallback branch. |
-| `endif()` | close the flow. |
+| `else` / `else()` | open the fallback branch. |
+| `endif` / `endif()` | close the flow. |
 
 Example:
 
@@ -1177,9 +1177,9 @@ if(is_undefined(meta.pick_keys("kind").sorted_values().first()))
   set(meta, set_key(meta, "kind", "unknown"))
 elseif(str_eq(lowercase(trim(meta.pick_keys("kind").sorted_values().first())), "word"))
   set(meta, set_key(meta, "normalized_kind", "word"))
-else()
+else
   set(meta, set_key(meta, "normalized_kind", "other"))
-endif()
+endif
 
 return(copy(meta));
 ```
@@ -1202,7 +1202,7 @@ Use the marker form when branches contain multiple statements, nested flow, or s
 oriented. Inline value control is the shorter portable form for single-expression branch payloads.
 
 Attached-block form is also portable. It lowers to the same marker flow and supplies the closing
-`endif()` implicitly:
+`endif` implicitly (the parenthesized `endif()` twin is also valid):
 
 ```text
 if(is_nonempty(items)) {
@@ -1335,17 +1335,18 @@ Marker-delimited switch is the equivalent statement-range form:
 switch(kind)
 case(word)
   return(hash("kind", "word", "text", text))
-endcase()
+endcase
 case(space)
   return(hash("kind", "space", "text", text))
-endcase()
-default()
+endcase
+default
   return(hash("kind", "unknown", "text", text))
-endswitch()
+endswitch
 ```
 
-The subject evaluates once. `endcase()` is optional when the next same-depth marker already bounds the branch;
-nested marker switches keep their own `endswitch()` boundary. All five current backends implement this form.
+The subject evaluates once. `endcase` is optional when the next same-depth marker already bounds the branch;
+nested marker switches keep their own `endswitch` boundary. The parenthesized spellings remain valid, and all five
+current backends implement both forms.
 Keep every executable statement inside a `case/default` range. Perl currently executes ordinary statements before
 the first branch or after `endcase()`, while Rust, Dart, Julia, and Lua skip them; backlog `.5` owns normalization.
 
@@ -1390,10 +1391,11 @@ print_each(matches, "match:<<", ">>\n")
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
-Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator. Perl, Rust, Dart, Julia, and Lua also accept the punctuation-light standalone alias `next`:
+Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
+the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:
 
 ```text
--> comment {next()}
+-> comment { next }
 ```
 
 Keep public examples focused on structured return values. Use debug output helpers when the example is genuinely about tracing or demonstrating a branch.
