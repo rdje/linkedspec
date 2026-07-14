@@ -2491,6 +2491,96 @@ local function uniform_binding_action_source(action)
   return "Top::\n /x/ -> Done { " .. action .. " }\nDone::\n /x/\n"
 end
 
+test("punctuation-light zero-argument contract is exact", function()
+  local contract = json.decode(read_file(
+    "capability_conformance/punctuation_light_zero_arg_contract.json"
+  ))
+  assert_equal(contract.contract_id, "linkedspec-punctuation-light-zero-arg-v1", "contract id")
+
+  local omitted_fields = {
+    source = true,
+    source_span = true,
+    source_method = true,
+    body_source_span = true,
+    trailing_block_source_span = true,
+  }
+  local function semantic_ast(value)
+    if type(value) ~= "table" then return value end
+    local result = json.kind(value) == "array" and json.array() or json.harray()
+    for key, item in pairs(value) do
+      if not omitted_fields[key] then
+        result[key] = semantic_ast(item)
+      end
+    end
+    return result
+  end
+  local function assert_semantic_ast_equal(actual, expected, label)
+    assert_equal(
+      json.encode(semantic_ast(linkedspec.action_ast.to_json(actual))),
+      json.encode(semantic_ast(linkedspec.action_ast.to_json(expected))),
+      label
+    )
+  end
+
+  for _, case in ipairs(contract.standalone_cases) do
+    local bare = linkedspec.parse_action_statement(case.bare).expr
+    local parenthesized = linkedspec.parse_action_statement(case.parenthesized).expr
+    assert_semantic_ast_equal(bare, parenthesized, case.id .. " statement AST")
+    assert_equal(bare.kind, case.expected_ast.kind, case.id .. " statement kind")
+  end
+  local next_value = linkedspec.parse_action_expression("return(next)")
+  assert_equal(next_value.args[1].value.kind, "variable", "return next remains a variable")
+  assert_equal(next_value.args[1].value.name, "next", "return next variable name")
+  assert_equal(linkedspec.parse_action_expression("next").kind, "variable", "expression next remains a variable")
+
+  for _, case in ipairs(contract.receiver_cases) do
+    local bare = linkedspec.parse_action_expression(case.bare)
+    local parenthesized = linkedspec.parse_action_expression(case.parenthesized)
+    assert_equal(bare.kind, "fluent_chain", case.id .. " receiver kind")
+    assert_semantic_ast_equal(bare, parenthesized, case.id .. " receiver AST")
+    assert_equal(#bare.calls[#bare.calls].args, 0, case.id .. " authored arguments")
+  end
+
+  for _, case in ipairs(contract.retained_noncall_cases) do
+    local expression = linkedspec.parse_action_expression(case.source)
+    assert_equal(expression.kind, "variable", case.id .. " retained kind")
+    assert_equal(expression.name, case.source, case.id .. " retained name")
+  end
+  for _, case in ipairs(contract.invalid_syntax_cases) do
+    local expression = linkedspec.parse_action_expression(case.source)
+    assert_equal(expression.kind, "raw_perl", case.id .. " invalid kind")
+    local fluent_invalid = case.id == "intermediate_generic_receiver" or
+      case.id == "receiver_trailing_block_without_call"
+    assert_equal(
+      expression.reason,
+      fluent_invalid and "invalid_fluent_chain" or "unsupported_expression",
+      case.id .. " invalid reason"
+    )
+  end
+
+  local count_result = execute_uniform_binding_source(
+    uniform_binding_action_source('values = ["a", "b"]; return(values.count)')
+  )
+  assert_equal(count_result, 2, "terminal count alias")
+  local bare_contains = execute_uniform_binding_source(
+    uniform_binding_action_source('values = ["a", "b"]; return(values.contains)')
+  )
+  local parenthesized_contains = execute_uniform_binding_source(
+    uniform_binding_action_source('values = ["a", "b"]; return(values.contains())')
+  )
+  assert_equal(bare_contains, parenthesized_contains, "contains spellings")
+  assert_equal(bare_contains, 0, "existing missing contains needle result")
+
+  local parsed = linkedspec.parse_spec(contract.future_fixture.spec_source)
+  local serialized = json.encode(linkedspec.spec_ast.to_json(parsed))
+  local reconstructed = linkedspec.spec_ast.from_json("SpecFile", json.decode(serialized))
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(reconstructed)),
+    contract.future_fixture.input
+  ).value
+  assert_json_equal(result, contract.future_fixture.expected, "neutral native/serialized fixture")
+end)
+
 test("runtime eager blocks return last values and consume local return", function()
   local source = uniform_binding_action_source([[
 items = [" raw "]

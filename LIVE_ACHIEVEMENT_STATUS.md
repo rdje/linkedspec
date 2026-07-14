@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.16.6 — implement Lua zero-argument aliases**
+  (DONE — exact Lua typed/serialized/native consumption on both ABIs; cross-backend `.16.7` next).
+
+  **Result:** Exact statement-context recognition maps bare `next` to its parenthesized typed call while preserving
+  value-position `next`; expanded control normalization supplies the other five standalone aliases. Final-only
+  receiver omission maps to the existing empty-argument fluent node and all exclusions remain narrow. Public
+  `SpecFile` JSON reconstruction and native fixture execution return `{"count":2,"picked":"a","result":"yes"}`.
+  PUC Lua and LuaJIT each pass 109/109 plus corpus and CLI scaffold checks. Lua generated-source work remains
+  explicitly owned by `LUA-BACKEND-PARITY.8.1-.8.4`; its pre-existing `.contains()` result remains under `.5`.
+
 - 2026-07-13: **FUTURE-PARITY-BACKLOG.16.5 — implement Julia zero-argument aliases**
   (DONE — exact Julia typed/native/generated/emitted/CLI consumption; Lua `.16.6` next).
 

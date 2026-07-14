@@ -565,12 +565,15 @@ local function parser(root_source)
     return pieces
   end
 
-  local function parse_fluent_call(segment)
+  local function parse_fluent_call(segment, allow_bare_identifier)
     local attached = split_attached_block(segment.text)
     local head = attached and segment.text:sub(1, attached.open_position - 1) or segment.text
     head = head:match("^%s*(.-)%s*$")
     local callee = parse_callee(head, segment.start)
     if not callee then
+      if attached or not allow_bare_identifier then
+        return nil
+      end
       local method = head:match("^([A-Za-z_][A-Za-z0-9_]*)$")
       if not method then
         return nil
@@ -613,7 +616,8 @@ local function parser(root_source)
     local attached = split_attached_block(text)
     local head = attached and text:sub(1, attached.open_position - 1) or text
     head = head:match("^%s*(.-)%s*$")
-    if head == "else" or head == "otherwise" or head == "default" then
+    if head == "else" or head == "otherwise" or head == "endif" or
+        head == "default" or head == "endcase" or head == "endswitch" then
       head = head .. "()"
     end
     local callee = parse_callee(head, start_byte)
@@ -712,7 +716,7 @@ local function parser(root_source)
       end
       local calls = {}
       for index = 2, #fluent_segments do
-        local call = parse_fluent_call(fluent_segments[index])
+        local call = parse_fluent_call(fluent_segments[index], index == #fluent_segments)
         if not call then return raw_expr(text, start_byte, "invalid_fluent_chain") end
         calls[#calls + 1] = call
       end
@@ -771,17 +775,24 @@ local function parser(root_source)
     return raw_expr(text, start_byte, "unsupported_expression")
   end
 
+  local function parse_statement(text, start_byte, end_byte)
+    local expression
+    if text == "next" then
+      expression = action_ast.expr("call", text, span(start_byte, end_byte), {
+        name = "next",
+        args = {},
+      })
+    else
+      expression = parse_expression(text, start_byte)
+    end
+    return action_ast.statement(text, span(start_byte, end_byte), expression, true)
+  end
+
   parse_block = function(source, absolute_start)
     local statements = {}
     local separators = { [";"] = true, ["\n"] = true, ["\r"] = true, branch = true }
     for _, piece in ipairs(split_top_level(source, absolute_start, separators)) do
-      local expression = parse_expression(piece.text, piece.start)
-      statements[#statements + 1] = action_ast.statement(
-        piece.text,
-        span(piece.start, piece["end"]),
-        expression,
-        true
-      )
+      statements[#statements + 1] = parse_statement(piece.text, piece.start, piece["end"])
     end
     return action_ast.block(source, span(absolute_start, absolute_start + #source), statements)
   end
@@ -790,7 +801,7 @@ local function parser(root_source)
     parse_expression = function(source) return parse_expression(source, 1) end,
     parse_statement = function(source)
       local text, start_byte, end_byte = trim_offsets(source, 1)
-      return action_ast.statement(text, span(start_byte, end_byte), parse_expression(text, start_byte), true)
+      return parse_statement(text, start_byte, end_byte)
     end,
     parse_block = function(source) return parse_block(source, 1) end,
   }

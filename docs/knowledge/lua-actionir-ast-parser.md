@@ -8,11 +8,14 @@ answers:
   - how does Lua parse semicolon action statements
   - does Lua support single quoted ActionIR strings
   - does Lua support generic trailing codeblocks
+  - does Lua support punctuation-light zero-argument markers
+  - may a Lua receiver method omit empty parentheses
+  - is bare next a statement or value in Lua ActionIR
   - are Lua ActionIR spans Unicode characters or bytes
-date: 2026-07-11
+date: 2026-07-13
 status: current
 tags: [lua, actionir, parser, AST, Unicode, semicolon, codeblock]
-evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias; .3.3-.4.1 add registry, compiled payload, and matching boundaries. The current local gate passes 60/60 on PUC Lua and LuaJIT."
+evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias; FUTURE-PARITY-BACKLOG.16.6 adds the exact punctuation-light statement/terminal-receiver boundary and passes 109/109 on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -36,6 +39,14 @@ user-function-shaped, and receiver-method forms append a final positional
 `block_value`, giving `call(args) { ... }` the same argument semantics as
 `call(args, { ... })`. Contract resolution later decides whether a resolved
 callable accepts that argument; the parser does not fall through to Lua globals.
+
+The punctuation-light boundary is deliberately contextual. Exact standalone
+`else`, `endif`, `default`, `endcase`, `endswitch`, and `next` statements produce
+the same zero-argument typed calls as their parenthesized twins. A generic receiver
+identifier may omit `()` only in the final chain segment. Expression-position
+`next` remains a variable, while general calls, condition-bearing `if`/`while`
+headers, intermediate bare receiver segments, and receiver calls with trailing
+blocks keep their existing parenthesized syntax.
 
 Lua source is admitted only as strict UTF-8, but stored spans are zero-based
 Unicode character offsets rather than byte offsets. `action_ast.to_json(node)`

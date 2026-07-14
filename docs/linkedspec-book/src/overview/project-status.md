@@ -60,8 +60,8 @@ Three backbone items tracked major structural modernization — all done:
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close at 108/108 through
   `.4.3.6.3.3`; built-in final blocks/scoped with `.4.3.6.4` are queued at a clean handoff while
-  the director-requested syntax lane runs. Neutral contract `.16.1`, Perl `.16.2`, Rust `.16.3`, Dart `.16.4`, and
-  Julia `.16.5` are complete; Lua `.16.6` is next.
+  the director-requested syntax lane runs. Neutral contract `.16.1` and all five backend implementations through
+  Lua `.16.6` are complete; public/capability closeout `.16.7` is next.
   Implicit child-push side effects are included in the closed Lua array family, but their expression result is not
   yet portable: Perl exposes its host push count and Lua exposes the updated implicit accumulator. Backlog `.5`
   owns normalization; current authoring uses implicit child push as a statement.
@@ -71,11 +71,11 @@ Three backbone items tracked major structural modernization — all done:
   support rather than five-backend parity. Neutral contract `.16.1` now locks six standalone and four receiver
   equivalences, retained value reads, exclusions, arity delegation, and one future fixture. Calibration `.16.2.0`
   corrected the required-argument example from `drop_front` to `contains` after subtracting the implicit receiver
-  slot. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, and Julia `.16.5` consume the aliases with typed AST
-  equivalence, unchanged exclusions, and exact native/generated execution; Rust additionally proves serialized/
-  emitted paths and Dart/Julia prove emitted-state reconstruction. Rust/Dart/Julia pre-existing `.contains()`
-  missing-argument outcomes are owned by helper backlog `.5`. `.16.6-.16.7` own remaining backend and
-  generated/public closeout. Parenthesis-free `if`/`while`
+  slot. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` consume the aliases with typed
+  AST equivalence, unchanged exclusions, and exact native execution; Rust additionally proves serialized/emitted
+  paths, Dart/Julia prove emitted-state reconstruction, and Lua proves public SpecFile JSON reconstruction on both
+  ABIs. Rust/Dart/Julia/Lua pre-existing `.contains()` missing-argument outcomes are owned by helper backlog `.5`.
+  Lua generated-source preservation remains `.8.1-.8.4`; `.16.7` owns public/capability closeout. Parenthesis-free `if`/`while`
   condition headers are explicitly outside this lane.
 - **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` now gate all 56 root/component/mdBook files at zero current examples.
 - **Structural, progressive, and staged authoring clarification** - typical `.spec` authoring uses small readable

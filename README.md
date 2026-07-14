@@ -67,11 +67,13 @@ This `README.md` is the **single entry point** to the project.
   Current built-in final blocks and scoped `with` `.4.3.6.4` are queued at a clean handoff while ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
-  required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, and Julia `.16.5` now consume the aliases
-  through typed AST plus exact native/generated execution; Rust also proves serialized and emitted-source paths,
-  while Dart and Julia prove emitted-state reconstruction. Lua `.16.6` is next. Rust, Dart, and Julia's pre-existing `.contains()`
+  required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
+  the aliases through typed AST plus exact native execution; Rust also proves serialized/emitted-source paths,
+  Dart and Julia prove emitted-state reconstruction, and Lua proves serialized SpecFile state on both ABIs.
+  Public/capability closeout `.16.7` is next. Rust, Dart, Julia, and Lua's pre-existing `.contains()`
   missing-argument outcomes remain a helper-semantics gap owned by `.5`, not a syntax
   exception.
+  Lua generated-source preservation remains with its existing `.8.1-.8.4` emitter/admission owner.
   Parenthesis-free condition-bearing `if`/`while` headers remain excluded. General user-function final blocks remain
   `.5.1`,
   and explicit callable codeblock values remain future `.11.7`. Copied harray construction,

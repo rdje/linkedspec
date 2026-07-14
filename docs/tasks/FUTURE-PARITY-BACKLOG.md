@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (Perl, Rust, Dart, and Julia consume the punctuation-light alias contract through
-  completed `.16.5`; Lua implementation `.16.6` is next, and built-in final blocks/scoped with `.4.3.6.4` remain queued at a
+- Last updated: `2026-07-13` (all five backends consume the punctuation-light alias contract through completed
+  Lua `.16.6`; public/capability no-drift closeout `.16.7` is next, and built-in final blocks/scoped with `.4.3.6.4` remain queued at a
   clean handoff point).
 - Owner: repo-local workflow
 
@@ -2209,7 +2209,7 @@ before implementation.
     a no-op, and Dart/Julia propagate it to rule repetition. Choose one exact limit and flow rule before portable
     specs rely on either boundary.
     Normalize required receiver-helper arity too: Perl rejects `.contains()` because the implicit receiver still
-    leaves one required authored argument, while Rust, Dart, and Julia currently default or otherwise accept the absent
+    leaves one required authored argument, while Rust, Dart, Julia, and Lua currently default or otherwise accept the absent
     needle and return numeric `0`. This is pre-existing helper semantics, not permission for a punctuation-light alias to
     differ from its parenthesized twin.
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
@@ -3331,24 +3331,36 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.6`
-  Status: `in_progress`
+  Status: `done`
   Goal: Align Lua's parser-ahead bare receiver behavior with the final-only contract and add all standalone aliases
     on both PUC Lua and LuaJIT without preempting the parked runtime leaf.
   Dependencies: `.16.1`, `.16.2`
   Acceptance: Lua normalizes all six standalone forms; generic bare receiver calls are accepted only in the final
     segment; existing rule/lifecycle control-marker suffixes and attached `else`/`default` remain valid; both ABIs
-    pass the neutral native/generated contract and negative diagnostics without changing `.4.3.6.4` runtime scope.
-  Verification: `pending`
-  Commit: `pending`
+    pass the neutral typed-AST, serialized-state, native execution, and negative-diagnostic contract without
+    changing `.4.3.6.4` runtime scope. Lua generated source does not yet exist and remains owned by
+    `LUA-BACKEND-PARITY.8.1-.8.4`; that later emitter must preserve the already-normalized typed state.
+  Verification: **PASS 2026-07-13.** Lua now normalizes all five structural markers in `parse_control(...)` and
+    exact bare `next` only while constructing a complete statement, preserving expression/value-position `next`
+    as a variable. The parser-ahead generic bare receiver path is narrowed from every segment to the terminal
+    segment and explicitly rejects a receiver trailing block without `()`. The neutral contract proves six
+    statement and four receiver semantic-AST equivalences, three retained identifiers, all six negative classes,
+    method-resolution twins, and the exact fixture after public SpecFile JSON serialization/reconstruction. The
+    fixture returns `{result: "yes", picked: "a", count: 2}` natively on PUC Lua 5.4 and LuaJIT. Both complete
+    local gates pass 109/109 plus corpus validation/scaffold checks. Lua's pre-existing `.contains()` no-needle
+    result remains `0` and joins Rust/Dart/Julia under helper owner `.5`. No Lua emitter exists; generated-source
+    preservation remains explicitly owned by `LUA-BACKEND-PARITY.8.1-.8.4`.
+  Commit: `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases`
 
 - ID: `FUTURE-PARITY-BACKLOG.16.7`
-  Status: `pending`
+  Status: `in_progress`
   Goal: Migrate current examples where useful and close mdBook, grammar, Knowledge Map, roadmap, generated-source,
     corpus, capability, and complete no-drift alignment.
   Dependencies: `.16.2`, `.16.3`, `.16.4`, `.16.5`, `.16.6`
   Acceptance: Current examples prefer the punctuation-light spelling where it improves readability; all public
     text clearly preserves parentheses for the general call grammar and condition headers; recurring scans and
-    complete backend gates prove no parser, generated, diagnostic, or documentation drift; `.16` closes.
+    complete backend gates prove no parser, available generated-source, diagnostic, or documentation drift; Lua's
+    future generated-source preservation remains explicitly owned by `LUA-BACKEND-PARITY.8.1-.8.4`; `.16` closes.
   Verification: `pending`
   Commit: `pending`
 
@@ -3486,6 +3498,22 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
   corpus 105/105. Parenthesized syntax and all excluded grammar classes are unchanged.
 - [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Lua `.16.6`; Julia's pre-existing
   `.contains()` zero-argument result is recorded with Rust/Dart under helper-normalization owner `.5`, not changed here.
+
+### `FUTURE-PARITY-BACKLOG.16.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua normalized only bare `else`/`otherwise`/`default`, left bare `next` as a value,
+  accepted generic bare receiver identifiers in every segment, and accepted `.with { ... }` without `()`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_parser.lua` used one unconditional identifier fallback inside
+  `parse_fluent_call(...)`, while block/public statement construction bypassed a shared statement-context seam.
+- [x] **FIX** — Normalize all five structural markers, route exact bare `next` only through shared statement-node
+  construction, and permit the generic identifier fallback only for a terminal non-block receiver segment.
+- [x] **ADDRESSED (verified)** — The neutral Lua contract proves six statement and four receiver typed-AST
+  equivalences, retained value reads, six negative classes, method twins, public SpecFile JSON reconstruction, and
+  exact native fixture output on PUC Lua and LuaJIT.
+- [x] **NO REGRESSION** — `luac -p` passes changed source/tests and the complete dual-ABI local gate passes 109/109
+  on each runtime plus corpus validation and the explicit unavailable-primary-CLI scaffold check.
+- [x] **LOCKSTEP / FINDINGS** — Public/task/KM state advances no-drift `.16.7`; Lua's `.contains()` result joins
+  Rust/Dart/Julia under `.5`, and absent Lua generated-source proof stays with `.8.1-.8.4` rather than being faked.
 
 ### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
 
@@ -4044,8 +4072,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 152 | `FUTURE-PARITY-BACKLOG.16.3` | `done` | Rust aliases and native/oracle/generated paths are exact; helper drift is delegated to `.5`. |
 | 153 | `FUTURE-PARITY-BACKLOG.16.4` | `done` | Dart aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
 | 154 | `FUTURE-PARITY-BACKLOG.16.5` | `done` | Julia aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
-| 155 | `FUTURE-PARITY-BACKLOG.16.6` | `in_progress` | Align Lua final-only receiver parsing and standalone aliases on both ABIs. |
-| 156 | `FUTURE-PARITY-BACKLOG.16.7` | `pending` | Close examples, book, grammar, KM, generated, capability, and no-drift alignment. |
+| 155 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
+| 156 | `FUTURE-PARITY-BACKLOG.16.7` | `in_progress` | Close examples, book, grammar, KM, available generated paths, capability, and no-drift alignment. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4510,6 +4538,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Decisions
 
+- `2026-07-13`: `.16.6` narrows Lua's parser-ahead identifier fallback instead of layering another exception over
+  it. Only a terminal receiver segment without a trailing block may omit `()`; exact bare `next` is a call only in
+  statement construction. Lua `.contains()` without a needle remains `0` like Rust/Dart/Julia and stays owned by
+  `.5`; `.16.6` changes syntax only.
+- `2026-07-13`: Lua `.16.6` cannot honestly claim generated-source execution because no Lua emitter exists yet.
+  `LUA-BACKEND-PARITY.8.1-.8.4` already owns deterministic emission, execution, and admission. This syntax leaf
+  therefore proves typed AST, serialized SpecFile/ActionIR state, and native behavior on PUC Lua/LuaJIT; later generated
+  source must preserve that normalized state without moving emitter architecture into `.16`.
 - `2026-07-13`: `.16.5` uses Julia's explicit statement and terminal-segment contexts rather than adding a new
   general call production. Bare `next` is a call only as a complete statement; value-position `next` remains a
   variable. A generic receiver identifier becomes a zero-argument call only when final. Julia's existing
@@ -4674,6 +4710,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.6` | Lua typed-AST/negative contract; public SpecFile JSON reconstruction; exact native fixture; `luac -p`; complete PUC Lua 109/LuaJIT 109/corpus-validation/scaffold gate; docs/KM/governance/whitespace. | PASS. Lua consumes/narrows the aliases without grammar broadening; `.contains()` drift is owned by `.5`; absent generated source remains `.8`; closeout `.16.7` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.5` | Julia 55-assertion typed-AST/negative contract; exact bare/parenthesized CLI twins; native/generated-plan/emitted-state fixture; complete 1,394-package/primary-CLI/corpus-105 gate; docs/KM/governance/whitespace. | PASS. Julia consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Lua `.16.6` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.4` | Dart typed-AST/negative contract; exact bare/parenthesized CLI twins; native/generated-plan/emitted-state fixture; format; strict analysis; complete 211-package/CLI 61x2/corpus 105 gate; docs/KM/governance/whitespace. | PASS. Dart consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Julia `.16.5` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.3` | Rust typed-AST/negative contract; exact rebuilt-CLI twins; native/serialized/emitted/generated fixture; complete 137/105-oracle/105-generated/197-integration/focused suites/CLI 61x2 gate; docs/KM/governance/whitespace. | PASS. Rust consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Dart `.16.4` activates. |
@@ -4789,6 +4826,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.16.6` | `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases` | Lua typed AST, statement-only bare next, terminal-only receiver narrowing, serialized/native dual-ABI fixture, and honest generated/helper routing. |
 | `FUTURE-PARITY-BACKLOG.16.5` | `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases` | Julia typed AST, statement-only bare next, final-only receivers, native/generated/emitted/CLI fixture, and helper-drift routing. |
 | `FUTURE-PARITY-BACKLOG.16.4` | `FUTURE-PARITY-BACKLOG.16.4 - implement Dart zero-argument aliases` | Dart typed AST, statement-only bare next, final-only receivers, native/generated/emitted/CLI fixture, and helper-drift routing. |
 | `FUTURE-PARITY-BACKLOG.16.3` | `FUTURE-PARITY-BACKLOG.16.3 - implement Rust zero-argument aliases` | Rust typed AST, exact statement boundaries, final-only receivers, native/serialized/emitted/generated fixture, and helper-drift routing. |
@@ -4904,6 +4942,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.16.6` completes Lua native parser/runtime convergence for punctuation-light aliases. All five
+  structural markers normalize bare, exact statement-context `next` adds the sixth without changing expression
+  reads, and the generic bare receiver fallback is narrowed from every segment to terminal non-block segments.
+  The contract proves typed ASTs, retained/negative classes, method twins, public SpecFile JSON reconstruction,
+  and the exact fixture natively on both Lua ABIs. Complete local gates pass 109/109 each. Lua's pre-existing
+  `.contains()` no-needle result joins Rust/Dart/Julia under `.5`. Since generated Lua source does not exist,
+  preservation/execution remains honestly owned by `.8.1-.8.4`; public/capability closeout `.16.7` becomes active.
 - `2026-07-13`: `.16.5` makes Julia consume the punctuation-light aliases at its typed parser seam. Existing
   control-head normalization covers five markers; exact statement-context `next` adds the sixth without changing
   expression/value reads. Final generic receiver identifiers synthesize the same empty argument list as `()`,

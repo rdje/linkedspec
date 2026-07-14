@@ -10,16 +10,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.5` — implemented zero-argument aliases on Julia.
-- latest_commit: `ec041e6c` — `FUTURE-PARITY-BACKLOG.16.4 - implement Dart zero-argument aliases`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.16.6`; implement the unchanged alias surface on Lua for both ABIs.
-- next_action: inspect Lua's parser-ahead broad bare-receiver behavior, standalone marker normalization, exact
-  statement context, generated/runtime routing, and neutral fixture before narrowing terminality and adding aliases.
-- current_proof: Julia maps six standalone and four terminal receiver aliases to parenthesized typed twins without
-  broadening conditions/calls; native, generated-plan, emitted-state, and CLI fixture output is exact. Complete
-  Julia gate passes 1,394 package assertions, primary CLI conformance, and corpus 105/105. Rust, Dart, and Julia's
-  pre-existing `.contains()` missing-argument outcomes are tracked under helper owner `.5`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.16.6` — implemented zero-argument aliases on Lua.
+- latest_commit: `665c41cd` — `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.16.7`; admit the five-backend syntax and close its no-drift surfaces.
+- next_action: audit capability/public examples and ADR status, admit only implemented execution paths, run the
+  recurring neutral contract plus focused five-backend checks, then close parent `.16` without claiming generated Lua.
+- current_proof: Lua maps six standalone and four terminal receiver aliases to parenthesized typed twins while
+  preserving value-position `next` and all excluded grammar classes. Typed AST, serialized `SpecFile`/ActionIR
+  reconstruction, and native execution return the exact fixture result; PUC Lua and LuaJIT each pass 109/109 plus
+  corpus/CLI scaffold checks. Lua has no generated-source emitter yet; `LUA-BACKEND-PARITY.8.1-.8.4` owns it.
+  Rust/Dart/Julia/Lua pre-existing `.contains()` missing-argument outcomes remain tracked under helper owner `.5`.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -29,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua built-in final blocks `.4.3.6.4`; parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.16.5` Julia implementation/task/book/KM/live-doc synchronization
+- blockers: none. in_flight_uncommitted: verified `.16.6` Lua implementation/task/book/KM/live-doc synchronization
   awaits its prepared commit. Oracle timeout calibration remains `.7.0`.

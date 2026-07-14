@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.6 — implement Lua zero-argument aliases
+
+Lua now recognizes exact bare `next` only as a complete statement, extends standalone control normalization to
+`endif`, `endcase`, and `endswitch`, and permits an omitted empty argument list only on the final generic receiver
+segment. Bare and parenthesized spellings produce identical semantic typed AST nodes; value-position `next`,
+condition headers, ordinary calls, intermediate receiver segments, and receiver trailing blocks retain their prior
+meanings or failures.
+
+The unchanged neutral fixture returns `{"count":2,"picked":"a","result":"yes"}` through typed AST, public
+`SpecFile` JSON reconstruction, and native execution. The complete Lua gate passes 109/109 on PUC Lua and 109/109
+on LuaJIT, plus corpus validation and exact CLI scaffold checks. Lua has no generated-source emitter yet; its
+separate `LUA-BACKEND-PARITY.8.1-.8.4` lane remains the owner of generated preservation and admission.
+
+Lua's pre-existing `.contains()` missing-argument result is `0`, like Rust, Dart, and Julia. The syntax alias
+preserves that parenthesized outcome and leaves helper normalization to `.5`. All five implementations are now
+complete; cross-backend public/capability/no-drift closeout `.16.7` is next.
+
 ## 2026-07-13 — FUTURE-PARITY-BACKLOG.16.5 — implement Julia zero-argument aliases
 
 Julia now recognizes exact bare `next` only as a complete statement and permits an omitted empty argument list

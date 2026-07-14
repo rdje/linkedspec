@@ -11,10 +11,10 @@ answers:
   - must Lua support generated source
   - what task implements the Lua backend
   - what is the first Lua backend task
-date: 2026-07-11
+date: 2026-07-13
 status: current
 tags: [lua, backend, parity, embedding, cli, corpus, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.3 creates docs/tasks/LUA-BACKEND-PARITY.md after generated-source .3 closes at 60/0/0. Read-only preflight finds PUC Lua 5.4.8, LuaJIT 2.1, and LPeg on both; LuaRocks, Busted, Luacheck, and StyLua are absent. The plan splits foundation, frontend, ActionIR/compiler, matching/runtime, staged/loading/capabilities, 105 corpus, exact CLI, and generated-source v1 before code."
+evidence: "FUTURE-PARITY-BACKLOG.1.3 creates docs/tasks/LUA-BACKEND-PARITY.md after generated-source .3 closes at 60/0/0. FUTURE-PARITY-BACKLOG.16.6 proves punctuation-light aliases through typed AST, serialized SpecFile/ActionIR reconstruction, and native execution on PUC Lua and LuaJIT; Lua generated-source ownership remains LUA-BACKEND-PARITY.8.1-.8.4."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -31,6 +31,11 @@ newline-only statement separation with semicolons only between same-line stateme
 generic final-codeblock equivalence, matching/cursor/capture semantics, staged functions, descriptors,
 diagnostics/trace, native resolution, 105/105 corpus, capability census, and generated-source v1 with ten families
 and exact 8/105 admission.
+
+Cross-backend syntax work may validate Lua today through the implemented typed AST,
+serialized `SpecFile`/ActionIR state, and native PUC Lua/LuaJIT execution. It must not
+claim a generated-Lua preservation path before the distinct generated-source lane
+`LUA-BACKEND-PARITY.8.1-.8.4` implements and admits that product surface.
 
 LPeg loads on both installed runtimes, but this does not make it the selected regex engine. Lua patterns and LPeg
 must be compared with the neutral regex/match-state fixtures; a native adapter is permissible if it preserves the

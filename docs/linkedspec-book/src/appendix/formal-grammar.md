@@ -423,11 +423,10 @@ Rule-edge and lifecycle fluent control-flow markers accept bare-keyword suffix f
 .else   .endif   .default   .endcase   .endswitch
 ```
 
-These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl, Rust, Dart, and
-Julia typed ActionIR parsers now accept standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and
-`next`, plus a final zero-argument receiver segment such as `.trim`. `FUTURE-PARITY-BACKLOG.16` owns convergence
-for Lua. Until that lane closes, parenthesized standalone markers and generic receiver calls remain the
-universal spelling.
+These suffixes are equivalent to their parenthesized forms `.else()`, `.endif()`, etc. The Perl, Rust, Dart, Julia,
+and Lua typed ActionIR parsers accept standalone bare `else`, `endif`, `default`, `endcase`, `endswitch`, and
+`next`, plus a final zero-argument receiver segment such as `.trim`. Parenthesized standalone markers and generic
+receiver calls remain valid.
 
 ADR 0033 deliberately keeps the exception narrow. Calls with arguments, general helper/user-function calls,
 intermediate generic receiver segments, and condition-bearing headers keep parentheses. In particular,
@@ -463,9 +462,10 @@ The versioned source of truth is
 `t/punctuation_light_zero_arg_contract.t`; Rust consumes its syntax/AST and execution cases through
 `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`; Dart consumes it through
 `dart/test/punctuation_light_zero_arg_contract_test.dart`; Julia consumes it through
-`julia/test/punctuation_light_zero_arg_contract_test.jl`. Rust, Dart, and Julia's pre-existing zero-argument
-`.contains()` outcomes are separately owned by helper-normalization backlog `.5`. Complete admission remains
-future until `FUTURE-PARITY-BACKLOG.16.6-.16.7` close.
+`julia/test/punctuation_light_zero_arg_contract_test.jl`; Lua consumes it inside `lua/test/run.lua` on both ABIs.
+Rust, Dart, Julia, and Lua's pre-existing zero-argument `.contains()` outcomes are separately owned by helper-
+normalization backlog `.5`. Lua proves public SpecFile JSON reconstruction rather than nonexistent generated
+source; `LUA-BACKEND-PARITY.8.1-.8.4` owns its future emitter. Final admission remains `.16.7`.
 
 ### 3.8 Conditional Markers
 

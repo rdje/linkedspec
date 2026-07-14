@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.6` — narrow Lua's parser-ahead fallback at its existing context): Lua's
+  fluent parser already accepted any identifier-only receiver segment, so the safe change was to pass segment
+  terminality into that fallback and reject both intermediate omissions and attached blocks. Exact trimmed `next`
+  is synthesized only by the shared statement constructor; expression parsing still produces a variable. Existing
+  control-head normalization was extended for the three missing structural markers. The public `SpecFile` JSON
+  reconstruction test proves serialized ActionIR and native execution consume the same nodes on PUC Lua and
+  LuaJIT. Preflight also corrected the task's preservation claim: Lua has no emitter today, so generated-source
+  proof remains with `LUA-BACKEND-PARITY.8.1-.8.4`, not this syntax leaf. Lua `contains` independently returns `0`
+  for an absent needle; syntax parity preserves the twin and leaves semantic normalization to `.5`.
+
 - 2026-07-13 (`FUTURE-PARITY-BACKLOG.16.5` — reuse Julia's existing statement and terminal-chain contexts): Julia
   already normalized five structural control heads, so adding a grammar-wide bare-call production would have
   broadened the language unnecessarily. Exact trimmed `next` is synthesized as the existing zero-argument call

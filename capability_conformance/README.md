@@ -77,8 +77,11 @@ emitted-source, generated-plan, and rebuilt-CLI fixture results. Dart consumes t
 and CLI fixture results. Julia consumes the same cases through
 `julia/test/punctuation_light_zero_arg_contract_test.jl`, including exact native, generated-plan, emitted-state,
 and CLI fixture results. Rust, Dart, and Julia's pre-existing `.contains()` missing-argument outcomes remain helper
-drift owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome.
-Complete backend admission remains future under `FUTURE-PARITY-BACKLOG.16.6-.16.7`.
+drift owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome. Lua consumes
+the same AST/negative/native fixture cases inside `lua/test/run.lua` on PUC Lua and LuaJIT, including public
+SpecFile JSON reconstruction; its matching `.contains()` drift is also owned by `.5`. Generated Lua source does
+not exist yet and remains owned by `LUA-BACKEND-PARITY.8.1-.8.4`. Final public/capability admission remains future
+under `FUTURE-PARITY-BACKLOG.16.7`.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
 changes. A bare identifier reads its current scalar, array, harray, or codeblock value; `set(name, value)` returns
