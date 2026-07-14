@@ -10,19 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.5.2` — executed zero-based Lua array-root callbacks.
-- latest_commit: `ce7fc354` — `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`.
-- active_work_unit: verified shared root-kind array callback execution; no-drift/dependency handoff
-  `.4.3.6.6` is the prepared clean-pivot frontier.
-- next_action: commit `.4.3.6.5.2`, verify a clean tree and zero-byte brief, then close block/control/callback public
-  no-drift and dependency routing under `.4.3.6.6`.
-- current_proof: One dispatcher retains lexical hash traversal and adds source-order arrays with zero-based
-  `index`/`path`; recursion follows only the receiver root kind, so cross-kind aggregates are leaves. Atomic copied
-  frames, walk/map continuation, terminal reduce, lazy empty/invalid behavior, and exact restoration remain exact.
-  Direct Perl/Lua array outputs agree; PUC Lua and LuaJIT pass 114/114. The current leaf's mandatory full local CI
-  exits 0 with capability 64/0/0, CLI 61/61 twice, and phase0 `1..1031` in 987 seconds.
-- latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.6` — closed Lua block/control/callback parity and later routing.
+- latest_commit: `b841c09a` — `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`.
+- active_work_unit: verified docs-only `.4.3.6.6` closeout; capture-slice/mark/input/cursor family `.4.3.7` is the
+  prepared clean-pivot frontier.
+- next_action: commit `.4.3.6.6`, verify a clean tree and zero-byte brief, then audit and split or implement the
+  dependency-ready capture/cursor helper family under `.4.3.7`.
+- current_proof: Eager blocks, inline/statement controls, metadata-governed `with`, and same-root-kind harray/array
+  callbacks pass 114/114 on PUC Lua and LuaJIT. Callable-codeblock and punctuation-light checkers pass; capability
+  census is 64/0/0; preceding full CI passes CLI 61/61 twice and phase0 `1..1031` in 987 seconds. `.5.1` explicitly
+  owns final `callback: codeblock` user-function execution; explicit callable literals/dynamic calls remain `.11.7`.
+- latest_bootstrap_read: 2026-07-13 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
@@ -31,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: fully gated `.4.3.6.5.2` Lua runtime/test/book/KM/live-doc closeout awaits
-  its prepared commit before clean pivot to `.4.3.6.6`. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: docs-only `.4.3.6.6` task/book/KM/live closeout awaits its prepared commit
+  before clean pivot to `.4.3.7`. Oracle timeout calibration remains `.7.0`.

@@ -705,7 +705,9 @@ absent uniform bindings restore after success, local return, and error. Callback
 `.4.3.6.5.1.0`: reference authored-value repair `.1.1` is done; `.1.2` adds atomic copied/restored callback frames
 and sorted harray walk/map/reduce at 113/113. `.5.2` shares the dispatcher with zero-based array-root traversal,
 recurse-only-same-kind semantics, and exact Perl-oracle behavior at 114/114 on both Lua ABIs. Tree callbacks are
-closed; no-drift/dependency routing `.4.3.6.6` is active.
+closed; no-drift/dependency routing `.4.3.6.6` closes the parent and advances capture-slice/mark/input/cursor
+helpers `.4.3.7`. General user-function final `callback: codeblock` declaration and contextual execution remain
+explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`

@@ -57,8 +57,8 @@ This `README.md` is the **single entry point** to the project.
   receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
   and exact copied tagged-record construction pass 99/99 on both ABIs. All 34 non-callback array names and six
-  numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, while the
-  three tree-callback names remain explicitly owned by active parent `.4.3.6`. Audit `.4.3.6.0` splits eager
+  numeric terminals are closed under `.4.3.4`; all 13 ordinary harray names are closed under `.4.3.5`, and the
+  three tree-callback names close under parent `.4.3.6`. Audit `.4.3.6.0` splits eager
   blocks, inline and statement controls, contextual built-ins/`with`, and deterministic tree callbacks before
   behavior code. Eager blocks, lazy inline `if`/`switch`, attached/marker if and switch statements, and attached
   `while` pass through `.4.3.6.3.3`: only selected branches execute, nested marker
@@ -71,7 +71,8 @@ This `README.md` is the **single entry point** to the project.
   callback work is split at `.4.3.6.5.1.0`: reference authored-value precedence repair `.4.3.6.5.1.1` is done;
   `.4.3.6.5.1.2` adds atomic copied/restored callback frames plus sorted harray walk/map/reduce at 113/113;
   `.4.3.6.5.2` shares that dispatcher with zero-based array-root traversal, recurses only through the receiver's
-  own root kind, and raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` is active. ADR `0033` and
+  own root kind, and raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent and
+  advances capture/mark/input/cursor helpers `.4.3.7`. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -82,9 +83,9 @@ This `README.md` is the **single entry point** to the project.
   missing-argument outcomes remain a helper-semantics gap owned by `.5`, not a syntax
   exception.
   Lua generated-source preservation remains with its existing `.8.1-.8.4` emitter/admission owner.
-  Parenthesis-free condition-bearing `if`/`while` headers remain excluded. General user-function final blocks remain
-  `.5.1`,
-  and explicit callable codeblock values remain future `.11.7`. Copied harray construction,
+  Parenthesis-free condition-bearing `if`/`while` headers remain excluded. General user-function final
+  `callback: codeblock` declaration/execution remains `.5.1`, and explicit callable codeblock values remain future
+  `.11.7`. Copied harray construction,
   runtime-kind `flat`, direct/
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass

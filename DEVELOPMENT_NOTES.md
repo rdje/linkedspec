@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.6` — a dependency handoff is incomplete until the destination acceptance
+  names the obligation): `.4.3.6` already said general user-function contextual blocks belonged to `.5.1`, but
+  `.5.1` described fixed/rest runtime calls without naming final `callback: codeblock` metadata or equivalent
+  attached/parenthesized execution. The closeout now records that requirement at `.5.1` itself, while keeping
+  explicit `{|params| ...}` literals and dynamic codeblock-variable calls under `.11.7`; this prevents a future
+  session from closing general function dispatch while silently omitting its contextual final block. Current
+  built-in scope is unchanged: eager blocks, controls, signature-governed `with`, and root-kind callbacks pass
+  114/114 on PUC Lua and LuaJIT. Callable and punctuation-light neutral checkers pass, capability census stays
+  64/0/0, and the preceding mandatory full gate passes CLI 61/61 twice plus phase0 `1..1031` in 987 seconds.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.2` — dispatch traversal by root kind, not by a synthetic mixed tree):
   The canonical array and harray methods share names and callback mechanics but do not share interior-node kinds.
   A hash root recurses only through hashes; an array root recurses only through arrays. Cross-kind aggregates are

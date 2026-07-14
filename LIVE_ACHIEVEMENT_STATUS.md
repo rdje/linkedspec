@@ -8,8 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.6 — close Lua block control callback parity**
+  (DONE — parent `.4.3.6` closes at 114/114 on both ABIs; capture/cursor `.4.3.7` active).
+
+  **Result:** Focused proof locks eager blocks, inline/statement controls, metadata-governed built-in final blocks,
+  cleanup-safe `with`, root-kind callbacks, and typed malformed boundaries at 114/114 on PUC Lua and LuaJIT.
+  Callable-codeblock/punctuation-light neutral checkers and capability 64/0/0 remain green; the preceding full gate
+  passes CLI 61/61 twice and phase0 `1..1031` in 987 seconds. `.5.1` now explicitly owns final
+  `callback: codeblock` declarations plus attached/parenthesized contextual user-function execution; `.11.7`
+  retains explicit literals/dynamic calls. No parser/runtime behavior changed.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.2 — execute Lua array callbacks**
-  (DONE — shared root-kind array walk/map/reduce pass 114/114 on both ABIs; no-drift `.4.3.6.6` active).
+  (DONE — shared root-kind array walk/map/reduce pass 114/114 on both ABIs; no-drift `.4.3.6.6` later closed).
 
   **Result:** One root-kind dispatcher now enumerates lexical harray keys or source-order array offsets translated
   to zero-based indexes, recursing only through children of the same kind. Array callbacks atomically scope copied

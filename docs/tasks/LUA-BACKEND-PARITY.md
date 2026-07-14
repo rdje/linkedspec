@@ -6,11 +6,10 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-13` (signature-governed built-in final blocks and copied/restored scoped `with` pass
-  112/112 through `.4.3.6.4`; `.4.3.6.5.1.1` repairs authored-value/optional-scope precedence on the Perl
-  reference with full 1,031-test phase0 proof; deterministic scoped Lua harray traversal `.4.3.6.5.1.2` passes
-  113/113 and shared root-kind array traversal `.4.3.6.5.2` closes at 114/114 on both ABIs; no-drift `.4.3.6.6`
-  is active; control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
+- Last updated: `2026-07-13` (block/control/contextual-built-in/tree-callback parent `.4.3.6` closes through
+  no-drift/dependency leaf `.4.3.6.6` at 114/114 on both ABIs; user-function final `callback: codeblock` execution
+  is explicit in `.5.1`, callable literals/dynamic calls remain `.11.7`, and capture/cursor family `.4.3.7` is
+  active; control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1342,7 +1341,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6`
-  Status: `active`
+  Status: `done`
   Goal: Execute immediate codeblock values, structured controls, contextual built-in blocks, and tree callbacks.
   Children: `.4.3.6.0`, `.4.3.6.1`, `.4.3.6.2`, `.4.3.6.3`, `.4.3.6.4`, `.4.3.6.5`, `.4.3.6.6`
   Dependencies: `.4.3.1`-`.4.3.5`
@@ -1351,8 +1350,15 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     array/harray walk/map/reduce callbacks match the governed surface; unsupported built-in block arities fail
     generically. General user-function invocation and its contextual final-codeblock path remain owned by `.5.1`;
     explicit callable literals and dynamic codeblock-variable calls remain owned by `FUTURE-PARITY-BACKLOG.11.7`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** Eager ordinary blocks, lazy inline controls, attached/marker if and switch,
+    attached while, metadata-governed helper/receiver `with`, and same-root-kind harray/array callbacks are exact
+    through `.1-.5`. Typed missing/wrong codeblock and arity diagnostics remain generic. `tools/run_lua_local.sh`
+    passes 114/114 on PUC Lua and LuaJIT plus syntax/corpus/process checks; callable-codeblock and punctuation-light
+    neutral checkers pass, capability census is 64/0/0, and the immediately preceding mandatory full local gate
+    passes both primary CLI environments at 61/61 plus phase0 `1..1031` in 987 seconds. `.6` aligns every public
+    surface and routes general user-function final `callback: codeblock` execution to `.5.1`, explicit callable
+    literals/dynamic calls to `FUTURE-PARITY-BACKLOG.11.7`, and generated preservation to `.8.1-.8.4`.
+  Commit: closed by `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.0`
   Status: `done`
@@ -1583,17 +1589,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.6`
-  Status: `active`
+  Status: `done`
   Goal: Close Lua immediate-block/control/contextual-built-in/tree-callback no-drift and dependency routing.
   Dependencies: `.4.3.6.2`, `.4.3.6.3`, `.4.3.6.4`, `.4.3.6.5`
   Acceptance: Focused dual-ABI proof, catalog/README/mdBook/KM/task/live state, and unsupported-block diagnostics
     agree; general user-function contextual blocks are explicitly handed to `.5.1`, explicit callable literals and
     dynamic codeblock calls to `FUTURE-PARITY-BACKLOG.11.7`, with no premature parity claim.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** The complete focused dual-ABI suite passes 114/114 and locks eager blocks,
+    inline/statement controls, built-in final-codeblock contracts, cleanup-safe `with`, root-kind tree callbacks,
+    typed unsupported final-kind/arity boundaries, and the punctuation-light exclusions. The independent callable-
+    codeblock checker passes 7 literals, 11 calls, 9 invalid literals, 7 invalid calls, 4 invalid declarations,
+    and 8 contextual forms; the punctuation-light checker passes 6 standalone, 4 receiver, and 6 excluded forms;
+    capability census remains 64/0/0. Public/catalog/book/KM/task/live state agrees. `.5.1` now explicitly owns
+    final `callback: codeblock` metadata and attached/parenthesized user-function execution; `.11.7` retains
+    `{|params| ...}` literals and dynamic codeblock-variable calls. No parser/runtime code changes in this leaf.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7`
-  Status: `pending`
+  Status: `active`
   Goal: Implement capture-slice, named-mark, input, and explicit cursor-state helper families.
   Dependencies: `.4.3.1`, `.4.3.6`
   Acceptance: Capture anchors/slices/boundaries, rule-local named marks, Unicode character positions/lengths,
@@ -1644,7 +1657,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     frames: fixed v1 calls remain exact; final-rest v2 calls are positional-only, require `min_arity`, evaluate once
     left-to-right, and bind extras as one fresh typed array without Lua vararg/closure dispatch. The unchanged
     neutral fixture, seven invalid definitions, keyword rejection, exact/minimum diagnostics, receiver continuation,
-    mixed/empty/fresh rest values, and recursion fence pass on PUC Lua and LuaJIT.
+    mixed/empty/fresh rest values, and recursion fence pass on PUC Lua and LuaJIT. Preserve a final
+    `callback: codeblock` declaration in spec-owned function signatures/registries and execute attached
+    and parenthesized contextual final blocks equivalently in the caller's dynamic context, with copied/restored
+    bindings and no harray promotion. Explicit `{|params| ...}` literals and dynamic codeblock-variable calls remain
+    routed through `FUTURE-PARITY-BACKLOG.11.7` to dependency-complete Lua owners.
   Verification: `pending`
   Commit: `pending`
 
@@ -1772,13 +1789,13 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
-All 34 ordinary array helper names and six numeric terminals are routed; only the three callback methods remain
-under `.4.3.6`. Cross-cutting caveats remain `FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
+All 34 ordinary array helper names and six numeric terminals are routed. Cross-cutting caveats remain
+`FUTURE-PARITY-BACKLOG.5`; harray audit `.4.3.5.0` split five
 mechanisms plus closeout. Construction/splicing, deterministic views/membership, and copied transforms/receiver
 chains and named mutation/direct assignment close all 13 ordinary harray names at 103/103 on both Lua ABIs.
-Codeblock/control/tree-callback parent `.4.3.6` is active. Eager blocks, control statements, signature-governed
-built-in final blocks, and scoped `with` are complete; the shared scoped callback frame and deterministic harray
-leaf traversal are the current executable frontier.
+Codeblock/control/tree-callback parent `.4.3.6` closes at 114/114 with later function/callable obligations routed
+explicitly. Capture-slice, named-mark, input, and cursor-state helper family `.4.3.7` is the current executable
+frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1852,7 +1869,29 @@ leaf traversal are the current executable frontier.
 | 68 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Valid authored value lists outrank optional-scope fallback; phase0 1,031 passes. |
 | 69 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `done` | Sorted scoped copied Lua harray walk/map/reduce pass 113/113 on both ABIs. |
 | 70 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `done` | Root-kind array traversal and zero-based scoped callbacks pass 114/114 on both ABIs. |
-| 71 | `LUA-BACKEND-PARITY.4.3.6.6` | `active` | Close block/control/callback no-drift and dependency routing. |
+| 71 | `LUA-BACKEND-PARITY.4.3.6.6` | `done` | Closed block/control/callback no-drift and routed later function/callable obligations exactly. |
+| 72 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
+
+### `LUA-BACKEND-PARITY.4.3.6.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Every executable child of `.4.3.6` was complete at 114/114, but the parent and public
+  surfaces still advertised an active closeout; `.5.1` was named as the user-function contextual-block handoff
+  without carrying that obligation in its own acceptance text.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.3.6.6` intentionally owned final no-drift and dependency routing after
+  runtime work, so parent/task/live/book status could not close earlier. The broad `.5.1` staged-function wording
+  covered calls generally but omitted the final `callback: codeblock` declaration/execution detail.
+- [x] **FIX** — Closed `.4.3.6`, made `.5.1` explicitly own spec-owned final codeblock metadata plus equivalent
+  attached/parenthesized contextual execution, retained explicit literals/dynamic calls under `.11.7`, preserved
+  generated obligations under `.8.1-.8.4`, and advanced only the dependency-ready `.4.3.7` frontier.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 114/114 on PUC Lua and LuaJIT; the callable-
+  codeblock checker passes 7 literals, 11 calls, 9 invalid literals, 7 invalid calls, 4 invalid declarations, and
+  8 contextual forms; the punctuation-light checker passes 6 standalone, 4 receiver, and 6 excluded forms.
+- [x] **NO REGRESSION** — Capability census remains 64/0/0. The immediately preceding mandatory full local CI gate
+  passes both primary CLI environments at 61/61 and phase0 `1..1031` in 987 seconds; this leaf changes no parser,
+  runtime, fixture, capability, or generated-source behavior.
+- [x] **LOCKSTEP** — Catalog/README/mdBook/KM/task/live/roadmap/memory surfaces agree that current built-in blocks
+  and callbacks are closed, user-function contextual final blocks remain `.5.1`, explicit callable values remain
+  `.11.7`, parenthesis-free condition headers remain excluded, and `.4.3.7` is next.
 
 ### `LUA-BACKEND-PARITY.4.3.6.5.2` Acceptance Checklist
 
@@ -2739,3 +2778,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values` | Central authored-value precedence, affected helper repair, callback runtime proof, and Lua handoff. |
 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks` | Atomic callback frames, sorted copied harray walk/map/reduce, exact Perl result, and array-root handoff. |
 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks` | Shared root-kind traversal, zero-based array callbacks, exact Perl result, and no-drift handoff. |
+| `LUA-BACKEND-PARITY.4.3.6.6` | `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity` | Dual-ABI no-drift, explicit user-function/callable/generated routing, parent closure, and capture/cursor handoff. |

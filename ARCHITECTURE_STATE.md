@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua block/control/contextual-built-in/tree-callback parent `.4.3.6` closes through
+  no-drift/dependency leaf `.4.3.6.6`. The focused dual-ABI gate remains 114/114; independent callable-codeblock
+  and punctuation-light contracts pass; capability census remains 64/0/0; and the preceding mandatory full local
+  gate passes CLI 61/61 twice plus phase0 `1..1031`. Current built-in final blocks remain metadata-governed by one
+  final `callback: codeblock` slot. General user-function declarations and contextual execution are explicitly
+  handed to `.5.1`, `{|params| ...}` literals/dynamic calls stay `.11.7`, generated preservation stays `.8.1-.8.4`,
+  and capture-slice/mark/input/cursor helpers `.4.3.7` are the next dependency-ready runtime family.
 - `2026-07-13` refresh: Lua array-root `walk_leaves`/`map_leaves`/`reduce_leaves` now reuse the harray callback
   frame through one receiver-root-kind dispatcher. Array children are visited by source order with Lua offsets
   translated to zero-based `index` and `path`; only nested arrays recurse, so harrays remain opaque leaves just as
   arrays remain leaves below harray roots. Kind-specific result construction preserves typed trees while shared
   walk/map/reduce control retains copied scope, continuation, terminality, and lazy invalid/empty boundaries. The
   exact checked-in Perl oracle result matches, the prior harray case remains green, and PUC Lua/LuaJIT pass 114/114.
-  Tree-callback parent `.4.3.6.5` closes and no-drift/dependency handoff `.4.3.6.6` is active.
+  Tree-callback parent `.4.3.6.5` closes and no-drift/dependency handoff `.4.3.6.6` subsequently closes `.4.3.6`.
 - `2026-07-13` refresh: Lua harray `walk_leaves`/`map_leaves`/`reduce_leaves` now execute through one atomic
   multi-binding scope frame. Lexically sorted keys drive depth-first recursion through harray interiors; arrays
   remain leaves; callback `path` is copied and `depth == count(path)`; `walk` preserves side effects and returns a

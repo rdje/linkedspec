@@ -133,17 +133,18 @@ dispatch rule.
   - On Lua, array/harray values are copied into `value`; the exact prior or absent uniform binding is restored even
     when the block or result copy fails.
 
-> **Corrective direction:** `with` is currently a special-cased MVP, not the final syntax abstraction. The language
-> model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
-> codeblock parameter using exact final-only `name: codeblock`, after which attached/contextual final-block forms normalize to the same call on helper,
+> **Current portability boundary:** The language model has scalar, array, harray/hash, and codeblock values. A
+> block-taking callable declares an exact final-only `name: codeblock` parameter, with no callback argument list;
+> attached/contextual final-block forms then normalize to the same call on helper,
 > user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
 > dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
 > checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
 > caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
 > declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
 > function, and receiver surfaces. Lua `.4.3.6.4` now consumes the same declaration for built-in helper/receiver
-> `with`, with cleanup-safe copied scope. Cross-backend parity remains future, so do not treat the parenthesized
-> form as portable yet.
+> `with`, with cleanup-safe copied scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general
+> user-function `callback: codeblock` execution remains `.5.1`, and explicit literals/dynamic calls remain `.11.7`.
+> Cross-backend parity remains future, so do not treat the parenthesized form as portable yet.
 
 ## 1. Working Variables and Setup
 

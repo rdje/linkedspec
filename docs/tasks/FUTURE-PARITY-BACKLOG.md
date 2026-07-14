@@ -4081,7 +4081,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 133 | `LUA-BACKEND-PARITY.4.3.5.3.1` | `done` | Copied merge/set/rename/drop/pick and receiver flow pass 102/102. |
 | 134 | `LUA-BACKEND-PARITY.4.3.5.4` | `done` | Named set-key/direct harray mutation share one seam and pass 103/103. |
 | 135 | `LUA-BACKEND-PARITY.4.3.5.5` | `done` | Exact ordinary inventory, public result guard, and callback handoff close at 103/103. |
-| 136 | `LUA-BACKEND-PARITY.4.3.6` | `active` | Execute eager blocks, controls, contextual built-ins, and tree callbacks without preempting user-function/callable owners. |
+| 136 | `LUA-BACKEND-PARITY.4.3.6` | `done` | Eager blocks, controls, contextual built-ins, callbacks, and exact later-owner routing close at 114/114. |
 | 137 | `LUA-BACKEND-PARITY.4.3.6.0` | `done` | Split parser-ahead runtime work into six mechanisms plus no-drift/dependency handoff. |
 | 138 | `LUA-BACKEND-PARITY.4.3.6.1` | `done` | Eager last values, local return, mutation, harray precedence, and receiver dispatch pass 104/104. |
 | 139 | `LUA-BACKEND-PARITY.4.3.6.2` | `done` | Lazy selected branches, one-time switch subjects, literal labels, arity diagnostics, and fluent returns pass 105/105. |
@@ -4093,7 +4093,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Preserve authored helper values before optional-scope fallback; phase0 1,031 passes. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `done` | Sorted scoped copied Lua harray walk/map/reduce pass 113/113 on both ABIs. |
 | 147 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `done` | Shared root-kind array callbacks pass 114/114 on both Lua ABIs. |
-| 148 | `LUA-BACKEND-PARITY.4.3.6.6` | `active` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
+| 148 | `LUA-BACKEND-PARITY.4.3.6.6` | `done` | Closed no-drift; `.5.1` owns user-function final blocks and `.11.7` retains explicit callable values. |
 | 149 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
 | 150 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |
 | 151 | `FUTURE-PARITY-BACKLOG.16.2` | `done` | Calibrated arity and aligned the Perl reference parser and execution surface. |
@@ -4104,6 +4104,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 156 | `FUTURE-PARITY-BACKLOG.16.5` | `done` | Julia aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
 | 157 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
 | 158 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
+| 159 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

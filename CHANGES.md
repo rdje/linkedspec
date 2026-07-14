@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.6 — close Lua block control callback parity
+
+Closed the Lua immediate-block/control/contextual-built-in/tree-callback parent without changing runtime code.
+The focused dual-ABI gate remains 114/114 and covers eager ordinary blocks, lazy inline controls, attached/marker
+if and switch, attached while, metadata-governed helper/receiver `with`, same-root-kind harray/array callbacks,
+cleanup-safe copied scope, and typed missing/wrong-block/arity boundaries. The independent callable-codeblock and
+punctuation-light neutral contracts pass, capability census remains 64/0/0, and the immediately preceding full
+local gate passes CLI 61/61 twice plus phase0 `1..1031` in 987 seconds.
+
+Dependency routing is now explicit at the destination: `.5.1` owns spec-owned final `callback: codeblock`
+declarations and equivalent attached/parenthesized contextual user-function execution; `.11.7` retains explicit
+`{|params| ...}` literals and dynamic codeblock-variable calls; generated preservation remains `.8.1-.8.4`.
+Parenthesis-free condition-bearing `if`/`while` headers remain excluded. Parent `.4.3.6` closes and capture-slice,
+named-mark, input, and cursor-state helper family `.4.3.7` becomes active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.2 — execute Lua array callbacks
 
 Lua now executes array-root `walk_leaves`, `map_leaves`, and `reduce_leaves` through the same callback machinery as
@@ -19,7 +34,7 @@ laziness, continuation/terminality, and exact outer-frame restoration. It reprod
 result; the existing sorted harray test remains green under the generalized dispatcher. `bash tools/run_lua_local.sh`
 passes 114/114 on PUC Lua and LuaJIT plus syntax, corpus, and process checks. Tree-callback parent `.4.3.6.5` closes;
 the mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and
-phase0 `1..1031` green in 987 seconds. No-drift/dependency handoff `.4.3.6.6` is active.
+phase0 `1..1031` green in 987 seconds. No-drift/dependency handoff `.4.3.6.6` subsequently closes the parent.
 
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.2 — execute Lua harray callbacks
 
