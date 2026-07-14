@@ -701,8 +701,9 @@ rule-attributed guard fails only when the condition remains true after the confi
 timing and Rust/Dart/Julia `next` drift join backlog `.5`. Built-in final blocks/scoped `with` then raise both Lua
 ABIs to 112/112: copied signature metadata admits attached and parenthesized helper/receiver forms; the optional
 value or receiver evaluates first; copied results continue through compatible receiver chains; and exact prior or
-absent uniform bindings restore after success, local return, and error. Scoped callback-frame/harray traversal
-`.4.3.6.5.1` is active. ADR `0033` and `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
+absent uniform bindings restore after success, local return, and error. Callback work is split at
+`.4.3.6.5.1.0`: reference append-RHS scope repair `.1.1` precedes Lua harray execution `.1.2`. ADR `0033` and
+`FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`
 are complete at 64/0/0 with one recurring five-backend/two-Lua-ABI command. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
 separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs; generated

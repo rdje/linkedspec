@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.0 — split callback append scope repair**
+  (DONE — root cause and two commit-sized owners recorded; reference repair `.4.3.6.5.1.1` active).
+
+  **Result:** Typed AST inspection proves callback `key` survives parsing inside `seen += cat(key, "@", depth)`.
+  The shared optional-scope normalizer later removes that authored first bare value because `cat` remains arity-
+  valid without it; the same two-argument call cannot be stripped. The callback frame and append operator are not
+  the cause. Reference repair `.1.1` now precedes Lua harray traversal `.1.2`. Preflight also corrects callback
+  depth to `count(path)` (root 1). No runtime changed; Lua remains green at the committed 112/112 boundary.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.4 — execute Lua built-in final blocks**
   (DONE — metadata-governed helper/receiver `with` and cleanup-safe scope pass 112/112 on both ABIs;
   callback-frame/harray traversal `.4.3.6.5.1` active).

@@ -1004,7 +1004,7 @@ dispatch rule.
   - `value`: current leaf value.
   - `key`: current leaf key.
   - `path`: array value containing root-to-leaf path segments.
-  - `depth`: zero-based leaf depth.
+  - `depth`: number of path segments (`count(path)`); a root leaf has depth 1.
   - `acc`: current accumulator for `reduce_leaves` only.
 - **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
   completes. Mutations to other working variables are ordinary side effects and persist.

@@ -4089,7 +4089,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 141 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 142 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
 | 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `pending` | Resume current built-in final blocks and scoped with after the clean director-requested syntax pivot. |
-| 144 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `pending` | Add scoped callback frames and deterministic harray leaf traversal. |
+| 144 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Split the reproduced reference append-RHS scope collision from Lua harray traversal. |
+| 145 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `active` | Preserve authored callback values before Lua harray implementation `.1.2`. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
 | 146 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 147 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |

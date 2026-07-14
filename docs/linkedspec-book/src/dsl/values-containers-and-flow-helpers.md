@@ -306,8 +306,8 @@ leaf for side effects and returns the original hash tree. `map_leaves() { ... }`
 leaf replaced by the block result. `reduce_leaves(initial) { ... }` folds leaves into an accumulator and returns the
 final accumulator. Traversal is stable sorted-key depth-first order. The block gets scoped scalar bindings:
 `value` for the current leaf, `key` for the current key, `path` for an array of path segments from the root, `depth`
-for the zero-based leaf depth, and `acc` for `reduce_leaves` only. Those scoped bindings are restored after each
-callback.
+for the number of path segments (so a root leaf has depth 1), and `acc` for `reduce_leaves` only. Those scoped
+bindings are restored after each callback.
 
 ```text
 tree = { "a" : "A", "b" : { "y" : "B" }, "arr" : ["u", "v"] };

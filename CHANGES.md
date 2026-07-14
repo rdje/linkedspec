@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.0 — split callback append scope repair
+
+Lua harray traversal preflight exposed a reference lowering defect before the new backend could copy it. The typed
+ActionIR AST preserves `seen += cat(key, "@", depth)` exactly, but `cat` then spends the shared legacy optional-
+scope normalizer: because three arguments remain arity-valid after removal, the authored bare `key` value is
+mistaken for a scope label and silently dropped. The equivalent two-argument call retains `key`, explaining the
+apparently callback-specific inconsistency. Append assignment only exposes the defect; it does not cause it.
+
+The active harray leaf is now a container with independently committable reference repair `.4.3.6.5.1.1` and Lua
+implementation `.4.3.6.5.1.2`. The same executable preflight establishes the real public depth contract as
+`depth == count(path)`: root harray leaves have depth 1, not zero. No runtime behavior changes in this split;
+the committed 112/112 dual-ABI Lua proof remains authoritative.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.4 — execute Lua built-in final blocks
 
 Lua now uses one copied callable-metadata registry for every current built-in final `codeblock` slot: helper

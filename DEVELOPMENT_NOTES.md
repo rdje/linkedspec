@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.5.1.0` — a callback-looking loss can be a generic arity normalizer):
+  `parse_action_expr` proves `seen += cat(key, "@", depth)` retains `key` in the nested call AST. The later `cat`
+  lowerer invokes `_normalize_method_args_with_optional_scope(..., 2, undef)`, whose count-based rule strips any
+  first bare identifier when the remainder is still valid. Thus three-argument `cat` loses `key`, while two-
+  argument `cat(key, "!")` does not. The callback frame is correct and append only reveals the generic collision.
+  Repair the reference value-helper boundary before copying behavior into Lua; preserve unrelated accepted scope
+  forms. The same source/runtime audit shows tree callback `depth` is path length (root 1), despite stale zero-based
+  mdBook prose. Separate owners `.4.3.6.5.1.1` and `.4.3.6.5.1.2` keep repair and Lua execution independently
+  verifiable.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.6.4` — context decides whether braces execute eagerly): Lua's parser uses
   the same structural `block_value` for an ordinary expression block and a contextual final argument. The runtime
   must therefore consult callable signature metadata before generic argument evaluation: helper/receiver `with`

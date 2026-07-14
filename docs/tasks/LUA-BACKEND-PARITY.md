@@ -7,8 +7,9 @@
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (signature-governed built-in final blocks and copied/restored scoped `with` pass
-  112/112 through `.4.3.6.4`; scoped callback frames and deterministic harray traversal `.4.3.6.5.1` are active;
-  control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
+  112/112 through `.4.3.6.4`; `.4.3.6.5.1.0` splits a newly reproduced Perl callback append-RHS defect from
+  Lua harray traversal, with reference repair `.4.3.6.5.1.1` active; control comparison/range/alias/truthiness/
+  loop drift remains routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1491,9 +1492,43 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1`
   Status: `active`
   Goal: Implement the scoped callback frame and deterministic harray leaf traversal.
+  Children: `.4.3.6.5.1.0`, `.4.3.6.5.1.1`, `.4.3.6.5.1.2`
   Dependencies: `.4.3.6.4`
   Acceptance: Lexically sorted harray keys produce stable path/value bindings; walk side effects, mapped copies,
     and typed reduce accumulation match the governed contract without leaking callback locals or aliasing sources.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5.1.0`
+  Status: `done`
+  Goal: Split the reproduced Perl callback append-RHS defect from Lua harray behavior before implementation.
+  Dependencies: `.4.3.6.4`
+  Acceptance: Use the toolbox and typed AST dump to locate the exact corruption boundary; give the reference repair
+    and Lua traversal separate commit-sized owners; record the public depth contract from executable evidence.
+  Verification: **PASS 2026-07-13.** The typed AST preserves `cat(key, "@", depth)` intact inside `seen += ...`,
+    but `MethodLowering` passes the call through the legacy optional-scope normalizer. With three `cat` arguments,
+    its first bare value is stripped as a supposed scope label; the same call in a two-argument return stays intact.
+    Perl/Rust traversal source and direct execution also establish `depth == count(path)` (root leaf 1), contrary
+    to the mdBook's stale "zero-based depth" wording. Reference repair `.1.1` precedes Lua implementation `.1.2`.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5.1.1`
+  Status: `active`
+  Goal: Stop callback append RHS values from being consumed as legacy optional scope labels.
+  Dependencies: `.4.3.6.5.1.0`
+  Acceptance: `cat(key, ...)` and comparable value helpers retain every authored bare first argument inside
+    `+=` callback side effects; direct helper behavior stays unchanged, typed AST/lowering/runtime tests lock the
+    exact source location, and accepted optional-scope forms outside the affected value-helper path do not change.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6.5.1.2`
+  Status: `pending`
+  Goal: Implement the shared scoped callback frame and deterministic Lua harray leaf traversal.
+  Dependencies: `.4.3.6.5.1.1`
+  Acceptance: Lexically sorted harray keys produce stable copied `value`/`key`/`path`/`depth` bindings; walk side
+    effects, mapped copies, and typed reduce accumulation match the corrected reference contract without leaking
+    callback locals or aliasing sources. Public docs define depth as `count(path)`, so a root leaf has depth 1.
   Verification: `pending`
   Commit: `pending`
 
@@ -1772,7 +1807,24 @@ leaf traversal are the current executable frontier.
 | 64 | `LUA-BACKEND-PARITY.4.3.6.3.2` | `done` | One-time attached/marker switch selection and typed malformed diagnostics pass 107/107. |
 | 65 | `LUA-BACKEND-PARITY.4.3.6.3.3` | `done` | State-visible loops, local/action return, next, and typed exact-limit safety pass 108/108. |
 | 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with`, copied scope, restoration, chaining, and typed failures pass 112/112. |
-| 67 | `LUA-BACKEND-PARITY.4.3.6.5.1` | `active` | Implement the shared scoped callback frame and deterministic harray leaf traversal. |
+| 67 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Root-cause and split callback append scope repair from Lua harray traversal. |
+| 68 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `active` | Preserve authored bare first values in callback append RHS helpers. |
+
+### `LUA-BACKEND-PARITY.4.3.6.5.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — A direct Perl traversal probe returned correct callback `key` values except when
+  `cat(key, ...)` appeared inside an append RHS, where the first value vanished.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The typed AST keeps all arguments. `MethodLowering` then sends variadic `cat`
+  through `MethodExpr::_normalize_method_args_with_optional_scope`, which strips a first bare identifier whenever
+  the remaining count is still valid. Three arguments trigger the collision; two do not.
+- [x] **FIX** — Split reference repair `.4.3.6.5.1.1` from Lua scoped harray execution `.4.3.6.5.1.2` before either
+  behavior change. Record the exact cause and the executable `depth == count(path)` contract durably.
+- [x] **ADDRESSED (verified)** — AST dumps, generated Perl lowering, direct runtime output, and current Perl/Rust
+  traversal sources agree on the two findings; task/roadmap/book/KM/live surfaces point at the two new owners.
+- [x] **NO REGRESSION** — No runtime, parser, test, fixture, capability, or generated-source behavior changed;
+  task metadata, memory, Knowledge Map, doctrines, mdBook build, and whitespace checks pass.
+- [x] **LOCKSTEP** — Public depth prose now says root 1/path length; reference repair `.1.1` is the clean frontier
+  before Lua implementation `.1.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.5.3.0` Acceptance Checklist
 
@@ -2583,3 +2635,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.6.0` | `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms` | Parser-ahead runtime work split from general function and callable-value owners. |
 | `LUA-BACKEND-PARITY.4.3.6.1` | `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values` | Last/local-return values, mutation, harray precedence, receiver dispatch, and contextual-block separation. |
 | `LUA-BACKEND-PARITY.4.3.6.2` | `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls` | Selected-only if/switch values, one-time subjects, literal labels, diagnostics, truthiness routing, and fluent return. |
+| `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair` | Root cause, separate reference/Lua owners, corrected path-length depth contract, and no behavior change. |

@@ -10,17 +10,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.4` — executed built-in final blocks and scoped `with`.
-- latest_commit: `4a2adda9` — `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.4 - execute Lua built-in final blocks`.
-- active_work_unit: verified `.4.3.6.4` closeout; `.4.3.6.5.1` is the prepared clean-pivot frontier.
-- next_action: commit `.4.3.6.4`, verify a clean tree and zero-byte brief, then implement the shared scoped callback
-  frame and deterministic harray leaf traversal under `.4.3.6.5.1`.
-- current_proof: Copied built-in metadata governs helper/receiver `with` and later tree callbacks. Attached and
-  parenthesized `with` forms execute identically through copied/restored uniform scope; prior/absent bindings
-  restore after success, local return, callback error, and result-copy error. PUC Lua and LuaJIT pass 112/112 plus
-  corpus/CLI scaffolding; Perl toolbox lowering/execution agrees. Capability remains 64/0/0 because complete
-  cross-backend generic callable blocks are still future.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.6.5.1.0` — split callback append scope repair from Lua traversal.
+- latest_commit: `ce310aed` — `LUA-BACKEND-PARITY.4.3.6.4 - execute Lua built-in final blocks`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair`.
+- active_work_unit: verified planning/root-cause split; reference repair `.4.3.6.5.1.1` is the prepared clean-pivot
+  frontier before Lua harray execution `.4.3.6.5.1.2`.
+- next_action: commit `.4.3.6.5.1.0`, verify a clean tree and zero-byte brief, then stop `cat(key, ...)` callback
+  append RHS values from being consumed as optional scope labels under `.4.3.6.5.1.1`.
+- current_proof: Typed AST preserves `seen += cat(key,"@",depth)`; Perl lowering drops `key` only when `cat`'s
+  shared optional-scope normalizer can remove a bare first argument without violating arity. Two-argument `cat`
+  retains it. Tree callback `depth` is `count(path)` (root 1), not zero-based. No runtime changed; committed Lua
+  PUC/LuaJIT proof remains 112/112 and capability 64/0/0.
 - latest_bootstrap_read: 2026-07-12 — full roadmap/codebase/mdBook continuity revalidated through the current delta;
   complete facade/lazy import tree and all active scalar-text runtime/test/doc surfaces inspected.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -30,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.4.3.6.4` runtime/test/public/task/KM/live-doc closeout awaits
-  its prepared commit before the required clean pivot to `.4.3.6.5.1`. Oracle timeout calibration remains `.7.0`.
+- blockers: none. in_flight_uncommitted: verified `.4.3.6.5.1.0` task split/KM/live-doc closeout awaits its prepared
+  commit before the required clean pivot to reference repair `.4.3.6.5.1.1`. Oracle timeout calibration remains `.7.0`.

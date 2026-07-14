@@ -11,8 +11,9 @@ This document is the current high-level technical reading of the project shape. 
   chains continue. A protected scoped-binding module snapshots all private stores before mutation, copies the
   temporary uniform `value` and result inside `pcall`, restores exact prior/absent state unconditionally, then
   rethrows the original failure. This distinguishes contextual blocks from ordinary eager braces without changing
-  parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback behavior reuses the metadata/scope seam under
-  active `.4.3.6.5.1`; user-function blocks and first-class callable values keep their separate owners.
+  parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback work is split under `.4.3.6.5.1.0`: Perl
+  append-RHS scope repair `.4.3.6.5.1.1` precedes Lua harray execution
+  `.4.3.6.5.1.2`; user-function blocks and first-class callable values keep their separate owners.
 - `2026-07-13` refresh: Lua's indexed statement executor now dispatches attached while through a dedicated lazy
   loop seam. Body validation precedes condition evaluation; body mutations feed the next condition; false initial,
   action return, expression-block-local return, and Perl-reference inner-loop `next()` are exact. The configured

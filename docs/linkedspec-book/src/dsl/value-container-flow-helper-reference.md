@@ -936,7 +936,7 @@ During each callback the runtime binds scoped scalars:
 | `value` | current leaf value. |
 | `key` | current leaf key. |
 | `path` | array value containing root-to-leaf path segments. |
-| `depth` | zero-based leaf depth. |
+| `depth` | number of path segments (`count(path)`); a root leaf has depth 1. |
 | `acc` | current accumulator, for `reduce_leaves` only. |
 
 The scoped callback bindings are restored after each callback and after traversal completes. Ordinary side effects
