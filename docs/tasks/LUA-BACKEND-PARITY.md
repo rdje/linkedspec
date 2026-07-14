@@ -8,8 +8,9 @@
 - Created: `2026-07-11`
 - Last updated: `2026-07-13` (signature-governed built-in final blocks and copied/restored scoped `with` pass
   112/112 through `.4.3.6.4`; `.4.3.6.5.1.1` repairs authored-value/optional-scope precedence on the Perl
-  reference with focused AST plus full 1,031-test phase0 proof; Lua scoped harray execution `.4.3.6.5.1.2` is
-  active; control comparison/range/alias/truthiness/loop drift remains routed to backlog `.5`)
+  reference with full 1,031-test phase0 proof; deterministic scoped Lua harray traversal `.4.3.6.5.1.2` passes
+  113/113 on both ABIs; array-root and mixed-tree extension `.4.3.6.5.2` is active; control comparison/range/alias/
+  truthiness/loop drift remains routed to backlog `.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1490,14 +1491,19 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement the scoped callback frame and deterministic harray leaf traversal.
   Children: `.4.3.6.5.1.0`, `.4.3.6.5.1.1`, `.4.3.6.5.1.2`
   Dependencies: `.4.3.6.4`
   Acceptance: Lexically sorted harray keys produce stable path/value bindings; walk side effects, mapped copies,
     and typed reduce accumulation match the governed contract without leaking callback locals or aliasing sources.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** `.1.0` localized and split the reference argument-loss defect, `.1.1`
+    repaired authored-value precedence before optional-scope fallback, and `.1.2` executes deterministic Lua
+    harray callbacks through one copied/restored frame. Both Lua ABIs pass 113/113 with an exact Perl-reference
+    output lock. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments
+    at 61/61, and phase0 `1..1031` green in 983 seconds. Array-root and mixed-tree traversal remain independently
+    owned by `.4.3.6.5.2`.
+  Commit: closed by `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.0`
   Status: `done`
@@ -1530,17 +1536,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement the shared scoped callback frame and deterministic Lua harray leaf traversal.
   Dependencies: `.4.3.6.5.1.1`
   Acceptance: Lexically sorted harray keys produce stable copied `value`/`key`/`path`/`depth` bindings; walk side
     effects, mapped copies, and typed reduce accumulation match the corrected reference contract without leaking
     callback locals or aliasing sources. Public docs define depth as `count(path)`, so a root leaf has depth 1.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-13.** `runtime_scoped_binding.run_frame` snapshots all three private stores for
+    ordered `value`/`key`/`path`/`depth` and optional `acc` bindings, copies inputs/results, restores every prior
+    or absent value in reverse frame order after success or error, and preserves the existing one-binding `with`
+    API. Lua walks harray interiors by lexical key order, treats every non-harray value (including arrays) as a
+    leaf, maps into new typed harrays, preserves walk side effects while returning a source copy, threads copied
+    typed reduce results, defines depth as path length, keeps reduce terminal, and returns null for non-harray
+    receivers without evaluating initial/callback expressions. Empty trees run no callbacks. Focused proof covers
+    source/result isolation, exact outer binding restoration, missing/wrong block and arity diagnostics, and the
+    exact Perl output `[{...},"a@1;arr@1;y@2;",3,["a@1","arr@1","y@2"]]`. PUC Lua and LuaJIT pass 113/113.
+    The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61,
+    and phase0 `1..1031` green in 983 seconds.
+  Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks`
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Extend leaf traversal to arrays and close mixed-tree callback continuation.
   Dependencies: `.4.3.6.5.1`
   Acceptance: Zero-based array path components preserve element order across arrays, harrays, and mixed nesting;
@@ -1816,7 +1832,27 @@ leaf traversal are the current executable frontier.
 | 66 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with`, copied scope, restoration, chaining, and typed failures pass 112/112. |
 | 67 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Root-cause and split callback append scope repair from Lua harray traversal. |
 | 68 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Valid authored value lists outrank optional-scope fallback; phase0 1,031 passes. |
-| 69 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `active` | Implement scoped deterministic Lua harray callback execution. |
+| 69 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `done` | Sorted scoped copied Lua harray walk/map/reduce pass 113/113 on both ABIs. |
+| 70 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `active` | Extend traversal through array roots and mixed trees. |
+
+### `LUA-BACKEND-PARITY.4.3.6.5.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Built-in callback signatures were admitted, but all three traversal receivers still
+  failed as unsupported at runtime and the one-name scope helper could not install one atomic callback frame.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Fluent dispatch recognized final codeblocks but routed every non-`with`
+  contract to the unsupported path. `runtime_scoped_binding.run` only scoped `value`; no deterministic harray
+  walker installed copied `value`/`key`/`path`/`depth`/`acc` bindings or consumed callback results.
+- [x] **FIX** — Added atomic multi-binding frames and sorted recursive harray walk/map/reduce execution, preserving
+  arrays as leaves, root depth 1, mapped/source isolation, walk continuation, and reduce terminality.
+- [x] **ADDRESSED (verified)** — The Lua case locks sorted nested and empty trees, typed accumulator flow, copied
+  paths/results, persistent non-frame side effects, exact restoration, neutral invalid receivers, typed malformed
+  calls, and the exact Perl reference result from a direct `LinkedSpec::Get` probe.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes syntax, corpus/process checks, and 113/113 on both
+  PUC Lua and LuaJIT; the existing scoped `with` proof still consumes the preserved one-binding API. The mandatory
+  full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0
+  `1..1031` green in 983 seconds.
+- [x] **LOCKSTEP** — Public hash-tree docs, Lua README/handoff/status, Knowledge Map, task/index/roadmaps, live docs,
+  and memory record harray closure and the active array/mixed successor `.4.3.6.5.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.6.5.1.1` Acceptance Checklist
 
@@ -2663,3 +2699,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.6.2` | `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls` | Selected-only if/switch values, one-time subjects, literal labels, diagnostics, truthiness routing, and fluent return. |
 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair` | Root cause, separate reference/Lua owners, corrected path-length depth contract, and no behavior change. |
 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values` | Central authored-value precedence, affected helper repair, callback runtime proof, and Lua handoff. |
+| `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks` | Atomic callback frames, sorted copied harray walk/map/reduce, exact Perl result, and array/mixed handoff. |

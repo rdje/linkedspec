@@ -2709,20 +2709,31 @@ test("scoped runtime bindings restore every store on success and error", functio
   )
 
   local absent = { variables = {}, arrays = {}, harrays = {} }
+  local scoped_names = { "value", "key", "path", "depth", "acc" }
   local marker = {}
   local ok, failure = pcall(function()
-    runtime_scoped_binding.run(absent, "value", "temporary", scoped_copy, function()
-      absent.variables.value = "changed"
-      absent.arrays.value = json.array({ "changed" })
-      absent.harrays.value = json.harray({ changed = true })
+    runtime_scoped_binding.run_frame(absent, {
+      { name = "value", value = "temporary" },
+      { name = "key", value = "a" },
+      { name = "path", value = json.array({ "a" }) },
+      { name = "depth", value = 1 },
+      { name = "acc", value = json.array({ "seed" }) },
+    }, scoped_copy, function()
+      for _, name in ipairs(scoped_names) do
+        absent.variables[name] = "changed"
+        absent.arrays[name] = json.array({ "changed" })
+        absent.harrays[name] = json.harray({ changed = true })
+      end
       error(marker, 0)
     end)
   end)
   assert_equal(ok, false, "callback error propagates")
   assert_equal(failure, marker, "callback error identity is preserved")
-  assert_equal(absent.variables.value, nil, "absent scalar binding remains absent after error")
-  assert_equal(absent.arrays.value, nil, "absent array binding remains absent after error")
-  assert_equal(absent.harrays.value, nil, "absent harray binding remains absent after error")
+  for _, name in ipairs(scoped_names) do
+    assert_equal(absent.variables[name], nil, "absent " .. name .. " scalar remains absent after frame error")
+    assert_equal(absent.arrays[name], nil, "absent " .. name .. " array remains absent after frame error")
+    assert_equal(absent.harrays[name], nil, "absent " .. name .. " harray remains absent after frame error")
+  end
 end)
 
 test("runtime with executes equivalent final codeblock spellings in copied scope", function()
@@ -2833,6 +2844,150 @@ return({
   assert_equal(error_ok, false, "with callback errors propagate")
   assert_equal(linkedspec.is_runtime_interpreter_error(error_failure), true, "with callback failure stays typed")
   assert_equal(error_failure.status, 86, "with callback failure stays exact")
+end)
+
+test("runtime harray traversal is sorted scoped copied and terminal where required", function()
+  local source = uniform_binding_action_source([[
+value = "outer-value"
+key = "outer-key"
+path = "outer-path"
+depth = "outer-depth"
+acc = "outer-acc"
+source = {
+  "b" : { "y" : "B" },
+  "a" : "A",
+  "arr" : ["u", "v"],
+  "empty" : {}
+}
+mapped = source.map_leaves() {
+  callback_label = cat(key, "@", depth)
+  callback_path = copy(path)
+  if(str_eq(key, "arr")) { value += "callback" }
+  key = "inner-key"
+  path = ["inner-path"]
+  depth = 99
+  return({ "label" : callback_label, "path" : callback_path, "value" : value })
+}
+seen = []
+walk_count = source.walk_leaves() {
+  seen += cat(key, "@", depth)
+  value = "walk-local"
+  key = "walk-key"
+  path = ["walk-path"]
+  depth = 88
+  return(value)
+}.count_keys()
+reduced = source.reduce_leaves([]) {
+  acc += cat(key, "@", depth)
+  return(acc)
+}
+reduce_continuation_is_null = is_undefined(source.reduce_leaves("") { return(acc) }.trim())
+empty = {}
+seed = ["seed"]
+empty_map = empty.map_leaves() { return(exit_now(71)) }
+empty_reduce = empty.reduce_leaves(seed) { return(exit_now(72)) }
+empty_reduce += "result-only"
+empty_walk_count = empty.walk_leaves() { return(exit_now(73)) }.count_keys()
+invalid_map = "scalar".map_leaves() { return(exit_now(74)) }
+invalid_reduce = "scalar".reduce_leaves(exit_now(75)) { return(exit_now(76)) }
+invalid_walk = "scalar".walk_leaves() { return(exit_now(77)) }
+return({
+  "mapped" : mapped,
+  "seen" : seen,
+  "walk_count" : walk_count,
+  "reduced" : reduced,
+  "reduce_continuation_is_null" : reduce_continuation_is_null,
+  "source" : source,
+  "outer_value" : value,
+  "outer_key" : key,
+  "outer_path" : path,
+  "outer_depth" : depth,
+  "outer_acc" : acc,
+  "empty_map" : empty_map,
+  "empty_reduce" : empty_reduce,
+  "empty_walk_count" : empty_walk_count,
+  "seed" : seed,
+  "invalid_map" : invalid_map,
+  "invalid_reduce" : invalid_reduce,
+  "invalid_walk" : invalid_walk
+})
+]])
+  local result = execute_uniform_binding_source(source)
+  assert_json_equal(result, json.harray({
+    mapped = json.harray({
+      a = json.harray({ label = "a@1", path = json.array({ "a" }), value = "A" }),
+      arr = json.harray({
+        label = "arr@1",
+        path = json.array({ "arr" }),
+        value = json.array({ "u", "v", "callback" }),
+      }),
+      b = json.harray({
+        y = json.harray({ label = "y@2", path = json.array({ "b", "y" }), value = "B" }),
+      }),
+      empty = json.harray(),
+    }),
+    seen = json.array({ "a@1", "arr@1", "y@2" }),
+    walk_count = 4,
+    reduced = json.array({ "a@1", "arr@1", "y@2" }),
+    reduce_continuation_is_null = true,
+    source = json.harray({
+      a = "A",
+      arr = json.array({ "u", "v" }),
+      b = json.harray({ y = "B" }),
+      empty = json.harray(),
+    }),
+    outer_value = "outer-value",
+    outer_key = "outer-key",
+    outer_path = "outer-path",
+    outer_depth = "outer-depth",
+    outer_acc = "outer-acc",
+    empty_map = json.harray(),
+    empty_reduce = json.array({ "seed", "result-only" }),
+    empty_walk_count = 0,
+    seed = json.array({ "seed" }),
+    invalid_map = json.null,
+    invalid_reduce = json.null,
+    invalid_walk = json.null,
+  }), "harray traversal behavior")
+
+  local reference_result = execute_uniform_binding_source(uniform_binding_action_source([[
+meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] }
+return([
+  meta.map_leaves() {
+    return(cat(key, "@", depth, "=", if(count(value), join_values("", value), else(value))))
+  },
+  meta.reduce_leaves("") { return(cat(acc, key, "@", depth, ";")) },
+  meta.walk_leaves() { seen += cat(key, "@", depth); return(value) }.count_keys(),
+  seen
+])
+]]))
+  assert_json_equal(reference_result, json.decode([[
+[
+  {"a":"a@1=A","arr":"arr@1=uv","b":{"y":"y@2=B"}},
+  "a@1;arr@1;y@2;",
+  3,
+  ["a@1","arr@1","y@2"]
+]
+]]), "exact Perl reference callback result")
+
+  for _, invalid in ipairs({
+    { source = "return({}.map_leaves())", code = "final_argument_not_codeblock", kind = "missing" },
+    { source = 'return({}.walk_leaves("bad"))', code = "final_argument_not_codeblock", kind = "scalar" },
+    {
+      source = "return({}.reduce_leaves({ return(value) }))",
+      code = "helper_arity_mismatch",
+      actual = 0,
+    },
+  }) do
+    local ok, failure = pcall(function()
+      execute_uniform_binding_source(uniform_binding_action_source(invalid.source))
+    end)
+    assert_equal(ok, false, invalid.source .. " fails")
+    assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, invalid.source .. " typed failure")
+    assert_equal(failure.code, invalid.code, invalid.source .. " diagnostic code")
+    if invalid.kind then assert_equal(failure.value_kind, invalid.kind, invalid.source .. " value kind") end
+    if invalid.actual then assert_equal(failure.actual_arity, invalid.actual, invalid.source .. " authored arity") end
+  end
 end)
 
 test("runtime inline value controls select one lazy payload", function()

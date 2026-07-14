@@ -68,8 +68,9 @@ This `README.md` is the **single entry point** to the project.
   through one cleanup-safe uniform `value` scope. Optional values and receivers evaluate first; aggregate inputs
   and results are isolated; exact prior/absent bindings restore after success, local return, and error; compatible
   receiver chains continue; and malformed final kinds/counts stay typed. Both Lua ABIs pass 112/112. Scoped
-  callback work is split at `.4.3.6.5.1.0`: reference authored-value precedence repair `.4.3.6.5.1.1` is done,
-  and Lua harray implementation `.4.3.6.5.1.2` is active. ADR `0033` and
+  callback work is split at `.4.3.6.5.1.0`: reference authored-value precedence repair `.4.3.6.5.1.1` is done;
+  `.4.3.6.5.1.2` adds atomic copied/restored callback frames plus sorted harray walk/map/reduce and passes 113/113
+  on both ABIs; array-root and mixed-tree extension `.4.3.6.5.2` is active. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -87,7 +88,8 @@ This `README.md` is the **single entry point** to the project.
   receiver `flat_hash`, ordinary nested-map preservation, explicit splicing, lexical key/value views, count, and
   null-aware membership pass through `.4.3.5.2`; copied merge/set/rename/drop/pick values and receiver chains pass
   103/103 through the `.4.3.5.5` public/no-drift closeout before eager blocks and controls raise the gate to
-  108/108 and built-in final blocks/scoped `with` raise it to 112/112. Portable aliases remain `i`/`elif` for
+  108/108, built-in final blocks/scoped `with` raise it to 112/112, and harray callbacks raise it to 113/113.
+  Portable aliases remain `i`/`elif` for
   marker chains and `when`/`otherwise` for attached chains; broader
   Perl/Dart/Julia acceptance, scalar/aggregate truthiness, and switch scalar-equality drift are owned by
   `FUTURE-PARITY-BACKLOG.5`. Portable switch labels avoid boolean-versus-number and aggregate comparisons until

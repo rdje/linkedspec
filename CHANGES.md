@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.2 — execute Lua harray callbacks
+
+Lua now executes harray `walk_leaves`, `map_leaves`, and `reduce_leaves` through the already-declared final
+`callback: codeblock` contract. A new atomic scope frame snapshots every private store for `value`, `key`, `path`,
+`depth`, and reduce-only `acc`, copies inputs and results, then restores every prior or absent binding after success
+or error. The existing one-binding `with` API delegates to the same implementation.
+
+Traversal sorts harray keys lexically and recurses only through nested harrays; arrays and every other typed value
+remain leaves. Paths are copied, root depth is 1, walk returns an isolated source copy while preserving non-frame
+side effects, map rebuilds typed harrays, and reduce threads copied typed results and stays terminal. Empty trees
+run no callbacks. Non-harray receivers return null without evaluating reduce initials or callbacks. Typed missing/
+wrong-block and arity diagnostics remain signature-owned.
+
+The focused test locks aggregate isolation, exact frame restoration, deterministic order, empty/invalid behavior,
+continuation, and the exact direct Perl result. `bash tools/run_lua_local.sh` passes 113/113 on PUC Lua and 113/113
+on LuaJIT plus corpus/process checks. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary
+CLI environments at 61/61, and phase0 `1..1031` green in 983 seconds. Harray parent `.4.3.6.5.1` closes;
+array-root and mixed-tree extension `.4.3.6.5.2` is active.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.6.5.1.1 — preserve authored callback values
 
 Current value-helper calls now decide arity before considering the legacy optional-scope heuristic. When the raw

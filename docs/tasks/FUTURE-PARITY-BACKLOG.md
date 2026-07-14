@@ -4091,8 +4091,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 143 | `LUA-BACKEND-PARITY.4.3.6.4` | `done` | Metadata-governed helper/receiver `with` and cleanup-safe scope pass 112/112 on both Lua ABIs. |
 | 144 | `LUA-BACKEND-PARITY.4.3.6.5.1.0` | `done` | Split the reproduced reference append-RHS scope collision from Lua harray traversal. |
 | 145 | `LUA-BACKEND-PARITY.4.3.6.5.1.1` | `done` | Preserve authored helper values before optional-scope fallback; phase0 1,031 passes. |
-| 146 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `active` | Implement deterministic scoped Lua harray callback execution. |
-| 147 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `pending` | Extend callbacks across arrays and mixed trees. |
+| 146 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `done` | Sorted scoped copied Lua harray walk/map/reduce pass 113/113 on both ABIs. |
+| 147 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `active` | Extend callbacks across array roots and mixed trees. |
 | 148 | `LUA-BACKEND-PARITY.4.3.6.6` | `pending` | Close no-drift and hand user-function/callable work to dependency-complete owners. |
 | 149 | `FUTURE-PARITY-BACKLOG.16.0` | `done` | Ratified exact existing/missing surfaces and ADR 0033 before behavior code. |
 | 150 | `FUTURE-PARITY-BACKLOG.16.1` | `done` | Six standalone, four terminal receiver, retained-value, negative, arity, and fixture contracts are executable. |

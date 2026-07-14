@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.2 — execute Lua harray callbacks**
+  (DONE — sorted atomic-frame harray walk/map/reduce pass 113/113 on both ABIs; array/mixed `.4.3.6.5.2` active).
+
+  **Result:** One multi-binding scope transaction copies and restores `value`, `key`, `path`, `depth`, and
+  reduce-only `acc` across every private store and failure path. Sorted depth-first harray recursion treats arrays
+  as leaves, preserves root depth 1, copies sources/results/paths/accumulators, keeps walk/map continuation, and
+  makes reduce terminal. Empty and invalid receivers are lazy and neutral; malformed calls stay typed. The exact
+  Perl callback output matches, and PUC Lua/LuaJIT pass 113/113 plus corpus/process checks. The mandatory full local
+  CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0 passing all 1,031
+  tests in 983 seconds.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.6.5.1.1 — preserve authored callback values**
   (DONE — Perl reference repair passes focused AST proof and phase0 `1..1031`; Lua `.4.3.6.5.1.2` active).
 

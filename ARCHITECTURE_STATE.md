@@ -5,22 +5,29 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-13`
+- `2026-07-13` refresh: Lua harray `walk_leaves`/`map_leaves`/`reduce_leaves` now execute through one atomic
+  multi-binding scope frame. Lexically sorted keys drive depth-first recursion through harray interiors; arrays
+  remain leaves; callback `path` is copied and `depth == count(path)`; `walk` preserves side effects and returns a
+  source copy, `map` rebuilds a copied harray, and `reduce` threads copied typed results and stays terminal. Empty
+  trees run no callbacks, non-harray receivers return null before initial/callback evaluation, and exact prior or
+  absent `value`/`key`/`path`/`depth`/`acc` stores restore after success or error. The exact Perl result is locked;
+  PUC Lua and LuaJIT pass 113/113. Array-root and mixed-tree recursion `.4.3.6.5.2` is active.
 - `2026-07-13` refresh: Current value-helper lowering now gives an already-valid authored argument list priority
   over the legacy optional-scope heuristic. The AST was already correct; `MethodExpr` now exposes the explicit
   precedence mode, and `MethodLowering`/`FlowExpr` use it for `cat`, variadic arithmetic/min/max, coalescing,
   optional-width `substr`, aggregate collection values, and coalesce family inference. Invalid raw counts may
   still fall back to optional-scope compatibility. Focused AST/lowering tests and phase0 `1..1031` pass. The hash-
-  tree runtime proof now consumes `key`/`depth` as leading callback values; Lua harray execution `.4.3.6.5.1.2`
-  is active.
+  tree runtime proof now consumes `key`/`depth` as leading callback values; Lua harray execution closes in
+  `.4.3.6.5.1.2`.
 - `2026-07-13` refresh: Lua now consults copied built-in callable metadata before evaluating a final structural
   `block_value`. Helper/receiver `with` consume attached and parenthesized forms identically; optional values and
   receivers evaluate before scope entry; copied aggregate values/results remain isolated; and compatible receiver
   chains continue. A protected scoped-binding module snapshots all private stores before mutation, copies the
   temporary uniform `value` and result inside `pcall`, restores exact prior/absent state unconditionally, then
   rethrows the original failure. This distinguishes contextual blocks from ordinary eager braces without changing
-  parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback work is split under `.4.3.6.5.1.0`: Perl
-  append-RHS scope repair `.4.3.6.5.1.1` precedes Lua harray execution `.4.3.6.5.1.2`; the repair is now done and
-  Lua execution active. User-function blocks and first-class callable values keep their separate owners.
+  parser syntax. PUC Lua and LuaJIT pass 112/112. Tree callback work then extends this seam from one binding to an
+  atomic frame and closes deterministic harray execution at 113/113 through `.4.3.6.5.1.2`. User-function blocks
+  and first-class callable values keep their separate owners.
 - `2026-07-13` refresh: Lua's indexed statement executor now dispatches attached while through a dedicated lazy
   loop seam. Body validation precedes condition evaluation; body mutations feed the next condition; false initial,
   action return, expression-block-local return, and Perl-reference inner-loop `next()` are exact. The configured

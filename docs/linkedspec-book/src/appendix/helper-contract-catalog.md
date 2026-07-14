@@ -999,7 +999,9 @@ dispatch rule.
   - `walk_leaves` returns the original hash tree after running callbacks.
   - `map_leaves` returns a new hash tree with each leaf replaced by the callback result.
   - `reduce_leaves` returns the final accumulator.
-- **Backend status**: Perl reference and Rust interpreter support are current.
+- **Backend status**: Perl, Rust, Dart, Julia, and Lua support this hash-root contract. Lua's focused dual-ABI
+  proof passes 113/113 and locks the exact Perl callback result; Lua array-root and mixed-tree recursion remain the
+  separate active `.4.3.6.5.2` extension.
 - **Tree shape**: The receiver must be a hash. Nested hashes are interior nodes. Every non-hash value is a leaf,
   including arrays.
 - **Traversal order**: Sorted-key depth-first traversal. For `{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`,
@@ -1012,7 +1014,9 @@ dispatch rule.
   - `depth`: number of path segments (`count(path)`); a root leaf has depth 1.
   - `acc`: current accumulator for `reduce_leaves` only.
 - **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
-  completes. Mutations to other working variables are ordinary side effects and persist.
+  completes, including callback errors. Inputs, paths, mapped results, and accumulator values are copied, so
+  callback mutation cannot alias the source. Mutations to other working variables are ordinary side effects and
+  persist.
 - **Return semantics**: `return(expr)` inside the callback is block-local and supplies that callback's result. In
   `map_leaves`, the result replaces the current leaf. In `reduce_leaves`, the result becomes the next accumulator.
   In `walk_leaves`, the result is ignored.

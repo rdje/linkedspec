@@ -71,7 +71,10 @@ inside the body as inner-loop continue. Exact-limit and `next()` behavior differ
 block form. The optional value or receiver evaluates first; Lua copies it into the temporary uniform `value`
 binding, copies the result, restores every prior/absent private store after success, block-local return, or error,
 and continues compatible receiver chains. Tree callbacks are split by `.4.3.6.5.1.0`: the reproduced reference
-append-RHS scope collision is repaired in `.4.3.6.5.1.1`; Lua harray execution `.4.3.6.5.1.2` is active.
+append-RHS scope collision is repaired in `.4.3.6.5.1.1`; `.4.3.6.5.1.2` then adds one atomic copied/restored
+`value`/`key`/`path`/`depth`/`acc` frame and sorted harray `walk_leaves`/`map_leaves`/`reduce_leaves`. Arrays remain
+leaves, root depth is 1, walk/map keep hash-family continuation, reduce is terminal, and both ABIs pass 113/113
+with the exact Perl callback result. Array-root and mixed-tree recursion remain active `.4.3.6.5.2`.
 General user-function final blocks remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,

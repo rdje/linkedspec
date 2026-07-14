@@ -24,38 +24,70 @@ local function restore_store(store, name, snapshot)
   if snapshot.present then store[name] = snapshot.value end
 end
 
-function M.run(context, name, value, copy_value, callback)
-  require_table(context, "context")
-  if type(name) ~= "string" or name == "" then
-    error("RuntimeScopedBindingException: binding name must be a non-empty string", 0)
+local function validated_bindings(bindings)
+  require_table(bindings, "bindings")
+  local normalized = {}
+  local seen = {}
+  for index, binding in ipairs(bindings) do
+    require_table(binding, "bindings[" .. index .. "]")
+    local name = binding.name
+    if type(name) ~= "string" or name == "" then
+      error("RuntimeScopedBindingException: binding name must be a non-empty string", 0)
+    end
+    if seen[name] then
+      error("RuntimeScopedBindingException: duplicate scoped binding '" .. name .. "'", 0)
+    end
+    seen[name] = true
+    normalized[index] = { name = name, value = binding.value }
   end
+  return normalized
+end
+
+function M.run_frame(context, bindings, copy_value, callback)
+  require_table(context, "context")
   if type(copy_value) ~= "function" then
     error("RuntimeScopedBindingException: copy_value must be a function", 0)
   end
   if type(callback) ~= "function" then
     error("RuntimeScopedBindingException: callback must be a function", 0)
   end
+  bindings = validated_bindings(bindings)
 
   local stores = {}
-  local snapshots = {}
   for index, store_name in ipairs(STORE_NAMES) do
-    local store = require_table(context[store_name], "context." .. store_name)
-    stores[index] = store
-    snapshots[index] = snapshot_store(store, name, copy_value)
+    stores[index] = require_table(context[store_name], "context." .. store_name)
   end
-  for _, store in ipairs(stores) do
-    store[name] = nil
+
+  local frame = {}
+  for binding_index, binding in ipairs(bindings) do
+    local snapshots = {}
+    for store_index, store in ipairs(stores) do
+      snapshots[store_index] = snapshot_store(store, binding.name, copy_value)
+    end
+    frame[binding_index] = { name = binding.name, snapshots = snapshots }
+  end
+  for _, binding in ipairs(bindings) do
+    for _, store in ipairs(stores) do store[binding.name] = nil end
   end
 
   local ok, result = pcall(function()
-    context.variables[name] = copy_value(value)
+    for _, binding in ipairs(bindings) do
+      context.variables[binding.name] = copy_value(binding.value)
+    end
     return copy_value(callback())
   end)
-  for index, store in ipairs(stores) do
-    restore_store(store, name, snapshots[index])
+  for binding_index = #frame, 1, -1 do
+    local saved = frame[binding_index]
+    for store_index, store in ipairs(stores) do
+      restore_store(store, saved.name, saved.snapshots[store_index])
+    end
   end
   if not ok then error(result, 0) end
   return result
+end
+
+function M.run(context, name, value, copy_value, callback)
+  return M.run_frame(context, { { name = name, value = value } }, copy_value, callback)
 end
 
 return M

@@ -1270,6 +1270,143 @@ local function evaluate_hash_values(engine, expr, ctx, accumulator, edge_state, 
   return evaluate_hash_helper(action_contracts.canonical_action_helper_name(expr.name), values)
 end
 
+local function hash_tree_child_path(path, key)
+  local result = json.array()
+  for index, part in ipairs(path) do result[index] = part end
+  result[#result + 1] = key
+  return result
+end
+
+local function evaluate_hash_tree_leaf_block(
+  engine,
+  block_expr,
+  value,
+  key,
+  path,
+  acc,
+  bind_acc,
+  ctx,
+  accumulator,
+  edge_state
+)
+  local bindings = {}
+  if bind_acc then bindings[#bindings + 1] = { name = "acc", value = acc } end
+  bindings[#bindings + 1] = { name = "value", value = value }
+  bindings[#bindings + 1] = { name = "key", value = key }
+  bindings[#bindings + 1] = { name = "path", value = path }
+  bindings[#bindings + 1] = { name = "depth", value = #path }
+  return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
+    return evaluate_block_value(engine, block_expr.block, ctx, accumulator, edge_state)
+  end)
+end
+
+local function evaluate_hash_tree_receiver_block(
+  engine,
+  name,
+  call_expr,
+  block_expr,
+  receiver,
+  ctx,
+  accumulator,
+  edge_state
+)
+  if json.kind(receiver) ~= "harray" then return json.null end
+
+  if name == "walk_leaves" then
+    local walk
+    walk = function(node, path)
+      for _, key in ipairs(sorted_harray_keys(node)) do
+        local value = node[key]
+        local next_path = hash_tree_child_path(path, key)
+        if json.kind(value) == "harray" then
+          walk(value, next_path)
+        else
+          evaluate_hash_tree_leaf_block(
+            engine,
+            block_expr,
+            value,
+            key,
+            next_path,
+            nil,
+            false,
+            ctx,
+            accumulator,
+            edge_state
+          )
+        end
+      end
+    end
+    walk(receiver, json.array())
+    return copy_value(receiver)
+  end
+
+  if name == "map_leaves" then
+    local map
+    map = function(node, path)
+      local result = json.harray()
+      for _, key in ipairs(sorted_harray_keys(node)) do
+        local value = node[key]
+        local next_path = hash_tree_child_path(path, key)
+        if json.kind(value) == "harray" then
+          result[key] = map(value, next_path)
+        else
+          result[key] = evaluate_hash_tree_leaf_block(
+            engine,
+            block_expr,
+            value,
+            key,
+            next_path,
+            nil,
+            false,
+            ctx,
+            accumulator,
+            edge_state
+          )
+        end
+      end
+      return result
+    end
+    return map(receiver, json.array())
+  end
+
+  if name == "reduce_leaves" then
+    local reduced = copy_value(evaluate_expr(
+      engine,
+      argument_expr(call_expr.args[1]),
+      ctx,
+      accumulator,
+      edge_state
+    ))
+    local reduce
+    reduce = function(node, path)
+      for _, key in ipairs(sorted_harray_keys(node)) do
+        local value = node[key]
+        local next_path = hash_tree_child_path(path, key)
+        if json.kind(value) == "harray" then
+          reduce(value, next_path)
+        else
+          reduced = evaluate_hash_tree_leaf_block(
+            engine,
+            block_expr,
+            value,
+            key,
+            next_path,
+            reduced,
+            true,
+            ctx,
+            accumulator,
+            edge_state
+          )
+        end
+      end
+    end
+    reduce(receiver, json.array())
+    return copy_value(reduced)
+  end
+
+  fail("unsupported harray traversal helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
 local function evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, receiver)
   local values = {}
   if receiver ~= nil then values[1] = receiver end
@@ -1604,12 +1741,21 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       local canonical_name = action_contracts.canonical_action_helper_name(call.method)
       if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
         local block_expr = final_codeblock_argument(canonical_name, "receiver", call.args)
-        if canonical_name ~= "with" then
-          fail("unsupported runtime helper '" .. tostring(canonical_name) .. "'", {
-            helper_name = canonical_name,
-          })
+        if canonical_name == "with" then
+          value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
+        else
+          value = evaluate_hash_tree_receiver_block(
+            engine,
+            canonical_name,
+            call_expr,
+            block_expr,
+            value,
+            ctx,
+            accumulator,
+            edge_state
+          )
+          if canonical_name == "reduce_leaves" and index < #expr.calls then return json.null end
         end
-        value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
       elseif ARRAY_END_MUTATIONS[canonical_name] then
         local target = index == 1 and binding_target_descriptor(expr.receiver) or nil
         if not target then return json.null end
