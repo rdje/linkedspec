@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-13 (`FUTURE-PARITY-BACKLOG.17.0` — compare semantics before turning a set difference into inventory):
+  Sixteen identifier-shaped, non-compatibility Perl contract diagnostic names are outside the aligned 239-name
+  inventories, but only seven are missing public current calls. Two are documented compatibility aliases, two are
+  legacy capture surfaces, and five are internal assignment/append/drop operations. Requiring all 16 as user calls
+  would be as wrong as ignoring all 16. The new lane therefore starts with an exact seven-helper neutral contract,
+  rolls it through Perl/Rust/Dart/Julia/Lua, and only then hardens coverage against symmetric omission using an
+  independent public-current source. This keeps the public book authoritative without treating prose extraction
+  or internal `diag_name` fields as an untyped registry generator. Lua `.4.3.7.1` can proceed independently;
+  named-mark `.4.3.7.3` waits for the shared resolution.
+
 - 2026-07-13 (`LUA-BACKEND-PARITY.4.3.7.0` — inventory agreement can preserve the same omission): The exact
   239-name gate proves that Dart, Julia, and Lua share one governed inventory, that every inventoried name appears
   in the book/corpus, and that neutral-corpus calls matching current Perl contracts occur in the inventories. Its

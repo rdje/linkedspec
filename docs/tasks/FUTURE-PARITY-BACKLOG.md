@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-13` (punctuation-light parent `.16` is admitted and closed through `.16.7`; Lua built-in
-  final blocks/scoped with `.4.3.6.4` resume after the required clean task-tree pivot).
+- Last updated: `2026-07-13` (Lua capture/cursor audit exposes a seven-helper current-mark inventory blind spot;
+  new cross-backend lane `.17` owns complete documented-mark parity without a Lua-only extension).
 - Owner: repo-local workflow
 
 ## Goal
@@ -29,7 +29,7 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The sixteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+- The seventeen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
   repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
   director's structural linked-rule plus progressive/staged parser-composition authoring model and rule-level bare
   lifecycle-block shorthand.
@@ -65,7 +65,7 @@ before implementation.
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`,
-  `.15`, `.16`
+  `.15`, `.16`, `.17`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -3376,6 +3376,97 @@ before implementation.
     64/0/0. Capability, docs, ADR, Knowledge Map, roadmap, task, and canonical CI wiring agree.
   Commit: `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases`
 
+- ID: `FUTURE-PARITY-BACKLOG.17`
+  Status: `pending`
+  Goal: Reconcile the complete documented current named-mark helper surface across every backend and its coverage
+    inventory.
+  Children: `.17.0`, `.17.1`, `.17.2`, `.17.3`, `.17.4`, `.17.5`
+  Acceptance: The seven public current helpers outside the governed 239-name inventory—`mark_entry_start/end`,
+    `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`—have one neutral exact contract and execute
+    identically on Perl, Rust, Dart, Julia, and Lua; generated paths preserve them where available; inventory and
+    coverage gates cannot pass through a symmetric omission; public docs, capabilities, KM, and task state agree.
+
+- ID: `FUTURE-PARITY-BACKLOG.17.0`
+  Status: `done`
+  Goal: Classify the inventory blind spot and split complete named-mark parity before behavior changes.
+  Acceptance: Compare all non-compatibility Perl contract diagnostics with the aligned backend inventories;
+    distinguish internal operators, legacy/compatibility names, and public current calls; prove the seven-helper
+    gap from source and book evidence; define neutral/backend/admission owners and return to the Lua `.4.3.7.1`
+    frontier without changing parser/compiler/runtime behavior.
+  Verification: **PASS 2026-07-13.** Direct contract/inventory comparison produces exactly 16 names and classifies
+    seven public current marks, two compatibility map aliases, two legacy capture names, and five internal lowering
+    operations. The still-green 239-name/105-fixture report proves the corpus-seeded blind spot. `.17.1-.17.5`
+    own exact neutral/Perl/Rust, Dart, Julia, Lua, and admission/gate work. Knowledge Map, memory architecture, task
+    metadata, doctrines, mdBook, and whitespace checks pass; no runtime, inventory, corpus, or capability changed.
+  Commit: `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.1`
+  Status: `pending`
+  Goal: Adopt the exact seven-helper neutral contract and align Perl/Rust execution.
+  Dependencies: `.17.0`
+  Acceptance: One unchanged fixture covers entry/local start/end mark writes, Unicode position/line/column reads,
+    clear/existence behavior, symbolic bare names, absent marks, rule-local isolation, and generated preservation;
+    Perl proves the reference result and Rust native/oracle/generated paths match it.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.2`
+  Status: `pending`
+  Goal: Align Dart complete named-mark execution and inventory.
+  Dependencies: `.17.1`
+  Acceptance: Dart consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
+    preserves code-unit storage with character-based public values, and adds exactly the seven current names.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.3`
+  Status: `pending`
+  Goal: Align Julia complete named-mark execution and inventory.
+  Dependencies: `.17.1`
+  Acceptance: Julia consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
+    preserves code-unit storage with character-based public values, and adds exactly the seven current names.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.4`
+  Status: `pending`
+  Goal: Align Lua complete named-mark execution and inventory without a backend-only dialect.
+  Dependencies: `.17.1`, `.17.2`, `.17.3`, `LUA-BACKEND-PARITY.4.3.7.2`
+  Acceptance: Lua consumes the unchanged neutral contract on PUC Lua and LuaJIT through its rule-local named-mark
+    frame and Unicode projection seam; the seven calls join the shared inventory only with all established
+    backends aligned, and `LUA-BACKEND-PARITY.4.3.7.3` consumes rather than duplicates the implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.5`
+  Status: `pending`
+  Goal: Admit complete named-mark inventory and close the symmetric-omission gate weakness.
+  Dependencies: `.17.1`, `.17.2`, `.17.3`, `.17.4`
+  Acceptance: Coverage derives or checks the complete public-current contract set independently of corpus seeding;
+    inventories, neutral fixtures, exact outputs, all available generated paths, mdBook, capability census, KM,
+    roadmaps, and complete local gates agree; `.17` closes and Lua `.4.3.7.3` may claim full named-mark parity.
+  Verification: `pending`
+  Commit: `pending`
+
+## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
+
+Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
+239-name Dart/Julia/Lua inventories produces 16 differences. They are not one semantic class:
+
+| Classification | Names | Disposition |
+| --- | --- | --- |
+| Public current named-mark helpers | `mark_entry_start`, `mark_entry_end`, `mark_match_start`, `mark_match_end`, `mark_line`, `mark_col`, `clear_mark` | `.17.1-.17.5` neutral/backend/admission parity. |
+| Documented compatibility aliases | `entry_named_map`, `match_named_map` | Retain compatibility classification; do not inflate the current inventory. |
+| Legacy capture surface | `capture`, `capture_macro` | Retain legacy classification; no current-backend admission. |
+| Internal lowering operations | `array_append_operator`, `array_end_mutation_method`, `hash_index_assignment_operator`, `scalar_assignment_operator`, `value_drop` | Structural IR/lowering names, not public calls. |
+
+The seven public calls are each listed as current mark helpers in the source-boundary reference and have concrete
+Perl lowerings. Rust's earlier mark-family audit independently recorded the entry/match writers as follow-on gaps.
+The exact 239-name checker compares Dart/Julia/Lua inventories, requires every inventoried name in the book and
+neutral corpus, then reverse-checks only Perl current calls already found in that corpus. Because no governed
+fixture calls the seven helpers, the symmetric omission is invisible. `.17.5` must replace or supplement that
+corpus-seeded reverse leg with an independent public-current source of truth after exact backend execution lands.
+
 ## `FUTURE-PARITY-BACKLOG.16.0` Read-only audit
 
 The parser inventory intentionally separates two surfaces that previously looked like one feature:
@@ -3925,6 +4016,21 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 - [x] **NO REGRESSION** — Planning-only: no parser, compiler, runtime, fixture, or active Lua frontier changed.
 - [x] **LOCKSTEP** — Future task, index, roadmaps, mdBook status, KM, changes/notes/live, and memory agree.
 
+### `FUTURE-PARITY-BACKLOG.17.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Compare current Perl contract diagnostics against the aligned 239-name inventories
+  and show why the existing coverage report remains green while seven public mark calls are missing everywhere.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Classify every difference as internal operator, legacy/compatibility spelling,
+  or public current helper; trace the checker's corpus-seeded reverse direction that preserves symmetric omissions.
+- [x] **FIX** — Create `.17.1-.17.5` for neutral/Perl/Rust, Dart, Julia, Lua, and final admission/gate hardening;
+  make Lua `.4.3.7.3` depend on the shared resolution instead of adding an isolated extension.
+- [x] **ADDRESSED (verified)** — Task, book/status, Knowledge Map, roadmap, live docs, and memory record the exact
+  seven names, affected surfaces, dependency order, and clean return to Lua `.4.3.7.1`.
+- [x] **NO REGRESSION** — Planning changes no parser/compiler/runtime/inventory/corpus/capability behavior; focused
+  coverage, memory, task, doctrine, Knowledge Map, book, and whitespace checks pass.
+- [x] **LOCKSTEP** — `.17` remains pending implementation, `.17.0` closes only the tracking/audit slice, and Lua
+  input/cursor `.4.3.7.1` resumes without a false named-mark parity claim.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -4105,6 +4211,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 157 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
 | 158 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
 | 159 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
+| 160 | `FUTURE-PARITY-BACKLOG.17.0` | `done` | Classified 16 differences and split the exact seven-helper public parity/gate correction. |
+| 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `active` | Resume Unicode input/live-cursor views and explicit cursor controls. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -4746,6 +4854,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-13` | `FUTURE-PARITY-BACKLOG.17.0` | Exact 131-Perl/239-backend identifier comparison; 16-name semantic classification; still-green 239-name/105-fixture report; docs/KM/memory/task/doctrine/mdBook/whitespace. | PASS. Seven public current marks have neutral/backend/admission owners; no behavior/inventory changed; Lua `.4.3.7.1` resumes. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.7` | Neutral 6/4/6 contract; Perl 7; Rust 5; Dart 5; Julia 55; PUC Lua 109/LuaJIT 109; capability and generated checker 64/0/0; public/condition/generated-owner scans; docs/KM/governance/mdBook/whitespace. | PASS. Punctuation-light `.16` is admitted and closed; generated Lua stays `.8`; clean pivot returns to Lua `.4.3.6.4`. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.6` | Lua typed-AST/negative contract; public SpecFile JSON reconstruction; exact native fixture; `luac -p`; complete PUC Lua 109/LuaJIT 109/corpus-validation/scaffold gate; docs/KM/governance/whitespace. | PASS. Lua consumes/narrows the aliases without grammar broadening; `.contains()` drift is owned by `.5`; absent generated source remains `.8`; closeout `.16.7` activates. |
 | `2026-07-13` | `FUTURE-PARITY-BACKLOG.16.5` | Julia 55-assertion typed-AST/negative contract; exact bare/parenthesized CLI twins; native/generated-plan/emitted-state fixture; complete 1,394-package/primary-CLI/corpus-105 gate; docs/KM/governance/whitespace. | PASS. Julia consumes the aliases without grammar broadening; pre-existing `.contains()` arity drift is owned by `.5`; Lua `.16.6` activates. |
@@ -4863,6 +4972,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.17.0` | `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity` | Sixteen-name classification, exact seven-helper neutral/backend/admission owners, and clean Lua input/cursor return. |
 | `FUTURE-PARITY-BACKLOG.16.7` | `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases` | Capability 64/0/0, selected public examples, composed five-backend/two-Lua-ABI recurring proof, and parent `.16` closeout. |
 | `FUTURE-PARITY-BACKLOG.16.6` | `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases` | Lua typed AST, statement-only bare next, terminal-only receiver narrowing, serialized/native dual-ABI fixture, and honest generated/helper routing. |
 | `FUTURE-PARITY-BACKLOG.16.5` | `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases` | Julia typed AST, statement-only bare next, final-only receivers, native/generated/emitted/CLI fixture, and helper-drift routing. |
@@ -4980,6 +5090,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-13`: `.17.0` classifies the 16-name difference between identifier-shaped non-compatibility Perl
+  contract diagnostics and the aligned backend inventories. Seven are public current marks, two compatibility map
+  aliases, two legacy capture names, and five internal lowering operations. `.17.1-.17.5` now own the exact
+  neutral/Perl/Rust, Dart, Julia, Lua, and independent admission/gate correction; no behavior or inventory changes,
+  and the clean PNT frontier returns to Lua input/cursor `.4.3.7.1`.
 - `2026-07-13`: `.16.7` admits and closes the punctuation-light syntax lane. The capability census promotes one
   explicit language row to 64/0/0 and removes the future exclusion. A composed recurring command proves the
   neutral boundary plus Perl/Rust/Dart/Julia/Lua, every available generated path, Lua serialized state, and both

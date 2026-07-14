@@ -72,7 +72,9 @@ This `README.md` is the **single entry point** to the project.
   `.4.3.6.5.1.2` adds atomic copied/restored callback frames plus sorted harray walk/map/reduce at 113/113;
   `.4.3.6.5.2` shares that dispatcher with zero-based array-root traversal, recurses only through the receiver's
   own root kind, and raises both ABIs to 114/114. No-drift/dependency handoff `.4.3.6.6` closes the parent and
-  advances capture/mark/input/cursor helpers `.4.3.7`. ADR `0033` and
+  advances capture/mark/input/cursor helpers `.4.3.7`. Audit `.4.3.7.0` splits those mechanisms and finds seven
+  documented current mark helpers outside every governed backend inventory; `FUTURE-PARITY-BACKLOG.17` owns the
+  neutral/five-backend correction and independent gate hardening before Lua named-mark closure. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume
@@ -351,8 +353,9 @@ Top-level project docs:
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
-  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
-  `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; native resolution
+  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and governed 239-name/105-fixture
+  surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
+  documented named-mark inventory remains explicitly owned by `.17`; native resolution
   native resolution `.1.6.4`, Dart full-pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.

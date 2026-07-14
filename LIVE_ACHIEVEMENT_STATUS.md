@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-13: **FUTURE-PARITY-BACKLOG.17.0 — split complete named mark parity**
+  (DONE — exact seven-helper cross-backend owners recorded; Lua input/cursor `.4.3.7.1` resumes).
+
+  **Result:** The 16-name Perl-contract/backend-inventory difference is classified into seven public current mark
+  helpers, two compatibility map aliases, two legacy capture names, and five internal lowering operations. New
+  leaves split neutral plus Perl/Rust proof, Dart, Julia, Lua, and final admission/gate hardening. Complete
+  named-mark parity can no longer be “fixed” only in Lua or inferred from the green corpus-seeded 239-name gate.
+  No behavior, inventory, corpus, or capability changed.
+
 - 2026-07-13: **LUA-BACKEND-PARITY.4.3.7.0 — split Lua capture cursor mechanisms**
   (DONE — six runtime mechanisms plus no-drift are owned; input/cursor `.4.3.7.1` next).
 

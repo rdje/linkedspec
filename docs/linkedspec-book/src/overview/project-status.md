@@ -66,7 +66,8 @@ Three backbone items tracked major structural modernization — all done:
   `.1.1` is done, harray execution `.1.2` passes 113/113, and shared root-kind array execution `.5.2` closes at
   114/114. No-drift/dependency routing `.4.3.6.6` closes the parent. Capture/cursor audit `.4.3.7.0` splits six
   executable mechanisms plus no-drift; input/cursor `.4.3.7.1` is next, and seven documented mark helpers need a
-  cross-backend inventory owner before named-mark closure.
+  cross-backend inventory owner before named-mark closure. `FUTURE-PARITY-BACKLOG.17` owns that exact neutral and
+  five-backend parity/gate-hardening work; tracking leaf `.17.0` changes no runtime behavior.
   Implicit child-push side effects are included in the closed Lua array family, but their expression result is not
   yet portable: Perl exposes its host push count and Lua exposes the updated implicit accumulator. Backlog `.5`
   owns normalization; current authoring uses implicit child push as a statement.
@@ -275,8 +276,11 @@ Three backbone items tracked major structural modernization — all done:
   primary execution and recursively key-sorted direct JSON. `.7.3.2.4` now closes phase-ordered failures, stable
   stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,023 package
   assertions and 99/99 pass. `.7.3.2.5` now adds nine direct process families and focused-gate delegation; status
-  is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. The later exhaustive current-surface
-  gate is now 239 names and 105/105 exact fixtures across all four variants. Public generated source remains
+  is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. The later governed current-surface
+  gate is now 239 names and 105/105 exact fixtures across all four variants. Audit `.17.0` has since shown that
+  seven additional helpers advertised by the current named-mark reference are outside those inventories and
+  corpus fixtures; `.17.1-.17.5` own complete portable execution and independent inventory hardening. Public
+  generated source remains
   deferred to `.3`; global CLI identity `.1.5` and language-surface `.1.6.1` are closed, while remaining outward
   API capability leaves under `.1.6` still block a complete Julia capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.

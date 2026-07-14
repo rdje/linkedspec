@@ -709,7 +709,8 @@ closed; no-drift/dependency routing `.4.3.6.6` closes the parent and advances ca
 helpers `.4.3.7`. Audit `.4.3.7.0` splits input/cursor controls, anonymous capture, governed named marks/bridges,
 placement-sensitive marker members, earliest-boundary lookahead, and no-drift. It also finds seven helpers in the
 public mark reference outside the governed 239-name backend inventories; named-mark closure must resolve that
-cross-backend inventory gap instead of creating a Lua-only extension. General user-function final
+cross-backend inventory gap instead of creating a Lua-only extension. `FUTURE-PARITY-BACKLOG.17` now owns the
+neutral contract, five-backend rollout, and independent gate hardening. General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

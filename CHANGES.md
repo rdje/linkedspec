@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-13 — FUTURE-PARITY-BACKLOG.17.0 — split complete named mark parity
+
+Created a cross-backend owner for the seven documented current named-mark helpers excluded from the governed
+239-name inventories: `mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`.
+The read-only comparison classified all 16 Perl-contract/inventory differences so public calls are not mixed with
+two compatibility map aliases, two legacy capture names, or five internal lowering operations.
+
+Leaves `.17.1-.17.5` now own the neutral contract plus Perl/Rust proof, Dart, Julia, Lua, and final admission/gate
+hardening. The final gate must use an independent public-current source of truth rather than only reverse-checking
+Perl contracts already called by the corpus. No parser/compiler/runtime/inventory/corpus/capability behavior
+changed. This short tracking pivot returns execution to Lua input/cursor `.4.3.7.1`; Lua named-mark `.4.3.7.3`
+must consume the shared correction.
+
 ## 2026-07-13 — LUA-BACKEND-PARITY.4.3.7.0 — split Lua capture cursor mechanisms
 
 Audited the canonical capture/mark/input/cursor contract before runtime changes and split the broad Lua parent
