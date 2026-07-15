@@ -86,7 +86,11 @@ This `README.md` is the **single entry point** to the project.
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
-  immediate use on every backend; no format implementation has started. ADR `0033` and
+  immediate use on every backend; no format implementation has started. ADR `0035` additionally makes terse,
+  readable, and highly expressive authoring a hard design constraint: remove redundant ceremony, preserve
+  semantic signal and typed diagnostics, and prefer small orthogonal mechanisms over format-specific escapes.
+  Uniform binding is the positive precedent; recursive traversal keeps informative `_leaves` names rather than
+  gaining ambiguous `walk`/`map`/`reduce` aliases. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume

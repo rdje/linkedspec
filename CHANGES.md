@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.1 — govern expressive spec authoring
+
+ADR `0035` defines terse, readable, and highly expressive `.spec` authoring as one language-design constraint.
+Terseness removes redundant ceremony rather than semantic signal. Readability keeps structure, evaluation/value
+flow, mutation, scope, recovery, and typed diagnostics locally predictable. Expressiveness comes from small typed
+orthogonal mechanisms that compose across formats rather than format-specific built-ins, host callbacks, or
+backend dialects.
+
+Uniform binding is recorded as the positive precedent: one identifier can hold any of the four value kinds,
+runtime kind controls valid operations, and incompatible mutation fails explicitly. Informative names remain when
+they disambiguate behavior, so recursive `walk_leaves`, `map_leaves`, and `reduce_leaves` do not gain ambiguous
+`walk`, `map`, or `reduce` aliases. The structured-text program now requires representative-format authoring proof
+for future language mechanisms. No syntax, parser/compiler/runtime behavior, helper, alias, fixture, inventory,
+capability, backend, or format support changed.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.4 — execute Lua rule-slot markers
 
 Lua now compiles preferred `@capture_slice`, compatibility `@capture_from_here` / `@move_pos`, and

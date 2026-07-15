@@ -54,6 +54,11 @@ implement and prove it across Perl, Rust, Dart, Julia, and Lua, then resume that
    ceilings, and comparable measurements across current backends.
 9. **Parsing scope stays honest.** Text-to-AST completion is distinct from evaluator, validator, schema engine,
    renderer, query engine, or domain-application completion.
+10. **Authoring quality is a hard constraint.** Universal `.spec` sources must be terse, readable, and highly
+    expressive at the same time. Terseness removes redundant ceremony rather than semantic signal; readability
+    keeps structure, value flow, mutation, scope, recovery, and diagnostics locally predictable; expressiveness
+    comes from small typed orthogonal mechanisms that compose across formats rather than format-specific or host
+    escapes. ADR `0035` governs the exact trade.
 
 ## Shared Leaf Acceptance
 
@@ -68,6 +73,8 @@ Every format leaf must:
 - prove derived-format reuse instead of cloning its base syntax;
 - record any missing general mechanism as an owning child before implementation, then land that mechanism across
   all current backends before continuing;
+- demonstrate proposed language mechanisms in representative format excerpts, including ambiguous/invalid
+  boundaries, and show that the resulting `.spec` is concise without hiding structure or weakening diagnostics;
 - publish user-facing examples and limitations in the mdBook; and
 - meet correctness-preserving benchmark/resource criteria before claiming `done`.
 
@@ -315,13 +322,16 @@ Every format leaf must:
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-15` | `.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR/task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — complete parity gate is explicit and no behavior changed. |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR/task/roadmap/index/live-doc/book/KM sync; exact uniform-binding precedent; recursive-traversal naming exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — authoring quality is governed without adding syntax, aliases, or behavior. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR, exact 91-row decomposition, hard parity gate, roadmap/book/KM/live-doc synchronization. |
+| `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, authoring-quality invariant, uniform-binding precedent, and explicit retention of informative recursive names. |
 
 ## Changelog
 
 - `2026-07-15`: Created the parity-gated structured-text format program and exact catalog ownership map.
+- `2026-07-15`: Added ADR `0035`'s terse/readable/highly-expressive authoring constraint without changing behavior.

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua placement-sensitive split/mark rule members pass 121/121 on PUC Lua and LuaJIT;
-  exhaustive capture/cursor no-drift `.4.3.7.6` is the executable frontier; `.18` remains parity-gated).
+- Last updated: `2026-07-15` (ADR `0035` governs terse/readable/highly-expressive authoring; Lua exhaustive
+  capture/cursor no-drift `.4.3.7.6` remains the executable frontier; `.18` remains parity-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -29,7 +29,7 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The seventeen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+- The eighteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
   repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
   director's structural linked-rule plus progressive/staged parser-composition authoring model and rule-level bare
   lifecycle-block shorthand.
@@ -54,6 +54,9 @@ before implementation.
 - The director's parser-authoring doctrine is recorded: simple zero/one/two-regex rules form a linked structural
   graph; recursion belongs in rule connections rather than recursive regexes; cursor-relative extraction enables
   in-parse parser composition; and returned AST fields may be parsed again by later spec-driven stages.
+- Universal `.spec` authoring is governed as terse, readable, and highly expressive: remove redundant ceremony,
+  preserve semantic signal and typed diagnostics, and prefer orthogonal reusable composition over format-specific
+  or host-language escape hatches.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -65,7 +68,7 @@ before implementation.
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`,
-  `.15`, `.16`, `.17`
+  `.15`, `.16`, `.17`, `.18`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -3495,11 +3498,12 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.18`
   Status: `proposed`
   Goal: Govern the post-current-backend-parity Unicode structured-text-to-AST format program.
-  Children: `.18.0`; detailed execution tree: `STRUCTURED-TEXT-FORMAT-PROGRAM`
+  Children: `.18.0`, `.18.1`; detailed execution tree: `STRUCTURED-TEXT-FORMAT-PROGRAM`
   Acceptance: The agreed program is dependency-gated on complete Perl/Rust/Dart/Julia/Lua parity, enumerates every
     eligible catalog row, makes the dynamically compiled `.spec` graph the sole parser source, uses real formats
     as requirements evidence for reusable `.spec` features, forbids hidden host parsers, separates parsing from
-    evaluation/domain semantics, and keeps roadmap/book/KM/live state exact.
+    evaluation/domain semantics, governs those features as terse/readable/highly expressive without discarding
+    semantic signal, and keeps roadmap/book/KM/live state exact.
   Verification: `pending`
   Commit: `pending`
 
@@ -3517,6 +3521,22 @@ before implementation.
     seams, and measured correctness-preserving performance. Governance/book/count/whitespace checks pass; no
     parser/compiler/runtime/helper/fixture/capability or format behavior changed.
   Commit: `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.1`
+  Status: `done`
+  Goal: Govern terse, readable, and highly expressive universal `.spec` authoring without erasing semantic signal.
+  Dependencies: `.18.0`
+  Acceptance: A durable neutral doctrine defines concision, readability, expressiveness, orthogonal composition,
+    diagnostic precision, representative-format evidence, and the uniform value-binding precedent; explicitly
+    retains semantically informative recursive traversal names; synchronizes ADR, roadmap, dedicated program tree,
+    mdBook, Knowledge Map, and live docs; and changes no parser/compiler/runtime behavior.
+  Verification: **PASS 2026-07-15.** ADR `0035`, the structured-format program, roadmap/index/live docs, mdBook,
+    and Knowledge Map define terseness as removal of redundant ceremony, readability as local predictability, and
+    expressiveness as small typed orthogonal composition. Uniform binding is the positive precedent. Recursive
+    `walk_leaves`/`map_leaves`/`reduce_leaves` retain their semantic suffix and gain no short aliases. Memory
+    architecture, Knowledge Map, doctrines, mdBook, task metadata, and whitespace checks pass. No syntax,
+    parser/compiler/runtime, helper, alias, fixture, inventory, capability, or format behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring`
 
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
@@ -4389,6 +4409,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark events execute after their matched actions at 121/121 on both Lua ABIs. |
 | 171 | `FUTURE-PARITY-BACKLOG.18.0` | `done` | Exact 91-row parity-gated requirements program is ratified; no format code started. |
 | 172 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive Lua capture/cursor helper and public-surface no-drift. |
+| 173 | `FUTURE-PARITY-BACKLOG.18.1` | `done` | ADR 0035 governs concise, readable, expressive universal `.spec` authoring without behavior change. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5030,6 +5051,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR 0035; task/program/roadmap/index/live-doc/book/KM sync; uniform-binding precedent; traversal-name exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Authoring quality is a hard future feature gate; no syntax, alias, backend, or format behavior changed; Lua `.4.3.7.6` remains active. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.4` | Typed compiled slot events; post-action/pre-LE timing; all three anonymous marker spellings plus named marks; `é(α🙂,βγ)` native/reconstructed proof; exact shipped EBNF `@move_pos`; typed malformed names/fragments/AST; Lua 121/121 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Placement-sensitive marker execution closes on the existing stores without surface drift; `.4.3.7.6` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR 0034; dedicated exact-row task tree; roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Parity-first format requirements program is durable; no behavior or format implementation changed; Lua `.4.3.7.4` remains active. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
@@ -5156,6 +5178,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, program invariant, realistic authoring proof, uniform-binding precedent, and informative traversal names. |
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action slot events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
 | `FUTURE-PARITY-BACKLOG.18.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR 0034, exact 91-row ownership, hard current-parity gate, format-driven neutral feature loop, and public architecture chapter. |
 | `FUTURE-PARITY-BACKLOG.17.5` | `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory` | 246-name admission, 105+1 occurrence proof, independent 122-public-contract reverse check, nine exclusions, and symmetric mutation proof. |
@@ -5282,6 +5305,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: `.18.1` adopts ADR `0035`: universal `.spec` sources must be terse, readable, and highly
+  expressive simultaneously. Terseness removes redundant ceremony rather than meaning; readability preserves
+  locally visible structure/value flow/mutation/scope/recovery and precise diagnostics; expressiveness comes from
+  small typed reusable mechanisms rather than format-specific or host escapes. Uniform binding is the precedent.
+  Recursive `walk_leaves`/`map_leaves`/`reduce_leaves` keep `_leaves`, so no shallow-looking aliases are added.
+  No behavior changed and Lua `.4.3.7.6` remains the executable frontier.
 - `2026-07-15`: Lua `.4.3.7.4` compiles `@capture_slice`, both compatibility aliases, and `@mark(name)` into
   typed preceding-slot events, preserves them in public compiled state, and executes them after that slot's
   action/child dispatch and before `LE` through the existing anonymous/named stores. Multibyte native and

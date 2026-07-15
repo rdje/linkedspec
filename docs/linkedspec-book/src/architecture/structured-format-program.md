@@ -24,6 +24,35 @@ The standards and external conformance suites remain the correctness oracles. Th
 the `.spec` graph is the single parser implementation that must satisfy them on every backend. Performance proof
 therefore measures three distinct paths: cold dynamic parser construction, warm cache reuse, and document parsing.
 
+## Terse, readable, and highly expressive
+
+The format program also treats the quality of the `.spec` source as part of the result. A parser is not a success
+if it passes a corpus only by turning its grammar into unreadable punctuation, repeated boilerplate, or opaque
+format-specific escape hatches.
+
+Here, **terse** means that redundant ceremony is absent. It does not mean that the shortest spelling always wins.
+Names retain the words needed to communicate semantics. For example, `walk_leaves`, `map_leaves`, and
+`reduce_leaves` deliberately keep `_leaves`: those methods recursively visit leaves, while plain `map` or
+`reduce` would normally suggest immediate elements. Removing that suffix would save characters but lose meaning.
+
+**Readable** means that rule structure, value flow, evaluation order, mutation, scope, and recovery remain visible
+from the source and the documented contract. Equivalent concepts use equivalent forms; distinct concepts remain
+distinguishable. Invalid or wrong-kind operations produce precise typed diagnostics instead of relying on hidden
+coercion.
+
+**Highly expressive** means that a small set of typed, orthogonal mechanisms can compose into difficult parsers.
+It does not mean adding one built-in for every format. When HTML, YAML, CommonMark, or another format exposes a
+missing capability, LinkedSpec extracts the reusable mechanism and proves it across every current backend.
+
+Uniform value binding is the existing precedent. One identifier can hold scalar, array, harray, or codeblock;
+runtime kind determines valid operations, and a wrong-kind mutation fails explicitly. Authors do not select a
+parallel backend storage namespace. That design is concise because one abstraction composes uniformly while
+preserving typed meaning.
+
+Every later language proposal must therefore include representative format excerpts and ambiguous or invalid
+boundaries. The review asks both whether the mechanism can express the format and whether the resulting `.spec`
+is a clear, compact source of truth.
+
 ## Formats are requirements evidence
 
 The catalog is not only a list of parsers to accumulate. Each authoritative format is an acceptance test for the

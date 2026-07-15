@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: ADR `0035` makes terse, readable, and highly expressive authoring a hard constraint on
+  future universal `.spec` evolution. Terseness removes redundant ceremony rather than semantic signal;
+  readability keeps structure, value flow, mutation, scope, recovery, and typed diagnostics locally predictable;
+  expressiveness comes from small typed orthogonal mechanisms rather than format-specific or host escapes.
+  Uniform binding is the positive precedent: one four-kind value binding, runtime-kind dispatch, and typed
+  wrong-kind failure. Recursive tree traversal keeps `walk_leaves`/`map_leaves`/`reduce_leaves`; shorter aliases
+  would obscure recursive semantics. This planning slice changes no syntax or behavior; Lua `.4.3.7.6` remains
+  the executable frontier.
 - `2026-07-15` refresh: Lua now represents placement-sensitive split/named-mark rule members as typed compiled
   events attached to the preceding regex slot. Compiled and outward state preserve those events; runtime applies
   them after slot action/child dispatch and before `LE` through the existing anonymous capture boundary and

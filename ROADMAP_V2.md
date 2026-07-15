@@ -62,6 +62,15 @@ Semicolon-light structured authoring is intended to apply across the full lifecy
 
 Current regression anchors are `I { ... }` and `LX { ... }`, but those are only proof points. They are not the intended limit of the policy. If semicolon-light structured authoring applies to one lifecycle block family, it should apply to the others too unless an explicit documented exception is introduced.
 
+## Spec-Authoring Quality Contract
+
+ADR `0035` and `FUTURE-PARITY-BACKLOG.18.1` make terse, readable, and highly expressive authoring one hard
+constraint for future `.spec` evolution. Terseness removes redundant ceremony rather than meaning; readability
+keeps structure, value flow, mutation, scope, recovery, and diagnostics locally predictable; expressiveness comes
+from small typed orthogonal mechanisms instead of format-specific or host-language escape hatches. Uniform binding
+is the positive precedent. Recursive traversal retains `walk_leaves` / `map_leaves` / `reduce_leaves`, because
+their suffix distinguishes leaf recursion from conventional shallow operations; no short aliases are planned.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

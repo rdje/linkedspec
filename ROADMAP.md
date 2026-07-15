@@ -882,6 +882,12 @@ Cross-backend product-surface note (2026-07-10, `FUTURE-PARITY-BACKLOG.1.4` / AD
 host-language embedding is primary for Perl, Rust, Dart, Julia, Lua, and future variants. Distinct variant CLIs
 remain secondary thin adapters and may not own exclusive parser/compiler/runtime semantics.
 
+Spec-authoring quality note (2026-07-15, `FUTURE-PARITY-BACKLOG.18.1` / ADR `0035`): every future universal
+`.spec` feature must keep terseness, readability, and high expressiveness together. Remove redundant ceremony,
+not semantic signal; preserve typed diagnostics and locally predictable structure; prefer small reusable typed
+mechanisms over format-specific/host escapes. Uniform binding is the precedent. Recursive traversal retains
+`walk_leaves` / `map_leaves` / `reduce_leaves`; ambiguous short aliases are not adopted.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

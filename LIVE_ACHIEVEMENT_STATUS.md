@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.18.1 — govern expressive spec authoring**
+  (DONE — ADR `0035` adds authoring governance only; Lua `.4.3.7.6` remains executable next).
+
+  **Result:** Universal `.spec` evolution must now be terse, readable, and highly expressive simultaneously.
+  Terseness removes redundant ceremony, not semantic signal; readability preserves locally visible structure,
+  value flow, mutation, scope, recovery, and typed diagnostics; expressiveness comes from small reusable typed
+  mechanisms, not format-specific or host escapes. Uniform binding is the positive precedent. Recursive traversal
+  retains `walk_leaves`/`map_leaves`/`reduce_leaves`, so no ambiguous short aliases are added. The post-parity
+  structured-format program now requires representative authoring proof. No syntax or runtime behavior changed.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.4 — execute Lua rule-slot markers**
   (DONE — post-action split/named-mark events pass 121/121 on PUC Lua and LuaJIT).
 

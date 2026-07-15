@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.1` — terseness removes redundancy, not information): Evaluate future
+  `.spec` proposals against terseness, readability, and expressiveness together. Prefer one canonical abstraction,
+  orthogonal composition, inferred information only when unambiguous, and precise typed failures. Do not optimize
+  character count by erasing recursive/shallow distinctions or hiding behavior in format-specific/host escapes.
+  Uniform binding is the precedent: one scalar/array/harray/codeblock value slot plus runtime-kind dispatch and
+  `binding_kind_mismatch` is both shorter and clearer than selector namespaces or implicit coercion. Keep
+  `walk_leaves`/`map_leaves`/`reduce_leaves`: `_leaves` is semantic, not ceremony. Future format-driven features
+  must include realistic `.spec` excerpts and invalid/ambiguous boundaries. ADR `0035` governs this; no behavior
+  changed, and Lua `.4.3.7.6` remains active.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.4` — placement belongs in compiled state, timing belongs after action
   dispatch): Split markers are grammar-slot events, not helper calls. Preserve a typed event on the preceding
   regex index, carry it through compiled/public state, dispatch all actions and children first, then mutate the
