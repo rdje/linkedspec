@@ -134,7 +134,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-trace-controls", "status parity")
+  assert_equal(first.parity, "runtime-trace-events", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -277,7 +277,7 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
       json.encode(linkedspec.interpreter.to_json(untraced)),
       "direct trace result neutrality"
     )
-    assert_equal(#linkedspec.trace_events(direct_emitter), 2, "controls slice parse scope only")
+    assert_equal(#linkedspec.trace_events(direct_emitter), 4, "parse and runtime rule scopes")
     assert_contains(table.concat(direct_stdout), "lua_runtime:parse top_rule=Top", "direct parse enter")
     assert_contains(table.concat(direct_stdout), "matched=true cursor=1", "direct parse exit")
 
@@ -2149,6 +2149,115 @@ test("runtime interpreter guards bounds recursion zero progress and unsupported 
   )
   assert_equal(helper_ok, false, "unsupported runtime helper")
   assert_equal(linkedspec.is_runtime_interpreter_error(helper_error), true, "unsupported typed error")
+end)
+
+test("runtime trace events expose exact interpreter decisions without changing results", function()
+  local function emitter()
+    return linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG), {
+      stdout_writer = function() end,
+    })
+  end
+
+  local function find_event(one_emitter, topic, details)
+    for _, event in ipairs(linkedspec.trace_events(one_emitter)) do
+      if event.topic == topic and (details == nil or event.details:find(details, 1, true)) then
+        return event
+      end
+    end
+    fail("missing trace event " .. topic .. (details and (" containing " .. details) or ""))
+  end
+
+  local source = [[
+Top::AND
+ I { mark_here(init_mark) }
+ /BEGIN[ ]*/
+ @capture_slice
+ @mark(slot_mark)
+ -> Child {
+   save_cursor()
+   body = capture_until_boundary(Boundary)
+   restore_cursor()
+   rewind_match_start()
+   rewind_entry_start()
+   mark_here(action_mark)
+ }
+ E {
+   return({
+     "body" : body,
+     "action_mark" : mark_pos(action_mark),
+     "slot_mark" : mark_pos(slot_mark)
+   })
+ }
+
+Child:
+ /CHILD[ ]*/
+ E { return("child") }
+
+Boundary: /STOP/
+]]
+  local engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source)))
+  local untraced = linkedspec.runtime_parse(engine, "BEGIN CHILD gap STOP")
+  local traced_emitter = emitter()
+  local traced = linkedspec.runtime_parse(engine, "BEGIN CHILD gap STOP", { trace = traced_emitter })
+  assert_equal(
+    json.encode(linkedspec.interpreter.to_json(traced)),
+    json.encode(linkedspec.interpreter.to_json(untraced)),
+    "instrumented result identity"
+  )
+  assert_equal(traced.value.body, "gap ", "boundary result")
+
+  find_event(traced_emitter, "lua_runtime:rule", "rule=Top entry_regex=0 mode=And")
+  find_event(traced_emitter, "lua_runtime:regex_match", "rule=Top mode=AND expected_index=0")
+  find_event(traced_emitter, "lua_runtime:regex_match", "rule=Child entry_regex=0")
+  find_event(traced_emitter, "lua_runtime:child_dispatch", "edge_family=action rule=Top target=Child[0]")
+  find_event(traced_emitter, "lua_runtime:lifecycle_block", "rule=Top lifecycle=I")
+  find_event(traced_emitter, "lua_runtime:lifecycle_block", "rule=Top lifecycle=E")
+  for _, helper in ipairs({ "save_cursor", "restore_cursor", "rewind_match_start", "rewind_entry_start" }) do
+    find_event(traced_emitter, "lua_runtime:cursor_control", "helper=" .. helper .. " rule=Top")
+  end
+  find_event(traced_emitter, "lua_runtime:source_boundary", "helper=capture_until_boundary rule=Top")
+  find_event(traced_emitter, "lua_runtime:source_boundary", "found=1")
+  find_event(traced_emitter, "lua_runtime:mark_capture", "source=helper rule=Top helper=mark_here")
+  find_event(traced_emitter, "lua_runtime:mark_capture", "source=rule_slot rule=Top kind=capture_boundary")
+  find_event(traced_emitter, "lua_runtime:mark_capture", "source=rule_slot rule=Top kind=named_mark")
+
+  local enter_count = 0
+  local exit_count = 0
+  for _, event in ipairs(linkedspec.trace_events(traced_emitter)) do
+    if event.kind == linkedspec.TRACE_ENTER then enter_count = enter_count + 1 end
+    if event.kind == linkedspec.TRACE_EXIT then exit_count = exit_count + 1 end
+  end
+  assert_equal(exit_count, enter_count, "runtime scopes stay balanced")
+
+  local miss_untraced = linkedspec.runtime_parse(engine, "MISS")
+  local miss_emitter = emitter()
+  local miss_traced = linkedspec.runtime_parse(engine, "MISS", { trace = miss_emitter })
+  assert_equal(
+    json.encode(linkedspec.interpreter.to_json(miss_traced)),
+    json.encode(linkedspec.interpreter.to_json(miss_untraced)),
+    "no-match trace result identity"
+  )
+  local miss_event = find_event(miss_emitter, "lua_runtime:regex_match", "rule=Top mode=AND expected_index=0")
+  assert_contains(miss_event.details, "taken=0", "regex no-match decision")
+
+  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "" }), source = "//", line = 1 }),
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "Top" }), source = "=> Top", line = 1 }),
+  })
+  local recursive_engine = linkedspec.runtime_engine(linkedspec.compile_spec(
+    ast.spec_file({ rules = { recursive } }),
+    { validate_source = false }
+  ))
+  local recursive_untraced = linkedspec.runtime_parse(recursive_engine, "")
+  local recursive_emitter = emitter()
+  local recursive_traced = linkedspec.runtime_parse(recursive_engine, "", { trace = recursive_emitter })
+  assert_equal(
+    json.encode(linkedspec.interpreter.to_json(recursive_traced)),
+    json.encode(linkedspec.interpreter.to_json(recursive_untraced)),
+    "recursion trace result identity"
+  )
+  find_event(recursive_emitter, "lua_runtime:recursion_guard", "rule=Top entry_regex=0 cursor=0")
+  find_event(recursive_emitter, "lua_runtime:child_dispatch", "edge_family=blind mode=OR rule=Top")
 end)
 
 test("runtime failures carry neutral structured diagnostics with deepest rule attribution", function()

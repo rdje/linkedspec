@@ -574,9 +574,10 @@ typed emitter with `runtime_parse(engine, input, { trace = emitter })` or use
 structured enter/exit/decision/mark/dump/log events, environment-derived
 immutable configs, stdout/routed-file/mirror sinks, reset/append, and optional
 emoji are implemented in `linkedspec.trace`. Disabled or absent tracing is a
-no-op. The `.4.4.2` boundary emits only balanced `lua_runtime:parse` events and
-preserves exact parse-result JSON; `.4.4.3` owns rule/branch/lifecycle/cursor/
-boundary instrumentation.
+no-op. `.4.4.2` introduced balanced `lua_runtime:parse` scopes; `.4.4.3` adds
+balanced rule scopes, regex match/no-match, action/blind dispatch, recursion
+cutoff, lifecycle, cursor, source-boundary, and governed mark/capture events
+while preserving exact parse-result JSON.
 
 ### 10.3 Input Validation
 

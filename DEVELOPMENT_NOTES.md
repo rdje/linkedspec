@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.4.3` — instrument the one runtime, not a traced duplicate): Thread the optional
+  emitter through the parse context, then place events at the existing mechanism boundaries: rule scope entry/
+  cleanup, regex decision, cached action-child or blind-child return, lifecycle execution, recursion cutoff,
+  cursor mutation, boundary capture, and governed helper/rule-slot mark mutation. High owns structural scopes and
+  lifecycle; debug owns detailed decisions and positions. Keep byte offsets in internal trace details while public
+  result positions remain Unicode characters. Focused dual-ABI tests compare full result JSON for success,
+  no-match, action/blind dispatch, and recursion, then assert exact mechanism topics/details. PUC Lua and LuaJIT
+  pass 129/129; canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 610 seconds. Status is
+  `runtime-trace-events`, and `.4.4.4` owns no-drift.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.4.2` — trace controls stay caller-owned and mechanism-neutral): Lua follows
   the admitted Dart/Julia split: one immutable config and one caller-owned emitter own ordered thresholds, events,
   rendering, and stdout/route/mirror delivery. Runtime entrypoints accept the emitter directly or construct it from

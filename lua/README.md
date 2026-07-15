@@ -36,9 +36,10 @@ enter/exit/decision/mark/dump/log events to stdout, a resettable/appending file,
 or both. `runtime_parse(...)` / `runtime_execute(...)` accept a `trace` emitter
 in their options table, while the `_with_trace` entrypoints construct one from
 config. Disabled or absent tracing stays quiet, and successful result JSON is
-unchanged. The controls slice emits only `lua_runtime:parse`; `.4.4.3` owns
-deeper interpreter events. Both ABIs pass 128/128 and public status is
-`runtime-trace-controls`.
+unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
+action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
+governed mark/capture events. Both ABIs pass 129/129 and public status is
+`runtime-trace-events`.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -152,8 +153,8 @@ handled, thirteen intentional statement/receiver-only surfaces, and missing eage
 `.4.3.9.1` first passes 123/123. Permanent `.4.3.9.2` now proves exact 233+13 ownership for all 246 names, direct
 `call(rule)` result/`retv`/cursor behavior, and public status `runtime-helper-value-control`; both ABIs pass 125/125
 and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime failures, trace controls/sinks,
-runtime events, and closeout; structured diagnostics `.4.4.1` pass 126/126 and trace controls/sinks `.4.4.2`
-pass 128/128. Runtime instrumentation `.4.4.3` is active. Full frontend/compiler/function/staged trace remains `.5.3` after
+runtime events, and closeout; structured diagnostics `.4.4.1` pass 126/126, trace controls/sinks `.4.4.2`
+pass 128/128, and runtime instrumentation `.4.4.3` passes 129/129. No-drift `.4.4.4` is active. Full frontend/compiler/function/staged trace remains `.5.3` after
 general staged functions and native loading exist. This is native interpreter parity only; generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -164,7 +165,7 @@ Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as tr
 explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
 proof first raised both ABI suites to 123/123; the complete helper closeout now passes 125/125 and diagnostics/
 trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
-trace controls/sinks `.4.4.2` raise it to 128/128, with deeper runtime instrumentation `.4.4.3` next.
+trace controls/sinks `.4.4.2` raise it to 128/128, and runtime instrumentation `.4.4.3` raises it to 129/129.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while

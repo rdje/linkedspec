@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.4.3 — instrument Lua runtime trace**
+  (DONE — exact interpreter event coverage passes 129/129; no-drift `.4.4.4` is next).
+
+  **Result:** The existing Lua interpreter now emits balanced rule scopes and lifecycle events at high level, plus
+  debug recursion, regex, action/blind dispatch, cursor, source-boundary, and governed helper/rule-slot mark/capture
+  events through the optional caller-owned emitter. Disabled or absent tracing remains a no-op; success, no-match,
+  dispatch, and recursion results are byte-identical with and without tracing. PUC Lua and LuaJIT pass 129/129;
+  canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 610 seconds. Public status is
+  `runtime-trace-events`, coverage remains 246/105+1/122, capability remains 64/0/0, and `.4.4.4` is active.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.4.2 — native trace controls and caller-owned sinks**
   (DONE — levels/config/events/sinks and result-neutral parse scopes pass 128/128; `.4.4.3` is next).
 

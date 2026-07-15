@@ -15,6 +15,7 @@ tags: [lua, diagnostics, trace, runtime, staged-parsing, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.4.0; completed Dart .4.5 and Julia .4.5 plus later full-pipeline trace records"
 evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 adds typed neutral RuntimeDiagnostic payloads, optional engine spec identity, top/deepest-rule/handler attribution, specific top/input/lookup/execution stages, deterministic JSON, and unchanged successful output at 126/126 on PUC Lua and LuaJIT."
 evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks, reset/append, and result-neutral runtime wrappers at 128/128; .4.4.3 is active."
+evidence_update_2026_07_15_runtime_events: "LUA-BACKEND-PARITY.4.4.3 adds rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events behind the optional emitter and passes 129/129 on both Lua ABIs; .4.4.4 is the no-drift closeout."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md"
 ---
 
@@ -40,8 +41,8 @@ the staged pipeline existed. Lua reuses that dependency-safe architecture.
 
 The planning slice itself changed no Lua behavior or capability claim. `.4.4.1` consumes the typed runtime
 exception seam and parse-scoped rule stack to add neutral structured failures with deepest-rule preservation.
-`.4.4.2` now adds the typed control/sink/event boundary and balanced parse scope; `.4.4.3` is active for deeper
-runtime instrumentation.
+`.4.4.2` adds the typed control/sink/event boundary and balanced parse scope. `.4.4.3` now instruments the existing
+runtime mechanisms without changing results; `.4.4.4` owns the scoped no-drift closeout.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],

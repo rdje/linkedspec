@@ -5,13 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now instruments its one compiled-rule interpreter behind the optional trace emitter.
+  High-level events cover balanced parse/rule scopes and lifecycle blocks; debug events cover recursion cutoffs,
+  regex match/no-match, action/blind child dispatch, cursor and stack transitions, successful/unusable source
+  boundaries, governed helper mark/capture positions, and post-mutation rule-slot capture/named marks. Absent or
+  disabled emitters remain no-ops, and traced/untraced result JSON is exact across success, no-match, dispatch,
+  and recursion paths. PUC Lua and LuaJIT pass 129/129, status is `runtime-trace-events`, capability remains
+  64/0/0, and `.4.4.4` owns scoped runtime no-drift. Full loading/frontend/compiler/function/staged propagation
+  remains dependency-gated `.5.3`.
 - `2026-07-15` refresh: Lua now owns a zero-dependency native trace boundary in `linkedspec.trace`. Ordered typed
   levels/config/sink/event/scope/emitter records, exact aliases and numeric thresholds, immutable config updates,
   documented environment controls, structured event JSON, and deterministic indentation/emoji rendering feed
   caller-owned stdout, resettable/appending routed files, or mirror sinks. Direct emitter injection and config
   wrappers emit a balanced `lua_runtime:parse` scope without mutating caller options or parse results; absent or
-  disabled trace records/writes nothing. PUC Lua and LuaJIT pass 128/128, status is `runtime-trace-controls`,
-  capability remains 64/0/0, and `.4.4.3` exclusively owns deeper interpreter instrumentation.
+  disabled trace records/writes nothing. PUC Lua and LuaJIT pass 128/128 at that controls boundary, whose
+  historical status is `runtime-trace-controls`; `.4.4.3` later adds the runtime events recorded above.
 - `2026-07-15` refresh: Lua runtime errors now carry typed neutral `RuntimeDiagnostic` payloads. Optional engine
   `spec_name` / `spec_path` flows only into failures; `top_rule_selection`, `runtime_input`, `rule_lookup`, and
   `runtime_execution` distinguish the mechanism. Each rule adds a fallback before local-state unwind, while outer

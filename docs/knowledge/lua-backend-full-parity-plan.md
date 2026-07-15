@@ -18,6 +18,7 @@ evidence: "FUTURE-PARITY-BACKLOG.1.3 creates docs/tasks/LUA-BACKEND-PARITY.md af
 evidence_update_2026_07_15_diagnostics_trace_split: "LUA-BACKEND-PARITY.4.4.0 splits structured runtime diagnostics, controls/sinks, runtime instrumentation, and closeout. Full frontend/compiler/function/staged propagation remains dependency-correct .5.3 after general staged-function .5.1 and native loading .5.2."
 evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 adds neutral typed RuntimeDiagnostic payloads with optional spec identity, specific top/input/lookup/execution stages, deepest-rule/handler preservation, deterministic JSON, unchanged success output, and runtime-structured-diagnostics status at 126/126 on both ABIs."
 evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed ordered levels/config/events, environment controls, caller-owned stdout/route/mirror sinks, reset/append, and result-neutral traced runtime entrypoints at 128/128 on both ABIs; .4.4.3 owns deeper instrumentation."
+evidence_update_2026_07_15_runtime_trace_events: "LUA-BACKEND-PARITY.4.4.3 instruments rule scopes, regex decisions, action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and governed mark/capture events at 129/129 on both ABIs; .4.4.4 owns no-drift."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

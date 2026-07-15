@@ -269,10 +269,11 @@ without trace or corpus drift.
 
 ## Lua variant trace status
 
-As of `LUA-BACKEND-PARITY.4.4.2`, Lua exposes the complete native trace
-control/sink/event boundary and balanced runtime parse scopes. Deeper
-interpreter instrumentation remains the active `.4.4.3` leaf, so this is not
-yet a full trace-parity claim.
+As of `LUA-BACKEND-PARITY.4.4.3`, Lua exposes the native trace
+control/sink/event boundary plus runtime interpreter events. Full frontend,
+compiler, function-shell, native-loading, and staged propagation remains the
+dependency-gated `.5.3` owner, so this is not yet a full pipeline trace-parity
+claim.
 
 The top-level `linkedspec` module exports:
 
@@ -298,12 +299,23 @@ enabled and otherwise appends. Route suppresses stdout; mirror writes identical
 bytes to both destinations. Disabled or absent tracing records and writes
 nothing.
 
-At this controls boundary the runtime emits only balanced high-level
-`lua_runtime:parse` enter/exit events. This separation keeps exact rule, regex,
-dispatch, recursion, lifecycle, cursor, mark/capture, and source-boundary
-instrumentation reviewable under `.4.4.3`. Traced and untraced result JSON is
-identical, caller options are not mutated, and both PUC Lua and LuaJIT pass
-128/128.
+The runtime emits balanced high-level `lua_runtime:parse` and
+`lua_runtime:rule` enter/exit events. Debug events cover regex match/no-match,
+action/blind child dispatch, recursion cutoffs, all four cursor controls,
+successful/unusable source boundaries, governed mark/capture helpers, and
+post-mutation capture/named-mark rule slots. Lifecycle blocks are high-level
+marks. Traced and untraced result JSON is identical across success, no-match,
+dispatch, and recursion paths; caller options are not mutated; and both PUC
+Lua and LuaJIT pass 129/129. Public status is `runtime-trace-events`.
+
+```text
+[HIGH][enter] -> lua_runtime:parse top_rule=Top
+[HIGH][enter]   -> lua_runtime:rule rule=Top entry_regex=0 mode=And cursor=0
+[DEBUG][decision]     lua_runtime:regex_match taken=1 reason=rule=Top ...
+[DEBUG][mark]     lua_runtime:cursor_control helper=save_cursor rule=Top ...
+[HIGH][exit]   <- lua_runtime:rule matched=true cursor=12
+[HIGH][exit] <- lua_runtime:parse matched=true cursor=12
+```
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(

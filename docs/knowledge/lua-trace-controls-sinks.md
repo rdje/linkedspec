@@ -12,7 +12,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, trace, runtime, diagnostics, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.4.2 adds native levels/config/events/sinks and balanced parse-scope entrypoints at 128/128 on PUC Lua and LuaJIT; .4.4.3 separately owns deeper interpreter instrumentation."
+evidence: "LUA-BACKEND-PARITY.4.4.2 adds native levels/config/events/sinks and balanced parse-scope entrypoints at 128/128 on PUC Lua and LuaJIT; .4.4.3 then instruments the existing interpreter and passes 129/129."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -35,13 +35,12 @@ and writes nothing.
 `runtime_parse(...)` and `runtime_execute(...)` accept an emitter in the
 options table as `trace`. `runtime_parse_with_trace(...)` and
 `runtime_execute_with_trace(...)` accept a config, construct the emitter, and
-preserve the caller's options table. At `.4.4.2`, runtime tracing emits only a
-balanced `lua_runtime:parse` scope. Traced and untraced successful result JSON
-is identical on PUC Lua and LuaJIT. Rule, regex, branch, lifecycle, cursor, and
-source-boundary events remain the exclusive next owner `.4.4.3`; full native
-frontend/compiler/function-shell/staged propagation remains dependency-gated
-`.5.3`.
+preserve the caller's options table. `.4.4.2` introduced the balanced
+`lua_runtime:parse` scope; `.4.4.3` adds rule, regex, dispatch, recursion,
+lifecycle, cursor, mark/capture, and source-boundary events without changing
+successful result JSON on PUC Lua or LuaJIT. Full native frontend/compiler/
+function-shell/staged propagation remains dependency-gated `.5.3`.
 
 Related facts: [[lua-runtime-structured-diagnostics]],
-[[lua-runtime-diagnostics-trace-split]], [[dart-trace-controls-sinks]],
+[[lua-runtime-diagnostics-trace-split]], [[lua-runtime-trace-events]], [[dart-trace-controls-sinks]],
 [[julia-trace-controls-sinks]], [[trace-cross-variant-capability-contract]].

@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.4.3 — instrument Lua runtime trace
+
+Lua's existing compiled-rule interpreter now emits trace-only runtime events through the optional caller-owned
+emitter. High-level events cover balanced rule scopes and lifecycle blocks. Debug events cover recursion cutoffs,
+regex match/no-match decisions, action and blind child dispatch, all four cursor controls, successful/unusable
+source-boundary capture, governed mark/capture helper positions, and post-mutation rule-slot capture/named marks.
+
+No second runtime path was introduced. Absent or disabled tracing remains a no-op, and focused success, no-match,
+action-dispatch, blind-dispatch, and recursion tests prove exact traced/untraced result JSON. PUC Lua and LuaJIT
+pass 129/129; coverage remains 246/105+1/122 and capability remains 64/0/0. Public status becomes
+`runtime-trace-events`. Canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 610 seconds. Full frontend/
+compiler/function/staged propagation remains dependency-gated `.5.3`; runtime no-drift `.4.4.4` is next.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.4.2 — add Lua trace controls
 
 Lua now exports typed ordered none/low/medium/high/full/debug levels, immutable config updates, exact aliases and

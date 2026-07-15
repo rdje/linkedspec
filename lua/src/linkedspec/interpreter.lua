@@ -142,7 +142,7 @@ local function default_top(engine)
   return engine.compiled_spec.compiled_rule_order[1]
 end
 
-local function context(engine, input, top_rule, compiled_rules, diagnostic_sink)
+local function context(engine, input, top_rule, compiled_rules, diagnostic_sink, trace_emitter)
   local valid, position = json.validate_utf8(input)
   if not valid then
     local detail = "runtime input is not valid UTF-8 at byte " .. (position - 1)
@@ -168,12 +168,32 @@ local function context(engine, input, top_rule, compiled_rules, diagnostic_sink)
     active = {},
     lifecycle_events = {},
     diagnostic_sink = diagnostic_sink,
+    trace = trace_emitter,
     rule_stack = {},
     accumulator_stack = {},
     cursor_stack = {},
     compiled_rules = compiled_rules,
     top_rule = top_rule,
   }
+end
+
+local function runtime_trace_event(ctx, kind, topic, details, level)
+  if ctx.trace == nil then return nil end
+  return trace.emit_trace_event(ctx.trace, kind, topic, details, level)
+end
+
+local function runtime_trace_decision(ctx, topic, taken, reason, level)
+  if ctx.trace == nil then return taken end
+  return trace.trace_decision(ctx.trace, topic, taken, reason, level)
+end
+
+local function runtime_trace_scope(ctx, topic, details, level)
+  if ctx.trace == nil then return nil end
+  return trace.enter_trace_scope(ctx.trace, topic, details, level)
+end
+
+local function runtime_trace_scope_exit(ctx, scope, details)
+  if ctx.trace ~= nil and scope ~= nil then trace.exit_trace_scope(ctx.trace, scope, details) end
 end
 
 local execute_rule
@@ -325,7 +345,17 @@ end
 local function dispatch_edge_child(engine, edge_state, ctx)
   if edge_state.child_dispatched then return edge_state.child_result end
   edge_state.child_dispatched = true
+  local cursor_before = ctx.cursor_byte
   edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
+  runtime_trace_decision(
+    ctx,
+    "lua_runtime:child_dispatch",
+    edge_state.child_result.matched,
+    "edge_family=action rule=" .. edge_state.rule_label ..
+      " target=" .. edge_state.target.label .. "[" .. tostring(edge_state.target.index) .. "]" ..
+      " cursor_before=" .. tostring(cursor_before) .. " cursor_after=" .. tostring(ctx.cursor_byte),
+    trace.TRACE_DEBUG
+  )
   ctx.retv = copy_value(edge_state.child_result.value)
   return edge_state.child_result
 end
@@ -1738,6 +1768,21 @@ local function set_capture_start(ctx, byte_cursor)
   ctx.registers = ctx.registers:with_capture_start_byte(byte_cursor)
 end
 
+local function trace_mark_capture_helper(ctx, rule_label, helper_name, arity)
+  local one = ctx.registers.local_match
+  runtime_trace_event(
+    ctx,
+    trace.TRACE_MARK,
+    "lua_runtime:mark_capture",
+    "source=helper rule=" .. rule_label .. " helper=" .. helper_name ..
+      " arity=" .. tostring(arity) .. " cursor=" .. tostring(ctx.cursor_byte) ..
+      " match_start=" .. tostring(one and one.byte_start or -1) ..
+      " match_end=" .. tostring(one and one.byte_end or -1) ..
+      " capture_start=" .. tostring(ctx.registers.capture_start_byte or -1),
+    trace.TRACE_DEBUG
+  )
+end
+
 local function anonymous_capture_span(ctx, start_byte, end_byte, length_only)
   if start_byte == nil or end_byte == nil or start_byte < 0 or start_byte > #ctx.input or
       end_byte < start_byte or end_byte > #ctx.input then
@@ -1752,6 +1797,7 @@ end
 
 local function evaluate_anonymous_capture_helper(name, expr, ctx)
   if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
+  trace_mark_capture_helper(ctx, ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule, name, #expr.args)
   if name == "start_capture_slice" then
     set_capture_start(ctx, ctx.cursor_byte)
     return json.null
@@ -1801,6 +1847,9 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
     invalid_helper_arity(name, expectation, #expr.args)
   end
 
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  trace_mark_capture_helper(ctx, rule_label, name, #expr.args)
+
   local function mark_name(index)
     return capture_name(
       engine,
@@ -1811,7 +1860,6 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
     )
   end
 
-  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
   local marks = ctx.mark_buckets[rule_label]
   local first_mark_name = mark_name(1)
 
@@ -1924,6 +1972,18 @@ local function boundary_rule_name(engine, arg, ctx, accumulator, edge_state)
 end
 
 local function evaluate_capture_until_boundary(engine, expr, ctx, accumulator, edge_state)
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  if #expr.args == 0 then
+    runtime_trace_decision(
+      ctx,
+      "lua_runtime:source_boundary",
+      false,
+      "helper=capture_until_boundary rule=" .. rule_label ..
+        " reason=arguments_empty cursor=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_DEBUG
+    )
+    return json.null
+  end
   local saw_usable_boundary = false
   local boundary_start
   for _, arg in ipairs(expr.args) do
@@ -1942,13 +2002,43 @@ local function evaluate_capture_until_boundary(engine, expr, ctx, accumulator, e
       end
     end
   end
-  if not saw_usable_boundary then return json.null end
+  if not saw_usable_boundary then
+    runtime_trace_decision(
+      ctx,
+      "lua_runtime:source_boundary",
+      false,
+      "helper=capture_until_boundary rule=" .. rule_label ..
+        " reason=no_usable_boundary cursor=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_DEBUG
+    )
+    return json.null
+  end
 
   local capture_start = ctx.cursor_byte
   local capture_end = boundary_start or #ctx.input
-  if capture_end < capture_start or capture_end > #ctx.input then return json.null end
+  if capture_end < capture_start or capture_end > #ctx.input then
+    runtime_trace_decision(
+      ctx,
+      "lua_runtime:source_boundary",
+      false,
+      "helper=capture_until_boundary rule=" .. rule_label ..
+        " capture_start=" .. tostring(capture_start) .. " boundary=" .. tostring(capture_end),
+      trace.TRACE_DEBUG
+    )
+    return json.null
+  end
   local captured = ctx.input:sub(capture_start + 1, capture_end)
   set_live_cursor(ctx, capture_end)
+  runtime_trace_event(
+    ctx,
+    trace.TRACE_MARK,
+    "lua_runtime:source_boundary",
+    "helper=capture_until_boundary rule=" .. rule_label ..
+      " capture_start=" .. tostring(capture_start) .. " boundary=" .. tostring(capture_end) ..
+      " length=" .. tostring(capture_end - capture_start) ..
+      " found=" .. (boundary_start == nil and "0" or "1"),
+    trace.TRACE_DEBUG
+  )
   return captured
 end
 
@@ -2003,6 +2093,8 @@ end
 
 local function evaluate_cursor_control(name, expr, ctx)
   if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
+  local cursor_before = ctx.cursor_byte
+  local stack_before = #ctx.cursor_stack
   if name == "save_cursor" then
     ctx.cursor_stack[#ctx.cursor_stack + 1] = ctx.cursor_byte
   elseif name == "restore_cursor" then
@@ -2016,6 +2108,15 @@ local function evaluate_cursor_control(name, expr, ctx)
   elseif name == "rewind_entry_start" then
     if ctx.registers.entry_match then set_live_cursor(ctx, ctx.registers.entry_match.byte_start) end
   end
+  runtime_trace_event(
+    ctx,
+    trace.TRACE_MARK,
+    "lua_runtime:cursor_control",
+    "helper=" .. name .. " rule=" .. (ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule) ..
+      " before=" .. tostring(cursor_before) .. " after=" .. tostring(ctx.cursor_byte) ..
+      " stack_before=" .. tostring(stack_before) .. " stack_after=" .. tostring(#ctx.cursor_stack),
+    trace.TRACE_DEBUG
+  )
   return json.null
 end
 
@@ -2968,6 +3069,14 @@ local function lifecycle(engine, rule, name, ctx, accumulator)
         lifecycle = name,
         line = payload.line,
       }, EVENT_MT)
+      runtime_trace_event(
+        ctx,
+        trace.TRACE_MARK,
+        "lua_runtime:lifecycle_block",
+        "rule=" .. rule.label .. " lifecycle=" .. name .. " line=" .. tostring(payload.line) ..
+          " cursor=" .. tostring(ctx.cursor_byte),
+        trace.TRACE_HIGH
+      )
       execute_block(engine, payload.action_ast, ctx, accumulator, nil)
     end
   end
@@ -2992,8 +3101,31 @@ local function execute_rule_slot_events(rule, regex_index, ctx)
           event_kind = event.kind,
         })
       end
+      runtime_trace_event(
+        ctx,
+        trace.TRACE_MARK,
+        "lua_runtime:mark_capture",
+        "source=rule_slot rule=" .. rule.label .. " kind=" .. event.kind ..
+          " regex_index=" .. tostring(regex_index) .. " cursor=" .. tostring(ctx.cursor_byte) ..
+          (event.mark_name and (" mark_name=" .. event.mark_name) or ""),
+        trace.TRACE_DEBUG
+      )
     end
   end
+end
+
+local function trace_regex_decision(ctx, rule, one, cursor_before, reason)
+  runtime_trace_decision(
+    ctx,
+    "lua_runtime:regex_match",
+    one ~= nil,
+    "rule=" .. rule.label .. " " .. reason ..
+      " alternative=" .. tostring(one and one.alternative_index or -1) ..
+      " match_start=" .. tostring(one and one.byte_start or -1) ..
+      " match_end=" .. tostring(one and one.byte_end or -1) ..
+      " cursor_before=" .. tostring(cursor_before),
+    trace.TRACE_DEBUG
+  )
 end
 
 local function match_specific(engine, rule, index, ctx)
@@ -3012,7 +3144,12 @@ local function accept_match(engine, rule, one, ctx, accumulator)
   ctx.registers = ctx.registers:with_local_match(one)
   for _, edge in ipairs(rule.action_edges) do
     if edge.regex_index == one.alternative_index then
-      local edge_state = { edge = edge, target = edge.targets[1], child_dispatched = false }
+      local edge_state = {
+        edge = edge,
+        target = edge.targets[1],
+        rule_label = rule.label,
+        child_dispatched = false,
+      }
       if edge.action_payload then
         execute_block(engine, edge.action_payload.action_ast, ctx, accumulator, edge_state)
         if not edge_state.child_dispatched and edge_state.target.label ~= rule.label then
@@ -3028,10 +3165,16 @@ local function accept_match(engine, rule, one, ctx, accumulator)
 end
 
 local function regex_once(engine, rule, entry_index, ctx, accumulator)
-  if #rule.regex_patterns == 0 then return false end
+  local cursor_before = ctx.cursor_byte
+  if #rule.regex_patterns == 0 then
+    trace_regex_decision(ctx, rule, nil, cursor_before, "patterns=0")
+    return false
+  end
   if rule.mode_metadata.is_and and #rule.regex_patterns > 1 then
     for index = 0, #rule.regex_patterns - 1 do
+      cursor_before = ctx.cursor_byte
       local one = match_specific(engine, rule, index, ctx)
+      trace_regex_decision(ctx, rule, one, cursor_before, "mode=AND expected_index=" .. tostring(index))
       if not one then return false end
       accept_match(engine, rule, one, ctx, accumulator)
     end
@@ -3048,6 +3191,7 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator)
     end
     one = alternation:match(ctx.input, ctx.cursor_byte, engine.parse_mode)
   end
+  trace_regex_decision(ctx, rule, one, cursor_before, "entry_regex=" .. tostring(entry_index))
   if not one then return false end
   accept_match(engine, rule, one, ctx, accumulator)
   return true
@@ -3055,8 +3199,19 @@ end
 
 local function blind_once(engine, rule, ctx, accumulator)
   local any = false
-  for _, edge in ipairs(rule.blind_edges) do
+  for edge_index, edge in ipairs(rule.blind_edges) do
+    local cursor_before = ctx.cursor_byte
     local child = execute_rule(engine, edge.target.label, edge.target.index, ctx)
+    runtime_trace_decision(
+      ctx,
+      "lua_runtime:child_dispatch",
+      child.matched,
+      "edge_family=blind mode=" .. (rule.mode_metadata.is_and and "AND" or "OR") ..
+        " rule=" .. rule.label .. " index=" .. tostring(edge_index - 1) ..
+        " target=" .. edge.target.label .. "[" .. tostring(edge.target.index) .. "]" ..
+        " cursor_before=" .. tostring(cursor_before) .. " cursor_after=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_DEBUG
+    )
     ctx.retv = copy_value(child.value)
     if edge.action_payload then execute_block(engine, edge.action_payload.action_ast, ctx, accumulator, nil) end
     if rule.mode_metadata.is_and and not child.matched then return false end
@@ -3100,7 +3255,17 @@ execute_rule = function(engine, label, entry_index, ctx)
     })
   end
   local recursion_key = label .. ":" .. entry_index .. ":" .. ctx.cursor_byte
-  if ctx.active[recursion_key] then return rule_result(false, json.null) end
+  if ctx.active[recursion_key] then
+    runtime_trace_decision(
+      ctx,
+      "lua_runtime:recursion_guard",
+      true,
+      "rule=" .. label .. " entry_regex=" .. tostring(entry_index) ..
+        " cursor=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_DEBUG
+    )
+    return rule_result(false, json.null)
+  end
   ctx.active[recursion_key] = true
   local saved_registers = ctx.registers
   local saved_variables = ctx.variables
@@ -3113,6 +3278,13 @@ execute_rule = function(engine, label, entry_index, ctx)
   ctx.rule_stack[#ctx.rule_stack + 1] = label
   local accumulator = json.array()
   ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
+  local trace_scope = runtime_trace_scope(
+    ctx,
+    "lua_runtime:rule",
+    "rule=" .. label .. " entry_regex=" .. tostring(entry_index) ..
+      " mode=" .. rule.mode_metadata.name .. " cursor=" .. tostring(ctx.cursor_byte),
+    trace.TRACE_HIGH
+  )
   local ok, result_or_flow = pcall(function()
     lifecycle(engine, rule, "I", ctx, accumulator)
     local minimum = rule.mode_metadata.rep_min
@@ -3181,6 +3353,17 @@ execute_rule = function(engine, label, entry_index, ctx)
       rule_label = label,
     }))
   end
+  local trace_exit_details
+  if ok then
+    trace_exit_details = "matched=" .. tostring(result_or_flow.matched) .. " cursor=" .. tostring(ctx.cursor_byte)
+  elseif getmetatable(result_or_flow) == FLOW_MT and
+      (result_or_flow.kind == "return" or result_or_flow.kind == "next") then
+    trace_exit_details = "matched=true cursor=" .. tostring(ctx.cursor_byte)
+  else
+    local message = getmetatable(result_or_flow) == ERROR_MT and result_or_flow.message or tostring(result_or_flow)
+    trace_exit_details = "error=" .. message .. " cursor=" .. tostring(ctx.cursor_byte)
+  end
+  runtime_trace_scope_exit(ctx, trace_scope, trace_exit_details)
   ctx.accumulator_stack[#ctx.accumulator_stack] = nil
   ctx.rule_stack[#ctx.rule_stack] = nil
   ctx.registers = saved_registers
@@ -3218,7 +3401,14 @@ function M.runtime_parse(engine, input, options)
       }),
     })
   end
-  local ctx = context(engine, input, top, engine.compiled_spec.rules_by_label, options.diagnostic_sink)
+  local ctx = context(
+    engine,
+    input,
+    top,
+    engine.compiled_spec.rules_by_label,
+    options.diagnostic_sink,
+    options.trace
+  )
   local trace_scope
   if options.trace ~= nil then
     trace_scope = trace.enter_trace_scope(
