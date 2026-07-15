@@ -114,8 +114,9 @@ This `README.md` is the **single entry point** to the project.
   in the current isolated function frame, preserves static function/helper precedence, restores outer stores,
   composes callback results, and reports typed missing/wrong-kind/arity/recursion failures. Both ABIs pass 146/146
   and public status is `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes the staged-
-  function parent without behavior change, and native loading `.5.2` is active. Outward descriptor admission
-  remains `.5.3`. Full frontend/
+  function parent without behavior change. Planning `.5.2.0` splits native loading into portable resolve/load,
+  automatic spec-defined function parsing, full compile/engine composition, and no-drift; `.5.2.1` is active.
+  Outward descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

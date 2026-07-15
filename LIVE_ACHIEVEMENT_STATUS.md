@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.2.0 — split Lua native spec loading**
+  (DONE — dependency-correct implementation leaves exist; portable resolve/load `.5.2.1` is next).
+
+  **Result:** ADR/fixture/completed-backend/current-Lua audit separates portable resolve/load, automatic
+  spec-defined function parsing, full compile/engine composition, and no-drift. A direct native probe compiles and
+  executes `specs/user_function_definition.spec` over real `fn zero()` source and returns the exact typed node,
+  proving the automatic path needs no raw scanner. No behavior changes: both ABIs remain 146/146, the native
+  contract checker passes 14/9/4, status remains `runtime-user-functions-contextual-codeblock-v1`, capability
+  remains 64/0/0, and mutation testing remains manual-only.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.5 — close Lua staged functions no drift**
   (DONE — staged functions are closed; portable native loading `.5.2` is next).
 

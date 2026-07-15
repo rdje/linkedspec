@@ -15,8 +15,9 @@ This document is the current high-level technical reading of the project shape. 
   later function statements, restores the outer caller, and returns chainable values. Registered functions and
   governed helpers retain static precedence; missing/harray/arity/recursion failures stay typed. Both ABIs pass
   146/146, status is `runtime-user-functions-contextual-codeblock-v1`, and capability remains 64/0/0. No-drift
-  `.5.1.5` closes the staged-function parent and activates native loading `.5.2`. Descriptors remain `.5.3`,
-  generated source `.8`, and explicit/general dynamic codeblocks remain `.11.7`.
+  `.5.1.5` closes the staged-function parent. Planning `.5.2.0` orders portable resolve/load, automatic spec-owned
+  function parsing, full composition, and no-drift; `.5.2.1` is active. Descriptors remain `.5.3`, generated
+  source `.8`, and explicit/general dynamic codeblocks remain `.11.7`.
 - `2026-07-15` refresh: Lua variadic-v2 calls now execute through the same staged ActionIR function runtime as
   fixed calls. Caller arguments still evaluate exactly once left-to-right; the invocation frame copies every value,
   binds the fixed prefix normally, and copies extras again into one fresh typed array for the final rest name.

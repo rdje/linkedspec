@@ -26,8 +26,9 @@ tests remain 146/146 on PUC Lua and LuaJIT, and capability remains 64/0/0 becaus
 was admitted. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 644 seconds. Mutation testing remains
 a separately scheduled manual campaign and was not part of the closeout gate.
 
-The next dependency-ready leaf is portable native named/path loading `.5.2`, implemented as adapters over the
-existing in-memory APIs. Outward descriptors plus full-pipeline trace remain `.5.3`; generated preservation and
+Planning `.5.2.0` splits portable native loading into resolve/load `.5.2.1`, automatic spec-defined function-shell
+parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`; `.5.2.1` is active. Outward
+descriptors plus full-pipeline trace remain `.5.3`; generated preservation and
 execution remain `.8`; corpus and parser CLI have later owners; explicit `{|params| ...}` literals and general
 bound dynamic calls remain `.11.7`.
 

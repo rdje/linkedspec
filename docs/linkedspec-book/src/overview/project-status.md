@@ -82,8 +82,8 @@ Three backbone items tracked major structural modernization — all done:
   both contextual spellings without promoting harrays. Runtime `.5.1.4.2` executes those zero-positional blocks in
   the current isolated function frame, restores outer stores, preserves static callable precedence, composes
   results, and keeps callback failures typed. Both ABIs pass 146/146 with public status
-  `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes parent `.5.1`, native loading `.5.2`
-  is active, and full native-loading/frontend/
+  `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes parent `.5.1`; planning `.5.2.0`
+  splits native loading and portable resolve/load `.5.2.1` is active. Full native-loading/frontend/
   compiler/function/staged/runtime trace remains `.5.3` after its `.5.1`/`.5.2` owners exist. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
@@ -100,7 +100,9 @@ Three backbone items tracked major structural modernization — all done:
   prefix at 136/136. `.5.1.3.2` binds fresh copied rest arrays and executes the exact shared fixture at 139/139;
   `.5.1.4.1` preserves final codeblock metadata and contextual normalization at 142/142; `.5.1.4.2` executes the
   dynamic contextual path at 146/146; and `.5.1.5` closes the parent after correcting one stale README claim.
-  Native loading `.5.2` is active.
+  Planning `.5.2.0` proves the current runtime can execute `specs/user_function_definition.spec`, then splits
+  resolve/load `.5.2.1`, automatic spec-defined function parsing `.5.2.2`, full composition `.5.2.3`, and no-drift
+  `.5.2.4`; `.5.2.1` is active.
   Descriptors/full trace remain `.5.3`, generated Lua remains `.8`, and explicit callable literals/bound
   calls remain `.11.7`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. The program is dormant until full current-backend parity and no format implementation has started.

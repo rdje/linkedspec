@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.2.0 — split Lua native spec loading
+
+Split broad native loading before code along the actual pipeline dependencies. Portable request validation,
+deterministic name/path resolution, regular-file selection, byte loading, strict UTF-8 preservation, and direct
+14/9/4 fixture consumption belong to `.5.2.1`. Automatic execution of the spec-owned function-definition grammar
+belongs to `.5.2.2`; full parse/validate/compile and identity-bearing engine composition belongs to `.5.2.3`; and
+public no-drift belongs to `.5.2.4`. Descriptors/full-pipeline trace remain `.5.3`; generated source, corpus
+execution, and parser CLI retain later owners.
+
+A direct native probe confirms the key dependency is feasible without a raw scanner: current Lua parses,
+validates, and compiles `specs/user_function_definition.spec`, executes `user_function_definitions` over a real
+`fn zero()` source, and returns one exact `function_definition` node named `zero` with its exact body text. No
+behavior, public status, capability, or test count changes. Both Lua ABIs remain 146/146; the neutral native
+resolution checker passes 14/9/4; capability remains 64/0/0; and `.5.2.1` is active. Mutation testing remains
+manual-only and was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.5 — close Lua staged functions no drift
 
 Closed the Lua staged-function parent after an exact source/API/test/public-doc/Knowledge-Map audit. Deterministic

@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.2.0` — filesystem policy, spec-language parsing, and compiled identity are
+  separate mechanisms): Implement ADR `0026` through a narrow resolver/byte-loader first; it can consume all
+  14/9/4 cases without parsing source. Then make Lua run the existing spec-owned function-shell grammar and feed
+  only its typed output into the existing projector/body dispatcher. Only after both are green should the public
+  loader compose parse, validation, compile, and identity-bearing engine creation. A direct native probe proves
+  the current runtime can already execute `specs/user_function_definition.spec` and return the exact `fn zero()`
+  node, so no raw scanner or host-language grammar is justified. Close public no-drift last. Full-pipeline trace
+  remains `.5.3`; generated/corpus/CLI remain later. No behavior changes; both ABIs remain 146/146, the native
+  checker passes 14/9/4, capability stays 64/0/0, and mutation campaigns remain manual-only.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.5` — close by ownership inventory, not another runtime path): Audit the
   staged-function surface as one dependency chain: spec-owned shell -> typed payload/job -> deterministic staged
   provider/stitching -> immutable registry/frame -> fixed/variadic/contextual execution -> public status/tests.

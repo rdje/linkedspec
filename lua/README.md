@@ -55,7 +55,8 @@ remain harrays. Runtime then executes the deferred block in the current isolated
 functions and governed helpers ahead of the contextual slot, restores the outer caller, and returns an ordinary
 composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and active recursion stay typed. Both
 ABIs pass 146/146; public status is `runtime-user-functions-contextual-codeblock-v1`. No-drift closes the staged-
-function parent; native loading is next, while outward descriptors remain a later owner.
+function parent. Planning splits native loading into portable resolve/load, automatic spec-defined function parsing,
+full compile/engine composition, and no-drift; portable resolve/load is next, while outward descriptors remain later.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -207,7 +208,7 @@ complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/comp
 spellings normalize to one zero-positional typed argument without harray promotion. Runtime `.5.1.4.2` executes
 that argument with current function-frame bindings, cleanup-safe outer restoration, static callable precedence,
 chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` closes parent `.5.1`; native loading
-`.5.2` is active. Full frontend/compiler/function/
+planning `.5.2.0` is complete and portable resolve/load `.5.2.1` is active. Full frontend/compiler/function/
 staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

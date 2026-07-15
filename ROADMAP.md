@@ -954,7 +954,9 @@ all four invalid declarations, and normalizes attached/parenthesized blocks with
 `.5.1.4.2` executes those zero-positional blocks in the current isolated function frame, restores outer stores,
 preserves static callable precedence, composes results, and keeps callback failures typed. Both ABIs pass 146/146
 with status `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes parent `.5.1` without
-behavior change and activates native loading `.5.2`. Full native-pipeline trace remains dependency-correct `.5.3`.
+behavior change and activates native loading `.5.2`. Planning `.5.2.0` separates portable resolve/load `.1`,
+automatic spec-defined function parsing `.2`, full compile/engine composition `.3`, and no-drift `.4`; `.5.2.1`
+is active. Full native-pipeline trace remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -971,8 +973,8 @@ fixture and lock eager order, copied mixed values, empty freshness, receiver cha
 failures at 139/139. Final contextual metadata then passes 142/142 with exact sidecar preservation and
 zero-positional `codeblock_argument` normalization. Runtime invocation passes 146/146 with dynamic function-frame
 bindings, cleanup-safe outer restoration, static callable precedence, chainable results, and typed failures.
-Public status is `runtime-user-functions-contextual-codeblock-v1`; parent `.5.1` is closed, `.5.2` is active, and
-capability remains 64/0/0.
+Public status is `runtime-user-functions-contextual-codeblock-v1`; parent `.5.1` is closed, planning `.5.2.0` is
+complete, portable resolve/load `.5.2.1` is active, and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

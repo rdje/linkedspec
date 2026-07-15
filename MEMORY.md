@@ -10,20 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.1.5` — staged-function runtime/API/public no-drift closeout.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.2.0` — dependency-correct native-loading split.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.2.0 - split Lua native spec loading`.
 - prepared_commit: `none`.
-- active_work_unit: clean handoff to portable native named/path loading `LUA-BACKEND-PARITY.5.2` after staged-
-  function parent `.5.1` closes at 146/146 on both Lua ABIs.
-- next_action: consume the neutral native resolution contract through name/path/root/strict-UTF-8/stage-aware Lua
-  adapters over the existing in-memory parse/compile/engine APIs, without fallback lookup or implicit transcoding.
-- current_proof: Exact inventory confirms deterministic staged body execution/stitching, isolated frame
-  preparation, and fixed-v1/variadic-v2/contextual runtime ownership with no parallel path. One stale Lua README
-  dispatch claim is corrected. Both ABIs remain 146/146; callable checkers remain 3/9/7 and 7/11/9/7/4/8;
-  coverage is 246/105+1/122; capability is 64/0/0; status is
-  `runtime-user-functions-contextual-codeblock-v1`; descriptors/full trace remain `.5.3`, generated source `.8`,
-  corpus/CLI later lanes, and explicit/general dynamic codeblocks `.11.7`. Canonical local CI passes CLI 61x2
-  plus Phase 0 `1..1031` in 644 seconds; mutation testing remains manual-only and was not run.
+- active_work_unit: portable native request/resolution/strict-UTF-8 loading `LUA-BACKEND-PARITY.5.2.1`.
+- next_action: add public typed request/options/resolved/loaded/error values and consume every shared 14/9/4 case
+  directly on both Lua ABIs, with no parse/compile work, recursive fallback, implicit root, or transcoding.
+- current_proof: ADR `0026`, the executable contract, completed loaders, and current Lua seams are audited. A
+  direct native probe parses/validates/compiles `specs/user_function_definition.spec`, executes it over real
+  `fn zero()` source, and returns one exact typed node, so `.5.2.2` can later automate spec-owned shell parsing
+  without a raw scanner. `.5.2.1` owns resolve/load, `.5.2.3` full composition, `.5.2.4` no-drift, and `.5.3`
+  descriptors/full trace. Both ABIs remain 146/146; native contract checker passes 14/9/4; capability is 64/0/0;
+  status remains `runtime-user-functions-contextual-codeblock-v1`; mutation testing remains manual-only.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -34,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: none after the `.5.1.5` commit; mutation campaigns remain parked
+- blockers: none. in_flight_uncommitted: none after the `.5.2.0` commit; mutation campaigns remain parked
   and no mutant run belongs to ordinary commit/local-CI workflow.

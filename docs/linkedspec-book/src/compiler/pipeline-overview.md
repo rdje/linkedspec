@@ -95,7 +95,9 @@ function frame, preserves registered-function and governed-helper precedence, re
 ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Both Lua ABIs pass 146/146
 with status `runtime-user-functions-contextual-codeblock-v1`; outward descriptors remain `.5.3`.
 The following no-drift audit closes Lua's staged-function parent and advances the frontier to portable native
-named/path loading without changing this runtime status or claiming generated-source support.
+named/path loading without changing this runtime status or claiming generated-source support. Planning splits that
+work into portable resolve/load, automatic execution of the spec-owned function-shell grammar, full compile/engine
+composition, and no-drift; the resolve/load leaf is active.
 
 ```text
 fn apply(value, callback: codeblock) {
