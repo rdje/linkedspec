@@ -3829,6 +3829,37 @@ before implementation.
     or mutation-score claim changes.
   Commit: `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing`
 
+- ID: `FUTURE-PARITY-BACKLOG.21`
+  Status: `proposed`
+  Goal: Add backend-specific implementation companion books around the canonical neutral mdBook.
+  Children: `.21.0`, `.21.1`; detailed execution tree: `BACKEND-COMPANION-BOOKS`
+  Acceptance: The neutral mdBook remains the sole normative language/portable-behavior owner; independently
+    buildable Perl/Rust/Dart/Julia/Lua companions document only user-relevant variant implementation, embedding,
+    operation, performance, debugging, and limitation material; cross-links, canonical-owner metadata, and
+    registered drift checks prevent five copied manuals.
+
+- ID: `FUTURE-PARITY-BACKLOG.21.0`
+  Status: `done`
+  Goal: Adopt and dependency-order the companion-book architecture before scaffolding or migration.
+  Dependencies: `.20.0`
+  Acceptance: Record ADR `0040`, the detailed task tree, exact content boundary, five companion scope, risks,
+    parity dependency, and one future inventory frontier across task/index/roadmaps/live/KM/mdBook; change no book
+    layout or current content ownership.
+  Verification: **PASS 2026-07-15.** ADR `0040` and `BACKEND-COMPANION-BOOKS` define one normative neutral book,
+    five optional implementation companions, precise what-versus-how routing, shared-template/independent-build/
+    canonical-owner/drift gates, and a read-only inventory first. `.21.1` remains dependency-gated until current
+    backend parity completes. No scaffold, content move, runtime behavior, or capability changed.
+  Commit: `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books`
+
+- ID: `FUTURE-PARITY-BACKLOG.21.1`
+  Status: `pending` / dependency-gated
+  Goal: Execute the detailed `BACKEND-COMPANION-BOOKS.1-.8` inventory/scaffold/population/closeout program.
+  Dependencies: `.21.0`, complete current Perl/Rust/Dart/Julia/Lua parity
+  Acceptance: All five companions and the neutral book satisfy the detailed tree's build/navigation/ownership/
+    no-duplication gates; ordinary portable readers never require a companion.
+  Verification: `pending`
+  Commit: `pending`
+
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
 Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
@@ -4712,6 +4743,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
 | 184 | `FUTURE-PARITY-BACKLOG.20.0` | `done` | ADR 0039 governs explicit milestone-scoped Rust mutation testing; list-only baseline 3,333, no run. |
+| 185 | `FUTURE-PARITY-BACKLOG.21.0` | `done` | ADR 0040 governs one neutral mdBook plus five linked non-normative implementation companions; no scaffold yet. |
+| 186 | `FUTURE-PARITY-BACKLOG.21.1` | `pending` / dependency-gated | Run the companion inventory/scaffold/population program only after current backend parity. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5353,6 +5386,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.21.0` | User proposal; existing neutral-book/backend-README architecture; ADR 0040; detailed task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. One canonical neutral book plus five linked implementation companions is adopted and dependency-gated; no scaffold/content migration or behavior change. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.20.0` | KM/Rust workspace/test/local-CI audit; cargo-mutants 27.0.0; list-only 3,333/file/package/genre census; generated Unicode provenance; ADR 0039; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Mutation testing is adopted only for explicit campaigns, never per commit; no mutant ran, no score exists, and no Rust/test/CI behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR 0038; separate native-accelerator tree; program/task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Dynamic parsing remains primary/oracle/fallback; any accelerator is optional, fingerprinted, equivalence-gated, trust-isolated, and measurement-admitted; no behavior or speed claim changed and Lua `.5.1.2` resumes. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.2` | Knowledge Map-first cross-variant trace/status audit; duplicate Dart trace-book root cause; ADR 0037; format-program `.2.7`; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Correlated compile/runtime trace and exact emission-only rule filters are future format-readiness requirements; stale Dart prose is removed; Lua `.5.3` remains the full-pipeline owner; no behavior changed and Lua `.5.1.2` resumes. |
@@ -5488,6 +5522,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.21.0` | `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books` | ADR 0040, one neutral normative owner, five implementation companions, routing/drift gates, and parity dependency. |
 | `FUTURE-PARITY-BACKLOG.20.0` | `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing` | ADR 0039, exact list-only census, no-per-commit rule, survivor taxonomy, narrow generated exclusion, and detailed tree. |
 | `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, explicit trust/measurement gates, and non-blocking horizon tree. |
 | `FUTURE-PARITY-BACKLOG.18.2` | `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability` | ADR 0037, correlated construction/runtime trace, exact rule filters, bounded payloads, non-interference proof, and Dart doc-drift repair. |
@@ -5648,7 +5683,11 @@ Read-only evidence recorded on 2026-07-10:
   are prohibited per commit, in pre-commit, and in ordinary local CI; future work starts with a safe manual
   targeted pilot and admits sharded breadth only for justified milestones/releases. Survivors/timeouts/unviable
   outcomes remain distinct, the generated Unicode table is the sole initial evidence-backed exclusion, no score
-  is claimed, and Lua `.5.1.2` resumes.
+  is claimed, and ordinary commit/local-CI workflow remains unchanged.
+- `2026-07-15`: `.21.0` adopts ADR `0040` and creates `BACKEND-COMPANION-BOOKS`. The neutral mdBook remains the
+  sole normative semantic/portable owner; five independently buildable companions will later document only
+  user-relevant variant implementation and embedding details. Inventory, shared scaffold/governance, five content
+  leaves, and closeout are dependency-gated on current backend parity; no scaffold or content move occurs now.
 - `2026-07-15`: `.18.3` adopts ADR `0038` and creates `NATIVE-PARSER-ACCELERATOR` as a separate non-blocking
   horizon. Dynamic load-`.spec` parsing remains primary, oracle, and fallback. Generated-source v1 supplies
   semantic foundations but no optimization claim; any later artifact needs normalized-IR derivation, full

@@ -10,8 +10,8 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.2.2` — automatic cached spec-defined function parsing.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.21.0` — adopt the parity-gated backend companion-book architecture.
+- latest_commit: `HEAD` — `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books`.
 - prepared_commit: `none`.
 - active_work_unit: loaded-source parse/validate/compile and identity-bearing engine composition
   `LUA-BACKEND-PARITY.5.2.3`.
@@ -24,7 +24,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   existing Unicode projector/body dispatcher without a raw scanner. PUC Lua and LuaJIT pass 151/151 with status
   `native-spec-defined-functions-v1`; capability is 64/0/0. Canonical local CI passes CLI 61x2 plus Phase 0
   `1..1031` in 631 seconds. `.5.2.3` owns loaded-source full composition, `.5.2.4` no-drift, and `.5.3`
-  descriptors/full trace; mutation testing remains manual-only.
+  descriptors/full trace. ADR `0040` and `BACKEND-COMPANION-BOOKS` adopt one normative neutral book plus five
+  linked implementation companions; implementation starts only after full current-backend parity and no scaffold
+  or content migration exists yet. Mutation testing remains manual-only.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -35,5 +37,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.5.2.2` is fully verified and awaiting commit;
+- blockers: none. in_flight_uncommitted: `.21.0` is fully verified and awaiting commit; after commit resume `.5.2.3`;
   mutation campaigns remain parked and no mutant run belongs to ordinary commit/local-CI workflow.

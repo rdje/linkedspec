@@ -346,6 +346,11 @@ Top-level project docs:
 - `TOOLBOX.md` — LinkedSpec's own diagnostic/debug toolbox (the probes, the `LINKEDSPEC_TRACE_LEVEL` trace framework, the `tools/` scripts, the gates); reach for it FIRST when diagnosing
 - `AGENTS.md` + mirrors (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`) — tool-neutral agent bootstrap pointers
 
+The current mdBook remains the sole normative backend-neutral manual. ADR `0040` adopts future linked Perl/Rust/
+Dart/Julia/Lua implementation companions for native setup, embedding, architecture, operation, performance, and
+troubleshooting detail that does not belong in the portable manual. `BACKEND-COMPANION-BOOKS` is dependency-gated
+on current backend parity; no companion scaffold or content migration exists yet.
+
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Rust mutation testing is adopted under ADR `0039`, but mutation execution will never run per commit, from

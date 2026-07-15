@@ -128,6 +128,9 @@ strict UTF-8 preservation and consumes all shared 14/9/4 cases. Automatic spec-d
 then resolves the bundled grammar module-relatively, validates/compiles it once, executes it in process, and
 composes typed output without a raw scanner. Both Lua ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`; full loaded-source composition `.5.2.3` and no-drift `.5.2.4` follow.
+ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
+`BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
+build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.
 One-emitter native loading,
 frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
 the owners it must traverse. This split changes no runtime or capability claim.

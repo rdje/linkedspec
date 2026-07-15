@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.21.0 — plan backend companion books**
+  (DONE — architecture adopted; implementation waits for current backend parity; Lua `.5.2.3` resumes).
+
+  **Result:** ADR `0040` and `BACKEND-COMPANION-BOOKS` keep the current neutral mdBook as the sole normative
+  semantic/portable owner and plan optional independently buildable Perl/Rust/Dart/Julia/Lua implementation
+  companions. Exact content routing, read-only inventory first, shared template, build/navigation/canonical-owner/
+  no-copy drift gates, five population leaves, and closeout are owned. No scaffold, content migration, behavior,
+  or capability changed.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.2.2 — automate Lua function parsing**
   (DONE — automatic spec-owned function parsing is green; loaded-source compile/engine composition `.5.2.3` is
   next).

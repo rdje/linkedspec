@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.21.0 — plan backend companion books
+
+Adopted ADR `0040` and the dependency-gated `BACKEND-COMPANION-BOOKS` tree. The existing mdBook remains the sole
+normative owner of `.spec`/ActionIR semantics, portable behavior, shared AST/diagnostic/conformance contracts, and
+common examples. After current backend parity, independently buildable Perl, Rust, Dart, Julia, and Lua companions
+may document user-relevant native setup/APIs/embedding, implementation architecture, diagnostics/trace, generated
+or native artifacts, performance/deployment, troubleshooting, and precise variant limitations.
+
+The rollout starts with a read-only page inventory, then establishes a shared template, independent builds,
+cross-links, canonical-owner metadata, and mechanical drift checks before any migration. Five population leaves
+and final no-drift follow. This adoption slice creates no companion scaffold, moves no current content, changes no
+runtime behavior or capability, and does not interrupt Lua parity.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.2.2 — automate Lua function parsing
 
 Added a native `UserFunctionDefinitionAstParser` adapter that resolves the repository-owned

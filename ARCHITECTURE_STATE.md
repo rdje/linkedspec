@@ -22,6 +22,13 @@ This document is the current high-level technical reading of the project shape. 
   `native-spec-defined-functions-v1`, capability remains 64/0/0, and loaded-source compile/engine composition
   `.5.2.3` is active. No-drift `.5.2.4`, descriptors `.5.3`, generated source `.8`, and explicit/general dynamic
   codeblocks `.11.7` retain separate owners.
+- `2026-07-15` documentation architecture: ADR `0040` keeps `docs/linkedspec-book/` as the sole normative,
+  backend-neutral owner of `.spec` semantics and portable behavior, and adopts one optional implementation
+  companion each for Perl, Rust, Dart, Julia, and Lua. Companions will explain host APIs, embedding, toolchains,
+  ABIs, implementation architecture, trace/debug, generated artifacts, performance/deployment, and exact variant
+  boundaries by linking to—not copying—the neutral contract. `BACKEND-COMPANION-BOOKS.1+` is dependency-gated
+  until full current-backend parity; a read-only ownership inventory and mechanical build/link/drift governance
+  precede any scaffold population or content migration.
 - `2026-07-15` refresh: Lua variadic-v2 calls now execute through the same staged ActionIR function runtime as
   fixed calls. Caller arguments still evaluate exactly once left-to-right; the invocation frame copies every value,
   binds the fixed prefix normally, and copies extras again into one fresh typed array for the final rest name.

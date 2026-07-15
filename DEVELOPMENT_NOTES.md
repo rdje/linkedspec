@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.21.0` — separate normative semantics from variant implementation guidance):
+  Use one backend-neutral mdBook as the only portable contract and five optional implementation companions for
+  host-specific how/operation material. Avoid both bad extremes: do not dilute the neutral book with every ABI,
+  toolchain, cache, and deployment detail; do not clone the neutral manual five times. Start with a read-only
+  retain/move/link/remove inventory, establish shared structure plus independent-build/link/canonical-owner/drift
+  gates, then populate each backend. Dependency-gate implementation on full current parity so incomplete Lua state
+  is not fossilized. ADR `0040` and `BACKEND-COMPANION-BOOKS` own the future work; no scaffold exists now.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.2.2` — make the spec-owned grammar executable infrastructure, not duplicated
   syntax): Resolve the internal function grammar from the Lua module location with an empty root list, then reuse
   the ordinary parse/validate/compile/runtime stack. Cache only a successful compiled parser; execute it anew over
