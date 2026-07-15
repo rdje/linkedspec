@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now preserves the exact callable-signature storage union. Fixed version 1 retains only
+  top-level `params`/`arity`; variadic version 2 retains only its six-field typed signature in serialized shell,
+  AST, staged jobs, registry entries, and compiled state while internal positional mirrors remain identity-checked.
+  Registry lookup accepts `arity >= min_arity`, reports `at least N`, and keeps the maximum unbounded. All seven
+  invalid-definition classes, mixed-version storage, and sidecar signature drift fail through typed owners.
+  Runtime variadic execution and outward descriptors deliberately fail closed for `.5.1.3.2` and `.5.3`. Both
+  ABIs pass 136/136, status is `runtime-user-functions-variadic-v2-state`, capability remains 64/0/0, and
+  fresh-rest-array execution `.5.1.3.2` is active.
 - `2026-07-15` refresh: Lua fixed-v1 functions now execute through the one ActionIR runtime. Raw registered names
   resolve before helper canonicalization; caller arguments evaluate once left-to-right; copied values bind into
   fresh scalar/array/harray stores; staged `body_ast` JSON is integrity-checked against reconstructed typed source;

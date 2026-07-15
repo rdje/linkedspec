@@ -339,8 +339,11 @@ composes the function shell and dispatch directly. `.5.1.2` adds registry-first 
 execution: eager ordered caller arguments, copied fresh scalar/array/harray stores,
 staged-AST integrity checks, local final/early returns, nested nonrecursive calls,
 standalone value drop, returned-value receiver continuation, cleanup-safe caller
-restoration, and typed arity/keyword/recursion/staging failures. PUC Lua and LuaJIT pass
-133/133 with status `runtime-user-functions-fixed-v1`; variadic-v2 state `.5.1.3.1` is next.
+restoration, and typed arity/keyword/recursion/staging failures. `.5.1.3.1` then preserves the exact v1/v2
+signature union through every native state boundary, validates sidecar identity and all seven invalid definitions,
+and resolves variadic calls from the fixed-prefix minimum through an unbounded maximum. Runtime rest binding and
+outward descriptors fail closed for `.5.1.3.2` and `.5.3`. PUC Lua and LuaJIT pass 136/136 with status
+`runtime-user-functions-variadic-v2-state`; `.5.1.3.2` is next.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -774,9 +777,10 @@ typed ordered levels/config/events, documented environment controls, caller-owne
 reset/append, and result-neutral direct/config-wrapper parse scopes at 128/128. `.4.4.3` adds exact runtime
 rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events at 129/129. No-drift `.4.4.4` closes
 parent `.4.4`. Planning `.5.1.0` separates staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/
-runtime, and closeout. Minimal staged dispatch `.5.1.1` passes 130/130; fixed-v1 runtime `.5.1.2` passes 133/133
-with public status `runtime-user-functions-fixed-v1`. Variadic-v2 state `.5.1.3.1` is active and capability
-remains 64/0/0.
+runtime, and closeout. Minimal staged dispatch `.5.1.1` passes 130/130; fixed-v1 runtime `.5.1.2` passes 133/133.
+Variadic-v2 state `.5.1.3.1` preserves the exact signature union and minimum/unbounded resolution at 136/136 with
+public status `runtime-user-functions-variadic-v2-state`. Fresh rest-array execution `.5.1.3.2` is active and
+capability remains 64/0/0.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
@@ -797,8 +801,9 @@ purposefully unbounded, while subtraction/division/modulo and comparisons remain
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
 array, and reject keyword/overload/host-splat semantics. Perl, Rust, Dart, and Julia now consume the unchanged
 fixture through grammar/spec projection, staged/outward records, native and generated execution, diagnostics, and
-exact results. Lua native parity is explicitly owned by dependency-complete `.5.1`, descriptor admission by `.5.3`,
-and generated preservation/execution/admission by `.8.1-.4`, so six-runtime admission must not be claimed early.
+exact results. Lua `.5.1.3.1` now preserves and resolves the native signature state; fresh rest-array execution is
+owned by `.5.1.3.2`, descriptor admission by `.5.3`, and generated preservation/execution/admission by `.8.1-.4`,
+so six-runtime admission must not be claimed early.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

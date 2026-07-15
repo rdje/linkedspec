@@ -102,8 +102,12 @@ This `README.md` is the **single entry point** to the project.
   `actionir-body.spec` provider/digest/cache identity, parses exact ActionIR bodies, and immutably stitches
   `body_ast`. Fixed-v1 runtime `.5.1.2` now resolves registered calls before helper fallback, evaluates caller
   arguments once left-to-right, executes integrity-checked staged bodies in fresh local stores, restores callers,
-  composes returned values, and reports typed arity/keyword/recursion/staging failures. Both ABIs pass 133/133 and
-  public status is `runtime-user-functions-fixed-v1`; variadic-v2 state `.5.1.3.1` is active. Full frontend/
+  composes returned values, and reports typed arity/keyword/recursion/staging failures. Variadic-v2 state
+  `.5.1.3.1` now preserves the exact fixed-v1/variadic-v2 union through shell, typed AST, staged jobs, registry,
+  contracts, and compiled state; registry resolution accepts the governed fixed-prefix minimum and unbounded
+  maximum while runtime rest binding and outward descriptor admission fail closed for their later owners. Both
+  ABIs pass 136/136 and public status is `runtime-user-functions-variadic-v2-state`; fresh rest-array execution
+  `.5.1.3.2` is active. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

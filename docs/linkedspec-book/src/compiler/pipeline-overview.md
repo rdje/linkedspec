@@ -83,8 +83,10 @@ The implemented function-body subset dispatches jobs through a staged parser reg
 `actionir-body.spec` identity, record the governed built-in adapter digest/cache key, execute top rule
 `action_block`, and immutably stitch `body_ast`. Lua additionally exposes one/many-job, dispatch-with-results,
 stitch-only, and composed function-shell APIs. Its following fixed-v1 runtime executes registry-first calls over
-verified staged bodies and fresh copied stores; both Lua ABIs pass 133/133 with status
-`runtime-user-functions-fixed-v1`.
+verified staged bodies and fresh copied stores. Lua then preserves the exact fixed-v1/variadic-v2 signature union
+through shell, AST, jobs, registry, contracts, and compiled state. Registry lookup accepts a v2 fixed-prefix
+minimum through an unbounded maximum; runtime rest binding and outward descriptors fail closed for their later
+owners. Both Lua ABIs pass 136/136 with status `runtime-user-functions-variadic-v2-state`.
 
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
@@ -316,9 +318,11 @@ native/generated execution; registered keyword arguments diagnose instead of lea
 Julia carries the same typed union through its spec projection, staged jobs, registry/action resolver, outward
 descriptor, native runtime, canonical JSON/ASCII-hex emitted state, generated-plan execution, and reconstruction.
 Its registered calls likewise reject keyword arguments and bind a newly copied vector into fresh scalar/array
-stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua remains rollout
-work under native owner `LUA-BACKEND-PARITY.5.1`, descriptor admission `.5.3`, and generated owners `.8.1-.4`, so
-four admitted backends implement the contract while six-runtime portability awaits those leaves.
+stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua now preserves the
+same exact state union and resolves the minimum/unbounded arity through native `.5.1.3.1`; runtime rest-array
+execution remains `.5.1.3.2`, descriptor admission `.5.3`, and generated owners `.8.1-.4`. Four admitted backends
+implement the complete contract while Lua's state-only milestone deliberately does not claim six-runtime
+portability early.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

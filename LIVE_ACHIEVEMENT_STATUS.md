@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.3.1 — preserve Lua variadic signatures**
+  (DONE — exact variadic-v2 state is green; fresh rest-array runtime `.5.1.3.2` is next).
+
+  **Result:** Lua preserves the exact fixed-v1/variadic-v2 storage union through its spec-owned shell, typed AST,
+  staged jobs, registry, contracts, and compiled state. Variadic lookup accepts the governed fixed-prefix minimum
+  through an unbounded maximum and reports `at least N`; exact mixed storage, signature/sidecar drift, duplicate or
+  reserved parameters, and all seven neutral invalid definitions fail through typed owners. Runtime rest binding
+  and outward descriptors fail closed for `.5.1.3.2` and `.5.3`. PUC Lua and LuaJIT pass 136/136; status is
+  `runtime-user-functions-variadic-v2-state`, coverage remains 246/105+1/122, and capability remains 64/0/0.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 620 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.2 — execute Lua fixed user functions**
   (DONE — fixed-v1 native execution is green; variadic-v2 state `.5.1.3.1` is next).
 

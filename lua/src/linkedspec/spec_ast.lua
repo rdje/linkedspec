@@ -208,12 +208,46 @@ function M.staged_source_span(options)
   })
 end
 
+function M.callable_signature(options)
+  options = options_table(options, "CallableSignature")
+  return node("CallableSignature", {
+    kind = required_string(options, "kind", "CallableSignature"),
+    version = required_integer(options, "version", "CallableSignature"),
+    positional_params = copy_string_list(
+      options.positional_params,
+      "CallableSignature.positional_params"
+    ),
+    rest_param = required_string(options, "rest_param", "CallableSignature"),
+    min_arity = required_integer(options, "min_arity", "CallableSignature"),
+    max_arity = optional_integer(options, "max_arity", "CallableSignature"),
+  })
+end
+
+function M.callable_signatures_equal(left, right)
+  if M.node_type(left) ~= "CallableSignature" or M.node_type(right) ~= "CallableSignature" then
+    return false
+  end
+  if left.kind ~= right.kind or left.version ~= right.version or
+      left.rest_param ~= right.rest_param or left.min_arity ~= right.min_arity or
+      left.max_arity ~= right.max_arity or #left.positional_params ~= #right.positional_params then
+    return false
+  end
+  for index, param in ipairs(left.positional_params) do
+    if param ~= right.positional_params[index] then return false end
+  end
+  return true
+end
+
 function M.staged_parse_job(options)
   options = options_table(options, "StagedParseJob")
   local params = options.params
   local copied_params = nil
   if params ~= nil then
     copied_params = copy_string_list(params, "StagedParseJob.params")
+  end
+  local signature = options.signature
+  if signature ~= nil then
+    signature = require_node(signature, "CallableSignature", "StagedParseJob.signature")
   end
   return node("StagedParseJob", {
     version = optional_integer(options, "version", "StagedParseJob"),
@@ -224,6 +258,7 @@ function M.staged_parse_job(options)
     function_name = optional_string(options, "function_name", "StagedParseJob"),
     params = copied_params,
     arity = optional_integer(options, "arity", "StagedParseJob"),
+    signature = signature,
     text = required_string(options, "text", "StagedParseJob"),
     source_span = require_node(options.source_span, "StagedSourceSpan", "StagedParseJob.source_span"),
     parser_spec_id = required_string(options, "parser_spec_id", "StagedParseJob"),
@@ -243,6 +278,7 @@ function M.function_definition(options)
   local copied_body_payload = nil
   local copied_body_ast = nil
   local checked_body_parse_job = nil
+  local signature = options.signature
   if body_payload ~= nil then
     copied_body_payload = clone_json(body_payload, "FunctionDefinition.body_payload")
   end
@@ -256,10 +292,14 @@ function M.function_definition(options)
       "FunctionDefinition.body_parse_job"
     )
   end
+  if signature ~= nil then
+    signature = require_node(signature, "CallableSignature", "FunctionDefinition.signature")
+  end
   return node("FunctionDefinition", {
     name = required_string(options, "name", "FunctionDefinition"),
     params = copy_string_list(options.params, "FunctionDefinition.params"),
     arity = required_integer(options, "arity", "FunctionDefinition"),
+    signature = signature,
     body_source = required_string(options, "body_source", "FunctionDefinition"),
     body_payload = copied_body_payload,
     body_parse_job = checked_body_parse_job,
@@ -563,6 +603,13 @@ project = function(value)
     result["end"] = value["end"]
     result.line_start = value.line_start
     result.line_end = value.line_end
+  elseif node_type == "CallableSignature" then
+    result.kind = value.kind
+    result.version = value.version
+    result.positional_params = json_array_of(value.positional_params, function(item) return item end)
+    result.rest_param = value.rest_param
+    result.min_arity = value.min_arity
+    result.max_arity = value.max_arity == nil and json.null or value.max_arity
   elseif node_type == "StagedParseJob" then
     result.kind = "parse_job"
     put_optional(result, "version", value.version)
@@ -571,10 +618,14 @@ project = function(value)
     result.node_kind = value.node_kind
     result.payload_kind = value.payload_kind
     put_optional(result, "function_name", value.function_name)
-    put_optional(result, "params", value.params, function(items)
-      return json_array_of(items, function(item) return item end)
-    end)
-    put_optional(result, "arity", value.arity)
+    if value.signature == nil then
+      put_optional(result, "params", value.params, function(items)
+        return json_array_of(items, function(item) return item end)
+      end)
+      put_optional(result, "arity", value.arity)
+    else
+      result.signature = project(value.signature)
+    end
     result.text = value.text
     result.source_span = project(value.source_span)
     result.parser_spec_id = value.parser_spec_id
@@ -585,8 +636,12 @@ project = function(value)
     put_optional(result, "diagnostic_owner", value.diagnostic_owner)
   elseif node_type == "FunctionDefinition" then
     result.name = value.name
-    result.params = json_array_of(value.params, function(item) return item end)
-    result.arity = value.arity
+    if value.signature == nil then
+      result.params = json_array_of(value.params, function(item) return item end)
+      result.arity = value.arity
+    else
+      result.signature = project(value.signature)
+    end
     result.body_source = value.body_source
     put_optional(result, "body_payload", value.body_payload, function(item)
       return clone_json(item, "FunctionDefinition.body_payload")
@@ -820,10 +875,23 @@ build = function(node_type, value)
       line_start = json_integer(object, "line_start", node_type),
       line_end = json_integer(object, "line_end", node_type),
     })
+  elseif node_type == "CallableSignature" then
+    return M.callable_signature({
+      kind = json_string(object, "kind", node_type),
+      version = json_integer(object, "version", node_type),
+      positional_params = json_string_list(object, "positional_params", node_type),
+      rest_param = json_string(object, "rest_param", node_type),
+      min_arity = json_integer(object, "min_arity", node_type),
+      max_arity = json_optional_integer(object, "max_arity", node_type),
+    })
   elseif node_type == "StagedParseJob" then
     local kind = json_string(object, "kind", node_type)
     if kind ~= "parse_job" then
       fail("staged parse job kind must be parse_job, got " .. kind)
+    end
+    local signature = nil
+    if object.signature ~= nil and object.signature ~= json.null then
+      signature = build("CallableSignature", object.signature)
     end
     return M.staged_parse_job({
       version = json_optional_integer(object, "version", node_type),
@@ -834,6 +902,7 @@ build = function(node_type, value)
       function_name = json_optional_string(object, "function_name", node_type),
       params = json_string_list(object, "params", node_type, true),
       arity = json_optional_integer(object, "arity", node_type),
+      signature = signature,
       text = json_string(object, "text", node_type),
       source_span = build("StagedSourceSpan", object_value(object.source_span, "StagedParseJob.source_span")),
       parser_spec_id = json_string(object, "parser_spec_id", node_type),
@@ -857,10 +926,22 @@ build = function(node_type, value)
     if object.body_ast ~= nil and object.body_ast ~= json.null then
       body_ast = clone_json(object.body_ast, "FunctionDefinition.body_ast")
     end
+    local signature = nil
+    local params
+    local arity
+    if object.signature ~= nil and object.signature ~= json.null then
+      signature = build("CallableSignature", object.signature)
+      params = signature.positional_params
+      arity = signature.min_arity
+    else
+      params = json_string_list(object, "params", node_type)
+      arity = json_integer(object, "arity", node_type)
+    end
     return M.function_definition({
       name = json_string(object, "name", node_type),
-      params = json_string_list(object, "params", node_type),
-      arity = json_integer(object, "arity", node_type),
+      params = params,
+      arity = arity,
+      signature = signature,
       body_source = json_string(object, "body_source", node_type),
       body_payload = body_payload,
       body_parse_job = parsed_body_parse_job,

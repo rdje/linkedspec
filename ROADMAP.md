@@ -945,8 +945,10 @@ propagation remains `.5.3` after its owners exist. Structured runtime diagnostic
 trace controls/sinks `.4.4.2` pass 128/128; deeper runtime instrumentation `.4.4.3` passes 129/129 and no-drift
 closeout `.4.4.4` closes the scoped runtime diagnostics/trace parent. Staged-function/native-loading `.5.1` is
 now split by `.5.1.0`; minimal `actionir-body.spec` staged dispatch `.5.1.1` passes 130/130, and fixed-v1
-registered-call runtime `.5.1.2` passes 133/133 with status `runtime-user-functions-fixed-v1`. Variadic-v2 state
-`.5.1.3.1` is active. Full native-pipeline trace remains dependency-correct `.5.3`.
+registered-call runtime `.5.1.2` passes 133/133. Variadic-v2 state `.5.1.3.1` preserves the exact signature union,
+minimum/unbounded registry resolution, and fixed-v1 compatibility at 136/136 with status
+`runtime-user-functions-variadic-v2-state`; fresh rest-array execution `.5.1.3.2` is active. Full native-pipeline
+trace remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -957,8 +959,9 @@ controls, caller-owned stdout/route/mirror sinks with reset/append, and balanced
 pass 128/128. Runtime rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129.
 Minimal staged dispatch `.5.1.1` then adds the governed ActionIR-body provider/queue/cache/stitch path at 130/130.
 Fixed-v1 runtime `.5.1.2` adds registry-first calls, isolated copied stores, local returns, value composition, and
-typed function-owned failures at 133/133. Public status is `runtime-user-functions-fixed-v1`; `.5.1.3.1` is active
-and capability remains 64/0/0.
+typed function-owned failures at 133/133. Variadic-v2 typed state then preserves exact v1/v2 storage, sidecar
+identity, and minimum/unbounded resolution at 136/136. Public status is
+`runtime-user-functions-variadic-v2-state`; `.5.1.3.2` is active and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

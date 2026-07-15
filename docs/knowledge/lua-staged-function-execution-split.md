@@ -12,7 +12,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, staged-parsing, user-functions, variadic, codeblock, task-tree, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. .5.1.1 lands staged dispatch at 130/130; .5.1.2 lands fixed-v1 execution at 133/133 and activates .5.1.3.1."
+evidence: "LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. .5.1.1 lands staged dispatch at 130/130, .5.1.2 fixed-v1 execution at 133/133, and .5.1.3.1 exact variadic-v2 state at 136/136 before .5.1.3.2 runtime."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1(\\.|`)|staged action-body|fixed-v1|variadic-v2|contextual-codeblock|callable literals' docs/tasks/LUA-BACKEND-PARITY.md docs/TASK_TREE.md README.md ROADMAP.md ROADMAP_V2.md lua/README.md docs/linkedspec-book/src docs/knowledge"
 ---
 
@@ -32,8 +32,9 @@ The implementation order is therefore:
 - `.5.1.1` (done): minimal deterministic `actionir-body.spec` provider, queue,
   execution, and immutable `body_ast` stitching;
 - `.5.1.2` (done): fixed-v1 registry-first runtime execution;
-- `.5.1.3.1/.2` (state active): variadic-v2 shell/state preservation, then fresh-rest-array
-  runtime execution;
+- `.5.1.3.1` (done): exact variadic-v2 shell/AST/staged/registry/compiled-state preservation and
+  minimum/unbounded resolution;
+- `.5.1.3.2` (active): fresh-rest-array runtime execution;
 - `.5.1.4.1/.2`: final `name: codeblock` metadata/normalization, then contextual
   user-function block execution;
 - `.5.1.5`: focused/public/durable/canonical no-drift.
@@ -51,3 +52,4 @@ Related facts: [[lua-user-function-registry]],
 [[final-codeblock-parameter-declaration]],
 [[lua-runtime-block-control-callback-split]],
 [[lua-fixed-v1-user-function-runtime]].
+[[lua-variadic-v2-signature-state]].

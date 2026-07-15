@@ -181,6 +181,80 @@ local function string_lists_equal(left, right)
   return true
 end
 
+local CALLABLE_SIGNATURE_FIELDS = {
+  kind = true,
+  version = true,
+  positional_params = true,
+  rest_param = true,
+  min_arity = true,
+  max_arity = true,
+}
+
+local function callable_signature_field(object, field, index)
+  local signature = object_value(
+    required_value(object, field, index),
+    "function_definition node " .. index .. " field '" .. field .. "'"
+  )
+  local field_count = 0
+  for key in pairs(signature) do
+    field_count = field_count + 1
+    if not CALLABLE_SIGNATURE_FIELDS[key] then
+      projection_fail(
+        "function_definition node " .. index .. " field '" .. field ..
+        "' has invalid callable signature fields"
+      )
+    end
+  end
+  if field_count ~= 6 then
+    projection_fail(
+      "function_definition node " .. index .. " field '" .. field ..
+      "' has invalid callable signature fields"
+    )
+  end
+  assert_string_field(signature, "kind", "callable_signature", index)
+  local version = integer_field(signature, "version", index)
+  if version ~= 1 then
+    projection_fail(
+      "function_definition node " .. index .. " field '" .. field ..
+      "' has unsupported signature version " .. version
+    )
+  end
+  local positional_params = string_list_field(signature, "positional_params", index)
+  for _, param in ipairs(positional_params) do
+    if not is_identifier(param) then
+      projection_fail(
+        "function_definition node " .. index .. " has invalid positional parameter '" .. param .. "'"
+      )
+    end
+  end
+  local rest_param = string_field(signature, "rest_param", "callable_signature")
+  if not is_identifier(rest_param) then
+    projection_fail(
+      "function_definition node " .. index .. " has invalid rest parameter '" .. rest_param .. "'"
+    )
+  end
+  local min_arity = integer_field(signature, "min_arity", index)
+  if min_arity ~= #positional_params then
+    projection_fail(
+      "function_definition node " .. index .. " min_arity " .. min_arity ..
+      " does not match " .. #positional_params .. " positional params"
+    )
+  end
+  if signature.max_arity ~= json.null then
+    projection_fail(
+      "function_definition node " .. index .. " field '" .. field .. "' max_arity must be null"
+    )
+  end
+  return ast.callable_signature({
+    kind = "callable_signature",
+    version = version,
+    positional_params = positional_params,
+    rest_param = rest_param,
+    min_arity = min_arity,
+    max_arity = nil,
+  })
+end
+
 local function validate_parent_path(object, context, index)
   local path = string_list_field(object, "parent_ast_path", index)
   if #path ~= 3 or path[1] ~= "functions" or path[3] ~= "body_source" then
@@ -195,33 +269,70 @@ local function normalize_parent_path(object, index)
   object.parent_ast_path = json.array({ "functions", tostring(index), "body_source" })
 end
 
-local function validate_body_common(object, context, name, params, arity, body_source, body_span, index)
+local function validate_staged_signature(object, context, params, arity, signature, index)
+  if signature ~= nil then
+    if object.params ~= nil or object.arity ~= nil then
+      projection_fail(
+        "function_definition node " .. index .. " " .. context ..
+        " version 2 must store arity only in signature"
+      )
+    end
+    local actual = callable_signature_field(object, "signature", index)
+    if not ast.callable_signatures_equal(actual, signature) then
+      projection_fail(
+        "function_definition node " .. index .. " " .. context ..
+        " signature does not match signature"
+      )
+    end
+    return
+  end
+  if object.signature ~= nil then
+    projection_fail(
+      "function_definition node " .. index .. " " .. context ..
+      " version 1 must not contain signature"
+    )
+  elseif not string_lists_equal(string_list_field(object, "params", index), params) then
+    projection_fail("function_definition node " .. index .. " " .. context .. " params do not match params")
+  elseif integer_field(object, "arity", index) ~= arity then
+    projection_fail("function_definition node " .. index .. " " .. context .. " arity does not match arity")
+  end
+end
+
+local function validate_body_common(
+  object,
+  context,
+  name,
+  params,
+  arity,
+  signature,
+  body_source,
+  body_span,
+  index
+)
   assert_string_field(object, "node_kind", "function_definition", index)
   assert_string_field(object, "payload_kind", "function_body", index)
   validate_parent_path(object, context, index)
   if string_field(object, "function_name", context) ~= name then
     projection_fail("function_definition node " .. index .. " " .. context .. " function_name does not match name")
-  elseif not string_lists_equal(string_list_field(object, "params", index), params) then
-    projection_fail("function_definition node " .. index .. " " .. context .. " params do not match params")
-  elseif integer_field(object, "arity", index) ~= arity then
-    projection_fail("function_definition node " .. index .. " " .. context .. " arity does not match arity")
-  elseif string_field(object, "text", context) ~= body_source then
+  end
+  validate_staged_signature(object, context, params, arity, signature, index)
+  if string_field(object, "text", context) ~= body_source then
     projection_fail("function_definition node " .. index .. " " .. context .. " text does not match body_source")
   elseif not spans_equal(span_field(object, "source_span", index), body_span) then
     projection_fail("function_definition node " .. index .. " " .. context .. " source_span does not match body_span")
   end
 end
 
-local function validate_body_payload(payload, name, params, arity, body_source, body_span, index)
+local function validate_body_payload(payload, name, params, arity, signature, body_source, body_span, index)
   local object = object_value(payload, "function_definition node " .. index .. " body_payload")
   assert_string_field(object, "kind", "staged_payload", index)
-  validate_body_common(object, "body_payload", name, params, arity, body_source, body_span, index)
+  validate_body_common(object, "body_payload", name, params, arity, signature, body_source, body_span, index)
 end
 
-local function validate_body_parse_job(job, name, params, arity, body_source, body_span, index)
+local function validate_body_parse_job(job, name, params, arity, signature, body_source, body_span, index)
   local object = object_value(job, "function_definition node " .. index .. " body_parse_job")
   assert_string_field(object, "kind", "parse_job", index)
-  validate_body_common(object, "body_parse_job", name, params, arity, body_source, body_span, index)
+  validate_body_common(object, "body_parse_job", name, params, arity, signature, body_source, body_span, index)
   if string_field(object, "job_id", "body_parse_job") == "" then
     projection_fail("function_definition node " .. index .. " body_parse_job job_id must be non-empty")
   end
@@ -245,18 +356,39 @@ end
 
 local function project_function(object, source, offsets, character_count, index)
   assert_string_field(object, "kind", "user_function_definition", index)
-  integer_field(object, "version", index)
+  local version = integer_field(object, "version", index)
   local name = string_field(object, "name", "function_definition")
   if not is_identifier(name) then
     projection_fail("function_definition node " .. index .. " has invalid name '" .. name .. "'")
   end
-  local params = string_list_field(object, "params", index)
+  local params
+  local arity
+  local signature
+  if version == 1 then
+    if object.signature ~= nil then
+      projection_fail("function_definition node " .. index .. " version 1 must not contain signature")
+    end
+    params = string_list_field(object, "params", index)
+    arity = integer_field(object, "arity", index)
+  elseif version == 2 then
+    if object.params ~= nil or object.arity ~= nil then
+      projection_fail(
+        "function_definition node " .. index .. " version 2 must store arity only in signature"
+      )
+    end
+    signature = callable_signature_field(object, "signature", index)
+    params = signature.positional_params
+    arity = signature.min_arity
+  else
+    projection_fail(
+      "function_definition node " .. index .. " has unsupported version " .. version
+    )
+  end
   for _, param in ipairs(params) do
     if not is_identifier(param) then
       projection_fail("function_definition node " .. index .. " has invalid parameter '" .. param .. "'")
     end
   end
-  local arity = integer_field(object, "arity", index)
   if arity ~= #params then
     projection_fail(
       "function_definition node " .. index .. " arity " .. arity .. " does not match " .. #params .. " params"
@@ -275,10 +407,10 @@ local function project_function(object, source, offsets, character_count, index)
   end
 
   local body_payload = clone_json(required_value(object, "body_payload", index))
-  validate_body_payload(body_payload, name, params, arity, body_source, body_span, index)
+  validate_body_payload(body_payload, name, params, arity, signature, body_source, body_span, index)
   normalize_parent_path(body_payload, index)
   local body_parse_job = clone_json(required_value(object, "body_parse_job", index))
-  validate_body_parse_job(body_parse_job, name, params, arity, body_source, body_span, index)
+  validate_body_parse_job(body_parse_job, name, params, arity, signature, body_source, body_span, index)
   normalize_parent_path(body_parse_job, index)
   body_parse_job.job_id = "parse_job:function_body:functions." .. index ..
     ".body_source:actionir-body.spec:action_block:" .. body_span.start .. "-" .. body_span["end"]
@@ -288,6 +420,7 @@ local function project_function(object, source, offsets, character_count, index)
       name = name,
       params = params,
       arity = arity,
+      signature = signature,
       body_source = body_source,
       body_payload = body_payload,
       body_parse_job = ast.from_json("StagedParseJob", body_parse_job),

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.3.1` — preserve semantic variadicity before executing it): Keep the neutral
+  version switch exact at every Lua boundary. Fixed-v1 JSON owns top-level `params`/`arity` and forbids a signature;
+  variadic-v2 JSON owns only its six-field `callable_signature` and forbids legacy top-level or staged fields.
+  Derive the typed runtime positional mirror from the signature, then require shell sidecars, staged copies, and
+  compiled records to remain identical. Resolve v2 calls by their minimum and unbounded maximum and carry
+  human-readable `at least N` expectations through call contracts. Do not fake partial runtime support: variadic
+  execution and descriptor conversion fail closed until `.5.1.3.2` and `.5.3`; generated source remains `.8`.
+  Both Lua ABIs pass 136/136, the neutral callable checker remains 3 definitions/9 calls/7 invalid definitions,
+  status is `runtime-user-functions-variadic-v2-state`, and capability remains 64/0/0. Canonical local CI passes
+  CLI 61x2 plus Phase 0 `1..1031` in 620 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.2` — make staged bodies executable without leaking caller state): Resolve
   raw registered names before helper canonicalization, but keep argument evaluation in the caller and frame
   preparation in `user_function_registry.lua`. Install only copied scalar/array/harray stores plus the active-name

@@ -320,6 +320,18 @@ end
 
 local function validate_function_body_job(definition, index, job)
   normalize_job(job)
+  if definition.signature ~= nil then
+    if job.params ~= nil or job.arity ~= nil then
+      fail(
+        "function " .. definition.name ..
+        " body_parse_job version 2 must store arity only in signature"
+      )
+    elseif not spec_ast.callable_signatures_equal(job.signature, definition.signature) then
+      fail("function " .. definition.name .. " body_parse_job signature does not match")
+    end
+  elseif job.signature ~= nil then
+    fail("function " .. definition.name .. " body_parse_job version 1 must not contain signature")
+  end
   local expected_path = { "functions", tostring(index), "body_source" }
   if not string_lists_equal(job.parent_ast_path, expected_path) then
     fail(

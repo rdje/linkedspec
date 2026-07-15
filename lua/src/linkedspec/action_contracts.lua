@@ -332,7 +332,8 @@ local function resolver(function_registry)
         })
         return
       elseif user_resolution and user_resolution.arity_mismatch then
-        local expected = user_resolution.expected_arities or {}
+        local expected = user_resolution.expected_arity_descriptions or
+          user_resolution.expected_arities or {}
         diagnostics[#diagnostics + 1] = diagnostic({
           code = "user_function_arity_mismatch",
           message = "user function '" .. name .. "' expects arity " .. table.concat(expected, " or ") ..

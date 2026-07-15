@@ -110,13 +110,21 @@ local function entry(index, definition)
   return setmetatable({ index = index, definition = definition }, ENTRY_MT)
 end
 
-local function call_resolution(name, requested_arity, expected_arities, matched_entry)
+local function call_resolution(
+  name,
+  requested_arity,
+  expected_arities,
+  expected_arity_descriptions,
+  matched_entry
+)
   local expected = copy_list(expected_arities)
+  local descriptions = copy_list(expected_arity_descriptions)
   local name_known = #expected > 0
   return setmetatable({
     name = name,
     requested_arity = requested_arity,
     expected_arities = expected,
+    expected_arity_descriptions = descriptions,
     entry = matched_entry,
     name_known = name_known,
     matched = matched_entry ~= nil,
@@ -198,6 +206,20 @@ function RegistryMethods:expected_arities_for(name)
   return result
 end
 
+function RegistryMethods:expected_arity_descriptions_for(name)
+  validate_registry(self)
+  if type(name) ~= "string" then fail("expected_arity_descriptions_for name must be a string") end
+  local values = self.by_name[name]
+  if not values then return {} end
+  local result = {}
+  for index, item in ipairs(values) do
+    local signature = item.definition.signature
+    result[index] = signature == nil and tostring(item.definition.arity) or
+      "at least " .. signature.min_arity
+  end
+  return result
+end
+
 function RegistryMethods:lookup(name)
   validate_registry(self)
   if type(name) ~= "string" then fail("lookup name must be a string") end
@@ -213,7 +235,9 @@ function RegistryMethods:resolve_exact(name, arity)
   local values = self.by_name[name]
   if not values then return nil end
   for _, item in ipairs(values) do
-    if item.definition.arity == arity then return item end
+    local signature = item.definition.signature
+    if signature == nil and item.definition.arity == arity then return item end
+    if signature ~= nil and arity >= signature.min_arity then return item end
   end
   return nil
 end
@@ -221,7 +245,8 @@ end
 function RegistryMethods:resolve_call(name, arity)
   validate_registry(self)
   local expected = self:expected_arities_for(name)
-  return call_resolution(name, arity, expected, self:resolve_exact(name, arity))
+  local descriptions = self:expected_arity_descriptions_for(name)
+  return call_resolution(name, arity, expected, descriptions, self:resolve_exact(name, arity))
 end
 
 local function projected_definition(definition)
@@ -237,10 +262,15 @@ end
 local function resolution_to_json(value)
   local expected = json.array()
   for index, arity in ipairs(value.expected_arities) do expected[index] = arity end
+  local descriptions = json.array()
+  for index, description in ipairs(value.expected_arity_descriptions) do
+    descriptions[index] = description
+  end
   local result = json.harray({
     name = value.name,
     requested_arity = value.requested_arity,
     expected_arities = expected,
+    expected_arity_descriptions = descriptions,
     name_known = value.name_known,
     matched = value.matched,
     arity_mismatch = value.arity_mismatch,
@@ -254,6 +284,12 @@ function M.to_descriptor_json(item)
     fail("to_descriptor_json expects UserFunctionEntry")
   end
   local definition = item.definition
+  if definition.signature ~= nil then
+    fail(
+      "variadic user function descriptors are not admitted before LUA-BACKEND-PARITY.5.3",
+      { code = "variadic_user_function_descriptor_pending" }
+    )
+  end
   local projected = projected_definition(definition)
   return json.harray({
     index = item.index,
@@ -293,6 +329,7 @@ local function definition_with_body_ast(definition, body_ast)
     name = definition.name,
     params = definition.params,
     arity = definition.arity,
+    signature = definition.signature,
     body_source = definition.body_source,
     body_payload = definition.body_payload,
     body_parse_job = definition.body_parse_job,
@@ -353,10 +390,22 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
   if not resolution.name_known then
     fail("unknown user function '" .. tostring(name) .. "'", { code = "unknown_user_function" })
   elseif resolution.arity_mismatch then
+    local expected = table.concat(resolution.expected_arity_descriptions, " or ")
     fail(
-      "user function '" .. name .. "' expects arity " .. table.concat(resolution.expected_arities, " or ") ..
+      "user function '" .. name .. "' expects arity " .. expected ..
         ", got " .. #evaluated_values,
       { code = "user_function_arity_mismatch", stage = "user_function_call", helper_name = name }
+    )
+  end
+
+  if resolution.entry.definition.signature ~= nil then
+    fail(
+      "variadic user function '" .. name .. "' runtime binding is pending fresh rest-array execution",
+      {
+        code = "variadic_user_function_runtime_pending",
+        stage = "user_function_call",
+        helper_name = name,
+      }
     )
   end
 

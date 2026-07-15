@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.3.1 — preserve Lua variadic signatures
+
+Added a typed six-field callable signature and preserved the exact versioned storage union through Lua's
+spec-owned shell, AST, staged jobs, registry entries, call contracts, and compiled state. Version 1 keeps only
+top-level `params`/`arity`; version 2 serializes only `callable_signature`, with its internal positional mirror
+derived and identity-checked. Mixed storage, malformed signatures, sidecar drift, duplicate/reserved names, and all
+seven neutral invalid definitions fail through typed owners.
+
+Variadic registry resolution now accepts every positional arity from the fixed-prefix minimum through an unbounded
+maximum and exposes `at least N` expectations. Runtime rest-array binding and outward descriptor conversion fail
+closed under explicit pending diagnostics for `.5.1.3.2` and `.5.3`; generated-source admission remains `.8`.
+PUC Lua and LuaJIT pass 136/136; public status becomes `runtime-user-functions-variadic-v2-state`, coverage remains
+246/105+1/122, capability remains 64/0/0, and fresh rest-array execution `.5.1.3.2` is next. Canonical local CI
+passes CLI 61x2 plus Phase 0 `1..1031` in 620 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.2 — execute Lua fixed user functions
 
 Added registry-first fixed-v1 user-function execution to the native Lua interpreter. Positional arguments evaluate

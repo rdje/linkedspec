@@ -134,7 +134,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-user-functions-fixed-v1", "status parity")
+  assert_equal(first.parity, "runtime-user-functions-variadic-v2-state", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1102,6 +1102,166 @@ local function definition_node(source, name, params, body_source)
   })
 end
 
+local function variadic_definition_node(source, name, positional_params, rest_param, body_source)
+  local node = definition_node(source, name, positional_params, body_source)
+  local signature = json.harray({
+    kind = "callable_signature",
+    version = 1,
+    positional_params = json.array(positional_params),
+    rest_param = rest_param,
+    min_arity = #positional_params,
+    max_arity = json.null,
+  })
+  node.version = 2
+  node.params = nil
+  node.arity = nil
+  node.signature = json.decode(json.encode(signature))
+  for _, staged_name in ipairs({ "body_payload", "body_parse_job" }) do
+    local staged = node[staged_name]
+    staged.params = nil
+    staged.arity = nil
+    staged.signature = json.decode(json.encode(signature))
+  end
+  return node
+end
+
+test("function shell preserves the exact fixed-v1 variadic-v2 signature union", function()
+  local source = table.concat({
+    'fn pair(left, right) { return([left, right]) }',
+    'fn all_values(...items) { return(items) }',
+    'fn collect(prefix, ...items) { return({ "prefix" : prefix, "items" : items }) }',
+    "",
+    "Top::",
+    " /x/",
+    "",
+  }, "\n")
+  local nodes = json.array({
+    definition_node(source, "pair", { "left", "right" }, " return([left, right]) "),
+    variadic_definition_node(source, "all_values", {}, "items", " return(items) "),
+    variadic_definition_node(
+      source,
+      "collect",
+      { "prefix" },
+      "items",
+      ' return({ "prefix" : prefix, "items" : items }) '
+    ),
+  })
+
+  local projection = linkedspec.project_user_function_definition_asts(source, nodes)
+  local fixed_json = ast.to_json(projection.functions[1])
+  assert_equal(fixed_json.signature, nil, "fixed signature absent")
+  assert_equal(fixed_json.arity, 2, "fixed exact arity")
+  assert_equal(fixed_json.params[2], "right", "fixed ordered params")
+
+  for index, expected in ipairs({
+    { name = "all_values", minimum = 0, positional_count = 0 },
+    { name = "collect", minimum = 1, positional_count = 1 },
+  }) do
+    local definition = projection.functions[index + 1]
+    local projected = ast.to_json(definition)
+    assert_equal(ast.node_type(definition.signature), "CallableSignature", expected.name .. " signature type")
+    assert_equal(projected.params, nil, expected.name .. " params absent")
+    assert_equal(projected.arity, nil, expected.name .. " arity absent")
+    assert_equal(projected.signature.kind, "callable_signature", expected.name .. " signature kind")
+    assert_equal(projected.signature.version, 1, expected.name .. " signature version")
+    assert_equal(#projected.signature.positional_params, expected.positional_count, expected.name .. " prefix count")
+    assert_equal(projected.signature.rest_param, "items", expected.name .. " rest name")
+    assert_equal(projected.signature.min_arity, expected.minimum, expected.name .. " minimum")
+    assert_equal(projected.signature.max_arity, json.null, expected.name .. " unbounded maximum")
+    for _, staged_name in ipairs({ "body_payload", "body_parse_job" }) do
+      local staged = projected[staged_name]
+      assert_equal(staged.params, nil, expected.name .. " " .. staged_name .. " params absent")
+      assert_equal(staged.arity, nil, expected.name .. " " .. staged_name .. " arity absent")
+      assert_equal(
+        json.encode(staged.signature),
+        json.encode(projected.signature),
+        expected.name .. " " .. staged_name .. " exact signature copy"
+      )
+    end
+    local round_trip = ast.from_json("FunctionDefinition", projected)
+    assert_equal(
+      ast.callable_signatures_equal(round_trip.signature, definition.signature),
+      true,
+      expected.name .. " AST round-trip"
+    )
+  end
+
+  local staged = linkedspec.parse_spec_with_staged_user_function_definition_asts(source, nodes)
+  assert_equal(linkedspec.validate_spec(staged), nil, "variadic staged validation")
+  local compiled = linkedspec.compile_spec(staged)
+  local compiled_json = linkedspec.compiled_spec_to_json(compiled)
+  assert_equal(
+    compiled_json.functions_by_name.all_values.signature.rest_param,
+    "items",
+    "compiled variadic signature"
+  )
+  assert_equal(compiled_json.functions_by_name.all_values.params, nil, "compiled v2 params absent")
+  local descriptor_ok, descriptor_error = pcall(linkedspec.to_descriptor_json, compiled)
+  assert_equal(descriptor_ok, false, "variadic descriptor remains pending")
+  assert_equal(
+    linkedspec.user_function_registry.is_registry_error(descriptor_error),
+    true,
+    "variadic descriptor typed boundary"
+  )
+  assert_equal(
+    descriptor_error.code,
+    "variadic_user_function_descriptor_pending",
+    "variadic descriptor pending code"
+  )
+end)
+
+test("function shell rejects drifting variadic signature records", function()
+  local source = 'fn collect(prefix, ...items) { return(items) }\nTop::\n /x/\n'
+  local function fresh_node()
+    return variadic_definition_node(source, "collect", { "prefix" }, "items", " return(items) ")
+  end
+
+  local mixed = fresh_node()
+  mixed.params = json.array({ "prefix" })
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ mixed }))
+  end, "version 2 must store arity only in signature", "mixed v2 storage")
+
+  local extra_field = fresh_node()
+  extra_field.signature.extra = true
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ extra_field }))
+  end, "invalid callable signature fields", "signature extra field")
+
+  local bounded = fresh_node()
+  bounded.signature.max_arity = 2
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ bounded }))
+  end, "max_arity must be null", "bounded variadic maximum")
+
+  local drifted = fresh_node()
+  drifted.body_parse_job.signature.rest_param = "other"
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ drifted }))
+  end, "body_parse_job signature does not match signature", "staged signature drift")
+
+  local duplicate = linkedspec.parse_spec_with_user_function_definition_asts(
+    source,
+    json.array({ variadic_definition_node(source, "collect", { "items" }, "items", " return(items) ") })
+  )
+  local duplicate_ok, duplicate_error = pcall(linkedspec.validate_spec, duplicate)
+  assert_equal(duplicate_ok, false, "duplicate rest rejected")
+  assert_equal(linkedspec.is_spec_validation_error(duplicate_error), true, "duplicate rest type")
+  assert_equal(duplicate_error.code, "duplicate_parameter", "duplicate rest code")
+
+  local reserved_source = 'fn collect(prefix, ...return) { return(prefix) }\nTop::\n /x/\n'
+  local reserved = linkedspec.parse_spec_with_user_function_definition_asts(
+    reserved_source,
+    json.array({
+      variadic_definition_node(reserved_source, "collect", { "prefix" }, "return", " return(prefix) ")
+    })
+  )
+  local reserved_ok, reserved_error = pcall(linkedspec.validate_spec, reserved)
+  assert_equal(reserved_ok, false, "reserved rest rejected")
+  assert_equal(linkedspec.is_spec_validation_error(reserved_error), true, "reserved rest type")
+  assert_equal(reserved_error.code, "reserved_parameter", "reserved rest code")
+end)
+
 test("function shell projects spec-owned nodes with Unicode character spans", function()
   local source = table.concat({
     "# préface",
@@ -1474,47 +1634,79 @@ test("ActionIR contracts resolve registered functions before helper fallback", f
   end, "must expose resolve_call", "registry interface")
 end)
 
-local function registry_function(name, params, index, body_ast, body_source_override)
+local function registry_function(name, params, index, body_ast, body_source_override, signature)
   local body_source = body_source_override or "return(value)"
   local path = { "functions", tostring(index), "body_source" }
+  local payload = json.harray({
+    kind = "staged_payload",
+    node_kind = "function_definition",
+    payload_kind = "function_body",
+    parent_ast_path = json.array(path),
+    function_name = name,
+    text = body_source,
+  })
+  local job_options = {
+    version = 1,
+    job_id = "parse_job:function_body:functions." .. index .. ".body_source",
+    parent_ast_path = path,
+    node_kind = "function_definition",
+    payload_kind = "function_body",
+    function_name = name,
+    text = body_source,
+    source_span = ast.staged_source_span({ start = 0, ["end"] = #body_source, line_start = 1, line_end = 1 }),
+    parser_spec_id = "actionir-body.spec",
+    top_rule = "action_block",
+    result_policy = "replace_field",
+    result_field = "body_ast",
+    failure_policy = "fail",
+    diagnostic_owner = "function_body",
+  }
+  if signature == nil then
+    payload.params = json.array(params)
+    payload.arity = #params
+    job_options.params = params
+    job_options.arity = #params
+  else
+    payload.signature = ast.to_json(signature)
+    job_options.signature = signature
+  end
+  local source_params = table.concat(params, ", ")
+  if signature ~= nil then
+    source_params = source_params == "" and ("..." .. signature.rest_param) or
+      (source_params .. ", ..." .. signature.rest_param)
+  end
   return ast.function_definition({
     name = name,
     params = params,
     arity = #params,
+    signature = signature,
     body_source = body_source,
-    body_payload = json.harray({
-      kind = "staged_payload",
-      node_kind = "function_definition",
-      payload_kind = "function_body",
-      parent_ast_path = json.array(path),
-      function_name = name,
-      params = json.array(params),
-      arity = #params,
-      text = body_source,
-    }),
-    body_parse_job = ast.staged_parse_job({
-      version = 1,
-      job_id = "parse_job:function_body:functions." .. index .. ".body_source",
-      parent_ast_path = path,
-      node_kind = "function_definition",
-      payload_kind = "function_body",
-      function_name = name,
-      params = params,
-      arity = #params,
-      text = body_source,
-      source_span = ast.staged_source_span({ start = 0, ["end"] = #body_source, line_start = 1, line_end = 1 }),
-      parser_spec_id = "actionir-body.spec",
-      top_rule = "action_block",
-      result_policy = "replace_field",
-      result_field = "body_ast",
-      failure_policy = "fail",
-      diagnostic_owner = "function_body",
-    }),
+    body_payload = payload,
+    body_parse_job = ast.staged_parse_job(job_options),
     body_ast = body_ast,
-    source = "fn " .. name .. "(" .. table.concat(params, ", ") .. ") { " .. body_source .. " }",
+    source = "fn " .. name .. "(" .. source_params .. ") { " .. body_source .. " }",
     source_span = ast.source_span({ line_start = 1, line_end = 1 }),
     body_span = ast.source_span({ line_start = 1, line_end = 1 }),
   })
+end
+
+local function variadic_registry_function(name, positional_params, rest_param, index, body_ast, body_source)
+  local signature = ast.callable_signature({
+    kind = "callable_signature",
+    version = 1,
+    positional_params = positional_params,
+    rest_param = rest_param,
+    min_arity = #positional_params,
+    max_arity = nil,
+  })
+  return registry_function(
+    name,
+    positional_params,
+    index,
+    body_ast,
+    body_source,
+    signature
+  )
 end
 
 local function assert_registry_error(operation, expected, code, label)
@@ -1566,6 +1758,57 @@ test("user function registry preserves order jobs definitions and exact arity", 
   assert_registry_error(function()
     linkedspec.user_function_registry_from_functions({ zero, zero })
   end, "duplicate user function 'zero'", nil, "duplicate registry")
+end)
+
+test("user function registry resolves variadic minimum arity and fails runtime closed", function()
+  local body_ast = json.harray({ kind = "action_block", statements = json.array() })
+  local all_values = variadic_registry_function(
+    "all_values",
+    {},
+    "items",
+    0,
+    body_ast,
+    "return(items)"
+  )
+  local collect = variadic_registry_function(
+    "collect",
+    { "prefix" },
+    "items",
+    1,
+    body_ast,
+    "return(items)"
+  )
+  local registry = linkedspec.user_function_registry_from_functions({ all_values, collect })
+
+  assert_equal(registry:resolve_call("all_values", 0).matched, true, "zero-rest minimum")
+  assert_equal(registry:resolve_call("all_values", 4).matched, true, "zero-rest unbounded")
+  assert_equal(registry:resolve_call("collect", 1).matched, true, "prefix empty rest")
+  assert_equal(registry:resolve_call("collect", 5).matched, true, "prefix unbounded rest")
+  local missing = registry:resolve_call("collect", 0)
+  assert_equal(missing.arity_mismatch, true, "variadic missing prefix")
+  assert_equal(missing.expected_arities[1], 1, "variadic numeric minimum")
+  assert_equal(missing.expected_arity_descriptions[1], "at least 1", "variadic arity description")
+
+  local accepted = linkedspec.resolve_action_expression_contracts(
+    linkedspec.parse_action_expression('collect("p", "a", "b")'),
+    { function_registry = registry }
+  )
+  assert_equal(accepted.ok, true, "variadic positional contract")
+  assert_equal(accepted.contracts[1].family, "user_function", "variadic contract family")
+  local rejected = linkedspec.resolve_action_expression_contracts(
+    linkedspec.parse_action_expression("collect()"),
+    { function_registry = registry }
+  )
+  assert_equal(rejected.diagnostics[1].code, "user_function_arity_mismatch", "variadic minimum code")
+  assert_contains(rejected.diagnostics[1].message, "expects arity at least 1", "variadic minimum message")
+
+  assert_registry_error(function()
+    linkedspec.prepare_user_function_invocation(registry, "collect", { "p", "a" })
+  end,
+    "runtime binding is pending fresh rest-array execution",
+    "variadic_user_function_runtime_pending",
+    "pending rest runtime"
+  )
 end)
 
 test("user function registry stitches body AST without mutating the source spec", function()

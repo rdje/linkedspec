@@ -38,8 +38,8 @@ local LIFECYCLE_NAMES = {
   LX = true,
 }
 
-local function validation_fail(message)
-  error(setmetatable({ message = message }, VALIDATION_ERROR_MT), 0)
+local function validation_fail(message, code)
+  error(setmetatable({ message = message, code = code }, VALIDATION_ERROR_MT), 0)
 end
 
 function M.is_validation_error(value)
@@ -48,6 +48,14 @@ end
 
 local function is_identifier(value)
   return type(value) == "string" and value:match("^[A-Za-z_][A-Za-z0-9_]*$") ~= nil
+end
+
+local function string_lists_equal(left, right)
+  if #left ~= #right then return false end
+  for index, value in ipairs(left) do
+    if value ~= right[index] then return false end
+  end
+  return true
 end
 
 local function check_top_rule(spec)
@@ -103,16 +111,61 @@ local function check_function_registry(spec)
       )
     end
 
+    local signature = definition.signature
+    if signature ~= nil and (
+        ast.node_type(signature) ~= "CallableSignature" or
+        signature.kind ~= "callable_signature" or
+        signature.version ~= 1 or
+        not string_lists_equal(signature.positional_params, definition.params) or
+        signature.min_arity ~= definition.arity or
+        signature.min_arity ~= #signature.positional_params or
+        signature.max_arity ~= nil
+      ) then
+      validation_fail(
+        "user function '" .. name .. "' has an invalid variadic callable signature",
+        "invalid_callable_signature"
+      )
+    end
+
     local seen_params = {}
     for _, param in ipairs(definition.params) do
       if not is_identifier(param) then
-        validation_fail("user function '" .. name .. "' has invalid parameter '" .. param .. "'")
+        validation_fail(
+          "user function '" .. name .. "' has invalid parameter '" .. param .. "'",
+          "invalid_parameter"
+        )
       elseif seen_params[param] then
-        validation_fail("duplicate parameter '" .. param .. "' in function '" .. name .. "'")
+        validation_fail(
+          "duplicate parameter '" .. param .. "' in function '" .. name .. "'",
+          "duplicate_parameter"
+        )
       elseif RESERVED_RUNTIME_SYMBOLS[param] or LIFECYCLE_NAMES[param] or param == "fn" or param == "return" then
-        validation_fail("user function '" .. name .. "' parameter '" .. param .. "' is reserved")
+        validation_fail(
+          "user function '" .. name .. "' parameter '" .. param .. "' is reserved",
+          "reserved_parameter"
+        )
       end
       seen_params[param] = true
+    end
+    if signature ~= nil then
+      local rest_param = signature.rest_param
+      if not is_identifier(rest_param) then
+        validation_fail(
+          "user function '" .. name .. "' has invalid rest parameter '" .. tostring(rest_param) .. "'",
+          "invalid_rest_parameter"
+        )
+      elseif seen_params[rest_param] then
+        validation_fail(
+          "duplicate parameter '" .. rest_param .. "' in function '" .. name .. "'",
+          "duplicate_parameter"
+        )
+      elseif RESERVED_RUNTIME_SYMBOLS[rest_param] or LIFECYCLE_NAMES[rest_param] or
+          rest_param == "fn" or rest_param == "return" then
+        validation_fail(
+          "user function '" .. name .. "' parameter '" .. rest_param .. "' is reserved",
+          "reserved_parameter"
+        )
+      end
     end
   end
 end
