@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua governed named writers, spans, and bridges `.4.3.7.3` pass 120/120 on PUC Lua
-  and LuaJIT; placement-sensitive split/mark execution `.4.3.7.4` is active).
+- Last updated: `2026-07-15` (planning leaf `.18.0` ratifies the post-parity 91-row Unicode structured-text
+  requirements program; Lua placement-sensitive split/mark execution `.4.3.7.4` remains the executable frontier).
 - Owner: repo-local workflow
 
 ## Goal
@@ -3492,6 +3492,32 @@ before implementation.
     and Phase 0 `1..1031` in 633 seconds.
   Commit: `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory`
 
+- ID: `FUTURE-PARITY-BACKLOG.18`
+  Status: `proposed`
+  Goal: Govern the post-current-backend-parity Unicode structured-text-to-AST format program.
+  Children: `.18.0`; detailed execution tree: `STRUCTURED-TEXT-FORMAT-PROGRAM`
+  Acceptance: The agreed program is dependency-gated on complete Perl/Rust/Dart/Julia/Lua parity, enumerates every
+    eligible catalog row, makes the dynamically compiled `.spec` graph the sole parser source, uses real formats
+    as requirements evidence for reusable `.spec` features, forbids hidden host parsers, separates parsing from
+    evaluation/domain semantics, and keeps roadmap/book/KM/live state exact.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.0`
+  Status: `done`
+  Goal: Ratify and durably decompose the post-parity Unicode structured-text format program.
+  Dependencies: director/engineer agreement; execution dependencies live in `STRUCTURED-TEXT-FORMAT-PROGRAM.1`.
+  Acceptance: ADR, dedicated detailed tree, exact 91-row eligible inventory, exclusion boundary, parity-first gate,
+    dynamic `.spec`-graph sole-source contract, roadmap/index/live-doc/mdBook/Knowledge Map sync, and no behavior change.
+  Verification: **PASS 2026-07-15.** Direct source/task extraction reports 91/91 unique eligible row names with
+    zero missing/extra; the dedicated tree preserves exact binary/container exclusions. ADR `0034`, roadmap/index/live docs, mdBook,
+    and Knowledge Map agree on full-current-backend parity first, dynamic `.spec`-graph sole-source construction,
+    format-driven general features, no hidden host parser, layered syntax reuse, independent full HTML,
+    parsing/evaluation separation, explicit future decoder
+    seams, and measured correctness-preserving performance. Governance/book/count/whitespace checks pass; no
+    parser/compiler/runtime/helper/fixture/capability or format behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`
+
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
 Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
@@ -4361,6 +4387,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 168 | `FUTURE-PARITY-BACKLOG.17.5` | `done` | Admitted 246 names and independently locks 122 public contracts plus nine explicit exclusions. |
 | 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT. |
 | 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `active` | Execute placement-sensitive split and named-mark rule members at their matched action sites. |
+| 171 | `FUTURE-PARITY-BACKLOG.18.0` | `done` | Exact 91-row parity-gated requirements program is ratified; no format code started. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5002,6 +5029,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR 0034; dedicated exact-row task tree; roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Parity-first format requirements program is durable; no behavior or format implementation changed; Lua `.4.3.7.4` remains active. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.3` | Unchanged governed named-capture fixture native/reconstructed; supplemental multibyte writers/bridges/stable+advancing spans/missing+reversed/overload/arity; Lua 120/120 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/637s; docs/KM/doctrines/book/whitespace. | PASS. Full governed named-span parity closes without surface drift; placement-sensitive `.4.3.7.4` activates. |
 | `2026-07-14` | `FUTURE-PARITY-BACKLOG.17.4` | Exact staged 7-name set/family resolution; native/serialized `SpecFile` contract; complete PUC Lua 119/LuaJIT 119/syntax/CLI scaffold/corpus manifest 105; capability 64/0/0; shared coverage 239/105; canonical CLI 61x2; Phase 0 `1..1031`/627s; docs/KM/doctrines/book/whitespace. | PASS. One rule-label/mark-name/byte-offset store serves all seven calls, public positions remain character-based, parent/child names stay isolated, and `.17.5` activates. |
@@ -5126,6 +5154,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.18.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR 0034, exact 91-row ownership, hard current-parity gate, format-driven neutral feature loop, and public architecture chapter. |
 | `FUTURE-PARITY-BACKLOG.17.5` | `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory` | 246-name admission, 105+1 occurrence proof, independent 122-public-contract reverse check, nine exclusions, and symmetric mutation proof. |
 | `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed named writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
 | `FUTURE-PARITY-BACKLOG.17.4` | `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks` | Lua rule-label/byte-offset store, exact seven-helper native/serialized fixture, and complete dual-ABI/canonical proof. |
@@ -5250,6 +5279,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: `.18.0` adopts ADR `0034` and creates `STRUCTURED-TEXT-FORMAT-PROGRAM`. All 91 eligible Unicode
+  structured-text catalog rows map to explicit reusable foundation/family leaves; binary/container exclusions
+  stay exact. The catalog becomes requirements evidence for general neutral `.spec` features, never permission for
+  hidden host parsers. Full Perl/Rust/Dart/Julia/Lua parity is a hard execution dependency. HTML owns a full
+  WHATWG path, derived formats reuse foundations, parsing stays separate from evaluation/domain semantics, and
+  accuracy/Unicode/diagnostics/conformance/measured performance are completion gates. No behavior changed; Lua
+  `.4.3.7.4` remains the active executable frontier.
 - `2026-07-14`: `.17.3` makes Julia consume the unchanged seven-helper complete named-mark artifact through its
   existing rule-local code-unit store. Entry/local writers read the established match registers; line/column
   projections remain Unicode-character based; clear affects only the current rule; and absent reads remain undef.

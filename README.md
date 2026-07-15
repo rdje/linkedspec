@@ -79,7 +79,11 @@ This `README.md` is the **single entry point** to the project.
   Perl contracts. Lua `.4.3.7.3` then executes the governed named writers, stable/advancing spans, two-mark reads,
   and anonymous/named bridges through that same store at 120/120 on PUC Lua and LuaJIT. Missing/reversed spans are
   neutral, public positions/lengths are character-based, and `capture_take()` versus `capture_take(name)` retains
-  the anonymous/named overload split. Placement-sensitive split/mark execution `.4.3.7.4` is now active. ADR `0033` and
+  the anonymous/named overload split. Placement-sensitive split/mark execution `.4.3.7.4` is now active. ADR
+  `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
+  cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
+  text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
+  immediate use on every backend; no format implementation has started. ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume

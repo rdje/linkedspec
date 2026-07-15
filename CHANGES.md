@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.0 — adopt structured-text requirements program
+
+ADR `0034` adopts the director-provided 91-row Unicode structured-text catalog as a post-current-backend-parity
+requirements program for LinkedSpec. The dedicated `STRUCTURED-TEXT-FORMAT-PROGRAM` tree maps every eligible row
+across reusable JSON/XML/YAML/HTML/Markdown/RDF foundations, configuration/document/graph/schema/messaging/
+geospatial/domain families, and exact exclusion/performance/public closeout. All execution is hard-gated on full
+feature and behavior parity among Perl, Rust, Dart, Julia, and Lua.
+
+Real authoritative formats become evidence for general `.spec` evolution: a discovered mechanism gap must gain a
+neutral contract, all-current-backend implementation/proof, mdBook coverage, and recurring gates before the format
+continues. Each composed format `.spec` graph is the sole parser source of truth and is dynamically compiled for
+immediate use; generated host source/caches are reproducible derivatives only. Hidden host parsers and backend
+dialects are forbidden. Derived formats reuse foundations; conditional formats use named profiles; language
+parsing does not imply evaluation; HTML has an independent WHATWG tokenizer/tree-builder lane; non-UTF-8-capable
+formats require an explicit governed decoder seam without weakening the strict-UTF-8 primary CLI. No parser,
+compiler, runtime, helper, capability, fixture, or format implementation changed.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.3 — execute Lua named mark spans
 
 Lua now executes the complete governed rule-local named writer, span, and anonymous/named bridge family through

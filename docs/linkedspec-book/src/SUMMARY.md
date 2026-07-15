@@ -56,6 +56,7 @@
 # Architecture
 
 - [Owner Tree and Module Boundaries](architecture/owner-tree.md)
+- [Post-Parity Structured-Text Program](architecture/structured-format-program.md)
 
 # Appendix
 

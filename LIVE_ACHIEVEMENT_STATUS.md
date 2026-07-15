@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.18.0 — adopt structured-text requirements program**
+  (DONE — exact 91-row program is fully dependency-gated on current-backend parity; no format code started).
+
+  **Result:** ADR `0034` and `STRUCTURED-TEXT-FORMAT-PROGRAM` turn the Unicode structured-text catalog into the
+  post-parity requirements generator for `.spec`. Each format's composed `.spec` graph is the sole parser source,
+  dynamically compiled for immediate use; generated host source/caches are derivative only. Every eligible row has an owner; derived formats reuse shared
+  syntax foundations; conditional conventions use named profiles; language parsing stays separate from
+  evaluation; HTML owns an independent WHATWG tokenizer/tree-builder lane; binary/container exclusions remain
+  exact. Format-discovered general mechanisms must reach neutral Perl/Rust/Dart/Julia/Lua parity before the format
+  continues. Accuracy, Unicode, diagnostics, conformance, and measured performance are completion gates. The
+  program remains dormant until current backend parity closes; active execution returns to Lua `.4.3.7.4`.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.3 — execute Lua named mark spans**
   (DONE — governed writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT).
 

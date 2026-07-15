@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: ADR `0034` adopts a 91-row Unicode structured-text catalog as a requirements generator for
+  post-parity `.spec` evolution. `STRUCTURED-TEXT-FORMAT-PROGRAM` hard-gates execution on complete current
+  Perl/Rust/Dart/Julia/Lua parity, then establishes decoded-input/provenance, source-aware AST/trivia/diagnostics,
+  conformance/differential/Unicode fuzzing, composition, and benchmark contracts before seven seed formats. Every
+  format-discovered mechanism must land neutrally across all current backends before that format continues. Each
+  composed format `.spec` graph is the sole parser source and is dynamically compiled for immediate use; generated
+  host source/caches are reproducible derivatives only. Backend dialects and hidden host parsers are forbidden. Derived serializations reuse syntax foundations, HTML
+  owns a full WHATWG tokenizer/tree-builder path, parsing stays distinct from evaluation/domain semantics, and
+  non-UTF-8 input needs a future explicit decoder seam rather than weakening strict-UTF-8 current APIs. No format
+  implementation starts before parity; performance will separate cold construction, warm reuse, and parsing.
 - `2026-07-15` refresh: Lua now executes all governed rule-local named writers, stable/advancing spans, two-mark
   spans, and anonymous/named bridges over the single parse-scoped rule-label/name/UTF-8-byte-offset store. One
   guarded span seam enforces null/no-mutation behavior for missing, invalid, or reversed endpoints; public

@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.0` — use formats as requirements evidence, not host-parser wrappers): The
+  91 eligible catalog rows are valuable because they expose general parser mechanisms the current `.spec` language
+  may still lack. The safe evolution loop is format conformance failure -> reusable mechanism classification ->
+  neutral contract -> Perl/Rust/Dart/Julia/Lua implementation and proof -> resume the format. Never conceal the
+  hard part in a host callback or duplicate JSON/XML/YAML syntax across derived vocabularies. The composed format
+  `.spec` graph is the sole parser implementation and is dynamically compiled for immediate document use;
+  generated host source or compiled caches are fingerprinted derivatives, never co-authoritative grammar. Accuracy includes a
+  pinned spec/corpus, source-aware AST/trivia policy, typed errors/recovery, adversarial Unicode, and differential
+  proof; speed separately measures cold construction, warm reuse, and document parsing. HTML is an independent WHATWG tokenizer/
+  tree-builder stress test, while XHTML reuses XML. CUE/Dhall/Jsonnet/Nickel/Pkl/Nix text-to-AST does not silently
+  include evaluation. The entire program remains dormant until current backend parity is complete.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.3` — overload at dispatch, share state and span validation): The admitted
   named-mark family did not need another frame: every writer, reader, two-mark span, and bridge extends the
   existing parse-scoped `rule label -> name -> UTF-8 byte offset` store. One guarded byte-span seam validates both
