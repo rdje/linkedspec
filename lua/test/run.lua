@@ -4355,6 +4355,55 @@ test("Lua matches the neutral scalar numeric contract exactly", function()
   assert_json_equal(actual, contract.expected, "all scalar numeric cases")
 end)
 
+test("runtime logical helpers are eager boolean values over governed truthiness", function()
+  local source = uniform_binding_action_source([[
+seen = []
+and_value = and(
+  { push(seen, "and-first"); return(false) },
+  { push(seen, "and-second"); return(true) }
+)
+or_value = or(
+  { push(seen, "or-first"); return(true) },
+  { push(seen, "or-second"); return(false) }
+)
+not_value = not(
+  { push(seen, "not-first"); return(false) },
+  { push(seen, "not-extra"); return(true) }
+)
+return({
+  "and_value" : and_value,
+  "or_value" : or_value,
+  "not_value" : not_value,
+  "and_empty" : and(),
+  "or_empty" : or(),
+  "not_empty" : not(),
+  "lua_aggregate_truthiness" : and([], {}, true),
+  "lua_zero_truthiness" : or("0", 0, ""),
+  "receiver_value" : and(1, 2).with() { return(value) },
+  "seen" : copy(seen)
+})
+]])
+  assert_json_equal(execute_uniform_binding_source(source), json.harray({
+    and_value = false,
+    or_value = true,
+    not_value = true,
+    and_empty = false,
+    or_empty = false,
+    not_empty = true,
+    lua_aggregate_truthiness = true,
+    lua_zero_truthiness = false,
+    receiver_value = true,
+    seen = json.array({
+      "and-first",
+      "and-second",
+      "or-first",
+      "or-second",
+      "not-first",
+      "not-extra",
+    }),
+  }), "logical helper values and eager order")
+end)
+
 test("numeric aliases symbols and receiver chains share the scalar evaluator", function()
   local grouped_regex = linkedspec.parse_action_expression("/(foo),bar/")
   local class_regex = linkedspec.parse_action_expression("/([)])/")

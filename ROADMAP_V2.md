@@ -90,6 +90,11 @@ repairs that family; `.2` closes recurring ownership/status/direct-call admissio
 lowering and the existing five-backend logical truthiness/arity drift are explicitly gated under
 `FUTURE-PARITY-BACKLOG.5.2` rather than being hidden by the Lua-local repair.
 
+Lua `.4.3.9.1` now closes that local three-name gap at 123/123 on PUC Lua and LuaJIT: all logical arguments are
+eager and ordered, results are booleans, empty calls are false/false/true, and established Lua truthiness is reused.
+Exact recurring ownership/direct-call/inventory/status admission `.4.3.9.2` is active; `.5.2` still owns global
+truthiness, arity, Dart evaluation/empty-`and`, and Perl lowering normalization.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

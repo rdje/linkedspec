@@ -5,10 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now executes eager boolean `and`/`or`/`not` through the existing runtime truthiness
+  seam. Every authored argument is materialized once left-to-right before composition; empty calls are false/
+  false/true, scalar `"0"` remains false, and empty aggregates remain true. PUC Lua and LuaJIT pass 123/123.
+  Exact recurring ownership/direct-call/inventory/status admission `.4.3.9.2` is active. Global truthiness, arity,
+  Dart evaluation/empty-`and`, and Perl keyword-lowering differences remain dependency-gated `.5.2`.
 - `2026-07-15` refresh: the Lua helper closeout now has an executable negative-space measurement. Generating a
   minimal action for every exact admitted name yields 230 runtime-owned and 16 unsupported names. Thirteen are
-  intentionally structural or named-receiver-only; `and`/`or`/`not` are the exact missing value helpers. Repair
-  `.4.3.9.1` is active and final recurring ownership/status admission is `.2`. The audit also exposed stale
+  intentionally structural or named-receiver-only; `and`/`or`/`not` are the exact missing value helpers. That
+  audit activated repair `.4.3.9.1`, now complete as recorded above; final recurring ownership/status admission
+  is `.2`. The audit also exposed stale
   `runtime-numeric-reducers` status, a duplicate source `or` row, absent focused direct `call(rule)` proof, and a
   separate Perl `and`/`or` keyword-precedence lowering defect. The cross-backend logical contract is durably owned
   by dependency-gated `FUTURE-PARITY-BACKLOG.5.2`; no behavior changed in the split.

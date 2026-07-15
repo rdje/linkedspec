@@ -637,6 +637,40 @@ local function runtime_truthy(value)
   return true
 end
 
+local LOGICAL_HELPERS = {
+  ["and"] = true,
+  ["not"] = true,
+  ["or"] = true,
+}
+
+local function evaluate_runtime_logical(
+  engine,
+  name,
+  expr,
+  ctx,
+  accumulator,
+  edge_state
+)
+  local values = {}
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+
+  if name == "and" then
+    if #values == 0 then return false end
+    for _, value in ipairs(values) do
+      if not runtime_truthy(value) then return false end
+    end
+    return true
+  elseif name == "or" then
+    for _, value in ipairs(values) do
+      if runtime_truthy(value) then return true end
+    end
+    return false
+  end
+  return #values == 0 or not runtime_truthy(values[1])
+end
+
 invalid_helper_arity = function(name, expected, actual)
   fail("helper '" .. name .. "' expects " .. expected .. ", got " .. actual, {
     code = "helper_arity_mismatch",
@@ -1973,6 +2007,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
   elseif DIAGNOSTIC_OUTPUT_HELPERS[name] then
     return evaluate_runtime_diagnostic_output(engine, name, expr, ctx, accumulator, edge_state)
+  elseif LOGICAL_HELPERS[name] then
+    return evaluate_runtime_logical(engine, name, expr, ctx, accumulator, edge_state)
   end
   if name == "return" then
     local value = json.null

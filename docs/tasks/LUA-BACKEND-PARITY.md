@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (exact 246-name function-form probing found 230 handled names, thirteen intentional
-  statement/receiver-only owners, and three missing eager logical helpers; `.4.3.9.1` is active)
+- Last updated: `2026-07-15` (eager `and`/`or`/`not` now pass 123/123 on PUC Lua and LuaJIT;
+  exact recurring ownership/status/direct-call admission `.4.3.9.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1802,18 +1802,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout`
 
 - ID: `LUA-BACKEND-PARITY.4.3.9.1`
-  Status: `active`
+  Status: `done`
   Goal: Execute Lua eager logical value helpers.
   Dependencies: `.4.3.9.0`
   Acceptance: `and`, `or`, and `not` eagerly evaluate every authored argument once left-to-right, compose through
     Lua's already-governed runtime truthiness, return booleans including empty-call false/false/true behavior, work
     in value/receiver-compatible positions, and pass exact Unicode-neutral side-effect proof on PUC Lua and LuaJIT;
     no cross-backend truthiness or Perl-lowering normalization is claimed.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** One shared evaluator materializes every authored argument once left-to-right
+    before composing with `runtime_truthy`. `and` requires at least one truthful value and otherwise returns false;
+    `or` returns true when any value is truthful and false for empty; `not` returns true for empty and negates the
+    first value after eagerly evaluating any extras. Focused execution locks false-first `and`, true-first `or`,
+    extra-argument `not`, exact side-effect order, false/false/true empty results, Lua's already-governed `"0"` and
+    aggregate truthiness, boolean JSON identity, and receiver continuation through `with`.
+    `bash tools/run_lua_local.sh` passes 123/123 on PUC Lua and LuaJIT. Cross-backend truthiness, arity, Dart short-
+    circuit/empty-`and`, and Perl keyword-lowering normalization remain dependency-gated `.5.2`.
+  Commit: `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.9.2`
-  Status: `pending`
+  Status: `active`
   Goal: Admit exhaustive Lua runtime helper/value/control/method no-drift.
   Dependencies: `.4.3.9.1`
   Acceptance: A recurring exact 246-name probe reports only the thirteen documented non-function owners and zero
@@ -1994,7 +2001,8 @@ LuaJIT. Placement-sensitive split/mark rule members execute at their owning slot
 closeout finds 62/62 current calls in contracts, runtime dispatch, and focused execution sources, plus four exact
 marker spellings. Parent `.4.3.7` is closed. Caller-owned diagnostic events now pass 122/122 on both Lua ABIs.
 The exact `.4.3.9.0` audit partitions the 246 names into 230 handled, thirteen intentional non-function owners,
-and missing `and`/`or`/`not`; eager logical repair `.4.3.9.1` is the sole active frontier.
+and missing `and`/`or`/`not`. Those eager logical values now pass 123/123 on both ABIs; recurring exact ownership,
+direct-call, inventory, and status admission `.4.3.9.2` is the sole active frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2079,8 +2087,28 @@ and missing `and`/`or`/`not`; eager logical repair `.4.3.9.1` is the sole active
 | 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `done` | Closed exact 62-call/four-marker native capture/cursor no-drift at 121/121 on both ABIs. |
 | 80 | `LUA-BACKEND-PARITY.4.3.8` | `done` | Typed caller-owned diagnostic events, quiet default, Unicode/order, parse neutrality, and immediate exit pass 122/122. |
 | 81 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230 handled / 16 unsupported audit isolates thirteen intentional owners and three logical gaps. |
-| 82 | `LUA-BACKEND-PARITY.4.3.9.1` | `active` | Execute eager `and`/`or`/`not` values through governed Lua truthiness. |
-| 83 | `LUA-BACKEND-PARITY.4.3.9.2` | `pending` | Add recurring exact ownership/direct-call proof, correct status, and close helper no-drift. |
+| 82 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and false/false/true empty calls pass 123/123 on both ABIs. |
+| 83 | `LUA-BACKEND-PARITY.4.3.9.2` | `active` | Add recurring exact ownership/direct-call proof, correct status, and close helper no-drift. |
+
+### `LUA-BACKEND-PARITY.4.3.9.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The `.0` generated runtime probe reports exact admitted calls `and`, `or`, and
+  `not` as unsupported while the mdBook and Rust/Dart/Julia runtimes expose logical value helpers.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua::evaluate_call` had no logical-family branch. Existing
+  `runtime_truthy` already owns Lua's current condition policy, so a new coercion or host Lua `and`/`or` path would
+  create drift. Cross-backend source inspection also confirms Dart currently short-circuits and gives empty
+  `and()` true, reinforcing that global normalization belongs to `.5.2` rather than this Lua repair.
+- [x] **FIX** — Added one `LOGICAL_HELPERS` dispatcher and eager evaluator that collects all argument values first,
+  then computes booleans through `runtime_truthy`, including governed empty-call false/false/true behavior.
+- [x] **ADDRESSED (verified)** — Focused runtime proof locks false-first `and`, true-first `or`, extra-argument
+  `not`, exact six-event order, empty calls, scalar zero text, empty aggregate truthiness, boolean identity, and
+  result continuation through receiver `.with()`.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 123/123 under separately built PUC Lua and LuaJIT
+  adapters, plus syntax, CLI-scaffold, and exact 105-fixture manifest validation. Inventory/capability stay 246 and
+  64/0/0; no Perl/Rust/Dart/Julia behavior changed.
+- [x] **LOCKSTEP** — Lua README/API, helper reference, backend handoff/status, task/index/roadmaps, Knowledge Map,
+  architecture/live docs, changes/notes, and memory agree that `.1` is complete, `.2` is active, and global
+  normalization remains `.5.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.9.0` Acceptance Checklist
 
@@ -3181,3 +3209,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 admission proof, generated routing, parent closure, and diagnostic-helper handoff. |
 | `LUA-BACKEND-PARITY.4.3.8` | `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events` | Eager typed caller-owned events, quiet default, Unicode/order, parse-result neutrality, exit retention, and 122/122 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.9.0` | `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout` | Exact 230/16/13/3 probe partition, logical repair/admission split, and Perl-lowering future owner. |
+| `LUA-BACKEND-PARITY.4.3.9.1` | `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers` | Eager ordered boolean composition, empty false/false/true, governed truthiness, and 123/123 dual-ABI proof. |

@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.1 — execute Lua eager logical helpers
+
+Lua now executes `and`, `or`, and `not` as boolean value helpers over the existing `runtime_truthy` policy. One
+shared evaluator materializes every authored argument once from left to right before composing a result. Empty
+calls return false, false, and true respectively; extra `not` operands still evaluate before the first value is
+negated.
+
+Focused proof covers side effects after decisive operands, exact ordering, scalar `"0"`, empty array/harray
+truthiness, boolean JSON identity, and receiver continuation through `.with()`. Both separately built PUC Lua and
+LuaJIT adapters pass 123/123. This does not normalize Dart short-circuit/empty-`and`, Perl keyword lowering, arity,
+or cross-backend truthiness; those remain dependency-gated `FUTURE-PARITY-BACKLOG.5.2`. Exact Lua admission
+`.4.3.9.2` is now active.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.0 — split Lua exhaustive helper closeout
 
 An exact generated audit now sends all 246 admitted source names through Lua parse, compile, and runtime dispatch.

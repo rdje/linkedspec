@@ -8,6 +8,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.1 — execute Lua eager logical helpers**
+  (DONE — eager logical values pass 123/123; exact recurring admission/status `.4.3.9.2` is next).
+
+  **Result:** `and`/`or`/`not` now evaluate all authored arguments once left-to-right, then return booleans through
+  existing Lua truthiness. Focused proof locks decisive-operand side effects, extra `not` evaluation, empty false/
+  false/true, zero/aggregate boundaries, and receiver continuation. PUC Lua and LuaJIT pass 123/123. Global
+  truthiness/arity, Dart evaluation/empty-`and`, and Perl lowering remain dependency-gated `.5.2`.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.0 — split Lua exhaustive helper closeout**
   (DONE — exact 230/16/13/3 partition; eager logical helper `.4.3.9.1` is next).
 

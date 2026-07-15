@@ -11,6 +11,7 @@ date: 2026-07-15
 status: current
 tags: [lua, runtime, helpers, logical, no-drift, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.9.0 generates a minimal action for every exact name in lua/src/linkedspec/action_call_names.lua and runs each through Lua parse, compile, and execution with a disposable PUC Lua PCRE2 adapter. Of 246 unique names, 230 reach an owner and 16 report unsupported runtime helper. Thirteen are intentionally structural or named-receiver-only; the exact missing value family is and/or/not. The audit also finds stale runtime-numeric-reducers status, a duplicate source or row, and missing focused direct call(rule) proof."
+evidence_update_2026_07_15_logical: "LUA-BACKEND-PARITY.4.3.9.1 implements the exact three logical gaps eagerly over runtime_truthy and passes 123/123 on PUC Lua and LuaJIT. The remaining .4.3.9.2 closeout must make the probe recurring and report exactly the thirteen intentional non-function surfaces, while also covering direct call(rule), duplicate inventory cleanup, status, and parent closure."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -25,14 +26,14 @@ The measured partition before logical repair is:
 | Missing value helper | 3 | `and`, `or`, `not`. |
 
 The thirteen names remain admitted because their documented current syntax is structural or receiver-bound; a
-bare `name()` function probe is deliberately not their executable form. `LUA-BACKEND-PARITY.4.3.9.1` owns eager
-logical execution. `.4.3.9.2` owns a permanent exact partition check, direct `call(rule)` proof, duplicate inventory
-cleanup, public status correction, and parent closeout.
+bare `name()` function probe is deliberately not their executable form. `LUA-BACKEND-PARITY.4.3.9.1` has now
+closed eager logical execution at 123/123 on both ABIs. `.4.3.9.2` owns a permanent exact partition check, direct
+`call(rule)` proof, duplicate inventory cleanup, public status correction, and parent closeout.
 
 Toolbox probes also exposed a separate reference issue: Perl lowering emits `return and(...)` / `return or(...)`,
 where keyword precedence returns `undef` instead of the documented boolean helper value. Rust, Dart, and Julia
 already execute eager boolean composition. That cross-backend truthiness/arity/lowering decision is not hidden in
 the Lua repair; dependency-gated `FUTURE-PARITY-BACKLOG.5.2` owns it.
 
-Related facts: [[lua-runtime-helper-family-split]], [[julia-logical-helper-execution]],
+Related facts: [[lua-runtime-helper-family-split]], [[lua-logical-helper-execution]], [[julia-logical-helper-execution]],
 [[cross-backend-condition-truthiness-drift]], [[public-call-inventory-independent-coverage]].

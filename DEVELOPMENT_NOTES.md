@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.1` — eager first, compose second): Do not implement logical helpers with
+  host-language short-circuit operators around expression evaluation. Evaluate and retain every authored value in
+  source order, then apply `runtime_truthy`; this preserves side effects even after a decisive `and`/`or` operand
+  and after `not`'s first operand. Keep empty calls false/false/true to match the established Rust/Julia boundary.
+  Lua's current `"0"`/empty-aggregate truthiness stays unchanged pending `.5.2`. Both ABIs pass 123/123 and exact
+  admission/status `.4.3.9.2` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.0` — probe the negative space, not only the green inventory): Generate one
   minimal call per exact admitted source name and distinguish runtime-owned calls from an `unsupported runtime
   helper` result. The 246-name Lua boundary is 230 handled, thirteen intentionally non-function (structural or

@@ -741,8 +741,9 @@ and typed `RuntimeDiagnosticOutputEvent` records carrying helper, rule, and exac
 `print_each` evaluate once left-to-right, preserve Unicode/order, stay out of parse values, and remain quiet
 without a sink; immediate typed `exit_now` is unchanged. PUC Lua and LuaJIT pass 122/122. Exhaustive `.4.3.9.0`
 then probes every admitted name: 230 reach an owner, thirteen are intentional statement/receiver-only forms, and
-eager `and`/`or`/`not` are the exact missing value family. `.4.3.9.1` repairs logical execution and `.2` owns
-recurring exact admission, direct `call(rule)` proof, inventory cleanup, and status. The audit also records
+eager `and`/`or`/`not` are the exact missing value family. `.4.3.9.1` now executes all three eagerly over established
+Lua truthiness at 123/123 on both ABIs; active `.2` owns recurring exact admission, direct `call(rule)` proof,
+inventory cleanup, and status. The audit also records
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl `and`/`or`
 keyword lowering and five-backend logical truthiness/arity stay dependency-gated under `.5.2`; neither Lua-local
 closure is a false five-backend normalization claim.

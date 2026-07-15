@@ -108,9 +108,15 @@ sources, plus four placement-marker spellings. Parent `.4.3.7` is closed. `.4.3.
 optional per-parse caller sink. With no sink it stays quiet; events never alter parse values; `exit_now` remains
 immediate typed control. Both ABIs pass 122/122. Exhaustive `.4.3.9.0` probing partitions all 246 names into 230
 handled, thirteen intentional statement/receiver-only surfaces, and missing eager `and`/`or`/`not`; logical repair
-`.4.3.9.1` is next and recurring admission/status `.2` follows. This is native interpreter parity only; generated
-Lua preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
+`.4.3.9.1` now passes 123/123 and recurring admission/status `.2` is next. This is native interpreter parity only;
+generated Lua preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
+
+Lua now executes `and`, `or`, and `not` as eager boolean value helpers: all authored arguments evaluate once
+left-to-right before `runtime_truthy` composition. Empty calls return false, false, and true respectively. Current
+Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as true; portable specs should use
+explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
+proof raises both ABI suites to 123/123; exact runtime-call admission/status `.4.3.9.2` is next.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
