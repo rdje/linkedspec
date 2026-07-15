@@ -925,7 +925,8 @@ own structured runtime failures, trace controls/sinks, runtime events, and no-dr
 propagation remains `.5.3` after its owners exist. Structured runtime diagnostics `.4.4.1` pass 126/126 and native
 trace controls/sinks `.4.4.2` pass 128/128; deeper runtime instrumentation `.4.4.3` passes 129/129 and no-drift
 closeout `.4.4.4` closes the scoped runtime diagnostics/trace parent. Staged-function/native-loading `.5.1` is
-active; full native-pipeline trace remains dependency-correct `.5.3`.
+now split by `.5.1.0`; minimal `actionir-body.spec` staged dispatch `.5.1.1` is active. Full native-pipeline trace
+remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -934,8 +935,8 @@ child-before-parent preservation, deterministic error/diagnostic JSON, unchanged
 successful results pass 126/126 on PUC Lua and LuaJIT. Typed ordered trace levels/config/events, environment
 controls, caller-owned stdout/route/mirror sinks with reset/append, and balanced result-neutral parse scopes now
 pass 128/128. Runtime rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129.
-Public status is `runtime-trace-events`; `.4.4.4` closes parent `.4.4`, `.5.1` is active, and capability remains
-64/0/0.
+Public status is `runtime-trace-events`; `.4.4.4` closes parent `.4.4`, planning `.5.1.0` activates minimal staged
+dispatch `.5.1.1`, and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

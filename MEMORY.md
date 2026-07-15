@@ -10,18 +10,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.4.3` — native runtime trace instrumentation.
-- latest_commit: `4cd3347d` — `LUA-BACKEND-PARITY.4.4.3 - instrument Lua runtime trace`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift`.
-- active_work_unit: `.4.4.4` no-drift audit, public/durable alignment, focused proof, canonical verification, and
-  parent `.4.4` closure are complete; its prepared commit remains before the clean pivot to `.5.1`.
-- next_action: commit and clean `.4.4.4`, then pivot to staged-function/native-loading `.5.1`.
-- current_proof: PUC Lua and LuaJIT pass 129/129. Exact API/source/test inventory covers diagnostics, ordered
-  controls, environment mapping, event primitives, stdout/route/mirror/reset/append, result-neutral entrypoints,
-  and parse/rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events. Public status remains
-  `runtime-trace-events`; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
-  CLI 61x2 and Phase 0 `1..1031` in 608 seconds. Full pipeline trace remains dependency-correct `.5.3`;
-  diagnostic-output `.5.1` and logical `.5.2` stay dependency-gated.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.4.4` — native runtime diagnostics/trace no-drift.
+- latest_commit: `70f35dce` — `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift`.
+- prepared_commit: `LUA-BACKEND-PARITY.5.1.0 - split Lua staged function execution`.
+- active_work_unit: planning `.5.1.0` split, durable alignment, focused baseline, neutral contract, book, Knowledge
+  Map, and doctrine verification are complete; its prepared commit remains before `.5.1.1` code.
+- next_action: commit and clean `.5.1.0`, then implement minimal staged action-body dispatch `.5.1.1`.
+- current_proof: Lua already owns exact-v1 function projection, staged sidecars, registry-first contracts, isolated
+  pre-execution frames, compiled records, generic trailing-block AST, and built-in contextual blocks; it lacks body-
+  job dispatch and registered-call runtime. `.5.1.1` owns dispatch first. Baseline stays PUC Lua/LuaJIT 129/129,
+  coverage 246/105+1/122, capability 64/0/0, and public status `runtime-trace-events`. Descriptors/full trace remain
+  `.5.3`, generated source `.8`, and explicit callable literals/bound calls `.11.7`.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +31,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.4.4.4` no-drift records pass focused 129/129 on both Lua ABIs plus
-  canonical CI; commit remains before the clean pivot to `.5.1`.
+- blockers: none. in_flight_uncommitted: `.5.1.0` planning/task/book/KM/live alignment passes focused 129/129 on
+  both Lua ABIs, neutral callable contracts, and governance gates; commit remains before `.5.1.1` code.

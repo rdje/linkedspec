@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.0` — split at typed data and execution boundaries): The current Lua shell/
+  registry/state foundation is not one missing function-call switch. First dispatch exact body jobs into immutable
+  `body_ast`; then execute fixed-v1 calls over that staged body. Variadic-v2 changes the authoritative definition,
+  sidecar, registry-resolution, and frame schemas before it changes execution, so give metadata and runtime separate
+  leaves. Final `callback: codeblock` likewise requires typed declaration/normalization before contextual execution.
+  Keep `{|params| ...}` construction and bound-codeblock invocation in `.11.7`; they require a different runtime
+  model. This produces reviewable dependency-ordered commits and activates only staged provider `.5.1.1`.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.4.4` — close exactly the runtime boundary that exists): Reuse the completed
   Dart/Julia runtime checklists to audit controls, sinks, event kinds, traced entrypoints, rule/branch/lifecycle/
   cursor/boundary coverage, default quietness, and result identity. Then compare exported Lua API names, source

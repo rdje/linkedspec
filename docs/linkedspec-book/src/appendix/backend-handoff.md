@@ -761,8 +761,9 @@ deterministic JSON, unchanged text, and successful-result identity pass 126/126 
 typed ordered levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks,
 reset/append, and result-neutral direct/config-wrapper parse scopes at 128/128. `.4.4.3` adds exact runtime
 rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events at 129/129. Public status is
-`runtime-trace-events`; no-drift `.4.4.4` closes parent `.4.4`, staged-function/native-loading `.5.1` is active,
-and capability remains 64/0/0.
+`runtime-trace-events`; no-drift `.4.4.4` closes parent `.4.4`. Planning `.5.1.0` separates staged dispatch,
+fixed/variadic runtime, contextual-codeblock metadata/runtime, and closeout; minimal staged dispatch `.5.1.1` is
+active, and capability remains 64/0/0.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

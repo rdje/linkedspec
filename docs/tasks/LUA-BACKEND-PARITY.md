@@ -1952,6 +1952,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.5.1`
   Status: `active`
   Goal: Add staged parser registry/function-body dispatch and fixed-v1/variadic-v2 runtime calls.
+  Children: `.5.1.0`, `.5.1.1`, `.5.1.2`, `.5.1.3`, `.5.1.4`, `.5.1.5`
   Acceptance: Provider identity, ordered jobs, parse/normalize/stitch phases, failures, and trace match the admitted
     variants without Lua-only queues or cache behavior. Consume `linkedspec-callable-signature-v1` through the
     spec-owned shell, typed function/job records, registry-first ActionIR resolution, and isolated invocation
@@ -1963,6 +1964,115 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     and parenthesized contextual final blocks equivalently in the caller's dynamic context, with copied/restored
     bindings and no harray promotion. Explicit `{|params| ...}` literals and dynamic codeblock-variable calls remain
     routed through `FUTURE-PARITY-BACKLOG.11.7` to dependency-complete Lua owners.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.0`
+  Status: `done`
+  Goal: Split staged-function and contextual-codeblock work into dependency-correct signoff-sized leaves.
+  Acceptance: Existing Lua shell/registry/compiled/runtime seams and neutral staged/callable contracts are audited
+    before code; staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime,
+    and no-drift each receive an exact owner without pulling dynamic callable literals out of `.11.7`.
+  Verification: **PASS 2026-07-15.** Knowledge Map-first inspection confirms Lua already projects exact-v1 function
+    nodes, preserves parse-job/body payloads, owns registry-first contract resolution and isolated pre-execution
+    frames, compiles function records, parses generic trailing block arguments, and executes built-in contextual
+    blocks—but it does not dispatch body jobs or call registered functions. The neutral staged provider is one
+    independent mechanism; fixed runtime execution depends on it; variadic-v2 requires typed shell/state evolution
+    before runtime; final `callback: codeblock` requires declaration/normalization before contextual execution.
+    Explicit `{|params| ...}` literals and bound codeblock calls remain dependency-gated `.11.7`. No behavior,
+    status, capability, or test count changes. PUC Lua and LuaJIT pass the unchanged 129/129; callable-signature
+    and callable-codeblock checkers pass 3/9/7 and 7/11/9/7/4/8 inventories; capability remains 64/0/0; mdBook,
+    memory, Knowledge Map, task metadata, doctrines, and whitespace gates pass. `.5.1.1` is active.
+  Commit: `LUA-BACKEND-PARITY.5.1.0 - split Lua staged function execution`
+
+- ID: `LUA-BACKEND-PARITY.5.1.1`
+  Status: `active`
+  Goal: Add the minimal Lua staged action-body provider, deterministic job execution, and immutable body stitching.
+  Acceptance: Validate and stable-sort exact `StagedParseJob` values by parent path/span/job id; resolve only
+    `actionir-body.spec` to `builtin:actionir-body.spec`; record the governed digest/cache/compiled identity; parse
+    exact body text through `parse_action_block(...)`; stitch `body_ast` under replace-field policy; expose composed
+    shell+dispatch APIs; reject unsupported providers and sidecar drift on PUC Lua and LuaJIT.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.2`
+  Status: `pending`
+  Goal: Execute registered fixed-v1 user functions through the Lua runtime.
+  Dependencies: `.5.1.1`
+  Acceptance: Registry-first calls evaluate positional arguments once left-to-right in caller scope, execute staged
+    `body_ast` in fresh scalar/array/harray stores, return local final/early-return values, restore caller stores on
+    success/failure, feed receiver chains, execute-and-discard standalone calls, and diagnose arity/keyword/
+    direct-mutual recursion without helper fallback on both ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.3`
+  Status: `pending`
+  Goal: Consume the fixed-v1/variadic-v2 callable-signature union natively.
+  Children: `.5.1.3.1`, `.5.1.3.2`
+  Dependencies: `.5.1.2`
+  Acceptance: The spec-owned shell, typed state, registry resolution, and runtime consume the unchanged neutral
+    signature contract; descriptor admission remains `.5.3` and generated preservation/execution remains `.8`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.3.1`
+  Status: `pending`
+  Goal: Preserve variadic-v2 callable signatures through Lua shell, AST, staged records, registry, and compiled state.
+  Dependencies: `.5.1.2`
+  Acceptance: Fixed v1 retains exact params/arity; variadic v2 uses only the typed callable signature with final
+    rest, minimum/unbounded maximum arity, positional-only resolution, identical staged copies, and all seven exact
+    invalid-definition diagnostics without prematurely changing outward descriptor or generated-source contracts.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.3.2`
+  Status: `pending`
+  Goal: Execute Lua variadic-v2 user functions through fresh typed rest arrays.
+  Dependencies: `.5.1.3.1`
+  Acceptance: Arguments evaluate once left-to-right; fixed prefixes bind normally; extras bind as one fresh copied
+    typed array including the empty case and nested/null/boolean/codeblock identities; minimum-arity and keyword
+    failures are typed; results chain; the unchanged neutral fixture passes on PUC Lua and LuaJIT.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.4`
+  Status: `pending`
+  Goal: Consume final contextual `name: codeblock` parameters for Lua user functions.
+  Children: `.5.1.4.1`, `.5.1.4.2`
+  Dependencies: `.5.1.3`
+  Acceptance: Declaration metadata and attached/parenthesized contextual execution match the neutral final-codeblock
+    contract without implementing explicit callable literals or bound codeblock-variable invocation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.4.1`
+  Status: `pending`
+  Goal: Preserve final codeblock parameter kind through Lua shell, staged records, registry, and call normalization.
+  Dependencies: `.5.1.3.2`
+  Acceptance: Final-only `callback: codeblock` carries exact typed metadata; attached and parenthesized contextual
+    blocks normalize equivalently; invalid non-final/argument-list/missing-name/unknown-type forms reject; harray
+    literals are never promoted; built-in contracts remain unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.4.2`
+  Status: `pending`
+  Goal: Execute Lua user-function contextual final blocks in the caller's dynamic context.
+  Dependencies: `.5.1.4.1`
+  Acceptance: Attached and parenthesized zero-positional contextual blocks execute equivalently through the declared
+    final slot, see current dynamic bindings, preserve copied/restored parameter stores, keep nonparameter effects
+    visible where governed, return ordinary chainable values, and reject wrong-kind/missing callbacks on both ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.1.5`
+  Status: `pending`
+  Goal: Close Lua staged-function/variadic/contextual-codeblock execution no-drift.
+  Dependencies: `.5.1.1`, `.5.1.2`, `.5.1.3`, `.5.1.4`
+  Acceptance: Focused dual-ABI proof, neutral contract checkers/fixtures, public API/status, docs/book, task/index/
+    roadmaps/live/KM, and canonical gates agree; parent `.5.1` closes and native loading `.5.2` activates without
+    claiming descriptors/full-pipeline trace `.5.3`, generated execution `.8`, or dynamic callable literals `.11.7`.
   Verification: `pending`
   Commit: `pending`
 
@@ -2115,7 +2225,9 @@ instrumentation, and closeout; it retains full frontend/compiler/function/staged
 general staged-function and native-loading prerequisites. Structured runtime diagnostics pass 126/126; native
 trace controls/sinks pass 128/128 and runtime instrumentation `.4.4.3` passes 129/129 on both ABIs. No-drift
 `.4.4.4` closes the scoped parent without behavior changes. Staged-function/native-loading `.5.1` is active; full
-native-pipeline trace remains `.5.3`.
+native-pipeline trace remains `.5.3`. Planning `.5.1.0` now separates staged body dispatch, fixed-v1 execution,
+variadic metadata/runtime, contextual-codeblock metadata/runtime, and closeout; minimal staged dispatch `.5.1.1`
+is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2210,6 +2322,34 @@ native-pipeline trace remains `.5.3`.
 | 89 | `LUA-BACKEND-PARITY.4.4.4` | `done` | Exact API/source/test/public-doc no-drift closes parent `.4.4`; full pipeline stays `.5.3`. |
 | 90 | `LUA-BACKEND-PARITY.5` | `active` | Implement general staged-function execution, native loading, descriptors, and full-pipeline trace. |
 | 91 | `LUA-BACKEND-PARITY.5.1` | `active` | Add staged registry/function dispatch plus fixed-v1/variadic-v2 and contextual codeblock calls. |
+| 92 | `LUA-BACKEND-PARITY.5.1.0` | `done` | Split staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift. |
+| 93 | `LUA-BACKEND-PARITY.5.1.1` | `active` | Add the minimal deterministic `actionir-body.spec` staged provider and immutable body stitching. |
+| 94 | `LUA-BACKEND-PARITY.5.1.2` | `pending` | Execute fixed-v1 registered functions through fresh local stores. |
+| 95 | `LUA-BACKEND-PARITY.5.1.3.1` | `pending` | Preserve typed variadic-v2 signatures through native state. |
+| 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `pending` | Execute variadic-v2 calls with fresh typed rest arrays. |
+| 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `pending` | Preserve final codeblock parameter metadata and normalize contextual forms. |
+| 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `pending` | Execute contextual final blocks through declared user-function slots. |
+| 99 | `LUA-BACKEND-PARITY.5.1.5` | `pending` | Close staged-function/variadic/contextual-codeblock execution no-drift. |
+
+### `LUA-BACKEND-PARITY.5.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Parent `.5.1` combined staged parser dispatch, fixed and variadic execution, signature
+  evolution, contextual final-codeblock declarations/execution, and closeout in one implementation leaf.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua's current seams are intentionally uneven: the shell and registry preserve
+  exact-v1 sidecars/frames, compiled state resolves contracts, ActionIR parses generic trailing blocks, and built-in
+  contextual blocks execute, but no staged provider or registered-call runtime exists. Variadic and codeblock
+  declaration records have different neutral schemas and each requires metadata before execution.
+- [x] **FIX** — Split `.5.1` by dependency into `.1` staged dispatch, `.2` fixed execution, `.3.1/.3.2` variadic
+  state/runtime, `.4.1/.4.2` contextual-codeblock state/runtime, and `.5` no-drift. Retain descriptors/full trace in
+  `.5.3`, generated source in `.8`, and explicit callable literals/bound calls in `.11.7`.
+- [x] **ADDRESSED (verified)** — Knowledge Map and source inspection identify exact current owners in
+  `user_function_definition_shell.lua`, `user_function_registry.lua`, `compiled_spec.lua`, `action_contracts.lua`,
+  `action_parser.lua`, and `interpreter.lua`; completed Dart/Julia staged and runtime sequences confirm the order.
+- [x] **NO REGRESSION** — Planning changes no source, status, capability, fixtures, or test count. The committed
+  baseline remains PUC Lua/LuaJIT 129/129, coverage 246/105+1/122, and capability 64/0/0. Both neutral callable
+  checkers plus mdBook, memory, Knowledge Map, task metadata, doctrines, and whitespace pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/Lua README, architecture/live/changes/notes/memory, mdBook, and
+  Knowledge Map record the split and activate only `.5.1.1`.
 
 ### `LUA-BACKEND-PARITY.4.4.4` Acceptance Checklist
 
@@ -3472,3 +3612,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.4.2` | `LUA-BACKEND-PARITY.4.4.2 - add Lua trace controls` | Typed levels/config/events, documented environment controls, caller-owned sinks, reset/append, and 128/128 result-neutral proof. |
 | `LUA-BACKEND-PARITY.4.4.3` | `LUA-BACKEND-PARITY.4.4.3 - instrument Lua runtime trace` | Balanced rule scopes plus exact regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events and 129/129 dual-ABI identity proof. |
 | `LUA-BACKEND-PARITY.4.4.4` | `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift` | Exact API/source/test/public-doc inventory, parent `.4.4` closure, 129/129 dual-ABI proof, and `.5.1` handoff. |
+| `LUA-BACKEND-PARITY.5.1.0` | `LUA-BACKEND-PARITY.5.1.0 - split Lua staged function execution` | Dependency-correct staged/fixed/variadic/contextual-codeblock/no-drift leaves with explicit later boundaries retained. |

@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.0 — split Lua staged function execution
+
+Split the broad Lua staged-function leaf before code. Existing Lua owns exact-v1 spec-defined projection, staged
+sidecars, registry-first ActionIR resolution, isolated pre-execution frames, compiled function records, generic
+trailing-block AST, and built-in contextual-block execution, but not staged body dispatch or registered-function
+runtime calls.
+
+New owners follow those dependencies: `.5.1.1` minimal deterministic action-body dispatch/stitching; `.5.1.2`
+fixed-v1 runtime; `.5.1.3.1/.2` variadic-v2 typed state then runtime; `.5.1.4.1/.2` final-codeblock metadata then
+contextual execution; and `.5.1.5` no-drift. Descriptors/full trace remain `.5.3`, generated source remains `.8`,
+and explicit callable literals/bound calls remain `.11.7`. No behavior, status, capability, or test count changes;
+PUC Lua and LuaJIT pass the unchanged 129/129, both neutral callable checkers pass, capability remains 64/0/0,
+and `.5.1.1` is active.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.4.4 — close Lua diagnostics trace no drift
 
 Closed Lua's scoped native runtime diagnostics/trace parent without changing implementation behavior. Exact source,

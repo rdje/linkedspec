@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua staged-function `.5.1` is split before implementation. Existing code owns exact-v1
+  function projection, staged sidecars, registry-first contract resolution, isolated pre-execution frames, compiled
+  records, generic trailing-block AST, and built-in contextual block execution—but not body-job dispatch or
+  registered-call runtime. `.5.1.1` now owns the minimal deterministic action-body provider/stitch path; `.2` fixed
+  execution; `.3.1/.2` variadic typed state/runtime; `.4.1/.2` final-codeblock metadata/contextual runtime; `.5`
+  no-drift. Descriptors/full trace stay `.5.3`, generated source `.8`, explicit callable literals/bound calls `.11.7`.
 - `2026-07-15` refresh: Lua diagnostics/trace no-drift is closed at the precise native runtime boundary. The public
   API exports all ordered levels, immutable controls, environment mapping, structured events/scopes, log/dump
   primitives, stdout/route/mirror sinks, reset/append behavior, and direct/config-wrapper runtime entrypoints.

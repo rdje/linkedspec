@@ -155,7 +155,8 @@ handled, thirteen intentional statement/receiver-only surfaces, and missing eage
 and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime failures, trace controls/sinks,
 runtime events, and closeout; structured diagnostics `.4.4.1` pass 126/126, trace controls/sinks `.4.4.2`
 pass 128/128, runtime instrumentation `.4.4.3` passes 129/129, and no-drift `.4.4.4` closes the scoped runtime
-parent. Staged-function/native-loading `.5.1` is active. Full frontend/compiler/function/staged trace remains
+parent. Planning `.5.1.0` splits staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime,
+and closeout; minimal staged dispatch `.5.1.1` is active. Full frontend/compiler/function/staged trace remains
 `.5.3` after general staged functions and native loading exist. This is native interpreter parity only; generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

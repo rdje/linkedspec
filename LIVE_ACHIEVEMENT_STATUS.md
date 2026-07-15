@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.0 — split Lua staged function execution**
+  (DONE — dependency-correct implementation leaves now exist; staged dispatch `.5.1.1` is next).
+
+  **Result:** Source and Knowledge Map audit separates the broad leaf into deterministic action-body dispatch,
+  fixed-v1 execution, variadic-v2 metadata/runtime, contextual-codeblock metadata/runtime, and no-drift. Existing
+  exact-v1 projection/sidecars/registry/frames/compiled records and built-in block execution are retained. Later
+  descriptors/full trace `.5.3`, generated source `.8`, and explicit callable literals/bound calls `.11.7` stay
+  outside the slice. No behavior or capability changes; the baseline remains 129/129 on both Lua ABIs and 64/0/0,
+  both neutral callable contract checkers pass, and all book/continuity/doctrine gates are green.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.4.4 — close Lua diagnostics trace no drift**
   (DONE — scoped runtime diagnostics/trace is aligned; staged-function/native-loading `.5.1` is next).
 

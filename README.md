@@ -97,8 +97,9 @@ This `README.md` is the **single entry point** to the project.
   documented environment controls, caller-owned stdout/route/mirror sinks with reset/append, and result-neutral
   direct/config-wrapper parse scopes at 128/128. `.4.4.3` adds rule/regex/dispatch/recursion/lifecycle/cursor/
   boundary/mark-capture events at 129/129. No-drift `.4.4.4` closes the scoped runtime diagnostics/trace parent;
-  public status remains `runtime-trace-events` and staged-function/native-loading `.5.1` is active. Full frontend/
-  compiler/function/staged propagation remains `.5.3`.
+  public status remains `runtime-trace-events`. Planning `.5.1.0` separates staged body dispatch, fixed/variadic
+  runtime, contextual-codeblock metadata/runtime, and closeout; minimal staged dispatch `.5.1.1` is active. Full
+  frontend/compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

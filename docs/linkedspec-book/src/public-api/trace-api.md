@@ -307,8 +307,8 @@ post-mutation capture/named-mark rule slots. Lifecycle blocks are high-level
 marks. Traced and untraced result JSON is identical across success, no-match,
 dispatch, and recursion paths; caller options are not mutated; and both PUC
 Lua and LuaJIT pass 129/129. Public status is `runtime-trace-events`. The scoped
-no-drift proof closes parent `.4.4`; staged-function/native-loading `.5.1` is
-the next active leaf.
+no-drift proof closes parent `.4.4`. Planning `.5.1.0` splits the staged-function
+work; minimal action-body dispatch `.5.1.1` is the next active leaf.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top
