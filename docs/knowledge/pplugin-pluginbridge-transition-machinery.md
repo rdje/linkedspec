@@ -40,4 +40,9 @@ wraps it for legacy callers. Richer `pplugin` subdefinitions still are not evide
 the legacy plugin runtime is a backend-neutral target; promoting them to the Rust oracle
 requires a separate Rust parser/runtime parity owner.
 
-Related: [[ownerdispatch-shared-seam]].
+`LUA-BACKEND-PARITY.6.2.3` makes the existing empty `pplugin_empty` smoke pass on Lua by
+implementing the neutral `hash(flat_array(...))` constructor boundary. That result proves
+hash/list-context parity for the syntax smoke; it does not broaden Lua into legacy plugin
+runtime execution.
+
+Related: [[ownerdispatch-shared-seam]], [[lua-flat-array-hash-splicing]].

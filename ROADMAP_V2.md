@@ -162,7 +162,9 @@ admission. `.6.2.1` now caches the matching current-edge call once, skips passiv
 unrelated calls, and closes all three HLink, both EBNF, and SimEnv cases unchanged. Both ABI suites pass 163/163
 and the exact window is 56/59. Receiver-copy `.6.2.2` now deep-copies the already evaluated fluent value once,
 preserves typed continuations, closes the exact hash-receiver fixture, and raises both ABIs to 164/164 with the
-window at 57/59. Flat-array hash splicing `.6.2.3` is active.
+window at 57/59. Flat-array hash splicing `.6.2.3` now consumes direct/receiver `flat_array(...)` values as ordered
+hash pairs, closes unchanged `pplugin_empty`, and raises the window to 58/59. Public leading-trivia initialization
+`.6.2.4` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

@@ -859,6 +859,8 @@ dispatch rule.
 | Splice count | `return(count(array(flat_hash(hash("a", 1, "b", 2)))))` | `x` | `[4]` |
 | Copy snapshot | `set(meta, { "a" : 1 }); set(saved, copy(meta)); meta["b"] = 2; return(array(count_keys(meta), count_keys(saved)))` | `x` | `[[2,1]]` |
 | Receiver copy | `set(meta, { "a" : 1, "b" : 2 }); return(meta.copy().flat_hash().count_keys())` | `x` | `[2]` |
+| Flat-array hash splice | `return(hash(flat_array(["a", 1, "b", { "nested" : 2 }])))` | `x` | `[{"a":1,"b":{"nested":2}}]` |
+| Receiver flat-array hash splice | `set(pairs, ["a", 1]); return(harray(pairs.flat_array()))` | `x` | `[{"a":1}]` |
 | Merge override | `return(merge_hash(hash("a", 1, "b", 2), hash("b", 9, "c", 3)))` | `x` | `[{"a":1,"b":9,"c":3}]` |
 | Pure `set_key` | `set(meta, { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(meta)))` | `x` | `[[2,1]]` |
 | Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(meta))` | `x` | `[{"a":1,"b":2}]` |
@@ -885,7 +887,9 @@ dispatch rule.
 - **Behavior**: Constructs a hash from flat key/value pairs. Quoted strings are literal constructor payloads, so
   `hash("key", value)` constructs a hash entry whose key is `"key"`. Zero and paired multi-argument calls are
   valid. Arguments are interpreted as alternating keys and values. Accepts
-  `flat_array(...)` and `flat_hash(...)` for list-context insertion.
+  `flat_array(...)` and `flat_hash(...)` for list-context insertion. Direct call or terminal receiver
+  `flat_array(...)` results splice their copied array members as ordered alternating tokens; an unwrapped array
+  argument remains one value, and an empty splice adds no tokens.
 - **Boundary**: Exact `hash(IDENTIFIER)` is a removed selector shape. Use the bare identifier to read its harray
   value or `{ identifier : value }` / `{ "identifier" : value }` to construct a field. All five backends reject
   the removed selector before execution.

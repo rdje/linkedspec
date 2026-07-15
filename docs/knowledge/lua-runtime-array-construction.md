@@ -32,4 +32,5 @@ probe found that the reference lowerer accepts the catalog-sized `flat(array)` /
 `FUTURE-PARITY-BACKLOG.5` owns the keep-or-normalize decision; Lua parity does not erase that measured caveat.
 
 Related facts: [[lua-runtime-core-value-capture-helpers]], [[lua-runtime-harray-construction]],
-[[lua-numeric-aggregate-reducers]], [[uniform-binding-array-end-result-supersession]].
+[[lua-flat-array-hash-splicing]], [[lua-numeric-aggregate-reducers]],
+[[uniform-binding-array-end-result-supersession]].

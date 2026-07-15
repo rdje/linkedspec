@@ -7621,6 +7621,8 @@ Top::
  /x/ -> Done {
    set(step, 0)
    set(source, { "b" : 2, "a" : { "nested" : 1 } })
+   set(pair_tokens, ["direct", { "nested" : 1 }, "tail", 2])
+   set(empty_tokens, [])
    constructed = hash(
      "left",
      set(step, add(step, 1)),
@@ -7633,11 +7635,19 @@ Top::
    hash_splice = hash("kind", "root", source.flat_hash())
    positioned_splice = hash(flat_hash({ "a" : 1 }), "b", 2, flat({ "a" : 3 }), "c", 4)
    array_pair_splice = hash(flat(["p", 3, "missing"]))
+   flat_array_splice = hash(flat_array(pair_tokens))
+   receiver_flat_array_splice = hash(pair_tokens.flat_array())
+   positioned_flat_array_splice = hash("head", 0, flat_array(["middle", 1]), "tail", 2)
+   harray_flat_array_splice = harray(flat_array(["alias", 3]))
+   empty_flat_array_splice = hash(flat_array())
+   empty_receiver_flat_array_splice = hash(empty_tokens.flat_array())
+   ordinary_array_value = hash("payload", pair_tokens)
    odd = hash("present", 1, "missing")
    call_list_splice = array("tag", flat_hash(source))
    literal_list_splice = ["tag", source.flat()]
    source["b"] = 9
    source["a"]["nested"] = 7
+   pair_tokens[1]["nested"] = 9
    extra["x"] = 99
    return({
      "step" : step,
@@ -7649,10 +7659,18 @@ Top::
      "hash_splice" : hash_splice,
      "positioned_splice" : positioned_splice,
      "array_pair_splice" : array_pair_splice,
+     "flat_array_splice" : flat_array_splice,
+     "receiver_flat_array_splice" : receiver_flat_array_splice,
+     "positioned_flat_array_splice" : positioned_flat_array_splice,
+     "harray_flat_array_splice" : harray_flat_array_splice,
+     "empty_flat_array_splice" : empty_flat_array_splice,
+     "empty_receiver_flat_array_splice" : empty_receiver_flat_array_splice,
+     "ordinary_array_value" : ordinary_array_value,
      "odd" : odd,
      "call_list_splice" : call_list_splice,
      "literal_list_splice" : literal_list_splice,
      "source" : source,
+     "pair_tokens" : pair_tokens,
      "extra" : extra
    })
  }
@@ -7670,10 +7688,20 @@ Done::
     hash_splice = json.harray({ a = json.harray({ nested = 1 }), b = 2, kind = "root" }),
     positioned_splice = json.harray({ a = 3, b = 2, c = 4 }),
     array_pair_splice = json.harray({ p = 3, missing = json.null }),
+    flat_array_splice = json.harray({ direct = json.harray({ nested = 1 }), tail = 2 }),
+    receiver_flat_array_splice = json.harray({ direct = json.harray({ nested = 1 }), tail = 2 }),
+    positioned_flat_array_splice = json.harray({ head = 0, middle = 1, tail = 2 }),
+    harray_flat_array_splice = json.harray({ alias = 3 }),
+    empty_flat_array_splice = json.harray(),
+    empty_receiver_flat_array_splice = json.harray(),
+    ordinary_array_value = json.harray({ payload = json.array({
+      "direct", json.harray({ nested = 1 }), "tail", 2,
+    }) }),
     odd = json.harray({ present = 1, missing = json.null }),
     call_list_splice = json.array({ "tag", "a", json.harray({ nested = 1 }), "b", 2 }),
     literal_list_splice = json.array({ "tag", "a", json.harray({ nested = 1 }), "b", 2 }),
     source = json.harray({ a = json.harray({ nested = 7 }), b = 9 }),
+    pair_tokens = json.array({ "direct", json.harray({ nested = 9 }), "tail", 2 }),
     extra = json.harray({ x = 99 }),
   }), "copied harray construction")
 end)

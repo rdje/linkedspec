@@ -86,7 +86,9 @@ re-search after the parent match, and retains ordinary execution for unrelated r
 shipped cases pass unchanged, both ABI suites pass 163/163, and the window is 56/59. Receiver-copy `.6.2.2` is
 now complete: zero-argument `.copy()` deep-copies the already evaluated receiver and retains its runtime kind for
 harray, array, string, and scalar continuations. Both suites pass 164/164 and the exact window reaches 57/59;
-flat-array hash splicing `.6.2.3` is active.
+flat-array hash splicing `.6.2.3` now consumes direct and receiver `flat_array(...)` results as ordered hash pairs.
+The unchanged `pplugin_empty` returns `[{}]` on both ABIs and the window reaches 58/59; public leading-trivia
+initialization `.6.2.4` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -313,7 +315,10 @@ reuse `.6.2.1` now passes 163/163 per ABI and raises the exact window to 56/59 b
 and SimEnv cases. It caches the current edge result exactly once, does not re-search passive terminals, and leaves
 unrelated calls direct. Receiver copy `.6.2.2` then preserves the one evaluated fluent value, closes the unchanged
 hash-receiver fixture, raises both suites to 164/164, and moves the window to 57/59. Flat-array hash splicing is
-active; leading-trivia initialization, successor measurement, and permanent admission follow under `.6.2.4-.6`.
+now complete: explicit direct/receiver `flat_array(...)` results splice ordered key/value tokens into `hash(...)`
+and `harray(...)`, while ordinary arrays remain one copied value. `pplugin_empty` passes unchanged and the window
+reaches 58/59. Leading-trivia initialization is active; successor measurement and permanent admission follow
+under `.6.2.5-.6`.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

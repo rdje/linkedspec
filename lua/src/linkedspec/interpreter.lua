@@ -1200,6 +1200,7 @@ local ARRAY_SPLICE_HELPERS = {
 
 local HASH_SPLICE_HELPERS = {
   flat = true,
+  flat_array = true,
   flat_hash = true,
 }
 

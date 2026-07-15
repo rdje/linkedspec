@@ -113,8 +113,10 @@ Three backbone items tracked major structural modernization — all done:
   unrelated calls direct. Three HLink, two EBNF, and SimEnv fixtures pass unchanged; both ABI suites pass 163/163
   and the exact window reaches 56/59. Receiver-copy `.6.2.2` now deep-copies the one evaluated fluent value,
   preserves typed continuations, and closes the unchanged hash-receiver fixture. Both suites pass 164/164 and the
-  window reaches 57/59; flat-array hash splicing `.6.2.3` is active. The capability census remains four-backend
-  64/0/0 until `.8.4`.
+  window reaches 57/59. Flat-array hash splicing `.6.2.3` now consumes direct/receiver `flat_array(...)` results as
+  ordered key/value tokens for `hash(...)` and `harray(...)`, closes unchanged `pplugin_empty`, and raises the
+  window to 58/59. Public leading-trivia initialization `.6.2.4` is active. The capability census remains
+  four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s

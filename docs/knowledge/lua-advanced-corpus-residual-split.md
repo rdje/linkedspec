@@ -15,7 +15,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, corpus, action-edge, receiver, harray, leading-trivia, toolbox, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.6.2.0 executed exact manifest offsets 40-98 through the production library executor with debug trace on disposable PUC Lua and LuaJIT PCRE2 adapters. Both ABIs passed the same 50/59 and exposed the same nine residuals. Canonical Perl dump_parser_source and return_descriptor probes proved four Lua mechanisms: call(child) bypassed the current action-edge cache and triggered fallback double execution; receiver .copy() dropped the evaluated harray; hash(flat_array(defs)) fails to splice flat_array tokens; and runtime_parse starts at byte zero rather than the Perl public wrapper's leading blank/comment boundary. LUA-BACKEND-PARITY.6.2.1 repaired current-edge call reuse plus passive terminals and raised both ABIs to 56/59; .6.2.2 preserved receiver copy values and raised them to 57/59. The final two mechanisms retain .6.2.3-.4 ownership."
+evidence: "LUA-BACKEND-PARITY.6.2.0 executed exact manifest offsets 40-98 through the production library executor with debug trace on disposable PUC Lua and LuaJIT PCRE2 adapters. Both ABIs passed the same 50/59 and exposed the same nine residuals. Canonical Perl dump_parser_source and return_descriptor probes proved four Lua mechanisms: call(child) bypassed the current action-edge cache and triggered fallback double execution; receiver .copy() dropped the evaluated harray; hash(flat_array(defs)) lacked flat-array hash-splice classification; and runtime_parse starts at byte zero rather than the Perl public wrapper's leading blank/comment boundary. LUA-BACKEND-PARITY.6.2.1 repaired current-edge call reuse plus passive terminals and raised both ABIs to 56/59; .6.2.2 preserved receiver copy values and raised them to 57/59; .6.2.3 added flat-array hash splicing and raised them to 58/59. Only leading-trivia .6.2.4 remains."
 reverify: "bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua"
 ---
 
@@ -43,8 +43,8 @@ The three independent compare mismatches have separate owners:
 
 - `.6.2.2` (done): receiver-form `meta.copy()` now deep-copies the evaluated
   harray before `.flat_hash().count_keys()`;
-- `.6.2.3`: `hash(flat_array(defs))` treats the flattened array as one Lua
-  table key because `flat_array` is absent from hash-splice classification;
+- `.6.2.3` (done): `hash(flat_array(defs))` now splices the flattened array
+  as ordered copied key/value tokens instead of using one Lua table key;
 - `.6.2.4`: public `runtime_parse(...)` starts history at byte zero, whereas
   the Perl public wrapper skips leading blank/comment lines before its top
   handler.
@@ -57,4 +57,5 @@ Related facts: [[rust-action-edge-child-return-dispatch]],
 [[julia-action-edge-child-push]], [[julia-statement-regex-mutation]],
 [[ds-vhistory-leading-newline-oracle-boundary]],
 [[terse-hash-receiver-value-chains]], [[pplugin-pluginbridge-transition-machinery]],
-[[lua-action-edge-child-call-reuse]], [[lua-receiver-copy-value-preservation]].
+[[lua-action-edge-child-call-reuse]], [[lua-receiver-copy-value-preservation]],
+[[lua-flat-array-hash-splicing]].

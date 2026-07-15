@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.3 — splice Lua flat arrays into hashes**
+  (DONE — unchanged `pplugin_empty` closes at dual-ABI 58/59; `.6.2.4` is next).
+
+  **Result:** Direct and terminal receiver `flat_array(...)` results now splice their copied members as ordered
+  alternating key/value tokens into `hash(...)` and `harray(...)`. Focused proof locks empty results, positioned
+  pairs, the harray alias, nested copy isolation, and the ordinary unwrapped-array boundary. PUC Lua and LuaJIT
+  pass 164/164. The unchanged `pplugin_empty` returns exact `[{}]` at endpoint 0 and exact offsets 40-98 reach
+  58/59 on both ABIs. Only the pre-owned history public leading-trivia compare remains. Corpus/oracle data,
+  status/CLI, coverage, and capability are unchanged. Canonical local CI exits 0 with CLI 61/61 in default and
+  POSIX environments plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.2 — preserve Lua receiver copy values**
   (DONE — exact hash-receiver output closes at dual-ABI 57/59; `.6.2.3` is next).
 

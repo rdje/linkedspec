@@ -373,7 +373,10 @@ dependency match, and preserves ordinary unrelated rule calls. Three HLink, two 
 unchanged; both suites pass 163/163 and the window reaches 56/59. Receiver-copy `.6.2.2` then carries the one
 evaluated fluent value through zero-argument `.copy()`, retains its runtime kind for later links, and closes the
 hash-receiver fixture. Both suites pass 164/164 and the window reaches 57/59; flat-array hash splicing `.6.2.3` is
-active. The census stays 64/0/0 until `.8.4`.
+now complete. Direct and receiver `flat_array(...)` results splice ordered alternating tokens into `hash(...)` and
+`harray(...)`, empty input yields an empty harray, and ordinary arrays remain one copied value. The unchanged
+`pplugin_empty` returns `[{}]`; both ABIs reach 58/59 and public leading-trivia `.6.2.4` is active. The census stays
+64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler

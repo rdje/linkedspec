@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.3` — list context is authored syntax, not an aggregate-shape guess): Hash
+  construction must decide whether an array is a sequence of key/value tokens from the argument expression that
+  produced it. Add `flat_array` to the same direct-call/terminal-receiver classifier as `flat` and `flat_hash`,
+  then reuse the existing recursive copy path. Do not splice every runtime array: `hash("payload", pairs)` must
+  retain `pairs` as one copied value. This one expression-shape correction makes empty `flat_array(defs)` add zero
+  tokens instead of one table-address key, so unchanged `pplugin_empty` returns `[{}]`. Both Lua ABIs pass 164/164
+  and exact offsets 40-98 reach 58/59 with only the pre-owned leading-trivia compare remaining. Mutation testing
+  was not run. Canonical local CI exits 0 with CLI 61/61 in both environments and Phase 0 `1..1031` in 634
+  seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.2` — receiver links must consume the carried value, not reconstruct a call):
   Fluent evaluation already spends receiver evaluation once and stores the result in `value`; each receiver-aware
   link must transform that value. Letting `.copy()` fall through to `evaluate_call(copy, no_args)` silently changes

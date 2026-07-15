@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.3 — splice Lua flat arrays into hashes
+
+Added canonical `flat_array` to Lua's explicit hash-constructor splice classification. Direct calls and fluent
+chains ending in `.flat_array()` now feed the helper's copied array members into `hash(...)` and `harray(...)` as
+ordered alternating key/value tokens. Empty results contribute no tokens; ordinary unwrapped arrays retain their
+single-value boundary.
+
+Extended focused harray-construction proof across direct and receiver spellings, empty direct/receiver results,
+positioned insertion, the `harray(...)` alias, nested isolation after source mutation, and ordinary copied array
+values. PUC Lua and LuaJIT pass 164/164. The unchanged `pplugin_empty` fixture now returns exact `[{}]` at endpoint
+0 on both ABIs, raising exact offsets 40-98 from 57/59 to 58/59 with only the pre-owned history leading-trivia
+compare remaining.
+
+Corpus/oracle data, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Mutation
+testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0
+true reach `1..1031` in 634 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.2 — preserve Lua receiver copy values
 
 Classified zero-argument receiver `.copy()` in Lua fluent evaluation. It now deep-copies the chain's already
