@@ -71,6 +71,13 @@ from small typed orthogonal mechanisms instead of format-specific or host-langua
 is the positive precedent. Recursive traversal retains `walk_leaves` / `map_leaves` / `reduce_leaves`, because
 their suffix distinguishes leaf recursion from conventional shallow operations; no short aliases are planned.
 
+ADR `0036` / `FUTURE-PARITY-BACKLOG.19` own the separate future mutation direction after complete current-backend
+parity. Nested writes may create a missing root/intermediate only when the next evaluated segment unambiguously
+selects array or harray; reads remain pure, existing wrong-kind values are not coerced, and arrays do not gain
+implicit null-filled gaps. `map_leaves!` is the sole v1 bang candidate: it atomically rebinds a bare named receiver
+after successful original-shape/root-kind traversal and returns the updated value. Callback `path` remains the
+complete stable receiver-root-relative path and `value` is not an alias. Other bang spellings remain excluded.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

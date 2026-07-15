@@ -888,6 +888,13 @@ not semantic signal; preserve typed diagnostics and locally predictable structur
 mechanisms over format-specific/host escapes. Uniform binding is the precedent. Recursive traversal retains
 `walk_leaves` / `map_leaves` / `reduce_leaves`; ambiguous short aliases are not adopted.
 
+Write-vivification/mutation note (2026-07-15, `FUTURE-PARITY-BACKLOG.19.0` / ADR `0036`): after complete current
+backend parity, neutral contracts may add write-only creation of unambiguous missing path containers and an
+explicit receiver-mutating `map_leaves!`. Reads never create state, wrong-kind values are never coerced, arrays
+remain dense, receiver commit is atomic, callback paths stay complete/stable, and `value` remains scoped rather
+than aliased. `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary bang identifiers are
+excluded. `.19.1-.19.7` own contracts, five backends, and admission; no current behavior changes in `.19.0`.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

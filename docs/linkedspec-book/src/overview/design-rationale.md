@@ -58,6 +58,35 @@ But concision must not hide what is happening. The project direction is toward:
 - clearer runtime ownership (each module owns its state and its diagnostics)
 - stronger documentation expectations (every surface explained, every contract explicit)
 
+The same principle governs two planned mutation extensions. They are accepted directions, not current syntax or
+runtime behavior.
+
+First, nested assignment may eventually create missing path containers, but only on the write path. Reads will
+remain free of side effects. The next evaluated path segment determines the missing kind: a nonnegative integer
+selects an array and a string selects a harray. Existing wrong-kind values will never be coerced, and arrays remain
+dense—an out-of-range gap will not invent null leaves. Validation and the right-hand side complete before an
+isolated updated root commits.
+
+Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
+version-1 candidate is:
+
+```text
+tree.map_leaves!() {
+    return(normalize(value))
+}
+```
+
+The current `map_leaves()` returns a rebuilt tree without changing `tree`. The planned `map_leaves!()` will require
+a bare named receiver, traverse an isolated snapshot using the receiver's existing root-kind rules, commit the
+rebuilt tree only after complete success, rebind `tree`, and return the updated value. The callback's `path` stays
+a complete copied root-to-leaf path; `value` stays a scoped value rather than a writable reference. Replacements
+are based on the original tree shape and are not recursively revisited in the same call.
+
+`walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
+that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
+contract. Current nested writes still require every intermediate container to exist, and current parsers do not
+accept `map_leaves!`; ADR `0036` and backlog `.19.1-.19.7` own the future neutral and five-backend work.
+
 ## 3. Actions are moving toward backend-neutral semantics
 
 Historically, LinkedSpec tolerated raw Perl-shaped behavior inside `.spec` action blocks. The long-term direction is cleaner:

@@ -90,7 +90,11 @@ This `README.md` is the **single entry point** to the project.
   readable, and highly expressive authoring a hard design constraint: remove redundant ceremony, preserve
   semantic signal and typed diagnostics, and prefer small orthogonal mechanisms over format-specific escapes.
   Uniform binding is the positive precedent; recursive traversal keeps informative `_leaves` names rather than
-  gaining ambiguous `walk`/`map`/`reduce` aliases. ADR `0033` and
+  gaining ambiguous `walk`/`map`/`reduce` aliases. ADR `0036` separately plans a post-current-parity extension:
+  nested assignments may create only unambiguous missing intermediates while reads stay pure, existing wrong-kind
+  values are never coerced, and arrays remain dense. Its only v1 bang-method candidate is receiver-mutating
+  `map_leaves!`; that spelling is not current behavior and must land through neutral plus five-backend proof.
+  ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its
   required-argument example. Perl `.16.2.1`, Rust `.16.3`, Dart `.16.4`, Julia `.16.5`, and Lua `.16.6` now consume

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (ADR `0035` governs terse/readable/highly-expressive authoring; Lua exhaustive
-  capture/cursor no-drift `.4.3.7.6` remains the executable frontier; `.18` remains parity-gated).
+- Last updated: `2026-07-15` (ADR `0036` plans write-only nested vivification plus receiver-mutating
+  `map_leaves!`; Lua exhaustive capture/cursor no-drift `.4.3.7.6` remains the executable frontier).
 - Owner: repo-local workflow
 
 ## Goal
@@ -29,7 +29,7 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The eighteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
+- The nineteen backlog directions are represented as owned task-tree lanes, including compatibility retirement,
   repair of the codegen-inspector toolbox regression discovered while proving selector-source migration, and the
   director's structural linked-rule plus progressive/staged parser-composition authoring model and rule-level bare
   lifecycle-block shorthand.
@@ -57,6 +57,8 @@ before implementation.
 - Universal `.spec` authoring is governed as terse, readable, and highly expressive: remove redundant ceremony,
   preserve semantic signal and typed diagnostics, and prefer orthogonal reusable composition over format-specific
   or host-language escape hatches.
+- Portable deep-write creation and explicit receiver mutation have a separate parity-gated owner: reads never
+  vivify, arrays remain dense, wrong-kind values are never coerced, and `!` is restricted to a true mutating twin.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -68,7 +70,7 @@ before implementation.
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`, `.13`, `.14`,
-  `.15`, `.16`, `.17`, `.18`
+  `.15`, `.16`, `.17`, `.18`, `.19`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -3538,6 +3540,188 @@ before implementation.
     parser/compiler/runtime, helper, alias, fixture, inventory, capability, or format behavior changed.
   Commit: `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring`
 
+- ID: `FUTURE-PARITY-BACKLOG.19`
+  Status: `proposed`
+  Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
+    reads, host-language aliasing, or backend drift.
+  Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
+  Acceptance: The language distinguishes reads from creating writes, defines path/container/conflict/gap semantics
+    neutrally, uses `!` only for methods that genuinely mutate their receiver and have a clear non-mutating twin,
+    preserves root-kind traversal and stable callback paths, reaches exact Perl/Rust/Dart/Julia/Lua parity, and
+    closes capability/public/book/KM/no-drift proof before the parent is done.
+
+- ID: `FUTURE-PARITY-BACKLOG.19.0`
+  Status: `done`
+  Goal: Audit current nested-path/traversal/method grammar and ratify the portable write-vivification/receiver-
+    mutation direction before syntax or runtime code.
+  Dependencies: `.18.1`
+  Acceptance: Knowledge Map and exact current-contract evidence establish the non-vivifying nested-write boundary,
+    uniform-binding top-level creation, both root-kind traversal contracts, callback path/value scope, and current
+    identifier grammar; a durable decision fixes accepted creation/gap/conflict/method invariants and exclusions
+    while routing exact AST/diagnostic/re-entrancy contracts to `.19.1`; implementation is split per backend plus
+    admission; roadmap, mdBook, KM, and live docs align; no syntax/parser/compiler/runtime behavior changes.
+  Verification: **PASS 2026-07-15.** Knowledge Map retrieval plus exact five-backend source/tests confirm current
+    intermediate non-vivification, dense array replace/append, updated-root results, root-kind traversal, scoped
+    complete paths, and identifier-only method grammar. Perl's direct probe, Rust three-test `terse_11_4`, Dart's
+    exact no-autovivification test, Julia's complete local suite through the stacked installed depot, and Lua
+    121/121 on PUC Lua/LuaJIT pass. The first Julia command with an empty writable depot alone failed only because
+    it attempted forbidden registry/network resolution; the documented stacked-depot rerun passed. ADR `0036`,
+    roadmap/book/KM/live docs, and the detailed neutral/backend/admission split align. Memory architecture,
+    Knowledge Map, doctrines, task metadata, mdBook, and whitespace checks pass. No behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1`
+  Status: `pending`
+  Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
+  Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
+  Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity, including `LUA-BACKEND-PARITY`
+  Acceptance: Strict fixtures define syntax/AST, write-only creation, path segment/container selection, gaps,
+    kind conflicts, copied results, mutation identity, callback return replacement, original-shape traversal,
+    stable copied paths, exact exclusions, and typed diagnostics before backend code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.1`
+  Status: `pending`
+  Goal: Lock the neutral nested write-vivification syntax, AST, evaluation, creation, conflict, dense-array, result,
+    and diagnostic contract.
+  Dependencies: `.19.0`; complete current-backend parity
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.2`
+  Status: `pending`
+  Goal: Lock the neutral `map_leaves!` parser, addressable receiver, callback, stable path, original-shape,
+    atomic-commit, re-entrancy, result, continuation, and exclusion contract.
+  Dependencies: `.19.0`; complete current-backend parity
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.3`
+  Status: `pending`
+  Goal: Compose strict future fixtures/checkers for both v1 mechanisms and prove current backends fail only at the
+    expected pre-implementation boundary.
+  Dependencies: `.19.1.1`, `.19.1.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on the Perl reference backend.
+  Children: `.19.2.1`, `.19.2.2`
+  Dependencies: `.19.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2.1`
+  Status: `pending`
+  Goal: Implement Perl reference nested write-vivification over scalar-held typed value trees.
+  Dependencies: `.19.1.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2.2`
+  Status: `pending`
+  Goal: Implement Perl reference `map_leaves!` parsing, lowering, atomic receiver rebinding, and typed boundaries.
+  Dependencies: `.19.2.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
+  Children: `.19.3.1`, `.19.3.2`
+  Dependencies: `.19.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.1`
+  Status: `pending`
+  Goal: Implement Rust nested write-vivification through typed parsed/serialized/emitted state and runtime.
+  Dependencies: `.19.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.2`
+  Status: `pending`
+  Goal: Implement Rust `map_leaves!` through typed parsed/serialized/emitted state and runtime.
+  Dependencies: `.19.3.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Dart across native and supported generated/emitted routes.
+  Children: `.19.4.1`, `.19.4.2`
+  Dependencies: `.19.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4.1`
+  Status: `pending`
+  Goal: Implement Dart nested write-vivification through typed parsed/emitted state and runtime.
+  Dependencies: `.19.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4.2`
+  Status: `pending`
+  Goal: Implement Dart `map_leaves!` through typed parsed/emitted state and runtime.
+  Dependencies: `.19.4.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Julia across native and supported generated/emitted routes.
+  Children: `.19.5.1`, `.19.5.2`
+  Dependencies: `.19.4`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5.1`
+  Status: `pending`
+  Goal: Implement Julia nested write-vivification through typed parsed/emitted state and runtime.
+  Dependencies: `.19.4`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5.2`
+  Status: `pending`
+  Goal: Implement Julia `map_leaves!` through typed parsed/emitted state and runtime.
+  Dependencies: `.19.5.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on PUC Lua and LuaJIT through public compiled-state reconstruction.
+  Children: `.19.6.1`, `.19.6.2`
+  Dependencies: `.19.5`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6.1`
+  Status: `pending`
+  Goal: Implement Lua nested write-vivification through typed parsed/reconstructed state on both ABIs.
+  Dependencies: `.19.5`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6.2`
+  Status: `pending`
+  Goal: Implement Lua `map_leaves!` through typed parsed/reconstructed state on both ABIs.
+  Dependencies: `.19.6.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.7`
+  Status: `pending`
+  Goal: Admit the portable surface and close public/capability/book/KM/cross-backend no-drift.
+  Dependencies: `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`
+  Verification: `pending`
+  Commit: `pending`
+
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
 Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
@@ -4410,6 +4594,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 171 | `FUTURE-PARITY-BACKLOG.18.0` | `done` | Exact 91-row parity-gated requirements program is ratified; no format code started. |
 | 172 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive Lua capture/cursor helper and public-surface no-drift. |
 | 173 | `FUTURE-PARITY-BACKLOG.18.1` | `done` | ADR 0035 governs concise, readable, expressive universal `.spec` authoring without behavior change. |
+| 174 | `FUTURE-PARITY-BACKLOG.19.0` | `done` | ADR 0036 plans write-only nested vivification and named-receiver `map_leaves!`; no behavior changed. |
+| 175 | `FUTURE-PARITY-BACKLOG.19.1` | `pending` / dependency-gated | Lock executable neutral contracts only after complete current-backend parity. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5051,6 +5237,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.19.0` | KM retrieval; five ActionIR parser-source audit; current nested-write/traversal contract audit; Perl direct output; Rust `terse_11_4` 3/3; Dart exact focused 1/1; Julia complete suite via stacked depot after one empty-depot network-resolution failure; Lua 121/121 dual ABI; ADR 0036; task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Write-only deterministic creation and named-receiver `map_leaves!` are fully planned but dependency-gated; current behavior/capability unchanged and Lua `.4.3.7.6` remains active. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR 0035; task/program/roadmap/index/live-doc/book/KM sync; uniform-binding precedent; traversal-name exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Authoring quality is a hard future feature gate; no syntax, alias, backend, or format behavior changed; Lua `.4.3.7.6` remains active. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.4` | Typed compiled slot events; post-action/pre-LE timing; all three anonymous marker spellings plus named marks; `é(α🙂,βγ)` native/reconstructed proof; exact shipped EBNF `@move_pos`; typed malformed names/fragments/AST; Lua 121/121 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Placement-sensitive marker execution closes on the existing stores without surface drift; `.4.3.7.6` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR 0034; dedicated exact-row task tree; roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Parity-first format requirements program is durable; no behavior or format implementation changed; Lua `.4.3.7.4` remains active. |
@@ -5178,6 +5365,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.19.0` | `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation` | ADR 0036, exact current five-backend audit, neutral/mechanism/backend split, explicit exclusions, and parity gate. |
 | `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, program invariant, realistic authoring proof, uniform-binding precedent, and informative traversal names. |
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action slot events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
 | `FUTURE-PARITY-BACKLOG.18.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR 0034, exact 91-row ownership, hard current-parity gate, format-driven neutral feature loop, and public architecture chapter. |
@@ -5305,6 +5493,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: `.19.0` adopts ADR `0036` after exact current five-backend audit. Nested creation is future
+  write-only behavior: segment kind selects missing array/harray, reads remain pure, existing wrong kinds are not
+  coerced, arrays stay dense, and isolated root commit is atomic. `map_leaves!` is the sole v1 bang candidate and
+  requires a bare named receiver; callback results replace leaves over stable paths/original root-kind shape, and
+  `value` stays non-aliased. Other bang spellings are excluded. `.19.1-.19.7` split neutral contracts, each
+  backend mechanism, and admission behind full current parity. Current behavior does not change; Lua `.4.3.7.6`
+  remains active.
 - `2026-07-15`: `.18.1` adopts ADR `0035`: universal `.spec` sources must be terse, readable, and highly
   expressive simultaneously. Terseness removes redundant ceremony rather than meaning; readability preserves
   locally visible structure/value flow/mutation/scope/recovery and precise diagnostics; expressiveness comes from

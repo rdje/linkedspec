@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: ADR `0036` adopts a post-current-parity direction for write-only missing-container
+  creation and explicit receiver-mutating `map_leaves!`. The next evaluated segment selects a missing array versus
+  harray; reads remain pure, existing wrong kinds are never coerced, arrays remain dense, and copy-on-write root
+  commit is atomic. `map_leaves!` v1 accepts only a bare named binding, traverses the original snapshot with current
+  root-kind rules, uses copied callback results as replacements, retains complete stable receiver-root-relative
+  paths, and does not make `value` a writable alias. No other bang methods/identifiers are adopted. Current source
+  and focused Perl/Rust/Dart/Julia/Lua proof confirm intermediate non-vivification and bang-invalid grammar;
+  `.19.1-.19.7` are dependency-gated behind complete current parity and Lua `.4.3.7.6` remains active.
 - `2026-07-15` refresh: ADR `0035` makes terse, readable, and highly expressive authoring a hard constraint on
   future universal `.spec` evolution. Terseness removes redundant ceremony rather than semantic signal;
   readability keeps structure, value flow, mutation, scope, recovery, and typed diagnostics locally predictable;

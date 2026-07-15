@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.19.0` — borrow the useful ideas, not host-language accidents): Portable
+  autovivification belongs only on writes. Determine a missing container from the next evaluated segment (integer
+  array, string harray), never overwrite an existing wrong-kind value, keep arrays dense, and commit an isolated
+  updated root only after full validation. This preserves the existing expression evaluation order without Perl
+  reference aliasing or sparse filler artifacts. For Ruby-style mutation, admit `!` only when it communicates a
+  real receiver update. `map_leaves!` has a coherent pure twin and replacement result; `walk_leaves!` and
+  `reduce_leaves!` do not. V1 uses a bare named binding, original-shape/root-kind traversal, stable copied paths,
+  callback-result replacement, and atomic rebind/return. `value` remains scoped data, never a secret writable
+  alias. Current method parsers are identifier/word based and all need an explicit typed bang seam. ADR `0036`
+  and `.19.1-.19.7` own the future contract/rollout after current parity; Lua `.4.3.7.6` remains next.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.1` — terseness removes redundancy, not information): Evaluate future
   `.spec` proposals against terseness, readability, and expressiveness together. Prefer one canonical abstraction,
   orthogonal composition, inferred information only when unambiguous, and precise typed failures. Do not optimize

@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.19.0 — plan write vivification and bang mutation**
+  (DONE — accepted post-current-parity direction only; Lua `.4.3.7.6` remains executable next).
+
+  **Result:** ADR `0036` accepts write-only missing-container creation with deterministic segment-kind selection,
+  no wrong-kind coercion, dense arrays, and atomic copy-on-write commit. `map_leaves!` is the only v1 bang
+  candidate: a bare named receiver is rebuilt over the original root-kind tree shape, callback results replace
+  leaves through complete stable paths, and the receiver rebinds only after success. `value` is not an alias;
+  other bang spellings are excluded. Current Perl/Rust/Dart/Julia/Lua evidence remains non-vivifying and current
+  parser identifiers remain bang-free. `.19.1-.19.7` are gated behind full current parity; no behavior changed.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.18.1 — govern expressive spec authoring**
   (DONE — ADR `0035` adds authoring governance only; Lua `.4.3.7.6` remains executable next).
 

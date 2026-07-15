@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.19.0 — plan write vivification and bang mutation
+
+ADR `0036` adopts a future, post-current-parity direction without changing current behavior. Nested assignments
+may create a missing root/intermediate only when the next evaluated segment unambiguously selects an array
+(nonnegative integer) or harray (string). Reads remain pure, existing wrong-kind values are never coerced, arrays
+remain dense without implicit null padding, and segment/RHS evaluation precedes atomic copy-on-write root commit.
+
+`map_leaves!` is the only v1 bang-method candidate. It requires a bare named receiver, traverses the original
+snapshot using current root-kind recursion, supplies a complete copied receiver-root-relative path, uses the
+callback result rather than a writable `value` alias to replace the leaf, commits the receiver only after complete
+success, and returns the updated value. `walk_leaves!`, `reduce_leaves!`, function-form/arbitrary bang names, and
+temporary/nested receivers are excluded. `.19.1-.19.7` split neutral contracts, each backend mechanism, and final
+admission after current parity.
+
+The audit reverified current non-vivifying behavior through a Perl direct probe, Rust's three `terse_11_4` tests,
+Dart's exact focused test, Julia's complete local suite with a stacked depot, and Lua 121/121 on PUC Lua/LuaJIT.
+The first Julia empty-depot-only command failed on blocked registry resolution; the documented stacked-depot rerun
+passed. Five parser sources confirm `!` is not a current method token. No syntax/runtime/capability changed.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.1 — govern expressive spec authoring
 
 ADR `0035` defines terse, readable, and highly expressive `.spec` authoring as one language-design constraint.
