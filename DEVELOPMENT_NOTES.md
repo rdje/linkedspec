@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.5` — close by ownership inventory, not another runtime path): Audit the
+  staged-function surface as one dependency chain: spec-owned shell -> typed payload/job -> deterministic staged
+  provider/stitching -> immutable registry/frame -> fixed/variadic/contextual execution -> public status/tests.
+  Once every seam has a focused owner, correct narrative residue and close the parent without inventing another
+  integration layer. Preserve the remaining boundaries precisely: `.5.2` loads portable names/paths into the
+  existing in-memory pipeline; `.5.3` owns outward descriptors and full-pipeline trace; `.8` owns generated Lua;
+  `.11.7` owns explicit literals/general dynamic calls. The audit changes no behavior; both ABIs remain 146/146
+  with status `runtime-user-functions-contextual-codeblock-v1`. Mutation campaigns remain manual-only. Canonical
+  local CI passes CLI 61x2 plus Phase 0 `1..1031` in 644 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.4.2` — contextual blocks are data until the declared slot invokes them):
   Normalize registered calls before ordinary argument evaluation so a contextual block is copied as an inert
   `codeblock_argument`, not eagerly collapsed to its result. Install the definition's exact `parameter_kinds`

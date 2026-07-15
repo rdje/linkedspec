@@ -94,6 +94,8 @@ passes 142/142 without promoting harrays. The next runtime boundary invokes that
 function frame, preserves registered-function and governed-helper precedence, restores the outer caller, returns
 ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Both Lua ABIs pass 146/146
 with status `runtime-user-functions-contextual-codeblock-v1`; outward descriptors remain `.5.3`.
+The following no-drift audit closes Lua's staged-function parent and advances the frontier to portable native
+named/path loading without changing this runtime status or claiming generated-source support.
 
 ```text
 fn apply(value, callback: codeblock) {

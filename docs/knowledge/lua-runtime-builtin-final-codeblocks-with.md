@@ -49,7 +49,7 @@ This leaf supplies the signature and scoped execution seam, not every callback b
 consumes the same registry and an extended atomic frame through `LUA-BACKEND-PARITY.4.3.6.5.1`; array-root
 traversal shares the receiver-root-kind dispatcher through `.4.3.6.5.2`, with cross-kind aggregates staying
 leaves. General user-function dispatch, final `callback: codeblock` declaration, and attached/parenthesized
-contextual execution remain `.5.1`, while explicit first-class
+contextual execution have since closed through `.5.1`, while explicit first-class
 `{|params| ...}` values remain `FUTURE-PARITY-BACKLOG.11.7`.
 
 Related facts: [[lua-runtime-block-control-callback-split]], [[lua-runtime-eager-block-values]],

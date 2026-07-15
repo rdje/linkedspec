@@ -54,8 +54,8 @@ Attached and parenthesized contextual forms normalize to the same zero-positiona
 remain harrays. Runtime then executes the deferred block in the current isolated function frame, keeps registered
 functions and governed helpers ahead of the contextual slot, restores the outer caller, and returns an ordinary
 composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and active recursion stay typed. Both
-ABIs pass 146/146; public status is `runtime-user-functions-contextual-codeblock-v1`. Outward descriptors remain
-a later owner.
+ABIs pass 146/146; public status is `runtime-user-functions-contextual-codeblock-v1`. No-drift closes the staged-
+function parent; native loading is next, while outward descriptors remain a later owner.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -206,7 +206,8 @@ neutral fixture passes, and minimum/keyword failures stay typed. Contextual fina
 complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/compiled state and both contextual
 spellings normalize to one zero-positional typed argument without harray promotion. Runtime `.5.1.4.2` executes
 that argument with current function-frame bindings, cleanup-safe outer restoration, static callable precedence,
-chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` is active. Full frontend/compiler/function/
+chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` closes parent `.5.1`; native loading
+`.5.2` is active. Full frontend/compiler/function/
 staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -258,9 +259,10 @@ Typed current-rule accumulators and otherwise-absent compiled-rule arrays share 
 items when requested, and retain neutral wrong-kind diagnostics.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
-be projected and composed with rule parsing. Staged body dispatch, corpus
-execution beyond the landed helper families, the primary CLI contract, and
-generated source are deliberately not implemented yet.
+be projected and composed with rule parsing. The staged registry now dispatches and stitches their bodies, and
+fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
+loading, corpus execution beyond the landed helper families, the primary parser CLI contract, outward function
+descriptors/full-pipeline trace, and generated source retain their later owners.
 
 Run the local gate from the repository root:
 

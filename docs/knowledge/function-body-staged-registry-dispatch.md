@@ -50,8 +50,9 @@ and preserves source `SpecFile` and staged-result isolation during stitching.
 This does not implement the full future surface. Public `parse_job(...)` authoring,
 filesystem/import/provider search roots, multiple next-stage parser families, recursive
 staged queues, and cycle diagnostics remain future leaves. Dart user-function runtime
-execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime
-execution has landed under `LUA-BACKEND-PARITY.5.1.2`, and variadic-v2 state `.5.1.3.1` is active.
+execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime execution lands under
+`LUA-BACKEND-PARITY.5.1.2`, variadic/contextual runtime follows through `.5.1.4.2`, and no-drift `.5.1.5` closes
+the Lua staged-function parent.
 
 Related backend facts: [[julia-staged-function-body-registry]],
 [[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]].

@@ -23,6 +23,7 @@ evidence_update_2026_07_15_runtime_trace_closeout: "LUA-BACKEND-PARITY.4.4.4 clo
 evidence_update_2026_07_15_staged_function_split: "LUA-BACKEND-PARITY.5.1.0 splits minimal staged dispatch, fixed-v1 runtime, variadic-v2 metadata/runtime, contextual-codeblock metadata/runtime, and no-drift; .5.1.1 is active."
 evidence_update_2026_07_15_staged_registry: "LUA-BACKEND-PARITY.5.1.1 adds the deterministic actionir-body.spec provider, governed cache/compiled identity, stable queue, immutable body_ast stitching, composed shell dispatch, and typed failure fences at 130/130 on PUC Lua and LuaJIT; status is runtime-staged-registry and .5.1.2 is active."
 evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 adds registry-first fixed-v1 calls over verified staged bodies and isolated copied stores at 133/133 on PUC Lua and LuaJIT; status is runtime-user-functions-fixed-v1 and .5.1.3.1 is active."
+evidence_update_2026_07_15_staged_function_closeout: "LUA-BACKEND-PARITY.5.1.3-.5 close variadic-v2 and contextual-codeblock runtime plus no-drift at 146/146 with status runtime-user-functions-contextual-codeblock-v1; native loading .5.2 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -47,8 +48,9 @@ claim a generated-Lua preservation path before the distinct generated-source lan
 
 LPeg loads on both installed runtimes, but this does not make it the selected regex engine. Lua patterns and LPeg
 must be compared with the neutral regex/match-state fixtures; a native adapter is permissible if it preserves the
-native in-memory module contract and exact behavior. LuaRocks and the common test/lint/format tools are absent, so
-active `.1.1` must lock a reproducible repository-owned dependency/test/cache strategy before code.
+native in-memory module contract and exact behavior. LuaRocks and the common test/lint/format tools were absent at
+foundation time, so `.1.1` locked a reproducible repository-owned dependency/test/cache strategy. The current
+frontier is native named/path loading `.5.2`.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],

@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.5 — close Lua staged functions no drift**
+  (DONE — staged functions are closed; portable native loading `.5.2` is next).
+
+  **Result:** Exact API/source/test/public-doc/KM inventory confirms one deterministic body-job/stitch path, one
+  isolated function-frame path, and complete fixed-v1/variadic-v2/contextual runtime ownership. One stale Lua
+  README sentence claiming staged dispatch was absent is corrected. No behavior changes: both ABIs remain 146/146,
+  status remains `runtime-user-functions-contextual-codeblock-v1`, coverage remains 246/105+1/122, and capability
+  remains 64/0/0. Parent `.5.1` closes; `.5.2` activates; later descriptor/trace/generated/dynamic-call boundaries
+  remain explicit; mutation testing remains manual-only. Canonical local CI passes CLI 61x2 plus Phase 0
+  `1..1031` in 644 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.4.2 — execute Lua contextual codeblocks**
   (DONE — contextual user-function execution is green; staged-function no-drift `.5.1.5` is next).
 

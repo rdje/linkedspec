@@ -286,7 +286,8 @@ ABI suites to 130/130. Fixed-v1 registered-function execution `.5.1.2` raises th
 execution `.5.1.3.2` raises them to 139/139. Final contextual-codeblock metadata `.5.1.4.1` raises them to 142/142
 and runtime invocation `.5.1.4.2` raises them to 146/146 with public status
 `runtime-user-functions-contextual-codeblock-v1`. This status claims only native runtime contextual execution;
-full loading/frontend/compiler/function/staged trace propagation remains `.5.3`.
+no-drift `.5.1.5` closes that staged-function parent and activates native loading `.5.2`. Full loading/frontend/
+compiler/function/staged trace propagation remains `.5.3`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

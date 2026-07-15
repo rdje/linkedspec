@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (contextual final-codeblock execution passes 146/146 on PUC Lua and LuaJIT with
-  status `runtime-user-functions-contextual-codeblock-v1`; staged-function no-drift `.5.1.5` is active)
+- Last updated: `2026-07-15` (staged fixed-v1/variadic-v2/contextual-codeblock runtime parent `.5.1` is closed at
+  146/146 on PUC Lua and LuaJIT with status `runtime-user-functions-contextual-codeblock-v1`; native loading
+  `.5.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1950,7 +1951,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.5.1`, `.5.2`, `.5.3`
 
 - ID: `LUA-BACKEND-PARITY.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Add staged parser registry/function-body dispatch and fixed-v1/variadic-v2 runtime calls.
   Children: `.5.1.0`, `.5.1.1`, `.5.1.2`, `.5.1.3`, `.5.1.4`, `.5.1.5`
   Acceptance: Provider identity, ordered jobs, parse/normalize/stitch phases, failures, and trace match the admitted
@@ -1964,8 +1965,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     and parenthesized contextual final blocks equivalently in the caller's dynamic context, with copied/restored
     bindings and no harray promotion. Explicit `{|params| ...}` literals and dynamic codeblock-variable calls remain
     routed through `FUTURE-PARITY-BACKLOG.11.7` to dependency-complete Lua owners.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Deterministic staged body dispatch, fixed-v1 execution, exact variadic-v2
+    state/runtime, and final contextual-codeblock metadata/runtime are complete through `.5.1.1-.5`; PUC Lua and
+    LuaJIT pass 146/146, both neutral callable checkers and unchanged fixtures pass, public/native API/status agree,
+    capability remains 64/0/0, and every later boundary retains an explicit owner.
+  Commit: `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`
 
 - ID: `LUA-BACKEND-PARITY.5.1.0`
   Status: `done`
@@ -2134,17 +2138,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.1.4.2 - execute Lua contextual codeblocks`
 
 - ID: `LUA-BACKEND-PARITY.5.1.5`
-  Status: `active`
+  Status: `done`
   Goal: Close Lua staged-function/variadic/contextual-codeblock execution no-drift.
   Dependencies: `.5.1.1`, `.5.1.2`, `.5.1.3`, `.5.1.4`
   Acceptance: Focused dual-ABI proof, neutral contract checkers/fixtures, public API/status, docs/book, task/index/
     roadmaps/live/KM, and canonical gates agree; parent `.5.1` closes and native loading `.5.2` activates without
     claiming descriptors/full-pipeline trace `.5.3`, generated execution `.8`, or dynamic callable literals `.11.7`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Source/API/test/public-doc/KM inventory finds no unowned staged-function
+    seam. The only live residue was stale Lua README prose claiming staged dispatch was absent; it now describes
+    the implemented registry/runtime and the correct later owners. PUC Lua and LuaJIT remain 146/146; callable
+    signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains
+    64/0/0; status remains `runtime-user-functions-contextual-codeblock-v1`; parent `.5.1` closes; and `.5.2`
+    activates. Descriptor/full trace `.5.3`, generated source `.8`, corpus/CLI later lanes, and explicit/dynamic
+    codeblocks `.11.7` remain explicit without partial claims. Canonical local CI passes CLI 61x2 plus Phase 0
+    `1..1031` in 644 seconds; mutation testing remains manual-only and was not run.
+  Commit: `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`
 
 - ID: `LUA-BACKEND-PARITY.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add portable native named/path resolution and in-memory composition.
   Acceptance: Consume exact name/path/root/UTF-8/stage contract; expose load/compile/create-engine conveniences as
     adapters over native in-memory APIs; remove any backend-local fallback or implicit transcoding.
@@ -2291,15 +2302,17 @@ runtime-owned plus the same thirteen non-function forms, focuses direct `call(ru
 instrumentation, and closeout; it retains full frontend/compiler/function/staged propagation under `.5.3` after
 general staged-function and native-loading prerequisites. Structured runtime diagnostics pass 126/126; native
 trace controls/sinks pass 128/128 and runtime instrumentation `.4.4.3` passes 129/129 on both ABIs. No-drift
-`.4.4.4` closes the scoped parent without behavior changes. Staged-function/native-loading `.5.1` is active; full
-native-pipeline trace remains `.5.3`. Planning `.5.1.0` now separates staged body dispatch, fixed-v1 execution,
+`.4.4.4` closes the scoped parent without behavior changes. Staged-function parent `.5.1` is now closed and native
+loading `.5.2` is active; full native-pipeline trace remains `.5.3`. Planning `.5.1.0` separates staged body dispatch, fixed-v1 execution,
 variadic metadata/runtime, contextual-codeblock metadata/runtime, and closeout. Minimal staged dispatch `.5.1.1`
 passes 130/130. Fixed-v1 runtime `.5.1.2` passes 133/133. Exact variadic-v2 state `.5.1.3.1` passes 136/136, and
 fresh rest-array runtime `.5.1.3.2` passes 139/139. Final-only contextual metadata `.5.1.4.1` then preserves the
 exact declaration/staged/registry contract and normalizes both contextual spellings at 142/142 with status
 `runtime-user-functions-contextual-codeblock-metadata-v1`. Contextual execution `.5.1.4.2` runs zero-positional
 blocks in the current isolated function frame with restoration, static precedence, chainable results, and typed
-failures at 146/146 with status `runtime-user-functions-contextual-codeblock-v1`; `.5.1.5` is active.
+failures at 146/146 with status `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` then confirms
+the public API/status/tests/docs/KM and all later fences, closes parent `.5.1`
+without behavior change, and activates native loading `.5.2`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2393,7 +2406,7 @@ failures at 146/146 with status `runtime-user-functions-contextual-codeblock-v1`
 | 88 | `LUA-BACKEND-PARITY.4.4.3` | `done` | Exact runtime rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129. |
 | 89 | `LUA-BACKEND-PARITY.4.4.4` | `done` | Exact API/source/test/public-doc no-drift closes parent `.4.4`; full pipeline stays `.5.3`. |
 | 90 | `LUA-BACKEND-PARITY.5` | `active` | Implement general staged-function execution, native loading, descriptors, and full-pipeline trace. |
-| 91 | `LUA-BACKEND-PARITY.5.1` | `active` | Add staged registry/function dispatch plus fixed-v1/variadic-v2 and contextual codeblock calls. |
+| 91 | `LUA-BACKEND-PARITY.5.1` | `done` | Staged registry plus fixed-v1/variadic-v2/contextual codeblock runtime closes at 146/146. |
 | 92 | `LUA-BACKEND-PARITY.5.1.0` | `done` | Split staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift. |
 | 93 | `LUA-BACKEND-PARITY.5.1.1` | `done` | Deterministic `actionir-body.spec` provider, stable queue, governed identity, and immutable stitching pass 130/130. |
 | 94 | `LUA-BACKEND-PARITY.5.1.2` | `done` | Registry-first fixed-v1 calls, fresh stores, local returns, composition, and typed fences pass 133/133. |
@@ -2401,7 +2414,26 @@ failures at 146/146 with status `runtime-user-functions-contextual-codeblock-v1`
 | 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `done` | Fresh typed rest arrays and the unchanged neutral fixture pass 139/139. |
 | 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `done` | Exact final metadata and contextual normalization pass 142/142 on both Lua ABIs. |
 | 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `done` | Dynamic contextual execution, restoration, precedence, chainable values, and typed failures pass 146/146. |
-| 99 | `LUA-BACKEND-PARITY.5.1.5` | `active` | Close staged-function/variadic/contextual-codeblock execution no-drift. |
+| 99 | `LUA-BACKEND-PARITY.5.1.5` | `done` | Public/API/test/docs/KM no-drift closes parent `.5.1` without behavior change. |
+| 100 | `LUA-BACKEND-PARITY.5.2` | `active` | Add portable native named/path resolution and in-memory composition. |
+
+### `LUA-BACKEND-PARITY.5.1.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The implementation leaves were green, but parent `.5.1` still advertised an active
+  frontier and Lua's README still said staged body dispatch was unimplemented.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Each implementation slice updated its own mechanism and handoff, while the
+  parent closeout and an older bottom-of-README capability paragraph deliberately remained owned by `.5.1.5`.
+- [x] **FIX** — Audit exports, provider/runtime seams, focused tests, status, later fences, public docs, task/index/
+  roadmaps/live state, and Knowledge Map; correct the stale dispatch statement; close `.5.1`; activate only `.5.2`.
+- [x] **ADDRESSED (verified)** — Public APIs expose deterministic staged execution/stitching and function-frame
+  preparation; runtime covers fixed, variadic, and contextual calls; descriptors/full trace, loading, generated
+  source, corpus/CLI, and explicit dynamic codeblocks retain distinct owners with no premature capability claim.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` remains 146/146 on PUC Lua and LuaJIT; callable signature/
+  codeblock checkers remain 3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains 64/0/0;
+  canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 644 seconds. Mutation testing is manual-only and
+  was not run.
+- [x] **LOCKSTEP** — Status remains precise; Lua/root READMEs, task/index/roadmaps, architecture/live/changes/notes/
+  memory, mdBook, and Knowledge Map close `.5.1`, activate `.5.2`, and retain every later boundary.
 
 ### `LUA-BACKEND-PARITY.5.1.4.2` Acceptance Checklist
 
@@ -3810,3 +3842,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.1.3.2` | `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions` | Eager ordered arguments, fresh copied mixed/empty rest arrays, exact neutral fixture, typed failures, and 139/139 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.4.1` | `LUA-BACKEND-PARITY.5.1.4.1 - preserve Lua final codeblock metadata` | Exact final-only metadata, four invalid declarations, contextual normalization, harray non-promotion, and 142/142 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.4.2` | `LUA-BACKEND-PARITY.5.1.4.2 - execute Lua contextual codeblocks` | Dynamic current-frame invocation, restoration, static precedence, chainable values, typed failures, and 146/146 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.5.1.5` | `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift` | Exact API/status/test/public-doc/KM audit, stale README correction, parent `.5.1` closure, and `.5.2` activation. |

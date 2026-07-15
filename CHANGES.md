@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.5 — close Lua staged functions no drift
+
+Closed the Lua staged-function parent after an exact source/API/test/public-doc/Knowledge-Map audit. Deterministic
+function-body job execution and stitching, isolated invocation-frame preparation, fixed-v1 calls, variadic-v2
+state/runtime, and contextual final blocks all have public native owners and focused dual-ABI proof. The audit
+corrected one stale Lua README paragraph that still said staged body dispatch was unimplemented.
+
+No runtime or public API behavior changed. PUC Lua and LuaJIT remain 146/146; callable signature/codeblock
+checkers remain 3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains 64/0/0; and status
+remains `runtime-user-functions-contextual-codeblock-v1`. Parent `.5.1` closes and portable native named/path
+loading `.5.2` activates. Outward descriptors/full-pipeline trace remain `.5.3`, generated source remains `.8`,
+corpus/CLI retain later lanes, and explicit/dynamic codeblocks remain `.11.7`. Mutation testing remains a separate
+manual campaign, not a commit gate. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 644 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.4.2 — execute Lua contextual codeblocks
 
 Lua user functions now consume their declared final `callback: codeblock` slots at runtime. Attached and
