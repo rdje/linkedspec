@@ -10,6 +10,7 @@ local action_parser = require("linkedspec.action_parser")
 local action_contracts = require("linkedspec.action_contracts")
 local user_function_registry = require("linkedspec.user_function_registry")
 local staged_parser_registry = require("linkedspec.staged_parser_registry")
+local user_function_definition_parser = require("linkedspec.user_function_definition_parser")
 local compiled_spec = require("linkedspec.compiled_spec")
 local matching = require("linkedspec.matching")
 local interpreter = require("linkedspec.interpreter")
@@ -20,7 +21,7 @@ local M = {}
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "native-spec-resolution-loading-v1"
+M.PARITY_STATUS = "native-spec-defined-functions-v1"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -119,6 +120,18 @@ M.parse_spec_with_staged_user_function_definition_asts =
   staged_parser_registry.parse_spec_with_staged_user_function_definition_asts
 M.is_staged_parser_registry_error = staged_parser_registry.is_staged_parser_registry_error
 M.staged_parser_registry_to_json = staged_parser_registry.to_json
+M.user_function_definition_parser = user_function_definition_parser
+M.USER_FUNCTION_DEFINITION_SPEC_ID = user_function_definition_parser.USER_FUNCTION_DEFINITION_SPEC_ID
+M.USER_FUNCTION_DEFINITION_TOP_RULE = user_function_definition_parser.USER_FUNCTION_DEFINITION_TOP_RULE
+M.user_function_definition_ast_parser_from_spec_source =
+  user_function_definition_parser.parser_from_spec_source
+M.user_function_definition_parser_metadata =
+  user_function_definition_parser.default_parser_metadata
+M.parse_user_function_definition_asts =
+  user_function_definition_parser.parse_user_function_definition_asts
+M.parse_spec_with_staged_user_function_definitions =
+  user_function_definition_parser.parse_spec_with_staged_user_function_definitions
+M.is_user_function_definition_parser_error = user_function_definition_parser.is_error
 M.compiled_spec = compiled_spec
 M.compile_spec = compiled_spec.compile_spec
 M.is_compiled_spec_error = compiled_spec.is_compiled_spec_error

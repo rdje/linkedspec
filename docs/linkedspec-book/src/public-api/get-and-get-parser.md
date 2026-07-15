@@ -21,7 +21,8 @@ in-process data path, not identical spelling:
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
-| Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
+| Lua | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `runtime_engine(...)`. File-oriented resolve/load is present; the composed loaded/compiled result and identity-bearing engine convenience are the active next slice. |
+| Later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
 The inline and file-oriented roles are implemented on all four current backends: Perl through `Get(...)`, portable
 `LinkedSpec::SpecLoader`, and legacy `get_parser(...)`; Rust through core composition and

@@ -124,9 +124,10 @@ final-codeblock metadata/normalization `.5.1.4.1` passes 142/142, and contextual
 passes 146/146 with status `runtime-user-functions-contextual-codeblock-v1`; no-drift `.5.1.5` closes parent
 `.5.1` without behavior change and activates native loading `.5.2`. Portable resolution/loading `.5.2.1` adds
 typed requests/options/results/errors, deterministic direct candidate selection, in-process byte loading, and
-strict UTF-8 preservation; it consumes all shared 14/9/4 cases and passes 149/149 on both Lua ABIs with status
-`native-spec-resolution-loading-v1`. Automatic spec-defined function parsing `.5.2.2` is active; full composition
-`.5.2.3` and no-drift `.5.2.4` follow.
+strict UTF-8 preservation and consumes all shared 14/9/4 cases. Automatic spec-defined function parsing `.5.2.2`
+then resolves the bundled grammar module-relatively, validates/compiles it once, executes it in process, and
+composes typed output without a raw scanner. Both Lua ABIs pass 151/151 with status
+`native-spec-defined-functions-v1`; full loaded-source composition `.5.2.3` and no-drift `.5.2.4` follow.
 One-emitter native loading,
 frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
 the owners it must traverse. This split changes no runtime or capability claim.
@@ -143,7 +144,8 @@ local returns, returned-value composition, and typed function-owned fences at 13
 the exact fixed-v1/variadic-v2 union and minimum/unbounded resolution at 136/136, then `.5.1.3.2` executes fresh
 typed rest arrays at 139/139. `.5.1.4.1` preserves final metadata and normalization at 142/142; `.5.1.4.2`
 executes contextual blocks at 146/146; `.5.1.5` closes the parent; `.5.2.0` splits native loading; `.5.2.1`
-implements portable resolve/load at 149/149; `.5.2.2` is active; and capability remains 64/0/0.
+implements portable resolve/load, `.5.2.2` automates the cached spec-owned function parser at 151/151, `.5.2.3`
+is active, and capability remains 64/0/0.
 
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |

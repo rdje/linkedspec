@@ -16,6 +16,7 @@ evidence: "LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-
 evidence_update_2026_07_15_staged_dispatch: "LUA-BACKEND-PARITY.5.1.1 composes this projector with deterministic staged body dispatch; PUC Lua and LuaJIT pass 130/130."
 evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 executes the projected exact-v1 records through verified staged bodies and fresh stores at 133/133; .5.1.3.1 now owns variadic-v2 projection evolution."
 evidence_update_2026_07_15_native_loading_split: "LUA-BACKEND-PARITY.5.2.0 directly proves the current Lua runtime can execute specs/user_function_definition.spec and return an exact function_definition node; automatic parser composition is owned by .5.2.2 after portable resolve/load .5.2.1."
+evidence_update_2026_07_15_automatic_parser: "LUA-BACKEND-PARITY.5.2.2 resolves the bundled owning grammar module-relatively, compiles it once, executes it automatically, and composes this projector/body dispatcher at 151/151 on PUC Lua and LuaJIT without a raw scanner."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -41,10 +42,11 @@ array result shapes. The original projection APIs preserve `body_parse_job` with
 dispatch and returns a new spec carrying neutral `body_ast` JSON.
 
 The completed projector now validates fixed-v1, variadic-v2, and final-codeblock parameter state through the
-closed `.5.1` runtime parent. Planning `.5.2.0` proves the owning grammar itself executes on the current Lua
-runtime; `.5.2.2` will make that execution an automatic composed parser after `.5.2.1` supplies portable loading.
+closed `.5.1` runtime parent. `.5.2.2` now executes the owning grammar automatically through a cached bundled
+parser and exposes `parse_spec_with_staged_user_function_definitions(...)`; callers no longer need to supply the
+node batch themselves.
 
-Related facts: [[spec-defined-user-function-definition-parser]], [[function-body-parse-job-sidecar]],
+Related facts: [[lua-spec-defined-function-parser]], [[spec-defined-user-function-definition-parser]], [[function-body-parse-job-sidecar]],
 [[lua-staged-function-body-registry]],
 [[lua-core-spec-parser]], [[lua-frontend-validation]], [[dart-function-definition-shell-projection]],
 [[julia-user-function-definition-projection]].

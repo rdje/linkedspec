@@ -95,9 +95,11 @@ function frame, preserves registered-function and governed-helper precedence, re
 ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Portable resolution/loading
 then adds typed named/exact-path requests, caller-owned cwd/direct roots, deterministic first-regular-file
 selection, in-process byte reads, strict UTF-8 preservation, and neutral pipeline errors. It directly consumes all
-14 name, nine resolution/file-kind, and four text cases on both Lua ABIs at 149/149 with status
-`native-spec-resolution-loading-v1`. Automatic execution of the spec-owned function-shell grammar is now active;
-full compile/engine composition, no-drift, and outward descriptors remain later dependency-ordered leaves.
+14 name, nine resolution/file-kind, and four text cases on both Lua ABIs. Automatic execution of the spec-owned
+function-shell grammar now resolves the bundled owner module-relatively, validates/compiles it once, and composes
+only typed results through the Unicode projector and body dispatcher without a raw scanner. Both ABIs pass 151/151
+with status `native-spec-defined-functions-v1`; loaded-source compile/engine composition, no-drift, and outward
+descriptors remain later dependency-ordered leaves.
 
 ```text
 fn apply(value, callback: codeblock) {
@@ -207,8 +209,9 @@ provider is intentionally narrow: `actionir-body.spec` is resolved as a built-in
 neutral identity and executed by the existing ActionIR body-parser adapter until
 a self-hosted body spec exists.
 
-In Lua, the composed entrypoint is
-`parse_spec_with_staged_user_function_definition_asts(source, definition_nodes)`.
+In Lua, `parse_spec_with_staged_user_function_definitions(source)` automatically executes the cached bundled
+definition grammar, projects its typed nodes, and dispatches their body jobs.
+`parse_spec_with_staged_user_function_definition_asts(source, definition_nodes)` remains the explicit-node seam.
 Lower-level callers can inspect deterministic provider/cache/result records through
 `dispatch_function_body_parse_jobs(spec)` and `staged_parser_registry_to_json(result)`;
 `stitch_function_body_parse_jobs(spec)` returns only the new stitched `SpecFile`.

@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (portable request/resolution/strict-UTF-8 loading `.5.2.1` is complete at 149/149 on
-  both Lua ABIs; automatic spec-defined function-shell parsing `.5.2.2` is active while full composition and
-  no-drift retain `.5.2.3-.4`)
+- Last updated: `2026-07-15` (automatic spec-defined function-shell parsing `.5.2.2` is complete at 151/151 on
+  both Lua ABIs; full loaded-source compile/engine composition `.5.2.3` is active while no-drift remains `.5.2.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2201,7 +2200,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.2.1 - add Lua native spec loading`
 
 - ID: `LUA-BACKEND-PARITY.5.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Add automatic spec-defined top-level function-shell parsing for loaded and inline source.
   Dependencies: `.5.2.1`
   Acceptance: Resolve the repository-owned `specs/user_function_definition.spec` through one deterministic
@@ -2210,11 +2209,18 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     feed those nodes through the existing Unicode-exact shell projector and deterministic body-job dispatcher;
     expose a composed `parse_spec_with_staged_user_function_definitions(...)` API; and reject parser execution,
     output-shape, projection, or staged failures without introducing a raw `fn` scanner.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `bash tools/run_lua_local.sh` passes PUC Lua 151/151 and LuaJIT 151/151. The public parser resolves
+    the bundled grammar by exact module-relative path with no search roots, validates/compiles it once, reuses the
+    compiled state across direct and composed calls, returns fixed-v1/variadic-v2/final-codeblock nodes in source
+    order with Unicode character spans, and dispatches all body jobs. Focused injected parsers prove typed parser-
+    spec parse/validation, execution, output-shape, projection, and staged-error ownership. Capability remains
+    64/0/0; the parser CLI, corpus execution, loaded-source compile/engine composition, descriptors, generated
+    source, and full-pipeline trace remain unclaimed. Native 14/9/4, coverage 246/105+1/122, public 58/27/0,
+    mdBook/KM/governance checks pass; canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 631 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing`
 
 - ID: `LUA-BACKEND-PARITY.5.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Compose native loaded text through parse, validation, compilation, and identity-bearing engine creation.
   Dependencies: `.5.2.2`
   Acceptance: Export `load_and_compile_spec(...)` plus a loaded-compiled result that retains request kind/value,
@@ -2391,10 +2397,12 @@ without behavior change, and activates native loading `.5.2`. Planning-only `.5.
 the current Lua runtime already parses, validates, compiles, and executes `specs/user_function_definition.spec`
 to produce the exact typed node for real `fn` source. The dependency order is therefore portable resolve/load
 `.5.2.1`, automatic spec-defined function-shell parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and
-no-drift `.5.2.4`. Portable resolution/loading `.5.2.1` now exposes typed request/options/resolved/loaded/error
-values, uses a narrow native filesystem inspector for deterministic regular-file classification, reads bytes in
-process, preserves strict UTF-8 text, and consumes every shared 14/9/4 case on both Lua ABIs at 149/149 with status
-`native-spec-resolution-loading-v1`; `.5.2.2` is active.
+no-drift `.5.2.4`. Portable resolution/loading `.5.2.1` exposes typed request/options/resolved/loaded/error values,
+uses a narrow native filesystem inspector for deterministic regular-file classification, reads bytes in process,
+and preserves strict UTF-8 text. Automatic function parsing `.5.2.2` now resolves the bundled owning grammar by
+one exact module-relative path, compiles it once, executes it in process, and feeds only typed output through the
+existing Unicode projector/body dispatcher. Both Lua ABIs pass 151/151 with status
+`native-spec-defined-functions-v1`; `.5.2.3` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2500,9 +2508,29 @@ process, preserves strict UTF-8 text, and consumes every shared 14/9/4 case on b
 | 100 | `LUA-BACKEND-PARITY.5.2` | `active` | Add portable native named/path resolution and in-memory composition. |
 | 101 | `LUA-BACKEND-PARITY.5.2.0` | `done` | Split portable resolve/load, spec-defined function parsing, full composition, and no-drift by dependency. |
 | 102 | `LUA-BACKEND-PARITY.5.2.1` | `done` | Typed deterministic resolve/load consumes all 14/9/4 cases at 149/149 on both ABIs. |
-| 103 | `LUA-BACKEND-PARITY.5.2.2` | `active` | Execute the spec-owned function-definition grammar automatically with no raw scanner. |
-| 104 | `LUA-BACKEND-PARITY.5.2.3` | `pending` | Compose parse/validate/compile and identity-bearing runtime-engine creation. |
+| 103 | `LUA-BACKEND-PARITY.5.2.2` | `done` | Cached spec-owned function parsing composes Unicode projection/body dispatch at 151/151 with no raw scanner. |
+| 104 | `LUA-BACKEND-PARITY.5.2.3` | `active` | Compose parse/validate/compile and identity-bearing runtime-engine creation. |
 | 105 | `LUA-BACKEND-PARITY.5.2.4` | `pending` | Close native loading no-drift and activate outward descriptors/full-pipeline trace `.5.3`. |
+
+### `LUA-BACKEND-PARITY.5.2.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua could project caller-supplied function-definition nodes and could execute the
+  owning grammar in a probe, but no production API connected those mechanisms automatically.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `user_function_definition_shell.lua` deliberately owned typed projection,
+  while no adapter owned bundled grammar resolution, one-time compilation, in-process execution, or composition.
+- [x] **FIX** — Add a typed cached parser that resolves only the module-relative bundled grammar, runs the native
+  parse/validate/compile APIs once, executes top rule `user_function_definitions`, normalizes typed output, and
+  delegates to the existing Unicode projector and deterministic staged body dispatcher.
+- [x] **ADDRESSED (verified)** — Fixed, variadic, and final-codeblock definitions preserve source order and Unicode
+  character spans; composed rules validate; parser build count stays one; parse/validation/execution/output/
+  projection/staged failures retain their typed owner; no raw `fn` scanner was introduced.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes PUC Lua 151/151 and LuaJIT 151/151; native 14/9/4,
+  capability 64/0/0, coverage 246/105+1/122, public inventory, mdBook, Knowledge Map, doctrine, memory, and
+  canonical CI pass; the canonical gate includes CLI 61x2 and Phase 0 `1..1031` in 631 seconds. Mutation testing
+  remains manual-only and is not run.
+- [x] **LOCKSTEP** — Public status is `native-spec-defined-functions-v1`; root/Lua docs, roadmap/architecture/live
+  state, mdBook API/status/handoff pages, task/index, and Knowledge Map activate only loaded-source compile/engine
+  composition `.5.2.3`, without claiming descriptors, full trace, generated source, corpus execution, or CLI.
 
 ### `LUA-BACKEND-PARITY.5.2.1` Acceptance Checklist
 
@@ -3967,3 +3995,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.1.5` | `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift` | Exact API/status/test/public-doc/KM audit, stale README correction, parent `.5.1` closure, and `.5.2` activation. |
 | `LUA-BACKEND-PARITY.5.2.0` | `LUA-BACKEND-PARITY.5.2.0 - split Lua native spec loading` | ADR/fixture/backend/Lua audit, successful spec-owned definition-parser probe, and dependency-correct four-leaf implementation split. |
 | `LUA-BACKEND-PARITY.5.2.1` | `LUA-BACKEND-PARITY.5.2.1 - add Lua native spec loading` | Typed requests/options/results/errors, native file-kind inspection, deterministic candidates, strict UTF-8, direct 14/9/4 dual-ABI proof, and automatic-function-parser handoff. |
+| `LUA-BACKEND-PARITY.5.2.2` | `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing` | Module-relative bundled grammar, one-time native compile, typed in-process execution, Unicode projection/body dispatch, typed failure ownership, and no raw scanner. |

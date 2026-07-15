@@ -88,8 +88,37 @@ normalization form, and leading/trailing newlines or spaces.
 
 PUC Lua and LuaJIT consume the same executable contract directly: 14 name-validation cases, nine
 resolution/file-kind cases, and four strict-UTF-8 preservation/rejection cases. The backend currently passes
-149/149 focused tests on both runtimes with status `native-spec-resolution-loading-v1`.
+151/151 focused tests on both runtimes with status `native-spec-defined-functions-v1`.
 
-This Lua milestone stops after resolution and loading. Automatic execution of the spec-owned top-level function
-grammar is the next dependency; composed parse, validation, compilation, and identity-bearing engine creation
-follow after it. `load_spec(...)` therefore does not yet claim to return an executable parser.
+## Lua automatic function parsing
+
+Lua can now execute the repository-owned function-definition grammar automatically:
+
+```lua
+local source = [[
+fn normalize(value) { return(value.trim()) }
+
+Top::
+ /x/
+]]
+
+local nodes = linkedspec.parse_user_function_definition_asts(source)
+assert(nodes[1].name == "normalize")
+
+local spec = linkedspec.parse_spec_with_staged_user_function_definitions(source)
+assert(spec.functions[1].body_ast.kind == "action_block")
+```
+
+The backend resolves `specs/user_function_definition.spec` through one exact module-relative bundled path with an
+empty search-root list. On first use it runs the ordinary native source parser, validator, and compiler; the
+successful compiled parser is then reused. Each call executes top rule `user_function_definitions` in process,
+normalizes only the typed result batch, and passes those nodes to the existing Unicode-character-index projector
+and deterministic `actionir-body.spec` dispatcher. There is no fallback or competing raw `fn` scanner.
+
+`user_function_definition_parser_metadata()` reports the resolved identity, top rule, and successful build count.
+Parser-spec parse/validation/compile, parser execution, and unsupported output failures are typed
+`UserFunctionDefinitionParserError` values with a `stage` field. Function error nodes remain ordinary typed source
+parse errors, and staged-dispatch errors retain their staged-registry owner.
+
+This milestone does not make `load_spec(...)` executable by itself. Composed loaded-source parse, validation,
+compilation, identity-bearing engine creation, and their neutral pipeline errors remain the next Lua dependency.

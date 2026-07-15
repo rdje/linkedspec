@@ -16,10 +16,12 @@ This document is the current high-level technical reading of the project shape. 
   governed helpers retain static precedence; missing/harray/arity/recursion failures stay typed. Both ABIs pass
   146/146 before portable resolution/loading `.5.2.1` adds typed named/exact-path requests, caller-owned options,
   typed resolved/loaded/error values, deterministic first-regular-file selection, in-process byte reads, and strict
-  UTF-8 preservation. All shared 14/9/4 cases pass directly on PUC Lua and LuaJIT at 149/149; status is
-  `native-spec-resolution-loading-v1`, capability remains 64/0/0, and automatic spec-owned function parsing
-  `.5.2.2` is active. Full composition `.5.2.3`, no-drift `.5.2.4`, descriptors `.5.3`, generated source `.8`,
-  and explicit/general dynamic codeblocks `.11.7` retain separate owners.
+  UTF-8 preservation. Automatic spec-owned function parsing `.5.2.2` resolves the bundled grammar by one exact
+  module-relative owner, validates/compiles it once, executes it in process, and composes only typed output through
+  the existing Unicode projector/body dispatcher without a raw scanner. PUC Lua and LuaJIT pass 151/151; status is
+  `native-spec-defined-functions-v1`, capability remains 64/0/0, and loaded-source compile/engine composition
+  `.5.2.3` is active. No-drift `.5.2.4`, descriptors `.5.3`, generated source `.8`, and explicit/general dynamic
+  codeblocks `.11.7` retain separate owners.
 - `2026-07-15` refresh: Lua variadic-v2 calls now execute through the same staged ActionIR function runtime as
   fixed calls. Caller arguments still evaluate exactly once left-to-right; the invocation frame copies every value,
   binds the fixed prefix normally, and copies extras again into one fresh typed array for the final rest name.

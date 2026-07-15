@@ -956,9 +956,11 @@ preserves static callable precedence, composes results, and keeps callback failu
 with status `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes parent `.5.1` without
 behavior change and activates native loading `.5.2`. Portable resolution/loading `.5.2.1` now exposes typed
 requests/options/results/errors, deterministic direct candidates, in-process bytes, and strict UTF-8 text; all
-shared 14/9/4 cases pass on PUC Lua and LuaJIT at 149/149 with status `native-spec-resolution-loading-v1`.
-Automatic spec-defined function parsing `.5.2.2` is active; full compile/engine composition `.5.2.3`, no-drift
-`.5.2.4`, and full native-pipeline trace `.5.3` remain dependency-ordered.
+shared 14/9/4 cases pass on PUC Lua and LuaJIT. Automatic spec-defined function parsing `.5.2.2` now resolves and
+compiles the bundled grammar once, executes it in process, and composes typed output through the Unicode projector
+and staged body dispatcher without a raw scanner. Both ABIs pass 151/151 with status
+`native-spec-defined-functions-v1`; full loaded-source compile/engine composition `.5.2.3`, no-drift `.5.2.4`,
+and full native-pipeline trace `.5.3` remain dependency-ordered.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -975,9 +977,9 @@ fixture and lock eager order, copied mixed values, empty freshness, receiver cha
 failures at 139/139. Final contextual metadata then passes 142/142 with exact sidecar preservation and
 zero-positional `codeblock_argument` normalization. Runtime invocation passes 146/146 with dynamic function-frame
 bindings, cleanup-safe outer restoration, static callable precedence, chainable results, and typed failures.
-Portable resolve/load `.5.2.1` is complete at 149/149 with public status
-`native-spec-resolution-loading-v1`; automatic spec-defined parsing `.5.2.2` is active and capability remains
-64/0/0.
+Portable resolve/load `.5.2.1` and automatic spec-defined function parsing `.5.2.2` are complete. The bundled
+grammar is module-relative, compiled once, and composed without a raw scanner; both ABIs pass 151/151 with public
+status `native-spec-defined-functions-v1`, `.5.2.3` is active, and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

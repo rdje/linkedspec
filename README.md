@@ -115,9 +115,10 @@ This `README.md` is the **single entry point** to the project.
   composes callback results, and reports typed missing/wrong-kind/arity/recursion failures. Portable loading
   `.5.2.1` now adds typed named/exact-path requests, caller-owned cwd/direct roots, deterministic first-regular-file
   resolution, in-process bytes, strict UTF-8 preservation, and structured pipeline errors. It directly consumes
-  every shared 14/9/4 contract case on both ABIs, which now pass 149/149 with public status
-  `native-spec-resolution-loading-v1`. Automatic spec-defined function parsing `.5.2.2` is active; full
-  compile/engine composition and no-drift remain `.5.2.3-.4`.
+  every shared 14/9/4 contract case on both ABIs. Automatic spec-defined function parsing `.5.2.2` now resolves
+  the bundled owner by exact module-relative path, validates/compiles it once, executes it in process, and reuses
+  the Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with public status
+  `native-spec-defined-functions-v1`; loaded-source compile/engine composition and no-drift remain `.5.2.3-.4`.
   Outward descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus

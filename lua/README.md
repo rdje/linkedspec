@@ -57,9 +57,11 @@ composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and ac
 Portable native loading now exposes typed named/exact-path requests, load options, resolved/loaded values, and
 structured pipeline errors. It checks cwd exact, cwd suffix, and direct declared roots in deterministic order,
 selects the first regular file without recursion or implicit roots, reads bytes in process, and strictly preserves
-UTF-8 text. Both ABIs pass 149/149; public status is `native-spec-resolution-loading-v1`. Automatic spec-defined
-function parsing is next, while full compile/engine composition, outward descriptors, and generated source remain
-later owners.
+UTF-8 text. Automatic function parsing now resolves repository-owned `user_function_definition.spec` by one exact
+module-relative path, validates and compiles it once, executes it over caller source, and feeds its typed output
+through the existing Unicode projector and body dispatcher. Both ABIs pass 151/151; public status is
+`native-spec-defined-functions-v1`. Full loaded-source compile/engine composition, outward descriptors, and
+generated source remain later owners.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")
@@ -71,6 +73,30 @@ local loaded = linkedspec.load_spec(request, options)
 assert(loaded.resolved.request.requested == "Demo")
 local exact_source_text = loaded.source_text
 ```
+
+Top-level functions can now be parsed and staged directly from source without caller-supplied nodes:
+
+```lua
+local source = [[
+fn normalize(value) { return(value.trim()) }
+
+Top::
+ /x/
+]]
+
+local spec = linkedspec.parse_spec_with_staged_user_function_definitions(source)
+assert(spec.functions[1].name == "normalize")
+assert(spec.functions[1].body_ast.kind == "action_block")
+
+local metadata = linkedspec.user_function_definition_parser_metadata()
+assert(metadata.spec_origin == "path_exact")
+assert(metadata.build_count == 1)
+```
+
+`parse_user_function_definition_asts(source)` exposes the lower-level typed node batch. The bundled grammar is
+cached after its first successful native parse/validation/compile; no caller search root and no raw `fn` scanner
+participates. Parser construction/execution/output failures use `UserFunctionDefinitionParserError`, while
+projection and staged-dispatch failures retain their existing typed owners.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -222,8 +248,10 @@ complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/comp
 spellings normalize to one zero-positional typed argument without harray promotion. Runtime `.5.1.4.2` executes
 that argument with current function-frame bindings, cleanup-safe outer restoration, static callable precedence,
 chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` closes parent `.5.1`; portable native
-resolution/loading `.5.2.1` consumes all shared 14/9/4 cases and raises the dual-ABI gate to 149/149 with status
-`native-spec-resolution-loading-v1`. Automatic spec-defined function parsing `.5.2.2` is active. Full
+resolution/loading `.5.2.1` consumes all shared 14/9/4 cases. Automatic spec-defined function parsing `.5.2.2`
+resolves and compiles the bundled grammar once, executes it in process, and composes the existing projector/body
+dispatcher without a raw scanner; the dual-ABI gate is 151/151 with status
+`native-spec-defined-functions-v1`. Loaded-source compile/engine composition `.5.2.3` is active. Full
 frontend/compiler/function/staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -356,15 +384,21 @@ statements on one physical line; the final statement on that line needs no
 trailing semicolon. Both single- and double-quoted strings are preserved while
 the parser scans nested blocks. Lua strings may contain arbitrary bytes, so
 `parse_spec` requires strict UTF-8 as the host representation of Unicode source
-text. `parse_spec` currently parses rule paragraphs
-only; spec-returned top-level function projection follows separately.
+text. `parse_spec` parses rule paragraphs only; the automatic composed API executes the spec-owned top-level
+function grammar before delegating the stripped rule source to `parse_spec`.
 `validate_spec(parsed, { strict_syntax = true })` adds the
 portable strict unused-rule check; ordinary validation already checks tops,
 duplicates, function/helper collisions, raw syntax, edge families/targets/
 slots, and regex structure.
 
-Function-shell semantics are not raw-scanned by Lua. Given the explicitly typed
-node array returned by the owning definition spec, use:
+Function-shell semantics are not raw-scanned by Lua. The automatic path executes the cached owning grammar and
+stages body ASTs directly:
+
+```lua
+local staged = linkedspec.parse_spec_with_staged_user_function_definitions(source)
+```
+
+Given an explicitly typed node array returned by another owning-grammar invocation, the lower-level seam remains:
 
 ```lua
 local parsed = linkedspec.parse_spec_with_user_function_definition_asts(
@@ -377,7 +411,8 @@ local parsed = linkedspec.parse_spec_with_user_function_definition_asts(
 and `definition_nodes_from_user_function_definition_output(...)` normalizes the
 owning spec's nested output shapes. Character-index spans, source/body text,
 staged payloads, and body parse jobs are checked and normalized. The jobs remain
-undispatched and `body_ast` remains absent at this boundary.
+undispatched and `body_ast` remains absent only at this explicit projection boundary; the automatic staged API
+dispatches and stitches them.
 
 Parse helper/action source without rewriting it to Lua:
 

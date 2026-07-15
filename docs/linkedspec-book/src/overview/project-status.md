@@ -82,9 +82,10 @@ Three backbone items tracked major structural modernization — all done:
   both contextual spellings without promoting harrays. Runtime `.5.1.4.2` executes those zero-positional blocks in
   the current isolated function frame, restores outer stores, preserves static callable precedence, composes
   results, and keeps callback failures typed. Portable resolution/loading `.5.2.1` then adds typed requests,
-  deterministic direct candidates, in-process bytes, strict UTF-8 preservation, and structured errors. Both ABIs
-  consume every shared 14/9/4 case at 149/149 with public status `native-spec-resolution-loading-v1`; automatic
-  spec-defined function parsing `.5.2.2` is active. Full native-loading/frontend/
+  deterministic direct candidates, in-process bytes, strict UTF-8 preservation, and structured errors. Automatic
+  spec-defined function parsing `.5.2.2` then resolves and compiles the bundled grammar once and composes typed
+  output without a raw scanner. Both ABIs pass 151/151 with public status
+  `native-spec-defined-functions-v1`; loaded-source composition `.5.2.3` is active. Full native-loading/frontend/
   compiler/function/staged/runtime trace remains `.5.3` after its `.5.1`/`.5.2` owners exist. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
@@ -103,7 +104,7 @@ Three backbone items tracked major structural modernization — all done:
   dynamic contextual path at 146/146; and `.5.1.5` closes the parent after correcting one stale README claim.
   Planning `.5.2.0` proves the current runtime can execute `specs/user_function_definition.spec`, then splits
   resolve/load `.5.2.1`, automatic spec-defined function parsing `.5.2.2`, full composition `.5.2.3`, and no-drift
-  `.5.2.4`. Resolve/load is complete at 149/149 and `.5.2.2` is active.
+  `.5.2.4`. Resolve/load and automatic spec-defined parsing are complete at 151/151 and `.5.2.3` is active.
   Descriptors/full trace remain `.5.3`, generated Lua remains `.8`, and explicit callable literals/bound
   calls remain `.11.7`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. The program is dormant until full current-backend parity and no format implementation has started.

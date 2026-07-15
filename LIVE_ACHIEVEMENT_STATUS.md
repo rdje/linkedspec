@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.2.2 — automate Lua function parsing**
+  (DONE — automatic spec-owned function parsing is green; loaded-source compile/engine composition `.5.2.3` is
+  next).
+
+  **Result:** The Lua module resolves the bundled function grammar by one exact module-relative owner, validates
+  and compiles it once, executes it over each caller source in process, and composes only typed output through the
+  existing Unicode projector and staged body dispatcher. Fixed, variadic, and final-codeblock definitions plus
+  parser/projection/staged failure ownership pass on PUC Lua and LuaJIT at 151/151 with status
+  `native-spec-defined-functions-v1`. There is no raw scanner; capability remains 64/0/0. Loaded-source compile/
+  engine identity, descriptors/full trace, generated source, corpus execution, and CLI remain later owners.
+  Mutation testing remains manual-only and was not run. Canonical local CI passes CLI 61x2 plus Phase 0
+  `1..1031` in 631 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.2.1 — add Lua native spec loading**
   (DONE — portable resolution/loading is green; automatic spec-defined function parsing `.5.2.2` is next).
 

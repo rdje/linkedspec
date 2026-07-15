@@ -11,7 +11,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, resolution, files, utf8, functions, staged-parsing, task-tree, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.2.0 audits and splits the dependency chain; .5.2.1 now implements typed deterministic resolve/load and strict UTF-8, consumes all 14/9/4 cases at 149/149 on both ABIs, and activates automatic spec-owned function parsing .5.2.2."
+evidence: "LUA-BACKEND-PARITY.5.2.0 audits and splits the dependency chain; .5.2.1 implements typed deterministic resolve/load and strict UTF-8; .5.2.2 implements cached automatic spec-owned function parsing at 151/151 on both ABIs and activates loaded-source composition .5.2.3."
 reverify: "perl tools/check_native_spec_resolution_contract.pl && bash tools/run_lua_local.sh"
 ---
 
@@ -21,12 +21,11 @@ UTF-8 preservation, neutral pipeline errors through decode, and direct consumpti
 resolution, and 4 text cases. It does not parse or compile the loaded source. Both Lua ABIs pass 149/149 with
 status `native-spec-resolution-loading-v1`.
 
-Second, `.5.2.2` makes top-level function-shell parsing automatic without adding a raw `fn` scanner. The current
-Lua runtime already proves the key feasibility point: it can parse, validate, and compile the repository-owned
-`specs/user_function_definition.spec`, execute its `user_function_definitions` top rule over real `fn zero()`
-source, and return one exact typed `function_definition` node with the correct name and body text. The production
-adapter will resolve that internal grammar through one deterministic bundled/module-relative owner, normalize its
-typed output, and reuse the existing Unicode-exact projector plus body-job dispatcher.
+Second, `.5.2.2` makes top-level function-shell parsing automatic without adding a raw `fn` scanner. The
+production adapter resolves `specs/user_function_definition.spec` through one exact module-relative owner with no
+search roots, parses/validates/compiles it once, executes `user_function_definitions` over each caller source, and
+reuses the existing Unicode-exact projector plus body-job dispatcher. Both Lua ABIs pass 151/151 with status
+`native-spec-defined-functions-v1`.
 
 Third, `.5.2.3` composes loaded source through automatic full-source parse, validation, compilation, and engine
 creation while retaining requested identity, resolved path, and exact source text. Fourth, `.5.2.4` performs the
@@ -39,4 +38,5 @@ native loader supplies composition, not an alternative host-language function-de
 
 Related facts: [[native-spec-resolution-contract]], [[native-in-memory-backend-contract]],
 [[lua-function-definition-shell-projection]], [[lua-staged-function-runtime-closeout]],
-[[spec-defined-user-function-definition-parser]], [[lua-native-spec-resolution]].
+[[spec-defined-user-function-definition-parser]], [[lua-native-spec-resolution]],
+[[lua-spec-defined-function-parser]].

@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.2.2 — automate Lua function parsing
+
+Added a native `UserFunctionDefinitionAstParser` adapter that resolves the repository-owned
+`specs/user_function_definition.spec` through one exact module-relative path and no user search roots. Its first
+successful use parses, validates, and compiles the grammar through the existing Lua APIs; later direct and composed
+calls reuse that compiled state. Each call executes top rule `user_function_definitions` in process, normalizes the
+typed result batch, and delegates to the existing Unicode-character-index projector and deterministic staged body
+dispatcher. No raw `fn` scanner was introduced.
+
+Public `parse_user_function_definition_asts(...)` and
+`parse_spec_with_staged_user_function_definitions(...)` APIs cover fixed-v1, variadic-v2, and final-codeblock
+definitions. Metadata exposes bundled identity/top-rule/build-count proof. Typed parser-spec parse/validation/
+compile, execution, and output-shape errors are distinct from the existing projection/source-parse and staged-
+registry owners. PUC Lua and LuaJIT pass 151/151 with status `native-spec-defined-functions-v1`; capability remains
+64/0/0 and loaded-source compile/engine composition `.5.2.3` is active. Mutation testing remains manual-only and
+was not run. Native 14/9/4, coverage 246/105+1/122, public 58/27/0, mdBook/KM/governance checks pass; canonical
+local CI passes CLI 61x2 plus Phase 0 `1..1031` in 631 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.2.1 — add Lua native spec loading
 
 Added Lua's public file-oriented resolution/loading API: typed named and exact-path requests, caller-owned cwd and

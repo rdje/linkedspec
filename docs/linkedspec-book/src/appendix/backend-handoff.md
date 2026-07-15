@@ -335,7 +335,9 @@ It defensively copies exact typed jobs, decorates equal sort keys with input ord
 Lua sorting stable, exposes the governed digest/cache/compiled/result records, rejects
 unsupported providers and sidecar/duplicate-job drift, and rebuilds immutable function/spec
 records during stitching. `parse_spec_with_staged_user_function_definition_asts(...)`
-composes the function shell and dispatch directly. `.5.1.2` adds registry-first fixed-v1
+composes an explicit node batch and dispatch directly. `.5.2.2` adds
+`parse_spec_with_staged_user_function_definitions(source)`, which resolves and compiles the bundled owning grammar
+once and supplies that node batch automatically without a raw scanner. `.5.1.2` adds registry-first fixed-v1
 execution: eager ordered caller arguments, copied fresh scalar/array/harray stores,
 staged-AST integrity checks, local final/early returns, nested nonrecursive calls,
 standalone value drop, returned-value receiver continuation, cleanup-safe caller
@@ -349,9 +351,11 @@ typed argument without promoting harrays. `.5.1.4.2` executes that argument agai
 frame, preserves static callable precedence, restores outer stores, returns chainable values, and reports typed
 callback failures. Portable native resolution/loading `.5.2.1` then adds typed requests/options/results/errors,
 deterministic direct candidate order, in-process byte reads, and strict UTF-8 preservation. PUC Lua and LuaJIT
-consume the complete 14/9/4 contract at 149/149 with status `native-spec-resolution-loading-v1`; automatic
-spec-defined function parsing `.5.2.2` is active. Full composition `.5.2.3`, no-drift `.5.2.4`, and outward
-descriptors `.5.3` follow.
+consume the complete 14/9/4 contract. Automatic spec-defined function parsing `.5.2.2` resolves the bundled
+grammar module-relatively, validates/compiles it once, executes it in process, and composes typed nodes through the
+existing Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with status
+`native-spec-defined-functions-v1`; loaded-source composition `.5.2.3` is active, while no-drift `.5.2.4` and
+outward descriptors `.5.3` follow.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -793,8 +797,8 @@ normalization at 142/142 with public status `runtime-user-functions-contextual-c
 Contextual execution `.5.1.4.2` then runs in the current function frame with cleanup-safe restoration, static
 callable precedence, chainable results, and typed failures at 146/146; public status is
 `runtime-user-functions-contextual-codeblock-v1`, parent `.5.1` is closed, native-loading split `.5.2.0` is done,
-portable resolve/load `.5.2.1` passes 149/149 with status `native-spec-resolution-loading-v1`, automatic
-spec-defined parsing `.5.2.2` is active, and capability remains 64/0/0. Explicit
+ portable resolve/load `.5.2.1` and cached automatic spec-defined parsing `.5.2.2` pass 151/151 with status
+`native-spec-defined-functions-v1`, loaded-source composition `.5.2.3` is active, and capability remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
@@ -925,6 +929,7 @@ The function-shell APIs are:
 local nodes = linkedspec.definition_nodes_from_user_function_definition_output(output)
 local projection = linkedspec.project_user_function_definition_asts(source, nodes)
 local parsed = linkedspec.parse_spec_with_user_function_definition_asts(source, nodes)
+local staged = linkedspec.parse_spec_with_staged_user_function_definitions(source)
 ```
 
 Projection validates identifiers, params/arity, Unicode character-index spans,
@@ -932,9 +937,9 @@ exact source/body slices, staged payload and parse-job metadata, parser/top-rule
 identity, result/failure policy, and diagnostic ownership. It normalizes paths
 to `functions.<index>.body_source`, derives deterministic body-job IDs, replaces
 function-span characters with spaces while preserving CR/LF, then parses the
-remaining rules. `body_ast` remains absent because staged dispatch belongs to a
-later registry leaf. Empty node input never falls back to a raw function
-scanner. This closes the Lua source frontend.
+remaining rules. The explicit projection API leaves `body_ast` absent; the automatic staged API executes and
+stitches it. Empty node input never falls back to a raw function scanner, and the automatic API obtains nodes only
+by executing the spec-owned grammar.
 
 Lua now also exposes the typed ActionIR parser seam:
 

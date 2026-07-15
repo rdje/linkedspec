@@ -165,7 +165,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "native-spec-resolution-loading-v1",
+    "native-spec-defined-functions-v1",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -1623,6 +1623,129 @@ test("function shell normalizes nested spec output shapes", function()
   assert_error_contains(function()
     linkedspec.definition_nodes_from_user_function_definition_output("invalid")
   end, "unsupported output shape", "unsupported output")
+end)
+
+test("spec-defined function parser automatically composes Unicode function shells", function()
+  local source = table.concat({
+    "# préface λ",
+    'fn pair(left, right) { return([left, right]) }',
+    'fn collect(prefix, ...items) { return(items) }',
+    'fn apply(value, callback: codeblock) { return(value) }',
+    "Top::",
+    " /x/",
+    "",
+  }, "\n")
+
+  local before = linkedspec.user_function_definition_parser_metadata()
+  local nodes = linkedspec.parse_user_function_definition_asts(source)
+  local after = linkedspec.user_function_definition_parser_metadata()
+  assert_equal(before.type, "user_function_definition_ast_parser", "parser metadata type")
+  assert_equal(before.spec_name, "user_function_definition.spec", "parser spec identity")
+  assert_equal(before.spec_origin, "path_exact", "module-relative exact resolution")
+  assert_contains(before.spec_path, "specs/user_function_definition.spec", "bundled spec path")
+  assert_equal(before.top_rule, "user_function_definitions", "parser top rule")
+  assert_equal(before.build_count, 1, "single initial parser build")
+  assert_equal(after.build_count, 1, "compiled parser cache reuse")
+
+  assert_equal(#nodes, 3, "automatic function node count")
+  assert_equal(nodes[1].name, "pair", "fixed function order")
+  assert_equal(nodes[1].source_span.line_start, 2, "Unicode-prefixed source line")
+  assert_equal(nodes[2].signature.rest_param, "items", "variadic signature")
+  assert_equal(nodes[3].codeblock_param, "callback", "codeblock signature")
+
+  local staged = linkedspec.parse_spec_with_staged_user_function_definitions(source)
+  assert_equal(#staged.functions, 3, "automatic composed function count")
+  assert_equal(#staged.rules, 1, "automatic composed rule count")
+  assert_equal(staged.functions[1].body_ast.kind, "action_block", "fixed body dispatch")
+  assert_equal(staged.functions[2].body_ast.kind, "action_block", "variadic body dispatch")
+  assert_equal(staged.functions[3].body_ast.kind, "action_block", "codeblock body dispatch")
+  assert_equal(linkedspec.validate_spec(staged), nil, "automatic composed validation")
+  assert_equal(
+    linkedspec.user_function_definition_parser_metadata().build_count,
+    1,
+    "composed parse reuses compiled parser"
+  )
+end)
+
+test("spec-defined function parser preserves typed failure ownership", function()
+  local parse_ok, parse_error = pcall(
+    linkedspec.user_function_definition_ast_parser_from_spec_source,
+    "fn invalid() { return(undef) }\nTop::\n /x/\n"
+  )
+  assert_equal(parse_ok, false, "parser-spec parse rejection")
+  assert_equal(linkedspec.is_user_function_definition_parser_error(parse_error), true, "parser parse type")
+  assert_equal(parse_error.stage, "parse_parser_spec", "parser parse stage")
+
+  local validation_ok, validation_error = pcall(
+    linkedspec.user_function_definition_ast_parser_from_spec_source,
+    "Only:\n /x/\n"
+  )
+  assert_equal(validation_ok, false, "parser-spec validation rejection")
+  assert_equal(
+    linkedspec.is_user_function_definition_parser_error(validation_error),
+    true,
+    "parser validation type"
+  )
+  assert_equal(validation_error.stage, "validate_parser_spec", "parser validation stage")
+
+  local execution_parser = linkedspec.user_function_definition_ast_parser_from_spec_source([[
+user_function_definitions::
+ I { return(no_such_helper()) }
+]])
+  local execution_ok, execution_error = pcall(
+    linkedspec.parse_user_function_definition_asts,
+    "Top::\n /x/\n",
+    execution_parser
+  )
+  assert_equal(execution_ok, false, "parser execution rejection")
+  assert_equal(
+    linkedspec.is_user_function_definition_parser_error(execution_error),
+    true,
+    "parser execution type"
+  )
+  assert_equal(execution_error.stage, "execute_parser_spec", "parser execution stage")
+
+  local output_parser = linkedspec.user_function_definition_ast_parser_from_spec_source([[
+user_function_definitions::
+ I { return("unsupported") }
+]])
+  local output_ok, output_error = pcall(
+    linkedspec.parse_user_function_definition_asts,
+    "Top::\n /x/\n",
+    output_parser
+  )
+  assert_equal(output_ok, false, "parser output-shape rejection")
+  assert_equal(linkedspec.is_user_function_definition_parser_error(output_error), true, "parser output type")
+  assert_equal(output_error.stage, "normalize_output", "parser output stage")
+
+  local projection_ok, projection_error = pcall(
+    linkedspec.parse_spec_with_staged_user_function_definitions,
+    "fn bad(value\nTop::\n /x/\n"
+  )
+  assert_equal(projection_ok, false, "projection rejection")
+  assert_equal(linkedspec.is_spec_parse_error(projection_error), true, "projection typed owner")
+
+  local _, staged_sentinel = pcall(
+    linkedspec.execute_staged_parse_jobs,
+    { json.harray() }
+  )
+  assert_equal(
+    linkedspec.is_staged_parser_registry_error(staged_sentinel),
+    true,
+    "staged sentinel type"
+  )
+  local staged_registry = linkedspec.staged_parser_registry
+  local original_dispatch = staged_registry.parse_spec_with_staged_user_function_definition_asts
+  staged_registry.parse_spec_with_staged_user_function_definition_asts = function()
+    error(staged_sentinel, 0)
+  end
+  local staged_ok, staged_error = pcall(
+    linkedspec.parse_spec_with_staged_user_function_definitions,
+    "Top::\n /x/\n"
+  )
+  staged_registry.parse_spec_with_staged_user_function_definition_asts = original_dispatch
+  assert_equal(staged_ok, false, "staged body rejection")
+  assert_equal(linkedspec.is_staged_parser_registry_error(staged_error), true, "staged typed owner")
 end)
 
 test("function shell rejects overlapping source spans", function()

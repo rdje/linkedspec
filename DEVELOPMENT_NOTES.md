@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.2.2` — make the spec-owned grammar executable infrastructure, not duplicated
+  syntax): Resolve the internal function grammar from the Lua module location with an empty root list, then reuse
+  the ordinary parse/validate/compile/runtime stack. Cache only a successful compiled parser; execute it anew over
+  each caller source and pass only its normalized typed nodes into the already-verified Unicode projector and
+  staged body dispatcher. This keeps `user_function_definition.spec` the sole syntax owner and makes the automatic
+  path a thin composition layer. Preserve existing typed source/projection/staged errors rather than flattening
+  them into the adapter error. PUC Lua and LuaJIT pass 151/151 with status
+  `native-spec-defined-functions-v1`; `.5.2.3` owns loaded-source compile/engine identity, and mutation campaigns
+  remain manual-only. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 631 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.2.1` — keep filesystem facts native and resolution policy in Lua): Represent
   portable name versus exact host path as typed Lua request values, and keep candidate construction/order,
   deduplication, error attribution, byte loading, and UTF-8 policy in the Lua module. Isolate only the one fact Lua
