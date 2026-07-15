@@ -87,7 +87,9 @@ Three backbone items tracked major structural modernization — all done:
   output without a raw scanner. Loaded-source composition `.5.2.3` now returns typed exact identity/source/compiled
   state, maps neutral source-pipeline errors, and creates named/path-attributed engines. Both ABIs pass 153/153
   with public status `native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` without behavior change.
-  Full native-loading/frontend/compiler/function/staged/runtime trace `.5.3` is active. Cross-backend
+  Planning `.5.3.0` splits exact outward descriptors, full native-loading/frontend/compiler/function/staged/runtime
+  trace, and admission. Decision `.5.3.0.1` first settles final-codeblock outward metadata and census timing; no
+  runtime or capability claim changed. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument

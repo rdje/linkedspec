@@ -244,9 +244,9 @@ without trace or corpus drift.
 
 As of `LUA-BACKEND-PARITY.4.4.4`, Lua's native runtime diagnostics/trace
 boundary is closed: it exposes the trace control/sink/event surface plus runtime interpreter events. Full frontend,
-compiler, function-shell, native-loading, and staged propagation remains the
-dependency-gated `.5.3` owner, so this is not yet a full pipeline trace-parity
-claim.
+compiler, function-shell, native-loading, and staged propagation remains later work, so this is not yet a full
+pipeline trace-parity claim. Planning `.5.3.0` inventories every seam and assigns one-emitter propagation to
+`.5.3.2`, after the exact outward descriptor decision/implementation dependency `.5.3.0.1-.5.3.1`.
 
 The top-level `linkedspec` module exports:
 

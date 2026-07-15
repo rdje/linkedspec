@@ -10,21 +10,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.2.4` — close portable native loading no drift.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.3.0` — split Lua descriptor/trace/admission work after exact audit.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission`.
 - prepared_commit: `none`.
-- active_work_unit: exact outward descriptors and one-emitter full-pipeline trace `LUA-BACKEND-PARITY.5.3`.
-- next_action: audit the shared descriptor/trace contracts and every Lua loading/frontend/validation/compiler/
-  function/staged/runtime seam, then split `.5.3` by dependency before changing behavior.
-- current_proof: `.5.2.4` inventories the complete native loading chain and finds no unowned source/export/test/
-  public-doc/KM seam. Typed `LoadedCompiledSpec`, exact parse/validate/compile errors, option-copying named/path-
-  identified engines, loaded fixed functions, inline no-drift, runtime identity, and missing-name JSON remain
-  153/153 on PUC Lua/LuaJIT;
-  native 14/9/4, capability 64/0/0, coverage 246/105+1/122, public 58/27/0, CLI 61x2, and Phase 0 `1..1031` in
-  607 seconds are green. Parent `.5.2` is closed; `.5.3` is active for descriptors/full trace. ADR `0040` and
-  `BACKEND-COMPANION-BOOKS` adopt one neutral book plus five
-  linked implementation companions; implementation starts only after full current-backend parity and no scaffold
-  or content migration exists yet. Mutation testing remains manual-only.
+- active_work_unit: descriptor-shape and census-timing decision `LUA-BACKEND-PARITY.5.3.0.1`.
+- next_action: obtain the director's two policy choices, record them under `.5.3.0.1`, then implement exact outward
+  descriptors `.5.3.1` before one-emitter full-pipeline trace `.5.3.2` and closeout/admission `.5.3.3`.
+- current_proof: `.5.3.0` finds exact fixed-v1 and variadic-v2 outward schemas, but no neutral final-codeblock
+  record shape for `parameter_kinds`; Lua retains its explicit descriptor fence. The original `.5.3` census
+  sentence predates current completion-time Lua admission policy. Runtime alone accepts one caller emitter; every
+  loading/frontend/validation/compiler/function/staged seam is inventoried. No source, behavior, status,
+  descriptor, capability, or test expectation changed; Lua remains 153/153 on both ABIs and capability remains
+  64/0/0; canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds. Mutation testing remains
+  manual-only and was not run.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -35,5 +33,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.5.2.4` no-drift docs pass focused/canonical gates and await commit;
-  mutation campaigns remain parked and no mutant run belongs to ordinary commit/local-CI workflow.
+- blockers: `.5.3.0.1` awaits director decisions on final-codeblock outward schema scope and Lua census timing.
+  in_flight_uncommitted: none after the `.5.3.0` planning commit; mutation campaigns remain parked and no mutant
+  run belongs to ordinary commit/local-CI workflow.

@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.3.0 — split Lua descriptor trace admission
+
+Audited the exact fixed-v1/variadic-v2 outward schemas, final-codeblock metadata and fail-closed Lua descriptor
+boundaries, every native trace-emitter seam, completed Dart/Julia trace precedent, the current capability manifest,
+and the history of `.5.3` admission wording. The audit found two foundational neutral-policy dependencies: no
+governed outward function-record shape currently places final-codeblock `parameter_kinds`, and the original
+immediate Lua census expansion conflicts with the newer policy that keeps Lua outside until its parity tree
+completes.
+
+Split `.5.3` into director decision `.5.3.0.1`, exact descriptor implementation `.5.3.1`, one-emitter native-
+pipeline propagation `.5.3.2`, and no-drift/selected capability admission `.5.3.3`. Added a Knowledge Map fact and
+aligned roadmaps, architecture/live state, root/Lua docs, and mdBook. No source, runtime behavior, public status,
+descriptor schema, capability row, test expectation, or mutation policy changed. PUC Lua and LuaJIT remain
+153/153; signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; capability remains 64/0/0; canonical local CI
+passes both 61/61 CLI environments and Phase 0 `1..1031` in 605 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.2.4 — close Lua native loading no drift
 
 Closed the portable native-loading parent after an exact source/export/test/public-doc/Knowledge-Map inventory.

@@ -982,7 +982,10 @@ bindings, cleanup-safe outer restoration, static callable precedence, chainable 
 Portable resolve/load `.5.2.1` and automatic spec-defined function parsing `.5.2.2` are complete. The bundled
 grammar is module-relative, compiled once, and composed without a raw scanner; both ABIs pass 151/151 with public
 status `native-spec-defined-functions-v1`. Typed full composition and source-identified engines then pass 153/153
-with status `native-spec-pipeline-v1`; `.5.2.4` closes native-loading no-drift, `.5.3` is active, and capability
+with status `native-spec-pipeline-v1`; `.5.2.4` closes native-loading no-drift. Planning `.5.3.0` finds exact
+fixed-v1/variadic-v2 outward schemas but no neutral final-codeblock outward record shape, plus a historical conflict
+between immediate Lua census expansion and the newer completion-time admission policy. Decision `.5.3.0.1` is the
+frontier before descriptor `.5.3.1`, one-emitter trace `.5.3.2`, and closeout/admission `.5.3.3`; capability
 remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative

@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua descriptor/full-pipeline-trace planning `.5.3.0` identifies two neutral-policy
+  dependencies before code. Fixed-v1 and variadic-v2 have exact outward function-record schemas, while ADR `0032`
+  requires final-codeblock metadata preservation but no neutral outward record shape places `parameter_kinds`;
+  Lua correctly retains its fail-closed descriptor fence. The original `.5.3` immediate-census sentence also
+  predates the current four-backend-until-Lua-complete admission policy. Runtime already accepts one caller emitter;
+  loading, frontend, validation, compile, function-shell, and staged APIs do not. Decision `.5.3.0.1` is active,
+  followed by descriptor `.5.3.1`, one-emitter trace `.5.3.2`, and no-drift/selected admission `.5.3.3`. No source,
+  behavior, status, descriptor, capability, or test expectation changed.
 - `2026-07-15` refresh: Lua now executes final-only `callback: codeblock` intent after preserving it end-to-end.
   Spec-produced fixed/codeblock fields canonicalize once to ordered fixed-v1 params/arity plus an exact one-entry
   `parameter_kinds` harray, and identical metadata survives body payload, staged job, typed AST, registry,

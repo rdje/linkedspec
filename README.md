@@ -121,8 +121,10 @@ This `README.md` is the **single entry point** to the project.
   `native-spec-defined-functions-v1`. Loaded-source composition `.5.2.3` now returns exact identity/source/compiled
   state, maps neutral parse/validate/compile failures, and creates named/path-attributed runtime engines. Both ABIs
   pass 153/153 with status `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2` without changing
-  behavior or capability; outward descriptor admission plus full frontend/compiler/function/staged trace `.5.3`
-  is active.
+  behavior or capability. Planning `.5.3.0` now splits outward descriptors, one-emitter full-pipeline trace, and
+  final admission. Decision leaf `.5.3.0.1` must first settle the absent neutral outward record shape for
+  final-codeblock `parameter_kinds` and reconcile the original immediate-census wording with the newer policy that
+  keeps Lua outside the full-backend census until its parity tree completes. No behavior or capability changed.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

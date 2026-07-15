@@ -129,7 +129,11 @@ then resolves the bundled grammar module-relatively, validates/compiles it once,
 composes typed output without a raw scanner. Both Lua ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`. Full loaded-source `.5.2.3` now retains exact identity/source/compiled state,
 maps neutral parse/validate/compile failures, and builds named/path-attributed engines at 153/153 with status
-`native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` and activates `.5.3` without behavior change.
+`native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` without behavior change. Planning `.5.3.0`
+then audits and splits the exact descriptor/full-trace/admission boundary. Fixed-v1 and variadic-v2 outward shapes
+are governed; final-codeblock `parameter_kinds` lacks a neutral outward record shape; and original immediate-census
+wording conflicts with the newer completion-time Lua admission policy. Decision `.5.3.0.1` precedes implementation
+`.5.3.1-.3`; current runtime and capability state remain unchanged.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.

@@ -356,8 +356,10 @@ grammar module-relatively, validates/compiles it once, executes it in process, a
 existing Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`. Loaded-source `.5.2.3` retains exact identity/source/compiled state, maps the
 three neutral source stages, and creates named/path-attributed engines at 153/153 with status
-`native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` and outward descriptors/full trace `.5.3` is
-active.
+`native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2`. Planning `.5.3.0` separates exact outward
+descriptor admission, one-emitter native-pipeline trace, and capability closeout. Before implementation,
+`.5.3.0.1` must settle the backend-neutral outward shape for final-codeblock parameter-kind metadata and the Lua
+capability-census admission boundary. Current runtime/status/census behavior is unchanged.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler

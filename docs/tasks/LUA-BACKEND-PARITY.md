@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (portable native-loading parent `.5.2` is closed at 153/153 on both Lua ABIs;
-  outward descriptors/full-pipeline trace `.5.3` is active)
+- Last updated: `2026-07-15` (`.5.3.0` audits and splits descriptor/full-pipeline-trace admission; neutral
+  final-codeblock descriptor shape and capability-census timing await director resolution in `.5.3.0.1`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2265,11 +2265,78 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.5.3`
   Status: `active`
   Goal: Admit exact outward descriptors, runtime diagnostics, and full-pipeline trace.
+  Children: `.5.3.0`, `.5.3.0.1`, `.5.3.1`, `.5.3.2`, `.5.3.3`
   Dependencies: `.4.4`, `.5.1`, `.5.2`
   Acceptance: Consume shared fixtures/checkers directly, including the exact fixed-v1/variadic-v2 outward function
     descriptor union and identical staged signature copies; propagate one caller-owned emitter through native
     loading, frontend, validation, compilation, function-shell, staged dispatch, and runtime phases; expand the
     capability census without changing existing backend rows; no partial/gap state lacks a concrete next owner.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.3.0`
+  Status: `done`
+  Goal: Audit and dependency-split Lua descriptor, full-pipeline trace, and capability-admission work before code.
+  Dependencies: `.4.4`, `.5.1`, `.5.2`
+  Acceptance: Inspect the exact neutral fixed-v1/variadic-v2 outward contracts, contextual-codeblock metadata,
+    current Lua descriptor fences, every emitter propagation seam, completed Dart/Julia trace precedent, current
+    capability-manifest admission policy, and the history of any contradictory owner text; record foundational
+    contract conflicts durably; split decision, descriptor, trace, and admission work so no behavior leaf starts
+    before its exact source of truth and dependency are settled.
+  Verification: **PASS 2026-07-15.** Exact executable-contract, Lua fence, completed-backend precedent, API seam,
+    capability policy, and git-history inspection finds two neutral-policy dependencies before behavior code. The
+    fixed-v1 and variadic-v2 outward schemas are exact, but no neutral outward function-record schema places the
+    final-codeblock `parameter_kinds` metadata that ADR `0032` requires descriptors to preserve. Separately, the
+    original `.5.3` immediate-census wording predates commit `4a2adda9`, whose current four-backend census policy
+    keeps Lua outside until the dedicated parity tree completes. Runtime alone accepts a caller emitter; every
+    loading/frontend/validation/compiler/function/staged seam is now inventoried. `.5.3.0.1` owns the two director
+    decisions; `.5.3.1-.3` separately own descriptor implementation, one-emitter propagation, and no-drift/
+    selected admission. No source, behavior, status, capability, descriptor, or test expectation changes. PUC Lua
+    and LuaJIT remain 153/153; callable-signature/codeblock checkers remain 3/9/7 and 7/11/9/7/4/8; capability
+    remains 64/0/0; canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 605 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission`
+
+- ID: `LUA-BACKEND-PARITY.5.3.0.1`
+  Status: `active`
+  Goal: Resolve the outward final-codeblock descriptor schema and Lua capability-census admission timing.
+  Dependencies: `.5.3.0`
+  Blocker: Awaiting the director's two policy choices recorded by `.5.3.0`.
+  Acceptance: Adopt one backend-neutral outward descriptor policy for final-codeblock metadata or retain the
+    explicit Lua fence under its exact future cross-backend owner; reconcile `.5.3` census wording with the newer
+    full-backend admission policy; update the governing contract/decision/task/docs consistently before descriptor
+    or census code changes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.3.1`
+  Status: `pending`
+  Goal: Admit exact Lua outward user-function descriptors.
+  Dependencies: `.5.3.0.1`
+  Acceptance: Consume the shared fixed-v1/variadic-v2 descriptor union directly, preserve identical callable
+    signatures through staged and outward copies, implement the selected final-codeblock policy without a Lua-only
+    record shape, reject schema drift, and keep compiled descriptor metadata/order exact on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.3.2`
+  Status: `pending`
+  Goal: Propagate one caller-owned trace emitter through the complete native Lua parser pipeline.
+  Dependencies: `.5.3.0.1`, `.5.3.1`
+  Acceptance: One emitter identity crosses native resolution/loading, source frontend, validation, compilation,
+    spec-owned function parser, function-shell projection, staged body resolve/load/compile/execute/stitch, engine
+    creation, and runtime execution; ordered phase/rule events, quiet-default behavior, level filtering, sinks,
+    error attribution, result neutrality, and no hidden emitter creation match the shared trace precedent.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.5.3.3`
+  Status: `pending`
+  Goal: Close Lua descriptor/full-pipeline-trace no-drift and apply the selected capability-admission policy.
+  Dependencies: `.5.3.1`, `.5.3.2`
+  Acceptance: Focused dual-ABI proof, neutral descriptor/trace fixtures and checkers, public API/status, docs/book,
+    task/index/roadmaps/live/KM, and canonical gates agree; capability rows are expanded only at the selected
+    admission boundary and every non-pass state has a concrete owner; parent `.5.3` closes without claiming
+    generated source, corpus execution, or the primary parser CLI.
   Verification: `pending`
   Commit: `pending`
 
@@ -2426,6 +2493,11 @@ existing Unicode projector/body dispatcher. Both Lua ABIs pass 151/151 with stat
 three source stages, creates name/path-identified engines, and executes loaded top-level functions at 153/153 on
 both ABIs with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` confirms exact source/API/test/
 public-doc/KM agreement, closes parent `.5.2` without behavior change, and activates descriptors/full trace `.5.3`.
+Planning `.5.3.0` audits the exact fixed-v1/variadic-v2 schemas, final-codeblock metadata/fence, trace seams,
+completed Dart/Julia precedent, capability policy, and history before code. It finds no neutral outward
+final-codeblock record shape and a timing conflict between the original `.5.3` census sentence and the newer
+four-backend-until-Lua-complete policy. Decision leaf `.5.3.0.1` is active; descriptor implementation `.5.3.1`,
+one-emitter propagation `.5.3.2`, and no-drift/selected admission `.5.3.3` remain dependency-ordered and pending.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2535,6 +2607,35 @@ public-doc/KM agreement, closes parent `.5.2` without behavior change, and activ
 | 104 | `LUA-BACKEND-PARITY.5.2.3` | `done` | Typed full composition and source-identified runtime engines pass 153/153 on both ABIs. |
 | 105 | `LUA-BACKEND-PARITY.5.2.4` | `done` | Exact source/API/test/public-doc/KM no-drift closes parent `.5.2`. |
 | 106 | `LUA-BACKEND-PARITY.5.3` | `active` | Admit outward descriptors and one-emitter full-pipeline trace. |
+| 107 | `LUA-BACKEND-PARITY.5.3.0` | `done` | Audit finds two neutral-policy dependencies and splits decision/descriptor/trace/admission work. |
+| 108 | `LUA-BACKEND-PARITY.5.3.0.1` | `active` | Await director choice on final-codeblock outward shape and Lua census timing. |
+| 109 | `LUA-BACKEND-PARITY.5.3.1` | `pending` | Implement the selected exact outward descriptor union without a Lua-only shape. |
+| 110 | `LUA-BACKEND-PARITY.5.3.2` | `pending` | Carry one caller-owned emitter across the full native parser pipeline. |
+| 111 | `LUA-BACKEND-PARITY.5.3.3` | `pending` | Close no-drift and apply the selected capability-admission boundary. |
+
+### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Parent `.5.3` combines descriptor, full-pipeline trace, and capability admission,
+  but its exact neutral descriptor variants, emitter seams, and census timing had not been re-audited after the
+  later callable-codeblock and four-backend census decisions.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Fixed-v1 and variadic-v2 have exact outward schemas; final-codeblock
+  `parameter_kinds` has no neutral outward record shape despite ADR `0032` preservation intent. Separately, the
+  original `.5.3` immediate-census sentence predates README commit `4a2adda9`, which keeps Lua outside until its
+  dedicated parity tree completes. Runtime accepts an emitter, while every preceding native phase currently does
+  not.
+- [x] **FIX** — Record the facts in the Knowledge Map and split director decision `.5.3.0.1`, descriptor
+  implementation `.5.3.1`, one-emitter propagation `.5.3.2`, and no-drift/selected admission `.5.3.3` before
+  changing behavior.
+- [x] **ADDRESSED (verified)** — Every descriptor/schema/fence, API propagation seam, completed-backend precedent,
+  capability owner, and conflicting-history source has one durable pointer; no implementation leaf can silently
+  invent a Lua-only contract or supersede census policy.
+- [x] **NO REGRESSION** — Planning changes no source, behavior, public status, capability row, descriptor shape,
+  test expectation, or mutation policy. Focused Lua and neutral contract gates, canonical local CI, mdBook,
+  Knowledge Map, memory, doctrines, and cleanup pass. PUC Lua/LuaJIT remain 153/153; signature/codeblock checkers
+  remain 3/9/7 and 7/11/9/7/4/8; capability remains 64/0/0; canonical CI includes CLI 61x2 and Phase 0 `1..1031`
+  in 605 seconds. Mutation testing was not run.
+- [x] **LOCKSTEP** — Roadmaps, architecture/live state, root/Lua docs, mdBook trace/handoff/status pages, task/index,
+  Knowledge Map, changes/notes, and bounded memory identify `.5.3.0.1` as the exact resume point.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4060,3 +4161,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.2.2` | `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing` | Module-relative bundled grammar, one-time native compile, typed in-process execution, Unicode projection/body dispatch, typed failure ownership, and no raw scanner. |
 | `LUA-BACKEND-PARITY.5.2.3` | `LUA-BACKEND-PARITY.5.2.3 - compose Lua native spec pipeline` | Typed loaded/compiled result, exact source identity, neutral parse/validate/compile errors, identified engines, and loaded function execution. |
 | `LUA-BACKEND-PARITY.5.2.4` | `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift` | Exact source/export/test/public-doc/Knowledge-Map inventory, parent `.5.2` closure, and descriptor/full-trace `.5.3` handoff. |
+| `LUA-BACKEND-PARITY.5.3.0` | `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission` | Exact schema/fence/trace/census/history audit, durable conflict record, and decision/descriptor/trace/admission split. |

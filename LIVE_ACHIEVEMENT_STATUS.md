@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.3.0 — split Lua descriptor trace admission**
+  (DONE — planning is durable; decision `.5.3.0.1` awaits the director before behavior code).
+
+  **Result:** Exact contract/fence/API/precedent/census/history inspection finds governed fixed-v1 and variadic-v2
+  outward shapes but no neutral final-codeblock outward record for `parameter_kinds`. It also proves the original
+  `.5.3` immediate-census sentence predates the newer completion-time Lua admission policy. Runtime alone accepts
+  a caller emitter; every earlier native phase is inventoried for `.5.3.2`. Decision `.5.3.0.1`, descriptor
+  `.5.3.1`, trace `.5.3.2`, and closeout/admission `.5.3.3` are dependency-ordered. No behavior, status,
+  descriptor, capability, test expectation, or mutation policy changed. PUC Lua and LuaJIT remain 153/153;
+  signature/codeblock checks remain 3/9/7 and 7/11/9/7/4/8; capability remains 64/0/0; canonical local CI passes
+  CLI 61x2 plus Phase 0 `1..1031` in 605 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.2.4 — close Lua native loading no drift**
   (DONE — native loading parent `.5.2` is closed; outward descriptor/full-pipeline trace `.5.3` is active).
 

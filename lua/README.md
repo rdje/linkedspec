@@ -62,8 +62,10 @@ module-relative path, validates and compiles it once, executes it over caller so
 through the existing Unicode projector and body dispatcher. Both ABIs pass 151/151; public status is
 `native-spec-defined-functions-v1`. Loaded-source composition now carries that path through explicit validation,
 compilation, and source-identified engine construction. Both ABIs pass 153/153 with public status
-`native-spec-pipeline-v1`. No-drift closes native-loading parent `.5.2`; outward descriptors/full-pipeline trace
-`.5.3` is active, while generated source remains a later owner.
+`native-spec-pipeline-v1`. No-drift closes native-loading parent `.5.2`. Planning `.5.3.0` separates exact outward
+descriptors, one-emitter full-pipeline trace, and final admission. Decision `.5.3.0.1` first settles the missing
+neutral outward final-codeblock record shape and Lua capability-census timing; current descriptor fences, runtime
+behavior, public status, and the four-backend 64/0/0 census remain unchanged. Generated source stays later-owned.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")

@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.3.0` — a backend may implement a contract only after the neutral record exists):
+  The Lua descriptor code is straightforward for fixed-v1 and variadic-v2 because their outward record keys are
+  exact. Final-codeblock definitions are different: `parameter_kinds` is preserved through every native state and
+  ADR `0032` requires descriptor preservation, but no neutral outward record version says where that metadata
+  belongs. A Lua-only extra field would be divergence disguised as progress, so retain the explicit fence until
+  the shared policy is settled. The same audit found temporal policy drift: the initial `.5.3` immediate-census
+  sentence predates `4a2adda9`, which made the census an admitted-full-backend surface and kept Lua outside until
+  completion. Runtime trace mechanics are not blocked—the existing caller emitter is reusable—but all earlier
+  parse/validate/compile/function/staged/loading APIs need explicit optional propagation. Split decision,
+  descriptor, trace, and admission into `.5.3.0.1-.3`; change no behavior while the two policy choices await the
+  director. Both Lua ABIs remain 153/153 and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605
+  seconds. Mutation campaigns remain manual-only and no mutation command ran.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.2.4` — close composition by inventory, not another adapter): Treat native
   loading as the complete dependency chain from request policy through exact text, spec-owned function parsing,
   validation/compile, and source-identified engine construction. The closeout should prove exports, typed state,
