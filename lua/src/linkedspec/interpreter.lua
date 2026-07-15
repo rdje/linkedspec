@@ -161,6 +161,22 @@ local function default_top(engine)
   return engine.compiled_spec.compiled_rule_order[1]
 end
 
+local function public_parser_start_byte(input)
+  local cursor_byte = 0
+  while cursor_byte < #input do
+    local remaining = input:sub(cursor_byte + 1)
+    local after_line = remaining:match("^[ \t]*\n()") or remaining:match("^[ \t]*#[^\n]*\n()")
+    if after_line ~= nil then
+      cursor_byte = cursor_byte + after_line - 1
+    elseif remaining:match("^[ \t]*#[^\n]*$") then
+      return #input
+    else
+      break
+    end
+  end
+  return cursor_byte
+end
+
 local function context(engine, input, top_rule, compiled_rules, diagnostic_sink, trace_emitter)
   local valid, position = json.validate_utf8(input)
   if not valid then
@@ -3742,6 +3758,8 @@ function M.runtime_parse(engine, input, options)
     options.diagnostic_sink,
     options.trace
   )
+  -- Mirror Perl's public parser wrapper; direct rule handlers bypass this boundary.
+  set_live_cursor(ctx, public_parser_start_byte(input))
   local trace_scope
   if options.trace ~= nil then
     trace_scope = trace.enter_trace_scope(

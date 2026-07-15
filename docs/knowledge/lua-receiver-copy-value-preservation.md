@@ -36,8 +36,9 @@ receiver-copy result does not alter the earlier source snapshot. The focused sca
 also increments its evaluation counter once before `.copy().add(1)`, preventing a future
 implementation from re-evaluating the receiver while fixing the value path.
 
-The advanced window now passes 57/59 on both Lua ABIs. PPlugin flat-array hash splicing and
-history leading-trivia initialization remain independent under `.6.2.3-.4`.
+At this leaf boundary, the advanced window passed 57/59 on both Lua ABIs. The independent
+PPlugin flat-array hash-splicing and history leading-trivia repairs subsequently closed
+`.6.2.3-.4` and brought the window to 59/59.
 
 Related facts: [[terse-hash-receiver-value-chains]],
 [[lua-advanced-corpus-residual-split]], [[lua-runtime-array-construction]].

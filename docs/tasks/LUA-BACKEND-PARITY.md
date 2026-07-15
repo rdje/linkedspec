@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.2.3` splices explicit `flat_array(...)` values through hash construction, raises
-  exact offsets 40-98 to 58/59 on both Lua ABIs at 164/164, and activates leading-trivia initialization `.6.2.4`)
+- Last updated: `2026-07-15` (`.6.2.4` mirrors public leading-trivia initialization, raises exact offsets 40-98
+  to 59/59 on both Lua ABIs at 165/165, and activates successor remeasurement `.6.2.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2612,18 +2612,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.2.3 - splice Lua flat arrays into hashes`
 
 - ID: `LUA-BACKEND-PARITY.6.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Mirror the Perl public parser's leading blank/comment-line cursor initialization.
   Dependencies: `.6.2.3`
   Acceptance: Public in-memory `runtime_parse(...)` initializes the top-rule cursor after leading blank and comment
     lines exactly as the Perl wrapper does, while ordinary indexed-variable reads and nonleading content remain
     unchanged. Focused entry-boundary tests and the unchanged `ds_vhistory_version_entry` oracle pass on both Lua
     ABIs without weakening expected output.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Public `runtime_parse(...)` now computes the byte boundary after complete
+    leading blank lines or leading `#` comment lines, including a comment ending at EOF, then updates both the
+    live cursor and match registers before top-rule entry. Ordinary leading spaces/content are not trimmed.
+    Focused Unicode proof locks initial and final absolute byte/character offsets, remaining input, terminal-comment
+    EOF behavior, the history-shaped null-object mechanism, and an unchanged scalar-held `payload[1]` read. PUC
+    Lua and LuaJIT pass 165/165. The unchanged `ds_vhistory_version_entry` fixture returns exact wrapped expected
+    output with null object at endpoint 62 on both ABIs; exact offsets 40-98 rise identically from 58/59 to 59/59
+    with no successor residual. Corpus/oracle data, public status/CLI, coverage, and capability census are
+    unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true
+    reach `1..1031` in 644 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.2.4 - mirror Lua public leading trivia`
 
 - ID: `LUA-BACKEND-PARITY.6.2.5`
-  Status: `pending`
+  Status: `active`
   Goal: Remeasure offsets 40-98 and dependency-split every successor residual before further behavior work.
   Dependencies: `.6.2.4`
   Acceptance: Execute the exact 59-case window on both Lua ABIs after the four measured repairs; classify every
@@ -2791,7 +2800,9 @@ three remaining compare residuals retain their existing owners. Receiver-copy `.
 evaluated fluent value through zero-argument `.copy()`, closes the hash-receiver fixture, and raises both ABIs to
 57/59 at 164/164. Flat-array hash splicing `.6.2.3` now consumes explicit direct/receiver `flat_array(...)` values
 as ordered constructor pairs, closes unchanged `pplugin_empty`, and raises both ABIs to 58/59. Public leading-
-trivia initialization `.6.2.4` is active.
+trivia initialization `.6.2.4` now updates cursor/register state past only complete leading blank or `#` comment
+lines, preserves ordinary indexed reads, closes unchanged history, and raises both ABIs to 59/59 at 165/165.
+Successor remeasurement `.6.2.5` is active before permanent admission.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2918,7 +2929,8 @@ trivia initialization `.6.2.4` is active.
 | 121 | `LUA-BACKEND-PARITY.6.2.1` | `done` | Cached child calls/passive terminals close six fixtures and raise both ABIs to 56/59 at 163/163. |
 | 122 | `LUA-BACKEND-PARITY.6.2.2` | `done` | Receiver `.copy()` preserves one evaluated typed value and raises both ABIs to 57/59 at 164/164. |
 | 123 | `LUA-BACKEND-PARITY.6.2.3` | `done` | Explicit flat-array hash pairs close `pplugin_empty` and raise both ABIs to 58/59 at 164/164. |
-| 124 | `LUA-BACKEND-PARITY.6.2.4` | `active` | Mirror public leading blank/comment-line cursor initialization. |
+| 124 | `LUA-BACKEND-PARITY.6.2.4` | `done` | Public leading trivia closes history and raises both ABIs to 59/59 at 165/165. |
+| 125 | `LUA-BACKEND-PARITY.6.2.5` | `active` | Remeasure 59/59 and prove a zero-residual handoff to permanent admission. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3199,6 +3211,26 @@ trivia initialization `.6.2.4` is active.
   plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook hash semantics/status/handoff,
   Knowledge Map, changes/notes, and bounded memory record exact 58/59 and activate only leading trivia `.6.2.4`.
+
+### `LUA-BACKEND-PARITY.6.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact history output retained `/proj/foo` instead of null on both Lua ABIs because
+  public `runtime_parse(...)` entered the top rule at input byte zero.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The canonical public Perl wrapper skips complete leading blank/comment lines
+  before top-rule invocation, while direct descriptor handlers do not. Lua created valid cursor/register state at
+  byte zero and never applied that public entry boundary; ordinary scalar-held indexed reads were already correct.
+- [x] **FIX** — Compute the public start byte after input validation, then use the existing `set_live_cursor(...)`
+  seam to update cursor and match registers exactly once before the runtime trace/top-rule scope. Skip only blank
+  lines and spaces/tabs followed by `#` comment lines ending at newline or EOF.
+- [x] **ADDRESSED (verified)** — Focused proof locks Unicode byte/character offsets, remaining input, comment EOF,
+  ordinary leading content, the history-shaped null-object output, and unchanged `payload[1]`. The unchanged exact
+  history fixture passes at endpoint 62 and offsets 40-98 are 59/59 on both ABIs.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 165/165 with no successor corpus residual. Corpus/oracle data,
+  public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Canonical local CI exits 0 with
+  CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in 644 seconds. Mutation testing
+  was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook public API/status/handoff, Knowledge
+  Map, changes/notes, and bounded memory record exact 59/59 and activate only remeasurement `.6.2.5`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4759,3 +4791,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.2.1` | `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls` | Cached current-edge calls, passive-terminal no-research, trace-backed self/non-self/unrelated proof, exact six-fixture closure, and dual-ABI 56/59. |
 | `LUA-BACKEND-PARITY.6.2.2` | `LUA-BACKEND-PARITY.6.2.2 - preserve Lua receiver copy values` | One-time evaluated receiver deep copy, typed continuation/isolation proof, exact hash-receiver fixture, and dual-ABI 57/59. |
 | `LUA-BACKEND-PARITY.6.2.3` | `LUA-BACKEND-PARITY.6.2.3 - splice Lua flat arrays into hashes` | Direct/receiver/empty/positioned copied token splicing, exact `pplugin_empty`, and dual-ABI 58/59. |
+| `LUA-BACKEND-PARITY.6.2.4` | `LUA-BACKEND-PARITY.6.2.4 - mirror Lua public leading trivia` | Unicode cursor/register initialization, comment EOF/content/indexed-read boundaries, exact history, and dual-ABI 59/59. |

@@ -40,8 +40,9 @@ constructor rule.
 
 The earlier `pplugin_empty` mismatch was this constructor boundary, not plugin execution:
 `hash(flat_array(defs))` treated the empty Lua array as one table-address key plus an
-implicit null. It now returns the unchanged checked output `[{}]`. The advanced window is
-58/59 on both Lua ABIs; only public leading-trivia initialization remains under `.6.2.4`.
+implicit null. It now returns the unchanged checked output `[{}]`. At this leaf boundary,
+the advanced window was 58/59 on both Lua ABIs; `.6.2.4` subsequently closed public
+leading-trivia initialization and brought it to 59/59.
 
 Related facts: [[lua-runtime-array-construction]], [[lua-runtime-harray-construction]],
 [[lua-advanced-corpus-residual-split]], [[pplugin-pluginbridge-transition-machinery]].

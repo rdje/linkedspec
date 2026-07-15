@@ -153,7 +153,10 @@ This `README.md` is the **single entry point** to the project.
   hash-receiver fixture. Both suites pass 164/164 and the window reaches 57/59. Flat-array hash splicing `.6.2.3`
   now treats direct and receiver `flat_array(...)` results as ordered hash-constructor key/value tokens, closing
   unchanged `pplugin_empty` at `[{}]`. The window reaches 58/59; public leading-trivia initialization `.6.2.4` is
-  active. Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0.
+  now complete: only complete leading blank/`#` comment lines move the public start cursor, indexed reads stay
+  ordinary, and unchanged history closes the window at 59/59. Successor remeasurement `.6.2.5` is active before
+  permanent admission `.6.2.6`. Public status/CLI/corpus data remain unchanged and capability stays four-backend
+  64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

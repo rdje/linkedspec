@@ -4007,6 +4007,65 @@ test("runtime interpreter repeats default rules and preserves direct result shap
   assert_equal(consume.cursor_code_unit, 0, "consume cursor")
 end)
 
+test("runtime public parse initializes after complete leading blank and comment lines", function()
+  local boundary_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ I { initial = cursor_pos(); initial_rest = cursor_rest() }
+ /x/
+ E { return(array(initial, initial_rest)) }
+]])))
+
+  local leading = linkedspec.runtime_parse(boundary_engine, "\n \t# é\nx")
+  assert_equal(leading.value[1], 7, "leading trivia character start")
+  assert_equal(leading.value[2], "x", "leading trivia remaining input")
+  assert_equal(leading.cursor_code_unit, 9, "leading trivia byte endpoint")
+  assert_equal(leading.cursor_char_offset, 8, "leading trivia character endpoint")
+
+  local terminal_comment = linkedspec.runtime_parse(boundary_engine, " \t# é")
+  assert_equal(terminal_comment.value[1], 5, "terminal comment character start")
+  assert_equal(terminal_comment.value[2], "", "terminal comment reaches input end")
+  assert_equal(terminal_comment.cursor_code_unit, 6, "terminal comment byte endpoint")
+  assert_equal(terminal_comment.cursor_char_offset, 5, "terminal comment character endpoint")
+
+  local ordinary = linkedspec.runtime_parse(boundary_engine, "  x")
+  assert_equal(ordinary.value[1], 0, "ordinary leading spaces stay content")
+  assert_equal(ordinary.value[2], "  x", "ordinary nontrivia input is unchanged")
+
+  local history_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ I { cur = undef; items = [] }
+ -> object { cur = call(object) }
+ -> version { push(items, call(version)) }
+ LX { return(array(cur[1], copy(items))) }
+
+object: /(?i)\nobject:\s+(\S+)/ I { return(array("?object:", flat_array(entry_groups()))) }
+version: /(?i)\nversion:\s+(\S+)/ I { return(array("?version:", flat_array(entry_groups()))) }
+]])))
+  local history = linkedspec.runtime_parse(
+    history_engine,
+    "\n \t# generated report\nobject: /proj/foo\nversion: 1\n"
+  )
+  assert_equal(
+    json.encode(history.value),
+    json.encode(json.array({
+      json.null,
+      json.array({ json.array({ "?version:", "1" }) }),
+    })),
+    "leading trivia history boundary"
+  )
+
+  local indexed_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ LE { payload = ["tag", "name"]; return(payload[1]) }
+]])))
+  assert_equal(
+    linkedspec.runtime_parse(indexed_engine, "x").value,
+    "name",
+    "ordinary scalar-held indexed read"
+  )
+end)
+
 test("runtime action edges dispatch children and publish retv", function()
   local source = [[
 Top::

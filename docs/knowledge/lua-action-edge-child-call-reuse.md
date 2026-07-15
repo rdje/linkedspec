@@ -42,9 +42,9 @@ The focused proof covers four non-interchangeable cases:
   state;
 - an unrelated named call executes normally before the current edge's fallback child.
 
-The exact advanced window now passes 56/59 on both Lua ABIs. The remaining receiver
-copy, flat-array hash splice, and leading-trivia mismatches are independent and retain
-their `.6.2.2-.4` owners.
+At this leaf boundary, the exact advanced window passed 56/59 on both Lua ABIs.
+The independent receiver-copy, flat-array hash-splice, and leading-trivia repairs
+subsequently closed their `.6.2.2-.4` owners and brought the window to 59/59.
 
 Related facts: [[rust-action-edge-child-return-dispatch]],
 [[julia-action-edge-child-push]], [[lua-advanced-corpus-residual-split]].

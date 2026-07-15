@@ -10,10 +10,12 @@ answers:
   - "which leaf closed the ds_vhistory leading-newline oracle boundary"
   - "how did Julia fix ds_vhistory_version_entry"
   - "does Julia skip leading blank and comment lines"
+  - "how did Lua fix ds_vhistory_version_entry"
+  - "does Lua skip leading blank and comment lines"
 date: 2026-07-10
 status: current
-tags: [dart, julia, perl, rust, oracle, ds_vhistory, leading-trivia, parser-smoke, backend-parity]
-evidence: "DART-BACKEND-PARITY.6.2.4.4.5 probed the `ds_vhistory_version_entry` residual before changing Dart. Public `LinkedSpec::get_parser(\"ds_vhistory\")` returns the checked null object name for the leading-newline fixture, and Rust `oracle_corpus_matches_perl_reference` passes that fixture. Directly invoking the generated `vhistory` descriptor handler on the same source prints and returns `/proj/foo`. `call_spec_handler_subst` lowers `cur_object[1]` to `$cur_object->[1]`, and a minimal public parser with `payload = [\"tag\", \"name\"]; return(payload[1])` returns `\"name\"`, so scalar-held indexed reads are valid in ordinary public-parser execution. DART-BACKEND-PARITY.6.2.4.4.6 root-caused the boundary to `perl/LinkedSpec/Runtime.pm`: the public wrapper resets `pos` and skips leading blank/comment lines before invoking the top handler, while direct descriptor handlers bypass it. Dart then mirrored the skip. JULIA-BACKEND-PARITY.6.2.4.5.3 initializes Julia's public in-memory runtime cursor through the same boundary; a focused leading-trivia minimal and ordinary `payload[1]` lock both sides, and ds_vhistory passes. JULIA-BACKEND-PARITY.6.2.4.6 permanently locks the complete Julia shipped window at 31/31; full tests pass with 816 assertions and status runtime-corpus-shipped."
+tags: [dart, julia, lua, perl, rust, oracle, ds_vhistory, leading-trivia, parser-smoke, backend-parity]
+evidence: "DART-BACKEND-PARITY.6.2.4.4.5 probed the `ds_vhistory_version_entry` residual before changing Dart. Public `LinkedSpec::get_parser(\"ds_vhistory\")` returns the checked null object name for the leading-newline fixture, and Rust `oracle_corpus_matches_perl_reference` passes that fixture. Directly invoking the generated `vhistory` descriptor handler on the same source prints and returns `/proj/foo`. `call_spec_handler_subst` lowers `cur_object[1]` to `$cur_object->[1]`, and a minimal public parser with `payload = [\"tag\", \"name\"]; return(payload[1])` returns `\"name\"`, so scalar-held indexed reads are valid in ordinary public-parser execution. DART-BACKEND-PARITY.6.2.4.4.6 root-caused the boundary to `perl/LinkedSpec/Runtime.pm`: the public wrapper resets `pos` and skips leading blank/comment lines before invoking the top handler, while direct descriptor handlers bypass it. Dart then mirrored the skip. JULIA-BACKEND-PARITY.6.2.4.5.3 initializes Julia's public in-memory runtime cursor through the same boundary; a focused leading-trivia minimal and ordinary `payload[1]` lock both sides, and ds_vhistory passes. JULIA-BACKEND-PARITY.6.2.4.6 permanently locks the complete Julia shipped window at 31/31; full tests pass with 816 assertions and status runtime-corpus-shipped. LUA-BACKEND-PARITY.6.2.4 applies the same public boundary through Lua's cursor/register seam; Unicode offsets, comment EOF, ordinary content, and `payload[1]` are focused-locked at 165/165, `ds_vhistory_version_entry` passes at endpoint 62, and exact offsets 40-98 reach 59/59 on both Lua ABIs."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry && cd .. && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry"
 ---
 
@@ -38,6 +40,13 @@ in-memory `runtime_parse(...)` entrypoint. Julia uses its existing cursor/regist
 seam, so only the public start offset changes; direct indexing remains ordinary
 runtime behavior. History and the complete 31-case shipped window now pass.
 
+`LUA-BACKEND-PARITY.6.2.4` applies the boundary after UTF-8 validation through
+Lua's existing live cursor/register mutator. It skips only complete leading blank
+lines and leading spaces/tabs plus `#` comment lines ending at newline or EOF;
+ordinary leading content remains untouched, and byte and character offsets remain
+absolute. Indexed reads stay valid. The history fixture passes at endpoint 62 and
+the exact advanced window reaches 59/59 on both Lua ABIs.
+
 Related facts: [[dart-residual-parser-smoke-split]],
 [[dart-legacy-structural-accumulator-parity]], [[dart-structural-pcre-parser-smoke-parity]],
-[[rust-perl-output-oracle]].
+[[rust-perl-output-oracle]], [[lua-advanced-corpus-residual-split]].

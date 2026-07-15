@@ -53,6 +53,12 @@ local engine = complete:create_engine({ parse_mode = "seek", trace = emitter })
 local result = linkedspec.runtime_parse(engine, "input", { trace = emitter })
 ```
 
+`runtime_parse(...)` mirrors the reference public-parser entry boundary before it invokes the top rule. It skips
+only complete leading lines that are blank (spaces/tabs followed by `\n`) or comments (spaces/tabs, `#`, then
+text through `\n` or end of input). It does not trim ordinary leading spaces, nonleading comments, or other
+content. Result byte/code-unit and character cursors remain absolute offsets in the original input, including
+when a skipped comment contains Unicode text.
+
 Use `linkedspec.path_spec_request(path)` when the caller has already selected one exact file. A relative path is
 resolved only against `options.cwd`; it does not gain `.spec` and does not fall back to search roots.
 

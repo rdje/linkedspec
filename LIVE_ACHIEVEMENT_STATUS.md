@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.4 — mirror Lua public leading trivia**
+  (DONE — unchanged history closes at dual-ABI 59/59; `.6.2.5` is next).
+
+  **Result:** Public `runtime_parse(...)` now initializes through Lua's existing live cursor/register seam after
+  complete leading blank lines or spaces/tabs plus `#` comment lines ending at newline or EOF. It leaves ordinary
+  leading content and direct rule execution unchanged and retains absolute byte/character offsets. Focused Unicode,
+  terminal-EOF, ordinary-content, history-shape, and scalar-held indexed-read proof passes 165/165 on PUC Lua and
+  LuaJIT. The unchanged `ds_vhistory_version_entry` passes at endpoint 62 and exact offsets 40-98 reach 59/59 on
+  both ABIs with no residual. Corpus/oracle data, status/CLI, coverage, and capability remain unchanged. Mutation
+  testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0
+  true reach `1..1031` in 644 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.3 — splice Lua flat arrays into hashes**
   (DONE — unchanged `pplugin_empty` closes at dual-ABI 58/59; `.6.2.4` is next).
 

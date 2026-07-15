@@ -375,8 +375,10 @@ evaluated fluent value through zero-argument `.copy()`, retains its runtime kind
 hash-receiver fixture. Both suites pass 164/164 and the window reaches 57/59; flat-array hash splicing `.6.2.3` is
 now complete. Direct and receiver `flat_array(...)` results splice ordered alternating tokens into `hash(...)` and
 `harray(...)`, empty input yields an empty harray, and ordinary arrays remain one copied value. The unchanged
-`pplugin_empty` returns `[{}]`; both ABIs reach 58/59 and public leading-trivia `.6.2.4` is active. The census stays
-64/0/0 until `.8.4`.
+`pplugin_empty` returns `[{}]`; both ABIs reach 58/59. Public leading-trivia `.6.2.4` then moves cursor/register
+state past only complete leading blank or `#` comment lines, preserves ordinary indexed reads, and closes unchanged
+history. Both ABIs pass 165/165 and the window reaches 59/59; successor remeasurement `.6.2.5` is active. The
+census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler

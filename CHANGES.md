@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.4 — mirror Lua public leading trivia
+
+Initialized Lua's public in-memory parser at the same leading-trivia boundary as Perl. After UTF-8 validation,
+`runtime_parse(...)` now skips only complete leading blank lines and leading spaces/tabs plus `#` comment lines
+ending at newline or EOF, then updates the live byte cursor and match registers together. Ordinary leading
+spaces/content and nonleading comments remain input, direct rule handlers retain their existing boundary, and
+reported byte/character positions remain absolute.
+
+Added focused proof for Unicode comment text, multiple complete leading lines, terminal comment EOF, ordinary
+leading content, unchanged scalar-held `payload[1]`, and the history-shaped public parse. PUC Lua and LuaJIT pass
+165/165. The unchanged `ds_vhistory_version_entry` fixture now passes at byte/character endpoint 62 on both ABIs,
+raising exact offsets 40-98 from 58/59 to 59/59 with no successor residual.
+
+Corpus/oracle data, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Mutation
+testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0
+true reach `1..1031` in 644 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.3 — splice Lua flat arrays into hashes
 
 Added canonical `flat_array` to Lua's explicit hash-constructor splice classification. Direct calls and fluent

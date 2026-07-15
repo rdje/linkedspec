@@ -88,7 +88,9 @@ now complete: zero-argument `.copy()` deep-copies the already evaluated receiver
 harray, array, string, and scalar continuations. Both suites pass 164/164 and the exact window reaches 57/59;
 flat-array hash splicing `.6.2.3` now consumes direct and receiver `flat_array(...)` results as ordered hash pairs.
 The unchanged `pplugin_empty` returns `[{}]` on both ABIs and the window reaches 58/59; public leading-trivia
-initialization `.6.2.4` is active.
+initialization `.6.2.4` now advances cursor/register state past only complete leading blank or `#` comment lines.
+Unicode byte/character offsets and ordinary indexed reads remain exact, unchanged `ds_vhistory_version_entry`
+passes, and the window reaches 59/59. Successor remeasurement `.6.2.5` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -317,8 +319,10 @@ unrelated calls direct. Receiver copy `.6.2.2` then preserves the one evaluated 
 hash-receiver fixture, raises both suites to 164/164, and moves the window to 57/59. Flat-array hash splicing is
 now complete: explicit direct/receiver `flat_array(...)` results splice ordered key/value tokens into `hash(...)`
 and `harray(...)`, while ordinary arrays remain one copied value. `pplugin_empty` passes unchanged and the window
-reaches 58/59. Leading-trivia initialization is active; successor measurement and permanent admission follow
-under `.6.2.5-.6`.
+reaches 58/59. `.6.2.4` now mirrors the public Perl boundary by skipping only complete leading blank/`#` comment
+lines before top-rule entry, including a comment ending at EOF; ordinary leading content and scalar-held indexed
+reads are unchanged. History passes and the exact window is 59/59, so `.6.2.5` remeasurement is active before
+`.6.2.6` permanent admission.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

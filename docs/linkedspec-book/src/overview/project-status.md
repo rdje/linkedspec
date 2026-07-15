@@ -115,7 +115,9 @@ Three backbone items tracked major structural modernization — all done:
   preserves typed continuations, and closes the unchanged hash-receiver fixture. Both suites pass 164/164 and the
   window reaches 57/59. Flat-array hash splicing `.6.2.3` now consumes direct/receiver `flat_array(...)` results as
   ordered key/value tokens for `hash(...)` and `harray(...)`, closes unchanged `pplugin_empty`, and raises the
-  window to 58/59. Public leading-trivia initialization `.6.2.4` is active. The capability census remains
+  window to 58/59. Public leading-trivia initialization `.6.2.4` now moves cursor/register state past only complete
+  leading blank or `#` comment lines, preserves indexed reads, closes unchanged history, and raises the window to
+  59/59 on both ABIs at 165/165. Successor remeasurement `.6.2.5` is active. The capability census remains
   four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart

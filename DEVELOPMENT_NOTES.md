@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.4` — public-entry initialization belongs before the top rule, not inside
+  indexed reads): Perl's history result comes from its public parser wrapper skipping complete leading blank and
+  comment lines; direct generated handlers deliberately bypass that seam, and `payload[1]` remains a valid read.
+  Mirror the wrapper once after UTF-8 validation, using the existing live-cursor mutator so byte cursor and match
+  registers change atomically while character positions remain derived from the original input. Recognize only a
+  whole blank line or spaces/tabs plus `#` comment through newline/EOF; do not trim ordinary leading whitespace or
+  content. Unicode offsets, EOF comments, the ordinary-content boundary, indexed reads, and the history shape pass
+  165/165 on both Lua ABIs; unchanged `ds_vhistory_version_entry` ends at 62 and exact offsets 40-98 reach 59/59.
+  Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in both environments and Phase 0
+  `1..1031` in 644 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.3` — list context is authored syntax, not an aggregate-shape guess): Hash
   construction must decide whether an array is a sequence of key/value tokens from the argument expression that
   produced it. Add `flat_array` to the same direct-call/terminal-receiver classifier as `flat` and `flat_hash`,
