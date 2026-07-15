@@ -21,6 +21,7 @@ evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed 
 evidence_update_2026_07_15_runtime_trace_events: "LUA-BACKEND-PARITY.4.4.3 instruments rule scopes, regex decisions, action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and governed mark/capture events at 129/129 on both ABIs; .4.4.4 owns no-drift."
 evidence_update_2026_07_15_runtime_trace_closeout: "LUA-BACKEND-PARITY.4.4.4 closes scoped runtime diagnostics/trace no-drift at 129/129, closes parent .4.4, and activates staged-function/native-loading .5.1; full-pipeline trace remains .5.3."
 evidence_update_2026_07_15_staged_function_split: "LUA-BACKEND-PARITY.5.1.0 splits minimal staged dispatch, fixed-v1 runtime, variadic-v2 metadata/runtime, contextual-codeblock metadata/runtime, and no-drift; .5.1.1 is active."
+evidence_update_2026_07_15_staged_registry: "LUA-BACKEND-PARITY.5.1.1 adds the deterministic actionir-body.spec provider, governed cache/compiled identity, stable queue, immutable body_ast stitching, composed shell dispatch, and typed failure fences at 130/130 on PUC Lua and LuaJIT; status is runtime-staged-registry and .5.1.2 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

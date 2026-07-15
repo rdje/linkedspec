@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.1 — add Lua staged body dispatch
+
+Added Lua's minimal staged parser registry for function bodies. It defensively validates and stable-sorts exact
+`StagedParseJob` values, resolves only `actionir-body.spec` to `builtin:actionir-body.spec`, records the governed
+adapter digest plus neutral cache/compiled-parser identity, and executes exact body text through
+`parse_action_block(...)`.
+
+Function dispatch validates normalized fixed-v1 sidecars and stitching policy, rejects duplicate job ids and
+unsupported identities, and immutably places neutral `action_block` JSON into `body_ast`. Public APIs cover one/
+many-job execution, dispatch-with-results, stitch-only convenience, and composed spec-owned function-shell parsing.
+PUC Lua and LuaJIT pass 130/130; public status becomes `runtime-staged-registry`, coverage stays 246/105+1/122,
+capability stays 64/0/0, and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 622 seconds. Fixed-v1
+registered-function execution `.5.1.2` is active.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.0 — split Lua staged function execution
 
 Split the broad Lua staged-function leaf before code. Existing Lua owns exact-v1 spec-defined projection, staged

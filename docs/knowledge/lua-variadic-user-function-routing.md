@@ -12,6 +12,7 @@ status: current
 tags: [lua, functions, variadic, staged-parsing, descriptor, generated-source, routing, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.4 audits the completed Lua shell/registry/frame/compiled-state seams and pending runtime/generated lanes. LUA-BACKEND-PARITY.5.1 now owns native fixed-v1/variadic-v2 execution, .5.3 descriptor admission, and .8.1-.4 generated preservation/execution/proof/capability retirement."
 evidence_update_2026_07_15_split: "LUA-BACKEND-PARITY.5.1.0 assigns variadic typed shell/staged/registry/compiled state to .5.1.3.1 and native fresh-rest-array execution to .5.1.3.2 after staged dispatch and fixed-v1 runtime."
+evidence_update_2026_07_15_staged_registry: "LUA-BACKEND-PARITY.5.1.1 completes minimal body dispatch at 130/130 and activates fixed-v1 runtime .5.1.2; variadic state/runtime remain dependency-correct .5.1.3.1/.2."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1|LUA-BACKEND-PARITY\\.5\\.3|LUA-BACKEND-PARITY\\.8\\.[1-4]|callable-signature|variadic' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md capability_conformance/manifest.json"
 ---
 
@@ -29,7 +30,7 @@ array binding, not Lua `...` dispatch.
 The remaining projections have explicit later owners: `.5.3` admits exact outward descriptors; `.8.1` preserves
 the union in normalized emitted state; `.8.2` independently executes the neutral fixture; `.8.3` makes the proof
 recurring; and `.8.4` removes the future capability entry only after native and generated paths pass. The current
-Lua execution frontier is minimal staged action-body dispatch `.5.1.1`.
+Lua execution frontier is fixed-v1 registered-call runtime `.5.1.2`; staged action-body dispatch `.5.1.1` is done.
 
 Related facts: [[lua-user-function-registry]], [[lua-function-definition-shell-projection]],
 [[variadic-user-function-contract]], [[variadic-callable-signature-seams]],

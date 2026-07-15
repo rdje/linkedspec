@@ -100,7 +100,8 @@ truthiness, arity, Dart evaluation/empty-`and`, and Perl lowering normalization.
 Planning-only `.4.4.0` now resolves the diagnostics/trace dependency order. `.4.4.1-.4` own structured runtime
 failures, controls/sinks, interpreter events, and runtime no-drift; `.4.4.1-.4` are done, parent `.4.4` is closed,
 and planning `.5.1.0` splits staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime, and
-closeout. Minimal staged dispatch `.5.1.1` is active. One-emitter native loading,
+closeout. Minimal staged dispatch `.5.1.1` passes 130/130 with status `runtime-staged-registry`; fixed-v1 runtime
+`.5.1.2` is active. One-emitter native loading,
 frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
 the owners it must traverse. This split changes no runtime or capability claim.
 
@@ -109,9 +110,9 @@ top/deepest-rule/handler attribution, specific selection/input/lookup/execution 
 child-payload preservation, unchanged text, and unchanged successful parse results pass 126/126 on both ABIs.
 Lua `.4.4.2` now adds typed ordered levels/config/events, documented environment controls, caller-owned
 stdout/route/mirror sinks with reset/append, and result-neutral direct/config-wrapper parse scopes. Both ABIs pass
-128/128. Rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129. Public status is
-`runtime-trace-events`; `.4.4.4` closes parent `.4.4`, `.5.1.0` activates staged dispatch `.5.1.1`, and capability
-remains 64/0/0.
+128/128. Rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129. Minimal staged
+dispatch `.5.1.1` adds the governed provider/queue/cache/stitch path at 130/130. Public status is
+`runtime-staged-registry`; `.5.1.2` is active and capability remains 64/0/0.
 
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |

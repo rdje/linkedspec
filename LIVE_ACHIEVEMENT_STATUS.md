@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.1 — add Lua staged body dispatch**
+  (DONE — deterministic provider/queue/stitching is green; fixed-v1 runtime `.5.1.2` is next).
+
+  **Result:** New `linkedspec.staged_parser_registry` resolves the sole governed `actionir-body.spec` provider,
+  records its fixed digest/cache/compiled identity, stable-sorts validated jobs, parses exact ActionIR body text,
+  and immutably stitches `body_ast`. Composed shell dispatch and typed provider/span/sidecar/duplicate-job failure
+  fences are public. PUC Lua and LuaJIT pass 130/130; coverage remains 246/105+1/122, capability remains 64/0/0,
+  status advances to `runtime-staged-registry`, and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`
+  in 622 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.0 — split Lua staged function execution**
   (DONE — dependency-correct implementation leaves now exist; staged dispatch `.5.1.1` is next).
 

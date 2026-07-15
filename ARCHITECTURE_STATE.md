@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now owns the minimal staged function-body registry in
+  `linkedspec.staged_parser_registry`. Exact `StagedParseJob` values are defensively normalized and stable-sorted by
+  parent path, source span, job id, then input order. The only provider resolves `actionir-body.spec` to
+  `builtin:actionir-body.spec`, records the governed adapter digest and neutral cache/compiled identity, parses
+  exact body text through the native ActionIR parser, and immutably stitches neutral `body_ast` JSON. Function
+  sidecars, unsupported identities, invalid spans, duplicate jobs, and stitching policies are fenced. The composed
+  shell+dispatch API passes 130/130 on PUC Lua and LuaJIT; status is `runtime-staged-registry`, capability remains
+  64/0/0, and fixed-v1 registered-call execution `.5.1.2` is active.
 - `2026-07-15` refresh: Lua staged-function `.5.1` is split before implementation. Existing code owns exact-v1
   function projection, staged sidecars, registry-first contract resolution, isolated pre-execution frames, compiled
   records, generic trailing-block AST, and built-in contextual block execution—but not body-job dispatch or

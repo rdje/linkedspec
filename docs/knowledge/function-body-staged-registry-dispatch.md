@@ -9,17 +9,19 @@ answers:
   - "what cache key fields are used for function body staged dispatch"
   - "does body_ast come from staged dispatch"
   - "does Dart have function-body staged dispatch"
+  - "does Lua have function-body staged dispatch"
   - "what remains future after STAGED-LINKED-PARSING.5.5"
 date: 2026-07-09
 status: current
-tags: [staged-parsing, parser-registry, parse-jobs, user-functions, rust, perl, dart]
-evidence: "STAGED-LINKED-PARSING.5.5 adds Perl/Rust dispatch; DART-BACKEND-PARITY.5.1 adds Dart dispatch; JULIA-BACKEND-PARITY.5.1 adds Julia dispatch. Evidence lives in the four staged registry owners and their focused tests."
-reverify: "rg -n 'StagedParserRegistry|staged_parser_registry|builtin:actionir-body.spec|staged_parser_cache_key|body_ast|dispatchFunctionBodyParseJobs|executeStagedParseJobs|dispatch_function_body_parse_jobs|execute_staged_parse_jobs' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl t/phase0_regression.t rust/linkedspec-runtime/tests/integration_test.rs dart/test/staged_parser_registry_test.dart julia/test/runtests.jl"
+tags: [staged-parsing, parser-registry, parse-jobs, user-functions, rust, perl, dart, julia, lua]
+evidence: "STAGED-LINKED-PARSING.5.5 adds Perl/Rust dispatch; DART-BACKEND-PARITY.5.1 adds Dart dispatch; JULIA-BACKEND-PARITY.5.1 adds Julia dispatch; LUA-BACKEND-PARITY.5.1.1 adds Lua dispatch. Evidence lives in the five staged registry owners and their focused tests."
+reverify: "rg -n 'StagedParserRegistry|staged_parser_registry|builtin:actionir-body.spec|staged_parser_cache_key|body_ast|dispatchFunctionBodyParseJobs|executeStagedParseJobs|dispatch_function_body_parse_jobs|execute_staged_parse_jobs' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl lua/src/linkedspec/staged_parser_registry.lua t/phase0_regression.t rust/linkedspec-runtime/tests/integration_test.rs dart/test/staged_parser_registry_test.dart julia/test/runtests.jl lua/test/run.lua"
 ---
 
 `STAGED-LINKED-PARSING.5.5` adds the first executable staged parser registry path
 on Perl and Rust. `DART-BACKEND-PARITY.5.1` adds the same narrow dispatch
-contract on Dart, and `JULIA-BACKEND-PARITY.5.1` adds it on Julia.
+contract on Dart, `JULIA-BACKEND-PARITY.5.1` adds it on Julia, and
+`LUA-BACKEND-PARITY.5.1.1` adds it on both Lua ABIs.
 
 The path is intentionally narrow. For user-function body jobs, `resolve` maps
 `parser_spec_id = actionir-body.spec` to the neutral built-in provider identity
@@ -41,11 +43,15 @@ compiled function state. Dart exposes it through
 `parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
 Julia exposes the snake-case equivalents from
 `julia/src/parser/StagedParserRegistry.jl` and stores the same neutral JSON
-`action_block` shape in `body_ast`.
+`action_block` shape in `body_ast`. Lua exposes the snake-case equivalents from
+`lua/src/linkedspec/staged_parser_registry.lua`, adds duplicate-job rejection,
+and preserves source `SpecFile` and staged-result isolation during stitching.
 
 This does not implement the full future surface. Public `parse_job(...)` authoring,
 filesystem/import/provider search roots, multiple next-stage parser families, recursive
 staged queues, and cycle diagnostics remain future leaves. Dart user-function runtime
-execution has since landed under `DART-BACKEND-PARITY.5.2`.
+execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime
+execution is the active `LUA-BACKEND-PARITY.5.1.2` frontier.
 
-Related Julia fact: [[julia-staged-function-body-registry]].
+Related backend facts: [[julia-staged-function-body-registry]],
+[[lua-staged-function-body-registry]].

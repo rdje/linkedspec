@@ -13,6 +13,7 @@ date: 2026-07-11
 status: current
 tags: [lua, actionir, functions, staged-parsing, registry, runtime-boundary]
 evidence: "LUA-BACKEND-PARITY.3.3 adds lua/src/linkedspec/user_function_registry.lua and 4 focused tests; .3.4 carries it into compiled state/descriptors; .4.1 adds matching. The full Lua gate passes 60/60 on PUC Lua and LuaJIT; exact 239-name and 105-fixture coverage remains green."
+evidence_update_2026_07_15_staged_dispatch: "LUA-BACKEND-PARITY.5.1.1 adds the separate staged parser registry over these preserved jobs and stitch seam; PUC Lua and LuaJIT pass 130/130 with status runtime-staged-registry."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -47,12 +48,14 @@ tables, and cycles, so there is no implicit caller mutation or host closure
 capture. Active-name recursion is rejected with typed stage, rule, helper,
 handler-source, and cycle identity.
 
-This leaf does not dispatch staged jobs or execute function bodies. Those remain
-owned by later compiler/runtime leaves. `FUTURE-PARITY-BACKLOG.4.4` routes the adopted variadic-v2 signature to
+This `.3.3` leaf did not dispatch staged jobs or execute function bodies. The separate
+`.5.1.1` registry now dispatches and stitches them without changing this registry's ownership;
+fixed-v1 execution remains active `.5.1.2`. `FUTURE-PARITY-BACKLOG.4.4` routes the adopted variadic-v2 signature to
 dependency-complete `LUA-BACKEND-PARITY.5.1`; this completed exact-v1 registry leaf is not retroactively an
 execution claim. Descriptor admission follows in `.5.3`, with generated preservation/execution under `.8`.
 
 Related facts: [[lua-function-definition-shell-projection]],
+[[lua-staged-function-body-registry]],
 [[lua-actionir-contract-resolver]], [[julia-user-function-registry]],
 [[dart-function-registry]], [[function-body-parse-job-sidecar]],
 [[text-to-ast-backend-doctrine]].

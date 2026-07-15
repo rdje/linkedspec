@@ -317,7 +317,7 @@ half-open source span, source-slice provenance, source-order parent path, functi
 params, arity, `node_kind = function_definition`, and `payload_kind = function_body`.
 `body_parse_job` is the parse-intent sidecar for that payload: deterministic job id,
 parent AST path, parser spec identity, top rule, result/failure policies, exact text,
-source span, and diagnostic ownership. The Perl reference and Rust runtime both consume
+source span, and diagnostic ownership. The Perl reference plus Rust, Dart, Julia, and Lua runtimes consume
 that spec-returned AST today and normalize the source-order path/job id once the function
 ordinal is known. They dispatch that job through the minimal staged parser registry:
 `resolve` maps `actionir-body.spec` to a built-in provider identity, `load` records the
@@ -329,6 +329,14 @@ handles nested brace islands, quoted strings, comments, and regex literals are p
 before brace dispatch, and the outer close is matched by `function_definition[1]`.
 Backends must converge on this same spec-defined AST contract instead of maintaining
 host-language definition grammars as the staged dispatch queue becomes portable.
+
+Lua's `.5.1.1` implementation lives in `lua/src/linkedspec/staged_parser_registry.lua`.
+It defensively copies exact typed jobs, decorates equal sort keys with input order to make
+Lua sorting stable, exposes the governed digest/cache/compiled/result records, rejects
+unsupported providers and sidecar/duplicate-job drift, and rebuilds immutable function/spec
+records during stitching. `parse_spec_with_staged_user_function_definition_asts(...)`
+composes the function shell and dispatch directly. PUC Lua and LuaJIT pass 130/130 with
+status `runtime-staged-registry`; fixed-v1 runtime execution remains the next leaf.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -760,10 +768,10 @@ engine source identity, top-selection/input/lookup/execution stages, deepest chi
 deterministic JSON, unchanged text, and successful-result identity pass 126/126 on both ABIs. `.4.4.2` now adds
 typed ordered levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks,
 reset/append, and result-neutral direct/config-wrapper parse scopes at 128/128. `.4.4.3` adds exact runtime
-rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events at 129/129. Public status is
-`runtime-trace-events`; no-drift `.4.4.4` closes parent `.4.4`. Planning `.5.1.0` separates staged dispatch,
-fixed/variadic runtime, contextual-codeblock metadata/runtime, and closeout; minimal staged dispatch `.5.1.1` is
-active, and capability remains 64/0/0.
+rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events at 129/129. No-drift `.4.4.4` closes
+parent `.4.4`. Planning `.5.1.0` separates staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/
+runtime, and closeout. Minimal staged dispatch `.5.1.1` now passes 130/130 with public status
+`runtime-staged-registry`; fixed-v1 runtime `.5.1.2` is active and capability remains 64/0/0.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

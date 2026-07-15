@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.1` — keep the first staged provider narrow and observable): Reuse the
+  accepted resolve/load/compile/execute record shapes rather than hiding ActionIR parsing behind one convenience
+  call. Normalize each typed job defensively, decorate equal sort keys with input order because Lua's `table.sort`
+  is not stable, and retain the fixed adapter digest/cache fingerprint so all backends describe the same parser
+  identity. Validate function sidecars before execution, reject duplicate job ids before stitching, and rebuild
+  `SpecFile`/`FunctionDefinition` values through existing constructors so result mutation cannot alter the stitched
+  tree. Do not pull registered-call runtime, native loading, descriptors/full trace, or recursive public staged
+  authoring into this provider. Both ABIs pass 130/130 and status becomes `runtime-staged-registry`.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 622 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.0` — split at typed data and execution boundaries): The current Lua shell/
   registry/state foundation is not one missing function-call switch. First dispatch exact body jobs into immutable
   `body_ast`; then execute fixed-v1 calls over that staged body. Variadic-v2 changes the authoritative definition,

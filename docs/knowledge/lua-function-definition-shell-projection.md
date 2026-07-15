@@ -13,6 +13,7 @@ date: 2026-07-11
 status: current
 tags: [lua, parser, functions, staged-parsing, provenance, Unicode]
 evidence: "LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The local gate passes 60/60 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, contracts, registry, descriptor, and matching preservation."
+evidence_update_2026_07_15_staged_dispatch: "LUA-BACKEND-PARITY.5.1.1 composes this projector with deterministic staged body dispatch; PUC Lua and LuaJIT pass 130/130."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -33,14 +34,16 @@ per character while CR/LF and all outside Unicode text remain intact, so subsequ
 The composed API attaches ordered `FunctionDefinition` nodes to ordinary parsed rules and can pass validation.
 
 `definition_nodes_from_user_function_definition_output(output)` normalizes direct, singleton-wrapped, and nested
-array result shapes. `body_parse_job` is preserved, but `body_ast` remains absent because staged registry dispatch
-belongs to `.5.1`.
+array result shapes. The original projection APIs preserve `body_parse_job` with `body_ast` absent. The later
+`parse_spec_with_staged_user_function_definition_asts(...)` API composes that exact projection with `.5.1.1`
+dispatch and returns a new spec carrying neutral `body_ast` JSON.
 
 The completed projector currently validates exact-v1 `params`/`arity`. The adopted variadic-v2 signature is
-explicitly routed to the same dependency-complete `.5.1` implementation that will dispatch and execute function
-bodies, so shell/staged/registry/runtime evolution lands as one contract rather than a premature metadata claim.
+explicitly routed to `.5.1.3.1/.2` after fixed-v1 runtime `.5.1.2`, so shell/staged/registry/runtime evolution
+lands in dependency order rather than as a premature metadata claim.
 
 Related facts: [[spec-defined-user-function-definition-parser]], [[function-body-parse-job-sidecar]],
+[[lua-staged-function-body-registry]],
 [[lua-core-spec-parser]], [[lua-frontend-validation]], [[dart-function-definition-shell-projection]],
 [[julia-user-function-definition-projection]].
 See also [[lua-variadic-user-function-routing]].

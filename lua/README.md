@@ -8,7 +8,9 @@ typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
 compiled rule/dependency/payload state and exact outward descriptors are also
-available in memory. Native PCRE2 matching supplies stable seek/consume,
+available in memory. A minimal staged registry now executes the governed ActionIR
+body jobs and immutably stitches `body_ast`; registered-call execution remains next.
+Native PCRE2 matching supplies stable seek/consume,
 captures, Unicode positions, and entry/local match registers. The first
 compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
 repetition, and direct result channels entirely in memory.
@@ -38,8 +40,9 @@ in their options table, while the `_with_trace` entrypoints construct one from
 config. Disabled or absent tracing stays quiet, and successful result JSON is
 unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
 action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
-governed mark/capture events. Both ABIs pass 129/129 and public status is
-`runtime-trace-events`.
+governed mark/capture events. The later minimal staged registry validates and stable-sorts exact function-body jobs,
+records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
+`body_ast`. Both ABIs pass 130/130 and public status is `runtime-staged-registry`.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -53,6 +56,27 @@ local result = linkedspec.runtime_parse_with_trace(engine, input, config)
 (falling back to `LINKEDSPEC_DUMP_VERBOSITY`), `LINKEDSPEC_TRACE_FILE`,
 `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_RESET_FILE`, and
 `LINKEDSPEC_TRACE_EMOJI`.
+
+The minimal staged function-body API consumes the typed definition nodes returned by
+`specs/user_function_definition.spec`, projects them into the source AST, dispatches each exact
+`body_parse_job`, and returns a new spec whose functions carry neutral `body_ast` JSON:
+
+```lua
+local spec = linkedspec.parse_spec_with_staged_user_function_definition_asts(
+  source,
+  definition_nodes
+)
+assert(spec.functions[1].body_ast.kind == "action_block")
+
+local dispatch = linkedspec.dispatch_function_body_parse_jobs(pre_dispatch_spec)
+local first = linkedspec.staged_parser_registry_to_json(dispatch.results[1])
+assert(first.resolved_spec_id == "builtin:actionir-body.spec")
+assert(first.cache_key.content_digest == linkedspec.ACTION_IR_BODY_ADAPTER_DIGEST)
+```
+
+`execute_staged_parse_job(...)` and `execute_staged_parse_jobs(...)` expose the lower-level provider queue;
+`stitch_function_body_parse_jobs(...)` returns only the immutably stitched spec. This boundary intentionally
+supports only `actionir-body.spec` / `action_block`; registered user-function execution is the next runtime layer.
 
 Deterministic scalar/string helpers include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
@@ -156,8 +180,10 @@ and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime fa
 runtime events, and closeout; structured diagnostics `.4.4.1` pass 126/126, trace controls/sinks `.4.4.2`
 pass 128/128, runtime instrumentation `.4.4.3` passes 129/129, and no-drift `.4.4.4` closes the scoped runtime
 parent. Planning `.5.1.0` splits staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime,
-and closeout; minimal staged dispatch `.5.1.1` is active. Full frontend/compiler/function/staged trace remains
-`.5.3` after general staged functions and native loading exist. This is native interpreter parity only; generated Lua
+and closeout. Minimal staged dispatch `.5.1.1` is complete at 130/130: `actionir-body.spec` resolves to the governed
+built-in identity, jobs execute in stable order with neutral cache/compiled records, and `body_ast` is stitched
+without mutating the source spec. Fixed-v1 runtime `.5.1.2` is active. Full frontend/compiler/function/staged trace
+remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -167,7 +193,8 @@ Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as tr
 explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
 proof first raised both ABI suites to 123/123; the complete helper closeout now passes 125/125 and diagnostics/
 trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
-trace controls/sinks `.4.4.2` raise it to 128/128, and runtime instrumentation `.4.4.3` raises it to 129/129.
+trace controls/sinks `.4.4.2` raise it to 128/128, runtime instrumentation `.4.4.3` raises it to 129/129, and the
+minimal staged function-body registry `.5.1.1` raises it to 130/130.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while

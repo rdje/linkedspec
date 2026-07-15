@@ -134,7 +134,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-trace-events", "status parity")
+  assert_equal(first.parity, "runtime-staged-registry", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1597,6 +1597,112 @@ test("user function registry stitches body AST without mutating the source spec"
   assert_registry_error(function()
     linkedspec.stitch_function_body_ast(spec, "missing-job", json.harray({ kind = "action_block" }))
   end, "not found", nil, "missing stitch job")
+end)
+
+test("staged parser registry orders dispatches stitches and diagnoses sidecar drift", function()
+  local later = registry_function("later", {}, 1, nil, 'return("b")')
+  local earlier = registry_function("earlier", {}, 0, nil, 'return("a")')
+  local results = linkedspec.execute_staged_parse_jobs({
+    later.body_parse_job,
+    earlier.body_parse_job,
+  })
+
+  assert_equal(#results, 2, "staged result count")
+  assert_equal(results[1].queue_index, 0, "staged first queue index")
+  assert_equal(results[1].job.job_id, earlier.body_parse_job.job_id, "staged path ordering")
+  assert_equal(results[2].job.job_id, later.body_parse_job.job_id, "staged later ordering")
+  local encoded = linkedspec.staged_parser_registry_to_json(results[1])
+  assert_equal(encoded.kind, "staged_parse_result", "staged result kind")
+  assert_equal(encoded.resolved_spec_id, linkedspec.ACTION_IR_BODY_RESOLVED_SPEC_ID, "resolved spec")
+  assert_equal(encoded.registry_provider, "builtin", "registry provider")
+  assert_equal(encoded.compiled_parser.top_rule, linkedspec.ACTION_IR_BODY_TOP_RULE, "compiled top rule")
+  assert_equal(encoded.cache_key.content_digest, linkedspec.ACTION_IR_BODY_ADAPTER_DIGEST, "adapter digest")
+  assert_equal(
+    encoded.cache_key.fingerprint,
+    table.concat({
+      linkedspec.ACTION_IR_BODY_RESOLVED_SPEC_ID,
+      linkedspec.ACTION_IR_BODY_ADAPTER_DIGEST,
+      "none",
+      linkedspec.ACTION_IR_BODY_TOP_RULE,
+      "spec-language-v1",
+      "actionir-v1",
+      "staged-parsing-v1",
+      "actionir_ast_v1",
+    }, "|"),
+    "staged cache fingerprint"
+  )
+  assert_equal(encoded.result.kind, "action_block", "staged action block")
+  assert_equal(encoded.result.statements[1].expr.name, "return", "staged action call")
+
+  local source_spec = spec_with_functions({ earlier, later })
+  local dispatch = linkedspec.dispatch_function_body_parse_jobs(source_spec)
+  assert_equal(
+    linkedspec.staged_parser_registry.node_type(dispatch),
+    "StagedFunctionBodyDispatchResult",
+    "dispatch type"
+  )
+  assert_equal(source_spec.functions[1].body_ast, nil, "dispatch source remains unchanged")
+  assert_equal(dispatch.spec.functions[1].body_ast.kind, "action_block", "first stitched body")
+  assert_equal(dispatch.spec.functions[2].body_ast.kind, "action_block", "second stitched body")
+  dispatch.results[1].result.kind = "mutated"
+  assert_equal(dispatch.spec.functions[1].body_ast.kind, "action_block", "stitched body is isolated")
+
+  local source = table.concat({
+    'fn zero() {return("zero")}',
+    "Top::",
+    " /x/ -> Done { return(zero()) }",
+    "",
+    "Done:",
+    " /[a-z]+/",
+  }, "\n")
+  local staged_spec = linkedspec.parse_spec_with_staged_user_function_definition_asts(
+    source,
+    json.array({ definition_node(source, "zero", {}, 'return("zero")') })
+  )
+  assert_equal(#staged_spec.functions, 1, "composed staged function count")
+  assert_equal(staged_spec.functions[1].body_ast.kind, "action_block", "composed staged body")
+  assert_equal(staged_spec.rules[1].header.label, "Top", "composed staged rules")
+
+  local unsupported_json = ast.to_json(later.body_parse_job)
+  unsupported_json.parser_spec_id = "missing.spec"
+  local unsupported_job = ast.from_json("StagedParseJob", unsupported_json)
+  local unsupported_ok, unsupported_error = pcall(
+    linkedspec.execute_staged_parse_job,
+    unsupported_job
+  )
+  assert_equal(unsupported_ok, false, "unsupported staged provider rejects")
+  assert_equal(
+    linkedspec.is_staged_parser_registry_error(unsupported_error),
+    true,
+    "unsupported staged provider error type"
+  )
+  assert_contains(unsupported_error.message, "phase=resolve", "unsupported staged phase")
+  assert_contains(unsupported_error.message, "parser_spec_id=missing.spec", "unsupported staged identity")
+
+  local drifted = registry_function("drifted", {}, 0, nil, 'return("x")')
+  drifted.body_parse_job.result_field = "wrong_field"
+  local drift_ok, drift_error = pcall(function()
+    linkedspec.dispatch_function_body_parse_jobs(spec_with_functions({ drifted }))
+  end)
+  assert_equal(drift_ok, false, "staged sidecar drift rejects")
+  assert_equal(linkedspec.is_staged_parser_registry_error(drift_error), true, "staged drift error type")
+  assert_contains(drift_error.message, "result_field must be 'body_ast'", "staged drift field")
+
+  local duplicate_first = registry_function("duplicate_first", {}, 0, nil, 'return("x")')
+  local duplicate_second = registry_function("duplicate_second", {}, 1, nil, 'return("y")')
+  duplicate_second.body_parse_job.job_id = duplicate_first.body_parse_job.job_id
+  local duplicate_ok, duplicate_error = pcall(function()
+    linkedspec.dispatch_function_body_parse_jobs(
+      spec_with_functions({ duplicate_first, duplicate_second })
+    )
+  end)
+  assert_equal(duplicate_ok, false, "duplicate staged job id rejects")
+  assert_equal(
+    linkedspec.is_staged_parser_registry_error(duplicate_error),
+    true,
+    "duplicate staged job error type"
+  )
+  assert_contains(duplicate_error.message, "duplicate staged function-body job_id", "duplicate staged job")
 end)
 
 test("user function invocation frames copy supplied four-kind values into fresh stores", function()

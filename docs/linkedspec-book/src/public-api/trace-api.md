@@ -306,9 +306,10 @@ successful/unusable source boundaries, governed mark/capture helpers, and
 post-mutation capture/named-mark rule slots. Lifecycle blocks are high-level
 marks. Traced and untraced result JSON is identical across success, no-match,
 dispatch, and recursion paths; caller options are not mutated; and both PUC
-Lua and LuaJIT pass 129/129. Public status is `runtime-trace-events`. The scoped
-no-drift proof closes parent `.4.4`. Planning `.5.1.0` splits the staged-function
-work; minimal action-body dispatch `.5.1.1` is the next active leaf.
+Lua and LuaJIT pass 129/129 at this trace boundary. The scoped no-drift proof closes
+parent `.4.4`. Minimal staged action-body dispatch `.5.1.1` subsequently raises both
+ABI suites to 130/130 and public status to `runtime-staged-registry`; that later status
+does not claim full pipeline trace propagation, which remains `.5.3`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

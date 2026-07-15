@@ -78,8 +78,13 @@ parse (`fail`), preserves the original text plus diagnostics (`keep_text`), or e
 structured diagnostic node (`diagnostic_node`). Current shipped parsers do not yet accept
 or execute `parse_job(...)`.
 
-When implemented, parse jobs dispatch through a staged parser registry with neutral
-`resolve`, `load`, `compile`, and `execute` operations. Resolution checks already-known
+The implemented function-body subset dispatches jobs through a staged parser registry with neutral
+`resolve`, `load`, `compile`, and `execute` operations. Perl, Rust, Dart, Julia, and Lua all resolve the narrow
+`actionir-body.spec` identity, record the governed built-in adapter digest/cache key, execute top rule
+`action_block`, and immutably stitch `body_ast`. Lua additionally exposes one/many-job, dispatch-with-results,
+stitch-only, and composed function-shell APIs; both Lua ABIs pass 130/130 with status `runtime-staged-registry`.
+
+The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
 then configured search roots and registry providers in declared order. The scheduler
 collects jobs after the current stage parse, orders them by parent AST path, source span,
@@ -161,8 +166,8 @@ exact text, source span, and diagnostic ownership.
 The function shell uses linked opener/closer rules: nested `body_brace` islands handle
 inner `{ ... }` blocks, while `function_definition[1]` owns the outer close edge.
 Quoted strings, comments, and regex literals are matched as body islands before brace
-dispatch so braces inside them do not end the function. The Perl registry, Rust
-adapter, and Dart staged-dispatch API validate that returned AST, normalize
+dispatch so braces inside them do not end the function. The Perl registry plus Rust, Dart, Julia, and Lua
+staged-dispatch APIs validate that returned AST, normalize
 source-order parent paths and parse-job ids, preserve the sidecar in
 descriptor/compiled function state where that backend has the descriptor layer,
 dispatch the `body_parse_job` through the minimal staged parser registry, and
@@ -170,6 +175,12 @@ stitch the returned body ActionIR AST into `body_ast`. The current registry
 provider is intentionally narrow: `actionir-body.spec` is resolved as a built-in
 neutral identity and executed by the existing ActionIR body-parser adapter until
 a self-hosted body spec exists.
+
+In Lua, the composed entrypoint is
+`parse_spec_with_staged_user_function_definition_asts(source, definition_nodes)`.
+Lower-level callers can inspect deterministic provider/cache/result records through
+`dispatch_function_body_parse_jobs(spec)` and `staged_parser_registry_to_json(result)`;
+`stitch_function_body_parse_jobs(spec)` returns only the new stitched `SpecFile`.
 
 The current end-to-end proof covers both descriptor shape and runtime behavior. A spec
 with several function bodies such as:
