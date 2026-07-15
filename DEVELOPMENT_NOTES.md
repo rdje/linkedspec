@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.0` — probe the negative space, not only the green inventory): Generate one
+  minimal call per exact admitted source name and distinguish runtime-owned calls from an `unsupported runtime
+  helper` result. The 246-name Lua boundary is 230 handled, thirteen intentionally non-function (structural or
+  named-receiver-only), and three genuinely missing (`and`/`or`/`not`). A corpus occurrence and equal inventory
+  cannot prove execution. Keep the Lua repair separate from the toolbox-discovered Perl keyword-precedence defect:
+  `return and(...)` / `return or(...)` returns host undef, so `FUTURE-PARITY-BACKLOG.5.2` must repair the reference
+  and normalize truthiness/arity after current Lua parity. `.1` implements eager Lua logic; `.2` owns the permanent
+  partition, direct `call(rule)` proof, duplicate inventory cleanup, status correction, and parent closure.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.8` — diagnostic output is an event, never parser data): Evaluate every
   valid helper argument once left-to-right before emission, then synchronously deliver typed helper/rule/message
   events through a per-parse caller callback. A missing sink suppresses delivery, not evaluation. Keep messages

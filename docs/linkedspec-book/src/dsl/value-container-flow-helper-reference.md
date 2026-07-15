@@ -1132,6 +1132,12 @@ Boolean helpers make branch conditions portable and analyzable.
 These are eager value helpers: every argument is evaluated before truthiness is composed. They do not short-
 circuit side effects. Use structured or inline `if`/`switch` when an unselected expression must remain unevaluated.
 
+Current implementation status (2026-07-15): Rust, Dart, and Julia execute this eager shape. Lua exhaustive audit
+`.4.3.9.0` found these are its exact three missing admitted value helpers, with `.4.3.9.1` active. Direct Perl
+toolbox probes expose a separate keyword-precedence lowering defect for `return(and(...))` / `return(or(...))`.
+`FUTURE-PARITY-BACKLOG.5.2` owns that reference repair plus the remaining truthiness and arity normalization; use
+the explicit predicates above when authoring a currently portable condition at a disputed truthiness boundary.
+
 Examples:
 
 ```text

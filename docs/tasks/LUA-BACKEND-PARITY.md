@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (caller-owned diagnostic output events pass 122/122 on PUC Lua and LuaJIT;
-  exhaustive helper/value/control/method no-drift `.4.3.9` is the active executable frontier)
+- Last updated: `2026-07-15` (exact 246-name function-form probing found 230 handled names, thirteen intentional
+  statement/receiver-only owners, and three missing eager logical helpers; `.4.3.9.1` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1774,10 +1774,53 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3.9`
   Status: `active`
   Goal: Close exhaustive Lua helper/value/control/method no-drift.
+  Children: `.4.3.9.0`, `.4.3.9.1`, `.4.3.9.2`
   Dependencies: `.4.3.1`-`.4.3.8`
   Acceptance: Every governed current name is execution-covered or has a later explicit non-helper owner; exact
     246-name admission, mdBook examples, both runtime gates, statuses, API docs, task trees, Knowledge Map, and
     capability claims agree with zero hidden partial surface before `.4.4`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.9.0`
+  Status: `done`
+  Goal: Audit and split exhaustive Lua runtime-call closure before behavior code.
+  Dependencies: `.4.3.8`
+  Acceptance: Probe all 246 admitted names through the Lua parser/compiler/interpreter; classify every unsupported
+    result as a real missing value helper or an explicit statement/receiver-only surface; inspect status and focused
+    evidence drift; split repair from final admission; route any cross-backend/reference contradiction durably.
+  Verification: **PASS 2026-07-15.** A disposable PUC Lua PCRE2 adapter and generated minimal action per admitted
+    name produce 230 handled names and 16 `unsupported runtime helper` results. Thirteen are intentional non-function
+    owners: structural `case`/`elif`/`elseif`/`i`/`when`/`while`, receiver-only `walk_leaves`/`map_leaves`/
+    `reduce_leaves`, and named-receiver-only `push_back`/`push_front`/`pop_back`/`pop_front`. The remaining exact
+    gap is eager value helpers `and`/`or`/`not`. The audit also finds stale public status
+    `runtime-numeric-reducers`, a duplicate source `or` inventory row, and no focused direct `call(rule)` execution
+    assertion. Toolbox probes show Perl `return(and(...))` / `return(or(...))` lower through keyword-precedence
+    forms and return null, while Rust/Dart/Julia implement eager boolean composition; normalization is routed to
+    dependency-gated `FUTURE-PARITY-BACKLOG.5.2`. `.1` owns the Lua logical repair and `.2` the recurring exact
+    ownership/status/direct-call admission.
+  Commit: `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout`
+
+- ID: `LUA-BACKEND-PARITY.4.3.9.1`
+  Status: `active`
+  Goal: Execute Lua eager logical value helpers.
+  Dependencies: `.4.3.9.0`
+  Acceptance: `and`, `or`, and `not` eagerly evaluate every authored argument once left-to-right, compose through
+    Lua's already-governed runtime truthiness, return booleans including empty-call false/false/true behavior, work
+    in value/receiver-compatible positions, and pass exact Unicode-neutral side-effect proof on PUC Lua and LuaJIT;
+    no cross-backend truthiness or Perl-lowering normalization is claimed.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.9.2`
+  Status: `pending`
+  Goal: Admit exhaustive Lua runtime helper/value/control/method no-drift.
+  Dependencies: `.4.3.9.1`
+  Acceptance: A recurring exact 246-name probe reports only the thirteen documented non-function owners and zero
+    unowned names; direct `call(rule)` execution is focused; the duplicate inventory row is removed; public backend
+    status names the completed native helper/value/control boundary without implying trace, functions, corpus, CLI,
+    or generated support; dual-ABI, 246/105+1/122, capability, API, book, Knowledge Map, task, and canonical gates
+    agree; parent `.4.3` closes and `.4.4` activates.
   Verification: `pending`
   Commit: `pending`
 
@@ -1949,8 +1992,9 @@ now consumes the unchanged contract through native/serialized routes at 119/119 
 extends that same store and dispatcher across the governed named-span and bridge family at 120/120 on PUC Lua and
 LuaJIT. Placement-sensitive split/mark rule members execute at their owning slots at 121/121. Exact source-derived
 closeout finds 62/62 current calls in contracts, runtime dispatch, and focused execution sources, plus four exact
-marker spellings. Parent `.4.3.7` is closed. Caller-owned diagnostic events now pass 122/122 on both Lua ABIs;
-exhaustive helper/value/control/method no-drift `.4.3.9` is the sole active frontier.
+marker spellings. Parent `.4.3.7` is closed. Caller-owned diagnostic events now pass 122/122 on both Lua ABIs.
+The exact `.4.3.9.0` audit partitions the 246 names into 230 handled, thirteen intentional non-function owners,
+and missing `and`/`or`/`not`; eager logical repair `.4.3.9.1` is the sole active frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2034,7 +2078,28 @@ exhaustive helper/value/control/method no-drift `.4.3.9` is the sole active fron
 | 78 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark slot events execute after their matched actions at 121/121 on both ABIs. |
 | 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `done` | Closed exact 62-call/four-marker native capture/cursor no-drift at 121/121 on both ABIs. |
 | 80 | `LUA-BACKEND-PARITY.4.3.8` | `done` | Typed caller-owned diagnostic events, quiet default, Unicode/order, parse neutrality, and immediate exit pass 122/122. |
-| 81 | `LUA-BACKEND-PARITY.4.3.9` | `active` | Close exhaustive Lua helper/value/control/method no-drift before runtime diagnostics/trace. |
+| 81 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230 handled / 16 unsupported audit isolates thirteen intentional owners and three logical gaps. |
+| 82 | `LUA-BACKEND-PARITY.4.3.9.1` | `active` | Execute eager `and`/`or`/`not` values through governed Lua truthiness. |
+| 83 | `LUA-BACKEND-PARITY.4.3.9.2` | `pending` | Add recurring exact ownership/direct-call proof, correct status, and close helper no-drift. |
+
+### `LUA-BACKEND-PARITY.4.3.9.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — A generated `name()` action for every exact admitted call reports 230 handled names
+  and 16 `unsupported runtime helper` names instead of silently treating the green 246-name occurrence gate as
+  execution parity.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Thirteen unsupported function shapes belong to explicit structural or
+  named-receiver-only syntax. `interpreter.lua` has no branch for the remaining `and`/`or`/`not`; `init.lua` still
+  publishes the much earlier `runtime-numeric-reducers` status. Toolbox lowering proves Perl `and`/`or` also have
+  a separate keyword-precedence defect even though Rust/Dart/Julia and the mdBook specify eager boolean helpers.
+- [x] **FIX** — Split logical behavior `.1` from exact recurring ownership/status admission `.2`, and add
+  dependency-gated `FUTURE-PARITY-BACKLOG.5.2` for the neutral truthiness/arity/reference-lowering contract.
+- [x] **ADDRESSED (verified)** — The source-derived partition is exactly 230 handled + 13 intentional non-function
+  owners + 3 missing logical helpers = 246, with no ambiguous residual name. Direct `call(rule)`, duplicate `or`,
+  and stale status are explicitly owned by `.2`.
+- [x] **NO REGRESSION** — This split changes no parser/compiler/runtime/inventory/status behavior or capability
+  claim; the committed `.4.3.8` Lua 122/122 and canonical 64/0/0 proof remains the executable baseline.
+- [x] **LOCKSTEP** — Task/index/roadmaps, README/Lua README, public book status/handoff, Knowledge Map, architecture/
+  live docs, changes/notes, and memory record the exact partition, active `.1`, closeout `.2`, and future `.5.2`.
 
 ### `LUA-BACKEND-PARITY.4.3.8` Acceptance Checklist
 
@@ -3115,3 +3180,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action split/named-mark events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 admission proof, generated routing, parent closure, and diagnostic-helper handoff. |
 | `LUA-BACKEND-PARITY.4.3.8` | `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events` | Eager typed caller-owned events, quiet default, Unicode/order, parse-result neutrality, exit retention, and 122/122 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.9.0` | `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout` | Exact 230/16/13/3 probe partition, logical repair/admission split, and Perl-lowering future owner. |

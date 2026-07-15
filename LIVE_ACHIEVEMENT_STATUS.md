@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.0 — split Lua exhaustive helper closeout**
+  (DONE — exact 230/16/13/3 partition; eager logical helper `.4.3.9.1` is next).
+
+  **Result:** Generated minimal actions probe all 246 admitted names through Lua parse/compile/runtime. Exactly 230
+  reach an owner; thirteen unsupported function forms are intentional structural/receiver-only surfaces; the
+  genuine missing family is `and`/`or`/`not`. `.1` owns eager Lua logic, while `.2` owns recurring exact admission,
+  direct `call(rule)`, duplicate `or` cleanup, status, and parent closure. Toolbox probes expose a distinct Perl
+  keyword-precedence lowering defect, durably dependency-gated under `FUTURE-PARITY-BACKLOG.5.2`. No behavior or
+  capability changed.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.8 — add Lua diagnostic output events**
   (DONE — typed caller-owned events pass 122/122; exhaustive helper no-drift `.4.3.9` is next).
 

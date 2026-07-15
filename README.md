@@ -85,9 +85,11 @@ This `README.md` is the **single entry point** to the project.
   exhaustive `.4.3.7.6` proves exact 62/62 call agreement across contracts/runtime/focused execution sources plus
   four placement-marker spellings and closes parent `.4.3.7`. Lua `.4.3.8` now evaluates `print`/`say`/
   `print_each` eagerly and delivers ordered Unicode-safe typed events through a per-parse caller-owned sink while
-  staying quiet by default and preserving parse values; both ABIs pass 122/122 and exhaustive helper no-drift
-  `.4.3.9` is active. The audit exposed existing cross-backend diagnostic-output drift, now owned by
-  `FUTURE-PARITY-BACKLOG.5.1` before structured-format execution.
+  staying quiet by default and preserving parse values; both ABIs pass 122/122. Exhaustive audit `.4.3.9.0`
+  probes all 246 names: 230 reach an owner, thirteen are intentional statement/receiver-only surfaces, and the
+  exact missing family is eager `and`/`or`/`not`; repair `.4.3.9.1` is active and final admission `.2` follows.
+  Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
+  five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured

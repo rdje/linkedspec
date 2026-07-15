@@ -10,18 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.7.6` — close native Lua capture/cursor parity.
-- latest_commit: `5c73e59b` — `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events`.
-- active_work_unit: `.4.3.8` adds eager `print`/`say`/`print_each` execution over an optional per-parse typed
-  caller sink, retains quiet/parse-neutral defaults and immediate `exit_now`, and routes discovered cross-backend
-  output drift to dependency-gated `FUTURE-PARITY-BACKLOG.5.1`.
-- next_action: finish lockstep/checks, commit `.4.3.8`, clear the brief, confirm a clean tree, then audit and close
-  exhaustive Lua helper/value/control/method no-drift under active `.4.3.9`.
-- current_proof: PUC Lua and LuaJIT pass 122/122 with eager one-time order, Unicode, typed event JSON, quiet default,
-  parse-result neutrality, sink/arity failures, and immediate exit. Canonical CI passes capability 64/0/0,
-  coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 611 seconds; `.18.1+`, `.19.1+`, structured formats,
-  and diagnostic normalization `.5.1` remain gated on complete current-backend parity.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.3.8` — add Lua diagnostic output events.
+- latest_commit: `9e49ba7a` — `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout`.
+- active_work_unit: `.4.3.9.0` records the exact 246-name Lua runtime audit: 230 handled, thirteen intentional
+  statement/receiver-only owners, and missing eager `and`/`or`/`not`; `.4.3.9.1` is the next behavior leaf.
+- next_action: finish planning lockstep/checks, commit `.4.3.9.0`, clear the brief, confirm a clean tree, then
+  implement eager Lua logical helpers under `.4.3.9.1` before final recurring admission/status `.4.3.9.2`.
+- current_proof: generated PUC Lua probes cover 246/246 names as 230 runtime-owned + 13 intentional non-function +
+  3 missing logical helpers. The prior dual-ABI gate is 122/122 and canonical CI is 64/0/0, 246/105+1/122, CLI
+  61x2, Phase 0 `1..1031`/611s. Diagnostic `.5.1` and logical truthiness/Perl-lowering `.5.2` stay parity-gated.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.4.3.8` runtime/test/docs/KM/task changes pass the dual-ABI gate and await
-  governance/book/full relevant checks plus commit before the clean pivot to `.4.3.9`.
+- blockers: none. in_flight_uncommitted: `.4.3.9.0` task split, future owner, fact cards, and lockstep docs await
+  governance/book checks plus commit before the clean pivot to logical implementation `.4.3.9.1`.

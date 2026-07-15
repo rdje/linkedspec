@@ -106,9 +106,11 @@ cursor/control calls and proves exact agreement across contracts, interpreter di
 sources, plus four placement-marker spellings. Parent `.4.3.7` is closed. `.4.3.8` now evaluates diagnostic
 `print`/`say`/`print_each` arguments once left-to-right and delivers ordered Unicode-safe typed events through an
 optional per-parse caller sink. With no sink it stays quiet; events never alter parse values; `exit_now` remains
-immediate typed control. Both ABIs pass 122/122 and exhaustive helper no-drift `.4.3.9` is next. This is native
-interpreter parity only; generated Lua preservation/execution remains `.8.1-.8.4`. Cross-backend output routing
-and formatting normalization is separately owned by `FUTURE-PARITY-BACKLOG.5.1`.
+immediate typed control. Both ABIs pass 122/122. Exhaustive `.4.3.9.0` probing partitions all 246 names into 230
+handled, thirteen intentional statement/receiver-only surfaces, and missing eager `and`/`or`/`not`; logical repair
+`.4.3.9.1` is next and recurring admission/status `.2` follows. This is native interpreter parity only; generated
+Lua preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
+`FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while

@@ -902,6 +902,13 @@ no-drift `.4.3.9` is active. The implementation audit found existing Perl/Rust/D
 `print_each` formatting drift; dependency-gated `FUTURE-PARITY-BACKLOG.5.1` owns one neutral five-backend contract
 before the structured-format program may execute.
 
+Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
+partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only
+surfaces, and missing eager `and`/`or`/`not`. Logical repair `.4.3.9.1` is active; `.2` owns recurring exact
+admission, direct `call(rule)` proof, duplicate inventory cleanup, and public status. Toolbox probes also expose a
+separate Perl `and`/`or` keyword-precedence lowering defect, dependency-gated with five-backend truthiness/arity
+normalization under `FUTURE-PARITY-BACKLOG.5.2`.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

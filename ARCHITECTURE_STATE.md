@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: the Lua helper closeout now has an executable negative-space measurement. Generating a
+  minimal action for every exact admitted name yields 230 runtime-owned and 16 unsupported names. Thirteen are
+  intentionally structural or named-receiver-only; `and`/`or`/`not` are the exact missing value helpers. Repair
+  `.4.3.9.1` is active and final recurring ownership/status admission is `.2`. The audit also exposed stale
+  `runtime-numeric-reducers` status, a duplicate source `or` row, absent focused direct `call(rule)` proof, and a
+  separate Perl `and`/`or` keyword-precedence lowering defect. The cross-backend logical contract is durably owned
+  by dependency-gated `FUTURE-PARITY-BACKLOG.5.2`; no behavior changed in the split.
 - `2026-07-15` refresh: Lua diagnostic output is a synchronous caller-owned event boundary, not parser data.
   `runtime_parse(..., { diagnostic_sink = callback })` emits typed helper/rule/message records for eager
   `print`/`say`/`print_each`; missing sinks stay quiet without skipping side effects, Unicode bytes and message

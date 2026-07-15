@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.0 — split Lua exhaustive helper closeout
+
+An exact generated audit now sends all 246 admitted source names through Lua parse, compile, and runtime dispatch.
+The measured boundary is 230 handled and 16 unsupported. Thirteen unsupported function shapes are intentional:
+six structural controls, three receiver-only tree traversals, and four named-array receiver mutations. The exact
+unimplemented value family is `and`, `or`, and `not`.
+
+The closeout is split accordingly: `.4.3.9.1` implements eager logical values through established Lua truthiness;
+`.4.3.9.2` adds recurring exact ownership, focused direct `call(rule)`, removes a duplicate inventory row, corrects
+the stale `runtime-numeric-reducers` status, and closes parent `.4.3`. Toolbox probes also found Perl
+`return(and(...))` / `return(or(...))` keyword-precedence lowering returns null instead of a boolean. That broader
+truthiness/arity/reference repair is dependency-gated under `FUTURE-PARITY-BACKLOG.5.2`. No behavior changed here.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.8 — add Lua diagnostic output events
 
 Lua now executes `print`, `say`, and `print_each` through one eager diagnostic-output path. Each parse may supply

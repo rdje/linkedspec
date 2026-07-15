@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua diagnostic events close at 122/122 and `.4.3.9` is executable next;
-  discovered five-backend diagnostic-output drift is owned by helper normalization `.5.1`).
+- Last updated: `2026-07-15` (Lua exhaustive audit `.4.3.9.0` isolates missing eager logical helpers and activates
+  `.4.3.9.1`; diagnostic drift `.5.1` and logical truthiness/reference-lowering drift `.5.2` are dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -2171,7 +2171,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `pending`
   Goal: Normalize or permanently document helper caveats.
-  Children: `.5.1`
+  Children: `.5.1`, `.5.2`
   Acceptance: Own the array split/pipeline return-shape caveats (`SPEC-LANG-REFERENCE.5.3.1`) and
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
@@ -2239,6 +2239,20 @@ before implementation.
     generated/CLI paths where applicable; remove Rust's direct stderr bypass, Dart's evaluate-and-discard path,
     Julia's omitted-suffix newline drift, and any ungoverned Perl host-output coupling. Finish with shared tests,
     public docs, Knowledge Map, and capability/no-drift gates before structured-format execution can begin.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.5.2`
+  Status: `pending`
+  Goal: Define and align one logical-helper truthiness, arity, and lowering contract.
+  Dependencies: complete current Lua parity
+  Acceptance: Use a neutral fixture to lock eager left-to-right `and`/`or`/`not` evaluation, exact zero/one/
+    variadic arities, boolean result types, scalar `"0"`, empty aggregate, null, boolean, numeric, and string
+    truthiness, side effects, value/receiver composition, and typed failures across Perl, Rust, Dart, Julia, and
+    Lua native plus generated/CLI paths where applicable. Repair Perl `return(and(...))` / `return(or(...))`
+    keyword-precedence lowering so the designated reference actually executes the authored helper instead of
+    returning host `undef`; then align or explicitly migrate the existing backend truthiness differences. Finish
+    with shared tests, mdBook/KM truth tables, and capability/no-drift gates before structured-format execution.
   Verification: `pending`
   Commit: `pending`
 
@@ -4612,8 +4626,11 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 174 | `FUTURE-PARITY-BACKLOG.19.0` | `done` | ADR 0036 plans write-only nested vivification and named-receiver `map_leaves!`; no behavior changed. |
 | 175 | `FUTURE-PARITY-BACKLOG.19.1` | `pending` / dependency-gated | Lock executable neutral contracts only after complete current-backend parity. |
 | 176 | `LUA-BACKEND-PARITY.4.3.8` | `done` | Caller-owned typed diagnostic events, quiet default, Unicode/order, and retained exit pass 122/122. |
-| 177 | `LUA-BACKEND-PARITY.4.3.9` | `active` | Close exhaustive helper/value/control/method no-drift before Lua runtime diagnostics/trace. |
-| 178 | `FUTURE-PARITY-BACKLOG.5.1` | `pending` / dependency-gated | Align the discovered five-backend diagnostic-output semantics and routing drift after Lua parity. |
+| 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
+| 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `active` | Execute eager logical values through Lua's governed truthiness. |
+| 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `pending` | Admit exact recurring runtime-call ownership and correct public status. |
+| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `pending` / dependency-gated | Align the discovered five-backend diagnostic-output semantics and routing drift after Lua parity. |
+| 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / dependency-gated | Repair Perl logical lowering and align eager truthiness/arity across five backends. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5255,6 +5272,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `LUA-BACKEND-PARITY.4.3.9.0` | Knowledge Map retrieval; exact generated 246-name PUC Lua parse/compile/runtime probe; 230 handled/16 unsupported classification; interpreter/test/status/inventory source audit; LinkedSpec `call_spec_handler_subst` plus `Get` probes; Rust/Dart/Julia runtime-owner comparison; split/task/index/roadmap/book/KM/live sync; governance/book/whitespace. | PASS. Thirteen names are explicit structural/receiver-only surfaces; missing `and`/`or`/`not` move to `.1`; direct-call/status/exact recurring admission move to `.2`; Perl keyword-lowering normalization is dependency-gated `.5.2`. No behavior changed. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.8` | Typed output-event sink; eager/order/Unicode/null/boolean/optional-suffix/quiet/parse-neutral/invalid-sink/arity/exit proof; Lua 122/122 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/611s; five-backend source audit and `.5.1` routing; API/book/KM/task/live/roadmap/memory sync; governance/book/whitespace. | PASS. Lua diagnostic helper execution closes over a caller-owned seam; `.4.3.9` activates. Cross-backend formatting/transport normalization stays pending `.5.1`. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.6` | Source-derived 62-call contract/runtime/execution comparison; four marker spellings/timing; Lua 121/121 on PUC Lua and LuaJIT; complete-mark 7/3; coverage 246/105+1/122; selector 57/27/0; punctuation-light 6/4/6; capability 64/0/0; API/book/KM/task/live/roadmap/memory sync; governance/book/whitespace. | PASS. Native capture/cursor parent `.4.3.7` closes with generated support still `.8.1-.8.4`; diagnostic output `.4.3.8` activates; no behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.19.0` | KM retrieval; five ActionIR parser-source audit; current nested-write/traversal contract audit; Perl direct output; Rust `terse_11_4` 3/3; Dart exact focused 1/1; Julia complete suite via stacked depot after one empty-depot network-resolution failure; Lua 121/121 dual ABI; ADR 0036; task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Write-only deterministic creation and named-receiver `map_leaves!` are fully planned but dependency-gated; current behavior/capability unchanged and Lua `.4.3.7.6` was the next frontier. |
@@ -5385,6 +5403,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.4.3.9.0` | `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout` | Exact 230/16/13/3 partition, logical repair, admission split, and Perl-lowering `.5.2` routing. |
 | `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 proof, generated routing, parent closure, and diagnostic-helper handoff. |
 | `LUA-BACKEND-PARITY.4.3.8` | `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events` | Typed caller-owned output events, eager/quiet/neutral semantics, exit retention, drift routing, and 122/122 proof. |
 | `FUTURE-PARITY-BACKLOG.19.0` | `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation` | ADR 0036, exact current five-backend audit, neutral/mechanism/backend split, explicit exclusions, and parity gate. |
@@ -5515,6 +5534,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: Lua `.4.3.9.0` probes all 246 admitted calls through a disposable native runtime: 230 reach an
+  owner and 16 report unsupported. Thirteen are intentional structural or named-receiver-only forms; the exact
+  gap is eager value helpers `and`/`or`/`not`. The audit also owns stale status, duplicate `or`, direct `call(rule)`
+  proof, and recurring exact admission under `.2`. Toolbox probes expose a separate Perl keyword-precedence
+  lowering defect, now dependency-gated as helper normalization `.5.2`; logical implementation `.1` is active.
 - `2026-07-15`: Lua `.4.3.8` adds a per-parse `diagnostic_sink` and typed helper/rule/message output events.
   `print`/`say`/`print_each` evaluate once left-to-right, preserve Unicode and order, remain absent from parse
   values, and stay quiet without a sink; `exit_now` remains immediate typed control. PUC Lua and LuaJIT pass

@@ -84,6 +84,12 @@ pass 122/122. Exhaustive helper no-drift `.4.3.9` is active. The audit found pre
 transport and formatting drift; `FUTURE-PARITY-BACKLOG.5.1` is the dependency-gated five-backend normalization
 owner before any structured-format execution.
 
+The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
+intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`
+repairs that family; `.2` closes recurring ownership/status/direct-call admission. Perl `and`/`or` keyword
+lowering and the existing five-backend logical truthiness/arity drift are explicitly gated under
+`FUTURE-PARITY-BACKLOG.5.2` rather than being hidden by the Lua-local repair.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

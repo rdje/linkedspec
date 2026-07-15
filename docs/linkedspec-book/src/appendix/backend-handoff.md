@@ -739,9 +739,13 @@ not imply generated Lua support: compiled-state preservation, direct generated e
 capability closeout remain `.8.1-.8.4`. Diagnostic output `.4.3.8` now adds a per-parse `diagnostic_sink` callback
 and typed `RuntimeDiagnosticOutputEvent` records carrying helper, rule, and exact message text. `print`, `say`, and
 `print_each` evaluate once left-to-right, preserve Unicode/order, stay out of parse values, and remain quiet
-without a sink; immediate typed `exit_now` is unchanged. PUC Lua and LuaJIT pass 122/122, and exhaustive helper
-no-drift `.4.3.9` is next. The implementation audit also records pre-existing Perl/Rust/Dart/Julia transport and
-formatting differences under `FUTURE-PARITY-BACKLOG.5.1`; Lua's closure is not a false five-backend parity claim.
+without a sink; immediate typed `exit_now` is unchanged. PUC Lua and LuaJIT pass 122/122. Exhaustive `.4.3.9.0`
+then probes every admitted name: 230 reach an owner, thirteen are intentional statement/receiver-only forms, and
+eager `and`/`or`/`not` are the exact missing value family. `.4.3.9.1` repairs logical execution and `.2` owns
+recurring exact admission, direct `call(rule)` proof, inventory cleanup, and status. The audit also records
+pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl `and`/`or`
+keyword lowering and five-backend logical truthiness/arity stay dependency-gated under `.5.2`; neither Lua-local
+closure is a false five-backend normalization claim.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
