@@ -1,5 +1,17 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.4.0 — split Lua diagnostics trace controls
+
+The Lua diagnostics/trace parent is now split into signoff-sized runtime mechanisms: `.4.4.1` neutral structured
+failure payloads, `.4.4.2` ordered trace controls/events/sinks, `.4.4.3` interpreter instrumentation, and `.4.4.4`
+runtime no-drift. Structured diagnostic `.4.4.1` is active.
+
+The planning audit corrects a dependency-order defect in the original acceptance sentence. General staged-function
+execution `.5.1` and native loading `.5.2` do not exist yet, so frontend/compiler/function/staged propagation cannot
+be honestly completed under `.4.4`. Full one-emitter native-pipeline trace remains `.5.3`, explicitly dependent on
+`.4.4`, `.5.1`, and `.5.2`, matching completed Dart/Julia rollout evidence. No Lua behavior, status, test result, or
+capability claim changes; the committed baseline remains 125/125 on both ABIs and 64/0/0 capability.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.2 — close Lua runtime helper no drift
 
 Lua now derives a sorted defensive view of all 246 admitted call names and permanently drives each generated

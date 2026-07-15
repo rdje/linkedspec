@@ -91,7 +91,8 @@ This `README.md` is the **single entry point** to the project.
   all 246 admitted names through parse/compile/runtime, reports exact 233 function-form owners plus thirteen
   documented structural/receiver-only forms, focuses direct `call(rule)`, and publishes
   `runtime-helper-value-control`. Both ABIs pass 125/125, parent `.4.3` is closed, and diagnostics/trace `.4.4` is
-  active.
+  now split into structured runtime failures `.1`, controls/sinks `.2`, runtime events `.3`, and closeout `.4`;
+  `.4.4.1` is active. Full frontend/compiler/function/staged propagation remains `.5.3` after those owners exist.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

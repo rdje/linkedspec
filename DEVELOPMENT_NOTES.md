@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.4.0` — trace owners must exist before propagation can be proved): Split
+  observability by dependency epoch. The current runtime already has typed exceptions, a parse-scoped rule stack,
+  compiled source records, cursor/capture/mark state, and a caller-owned parse option boundary, so structured
+  failures, controls/sinks, and runtime events are safe `.4.4.1-.3` units. General function/staged and native-load
+  owners do not exist until `.5.1/.5.2`; keep full-pipeline propagation in dependent `.5.3`. This mirrors the
+  completed Dart and Julia sequence and prevents a runtime slice from making a false full-pipeline claim. The
+  planning-only split changes no behavior; `.4.4.1` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.2` — make the negative space executable, and correct audit prose from
   source history): Export a defensive sorted internal inventory view so the dual-ABI suite, not a disposable probe,
   owns the exact all-name assertion. Parse and compile every generated call before classifying runtime outcomes;

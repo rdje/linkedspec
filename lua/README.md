@@ -110,8 +110,10 @@ immediate typed control. Both ABIs pass 122/122. Exhaustive `.4.3.9.0` probing p
 handled, thirteen intentional statement/receiver-only surfaces, and missing eager `and`/`or`/`not`; logical repair
 `.4.3.9.1` first passes 123/123. Permanent `.4.3.9.2` now proves exact 233+13 ownership for all 246 names, direct
 `call(rule)` result/`retv`/cursor behavior, and public status `runtime-helper-value-control`; both ABIs pass 125/125
-and parent `.4.3` closes. This is native interpreter parity only; generated Lua preservation/execution remains
-`.8.1-.8.4`. Cross-backend output routing/formatting is owned by
+and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime failures, trace controls/sinks,
+runtime events, and closeout; `.4.4.1` is active. Full frontend/compiler/function/staged trace remains `.5.3` after
+general staged functions and native loading exist. This is native interpreter parity only; generated Lua
+preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
 Lua now executes `and`, `or`, and `not` as eager boolean value helpers: all authored arguments evaluate once
@@ -119,7 +121,7 @@ left-to-right before `runtime_truthy` composition. Empty calls return false, fal
 Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as true; portable specs should use
 explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
 proof first raised both ABI suites to 123/123; the complete helper closeout now passes 125/125 and diagnostics/
-trace `.4.4` is next.
+trace planning `.4.4.0` is complete, with structured runtime diagnostic `.4.4.1` next.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while

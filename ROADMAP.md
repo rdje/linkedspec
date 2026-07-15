@@ -918,6 +918,13 @@ status admission `.4.3.9.2` then closes at 125/125 with 233 function-form owners
 non-function forms and public status `runtime-helper-value-control`. Parent `.4.3` is done; diagnostics/trace `.4.4`
 is active while cross-backend normalization remains `.5.2`.
 
+Diagnostics/trace split note (2026-07-15, `LUA-BACKEND-PARITY.4.4.0`): the original parent sentence combined
+runtime observability with frontend/compiler/function/staged propagation before general staged functions `.5.1`
+and native loading `.5.2` exist. Following the completed Dart/Julia dependency order, `.4.4.1-.4` now separately
+own structured runtime failures, trace controls/sinks, runtime events, and no-drift. Full native-pipeline
+propagation remains `.5.3` after its owners exist; structured runtime diagnostic `.4.4.1` is active. No behavior or
+capability changed in the split.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

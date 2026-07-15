@@ -97,6 +97,11 @@ receiver-only forms, focuses direct `call(rule)`, and publishes `runtime-helper-
 125/125; parent `.4.3` closes and diagnostics/trace `.4.4` activates. `.5.2` still owns global
 truthiness, arity, Dart evaluation/empty-`and`, and Perl lowering normalization.
 
+Planning-only `.4.4.0` now resolves the diagnostics/trace dependency order. `.4.4.1-.4` own structured runtime
+failures, controls/sinks, interpreter events, and runtime no-drift; `.4.4.1` is active. One-emitter native loading,
+frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
+the owners it must traverse. This split changes no runtime or capability claim.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

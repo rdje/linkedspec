@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua diagnostics/trace is split by mechanism and dependency. `.4.4.1-.4` now own neutral
+  structured runtime failures, ordered controls/events/sinks, interpreter instrumentation, and scoped no-drift.
+  Full loading/frontend/validation/compiler/function-shell/staged/runtime propagation remains `.5.3`, explicitly
+  after staged-function `.5.1` and native-loading `.5.2` create those owners. The ordering follows completed Dart
+  and Julia evidence. Current Lua already provides the typed runtime exception seam, parse-scoped rule stack,
+  compiled source records, cursor/capture/mark state, and per-parse caller option boundary needed by `.4.4`; no
+  behavior or capability changed in planning `.4.4.0`, and structured diagnostic `.4.4.1` is active.
 - `2026-07-15` refresh: Lua's native helper/value/control boundary is now exhaustively closed. A defensive sorted
   inventory view drives all 246 admitted names through parse, compile, and runtime on both ABIs: 233 reach
   function-form owners and exactly thirteen governed structural/receiver-only forms remain non-functions. Focused

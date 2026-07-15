@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.4.0 — split Lua diagnostics trace controls**
+  (DONE — runtime mechanisms and later full-pipeline propagation are dependency-correct; `.4.4.1` is next).
+
+  **Result:** `.4.4.1-.4` now separately own neutral structured runtime failures, trace levels/events/sinks,
+  interpreter instrumentation, and scoped no-drift. Full loading/frontend/compiler/function/staged/runtime trace
+  remains `.5.3`, after staged-function `.5.1` and native-loading `.5.2` provide its owners, matching completed
+  Dart/Julia sequencing. No Lua behavior or capability changes; the baseline remains 125/125 on both ABIs and
+  64/0/0 capability.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.2 — close Lua runtime helper no drift**
   (DONE — exact 233+13 ownership passes 125/125; diagnostics/trace `.4.4` is next).
 

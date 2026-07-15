@@ -751,6 +751,11 @@ also records
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl `and`/`or`
 keyword lowering and five-backend logical truthiness/arity stay dependency-gated under `.5.2`; neither Lua-local
 closure is a false five-backend normalization claim.
+Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
+structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
+no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime
+propagation stays `.5.3`, after general staged functions `.5.1` and native loading `.5.2` create those owners.
+Structured runtime diagnostic `.4.4.1` is active; the split itself changes no Lua behavior or capability claim.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

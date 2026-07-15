@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (the complete native helper/value/control boundary passes 125/125 on PUC Lua and
-  LuaJIT with exact 233 runtime-owned + thirteen documented non-function names; diagnostics/trace `.4.4` is active)
+- Last updated: `2026-07-15` (diagnostics/trace `.4.4.0` is split by mechanism and dependency; structured runtime
+  diagnostic payload `.4.4.1` is active, while full-pipeline propagation remains dependency-correct `.5.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1850,9 +1850,64 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 - ID: `LUA-BACKEND-PARITY.4.4`
   Status: `active`
-  Goal: Close runtime diagnostics and native trace propagation.
-  Acceptance: Typed diagnostics carry stage/source/top/deepest rule/handler identity; caller-owned trace propagates
-    through frontend/compiler/function/staged/runtime phases with exact levels/events/sinks and default quietness.
+  Goal: Implement structured runtime diagnostics and runtime trace controls.
+  Children: `.4.4.0`, `.4.4.1`, `.4.4.2`, `.4.4.3`, `.4.4.4`
+  Acceptance: Typed runtime diagnostics carry neutral stage/source/top/deepest-rule/handler identity; default-quiet
+    caller-owned tracing exposes exact ordered levels, event primitives, sinks, and runtime interpreter events
+    without changing parse results. Full frontend/compiler/function/staged propagation remains `.5.3`, after `.5.1`
+    and `.5.2` provide the general staged-function and native-loading owners it must traverse.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.4.0`
+  Status: `done`
+  Goal: Split the broad Lua diagnostics/trace leaf into dependency-correct signoff-sized implementation leaves.
+  Acceptance: Structured failure payloads, trace controls/sinks, runtime instrumentation, and no-drift closeout are
+    separately owned; dependency-incomplete full-pipeline propagation is explicitly retained by `.5.3` rather than
+    being claimed before general staged functions and native loading exist.
+  Verification: **PASS 2026-07-15.** Knowledge Map-first comparison against the completed Dart and Julia rollout
+    proves both backends implemented runtime diagnostics, controls/sinks, and runtime events before their later
+    frontend/compiler/function/staged trace work. Current Lua already has the necessary rule stack, typed runtime
+    exception seam, compiled action source, cursor/capture state, and per-parse caller-owned option boundary, but no
+    neutral `RuntimeDiagnostic` or trace owner. The split creates `.4.4.1` structured runtime diagnostics, `.4.4.2`
+    levels/config/events/sinks, `.4.4.3` runtime instrumentation, and `.4.4.4` no-drift closeout. No Lua behavior or
+    capability claim changed; `.4.4.1` is active.
+  Commit: `LUA-BACKEND-PARITY.4.4.0 - split Lua diagnostics trace controls`
+
+- ID: `LUA-BACKEND-PARITY.4.4.1`
+  Status: `active`
+  Goal: Add Lua runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
+  Acceptance: Runtime failures expose stable `type`, `stage`, `owner_stage`, `summary`, `detail`, `top_rule`,
+    `rule_label`, `handler_source_label`, and optional `spec_name` / `spec_path` fields; the deepest available rule
+    and source attribution survive stack unwinding, richer inner diagnostics are preserved, textual errors remain
+    useful, and successful parse results are unchanged on PUC Lua and LuaJIT.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.4.2`
+  Status: `pending`
+  Goal: Add Lua trace levels, controls, structured event primitives, and caller-owned sink routing.
+  Acceptance: Ordered none/low/medium/high/full/debug levels, explicit and documented environment configuration,
+    enter/exit/decision/mark/dump/log events, stdout/routed-file/mirror sinks, route reset/truncate behavior, and
+    direct traced runtime entrypoints are default-quiet and preserve successful parse results on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.4.3`
+  Status: `pending`
+  Goal: Instrument the Lua runtime interpreter with exact rule, branch, dispatch, lifecycle, cursor, and boundary events.
+  Acceptance: The optional emitter covers parse/rule scopes, recursion cutoffs, regex match/no-match, action/blind
+    child dispatch, lifecycle blocks, cursor controls, source-boundary capture, and governed mark/capture positions
+    where applicable; disabled or absent tracing is a no-op and traced/untraced results are identical on both ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.4.4`
+  Status: `pending`
+  Goal: Close Lua runtime diagnostics/trace no-drift.
+  Acceptance: Focused dual-ABI proofs, public API/status, README/mdBook, Knowledge Map, task/index/roadmaps, live
+    docs, and canonical gates agree on the implemented runtime boundary without claiming dependency-incomplete
+    full-pipeline tracing; parent `.4.4` closes and staged-function/native-loading `.5.1` becomes active.
   Verification: `pending`
   Commit: `pending`
 
@@ -1889,9 +1944,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.5.3`
   Status: `pending`
   Goal: Admit exact outward descriptors, runtime diagnostics, and full-pipeline trace.
+  Dependencies: `.4.4`, `.5.1`, `.5.2`
   Acceptance: Consume shared fixtures/checkers directly, including the exact fixed-v1/variadic-v2 outward function
-    descriptor union and identical staged signature copies, and expand the capability census without changing
-    existing backend rows; no partial/gap state lacks a concrete next owner.
+    descriptor union and identical staged signature copies; propagate one caller-owned emitter through native
+    loading, frontend, validation, compilation, function-shell, staged dispatch, and runtime phases; expand the
+    capability census without changing existing backend rows; no partial/gap state lacks a concrete next owner.
   Verification: `pending`
   Commit: `pending`
 
@@ -2021,7 +2078,9 @@ The exact `.4.3.9.0` audit partitions the pre-repair 246 names into 230 handled,
 owners, and missing `and`/`or`/`not`; `.1` repairs those logical values. Permanent `.4.3.9.2` now measures 233
 runtime-owned plus the same thirteen non-function forms, focuses direct `call(rule)`, publishes
 `runtime-helper-value-control`, and closes parent `.4.3` at 125/125 on both ABIs. Diagnostics/trace `.4.4` is the
-sole active frontier.
+sole active parent. Planning-only `.4.4.0` now separates structured runtime failures, trace controls/sinks, runtime
+instrumentation, and closeout; it retains full frontend/compiler/function/staged propagation under `.5.3` after
+general staged-function and native-loading prerequisites. Structured runtime diagnostic `.4.4.1` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2108,7 +2167,30 @@ sole active frontier.
 | 81 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230 handled / 16 unsupported audit isolates thirteen intentional owners and three logical gaps. |
 | 82 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and false/false/true empty calls pass 123/123 on both ABIs. |
 | 83 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact 233+13 ownership, direct-call proof, corrected status/audit note, and parent closure pass 125/125. |
-| 84 | `LUA-BACKEND-PARITY.4.4` | `active` | Close typed runtime diagnostics and native trace propagation. |
+| 84 | `LUA-BACKEND-PARITY.4.4` | `active` | Implement structured runtime diagnostics and runtime trace controls. |
+| 85 | `LUA-BACKEND-PARITY.4.4.0` | `done` | Split diagnostics, controls/sinks, runtime events, closeout, and later full-pipeline ownership by dependency. |
+| 86 | `LUA-BACKEND-PARITY.4.4.1` | `active` | Add neutral structured runtime diagnostic payloads without changing successful results. |
+
+### `LUA-BACKEND-PARITY.4.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Parent `.4.4` bundled runtime diagnostics, trace controls, interpreter events, and
+  frontend/compiler/function/staged propagation even though general function/staged execution `.5.1` and native
+  loading `.5.2` do not exist yet; `.5.3` independently owned full-pipeline trace admission.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The original planning sentence combined two dependency epochs. Completed Dart
+  and Julia task trees prove the safe order: structured runtime failures, controls/sinks, and runtime events land
+  before staged work; one-emitter frontend/compiler/function/staged propagation lands only after those owners exist.
+- [x] **FIX** — Split `.4.4` into `.1` neutral runtime diagnostics, `.2` levels/config/events/sinks, `.3` runtime
+  instrumentation, and `.4` no-drift closeout. Narrowed the parent to that executable runtime boundary and made
+  `.5.3` explicitly depend on `.4.4`, `.5.1`, and `.5.2` for full native-pipeline propagation.
+- [x] **ADDRESSED (verified)** — Current Lua seams are sufficient for the ordered plan: typed runtime errors and a
+  rule stack support `.1`; the per-parse option boundary supports caller-owned `.2`; compiled rule/action source,
+  recursion, lifecycle, cursor, boundary, capture, and mark state support `.3`. Missing staged/native owners no
+  longer sit inside the active implementation leaf.
+- [x] **NO REGRESSION** — Planning-only task/KM/book/live-doc changes alter no Lua source, test expectation, public
+  parity status, capability row, or runtime result. The committed 125/125 dual-ABI and 64/0/0 capability baseline
+  remains the executable proof.
+- [x] **LOCKSTEP** — Task/index/roadmaps, README/Lua README, mdBook status/handoff, Knowledge Map, architecture/live
+  docs, changes/notes, and memory record the same dependency-correct split and activate `.4.4.1`.
 
 ### `LUA-BACKEND-PARITY.4.3.9.2` Acceptance Checklist
 
@@ -3254,3 +3336,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.9.0` | `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout` | Exact 230/16/13/3 probe partition, logical repair/admission split, and Perl-lowering future owner. |
 | `LUA-BACKEND-PARITY.4.3.9.1` | `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers` | Eager ordered boolean composition, empty false/false/true, governed truthiness, and 123/123 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.9.2` | `LUA-BACKEND-PARITY.4.3.9.2 - close Lua runtime helper no drift` | Permanent exact 233+13 partition, direct-call proof, public-status correction, audit-note correction, and parent closure. |
+| `LUA-BACKEND-PARITY.4.4.0` | `LUA-BACKEND-PARITY.4.4.0 - split Lua diagnostics trace controls` | Dependency-correct structured-diagnostic, controls/sinks, runtime-event, closeout, and later full-pipeline split. |
