@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.1.0 — split Lua controlled corpus admission**
+  (DONE — measurement and task split are durable; nested segment-kind repair `.6.1.1` is next).
+
+  **Result:** Exact manifest offsets 0-39 and 99-104 pass 45/46 identically on PUC Lua and LuaJIT. All six governed
+  capability fixtures and 39/40 core fixtures are exact. Offset 20 alone reaches runtime but emits a mutated hash:
+  nested assignment discards parsed key/index kinds, so a numeric segment into a hash becomes key `"0"` instead of
+  a null, non-mutating wrong-shape result. `.6.1.1` owns the repair; `.6.1.2` owns library execution/result records;
+  `.6.1.3` and `.6.1.4` own permanent core and capability windows. Planning changes no runtime, fixture/expected
+  value, public status, test count, capability row, or mutation policy. Focused Lua remains 155/155 on both ABIs;
+  canonical CI passes CLI 61x2 plus Phase 0 `1..1031` in 606 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.3.3 — close Lua descriptor trace no drift**
   (DONE — parents `.5.3`/`.5` are closed; controlled/core corpus window `.6.1` is next).
 

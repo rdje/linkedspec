@@ -132,8 +132,11 @@ This `README.md` is the **single entry point** to the project.
   events, sinks, quiet/filtered paths, balanced attributed failures, no hidden emitter construction, and traced/
   untraced result identity pass 155/155 on PUC Lua and LuaJIT with status
   `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5` with no
-  source/status/behavior/test/manifest change. Capability remains 64/0/0; controlled/core corpus window `.6.1`
-  is next.
+  source/status/behavior/test/manifest change. Controlled/core planning `.6.1.0` measures exact manifest offsets
+  0-39 and 99-104 at 45/46 on both Lua ABIs: all six governed capability cases pass, and offset 20 alone exposes
+  nested-assignment key/index segment-kind erasure. Repair `.6.1.1`, library execution `.6.1.2`, core admission
+  `.6.1.3`, and capability/no-drift `.6.1.4` are dependency-ordered without weakening fixtures. Capability remains
+  64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

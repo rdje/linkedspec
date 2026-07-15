@@ -362,7 +362,9 @@ final-codeblock descriptor v3 plus completion-time census admission; `.5.3.1` em
 `.5.3.2` passes one caller-owned emitter across native IO, frontend/compiler/function/staged owners, engine
 creation, and runtime without retained or hidden emitter state. Ordered sinks/filters/errors and result identity
 pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`; `.5.3.3` closes exact no-drift and parents
-`.5.3`/`.5`, controlled/core corpus `.6.1` follows, and the census stays 64/0/0 until `.8.4`.
+`.5.3`/`.5`. Controlled/core planning `.6.1.0` measures offsets 0-39 and 99-104 at 45/46 on both ABIs and routes
+offset 20's nested segment-kind defect to `.6.1.1` before executor/window work `.6.1.2-.4`; the census stays
+64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -807,8 +809,9 @@ callable precedence, chainable results, and typed failures at 146/146; public st
  portable resolve/load `.5.2.1` and cached automatic spec-defined parsing `.5.2.2` pass 151/151. Typed loaded-source
 composition `.5.2.3` then passes 153/153 with status `native-spec-pipeline-v1`; `.5.2.4` closes parent `.5.2`,
 exact descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` then pass 155/155 with status
-`native-full-pipeline-trace-v1`. No-drift `.5.3.3` closes parents `.5.3`/`.5`; controlled/core corpus `.6.1` is
-active and capability remains 64/0/0. Explicit
+`native-full-pipeline-trace-v1`. No-drift `.5.3.3` closes parents `.5.3`/`.5`; controlled/core planning `.6.1.0`
+is complete at 45/46 across offsets 0-39 and 99-104, nested segment-kind repair `.6.1.1` is active, and capability
+remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

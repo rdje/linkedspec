@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua controlled-corpus planning `.6.1.0` defines exact owned windows at manifest offsets
+  0-39 and 99-104 and measures them through the current automatic parse/validate/compile/engine/runtime pipeline.
+  PUC Lua and LuaJIT both pass 45/46: all six governed capability fixtures and 39/40 core fixtures are exact. Sole
+  residual offset 20 is an output mismatch caused by nested assignment erasing parsed key/index segment kinds;
+  generic harray writing stringifies numeric segment `0` instead of rejecting the wrong-container transition.
+  Repair `.6.1.1`, library execution `.6.1.2`, core admission `.6.1.3`, and capability/no-drift `.6.1.4` are now
+  dependency-ordered. No implementation, fixture, public status, test count, endpoint, or census row changed.
 - `2026-07-15` refresh: Lua no-drift `.5.3.3` confirms exact agreement across trace-aware public exports/options,
   `native-full-pipeline-trace-v1`, fixed-v1/variadic-v2/final-codeblock-v3 descriptor ownership, the two neutral
   trace capability definitions, dual-ABI descriptor/full-pipeline tests, public docs/book, task/roadmap/live state,

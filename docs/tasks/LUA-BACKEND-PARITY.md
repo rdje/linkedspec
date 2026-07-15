@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.5.3.3` closes exact descriptor/full-pipeline-trace no-drift at 155/155 on both
-  Lua ABIs, closes parent `.5`, preserves the four-backend 64/0/0 census, and activates corpus window `.6.1`)
+- Last updated: `2026-07-15` (`.6.1.0` measures core offsets 0-39 plus capability offsets 99-104 at 45/46 on both
+  Lua ABIs, isolates offset 20 nested segment-kind drift, and activates repair `.6.1.1` before executor/windows)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2392,8 +2392,77 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.6.1`
   Status: `active`
   Goal: Admit controlled/core and governed capability fixture windows.
+  Children: `.6.1.0`, `.6.1.1`, `.6.1.2`, `.6.1.3`, `.6.1.4`
   Acceptance: Run ordered subsets, classify failures by mechanism, split repairs before code, and preserve exact
     expected values/endpoints rather than weakening fixtures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.1.0`
+  Status: `done`
+  Goal: Measure and dependency-split controlled/core and governed-capability corpus admission before code.
+  Dependencies: `.5.3.3`
+  Acceptance: Identify the exact ordered manifest windows owned by `.6.1`; execute them through the existing native
+    parse/validate/compile/runtime APIs without changing source or fixtures; classify every failure by stage and
+    mechanism; retrieve the canonical semantic contract for each residual; and create narrowly owned repair,
+    executor, permanent-window, and closeout leaves before behavior work.
+  Verification: **PASS 2026-07-15.** The owned windows are the 40-case core prefix at offsets 0-39 and the six
+    governed capability fixtures at offsets 99-104; `.6.2` retains offsets 40-98 for advanced helpers, functions,
+    recursion, and shipped specs. Disposable manifest-ordered native probes pass the same 45/46 exact cases on PUC
+    Lua and LuaJIT. All six capability fixtures and 39/40 core fixtures pass; the sole residual is offset 20
+    `terse_11_4_nested_mixed_value_path_assignment`, an output mismatch after successful parse, validation,
+    compilation, match, and endpoint execution. Canonical `terse-nested-value-path-assignment` semantics require a
+    numeric index segment into a hash to fail without mutation and return null. Lua currently discards the parsed
+    segment kind at `assign_nested_access`, lets generic harray `write_index(...)` stringify numeric key `0`, and
+    therefore adds an invalid `"0":"bad"` field and returns the mutated root. `.6.1.1` owns only that repair;
+    `.6.1.2` owns the reusable library executor/result boundary; `.6.1.3` permanently admits offsets 0-39; and
+    `.6.1.4` admits offsets 99-104 and closes no-drift. No Lua source, fixture, expected value, public status,
+    capability row, or test count changes in this planning slice. Focused PUC Lua and LuaJIT suites remain
+    155/155; mdBook, Knowledge Map, memory/task/doctrine, and whitespace checks pass; canonical local CI passes
+    both 61/61 CLI environments and Phase 0 reaches true stop `1..1031` in 606 seconds. Mutation testing remains
+    manual-only and was not run.
+  Commit: `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission`
+
+- ID: `LUA-BACKEND-PARITY.6.1.1`
+  Status: `active`
+  Goal: Preserve nested assignment segment kinds and reject wrong-shape transitions.
+  Dependencies: `.6.1.0`
+  Acceptance: Evaluate path segments and RHS in the governed order, require numeric index segments to traverse or
+    write arrays and key segments to traverse or write hashes, preserve copy-on-write/no-autovivification behavior,
+    return null without root mutation for missing/wrong-kind/gap paths, and pass the exact offset-20 oracle case on
+    both Lua ABIs without weakening its expected JSON.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.1.2`
+  Status: `pending`
+  Goal: Add reusable native library corpus execution and controlled proof records.
+  Dependencies: `.6.1.1`
+  Acceptance: Validate the strict manifest, execute selected fixtures through automatic spec-defined parsing,
+    validation, compilation, source-identified engine construction, and runtime; compare exact one-level wrapped
+    output structurally; retain actual value/output/match/endpoints/trace/diagnostic/failure stage; report every
+    selected fixture without aborting; and prove controlled scalar/aggregate/dispatch/lifecycle/function/boundary/
+    failure cases while keeping the validation-only corpus CLI unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.1.3`
+  Status: `pending`
+  Goal: Permanently admit the ordered 40-case core corpus prefix.
+  Dependencies: `.6.1.2`
+  Acceptance: The exact manifest offsets 0-39 pass in order on PUC Lua and LuaJIT through the library executor;
+    permanent assertions lock count, first/last names, zero failures, exact expected outputs, and unchanged
+    endpoints without parser/runtime or fixture work outside routed failures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.1.4`
+  Status: `pending`
+  Goal: Admit the six governed capability fixtures and close controlled/core no-drift.
+  Dependencies: `.6.1.3`
+  Acceptance: Exact manifest offsets 99-104 pass in order on both Lua ABIs; permanent assertions lock the six
+    governed names, endpoints, and outputs; API/status/tests/root and Lua docs/mdBook/KM/task/live state agree;
+    parent `.6.1` closes without changing capability-census membership; and `.6.2` activates for offsets 40-98.
   Verification: `pending`
   Commit: `pending`
 
@@ -2663,6 +2732,11 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 | 111 | `LUA-BACKEND-PARITY.5.3.3` | `done` | Exact no-drift closes parents `.5.3`/`.5`; `.8.4` remains sole census admission. |
 | 112 | `LUA-BACKEND-PARITY.6` | `active` | Reach complete interpreter-corpus parity. |
 | 113 | `LUA-BACKEND-PARITY.6.1` | `active` | Admit controlled/core and governed capability fixture windows. |
+| 114 | `LUA-BACKEND-PARITY.6.1.0` | `done` | Both ABIs measure 45/46 and split the sole nested-assignment residual before code. |
+| 115 | `LUA-BACKEND-PARITY.6.1.1` | `active` | Preserve nested path segment kinds and close exact offset 20. |
+| 116 | `LUA-BACKEND-PARITY.6.1.2` | `pending` | Add reusable library corpus execution and controlled result records. |
+| 117 | `LUA-BACKEND-PARITY.6.1.3` | `pending` | Permanently admit exact ordered core offsets 0-39. |
+| 118 | `LUA-BACKEND-PARITY.6.1.4` | `pending` | Admit capability offsets 99-104 and close controlled/core no-drift. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -2772,6 +2846,28 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 - [x] **LOCKSTEP** — Root/Lua docs, both roadmaps, architecture/live/change/notes, task/index, mdBook API/trace/
   status/handoff/compiler pages, Knowledge Map, and bounded memory close `.5.3`/`.5`, activate `.6.1`, and retain
   generated source, primary CLI, and census expansion under `.8.1-.8.4`.
+
+### `LUA-BACKEND-PARITY.6.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Disposable ordered execution of the 40-case core prefix and six governed capability
+  fixtures passes 45/46 identically on PUC Lua and LuaJIT. Offset 20 alone returns a mutated hash with numeric key
+  `"0"` where the oracle requires unchanged state and null.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The parser preserves `key` versus `index` path segments, but
+  `interpreter.lua`'s `assign_nested_access` evaluates each to a bare value and delegates to kind-generic
+  `read_index(...)` / `write_index(...)`. A numeric final segment against a harray is therefore stringified rather
+  than rejected as a wrong-kind transition.
+- [x] **FIX** — Change no behavior in planning. Split segment-kind repair `.6.1.1`, library executor/result records
+  `.6.1.2`, exact core offsets 0-39 `.6.1.3`, and governed capability offsets 99-104 plus no-drift `.6.1.4`.
+- [x] **ADDRESSED (verified)** — Every owned fixture is accounted for by exact offset/name/stage; `.6.2` retains
+  offsets 40-98; the sole residual points to the already-governed nested-write contract and one source mechanism;
+  no implementation leaf can weaken expected JSON or silently absorb unrelated advanced/shipped work.
+- [x] **NO REGRESSION** — Planning changes only task/docs/Knowledge Map state. Both disposable ABI probes reproduce
+  45/46 with the same sole output mismatch; focused Lua remains 155/155 on each ABI; canonical CI passes CLI 61x2
+  plus Phase 0 `1..1031` in 606 seconds. No source, public status, test count, fixture, expected value, capability
+  row, or mutation policy changes; mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/live/change/notes, task/index, mdBook status/API/handoff,
+  Knowledge Map, and bounded memory record the exact windows, 45/46 boundary, mechanism, ordered owners, and active
+  segment-kind repair `.6.1.1`.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4302,3 +4398,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.3.1` | `LUA-BACKEND-PARITY.5.3.1 - admit Lua function descriptors` | Checked exact fixed-v1/variadic-v2/final-codeblock-v3 union, dual-ABI Lua emission, and Perl outward-v3 alignment. |
 | `LUA-BACKEND-PARITY.5.3.2` | `LUA-BACKEND-PARITY.5.3.2 - propagate Lua full-pipeline trace` | One caller-owned emitter across IO/frontend/compiler/function/staged/engine/runtime, exact filters/sinks/errors/identity, and 155/155 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.3.3` | `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift` | Exact API/status/test/contract/book/KM inventory, parent `.5.3`/`.5` closure, unchanged 64/0/0 census, and corpus `.6.1` handoff. |
+| `LUA-BACKEND-PARITY.6.1.0` | `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission` | Exact 0-39/99-104 dual-ABI measurement, sole nested-segment mismatch classification, and dependency-ordered repair/executor/window split. |

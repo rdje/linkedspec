@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.1.0 — split Lua controlled corpus admission
+
+Measured the exact `.6.1` manifest windows through the existing native pipeline before adding corpus execution or
+changing runtime behavior. The 40-case core prefix at offsets 0-39 plus the six governed capability fixtures at
+offsets 99-104 pass 45/46 identically on PUC Lua and LuaJIT. All capability cases and 39/40 core cases are exact.
+Offset 20, `terse_11_4_nested_mixed_value_path_assignment`, is the sole residual: parse, validation, compilation,
+matching, and endpoints succeed, but Lua adds a numeric `"0"` field to a hash and returns the mutated root instead
+of null.
+
+The parser retains key/index segment kinds, while runtime nested assignment reduces both to bare keys before its
+generic hash/array writer. Split `.6.1` before behavior code: `.6.1.1` owns segment-kind enforcement, `.6.1.2`
+owns reusable library corpus execution and result records, `.6.1.3` owns permanent offsets 0-39, and `.6.1.4`
+owns offsets 99-104 plus no-drift closure. Added a Knowledge Map fact and aligned roadmap, task, live-doc, and
+mdBook state. No Lua source, public status, test count, fixture/expected value, capability row, or mutation policy
+changed. Focused PUC Lua and LuaJIT tests remain 155/155; canonical local CI passes CLI 61x2 plus Phase 0
+`1..1031` in 606 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.3.3 — close Lua descriptor trace no drift
 
 Inventoried exact Lua trace-aware exports/options/status, all native construction/runtime propagation owners, the

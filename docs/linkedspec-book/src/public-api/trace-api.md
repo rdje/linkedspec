@@ -293,7 +293,8 @@ loaded-source compile/engine composition `.5.2.3` then raises them to 153/153 an
 `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2`; full loading/frontend/compiler/function/staged
 trace propagation `.5.3.2` then raises them to 155/155 and status
 `native-full-pipeline-trace-v1`; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5` without behavior
-or manifest change, and controlled/core corpus window `.6.1` follows.
+or manifest change. Controlled/core planning `.6.1.0` then measures offsets 0-39 and 99-104 at 45/46 on both ABIs,
+isolates one nested segment-kind repair under `.6.1.1`, and orders executor/window admission under `.6.1.2-.4`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

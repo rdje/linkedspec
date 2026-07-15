@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.1.0` — preserve path syntax kinds through runtime mutation): A mixed nested
+  lvalue is not just a list of evaluated keys. Its parsed segment kind carries the container requirement: `[0]`
+  selects an array element, while `["name"]` selects a hash field. Lua's core read/write helpers intentionally
+  accept both container kinds, but `assign_nested_access` cannot erase segment provenance before choosing them;
+  doing so turns a wrong-shape numeric transition into a valid hash key `"0"`. The controlled/core probe exposes
+  exactly that defect at manifest offset 20 and no other one: both Lua ABIs pass 45/46 across offsets 0-39 and
+  99-104. Keep the oracle unchanged, repair segment-kind enforcement in `.6.1.1`, then add reusable executor
+  composition `.6.1.2` and permanent core/capability windows `.6.1.3-.4`. This planning slice changes no runtime,
+  fixture, public status, test count, or census row. Focused Lua remains 155/155 on both ABIs and canonical CI
+  passes CLI 61x2 plus Phase 0 `1..1031` in 606 seconds; mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.3.3` — implementation proof and census admission are separate boundaries):
   Close descriptor/full-trace implementation when exact API/status/test/contract/book/KM surfaces agree, but do
   not add Lua rows to the executable capability census early. The manifest is an all-pass admission surface, not

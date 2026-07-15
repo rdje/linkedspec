@@ -30,6 +30,7 @@ evidence_update_2026_07_15_native_spec_pipeline: "LUA-BACKEND-PARITY.5.2.3 adds 
 evidence_update_2026_07_15_native_loading_closeout: "LUA-BACKEND-PARITY.5.2.4 confirms exact source/API/test/public-doc/KM no-drift at 153/153, closes parent .5.2 without behavior change, and activates descriptors/full trace .5.3."
 evidence_update_2026_07_15_full_pipeline_trace: "LUA-BACKEND-PARITY.5.3.1 admits exact v1/v2/v3 descriptors; .5.3.2 passes one caller emitter through IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs with status native-full-pipeline-trace-v1; .5.3.3 is active."
 evidence_update_2026_07_15_descriptor_trace_closeout: "LUA-BACKEND-PARITY.5.3.3 closes exact descriptor/full-trace no-drift and parents .5.3/.5 without source/census change; controlled/core corpus .6.1 is active."
+evidence_update_2026_07_15_controlled_corpus_split: "LUA-BACKEND-PARITY.6.1.0 measures exact offsets 0-39 and 99-104 at 45/46 on PUC Lua and LuaJIT, isolates offset 20 nested-assignment segment-kind drift under .6.1.1, and orders executor/core/capability leaves .6.1.2-.4 before behavior code."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -58,11 +59,14 @@ native in-memory module contract and exact behavior. LuaRocks and the common tes
 foundation time, so `.1.1` locked a reproducible repository-owned dependency/test/cache strategy. Automatic
 spec-owned top-level function-shell parsing and loaded-source identity/compile/engine composition are complete;
 native-loading no-drift, exact descriptors, and caller-owned full-pipeline trace are complete. Census-preserving
-no-drift `.5.3.3` closes parents `.5.3`/`.5`; controlled/core corpus window `.6.1` is the current frontier.
+no-drift `.5.3.3` closes parents `.5.3`/`.5`. Controlled/core planning `.6.1.0` measures exact offsets 0-39 plus
+99-104 at 45/46 on both ABIs and isolates the sole nested-assignment segment-kind residual. Repair `.6.1.1` is the
+current frontier before executor/core/capability admission `.6.1.2-.4`.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
 [[dart-backend-interpreter-first-plan]], [[julia-backend-interpreter-first-plan]],
 [[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]],
 [[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
-[[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]].
+[[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]],
+[[lua-controlled-corpus-admission-split]].
