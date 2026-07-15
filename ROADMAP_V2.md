@@ -90,9 +90,11 @@ repairs that family; `.2` closes recurring ownership/status/direct-call admissio
 lowering and the existing five-backend logical truthiness/arity drift are explicitly gated under
 `FUTURE-PARITY-BACKLOG.5.2` rather than being hidden by the Lua-local repair.
 
-Lua `.4.3.9.1` now closes that local three-name gap at 123/123 on PUC Lua and LuaJIT: all logical arguments are
+Lua `.4.3.9.1` first closes that local three-name gap at 123/123 on PUC Lua and LuaJIT: all logical arguments are
 eager and ordered, results are booleans, empty calls are false/false/true, and established Lua truthiness is reused.
-Exact recurring ownership/direct-call/inventory/status admission `.4.3.9.2` is active; `.5.2` still owns global
+Exact `.4.3.9.2` then accounts for all 246 names as 233 function-form owners plus thirteen documented structural/
+receiver-only forms, focuses direct `call(rule)`, and publishes `runtime-helper-value-control`. Both ABIs pass
+125/125; parent `.4.3` closes and diagnostics/trace `.4.4` activates. `.5.2` still owns global
 truthiness, arity, Dart evaluation/empty-`and`, and Perl lowering normalization.
 
 ## Current Live Tracker

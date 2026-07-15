@@ -87,8 +87,11 @@ This `README.md` is the **single entry point** to the project.
   `print_each` eagerly and delivers ordered Unicode-safe typed events through a per-parse caller-owned sink while
   staying quiet by default and preserving parse values; both ABIs pass 122/122. Exhaustive audit `.4.3.9.0`
   probes all 246 names: 230 reach an owner, thirteen are intentional statement/receiver-only surfaces, and the
-  exact missing family is eager `and`/`or`/`not`. That repair now passes 123/123 on both ABIs; final exact recurring
-  ownership/status/direct-call admission `.4.3.9.2` is active.
+  exact missing family is eager `and`/`or`/`not`. That repair first passed 123/123; permanent `.4.3.9.2` now drives
+  all 246 admitted names through parse/compile/runtime, reports exact 233 function-form owners plus thirteen
+  documented structural/receiver-only forms, focuses direct `call(rule)`, and publishes
+  `runtime-helper-value-control`. Both ABIs pass 125/125, parent `.4.3` is closed, and diagnostics/trace `.4.4` is
+  active.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

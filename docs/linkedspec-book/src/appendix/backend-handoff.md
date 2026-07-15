@@ -742,8 +742,12 @@ and typed `RuntimeDiagnosticOutputEvent` records carrying helper, rule, and exac
 without a sink; immediate typed `exit_now` is unchanged. PUC Lua and LuaJIT pass 122/122. Exhaustive `.4.3.9.0`
 then probes every admitted name: 230 reach an owner, thirteen are intentional statement/receiver-only forms, and
 eager `and`/`or`/`not` are the exact missing value family. `.4.3.9.1` now executes all three eagerly over established
-Lua truthiness at 123/123 on both ABIs; active `.2` owns recurring exact admission, direct `call(rule)` proof,
-inventory cleanup, and status. The audit also records
+Lua truthiness. Permanent `.4.3.9.2` drives all 246 names through parse/compile/runtime: 233 reach function-form
+owners and the exact thirteen documented structural/receiver-only forms remain intentionally unsupported as
+functions. Direct `call(rule)` result/`retv`/cursor behavior is focused, public status is
+`runtime-helper-value-control`, both ABIs pass 125/125, and parent `.4.3` is closed. A source-history recheck also
+corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. The audit
+also records
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl `and`/`or`
 keyword lowering and five-backend logical truthiness/arity stay dependency-gated under `.5.2`; neither Lua-local
 closure is a false five-backend normalization claim.

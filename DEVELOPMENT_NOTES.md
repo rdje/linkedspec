@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.2` — make the negative space executable, and correct audit prose from
+  source history): Export a defensive sorted internal inventory view so the dual-ABI suite, not a disposable probe,
+  owns the exact all-name assertion. Parse and compile every generated call before classifying runtime outcomes;
+  only the thirteen governed structural/receiver-only function forms may remain unsupported. Focus `call(rule)`
+  separately because a generic owner error cannot prove result/`retv`/cursor semantics. When an audit note says a
+  duplicate exists but current and historical exact scans each show one row, correct the durable note instead of
+  manufacturing a no-op source edit. The final partition is 233+13=246, both ABIs pass 125/125, public status is
+  `runtime-helper-value-control`, parent `.4.3` closes, and `.4.4` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.9.1` — eager first, compose second): Do not implement logical helpers with
   host-language short-circuit operators around expression evaluation. Evaluate and retain every authored value in
   source order, then apply `runtime_truthy`; this preserves side effects even after a decisive `and`/`or` operand
@@ -14,7 +23,7 @@
   cannot prove execution. Keep the Lua repair separate from the toolbox-discovered Perl keyword-precedence defect:
   `return and(...)` / `return or(...)` returns host undef, so `FUTURE-PARITY-BACKLOG.5.2` must repair the reference
   and normalize truthiness/arity after current Lua parity. `.1` implements eager Lua logic; `.2` owns the permanent
-  partition, direct `call(rule)` proof, duplicate inventory cleanup, status correction, and parent closure.
+  partition, direct `call(rule)` proof, reported-duplicate resolution, status correction, and parent closure.
 
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.8` — diagnostic output is an event, never parser data): Evaluate every
   valid helper argument once left-to-right before emission, then synchronously deliver typed helper/rule/message

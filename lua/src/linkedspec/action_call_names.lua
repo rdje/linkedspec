@@ -286,4 +286,13 @@ function M.count()
   return count
 end
 
+function M.current_names()
+  local result = {}
+  for name in pairs(CURRENT_CALL_NAMES) do
+    result[#result + 1] = name
+  end
+  table.sort(result)
+  return result
+end
+
 return M

@@ -22,6 +22,7 @@ evidence_update_2026_07_13_capture_split: "LUA-BACKEND-PARITY.4.3.7.0 splits inp
 evidence_update_2026_07_15_diagnostic_output: "Complete named-mark admission raised the shared inventory to 246 and capture/cursor .4.3.7 closed at exact 62-call/four-marker no-drift. LUA-BACKEND-PARITY.4.3.8 now emits eager Unicode-safe print/say/print_each messages through a per-parse typed caller-owned event sink at 122/122 on PUC Lua and LuaJIT; .4.3.9 is active. Cross-backend output drift is routed to FUTURE-PARITY-BACKLOG.5.1."
 evidence_update_2026_07_15_exhaustive_split: "LUA-BACKEND-PARITY.4.3.9.0 probes all 246 names through Lua parse/compile/runtime: 230 reach an owner, thirteen unsupported function forms are intentionally structural or named-receiver-only, and eager and/or/not are the exact missing family. .4.3.9.1 owns logical execution; .4.3.9.2 owns recurring exact admission, direct call(rule), inventory cleanup, status, and parent closure. Perl logical keyword lowering plus five-backend truthiness/arity is routed to FUTURE-PARITY-BACKLOG.5.2."
 evidence_update_2026_07_15_logical: "LUA-BACKEND-PARITY.4.3.9.1 closes eager and/or/not execution over existing Lua truthiness at 123/123 on PUC Lua and LuaJIT. .4.3.9.2 is active for recurring exact 246-name ownership, direct call(rule), inventory cleanup, status, and .4.3 parent closure."
+evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.4.3.9.2 closes exhaustive native helper/value/control no-drift. A permanent sorted 246-name probe reports 233 function-form owners and exactly thirteen documented structural/receiver-only forms; direct call(rule) and public runtime-helper-value-control status are focused. PUC Lua and LuaJIT pass 125/125; .4.3 closes and diagnostics/trace .4.4 activates."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -59,8 +60,9 @@ boundary lookahead, and `.6` no-drift. The 239-name inventory is the governed ex
 every helper advertised by the source-boundary reference is inventoried; seven documented mark helpers require a
 separate cross-backend resolution before `.3` could close full named-mark parity. That correction is complete:
 the aligned inventory now has 246 names. Diagnostic output `.4.3.8` is also complete through the per-parse typed
-event seam. Exhaustive `.4.3.9.0` isolates the exact remaining logical family; `.1` has repaired it at 123/123 and
-active `.2` admits the full runtime helper boundary.
+event seam. Exhaustive `.4.3.9.0` isolates the exact remaining logical family; `.1` repairs it and `.2` permanently
+admits the full runtime helper boundary at exact 233+13 ownership and 125/125 on both ABIs. Parent `.4.3` is closed;
+diagnostics/trace `.4.4` is active.
 
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
@@ -72,3 +74,4 @@ Related facts: [[lua-runtime-rule-interpreter]], [[lua-actionir-contract-resolve
 See also [[lua-capture-cursor-runtime-audit]].
 Diagnostic details and remaining cross-backend drift are in [[lua-diagnostic-output-events]] and
 [[cross-backend-diagnostic-output-drift]]. Exhaustive evidence is [[lua-exhaustive-runtime-call-audit]].
+Final admission details are [[lua-runtime-helper-no-drift-closeout]].

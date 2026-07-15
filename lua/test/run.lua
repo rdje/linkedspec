@@ -127,7 +127,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-numeric-reducers", "status parity")
+  assert_equal(first.parity, "runtime-helper-value-control", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -735,6 +735,8 @@ end)
 test("source validator locks all 246 helper and control names", function()
   local action_names = require("linkedspec.action_call_names")
   assert_equal(action_names.count(), 246, "current call-name count")
+  assert_equal(#action_names.current_names(), 246, "current call-name list count")
+  assert_equal(action_names.current_names()[1], "!=", "current call-name list is sorted")
   assert_equal(action_names.is_known("trim"), true, "trim reservation")
   assert_equal(action_names.is_known("with"), true, "with reservation")
   assert_equal(action_names.is_known("otherwise"), true, "alias reservation")
@@ -3264,6 +3266,72 @@ end
 local function uniform_binding_action_source(action)
   return "Top::\n /x/ -> Done { " .. action .. " }\nDone::\n /x/\n"
 end
+
+test("every admitted call name reaches a runtime or documented non-function owner", function()
+  local action_names = require("linkedspec.action_call_names")
+  local expected_non_function = {
+    ["case"] = true,
+    ["elif"] = true,
+    ["elseif"] = true,
+    ["i"] = true,
+    ["map_leaves"] = true,
+    ["pop_back"] = true,
+    ["pop_front"] = true,
+    ["push_back"] = true,
+    ["push_front"] = true,
+    ["reduce_leaves"] = true,
+    ["walk_leaves"] = true,
+    ["when"] = true,
+    ["while"] = true,
+  }
+  local observed_non_function = {}
+
+  for _, name in ipairs(action_names.current_names()) do
+    local source = uniform_binding_action_source(name .. "()")
+    local parsed_ok, parsed = pcall(linkedspec.parse_spec, source)
+    if not parsed_ok then fail("admitted call failed to parse: " .. name .. ": " .. tostring(parsed)) end
+    local compiled_ok, compiled = pcall(linkedspec.compile_spec, parsed)
+    if not compiled_ok then fail("admitted call failed to compile: " .. name .. ": " .. tostring(compiled)) end
+    local runtime_ok, runtime_failure = pcall(
+      linkedspec.runtime_parse,
+      linkedspec.runtime_engine(compiled),
+      "xx"
+    )
+    if not runtime_ok and
+      linkedspec.is_runtime_interpreter_error(runtime_failure) and
+      runtime_failure.helper_name ~= nil and
+      runtime_failure.message:find("unsupported", 1, true)
+    then
+      observed_non_function[name] = true
+    end
+  end
+
+  local observed_count = 0
+  for name in pairs(observed_non_function) do
+    observed_count = observed_count + 1
+    assert_equal(expected_non_function[name], true, "unexpected unowned call name " .. name)
+  end
+  local expected_count = 0
+  for name in pairs(expected_non_function) do
+    expected_count = expected_count + 1
+    assert_equal(observed_non_function[name], true, "non-function owner remains explicit for " .. name)
+  end
+  assert_equal(expected_count, 13, "documented non-function owner count")
+  assert_equal(observed_count, 13, "observed non-function owner count")
+end)
+
+test("direct call rule returns the child value and refreshes retv", function()
+  local source = [[
+Top::
+ /x/ E { return([call(Child), retv, cursor_pos()]) }
+
+Child::
+ /y/ E { return(["child", match_text(), cursor_pos()]) }
+]]
+  assert_json_equal(execute_uniform_binding_source(source, "xy"), json.decode(
+    '[["child","y",2],["child","y",2],2]'
+  ), "direct child result and return channel")
+end)
 
 test("punctuation-light zero-argument contract is exact", function()
   local contract = json.decode(read_file(

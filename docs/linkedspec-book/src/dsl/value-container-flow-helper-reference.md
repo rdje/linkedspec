@@ -1133,7 +1133,8 @@ These are eager value helpers: every argument is evaluated before truthiness is 
 circuit side effects. Use structured or inline `if`/`switch` when an unselected expression must remain unevaluated.
 
 Current implementation status (2026-07-15): Rust and Julia execute this eager shape; Lua `.4.3.9.1` now does too
-at 123/123 on both ABIs after exhaustive audit `.4.3.9.0` isolated the exact three-name gap. Dart currently returns
+after exhaustive audit `.4.3.9.0` isolated the exact three-name gap. Lua's complete native helper closeout then
+passes 125/125 on both ABIs with exact all-name ownership. Dart currently returns
 early after a decisive operand and gives empty `and()` true, so it is not yet the documented eager shape. Direct Perl
 toolbox probes expose a separate keyword-precedence lowering defect for `return(and(...))` / `return(or(...))`.
 `FUTURE-PARITY-BACKLOG.5.2` owns those evaluation/reference repairs plus truthiness and arity normalization; use

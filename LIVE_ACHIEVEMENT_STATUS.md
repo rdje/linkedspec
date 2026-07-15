@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.2 — close Lua runtime helper no drift**
+  (DONE — exact 233+13 ownership passes 125/125; diagnostics/trace `.4.4` is next).
+
+  **Result:** A permanent sorted 246-name probe proves 233 runtime-owned function forms plus thirteen exact
+  documented structural/receiver-only forms and no unowned residual. Direct `call(Child)` locks child value,
+  refreshed `retv`, and cursor. Public status is now `runtime-helper-value-control`. PUC Lua and LuaJIT pass
+  125/125; coverage stays 246/105+1/122 and capability stays 64/0/0. Source-history rechecking corrects the prior
+  duplicate-`or` audit note: every inspected revision has one row. Canonical local CI passes CLI 61x2 and Phase 0
+  `1..1031` in 608 seconds. `.4.3.9` and `.4.3` close; `.4.4` activates.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.9.1 — execute Lua eager logical helpers**
   (DONE — eager logical values pass 123/123; exact recurring admission/status `.4.3.9.2` is next).
 
@@ -22,7 +32,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Result:** Generated minimal actions probe all 246 admitted names through Lua parse/compile/runtime. Exactly 230
   reach an owner; thirteen unsupported function forms are intentional structural/receiver-only surfaces; the
   genuine missing family is `and`/`or`/`not`. `.1` owns eager Lua logic, while `.2` owns recurring exact admission,
-  direct `call(rule)`, duplicate `or` cleanup, status, and parent closure. Toolbox probes expose a distinct Perl
+  direct `call(rule)`, the reported duplicate `or`, status, and parent closure. `.2` later proves the duplicate
+  report was an audit-note error rather than a source row. Toolbox probes expose a distinct Perl
   keyword-precedence lowering defect, durably dependency-gated under `FUTURE-PARITY-BACKLOG.5.2`. No behavior or
   capability changed.
 

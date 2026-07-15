@@ -5,19 +5,28 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua's native helper/value/control boundary is now exhaustively closed. A defensive sorted
+  inventory view drives all 246 admitted names through parse, compile, and runtime on both ABIs: 233 reach
+  function-form owners and exactly thirteen governed structural/receiver-only forms remain non-functions. Focused
+  direct `call(rule)` proof locks child value, refreshed `retv`, and cursor. Public status is
+  `runtime-helper-value-control`; PUC Lua and LuaJIT pass 125/125, coverage remains 246/105+1/122, and capability
+  remains 64/0/0. Source-history rechecking corrects the earlier duplicate-`or` audit note—every inspected revision
+  contains one row. Parents `.4.3.9`/`.4.3` close and diagnostics/trace `.4.4` activates; generated source, general
+  functions, corpus execution, and primary CLI retain later owners.
 - `2026-07-15` refresh: Lua now executes eager boolean `and`/`or`/`not` through the existing runtime truthiness
   seam. Every authored argument is materialized once left-to-right before composition; empty calls are false/
-  false/true, scalar `"0"` remains false, and empty aggregates remain true. PUC Lua and LuaJIT pass 123/123.
-  Exact recurring ownership/direct-call/inventory/status admission `.4.3.9.2` is active. Global truthiness, arity,
+  false/true, scalar `"0"` remains false, and empty aggregates remain true. That logical slice passes 123/123 and
+  the complete helper boundary now passes 125/125 as recorded above. Global truthiness, arity,
   Dart evaluation/empty-`and`, and Perl keyword-lowering differences remain dependency-gated `.5.2`.
 - `2026-07-15` refresh: the Lua helper closeout now has an executable negative-space measurement. Generating a
   minimal action for every exact admitted name yields 230 runtime-owned and 16 unsupported names. Thirteen are
   intentionally structural or named-receiver-only; `and`/`or`/`not` are the exact missing value helpers. That
-  audit activated repair `.4.3.9.1`, now complete as recorded above; final recurring ownership/status admission
-  is `.2`. The audit also exposed stale
-  `runtime-numeric-reducers` status, a duplicate source `or` row, absent focused direct `call(rule)` proof, and a
+  audit activated repair `.4.3.9.1`, now complete as recorded above; `.2` later closes the recurring admission.
+  The audit also exposed stale `runtime-numeric-reducers` status, reported a duplicate source `or` row, found
+  absent focused direct `call(rule)` proof, and exposed a
   separate Perl `and`/`or` keyword-precedence lowering defect. The cross-backend logical contract is durably owned
-  by dependency-gated `FUTURE-PARITY-BACKLOG.5.2`; no behavior changed in the split.
+  by dependency-gated `FUTURE-PARITY-BACKLOG.5.2`; the closeout later disproves the duplicate-row report from exact
+  source history.
 - `2026-07-15` refresh: Lua diagnostic output is a synchronous caller-owned event boundary, not parser data.
   `runtime_parse(..., { diagnostic_sink = callback })` emits typed helper/rule/message records for eager
   `print`/`say`/`print_each`; missing sinks stay quiet without skipping side effects, Unicode bytes and message

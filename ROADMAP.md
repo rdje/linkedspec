@@ -905,15 +905,18 @@ before the structured-format program may execute.
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only
 surfaces, and missing eager `and`/`or`/`not`. The audit activated logical repair `.4.3.9.1`, now complete below;
-`.2` owns recurring exact
-admission, direct `call(rule)` proof, duplicate inventory cleanup, and public status. Toolbox probes also expose a
+`.2` now closes recurring exact admission, direct `call(rule)` proof, and public status. Its source-history recheck
+also corrects the audit's unreproducible duplicate-`or` note: every inspected revision contains one exact row.
+Toolbox probes also expose a
 separate Perl `and`/`or` keyword-precedence lowering defect, dependency-gated with five-backend truthiness/arity
 normalization under `FUTURE-PARITY-BACKLOG.5.2`.
 
 Logical repair note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.1`): Lua now eagerly evaluates every authored
 `and`/`or`/`not` argument once left-to-right and returns booleans through the established Lua truthiness policy;
-empty calls are false/false/true. PUC Lua and LuaJIT pass 123/123. Exact recurring ownership/direct-call/inventory/
-status admission `.4.3.9.2` is active; cross-backend normalization remains `.5.2`.
+empty calls are false/false/true. PUC Lua and LuaJIT first pass 123/123. Exact recurring ownership/direct-call/
+status admission `.4.3.9.2` then closes at 125/125 with 233 function-form owners plus thirteen documented
+non-function forms and public status `runtime-helper-value-control`. Parent `.4.3` is done; diagnostics/trace `.4.4`
+is active while cross-backend normalization remains `.5.2`.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

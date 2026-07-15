@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua eager logical helpers pass 123/123 and exact runtime ownership/status admission
-  `.4.3.9.2` is active; diagnostic `.5.1` and logical normalization `.5.2` remain dependency-gated).
+- Last updated: `2026-07-15` (Lua native helper/value/control parity closes at 125/125 with exact 233+13 runtime
+  ownership; diagnostics/trace `.4.4` is active while diagnostic `.5.1` and logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4630,7 +4630,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 176 | `LUA-BACKEND-PARITY.4.3.8` | `done` | Caller-owned typed diagnostic events, quiet default, Unicode/order, and retained exit pass 122/122. |
 | 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
-| 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `active` | Admit exact recurring runtime-call ownership and correct public status. |
+| 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
 | 180 | `FUTURE-PARITY-BACKLOG.5.1` | `pending` / dependency-gated | Align the discovered five-backend diagnostic-output semantics and routing drift after Lua parity. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / dependency-gated | Repair Perl logical lowering and align eager truthiness/arity across five backends. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |

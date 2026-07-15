@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.2 — close Lua runtime helper no drift
+
+Lua now derives a sorted defensive view of all 246 admitted call names and permanently drives each generated
+function-form action through parse, compile, and runtime. The exact post-logical partition is 233 runtime-owned
+function forms plus thirteen documented structural/receiver-only forms, with zero unowned names. A focused direct
+`call(Child)` test locks the child value, refreshed `retv`, and cursor position.
+
+The public parity status advances from `runtime-numeric-reducers` to `runtime-helper-value-control`, deliberately
+without claiming later trace, general-function, corpus-execution, primary-CLI, or generated-source work. PUC Lua
+and LuaJIT pass 125/125; shared coverage remains 246/105+1/122 and capability remains 64/0/0. Source-history
+rechecking also corrects `.4.3.9.0`'s duplicate-`or` assertion: every inspected revision contains one exact row,
+so the earlier durable note—not executable inventory—was wrong. Canonical local CI passes CLI 61x2 and Phase 0
+`1..1031` in 608 seconds. `.4.3.9` and parent `.4.3` close; `.4.4` activates.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.9.1 — execute Lua eager logical helpers
 
 Lua now executes `and`, `or`, and `not` as boolean value helpers over the existing `runtime_truthy` policy. One
@@ -21,8 +35,9 @@ six structural controls, three receiver-only tree traversals, and four named-arr
 unimplemented value family is `and`, `or`, and `not`.
 
 The closeout is split accordingly: `.4.3.9.1` implements eager logical values through established Lua truthiness;
-`.4.3.9.2` adds recurring exact ownership, focused direct `call(rule)`, removes a duplicate inventory row, corrects
-the stale `runtime-numeric-reducers` status, and closes parent `.4.3`. Toolbox probes also found Perl
+`.4.3.9.2` adds recurring exact ownership, focused direct `call(rule)`, resolves the reported duplicate inventory
+row against source history, corrects the stale `runtime-numeric-reducers` status, and closes parent `.4.3`.
+Toolbox probes also found Perl
 `return(and(...))` / `return(or(...))` keyword-precedence lowering returns null instead of a boolean. That broader
 truthiness/arity/reference repair is dependency-gated under `FUTURE-PARITY-BACKLOG.5.2`. No behavior changed here.
 
