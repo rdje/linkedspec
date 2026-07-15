@@ -109,7 +109,10 @@ Three backbone items tracked major structural modernization — all done:
   canonical Perl generated-source/descriptor probes route nine residuals to four current mechanisms: action-edge
   child-call double dispatch, receiver-copy value loss, missing flat-array hash splicing, and public leading-trivia
   initialization. Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and exact permanent admission `.6.2.6` are
-  split; `.6.2.1` is active. The capability census remains four-backend 64/0/0 until `.8.4`.
+  split. Action-edge `.6.2.1` now caches matching current-edge calls, skips passive-terminal re-search, and leaves
+  unrelated calls direct. Three HLink, two EBNF, and SimEnv fixtures pass unchanged; both ABI suites pass 163/163
+  and the exact window reaches 56/59. Receiver-copy `.6.2.2` is active. The capability census remains four-backend
+  64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s

@@ -387,17 +387,36 @@ local function access_segment_matches(root, segment)
     (segment.kind == "index" and kind == "array")
 end
 
+local function is_passive_terminal_rule(rule)
+  return #rule.lifecycle_action_payloads == 0 and
+    #rule.action_edges == 0 and
+    #rule.blind_edges == 0 and
+    #rule.plain_action_payloads == 0
+end
+
 local function dispatch_edge_child(engine, edge_state, ctx)
   if edge_state.child_dispatched then return edge_state.child_result end
   edge_state.child_dispatched = true
   local cursor_before = ctx.cursor_byte
-  edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
+  local child_rule = engine.compiled_spec.rules_by_label[edge_state.target.label]
+  if not child_rule then
+    fail("action edge references undefined child '" .. edge_state.target.label .. "'", {
+      rule_label = edge_state.rule_label,
+    })
+  end
+  local passive = is_passive_terminal_rule(child_rule)
+  if passive then
+    edge_state.child_result = rule_result(false, json.null)
+  else
+    edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
+  end
   runtime_trace_decision(
     ctx,
     "lua_runtime:child_dispatch",
     edge_state.child_result.matched,
     "edge_family=action rule=" .. edge_state.rule_label ..
       " target=" .. edge_state.target.label .. "[" .. tostring(edge_state.target.index) .. "]" ..
+      (passive and " passive=1" or "") ..
       " cursor_before=" .. tostring(cursor_before) .. " cursor_after=" .. tostring(ctx.cursor_byte),
     trace.TRACE_DEBUG
   )
@@ -2239,7 +2258,12 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     if not expr.args[1] then fail("call expects a rule name") end
     local label = target_name(argument_expr(expr.args[1]))
     if not label then fail("call rule name must be a variable or string") end
-    local child = execute_rule(engine, label, 0, ctx)
+    local child
+    if edge_state and label == edge_state.target.label then
+      child = dispatch_edge_child(engine, edge_state, ctx)
+    else
+      child = execute_rule(engine, label, 0, ctx)
+    end
     ctx.retv = copy_value(child.value)
     return child.value
   elseif name == "push" then

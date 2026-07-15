@@ -5798,6 +5798,101 @@ Child::
   ), "direct child result and return channel")
 end)
 
+test("action-edge call reuses the current child exactly once", function()
+  local function execute_traced(source, input)
+    local emitter = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG), {
+      stdout_writer = function() end,
+    })
+    local result = linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+      input,
+      { trace = emitter }
+    )
+    return result, linkedspec.trace_events(emitter)
+  end
+
+  local function count_rule_entries(events, label)
+    local count = 0
+    local details = "rule=" .. label .. " "
+    for _, event in ipairs(events) do
+      if event.kind == linkedspec.TRACE_ENTER and
+          event.topic == "lua_runtime:rule" and
+          event.details:find(details, 1, true) then
+        count = count + 1
+      end
+    end
+    return count
+  end
+
+  local function count_child_dispatches(events, label, passive)
+    local count = 0
+    local target = "target=" .. label .. "[0]"
+    for _, event in ipairs(events) do
+      if event.topic == "lua_runtime:child_dispatch" and
+          event.details:find(target, 1, true) and
+          (not passive or event.details:find("passive=1", 1, true)) then
+        count = count + 1
+      end
+    end
+    return count
+  end
+
+  local current, current_events = execute_traced([[
+Top::
+ I { called = "unset" }
+ /a/ -> Child { called = call(Child) }
+ E { return([called, retv, cursor_pos()]) }
+
+Child:
+ /b/
+ E { return(["child", match_text(), cursor_pos()]) }
+]], "ab")
+  assert_json_equal(current.value, json.decode(
+    '[["child","b",2],["child","b",2],2]'
+  ), "current action-edge child value and return channel")
+  assert_equal(current.cursor_code_unit, 2, "current action-edge child cursor")
+  assert_equal(count_rule_entries(current_events, "Child"), 1, "current child call count")
+
+  local passive, passive_events = execute_traced([[
+Top::
+ -> Passive { observed = call(Passive) }
+ E { return([observed, retv, cursor_pos()]) }
+
+Passive: /b/
+]], "b")
+  assert_json_equal(passive.value, json.array({ json.null, json.null, 1 }), "passive child result")
+  assert_equal(passive.cursor_code_unit, 1, "passive child cursor")
+  assert_equal(count_rule_entries(passive_events, "Passive"), 0, "passive child re-search count")
+  assert_equal(count_child_dispatches(passive_events, "Passive", true), 1, "passive edge dispatch count")
+
+  local recursive, recursive_events = execute_traced([[
+Node::*
+ /a/ -> Node { nested = call(Node) }
+ E { return(cursor_pos()) }
+]], "aa")
+  assert_equal(recursive.value, 2, "self-recursive child value")
+  assert_equal(recursive.cursor_code_unit, 2, "self-recursive child cursor")
+  assert_equal(count_rule_entries(recursive_events, "Node"), 3, "self-recursive call count")
+
+  local unrelated, unrelated_events = execute_traced([[
+Top::
+ /a/ -> Child { other = call(Other) }
+ E { return([other, retv, cursor_pos()]) }
+
+Other:
+ /b/
+ E { return("other") }
+
+Child:
+ /c/
+ E { return("child") }
+]], "abc")
+  assert_json_equal(unrelated.value, json.decode('["other","child",3]'), "unrelated named call")
+  assert_equal(unrelated.cursor_code_unit, 3, "unrelated named call cursor")
+  assert_equal(count_rule_entries(unrelated_events, "Other"), 1, "unrelated rule call count")
+  assert_equal(count_rule_entries(unrelated_events, "Child"), 1, "edge child fallback count")
+end)
+
 test("punctuation-light zero-argument contract is exact", function()
   local contract = json.decode(read_file(
     "capability_conformance/punctuation_light_zero_arg_contract.json"

@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.1 — reuse Lua action-edge child calls
+
+Changed Lua `call(target)` so a call naming the current compiled action-edge target routes through that edge's
+cached dispatcher. The first request computes at most one child result, updates `retv`, and marks the edge
+dispatched; `accept_match(...)` can no longer execute the same child again as fallback. Unrelated named calls keep
+their ordinary direct execution path.
+
+Added the established passive-terminal boundary to the same dispatcher. A compiled child with no lifecycle,
+action-edge, blind-edge, or plain action payload is not re-searched after the parent dependency regex has already
+consumed its match; it yields a cached null result and emits `passive=1` in the existing child-dispatch trace.
+Trace-backed tests lock non-self value/cursor/one-entry behavior, passive zero-re-search behavior, self-recursive
+call count, and an unrelated call followed by normal fallback.
+
+PUC Lua and LuaJIT pass 163/163. Exact offsets 40-98 improve identically from 50/59 to 56/59: all three HLink, both
+EBNF, and SimEnv fixtures now pass unchanged. Only the separately owned receiver-copy, flat-array hash-splice, and
+leading-trivia compare residuals remain. Corpus/oracle data, public status/CLI, coverage 246/105+1/122, and the
+four-backend 64/0/0 capability census are unchanged. Canonical local CI exits 0 with CLI 61/61 in default and
+POSIX environments plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.0 — split Lua advanced corpus residuals
 
 Measured exact zero-based manifest offsets 40-98 through the production library executor before behavior changes.

@@ -1744,7 +1744,10 @@ These helpers read from the **current match** — the regex capture that trigger
 - **Behavior**: Invokes a child rule directly from action code and returns its result. Used for nested parsing delegation.
 - **Edge cases**: The child rule must exist and be a valid body rule in the same `.spec` file. Use the bare
   rule label (`call(child)`), not a quoted string: current runtimes resolve the target from the raw action
-  argument token.
+  argument token. Inside an action edge, calling that edge's current target reads the one cached selected-child
+  result; it does not launch a second child search or permit a later fallback dispatch. A body-less passive
+  terminal has already been consumed by the parent dependency match, so its cached result is undefined/null and
+  the child is not re-searched. Calling a different rule name remains an ordinary independent call.
 - **Worked example**:
   ```text
   demo::
@@ -1757,7 +1760,8 @@ These helpers read from the **current match** — the regex capture that trigger
    I { return(uppercase(entry_text())) }
   ```
   Input `abc` returns `{"child":"ABC","len":3}`. The top action calls `child`, stores the child return in
-  `retv`, and returns a hash directly; this example does not use the top accumulator wrapper.
+  `retv`, and returns a hash directly; this example does not use the top accumulator wrapper. The `-> child`
+  edge selects `child`, and `call(child)` consumes that selected result exactly once.
 
 ## Cross-Cutting Contracts
 

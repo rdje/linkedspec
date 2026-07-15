@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.1.4` permanently admits governed capability offsets 99-104 at 162/162 on both
-  Lua ABIs, closes controlled/core parent `.6.1`, and activates advanced/shipped window `.6.2`)
+- Last updated: `2026-07-15` (`.6.2.1` reuses action-edge child calls exactly once, skips passive-terminal
+  re-search, raises exact offsets 40-98 to 56/59 on both Lua ABIs, and activates receiver-copy repair `.6.2.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2548,7 +2548,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals`
 
 - ID: `LUA-BACKEND-PARITY.6.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Reuse the current action-edge child result for `call(child)` exactly once.
   Dependencies: `.6.2.0`
   Acceptance: When `call(target)` names the current action edge's compiled target, dispatch through that edge state,
@@ -2556,11 +2556,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     unrelated named calls retain normal execution. Focused tests lock call count, cursor, value, recursion, and
     passive-child behavior on both Lua ABIs; the six currently affected corpus cases are re-executed unchanged and
     the full offsets 40-98 window is remeasured to route any successor mechanism.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `call(target)` now routes through the current action-edge state when the
+    labels agree, caches the selected child result, refreshes `retv`, and prevents fallback re-execution. A
+    structurally passive child—no lifecycle, action-edge, blind-edge, or plain action payload—is not re-searched
+    after the parent dependency regex has already consumed its match; its cached result is null and trace marks
+    `passive=1`. Unrelated named calls retain ordinary direct execution. One focused trace-backed test locks a
+    non-self child at one entry, passive child at zero re-searches/one edge dispatch, self-recursive cursor/value/
+    call count, and an unrelated call followed by normal edge fallback. PUC Lua and LuaJIT pass 163/163. Exact
+    offsets 40-98 improve identically from 50/59 to 56/59: all three HLink, both EBNF, and SimEnv cases now pass
+    unchanged. Only the separately owned receiver-copy, PPlugin flat-array hash-splice, and history leading-trivia
+    compare residuals remain. Corpus/oracle data, public status/CLI, coverage, and capability census are unchanged.
+    Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+    `1..1031` in 634 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls`
 
 - ID: `LUA-BACKEND-PARITY.6.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve evaluated values through receiver-form `.copy()` continuation.
   Dependencies: `.6.2.1`
   Acceptance: Generic receiver `copy()` deep-copies its current value exactly once, while function-form
@@ -2754,6 +2765,10 @@ projection, and leaves the census unchanged. One-emitter propagation `.5.3.2` no
 construction/runtime trace at 155/155 on both ABIs with no emitter retained in compiled or engine state;
 census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book/KM agreement, closes parents
 `.5.3`/`.5`, and activates corpus window `.6.1` without changing the four-backend census.
+Action-edge repair `.6.2.1` now routes `call(target)` through the current compiled edge, caches one child result,
+and skips passive-terminal re-search after the parent consumes the dependency match. All three HLink, both EBNF,
+and SimEnv cases pass unchanged; exact offsets 40-98 are 56/59 on both Lua ABIs at 163/163 focused tests. The
+three remaining compare residuals retain their existing owners, so receiver-copy `.6.2.2` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2876,6 +2891,9 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 | 117 | `LUA-BACKEND-PARITY.6.1.3` | `done` | Permanent ordered core offsets 0-39 pass 40/40 at endpoint 1 on both ABIs. |
 | 118 | `LUA-BACKEND-PARITY.6.1.4` | `done` | Permanent offsets 99-104 pass 6/6 with exact names, outputs, and endpoints on both ABIs. |
 | 119 | `LUA-BACKEND-PARITY.6.2` | `active` | Measure offsets 40-98 and split every residual by stage and mechanism before behavior work. |
+| 120 | `LUA-BACKEND-PARITY.6.2.0` | `done` | Both ABIs measure 50/59 and split four independent advanced-corpus mechanisms before code. |
+| 121 | `LUA-BACKEND-PARITY.6.2.1` | `done` | Cached child calls/passive terminals close six fixtures and raise both ABIs to 56/59 at 163/163. |
+| 122 | `LUA-BACKEND-PARITY.6.2.2` | `active` | Preserve the evaluated value through receiver-form `.copy()` exactly once. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3093,6 +3111,30 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
   run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmap, architecture, task/index/live state, mdBook, Knowledge Map, and bounded
   memory record exact 50/59 measurement and activate only action-edge repair `.6.2.1`.
+
+### `LUA-BACKEND-PARITY.6.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua `call(target)` inside its owning action edge directly executed the child without
+  setting `child_dispatched`; non-self fallback executed it again. Separately, a body-less terminal child was
+  re-searched after the parent dependency regex had already consumed its match, allowing default seek repetition
+  to skip later tokens.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `evaluate_call(...)` bypassed `dispatch_edge_child(...)`, while that dispatcher
+  lacked the established passive-terminal predicate. Production trace showed duplicated HLink/EBNF/SimEnv child
+  entries and EBNF `whitespace` seeking from cursor 8 through every later whitespace to cursor 40. Existing
+  Knowledge Map and canonical generated-handler evidence require one cached current-edge result and no passive
+  re-search.
+- [x] **FIX** — Route matching `call(target)` through the current edge state; retain direct execution for unrelated
+  labels; cache one result/`retv`; classify passive terminals structurally from compiled payload families; return
+  cached null without rule re-entry; and emit `passive=1` in the existing child-dispatch trace.
+- [x] **ADDRESSED (verified)** — Trace-backed focused proof locks current-child value/cursor/one entry, passive
+  null/cursor/zero re-searches/one dispatch, self-recursive value/cursor/call count, and unrelated call plus fallback.
+  All three HLink, both EBNF, and SimEnv fixtures pass unchanged; offsets 40-98 are 56/59 on both ABIs.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 163/163. The remaining three failures are exactly the pre-owned
+  receiver-copy, flat-array hash-splice, and leading-trivia compares. No corpus/oracle data, public status/CLI,
+  coverage 246/105+1/122, or capability 64/0/0 changed. Canonical local CI exits 0 with CLI 61/61 in default and
+  POSIX environments plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook helper semantics/status/handoff,
+  Knowledge Map, changes/notes, and bounded memory record exact 56/59 and activate only receiver-copy `.6.2.2`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4650,3 +4692,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.1.3` | `LUA-BACKEND-PARITY.6.1.3 - admit Lua core corpus prefix` | Permanent exact offsets 0-39, 40/40 ordered wrapped outputs, endpoint 1/1, and 161/161 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.6.1.4` | `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window` | Permanent exact offsets 99-104, six governed names/wrapped outputs/endpoints, 162/162 dual-ABI proof, parent `.6.1` closure, and `.6.2` handoff. |
 | `LUA-BACKEND-PARITY.6.2.0` | `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals` | Exact dual-ABI 50/59 measurement, nine routed residuals, four toolbox-proven current mechanisms, and dependency-ordered repair/remeasure/admission split. |
+| `LUA-BACKEND-PARITY.6.2.1` | `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls` | Cached current-edge calls, passive-terminal no-research, trace-backed self/non-self/unrelated proof, exact six-fixture closure, and dual-ABI 56/59. |

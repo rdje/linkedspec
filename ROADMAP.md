@@ -1003,6 +1003,11 @@ permanently locks exact offsets 0-39 at 40/40, exact wrapped outputs, and endpoi
 161/161. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
 `2,1,2,1,5,5`; both suites pass 162/162, `.6.1` closes, and advanced/shipped offsets 40-98 `.6.2` activate.
 Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0 until `.8.4`.
+Planning `.6.2.0` measures that exact window at 50/59 on both Lua ABIs and splits four mechanisms. Action-edge
+repair `.6.2.1` now reuses the current child result once, skips body-less passive-terminal re-search after the
+parent match, and leaves unrelated named calls direct. Three HLink, two EBNF, and SimEnv cases pass unchanged;
+both focused suites pass 163/163 and offsets 40-98 reach 56/59. Receiver-copy `.6.2.2` is active, with flat-array
+hash splicing, leading-trivia initialization, successor measurement, and permanent admission following.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

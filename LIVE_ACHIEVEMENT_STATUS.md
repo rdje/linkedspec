@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.1 — reuse Lua action-edge child calls**
+  (DONE — six action-edge/passive-terminal fixtures close unchanged at dual-ABI 56/59; `.6.2.2` is next).
+
+  **Result:** Matching `call(target)` now uses the current compiled edge state, caches one child result/`retv`, and
+  prevents fallback re-execution; unrelated rule calls remain direct. Structurally passive terminals are not
+  re-searched after their parent dependency match and trace as `passive=1`. Focused current-child, passive,
+  self-recursive, and unrelated-call proofs pass 163/163 on PUC Lua and LuaJIT. All three HLink, both EBNF, and
+  SimEnv cases pass unchanged, raising exact offsets 40-98 from 50/59 to 56/59 on both ABIs. Only the separately
+  owned receiver-copy, PPlugin flat-array hash-splice, and history leading-trivia compares remain. Corpus/oracle,
+  status/CLI, coverage, and capability are unchanged. Canonical local CI exits 0 with CLI 61/61 in default and
+  POSIX environments plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.0 — split Lua advanced corpus residuals**
   (DONE — exact dual-ABI 50/59 measurement and dependency-ordered repair split are durable; `.6.2.1` is next).
 

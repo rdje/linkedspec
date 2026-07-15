@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.1` — an action edge owns one child result, including no-result terminals):
+  Treat `call(target)` as a request against the current edge when its label matches; the edge state—not the helper
+  spelling—owns dispatch count, target index, cached value, and `retv`. Keep unrelated calls direct. A passive
+  terminal is structural: no lifecycle, action, blind, or plain payload. Its dependency regex was already consumed
+  by the parent, so re-entering its default rule is not harmless—it can seek across later input. EBNF exposed this
+  vividly when `whitespace` jumped from cursor 8 to 40 and erased every body token. Trace both rule entries and
+  child-dispatch decisions; a null result still needs a separate dispatched boolean. PUC Lua and LuaJIT pass
+  163/163, and exact offsets 40-98 move from 50/59 to 56/59 with six unchanged fixtures closed. Canonical local CI
+  exits 0 with CLI 61/61 in both environments and Phase 0 `1..1031` in 634 seconds. Mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.0` — use cross-language disagreement as a mechanism detector): Exact
   offsets 40-98 are already 50/59 on both Lua ABIs; the value lies in the nine disagreements. Trace first: a child
   entered twice is stronger evidence than an output diff. Then compare the emitted canonical Perl handler: it

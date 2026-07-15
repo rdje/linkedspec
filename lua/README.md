@@ -81,7 +81,10 @@ governed `.6.1.4` permanently locks offsets 99-104 at 6/6 with endpoints `2,1,2,
 162/162, and closes `.6.1`. Advanced/shipped planning `.6.2.0` measures offsets 40-98 at the same 50/59 on both
 ABIs. It routes action-edge child-call double dispatch, receiver-copy value loss, flat-array hash-splice omission,
 and public leading-trivia initialization to `.6.2.1-.4`; `.6.2.5` owns successor measurement before `.6.2.6`
-permanent 59-case admission. `.6.2.1` is active.
+permanent 59-case admission. Action-edge `.6.2.1` now caches matching `call(target)` results, skips passive-terminal
+re-search after the parent match, and retains ordinary execution for unrelated rule calls. All six affected
+shipped cases pass unchanged, both ABI suites pass 163/163, and the window is 56/59. Receiver-copy `.6.2.2` is
+active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -304,8 +307,10 @@ controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` permanentl
 40/40 and endpoint 1/1. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
 `2,1,2,1,5,5`; focused suites pass 162/162 and parent `.6.1` closes. `.6.2.0` then measures offsets 40-98 at
 50/59 identically on both ABIs and dependency-splits the four observed runtime mechanisms. Action-edge child-call
-reuse `.6.2.1` is active; receiver copy, flat-array hash splicing, leading-trivia initialization, successor
-measurement, and permanent admission follow under `.6.2.2-.6`.
+reuse `.6.2.1` now passes 163/163 per ABI and raises the exact window to 56/59 by closing three HLink, two EBNF,
+and SimEnv cases. It caches the current edge result exactly once, does not re-search passive terminals, and leaves
+unrelated calls direct. Receiver copy is active; flat-array hash splicing, leading-trivia initialization, successor
+measurement, and permanent admission follow under `.6.2.3-.6`.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

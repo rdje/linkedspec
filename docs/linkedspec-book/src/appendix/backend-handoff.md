@@ -367,7 +367,11 @@ nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46
 Reusable executor `.6.1.2` validates before selection and retains every controlled result/failure at 160/160 per
 ABI. Permanent core window `.6.1.3` then locks exact offsets 0-39 at 40/40 with endpoint 1/1 and raises both suites
 to 161/161. Governed `.6.1.4` locks offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`, raises both suites to
-162/162, closes `.6.1`, and activates offsets 40-98 under `.6.2`. The census stays 64/0/0 until `.8.4`.
+162/162, closes `.6.1`, and activates offsets 40-98 under `.6.2`. Planning `.6.2.0` measures that window at 50/59.
+Action-edge `.6.2.1` then caches matching current-edge calls, skips passive-terminal re-search after the parent
+dependency match, and preserves ordinary unrelated rule calls. Three HLink, two EBNF, and SimEnv cases pass
+unchanged; both suites pass 163/163 and the window reaches 56/59. Receiver-copy `.6.2.2` is active. The census
+stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
