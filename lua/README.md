@@ -73,9 +73,9 @@ hidden emitter. Ordered scopes/decisions, routed output, quiet and filtered leve
 and traced/untraced identity pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Lua remains
 outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`. Exact no-drift `.5.3.3` closes parents
 `.5.3`/`.5` without changing source, status, behavior, tests, or the manifest. Controlled/core planning `.6.1.0`
-measures offsets 0-39 and 99-104 at 45/46 on both ABIs: all capability cases pass, while offset 20 alone exposes
-nested-assignment key/index segment-kind erasure. Repair `.6.1.1`, executor `.6.1.2`, core `.6.1.3`, and
-capability/no-drift `.6.1.4` are ordered before generated source.
+measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed nested-path repair `.6.1.1` preserves key/index
+requirements and atomic governed assignment, closes unchanged offset 20, and raises both windows to 46/46 while
+focused suites pass 157/157. Executor `.6.1.2` is active before core `.6.1.3` and capability/no-drift `.6.1.4`.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -291,8 +291,9 @@ neutral parse/validate/compile failures, and named/path runtime-engine attributi
 with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes parent `.5.2`. Exact outward
 descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` are now complete; the latter raises both suites
 to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` closes parents
-`.5.3`/`.5`; controlled/core planning `.6.1.0` is complete at 45/46 across exact offsets 0-39 and 99-104, and
-nested segment-kind repair `.6.1.1` is active. Generated Lua preservation/execution remains `.8.1-.8.4`.
+`.5.3`/`.5`; controlled/core planning `.6.1.0` and typed nested-path repair `.6.1.1` are complete at 46/46 across
+exact offsets 0-39 and 99-104, and reusable library executor `.6.1.2` is active. Generated Lua preservation/
+execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

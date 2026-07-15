@@ -158,5 +158,6 @@ to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(.
 `runtime_engine(...)` directly; no CLI, subprocess, temporary file, or serialized handoff participates in either
 path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors are now current; one-emitter
 full-pipeline trace is current; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5`. Controlled/core
-planning `.6.1.0` measures offsets 0-39 and 99-104 at 45/46 on both ABIs, isolates nested path segment-kind repair
-`.6.1.1`, and orders reusable corpus execution plus permanent windows under `.6.1.2-.4`.
+planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs; typed nested-path repair `.6.1.1`
+closes unchanged offset 20 and both windows at 46/46. Reusable corpus execution `.6.1.2` is active before
+permanent windows `.6.1.3-.4`.

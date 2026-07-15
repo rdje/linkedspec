@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.1.0` measures core offsets 0-39 plus capability offsets 99-104 at 45/46 on both
-  Lua ABIs, isolates offset 20 nested segment-kind drift, and activates repair `.6.1.1` before executor/windows)
+- Last updated: `2026-07-15` (`.6.1.1` preserves typed nested path segments and governed evaluation/atomicity,
+  closes exact offset 20, passes owned windows 46/46 on both Lua ABIs, and activates library executor `.6.1.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2424,18 +2424,28 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission`
 
 - ID: `LUA-BACKEND-PARITY.6.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Preserve nested assignment segment kinds and reject wrong-shape transitions.
   Dependencies: `.6.1.0`
   Acceptance: Evaluate path segments and RHS in the governed order, require numeric index segments to traverse or
     write arrays and key segments to traverse or write hashes, preserve copy-on-write/no-autovivification behavior,
     return null without root mutation for missing/wrong-kind/gap paths, and pass the exact offset-20 oracle case on
     both Lua ABIs without weakening its expected JSON.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Lua now normalizes index-expression values to finite nonnegative integer
+    positions, preserves key versus index segment identity for nested reads and writes, and rejects every
+    wrong-container transition instead of routing numeric indices through harray stringification. Nested assignment
+    evaluates all segment expressions in order, then the RHS, before root/path validation; it mutates only a deep
+    copied root and stores that root only after the complete path succeeds. Focused proof locks valid dynamic
+    numeric-string indices, hash/array traversal, append-at-length, wrong-kind reads/writes, missing intermediates,
+    expression side effects on rejected paths, unchanged roots, null results, and stored false preservation. The
+    exact manifest offset-20 source passes with unchanged wrapped expected JSON and byte/character cursor 1. PUC
+    Lua and LuaJIT pass 157/157; disposable ordered offsets 0-39 plus 99-104 pass 46/46 on both ABIs. No fixture,
+    expected value, parser grammar, public status, capability row, or later corpus boundary changes. Canonical
+    local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds`
 
 - ID: `LUA-BACKEND-PARITY.6.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add reusable native library corpus execution and controlled proof records.
   Dependencies: `.6.1.1`
   Acceptance: Validate the strict manifest, execute selected fixtures through automatic spec-defined parsing,
@@ -2733,8 +2743,8 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 | 112 | `LUA-BACKEND-PARITY.6` | `active` | Reach complete interpreter-corpus parity. |
 | 113 | `LUA-BACKEND-PARITY.6.1` | `active` | Admit controlled/core and governed capability fixture windows. |
 | 114 | `LUA-BACKEND-PARITY.6.1.0` | `done` | Both ABIs measure 45/46 and split the sole nested-assignment residual before code. |
-| 115 | `LUA-BACKEND-PARITY.6.1.1` | `active` | Preserve nested path segment kinds and close exact offset 20. |
-| 116 | `LUA-BACKEND-PARITY.6.1.2` | `pending` | Add reusable library corpus execution and controlled result records. |
+| 115 | `LUA-BACKEND-PARITY.6.1.1` | `done` | Typed nested paths close offset 20 and both owned windows at 46/46 per ABI. |
+| 116 | `LUA-BACKEND-PARITY.6.1.2` | `active` | Add reusable library corpus execution and controlled result records. |
 | 117 | `LUA-BACKEND-PARITY.6.1.3` | `pending` | Permanently admit exact ordered core offsets 0-39. |
 | 118 | `LUA-BACKEND-PARITY.6.1.4` | `pending` | Admit capability offsets 99-104 and close controlled/core no-drift. |
 
@@ -2868,6 +2878,25 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/live/change/notes, task/index, mdBook status/API/handoff,
   Knowledge Map, and bounded memory record the exact windows, 45/46 boundary, mechanism, ordered owners, and active
   segment-kind repair `.6.1.1`.
+
+### `LUA-BACKEND-PARITY.6.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact offset 20 returned a hash with an invalid stringified numeric key `"0"`, and
+  the owned offsets 0-39 plus 99-104 passed only 45/46 on both PUC Lua and LuaJIT.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Parsing retained `key` versus `index`, but nested access reduced both to bare
+  values before kind-generic reads/writes. Assignment also validated the root/path before completing the governed
+  evaluation order, so a repair had to preserve both segment provenance and side-effect ordering.
+- [x] **FIX** — `runtime_access_index(...)` normalizes finite nonnegative indices; typed segment checks require keys
+  to traverse harrays and indices to traverse arrays. Nested assignments evaluate all segments, then RHS, mutate a
+  deep copy, and replace the root only after the whole path succeeds.
+- [x] **ADDRESSED (verified)** — Focused tests lock dynamic numeric-string indices, valid hash/array paths,
+  append-at-length, wrong-kind reads/writes, missing intermediates, rejected-path expression side effects,
+  unchanged roots, null results, false preservation, and the exact offset-20 source/cursor/wrapped output.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 157/157; disposable ordered windows pass 46/46 on both ABIs. No
+  fixture, expected value, parser grammar, public status, capability row, or corpus ownership changes. Canonical
+  local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds; mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/live/change/notes, task/index, mdBook status/API/handoff,
+  Knowledge Map, and bounded memory record repair closure and activate reusable library executor `.6.1.2`.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4399,3 +4428,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.3.2` | `LUA-BACKEND-PARITY.5.3.2 - propagate Lua full-pipeline trace` | One caller-owned emitter across IO/frontend/compiler/function/staged/engine/runtime, exact filters/sinks/errors/identity, and 155/155 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.3.3` | `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift` | Exact API/status/test/contract/book/KM inventory, parent `.5.3`/`.5` closure, unchanged 64/0/0 census, and corpus `.6.1` handoff. |
 | `LUA-BACKEND-PARITY.6.1.0` | `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission` | Exact 0-39/99-104 dual-ABI measurement, sole nested-segment mismatch classification, and dependency-ordered repair/executor/window split. |
+| `LUA-BACKEND-PARITY.6.1.1` | `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds` | Typed key/index traversal, governed evaluation order, atomic failed writes, exact offset 20, and dual-ABI 46/46 handoff. |

@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.1.1 — preserve Lua nested path segment kinds
+
+Preserved parsed key/index segment identity through Lua nested reads and writes. Index expressions now normalize
+to finite nonnegative integer positions and can traverse only arrays; key segments can traverse only harrays.
+Nested assignment evaluates every segment expression in order and then the RHS before validation, mutates a deep
+copy, and replaces the root only after the complete path succeeds. Missing, wrong-kind, negative/nonfinite, and
+gap paths therefore return null without autovivification or partial root mutation.
+
+Focused tests cover valid mixed paths, dynamic numeric-string indices, append-at-length, wrong-kind reads/writes,
+missing intermediates, rejected-path evaluation side effects, false preservation, and the unchanged exact offset
+20 fixture. PUC Lua and LuaJIT pass 157/157; disposable offsets 0-39 plus 99-104 pass 46/46 on both ABIs. No
+fixture/expected value, parser grammar, public status, capability row, or corpus boundary changed. Reusable native
+library corpus execution/result records `.6.1.2` are next. Canonical local CI passes CLI 61x2 plus Phase 0
+`1..1031` in 619 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.1.0 — split Lua controlled corpus admission
 
 Measured the exact `.6.1` manifest windows through the existing native pipeline before adding corpus execution or

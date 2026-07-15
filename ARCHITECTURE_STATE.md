@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua nested-path repair `.6.1.1` carries parser key/index identity through runtime reads and
+  writes. Keys require harrays; normalized finite nonnegative indices require arrays. Nested assignment evaluates
+  all segment expressions and then RHS before validation, mutates a copied root, and stores only after complete
+  success, preserving null/no-autovivification/no-partial-mutation behavior. Exact offset 20 now passes unchanged;
+  owned offsets 0-39 and 99-104 pass 46/46 on PUC Lua and LuaJIT, and focused suites pass 157/157. No fixture,
+  expected value, parser grammar, public status, capability row, or corpus boundary changed. Reusable library
+  corpus execution/result records `.6.1.2` are active. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`
+  in 619 seconds.
 - `2026-07-15` refresh: Lua controlled-corpus planning `.6.1.0` defines exact owned windows at manifest offsets
   0-39 and 99-104 and measures them through the current automatic parse/validate/compile/engine/runtime pipeline.
   PUC Lua and LuaJIT both pass 45/46: all six governed capability fixtures and 39/40 core fixtures are exact. Sole

@@ -332,6 +332,21 @@ local function append_array_binding(ctx, target, value)
   return store_array_mutation(ctx, target, storage, values)
 end
 
+local function runtime_access_index(value)
+  local number
+  if type(value) == "number" then
+    number = value
+  elseif type(value) == "string" then
+    number = tonumber(value)
+  elseif type(value) == "boolean" then
+    number = value and 1 or 0
+  end
+  if number == nil or number ~= number or number == math.huge or number == -math.huge or number < 0 then
+    return -1
+  end
+  return math.floor(number)
+end
+
 local function read_index(root, key)
   local kind = json.kind(root)
   if kind == "array" then
@@ -364,6 +379,12 @@ local function write_index(root, key, value)
     return true, stored
   end
   return false
+end
+
+local function access_segment_matches(root, segment)
+  local kind = json.kind(root)
+  return (segment.kind == "key" and kind == "harray") or
+    (segment.kind == "index" and kind == "array")
 end
 
 local function dispatch_edge_child(engine, edge_state, ctx)
@@ -2380,15 +2401,17 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   if kind == "nested_access" then
     local value = lookup_binding(ctx, expr.base)
     for _, segment in ipairs(expr.segments) do
-      local key = segment.kind == "key" and segment.value or evaluate_expr(
-        engine,
-        segment.expr,
-        ctx,
-        accumulator,
-        edge_state
-      )
-      value = read_index(value, key)
-      if value == json.null then break end
+      local key
+      if segment.kind == "key" then
+        key = segment.value
+      else
+        key = runtime_access_index(evaluate_expr(engine, segment.expr, ctx, accumulator, edge_state))
+      end
+      if access_segment_matches(value, segment) then
+        value = read_index(value, key)
+      else
+        value = json.null
+      end
     end
     return copy_value(value)
   end
@@ -2407,25 +2430,29 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return store_harray_mutation(ctx, { kind = "scalar", name = expr.name }, storage, root)
   end
   if kind == "assign_nested_access" then
+    local segments = {}
+    for index, segment in ipairs(expr.segments) do
+      local key
+      if segment.kind == "key" then
+        key = segment.value
+      else
+        key = runtime_access_index(evaluate_expr(engine, segment.expr, ctx, accumulator, edge_state))
+      end
+      segments[index] = { kind = segment.kind, key = key }
+    end
+    local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
     local current, storage = lookup_binding(ctx, expr.base)
     if json.kind(current) ~= "array" and json.kind(current) ~= "harray" then return json.null end
     local root = copy_value(current)
     local target = root
-    for index, segment in ipairs(expr.segments) do
-      local key = segment.kind == "key" and segment.value or evaluate_expr(
-        engine,
-        segment.expr,
-        ctx,
-        accumulator,
-        edge_state
-      )
-      if index == #expr.segments then
-        local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
-        if not write_index(target, key, value) then return json.null end
+    for index, segment in ipairs(segments) do
+      if not access_segment_matches(target, segment) then return json.null end
+      if index == #segments then
+        if not write_index(target, segment.key, value) then return json.null end
       else
-        local next_value = read_index(target, key)
+        local next_value = read_index(target, segment.key)
         if json.kind(next_value) ~= "array" and json.kind(next_value) ~= "harray" then return json.null end
-        local written, copied = write_index(target, key, next_value)
+        local written, copied = write_index(target, segment.key, next_value)
         if not written then return json.null end
         target = copied
       end

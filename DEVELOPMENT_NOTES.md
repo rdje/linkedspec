@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.1.1` — retain syntax kind and evaluation order at the runtime boundary):
+  Evaluated path values do not contain enough information to choose a container. Preserve the parser's `key`/
+  `index` tag until each transition: keys require harrays, indices require arrays, and normalized indices must be
+  finite nonnegative integers. Assignment ordering is equally semantic: evaluate every segment expression, then
+  the RHS, before root/path validation; mutate a deep copy and store it only on full success. Do not use Lua's
+  `and`/`or` selection idiom when the valid value may be `false`, because it collapses stored false to the fallback.
+  These rules close exact corpus offset 20 and both owned windows at 46/46 on PUC Lua and LuaJIT while focused
+  suites pass 157/157. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds. No oracle, parser,
+  status, census, or corpus ownership changes; `.6.1.2` is active.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.1.0` — preserve path syntax kinds through runtime mutation): A mixed nested
   lvalue is not just a list of evaluated keys. Its parsed segment kind carries the container requirement: `[0]`
   selects an array element, while `["name"]` selects a hash field. Lua's core read/write helpers intentionally

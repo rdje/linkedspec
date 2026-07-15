@@ -140,15 +140,16 @@ contract/emission `.5.3.1` now locks and emits fixed-v1/variadic-v2/final-codebl
 with Perl's existing final-codeblock projection aligned to outward v3. One-emitter pipeline trace `.5.3.2` now
 crosses native IO, frontend/compiler/function/staged phases, engine construction, and runtime at 155/155 on both
 ABIs with status `native-full-pipeline-trace-v1`. Census-preserving `.5.3.3` closes parents `.5.3`/`.5` without
-behavior or census change. Controlled/core planning `.6.1.0` measures exact offsets 0-39 and 99-104 at 45/46 on
-both ABIs, isolates offset 20's nested-assignment segment-kind defect under `.6.1.1`, and orders library execution
-`.6.1.2`, core admission `.6.1.3`, and capability/no-drift `.6.1.4`. Capability remains 64/0/0.
+behavior or census change. Controlled/core planning `.6.1.0` measured exact offsets 0-39 and 99-104 at 45/46 on
+both ABIs. Typed nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46, with focused
+suites at 157/157. Library execution `.6.1.2` is active before core admission `.6.1.3` and capability/no-drift
+`.6.1.4`. Capability remains 64/0/0.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.
 One-emitter native loading, frontend, compiler, function-shell, staged, engine, and runtime propagation is complete
 under `.5.3.2`; `.5.3.3` closes exact no-drift without changing the capability census. Corpus planning `.6.1.0`
-is complete and segment-kind repair `.6.1.1` is active.
+and typed segment-kind repair `.6.1.1` are complete; reusable library executor `.6.1.2` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

@@ -4235,6 +4235,68 @@ Top::
   assert_equal(linkedspec.runtime_value_kind(json.array()), "array", "empty array kind")
 end)
 
+test("runtime nested assignment preserves segment kinds order and atomic failure", function()
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ I {
+   payload = { "items" : [{ "name" : "old" }] }
+   dynamic_index = "0"
+   payload["items"][dynamic_index]["name"] = "new"
+   payload["items"][1] = { "name" : "tail" }
+   wrong_result = payload["items"][0][0] = "bad"
+   index_seen = -1
+   rhs_seen = "before"
+   missing_result = payload["missing"][index_seen = 0] = (rhs_seen = "after")
+ }
+ E {
+   return(array(
+     payload,
+     wrong_result,
+     missing_result,
+     index_seen,
+     rhs_seen,
+     payload["items"][0][0],
+     payload["items"][0]["name"]
+   ))
+ }
+]]))),
+    "x"
+  )
+  assert_equal(json.encode(result.value[1]), [[{"items":[{"name":"new"},{"name":"tail"}]}]], "valid path root")
+  assert_equal(result.value[2], json.null, "numeric segment rejects harray write")
+  assert_equal(result.value[3], json.null, "missing intermediate rejects write")
+  assert_equal(result.value[4], 0, "all index expressions evaluate before path validation")
+  assert_equal(result.value[5], "after", "RHS evaluates before path validation")
+  assert_equal(result.value[6], json.null, "numeric segment rejects harray read")
+  assert_equal(result.value[7], "new", "typed key path reads updated value")
+end)
+
+test("runtime executes exact nested assignment core corpus fixture", function()
+  local corpus = linkedspec.load_corpus_fixtures("rust/linkedspec-runtime/tests/corpus")
+  local fixture = corpus.fixtures[21]
+  assert_equal(fixture.name, "terse_11_4_nested_mixed_value_path_assignment", "manifest offset 20")
+  local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(fixture.spec_source)
+  assert_equal(linkedspec.validate_spec(parsed), nil, "fixture validation")
+  local engine = linkedspec.runtime_engine(
+    linkedspec.compile_spec(parsed, { validate_source = false }),
+    {
+      spec_name = fixture.name,
+      spec_path = corpus.root .. "/" .. fixture.name .. "/input.spec",
+    }
+  )
+  local result = linkedspec.runtime_parse(engine, fixture.input_text)
+  assert_equal(result.matched, true, "fixture matched")
+  assert_equal(result.cursor_code_unit, 1, "fixture byte endpoint remains unchanged")
+  assert_equal(result.cursor_char_offset, 1, "fixture character endpoint remains unchanged")
+  assert_equal(
+    json.encode(result.output),
+    json.encode(json.array({ fixture.expected_json })),
+    "fixture exact wrapped output"
+  )
+end)
+
 test("runtime entry and match helper families expose captures and Unicode positions", function()
   local source = [[
 Top::

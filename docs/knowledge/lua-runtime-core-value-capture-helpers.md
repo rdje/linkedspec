@@ -16,6 +16,7 @@ status: current
 tags: [lua, runtime, values, stores, access, captures, positions, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.1 extends lua/src/linkedspec/interpreter.lua with runtime_value_kind, defensive four-kind copies, scalar/array/harray binding, checked direct/nested access and assignment, current-edge retv dispatch, and all entry_*/match_* reads. FUTURE-PARITY-BACKLOG.12.1.6 later routes every public bare mutation/read through one observable typed binding, and .12.1.8.5 hard-rejects exact aggregate selectors."
 evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 corrects the earlier Lua-only callback = { return(...) } storage fixture: ordinary no-pair braces are eager values. Structural codeblock identity remains for contextual final arguments, registry frames, and future explicit callable values."
+evidence_update_2026_07_15_typed_nested_paths: "LUA-BACKEND-PARITY.6.1.1 preserves key/index path kinds, requires harrays/arrays respectively, evaluates all assignment segments then RHS before validation, and stores only a fully successful deep copy. Exact corpus offset 20 and both owned windows pass on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -42,7 +43,10 @@ action edge dispatches that edge child before reading.
 DSL array indexes are zero-based; harray keys are strings. Direct and mixed
 nested reads return null for missing/wrong-kind paths. Nested writes are
 copy-on-write, permit an array write only within `[0, length]`, and never create
-missing intermediate containers.
+missing intermediate containers. Parsed key segments can traverse only harrays;
+index expressions normalize to finite nonnegative integers and can traverse only
+arrays. Assignment evaluates every segment expression in order, then the RHS,
+before path validation, and stores the copied root only after complete success.
 
 The complete `entry_*` and `match_*` family exposes text, zero-based compact
 groups, named values/presence/maps, Unicode character lengths/start/end, and

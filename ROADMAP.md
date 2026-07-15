@@ -993,10 +993,11 @@ codeblock-v3 union on both Lua ABIs; Perl's existing final-codeblock projection 
 One-emitter trace `.5.3.2` now propagates caller ownership through IO, frontend/compiler/function/staged phases,
 engine construction, and runtime. Ordered sinks/filters/failure attribution and traced/untraced identity pass
 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Census-preserving `.5.3.3` closes parents
-`.5.3`/`.5`. Controlled/core planning `.6.1.0` then measures exact offsets 0-39 plus 99-104 at 45/46 on both
-ABIs: all six governed capability fixtures and 39/40 core fixtures pass. Offset 20 alone exposes nested-assignment
-key/index segment-kind erasure, now isolated under repair `.6.1.1`; library execution `.6.1.2`, core admission
-`.6.1.3`, and capability/no-drift `.6.1.4` follow. Capability remains 64/0/0.
+`.5.3`/`.5`. Controlled/core planning `.6.1.0` measured exact offsets 0-39 plus 99-104 at 45/46 on both ABIs.
+Typed nested-path repair `.6.1.1` preserves key/index container requirements, governed segment/RHS evaluation,
+and atomic failed writes; unchanged offset 20 and both owned windows now pass 46/46, with focused suites at
+157/157. Reusable library execution `.6.1.2` is active before core admission `.6.1.3` and capability/no-drift
+`.6.1.4`. Capability remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

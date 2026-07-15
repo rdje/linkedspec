@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.1.1 — preserve Lua nested path segment kinds**
+  (DONE — exact offset 20 and both owned windows close; reusable library executor `.6.1.2` is next).
+
+  **Result:** Lua preserves key/index segment identity through nested reads and writes, normalizes finite
+  nonnegative array indices, evaluates every assignment segment and then RHS before validation, and stores only a
+  fully successful copied root. Wrong-kind/missing/gap paths return null without mutation. Exact offset 20 passes
+  with unchanged source, cursor, and wrapped expected JSON; offsets 0-39 plus 99-104 pass 46/46 on PUC Lua and
+  LuaJIT, whose focused suites pass 157/157. No fixture/expected value, parser grammar, public status, capability
+  row, or corpus boundary changed. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds.
+  Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.1.0 — split Lua controlled corpus admission**
   (DONE — measurement and task split are durable; nested segment-kind repair `.6.1.1` is next).
 
