@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.4.2` — native trace controls and caller-owned sinks.
-- latest_commit: `500314af` — `LUA-BACKEND-PARITY.4.4.2 - add Lua trace controls`.
-- prepared_commit: `LUA-BACKEND-PARITY.4.4.3 - instrument Lua runtime trace`.
-- active_work_unit: `.4.4.3` implementation, focused proof, public/task/book/Knowledge Map sync, and canonical
-  verification are complete; its prepared commit remains before the clean pivot to `.4.4.4`.
-- next_action: commit and clean `.4.4.3`, then pivot to diagnostics/trace no-drift `.4.4.4`.
-- current_proof: PUC Lua and LuaJIT pass 129/129. Exact traced/untraced result JSON passes for success, no-match,
-  action/blind dispatch, and recursion; balanced parse/rule scopes plus regex, lifecycle, cursor, boundary, and
-  governed mark/capture details are focused. Public status is `runtime-trace-events`; coverage remains
-  246/105+1/122 and capability remains 64/0/0. Canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 610
-  seconds. Full pipeline
-  trace remains dependency-correct `.5.3`; diagnostic-output `.5.1` and logical `.5.2` stay dependency-gated.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.4.3` — native runtime trace instrumentation.
+- latest_commit: `4cd3347d` — `LUA-BACKEND-PARITY.4.4.3 - instrument Lua runtime trace`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift`.
+- active_work_unit: `.4.4.4` no-drift audit, public/durable alignment, focused proof, canonical verification, and
+  parent `.4.4` closure are complete; its prepared commit remains before the clean pivot to `.5.1`.
+- next_action: commit and clean `.4.4.4`, then pivot to staged-function/native-loading `.5.1`.
+- current_proof: PUC Lua and LuaJIT pass 129/129. Exact API/source/test inventory covers diagnostics, ordered
+  controls, environment mapping, event primitives, stdout/route/mirror/reset/append, result-neutral entrypoints,
+  and parse/rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events. Public status remains
+  `runtime-trace-events`; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
+  CLI 61x2 and Phase 0 `1..1031` in 608 seconds. Full pipeline trace remains dependency-correct `.5.3`;
+  diagnostic-output `.5.1` and logical `.5.2` stay dependency-gated.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.4.4.3` runtime instrumentation/tests and all durable records pass focused
-  129/129 on both Lua ABIs plus canonical CI; commit remains before the clean pivot to `.4.4.4`.
+- blockers: none. in_flight_uncommitted: `.4.4.4` no-drift records pass focused 129/129 on both Lua ABIs plus
+  canonical CI; commit remains before the clean pivot to `.5.1`.

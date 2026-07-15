@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.4.4` — close exactly the runtime boundary that exists): Reuse the completed
+  Dart/Julia runtime checklists to audit controls, sinks, event kinds, traced entrypoints, rule/branch/lifecycle/
+  cursor/boundary coverage, default quietness, and result identity. Then compare exported Lua API names, source
+  topics, focused assertions, status, public book, task/index, roadmaps, and Knowledge Map. The inventory is exact;
+  Lua additionally traces its governed helper and rule-slot mark/capture mechanisms. Do not call this full pipeline
+  trace: loading, frontend, validation, compiler, function-shell, and staged owners remain `.5.3` after `.5.1/.5.2`.
+  No source change is needed; both ABIs remain 129/129, canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`
+  in 608 seconds, and `.5.1` becomes active.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.4.3` — instrument the one runtime, not a traced duplicate): Thread the optional
   emitter through the parse context, then place events at the existing mechanism boundaries: rule scope entry/
   cleanup, regex decision, cached action-child or blind-child return, lifecycle execution, recursion cutoff,

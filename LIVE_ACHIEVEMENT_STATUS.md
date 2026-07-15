@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.4.4 — close Lua diagnostics trace no drift**
+  (DONE — scoped runtime diagnostics/trace is aligned; staged-function/native-loading `.5.1` is next).
+
+  **Result:** Exact API/source/test/public-doc inventory closes the native runtime boundary without a source change:
+  structured diagnostics, ordered controls, environment mapping, event primitives, stdout/route/mirror sinks,
+  reset/append, result-neutral runtime entrypoints, and all parse/rule/regex/dispatch/recursion/lifecycle/cursor/
+  boundary/mark-capture topics agree. PUC Lua and LuaJIT remain 129/129; coverage remains 246/105+1/122,
+  capability remains 64/0/0, and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 608 seconds. Status
+  remains `runtime-trace-events`. Parent `.4.4` closes and `.5.1` activates; dependency-incomplete full native-
+  pipeline trace stays `.5.3`.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.4.3 — instrument Lua runtime trace**
   (DONE — exact interpreter event coverage passes 129/129; no-drift `.4.4.4` is next).
 

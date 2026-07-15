@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua diagnostics/trace no-drift is closed at the precise native runtime boundary. The public
+  API exports all ordered levels, immutable controls, environment mapping, structured events/scopes, log/dump
+  primitives, stdout/route/mirror sinks, reset/append behavior, and direct/config-wrapper runtime entrypoints.
+  Source/test inventory agrees on parse/rule, regex, dispatch, recursion, lifecycle, cursor, boundary, and governed
+  mark/capture topics; traced/untraced identity remains locked on both Lua ABIs. Parent `.4.4` is done, status
+  remains `runtime-trace-events`, and `.5.1` is active. Full native-pipeline propagation remains `.5.3`.
 - `2026-07-15` refresh: Lua now instruments its one compiled-rule interpreter behind the optional trace emitter.
   High-level events cover balanced parse/rule scopes and lifecycle blocks; debug events cover recursion cutoffs,
   regex match/no-match, action/blind child dispatch, cursor and stack transitions, successful/unusable source

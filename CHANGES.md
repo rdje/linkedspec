@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.4.4 — close Lua diagnostics trace no drift
+
+Closed Lua's scoped native runtime diagnostics/trace parent without changing implementation behavior. Exact source,
+test, API, and public-document inventory agrees on structured runtime diagnostics; six ordered levels; immutable
+environment-aware controls; enter/exit/decision/mark/dump/log events; stdout/route/mirror sinks with reset/append;
+result-neutral runtime entrypoints; and parse/rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture
+instrumentation.
+
+PUC Lua and LuaJIT remain 129/129, shared coverage remains 246/105+1/122, capability remains 64/0/0, and public
+status remains `runtime-trace-events`. Canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 608 seconds.
+Parent `.4.4` closes and staged-function/native-loading `.5.1` activates. Full one-emitter loading/frontend/
+compiler/function/staged/runtime propagation remains dependency-correct `.5.3`.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.4.3 — instrument Lua runtime trace
 
 Lua's existing compiled-rule interpreter now emits trace-only runtime events through the optional caller-owned

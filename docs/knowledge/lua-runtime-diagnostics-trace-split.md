@@ -16,6 +16,7 @@ evidence: "LUA-BACKEND-PARITY.4.4.0; completed Dart .4.5 and Julia .4.5 plus lat
 evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 adds typed neutral RuntimeDiagnostic payloads, optional engine spec identity, top/deepest-rule/handler attribution, specific top/input/lookup/execution stages, deterministic JSON, and unchanged successful output at 126/126 on PUC Lua and LuaJIT."
 evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks, reset/append, and result-neutral runtime wrappers at 128/128; .4.4.3 is active."
 evidence_update_2026_07_15_runtime_events: "LUA-BACKEND-PARITY.4.4.3 adds rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events behind the optional emitter and passes 129/129 on both Lua ABIs; .4.4.4 is the no-drift closeout."
+evidence_update_2026_07_15_no_drift: "LUA-BACKEND-PARITY.4.4.4 closes the exact runtime diagnostics/trace boundary at 129/129 on both Lua ABIs, closes parent .4.4, and activates .5.1 while full-pipeline trace remains .5.3."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md"
 ---
 
@@ -44,7 +45,12 @@ exception seam and parse-scoped rule stack to add neutral structured failures wi
 `.4.4.2` adds the typed control/sink/event boundary and balanced parse scope. `.4.4.3` now instruments the existing
 runtime mechanisms without changing results; `.4.4.4` owns the scoped no-drift closeout.
 
+That closeout is now complete. Exact exported API, source-topic, focused-test,
+status, public-book, task/index, roadmap, live-doc, and Knowledge Map inventory
+agree on `runtime-trace-events`; parent `.4.4` is closed and `.5.1` is active.
+
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],
 [[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]],
-[[lua-runtime-structured-diagnostics]], [[lua-trace-controls-sinks]].
+[[lua-runtime-structured-diagnostics]], [[lua-trace-controls-sinks]],
+[[lua-diagnostics-trace-boundary]].

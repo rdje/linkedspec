@@ -269,8 +269,8 @@ without trace or corpus drift.
 
 ## Lua variant trace status
 
-As of `LUA-BACKEND-PARITY.4.4.3`, Lua exposes the native trace
-control/sink/event boundary plus runtime interpreter events. Full frontend,
+As of `LUA-BACKEND-PARITY.4.4.4`, Lua's native runtime diagnostics/trace
+boundary is closed: it exposes the trace control/sink/event surface plus runtime interpreter events. Full frontend,
 compiler, function-shell, native-loading, and staged propagation remains the
 dependency-gated `.5.3` owner, so this is not yet a full pipeline trace-parity
 claim.
@@ -306,7 +306,9 @@ successful/unusable source boundaries, governed mark/capture helpers, and
 post-mutation capture/named-mark rule slots. Lifecycle blocks are high-level
 marks. Traced and untraced result JSON is identical across success, no-match,
 dispatch, and recursion paths; caller options are not mutated; and both PUC
-Lua and LuaJIT pass 129/129. Public status is `runtime-trace-events`.
+Lua and LuaJIT pass 129/129. Public status is `runtime-trace-events`. The scoped
+no-drift proof closes parent `.4.4`; staged-function/native-loading `.5.1` is
+the next active leaf.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top
