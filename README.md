@@ -135,8 +135,12 @@ This `README.md` is the **single entry point** to the project.
   source/status/behavior/test/manifest change. Controlled/core planning `.6.1.0` measured exact manifest offsets
   0-39 and 99-104 at 45/46 on both Lua ABIs. Typed nested-path repair `.6.1.1` now preserves key/index container
   requirements and governed assignment order, closes unchanged offset 20, and raises both windows to 46/46 with
-  focused suites at 157/157. Reusable library execution `.6.1.2` is active before core admission `.6.1.3` and
-  capability/no-drift `.6.1.4`. Capability remains 64/0/0.
+  focused suites at 157/157. Reusable library execution `.6.1.2` now validates the complete manifest before
+  selection, executes automatic parse/validate/compile/source-identified runtime composition, compares exact
+  one-level wrapped typed JSON, and retains typed per-fixture result/failure evidence without aborting later
+  cases. Controlled scalar/aggregate/dispatch/lifecycle/function/boundary and staged-failure proof passes
+  160/160 on both Lua ABIs; the corpus CLI deliberately remains validation-only. Core admission `.6.1.3` is
+  active before capability/no-drift `.6.1.4`. Capability remains 64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

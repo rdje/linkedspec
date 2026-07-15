@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.1.2 — add Lua library corpus execution
+
+Added reusable in-process corpus execution over the strict Lua manifest loader. The complete manifest, directory
+membership, UTF-8 files, and typed expected JSON validate before named or zero-based offset/limit selection. Every
+selected fixture then uses automatic spec-defined function parsing, explicit validation and compilation, exact
+fixture-name/path engine identity, native runtime, and structural comparison against one exactly wrapped expected
+JSON value.
+
+Typed execution/fixture records retain copied expected and actual values/outputs, match, byte and character
+endpoints, per-fixture trace lines, typed runtime diagnostics, stable failure stages, and failure text. Fixture
+failures no longer abort later selected cases; query helpers expose pass/failure summaries and named results.
+Controlled scalar, aggregate, dispatch, lifecycle, function, boundary, trace, staged failure, no-match, mismatch,
+selection, and continuation proof passes 160/160 on PUC Lua and LuaJIT. The developer corpus CLI remains
+validation-only; public status, capability census, manifest/fixtures/expected JSON, and permanent core/capability
+windows are unchanged. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds. Ordered core
+admission `.6.1.3` is next. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.1.1 — preserve Lua nested path segment kinds
 
 Preserved parsed key/index segment identity through Lua nested reads and writes. Index expressions now normalize

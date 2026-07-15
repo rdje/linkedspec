@@ -996,8 +996,10 @@ engine construction, and runtime. Ordered sinks/filters/failure attribution and 
 `.5.3`/`.5`. Controlled/core planning `.6.1.0` measured exact offsets 0-39 plus 99-104 at 45/46 on both ABIs.
 Typed nested-path repair `.6.1.1` preserves key/index container requirements, governed segment/RHS evaluation,
 and atomic failed writes; unchanged offset 20 and both owned windows now pass 46/46, with focused suites at
-157/157. Reusable library execution `.6.1.2` is active before core admission `.6.1.3` and capability/no-drift
-`.6.1.4`. Capability remains 64/0/0.
+157/157. Reusable library execution `.6.1.2` validates before selection, composes automatic parse/validate/
+compile/source-identified runtime, compares exact wrapped typed JSON, and retains every selected result/failure;
+controlled proof passes 160/160 on both Lua ABIs with the CLI still validation-only. Core admission `.6.1.3` is
+active before capability/no-drift `.6.1.4`. Capability remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

@@ -73,6 +73,15 @@ end
 
 M.json = json
 M.load_corpus_fixtures = corpus.load_corpus_fixtures
+M.execute_corpus_fixtures = corpus.execute_corpus_fixtures
+M.corpus_node_type = corpus.node_type
+M.is_corpus_fixture_execution_result = corpus.is_corpus_fixture_execution_result
+M.is_corpus_execution_result = corpus.is_corpus_execution_result
+M.corpus_fixture_passed = corpus.corpus_fixture_passed
+M.corpus_execution_passed = corpus.corpus_execution_passed
+M.corpus_passed_count = corpus.corpus_passed_count
+M.corpus_failures = corpus.corpus_failures
+M.corpus_fixture_result = corpus.corpus_fixture_result
 M.spec_loader = spec_loader
 M.named_spec_request = spec_loader.named_spec_request
 M.path_spec_request = spec_loader.path_spec_request

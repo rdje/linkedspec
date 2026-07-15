@@ -363,8 +363,9 @@ final-codeblock descriptor v3 plus completion-time census admission; `.5.3.1` em
 creation, and runtime without retained or hidden emitter state. Ordered sinks/filters/errors and result identity
 pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`; `.5.3.3` closes exact no-drift and parents
 `.5.3`/`.5`. Controlled/core planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed
-nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46 with focused suites at 157/157;
-reusable executor `.6.1.2` is active before permanent windows `.6.1.3-.4`. The census stays 64/0/0 until `.8.4`.
+nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46 with focused suites at 157/157.
+Reusable executor `.6.1.2` validates before selection and retains every controlled result/failure at 160/160 per
+ABI; permanent core window `.6.1.3` is active before `.6.1.4`. The census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -811,7 +812,8 @@ composition `.5.2.3` then passes 153/153 with status `native-spec-pipeline-v1`; 
 exact descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` then pass 155/155 with status
 `native-full-pipeline-trace-v1`. No-drift `.5.3.3` closes parents `.5.3`/`.5`; controlled/core planning `.6.1.0`
 and typed nested-path repair `.6.1.1` are complete at 46/46 across offsets 0-39 and 99-104. Reusable executor
-`.6.1.2` is active, and capability remains 64/0/0. Explicit
+`.6.1.2` passes controlled typed records at 160/160 per ABI; ordered core window `.6.1.3` is active, and
+capability remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

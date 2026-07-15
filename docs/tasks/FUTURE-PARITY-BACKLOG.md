@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua native helper/value/control parity closes at 125/125 with exact 233+13 runtime
-  ownership; diagnostics/trace `.4.4` is active while diagnostic `.5.1` and logical `.5.2` remain dependency-gated).
+- Last updated: `2026-07-15` (Lua reusable corpus execution `.6.1.2` passes controlled non-aborting proof at
+  160/160 on both ABIs; permanent ordered core window `.6.1.3` is active while diagnostic `.5.1` and logical
+  `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal

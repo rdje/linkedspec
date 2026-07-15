@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.1.2` — make failure evidence a library value, not batch control flow): The
+  corpus executor validates the whole persisted contract before selection, then owns exactly one native
+  parse→validate→compile→identified-engine→runtime route. Expected output is structurally compared as one wrapped
+  typed JSON value; encoding text is diagnostic presentation, never equality. Each fixture gets a fresh silent
+  emitter when tracing is requested. Preserve actual value/output, match, byte/character endpoints, trace,
+  diagnostic, and stage even when comparison fails, and catch fixture-local failures so a later case proves the
+  batch did not abort. Manifest/selection failures still raise because there is no valid execution set. This
+  separation lets `.6.1.3+` add permanent windows without duplicating pipeline orchestration or promoting the
+  validation-only CLI early. Controlled proof passes 160/160 on PUC Lua and LuaJIT; mutation testing was not run.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.1.1` — retain syntax kind and evaluation order at the runtime boundary):
   Evaluated path values do not contain enough information to choose a container. Preserve the parser's `key`/
   `index` tag until each transition: keys require harrays, indices require arrays, and normalized indices must be

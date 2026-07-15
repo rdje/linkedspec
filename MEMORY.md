@@ -10,19 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.6.1.1` — preserved typed nested paths and closed both owned windows.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.6.1.2` — added reusable typed non-aborting corpus execution records.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution`.
 - prepared_commit: `none`.
-- active_work_unit: reusable native library corpus executor/result records `LUA-BACKEND-PARITY.6.1.2`.
-- next_action: add strict manifest selection plus automatic parse/validate/compile/source-identified engine/runtime
-  execution as a reusable library surface, preserve per-case results/failures, and keep the corpus CLI validation-only.
-- current_proof: Lua nested access preserves parser key/index kinds; key segments require harrays and normalized
-  finite nonnegative index segments require arrays. Assignment evaluates all segment expressions then RHS before
-  validation, mutates a deep copy, and stores only after full success. Exact unchanged offset 20 passes; disposable
-  offsets 0-39 plus 99-104 pass 46/46 on PUC Lua and LuaJIT, and focused suites pass 157/157. Public status remains
-  `native-full-pipeline-trace-v1`, capability remains 64/0/0, and no fixture/expected/parser/corpus boundary changed.
-  Canonical CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds. `.6.1.2` precedes permanent core `.6.1.3`
-  and capability/no-drift `.6.1.4`. Mutation testing remains manual-only.
+- active_work_unit: permanent ordered 40-case core corpus prefix `LUA-BACKEND-PARITY.6.1.3`.
+- next_action: add permanent library-executor assertions for exact manifest offsets 0-39 on PUC Lua and LuaJIT,
+  locking order, boundary names, zero failures, exact wrapped outputs, and unchanged endpoints.
+- current_proof: The Lua executor validates the full strict manifest before named/offset/limit selection, composes
+  automatic function-aware parse, explicit validation/compile, exact source-identified engine/runtime execution,
+  and structurally compares one wrapped typed-JSON value. Typed records retain copied observations, match,
+  byte/character endpoints, trace, diagnostic, failure stage/text; every selected fixture runs after failures.
+  Controlled scalar/aggregate/dispatch/lifecycle/function/boundary/failure/selection proof passes 160/160 on PUC
+  Lua and LuaJIT. CLI remains validation-only; status is `native-full-pipeline-trace-v1`, capability is 64/0/0,
+  and fixtures/permanent windows are unchanged. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in
+  623 seconds; `.6.1.3` precedes capability/no-drift `.6.1.4`. Mutation testing remains manual-only.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -33,7 +34,7 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none for `.6.1.2`; typed nested-path repair and the exact owned-window proof are durable.
-  in_flight_uncommitted: none after `.6.1.1`; mutation campaigns remain parked and no mutant run belongs to
+- blockers: none for `.6.1.3`; controlled corpus execution and typed nested-path repair are durable.
+  in_flight_uncommitted: none after `.6.1.2`; mutation campaigns remain parked and no mutant run belongs to
   ordinary commit/local-CI workflow. Pre-existing modified/untracked `rgx/subs/pgen` work is not
   LinkedSpec-owned and remains untouched; root `.gitmodules` intentionally ignores dirty `rgx` worktree state.

@@ -3,7 +3,7 @@
 This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
-Current status: repository-owned module/test/command scaffold, strict corpus IO,
+Current status: repository-owned module/test/command scaffold, strict corpus IO and reusable selected execution,
 typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
@@ -75,7 +75,8 @@ outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`. Exa
 `.5.3`/`.5` without changing source, status, behavior, tests, or the manifest. Controlled/core planning `.6.1.0`
 measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed nested-path repair `.6.1.1` preserves key/index
 requirements and atomic governed assignment, closes unchanged offset 20, and raises both windows to 46/46 while
-focused suites pass 157/157. Executor `.6.1.2` is active before core `.6.1.3` and capability/no-drift `.6.1.4`.
+focused suites pass 157/157. Executor `.6.1.2` then adds typed selected execution records at 160/160 per ABI;
+core `.6.1.3` is active before capability/no-drift `.6.1.4`.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -292,7 +293,9 @@ with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes p
 descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` are now complete; the latter raises both suites
 to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` closes parents
 `.5.3`/`.5`; controlled/core planning `.6.1.0` and typed nested-path repair `.6.1.1` are complete at 46/46 across
-exact offsets 0-39 and 99-104, and reusable library executor `.6.1.2` is active. Generated Lua preservation/
+exact offsets 0-39 and 99-104. Reusable executor `.6.1.2` composes strict validation with automatic parsing,
+explicit compilation, source-identified execution, wrapped structural comparison, and per-fixture proof records;
+controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` is active. Generated Lua preservation/
 execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -346,8 +349,8 @@ Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. The staged registry now dispatches and stitches their bodies, and
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
-loading, corpus execution beyond the landed helper families, the primary parser CLI contract, outward function
-descriptors/full-pipeline trace, and generated source retain their later owners.
+loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
+parser CLI contract, and generated source retain their later owners.
 
 Run the local gate from the repository root:
 
@@ -379,8 +382,34 @@ lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
 ```
 
 The primary CLI remains a developer stub and exits `2`. The corpus runner loads
-strict UTF-8 source/input/JSON and explicitly reports that execution is not yet
-implemented.
+strict UTF-8 source/input/JSON and remains deliberately validation-only. Library callers can execute the complete
+validated manifest or a named/bounded subset in process:
+
+```lua
+local linkedspec = require("linkedspec")
+
+local execution = linkedspec.execute_corpus_fixtures(
+  "rust/linkedspec-runtime/tests/corpus",
+  {
+    case_names = { "proof_edge_array_literal" },
+    trace_config = linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+  }
+)
+
+assert(linkedspec.corpus_execution_passed(execution))
+local result = linkedspec.corpus_fixture_result(execution, "proof_edge_array_literal")
+assert(result.matched)
+print(result.cursor_code_unit, result.cursor_char_offset)
+```
+
+Use `{ offset = 0, limit = 40 }` for an ordered manifest window; named selection cannot be mixed with offsets.
+The executor always validates the full manifest and fixture inventory before selecting. Every selected fixture
+runs through automatic spec-defined function parsing, validation, compilation, source-identified engine creation,
+and runtime. Expected JSON is wrapped exactly once before structural comparison. A
+`CorpusFixtureExecutionResult` retains `expected_json`, copied `actual_value`/`actual_output`, `matched`, byte and
+character endpoints, trace lines, any typed runtime diagnostic, stable `failure_stage`, and failure text.
+Parse/validate/compile/execute/match/compare failures become records, so later selected fixtures still run.
+`corpus_failures(...)`, `corpus_passed_count(...)`, and `corpus_fixture_passed(...)` provide summary queries.
 
 Construct and project a typed source node in memory:
 

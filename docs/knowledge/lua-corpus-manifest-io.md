@@ -5,7 +5,7 @@ answers:
   - how does Lua validate the LinkedSpec corpus manifest
   - does Lua load all 105 corpus fixtures
   - does Lua preserve JSON null array and harray identity
-  - does the Lua corpus runner execute parsers yet
+  - does the Lua corpus runner CLI execute parsers yet
   - what encoding does Lua corpus IO use
   - does Lua corpus IO accept UTF-16 or UTF-32
   - does Lua detect missing and stale fixture directories
@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, corpus, manifest, JSON, Unicode, UTF-8, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.3 adds linkedspec.json and linkedspec.corpus. The current local gate passes 60/60 on PUC Lua and 60/60 on LuaJIT, loads exactly 105 checked-in fixtures, and process-validates the corpus without parser execution."
+evidence: "LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI. The current focused gate passes 160/160 on both Lua ABIs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -31,8 +31,9 @@ portable directory iterator; it creates no package or cache state.
 
 Unicode is the character/code-point model. UTF-8, UTF-16, and UTF-32 are encodings of Unicode; this corpus contract
 deliberately selects strict UTF-8 at its persisted byte boundary and does not auto-detect UTF-16 or UTF-32. The
-developer corpus command validates and reports the corpus but rejects `--execute`; parser execution belongs to a
-later runtime leaf. The primary `linkedspec-lua` command remains an explicit parser scaffold failure.
+developer corpus command validates and reports the corpus but rejects `--execute`; reusable parser execution is
+now available through `execute_corpus_fixtures(...)`, not this command. The primary `linkedspec-lua` command
+remains an explicit parser scaffold failure.
 
-Related facts: [[primary-cli-strict-utf8-text-contract]], [[lua-toolchain-package-policy]],
-[[lua-native-backend-scaffold]], [[rust-perl-output-oracle]].
+Related facts: [[lua-controlled-corpus-execution]], [[primary-cli-strict-utf8-text-contract]],
+[[lua-toolchain-package-policy]], [[lua-native-backend-scaffold]], [[rust-perl-output-oracle]].

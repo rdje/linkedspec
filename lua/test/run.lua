@@ -931,6 +931,268 @@ test("corpus fixture files require strict UTF-8 and valid expected JSON", functi
   end)
 end)
 
+test("corpus library executes controlled scalar aggregate dispatch lifecycle function and boundary cases", function()
+  with_temp_directory(function(root)
+    local cases = {
+      "scalar_output",
+      "nested_aggregate_output",
+      "rule_dispatch_output",
+      "lifecycle_output_shape",
+      "boundary_capture",
+      "user_function_call",
+    }
+    write_manifest(root, cases)
+    write_fixture(root, "scalar_output", {
+      spec_source = [[
+Top::
+ /x/ -> Done { return("scalar-ok") }
+
+Done::
+ /[a-z]+/
+]],
+      input_text = "xhello",
+      expected_source = '"scalar-ok"',
+    })
+    write_fixture(root, "nested_aggregate_output", {
+      spec_source = [[
+Top::
+ /n/ -> Done { return(hash("items", array("a", hash("b", 2)), "flag", true, "none", undef)) }
+
+Done::
+ /ested/
+]],
+      input_text = "nested",
+      expected_source = json.encode(json.harray({
+        flag = true,
+        items = json.array({ "a", json.harray({ b = 2 }) }),
+        none = json.null,
+      })),
+    })
+    write_fixture(root, "rule_dispatch_output", {
+      spec_source = [[
+Top::AND
+ I { set(out, []) }
+ => First { push(out, retv) }
+ => Second { push(out, retv) }
+ E { return(copy(out)) }
+
+First:
+ /a/
+ E { return("first") }
+
+Second:
+ /b/
+ E { return("second") }
+]],
+      input_text = "ab",
+      expected_source = json.encode(json.array({ "first", "second" })),
+    })
+    write_fixture(root, "lifecycle_output_shape", {
+      spec_source = [[
+Top::OR{1}
+ I { push(events, "I") }
+ LS { push(events, "LS") }
+ /x/
+ LE { push(events, "LE") }
+ IT { push(events, "IT") }
+ EX { push(events, "EX") }
+ LX { push(events, "LX") }
+ E { return(hash("cursor", cursor_pos(), "events", copy(events))) }
+]],
+      expected_source = json.encode(json.harray({
+        cursor = 1,
+        events = json.array({ "I", "LS", "LE", "IT", "EX", "LX" }),
+      })),
+    })
+    write_fixture(root, "boundary_capture", {
+      spec_source = [[
+Top::
+ /BEGIN/
+ E {
+   body = capture_until_boundary(Boundary, EarlierBoundary)
+   return(hash("body", body, "cursor", cursor_pos(), "rest", cursor_rest()))
+ }
+
+Boundary: /END/
+EarlierBoundary: /STOP/
+]],
+      input_text = "BEGIN body STOP later END",
+      expected_source = json.encode(json.harray({
+        body = " body ",
+        cursor = 11,
+        rest = "STOP later END",
+      })),
+    })
+    write_fixture(root, "user_function_call", {
+      spec_source = [[
+fn wrap(value) {return(hash("wrapped", value))}
+Top::
+ /x/
+ E { return(wrap(match_text())) }
+]],
+      expected_source = json.encode(json.harray({ wrapped = "x" })),
+    })
+
+    local execution = linkedspec.execute_corpus_fixtures(root, {
+      trace_config = linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+    })
+    assert_equal(linkedspec.corpus_node_type(execution), "CorpusExecutionResult", "execution record type")
+    assert_equal(linkedspec.is_corpus_execution_result(execution), true, "execution record identity")
+    assert_equal(#execution.results, 6, "controlled result count")
+    assert_equal(linkedspec.corpus_execution_passed(execution), true, "controlled execution")
+    assert_equal(linkedspec.corpus_passed_count(execution), 6, "controlled pass count")
+    assert_equal(#linkedspec.corpus_failures(execution), 0, "controlled failure count")
+
+    local scalar = linkedspec.corpus_fixture_result(execution, "scalar_output")
+    assert_equal(linkedspec.corpus_node_type(scalar), "CorpusFixtureExecutionResult", "fixture record type")
+    assert_equal(linkedspec.is_corpus_fixture_execution_result(scalar), true, "fixture record identity")
+    assert_equal(scalar.actual_value, "scalar-ok", "scalar value")
+    assert_equal(scalar.matched, true, "scalar matched")
+    assert_equal(scalar.cursor_code_unit, 1, "scalar byte endpoint")
+    assert_equal(scalar.cursor_char_offset, 1, "scalar character endpoint")
+    assert_equal(scalar.failure_stage, nil, "scalar failure stage")
+
+    local aggregate = linkedspec.corpus_fixture_result(execution, "nested_aggregate_output")
+    assert_equal(json.encode(aggregate.actual_value), json.encode(aggregate.expected_json), "aggregate value")
+    local dispatch = linkedspec.corpus_fixture_result(execution, "rule_dispatch_output")
+    assert_equal(json.encode(dispatch.actual_output), '[["first","second"]]', "dispatch wrapped output")
+    local lifecycle = linkedspec.corpus_fixture_result(execution, "lifecycle_output_shape")
+    assert_equal(json.encode(lifecycle.actual_output),
+      '[{"cursor":1,"events":["I","LS","LE","IT","EX","LX"]}]', "lifecycle output")
+
+    local boundary = linkedspec.corpus_fixture_result(execution, "boundary_capture")
+    assert_equal(boundary.cursor_code_unit, 11, "boundary byte endpoint")
+    assert_equal(boundary.cursor_char_offset, 11, "boundary character endpoint")
+    local saw_boundary_trace = false
+    for _, line in ipairs(boundary.trace_lines) do
+      if line:find("lua_runtime:source_boundary", 1, true) then saw_boundary_trace = true end
+    end
+    assert_equal(saw_boundary_trace, true, "boundary trace retained")
+    assert_equal(
+      json.encode(linkedspec.corpus_fixture_result(execution, "user_function_call").actual_value),
+      '{"wrapped":"x"}',
+      "automatic function parse"
+    )
+    assert_error_contains(function()
+      linkedspec.corpus_fixture_result(execution, "missing")
+    end, "executed corpus fixture not found: missing", "missing execution result")
+  end)
+end)
+
+test("corpus library records staged failures and continues through every selected fixture", function()
+  with_temp_directory(function(root)
+    local cases = {
+      "parse_failure",
+      "validate_failure",
+      "runtime_failure",
+      "output_mismatch",
+      "no_match",
+      "passing_after_failures",
+    }
+    write_manifest(root, cases)
+    write_fixture(root, "parse_failure", { spec_source = "not a spec", expected_source = '"unused"' })
+    write_fixture(root, "validate_failure", {
+      spec_source = "Top:\n /x/\n",
+      expected_source = '"unused"',
+    })
+    write_fixture(root, "runtime_failure", {
+      spec_source = "Top::\n /x/\n E { invented_helper() }\n",
+      expected_source = '"unused"',
+    })
+    write_fixture(root, "output_mismatch", {
+      spec_source = "Top::\n /x/\n E { return(\"actual\") }\n",
+      expected_source = '"expected"',
+    })
+    write_fixture(root, "no_match", {
+      spec_source = "Top::\n /z/\n",
+      expected_source = '"unused"',
+    })
+    write_fixture(root, "passing_after_failures", {
+      spec_source = "Top::\n /x/\n E { return(\"ok\") }\n",
+      expected_source = '"ok"',
+    })
+
+    local execution = linkedspec.execute_corpus_fixtures(root)
+    assert_equal(#execution.results, 6, "all failure fixtures reported")
+    assert_equal(linkedspec.corpus_execution_passed(execution), false, "failure execution status")
+    assert_equal(linkedspec.corpus_passed_count(execution), 1, "failure execution pass count")
+    assert_equal(#linkedspec.corpus_failures(execution), 5, "failure execution failure count")
+    assert_equal(linkedspec.corpus_fixture_result(execution, "parse_failure").failure_stage, "parse", "parse stage")
+    assert_equal(
+      linkedspec.corpus_fixture_result(execution, "validate_failure").failure_stage,
+      "validate",
+      "validation stage"
+    )
+    local runtime = linkedspec.corpus_fixture_result(execution, "runtime_failure")
+    assert_equal(runtime.failure_stage, "execute", "runtime stage")
+    assert_contains(runtime.failure, "unsupported runtime helper", "runtime failure detail")
+    assert_equal(linkedspec.is_runtime_diagnostic(runtime.diagnostic), true, "runtime diagnostic identity")
+    assert_equal(runtime.diagnostic.spec_name, "runtime_failure", "runtime diagnostic spec name")
+    assert_contains(runtime.diagnostic.spec_path, "/runtime_failure/input.spec", "runtime diagnostic spec path")
+    local mismatch = linkedspec.corpus_fixture_result(execution, "output_mismatch")
+    assert_equal(mismatch.failure_stage, "compare", "comparison stage")
+    assert_contains(mismatch.failure, 'expected (reference, wrapped): ["expected"]', "comparison expected output")
+    assert_equal(mismatch.actual_value, "actual", "comparison actual value")
+    local no_match = linkedspec.corpus_fixture_result(execution, "no_match")
+    assert_equal(no_match.failure_stage, "match", "no-match stage")
+    assert_equal(no_match.matched, false, "no-match flag retained")
+    assert_equal(no_match.cursor_code_unit, 0, "no-match byte endpoint retained")
+    assert_equal(no_match.cursor_char_offset, 0, "no-match character endpoint retained")
+    assert_equal(
+      linkedspec.corpus_fixture_passed(linkedspec.corpus_fixture_result(execution, "passing_after_failures")),
+      true,
+      "passing fixture after failures"
+    )
+  end)
+end)
+
+test("corpus library selects named and bounded fixtures after full validation", function()
+  with_temp_directory(function(root)
+    write_manifest(root, { "mismatched", "first", "second" })
+    write_fixture(root, "mismatched", {
+      spec_source = "Top::\n /x/ E { return(\"actual\") }\n",
+      expected_source = '"expected"',
+    })
+    write_fixture(root, "first", {
+      spec_source = "Top::\n /x/ E { return(\"first\") }\n",
+      expected_source = '"first"',
+    })
+    write_fixture(root, "second", {
+      spec_source = "Top::\n /x/ E { return(\"second\") }\n",
+      expected_source = '"second"',
+    })
+
+    local named = linkedspec.execute_corpus_fixtures(root, { case_names = { "second", "first" } })
+    assert_equal(linkedspec.corpus_execution_passed(named), true, "named selection status")
+    assert_equal(named.results[1].name, "second", "named selection first")
+    assert_equal(named.results[2].name, "first", "named selection second")
+    local bounded = linkedspec.execute_corpus_fixtures(root, { offset = 1, limit = 1 })
+    assert_equal(#bounded.results, 1, "bounded result count")
+    assert_equal(bounded.results[1].name, "first", "bounded selection")
+    local capped = linkedspec.execute_corpus_fixtures(root, { offset = 1, limit = 10 })
+    assert_equal(#capped.results, 2, "capped result count")
+
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { case_names = { "missing" } })
+    end, "selected corpus case not found in manifest: missing", "missing selection")
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { case_names = { "first", "first" } })
+    end, "selection contains duplicate case name: first", "duplicate selection")
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { case_names = { "first" }, limit = 1 })
+    end, "case selection cannot be combined with offset or limit", "mixed selection")
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { offset = -1 })
+    end, "offset must be a non-negative integer", "negative offset")
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { limit = 0 })
+    end, "limit must be a positive integer", "zero limit")
+    assert_error_contains(function()
+      linkedspec.execute_corpus_fixtures(root, { offset = 3 })
+    end, "offset 3 is outside fixture count 3", "outside offset")
+  end)
+end)
+
 test("source AST round-trips with neutral fields and provenance", function()
   local payload = json.harray({ kind = "action_block" })
   local job = ast.staged_parse_job({

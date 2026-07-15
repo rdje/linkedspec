@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.1.2 — add Lua library corpus execution**
+  (DONE — reusable typed execution records are green; ordered core window `.6.1.3` is next).
+
+  **Result:** The strict full manifest validates before named or bounded selection. Every selected fixture runs
+  through automatic function-aware parsing, explicit validation/compile, source-identified engine construction,
+  native runtime, and exact one-level wrapped typed-JSON comparison. Typed records retain copied expected/actual
+  values and outputs, match, byte/character endpoints, trace, runtime diagnostic, failure stage, and text; every
+  selected case runs after earlier failures. Controlled scalar/aggregate/dispatch/lifecycle/function/boundary,
+  staged-failure, no-match/mismatch, selection, and continuation proof passes 160/160 on PUC Lua and LuaJIT. The
+  developer CLI remains validation-only; status, census, fixtures, and permanent windows are unchanged. Canonical
+  local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.1.1 — preserve Lua nested path segment kinds**
   (DONE — exact offset 20 and both owned windows close; reusable library executor `.6.1.2` is next).
 

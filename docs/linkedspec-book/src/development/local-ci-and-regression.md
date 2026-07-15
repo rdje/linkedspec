@@ -223,6 +223,30 @@ Validation-only loading remains the default. Adding `--execute` without selector
 manifest and passes 105/105; `--case`, `--offset`, and `--limit` remain available for diagnostics. The permanent
 aggregate regression locks manifest order, endpoints, 99 passes, zero failures, and exact output for every fixture.
 
+## Focused Lua Gate
+
+Run both supported Lua ABIs from the repository root:
+
+```bash
+bash tools/run_lua_local.sh
+```
+
+The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
+PUC Lua and LuaJIT, locks the primary CLI scaffold boundary, and validates the exact 105-case manifest through the
+developer corpus command. The current suite passes 160/160 on each ABI. Its library-level controlled corpus tests
+exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
+wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
+continuation after failures. The developer corpus command remains validation-only until its own later CLI owner.
+
+Library selection is independent of that command:
+
+```lua
+local execution = linkedspec.execute_corpus_fixtures(corpus_root, {
+  case_names = { "proof_edge_array_literal" },
+})
+assert(linkedspec.corpus_execution_passed(execution))
+```
+
 ### Cleaning generated build caches
 
 Julia's generated precompile output lives in depot `compiled/` directories, not in a project-local Rust-style

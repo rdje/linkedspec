@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.1.1` preserves typed nested path segments and governed evaluation/atomicity,
-  closes exact offset 20, passes owned windows 46/46 on both Lua ABIs, and activates library executor `.6.1.2`)
+- Last updated: `2026-07-15` (`.6.1.2` adds reusable selected corpus execution with typed non-aborting proof
+  records at 160/160 on both Lua ABIs and activates permanent core window `.6.1.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2445,7 +2445,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds`
 
 - ID: `LUA-BACKEND-PARITY.6.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Add reusable native library corpus execution and controlled proof records.
   Dependencies: `.6.1.1`
   Acceptance: Validate the strict manifest, execute selected fixtures through automatic spec-defined parsing,
@@ -2453,11 +2453,21 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     output structurally; retain actual value/output/match/endpoints/trace/diagnostic/failure stage; report every
     selected fixture without aborting; and prove controlled scalar/aggregate/dispatch/lifecycle/function/boundary/
     failure cases while keeping the validation-only corpus CLI unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Lua now validates the complete strict manifest before named or zero-based
+    offset/limit selection, then automatically parses spec-defined functions, explicitly validates and compiles,
+    constructs fixture-name/exact-path-identified engines, executes native runtime, and compares exact one-level
+    wrapped typed JSON structurally. Typed fixture records retain copied expected/actual value/output, match,
+    byte/character endpoints, per-fixture trace lines, typed runtime diagnostics, stable failure stage, and failure
+    text. Parse/validate/compile/execute/match/compare/unexpected failures remain records so every selected fixture
+    runs. Controlled scalar, nested aggregate, action/blind dispatch, lifecycle shape, top-level function,
+    boundary/trace, parse/validation/runtime/mismatch/no-match, post-failure continuation, and strict selection
+    proof passes 160/160 on PUC Lua and LuaJIT. The developer corpus CLI remains validation-only; public status,
+    capability census, manifest/fixtures/expected JSON, and permanent corpus windows are unchanged. Canonical
+    local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution`
 
 - ID: `LUA-BACKEND-PARITY.6.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Permanently admit the ordered 40-case core corpus prefix.
   Dependencies: `.6.1.2`
   Acceptance: The exact manifest offsets 0-39 pass in order on PUC Lua and LuaJIT through the library executor;
@@ -2744,8 +2754,8 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 | 113 | `LUA-BACKEND-PARITY.6.1` | `active` | Admit controlled/core and governed capability fixture windows. |
 | 114 | `LUA-BACKEND-PARITY.6.1.0` | `done` | Both ABIs measure 45/46 and split the sole nested-assignment residual before code. |
 | 115 | `LUA-BACKEND-PARITY.6.1.1` | `done` | Typed nested paths close offset 20 and both owned windows at 46/46 per ABI. |
-| 116 | `LUA-BACKEND-PARITY.6.1.2` | `active` | Add reusable library corpus execution and controlled result records. |
-| 117 | `LUA-BACKEND-PARITY.6.1.3` | `pending` | Permanently admit exact ordered core offsets 0-39. |
+| 116 | `LUA-BACKEND-PARITY.6.1.2` | `done` | Typed selected execution/result records and controlled continuation proof pass 160/160 per ABI. |
+| 117 | `LUA-BACKEND-PARITY.6.1.3` | `active` | Permanently admit exact ordered core offsets 0-39. |
 | 118 | `LUA-BACKEND-PARITY.6.1.4` | `pending` | Admit capability offsets 99-104 and close controlled/core no-drift. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
@@ -2897,6 +2907,29 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
   local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds; mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/live/change/notes, task/index, mdBook status/API/handoff,
   Knowledge Map, and bounded memory record repair closure and activate reusable library executor `.6.1.2`.
+
+### `LUA-BACKEND-PARITY.6.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Strict Lua corpus IO existed, but callers had no reusable manifest-to-runtime
+  executor, selection boundary, structural comparison, or durable per-fixture evidence; the developer command was
+  intentionally validation-only.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `corpus.lua` stopped after loading fixtures even though automatic function
+  parsing, validation, compilation, source identity, runtime diagnostics, and trace were already independent
+  native APIs. Without one library owner, permanent corpus windows would duplicate orchestration and abort on the
+  first fixture error.
+- [x] **FIX** — Add typed execution/fixture records, full-validation-before-selection, named or offset/limit
+  selection, automatic parse→validate→compile→identified-engine→runtime composition, exact wrapped typed-JSON
+  comparison, copied observations, per-fixture trace/diagnostic capture, stable failure stages, and query helpers.
+- [x] **ADDRESSED (verified)** — Controlled scalar, nested aggregate, dispatch, lifecycle, function, boundary,
+  trace, parse, validation, runtime, mismatch, no-match, later-pass continuation, record identity/query, and strict
+  selection cases prove every accepted field and branch.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 160/160. The existing validation-only corpus process test and
+  exact gate boundary remain green; no manifest/fixture/expected value, public parity status, capability row, or
+  permanent ordered corpus-window assertion changes in this leaf. Canonical local CI passes CLI 61x2 plus Phase 0
+  `1..1031` in 623 seconds. Mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmap/task/live/architecture/change/notes, mdBook API/status/local-gate
+  chapters, Knowledge Map, and bounded memory describe the executor, preserve CLI ownership, and activate ordered
+  core admission `.6.1.3`.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4429,3 +4462,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.3.3` | `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift` | Exact API/status/test/contract/book/KM inventory, parent `.5.3`/`.5` closure, unchanged 64/0/0 census, and corpus `.6.1` handoff. |
 | `LUA-BACKEND-PARITY.6.1.0` | `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission` | Exact 0-39/99-104 dual-ABI measurement, sole nested-segment mismatch classification, and dependency-ordered repair/executor/window split. |
 | `LUA-BACKEND-PARITY.6.1.1` | `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds` | Typed key/index traversal, governed evaluation order, atomic failed writes, exact offset 20, and dual-ABI 46/46 handoff. |
+| `LUA-BACKEND-PARITY.6.1.2` | `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution` | Full validation before selection, automatic native pipeline, wrapped structural comparison, typed non-aborting records, and 160/160 dual-ABI controlled proof. |

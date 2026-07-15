@@ -159,5 +159,48 @@ to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(.
 path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors are now current; one-emitter
 full-pipeline trace is current; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5`. Controlled/core
 planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs; typed nested-path repair `.6.1.1`
-closes unchanged offset 20 and both windows at 46/46. Reusable corpus execution `.6.1.2` is active before
+closes unchanged offset 20 and both windows at 46/46. Reusable corpus execution `.6.1.2` is complete before
 permanent windows `.6.1.3-.4`.
+
+## Lua library corpus execution
+
+`execute_corpus_fixtures(root[, options])` is the in-process corpus boundary. It first applies the complete strict
+manifest, directory-membership, UTF-8, and expected-JSON validation contract. Selection happens only afterward,
+either by ordered `case_names` or by zero-based `offset` plus optional positive `limit`; named and bounded
+selection cannot be combined.
+
+```lua
+local linkedspec = require("linkedspec")
+
+local execution = linkedspec.execute_corpus_fixtures(
+  "rust/linkedspec-runtime/tests/corpus",
+  {
+    offset = 0,
+    limit = 1,
+    trace_config = linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+  }
+)
+
+assert(linkedspec.corpus_execution_passed(execution))
+local result = execution.results[1]
+print(result.name, result.cursor_code_unit, result.cursor_char_offset)
+```
+
+Each selected source uses the automatic spec-defined function parser, explicit validation, compilation with that
+validation result, a runtime engine identified by fixture name and exact `input.spec` path, and native runtime
+execution. The reference value is wrapped exactly once—`[expected_json]`—and compared structurally with typed
+array/harray/null identity. A fresh silent emitter is created per fixture when `trace_config` is supplied; its
+formatted lines remain in that fixture's result instead of leaking to stdout.
+
+`CorpusFixtureExecutionResult` retains the fixture name, copied expected JSON, copied actual value/output,
+match flag, byte and character endpoints, trace lines, typed runtime diagnostic when present, `failure_stage`, and
+failure text. Stable stages are `parse`, `validate`, `compile`, `execute`, `match`, `compare`, and `unexpected`.
+Fixture failures are data: every selected fixture is attempted even after an earlier failure. Selection/manifest
+errors remain caller errors because no valid execution set exists. Query with `corpus_fixture_passed(...)`,
+`corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_failures(...)`, and
+`corpus_fixture_result(...)`.
+
+The developer `lua/bin/corpus_runner.lua` intentionally remains validation-only in this slice; permanent ordered
+core and capability windows are owned by `.6.1.3-.4`. Controlled scalar, nested aggregate, rule dispatch,
+lifecycle, top-level function, boundary/trace, parse, validation, runtime, mismatch, no-match, and continuation
+proof passes 160/160 on both PUC Lua and LuaJIT.
