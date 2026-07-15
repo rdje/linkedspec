@@ -11,7 +11,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, resolution, files, utf8, functions, staged-parsing, task-tree, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.2.0 audits and splits the dependency chain; .5.2.1 implements typed deterministic resolve/load and strict UTF-8; .5.2.2 implements cached automatic spec-owned function parsing at 151/151 on both ABIs and activates loaded-source composition .5.2.3."
+evidence: "LUA-BACKEND-PARITY.5.2.0 splits the chain; .5.2.1 implements resolve/load; .5.2.2 implements cached spec-owned function parsing; .5.2.3 implements typed full composition and identified engines at 153/153 on both ABIs; .5.2.4 is active."
 reverify: "perl tools/check_native_spec_resolution_contract.pl && bash tools/run_lua_local.sh"
 ---
 
@@ -28,7 +28,9 @@ reuses the existing Unicode-exact projector plus body-job dispatcher. Both Lua A
 `native-spec-defined-functions-v1`.
 
 Third, `.5.2.3` composes loaded source through automatic full-source parse, validation, compilation, and engine
-creation while retaining requested identity, resolved path, and exact source text. Fourth, `.5.2.4` performs the
+creation while retaining requested identity, resolved path, exact source text, and native compiled state. Named
+engines receive the logical request name; exact-path engines do not; both receive the resolved path. Neutral
+parse/validation/compile errors and runtime identity pass at 153/153 on both ABIs. Fourth, `.5.2.4` performs the
 public/API/test/docs/Knowledge-Map no-drift closeout. Outward descriptors and full-pipeline trace remain `.5.3`;
 generated source, corpus execution, and the parser CLI retain their later owners.
 
@@ -39,4 +41,4 @@ native loader supplies composition, not an alternative host-language function-de
 Related facts: [[native-spec-resolution-contract]], [[native-in-memory-backend-contract]],
 [[lua-function-definition-shell-projection]], [[lua-staged-function-runtime-closeout]],
 [[spec-defined-user-function-definition-parser]], [[lua-native-spec-resolution]],
-[[lua-spec-defined-function-parser]].
+[[lua-spec-defined-function-parser]], [[lua-native-spec-pipeline]].

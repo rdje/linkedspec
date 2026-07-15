@@ -21,7 +21,7 @@ local M = {}
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "native-spec-defined-functions-v1"
+M.PARITY_STATUS = "native-spec-pipeline-v1"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -80,6 +80,8 @@ M.spec_load_options = spec_loader.spec_load_options
 M.validate_spec_request = spec_loader.validate_spec_request
 M.resolve_spec = spec_loader.resolve_spec
 M.load_spec = spec_loader.load_spec
+M.load_and_compile_spec = spec_loader.load_and_compile_spec
+M.create_loaded_spec_engine = spec_loader.create_engine
 M.is_spec_pipeline_error = spec_loader.is_spec_pipeline_error
 M.spec_pipeline_error_to_json = spec_loader.spec_pipeline_error_to_json
 M.spec_ast = spec_ast

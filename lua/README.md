@@ -60,8 +60,9 @@ selects the first regular file without recursion or implicit roots, reads bytes 
 UTF-8 text. Automatic function parsing now resolves repository-owned `user_function_definition.spec` by one exact
 module-relative path, validates and compiles it once, executes it over caller source, and feeds its typed output
 through the existing Unicode projector and body dispatcher. Both ABIs pass 151/151; public status is
-`native-spec-defined-functions-v1`. Full loaded-source compile/engine composition, outward descriptors, and
-generated source remain later owners.
+`native-spec-defined-functions-v1`. Loaded-source composition now carries that path through explicit validation,
+compilation, and source-identified engine construction. Both ABIs pass 153/153 with public status
+`native-spec-pipeline-v1`; outward descriptors, full-pipeline trace, and generated source remain later owners.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")
@@ -69,10 +70,25 @@ local options = linkedspec.spec_load_options({
   cwd = ".",
   search_roots = { "specs" },
 })
-local loaded = linkedspec.load_spec(request, options)
-assert(loaded.resolved.request.requested == "Demo")
-local exact_source_text = loaded.source_text
+local loaded = linkedspec.load_and_compile_spec(request, options)
+assert(loaded.loaded.resolved.request.requested == "Demo")
+assert(loaded.loaded.source_text ~= nil)
+
+local engine = loaded:create_engine({ parse_mode = "seek" })
+local result = linkedspec.runtime_parse(engine, "input")
 ```
+
+Use `load_spec(...)` when only exact decoded text is required. `load_and_compile_spec(...)` additionally runs the
+automatic spec-owned function parser, validates the composed source, compiles it, and returns a typed
+`LoadedCompiledSpec`. Its `loaded` field retains the request, resolved path, origin, and exact source text; its
+`compiled` field is ordinary backend-native compiled state. `create_loaded_spec_engine(loaded, options)` is the
+function-form equivalent of `loaded:create_engine(options)`. Both copy the options table, attach `spec_name` only
+for a named request, and attach the resolved `spec_path` for either request kind.
+
+Failures after decoding retain the same `SpecPipelineError` type and add the neutral stages `parse_spec`,
+`validate_spec`, and `compile_spec` with codes `spec_parse_failed`, `spec_validation_failed`, and
+`spec_compile_failed`. Existing inline `parse_spec_with_staged_user_function_definitions(...)`, `compile_spec(...)`,
+and `runtime_engine(...)` composition remains available and unchanged.
 
 Top-level functions can now be parsed and staged directly from source without caller-supplied nodes:
 
@@ -251,8 +267,10 @@ chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` clo
 resolution/loading `.5.2.1` consumes all shared 14/9/4 cases. Automatic spec-defined function parsing `.5.2.2`
 resolves and compiles the bundled grammar once, executes it in process, and composes the existing projector/body
 dispatcher without a raw scanner; the dual-ABI gate is 151/151 with status
-`native-spec-defined-functions-v1`. Loaded-source compile/engine composition `.5.2.3` is active. Full
-frontend/compiler/function/staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
+`native-spec-defined-functions-v1`. Loaded-source `.5.2.3` then adds typed compiled results, exact source identity,
+neutral parse/validate/compile failures, and named/path runtime-engine attribution; the dual-ABI gate is 153/153
+with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` is active. Full frontend/compiler/function/
+staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

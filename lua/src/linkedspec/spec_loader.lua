@@ -1,5 +1,7 @@
 local filesystem = require("linkedspec_filesystem_native")
+local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
+local spec_validator = require("linkedspec.spec_validator")
 
 local M = {}
 
@@ -7,6 +9,11 @@ local REQUEST_MT = { __spec_loader_type = "SpecRequest" }
 local OPTIONS_MT = { __spec_loader_type = "SpecLoadOptions" }
 local RESOLVED_MT = { __spec_loader_type = "ResolvedSpec" }
 local LOADED_MT = { __spec_loader_type = "LoadedSpec" }
+local LOADED_COMPILED_METHODS = {}
+local LOADED_COMPILED_MT = {
+  __spec_loader_type = "LoadedCompiledSpec",
+  __index = LOADED_COMPILED_METHODS,
+}
 local ERROR_MT = {
   __spec_loader_type = "SpecPipelineError",
   __tostring = function(value) return value.summary end,
@@ -334,6 +341,78 @@ function M.load_spec(request_input, options_input)
     )
   end
   return setmetatable({ resolved = resolved, source_text = bytes }, LOADED_MT)
+end
+
+local function run_source_stage(request_value, resolved_path, stage, code, summary, operation)
+  local ok, result = pcall(operation)
+  if not ok then
+    raise_pipeline_error(request_value, stage, code, summary, resolved_path, tostring(result))
+  end
+  return result
+end
+
+function M.load_and_compile_spec(request_input, options_input)
+  local request_value = require_request(request_input)
+  local loaded = M.load_spec(request_value, options_input)
+  local resolved_path = loaded.resolved.path
+  local parsed = run_source_stage(
+    request_value,
+    resolved_path,
+    "parse_spec",
+    "spec_parse_failed",
+    "Unable to parse spec",
+    function()
+      -- Loaded only at call time: the function parser itself uses this loader
+      -- for its one module-relative bundled grammar, so eager loading would
+      -- create a module cycle without changing the dependency graph.
+      local function_parser = require("linkedspec.user_function_definition_parser")
+      return function_parser.parse_spec_with_staged_user_function_definitions(loaded.source_text)
+    end
+  )
+  run_source_stage(
+    request_value,
+    resolved_path,
+    "validate_spec",
+    "spec_validation_failed",
+    "Spec validation failed",
+    function() return spec_validator.validate_spec(parsed) end
+  )
+  local compiled = run_source_stage(
+    request_value,
+    resolved_path,
+    "compile_spec",
+    "spec_compile_failed",
+    "Spec compilation failed",
+    function() return compiled_spec.compile_spec(parsed, { validate_source = false }) end
+  )
+  return setmetatable({ loaded = loaded, compiled = compiled }, LOADED_COMPILED_MT)
+end
+
+local function require_loaded_compiled(value)
+  if getmetatable(value) ~= LOADED_COMPILED_MT then fail("expected LoadedCompiledSpec") end
+  return value
+end
+
+function M.create_engine(value, options)
+  value = require_loaded_compiled(value)
+  options = options or {}
+  if type(options) ~= "table" then fail("loaded spec engine options must be a table") end
+  if options.spec_name ~= nil or options.spec_path ~= nil then
+    fail("loaded spec engine identity is derived from the resolved request")
+  end
+  local engine_options = {}
+  for key, item in pairs(options) do engine_options[key] = item end
+  local resolved = value.loaded.resolved
+  if resolved.request.kind == "name" then
+    engine_options.spec_name = resolved.request.requested
+  end
+  engine_options.spec_path = resolved.path
+  local interpreter = require("linkedspec.interpreter")
+  return interpreter.runtime_engine(value.compiled, engine_options)
+end
+
+function LOADED_COMPILED_METHODS:create_engine(options)
+  return M.create_engine(self, options)
 end
 
 function M.spec_pipeline_error_to_json(value)

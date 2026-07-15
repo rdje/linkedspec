@@ -21,27 +21,27 @@ in-process data path, not identical spelling:
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
-| Lua | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `runtime_engine(...)`. File-oriented resolve/load is present; the composed loaded/compiled result and identity-bearing engine convenience are the active next slice. |
+| Lua | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `runtime_engine(...)`. File-oriented: `load_and_compile_spec(...)` → `LoadedCompiledSpec:create_engine(...)`. |
 | Later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
-The inline and file-oriented roles are implemented on all four current backends: Perl through `Get(...)`, portable
+The inline and file-oriented roles are implemented on all five current backends: Perl through `Get(...)`, portable
 `LinkedSpec::SpecLoader`, and legacy `get_parser(...)`; Rust through core composition and
 `linkedspec_runtime::spec_loader`; Dart through its public parser/compiler plus `spec_loader.dart`; and Julia
-through its staged parser/compiler plus `SpecLoader.jl`. Final shared admission is closed under
-`FUTURE-PARITY-BACKLOG.1.6.4`.
+through its staged parser/compiler plus `SpecLoader.jl`. Lua adds its native typed full composition over the same
+staged parser/compiler/runtime. The original four-backend admission is closed under
+`FUTURE-PARITY-BACKLOG.1.6.4`; Lua consumes the same contract under `LUA-BACKEND-PARITY.5.2`.
 
 The implementation audit found that the former adapters did not share one fallback policy. Rust and Dart stopped
 after three local candidates, Julia added a sorted recursive repository search, and Perl delegated a bare miss to
 legacy `PathSearch`, whose recursively cached directory set and hash-key selection do not define portable
 duplicate-name precedence. ADR `0026` therefore makes additional search roots explicit and ordered. The Rust,
-Dart, and Julia native APIs and their primary adapters now use that policy; Julia's recursive adapter fallback was
-removed. Perl's implicit recursive fallback remains a compatibility extension, not the semantic model that new
-variants reproduce.
+Dart, Julia, and Lua native APIs now use that policy; Julia's recursive adapter fallback was removed. Perl's
+implicit recursive fallback remains a compatibility extension, not the semantic model that new variants reproduce.
 
 ### Portable file-oriented contract
 
 The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Perl,
-Rust, Dart, and Julia pass it directly. It separates two caller intents:
+Rust, Dart, Julia, and Lua pass it directly. It separates two caller intents:
 
 | Request | Resolution |
 | --- | --- |
@@ -238,6 +238,35 @@ When the source contains top-level `fn` definitions, replace `parse_spec(spec_so
 `parse_spec_with_staged_user_function_definitions(spec_source)`. That entrypoint executes the shared checked-in
 function-definition spec and staged body parser in memory; it does not invoke the CLI or raw-scan Julia source.
 Both paths feed the same compiled/runtime API.
+
+### Lua named/file example
+
+Lua exposes the progressive stages and complete composition from `require("linkedspec")`:
+
+```lua
+local linkedspec = require("linkedspec")
+
+local loaded = linkedspec.load_and_compile_spec(
+  linkedspec.named_spec_request("grammars/Expression"),
+  linkedspec.spec_load_options({
+    cwd = "/work/project",
+    search_roots = { "/app/specs", "/team/specs" },
+  })
+)
+
+print("resolved: " .. loaded.loaded.resolved.path)
+print("source bytes: " .. #loaded.loaded.source_text)
+
+local engine = loaded:create_engine()
+local value = linkedspec.runtime_parse(engine, "input").value
+```
+
+Use `path_spec_request("relative/or/absolute.spec")` for one exact host path. `resolve_spec(...)` selects only,
+`load_spec(...)` also reads and strictly validates UTF-8, and `load_and_compile_spec(...)` continues through the
+automatic spec-owned function parser, staged body dispatch, validation, and compiler. `SpecPipelineError` values
+project the neutral structured record. `LoadedCompiledSpec:create_engine(...)` copies caller options, attaches
+the requested name only for named requests, and attaches the resolved path for both kinds. The function-form
+`create_loaded_spec_engine(...)` is equivalent.
 
 ## `LinkedSpec::Get(...)`
 

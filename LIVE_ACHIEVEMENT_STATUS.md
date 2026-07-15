@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.2.3 — compose Lua native spec pipeline**
+  (DONE — loaded source compiles and executes with identity; native-loading no-drift `.5.2.4` is next).
+
+  **Result:** Public typed `LoadedCompiledSpec` retains exact request/path/source/native compiled state after the
+  deterministic loader, cached spec-owned function parser, explicit validation, and non-revalidating compile.
+  Method/function engine constructors copy options, attach names only for named requests, and attach resolved paths
+  for both kinds. Loaded fixed functions, inline no-drift, runtime diagnostic identity, exact missing-name JSON,
+  and neutral parse/validate/compile errors pass 153/153 on PUC Lua and LuaJIT. Native 14/9/4, capability 64/0/0,
+  coverage 246/105+1/122, and public 58/27/0 checks pass. Status is `native-spec-pipeline-v1`; later CLI/corpus/
+  descriptor/full-trace/generated owners remain explicit. Canonical local CI passes both 61/61 CLI environments
+  and Phase 0 `1..1031` in 616 seconds; mutation testing was not run.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.21.0 — plan backend companion books**
   (DONE — architecture adopted; implementation waits for current backend parity; Lua `.5.2.3` resumes).
 

@@ -165,7 +165,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "native-spec-defined-functions-v1",
+    "native-spec-pipeline-v1",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -497,6 +497,112 @@ test("native spec loading consumes every neutral strict UTF-8 case", function()
       '{"code":"spec_path_not_found","request_kind":"name","requested":"Missing",' ..
         '"stage":"resolve_spec_path","summary":"Spec path not found","type":"spec_pipeline_error"}',
       "missing name JSON"
+    )
+  end)
+end)
+
+test("native spec pipeline composes functions and source-identified engines", function()
+  with_temp_directory(function(root)
+    local specs = root .. "/specs"
+    make_directory(specs)
+    local source = table.concat({
+      'fn label() {return("hit")}',
+      "",
+      "Top::",
+      " /x/",
+      " E { return(label()) }",
+      "",
+    }, "\n")
+    local path = specs .. "/Demo.spec"
+    write_file(path, source)
+
+    local request = linkedspec.named_spec_request("Demo")
+    local options = linkedspec.spec_load_options({
+      cwd = root .. "/cwd",
+      search_roots = { specs },
+    })
+    local loaded = linkedspec.load_and_compile_spec(request, options)
+    assert_equal(linkedspec.spec_loader.node_type(loaded), "LoadedCompiledSpec", "composed result type")
+    assert_equal(loaded.loaded.resolved.request.kind, "name", "retained request kind")
+    assert_equal(loaded.loaded.resolved.request.requested, "Demo", "retained requested value")
+    assert_equal(loaded.loaded.resolved.path, path, "retained resolved path")
+    assert_equal(loaded.loaded.source_text, source, "retained exact source")
+    assert_equal(linkedspec.compiled_spec.node_type(loaded.compiled), "CompiledSpec", "compiled state type")
+    assert_equal(#loaded.compiled:functions(), 1, "compiled top-level function")
+
+    local engine_options = { parse_mode = "seek", max_iterations = 250 }
+    local engine = loaded:create_engine(engine_options)
+    assert_equal(engine_options.spec_name, nil, "caller options gain no name")
+    assert_equal(engine_options.spec_path, nil, "caller options gain no path")
+    assert_equal(engine.spec_name, "Demo", "named engine identity")
+    assert_equal(engine.spec_path, path, "named engine path")
+    assert_equal(linkedspec.runtime_parse(engine, "x").value, "hit", "loaded function execution")
+
+    local runtime_ok, runtime_error = pcall(
+      linkedspec.runtime_parse,
+      engine,
+      "x",
+      { top_rule = "Missing" }
+    )
+    assert_equal(runtime_ok, false, "identified runtime failure")
+    assert_equal(runtime_error.diagnostic.spec_name, "Demo", "runtime diagnostic name")
+    assert_equal(runtime_error.diagnostic.spec_path, path, "runtime diagnostic path")
+
+    local path_loaded = linkedspec.load_and_compile_spec(
+      linkedspec.path_spec_request(path),
+      linkedspec.spec_load_options({ cwd = root, search_roots = { root .. "/unused" } })
+    )
+    local path_engine = linkedspec.create_loaded_spec_engine(path_loaded)
+    assert_equal(path_engine.spec_name, nil, "exact-path engine has no logical name")
+    assert_equal(path_engine.spec_path, path, "exact-path engine identity")
+    assert_equal(linkedspec.runtime_parse(path_engine, "x").value, "hit", "exact-path execution")
+
+    local inline = linkedspec.parse_spec_with_staged_user_function_definitions(source)
+    local inline_engine = linkedspec.runtime_engine(linkedspec.compile_spec(inline))
+    assert_equal(linkedspec.runtime_parse(inline_engine, "x").value, "hit", "inline path unchanged")
+  end)
+end)
+
+test("native spec pipeline maps parse validation compile and missing-name failures", function()
+  with_temp_directory(function(root)
+    write_file(root .. "/parse.spec", "not a spec\n")
+    write_file(root .. "/validation.spec", "Only:\n /x/\n")
+    write_file(
+      root .. "/compile.spec",
+      "Top::\n /x/\n E { return(array" .. "(items)) }\n" -- selector-rejection fixture
+    )
+    local options = linkedspec.spec_load_options({ cwd = root, search_roots = {} })
+    local cases = {
+      { path = "parse.spec", stage = "parse_spec", code = "spec_parse_failed" },
+      { path = "validation.spec", stage = "validate_spec", code = "spec_validation_failed" },
+      { path = "compile.spec", stage = "compile_spec", code = "spec_compile_failed" },
+    }
+    for _, case in ipairs(cases) do
+      local ok, result = pcall(
+        linkedspec.load_and_compile_spec,
+        linkedspec.path_spec_request(case.path),
+        options
+      )
+      assert_equal(ok, false, case.stage .. " rejected")
+      assert_equal(linkedspec.is_spec_pipeline_error(result), true, case.stage .. " typed error")
+      assert_equal(result.stage, case.stage, case.stage .. " stage")
+      assert_equal(result.code, case.code, case.stage .. " code")
+      assert_equal(result.request_kind, "path", case.stage .. " request kind")
+      assert_equal(result.requested, case.path, case.stage .. " requested value")
+      assert_equal(result.resolved_path, root .. "/" .. case.path, case.stage .. " resolved path")
+    end
+
+    local missing_ok, missing = pcall(
+      linkedspec.load_and_compile_spec,
+      linkedspec.named_spec_request("Missing"),
+      options
+    )
+    assert_equal(missing_ok, false, "missing name rejected before parsing")
+    assert_equal(
+      json.encode(linkedspec.spec_pipeline_error_to_json(missing)),
+      '{"code":"spec_path_not_found","request_kind":"name","requested":"Missing",' ..
+        '"stage":"resolve_spec_path","summary":"Spec path not found","type":"spec_pipeline_error"}',
+      "full-pipeline missing name JSON"
     )
   end)
 end)

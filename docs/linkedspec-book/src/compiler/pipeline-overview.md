@@ -98,8 +98,10 @@ selection, in-process byte reads, strict UTF-8 preservation, and neutral pipelin
 14 name, nine resolution/file-kind, and four text cases on both Lua ABIs. Automatic execution of the spec-owned
 function-shell grammar now resolves the bundled owner module-relatively, validates/compiles it once, and composes
 only typed results through the Unicode projector and body dispatcher without a raw scanner. Both ABIs pass 151/151
-with status `native-spec-defined-functions-v1`; loaded-source compile/engine composition, no-drift, and outward
-descriptors remain later dependency-ordered leaves.
+with status `native-spec-defined-functions-v1`. Loaded-source composition then retains exact request/path/source/
+compiled state, translates neutral parse/validate/compile failures, and creates name/path-attributed engines.
+Loaded functions and runtime diagnostic identity pass 153/153 with status `native-spec-pipeline-v1`; no-drift is
+active and outward descriptors remain the next dependency-ordered mechanism.
 
 ```text
 fn apply(value, callback: codeblock) {

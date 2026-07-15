@@ -36,9 +36,10 @@ normalize Unicode, convert newlines, trim, replace malformed bytes, or transcode
 `spec_pipeline_error_to_json(...)` provides deterministic outward projection. Direct tests consume all 14 name,
 nine resolution/file-kind, and four text cases plus supplemental Unicode name and exact-path boundaries on both
 ABIs. This leaf's status was `native-spec-resolution-loading-v1`; subsequent `.5.2.2` adds cached automatic
-spec-owned function-shell parsing and advances the current status to `native-spec-defined-functions-v1` at
-151/151. Loaded-source parse/validate/compile/engine composition remains active `.5.2.3`.
+spec-owned function-shell parsing at 151/151. `.5.2.3` then adds typed loaded/compiled state, exact source-stage
+errors, and source-identified engines at 153/153; current status is `native-spec-pipeline-v1` and `.5.2.4` owns
+no-drift.
 
 Related facts: [[native-spec-resolution-contract]], [[lua-native-spec-loading-split]],
 [[native-in-memory-backend-contract]], [[lua-function-definition-shell-projection]],
-[[lua-spec-defined-function-parser]].
+[[lua-spec-defined-function-parser]], [[lua-native-spec-pipeline]].

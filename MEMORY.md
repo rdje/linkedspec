@@ -10,21 +10,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.21.0` — adopt the parity-gated backend companion-book architecture.
-- latest_commit: `HEAD` — `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.2.3` — compose loaded specs into typed state and identified engines.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.2.3 - compose Lua native spec pipeline`.
 - prepared_commit: `none`.
-- active_work_unit: loaded-source parse/validate/compile and identity-bearing engine composition
-  `LUA-BACKEND-PARITY.5.2.3`.
-- next_action: add `load_and_compile_spec(...)` and an identity-preserving loaded/compiled result, map frontend
-  pipeline stages/codes exactly, create source-identified runtime engines, and prove top-level function execution
-  without changing inline APIs or claiming CLI/descriptor/full-trace behavior.
-- current_proof: `.5.2.1` provides deterministic typed native resolve/load and exact strict UTF-8. `.5.2.2` now
-  resolves the bundled `user_function_definition.spec` through one exact module-relative owner, validates and
-  compiles it once, executes it in process, and composes typed fixed/variadic/final-codeblock nodes through the
-  existing Unicode projector/body dispatcher without a raw scanner. PUC Lua and LuaJIT pass 151/151 with status
-  `native-spec-defined-functions-v1`; capability is 64/0/0. Canonical local CI passes CLI 61x2 plus Phase 0
-  `1..1031` in 631 seconds. `.5.2.3` owns loaded-source full composition, `.5.2.4` no-drift, and `.5.3`
-  descriptors/full trace. ADR `0040` and `BACKEND-COMPANION-BOOKS` adopt one normative neutral book plus five
+- active_work_unit: portable native loading public/API/test/docs/Knowledge-Map closeout
+  `LUA-BACKEND-PARITY.5.2.4`.
+- next_action: audit exact exports/source/tests/public docs/KM for native-loading drift, close parent `.5.2`, and
+  activate descriptor/full-pipeline trace `.5.3` without claiming generated source, corpus execution, or CLI.
+- current_proof: `.5.2.3` adds typed `LoadedCompiledSpec`, exact parse/validate/compile errors, and option-copying
+  named/path-identified engines over the deterministic loader and cached spec-owned function parser. Loaded fixed
+  functions, inline no-drift, runtime diagnostic identity, and missing-name JSON pass 153/153 on PUC Lua/LuaJIT;
+  native 14/9/4, capability 64/0/0, coverage 246/105+1/122, public 58/27/0, CLI 61x2, and Phase 0 `1..1031` in
+  616 seconds are green. `.5.2.4` owns no-drift; `.5.3` owns descriptors/full trace. ADR `0040` and
+  `BACKEND-COMPANION-BOOKS` adopt one neutral book plus five
   linked implementation companions; implementation starts only after full current-backend parity and no scaffold
   or content migration exists yet. Mutation testing remains manual-only.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
@@ -37,5 +35,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.21.0` is fully verified and awaiting commit; after commit resume `.5.2.3`;
+- blockers: none. in_flight_uncommitted: `.5.2.3` implementation/docs pass focused and canonical gates and await commit;
   mutation campaigns remain parked and no mutant run belongs to ordinary commit/local-CI workflow.

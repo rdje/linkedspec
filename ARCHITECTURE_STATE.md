@@ -18,10 +18,12 @@ This document is the current high-level technical reading of the project shape. 
   typed resolved/loaded/error values, deterministic first-regular-file selection, in-process byte reads, and strict
   UTF-8 preservation. Automatic spec-owned function parsing `.5.2.2` resolves the bundled grammar by one exact
   module-relative owner, validates/compiles it once, executes it in process, and composes only typed output through
-  the existing Unicode projector/body dispatcher without a raw scanner. PUC Lua and LuaJIT pass 151/151; status is
-  `native-spec-defined-functions-v1`, capability remains 64/0/0, and loaded-source compile/engine composition
-  `.5.2.3` is active. No-drift `.5.2.4`, descriptors `.5.3`, generated source `.8`, and explicit/general dynamic
-  codeblocks `.11.7` retain separate owners.
+  the existing Unicode projector/body dispatcher without a raw scanner. Loaded-source composition `.5.2.3` adds
+  one typed nested identity/source/compiled result, exact parse/validation/compile error translation, and engine
+  creation that copies options while attaching logical names only to name requests and resolved paths to both
+  request kinds. Loaded top-level functions and runtime diagnostic identity pass 153/153 on PUC Lua and LuaJIT;
+  status is `native-spec-pipeline-v1`, capability remains 64/0/0, and no-drift `.5.2.4` is active. Descriptors
+  `.5.3`, generated source `.8`, and explicit/general dynamic codeblocks `.11.7` retain separate owners.
 - `2026-07-15` documentation architecture: ADR `0040` keeps `docs/linkedspec-book/` as the sole normative,
   backend-neutral owner of `.spec` semantics and portable behavior, and adopts one optional implementation
   companion each for Perl, Rust, Dart, Julia, and Lua. Companions will explain host APIs, embedding, toolchains,

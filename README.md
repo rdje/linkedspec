@@ -118,8 +118,10 @@ This `README.md` is the **single entry point** to the project.
   every shared 14/9/4 contract case on both ABIs. Automatic spec-defined function parsing `.5.2.2` now resolves
   the bundled owner by exact module-relative path, validates/compiles it once, executes it in process, and reuses
   the Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with public status
-  `native-spec-defined-functions-v1`; loaded-source compile/engine composition and no-drift remain `.5.2.3-.4`.
-  Outward descriptor admission remains `.5.3`. Full frontend/
+  `native-spec-defined-functions-v1`. Loaded-source composition `.5.2.3` now returns exact identity/source/compiled
+  state, maps neutral parse/validate/compile failures, and creates named/path-attributed runtime engines. Both ABIs
+  pass 153/153 with status `native-spec-pipeline-v1`; no-drift `.5.2.4` is active. Outward descriptor admission
+  remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

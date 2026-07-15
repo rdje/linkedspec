@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.2.3 — compose Lua native spec pipeline
+
+Added public `load_and_compile_spec(...)` and typed `LoadedCompiledSpec` to the Lua native file API. The adapter
+reuses deterministic resolution/strict UTF-8 loading and the cached spec-owned function parser, then performs an
+explicit validation boundary and non-revalidating native compilation. The result retains the exact nested request,
+resolved path/origin, unchanged decoded source, and ordinary `CompiledSpec` state.
+
+`LoadedCompiledSpec:create_engine(...)` and `create_loaded_spec_engine(...)` copy caller options and derive source
+identity: only named requests attach `spec_name`, while both request kinds attach the resolved `spec_path`. Runtime
+diagnostics preserve that identity. Parse, validation, and compilation failures map to the neutral stages/codes;
+earlier resolution/loading errors remain unchanged. Focused proof covers loaded fixed-function execution, named
+and exact-path identity, inline no-drift, runtime diagnostic identity, exact missing-name JSON, and all three
+source-stage failures. PUC Lua and LuaJIT pass 153/153; native 14/9/4, capability 64/0/0, coverage
+246/105+1/122, and public 58/27/0 checks pass. Status is `native-spec-pipeline-v1`; `.5.2.4` owns no-drift.
+Canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 616 seconds.
+No CLI, subprocess, temporary-file/serialized handoff, descriptor, full-trace, generated-source, corpus-execution,
+or mutation-testing claim is added.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.21.0 — plan backend companion books
 
 Adopted ADR `0040` and the dependency-gated `BACKEND-COMPANION-BOOKS` tree. The existing mdBook remains the sole

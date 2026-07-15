@@ -38,11 +38,11 @@ use typed `UserFunctionDefinitionParserError` stages. Function error nodes delib
 `SpecParseError` values from the projector, and staged failures remain `StagedParserRegistryError`; the composition
 layer does not flatten their ownership.
 
-The public status is `native-spec-defined-functions-v1`, with 151/151 focused tests on PUC Lua and LuaJIT.
-Loaded caller source is not yet automatically compiled into an identity-bearing engine; that separate adapter is
-owned by `LUA-BACKEND-PARITY.5.2.3`. Descriptors/full-pipeline trace, generated source, corpus execution, and the
-parser CLI remain later owners.
+This mechanism's milestone status is `native-spec-defined-functions-v1`, with 151/151 focused tests on PUC Lua
+and LuaJIT. `LUA-BACKEND-PARITY.5.2.3` now composes loaded caller source through this API into typed compiled state
+and identity-bearing engines at 153/153; it does not replace or duplicate the function parser. Descriptors/full-
+pipeline trace, generated source, corpus execution, and the parser CLI remain later owners.
 
 Related facts: [[lua-function-definition-shell-projection]], [[lua-native-spec-loading-split]],
 [[lua-staged-function-body-registry]], [[spec-defined-user-function-definition-parser]],
-[[native-in-memory-backend-contract]].
+[[native-in-memory-backend-contract]], [[lua-native-spec-pipeline]].

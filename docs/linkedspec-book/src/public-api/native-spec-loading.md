@@ -41,6 +41,11 @@ print(resolved.origin)  -- cwd_exact, cwd_spec_suffix, or search_root:<zero-base
 local loaded = linkedspec.load_spec(request, options)
 assert(loaded.resolved.path == resolved.path)
 local source = loaded.source_text
+
+local complete = linkedspec.load_and_compile_spec(request, options)
+assert(complete.loaded.source_text == source)
+local engine = complete:create_engine({ parse_mode = "seek" })
+local result = linkedspec.runtime_parse(engine, "input")
 ```
 
 Use `linkedspec.path_spec_request(path)` when the caller has already selected one exact file. A relative path is
@@ -48,7 +53,14 @@ resolved only against `options.cwd`; it does not gain `.spec` and does not fall 
 
 Requests, options, resolved values, loaded values, and pipeline errors have stable runtime identities. Advanced
 callers can inspect one with `linkedspec.spec_loader.node_type(value)`, which returns `SpecRequest`,
-`SpecLoadOptions`, `ResolvedSpec`, `LoadedSpec`, or `SpecPipelineError` as appropriate.
+`SpecLoadOptions`, `ResolvedSpec`, `LoadedSpec`, `LoadedCompiledSpec`, or `SpecPipelineError` as appropriate.
+
+`load_and_compile_spec(...)` continues from exact decoded text through automatic spec-owned top-level-function
+parsing, staged body dispatch, explicit source validation, and compilation. The returned `LoadedCompiledSpec`
+keeps the full `LoadedSpec` under `loaded` and ordinary backend-native compiled state under `compiled`. Use either
+`complete:create_engine(options)` or `linkedspec.create_loaded_spec_engine(complete, options)` to create a runtime
+engine. Both forms copy the caller's options. A named request attaches its exact requested identity as `spec_name`;
+an exact-path request attaches no logical name; both attach the winning `resolved.path` as `spec_path`.
 
 ## Validation and errors
 
@@ -78,6 +90,9 @@ The neutral payload always includes `type`, `stage`, `code`, `summary`, `request
 | `resolve_spec_path` | `spec_path_not_found`, `spec_path_not_file`, `spec_read_failed` |
 | `load_spec_content` | `spec_read_failed` |
 | `decode_spec_content` | `invalid_utf8` |
+| `parse_spec` | `spec_parse_failed` |
+| `validate_spec` | `spec_validation_failed` |
+| `compile_spec` | `spec_compile_failed` |
 
 ## Exact text boundary
 
@@ -87,8 +102,10 @@ trimming. Consequently, `source_text` retains the original UTF-8 text exactly, i
 normalization form, and leading/trailing newlines or spaces.
 
 PUC Lua and LuaJIT consume the same executable contract directly: 14 name-validation cases, nine
-resolution/file-kind cases, and four strict-UTF-8 preservation/rejection cases. The backend currently passes
-151/151 focused tests on both runtimes with status `native-spec-defined-functions-v1`.
+resolution/file-kind cases, and four strict-UTF-8 preservation/rejection cases. Full composition also proves
+loaded top-level-function execution, named versus exact-path engine identity, runtime diagnostic identity, exact
+missing-name JSON, and separate parse/validation/compile failure ownership. The backend currently passes 153/153
+focused tests on both runtimes with status `native-spec-pipeline-v1`.
 
 ## Lua automatic function parsing
 
@@ -120,5 +137,8 @@ Parser-spec parse/validation/compile, parser execution, and unsupported output f
 `UserFunctionDefinitionParserError` values with a `stage` field. Function error nodes remain ordinary typed source
 parse errors, and staged-dispatch errors retain their staged-registry owner.
 
-This milestone does not make `load_spec(...)` executable by itself. Composed loaded-source parse, validation,
-compilation, identity-bearing engine creation, and their neutral pipeline errors remain the next Lua dependency.
+`load_spec(...)` deliberately remains a text-loading stage and does not execute anything. Callers choose
+`load_and_compile_spec(...)` when they want the complete typed file-to-engine composition. Inline callers continue
+to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(...)`, `compile_spec(...)`, and
+`runtime_engine(...)` directly; no CLI, subprocess, temporary file, or serialized handoff participates in either
+path. Outward descriptors and one-emitter full-pipeline trace remain later Lua owners.

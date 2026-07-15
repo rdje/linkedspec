@@ -18,6 +18,7 @@ tags: [architecture, portability, backends, embedding, public-api, cross-variant
 evidence: "FUTURE-PARITY-BACKLOG.1.4 audits Perl LinkedSpec::Get/get_parser, Rust linkedspec-core plus runtime Engine, Dart parseSpec/compileSpec/LinkedSpecRuntimeEngine, and Julia parse_spec/compile_spec/runtime_parse/runtime_execute. ADR 0022 ratifies their native host-process pattern as mandatory for Lua and future backends and makes CLIs/corpus runners secondary adapters with no exclusive semantics."
 evidence_update_2026_07_15_lua: "Lua exports parse/validate/compile/runtime/staged/diagnostic/trace APIs in process; LUA-BACKEND-PARITY.5.2.1 adds typed deterministic native file resolution/loading and strict UTF-8 through the same module at 149/149 on both ABIs."
 evidence_update_2026_07_15_lua_automatic_functions: "LUA-BACKEND-PARITY.5.2.2 executes the bundled function-definition spec through native parse/validate/compile/runtime APIs, caches the compiled parser, and composes Unicode projection/body dispatch in process at 151/151 on both ABIs."
+evidence_update_2026_07_15_lua_native_pipeline: "LUA-BACKEND-PARITY.5.2.3 exposes typed loaded/compiled state plus named/path-identified runtime-engine creation and executes loaded top-level functions fully in process at 153/153 on both ABIs."
 reverify: "rg -n 'sub Get|sub get_parser|pub fn parse_spec|pub fn new\(spec: CompiledSpec\)|pub fn execute\(&self|parseSpec|compileSpec|LinkedSpecRuntimeEngine|parse_spec|compile_spec|runtime_parse|runtime_execute' perl/LinkedSpec.pm rust/linkedspec-core/src/parser.rs rust/linkedspec-runtime/src/engine.rs dart/lib/linkedspec_dart.dart julia/src/LinkedSpecJulia.jl"
 ---
 
@@ -50,7 +51,7 @@ identical user interface under ADR `0023`; backend identity is not permission to
 | Rust | `linkedspec-core::parser::parse_spec(...)`, core compilation, and `linkedspec-runtime::engine::Engine::new(...).execute(...)` operate on Rust values. |
 | Dart | The package exports `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine`; the CLI/corpus runner reuses that package code. |
 | Julia | `LinkedSpecJulia` exports `parse_spec(...)`, `compile_spec(...)`, `LinkedSpecRuntimeEngine`, `runtime_parse(...)`, and `runtime_execute(...)`; scripts call the module. |
-| Lua | `require("linkedspec")` exports in-memory parse/validate/compile, staged function projection/dispatch, `runtime_engine(...)`, and `runtime_parse(...)`/`runtime_execute(...)`; typed `resolve_spec(...)` / `load_spec(...)` add deterministic file loading, and `parse_spec_with_staged_user_function_definitions(...)` automatically executes the cached spec-owned function grammar. `.5.2.3-.4` finish loaded-source engine composition/no-drift. |
+| Lua | `require("linkedspec")` exports in-memory parse/validate/compile, staged function projection/dispatch, `runtime_engine(...)`, and `runtime_parse(...)`/`runtime_execute(...)`; typed `resolve_spec(...)`, `load_spec(...)`, and `load_and_compile_spec(...)` add deterministic file-to-compiled-state composition, while `LoadedCompiledSpec:create_engine(...)` carries name/path identity into runtime diagnostics. `.5.2.4` closes no-drift. |
 | Future | Must meet the same in-process library gate with idiomatic host-language names and types. |
 
 This structural audit does not claim that every active backend has completed every

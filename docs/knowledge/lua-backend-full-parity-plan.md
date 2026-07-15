@@ -26,6 +26,7 @@ evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 adds registr
 evidence_update_2026_07_15_staged_function_closeout: "LUA-BACKEND-PARITY.5.1.3-.5 close variadic-v2 and contextual-codeblock runtime plus no-drift at 146/146 with status runtime-user-functions-contextual-codeblock-v1; native loading .5.2 is active."
 evidence_update_2026_07_15_native_loading: "LUA-BACKEND-PARITY.5.2.1 implements typed deterministic resolve/load plus strict UTF-8, consumes every 14/9/4 case at 149/149 on PUC Lua and LuaJIT, and activates automatic spec-defined function parsing .5.2.2."
 evidence_update_2026_07_15_automatic_function_parser: "LUA-BACKEND-PARITY.5.2.2 adds module-relative one-build spec-owned function parsing and automatic Unicode projection/body dispatch at 151/151 on both ABIs; .5.2.3 is active."
+evidence_update_2026_07_15_native_spec_pipeline: "LUA-BACKEND-PARITY.5.2.3 adds typed LoadedCompiledSpec, exact neutral source-stage errors, and named/path-identified engines with loaded function execution at 153/153 on both ABIs; .5.2.4 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -52,11 +53,12 @@ LPeg loads on both installed runtimes, but this does not make it the selected re
 must be compared with the neutral regex/match-state fixtures; a native adapter is permissible if it preserves the
 native in-memory module contract and exact behavior. LuaRocks and the common test/lint/format tools were absent at
 foundation time, so `.1.1` locked a reproducible repository-owned dependency/test/cache strategy. Automatic
-spec-owned top-level function-shell parsing is complete; the current frontier is loaded-source parse/validate/
-compile and identity-bearing engine composition `.5.2.3`.
+spec-owned top-level function-shell parsing and loaded-source identity/compile/engine composition are complete;
+the current frontier is native-loading no-drift `.5.2.4`.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
 [[dart-backend-interpreter-first-plan]], [[julia-backend-interpreter-first-plan]],
 [[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]],
-[[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]].
+[[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
+[[lua-native-spec-pipeline]].

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.2.3` — compose policy, do not duplicate the pipeline): Keep filesystem policy
+  in `spec_loader.lua` and function syntax in the cached `user_function_definition.spec` adapter. The complete
+  file path should simply call those owners, validate their composed typed AST once, compile with validation
+  disabled, and retain both the original loaded record and native compiled state. Lazily require the function
+  parser inside the operation because it already uses `spec_loader` for its bundled grammar; this avoids an eager
+  module cycle without changing semantic dependencies. Engine creation copies options and makes resolved request
+  identity authoritative—logical name for named requests only, resolved path always. Translate failures only at
+  parse/validate/compile boundaries; do not flatten earlier loader errors or later runtime diagnostics. Both ABIs
+  pass 153/153 with status `native-spec-pipeline-v1`; canonical local CI passes both 61/61 CLI environments and
+  Phase 0 `1..1031` in 616 seconds. `.5.2.4` owns no-drift and mutation campaigns stay manual-only.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.21.0` — separate normative semantics from variant implementation guidance):
   Use one backend-neutral mdBook as the only portable contract and five optional implementation companions for
   host-specific how/operation material. Avoid both bad extremes: do not dilute the neutral book with every ABI,
