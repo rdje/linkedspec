@@ -345,8 +345,10 @@ and resolves variadic calls from the fixed-prefix minimum through an unbounded m
 evaluated frame arguments and binds extras as a fresh typed rest array; the unchanged neutral fixture, mixed/empty
 identity, receiver chains, and typed failures pass. `.5.1.4.1` then preserves final-only `callback: codeblock`
 metadata across every native state boundary and normalizes attached/parenthesized calls to one zero-positional
-typed argument without promoting harrays. PUC Lua and LuaJIT pass 142/142 with status
-`runtime-user-functions-contextual-codeblock-metadata-v1`; `.5.1.4.2` is next. Outward descriptors remain `.5.3`.
+typed argument without promoting harrays. `.5.1.4.2` executes that argument against the current isolated function
+frame, preserves static callable precedence, restores outer stores, returns chainable values, and reports typed
+callback failures. PUC Lua and LuaJIT pass 146/146 with status
+`runtime-user-functions-contextual-codeblock-v1`; `.5.1.5` is next. Outward descriptors remain `.5.3`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -785,7 +787,10 @@ Variadic-v2 state `.5.1.3.1` preserves the exact signature union and minimum/unb
 Fresh rest-array execution `.5.1.3.2` passes the exact neutral fixture and copied mixed/empty runtime proof at
 139/139. Contextual final-codeblock metadata `.5.1.4.1` preserves exact shell/staged/registry state and contextual
 normalization at 142/142 with public status `runtime-user-functions-contextual-codeblock-metadata-v1`.
-Contextual execution `.5.1.4.2` is active and capability remains 64/0/0. Explicit `{|params| ...}` literals and
+Contextual execution `.5.1.4.2` then runs in the current function frame with cleanup-safe restoration, static
+callable precedence, chainable results, and typed failures at 146/146; public status is
+`runtime-user-functions-contextual-codeblock-v1`, `.5.1.5` is active, and capability remains 64/0/0. Explicit
+`{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral

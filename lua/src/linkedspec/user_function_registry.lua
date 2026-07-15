@@ -71,12 +71,13 @@ local function clone_runtime_value(value, active)
   if value == json.null or value_type == "string" or value_type == "number" or value_type == "boolean" then
     return value
   end
-  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument") then
     local copied = action_parser.parse_action_expression(value.source)
     if copied.kind ~= "block_value" then
       fail("evaluated codeblock arguments must carry parseable block_value source")
     end
-    return copied
+    return value.kind == "codeblock_argument" and action_ast.contextual_codeblock_argument(copied) or copied
   end
   local kind = json.kind(value)
   if kind ~= "array" and kind ~= "harray" then
@@ -104,6 +105,16 @@ local function clone_runtime_value(value, active)
   end
   active[value] = nil
   return result
+end
+
+local function runtime_value_kind(value)
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument") then
+    return "codeblock"
+  end
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" then return kind end
+  return "scalar"
 end
 
 local function entry(index, definition)
@@ -393,6 +404,21 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
     if type(active_name) ~= "string" then fail("active_names must contain only strings") end
   end
 
+  local known_entry = registry:lookup(name)
+  local known_definition = known_entry and known_entry.definition
+  if known_definition ~= nil and known_definition.parameter_kinds ~= nil and
+      #evaluated_values == known_definition.arity - 1 then
+    fail(
+      "user function '" .. name .. "' requires a final codeblock argument",
+      {
+        code = "final_argument_not_codeblock",
+        stage = "user_function_call",
+        helper_name = name,
+        value_kind = "missing",
+      }
+    )
+  end
+
   local resolution = registry:resolve_call(name, #evaluated_values)
   if not resolution.name_known then
     fail("unknown user function '" .. tostring(name) .. "'", { code = "unknown_user_function" })
@@ -430,6 +456,22 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
   for index, value in ipairs(evaluated_values) do
     arguments[index] = clone_runtime_value(value)
   end
+  local parameter_kinds = resolution.entry.definition.parameter_kinds
+  if parameter_kinds ~= nil then
+    local final_name = resolution.entry.definition.params[#resolution.entry.definition.params]
+    local final_value = arguments[#arguments]
+    if parameter_kinds[final_name] ~= "codeblock" or runtime_value_kind(final_value) ~= "codeblock" then
+      fail(
+        "user function '" .. name .. "' final argument must be a codeblock",
+        {
+          code = "final_argument_not_codeblock",
+          stage = "user_function_call",
+          helper_name = name,
+          value_kind = runtime_value_kind(final_value),
+        }
+      )
+    end
+  end
   for index, param in ipairs(resolution.entry.definition.params) do
     local value = arguments[index]
     variables[param] = clone_runtime_value(value)
@@ -458,6 +500,7 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
     arrays = arrays,
     harrays = harrays,
     active_path = active_path,
+    parameter_kinds = resolution.entry.definition.parameter_kinds,
   }, FRAME_MT)
 end
 

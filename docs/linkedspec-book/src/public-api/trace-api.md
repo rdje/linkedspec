@@ -284,8 +284,9 @@ parent `.4.4`. Minimal staged action-body dispatch `.5.1.1` subsequently raises 
 ABI suites to 130/130. Fixed-v1 registered-function execution `.5.1.2` raises them to
 133/133. Exact variadic-v2 signature-state preservation `.5.1.3.1` raises them to 136/136. Fresh typed rest-array
 execution `.5.1.3.2` raises them to 139/139. Final contextual-codeblock metadata `.5.1.4.1` raises them to 142/142
-and public status to `runtime-user-functions-contextual-codeblock-metadata-v1`; that later status still does not
-claim callback execution or full pipeline trace propagation, which remain `.5.1.4.2` and `.5.3`.
+and runtime invocation `.5.1.4.2` raises them to 146/146 with public status
+`runtime-user-functions-contextual-codeblock-v1`. This status claims only native runtime contextual execution;
+full loading/frontend/compiler/function/staged trace propagation remains `.5.3`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

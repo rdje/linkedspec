@@ -54,10 +54,11 @@ end
 
 local function copy_value(value, active)
   if value == nil or value == json.null or type(value) ~= "table" then return value end
-  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument") then
     local copied = action_parser.parse_action_expression(value.source)
     if copied.kind ~= "block_value" then fail("runtime codeblock source no longer parses as a codeblock") end
-    return copied
+    return value.kind == "codeblock_argument" and action_ast.contextual_codeblock_argument(copied) or copied
   end
   local kind = json.kind(value)
   if kind ~= "array" and kind ~= "harray" then return value end
@@ -71,7 +72,10 @@ local function copy_value(value, active)
 end
 
 function M.runtime_value_kind(value)
-  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then return "codeblock" end
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument") then
+    return "codeblock"
+  end
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" then return kind end
   if value == json.null or type(value) == "string" or type(value) == "number" or type(value) == "boolean" then
@@ -167,6 +171,8 @@ local function context(engine, input, top_rule, compiled_rules, diagnostic_sink,
     arrays = {},
     harrays = {},
     active_user_functions = {},
+    user_function_parameter_kinds = nil,
+    active_contextual_codeblocks = {},
     mark_buckets = {},
     active = {},
     lifecycle_events = {},
@@ -205,6 +211,7 @@ local evaluate_block_value
 local execute_block
 local invalid_helper_arity
 local execute_user_function
+local execute_contextual_codeblock
 
 local function argument_expr(arg) return arg.value end
 
@@ -450,7 +457,8 @@ end
 
 local function scalar_string(value, null_as_empty)
   if value == json.null then return null_as_empty and "" or nil end
-  if action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value" then return nil end
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument") then return nil end
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" or type(value) == "table" then
     return null_as_empty and "" or nil
@@ -777,7 +785,7 @@ local function validate_positional_arguments(name, args)
 end
 
 local function authored_value_kind(expr)
-  if expr.kind == "block_value" then return "codeblock" end
+  if expr.kind == "block_value" or expr.kind == "codeblock_argument" then return "codeblock" end
   if expr.kind == "array_literal" then return "array" end
   if expr.kind == "hash_literal" then return "harray" end
   if expr.kind == "string" or expr.kind == "number" or expr.kind == "boolean" or expr.kind == "undef" then
@@ -916,7 +924,8 @@ end
 local function switch_scalar_text(value)
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" or
-      (action_ast.node_type(value) == "ActionExpr" and value.kind == "block_value") then
+      (action_ast.node_type(value) == "ActionExpr" and
+        (value.kind == "block_value" or value.kind == "codeblock_argument")) then
     return nil
   end
   return scalar_string(value, true)
@@ -2302,6 +2311,10 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     local value = evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
     if value ~= nil then return value end
   end
+  if ctx.user_function_parameter_kinds ~= nil and
+      ctx.user_function_parameter_kinds[expr.name] == "codeblock" then
+    return execute_contextual_codeblock(engine, expr, ctx)
+  end
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end
 
@@ -2321,6 +2334,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   if kind == "block_value" then
     return evaluate_block_value(engine, expr.block, ctx, accumulator, edge_state)
   end
+  if kind == "codeblock_argument" then return copy_value(expr) end
   if kind == "array_literal" then
     local result = json.array()
     for _, item in ipairs(expr.items) do
@@ -3148,7 +3162,72 @@ local function staged_user_function_body(engine, entry, ctx)
   return block_or_error
 end
 
+execute_contextual_codeblock = function(engine, expr, ctx)
+  local keyword_count = 0
+  for _, argument in ipairs(expr.args) do
+    if argument.argument_kind == "keyword" then keyword_count = keyword_count + 1 end
+  end
+  if keyword_count > 0 or #expr.args ~= 0 then
+    fail(
+      "contextual codeblock '" .. expr.name .. "' expects exactly 0 positional arguments, got " .. #expr.args,
+      {
+        code = "codeblock_arity_mismatch",
+        stage = "user_function_body",
+        expected = "exactly 0",
+        got = #expr.args,
+        helper_name = expr.name,
+      }
+    )
+  end
+
+  local value = ctx.variables[expr.name]
+  if action_ast.node_type(value) ~= "ActionExpr" or
+      (value.kind ~= "codeblock_argument" and value.kind ~= "block_value") then
+    fail(
+      "contextual codeblock parameter '" .. expr.name .. "' is not a codeblock",
+      {
+        code = "final_argument_not_codeblock",
+        stage = "user_function_body",
+        helper_name = expr.name,
+        value_kind = value == nil and "missing" or M.runtime_value_kind(value),
+      }
+    )
+  end
+  for _, active_name in ipairs(ctx.active_contextual_codeblocks) do
+    if active_name == expr.name then
+      local cycle = expr.name .. " -> " .. expr.name
+      fail(
+        "contextual codeblock recursion is not supported: " .. cycle,
+        {
+          code = "codeblock_recursion_unsupported",
+          stage = "user_function_body",
+          helper_name = expr.name,
+          cycle = cycle,
+        }
+      )
+    end
+  end
+
+  ctx.active_contextual_codeblocks[#ctx.active_contextual_codeblocks + 1] = expr.name
+  local executed, result = pcall(
+    evaluate_block_value,
+    engine,
+    value.block,
+    ctx,
+    json.array(),
+    nil
+  )
+  ctx.active_contextual_codeblocks[#ctx.active_contextual_codeblocks] = nil
+  if not executed then error(result, 0) end
+  return copy_value(result)
+end
+
 execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
+  expr = select(1, action_contracts.normalize_contextual_codeblock_call(
+    "function",
+    expr,
+    engine.compiled_spec.function_registry
+  ))
   local keyword_count = 0
   for _, argument in ipairs(expr.args) do
     if argument.argument_kind == "keyword" then keyword_count = keyword_count + 1 end
@@ -3204,10 +3283,14 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   local saved_arrays = ctx.arrays
   local saved_harrays = ctx.harrays
   local saved_active_user_functions = ctx.active_user_functions
+  local saved_parameter_kinds = ctx.user_function_parameter_kinds
+  local saved_active_contextual_codeblocks = ctx.active_contextual_codeblocks
   ctx.variables = frame_or_error.variables
   ctx.arrays = frame_or_error.arrays
   ctx.harrays = frame_or_error.harrays
   ctx.active_user_functions = frame_or_error.active_path
+  ctx.user_function_parameter_kinds = frame_or_error.parameter_kinds
+  ctx.active_contextual_codeblocks = {}
 
   local executed, value_or_error = pcall(
     evaluate_block_value,
@@ -3221,6 +3304,8 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   ctx.arrays = saved_arrays
   ctx.harrays = saved_harrays
   ctx.active_user_functions = saved_active_user_functions
+  ctx.user_function_parameter_kinds = saved_parameter_kinds
+  ctx.active_contextual_codeblocks = saved_active_contextual_codeblocks
 
   if not executed then
     if getmetatable(value_or_error) == ERROR_MT then

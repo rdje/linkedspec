@@ -5,14 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
-- `2026-07-15` refresh: Lua now preserves final-only `callback: codeblock` intent before runtime invocation.
+- `2026-07-15` refresh: Lua now executes final-only `callback: codeblock` intent after preserving it end-to-end.
   Spec-produced fixed/codeblock fields canonicalize once to ordered fixed-v1 params/arity plus an exact one-entry
   `parameter_kinds` harray, and identical metadata survives body payload, staged job, typed AST, registry,
   stitching, and compiled state. All four invalid declarations and sidecar drift reject. Callable metadata
   normalizes attached and parenthesized blocks to one zero-positional `codeblock_argument`; parsed source remains
-  unchanged, harrays are not promoted, and built-in contracts do not drift. Both ABIs pass 142/142, status is
-  `runtime-user-functions-contextual-codeblock-metadata-v1`, capability remains 64/0/0, and contextual execution
-  `.5.1.4.2` is active. Descriptors remain `.5.3`, generated source `.8`.
+  unchanged, harrays are not promoted, and built-in contracts do not drift. The deferred argument crosses the
+  isolated function-frame boundary, executes with current dynamic bindings, keeps nonparameter effects visible to
+  later function statements, restores the outer caller, and returns chainable values. Registered functions and
+  governed helpers retain static precedence; missing/harray/arity/recursion failures stay typed. Both ABIs pass
+  146/146, status is `runtime-user-functions-contextual-codeblock-v1`, capability remains 64/0/0, and no-drift
+  `.5.1.5` is active. Descriptors remain `.5.3`, generated source `.8`, and explicit/general dynamic codeblocks
+  remain `.11.7`.
 - `2026-07-15` refresh: Lua variadic-v2 calls now execute through the same staged ActionIR function runtime as
   fixed calls. Caller arguments still evaluate exactly once left-to-right; the invocation frame copies every value,
   binds the fixed prefix normally, and copies extras again into one fresh typed array for the final rest name.

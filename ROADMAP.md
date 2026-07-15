@@ -950,9 +950,11 @@ minimum/unbounded registry resolution, and fixed-v1 compatibility at 136/136. Fr
 `.5.1.3.2` passes the unchanged neutral fixture, ordered evaluation, copied mixed/empty rest values, receiver
 continuation, and typed minimum/keyword failures at 139/139 with status `runtime-user-functions-variadic-v2`.
 Final-only contextual metadata `.5.1.4.1` then preserves exact definition/staged/registry/compiled intent, maps
-all four invalid declarations, and normalizes attached/parenthesized blocks without promoting harrays or executing
-callbacks. Both ABIs pass 142/142 with status `runtime-user-functions-contextual-codeblock-metadata-v1`;
-contextual execution `.5.1.4.2` is active. Full native-pipeline trace remains dependency-correct `.5.3`.
+all four invalid declarations, and normalizes attached/parenthesized blocks without promoting harrays. Runtime
+`.5.1.4.2` executes those zero-positional blocks in the current isolated function frame, restores outer stores,
+preserves static callable precedence, composes results, and keeps callback failures typed. Both ABIs pass 146/146
+with status `runtime-user-functions-contextual-codeblock-v1`; no-drift `.5.1.5` is active. Full native-pipeline
+trace remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -967,8 +969,10 @@ typed function-owned failures at 133/133. Variadic-v2 typed state then preserves
 identity, and minimum/unbounded resolution at 136/136. Fresh typed rest arrays then execute the unchanged neutral
 fixture and lock eager order, copied mixed values, empty freshness, receiver chains, and typed minimum/keyword
 failures at 139/139. Final contextual metadata then passes 142/142 with exact sidecar preservation and
-zero-positional `codeblock_argument` normalization. Public status is
-`runtime-user-functions-contextual-codeblock-metadata-v1`; `.5.1.4.2` is active and capability remains 64/0/0.
+zero-positional `codeblock_argument` normalization. Runtime invocation passes 146/146 with dynamic function-frame
+bindings, cleanup-safe outer restoration, static callable precedence, chainable results, and typed failures.
+Public status is `runtime-user-functions-contextual-codeblock-v1`; `.5.1.5` is active and capability remains
+64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

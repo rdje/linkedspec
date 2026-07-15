@@ -136,7 +136,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "runtime-user-functions-contextual-codeblock-metadata-v1",
+    "runtime-user-functions-contextual-codeblock-v1",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -2321,6 +2321,179 @@ Top::
     number_chain = 7,
     hash_chain = "a,b",
   })), "fixed user function runtime result")
+end)
+
+test("runtime executes contextual final codeblocks in the current user function frame", function()
+  local parameter_kinds = json.harray({ callback = "codeblock" })
+  local functions = {
+    registry_function(
+      "apply",
+      { "value", "callback" },
+      0,
+      nil,
+      "return(callback())",
+      nil,
+      parameter_kinds
+    ),
+    registry_function(
+      "inspect",
+      { "value", "callback" },
+      1,
+      nil,
+      'callback(); return({ "value" : value, "scratch" : scratch })',
+      nil,
+      parameter_kinds
+    ),
+  }
+  local engine = staged_user_function_runtime(functions, [[
+Top::
+ /x/ E {
+   value = "caller"
+   scratch = "caller-scratch"
+   attached = apply("a") { return(cat(value, "!")) }
+   parenthesized = apply("a", { return(cat(value, "!")) })
+   chained = apply("a", { return(cat(value, "!")) }).uppercase()
+   observed = inspect("inside", {
+     value = value.uppercase()
+     scratch = "callback-scratch"
+     return(value)
+   })
+   return({
+     "attached" : attached,
+     "parenthesized" : parenthesized,
+     "chained" : chained,
+     "observed" : observed,
+     "caller_value" : value,
+     "caller_scratch" : scratch
+   })
+ }
+]])
+  local result = linkedspec.runtime_parse(engine, "x").value
+  assert_equal(json.encode(result), json.encode(json.harray({
+    attached = "a!",
+    parenthesized = "a!",
+    chained = "A!",
+    observed = json.harray({ value = "INSIDE", scratch = "callback-scratch" }),
+    caller_value = "caller",
+    caller_scratch = "caller-scratch",
+  })), "contextual user function codeblock result")
+end)
+
+test("runtime contextual final codeblocks reject missing wrong-kind and nonzero calls", function()
+  local parameter_kinds = json.harray({ callback = "codeblock" })
+  local apply = registry_function(
+    "apply",
+    { "value", "callback" },
+    0,
+    nil,
+    "return(callback())",
+    nil,
+    parameter_kinds
+  )
+  for _, case in ipairs({
+    {
+      label = "missing contextual callback",
+      source = 'Top::\n /x/ E { return(apply("x")) }\n',
+      kind = "missing",
+    },
+    {
+      label = "harray contextual callback",
+      source = 'Top::\n /x/ E { return(apply("x", { "key" : "value" })) }\n',
+      kind = "harray",
+    },
+  }) do
+    local runtime_error = assert_user_function_runtime_error(
+      staged_user_function_runtime({ apply }, case.source),
+      "final_argument_not_codeblock",
+      nil,
+      case.label
+    )
+    assert_equal(runtime_error.helper_name, "apply", case.label .. " owner")
+    assert_equal(runtime_error.value_kind, case.kind, case.label .. " kind")
+  end
+
+  local nonzero = registry_function(
+    "invoke_nonzero",
+    { "callback" },
+    0,
+    nil,
+    'return(callback("unexpected"))',
+    nil,
+    json.harray({ callback = "codeblock" })
+  )
+  local arity = assert_user_function_runtime_error(
+    staged_user_function_runtime(
+      { nonzero },
+      'Top::\n /x/ E { return(invoke_nonzero({ return("unused") })) }\n'
+    ),
+    "codeblock_arity_mismatch",
+    "expects exactly 0 positional arguments, got 1",
+    "contextual callback arity"
+  )
+  assert_equal(arity.expected, "exactly 0", "contextual callback expected arity")
+  assert_equal(arity.got, 1, "contextual callback actual arity")
+end)
+
+test("runtime contextual final codeblocks reject active self invocation", function()
+  local recurse = registry_function(
+    "invoke_recursive",
+    { "callback" },
+    0,
+    nil,
+    "return(callback())",
+    nil,
+    json.harray({ callback = "codeblock" })
+  )
+  local runtime_error = assert_user_function_runtime_error(
+    staged_user_function_runtime(
+      { recurse },
+      'Top::\n /x/ E { return(invoke_recursive({ return(callback()) })) }\n'
+    ),
+    "codeblock_recursion_unsupported",
+    "callback -> callback",
+    "contextual callback recursion"
+  )
+  assert_equal(runtime_error.cycle, "callback -> callback", "contextual callback recursion cycle")
+end)
+
+test("runtime governed helpers and registered functions precede contextual parameters", function()
+  local codeblock_kind = json.harray({ uppercase = "codeblock" })
+  local callback_kind = json.harray({ callback = "codeblock" })
+  local functions = {
+    registry_function("callback", {}, 0, nil, 'return("static-user-function")'),
+    registry_function(
+      "apply_helper",
+      { "uppercase" },
+      1,
+      nil,
+      'return(uppercase("static-helper"))',
+      nil,
+      codeblock_kind
+    ),
+    registry_function(
+      "apply_function",
+      { "callback" },
+      2,
+      nil,
+      "return(callback())",
+      nil,
+      callback_kind
+    ),
+  }
+  local engine = staged_user_function_runtime(functions, [[
+Top::
+ /x/ E {
+   return({
+     "helper" : apply_helper({ return("dynamic-helper") }),
+     "function" : apply_function({ return("dynamic-function") })
+   })
+ }
+]])
+  local result = linkedspec.runtime_parse(engine, "x").value
+  assert_equal(json.encode(result), json.encode(json.harray({
+    helper = "STATIC-HELPER",
+    ["function"] = "static-user-function",
+  })), "static callable precedence")
 end)
 
 test("runtime executes the unchanged neutral variadic callable fixture", function()

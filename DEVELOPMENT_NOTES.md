@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.4.2` — contextual blocks are data until the declared slot invokes them):
+  Normalize registered calls before ordinary argument evaluation so a contextual block is copied as an inert
+  `codeblock_argument`, not eagerly collapsed to its result. Install the definition's exact `parameter_kinds`
+  beside the isolated function stores; after registered functions and governed helpers have had static precedence,
+  a call to that declared slot evaluates the stored block with the current function frame. This gives the block
+  dynamic access to function parameters and lets nonparameter writes feed later statements without leaking either
+  category back into the outer caller. Reuse the existing protected function boundary for cleanup, and keep a
+  separate active callback stack for typed zero-arity and recursion diagnostics. Do not generalize this narrow
+  metadata-governed path into explicit literals or arbitrary dynamic calls. Both ABIs pass 146/146; status is
+  `runtime-user-functions-contextual-codeblock-v1`, capability stays 64/0/0, descriptors remain `.5.3`, generated
+  source remains `.8`, and no-drift `.5.1.5` is next. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`
+  in 622 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.4.1` — preserve callable intent before callback execution): Treat the
   spec-owned codeblock definition shape as an input form, not a second runtime schema. Canonicalize its
   `fixed_params` and final `codeblock_param` once into ordinary ordered params plus an exact one-entry

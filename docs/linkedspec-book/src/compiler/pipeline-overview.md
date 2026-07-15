@@ -90,8 +90,26 @@ the fixed prefix normally, and copies extras into one fresh typed rest array. Th
 exactly on both Lua ABIs at 139/139. Lua next canonicalizes final-only `callback: codeblock` definitions to fixed-v1
 params/arity plus exact `parameter_kinds`, preserves that metadata across payload/job/AST/registry/compiled state,
 and derives one zero-positional `codeblock_argument` from either contextual spelling. This metadata-only boundary
-passes 142/142 with status `runtime-user-functions-contextual-codeblock-metadata-v1`; it neither promotes harrays
-nor executes callbacks. Outward descriptors remain `.5.3`.
+passes 142/142 without promoting harrays. The next runtime boundary invokes that argument in the current isolated
+function frame, preserves registered-function and governed-helper precedence, restores the outer caller, returns
+ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Both Lua ABIs pass 146/146
+with status `runtime-user-functions-contextual-codeblock-v1`; outward descriptors remain `.5.3`.
+
+```text
+fn apply(value, callback: codeblock) {
+  return(callback())
+}
+
+upper_a = apply("hello") { return(value.uppercase()) }
+upper_b = apply("hello", { return(value.uppercase()) })
+```
+
+On Lua, both calls return `"HELLO"`. The contextual block is always zero-positional and sees the copied current
+function frame; it is not a lexical closure. Writes to other names are visible to later statements in that
+function invocation, while the outer caller is restored when the function returns. A keyed brace literal remains
+a harray and fails the declared codeblock slot. Registered functions and governed helpers keep static precedence
+over a colliding parameter name. Explicit `{|params| ...}` values and arbitrary bound codeblock calls remain a
+separate later Lua milestone.
 
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,

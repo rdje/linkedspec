@@ -110,9 +110,11 @@ This `README.md` is the **single entry point** to the project.
   keyword failures. Final-codeblock metadata `.5.1.4.1` now canonicalizes spec-produced `fixed_params` plus
   `codeblock_param` into exact final-only `parameter_kinds`, preserves identical copies through typed AST/staged/
   registry/compiled state, maps all four invalid declaration forms, and normalizes attached/parenthesized blocks
-  to one zero-positional `codeblock_argument` without promoting harrays or executing callbacks. Both ABIs pass
-  142/142 and public status is `runtime-user-functions-contextual-codeblock-metadata-v1`; contextual execution
-  `.5.1.4.2` is active. Outward descriptor admission remains `.5.3`. Full frontend/
+  to one zero-positional `codeblock_argument` without promoting harrays. Runtime `.5.1.4.2` invokes that argument
+  in the current isolated function frame, preserves static function/helper precedence, restores outer stores,
+  composes callback results, and reports typed missing/wrong-kind/arity/recursion failures. Both ABIs pass 146/146
+  and public status is `runtime-user-functions-contextual-codeblock-v1`; no-drift `.5.1.5` is active. Outward
+  descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

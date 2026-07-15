@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.4.2 — execute Lua contextual codeblocks
+
+Lua user functions now consume their declared final `callback: codeblock` slots at runtime. Attached and
+parenthesized immediate blocks enter the same deferred zero-positional representation, cross the existing copied
+invocation-frame boundary, and execute against the function's current dynamic bindings. Parameter and private
+stores remain isolated from the outer caller, while nonparameter mutations remain visible to the rest of the
+current function body. Callback results are ordinary values and continue through compatible receiver chains.
+
+Runtime call resolution preserves registered-function and governed-helper precedence before considering the
+current declared codeblock slot. Missing and harray callbacks fail as `final_argument_not_codeblock`; nonzero
+contextual calls fail as `codeblock_arity_mismatch`; active self-invocation fails with a typed cycle. Protected
+execution restores function/callback context on success or failure. Explicit `{|params| ...}` literals and general
+bound codeblock-variable calls remain owned by `FUTURE-PARITY-BACKLOG.11.7`; descriptors and generated source
+remain `.5.3` and `.8`. PUC Lua and LuaJIT pass 146/146; callable signature/codeblock checkers pass 3/9/7 and
+7/11/9/7/4/8, coverage remains 246/105+1/122, capability remains 64/0/0, and public status becomes
+`runtime-user-functions-contextual-codeblock-v1`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in
+622 seconds. Staged-function no-drift `.5.1.5` is next.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.4.1 — preserve Lua final codeblock metadata
 
 Added exact final-only `callback: codeblock` metadata to Lua's user-function state. Spec-produced

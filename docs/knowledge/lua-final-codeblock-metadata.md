@@ -6,7 +6,7 @@ answers:
   - "how does Lua normalize attached user function blocks"
   - "are Lua parenthesized and attached contextual blocks equivalent"
   - "does Lua promote a harray in a codeblock parameter slot"
-  - "does Lua execute user function contextual blocks yet"
+  - "when did Lua begin executing user function contextual blocks"
   - "where is Lua final codeblock descriptor support owned"
 date: 2026-07-15
 status: current
@@ -27,10 +27,12 @@ Callable metadata drives contextual normalization. For a registered definition s
 mutate the source ActionIR. It converts only structural `block_value`; a keyed brace expression stays
 `hash_literal` and is never promoted by position. Existing built-in final-codeblock contracts remain unchanged.
 
-This is deliberately metadata-only. User-function contextual blocks are not invoked by this slice;
-`LUA-BACKEND-PARITY.5.1.4.2` owns dynamic-context execution, copied/restored parameter stores, return behavior,
-and wrong-kind/missing runtime diagnostics. Outward descriptor admission remains `.5.3`, generated preservation
-and execution remain `.8`, and explicit `{|params| ...}` values plus bound dynamic calls remain `.11.7`.
+This leaf is deliberately metadata-only, but its direct successor is complete. `LUA-BACKEND-PARITY.5.1.4.2`
+invokes user-function contextual blocks in the current isolated function frame with copied/restored stores,
+chainable return behavior, static callable precedence, and typed wrong-kind/missing/arity/recursion diagnostics.
+Outward descriptor admission remains `.5.3`, generated preservation and execution remain `.8`, and explicit
+`{|params| ...}` values plus bound dynamic calls remain `.11.7`.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[perl-generic-final-codeblock-normalization]],
 [[lua-staged-function-execution-split]], [[lua-variadic-v2-runtime]].
+[[lua-contextual-user-function-codeblock-runtime]].

@@ -51,9 +51,11 @@ minimum/unbounded resolution is active. Runtime then copies every evaluated argu
 and copies extras into one fresh typed rest array. The following metadata slice preserves final-only
 `callback: codeblock` declarations through shell, typed AST, staged payload/job, registry, and compiled state.
 Attached and parenthesized contextual forms normalize to the same zero-positional `codeblock_argument`; harrays
-remain harrays and callbacks are not executed yet. Both ABIs pass 142/142; public status is
-`runtime-user-functions-contextual-codeblock-metadata-v1`. Outward descriptors and contextual execution remain
-later owners.
+remain harrays. Runtime then executes the deferred block in the current isolated function frame, keeps registered
+functions and governed helpers ahead of the contextual slot, restores the outer caller, and returns an ordinary
+composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and active recursion stay typed. Both
+ABIs pass 146/146; public status is `runtime-user-functions-contextual-codeblock-v1`. Outward descriptors remain
+a later owner.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -202,8 +204,9 @@ projection remain separately owned. Fresh typed rest-array execution `.5.1.3.2` 
 evaluate once in caller order, fixed prefixes bind normally, extras are copied into an isolated array, the exact
 neutral fixture passes, and minimum/keyword failures stay typed. Contextual final-codeblock metadata `.5.1.4.1` is
 complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/compiled state and both contextual
-spellings normalize to one zero-positional typed argument without harray promotion. Contextual execution `.5.1.4.2`
-is active. Full frontend/compiler/function/
+spellings normalize to one zero-positional typed argument without harray promotion. Runtime `.5.1.4.2` executes
+that argument with current function-frame bindings, cleanup-safe outer restoration, static callable precedence,
+chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` is active. Full frontend/compiler/function/
 staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -219,8 +222,8 @@ minimal staged function-body registry `.5.1.1` raises it to 130/130.
 Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
 Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
-Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; user-function contextual execution remains
-`.5.1.4.2`, while
+Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
+raises it to 146/146, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
@@ -232,6 +235,24 @@ codeblock. A trailing block remains structural until its signature-governed call
 `with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are
 `"x".with() { return(value) }` and `"x".with({ return(value) })`. Future explicit first-class codeblocks use
 `{|params| ...}`.
+
+A user function declares the same contextual intent explicitly:
+
+```text
+fn apply(value, callback: codeblock) {
+  return(callback())
+}
+
+attached = apply("hello") { return(value.uppercase()) }
+parenthesized = apply("hello", { return(value.uppercase()) })
+```
+
+Both results are `"HELLO"`. The contextual block takes no positional arguments and reads the function's current
+dynamic frame, so `value` above is the copied function parameter. Writes to other bindings remain visible to
+later statements in that function invocation; all function-frame stores restore when it returns. A keyed brace
+value remains a harray and fails the declared slot rather than being promoted. Registered functions and governed
+helpers retain static precedence over a colliding callback-parameter name. Explicit `{|params| ...}` values and
+general bound codeblock calls are not part of this Lua milestone.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge
 `.push`/`.push(target)` and block `push(Child[, target][, index])` reuse the cached child result, select zero-based
 items when requested, and retain neutral wrong-kind diagnostics.

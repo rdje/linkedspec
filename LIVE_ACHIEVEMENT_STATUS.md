@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.4.2 — execute Lua contextual codeblocks**
+  (DONE — contextual user-function execution is green; staged-function no-drift `.5.1.5` is next).
+
+  **Result:** Attached and parenthesized blocks execute through declared final codeblock slots in the current
+  isolated function frame. They observe and may update current dynamic bindings; callback-local/function stores
+  restore before returning to the outer caller; results feed receiver chains; and registered functions/governed
+  helpers keep static precedence. Missing/harray values, nonzero contextual calls, and active recursion produce
+  typed diagnostics. PUC Lua and LuaJIT pass 146/146; status is
+  `runtime-user-functions-contextual-codeblock-v1`, coverage remains 246/105+1/122, and capability remains
+  64/0/0. Descriptors remain `.5.3`, generated source remains `.8`, and mutation testing remains manual-only.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 622 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.4.1 — preserve Lua final codeblock metadata**
   (DONE — exact declaration/normalization state is green; contextual execution `.5.1.4.2` is next).
 

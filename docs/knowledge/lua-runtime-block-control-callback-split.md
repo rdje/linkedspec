@@ -21,6 +21,7 @@ evidence_update_2026_07_13_builtin_blocks: "LUA-BACKEND-PARITY.4.3.6.4 executes 
 evidence_update_2026_07_13_harray_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.1.2 executes sorted harray walk/map/reduce through one copied/restored value/key/path/depth/acc frame at 113/113 on both Lua ABIs; array-root traversal was then owned by .5.2."
 evidence_update_2026_07_13_array_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.2 generalizes the dispatcher by receiver root kind and executes zero-based array walk/map/reduce at 114/114 on both Lua ABIs; cross-kind aggregates remain leaves."
 evidence_update_2026_07_13_closeout: "LUA-BACKEND-PARITY.4.3.6.6 closes the parent after tools/run_lua_local.sh passes 114/114 on PUC Lua and LuaJIT, the callable-codeblock and punctuation-light checkers pass, capability census remains 64/0/0, and every public surface agrees. Destination acceptance now explicitly makes LUA-BACKEND-PARITY.5.1 own final callback: codeblock user-function metadata plus attached/parenthesized contextual execution; FUTURE-PARITY-BACKLOG.11.7 retains explicit literals and dynamic calls."
+evidence_update_2026_07_15_user_function_callbacks: "LUA-BACKEND-PARITY.5.1.4.1/.2 preserve final callback metadata, normalize both contextual spellings, and execute current-frame zero-positional blocks at 146/146 on both Lua ABIs; explicit literals and general dynamic calls remain .11.7."
 reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py && python3 tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl && rg -n 'LUA-BACKEND-PARITY.4.3.6.6|callback: codeblock|FUTURE-PARITY-BACKLOG.11.7' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -33,9 +34,8 @@ The contract resolver traverses those nodes without deciding their behavior.
 
 The interpreter now executes eager `block_value`, inline controls, attached/marker if and switch, attached while,
 signature-governed helper/receiver `with`, and root-kind hash/array walk/map/reduce callbacks through
-`.4.3.6.1-.5.2`. The user-function registry can prepare an
-invocation, but the interpreter does not yet call it; general staged-function
-runtime dispatch is explicitly owned by `LUA-BACKEND-PARITY.5.1`.
+`.4.3.6.1-.5.2`. General staged fixed/variadic user functions and their contextual final blocks now execute
+through `LUA-BACKEND-PARITY.5.1.1-.5.1.4.2`; scoped no-drift `.5.1.5` is active.
 
 `LUA-BACKEND-PARITY.4.3.6` therefore has dependency-ordered children:
 
@@ -48,8 +48,8 @@ runtime dispatch is explicitly owned by `LUA-BACKEND-PARITY.5.1`.
 
 This split preserves, rather than weakens, the generic final-codeblock model.
 Current built-in `with` consumes contextual codeblocks through `.4.3.6.4`.
-General user functions consume their final `callback: codeblock` parameter only after
-`.5.1` preserves that declaration and connects attached/parenthesized contextual execution to function dispatch.
+General user functions consume their final `callback: codeblock` parameter through `.5.1.4.1/.2`, which preserve
+the declaration and connect attached/parenthesized contextual execution to current function-frame dispatch.
 Explicit `{|params| ...}` literals and
 dynamic codeblock-variable calls remain the later Lua obligation routed by
 `FUTURE-PARITY-BACKLOG.11.7`.
