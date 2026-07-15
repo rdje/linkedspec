@@ -131,9 +131,11 @@ composes typed output without a raw scanner. Both Lua ABIs pass 151/151 with sta
 maps neutral parse/validate/compile failures, and builds named/path-attributed engines at 153/153 with status
 `native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` without behavior change. Planning `.5.3.0`
 then audits and splits the exact descriptor/full-trace/admission boundary. Fixed-v1 and variadic-v2 outward shapes
-are governed; final-codeblock `parameter_kinds` lacks a neutral outward record shape; and original immediate-census
-wording conflicts with the newer completion-time Lua admission policy. Decision `.5.3.0.1` precedes implementation
-`.5.3.1-.3`; current runtime and capability state remain unchanged.
+are governed; final-codeblock `parameter_kinds` lacked a neutral outward record shape; and original immediate-census
+wording conflicted with the newer completion-time Lua admission policy. Decision `.5.3.0.1` and ADR `0041` adopt
+exact final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`, keep the census
+at four all-pass backends through `.5.3-.7`, and reserve expansion for all-pass `.8.4`. Executable descriptor
+contract/emission `.5.3.1` is next; current runtime, descriptor output, and capability state remain unchanged.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.

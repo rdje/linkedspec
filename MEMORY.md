@@ -10,19 +10,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.3.0` — split Lua descriptor/trace/admission work after exact audit.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.3.0.1` — adopted descriptor-v3 and completion-time census policy.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.3.0.1 - settle descriptor and census policy`.
 - prepared_commit: `none`.
-- active_work_unit: descriptor-shape and census-timing decision `LUA-BACKEND-PARITY.5.3.0.1`.
-- next_action: obtain the director's two policy choices, record them under `.5.3.0.1`, then implement exact outward
-  descriptors `.5.3.1` before one-emitter full-pipeline trace `.5.3.2` and closeout/admission `.5.3.3`.
-- current_proof: `.5.3.0` finds exact fixed-v1 and variadic-v2 outward schemas, but no neutral final-codeblock
-  record shape for `parameter_kinds`; Lua retains its explicit descriptor fence. The original `.5.3` census
-  sentence predates current completion-time Lua admission policy. Runtime alone accepts one caller emitter; every
-  loading/frontend/validation/compiler/function/staged seam is inventoried. No source, behavior, status,
-  descriptor, capability, or test expectation changed; Lua remains 153/153 on both ABIs and capability remains
-  64/0/0; canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds. Mutation testing remains
-  manual-only and was not run.
+- active_work_unit: executable descriptor contract and Lua emission `LUA-BACKEND-PARITY.5.3.1`.
+- next_action: extend the neutral executable outward union/checker with exact final-codeblock-v3 fields, then make
+  Lua consume it before one-emitter full-pipeline trace `.5.3.2` and census-preserving closeout `.5.3.3`.
+- current_proof: ADR `0041` makes final-codeblock functions outward descriptor v3 over fixed `params`/`arity` plus
+  sole final `parameter_kinds[name] = "codeblock"`; fixed-v1/variadic-v2 stay exact. Lua remains outside the
+  four-backend all-pass census until sole expansion owner `.8.4`. No source, emitted descriptor, capability,
+  status, or test expectation changed; preceding Lua proof remains 153/153 on both ABIs, capability 64/0/0, and
+  canonical CLI 61x2 plus Phase 0 `1..1031`. Mutation testing remains manual-only and was not run. Artifact audit
+  removed reproducible Rust/Dart caches and deinitialized eight verified-clean nested pgen stimulus submodules;
+  restore them with `git -C rgx/subs/pgen submodule update --init --recursive` when pgen corpus work needs them.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -33,6 +33,7 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: `.5.3.0.1` awaits director decisions on final-codeblock outward schema scope and Lua census timing.
-  in_flight_uncommitted: none after the `.5.3.0` planning commit; mutation campaigns remain parked and no mutant
-  run belongs to ordinary commit/local-CI workflow.
+- blockers: none for `.5.3.1`; the neutral executable contract/checker must precede backend emitter code.
+  in_flight_uncommitted: none after the `.5.3.0.1` decision commit; mutation campaigns remain parked and no mutant
+  run belongs to ordinary commit/local-CI workflow. Pre-existing modified/untracked `rgx/subs/pgen` work is not
+  LinkedSpec-owned and remains untouched; root `.gitmodules` intentionally ignores dirty `rgx` worktree state.

@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.3.0.1 — settle descriptor and census policy
+
+Recorded the director's acceptance of both `.5.3.0` recommendations in ADR `0041`. The permanent outward
+user-function union now has a policy-level final-codeblock version 3: exact fixed `params`/`arity`, a sole final
+`parameter_kinds[name] = "codeblock"` entry, and unchanged provenance/body fields. Fixed-v1 and variadic-v2 remain
+exact. `.5.3.1` must update the executable neutral schema/checker before Lua emitter code; generic callable-
+codeblock capability and unrelated backend runtime work remain outside that leaf.
+
+Lua stays outside the four-backend all-pass capability census through `.5.3-.7`; `.8.4` is the sole expansion
+owner after native, corpus, primary CLI, generated-source, and generated-subset proof is complete. No source,
+emitted descriptor, capability manifest, public status, or test expectation changed. The requested artifact audit
+removed reproducible Rust/Dart caches and deinitialized eight verified-clean nested pgen stimulus submodule
+working trees, reducing `pgen/stimuli` from ~1.4 GB to 3.4 MB without deleting Git objects, commit pins, tracked
+corpus content, or pre-existing pgen work. Focused verification passes Lua 153/153 on both ABIs, signature 3/9/7,
+codeblock 7/11/9/7/4/8, capability 64/0/0, mdBook, Knowledge Map, memory/doctrines, and whitespace. The preceding
+`.5.3.0` canonical baseline remains CLI 61x2 plus Phase 0 `1..1031`; this decision-only slice does not rebuild the
+cleaned Rust target.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.3.0 — split Lua descriptor trace admission
 
 Audited the exact fixed-v1/variadic-v2 outward schemas, final-codeblock metadata and fail-closed Lua descriptor

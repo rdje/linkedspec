@@ -63,9 +63,11 @@ through the existing Unicode projector and body dispatcher. Both ABIs pass 151/1
 `native-spec-defined-functions-v1`. Loaded-source composition now carries that path through explicit validation,
 compilation, and source-identified engine construction. Both ABIs pass 153/153 with public status
 `native-spec-pipeline-v1`. No-drift closes native-loading parent `.5.2`. Planning `.5.3.0` separates exact outward
-descriptors, one-emitter full-pipeline trace, and final admission. Decision `.5.3.0.1` first settles the missing
-neutral outward final-codeblock record shape and Lua capability-census timing; current descriptor fences, runtime
-behavior, public status, and the four-backend 64/0/0 census remain unchanged. Generated source stays later-owned.
+descriptors, one-emitter full-pipeline trace, and final admission. Decision `.5.3.0.1` plus ADR `0041` adopts exact
+final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`; `.5.3.1` must add the
+neutral executable schema/checker before removing the Lua fence. Lua remains outside the four-backend 64/0/0
+census until sole all-pass admission `.8.4`. Runtime behavior, public status, descriptors, and capability remain
+unchanged in the decision slice. Generated source stays later-owned.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")

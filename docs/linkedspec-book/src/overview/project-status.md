@@ -88,8 +88,10 @@ Three backbone items tracked major structural modernization — all done:
   state, maps neutral source-pipeline errors, and creates named/path-attributed engines. Both ABIs pass 153/153
   with public status `native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` without behavior change.
   Planning `.5.3.0` splits exact outward descriptors, full native-loading/frontend/compiler/function/staged/runtime
-  trace, and admission. Decision `.5.3.0.1` first settles final-codeblock outward metadata and census timing; no
-  runtime or capability claim changed. Cross-backend
+  trace, and admission. Decision `.5.3.0.1` plus ADR `0041` now defines exact final-codeblock outward descriptor
+  v3 over fixed `params`/`arity` plus final-only `parameter_kinds`, and preserves the four-backend all-pass census
+  until sole Lua admission owner `.8.4`. Executable contract/emission `.5.3.1` is next; no runtime, descriptor, or
+  capability claim changed in the decision slice. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument

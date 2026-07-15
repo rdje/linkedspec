@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.3.0.1` — evolve exact public records by version, not optional drift):
+  Preserve fixed-v1 and variadic-v2 byte/schema identity. Represent a fixed function with final
+  `name: codeblock` intent as outward version 3: the fixed `params`/`arity` pair followed by an exact one-entry
+  `parameter_kinds` object for the final parameter. Make `.5.3.1` add this to the neutral executable
+  contract/checker before changing Lua emission; do not use the Lua leaf to promote generic callable-codeblock
+  capability or pull unrelated backend runtimes forward. Keep the capability census an admitted-backend surface,
+  not a progress ledger: `.5.3.3` preserves its four all-pass backends and `.8.4` alone adds Lua all-pass. The
+  decision changes no behavior or emitted record. Artifact cleanup used `cargo clean`, removed `dart/.dart_tool`,
+  and deinitialized eight clean nested pgen stimulus submodule working trees; the latter are restorable with
+  `git -C rgx/subs/pgen submodule update --init --recursive`. Preserve the unrelated pre-existing pgen source and
+  generated-tree changes.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.3.0` — a backend may implement a contract only after the neutral record exists):
   The Lua descriptor code is straightforward for fixed-v1 and variadic-v2 because their outward record keys are
   exact. Final-codeblock definitions are different: `parameter_kinds` is preserved through every native state and

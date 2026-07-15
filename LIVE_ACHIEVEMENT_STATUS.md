@@ -8,8 +8,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.3.0.1 — settle descriptor and census policy**
+  (DONE — accepted choices are durable; executable descriptor contract/emission `.5.3.1` is next).
+
+  **Result:** ADR `0041` defines exact outward final-codeblock descriptor v3 over fixed `params`/`arity` plus a
+  sole final `parameter_kinds[name] = "codeblock"` entry, while fixed-v1 and variadic-v2 stay exact. `.5.3.1`
+  must update the neutral executable schema/checker before Lua emitter code and does not promote generic callable-
+  codeblock capability. Lua stays outside the four-backend all-pass census through `.5.3-.7`; `.8.4` alone expands
+  it after full native/corpus/CLI/generated proof. No source, emitted descriptor, capability, status, or test
+  expectation changed. Artifact cleanup removed the reproducible Rust/Dart caches and deinitialized eight
+  verified-clean pgen stimulus submodule working trees, reducing `pgen/stimuli` from ~1.4 GB to 3.4 MB while
+  retaining pinned commits/object stores and preserving all pre-existing pgen work. Lua remains 153/153 on both
+  ABIs; signature/codeblock checks remain 3/9/7 and 7/11/9/7/4/8; capability remains 64/0/0; book/KM/doctrines
+  pass. The preceding canonical baseline remains CLI 61x2 plus Phase 0 `1..1031`.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.3.0 — split Lua descriptor trace admission**
-  (DONE — planning is durable; decision `.5.3.0.1` awaits the director before behavior code).
+  (DONE — at that boundary, decision `.5.3.0.1` awaited the director before behavior code; it is now resolved).
 
   **Result:** Exact contract/fence/API/precedent/census/history inspection finds governed fixed-v1 and variadic-v2
   outward shapes but no neutral final-codeblock outward record for `parameter_kinds`. It also proves the original
