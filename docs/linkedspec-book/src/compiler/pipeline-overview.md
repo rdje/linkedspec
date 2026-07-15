@@ -100,8 +100,8 @@ function-shell grammar now resolves the bundled owner module-relatively, validat
 only typed results through the Unicode projector and body dispatcher without a raw scanner. Both ABIs pass 151/151
 with status `native-spec-defined-functions-v1`. Loaded-source composition then retains exact request/path/source/
 compiled state, translates neutral parse/validate/compile failures, and creates name/path-attributed engines.
-Loaded functions and runtime diagnostic identity pass 153/153 with status `native-spec-pipeline-v1`; no-drift is
-active and outward descriptors remain the next dependency-ordered mechanism.
+Loaded functions and runtime diagnostic identity pass 153/153 with status `native-spec-pipeline-v1`; no-drift
+closes the native-loading parent and outward descriptors/full-pipeline trace are the active next mechanism.
 
 ```text
 fn apply(value, callback: codeblock) {

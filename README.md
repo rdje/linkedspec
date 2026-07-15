@@ -120,9 +120,9 @@ This `README.md` is the **single entry point** to the project.
   the Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with public status
   `native-spec-defined-functions-v1`. Loaded-source composition `.5.2.3` now returns exact identity/source/compiled
   state, maps neutral parse/validate/compile failures, and creates named/path-attributed runtime engines. Both ABIs
-  pass 153/153 with status `native-spec-pipeline-v1`; no-drift `.5.2.4` is active. Outward descriptor admission
-  remains `.5.3`. Full frontend/
-  compiler/function/staged propagation remains `.5.3`.
+  pass 153/153 with status `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2` without changing
+  behavior or capability; outward descriptor admission plus full frontend/compiler/function/staged trace `.5.3`
+  is active.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

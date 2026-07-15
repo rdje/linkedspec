@@ -961,8 +961,8 @@ compiles the bundled grammar once, executes it in process, and composes typed ou
 and staged body dispatcher without a raw scanner. Both ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`. Full loaded-source composition `.5.2.3` now retains request/path/source/native
 compiled state, maps exact parse/validate/compile failures, creates source-identified engines, and executes loaded
-top-level functions at 153/153 on both ABIs with status `native-spec-pipeline-v1`. No-drift `.5.2.4` is active;
-full native-pipeline trace `.5.3` follows.
+top-level functions at 153/153 on both ABIs with status `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent
+`.5.2` without behavior change; full native-pipeline descriptors/trace `.5.3` is active.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -982,7 +982,8 @@ bindings, cleanup-safe outer restoration, static callable precedence, chainable 
 Portable resolve/load `.5.2.1` and automatic spec-defined function parsing `.5.2.2` are complete. The bundled
 grammar is module-relative, compiled once, and composed without a raw scanner; both ABIs pass 151/151 with public
 status `native-spec-defined-functions-v1`. Typed full composition and source-identified engines then pass 153/153
-with status `native-spec-pipeline-v1`; `.5.2.4` no-drift is active and capability remains 64/0/0.
+with status `native-spec-pipeline-v1`; `.5.2.4` closes native-loading no-drift, `.5.3` is active, and capability
+remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

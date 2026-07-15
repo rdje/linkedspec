@@ -51,7 +51,7 @@ identical user interface under ADR `0023`; backend identity is not permission to
 | Rust | `linkedspec-core::parser::parse_spec(...)`, core compilation, and `linkedspec-runtime::engine::Engine::new(...).execute(...)` operate on Rust values. |
 | Dart | The package exports `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine`; the CLI/corpus runner reuses that package code. |
 | Julia | `LinkedSpecJulia` exports `parse_spec(...)`, `compile_spec(...)`, `LinkedSpecRuntimeEngine`, `runtime_parse(...)`, and `runtime_execute(...)`; scripts call the module. |
-| Lua | `require("linkedspec")` exports in-memory parse/validate/compile, staged function projection/dispatch, `runtime_engine(...)`, and `runtime_parse(...)`/`runtime_execute(...)`; typed `resolve_spec(...)`, `load_spec(...)`, and `load_and_compile_spec(...)` add deterministic file-to-compiled-state composition, while `LoadedCompiledSpec:create_engine(...)` carries name/path identity into runtime diagnostics. `.5.2.4` closes no-drift. |
+| Lua | `require("linkedspec")` exports in-memory parse/validate/compile, staged function projection/dispatch, `runtime_engine(...)`, and `runtime_parse(...)`/`runtime_execute(...)`; typed `resolve_spec(...)`, `load_spec(...)`, and `load_and_compile_spec(...)` add deterministic file-to-compiled-state composition, while `LoadedCompiledSpec:create_engine(...)` carries name/path identity into runtime diagnostics. `.5.2.4` closes this native-loading boundary; `.5.3` owns descriptors/full trace. |
 | Future | Must meet the same in-process library gate with idiomatic host-language names and types. |
 
 This structural audit does not claim that every active backend has completed every

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (loaded-source parse/validate/compile and identity-bearing engines `.5.2.3` are
-  complete at 153/153 on both Lua ABIs; native-loading no-drift `.5.2.4` is active)
+- Last updated: `2026-07-15` (portable native-loading parent `.5.2` is closed at 153/153 on both Lua ABIs;
+  outward descriptors/full-pipeline trace `.5.3` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2154,13 +2154,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`
 
 - ID: `LUA-BACKEND-PARITY.5.2`
-  Status: `active`
+  Status: `done`
   Goal: Add portable native named/path resolution and in-memory composition.
   Children: `.5.2.0`, `.5.2.1`, `.5.2.2`, `.5.2.3`, `.5.2.4`
   Acceptance: Consume exact name/path/root/UTF-8/stage contract; expose load/compile/create-engine conveniences as
     adapters over native in-memory APIs; remove any backend-local fallback or implicit transcoding.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Typed deterministic resolve/load, cached spec-owned function parsing,
+    validation/compile composition, source-identified engines, exact neutral errors, direct 14/9/4 fixture use,
+    public APIs/status, and later-owner fences agree through `.5.2.1-.4`. PUC Lua and LuaJIT remain 153/153;
+    capability remains 64/0/0 and no host fallback, transcoding, or second loading path exists.
+  Commit: `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift`
 
 - ID: `LUA-BACKEND-PARITY.5.2.0`
   Status: `done`
@@ -2243,17 +2246,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.2.3 - compose Lua native spec pipeline`
 
 - ID: `LUA-BACKEND-PARITY.5.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Close Lua portable native loading no-drift.
   Dependencies: `.5.2.1`, `.5.2.2`, `.5.2.3`
   Acceptance: Focused dual-ABI proof, direct neutral fixture consumption, public APIs/status, docs/book, task/index/
     roadmaps/live/KM, and canonical gates agree; parent `.5.2` closes and descriptor/full-pipeline trace `.5.3`
     activates without claiming generated source, corpus execution, or the parser CLI.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Exact `init.lua` exports, loader composition, status, the two native-pipeline
+    tests, 14/9/4 fixture consumption, root/Lua docs, roadmaps/architecture/live state, mdBook API/status/handoff/
+    trace pages, task/index, and Knowledge Map agree. No unowned loading seam or stale current-behavior claim was
+    found. PUC Lua and LuaJIT remain 153/153; native 14/9/4, capability 64/0/0, coverage 246/105+1/122, and public
+    58/27/0 checks pass. No Lua source, behavior, status, capability, or test count changes. Parent `.5.2` closes
+    and `.5.3` activates; generated source, corpus execution, and parser CLI remain later owners. Mutation testing
+    remains manual-only and was not run. Canonical local CI passes both 61/61 CLI environments and Phase 0
+    `1..1031` in 607 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift`
 
 - ID: `LUA-BACKEND-PARITY.5.3`
-  Status: `pending`
+  Status: `active`
   Goal: Admit exact outward descriptors, runtime diagnostics, and full-pipeline trace.
   Dependencies: `.4.4`, `.5.1`, `.5.2`
   Acceptance: Consume shared fixtures/checkers directly, including the exact fixed-v1/variadic-v2 outward function
@@ -2414,7 +2424,8 @@ one exact module-relative path, compiles it once, executes it in process, and fe
 existing Unicode projector/body dispatcher. Both Lua ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`. Full composition `.5.2.3` now returns typed loaded/compiled state, maps the
 three source stages, creates name/path-identified engines, and executes loaded top-level functions at 153/153 on
-both ABIs with status `native-spec-pipeline-v1`; native-loading no-drift `.5.2.4` is active.
+both ABIs with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` confirms exact source/API/test/
+public-doc/KM agreement, closes parent `.5.2` without behavior change, and activates descriptors/full trace `.5.3`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2517,12 +2528,32 @@ both ABIs with status `native-spec-pipeline-v1`; native-loading no-drift `.5.2.4
 | 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `done` | Exact final metadata and contextual normalization pass 142/142 on both Lua ABIs. |
 | 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `done` | Dynamic contextual execution, restoration, precedence, chainable values, and typed failures pass 146/146. |
 | 99 | `LUA-BACKEND-PARITY.5.1.5` | `done` | Public/API/test/docs/KM no-drift closes parent `.5.1` without behavior change. |
-| 100 | `LUA-BACKEND-PARITY.5.2` | `active` | Add portable native named/path resolution and in-memory composition. |
+| 100 | `LUA-BACKEND-PARITY.5.2` | `done` | Portable native named/path resolution and in-memory composition close at 153/153. |
 | 101 | `LUA-BACKEND-PARITY.5.2.0` | `done` | Split portable resolve/load, spec-defined function parsing, full composition, and no-drift by dependency. |
 | 102 | `LUA-BACKEND-PARITY.5.2.1` | `done` | Typed deterministic resolve/load consumes all 14/9/4 cases at 149/149 on both ABIs. |
 | 103 | `LUA-BACKEND-PARITY.5.2.2` | `done` | Cached spec-owned function parsing composes Unicode projection/body dispatch at 151/151 with no raw scanner. |
 | 104 | `LUA-BACKEND-PARITY.5.2.3` | `done` | Typed full composition and source-identified runtime engines pass 153/153 on both ABIs. |
-| 105 | `LUA-BACKEND-PARITY.5.2.4` | `active` | Close native loading no-drift and activate outward descriptors/full-pipeline trace `.5.3`. |
+| 105 | `LUA-BACKEND-PARITY.5.2.4` | `done` | Exact source/API/test/public-doc/KM no-drift closes parent `.5.2`. |
+| 106 | `LUA-BACKEND-PARITY.5.3` | `active` | Admit outward descriptors and one-emitter full-pipeline trace. |
+
+### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Resolve/load, automatic spec-owned function parsing, and compile/engine composition
+  are implemented, but their parent cannot close until every public/source/test/doc/KM surface and later fence
+  agrees.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The native-loading contract spans `init.lua`, `spec_loader.lua`, the cached
+  function parser, compiler/runtime identity, focused tests, neutral fixtures, and public/status documentation;
+  any stale or missing surface would make a green implementation an incomplete product boundary.
+- [x] **FIX** — Inventory those exact surfaces, align current frontier text, close parent `.5.2`, and activate only
+  descriptor/full-pipeline trace `.5.3`; add no duplicate adapter or behavior.
+- [x] **ADDRESSED (verified)** — Typed exports/state/errors and named/path runtime identity are exercised and
+  documented consistently; no unowned seam or stale current-behavior claim remains.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT remain 153/153; native 14/9/4, capability 64/0/0, coverage
+  246/105+1/122, public 58/27/0, mdBook, Knowledge Map, doctrine, memory, and canonical gates pass; canonical CI
+  includes both 61/61 CLI environments and Phase 0 `1..1031` in 607 seconds. No Lua source, behavior, status,
+  capability, or test count changes; mutation testing is not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps/architecture/live state, mdBook, task/index, and Knowledge Map close
+  `.5.2`, activate `.5.3`, and retain generated source, corpus execution, and parser CLI as later owners.
 
 ### `LUA-BACKEND-PARITY.5.2.3` Acceptance Checklist
 
@@ -4028,3 +4059,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.2.1` | `LUA-BACKEND-PARITY.5.2.1 - add Lua native spec loading` | Typed requests/options/results/errors, native file-kind inspection, deterministic candidates, strict UTF-8, direct 14/9/4 dual-ABI proof, and automatic-function-parser handoff. |
 | `LUA-BACKEND-PARITY.5.2.2` | `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing` | Module-relative bundled grammar, one-time native compile, typed in-process execution, Unicode projection/body dispatch, typed failure ownership, and no raw scanner. |
 | `LUA-BACKEND-PARITY.5.2.3` | `LUA-BACKEND-PARITY.5.2.3 - compose Lua native spec pipeline` | Typed loaded/compiled result, exact source identity, neutral parse/validate/compile errors, identified engines, and loaded function execution. |
+| `LUA-BACKEND-PARITY.5.2.4` | `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift` | Exact source/export/test/public-doc/Knowledge-Map inventory, parent `.5.2` closure, and descriptor/full-trace `.5.3` handoff. |

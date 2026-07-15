@@ -34,7 +34,10 @@ Source failures become typed `SpecPipelineError` records at exact neutral bounda
 Resolution/loading errors keep their earlier owners unchanged. Focused tests prove loaded fixed-function execution,
 named and exact-path identity, runtime diagnostic identity, inline API no-drift, exact missing-name JSON, and all
 three source-stage mappings on PUC Lua and LuaJIT at 153/153 with status `native-spec-pipeline-v1`.
+`LUA-BACKEND-PARITY.5.2.4` then confirms exact source/export/test/public-doc/Knowledge-Map no-drift and closes the
+native-loading parent without changing this API, status, behavior, capability, or test count. Outward descriptors
+and full-pipeline trace remain owned by active `.5.3`.
 
 Related facts: [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
 [[lua-native-spec-loading-split]], [[native-spec-resolution-contract]],
-[[native-in-memory-backend-contract]].
+[[native-in-memory-backend-contract]], [[lua-native-spec-loading-closeout]].

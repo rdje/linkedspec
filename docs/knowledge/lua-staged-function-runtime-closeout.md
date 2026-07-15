@@ -28,13 +28,12 @@ a separately scheduled manual campaign and was not part of the closeout gate.
 
 Planning `.5.2.0` splits portable native loading into resolve/load `.5.2.1`, automatic spec-defined function-shell
 parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`. Resolve/load and automatic
-function parsing are complete at 151/151; full composition is complete at 153/153 on both ABIs, and `.5.2.4` is
-active. Outward
-descriptors plus full-pipeline trace remain `.5.3`; generated preservation and
+function parsing are complete at 151/151; full composition is complete at 153/153 on both ABIs, and `.5.2.4`
+closes parent `.5.2`. Outward descriptors plus full-pipeline trace `.5.3` is active; generated preservation and
 execution remain `.8`; corpus and parser CLI have later owners; explicit `{|params| ...}` literals and general
 bound dynamic calls remain `.11.7`.
 
 Related facts: [[lua-staged-function-execution-split]], [[lua-staged-function-body-registry]],
 [[lua-fixed-v1-user-function-runtime]], [[lua-variadic-v2-runtime]],
 [[lua-contextual-user-function-codeblock-runtime]], [[lua-native-spec-resolution]],
-[[lua-spec-defined-function-parser]].
+[[lua-spec-defined-function-parser]], [[lua-native-spec-loading-closeout]].

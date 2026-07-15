@@ -22,8 +22,9 @@ This document is the current high-level technical reading of the project shape. 
   one typed nested identity/source/compiled result, exact parse/validation/compile error translation, and engine
   creation that copies options while attaching logical names only to name requests and resolved paths to both
   request kinds. Loaded top-level functions and runtime diagnostic identity pass 153/153 on PUC Lua and LuaJIT;
-  status is `native-spec-pipeline-v1`, capability remains 64/0/0, and no-drift `.5.2.4` is active. Descriptors
-  `.5.3`, generated source `.8`, and explicit/general dynamic codeblocks `.11.7` retain separate owners.
+  status is `native-spec-pipeline-v1` and capability remains 64/0/0. No-drift `.5.2.4` closes parent `.5.2`
+  without behavior change; descriptors/full-pipeline trace `.5.3` is active, while generated source `.8` and
+  explicit/general dynamic codeblocks `.11.7` retain separate owners.
 - `2026-07-15` documentation architecture: ADR `0040` keeps `docs/linkedspec-book/` as the sole normative,
   backend-neutral owner of `.spec` semantics and portable behavior, and adopts one optional implementation
   companion each for Perl, Rust, Dart, Julia, and Lua. Companions will explain host APIs, embedding, toolchains,

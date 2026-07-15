@@ -37,9 +37,9 @@ normalize Unicode, convert newlines, trim, replace malformed bytes, or transcode
 nine resolution/file-kind, and four text cases plus supplemental Unicode name and exact-path boundaries on both
 ABIs. This leaf's status was `native-spec-resolution-loading-v1`; subsequent `.5.2.2` adds cached automatic
 spec-owned function-shell parsing at 151/151. `.5.2.3` then adds typed loaded/compiled state, exact source-stage
-errors, and source-identified engines at 153/153; current status is `native-spec-pipeline-v1` and `.5.2.4` owns
-no-drift.
+errors, and source-identified engines at 153/153. `.5.2.4` closes exact source/API/test/public no-drift without a
+behavior change; current status remains `native-spec-pipeline-v1` and descriptors/full trace `.5.3` is active.
 
 Related facts: [[native-spec-resolution-contract]], [[lua-native-spec-loading-split]],
 [[native-in-memory-backend-contract]], [[lua-function-definition-shell-projection]],
-[[lua-spec-defined-function-parser]], [[lua-native-spec-pipeline]].
+[[lua-spec-defined-function-parser]], [[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]].

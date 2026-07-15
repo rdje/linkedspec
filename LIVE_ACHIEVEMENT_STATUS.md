@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.2.4 — close Lua native loading no drift**
+  (DONE — native loading parent `.5.2` is closed; outward descriptor/full-pipeline trace `.5.3` is active).
+
+  **Result:** Exact export/source/test/public-doc/Knowledge-Map inventory finds no unowned loading seam. Typed
+  resolve/load, cached spec-owned function parsing, full compile/engine composition, source identity, neutral
+  errors, and later boundaries agree. PUC Lua and LuaJIT remain 153/153; native 14/9/4, capability 64/0/0,
+  coverage 246/105+1/122, and public 58/27/0 checks pass. No Lua source, behavior, status, capability, or test
+  count changes. Canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 607 seconds.
+  Parent `.5.2` closes and `.5.3` activates; generated source, corpus execution, and parser CLI remain later
+  owners. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.2.3 — compose Lua native spec pipeline**
   (DONE — loaded source compiles and executes with identity; native-loading no-drift `.5.2.4` is next).
 

@@ -62,7 +62,8 @@ module-relative path, validates and compiles it once, executes it over caller so
 through the existing Unicode projector and body dispatcher. Both ABIs pass 151/151; public status is
 `native-spec-defined-functions-v1`. Loaded-source composition now carries that path through explicit validation,
 compilation, and source-identified engine construction. Both ABIs pass 153/153 with public status
-`native-spec-pipeline-v1`; outward descriptors, full-pipeline trace, and generated source remain later owners.
+`native-spec-pipeline-v1`. No-drift closes native-loading parent `.5.2`; outward descriptors/full-pipeline trace
+`.5.3` is active, while generated source remains a later owner.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")
@@ -269,8 +270,8 @@ resolves and compiles the bundled grammar once, executes it in process, and comp
 dispatcher without a raw scanner; the dual-ABI gate is 151/151 with status
 `native-spec-defined-functions-v1`. Loaded-source `.5.2.3` then adds typed compiled results, exact source identity,
 neutral parse/validate/compile failures, and named/path runtime-engine attribution; the dual-ABI gate is 153/153
-with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` is active. Full frontend/compiler/function/
-staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
+with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes parent `.5.2`; full frontend/
+compiler/function/staged trace `.5.3` is active now that its dependencies exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

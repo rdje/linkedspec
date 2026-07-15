@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.2.4` — close composition by inventory, not another adapter): Treat native
+  loading as the complete dependency chain from request policy through exact text, spec-owned function parsing,
+  validation/compile, and source-identified engine construction. The closeout should prove exports, typed state,
+  exact errors, runtime identity, focused tests, neutral fixtures, public docs, and later-owner fences agree; it
+  should not add a second loading path. The inventory finds no missing seam. Both ABIs remain 153/153, native
+  14/9/4, capability 64/0/0, coverage 246/105+1/122, and public 58/27/0 are green. Parent `.5.2` closes without a
+  behavior/status/capability change and `.5.3` becomes the one owner for outward descriptors and full-pipeline
+  trace. Canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 607 seconds. Generated
+  source, corpus execution, and the parser CLI remain later; mutation campaigns stay manual-only.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.2.3` — compose policy, do not duplicate the pipeline): Keep filesystem policy
   in `spec_loader.lua` and function syntax in the cached `user_function_definition.spec` adapter. The complete
   file path should simply call those owners, validate their composed typed AST once, compile with validation

@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.2.4 — close Lua native loading no drift
+
+Closed the portable native-loading parent after an exact source/export/test/public-doc/Knowledge-Map inventory.
+The audit finds no unowned seam: typed request/resolution/loading, cached spec-owned function parsing, composed
+validation/compilation, source-identified engines, neutral errors, and later descriptor/trace/generated/corpus/CLI
+boundaries all agree. PUC Lua and LuaJIT remain 153/153; the native 14/9/4 fixture, capability 64/0/0, coverage
+246/105+1/122, and public 58/27/0 checks pass. No source, public status, behavior, capability, or test count changes.
+Canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 607 seconds.
+
+Parent `.5.2` is closed and exact outward descriptors plus one-emitter full-pipeline trace `.5.3` is active.
+Generated source, corpus execution, and the parser CLI retain their later owners. Mutation testing remains a
+manual-only campaign and was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.2.3 — compose Lua native spec pipeline
 
 Added public `load_and_compile_spec(...)` and typed `LoadedCompiledSpec` to the Lua native file API. The adapter

@@ -288,8 +288,8 @@ and runtime invocation `.5.1.4.2` raises them to 146/146 with public status
 `runtime-user-functions-contextual-codeblock-v1`. Portable resolve/load `.5.2.1` and cached automatic spec-defined
 function parsing `.5.2.2` then raise both suites to 151/151 and status `native-spec-defined-functions-v1`;
 loaded-source compile/engine composition `.5.2.3` then raises them to 153/153 and status
-`native-spec-pipeline-v1`. No-drift `.5.2.4` is active; full loading/frontend/compiler/function/staged trace
-propagation remains `.5.3`.
+`native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2`; full loading/frontend/compiler/function/staged
+trace propagation `.5.3` is active.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

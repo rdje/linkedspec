@@ -356,7 +356,8 @@ grammar module-relatively, validates/compiles it once, executes it in process, a
 existing Unicode projector/body dispatcher without a raw scanner. Both ABIs pass 151/151 with status
 `native-spec-defined-functions-v1`. Loaded-source `.5.2.3` retains exact identity/source/compiled state, maps the
 three neutral source stages, and creates named/path-attributed engines at 153/153 with status
-`native-spec-pipeline-v1`; no-drift `.5.2.4` is active and outward descriptors `.5.3` follow.
+`native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2` and outward descriptors/full trace `.5.3` is
+active.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -799,8 +800,8 @@ Contextual execution `.5.1.4.2` then runs in the current function frame with cle
 callable precedence, chainable results, and typed failures at 146/146; public status is
 `runtime-user-functions-contextual-codeblock-v1`, parent `.5.1` is closed, native-loading split `.5.2.0` is done,
  portable resolve/load `.5.2.1` and cached automatic spec-defined parsing `.5.2.2` pass 151/151. Typed loaded-source
-composition `.5.2.3` then passes 153/153 with status `native-spec-pipeline-v1`, `.5.2.4` is active, and capability
-remains 64/0/0. Explicit
+composition `.5.2.3` then passes 153/153 with status `native-spec-pipeline-v1`; `.5.2.4` closes parent `.5.2`,
+`.5.3` is active, and capability remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
