@@ -16,8 +16,7 @@ Runtime failures now carry typed neutral `RuntimeDiagnostic` payloads on the
 `RuntimeInterpreterException.diagnostic` field. Optional `spec_name` / `spec_path`
 engine identity, top and deepest-rule attribution, Lua handler identity, exact
 top-selection/input/lookup/execution stages, deterministic JSON projection, and
-unchanged successful results pass 126/126 on PUC Lua and LuaJIT. Public status
-is `runtime-structured-diagnostics`.
+unchanged successful results pass on PUC Lua and LuaJIT.
 
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
@@ -30,6 +29,29 @@ if not ok and linkedspec.is_runtime_interpreter_error(value) then
   io.stderr:write(diagnostic.summary, " [", diagnostic.handler_source_label, "]\n")
 end
 ```
+
+Native tracing is opt-in and caller-owned. Ordered levels use the exact
+none/low/medium/high/full/debug thresholds; immutable configs can route typed
+enter/exit/decision/mark/dump/log events to stdout, a resettable/appending file,
+or both. `runtime_parse(...)` / `runtime_execute(...)` accept a `trace` emitter
+in their options table, while the `_with_trace` entrypoints construct one from
+config. Disabled or absent tracing stays quiet, and successful result JSON is
+unchanged. The controls slice emits only `lua_runtime:parse`; `.4.4.3` owns
+deeper interpreter events. Both ABIs pass 128/128 and public status is
+`runtime-trace-controls`.
+
+```lua
+local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+  linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+  "linkedspec.trace.log"
+))
+local result = linkedspec.runtime_parse_with_trace(engine, input, config)
+```
+
+`trace_config_from_environment(...)` recognizes `LINKEDSPEC_TRACE_LEVEL`
+(falling back to `LINKEDSPEC_DUMP_VERBOSITY`), `LINKEDSPEC_TRACE_FILE`,
+`LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_RESET_FILE`, and
+`LINKEDSPEC_TRACE_EMOJI`.
 
 Deterministic scalar/string helpers include lazy fallback, definedness/
 emptiness, Unicode trim/length/substrings, literal transforms/predicates,
@@ -130,8 +152,8 @@ handled, thirteen intentional statement/receiver-only surfaces, and missing eage
 `.4.3.9.1` first passes 123/123. Permanent `.4.3.9.2` now proves exact 233+13 ownership for all 246 names, direct
 `call(rule)` result/`retv`/cursor behavior, and public status `runtime-helper-value-control`; both ABIs pass 125/125
 and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime failures, trace controls/sinks,
-runtime events, and closeout; structured diagnostics `.4.4.1` now pass 126/126 and trace controls/sinks `.4.4.2`
-is active. Full frontend/compiler/function/staged trace remains `.5.3` after
+runtime events, and closeout; structured diagnostics `.4.4.1` pass 126/126 and trace controls/sinks `.4.4.2`
+pass 128/128. Runtime instrumentation `.4.4.3` is active. Full frontend/compiler/function/staged trace remains `.5.3` after
 general staged functions and native loading exist. This is native interpreter parity only; generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -141,8 +163,8 @@ left-to-right before `runtime_truthy` composition. Empty calls return false, fal
 Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as true; portable specs should use
 explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
 proof first raised both ABI suites to 123/123; the complete helper closeout now passes 125/125 and diagnostics/
-trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; trace
-controls/sinks `.4.4.2` is next.
+trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
+trace controls/sinks `.4.4.2` raise it to 128/128, with deeper runtime instrumentation `.4.4.3` next.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while

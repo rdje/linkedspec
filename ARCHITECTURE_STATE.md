@@ -5,20 +5,27 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now owns a zero-dependency native trace boundary in `linkedspec.trace`. Ordered typed
+  levels/config/sink/event/scope/emitter records, exact aliases and numeric thresholds, immutable config updates,
+  documented environment controls, structured event JSON, and deterministic indentation/emoji rendering feed
+  caller-owned stdout, resettable/appending routed files, or mirror sinks. Direct emitter injection and config
+  wrappers emit a balanced `lua_runtime:parse` scope without mutating caller options or parse results; absent or
+  disabled trace records/writes nothing. PUC Lua and LuaJIT pass 128/128, status is `runtime-trace-controls`,
+  capability remains 64/0/0, and `.4.4.3` exclusively owns deeper interpreter instrumentation.
 - `2026-07-15` refresh: Lua runtime errors now carry typed neutral `RuntimeDiagnostic` payloads. Optional engine
   `spec_name` / `spec_path` flows only into failures; `top_rule_selection`, `runtime_input`, `rule_lookup`, and
   `runtime_execution` distinguish the mechanism. Each rule adds a fallback before local-state unwind, while outer
   wrappers preserve existing child/lookup payloads, so top and deepest-rule/`lua_runtime:rule:<label>` identity
   coexist without another failure stack. Deterministic diagnostic/error JSON omits unavailable fields; existing
-  text and successful results stay unchanged. Both ABIs pass 126/126, status is `runtime-structured-diagnostics`,
-  capability remains 64/0/0, and trace controls/sinks `.4.4.2` is active.
+  text and successful results stay unchanged. That `.4.4.1` boundary passes 126/126 with historical status
+  `runtime-structured-diagnostics`; `.4.4.2` trace controls later supersedes the mechanism status as recorded above.
 - `2026-07-15` refresh: Lua diagnostics/trace is split by mechanism and dependency. `.4.4.1-.4` now own neutral
   structured runtime failures, ordered controls/events/sinks, interpreter instrumentation, and scoped no-drift.
   Full loading/frontend/validation/compiler/function-shell/staged/runtime propagation remains `.5.3`, explicitly
   after staged-function `.5.1` and native-loading `.5.2` create those owners. The ordering follows completed Dart
   and Julia evidence. Current Lua already provides the typed runtime exception seam, parse-scoped rule stack,
   compiled source records, cursor/capture/mark state, and per-parse caller option boundary needed by `.4.4`; no
-  behavior or capability changed in planning `.4.4.0`, and structured diagnostic `.4.4.1` is active.
+  behavior or capability changed in planning `.4.4.0`; structured diagnostic `.4.4.1` was the next leaf there.
 - `2026-07-15` refresh: Lua's native helper/value/control boundary is now exhaustively closed. A defensive sorted
   inventory view drives all 246 admitted names through parse, compile, and runtime on both ABIs: 233 reach
   function-form owners and exactly thirteen governed structural/receiver-only forms remain non-functions. Focused

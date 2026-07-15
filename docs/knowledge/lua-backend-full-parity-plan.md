@@ -17,6 +17,7 @@ tags: [lua, backend, parity, embedding, cli, corpus, generated-source, FUTURE-PA
 evidence: "FUTURE-PARITY-BACKLOG.1.3 creates docs/tasks/LUA-BACKEND-PARITY.md after generated-source .3 closes at 60/0/0. FUTURE-PARITY-BACKLOG.16.6 proves punctuation-light aliases through typed AST, serialized SpecFile/ActionIR reconstruction, and native execution on PUC Lua and LuaJIT; Lua generated-source ownership remains LUA-BACKEND-PARITY.8.1-.8.4."
 evidence_update_2026_07_15_diagnostics_trace_split: "LUA-BACKEND-PARITY.4.4.0 splits structured runtime diagnostics, controls/sinks, runtime instrumentation, and closeout. Full frontend/compiler/function/staged propagation remains dependency-correct .5.3 after general staged-function .5.1 and native loading .5.2."
 evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 adds neutral typed RuntimeDiagnostic payloads with optional spec identity, specific top/input/lookup/execution stages, deepest-rule/handler preservation, deterministic JSON, unchanged success output, and runtime-structured-diagnostics status at 126/126 on both ABIs."
+evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed ordered levels/config/events, environment controls, caller-owned stdout/route/mirror sinks, reset/append, and result-neutral traced runtime entrypoints at 128/128 on both ABIs; .4.4.3 owns deeper instrumentation."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -47,4 +48,5 @@ active `.1.1` must lock a reproducible repository-owned dependency/test/cache st
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
 [[dart-backend-interpreter-first-plan]], [[julia-backend-interpreter-first-plan]],
-[[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]].
+[[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]],
+[[lua-trace-controls-sinks]].

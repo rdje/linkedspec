@@ -87,6 +87,12 @@ outer wrappers preserve it, so `top_rule = "Top"` can coexist with
 nested diagnostic; absent optional identity fields are omitted. Successful
 parse values and ordinary textual errors are unchanged.
 
+Lua tracing uses a separate caller-owned channel. Passing `{ trace = emitter }`
+to `runtime_parse(...)` or calling `runtime_parse_with_trace(...)` emits
+structured trace events without replacing `RuntimeDiagnostic`, writing ambient
+diagnostics, or changing successful results. Disabled configs stay quiet;
+stdout, routed-file, and mirror sinks are explicit native trace policy.
+
 For Rust, `RuntimeExecutionError` carries the equivalent serializable `RuntimeDiagnostic`. Native callers opt into
 it through `Engine::execute_with_diagnostics(...)` or `execute_value_with_diagnostics(...)`:
 

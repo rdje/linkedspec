@@ -922,15 +922,17 @@ Diagnostics/trace split note (2026-07-15, `LUA-BACKEND-PARITY.4.4.0`): the origi
 runtime observability with frontend/compiler/function/staged propagation before general staged functions `.5.1`
 and native loading `.5.2` exist. Following the completed Dart/Julia dependency order, `.4.4.1-.4` now separately
 own structured runtime failures, trace controls/sinks, runtime events, and no-drift. Full native-pipeline
-propagation remains `.5.3` after its owners exist; structured runtime diagnostic `.4.4.1` is active. No behavior or
-capability changed in the split.
+propagation remains `.5.3` after its owners exist. Structured runtime diagnostics `.4.4.1` pass 126/126 and native
+trace controls/sinks `.4.4.2` pass 128/128; deeper runtime instrumentation `.4.4.3` is active.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
 Optional engine `spec_name` / `spec_path`, specific top-selection/strict-input/rule-lookup/execution stages,
 child-before-parent preservation, deterministic error/diagnostic JSON, unchanged textual errors, and unchanged
-successful results pass 126/126 on PUC Lua and LuaJIT. Public status is `runtime-structured-diagnostics`; trace
-controls/sinks `.4.4.2` is active and capability remains 64/0/0.
+successful results pass 126/126 on PUC Lua and LuaJIT. Typed ordered trace levels/config/events, environment
+controls, caller-owned stdout/route/mirror sinks with reset/append, and balanced result-neutral parse scopes now
+pass 128/128. Public status is `runtime-trace-controls`; runtime instrumentation `.4.4.3` is active and capability
+remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

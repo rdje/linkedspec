@@ -6,6 +6,7 @@ local json = require("linkedspec.json")
 local matching = require("linkedspec.matching")
 local runtime_scoped_binding = require("linkedspec.runtime_scoped_binding")
 local scalar_numeric = require("linkedspec.scalar_numeric")
+local trace = require("linkedspec.trace")
 local unicode_case = require("linkedspec.unicode_case_mapping")
 
 local M = {}
@@ -3203,6 +3204,9 @@ function M.runtime_parse(engine, input, options)
   if options.diagnostic_sink ~= nil and type(options.diagnostic_sink) ~= "function" then
     fail("diagnostic_sink must be a function")
   end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
+  end
   local top = options.top_rule or default_top(engine)
   if not top then
     local detail = "compiled spec does not contain any rules"
@@ -3215,6 +3219,15 @@ function M.runtime_parse(engine, input, options)
     })
   end
   local ctx = context(engine, input, top, engine.compiled_spec.rules_by_label, options.diagnostic_sink)
+  local trace_scope
+  if options.trace ~= nil then
+    trace_scope = trace.enter_trace_scope(
+      options.trace,
+      "lua_runtime:parse",
+      "top_rule=" .. top,
+      trace.TRACE_HIGH
+    )
+  end
   local ok, result = pcall(execute_rule, engine, top, 0, ctx)
   if not ok then
     if getmetatable(result) == ERROR_MT then
@@ -3226,10 +3239,14 @@ function M.runtime_parse(engine, input, options)
         rule_label = ctx.rule_stack[#ctx.rule_stack] or top,
       }))
     end
+    if trace_scope ~= nil then
+      local message = M.is_runtime_interpreter_error(result) and result.message or tostring(result)
+      trace.exit_trace_scope(options.trace, trace_scope, "error=" .. message)
+    end
     error(result, 0)
   end
   local output = json.array({ copy_value(result.value) })
-  return setmetatable({
+  local parse_result = setmetatable({
     matched = result.matched,
     value = copy_value(result.value),
     output = output,
@@ -3237,9 +3254,32 @@ function M.runtime_parse(engine, input, options)
     cursor_char_offset = matching.byte_offset_to_char_offset(input, ctx.cursor_byte),
     lifecycle_events = ctx.lifecycle_events,
   }, RESULT_MT)
+  if trace_scope ~= nil then
+    trace.exit_trace_scope(
+      options.trace,
+      trace_scope,
+      "matched=" .. tostring(parse_result.matched) .. " cursor=" .. tostring(parse_result.cursor_code_unit)
+    )
+  end
+  return parse_result
 end
 
 M.runtime_execute = M.runtime_parse
+
+function M.runtime_parse_with_trace(engine, input, config, options)
+  if not trace.is_trace_config(config) then
+    fail("runtime_parse_with_trace expects LinkedSpecTraceConfig")
+  end
+  options = options or {}
+  if type(options) ~= "table" then fail("runtime parse options must be a table") end
+  local parse_options = {}
+  for key, value in pairs(options) do parse_options[key] = value end
+  parse_options.trace = trace.trace_emitter(config, { stdout_writer = options.stdout_writer })
+  parse_options.stdout_writer = nil
+  return M.runtime_parse(engine, input, parse_options)
+end
+
+M.runtime_execute_with_trace = M.runtime_parse_with_trace
 
 function M.to_json(value)
   if getmetatable(value) == ERROR_MT then

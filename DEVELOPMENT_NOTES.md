@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.4.2` — trace controls stay caller-owned and mechanism-neutral): Lua follows
+  the admitted Dart/Julia split: one immutable config and one caller-owned emitter own ordered thresholds, events,
+  rendering, and stdout/route/mirror delivery. Runtime entrypoints accept the emitter directly or construct it from
+  config; they do not read ambient environment themselves, mutate caller options, or change result data. The
+  controls slice emits only balanced parse enter/exit records, keeping exact rule/regex/branch/lifecycle/cursor/
+  boundary instrumentation reviewable under `.4.4.3`. Weak-key private storage gives Lua typed immutable proxy
+  records across both ABIs; accessors must return stored `false` explicitly rather than collapsing it to `nil`.
+  Both PUC Lua and LuaJIT pass 128/128; canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 611 seconds;
+  status is `runtime-trace-controls`.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.4.1` — attach diagnostics at the deepest typed boundary, then preserve them):
   Build one neutral payload constructor over caller-owned engine identity. Give rule lookup, empty-state selection,
   strict input, and ordinary execution distinct stages. Wrap each typed rule failure before discarding its frame;

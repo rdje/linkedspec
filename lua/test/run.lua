@@ -68,6 +68,13 @@ local function write_file(path, value)
   assert(handle:close())
 end
 
+local function read_file(path)
+  local handle = assert(io.open(path, "rb"))
+  local value = assert(handle:read("*a"))
+  assert(handle:close())
+  return value
+end
+
 local function make_directory(path)
   if not command_succeeded("mkdir -p " .. shell_quote(path)) then
     fail("unable to create test directory: " .. path)
@@ -127,10 +134,191 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-structured-diagnostics", "status parity")
+  assert_equal(first.parity, "runtime-trace-controls", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
+end)
+
+test("trace controls expose ordered levels immutable config and structured primitives", function()
+  assert_equal(linkedspec.parse_trace_level("quiet"), linkedspec.TRACE_NONE, "quiet alias")
+  assert_equal(linkedspec.parse_trace_level("med"), linkedspec.TRACE_MEDIUM, "medium alias")
+  assert_equal(linkedspec.parse_trace_level("verbose"), linkedspec.TRACE_DEBUG, "debug alias")
+  assert_equal(linkedspec.parse_trace_level(" 250 ").value, 250, "numeric threshold")
+  assert_equal(linkedspec.trace_level_name(linkedspec.parse_trace_level(250)), "high", "numeric bucket")
+  assert_equal(linkedspec.trace_allows(linkedspec.TRACE_HIGH, linkedspec.TRACE_MEDIUM), true, "ordered allow")
+  assert_equal(linkedspec.trace_allows(linkedspec.TRACE_MEDIUM, linkedspec.TRACE_HIGH), false, "ordered reject")
+  assert_equal(linkedspec.trace_allows(linkedspec.TRACE_NONE, linkedspec.TRACE_NONE), false, "none is quiet")
+  assert_error_contains(function()
+    linkedspec.parse_trace_level("loud")
+  end, "unsupported trace level 'loud'", "invalid trace level")
+
+  local disabled = linkedspec.trace_config_disabled()
+  local enabled = linkedspec.with_trace_emoji(
+    linkedspec.with_trace_level(disabled, linkedspec.TRACE_FULL)
+  )
+  assert_equal(disabled.level, linkedspec.TRACE_NONE, "config update preserves source")
+  assert_equal(disabled.emoji, false, "source emoji remains disabled")
+  assert_equal(enabled.level, linkedspec.TRACE_FULL, "updated level")
+  assert_equal(enabled.emoji, true, "updated emoji")
+  assert_equal(linkedspec.is_trace_config(enabled), true, "typed config")
+  assert_error_contains(function()
+    enabled.level = linkedspec.TRACE_LOW
+  end, "trace values are immutable", "immutable trace config")
+
+  local environment = linkedspec.trace_config_from_environment({
+    LINKEDSPEC_DUMP_VERBOSITY = "debug",
+    LINKEDSPEC_TRACE_FILE = "  trace.log  ",
+    LINKEDSPEC_TRACE_MIRROR_STDOUT = "yes",
+    LINKEDSPEC_TRACE_RESET_FILE = "1",
+    LINKEDSPEC_TRACE_EMOJI = "true",
+  })
+  assert_equal(environment.level, linkedspec.TRACE_DEBUG, "environment fallback level")
+  assert_equal(environment.trace_file, "trace.log", "environment trace path")
+  assert_equal(environment.sink_mode, linkedspec.TRACE_MIRROR, "environment mirror")
+  assert_equal(environment.reset_file, true, "environment reset")
+  assert_equal(environment.emoji, true, "environment emoji")
+
+  local stdout = {}
+  local emitter = linkedspec.trace_emitter(
+    linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+    { stdout_writer = function(payload) stdout[#stdout + 1] = payload end }
+  )
+  local scope = linkedspec.enter_trace_scope(emitter, "compile", "start", linkedspec.TRACE_HIGH)
+  assert_equal(
+    linkedspec.trace_decision(emitter, "use_cache", false, "miss", linkedspec.TRACE_DEBUG),
+    false,
+    "decision result"
+  )
+  linkedspec.emit_trace_event(emitter, linkedspec.TRACE_MARK, "checkpoint", "ready", linkedspec.TRACE_MEDIUM)
+  linkedspec.log_trace_output(emitter, linkedspec.TRACE_LOW, "runtime message", "ctx=run")
+  linkedspec.log_trace_dump(emitter, linkedspec.TRACE_FULL, "compiled descriptor dump")
+  linkedspec.exit_trace_scope(emitter, scope, "done")
+
+  local rendered = table.concat(stdout)
+  assert_contains(rendered, "[HIGH][enter] -> compile start", "enter rendering")
+  assert_contains(rendered, "[DEBUG][decision]   use_cache taken=0 reason=miss", "decision rendering")
+  assert_contains(rendered, "[MEDIUM][mark]   checkpoint ready", "mark rendering")
+  assert_contains(rendered, "[LOW][log]   log_output runtime message context=ctx=run", "log rendering")
+  assert_contains(rendered, "[FULL][dump]   log_dump compiled descriptor dump", "dump rendering")
+  assert_contains(rendered, "[HIGH][exit] <- compile done", "exit rendering")
+  local events = linkedspec.trace_events(emitter)
+  assert_equal(#events, 6, "structured event count")
+  assert_equal(linkedspec.trace_event_to_json(events[1]).kind, "enter", "event JSON kind")
+  assert_equal(linkedspec.trace_event_to_json(events[2]).level_value, 500, "event JSON level")
+  local lines = linkedspec.trace_lines(emitter)
+  lines[1] = "caller mutation"
+  assert_equal(linkedspec.trace_lines(emitter)[1] ~= "caller mutation", true, "line snapshot isolation")
+end)
+
+test("trace sinks and direct runtime entrypoints stay caller-owned and result-neutral", function()
+  with_temp_directory(function(root)
+    local route_path = root .. "/route.log"
+    write_file(route_path, "stale\n")
+    local routed_stdout = {}
+    local route_config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+      linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+      route_path
+    ))
+    local routed_emitter = linkedspec.trace_emitter(route_config, {
+      stdout_writer = function(payload) routed_stdout[#routed_stdout + 1] = payload end,
+    })
+    linkedspec.emit_trace_event(routed_emitter, linkedspec.TRACE_MARK, "route", "fresh", linkedspec.TRACE_LOW)
+    assert_equal(table.concat(routed_stdout), "", "route suppresses stdout")
+    assert_equal(read_file(route_path), "[LOW][mark] route fresh\n", "route resets and writes")
+
+    local append_config = linkedspec.with_trace_reset_file(route_config, false)
+    local append_emitter = linkedspec.trace_emitter(append_config)
+    linkedspec.emit_trace_event(append_emitter, linkedspec.TRACE_MARK, "route", "append", linkedspec.TRACE_LOW)
+    assert_equal(
+      read_file(route_path),
+      "[LOW][mark] route fresh\n[LOW][mark] route append\n",
+      "route appends when reset is disabled"
+    )
+
+    local mirror_path = root .. "/mirror.log"
+    local mirror_stdout = {}
+    local mirror_config = linkedspec.with_trace_emoji(linkedspec.with_trace_reset_file(
+      linkedspec.with_trace_sink_mode(
+        linkedspec.with_trace_file(linkedspec.trace_config_enabled(linkedspec.TRACE_HIGH), mirror_path),
+        linkedspec.TRACE_MIRROR
+      )
+    ))
+    local mirror_emitter = linkedspec.trace_emitter(mirror_config, {
+      stdout_writer = function(payload) mirror_stdout[#mirror_stdout + 1] = payload end,
+    })
+    linkedspec.emit_trace_event(mirror_emitter, linkedspec.TRACE_MARK, "mirror", "same", linkedspec.TRACE_HIGH)
+    assert_equal(table.concat(mirror_stdout), read_file(mirror_path), "mirror bytes")
+    assert_contains(read_file(mirror_path), "🧭 mirror same", "emoji rendering")
+
+    local source = "Top::\n /x/\n"
+    local engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source)))
+    local untraced = linkedspec.runtime_parse(engine, "x")
+    local quiet_stdout = {}
+    local quiet_emitter = linkedspec.trace_emitter(linkedspec.trace_config_disabled(), {
+      stdout_writer = function(payload) quiet_stdout[#quiet_stdout + 1] = payload end,
+    })
+    local quiet = linkedspec.runtime_parse(engine, "x", { trace = quiet_emitter })
+    assert_equal(
+      json.encode(linkedspec.interpreter.to_json(quiet)),
+      json.encode(linkedspec.interpreter.to_json(untraced)),
+      "quiet trace result neutrality"
+    )
+    assert_equal(table.concat(quiet_stdout), "", "quiet trace stdout")
+    assert_equal(#linkedspec.trace_events(quiet_emitter), 0, "quiet trace events")
+
+    local direct_stdout = {}
+    local direct_emitter = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_HIGH), {
+      stdout_writer = function(payload) direct_stdout[#direct_stdout + 1] = payload end,
+    })
+    local direct = linkedspec.runtime_execute(engine, "x", { trace = direct_emitter })
+    assert_equal(
+      json.encode(linkedspec.interpreter.to_json(direct)),
+      json.encode(linkedspec.interpreter.to_json(untraced)),
+      "direct trace result neutrality"
+    )
+    assert_equal(#linkedspec.trace_events(direct_emitter), 2, "controls slice parse scope only")
+    assert_contains(table.concat(direct_stdout), "lua_runtime:parse top_rule=Top", "direct parse enter")
+    assert_contains(table.concat(direct_stdout), "matched=true cursor=1", "direct parse exit")
+
+    local failure_stdout = {}
+    local failure_emitter = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_HIGH), {
+      stdout_writer = function(payload) failure_stdout[#failure_stdout + 1] = payload end,
+    })
+    local failure_ok = pcall(linkedspec.runtime_parse, engine, "x", {
+      top_rule = "Missing",
+      trace = failure_emitter,
+    })
+    assert_equal(failure_ok, false, "traced failure remains a failure")
+    assert_equal(#linkedspec.trace_events(failure_emitter), 2, "failure scope balance")
+    assert_equal(linkedspec.trace_events(failure_emitter)[2].kind, linkedspec.TRACE_EXIT, "failure exit event")
+    assert_contains(table.concat(failure_stdout), "error=rule 'Missing' is not compiled", "failure exit detail")
+
+    local runtime_path = root .. "/runtime.log"
+    local runtime_options = { top_rule = "Top" }
+    local traced = linkedspec.runtime_parse_with_trace(
+      engine,
+      "x",
+      linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+        linkedspec.trace_config_enabled(linkedspec.TRACE_HIGH),
+        runtime_path
+      )),
+      runtime_options
+    )
+    assert_equal(runtime_options.trace, nil, "wrapper does not mutate caller options")
+    assert_equal(
+      json.encode(linkedspec.interpreter.to_json(traced)),
+      json.encode(linkedspec.interpreter.to_json(untraced)),
+      "routed wrapper result neutrality"
+    )
+    assert_contains(read_file(runtime_path), "lua_runtime:parse", "routed runtime scope")
+    assert_contains(read_file(runtime_path), "matched=true cursor=1", "routed runtime exit")
+  end)
+
+  assert_error_contains(function()
+    local engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec("Top::\n /x/\n")))
+    linkedspec.runtime_parse(engine, "x", { trace = {} })
+  end, "trace must be a LinkedSpecTraceEmitter", "invalid trace emitter")
 end)
 
 test("parser CLI stays unavailable while native parser API is explicit", function()

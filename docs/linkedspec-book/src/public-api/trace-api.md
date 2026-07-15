@@ -267,6 +267,53 @@ later CLI preparation/execution/failure-routing, strict-boundary tests, exhausti
 empty-local-match position, marker-control, and anonymous/named capture locks bring the current total to 1,028
 without trace or corpus drift.
 
+## Lua variant trace status
+
+As of `LUA-BACKEND-PARITY.4.4.2`, Lua exposes the complete native trace
+control/sink/event boundary and balanced runtime parse scopes. Deeper
+interpreter instrumentation remains the active `.4.4.3` leaf, so this is not
+yet a full trace-parity claim.
+
+The top-level `linkedspec` module exports:
+
+- ordered `TRACE_NONE`, `TRACE_LOW`, `TRACE_MEDIUM`, `TRACE_HIGH`,
+  `TRACE_FULL`, and `TRACE_DEBUG` values, named aliases, numeric thresholds,
+  `parse_trace_level(...)`, and `trace_allows(...)`;
+- immutable typed configs, `trace_config_from_environment(...)`, and
+  `with_trace_*` updates for level, file, stdout/route/mirror mode, reset, and
+  emoji;
+- typed events, scopes, and caller-owned emitters with
+  `emit_trace_event(...)`, `enter_trace_scope(...)`,
+  `exit_trace_scope(...)`, `trace_decision(...)`, `log_trace_output(...)`,
+  and `log_trace_dump(...)`;
+- direct `trace` emitter injection in the `runtime_parse(...)` /
+  `runtime_execute(...)` options table, plus `runtime_parse_with_trace(...)`
+  and `runtime_execute_with_trace(...)` config wrappers.
+
+Environment construction recognizes `LINKEDSPEC_TRACE_LEVEL`, falling back to
+`LINKEDSPEC_DUMP_VERBOSITY`, plus `LINKEDSPEC_TRACE_FILE`,
+`LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_RESET_FILE`, and
+`LINKEDSPEC_TRACE_EMOJI`. Creating a routed emitter truncates when reset is
+enabled and otherwise appends. Route suppresses stdout; mirror writes identical
+bytes to both destinations. Disabled or absent tracing records and writes
+nothing.
+
+At this controls boundary the runtime emits only balanced high-level
+`lua_runtime:parse` enter/exit events. This separation keeps exact rule, regex,
+dispatch, recursion, lifecycle, cursor, mark/capture, and source-boundary
+instrumentation reviewable under `.4.4.3`. Traced and untraced result JSON is
+identical, caller options are not mutated, and both PUC Lua and LuaJIT pass
+128/128.
+
+```lua
+local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+  linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+  "linkedspec.trace.log"
+))
+
+local result = linkedspec.runtime_parse_with_trace(engine, input, config)
+```
+
 ## Future variant trace parity checklist
 
 Any future LinkedSpec variant must satisfy this checklist before it claims trace parity:

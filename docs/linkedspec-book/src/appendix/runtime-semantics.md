@@ -568,6 +568,16 @@ runtime-input validation, rule lookup, and ordinary execution have distinct
 stages. Successful `RuntimeParseResult` values and textual error messages are
 unchanged.
 
+Lua native tracing is orthogonal to diagnostic payloads. Callers may inject a
+typed emitter with `runtime_parse(engine, input, { trace = emitter })` or use
+`runtime_parse_with_trace(engine, input, config, options)`. Ordered levels,
+structured enter/exit/decision/mark/dump/log events, environment-derived
+immutable configs, stdout/routed-file/mirror sinks, reset/append, and optional
+emoji are implemented in `linkedspec.trace`. Disabled or absent tracing is a
+no-op. The `.4.4.2` boundary emits only balanced `lua_runtime:parse` events and
+preserves exact parse-result JSON; `.4.4.3` owns rule/branch/lifecycle/cursor/
+boundary instrumentation.
+
 ### 10.3 Input Validation
 
 Before parsing, the input is validated:

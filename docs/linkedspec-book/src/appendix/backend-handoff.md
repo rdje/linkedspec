@@ -757,8 +757,10 @@ no-drift. Full native loading, frontend, validation, compiler, function-shell, s
 propagation stays `.5.3`, after general staged functions `.5.1` and native loading `.5.2` create those owners.
 Structured runtime diagnostic `.4.4.1` now exposes the same neutral fields on typed Lua exceptions. Optional
 engine source identity, top-selection/input/lookup/execution stages, deepest child rule and handler preservation,
-deterministic JSON, unchanged text, and successful-result identity pass 126/126 on both ABIs. Public status is
-`runtime-structured-diagnostics`; trace controls/sinks `.4.4.2` is active and capability remains 64/0/0.
+deterministic JSON, unchanged text, and successful-result identity pass 126/126 on both ABIs. `.4.4.2` now adds
+typed ordered levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks,
+reset/append, and result-neutral direct/config-wrapper parse scopes at 128/128. Public status is
+`runtime-trace-controls`; deeper interpreter instrumentation `.4.4.3` is active and capability remains 64/0/0.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

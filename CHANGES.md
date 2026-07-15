@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.4.2 — add Lua trace controls
+
+Lua now exports typed ordered none/low/medium/high/full/debug levels, immutable config updates, exact aliases and
+numeric thresholds, documented environment controls, structured enter/exit/decision/mark/dump/log events, and
+deterministic rendered/event snapshots. Caller-owned emitters route to stdout, a resettable/appending file, or both,
+with optional level emoji.
+
+`runtime_parse(...)` and `runtime_execute(...)` accept direct emitters;
+`runtime_parse_with_trace(...)` and `runtime_execute_with_trace(...)` construct one from config without mutating
+caller options. This slice emits only balanced `lua_runtime:parse` events; `.4.4.3` owns deeper runtime mechanisms.
+Disabled/absent tracing is quiet and traced/untraced result JSON is identical. PUC Lua and LuaJIT pass 128/128;
+coverage remains 246/105+1/122, capability remains 64/0/0, both primary CLI environments pass 61/61, and Phase 0
+passes `1..1031` in 611 seconds. Public status becomes `runtime-trace-controls`.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.4.1 — add Lua runtime diagnostics
 
 Lua native runtime failures now carry typed `RuntimeDiagnostic` payloads on `RuntimeInterpreterException` tables.

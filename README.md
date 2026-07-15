@@ -92,9 +92,11 @@ This `README.md` is the **single entry point** to the project.
   documented structural/receiver-only forms, focuses direct `call(rule)`, and publishes
   `runtime-helper-value-control`. Both ABIs pass 125/125, parent `.4.3` is closed, and diagnostics/trace `.4.4` is
   now split into structured runtime failures `.1`, controls/sinks `.2`, runtime events `.3`, and closeout `.4`;
-  `.4.4.1` now adds neutral typed diagnostics, optional spec identity, deepest-rule preservation, exact JSON, and
-  unchanged success output at 126/126 on both ABIs. Public status is `runtime-structured-diagnostics`; trace
-  controls/sinks `.4.4.2` is active. Full frontend/compiler/function/staged propagation remains `.5.3`.
+  `.4.4.1` adds neutral typed diagnostics, optional spec identity, deepest-rule preservation, exact JSON, and
+  unchanged success output at 126/126 on both ABIs. `.4.4.2` now adds typed ordered trace levels/config/events,
+  documented environment controls, caller-owned stdout/route/mirror sinks with reset/append, and result-neutral
+  direct/config-wrapper parse scopes at 128/128. Public status is `runtime-trace-controls`; deeper runtime
+  instrumentation `.4.4.3` is active. Full frontend/compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
