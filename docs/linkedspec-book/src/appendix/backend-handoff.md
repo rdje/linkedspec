@@ -357,9 +357,12 @@ existing Unicode projector/body dispatcher without a raw scanner. Both ABIs pass
 `native-spec-defined-functions-v1`. Loaded-source `.5.2.3` retains exact identity/source/compiled state, maps the
 three neutral source stages, and creates named/path-attributed engines at 153/153 with status
 `native-spec-pipeline-v1`; no-drift `.5.2.4` closes parent `.5.2`. Planning `.5.3.0` separates exact outward
-descriptor admission, one-emitter native-pipeline trace, and capability closeout. Before implementation,
-`.5.3.0.1` must settle the backend-neutral outward shape for final-codeblock parameter-kind metadata and the Lua
-capability-census admission boundary. Current runtime/status/census behavior is unchanged.
+descriptor admission, one-emitter native-pipeline trace, and capability closeout. Decision `.5.3.0.1` adopts
+final-codeblock descriptor v3 plus completion-time census admission; `.5.3.1` emits the exact three-variant union.
+`.5.3.2` passes one caller-owned emitter across native IO, frontend/compiler/function/staged owners, engine
+creation, and runtime without retained or hidden emitter state. Ordered sinks/filters/errors and result identity
+pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`; `.5.3.3` owns no-drift and the census stays
+64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -803,7 +806,8 @@ callable precedence, chainable results, and typed failures at 146/146; public st
 `runtime-user-functions-contextual-codeblock-v1`, parent `.5.1` is closed, native-loading split `.5.2.0` is done,
  portable resolve/load `.5.2.1` and cached automatic spec-defined parsing `.5.2.2` pass 151/151. Typed loaded-source
 composition `.5.2.3` then passes 153/153 with status `native-spec-pipeline-v1`; `.5.2.4` closes parent `.5.2`,
-`.5.3` is active, and capability remains 64/0/0. Explicit
+exact descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` then pass 155/155 with status
+`native-full-pipeline-trace-v1`. No-drift `.5.3.3` is active and capability remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

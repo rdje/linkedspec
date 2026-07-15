@@ -100,8 +100,11 @@ function-shell grammar now resolves the bundled owner module-relatively, validat
 only typed results through the Unicode projector and body dispatcher without a raw scanner. Both ABIs pass 151/151
 with status `native-spec-defined-functions-v1`. Loaded-source composition then retains exact request/path/source/
 compiled state, translates neutral parse/validate/compile failures, and creates name/path-attributed engines.
-Loaded functions and runtime diagnostic identity pass 153/153 with status `native-spec-pipeline-v1`; no-drift
-closes the native-loading parent and outward descriptors/full-pipeline trace are the active next mechanism.
+Loaded functions and runtime diagnostic identity first passed 153/153 with status `native-spec-pipeline-v1`;
+native-loading no-drift then closed that parent. Exact fixed/variadic/final-codeblock outward descriptors and one
+caller-owned emitter through IO, frontend, compiler, function, staged, engine, and runtime phases now pass 155/155
+on both Lua ABIs with status `native-full-pipeline-trace-v1`. The compiled spec and runtime engine retain no
+emitter; callers pass the same emitter explicitly when runtime parsing should continue the correlated stream.
 
 ```text
 fn apply(value, callback: codeblock) {

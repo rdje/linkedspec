@@ -11,6 +11,7 @@ date: 2026-07-15
 status: current
 tags: [lua, staged-parsing, functions, variadic, codeblock, closeout, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.5 audits source, exports, tests, public docs, task state, and Knowledge Map. .5.1.1-.5 close at 146/146 on PUC Lua and LuaJIT with status runtime-user-functions-contextual-codeblock-v1; .5.2 activates."
+evidence_update_2026_07_15_descriptor_trace: "Later .5.3.1/.2 admit exact outward descriptors and propagate one caller emitter through this staged runtime, reaching 155/155 with status native-full-pipeline-trace-v1."
 reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py && python3 tools/check_callable_codeblock_contract.py"
 ---
 
@@ -29,11 +30,13 @@ a separately scheduled manual campaign and was not part of the closeout gate.
 Planning `.5.2.0` splits portable native loading into resolve/load `.5.2.1`, automatic spec-defined function-shell
 parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`. Resolve/load and automatic
 function parsing are complete at 151/151; full composition is complete at 153/153 on both ABIs, and `.5.2.4`
-closes parent `.5.2`. Outward descriptors plus full-pipeline trace `.5.3` is active; generated preservation and
-execution remain `.8`; corpus and parser CLI have later owners; explicit `{|params| ...}` literals and general
+closes parent `.5.2`. Outward descriptors and full-pipeline trace close through `.5.3.1/.2`, with no-drift `.5.3.3`
+active. Generated preservation remains `.8`; corpus and parser CLI have later owners; explicit
+`{|params| ...}` literals and general
 bound dynamic calls remain `.11.7`.
 
 Related facts: [[lua-staged-function-execution-split]], [[lua-staged-function-body-registry]],
 [[lua-fixed-v1-user-function-runtime]], [[lua-variadic-v2-runtime]],
 [[lua-contextual-user-function-codeblock-runtime]], [[lua-native-spec-resolution]],
-[[lua-spec-defined-function-parser]], [[lua-native-spec-loading-closeout]].
+[[lua-spec-defined-function-parser]], [[lua-native-spec-loading-closeout]],
+[[lua-native-full-pipeline-trace]].

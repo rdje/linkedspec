@@ -1,5 +1,7 @@
 local ast = require("linkedspec.spec_ast")
 local json = require("linkedspec.json")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 
 local M = {}
 
@@ -913,54 +915,73 @@ local function parse_inline_body(rest, line_number, lines, cursor)
   return #elements == 0 and nil or elements
 end
 
-function M.parse_spec(source)
+function M.parse_spec(source, options)
   if type(source) ~= "string" then
     parse_fail(1, "source must be a string")
   end
-  local valid_utf8, invalid_position = json.validate_utf8(source)
-  if not valid_utf8 then
-    parse_fail(1, "source is not valid UTF-8 at byte " .. invalid_position)
+  options = options or {}
+  if type(options) ~= "table" then parse_fail(1, "parse options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    parse_fail(1, "trace must be a LinkedSpecTraceEmitter")
   end
-  local lines = split_lines(source)
-  local rules = {}
-  local index = skip_blanks_and_comments(lines, 1)
-  while index <= #lines do
-    local parsed_header = parse_header(lines, index)
-    if parsed_header then
-      local header = parsed_header.header
-      local body_start = parsed_header.next_index
-      local inline_elements = {}
-      if trim(header.rest) ~= "" then
-        local inline_cursor = { index = header.line }
-        inline_elements = parse_inline_body(header.rest, header.line, lines, inline_cursor) or {}
-        if inline_cursor.index > body_start then
-          body_start = inline_cursor.index
+  return trace_support.run(
+    options.trace,
+    "lua_frontend:parse_spec",
+    "source_bytes=" .. #source,
+    function()
+      local valid_utf8, invalid_position = json.validate_utf8(source)
+      if not valid_utf8 then
+        parse_fail(1, "source is not valid UTF-8 at byte " .. invalid_position)
+      end
+      local lines = split_lines(source)
+      local rules = {}
+      local index = skip_blanks_and_comments(lines, 1)
+      while index <= #lines do
+        local parsed_header = parse_header(lines, index)
+        if parsed_header then
+          local header = parsed_header.header
+          local body_start = parsed_header.next_index
+          local inline_elements = {}
+          if trim(header.rest) ~= "" then
+            local inline_cursor = { index = header.line }
+            inline_elements = parse_inline_body(header.rest, header.line, lines, inline_cursor) or {}
+            if inline_cursor.index > body_start then
+              body_start = inline_cursor.index
+            end
+          end
+          local collected = collect_body(lines, body_start)
+          local body = {}
+          for _, element in ipairs(inline_elements) do
+            body[#body + 1] = element
+          end
+          for _, element in ipairs(collected.body) do
+            body[#body + 1] = element
+          end
+          rules[#rules + 1] = ast.rule({ header = header, body = body })
+          index = collected.next_index
+        else
+          if #rules == 0 then
+            parse_fail(
+              index,
+              "expected rule definition to start with a rule label (Word: or Word::), got: " .. trim(lines[index])
+            )
+          end
+          index = index + 1
         end
       end
-      local collected = collect_body(lines, body_start)
-      local body = {}
-      for _, element in ipairs(inline_elements) do
-        body[#body + 1] = element
-      end
-      for _, element in ipairs(collected.body) do
-        body[#body + 1] = element
-      end
-      rules[#rules + 1] = ast.rule({ header = header, body = body })
-      index = collected.next_index
-    else
       if #rules == 0 then
-        parse_fail(
-          index,
-          "expected rule definition to start with a rule label (Word: or Word::), got: " .. trim(lines[index])
-        )
+        parse_fail(1, "no rule definitions found in spec")
       end
-      index = index + 1
-    end
-  end
-  if #rules == 0 then
-    parse_fail(1, "no rule definitions found in spec")
-  end
-  return ast.spec_file({ rules = rules })
+      trace_support.decision(
+        options.trace,
+        "lua_frontend:parse_spec:rules",
+        true,
+        "rule_count=" .. #rules
+      )
+      return ast.spec_file({ rules = rules })
+    end,
+    function(spec) return "ok rule_count=" .. #spec.rules end
+  )
 end
 
 return M

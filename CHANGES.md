@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.3.2 — propagate Lua full-pipeline trace
+
+Added optional caller-owned trace injection to Lua native load options, source parsing/validation/compilation,
+spec-owned function parser and shell projection, user-function registry construction, staged body dispatch, and
+engine construction. One internal balanced scope runner emits `lua_io:*`, `lua_frontend:*`, `lua_compiler:*`,
+`lua_staged:*`, and construction `lua_runtime:*` scopes/decisions while rethrowing original typed errors. The
+emitter remains explicit: compiled specs and engines retain no mutable trace state and pipeline owners construct no
+hidden emitter.
+
+Two focused tests prove exact ordered load-through-runtime topics on one routed emitter, zero hidden factory calls,
+balanced success/failure scopes, disabled/low/medium filtering, unchanged `SpecPipelineError` attribution/JSON,
+and exact traced/untraced descriptor/runtime JSON. PUC Lua and LuaJIT pass 155/155 with public status
+`native-full-pipeline-trace-v1`. The capability census remains four-backend 64/0/0 pending sole Lua all-pass
+admission `.8.4`; no-drift `.5.3.3` is next. Canonical local CI passes both 61/61 CLI environments and Phase 0
+reaches its true `1..1031` stop in 608 seconds. Mutation testing remains manual-only and was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.3.1 — admit Lua function descriptors
 
 Extended `outward_descriptor_contract.json` into one checked three-variant user-function union: exact fixed-v1

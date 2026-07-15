@@ -15,6 +15,7 @@ evidence: "LUA-BACKEND-PARITY.5.1.1 adds lua/src/linkedspec/staged_parser_regist
 evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 consumes stitched body_ast as an integrity-checked runtime authority for fixed-v1 calls; PUC Lua and LuaJIT pass 133/133 with status runtime-user-functions-fixed-v1."
 evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.5.1.5 closes staged fixed-v1/variadic-v2/contextual execution no-drift at 146/146; native loading .5.2 is active while descriptors/full trace remain .5.3."
 evidence_update_2026_07_15_native_loading_closeout: "LUA-BACKEND-PARITY.5.2.4 closes native loading at 153/153 and activates descriptors/full trace .5.3 without changing staged dispatch."
+evidence_update_2026_07_15_full_trace: "LUA-BACKEND-PARITY.5.3.2 threads the same optional emitter through staged queue, per-job resolve/load/compile/execute, and stitch decisions at 155/155 on both ABIs."
 reverify: "bash tools/run_lua_local.sh && rg -n 'ACTION_IR_BODY_|execute_staged_parse_jobs|dispatch_function_body_parse_jobs|body_ast' lua/src/linkedspec/staged_parser_registry.lua lua/src/linkedspec/init.lua lua/test/run.lua"
 ---
 
@@ -40,11 +41,12 @@ dispatch.
 
 The provider is intentionally narrow. Registered fixed-v1, variadic-v2, and contextual-final-block execution have
 landed through `.5.1.2-.5.1.4.2`, and `.5.1.5` closes their parent. Native loading closes through `.5.2.4`;
-outward descriptors and full-pipeline trace `.5.3` is active; public `parse_job(...)` authoring, multiple
+outward descriptors `.5.3.1` and full-pipeline trace `.5.3.2` are complete; public `parse_job(...)` authoring, multiple
 parser families, and recursive staged queues remain later staged-authoring
 work.
 
 Related facts: [[function-body-staged-registry-dispatch]],
 [[lua-function-definition-shell-projection]],
 [[lua-user-function-registry]], [[lua-staged-function-execution-split]],
-[[staged-parser-registry-dispatch-contract]], [[lua-fixed-v1-user-function-runtime]].
+[[staged-parser-registry-dispatch-contract]], [[lua-fixed-v1-user-function-runtime]],
+[[lua-native-full-pipeline-trace]].

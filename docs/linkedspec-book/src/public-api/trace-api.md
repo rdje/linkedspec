@@ -242,11 +242,10 @@ without trace or corpus drift.
 
 ## Lua variant trace status
 
-As of `LUA-BACKEND-PARITY.4.4.4`, Lua's native runtime diagnostics/trace
-boundary is closed: it exposes the trace control/sink/event surface plus runtime interpreter events. Full frontend,
-compiler, function-shell, native-loading, and staged propagation remains later work, so this is not yet a full
-pipeline trace-parity claim. Planning `.5.3.0` inventories every seam and assigns one-emitter propagation to
-`.5.3.2`, after the exact outward descriptor decision/implementation dependency `.5.3.0.1-.5.3.1`.
+As of `LUA-BACKEND-PARITY.5.3.2`, Lua exposes a complete caller-owned native-pipeline trace. The earlier `.4.4.4`
+boundary supplied controls, sinks, and runtime events; `.5.3.2` carries that same emitter through resolution/
+loading, source and function frontends, validation, compilation, function registry/shell, staged dispatch, engine
+construction, and runtime. There is no parallel traced pipeline and no hidden emitter construction.
 
 The top-level `linkedspec` module exports:
 
@@ -262,7 +261,10 @@ The top-level `linkedspec` module exports:
   and `log_trace_dump(...)`;
 - direct `trace` emitter injection in the `runtime_parse(...)` /
   `runtime_execute(...)` options table, plus `runtime_parse_with_trace(...)`
-  and `runtime_execute_with_trace(...)` config wrappers.
+  and `runtime_execute_with_trace(...)` config wrappers;
+- optional `trace` injection in `spec_load_options(...)`, `parse_spec(...)`,
+  `validate_spec(...)`, `compile_spec(...)`, function parser/shell/staged APIs,
+  user-function registry construction, and runtime-engine creation.
 
 Environment construction recognizes `LINKEDSPEC_TRACE_LEVEL`, falling back to
 `LINKEDSPEC_DUMP_VERBOSITY`, plus `LINKEDSPEC_TRACE_FILE`,
@@ -289,7 +291,8 @@ and runtime invocation `.5.1.4.2` raises them to 146/146 with public status
 function parsing `.5.2.2` then raise both suites to 151/151 and status `native-spec-defined-functions-v1`;
 loaded-source compile/engine composition `.5.2.3` then raises them to 153/153 and status
 `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2`; full loading/frontend/compiler/function/staged
-trace propagation `.5.3` is active.
+trace propagation `.5.3.2` then raises them to 155/155 and status
+`native-full-pipeline-trace-v1`; census-preserving no-drift `.5.3.3` follows.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top
@@ -306,8 +309,25 @@ local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
   "linkedspec.trace.log"
 ))
 
-local result = linkedspec.runtime_parse_with_trace(engine, input, config)
+local emitter = linkedspec.trace_emitter(config)
+local options = linkedspec.spec_load_options({
+  cwd = ".",
+  search_roots = { "specs" },
+  trace = emitter,
+})
+local loaded = linkedspec.load_and_compile_spec(
+  linkedspec.named_spec_request("Demo"),
+  options
+)
+local engine = loaded:create_engine({ trace = emitter })
+local result = linkedspec.runtime_parse(engine, input, { trace = emitter })
 ```
+
+High-level phase scopes use `TRACE_HIGH`; construction decisions use `TRACE_MEDIUM`; existing detailed runtime
+branches and positions remain `TRACE_DEBUG`. Thus a disabled or low emitter is quiet, a medium emitter sees phase
+decisions without high scopes, and high/full/debug progressively admit the balanced phase and runtime stream.
+Errors close every emitted scope before rethrowing the original typed value, so `SpecPipelineError` stage/code JSON
+and successful descriptor/runtime JSON are unchanged by tracing.
 
 ## Future variant trace parity checklist
 

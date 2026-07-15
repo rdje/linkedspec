@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua full-pipeline trace `.5.3.2` threads one caller-owned emitter through typed load
+  options, deterministic resolution/content loading, function-parser cache/build/execute, shell projection,
+  rule parsing, validation, function registry/rule compilation, staged resolve/load/compile/execute/stitch,
+  loaded/runtime engine creation, and existing runtime rule events. The internal scope runner balances high-level
+  success/failure events while rethrowing the original typed error; medium decisions expose construction choices.
+  Compiled and engine state retain no emitter, and no hidden factory is called. Routed sinks, disabled/low/medium
+  filtering, exact phase order, error attribution, and descriptor/runtime identity pass 155/155 on PUC Lua and
+  LuaJIT with status `native-full-pipeline-trace-v1`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`
+  in 608 seconds. Capability remains four-backend 64/0/0; `.5.3.3` is active.
 - `2026-07-15` refresh: Lua descriptor implementation `.5.3.1` makes
   `capability_conformance/outward_descriptor_contract.json:function_record_variants` the executable source of
   truth for fixed-v1, variadic-v2, and final-codeblock-v3 outward records. The neutral checker locks exact ordered

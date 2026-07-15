@@ -25,6 +25,10 @@ The Lua backend exposes the file-oriented stages directly from `require("linkeds
 ```lua
 local linkedspec = require("linkedspec")
 
+local emitter = linkedspec.trace_emitter(
+  linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG)
+)
+
 local request = linkedspec.named_spec_request("Demo")
 local options = linkedspec.spec_load_options({
   cwd = "/work/project",
@@ -32,6 +36,7 @@ local options = linkedspec.spec_load_options({
     "/work/project/specs",
     "/opt/shared/linkedspec",
   },
+  trace = emitter,
 })
 
 local resolved = linkedspec.resolve_spec(request, options)
@@ -44,8 +49,8 @@ local source = loaded.source_text
 
 local complete = linkedspec.load_and_compile_spec(request, options)
 assert(complete.loaded.source_text == source)
-local engine = complete:create_engine({ parse_mode = "seek" })
-local result = linkedspec.runtime_parse(engine, "input")
+local engine = complete:create_engine({ parse_mode = "seek", trace = emitter })
+local result = linkedspec.runtime_parse(engine, "input", { trace = emitter })
 ```
 
 Use `linkedspec.path_spec_request(path)` when the caller has already selected one exact file. A relative path is
@@ -61,6 +66,14 @@ keeps the full `LoadedSpec` under `loaded` and ordinary backend-native compiled 
 `complete:create_engine(options)` or `linkedspec.create_loaded_spec_engine(complete, options)` to create a runtime
 engine. Both forms copy the caller's options. A named request attaches its exact requested identity as `spec_name`;
 an exact-path request attaches no logical name; both attach the winning `resolved.path` as `spec_path`.
+
+The optional `trace` field in `SpecLoadOptions` is a caller-created `LinkedSpecTraceEmitter`. The same emitter may
+be passed through engine creation and then runtime execution, producing one ordered stream across `lua_io:*`,
+`lua_frontend:*`, `lua_compiler:*`, `lua_staged:*`, and `lua_runtime:*` topics. This covers resolution and content
+loading; function-parser cache/construction/execution; shell projection and rule parsing; validation and function/
+rule compilation; staged resolve/load/compile/execute/stitch; engine construction; and runtime rule behavior.
+Compiled specs and engines do not retain the emitter: caller ownership, sink lifetime, and explicit runtime
+injection remain visible. Omitting it is the ordinary quiet path, and disabled emitters record and write nothing.
 
 ## Validation and errors
 
@@ -104,8 +117,10 @@ normalization form, and leading/trailing newlines or spaces.
 PUC Lua and LuaJIT consume the same executable contract directly: 14 name-validation cases, nine
 resolution/file-kind cases, and four strict-UTF-8 preservation/rejection cases. Full composition also proves
 loaded top-level-function execution, named versus exact-path engine identity, runtime diagnostic identity, exact
-missing-name JSON, and separate parse/validation/compile failure ownership. The backend currently passes 153/153
-focused tests on both runtimes with status `native-spec-pipeline-v1`.
+missing-name JSON, and separate parse/validation/compile failure ownership. Full trace composition additionally
+proves one emitter identity, exact ordered phase/rule topics, routed sinks, level filtering, balanced attributed
+failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. The backend currently
+passes 155/155 focused tests on both runtimes with status `native-full-pipeline-trace-v1`.
 
 ## Lua automatic function parsing
 
@@ -142,4 +157,4 @@ parse errors, and staged-dispatch errors retain their staged-registry owner.
 to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(...)`, `compile_spec(...)`, and
 `runtime_engine(...)` directly; no CLI, subprocess, temporary file, or serialized handoff participates in either
 path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors are now current; one-emitter
-full-pipeline trace remains the next Lua owner.
+full-pipeline trace is current, and census-preserving no-drift `.5.3.3` is the next Lua owner.

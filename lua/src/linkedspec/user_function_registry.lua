@@ -2,6 +2,8 @@ local action_ast = require("linkedspec.action_ast")
 local action_parser = require("linkedspec.action_parser")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 
 local M = {}
 
@@ -150,30 +152,49 @@ local function validate_registry(registry)
   return registry
 end
 
-function M.from_functions(functions)
+function M.from_functions(functions, options)
   validate_dense_list(functions, "functions")
-  local entries = {}
-  local by_name = {}
-  for index, definition in ipairs(functions) do
-    if spec_ast.node_type(definition) ~= "FunctionDefinition" then
-      fail("functions must contain only FunctionDefinition values")
-    end
-    if by_name[definition.name] then
-      fail("duplicate user function '" .. definition.name .. "'")
-    end
-    local copied_definition = spec_ast.from_json("FunctionDefinition", spec_ast.to_json(definition))
-    local item = entry(index - 1, copied_definition)
-    entries[#entries + 1] = item
-    by_name[definition.name] = { item }
+  options = options or {}
+  if type(options) ~= "table" then fail("function registry options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
   end
-  return setmetatable({ entries = entries, by_name = by_name }, REGISTRY_MT)
+  return trace_support.run(
+    options.trace,
+    "lua_compiler:function_registry",
+    "function_count=" .. #functions,
+    function()
+      local entries = {}
+      local by_name = {}
+      for index, definition in ipairs(functions) do
+        if spec_ast.node_type(definition) ~= "FunctionDefinition" then
+          fail("functions must contain only FunctionDefinition values")
+        end
+        if by_name[definition.name] then
+          fail("duplicate user function '" .. definition.name .. "'")
+        end
+        local copied_definition = spec_ast.from_json("FunctionDefinition", spec_ast.to_json(definition))
+        local item = entry(index - 1, copied_definition)
+        entries[#entries + 1] = item
+        by_name[definition.name] = { item }
+        trace_support.decision(
+          options.trace,
+          "lua_compiler:function_registry:definition",
+          true,
+          "index=" .. (index - 1) .. " name=" .. definition.name .. " arity=" .. definition.arity
+        )
+      end
+      return setmetatable({ entries = entries, by_name = by_name }, REGISTRY_MT)
+    end,
+    function(registry) return "ok function_count=" .. #registry.entries end
+  )
 end
 
-function M.from_spec(spec)
+function M.from_spec(spec, options)
   if spec_ast.node_type(spec) ~= "SpecFile" then
     fail("from_spec expects SpecFile")
   end
-  return M.from_functions(spec.functions)
+  return M.from_functions(spec.functions, options)
 end
 
 function M.empty()

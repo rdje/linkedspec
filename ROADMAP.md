@@ -892,7 +892,8 @@ Dynamic-parser observability note (2026-07-15, `FUTURE-PARITY-BACKLOG.18.2` / AD
 must expose correlated compile-time and runtime trace through the normal native API. Exact rule-label allowlists
 focus emission only; they never change resolution, compilation, execution, recovery, diagnostics, caches, ASTs,
 or values. `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the neutral filters, bounded payload policy, `off` alias, and
-five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace remains `.5.3`.
+five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace is complete under
+`.5.3.2`; census-preserving no-drift `.5.3.3` closes that parent before the shared proof.
 
 Optional native-acceleration note (2026-07-15, `FUTURE-PARITY-BACKLOG.18.3` / ADR `0038`): after a realistic
 dynamic format parser is correct and measured, a backend may derive a fingerprinted native artifact from normalized
@@ -989,7 +990,10 @@ ADR `0041` resolve both: final-codeblock functions use exact outward descriptor 
 final-only `parameter_kinds`, and Lua stays outside the four-backend all-pass census until sole expansion owner
 `.8.4`. Executable contract/emission `.5.3.1` now governs and emits the exact fixed-v1/variadic-v2/final-
 codeblock-v3 union on both Lua ABIs; Perl's existing final-codeblock projection is also correctly labeled v3.
-One-emitter trace `.5.3.2` is the frontier before census-preserving closeout `.5.3.3`; capability remains 64/0/0.
+One-emitter trace `.5.3.2` now propagates caller ownership through IO, frontend/compiler/function/staged phases,
+engine construction, and runtime. Ordered sinks/filters/failure attribution and traced/untraced identity pass
+155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Census-preserving `.5.3.3` is the frontier;
+capability remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

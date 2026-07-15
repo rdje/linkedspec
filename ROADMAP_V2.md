@@ -74,7 +74,8 @@ their suffix distinguishes leaf recursion from conventional shallow operations; 
 ADR `0037` / `FUTURE-PARITY-BACKLOG.18.2` make correlated construction/runtime observability another future
 format-readiness constraint. Existing levels and sinks remain; exact rule-label filters affect emission only,
 high-volume payloads are bounded/redactable, and `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the shared
-five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace remains `.5.3`.
+five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace is complete under
+`.5.3.2`; census-preserving no-drift `.5.3.3` closes that parent before the shared proof.
 
 ADR `0038` / `FUTURE-PARITY-BACKLOG.18.3` govern a separate optional native-acceleration horizon. Only after a
 realistic dynamic format parser is correct and measured may a backend derive a fingerprinted artifact from
@@ -136,14 +137,14 @@ wording conflicted with the newer completion-time Lua admission policy. Decision
 exact final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`, keep the census
 at four all-pass backends through `.5.3-.7`, and reserve expansion for all-pass `.8.4`. Executable descriptor
 contract/emission `.5.3.1` now locks and emits fixed-v1/variadic-v2/final-codeblock-v3 records on both Lua ABIs,
-with Perl's existing final-codeblock projection aligned to outward v3. One-emitter pipeline trace `.5.3.2` is next;
-capability remains unchanged at 64/0/0.
+with Perl's existing final-codeblock projection aligned to outward v3. One-emitter pipeline trace `.5.3.2` now
+crosses native IO, frontend/compiler/function/staged phases, engine construction, and runtime at 155/155 on both
+ABIs with status `native-full-pipeline-trace-v1`. Census-preserving `.5.3.3` is next; capability remains 64/0/0.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.
-One-emitter native loading,
-frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
-the owners it must traverse. This split changes no runtime or capability claim.
+One-emitter native loading, frontend, compiler, function-shell, staged, engine, and runtime propagation is now
+complete under `.5.3.2`; `.5.3.3` owns exact no-drift without changing the capability census.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

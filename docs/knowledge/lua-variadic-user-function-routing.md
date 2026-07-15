@@ -18,6 +18,7 @@ evidence_update_2026_07_15_signature_state: "LUA-BACKEND-PARITY.5.1.3.1 preserve
 evidence_update_2026_07_15_native_runtime: "LUA-BACKEND-PARITY.5.1.3.2 executes fresh copied typed rest arrays and the unchanged neutral fixture at 139/139; contextual final-codeblock metadata .5.1.4.1 is active while descriptors and generated source remain .5.3/.8."
 evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.5.1.5 closes fixed-v1/variadic-v2/contextual runtime no-drift at 146/146; native loading .5.2 is active, descriptors .5.3 and generated source .8 remain later."
 evidence_update_2026_07_15_native_loading_closeout: "LUA-BACKEND-PARITY.5.2.4 closes native loading at 153/153 and activates descriptors/full trace .5.3 without changing variadic runtime."
+evidence_update_2026_07_15_descriptor_trace: "LUA-BACKEND-PARITY.5.3.1 admits exact variadic-v2 outward descriptors and .5.3.2 completes full-pipeline trace at 155/155; generated preservation/execution remains .8."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1|LUA-BACKEND-PARITY\\.5\\.3|LUA-BACKEND-PARITY\\.8\\.[1-4]|callable-signature|variadic' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md capability_conformance/manifest.json"
 ---
 
@@ -37,9 +38,11 @@ the union in normalized emitted state; `.8.2` independently executes the neutral
 recurring; and `.8.4` removes the future capability entry only after native and generated paths pass. Fixed-v1
 registered-call runtime `.5.1.2`, staged action-body dispatch `.5.1.1`, and exact variadic-v2 state/runtime
 `.5.1.3.1/.2` are done, contextual final blocks close through `.5.1.4.1/.2`, and `.5.1.5` closes the parent. The
-native loading closes through `.5.2.4`; the current Lua frontier is descriptors/full-pipeline trace `.5.3`.
+native loading closes through `.5.2.4`; descriptors and full-pipeline trace close through `.5.3.1/.2`; current
+frontier `.5.3.3` is no-drift. Generated variadic preservation/execution remains `.8`.
 
 Related facts: [[lua-user-function-registry]], [[lua-function-definition-shell-projection]],
 [[variadic-user-function-contract]], [[variadic-callable-signature-seams]],
 [[lua-staged-function-execution-split]], [[lua-fixed-v1-user-function-runtime]].
-[[lua-variadic-v2-signature-state]], [[lua-variadic-v2-runtime]].
+[[lua-variadic-v2-signature-state]], [[lua-variadic-v2-runtime]],
+[[lua-native-full-pipeline-trace]].

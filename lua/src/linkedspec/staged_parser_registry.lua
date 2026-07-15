@@ -3,6 +3,8 @@ local action_parser = require("linkedspec.action_parser")
 local function_shell = require("linkedspec.user_function_definition_shell")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
@@ -29,6 +31,15 @@ local DISPATCH_MT = { __staged_parser_registry_type = "StagedFunctionBodyDispatc
 
 local function fail(message)
   error(setmetatable({ message = message }, ERROR_MT), 0)
+end
+
+local function trace_from_options(options, label)
+  options = options or {}
+  if type(options) ~= "table" then fail(label .. " options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
+  end
+  return options.trace
 end
 
 function M.is_staged_parser_registry_error(value)
@@ -273,33 +284,75 @@ local function parse_result(queue_index, job, resolved, compiled, result)
   }, RESULT_MT)
 end
 
-function M.execute_staged_parse_jobs(jobs)
+function M.execute_staged_parse_jobs(jobs, options)
+  local emitter = trace_from_options(options, "staged parse jobs")
   validate_dense_list(jobs, "staged parse jobs")
-  local queue = {}
-  for index, job in ipairs(jobs) do
-    queue[index] = { input_index = index, job = normalize_job(job) }
-  end
-  table.sort(queue, job_less)
+  return trace_support.run(
+    emitter,
+    "lua_staged:execute_jobs",
+    "start",
+    function()
+      local queue = {}
+      for index, job in ipairs(jobs) do
+        queue[index] = { input_index = index, job = normalize_job(job) }
+      end
+      table.sort(queue, job_less)
+      trace_support.decision(
+        emitter,
+        "lua_staged:execute_jobs:queue",
+        true,
+        "normalized=" .. #queue .. " sorted=1"
+      )
 
-  local results = {}
-  for index, queued in ipairs(queue) do
-    local job = queued.job
-    local resolved = resolve_parser(job)
-    local loaded = load_parser(resolved)
-    local compiled = compile_parser(loaded, job)
-    results[index] = parse_result(
-      index - 1,
-      job,
-      resolved,
-      compiled,
-      execute_parser(compiled, job)
-    )
-  end
-  return results
+      local results = {}
+      for index, queued in ipairs(queue) do
+        local job = queued.job
+        results[index] = trace_support.run(
+          emitter,
+          "lua_staged:job",
+          "queue_index=" .. (index - 1) .. " job_id=" .. job.job_id,
+          function()
+            local resolved = resolve_parser(job)
+            trace_support.decision(
+              emitter,
+              "lua_staged:job:resolve",
+              true,
+              "job_id=" .. job.job_id .. " resolved_spec_id=" .. resolved.resolved_spec_id
+            )
+            local loaded = load_parser(resolved)
+            trace_support.decision(
+              emitter,
+              "lua_staged:job:load",
+              true,
+              "job_id=" .. job.job_id .. " source_kind=" .. loaded.source_kind
+            )
+            local compiled = compile_parser(loaded, job)
+            trace_support.decision(
+              emitter,
+              "lua_staged:job:compile",
+              true,
+              "job_id=" .. job.job_id .. " top_rule=" .. compiled.top_rule
+            )
+            local result = execute_parser(compiled, job)
+            trace_support.decision(
+              emitter,
+              "lua_staged:job:execute",
+              true,
+              "job_id=" .. job.job_id .. " result_field=" .. job.result_field
+            )
+            return parse_result(index - 1, job, resolved, compiled, result)
+          end,
+          "ok"
+        )
+      end
+      return results
+    end,
+    function(results) return "ok result_count=" .. #results end
+  )
 end
 
-function M.execute_staged_parse_job(job)
-  local results = M.execute_staged_parse_jobs({ job })
+function M.execute_staged_parse_job(job, options)
+  local results = M.execute_staged_parse_jobs({ job }, options)
   if #results == 0 then
     fail("staged parse dispatch produced no result")
   end
@@ -387,49 +440,81 @@ local function function_index(job)
   return index
 end
 
-function M.dispatch_function_body_parse_jobs(spec)
+function M.dispatch_function_body_parse_jobs(spec, options)
   if spec_ast.node_type(spec) ~= "SpecFile" then
     fail("dispatch_function_body_parse_jobs expects SpecFile")
   end
-  local jobs = {}
-  local seen_job_ids = {}
-  for lua_index, definition in ipairs(spec.functions) do
-    local job = definition.body_parse_job
-    if job ~= nil then
-      validate_function_body_job(definition, lua_index - 1, job)
-      if seen_job_ids[job.job_id] then
-        fail("duplicate staged function-body job_id '" .. job.job_id .. "'")
+  local emitter = trace_from_options(options, "function-body dispatch")
+  return trace_support.run(
+    emitter,
+    "lua_staged:function_body_dispatch",
+    "function_count=" .. #spec.functions,
+    function()
+      local jobs = {}
+      local seen_job_ids = {}
+      for lua_index, definition in ipairs(spec.functions) do
+        local job = definition.body_parse_job
+        if job ~= nil then
+          validate_function_body_job(definition, lua_index - 1, job)
+          if seen_job_ids[job.job_id] then
+            fail("duplicate staged function-body job_id '" .. job.job_id .. "'")
+          end
+          seen_job_ids[job.job_id] = true
+          jobs[#jobs + 1] = job
+          trace_support.decision(
+            emitter,
+            "lua_staged:function_body_dispatch:job",
+            true,
+            "function_index=" .. (lua_index - 1) .. " function_name=" .. definition.name
+          )
+        end
       end
-      seen_job_ids[job.job_id] = true
-      jobs[#jobs + 1] = job
-    end
-  end
 
-  local results = M.execute_staged_parse_jobs(jobs)
-  local stitched = spec
-  local seen_indexes = {}
-  for _, result in ipairs(results) do
-    local index = function_index(result.job)
-    if seen_indexes[index] then
-      fail("duplicate staged function-body result for functions." .. index .. ".body_source")
-    end
-    seen_indexes[index] = true
-    stitched = user_function_registry.stitch_function_body_ast(
-      stitched,
-      result.job.job_id,
-      result.result
-    )
-  end
-  return setmetatable({ spec = stitched, results = results }, DISPATCH_MT)
+      local results = M.execute_staged_parse_jobs(jobs, { trace = emitter })
+      local stitched = spec
+      local seen_indexes = {}
+      for _, result in ipairs(results) do
+        local index = function_index(result.job)
+        if seen_indexes[index] then
+          fail("duplicate staged function-body result for functions." .. index .. ".body_source")
+        end
+        seen_indexes[index] = true
+        stitched = user_function_registry.stitch_function_body_ast(
+          stitched,
+          result.job.job_id,
+          result.result
+        )
+        trace_support.decision(
+          emitter,
+          "lua_staged:function_body_dispatch:stitch",
+          true,
+          "function_index=" .. index .. " result_field=" .. result.job.result_field
+        )
+      end
+      return setmetatable({ spec = stitched, results = results }, DISPATCH_MT)
+    end,
+    function(dispatch) return "ok result_count=" .. #dispatch.results end
+  )
 end
 
-function M.stitch_function_body_parse_jobs(spec)
-  return M.dispatch_function_body_parse_jobs(spec).spec
+function M.stitch_function_body_parse_jobs(spec, options)
+  return M.dispatch_function_body_parse_jobs(spec, options).spec
 end
 
-function M.parse_spec_with_staged_user_function_definition_asts(source, definition_nodes)
-  local spec = function_shell.parse_spec_with_asts(source, definition_nodes)
-  return M.stitch_function_body_parse_jobs(spec)
+function M.parse_spec_with_staged_user_function_definition_asts(source, definition_nodes, options)
+  local emitter = trace_from_options(options, "staged function definition parse")
+  return trace_support.run(
+    emitter,
+    "lua_staged:parse_spec_with_function_asts",
+    "source_bytes=" .. (type(source) == "string" and #source or 0),
+    function()
+      local spec = function_shell.parse_spec_with_asts(source, definition_nodes, { trace = emitter })
+      return M.stitch_function_body_parse_jobs(spec, { trace = emitter })
+    end,
+    function(spec)
+      return "ok functions=" .. #spec.functions .. " rules=" .. #spec.rules
+    end
+  )
 end
 
 local function result_to_json(value)

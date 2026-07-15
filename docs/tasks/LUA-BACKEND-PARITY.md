@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.5.3.1` admits the exact fixed-v1/variadic-v2/final-codeblock-v3 outward union on
-  both Lua ABIs; one-emitter full native-pipeline trace `.5.3.2` is next)
+- Last updated: `2026-07-15` (`.5.3.2` carries one caller-owned emitter through the complete native pipeline at
+  155/155 on both Lua ABIs; census-preserving no-drift `.5.3.3` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2339,18 +2339,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.3.1 - admit Lua function descriptors`
 
 - ID: `LUA-BACKEND-PARITY.5.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Propagate one caller-owned trace emitter through the complete native Lua parser pipeline.
   Dependencies: `.5.3.0.1`, `.5.3.1`
   Acceptance: One emitter identity crosses native resolution/loading, source frontend, validation, compilation,
     spec-owned function parser, function-shell projection, staged body resolve/load/compile/execute/stitch, engine
     creation, and runtime execution; ordered phase/rule events, quiet-default behavior, level filtering, sinks,
     error attribution, result neutrality, and no hidden emitter creation match the shared trace precedent.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** A pre-change direct native TOOLBOX-style probe showed the caller emitter at
+    zero events after load/compile and engine creation, with its first five events appearing only at runtime.
+    `SpecLoadOptions.trace` now carries that same typed identity through balanced IO/frontend/compiler/function/
+    staged/engine scopes and medium decisions; compiled/engine state retains nothing and no hidden factory runs.
+    Exact ordered topics, route output, disabled/low/medium filtering, balanced attributed validation failure,
+    descriptor/runtime neutrality, and invalid-emitter rejection pass. PUC Lua and LuaJIT pass 155/155 with status
+    `native-full-pipeline-trace-v1`; capability remains four-backend 64/0/0. Canonical local CI passes both 61/61
+    CLI environments and Phase 0 reaches true stop `1..1031` in 608 seconds. Mutation testing is not run.
+  Commit: `LUA-BACKEND-PARITY.5.3.2 - propagate Lua full-pipeline trace`
 
 - ID: `LUA-BACKEND-PARITY.5.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Close Lua descriptor/full-pipeline-trace no-drift while preserving completion-time census admission.
   Dependencies: `.5.3.1`, `.5.3.2`
   Acceptance: Focused dual-ABI proof, neutral descriptor/trace fixtures and checkers, public API/status, docs/book,
@@ -2519,8 +2526,9 @@ completed Dart/Julia precedent, capability policy, and history before code. Deci
 an exact neutral final-codeblock-v3 outward record extends fixed `params`/`arity` with final-only
 `parameter_kinds`, while Lua remains outside the all-pass census until sole admission owner `.8.4`. Descriptor
 contract/emission `.5.3.1` now locks and emits all three variants on both Lua ABIs, aligns Perl's existing v3
-projection, and leaves the census unchanged. One-emitter propagation `.5.3.2` is active; no-drift `.5.3.3`
-remains ordered.
+projection, and leaves the census unchanged. One-emitter propagation `.5.3.2` now passes ordered, balanced
+construction/runtime trace at 155/155 on both ABIs with no emitter retained in compiled or engine state;
+census-preserving no-drift `.5.3.3` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2633,8 +2641,8 @@ remains ordered.
 | 107 | `LUA-BACKEND-PARITY.5.3.0` | `done` | Audit finds two neutral-policy dependencies and splits decision/descriptor/trace/admission work. |
 | 108 | `LUA-BACKEND-PARITY.5.3.0.1` | `done` | ADR `0041` adopts final-codeblock-v3 descriptors and completion-time Lua census admission. |
 | 109 | `LUA-BACKEND-PARITY.5.3.1` | `done` | Exact shared v1/v2/v3 descriptors pass both Lua ABIs; existing Perl final-codeblock projection is v3. |
-| 110 | `LUA-BACKEND-PARITY.5.3.2` | `active` | Carry one caller-owned emitter across the full native parser pipeline. |
-| 111 | `LUA-BACKEND-PARITY.5.3.3` | `pending` | Close no-drift while preserving `.8.4` as the sole Lua census-admission owner. |
+| 110 | `LUA-BACKEND-PARITY.5.3.2` | `done` | One caller-owned emitter crosses IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs. |
+| 111 | `LUA-BACKEND-PARITY.5.3.3` | `active` | Close no-drift while preserving `.8.4` as the sole Lua census-admission owner. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -2698,6 +2706,31 @@ remains ordered.
 - [x] **LOCKSTEP** — Contract/readme, root/Lua docs, roadmaps, architecture/live/change/notes, task/index, mdBook
   descriptor/status/loading/handoff/grammar chapters, Knowledge Map facts, and bounded memory all identify exact
   descriptor v1/v2/v3 behavior and activate one-emitter trace `.5.3.2` without changing census membership.
+
+### `LUA-BACKEND-PARITY.5.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — A direct public native probe created one debug emitter, put it in
+  `spec_load_options(...)`, then loaded/compiled and created an engine. The emitter had exactly zero events after
+  both construction boundaries; only explicit `runtime_parse(..., { trace = emitter })` produced five events,
+  beginning at `lua_runtime:parse`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `spec_loader`, `spec_parser`, `spec_validator`, `compiled_spec`, the
+  spec-owned function parser/shell, user-function registry, staged registry, and engine construction accepted no
+  optional emitter and therefore could neither propagate caller identity nor report their phase boundaries.
+- [x] **FIX** — Add optional typed `trace` injection to the existing APIs, one internal balanced scope runner that
+  rethrows original errors, high `lua_io`/`lua_frontend`/`lua_compiler`/`lua_staged`/engine scopes, and medium
+  candidate/cache/definition/rule/job/stitch decisions. Pass the same emitter explicitly; never retain it in
+  compiled or engine state and never construct a hidden one.
+- [x] **ADDRESSED (verified)** — One routed emitter records the exact ordered path from load/resolve through
+  function-parser execution, shell/staged phases, validation/compile/registry, engine creation, and final runtime
+  rule events. A patched factory counter stays zero; all emitted success and validation-failure scopes balance.
+- [x] **NO REGRESSION** — Disabled and low emitters remain empty, medium admits decisions but filters high scopes,
+  traced/untraced compiled descriptor and runtime JSON are exact, and typed `SpecPipelineError` JSON/stage remain
+  unchanged. `bash tools/run_lua_local.sh` passes PUC Lua 155/155 and LuaJIT 155/155; capability remains 64/0/0.
+  Canonical local CI passes both 61/61 CLI environments and Phase 0 reaches true stop `1..1031` in 608 seconds.
+  Mutation testing remains manual-only and was not run.
+- [x] **LOCKSTEP** — Lua/root API and status docs, native-loading/trace/status/handoff mdBook pages, task/index,
+  roadmaps, architecture/live/change/notes, Knowledge Map, and bounded memory record
+  `native-full-pipeline-trace-v1`, keep `.8.4` as sole census expansion owner, and activate `.5.3.3`.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4226,3 +4259,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.3.0` | `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission` | Exact schema/fence/trace/census/history audit, durable conflict record, and decision/descriptor/trace/admission split. |
 | `LUA-BACKEND-PARITY.5.3.0.1` | `LUA-BACKEND-PARITY.5.3.0.1 - settle descriptor and census policy` | ADR `0041` exact final-codeblock-v3 record plus completion-time all-pass Lua census admission. |
 | `LUA-BACKEND-PARITY.5.3.1` | `LUA-BACKEND-PARITY.5.3.1 - admit Lua function descriptors` | Checked exact fixed-v1/variadic-v2/final-codeblock-v3 union, dual-ABI Lua emission, and Perl outward-v3 alignment. |
+| `LUA-BACKEND-PARITY.5.3.2` | `LUA-BACKEND-PARITY.5.3.2 - propagate Lua full-pipeline trace` | One caller-owned emitter across IO/frontend/compiler/function/staged/engine/runtime, exact filters/sinks/errors/identity, and 155/155 dual-ABI proof. |

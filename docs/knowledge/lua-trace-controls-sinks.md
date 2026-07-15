@@ -13,6 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, trace, runtime, diagnostics, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.4.2 adds native levels/config/events/sinks and balanced parse-scope entrypoints at 128/128 on PUC Lua and LuaJIT; .4.4.3 then instruments the existing interpreter and passes 129/129."
+evidence_update_2026_07_15_full_pipeline: "LUA-BACKEND-PARITY.5.3.2 reuses the same caller-owned emitter and sinks across native IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -38,9 +39,10 @@ options table as `trace`. `runtime_parse_with_trace(...)` and
 preserve the caller's options table. `.4.4.2` introduced the balanced
 `lua_runtime:parse` scope; `.4.4.3` adds rule, regex, dispatch, recursion,
 lifecycle, cursor, mark/capture, and source-boundary events without changing
-successful result JSON on PUC Lua or LuaJIT. Full native frontend/compiler/
-function-shell/staged propagation remains dependency-gated `.5.3`.
+successful result JSON on PUC Lua or LuaJIT. `.5.3.2` now propagates an explicitly caller-created emitter through
+native IO/frontend/compiler/function-shell/staged/engine phases as well; compiled/engine state retains none.
 
 Related facts: [[lua-runtime-structured-diagnostics]],
 [[lua-runtime-diagnostics-trace-split]], [[lua-runtime-trace-events]], [[dart-trace-controls-sinks]],
-[[julia-trace-controls-sinks]], [[trace-cross-variant-capability-contract]].
+[[julia-trace-controls-sinks]], [[trace-cross-variant-capability-contract]],
+[[lua-native-full-pipeline-trace]].

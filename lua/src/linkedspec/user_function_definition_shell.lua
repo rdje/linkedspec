@@ -1,6 +1,8 @@
 local ast = require("linkedspec.spec_ast")
 local json = require("linkedspec.json")
 local spec_parser = require("linkedspec.spec_parser")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 
 local M = {}
 
@@ -704,53 +706,92 @@ function M.definition_nodes_from_output(output)
   projection_fail("user_function_definition.spec returned unsupported output shape")
 end
 
-function M.project(source, definition_nodes)
+function M.project(source, definition_nodes, options)
   if type(source) ~= "string" then
     projection_fail("function projection source must be a string")
+  end
+  options = options or {}
+  if type(options) ~= "table" then projection_fail("function projection options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    projection_fail("trace must be a LinkedSpecTraceEmitter")
   end
   local valid_utf8, invalid_position = json.validate_utf8(source)
   if not valid_utf8 then
     projection_fail("function projection source is not valid UTF-8 at byte " .. invalid_position)
   end
-  local nodes = array_value(definition_nodes, "definition_nodes")
-  local offsets, character_count = codepoint_offsets(source)
-  local functions = {}
-  local spans = {}
-  for lua_index, node_value in ipairs(nodes) do
-    local index = lua_index - 1
-    local object = object_value(node_value, "definition node " .. index)
-    local node_type = string_field(object, "type", "definition node")
-    if node_type == "function_definition" then
-      local projected = project_function(object, source, offsets, character_count, index)
-      functions[#functions + 1] = projected.definition
-      spans[#spans + 1] = projected.span
-    elseif node_type == "function_definition_error" then
-      error(definition_error(object, index), 0)
-    else
-      projection_fail(
-        "user_function_definition.spec returned unsupported node type '" .. node_type .. "' at index " .. index
-      )
-    end
-  end
-  return {
-    functions = functions,
-    stripped_source = strip_spans(source, offsets, character_count, spans),
-  }
+  return trace_support.run(
+    options.trace,
+    "lua_frontend:function_projection",
+    "source_bytes=" .. #source,
+    function()
+      local nodes = array_value(definition_nodes, "definition_nodes")
+      local offsets, character_count = codepoint_offsets(source)
+      local functions = {}
+      local spans = {}
+      for lua_index, node_value in ipairs(nodes) do
+        local index = lua_index - 1
+        local object = object_value(node_value, "definition node " .. index)
+        local node_type = string_field(object, "type", "definition node")
+        if node_type == "function_definition" then
+          local projected = project_function(object, source, offsets, character_count, index)
+          functions[#functions + 1] = projected.definition
+          spans[#spans + 1] = projected.span
+          trace_support.decision(
+            options.trace,
+            "lua_frontend:function_projection:definition",
+            true,
+            "index=" .. index .. " name=" .. projected.definition.name ..
+              " arity=" .. projected.definition.arity
+          )
+        elseif node_type == "function_definition_error" then
+          error(definition_error(object, index), 0)
+        else
+          projection_fail(
+            "user_function_definition.spec returned unsupported node type '" .. node_type .. "' at index " .. index
+          )
+        end
+      end
+      return {
+        functions = functions,
+        stripped_source = strip_spans(source, offsets, character_count, spans),
+      }
+    end,
+    function(projection) return "ok function_count=" .. #projection.functions end
+  )
 end
 
-function M.parse_spec_with_asts(source, definition_nodes)
-  local projection = M.project(source, definition_nodes)
-  local ok, rule_spec = pcall(spec_parser.parse_spec, projection.stripped_source)
-  if not ok then
-    if spec_parser.is_parse_error(rule_spec) then
-      error(spec_parser.new_parse_error(
-        rule_spec.line,
-        "rule parse after function extraction failed: " .. rule_spec.message
-      ), 0)
-    end
-    error(rule_spec, 0)
+function M.parse_spec_with_asts(source, definition_nodes, options)
+  options = options or {}
+  if type(options) ~= "table" then projection_fail("function shell options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    projection_fail("trace must be a LinkedSpecTraceEmitter")
   end
-  return ast.spec_file({ functions = projection.functions, rules = rule_spec.rules })
+  return trace_support.run(
+    options.trace,
+    "lua_frontend:function_shell_spec",
+    "source_bytes=" .. (type(source) == "string" and #source or 0),
+    function()
+      local projection = M.project(source, definition_nodes, { trace = options.trace })
+      local ok, rule_spec = pcall(
+        spec_parser.parse_spec,
+        projection.stripped_source,
+        { trace = options.trace }
+      )
+      if not ok then
+        if spec_parser.is_parse_error(rule_spec) then
+          error(spec_parser.new_parse_error(
+            rule_spec.line,
+            "rule parse after function extraction failed: " .. rule_spec.message
+          ), 0)
+        end
+        error(rule_spec, 0)
+      end
+      return ast.spec_file({ functions = projection.functions, rules = rule_spec.rules })
+    end,
+    function(spec)
+      return "ok functions=" .. #spec.functions .. " rules=" .. #spec.rules
+    end
+  )
 end
 
 return M

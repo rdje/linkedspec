@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.3.2` — pass trace identity; do not retain trace state): The full native Lua
+  pipeline uses one optional caller-created `LinkedSpecTraceEmitter` in existing options tables. Load options carry
+  it through resolution and compile; inline parser/validator/compiler/function/staged APIs accept the same field;
+  engine creation observes it but does not store it; runtime receives it explicitly again. This keeps sink lifetime
+  and ownership visible and prevents compiled artifacts from acquiring mutable diagnostic state. High scopes own
+  phase balance, medium decisions own candidate/cache/definition/rule/job choices, and existing debug runtime
+  events remain unchanged. `trace_support.run` is the sole local success/failure balancing helper and rethrows the
+  original error object after an error exit. Direct pre-change proof measured 0 events after load/compile and engine
+  creation versus 5 beginning at runtime; post-change exact routed order, filters, typed error/result neutrality,
+  and no hidden factory calls pass 155/155 on PUC Lua and LuaJIT. Status is
+  `native-full-pipeline-trace-v1`; census expansion remains `.8.4`, not this implementation slice. Canonical local
+  CI passes CLI 61x2 plus Phase 0 `1..1031` in 608 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.3.1` — project public function records from one checked union): Keep internal
   typed definition versions independent from outward record versions. Lua's registry decides outward v1/v2/v3
   from exact stored metadata: no signature/no parameter kind is fixed-v1, a callable signature is variadic-v2,

@@ -67,21 +67,29 @@ descriptors, one-emitter full-pipeline trace, and final admission. Decision `.5.
 final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`. `.5.3.1` now consumes
 the shared exact fixed-v1/variadic-v2/final-codeblock-v3 union, removes both descriptor fences, and preserves
 identical signature/parameter-kind values through outward and staged records. PUC Lua and LuaJIT remain 153/153.
-Lua remains outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`; one-emitter full-pipeline
-trace `.5.3.2` is next and generated source stays later-owned.
+Full-pipeline trace `.5.3.2` then propagates one caller-owned emitter through native resolution/loading, every
+frontend/compiler/function/staged owner, engine construction, and runtime without retaining it or creating a
+hidden emitter. Ordered scopes/decisions, routed output, quiet and filtered levels, attributed balanced failures,
+and traced/untraced identity pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Lua remains
+outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`; `.5.3.3` is the next no-drift leaf and
+generated source stays later-owned.
 
 ```lua
+local emitter = linkedspec.trace_emitter(
+  linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG)
+)
 local request = linkedspec.named_spec_request("Demo")
 local options = linkedspec.spec_load_options({
   cwd = ".",
   search_roots = { "specs" },
+  trace = emitter, -- optional caller-owned LinkedSpecTraceEmitter
 })
 local loaded = linkedspec.load_and_compile_spec(request, options)
 assert(loaded.loaded.resolved.request.requested == "Demo")
 assert(loaded.loaded.source_text ~= nil)
 
-local engine = loaded:create_engine({ parse_mode = "seek" })
-local result = linkedspec.runtime_parse(engine, "input")
+local engine = loaded:create_engine({ parse_mode = "seek", trace = emitter })
+local result = linkedspec.runtime_parse(engine, "input", { trace = emitter })
 ```
 
 Use `load_spec(...)` when only exact decoded text is required. `load_and_compile_spec(...)` additionally runs the
@@ -89,7 +97,9 @@ automatic spec-owned function parser, validates the composed source, compiles it
 `LoadedCompiledSpec`. Its `loaded` field retains the request, resolved path, origin, and exact source text; its
 `compiled` field is ordinary backend-native compiled state. `create_loaded_spec_engine(loaded, options)` is the
 function-form equivalent of `loaded:create_engine(options)`. Both copy the options table, attach `spec_name` only
-for a named request, and attach the resolved `spec_path` for either request kind.
+for a named request, and attach the resolved `spec_path` for either request kind. Put the same optional `trace`
+emitter in the load options, engine options, and runtime options to observe the complete pipeline. Compiled and
+engine values deliberately do not retain mutable emitter/sink state.
 
 Failures after decoding retain the same `SpecPipelineError` type and add the neutral stages `parse_spec`,
 `validate_spec`, and `compile_spec` with codes `spec_parse_failed`, `spec_validation_failed`, and
@@ -275,8 +285,9 @@ resolves and compiles the bundled grammar once, executes it in process, and comp
 dispatcher without a raw scanner; the dual-ABI gate is 151/151 with status
 `native-spec-defined-functions-v1`. Loaded-source `.5.2.3` then adds typed compiled results, exact source identity,
 neutral parse/validate/compile failures, and named/path runtime-engine attribution; the dual-ABI gate is 153/153
-with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes parent `.5.2`; full frontend/
-compiler/function/staged trace `.5.3` is active now that its dependencies exist. Generated Lua
+with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes parent `.5.2`. Exact outward
+descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` are now complete; the latter raises both suites
+to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` is active. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

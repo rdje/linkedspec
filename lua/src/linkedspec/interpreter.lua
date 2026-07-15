@@ -7,6 +7,7 @@ local matching = require("linkedspec.matching")
 local runtime_scoped_binding = require("linkedspec.runtime_scoped_binding")
 local scalar_numeric = require("linkedspec.scalar_numeric")
 local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 local unicode_case = require("linkedspec.unicode_case_mapping")
 local user_function_registry = require("linkedspec.user_function_registry")
 
@@ -90,7 +91,6 @@ end
 
 function M.runtime_engine(compiled, options)
   if compiled_spec.node_type(compiled) ~= "CompiledSpec" then fail("runtime engine expects CompiledSpec") end
-  compiled_spec.validate_no_removed_aggregate_selectors(compiled)
   options = options or {}
   if type(options) ~= "table" then fail("runtime engine options must be a table") end
   local max_iterations = options.max_iterations or 10000
@@ -103,17 +103,30 @@ function M.runtime_engine(compiled, options)
   if options.spec_path ~= nil and type(options.spec_path) ~= "string" then
     fail("spec_path must be a string when present")
   end
-  return setmetatable({
-    compiled_spec = compiled,
-    parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
-    max_iterations = max_iterations,
-    spec_name = options.spec_name,
-    spec_path = options.spec_path,
-    regex_cache = {},
-    boundary_regex_cache = {},
-    helper_regex_cache = {},
-    user_function_body_cache = {},
-  }, ENGINE_MT)
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
+  end
+  return trace_support.run(
+    options.trace,
+    "lua_runtime:create_engine",
+    "rules=" .. #compiled.compiled_rule_order ..
+      " functions=" .. #compiled.function_registry.entries,
+    function()
+      compiled_spec.validate_no_removed_aggregate_selectors(compiled)
+      return setmetatable({
+        compiled_spec = compiled,
+        parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
+        max_iterations = max_iterations,
+        spec_name = options.spec_name,
+        spec_path = options.spec_path,
+        regex_cache = {},
+        boundary_regex_cache = {},
+        helper_regex_cache = {},
+        user_function_body_cache = {},
+      }, ENGINE_MT)
+    end,
+    "ok"
+  )
 end
 
 local function runtime_diagnostic(engine, fields)

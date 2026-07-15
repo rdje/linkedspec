@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.3.2 — propagate Lua full-pipeline trace**
+  (DONE — one caller-owned emitter crosses the complete native pipeline; no-drift `.5.3.3` is next).
+
+  **Result:** Optional trace injection now spans native resolution/loading, source/function frontends, validation,
+  compilation, function registry/shell, staged body resolve/load/compile/execute/stitch, engine creation, and
+  runtime. One routed emitter records exact ordered topics without hidden construction or retained mutable state;
+  disabled/low/medium filtering, balanced attributed failures, and traced/untraced descriptor/runtime identity
+  pass. PUC Lua and LuaJIT pass 155/155 with status `native-full-pipeline-trace-v1`; capability remains 64/0/0.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 608 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.3.1 — admit Lua function descriptors**
   (DONE — exact outward union and Lua emission are complete; one-emitter full-pipeline trace `.5.3.2` is next).
 

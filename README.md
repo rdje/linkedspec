@@ -126,8 +126,12 @@ This `README.md` is the **single entry point** to the project.
   fixed `params`/`arity` plus final-only `parameter_kinds`. They also keep Lua outside the four-backend census until
   sole all-pass admission owner `.8.4`. Descriptor leaf `.5.3.1` now makes the neutral executable union exact for
   fixed-v1, variadic-v2, and final-codeblock-v3, removes the Lua fences, preserves identical staged metadata, and
-  aligns Perl's existing final-codeblock outward projection to v3. Both Lua ABIs remain 153/153 and capability
-  remains 64/0/0; one-emitter native-pipeline trace `.5.3.2` is next.
+  aligns Perl's existing final-codeblock outward projection to v3. Full-pipeline trace `.5.3.2` now carries one
+  caller-owned emitter through native resolution/loading, source/function frontends, validation, compilation,
+  function registry/shell, staged resolve/load/compile/execute/stitch, engine creation, and runtime. Exact ordered
+  events, sinks, quiet/filtered paths, balanced attributed failures, no hidden emitter construction, and traced/
+  untraced result identity pass 155/155 on PUC Lua and LuaJIT with status
+  `native-full-pipeline-trace-v1`. Capability remains 64/0/0; census-preserving no-drift `.5.3.3` is next.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
@@ -145,7 +149,8 @@ This `README.md` is the **single entry point** to the project.
   ADR `0037` makes end-to-end observability a future format-parser readiness gate: correlate `.spec` graph
   resolution/staging/cache/compilation with runtime rule/branch/position/AST behavior, add exact emission-only
   rule-label filters, bound high-volume payloads, and prove traced/untraced identity across all current backends.
-  Lua's current runtime trace is complete; its already-owned full native-pipeline propagation remains `.5.3`.
+  Lua now has caller-owned full native-pipeline trace; future format-parser correlation/filtering remains the
+  stronger post-parity readiness work owned by `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7`.
   ADR `0038` adds a separate optional, non-blocking acceleration horizon after a realistic dynamic format parser
   is correct and measured. Backend-native artifacts must remain fingerprinted disposable derivatives of normalized
   `.spec` state, exactly equivalent and objectively faster after build/load and break-even costs; the dynamic

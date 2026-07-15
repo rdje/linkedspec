@@ -17,6 +17,7 @@ evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 add
 evidence_update_2026_07_15_trace_controls: "LUA-BACKEND-PARITY.4.4.2 adds typed levels/config/events, documented environment controls, caller-owned stdout/route/mirror sinks, reset/append, and result-neutral runtime wrappers at 128/128; .4.4.3 is active."
 evidence_update_2026_07_15_runtime_events: "LUA-BACKEND-PARITY.4.4.3 adds rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events behind the optional emitter and passes 129/129 on both Lua ABIs; .4.4.4 is the no-drift closeout."
 evidence_update_2026_07_15_no_drift: "LUA-BACKEND-PARITY.4.4.4 closes the exact runtime diagnostics/trace boundary at 129/129 on both Lua ABIs, closes parent .4.4, and activates .5.1 while full-pipeline trace remains .5.3."
+evidence_update_2026_07_15_full_pipeline: "After .5.1/.5.2 created every owner, LUA-BACKEND-PARITY.5.3.2 completes the planned one-emitter propagation at 155/155 on both ABIs."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md"
 ---
 
@@ -31,8 +32,8 @@ The executable runtime epoch is owned under `.4.4`:
   source-boundary, mark, and capture events where applicable;
 - `.4.4.4` closes dual-ABI, API, book, task, Knowledge Map, live-doc, and canonical no-drift without claiming more.
 
-Full native-pipeline propagation remains `LUA-BACKEND-PARITY.5.3`. It depends on `.4.4` plus general staged-function
-execution `.5.1` and native loading `.5.2`, then carries one caller-owned emitter through loading, source parsing,
+Full native-pipeline propagation was correctly assigned to `LUA-BACKEND-PARITY.5.3`. It depended on `.4.4` plus
+general staged-function execution `.5.1` and native loading `.5.2`, then carried one caller-owned emitter through loading, source parsing,
 validation, compilation, function-shell work, staged dispatch, and runtime. This is not a deferral of runtime
 observability; it prevents trace from claiming owners that do not yet exist.
 
@@ -49,11 +50,11 @@ That closeout is now complete. At its boundary, exact exported API, source-topic
 focused-test, status, public-book, task/index, roadmap, live-doc, and Knowledge Map
 inventory agree on `runtime-trace-events`; parent `.4.4` is closed. Minimal staged
 dispatch `.5.1.1` later advanced status to `runtime-staged-registry`, and fixed-v1
-execution `.5.1.2` has since advanced current status to `runtime-user-functions-fixed-v1`,
-while full-pipeline trace correctly remains `.5.3`.
+execution `.5.1.2` later advanced status. `.5.3.2` has now completed the planned full-pipeline trace and current
+status is `native-full-pipeline-trace-v1`.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],
 [[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]],
 [[lua-runtime-structured-diagnostics]], [[lua-trace-controls-sinks]],
-[[lua-diagnostics-trace-boundary]].
+[[lua-diagnostics-trace-boundary]], [[lua-native-full-pipeline-trace]].

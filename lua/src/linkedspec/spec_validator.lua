@@ -1,6 +1,8 @@
 local action_call_names = require("linkedspec.action_call_names")
 local ast = require("linkedspec.spec_ast")
 local json = require("linkedspec.json")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 
 local M = {}
 
@@ -374,19 +376,34 @@ function M.validate_spec(spec, options)
   if options.strict_syntax ~= nil and type(options.strict_syntax) ~= "boolean" then
     validation_fail("strict_syntax must be a boolean when present")
   end
-
-  check_top_rule(spec)
-  check_duplicate_rule_labels(spec)
-  check_duplicate_function_names(spec)
-  check_function_registry(spec)
-  check_raw_body_lines(spec)
-  check_mixed_edges(spec)
-  check_grouped_action_edges(spec)
-  check_edge_targets(spec)
-  check_regex_syntax(spec)
-  if options.strict_syntax then
-    check_unused_rules(spec)
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    validation_fail("trace must be a LinkedSpecTraceEmitter")
   end
+  return trace_support.run(
+    options.trace,
+    "lua_frontend:validate_spec",
+    "rules=" .. #spec.rules .. " functions=" .. #spec.functions ..
+      " strict=" .. (options.strict_syntax and "1" or "0"),
+    function()
+      check_top_rule(spec)
+      check_duplicate_rule_labels(spec)
+      check_duplicate_function_names(spec)
+      check_function_registry(spec)
+      check_raw_body_lines(spec)
+      check_mixed_edges(spec)
+      check_grouped_action_edges(spec)
+      check_edge_targets(spec)
+      check_regex_syntax(spec)
+      if options.strict_syntax then check_unused_rules(spec) end
+      trace_support.decision(
+        options.trace,
+        "lua_frontend:validate_spec:checks",
+        true,
+        "strict=" .. (options.strict_syntax and "1" or "0")
+      )
+    end,
+    "ok"
+  )
 end
 
 return M

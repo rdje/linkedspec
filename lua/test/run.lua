@@ -179,7 +179,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "native-spec-pipeline-v1",
+    "native-full-pipeline-trace-v1",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -618,6 +618,213 @@ test("native spec pipeline maps parse validation compile and missing-name failur
         '"stage":"resolve_spec_path","summary":"Spec path not found","type":"spec_pipeline_error"}',
       "full-pipeline missing name JSON"
     )
+  end)
+end)
+
+test("one caller-owned emitter crosses the complete native parser pipeline", function()
+  with_temp_directory(function(root)
+    local source = table.concat({
+      'fn label() {return("hit")}',
+      "",
+      "Top::",
+      " /x/",
+      " E { return(label()) }",
+      "",
+    }, "\n")
+    local path = root .. "/pipeline.spec"
+    local route_path = root .. "/pipeline.trace"
+    write_file(path, source)
+
+    local request = linkedspec.path_spec_request(path)
+    local baseline_loaded = linkedspec.load_and_compile_spec(
+      request,
+      linkedspec.spec_load_options({ cwd = root, search_roots = {} })
+    )
+    local baseline_result = linkedspec.runtime_parse(baseline_loaded:create_engine(), "x")
+
+    local emitter = linkedspec.trace_emitter(
+      linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+        linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+        route_path
+      ))
+    )
+    local original_factory = linkedspec.trace.trace_emitter
+    local hidden_factory_calls = 0
+    linkedspec.trace.trace_emitter = function(...)
+      hidden_factory_calls = hidden_factory_calls + 1
+      return original_factory(...)
+    end
+    local traced_ok, traced_or_error = pcall(function()
+      local options = linkedspec.spec_load_options({
+        cwd = root,
+        search_roots = {},
+        trace = emitter,
+      })
+      local loaded = linkedspec.load_and_compile_spec(request, options)
+      local engine_options = { trace = emitter }
+      local engine = loaded:create_engine(engine_options)
+      assert_equal(engine_options.trace, emitter, "engine options retain caller emitter")
+      return {
+        loaded = loaded,
+        result = linkedspec.runtime_parse(engine, "x", { trace = emitter }),
+      }
+    end)
+    linkedspec.trace.trace_emitter = original_factory
+    if not traced_ok then error(traced_or_error, 0) end
+
+    assert_equal(hidden_factory_calls, 0, "pipeline creates no hidden emitter")
+    assert_equal(
+      json.encode(linkedspec.to_descriptor_json(traced_or_error.loaded.compiled)),
+      json.encode(linkedspec.to_descriptor_json(baseline_loaded.compiled)),
+      "traced compilation is descriptor-neutral"
+    )
+    assert_equal(
+      json.encode(linkedspec.interpreter.to_json(traced_or_error.result)),
+      json.encode(linkedspec.interpreter.to_json(baseline_result)),
+      "traced runtime is result-neutral"
+    )
+
+    local events = linkedspec.trace_events(emitter)
+    local cursor = 0
+    for _, topic in ipairs({
+      "lua_io:load_and_compile_spec",
+      "lua_io:load_spec",
+      "lua_io:resolve_spec",
+      "lua_io:resolve_spec:candidate",
+      "lua_io:load_spec:content",
+      "lua_io:load_and_compile_spec:loaded",
+      "lua_frontend:parse_spec_with_functions",
+      "lua_frontend:function_parser_spec:cache",
+      "lua_frontend:function_parser_execute",
+      "lua_runtime:create_engine",
+      "lua_runtime:parse",
+      "lua_staged:parse_spec_with_function_asts",
+      "lua_frontend:function_shell_spec",
+      "lua_frontend:function_projection",
+      "lua_frontend:parse_spec",
+      "lua_staged:function_body_dispatch",
+      "lua_staged:execute_jobs",
+      "lua_staged:job",
+      "lua_staged:job:resolve",
+      "lua_staged:job:load",
+      "lua_staged:job:compile",
+      "lua_staged:job:execute",
+      "lua_staged:function_body_dispatch:stitch",
+      "lua_frontend:validate_spec",
+      "lua_compiler:compile_spec",
+      "lua_compiler:function_registry",
+      "lua_io:create_engine",
+      "lua_runtime:create_engine",
+      "lua_runtime:parse",
+      "lua_runtime:rule",
+    }) do
+      local found
+      for index = cursor + 1, #events do
+        if events[index].topic == topic then
+          found = index
+          break
+        end
+      end
+      if found == nil then fail("missing ordered full-pipeline trace topic " .. topic) end
+      cursor = found
+    end
+
+    local enters = 0
+    local exits = 0
+    for _, event in ipairs(events) do
+      if event.kind == linkedspec.TRACE_ENTER then enters = enters + 1 end
+      if event.kind == linkedspec.TRACE_EXIT then exits = exits + 1 end
+    end
+    assert_equal(exits, enters, "full-pipeline scopes stay balanced")
+    assert_contains(read_file(route_path), "lua_staged:job:execute", "routed staged phase")
+    assert_contains(read_file(route_path), "lua_runtime:rule", "routed runtime rule")
+  end)
+end)
+
+test("full-pipeline tracing filters levels stays quiet and preserves attributed failures", function()
+  with_temp_directory(function(root)
+    local valid_path = root .. "/valid.spec"
+    local invalid_path = root .. "/invalid.spec"
+    write_file(valid_path, "Top::\n /x/\n")
+    write_file(invalid_path, "Only:\n /x/\n")
+
+    local function run_with(emitter)
+      local loaded = linkedspec.load_and_compile_spec(
+        linkedspec.path_spec_request(valid_path),
+        linkedspec.spec_load_options({ cwd = root, search_roots = {}, trace = emitter })
+      )
+      local engine = loaded:create_engine({ trace = emitter })
+      return linkedspec.runtime_parse(engine, "x", { trace = emitter })
+    end
+
+    local quiet_output = {}
+    local quiet = linkedspec.trace_emitter(linkedspec.trace_config_disabled(), {
+      stdout_writer = function(payload) quiet_output[#quiet_output + 1] = payload end,
+    })
+    local quiet_result = run_with(quiet)
+    assert_equal(#linkedspec.trace_events(quiet), 0, "disabled full pipeline has no events")
+    assert_equal(table.concat(quiet_output), "", "disabled full pipeline has no output")
+
+    local low = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_LOW), {
+      stdout_writer = function() end,
+    })
+    local low_result = run_with(low)
+    assert_equal(#linkedspec.trace_events(low), 0, "low filters medium and high pipeline events")
+    assert_equal(
+      json.encode(linkedspec.interpreter.to_json(low_result)),
+      json.encode(linkedspec.interpreter.to_json(quiet_result)),
+      "level filtering is result-neutral"
+    )
+
+    local medium = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_MEDIUM), {
+      stdout_writer = function() end,
+    })
+    run_with(medium)
+    local medium_events = linkedspec.trace_events(medium)
+    assert_equal(#medium_events > 0, true, "medium admits phase decisions")
+    for _, event in ipairs(medium_events) do
+      assert_equal(event.kind, linkedspec.TRACE_DECISION, "medium filters high scopes")
+    end
+
+    local baseline_ok, baseline_error = pcall(
+      linkedspec.load_and_compile_spec,
+      linkedspec.path_spec_request(invalid_path),
+      linkedspec.spec_load_options({ cwd = root, search_roots = {} })
+    )
+    assert_equal(baseline_ok, false, "baseline validation failure")
+    local failure = linkedspec.trace_emitter(linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG), {
+      stdout_writer = function() end,
+    })
+    local traced_ok, traced_error = pcall(
+      linkedspec.load_and_compile_spec,
+      linkedspec.path_spec_request(invalid_path),
+      linkedspec.spec_load_options({ cwd = root, search_roots = {}, trace = failure })
+    )
+    assert_equal(traced_ok, false, "traced validation failure")
+    assert_equal(linkedspec.is_spec_pipeline_error(traced_error), true, "traced error remains attributed")
+    assert_equal(traced_error.stage, "validate_spec", "traced error stage")
+    assert_equal(
+      json.encode(linkedspec.spec_pipeline_error_to_json(traced_error)),
+      json.encode(linkedspec.spec_pipeline_error_to_json(baseline_error)),
+      "traced failure JSON is neutral"
+    )
+    local validation_exit
+    local enters = 0
+    local exits = 0
+    for _, event in ipairs(linkedspec.trace_events(failure)) do
+      if event.kind == linkedspec.TRACE_ENTER then enters = enters + 1 end
+      if event.kind == linkedspec.TRACE_EXIT then
+        exits = exits + 1
+        if event.topic == "lua_frontend:validate_spec" then validation_exit = event end
+      end
+    end
+    assert_equal(validation_exit ~= nil, true, "validation failure closes its phase scope")
+    assert_contains(validation_exit.details, "no top rule found", "validation failure detail")
+    assert_equal(exits, enters, "failure scopes stay balanced")
+
+    assert_error_contains(function()
+      linkedspec.spec_load_options({ cwd = root, search_roots = {}, trace = {} })
+    end, "trace must be a LinkedSpecTraceEmitter", "invalid pipeline emitter")
   end)
 end)
 

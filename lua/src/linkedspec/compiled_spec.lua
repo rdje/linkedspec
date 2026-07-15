@@ -4,6 +4,8 @@ local action_parser = require("linkedspec.action_parser")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
 local spec_validator = require("linkedspec.spec_validator")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
@@ -414,40 +416,77 @@ function M.compile_spec(spec, options)
   if options.strict_syntax ~= nil and type(options.strict_syntax) ~= "boolean" then
     fail("strict_syntax must be a boolean when present")
   end
-
-  local source = spec_ast.from_json("SpecFile", spec_ast.to_json(spec))
-  if options.validate_source ~= false then
-    spec_validator.validate_spec(source, { strict_syntax = options.strict_syntax == true })
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
   end
+  return trace_support.run(
+    options.trace,
+    "lua_compiler:compile_spec",
+    "rules=" .. #spec.rules .. " functions=" .. #spec.functions ..
+      " validate=" .. (options.validate_source == false and "0" or "1") ..
+      " strict=" .. (options.strict_syntax == true and "1" or "0"),
+    function()
+      local source = spec_ast.from_json("SpecFile", spec_ast.to_json(spec))
+      if options.validate_source ~= false then
+        spec_validator.validate_spec(source, {
+          strict_syntax = options.strict_syntax == true,
+          trace = options.trace,
+        })
+      else
+        trace_support.decision(
+          options.trace,
+          "lua_compiler:compile_spec:validation",
+          false,
+          "validate_source=0"
+        )
+      end
 
-  local registry = user_function_registry.from_spec(source)
-  local definition_order = {}
-  local rules_by_label = {}
-  local redefined_rule_labels = {}
-  local redefined_seen = {}
-  for _, rule in ipairs(source.rules) do
-    local label = rule.header.label
-    definition_order[#definition_order + 1] = label
-    if rules_by_label[label] and not redefined_seen[label] then
-      redefined_seen[label] = true
-      redefined_rule_labels[#redefined_rule_labels + 1] = label
+      local registry = user_function_registry.from_spec(source, { trace = options.trace })
+      local definition_order = {}
+      local rules_by_label = {}
+      local redefined_rule_labels = {}
+      local redefined_seen = {}
+      for _, rule in ipairs(source.rules) do
+        local label = rule.header.label
+        definition_order[#definition_order + 1] = label
+        if rules_by_label[label] and not redefined_seen[label] then
+          redefined_seen[label] = true
+          redefined_rule_labels[#redefined_rule_labels + 1] = label
+        end
+        rules_by_label[label] = compile_rule(rule, registry)
+        trace_support.decision(
+          options.trace,
+          "lua_compiler:compile_spec:rule",
+          true,
+          "label=" .. label .. " definition_index=" .. (#definition_order - 1)
+        )
+      end
+
+      local compiled_rule_order = last_definition_order(definition_order)
+      local resolved = resolve_action_edge_dependency_regexes(compiled_rule_order, rules_by_label)
+      local dependency_state = build_dependency_regex_state(compiled_rule_order, resolved)
+      trace_support.decision(
+        options.trace,
+        "lua_compiler:compile_spec:dependency_regex",
+        true,
+        "rule_count=" .. #compiled_rule_order
+      )
+      local compiled = setmetatable({
+        definition_order = definition_order,
+        compiled_rule_order = compiled_rule_order,
+        rules_by_label = resolved,
+        redefined_rule_labels = redefined_rule_labels,
+        function_registry = registry,
+        dependency_regex_state = dependency_state,
+      }, COMPILED_SPEC_MT)
+      validate_no_removed_aggregate_selectors(compiled)
+      return compiled
+    end,
+    function(compiled)
+      return "ok rules=" .. #compiled.compiled_rule_order ..
+        " functions=" .. #compiled.function_registry.entries
     end
-    rules_by_label[label] = compile_rule(rule, registry)
-  end
-
-  local compiled_rule_order = last_definition_order(definition_order)
-  local resolved = resolve_action_edge_dependency_regexes(compiled_rule_order, rules_by_label)
-  local dependency_state = build_dependency_regex_state(compiled_rule_order, resolved)
-  local compiled = setmetatable({
-    definition_order = definition_order,
-    compiled_rule_order = compiled_rule_order,
-    rules_by_label = resolved,
-    redefined_rule_labels = redefined_rule_labels,
-    function_registry = registry,
-    dependency_regex_state = dependency_state,
-  }, COMPILED_SPEC_MT)
-  validate_no_removed_aggregate_selectors(compiled)
-  return compiled
+  )
 end
 
 function CompiledSpecMethods:rule(label)

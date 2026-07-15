@@ -15,6 +15,7 @@ date: 2026-07-15
 status: current
 tags: [trace, observability, compiler, runtime, parser, staged-parsing, formats, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director/engineer agreement 2026-07-15; ADR 0037; FUTURE-PARITY-BACKLOG.18.2; STRUCTURED-TEXT-FORMAT-PROGRAM.2.7; trace-api and structured-format-program mdBook chapters. Planning only: no trace/parser/compiler/runtime behavior changed."
+evidence_update_2026_07_15_lua_full_trace: "LUA-BACKEND-PARITY.5.3.2 now gives Lua ordinary full native-pipeline trace; future .2.7 still owns stronger correlated format identities, exact rule filters, bounded payloads, and shared non-interference fixtures."
 reverify: "rg -n '0037|rule-label allowlist|construction/runtime|STRUCTURED-TEXT-FORMAT-PROGRAM.2.7|Lua.*full.*pipeline|full frontend' docs/decisions/0037-selective-end-to-end-parser-observability.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/architecture/structured-format-program.md"
 ---
 
@@ -38,9 +39,9 @@ semantic identity on Perl, Rust, Dart, Julia, Lua, and LuaJIT.
 
 Current state is intentionally precise: the existing trace contract and compile/runtime coverage are established
 across the mature variants; Dart and Julia have caller-emitter full native-pipeline propagation; Lua has complete
-runtime tracing but retains frontend/compiler/function/staged propagation under `LUA-BACKEND-PARITY.5.3` before
-the post-parity format program may start.
+caller-emitter full native-pipeline propagation through `LUA-BACKEND-PARITY.5.3.2`. The post-parity format program
+still owns stronger cross-backend correlation, rule filtering, and bounded-payload requirements.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[post-parity-structured-text-program]],
 [[lua-diagnostics-trace-boundary]], [[dart-full-pipeline-trace-gap]],
-[[julia-frontend-compiler-staged-trace-events]].
+[[julia-frontend-compiler-staged-trace-events]], [[lua-native-full-pipeline-trace]].

@@ -28,6 +28,7 @@ evidence_update_2026_07_15_native_loading: "LUA-BACKEND-PARITY.5.2.1 implements 
 evidence_update_2026_07_15_automatic_function_parser: "LUA-BACKEND-PARITY.5.2.2 adds module-relative one-build spec-owned function parsing and automatic Unicode projection/body dispatch at 151/151 on both ABIs; .5.2.3 is active."
 evidence_update_2026_07_15_native_spec_pipeline: "LUA-BACKEND-PARITY.5.2.3 adds typed LoadedCompiledSpec, exact neutral source-stage errors, and named/path-identified engines with loaded function execution at 153/153 on both ABIs; .5.2.4 is active."
 evidence_update_2026_07_15_native_loading_closeout: "LUA-BACKEND-PARITY.5.2.4 confirms exact source/API/test/public-doc/KM no-drift at 153/153, closes parent .5.2 without behavior change, and activates descriptors/full trace .5.3."
+evidence_update_2026_07_15_full_pipeline_trace: "LUA-BACKEND-PARITY.5.3.1 admits exact v1/v2/v3 descriptors; .5.3.2 passes one caller emitter through IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs with status native-full-pipeline-trace-v1; .5.3.3 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -55,11 +56,12 @@ must be compared with the neutral regex/match-state fixtures; a native adapter i
 native in-memory module contract and exact behavior. LuaRocks and the common test/lint/format tools were absent at
 foundation time, so `.1.1` locked a reproducible repository-owned dependency/test/cache strategy. Automatic
 spec-owned top-level function-shell parsing and loaded-source identity/compile/engine composition are complete;
-native-loading no-drift is closed and the current frontier is descriptors/full-pipeline trace `.5.3`.
+native-loading no-drift, exact descriptors, and caller-owned full-pipeline trace are complete. Census-preserving
+no-drift `.5.3.3` is the current frontier.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
 [[dart-backend-interpreter-first-plan]], [[julia-backend-interpreter-first-plan]],
 [[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]],
 [[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
-[[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]].
+[[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]].

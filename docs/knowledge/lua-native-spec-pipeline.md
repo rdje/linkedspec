@@ -14,6 +14,7 @@ date: 2026-07-15
 status: current
 tags: [lua, native-api, resolution, compilation, runtime, diagnostics, functions, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.2.3 adds load_and_compile_spec, LoadedCompiledSpec, create_engine method/function forms, neutral source-stage errors, loaded function execution, and runtime identity proof at 153/153 on PUC Lua and LuaJIT; canonical CI passes CLI 61x2 and Phase 0 1..1031 in 616 seconds."
+evidence_update_2026_07_15_full_trace: "LUA-BACKEND-PARITY.5.3.2 adds optional caller-owned trace across this full composition and runtime at 155/155 on both ABIs with status native-full-pipeline-trace-v1."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_native_spec_resolution_contract.pl"
 ---
 
@@ -36,8 +37,10 @@ named and exact-path identity, runtime diagnostic identity, inline API no-drift,
 three source-stage mappings on PUC Lua and LuaJIT at 153/153 with status `native-spec-pipeline-v1`.
 `LUA-BACKEND-PARITY.5.2.4` then confirms exact source/export/test/public-doc/Knowledge-Map no-drift and closes the
 native-loading parent without changing this API, status, behavior, capability, or test count. Outward descriptors
-and full-pipeline trace remain owned by active `.5.3`.
+`.5.3.1` and full-pipeline trace `.5.3.2` are now complete; the same emitter is explicit in load, engine, and runtime
+options and is not retained. `.5.3.3` owns no-drift while the census remains unchanged.
 
 Related facts: [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
 [[lua-native-spec-loading-split]], [[native-spec-resolution-contract]],
-[[native-in-memory-backend-contract]], [[lua-native-spec-loading-closeout]].
+[[native-in-memory-backend-contract]], [[lua-native-spec-loading-closeout]],
+[[lua-native-full-pipeline-trace]].

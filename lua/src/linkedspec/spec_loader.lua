@@ -2,6 +2,8 @@ local filesystem = require("linkedspec_filesystem_native")
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local spec_validator = require("linkedspec.spec_validator")
+local trace = require("linkedspec.trace")
+local trace_support = require("linkedspec.trace_support")
 
 local M = {}
 
@@ -80,7 +82,10 @@ function M.spec_load_options(value)
       fail("spec search roots[" .. index .. "] must not contain NUL bytes")
     end
   end
-  return setmetatable({ cwd = cwd, search_roots = search_roots }, OPTIONS_MT)
+  if value.trace ~= nil and not trace.is_trace_emitter(value.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
+  end
+  return setmetatable({ cwd = cwd, search_roots = search_roots, trace = value.trace }, OPTIONS_MT)
 end
 
 local function require_request(value)
@@ -242,7 +247,7 @@ local function candidates(request_value, options)
   return result
 end
 
-function M.resolve_spec(request_input, options_input)
+local function resolve_spec(request_input, options_input, emitter)
   local request_value = require_request(request_input)
   local options = require_options(options_input)
   M.validate_spec_request(request_value)
@@ -259,12 +264,24 @@ function M.resolve_spec(request_input, options_input)
         "native filesystem inspector returned an invalid result"
       )
     elseif inspected.status == "file" then
+      trace_support.decision(
+        emitter,
+        "lua_io:resolve_spec:candidate",
+        true,
+        "origin=" .. candidate.origin .. " path=" .. candidate.path .. " status=file"
+      )
       return setmetatable({
         request = request(request_value.kind, request_value.requested),
         path = candidate.path,
         origin = candidate.origin,
       }, RESOLVED_MT)
     elseif inspected.status == "non_regular" then
+      trace_support.decision(
+        emitter,
+        "lua_io:resolve_spec:candidate",
+        false,
+        "origin=" .. candidate.origin .. " path=" .. candidate.path .. " status=non_regular"
+      )
       first_non_regular = first_non_regular or candidate.path
     elseif inspected.status == "error" then
       raise_pipeline_error(
@@ -283,6 +300,13 @@ function M.resolve_spec(request_input, options_input)
         "Unable to inspect spec path",
         candidate.path,
         "native filesystem inspector returned unsupported status '" .. inspected.status .. "'"
+      )
+    else
+      trace_support.decision(
+        emitter,
+        "lua_io:resolve_spec:candidate",
+        false,
+        "origin=" .. candidate.origin .. " path=" .. candidate.path .. " status=missing"
       )
     end
   end
@@ -303,7 +327,19 @@ function M.resolve_spec(request_input, options_input)
   )
 end
 
-function M.load_spec(request_input, options_input)
+function M.resolve_spec(request_input, options_input)
+  local request_value = require_request(request_input)
+  local options = require_options(options_input)
+  return trace_support.run(
+    options.trace,
+    "lua_io:resolve_spec",
+    "request_kind=" .. request_value.kind .. " requested=" .. request_value.requested,
+    function() return resolve_spec(request_value, options, options.trace) end,
+    function(resolved) return "ok path=" .. resolved.path end
+  )
+end
+
+local function load_spec(request_input, options_input, emitter)
   local request_value = require_request(request_input)
   local resolved = M.resolve_spec(request_value, options_input)
   local handle, open_error = io.open(resolved.path, "rb")
@@ -340,7 +376,25 @@ function M.load_spec(request_input, options_input)
       "invalid UTF-8 at byte " .. (invalid_position - 1)
     )
   end
+  trace_support.decision(
+    emitter,
+    "lua_io:load_spec:content",
+    true,
+    "origin=" .. resolved.origin .. " path=" .. resolved.path .. " source_bytes=" .. #bytes
+  )
   return setmetatable({ resolved = resolved, source_text = bytes }, LOADED_MT)
+end
+
+function M.load_spec(request_input, options_input)
+  local request_value = require_request(request_input)
+  local options = require_options(options_input)
+  return trace_support.run(
+    options.trace,
+    "lua_io:load_spec",
+    "request_kind=" .. request_value.kind .. " requested=" .. request_value.requested,
+    function() return load_spec(request_value, options, options.trace) end,
+    function(loaded) return "ok path=" .. loaded.resolved.path end
+  )
 end
 
 local function run_source_stage(request_value, resolved_path, stage, code, summary, operation)
@@ -351,10 +405,17 @@ local function run_source_stage(request_value, resolved_path, stage, code, summa
   return result
 end
 
-function M.load_and_compile_spec(request_input, options_input)
+local function load_and_compile_spec(request_input, options_input, emitter)
   local request_value = require_request(request_input)
   local loaded = M.load_spec(request_value, options_input)
   local resolved_path = loaded.resolved.path
+  trace_support.decision(
+    emitter,
+    "lua_io:load_and_compile_spec:loaded",
+    true,
+    "origin=" .. loaded.resolved.origin .. " path=" .. resolved_path ..
+      " source_bytes=" .. #loaded.source_text
+  )
   local parsed = run_source_stage(
     request_value,
     resolved_path,
@@ -366,7 +427,11 @@ function M.load_and_compile_spec(request_input, options_input)
       -- for its one module-relative bundled grammar, so eager loading would
       -- create a module cycle without changing the dependency graph.
       local function_parser = require("linkedspec.user_function_definition_parser")
-      return function_parser.parse_spec_with_staged_user_function_definitions(loaded.source_text)
+      return function_parser.parse_spec_with_staged_user_function_definitions(
+        loaded.source_text,
+        nil,
+        { trace = emitter }
+      )
     end
   )
   run_source_stage(
@@ -375,7 +440,7 @@ function M.load_and_compile_spec(request_input, options_input)
     "validate_spec",
     "spec_validation_failed",
     "Spec validation failed",
-    function() return spec_validator.validate_spec(parsed) end
+    function() return spec_validator.validate_spec(parsed, { trace = emitter }) end
   )
   local compiled = run_source_stage(
     request_value,
@@ -383,9 +448,21 @@ function M.load_and_compile_spec(request_input, options_input)
     "compile_spec",
     "spec_compile_failed",
     "Spec compilation failed",
-    function() return compiled_spec.compile_spec(parsed, { validate_source = false }) end
+    function() return compiled_spec.compile_spec(parsed, { validate_source = false, trace = emitter }) end
   )
   return setmetatable({ loaded = loaded, compiled = compiled }, LOADED_COMPILED_MT)
+end
+
+function M.load_and_compile_spec(request_input, options_input)
+  local request_value = require_request(request_input)
+  local options = require_options(options_input)
+  return trace_support.run(
+    options.trace,
+    "lua_io:load_and_compile_spec",
+    "request_kind=" .. request_value.kind .. " requested=" .. request_value.requested,
+    function() return load_and_compile_spec(request_value, options, options.trace) end,
+    function(result) return "ok path=" .. result.loaded.resolved.path end
+  )
 end
 
 local function require_loaded_compiled(value)
@@ -393,7 +470,7 @@ local function require_loaded_compiled(value)
   return value
 end
 
-function M.create_engine(value, options)
+local function create_engine(value, options)
   value = require_loaded_compiled(value)
   options = options or {}
   if type(options) ~= "table" then fail("loaded spec engine options must be a table") end
@@ -409,6 +486,22 @@ function M.create_engine(value, options)
   engine_options.spec_path = resolved.path
   local interpreter = require("linkedspec.interpreter")
   return interpreter.runtime_engine(value.compiled, engine_options)
+end
+
+function M.create_engine(value, options)
+  value = require_loaded_compiled(value)
+  options = options or {}
+  if type(options) ~= "table" then fail("loaded spec engine options must be a table") end
+  if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
+    fail("trace must be a LinkedSpecTraceEmitter")
+  end
+  return trace_support.run(
+    options.trace,
+    "lua_io:create_engine",
+    "path=" .. value.loaded.resolved.path,
+    function() return create_engine(value, options) end,
+    "ok"
+  )
 end
 
 function LOADED_COMPILED_METHODS:create_engine(options)
