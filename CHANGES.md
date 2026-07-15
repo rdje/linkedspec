@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.3.3 — close Lua descriptor trace no drift
+
+Inventoried exact Lua trace-aware exports/options/status, all native construction/runtime propagation owners, the
+governed fixed-v1/variadic-v2/final-codeblock-v3 outward descriptor union, both neutral trace capability
+definitions, focused tests, root/Lua docs, mdBook, task/index/roadmaps/live state, and Knowledge Map. No unowned
+seam, hidden emitter construction, retained compiled/engine trace state, or stale current-behavior claim remains.
+
+PUC Lua and LuaJIT pass 155/155; callable-signature/codeblock checks pass 3/9/7 and 7/11/9/7/4/8; native loading
+passes 14/9/4; coverage is 246/105+1/122; public aggregate surface is 58/27/0; capability deliberately remains
+four-backend 64/0/0 until all-pass `.8.4`. This closeout changes no Lua source, public status, behavior, test count,
+or capability manifest row. Parents `.5.3` and `.5` close; controlled/core corpus window `.6.1` is next. Mutation
+testing remains manual-only and was not run. Canonical local CI passes both 61/61 CLI environments and Phase 0
+reaches its true `1..1031` stop in 611 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.3.2 — propagate Lua full-pipeline trace
 
 Added optional caller-owned trace injection to Lua native load options, source parsing/validation/compilation,

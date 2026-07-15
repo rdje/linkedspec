@@ -30,8 +30,9 @@ a separately scheduled manual campaign and was not part of the closeout gate.
 Planning `.5.2.0` splits portable native loading into resolve/load `.5.2.1`, automatic spec-defined function-shell
 parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`. Resolve/load and automatic
 function parsing are complete at 151/151; full composition is complete at 153/153 on both ABIs, and `.5.2.4`
-closes parent `.5.2`. Outward descriptors and full-pipeline trace close through `.5.3.1/.2`, with no-drift `.5.3.3`
-active. Generated preservation remains `.8`; corpus and parser CLI have later owners; explicit
+closes parent `.5.2`. Outward descriptors and full-pipeline trace close through `.5.3.1/.2`, and no-drift `.5.3.3`
+closes parents `.5.3`/`.5` before corpus `.6.1`.
+Generated preservation remains `.8`; corpus `.6.1` is active and the parser CLI has a later owner; explicit
 `{|params| ...}` literals and general
 bound dynamic calls remain `.11.7`.
 

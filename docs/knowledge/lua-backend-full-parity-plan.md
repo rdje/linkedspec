@@ -29,6 +29,7 @@ evidence_update_2026_07_15_automatic_function_parser: "LUA-BACKEND-PARITY.5.2.2 
 evidence_update_2026_07_15_native_spec_pipeline: "LUA-BACKEND-PARITY.5.2.3 adds typed LoadedCompiledSpec, exact neutral source-stage errors, and named/path-identified engines with loaded function execution at 153/153 on both ABIs; .5.2.4 is active."
 evidence_update_2026_07_15_native_loading_closeout: "LUA-BACKEND-PARITY.5.2.4 confirms exact source/API/test/public-doc/KM no-drift at 153/153, closes parent .5.2 without behavior change, and activates descriptors/full trace .5.3."
 evidence_update_2026_07_15_full_pipeline_trace: "LUA-BACKEND-PARITY.5.3.1 admits exact v1/v2/v3 descriptors; .5.3.2 passes one caller emitter through IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs with status native-full-pipeline-trace-v1; .5.3.3 is active."
+evidence_update_2026_07_15_descriptor_trace_closeout: "LUA-BACKEND-PARITY.5.3.3 closes exact descriptor/full-trace no-drift and parents .5.3/.5 without source/census change; controlled/core corpus .6.1 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -57,7 +58,7 @@ native in-memory module contract and exact behavior. LuaRocks and the common tes
 foundation time, so `.1.1` locked a reproducible repository-owned dependency/test/cache strategy. Automatic
 spec-owned top-level function-shell parsing and loaded-source identity/compile/engine composition are complete;
 native-loading no-drift, exact descriptors, and caller-owned full-pipeline trace are complete. Census-preserving
-no-drift `.5.3.3` is the current frontier.
+no-drift `.5.3.3` closes parents `.5.3`/`.5`; controlled/core corpus window `.6.1` is the current frontier.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],

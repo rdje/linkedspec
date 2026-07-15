@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.3.3` — implementation proof and census admission are separate boundaries):
+  Close descriptor/full-trace implementation when exact API/status/test/contract/book/KM surfaces agree, but do
+  not add Lua rows to the executable capability census early. The manifest is an all-pass admission surface, not
+  an incremental progress ledger; ADR `0041` therefore keeps its 16 capabilities at four-backend 64/0/0 until
+  `.8.4` can admit Lua after native, corpus, primary CLI, generated-source, and generated-subset proof all pass.
+  Current no-drift confirms caller-owned tracing and exact v1/v2/v3 descriptors at 155/155 on both Lua ABIs with
+  no source/status/behavior/test/manifest change, closes parents `.5.3`/`.5`, and hands off to corpus `.6.1`.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 611 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.3.2` — pass trace identity; do not retain trace state): The full native Lua
   pipeline uses one optional caller-created `LinkedSpecTraceEmitter` in existing options tables. Load options carry
   it through resolution and compile; inline parser/validator/compiler/function/staged APIs accept the same field;

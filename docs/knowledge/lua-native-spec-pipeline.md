@@ -38,7 +38,7 @@ three source-stage mappings on PUC Lua and LuaJIT at 153/153 with status `native
 `LUA-BACKEND-PARITY.5.2.4` then confirms exact source/export/test/public-doc/Knowledge-Map no-drift and closes the
 native-loading parent without changing this API, status, behavior, capability, or test count. Outward descriptors
 `.5.3.1` and full-pipeline trace `.5.3.2` are now complete; the same emitter is explicit in load, engine, and runtime
-options and is not retained. `.5.3.3` owns no-drift while the census remains unchanged.
+options and is not retained. `.5.3.3` closes no-drift while the census remains unchanged and activates `.6.1`.
 
 Related facts: [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
 [[lua-native-spec-loading-split]], [[native-spec-resolution-contract]],

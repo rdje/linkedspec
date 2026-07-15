@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.3.3 — close Lua descriptor trace no drift**
+  (DONE — parents `.5.3`/`.5` are closed; controlled/core corpus window `.6.1` is next).
+
+  **Result:** Exact exports/options/status, the governed fixed-v1/variadic-v2/final-codeblock-v3 descriptor union,
+  both neutral trace capabilities, focused dual-ABI tests, public docs/book, task/roadmap/live state, and Knowledge
+  Map agree. No hidden emitter construction, retained compiled/engine trace state, unowned seam, or stale current
+  claim remains. PUC Lua and LuaJIT pass 155/155; callable/loading/coverage/public checks pass; capability stays
+  four-backend 64/0/0 until `.8.4`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 611 seconds. No
+  source/status/behavior/test/manifest change; `.6.1` is active.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.3.2 — propagate Lua full-pipeline trace**
   (DONE — one caller-owned emitter crosses the complete native pipeline; no-drift `.5.3.3` is next).
 

@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua no-drift `.5.3.3` confirms exact agreement across trace-aware public exports/options,
+  `native-full-pipeline-trace-v1`, fixed-v1/variadic-v2/final-codeblock-v3 descriptor ownership, the two neutral
+  trace capability definitions, dual-ABI descriptor/full-pipeline tests, public docs/book, task/roadmap/live state,
+  and Knowledge Map. No hidden emitter construction or compiled/engine retention exists. PUC Lua and LuaJIT pass
+  155/155; callable/loading/coverage/public checks remain green; capability intentionally stays four-backend
+  64/0/0 until `.8.4`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 611 seconds. No source/status/
+  behavior/test/manifest change. Parents `.5.3`/`.5` close and corpus `.6.1` is active.
 - `2026-07-15` refresh: Lua full-pipeline trace `.5.3.2` threads one caller-owned emitter through typed load
   options, deterministic resolution/content loading, function-parser cache/build/execute, shell projection,
   rule parsing, validation, function registry/rule compilation, staged resolve/load/compile/execute/stitch,

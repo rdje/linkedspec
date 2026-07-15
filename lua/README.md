@@ -71,8 +71,9 @@ Full-pipeline trace `.5.3.2` then propagates one caller-owned emitter through na
 frontend/compiler/function/staged owner, engine construction, and runtime without retaining it or creating a
 hidden emitter. Ordered scopes/decisions, routed output, quiet and filtered levels, attributed balanced failures,
 and traced/untraced identity pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Lua remains
-outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`; `.5.3.3` is the next no-drift leaf and
-generated source stays later-owned.
+outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`. Exact no-drift `.5.3.3` closes parents
+`.5.3`/`.5` without changing source, status, behavior, tests, or the manifest; controlled/core corpus window `.6.1`
+is next and generated source stays later-owned.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -287,8 +288,9 @@ dispatcher without a raw scanner; the dual-ABI gate is 151/151 with status
 neutral parse/validate/compile failures, and named/path runtime-engine attribution; the dual-ABI gate is 153/153
 with status `native-spec-pipeline-v1`. Native-loading no-drift `.5.2.4` closes parent `.5.2`. Exact outward
 descriptors `.5.3.1` and caller-owned full-pipeline trace `.5.3.2` are now complete; the latter raises both suites
-to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` is active. Generated Lua
-preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
+to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` closes parents
+`.5.3`/`.5`; controlled/core corpus window `.6.1` is active. Generated Lua preservation/execution remains
+`.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
 Lua now executes `and`, `or`, and `not` as eager boolean value helpers: all authored arguments evaluate once

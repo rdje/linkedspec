@@ -157,4 +157,5 @@ parse errors, and staged-dispatch errors retain their staged-registry owner.
 to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(...)`, `compile_spec(...)`, and
 `runtime_engine(...)` directly; no CLI, subprocess, temporary file, or serialized handoff participates in either
 path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors are now current; one-emitter
-full-pipeline trace is current, and census-preserving no-drift `.5.3.3` is the next Lua owner.
+full-pipeline trace is current; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5`, and controlled/core
+corpus window `.6.1` is the next Lua owner.

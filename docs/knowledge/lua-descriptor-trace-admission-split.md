@@ -12,7 +12,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, descriptors, callable-signature, codeblock, trace, capability-census, task-tree, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.3.0 audits the contracts/fences/trace APIs/census history; .5.3.0.1/ADR 0041 adopt descriptor v3 and completion-time census admission; .5.3.1 implements the exact three-variant union and Lua emission; .5.3.2 completes one-emitter native-pipeline trace at 155/155 on both ABIs."
+evidence: "LUA-BACKEND-PARITY.5.3.0 audits the contracts/fences/trace APIs/census history; .5.3.0.1/ADR 0041 adopt descriptor v3 and completion-time census admission; .5.3.1 implements the exact three-variant union; .5.3.2 completes one-emitter trace at 155/155; .5.3.3 closes no-drift without census change."
 reverify: "python3 tools/check_callable_signature_contract.py && python3 tools/check_callable_codeblock_contract.py && bash tools/run_lua_local.sh && perl tools/check_capability_conformance.pl && rg -n 'function_record_variants|options.trace|Lua remains outside|expand the capability census' lua capability_conformance README.md docs/tasks/LUA-BACKEND-PARITY.md"
 ---
 
@@ -48,11 +48,12 @@ The resolved dependency order is:
 - `.5.3.0.1`: done; adopt descriptor v3 and completion-time census admission;
 - `.5.3.1`: done; executable union/checker plus exact Lua outward descriptors;
 - `.5.3.2`: done; propagate one emitter through the complete native pipeline;
-- `.5.3.3`: active; close no-drift while preserving the four-backend census;
+- `.5.3.3`: done; close no-drift and parents `.5.3`/`.5` while preserving the four-backend census;
+- `.6.1`: active; admit controlled/core and governed capability corpus windows;
 - `.8.4`: expand the census with all-pass Lua rows.
 
 No source, behavior, public status, emitted descriptor, capability row, or test expectation changes in `.5.3.0.1`.
 
 Related facts: [[lua-diagnostics-trace-boundary]], [[lua-variadic-v2-signature-state]],
 [[outward-function-descriptor-record-shape-drift]], [[trace-cross-variant-capability-contract]],
-[[backend-capability-census]], [[lua-native-full-pipeline-trace]].
+[[backend-capability-census]], [[lua-native-full-pipeline-trace]], [[lua-descriptor-trace-closeout]].

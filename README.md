@@ -131,7 +131,9 @@ This `README.md` is the **single entry point** to the project.
   function registry/shell, staged resolve/load/compile/execute/stitch, engine creation, and runtime. Exact ordered
   events, sinks, quiet/filtered paths, balanced attributed failures, no hidden emitter construction, and traced/
   untraced result identity pass 155/155 on PUC Lua and LuaJIT with status
-  `native-full-pipeline-trace-v1`. Capability remains 64/0/0; census-preserving no-drift `.5.3.3` is next.
+  `native-full-pipeline-trace-v1`. Census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5` with no
+  source/status/behavior/test/manifest change. Capability remains 64/0/0; controlled/core corpus window `.6.1`
+  is next.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

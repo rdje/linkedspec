@@ -292,7 +292,8 @@ function parsing `.5.2.2` then raise both suites to 151/151 and status `native-s
 loaded-source compile/engine composition `.5.2.3` then raises them to 153/153 and status
 `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2`; full loading/frontend/compiler/function/staged
 trace propagation `.5.3.2` then raises them to 155/155 and status
-`native-full-pipeline-trace-v1`; census-preserving no-drift `.5.3.3` follows.
+`native-full-pipeline-trace-v1`; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5` without behavior
+or manifest change, and controlled/core corpus window `.6.1` follows.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top
