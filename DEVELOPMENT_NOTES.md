@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.3` — optimize only a measured derivative): Keep three distinct tiers:
+  immediate dynamic construction, fingerprinted warm-state reuse, and an optional backend-native artifact. Feed
+  the third tier normalized effective compiled state, never backend-specific grammar shortcuts. Generated-source
+  v1 contributes identity/loadability/trace/equivalence foundations but is not evidence of specialization or
+  speed. Select one realistic backend/format only after profiling; include build/load cost and break-even workload;
+  retain the dynamic parser as oracle/fallback; and reject promotion on any AST/span/diagnostic/Unicode/recovery/
+  limit/trace drift. Compilation and artifact loading are explicit trusted operations. Keep this separate horizon
+  non-blocking for both the dynamic 91-format program and semantic backend parity; do not require Perl support.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.2` — make a dynamic parser explain both construction and execution): The
   existing level/sink/event contract is necessary but not enough for large generated parsers. Correlate spec-graph
   and cache identity through resolution, staging, validation, planning, compilation, and runtime. An exact ordered

@@ -8,7 +8,7 @@ answers:
   - "what corpus subset proves a new source emitter"
   - "what errors must generated-source APIs expose"
   - "how is generated-source conformance checked"
-date: 2026-07-11
+date: 2026-07-15
 status: current
 tags: [generated-source, contract, parity, codegen, conformance]
 evidence: "FUTURE-PARITY-BACKLOG.3.1.1 adds capability_conformance/generated_source_contract.json and tools/check_generated_source_contract.pl, wired into tools/run_ci_local.sh. The v1 contract fixes compiled-spec-plus-identity input, host source output, deterministic format/version/identity markers, execute and execute-with-trace roles, seven ordered pipeline stages, ten structural families, exact family-plan validation and four rejection codes, stable generated_source_error stages/fields/codes, one direct result/trace/identity fixture, the accepted eight-case manifest subset, the 105-case primary interpreter manifest, and live backend states. ADR 0023 still permits idiomatic host names and backend-native source syntax; source bytes are explicitly not required to match."
@@ -23,6 +23,7 @@ evidence_update_2026_07_11_dart_family_execution: "FUTURE-PARITY-BACKLOG.3.3.2 a
 evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.3 adds the exact Dart accepted-subset test path to the contract, consumes its eight names directly, proves interpreter expected values before emission, runs all emitted libraries in one isolated offline package with exact metadata/plans/trace identity, and passes complete 181/61x2/105 gates. Dart promotes at census 59/0/1."
 evidence_update_2026_07_11_julia_admission: "FUTURE-PARITY-BACKLOG.3.4.3 adds the exact Julia accepted-subset test path, consumes the eight contract names directly, proves interpreter expected values before emission, loads eight modules in one isolated offline host with exact metadata/plans/trace identity, and passes complete 1,168/61x2/105 gates. Julia promotes at census 60/0/0."
 evidence_update_2026_07_11_final_closeout: "FUTURE-PARITY-BACKLOG.3.5 rechecks all four focused generated-source proofs plus adjacent complete backend gates, confirms executable contract/capability 60/0/0, closes .3, and hands the complete v1 obligation to active Lua planning .1.3."
+evidence_update_2026_07_15_acceleration_horizon: "ADR 0038 and FUTURE-PARITY-BACKLOG.18.3 preserve v1 as the semantic portability foundation for any future native parser accelerator. Existing source wrappers and state reconstruction prove identity, loadability, trace roles, and oracle equivalence; they do not by themselves establish optimizing compilation or a speed advantage."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -49,6 +50,11 @@ generated-source test. Rust must additionally expand to all 105 interpreter
 fixtures under `.3.2`; new Dart and Julia emitters must prove the subset plus
 all generated families. The interpreter corpus remains the primary oracle.
 
+Generated-source v1 is deliberately a semantic contract, not an optimization claim. A future optional native
+accelerator may build on its normalized state, source identity, independent loading, trace roles, and dynamic-oracle
+comparison, but must separately prove specialized execution, exact equivalence, and an objective break-even benefit
+under ADR `0038`.
+
 The Perl/Rust v1 baseline is admitted under `.3.1.3.3`. Rust's separate
 full-manifest claim is admitted under `.3.2.2` through an unconditional,
 contract-checked 105/105 recurring test. Both backends now pass.
@@ -66,4 +72,5 @@ Related facts: [[generated-source-parity-audit]],
 [[rust-generated-source-v1-result-projection]],
 [[rust-generated-source-corpus-subset]],
 [[dart-generated-source-deferred]],
+[[optional-native-parser-acceleration]],
 [[user-observable-backend-cli-parity-contract]].

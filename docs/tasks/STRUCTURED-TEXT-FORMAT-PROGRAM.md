@@ -63,6 +63,9 @@ implement and prove it across Perl, Rust, Dart, Julia, and Lua, then resume that
     graph resolves, validates, stages, caches, and compiles as well as how the resulting parser enters rules,
     takes branches, moves through input, emits AST values, recovers, and diagnoses. Exact rule-label filters may
     focus emission but never alter parser construction or behavior. ADR `0037` governs the contract.
+12. **Acceleration stays derivative and optional.** A completed dynamic format parser may later seed a measured
+    backend-native accelerator, but the dynamic route remains primary, oracle, and fallback. Accelerator work has
+    its own non-blocking `NATIVE-PARSER-ACCELERATOR` tree under ADR `0038`; it cannot delay or redefine a format.
 
 ## Shared Leaf Acceptance
 
@@ -83,6 +86,14 @@ Every format leaf must:
   boundaries, and show that the resulting `.spec` is concise without hiding structure or weakening diagnostics;
 - publish user-facing examples and limitations in the mdBook; and
 - meet correctness-preserving benchmark/resource criteria before claiming `done`.
+
+## Optional Native Acceleration Horizon
+
+This program delivers dynamic parsers and does not require native acceleration for any row. After a realistic
+format parser is correct, observable, and measured, the separate `NATIVE-PARSER-ACCELERATOR` tree may select one
+backend/format experiment. Any resulting artifact must be derived from normalized compiled `.spec` state,
+fingerprinted and disposable, exactly equivalent for ASTs, spans, diagnostics, Unicode, recovery, limits, and
+trace, and objectively beneficial after build/load and break-even costs. Perl acceleration is not required.
 
 ## Task Tree
 
@@ -310,6 +321,8 @@ Every format leaf must:
   include evaluators, schema engines, renderers, or domain semantics.
 - `2026-07-15`: The composed format `.spec` graph is the sole parser source of truth. Backends dynamically compile
   it for immediate document use; generated host source and warm caches are fingerprinted derivatives only.
+- `2026-07-15`: ADR `0038` permits optional measured backend-native acceleration after dynamic completion. The
+  separate horizon neither blocks the 91-row program nor replaces the dynamic parser as oracle and fallback.
 
 ## Open Questions
 
@@ -330,6 +343,7 @@ Every format leaf must:
 | --- | --- | --- | --- |
 | `2026-07-15` | `.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR/task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — complete parity gate is explicit and no behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR/task/roadmap/index/live-doc/book/KM sync; exact uniform-binding precedent; recursive-traversal naming exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — authoring quality is governed without adding syntax, aliases, or behavior. |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR/task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — optional native acceleration is a separate derivative horizon; dynamic format work remains primary and unblocked. |
 
 ## Commit Log
 
@@ -337,8 +351,11 @@ Every format leaf must:
 | --- | --- | --- |
 | `.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR, exact 91-row decomposition, hard parity gate, roadmap/book/KM/live-doc synchronization. |
 | `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, authoring-quality invariant, uniform-binding precedent, and explicit retention of informative recursive names. |
+| `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, and a separate non-blocking horizon tree. |
 
 ## Changelog
 
 - `2026-07-15`: Created the parity-gated structured-text format program and exact catalog ownership map.
 - `2026-07-15`: Added ADR `0035`'s terse/readable/highly-expressive authoring constraint without changing behavior.
+- `2026-07-15`: Linked ADR `0038` and the optional non-blocking native-accelerator horizon without changing the
+  dynamic program or current behavior.

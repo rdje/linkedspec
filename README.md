@@ -120,6 +120,10 @@ This `README.md` is the **single entry point** to the project.
   resolution/staging/cache/compilation with runtime rule/branch/position/AST behavior, add exact emission-only
   rule-label filters, bound high-volume payloads, and prove traced/untraced identity across all current backends.
   Lua's current runtime trace is complete; its already-owned full native-pipeline propagation remains `.5.3`.
+  ADR `0038` adds a separate optional, non-blocking acceleration horizon after a realistic dynamic format parser
+  is correct and measured. Backend-native artifacts must remain fingerprinted disposable derivatives of normalized
+  `.spec` state, exactly equivalent and objectively faster after build/load and break-even costs; the dynamic
+  parser remains primary, oracle, and fallback, and Perl acceleration is not required.
   ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its

@@ -3531,7 +3531,8 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.18`
   Status: `proposed`
   Goal: Govern the post-current-backend-parity Unicode structured-text-to-AST format program.
-  Children: `.18.0`, `.18.1`, `.18.2`; detailed execution tree: `STRUCTURED-TEXT-FORMAT-PROGRAM`
+  Children: `.18.0`, `.18.1`, `.18.2`, `.18.3`; detailed execution trees:
+    `STRUCTURED-TEXT-FORMAT-PROGRAM`, `NATIVE-PARSER-ACCELERATOR`
   Acceptance: The agreed program is dependency-gated on complete Perl/Rust/Dart/Julia/Lua parity, enumerates every
     eligible catalog row, makes the dynamically compiled `.spec` graph the sole parser source, uses real formats
     as requirements evidence for reusable `.spec` features, forbids hidden host parsers, separates parsing from
@@ -3593,6 +3594,29 @@ before implementation.
     duplicated Julia bullet are removed. Memory architecture, Knowledge Map, doctrines, task metadata, mdBook,
     and whitespace checks pass; no parser/compiler/runtime/CLI/trace behavior changes.
   Commit: `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.3`
+  Status: `done`
+  Goal: Govern an optional backend-native acceleration tier derived from dynamic `.spec` parsers.
+  Dependencies: `.18.2`; implementation requires at least one completed dynamic format parser and objective
+    benchmark evidence.
+  Acceptance: Audit generated-source v1 before planning; preserve load-`foo.spec` immediate dynamic parsing as the
+    primary contract and sole source of truth; distinguish current semantic source wrappers from an optimizing
+    compiler; define native artifacts as fingerprinted disposable derivatives of normalized compiled IR; require
+    exact AST/diagnostic/Unicode/recovery/trace equivalence, source/rule correlation, safe trust/toolchain
+    boundaries, deterministic invalidation and dynamic fallback, correctness-preserving cold/warm/parse
+    benchmarks, backend-specific strategies without making acceleration a format-support or semantic-parity gate,
+    a separate detailed horizon tree, and roadmap/program/mdBook/Knowledge Map/live-doc synchronization without
+    changing current behavior.
+  Verification: **PASS 2026-07-15.** Knowledge Map-first generated-source audit confirms v1 already supplies
+    deterministic identity, normalized compiled state, independent host loading, portable trace roles, and
+    dynamic-oracle equivalence, but its current wrappers/state reconstruction make no optimizing-compiler or speed
+    claim. ADR `0038` and `NATIVE-PARSER-ACCELERATOR` preserve dynamic/warm/native tiers, the dynamic parser as
+    primary/oracle/fallback, exact behavioral/trace equivalence, complete fingerprint/invalidation, explicit
+    toolchain/trust boundaries, objective build/load/break-even proof, backend-specific internal strategies, and
+    optional Perl participation. Program/roadmap/index/live-doc/mdBook/Knowledge Map alignment and governance/
+    book/whitespace checks pass; no code, behavior, capability, format support, or benchmark claim changes.
+  Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
   Status: `proposed`
@@ -4657,6 +4681,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 180 | `FUTURE-PARITY-BACKLOG.5.1` | `pending` / dependency-gated | Align the discovered five-backend diagnostic-output semantics and routing drift after Lua parity. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / dependency-gated | Repair Perl logical lowering and align eager truthiness/arity across five backends. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
+| 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5298,6 +5323,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR 0038; separate native-accelerator tree; program/task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Dynamic parsing remains primary/oracle/fallback; any accelerator is optional, fingerprinted, equivalence-gated, trust-isolated, and measurement-admitted; no behavior or speed claim changed and Lua `.5.1.2` resumes. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.2` | Knowledge Map-first cross-variant trace/status audit; duplicate Dart trace-book root cause; ADR 0037; format-program `.2.7`; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Correlated compile/runtime trace and exact emission-only rule filters are future format-readiness requirements; stale Dart prose is removed; Lua `.5.3` remains the full-pipeline owner; no behavior changed and Lua `.5.1.2` resumes. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.9.1` | Shared eager logical evaluator; false-first `and`/true-first `or`/extra-argument `not`; exact side-effect order; empty false/false/true; governed zero/aggregate truthiness; boolean receiver continuation; Lua 123/123 on PUC Lua and LuaJIT; API/book/KM/task/live/roadmap/memory sync; governance/book/whitespace. | PASS. Lua's exact three-name gap is repaired without claiming cross-backend truthiness/arity/Perl-lowering normalization; exact recurring admission `.2` activates. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.9.0` | Knowledge Map retrieval; exact generated 246-name PUC Lua parse/compile/runtime probe; 230 handled/16 unsupported classification; interpreter/test/status/inventory source audit; LinkedSpec `call_spec_handler_subst` plus `Get` probes; Rust/Dart/Julia runtime-owner comparison; split/task/index/roadmap/book/KM/live sync; governance/book/whitespace. | PASS. Thirteen names are explicit structural/receiver-only surfaces; missing `and`/`or`/`not` move to `.1`; direct-call/status/exact recurring admission move to `.2`; Perl keyword-lowering normalization is dependency-gated `.5.2`. No behavior changed. |
@@ -5431,6 +5457,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, explicit trust/measurement gates, and non-blocking horizon tree. |
 | `FUTURE-PARITY-BACKLOG.18.2` | `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability` | ADR 0037, correlated construction/runtime trace, exact rule filters, bounded payloads, non-interference proof, and Dart doc-drift repair. |
 | `LUA-BACKEND-PARITY.4.3.9.1` | `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers` | Eager ordered booleans, empty false/false/true, governed truthiness, and 123/123 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.9.0` | `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout` | Exact 230/16/13/3 partition, logical repair, admission split, and Perl-lowering `.5.2` routing. |
@@ -5584,6 +5611,12 @@ Read-only evidence recorded on 2026-07-10:
   marker forms. PUC Lua/LuaJIT pass 121/121; complete-mark, coverage 246/105+1/122, selector 57/27/0,
   punctuation-light, and capability 64/0/0 gates pass. Parent `.4.3.7` closes, generated Lua stays `.8.1-.8.4`,
   and diagnostic output `.4.3.8` activates without behavior change.
+- `2026-07-15`: `.18.3` adopts ADR `0038` and creates `NATIVE-PARSER-ACCELERATOR` as a separate non-blocking
+  horizon. Dynamic load-`.spec` parsing remains primary, oracle, and fallback. Generated-source v1 supplies
+  semantic foundations but no optimization claim; any later artifact needs normalized-IR derivation, full
+  fingerprint/invalidation, exact behavior/trace equivalence, explicit toolchain/trust isolation, and objective
+  build/load/break-even benefit. Backend strategies may differ and Perl acceleration is optional. No behavior,
+  capability, format support, or benchmark claim changed; Lua `.5.1.2` resumes.
 - `2026-07-15`: `.18.2` adopts ADR `0037`: future dynamic format parsers must correlate `.spec` graph loading,
   staging, validation, cache/planning, and compilation with rule/branch/position/AST/recovery runtime behavior.
   Exact ordered rule-label allowlists filter emission only, unknown labels fail before work, payloads are bounded,

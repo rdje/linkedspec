@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.1.1` — deterministic staged ActionIR-body dispatch and stitching.
-- latest_commit: `ded8654a` — `LUA-BACKEND-PARITY.5.1.1 - add Lua staged body dispatch`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability`.
-- active_work_unit: planning-only `.18.2` is fully aligned and verified; its prepared commit remains before the
-  clean return to Lua fixed-v1 runtime `.5.1.2`.
-- next_action: commit/clean `.18.2`, record the director's optional native-accelerator horizon in a separate
-  planning leaf, commit/clean it, then resume Lua registered fixed-v1 runtime `.5.1.2`.
-- current_proof: ADR `0037` and format-program `.2.7` require correlated construction/runtime trace, exact
-  emission-only rule filters, bounded payloads, stable identity, and shared traced/untraced cross-backend proof.
-  Existing six levels/sinks remain. Dart/Julia full pipeline is confirmed; stale Dart book drift is removed; Lua
-  runtime trace is complete while `.5.3` retains full native-pipeline propagation. Knowledge Map, task metadata,
-  doctrines, mdBook, memory architecture, and whitespace pass. No behavior changes.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.2` — selective end-to-end parser observability governance.
+- latest_commit: `bb9c07f0` — `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`.
+- active_work_unit: planning-only `.18.3` is fully aligned and awaits verification/commit before the clean return
+  to Lua fixed-v1 runtime `.5.1.2`.
+- next_action: verify/commit/clean `.18.3`, then open a separate task-tree leaf to assess targeted Rust
+  `cargo-mutants` adoption before resuming Lua registered fixed-v1 runtime `.5.1.2`.
+- current_proof: ADR `0038` and `NATIVE-PARSER-ACCELERATOR` preserve immediate dynamic parsing as primary,
+  oracle, and fallback. Generated-source v1 is a semantic foundation, not a speed claim. Any later native artifact
+  must be a fingerprinted normalized-IR derivative with exact AST/diagnostic/Unicode/recovery/trace equivalence,
+  explicit toolchain/trust boundaries, and objective build/load/break-even benefit. The horizon is non-blocking,
+  backend-specific internally, and optional for Perl. No behavior, format support, or performance claim changes.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.18.2` planning/docs/ADR/KM plus the stale Dart trace-book repair are
-  verified and await their prepared commit; no code or runtime behavior changed.
+- blockers: none. in_flight_uncommitted: `.18.3` planning/docs/ADR/task/KM/book alignment awaits gates and its
+  prepared commit; no code or runtime behavior changed.

@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.18.3 — plan optional native parser acceleration**
+  (DONE — planning contract only; Lua fixed-v1 runtime `.5.1.2` resumes next).
+
+  **Result:** ADR `0038` and `NATIVE-PARSER-ACCELERATOR` preserve load-`.spec` dynamic parsing as primary, oracle,
+  and fallback while governing a later optional backend-native derivative. Generated-source v1 is the semantic
+  foundation, not a speed claim. Exact behavior/trace equivalence, full fingerprint/invalidation, explicit
+  toolchain/trust boundaries, and objective build/load/break-even benefit are mandatory. The horizon is
+  non-blocking for the 91-format program and semantic parity; Perl acceleration is optional. No behavior changed.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.18.2 — govern selective parser observability**
   (DONE — planning contract only; Lua fixed-v1 runtime `.5.1.2` resumes next).
 

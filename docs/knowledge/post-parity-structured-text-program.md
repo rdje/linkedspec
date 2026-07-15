@@ -16,12 +16,15 @@ answers:
   - how will structured text parsers prove Unicode accuracy and speed
   - must dynamic format parsers trace construction and runtime execution
   - can a structured text parser trace selected rules only
+  - may a dynamic spec parser have an optional backend native accelerator
+  - does native acceleration replace the dynamic spec parser
   - are binary formats and packaged containers in the structured text program
 date: 2026-07-15
 status: current
 tags: [roadmap, formats, parser, ast, unicode, performance, conformance, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director/engineer agreement on 2026-07-15; ADR 0034; FUTURE-PARITY-BACKLOG.18.0; exact 91-row ownership in docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md; public architecture chapter architecture/structured-format-program.md. No parser/compiler/runtime behavior or format implementation changes in the ratification slice."
 evidence_update_2026_07_15_observability: "ADR 0037 and FUTURE-PARITY-BACKLOG.18.2 make correlated compile/runtime trace, exact emission-only rule filters, bounded payloads, and traced/untraced parity proof a future readiness contract under STRUCTURED-TEXT-FORMAT-PROGRAM.2.7."
+evidence_update_2026_07_15_native_acceleration: "ADR 0038, FUTURE-PARITY-BACKLOG.18.3, and NATIVE-PARSER-ACCELERATOR govern an optional measured backend-native derivative after a dynamic format parser is correct. The dynamic parser remains primary, oracle, and fallback; the acceleration horizon is separate and non-blocking for the 91-format program."
 reverify: "rg -n '91|Parity first|Formats drive general features|HTML is not XML|Parsing scope stays honest' docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md docs/decisions/0034-post-parity-structured-text-requirements-program.md docs/linkedspec-book/src/architecture/structured-format-program.md"
 ---
 
@@ -57,9 +60,16 @@ through its normal API. An exact rule-label filter focuses emitted events withou
 fixtures prove traced/untraced identity. The executable contract remains parity-gated under
 `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7`.
 
+ADR `0038` permits a later optional backend-native acceleration tier only after a realistic dynamic format parser
+is complete and measured. Such an artifact is a fingerprinted disposable derivative of normalized compiled state,
+must preserve the complete AST/diagnostic/Unicode/recovery/trace contract, and must demonstrate an objective
+benefit including build/load and break-even costs. The dynamic parser remains the always-available primary path,
+oracle, and fallback. This separate horizon does not block format completion or require acceleration on Perl.
+
 ## Links
 
-- Decisions: ADRs `0034` and `0037`.
+- Decisions: ADRs `0034`, `0037`, and `0038`.
 - Parent owner: [[FUTURE-PARITY-BACKLOG]] `.18.0`.
 - Detailed execution tree: [[STRUCTURED-TEXT-FORMAT-PROGRAM]].
+- Optional non-blocking acceleration tree: [[NATIVE-PARSER-ACCELERATOR]].
 - Existing doctrines: ADRs `0011`, `0012`, `0016`, `0023`, `0025`, and `0026`.

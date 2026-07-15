@@ -48,6 +48,7 @@ changed* lives in git (layer D), not here.
 | [0035](0035-terse-readable-expressive-spec-authoring.md) | Universal `.spec` authoring is terse, readable, and highly expressive | 2026-07-15 | accepted | dsl, language-evolution, authoring, terseness, readability, expressiveness, composition, diagnostics |
 | [0036](0036-write-vivification-and-receiver-mutation.md) | Nested creation is write-only and `!` denotes explicit receiver mutation | 2026-07-15 | accepted direction; implementation pending | dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability |
 | [0037](0037-selective-end-to-end-parser-observability.md) | Dynamic parser construction and execution are selectively observable | 2026-07-15 | accepted direction; implementation pending | architecture, trace, observability, compiler, runtime, parser, staged-parsing, formats, portability |
+| [0038](0038-optional-native-parser-acceleration.md) | Native parser acceleration is an optional derivative tier | 2026-07-15 | accepted horizon; implementation pending | architecture, parser, codegen, native, performance, generated-source, formats, portability |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

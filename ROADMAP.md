@@ -894,6 +894,12 @@ focus emission only; they never change resolution, compilation, execution, recov
 or values. `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the neutral filters, bounded payload policy, `off` alias, and
 five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace remains `.5.3`.
 
+Optional native-acceleration note (2026-07-15, `FUTURE-PARITY-BACKLOG.18.3` / ADR `0038`): after a realistic
+dynamic format parser is correct and measured, a backend may derive a fingerprinted native artifact from normalized
+compiled `.spec` state. The dynamic parser remains primary, oracle, and fallback; exact AST/diagnostic/Unicode/
+recovery/trace equivalence and objective build/load/break-even benefit are mandatory. The separate
+`NATIVE-PARSER-ACCELERATOR` horizon is non-blocking for the 91-format program and does not require Perl support.
+
 Write-vivification/mutation note (2026-07-15, `FUTURE-PARITY-BACKLOG.19.0` / ADR `0036`): after complete current
 backend parity, neutral contracts may add write-only creation of unambiguous missing path containers and an
 explicit receiver-mutating `map_leaves!`. Reads never create state, wrong-kind values are never coerced, arrays

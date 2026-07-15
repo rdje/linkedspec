@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.3 — plan optional native parser acceleration
+
+ADR `0038` and `NATIVE-PARSER-ACCELERATOR` establish an optional, non-blocking performance horizon after a
+realistic dynamic `.spec` format parser is correct, observable, and measured. Immediate dynamic construction
+remains the primary product contract, correctness oracle, and fallback; warm state and backend-native artifacts
+are fingerprinted disposable derivatives of the same normalized compiled semantics.
+
+Generated-source v1 is recorded as the semantic foundation, not an optimizing-compiler or speed claim. Any later
+accelerator must prove exact AST/span/diagnostic/Unicode/recovery/limit/trace equivalence, `.spec`-rule source
+correlation, deterministic invalidation, isolated explicit toolchain/trust boundaries, and objective cold/warm/
+build/load/steady-state/resource/break-even benefit. Backend strategies may differ internally; acceleration is not
+a format-support or parity gate, and Perl acceleration is not required. No current behavior or performance claim
+changed.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.2 — govern selective parser observability
 
 ADR `0037` makes end-to-end observability a readiness contract for the post-parity structured-format program.

@@ -76,6 +76,12 @@ format-readiness constraint. Existing levels and sinks remain; exact rule-label 
 high-volume payloads are bounded/redactable, and `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the shared
 five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace remains `.5.3`.
 
+ADR `0038` / `FUTURE-PARITY-BACKLOG.18.3` govern a separate optional native-acceleration horizon. Only after a
+realistic dynamic format parser is correct and measured may a backend derive a fingerprinted artifact from
+normalized compiled `.spec` state. Exact semantic/Unicode/diagnostic/recovery/trace equivalence and objective
+build/load/break-even benefit are mandatory; the dynamic parser stays primary/oracle/fallback, the horizon does
+not block the 91-format program, and Perl acceleration is not required.
+
 ADR `0036` / `FUTURE-PARITY-BACKLOG.19` own the separate future mutation direction after complete current-backend
 parity. Nested writes may create a missing root/intermediate only when the next evaluated segment unambiguously
 selects array or harray; reads remain pure, existing wrong-kind values are not coerced, and arrays do not gain

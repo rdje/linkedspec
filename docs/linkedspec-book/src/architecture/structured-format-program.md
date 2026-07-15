@@ -24,6 +24,23 @@ The standards and external conformance suites remain the correctness oracles. Th
 the `.spec` graph is the single parser implementation that must satisfy them on every backend. Performance proof
 therefore measures three distinct paths: cold dynamic parser construction, warm cache reuse, and document parsing.
 
+## Optional native acceleration
+
+After a realistic dynamic format parser is complete and measured, LinkedSpec may optionally derive a faster
+backend-native artifact from its normalized compiled state. This is a third deployment tier after immediate
+dynamic construction and warm cache reuse, not a replacement parser. Loading `foo.spec` must still produce a
+usable parser without a native compiler or prebuilt artifact, and the dynamic route remains the correctness oracle
+and fallback.
+
+Generated-source v1 supplies important foundations—deterministic identity, independently loadable host source,
+normalized state, trace roles, and interpreter-first equivalence—but does not itself claim optimizing compilation
+or higher speed. A native accelerator must separately match ASTs, spans, diagnostics, Unicode behavior, recovery,
+limits, and trace semantics; correlate compile/runtime behavior back to `.spec` rules; use complete deterministic
+fingerprints and invalidation; isolate explicit toolchain/trust boundaries; and demonstrate an objective benefit
+including build/load and break-even costs. Strategies may differ internally by backend. Acceleration is not a
+format-support or semantic-parity requirement, and Perl need not provide it. ADR `0038` and the separate
+`NATIVE-PARSER-ACCELERATOR` task tree govern this non-blocking horizon.
+
 ## Observe what was built and what ran
 
 A dynamic parser must be explainable from its first `.spec` load through its final AST. The normal native API must
