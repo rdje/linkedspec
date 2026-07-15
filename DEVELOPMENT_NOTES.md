@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.8` — diagnostic output is an event, never parser data): Evaluate every
+  valid helper argument once left-to-right before emission, then synchronously deliver typed helper/rule/message
+  events through a per-parse caller callback. A missing sink suppresses delivery, not evaluation. Keep messages
+  out of accumulators and parse-result values; preserve Unicode bytes and call/item order; leave `exit_now` as
+  immediate typed control. Lua follows the current Perl reference arity and prefix/optional-suffix formatting so
+  this backend slice does not invent a sixth contract. The source audit nevertheless found a real four-existing-
+  backend disagreement: Rust bypasses prefix/suffix through stderr lines, Dart discards after evaluation, and
+  Julia's omitted suffix adds a newline while Perl writes through host output. Route the neutral transport/
+  formatting decision to `FUTURE-PARITY-BACKLOG.5.1`; do not mislabel Lua closure as five-backend parity. Both Lua
+  ABIs pass 122/122, and exhaustive helper no-drift `.4.3.9` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.6` — close families from exact sources, not a green count alone): The
   capture/cursor parent has 62 unique current call names across capture/mark, input/cursor, and explicit cursor
   control families. Compare contract classification to runtime dispatch and focused execution sources; all three

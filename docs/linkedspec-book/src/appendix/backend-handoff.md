@@ -736,7 +736,12 @@ capture/cursor no-drift `.4.3.7.6` derives 62 unique capture/mark/input/cursor/c
 agreement across contracts, interpreter dispatch, and focused execution sources. Together with the four exact
 placement-marker spellings, the parent closes at 121/121 on PUC Lua and LuaJIT. Native capture/cursor parity does
 not imply generated Lua support: compiled-state preservation, direct generated execution, subset admission, and
-capability closeout remain `.8.1-.8.4`. Diagnostic output helper `.4.3.8` is next.
+capability closeout remain `.8.1-.8.4`. Diagnostic output `.4.3.8` now adds a per-parse `diagnostic_sink` callback
+and typed `RuntimeDiagnosticOutputEvent` records carrying helper, rule, and exact message text. `print`, `say`, and
+`print_each` evaluate once left-to-right, preserve Unicode/order, stay out of parse values, and remain quiet
+without a sink; immediate typed `exit_now` is unchanged. PUC Lua and LuaJIT pass 122/122, and exhaustive helper
+no-drift `.4.3.9` is next. The implementation audit also records pre-existing Perl/Rust/Dart/Julia transport and
+formatting differences under `FUTURE-PARITY-BACKLOG.5.1`; Lua's closure is not a false five-backend parity claim.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

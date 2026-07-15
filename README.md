@@ -83,7 +83,11 @@ This `README.md` is the **single entry point** to the project.
   the anonymous/named overload split. Lua `.4.3.7.4` now compiles split/named-mark rule members into typed
   preceding-slot events and executes them after that slot's actions at 121/121 on PUC Lua and LuaJIT;
   exhaustive `.4.3.7.6` proves exact 62/62 call agreement across contracts/runtime/focused execution sources plus
-  four placement-marker spellings, closes parent `.4.3.7`, and activates diagnostic output helper `.4.3.8`.
+  four placement-marker spellings and closes parent `.4.3.7`. Lua `.4.3.8` now evaluates `print`/`say`/
+  `print_each` eagerly and delivers ordered Unicode-safe typed events through a per-parse caller-owned sink while
+  staying quiet by default and preserving parse values; both ABIs pass 122/122 and exhaustive helper no-drift
+  `.4.3.9` is active. The audit exposed existing cross-backend diagnostic-output drift, now owned by
+  `FUTURE-PARITY-BACKLOG.5.1` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured

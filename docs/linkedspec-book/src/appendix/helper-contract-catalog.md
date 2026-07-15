@@ -828,10 +828,12 @@ dispatch rule.
 - **Example**: after `set(items, ["a", "bC"])`, `return(items.uppercase_each())`
   yields `[["A","BC"]]`.
 
-### `print_each(arr)`
-- **Signature**: `print_each(arr: array)`
+### `print_each(arr, prefix, suffix?)`
+- **Signature**: `print_each(arr: array, prefix: scalar, suffix?: scalar)`
 - **Returns**: void
-- **Behavior**: Debug helper — prints each element to the trace/output channel. No return value.
+- **Behavior**: Debug helper — eagerly emits `prefix + item + suffix` for each element in order. The omitted
+  suffix is empty text in the Perl reference contract. No message enters the parser result. Current backend
+  routing/default-suffix drift remains explicitly owned by `FUTURE-PARITY-BACKLOG.5.1`.
 
 ## 4. Hash Helpers
 

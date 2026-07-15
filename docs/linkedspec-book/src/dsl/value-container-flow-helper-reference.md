@@ -1377,9 +1377,9 @@ no-op, and Dart/Julia propagate it to rule repetition. `FUTURE-PARITY-BACKLOG.5`
 
 | Helper | Effect |
 | --- | --- |
-| `say(value, ...)` | print values with a trailing newline. |
-| `print(value, ...)` | print values without adding a newline. |
-| `print_each(target, prefix, suffix?)` | print each item in an array with optional text before and after it. |
+| `say(value, ...)` | concatenate one or more values and add one trailing newline. |
+| `print(value, ...)` | concatenate one or more values without adding a newline. |
+| `print_each(target, prefix, suffix?)` | emit `prefix + item + suffix` for every array item; omitted suffix is empty text. |
 
 Examples:
 
@@ -1390,6 +1390,18 @@ print_each(matches, "match:<<", ">>\n")
 ```
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
+
+These helpers evaluate arguments once from left to right, return no parser value, and must not add diagnostic
+messages to a rule accumulator or parse-result output. Output routing is caller-owned and quiet by default in the
+typed runtime design. Lua implements that boundary as
+`runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`; each synchronous
+`RuntimeDiagnosticOutputEvent` carries `helper_name`, `rule_label`, and exact Unicode `message` text.
+
+Current backend routing is not yet fully aligned: Perl still lowers to host output, Rust writes direct stderr
+lines and does not honor authored `print_each` prefix/suffix, Dart evaluates without emitting, and Julia routes
+through trace but gives an omitted suffix a newline. Lua uses typed events and Perl-reference formatting.
+`FUTURE-PARITY-BACKLOG.5.1` owns the exact five-backend normalization; portable diagnostics should therefore
+supply an explicit `print_each` suffix until that leaf closes.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:

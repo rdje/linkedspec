@@ -895,6 +895,13 @@ remain dense, receiver commit is atomic, callback paths stay complete/stable, an
 than aliased. `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary bang identifiers are
 excluded. `.19.1-.19.7` own contracts, five backends, and admission; no current behavior changes in `.19.0`.
 
+Diagnostic-output parity note (2026-07-15, `LUA-BACKEND-PARITY.4.3.8`): Lua now evaluates `print`/`say`/
+`print_each` eagerly and delivers typed ordered Unicode events through an optional per-parse caller sink while
+remaining quiet and parse-result neutral by default. PUC Lua and LuaJIT pass 122/122; exhaustive Lua helper
+no-drift `.4.3.9` is active. The implementation audit found existing Perl/Rust/Dart/Julia transport and
+`print_each` formatting drift; dependency-gated `FUTURE-PARITY-BACKLOG.5.1` owns one neutral five-backend contract
+before the structured-format program may execute.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

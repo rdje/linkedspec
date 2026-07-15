@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.8 — add Lua diagnostic output events**
+  (DONE — typed caller-owned events pass 122/122; exhaustive helper no-drift `.4.3.9` is next).
+
+  **Result:** `print`/`say`/`print_each` now evaluate once left-to-right and synchronously deliver ordered Unicode
+  helper/rule/message events through an optional per-parse sink. Default execution remains quiet, parse values are
+  unchanged, invalid sink/arity is typed, and `exit_now` remains immediate. PUC Lua and LuaJIT pass 122/122. The
+  canonical gate passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 611 seconds.
+  The audit found existing Perl/Rust/Dart/Julia output drift and records dependency-gated normalization `.5.1`
+  before structured-format execution.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.6 — close Lua capture cursor parity**
   (DONE — parent `.4.3.7` closed; diagnostic output helper `.4.3.8` is next).
 

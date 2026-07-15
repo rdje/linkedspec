@@ -78,6 +78,12 @@ implicit null-filled gaps. `map_leaves!` is the sole v1 bang candidate: it atomi
 after successful original-shape/root-kind traversal and returns the updated value. Callback `path` remains the
 complete stable receiver-root-relative path and `value` is not an alias. Other bang spellings remain excluded.
 
+Lua diagnostic output `.4.3.8` is also complete: an optional per-parse caller sink receives typed ordered Unicode
+events, default execution stays quiet and parse-result neutral, `exit_now` remains immediate, and both Lua ABIs
+pass 122/122. Exhaustive helper no-drift `.4.3.9` is active. The audit found pre-existing Perl/Rust/Dart/Julia
+transport and formatting drift; `FUTURE-PARITY-BACKLOG.5.1` is the dependency-gated five-backend normalization
+owner before any structured-format execution.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

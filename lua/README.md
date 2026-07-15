@@ -103,8 +103,12 @@ the same anonymous boundary and named-mark store; same-slot action reads therefo
 see the update. Native and serialized-source Unicode timing, the checked-in EBNF `@move_pos`, and malformed-marker
 diagnostics pass 121/121 on PUC Lua and LuaJIT. Exhaustive `.4.3.7.6` derives 62 unique current capture/mark/input/
 cursor/control calls and proves exact agreement across contracts, interpreter dispatch, and focused execution
-sources, plus four placement-marker spellings. Parent `.4.3.7` is closed and diagnostic output helper `.4.3.8` is
-next. This is native interpreter parity only; generated Lua preservation/execution remains `.8.1-.8.4`.
+sources, plus four placement-marker spellings. Parent `.4.3.7` is closed. `.4.3.8` now evaluates diagnostic
+`print`/`say`/`print_each` arguments once left-to-right and delivers ordered Unicode-safe typed events through an
+optional per-parse caller sink. With no sink it stays quiet; events never alter parse values; `exit_now` remains
+immediate typed control. Both ABIs pass 122/122 and exhaustive helper no-drift `.4.3.9` is next. This is native
+interpreter parity only; generated Lua preservation/execution remains `.8.1-.8.4`. Cross-backend output routing
+and formatting normalization is separately owned by `FUTURE-PARITY-BACKLOG.5.1`.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
@@ -401,6 +405,25 @@ assert(result.output[1] == "child")
 assert(result.cursor_code_unit == 2)
 ```
 
+Diagnostic helpers are opt-in at the embedding boundary:
+
+```lua
+local events = {}
+local result = linkedspec.runtime_parse(engine, "ab", {
+  diagnostic_sink = function(event)
+    events[#events + 1] = event
+  end,
+})
+
+-- RuntimeDiagnosticOutputEvent fields are helper_name, rule_label, and message.
+assert(linkedspec.interpreter.node_type(events[1]) == "RuntimeDiagnosticOutputEvent")
+```
+
+`print(value, ...)` concatenates eager scalar-text values; `say(value, ...)` adds one newline;
+`print_each(array, prefix[, suffix])` emits one event per item, with an empty default suffix. The callback runs
+synchronously in message order. Omit `diagnostic_sink` for quiet execution; helper arguments still evaluate and
+`result.value` / `result.output` stay structural. A non-function sink is a typed runtime boundary error.
+
 `runtime_parse(...)` and its `runtime_execute(...)` alias execute default,
 AND, OR, single, optional, plus/star, and bounded families. Action and blind
 edges dispatch children through `retv`; lifecycle payloads run in applicable
@@ -419,9 +442,8 @@ mechanism; `.2.2.1` supplies helper-regex values, flags, and `matches`; `.2.2.2`
 supplies scalar substitution; `.2.2.4` supplies explicit array split replacement; `.2.2.5` closes focused/public
 no-drift and routes broader shipped proof to phase 6; `.3`
 numeric; `.4` arrays; `.5` harrays; `.6` eager codeblocks/controls/contextual built-in blocks/
-tree callbacks (split into `.0` audit, `.1` eager values, `.2` inline controls, `.3` statement controls, completed
-`.4` current built-ins/`with`, active `.5` callbacks, and `.6` closeout); `.7` capture/mark/input/cursor state; `.8` diagnostic output;
-and `.9` exhaustive no-drift. A broad leaf may split again before code if its
+tree callbacks; `.7` capture/mark/input/cursor state; and `.8` diagnostic output are complete; `.9` exhaustive
+no-drift is active. A broad leaf may split again before code if its
 mechanism cannot remain signoff-sized.
 
 Runtime values have exactly four public kinds: `scalar`, `array`, `harray`, and

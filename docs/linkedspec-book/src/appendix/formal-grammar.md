@@ -725,7 +725,7 @@ filter_match(arr, /re/) — keep elements matching regex
 uniq(arr)               — remove duplicates
 lowercase_each(arr)     — lowercase each element
 uppercase_each(arr)     — uppercase each element
-print_each(arr)         — debug output each element
+print_each(arr, prefix[, suffix]) — debug output each element with explicit prefix and optional suffix
 ```
 
 ### 7.4 Hash Helpers

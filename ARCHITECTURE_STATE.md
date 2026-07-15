@@ -5,13 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua diagnostic output is a synchronous caller-owned event boundary, not parser data.
+  `runtime_parse(..., { diagnostic_sink = callback })` emits typed helper/rule/message records for eager
+  `print`/`say`/`print_each`; missing sinks stay quiet without skipping side effects, Unicode bytes and message
+  order are preserved, and `RuntimeParseResult` remains structural. `exit_now` remains an immediate typed failure.
+  PUC Lua and LuaJIT pass 122/122 and `.4.3.9` is active. The source audit found Perl/Rust/Dart/Julia transport and
+  optional-suffix drift, durably routed to `FUTURE-PARITY-BACKLOG.5.1` before structured-format execution.
 - `2026-07-15` refresh: Lua native capture/cursor parity is closed. A source-derived inventory finds 62 unique
   current capture/mark/input/cursor/control calls and exact 62/62 agreement across ActionIR contract family,
   admitted names, interpreter dispatch, and focused execution sources. Four placement-marker spellings remain
   separately timing-tested through typed post-action/pre-`LE` events. PUC Lua and LuaJIT pass 121/121; complete-
   mark, 246/105+1/122 coverage, selector 57/27/0, punctuation-light, and capability 64/0/0 gates pass. Parent
-  `.4.3.7` closes without generated-source claims; `.8.1-.8.4` retain those obligations and diagnostic output
-  helper `.4.3.8` is the active Lua frontier.
+  `.4.3.7` closes without generated-source claims; `.8.1-.8.4` retain those obligations. That closure activated
+  diagnostic output `.4.3.8`, which is now complete as described above.
 - `2026-07-15` refresh: ADR `0036` adopts a post-current-parity direction for write-only missing-container
   creation and explicit receiver-mutating `map_leaves!`. The next evaluated segment selects a missing array versus
   harray; reads remain pure, existing wrong kinds are never coerced, arrays remain dense, and copy-on-write root

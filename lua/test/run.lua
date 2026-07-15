@@ -2009,6 +2009,96 @@ Top::
   assert_equal(exit_error.status, 7, "exit_now status")
 end)
 
+test("runtime diagnostic output is eager ordered Unicode-safe and caller-owned", function()
+  local function assert_same_json(actual, expected, label)
+    assert_equal(json.encode(actual), json.encode(expected), label)
+  end
+  local source = [[
+Top::
+ /x/
+ E {
+   seen = []
+   items = ["α", false, undef, "🙂"]
+   print({ push(seen, "print-left"); return("pré") }, { push(seen, "print-right"); return("🙂") })
+   say({ push(seen, "say"); return(" ligne") })
+   print_each(
+     { push(seen, "items"); return(items) },
+     { push(seen, "prefix"); return("élément:") },
+     { push(seen, "suffix"); return("!") }
+   )
+   print_each(items, "raw:")
+   return(copy(seen))
+ }
+]]
+  local engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source)))
+  local events = {}
+  local result = linkedspec.runtime_parse(engine, "x", {
+    diagnostic_sink = function(event) events[#events + 1] = event end,
+  })
+
+  assert_same_json(result.value, json.decode(
+    '["print-left","print-right","say","items","prefix","suffix"]'
+  ), "diagnostic arguments evaluate once from left to right")
+  assert_same_json(result.output, json.array({ result.value }), "diagnostics stay out of parse output")
+  assert_equal(#events, 10, "one ordered event per print/say or print_each item")
+  local expected = {
+    { "print", "pré🙂" },
+    { "say", " ligne\n" },
+    { "print_each", "élément:α!" },
+    { "print_each", "élément:0!" },
+    { "print_each", "élément:!" },
+    { "print_each", "élément:🙂!" },
+    { "print_each", "raw:α" },
+    { "print_each", "raw:0" },
+    { "print_each", "raw:" },
+    { "print_each", "raw:🙂" },
+  }
+  for index, expected_event in ipairs(expected) do
+    local event = events[index]
+    assert_equal(linkedspec.interpreter.node_type(event), "RuntimeDiagnosticOutputEvent", "event type " .. index)
+    assert_equal(event.helper_name, expected_event[1], "event helper " .. index)
+    assert_equal(event.rule_label, "Top", "event rule " .. index)
+    assert_equal(event.message, expected_event[2], "event message " .. index)
+  end
+  assert_equal(
+    json.decode(json.encode(linkedspec.interpreter.to_json(events[1]))).message,
+    "pré🙂",
+    "event JSON"
+  )
+
+  local quiet = linkedspec.runtime_parse(engine, "x")
+  assert_same_json(quiet.value, result.value, "missing sink stays quiet without skipping evaluation")
+  assert_same_json(quiet.output, result.output, "missing sink preserves structural parse output")
+
+  assert_error_contains(function()
+    linkedspec.runtime_parse(engine, "x", { diagnostic_sink = {} })
+  end, "diagnostic_sink must be a function", "invalid diagnostic sink")
+
+  local invalid_arity = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ E { print_each(["x"]); return("unreachable") }
+]])))
+  assert_error_contains(function()
+    linkedspec.runtime_parse(invalid_arity, "x", { diagnostic_sink = function() end })
+  end, "helper 'print_each' expects 2 or 3 positional arguments", "print_each arity")
+
+  local exit_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ E { say("before"); exit_now(23); say("after") }
+]])))
+  local exit_events = {}
+  local exit_ok, exit_error = pcall(linkedspec.runtime_parse, exit_engine, "x", {
+    diagnostic_sink = function(event) exit_events[#exit_events + 1] = event end,
+  })
+  assert_equal(exit_ok, false, "exit_now still terminates immediately")
+  assert_equal(linkedspec.is_runtime_interpreter_error(exit_error), true, "exit_now remains typed")
+  assert_equal(exit_error.status, 23, "exit_now retains status")
+  assert_equal(#exit_events, 1, "post-exit output is not evaluated")
+  assert_equal(exit_events[1].message, "before\n", "pre-exit event is delivered")
+end)
+
 test("runtime core stores snapshots and checked access preserve typed values", function()
   local source = [[
 Top::

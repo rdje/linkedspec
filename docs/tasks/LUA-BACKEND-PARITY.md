@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (capture/cursor parent `.4.3.7` closes through exhaustive 62-call/four-marker
-  no-drift at 121/121 on PUC Lua and LuaJIT; diagnostic output helper `.4.3.8` is the active executable frontier)
+- Last updated: `2026-07-15` (caller-owned diagnostic output events pass 122/122 on PUC Lua and LuaJIT;
+  exhaustive helper/value/control/method no-drift `.4.3.9` is the active executable frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1755,17 +1755,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.8`
-  Status: `active`
+  Status: `done`
   Goal: Implement runtime diagnostic output helpers over a caller-owned event boundary.
   Dependencies: `.4.3.2`, `.4.3.4`, `.4.3.7`
   Acceptance: `print`, `say`, and `print_each` evaluate eagerly, stay out of parse-result values, are quiet without
     a sink, preserve message ordering/Unicode, and expose an event seam that `.4.4` can instrument without changing
     helper semantics; `exit_now` remains immediate typed control.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `runtime_parse(..., { diagnostic_sink = callback })` delivers typed
+    `RuntimeDiagnosticOutputEvent` records with helper/rule/message fields. `print` concatenates one or more eager
+    values, `say` appends one newline, and `print_each(array, prefix[, suffix])` emits one event per item in source
+    order. Missing sinks stay quiet without skipping evaluation; output events never enter `RuntimeParseResult`.
+    Focused coverage locks Unicode, null/boolean text, exact Perl-reference optional-suffix behavior, invalid sink/
+    arity diagnostics, and immediate typed `exit_now`. `bash tools/run_lua_local.sh` passes 122/122 on PUC Lua and
+    LuaJIT. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 611
+    seconds. The audited cross-backend transport/format drift is routed to `FUTURE-PARITY-BACKLOG.5.1`.
+  Commit: `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events`
 
 - ID: `LUA-BACKEND-PARITY.4.3.9`
-  Status: `pending`
+  Status: `active`
   Goal: Close exhaustive Lua helper/value/control/method no-drift.
   Dependencies: `.4.3.1`-`.4.3.8`
   Acceptance: Every governed current name is execution-covered or has a later explicit non-helper owner; exact
@@ -1942,7 +1949,8 @@ now consumes the unchanged contract through native/serialized routes at 119/119 
 extends that same store and dispatcher across the governed named-span and bridge family at 120/120 on PUC Lua and
 LuaJIT. Placement-sensitive split/mark rule members execute at their owning slots at 121/121. Exact source-derived
 closeout finds 62/62 current calls in contracts, runtime dispatch, and focused execution sources, plus four exact
-marker spellings. Parent `.4.3.7` is closed; diagnostic output helper `.4.3.8` is the sole active frontier.
+marker spellings. Parent `.4.3.7` is closed. Caller-owned diagnostic events now pass 122/122 on both Lua ABIs;
+exhaustive helper/value/control/method no-drift `.4.3.9` is the sole active frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2025,7 +2033,30 @@ marker spellings. Parent `.4.3.7` is closed; diagnostic output helper `.4.3.8` i
 | 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, overloads, and valid-only mutation pass 120/120 on PUC Lua and LuaJIT. |
 | 78 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark slot events execute after their matched actions at 121/121 on both ABIs. |
 | 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `done` | Closed exact 62-call/four-marker native capture/cursor no-drift at 121/121 on both ABIs. |
-| 80 | `LUA-BACKEND-PARITY.4.3.8` | `active` | Implement caller-owned diagnostic output helpers and retain immediate typed exit control. |
+| 80 | `LUA-BACKEND-PARITY.4.3.8` | `done` | Typed caller-owned diagnostic events, quiet default, Unicode/order, parse neutrality, and immediate exit pass 122/122. |
+| 81 | `LUA-BACKEND-PARITY.4.3.9` | `active` | Close exhaustive Lua helper/value/control/method no-drift before runtime diagnostics/trace. |
+
+### `LUA-BACKEND-PARITY.4.3.8` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua recognized `print`, `say`, and `print_each` in its exact 246-name ActionIR
+  surface but the interpreter fell through to `unsupported runtime helper`; `exit_now` already terminated through
+  a typed runtime error.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` had no output-family dispatcher or per-parse sink. A
+  backend audit also found that Perl, Rust, Dart, and Julia agree on recognition but currently disagree on output
+  transport and parts of `print_each` formatting; no existing normalization leaf named that drift.
+- [x] **FIX** — Added one eager output-family evaluator, a per-parse `diagnostic_sink`, and typed
+  `RuntimeDiagnosticOutputEvent` records. Lua follows the Perl reference for arity/formatting, keeps all output
+  outside structural parse values, and exposes a seam that `.4.4` can adapt to tracing without changing helpers.
+  Added `FUTURE-PARITY-BACKLOG.5.1` for the five-backend contract decision.
+- [x] **ADDRESSED (verified)** — One focused rule proves left-to-right one-time argument evaluation, exact
+  `pré🙂`/Greek/emoji delivery, boolean/null scalar text, ordered per-item events, optional empty suffix, typed JSON
+  projection, no-sink evaluation, invalid sink/arity boundaries, and pre-/post-`exit_now` ordering.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 122/122 under separately built PUC Lua and LuaJIT
+  adapters plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. `RuntimeParseResult.value` and
+  one-value `output` remain unchanged; `exit_now(23)` retains immediate typed status and suppresses later output.
+- [x] **LOCKSTEP** — Lua README/API guidance, helper reference/catalog, mdBook handoff/status, task trees,
+  roadmaps, Knowledge Map, architecture/live docs, changes/notes, and memory agree that `.4.3.8` is closed and
+  exhaustive helper no-drift `.4.3.9` is next. Cross-backend diagnostic semantics remain explicitly pending `.5.1`.
 
 ### `LUA-BACKEND-PARITY.4.3.7.6` Acceptance Checklist
 
@@ -3083,3 +3114,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed rule-local writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action split/named-mark events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 admission proof, generated routing, parent closure, and diagnostic-helper handoff. |
+| `LUA-BACKEND-PARITY.4.3.8` | `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events` | Eager typed caller-owned events, quiet default, Unicode/order, parse-result neutrality, exit retention, and 122/122 dual-ABI proof. |

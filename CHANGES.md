@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.8 — add Lua diagnostic output events
+
+Lua now executes `print`, `say`, and `print_each` through one eager diagnostic-output path. Each parse may supply
+`diagnostic_sink = function(event) ... end`; the callback receives synchronous typed
+`RuntimeDiagnosticOutputEvent` records with helper, current rule, and exact message text. Values evaluate once
+left-to-right, Unicode and message order are preserved, no-sink execution stays quiet, and diagnostic messages
+never enter the rule accumulator or `RuntimeParseResult` value/output channels.
+
+The focused proof covers concatenation, the `say` newline, per-item prefix/optional-suffix output, null/boolean
+text, invalid sink and arity, typed JSON projection, and unchanged immediate `exit_now` termination. The complete
+gate passes 122/122 on both separately built PUC Lua and LuaJIT adapters. Canonical CI also passes capability
+64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 611 seconds.
+
+The implementation audit found a genuine existing parity gap: Perl host output, Rust direct stderr lines, Dart's
+evaluate-and-discard path, and Julia trace/default-suffix behavior are not one contract. New pending leaf
+`FUTURE-PARITY-BACKLOG.5.1` owns neutral semantics and five-backend alignment before structured-format execution.
+Lua `.4.3.9` is now active for exhaustive helper/value/control/method no-drift.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.6 — close Lua capture cursor parity
 
 Closed the native Lua capture/mark/input/cursor parent after a source-derived exhaustive audit. The current

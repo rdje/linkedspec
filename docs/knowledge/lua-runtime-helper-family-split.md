@@ -10,7 +10,7 @@ answers:
   - which Lua task owns codeblocks controls and trailing blocks
   - which Lua task owns capture marks input and cursor helpers
   - which Lua task owns diagnostic output helpers
-  - how will Lua prove all 239 helpers execute
+  - how will Lua prove all 246 helpers execute
 date: 2026-07-11
 status: current
 tags: [lua, runtime, helpers, values, controls, planning, LUA-BACKEND-PARITY]
@@ -19,6 +19,7 @@ evidence_update_2026_07_13_harray_closeout: "Array family .4.3.4 is closed at 99
 evidence_update_2026_07_13_block_split: "LUA-BACKEND-PARITY.4.3.6.0 splits eager blocks, inline controls, statement controls, contextual built-ins/with, tree callbacks, and closeout. General user-function blocks remain .5.1; explicit callable values remain FUTURE-PARITY-BACKLOG.11.7."
 evidence_update_2026_07_13_eager_blocks: "LUA-BACKEND-PARITY.4.3.6.1 closes eager expression-valued blocks and local return at 104/104 on both Lua ABIs; inline value controls .4.3.6.2 are active."
 evidence_update_2026_07_13_capture_split: "LUA-BACKEND-PARITY.4.3.7.0 splits input/cursor controls, anonymous capture, governed named marks, placement markers, boundary lookahead, and no-drift. The audit also finds seven documented current mark helpers outside the aligned 239-name inventories; a cross-backend owner is required before named-mark closure."
+evidence_update_2026_07_15_diagnostic_output: "Complete named-mark admission raised the shared inventory to 246 and capture/cursor .4.3.7 closed at exact 62-call/four-marker no-drift. LUA-BACKEND-PARITY.4.3.8 now emits eager Unicode-safe print/say/print_each messages through a per-parse typed caller-owned event sink at 122/122 on PUC Lua and LuaJIT; .4.3.9 is active. Cross-backend output drift is routed to FUTURE-PARITY-BACKLOG.5.1."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -39,7 +40,7 @@ owners under `docs/tasks/LUA-BACKEND-PARITY.md` are:
    final-codeblock equivalence, scoped `with`, and array/harray tree callbacks;
 7. `.4.3.7`: capture slices, named marks, input views, and explicit cursor state;
 8. `.4.3.8`: parse-result-neutral diagnostic output over a caller-owned event seam;
-9. `.4.3.9`: exhaustive 239-name execution/API/book/status no-drift.
+9. `.4.3.9`: exhaustive 246-name execution/API/book/status no-drift.
 
 The regex/split/mutation child `.4.3.2.2` is itself ordered as `.1` helper regex values and `matches`, `.2` pure
 split/receiver bridging, `.3` scalar regex substitution, `.4` explicit array split replacement, and `.5` corpus/
@@ -50,11 +51,13 @@ block execution, `.2` inline value controls, `.3` statement controls, `.4` built
 tree callbacks, and `.6` no-drift. General user-function contextual blocks remain `.5.1`; explicit callable
 codeblock values remain `FUTURE-PARITY-BACKLOG.11.7`.
 
-Capture/cursor parent `.4.3.7` is split into `.0` audit, `.1` input/cursor reads and explicit controls, `.2`
+Capture/cursor parent `.4.3.7` was split into `.0` audit, `.1` input/cursor reads and explicit controls, `.2`
 anonymous boundaries, `.3` governed named marks/bridges, `.4` placement-sensitive marker members, `.5` earliest-
 boundary lookahead, and `.6` no-drift. The 239-name inventory is the governed executable subset, not proof that
 every helper advertised by the source-boundary reference is inventoried; seven documented mark helpers require a
-separate cross-backend resolution before `.3` can close full named-mark parity.
+separate cross-backend resolution before `.3` could close full named-mark parity. That correction is complete:
+the aligned inventory now has 246 names. Diagnostic output `.4.3.8` is also complete through the per-parse typed
+event seam; `.4.3.9` owns exhaustive helper closure.
 
 Each leaf may split again before code. The ordering follows runtime mechanism
 dependencies, not catalog size, and keeps recognized call-name admission
@@ -64,3 +67,5 @@ Related facts: [[lua-runtime-rule-interpreter]], [[lua-actionir-contract-resolve
 [[lua-actionir-ast-parser]], [[spec-lifecycle-retv-order]],
 [[generic-trailing-codeblock-argument-correction]], [[lua-runtime-block-control-callback-split]].
 See also [[lua-capture-cursor-runtime-audit]].
+Diagnostic details and remaining cross-backend drift are in [[lua-diagnostic-output-events]] and
+[[cross-backend-diagnostic-output-drift]].

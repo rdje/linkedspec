@@ -15,6 +15,7 @@ local FLOW_MT = { __tostring = function(value) return "RuntimeActionFlow: " .. v
 local ENGINE_MT = { __runtime_interpreter_type = "LinkedSpecRuntimeEngine" }
 local RESULT_MT = { __runtime_interpreter_type = "RuntimeParseResult" }
 local EVENT_MT = { __runtime_interpreter_type = "RuntimeLifecycleEvent" }
+local DIAGNOSTIC_OUTPUT_EVENT_MT = { __runtime_interpreter_type = "RuntimeDiagnosticOutputEvent" }
 local HELPER_REGEX_MT = { __runtime_interpreter_type = "RuntimeHelperRegex" }
 
 local function fail(message, fields)
@@ -102,7 +103,7 @@ local function default_top(engine)
   return engine.compiled_spec.compiled_rule_order[1]
 end
 
-local function context(input, top_rule, compiled_rules)
+local function context(input, top_rule, compiled_rules, diagnostic_sink)
   local valid, position = json.validate_utf8(input)
   if not valid then fail("runtime input is not valid UTF-8 at byte " .. (position - 1)) end
   return {
@@ -116,6 +117,7 @@ local function context(input, top_rule, compiled_rules)
     mark_buckets = {},
     active = {},
     lifecycle_events = {},
+    diagnostic_sink = diagnostic_sink,
     rule_stack = {},
     accumulator_stack = {},
     cursor_stack = {},
@@ -128,6 +130,7 @@ local execute_rule
 local evaluate_expr
 local evaluate_block_value
 local execute_block
+local invalid_helper_arity
 
 local function argument_expr(arg) return arg.value end
 
@@ -374,6 +377,65 @@ local function scalar_string(value, null_as_empty)
   return nil
 end
 
+local DIAGNOSTIC_OUTPUT_HELPERS = {
+  print = true,
+  print_each = true,
+  say = true,
+}
+
+local function runtime_diagnostic_string(value)
+  return scalar_string(value, true) or ""
+end
+
+local function emit_runtime_diagnostic_output(ctx, helper_name, message)
+  if ctx.diagnostic_sink == nil then return end
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  ctx.diagnostic_sink(setmetatable({
+    helper_name = helper_name,
+    rule_label = rule_label,
+    message = message,
+  }, DIAGNOSTIC_OUTPUT_EVENT_MT))
+end
+
+local function evaluate_runtime_diagnostic_output(
+  engine,
+  name,
+  expr,
+  ctx,
+  accumulator,
+  edge_state
+)
+  if name == "print_each" then
+    if #expr.args < 2 or #expr.args > 3 then
+      invalid_helper_arity(name, "2 or 3 positional arguments", #expr.args)
+    end
+  elseif #expr.args == 0 then
+    invalid_helper_arity(name, "at least 1 positional argument", 0)
+  end
+
+  local values = {}
+  for _, arg in ipairs(expr.args) do
+    values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
+  end
+
+  if name == "print_each" then
+    local items = json.kind(values[1]) == "array" and values[1] or json.array()
+    local prefix = runtime_diagnostic_string(values[2])
+    local suffix = #values == 3 and runtime_diagnostic_string(values[3]) or ""
+    for _, item in ipairs(items) do
+      emit_runtime_diagnostic_output(ctx, name, prefix .. runtime_diagnostic_string(item) .. suffix)
+    end
+    return json.null
+  end
+
+  local parts = {}
+  for index, value in ipairs(values) do parts[index] = runtime_diagnostic_string(value) end
+  local message = table.concat(parts)
+  if name == "say" then message = message .. "\n" end
+  emit_runtime_diagnostic_output(ctx, name, message)
+  return json.null
+end
+
 local function helper_regex(pattern, flags)
   return setmetatable({ pattern = pattern, flags = flags or "" }, HELPER_REGEX_MT)
 end
@@ -575,7 +637,7 @@ local function runtime_truthy(value)
   return true
 end
 
-local function invalid_helper_arity(name, expected, actual)
+invalid_helper_arity = function(name, expected, actual)
   fail("helper '" .. name .. "' expects " .. expected .. ", got " .. actual, {
     code = "helper_arity_mismatch",
     helper_name = name,
@@ -1909,6 +1971,8 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     return evaluate_scalar_numeric_values(engine, expr, ctx, accumulator, edge_state, name, nil)
   elseif NAMED_MARK_HELPERS[name] or (name == "capture_take" and #expr.args > 0) then
     return evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, edge_state)
+  elseif DIAGNOSTIC_OUTPUT_HELPERS[name] then
+    return evaluate_runtime_diagnostic_output(engine, name, expr, ctx, accumulator, edge_state)
   end
   if name == "return" then
     local value = json.null
@@ -3029,9 +3093,13 @@ function M.runtime_parse(engine, input, options)
   if M.node_type(engine) ~= "LinkedSpecRuntimeEngine" then fail("runtime_parse expects runtime engine") end
   if type(input) ~= "string" then fail("runtime input must be a string") end
   options = options or {}
+  if type(options) ~= "table" then fail("runtime parse options must be a table") end
+  if options.diagnostic_sink ~= nil and type(options.diagnostic_sink) ~= "function" then
+    fail("diagnostic_sink must be a function")
+  end
   local top = options.top_rule or default_top(engine)
   if not top then fail("compiled spec does not contain any rules") end
-  local ctx = context(input, top, engine.compiled_spec.rules_by_label)
+  local ctx = context(input, top, engine.compiled_spec.rules_by_label, options.diagnostic_sink)
   local result = execute_rule(engine, top, 0, ctx)
   local output = json.array({ copy_value(result.value) })
   return setmetatable({
@@ -3050,6 +3118,12 @@ function M.to_json(value)
   local node_type = M.node_type(value)
   if node_type == "RuntimeLifecycleEvent" then
     return json.harray({ rule_label = value.rule_label, lifecycle = value.lifecycle, line = value.line })
+  elseif node_type == "RuntimeDiagnosticOutputEvent" then
+    return json.harray({
+      helper_name = value.helper_name,
+      rule_label = value.rule_label,
+      message = value.message,
+    })
   elseif node_type == "RuntimeParseResult" then
     local events = json.array()
     for index, event in ipairs(value.lifecycle_events) do events[index] = M.to_json(event) end
@@ -3062,7 +3136,7 @@ function M.to_json(value)
       lifecycle_events = events,
     })
   end
-  fail("runtime to_json expects parse result or lifecycle event")
+  fail("runtime to_json expects parse result, lifecycle event, or diagnostic output event")
 end
 
 return M
