@@ -59,6 +59,10 @@ implement and prove it across Perl, Rust, Dart, Julia, and Lua, then resume that
     keeps structure, value flow, mutation, scope, recovery, and diagnostics locally predictable; expressiveness
     comes from small typed orthogonal mechanisms that compose across formats rather than format-specific or host
     escapes. ADR `0035` governs the exact trade.
+11. **Construction and execution are observable.** The normal native path must trace how the composed `.spec`
+    graph resolves, validates, stages, caches, and compiles as well as how the resulting parser enters rules,
+    takes branches, moves through input, emits AST values, recovers, and diagnoses. Exact rule-label filters may
+    focus emission but never alter parser construction or behavior. ADR `0037` governs the contract.
 
 ## Shared Leaf Acceptance
 
@@ -69,6 +73,8 @@ Every format leaf must:
 - use composed `.spec` sources with no backend-specific syntax or hidden host parser;
 - prove on-demand parser construction from those sources, deterministic fingerprinted warm-cache reuse, and
   immediate parsing without a separately maintained generated parser;
+- provide correlated compile-time and runtime traces through the normal native API, including exact rule-focused
+  output and traced/untraced semantic identity;
 - pass the same neutral valid/invalid/Unicode fixtures on all current backends and every supported route;
 - prove derived-format reuse instead of cloning its base syntax;
 - record any missing general mechanism as an owning child before implementation, then land that mechanism across
@@ -112,7 +118,7 @@ Every format leaf must:
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.2`
   Status: `pending`
   Goal: Establish the reusable contracts and measurement harness before the first format parser.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`
 
 | Leaf | Contract/harness slice | Status |
 | --- | --- | --- |
@@ -122,6 +128,7 @@ Every format leaf must:
 | `.2.4` | Shared conformance, differential-oracle, mutation, Unicode fuzz/property, minimization, and reproducibility harness. | `pending` |
 | `.2.5` | Cross-backend cold-construction, warm-cache, parse-throughput/latency, memory/resource protocol for representative, large, streaming-shaped, and adversarial inputs. | `pending` |
 | `.2.6` | Reusable spec import/staged-parse/profile/projection architecture and syntax-family cache contract. | `pending` |
+| `.2.7` | End-to-end construction/runtime trace contract, exact rule-label filtering, correlation, bounded payloads, and shared five-backend/two-Lua-ABI non-interference proof. | `pending` |
 
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.3`
   Status: `pending`

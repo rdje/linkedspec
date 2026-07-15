@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.18.2 — govern selective parser observability**
+  (DONE — planning contract only; Lua fixed-v1 runtime `.5.1.2` resumes next).
+
+  **Result:** ADR `0037` requires correlated compile-time and runtime trace for future dynamic format parsers,
+  exact rule-label allowlists that filter emission only, bounded/redactable payloads, stable spec/cache/rule/source/
+  position identity, and shared traced/untraced five-backend/two-Lua-ABI proof under
+  `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7`. Existing six levels/sinks remain. Dart/Julia full-pipeline status is
+  confirmed; a stale Dart mdBook section is removed; Lua full-pipeline propagation remains `.5.3`. No behavior
+  changed.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.1 — add Lua staged body dispatch**
   (DONE — deterministic provider/queue/stitching is green; fixed-v1 runtime `.5.1.2` is next).
 

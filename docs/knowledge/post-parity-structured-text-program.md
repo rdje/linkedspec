@@ -14,11 +14,14 @@ answers:
   - is HTML parsed as XML in the format program
   - does parsing Jsonnet Dhall CUE Pkl Nickel or Nix include evaluation
   - how will structured text parsers prove Unicode accuracy and speed
+  - must dynamic format parsers trace construction and runtime execution
+  - can a structured text parser trace selected rules only
   - are binary formats and packaged containers in the structured text program
 date: 2026-07-15
 status: current
 tags: [roadmap, formats, parser, ast, unicode, performance, conformance, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director/engineer agreement on 2026-07-15; ADR 0034; FUTURE-PARITY-BACKLOG.18.0; exact 91-row ownership in docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md; public architecture chapter architecture/structured-format-program.md. No parser/compiler/runtime behavior or format implementation changes in the ratification slice."
+evidence_update_2026_07_15_observability: "ADR 0037 and FUTURE-PARITY-BACKLOG.18.2 make correlated compile/runtime trace, exact emission-only rule filters, bounded payloads, and traced/untraced parity proof a future readiness contract under STRUCTURED-TEXT-FORMAT-PROGRAM.2.7."
 reverify: "rg -n '91|Parity first|Formats drive general features|HTML is not XML|Parsing scope stays honest' docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md docs/decisions/0034-post-parity-structured-text-requirements-program.md docs/linkedspec-book/src/architecture/structured-format-program.md"
 ---
 
@@ -49,9 +52,14 @@ examples, and correctness-preserving performance/resource measurements. Parsing 
 Nix, schemas, or IDLs to AST does not silently include evaluation, validation, compilation, package loading, or
 binary codecs. Binary/database/container formats remain outside this text program.
 
+ADR `0037` additionally requires every dynamic format parser to expose correlated construction and runtime trace
+through its normal API. An exact rule-label filter focuses emitted events without changing behavior, and shared
+fixtures prove traced/untraced identity. The executable contract remains parity-gated under
+`STRUCTURED-TEXT-FORMAT-PROGRAM.2.7`.
+
 ## Links
 
-- Decision: ADR `0034`.
+- Decisions: ADRs `0034` and `0037`.
 - Parent owner: [[FUTURE-PARITY-BACKLOG]] `.18.0`.
 - Detailed execution tree: [[STRUCTURED-TEXT-FORMAT-PROGRAM]].
 - Existing doctrines: ADRs `0011`, `0012`, `0016`, `0023`, `0025`, and `0026`.

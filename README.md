@@ -116,6 +116,10 @@ This `README.md` is the **single entry point** to the project.
   nested assignments may create only unambiguous missing intermediates while reads stay pure, existing wrong-kind
   values are never coerced, and arrays remain dense. Its only v1 bang-method candidate is receiver-mutating
   `map_leaves!`; that spelling is not current behavior and must land through neutral plus five-backend proof.
+  ADR `0037` makes end-to-end observability a future format-parser readiness gate: correlate `.spec` graph
+  resolution/staging/cache/compilation with runtime rule/branch/position/AST behavior, add exact emission-only
+  rule-label filters, bound high-volume payloads, and prove traced/untraced identity across all current backends.
+  Lua's current runtime trace is complete; its already-owned full native-pipeline propagation remains `.5.3`.
   ADR `0033` and
   `FUTURE-PARITY-BACKLOG.16` align narrow zero-argument aliases. Neutral contract `.16.1` now locks six standalone
   markers, final-only receiver omission, exclusions, and arity delegation. Calibration `.16.2.0` corrects its

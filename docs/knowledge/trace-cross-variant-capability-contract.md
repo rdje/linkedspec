@@ -8,10 +8,11 @@ answers:
   - "are Perl trace internals the external contract"
   - "what must variants implement to claim trace parity"
   - "does the common LinkedSpec book define trace behavior for all variants"
-date: 2026-07-04
+date: 2026-07-15
 status: current
 tags: [trace, parity, variants, mdbook, external-contract, rust, perl]
 evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; TRACE-OBSERVABILITY.4.5; JULIA-BACKEND-PARITY.7.3.2.1"
+evidence_update_2026_07_15_selective_format_trace: "ADR 0037 and FUTURE-PARITY-BACKLOG.18.2 add future correlated construction/runtime tracing, exact emission-only rule filters, bounded payloads, and shared non-interference proof under STRUCTURED-TEXT-FORMAT-PROGRAM.2.7; current behavior is unchanged."
 reverify: "rg -n 'variant-neutral trace contract|Future variant trace parity checklist|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.5|rust_runtime:engine|rust_runtime:generated_plan' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md rust/linkedspec-runtime/src"
 ---
 
@@ -45,9 +46,16 @@ runtime instrumentation and no-drift. `.7.3.2.1` later closes Julia source parse
 function-shell, and staged-dispatch propagation through the same controls/sinks, with default-quiet and
 traced/untraced identity proof.
 
+ADR `0037` adds a stronger future readiness layer for dynamic format parsers: correlated spec/cache/rule/source
+identity across construction and runtime, exact rule-label emission filters, bounded diagnostic payloads, and
+shared cross-backend non-interference fixtures. Those are owned by
+`STRUCTURED-TEXT-FORMAT-PROGRAM.2.7`; they are not retroactive implementation claims for the completed original
+trace tree.
+
 Related facts: [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
 [[julia-frontend-compiler-staged-trace-events]],
 [[trace-backend-parity-split]],
-[[dart-runtime-diagnostics-trace-split]].
+[[dart-runtime-diagnostics-trace-split]],
+[[selective-end-to-end-parser-observability]].

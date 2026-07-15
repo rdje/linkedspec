@@ -71,6 +71,11 @@ from small typed orthogonal mechanisms instead of format-specific or host-langua
 is the positive precedent. Recursive traversal retains `walk_leaves` / `map_leaves` / `reduce_leaves`, because
 their suffix distinguishes leaf recursion from conventional shallow operations; no short aliases are planned.
 
+ADR `0037` / `FUTURE-PARITY-BACKLOG.18.2` make correlated construction/runtime observability another future
+format-readiness constraint. Existing levels and sinks remain; exact rule-label filters affect emission only,
+high-volume payloads are bounded/redactable, and `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the shared
+five-backend/two-Lua-ABI traced/untraced proof after current parity. Lua full-pipeline trace remains `.5.3`.
+
 ADR `0036` / `FUTURE-PARITY-BACKLOG.19` own the separate future mutation direction after complete current-backend
 parity. Nested writes may create a missing root/intermediate only when the next evaluated segment unambiguously
 selects array or harray; reads remain pure, existing wrong-kind values are not coerced, and arrays do not gain

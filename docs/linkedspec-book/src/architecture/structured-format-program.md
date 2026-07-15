@@ -24,6 +24,22 @@ The standards and external conformance suites remain the correctness oracles. Th
 the `.spec` graph is the single parser implementation that must satisfy them on every backend. Performance proof
 therefore measures three distinct paths: cold dynamic parser construction, warm cache reuse, and document parsing.
 
+## Observe what was built and what ran
+
+A dynamic parser must be explainable from its first `.spec` load through its final AST. The normal native API must
+accept one trace configuration/emitter across spec resolution and imports, validation, function and staged parsing,
+contract/dependency planning, cache fingerprint and hit/miss decisions, compilation, and document execution.
+Runtime events must expose rule entry/exit, parsing and branch decisions, cursor/capture transitions, AST/value
+emission, recovery, and diagnostics where applicable. Stable spec-graph/cache identity and rule/source/position
+fields correlate the constructed parser with its execution.
+
+The existing `none`, `low`, `medium`, `high`, `full`, and `debug` levels and quiet/stdout/routed/mirrored behavior
+remain the base contract. ADR `0037` adds a future exact rule-label allowlist for focused diagnosis. Global pipeline
+scopes remain visible, while rule-owned events are emitted only for selected labels. This filter changes emission
+only: traced and untraced construction, parsing, ASTs, recovery, diagnostics, and caches must remain identical.
+Payloads and excerpts use explicit limits/redaction controls so debug tracing remains safe for large or adversarial
+documents. `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the shared executable contract after current backend parity.
+
 ## Terse, readable, and highly expressive
 
 The format program also treats the quality of the `.spec` source as part of the result. A parser is not a success
@@ -135,6 +151,7 @@ A format is complete only when it has:
 - a pinned authoritative specification and usable conformance corpus;
 - a documented source-aware AST, trivia/raw-text policy, and typed diagnostic/recovery boundary;
 - identical neutral fixtures on every current backend and supported execution route;
+- correlated construction/runtime trace proof, exact rule-focused output, and traced/untraced semantic identity;
 - Unicode adversarial and mutation/property proof;
 - differential comparison with an independent implementation where practical;
 - public examples and honest limitations; and

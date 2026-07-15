@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.2` — make a dynamic parser explain both construction and execution): The
+  existing level/sink/event contract is necessary but not enough for large generated parsers. Correlate spec-graph
+  and cache identity through resolution, staging, validation, planning, compilation, and runtime. An exact ordered
+  rule-label allowlist is an event filter, never an execution filter: keep global scopes, keep dispatch decisions
+  owned by selected rules, reject unknown labels before work, and prove identical compiled state/results/ASTs/
+  diagnostics/caches with and without tracing. Bound/redact debug payloads. Keep Lua `.5.3` as the current parity
+  owner; implement the stronger neutral format-readiness contract only after parity in `.2.7`.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.1` — keep the first staged provider narrow and observable): Reuse the
   accepted resolve/load/compile/execute record shapes rather than hiding ActionIR parsing behind one convenience
   call. Normalize each typed job defensively, decorate equal sort keys with input order because Lua's `table.sort`

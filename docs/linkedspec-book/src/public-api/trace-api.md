@@ -21,6 +21,15 @@ The portable contract is behavioral, not package-name based. A variant that clai
 - dump/log events for deeper diagnostic payloads at higher verbosity;
 - a default quiet mode where tracing is disabled and normal output remains unchanged.
 
+ADR `0037` extends this contract for the future dynamically constructed format parsers. Their normal native path
+must correlate construction and execution: `.spec` resolution/imports, validation, staged jobs, contract and
+dependency planning, cache identity, and compilation must be traceable beside rule entry/exit, parsing decisions,
+input/capture transitions, AST emission, recovery, and diagnostics. The future shared control contract also adds
+an exact rule-label allowlist. Global pipeline scopes remain visible, selected-rule dispatch decisions remain
+visible, and filtering suppresses only events—it never changes compilation, execution, recovery, or diagnostics.
+Unknown selected labels fail configuration before parser work. Shared tests must prove traced/untraced semantic
+identity and deterministic filtered event order across all current variants.
+
 Perl reference event names such as `rule_ir:...`, `emit_context:...`, `actionir:...`, and
 `generated_handler_branch:...` are the current reference vocabulary. Other variants may use native names, but a
 user reading this book must be able to ask the same trace questions and observe equivalent externally documented
@@ -142,42 +151,6 @@ let output = Engine::new(compiled).execute_with_trace(input, trace)?;
 Rust compile/spec-parser/staged-dispatch trace events are present as of `.4.3`; Rust interpreted and generated-plan
 runtime branch/mark/capture events are present as of `.4.4`; `.4.5` closes the cross-variant parity proof and
 records the reusable future-variant checklist.
-
-## Dart variant trace status
-
-As of `DART-BACKEND-PARITY.4.5.4`, Dart has trace controls and runtime interpreter trace events, but does not yet
-claim full trace parity.
-
-The Dart control surface is:
-
-- `LinkedSpecTraceLevel` with ordered levels equivalent to `none`, `low`, `medium`, `high`, `full`, and `debug`;
-- `LinkedSpecTraceConfig`, including `fromEnvironment(...)` for `LINKEDSPEC_TRACE_LEVEL`,
-  `LINKEDSPEC_DUMP_VERBOSITY`, `LINKEDSPEC_TRACE_FILE`, `LINKEDSPEC_TRACE_MIRROR_STDOUT`,
-  `LINKEDSPEC_TRACE_RESET_FILE`, and `LINKEDSPEC_TRACE_EMOJI`;
-- `LinkedSpecTraceSinkMode` for stdout, routed-file, and mirror sinks;
-- `LinkedSpecTraceEmitter` event primitives: `emitEvent`, `enterScope`, `exitScope`, `traceDecision`,
-  `logOutput`, and `logDump`;
-- `LinkedSpecRuntimeEngine.parse(..., trace: emitter)`, `execute(..., trace: emitter)`,
-  `parseWithTrace(...)`, and `executeWithTrace(...)`.
-
-The `.4.5.2` proof covers default-quiet behavior, level gating, routed-file reset/truncate, mirror output,
-structured event classes, decision/log/dump primitives, and runtime traced entrypoints preserving parse output.
-The `.4.5.3` proof adds runtime interpreter instrumentation: parse/rule scopes, regex match/no-match decisions,
-action-edge and blind-call child-dispatch decisions, lifecycle block mark events, cursor-control mark events,
-recursion-cutoff decisions, and `capture_until_boundary(...)` source-boundary mark events. `.4.5.4` closes the
-Dart diagnostics/trace no-drift sweep across Dart status text, mdBook pages, live docs, task-tree index, and
-Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry provider, `.5.2` adds registered
-exact-arity user-function runtime execution, and `.5.3` preserves staged parse-job/function-registry descriptor
-shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, and final capability admission
-expands it to full 105-fixture Dart corpus execution. `.6.4` wires the focused Dart local verification gate, `.7.1` closes Dart mdBook
-usage/status/handoff documentation, `.7.2` defers generated Dart source to a future source-emitter lane, `.7.4`
-productizes the Dart-specific CLI around the existing corpus/runtime command path, and `.7.5` closes the scoped
-Dart milestone. Trace parity is unchanged by these staged/user-function/corpus/generated-source/CLI/closeout
-leaves.
-
-The complete capability census therefore records Dart runtime trace controls/events/sinks as passing, but native
-frontend/compiler/function-shell/staged propagation as a separate gap. `FUTURE-PARITY-BACKLOG.1.6.5` owns one
-caller-emitter path through those phases; canonical primary CLI trace remains independently closed.
 
 ## Julia variant trace status
 
@@ -344,6 +317,11 @@ Any future LinkedSpec variant must satisfy this checklist before it claims trace
 - prove routed trace output with focused tests for controls, sinks, scopes, decisions, dump/log events, and
   default-quiet behavior;
 - update the task tree, Knowledge Map, and mdBook with the proof before the variant parity claim is durable.
+
+For the post-parity structured-format program, this checklist is necessary but not sufficient. ADR `0037` and
+`STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` additionally require correlated construction/runtime identity, exact
+rule-label filtering, bounded/redactable high-volume payloads, and shared cross-backend non-interference fixtures
+before any dynamic format parser can claim readiness.
 
 ## Command-line trace control
 

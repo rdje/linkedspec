@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.2 — govern selective parser observability
+
+ADR `0037` makes end-to-end observability a readiness contract for the post-parity structured-format program.
+Dynamic parser construction must trace `.spec` graph resolution/imports, validation, function/staged work,
+contracts/dependencies, cache identity, and compilation; runtime trace must correlate rule, branch, input/capture,
+AST-emission, recovery, diagnostic, and result behavior. Future exact rule-label allowlists suppress only emitted
+events and cannot change semantics. Payload limits/redaction and shared traced/untraced cross-backend proof are
+owned by `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` after current parity.
+
+The audit confirms the existing six ordered levels and sink model, Dart/Julia full native-pipeline propagation,
+and Lua's precise runtime-only boundary pending its already-owned `.5.3`. The public trace chapter's stale second
+Dart runtime-only section was removed. No parser, compiler, runtime, CLI, trace-control, or format behavior changed.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.1 — add Lua staged body dispatch
 
 Added Lua's minimal staged parser registry for function bodies. It defensively validates and stable-sorts exact
