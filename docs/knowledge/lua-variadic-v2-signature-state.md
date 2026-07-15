@@ -24,10 +24,10 @@ Registry resolution accepts any positional arity at or above `min_arity` and rep
 `at least N`. Mixed v1/v2 storage, malformed fields, signature/sidecar drift, duplicate or reserved parameters,
 and all seven neutral invalid definitions fail through typed diagnostic owners.
 
-This is a state milestone, not runtime completion. Calling a resolved variadic definition fails closed with
-`variadic_user_function_runtime_pending` until `LUA-BACKEND-PARITY.5.1.3.2` binds extras into one fresh typed
-array. Outward descriptor conversion fails closed with `variadic_user_function_descriptor_pending` until `.5.3`;
-generated preservation and execution remain `.8.1-.4`.
+This state milestone now feeds completed native runtime `.5.1.3.2`, which binds extras into one fresh typed array
+and passes the unchanged neutral fixture. Outward descriptor conversion still fails closed with
+`variadic_user_function_descriptor_pending` until `.5.3`; generated preservation and execution remain `.8.1-.4`.
 
 Related facts: [[variadic-user-function-contract]], [[lua-variadic-user-function-routing]],
-[[lua-staged-function-execution-split]], [[lua-fixed-v1-user-function-runtime]].
+[[lua-staged-function-execution-split]], [[lua-fixed-v1-user-function-runtime]],
+[[lua-variadic-v2-runtime]].

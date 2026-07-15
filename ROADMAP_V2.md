@@ -117,8 +117,10 @@ Planning-only `.4.4.0` now resolves the diagnostics/trace dependency order. `.4.
 failures, controls/sinks, interpreter events, and runtime no-drift; `.4.4.1-.4` are done, parent `.4.4` is closed,
 and planning `.5.1.0` splits staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime, and
 closeout. Minimal staged dispatch `.5.1.1` passes 130/130; fixed-v1 runtime `.5.1.2` passes 133/133. Variadic-v2
-state `.5.1.3.1` preserves exact signature state and minimum/unbounded registry resolution at 136/136 with status
-`runtime-user-functions-variadic-v2-state`; fresh rest-array runtime `.5.1.3.2` is active. One-emitter native loading,
+state `.5.1.3.1` preserves exact signature state and minimum/unbounded registry resolution at 136/136. Fresh
+rest-array runtime `.5.1.3.2` executes the unchanged neutral fixture and locks copied mixed/empty values, eager
+order, receiver chains, and typed failures at 139/139 with status `runtime-user-functions-variadic-v2`;
+contextual final-codeblock metadata `.5.1.4.1` is active. One-emitter native loading,
 frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
 the owners it must traverse. This split changes no runtime or capability claim.
 
@@ -129,10 +131,10 @@ Lua `.4.4.2` now adds typed ordered levels/config/events, documented environment
 stdout/route/mirror sinks with reset/append, and result-neutral direct/config-wrapper parse scopes. Both ABIs pass
 128/128. Rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129. Minimal staged
 dispatch `.5.1.1` adds the governed provider/queue/cache/stitch path at 130/130. Public status is
-`runtime-user-functions-variadic-v2-state` after `.5.1.2` adds registry-first fixed calls, copied fresh stores,
+`runtime-user-functions-variadic-v2` after `.5.1.2` adds registry-first fixed calls, copied fresh stores,
 local returns, returned-value composition, and typed function-owned fences at 133/133, then `.5.1.3.1` preserves
-the exact fixed-v1/variadic-v2 union and minimum/unbounded resolution at 136/136. `.5.1.3.2` is active and
-capability remains 64/0/0.
+the exact fixed-v1/variadic-v2 union and minimum/unbounded resolution at 136/136, then `.5.1.3.2` executes fresh
+typed rest arrays at 139/139. `.5.1.4.1` is active and capability remains 64/0/0.
 
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |

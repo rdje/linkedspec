@@ -398,17 +398,6 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
     )
   end
 
-  if resolution.entry.definition.signature ~= nil then
-    fail(
-      "variadic user function '" .. name .. "' runtime binding is pending fresh rest-array execution",
-      {
-        code = "variadic_user_function_runtime_pending",
-        stage = "user_function_call",
-        helper_name = name,
-      }
-    )
-  end
-
   local cycle = recursion_cycle(active_names, name)
   if cycle then
     local detail = "user function recursion is not supported: " .. cycle
@@ -431,9 +420,11 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
   local variables = {}
   local arrays = {}
   local harrays = {}
+  for index, value in ipairs(evaluated_values) do
+    arguments[index] = clone_runtime_value(value)
+  end
   for index, param in ipairs(resolution.entry.definition.params) do
-    local value = clone_runtime_value(evaluated_values[index])
-    arguments[index] = value
+    local value = arguments[index]
     variables[param] = clone_runtime_value(value)
     local kind = json.kind(value)
     if kind == "array" then
@@ -441,6 +432,15 @@ function M.prepare_invocation(registry, name, evaluated_values, active_names, op
     elseif kind == "harray" then
       harrays[param] = clone_runtime_value(value)
     end
+  end
+  local signature = resolution.entry.definition.signature
+  if signature ~= nil then
+    local rest_values = json.array()
+    for index = signature.min_arity + 1, #arguments do
+      rest_values[#rest_values + 1] = clone_runtime_value(arguments[index])
+    end
+    variables[signature.rest_param] = clone_runtime_value(rest_values)
+    arrays[signature.rest_param] = clone_runtime_value(rest_values)
   end
   local active_path = copy_list(active_names)
   active_path[#active_path + 1] = name

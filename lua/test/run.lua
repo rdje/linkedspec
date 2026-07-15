@@ -134,7 +134,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-user-functions-variadic-v2-state", "status parity")
+  assert_equal(first.parity, "runtime-user-functions-variadic-v2", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1760,7 +1760,7 @@ test("user function registry preserves order jobs definitions and exact arity", 
   end, "duplicate user function 'zero'", nil, "duplicate registry")
 end)
 
-test("user function registry resolves variadic minimum arity and fails runtime closed", function()
+test("user function registry resolves variadic arity and binds fresh typed rest arrays", function()
   local body_ast = json.harray({ kind = "action_block", statements = json.array() })
   local all_values = variadic_registry_function(
     "all_values",
@@ -1802,13 +1802,42 @@ test("user function registry resolves variadic minimum arity and fails runtime c
   assert_equal(rejected.diagnostics[1].code, "user_function_arity_mismatch", "variadic minimum code")
   assert_contains(rejected.diagnostics[1].message, "expects arity at least 1", "variadic minimum message")
 
-  assert_registry_error(function()
-    linkedspec.prepare_user_function_invocation(registry, "collect", { "p", "a" })
-  end,
-    "runtime binding is pending fresh rest-array execution",
-    "variadic_user_function_runtime_pending",
-    "pending rest runtime"
+  local source_array = json.array({ 2, json.harray({ nested = true }) })
+  local source_harray = json.harray({ key = json.array({ 3 }) })
+  local source_block = linkedspec.parse_action_expression('{ return("callback") }')
+  local frame = linkedspec.prepare_user_function_invocation(
+    registry,
+    "collect",
+    { "p", 1, source_array, source_harray, false, json.null, source_block }
   )
+  assert_equal(frame.variables.prefix, "p", "variadic fixed-prefix binding")
+  assert_equal(json.kind(frame.variables.items), "array", "variadic scalar-view rest kind")
+  assert_equal(json.kind(frame.arrays.items), "array", "variadic typed rest store")
+  assert_equal(#frame.variables.items, 6, "variadic rest count")
+  assert_equal(frame.variables.items[1], 1, "variadic ordered scalar")
+  assert_equal(json.kind(frame.variables.items[2]), "array", "variadic nested array identity")
+  assert_equal(json.kind(frame.variables.items[3]), "harray", "variadic harray identity")
+  assert_equal(frame.variables.items[4], false, "variadic boolean identity")
+  assert_equal(frame.variables.items[5], json.null, "variadic null identity")
+  assert_equal(
+    linkedspec.runtime_value_kind(frame.variables.items[6]),
+    "codeblock",
+    "variadic codeblock identity"
+  )
+  assert_equal(#frame.arguments, 7, "variadic frame retains every argument")
+
+  frame.variables.items[2][1] = 99
+  frame.variables.items[3].key[1] = 99
+  frame.variables.items[6].kind = "mutated"
+  assert_equal(source_array[1], 2, "variadic caller array isolation")
+  assert_equal(source_harray.key[1], 3, "variadic caller harray isolation")
+  assert_equal(source_block.kind, "block_value", "variadic caller codeblock isolation")
+  assert_equal(frame.arrays.items[2][1], 2, "variadic typed store isolation")
+
+  local first_empty = linkedspec.prepare_user_function_invocation(registry, "all_values", {})
+  local second_empty = linkedspec.prepare_user_function_invocation(registry, "all_values", {})
+  first_empty.variables.items[1] = "changed"
+  assert_equal(#second_empty.variables.items, 0, "variadic empty rest freshness")
 end)
 
 test("user function registry stitches body AST without mutating the source spec", function()
@@ -2080,6 +2109,114 @@ Top::
     number_chain = 7,
     hash_chain = "a,b",
   })), "fixed user function runtime result")
+end)
+
+test("runtime executes the unchanged neutral variadic callable fixture", function()
+  local contract = json.decode(read_file("capability_conformance/callable_signature_contract.json"))
+  local source = contract.fixture.spec_source
+  local nodes = json.array({
+    definition_node(source, "pair", { "left", "right" }, " return([left, right]) "),
+    variadic_definition_node(source, "all_values", {}, "items", " return(items) "),
+    variadic_definition_node(
+      source,
+      "collect",
+      { "prefix" },
+      "items",
+      ' return({ "prefix" : prefix, "items" : items }) '
+    ),
+  })
+  local staged = linkedspec.parse_spec_with_staged_user_function_definition_asts(source, nodes)
+  local engine = linkedspec.runtime_engine(linkedspec.compile_spec(staged))
+  local result = linkedspec.runtime_parse(engine, contract.fixture.input).value
+  assert_equal(json.encode(result), json.encode(contract.fixture.expected), "neutral variadic fixture result")
+end)
+
+test("runtime evaluates variadic arguments once and isolates each rest array", function()
+  local functions = {
+    variadic_registry_function("all_values", {}, "items", 0, nil, "return(items)"),
+    variadic_registry_function(
+      "mutate_rest",
+      {},
+      "items",
+      1,
+      nil,
+      'items += "inner"; return(items)'
+    ),
+  }
+  local engine = staged_user_function_runtime(functions, [[
+Top::
+ /x/ E {
+   counter = 0
+   source = ["outer"]
+   ordered = all_values(counter = counter.add(1), counter = counter.add(1))
+   return({
+     "ordered" : ordered,
+     "counter" : counter,
+     "caller_source" : source,
+     "nested_rest" : mutate_rest(source),
+     "first_empty" : mutate_rest(),
+     "second_empty" : mutate_rest(),
+     "codeblock_count" : all_values({ return("callback") }).count()
+   })
+ }
+]])
+  local result = linkedspec.runtime_parse(engine, "x").value
+  assert_equal(json.encode(result), json.encode(json.harray({
+    ordered = json.array({ 1, 2 }),
+    counter = 2,
+    caller_source = json.array({ "outer" }),
+    nested_rest = json.array({ json.array({ "outer" }), "inner" }),
+    first_empty = json.array({ "inner" }),
+    second_empty = json.array({ "inner" }),
+    codeblock_count = 1,
+  })), "variadic runtime order and freshness")
+end)
+
+test("runtime variadic calls diagnose minimum arity and keyword arguments", function()
+  local collect = variadic_registry_function(
+    "collect",
+    { "prefix" },
+    "items",
+    0,
+    nil,
+    'return({ "prefix" : prefix, "items" : items })'
+  )
+  local minimum = assert_user_function_runtime_error(
+    staged_user_function_runtime({ collect }, "Top::\n /x/ E { return(collect()) }\n"),
+    "user_function_arity_mismatch",
+    "expects arity at least 1, got 0",
+    "variadic minimum arity"
+  )
+  assert_equal(minimum.helper_name, "collect", "variadic minimum function owner")
+
+  local keyword_engine = staged_user_function_runtime(
+    { collect },
+    'Top::\n /x/ E { return(collect("p")) }\n'
+  )
+  local payload = keyword_engine.compiled_spec.rules_by_label.Top.lifecycle_action_payloads[1]
+  local call = payload.action_ast.statements[1].expr.args[1].value
+  call.args[1] = linkedspec.action_ast.keyword_argument(
+    "prefix",
+    linkedspec.parse_action_expression('"p"')
+  )
+  payload.contracts = linkedspec.resolve_action_block_contracts(
+    payload.action_ast,
+    { function_registry = keyword_engine.compiled_spec.function_registry }
+  )
+  local keyword = assert_user_function_runtime_error(
+    keyword_engine,
+    "user_function_keyword_arguments_unsupported",
+    "accepts positional arguments only",
+    "variadic keyword argument"
+  )
+  assert_equal(keyword.expected, "positional arguments", "variadic keyword expected surface")
+  assert_equal(keyword.got, 1, "variadic keyword count")
+  assert_equal(payload.contracts.ok, false, "variadic keyword contract rejects")
+  assert_equal(
+    payload.contracts.diagnostics[1].code,
+    "user_function_keyword_arguments_unsupported",
+    "variadic keyword contract diagnostic"
+  )
 end)
 
 test("runtime user functions diagnose arity keywords and recursion before helper fallback", function()

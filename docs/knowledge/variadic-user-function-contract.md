@@ -46,9 +46,10 @@ not accepted; user-defined functions do not become receiver methods. Existing bu
 their purpose-specific exact, bounded, or open arities.
 
 Perl, Rust, Dart, and Julia implement the neutral contract through native and generated execution. Lua now
-preserves the exact native signature-state union and resolves its minimum/unbounded arity under
-`LUA-BACKEND-PARITY.5.1.3.1`; fresh rest-array execution remains `.5.1.3.2`, descriptor admission `.5.3`, and
-generated preservation/execution/admission `.8.1-.4`. Until those close, fixed-function behavior remains the
-portable six-runtime baseline.
+preserves the exact native signature-state union, resolves minimum/unbounded arity, and executes fresh typed rest
+arrays under `LUA-BACKEND-PARITY.5.1.3.1/.2`; descriptor admission remains `.5.3`, and generated preservation/
+execution/admission remains `.8.1-.4`. Until those close, fixed-function behavior remains the portable six-runtime
+baseline.
 
-Related routing facts: [[lua-variadic-user-function-routing]], [[lua-variadic-v2-signature-state]].
+Related routing facts: [[lua-variadic-user-function-routing]], [[lua-variadic-v2-signature-state]],
+[[lua-variadic-v2-runtime]].

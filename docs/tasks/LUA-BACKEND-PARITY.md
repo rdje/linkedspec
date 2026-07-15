@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (exact variadic-v2 signature state passes 136/136 on PUC Lua and LuaJIT with status
-  `runtime-user-functions-variadic-v2-state`; fresh rest-array execution `.5.1.3.2` is active)
+- Last updated: `2026-07-15` (fresh typed variadic-v2 rest arrays pass 139/139 on PUC Lua and LuaJIT with status
+  `runtime-user-functions-variadic-v2`; contextual final-codeblock metadata `.5.1.4.1` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2027,14 +2027,19 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions`
 
 - ID: `LUA-BACKEND-PARITY.5.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Consume the fixed-v1/variadic-v2 callable-signature union natively.
   Children: `.5.1.3.1`, `.5.1.3.2`
   Dependencies: `.5.1.2`
   Acceptance: The spec-owned shell, typed state, registry resolution, and runtime consume the unchanged neutral
     signature contract; descriptor admission remains `.5.3` and generated preservation/execution remains `.8`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `.5.1.3.1` preserves the exact fixed-v1/variadic-v2 signature union through
+    every native state boundary and resolves minimum/unbounded arity at 136/136. `.5.1.3.2` evaluates caller
+    arguments once left-to-right, copies the complete frame, binds fixed prefixes normally, and copies all extras
+    into one fresh typed rest array. The unchanged neutral fixture plus empty/nonempty/mixed/codeblock/freshness,
+    receiver-chain, minimum-arity, and keyword proof pass at 139/139 on both Lua ABIs. Descriptors remain `.5.3`,
+    generated source remains `.8`, status is `runtime-user-functions-variadic-v2`, and `.5.1.4.1` is active.
+  Commit: children `.5.1.3.1`, `.5.1.3.2`
 
 - ID: `LUA-BACKEND-PARITY.5.1.3.1`
   Status: `done`
@@ -2058,17 +2063,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.1.3.1 - preserve Lua variadic signatures`
 
 - ID: `LUA-BACKEND-PARITY.5.1.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute Lua variadic-v2 user functions through fresh typed rest arrays.
   Dependencies: `.5.1.3.1`
   Acceptance: Arguments evaluate once left-to-right; fixed prefixes bind normally; extras bind as one fresh copied
     typed array including the empty case and nested/null/boolean/codeblock identities; minimum-arity and keyword
     failures are typed; results chain; the unchanged neutral fixture passes on PUC Lua and LuaJIT.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `prepare_invocation(...)` retains every evaluated argument as an isolated
+    copy, binds fixed-prefix parameters through the established four-kind stores, and copies extras again into one
+    fresh `json.array()` bound through the final rest name. Empty/repeated calls do not alias; nested array/harray,
+    null, boolean, and structural codeblock identities survive; caller inputs and the separate typed-store mirror
+    remain isolated. The native interpreter executes the unchanged shared callable-signature fixture exactly,
+    including fixed/empty/nonempty/mixed/prefix-object/result-chain cases. Supplemental proof locks eager ordered
+    side effects, rest mutation, codeblock count, `at least N` runtime diagnostics, and keyword rejection. PUC Lua
+    and LuaJIT pass 139/139; callable signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; coverage remains
+    246/105+1/122; capability remains 64/0/0; public status is `runtime-user-functions-variadic-v2`; and
+    `.5.1.4.1` is active. Descriptor admission remains `.5.3`; generated source remains `.8`.
+    Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 621 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions`
 
 - ID: `LUA-BACKEND-PARITY.5.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Consume final contextual `name: codeblock` parameters for Lua user functions.
   Children: `.5.1.4.1`, `.5.1.4.2`
   Dependencies: `.5.1.3`
@@ -2078,7 +2093,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.5.1.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve final codeblock parameter kind through Lua shell, staged records, registry, and call normalization.
   Dependencies: `.5.1.3.2`
   Acceptance: Final-only `callback: codeblock` carries exact typed metadata; attached and parenthesized contextual
@@ -2258,8 +2273,9 @@ trace controls/sinks pass 128/128 and runtime instrumentation `.4.4.3` passes 12
 `.4.4.4` closes the scoped parent without behavior changes. Staged-function/native-loading `.5.1` is active; full
 native-pipeline trace remains `.5.3`. Planning `.5.1.0` now separates staged body dispatch, fixed-v1 execution,
 variadic metadata/runtime, contextual-codeblock metadata/runtime, and closeout. Minimal staged dispatch `.5.1.1`
-passes 130/130. Fixed-v1 runtime `.5.1.2` passes 133/133. Exact variadic-v2 signature state `.5.1.3.1` now passes
-136/136 with status `runtime-user-functions-variadic-v2-state`; fresh rest-array execution `.5.1.3.2` is active.
+passes 130/130. Fixed-v1 runtime `.5.1.2` passes 133/133. Exact variadic-v2 state `.5.1.3.1` passes 136/136, and
+fresh rest-array runtime `.5.1.3.2` passes 139/139 with status `runtime-user-functions-variadic-v2`; contextual
+final-codeblock metadata `.5.1.4.1` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2358,10 +2374,30 @@ passes 130/130. Fixed-v1 runtime `.5.1.2` passes 133/133. Exact variadic-v2 sign
 | 93 | `LUA-BACKEND-PARITY.5.1.1` | `done` | Deterministic `actionir-body.spec` provider, stable queue, governed identity, and immutable stitching pass 130/130. |
 | 94 | `LUA-BACKEND-PARITY.5.1.2` | `done` | Registry-first fixed-v1 calls, fresh stores, local returns, composition, and typed fences pass 133/133. |
 | 95 | `LUA-BACKEND-PARITY.5.1.3.1` | `done` | Exact fixed-v1/variadic-v2 state and minimum/unbounded resolution pass 136/136. |
-| 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `active` | Execute variadic-v2 calls with fresh typed rest arrays. |
-| 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `pending` | Preserve final codeblock parameter metadata and normalize contextual forms. |
+| 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `done` | Fresh typed rest arrays and the unchanged neutral fixture pass 139/139. |
+| 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `active` | Preserve final codeblock parameter metadata and normalize contextual forms. |
 | 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `pending` | Execute contextual final blocks through declared user-function slots. |
 | 99 | `LUA-BACKEND-PARITY.5.1.5` | `pending` | Close staged-function/variadic/contextual-codeblock execution no-drift. |
+
+### `LUA-BACKEND-PARITY.5.1.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Variadic definitions resolved by minimum arity, but invocation deliberately failed
+  with `variadic_user_function_runtime_pending` before any rest value could bind or a staged body could execute.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `user_function_registry.prepare_invocation(...)` copied only fixed-prefix
+  arguments into the isolated frame and had no backend-neutral typed-array binding for the signature's rest name.
+- [x] **FIX** — Retain isolated copies of every evaluated argument, bind the fixed prefix normally, and copy all
+  extras again into one fresh `json.array()` exposed through the rest scalar/typed-array stores; reuse the existing
+  staged ActionIR body evaluator with no Lua vararg, host splat, or second function interpreter.
+- [x] **ADDRESSED (verified)** — The unchanged neutral callable fixture passes exact fixed, empty/nonempty rest,
+  mixed value, prefix/object, and receiver-chain results. Supplemental tests lock eager order, empty/repeated
+  freshness, nested array/harray/null/boolean/codeblock identity, caller/store isolation, minimum arity, and keyword
+  diagnostics.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 139/139 on separately built PUC Lua and LuaJIT
+  adapters plus syntax, CLI scaffold, and exact 105-fixture validation. Callable signature/codeblock checkers pass
+  3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
+  CLI 61x2 plus Phase 0 `1..1031` in 621 seconds.
+- [x] **LOCKSTEP** — Public status, Lua/root READMEs, task/index/roadmaps, live/changes/notes/memory, mdBook
+  pipeline/status/handoff/trace pages, and Knowledge Map close `.5.1.3` and activate only `.5.1.4.1`.
 
 ### `LUA-BACKEND-PARITY.5.1.3.1` Acceptance Checklist
 
@@ -3705,3 +3741,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.1.1` | `LUA-BACKEND-PARITY.5.1.1 - add Lua staged body dispatch` | Stable typed job queue, governed ActionIR provider/cache identity, immutable body stitching, typed fences, and 130/130 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.2` | `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions` | Registry-first calls, staged-AST authority, isolated local execution, value composition, typed fences, and 133/133 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.3.1` | `LUA-BACKEND-PARITY.5.1.3.1 - preserve Lua variadic signatures` | Exact v1/v2 union, signature identity, minimum/unbounded registry resolution, later-boundary fences, and 136/136 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.5.1.3.2` | `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions` | Eager ordered arguments, fresh copied mixed/empty rest arrays, exact neutral fixture, typed failures, and 139/139 dual-ABI proof. |

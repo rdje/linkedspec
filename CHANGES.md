@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.3.2 — execute Lua variadic functions
+
+Replaced the deliberate variadic-runtime pending fence with fresh typed rest-array binding in the native Lua
+invocation frame. Every positional argument remains eagerly evaluated once left-to-right by the caller, then is
+copied into frame arguments. Fixed-prefix parameters bind through the established isolated stores; every extra is
+copied again into one fresh typed array bound to the final rest name. Empty and repeated rest arrays do not alias,
+and nested array/harray plus null, boolean, and codeblock identities remain intact without caller mutation.
+
+The Lua runtime now executes the unchanged shared `linkedspec-callable-signature-v1` fixture, including fixed,
+empty/nonempty rest, mixed-value, prefix/object, and receiver-chain cases. Supplemental runtime proof locks eager
+side effects, nested/rest mutation isolation, codeblock admission, minimum-arity diagnostics, and keyword
+rejection. PUC Lua and LuaJIT pass 139/139; public status becomes `runtime-user-functions-variadic-v2`, coverage
+remains 246/105+1/122, capability remains 64/0/0, and contextual final-codeblock metadata `.5.1.4.1` is next.
+Outward descriptors remain `.5.3`; generated preservation/execution remains `.8`. Canonical local CI passes CLI
+61x2 plus Phase 0 `1..1031` in 621 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.3.1 — preserve Lua variadic signatures
 
 Added a typed six-field callable signature and preserved the exact versioned storage union through Lua's

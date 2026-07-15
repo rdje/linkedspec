@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.3.2 — execute Lua variadic functions**
+  (DONE — native variadic-v2 runtime is green; contextual final-codeblock metadata `.5.1.4.1` is next).
+
+  **Result:** Lua evaluates variadic arguments once in caller order, copies every frame argument, binds fixed
+  prefixes normally, and binds extras as one fresh copied typed array. Empty and repeated calls stay isolated;
+  nested arrays/harrays plus null/boolean/codeblock identities survive; results feed receiver chains; and minimum
+  arity/keyword failures stay typed. The unchanged neutral callable fixture passes exactly on both ABIs. PUC Lua
+  and LuaJIT pass 139/139; status is `runtime-user-functions-variadic-v2`, coverage remains 246/105+1/122, and
+  capability remains 64/0/0. Descriptors remain `.5.3` and generated source remains `.8`.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 621 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.3.1 — preserve Lua variadic signatures**
   (DONE — exact variadic-v2 state is green; fresh rest-array runtime `.5.1.3.2` is next).
 

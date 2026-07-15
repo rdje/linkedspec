@@ -15,6 +15,7 @@ evidence_update_2026_07_15_split: "LUA-BACKEND-PARITY.5.1.0 assigns variadic typ
 evidence_update_2026_07_15_staged_registry: "LUA-BACKEND-PARITY.5.1.1 completes minimal body dispatch at 130/130 and activates fixed-v1 runtime .5.1.2; variadic state/runtime remain dependency-correct .5.1.3.1/.2."
 evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 completes fixed-v1 registered execution at 133/133 and activates variadic-v2 typed-state preservation .5.1.3.1; runtime rest-array execution remains .5.1.3.2."
 evidence_update_2026_07_15_signature_state: "LUA-BACKEND-PARITY.5.1.3.1 preserves exact v1/v2 shell, AST, staged, registry, contract, and compiled signature state with minimum/unbounded resolution at 136/136; fresh rest-array execution .5.1.3.2 is active while descriptors and generated source remain .5.3/.8."
+evidence_update_2026_07_15_native_runtime: "LUA-BACKEND-PARITY.5.1.3.2 executes fresh copied typed rest arrays and the unchanged neutral fixture at 139/139; contextual final-codeblock metadata .5.1.4.1 is active while descriptors and generated source remain .5.3/.8."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1|LUA-BACKEND-PARITY\\.5\\.3|LUA-BACKEND-PARITY\\.8\\.[1-4]|callable-signature|variadic' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md capability_conformance/manifest.json"
 ---
 
@@ -32,10 +33,10 @@ array binding, not Lua `...` dispatch.
 The remaining projections have explicit later owners: `.5.3` admits exact outward descriptors; `.8.1` preserves
 the union in normalized emitted state; `.8.2` independently executes the neutral fixture; `.8.3` makes the proof
 recurring; and `.8.4` removes the future capability entry only after native and generated paths pass. Fixed-v1
-registered-call runtime `.5.1.2`, staged action-body dispatch `.5.1.1`, and exact variadic-v2 state preservation
-`.5.1.3.1` are done. The current Lua frontier is fresh typed rest-array execution `.5.1.3.2`.
+registered-call runtime `.5.1.2`, staged action-body dispatch `.5.1.1`, and exact variadic-v2 state/runtime
+`.5.1.3.1/.2` are done. The current Lua frontier is contextual final-codeblock metadata `.5.1.4.1`.
 
 Related facts: [[lua-user-function-registry]], [[lua-function-definition-shell-projection]],
 [[variadic-user-function-contract]], [[variadic-callable-signature-seams]],
 [[lua-staged-function-execution-split]], [[lua-fixed-v1-user-function-runtime]].
-[[lua-variadic-v2-signature-state]].
+[[lua-variadic-v2-signature-state]], [[lua-variadic-v2-runtime]].

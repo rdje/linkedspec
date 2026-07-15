@@ -10,20 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.5.1.3.1` — exact variadic-v2 signature-state preservation.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.1.3.1 - preserve Lua variadic signatures`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.1.3.2` — fresh typed variadic-v2 runtime execution.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions`.
 - prepared_commit: `none`.
-- active_work_unit: clean handoff to fresh typed rest-array execution `LUA-BACKEND-PARITY.5.1.3.2` after exact
-  variadic-v2 state closes at 136/136 on both Lua ABIs.
-- next_action: bind ordered variadic extras into one fresh copied typed array, including the empty case, and execute
-  the unchanged neutral callable fixture under `.5.1.3.2`; do not begin descriptor admission `.5.3` or generated
-  preservation/execution `.8`.
-- current_proof: Lua preserves the exclusive fixed-v1 params/arity versus variadic-v2 six-field signature union
-  through shell, AST, staged jobs, registry, contracts, and compiled state; sidecar drift and seven invalid
-  definitions fail typed; resolution accepts the fixed-prefix minimum through an unbounded maximum and carries
-  `at least N` expectations; runtime and descriptors fail closed for their later owners. Both Lua ABIs pass
-  136/136; callable signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; canonical local CI passes CLI 61x2
-  and Phase 0 `1..1031` in 620 seconds. Status is `runtime-user-functions-variadic-v2-state`; capability is 64/0/0.
+- active_work_unit: clean handoff to contextual final-codeblock metadata
+  `LUA-BACKEND-PARITY.5.1.4.1` after native variadic-v2 execution closes at 139/139 on both Lua ABIs.
+- next_action: preserve final-only `callback: codeblock` parameter metadata through Lua shell/staged/registry/call
+  normalization and reject invalid declarations under `.5.1.4.1`; do not begin contextual execution `.5.1.4.2`.
+- current_proof: Lua evaluates variadic positional arguments once in caller order, copies the complete invocation
+  frame, binds fixed prefixes normally, and copies extras into one fresh typed rest array. The unchanged neutral
+  fixture passes; empty/repeated arrays and nested array/harray/null/boolean/codeblock values remain isolated;
+  receiver chains work; minimum/keyword failures stay typed. Both Lua ABIs pass 139/139; callable signature/
+  codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 621
+  seconds. Status is `runtime-user-functions-variadic-v2`; capability is 64/0/0; descriptors/generated source
+  remain `.5.3`/`.8`.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.

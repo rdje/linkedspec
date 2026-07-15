@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.3.2` — rest is a LinkedSpec value, never a Lua vararg): Preserve caller-side
+  eager evaluation and the existing isolated function frame. Copy all evaluated values into `frame.arguments`,
+  bind the fixed prefix through the ordinary scalar/array/harray mirrors, then build a new `json.array()` and copy
+  each extra again before binding the rest name. That second boundary makes the rest value independent from caller
+  inputs, the diagnostic frame, and every later invocation—including the empty case—without host `...`, closure,
+  or splat semantics. The existing ActionIR body evaluator then handles return composition and receiver chains
+  unchanged. Lock the exact neutral fixture plus supplemental ordered side effects, nested mutations, codeblock
+  identity, minimum arity, and keyword failures. Both ABIs pass 139/139; status is
+  `runtime-user-functions-variadic-v2`, capability stays 64/0/0, descriptors remain `.5.3`, and generated source
+  remains `.8`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 621 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.3.1` — preserve semantic variadicity before executing it): Keep the neutral
   version switch exact at every Lua boundary. Fixed-v1 JSON owns top-level `params`/`arity` and forbids a signature;
   variadic-v2 JSON owns only its six-field `callable_signature` and forbids legacy top-level or staged fields.

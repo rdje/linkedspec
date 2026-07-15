@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **533** facts · **3687** question keys.
+> **534** facts · **3692** question keys.
 
 ## Questions → fact
 
@@ -56,6 +56,7 @@
 - "are Lua selectors rejected inside unused user functions" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
 - "are Lua sorted_values ordered by sorted keys" -> [lua-runtime-harray-views](docs/knowledge/lua-runtime-harray-views.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'count_keys|sorted_keys|sorted_values|has_key|runtime deterministic harray views' lua/src/linkedspec/interpreter.lua lua/test/run.lua docs/linkedspec-book/src/appendix/helper-contract-catalog.md`
 - "are Lua tree callback paths and values copied" -> [lua-runtime-harray-tree-callbacks](docs/knowledge/lua-runtime-harray-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'run_frame|evaluate_tree_receiver_block|exact Perl reference callback result|runtime harray traversal' lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua`
+- "are Lua variadic rest arrays fresh" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "are PPlugin and PluginBridge part of the target architecture" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
 - "are Perl CLI long options case sensitive" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "are Perl CLI options case sensitive now" -> [perl-primary-cli-strict-arguments](docs/knowledge/perl-primary-cli-strict-arguments.md) · 2026-07-10 · reverify: `perl -c bin/linkedspec && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= POSIXLY_CORRECT=1 perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
@@ -808,6 +809,7 @@
 - "does Lua execute the anonymous capture helper family" -> [lua-runtime-anonymous-capture-helpers](docs/knowledge/lua-runtime-anonymous-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua execute the exhaustive governed named capture fixture" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "does Lua execute variadic rest arrays yet" -> [lua-variadic-v2-signature-state](docs/knowledge/lua-variadic-v2-signature-state.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
+- "does Lua execute variadic user functions" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua execute with trailing blocks" -> [lua-runtime-builtin-final-codeblocks-with](docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && PERL5LIB=perl perl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(\"x\".with() { return(value) })}, q{return(\"x\".with({ return(value) }))}) { print LinkedSpec::call_spec_handler_subst(q{Top},$s), qq{\\n}; }'`
 - "does Lua exit_now still terminate immediately" -> [lua-diagnostic-output-events](docs/knowledge/lua-diagnostic-output-events.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnosticOutputEvent|diagnostic_sink|evaluate_runtime_diagnostic_output' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua expose an implicit rule accumulator" -> [lua-runtime-array-mutation-child-flow](docs/knowledge/lua-runtime-array-mutation-child-flow.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'accumulator_stack|literal_nonnegative_index|runtime child push' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
@@ -839,6 +841,7 @@
 - "does Lua parse spec source yet" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse the equals helper alias" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua parse top-level function definitions yet" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua pass the neutral callable signature fixture" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua preserve JSON null array and harray identity" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve function body parse jobs" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve numeric array index assignment" -> [lua-runtime-named-harray-mutation](docs/knowledge/lua-runtime-named-harray-mutation.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
@@ -907,6 +910,7 @@
 - "does Lua trace lifecycle blocks and recursion guards" -> [lua-runtime-trace-events](docs/knowledge/lua-runtime-trace-events.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'lua_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary|mark_capture)' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua trace regex match decisions" -> [lua-runtime-trace-events](docs/knowledge/lua-runtime-trace-events.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'lua_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary|mark_capture)' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua tracing preserve parse output" -> [lua-trace-controls-sinks](docs/knowledge/lua-trace-controls-sinks.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua use host varargs for LinkedSpec functions" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua use one dispatcher for hash and array tree traversal" -> [lua-runtime-harray-tree-callbacks](docs/knowledge/lua-runtime-harray-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'run_frame|evaluate_tree_receiver_block|exact Perl reference callback result|runtime harray traversal' lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua use one root kind dispatcher for tree callbacks" -> [lua-runtime-array-tree-callbacks](docs/knowledge/lua-runtime-array-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'tree_children|new_tree_container|set_tree_child|evaluate_tree_leaf_block|evaluate_tree_receiver_block|runtime array traversal' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua use string lower upper for LinkedSpec casing" -> [six-variant-unicode-17-case-parity](docs/knowledge/six-variant-unicode-17-case-parity.md) · 2026-07-12 · reverify: `python3 tools/check_unicode_case_contract.py && bash tools/run_lua_local.sh`
@@ -1646,6 +1650,7 @@
 - "how does LinkedSpec run Lua tests" -> [lua-toolchain-package-policy](docs/knowledge/lua-toolchain-package-policy.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does LinkedSpec.pm dispatch into owner modules" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
 - "how does Lua avoid tonumber modulo and rounding drift" -> [lua-scalar-numeric-runtime](docs/knowledge/lua-scalar-numeric-runtime.md) · 2026-07-12 · reverify: `bash tools/check_scalar_numeric_six_runtime.sh`
+- "how does Lua bind variadic rest values" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "how does Lua bound nested marker switches" -> [lua-runtime-switch-statement-controls](docs/knowledge/lua-runtime-switch-statement-controls.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash knowledge-map/scripts/check_knowledge_map.sh`
 - "how does Lua build its PCRE2 matching adapter" -> [lua-toolchain-package-policy](docs/knowledge/lua-toolchain-package-policy.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does Lua canonicalize helper aliases" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -5916,7 +5921,7 @@ _Lua staged function execution is split by typed-state and runtime dependencies_
 
 - **answers:** how is LUA-BACKEND-PARITY 5.1 split | what is next after Lua diagnostics trace | which Lua leaf dispatches function body parse jobs | which Lua leaf executes fixed user functions | which Lua leaves implement variadic user functions | which Lua leaves implement contextual final codeblock parameters | why are callable codeblock literals not in Lua 5.1
 - **date:** 2026-07-15 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. .5.1.1 lands staged dispatch at 130/130, .5.1.2 fixed-v1 execution at 133/133, and .5.1.3.1 exact variadic-v2 state at 136/136 before .5.1.3.2 runtime.`
+- **evidence:** `LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. .5.1.1 lands staged dispatch at 130/130, .5.1.2 fixed-v1 execution at 133/133, .5.1.3.1 exact variadic-v2 state at 136/136, and .5.1.3.2 fresh-rest runtime at 139/139 before .5.1.4.1 metadata.`
 - **reverify:** `rg -n 'LUA-BACKEND-PARITY\\.5\\.1(\\.|`)|staged action-body|fixed-v1|variadic-v2|contextual-codeblock|callable literals' docs/tasks/LUA-BACKEND-PARITY.md docs/TASK_TREE.md README.md ROADMAP.md ROADMAP_V2.md lua/README.md docs/linkedspec-book/src docs/knowledge`
 - **source:** [`docs/knowledge/lua-staged-function-execution-split.md`](docs/knowledge/lua-staged-function-execution-split.md)
 
@@ -5991,6 +5996,15 @@ _Lua variadic user functions begin at dependency-complete staged runtime executi
 - **evidence:** `FUTURE-PARITY-BACKLOG.4.4 audits the completed Lua shell/registry/frame/compiled-state seams and pending runtime/generated lanes. LUA-BACKEND-PARITY.5.1 now owns native fixed-v1/variadic-v2 execution, .5.3 descriptor admission, and .8.1-.4 generated preservation/execution/proof/capability retirement.`
 - **reverify:** `rg -n 'LUA-BACKEND-PARITY\\.5\\.1|LUA-BACKEND-PARITY\\.5\\.3|LUA-BACKEND-PARITY\\.8\\.[1-4]|callable-signature|variadic' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md capability_conformance/manifest.json`
 - **source:** [`docs/knowledge/lua-variadic-user-function-routing.md`](docs/knowledge/lua-variadic-user-function-routing.md)
+
+### lua-variadic-v2-runtime
+_Lua variadic functions bind extras as fresh typed arrays_
+
+- **answers:** does Lua execute variadic user functions | how does Lua bind variadic rest values | are Lua variadic rest arrays fresh | does Lua use host varargs for LinkedSpec functions | does Lua pass the neutral callable signature fixture
+- **date:** 2026-07-15 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.5.1.3.2 passes 139/139 on PUC Lua and LuaJIT. The unchanged linkedspec-callable-signature-v1 fixture passes exactly; supplemental proof covers eager order, empty/nonempty freshness, nested array/harray/null/boolean/codeblock identity, receiver chains, minimum arity, and keyword rejection.`
+- **reverify:** `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
+- **source:** [`docs/knowledge/lua-variadic-v2-runtime.md`](docs/knowledge/lua-variadic-v2-runtime.md)
 
 ### lua-variadic-v2-signature-state
 _Lua preserves variadic-v2 signatures before binding rest arrays_

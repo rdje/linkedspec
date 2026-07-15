@@ -75,8 +75,10 @@ Three backbone items tracked major structural modernization — all done:
   runtime wrappers at 128/128. `.4.4.3` adds exact rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-
   capture events at 129/129; `.4.4.4` closes scoped runtime no-drift and parent `.4.4`. Minimal staged dispatch
   `.5.1.1` passes 130/130; fixed-v1 execution `.5.1.2` passes 133/133. Variadic-v2 state `.5.1.3.1` preserves the
-  exact signature union and minimum/unbounded registry resolution at 136/136 with public status
-  `runtime-user-functions-variadic-v2-state`; fresh rest-array runtime `.5.1.3.2` is active, and full native-loading/frontend/
+  exact signature union and minimum/unbounded registry resolution at 136/136. Fresh rest-array runtime `.5.1.3.2`
+  then executes the unchanged neutral fixture, copied mixed/empty values, receiver chains, and typed failures at
+  139/139 with public status `runtime-user-functions-variadic-v2`; contextual final-codeblock metadata `.5.1.4.1`
+  is active, and full native-loading/frontend/
   compiler/function/staged/runtime trace remains `.5.3` after its `.5.1`/`.5.2` owners exist. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
@@ -90,7 +92,8 @@ Three backbone items tracked major structural modernization — all done:
   immutable `body_ast` stitching, and composed shell dispatch at 130/130 on both ABIs. `.5.1.2` adds registry-first
   fixed calls, copied fresh stores, local returns, composition, and typed failure fences at 133/133. `.5.1.3.1`
   then preserves exact v1/v2 state, validates all seven invalid definitions, and resolves at or above the fixed
-  prefix at 136/136; `.5.1.3.2` is active. Descriptors/full trace remain `.5.3`, generated Lua remains `.8`, and explicit callable literals/bound
+  prefix at 136/136. `.5.1.3.2` binds fresh copied rest arrays and executes the exact shared fixture at 139/139;
+  `.5.1.4.1` is active. Descriptors/full trace remain `.5.3`, generated Lua remains `.8`, and explicit callable literals/bound
   calls remain `.11.7`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. The program is dormant until full current-backend parity and no format implementation has started.
 - **Planned Rust mutation testing** - ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit test-strength campaign, never a per-commit/pre-commit/ordinary-local-CI gate. The list-only baseline is 3,333 candidates across 19 files; no mutant has executed and no score is claimed. A safe manual surface and targeted pilot must precede any resource-guarded milestone/release sharding. Every survivor receives a durable disposition and true gaps gain behavior-focused tests; the generated Unicode table is the initial provenance-backed exclusion.

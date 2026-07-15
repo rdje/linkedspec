@@ -105,9 +105,10 @@ This `README.md` is the **single entry point** to the project.
   composes returned values, and reports typed arity/keyword/recursion/staging failures. Variadic-v2 state
   `.5.1.3.1` now preserves the exact fixed-v1/variadic-v2 union through shell, typed AST, staged jobs, registry,
   contracts, and compiled state; registry resolution accepts the governed fixed-prefix minimum and unbounded
-  maximum while runtime rest binding and outward descriptor admission fail closed for their later owners. Both
-  ABIs pass 136/136 and public status is `runtime-user-functions-variadic-v2-state`; fresh rest-array execution
-  `.5.1.3.2` is active. Full frontend/
+  maximum. Runtime `.5.1.3.2` now evaluates positional arguments once left-to-right, binds extras as a fresh copied
+  typed array, executes the unchanged neutral fixture, preserves mixed value identities, and diagnoses minimum/
+  keyword failures. Both ABIs pass 139/139 and public status is `runtime-user-functions-variadic-v2`; contextual
+  final-codeblock metadata `.5.1.4.1` is active. Outward descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
