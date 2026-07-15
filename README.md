@@ -142,8 +142,12 @@ This `README.md` is the **single entry point** to the project.
   160/160 on both Lua ABIs; the corpus CLI deliberately remains validation-only. Core admission `.6.1.3` now
   permanently locks exact offsets 0-39 at 40/40 with endpoint 1/1 and focused suites at 161/161 on both ABIs.
   Governed admission `.6.1.4` now permanently locks exact offsets 99-104 at 6/6 with endpoints
-  `2,1,2,1,5,5`; both suites pass 162/162, parent `.6.1` is closed, and advanced/shipped offsets 40-98 `.6.2`
-  are active. Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0.
+  `2,1,2,1,5,5`; both suites pass 162/162 and parent `.6.1` is closed. Advanced/shipped planning `.6.2.0`
+  measures offsets 40-98 identically at 50/59 on both ABIs and routes nine residuals through four current
+  mechanisms: action-edge child-call double dispatch, receiver-copy value loss, missing flat-array hash splicing,
+  and public leading-trivia initialization. Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and permanent
+  59-case admission `.6.2.6` are split; `.6.2.1` is active. Public status/CLI/corpus data remain unchanged and
+  capability stays four-backend 64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

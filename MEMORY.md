@@ -10,19 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.6.1.4` — permanently admitted governed capability offsets 99-104.
-- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.6.2.0` — measured and split advanced/shipped offsets 40-98.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals`.
 - prepared_commit: `none`.
-- active_work_unit: advanced helper/function/recursion/shipped corpus window `LUA-BACKEND-PARITY.6.2`.
-- next_action: execute exact manifest offsets 40-98 through the production library executor, inventory every
-  failure by stage/mechanism, and dependency-split repairs before changing behavior or expected values.
-- current_proof: The reusable executor validates before selection and retains typed non-aborting observations.
-  Permanent offsets 0-39 pass 40/40 at endpoint 1; offsets 99-104 pass 6/6 with exact governed names and endpoints
-  `2,1,2,1,5,5`. Every result matches one wrapping of unchanged expected JSON with no failure. PUC Lua and LuaJIT
-  pass 162/162. Production source, corpus data, CLI, public status `native-full-pipeline-trace-v1`, coverage
-  246/105+1/122, and capability 64/0/0 remain unchanged. Canonical local CI exits 0: CLI 61x2 and Phase 0
-  `1..1031` pass in 651 seconds (1,328.76 seconds total under concurrent machine load). Parent `.6.1` closes and
-  `.6.2` owns offsets 40-98. Mutation testing remains manual-only.
+- active_work_unit: action-edge child-call reuse `LUA-BACKEND-PARITY.6.2.1`.
+- next_action: make `call(child)` reuse and mark the current action-edge child result exactly once; add focused
+  self/non-self/passive/unrelated-call proof, then remeasure the six currently affected fixtures and offsets 40-98.
+- current_proof: Exact offsets 40-98 produce the same 50/59 result on PUC Lua and LuaJIT. Nine residuals comprise
+  hash receiver compare; three HLink execute; two EBNF compare; SimEnv execute; history compare; and PPlugin compare.
+  Production debug trace plus canonical Perl generated source/descriptor probes prove four current mechanisms:
+  `call(child)` bypasses the action-edge cache and triggers fallback double execution; receiver `.copy()` drops its
+  value; `hash(flat_array(...))` misses a hash splice; public parse does not skip leading blank/comment lines.
+  Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and permanent 59/59 admission `.6.2.6` are split. No runtime,
+  tests, corpus/oracle, public status/CLI, coverage 246/105+1/122, or capability 64/0/0 changes in `.6.2.0`. Both
+  Lua ABIs remain 162/162; canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 629 seconds.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.

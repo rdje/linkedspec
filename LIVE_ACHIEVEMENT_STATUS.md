@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.0 — split Lua advanced corpus residuals**
+  (DONE — exact dual-ABI 50/59 measurement and dependency-ordered repair split are durable; `.6.2.1` is next).
+
+  **Result:** Exact offsets 40-98 produce the same 50/59 result on PUC Lua and LuaJIT. Nine residuals comprise one
+  hash-receiver compare, three HLink executes, two EBNF compares, one SimEnv execute, one history compare, and one
+  PPlugin compare. Production debug traces plus canonical Perl generated-source/descriptor probes prove four
+  current mechanisms: action-edge `call(child)` double dispatch, receiver `.copy()` value loss, missing
+  `flat_array` hash splicing, and public leading-trivia cursor initialization. Repairs `.6.2.1-.4`, successor
+  measurement `.6.2.5`, and permanent 59-case admission `.6.2.6` are split before runtime changes. Production,
+  tests, corpus/oracle, status/CLI, coverage, and capability remain unchanged. Both Lua suites pass 162/162;
+  canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 629 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.1.4 — admit Lua capability corpus window**
   (DONE — governed offsets 99-104 are permanently 6/6; parent `.6.1` closes and offsets 40-98 `.6.2` activate).
 

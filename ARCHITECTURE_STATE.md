@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua advanced/shipped planning `.6.2.0` executes exact manifest offsets 40-98 through the
+  production library executor and debug trace on both ABIs before behavior changes. PUC Lua and LuaJIT agree at
+  50/59 with nine identical residuals. Canonical Perl generated-source/descriptor probes separate four current
+  Lua mechanisms: `call(child)` bypasses the current action-edge cache and causes fallback double dispatch;
+  receiver `.copy()` drops its value; `hash(flat_array(...))` misses a hash splice; and public parse starts before
+  the Perl wrapper's leading blank/comment-line boundary. `.6.2.1-.4` own those repairs, `.6.2.5` remeasures and
+  splits any successor, and `.6.2.6` alone owns permanent exact 59/59 admission/no-drift. Production source,
+  tests, corpus/oracle, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 remain unchanged;
+  action-edge repair `.6.2.1` is active.
 - `2026-07-15` refresh: Lua governed corpus admission `.6.1.4` permanently executes exact manifest offsets 99-104.
   The cursor-control, pure-helper, position-helper, control-marker, anonymous-capture, and named-capture fixtures
   pass 6/6 in exact order with unchanged wrapped outputs and byte/character endpoints `2,1,2,1,5,5`. PUC Lua and

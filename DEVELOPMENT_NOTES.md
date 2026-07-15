@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.0` — use cross-language disagreement as a mechanism detector): Exact
+  offsets 40-98 are already 50/59 on both Lua ABIs; the value lies in the nine disagreements. Trace first: a child
+  entered twice is stronger evidence than an output diff. Then compare the emitted canonical Perl handler: it
+  distinguishes one selected-edge invocation from Lua's direct `call(child)` plus fallback dispatch. Keep the
+  independent boundaries separate—receiver `.copy()` must carry its current value, `flat_array` must be an
+  explicit hash splice, and public parse must mirror leading-trivia initialization. Repair those four mechanisms
+  independently, then remeasure before assuming Julia's later statement-mutation residual also exists in Lua.
+  No production/test/oracle/status/census change occurs in this planning slice. Both Lua ABIs remain 162/162;
+  canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 629 seconds. Mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.1.4` — lock endpoints per governed fixture, not per window): Corpus windows
   can share pass/output semantics without sharing cursor length. The core prefix happens to end at endpoint 1 for
   every case, but the six governed capability fixtures end at `2,1,2,1,5,5`. Measure through the production

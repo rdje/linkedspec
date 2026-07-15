@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.0 — split Lua advanced corpus residuals
+
+Measured exact zero-based manifest offsets 40-98 through the production library executor before behavior changes.
+PUC Lua and LuaJIT agree at 50/59 with the same nine residuals: one hash-receiver compare mismatch, three HLink
+execute failures, two EBNF compare mismatches, one SimEnv execute failure, one history compare mismatch, and one
+PPlugin compare mismatch.
+
+Production debug traces plus canonical Perl generated-source and descriptor probes identify four current runtime
+mechanisms. Action-edge `call(child)` bypasses Lua's cached edge dispatcher, so all three HLink cases, both EBNF
+cases, and SimEnv enter the selected child again through fallback. Receiver `.copy()` drops the evaluated harray;
+`hash(flat_array(...))` does not splice the flattened key/value tokens; and public `runtime_parse(...)` does not
+mirror the Perl wrapper's leading blank/comment-line cursor initialization. Split repairs `.6.2.1-.4`, successor
+measurement `.6.2.5`, and exact permanent 59-case admission/no-drift `.6.2.6` before runtime code.
+
+This planning slice changes no production source, tests, corpus data, expected JSON, public status/CLI, coverage,
+or capability census. PUC Lua and LuaJIT remain 162/162; mdBook, Knowledge Map, memory/doctrine, and canonical
+local CI pass. The canonical gate includes CLI 61/61 in default and POSIX environments plus Phase 0 `1..1031` in
+629 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.1.4 — admit Lua capability corpus window
 
 Added one permanent manifest-backed library-executor regression for exact zero-based offsets 99-104. It locks the

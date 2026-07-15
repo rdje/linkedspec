@@ -104,8 +104,12 @@ Three backbone items tracked major structural modernization — all done:
   compares exact wrapped typed JSON, and records every selected success/failure. Controlled proof passes 160/160
   on both ABIs while the CLI stays validation-only. Core admission `.6.1.3` permanently locks exact offsets 0-39
   at 40/40 with exact wrapped outputs and endpoint 1/1. Governed admission `.6.1.4` permanently locks exact
-  offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`; both focused suites pass 162/162, parent `.6.1` closes, and
-  advanced/shipped offsets 40-98 `.6.2` activate. The capability census remains four-backend 64/0/0 until `.8.4`.
+  offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`; both focused suites pass 162/162 and parent `.6.1` closes.
+  Advanced/shipped planning `.6.2.0` measures offsets 40-98 identically at 50/59 on both ABIs. Debug trace and
+  canonical Perl generated-source/descriptor probes route nine residuals to four current mechanisms: action-edge
+  child-call double dispatch, receiver-copy value loss, missing flat-array hash splicing, and public leading-trivia
+  initialization. Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and exact permanent admission `.6.2.6` are
+  split; `.6.2.1` is active. The capability census remains four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s

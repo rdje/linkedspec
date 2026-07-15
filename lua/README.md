@@ -78,7 +78,10 @@ requirements and atomic governed assignment, closes unchanged offset 20, and rai
 focused suites pass 157/157. Executor `.6.1.2` then adds typed selected execution records at 160/160 per ABI.
 Core `.6.1.3` permanently locks offsets 0-39 at 40/40 with endpoint 1/1 and raises both suites to 161/161;
 governed `.6.1.4` permanently locks offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`, raises both suites to
-162/162, closes `.6.1`, and activates advanced/shipped offsets 40-98 under `.6.2`.
+162/162, and closes `.6.1`. Advanced/shipped planning `.6.2.0` measures offsets 40-98 at the same 50/59 on both
+ABIs. It routes action-edge child-call double dispatch, receiver-copy value loss, flat-array hash-splice omission,
+and public leading-trivia initialization to `.6.2.1-.4`; `.6.2.5` owns successor measurement before `.6.2.6`
+permanent 59-case admission. `.6.2.1` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -299,7 +302,10 @@ exact offsets 0-39 and 99-104. Reusable executor `.6.1.2` composes strict valida
 explicit compilation, source-identified execution, wrapped structural comparison, and per-fixture proof records;
 controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` permanently locks exact offsets 0-39 at
 40/40 and endpoint 1/1. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
-`2,1,2,1,5,5`; focused suites pass 162/162, parent `.6.1` closes, and `.6.2` is active for offsets 40-98.
+`2,1,2,1,5,5`; focused suites pass 162/162 and parent `.6.1` closes. `.6.2.0` then measures offsets 40-98 at
+50/59 identically on both ABIs and dependency-splits the four observed runtime mechanisms. Action-edge child-call
+reuse `.6.2.1` is active; receiver copy, flat-array hash splicing, leading-trivia initialization, successor
+measurement, and permanent admission follow under `.6.2.2-.6`.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.

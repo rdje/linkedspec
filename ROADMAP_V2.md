@@ -154,7 +154,11 @@ build/navigation/canonical-owner/drift gates precede any migration. No companion
 One-emitter native loading, frontend, compiler, function-shell, staged, engine, and runtime propagation is complete
 under `.5.3.2`; `.5.3.3` closes exact no-drift without changing the capability census. Corpus planning `.6.1.0`
 and typed segment-kind repair `.6.1.1`, reusable library executor `.6.1.2`, and ordered core window `.6.1.3` are
-complete; governed capability/no-drift `.6.1.4` closes parent `.6.1`, and advanced/shipped window `.6.2` is active.
+complete; governed capability/no-drift `.6.1.4` closes parent `.6.1`. Advanced/shipped planning `.6.2.0` measures
+offsets 40-98 identically at 50/59 on both Lua ABIs and splits four current mechanisms before runtime changes:
+action-edge child-call reuse `.6.2.1`, receiver copy `.6.2.2`, flat-array hash splicing `.6.2.3`, and public
+leading-trivia initialization `.6.2.4`; `.6.2.5` remeasures successor residuals before `.6.2.6` permanent 59-case
+admission. `.6.2.1` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

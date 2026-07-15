@@ -1341,6 +1341,15 @@ Public corpus exports, status `native-full-pipeline-trace-v1`, primary/developer
 coverage 246/105+1/122, and the four-backend 64/0/0 census remain unchanged. Parent `.6.1` closes and `.6.2`
 activates for offsets 40-98.
 
+Index note 2026-07-15: `LUA-BACKEND-PARITY.6.2.0` executes exact offsets 40-98 through the production library
+executor and debug trace on both Lua ABIs before behavior changes. PUC Lua and LuaJIT agree at 50/59 with the same
+nine residuals: one hash-receiver compare, three HLink executes, two EBNF compares, SimEnv execute, history compare,
+and PPlugin compare. Knowledge Map retrieval plus canonical Perl generated-source/descriptor probes identify four
+current mechanisms: action-edge `call(child)` double dispatch; receiver `.copy()` value loss; missing `flat_array`
+hash splicing; and public leading-trivia cursor initialization. Repairs `.6.2.1-.4`, successor measurement/split
+`.6.2.5`, and permanent exact admission `.6.2.6` are owned before runtime changes. `.6.2.1` is active; production
+source, tests, corpus data, expected JSON, status/CLI, coverage, and capability census remain unchanged.
+
 Index note 2026-07-15: ADR `0040` and `FUTURE-PARITY-BACKLOG.21.0` adopt backend implementation companion
 books. The existing backend-neutral mdBook remains the sole normative owner for `.spec`/ActionIR semantics,
 portable behavior, AST/diagnostic contracts, conformance, and common examples. After current backend parity,

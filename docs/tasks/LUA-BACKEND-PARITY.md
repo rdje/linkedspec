@@ -2515,10 +2515,102 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.6.2`
   Status: `active`
   Goal: Admit shipped-spec, recursion, function, and advanced helper windows.
+  Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`, `.6.2.6`
   Acceptance: Expand monotonically through all named manifest families with exact failure inventories and no
     backend-local expected files. This includes exact `portmap_constant`, `simenv_multiline_value`,
     `ebnf_expression_rules`, `ebnf_logging_annotation`, `lib_reader_sattribute`, and `lib_reader_cattribute` proof
     after the helper/control/output owners on which those cases depend.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.0`
+  Status: `done`
+  Goal: Measure and dependency-split exact advanced/shipped offsets 40-98 before behavior changes.
+  Dependencies: `.6.1.4`
+  Acceptance: Execute the exact 59-case window through the production library executor on PUC Lua and LuaJIT;
+    retain exact names, stages, outputs, endpoints, trace evidence, and canonical Perl generated-source evidence;
+    retrieve existing Knowledge Map mechanisms before diagnosis; and create narrowly owned repair, residual-
+    measurement, permanent-admission, and no-drift leaves before changing runtime behavior or expected values.
+  Verification: **PASS 2026-07-15.** Both Lua ABIs produce the same 50/59 exact result. The nine residuals are
+    `terse_2_3_5_2_hash_receiver_value_chains` (compare), three HLink cases (execute), two EBNF cases (compare),
+    `simenv_multiline_value` (execute), `ds_vhistory_version_entry` (compare), and `pplugin_empty` (compare).
+    Production debug trace plus canonical generated Perl prove four current mechanisms: action-edge `call(child)`
+    executes the already-selected child without marking/reusing the edge result and the fallback executes it a
+    second time (all three HLink, both EBNF, and SimEnv); receiver-form `.copy()` discards its evaluated harray
+    receiver (hash receiver fixture); `hash(flat_array(defs))` does not classify `flat_array` as a hash splice
+    (PPlugin); and public `runtime_parse(...)` starts at byte zero instead of mirroring the Perl wrapper's leading
+    blank/comment-line skip (history). `.6.2.1-.4` own those repairs, `.6.2.5` remeasures and splits any newly
+    exposed residual before further behavior, and `.6.2.6` owns permanent exact 59/59 admission/no-drift. This
+    planning slice changes no production source, test, corpus data, expected JSON, public status/CLI, or capability
+    census. PUC Lua and LuaJIT remain 162/162; mdBook, Knowledge Map, memory/doctrine, and canonical local CI pass.
+    The canonical gate includes CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in
+    629 seconds. Mutation testing remains manual-only and was not run.
+  Commit: `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals`
+
+- ID: `LUA-BACKEND-PARITY.6.2.1`
+  Status: `active`
+  Goal: Reuse the current action-edge child result for `call(child)` exactly once.
+  Dependencies: `.6.2.0`
+  Acceptance: When `call(target)` names the current action edge's compiled target, dispatch through that edge state,
+    cache one child result, refresh `retv`, and prevent fallback re-execution for self-recursive and non-self edges;
+    unrelated named calls retain normal execution. Focused tests lock call count, cursor, value, recursion, and
+    passive-child behavior on both Lua ABIs; the six currently affected corpus cases are re-executed unchanged and
+    the full offsets 40-98 window is remeasured to route any successor mechanism.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.2`
+  Status: `pending`
+  Goal: Preserve evaluated values through receiver-form `.copy()` continuation.
+  Dependencies: `.6.2.1`
+  Acceptance: Generic receiver `copy()` deep-copies its current value exactly once, while function-form
+    `copy(value)`, missing/undefined values, nested isolation, and subsequent array/harray/string-compatible
+    continuations retain their governed behavior. The unchanged hash-receiver corpus fixture returns its expected
+    sixth value `2` on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.3`
+  Status: `pending`
+  Goal: Splice `flat_array(...)` key/value tokens into hash construction.
+  Dependencies: `.6.2.2`
+  Acceptance: `hash(flat_array(values))` / equivalent harray construction consumes the flattened array as ordered
+    key/value tokens rather than stringifying the Lua table as one key; empty input yields an empty harray, nested
+    values remain copied, and ordinary non-splice arguments retain their existing boundaries. The unchanged
+    `pplugin_empty` fixture returns `[{}]` on both Lua ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.4`
+  Status: `pending`
+  Goal: Mirror the Perl public parser's leading blank/comment-line cursor initialization.
+  Dependencies: `.6.2.3`
+  Acceptance: Public in-memory `runtime_parse(...)` initializes the top-rule cursor after leading blank and comment
+    lines exactly as the Perl wrapper does, while ordinary indexed-variable reads and nonleading content remain
+    unchanged. Focused entry-boundary tests and the unchanged `ds_vhistory_version_entry` oracle pass on both Lua
+    ABIs without weakening expected output.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.5`
+  Status: `pending`
+  Goal: Remeasure offsets 40-98 and dependency-split every successor residual before further behavior work.
+  Dependencies: `.6.2.4`
+  Acceptance: Execute the exact 59-case window on both Lua ABIs after the four measured repairs; classify every
+    remaining failure with production trace, Knowledge Map retrieval, and canonical toolbox/generated-source
+    evidence; create mechanism-sized child leaves before changing behavior; or record a zero-residual boundary and
+    activate permanent admission when all 59 pass unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.6.2.6`
+  Status: `pending`
+  Goal: Permanently admit exact advanced/shipped offsets 40-98 and close parent no-drift.
+  Dependencies: `.6.2.5`
+  Acceptance: One recurring production-library test locks all 59 names in manifest order, exact one-level wrapped
+    expected outputs, match/endpoints, 59 passes, and zero failures on PUC Lua and LuaJIT; docs/KM/task/roadmap/
+    architecture/live state agree; parent `.6.2` closes and full-manifest `.6.3` activates without premature CLI,
+    generated-source, public-status, or capability-census promotion.
   Verification: `pending`
   Commit: `pending`
 
@@ -2976,6 +3068,31 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
   seconds total under concurrent load). Mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live/architecture/change/notes, mdBook, Knowledge Map, and
   bounded memory record exact 40/40 admission and activate governed capability/no-drift `.6.1.4`.
+
+### `LUA-BACKEND-PARITY.6.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact manifest offsets 40-98 pass 50/59 identically on PUC Lua and LuaJIT. The nine
+  residuals are one hash-receiver compare mismatch, three HLink execute failures, two EBNF compare mismatches,
+  one SimEnv execute failure, one history compare mismatch, and one PPlugin compare mismatch.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Production debug traces show child rules entered twice before the HLink/
+  EBNF/SimEnv failure paths. Canonical generated Perl invokes each selected action-edge child once. Lua
+  `evaluate_call(...)` executes `call(child)` directly instead of using `dispatch_edge_child(...)`, leaving the
+  edge fallback to execute it again. Separate ActionIR/toolbox probes prove receiver `.copy()` loses the receiver,
+  `hash(flat_array(...))` misses a hash-splice classification, and public parse starts before the Perl wrapper's
+  leading-trivia boundary.
+- [x] **FIX** — No behavior changes in this planning leaf. Split action-edge call reuse `.6.2.1`, receiver copy
+  `.6.2.2`, flat-array hash splicing `.6.2.3`, leading-trivia initialization `.6.2.4`, successor measurement/split
+  `.6.2.5`, and exact permanent 59-case admission/no-drift `.6.2.6` in dependency order.
+- [x] **ADDRESSED (verified)** — Both ABIs expose the same names, failure stages, values, endpoints, and trace
+  mechanisms; 50 passing cases and nine residuals are durably routed without changing any oracle.
+- [x] **NO REGRESSION** — Planning changes only task/live/book/KM state. Production source, tests, corpus data,
+  expected JSON, public status `native-full-pipeline-trace-v1`, primary/developer CLI boundaries, coverage
+  246/105+1/122, and four-backend capability 64/0/0 remain unchanged. PUC Lua and LuaJIT pass 162/162; mdBook,
+  Knowledge Map, memory/doctrine, and canonical local CI pass. The canonical gate includes CLI 61/61 in both
+  environments and Phase 0 true reach `1..1031` in 629 seconds. Mutation testing remains manual-only and is not
+  run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmap, architecture, task/index/live state, mdBook, Knowledge Map, and bounded
+  memory record exact 50/59 measurement and activate only action-edge repair `.6.2.1`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4532,3 +4649,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.1.2` | `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution` | Full validation before selection, automatic native pipeline, wrapped structural comparison, typed non-aborting records, and 160/160 dual-ABI controlled proof. |
 | `LUA-BACKEND-PARITY.6.1.3` | `LUA-BACKEND-PARITY.6.1.3 - admit Lua core corpus prefix` | Permanent exact offsets 0-39, 40/40 ordered wrapped outputs, endpoint 1/1, and 161/161 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.6.1.4` | `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window` | Permanent exact offsets 99-104, six governed names/wrapped outputs/endpoints, 162/162 dual-ABI proof, parent `.6.1` closure, and `.6.2` handoff. |
+| `LUA-BACKEND-PARITY.6.2.0` | `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals` | Exact dual-ABI 50/59 measurement, nine routed residuals, four toolbox-proven current mechanisms, and dependency-ordered repair/remeasure/admission split. |
