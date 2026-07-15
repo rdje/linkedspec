@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (governed named writers, spans, and anonymous/named bridges pass 120/120 on PUC Lua
-  and LuaJIT; placement-sensitive split/mark execution `.4.3.7.4` is the active executable frontier)
+- Last updated: `2026-07-15` (placement-sensitive split/mark rule members pass 121/121 on PUC Lua and LuaJIT;
+  exhaustive capture/cursor no-drift `.4.3.7.6` is the active executable frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1690,14 +1690,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.4`
-  Status: `active`
+  Status: `done`
   Goal: Execute placement-sensitive split and named-mark rule members.
   Dependencies: `.4.3.7.2`, `.4.3.7.3`
   Acceptance: `@capture_slice`, compatibility capture-boundary aliases, and `@mark(name)` compile into explicit
     rule-slot events whose mutations become visible after that matched action site; helper calls remain available
     for in-block timing, malformed names stay typed, and the shipped `@move_pos` source has an executable owner.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Lua compiles preferred `@capture_slice`, compatibility
+    `@capture_from_here` / `@move_pos`, and `@mark(name)` into typed `CompiledRuleSlotEvent` records attached to
+    the preceding regex slot. The interpreter applies those events after that slot's action/child dispatch and
+    before `LE`, through the existing anonymous capture boundary and parse-scoped rule-label mark store. One
+    multibyte test locks same-slot invisibility, later-slot visibility, all three anonymous spellings, two named
+    marks, Unicode positions, native and serialized-source execution, typed malformed names/fragments, and the
+    exact checked-in EBNF `logging_annotation` line. `bash tools/run_lua_local.sh` passes 121/121 on separately
+    built PUC Lua and LuaJIT adapters plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. The
+    authoritative `bash tools/run_ci_local.sh` passes capability 64/0/0, coverage 246/105+1/122, public-selector
+    admission across 57 files with 27 classified references and zero current examples, both primary CLI
+    environments at 61/61, phase0 `1..1031` in 633 seconds, and every contract/doctrine/documentation gate.
+  Commit: `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.5`
   Status: `done`
@@ -1720,7 +1730,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.6`
-  Status: `pending`
+  Status: `active`
   Goal: Close exhaustive Lua capture/cursor helper and public-surface no-drift.
   Dependencies: `.4.3.7.1`-`.4.3.7.5`
   Acceptance: Helper inventory, governed fixtures, marker timing, dual-ABI runtime gates, API docs, mdBook,
@@ -1916,7 +1926,8 @@ Julia `.17.3` match it through native/generated/CLI routes with complete backend
 now consumes the unchanged contract through native/serialized routes at 119/119 on PUC Lua and LuaJIT. Final admission
 `.17.5` closes at 246 shared names with all 122 public Perl contracts independently checked. `.4.3.7.3` now
 extends that same store and dispatcher across the governed named-span and bridge family at 120/120 on PUC Lua and
-LuaJIT; placement-sensitive split/mark execution `.4.3.7.4` is active.
+LuaJIT. Placement-sensitive split/mark rule members now execute at their owning slots at 121/121; exhaustive
+capture/cursor no-drift `.4.3.7.6` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -1997,7 +2008,35 @@ LuaJIT; placement-sensitive split/mark execution `.4.3.7.4` is active.
 | 75 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls share byte-safe state and pass 116/116 on both ABIs. |
 | 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Non-consuming earliest usable boundary and EOF/no-op cases pass 117/117 on both ABIs. |
 | 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, overloads, and valid-only mutation pass 120/120 on PUC Lua and LuaJIT. |
-| 78 | `LUA-BACKEND-PARITY.4.3.7.4` | `active` | Execute placement-sensitive split and named-mark rule members at their matched action sites. |
+| 78 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark slot events execute after their matched actions at 121/121 on both ABIs. |
+| 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive capture/cursor helper and public-surface no-drift. |
+
+### `LUA-BACKEND-PARITY.4.3.7.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua's source parser preserved valid split-marker AST nodes, but compiled rules
+  exposed no slot events; the first focused run kept all 120 existing tests green while the new test alone failed
+  because `rule_slot_events` was absent.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `compiled_spec.lua` ignored `SplitMarkerBodyElementKind`, and
+  `interpreter.lua` had no post-action slot-event phase. A narrower parser defect also discarded malformed text
+  remaining after a valid same-line element, allowing invalid marker fragments to disappear before validation.
+- [x] **FIX** — Compile canonical typed capture-boundary/named-mark events against the preceding regex slot,
+  preserve them through dependency resolution and public serialization, execute them after action/child dispatch
+  and before `LE`, and route writes through the existing anonymous and named stores. Preserve unparsed body
+  remainder as a typed raw element so validation rejects malformed authored markers.
+- [x] **ADDRESSED (verified)** — One `é(α🙂,βγ)` case proves same-slot reads see old state, later slots see the
+  updates, all three anonymous spellings share one event kind, named marks keep Unicode character positions, and
+  native/public-source reconstruction agree. Empty, digit-leading, hyphenated, trailing-fragment, and prefix-
+  typo markers fail through typed validation; a validation-bypassed malformed AST fails with rule/line/marker
+  fields. The exact shipped `rgx/subs/pgen/specs/ebnf.spec::logging_annotation` line owns one executable
+  `@move_pos` event at its expected slot.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 121/121 under separately built PUC Lua and LuaJIT
+  adapters plus syntax, CLI-scaffold, and 105 manifest checks. Full local CI passes capability 64/0/0, coverage
+  246/105+1/122, selector admission 57/27/0, CLI 61/61 twice, phase0 `1..1031` in 633 seconds, and every
+  contract/doctrine/documentation gate. The only first-run failure was the selector checker's stale exact public-
+  file count after `.18.0` added one mdBook page; raising 56 to the measured 57 restored the existing guard.
+- [x] **LOCKSTEP** — No helper, fixture, inventory, generated-source, or capability claim changes. The Lua API,
+  mdBook, Knowledge Map, roadmaps, live docs, and both task trees advance only exhaustive capture/cursor no-drift
+  `.4.3.7.6`.
 
 ### `LUA-BACKEND-PARITY.4.3.7.3` Acceptance Checklist
 
@@ -3004,3 +3043,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.2` | `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers` | Sixteen byte-safe stable/location/advancing calls, Unicode values, valid-only mutation, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.5` | `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture` | Earliest usable rule lookahead, non-consumption, EOF/no-op edges, caching, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed rule-local writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
+| `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action split/named-mark events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |

@@ -727,7 +727,10 @@ result at 119/119 on PUC Lua and LuaJIT. `.17.5` admits the seven calls into the
 combines 105 corpus fixtures with the exact named-mark fixture, independently requires all 122 public Perl
 contracts, and locks nine non-public exclusions. Parent `.17` closes. Lua `.4.3.7.3` extends the same store across
 governed current/input/anonymous/copy writers, stable and valid-only advancing named spans, two-mark reads, and
-both anonymous/named bridges at 120/120. Placement-sensitive split/mark execution `.4.3.7.4` is active.
+both anonymous/named bridges at 120/120. Placement-sensitive `.4.3.7.4` then compiles preferred/compatibility
+anonymous markers and named marks into typed preceding-slot events, executes them after slot actions and before
+`LE`, preserves them through public source reconstruction, and passes 121/121 on PUC Lua and LuaJIT. Exhaustive
+capture/cursor no-drift `.4.3.7.6` is active.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

@@ -97,7 +97,12 @@ checks all 122 public Perl contracts. `.4.3.7.3` extends the same store across c
 writers, match-start/live-cursor/input-end/two-mark stable and valid-only advancing spans, and both anonymous/named
 bridges. Public positions and lengths use Unicode characters; missing/reversed spans are neutral; anonymous
 `capture_take()` and named `capture_take(name)` remain distinct overloads. Both supported runtimes pass 120/120.
-Placement-sensitive split/mark execution continues in active `.4.3.7.4`. General
+`.4.3.7.4` now compiles `@capture_slice`, `@capture_from_here`, `@move_pos`, and `@mark(name)` into typed events
+owned by the preceding regex slot. Events execute after that slot's action/child dispatch and before `LE`, through
+the same anonymous boundary and named-mark store; same-slot action reads therefore see old state and later slots
+see the update. Native and serialized-source Unicode timing, the checked-in EBNF `@move_pos`, and malformed-marker
+diagnostics pass 121/121 on PUC Lua and LuaJIT. Exhaustive capture/cursor no-drift continues in active `.4.3.7.6`.
+General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic

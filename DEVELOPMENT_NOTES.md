@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.4` — placement belongs in compiled state, timing belongs after action
+  dispatch): Split markers are grammar-slot events, not helper calls. Preserve a typed event on the preceding
+  regex index, carry it through compiled/public state, dispatch all actions and children first, then mutate the
+  existing anonymous boundary or rule-local named-mark store before `LE`. This makes same-slot invisibility and
+  later-slot visibility explicit and avoids a second marker frame. Parser recovery must preserve any unparsed
+  same-line remainder as typed raw syntax; otherwise a valid prefix can silently swallow a malformed marker
+  suffix. The multibyte native/reconstructed proof covers all anonymous aliases, named marks, Unicode positions,
+  the shipped EBNF `@move_pos`, and malformed names/fragments at 121/121 on both Lua ABIs. The first canonical CI
+  run found only a stale exact public-file count: `.18.0` added one discovered mdBook page, so selector admission
+  intentionally moves from 56 to 57 files while retaining 27 classified references and zero current examples.
+  Exhaustive capture/cursor no-drift `.4.3.7.6` is next.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.0` — use formats as requirements evidence, not host-parser wrappers): The
   91 eligible catalog rows are valuable because they expose general parser mechanisms the current `.spec` language
   may still lack. The safe evolution loop is format conformance failure -> reusable mechanism classification ->

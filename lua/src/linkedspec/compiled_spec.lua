@@ -30,6 +30,7 @@ local DEPENDENCY_REF_MT = type_metatable("DependencyRef")
 local ACTION_EDGE_MT = type_metatable("CompiledActionEdge")
 local BLIND_EDGE_MT = type_metatable("CompiledBlindEdge")
 local ACTION_PAYLOAD_MT = type_metatable("CompiledActionPayload")
+local RULE_SLOT_EVENT_MT = type_metatable("CompiledRuleSlotEvent")
 local DEPENDENCY_ENTRY_MT = type_metatable("CompiledDependencyRegexEntry")
 local DEPENDENCY_STATE_MT = type_metatable("CompiledDependencyRegexState")
 local DESCRIPTOR_STATE_MT = type_metatable("CompiledDescriptorState")
@@ -108,6 +109,32 @@ local function optional_action_payload(role, element, source_code, fluent_chain,
   return action_payload(role, element, code, registry)
 end
 
+local function rule_slot_event(rule_label, element, regex_index)
+  local marker = element.kind.marker
+  local capture_marker = marker:match("^@[ \t]*(capture_slice)[ \t]*$") or
+    marker:match("^@[ \t]*(capture_from_here)[ \t]*$") or
+    marker:match("^@[ \t]*(move_pos)[ \t]*$")
+  local mark_name = marker:match(
+    "^@[ \t]*mark[ \t]*%([ \t]*([A-Za-z_][A-Za-z0-9_]*)[ \t]*%)[ \t]*$"
+  )
+  if capture_marker == nil and mark_name == nil then
+    fail("rule '" .. rule_label .. "' has malformed split marker '" .. marker .. "'", {
+      code = "malformed_rule_slot_marker",
+      rule_label = rule_label,
+      line = element.line,
+      marker = marker,
+    })
+  end
+  return setmetatable({
+    kind = mark_name == nil and "capture_boundary" or "named_mark",
+    marker = marker,
+    mark_name = mark_name,
+    regex_index = regex_index,
+    line = element.line,
+    source = element.source,
+  }, RULE_SLOT_EVENT_MT)
+end
+
 local function compile_rule(rule, registry)
   local regex_patterns = {}
   local dependency_refs = {}
@@ -115,6 +142,7 @@ local function compile_rule(rule, registry)
   local blind_edges = {}
   local lifecycle_action_payloads = {}
   local plain_action_payloads = {}
+  local rule_slot_events = {}
   local last_regex_line = nil
 
   for _, element in ipairs(rule.body) do
@@ -172,6 +200,12 @@ local function compile_rule(rule, registry)
         registry
       )
       last_regex_line = nil
+    elseif node_type == "SplitMarkerBodyElementKind" then
+      rule_slot_events[#rule_slot_events + 1] = rule_slot_event(
+        rule.header.label,
+        element,
+        math.max(#regex_patterns - 1, 0)
+      )
     else
       last_regex_line = nil
     end
@@ -187,6 +221,7 @@ local function compile_rule(rule, registry)
     blind_edges = blind_edges,
     lifecycle_action_payloads = lifecycle_action_payloads,
     plain_action_payloads = plain_action_payloads,
+    rule_slot_events = rule_slot_events,
     body_elements = copy_list(rule.body),
   }, COMPILED_RULE_MT)
 end
@@ -216,6 +251,7 @@ local function copy_compiled_rule(rule, regex_patterns, action_edges)
     blind_edges = copy_list(rule.blind_edges),
     lifecycle_action_payloads = copy_list(rule.lifecycle_action_payloads),
     plain_action_payloads = copy_list(rule.plain_action_payloads),
+    rule_slot_events = copy_list(rule.rule_slot_events),
     body_elements = copy_list(rule.body_elements),
   }, COMPILED_RULE_MT)
 end
@@ -515,6 +551,18 @@ local function blind_edge_to_json(edge)
   return result
 end
 
+local function rule_slot_event_to_json(event)
+  local result = json.harray({
+    kind = event.kind,
+    marker = event.marker,
+    regex_index = event.regex_index,
+    line = event.line,
+    source = event.source,
+  })
+  if event.mark_name ~= nil then result.mark_name = event.mark_name end
+  return result
+end
+
 local function rule_to_json(rule)
   return json.harray({
     label = rule.label,
@@ -526,6 +574,7 @@ local function rule_to_json(rule)
     blind_edges = typed_array(rule.blind_edges, blind_edge_to_json),
     lifecycle_action_payloads = typed_array(rule.lifecycle_action_payloads, payload_to_json),
     plain_action_payloads = typed_array(rule.plain_action_payloads, payload_to_json),
+    rule_slot_events = typed_array(rule.rule_slot_events, rule_slot_event_to_json),
     body = typed_array(rule.body_elements, spec_ast.to_json),
   })
 end
@@ -539,6 +588,7 @@ local function descriptor_rule_to_json(rule)
     blind_edges = typed_array(rule.blind_edges, blind_edge_to_json),
     lifecycle_action_payloads = typed_array(rule.lifecycle_action_payloads, payload_to_json),
     plain_action_payloads = typed_array(rule.plain_action_payloads, payload_to_json),
+    rule_slot_events = typed_array(rule.rule_slot_events, rule_slot_event_to_json),
     meta = json.harray({
       label = rule.label,
       line = rule.header.line,
@@ -626,6 +676,7 @@ function M.to_json(value)
   if node_type == "CompiledActionEdge" then return action_edge_to_json(value) end
   if node_type == "CompiledBlindEdge" then return blind_edge_to_json(value) end
   if node_type == "CompiledActionPayload" then return payload_to_json(value) end
+  if node_type == "CompiledRuleSlotEvent" then return rule_slot_event_to_json(value) end
   if node_type == "CompiledDependencyRegexEntry" then return dependency_entry_to_json(value) end
   if node_type == "CompiledDependencyRegexState" then
     return json.harray({

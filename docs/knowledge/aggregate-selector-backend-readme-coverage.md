@@ -11,6 +11,7 @@ status: current
 tags: [language, bindings, retirement, documentation, readme, no-drift, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.10 found 14 current positive exact selector forms in rust/README.md, dart/README.md, julia/README.md, and lua/README.md after .12.1.9 had reported zero examples across a curated 47-file root/capability/mdBook list. The four READMEs now use bare typed bindings. tools/check_public_aggregate_selector_surface.py discovers every immediate component README, asserts 56 files and 31 classified removed/history references, requires four backend bare-binding anchors, and reports zero current examples."
 evidence_update_2026_07_12_lua_array_closeout: "The 56-file inventory remains exact, but its classified count is now 27. Four former matches were `array (statement)` prose fragments inside a formal-grammar code block, not removed selector references; LUA-BACKEND-PARITY.4.3.4.6 replaced them with accurate updated-snapshot descriptions and corrected the expected count."
+evidence_update_2026_07_15_structured_format_page: "FUTURE-PARITY-BACKLOG.18.0 added architecture/structured-format-program.md to the discovered mdBook surface. LUA-BACKEND-PARITY.4.3.7.4's first canonical gate measured the stale exact count; the checker now asserts 57 public files, 27 classified removed/history references, and zero current examples."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -24,3 +25,6 @@ three-argument `split`. The checker now discovers `*/README.md` at the repositor
 already-fixed capability README, and scans those files beside root documents and mdBook sources. Exact file and
 classified-reference counts make inventory growth deliberate; backend-specific bare-binding anchors ensure the
 entry documents teach the replacement, not merely avoid the removed spelling.
+
+The current discovered inventory is 57 files after the structured-format architecture page joined the mdBook;
+classified and current example counts remain 27 and zero.

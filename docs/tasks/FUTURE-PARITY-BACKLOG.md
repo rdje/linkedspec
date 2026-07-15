@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (planning leaf `.18.0` ratifies the post-parity 91-row Unicode structured-text
-  requirements program; Lua placement-sensitive split/mark execution `.4.3.7.4` remains the executable frontier).
+- Last updated: `2026-07-15` (Lua placement-sensitive split/mark rule members pass 121/121 on PUC Lua and LuaJIT;
+  exhaustive capture/cursor no-drift `.4.3.7.6` is the executable frontier; `.18` remains parity-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4386,8 +4386,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 167 | `FUTURE-PARITY-BACKLOG.17.4` | `done` | Lua consumes the unchanged native/serialized contract at 119/119 on both ABIs without changing the shared inventory. |
 | 168 | `FUTURE-PARITY-BACKLOG.17.5` | `done` | Admitted 246 names and independently locks 122 public contracts plus nine explicit exclusions. |
 | 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT. |
-| 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `active` | Execute placement-sensitive split and named-mark rule members at their matched action sites. |
+| 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark events execute after their matched actions at 121/121 on both Lua ABIs. |
 | 171 | `FUTURE-PARITY-BACKLOG.18.0` | `done` | Exact 91-row parity-gated requirements program is ratified; no format code started. |
+| 172 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive Lua capture/cursor helper and public-surface no-drift. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5029,6 +5030,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.4` | Typed compiled slot events; post-action/pre-LE timing; all three anonymous marker spellings plus named marks; `é(α🙂,βγ)` native/reconstructed proof; exact shipped EBNF `@move_pos`; typed malformed names/fragments/AST; Lua 121/121 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Placement-sensitive marker execution closes on the existing stores without surface drift; `.4.3.7.6` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR 0034; dedicated exact-row task tree; roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Parity-first format requirements program is durable; no behavior or format implementation changed; Lua `.4.3.7.4` remains active. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.3` | Unchanged governed named-capture fixture native/reconstructed; supplemental multibyte writers/bridges/stable+advancing spans/missing+reversed/overload/arity; Lua 120/120 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/637s; docs/KM/doctrines/book/whitespace. | PASS. Full governed named-span parity closes without surface drift; placement-sensitive `.4.3.7.4` activates. |
@@ -5154,6 +5156,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action slot events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
 | `FUTURE-PARITY-BACKLOG.18.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR 0034, exact 91-row ownership, hard current-parity gate, format-driven neutral feature loop, and public architecture chapter. |
 | `FUTURE-PARITY-BACKLOG.17.5` | `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory` | 246-name admission, 105+1 occurrence proof, independent 122-public-contract reverse check, nine exclusions, and symmetric mutation proof. |
 | `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed named writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
@@ -5279,13 +5282,20 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: Lua `.4.3.7.4` compiles `@capture_slice`, both compatibility aliases, and `@mark(name)` into
+  typed preceding-slot events, preserves them in public compiled state, and executes them after that slot's
+  action/child dispatch and before `LE` through the existing anonymous/named stores. Multibyte native and
+  reconstructed proof, exact shipped EBNF `@move_pos` ownership, and typed malformed-marker rejection pass
+  121/121 on PUC Lua and LuaJIT. The canonical public-selector guard now intentionally covers 57 files after
+  `.18.0` added one mdBook page; classified/current counts remain 27/0. Exhaustive capture/cursor no-drift
+  `.4.3.7.6` activates without a helper, fixture, inventory, generated-source, or capability change.
 - `2026-07-15`: `.18.0` adopts ADR `0034` and creates `STRUCTURED-TEXT-FORMAT-PROGRAM`. All 91 eligible Unicode
   structured-text catalog rows map to explicit reusable foundation/family leaves; binary/container exclusions
   stay exact. The catalog becomes requirements evidence for general neutral `.spec` features, never permission for
   hidden host parsers. Full Perl/Rust/Dart/Julia/Lua parity is a hard execution dependency. HTML owns a full
   WHATWG path, derived formats reuse foundations, parsing stays separate from evaluation/domain semantics, and
   accuracy/Unicode/diagnostics/conformance/measured performance are completion gates. No behavior changed; Lua
-  `.4.3.7.4` remains the active executable frontier.
+  `.4.3.7.4` was the active executable frontier at that planning commit.
 - `2026-07-14`: `.17.3` makes Julia consume the unchanged seven-helper complete named-mark artifact through its
   existing rule-local code-unit store. Entry/local writers read the established match registers; line/column
   projections remain Unicode-character based; clear affects only the current rule; and absent reads remain undef.

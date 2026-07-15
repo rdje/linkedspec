@@ -2823,6 +2823,29 @@ local function lifecycle(engine, rule, name, ctx, accumulator)
   end
 end
 
+local function execute_rule_slot_events(rule, regex_index, ctx)
+  for _, event in ipairs(rule.rule_slot_events) do
+    if event.regex_index == regex_index then
+      if event.kind == "capture_boundary" then
+        set_capture_start(ctx, ctx.cursor_byte)
+      elseif event.kind == "named_mark" then
+        local marks = ctx.mark_buckets[rule.label]
+        if marks == nil then
+          marks = {}
+          ctx.mark_buckets[rule.label] = marks
+        end
+        marks[event.mark_name] = ctx.cursor_byte
+      else
+        fail("unsupported compiled rule-slot event '" .. tostring(event.kind) .. "'", {
+          code = "unsupported_rule_slot_event",
+          rule_label = rule.label,
+          event_kind = event.kind,
+        })
+      end
+    end
+  end
+end
+
 local function match_specific(engine, rule, index, ctx)
   local key = rule.label .. ":" .. index
   local alternation = engine.regex_cache[key]
@@ -2850,6 +2873,7 @@ local function accept_match(engine, rule, one, ctx, accumulator)
       end
     end
   end
+  execute_rule_slot_events(rule, one.alternative_index, ctx)
   lifecycle(engine, rule, "LE", ctx, accumulator)
 end
 

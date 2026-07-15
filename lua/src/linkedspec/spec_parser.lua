@@ -734,7 +734,9 @@ local function parse_single_element(text, lines, cursor, line_number)
   if split_marker then
     split_full = text:match("^@[ \t]*" .. split_marker)
   else
-    split_full = text:match("^@[ \t]*mark[ \t]*%([ \t]*[%w_]+[ \t]*%)")
+    split_full = text:match(
+      "^@[ \t]*mark[ \t]*%([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*%)"
+    )
   end
   if split_full then
     return {
@@ -747,7 +749,6 @@ local function parse_single_element(text, lines, cursor, line_number)
       advanced = false,
     }
   end
-
   local conditional = text:match("^%-%?[ \t]+([%w_]+)")
   if conditional then
     local conditional_full = text:match("^%-%?[ \t]+[%w_]+")
@@ -806,6 +807,12 @@ local function parse_body_elements(lines, cursor)
     end
     local parsed = parse_single_element(text, lines, cursor, line_number)
     if not parsed then
+      elements[#elements + 1] = ast.body_element({
+        kind = ast.raw_body_kind({ text = text }),
+        source = text,
+        line = line_number,
+      })
+      remaining = ""
       break
     end
     elements[#elements + 1] = parsed.element
@@ -889,6 +896,12 @@ local function parse_inline_body(rest, line_number, lines, cursor)
     local before = text
     local parsed = parse_single_element(text, lines, cursor, line_number)
     if not parsed then
+      elements[#elements + 1] = ast.body_element({
+        kind = ast.raw_body_kind({ text = text }),
+        source = text,
+        line = line_number,
+      })
+      remaining = ""
       break
     end
     elements[#elements + 1] = parsed.element

@@ -2719,6 +2719,137 @@ Value:AND
   end
 end)
 
+test("runtime split and named-mark rule-slot events execute after their matched action sites", function()
+  local source = [[
+Top::AND
+ => Value
+
+Value:AND
+ /é\(/
+ @capture_slice
+ @mark(first_start)
+ /α🙂/
+ /,/
+ @capture_from_here
+ @mark(second_start)
+ /β/
+ @move_pos
+ /γ/
+ /\)/
+ -> Value[0] {
+   same_opener_slice = capture_slice()
+   same_opener_mark = mark_exists(first_start)
+ }
+ -> Value[2] {
+   first_slice = capture_slice()
+   first_named = capture_from(first_start)
+   same_comma_mark = mark_exists(second_start)
+ }
+ -> Value[3] {
+   same_beta_slice = capture_slice()
+ }
+ -> Value[5] {
+   return({
+     "same_opener_slice" : same_opener_slice,
+     "same_opener_mark" : same_opener_mark,
+     "first_slice" : first_slice,
+     "first_named" : first_named,
+     "same_comma_mark" : same_comma_mark,
+     "same_beta_slice" : same_beta_slice,
+     "last_slice" : capture_slice(),
+     "second_named" : capture_from(second_start),
+     "first_pos" : mark_pos(first_start),
+     "second_pos" : mark_pos(second_start)
+   })
+ }
+]]
+  local parsed = linkedspec.parse_spec(source)
+  local compiled = linkedspec.compile_spec(parsed)
+  local events = compiled:rule("Value").rule_slot_events
+  assert_equal(#events, 5, "compiled rule-slot event count")
+  assert_equal(linkedspec.compiled_spec.node_type(events[1]), "CompiledRuleSlotEvent", "event type")
+  assert_equal(events[1].kind, "capture_boundary", "preferred capture marker kind")
+  assert_equal(events[1].regex_index, 0, "preferred capture marker slot")
+  assert_equal(events[2].kind, "named_mark", "first named marker kind")
+  assert_equal(events[2].mark_name, "first_start", "first named marker name")
+  assert_equal(events[3].kind, "capture_boundary", "first compatibility alias kind")
+  assert_equal(events[3].regex_index, 2, "first compatibility alias slot")
+  assert_equal(events[4].mark_name, "second_start", "second named marker name")
+  assert_equal(events[5].kind, "capture_boundary", "shipped move-pos alias kind")
+  assert_equal(events[5].regex_index, 3, "shipped move-pos alias slot")
+  assert_equal(events[5].marker, "@move_pos", "shipped move-pos spelling")
+
+  local shipped_source = read_file("rgx/subs/pgen/specs/ebnf.spec")
+  local shipped_line = shipped_source:match("logging_annotation:[^\r\n]+")
+  local shipped_owner = linkedspec.compile_spec(linkedspec.parse_spec(
+    "Top::AND\n => logging_annotation\n\n" .. shipped_line .. "\n"
+  )):rule("logging_annotation")
+  assert_equal(#shipped_owner.rule_slot_events, 1, "shipped EBNF marker has one executable owner")
+  assert_equal(shipped_owner.rule_slot_events[1].marker, "@move_pos", "shipped EBNF marker spelling")
+  assert_equal(shipped_owner.rule_slot_events[1].regex_index, 1, "shipped EBNF marker slot")
+
+  local expected = json.harray({
+    same_opener_slice = "",
+    same_opener_mark = 0,
+    first_slice = "α🙂",
+    first_named = "α🙂",
+    same_comma_mark = 0,
+    same_beta_slice = "",
+    last_slice = "γ",
+    second_named = "βγ",
+    first_pos = 2,
+    second_pos = 5,
+  })
+  local result = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "é(α🙂,βγ)").value[1]
+  assert_equal(json.encode(result), json.encode(expected), "native rule-slot marker timing")
+
+  local reconstructed = linkedspec.compile_spec(
+    linkedspec.spec_ast.from_json("SpecFile", json.decode(json.encode(linkedspec.spec_ast.to_json(parsed))))
+  )
+  local reconstructed_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(reconstructed),
+    "é(α🙂,βγ)"
+  ).value[1]
+  assert_equal(json.encode(reconstructed_result), json.encode(expected), "serialized rule-slot marker timing")
+
+  for _, malformed_marker in ipairs({
+    "@mark()",
+    "@mark(9bad)",
+    "@mark(bad-name)",
+    "@mark(ok) trailing",
+    "@capture_slicex",
+  }) do
+    local ok, validation_error = pcall(function()
+      linkedspec.compile_spec(linkedspec.parse_spec("Top::\n /x/ " .. malformed_marker .. "\n"))
+    end)
+    assert_equal(ok, false, malformed_marker .. " authored marker fails")
+    assert_equal(
+      linkedspec.is_spec_validation_error(validation_error),
+      true,
+      malformed_marker .. " authored marker is typed"
+    )
+  end
+
+  local malformed_ast = ast.spec_file({
+    rules = {
+      compiled_test_rule("Top", true, nil, {
+        ast.body_element({ kind = ast.regex_body_kind({ pattern = "x" }), source = "/x/", line = 1 }),
+        ast.body_element({
+          kind = ast.split_marker_body_kind({ marker = "@mark(bad-name)" }),
+          source = "@mark(bad-name)",
+          line = 1,
+        }),
+      }),
+    },
+  })
+  local compiled_error = assert_compiled_error(function()
+    linkedspec.compile_spec(malformed_ast, { validate_source = false })
+  end, "malformed split marker", "malformed typed marker")
+  assert_equal(compiled_error.code, "malformed_rule_slot_marker", "malformed marker diagnostic code")
+  assert_equal(compiled_error.rule_label, "Top", "malformed marker rule attribution")
+  assert_equal(compiled_error.line, 1, "malformed marker line attribution")
+end)
+
 test("runtime deterministic pure scalar string helpers and receivers preserve portable values", function()
   local source = [[
 Top::

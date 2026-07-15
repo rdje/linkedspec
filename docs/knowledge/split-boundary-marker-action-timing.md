@@ -11,6 +11,7 @@ date: 2026-07-08
 status: confirmed
 tags: [spec-language, mdbook, helpers, capture-mark, markers, SPEC-LANG-REFERENCE]
 evidence: "SPEC-LANG-REFERENCE.6 generated-source probes showed current Perl emits split-boundary marker updates after action dispatch for the effective action site: @capture_slice updates the anonymous $IPOS boundary there, and @mark(name) writes the named mark for later same-rule reads. The verified public example uses an opener action plus @capture_slice/@mark, then reads capture_slice(), capture_from(...), and capture_between(...) from the closing action under seek mode."
+evidence_update_2026_07_15_lua: "LUA-BACKEND-PARITY.4.3.7.4 implements the same timing explicitly: typed preceding-slot events execute after action/child dispatch and before LE through the existing anonymous/named stores. A multibyte native/reconstructed test proves same-slot invisibility and later-slot visibility at 121/121 on PUC Lua and LuaJIT."
 ---
 
 # Split-Boundary Marker Action Timing
@@ -60,6 +61,9 @@ For exact timing inside an action or lifecycle block, prefer helper-call forms
 such as `start_capture_slice()` and `mark_here(name)`. Use marker forms when the
 grammar slot itself is the boundary and the later read happens from a later
 action.
+
+Lua now encodes the timing directly in compiled state. See [[lua-rule-slot-marker-execution]] for the typed event,
+serialization, Unicode, shipped-source, and malformed-marker proof.
 
 ## Links
 

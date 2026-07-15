@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.4 — execute Lua rule-slot markers
+
+Lua now compiles preferred `@capture_slice`, compatibility `@capture_from_here` / `@move_pos`, and
+`@mark(name)` rule members into typed events owned by the preceding regex slot. Events survive dependency
+resolution and compiled/outward serialization. After a slot matches, the interpreter dispatches its actions and
+children, applies its marker events through the existing anonymous capture boundary or parse-scoped rule-label
+mark store, then runs `LE`; same-slot actions therefore see old state and later slots see the update.
+
+One `é(α🙂,βγ)` test locks all marker spellings, two named checkpoints, Unicode character positions, exact timing,
+and native plus serialized-source execution. It also embeds the checked-in EBNF `logging_annotation` line to give
+its `@move_pos` an executable owner. Malformed empty, digit-leading, hyphenated, trailing-fragment, prefix-typo,
+and validation-bypassed markers fail through typed boundaries. The parser now preserves unparsed same-line body
+remainder instead of silently discarding it.
+
+The complete Lua gate passes 121/121 on separately built PUC Lua and LuaJIT adapters plus syntax, CLI scaffold,
+and all 105 manifest checks. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, public selector
+admission 57/27/0, CLI 61x2, Phase 0 `1..1031` in 633 seconds, and all doctrine/documentation gates. The selector
+checker count moves from 56 to 57 solely because `.18.0` added one discovered mdBook page; classified/current
+counts remain 27/0. No helper, fixture, inventory, generated-source, or capability surface changes; exhaustive
+capture/cursor no-drift `.4.3.7.6` becomes active.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.0 — adopt structured-text requirements program
 
 ADR `0034` adopts the director-provided 91-row Unicode structured-text catalog as a post-current-backend-parity

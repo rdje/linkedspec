@@ -465,6 +465,12 @@ The opener slot establishes both the anonymous boundary and the named mark after
 its action runs; the closing slot can then read the same span through
 `capture_slice()`, `capture_from(...)`, and `capture_between(...)`.
 
+Lua preserves these markers as typed compiled rule-slot events, including
+`@capture_from_here` and `@move_pos` as compatibility spellings for the anonymous
+boundary. It applies each event after the owning slot's action/child dispatch and
+before `LE`, matching the timing above. Malformed marker names and trailing marker
+fragments are rejected rather than silently ignored.
+
 Use the helper-call form such as `start_capture_slice()` when the boundary move belongs inside an action or lifecycle block. Use the marker form when the grammar slot itself is the boundary.
 
 ## Choosing the right placement

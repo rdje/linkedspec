@@ -191,6 +191,12 @@ The unchanged exhaustive named fixture passes both native execution and reconstr
 Unicode characters, and absent or reversed spans return `undef` without advancing a mark. The overloads remain
 deliberate: `capture_take()` uses the anonymous capture boundary, while `capture_take(name)` uses a named mark.
 
+Lua's placement-sensitive marker path is executable at 121/121 on PUC Lua and LuaJIT. `@capture_slice`,
+`@capture_from_here`, `@move_pos`, and `@mark(name)` compile into typed events on the preceding regex slot and
+write the same anonymous boundary or named-mark store used by these helpers. The write occurs after that slot's
+action/child dispatch and before `LE`: use a later slot to observe a marker, or use `start_capture_slice()` /
+`mark_here(name)` when the mutation must happen inside an action block.
+
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 
 | Helper | Result | Right edge | Boundary movement |

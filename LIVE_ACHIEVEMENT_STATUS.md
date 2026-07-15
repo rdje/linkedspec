@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.4 — execute Lua rule-slot markers**
+  (DONE — post-action split/named-mark events pass 121/121 on PUC Lua and LuaJIT).
+
+  **Result:** Preferred `@capture_slice`, compatibility `@capture_from_here` / `@move_pos`, and `@mark(name)` now
+  compile into typed events on the preceding regex slot, survive public state, and execute after that slot's
+  action/child dispatch and before `LE` through the existing anonymous/named stores. A multibyte native and
+  reconstructed test locks same-slot versus later-slot visibility, all aliases, named positions, malformed typed
+  failures, and the exact shipped EBNF `@move_pos`. Full Lua and canonical gates pass capability 64/0/0, coverage
+  246/105+1/122, selector admission 57/27/0, CLI 61x2, and Phase 0 `1..1031` in 633 seconds. No helper, fixture,
+  inventory, generated-source, or capability surface changed; exhaustive capture/cursor no-drift `.4.3.7.6` is
+  next.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.18.0 — adopt structured-text requirements program**
   (DONE — exact 91-row program is fully dependency-gated on current-backend parity; no format code started).
 

@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now represents placement-sensitive split/named-mark rule members as typed compiled
+  events attached to the preceding regex slot. Compiled and outward state preserve those events; runtime applies
+  them after slot action/child dispatch and before `LE` through the existing anonymous capture boundary and
+  parse-scoped rule-label/name/UTF-8-byte-offset store. Same-slot actions see old state, later slots see the
+  update, and no parallel marker state exists. Native and reconstructed `é(α🙂,βγ)` execution, all three anonymous
+  spellings, two named marks, Unicode positions, the exact shipped EBNF `@move_pos`, and malformed-marker typed
+  boundaries pass 121/121 on PUC Lua and LuaJIT. Canonical CI passes capability 64/0/0, coverage 246/105+1/122,
+  selector admission 57/27/0, CLI 61x2, and Phase 0 `1..1031` in 633 seconds. Exhaustive capture/cursor no-drift
+  `.4.3.7.6` is the active Lua frontier.
 - `2026-07-15` refresh: ADR `0034` adopts a 91-row Unicode structured-text catalog as a requirements generator for
   post-parity `.spec` evolution. `STRUCTURED-TEXT-FORMAT-PROGRAM` hard-gates execution on complete current
   Perl/Rust/Dart/Julia/Lua parity, then establishes decoded-input/provenance, source-aware AST/trivia/diagnostics,

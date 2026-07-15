@@ -11,18 +11,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.0` — adopt structured-text requirements program.
-- latest_commit: `35e4a55b` — `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`.
-- active_work_unit: `.18.0` planning is synchronized without behavior changes; final governance/book/count checks,
-  prepared commit, brief cleanup, and clean-tree verification remain.
-- next_action: verify and commit `.18.0`, clear the brief, confirm a clean tree, then return to active Lua
-  placement-sensitive split/mark execution `LUA-BACKEND-PARITY.4.3.7.4`.
-- current_proof: ADR `0034` and `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible catalog rows across seven
-  seed formats, derived families, explicit profiles, and closeout. `.1+` is hard-gated on complete Perl/Rust/Dart/
-  Julia/Lua parity. Each composed format `.spec` graph is the sole dynamically compiled parser source; generated
-  host source/caches are derivative only. Format gaps drive reusable neutral all-backend features; hidden host
-  parsers are forbidden; HTML is an independent WHATWG path; parsing is separate from evaluation/domain semantics;
-  Unicode plus cold/warm/parse performance require executable evidence. No behavior changed.
+- latest_commit: `970f5df5` — `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers`.
+- active_work_unit: Lua placement-sensitive split/named-mark rule-member execution `.4.3.7.4` is implemented,
+  verified, and synchronized; final governance/book/KM checks, commit, brief cleanup, and clean-tree verification
+  remain.
+- next_action: commit `.4.3.7.4`, clear the brief, confirm a clean tree, then create and commit the task-tree-owned
+  `.spec` terseness/readability/expressiveness design slice (including uniform-binding duck typing as a positive
+  precedent) before returning to active Lua exhaustive capture/cursor no-drift `.4.3.7.6`.
+- current_proof: typed compiled events preserve all three anonymous marker spellings plus `@mark(name)` on the
+  preceding regex slot and execute after slot action/child dispatch and before `LE` through existing stores. Exact
+  `é(α🙂,βγ)` native/reconstructed timing, shipped EBNF `@move_pos`, and malformed-marker boundaries pass 121/121
+  on PUC Lua and LuaJIT. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0,
+  CLI 61x2, and Phase 0 `1..1031` in 633 seconds. No helper/fixture/inventory/generated/capability surface changed.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -33,6 +34,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: planning-only `.18.0` ADR/task/roadmap/book/KM/live docs await verification
-  and prepared commit; do not return to `.4.3.7.4` before it lands and the tree is clean. The structured-format
-  execution tree remains dependency-gated on full current-backend parity.
+- blockers: none. in_flight_uncommitted: `.4.3.7.4` Lua code/test plus task/roadmap/book/KM/live closeout await
+  final checks and prepared commit. Do not open the terse/expressive design leaf or resume `.4.3.7.6` before this
+  lands and the tree is clean. The structured-format execution tree remains dependency-gated on full parity.

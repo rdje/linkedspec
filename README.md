@@ -52,7 +52,8 @@ This `README.md` is the **single entry point** to the project.
   `aggregate_selector_removed` fields. Cross-variant `.12.1.8.6` locks those boundaries and zero runtime selector
   compatibility in canonical CI. `.12.1.9` admitted the root/capability/mdBook surface; follow-up `.12.1.10`
   removed 14 stale positive forms from the Rust, Dart, Julia, and Lua READMEs and expanded the recurring public
-  checker to all 56 root/component/mdBook files. Current authoring uses bare typed bindings, for example
+  checker to all 56 files then present; the discovered public surface is now 57 files after the structured-format
+  architecture page, still with zero current examples. Current authoring uses bare typed bindings, for example
   `set(items, [])`, `push(items, value)`, and `copy(items)`. Lua numeric canonical/alias/symbol calls, number
   receivers, strict aggregate reducers, ordered copied array construction, explicit flat splicing/concatenation,
   copied selection/order/membership/uniqueness, transform/join/PCRE2 pipelines, typed mutation/child-result flow,
@@ -79,7 +80,9 @@ This `README.md` is the **single entry point** to the project.
   Perl contracts. Lua `.4.3.7.3` then executes the governed named writers, stable/advancing spans, two-mark reads,
   and anonymous/named bridges through that same store at 120/120 on PUC Lua and LuaJIT. Missing/reversed spans are
   neutral, public positions/lengths are character-based, and `capture_take()` versus `capture_take(name)` retains
-  the anonymous/named overload split. Placement-sensitive split/mark execution `.4.3.7.4` is now active. ADR
+  the anonymous/named overload split. Lua `.4.3.7.4` now compiles split/named-mark rule members into typed
+  preceding-slot events and executes them after that slot's actions at 121/121 on PUC Lua and LuaJIT;
+  exhaustive capture/cursor no-drift `.4.3.7.6` is active. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
