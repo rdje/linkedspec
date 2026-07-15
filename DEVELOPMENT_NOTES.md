@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.2` — make staged bodies executable without leaking caller state): Resolve
+  raw registered names before helper canonicalization, but keep argument evaluation in the caller and frame
+  preparation in `user_function_registry.lua`. Install only copied scalar/array/harray stores plus the active-name
+  path, run the existing block-value evaluator with a fresh result accumulator, and restore all four context fields
+  after one protected call. This naturally supports nested nonrecursive calls, final/local-return values, discard
+  statements, and receiver continuation without a second function-body interpreter. Treat neutral `body_ast` as
+  authority even though the evaluator needs typed nodes: reparse governed `body_source`, require exact canonical
+  JSON equality, and cache only the verified pair. Reject registered keywords before evaluating any argument; keep
+  arity and recursion in the registry so runtime failures preserve one portable owner. Both Lua ABIs pass 133/133;
+  status is `runtime-user-functions-fixed-v1`, and `.5.1.3.1` owns the separate variadic-v2 schema change.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.20.0` — mutation testing is a campaign, never commit ceremony): The
   list-only `cargo-mutants 27.0.0` census is 3,333 candidates across 19 files, including 1,343 in `engine.rs`, so
   even diff/file execution does not belong in per-commit, pre-commit, or ordinary local-CI paths. Preserve normal

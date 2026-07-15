@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.2 — execute Lua fixed user functions
+
+Added registry-first fixed-v1 user-function execution to the native Lua interpreter. Positional arguments evaluate
+once left-to-right in caller scope and enter fresh copied scalar/array/harray stores; protected execution restores
+caller stores and the active-function path on success or failure. Verified staged `body_ast` records supply final
+expression and function-local early-return values, nested nonrecursive calls, standalone value drop, and ordinary
+array/harray/string/numeric receiver continuation.
+
+Registered keyword arguments now keep the portable `user_function_keyword_arguments_unsupported` contract rather
+than being counted as positional arity or falling through to a helper. Exact arity, direct/mutual recursion cycles,
+and missing/mismatched staged bodies retain typed function-owned diagnostics. PUC Lua and LuaJIT pass 133/133;
+public status becomes `runtime-user-functions-fixed-v1`, capability remains 64/0/0, and variadic-v2 state
+`.5.1.3.1` is next. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.20.0 — plan targeted Rust mutation testing
 
 ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit Rust test-strength tool while

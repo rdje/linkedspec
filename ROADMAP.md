@@ -944,9 +944,9 @@ own structured runtime failures, trace controls/sinks, runtime events, and no-dr
 propagation remains `.5.3` after its owners exist. Structured runtime diagnostics `.4.4.1` pass 126/126 and native
 trace controls/sinks `.4.4.2` pass 128/128; deeper runtime instrumentation `.4.4.3` passes 129/129 and no-drift
 closeout `.4.4.4` closes the scoped runtime diagnostics/trace parent. Staged-function/native-loading `.5.1` is
-now split by `.5.1.0`; minimal `actionir-body.spec` staged dispatch `.5.1.1` passes 130/130 with status
-`runtime-staged-registry`, and fixed-v1 registered-call runtime `.5.1.2` is active. Full native-pipeline trace remains
-dependency-correct `.5.3`.
+now split by `.5.1.0`; minimal `actionir-body.spec` staged dispatch `.5.1.1` passes 130/130, and fixed-v1
+registered-call runtime `.5.1.2` passes 133/133 with status `runtime-user-functions-fixed-v1`. Variadic-v2 state
+`.5.1.3.1` is active. Full native-pipeline trace remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -956,7 +956,9 @@ successful results pass 126/126 on PUC Lua and LuaJIT. Typed ordered trace level
 controls, caller-owned stdout/route/mirror sinks with reset/append, and balanced result-neutral parse scopes now
 pass 128/128. Runtime rule/regex/dispatch/recursion/lifecycle/cursor/boundary/mark-capture events pass 129/129.
 Minimal staged dispatch `.5.1.1` then adds the governed ActionIR-body provider/queue/cache/stitch path at 130/130.
-Public status is `runtime-staged-registry`; `.5.1.2` is active and capability remains 64/0/0.
+Fixed-v1 runtime `.5.1.2` adds registry-first calls, isolated copied stores, local returns, value composition, and
+typed function-owned failures at 133/133. Public status is `runtime-user-functions-fixed-v1`; `.5.1.3.1` is active
+and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

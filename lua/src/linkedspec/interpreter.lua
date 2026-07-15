@@ -8,6 +8,7 @@ local runtime_scoped_binding = require("linkedspec.runtime_scoped_binding")
 local scalar_numeric = require("linkedspec.scalar_numeric")
 local trace = require("linkedspec.trace")
 local unicode_case = require("linkedspec.unicode_case_mapping")
+local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
 
@@ -107,6 +108,7 @@ function M.runtime_engine(compiled, options)
     regex_cache = {},
     boundary_regex_cache = {},
     helper_regex_cache = {},
+    user_function_body_cache = {},
   }, ENGINE_MT)
 end
 
@@ -164,6 +166,7 @@ local function context(engine, input, top_rule, compiled_rules, diagnostic_sink,
     variables = {},
     arrays = {},
     harrays = {},
+    active_user_functions = {},
     mark_buckets = {},
     active = {},
     lifecycle_events = {},
@@ -201,6 +204,7 @@ local evaluate_expr
 local evaluate_block_value
 local execute_block
 local invalid_helper_arity
+local execute_user_function
 
 local function argument_expr(arg) return arg.value end
 
@@ -2121,6 +2125,9 @@ local function evaluate_cursor_control(name, expr, ctx)
 end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
+  if engine.compiled_spec.function_registry:has_name(expr.name) then
+    return execute_user_function(engine, expr, ctx, accumulator, edge_state)
+  end
   if expr.name == "if" then
     return evaluate_inline_if(engine, expr, ctx, accumulator, edge_state)
   elseif expr.name == "switch" then
@@ -3055,6 +3062,180 @@ evaluate_block_value = function(engine, block, ctx, accumulator, edge_state)
     index = next_index + 1
   end
   return json.null
+end
+
+local function current_rule_label(ctx)
+  return ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+end
+
+local function raise_user_function_error(engine, ctx, name, message, fields)
+  fields = fields or {}
+  local rule_label = fields.rule_label or current_rule_label(ctx)
+  fields.stage = fields.stage or "user_function_call"
+  fields.helper_name = fields.helper_name or name
+  fields.rule_label = rule_label
+  fields.handler_source_label = fields.handler_source_label or "lua_runtime:function:" .. name
+  fields.diagnostic = fields.diagnostic or runtime_diagnostic(engine, {
+    stage = fields.stage,
+    summary = fields.summary or "Lua user function execution failed",
+    detail = message,
+    top_rule = ctx.top_rule,
+    rule_label = rule_label,
+    handler_source_label = fields.handler_source_label,
+  })
+  fail(message, fields)
+end
+
+local function staged_user_function_body(engine, entry, ctx)
+  local definition = entry.definition
+  local body_ast = definition.body_ast
+  if json.kind(body_ast) ~= "harray" or body_ast.kind ~= "action_block" then
+    raise_user_function_error(
+      engine,
+      ctx,
+      definition.name,
+      "user function '" .. definition.name .. "' does not have a staged action-block body_ast",
+      {
+        code = "user_function_body_ast_missing",
+        stage = "user_function_body_parse",
+        summary = "Lua user function staging failed",
+      }
+    )
+  end
+
+  local staged_json = json.encode(body_ast)
+  local cached = engine.user_function_body_cache[definition.name]
+  if cached ~= nil and cached.body_source == definition.body_source and cached.staged_json == staged_json then
+    return cached.block
+  end
+
+  local ok, block_or_error = pcall(action_parser.parse_action_block, definition.body_source)
+  if not ok then
+    raise_user_function_error(
+      engine,
+      ctx,
+      definition.name,
+      "user function '" .. definition.name .. "' staged body source could not be reconstructed: " ..
+        tostring(block_or_error),
+      {
+        code = "user_function_body_parse_failed",
+        stage = "user_function_body_parse",
+        summary = "Lua user function body parse failed",
+      }
+    )
+  end
+
+  local parsed_json = json.encode(action_ast.to_json(block_or_error))
+  if parsed_json ~= staged_json then
+    raise_user_function_error(
+      engine,
+      ctx,
+      definition.name,
+      "user function '" .. definition.name .. "' staged body_ast does not match its governed body source",
+      {
+        code = "user_function_body_ast_mismatch",
+        stage = "user_function_body_parse",
+        summary = "Lua user function staging failed",
+      }
+    )
+  end
+
+  engine.user_function_body_cache[definition.name] = {
+    body_source = definition.body_source,
+    staged_json = staged_json,
+    block = block_or_error,
+  }
+  return block_or_error
+end
+
+execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
+  local keyword_count = 0
+  for _, argument in ipairs(expr.args) do
+    if argument.argument_kind == "keyword" then keyword_count = keyword_count + 1 end
+  end
+  if keyword_count > 0 then
+    raise_user_function_error(
+      engine,
+      ctx,
+      expr.name,
+      "user function '" .. expr.name .. "' accepts positional arguments only, got " ..
+        keyword_count .. " keyword argument(s)",
+      {
+        code = "user_function_keyword_arguments_unsupported",
+        expected = "positional arguments",
+        got = keyword_count,
+      }
+    )
+  end
+
+  local evaluated_values = {}
+  for _, argument in ipairs(expr.args) do
+    evaluated_values[#evaluated_values + 1] = evaluate_expr(
+      engine,
+      argument_expr(argument),
+      ctx,
+      accumulator,
+      edge_state
+    )
+  end
+
+  local rule_label = current_rule_label(ctx)
+  local prepared, frame_or_error = pcall(
+    user_function_registry.prepare_invocation,
+    engine.compiled_spec.function_registry,
+    expr.name,
+    evaluated_values,
+    ctx.active_user_functions,
+    { rule_label = rule_label }
+  )
+  if not prepared then
+    if user_function_registry.is_registry_error(frame_or_error) then
+      local fields = {}
+      for key, value in pairs(frame_or_error) do
+        if key ~= "message" then fields[key] = value end
+      end
+      raise_user_function_error(engine, ctx, expr.name, frame_or_error.message, fields)
+    end
+    error(frame_or_error, 0)
+  end
+
+  local block = staged_user_function_body(engine, frame_or_error.entry, ctx)
+  local saved_variables = ctx.variables
+  local saved_arrays = ctx.arrays
+  local saved_harrays = ctx.harrays
+  local saved_active_user_functions = ctx.active_user_functions
+  ctx.variables = frame_or_error.variables
+  ctx.arrays = frame_or_error.arrays
+  ctx.harrays = frame_or_error.harrays
+  ctx.active_user_functions = frame_or_error.active_path
+
+  local executed, value_or_error = pcall(
+    evaluate_block_value,
+    engine,
+    block,
+    ctx,
+    json.array(),
+    nil
+  )
+  ctx.variables = saved_variables
+  ctx.arrays = saved_arrays
+  ctx.harrays = saved_harrays
+  ctx.active_user_functions = saved_active_user_functions
+
+  if not executed then
+    if getmetatable(value_or_error) == ERROR_MT then
+      value_or_error = with_runtime_diagnostic(value_or_error, runtime_diagnostic(engine, {
+        stage = "user_function_body",
+        summary = "Lua user function execution failed",
+        detail = value_or_error.message,
+        top_rule = ctx.top_rule,
+        rule_label = rule_label,
+        handler_source_label = "lua_runtime:function:" .. expr.name,
+      }))
+    end
+    error(value_or_error, 0)
+  end
+  return copy_value(value_or_error)
 end
 
 execute_block = function(engine, block, ctx, accumulator, edge_state)

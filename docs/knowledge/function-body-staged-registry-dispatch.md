@@ -51,7 +51,7 @@ This does not implement the full future surface. Public `parse_job(...)` authori
 filesystem/import/provider search roots, multiple next-stage parser families, recursive
 staged queues, and cycle diagnostics remain future leaves. Dart user-function runtime
 execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime
-execution is the active `LUA-BACKEND-PARITY.5.1.2` frontier.
+execution has landed under `LUA-BACKEND-PARITY.5.1.2`, and variadic-v2 state `.5.1.3.1` is active.
 
 Related backend facts: [[julia-staged-function-body-registry]],
-[[lua-staged-function-body-registry]].
+[[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]].

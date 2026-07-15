@@ -9,7 +9,9 @@ structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
 compiled rule/dependency/payload state and exact outward descriptors are also
 available in memory. A minimal staged registry now executes the governed ActionIR
-body jobs and immutably stitches `body_ast`; registered-call execution remains next.
+body jobs and immutably stitches `body_ast`. The runtime resolves registered fixed-v1
+calls before helper fallback, evaluates caller arguments once in order, executes copied
+function-local stores, restores callers, and returns ordinary composable values.
 Native PCRE2 matching supplies stable seek/consume,
 captures, Unicode positions, and entry/local match registers. The first
 compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
@@ -42,7 +44,9 @@ unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
 action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
 governed mark/capture events. The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
-`body_ast`. Both ABIs pass 130/130 and public status is `runtime-staged-registry`.
+`body_ast`. Fixed-v1 calls require that staged AST, fail closed on source/AST drift, and carry typed function-owned
+arity, keyword, recursion, and staging diagnostics. Both ABIs pass 133/133 and public status is
+`runtime-user-functions-fixed-v1`.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -182,8 +186,10 @@ pass 128/128, runtime instrumentation `.4.4.3` passes 129/129, and no-drift `.4.
 parent. Planning `.5.1.0` splits staged dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime,
 and closeout. Minimal staged dispatch `.5.1.1` is complete at 130/130: `actionir-body.spec` resolves to the governed
 built-in identity, jobs execute in stable order with neutral cache/compiled records, and `body_ast` is stitched
-without mutating the source spec. Fixed-v1 runtime `.5.1.2` is active. Full frontend/compiler/function/staged trace
-remains `.5.3` after general staged functions and native loading exist. Generated Lua
+without mutating the source spec. Fixed-v1 runtime `.5.1.2` is complete at 133/133: registry-first calls use eager
+ordered caller arguments, fresh copied local stores, final/local returns, standalone value drop, returned-value
+receiver chains, and typed failure fences. Variadic-v2 state `.5.1.3.1` is active. Full frontend/compiler/function/
+staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -195,6 +201,7 @@ proof first raised both ABI suites to 123/123; the complete helper closeout now 
 trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
 trace controls/sinks `.4.4.2` raise it to 128/128, runtime instrumentation `.4.4.3` raises it to 129/129, and the
 minimal staged function-body registry `.5.1.1` raises it to 130/130.
+Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
@@ -410,8 +417,36 @@ options)` accepts already-evaluated scalar, array, harray, or codeblock values.
 It creates a fresh data-only frame, defensively copies aggregate/codeblock
 arguments, and never captures caller stores or Lua closures. Exact arity is
 mandatory; unknown names, arity drift, ambiguous/cyclic values, and recursion
-are typed registry errors. Staged body-job dispatch, body execution, and primary
-CLI promotion remain later owned layers.
+are typed registry errors.
+
+After `dispatch_function_body_parse_jobs(...)` stitches each governed `body_ast`,
+compiled fixed-v1 functions execute directly through the normal runtime:
+
+```text
+fn pair(left, right) { [left, right] }
+fn normalize(value) { return(value.trim()) }
+
+Top::
+ /x/ E {
+   pair("a", "b").join_values("|").return()
+ }
+```
+
+The result is `"a|b"`. Function calls are expression values: their result may feed
+array, harray, string, or numeric receiver families, while a standalone call still
+executes its arguments/body and discards only the final value. Positional arguments
+evaluate once left-to-right in caller scope. Parameters and locals live in fresh copied
+scalar/array/harray stores, so aggregate mutation inside a function cannot mutate the
+caller and undeclared caller bindings are not captured. The body result is its final
+expression or a function-local `return(expr)` payload; nested nonrecursive calls work.
+
+Registered keyword arguments diagnose as
+`user_function_keyword_arguments_unsupported`; exact-arity drift uses
+`user_function_arity_mismatch`; direct and mutual recursion use
+`user_function_recursion` with the full cycle. Missing or mismatched staged bodies fail
+closed before body execution. Variadic signatures, declared contextual final codeblocks,
+descriptor/full-pipeline trace admission, generated Lua, and primary CLI promotion remain
+their separately owned later layers.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

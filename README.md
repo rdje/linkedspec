@@ -100,8 +100,11 @@ This `README.md` is the **single entry point** to the project.
   Planning `.5.1.0` separates staged body dispatch, fixed/variadic runtime, contextual-codeblock metadata/runtime,
   and closeout. Minimal staged dispatch `.5.1.1` now validates/stable-sorts exact jobs, resolves the governed
   `actionir-body.spec` provider/digest/cache identity, parses exact ActionIR bodies, and immutably stitches
-  `body_ast`; both ABIs pass 130/130 and public status is `runtime-staged-registry`. Fixed-v1 runtime `.5.1.2` is
-  active. Full frontend/compiler/function/staged propagation remains `.5.3`.
+  `body_ast`. Fixed-v1 runtime `.5.1.2` now resolves registered calls before helper fallback, evaluates caller
+  arguments once left-to-right, executes integrity-checked staged bodies in fresh local stores, restores callers,
+  composes returned values, and reports typed arity/keyword/recursion/staging failures. Both ABIs pass 133/133 and
+  public status is `runtime-user-functions-fixed-v1`; variadic-v2 state `.5.1.3.1` is active. Full frontend/
+  compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

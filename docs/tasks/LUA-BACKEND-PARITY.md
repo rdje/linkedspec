@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (minimal staged action-body dispatch passes 130/130 on PUC Lua and LuaJIT with status
-  `runtime-staged-registry`; fixed-v1 registered-function runtime `.5.1.2` is active)
+- Last updated: `2026-07-15` (fixed-v1 registered-function execution passes 133/133 on PUC Lua and LuaJIT with
+  status `runtime-user-functions-fixed-v1`; variadic-v2 state preservation `.5.1.3.1` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2005,18 +2005,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.5.1.1 - add Lua staged body dispatch`
 
 - ID: `LUA-BACKEND-PARITY.5.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute registered fixed-v1 user functions through the Lua runtime.
   Dependencies: `.5.1.1`
   Acceptance: Registry-first calls evaluate positional arguments once left-to-right in caller scope, execute staged
     `body_ast` in fresh scalar/array/harray stores, return local final/early-return values, restore caller stores on
     success/failure, feed receiver chains, execute-and-discard standalone calls, and diagnose arity/keyword/
     direct-mutual recursion without helper fallback on both ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `interpreter.lua` resolves registered raw call names before canonical helper
+    dispatch, rejects keyword AST arguments before evaluation, evaluates positional arguments exactly once in
+    source order, and uses `prepare_invocation(...)` to copy values into fresh scalar/array/harray stores. Each
+    function executes a cached typed ActionIR block only after its canonical JSON exactly matches the governed
+    staged `body_ast`; missing or drifting staged bodies fail closed. Protected execution restores caller stores
+    and the active-function path on success/failure. Final expressions, local early returns, nested calls,
+    standalone value drop, array/string/number/harray result chains, caller isolation, exact arity, and direct/
+    mutual recursion cycles are locked. Registered keyword contracts use the portable
+    `user_function_keyword_arguments_unsupported` diagnostic instead of helper fallback. PUC Lua and LuaJIT pass
+    133/133; coverage remains 246/105+1/122, capability remains 64/0/0, public status is
+    `runtime-user-functions-fixed-v1`, and `.5.1.3.1` is active. Canonical local CI passes CLI 61x2 plus Phase 0
+    `1..1031` in 605 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions`
 
 - ID: `LUA-BACKEND-PARITY.5.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Consume the fixed-v1/variadic-v2 callable-signature union natively.
   Children: `.5.1.3.1`, `.5.1.3.2`
   Dependencies: `.5.1.2`
@@ -2026,7 +2037,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.5.1.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve variadic-v2 callable signatures through Lua shell, AST, staged records, registry, and compiled state.
   Dependencies: `.5.1.2`
   Acceptance: Fixed v1 retains exact params/arity; variadic v2 uses only the typed callable signature with final
@@ -2236,7 +2247,8 @@ trace controls/sinks pass 128/128 and runtime instrumentation `.4.4.3` passes 12
 `.4.4.4` closes the scoped parent without behavior changes. Staged-function/native-loading `.5.1` is active; full
 native-pipeline trace remains `.5.3`. Planning `.5.1.0` now separates staged body dispatch, fixed-v1 execution,
 variadic metadata/runtime, contextual-codeblock metadata/runtime, and closeout. Minimal staged dispatch `.5.1.1`
-now passes 130/130 with status `runtime-staged-registry`; fixed-v1 runtime `.5.1.2` is active.
+passes 130/130. Fixed-v1 runtime `.5.1.2` now passes 133/133 with status
+`runtime-user-functions-fixed-v1`; variadic-v2 state `.5.1.3.1` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2333,12 +2345,30 @@ now passes 130/130 with status `runtime-staged-registry`; fixed-v1 runtime `.5.1
 | 91 | `LUA-BACKEND-PARITY.5.1` | `active` | Add staged registry/function dispatch plus fixed-v1/variadic-v2 and contextual codeblock calls. |
 | 92 | `LUA-BACKEND-PARITY.5.1.0` | `done` | Split staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift. |
 | 93 | `LUA-BACKEND-PARITY.5.1.1` | `done` | Deterministic `actionir-body.spec` provider, stable queue, governed identity, and immutable stitching pass 130/130. |
-| 94 | `LUA-BACKEND-PARITY.5.1.2` | `active` | Execute fixed-v1 registered functions through fresh local stores. |
-| 95 | `LUA-BACKEND-PARITY.5.1.3.1` | `pending` | Preserve typed variadic-v2 signatures through native state. |
+| 94 | `LUA-BACKEND-PARITY.5.1.2` | `done` | Registry-first fixed-v1 calls, fresh stores, local returns, composition, and typed fences pass 133/133. |
+| 95 | `LUA-BACKEND-PARITY.5.1.3.1` | `active` | Preserve typed variadic-v2 signatures through native state. |
 | 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `pending` | Execute variadic-v2 calls with fresh typed rest arrays. |
 | 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `pending` | Preserve final codeblock parameter metadata and normalize contextual forms. |
 | 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `pending` | Execute contextual final blocks through declared user-function slots. |
 | 99 | `LUA-BACKEND-PARITY.5.1.5` | `pending` | Close staged-function/variadic/contextual-codeblock execution no-drift. |
+
+### `LUA-BACKEND-PARITY.5.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Staged function definitions and isolated invocation frames existed, but every
+  registered runtime call still canonicalized into built-in helper dispatch and ended as unsupported.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` never consulted the compiled function registry, had no
+  active-function recursion path, and had no cleanup-safe body executor tied to staged `body_ast` authority.
+- [x] **FIX** — Resolve registered names first; reject keyword AST arguments; evaluate positional arguments once
+  left-to-right; prepare copied local frames; integrity-check/cache typed bodies against staged JSON; execute with
+  local final/early-return semantics; and restore all caller stores/active paths through one protected boundary.
+- [x] **ADDRESSED (verified)** — Focused execution proves nested fixed calls, eager side-effect order, standalone
+  result drop, scalar/array/harray isolation, absent caller capture, four receiver-result families, exact arity,
+  keyword ownership, direct/mutual recursion cycles, and missing/mismatched staged-body rejection.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 133/133 on separately built PUC Lua and LuaJIT
+  adapters plus syntax, CLI scaffold, and exact 105-fixture validation. Coverage remains 246/105+1/122 and
+  capability remains 64/0/0. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+- [x] **LOCKSTEP** — Public status, Lua/root READMEs, task/index/roadmaps, live/changes/notes/memory, mdBook
+  pipeline/status/handoff pages, and Knowledge Map close `.5.1.2` and activate only `.5.1.3.1`.
 
 ### `LUA-BACKEND-PARITY.5.1.1` Acceptance Checklist
 
@@ -3643,3 +3673,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.4.4` | `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift` | Exact API/source/test/public-doc inventory, parent `.4.4` closure, 129/129 dual-ABI proof, and `.5.1` handoff. |
 | `LUA-BACKEND-PARITY.5.1.0` | `LUA-BACKEND-PARITY.5.1.0 - split Lua staged function execution` | Dependency-correct staged/fixed/variadic/contextual-codeblock/no-drift leaves with explicit later boundaries retained. |
 | `LUA-BACKEND-PARITY.5.1.1` | `LUA-BACKEND-PARITY.5.1.1 - add Lua staged body dispatch` | Stable typed job queue, governed ActionIR provider/cache identity, immutable body stitching, typed fences, and 130/130 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.5.1.2` | `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions` | Registry-first calls, staged-AST authority, isolated local execution, value composition, typed fences, and 133/133 dual-ABI proof. |

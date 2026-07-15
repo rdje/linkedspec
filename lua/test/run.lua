@@ -134,7 +134,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-staged-registry", "status parity")
+  assert_equal(first.parity, "runtime-user-functions-fixed-v1", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1764,6 +1764,177 @@ test("user function invocation frames diagnose arity unknown calls and recursion
   assert_equal(recursion.summary, "Lua user function recursion failed", "recursion summary")
   assert_equal(recursion.rule_label, "Top", "recursion rule")
   assert_equal(recursion.handler_source_label, "lua_runtime:function:first", "recursion handler source")
+end)
+
+local function staged_user_function_runtime(functions, rule_source)
+  local parsed_rules = linkedspec.parse_spec(rule_source).rules
+  local source_spec = ast.spec_file({ functions = functions, rules = parsed_rules })
+  local staged_spec = linkedspec.dispatch_function_body_parse_jobs(source_spec).spec
+  return linkedspec.runtime_engine(linkedspec.compile_spec(staged_spec))
+end
+
+local function assert_user_function_runtime_error(engine, code, expected, label)
+  local ok, runtime_error = pcall(linkedspec.runtime_parse, engine, "x")
+  if ok then fail((label or code) .. ": expected an error") end
+  assert_equal(linkedspec.is_runtime_interpreter_error(runtime_error), true, (label or code) .. " type")
+  assert_equal(runtime_error.code, code, (label or code) .. " code")
+  if expected then assert_contains(runtime_error.message, expected, label or code) end
+  assert_equal(runtime_error.diagnostic.stage, runtime_error.stage, (label or code) .. " diagnostic stage")
+  return runtime_error
+end
+
+test("runtime executes staged fixed user functions in isolated stores and preserves value composition", function()
+  local functions = {
+    registry_function("pair", { "first", "second" }, 0, nil, "[first, second]"),
+    registry_function("identity", { "value" }, 1, nil, "return(value)"),
+    registry_function("nested", { "value" }, 2, nil, 'pair(value, "nested")'),
+    registry_function("early", { "value" }, 3, nil, 'if(value) { return("early") }; "late"'),
+    registry_function("mutate_items", { "items" }, 4, nil, 'items += "inner"; return(items)'),
+    registry_function("mutate_meta", { "meta" }, 5, nil, 'meta["inner"] = "yes"; return(meta)'),
+    registry_function("read_outside", {}, 6, nil, "return(outside)"),
+  }
+  local engine = staged_user_function_runtime(functions, [[
+Top::
+ /x/ E {
+   counter = 0
+   outside = "caller"
+   items = ["outer"]
+   meta = { "outer" : "yes" }
+   ordered = pair(counter = counter.add(1), counter = counter.add(1))
+   identity(counter = counter.add(1))
+   return({
+     "ordered" : ordered,
+     "counter" : counter,
+     "nested" : nested("value"),
+     "early_true" : early(true),
+     "early_false" : early(false),
+     "mutated_items" : mutate_items(items),
+     "caller_items" : items,
+     "mutated_meta" : mutate_meta(meta),
+     "caller_meta" : meta,
+     "outside_isolated" : read_outside(),
+     "array_chain" : pair("a", "b").join_values("|"),
+     "string_chain" : identity("  text  ").trim(),
+     "number_chain" : identity(4).add(3),
+     "hash_chain" : identity({ "b" : 2, "a" : 1 }).sorted_keys().join_values(",")
+   })
+ }
+]])
+  local result = linkedspec.runtime_parse(engine, "x").value
+  assert_equal(json.encode(result), json.encode(json.harray({
+    ordered = json.array({ 1, 2 }),
+    counter = 3,
+    nested = json.array({ "value", "nested" }),
+    early_true = "early",
+    early_false = "late",
+    mutated_items = json.array({ "outer", "inner" }),
+    caller_items = json.array({ "outer" }),
+    mutated_meta = json.harray({ outer = "yes", inner = "yes" }),
+    caller_meta = json.harray({ outer = "yes" }),
+    outside_isolated = json.null,
+    array_chain = "a|b",
+    string_chain = "text",
+    number_chain = 7,
+    hash_chain = "a,b",
+  })), "fixed user function runtime result")
+end)
+
+test("runtime user functions diagnose arity keywords and recursion before helper fallback", function()
+  local identity = registry_function("identity", { "value" }, 0, nil, "return(value)")
+  local arity = assert_user_function_runtime_error(
+    staged_user_function_runtime({ identity }, "Top::\n /x/ E { return(identity()) }\n"),
+    "user_function_arity_mismatch",
+    "expects arity 1, got 0",
+    "fixed arity"
+  )
+  assert_equal(arity.helper_name, "identity", "fixed arity function owner")
+
+  local keyword_engine = staged_user_function_runtime(
+    { identity },
+    'Top::\n /x/ E { return(identity("x")) }\n'
+  )
+  local keyword_payload = keyword_engine.compiled_spec.rules_by_label.Top.lifecycle_action_payloads[1]
+  local keyword_call = keyword_payload.action_ast.statements[1].expr.args[1].value
+  keyword_call.args[1] = linkedspec.action_ast.keyword_argument(
+    "value",
+    linkedspec.parse_action_expression('"x"')
+  )
+  keyword_payload.contracts = linkedspec.resolve_action_block_contracts(
+    keyword_payload.action_ast,
+    { function_registry = keyword_engine.compiled_spec.function_registry }
+  )
+  local keyword = assert_user_function_runtime_error(
+    keyword_engine,
+    "user_function_keyword_arguments_unsupported",
+    "accepts positional arguments only",
+    "keyword argument"
+  )
+  assert_equal(keyword.expected, "positional arguments", "keyword expected surface")
+  assert_equal(keyword.got, 1, "keyword count")
+  local keyword_contract = keyword_payload.contracts
+  assert_equal(keyword_contract.ok, false, "keyword contract rejects")
+  assert_equal(
+    keyword_contract.diagnostics[1].code,
+    "user_function_keyword_arguments_unsupported",
+    "keyword contract diagnostic"
+  )
+
+  local direct = registry_function("direct", { "value" }, 0, nil, "direct(value)")
+  local direct_error = assert_user_function_runtime_error(
+    staged_user_function_runtime({ direct }, 'Top::\n /x/ E { return(direct("x")) }\n'),
+    "user_function_recursion",
+    "direct -> direct",
+    "direct recursion"
+  )
+  assert_equal(direct_error.cycle, "direct -> direct", "direct recursion cycle")
+
+  local first = registry_function("recur_alpha", { "value" }, 0, nil, "recur_beta(value)")
+  local second = registry_function("recur_beta", { "value" }, 1, nil, "recur_alpha(value)")
+  local mutual_error = assert_user_function_runtime_error(
+    staged_user_function_runtime({ first, second }, 'Top::\n /x/ E { return(recur_alpha("x")) }\n'),
+    "user_function_recursion",
+    "recur_alpha -> recur_beta -> recur_alpha",
+    "mutual recursion"
+  )
+  assert_equal(
+    mutual_error.cycle,
+    "recur_alpha -> recur_beta -> recur_alpha",
+    "mutual recursion cycle"
+  )
+end)
+
+test("runtime requires staged user function body AST authority", function()
+  local missing = registry_function("missing_body", {}, 0, nil, 'return("x")')
+  local missing_rules = linkedspec.parse_spec('Top::\n /x/ E { return(missing_body()) }\n').rules
+  local missing_engine = linkedspec.runtime_engine(linkedspec.compile_spec(ast.spec_file({
+    functions = { missing },
+    rules = missing_rules,
+  })))
+  assert_user_function_runtime_error(
+    missing_engine,
+    "user_function_body_ast_missing",
+    "does not have a staged action-block body_ast",
+    "missing staged body"
+  )
+
+  local mismatched = registry_function(
+    "mismatched_body",
+    {},
+    0,
+    json.harray({ kind = "action_block", statements = json.array() }),
+    'return("x")'
+  )
+  local mismatch_rules = linkedspec.parse_spec('Top::\n /x/ E { return(mismatched_body()) }\n').rules
+  local mismatch_engine = linkedspec.runtime_engine(linkedspec.compile_spec(ast.spec_file({
+    functions = { mismatched },
+    rules = mismatch_rules,
+  })))
+  assert_user_function_runtime_error(
+    mismatch_engine,
+    "user_function_body_ast_mismatch",
+    "does not match its governed body source",
+    "mismatched staged body"
+  )
 end)
 
 local function compiled_test_rule(label, is_top, mode, body)

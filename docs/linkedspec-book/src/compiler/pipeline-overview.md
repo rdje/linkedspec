@@ -82,7 +82,9 @@ The implemented function-body subset dispatches jobs through a staged parser reg
 `resolve`, `load`, `compile`, and `execute` operations. Perl, Rust, Dart, Julia, and Lua all resolve the narrow
 `actionir-body.spec` identity, record the governed built-in adapter digest/cache key, execute top rule
 `action_block`, and immutably stitch `body_ast`. Lua additionally exposes one/many-job, dispatch-with-results,
-stitch-only, and composed function-shell APIs; both Lua ABIs pass 130/130 with status `runtime-staged-registry`.
+stitch-only, and composed function-shell APIs. Its following fixed-v1 runtime executes registry-first calls over
+verified staged bodies and fresh copied stores; both Lua ABIs pass 133/133 with status
+`runtime-user-functions-fixed-v1`.
 
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
@@ -181,6 +183,16 @@ In Lua, the composed entrypoint is
 Lower-level callers can inspect deterministic provider/cache/result records through
 `dispatch_function_body_parse_jobs(spec)` and `staged_parser_registry_to_json(result)`;
 `stitch_function_body_parse_jobs(spec)` returns only the new stitched `SpecFile`.
+The Lua fixed-v1 runtime then resolves registered raw call names before helper
+canonicalization. It evaluates positional arguments once left-to-right in caller scope,
+copies them into fresh scalar/array/harray stores, executes the staged function body, and
+restores the caller stores and active-function path on both success and failure. The
+staged `body_ast` is authoritative: Lua reconstructs the typed ActionIR block from the
+governed body source, requires exact canonical JSON equality with `body_ast`, and caches
+only that verified pair. Final expressions and function-local `return(expr)` provide the
+result; nested nonrecursive calls, standalone value drop, and compatible receiver chains
+all reuse ordinary ActionIR evaluation. Exact arity, keyword arguments, recursion cycles,
+and missing/drifting staged bodies retain typed function-owned diagnostics.
 
 The current end-to-end proof covers both descriptor shape and runtime behavior. A spec
 with several function bodies such as:

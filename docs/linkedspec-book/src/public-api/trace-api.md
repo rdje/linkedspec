@@ -281,7 +281,8 @@ marks. Traced and untraced result JSON is identical across success, no-match,
 dispatch, and recursion paths; caller options are not mutated; and both PUC
 Lua and LuaJIT pass 129/129 at this trace boundary. The scoped no-drift proof closes
 parent `.4.4`. Minimal staged action-body dispatch `.5.1.1` subsequently raises both
-ABI suites to 130/130 and public status to `runtime-staged-registry`; that later status
+ABI suites to 130/130. Fixed-v1 registered-function execution `.5.1.2` raises them to
+133/133 and public status to `runtime-user-functions-fixed-v1`; that later status
 does not claim full pipeline trace propagation, which remains `.5.3`.
 
 ```text

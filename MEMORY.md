@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.3` — optional native parser acceleration governance.
-- latest_commit: `eab09b48` — `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing`.
-- active_work_unit: planning/list-only Rust mutation-testing `.20.0` is aligned and awaits gates/commit before the
-  clean return to Lua fixed-v1 runtime `.5.1.2`.
-- next_action: verify/commit/clean `.20.0`, then resume Lua registered fixed-v1 runtime `.5.1.2`; mutation
-  configuration/pilot remains parked at `RUST-MUTATION-TESTING.1+` for an explicit later campaign.
-- current_proof: ADR `0039` adopts cargo-mutants only for explicit on-demand or milestone/release campaigns, never
-  per commit, pre-commit, or ordinary local CI. Installed 27.0.0 lists 3,333 candidates across 19 files (core
-  1,217; runtime 2,116) without executing a mutant. Survivors/timeouts/unviable results require distinct durable
-  dispositions; the generated Unicode table is the initial generator-backed exclusion. No score exists and no
-  Rust code, test, CI behavior, or Lua priority changed.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.5.1.2` — native fixed-v1 registered-function execution.
+- latest_commit: `HEAD` — `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions`.
+- prepared_commit: `none`.
+- active_work_unit: clean handoff to variadic-v2 typed state `LUA-BACKEND-PARITY.5.1.3.1` after fixed-v1 execution
+  closes at 133/133 on both Lua ABIs.
+- next_action: preserve the exact fixed-v1/variadic-v2 callable-signature union through Lua shell, AST, staged
+  records, registry, contracts, and compiled state under `.5.1.3.1`; do not begin rest-array execution `.5.1.3.2`.
+- current_proof: registered Lua calls resolve before helpers, evaluate positional arguments once left-to-right,
+  execute integrity-checked staged bodies through fresh copied stores, restore callers on success/failure, return
+  local final/early values, compose nested/discard/receiver positions, and diagnose arity/keyword/recursion/body
+  drift through typed function-owned failures. Both Lua ABIs pass 133/133; canonical local CI passes CLI 61x2 and
+  Phase 0 `1..1031` in 605 seconds. Status is `runtime-user-functions-fixed-v1`; capability is 64/0/0.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.20.0` task/ADR/KM/roadmap/book/live-doc planning plus list-only census
-  awaits gates and its prepared commit; no mutant ran and no code/test/CI behavior changed.
+- blockers: none. in_flight_uncommitted: none after the prepared `.5.1.2` commit; mutation campaigns remain parked
+  and no mutant run belongs to ordinary commit/local-CI workflow.

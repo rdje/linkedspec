@@ -48,7 +48,8 @@ runtime mechanisms without changing results; `.4.4.4` owns the scoped no-drift c
 That closeout is now complete. At its boundary, exact exported API, source-topic,
 focused-test, status, public-book, task/index, roadmap, live-doc, and Knowledge Map
 inventory agree on `runtime-trace-events`; parent `.4.4` is closed. Minimal staged
-dispatch `.5.1.1` has since advanced current status to `runtime-staged-registry`,
+dispatch `.5.1.1` later advanced status to `runtime-staged-registry`, and fixed-v1
+execution `.5.1.2` has since advanced current status to `runtime-user-functions-fixed-v1`,
 while full-pipeline trace correctly remains `.5.3`.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],

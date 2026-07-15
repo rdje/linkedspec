@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua fixed-v1 functions now execute through the one ActionIR runtime. Raw registered names
+  resolve before helper canonicalization; caller arguments evaluate once left-to-right; copied values bind into
+  fresh scalar/array/harray stores; staged `body_ast` JSON is integrity-checked against reconstructed typed source;
+  and protected execution restores caller stores/active paths. Final/local-return values compose through nested
+  nonrecursive calls, standalone drop, and receiver chains. Typed arity, keyword, recursion-cycle, and body-staging
+  failures remain function-owned. Both ABIs pass 133/133, status is `runtime-user-functions-fixed-v1`, capability
+  remains 64/0/0, and variadic-v2 state `.5.1.3.1` is active.
 - `2026-07-15` refresh: Lua now owns the minimal staged function-body registry in
   `linkedspec.staged_parser_registry`. Exact `StagedParseJob` values are defensively normalized and stable-sorted by
   parent path, source span, job id, then input order. The only provider resolves `actionir-body.spec` to

@@ -304,10 +304,22 @@ local function resolver(function_registry)
   local function resolve_call(name, source, source_span, surface, args)
     local positional_count = positional_arg_count(args)
     local keyword_count = keyword_arg_count(args)
-    local arg_count = positional_count + keyword_count
     if surface == "function" then
-      local user_resolution = resolve_user_call(name, arg_count)
-      if user_resolution and user_resolution.matched then
+      local user_resolution = resolve_user_call(name, positional_count)
+      local user_name_known = user_resolution and (
+        user_resolution.name_known or user_resolution.matched or user_resolution.arity_mismatch
+      )
+      if user_name_known and keyword_count > 0 then
+        diagnostics[#diagnostics + 1] = diagnostic({
+          code = "user_function_keyword_arguments_unsupported",
+          message = "user function '" .. name .. "' accepts positional arguments only, got " ..
+            keyword_count .. " keyword argument(s)",
+          helper_name = name,
+          source = source,
+          source_span = source_span,
+        })
+        return
+      elseif user_resolution and user_resolution.matched then
         record({
           source_name = name,
           canonical_name = name,
@@ -324,7 +336,7 @@ local function resolver(function_registry)
         diagnostics[#diagnostics + 1] = diagnostic({
           code = "user_function_arity_mismatch",
           message = "user function '" .. name .. "' expects arity " .. table.concat(expected, " or ") ..
-            ", got " .. arg_count,
+            ", got " .. positional_count,
           helper_name = name,
           source = source,
           source_span = source_span,

@@ -14,6 +14,7 @@ status: current
 tags: [lua, actionir, functions, staged-parsing, registry, runtime-boundary]
 evidence: "LUA-BACKEND-PARITY.3.3 adds lua/src/linkedspec/user_function_registry.lua and 4 focused tests; .3.4 carries it into compiled state/descriptors; .4.1 adds matching. The full Lua gate passes 60/60 on PUC Lua and LuaJIT; exact 239-name and 105-fixture coverage remains green."
 evidence_update_2026_07_15_staged_dispatch: "LUA-BACKEND-PARITY.5.1.1 adds the separate staged parser registry over these preserved jobs and stitch seam; PUC Lua and LuaJIT pass 130/130 with status runtime-staged-registry."
+evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 consumes the registry and invocation frames for registry-first fixed-v1 execution. PUC Lua and LuaJIT pass 133/133 with status runtime-user-functions-fixed-v1; variadic state .5.1.3.1 is active."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -50,7 +51,7 @@ handler-source, and cycle identity.
 
 This `.3.3` leaf did not dispatch staged jobs or execute function bodies. The separate
 `.5.1.1` registry now dispatches and stitches them without changing this registry's ownership;
-fixed-v1 execution remains active `.5.1.2`. `FUTURE-PARITY-BACKLOG.4.4` routes the adopted variadic-v2 signature to
+fixed-v1 execution landed under `.5.1.2`. `FUTURE-PARITY-BACKLOG.4.4` routes the adopted variadic-v2 signature to
 dependency-complete `LUA-BACKEND-PARITY.5.1`; this completed exact-v1 registry leaf is not retroactively an
 execution claim. Descriptor admission follows in `.5.3`, with generated preservation/execution under `.8`.
 
@@ -59,4 +60,4 @@ Related facts: [[lua-function-definition-shell-projection]],
 [[lua-actionir-contract-resolver]], [[julia-user-function-registry]],
 [[dart-function-registry]], [[function-body-parse-job-sidecar]],
 [[text-to-ast-backend-doctrine]].
-See also [[lua-variadic-user-function-routing]].
+See also [[lua-variadic-user-function-routing]], [[lua-fixed-v1-user-function-runtime]].

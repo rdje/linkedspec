@@ -12,7 +12,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, staged-parsing, user-functions, variadic, codeblock, task-tree, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. LUA-BACKEND-PARITY.5.1.1 subsequently lands staged dispatch at 130/130 on both ABIs and activates .5.1.2."
+evidence: "LUA-BACKEND-PARITY.5.1.0 audits Lua function shell/registry/compiled/runtime seams and splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift before code. .5.1.1 lands staged dispatch at 130/130; .5.1.2 lands fixed-v1 execution at 133/133 and activates .5.1.3.1."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1(\\.|`)|staged action-body|fixed-v1|variadic-v2|contextual-codeblock|callable literals' docs/tasks/LUA-BACKEND-PARITY.md docs/TASK_TREE.md README.md ROADMAP.md ROADMAP_V2.md lua/README.md docs/linkedspec-book/src docs/knowledge"
 ---
 
@@ -25,14 +25,14 @@ contract resolution, isolated pre-execution invocation frames, compiled
 function records, generic trailing-block AST parsing, and built-in contextual
 block execution. At that boundary it did not dispatch body parse jobs or execute
 registered functions from the runtime. `.5.1.1` has since added the minimal
-staged registry; registered calls remain `.5.1.2`.
+staged registry; `.5.1.2` has since added registered fixed-v1 execution.
 
 The implementation order is therefore:
 
 - `.5.1.1` (done): minimal deterministic `actionir-body.spec` provider, queue,
   execution, and immutable `body_ast` stitching;
-- `.5.1.2`: fixed-v1 registry-first runtime execution;
-- `.5.1.3.1/.2`: variadic-v2 shell/state preservation, then fresh-rest-array
+- `.5.1.2` (done): fixed-v1 registry-first runtime execution;
+- `.5.1.3.1/.2` (state active): variadic-v2 shell/state preservation, then fresh-rest-array
   runtime execution;
 - `.5.1.4.1/.2`: final `name: codeblock` metadata/normalization, then contextual
   user-function block execution;
@@ -49,4 +49,5 @@ Related facts: [[lua-user-function-registry]],
 [[lua-staged-function-body-registry]],
 [[lua-variadic-user-function-routing]],
 [[final-codeblock-parameter-declaration]],
-[[lua-runtime-block-control-callback-split]].
+[[lua-runtime-block-control-callback-split]],
+[[lua-fixed-v1-user-function-runtime]].

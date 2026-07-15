@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.2 — execute Lua fixed user functions**
+  (DONE — fixed-v1 native execution is green; variadic-v2 state `.5.1.3.1` is next).
+
+  **Result:** Lua resolves registered calls before helper fallback, evaluates positional arguments once in caller
+  order, executes verified staged bodies in fresh copied stores, restores callers on success/failure, and returns
+  final/local-return values through nested calls, standalone discard, and receiver chains. Typed arity, keyword,
+  direct/mutual recursion, and staged-body integrity failures remain function-owned. PUC Lua and LuaJIT pass
+  133/133; status is `runtime-user-functions-fixed-v1`, coverage remains 246/105+1/122, and capability remains
+  64/0/0. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.20.0 — plan targeted Rust mutation testing**
   (DONE — planning/list-only census; Lua fixed-v1 runtime `.5.1.2` resumes next).
 

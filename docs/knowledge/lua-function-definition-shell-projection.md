@@ -14,6 +14,7 @@ status: current
 tags: [lua, parser, functions, staged-parsing, provenance, Unicode]
 evidence: "LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The local gate passes 60/60 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, contracts, registry, descriptor, and matching preservation."
 evidence_update_2026_07_15_staged_dispatch: "LUA-BACKEND-PARITY.5.1.1 composes this projector with deterministic staged body dispatch; PUC Lua and LuaJIT pass 130/130."
+evidence_update_2026_07_15_fixed_runtime: "LUA-BACKEND-PARITY.5.1.2 executes the projected exact-v1 records through verified staged bodies and fresh stores at 133/133; .5.1.3.1 now owns variadic-v2 projection evolution."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -39,11 +40,11 @@ array result shapes. The original projection APIs preserve `body_parse_job` with
 dispatch and returns a new spec carrying neutral `body_ast` JSON.
 
 The completed projector currently validates exact-v1 `params`/`arity`. The adopted variadic-v2 signature is
-explicitly routed to `.5.1.3.1/.2` after fixed-v1 runtime `.5.1.2`, so shell/staged/registry/runtime evolution
+explicitly routed to `.5.1.3.1/.2` now that fixed-v1 runtime `.5.1.2` is done, so shell/staged/registry/runtime evolution
 lands in dependency order rather than as a premature metadata claim.
 
 Related facts: [[spec-defined-user-function-definition-parser]], [[function-body-parse-job-sidecar]],
 [[lua-staged-function-body-registry]],
 [[lua-core-spec-parser]], [[lua-frontend-validation]], [[dart-function-definition-shell-projection]],
 [[julia-user-function-definition-projection]].
-See also [[lua-variadic-user-function-routing]].
+See also [[lua-variadic-user-function-routing]], [[lua-fixed-v1-user-function-runtime]].
