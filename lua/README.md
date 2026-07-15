@@ -77,7 +77,8 @@ measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed nested-path repair
 requirements and atomic governed assignment, closes unchanged offset 20, and raises both windows to 46/46 while
 focused suites pass 157/157. Executor `.6.1.2` then adds typed selected execution records at 160/160 per ABI.
 Core `.6.1.3` permanently locks offsets 0-39 at 40/40 with endpoint 1/1 and raises both suites to 161/161;
-capability/no-drift `.6.1.4` is active.
+governed `.6.1.4` permanently locks offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`, raises both suites to
+162/162, closes `.6.1`, and activates advanced/shipped offsets 40-98 under `.6.2`.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -297,8 +298,9 @@ to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-dri
 exact offsets 0-39 and 99-104. Reusable executor `.6.1.2` composes strict validation with automatic parsing,
 explicit compilation, source-identified execution, wrapped structural comparison, and per-fixture proof records;
 controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` permanently locks exact offsets 0-39 at
-40/40 and endpoint 1/1; focused suites pass 161/161 and capability/no-drift `.6.1.4` is active. Generated Lua
-preservation/execution remains `.8.1-.8.4`.
+40/40 and endpoint 1/1. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
+`2,1,2,1,5,5`; focused suites pass 162/162, parent `.6.1` closes, and `.6.2` is active for offsets 40-98.
+Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -405,6 +407,8 @@ print(result.cursor_code_unit, result.cursor_char_offset)
 ```
 
 Use `{ offset = 0, limit = 40 }` for an ordered manifest window; named selection cannot be mixed with offsets.
+The permanent governed window uses `{ offset = 99, limit = 6 }` and locks the six final capability fixtures in
+manifest order with exact byte/character endpoints `2,1,2,1,5,5`.
 The executor always validates the full manifest and fixture inventory before selecting. Every selected fixture
 runs through automatic spec-defined function parsing, validation, compilation, source-identified engine creation,
 and runtime. Expected JSON is wrapped exactly once before structural comparison. A

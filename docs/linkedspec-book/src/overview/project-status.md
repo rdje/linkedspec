@@ -103,8 +103,9 @@ Three backbone items tracked major structural modernization — all done:
   now validates before selection, composes automatic parse/validate/compile/source-identified runtime execution,
   compares exact wrapped typed JSON, and records every selected success/failure. Controlled proof passes 160/160
   on both ABIs while the CLI stays validation-only. Core admission `.6.1.3` permanently locks exact offsets 0-39
-  at 40/40 with exact wrapped outputs and endpoint 1/1; both focused suites pass 161/161. Capability/no-drift
-  `.6.1.4` is active. The capability census remains 64/0/0.
+  at 40/40 with exact wrapped outputs and endpoint 1/1. Governed admission `.6.1.4` permanently locks exact
+  offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`; both focused suites pass 162/162, parent `.6.1` closes, and
+  advanced/shipped offsets 40-98 `.6.2` activate. The capability census remains four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
@@ -127,7 +128,8 @@ Three backbone items tracked major structural modernization — all done:
   and full trace `.5.3.2` are complete at 155/155, and `.5.3.3` closes parents `.5.3`/`.5`. Corpus planning
   `.6.1.0`, typed segment-kind repair `.6.1.1`, and reusable executor `.6.1.2` are complete; controlled executor
   proof passes 160/160 on both ABIs; ordered core admission `.6.1.3` then locks 40/40 at endpoint 1/1 and raises
-  both suites to 161/161. Governed capability/no-drift `.6.1.4` is active.
+  both suites to 161/161. Governed capability/no-drift `.6.1.4` locks the remaining owned 6/6 window, raises both
+  suites to 162/162, closes `.6.1`, and activates `.6.2`.
   Generated Lua remains `.8`, and explicit callable literals/bound
   calls remain `.11.7`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. The program is dormant until full current-backend parity and no format implementation has started.

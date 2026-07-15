@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.1.4 — admit Lua capability corpus window**
+  (DONE — governed offsets 99-104 are permanently 6/6; parent `.6.1` closes and offsets 40-98 `.6.2` activate).
+
+  **Result:** One recurring library-executor test locks the six final manifest names in order, 6/6 passes, zero
+  failures, exact one-level wrapped unchanged expected JSON, and byte/character endpoints `2,1,2,1,5,5`. PUC Lua
+  and LuaJIT pass 162/162. Public corpus exports, status `native-full-pipeline-trace-v1`, primary scaffold,
+  validation-only developer corpus CLI, corpus data, coverage 246/105+1/122, and the four-backend 64/0/0 census
+  remain unchanged. Combined permanent `.6.1` windows close at 46/46. Canonical local CI exits 0 with CLI 61x2
+  and Phase 0 `1..1031` passing in 651 seconds (1,328.76 seconds total under concurrent load). Mutation testing was
+  not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.1.3 — admit Lua core corpus prefix**
   (DONE — exact ordered offsets 0-39 are permanently 40/40; capability/no-drift `.6.1.4` is next).
 

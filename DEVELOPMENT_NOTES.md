@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.1.4` — lock endpoints per governed fixture, not per window): Corpus windows
+  can share pass/output semantics without sharing cursor length. The core prefix happens to end at endpoint 1 for
+  every case, but the six governed capability fixtures end at `2,1,2,1,5,5`. Measure through the production
+  executor and assert each manifest relationship explicitly; do not generalize the prior window's uniform value.
+  Exact names, wrapped outputs, endpoints, public exports/status/CLI boundaries, coverage 246/105+1/122, and census
+  64/0/0 now agree at 162/162 on both Lua ABIs. Parent `.6.1` closes and `.6.2` owns offsets 40-98. Mutation
+  testing was not run. Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 651 seconds;
+  total gate time was 1,328.76 seconds under concurrent load.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.1.3` — make corpus admission a manifest relationship, not 40 copied values):
   Select exact offsets 0-39 through the production executor, assert the manifest's first/last/order, then compare
   each retained actual output structurally to one wrapping of that same result's copied expected JSON. This locks

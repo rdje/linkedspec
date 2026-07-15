@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.1.4 — admit Lua capability corpus window
+
+Added one permanent manifest-backed library-executor regression for exact zero-based offsets 99-104. It locks the
+six governed cursor-control, pure-helper, position-helper, control-marker, anonymous-capture, and named-capture
+fixture names in manifest order, 6/6 pass state, exact one-level wrapping of every unchanged expected JSON value,
+and exact byte/character endpoints `2,1,2,1,5,5`.
+
+PUC Lua and LuaJIT pass 162/162. Exact corpus exports, status `native-full-pipeline-trace-v1`, primary scaffold,
+validation-only developer corpus CLI, coverage 246/105+1/122, and the four-backend 64/0/0 capability census remain
+unchanged. No production source or corpus data changed. Parent `.6.1` closes at permanent core 40/40 plus governed
+6/6, and advanced/shipped offsets 40-98 `.6.2` activate. Canonical local CI exits 0 with CLI 61x2 and Phase 0
+`1..1031` passing in 651 seconds (1,328.76 seconds total under concurrent load). Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.1.3 — admit Lua core corpus prefix
 
 Added one permanent manifest-backed library-executor regression for exact zero-based offsets 0-39. It validates

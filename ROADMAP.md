@@ -1000,7 +1000,9 @@ and atomic failed writes; unchanged offset 20 and both owned windows now pass 46
 compile/source-identified runtime, compares exact wrapped typed JSON, and retains every selected result/failure;
 controlled proof passes 160/160 on both Lua ABIs with the CLI still validation-only. Core admission `.6.1.3`
 permanently locks exact offsets 0-39 at 40/40, exact wrapped outputs, and endpoint 1/1; both focused suites pass
-161/161. Capability/no-drift `.6.1.4` is active. Capability remains 64/0/0.
+161/161. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
+`2,1,2,1,5,5`; both suites pass 162/162, `.6.1` closes, and advanced/shipped offsets 40-98 `.6.2` activate.
+Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0 until `.8.4`.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

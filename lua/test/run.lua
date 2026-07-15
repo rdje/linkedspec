@@ -1226,6 +1226,48 @@ test("corpus library permanently admits the ordered 40-case core prefix", functi
   end
 end)
 
+test("corpus library permanently admits the six governed capability fixtures", function()
+  local expected_names = {
+    "capability_cursor_control_surface",
+    "capability_pure_helper_surface",
+    "capability_position_helper_surface",
+    "capability_control_marker_surface",
+    "capability_capture_anonymous_surface",
+    "capability_capture_named_surface",
+  }
+  local expected_endpoints = { 2, 1, 2, 1, 5, 5 }
+  local execution = linkedspec.execute_corpus_fixtures(
+    "rust/linkedspec-runtime/tests/corpus",
+    { offset = 99, limit = #expected_names }
+  )
+  assert_equal(execution.validation.manifest.case_count, 105, "capability full manifest count")
+  assert_equal(#execution.results, #expected_names, "capability selected count")
+  assert_equal(linkedspec.corpus_execution_passed(execution), true, "capability execution status")
+  assert_equal(linkedspec.corpus_passed_count(execution), #expected_names, "capability pass count")
+  assert_equal(#linkedspec.corpus_failures(execution), 0, "capability failure count")
+
+  for index, name in ipairs(expected_names) do
+    local result = execution.results[index]
+    assert_equal(result.name, name, "capability selected order " .. index)
+    assert_equal(
+      result.name,
+      execution.validation.manifest.cases[99 + index],
+      "capability manifest order " .. index
+    )
+    assert_equal(linkedspec.corpus_fixture_passed(result), true, "capability fixture status " .. name)
+    assert_equal(result.matched, true, "capability match " .. name)
+    assert_equal(result.cursor_code_unit, expected_endpoints[index], "capability byte endpoint " .. name)
+    assert_equal(result.cursor_char_offset, expected_endpoints[index], "capability character endpoint " .. name)
+    assert_equal(result.failure_stage, nil, "capability failure stage " .. name)
+    assert_equal(result.failure, nil, "capability failure text " .. name)
+    assert_equal(
+      json.encode(result.actual_output),
+      json.encode(json.array({ result.expected_json })),
+      "capability exact wrapped output " .. name
+    )
+  end
+end)
+
 test("source AST round-trips with neutral fields and provenance", function()
   local payload = json.harray({ kind = "action_block" })
   local job = ast.staged_parse_job({

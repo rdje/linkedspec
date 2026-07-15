@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, corpus, manifest, JSON, Unicode, UTF-8, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI; LUA-BACKEND-PARITY.6.1.3 permanently admits core offsets 0-39. The current focused gate passes 161/161 on both Lua ABIs."
+evidence: "LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI; LUA-BACKEND-PARITY.6.1.3-.4 permanently admit core offsets 0-39 and governed capability offsets 99-104. The current focused gate passes 162/162 on both Lua ABIs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

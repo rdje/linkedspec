@@ -233,15 +233,19 @@ bash tools/run_lua_local.sh
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
 PUC Lua and LuaJIT, locks the primary CLI scaffold boundary, and validates the exact 105-case manifest through the
-developer corpus command. The current suite passes 161/161 on each ABI. Its library-level controlled corpus tests
+developer corpus command. The current suite passes 162/162 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command remains validation-only until its own later CLI owner.
 The same suite permanently executes exact manifest offsets 0-39 at 40/40, locks first/last names, every wrapped
 expected output, and byte/character endpoint 1, without promoting the developer command.
+It also permanently executes exact capability offsets 99-104 at 6/6, locking all six governed names, unchanged
+wrapped outputs, and byte/character endpoints `2,1,2,1,5,5`.
 The `.6.1.3` admission also passes the canonical local gate: both 61-case primary CLI environments and Phase 0
 `1..1031`, with Phase 0 completing in 640 seconds. Allow at least 30 minutes for a complete gate under concurrent
 machine load; this measured run took 1,316.33 seconds end to end.
+The `.6.1.4` closeout independently passes that same canonical boundary, with Phase 0 completing in 651 seconds
+and the load-affected full gate taking 1,328.76 seconds end to end.
 
 Library selection is independent of that command:
 

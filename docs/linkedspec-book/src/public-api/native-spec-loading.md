@@ -160,7 +160,7 @@ path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors ar
 full-pipeline trace is current; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5`. Controlled/core
 planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs; typed nested-path repair `.6.1.1`
 closes unchanged offset 20 and both windows at 46/46. Reusable corpus execution `.6.1.2` is complete before
-permanent windows `.6.1.3-.4`.
+permanent windows `.6.1.3-.4`; both windows are now admitted and parent `.6.1` is closed.
 
 ## Lua library corpus execution
 
@@ -201,9 +201,15 @@ errors remain caller errors because no valid execution set exists. Query with `c
 `corpus_fixture_result(...)`.
 
 The developer `lua/bin/corpus_runner.lua` intentionally remains validation-only. Permanent ordered core offsets
-0-39 are now admitted by `.6.1.3`; capability offsets 99-104 and no-drift remain `.6.1.4`. Controlled scalar,
+0-39 are admitted by `.6.1.3`; `.6.1.4` admits the six governed capability fixtures at offsets 99-104 in this
+exact order: `capability_cursor_control_surface`, `capability_pure_helper_surface`,
+`capability_position_helper_surface`, `capability_control_marker_surface`,
+`capability_capture_anonymous_surface`, and `capability_capture_named_surface`. Their exact byte/character
+endpoints are `2,1,2,1,5,5`, and every actual output remains exactly `[expected_json]`. Controlled scalar,
 nested aggregate, rule dispatch,
 lifecycle, top-level function, boundary/trace, parse, validation, runtime, mismatch, no-match, and continuation
 proof passes 160/160 on both PUC Lua and LuaJIT. The recurring core test additionally locks 40/40 manifest-ordered
 results from `proof_edge_array_literal` through `terse_2_2_5_2_attached_switch_blocks`: every actual output is
-exactly `[expected_json]`, every case matches at byte/character endpoint 1, and both ABI suites pass 161/161.
+exactly `[expected_json]` and every case matches at byte/character endpoint 1. The governed test locks 6/6 with
+the per-fixture endpoints above; both ABI suites pass 162/162. Parent `.6.1` is closed and `.6.2` owns offsets
+40-98.

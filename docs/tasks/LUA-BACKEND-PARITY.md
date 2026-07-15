@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.1.3` permanently admits exact core offsets 0-39 at 161/161 on both Lua ABIs and
-  activates governed capability/no-drift window `.6.1.4`)
+- Last updated: `2026-07-15` (`.6.1.4` permanently admits governed capability offsets 99-104 at 162/162 on both
+  Lua ABIs, closes controlled/core parent `.6.1`, and activates advanced/shipped window `.6.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2390,13 +2390,20 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.6.1`, `.6.2`, `.6.3`
 
 - ID: `LUA-BACKEND-PARITY.6.1`
-  Status: `active`
+  Status: `done`
   Goal: Admit controlled/core and governed capability fixture windows.
   Children: `.6.1.0`, `.6.1.1`, `.6.1.2`, `.6.1.3`, `.6.1.4`
   Acceptance: Run ordered subsets, classify failures by mechanism, split repairs before code, and preserve exact
     expected values/endpoints rather than weakening fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Typed segment-kind repair closes the sole measured residual without changing
+    its oracle; one reusable non-aborting executor then owns strict validation, selection, automatic native
+    execution, and typed proof records. Permanent tests admit exact core offsets 0-39 at 40/40 and governed
+    capability offsets 99-104 at 6/6 on both Lua ABIs. All outputs equal one wrapping of unchanged expected JSON;
+    exact byte/character endpoints are 1 for the core prefix and `2,1,2,1,5,5` for the governed window. PUC Lua
+    and LuaJIT pass 162/162. Public exports/status, CLI boundary, corpus data, coverage 246/105+1/122, and the
+    four-backend 64/0/0 capability census do not change. Canonical local CI exits 0 with CLI 61x2 and Phase 0
+    `1..1031` passing in 651 seconds (1,328.76 seconds total under concurrent load). `.6.2` owns offsets 40-98.
+  Commit: `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window`
 
 - ID: `LUA-BACKEND-PARITY.6.1.0`
   Status: `done`
@@ -2484,17 +2491,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.1.3 - admit Lua core corpus prefix`
 
 - ID: `LUA-BACKEND-PARITY.6.1.4`
-  Status: `active`
+  Status: `done`
   Goal: Admit the six governed capability fixtures and close controlled/core no-drift.
   Dependencies: `.6.1.3`
   Acceptance: Exact manifest offsets 99-104 pass in order on both Lua ABIs; permanent assertions lock the six
     governed names, endpoints, and outputs; API/status/tests/root and Lua docs/mdBook/KM/task/live state agree;
     parent `.6.1` closes without changing capability-census membership; and `.6.2` activates for offsets 40-98.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** One permanent library-executor test validates the complete unchanged
+    105-case manifest and selects exact zero-based offsets 99-104. It locks these six ordered names:
+    `capability_cursor_control_surface`, `capability_pure_helper_surface`,
+    `capability_position_helper_surface`, `capability_control_marker_surface`,
+    `capability_capture_anonymous_surface`, and `capability_capture_named_surface`. All six pass, match, retain no
+    failure, and structurally equal exactly one wrapping of their unchanged expected JSON. Their exact byte and
+    character endpoints are `2,1,2,1,5,5`. PUC Lua and LuaJIT pass 162/162. `init.lua` retains the exact corpus
+    load/execute/result/query exports and public status `native-full-pipeline-trace-v1`; the primary CLI remains an
+    explicit scaffold and the developer corpus CLI remains validation-only. Coverage is 246/105+1/122 with zero
+    omissions, and ADR `0041` keeps capability at four-backend 64/0/0 until sole Lua admission `.8.4`. No
+    production source, manifest/fixture/expected JSON, public status, CLI behavior, or census row changed.
+    Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 651 seconds (1,328.76 seconds total
+    under concurrent load). Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window`
 
 - ID: `LUA-BACKEND-PARITY.6.2`
-  Status: `pending`
+  Status: `active`
   Goal: Admit shipped-spec, recursion, function, and advanced helper windows.
   Acceptance: Expand monotonically through all named manifest families with exact failure inventories and no
     backend-local expected files. This includes exact `portmap_constant`, `simenv_multiline_value`,
@@ -2758,12 +2777,13 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 | 110 | `LUA-BACKEND-PARITY.5.3.2` | `done` | One caller-owned emitter crosses IO/frontend/compiler/function/staged/engine/runtime at 155/155 on both ABIs. |
 | 111 | `LUA-BACKEND-PARITY.5.3.3` | `done` | Exact no-drift closes parents `.5.3`/`.5`; `.8.4` remains sole census admission. |
 | 112 | `LUA-BACKEND-PARITY.6` | `active` | Reach complete interpreter-corpus parity. |
-| 113 | `LUA-BACKEND-PARITY.6.1` | `active` | Admit controlled/core and governed capability fixture windows. |
+| 113 | `LUA-BACKEND-PARITY.6.1` | `done` | Exact core 40/40 and capability 6/6 windows pass permanently on both ABIs. |
 | 114 | `LUA-BACKEND-PARITY.6.1.0` | `done` | Both ABIs measure 45/46 and split the sole nested-assignment residual before code. |
 | 115 | `LUA-BACKEND-PARITY.6.1.1` | `done` | Typed nested paths close offset 20 and both owned windows at 46/46 per ABI. |
 | 116 | `LUA-BACKEND-PARITY.6.1.2` | `done` | Typed selected execution/result records and controlled continuation proof pass 160/160 per ABI. |
 | 117 | `LUA-BACKEND-PARITY.6.1.3` | `done` | Permanent ordered core offsets 0-39 pass 40/40 at endpoint 1 on both ABIs. |
-| 118 | `LUA-BACKEND-PARITY.6.1.4` | `active` | Admit capability offsets 99-104 and close controlled/core no-drift. |
+| 118 | `LUA-BACKEND-PARITY.6.1.4` | `done` | Permanent offsets 99-104 pass 6/6 with exact names, outputs, and endpoints on both ABIs. |
+| 119 | `LUA-BACKEND-PARITY.6.2` | `active` | Measure offsets 40-98 and split every residual by stage and mechanism before behavior work. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -2956,6 +2976,27 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
   seconds total under concurrent load). Mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live/architecture/change/notes, mdBook, Knowledge Map, and
   bounded memory record exact 40/40 admission and activate governed capability/no-drift `.6.1.4`.
+
+### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The six governed capability fixtures passed disposable probes, but offsets 99-104
+  had no recurring executor proof and parent `.6.1` still lacked exact public/status/census closeout.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.6.1.3` deliberately admitted only the core prefix. The six final manifest
+  entries exercise distinct cursor, helper, marker, anonymous-capture, and named-capture surfaces whose endpoints
+  are not uniformly 1, so they require their own ordered names and per-fixture endpoint contract.
+- [x] **FIX** — Execute `{ offset = 99, limit = 6 }` through the production library API; lock all six names,
+  manifest order, 6/6 pass state, exact one-level wrapped output, match, endpoint pairs `2,1,2,1,5,5`, and absent
+  failure fields. Inventory exact public corpus exports/status/CLI/tests/docs/KM and retain ADR `0041` census timing.
+- [x] **ADDRESSED (verified)** — Exact offsets 99-104 pass 6/6 on PUC Lua and LuaJIT, every unchanged output and
+  endpoint is permanent, and the combined owned windows close at 46/46.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 162/162. Coverage is 246/105+1/122 with zero omissions and
+  capability remains four-backend 64/0/0. Production source, manifest/fixtures/expected JSON, public status,
+  primary/developer CLI behavior, and census rows are unchanged. Canonical local CI exits 0 with CLI 61x2 and
+  Phase 0 `1..1031` passing in 651 seconds (1,328.76 seconds total under concurrent load). Mutation testing was
+  not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live/architecture/change/notes, mdBook API/status/local-gate/
+  handoff/trace surfaces, Knowledge Map, and bounded memory close parent `.6.1` and activate `.6.2` for offsets
+  40-98.
 
 ### `LUA-BACKEND-PARITY.5.2.4` Acceptance Checklist
 
@@ -4490,3 +4531,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.1.1` | `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds` | Typed key/index traversal, governed evaluation order, atomic failed writes, exact offset 20, and dual-ABI 46/46 handoff. |
 | `LUA-BACKEND-PARITY.6.1.2` | `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution` | Full validation before selection, automatic native pipeline, wrapped structural comparison, typed non-aborting records, and 160/160 dual-ABI controlled proof. |
 | `LUA-BACKEND-PARITY.6.1.3` | `LUA-BACKEND-PARITY.6.1.3 - admit Lua core corpus prefix` | Permanent exact offsets 0-39, 40/40 ordered wrapped outputs, endpoint 1/1, and 161/161 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.6.1.4` | `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window` | Permanent exact offsets 99-104, six governed names/wrapped outputs/endpoints, 162/162 dual-ABI proof, parent `.6.1` closure, and `.6.2` handoff. |

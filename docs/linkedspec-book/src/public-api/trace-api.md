@@ -296,7 +296,8 @@ trace propagation `.5.3.2` then raises them to 155/155 and status
 or manifest change. Controlled/core planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs;
 typed nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46. Reusable executor `.6.1.2`
 then adds controlled typed evidence at 160/160; permanent core admission `.6.1.3` locks offsets 0-39 at 40/40 and
-endpoint 1/1, raising both suites to 161/161. Capability/no-drift `.6.1.4` is active.
+endpoint 1/1, raising both suites to 161/161. Governed `.6.1.4` locks offsets 99-104 at 6/6 with endpoints
+`2,1,2,1,5,5`, raises both suites to 162/162, closes `.6.1`, and activates `.6.2`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

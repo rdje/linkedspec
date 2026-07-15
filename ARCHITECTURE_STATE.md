@@ -5,13 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua governed corpus admission `.6.1.4` permanently executes exact manifest offsets 99-104.
+  The cursor-control, pure-helper, position-helper, control-marker, anonymous-capture, and named-capture fixtures
+  pass 6/6 in exact order with unchanged wrapped outputs and byte/character endpoints `2,1,2,1,5,5`. PUC Lua and
+  LuaJIT pass 162/162. Public corpus exports, status `native-full-pipeline-trace-v1`, primary scaffold,
+  validation-only developer corpus CLI, coverage 246/105+1/122, and capability 64/0/0 remain unchanged. No
+  production source or corpus data changes. Parent `.6.1` closes at 46/46 across both permanent windows and `.6.2`
+  activates for offsets 40-98. Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 651
+  seconds (1,328.76 seconds total under concurrent load).
 - `2026-07-15` refresh: Lua core corpus admission `.6.1.3` turns the measured prefix into one permanent
   manifest-backed executor test. Exact offsets 0-39 stay ordered from `proof_edge_array_literal` through
   `terse_2_2_5_2_attached_switch_blocks`; all 40 match, equal one wrapping of unchanged expected JSON, retain byte
   and character endpoint 1, and carry no failure. PUC Lua and LuaJIT pass 161/161. This is a test/documentation
   admission only; production source, corpus data, status, capability census, CLI, and offsets 40-104 do not change.
   Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 640 seconds (1,316.33 seconds total
-  under concurrent load). Governed capability/no-drift `.6.1.4` is active.
+  under concurrent load). Governed capability/no-drift `.6.1.4` follows and is now complete.
 - `2026-07-15` refresh: Lua corpus execution `.6.1.2` is a library-owned composition boundary, not a CLI
   behavior. It validates the full manifest/inventory/UTF-8/typed JSON before named or offset/limit selection, then
   runs automatic function-aware parse, explicit validation/compile, exact source-identified engine construction,

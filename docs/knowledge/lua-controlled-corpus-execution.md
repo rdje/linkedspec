@@ -14,6 +14,7 @@ date: 2026-07-15
 status: current
 tags: [lua, corpus, execution, library, result-records, trace, diagnostics, PUC-Lua, LuaJIT]
 evidence: "LUA-BACKEND-PARITY.6.1.2 adds execute_corpus_fixtures and typed result/query APIs. Controlled scalar, aggregate, dispatch, lifecycle, function, boundary, selection, and failure/continuation proof passes 160/160 on PUC Lua and LuaJIT."
+evidence_update_2026_07_15_permanent_windows: "LUA-BACKEND-PARITY.6.1.3-.4 permanently execute exact core offsets 0-39 at 40/40 endpoint 1 and governed offsets 99-104 at 6/6 endpoints 2,1,2,1,5,5. Both ABIs pass 162/162 and .6.1 is closed."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -37,6 +38,7 @@ valid execution set exists. `CorpusExecutionResult` retains the full validation 
 `corpus_fixture_result` query it.
 
 The developer `lua/bin/corpus_runner.lua` remains validation-only by design. `LUA-BACKEND-PARITY.6.1.3` now
-permanently executes exact core offsets 0-39 at 40/40 with endpoint 1/1; capability offsets 99-104 remain
-`.6.1.4`, while full corpus and CLI promotion have later owners. Related facts: [[lua-corpus-manifest-io]],
+permanently executes exact core offsets 0-39 at 40/40 with endpoint 1/1; `.6.1.4` permanently executes capability
+offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`. Parent `.6.1` is closed, while full corpus and CLI promotion
+have later owners. Related facts: [[lua-corpus-manifest-io]],
 [[lua-controlled-corpus-admission-split]], [[lua-native-spec-pipeline]], [[lua-native-full-pipeline-trace]].
