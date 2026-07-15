@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.3.1 — admit Lua function descriptors**
+  (DONE — exact outward union and Lua emission are complete; one-emitter full-pipeline trace `.5.3.2` is next).
+
+  **Result:** The executable outward contract now governs exact fixed-v1, variadic-v2, and final-codeblock-v3
+  record fields, versions, parameter storage, and final-only codeblock policy. Lua emits all three variants from
+  typed registry state, preserves identical staged signature/parameter-kind copies, and keeps exact source-order
+  metadata/counts. Perl's existing final-codeblock projection is outward v3 without runtime change. PUC Lua and
+  LuaJIT pass 153/153; neutral signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; 76 focused Perl tests
+  pass. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 616 seconds. Generic callable-codeblock
+  capability stays future and the census remains 64/0/0 pending all-pass `.8.4`.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.3.0.1 — settle descriptor and census policy**
   (DONE — accepted choices are durable; executable descriptor contract/emission `.5.3.1` is next).
 

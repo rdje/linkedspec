@@ -75,6 +75,20 @@ local function read_file(path)
   return value
 end
 
+local function sorted_keys(value)
+  local keys = {}
+  for key in pairs(value) do keys[#keys + 1] = key end
+  table.sort(keys)
+  return keys
+end
+
+local function sorted_values(value)
+  local values = {}
+  for index, item in ipairs(value) do values[index] = item end
+  table.sort(values)
+  return values
+end
+
 local function make_directory(path)
   if not command_succeeded("mkdir -p " .. shell_quote(path)) then
     fail("unable to create test directory: " .. path)
@@ -1468,17 +1482,21 @@ test("function shell preserves the exact fixed-v1 variadic-v2 signature union", 
     "compiled variadic signature"
   )
   assert_equal(compiled_json.functions_by_name.all_values.params, nil, "compiled v2 params absent")
-  local descriptor_ok, descriptor_error = pcall(linkedspec.to_descriptor_json, compiled)
-  assert_equal(descriptor_ok, false, "variadic descriptor remains pending")
-  assert_equal(
-    linkedspec.user_function_registry.is_registry_error(descriptor_error),
-    true,
-    "variadic descriptor typed boundary"
+  local descriptor = linkedspec.to_descriptor_json(compiled)
+  local descriptor_contract = json.decode(
+    read_file("capability_conformance/outward_descriptor_contract.json")
   )
+  local variant = descriptor_contract.function_record_variants.variadic_v2
   assert_equal(
-    descriptor_error.code,
-    "variadic_user_function_descriptor_pending",
-    "variadic descriptor pending code"
+    table.concat(sorted_keys(descriptor.functions.all_values), ","),
+    table.concat(sorted_values(variant.record_fields), ","),
+    "variadic descriptor exact fields"
+  )
+  assert_equal(descriptor.functions.all_values.version, variant.function_version, "variadic descriptor version")
+  assert_equal(
+    json.encode(descriptor.functions.all_values.signature),
+    json.encode(descriptor.functions.all_values.body_payload.signature),
+    "variadic descriptor staged signature copy"
   )
 end)
 
@@ -1585,12 +1603,21 @@ test("function shell preserves exact final codeblock parameter metadata", functi
     "codeblock",
     "compiled registry metadata"
   )
-  local descriptor_ok, descriptor_error = pcall(linkedspec.to_descriptor_json, compiled)
-  assert_equal(descriptor_ok, false, "codeblock descriptor remains pending")
+  local descriptor = linkedspec.to_descriptor_json(compiled)
+  local descriptor_contract = json.decode(
+    read_file("capability_conformance/outward_descriptor_contract.json")
+  )
+  local variant = descriptor_contract.function_record_variants.final_codeblock_v3
   assert_equal(
-    descriptor_error.code,
-    "codeblock_user_function_descriptor_pending",
-    "codeblock descriptor pending code"
+    table.concat(sorted_keys(descriptor.functions.apply), ","),
+    table.concat(sorted_values(variant.record_fields), ","),
+    "codeblock descriptor exact fields"
+  )
+  assert_equal(descriptor.functions.apply.version, variant.function_version, "codeblock descriptor version")
+  assert_equal(
+    json.encode(descriptor.functions.apply.parameter_kinds),
+    json.encode(descriptor.functions.apply.body_parse_job.parameter_kinds),
+    "codeblock descriptor staged parameter-kinds copy"
   )
 end)
 
@@ -3083,20 +3110,6 @@ local function compiled_test_rule(label, is_top, mode, body)
   })
 end
 
-local function sorted_keys(value)
-  local keys = {}
-  for key in pairs(value) do keys[#keys + 1] = key end
-  table.sort(keys)
-  return keys
-end
-
-local function sorted_values(value)
-  local values = {}
-  for index, item in ipairs(value) do values[index] = item end
-  table.sort(values)
-  return values
-end
-
 local function assert_compiled_error(operation, expected, label)
   local ok, compiled_error = pcall(operation)
   if ok then fail((label or "compiled spec") .. ": expected an error") end
@@ -3198,7 +3211,18 @@ end)
 test("compiled descriptor matches the exact outward contract", function()
   local body_ast = json.harray({ kind = "action_block", statements = json.array() })
   local normalize = registry_function("normalize", { "value" }, 0, body_ast)
-  local compiled = linkedspec.compile_spec(spec_with_functions({ normalize }))
+  local collect = variadic_registry_function("collect", { "prefix" }, "items", 1, body_ast)
+  local parameter_kinds = json.harray({ callback = "codeblock" })
+  local apply = registry_function(
+    "apply",
+    { "value", "callback" },
+    2,
+    body_ast,
+    nil,
+    nil,
+    parameter_kinds
+  )
+  local compiled = linkedspec.compile_spec(spec_with_functions({ normalize, collect, apply }))
   local descriptor = linkedspec.to_descriptor_json(compiled)
   local contract = json.decode(read_file("capability_conformance/outward_descriptor_contract.json"))
 
@@ -3216,13 +3240,35 @@ test("compiled descriptor matches the exact outward contract", function()
   assert_equal(descriptor.spec.Top.handler.kind, "lua_interpreter_rule", "Lua handler identity")
   assert_equal(descriptor.spec.Top.handler.status, "compiled_state_only", "handler boundary")
   assert_equal(descriptor.meta.function_order[1], "normalize", "function order")
-  assert_equal(descriptor.meta.function_count, 1, "function count")
-  assert_equal(
-    table.concat(sorted_keys(descriptor.functions.normalize), ","),
-    table.concat(sorted_values(contract.function_record_keys), ","),
-    "function record keys"
-  )
+  assert_equal(descriptor.meta.function_order[2], "collect", "variadic function order")
+  assert_equal(descriptor.meta.function_order[3], "apply", "codeblock function order")
+  assert_equal(descriptor.meta.function_count, 3, "function count")
+  for _, expected in ipairs({
+    { name = "normalize", variant = "fixed_v1", index = 0 },
+    { name = "collect", variant = "variadic_v2", index = 1 },
+    { name = "apply", variant = "final_codeblock_v3", index = 2 },
+  }) do
+    local record = descriptor.functions[expected.name]
+    local variant = contract.function_record_variants[expected.variant]
+    assert_equal(
+      table.concat(sorted_keys(record), ","),
+      table.concat(sorted_values(variant.record_fields), ","),
+      expected.name .. " function record keys"
+    )
+    assert_equal(record.version, variant.function_version, expected.name .. " function record version")
+    assert_equal(record.index, expected.index, expected.name .. " function record index")
+  end
   assert_equal(descriptor.functions.normalize.body_ast.kind, "action_block", "function body AST")
+  assert_equal(
+    json.encode(descriptor.functions.collect.signature),
+    json.encode(descriptor.functions.collect.body_parse_job.signature),
+    "variadic descriptor signature preservation"
+  )
+  assert_equal(
+    json.encode(descriptor.functions.apply.parameter_kinds),
+    json.encode(descriptor.functions.apply.body_payload.parameter_kinds),
+    "codeblock descriptor parameter-kinds preservation"
+  )
   assert_equal(json.decode(json.encode(descriptor)).meta.parse_mode, "seek", "descriptor JSON round-trip")
 end)
 

@@ -295,26 +295,11 @@ function M.to_descriptor_json(item)
     fail("to_descriptor_json expects UserFunctionEntry")
   end
   local definition = item.definition
-  if definition.signature ~= nil then
-    fail(
-      "variadic user function descriptors are not admitted before LUA-BACKEND-PARITY.5.3",
-      { code = "variadic_user_function_descriptor_pending" }
-    )
-  end
-  if definition.parameter_kinds ~= nil then
-    fail(
-      "final-codeblock user function descriptors are not admitted before LUA-BACKEND-PARITY.5.3",
-      { code = "codeblock_user_function_descriptor_pending" }
-    )
-  end
   local projected = projected_definition(definition)
-  return json.harray({
+  local result = json.harray({
     index = item.index,
     kind = "user_function_definition",
-    version = 1,
     name = definition.name,
-    params = projected.params,
-    arity = definition.arity,
     source_text = definition.source,
     source_span = projected.source_span,
     body_span = projected.body_span,
@@ -323,6 +308,18 @@ function M.to_descriptor_json(item)
     body_parse_job = projected.body_parse_job,
     body_ast = projected.body_ast,
   })
+  if definition.signature ~= nil then
+    result.version = 2
+    result.signature = projected.signature
+  else
+    result.version = definition.parameter_kinds == nil and 1 or 3
+    result.params = projected.params
+    result.arity = definition.arity
+    if definition.parameter_kinds ~= nil then
+      result.parameter_kinds = projected.parameter_kinds
+    end
+  end
+  return result
 end
 
 function M.to_json(value)

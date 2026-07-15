@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, compiler, compiled-state, descriptor, dependency-regex, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.3.4 adds lua/src/linkedspec/compiled_spec.lua and exports compile_spec plus typed compiled rule/mode/edge/payload/dependency/descriptor state; .4.1 consumes compiled rules in matching. Five focused compiler tests plus five matching tests pass in the 60/60 PUC Lua and LuaJIT gate."
+evidence: "LUA-BACKEND-PARITY.3.4 adds typed compile/descriptor state; .5.3.1 makes the descriptor projection consume the exact fixed-v1/variadic-v2/final-codeblock-v3 union. The complete PUC Lua and LuaJIT gates pass 153/153."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -37,7 +37,8 @@ does not execute or host-compile regexes.
 `compiled:to_descriptor_json()` matches
 `capability_conformance/outward_descriptor_contract.json`: exact top-level
 `spec`, `functions`, `dependency_regex_map`, and `meta` keys; exact composing
-model identities; order/count metadata; and canonical staged function records.
+model identities; order/count metadata; and canonical fixed-v1, variadic-v2, or final-codeblock-v3 staged function
+records.
 Lua handlers are explicitly `lua_interpreter_rule` / `compiled_state_only`.
 `compiled:to_json()` separately exposes typed effective internal state.
 

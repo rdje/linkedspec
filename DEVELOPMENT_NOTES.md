@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.3.1` — project public function records from one checked union): Keep internal
+  typed definition versions independent from outward record versions. Lua's registry decides outward v1/v2/v3
+  from exact stored metadata: no signature/no parameter kind is fixed-v1, a callable signature is variadic-v2,
+  and final-only `parameter_kinds` is fixed final-codeblock-v3. Construct the shared provenance/body suffix once,
+  then add only the selected variant's parameter fields. The neutral checker owns field order, version, storage,
+  and final-only codeblock policy, so backend tests consume the contract rather than duplicating Lua record lists.
+  Perl already exposed the v3 fields; change only its outward projection label from 1 to 3. This leaves internal
+  parsing/runtime records, generic callable-codeblock capability, and census membership unchanged. Both Lua ABIs
+  pass 153/153; focused signature/codeblock checkers and 76 Perl tests pass. Full-pipeline trace `.5.3.2` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.3.0.1` — evolve exact public records by version, not optional drift):
   Preserve fixed-v1 and variadic-v2 byte/schema identity. Represent a fixed function with final
   `name: codeblock` intent as outward version 3: the fixed `params`/`arity` pair followed by an exact one-entry

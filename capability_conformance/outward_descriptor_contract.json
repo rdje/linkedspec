@@ -32,6 +32,79 @@
     "body_parse_job",
     "body_ast"
   ],
+  "function_record_variants": {
+    "fixed_v1": {
+      "function_version": 1,
+      "parameter_fields": [
+        "params",
+        "arity"
+      ],
+      "record_fields": [
+        "index",
+        "kind",
+        "version",
+        "name",
+        "params",
+        "arity",
+        "source_text",
+        "source_span",
+        "body_span",
+        "body_source",
+        "body_payload",
+        "body_parse_job",
+        "body_ast"
+      ]
+    },
+    "variadic_v2": {
+      "function_version": 2,
+      "parameter_fields": [
+        "signature"
+      ],
+      "record_fields": [
+        "index",
+        "kind",
+        "version",
+        "name",
+        "signature",
+        "source_text",
+        "source_span",
+        "body_span",
+        "body_source",
+        "body_payload",
+        "body_parse_job",
+        "body_ast"
+      ]
+    },
+    "final_codeblock_v3": {
+      "function_version": 3,
+      "parameter_fields": [
+        "params",
+        "arity",
+        "parameter_kinds"
+      ],
+      "parameter_kinds_policy": {
+        "entry_count": 1,
+        "key": "final_parameter",
+        "value": "codeblock"
+      },
+      "record_fields": [
+        "index",
+        "kind",
+        "version",
+        "name",
+        "params",
+        "arity",
+        "parameter_kinds",
+        "source_text",
+        "source_span",
+        "body_span",
+        "body_source",
+        "body_payload",
+        "body_parse_job",
+        "body_ast"
+      ]
+    }
+  },
   "model_values": {
     "descriptor_model": "compiled_descriptor_state",
     "compiled_spec_model": "compiled_spec_state",

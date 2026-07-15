@@ -121,9 +121,9 @@ The exact token is `...IDENTIFIER` with no whitespace between marker and name. I
 end of the parameter list. Calls remain positional; fixed prefix parameters bind first and all extras bind as one
 fresh typed array, empty when there are no extras. Fixed functions remain exact-arity. This syntax and its
 version-2 signature record are adopted by ADR 0030 and the neutral callable-signature contract. Perl, Rust, Dart,
-and Julia implement the syntax now. Lua native execution is owned by `LUA-BACKEND-PARITY.5.1`, descriptor
-admission by `.5.3`, and generated preservation/execution by `.8.1-.4`; portable six-runtime specs must wait for
-those admissions.
+Julia, and Lua implement the syntax and native execution now; Lua's exact outward descriptor joined the shared
+union in `LUA-BACKEND-PARITY.5.3.1`. Generated preservation/execution remains `.8.1-.4`, so portable six-runtime
+generated specs must wait for those admissions.
 
 On Perl, Rust, Dart, and Julia, these calls illustrate the binding boundary:
 

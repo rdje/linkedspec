@@ -149,7 +149,9 @@ sub compiled_spec_state_to_legacy_functions {
  foreach my $name (@{compiled_spec_state_function_order($state)}) {
   my $definition = $functions_by_name->{$name};
   next unless ref($definition) eq 'HASH';
-  $functions{$name} = { %$definition, index => $index++ };
+  my $record = { %$definition, index => $index++ };
+  $record->{version} = 3 if ref($record->{parameter_kinds}) eq 'HASH';
+  $functions{$name} = $record;
  }
  return \%functions
 }

@@ -141,4 +141,5 @@ parse errors, and staged-dispatch errors retain their staged-registry owner.
 `load_and_compile_spec(...)` when they want the complete typed file-to-engine composition. Inline callers continue
 to use `parse_spec_with_staged_user_function_definitions(...)`, `validate_spec(...)`, `compile_spec(...)`, and
 `runtime_engine(...)` directly; no CLI, subprocess, temporary file, or serialized handoff participates in either
-path. Outward descriptors and one-emitter full-pipeline trace remain later Lua owners.
+path. Exact fixed-v1, variadic-v2, and final-codeblock-v3 outward descriptors are now current; one-emitter
+full-pipeline trace remains the next Lua owner.

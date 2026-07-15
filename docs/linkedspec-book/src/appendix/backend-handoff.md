@@ -823,9 +823,10 @@ purposefully unbounded, while subtraction/division/modulo and comparisons remain
 neutral fixed-prefix/rest/min/max signature through staged records and descriptors, bind extras as a fresh typed
 array, and reject keyword/overload/host-splat semantics. Perl, Rust, Dart, and Julia now consume the unchanged
 fixture through grammar/spec projection, staged/outward records, native and generated execution, diagnostics, and
-exact results. Lua `.5.1.3.1/.2` now preserve and execute the native signature/rest contract; descriptor admission
-remains `.5.3`, and generated preservation/execution/admission remains `.8.1-.4`, so six-runtime admission must not
-be claimed early.
+exact results. Lua `.5.1.3.1/.2` preserves and executes the native signature/rest contract, and `.5.3.1` now emits
+the exact shared fixed-v1/variadic-v2/final-codeblock-v3 outward descriptor union. Generated preservation,
+execution, and final census admission remain `.8.1-.4`, so six-runtime generated admission must not be claimed
+early.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex

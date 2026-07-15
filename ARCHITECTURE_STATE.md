@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua descriptor implementation `.5.3.1` makes
+  `capability_conformance/outward_descriptor_contract.json:function_record_variants` the executable source of
+  truth for fixed-v1, variadic-v2, and final-codeblock-v3 outward records. The neutral checker locks exact ordered
+  fields, versions, parameter storage, compatibility aliases, and the sole-final-parameter `codeblock` policy.
+  Lua projects each variant directly from typed registry state, preserves identical staged metadata, and retains
+  exact function order/count on PUC Lua and LuaJIT at 153/153. Perl's existing final-codeblock projection now uses
+  outward version 3 without changing its internal definition/runtime model. Generic callable-codeblock capability
+  and the four-backend 64/0/0 census do not change; one-emitter native-pipeline trace `.5.3.2` is active.
 - `2026-07-15` refresh: Lua decision `.5.3.0.1` resolves the two neutral-policy dependencies from planning
   `.5.3.0`. ADR `0041` makes final-codeblock functions outward descriptor version 3, preserving exact fixed
   `params`/`arity` plus a sole final `parameter_kinds[name] = "codeblock"` entry without weakening fixed-v1 or
@@ -48,13 +56,15 @@ This document is the current high-level technical reading of the project shape. 
   remain isolated, and returned arrays feed receiver chains. The unchanged neutral callable fixture passes exactly;
   minimum arity and keywords retain portable typed diagnostics. Both ABIs pass 139/139, status is
   `runtime-user-functions-variadic-v2`, capability remains 64/0/0, and that milestone handed off to contextual
-  final-codeblock metadata `.5.1.4.1`. Outward descriptor admission remains `.5.3`, generated source `.8`.
+  final-codeblock metadata `.5.1.4.1`. Outward descriptor admission later completed in `.5.3.1`; generated source
+  remains `.8`.
 - `2026-07-15` refresh: Lua now preserves the exact callable-signature storage union. Fixed version 1 retains only
   top-level `params`/`arity`; variadic version 2 retains only its six-field typed signature in serialized shell,
   AST, staged jobs, registry entries, and compiled state while internal positional mirrors remain identity-checked.
   Registry lookup accepts `arity >= min_arity`, reports `at least N`, and keeps the maximum unbounded. All seven
   invalid-definition classes, mixed-version storage, and sidecar signature drift fail through typed owners.
-  Runtime variadic execution and outward descriptors deliberately fail closed for `.5.1.3.2` and `.5.3`. Both
+  At that milestone runtime variadic execution and outward descriptors deliberately failed closed for
+  `.5.1.3.2` and `.5.3`; both are now complete through `.5.3.1`. Both
   ABIs pass 136/136, status is `runtime-user-functions-variadic-v2-state`, capability remains 64/0/0, and
   fresh-rest-array execution `.5.1.3.2` is active.
 - `2026-07-15` refresh: Lua fixed-v1 functions now execute through the one ActionIR runtime. Raw registered names

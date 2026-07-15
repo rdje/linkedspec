@@ -157,12 +157,22 @@ fn normalize(value) {
 }
 ```
 
-Every variant records the definition by name with the same exact outer fields: `index`, `kind`, `version`, `name`,
-`params`, `arity`, `source_text`, `source_span`, `body_span`, `body_source`, `body_payload`, `body_parse_job`, and
-`body_ast`. `index` is zero-based source order; `kind` is `user_function_definition`; `version` is `1`.
-`source_text` is the complete original definition while `body_source` is the exact text inside its braces. The
-shared executable schema is `capability_conformance/outward_descriptor_contract.json`; focused Perl, Rust, Dart,
-and Julia tests consume that file and reject missing or backend-specific extra fields.
+Every variant records the definition by name through one exact versioned union. The common fields are `index`,
+`kind`, `version`, `name`, followed by one variant's parameter fields and the shared `source_text`, `source_span`,
+`body_span`, `body_source`, `body_payload`, `body_parse_job`, and `body_ast` suffix. `index` is zero-based source
+order and `kind` is `user_function_definition`.
+
+| Variant | Version | Exact parameter fields |
+| --- | ---: | --- |
+| fixed | 1 | `params`, `arity` |
+| variadic | 2 | `signature` |
+| fixed with final codeblock intent | 3 | `params`, `arity`, `parameter_kinds` |
+
+The authoritative executable union is
+`capability_conformance/outward_descriptor_contract.json:function_record_variants`. Its checker rejects variant,
+field-order, version, storage, or final-codeblock-policy drift. Focused backend tests reject missing or
+backend-specific extra fields. `source_text` is the complete original definition while `body_source` is the exact
+text inside its braces.
 
 The descriptor therefore includes ordered parameter names, exact arity, source/body spans, original body source,
 a neutral staged `body_payload`, a neutral `body_parse_job`, and the
@@ -218,7 +228,7 @@ model namespaces/modules, overload sets, optional-argument variants, closures, l
 curried/partial applications; those are deferred language-extension topics rather than
 descriptor fields a tool should expect today.
 
-### Variadic descriptor version (Perl, Rust, Dart, and Julia implemented)
+### Variadic descriptor version (Perl, Rust, Dart, Julia, and Lua implemented)
 
 ADR 0030 adopts a versioned union instead of changing the meaning of the current `arity` field. Fixed definitions
 remain version 1 with the exact fields documented above. A variadic definition is version 2 and
@@ -238,13 +248,33 @@ replaces top-level `params`/`arity` with:
 The same `signature` is preserved in the staged body payload and parse job. `max_arity: null` means purposefully
 unbounded; it does not mean unknown. Extras bind as one fresh typed array. Function names remain unique and calls
 remain positional-only, so tools must not infer overloads, defaults, keyword mapping, or host-language splats.
-`capability_conformance/callable_signature_contract.json` is the schema. Perl, Rust, Dart, and Julia expose this v1/v2
-union and its staged records exactly. Rust's typed `CallableSignature` survives compiled-state serialization,
+`capability_conformance/callable_signature_contract.json` governs the signature object and execution fixture;
+`outward_descriptor_contract.json` governs its exact version-2 record placement. Perl, Rust, Dart, Julia, and Lua
+expose this v1/v2 union and its staged records exactly. Rust's typed `CallableSignature` survives compiled-state serialization,
 source emission, and generated-plan execution. Dart's corresponding typed value survives normalized emitted JSON,
 generated-plan execution, and reconstruction. Julia's typed value survives canonical JSON/ASCII-hex emission,
-generated-plan execution, and reconstruction through the same compiler/runtime. The exact
-`outward_descriptor_contract.json` remains the fixed-function v1 baseline; consumers must branch on
+generated-plan execution, and reconstruction through the same compiler/runtime. Consumers must branch on
 function-record `version`, never on field presence alone.
+
+### Final-codeblock descriptor version (Perl and Lua implemented)
+
+A fixed function whose final parameter is declared `name: codeblock` uses version 3. It retains the ordinary
+fixed `params` and `arity`, then adds one exact `parameter_kinds` object:
+
+```json
+{
+  "version": 3,
+  "params": ["value", "callback"],
+  "arity": 2,
+  "parameter_kinds": {"callback": "codeblock"}
+}
+```
+
+The object must contain exactly one entry, its key must be the final parameter name, and its value must be
+`codeblock`. Empty, extra, non-final, or differently valued entries are invalid; version 3 never carries a
+variadic `signature`. The same `parameter_kinds` value is preserved in `body_payload` and `body_parse_job`.
+Perl and Lua currently expose this exact record because both already implement contextual final-codeblock user
+functions. This descriptor fact does not promote the separately future generic callable-codeblock capability.
 
 ## `meta`
 

@@ -26,8 +26,9 @@ values and can feed compatible receiver chains.
 
 The exact neutral fixture in `capability_conformance/callable_signature_contract.json` passes unchanged. Calls
 below the fixed-prefix minimum report `user_function_arity_mismatch` with `at least N`; keywords report
-`user_function_keyword_arguments_unsupported`. Outward descriptor admission remains `.5.3`, and generated
-preservation/execution remains `.8.1-.4`, so native execution does not retire the future capability by itself.
+`user_function_keyword_arguments_unsupported`. Exact outward descriptor admission is complete in `.5.3.1`, while
+generated preservation/execution remains `.8.1-.4`; native execution does not retire the future generated
+capability by itself.
 
 Related facts: [[variadic-user-function-contract]], [[lua-variadic-user-function-routing]],
 [[lua-variadic-v2-signature-state]], [[lua-staged-function-execution-split]].

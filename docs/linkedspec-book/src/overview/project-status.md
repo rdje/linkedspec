@@ -90,13 +90,15 @@ Three backbone items tracked major structural modernization — all done:
   Planning `.5.3.0` splits exact outward descriptors, full native-loading/frontend/compiler/function/staged/runtime
   trace, and admission. Decision `.5.3.0.1` plus ADR `0041` now defines exact final-codeblock outward descriptor
   v3 over fixed `params`/`arity` plus final-only `parameter_kinds`, and preserves the four-backend all-pass census
-  until sole Lua admission owner `.8.4`. Executable contract/emission `.5.3.1` is next; no runtime, descriptor, or
-  capability claim changed in the decision slice. Cross-backend
+  until sole Lua admission owner `.8.4`. `.5.3.1` now makes the executable descriptor contract authoritative for
+  fixed-v1, variadic-v2, and final-codeblock-v3; Lua emits all three exact records with identical staged metadata,
+  and Perl's existing final-codeblock projection is correctly labeled v3. Both Lua ABIs remain 153/153 and the
+  capability census remains 64/0/0. One-emitter native-pipeline trace `.5.3.2` is next. Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
-  `capture_until_boundary()` decisions. Capability stays 64/0/0. General user-function final
-  `callback: codeblock` declaration/execution remains Lua `.5.1`; first-class callable block values remain `.11.7`;
+  `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
+  and outward descriptor v3 are current in Lua; first-class callable block values remain `.11.7`;
   generated Lua preservation/execution remains `.8.1-.8.4`.
 - **Lua staged-function frontier** - Planning `.5.1.0` separates minimal action-body dispatch `.5.1.1`, fixed-v1
   runtime `.5.1.2`, variadic-v2 metadata/runtime `.5.1.3`, contextual final-codeblock metadata/runtime `.5.1.4`,

@@ -124,8 +124,10 @@ This `README.md` is the **single entry point** to the project.
   behavior or capability. Planning `.5.3.0` splits outward descriptors, one-emitter full-pipeline trace, and final
   admission. Decision `.5.3.0.1` and ADR `0041` now adopt an exact final-codeblock outward descriptor version 3:
   fixed `params`/`arity` plus final-only `parameter_kinds`. They also keep Lua outside the four-backend census until
-  sole all-pass admission owner `.8.4`; executable schema/checker plus Lua emission `.5.3.1` is next. No behavior,
-  descriptor, or capability changed in the decision slice.
+  sole all-pass admission owner `.8.4`. Descriptor leaf `.5.3.1` now makes the neutral executable union exact for
+  fixed-v1, variadic-v2, and final-codeblock-v3, removes the Lua fences, preserves identical staged metadata, and
+  aligns Perl's existing final-codeblock outward projection to v3. Both Lua ABIs remain 153/153 and capability
+  remains 64/0/0; one-emitter native-pipeline trace `.5.3.2` is next.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

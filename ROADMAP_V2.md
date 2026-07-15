@@ -135,7 +135,9 @@ are governed; final-codeblock `parameter_kinds` lacked a neutral outward record 
 wording conflicted with the newer completion-time Lua admission policy. Decision `.5.3.0.1` and ADR `0041` adopt
 exact final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`, keep the census
 at four all-pass backends through `.5.3-.7`, and reserve expansion for all-pass `.8.4`. Executable descriptor
-contract/emission `.5.3.1` is next; current runtime, descriptor output, and capability state remain unchanged.
+contract/emission `.5.3.1` now locks and emits fixed-v1/variadic-v2/final-codeblock-v3 records on both Lua ABIs,
+with Perl's existing final-codeblock projection aligned to outward v3. One-emitter pipeline trace `.5.3.2` is next;
+capability remains unchanged at 64/0/0.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.

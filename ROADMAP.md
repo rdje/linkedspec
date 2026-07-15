@@ -987,8 +987,9 @@ fixed-v1/variadic-v2 outward schemas but no neutral final-codeblock outward reco
 between immediate Lua census expansion and the newer completion-time admission policy. Decision `.5.3.0.1` and
 ADR `0041` resolve both: final-codeblock functions use exact outward descriptor v3 with fixed `params`/`arity` plus
 final-only `parameter_kinds`, and Lua stays outside the four-backend all-pass census until sole expansion owner
-`.8.4`. Executable contract/emission `.5.3.1` is the frontier before one-emitter trace `.5.3.2` and census-
-preserving closeout `.5.3.3`; capability remains 64/0/0.
+`.8.4`. Executable contract/emission `.5.3.1` now governs and emits the exact fixed-v1/variadic-v2/final-
+codeblock-v3 union on both Lua ABIs; Perl's existing final-codeblock projection is also correctly labeled v3.
+One-emitter trace `.5.3.2` is the frontier before census-preserving closeout `.5.3.3`; capability remains 64/0/0.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

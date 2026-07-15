@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.3.1 — admit Lua function descriptors
+
+Extended `outward_descriptor_contract.json` into one checked three-variant user-function union: exact fixed-v1
+`params`/`arity`, variadic-v2 `signature`, and final-codeblock-v3 `params`/`arity` plus a sole final
+`parameter_kinds[name] = "codeblock"` entry. The portable callable-signature checker now validates the complete
+descriptor schema, exact ordered fields, versions, storage choices, compatibility aliases, and v3 policy before
+backend emission can consume it.
+
+Lua now emits all three exact outward records from its typed registry state and preserves identical signatures or
+parameter kinds in staged payload/job copies. Exact record fields, versions, source order, function count, and JSON
+round-trip pass on PUC Lua and LuaJIT at 153/153. Perl's already-existing final-codeblock projection now reports
+outward version 3 and passes the shared exact record shape; no Perl runtime behavior changed. Focused neutral
+checkers and 76 Perl callable-signature/codeblock tests pass. The generic callable-codeblock capability remains
+future, the executable census remains four-backend 64/0/0, and one-emitter full native-pipeline trace `.5.3.2` is
+next. Canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 616 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.3.0.1 — settle descriptor and census policy
 
 Recorded the director's acceptance of both `.5.3.0` recommendations in ADR `0041`. The permanent outward

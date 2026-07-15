@@ -11,7 +11,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [lua, functions, codeblock, parameter-kinds, actionir, staged-parsing, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.5.1.4.1 passes 142/142 on PUC Lua and LuaJIT. Exact shell/payload/job/AST/registry/compiled metadata, four invalid declaration forms, equivalent contextual normalization, harray non-promotion, built-in no-drift, and descriptor fencing are focused in lua/test/run.lua."
+evidence: "LUA-BACKEND-PARITY.5.1.4.1 passes metadata preservation at 142/142; .5.1.4.2 executes callbacks at 146/146; .5.3.1 emits exact outward final-codeblock-v3 records while the complete Lua suite remains 153/153 on both ABIs."
 reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py"
 ---
 
@@ -30,7 +30,7 @@ mutate the source ActionIR. It converts only structural `block_value`; a keyed b
 This leaf is deliberately metadata-only, but its direct successor is complete. `LUA-BACKEND-PARITY.5.1.4.2`
 invokes user-function contextual blocks in the current isolated function frame with copied/restored stores,
 chainable return behavior, static callable precedence, and typed wrong-kind/missing/arity/recursion diagnostics.
-Outward descriptor admission remains `.5.3`, generated preservation and execution remain `.8`, and explicit
+Outward descriptor v3 is complete in `.5.3.1`; generated preservation and execution remain `.8`, and explicit
 `{|params| ...}` values plus bound dynamic calls remain `.11.7`.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[perl-generic-final-codeblock-normalization]],

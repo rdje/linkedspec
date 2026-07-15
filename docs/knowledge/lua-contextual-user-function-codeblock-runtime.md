@@ -30,7 +30,8 @@ Registered functions and governed helpers resolve before a colliding declared sl
 value reports `final_argument_not_codeblock`; a contextual call with arguments reports `codeblock_arity_mismatch`;
 active self-invocation reports `codeblock_recursion_unsupported` with a cycle. This is a narrow
 metadata-governed contextual path. Explicit `{|params| ...}` literals and general bound dynamic calls remain
-`FUTURE-PARITY-BACKLOG.11.7`; descriptors remain `.5.3` and generated source remains `.8`.
+`FUTURE-PARITY-BACKLOG.11.7`; exact outward descriptor v3 is complete in `.5.3.1` and generated source remains
+`.8`.
 
 Related facts: [[lua-final-codeblock-metadata]], [[perl-generic-final-codeblock-normalization]],
 [[callable-codeblock-literal-contract]], [[lua-fixed-v1-user-function-runtime]].

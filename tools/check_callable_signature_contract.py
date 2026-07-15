@@ -13,6 +13,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "callable_signature_contract.json"
 DESCRIPTOR_PATH = ROOT / "capability_conformance" / "outward_descriptor_contract.json"
+FIXED_RECORD_FIELDS_SOURCE = (
+    "capability_conformance/outward_descriptor_contract.json:"
+    "function_record_variants.fixed_v1.record_fields"
+)
+VARIADIC_RECORD_FIELDS_SOURCE = (
+    "capability_conformance/outward_descriptor_contract.json:"
+    "function_record_variants.variadic_v2.record_fields"
+)
 IDENTIFIER = re.compile(r"[A-Za-z_]\w*\Z")
 RESERVED_PARAMETERS = {
     "fn",
@@ -54,6 +62,51 @@ BEHAVIORS = {
     "return_rest_array",
     "return_prefix_rest_object",
 }
+FIXED_V1_FIELDS = [
+    "index",
+    "kind",
+    "version",
+    "name",
+    "params",
+    "arity",
+    "source_text",
+    "source_span",
+    "body_span",
+    "body_source",
+    "body_payload",
+    "body_parse_job",
+    "body_ast",
+]
+VARIADIC_V2_FIELDS = [
+    "index",
+    "kind",
+    "version",
+    "name",
+    "signature",
+    "source_text",
+    "source_span",
+    "body_span",
+    "body_source",
+    "body_payload",
+    "body_parse_job",
+    "body_ast",
+]
+FINAL_CODEBLOCK_V3_FIELDS = [
+    "index",
+    "kind",
+    "version",
+    "name",
+    "params",
+    "arity",
+    "parameter_kinds",
+    "source_text",
+    "source_span",
+    "body_span",
+    "body_source",
+    "body_payload",
+    "body_parse_job",
+    "body_ast",
+]
 
 
 class ContractError(ValueError):
@@ -66,6 +119,85 @@ class ContractError(ValueError):
 
 def fail(code: str, detail: str) -> None:
     raise ContractError(code, detail)
+
+
+def validate_outward_descriptor_contract(descriptor: Any) -> None:
+    if not isinstance(descriptor, dict) or set(descriptor) != {
+        "format",
+        "top_level_keys",
+        "required_meta_keys",
+        "function_record_keys",
+        "function_record_variants",
+        "model_values",
+        "function_kind",
+        "function_version",
+    }:
+        fail("invalid_descriptor_contract", "outward descriptor top-level fields drifted")
+    if descriptor["format"] != 1:
+        fail("invalid_descriptor_contract", "outward descriptor format drifted")
+    if descriptor["top_level_keys"] != ["spec", "functions", "dependency_regex_map", "meta"]:
+        fail("invalid_descriptor_contract", "outward descriptor top-level key order drifted")
+    if descriptor["required_meta_keys"] != [
+        "descriptor_model",
+        "compiled_spec_model",
+        "compiled_dependency_regex_model",
+        "parse_mode",
+        "definition_order",
+        "compiled_rule_order",
+        "redefined_rule_labels",
+        "function_order",
+        "function_count",
+    ]:
+        fail("invalid_descriptor_contract", "outward descriptor metadata fields drifted")
+    if descriptor["model_values"] != {
+        "descriptor_model": "compiled_descriptor_state",
+        "compiled_spec_model": "compiled_spec_state",
+        "compiled_dependency_regex_model": "compiled_dependency_regex_state",
+    }:
+        fail("invalid_descriptor_contract", "outward descriptor model values drifted")
+    if descriptor["function_kind"] != "user_function_definition":
+        fail("invalid_descriptor_contract", "outward descriptor function kind drifted")
+
+    variants = descriptor["function_record_variants"]
+    if not isinstance(variants, dict) or set(variants) != {
+        "fixed_v1",
+        "variadic_v2",
+        "final_codeblock_v3",
+    }:
+        fail("invalid_descriptor_contract", "outward descriptor function variants drifted")
+    expected_variants = {
+        "fixed_v1": (1, ["params", "arity"], FIXED_V1_FIELDS),
+        "variadic_v2": (2, ["signature"], VARIADIC_V2_FIELDS),
+        "final_codeblock_v3": (
+            3,
+            ["params", "arity", "parameter_kinds"],
+            FINAL_CODEBLOCK_V3_FIELDS,
+        ),
+    }
+    for name, (version, parameter_fields, record_fields) in expected_variants.items():
+        variant = variants[name]
+        expected_keys = {"function_version", "parameter_fields", "record_fields"}
+        if name == "final_codeblock_v3":
+            expected_keys.add("parameter_kinds_policy")
+        if not isinstance(variant, dict) or set(variant) != expected_keys:
+            fail("invalid_descriptor_contract", f"{name} fields drifted")
+        if variant["function_version"] != version:
+            fail("invalid_descriptor_contract", f"{name} version drifted")
+        if variant["parameter_fields"] != parameter_fields:
+            fail("invalid_descriptor_contract", f"{name} parameter fields drifted")
+        if variant["record_fields"] != record_fields or len(set(record_fields)) != len(record_fields):
+            fail("invalid_descriptor_contract", f"{name} record fields drifted")
+    if variants["final_codeblock_v3"]["parameter_kinds_policy"] != {
+        "entry_count": 1,
+        "key": "final_parameter",
+        "value": "codeblock",
+    }:
+        fail("invalid_descriptor_contract", "final-codeblock parameter-kinds policy drifted")
+
+    if descriptor["function_record_keys"] != FIXED_V1_FIELDS:
+        fail("invalid_descriptor_contract", "fixed-v1 compatibility field list drifted")
+    if descriptor["function_version"] != 1:
+        fail("invalid_descriptor_contract", "fixed-v1 compatibility version drifted")
 
 
 def parse_signature_source(source: str) -> dict[str, Any]:
@@ -279,19 +411,24 @@ def main() -> None:
         fail("invalid_contract", "signature schema drifted")
 
     descriptor = json.loads(DESCRIPTOR_PATH.read_text(encoding="utf-8"))
+    validate_outward_descriptor_contract(descriptor)
     versions = contract["definition_versions"]
     if set(versions) != {"fixed", "variadic"}:
         fail("invalid_contract", "definition versions drifted")
     if versions["fixed"] != {
         "function_version": 1,
-        "record_fields_source": "capability_conformance/outward_descriptor_contract.json:function_record_keys",
+        "record_fields_source": FIXED_RECORD_FIELDS_SOURCE,
         "signature_storage": ["params", "arity"],
     }:
         fail("invalid_contract", "fixed definition version drifted")
-    if versions["variadic"]["function_version"] != 2 or versions["variadic"]["signature_storage"] != ["signature"]:
+    if (
+        versions["variadic"]["function_version"] != 2
+        or versions["variadic"]["signature_storage"] != ["signature"]
+    ):
         fail("invalid_contract", "variadic definition version drifted")
-    expected_v2_fields = [key for key in descriptor["function_record_keys"] if key not in {"params", "arity"}]
-    expected_v2_fields.insert(4, "signature")
+    if versions["variadic"].get("record_fields_source") != VARIADIC_RECORD_FIELDS_SOURCE:
+        fail("invalid_contract", "variadic record field source drifted")
+    expected_v2_fields = descriptor["function_record_variants"]["variadic_v2"]["record_fields"]
     if versions["variadic"]["record_fields"] != expected_v2_fields:
         fail("invalid_contract", "variadic record fields drifted")
 

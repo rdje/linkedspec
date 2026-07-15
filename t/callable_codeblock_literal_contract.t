@@ -23,6 +23,19 @@ my $contract_text = do {
 my $contract = JSON::PP->new->decode($contract_text);
 close $contract_fh or die "Could not close $contract_path: $!";
 
+my $descriptor_contract_path = File::Spec->catfile(
+    $repo_root,
+    'capability_conformance',
+    'outward_descriptor_contract.json',
+);
+open my $descriptor_contract_fh, '<:encoding(UTF-8)', $descriptor_contract_path
+    or die "Could not read $descriptor_contract_path: $!";
+my $descriptor_contract = JSON::PP->new->decode(do {
+    local $/;
+    <$descriptor_contract_fh>;
+});
+close $descriptor_contract_fh or die "Could not close $descriptor_contract_path: $!";
+
 my @ast_fields = sort @{$contract->{ast_schema}{fields}};
 
 sub parse_expr {
@@ -342,6 +355,12 @@ subtest 'final codeblock declarations and contextual AST normalization are metad
         '';
     my $descriptor = LinkedSpec::Get(\$source, return_descriptor => 1);
     ok(ref($descriptor) eq 'HASH', 'typed-codeblock user-function descriptor builds');
+    my $record = $descriptor->{functions}{apply};
+    my $variant = $descriptor_contract->{function_record_variants}{final_codeblock_v3};
+    is_deeply([sort keys %$record], [sort @{$variant->{record_fields}}],
+        'typed-codeblock function uses the exact neutral version-3 record');
+    is($record->{version}, $variant->{function_version},
+        'typed-codeblock function is outward descriptor version 3');
     is_deeply($descriptor->{functions}{apply}{params}, ['value', 'callback'],
         'typed-codeblock function preserves ordered parameter names');
     is_deeply($descriptor->{functions}{apply}{parameter_kinds}, {callback => 'codeblock'},

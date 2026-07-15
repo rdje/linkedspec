@@ -34,11 +34,12 @@
   "definition_versions": {
     "fixed": {
       "function_version": 1,
-      "record_fields_source": "capability_conformance/outward_descriptor_contract.json:function_record_keys",
+      "record_fields_source": "capability_conformance/outward_descriptor_contract.json:function_record_variants.fixed_v1.record_fields",
       "signature_storage": ["params", "arity"]
     },
     "variadic": {
       "function_version": 2,
+      "record_fields_source": "capability_conformance/outward_descriptor_contract.json:function_record_variants.variadic_v2.record_fields",
       "record_fields": [
         "index",
         "kind",

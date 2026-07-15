@@ -64,10 +64,11 @@ through the existing Unicode projector and body dispatcher. Both ABIs pass 151/1
 compilation, and source-identified engine construction. Both ABIs pass 153/153 with public status
 `native-spec-pipeline-v1`. No-drift closes native-loading parent `.5.2`. Planning `.5.3.0` separates exact outward
 descriptors, one-emitter full-pipeline trace, and final admission. Decision `.5.3.0.1` plus ADR `0041` adopts exact
-final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`; `.5.3.1` must add the
-neutral executable schema/checker before removing the Lua fence. Lua remains outside the four-backend 64/0/0
-census until sole all-pass admission `.8.4`. Runtime behavior, public status, descriptors, and capability remain
-unchanged in the decision slice. Generated source stays later-owned.
+final-codeblock descriptor v3 over fixed `params`/`arity` plus final-only `parameter_kinds`. `.5.3.1` now consumes
+the shared exact fixed-v1/variadic-v2/final-codeblock-v3 union, removes both descriptor fences, and preserves
+identical signature/parameter-kind values through outward and staged records. PUC Lua and LuaJIT remain 153/153.
+Lua remains outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`; one-emitter full-pipeline
+trace `.5.3.2` is next and generated source stays later-owned.
 
 ```lua
 local request = linkedspec.named_spec_request("Demo")
@@ -557,9 +558,9 @@ Registered keyword arguments diagnose as
 `user_function_keyword_arguments_unsupported`; exact-arity drift uses
 `user_function_arity_mismatch`; direct and mutual recursion use
 `user_function_recursion` with the full cycle. Missing or mismatched staged bodies fail
-closed before body execution. Variadic signatures, declared contextual final codeblocks,
-descriptor/full-pipeline trace admission, generated Lua, and primary CLI promotion remain
-their separately owned later layers.
+closed before body execution. Variadic signatures and declared contextual final codeblocks
+now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
+generated Lua, corpus execution, and primary CLI promotion remain separately owned layers.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

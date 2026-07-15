@@ -22,8 +22,12 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 `capabilities`; deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
 
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
-Perl, Rust, Dart, and Julia descriptor tests consume the same exact top-level, metadata, and function-record field
-sets so a backend-specific serialization convention cannot silently become public API.
+Its `function_record_variants` object is the authoritative three-way union: fixed-v1 stores `params`/`arity`,
+variadic-v2 stores `signature`, and final-codeblock-v3 stores `params`/`arity` plus exact final-only
+`parameter_kinds`. `tools/check_callable_signature_contract.py` rejects schema/order/version/storage/policy drift.
+Perl, Rust, Dart, Julia, and Lua descriptor tests consume the applicable exact variants so a backend-specific
+serialization convention cannot silently become public API. Final-codeblock-v3 admission by Perl and Lua does not
+promote the separately future generic callable-codeblock capability.
 
 `scalar_text_contract.json` fixes the portable `cat` conversion boundary across Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite decimal text, and makes null plus
@@ -38,12 +42,13 @@ consume the unchanged 55 cases; `bash tools/check_scalar_numeric_six_runtime.sh`
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,
-defines version-2 signature records, binds extras as one fresh typed array, rejects keyword/overload/host-splat
+defines version-2 signature objects whose outward placement is sourced from the descriptor union, binds extras as one fresh typed array, rejects keyword/overload/host-splat
 semantics, and locks representative purpose-specific helper/method arities. Validate its schema, definitions,
 bindings, diagnostics, and deterministically rendered future `.spec` fixture with
 `python3 tools/check_callable_signature_contract.py`. Perl, Rust, Dart, and Julia consume the unchanged
-source/result/record contract through native and generated execution. Lua remains explicitly future under
-`LUA-BACKEND-PARITY.5.1`, with descriptor admission in `.5.3` and generated preservation/execution in `.8`.
+source/result/record contract through native and generated execution. Lua consumes native signature/runtime and
+exact outward-descriptor variants through `LUA-BACKEND-PARITY.5.1/.5.3.1`; generated preservation/execution
+remains `.8`.
 
 `callable_codeblock_contract.json` adopts the future first-class callable-codeblock boundary without claiming
 backend support early. Exact `{|fixed, ...rest| body }` syntax constructs deferred typed codeblock data; `cb(args)`
