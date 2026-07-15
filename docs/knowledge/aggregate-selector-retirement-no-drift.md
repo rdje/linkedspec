@@ -14,6 +14,7 @@ tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Final admission .12.1.9 composes this under tools/check_public_aggregate_selector_surface.py and removes the capability future exclusion. Follow-up .12.1.10 removes 14 missed Rust/Dart/Julia/Lua README positives and expands public proof to 56 root/component/mdBook files, 31 classified references, and zero current examples."
 evidence_update_2026_07_12_lua_array_closeout: "The public inventory remains 56 files and zero current examples; its corrected classified count is 27 after four `array (statement)` formal-grammar prose false positives were removed. Runtime/source retirement counts are unchanged."
 evidence_update_2026_07_15_structured_format_page: "The discovered public inventory is now 57 files after FUTURE-PARITY-BACKLOG.18.0 added one mdBook architecture page. The classified/current counts remain 27/0; LUA-BACKEND-PARITY.4.3.7.4 updates the stale exact expected count without weakening discovery or admission."
+evidence_update_2026_07_15_native_loading_page: "The discovered public inventory is now 58 files after LUA-BACKEND-PARITY.5.2.1 added the native spec loading API page. Classified/current counts remain 27/0."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -35,7 +36,7 @@ diagnostics, and classified historical/documentation evidence. Generated Perl `$
 implementation details and are not spec-facing selector forms.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
-bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 57-file inventory prevents a backend
+bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 58-file inventory prevents a backend
 entry document from falling outside the public zero-current-example claim.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],

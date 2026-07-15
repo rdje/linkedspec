@@ -8,6 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.2.1 — add Lua native spec loading**
+  (DONE — portable resolution/loading is green; automatic spec-defined function parsing `.5.2.2` is next).
+
+  **Result:** Public typed requests/options/resolved/loaded/errors, deterministic cwd/suffix/direct-root
+  candidates, a minimal dual-ABI native file-kind inspector, in-process byte reads, strict UTF-8 preservation, and
+  exact error JSON now consume all shared 14/9/4 cases directly. PUC Lua and LuaJIT pass 149/149 with status
+  `native-spec-resolution-loading-v1`; capability remains 64/0/0. Parse/compile, descriptors, generated source,
+  corpus execution, and CLI remain later owners. Mutation testing remains manual-only and was not run.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 1,265 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.2.0 — split Lua native spec loading**
   (DONE — dependency-correct implementation leaves exist; portable resolve/load `.5.2.1` is next).
 

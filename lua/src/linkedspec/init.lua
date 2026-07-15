@@ -1,5 +1,6 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
+local spec_loader = require("linkedspec.spec_loader")
 local spec_ast = require("linkedspec.spec_ast")
 local spec_parser = require("linkedspec.spec_parser")
 local spec_validator = require("linkedspec.spec_validator")
@@ -19,7 +20,7 @@ local M = {}
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "runtime-user-functions-contextual-codeblock-v1"
+M.PARITY_STATUS = "native-spec-resolution-loading-v1"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -71,6 +72,15 @@ end
 
 M.json = json
 M.load_corpus_fixtures = corpus.load_corpus_fixtures
+M.spec_loader = spec_loader
+M.named_spec_request = spec_loader.named_spec_request
+M.path_spec_request = spec_loader.path_spec_request
+M.spec_load_options = spec_loader.spec_load_options
+M.validate_spec_request = spec_loader.validate_spec_request
+M.resolve_spec = spec_loader.resolve_spec
+M.load_spec = spec_loader.load_spec
+M.is_spec_pipeline_error = spec_loader.is_spec_pipeline_error
+M.spec_pipeline_error_to_json = spec_loader.spec_pipeline_error_to_json
 M.spec_ast = spec_ast
 M.parse_spec = spec_parser.parse_spec
 M.is_spec_parse_error = spec_parser.is_parse_error

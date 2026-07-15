@@ -92,12 +92,12 @@ params/arity plus exact `parameter_kinds`, preserves that metadata across payloa
 and derives one zero-positional `codeblock_argument` from either contextual spelling. This metadata-only boundary
 passes 142/142 without promoting harrays. The next runtime boundary invokes that argument in the current isolated
 function frame, preserves registered-function and governed-helper precedence, restores the outer caller, returns
-ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Both Lua ABIs pass 146/146
-with status `runtime-user-functions-contextual-codeblock-v1`; outward descriptors remain `.5.3`.
-The following no-drift audit closes Lua's staged-function parent and advances the frontier to portable native
-named/path loading without changing this runtime status or claiming generated-source support. Planning splits that
-work into portable resolve/load, automatic execution of the spec-owned function-shell grammar, full compile/engine
-composition, and no-drift; the resolve/load leaf is active.
+ordinary chainable values, and diagnoses missing/wrong-kind/arity/recursion failures. Portable resolution/loading
+then adds typed named/exact-path requests, caller-owned cwd/direct roots, deterministic first-regular-file
+selection, in-process byte reads, strict UTF-8 preservation, and neutral pipeline errors. It directly consumes all
+14 name, nine resolution/file-kind, and four text cases on both Lua ABIs at 149/149 with status
+`native-spec-resolution-loading-v1`. Automatic execution of the spec-owned function-shell grammar is now active;
+full compile/engine composition, no-drift, and outward descriptors remain later dependency-ordered leaves.
 
 ```text
 fn apply(value, callback: codeblock) {

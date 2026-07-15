@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.2.1 — add Lua native spec loading
+
+Added Lua's public file-oriented resolution/loading API: typed named and exact-path requests, caller-owned cwd and
+ordered direct search roots, typed resolved/loaded values, and structured pipeline errors through strict decoding.
+Named candidates follow cwd-exact, cwd-suffix, then declared-root order with lexical deduplication, first-regular-
+file selection, no recursion, and no implicit roots. A minimal native filesystem inspector is built independently
+for PUC Lua and LuaJIT, avoiding subprocess-based file classification; file bytes are read in process.
+
+Strict UTF-8 validation preserves BOM, code points, normalization form, newlines, and leading/trailing text without
+replacement, transcoding, normalization, or trimming. Both Lua ABIs directly consume all shared 14 name, nine
+resolution/file-kind, and four text cases plus supplemental Unicode/path boundaries, raising the gate to 149/149
+with status `native-spec-resolution-loading-v1`. Capability remains 64/0/0; automatic spec-owned function-shell
+parsing `.5.2.2` is active. No parse/compile, descriptor, generated-source, corpus-execution, or CLI capability is
+claimed. Mutation testing remains manual-only and was not run.
+
+Verification passes the Lua dual-ABI 149/149 gate, native contract 14/9/4, capability 64/0/0, coverage
+246/105+1/122, 58-file public admission, mdBook, Knowledge Map, doctrines, memory architecture, and canonical local
+CI with CLI 61x2 plus Phase 0 `1..1031` in 1,265 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.2.0 — split Lua native spec loading
 
 Split broad native loading before code along the actual pipeline dependencies. Portable request validation,

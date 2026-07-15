@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.2.1` — keep filesystem facts native and resolution policy in Lua): Represent
+  portable name versus exact host path as typed Lua request values, and keep candidate construction/order,
+  deduplication, error attribution, byte loading, and UTF-8 policy in the Lua module. Isolate only the one fact Lua
+  cannot determine portably without shelling out—regular file versus non-regular versus missing/error—behind a
+  tiny `stat`-based native module built separately for both ABIs. This preserves in-process behavior without
+  letting platform APIs own product policy. Consume the shared 14/9/4 fixture directly, supplement Unicode/path
+  boundaries, and stop before source parsing so automatic spec-owned function-shell execution remains one focused
+  `.5.2.2` dependency. PUC Lua and LuaJIT pass 149/149; status is `native-spec-resolution-loading-v1`, capability
+  remains 64/0/0, and mutation campaigns remain manual-only. Adding the public API chapter deliberately advances
+  the discovered aggregate-selector no-drift inventory from 57 to 58 files without changing its 27 historical/0
+  current selector counts. Canonical CI passes CLI 61x2 plus Phase 0 `1..1031` in 1,265 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.2.0` — filesystem policy, spec-language parsing, and compiled identity are
   separate mechanisms): Implement ADR `0026` through a narrow resolver/byte-loader first; it can consume all
   14/9/4 cases without parsing source. Then make Lua run the existing spec-owned function-shell grammar and feed

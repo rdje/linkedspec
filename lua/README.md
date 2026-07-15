@@ -53,10 +53,24 @@ and copies extras into one fresh typed rest array. The following metadata slice 
 Attached and parenthesized contextual forms normalize to the same zero-positional `codeblock_argument`; harrays
 remain harrays. Runtime then executes the deferred block in the current isolated function frame, keeps registered
 functions and governed helpers ahead of the contextual slot, restores the outer caller, and returns an ordinary
-composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and active recursion stay typed. Both
-ABIs pass 146/146; public status is `runtime-user-functions-contextual-codeblock-v1`. No-drift closes the staged-
-function parent. Planning splits native loading into portable resolve/load, automatic spec-defined function parsing,
-full compile/engine composition, and no-drift; portable resolve/load is next, while outward descriptors remain later.
+composable value. Missing/wrong-kind callbacks, nonzero contextual calls, and active recursion stay typed.
+Portable native loading now exposes typed named/exact-path requests, load options, resolved/loaded values, and
+structured pipeline errors. It checks cwd exact, cwd suffix, and direct declared roots in deterministic order,
+selects the first regular file without recursion or implicit roots, reads bytes in process, and strictly preserves
+UTF-8 text. Both ABIs pass 149/149; public status is `native-spec-resolution-loading-v1`. Automatic spec-defined
+function parsing is next, while full compile/engine composition, outward descriptors, and generated source remain
+later owners.
+
+```lua
+local request = linkedspec.named_spec_request("Demo")
+local options = linkedspec.spec_load_options({
+  cwd = ".",
+  search_roots = { "specs" },
+})
+local loaded = linkedspec.load_spec(request, options)
+assert(loaded.resolved.request.requested == "Demo")
+local exact_source_text = loaded.source_text
+```
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -207,9 +221,10 @@ neutral fixture passes, and minimum/keyword failures stay typed. Contextual fina
 complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/compiled state and both contextual
 spellings normalize to one zero-positional typed argument without harray promotion. Runtime `.5.1.4.2` executes
 that argument with current function-frame bindings, cleanup-safe outer restoration, static callable precedence,
-chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` closes parent `.5.1`; native loading
-planning `.5.2.0` is complete and portable resolve/load `.5.2.1` is active. Full frontend/compiler/function/
-staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
+chainable results, and typed callback failures at 146/146. No-drift `.5.1.5` closes parent `.5.1`; portable native
+resolution/loading `.5.2.1` consumes all shared 14/9/4 cases and raises the dual-ABI gate to 149/149 with status
+`native-spec-resolution-loading-v1`. Automatic spec-defined function parsing `.5.2.2` is active. Full
+frontend/compiler/function/staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

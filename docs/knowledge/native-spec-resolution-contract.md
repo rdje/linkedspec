@@ -18,7 +18,7 @@ tags: [resolution, files, utf8, unicode, diagnostics, parity, ADR-0026, FUTURE-P
 evidence: "ADR 0026 plus capability_conformance/native_spec_resolution_contract.json define portable forward-slash names, separate exact paths, cwd/suffix/declared-root precedence, direct non-recursive roots, first-regular-file selection, strict preserved UTF-8, source identity, pipeline stages/codes, and 14 validation + 9 resolution + 4 text cases; tools/check_native_spec_resolution_contract.pl validates them."
 evidence_update_2026_07_11_rust: "FUTURE-PARITY-BACKLOG.1.6.4.2 consumes every case through public rust/linkedspec-runtime/src/spec_loader.rs, adds the Windows-drive absolute-name lock, composes staged parse/validate/compile, and keeps 61x2 CLI exact."
 evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.1.6.4.5 adds direct Perl 14/9/4 consumption and canonical-gate proof; Rust, Dart, and Julia direct consumers plus recurring/CLI gates landed in .2-.4. Exact four-backend admission is closed."
-evidence_update_2026_07_15_lua_plan: "LUA-BACKEND-PARITY.5.2.0 audits this exact contract, splits Lua resolve/load .5.2.1 from automatic spec-defined parsing .5.2.2 and full composition .5.2.3, and leaves no-drift .5.2.4; .5.2.1 is active."
+evidence_update_2026_07_15_lua: "LUA-BACKEND-PARITY.5.2.1 consumes every 14/9/4 case directly on PUC Lua and LuaJIT through typed requests/options/results/errors, deterministic direct resolution, in-process bytes, and strict preserved UTF-8 at 149/149."
 reverify: "perl tools/check_native_spec_resolution_contract.pl && sed -n '1,260p' docs/decisions/0026-native-spec-resolution-and-loading-contract.md"
 ---
 
@@ -41,4 +41,4 @@ text.
 
 Related facts: [[native-spec-resolution-policy-drift]], [[primary-cli-strict-utf8-text-contract]],
 [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
-[[rust-native-spec-resolution]].
+[[rust-native-spec-resolution]], [[lua-native-spec-resolution]].

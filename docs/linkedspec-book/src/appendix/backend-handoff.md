@@ -347,10 +347,11 @@ identity, receiver chains, and typed failures pass. `.5.1.4.1` then preserves fi
 metadata across every native state boundary and normalizes attached/parenthesized calls to one zero-positional
 typed argument without promoting harrays. `.5.1.4.2` executes that argument against the current isolated function
 frame, preserves static callable precedence, restores outer stores, returns chainable values, and reports typed
-callback failures. PUC Lua and LuaJIT pass 146/146 with status
-`runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes parent `.5.1` without behavior change
-and activates native loading `.5.2`. Planning `.5.2.0` orders portable resolve/load `.1`, automatic spec-defined
-function parsing `.2`, full composition `.3`, and no-drift `.4`; `.5.2.1` is active. Outward descriptors remain `.5.3`.
+callback failures. Portable native resolution/loading `.5.2.1` then adds typed requests/options/results/errors,
+deterministic direct candidate order, in-process byte reads, and strict UTF-8 preservation. PUC Lua and LuaJIT
+consume the complete 14/9/4 contract at 149/149 with status `native-spec-resolution-loading-v1`; automatic
+spec-defined function parsing `.5.2.2` is active. Full composition `.5.2.3`, no-drift `.5.2.4`, and outward
+descriptors `.5.3` follow.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -792,7 +793,8 @@ normalization at 142/142 with public status `runtime-user-functions-contextual-c
 Contextual execution `.5.1.4.2` then runs in the current function frame with cleanup-safe restoration, static
 callable precedence, chainable results, and typed failures at 146/146; public status is
 `runtime-user-functions-contextual-codeblock-v1`, parent `.5.1` is closed, native-loading split `.5.2.0` is done,
-portable resolve/load `.5.2.1` is active, and capability remains 64/0/0. Explicit
+portable resolve/load `.5.2.1` passes 149/149 with status `native-spec-resolution-loading-v1`, automatic
+spec-defined parsing `.5.2.2` is active, and capability remains 64/0/0. Explicit
 `{|params| ...}` literals and
 dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and

@@ -112,10 +112,12 @@ This `README.md` is the **single entry point** to the project.
   registry/compiled state, maps all four invalid declaration forms, and normalizes attached/parenthesized blocks
   to one zero-positional `codeblock_argument` without promoting harrays. Runtime `.5.1.4.2` invokes that argument
   in the current isolated function frame, preserves static function/helper precedence, restores outer stores,
-  composes callback results, and reports typed missing/wrong-kind/arity/recursion failures. Both ABIs pass 146/146
-  and public status is `runtime-user-functions-contextual-codeblock-v1`. No-drift `.5.1.5` closes the staged-
-  function parent without behavior change. Planning `.5.2.0` splits native loading into portable resolve/load,
-  automatic spec-defined function parsing, full compile/engine composition, and no-drift; `.5.2.1` is active.
+  composes callback results, and reports typed missing/wrong-kind/arity/recursion failures. Portable loading
+  `.5.2.1` now adds typed named/exact-path requests, caller-owned cwd/direct roots, deterministic first-regular-file
+  resolution, in-process bytes, strict UTF-8 preservation, and structured pipeline errors. It directly consumes
+  every shared 14/9/4 contract case on both ABIs, which now pass 149/149 with public status
+  `native-spec-resolution-loading-v1`. Automatic spec-defined function parsing `.5.2.2` is active; full
+  compile/engine composition and no-drift remain `.5.2.3-.4`.
   Outward descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus

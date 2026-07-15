@@ -50,3 +50,10 @@ cc -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
  "$REPO_ROOT/lua/native/regex_pcre2.c" \
  $(pkg-config --libs libpcre2-8) \
  -o "$output/linkedspec_regex_pcre2.so"
+
+# shellcheck disable=SC2046
+cc -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
+ $(pkg-config --cflags "$lua_pkg") \
+ "${link_flags[@]}" \
+ "$REPO_ROOT/lua/native/filesystem_native.c" \
+ -o "$output/linkedspec_filesystem_native.so"

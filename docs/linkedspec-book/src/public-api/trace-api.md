@@ -285,10 +285,9 @@ ABI suites to 130/130. Fixed-v1 registered-function execution `.5.1.2` raises th
 133/133. Exact variadic-v2 signature-state preservation `.5.1.3.1` raises them to 136/136. Fresh typed rest-array
 execution `.5.1.3.2` raises them to 139/139. Final contextual-codeblock metadata `.5.1.4.1` raises them to 142/142
 and runtime invocation `.5.1.4.2` raises them to 146/146 with public status
-`runtime-user-functions-contextual-codeblock-v1`. This status claims only native runtime contextual execution;
-no-drift `.5.1.5` closes that staged-function parent. Planning `.5.2.0` orders portable resolve/load `.1`,
-automatic spec-defined function parsing `.2`, full composition `.3`, and no-drift `.4`; `.5.2.1` is active. Full
-loading/frontend/compiler/function/staged trace propagation remains `.5.3`.
+`runtime-user-functions-contextual-codeblock-v1`. Portable resolve/load `.5.2.1` then raises both suites to
+149/149 and status `native-spec-resolution-loading-v1`; automatic spec-defined function parsing `.5.2.2` is
+active. Full loading/frontend/compiler/function/staged trace propagation remains `.5.3`.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

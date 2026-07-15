@@ -27,11 +27,12 @@ was admitted. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 644 s
 a separately scheduled manual campaign and was not part of the closeout gate.
 
 Planning `.5.2.0` splits portable native loading into resolve/load `.5.2.1`, automatic spec-defined function-shell
-parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`; `.5.2.1` is active. Outward
+parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4`. Resolve/load is now complete at
+149/149 on both ABIs and `.5.2.2` is active. Outward
 descriptors plus full-pipeline trace remain `.5.3`; generated preservation and
 execution remain `.8`; corpus and parser CLI have later owners; explicit `{|params| ...}` literals and general
 bound dynamic calls remain `.11.7`.
 
 Related facts: [[lua-staged-function-execution-split]], [[lua-staged-function-body-registry]],
 [[lua-fixed-v1-user-function-runtime]], [[lua-variadic-v2-runtime]],
-[[lua-contextual-user-function-codeblock-runtime]].
+[[lua-contextual-user-function-codeblock-runtime]], [[lua-native-spec-resolution]].

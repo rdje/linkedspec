@@ -118,6 +118,35 @@ local function write_fixture(root, name, options)
   end
 end
 
+local function native_resolution_contract()
+  return json.decode(read_file("capability_conformance/native_spec_resolution_contract.json"))
+end
+
+local function fixture_path(root, portable_path)
+  return root .. "/" .. portable_path
+end
+
+local function write_resolution_entry(root, entry)
+  local path = fixture_path(root, entry.path)
+  if entry.kind == "file" then
+    make_directory(assert(path:match("^(.*)/[^/]+$")))
+    write_file(path, "fixture")
+  elseif entry.kind == "directory" or entry.kind == "non_regular" then
+    make_directory(path)
+  else
+    fail("unsupported resolution fixture kind: " .. tostring(entry.kind))
+  end
+end
+
+local function bytes_from_hex(value)
+  if #value % 2 ~= 0 then fail("hex byte fixture must have even length") end
+  local chunks = {}
+  for index = 1, #value, 2 do
+    chunks[#chunks + 1] = string.char(assert(tonumber(value:sub(index, index + 1), 16)))
+  end
+  return table.concat(chunks)
+end
+
 test("native module identity is exact", function()
   assert_equal(linkedspec.backend_name(), "lua", "backend name")
   assert_equal(linkedspec.cli_entrypoint(), "lua/bin/linkedspec-lua", "CLI entrypoint")
@@ -136,7 +165,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "runtime-user-functions-contextual-codeblock-v1",
+    "native-spec-resolution-loading-v1",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -360,6 +389,116 @@ test("JSON Unicode escapes and strict UTF-8 are exact", function()
   assert_error_contains(function()
     json.encode({ "ambiguous" })
   end, "plain Lua tables are ambiguous", "plain table encoding")
+end)
+
+test("native spec requests consume every neutral name-validation case", function()
+  local contract = native_resolution_contract()
+  assert_equal(linkedspec.spec_loader.node_type(linkedspec.named_spec_request("Demo")), "SpecRequest", "request type")
+  for _, case in ipairs(contract.name_validation_cases) do
+    local request = linkedspec.named_spec_request(case.value)
+    local ok, result = pcall(linkedspec.validate_spec_request, request)
+    if case.expect.status == "ok" then
+      assert_equal(ok, true, case.id .. " accepted")
+      assert_equal(result, true, case.id .. " result")
+    else
+      assert_equal(ok, false, case.id .. " rejected")
+      assert_equal(linkedspec.is_spec_pipeline_error(result), true, case.id .. " typed error")
+      assert_equal(result.stage, case.expect.stage, case.id .. " stage")
+      assert_equal(result.code, case.expect.code, case.id .. " code")
+      assert_equal(result.request_kind, "name", case.id .. " request kind")
+      assert_equal(result.requested, case.value, case.id .. " requested identity")
+    end
+  end
+
+  for _, value in ipairs({ "\194\160Demo", "Demo\226\128\128", "De\194\133mo" }) do
+    local ok, result = pcall(linkedspec.validate_spec_request, linkedspec.named_spec_request(value))
+    assert_equal(ok, false, "supplemental Unicode boundary rejected")
+    assert_equal(linkedspec.is_spec_pipeline_error(result), true, "supplemental Unicode typed error")
+    assert_equal(result.stage, "validate_spec_name", "supplemental Unicode stage")
+    assert_equal(result.code, "invalid_spec_name", "supplemental Unicode code")
+  end
+
+  for _, value in ipairs({ "", "source\0.spec", "\255" }) do
+    local ok, result = pcall(linkedspec.validate_spec_request, linkedspec.path_spec_request(value))
+    assert_equal(ok, false, "supplemental path boundary rejected")
+    assert_equal(linkedspec.is_spec_pipeline_error(result), true, "supplemental path typed error")
+    assert_equal(result.stage, "validate_spec_path", "supplemental path stage")
+    assert_equal(result.code, "invalid_spec_path", "supplemental path code")
+  end
+end)
+
+test("native spec resolution consumes every neutral path and file-kind case", function()
+  local contract = native_resolution_contract()
+  for _, case in ipairs(contract.resolution_cases) do
+    with_temp_directory(function(root)
+      for _, entry in ipairs(case.entries) do write_resolution_entry(root, entry) end
+      local cwd = fixture_path(root, case.cwd)
+      make_directory(cwd)
+      local roots = {}
+      for index, search_root in ipairs(case.search_roots) do
+        roots[index] = fixture_path(root, search_root)
+      end
+      local options = linkedspec.spec_load_options({ cwd = cwd, search_roots = roots })
+      assert_equal(linkedspec.spec_loader.node_type(options), "SpecLoadOptions", case.id .. " options type")
+      local request = case.request.kind == "name" and linkedspec.named_spec_request(case.request.value) or
+        linkedspec.path_spec_request(case.request.value)
+      local ok, result = pcall(linkedspec.resolve_spec, request, options)
+      if case.expect.status == "ok" then
+        assert_equal(ok, true, case.id .. " resolved")
+        assert_equal(linkedspec.spec_loader.node_type(result), "ResolvedSpec", case.id .. " resolved type")
+        assert_equal(result.path, fixture_path(root, case.expect.path), case.id .. " path")
+        assert_equal(result.origin, case.expect.origin, case.id .. " origin")
+        assert_equal(result.request.kind, case.request.kind, case.id .. " retained kind")
+        assert_equal(result.request.requested, case.request.value, case.id .. " retained request")
+      else
+        assert_equal(ok, false, case.id .. " rejected")
+        assert_equal(linkedspec.is_spec_pipeline_error(result), true, case.id .. " typed error")
+        assert_equal(result.stage, case.expect.stage, case.id .. " stage")
+        assert_equal(result.code, case.expect.code, case.id .. " code")
+        local expected_path = case.expect.resolved_path and fixture_path(root, case.expect.resolved_path) or nil
+        assert_equal(result.resolved_path, expected_path, case.id .. " resolved error path")
+      end
+    end)
+  end
+end)
+
+test("native spec loading consumes every neutral strict UTF-8 case", function()
+  local contract = native_resolution_contract()
+  for _, case in ipairs(contract.text_cases) do
+    with_temp_directory(function(root)
+      write_file(root .. "/source.spec", bytes_from_hex(case.bytes_hex))
+      local request = linkedspec.path_spec_request("source.spec")
+      local options = linkedspec.spec_load_options({ cwd = root, search_roots = {} })
+      local ok, result = pcall(linkedspec.load_spec, request, options)
+      if case.expect.status == "ok" then
+        assert_equal(ok, true, case.id .. " loaded")
+        assert_equal(linkedspec.spec_loader.node_type(result), "LoadedSpec", case.id .. " loaded type")
+        assert_equal(result.source_text, case.expect.text, case.id .. " exact text")
+        assert_equal(result.resolved.path, root .. "/source.spec", case.id .. " loaded path")
+      else
+        assert_equal(ok, false, case.id .. " rejected")
+        assert_equal(linkedspec.is_spec_pipeline_error(result), true, case.id .. " typed error")
+        assert_equal(result.stage, case.expect.stage, case.id .. " stage")
+        assert_equal(result.code, case.expect.code, case.id .. " code")
+        assert_equal(result.resolved_path, root .. "/source.spec", case.id .. " decoded path")
+      end
+    end)
+  end
+
+  with_temp_directory(function(root)
+    local missing_ok, missing = pcall(
+      linkedspec.resolve_spec,
+      linkedspec.named_spec_request("Missing"),
+      linkedspec.spec_load_options({ cwd = root, search_roots = {} })
+    )
+    assert_equal(missing_ok, false, "missing name fails")
+    assert_equal(
+      json.encode(linkedspec.spec_pipeline_error_to_json(missing)),
+      '{"code":"spec_path_not_found","request_kind":"name","requested":"Missing",' ..
+        '"stage":"resolve_spec_path","summary":"Spec path not found","type":"spec_pipeline_error"}',
+      "missing name JSON"
+    )
+  end)
 end)
 
 test("checked-in corpus validates all 105 strict fixtures", function()
