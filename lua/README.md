@@ -75,8 +75,9 @@ outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`. Exa
 `.5.3`/`.5` without changing source, status, behavior, tests, or the manifest. Controlled/core planning `.6.1.0`
 measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed nested-path repair `.6.1.1` preserves key/index
 requirements and atomic governed assignment, closes unchanged offset 20, and raises both windows to 46/46 while
-focused suites pass 157/157. Executor `.6.1.2` then adds typed selected execution records at 160/160 per ABI;
-core `.6.1.3` is active before capability/no-drift `.6.1.4`.
+focused suites pass 157/157. Executor `.6.1.2` then adds typed selected execution records at 160/160 per ABI.
+Core `.6.1.3` permanently locks offsets 0-39 at 40/40 with endpoint 1/1 and raises both suites to 161/161;
+capability/no-drift `.6.1.4` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -295,8 +296,9 @@ to 155/155 with status `native-full-pipeline-trace-v1`. Census-preserving no-dri
 `.5.3`/`.5`; controlled/core planning `.6.1.0` and typed nested-path repair `.6.1.1` are complete at 46/46 across
 exact offsets 0-39 and 99-104. Reusable executor `.6.1.2` composes strict validation with automatic parsing,
 explicit compilation, source-identified execution, wrapped structural comparison, and per-fixture proof records;
-controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` is active. Generated Lua preservation/
-execution remains `.8.1-.8.4`.
+controlled proof passes 160/160 on both ABIs. Core admission `.6.1.3` permanently locks exact offsets 0-39 at
+40/40 and endpoint 1/1; focused suites pass 161/161 and capability/no-drift `.6.1.4` is active. Generated Lua
+preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 

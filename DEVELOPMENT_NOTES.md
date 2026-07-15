@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.1.3` — make corpus admission a manifest relationship, not 40 copied values):
+  Select exact offsets 0-39 through the production executor, assert the manifest's first/last/order, then compare
+  each retained actual output structurally to one wrapping of that same result's copied expected JSON. This locks
+  every fixture without duplicating large expected payloads in Lua test source. Endpoint measurement is uniform
+  and semantic here: all 40 match at byte and character endpoint 1, so assert both fields for every record. The
+  permanent proof raises each ABI suite to 161/161 and changes no runtime or corpus data; `.6.1.4` owns the separate
+  governed capability window and no-drift closure. Canonical local CI exits 0 with CLI 61x2 and Phase 0
+  `1..1031` passing in 640 seconds; total gate time was 1,316.33 seconds under concurrent build load, so future
+  complete-gate invocations should allow at least 30 minutes even though Phase 0 itself retains its 20-minute
+  timeout guidance. Mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.1.2` — make failure evidence a library value, not batch control flow): The
   corpus executor validates the whole persisted contract before selection, then owns exactly one native
   parse→validate→compile→identified-engine→runtime route. Expected output is structurally compared as one wrapped

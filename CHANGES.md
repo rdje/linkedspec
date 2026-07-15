@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.1.3 — admit Lua core corpus prefix
+
+Added one permanent manifest-backed library-executor regression for exact zero-based offsets 0-39. It validates
+the unchanged 105-case manifest, selects 40 cases in exact order from `proof_edge_array_literal` through
+`terse_2_2_5_2_attached_switch_blocks`, and locks 40 passes, zero failures, matched state, byte/character endpoint
+1, absent failure fields, and exact structural equality between every actual output and one wrapping of that
+fixture's unchanged expected JSON.
+
+PUC Lua and LuaJIT pass 161/161 with the exact core prefix at 40/40. This admission changes only the permanent
+test and aligned documentation: no production source, manifest/fixture/expected JSON, public status, capability
+census, CLI behavior, or offsets 40-104 changed. Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031`
+passing in 640 seconds (1,316.33 seconds total under concurrent load). Capability/no-drift `.6.1.4` is next.
+Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.1.2 — add Lua library corpus execution
 
 Added reusable in-process corpus execution over the strict Lua manifest loader. The complete manifest, directory

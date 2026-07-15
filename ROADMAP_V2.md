@@ -143,15 +143,16 @@ ABIs with status `native-full-pipeline-trace-v1`. Census-preserving `.5.3.3` clo
 behavior or census change. Controlled/core planning `.6.1.0` measured exact offsets 0-39 and 99-104 at 45/46 on
 both ABIs. Typed nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46, with focused
 suites at 157/157. Library execution `.6.1.2` adds strict selection, automatic full native composition, exact
-wrapped comparison, and typed non-aborting proof records at 160/160 per ABI. Core admission `.6.1.3` is active
-before capability/no-drift `.6.1.4`. Capability remains 64/0/0.
+wrapped comparison, and typed non-aborting proof records at 160/160 per ABI. Core admission `.6.1.3` permanently
+locks exact offsets 0-39 at 40/40 with endpoint 1/1 and focused suites at 161/161 on both ABIs.
+Capability/no-drift `.6.1.4` is active. Capability remains 64/0/0.
 ADR `0040` separately adopts one normative neutral mdBook plus five linked backend implementation companions.
 `BACKEND-COMPANION-BOOKS.1+` starts with a read-only content inventory only after current backend parity; shared
 build/navigation/canonical-owner/drift gates precede any migration. No companion scaffold exists yet.
 One-emitter native loading, frontend, compiler, function-shell, staged, engine, and runtime propagation is complete
 under `.5.3.2`; `.5.3.3` closes exact no-drift without changing the capability census. Corpus planning `.6.1.0`
-and typed segment-kind repair `.6.1.1` plus reusable library executor `.6.1.2` are complete; ordered core window
-`.6.1.3` is active.
+and typed segment-kind repair `.6.1.1`, reusable library executor `.6.1.2`, and ordered core window `.6.1.3` are
+complete; governed capability/no-drift `.6.1.4` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

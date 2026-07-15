@@ -5613,7 +5613,7 @@ _Lua validates the exact 105-case corpus through strict typed JSON and UTF-8 IO_
 
 - **answers:** how does Lua validate the LinkedSpec corpus manifest | does Lua load all 105 corpus fixtures | does Lua preserve JSON null array and harray identity | does the Lua corpus runner CLI execute parsers yet | what encoding does Lua corpus IO use | does Lua corpus IO accept UTF-16 or UTF-32 | does Lua detect missing and stale fixture directories | does the Lua backend require a JSON package
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI. The current focused gate passes 160/160 on both Lua ABIs.`
+- **evidence:** `LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI; LUA-BACKEND-PARITY.6.1.3 permanently admits core offsets 0-39. The current focused gate passes 161/161 on both Lua ABIs.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-corpus-manifest-io.md`](docs/knowledge/lua-corpus-manifest-io.md)
 

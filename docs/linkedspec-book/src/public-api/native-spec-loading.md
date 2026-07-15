@@ -200,7 +200,10 @@ errors remain caller errors because no valid execution set exists. Query with `c
 `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_failures(...)`, and
 `corpus_fixture_result(...)`.
 
-The developer `lua/bin/corpus_runner.lua` intentionally remains validation-only in this slice; permanent ordered
-core and capability windows are owned by `.6.1.3-.4`. Controlled scalar, nested aggregate, rule dispatch,
+The developer `lua/bin/corpus_runner.lua` intentionally remains validation-only. Permanent ordered core offsets
+0-39 are now admitted by `.6.1.3`; capability offsets 99-104 and no-drift remain `.6.1.4`. Controlled scalar,
+nested aggregate, rule dispatch,
 lifecycle, top-level function, boundary/trace, parse, validation, runtime, mismatch, no-match, and continuation
-proof passes 160/160 on both PUC Lua and LuaJIT.
+proof passes 160/160 on both PUC Lua and LuaJIT. The recurring core test additionally locks 40/40 manifest-ordered
+results from `proof_edge_array_literal` through `terse_2_2_5_2_attached_switch_blocks`: every actual output is
+exactly `[expected_json]`, every case matches at byte/character endpoint 1, and both ABI suites pass 161/161.

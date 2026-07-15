@@ -139,8 +139,9 @@ This `README.md` is the **single entry point** to the project.
   selection, executes automatic parse/validate/compile/source-identified runtime composition, compares exact
   one-level wrapped typed JSON, and retains typed per-fixture result/failure evidence without aborting later
   cases. Controlled scalar/aggregate/dispatch/lifecycle/function/boundary and staged-failure proof passes
-  160/160 on both Lua ABIs; the corpus CLI deliberately remains validation-only. Core admission `.6.1.3` is
-  active before capability/no-drift `.6.1.4`. Capability remains 64/0/0.
+  160/160 on both Lua ABIs; the corpus CLI deliberately remains validation-only. Core admission `.6.1.3` now
+  permanently locks exact offsets 0-39 at 40/40 with endpoint 1/1 and focused suites at 161/161 on both ABIs.
+  Capability/no-drift `.6.1.4` is active. Capability remains 64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

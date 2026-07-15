@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua core corpus admission `.6.1.3` turns the measured prefix into one permanent
+  manifest-backed executor test. Exact offsets 0-39 stay ordered from `proof_edge_array_literal` through
+  `terse_2_2_5_2_attached_switch_blocks`; all 40 match, equal one wrapping of unchanged expected JSON, retain byte
+  and character endpoint 1, and carry no failure. PUC Lua and LuaJIT pass 161/161. This is a test/documentation
+  admission only; production source, corpus data, status, capability census, CLI, and offsets 40-104 do not change.
+  Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 640 seconds (1,316.33 seconds total
+  under concurrent load). Governed capability/no-drift `.6.1.4` is active.
 - `2026-07-15` refresh: Lua corpus execution `.6.1.2` is a library-owned composition boundary, not a CLI
   behavior. It validates the full manifest/inventory/UTF-8/typed JSON before named or offset/limit selection, then
   runs automatic function-aware parse, explicit validation/compile, exact source-identified engine construction,
   native runtime, and one-level wrapped structural JSON comparison. Typed result records copy actual value/output,
   retain match plus byte/character endpoints, per-fixture trace, runtime diagnostic, failure stage/text, and turn
   every fixture failure into data so later selected cases run. Controlled proof passes 160/160 on PUC Lua and
-  LuaJIT; the developer CLI remains validation-only and ordered core admission `.6.1.3` is active. Canonical
+  LuaJIT; the developer CLI remains validation-only and ordered core admission `.6.1.3` follows. Canonical
   local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds.
 - `2026-07-15` refresh: Lua nested-path repair `.6.1.1` carries parser key/index identity through runtime reads and
   writes. Keys require harrays; normalized finite nonnegative indices require arrays. Nested assignment evaluates

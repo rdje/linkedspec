@@ -295,7 +295,8 @@ trace propagation `.5.3.2` then raises them to 155/155 and status
 `native-full-pipeline-trace-v1`; census-preserving no-drift `.5.3.3` closes parents `.5.3`/`.5` without behavior
 or manifest change. Controlled/core planning `.6.1.0` measured offsets 0-39 and 99-104 at 45/46 on both ABIs;
 typed nested-path repair `.6.1.1` closes unchanged offset 20 and both windows at 46/46. Reusable executor `.6.1.2`
-is active before permanent window admission `.6.1.3-.4`.
+then adds controlled typed evidence at 160/160; permanent core admission `.6.1.3` locks offsets 0-39 at 40/40 and
+endpoint 1/1, raising both suites to 161/161. Capability/no-drift `.6.1.4` is active.
 
 ```text
 [HIGH][enter] -> lua_runtime:parse top_rule=Top

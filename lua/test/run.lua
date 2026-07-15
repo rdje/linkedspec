@@ -1193,6 +1193,39 @@ test("corpus library selects named and bounded fixtures after full validation", 
   end)
 end)
 
+test("corpus library permanently admits the ordered 40-case core prefix", function()
+  local execution = linkedspec.execute_corpus_fixtures(
+    "rust/linkedspec-runtime/tests/corpus",
+    { offset = 0, limit = 40 }
+  )
+  assert_equal(execution.validation.manifest.case_count, 105, "core full manifest count")
+  assert_equal(#execution.results, 40, "core selected count")
+  assert_equal(execution.results[1].name, "proof_edge_array_literal", "core first fixture")
+  assert_equal(
+    execution.results[40].name,
+    "terse_2_2_5_2_attached_switch_blocks",
+    "core last fixture"
+  )
+  assert_equal(linkedspec.corpus_execution_passed(execution), true, "core execution status")
+  assert_equal(linkedspec.corpus_passed_count(execution), 40, "core pass count")
+  assert_equal(#linkedspec.corpus_failures(execution), 0, "core failure count")
+
+  for index, result in ipairs(execution.results) do
+    assert_equal(result.name, execution.validation.manifest.cases[index], "core manifest order " .. index)
+    assert_equal(linkedspec.corpus_fixture_passed(result), true, "core fixture status " .. result.name)
+    assert_equal(result.matched, true, "core match " .. result.name)
+    assert_equal(result.cursor_code_unit, 1, "core byte endpoint " .. result.name)
+    assert_equal(result.cursor_char_offset, 1, "core character endpoint " .. result.name)
+    assert_equal(result.failure_stage, nil, "core failure stage " .. result.name)
+    assert_equal(result.failure, nil, "core failure text " .. result.name)
+    assert_equal(
+      json.encode(result.actual_output),
+      json.encode(json.array({ result.expected_json })),
+      "core exact wrapped output " .. result.name
+    )
+  end
+end)
+
 test("source AST round-trips with neutral fields and provenance", function()
   local payload = json.harray({ kind = "action_block" })
   local job = ast.staged_parse_job({

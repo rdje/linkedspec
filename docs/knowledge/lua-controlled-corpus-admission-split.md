@@ -16,6 +16,7 @@ status: current
 tags: [lua, corpus, assignment, nested-access, task-tree, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.6.1.0 runs disposable manifest-ordered PUC Lua and LuaJIT probes through automatic parse, validate, compile, engine, and runtime APIs. Both pass 45/46 across offsets 0-39 and 99-104. Offset 20 alone mismatches because assign_nested_access passes evaluated values to generic read_index/write_index without enforcing the parsed segment kind; numeric index 0 into a harray becomes string key 0."
 evidence_update_2026_07_15_segment_kind_repair: "LUA-BACKEND-PARITY.6.1.1 preserves typed key/index segments, governed all-segments-then-RHS evaluation order, and copy/store-on-success assignment. Exact offset 20 passes unchanged, both owned windows pass 46/46 on PUC Lua and LuaJIT, and focused suites pass 157/157."
+evidence_update_2026_07_15_core_prefix_admission: "LUA-BACKEND-PARITY.6.1.3 permanently executes exact manifest offsets 0-39 through the library executor. All 40 pass in order with exact wrapped expected output and byte/character endpoint 1; PUC Lua and LuaJIT pass 161/161."
 reverify: "bash tools/run_lua_local.sh && rg -n 'assign_nested_access|local function read_index|local function write_index' lua/src/linkedspec/interpreter.lua && sed -n '1,40p' rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.spec && sed -n '1,80p' rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/expected.json"
 ---
 
@@ -45,8 +46,8 @@ and LuaJIT. Focused suites pass 157/157.
 Planning leaf `.6.1.0` changes no runtime or fixture. It dependency-orders the work:
 
 - `.6.1.1` preserves segment kind and repairs only this wrong-shape mutation (done);
-- `.6.1.2` adds reusable library corpus execution and controlled result/failure proof;
-- `.6.1.3` permanently admits exact offsets 0-39 on both Lua ABIs;
+- `.6.1.2` adds reusable library corpus execution and controlled result/failure proof (done);
+- `.6.1.3` permanently admits exact offsets 0-39 on both Lua ABIs (done: 40/40, endpoint 1/1, 161/161);
 - `.6.1.4` permanently admits offsets 99-104, closes `.6.1` no-drift, and activates `.6.2`.
 
 Related facts: [[lua-runtime-core-value-capture-helpers]], [[terse-nested-value-path-assignment]],

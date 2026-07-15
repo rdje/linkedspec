@@ -33,6 +33,7 @@ evidence_update_2026_07_15_descriptor_trace_closeout: "LUA-BACKEND-PARITY.5.3.3 
 evidence_update_2026_07_15_controlled_corpus_split: "LUA-BACKEND-PARITY.6.1.0 measures exact offsets 0-39 and 99-104 at 45/46 on PUC Lua and LuaJIT, isolates offset 20 nested-assignment segment-kind drift under .6.1.1, and orders executor/core/capability leaves .6.1.2-.4 before behavior code."
 evidence_update_2026_07_15_nested_path_repair: "LUA-BACKEND-PARITY.6.1.1 preserves typed key/index traversal, governed segment/RHS order, and atomic failed writes. Exact offset 20 and both owned windows now pass 46/46 on PUC Lua and LuaJIT at 157/157 focused tests; reusable executor .6.1.2 is active."
 evidence_update_2026_07_15_controlled_corpus_execution: "LUA-BACKEND-PARITY.6.1.2 validates the full strict manifest before selection, composes automatic parse/validate/compile/source-identified runtime, compares exact wrapped typed JSON, and retains per-fixture observations/failures without aborting later cases. Controlled proof passes 160/160 on both ABIs; ordered core window .6.1.3 is active."
+evidence_update_2026_07_15_core_prefix_admission: "LUA-BACKEND-PARITY.6.1.3 permanently locks exact manifest offsets 0-39 at 40/40 with exact wrapped expected output and endpoint 1/1. PUC Lua and LuaJIT pass 161/161; capability/no-drift .6.1.4 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

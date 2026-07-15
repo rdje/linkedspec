@@ -36,6 +36,7 @@ valid execution set exists. `CorpusExecutionResult` retains the full validation 
 `corpus_fixture_passed`, `corpus_execution_passed`, `corpus_passed_count`, `corpus_failures`, and
 `corpus_fixture_result` query it.
 
-The developer `lua/bin/corpus_runner.lua` remains validation-only by design in this slice. Permanent ordered core
-and capability windows are owned by `LUA-BACKEND-PARITY.6.1.3-.4`; full corpus and CLI promotion have later
-owners. Related facts: [[lua-corpus-manifest-io]], [[lua-native-spec-pipeline]], [[lua-native-full-pipeline-trace]].
+The developer `lua/bin/corpus_runner.lua` remains validation-only by design. `LUA-BACKEND-PARITY.6.1.3` now
+permanently executes exact core offsets 0-39 at 40/40 with endpoint 1/1; capability offsets 99-104 remain
+`.6.1.4`, while full corpus and CLI promotion have later owners. Related facts: [[lua-corpus-manifest-io]],
+[[lua-controlled-corpus-admission-split]], [[lua-native-spec-pipeline]], [[lua-native-full-pipeline-trace]].
