@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **FUTURE-PARITY-BACKLOG.20.0 — plan targeted Rust mutation testing**
+  (DONE — planning/list-only census; Lua fixed-v1 runtime `.5.1.2` resumes next).
+
+  **Result:** ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` only for explicit investigations or
+  milestone/release campaigns, never per commit, pre-commit, or ordinary local CI. The installed 27.0.0 list-only
+  census is 3,333 candidates across 19 files (core 1,217; runtime 2,116); no mutant ran and no score is claimed.
+  Targeted pilot/configuration remains `.1+`; survivors require typed dispositions and true gaps gain tests. The
+  generated Unicode table is the initial provenance-backed exclusion. No code, test, or CI behavior changed.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.18.3 — plan optional native parser acceleration**
   (DONE — planning contract only; Lua fixed-v1 runtime `.5.1.2` resumes next).
 

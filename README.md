@@ -329,6 +329,10 @@ Top-level project docs:
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
+- Rust mutation testing is adopted under ADR `0039`, but mutation execution will never run per commit, from
+  pre-commit hooks, or in ordinary local CI. The list-only baseline is 3,333 candidates across 19 files; future
+  runs are explicit on-demand or milestone/release campaigns, targeted before any resource-guarded sharded
+  breadth. `RUST-MUTATION-TESTING` owns the safe manual command and pilot; no mutation score is claimed yet.
 - Run `perl tools/check_capability_conformance.pl` to validate the current 16-capability/four-backend census,
   evidence paths, and future ownership. The live census is 64 pass, zero partial, and zero gap states. Generated
   source reached the earlier 60/0/0 milestone under `.3`; punctuation-light admission `.16.7` adds the current

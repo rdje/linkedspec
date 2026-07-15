@@ -142,6 +142,20 @@ The canonical shared gate does not require a Rust toolchain by default. Opt in o
 LINKEDSPEC_RUN_RUST=1 bash tools/run_ci_local.sh
 ```
 
+### Rust mutation testing (planned)
+
+ADR `0039` adopts `cargo-mutants` as a separate test-strength tool, not another commit gate. Mutation execution
+will never run per commit, in pre-commit hooks, or in ordinary local CI—not even with diff/file scope. The existing
+focused and broader Rust tests remain the normal workflow.
+
+Mutation campaigns will be explicit on-demand investigations or meaningful milestone/release/admission work. A
+2026-07-15 list-only census with `cargo-mutants 27.0.0` found 3,333 candidates across 19 production files, so
+targeted files must precede any resource-guarded, sharded breadth. Every survivor, timeout, and unviable mutant
+will receive a separate disposition; true test gaps gain behavior-focused tests. The generated Rust Unicode case
+table is the initial narrow exclusion because its generator, exact-byte regeneration, neutral contract, and
+runtime proof already own correctness. `RUST-MUTATION-TESTING` owns the future safe manual command and pilot. No
+mutation command is admitted yet, and no mutation score is currently claimed.
+
 ## Optional Dart Gate
 
 The Dart backend has its own focused local gate:

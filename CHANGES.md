@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — FUTURE-PARITY-BACKLOG.20.0 — plan targeted Rust mutation testing
+
+ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit Rust test-strength tool while
+forbidding mutation execution per commit, in pre-commit hooks, or in ordinary local CI. Normal focused and broader
+tests remain commit gates; mutation campaigns are manual investigations or meaningful milestone/release/admission
+work, targeted before any resource-guarded sharded breadth.
+
+The installed `cargo-mutants 27.0.0` list-only census reports 3,333 candidates across 19 production files: 1,217
+in core and 2,116 in runtime, led by `engine.rs` 1,343, `expr.rs` 522, and `parser.rs` 320. No mutant executed and
+no score is claimed. Future survivors/timeouts/unviable cases require distinct dispositions; true gaps gain tests.
+The auto-generated Unicode mapping is the initial narrow exclusion because generator, exact-byte, neutral-fixture,
+and runtime proof already govern it. No Rust code, tests, or CI behavior changed.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.3 — plan optional native parser acceleration
 
 ADR `0038` and `NATIVE-PARSER-ACCELERATOR` establish an optional, non-blocking performance horizon after a

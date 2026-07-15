@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`FUTURE-PARITY-BACKLOG.20.0` — mutation testing is a campaign, never commit ceremony): The
+  list-only `cargo-mutants 27.0.0` census is 3,333 candidates across 19 files, including 1,343 in `engine.rs`, so
+  even diff/file execution does not belong in per-commit, pre-commit, or ordinary local-CI paths. Preserve normal
+  tests there. Build a future manual command that refuses accidental full execution, starts with small semantic
+  files, records tool/config/scope/baseline/time/resources, separates survived/timeout/unviable outcomes, and uses
+  sharding only for justified milestones or releases. Convert real survivors into behavior tests; record narrow
+  equivalent/dead/unspecified/tool-limit dispositions. Exclude only the generated Unicode table initially because
+  its generator and exact-byte/runtime contract are stronger owners. No mutant ran in this planning slice.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.3` — optimize only a measured derivative): Keep three distinct tiers:
   immediate dynamic construction, fingerprinted warm-state reuse, and an optional backend-native artifact. Feed
   the third tier normalized effective compiled state, never backend-specific grammar shortcuts. Generated-source

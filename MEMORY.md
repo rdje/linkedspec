@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.2` — selective end-to-end parser observability governance.
-- latest_commit: `bb9c07f0` — `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`.
-- active_work_unit: planning-only `.18.3` is fully aligned and awaits verification/commit before the clean return
-  to Lua fixed-v1 runtime `.5.1.2`.
-- next_action: verify/commit/clean `.18.3`, then open a separate task-tree leaf to assess targeted Rust
-  `cargo-mutants` adoption before resuming Lua registered fixed-v1 runtime `.5.1.2`.
-- current_proof: ADR `0038` and `NATIVE-PARSER-ACCELERATOR` preserve immediate dynamic parsing as primary,
-  oracle, and fallback. Generated-source v1 is a semantic foundation, not a speed claim. Any later native artifact
-  must be a fingerprinted normalized-IR derivative with exact AST/diagnostic/Unicode/recovery/trace equivalence,
-  explicit toolchain/trust boundaries, and objective build/load/break-even benefit. The horizon is non-blocking,
-  backend-specific internally, and optional for Perl. No behavior, format support, or performance claim changes.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.3` — optional native parser acceleration governance.
+- latest_commit: `eab09b48` — `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing`.
+- active_work_unit: planning/list-only Rust mutation-testing `.20.0` is aligned and awaits gates/commit before the
+  clean return to Lua fixed-v1 runtime `.5.1.2`.
+- next_action: verify/commit/clean `.20.0`, then resume Lua registered fixed-v1 runtime `.5.1.2`; mutation
+  configuration/pilot remains parked at `RUST-MUTATION-TESTING.1+` for an explicit later campaign.
+- current_proof: ADR `0039` adopts cargo-mutants only for explicit on-demand or milestone/release campaigns, never
+  per commit, pre-commit, or ordinary local CI. Installed 27.0.0 lists 3,333 candidates across 19 files (core
+  1,217; runtime 2,116) without executing a mutant. Survivors/timeouts/unviable results require distinct durable
+  dispositions; the generated Unicode table is the initial generator-backed exclusion. No score exists and no
+  Rust code, test, CI behavior, or Lua priority changed.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -32,5 +32,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.18.3` planning/docs/ADR/task/KM/book alignment awaits gates and its
-  prepared commit; no code or runtime behavior changed.
+- blockers: none. in_flight_uncommitted: `.20.0` task/ADR/KM/roadmap/book/live-doc planning plus list-only census
+  awaits gates and its prepared commit; no mutant ran and no code/test/CI behavior changed.

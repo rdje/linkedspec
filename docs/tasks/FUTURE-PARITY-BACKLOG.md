@@ -3800,6 +3800,35 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.20`
+  Status: `proposed`
+  Goal: Add evidence-based Rust mutation testing as a targeted verification layer.
+  Children: `.20.0`, `.20.1`, `.20.2`, `.20.3`, `.20.4`; detailed execution tree: `RUST-MUTATION-TESTING`
+  Acceptance: The Rust workspace gains a measured mutation-testing policy that focuses hand-written semantic code,
+    records justified exclusions, converts meaningful survivors into focused tests or documented equivalents,
+    keeps all mutation execution outside per-commit/pre-commit/ordinary-local-CI gates, uses only explicit
+    on-demand or milestone/admission campaigns, bounds resources and artifacts, and integrates a stable manual
+    command rather than turning mutation score into an unexamined vanity metric.
+
+- ID: `FUTURE-PARITY-BACKLOG.20.0`
+  Status: `done`
+  Goal: Audit and ratify targeted `cargo-mutants` use for the Rust backend before configuration or test changes.
+  Dependencies: `.18.3`
+  Acceptance: Check the Knowledge Map and current Rust/local-CI test architecture; confirm available tool/version;
+    inventory candidate production files and mutations without executing the full mutation campaign; define scope,
+    exclusions, baseline/survivor/timeout/unviable handling, resource/artifact safety, explicit campaign cadence
+    cadence, and follow-on implementation/admission leaves in a detailed task tree; synchronize roadmap/index/live
+    docs/mdBook/KM without changing Rust behavior or claiming a mutation score before measurement.
+  Verification: **PASS 2026-07-15.** Knowledge Map and Rust workspace/test/local-CI audit found no prior mutation
+    plan or config. Installed `cargo-mutants 27.0.0` list-only inventory reports 3,333 candidates across 19 files:
+    core 1,217, runtime 2,116; largest files `engine.rs` 1,343, `expr.rs` 522, `parser.rs` 320. No mutant executed.
+    ADR `0039` and `RUST-MUTATION-TESTING` prohibit all per-commit/pre-commit/ordinary-local-CI mutation runs,
+    require explicit targeted or milestone/release campaigns, typed survivor/timeout/unviable dispositions,
+    resource/artifact controls, and only the generator-backed Unicode table as the initial exclusion. Roadmap,
+    index, live docs, mdBook, Knowledge Map, governance, and whitespace checks pass; no Rust code/test/CI behavior
+    or mutation-score claim changes.
+  Commit: `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing`
+
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
 Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
@@ -4682,6 +4711,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / dependency-gated | Repair Perl logical lowering and align eager truthiness/arity across five backends. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
+| 184 | `FUTURE-PARITY-BACKLOG.20.0` | `done` | ADR 0039 governs explicit milestone-scoped Rust mutation testing; list-only baseline 3,333, no run. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5323,6 +5353,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.20.0` | KM/Rust workspace/test/local-CI audit; cargo-mutants 27.0.0; list-only 3,333/file/package/genre census; generated Unicode provenance; ADR 0039; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Mutation testing is adopted only for explicit campaigns, never per commit; no mutant ran, no score exists, and no Rust/test/CI behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR 0038; separate native-accelerator tree; program/task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Dynamic parsing remains primary/oracle/fallback; any accelerator is optional, fingerprinted, equivalence-gated, trust-isolated, and measurement-admitted; no behavior or speed claim changed and Lua `.5.1.2` resumes. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.2` | Knowledge Map-first cross-variant trace/status audit; duplicate Dart trace-book root cause; ADR 0037; format-program `.2.7`; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Correlated compile/runtime trace and exact emission-only rule filters are future format-readiness requirements; stale Dart prose is removed; Lua `.5.3` remains the full-pipeline owner; no behavior changed and Lua `.5.1.2` resumes. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.9.1` | Shared eager logical evaluator; false-first `and`/true-first `or`/extra-argument `not`; exact side-effect order; empty false/false/true; governed zero/aggregate truthiness; boolean receiver continuation; Lua 123/123 on PUC Lua and LuaJIT; API/book/KM/task/live/roadmap/memory sync; governance/book/whitespace. | PASS. Lua's exact three-name gap is repaired without claiming cross-backend truthiness/arity/Perl-lowering normalization; exact recurring admission `.2` activates. |
@@ -5457,6 +5488,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.20.0` | `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing` | ADR 0039, exact list-only census, no-per-commit rule, survivor taxonomy, narrow generated exclusion, and detailed tree. |
 | `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, explicit trust/measurement gates, and non-blocking horizon tree. |
 | `FUTURE-PARITY-BACKLOG.18.2` | `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability` | ADR 0037, correlated construction/runtime trace, exact rule filters, bounded payloads, non-interference proof, and Dart doc-drift repair. |
 | `LUA-BACKEND-PARITY.4.3.9.1` | `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers` | Eager ordered booleans, empty false/false/true, governed truthiness, and 123/123 dual-ABI proof. |
@@ -5611,6 +5643,12 @@ Read-only evidence recorded on 2026-07-10:
   marker forms. PUC Lua/LuaJIT pass 121/121; complete-mark, coverage 246/105+1/122, selector 57/27/0,
   punctuation-light, and capability 64/0/0 gates pass. Parent `.4.3.7` closes, generated Lua stays `.8.1-.8.4`,
   and diagnostic output `.4.3.8` activates without behavior change.
+- `2026-07-15`: `.20.0` adopts ADR `0039` and creates `RUST-MUTATION-TESTING`. Installed cargo-mutants 27.0.0
+  lists 3,333 candidates across 19 files (core 1,217; runtime 2,116) without executing any mutant. Mutation runs
+  are prohibited per commit, in pre-commit, and in ordinary local CI; future work starts with a safe manual
+  targeted pilot and admits sharded breadth only for justified milestones/releases. Survivors/timeouts/unviable
+  outcomes remain distinct, the generated Unicode table is the sole initial evidence-backed exclusion, no score
+  is claimed, and Lua `.5.1.2` resumes.
 - `2026-07-15`: `.18.3` adopts ADR `0038` and creates `NATIVE-PARSER-ACCELERATOR` as a separate non-blocking
   horizon. Dynamic load-`.spec` parsing remains primary, oracle, and fallback. Generated-source v1 supplies
   semantic foundations but no optimization claim; any later artifact needs normalized-IR derivation, full
