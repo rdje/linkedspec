@@ -102,6 +102,12 @@ failures, controls/sinks, interpreter events, and runtime no-drift; `.4.4.1` is 
 frontend, compiler, function-shell, staged, and runtime propagation remains `.5.3`, after `.5.1` and `.5.2` provide
 the owners it must traverse. This split changes no runtime or capability claim.
 
+Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
+top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer
+child-payload preservation, unchanged text, and unchanged successful parse results pass 126/126 on both ABIs.
+Public status is `runtime-structured-diagnostics`; `.4.4.2` trace controls/sinks is active while capability remains
+64/0/0.
+
 ## Current Live Tracker
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

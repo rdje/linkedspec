@@ -8,6 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.4.1 — add Lua runtime diagnostics**
+  (DONE — neutral deepest-rule diagnostics pass 126/126; trace controls/sinks `.4.4.2` is next).
+
+  **Result:** Typed `RuntimeDiagnostic` payloads now carry exact neutral stage/owner/spec/top/rule/handler fields
+  through Lua runtime exceptions. Missing rules, empty compiled state, strict invalid input, and ordinary execution
+  have specific stages; child payloads survive parent and parse unwind. Error/diagnostic JSON is deterministic,
+  optional identity is omitted when absent, error text and successful results are unchanged, and public status is
+  `runtime-structured-diagnostics`. PUC Lua and LuaJIT pass 126/126; capability remains 64/0/0.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.4.4.0 — split Lua diagnostics trace controls**
   (DONE — runtime mechanisms and later full-pipeline propagation are dependency-correct; `.4.4.1` is next).
 

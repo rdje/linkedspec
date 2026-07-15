@@ -10,12 +10,16 @@ local unicode_case = require("linkedspec.unicode_case_mapping")
 
 local M = {}
 
-local ERROR_MT = { __tostring = function(value) return "RuntimeInterpreterException: " .. value.message end }
+local ERROR_MT = {
+  __runtime_interpreter_type = "RuntimeInterpreterException",
+  __tostring = function(value) return "RuntimeInterpreterException: " .. value.message end,
+}
 local FLOW_MT = { __tostring = function(value) return "RuntimeActionFlow: " .. value.kind end }
 local ENGINE_MT = { __runtime_interpreter_type = "LinkedSpecRuntimeEngine" }
 local RESULT_MT = { __runtime_interpreter_type = "RuntimeParseResult" }
 local EVENT_MT = { __runtime_interpreter_type = "RuntimeLifecycleEvent" }
 local DIAGNOSTIC_OUTPUT_EVENT_MT = { __runtime_interpreter_type = "RuntimeDiagnosticOutputEvent" }
+local DIAGNOSTIC_MT = { __runtime_interpreter_type = "RuntimeDiagnostic" }
 local HELPER_REGEX_MT = { __runtime_interpreter_type = "RuntimeHelperRegex" }
 
 local function fail(message, fields)
@@ -38,6 +42,7 @@ local function nextable(callback)
 end
 
 function M.is_runtime_interpreter_error(value) return getmetatable(value) == ERROR_MT end
+function M.is_runtime_diagnostic(value) return getmetatable(value) == DIAGNOSTIC_MT end
 
 function M.node_type(value)
   if type(value) ~= "table" then return nil end
@@ -86,14 +91,47 @@ function M.runtime_engine(compiled, options)
   if type(max_iterations) ~= "number" or max_iterations % 1 ~= 0 or max_iterations <= 0 then
     fail("max_iterations must be a positive integer")
   end
+  if options.spec_name ~= nil and type(options.spec_name) ~= "string" then
+    fail("spec_name must be a string when present")
+  end
+  if options.spec_path ~= nil and type(options.spec_path) ~= "string" then
+    fail("spec_path must be a string when present")
+  end
   return setmetatable({
     compiled_spec = compiled,
     parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
     max_iterations = max_iterations,
+    spec_name = options.spec_name,
+    spec_path = options.spec_path,
     regex_cache = {},
     boundary_regex_cache = {},
     helper_regex_cache = {},
   }, ENGINE_MT)
+end
+
+local function runtime_diagnostic(engine, fields)
+  local effective_rule = fields.rule_label or fields.top_rule
+  return setmetatable({
+    type = "runtime_parser",
+    stage = fields.stage,
+    owner_stage = "lua_runtime",
+    summary = fields.summary,
+    detail = fields.detail,
+    spec_name = engine.spec_name,
+    spec_path = engine.spec_path,
+    top_rule = fields.top_rule,
+    rule_label = fields.rule_label,
+    handler_source_label = fields.handler_source_label or
+      (effective_rule and ("lua_runtime:rule:" .. effective_rule) or "lua_runtime"),
+  }, DIAGNOSTIC_MT)
+end
+
+local function with_runtime_diagnostic(value, diagnostic)
+  if getmetatable(value) ~= ERROR_MT or value.diagnostic ~= nil then return value end
+  local wrapped = {}
+  for key, field_value in pairs(value) do wrapped[key] = field_value end
+  wrapped.diagnostic = diagnostic
+  return setmetatable(wrapped, ERROR_MT)
 end
 
 local function default_top(engine)
@@ -103,9 +141,20 @@ local function default_top(engine)
   return engine.compiled_spec.compiled_rule_order[1]
 end
 
-local function context(input, top_rule, compiled_rules, diagnostic_sink)
+local function context(engine, input, top_rule, compiled_rules, diagnostic_sink)
   local valid, position = json.validate_utf8(input)
-  if not valid then fail("runtime input is not valid UTF-8 at byte " .. (position - 1)) end
+  if not valid then
+    local detail = "runtime input is not valid UTF-8 at byte " .. (position - 1)
+    fail(detail, {
+      diagnostic = runtime_diagnostic(engine, {
+        stage = "runtime_input",
+        summary = "Lua runtime input validation failed",
+        detail = detail,
+        top_rule = top_rule,
+        rule_label = top_rule,
+      }),
+    })
+  end
   return {
     input = input,
     cursor_byte = 0,
@@ -3036,7 +3085,19 @@ end
 
 execute_rule = function(engine, label, entry_index, ctx)
   local rule = engine.compiled_spec.rules_by_label[label]
-  if not rule then fail("rule '" .. label .. "' is not compiled", { rule_label = label }) end
+  if not rule then
+    local detail = "rule '" .. label .. "' is not compiled"
+    fail(detail, {
+      rule_label = label,
+      diagnostic = runtime_diagnostic(engine, {
+        stage = "rule_lookup",
+        summary = "Lua runtime rule lookup failed",
+        detail = detail,
+        top_rule = ctx.top_rule,
+        rule_label = label,
+      }),
+    })
+  end
   local recursion_key = label .. ":" .. entry_index .. ":" .. ctx.cursor_byte
   if ctx.active[recursion_key] then return rule_result(false, json.null) end
   ctx.active[recursion_key] = true
@@ -3110,6 +3171,15 @@ execute_rule = function(engine, label, entry_index, ctx)
     lifecycle(engine, rule, "E", ctx, accumulator)
     return rule_result(count > 0, finish_value(accumulator, ctx.retv))
   end)
+  if not ok and getmetatable(result_or_flow) == ERROR_MT then
+    result_or_flow = with_runtime_diagnostic(result_or_flow, runtime_diagnostic(engine, {
+      stage = "runtime_execution",
+      summary = "Lua runtime interpreter failed",
+      detail = result_or_flow.message,
+      top_rule = ctx.top_rule,
+      rule_label = label,
+    }))
+  end
   ctx.accumulator_stack[#ctx.accumulator_stack] = nil
   ctx.rule_stack[#ctx.rule_stack] = nil
   ctx.registers = saved_registers
@@ -3134,9 +3204,30 @@ function M.runtime_parse(engine, input, options)
     fail("diagnostic_sink must be a function")
   end
   local top = options.top_rule or default_top(engine)
-  if not top then fail("compiled spec does not contain any rules") end
-  local ctx = context(input, top, engine.compiled_spec.rules_by_label, options.diagnostic_sink)
-  local result = execute_rule(engine, top, 0, ctx)
+  if not top then
+    local detail = "compiled spec does not contain any rules"
+    fail(detail, {
+      diagnostic = runtime_diagnostic(engine, {
+        stage = "top_rule_selection",
+        summary = "Lua runtime top-rule selection failed",
+        detail = detail,
+      }),
+    })
+  end
+  local ctx = context(engine, input, top, engine.compiled_spec.rules_by_label, options.diagnostic_sink)
+  local ok, result = pcall(execute_rule, engine, top, 0, ctx)
+  if not ok then
+    if getmetatable(result) == ERROR_MT then
+      result = with_runtime_diagnostic(result, runtime_diagnostic(engine, {
+        stage = "runtime_execution",
+        summary = "Lua runtime interpreter failed",
+        detail = result.message,
+        top_rule = top,
+        rule_label = ctx.rule_stack[#ctx.rule_stack] or top,
+      }))
+    end
+    error(result, 0)
+  end
   local output = json.array({ copy_value(result.value) })
   return setmetatable({
     matched = result.matched,
@@ -3151,8 +3242,27 @@ end
 M.runtime_execute = M.runtime_parse
 
 function M.to_json(value)
+  if getmetatable(value) == ERROR_MT then
+    return json.harray({
+      message = value.message,
+      diagnostic = value.diagnostic and M.to_json(value.diagnostic) or nil,
+    })
+  end
   local node_type = M.node_type(value)
-  if node_type == "RuntimeLifecycleEvent" then
+  if node_type == "RuntimeDiagnostic" then
+    return json.harray({
+      type = value.type,
+      stage = value.stage,
+      owner_stage = value.owner_stage,
+      summary = value.summary,
+      detail = value.detail,
+      spec_name = value.spec_name,
+      spec_path = value.spec_path,
+      top_rule = value.top_rule,
+      rule_label = value.rule_label,
+      handler_source_label = value.handler_source_label,
+    })
+  elseif node_type == "RuntimeLifecycleEvent" then
     return json.harray({ rule_label = value.rule_label, lifecycle = value.lifecycle, line = value.line })
   elseif node_type == "RuntimeDiagnosticOutputEvent" then
     return json.harray({
@@ -3172,7 +3282,7 @@ function M.to_json(value)
       lifecycle_events = events,
     })
   end
-  fail("runtime to_json expects parse result, lifecycle event, or diagnostic output event")
+  fail("runtime to_json expects a runtime error, diagnostic, parse result, lifecycle event, or diagnostic output event")
 end
 
 return M

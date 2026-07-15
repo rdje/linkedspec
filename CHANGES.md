@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.4.1 — add Lua runtime diagnostics
+
+Lua native runtime failures now carry typed `RuntimeDiagnostic` payloads on `RuntimeInterpreterException` tables.
+The neutral type/stage/owner/summary/detail/spec/top/rule/handler fields have deterministic JSON projection;
+optional `spec_name` / `spec_path` are caller-owned engine options. Specific top-selection, strict-input,
+rule-lookup, and execution stages replace an undifferentiated outer failure.
+
+Rule wrappers attach fallback diagnostics before local context is discarded, while parent and parse wrappers keep
+an existing richer payload. Nested child failure therefore preserves the deepest rule and Lua handler identity.
+Textual errors and successful parse results are unchanged. PUC Lua and LuaJIT pass 126/126; shared coverage stays
+246/105+1/122 and capability stays 64/0/0. Canonical local CI passes both primary CLI environments at 61/61 and
+Phase 0 `1..1031` in 613 seconds. Public status becomes `runtime-structured-diagnostics`, and trace controls/sinks
+`.4.4.2` activates.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.4.4.0 — split Lua diagnostics trace controls
 
 The Lua diagnostics/trace parent is now split into signoff-sized runtime mechanisms: `.4.4.1` neutral structured

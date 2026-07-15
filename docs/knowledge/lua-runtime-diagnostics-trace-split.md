@@ -13,6 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, diagnostics, trace, runtime, staged-parsing, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.4.0; completed Dart .4.5 and Julia .4.5 plus later full-pipeline trace records"
+evidence_update_2026_07_15_structured_diagnostics: "LUA-BACKEND-PARITY.4.4.1 adds typed neutral RuntimeDiagnostic payloads, optional engine spec identity, top/deepest-rule/handler attribution, specific top/input/lookup/execution stages, deterministic JSON, and unchanged successful output at 126/126 on PUC Lua and LuaJIT. .4.4.2 is active."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md"
 ---
 
@@ -36,10 +37,11 @@ The order follows completed Dart and Julia evidence. Both variants first landed 
 controls/sinks, and interpreter events. Their frontend/compiler/function/staged propagation was added later, after
 the staged pipeline existed. Lua reuses that dependency-safe architecture.
 
-The planning slice changes no Lua behavior or capability claim. At this boundary Lua already has a typed runtime
-exception seam, parse-scoped rule stack, compiled action/source records, cursor/capture/mark state, and a per-parse
-caller-owned option table; `.4.4.1` is the first active implementation leaf.
+The planning slice itself changed no Lua behavior or capability claim. `.4.4.1` now consumes the typed runtime
+exception seam and parse-scoped rule stack to add neutral structured failures with deepest-rule preservation;
+trace control/sink `.4.4.2` is active.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],
-[[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]].
+[[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]],
+[[lua-runtime-structured-diagnostics]].

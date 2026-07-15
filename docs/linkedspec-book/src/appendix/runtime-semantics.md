@@ -558,6 +558,16 @@ Julia exposes the same neutral fields through exported `RuntimeDiagnostic` on
 `spec_path` identity and top/rule/handler attribution are attached only on
 failure; successful `RuntimeParseResult` output remains unchanged.
 
+Lua exposes a typed `RuntimeDiagnostic` on the native
+`RuntimeInterpreterException.diagnostic` table field. Callers provide optional
+`spec_name` / `spec_path` in `runtime_engine(...)`; rule wrappers preserve the
+deepest child or lookup payload across parent unwind. The Lua-specific handler
+label is `lua_runtime:rule:<label>`, and deterministic projection is available
+through `linkedspec.interpreter.to_json(...)`. Top-rule selection, strict
+runtime-input validation, rule lookup, and ordinary execution have distinct
+stages. Successful `RuntimeParseResult` values and textual error messages are
+unchanged.
+
 ### 10.3 Input Validation
 
 Before parsing, the input is validated:

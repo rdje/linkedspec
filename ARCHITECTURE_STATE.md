@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua runtime errors now carry typed neutral `RuntimeDiagnostic` payloads. Optional engine
+  `spec_name` / `spec_path` flows only into failures; `top_rule_selection`, `runtime_input`, `rule_lookup`, and
+  `runtime_execution` distinguish the mechanism. Each rule adds a fallback before local-state unwind, while outer
+  wrappers preserve existing child/lookup payloads, so top and deepest-rule/`lua_runtime:rule:<label>` identity
+  coexist without another failure stack. Deterministic diagnostic/error JSON omits unavailable fields; existing
+  text and successful results stay unchanged. Both ABIs pass 126/126, status is `runtime-structured-diagnostics`,
+  capability remains 64/0/0, and trace controls/sinks `.4.4.2` is active.
 - `2026-07-15` refresh: Lua diagnostics/trace is split by mechanism and dependency. `.4.4.1-.4` now own neutral
   structured runtime failures, ordered controls/events/sinks, interpreter instrumentation, and scoped no-drift.
   Full loading/frontend/validation/compiler/function-shell/staged/runtime propagation remains `.5.3`, explicitly

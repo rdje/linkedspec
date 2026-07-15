@@ -925,6 +925,13 @@ own structured runtime failures, trace controls/sinks, runtime events, and no-dr
 propagation remains `.5.3` after its owners exist; structured runtime diagnostic `.4.4.1` is active. No behavior or
 capability changed in the split.
 
+Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
+`RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
+Optional engine `spec_name` / `spec_path`, specific top-selection/strict-input/rule-lookup/execution stages,
+child-before-parent preservation, deterministic error/diagnostic JSON, unchanged textual errors, and unchanged
+successful results pass 126/126 on PUC Lua and LuaJIT. Public status is `runtime-structured-diagnostics`; trace
+controls/sinks `.4.4.2` is active and capability remains 64/0/0.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |

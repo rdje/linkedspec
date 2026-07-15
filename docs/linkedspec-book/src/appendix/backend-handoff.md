@@ -755,7 +755,10 @@ Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime
 propagation stays `.5.3`, after general staged functions `.5.1` and native loading `.5.2` create those owners.
-Structured runtime diagnostic `.4.4.1` is active; the split itself changes no Lua behavior or capability claim.
+Structured runtime diagnostic `.4.4.1` now exposes the same neutral fields on typed Lua exceptions. Optional
+engine source identity, top-selection/input/lookup/execution stages, deepest child rule and handler preservation,
+deterministic JSON, unchanged text, and successful-result identity pass 126/126 on both ABIs. Public status is
+`runtime-structured-diagnostics`; trace controls/sinks `.4.4.2` is active and capability remains 64/0/0.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.

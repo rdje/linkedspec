@@ -60,6 +60,33 @@ on `LinkedSpecRuntimeEngine`, and preserves the failing child rule and
 Successful Julia `RuntimeParseResult` JSON and textual exception display remain
 unchanged.
 
+For the Lua backend, `pcall(...)` returns a typed `RuntimeInterpreterException`
+table whose `diagnostic` field is a typed `RuntimeDiagnostic`. Native callers
+may attach source identity when constructing the engine:
+
+```lua
+local engine = linkedspec.runtime_engine(compiled, {
+  spec_name = "Example",
+  spec_path = "specs/Example.spec",
+})
+
+local ok, result_or_error = pcall(linkedspec.runtime_parse, engine, input)
+if not ok and linkedspec.is_runtime_interpreter_error(result_or_error) then
+  local diagnostic = linkedspec.interpreter.to_json(result_or_error.diagnostic)
+  io.stderr:write(diagnostic.owner_stage, ": ", diagnostic.summary, "\n")
+  io.stderr:write(diagnostic.handler_source_label, "\n")
+end
+```
+
+The Lua fields use the same neutral snake-case names. `rule_lookup`,
+`top_rule_selection`, `runtime_input`, and `runtime_execution` distinguish
+specific runtime stages. A child attaches its payload before unwinding, and
+outer wrappers preserve it, so `top_rule = "Top"` can coexist with
+`rule_label = "Child"` and `handler_source_label = "lua_runtime:rule:Child"`.
+`linkedspec.interpreter.to_json(error)` returns the unchanged message plus the
+nested diagnostic; absent optional identity fields are omitted. Successful
+parse values and ordinary textual errors are unchanged.
+
 For Rust, `RuntimeExecutionError` carries the equivalent serializable `RuntimeDiagnostic`. Native callers opt into
 it through `Engine::execute_with_diagnostics(...)` or `execute_value_with_diagnostics(...)`:
 

@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.4.1` — attach diagnostics at the deepest typed boundary, then preserve them):
+  Build one neutral payload constructor over caller-owned engine identity. Give rule lookup, empty-state selection,
+  strict input, and ordinary execution distinct stages. Wrap each typed rule failure before discarding its frame;
+  parent and parse fallbacks add context only when no payload exists. This preserves `Top` plus deepest `Child`
+  attribution without a parallel failure stack. Keep `message`/`tostring` unchanged, omit unavailable JSON fields,
+  and prove successful result identity separately. Both ABIs pass 126/126; canonical local CI passes both primary
+  CLI environments at 61/61 and Phase 0 `1..1031` in 613 seconds. Status is `runtime-structured-diagnostics` and
+  trace controls/sinks `.4.4.2` is next.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.4.0` — trace owners must exist before propagation can be proved): Split
   observability by dependency epoch. The current runtime already has typed exceptions, a parse-scoped rule stack,
   compiled source records, cursor/capture/mark state, and a caller-owned parse option boundary, so structured

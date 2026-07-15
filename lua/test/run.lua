@@ -127,7 +127,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-helper-value-control", "status parity")
+  assert_equal(first.parity, "runtime-structured-diagnostics", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1961,6 +1961,112 @@ test("runtime interpreter guards bounds recursion zero progress and unsupported 
   )
   assert_equal(helper_ok, false, "unsupported runtime helper")
   assert_equal(linkedspec.is_runtime_interpreter_error(helper_error), true, "unsupported typed error")
+end)
+
+test("runtime failures carry neutral structured diagnostics with deepest rule attribution", function()
+  local compiled = linkedspec.compile_spec(linkedspec.parse_spec("Top::\n /x/\n"))
+  local identified = linkedspec.runtime_engine(compiled, {
+    spec_name = "diagnostic.spec",
+    spec_path = "specs/diagnostic.spec",
+  })
+  local missing_ok, missing_error = pcall(
+    linkedspec.runtime_parse,
+    identified,
+    "x",
+    { top_rule = "Missing" }
+  )
+  assert_equal(missing_ok, false, "missing selected rule fails")
+  assert_equal(linkedspec.is_runtime_interpreter_error(missing_error), true, "missing rule typed error")
+  assert_equal(linkedspec.interpreter.node_type(missing_error), "RuntimeInterpreterException", "error node type")
+  assert_equal(missing_error.message, "rule 'Missing' is not compiled", "missing rule text stays unchanged")
+  assert_equal(
+    tostring(missing_error),
+    "RuntimeInterpreterException: rule 'Missing' is not compiled",
+    "missing rule display stays unchanged"
+  )
+  assert_equal(linkedspec.is_runtime_diagnostic(missing_error.diagnostic), true, "missing rule diagnostic type")
+  assert_equal(
+    json.encode(linkedspec.interpreter.to_json(missing_error.diagnostic)),
+    json.encode(json.harray({
+      type = "runtime_parser",
+      stage = "rule_lookup",
+      owner_stage = "lua_runtime",
+      summary = "Lua runtime rule lookup failed",
+      detail = "rule 'Missing' is not compiled",
+      spec_name = "diagnostic.spec",
+      spec_path = "specs/diagnostic.spec",
+      top_rule = "Missing",
+      rule_label = "Missing",
+      handler_source_label = "lua_runtime:rule:Missing",
+    })),
+    "missing rule diagnostic JSON"
+  )
+  assert_equal(
+    json.encode(linkedspec.interpreter.to_json(missing_error)),
+    json.encode(json.harray({
+      message = "rule 'Missing' is not compiled",
+      diagnostic = linkedspec.interpreter.to_json(missing_error.diagnostic),
+    })),
+    "runtime error JSON carries diagnostic"
+  )
+
+  local child_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ -> Child
+
+Child:
+ /x/
+ E { invented_helper() }
+]])))
+  local child_ok, child_error = pcall(linkedspec.runtime_parse, child_engine, "x")
+  assert_equal(child_ok, false, "child helper failure")
+  assert_contains(child_error.message, "invented_helper", "child error text")
+  local child_diagnostic = linkedspec.interpreter.to_json(child_error.diagnostic)
+  assert_equal(child_diagnostic.stage, "runtime_execution", "child stage")
+  assert_equal(child_diagnostic.summary, "Lua runtime interpreter failed", "child summary")
+  assert_equal(child_diagnostic.top_rule, "Top", "child top rule")
+  assert_equal(child_diagnostic.rule_label, "Child", "deepest child rule survives unwind")
+  assert_equal(
+    child_diagnostic.handler_source_label,
+    "lua_runtime:rule:Child",
+    "deepest child handler survives unwind"
+  )
+  assert_equal(child_diagnostic.spec_name, nil, "absent spec name omitted")
+  assert_equal(child_diagnostic.spec_path, nil, "absent spec path omitted")
+
+  local lookup_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ E { call(Missing) }
+]])))
+  local lookup_ok, lookup_error = pcall(linkedspec.runtime_parse, lookup_engine, "x")
+  assert_equal(lookup_ok, false, "nested missing rule fails")
+  assert_equal(lookup_error.diagnostic.stage, "rule_lookup", "richer nested stage is preserved")
+  assert_equal(lookup_error.diagnostic.top_rule, "Top", "nested lookup top rule")
+  assert_equal(lookup_error.diagnostic.rule_label, "Missing", "nested lookup target attribution")
+
+  local empty_compiled = linkedspec.compile_spec(ast.spec_file({ rules = {} }), { validate_source = false })
+  local empty_ok, empty_error = pcall(
+    linkedspec.runtime_parse,
+    linkedspec.runtime_engine(empty_compiled),
+    ""
+  )
+  assert_equal(empty_ok, false, "empty compiled state fails")
+  assert_equal(empty_error.diagnostic.stage, "top_rule_selection", "empty state stage")
+  assert_equal(empty_error.diagnostic.handler_source_label, "lua_runtime", "empty state handler")
+
+  local input_ok, input_error = pcall(linkedspec.runtime_parse, identified, string.char(255))
+  assert_equal(input_ok, false, "invalid UTF-8 runtime input fails")
+  assert_equal(input_error.diagnostic.stage, "runtime_input", "invalid input stage")
+  assert_equal(input_error.diagnostic.top_rule, "Top", "invalid input top rule")
+  assert_equal(input_error.diagnostic.rule_label, "Top", "invalid input effective rule")
+
+  local success = linkedspec.runtime_parse(identified, "x")
+  assert_equal(linkedspec.interpreter.node_type(success), "RuntimeParseResult", "successful result type unchanged")
+  assert_equal(success.matched, true, "successful match unchanged")
+  assert_equal(success.cursor_code_unit, 1, "successful cursor unchanged")
+  assert_equal(success.value, json.null, "successful value unchanged")
+  assert_equal(success.output[1], json.null, "successful output unchanged")
 end)
 
 test("runtime control and local stores match the cross-backend rule contract", function()

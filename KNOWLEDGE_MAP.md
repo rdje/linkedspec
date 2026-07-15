@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **522** facts · **3602** question keys.
+> **523** facts · **3609** question keys.
 
 ## Questions → fact
 
@@ -839,6 +839,7 @@
 - "does Lua restore callback bindings after an error" -> [lua-runtime-harray-tree-callbacks](docs/knowledge/lua-runtime-harray-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'run_frame|evaluate_tree_receiver_block|exact Perl reference callback result|runtime harray traversal' lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua restore scoped bindings after a callback error" -> [lua-runtime-builtin-final-codeblocks-with](docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && PERL5LIB=perl perl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(\"x\".with() { return(value) })}, q{return(\"x\".with({ return(value) }))}) { print LinkedSpec::call_spec_handler_subst(q{Top},$s), qq{\\n}; }'`
 - "does Lua run lifecycle blocks in order" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua runtime expose structured diagnostics" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "does Lua set_key create an absent harray target" -> [lua-runtime-named-harray-mutation](docs/knowledge/lua-runtime-named-harray-mutation.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua snapshot source before compilation" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua split array target mutate arrays" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
@@ -849,6 +850,7 @@
 - "does Lua split_tagged_records copy carried arrays" -> [lua-runtime-tagged-record-construction](docs/knowledge/lua-runtime-tagged-record-construction.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'split_tagged_records|runtime split tagged records' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua statement split mutate its source" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua string receiver split mutate its source" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua structured diagnostics change successful parse output" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support array flat flat_array and concat_arrays" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua support count_keys sorted_keys sorted_values and has_key" -> [lua-runtime-harray-views](docs/knowledge/lua-runtime-harray-views.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'count_keys|sorted_keys|sorted_values|has_key|runtime deterministic harray views' lua/src/linkedspec/interpreter.lua lua/test/run.lua docs/linkedspec-book/src/appendix/helper-contract-catalog.md`
@@ -1502,6 +1504,8 @@
 - "how do Julia AST types serialize to JSON" -> [julia-frontend-ast-json-contract](docs/knowledge/julia-frontend-ast-json-contract.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "how do Julia controlled fixtures parse staged function shells" -> [julia-controlled-corpus-execution](docs/knowledge/julia-controlled-corpus-execution.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "how do Lua AST nodes serialize to JSON" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how do Lua callers attach spec name and path" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
+- "how do Lua callers serialize runtime diagnostics" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "how do Lua retv and direct output work" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how do Lua scalar array and harray stores work" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "how do Lua user functions resolve before helpers" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -1643,6 +1647,7 @@
 - "how does Lua parse semicolon statement separators" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua prepare user function invocation frames" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua preserve function body parse jobs" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "how does Lua preserve the deepest failing rule" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "how does Lua project descriptor JSON" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua regex split handle zero width" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua reject array name and hash name selectors" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
@@ -2522,6 +2527,7 @@
 - "what is LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER" -> [perl-actionir-ast-covered-call-diagnostics](docs/knowledge/perl-actionir-ast-covered-call-diagnostics.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "what is LinkedSpecTraceConfig in Julia" -> [julia-trace-controls-sinks](docs/knowledge/julia-trace-controls-sinks.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "what is LinkedSpecTraceConfig" -> [dart-trace-controls-sinks](docs/knowledge/dart-trace-controls-sinks.md) · 2026-07-09 · reverify: `cd dart && dart test test/trace_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'LinkedSpecTraceConfig|LinkedSpecTraceEmitter|parseWithTrace|executeWithTrace|DART-BACKEND-PARITY\\.4\\.5\\.2' dart/lib dart/test docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src/public-api/trace-api.md`
+- "what is Lua RuntimeDiagnostic" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "what is OwnerDispatch and why do all owners use it" -> [ownerdispatch-shared-seam](docs/knowledge/ownerdispatch-shared-seam.md) · 2026-06-12 · reverify: `grep -l 'OwnerDispatch' perl/LinkedSpec/*.pm perl/LinkedSpec/ActionIR/*.pm | wc -l`
 - "what is RTLUTILS-REGEX-HANG" -> [rtlutils-regex-hang](docs/knowledge/rtlutils-regex-hang.md) · 2026-06-18 · reverify: `! test -e perl/RTLUtils.pm && ! test -e perl/FSMGen.pm && echo 'subsystem retired (LEGACY-VHDL-RETIRE)'   # RESOLVED 2026-06-22: phase0 now 960/960 green end-to-end (PHASE0-BACKHALF-TRIAGE); subtest-131 HTML::PathLinks smoke excised by NONCORE-QUARANTINE.3`
 - "what is RuntimeContext and why is it important" -> [runtimecontext-boundary](docs/knowledge/runtimecontext-boundary.md) · 2026-06-12 · reverify: `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
@@ -2934,6 +2940,7 @@
 - "where are Lua native artifacts written" -> [lua-toolchain-package-policy](docs/knowledge/lua-toolchain-package-policy.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "where are Lua portmap simenv ebnf and lib reader corpus cases owned" -> [lua-string-corpus-proof-routing](docs/knowledge/lua-string-corpus-proof-routing.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && rg -n 'control_if|print|--execute|portmap_constant|lib_reader_cattribute' lua/src/linkedspec docs/tasks/LUA-BACKEND-PARITY.md`
 - "where are Lua rule modes and body element types" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "where are Lua runtime diagnostic fields" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "where are Perl block taking helper and receiver methods declared" -> [perl-generic-final-codeblock-normalization](docs/knowledge/perl-generic-final-codeblock-normalization.md) · 2026-07-12 · reverify: `PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t && python3 tools/check_callable_codeblock_contract.py`
 - "where are Rust declared working variables scoped" -> [rust-declare-type-token-rule-scope](docs/knowledge/rust-declare-type-token-rule-scope.md) · 2026-07-04 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal_3_2 -- --nocapture && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`
 - "where are Rust expression-valued blocks implemented" -> [terse-rust-expression-valued-block-seams](docs/knowledge/terse-rust-expression-valued-block-seams.md) · 2026-06-29 · reverify: `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core expression_valued_block && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_3 && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
@@ -5753,6 +5760,15 @@ _Lua runtime interpreter executes compiled modes, lifecycle flow, local child di
 - **evidence:** `LUA-BACKEND-PARITY.4.2 adds lua/src/linkedspec/interpreter.lua and exports runtime_engine(...), runtime_parse(...), runtime_execute(...), typed results/events/errors, and JSON projection. lua/test/run.lua locks default/AND/OR/repetition modes, action/blind children, lifecycle order, local stores, retv, return/next/exit_now, bounds, cursors, direct output, false/null identity, recursion, zero progress, and typed failures. tools/run_lua_local.sh passes 66/66 on PUC Lua and LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-runtime-rule-interpreter.md`](docs/knowledge/lua-runtime-rule-interpreter.md)
+
+### lua-runtime-structured-diagnostics
+_Lua runtime failures carry neutral RuntimeDiagnostic payloads with deepest-rule attribution_
+
+- **answers:** does Lua runtime expose structured diagnostics | what is Lua RuntimeDiagnostic | where are Lua runtime diagnostic fields | how does Lua preserve the deepest failing rule | how do Lua callers attach spec name and path | how do Lua callers serialize runtime diagnostics | does Lua structured diagnostics change successful parse output
+- **date:** 2026-07-15 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.4.1 adds RuntimeDiagnostic, diagnostic-carrying RuntimeInterpreterException tables, optional engine spec_name/spec_path, rule/input/top-stage attribution, and focused dual-ABI proof at 126/126.`
+- **reverify:** `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
+- **source:** [`docs/knowledge/lua-runtime-structured-diagnostics.md`](docs/knowledge/lua-runtime-structured-diagnostics.md)
 
 ### lua-runtime-switch-statement-controls
 _Lua executes attached and marker switch statements through indexed ranges_
