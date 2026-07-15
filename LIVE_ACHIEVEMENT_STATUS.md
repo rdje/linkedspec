@@ -8,8 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.4.3.7.6 — close Lua capture cursor parity**
+  (DONE — parent `.4.3.7` closed; diagnostic output helper `.4.3.8` is next).
+
+  **Result:** Exact source comparison finds 62/62 current capture/mark/input/cursor/control calls in contracts,
+  interpreter dispatch, and focused execution sources, plus four separately timing-tested marker spellings. PUC
+  Lua and LuaJIT pass 121/121; complete-mark, 246/105+1/122 coverage, selector 57/27/0, punctuation-light, and
+  capability 64/0/0 gates pass. Public/API/book/KM/task state is aligned. Generated Lua support remains
+  `.8.1-.8.4`; no implementation or capability behavior changed.
+
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.19.0 — plan write vivification and bang mutation**
-  (DONE — accepted post-current-parity direction only; Lua `.4.3.7.6` remains executable next).
+  (DONE — accepted post-current-parity direction only; Lua `.4.3.7.6` was executable next).
 
   **Result:** ADR `0036` accepts write-only missing-container creation with deterministic segment-kind selection,
   no wrong-kind coercion, dense arrays, and atomic copy-on-write commit. `map_leaves!` is the only v1 bang
@@ -19,7 +28,7 @@ Current execution status for interruption-safe batch workflow recovery.
   parser identifiers remain bang-free. `.19.1-.19.7` are gated behind full current parity; no behavior changed.
 
 - 2026-07-15: **FUTURE-PARITY-BACKLOG.18.1 — govern expressive spec authoring**
-  (DONE — ADR `0035` adds authoring governance only; Lua `.4.3.7.6` remains executable next).
+  (DONE — ADR `0035` adds authoring governance only; Lua `.4.3.7.6` was executable next).
 
   **Result:** Universal `.spec` evolution must now be terse, readable, and highly expressive simultaneously.
   Terseness removes redundant ceremony, not semantic signal; readability preserves locally visible structure,

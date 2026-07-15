@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (ADR `0036` plans write-only nested vivification plus receiver-mutating
-  `map_leaves!`; Lua exhaustive capture/cursor no-drift `.4.3.7.6` remains the executable frontier).
+- Last updated: `2026-07-15` (Lua capture/cursor `.4.3.7` closes at exact 62-call/four-marker no-drift;
+  diagnostic output helper `.4.3.8` is the executable frontier; ADR `0036` remains parity-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4592,10 +4592,11 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 169 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, and overloads pass 120/120 on PUC Lua and LuaJIT. |
 | 170 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark events execute after their matched actions at 121/121 on both Lua ABIs. |
 | 171 | `FUTURE-PARITY-BACKLOG.18.0` | `done` | Exact 91-row parity-gated requirements program is ratified; no format code started. |
-| 172 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive Lua capture/cursor helper and public-surface no-drift. |
+| 172 | `LUA-BACKEND-PARITY.4.3.7.6` | `done` | Exact 62-call/four-marker native Lua capture/cursor parent closes at 121/121. |
 | 173 | `FUTURE-PARITY-BACKLOG.18.1` | `done` | ADR 0035 governs concise, readable, expressive universal `.spec` authoring without behavior change. |
 | 174 | `FUTURE-PARITY-BACKLOG.19.0` | `done` | ADR 0036 plans write-only nested vivification and named-receiver `map_leaves!`; no behavior changed. |
 | 175 | `FUTURE-PARITY-BACKLOG.19.1` | `pending` / dependency-gated | Lock executable neutral contracts only after complete current-backend parity. |
+| 176 | `LUA-BACKEND-PARITY.4.3.8` | `active` | Implement caller-owned diagnostic output events and retain immediate typed exit control. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5237,8 +5238,9 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-07-15` | `FUTURE-PARITY-BACKLOG.19.0` | KM retrieval; five ActionIR parser-source audit; current nested-write/traversal contract audit; Perl direct output; Rust `terse_11_4` 3/3; Dart exact focused 1/1; Julia complete suite via stacked depot after one empty-depot network-resolution failure; Lua 121/121 dual ABI; ADR 0036; task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Write-only deterministic creation and named-receiver `map_leaves!` are fully planned but dependency-gated; current behavior/capability unchanged and Lua `.4.3.7.6` remains active. |
-| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR 0035; task/program/roadmap/index/live-doc/book/KM sync; uniform-binding precedent; traversal-name exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Authoring quality is a hard future feature gate; no syntax, alias, backend, or format behavior changed; Lua `.4.3.7.6` remains active. |
+| `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.6` | Source-derived 62-call contract/runtime/execution comparison; four marker spellings/timing; Lua 121/121 on PUC Lua and LuaJIT; complete-mark 7/3; coverage 246/105+1/122; selector 57/27/0; punctuation-light 6/4/6; capability 64/0/0; API/book/KM/task/live/roadmap/memory sync; governance/book/whitespace. | PASS. Native capture/cursor parent `.4.3.7` closes with generated support still `.8.1-.8.4`; diagnostic output `.4.3.8` activates; no behavior changed. |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.19.0` | KM retrieval; five ActionIR parser-source audit; current nested-write/traversal contract audit; Perl direct output; Rust `terse_11_4` 3/3; Dart exact focused 1/1; Julia complete suite via stacked depot after one empty-depot network-resolution failure; Lua 121/121 dual ABI; ADR 0036; task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Write-only deterministic creation and named-receiver `map_leaves!` are fully planned but dependency-gated; current behavior/capability unchanged and Lua `.4.3.7.6` was the next frontier. |
+| `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR 0035; task/program/roadmap/index/live-doc/book/KM sync; uniform-binding precedent; traversal-name exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Authoring quality is a hard future feature gate; no syntax, alias, backend, or format behavior changed; Lua `.4.3.7.6` was the next frontier. |
 | `2026-07-15` | `LUA-BACKEND-PARITY.4.3.7.4` | Typed compiled slot events; post-action/pre-LE timing; all three anonymous marker spellings plus named marks; `é(α🙂,βγ)` native/reconstructed proof; exact shipped EBNF `@move_pos`; typed malformed names/fragments/AST; Lua 121/121 on PUC Lua and LuaJIT; canonical capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Placement-sensitive marker execution closes on the existing stores without surface drift; `.4.3.7.6` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR 0034; dedicated exact-row task tree; roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS. Parity-first format requirements program is durable; no behavior or format implementation changed; Lua `.4.3.7.4` remains active. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.17.5` | Equal 246-name inventories; 105 corpus + exact fixture; independent 122-public-contract reverse check; nine exclusions; symmetric `clear_mark` mutation; exact neutral/Perl/Rust; complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 dual ABI, Rust full/CLI 61x2; canonical capability 64/0/0, coverage 246/105+1/122, CLI 61x2, Phase 0 `1..1031`/633s; docs/KM/doctrines/book/whitespace. | PASS. Symmetric omissions fail independently, parent `.17` closes, and Lua `.4.3.7.3` activates. |
@@ -5365,6 +5367,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 proof, generated routing, parent closure, and diagnostic-helper handoff. |
 | `FUTURE-PARITY-BACKLOG.19.0` | `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation` | ADR 0036, exact current five-backend audit, neutral/mechanism/backend split, explicit exclusions, and parity gate. |
 | `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, program invariant, realistic authoring proof, uniform-binding precedent, and informative traversal names. |
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action slot events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
@@ -5493,19 +5496,25 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-15`: Lua `.4.3.7.6` derives 62 unique current capture/mark/input/cursor/control call names and proves
+  exact 62/62 agreement across contract classification, interpreter dispatch, and focused execution sources.
+  Preferred `@capture_slice`, two compatibility spellings, and `@mark(name)` remain four separately timing-tested
+  marker forms. PUC Lua/LuaJIT pass 121/121; complete-mark, coverage 246/105+1/122, selector 57/27/0,
+  punctuation-light, and capability 64/0/0 gates pass. Parent `.4.3.7` closes, generated Lua stays `.8.1-.8.4`,
+  and diagnostic output `.4.3.8` activates without behavior change.
 - `2026-07-15`: `.19.0` adopts ADR `0036` after exact current five-backend audit. Nested creation is future
   write-only behavior: segment kind selects missing array/harray, reads remain pure, existing wrong kinds are not
   coerced, arrays stay dense, and isolated root commit is atomic. `map_leaves!` is the sole v1 bang candidate and
   requires a bare named receiver; callback results replace leaves over stable paths/original root-kind shape, and
   `value` stays non-aliased. Other bang spellings are excluded. `.19.1-.19.7` split neutral contracts, each
   backend mechanism, and admission behind full current parity. Current behavior does not change; Lua `.4.3.7.6`
-  remains active.
+  was the next frontier at that planning slice.
 - `2026-07-15`: `.18.1` adopts ADR `0035`: universal `.spec` sources must be terse, readable, and highly
   expressive simultaneously. Terseness removes redundant ceremony rather than meaning; readability preserves
   locally visible structure/value flow/mutation/scope/recovery and precise diagnostics; expressiveness comes from
   small typed reusable mechanisms rather than format-specific or host escapes. Uniform binding is the precedent.
   Recursive `walk_leaves`/`map_leaves`/`reduce_leaves` keep `_leaves`, so no shallow-looking aliases are added.
-  No behavior changed and Lua `.4.3.7.6` remains the executable frontier.
+  No behavior changed and Lua `.4.3.7.6` was the next executable frontier.
 - `2026-07-15`: Lua `.4.3.7.4` compiles `@capture_slice`, both compatibility aliases, and `@mark(name)` into
   typed preceding-slot events, preserves them in public compiled state, and executes them after that slot's
   action/child dispatch and before `LE` through the existing anonymous/named stores. Multibyte native and

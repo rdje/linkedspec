@@ -119,8 +119,9 @@ The same gate also enforces exhaustive current ActionIR coverage:
 perl tools/check_language_capability_coverage.pl
 ```
 
-That checker requires exact Dart/Julia inventory identity, all 239 current names in the mdBook and 105-case
-neutral corpus, and every current Perl contract call used by the corpus in both backend inventories.
+That checker requires exact Dart/Julia/Lua inventory identity at 246 current names, occurrence across the mdBook
+and governed 105-case corpus plus exact named-mark fixture, every one of 122 independently derived public Perl
+contracts in each backend inventory, and rejection of nine classified non-public names.
 
 ## Focused Rust Gate
 

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (placement-sensitive split/mark rule members pass 121/121 on PUC Lua and LuaJIT;
-  exhaustive capture/cursor no-drift `.4.3.7.6` is the active executable frontier)
+- Last updated: `2026-07-15` (capture/cursor parent `.4.3.7` closes through exhaustive 62-call/four-marker
+  no-drift at 121/121 on PUC Lua and LuaJIT; diagnostic output helper `.4.3.8` is the active executable frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1604,15 +1604,22 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7`
-  Status: `active`
+  Status: `done`
   Goal: Implement capture-slice, named-mark, input, and explicit cursor-state helper families.
   Children: `.4.3.7.0`, `.4.3.7.1`, `.4.3.7.2`, `.4.3.7.3`, `.4.3.7.4`, `.4.3.7.5`, `.4.3.7.6`
   Dependencies: `.4.3.1`, `.4.3.6`
   Acceptance: Capture anchors/slices/boundaries, rule-local named marks, Unicode character positions/lengths,
     input views, save/restore and entry/local rewinds, consume continuation, earliest boundary selection, and
     unresolved-rule behavior match the runtime contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** The 62 unique current capture/mark/input/cursor/control call names agree
+    exactly across Lua contracts, the 246-name admitted inventory, interpreter dispatch, and focused execution
+    sources. Four placement spellings compile/execute through typed post-action slot events. Governed anonymous,
+    named, complete-mark, cursor-control, and boundary fixtures remain exact; all public positions and widths use
+    Unicode characters over byte-safe internal state. The dual-ABI gate passes 121/121, complete-mark and
+    punctuation-light checkers pass, coverage is 246 names over 105+1 occurrence sources with all 122 public Perl
+    contracts present, capability remains 64/0/0, and public selector admission remains 57/27/0. Public/API/book/
+    KM/task/live state agrees. Helper caveats remain `.5`; generated preservation/execution remains `.8.1-.8.4`.
+  Commit: closed by `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.0`
   Status: `done`
@@ -1730,18 +1737,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.6`
-  Status: `active`
+  Status: `done`
   Goal: Close exhaustive Lua capture/cursor helper and public-surface no-drift.
   Dependencies: `.4.3.7.1`-`.4.3.7.5`
   Acceptance: Helper inventory, governed fixtures, marker timing, dual-ABI runtime gates, API docs, mdBook,
     Knowledge Map, task/live state, and later capability routing agree with no premature generated-source or
     capability claim; the documented-mark inventory gap has an explicit cross-backend disposition; parent
     `.4.3.7` closes and diagnostic helper `.4.3.8` becomes the sole active frontier.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** A source-derived audit proves 62/62 current calls in the contract family,
+    62/62 interpreter dispatch, and 62/62 focused execution-source occurrence. The marker proof covers preferred
+    `@capture_slice`, compatibility `@capture_from_here`/`@move_pos`, and `@mark(name)` with exact post-action/
+    pre-`LE` timing. `bash tools/run_lua_local.sh` passes 121/121 on both separately built ABIs. The exact seven-
+    helper mark checker, 246/105+1/122 coverage report, 57/27/0 public-selector guard, punctuation-light checker,
+    and capability 64/0/0 all pass. The former documented-mark gap is resolved cross-backend by completed `.17`.
+    API/book/KM/task/live surfaces close native capture/cursor parity without claiming generated Lua support;
+    `.8.1-.8.4` retain preservation/execution/admission. No parser/runtime/fixture/capability behavior changed.
+  Commit: `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`
 
 - ID: `LUA-BACKEND-PARITY.4.3.8`
-  Status: `pending`
+  Status: `active`
   Goal: Implement runtime diagnostic output helpers over a caller-owned event boundary.
   Dependencies: `.4.3.2`, `.4.3.4`, `.4.3.7`
   Acceptance: `print`, `say`, and `print_each` evaluate eagerly, stay out of parse-result values, are quiet without
@@ -1926,8 +1940,9 @@ Julia `.17.3` match it through native/generated/CLI routes with complete backend
 now consumes the unchanged contract through native/serialized routes at 119/119 on PUC Lua and LuaJIT. Final admission
 `.17.5` closes at 246 shared names with all 122 public Perl contracts independently checked. `.4.3.7.3` now
 extends that same store and dispatcher across the governed named-span and bridge family at 120/120 on PUC Lua and
-LuaJIT. Placement-sensitive split/mark rule members now execute at their owning slots at 121/121; exhaustive
-capture/cursor no-drift `.4.3.7.6` is active.
+LuaJIT. Placement-sensitive split/mark rule members execute at their owning slots at 121/121. Exact source-derived
+closeout finds 62/62 current calls in contracts, runtime dispatch, and focused execution sources, plus four exact
+marker spellings. Parent `.4.3.7` is closed; diagnostic output helper `.4.3.8` is the sole active frontier.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2002,14 +2017,37 @@ capture/cursor no-drift `.4.3.7.6` is active.
 | 69 | `LUA-BACKEND-PARITY.4.3.6.5.1.2` | `done` | Sorted scoped copied Lua harray walk/map/reduce pass 113/113 on both ABIs. |
 | 70 | `LUA-BACKEND-PARITY.4.3.6.5.2` | `done` | Root-kind array traversal and zero-based scoped callbacks pass 114/114 on both ABIs. |
 | 71 | `LUA-BACKEND-PARITY.4.3.6.6` | `done` | Closed block/control/callback no-drift and routed later function/callable obligations exactly. |
-| 72 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
+| 72 | `LUA-BACKEND-PARITY.4.3.7` | `done` | Complete capture/mark/input/cursor family closes at exact 62-call/four-marker no-drift. |
 | 73 | `LUA-BACKEND-PARITY.4.3.7.0` | `done` | Split six runtime mechanisms plus no-drift and exposed the symmetric documented-mark inventory gap. |
 | 74 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit save/restore/rewind controls pass 115/115 on both ABIs. |
 | 75 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls share byte-safe state and pass 116/116 on both ABIs. |
 | 76 | `LUA-BACKEND-PARITY.4.3.7.5` | `done` | Non-consuming earliest usable boundary and EOF/no-op cases pass 117/117 on both ABIs. |
 | 77 | `LUA-BACKEND-PARITY.4.3.7.3` | `done` | Governed named writers, spans, bridges, overloads, and valid-only mutation pass 120/120 on PUC Lua and LuaJIT. |
 | 78 | `LUA-BACKEND-PARITY.4.3.7.4` | `done` | Typed split/named-mark slot events execute after their matched actions at 121/121 on both ABIs. |
-| 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `active` | Close exhaustive capture/cursor helper and public-surface no-drift. |
+| 79 | `LUA-BACKEND-PARITY.4.3.7.6` | `done` | Closed exact 62-call/four-marker native capture/cursor no-drift at 121/121 on both ABIs. |
+| 80 | `LUA-BACKEND-PARITY.4.3.8` | `active` | Implement caller-owned diagnostic output helpers and retain immediate typed exit control. |
+
+### `LUA-BACKEND-PARITY.4.3.7.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Every mechanism child was complete, but the parent and public surfaces still
+  advertised active capture/cursor work, and the mdBook handoff retained the superseded 239/237-name inventory
+  account from before complete named-mark admission.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.3.7.6` intentionally owns the exhaustive source/public closeout after all
+  behavior leaves. The older handoff prose described the former corpus-seeded reverse check and had not consumed
+  `.17.5`'s 246-name inventory plus independent 122-public-contract proof.
+- [x] **FIX** — Derived one exact 62-name family from Lua capture/mark, input/cursor, and cursor-control contracts;
+  matched it against runtime dispatch and focused execution sources; retained four placement-marker spellings;
+  corrected the public inventory account; closed `.4.3.7`; and activated only `.4.3.8`. Generated preservation,
+  direct generated execution, subset admission, and capability closeout remain `.8.1-.8.4`.
+- [x] **ADDRESSED (verified)** — Contract/runtime/execution-source comparison is 62/62 with zero missing or extra;
+  `bash tools/run_lua_local.sh` passes 121/121 on PUC Lua and LuaJIT. The complete-mark checker passes seven calls
+  and three mutations; coverage reports 246 names, 105+1 occurrence sources, 0/122 public-contract omissions, and
+  zero admitted exclusions; the public selector guard remains 57/27/0.
+- [x] **NO REGRESSION** — Punctuation-light proof remains 6 standalone/4 receiver/6 invalid and capability census
+  remains 64/0/0. This leaf changes no parser, compiler, runtime, fixture, helper, inventory, generated-source, or
+  capability behavior.
+- [x] **LOCKSTEP** — Lua API README, mdBook, Knowledge Map, task trees, roadmaps, architecture/live docs, changes,
+  development notes, and bounded memory agree that native capture/cursor parity is closed and `.4.3.8` is next.
 
 ### `LUA-BACKEND-PARITY.4.3.7.4` Acceptance Checklist
 
@@ -3044,3 +3082,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.4.3.7.5` | `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture` | Earliest usable rule lookahead, non-consumption, EOF/no-op edges, caching, and dual-ABI proof. |
 | `LUA-BACKEND-PARITY.4.3.7.3` | `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans` | Governed rule-local writers/spans/bridges, Unicode projection, valid-only mutation, overload separation, and PUC Lua/LuaJIT proof. |
 | `LUA-BACKEND-PARITY.4.3.7.4` | `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers` | Typed post-action split/named-mark events, serialized state, shipped EBNF owner, malformed rejection, and 121/121 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.4.3.7.6` | `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity` | Exact 62-call/four-marker no-drift, 246/105+1/122 admission proof, generated routing, parent closure, and diagnostic-helper handoff. |

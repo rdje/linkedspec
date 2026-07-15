@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.4.3.7.6 — close Lua capture cursor parity
+
+Closed the native Lua capture/mark/input/cursor parent after a source-derived exhaustive audit. The current
+contract family contains 62 unique calls; all 62 are present in the admitted inventory, all 62 have interpreter
+dispatch, and all 62 occur in the focused execution proof sources. Preferred `@capture_slice`, compatibility
+`@capture_from_here` / `@move_pos`, and `@mark(name)` remain four separately proved placement spellings with
+post-action/pre-`LE` timing.
+
+The complete PUC Lua and LuaJIT gates pass 121/121. The exact seven-helper mark contract, 246-name/105+1-source/
+122-public-contract coverage report, 57-file public selector guard, punctuation-light proof, and capability
+64/0/0 all pass. The mdBook's historical 239/237-name account now reflects complete 246-name admission and the
+independent public-contract check.
+
+Parent `.4.3.7` is done and diagnostic output helper `.4.3.8` is active. Generated Lua compiled-state
+preservation, direct execution, subset admission, and capability closeout remain `.8.1-.8.4`; this closeout changes
+no parser, compiler, runtime, fixture, helper, inventory, generated-source, or capability behavior.
+
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.19.0 — plan write vivification and bang mutation
 
 ADR `0036` adopts a future, post-current-parity direction without changing current behavior. Nested assignments
@@ -53,7 +70,7 @@ and all 105 manifest checks. Canonical CI passes capability 64/0/0, coverage 246
 admission 57/27/0, CLI 61x2, Phase 0 `1..1031` in 633 seconds, and all doctrine/documentation gates. The selector
 checker count moves from 56 to 57 solely because `.18.0` added one discovered mdBook page; classified/current
 counts remain 27/0. No helper, fixture, inventory, generated-source, or capability surface changes; exhaustive
-capture/cursor no-drift `.4.3.7.6` becomes active.
+capture/cursor no-drift `.4.3.7.6` was activated.
 
 ## 2026-07-15 — FUTURE-PARITY-BACKLOG.18.0 — adopt structured-text requirements program
 

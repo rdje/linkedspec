@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.6` — close families from exact sources, not a green count alone): The
+  capture/cursor parent has 62 unique current call names across capture/mark, input/cursor, and explicit cursor
+  control families. Compare contract classification to runtime dispatch and focused execution sources; all three
+  must be 62/62 with no missing or extra. Keep placement markers separate because they are grammar/timing events,
+  not calls. Historical inventory prose must distinguish the former 237/239 blind spots from the current 246-name
+  inventory, 105+1 occurrence sources, and independent 122-public-contract check. Native interpreter closure does
+  not imply generated-source support; preserve that boundary under `.8.1-.8.4`.
+
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.19.0` — borrow the useful ideas, not host-language accidents): Portable
   autovivification belongs only on writes. Determine a missing container from the next evaluated segment (integer
   array, string harray), never overwrite an existing wrong-kind value, keep arrays dense, and commit an isolated
@@ -9,7 +17,7 @@
   `reduce_leaves!` do not. V1 uses a bare named binding, original-shape/root-kind traversal, stable copied paths,
   callback-result replacement, and atomic rebind/return. `value` remains scoped data, never a secret writable
   alias. Current method parsers are identifier/word based and all need an explicit typed bang seam. ADR `0036`
-  and `.19.1-.19.7` own the future contract/rollout after current parity; Lua `.4.3.7.6` remains next.
+  and `.19.1-.19.7` own the future contract/rollout after current parity; Lua `.4.3.7.6` was then next.
 
 - 2026-07-15 (`FUTURE-PARITY-BACKLOG.18.1` — terseness removes redundancy, not information): Evaluate future
   `.spec` proposals against terseness, readability, and expressiveness together. Prefer one canonical abstraction,
@@ -19,7 +27,7 @@
   `binding_kind_mismatch` is both shorter and clearer than selector namespaces or implicit coercion. Keep
   `walk_leaves`/`map_leaves`/`reduce_leaves`: `_leaves` is semantic, not ceremony. Future format-driven features
   must include realistic `.spec` excerpts and invalid/ambiguous boundaries. ADR `0035` governs this; no behavior
-  changed, and Lua `.4.3.7.6` remains active.
+  changed, and Lua `.4.3.7.6` was the then-active frontier.
 
 - 2026-07-15 (`LUA-BACKEND-PARITY.4.3.7.4` — placement belongs in compiled state, timing belongs after action
   dispatch): Split markers are grammar-slot events, not helper calls. Preserve a typed event on the preceding

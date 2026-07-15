@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua native capture/cursor parity is closed. A source-derived inventory finds 62 unique
+  current capture/mark/input/cursor/control calls and exact 62/62 agreement across ActionIR contract family,
+  admitted names, interpreter dispatch, and focused execution sources. Four placement-marker spellings remain
+  separately timing-tested through typed post-action/pre-`LE` events. PUC Lua and LuaJIT pass 121/121; complete-
+  mark, 246/105+1/122 coverage, selector 57/27/0, punctuation-light, and capability 64/0/0 gates pass. Parent
+  `.4.3.7` closes without generated-source claims; `.8.1-.8.4` retain those obligations and diagnostic output
+  helper `.4.3.8` is the active Lua frontier.
 - `2026-07-15` refresh: ADR `0036` adopts a post-current-parity direction for write-only missing-container
   creation and explicit receiver-mutating `map_leaves!`. The next evaluated segment selects a missing array versus
   harray; reads remain pure, existing wrong kinds are never coerced, arrays remain dense, and copy-on-write root
@@ -12,15 +19,15 @@ This document is the current high-level technical reading of the project shape. 
   root-kind rules, uses copied callback results as replacements, retains complete stable receiver-root-relative
   paths, and does not make `value` a writable alias. No other bang methods/identifiers are adopted. Current source
   and focused Perl/Rust/Dart/Julia/Lua proof confirm intermediate non-vivification and bang-invalid grammar;
-  `.19.1-.19.7` are dependency-gated behind complete current parity and Lua `.4.3.7.6` remains active.
+  `.19.1-.19.7` are dependency-gated behind complete current parity; Lua `.4.3.7.6` was the then-active frontier.
 - `2026-07-15` refresh: ADR `0035` makes terse, readable, and highly expressive authoring a hard constraint on
   future universal `.spec` evolution. Terseness removes redundant ceremony rather than semantic signal;
   readability keeps structure, value flow, mutation, scope, recovery, and typed diagnostics locally predictable;
   expressiveness comes from small typed orthogonal mechanisms rather than format-specific or host escapes.
   Uniform binding is the positive precedent: one four-kind value binding, runtime-kind dispatch, and typed
   wrong-kind failure. Recursive tree traversal keeps `walk_leaves`/`map_leaves`/`reduce_leaves`; shorter aliases
-  would obscure recursive semantics. This planning slice changes no syntax or behavior; Lua `.4.3.7.6` remains
-  the executable frontier.
+  would obscure recursive semantics. This planning slice changes no syntax or behavior; Lua `.4.3.7.6` was the
+  executable frontier at that commit.
 - `2026-07-15` refresh: Lua now represents placement-sensitive split/named-mark rule members as typed compiled
   events attached to the preceding regex slot. Compiled and outward state preserve those events; runtime applies
   them after slot action/child dispatch and before `LE` through the existing anonymous capture boundary and
@@ -29,7 +36,7 @@ This document is the current high-level technical reading of the project shape. 
   spellings, two named marks, Unicode positions, the exact shipped EBNF `@move_pos`, and malformed-marker typed
   boundaries pass 121/121 on PUC Lua and LuaJIT. Canonical CI passes capability 64/0/0, coverage 246/105+1/122,
   selector admission 57/27/0, CLI 61x2, and Phase 0 `1..1031` in 633 seconds. Exhaustive capture/cursor no-drift
-  `.4.3.7.6` is the active Lua frontier.
+  `.4.3.7.6` was activated by that slice.
 - `2026-07-15` refresh: ADR `0034` adopts a 91-row Unicode structured-text catalog as a requirements generator for
   post-parity `.spec` evolution. `STRUCTURED-TEXT-FORMAT-PROGRAM` hard-gates execution on complete current
   Perl/Rust/Dart/Julia/Lua parity, then establishes decoded-input/provenance, source-aware AST/trivia/diagnostics,
@@ -48,7 +55,7 @@ This document is the current high-level technical reading of the project shape. 
   passes native and reconstructed execution, the complete Lua gate passes 120/120 on PUC Lua and LuaJIT, and
   canonical CI preserves capability 64/0/0 and coverage 246/105+1/122, passes CLI 61x2 and Phase 0 `1..1031` in
   637 seconds, and clears every doctrine/documentation gate. Only placement-sensitive split/mark event execution
-  remains active in `.4.3.7.4` before capture/cursor no-drift closure.
+  was then active in `.4.3.7.4` before capture/cursor no-drift closure.
 - `2026-07-15` refresh: Complete named-mark admission closes at one aligned 246-name Dart/Julia/Lua inventory.
   The coverage gate no longer relies on corpus discovery for reverse completeness: it derives 131 identifier-
   shaped Perl contracts, subtracts an exact classified set of nine compatibility/legacy/internal contracts, and

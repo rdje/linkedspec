@@ -10,19 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.18.1` — govern expressive universal `.spec` authoring.
-- latest_commit: `1e8a1d1f` — `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring`.
-- prepared_commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`.
-- active_work_unit: `.19.0` has audited current five-backend nested writes, traversal callbacks/paths, and method
-  grammar; ADR `0036` plus task/roadmap/book/KM/live synchronization are drafted. Final focused governance/book
-  checks, commit, brief cleanup, and clean-tree verification remain.
-- next_action: verify and commit `.19.0`, clear the brief, confirm a clean tree, then resume executable Lua
-  exhaustive capture/cursor/public-surface no-drift `LUA-BACKEND-PARITY.4.3.7.6`. Keep `.19.1+` pending until
-  complete current-backend parity.
-- current_proof: current nested writes do not vivify intermediates; Perl direct, Rust 3/3, Dart focused, Julia
-  complete stacked-depot, and Lua 121/121 dual-ABI proof pass. Current method tokens exclude `!`. ADR `0036`
-  accepts write-only deterministic creation, dense arrays, no coercion, atomic commit, and only named-receiver
-  `map_leaves!` v1; callback result replaces leaves through stable paths and `value` remains non-aliased.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.0` — plan write vivification and bang mutation after parity.
+- latest_commit: `1d5a1577` — `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`.
+- prepared_commit: `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`.
+- active_work_unit: docs-only `.4.3.7.6` has exact 62-call/four-marker no-drift proof, closes parent `.4.3.7`,
+  preserves generated Lua ownership under `.8.1-.8.4`, and activates diagnostic output helper `.4.3.8`.
+- next_action: verify and commit `.4.3.7.6`, clear the brief, confirm a clean tree, then audit/split or implement
+  caller-owned `print`/`say`/`print_each` output events and retained immediate `exit_now` semantics under `.4.3.8`.
+- current_proof: Lua contracts/runtime/focused execution sources agree 62/62 with four marker spellings. PUC Lua
+  and LuaJIT pass 121/121; complete marks, coverage 246/105+1/122, selector 57/27/0, punctuation-light, and
+  capability 64/0/0 pass. `.19.1+` remains gated on complete current-backend parity.
 - latest_bootstrap_read: 2026-07-14 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -33,6 +30,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: `.19.0` planning/audit/docs/KM source await focused verification and
-  prepared commit. Do not resume `.4.3.7.6` before this lands and the tree is clean. `.19.1+` and the structured-
-  format execution tree remain dependency-gated on complete current parity.
+- blockers: none. in_flight_uncommitted: docs-only `.4.3.7.6` closeout awaits governance/book checks and prepared
+  commit before clean pivot to `.4.3.8`. `.19.1+` and structured-format execution remain parity-gated.

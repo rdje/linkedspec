@@ -125,11 +125,13 @@ four-command integration and now closes the exact CLI lane with one 4x2x61 drive
 
 ### Call-name coverage versus executable parity
 
-The capability audit now derives the same corrected 239 current ActionIR call names from Dart and Julia. Every
-name appears in this book and in the checked-in neutral corpus. The strict checker also derives current
-non-compatibility calls from the Perl ActionIR contract registry and rejects any such call used by the neutral
-corpus but omitted from the backend inventories. This reverse check closes the blind spot that let both backend
-lists omit `mark_capture_slice(...)` and `start_capture_slice_from(...)` while still agreeing at 237 names.
+The capability audit now derives the same 246 current ActionIR call names from Dart, Julia, and Lua. Every name
+appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus plus the exact
+complete-named-mark fixture. The strict checker independently derives 122 public identifier-shaped calls from the
+Perl ActionIR contract registry, requires every one in each backend inventory, and rejects nine classified
+compatibility/legacy/internal names. This supersedes two historical blind spots: aligned lists first omitted
+`mark_capture_slice(...)` and `start_capture_slice_from(...)` at 237 names, then all inventories omitted seven
+documented complete-mark helpers at 239 names because the old reverse check began with corpus occurrences.
 
 Vocabulary identity remains necessary but insufficient. A diagnostic 105-case run originally found Rust, Dart,
 and Julia at 100/105 despite recognizing the provisional vocabulary. The backend repair leaves aligned exhaustive
@@ -602,7 +604,7 @@ Helper/value breadth is deliberately ordered into separate Lua leaves before
 implementation: four-kind stores/access plus entry/match reads; scalar/string;
 numeric; arrays; harrays; codeblocks/controls/generic trailing blocks/tree
 callbacks; capture/mark/input/cursor state; diagnostic output; then exhaustive
-239-name and documentation no-drift. Each leaf depends only on earlier value
+246-name and documentation no-drift. Each leaf depends only on earlier value
 mechanisms and may split again before code. This keeps recognition of a helper
 name distinct from executable parity. `.4.3.1` has since closed core values.
 Scalar/string is recursively split: pure value transforms/comparisons/receivers
@@ -730,7 +732,11 @@ governed current/input/anonymous/copy writers, stable and valid-only advancing n
 both anonymous/named bridges at 120/120. Placement-sensitive `.4.3.7.4` then compiles preferred/compatibility
 anonymous markers and named marks into typed preceding-slot events, executes them after slot actions and before
 `LE`, preserves them through public source reconstruction, and passes 121/121 on PUC Lua and LuaJIT. Exhaustive
-capture/cursor no-drift `.4.3.7.6` is active.
+capture/cursor no-drift `.4.3.7.6` derives 62 unique capture/mark/input/cursor/control calls and finds exact 62/62
+agreement across contracts, interpreter dispatch, and focused execution sources. Together with the four exact
+placement-marker spellings, the parent closes at 121/121 on PUC Lua and LuaJIT. Native capture/cursor parity does
+not imply generated Lua support: compiled-state preservation, direct generated execution, subset admission, and
+capability closeout remain `.8.1-.8.4`. Diagnostic output helper `.4.3.8` is next.
 General user-function final
 `callback: codeblock` declaration and contextual execution remain
 explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
@@ -953,7 +959,7 @@ same fields as Dart and Julia.
 
 `canonical_action_helper_name(name)` covers the current numeric, symbol, and
 control aliases, including `=(target, value)` to `set`. The resolver and source
-validator share the exact 239-name `action_call_names` inventory. Unknown or
+validator share the exact 246-name `action_call_names` inventory. Unknown or
 non-current calls produce generic `unknown_helper`; structural fallback
 produces `raw_perl`. Neither can fall through to a Lua global.
 

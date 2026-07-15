@@ -82,7 +82,9 @@ This `README.md` is the **single entry point** to the project.
   neutral, public positions/lengths are character-based, and `capture_take()` versus `capture_take(name)` retains
   the anonymous/named overload split. Lua `.4.3.7.4` now compiles split/named-mark rule members into typed
   preceding-slot events and executes them after that slot's actions at 121/121 on PUC Lua and LuaJIT;
-  exhaustive capture/cursor no-drift `.4.3.7.6` is active. ADR
+  exhaustive `.4.3.7.6` proves exact 62/62 call agreement across contracts/runtime/focused execution sources plus
+  four placement-marker spellings, closes parent `.4.3.7`, and activates diagnostic output helper `.4.3.8`.
+  Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

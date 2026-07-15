@@ -15,7 +15,8 @@ status: confirmed
 tags: [lua, runtime, capture, marks, cursor, inventory, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.7.0 audited perl/LinkedSpec/ActionIR/Contracts.pm, Rust/Dart/Julia runtime implementations, governed fixtures, Lua state seams, and shipped markers. `.4.3.7.1` implements input/cursor controls at 115/115, `.4.3.7.2` implements all 16 anonymous capture calls at 116/116, and `.4.3.7.5` implements non-consuming earliest-boundary lookahead at 117/117 on PUC Lua and LuaJIT. Named marks and split-marker AST execution remain later leaves. The documented current mark helpers mark_entry_start/end, mark_match_start/end, mark_line, mark_col, and clear_mark are absent from all aligned 239-name backend inventories; tools/check_language_capability_coverage.pl checks inventory names against book/corpus and only reverse-checks Perl contracts that occur in the neutral corpus, so those identical omissions pass."
 evidence_update_2026_07_15: "FUTURE-PARITY-BACKLOG.17.4 adds Lua's parse-scoped rule-label/name/byte-offset mark store and exact seven-call family view at 119/119. FUTURE-PARITY-BACKLOG.17.5 admits the calls at 246 shared names and independently checks all 122 public Perl contracts. LUA-BACKEND-PARITY.4.3.7.3 extends that store across governed named writers/spans/bridges at 120/120. LUA-BACKEND-PARITY.4.3.7.4 compiles and executes preferred/compatibility split markers plus named marks through typed post-action slot events at 121/121 on PUC Lua and LuaJIT; .4.3.7.6 is the remaining closeout."
-reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_match_start|mark_line|clear_mark' lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md && rg -n '@(capture_slice|capture_from_here|move_pos|mark\\()' --glob '*.spec' specs rgx/subs/pgen"
+evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.4.3.7.6 derives 62 unique current capture/mark/input/cursor/control calls from Lua contracts and finds the same 62 in interpreter dispatch plus focused execution sources, with zero missing or extra. Preferred @capture_slice, compatibility @capture_from_here/@move_pos, and @mark(name) remain four separately proved placement spellings. The dual-ABI suite passes 121/121; coverage is 246 names over 105+1 sources with 0/122 public-contract omissions. Parent .4.3.7 is closed; generated Lua preservation/execution remains .8.1-.8.4 and diagnostic helpers .4.3.8 become active."
+reverify: "bash tools/run_lua_local.sh && python3 tools/check_complete_named_mark_contract.py && perl tools/check_language_capability_coverage.pl --report && python3 tools/check_public_aggregate_selector_surface.py && rg -n 'CAPTURE_MARK_HELPERS|INPUT_HELPERS|RUNTIME_HELPERS|INPUT_CURSOR_HELPERS|CURSOR_CONTROL_HELPERS|ANONYMOUS_CAPTURE_HELPERS|NAMED_MARK_HELPERS|capture_until_boundary' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua"
 ---
 
 # Lua Capture/Cursor Runtime Audit
@@ -27,7 +28,7 @@ reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_c
 3. governed rule-local named marks, named spans, and anonymous/named bridges;
 4. placement-sensitive split/mark rule members, applied after their matched action site;
 5. compiled-rule earliest-boundary lookahead; and
-6. final inventory/public no-drift.
+6. final inventory/public no-drift (closed at 62 calls plus four marker spellings).
 
 Lua stores internal positions as UTF-8 byte offsets in immutable runtime match registers. Those registers carry
 the live cursor, entry/local matches, and anonymous capture start, and expose byte-to-character and line/column
@@ -39,7 +40,9 @@ and LuaJIT. `.4.3.7.3` extends that store across governed named writers, stable/
 and anonymous/named bridges at 120/120. `.4.3.7.4` compiles `@capture_slice`, `@capture_from_here`, `@move_pos`,
 and `@mark(name)` into typed preceding-slot events and executes them after slot action/child dispatch and before
 `LE` through those same stores at 121/121. The exact shipped `@move_pos` in `rgx/subs/pgen/specs/ebnf.spec` now
-has an executable native owner.
+has an executable native owner. `.4.3.7.6` then closes the parent after deriving 62 unique current call names and
+matching all 62 across contract classification, interpreter dispatch, and focused execution sources. There are no
+missing or extra names, and the four marker spellings remain separately timing-tested.
 
 The `.4.3.7.1` public boundary is character-based even though internal cursors remain byte offsets. `input_slice`
 converts its nonnegative character start and width to UTF-8-safe byte endpoints; invalid numeric boundaries return
@@ -59,7 +62,9 @@ calls present in the neutral corpus. `FUTURE-PARITY-BACKLOG.17.1-.17.4` implemen
 on all five backends; `.17.5` admits all seven into the shared 246-name inventory, adds the exact fixture to
 governed occurrence sources, and independently checks all 122 public Perl contracts. `.4.3.7.3` closes full-
 family named-mark parity without changing the admitted inventory. Placement-sensitive split/mark rule-member
-execution closes in `.4.3.7.4`; only exhaustive inventory/public no-drift `.4.3.7.6` remains in the parent.
+execution closes in `.4.3.7.4`; exhaustive inventory/public no-drift `.4.3.7.6` closes the parent at 121/121 on
+both Lua ABIs. The next native helper owner is diagnostic output `.4.3.8`; generated-state preservation and
+execution remain explicitly future under `.8.1-.8.4`.
 
 `capture_until_boundary` stays separate from ordinary capture spans: it resolves compiled regex-bearing rules,
 seeks all usable candidates from the live cursor through a boundary-specific alternation cache, chooses the

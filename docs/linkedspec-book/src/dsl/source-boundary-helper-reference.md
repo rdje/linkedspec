@@ -197,6 +197,11 @@ write the same anonymous boundary or named-mark store used by these helpers. The
 action/child dispatch and before `LE`: use a later slot to observe a marker, or use `start_capture_slice()` /
 `mark_here(name)` when the mutation must happen inside an action block.
 
+Lua's native family is closed at exact no-drift: 62 unique current capture/mark/input/cursor/control calls agree
+across contract classification, runtime dispatch, and focused execution sources, while the four placement
+spellings above remain separately timing-tested. Generated Lua preservation and execution remain future-owned by
+`LUA-BACKEND-PARITY.8.1-.8.4`; the native closeout does not claim that later surface.
+
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 
 | Helper | Result | Right edge | Boundary movement |

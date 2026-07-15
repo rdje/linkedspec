@@ -101,7 +101,10 @@ bridges. Public positions and lengths use Unicode characters; missing/reversed s
 owned by the preceding regex slot. Events execute after that slot's action/child dispatch and before `LE`, through
 the same anonymous boundary and named-mark store; same-slot action reads therefore see old state and later slots
 see the update. Native and serialized-source Unicode timing, the checked-in EBNF `@move_pos`, and malformed-marker
-diagnostics pass 121/121 on PUC Lua and LuaJIT. Exhaustive capture/cursor no-drift continues in active `.4.3.7.6`.
+diagnostics pass 121/121 on PUC Lua and LuaJIT. Exhaustive `.4.3.7.6` derives 62 unique current capture/mark/input/
+cursor/control calls and proves exact agreement across contracts, interpreter dispatch, and focused execution
+sources, plus four placement-marker spellings. Parent `.4.3.7` is closed and diagnostic output helper `.4.3.8` is
+next. This is native interpreter parity only; generated Lua preservation/execution remains `.8.1-.8.4`.
 General
 user-function final `callback: codeblock` declaration
 and contextual execution remain `.5.1`, while
@@ -293,6 +296,8 @@ every historical Perl diagnostic contract mentioned by the public helper referen
 documented complete-mark helpers—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and
 `clear_mark`—through the shared inventory while retaining a separate exact family view, as Dart and Julia do.
 Coverage independently checks all 122 public Perl contracts and rejects nine classified non-public names.
+The closed native capture/cursor family comprises 62 unique call names; all 62 are classified, dispatched, and
+present in focused execution sources. Placement-sensitive markers remain a separate four-spelling grammar surface.
 
 Build the concrete registry directly from a typed spec or function list:
 
