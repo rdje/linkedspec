@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.5.1.4.1` — preserve callable intent before callback execution): Treat the
+  spec-owned codeblock definition shape as an input form, not a second runtime schema. Canonicalize its
+  `fixed_params` and final `codeblock_param` once into ordinary ordered params plus an exact one-entry
+  `parameter_kinds` object, then require identical metadata in the payload, parse job, typed AST, registry, and
+  compiled snapshot. Derive contextual normalization from callable metadata: attached and parenthesized
+  `block_value` arguments become copied `codeblock_argument` nodes with a zero-positional signature, while harray
+  literals remain structurally unchanged. Keep execution out of this slice so `.5.1.4.2` can add dynamic-context
+  invocation and cleanup as one focused runtime change. Both ABIs pass 142/142; status is
+  `runtime-user-functions-contextual-codeblock-metadata-v1`, capability stays 64/0/0, descriptors remain `.5.3`,
+  and generated source remains `.8`. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.5.1.3.2` — rest is a LinkedSpec value, never a Lua vararg): Preserve caller-side
   eager evaluation and the existing isolated function frame. Copy all evaluated values into `frame.arguments`,
   bind the fixed prefix through the ordinary scalar/array/harray mirrors, then build a new `json.array()` and copy

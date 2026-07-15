@@ -155,6 +155,93 @@ function M.builtin_final_codeblock_contract(surface, name)
   return clone_final_codeblock_contract(contracts[name])
 end
 
+function M.user_function_final_codeblock_contract(definition)
+  if type(definition) ~= "table" or type(definition.params) ~= "table" or
+      type(definition.arity) ~= "number" or definition.arity ~= #definition.params or
+      definition.arity == 0 or definition.signature ~= nil then
+    return nil
+  end
+  local final_name = definition.params[#definition.params]
+  local kinds = definition.parameter_kinds
+  if json.kind(kinds) ~= "harray" or kinds[final_name] ~= "codeblock" then return nil end
+  local count = 0
+  for name, kind in pairs(kinds) do
+    count = count + 1
+    if name ~= final_name or kind ~= "codeblock" then return nil end
+  end
+  if count ~= 1 then return nil end
+  return {
+    min_before_codeblock = definition.arity - 1,
+    max_before_codeblock = definition.arity - 1,
+    final_parameter = { name = final_name, kind = "codeblock" },
+  }
+end
+
+local function contextual_contract(surface, name, function_registry)
+  local builtin_surface = surface == "function" and "helper" or surface
+  local builtin = M.builtin_final_codeblock_contract(builtin_surface, name)
+  if builtin ~= nil then return builtin end
+  if surface ~= "function" or function_registry == nil then return nil end
+  if type(function_registry) ~= "table" or type(function_registry.lookup) ~= "function" then return nil end
+  local item = function_registry:lookup(name)
+  return item and M.user_function_final_codeblock_contract(item.definition) or nil
+end
+
+local function copy_call_fields(call, excluded)
+  local result = {}
+  for key, value in pairs(call) do
+    if not excluded[key] then result[key] = value end
+  end
+  return result
+end
+
+function M.normalize_contextual_codeblock_call(surface, call, function_registry)
+  if surface ~= "function" and surface ~= "receiver" then
+    error("ActionContractException: contextual codeblock surface must be function or receiver", 0)
+  end
+  local node_type = action_ast.node_type(call)
+  local name
+  if surface == "function" and node_type == "ActionExpr" and call.kind == "call" then
+    name = call.name
+  elseif surface == "receiver" and node_type == "ActionFluentCall" then
+    name = call.method
+  else
+    error("ActionContractException: contextual codeblock normalization received the wrong call node", 0)
+  end
+  local contract = contextual_contract(surface, name, function_registry)
+  if contract == nil or type(call.args) ~= "table" or #call.args == 0 then
+    return call, contract
+  end
+  local final_argument = call.args[#call.args]
+  local final_value = final_argument and final_argument.value
+  if action_ast.node_type(final_value) ~= "ActionExpr" or final_value.kind ~= "block_value" then
+    return call, contract
+  end
+  if not M.accepts_final_codeblock_argument_count(contract, #call.args - 1) then
+    return call, contract
+  end
+  local args = {}
+  for index, argument in ipairs(call.args) do args[index] = argument end
+  args[#args] = action_ast.positional_argument(action_ast.contextual_codeblock_argument(final_value))
+  local fields
+  local normalized
+  if surface == "function" then
+    fields = copy_call_fields(call, { kind = true, source = true, source_span = true, name = true, args = true })
+    fields.name = call.name
+    fields.args = args
+    fields.trailing_block_arg = true
+    fields.contextual_codeblock_arg = true
+    normalized = action_ast.expr("call", call.source, call.source_span, fields)
+  else
+    fields = copy_call_fields(call, { source = true, source_span = true, method = true, args = true })
+    fields.trailing_block_arg = true
+    fields.receiver_trailing_block_arg = true
+    fields.contextual_codeblock_arg = true
+    normalized = action_ast.fluent_call(call.method, args, call.source, call.source_span, fields)
+  end
+  return normalized, contract
+end
+
 function M.accepts_final_codeblock_argument_count(contract, before_count)
   return type(contract) == "table" and
     type(contract.final_parameter) == "table" and contract.final_parameter.kind == "codeblock" and
@@ -393,13 +480,15 @@ local function resolver(function_registry)
   visit_expr = function(expr)
     local kind = expr.kind
     if kind == "call" then
-      resolve_call(expr.name, expr.source, expr.source_span, "function", expr.args)
-      visit_args(expr.args)
+      local normalized = M.normalize_contextual_codeblock_call("function", expr, function_registry)
+      resolve_call(normalized.name, normalized.source, normalized.source_span, "function", normalized.args)
+      visit_args(normalized.args)
     elseif kind == "fluent_chain" then
       visit_expr(expr.receiver)
       for _, call in ipairs(expr.calls) do
-        resolve_call(call.method, call.source, call.source_span, "receiver_method", call.args)
-        visit_args(call.args)
+        local normalized = M.normalize_contextual_codeblock_call("receiver", call, function_registry)
+        resolve_call(normalized.method, normalized.source, normalized.source_span, "receiver_method", normalized.args)
+        visit_args(normalized.args)
       end
     elseif kind == "assign_scalar" then
       record_structural(expr, "=", "set", "assignment", "assignment", 2)
@@ -415,7 +504,7 @@ local function resolver(function_registry)
       record_structural(expr, "nested_access=", "nested_access_assignment", "assignment", "assignment", 2)
       visit_access_segments(expr.segments)
       visit_expr(expr.value)
-    elseif kind == "block_value" then
+    elseif kind == "block_value" or kind == "codeblock_argument" then
       visit_block(expr.block)
     elseif kind == "array_literal" then
       for _, item in ipairs(expr.items) do visit_expr(item) end

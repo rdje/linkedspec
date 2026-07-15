@@ -949,8 +949,10 @@ registered-call runtime `.5.1.2` passes 133/133. Variadic-v2 state `.5.1.3.1` pr
 minimum/unbounded registry resolution, and fixed-v1 compatibility at 136/136. Fresh rest-array execution
 `.5.1.3.2` passes the unchanged neutral fixture, ordered evaluation, copied mixed/empty rest values, receiver
 continuation, and typed minimum/keyword failures at 139/139 with status `runtime-user-functions-variadic-v2`.
-Contextual final-codeblock metadata `.5.1.4.1` is active. Full native-pipeline trace remains dependency-correct
-`.5.3`.
+Final-only contextual metadata `.5.1.4.1` then preserves exact definition/staged/registry/compiled intent, maps
+all four invalid declarations, and normalizes attached/parenthesized blocks without promoting harrays or executing
+callbacks. Both ABIs pass 142/142 with status `runtime-user-functions-contextual-codeblock-metadata-v1`;
+contextual execution `.5.1.4.2` is active. Full native-pipeline trace remains dependency-correct `.5.3`.
 
 Structured diagnostic note (2026-07-15, `LUA-BACKEND-PARITY.4.4.1`): Lua runtime errors now carry typed neutral
 `RuntimeDiagnostic` payloads with exact type/stage/owner/summary/detail/spec/top/deepest-rule/handler fields.
@@ -964,8 +966,9 @@ Fixed-v1 runtime `.5.1.2` adds registry-first calls, isolated copied stores, loc
 typed function-owned failures at 133/133. Variadic-v2 typed state then preserves exact v1/v2 storage, sidecar
 identity, and minimum/unbounded resolution at 136/136. Fresh typed rest arrays then execute the unchanged neutral
 fixture and lock eager order, copied mixed values, empty freshness, receiver chains, and typed minimum/keyword
-failures at 139/139. Public status is `runtime-user-functions-variadic-v2`; `.5.1.4.1` is active and capability
-remains 64/0/0.
+failures at 139/139. Final contextual metadata then passes 142/142 with exact sidecar preservation and
+zero-positional `codeblock_argument` normalization. Public status is
+`runtime-user-functions-contextual-codeblock-metadata-v1`; `.5.1.4.2` is active and capability remains 64/0/0.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

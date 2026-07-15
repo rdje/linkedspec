@@ -5,14 +5,22 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua now preserves final-only `callback: codeblock` intent before runtime invocation.
+  Spec-produced fixed/codeblock fields canonicalize once to ordered fixed-v1 params/arity plus an exact one-entry
+  `parameter_kinds` harray, and identical metadata survives body payload, staged job, typed AST, registry,
+  stitching, and compiled state. All four invalid declarations and sidecar drift reject. Callable metadata
+  normalizes attached and parenthesized blocks to one zero-positional `codeblock_argument`; parsed source remains
+  unchanged, harrays are not promoted, and built-in contracts do not drift. Both ABIs pass 142/142, status is
+  `runtime-user-functions-contextual-codeblock-metadata-v1`, capability remains 64/0/0, and contextual execution
+  `.5.1.4.2` is active. Descriptors remain `.5.3`, generated source `.8`.
 - `2026-07-15` refresh: Lua variadic-v2 calls now execute through the same staged ActionIR function runtime as
   fixed calls. Caller arguments still evaluate exactly once left-to-right; the invocation frame copies every value,
   binds the fixed prefix normally, and copies extras again into one fresh typed array for the final rest name.
   Empty rest arrays are fresh, nested arrays/harrays and null/boolean/codeblock identities survive, caller values
   remain isolated, and returned arrays feed receiver chains. The unchanged neutral callable fixture passes exactly;
   minimum arity and keywords retain portable typed diagnostics. Both ABIs pass 139/139, status is
-  `runtime-user-functions-variadic-v2`, capability remains 64/0/0, and contextual final-codeblock metadata
-  `.5.1.4.1` is active. Outward descriptor admission remains `.5.3`, generated source `.8`.
+  `runtime-user-functions-variadic-v2`, capability remains 64/0/0, and that milestone handed off to contextual
+  final-codeblock metadata `.5.1.4.1`. Outward descriptor admission remains `.5.3`, generated source `.8`.
 - `2026-07-15` refresh: Lua now preserves the exact callable-signature storage union. Fixed version 1 retains only
   top-level `params`/`arity`; variadic version 2 retains only its six-field typed signature in serialized shell,
   AST, staged jobs, registry entries, and compiled state while internal positional mirrors remain identity-checked.

@@ -19,7 +19,7 @@ local M = {}
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "runtime-user-functions-variadic-v2"
+M.PARITY_STATUS = "runtime-user-functions-contextual-codeblock-metadata-v1"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 

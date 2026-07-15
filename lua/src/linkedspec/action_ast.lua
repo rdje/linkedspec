@@ -76,6 +76,33 @@ function M.hash_entry(key, value)
   return node("ActionHashEntry", { key = key, value = value })
 end
 
+function M.contextual_callable_signature()
+  return node("ActionCallableSignature", {
+    kind = "callable_signature",
+    version = 1,
+    positional_params = {},
+    rest_param = json.null,
+    min_arity = 0,
+    max_arity = 0,
+  })
+end
+
+function M.contextual_codeblock_argument(block_value)
+  if M.node_type(block_value) ~= "ActionExpr" or block_value.kind ~= "block_value" or
+      M.node_type(block_value.block) ~= "ActionBlock" then
+    error("action AST contextual codeblock argument requires a block_value expression", 0)
+  end
+  return M.expr("codeblock_argument", block_value.source, block_value.source_span, {
+    version = 1,
+    signature = M.contextual_callable_signature(),
+    body_source = block_value.block.source,
+    body_ast = block_value.block,
+    source_text = block_value.source,
+    body_span = block_value.block.source_span,
+    block = block_value.block,
+  })
+end
+
 function M.fluent_call(method, args, source, source_span, fields)
   fields = fields or {}
   fields.method = method
@@ -163,7 +190,7 @@ find_removed_aggregate_selector = function(value)
       if selector then return selector end
     end
     return nil
-  elseif kind == "block_value" then
+  elseif kind == "block_value" or kind == "codeblock_argument" then
     return find_in_block(value.block)
   elseif kind == "control_if" or kind == "control_while" then
     return find_removed_aggregate_selector(value.condition) or find_in_args(value.args) or find_in_block(value.body)

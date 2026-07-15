@@ -1,5 +1,6 @@
 local action_call_names = require("linkedspec.action_call_names")
 local ast = require("linkedspec.spec_ast")
+local json = require("linkedspec.json")
 
 local M = {}
 
@@ -125,6 +126,33 @@ local function check_function_registry(spec)
         "user function '" .. name .. "' has an invalid variadic callable signature",
         "invalid_callable_signature"
       )
+    end
+
+    local parameter_kinds = definition.parameter_kinds
+    if parameter_kinds ~= nil then
+      local final_param = definition.params[#definition.params]
+      if signature ~= nil or json.kind(parameter_kinds) ~= "harray" then
+        validation_fail(
+          "user function '" .. name .. "' has invalid final codeblock parameter metadata",
+          "invalid_parameter_kinds"
+        )
+      end
+      local count = 0
+      for param, kind in pairs(parameter_kinds) do
+        count = count + 1
+        if param ~= final_param or kind ~= "codeblock" then
+          validation_fail(
+            "user function '" .. name .. "' has invalid final codeblock parameter metadata",
+            "invalid_parameter_kinds"
+          )
+        end
+      end
+      if count ~= 1 then
+        validation_fail(
+          "user function '" .. name .. "' has invalid final codeblock parameter metadata",
+          "invalid_parameter_kinds"
+        )
+      end
     end
 
     local seen_params = {}

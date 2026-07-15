@@ -332,6 +332,9 @@ local function validate_function_body_job(definition, index, job)
   elseif job.signature ~= nil then
     fail("function " .. definition.name .. " body_parse_job version 1 must not contain signature")
   end
+  if not spec_ast.parameter_kinds_equal(job.parameter_kinds, definition.parameter_kinds) then
+    fail("function " .. definition.name .. " body_parse_job parameter_kinds do not match")
+  end
   local expected_path = { "functions", tostring(index), "body_source" }
   if not string_lists_equal(job.parent_ast_path, expected_path) then
     fail(

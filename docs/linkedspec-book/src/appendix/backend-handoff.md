@@ -343,8 +343,10 @@ restoration, and typed arity/keyword/recursion/staging failures. `.5.1.3.1` then
 signature union through every native state boundary, validates sidecar identity and all seven invalid definitions,
 and resolves variadic calls from the fixed-prefix minimum through an unbounded maximum. `.5.1.3.2` then copies all
 evaluated frame arguments and binds extras as a fresh typed rest array; the unchanged neutral fixture, mixed/empty
-identity, receiver chains, and typed failures pass. PUC Lua and LuaJIT pass 139/139 with status
-`runtime-user-functions-variadic-v2`; `.5.1.4.1` is next. Outward descriptors remain `.5.3`.
+identity, receiver chains, and typed failures pass. `.5.1.4.1` then preserves final-only `callback: codeblock`
+metadata across every native state boundary and normalizes attached/parenthesized calls to one zero-positional
+typed argument without promoting harrays. PUC Lua and LuaJIT pass 142/142 with status
+`runtime-user-functions-contextual-codeblock-metadata-v1`; `.5.1.4.2` is next. Outward descriptors remain `.5.3`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -781,11 +783,10 @@ parent `.4.4`. Planning `.5.1.0` separates staged dispatch, fixed/variadic runti
 runtime, and closeout. Minimal staged dispatch `.5.1.1` passes 130/130; fixed-v1 runtime `.5.1.2` passes 133/133.
 Variadic-v2 state `.5.1.3.1` preserves the exact signature union and minimum/unbounded resolution at 136/136.
 Fresh rest-array execution `.5.1.3.2` passes the exact neutral fixture and copied mixed/empty runtime proof at
-139/139 with public status `runtime-user-functions-variadic-v2`. Contextual final-codeblock metadata `.5.1.4.1`
-is active and capability remains 64/0/0.
-General user-function final
-`callback: codeblock` declaration and contextual execution remain
-explicitly owned by `.5.1`; `{|params| ...}` literals and dynamic codeblock-variable calls remain `.11.7`.
+139/139. Contextual final-codeblock metadata `.5.1.4.1` preserves exact shell/staged/registry state and contextual
+normalization at 142/142 with public status `runtime-user-functions-contextual-codeblock-metadata-v1`.
+Contextual execution `.5.1.4.2` is active and capability remains 64/0/0. Explicit `{|params| ...}` literals and
+dynamic codeblock-variable calls remain `.11.7`.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`

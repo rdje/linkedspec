@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.5.1.4.1 — preserve Lua final codeblock metadata**
+  (DONE — exact declaration/normalization state is green; contextual execution `.5.1.4.2` is next).
+
+  **Result:** Lua canonicalizes the spec-owned final-codeblock definition shape to fixed-v1 params/arity plus exact
+  `parameter_kinds`, preserves it through payload/job/AST/registry/compiled state, and rejects drift plus all four
+  governed invalid forms. Attached and parenthesized user-function blocks normalize from registry metadata to the
+  same zero-positional `codeblock_argument`; harrays remain harrays, source ActionIR remains unchanged, and
+  built-in contracts remain exact. Callbacks are not executed in this slice. PUC Lua and LuaJIT pass 142/142;
+  status is `runtime-user-functions-contextual-codeblock-metadata-v1`, coverage remains 246/105+1/122, and
+  capability remains 64/0/0. Descriptors remain `.5.3` and generated source remains `.8`.
+  Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.5.1.3.2 — execute Lua variadic functions**
   (DONE — native variadic-v2 runtime is green; contextual final-codeblock metadata `.5.1.4.1` is next).
 

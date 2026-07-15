@@ -107,8 +107,12 @@ This `README.md` is the **single entry point** to the project.
   contracts, and compiled state; registry resolution accepts the governed fixed-prefix minimum and unbounded
   maximum. Runtime `.5.1.3.2` now evaluates positional arguments once left-to-right, binds extras as a fresh copied
   typed array, executes the unchanged neutral fixture, preserves mixed value identities, and diagnoses minimum/
-  keyword failures. Both ABIs pass 139/139 and public status is `runtime-user-functions-variadic-v2`; contextual
-  final-codeblock metadata `.5.1.4.1` is active. Outward descriptor admission remains `.5.3`. Full frontend/
+  keyword failures. Final-codeblock metadata `.5.1.4.1` now canonicalizes spec-produced `fixed_params` plus
+  `codeblock_param` into exact final-only `parameter_kinds`, preserves identical copies through typed AST/staged/
+  registry/compiled state, maps all four invalid declaration forms, and normalizes attached/parenthesized blocks
+  to one zero-positional `codeblock_argument` without promoting harrays or executing callbacks. Both ABIs pass
+  142/142 and public status is `runtime-user-functions-contextual-codeblock-metadata-v1`; contextual execution
+  `.5.1.4.2` is active. Outward descriptor admission remains `.5.3`. Full frontend/
   compiler/function/staged propagation remains `.5.3`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

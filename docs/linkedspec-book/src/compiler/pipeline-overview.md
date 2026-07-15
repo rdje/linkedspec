@@ -87,8 +87,11 @@ verified staged bodies and fresh copied stores. Lua then preserves the exact fix
 through shell, AST, jobs, registry, contracts, and compiled state. Registry lookup accepts a v2 fixed-prefix
 minimum through an unbounded maximum. Runtime now copies all evaluated arguments into the isolated frame, binds
 the fixed prefix normally, and copies extras into one fresh typed rest array. The unchanged neutral fixture passes
-exactly on both Lua ABIs at 139/139 with status `runtime-user-functions-variadic-v2`; outward descriptors remain
-`.5.3`.
+exactly on both Lua ABIs at 139/139. Lua next canonicalizes final-only `callback: codeblock` definitions to fixed-v1
+params/arity plus exact `parameter_kinds`, preserves that metadata across payload/job/AST/registry/compiled state,
+and derives one zero-positional `codeblock_argument` from either contextual spelling. This metadata-only boundary
+passes 142/142 with status `runtime-user-functions-contextual-codeblock-metadata-v1`; it neither promotes harrays
+nor executes callbacks. Outward descriptors remain `.5.3`.
 
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,

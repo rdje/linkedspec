@@ -134,7 +134,11 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime-user-functions-variadic-v2", "status parity")
+  assert_equal(
+    first.parity,
+    "runtime-user-functions-contextual-codeblock-metadata-v1",
+    "status parity"
+  )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1125,6 +1129,29 @@ local function variadic_definition_node(source, name, positional_params, rest_pa
   return node
 end
 
+local function codeblock_definition_node(source, name, fixed_params, codeblock_param, body_source)
+  local params = {}
+  for index, param in ipairs(fixed_params) do params[index] = param end
+  params[#params + 1] = codeblock_param
+  local node = definition_node(source, name, params, body_source)
+  local parameter_kinds = json.harray()
+  parameter_kinds[codeblock_param] = "codeblock"
+  node.params = nil
+  node.arity = nil
+  node.fixed_params = json.array(fixed_params)
+  node.codeblock_param = codeblock_param
+  node.parameter_kinds = json.decode(json.encode(parameter_kinds))
+  for _, staged_name in ipairs({ "body_payload", "body_parse_job" }) do
+    local staged = node[staged_name]
+    staged.params = nil
+    staged.arity = nil
+    staged.fixed_params = json.array(fixed_params)
+    staged.codeblock_param = codeblock_param
+    staged.parameter_kinds = json.decode(json.encode(parameter_kinds))
+  end
+  return node
+end
+
 test("function shell preserves the exact fixed-v1 variadic-v2 signature union", function()
   local source = table.concat({
     'fn pair(left, right) { return([left, right]) }',
@@ -1260,6 +1287,116 @@ test("function shell rejects drifting variadic signature records", function()
   assert_equal(reserved_ok, false, "reserved rest rejected")
   assert_equal(linkedspec.is_spec_validation_error(reserved_error), true, "reserved rest type")
   assert_equal(reserved_error.code, "reserved_parameter", "reserved rest code")
+end)
+
+test("function shell preserves exact final codeblock parameter metadata", function()
+  local source = table.concat({
+    'fn apply(value, callback: codeblock) { return(value) }',
+    "Top::",
+    " /x/",
+    "",
+  }, "\n")
+  local node = codeblock_definition_node(
+    source,
+    "apply",
+    { "value" },
+    "callback",
+    " return(value) "
+  )
+  local projection = linkedspec.project_user_function_definition_asts(source, json.array({ node }))
+  local definition = projection.functions[1]
+  local projected = ast.to_json(definition)
+  assert_equal(projected.params[1], "value", "codeblock fixed parameter")
+  assert_equal(projected.params[2], "callback", "codeblock final parameter")
+  assert_equal(projected.arity, 2, "codeblock exact arity")
+  assert_equal(projected.parameter_kinds.callback, "codeblock", "definition parameter kind")
+  assert_equal(projected.fixed_params, nil, "raw fixed params removed")
+  assert_equal(projected.codeblock_param, nil, "raw codeblock param removed")
+  for _, staged_name in ipairs({ "body_payload", "body_parse_job" }) do
+    local staged = projected[staged_name]
+    assert_equal(staged.params[2], "callback", staged_name .. " canonical params")
+    assert_equal(staged.arity, 2, staged_name .. " canonical arity")
+    assert_equal(staged.parameter_kinds.callback, "codeblock", staged_name .. " parameter kind")
+    assert_equal(staged.fixed_params, nil, staged_name .. " raw fixed params removed")
+    assert_equal(staged.codeblock_param, nil, staged_name .. " raw codeblock param removed")
+  end
+  local round_trip = ast.from_json("FunctionDefinition", projected)
+  assert_equal(
+    ast.parameter_kinds_equal(round_trip.parameter_kinds, definition.parameter_kinds),
+    true,
+    "codeblock metadata AST round-trip"
+  )
+
+  local staged = linkedspec.parse_spec_with_staged_user_function_definition_asts(
+    source,
+    json.array({ codeblock_definition_node(source, "apply", { "value" }, "callback", " return(value) ") })
+  )
+  assert_equal(linkedspec.validate_spec(staged), nil, "codeblock staged validation")
+  assert_equal(staged.functions[1].body_parse_job.parameter_kinds.callback, "codeblock", "staged job metadata")
+  local compiled = linkedspec.compile_spec(staged)
+  local compiled_json = linkedspec.compiled_spec_to_json(compiled)
+  assert_equal(
+    compiled_json.functions_by_name.apply.parameter_kinds.callback,
+    "codeblock",
+    "compiled registry metadata"
+  )
+  local descriptor_ok, descriptor_error = pcall(linkedspec.to_descriptor_json, compiled)
+  assert_equal(descriptor_ok, false, "codeblock descriptor remains pending")
+  assert_equal(
+    descriptor_error.code,
+    "codeblock_user_function_descriptor_pending",
+    "codeblock descriptor pending code"
+  )
+end)
+
+test("function shell rejects drifting and invalid codeblock declarations", function()
+  local source = 'fn apply(value, callback: codeblock) { return(value) }\nTop::\n /x/\n'
+  local function fresh_node()
+    return codeblock_definition_node(source, "apply", { "value" }, "callback", " return(value) ")
+  end
+
+  local drifted = fresh_node()
+  drifted.body_parse_job.parameter_kinds = json.harray({ value = "codeblock" })
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ drifted }))
+  end, "must declare only the final parameter as codeblock", "codeblock sidecar drift")
+
+  local cases = {
+    {
+      header = "fn bad(callback: codeblock, tail)",
+      code = "codeblock_parameter_must_be_final",
+    },
+    {
+      header = "fn bad(callback: codeblock(item))",
+      code = "codeblock_declaration_has_no_argument_list",
+    },
+    {
+      header = "fn bad(: codeblock)",
+      code = "invalid_codeblock_parameter_name",
+    },
+    {
+      header = "fn bad(callback: closure)",
+      code = "unknown_parameter_type",
+    },
+  }
+  for _, item in ipairs(cases) do
+    local invalid_source = item.header .. "\nTop::\n /x/\n"
+    local error_node = json.harray({
+      type = "function_definition_error",
+      kind = "user_function_definition_error",
+      message = "invalid user function definition",
+      source_text = item.header,
+      source_span = definition_span(invalid_source, 0, utf8_character_count(item.header)),
+    })
+    local ok, parse_error = pcall(
+      linkedspec.project_user_function_definition_asts,
+      invalid_source,
+      json.array({ error_node })
+    )
+    assert_equal(ok, false, item.code .. " rejects")
+    assert_equal(linkedspec.is_spec_parse_error(parse_error), true, item.code .. " parse type")
+    assert_contains(parse_error.message, item.code, item.code .. " diagnostic")
+  end
 end)
 
 test("function shell projects spec-owned nodes with Unicode character spans", function()
@@ -1634,7 +1771,7 @@ test("ActionIR contracts resolve registered functions before helper fallback", f
   end, "must expose resolve_call", "registry interface")
 end)
 
-local function registry_function(name, params, index, body_ast, body_source_override, signature)
+local function registry_function(name, params, index, body_ast, body_source_override, signature, parameter_kinds)
   local body_source = body_source_override or "return(value)"
   local path = { "functions", tostring(index), "body_source" }
   local payload = json.harray({
@@ -1666,6 +1803,10 @@ local function registry_function(name, params, index, body_ast, body_source_over
     payload.arity = #params
     job_options.params = params
     job_options.arity = #params
+    if parameter_kinds ~= nil then
+      payload.parameter_kinds = json.decode(json.encode(parameter_kinds))
+      job_options.parameter_kinds = parameter_kinds
+    end
   else
     payload.signature = ast.to_json(signature)
     job_options.signature = signature
@@ -1680,6 +1821,7 @@ local function registry_function(name, params, index, body_ast, body_source_over
     params = params,
     arity = #params,
     signature = signature,
+    parameter_kinds = parameter_kinds,
     body_source = body_source,
     body_payload = payload,
     body_parse_job = ast.staged_parse_job(job_options),
@@ -1758,6 +1900,76 @@ test("user function registry preserves order jobs definitions and exact arity", 
   assert_registry_error(function()
     linkedspec.user_function_registry_from_functions({ zero, zero })
   end, "duplicate user function 'zero'", nil, "duplicate registry")
+end)
+
+test("registered final codeblock calls normalize contextual spellings without promoting harrays", function()
+  local parameter_kinds = json.harray({ callback = "codeblock" })
+  local apply = registry_function(
+    "apply",
+    { "value", "callback" },
+    0,
+    json.harray({ kind = "action_block", statements = json.array() }),
+    "return(value)",
+    nil,
+    parameter_kinds
+  )
+  local registry = linkedspec.user_function_registry_from_functions({ apply })
+  local entry = registry:lookup("apply")
+  local contract = linkedspec.action_contracts.user_function_final_codeblock_contract(entry.definition)
+  assert_equal(contract.min_before_codeblock, 1, "user codeblock minimum prefix")
+  assert_equal(contract.max_before_codeblock, 1, "user codeblock maximum prefix")
+  assert_equal(contract.final_parameter.name, "callback", "user codeblock final name")
+  assert_equal(contract.final_parameter.kind, "codeblock", "user codeblock final kind")
+
+  local attached_source = 'apply("x") { return(value) }'
+  local parenthesized_source = 'apply("x", { return(value) })'
+  local attached = linkedspec.parse_action_expression(attached_source)
+  local parenthesized = linkedspec.parse_action_expression(parenthesized_source)
+  local normalized_attached = linkedspec.action_contracts.normalize_contextual_codeblock_call(
+    "function",
+    attached,
+    registry
+  )
+  local normalized_parenthesized = linkedspec.action_contracts.normalize_contextual_codeblock_call(
+    "function",
+    parenthesized,
+    registry
+  )
+  local attached_argument = normalized_attached.args[2].value
+  local parenthesized_argument = normalized_parenthesized.args[2].value
+  for label, argument in pairs({
+    attached = attached_argument,
+    parenthesized = parenthesized_argument,
+  }) do
+    assert_equal(argument.kind, "codeblock_argument", label .. " normalized kind")
+    assert_equal(argument.version, 1, label .. " normalized version")
+    assert_equal(argument.signature.kind, "callable_signature", label .. " signature kind")
+    assert_equal(#argument.signature.positional_params, 0, label .. " zero positional signature")
+    assert_equal(argument.signature.min_arity, 0, label .. " minimum arity")
+    assert_equal(argument.signature.max_arity, 0, label .. " maximum arity")
+    assert_equal(argument.body_ast.statements[1].expr.name, "return", label .. " body AST")
+  end
+  assert_equal(attached_argument.body_source, parenthesized_argument.body_source, "equivalent body source")
+  assert_equal(attached.args[2].value.kind, "block_value", "attached source AST remains structural")
+  assert_equal(parenthesized.args[2].value.kind, "block_value", "parenthesized source AST remains structural")
+  assert_equal(normalized_attached.contextual_codeblock_arg, true, "attached contextual marker")
+  assert_equal(normalized_parenthesized.contextual_codeblock_arg, true, "parenthesized contextual marker")
+
+  local harray_call = linkedspec.parse_action_expression('apply("x", { "value" : value })')
+  local normalized_harray = linkedspec.action_contracts.normalize_contextual_codeblock_call(
+    "function",
+    harray_call,
+    registry
+  )
+  assert_equal(normalized_harray.args[2].value.kind, "hash_literal", "harray is never promoted")
+  assert_equal(normalized_harray.contextual_codeblock_arg, nil, "harray has no contextual marker")
+
+  local resolution = linkedspec.resolve_action_expression_contracts(attached, { function_registry = registry })
+  assert_equal(resolution.ok, true, "normalized registered contract resolves")
+  assert_equal(resolution.contracts[1].family, "user_function", "normalized user contract family")
+  local projected = linkedspec.action_ast.to_json(normalized_attached)
+  assert_equal(projected.args[2].kind, "codeblock_argument", "normalized ActionIR JSON kind")
+  assert_equal(projected.args[2].signature.rest_param, json.null, "contextual rest parameter absent")
 end)
 
 test("user function registry resolves variadic arity and binds fresh typed rest arrays", function()

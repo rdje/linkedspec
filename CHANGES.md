@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.5.1.4.1 — preserve Lua final codeblock metadata
+
+Added exact final-only `callback: codeblock` metadata to Lua's user-function state. Spec-produced
+`fixed_params`/`codeblock_param` records now canonicalize to ordered `params`/`arity` plus a one-entry
+`parameter_kinds` harray. The definition, staged payload/job, typed AST round-trip, registry snapshot, stitched
+definition, and compiled state preserve identical metadata; drift and all four governed invalid declaration forms
+fail closed. Descriptor conversion remains explicitly deferred to `.5.3`.
+
+Metadata-driven call normalization now converts both `apply(value) { ... }` and
+`apply(value, { ... })` to the same zero-positional typed `codeblock_argument` without mutating the parsed source
+AST. Hash literals remain `hash_literal` values and existing built-in final-codeblock contracts are unchanged.
+This slice deliberately does not execute user callbacks; `.5.1.4.2` owns that runtime boundary. PUC Lua and
+LuaJIT pass 142/142; callable signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8, coverage remains
+246/105+1/122, capability remains 64/0/0, and public status becomes
+`runtime-user-functions-contextual-codeblock-metadata-v1`. Canonical local CI passes CLI 61x2 plus Phase 0
+`1..1031` in 605 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.5.1.3.2 — execute Lua variadic functions
 
 Replaced the deliberate variadic-runtime pending fence with fresh typed rest-array binding in the native Lua

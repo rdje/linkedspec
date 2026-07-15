@@ -181,6 +181,81 @@ local function string_lists_equal(left, right)
   return true
 end
 
+local function parameter_kinds_field(object, params, context, index)
+  local kinds = object_value(
+    required_value(object, "parameter_kinds", index),
+    "function_definition node " .. index .. " " .. context .. " parameter_kinds"
+  )
+  if #params == 0 then
+    projection_fail(
+      "function_definition node " .. index .. " " .. context ..
+      " codeblock parameter must be final"
+    )
+  end
+  local expected_name = params[#params]
+  local count = 0
+  for name, kind in pairs(kinds) do
+    count = count + 1
+    if name ~= expected_name or kind ~= "codeblock" then
+      projection_fail(
+        "function_definition node " .. index .. " " .. context ..
+        " must declare only the final parameter as codeblock"
+      )
+    end
+  end
+  if count ~= 1 then
+    projection_fail(
+      "function_definition node " .. index .. " " .. context ..
+      " must declare exactly one parameter kind"
+    )
+  end
+  local result = json.harray()
+  result[expected_name] = "codeblock"
+  return result
+end
+
+local function canonicalize_codeblock_definition(object, index)
+  if object.codeblock_param == nil then return end
+  if integer_field(object, "version", index) ~= 1 then
+    projection_fail("function_definition node " .. index .. " codeblock declaration requires version 1")
+  end
+  local fixed_params = string_list_field(object, "fixed_params", index)
+  local codeblock_param = string_field(object, "codeblock_param", "function_definition")
+  if not is_identifier(codeblock_param) then
+    projection_fail(
+      "function_definition node " .. index .. " has invalid codeblock parameter '" ..
+      codeblock_param .. "'"
+    )
+  end
+  local params = {}
+  for item_index, param in ipairs(fixed_params) do params[item_index] = param end
+  params[#params + 1] = codeblock_param
+  parameter_kinds_field(object, params, "function definition", index)
+
+  for _, field in ipairs({ "body_payload", "body_parse_job" }) do
+    local record = object_value(
+      required_value(object, field, index),
+      "function_definition node " .. index .. " " .. field
+    )
+    local record_fixed = string_list_field(record, "fixed_params", index)
+    if not string_lists_equal(record_fixed, fixed_params) then
+      projection_fail("function_definition node " .. index .. " " .. field .. " fixed_params do not match")
+    elseif string_field(record, "codeblock_param", field) ~= codeblock_param then
+      projection_fail("function_definition node " .. index .. " " .. field .. " codeblock_param does not match")
+    end
+    parameter_kinds_field(record, params, field, index)
+    record.params = json.array(params)
+    record.arity = #params
+    record.fixed_params = nil
+    record.codeblock_param = nil
+  end
+
+  object.params = json.array(params)
+  object.arity = #params
+  object.fixed_params = nil
+  object.codeblock_param = nil
+end
+
 local CALLABLE_SIGNATURE_FIELDS = {
   kind = true,
   version = true,
@@ -269,12 +344,17 @@ local function normalize_parent_path(object, index)
   object.parent_ast_path = json.array({ "functions", tostring(index), "body_source" })
 end
 
-local function validate_staged_signature(object, context, params, arity, signature, index)
+local function validate_staged_signature(object, context, params, arity, signature, parameter_kinds, index)
   if signature ~= nil then
     if object.params ~= nil or object.arity ~= nil then
       projection_fail(
         "function_definition node " .. index .. " " .. context ..
         " version 2 must store arity only in signature"
+      )
+    elseif object.parameter_kinds ~= nil then
+      projection_fail(
+        "function_definition node " .. index .. " " .. context ..
+        " version 2 must not contain parameter_kinds"
       )
     end
     local actual = callable_signature_field(object, "signature", index)
@@ -296,6 +376,20 @@ local function validate_staged_signature(object, context, params, arity, signatu
   elseif integer_field(object, "arity", index) ~= arity then
     projection_fail("function_definition node " .. index .. " " .. context .. " arity does not match arity")
   end
+  if parameter_kinds ~= nil then
+    local actual = parameter_kinds_field(object, params, context, index)
+    if not ast.parameter_kinds_equal(actual, parameter_kinds) then
+      projection_fail(
+        "function_definition node " .. index .. " " .. context ..
+        " parameter_kinds do not match parameter_kinds"
+      )
+    end
+  elseif object.parameter_kinds ~= nil then
+    projection_fail(
+      "function_definition node " .. index .. " untyped " .. context ..
+      " must not contain parameter_kinds"
+    )
+  end
 end
 
 local function validate_body_common(
@@ -305,6 +399,7 @@ local function validate_body_common(
   params,
   arity,
   signature,
+  parameter_kinds,
   body_source,
   body_span,
   index
@@ -315,7 +410,7 @@ local function validate_body_common(
   if string_field(object, "function_name", context) ~= name then
     projection_fail("function_definition node " .. index .. " " .. context .. " function_name does not match name")
   end
-  validate_staged_signature(object, context, params, arity, signature, index)
+  validate_staged_signature(object, context, params, arity, signature, parameter_kinds, index)
   if string_field(object, "text", context) ~= body_source then
     projection_fail("function_definition node " .. index .. " " .. context .. " text does not match body_source")
   elseif not spans_equal(span_field(object, "source_span", index), body_span) then
@@ -323,16 +418,58 @@ local function validate_body_common(
   end
 end
 
-local function validate_body_payload(payload, name, params, arity, signature, body_source, body_span, index)
+local function validate_body_payload(
+  payload,
+  name,
+  params,
+  arity,
+  signature,
+  parameter_kinds,
+  body_source,
+  body_span,
+  index
+)
   local object = object_value(payload, "function_definition node " .. index .. " body_payload")
   assert_string_field(object, "kind", "staged_payload", index)
-  validate_body_common(object, "body_payload", name, params, arity, signature, body_source, body_span, index)
+  validate_body_common(
+    object,
+    "body_payload",
+    name,
+    params,
+    arity,
+    signature,
+    parameter_kinds,
+    body_source,
+    body_span,
+    index
+  )
 end
 
-local function validate_body_parse_job(job, name, params, arity, signature, body_source, body_span, index)
+local function validate_body_parse_job(
+  job,
+  name,
+  params,
+  arity,
+  signature,
+  parameter_kinds,
+  body_source,
+  body_span,
+  index
+)
   local object = object_value(job, "function_definition node " .. index .. " body_parse_job")
   assert_string_field(object, "kind", "parse_job", index)
-  validate_body_common(object, "body_parse_job", name, params, arity, signature, body_source, body_span, index)
+  validate_body_common(
+    object,
+    "body_parse_job",
+    name,
+    params,
+    arity,
+    signature,
+    parameter_kinds,
+    body_source,
+    body_span,
+    index
+  )
   if string_field(object, "job_id", "body_parse_job") == "" then
     projection_fail("function_definition node " .. index .. " body_parse_job job_id must be non-empty")
   end
@@ -356,6 +493,7 @@ end
 
 local function project_function(object, source, offsets, character_count, index)
   assert_string_field(object, "kind", "user_function_definition", index)
+  canonicalize_codeblock_definition(object, index)
   local version = integer_field(object, "version", index)
   local name = string_field(object, "name", "function_definition")
   if not is_identifier(name) then
@@ -364,16 +502,24 @@ local function project_function(object, source, offsets, character_count, index)
   local params
   local arity
   local signature
+  local parameter_kinds
   if version == 1 then
     if object.signature ~= nil then
       projection_fail("function_definition node " .. index .. " version 1 must not contain signature")
     end
     params = string_list_field(object, "params", index)
     arity = integer_field(object, "arity", index)
+    if object.parameter_kinds ~= nil then
+      parameter_kinds = parameter_kinds_field(object, params, "function definition", index)
+    end
   elseif version == 2 then
     if object.params ~= nil or object.arity ~= nil then
       projection_fail(
         "function_definition node " .. index .. " version 2 must store arity only in signature"
+      )
+    elseif object.parameter_kinds ~= nil then
+      projection_fail(
+        "function_definition node " .. index .. " version 2 must not contain parameter_kinds"
       )
     end
     signature = callable_signature_field(object, "signature", index)
@@ -407,10 +553,30 @@ local function project_function(object, source, offsets, character_count, index)
   end
 
   local body_payload = clone_json(required_value(object, "body_payload", index))
-  validate_body_payload(body_payload, name, params, arity, signature, body_source, body_span, index)
+  validate_body_payload(
+    body_payload,
+    name,
+    params,
+    arity,
+    signature,
+    parameter_kinds,
+    body_source,
+    body_span,
+    index
+  )
   normalize_parent_path(body_payload, index)
   local body_parse_job = clone_json(required_value(object, "body_parse_job", index))
-  validate_body_parse_job(body_parse_job, name, params, arity, signature, body_source, body_span, index)
+  validate_body_parse_job(
+    body_parse_job,
+    name,
+    params,
+    arity,
+    signature,
+    parameter_kinds,
+    body_source,
+    body_span,
+    index
+  )
   normalize_parent_path(body_parse_job, index)
   body_parse_job.job_id = "parse_job:function_body:functions." .. index ..
     ".body_source:actionir-body.spec:action_block:" .. body_span.start .. "-" .. body_span["end"]
@@ -421,6 +587,7 @@ local function project_function(object, source, offsets, character_count, index)
       params = params,
       arity = arity,
       signature = signature,
+      parameter_kinds = parameter_kinds,
       body_source = body_source,
       body_payload = body_payload,
       body_parse_job = ast.from_json("StagedParseJob", body_parse_job),
@@ -476,6 +643,20 @@ local function definition_error(object, index)
     line = object.source_span.line_start
   end
   local message = type(object.message) == "string" and object.message or "invalid user function definition"
+  local header = type(object.source_text) == "string" and object.source_text or ""
+  header = header:match("^(.-){") or header
+  if header:match(":%s*codeblock%s*%(") then
+    message = "codeblock_declaration_has_no_argument_list"
+  elseif header:match(":%s*codeblock%s*,") then
+    message = "codeblock_parameter_must_be_final"
+  elseif header:match("%(%s*:%s*codeblock") then
+    message = "invalid_codeblock_parameter_name"
+  else
+    local declared_type = header:match(":%s*([A-Za-z_][A-Za-z0-9_]*)")
+    if declared_type ~= nil and declared_type ~= "codeblock" then
+      message = "unknown_parameter_type"
+    end
+  end
   if line > 0 then
     return spec_parser.new_parse_error(
       line,

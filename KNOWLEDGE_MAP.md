@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **534** facts · **3692** question keys.
+> **535** facts · **3698** question keys.
 
 ## Questions → fact
 
@@ -51,6 +51,7 @@
 - "are Lua named mark positions character based" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "are Lua named marks isolated between parent and child rules" -> [lua-complete-named-mark-parity](docs/knowledge/lua-complete-named-mark-parity.md) · 2026-07-14 · reverify: `python3 tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - "are Lua numeric comparison receiver methods terminal" -> [lua-numeric-call-receiver-runtime](docs/knowledge/lua-numeric-call-receiver-runtime.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh`
+- "are Lua parenthesized and attached contextual blocks equivalent" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "are Lua rule stores local across child calls" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua selectors rejected inside dead code" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
 - "are Lua selectors rejected inside unused user functions" -> [lua-aggregate-selector-compile-rejection](docs/knowledge/lua-aggregate-selector-compile-rejection.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_executable_aggregate_selector_sources.py`
@@ -808,6 +809,7 @@
 - "does Lua execute split markers" -> [lua-capture-cursor-runtime-audit](docs/knowledge/lua-capture-cursor-runtime-audit.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_complete_named_mark_contract.py && perl tools/check_language_capability_coverage.pl --report && python3 tools/check_public_aggregate_selector_surface.py && rg -n 'CAPTURE_MARK_HELPERS|INPUT_HELPERS|RUNTIME_HELPERS|INPUT_CURSOR_HELPERS|CURSOR_CONTROL_HELPERS|ANONYMOUS_CAPTURE_HELPERS|NAMED_MARK_HELPERS|capture_until_boundary' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "does Lua execute the anonymous capture helper family" -> [lua-runtime-anonymous-capture-helpers](docs/knowledge/lua-runtime-anonymous-capture-helpers.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua execute the exhaustive governed named capture fixture" -> [lua-governed-named-span-parity](docs/knowledge/lua-governed-named-span-parity.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
+- "does Lua execute user function contextual blocks yet" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "does Lua execute variadic rest arrays yet" -> [lua-variadic-v2-signature-state](docs/knowledge/lua-variadic-v2-signature-state.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua execute variadic user functions" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua execute with trailing blocks" -> [lua-runtime-builtin-final-codeblocks-with](docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && PERL5LIB=perl perl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(\"x\".with() { return(value) })}, q{return(\"x\".with({ return(value) }))}) { print LinkedSpec::call_spec_handler_subst(q{Top},$s), qq{\\n}; }'`
@@ -843,12 +845,14 @@
 - "does Lua parse top-level function definitions yet" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua pass the neutral callable signature fixture" -> [lua-variadic-v2-runtime](docs/knowledge/lua-variadic-v2-runtime.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua preserve JSON null array and harray identity" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua preserve callback codeblock parameter metadata" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "does Lua preserve function body parse jobs" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve numeric array index assignment" -> [lua-runtime-named-harray-mutation](docs/knowledge/lua-runtime-named-harray-mutation.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve ordinary nested harrays in hash constructors" -> [lua-runtime-harray-construction](docs/knowledge/lua-runtime-harray-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'HASH_SPLICE_HELPERS|sorted_harray_keys|evaluate_hash_helper|runtime copied harray construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - "does Lua preserve single and double quoted strings" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua preserve variadic user function signatures" -> [lua-variadic-v2-signature-state](docs/knowledge/lua-variadic-v2-signature-state.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py`
 - "does Lua project top-level user functions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua promote a harray in a codeblock parameter slot" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "does Lua raw scan fn definitions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua receiver matches work" -> [lua-helper-regex-matches](docs/knowledge/lua-helper-regex-matches.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua reduce leaves evaluate its initial value for an invalid receiver" -> [lua-runtime-array-tree-callbacks](docs/knowledge/lua-runtime-array-tree-callbacks.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'tree_children|new_tree_container|set_tree_child|evaluate_tree_leaf_block|evaluate_tree_receiver_block|runtime array traversal' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
@@ -1682,6 +1686,7 @@
 - "how does Lua guard recursion and zero progress" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua handle Unicode function source spans" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua implement scalar numeric v1" -> [lua-scalar-numeric-runtime](docs/knowledge/lua-scalar-numeric-runtime.md) · 2026-07-12 · reverify: `bash tools/check_scalar_numeric_six_runtime.sh`
+- "how does Lua normalize attached user function blocks" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "how does Lua parse semicolon action statements" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua parse semicolon statement separators" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua prepare user function invocation frames" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -3074,6 +3079,7 @@
 - "where is Julia function definition projection" -> [julia-user-function-definition-projection](docs/knowledge/julia-user-function-definition-projection.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "where is Julia native spec resolution implemented" -> [julia-native-spec-resolution](docs/knowledge/julia-native-spec-resolution.md) · 2026-07-11 · reverify: `perl tools/check_native_spec_resolution_contract.pl && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'import Pkg; Pkg.test()' && LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh`
 - "where is Lua Unicode casing implemented" -> [six-variant-unicode-17-case-parity](docs/knowledge/six-variant-unicode-17-case-parity.md) · 2026-07-12 · reverify: `python3 tools/check_unicode_case_contract.py && bash tools/run_lua_local.sh`
+- "where is Lua final codeblock descriptor support owned" -> [lua-final-codeblock-metadata](docs/knowledge/lua-final-codeblock-metadata.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
 - "where is Lua function definition projection" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is Lua runtime tracing implemented" -> [lua-trace-controls-sinks](docs/knowledge/lua-trace-controls-sinks.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
 - "where is Perl ActionIR text-to-text lowering" -> [perl-actionir-text-to-ast-inventory](docs/knowledge/perl-actionir-text-to-ast-inventory.md) · 2026-07-01 · reverify: `rg -n '_lower_action_code_from_canonical_ir|_find_source_stmt_span|_lower_method_value_expr|_lower_return_payload_expr|_collect_auto_working_var_decls|split_action_ir_statements|_parse_method_function_expr' perl/LinkedSpec/ActionIR perl/LinkedSpec/RuleIR/EmitContext.pm`
@@ -5501,6 +5507,15 @@ _Lua's 246-name runtime audit isolates three logical helper gaps and thirteen no
 - **evidence:** `LUA-BACKEND-PARITY.4.3.9.0 generates a minimal action for every exact name in lua/src/linkedspec/action_call_names.lua and runs each through Lua parse, compile, and execution with a disposable PUC Lua PCRE2 adapter. Of 246 unique names, 230 reach an owner and 16 report unsupported runtime helper. Thirteen are intentionally structural or named-receiver-only; the exact missing value family is and/or/not. The audit also finds stale runtime-numeric-reducers status, reports a duplicate source or row, and notes missing focused direct call(rule) proof.`
 - **reverify:** `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - **source:** [`docs/knowledge/lua-exhaustive-runtime-call-audit.md`](docs/knowledge/lua-exhaustive-runtime-call-audit.md)
+
+### lua-final-codeblock-metadata
+_Lua preserves final contextual codeblock intent before executing callbacks_
+
+- **answers:** does Lua preserve callback codeblock parameter metadata | how does Lua normalize attached user function blocks | are Lua parenthesized and attached contextual blocks equivalent | does Lua promote a harray in a codeblock parameter slot | does Lua execute user function contextual blocks yet | where is Lua final codeblock descriptor support owned
+- **date:** 2026-07-15 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.5.1.4.1 passes 142/142 on PUC Lua and LuaJIT. Exact shell/payload/job/AST/registry/compiled metadata, four invalid declaration forms, equivalent contextual normalization, harray non-promotion, built-in no-drift, and descriptor fencing are focused in lua/test/run.lua.`
+- **reverify:** `bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py`
+- **source:** [`docs/knowledge/lua-final-codeblock-metadata.md`](docs/knowledge/lua-final-codeblock-metadata.md)
 
 ### lua-fixed-v1-user-function-runtime
 _Lua executes registered fixed-v1 functions through verified staged bodies and isolated stores_

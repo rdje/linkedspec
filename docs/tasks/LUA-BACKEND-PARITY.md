@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (fresh typed variadic-v2 rest arrays pass 139/139 on PUC Lua and LuaJIT with status
-  `runtime-user-functions-variadic-v2`; contextual final-codeblock metadata `.5.1.4.1` is active)
+- Last updated: `2026-07-15` (final-only contextual-codeblock metadata passes 142/142 on PUC Lua and LuaJIT with
+  status `runtime-user-functions-contextual-codeblock-metadata-v1`; contextual execution `.5.1.4.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2093,17 +2093,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.5.1.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Preserve final codeblock parameter kind through Lua shell, staged records, registry, and call normalization.
   Dependencies: `.5.1.3.2`
   Acceptance: Final-only `callback: codeblock` carries exact typed metadata; attached and parenthesized contextual
     blocks normalize equivalently; invalid non-final/argument-list/missing-name/unknown-type forms reject; harray
     literals are never promoted; built-in contracts remain unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Lua canonicalizes spec-produced `fixed_params` plus final `codeblock_param`
+    into ordered fixed-v1 `params`/`arity` and an exact one-entry `parameter_kinds` harray, then preserves identical
+    metadata through the body payload, staged parse job, typed AST round-trip, immutable registry, stitching, and
+    compiled JSON. Sidecar drift and the governed non-final, nested-argument-list, missing-name, and unknown-type
+    declarations reject. Callable metadata—not callee-name logic—normalizes attached and parenthesized user-function
+    blocks to the same zero-positional typed `codeblock_argument` without mutating source ActionIR; harray literals
+    remain harrays, and built-in contracts remain exact. Descriptor conversion fails closed for `.5.3`; callback
+    execution remains exclusively `.5.1.4.2`. PUC Lua and LuaJIT pass 142/142; signature/codeblock checkers pass
+    3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains 64/0/0; public status is
+    `runtime-user-functions-contextual-codeblock-metadata-v1`; and `.5.1.4.2` is active. Canonical local CI passes
+    CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+  Commit: `LUA-BACKEND-PARITY.5.1.4.1 - preserve Lua final codeblock metadata`
 
 - ID: `LUA-BACKEND-PARITY.5.1.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute Lua user-function contextual final blocks in the caller's dynamic context.
   Dependencies: `.5.1.4.1`
   Acceptance: Attached and parenthesized zero-positional contextual blocks execute equivalently through the declared
@@ -2274,8 +2284,9 @@ trace controls/sinks pass 128/128 and runtime instrumentation `.4.4.3` passes 12
 native-pipeline trace remains `.5.3`. Planning `.5.1.0` now separates staged body dispatch, fixed-v1 execution,
 variadic metadata/runtime, contextual-codeblock metadata/runtime, and closeout. Minimal staged dispatch `.5.1.1`
 passes 130/130. Fixed-v1 runtime `.5.1.2` passes 133/133. Exact variadic-v2 state `.5.1.3.1` passes 136/136, and
-fresh rest-array runtime `.5.1.3.2` passes 139/139 with status `runtime-user-functions-variadic-v2`; contextual
-final-codeblock metadata `.5.1.4.1` is active.
+fresh rest-array runtime `.5.1.3.2` passes 139/139. Final-only contextual metadata `.5.1.4.1` then preserves the
+exact declaration/staged/registry contract and normalizes both contextual spellings at 142/142 with status
+`runtime-user-functions-contextual-codeblock-metadata-v1`; contextual execution `.5.1.4.2` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2375,9 +2386,29 @@ final-codeblock metadata `.5.1.4.1` is active.
 | 94 | `LUA-BACKEND-PARITY.5.1.2` | `done` | Registry-first fixed-v1 calls, fresh stores, local returns, composition, and typed fences pass 133/133. |
 | 95 | `LUA-BACKEND-PARITY.5.1.3.1` | `done` | Exact fixed-v1/variadic-v2 state and minimum/unbounded resolution pass 136/136. |
 | 96 | `LUA-BACKEND-PARITY.5.1.3.2` | `done` | Fresh typed rest arrays and the unchanged neutral fixture pass 139/139. |
-| 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `active` | Preserve final codeblock parameter metadata and normalize contextual forms. |
-| 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `pending` | Execute contextual final blocks through declared user-function slots. |
+| 97 | `LUA-BACKEND-PARITY.5.1.4.1` | `done` | Exact final metadata and contextual normalization pass 142/142 on both Lua ABIs. |
+| 98 | `LUA-BACKEND-PARITY.5.1.4.2` | `active` | Execute contextual final blocks through declared user-function slots. |
 | 99 | `LUA-BACKEND-PARITY.5.1.5` | `pending` | Close staged-function/variadic/contextual-codeblock execution no-drift. |
+
+### `LUA-BACKEND-PARITY.5.1.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The shared definition spec already emitted `fixed_params`, `codeblock_param`, and
+  `parameter_kinds`, but Lua's shell and typed records accepted only untyped fixed-v1 or variadic-v2 state and
+  generic ActionIR retained contextual blocks only as `block_value`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `spec_ast.lua`, the function shell, validator, staged/registry copies, and
+  action contracts had no final-parameter-kind field or metadata-derived contextual normalization seam.
+- [x] **FIX** — Canonicalize the spec-produced codeblock shape into fixed-v1 params/arity plus exact final
+  `parameter_kinds`; enforce sidecar equality across AST/staged/registry/compiled state; map four invalid source
+  forms; and construct one typed zero-positional `codeblock_argument` for both contextual spellings.
+- [x] **ADDRESSED (verified)** — Exact declaration metadata round-trips and compiles; drift rejects; attached and
+  parenthesized calls normalize equivalently without source-AST mutation; harrays remain `hash_literal`; existing
+  built-in metadata is unchanged; descriptors and runtime invocation remain explicitly fenced for later owners.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 142/142 on separately built PUC Lua and LuaJIT
+  adapters plus syntax, CLI scaffold, and exact 105-fixture validation. Callable signature/codeblock checkers pass
+  3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
+  CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
+- [x] **LOCKSTEP** — Public status, Lua/root READMEs, task/index/live/changes/notes/memory, mdBook pipeline/status/
+  handoff pages, and Knowledge Map close `.5.1.4.1` and activate only `.5.1.4.2`.
 
 ### `LUA-BACKEND-PARITY.5.1.3.2` Acceptance Checklist
 
@@ -3742,3 +3773,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.5.1.2` | `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions` | Registry-first calls, staged-AST authority, isolated local execution, value composition, typed fences, and 133/133 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.3.1` | `LUA-BACKEND-PARITY.5.1.3.1 - preserve Lua variadic signatures` | Exact v1/v2 union, signature identity, minimum/unbounded registry resolution, later-boundary fences, and 136/136 dual-ABI proof. |
 | `LUA-BACKEND-PARITY.5.1.3.2` | `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions` | Eager ordered arguments, fresh copied mixed/empty rest arrays, exact neutral fixture, typed failures, and 139/139 dual-ABI proof. |
+| `LUA-BACKEND-PARITY.5.1.4.1` | `LUA-BACKEND-PARITY.5.1.4.1 - preserve Lua final codeblock metadata` | Exact final-only metadata, four invalid declarations, contextual normalization, harray non-promotion, and 142/142 dual-ABI proof. |

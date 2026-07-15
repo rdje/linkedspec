@@ -48,9 +48,12 @@ records the governed ActionIR-body provider/digest/cache identity, parses exact 
 arity, keyword, recursion, and staging diagnostics. The following variadic-state slice preserves the exact
 fixed-v1/variadic-v2 signature union through shell, AST, staged jobs, registry, contracts, and compiled state;
 minimum/unbounded resolution is active. Runtime then copies every evaluated argument, binds fixed prefixes normally,
-and copies extras into one fresh typed rest array. The unchanged neutral fixture, mixed/empty identity, receiver
-chains, and typed failures pass 139/139 on both ABIs; public status is `runtime-user-functions-variadic-v2`.
-Outward descriptors remain a later owner.
+and copies extras into one fresh typed rest array. The following metadata slice preserves final-only
+`callback: codeblock` declarations through shell, typed AST, staged payload/job, registry, and compiled state.
+Attached and parenthesized contextual forms normalize to the same zero-positional `codeblock_argument`; harrays
+remain harrays and callbacks are not executed yet. Both ABIs pass 142/142; public status is
+`runtime-user-functions-contextual-codeblock-metadata-v1`. Outward descriptors and contextual execution remain
+later owners.
 
 ```lua
 local config = linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
@@ -198,7 +201,9 @@ and resolution accepts the fixed-prefix minimum through an unbounded maximum. Ru
 projection remain separately owned. Fresh typed rest-array execution `.5.1.3.2` is complete at 139/139: arguments
 evaluate once in caller order, fixed prefixes bind normally, extras are copied into an isolated array, the exact
 neutral fixture passes, and minimum/keyword failures stay typed. Contextual final-codeblock metadata `.5.1.4.1` is
-active. Full frontend/compiler/function/
+complete at 142/142: exact `parameter_kinds` survives shell/staged/registry/compiled state and both contextual
+spellings normalize to one zero-positional typed argument without harray promotion. Contextual execution `.5.1.4.2`
+is active. Full frontend/compiler/function/
 staged trace remains `.5.3` after general staged functions and native loading exist. Generated Lua
 preservation/execution remains `.8.1-.8.4`. Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -214,9 +219,8 @@ minimal staged function-body registry `.5.1.1` raises it to 130/130.
 Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
 Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
-General
-user-function final `callback: codeblock` declaration
-and contextual execution remain `.5.1`, while
+Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; user-function contextual execution remains
+`.5.1.4.2`, while
 explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

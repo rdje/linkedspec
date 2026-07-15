@@ -290,6 +290,12 @@ function M.to_descriptor_json(item)
       { code = "variadic_user_function_descriptor_pending" }
     )
   end
+  if definition.parameter_kinds ~= nil then
+    fail(
+      "final-codeblock user function descriptors are not admitted before LUA-BACKEND-PARITY.5.3",
+      { code = "codeblock_user_function_descriptor_pending" }
+    )
+  end
   local projected = projected_definition(definition)
   return json.harray({
     index = item.index,
@@ -330,6 +336,7 @@ local function definition_with_body_ast(definition, body_ast)
     params = definition.params,
     arity = definition.arity,
     signature = definition.signature,
+    parameter_kinds = definition.parameter_kinds,
     body_source = definition.body_source,
     body_payload = definition.body_payload,
     body_parse_job = definition.body_parse_job,

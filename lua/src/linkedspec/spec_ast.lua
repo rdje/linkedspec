@@ -135,6 +135,42 @@ local function copy_string_list(values, context)
   return result
 end
 
+local function copy_parameter_kinds(value, params, context)
+  if value == nil then return nil end
+  if json.kind(value) ~= "harray" then
+    fail(context .. " must be a typed JSON object when present")
+  elseif type(params) ~= "table" or #params == 0 then
+    fail(context .. " requires a final positional parameter")
+  end
+  local expected_name = params[#params]
+  local count = 0
+  for name, kind in pairs(value) do
+    count = count + 1
+    if name ~= expected_name or kind ~= "codeblock" then
+      fail(context .. " must declare only the final parameter as codeblock")
+    end
+  end
+  if count ~= 1 then
+    fail(context .. " must declare exactly one parameter kind")
+  end
+  local result = json.harray()
+  result[expected_name] = "codeblock"
+  return result
+end
+
+function M.parameter_kinds_equal(left, right)
+  if left == nil or right == nil then return left == right end
+  if json.kind(left) ~= "harray" or json.kind(right) ~= "harray" then return false end
+  local left_count = 0
+  local right_count = 0
+  for name, kind in pairs(left) do
+    left_count = left_count + 1
+    if right[name] ~= kind then return false end
+  end
+  for _ in pairs(right) do right_count = right_count + 1 end
+  return left_count == right_count
+end
+
 local function copy_node_list(values, expected_type, context)
   if type(values) ~= "table" then
     fail(context .. " must be an array")
@@ -249,6 +285,14 @@ function M.staged_parse_job(options)
   if signature ~= nil then
     signature = require_node(signature, "CallableSignature", "StagedParseJob.signature")
   end
+  local parameter_kinds = copy_parameter_kinds(
+    options.parameter_kinds,
+    copied_params,
+    "StagedParseJob.parameter_kinds"
+  )
+  if signature ~= nil and parameter_kinds ~= nil then
+    fail("StagedParseJob.parameter_kinds is unavailable for variadic signatures")
+  end
   return node("StagedParseJob", {
     version = optional_integer(options, "version", "StagedParseJob"),
     job_id = required_string(options, "job_id", "StagedParseJob"),
@@ -259,6 +303,7 @@ function M.staged_parse_job(options)
     params = copied_params,
     arity = optional_integer(options, "arity", "StagedParseJob"),
     signature = signature,
+    parameter_kinds = parameter_kinds,
     text = required_string(options, "text", "StagedParseJob"),
     source_span = require_node(options.source_span, "StagedSourceSpan", "StagedParseJob.source_span"),
     parser_spec_id = required_string(options, "parser_spec_id", "StagedParseJob"),
@@ -295,11 +340,21 @@ function M.function_definition(options)
   if signature ~= nil then
     signature = require_node(signature, "CallableSignature", "FunctionDefinition.signature")
   end
+  local params = copy_string_list(options.params, "FunctionDefinition.params")
+  local parameter_kinds = copy_parameter_kinds(
+    options.parameter_kinds,
+    params,
+    "FunctionDefinition.parameter_kinds"
+  )
+  if signature ~= nil and parameter_kinds ~= nil then
+    fail("FunctionDefinition.parameter_kinds is unavailable for variadic signatures")
+  end
   return node("FunctionDefinition", {
     name = required_string(options, "name", "FunctionDefinition"),
-    params = copy_string_list(options.params, "FunctionDefinition.params"),
+    params = params,
     arity = required_integer(options, "arity", "FunctionDefinition"),
     signature = signature,
+    parameter_kinds = parameter_kinds,
     body_source = required_string(options, "body_source", "FunctionDefinition"),
     body_payload = copied_body_payload,
     body_parse_job = checked_body_parse_job,
@@ -626,6 +681,9 @@ project = function(value)
     else
       result.signature = project(value.signature)
     end
+    put_optional(result, "parameter_kinds", value.parameter_kinds, function(item)
+      return clone_json(item, "StagedParseJob.parameter_kinds")
+    end)
     result.text = value.text
     result.source_span = project(value.source_span)
     result.parser_spec_id = value.parser_spec_id
@@ -642,6 +700,9 @@ project = function(value)
     else
       result.signature = project(value.signature)
     end
+    put_optional(result, "parameter_kinds", value.parameter_kinds, function(item)
+      return clone_json(item, "FunctionDefinition.parameter_kinds")
+    end)
     result.body_source = value.body_source
     put_optional(result, "body_payload", value.body_payload, function(item)
       return clone_json(item, "FunctionDefinition.body_payload")
@@ -893,6 +954,10 @@ build = function(node_type, value)
     if object.signature ~= nil and object.signature ~= json.null then
       signature = build("CallableSignature", object.signature)
     end
+    local parameter_kinds = nil
+    if object.parameter_kinds ~= nil and object.parameter_kinds ~= json.null then
+      parameter_kinds = clone_json(object.parameter_kinds, "StagedParseJob.parameter_kinds")
+    end
     return M.staged_parse_job({
       version = json_optional_integer(object, "version", node_type),
       job_id = json_string(object, "job_id", node_type),
@@ -903,6 +968,7 @@ build = function(node_type, value)
       params = json_string_list(object, "params", node_type, true),
       arity = json_optional_integer(object, "arity", node_type),
       signature = signature,
+      parameter_kinds = parameter_kinds,
       text = json_string(object, "text", node_type),
       source_span = build("StagedSourceSpan", object_value(object.source_span, "StagedParseJob.source_span")),
       parser_spec_id = json_string(object, "parser_spec_id", node_type),
@@ -927,6 +993,7 @@ build = function(node_type, value)
       body_ast = clone_json(object.body_ast, "FunctionDefinition.body_ast")
     end
     local signature = nil
+    local parameter_kinds = nil
     local params
     local arity
     if object.signature ~= nil and object.signature ~= json.null then
@@ -937,11 +1004,15 @@ build = function(node_type, value)
       params = json_string_list(object, "params", node_type)
       arity = json_integer(object, "arity", node_type)
     end
+    if object.parameter_kinds ~= nil and object.parameter_kinds ~= json.null then
+      parameter_kinds = clone_json(object.parameter_kinds, "FunctionDefinition.parameter_kinds")
+    end
     return M.function_definition({
       name = json_string(object, "name", node_type),
       params = params,
       arity = arity,
       signature = signature,
+      parameter_kinds = parameter_kinds,
       body_source = json_string(object, "body_source", node_type),
       body_payload = body_payload,
       body_parse_job = parsed_body_parse_job,
