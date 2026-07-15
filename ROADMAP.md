@@ -1006,8 +1006,10 @@ Public status/CLI/corpus data remain unchanged and capability stays four-backend
 Planning `.6.2.0` measures that exact window at 50/59 on both Lua ABIs and splits four mechanisms. Action-edge
 repair `.6.2.1` now reuses the current child result once, skips body-less passive-terminal re-search after the
 parent match, and leaves unrelated named calls direct. Three HLink, two EBNF, and SimEnv cases pass unchanged;
-both focused suites pass 163/163 and offsets 40-98 reach 56/59. Receiver-copy `.6.2.2` is active, with flat-array
-hash splicing, leading-trivia initialization, successor measurement, and permanent admission following.
+both focused suites pass 163/163 and offsets 40-98 reach 56/59. Receiver-copy `.6.2.2` now deep-copies the one
+evaluated fluent value, preserves typed continuations, and closes the exact hash-receiver fixture; both suites pass
+164/164 and offsets 40-98 reach 57/59. Flat-array hash splicing `.6.2.3` is active, with leading-trivia
+initialization, successor measurement, and permanent admission following.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

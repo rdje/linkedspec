@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.2` — receiver links must consume the carried value, not reconstruct a call):
+  Fluent evaluation already spends receiver evaluation once and stores the result in `value`; each receiver-aware
+  link must transform that value. Letting `.copy()` fall through to `evaluate_call(copy, no_args)` silently changes
+  method semantics into function semantics and discards the receiver. Classify only zero-argument receiver copy,
+  deep-copy the current typed value, and let subsequent helper-family dispatch use the preserved runtime kind.
+  Prove nested isolation and one-time evaluation separately from the corpus result. Both Lua ABIs pass 164/164;
+  exact offsets 40-98 reach 57/59 and only two pre-owned compares remain. Canonical local CI exits 0 with CLI
+  61/61 in both environments and Phase 0 `1..1031` in 628 seconds. Mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.1` — an action edge owns one child result, including no-result terminals):
   Treat `call(target)` as a request against the current edge when its label matches; the edge state—not the helper
   spelling—owns dispatch count, target index, cached value, and `retv`. Keep unrelated calls direct. A passive

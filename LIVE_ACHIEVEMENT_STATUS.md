@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.2 — preserve Lua receiver copy values**
+  (DONE — exact hash-receiver output closes at dual-ABI 57/59; `.6.2.3` is next).
+
+  **Result:** Zero-argument receiver `.copy()` now deep-copies the fluent chain's one already evaluated current
+  value, retains its runtime kind for later compatible links, and keeps function `copy(value)` / `copy()` behavior
+  unchanged. Focused nested isolation, harray/array/string/scalar continuations, one-time evaluation, and missing
+  value proof passes 164/164 on PUC Lua and LuaJIT. The unchanged hash-receiver fixture returns exact
+  `[["a,b,c",9,2,0,2,2,0]]` at endpoint 1 and exact offsets 40-98 reach 57/59 on both ABIs. Only PPlugin flat-array
+  hash splicing and history leading trivia remain. Corpus/oracle, status/CLI, coverage, and capability are
+  unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+  `1..1031` in 628 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.1 — reuse Lua action-edge child calls**
   (DONE — six action-edge/passive-terminal fixtures close unchanged at dual-ABI 56/59; `.6.2.2` is next).
 

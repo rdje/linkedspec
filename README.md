@@ -148,8 +148,10 @@ This `README.md` is the **single entry point** to the project.
   and public leading-trivia initialization. Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and permanent
   59-case admission `.6.2.6` are split. Action-edge repair `.6.2.1` now caches the current child result, skips
   passive-terminal re-search, and preserves unrelated named calls; three HLink, two EBNF, and SimEnv cases pass
-  unchanged. Both ABIs reach 163/163 focused tests and exact offsets 40-98 reach 56/59. Receiver-copy `.6.2.2` is
-  active; public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0.
+  unchanged. Both ABIs reach 163/163 focused tests and exact offsets 40-98 reach 56/59. Receiver-copy `.6.2.2`
+  now deep-copies the already evaluated fluent value once, preserves typed continuations, and closes the unchanged
+  hash-receiver fixture. Both suites pass 164/164 and the window reaches 57/59. Flat-array hash splicing `.6.2.3`
+  is active; public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

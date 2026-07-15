@@ -111,7 +111,9 @@ Three backbone items tracked major structural modernization — all done:
   initialization. Repairs `.6.2.1-.4`, successor measurement `.6.2.5`, and exact permanent admission `.6.2.6` are
   split. Action-edge `.6.2.1` now caches matching current-edge calls, skips passive-terminal re-search, and leaves
   unrelated calls direct. Three HLink, two EBNF, and SimEnv fixtures pass unchanged; both ABI suites pass 163/163
-  and the exact window reaches 56/59. Receiver-copy `.6.2.2` is active. The capability census remains four-backend
+  and the exact window reaches 56/59. Receiver-copy `.6.2.2` now deep-copies the one evaluated fluent value,
+  preserves typed continuations, and closes the unchanged hash-receiver fixture. Both suites pass 164/164 and the
+  window reaches 57/59; flat-array hash splicing `.6.2.3` is active. The capability census remains four-backend
   64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart

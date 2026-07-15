@@ -160,7 +160,9 @@ action-edge child-call reuse `.6.2.1`, receiver copy `.6.2.2`, flat-array hash s
 leading-trivia initialization `.6.2.4`; `.6.2.5` remeasures successor residuals before `.6.2.6` permanent 59-case
 admission. `.6.2.1` now caches the matching current-edge call once, skips passive-terminal re-search, preserves
 unrelated calls, and closes all three HLink, both EBNF, and SimEnv cases unchanged. Both ABI suites pass 163/163
-and the exact window is 56/59; receiver-copy `.6.2.2` is active.
+and the exact window is 56/59. Receiver-copy `.6.2.2` now deep-copies the already evaluated fluent value once,
+preserves typed continuations, closes the exact hash-receiver fixture, and raises both ABIs to 164/164 with the
+window at 57/59. Flat-array hash splicing `.6.2.3` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

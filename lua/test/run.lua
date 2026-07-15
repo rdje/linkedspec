@@ -7678,6 +7678,63 @@ Done::
   }), "copied harray construction")
 end)
 
+test("runtime receiver copy preserves evaluated values and continuation kinds", function()
+  local result = execute_uniform_binding_source([[
+Top::
+ /x/ -> Done {
+   evaluations = 0
+   source = {
+     "a" : 1,
+     "nested" : { "value" : "original" },
+     "items" : ["a", "b"]
+   }
+   items = ["a", "b"]
+   raw = " text "
+   copied = source.copy()
+   copied["nested"]["value"] = "changed"
+   copied["items"][0] = "changed"
+   evaluated_once = set(evaluations, add(evaluations, 1)).copy().add(1)
+   return({
+     "source" : source,
+     "copied" : copied,
+     "harray_chain" : source.copy().flat_hash().count_keys(),
+     "derived_harray_chain" : source.set_key("extra", 2).copy().count_keys(),
+     "array_chain" : items.copy().drop_front(1).first(),
+     "string_chain" : raw.copy().trim().uppercase(),
+     "evaluated_once" : evaluated_once,
+     "evaluations" : evaluations,
+     "missing_copy" : missing.copy(),
+     "missing_chain" : missing.copy().count_keys(),
+     "function_copy_chain" : copy(source).flat_hash().count_keys(),
+     "function_missing_copy" : copy()
+   })
+ }
+Done:: /x/
+]])
+  assert_json_equal(result, json.harray({
+    source = json.harray({
+      a = 1,
+      nested = json.harray({ value = "original" }),
+      items = json.array({ "a", "b" }),
+    }),
+    copied = json.harray({
+      a = 1,
+      nested = json.harray({ value = "changed" }),
+      items = json.array({ "changed", "b" }),
+    }),
+    harray_chain = 3,
+    derived_harray_chain = 4,
+    array_chain = "b",
+    string_chain = "TEXT",
+    evaluated_once = 2,
+    evaluations = 1,
+    missing_copy = json.null,
+    missing_chain = 0,
+    function_copy_chain = 3,
+    function_missing_copy = json.null,
+  }), "receiver copy")
+end)
+
 test("runtime deterministic harray views preserve key order and copied values", function()
   local result = execute_uniform_binding_source([[
 Top::

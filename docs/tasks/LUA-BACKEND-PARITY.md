@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.2.1` reuses action-edge child calls exactly once, skips passive-terminal
-  re-search, raises exact offsets 40-98 to 56/59 on both Lua ABIs, and activates receiver-copy repair `.6.2.2`)
+- Last updated: `2026-07-15` (`.6.2.2` preserves the evaluated value through receiver `.copy()`, raises exact
+  offsets 40-98 to 57/59 on both Lua ABIs at 164/164, and activates flat-array hash splicing `.6.2.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2571,18 +2571,28 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls`
 
 - ID: `LUA-BACKEND-PARITY.6.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Preserve evaluated values through receiver-form `.copy()` continuation.
   Dependencies: `.6.2.1`
   Acceptance: Generic receiver `copy()` deep-copies its current value exactly once, while function-form
     `copy(value)`, missing/undefined values, nested isolation, and subsequent array/harray/string-compatible
     continuations retain their governed behavior. The unchanged hash-receiver corpus fixture returns its expected
     sixth value `2` on both Lua ABIs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Zero-argument receiver `.copy()` now deep-copies the fluent chain's already
+    evaluated current value instead of falling through to function-form zero-argument `copy()` and returning
+    null. One focused test proves one-time scalar receiver evaluation, nested harray/array isolation, harray,
+    derived-harray, array, and string continuation types, missing receiver null behavior, and unchanged
+    `copy(value)` / `copy()` function forms. PUC Lua and LuaJIT pass 164/164. The unchanged
+    `terse_2_3_5_2_hash_receiver_value_chains` fixture returns exact wrapped output
+    `[["a,b,c",9,2,0,2,2,0]]` at endpoint 1 on both ABIs; exact offsets 40-98 rise identically from 56/59 to
+    57/59. Only the separately owned PPlugin flat-array hash-splice and history leading-trivia compares remain.
+    Corpus/oracle data, public status/CLI, coverage, and capability census are unchanged. Canonical local CI exits
+    0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in 628 seconds. Mutation
+    testing was not run.
+  Commit: `LUA-BACKEND-PARITY.6.2.2 - preserve Lua receiver copy values`
 
 - ID: `LUA-BACKEND-PARITY.6.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Splice `flat_array(...)` key/value tokens into hash construction.
   Dependencies: `.6.2.2`
   Acceptance: `hash(flat_array(values))` / equivalent harray construction consumes the flattened array as ordered
@@ -2768,7 +2778,9 @@ census-preserving no-drift `.5.3.3` confirms exact source/API/test/contract/book
 Action-edge repair `.6.2.1` now routes `call(target)` through the current compiled edge, caches one child result,
 and skips passive-terminal re-search after the parent consumes the dependency match. All three HLink, both EBNF,
 and SimEnv cases pass unchanged; exact offsets 40-98 are 56/59 on both Lua ABIs at 163/163 focused tests. The
-three remaining compare residuals retain their existing owners, so receiver-copy `.6.2.2` is active.
+three remaining compare residuals retain their existing owners. Receiver-copy `.6.2.2` now carries the already
+evaluated fluent value through zero-argument `.copy()`, closes the hash-receiver fixture, and raises both ABIs to
+57/59 at 164/164. Flat-array hash splicing `.6.2.3` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2893,7 +2905,8 @@ three remaining compare residuals retain their existing owners, so receiver-copy
 | 119 | `LUA-BACKEND-PARITY.6.2` | `active` | Measure offsets 40-98 and split every residual by stage and mechanism before behavior work. |
 | 120 | `LUA-BACKEND-PARITY.6.2.0` | `done` | Both ABIs measure 50/59 and split four independent advanced-corpus mechanisms before code. |
 | 121 | `LUA-BACKEND-PARITY.6.2.1` | `done` | Cached child calls/passive terminals close six fixtures and raise both ABIs to 56/59 at 163/163. |
-| 122 | `LUA-BACKEND-PARITY.6.2.2` | `active` | Preserve the evaluated value through receiver-form `.copy()` exactly once. |
+| 122 | `LUA-BACKEND-PARITY.6.2.2` | `done` | Receiver `.copy()` preserves one evaluated typed value and raises both ABIs to 57/59 at 164/164. |
+| 123 | `LUA-BACKEND-PARITY.6.2.3` | `active` | Splice `flat_array(...)` key/value tokens through hash construction. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3135,6 +3148,26 @@ three remaining compare residuals retain their existing owners, so receiver-copy
   POSIX environments plus Phase 0 true reach `1..1031` in 634 seconds. Mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook helper semantics/status/handoff,
   Knowledge Map, changes/notes, and bounded memory record exact 56/59 and activate only receiver-copy `.6.2.2`.
+
+### `LUA-BACKEND-PARITY.6.2.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact hash-receiver offset 48 returned sixth value `0` instead of `2` on both ABIs;
+  `meta.copy().flat_hash().count_keys()` lost `meta` at the `.copy()` link while every other chain value matched.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Fluent evaluation carries one current `value` through classified receiver
+  helpers, but `copy` had no receiver classification. It fell through to ordinary `evaluate_call(...)`, where
+  zero-argument function `copy()` correctly returns null. `flat_hash(null).count_keys()` therefore returned zero.
+- [x] **FIX** — Classify only zero-argument receiver `copy()` in the fluent evaluator and deep-copy its already
+  evaluated current value. Keep all receiver arguments unevaluated on that branch, leave nonzero-argument fallback
+  untouched, and preserve ordinary `copy(value)` / `copy()` function behavior.
+- [x] **ADDRESSED (verified)** — Focused proof locks nested harray/array isolation, harray/derived-harray/array/
+  string continuations, scalar receiver evaluation exactly once, missing receiver null, missing-chain zero, and
+  unchanged function forms. Offset 48 passes exact output at endpoint 1; offsets 40-98 are 57/59 on both ABIs.
+- [x] **NO REGRESSION** — PUC Lua and LuaJIT pass 164/164. Only PPlugin hash splicing and history leading trivia
+  remain, under `.6.2.3-.4`. Corpus/oracle data, public status/CLI, coverage 246/105+1/122, and capability 64/0/0
+  are unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true
+  reach `1..1031` in 628 seconds. Mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook receiver/status/handoff, Knowledge Map,
+  changes/notes, and bounded memory record exact 57/59 and activate only flat-array hash splicing `.6.2.3`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4693,3 +4726,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.1.4` | `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window` | Permanent exact offsets 99-104, six governed names/wrapped outputs/endpoints, 162/162 dual-ABI proof, parent `.6.1` closure, and `.6.2` handoff. |
 | `LUA-BACKEND-PARITY.6.2.0` | `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals` | Exact dual-ABI 50/59 measurement, nine routed residuals, four toolbox-proven current mechanisms, and dependency-ordered repair/remeasure/admission split. |
 | `LUA-BACKEND-PARITY.6.2.1` | `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls` | Cached current-edge calls, passive-terminal no-research, trace-backed self/non-self/unrelated proof, exact six-fixture closure, and dual-ABI 56/59. |
+| `LUA-BACKEND-PARITY.6.2.2` | `LUA-BACKEND-PARITY.6.2.2 - preserve Lua receiver copy values` | One-time evaluated receiver deep copy, typed continuation/isolation proof, exact hash-receiver fixture, and dual-ABI 57/59. |

@@ -858,6 +858,7 @@ dispatch rule.
 | Explicit null value | `return(hash("a", 1, "missing", undef))` | `x` | `[{"a":1,"missing":null}]` |
 | Splice count | `return(count(array(flat_hash(hash("a", 1, "b", 2)))))` | `x` | `[4]` |
 | Copy snapshot | `set(meta, { "a" : 1 }); set(saved, copy(meta)); meta["b"] = 2; return(array(count_keys(meta), count_keys(saved)))` | `x` | `[[2,1]]` |
+| Receiver copy | `set(meta, { "a" : 1, "b" : 2 }); return(meta.copy().flat_hash().count_keys())` | `x` | `[2]` |
 | Merge override | `return(merge_hash(hash("a", 1, "b", 2), hash("b", 9, "c", 3)))` | `x` | `[{"a":1,"b":9,"c":3}]` |
 | Pure `set_key` | `set(meta, { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(meta)))` | `x` | `[[2,1]]` |
 | Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(meta))` | `x` | `[{"a":1,"b":2}]` |
@@ -905,6 +906,9 @@ dispatch rule.
 - **Behavior**: Shallow copy. The new hash has the same keys and values but is a distinct container.
 - **Compatibility status**: Retired on current runtimes.
 - **Terse spelling**: `copy(h)` / receiver `.copy()` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Receiver boundary**: `value.copy()` evaluates `value` once, deep-copies that current runtime value, and keeps
+  its array/hash/scalar kind available to later compatible receiver links. Missing `value` remains undefined/null.
+  Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`

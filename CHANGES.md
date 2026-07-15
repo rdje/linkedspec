@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.2 — preserve Lua receiver copy values
+
+Classified zero-argument receiver `.copy()` in Lua fluent evaluation. It now deep-copies the chain's already
+evaluated current value instead of falling through to ordinary zero-argument function `copy()` and returning
+null. Function-form `copy(value)` and `copy()` retain their existing behavior, and nonzero-argument receiver
+fallback is unchanged.
+
+Added focused proof for nested harray/array isolation, harray and derived-harray continuations, array and string
+continuations, one-time scalar receiver evaluation, missing receiver/null chaining, and unchanged function forms.
+PUC Lua and LuaJIT pass 164/164. The unchanged `terse_2_3_5_2_hash_receiver_value_chains` fixture now returns
+exact wrapped `[["a,b,c",9,2,0,2,2,0]]` at endpoint 1 on both ABIs, raising exact offsets 40-98 from 56/59 to
+57/59.
+
+Only PPlugin flat-array hash splicing and history leading-trivia initialization remain under their existing
+owners. Corpus/oracle data, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged.
+Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in
+628 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.1 — reuse Lua action-edge child calls
 
 Changed Lua `call(target)` so a call naming the current compiled action-edge target routes through that edge's

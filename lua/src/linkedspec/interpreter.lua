@@ -2534,6 +2534,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
         flow("return", returned)
       elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
         value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
+      elseif canonical_name == "copy" and #call.args == 0 then
+        value = copy_value(value)
       elseif is_pure_string_helper(canonical_name) then
         value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
         if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
