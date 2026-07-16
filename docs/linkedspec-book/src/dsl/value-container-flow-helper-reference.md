@@ -1431,8 +1431,17 @@ my $value = $parser->(
 Every callback argument is a `LinkedSpec::RuntimeDiagnosticOutputEvent` hash object with exactly the three
 contract fields. Sink exceptions and `LinkedSpec::RuntimeExitNow` propagate out of the parser unchanged; neither
 is converted to a structural parse value or ordinary parser `last_error`. Omitting the second argument, or its
-`diagnostic_sink`, remains quiet. Lua exposes its corresponding native form as
-`runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`.
+`diagnostic_sink`, remains quiet. Lua exposes its corresponding native form through the invocation options:
+
+```lua
+local events = {}
+local result = linkedspec.runtime_parse(engine, input, {
+  diagnostic_sink = function(event)
+    events[#events + 1] = event
+  end,
+})
+```
+
 Lua restores the exact caller-thrown sink value after internal rule/action unwinding, including a public
 `RuntimeInterpreterException`; `is_runtime_exit_now(error)` distinguishes the separate `RuntimeExitNow` control
 object and its `status` from ordinary runtime diagnostics. `runtime_parse`, `runtime_execute`, and both traced
@@ -1441,11 +1450,13 @@ aliases preserve the same event/failure/exit behavior.
 Rust exposes the same native event boundary for top-rule and direct-value execution:
 
 ```rust
-use linkedspec_runtime::RuntimeDiagnosticOutputSink;
-use std::convert::Infallible;
+use linkedspec_runtime::{RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputSink};
+use std::{cell::RefCell, convert::Infallible, rc::Rc};
 
-let sink = RuntimeDiagnosticOutputSink::new(|event| {
-    observe(event.helper_name, event.rule_label, event.message);
+let events = Rc::new(RefCell::new(Vec::<RuntimeDiagnosticOutputEvent>::new()));
+let captured = Rc::clone(&events);
+let sink = RuntimeDiagnosticOutputSink::new(move |event| {
+    captured.borrow_mut().push(event);
     Ok::<(), Infallible>(())
 });
 
@@ -1594,8 +1605,8 @@ result remains root-cause evidence, not portable behavior. Planning leaf `FUTURE
 the mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042` plus 11 rendering rows, five invalid arities, and six
 semantic scenarios; Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, Julia `.5.1.5`, and Lua `.5.1.6` are complete
 native rollout legs. Generated/primary propagation `.5.1.7` and recurring symmetric gate `.5.1.8` are complete
-too. Final public no-drift `.5.1.9` remains; the executable contract currently records seven complete and one
-pending rollout leg.
+too. Public no-drift `.5.1.9` locks this exact document set and closes the parent; the executable contract records
+8 complete / 0 pending rollout legs.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:

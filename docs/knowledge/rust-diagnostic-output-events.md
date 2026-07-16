@@ -9,6 +9,7 @@ answers:
   - how do Rust diagnostic sink failures propagate
   - what typed outcome does Rust exit_now return
   - are Rust diagnostic events part of RuntimeDiagnostic or native trace
+  - how do generated Rust parsers expose diagnostic output
 date: 2026-07-16
 status: current
 tags: [Rust, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]

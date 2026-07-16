@@ -41,8 +41,10 @@ empty/wrong-kind behavior, Unicode order, structural-result neutrality, quiet ex
 failure, immediate `exit_now`, generated propagation, and the quiet ADR `0024` primary-CLI projection. Validate
 the 11 rendering rows, five invalid arities, six semantic scenarios, and the exact rollout ledger
 offline with `python3 tools/check_diagnostic_output_contract.py`. The checker independently evaluates the model and
-rejects 16 representative semantic, topology, and admission drift mutations. All five native legs, generated/
-primary propagation, and recurring admission are complete; only public no-drift `.5.1.9` remains. Run
+rejects 20 representative semantic, topology, public-document, and admission drift mutations. All five native
+legs, generated/primary propagation, recurring admission, and public no-drift are complete: 8 complete / 0 pending.
+The public contract additionally requires 16 current documentation surfaces and rejects nine exact stale
+claims, so an old direct-host-output or pending-generated caveat cannot silently return. Run
 `bash tools/check_diagnostic_output_five_backend.sh` for the composed Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT native+
 generated proof, selected quiet five-command/default-POSIX case, and generated-source/capability/corpus ledgers.
 Canonical local CI registers that all-toolchain leg behind `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1` while auditing its

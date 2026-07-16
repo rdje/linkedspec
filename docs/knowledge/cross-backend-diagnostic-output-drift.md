@@ -10,10 +10,11 @@ answers:
   - can Perl diagnostic helpers corrupt primary CLI UTF-8 or bypass canonical exit handling
   - which backend has typed diagnostic output events
   - what prevents a diagnostic backend or generated path from dropping out of recurring CI
+  - which public documents are checked for diagnostic output drift
 date: 2026-07-16
 status: current
 tags: [parity, helpers, diagnostic-output, Perl, Rust, Dart, Julia, Lua, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.1.0 establishes the five-backend baseline with Knowledge Map/toolbox/native/process evidence. FUTURE-PARITY-BACKLOG.5.1.2-.6 admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT against exact arity-before-effects, once-only arguments, typed synchronous caller-owned events, quiet default execution, preserved sink failure, and typed immediate exit. FUTURE-PARITY-BACKLOG.5.1.7 propagates the same outcomes through every generated direct/traced entrypoint and locks quiet canonical primary projection across five backends, two environments, and 62 cases. FUTURE-PARITY-BACKLOG.5.1.8 adds one topology-checked recurring driver over all six consumers, the selected quiet projection, and capability/generated-source/corpus ledgers."
+evidence: "FUTURE-PARITY-BACKLOG.5.1.0 establishes the five-backend baseline with Knowledge Map/toolbox/native/process evidence. FUTURE-PARITY-BACKLOG.5.1.2-.6 admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT against exact arity-before-effects, once-only arguments, typed synchronous caller-owned events, quiet default execution, preserved sink failure, and typed immediate exit. FUTURE-PARITY-BACKLOG.5.1.7 propagates the same outcomes through every generated direct/traced entrypoint and locks quiet canonical primary projection across five backends, two environments, and 62 cases. FUTURE-PARITY-BACKLOG.5.1.8 adds one topology-checked recurring driver over all six consumers, the selected quiet projection, and capability/generated-source/corpus ledgers. FUTURE-PARITY-BACKLOG.5.1.9 adds deterministic 16-document/nine-stale-claim public enforcement and closes the rollout at 8/0."
 reverify: "bash tools/check_diagnostic_output_five_backend.sh"
 ---
 
@@ -67,8 +68,10 @@ empty stderr, and status 0. It passes unchanged for all five commands under defa
 This is a parity prerequisite, not permission to add another backend-local convention. Planning leaf `.5.1.0`,
 neutral contract `.5.1.1`, all five native `.5.1.2-.6` legs, generated/primary `.5.1.7`, and the recurring
 symmetric driver `.5.1.8` are complete. Its contract-declared topology prevents an omitted runtime, generated
-role, quiet-primary case, support ledger, or CI registration from silently passing. `.5.1.9` owns public no-drift
-closeout before the structured-format program may execute.
+role, quiet-primary case, support ledger, or CI registration from silently passing. Public no-drift `.5.1.9` is
+also complete: current helper/API/trace/backend/capability/CLI documents are required and the measured stale direct-
+host-output, trace-routed, and generated-pending claims are forbidden. Parent `.5.1` is closed before logical
+truthiness `.5.2`.
 
 Related facts: [[perl-diagnostic-output-events]], [[rust-diagnostic-output-events]],
 [[dart-diagnostic-output-events]], [[lua-diagnostic-output-events]], [[julia-diagnostic-output-helpers]],

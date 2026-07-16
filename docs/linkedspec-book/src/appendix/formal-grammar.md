@@ -725,7 +725,7 @@ filter_match(arr, /re/) — keep elements matching regex
 uniq(arr)               — remove duplicates
 lowercase_each(arr)     — lowercase each element
 uppercase_each(arr)     — uppercase each element
-print_each(arr, prefix[, suffix]) — debug output each element with explicit prefix and optional suffix
+print_each(arr, prefix[, suffix]) — emit one caller-owned diagnostic event per element
 ```
 
 ### 7.4 Hash Helpers

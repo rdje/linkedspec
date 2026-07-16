@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.9` — executable parity must include the explanation users copy):
+  Reimplementing one algorithm in several languages is an unusually strong specification probe: different type,
+  exception, callback, and generated-code boundaries expose assumptions that one implementation can hide. But
+  green backend tests alone do not keep the project coherent. This closeout found current-facing Dart and Julia
+  prose still claiming generated sink propagation was pending, Julia history presented as present behavior, and
+  Perl user guides still teaching direct host printing after the runtime had moved to typed events. Treat the
+  public explanation as another projection of the executable contract: enumerate authoritative documents,
+  require concept markers, forbid exact stale claims, and mutation-test omission and premature admission. The
+  resulting checker owns 16 documents, nine stale-current claims, and 20 mutations; the ledger reaches 8/0.
+  Complete backend gates, direct recurring proof, unchanged 5x2x62 primary projection, and canonical local CI
+  through reference CLI 62x2, Phase 0 `1..1031`, and the registered driver pass. No runtime semantics changed and
+  no mutation campaign ran.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.8` — multi-language parity needs an omission-checked composition layer):
   Six backend consumers can all be correct while the project gate silently stops invoking one of them. Put the
   recurring topology in the same neutral contract as the semantics: ordered runtime legs, native+generated roles,

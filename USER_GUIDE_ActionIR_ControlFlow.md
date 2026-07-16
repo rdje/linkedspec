@@ -604,7 +604,7 @@ LX
 That example uses the lighter `.default`, `.endcase`, and `.endswitch` spellings. They lower through the same canonical path as `.default()`, `.endcase()`, and `.endswitch()`. `endcase` remains optional in many flows, but it is shown here deliberately because explicit branch closeout can make longer fluent switch chains easier to read.
 
 ## `say(...)`
-`say(...)` is the newline-terminating output helper.
+`say(...)` produces one diagnostic event whose message is the concatenated scalar text plus one newline.
 
 Examples:
 
@@ -613,10 +613,10 @@ say("(Lispish) -E- Syntax Error")
 say("entered rule ", scalar(rule_name))
 ```
 
-Use it when you want a simple line-oriented diagnostic.
+Use it when you want a simple line-oriented diagnostic delivered to the embedding caller.
 
 ## `print(...)`
-`print(...)` is the non-newline-forcing output helper.
+`print(...)` produces one diagnostic event without adding a newline.
 
 Examples:
 
@@ -632,7 +632,8 @@ Use it when:
 - you are porting older debug-print rules into canonical helper flow.
 
 ## `print_each(array(target), prefix, suffix?)`
-`print_each(...)` prints every item in one working array, with optional text before and after each item.
+`print_each(...)` produces one ordered diagnostic event per item in a working array, with optional text before and
+after each item.
 
 Examples:
 
@@ -642,12 +643,23 @@ print_each(array(tokens), "token=", "\n")
 print_each(array(debug_rows), "")
 ```
 
-The first argument must name an array container. The second argument is printed before each item. The optional third argument is printed after each item, so include `"\n"` there when you want one output line per item.
+The first argument must name an array container. The second argument is prepended to each item. The optional third
+argument is appended; include `"\n"` there when you want line-oriented messages. `print_each` requires exactly two or three
+arguments. It evaluates the target, prefix, and suffix exactly once left-to-right before delivering any
+item; an omitted suffix is empty text.
 
 Use it when:
 - you have already accumulated child results or debug fragments in an array,
 - you want canonical ActionIR metadata for iterable debug output,
 - you are replacing older raw loops like `print "...$_..." foreach (@matches)`.
+
+All three helpers validate arity before argument effects and return no structural parser value. A native or
+generated embedding API may install one caller-owned `RuntimeDiagnosticOutputEvent` sink for an invocation. Each
+event contains the helper name, current rule label, and Unicode message. Omitting the sink is quiet, a sink failure
+propagates unchanged, and `exit_now(status)` remains distinct typed immediate control. Rich diagnostic events do
+not enter parse results, native/generated trace, primary-command stdout, or stderr. See the mdBook
+[value/container helper reference](docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md#debug-output-helpers)
+for complete Perl, Rust, Dart, Julia, and Lua API examples.
 
 ## `return_undef()`
 This is the explicit helper for returning `undef` in canonical control-flow.

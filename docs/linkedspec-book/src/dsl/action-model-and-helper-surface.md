@@ -155,13 +155,20 @@ Chain operations fluently on values:
 
 Detailed reference: [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md).
 
-### Output helpers
+### Diagnostic output helpers
 
-Emit debug or informational output during parsing:
+Emit caller-owned `RuntimeDiagnosticOutputEvent` values during parsing:
 
-- `say(...)` — print with newline
-- `print(...)` — print without newline
-- `print_each(...)` — print each element of an array
+- `say(value, ...)` — one event containing concatenated scalar text plus one newline;
+- `print(value, ...)` — one event containing concatenated scalar text;
+- `print_each(array, prefix, suffix?)` — one event per item in source order.
+
+These helpers do not write host stdout/stderr directly. The embedding API installs an optional caller-owned sink
+for one invocation; without it, valid calls still evaluate but delivery is quiet. `print`/`say` require one or
+more arguments, `print_each` requires two or three, and arity rejects before effects. Rich events remain outside
+parse results, native/generated trace, and the primary CLI. See [Value, Container, and Flow Helper
+Reference](value-container-flow-helper-reference.md#debug-output-helpers) for the exact ADR `0042` contract and
+five host-language examples.
 
 ### Rule-dispatch helpers
 

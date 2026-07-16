@@ -833,8 +833,12 @@ dispatch rule.
 - **Returns**: void
 - **Behavior**: Debug helper — eagerly emits `prefix + item + suffix` for each element in order. The omitted
   suffix is empty text under ADR `0042`. Arguments evaluate exactly once left-to-right before item delivery; an
-  empty or wrong-kind target emits no events. No message enters the parser result. Current backend routing,
-  arity, evaluation, and default-suffix drift remains explicitly owned by `FUTURE-PARITY-BACKLOG.5.1.2-.9`.
+  empty or wrong-kind target emits no events. No message enters the parser result. Each item is delivered as a
+  caller-owned `RuntimeDiagnosticOutputEvent` with exact helper/rule/message fields; an absent sink is quiet and a
+  sink failure propagates unchanged. Native and generated execution on all five backends consume this same
+  contract; primary commands deliberately install no rich sink. See the [value/container helper
+  reference](../dsl/value-container-flow-helper-reference.md#debug-output-helpers) for event rendering, typed exit,
+  and host API examples.
 
 ## 4. Hash Helpers
 

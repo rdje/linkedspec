@@ -149,7 +149,24 @@ Arity is validated before any argument evaluates: `print`/`say` require at least
 `print_each` requires two or three. Valid arguments evaluate once left-to-right. A callback failure propagates as
 the exact caller object, including `RuntimeInterpreterException`, and aborts later items/actions. `exit_now`
 throws `RuntimeExitNow(status)` after any preceding event. Neither event data nor callback failures become
-`RuntimeDiagnostic` or native trace records. Generated entrypoint propagation remains separately pending.
+`RuntimeDiagnostic` or native trace records. Independently emitted modules expose the same keyword on direct and
+traced entrypoints:
+
+```julia
+value = LinkedSpecGeneratedParser.execute(
+    input;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+traced = LinkedSpecGeneratedParser.execute_with_trace(
+    input,
+    trace_config;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+```
+
+Generated `LinkedSpecGeneratedParser.execute` and `LinkedSpecGeneratedParser.execute_with_trace` retain their
+sinkless forms. Caller failures cross generated framing unchanged; ordinary failures retain generated-source
+attribution.
 
 ## Native Trace Propagation
 
@@ -299,8 +316,8 @@ measures shipped-spec/parser-smoke fixtures 68–98 at 10 passed / 21 failed and
 mechanism leaves. `.6.2.4.1` adds the complete direct anonymous capture-boundary family, closes all three hlink
 delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers, closes
 three portmap cases plus tablegrep. `.6.2.4.2.3` adds shared strict helper regex flag normalization and closes
-`portmap_constant`. `.6.2.4.2.2` adds eager `print`/`print_each`/`say` execution through the configured low-level
-trace sink without changing parse output. Simenv advances to unsupported `exit_now`, while history reaches its
+`portmap_constant`. At the historical `.6.2.4.2.2` boundary, eager `print`/`print_each`/`say` execution used the
+configured low-level trace sink without changing parse output. Simenv then advanced to unsupported `exit_now`, while history reached its
 leading-trivia output mismatch. Full tests pass with 780 assertions, status is
 `runtime-corpus-diagnostic-output` at that boundary. `.6.2.4.3` scopes explicit aggregate resets per rule
 invocation, preserves ordinary caller-visible child mutations, and closes all three recursive top-rule cases.

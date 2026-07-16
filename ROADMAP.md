@@ -941,8 +941,10 @@ classification. Generated/primary `.5.1.7` now extends every emitted direct/trac
 preserves caller failures and typed exit through generated framing, and locks exact quiet canonical JSON across
 all five primary commands under the shared 62-case default/POSIX matrix. Symmetric recurring admission `.5.1.8`
 now locks one strict driver over the neutral model, all six native/generated consumers, the selected quiet five-
-command case, and generated-source/capability/corpus ledgers; the offline checker rejects 16 semantic/topology
-mutations. The ledger is 7 complete / 1 pending; public no-drift `.5.1.9` is next before structured-format work.
+command case, and generated-source/capability/corpus ledgers. Public no-drift `.5.1.9` closes the program with 16
+authoritative documents, nine forbidden stale claims, copyable native/generated examples for all five backends,
+and 20 semantic/topology/public-admission mutations. The ledger is 8 complete / 0 pending, parent `.5.1` is done,
+and logical truthiness/arity/lowering `.5.2` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

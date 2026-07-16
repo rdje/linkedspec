@@ -125,7 +125,11 @@ Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. 
 Unicode `message`; passing no sink is quiet and event text is never inserted into `RuntimeDiagnostic` or native
 trace. `RuntimeDiagnosticOutputExecutionError` has distinct `Runtime`, `Sink`, and `Exit` variants, so existing
 structured runtime context, the caller's concrete sink failure, and `RuntimeExitNow { status }` do not get
-rewritten into one textual channel. Generated parser sink propagation remains separately pending.
+rewritten into one textual channel. Emitted Rust modules preserve their sinkless functions and add paired
+`execute_with_diagnostic_output` / `execute_with_trace_and_diagnostic_output` plus compatibility
+`parse_with_diagnostic_output` / `parse_with_trace_and_diagnostic_output` functions. Their
+`GeneratedDiagnosticOutputExecutionError` keeps generated-source, compatibility, caller-sink, and immediate-exit
+outcomes distinct.
 
 ## Typical payload shape
 

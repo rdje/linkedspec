@@ -9,6 +9,7 @@ answers:
   - how do Dart diagnostic sink failures propagate
   - what typed outcome does Dart exit_now throw
   - are Dart diagnostic events part of RuntimeDiagnostic or native trace
+  - how do generated Dart parsers expose diagnostic output
 date: 2026-07-16
 status: current
 tags: [Dart, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]

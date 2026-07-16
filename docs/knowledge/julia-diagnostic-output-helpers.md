@@ -14,6 +14,7 @@ answers:
   - why did Julia simenv once fail on exit_now
   - why did Julia ds_vhistory once return proj foo
   - what did JULIA-BACKEND-PARITY.6.2.4.2.2 prove
+  - how do generated Julia parsers expose diagnostic output
 date: 2026-07-16
 status: current
 tags: [Julia, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]

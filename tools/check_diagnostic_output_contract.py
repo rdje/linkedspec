@@ -185,6 +185,120 @@ RECURRING_GATE = {
         "switch": "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX",
     },
 }
+PUBLIC_CONTRACT = {
+    "documents": [
+        {
+            "path": "README.md",
+            "required_markers": [
+                "tools/check_diagnostic_output_five_backend.sh",
+                "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1",
+            ],
+        },
+        {
+            "path": "USER_GUIDE_ActionIR_ControlFlow.md",
+            "required_markers": [
+                "caller-owned `RuntimeDiagnosticOutputEvent`",
+                "`print_each` requires exactly two or three",
+            ],
+        },
+        {
+            "path": "USER_GUIDE_ActionIR_EmittedPerlReference.md",
+            "required_markers": [
+                "`LinkedSpec::RuntimeDiagnosticOutput::emit`",
+                "never raw host `print`/`say`",
+            ],
+        },
+        {
+            "path": "rust/README.md",
+            "required_markers": [
+                "## Diagnostic Output Events",
+                "`execute_with_diagnostic_output`",
+                "`execute_with_trace_and_diagnostic_output`",
+            ],
+        },
+        {
+            "path": "dart/README.md",
+            "required_markers": ["`diagnosticOutputSink`", "`executeWithTrace`", "generated entrypoints"],
+        },
+        {
+            "path": "julia/README.md",
+            "required_markers": ["`diagnostic_output_sink`", "`LinkedSpecGeneratedParser.execute_with_trace`"],
+        },
+        {
+            "path": "lua/README.md",
+            "required_markers": ["`diagnostic_sink`", "`generated.execute_with_trace`", "PUC Lua and LuaJIT"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "required_markers": ["ADR `0042`", "`RuntimeDiagnosticOutputEvent`", "all five backends"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "required_markers": [
+                "Generated modules expose",
+                "`success_diagnostic_helpers_quiet`",
+                "tools/check_diagnostic_output_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "required_markers": ["`RuntimeDiagnosticOutputEvent`", "caller-owned"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/trace-api.md",
+            "required_markers": ["## Diagnostic output is not trace", "ADR `0042`", "ADR `0024`"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+            "required_markers": [
+                "`GeneratedDiagnosticOutputExecutionError`",
+                "`execute_with_trace_and_diagnostic_output`",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "required_markers": ["caller-owned diagnostic event"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": ["`linkedspec-diagnostic-output-v1`", "8 complete / 0 pending"],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": ["20 representative", "8 complete / 0 pending"],
+        },
+        {
+            "path": "cli_conformance/README.md",
+            "required_markers": ["success_diagnostic_helpers_quiet", "5x2x62 matrix"],
+        },
+    ],
+    "forbidden_current_claims": [
+        {"path": "dart/README.md", "text": "Generated parser entrypoint propagation remains owned"},
+        {"path": "julia/README.md", "text": "Generated entrypoint propagation remains separately pending"},
+        {
+            "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+            "text": "Generated parser sink propagation remains separately pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "text": "default-suffix drift remains explicitly owned",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "Julia emits these messages through a",
+        },
+        {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "text": "prints every item in one working array"},
+        {
+            "path": "USER_GUIDE_ActionIR_EmittedPerlReference.md",
+            "text": '`print "item<<", $_, ">>\\n" foreach',
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "text": "`say(...)` — print with newline",
+        },
+        {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "text": "debug output each element"},
+    ],
+}
 GATE_CONSUMER_MARKERS = {
     "perl": "t/diagnostic_output_perl_contract.t",
     "rust": "--test diagnostic_output_contract",
@@ -201,7 +315,7 @@ ROLLOUT = [
     ("lua_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.6"),
     ("generated_and_primary_cli", "complete", "FUTURE-PARITY-BACKLOG.5.1.7"),
     ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.5.1.8"),
-    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.1.9"),
+    ("public_no_drift", "complete", "FUTURE-PARITY-BACKLOG.5.1.9"),
 ]
 
 
@@ -408,6 +522,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
         "scenarios",
         "projections",
         "recurring_gate",
+        "public_contract",
         "backend_rollout",
     }:
         fail("top-level fields drifted")
@@ -488,6 +603,8 @@ def validate_contract(contract: dict[str, Any]) -> None:
         fail("native/generated/CLI projection drifted")
     if contract["recurring_gate"] != RECURRING_GATE:
         fail("recurring gate topology drifted")
+    if contract["public_contract"] != PUBLIC_CONTRACT:
+        fail("public diagnostic-output contract drifted")
 
     gate_path = ROOT / RECURRING_GATE["driver"]
     if not gate_path.is_file():
@@ -524,6 +641,19 @@ def validate_contract(contract: dict[str, Any]) -> None:
     local_ci_text = local_ci_path.read_text(encoding="utf-8")
     if RECURRING_GATE["driver"] not in local_ci_text or local_ci["switch"] not in local_ci_text:
         fail("recurring gate local-CI registration drifted")
+
+    for document in PUBLIC_CONTRACT["documents"]:
+        public_path = ROOT / document["path"]
+        if not public_path.is_file():
+            fail(f"public diagnostic-output document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            if marker not in public_text:
+                fail(f"public diagnostic-output marker is missing from {document['path']}: {marker}")
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        public_text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        if forbidden["text"] in public_text:
+            fail(f"stale public diagnostic-output claim remains in {forbidden['path']}: {forbidden['text']}")
     rollout = contract["backend_rollout"]
     if not isinstance(rollout, list) or len(rollout) != len(ROLLOUT):
         fail("backend rollout coverage drifted")
@@ -579,6 +709,19 @@ def main() -> None:
         (
             lambda value: value["backend_rollout"][6].__setitem__("status", "pending"),
             "recurring gate admission regression",
+        ),
+        (lambda value: value["public_contract"]["documents"].pop(), "public document coverage"),
+        (
+            lambda value: value["public_contract"]["documents"][0]["required_markers"].pop(),
+            "public marker coverage",
+        ),
+        (
+            lambda value: value["public_contract"]["forbidden_current_claims"].pop(),
+            "stale public claim coverage",
+        ),
+        (
+            lambda value: value["backend_rollout"][7].__setitem__("status", "pending"),
+            "public no-drift admission regression",
         ),
     ]
     for mutate, label in mutations:

@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: public diagnostic-output no-drift `.5.1.9` closes the eight-leg normalization program.
+  The neutral contract now identifies 16 authoritative public documents and nine exact stale-current claims; the
+  independent checker verifies every required contract marker and rejects 20 semantic, topology, documentation,
+  and premature-admission mutations. Backend READMEs and the mdBook expose copyable native and generated sink
+  examples for Perl, Rust, Dart, Julia, and Lua, with typed event/order/failure/exit behavior, quiet primary CLI,
+  and rich-event versus ADR `0024` phase-trace separation stated consistently. Complete Rust, Dart, Julia, and
+  dual-ABI Lua gates, the strict composed driver, unchanged 5x2x62 matrix, and canonical local CI all pass;
+  canonical proof includes reference CLI 62x2, Phase 0 `1..1031`, and the registered driver. Capability remains
+  80/0/0, the rollout ledger is 8 complete / 0 pending, parent `.5.1` is closed, and logical truthiness/arity/
+  lowering `.5.2` is active. Runtime semantics did not change.
 - `2026-07-16` refresh: recurring diagnostic-output gate `.5.1.8` turns the five host implementations into one
   omission-checked executable specification. The neutral contract now declares an exact ordered topology for Perl,
   Rust, Dart, Julia, PUC Lua, and LuaJIT native+generated consumers; the quiet five-command case; generated-source,

@@ -8,6 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.9 — close diagnostic-output public no-drift**
+  (DONE — the diagnostic-output program is 8 complete / 0 pending; parent `.5.1` is closed and logical
+  truthiness/arity/lowering `.5.2` is active).
+
+  **Result:** The neutral contract and independent checker now own 16 authoritative public documents, exact
+  durable markers, and nine forbidden stale-current claims. Backend READMEs and the mdBook teach copyable native
+  and generated event-sink use for Perl, Rust, Dart, Julia, and Lua, including exact arity/evaluation/rendering,
+  caller-failure identity, typed immediate exit, primary quietness, and separation from ADR `0024` phase trace.
+  The mutation inventory grows from 16 to 20 with public-document removal, marker removal, stale-claim coverage
+  removal, and premature public-admission regressions.
+
+  **Proof:** The offline checker reports 8 complete / 0 pending and rejects all 20 mutations. Complete Rust,
+  Dart, Julia, and dual-ABI Lua gates pass; the recurring driver passes Perl 16, Rust 7, Dart 7, Julia 82, PUC Lua
+  119, LuaJIT 119, exact 5x2x1 quiet CLI projection, generated-source 80/0/0 capability, and exhaustive coverage.
+  The unchanged primary matrix passes 5x2x62. Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031`,
+  and the registered diagnostic driver. No runtime semantics changed and no mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.8 — add recurring diagnostic-output gate**
   (DONE — one symmetric driver protects every native/generated/primary projection; public no-drift `.5.1.9` is
   next).

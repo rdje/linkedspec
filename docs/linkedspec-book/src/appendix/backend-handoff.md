@@ -848,22 +848,22 @@ pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLO
 `and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately pending under `.5.2`;
 Lua `.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local
 closure is a false five-backend normalization claim.
-Planning `.5.1.0` has since split diagnostic parity without changing behavior. Exact probes add three important
-reference hazards to the older transport summary: Perl evaluates `print_each` prefix/suffix inside its host loop,
-host output bypasses the primary command's strict UTF-8 encoder, and lowered host `exit` bypasses canonical
-invocation failure framing. Neutral contract `.5.1.1` now adopts ADR `0042` and the strict
+Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
+reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,
+host output bypassed the primary command's strict UTF-8 encoder, and lowered host `exit` bypassed canonical
+invocation failure framing. Neutral contract `.5.1.1` then adopted ADR `0042` and the strict
 `linkedspec-diagnostic-output-v1` fixture: one-plus/two-or-three arities before evaluation, once-only arguments,
 typed scalar rendering, per-call/item Unicode events, quiet caller sinks, unchanged sink failure, immediate exit,
 generated propagation, and an ADR `0024`-separate quiet primary projection. Its eight rollout rows deliberately
 began pending. Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5` now consume the exact native contract through typed
 invocation-local events, quiet defaults, preserved sink failure, and typed immediate exit. Dart and Julia both
 use private carriers through their action/runtime wrappers so even a caller-thrown interpreter exception retains
-its exact identity; Julia additionally removes rich helper text from low trace. Lua `.6` now consumes all 109
+its exact identity; Julia additionally removes rich helper text from low trace. Lua `.6` consumes all 109
 neutral assertions on PUC Lua and LuaJIT, using the same private-carrier pattern for exact caller identity and a
-distinct `RuntimeExitNow`. The ledger is 5 complete / 3 pending; generated/CLI `.7`, recurring admission `.8`, and
-public no-drift `.9` own the remaining correction. Generated/CLI `.7` and the topology-checked recurring six-
-consumer/native+generated/quiet-primary gate `.8` have since closed at 7 complete / 1 pending; public no-drift
-`.9` is active.
+distinct `RuntimeExitNow`. Generated/CLI `.7` propagated the same sink through every available emitted role and
+locked the quiet primary projection. The topology-checked recurring six-consumer/native+generated/quiet-primary
+gate `.8` prevents silent omission. Public no-drift `.9` aligns and checks the normative document set, closing the
+diagnostic-output parent at 8 complete / 0 pending while capability remains 80/0/0.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime
@@ -1780,13 +1780,14 @@ only `g` and Perl compile-once `o` are compile-time no-ops; unknown flags and in
 Both `matches(...)` and regex-delimiter `split(...)` use the seam. Portmap constant passes exact checked-in output,
 and the window is 18/31 at that boundary.
 
-Diagnostic `print(...)` and `say(...)` concatenate evaluated values, with `say(...)` adding a newline;
-`print_each(...)` walks an array with optional prefix and suffix text. Julia emits these messages through a
-configured low-level trace sink, returns no parse value, and remains quiet when tracing is absent or disabled.
-At the `.6.2.4.2.2` boundary, `simenv_multiline_value` reached unsupported `exit_now`, and
+At the historical `.6.2.4.2.2` boundary, diagnostic `print(...)` and `say(...)` concatenated evaluated values,
+with `say(...)` adding a newline; `print_each(...)` walked an array with optional prefix and suffix text. Julia
+then emitted these messages through a configured low-level trace sink, returned no parse value, and remained
+quiet when tracing was absent or disabled. `simenv_multiline_value` reached unsupported `exit_now`, and
 `ds_vhistory_version_entry` reached the known leading-trivia output mismatch. The permanent regression rejects
 renewed unsupported-`print` failures. The full window remained 18/31, full tests passed with 780 assertions, and
-status was `runtime-corpus-diagnostic-output`; later leaves own both residuals.
+status was `runtime-corpus-diagnostic-output`; later leaves closed both residuals. Current Julia diagnostic output
+uses ADR `0042`'s separate caller-owned typed event sink and never low trace.
 
 Recursive rule calls now carry a first-reset binding snapshot for explicit `set(array(...), ...)`,
 `set(hash(...), ...)`, and explicit split-target replacement. Child exit restores the caller's prior typed binding,

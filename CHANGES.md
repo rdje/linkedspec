@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.9 — close diagnostic-output public no-drift
+
+Extended `linkedspec-diagnostic-output-v1` with an authoritative 16-document public contract and nine exact
+forbidden stale-current claims. The independent checker validates every required marker and expands its mutation
+inventory from 16 to 20 with public-document removal, marker removal, stale-claim coverage removal, and premature
+public-admission regressions. The rollout ledger is now 8 complete / 0 pending.
+
+Aligned backend READMEs, helper/action guides, diagnostics and trace API chapters, formal/helper catalogs, backend
+handoff, capability evidence, roadmap/status pages, task-tree records, and Knowledge Map facts. Users now have
+copyable native and generated sink examples for Perl, Rust, Dart, Julia, and Lua, plus one consistent explanation
+of exact event semantics, typed exit, quiet primary commands, and separation from ADR `0024` phase trace. Stale
+claims that Dart/Julia generated propagation remained pending and that Perl helpers still lowered to direct host
+printing are removed or explicitly historicized.
+
+Complete backend gates, the strict recurring diagnostic driver, unchanged 5x2x62 primary matrix, and canonical
+local CI pass; canonical proof includes reference CLI 62x2, Phase 0 `1..1031`, and the registered driver. Parent
+`.5.1` closes and logical truthiness/arity/lowering `.5.2` activates. Runtime semantics did not change and no
+mutation campaign ran.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.8 — add recurring diagnostic-output gate
 
 Added `tools/check_diagnostic_output_five_backend.sh`, one strict all-toolchain driver for the unchanged neutral

@@ -189,10 +189,11 @@ This `README.md` is the **single entry point** to the project.
   failures and typed exit across generated framing, and adds one exact quiet diagnostic-helper primary case.
   Recurring gate `.5.1.8` now composes the neutral model, six native/generated consumers, the selected five-command
   quiet projection, and capability/generated-source/corpus ledgers under one omission-checked driver. All five
-  commands still pass the shared 62 cases under default and POSIX environments; the ledger is 7 complete / 1
-  pending, with public no-drift `.5.1.9` next;
-  Perl logical keyword-lowering plus five-backend truthiness/arity
-  normalization remains separately owned by `.5.2` before structured-format execution.
+  commands still pass the shared 62 cases under default and POSIX environments. Public no-drift `.5.1.9` now
+  locks 16 authoritative documents, nine forbidden stale claims, extensive native/generated examples, and 20
+  semantic/topology/public-admission mutations; the ledger is 8 complete / 0 pending and parent `.5.1` is closed.
+  Perl logical keyword-lowering plus five-backend truthiness/arity normalization is the active `.5.2` frontier
+  before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

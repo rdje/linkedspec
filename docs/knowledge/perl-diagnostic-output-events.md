@@ -9,6 +9,7 @@ answers:
   - how do Perl diagnostic sink failures propagate
   - what does Perl exit_now throw
   - do Perl generated handlers call host print say or exit
+  - what do Perl print say and print_each lower to
 date: 2026-07-16
 status: current
 tags: [Perl, runtime, ActionIR, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
@@ -42,6 +43,11 @@ event and prevents later actions. Generated live handlers call `RuntimeDiagnosti
 host `print`, `say`, or `exit`. Independently emitted `Execute($input_ref, $invocation_options)`,
 `ExecuteWithTrace($input_ref, $trace_config, $invocation_options)`, and `Get(...)` now expose the same sink and
 preserve these outcomes while ordinary failures retain generated-source attribution.
+
+`LinkedSpec::call_spec_handler_subst(...)` confirms the exact current lowering seam: all valid output helpers first
+snapshot evaluated values into an array, then call `LinkedSpec::RuntimeDiagnosticOutput::emit($descr, $rule,
+$helper, $values)`. `print_each` passes one snapshotted array plus prefix/suffix to that owner; no host `foreach`
+controls argument evaluation or delivery.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[lua-diagnostic-output-events]], [[perl-generated-handler-runtime-errors]].

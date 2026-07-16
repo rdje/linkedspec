@@ -21,6 +21,19 @@ The portable contract is behavioral, not package-name based. A variant that clai
 - dump/log events for deeper diagnostic payloads at higher verbosity;
 - a default quiet mode where tracing is disabled and normal output remains unchanged.
 
+## Diagnostic output is not trace
+
+Parser-authored `print`, `say`, and `print_each` messages use ADR `0042`'s separate invocation-local
+`RuntimeDiagnosticOutputEvent` sink. They never become native trace events, portable generated trace events,
+`RuntimeDiagnostic` failures, parse-result values, or primary-command stdout/stderr. Omitting the diagnostic sink
+keeps delivery quiet while valid helper arguments still evaluate.
+
+This boundary is independent of the trace emitter described in this chapter. A caller may install trace, rich
+diagnostic output, both, or neither; traced and untraced parser values remain identical. Primary commands install
+neither rich event sink and expose only ADR `0024` phase trace when requested. Native and generated examples for
+Perl, Rust, Dart, Julia, and Lua are in the [value/container helper
+reference](../dsl/value-container-flow-helper-reference.md#debug-output-helpers).
+
 ADR `0037` extends this contract for the future dynamically constructed format parsers. Their normal native path
 must correlate construction and execution: `.spec` resolution/imports, validation, staged jobs, contract and
 dependency planning, cache identity, and compilation must be traceable beside rule entry/exit, parsing decisions,

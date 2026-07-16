@@ -868,6 +868,22 @@ synchronously in message order. Omit `diagnostic_sink` for quiet execution; help
 callback throws, the exact caller value propagates unchanged and later items/actions do not run. The same sink
 option and behavior apply to `runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace`.
 
+Independently loaded generated modules retain their sinkless signatures and accept the same invocation option on
+direct and traced execution:
+
+```lua
+local value = generated.execute(input, {
+  diagnostic_sink = function(event) events[#events + 1] = event end,
+})
+local traced = generated.execute_with_trace(input, trace_config, {
+  diagnostic_sink = function(event) events[#events + 1] = event end,
+})
+```
+
+Generated `generated.execute` and `generated.execute_with_trace` retain their sinkless forms. The generated
+boundary preserves exact caller failures and typed `RuntimeExitNow` while ordinary failures retain source
+attribution. This contract is identical on PUC Lua and LuaJIT.
+
 `runtime_parse(...)` and its `runtime_execute(...)` alias execute default,
 AND, OR, single, optional, plus/star, and bounded families. Action and blind
 edges dispatch children through `retv`; lifecycle payloads run in applicable

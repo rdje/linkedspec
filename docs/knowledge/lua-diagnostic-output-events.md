@@ -10,6 +10,7 @@ answers:
   - does Lua preserve diagnostic sink failure identity
   - does Lua exit_now still terminate immediately
   - what is Lua RuntimeExitNow
+  - how do generated Lua parsers expose diagnostic output
 date: 2026-07-16
 status: current
 tags: [lua, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]

@@ -168,6 +168,50 @@ The engine implements 80+ helpers covering:
 - **Debug**: `print`, `say`, `print_each`
 - **Dispatch**: `call`
 
+## Diagnostic Output Events
+
+Parser-authored `print`, `say`, and `print_each` use a caller-owned typed event channel; they never write host
+stdout/stderr directly. Arity rejects before effects (`print`/`say` need at least one argument; `print_each` needs
+two or three), valid arguments evaluate once left-to-right, and an absent sink stays quiet. Native top-rule and
+direct-value execution accept the optional sink explicitly through `execute_with_diagnostic_output` and
+`execute_value_with_diagnostic_output`:
+
+```rust
+use linkedspec_runtime::{RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputSink};
+use std::{cell::RefCell, convert::Infallible, rc::Rc};
+
+let events = Rc::new(RefCell::new(Vec::<RuntimeDiagnosticOutputEvent>::new()));
+let captured = Rc::clone(&events);
+let sink = RuntimeDiagnosticOutputSink::new(move |event| {
+    captured.borrow_mut().push(event);
+    Ok::<(), Infallible>(())
+});
+
+let output = engine.execute_with_diagnostic_output(input, Some(&sink))?;
+let value = engine.execute_value_with_diagnostic_output(input, &options, Some(&sink))?;
+```
+
+Each `RuntimeDiagnosticOutputEvent` has exactly `helper_name`, `rule_label`, and Unicode `message`. Rich events
+stay outside `RuntimeDiagnostic`, native trace, parse values, and the primary command. The typed
+`RuntimeDiagnosticOutputExecutionError` keeps ordinary runtime failure, the caller's concrete sink error, and
+`RuntimeExitNow { status }` distinct.
+
+Emitted modules preserve legacy `execute`/`execute_with_trace` signatures and add paired
+`execute_with_diagnostic_output` and `execute_with_trace_and_diagnostic_output` entrypoints:
+
+```rust
+let value = generated_parser::execute_with_diagnostic_output(input, Some(&sink))?;
+let traced = generated_parser::execute_with_trace_and_diagnostic_output(
+    input,
+    trace_config,
+    Some(&sink),
+)?;
+```
+
+Compatibility generated roles likewise expose `parse_with_diagnostic_output` and
+`parse_with_trace_and_diagnostic_output`. Their `GeneratedDiagnosticOutputExecutionError` preserves generated-
+source attribution, compatibility failure, caller sink error, and typed immediate exit as separate outcomes.
+
 ## Relationship to Perl Reference
 
 The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust variant:

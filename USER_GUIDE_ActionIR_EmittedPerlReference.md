@@ -272,19 +272,25 @@ Important nuance:
 - `elif(scalar(alt_on))` -> `} elsif ($alt_on) {`
 - `else()` -> `} else {`
 - `endif()` -> `}`
-- `say("warn")` -> `say "warn"`
-- `say("entered rule ", scalar(rule_name))` -> `say "entered rule ", $rule_name`
-- `print("token=", scalar(token), "\n")` -> `print "token=", $token, "\n"`
-- `print_each(array(matches), "item<<", ">>\n")` -> `print "item<<", $_, ">>\n" foreach (@matches)`
+- `say("warn")` -> one evaluated-value array passed to
+  `LinkedSpec::RuntimeDiagnosticOutput::emit($descr, $rule, "say", $values)`
+- `say("entered rule ", scalar(rule_name))` -> the same event seam after both arguments are snapshotted
+  left-to-right
+- `print("token=", scalar(token), "\n")` -> the same event seam with helper name `print`
+- `print_each(array(matches), "item<<", ">>\n")` -> the same event seam with one snapshotted array plus prefix
+  and suffix; iteration and delivery belong to `LinkedSpec::RuntimeDiagnosticOutput::emit`
 - `switch(scalar(op))` -> `do { my $__ls_switch_value_1 = $op; my $__ls_switch_hit_1 = 0`
 - `case("|")` inside that switch -> `if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq "|") { $__ls_switch_hit_1 = 1`
 - `case(/^BEGIN_/)` inside that switch -> `if (!$__ls_switch_hit_1 && $__ls_switch_value_1 =~ /^BEGIN_/) { $__ls_switch_hit_1 = 1`
 - `default()` inside that switch -> `if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1`
 - `endcase()` -> `}`
 - `endswitch()` -> `}` if there was no open case, or `} }` when it closes the current case and then the switch scope
-- `switch(scalar(op), case("|", say("hit")), default(return_undef()))` -> `do { my $__ls_switch_value_1 = $op; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq "|") { $__ls_switch_hit_1 = 1; say "hit" }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; return undef } }`
+- `switch(scalar(op), case("|", say("hit")), default(return_undef()))` embeds that same diagnostic event call in
+  the selected branch and keeps `return undef` in the default branch
 
 Important nuance:
+- Current canonical output helpers lower through `LinkedSpec::RuntimeDiagnosticOutput::emit`, never raw host `print`/`say`;
+  the invocation-local sink owns delivery and a missing sink is quiet.
 - Marker-style switch is better for long branch bodies.
 - Composite switch is good for short one-liners.
 

@@ -178,8 +178,20 @@ final result = engine.parse(
 
 Without a sink execution remains eager but quiet, and event text never enters `RuntimeParseResult` or native
 trace. A thrown sink object propagates unchanged and aborts later delivery; `RuntimeExitNow.status` is separate
-typed immediate control. Generated parser entrypoint propagation remains owned by
-`FUTURE-PARITY-BACKLOG.5.1.7`. Helper-call parsing preserves literal delimiters inside quoted arguments.
+typed immediate control. Emitted generated entrypoints expose the same optional named argument while retaining
+their sinkless signatures:
+
+```dart
+final value = execute(input, diagnosticOutputSink: events.add);
+final traced = executeWithTrace(
+  input,
+  traceConfig,
+  diagnosticOutputSink: events.add,
+);
+```
+
+Caller objects and stacks cross generated framing unchanged; ordinary failures retain generated-source
+attribution. Helper-call parsing preserves literal delimiters inside quoted arguments.
 Compiled action edges now carry resolved regex-dispatch metadata, edge-only child
 regexes are folded into the parent alternation, and runtime action dispatch uses
 that metadata directly. Aggregate resets through `set(items, [])` and

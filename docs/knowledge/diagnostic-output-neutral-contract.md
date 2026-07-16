@@ -13,10 +13,12 @@ answers:
   - what happens to diagnostic events around exit_now
   - how do I run the recurring five-backend diagnostic output gate
   - which diagnostic output consumers are required by the recurring gate
+  - where are portable native and generated diagnostic output examples
+  - how is diagnostic output public documentation checked for drift
 date: 2026-07-16
 status: current
 tags: [architecture, parity, helpers, diagnostic-output, events, sink, generated-source, cli]
-evidence: "ADR 0042 ratifies linkedspec-diagnostic-output-v1. capability_conformance/diagnostic_output_contract.json encodes three helpers, 11 render rows, five invalid arities, six semantic scenarios, and exact rollout plus recurring-gate topology; tools/check_diagnostic_output_contract.py independently evaluates the fixtures/topology and rejects 16 drift mutations. FUTURE-PARITY-BACKLOG.5.1.2-.6 complete all five native legs, .5.1.7 completes generated/primary propagation, and .5.1.8 composes six native/generated consumers plus exact quiet CLI and support ledgers."
+evidence: "ADR 0042 ratifies linkedspec-diagnostic-output-v1. capability_conformance/diagnostic_output_contract.json encodes three helpers, 11 render rows, five invalid arities, six semantic scenarios, exact recurring-gate topology, and 16 required public documents plus nine forbidden stale claims; tools/check_diagnostic_output_contract.py independently evaluates them and rejects 20 drift mutations. FUTURE-PARITY-BACKLOG.5.1.2-.6 complete all five native legs, .5.1.7 completes generated/primary propagation, .5.1.8 composes six native/generated consumers plus exact quiet CLI/support ledgers, and .5.1.9 closes public no-drift at 8/0."
 reverify: "bash tools/check_diagnostic_output_five_backend.sh"
 ---
 
@@ -32,11 +34,13 @@ Unicode order, structural-result neutrality, unchanged sink-failure propagation,
 Generated APIs must propagate the per-invocation sink; primary commands omit it and therefore emit only canonical
 parse JSON on successful default execution.
 
-The rollout ledger now records all five native legs, generated/primary projection, and the recurring symmetric
-gate as `complete` (seven complete, one pending). `tools/check_diagnostic_output_five_backend.sh` requires Perl,
+The rollout ledger records all five native legs, generated/primary projection, the recurring symmetric gate, and
+public no-drift as `complete` (8 complete / 0 pending). `tools/check_diagnostic_output_five_backend.sh` requires Perl,
 Rust, Dart, Julia, PUC Lua, and LuaJIT; runs every focused native+generated consumer; selects the exact quiet case
 through the shared five-command/default-POSIX matrix; and checks generated-source, capability, and corpus ledgers.
-Public no-drift `.5.1.9` remains.
+Its offline model also requires the helper catalog, value-flow/API/trace pages, backend READMEs/handoff, capability,
+CLI, and root guidance and rejects the measured stale host-output/generated-pending claims. The mdBook value-flow
+page is the canonical copyable five-language native/generated example set.
 
 Related facts: [[perl-diagnostic-output-events]], [[rust-diagnostic-output-events]],
 [[dart-diagnostic-output-events]], [[julia-diagnostic-output-helpers]],
