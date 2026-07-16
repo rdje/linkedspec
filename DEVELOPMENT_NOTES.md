@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.1` — output helpers are events, not process I/O or parser data):
+  Validate arity before effects, evaluate valid-call arguments once left-to-right, render through an explicit
+  diagnostic scalar seam, and group one typed event per call/item. Keep the sink per invocation and synchronous:
+  absence suppresses delivery only, while caller failure propagates unchanged and stops later items/actions.
+  `exit_now` delivers only events that precede it. Generated entrypoints inherit this native option; primary
+  commands omit it and retain ADR `0024`'s phase-only trace. Null/aggregate/codeblock values deliberately become
+  empty diagnostic fragments without weakening ADR `0028`'s `cat` null propagation. The neutral checker evaluates
+  11 render rows, five invalid arities, and six semantic scenarios, then rejects eight mutations. Every rollout
+  leg remains pending so a design artifact cannot masquerade as backend parity; Perl `.5.1.2` is next. Canonical
+  local CI passes primary CLI 61x2 plus Phase 0 `1..1031` in 609 seconds. Mutation campaigns were not run.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.0` — diagnostic output is four mechanisms, not one string repair):
   Separate callable validation, argument evaluation, scalar/message formation, and delivery/process control before
   implementation. The Perl reference cannot be copied blindly: its generated host `foreach` puts prefix/suffix

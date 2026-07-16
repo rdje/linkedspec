@@ -181,8 +181,10 @@ This `README.md` is the **single entry point** to the project.
   capabilities, advances the census to 80/0/0, retires the satisfied Lua-backend and variadic-function future
   exclusions, and closes the backend handoff without changing its PUC-primary/LuaJIT-compatibility policy.
   Diagnostic-output audit `.5.1.0` has now separated arity/evaluation, formatting, transport, generated/CLI, and
-  host-process-control drift without changing behavior. Neutral executable contract `.5.1.1` is active before
-  five backend repairs and recurring admission; Perl logical keyword-lowering plus five-backend truthiness/arity
+  host-process-control drift without changing behavior. Neutral executable contract `.5.1.1` now adopts ADR
+  `0042` plus one checked fixture with exact arity/evaluation/rendering/events/sink/exit/generated/CLI semantics;
+  all eight rollout legs remain explicitly pending. Perl native repair `.5.1.2` is next before four more native
+  backends, generated propagation, recurring admission, and public no-drift; Perl logical keyword-lowering plus five-backend truthiness/arity
   normalization remains separately owned by `.5.2` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured

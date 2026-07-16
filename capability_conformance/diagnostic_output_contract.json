@@ -1,0 +1,213 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-diagnostic-output-v1",
+  "policy": {
+    "arity_validation": "validate positional arity before evaluating any argument",
+    "evaluation": "evaluate every valid call argument exactly once from left to right before formatting or delivery",
+    "non_scalar_fragments": "null, array, harray, and codeblock render as empty diagnostic fragments without changing linkedspec-scalar-text-v1 cat behavior",
+    "wrong_kind": "a print_each target that is not an array emits no events after all valid-call arguments evaluate",
+    "result_neutrality": "each helper returns null and no event enters the rule accumulator, direct value, or parse output",
+    "delivery": "an optional per-invocation caller sink receives synchronous ordered typed events; absent sink is quiet",
+    "sink_failure": "propagate the caller failure unchanged, abort immediately, and evaluate or deliver nothing later",
+    "exit_now": "deliver preceding events, then propagate typed exit status immediately without evaluating later actions",
+    "trace_separation": "rich diagnostic events are distinct from native trace and ADR 0024 canonical primary phase trace"
+  },
+  "event_schema": {
+    "native_type": "RuntimeDiagnosticOutputEvent",
+    "fields": ["helper_name", "rule_label", "message"],
+    "helper_names": ["print", "say", "print_each"],
+    "rule_label": "the current executing rule label",
+    "message": "exact Unicode text"
+  },
+  "helpers": [
+    {
+      "name": "print",
+      "arity": {"minimum": 1, "maximum": null, "expected_text": "at least 1 positional argument"},
+      "grouping": "one event per call",
+      "text": "concatenate all diagnostic fragments without an added newline",
+      "return_kind": "null"
+    },
+    {
+      "name": "say",
+      "arity": {"minimum": 1, "maximum": null, "expected_text": "at least 1 positional argument"},
+      "grouping": "one event per call",
+      "text": "concatenate all diagnostic fragments and add exactly one trailing newline",
+      "return_kind": "null"
+    },
+    {
+      "name": "print_each",
+      "arity": {"accepted": [2, 3], "expected_text": "2 or 3 positional arguments"},
+      "grouping": "one event per array item in order",
+      "text": "prefix plus diagnostic item fragment plus optional suffix; omitted suffix is empty",
+      "return_kind": "null"
+    }
+  ],
+  "scalar_render_cases": [
+    {"id": "string_unicode", "value": {"kind": "string", "value": "pré🙂"}, "expected": "pré🙂"},
+    {"id": "string_empty", "value": {"kind": "string", "value": ""}, "expected": ""},
+    {"id": "boolean_false", "value": {"kind": "boolean", "value": false}, "expected": "0"},
+    {"id": "boolean_true", "value": {"kind": "boolean", "value": true}, "expected": "1"},
+    {"id": "number_integral", "value": {"kind": "number", "value": 1.0}, "expected": "1"},
+    {"id": "number_fraction", "value": {"kind": "number", "value": 1.25}, "expected": "1.25"},
+    {"id": "number_negative_zero", "value": {"kind": "number", "value": -0.0}, "expected": "0"},
+    {"id": "null", "value": {"kind": "null"}, "expected": ""},
+    {"id": "array", "value": {"kind": "array", "items": [{"kind": "number", "value": 1}]}, "expected": ""},
+    {"id": "harray", "value": {"kind": "harray", "entries": {"k": {"kind": "number", "value": 1}}}, "expected": ""},
+    {"id": "codeblock", "value": {"kind": "codeblock", "id": "fixture-block"}, "expected": ""}
+  ],
+  "invalid_arity_cases": [
+    {"id": "print_zero", "helper_name": "print", "actual_arity": 0, "expected_arity": "at least 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "say_zero", "helper_name": "say", "actual_arity": 0, "expected_arity": "at least 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "print_each_zero", "helper_name": "print_each", "actual_arity": 0, "expected_arity": "2 or 3 positional arguments", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "print_each_one", "helper_name": "print_each", "actual_arity": 1, "expected_arity": "2 or 3 positional arguments", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "print_each_four", "helper_name": "print_each", "actual_arity": 4, "expected_arity": "2 or 3 positional arguments", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0}
+  ],
+  "programs": [
+    {
+      "id": "ordered_unicode",
+      "input": "x",
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   items = [\"α\", false, undef, [1], { \"k\" : 1 }, \"🙂\"]\n   print({ push(seen, \"print-left\"); return(\"pré\") }, { push(seen, \"print-right\"); return(\"🙂\") })\n   say({ push(seen, \"say\"); return(\" ligne\") })\n   print_each(\n     { push(seen, \"items\"); return(items) },\n     { push(seen, \"prefix\"); return(\"élément:\") },\n     { push(seen, \"suffix\"); return(\"!\") }\n   )\n   print_each({ push(seen, \"items-default\"); return(items) }, \"raw:\")\n   return(copy(seen))\n }\n",
+      "operations": [
+        {"op": "print", "rule_label": "Top", "args": [{"effect": "print-left", "value": {"kind": "string", "value": "pré"}}, {"effect": "print-right", "value": {"kind": "string", "value": "🙂"}}]},
+        {"op": "say", "rule_label": "Top", "args": [{"effect": "say", "value": {"kind": "string", "value": " ligne"}}]},
+        {"op": "print_each", "rule_label": "Top", "args": [{"effect": "items", "value": {"kind": "array", "items": [{"kind": "string", "value": "α"}, {"kind": "boolean", "value": false}, {"kind": "null"}, {"kind": "array", "items": [{"kind": "number", "value": 1}]}, {"kind": "harray", "entries": {"k": {"kind": "number", "value": 1}}}, {"kind": "string", "value": "🙂"}]}}, {"effect": "prefix", "value": {"kind": "string", "value": "élément:"}}, {"effect": "suffix", "value": {"kind": "string", "value": "!"}}]},
+        {"op": "print_each", "rule_label": "Top", "args": [{"effect": "items-default", "value": {"kind": "array", "items": [{"kind": "string", "value": "α"}, {"kind": "boolean", "value": false}, {"kind": "null"}, {"kind": "array", "items": [{"kind": "number", "value": 1}]}, {"kind": "harray", "entries": {"k": {"kind": "number", "value": 1}}}, {"kind": "string", "value": "🙂"}]}}, {"effect": null, "value": {"kind": "string", "value": "raw:"}}]},
+        {"op": "return_seen"}
+      ]
+    },
+    {
+      "id": "wrong_kind",
+      "input": "x",
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   print_each(\n     { push(seen, \"empty-target\"); return([]) },\n     { push(seen, \"empty-prefix\"); return(\"unused:\") }\n   )\n   print_each(\n     { push(seen, \"target\"); return(\"not-an-array\") },\n     { push(seen, \"prefix\"); return(\"unused:\") },\n     { push(seen, \"suffix\"); return(\"!\") }\n   )\n   return(copy(seen))\n }\n",
+      "operations": [
+        {"op": "print_each", "rule_label": "Top", "args": [{"effect": "empty-target", "value": {"kind": "array", "items": []}}, {"effect": "empty-prefix", "value": {"kind": "string", "value": "unused:"}}]},
+        {"op": "print_each", "rule_label": "Top", "args": [{"effect": "target", "value": {"kind": "string", "value": "not-an-array"}}, {"effect": "prefix", "value": {"kind": "string", "value": "unused:"}}, {"effect": "suffix", "value": {"kind": "string", "value": "!"}}]},
+        {"op": "return_seen"}
+      ]
+    },
+    {
+      "id": "sink_failure",
+      "input": "x",
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   print({ push(seen, \"before\"); return(\"before\") })\n   say({ push(seen, \"boom\"); return(\"boom\") })\n   print({ push(seen, \"after\"); return(\"after\") })\n   return(copy(seen))\n }\n",
+      "operations": [
+        {"op": "print", "rule_label": "Top", "args": [{"effect": "before", "value": {"kind": "string", "value": "before"}}]},
+        {"op": "say", "rule_label": "Top", "args": [{"effect": "boom", "value": {"kind": "string", "value": "boom"}}]},
+        {"op": "print", "rule_label": "Top", "args": [{"effect": "after", "value": {"kind": "string", "value": "after"}}]},
+        {"op": "return_seen"}
+      ]
+    },
+    {
+      "id": "immediate_exit",
+      "input": "x",
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   say({ push(seen, \"before\"); return(\"before\") })\n   exit_now(23)\n   say({ push(seen, \"after\"); return(\"after\") })\n   return(copy(seen))\n }\n",
+      "operations": [
+        {"op": "say", "rule_label": "Top", "args": [{"effect": "before", "value": {"kind": "string", "value": "before"}}]},
+        {"op": "exit_now", "status": 23},
+        {"op": "say", "rule_label": "Top", "args": [{"effect": "after", "value": {"kind": "string", "value": "after"}}]},
+        {"op": "return_seen"}
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "ordered_unicode_with_sink",
+      "program_id": "ordered_unicode",
+      "sink": {"mode": "collect"},
+      "expected": {
+        "evaluation_order": ["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"],
+        "events": [
+          {"helper_name": "print", "rule_label": "Top", "message": "pré🙂"},
+          {"helper_name": "say", "rule_label": "Top", "message": " ligne\n"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:α!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:0!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:🙂!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:α"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:0"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "raw:🙂"}
+        ],
+        "outcome": {"kind": "success", "value": ["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"], "output": [["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"]]}
+      }
+    },
+    {
+      "id": "ordered_unicode_quiet",
+      "program_id": "ordered_unicode",
+      "sink": {"mode": "absent"},
+      "expected": {
+        "evaluation_order": ["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"],
+        "events": [],
+        "outcome": {"kind": "success", "value": ["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"], "output": [["print-left", "print-right", "say", "items", "prefix", "suffix", "items-default"]]}
+      }
+    },
+    {
+      "id": "wrong_kind_no_events",
+      "program_id": "wrong_kind",
+      "sink": {"mode": "collect"},
+      "expected": {
+        "evaluation_order": ["empty-target", "empty-prefix", "target", "prefix", "suffix"],
+        "events": [],
+        "outcome": {"kind": "success", "value": ["empty-target", "empty-prefix", "target", "prefix", "suffix"], "output": [["empty-target", "empty-prefix", "target", "prefix", "suffix"]]}
+      }
+    },
+    {
+      "id": "print_each_sink_failure",
+      "program_id": "ordered_unicode",
+      "sink": {"mode": "fail_on_invocation", "invocation": 4, "error_id": "caller-item-sink-failure"},
+      "expected": {
+        "evaluation_order": ["print-left", "print-right", "say", "items", "prefix", "suffix"],
+        "events": [
+          {"helper_name": "print", "rule_label": "Top", "message": "pré🙂"},
+          {"helper_name": "say", "rule_label": "Top", "message": " ligne\n"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:α!"},
+          {"helper_name": "print_each", "rule_label": "Top", "message": "élément:0!"}
+        ],
+        "outcome": {"kind": "sink_failure", "error_id": "caller-item-sink-failure", "propagation": "unchanged"}
+      }
+    },
+    {
+      "id": "synchronous_sink_failure",
+      "program_id": "sink_failure",
+      "sink": {"mode": "fail_on_invocation", "invocation": 2, "error_id": "caller-sink-failure"},
+      "expected": {
+        "evaluation_order": ["before", "boom"],
+        "events": [
+          {"helper_name": "print", "rule_label": "Top", "message": "before"},
+          {"helper_name": "say", "rule_label": "Top", "message": "boom\n"}
+        ],
+        "outcome": {"kind": "sink_failure", "error_id": "caller-sink-failure", "propagation": "unchanged"}
+      }
+    },
+    {
+      "id": "event_before_immediate_exit",
+      "program_id": "immediate_exit",
+      "sink": {"mode": "collect"},
+      "expected": {
+        "evaluation_order": ["before"],
+        "events": [{"helper_name": "say", "rule_label": "Top", "message": "before\n"}],
+        "outcome": {"kind": "exit_now", "status": 23}
+      }
+    }
+  ],
+  "projections": {
+    "native": "optional caller-owned per-invocation sink; no sink is quiet; no implicit stdout or stderr",
+    "generated": "every available generated execution entrypoint accepts an equivalent per-invocation sink and preserves native outcomes",
+    "primary_cli": "install no rich sink; success emits canonical JSON of parse output plus one newline on stdout and empty stderr",
+    "primary_trace": "ADR 0024 phase events only when requested; never include RuntimeDiagnosticOutputEvent data",
+    "cli_options": "add no diagnostic-output-specific primary option"
+  },
+  "backend_rollout": [
+    {"leg": "perl_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.2"},
+    {"leg": "rust_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.3"},
+    {"leg": "dart_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.4"},
+    {"leg": "julia_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.5"},
+    {"leg": "lua_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.6"},
+    {"leg": "generated_and_primary_cli", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.7"},
+    {"leg": "recurring_five_backend_gate", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.8"},
+    {"leg": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.9"}
+  ]
+}

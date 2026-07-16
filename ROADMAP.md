@@ -924,7 +924,9 @@ no-drift `.4.3.9` has since closed. The implementation audit found existing Perl
 scalar/message formatting, and transport/process control. Perl additionally repeats `print_each` prefix/suffix
 effects per item, leaks invalid mixed-encoding bytes through the primary command, and permits lowered host `exit`
 to bypass canonical failure framing. `.5.1.1-.9` split neutral fixtures, five native repairs, generated/CLI
-propagation, recurring admission, and no-drift; neutral contract `.5.1.1` is next before structured-format work.
+propagation, recurring admission, and no-drift. ADR `0042` plus
+`capability_conformance/diagnostic_output_contract.json` now lock `.5.1.1`'s exact quiet caller-owned event target
+without claiming backend admission; Perl native repair `.5.1.2` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

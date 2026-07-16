@@ -1399,11 +1399,23 @@ print_each(matches, "match:<<", ">>\n")
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
-The portable design requires these helpers to evaluate arguments once from left to right, return no parser value,
-and keep diagnostic messages out of rule accumulators and parse-result output. Output routing is caller-owned and
-quiet by default. Lua implements that intended boundary as
-`runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`; each synchronous
-`RuntimeDiagnosticOutputEvent` carries `helper_name`, `rule_label`, and exact Unicode `message` text.
+ADR `0042` and `capability_conformance/diagnostic_output_contract.json` now ratify the portable target before
+backend repair. Arity is checked before evaluation: `print`/`say` require one or more positional arguments and
+`print_each` requires exactly two or three. A valid call evaluates every argument exactly once from left to right,
+then returns null without placing messages in rule accumulators or parse-result output. Strings remain unchanged,
+booleans render as `1`/`0`, finite numbers use the portable shortest decimal spelling, and null/array/harray/
+codeblock fragments render as empty text for these diagnostic helpers. That last rule is diagnostic-specific and
+does not change `cat`'s whole-expression null propagation.
+
+Output routing is caller-owned and quiet by default. A native sink receives synchronous
+`RuntimeDiagnosticOutputEvent` values with exactly `helper_name`, current `rule_label`, and Unicode `message`.
+`print` and `say` group one event per call; `print_each` groups one per array item and evaluates its decoration only
+once per call. Empty-array and wrong-kind targets emit no event after valid-call arguments evaluate. A sink failure
+propagates unchanged and stops later items/actions; an event before `exit_now(status)` is delivered before the
+typed exit stops everything later. Generated entrypoints must propagate the same per-invocation sink. Primary
+commands install none, add no diagnostic-output option, and keep rich events out of ADR `0024`'s separate phase
+trace. Lua already implements the closest current form as
+`runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`.
 
 Current execution is not yet aligned:
 
@@ -1417,8 +1429,9 @@ Current execution is not yet aligned:
 
 For example, the current Perl lowering of a stateful prefix/suffix places both expressions inside its host
 `foreach`; two items therefore advance each effect twice. That is a defect to normalize, not portable behavior.
-Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures these mechanisms and splits `.5.1.1-.9` across a neutral
-executable contract, five native backends, generated/CLI propagation, a symmetric recurring gate, and public
+Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures these mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042`
+plus 11 rendering rows, five invalid arities, six semantic scenarios, and eight explicitly pending rollout legs.
+Leaves `.5.1.2-.9` own five native backends, generated/CLI propagation, a symmetric recurring gate, and public
 no-drift. Until those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing,
 invalid arity, or side-effect counts across backends.
 

@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.1 — ratify diagnostic output events
+
+Adopted ADR `0042` and the backend-neutral `linkedspec-diagnostic-output-v1` contract before changing any engine.
+The machine-readable artifact fixes `print`/`say` one-plus and `print_each` two-or-three arities before argument
+evaluation; once-only left-to-right effects; portable scalar diagnostic rendering; per-call/per-item Unicode event
+grouping; empty-array and wrong-kind no-event behavior; null structural results; quiet execution; synchronous
+caller sink failure; immediate `exit_now`; generated-entrypoint propagation; and a quiet primary command whose
+ADR `0024` phase trace remains separate.
+
+Added an independent offline evaluator/checker over 11 render rows, five invalid arities, four neutral programs,
+and six sink/exit scenarios. Eight mutation probes reject arity, schema, rendering, fixture, message, quietness,
+item-failure, and premature-admission drift. All eight Perl/Rust/Dart/Julia/Lua/generated/gate/public rollout rows
+are explicitly `pending`; the artifact claims no backend behavior and changes no parser, compiler, runtime,
+generated source, CLI, corpus, or capability state. The canonical local gate now checks the design contract.
+
+Focused contract, capability 80/0/0, memory, Knowledge Map, mdBook, shell, and whitespace checks pass. Canonical
+local CI passes primary CLI 61/61 in both default and POSIX environments plus Phase 0 true reach `1..1031` in
+609 seconds. Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.0 — split diagnostic output parity
 
 Completed the planning-only five-backend `print`/`say`/`print_each` audit without changing parser, compiler,

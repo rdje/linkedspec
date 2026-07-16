@@ -34,6 +34,16 @@ and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite 
 the non-text value kinds propagate null. The executable fixture covers current portable source values; codeblock is
 normatively non-text while explicit final-codeblock call syntax remains separately owned.
 
+`diagnostic_output_contract.json` adopts ADR `0042`'s backend-neutral `print`/`say`/`print_each` event boundary
+without claiming backend admission early. It fixes exact one-plus/two-or-three arities, arity-before-evaluation,
+once-only left-to-right effects, diagnostic scalar rendering, call/item grouping, newline and decoration text,
+empty/wrong-kind behavior, Unicode order, structural-result neutrality, quiet execution, synchronous caller sink
+failure, immediate `exit_now`, generated propagation, and the quiet ADR `0024` primary-CLI projection. Validate
+the 11 rendering rows, five invalid arities, six semantic scenarios, and eight explicitly pending rollout legs
+offline with `python3 tools/check_diagnostic_output_contract.py`. The checker independently evaluates the model and
+rejects eight representative drift mutations; backend-specific behavior evidence remains owned by
+`FUTURE-PARITY-BACKLOG.5.1.2-.9`.
+
 `scalar_numeric_contract.json` fixes strict scalar numeric helper inputs, arities, invalid-to-null results, numeric
 comparison truth, half-away rounding, min/max/clamp, division, and signed integer modulo. Its deterministic case
 list also renders one backend-neutral `.spec` fixture. Validate schema, independent evaluator results, and rendered

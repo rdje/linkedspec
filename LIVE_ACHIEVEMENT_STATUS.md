@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.1 — ratify diagnostic output events**
+  (DONE — neutral executable target is exact; Perl native event seam `.5.1.2` is next).
+
+  **Result:** ADR `0042` makes diagnostic output a quiet optional per-invocation typed event channel rather than
+  host I/O, parser data, or primary phase trace. The exact artifact fixes arity-before-effects, once-only ordered
+  evaluation, diagnostic scalar rendering, call/item grouping, empty/wrong-kind behavior, structural null result,
+  synchronous unchanged sink failure, immediate exit, generated propagation, and quiet primary projection. Its
+  eight rollout legs stay pending; no backend behavior or capability claim changed.
+
+  **Proof:** The offline evaluator passes three helpers, 11 render rows, five invalid arities, six semantic
+  scenarios, eight pending rollout owners, and eight rejected mutations. Capability remains 80/0/0; generated and
+  246/105+1/122 coverage stay exact. Governance, Knowledge Map, mdBook, shell, and whitespace pass. Canonical local
+  CI passes primary CLI 61x2 and Phase 0 true reach `1..1031` in 609 seconds. Mutation testing was not run.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.0 — split diagnostic output parity**
   (DONE — planning-only evidence splits neutral/native/generated/gate/no-drift work; `.5.1.1` is next).
 

@@ -851,8 +851,12 @@ closure is a false five-backend normalization claim.
 Planning `.5.1.0` has since split diagnostic parity without changing behavior. Exact probes add three important
 reference hazards to the older transport summary: Perl evaluates `print_each` prefix/suffix inside its host loop,
 host output bypasses the primary command's strict UTF-8 encoder, and lowered host `exit` bypasses canonical
-invocation failure framing. Neutral contract `.5.1.1`, Perl/Rust/Dart/Julia/Lua native `.2-.6`, generated/CLI
-`.7`, recurring admission `.8`, and public no-drift `.9` now own the complete correction.
+invocation failure framing. Neutral contract `.5.1.1` now adopts ADR `0042` and the strict
+`linkedspec-diagnostic-output-v1` fixture: one-plus/two-or-three arities before evaluation, once-only arguments,
+typed scalar rendering, per-call/item Unicode events, quiet caller sinks, unchanged sink failure, immediate exit,
+generated propagation, and an ADR `0024`-separate quiet primary projection. Its eight rollout rows deliberately
+remain pending. Perl/Rust/Dart/Julia/Lua native `.2-.6`, generated/CLI `.7`, recurring admission `.8`, and public
+no-drift `.9` own the complete correction; Perl `.2` is next.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime

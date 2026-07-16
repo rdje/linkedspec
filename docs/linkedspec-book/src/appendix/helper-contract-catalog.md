@@ -832,8 +832,9 @@ dispatch rule.
 - **Signature**: `print_each(arr: array, prefix: scalar, suffix?: scalar)`
 - **Returns**: void
 - **Behavior**: Debug helper — eagerly emits `prefix + item + suffix` for each element in order. The omitted
-  suffix is empty text in the Perl reference contract. No message enters the parser result. Current backend
-  routing/default-suffix drift remains explicitly owned by `FUTURE-PARITY-BACKLOG.5.1`.
+  suffix is empty text under ADR `0042`. Arguments evaluate exactly once left-to-right before item delivery; an
+  empty or wrong-kind target emits no events. No message enters the parser result. Current backend routing,
+  arity, evaluation, and default-suffix drift remains explicitly owned by `FUTURE-PARITY-BACKLOG.5.1.2-.9`.
 
 ## 4. Hash Helpers
 

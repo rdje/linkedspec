@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (planning-only diagnostic-output audit `.5.1.0` measures and splits four independent
-  drift mechanisms; neutral executable-contract leaf `.5.1.1` is active before backend behavior)
+- Last updated: `2026-07-16` (ADR `0042` plus `linkedspec-diagnostic-output-v1` complete neutral contract
+  `.5.1.1` without backend claims; Perl native event-seam leaf `.5.1.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2304,7 +2304,7 @@ before implementation.
   executable-contract leaf `.5.1.1` after `.5.1.0` commits.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Ratify and encode the backend-neutral diagnostic-output contract before backend behavior changes.
   Dependencies: `.5.1.0`
   Acceptance: Add a durable decision plus machine-readable neutral fixtures for exact `print`/`say`/`print_each`
@@ -2313,11 +2313,38 @@ before implementation.
     caller-owned sink and sink-failure propagation; immediate `exit_now`; generated entrypoint propagation; and
     canonical primary-CLI quietness. Keep ADR `0024`'s phase-only primary trace separate from native rich events.
     The manifest/checker may describe future backend legs but must not claim or change backend behavior yet.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** ADR `0042` and `linkedspec-diagnostic-output-v1` fix three helper
+    signatures, 11 scalar-render rows, five invalid arities, four exact neutral programs, six collected/quiet/
+    wrong-kind/sink-failure/exit scenarios, native/generated/CLI/trace projections, and eight explicitly pending
+    rollout owners. `tools/check_diagnostic_output_contract.py` independently evaluates the fixtures and rejects
+    eight representative mutations. Capability remains 80/0/0; generated-source and 246/105+1/122 coverage gates
+    remain exact. Memory, Knowledge Map, doctrines, mdBook, shell, and whitespace pass. Canonical local CI passes
+    primary CLI 61x2 and Phase 0 true reach `1..1031` in 609 seconds. No parser, compiler, runtime, generated-source,
+    primary-CLI, corpus, or current backend-capability behavior/claim changes; mutation campaigns were not run.
+  Commit: `FUTURE-PARITY-BACKLOG.5.1.1 - ratify diagnostic output events`
+
+### `FUTURE-PARITY-BACKLOG.5.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve `.5.1.0`'s exact five-backend evidence as the reason a neutral contract is
+  required; do not infer portable behavior from any one host implementation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Separate callable validation, eager argument evaluation, scalar diagnostic
+  rendering, typed event formation, caller-owned delivery, generated propagation, primary-CLI projection, and
+  immediate termination so each later backend leaf has one exact target seam.
+- [x] **FIX** — Ratify ADR `0042`; add one strict machine-readable semantic fixture and an offline checker covering
+  exact arity, evaluation, rendering, grouping/order, Unicode, wrong-kind, result neutrality, quiet execution,
+  synchronous sink failure, `exit_now`, generated entrypoints, and ADR `0024` separation without changing runtime
+  behavior or claiming backend admission.
+- [x] **ADDRESSED (verified)** — The checker independently evaluates the neutral fixture, rejects representative
+  contract mutations, records every backend leg as pending with its exact task owner, and is registered in the
+  canonical local gate as a design-contract check only.
+- [x] **NO REGRESSION** — Focused contract/checker, governance, Knowledge Map, mdBook, whitespace, and canonical
+  gates pass; capability remains 80/0/0 and no parser/compiler/runtime/generated/CLI behavior or current
+  conformance claim changes.
+- [x] **LOCKSTEP** — Decision index, task/index, roadmap, live docs, mdBook, capability inventory documentation,
+  Knowledge Map, and bounded memory point to Perl native implementation `.5.1.2` only after this slice commits.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Replace Perl host diagnostic/control coupling with the neutral native event seam.
   Dependencies: `.5.1.1`
   Acceptance: Perl ActionIR/live generated handlers enforce the neutral arities and once-only evaluation, format
@@ -4701,8 +4728,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0. Planning
-leaf `.5.1.0` has measured and split diagnostic-output drift without changing behavior. Neutral executable-contract
-leaf `.5.1.1` is the sole active frontier before any backend implementation.
+leaf `.5.1.0` has measured and split diagnostic-output drift without changing behavior. ADR `0042` and the neutral
+executable contract close `.5.1.1` without backend claims. Perl native event seam `.5.1.2` is the sole active
+frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -4918,8 +4946,8 @@ leaf `.5.1.1` is the sole active frontier before any backend implementation.
 | 193 | `LUA-BACKEND-PARITY.8.3` | `done` | Exact contract-ordered interpreter-first generated 8/105 proof passes in fresh dual-ABI hosts at 177/177. |
 | 194 | `LUA-BACKEND-PARITY.8.4` | `done` | Lua closes the backend rollout at 16 capabilities and 80/0/0. |
 | 195 | `FUTURE-PARITY-BACKLOG.5.1.0` | `done` | Exact output/transport/error seams are measured and split into neutral/backend/generated/gate/no-drift owners. |
-| 196 | `FUTURE-PARITY-BACKLOG.5.1.1` | `active` | Ratify and encode the neutral executable diagnostic-output contract before backend behavior. |
-| 197 | `FUTURE-PARITY-BACKLOG.5.1.2` | `pending` | Replace Perl host output/process-control coupling after the neutral contract. |
+| 196 | `FUTURE-PARITY-BACKLOG.5.1.1` | `done` | ADR 0042 and the checked neutral fixture fix exact output-event semantics with all rollout legs pending. |
+| 197 | `FUTURE-PARITY-BACKLOG.5.1.2` | `active` | Replace Perl host output/process-control coupling after the neutral contract. |
 | 198 | `FUTURE-PARITY-BACKLOG.5.1.3` | `pending` | Replace Rust direct stderr with typed caller-owned events. |
 | 199 | `FUTURE-PARITY-BACKLOG.5.1.4` | `pending` | Replace Dart evaluate-and-discard with typed caller-owned events. |
 | 200 | `FUTURE-PARITY-BACKLOG.5.1.5` | `pending` | Separate Julia helper output from native trace and align exact semantics. |
@@ -4927,7 +4955,7 @@ leaf `.5.1.1` is the sole active frontier before any backend implementation.
 | 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `pending` | Propagate sinks through generated APIs and lock quiet canonical primary commands. |
 | 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `pending` | Register one symmetric native/generated/CLI five-backend gate. |
 | 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `pending` | Close public docs, Knowledge Map, capability, and final no-drift state. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output child `.5.1.1` is the current frontier before the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output Perl child `.5.1.2` is the current frontier before the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
