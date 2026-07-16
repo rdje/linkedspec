@@ -3,6 +3,9 @@
 //! Provides the execution environment for a single rule invocation.
 //! Declared variables are scoped to the rule. Accumulators hold child results.
 
+use crate::{
+    RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputSink, RuntimeDiagnosticOutputSinkFailure,
+};
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
 use linkedspec_core::types::{ParseMode, RuntimeValue};
 
@@ -65,6 +68,10 @@ pub struct RuntimeContext {
     pub capture_start: Option<usize>,
     /// Exit flag — set by exit_now(status).
     pub exit_status: Option<i32>,
+    /// Optional caller-owned diagnostic-output sink for this invocation.
+    diagnostic_output_sink: Option<RuntimeDiagnosticOutputSink>,
+    /// Exact caller failure retained while the interpreter unwinds.
+    diagnostic_output_sink_failure: Option<RuntimeDiagnosticOutputSinkFailure>,
     /// Explicit cursor save stack used by save_cursor()/restore_cursor().
     cursor_stack: Vec<usize>,
     /// The current rule invocation's pending return value, set by `return(...)`.
@@ -183,6 +190,8 @@ impl RuntimeContext {
             marks: std::collections::HashMap::new(),
             capture_start: None,
             exit_status: None,
+            diagnostic_output_sink: None,
+            diagnostic_output_sink_failure: None,
             cursor_stack: Vec::new(),
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
@@ -260,6 +269,36 @@ impl RuntimeContext {
 
     pub(crate) fn diagnostic_failure(&self) -> Option<&RuntimeFailureContext> {
         self.diagnostic_failure.as_ref()
+    }
+
+    pub(crate) fn install_diagnostic_output_sink(
+        &mut self,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) {
+        self.diagnostic_output_sink = sink.cloned();
+    }
+
+    pub(crate) fn emit_diagnostic_output(
+        &mut self,
+        event: RuntimeDiagnosticOutputEvent,
+    ) -> Result<(), String> {
+        let Some(sink) = self.diagnostic_output_sink.as_ref() else {
+            return Ok(());
+        };
+        let result = sink.emit(event);
+        match result {
+            Ok(()) => Ok(()),
+            Err(failure) => {
+                self.diagnostic_output_sink_failure = Some(failure);
+                Err("diagnostic output sink failed".to_string())
+            }
+        }
+    }
+
+    pub(crate) fn take_diagnostic_output_sink_failure(
+        &mut self,
+    ) -> Option<RuntimeDiagnosticOutputSinkFailure> {
+        self.diagnostic_output_sink_failure.take()
     }
 
     // ── Runtime trace recording ──

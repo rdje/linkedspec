@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.3 — add Rust diagnostic event seam
+
+Replaced Rust diagnostic helpers' direct `eprintln!` path with exported `RuntimeDiagnosticOutputEvent` and
+`RuntimeDiagnosticOutputSink` types. Native callers may install the sink per top-rule or direct-value execution;
+without one, valid calls remain eager but quiet. `print`/`say` now concatenate one exact Unicode event per call,
+and `print_each` applies its once-evaluated prefix and optional suffix to one event per array item.
+
+Rust now rejects the neutral one-plus/two-or-three helper arities from raw argument AST before effects, preserves
+empty scalar fragments for null/aggregate/codeblock values, keeps helper results structural, and emits nothing for
+empty or wrong-kind `print_each` targets. `RuntimeDiagnosticOutputExecutionError` separates existing structured
+runtime failures, the caller's unchanged downcastable sink error, and typed `RuntimeExitNow`; sink failure and exit
+both abort before later delivery or evaluation. Native event text stays out of the independent trace facility.
+
+The six-test Rust consumer covers all 11 render rows, five invalid arities, six neutral scenarios, direct and
+wrapped values, trace separation, sink failure identity, and immediate exit. The complete Rust gate passes 137
+unit tests, 105/105 oracle corpus, 105/105 generated classification, 197 integrations, all existing
+source-emitter/diagnostic/trace contracts, and primary CLI 61x2. The rollout ledger advances only `rust_native`
+to complete (2 complete / 6 pending); generated sink propagation remains `.5.1.7`, capability stays 80/0/0, and
+Dart native `.5.1.4` is next. Canonical local CI passes exact CLI 61x2 and Phase 0 `1..1031` in 611 seconds.
+Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.2 — add Perl diagnostic event seam
 
 Replaced Perl ActionIR's host `print`/`say`/`foreach` output and host `exit` coupling with

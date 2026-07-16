@@ -118,6 +118,15 @@ empty compiled state uses `top_rule_selection`. Existing `execute(...)` / `execu
 canonical primary CLI projection are unchanged. The complete Rust/CLI recurring gate passes, and `.1.6.3.2`
 admits this capability for all four variants.
 
+Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
+`execute_with_diagnostic_output(input, sink)` or
+`execute_value_with_diagnostic_output(input, options, sink)` with an optional caller-owned
+`RuntimeDiagnosticOutputSink`. Its `RuntimeDiagnosticOutputEvent` carries only `helper_name`, `rule_label`, and
+Unicode `message`; passing no sink is quiet and event text is never inserted into `RuntimeDiagnostic` or native
+trace. `RuntimeDiagnosticOutputExecutionError` has distinct `Runtime`, `Sink`, and `Exit` variants, so existing
+structured runtime context, the caller's concrete sink failure, and `RuntimeExitNow { status }` do not get
+rewritten into one textual channel. Generated parser sink propagation remains separately pending.
+
 ## Typical payload shape
 
 A payload can include fields such as:

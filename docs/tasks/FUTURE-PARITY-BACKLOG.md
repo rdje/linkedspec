@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (Perl native diagnostic events `.5.1.2` consume
-  `linkedspec-diagnostic-output-v1`; Rust native event-seam leaf `.5.1.3` is active)
+- Last updated: `2026-07-16` (Perl `.5.1.2` and Rust `.5.1.3` native diagnostic events consume
+  `linkedspec-diagnostic-output-v1`; Dart native event-seam leaf `.5.1.4` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2392,17 +2392,62 @@ before implementation.
   describe the same parse-scoped native event seam and point to Rust rollout `.5.1.3` only after this slice commits.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Replace Rust direct stderr diagnostic output with the neutral native event seam.
   Dependencies: `.5.1.1`
   Acceptance: Rust exposes the same typed parse-scoped sink/events, exact arities, once-only evaluation, formatting,
     failure, result-neutrality, Unicode, wrong-kind, and exit behavior as the neutral contract; no helper writes
     directly to stderr. Existing runtime diagnostics and native trace remain distinct typed facilities.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** Exported `RuntimeDiagnosticOutputEvent`, cloneable caller-owned
+    `RuntimeDiagnosticOutputSink`, typed `RuntimeDiagnosticOutputExecutionError`, and typed `RuntimeExitNow`
+    provide optional top-rule and direct-value native entrypoints. Raw-AST validation rejects all five invalid
+    neutral arities before effects, including fallback/fluent dispatch; valid arguments evaluate once
+    left-to-right; one exact Unicode event is delivered per call/item; empty and wrong-kind targets remain
+    eventless; absent sinks are quiet; and no diagnostic helper writes stdout/stderr. The caller's concrete sink
+    error is retained through the engine's compatibility string unwind and restored as a downcastable shared
+    value, while ordinary structured runtime diagnostics and native trace remain separate. The six-test neutral
+    consumer covers 11 render rows, five invalid arities, six scenarios, wrapped/direct results, trace separation,
+    sink failure identity, and typed exit. The complete Rust gate passes 137 unit tests, 105/105 oracle corpus,
+    105/105 generated classification, 197 integrations, existing source-emitter/runtime-diagnostic/trace suites,
+    and primary CLI 61x2. The offline checker reports 2 complete/6 pending and rejects eight mutations; canonical
+    local CI passes primary CLI 61x2 and Phase 0 `1..1031` in 611 seconds. Capability stays 80/0/0, generated/primary propagation
+    remains `.5.1.7`, and no mutation campaign ran.
+  Commit: `FUTURE-PARITY-BACKLOG.5.1.3 - add Rust diagnostic event seam`
+
+## `FUTURE-PARITY-BACKLOG.5.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve `.5.1.0`'s exact Rust native baseline and reverify its current source
+  mechanism: valid calls eagerly evaluate every authored argument left-to-right, zero-argument `print`/`say` and
+  invalid `print_each` arities are accepted, `print`/`say` write one added-newline stderr record per argument,
+  `print_each` writes one bare item record while discarding evaluated decoration, and `exit_now(23)` returns the
+  compatibility string `exit_now(23)` only after any preceding direct stderr leak.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `Engine::eval_expr` evaluates every non-lazy helper argument before helper
+  dispatch, so output arity cannot reject before effects. `Engine::call_helper` then formats with general
+  `RuntimeValue::to_str`, calls `eprintln!` directly, stores `exit_status`, and reduces output, sink, and exit
+  control to `Result<RuntimeValue, String>`. `RuntimeContext` has native trace and runtime-failure state but no
+  separate invocation-local diagnostic-output channel; the public native APIs therefore cannot preserve typed
+  events, caller sink failure, and immediate exit as three distinct outcomes.
+- [x] **FIX** — Add exported `RuntimeDiagnosticOutputEvent`, caller-owned per-invocation sink, typed sink/runtime/
+  exit outcome, and exact diagnostic-fragment rendering. Validate the three helper arities from raw AST before
+  evaluation; evaluate every valid argument once left-to-right; deliver one call/item event synchronously; keep
+  absent-sink execution quiet; remove helper `eprintln!`; and expose equivalent top-rule and direct-value native
+  entrypoints without modifying generated entrypoints owned by `.5.1.7`.
+- [x] **ADDRESSED (verified)** — A focused Rust consumer of `linkedspec-diagnostic-output-v1` proves all 11 scalar
+  render rows, all five pre-effect arity failures, collected and quiet Unicode/order scenarios, empty/wrong-kind
+  `print_each`, result neutrality, exact item grouping/decorations, unchanged synchronous sink-failure payload and
+  short-circuit, and one preceding event followed by typed status 23 with no later evaluation. Source inspection
+  proves diagnostic helpers contain no direct stdout/stderr write.
+- [x] **NO REGRESSION** — Existing structured `RuntimeDiagnostic`/`RuntimeExecutionError` and native trace remain
+  independently typed and unchanged for ordinary failures; legacy native methods retain compatible string/error
+  projections while becoming quiet. Focused contract tests, existing runtime diagnostics/trace/source-emitter
+  tests, the complete Rust local gate, neutral checker, capability/coverage checks, and canonical local CI pass;
+  generated and primary-CLI admission stays pending under `.5.1.7`.
+- [x] **LOCKSTEP** — Rust API/source/tests, neutral rollout ledger, task/index/roadmap/live docs, mdBook, Knowledge
+  Map, and bounded memory describe the same native-only event seam and point to Dart `.5.1.4` only after this
+  slice is verified, committed, and clean.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Replace Dart's evaluate-and-discard branch with the neutral native event seam.
   Dependencies: `.5.1.1`
   Acceptance: Dart preserves eager once-only argument effects while adding the same typed parse-scoped events,
@@ -4765,8 +4810,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0. Planning
-leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, and Perl native event seam `.5.1.2` are
-complete. Rust native event seam `.5.1.3` is the sole active frontier.
+leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, and Perl/Rust native event seams `.5.1.2-.3`
+are complete. Dart native event seam `.5.1.4` is the sole active frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -4966,7 +5011,7 @@ complete. Rust native event seam `.5.1.3` is the sole active frontier.
 | 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
-| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, and Perl native event seam are done; Rust `.5.1.3` is active. |
+| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, and Perl/Rust native event seams are done; Dart `.5.1.4` is active. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / parity prerequisite satisfied | Repair Perl logical lowering and align eager truthiness/arity after diagnostic-output `.5.1`. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
@@ -4984,14 +5029,14 @@ complete. Rust native event seam `.5.1.3` is the sole active frontier.
 | 195 | `FUTURE-PARITY-BACKLOG.5.1.0` | `done` | Exact output/transport/error seams are measured and split into neutral/backend/generated/gate/no-drift owners. |
 | 196 | `FUTURE-PARITY-BACKLOG.5.1.1` | `done` | ADR 0042 and the checked neutral fixture fix exact output-event semantics before rollout. |
 | 197 | `FUTURE-PARITY-BACKLOG.5.1.2` | `done` | Perl native parsing uses exact typed parse-scoped events and typed exit without host output/process coupling. |
-| 198 | `FUTURE-PARITY-BACKLOG.5.1.3` | `active` | Replace Rust direct stderr with typed caller-owned events. |
-| 199 | `FUTURE-PARITY-BACKLOG.5.1.4` | `pending` | Replace Dart evaluate-and-discard with typed caller-owned events. |
+| 198 | `FUTURE-PARITY-BACKLOG.5.1.3` | `done` | Rust native parsing uses typed caller-owned events, quiet defaults, typed sink/runtime/exit outcomes, and no helper stderr. |
+| 199 | `FUTURE-PARITY-BACKLOG.5.1.4` | `active` | Replace Dart evaluate-and-discard with typed caller-owned events. |
 | 200 | `FUTURE-PARITY-BACKLOG.5.1.5` | `pending` | Separate Julia helper output from native trace and align exact semantics. |
 | 201 | `FUTURE-PARITY-BACKLOG.5.1.6` | `pending` | Admit both Lua ABIs against the neutral contract and repair only measured residuals. |
 | 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `pending` | Propagate sinks through generated APIs and lock quiet canonical primary commands. |
 | 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `pending` | Register one symmetric native/generated/CLI five-backend gate. |
 | 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `pending` | Close public docs, Knowledge Map, capability, and final no-drift state. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output Rust child `.5.1.3` is the current frontier before later native/generated/gate/no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output Dart child `.5.1.4` is the current frontier before later native/generated/gate/no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
@@ -5618,9 +5663,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking active Rust native leaf `.5.1.3`. Five-backend capability parity remains 80/0/0. Planning
-  `.5.1.0`, neutral contract `.5.1.1`, and Perl native `.5.1.2` are complete; Rust/Dart/Julia/Lua native,
-  generated/CLI, recurring gate, and public no-drift retain `.5.1.3-.9`.
+- None blocking active Dart native leaf `.5.1.4`. Five-backend capability parity remains 80/0/0. Planning
+  `.5.1.0`, neutral contract `.5.1.1`, and Perl/Rust native `.5.1.2-.3` are complete; Dart/Julia/Lua native,
+  generated/CLI, recurring gate, and public no-drift retain `.5.1.4-.9`.
+- Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
+  optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
+  architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
+  This leaf does not relabel or rewrite unrelated fences; a future documentation-testing owner should decide
+  whether executable Rust examples gain hidden setup/`no_run` or illustrative fences become `text`/`ignore`.
 - Generic explicit callable values/dynamic calls and remaining Rust/Dart/Julia callable-codeblock parity remain
   future-owned; contextual declared Lua helper/user-function/receiver forms are current and no longer an exclusion.
 - Aggregate selectors are already retired across all five backends; their historical implementation sequence is
@@ -5628,13 +5678,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.5.1.3` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
+- None. `.5.1.4` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
   prerequisites are satisfied, but their pending trees are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.3` | Raw-AST arity/effect validation; six-test neutral Rust consumer over 11 render rows/five invalid arities/six scenarios; source no-stderr scan; exact sink-failure identity/typed exit/trace separation; complete Rust 137 unit + 105 corpus + six diagnostic-output + 105 generated-classifier + 197 integration + existing source/diagnostic/trace + CLI 61x2; offline 2-complete/6-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/611s; docs/KM/governance/mdBook/whitespace. | PASS. Rust native output is caller-owned typed synchronous events with quiet default and distinct runtime/sink/exit outcomes; only `rust_native` completes and Dart `.5.1.4` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.2` | Pre-change toolbox/live/dump evidence; exact ActionIR arity/order lowering; 16-test neutral Perl contract; 28-test combined focused proof; generated-source contract; offline 1-complete/7-pending rollout checker; direct Phase 0 `1..1031`/640s; canonical CLI 61x2 plus Phase 0 `1..1031`/637s; docs/KM/governance/mdBook/whitespace. | PASS. Perl native output is caller-owned typed synchronous events, quiet by default, structurally neutral, and free of host output/exit coupling; only `perl_native` completes and Rust `.5.1.3` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.1` | ADR 0042; exact three-helper/11-render/five-invalid/four-program/six-scenario fixture; independent evaluator and eight mutations; capability/generated/coverage no-drift; memory/KM/doctrine/mdBook/whitespace; canonical primary CLI 61x2 and Phase 0 `1..1031`/609s. | PASS. Neutral event policy is executable with all rollout legs initially pending; Perl native `.5.1.2` activates without behavior claims in this leaf. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.0` | Knowledge Map and TOOLBOX retrieval; `call_spec_handler_subst`, `LinkedSpec::Get`, generated-source dump; exact five-primary Unicode/arity/exit channel captures; focused Rust/Dart native tests; direct Julia trace and Lua sink probes; source/generated/adapter inventory; memory/task/doctrine/KM/whitespace/mdBook; canonical primary CLI 61x2 and Phase 0 `1..1031`/607s. | PASS. Four independent drift mechanisms and two Perl host-coupling hazards are durable; `.5.1.1-.9` own neutral/native/generated/gate/no-drift correction; no behavior or capability changed; `.5.1.1` is active. |
@@ -5779,6 +5830,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.1.3` | `FUTURE-PARITY-BACKLOG.5.1.3 - add Rust diagnostic event seam` | Exact native Rust events/arity/effects/quietness/failures/typed exit, helper-stderr removal, rollout ledger, and Dart handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.2` | `FUTURE-PARITY-BACKLOG.5.1.2 - add Perl diagnostic event seam` | Exact native Perl events/arity/effects/quietness/failures/typed exit, host-coupling removal, rollout ledger, and Rust handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.1` | `FUTURE-PARITY-BACKLOG.5.1.1 - ratify diagnostic output events` | ADR 0042, exact executable neutral event contract/evaluator/mutations, initially pending rollout ledger, and Perl handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.0` | `FUTURE-PARITY-BACKLOG.5.1.0 - split diagnostic output parity` | Exact five-backend baseline, four-mechanism diagnosis, complete neutral/native/generated/gate/no-drift split, and no behavior change. |
@@ -5923,6 +5975,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-16`: `.5.1.3` replaces Rust helpers' direct stderr with optional typed per-execution events. Raw-AST
+  arity rejects before effects, valid arguments evaluate once left-to-right, scalar/item formatting consumes the
+  neutral fixture, no sink is quiet, caller sink failures retain concrete identity, and immediate exit is typed.
+  Focused and complete Rust plus canonical gates pass. Only `rust_native` completes in the rollout ledger;
+  capability stays 80/0/0, generated propagation remains `.5.1.7`, and Dart `.5.1.4` activates.
 - `2026-07-16`: `.5.1.2` replaces Perl host diagnostic output and host exit lowering with one parse-scoped runtime
   seam. Exact arities reject before effects; valid arguments evaluate once left-to-right; typed call/item events
   preserve Unicode and structural results; no sink is quiet; sink failure retains identity; immediate exit is

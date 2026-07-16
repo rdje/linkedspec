@@ -10,6 +10,7 @@
 //! The Rust implementation is idiomatic Rust — no code generation, no eval.
 
 pub mod diagnostic;
+pub mod diagnostic_output;
 pub mod engine;
 pub mod helpers;
 pub mod primary_cli;
@@ -21,6 +22,10 @@ pub mod staged_parser_registry;
 pub mod unicode_case_mapping;
 
 pub use diagnostic::{RuntimeDiagnostic, RuntimeExecutionError};
+pub use diagnostic_output::{
+    RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
+    RuntimeDiagnosticOutputSink, RuntimeDiagnosticOutputSinkFailure, RuntimeExitNow,
+};
 pub use linkedspec_core::trace;
 
 /// Crate version, matching the workspace version.

@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.3` — typed host outcomes can share a string-based interpreter without
+  becoming strings): Validate output-helper arity while raw AST is still available, including fallback/fluent
+  dispatch, then evaluate valid args once and form events at the helper boundary. Keep the caller sink in the fresh
+  `RuntimeContext`; on failure retain its concrete `Error` value while the existing internal `Result<_, String>`
+  unwinds, then demultiplex native completion into `Runtime`, `Sink`, or `Exit` at the public boundary. This avoids
+  rewriting the engine's many ordinary error sites while ensuring the caller never receives a fabricated sink
+  string. A cloneable caller handle and cloneable context preserve the prior Rust surface. Diagnostic scalar text
+  deliberately reuses `RuntimeValue::to_str`, whose boolean/number/null/aggregate behavior already matches the
+  neutral event contract, without weakening `to_scalar_text`/`cat`. Full Rust proof passes 137 unit, 105 corpus,
+  six diagnostic-output, 105 generated-classifier, 197 integration, existing source/diagnostic/trace suites, and
+  CLI 61x2. Only native Rust advances; generated APIs remain `.5.1.7` and mutation campaigns were not run.
+  Signoff also identified a separate non-blocking documentation-test risk: canonical `mdbook build` passes, while
+  optional `mdbook test` compiles an intentionally partial Rust embedding snippet and an untyped architecture
+  diagram in `appendix/backend-handoff.md` as Rust, yielding two pre-existing doctest failures. It is recorded in
+  the active task tree for a future documentation-testing owner rather than silently relabelled in this Rust
+  runtime slice.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.2` — parser diagnostics need a marked control channel through eval
   wrappers): Validate helper arity in ActionIR before emitting any argument expression, then snapshot every valid
   argument with sequential scalar evaluation before calling the runtime seam. Store the optional sink in an

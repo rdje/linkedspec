@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.3 — add Rust diagnostic event seam**
+  (DONE — Rust native consumes the neutral event contract; Dart native `.5.1.4` is next).
+
+  **Result:** Rust native top-rule and direct-value callers may install a typed per-execution diagnostic sink.
+  Exact helper arities reject before effects; valid arguments evaluate once left-to-right; call/item events retain
+  Unicode and exact decorations; missing sinks are quiet; parse values remain structural; concrete sink failures
+  remain downcastable; and `exit_now` returns typed immediate control. Runtime diagnostics and native trace stay
+  separate. Generated sink propagation remains owned by `.5.1.7`; capability stays 80/0/0.
+
+  **Proof:** The six-test neutral consumer covers all 11 render rows, five invalid arities, six scenarios, trace
+  separation, sink-failure identity, and typed exit. The complete Rust gate passes 137 unit tests, 105/105 oracle
+  corpus, 105/105 generated classification, 197 integrations, existing diagnostics/trace/source-emitter suites,
+  and primary CLI 61x2. The contract checker reports 2 complete / 6 pending and rejects eight drift mutations;
+  canonical local CI passes primary CLI 61x2 and Phase 0 `1..1031` in 611 seconds. Mutation testing was not run.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.2 — add Perl diagnostic event seam**
   (DONE — Perl native consumes the neutral event contract; Rust native `.5.1.3` is next).
 

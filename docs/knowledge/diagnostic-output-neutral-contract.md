@@ -14,7 +14,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [architecture, parity, helpers, diagnostic-output, events, sink, generated-source, cli]
-evidence: "ADR 0042 ratifies linkedspec-diagnostic-output-v1. capability_conformance/diagnostic_output_contract.json encodes three helpers, 11 render rows, five invalid arities, six semantic scenarios, and an exact rollout ledger; tools/check_diagnostic_output_contract.py independently evaluates those fixtures and rejects eight drift mutations. FUTURE-PARITY-BACKLOG.5.1.2 completes the Perl native leg while seven later legs remain pending."
+evidence: "ADR 0042 ratifies linkedspec-diagnostic-output-v1. capability_conformance/diagnostic_output_contract.json encodes three helpers, 11 render rows, five invalid arities, six semantic scenarios, and an exact rollout ledger; tools/check_diagnostic_output_contract.py independently evaluates those fixtures and rejects eight drift mutations. FUTURE-PARITY-BACKLOG.5.1.2/.3 complete the Perl and Rust native legs while six later legs remain pending."
 reverify: "python3 tools/check_diagnostic_output_contract.py"
 ---
 
@@ -30,9 +30,10 @@ Unicode order, structural-result neutrality, unchanged sink-failure propagation,
 Generated APIs must propagate the per-invocation sink; primary commands omit it and therefore emit only canonical
 parse JSON on successful default execution.
 
-The rollout ledger now records Perl native execution as the first `complete` leg. Rust/Dart/Julia/Lua native
-behavior remains owned by `.5.1.3-.6`, generated/CLI projection by `.5.1.7`, recurring admission by `.5.1.8`, and
-public no-drift by `.5.1.9`.
+The rollout ledger now records Perl and Rust native execution as `complete`. Dart/Julia/Lua native behavior
+remains owned by `.5.1.4-.6`, generated/CLI projection by `.5.1.7`, recurring admission by `.5.1.8`, and public
+no-drift by `.5.1.9`.
 
-Related facts: [[perl-diagnostic-output-events]], [[cross-backend-diagnostic-output-drift]], [[lua-diagnostic-output-events]],
+Related facts: [[perl-diagnostic-output-events]], [[rust-diagnostic-output-events]],
+[[cross-backend-diagnostic-output-drift]], [[lua-diagnostic-output-events]],
 [[trace-cross-variant-capability-contract]], [[scalar-to-text-coercion-cross-backend-gap]].

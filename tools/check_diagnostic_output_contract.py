@@ -126,7 +126,7 @@ PROJECTIONS = {
 }
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.2"),
-    ("rust_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.3"),
+    ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.3"),
     ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.4"),
     ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.5"),
     ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.6"),
@@ -448,6 +448,7 @@ def main() -> None:
     assert_mutation_rejected(contract, lambda value: value["scenarios"][1]["expected"]["events"].append({}), "quiet default")
     assert_mutation_rejected(contract, lambda value: value["scenarios"][3]["sink"].__setitem__("invocation", 5), "item sink failure")
     assert_mutation_rejected(contract, lambda value: value["backend_rollout"][0].__setitem__("status", "pending"), "Perl admission regression")
+    assert_mutation_rejected(contract, lambda value: value["backend_rollout"][1].__setitem__("status", "pending"), "Rust admission regression")
     pending_count = sum(row["status"] == "pending" for row in contract["backend_rollout"])
     complete_count = sum(row["status"] == "complete" for row in contract["backend_rollout"])
     print(

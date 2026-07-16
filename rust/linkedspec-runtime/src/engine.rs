@@ -35,7 +35,10 @@
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::{RuntimeContext, RuntimeVarKind};
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
-use crate::{RuntimeDiagnostic, RuntimeExecutionError};
+use crate::{
+    RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
+    RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
+};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
@@ -91,6 +94,42 @@ fn finite_numeric_result(value: f64) -> RuntimeValue {
     } else {
         RuntimeValue::Undef
     }
+}
+
+fn diagnostic_output_expected_arity(
+    name: &str,
+    raw_args: &[Arg],
+    actual_arity: usize,
+) -> Option<&'static str> {
+    let positional_only =
+        raw_args.is_empty() || raw_args.iter().all(|arg| matches!(arg, Arg::Positional(_)));
+    match name {
+        "print" | "say" if positional_only && actual_arity >= 1 => None,
+        "print" | "say" => Some("at least 1 positional argument"),
+        "print_each" if positional_only && matches!(actual_arity, 2 | 3) => None,
+        "print_each" => Some("2 or 3 positional arguments"),
+        _ => None,
+    }
+}
+
+fn validate_diagnostic_output_arity(
+    name: &str,
+    raw_args: &[Arg],
+    actual_arity: usize,
+    ctx: &mut RuntimeContext,
+    rule_label: &str,
+) -> Result<(), String> {
+    let Some(expected) = diagnostic_output_expected_arity(name, raw_args, actual_arity) else {
+        return Ok(());
+    };
+    ctx.capture_diagnostic_failure(
+        "helper_arity_mismatch",
+        "Rust runtime helper arity mismatch",
+        Some(rule_label),
+    );
+    Err(format!(
+        "helper '{name}' expects {expected}, got {actual_arity} in rule '{rule_label}'"
+    ))
 }
 
 /// Per-invocation controls for direct top-rule value execution.
@@ -1419,6 +1458,22 @@ impl Engine {
             .map_err(|message| self.structured_runtime_error(&ctx, message))
     }
 
+    /// Execute the top rule with an optional caller-owned diagnostic-output sink.
+    ///
+    /// With no sink, diagnostic helpers remain quiet. The typed result keeps
+    /// ordinary runtime failures, caller sink failures, and `exit_now` control
+    /// distinct without routing any of them through process stderr.
+    pub fn execute_with_diagnostic_output(
+        &self,
+        input: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        let mut ctx = RuntimeContext::new(input);
+        ctx.install_diagnostic_output_sink(sink);
+        let result = self.execute_with_context(&mut ctx);
+        self.finish_diagnostic_output_execution(&mut ctx, result)
+    }
+
     /// Execute an optionally selected entry rule and return that rule's value
     /// directly as JSON.
     ///
@@ -1439,6 +1494,19 @@ impl Engine {
         let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
         self.execute_value_with_context(&mut ctx, options)
             .map_err(|message| self.structured_runtime_error(&ctx, message))
+    }
+
+    /// Execute a direct rule value with an optional diagnostic-output sink.
+    pub fn execute_value_with_diagnostic_output(
+        &self,
+        input: &str,
+        options: &ExecutionOptions,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        ctx.install_diagnostic_output_sink(sink);
+        let result = self.execute_value_with_context(&mut ctx, options);
+        self.finish_diagnostic_output_execution(&mut ctx, result)
     }
 
     /// Execute a direct rule value with explicit native trace configuration.
@@ -1685,6 +1753,29 @@ impl Engine {
                 handler_source_label,
             },
         )
+    }
+
+    fn finish_diagnostic_output_execution(
+        &self,
+        ctx: &mut RuntimeContext,
+        result: Result<Value, String>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        match result {
+            Ok(value) => Ok(value),
+            Err(message) => {
+                if let Some(failure) = ctx.take_diagnostic_output_sink_failure() {
+                    return Err(RuntimeDiagnosticOutputExecutionError::Sink(failure));
+                }
+                if let Some(status) = ctx.exit_status {
+                    return Err(RuntimeDiagnosticOutputExecutionError::Exit(
+                        RuntimeExitNow { status },
+                    ));
+                }
+                Err(RuntimeDiagnosticOutputExecutionError::Runtime(
+                    self.structured_runtime_error(ctx, message),
+                ))
+            }
+        }
     }
 
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
@@ -3857,6 +3948,7 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
+                validate_diagnostic_output_arity(name, args, args.len(), ctx, rule_label)?;
                 // Lazy-evaluation calls: if/switch/while/with/elseif/else/case/default
                 // Branch bodies must NOT be evaluated eagerly — they are
                 // evaluated only when their condition matches.
@@ -4048,6 +4140,13 @@ impl Engine {
                 }
                 self.eval_expr(receiver, ctx, rule_label)?;
                 for call in calls {
+                    validate_diagnostic_output_arity(
+                        &call.method,
+                        &call.args,
+                        call.args.len(),
+                        ctx,
+                        rule_label,
+                    )?;
                     let evaluated: Vec<RuntimeValue> = call
                         .args
                         .iter()
@@ -5866,6 +5965,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let name = Self::numeric_word_helper_name(name).unwrap_or(name);
+        validate_diagnostic_output_arity(name, raw_args, args.len(), ctx, rule_label)?;
         if Self::is_mark_capture_helper(name) {
             ctx.trace_mark(
                 "rust_runtime:engine:mark_capture",
@@ -6274,14 +6374,26 @@ impl Engine {
             "say" | "print" | "print_each" => {
                 if name == "print_each" {
                     if let Some(RuntimeValue::Array(items)) = args.first() {
+                        let prefix = args.get(1).map(RuntimeValue::to_str).unwrap_or_default();
+                        let suffix = args.get(2).map(RuntimeValue::to_str).unwrap_or_default();
                         for item in items {
-                            eprintln!("{}", item.to_str());
+                            ctx.emit_diagnostic_output(RuntimeDiagnosticOutputEvent {
+                                helper_name: name.to_string(),
+                                rule_label: rule_label.to_string(),
+                                message: format!("{prefix}{}{suffix}", item.to_str()),
+                            })?;
                         }
                     }
                 } else {
-                    for a in args {
-                        eprintln!("{}", a.to_str());
+                    let mut message = args.iter().map(RuntimeValue::to_str).collect::<String>();
+                    if name == "say" {
+                        message.push('\n');
                     }
+                    ctx.emit_diagnostic_output(RuntimeDiagnosticOutputEvent {
+                        helper_name: name.to_string(),
+                        rule_label: rule_label.to_string(),
+                        message,
+                    })?;
                 }
                 Ok(RuntimeValue::Undef)
             }
