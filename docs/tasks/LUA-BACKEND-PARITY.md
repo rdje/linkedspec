@@ -2779,14 +2779,20 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`
 
 - ID: `LUA-BACKEND-PARITY.8.1`
-  Status: `active`
+  Status: `done`
   Goal: Add deterministic contract-v1 Lua emitter scaffold and isolated load/run.
   Children: `.8.1.0`, `.8.1.1`, `.8.1.2`
   Acceptance: Effective compiled state, including exact fixed-v1/variadic-v2/final-codeblock-v3 callable records, stable
     identity/metadata/errors, Unicode/strict-UTF-8 payload boundary, direct/traced entrypoints, caller-owned
     isolation, and cleanup pass without altering native interpreter/CLI.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** Deterministic exact-state emission `.8.1.1` and fresh-process dual-ABI
+    isolation `.8.1.2` together close the scaffold. PUC Lua and LuaJIT each pass 173/173, including valid/corrupt
+    generated modules, Unicode metadata/direct/traced result identity, stable missing-rule/compile-load failures,
+    explicit repository/native module paths, and caller-owned cleanup after success and injected failure. Native
+    interpreter/CLI/corpus semantics and capability 64/0/0 remain unchanged. Canonical local CI passes reference
+    CLI 61x2 and Phase 0 `1..1031` in 607 seconds. Exact plans/families/portable generated trace activate under
+    `.8.2`; subset admission and census remain `.8.3-.8.4`.
+  Commit: `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts`
 
 - ID: `LUA-BACKEND-PARITY.8.1.0`
   Status: `done`
@@ -2837,18 +2843,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source`
 
 - ID: `LUA-BACKEND-PARITY.8.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Load and run generated Lua source in caller-owned fresh-process isolation.
   Dependencies: `.8.1.1`
   Acceptance: PUC Lua and LuaJIT write one generated module plus host runner into unique caller-owned temporary
     storage, load it in a fresh process with explicit repository/native module paths, prove exact Unicode metadata,
     direct and traced result identity, stable missing-rule and corrupt-payload failures, and remove every generated
     file/directory on success or failure. Portable generated family trace roles remain owned by `.8.2`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** The dual-ABI test now writes one deterministic generated module, one
+    deliberately corrupt payload variant, and one host runner under a unique caller-owned `/private/tmp` root.
+    It launches the exact current PUC Lua or LuaJIT binary in a fresh process with explicit `LUA_PATH` and
+    ABI-specific `LUA_CPATH`. Exact stdout/empty stderr prove Unicode contract/version/identity metadata,
+    direct/traced `λ:$` result identity, native trace activity, and typed missing-rule attribution. The corrupt
+    module loads as Lua source but fails effective-state reconstruction with exact
+    `compile_or_load_generated_source` / `generated_source_compile_failed` identity. The shared temporary-root
+    wrapper verifies absence after normal completion and after an injected exception; no generated roots remain.
+    PUC Lua and LuaJIT each pass 173/173, primary remains 61x2, and corpus remains 105/105. Contract/capability
+    64/0/0, Knowledge Map, memory, doctrines, mdBook, and whitespace checks pass. Canonical local CI passes
+    reference CLI 61/61 in both environments and Phase 0 `1..1031` in 607 seconds. Portable generated family
+    trace remains `.8.2`; mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts`
 
 - ID: `LUA-BACKEND-PARITY.8.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add exact ten-family plan and authoritative direct generated execution.
   Acceptance: Ordered public rows, four rejections, per-root/nested family dispatch, portable trace/source identity,
     one isolated all-family matrix, and the unchanged variadic callable fixture execute independently with values
@@ -2878,11 +2895,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 ## Current frontier
 
-Emitter core `.8.1.1` now returns deterministic contract-v1 native Lua from the exact fixed-v1/variadic-v2/
-final-codeblock-v3 effective state, with metadata, typed portable errors, and direct/traced result roles. It passes
-172/172 on PUC Lua and LuaJIT plus canonical Phase 0 `1..1031`/620s. Fresh-process PUC Lua/LuaJIT valid/corrupt
-load, result/failure/trace, caller-owned storage, and cleanup proof `.8.1.2` is the sole active Lua leaf. Plan/
-family/portable generated trace remains `.8.2`, accepted-subset proof `.8.3`, and census admission `.8.4`.
+Generated-source scaffold parent `.8.1` is closed. Deterministic core `.8.1.1` plus fresh-process isolation `.8.1.2`
+prove exact v1/v2/v3 effective state, metadata/errors, direct/traced result identity, corrupt-payload failure, and
+cleanup at 173/173 on PUC Lua and LuaJIT plus canonical Phase 0 `1..1031`/607s. Exact ten-family ordered plans,
+four rejections, authoritative structural execution, and portable generated trace under `.8.2` are the sole active
+Lua leaf. Accepted-subset proof remains `.8.3` and census admission `.8.4`.
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
@@ -3095,13 +3112,13 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 | 130 | `LUA-BACKEND-PARITY.7.2` | `done` | Focused Lua 61x2 and shared 5x2x61 matrix pass exactly. |
 | 131 | `LUA-BACKEND-PARITY.7.3` | `done` | Checkout setup, exact primary/corpus separation, limitations, docs, KM, and gates agree. |
 | 132 | `LUA-BACKEND-PARITY.8` | `active` | Implement generated Lua source and complete capability admission. |
-| 133 | `LUA-BACKEND-PARITY.8.1` | `active` | Add deterministic contract-v1 Lua emitter scaffold and isolated load/run. |
-| 134 | `LUA-BACKEND-PARITY.8.2` | `pending` | Add exact ten-family plan and authoritative direct generated execution. |
+| 133 | `LUA-BACKEND-PARITY.8.1` | `done` | Deterministic emitter plus fresh-process dual-ABI valid/corrupt load/run/cleanup close at 173/173. |
+| 134 | `LUA-BACKEND-PARITY.8.2` | `active` | Add exact ten-family plan and authoritative direct generated execution. |
 | 135 | `LUA-BACKEND-PARITY.8.3` | `pending` | Admit the exact contract-sourced generated 8/105 subset. |
 | 136 | `LUA-BACKEND-PARITY.8.4` | `pending` | Close Lua capability parity and backend handoff. |
 | 137 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Post-ADR-0041 contract audit splits exact v1/v2/v3 emission from isolated host proof. |
 | 138 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic native Lua preserves exact v1/v2/v3 state, metadata, errors, and entrypoint roles at 172/172 per ABI. |
-| 139 | `LUA-BACKEND-PARITY.8.1.2` | `active` | Prove fresh-process PUC/LuaJIT load/run, failures, tracing, and cleanup. |
+| 139 | `LUA-BACKEND-PARITY.8.1.2` | `done` | Fresh PUC Lua/LuaJIT hosts prove Unicode values, failures, trace identity, corrupt payloads, and cleanup. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3574,6 +3591,29 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 - [x] **LOCKSTEP** — Root/Lua docs, both roadmaps, architecture/task/index/live state, mdBook API/pipeline/status/
   handoff/gate pages, Knowledge Map, changes/notes, and bounded memory describe the emitter and activate only
   fresh-process isolation `.8.1.2`.
+
+### `LUA-BACKEND-PARITY.8.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.8.1.1` proved generated modules only through an in-process `load` call. It did not
+  prove persisted strict-UTF-8 source, real host startup/import paths, ABI-specific native adapters, corrupt
+  payload behavior, process channels, or cleanup.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `tools/run_lua_local.sh` already owns disposable ABI-specific PCRE2 builds
+  and exact runtime commands, while `lua/test/run.lua` owns caller-created temporary roots and byte-exact files.
+  The missing seam was passing the current runtime identity into a fresh host command and making cleanup absence
+  observable. The first implementation run exposed a malformed `[ -d path]` predicate; exact shell stderr
+  root-caused the missing space before `]`, and the corrected predicate was rerun cleanly.
+- [x] **FIX** — Parameterize the existing temporary-root helper, verify root absence after `rm -rf`, pass the exact
+  PUC/LuaJIT command from the focused gate, and add one fresh-process host runner with explicit `LUA_PATH`/
+  ABI-specific `LUA_CPATH`. Persist valid/corrupt modules and capture exact stdout/stderr for both modes.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 173/173 on both ABIs. Exact fresh-host JSON
+  locks Unicode metadata, direct/traced `λ:$` identity, native trace presence, missing-rule code/stage/label, and
+  corrupt-payload compile/load stage/code/identity. No `/private/tmp/linkedspec-lua-generated*` roots remain.
+- [x] **NO REGRESSION** — Primary CLI remains 61x2, corpus remains 105/105, generated-source/callable/capability
+  64/0/0 remains green, and canonical local CI passes reference CLI 61x2 plus Phase 0 `1..1031` in 607 seconds.
+  Plan/family/portable generated trace and admission are not claimed; mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook generated API/status/
+  handoff/gate pages, Knowledge Map, changes/notes, and bounded memory close scaffold `.8.1` and activate only
+  exact ten-family execution `.8.2`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -5143,3 +5183,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.7.3` | `LUA-BACKEND-PARITY.7.3 - close Lua primary usage no drift` | Correct historical scaffold prose and native-module lifetime guidance; close parent `.7` without behavior change; activate `.8.1`. |
 | `LUA-BACKEND-PARITY.8.1.0` | `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold` | Post-ADR-0041 v1/v2/v3 scope correction, emitter/isolation split, and `.8.1.1` handoff before code. |
 | `LUA-BACKEND-PARITY.8.1.1` | `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source` | Exact effective v1/v2/v3 state, canonical strict-UTF-8/ASCII hex, metadata/errors, direct/traced roles, and `.8.1.2` handoff. |
+| `LUA-BACKEND-PARITY.8.1.2` | `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts` | Fresh PUC Lua/LuaJIT valid/corrupt modules, exact metadata/results/failures/trace, verified cleanup, parent closure, and `.8.2` handoff. |

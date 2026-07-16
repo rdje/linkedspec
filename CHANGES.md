@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.1.2 — isolate generated Lua hosts
+
+Added recurring fresh-process proof for generated Lua source. The focused gate now passes the exact selected ABI
+runtime into the test suite, which persists a valid generated module, a corrupt-payload variant, and a host runner
+under one unique caller-owned temporary root. Fresh PUC Lua and LuaJIT processes run with the gate's exact checkout
+and native module paths; stdout and stderr are captured independently.
+
+The valid host locks exact Unicode source identity/result, contract metadata, direct/traced values, native trace,
+and attributed missing-rule failure. The corrupt host locks the portable `compile_or_load_generated_source` stage,
+`generated_source_compile_failed` code, and original source identity. Temporary roots must be absent after normal
+completion and after an injected operation failure. The cleanup helper also verifies that its removal succeeded.
+
+PUC Lua and LuaJIT each pass 173/173; primary CLI stays 61/61 in default and POSIX environments and corpus stays
+105/105. Generated-source, callable, capability 64/0/0, Knowledge Map, memory, doctrines, mdBook, and whitespace
+checks pass. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase 0 `1..1031` in
+607 seconds. Parent scaffold `.8.1` closes; exact plan/rejection/family execution and portable generated trace
+`.8.2` are active. Subset `.8.3` and census `.8.4` remain; mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.1.1 — emit deterministic Lua source
 
 Added Lua's public contract-v1 source-emitter core. `emit_lua_source_v1(compiled, source_identity)` reconstructs

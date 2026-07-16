@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Lua generated-source isolation `.8.1.2` closes scaffold parent `.8.1`. The focused gate
+  passes the exact current runtime command into each ABI test; one unique caller-owned temporary root contains a
+  valid generated module, corrupt-payload module, runner, and captured channels. Fresh PUC Lua/LuaJIT processes
+  receive explicit `LUA_PATH` and ABI-specific `LUA_CPATH` and prove exact Unicode metadata, direct/traced result
+  identity, native trace presence, missing-rule attribution, and corrupt compile/load identity. Cleanup verifies
+  root absence after normal completion and injected failure; no generated root remains. Both ABIs pass 173/173,
+  primary stays 61x2, corpus stays 105/105, and capability stays 64/0/0. Exact ten-family plan/execution `.8.2` is
+  active; subset/census remain `.8.3-.8.4`. Canonical Phase 0 passes `1..1031` in 607 seconds.
 - `2026-07-16` refresh: Lua emitter core `.8.1.1` implements the deterministic half of the split created by
   `.8.1.0`. `lua/src/linkedspec/source_emitter.lua` reconstructs one effective typed `SpecFile` from immutable,
   source-ordered fixed-v1/variadic-v2/final-codeblock-v3 function definitions and last-definition rule order,

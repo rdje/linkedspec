@@ -170,11 +170,12 @@ This `README.md` is the **single entry point** to the project.
   the older v1/v2-only wording against ADR `0041`; `.8.1.1` now emits deterministic contract-v1 native Lua from
   exact fixed-v1/variadic-v2/final-codeblock-v3 effective state. It exposes strict metadata, portable errors, and
   direct/traced entrypoint roles using canonical strict-UTF-8 JSON embedded as ASCII hex. Fresh-process PUC
-  Lua/LuaJIT valid/corrupt load/run proof remains `.8.1.2`, plan families `.8.2`, subset admission `.8.3`, and
-  census promotion `.8.4`.
+  Lua/LuaJIT valid/corrupt load/run proof `.8.1.2` now closes scaffold `.8.1` at 173/173 per ABI with exact
+  Unicode metadata/results/failures and verified caller-owned cleanup. Plan families `.8.2` are active; subset
+  admission `.8.3` and census promotion `.8.4` remain.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
-  Generated Lua isolation, plan execution, and admission remain `.8.1.2-.8.4`. ADR
+  Generated Lua plan execution and admission remain `.8.2-.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

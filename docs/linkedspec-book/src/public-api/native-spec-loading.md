@@ -132,8 +132,8 @@ proves one emitter identity, exact ordered phase/rule topics, routed sinks, leve
 failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. That trace milestone passes
 155/155. Complete interpreter-corpus admission raised the suite to 167/167 on both runtimes with status
 `runtime-corpus-full` at the `.6.3` boundary; primary CLI work raised the suite to 169/169 and status
-`runtime-corpus-primary-cli`, and generated-source core `.8.1.1` now raises the current suite to 172/172 without
-changing that status.
+`runtime-corpus-primary-cli`. Generated-source core `.8.1.1` raised the suite to 172/172, and isolated-host proof
+`.8.1.2` now raises the current suite to 173/173 without changing that status.
 
 ## Lua primary parser command
 
@@ -168,8 +168,9 @@ so no shell, subprocess, or environment option parser owns semantics. PUC Lua an
 unchanged shared process manifest now passes recurring 61/61 runs in default and POSIX environments. The warmed
 cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli`, no-drift `.7.3` closes parent
 `.7`. Planning leaf `.8.1.0` corrected the older v1/v2-only generated-source scope against current outward
-descriptor v3. Emitter core `.8.1.1` now supplies deterministic exact-v1/v2/v3 source construction; fresh-process
-PUC Lua/LuaJIT proof remains `.8.1.2`, and capability admission remains `.8.4`.
+descriptor v3. Emitter core `.8.1.1` supplies deterministic exact-v1/v2/v3 source construction, and `.8.1.2`
+proves persisted valid and corrupt modules in fresh PUC Lua/LuaJIT hosts with complete caller-owned cleanup.
+Exact generated family execution is active under `.8.2`; capability admission remains `.8.4`.
 
 ## Lua generated-source API
 
@@ -227,10 +228,15 @@ Its failures use typed `GeneratedSourceError` values. `generated_source_error_to
 `type`, `stage`, `code`, `summary`, and `source_identity` fields plus optional `rule_label`, `handler_family`, and
 `detail`. The four stages and seven codes are exported for callers that need exact classification.
 
-Fresh-process PUC Lua/LuaJIT persistence, corrupt-payload failure, and cleanup are intentionally proved by
-`.8.1.2`. The scaffold does not yet export `plan()` or validate/execute the ten structural handler families;
-those roles and portable generated-family trace events remain `.8.2`. Contract-sourced 8/105 admission is `.8.3`,
-and only `.8.4` may add Lua to the capability census.
+Fresh-process PUC Lua/LuaJIT persistence is recurring proof under `.8.1.2`. The focused host test writes a valid
+module, an invalid-payload variant, and a runner into one unique caller-owned temporary directory; launches the
+exact ABI runtime and native module paths used by the gate; captures stdout and stderr separately; and locks exact
+Unicode metadata/result, direct/traced results, native trace, missing-rule attribution, corrupt-payload stage/code,
+and source identity. The directory must be absent after normal completion and after an injected host failure.
+
+The scaffold does not yet export `plan()` or validate/execute the ten structural handler families; those roles and
+portable generated-family trace events are active under `.8.2`. Contract-sourced 8/105 admission is `.8.3`, and
+only `.8.4` may add Lua to the capability census.
 
 ## Lua automatic function parsing
 

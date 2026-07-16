@@ -46,8 +46,9 @@ This generated module reloads the effective typed spec through Lua's public AST/
 same runtime engine. It preserves fixed-v1, variadic-v2, and final-codeblock-v3 callable records rather than
 inventing a separate compiled-state decoder. Contract/version/identity markers and typed emit/compile-load/
 execution errors make the boundary inspectable. The scaffold is deterministic source generation, not an
-optimizing compiler: fresh-process dual-ABI proof, ten-family plans, portable generated-family trace, accepted
-subset admission, and census promotion remain subsequent Lua leaves.
+optimizing compiler. Fresh-process dual-ABI valid/corrupt load/run/cleanup is recurring proof under `.8.1.2`;
+ten-family plans, portable generated-family trace, accepted-subset admission, and census promotion remain
+subsequent Lua leaves.
 
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
@@ -376,10 +377,11 @@ Its registered calls likewise reject keyword arguments and bind a newly copied v
 stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua now preserves the
 same exact state union and resolves the minimum/unbounded arity through native `.5.1.3.1`; `.5.1.3.2` now executes
 fresh typed rest arrays and the unchanged neutral fixture. Descriptor admission remains `.5.3`, and generated
-owners remain `.8.1-.4`. Planning `.8.1.0` makes that boundary explicit: emitter core `.8.1.1` must reconstruct
-the effective fixed-v1, variadic-v2, and final-codeblock-v3 state union before isolation `.8.1.2` executes it in
-fresh PUC Lua and LuaJIT processes. Four admitted backends implement the complete native/generated contract while
-Lua's native milestone deliberately does not claim an emitter or six-runtime admission before those owners close.
+owners remain `.8.1-.4`. Planning `.8.1.0` made that boundary explicit: emitter core `.8.1.1` reconstructs the
+effective fixed-v1, variadic-v2, and final-codeblock-v3 state union, and isolation `.8.1.2` executes persisted valid
+and corrupt modules in fresh PUC Lua and LuaJIT processes with exact cleanup. Four admitted backends implement the
+complete native/generated contract while Lua deliberately remains outside six-runtime admission until `.8.2-.8.4`
+close.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

@@ -8,6 +8,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.1.2 — isolate generated Lua hosts**
+  (DONE — persisted dual-ABI valid/corrupt proof closes scaffold `.8.1`; exact family-plan `.8.2` is next).
+
+  **Result:** The focused gate passes its exact PUC Lua or LuaJIT executable into the suite. One unique
+  caller-owned root holds a valid generated module, corrupt-payload variant, and runner; fresh processes inherit
+  explicit checkout/native paths and return separately captured stdout/stderr. Exact Unicode metadata/results,
+  direct/traced values, native trace, missing-rule attribution, corrupt-payload stage/code/identity, and cleanup
+  after normal and injected-failure paths are permanent. The initial malformed directory predicate was
+  root-caused from its stderr warning, corrected, and both ABI gates rerun cleanly.
+
+  **Proof:** PUC Lua and LuaJIT each pass 173/173, primary CLI remains 61/61 under default and POSIX environments,
+  and corpus remains 105/105. Generated-source/callable/capability 64/0/0, Knowledge Map, memory, doctrine, mdBook,
+  and whitespace checks pass. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase
+  0 true reach `1..1031` in 607 seconds. Mutation testing was not run. Exact plan/rejection/family execution and
+  portable generated trace `.8.2` are active; subset `.8.3` and census `.8.4` remain.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.1.1 — emit deterministic Lua source**
   (DONE — exact v1/v2/v3 source core is current; fresh-process dual-ABI isolation `.8.1.2` is next).
 

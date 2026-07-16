@@ -37,7 +37,7 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
  done
 
 log "running primary PUC Lua tests"
-"$LUA_CMD" lua/test/run.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/run.lua
 
 log "running shared primary CLI contract (default environment)"
 env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
@@ -70,7 +70,8 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
  log "building disposable LuaJIT PCRE2 adapter"
  bash "$REPO_ROOT/tools/build_lua_native.sh" luajit "$secondary_native"
  log "running secondary LuaJIT compatibility tests"
- LUA_CPATH="$secondary_native/?.so;;" "$LUAJIT_CMD" lua/test/run.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/run.lua
 else
  log "LuaJIT compatibility runtime not installed; secondary leg skipped"
 fi

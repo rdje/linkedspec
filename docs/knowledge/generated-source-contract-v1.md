@@ -26,6 +26,7 @@ evidence_update_2026_07_11_final_closeout: "FUTURE-PARITY-BACKLOG.3.5 rechecks a
 evidence_update_2026_07_15_acceleration_horizon: "ADR 0038 and FUTURE-PARITY-BACKLOG.18.3 preserve v1 as the semantic portability foundation for any future native parser accelerator. Existing source wrappers and state reconstruction prove identity, loadability, trace roles, and oracle equivalence; they do not by themselves establish optimizing compilation or a speed advantage."
 evidence_update_2026_07_16_lua_scaffold_split: "LUA-BACKEND-PARITY.8.1.0 corrects the older Lua leaf against ADR 0041's later final-codeblock-v3 union and splits deterministic v1/v2/v3 emitter core .8.1.1 from fresh-process dual-ABI load/run .8.1.2 before family-plan .8.2 and subset admission .8.3."
 evidence_update_2026_07_16_lua_emitter_core: "LUA-BACKEND-PARITY.8.1.1 adds Lua compatibility/source-identified emitters, exact v1 metadata and portable error stages/codes, deterministic effective fixed-v1/variadic-v2/final-codeblock-v3 SpecFile reconstruction, canonical strict-UTF-8 JSON/source-identity ASCII hex, and generated direct/traced result roles. Focused PUC Lua and LuaJIT gates pass 172/172; canonical reference CLI is 61x2 and Phase 0 is 1031/1031 in 620 seconds. Fresh-process isolation, plan families, subset proof, and census remain .8.1.2-.8.4."
+evidence_update_2026_07_16_lua_isolation: "LUA-BACKEND-PARITY.8.1.2 persists valid/corrupt generated Lua plus a host runner in unique caller-owned temporary storage, launches the exact PUC Lua or LuaJIT ABI runtime/native paths in fresh processes, captures exact metadata/result/trace/failure observations, and proves cleanup after normal and injected-failure paths. Lua passes 173/173 per ABI and canonical Phase 0 1031/1031 in 607 seconds. Family plan/trace remains .8.2."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -76,5 +77,6 @@ Related facts: [[generated-source-parity-audit]],
 [[dart-generated-source-deferred]],
 [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-emitter-core]],
+[[lua-generated-source-fresh-process-isolation]],
 [[optional-native-parser-acceleration]],
 [[user-observable-backend-cli-parity-contract]].

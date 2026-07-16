@@ -55,8 +55,10 @@ local function command_succeeded(command)
   return first == true and (third == nil or third == 0)
 end
 
-local function make_temp_directory()
-  local handle = assert(io.popen("mktemp -d /private/tmp/linkedspec-lua-corpus.XXXXXX", "r"))
+local function make_temp_directory(prefix)
+  prefix = prefix or "linkedspec-lua-corpus"
+  if not prefix:match("^[a-z0-9-]+$") then fail("invalid temporary-directory prefix") end
+  local handle = assert(io.popen("mktemp -d /private/tmp/" .. prefix .. ".XXXXXX", "r"))
   local root = assert(handle:read("*l"))
   assert(handle:close())
   return root
@@ -95,16 +97,29 @@ local function make_directory(path)
   end
 end
 
-local function with_temp_directory(operation)
-  local root = make_temp_directory()
+local function directory_exists(path)
+  local handle = assert(io.popen(
+    "if [ -d " .. shell_quote(path) .. " ]; then printf 'yes'; fi",
+    "r"
+  ))
+  local output = assert(handle:read("*a"))
+  assert(handle:close())
+  return output == "yes"
+end
+
+local function with_temp_directory(operation, prefix)
+  local root = make_temp_directory(prefix)
   local ok, message = pcall(operation, root)
   local cleaned = command_succeeded("rm -rf " .. shell_quote(root))
   if not cleaned then
     fail("unable to remove test directory: " .. root)
+  elseif directory_exists(root) then
+    fail("test directory remains after cleanup: " .. root)
   end
   if not ok then
     error(message, 0)
   end
+  return root
 end
 
 local function write_manifest(root, cases, options)
@@ -4291,6 +4306,151 @@ test("generated Lua module executes direct and traced roles in process", functio
 
   local compatibility = load_generated_lua_module(linkedspec.emit_lua_source(compiled))
   assert_equal(compatibility.metadata().source_identity, "<inline>", "compatibility identity")
+end)
+
+local function generated_source_host_runner()
+  return [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local generated_path = assert(arg[1], "generated module path is required")
+local mode = assert(arg[2], "host mode is required")
+local loaded_ok, module_or_error = pcall(function()
+  local chunk, load_error = loadfile(generated_path)
+  if chunk == nil then error(load_error, 0) end
+  return chunk()
+end)
+
+if mode == "corrupt" then
+  assert(not loaded_ok, "corrupt generated module unexpectedly loaded")
+  assert(linkedspec.is_generated_source_error(module_or_error), "corrupt failure type")
+  local projection = linkedspec.generated_source_error_to_json(module_or_error)
+  io.write(json.encode(json.harray({
+    type = projection.type,
+    stage = projection.stage,
+    code = projection.code,
+    identity = projection.source_identity,
+  })), "\n")
+else
+  assert(mode == "valid", "unsupported host mode")
+  if not loaded_ok then error(module_or_error, 0) end
+  local generated = module_or_error
+  local metadata = linkedspec.generated_source_metadata_to_json(generated.metadata())
+  local direct = generated.execute("é")
+  local trace_output = {}
+  local traced = generated.execute_with_trace(
+    "é",
+    linkedspec.trace_config_enabled(linkedspec.TRACE_FULL),
+    { stdout_writer = function(payload) trace_output[#trace_output + 1] = payload end }
+  )
+  assert(direct == traced, "traced result drifted from direct result")
+  local missing_ok, missing_error = pcall(generated.execute, "é", { top_rule = "Missing" })
+  assert(not missing_ok, "missing rule unexpectedly executed")
+  assert(linkedspec.is_generated_source_error(missing_error), "missing-rule failure type")
+  local missing = linkedspec.generated_source_error_to_json(missing_error)
+  assert(missing.detail:find("Missing", 1, true), "missing-rule detail attribution")
+  io.write(json.encode(json.harray({
+    direct = direct,
+    traced = traced,
+    trace_has_runtime = table.concat(trace_output):find("lua_runtime:parse", 1, true) ~= nil,
+    metadata = metadata,
+    missing = json.harray({
+      stage = missing.stage,
+      code = missing.code,
+      rule_label = missing.rule_label,
+    }),
+  })), "\n")
+end
+]]
+end
+
+local function run_generated_source_host(runtime, root, generated_path, mode)
+  local stdout_path = root .. "/" .. mode .. ".stdout"
+  local stderr_path = root .. "/" .. mode .. ".stderr"
+  local command = table.concat({
+    "env",
+    shell_quote("LUA_PATH=" .. (os.getenv("LUA_PATH") or package.path)),
+    shell_quote("LUA_CPATH=" .. (os.getenv("LUA_CPATH") or package.cpath)),
+    shell_quote(runtime),
+    shell_quote(root .. "/runner.lua"),
+    shell_quote(generated_path),
+    shell_quote(mode),
+    ">" .. shell_quote(stdout_path),
+    "2>" .. shell_quote(stderr_path),
+  }, " ")
+  return command_succeeded(command), read_file(stdout_path), read_file(stderr_path)
+end
+
+test("generated Lua source loads and fails in fresh dual ABI host processes with cleanup", function()
+  local runtime = os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME")
+  if runtime == nil or runtime == "" then
+    runtime = type(jit) == "table" and "luajit" or "lua"
+  end
+  local identity = "generated/λ$isolated.spec"
+  local compiled = linkedspec.compile_spec(linkedspec.parse_spec(table.concat({
+    "Top::",
+    ' /é/ E { return("λ:$") }',
+  }, "\n")))
+  local generated = linkedspec.emit_lua_source_v1(compiled, identity)
+  local corrupt, replacements = generated:gsub(
+    'local _EFFECTIVE_SPEC_JSON_HEX = "[0-9a-f]+"',
+    'local _EFFECTIVE_SPEC_JSON_HEX = "00"',
+    1
+  )
+  assert_equal(replacements, 1, "corrupt payload replacement count")
+
+  local cleaned_root = with_temp_directory(function(root)
+    local generated_path = root .. "/generated_parser.lua"
+    local corrupt_path = root .. "/corrupt_parser.lua"
+    write_file(generated_path, generated)
+    write_file(corrupt_path, corrupt)
+    write_file(root .. "/runner.lua", generated_source_host_runner())
+
+    local valid_ok, valid_stdout, valid_stderr = run_generated_source_host(
+      runtime,
+      root,
+      generated_path,
+      "valid"
+    )
+    assert_equal(valid_ok, true, "fresh valid host status")
+    assert_equal(valid_stderr, "", "fresh valid host stderr")
+    assert_equal(
+      valid_stdout,
+      '{"direct":"λ:$","metadata":{"contract_id":"linkedspec-generated-source-v1",' ..
+        '"format_version":1,"source_identity":"generated/λ$isolated.spec"},' ..
+        '"missing":{"code":"generated_execution_failed","rule_label":"Missing",' ..
+        '"stage":"execute_generated"},"trace_has_runtime":true,"traced":"λ:$"}\n',
+      "fresh valid host output"
+    )
+
+    local corrupt_ok, corrupt_stdout, corrupt_stderr = run_generated_source_host(
+      runtime,
+      root,
+      corrupt_path,
+      "corrupt"
+    )
+    assert_equal(corrupt_ok, true, "fresh corrupt host status")
+    assert_equal(corrupt_stderr, "", "fresh corrupt host stderr")
+    assert_equal(
+      corrupt_stdout,
+      '{"code":"generated_source_compile_failed","identity":"generated/λ$isolated.spec",' ..
+        '"stage":"compile_or_load_generated_source","type":"generated_source_error"}\n',
+      "fresh corrupt host output"
+    )
+  end, "linkedspec-lua-generated")
+  assert_equal(directory_exists(cleaned_root), false, "fresh host directory cleanup after success")
+
+  local failure_root = nil
+  local cleanup_ok, cleanup_error = pcall(function()
+    with_temp_directory(function(root)
+      failure_root = root
+      write_file(root .. "/generated_parser.lua", generated)
+      error("intentional generated-host cleanup probe", 0)
+    end, "linkedspec-lua-generated-failure")
+  end)
+  assert_equal(cleanup_ok, false, "fresh host cleanup failure path propagates")
+  assert_contains(cleanup_error, "intentional generated-host cleanup probe", "cleanup failure propagation")
+  assert_equal(directory_exists(failure_root), false, "fresh host directory cleanup after failure")
 end)
 
 test("compiled spec reports typed dependency failures after optional validation", function()

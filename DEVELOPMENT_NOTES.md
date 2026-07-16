@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.1.2` — process isolation must use the ABI already selected by the gate): A
+  fresh-host test should not rediscover `lua` or `luajit` from `PATH`; pass the exact executable through a narrow
+  test-only environment variable, and retain the enclosing gate's `LUA_PATH`/`LUA_CPATH`. Persist valid source,
+  a deliberately corrupt payload, and the runner in unique caller-owned storage. Capture stdout/stderr separately
+  so successful observations and host diagnostics cannot mask one another. Cleanup is itself observable: require
+  root absence after the normal path and after an injected operation failure. The first focused run exposed a
+  malformed shell directory predicate through repeated `[: missing ]` stderr; correcting the bracket spacing and
+  rerunning both ABIs cleanly was required rather than classifying the noise as harmless. PUC Lua and LuaJIT pass
+  173/173, primary stays 61x2, corpus stays 105/105, capability stays 64/0/0, and canonical local CI passes Phase 0
+  `1..1031` in 607 seconds. Parent `.8.1` closes and exact plan/family/portable generated trace `.8.2` activates.
+  Mutation testing was not run.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.1.1` — generated state should reuse the typed public seam): Lua's compiled
   structures do not need a second internal serialization format. Immutable `function_registry.entries` retain
   exact source-ordered fixed-v1/variadic-v2/final-codeblock-v3 definitions, and `compiled_rule_order` plus each
