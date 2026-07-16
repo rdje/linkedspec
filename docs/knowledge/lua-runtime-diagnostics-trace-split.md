@@ -50,11 +50,12 @@ That closeout is now complete. At its boundary, exact exported API, source-topic
 focused-test, status, public-book, task/index, roadmap, live-doc, and Knowledge Map
 inventory agree on `runtime-trace-events`; parent `.4.4` is closed. Minimal staged
 dispatch `.5.1.1` later advanced status to `runtime-staged-registry`, and fixed-v1
-execution `.5.1.2` later advanced status. `.5.3.2` has now completed the planned full-pipeline trace and current
-status is `native-full-pipeline-trace-v1`.
+execution `.5.1.2` later advanced status. `.5.3.2` then completed the planned full-pipeline trace at
+`native-full-pipeline-trace-v1`; complete corpus `.6.3` has since advanced current status to `runtime-corpus-full`
+without changing these trace mechanisms.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],
-[[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]],
+[[julia-frontend-compiler-staged-trace-events]], [[lua-backend-full-parity-plan]], [[lua-full-corpus-gate]],
 [[lua-runtime-structured-diagnostics]], [[lua-trace-controls-sinks]],
 [[lua-diagnostics-trace-boundary]], [[lua-native-full-pipeline-trace]].

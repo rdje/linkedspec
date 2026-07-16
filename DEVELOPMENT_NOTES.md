@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.3` — close complete corpus with one atomic relationship and a thin developer
+  projection): Disjoint permanent windows prove every fixture but not the all-manifest relationship in one call.
+  Reuse the no-selector library path for the aggregate gate; do not concatenate window results or duplicate the
+  engine. The developer runner is now allowed to project that exact native API because its old rejection promised
+  execution at the phase-6 runtime corpus leaf. Preserve validation-only default use, keep fixture failures as
+  result data/exit 1, reserve exit 2 for invalid arguments or manifest state, and do not conflate this adapter with
+  the primary parser CLI owned by `.7`. PUC Lua and LuaJIT pass 167/167, direct runner execution is 105/105, and
+  status is `runtime-corpus-full`. Corpus data, generated source, coverage, and census 64/0/0 remain unchanged.
+  Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in both environments and Phase 0
+  `1..1031` in 621 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.6` — make a measured green window durable with an independent literal
   ledger): A bounded executor returning 59/59 proves current behavior but does not prevent a coordinated manifest
   reorder, renamed case, or endpoint drift from hiding behind dynamic expectations. The permanent test therefore

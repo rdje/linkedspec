@@ -59,12 +59,13 @@ selection and confirms the exact 59-case order, 59 passes, zero failures, and tr
 aggregate status on both ABIs. There is no repair child. Permanent `.6.2.6`
 validates the full manifest, selects the same window, and compares every result
 against a literal 59-name/endpoint ledger plus exactly one wrapping of its
-unchanged expected JSON. Both complete ABI suites pass 166/166; parent `.6.2`
-is closed and complete-manifest `.6.3` is active.
+unchanged expected JSON. Both complete ABI suites pass 166/166 at that boundary;
+parent `.6.2` is closed. Complete-manifest `.6.3` has since admitted the atomic
+105/105 library/runner gate at 167/167 per ABI.
 
 Related facts: [[rust-action-edge-child-return-dispatch]],
 [[julia-action-edge-child-push]], [[julia-statement-regex-mutation]],
 [[ds-vhistory-leading-newline-oracle-boundary]],
 [[terse-hash-receiver-value-chains]], [[pplugin-pluginbridge-transition-machinery]],
 [[lua-action-edge-child-call-reuse]], [[lua-receiver-copy-value-preservation]],
-[[lua-flat-array-hash-splicing]].
+[[lua-flat-array-hash-splicing]], [[lua-full-corpus-gate]].

@@ -15,6 +15,7 @@ status: current
 tags: [lua, corpus, execution, library, result-records, trace, diagnostics, PUC-Lua, LuaJIT]
 evidence: "LUA-BACKEND-PARITY.6.1.2 adds execute_corpus_fixtures and typed result/query APIs. Controlled scalar, aggregate, dispatch, lifecycle, function, boundary, selection, and failure/continuation proof passes 160/160 on PUC Lua and LuaJIT."
 evidence_update_2026_07_15_permanent_windows: "LUA-BACKEND-PARITY.6.1.3-.4 permanently execute exact core offsets 0-39 at 40/40 endpoint 1 and governed offsets 99-104 at 6/6 endpoints 2,1,2,1,5,5. Both ABIs pass 162/162 and .6.1 is closed."
+evidence_update_2026_07_15_full_gate: "LUA-BACKEND-PARITY.6.3 executes the complete manifest without selectors through the library and developer runner. Both paths pass 105/105 in order with zero failures; PUC Lua and LuaJIT pass 167/167 with status runtime-corpus-full."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -37,8 +38,10 @@ valid execution set exists. `CorpusExecutionResult` retains the full validation 
 `corpus_fixture_passed`, `corpus_execution_passed`, `corpus_passed_count`, `corpus_failures`, and
 `corpus_fixture_result` query it.
 
-The developer `lua/bin/corpus_runner.lua` remains validation-only by design. `LUA-BACKEND-PARITY.6.1.3` now
-permanently executes exact core offsets 0-39 at 40/40 with endpoint 1/1; `.6.1.4` permanently executes capability
-offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`. Parent `.6.1` is closed, while full corpus and CLI promotion
-have later owners. Related facts: [[lua-corpus-manifest-io]],
+The developer `lua/bin/corpus_runner.lua` validates only by default. Under `.6.3`, bare `--execute` now runs the
+complete manifest through this library API and maps all-pass, fixture-failure, and argument/manifest outcomes to
+exits 0, 1, and 2. `LUA-BACKEND-PARITY.6.1.3` permanently executes exact core offsets 0-39 at 40/40 with endpoint
+1/1; `.6.1.4` permanently executes capability offsets 99-104 at 6/6 with endpoints `2,1,2,1,5,5`; `.6.2.6`
+permanently executes advanced/shipped offsets 40-98 at 59/59. Final `.6.3` locks one ordered 105/105 run. Related
+facts: [[lua-full-corpus-gate]], [[lua-corpus-manifest-io]],
 [[lua-controlled-corpus-admission-split]], [[lua-native-spec-pipeline]], [[lua-native-full-pipeline-trace]].

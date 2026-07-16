@@ -35,10 +35,10 @@ and must pass the emitter again for runtime events. Absent/disabled tracing is e
 construction stream; medium admits decisions; high and above admit balanced scopes. Error scopes close before the
 original typed value is rethrown. Focused proof locks exact routed topic order, zero hidden factory calls, balanced
 validation failure, unchanged `SpecPipelineError` JSON, and exact traced/untraced descriptor/runtime JSON on PUC
-Lua and LuaJIT at 155/155. Public status is `native-full-pipeline-trace-v1`; capability census expansion remains
-owned solely by `.8.4`. No-drift `.5.3.3` closes parents `.5.3`/`.5` and hands off to corpus `.6.1` without
-changing this behavior.
+Lua and LuaJIT at 155/155. Public status at this trace boundary is `native-full-pipeline-trace-v1`; complete corpus
+`.6.3` has since advanced it to `runtime-corpus-full` without changing trace behavior. Capability census expansion
+remains owned solely by `.8.4`. No-drift `.5.3.3` closes parents `.5.3`/`.5` and hands off to corpus `.6.1`.
 
 Related facts: [[lua-trace-controls-sinks]], [[lua-runtime-trace-events]],
 [[lua-native-spec-pipeline]], [[lua-descriptor-trace-admission-split]],
-[[trace-cross-variant-capability-contract]], [[lua-descriptor-trace-closeout]].
+[[trace-cross-variant-capability-contract]], [[lua-descriptor-trace-closeout]], [[lua-full-corpus-gate]].

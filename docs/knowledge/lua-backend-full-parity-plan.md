@@ -35,6 +35,7 @@ evidence_update_2026_07_15_nested_path_repair: "LUA-BACKEND-PARITY.6.1.1 preserv
 evidence_update_2026_07_15_controlled_corpus_execution: "LUA-BACKEND-PARITY.6.1.2 validates the full strict manifest before selection, composes automatic parse/validate/compile/source-identified runtime, compares exact wrapped typed JSON, and retains per-fixture observations/failures without aborting later cases. Controlled proof passes 160/160 on both ABIs; ordered core window .6.1.3 is active."
 evidence_update_2026_07_15_core_prefix_admission: "LUA-BACKEND-PARITY.6.1.3 permanently locks exact manifest offsets 0-39 at 40/40 with exact wrapped expected output and endpoint 1/1. PUC Lua and LuaJIT pass 161/161; capability/no-drift .6.1.4 is active."
 evidence_update_2026_07_15_controlled_corpus_closeout: "LUA-BACKEND-PARITY.6.1.4 permanently locks governed offsets 99-104 at 6/6 with exact ordered names, wrapped expected outputs, and endpoints 2,1,2,1,5,5. PUC Lua and LuaJIT pass 162/162; .6.1 closes with coverage 246/105+1/122 and census 64/0/0 unchanged, and .6.2 activates for offsets 40-98."
+evidence_update_2026_07_15_full_corpus: "LUA-BACKEND-PARITY.6.3 executes one ordered 105/105 no-selector library gate and bare developer-runner --execute. PUC Lua and LuaJIT pass 167/167 with status runtime-corpus-full; parent .6 closes, primary CLI .7.1 activates, and census 64/0/0 remains unchanged."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -65,9 +66,9 @@ spec-owned top-level function-shell parsing and loaded-source identity/compile/e
 native-loading no-drift, exact descriptors, and caller-owned full-pipeline trace are complete. Census-preserving
 no-drift `.5.3.3` closes parents `.5.3`/`.5`. Controlled/core planning `.6.1.0` measured exact offsets 0-39 plus
 99-104 at 45/46 on both ABIs. Typed nested-path repair `.6.1.1` closes the sole residual and both windows at
-46/46, with focused suites at 157/157. Reusable executor `.6.1.2` is current before core/capability admission
-`.6.1.3-.4`. Both permanent windows now pass at 40/40 plus 6/6; `.6.1` is closed and `.6.2` is active for offsets
-40-98.
+46/46, with focused suites at 157/157. Reusable executor `.6.1.2` precedes permanent core/capability and advanced
+window admission. Complete `.6.3` now executes the ordered 105/105 manifest through the library and developer
+runner at 167/167 per ABI with status `runtime-corpus-full`. Parent `.6` is closed and primary CLI `.7.1` is active.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
@@ -75,4 +76,4 @@ Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-
 [[lua-runtime-diagnostics-trace-split]], [[lua-runtime-structured-diagnostics]],
 [[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
 [[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]],
-[[lua-controlled-corpus-admission-split]].
+[[lua-controlled-corpus-admission-split]], [[lua-full-corpus-gate]].

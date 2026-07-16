@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, corpus, manifest, JSON, Unicode, UTF-8, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution while deliberately retaining the validation-only developer CLI; LUA-BACKEND-PARITY.6.1.3-.4 permanently admit core offsets 0-39 and governed capability offsets 99-104. The current focused gate passes 162/162 on both Lua ABIs."
+evidence: "LUA-BACKEND-PARITY.1.3 adds strict JSON/corpus IO; LUA-BACKEND-PARITY.6.1.2 adds reusable library execution; LUA-BACKEND-PARITY.6.1.3-.4 and .6.2.6 permanently admit core, capability, and advanced windows. LUA-BACKEND-PARITY.6.3 retains validation-only default runner use and adds complete bare --execute at 105/105; both Lua ABIs pass 167/167."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -31,9 +31,10 @@ portable directory iterator; it creates no package or cache state.
 
 Unicode is the character/code-point model. UTF-8, UTF-16, and UTF-32 are encodings of Unicode; this corpus contract
 deliberately selects strict UTF-8 at its persisted byte boundary and does not auto-detect UTF-16 or UTF-32. The
-developer corpus command validates and reports the corpus but rejects `--execute`; reusable parser execution is
-now available through `execute_corpus_fixtures(...)`, not this command. The primary `linkedspec-lua` command
-remains an explicit parser scaffold failure.
+developer corpus command validates and reports the corpus by default; bare `--execute` now runs all 105 fixtures
+through `execute_corpus_fixtures(...)`, reports ordered PASS/FAIL results, and uses exits 0/1/2. The primary
+`linkedspec-lua` command remains a distinct explicit parser scaffold failure.
 
 Related facts: [[lua-controlled-corpus-execution]], [[primary-cli-strict-utf8-text-contract]],
-[[lua-toolchain-package-policy]], [[lua-native-backend-scaffold]], [[rust-perl-output-oracle]].
+[[lua-full-corpus-gate]], [[lua-toolchain-package-policy]], [[lua-native-backend-scaffold]],
+[[rust-perl-output-oracle]].

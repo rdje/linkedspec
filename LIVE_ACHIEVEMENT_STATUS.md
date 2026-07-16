@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.3 — close full Lua corpus gate**
+  (DONE — atomic library/runner execution is 105/105; parent `.6` closes and primary adapter `.7.1` is next).
+
+  **Result:** One no-selector production-library test validates and executes all 105 fixtures in manifest order,
+  with exact wrapped output, 105 passes, and zero failures. The separate developer runner keeps validation-only
+  default use and now exposes bare `--execute`, ordered PASS/FAIL reporting, exact summary, and exits 0/1/2 for
+  all-pass, fixture-failure, and argument/manifest outcomes. PUC Lua and LuaJIT pass 167/167 and status is
+  `runtime-corpus-full`. The primary parser command remains an exit-2 scaffold; generated source, coverage, and
+  capability 64/0/0 remain unchanged. Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in
+  default and POSIX environments plus Phase 0 true reach `1..1031` in 621 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.6 — admit Lua advanced corpus window**
   (DONE — exact dual-ABI 59/59 is permanent; parent `.6.2` closes and complete-manifest `.6.3` is next).
 

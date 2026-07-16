@@ -5,12 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua full-corpus `.6.3` closes interpreter-corpus parent `.6`. One selection-free
+  `execute_corpus_fixtures(...)` regression validates and executes all 105 fixtures in manifest order with exact
+  wrapped outputs, 105 passes, and zero failures. The separate developer corpus runner keeps validation-only
+  default behavior and now projects the same native API behind bare `--execute`, ordered PASS/FAIL reporting, and
+  exits 0/1/2 for success, fixture failure, and argument/manifest failure. PUC Lua and LuaJIT pass 167/167 and
+  public status is `runtime-corpus-full`. The primary parser CLI remains an exit-2 scaffold; generated source,
+  coverage 246/105+1/122, and capability 64/0/0 remain unchanged. Primary adapter `.7.1` is active.
 - `2026-07-15` refresh: Lua advanced/shipped parent `.6.2` is closed. Planning `.6.2.0` measured exact offsets
   40-98 at the same 50/59 on PUC Lua and LuaJIT; four toolbox-proven repairs raised the unchanged window through
   56/59, 57/59, 58/59, and 59/59, and independent `.6.2.5` successor measurement found no residual. Permanent
-  `.6.2.6` now validates all 105 manifest entries, selects exact offsets 40-98, and locks all 59 literal names,
+  `.6.2.6` validates all 105 manifest entries, selects exact offsets 40-98, and locks all 59 literal names,
   one-level wrapped expected outputs, matches, byte/character endpoints, 59 passes, and zero failures. Both ABIs
-  pass 166/166. Complete-manifest `.6.3` is active. Production source, corpus/oracle data, public status/CLI,
+  pass 166/166 at that boundary; complete-manifest `.6.3` has since closed. Production source, corpus/oracle data,
   generated-source state, coverage 246/105+1/122, and capability 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua governed corpus admission `.6.1.4` permanently executes exact manifest offsets 99-104.
   The cursor-control, pure-helper, position-helper, control-marker, anonymous-capture, and named-capture fixtures

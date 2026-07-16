@@ -132,6 +132,19 @@ local function write_fixture(root, name, options)
   end
 end
 
+local function run_corpus_runner(args)
+  local output = assert(io.tmpfile())
+  local error_output = assert(io.tmpfile())
+  local status = corpus_runner.run(args, output, error_output)
+  output:seek("set", 0)
+  error_output:seek("set", 0)
+  local output_text = assert(output:read("*a"))
+  local error_text = assert(error_output:read("*a"))
+  output:close()
+  error_output:close()
+  return status, output_text, error_text
+end
+
 local function native_resolution_contract()
   return json.decode(read_file("capability_conformance/native_spec_resolution_contract.json"))
 end
@@ -179,7 +192,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.version, "0.1.0", "status version")
   assert_equal(
     first.parity,
-    "native-full-pipeline-trace-v1",
+    "runtime-corpus-full",
     "status parity"
   )
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
@@ -837,24 +850,40 @@ test("checked-in corpus validates all 105 strict fixtures", function()
   assert_equal(json.kind(validation.fixtures[1].expected_json), "array", "expected JSON kind")
 end)
 
-test("corpus runner validates but does not execute", function()
-  local output_path = os.tmpname()
-  local error_path = os.tmpname()
-  local output = assert(io.open(output_path, "w+"))
-  local error_output = assert(io.open(error_path, "w+"))
-  local status = corpus_runner.run({ "--corpus", "rust/linkedspec-runtime/tests/corpus" }, output, error_output)
-  output:seek("set", 0)
-  error_output:seek("set", 0)
-  local output_text = output:read("*a")
-  local error_text = error_output:read("*a")
-  output:close()
-  error_output:close()
-  os.remove(output_path)
-  os.remove(error_path)
+test("corpus runner validates by default and rejects manifest drift", function()
+  local status, output_text, error_text = run_corpus_runner({
+    "--corpus",
+    "rust/linkedspec-runtime/tests/corpus",
+  })
   assert_equal(status, 0, "corpus runner status")
   assert_contains(output_text, "fixtures: 105", "corpus runner count")
-  assert_contains(output_text, "parser execution is not implemented", "execution boundary")
+  assert_contains(output_text, "execution not requested", "execution boundary")
   assert_equal(error_text, "", "corpus runner stderr")
+
+  with_temp_directory(function(root)
+    write_manifest(root, { "missing" })
+    local invalid_status, invalid_output, invalid_error = run_corpus_runner({ "--corpus", root })
+    assert_equal(invalid_status, 2, "invalid manifest status")
+    assert_equal(invalid_output, "", "invalid manifest stdout")
+    assert_contains(invalid_error, "missing fixture dirs: [missing]", "invalid manifest stderr")
+  end)
+
+  with_temp_directory(function(root)
+    write_manifest(root, { "mismatch" })
+    write_fixture(root, "mismatch", {
+      spec_source = "Top::\n /x/ E { return(\"actual\") }\n",
+      expected_source = '"expected"',
+    })
+    local failed_status, failed_output, failed_error = run_corpus_runner({
+      "--corpus",
+      root,
+      "--execute",
+    })
+    assert_equal(failed_status, 1, "fixture failure status")
+    assert_contains(failed_output, "FAIL mismatch [compare]", "fixture failure report")
+    assert_contains(failed_output, "summary: 0 passed, 1 failed", "fixture failure summary")
+    assert_equal(failed_error, "", "fixture failure stderr")
+  end)
 end)
 
 test("corpus manifest rejects format names duplicates and count drift", function()
@@ -1362,6 +1391,42 @@ test("corpus library permanently admits the ordered 59-case advanced and shipped
       "advanced exact wrapped output " .. name
     )
   end
+end)
+
+test("corpus library and developer runner execute the complete ordered 105-case manifest", function()
+  local corpus_path = "rust/linkedspec-runtime/tests/corpus"
+  local execution = linkedspec.execute_corpus_fixtures(corpus_path)
+  assert_equal(execution.validation.manifest.format, 1, "full manifest format")
+  assert_equal(execution.validation.manifest.case_count, 105, "full manifest count")
+  assert_equal(#execution.results, 105, "full result count")
+  assert_equal(execution.results[1].name, "proof_edge_array_literal", "full first fixture")
+  assert_equal(execution.results[105].name, "capability_capture_named_surface", "full last fixture")
+  assert_equal(linkedspec.corpus_execution_passed(execution), true, "full execution status")
+  assert_equal(linkedspec.corpus_passed_count(execution), 105, "full pass count")
+  assert_equal(#linkedspec.corpus_failures(execution), 0, "full failure count")
+
+  for index, result in ipairs(execution.results) do
+    assert_equal(result.name, execution.validation.manifest.cases[index], "full manifest order " .. index)
+    assert_equal(linkedspec.corpus_fixture_passed(result), true, "full fixture status " .. result.name)
+    assert_equal(result.matched, true, "full match " .. result.name)
+    assert_equal(result.failure_stage, nil, "full failure stage " .. result.name)
+    assert_equal(result.failure, nil, "full failure text " .. result.name)
+    assert_equal(
+      json.encode(result.actual_output),
+      json.encode(json.array({ result.expected_json })),
+      "full exact wrapped output " .. result.name
+    )
+  end
+
+  local status, output_text, error_text = run_corpus_runner({ "--corpus", corpus_path, "--execute" })
+  assert_equal(status, 0, "full runner status")
+  assert_contains(output_text, "format: 1", "full runner format")
+  assert_contains(output_text, "fixtures: 105", "full runner count")
+  assert_contains(output_text, "PASS proof_edge_array_literal", "full runner first fixture")
+  assert_contains(output_text, "PASS capability_capture_named_surface", "full runner last fixture")
+  assert_contains(output_text, "summary: 105 passed, 0 failed", "full runner summary")
+  assert_equal(output_text:find("FAIL ", 1, true), nil, "full runner failures")
+  assert_equal(error_text, "", "full runner stderr")
 end)
 
 test("source AST round-trips with neutral fields and provenance", function()

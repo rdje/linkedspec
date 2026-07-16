@@ -125,8 +125,9 @@ resolution/file-kind cases, and four strict-UTF-8 preservation/rejection cases. 
 loaded top-level-function execution, named versus exact-path engine identity, runtime diagnostic identity, exact
 missing-name JSON, and separate parse/validation/compile failure ownership. Full trace composition additionally
 proves one emitter identity, exact ordered phase/rule topics, routed sinks, level filtering, balanced attributed
-failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. The backend currently
-passes 155/155 focused tests on both runtimes with status `native-full-pipeline-trace-v1`.
+failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. That trace milestone passes
+155/155. Complete interpreter-corpus admission has since raised the current suite to 167/167 on both runtimes with
+status `runtime-corpus-full`.
 
 ## Lua automatic function parsing
 
@@ -206,7 +207,23 @@ errors remain caller errors because no valid execution set exists. Query with `c
 `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_failures(...)`, and
 `corpus_fixture_result(...)`.
 
-The developer `lua/bin/corpus_runner.lua` intentionally remains validation-only. Permanent ordered core offsets
+The developer `lua/bin/corpus_runner.lua` validates only by default:
+
+```bash
+lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
+```
+
+Bare `--execute` runs the complete validated manifest through the same native in-memory API, prints each ordered
+PASS/FAIL result and an exact pass/fail summary, and returns 0 for all-pass, 1 for fixture failures, or 2 for
+arguments and manifest drift:
+
+```bash
+lua lua/bin/corpus_runner.lua \
+  --corpus rust/linkedspec-runtime/tests/corpus --execute
+```
+
+This is a separate developer adapter; the primary `linkedspec-lua` parser CLI remains a later `.7` surface.
+Permanent ordered core offsets
 0-39 are admitted by `.6.1.3`; `.6.1.4` admits the six governed capability fixtures at offsets 99-104 in this
 exact order: `capability_cursor_control_surface`, `capability_pure_helper_surface`,
 `capability_position_helper_surface`, `capability_control_marker_surface`,
@@ -217,5 +234,6 @@ lifecycle, top-level function, boundary/trace, parse, validation, runtime, misma
 proof passes 160/160 on both PUC Lua and LuaJIT. The recurring core test additionally locks 40/40 manifest-ordered
 results from `proof_edge_array_literal` through `terse_2_2_5_2_attached_switch_blocks`: every actual output is
 exactly `[expected_json]` and every case matches at byte/character endpoint 1. The governed test locks 6/6 with
-the per-fixture endpoints above; both ABI suites pass 162/162. Parent `.6.1` is closed and `.6.2` owns offsets
-40-98.
+the per-fixture endpoints above. Advanced/shipped offsets 40-98 are likewise permanently 59/59. Final `.6.3`
+executes all 105 fixtures as one ordered library/runner gate with zero failures; both ABI suites pass 167/167 and
+status is `runtime-corpus-full`.

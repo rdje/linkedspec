@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.3 — close full Lua corpus gate
+
+Added one selection-free production-library regression that validates and executes all 105 fixtures in manifest
+order. It locks format/count, result count/order, first/last names, match and failure state, 105 passes, zero
+failures, and exactly one wrapping of every unchanged expected JSON value.
+
+Promoted only the separate developer corpus runner: default use still validates without execution, while bare
+`--execute` runs the complete manifest through the same native API, prints ordered PASS/FAIL records plus an exact
+summary, and returns 0 for all-pass, 1 for fixture failures, or 2 for arguments/manifest drift. PUC Lua and LuaJIT
+pass 167/167 and public status advances to `runtime-corpus-full`. Parent `.6` closes and primary parser CLI adapter
+`.7.1` activates. The primary command itself remains the exact exit-2 scaffold; corpus/oracle data, generated
+source, coverage 246/105+1/122, and capability 64/0/0 remain unchanged. Mutation testing was not run.
+Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031`
+in 621 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.6 — admit Lua advanced corpus window
 
 Added one recurring production-library test for exact manifest offsets 40-98. Its independent literal ledger

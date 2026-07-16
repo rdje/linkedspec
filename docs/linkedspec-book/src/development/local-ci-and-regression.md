@@ -233,10 +233,11 @@ bash tools/run_lua_local.sh
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
 PUC Lua and LuaJIT, locks the primary CLI scaffold boundary, and validates the exact 105-case manifest through the
-developer corpus command. The current suite passes 166/166 on each ABI. Its library-level controlled corpus tests
+developer corpus command. The current suite passes 167/167 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
-continuation after failures. The developer corpus command remains validation-only until its own later CLI owner.
+continuation after failures. The developer corpus command validates by default and executes the complete manifest
+only when passed bare `--execute`; the primary parser CLI remains a separate later owner.
 The same suite permanently executes exact manifest offsets 0-39 at 40/40, locks first/last names, every wrapped
 expected output, and byte/character endpoint 1, without promoting the developer command.
 It also permanently executes exact capability offsets 99-104 at 6/6, locking all six governed names, unchanged
@@ -244,7 +245,11 @@ wrapped outputs, and byte/character endpoints `2,1,2,1,5,5`.
 Advanced/shipped admission likewise executes exact offsets 40-98 at 59/59. Its independent literal ledger locks
 all selected names in manifest order, every byte/character endpoint, match and failure state, and exactly one
 wrapping of each unchanged expected JSON value. Together these three windows cover the complete 105-case manifest;
-`.6.3` owns the final single-gate 105/105 relationship rather than changing the validation-only CLI boundary.
+`.6.3` adds the final no-selector 105/105 library gate and projects it through the developer runner. The runner
+prints ordered PASS/FAIL records plus a summary and returns 0 for all-pass, 1 for fixture failures, and 2 for
+arguments or manifest drift. The complete dual-ABI suites pass 167/167 with status `runtime-corpus-full`.
+The `.6.3` closeout passes the canonical local gate: both 61-case primary CLI environments and Phase 0
+`1..1031`, with Phase 0 completing in 621 seconds.
 The `.6.2.6` admission passes the canonical local gate: both 61-case primary CLI environments and Phase 0
 `1..1031`, with Phase 0 completing in 621 seconds.
 The `.6.1.3` admission also passes the canonical local gate: both 61-case primary CLI environments and Phase 0

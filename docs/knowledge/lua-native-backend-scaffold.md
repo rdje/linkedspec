@@ -12,6 +12,7 @@ date: 2026-07-11
 status: current
 tags: [lua, backend, scaffold, embedding, tests, PUC-Lua, LuaJIT]
 evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add frontend/function projection; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The current local gate passes 60/60 on PUC Lua and LuaJIT plus exact process checks. Matching uses a disposable native PCRE2 adapter, not LPeg."
+evidence_update_2026_07_15_full_corpus: "LUA-BACKEND-PARITY.6.3 closes current interpreter-corpus execution at 105/105 and 167/167 per ABI with status runtime-corpus-full; the primary command remains the later .7 surface."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -20,16 +21,16 @@ The repository now owns a native Lua module at `lua/src/linkedspec/init.lua`. Wi
 `backend_status()` call returns a fresh table, so caller mutation cannot alter later status.
 
 `lua/test/run.lua` is a dependency-free assertion driver. `tools/run_lua_local.sh` syntax-checks every Lua source,
-runs forty-six current module/JSON/corpus/AST/frontend/ActionIR tests on PUC Lua and the same forty-six on
-LuaJIT, byte-checks the primary command stub, and validates the exact 105-fixture corpus command. It writes no
-cache or global module state.
+runs 167 current tests on PUC Lua and the same 167 on LuaJIT, byte-checks the primary command stub, validates the
+exact 105-fixture corpus, and executes it at 105/105 through the developer runner. It writes no cache or global
+module state.
 
 `lua/bin/linkedspec-lua` remains an executable developer stub and exits `2` with an explicit parser message. The
-corpus runner now performs strict validation and explicitly declines execution. The module exposes native
-rule-level `parse_spec` / `validate_spec`, spec-owned function-node projection, and typed structural
-ActionIR parse/contract resolution entrypoints; the primary command remains
-unavailable until its later CLI leaf.
+separate corpus runner validates by default and executes the complete manifest behind bare `--execute`. The module
+now exposes the complete native parse/validate/compile/function/staged/runtime/corpus surface with
+`runtime-corpus-full` status; the primary parser command remains unavailable until its `.7` leaves.
 
 Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]], [[lua-actionir-ast-parser]],
 [[lua-actionir-contract-resolver]],
-[[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]].
+[[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
+[[lua-full-corpus-gate]].

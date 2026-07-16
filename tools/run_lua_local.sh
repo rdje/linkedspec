@@ -51,8 +51,18 @@ log "validating the exact checked-in corpus through the developer command"
 corpus_output=$("$LUA_CMD" lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus)
 printf '%s\n' "$corpus_output" | grep -F 'fixtures: 105' >/dev/null ||
  fail "corpus runner fixture count drifted"
-printf '%s\n' "$corpus_output" | grep -F 'status: manifest validated; parser execution is not implemented' >/dev/null ||
- fail "corpus runner execution boundary drifted"
+printf '%s\n' "$corpus_output" | grep -F 'status: manifest validated; execution not requested' >/dev/null ||
+ fail "corpus runner validation boundary drifted"
+
+log "executing the complete checked-in corpus through the developer command"
+corpus_output=$("$LUA_CMD" lua/bin/corpus_runner.lua \
+ --corpus rust/linkedspec-runtime/tests/corpus --execute)
+printf '%s\n' "$corpus_output" | grep -F 'PASS proof_edge_array_literal' >/dev/null ||
+ fail "corpus runner first result drifted"
+printf '%s\n' "$corpus_output" | grep -F 'PASS capability_capture_named_surface' >/dev/null ||
+ fail "corpus runner last result drifted"
+printf '%s\n' "$corpus_output" | grep -F 'summary: 105 passed, 0 failed' >/dev/null ||
+ fail "corpus runner complete execution drifted"
 
 if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
  log "building disposable LuaJIT PCRE2 adapter"

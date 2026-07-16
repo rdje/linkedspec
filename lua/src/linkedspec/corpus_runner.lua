@@ -5,8 +5,39 @@ local M = {}
 local function write_help(io)
   io:write("LinkedSpec Lua corpus runner\n\n")
   io:write("Usage:\n")
-  io:write("  corpus_runner.lua --corpus <path>\n\n")
-  io:write("Validates strict UTF-8 fixture IO and expected JSON without executing parsers.\n")
+  io:write("  corpus_runner.lua --corpus <path> [--execute]\n\n")
+  io:write("Without --execute, validates strict UTF-8 fixture IO and expected JSON.\n")
+  io:write("With --execute, runs the complete manifest through the native in-memory interpreter.\n")
+end
+
+local function write_validation_header(output, validation)
+  output:write("corpus: ", validation.root, "\n")
+  output:write("format: ", validation.manifest.format, "\n")
+  output:write("fixtures: ", validation.manifest.case_count, "\n")
+end
+
+local function write_execution(output, execution)
+  write_validation_header(output, execution.validation)
+  for _, result in ipairs(execution.results) do
+    if corpus.corpus_fixture_passed(result) then
+      output:write("PASS ", result.name, "\n")
+    else
+      output:write(
+        "FAIL ",
+        result.name,
+        " [",
+        result.failure_stage or "unexpected",
+        "]: ",
+        result.failure or "unknown failure",
+        "\n"
+      )
+    end
+  end
+  local passed = corpus.corpus_passed_count(execution)
+  local failed = #corpus.corpus_failures(execution)
+  output:write("summary: ", passed, " passed, ", failed, " failed\n")
+  if failed == 0 then return 0 end
+  return 1
 end
 
 function M.run(args, output, error_output)
@@ -18,6 +49,7 @@ function M.run(args, output, error_output)
   end
 
   local corpus_path = nil
+  local execute = false
   local errors = {}
   local index = 1
   while index <= #args do
@@ -37,7 +69,7 @@ function M.run(args, output, error_output)
       corpus_path = argument:sub(10)
       index = index + 1
     elseif argument == "--execute" then
-      errors[#errors + 1] = "--execute is unavailable until the Lua runtime corpus leaf"
+      execute = true
       index = index + 1
     else
       errors[#errors + 1] = "unknown argument: " .. argument
@@ -53,15 +85,17 @@ function M.run(args, output, error_output)
     return 2
   end
 
-  local ok, validation = pcall(corpus.load_corpus_fixtures, corpus_path)
+  local ok, result = pcall(function()
+    if execute then return corpus.execute_corpus_fixtures(corpus_path) end
+    return corpus.load_corpus_fixtures(corpus_path)
+  end)
   if not ok then
-    error_output:write("error: ", tostring(validation), "\n")
+    error_output:write("error: ", tostring(result), "\n")
     return 2
   end
-  output:write("corpus: ", validation.root, "\n")
-  output:write("format: ", validation.manifest.format, "\n")
-  output:write("fixtures: ", validation.manifest.case_count, "\n")
-  output:write("status: manifest validated; parser execution is not implemented\n")
+  if execute then return write_execution(output, result) end
+  write_validation_header(output, result)
+  output:write("status: manifest validated; execution not requested\n")
   return 0
 end
 
