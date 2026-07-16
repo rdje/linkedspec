@@ -1012,7 +1012,8 @@ evaluated fluent value, preserves typed continuations, and closes the exact hash
 `flat_array(...)` results as ordered hash-constructor pairs, closes unchanged `pplugin_empty`, and raises both ABIs
 to 58/59. Leading-trivia initialization `.6.2.4` now updates cursor and registers past only complete leading blank/
 `#` comment lines, preserves ordinary indexed reads, closes unchanged history, and raises both ABIs to 59/59.
-Successor remeasurement `.6.2.5` is active before permanent admission `.6.2.6`.
+Successor remeasurement `.6.2.5` independently validates all 105 fixtures and confirms exact offsets 40-98 at
+59/59 with zero failures on both ABIs. Permanent admission `.6.2.6` is active.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

@@ -117,8 +117,9 @@ Three backbone items tracked major structural modernization — all done:
   ordered key/value tokens for `hash(...)` and `harray(...)`, closes unchanged `pplugin_empty`, and raises the
   window to 58/59. Public leading-trivia initialization `.6.2.4` now moves cursor/register state past only complete
   leading blank or `#` comment lines, preserves indexed reads, closes unchanged history, and raises the window to
-  59/59 on both ABIs at 165/165. Successor remeasurement `.6.2.5` is active. The capability census remains
-  four-backend 64/0/0 until `.8.4`.
+  59/59 on both ABIs at 165/165. Successor remeasurement `.6.2.5` independently validates the full 105-case
+  manifest and confirms exact offsets 40-98 at 59/59 with zero failures on both ABIs. Permanent admission `.6.2.6`
+  is active. The capability census remains four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s

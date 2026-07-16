@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.5` — measure the post-repair window independently before making it
+  permanent): A green result observed while closing the last mechanism is not itself the successor audit. Rebuild
+  each ABI adapter, validate the full manifest, select the exact owned window through the production library API,
+  and record order plus aggregate failure state. Both PUC Lua and LuaJIT independently return the same 59 results
+  from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, 59 passes, zero failures, and true
+  status. Therefore no speculative repair child is warranted; `.6.2.6` can add the recurring relationship gate
+  without behavior changes. The full Lua gate remains 165/165 per ABI; source/tests/oracles/status/census are
+  unchanged. Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in both environments and
+  Phase 0 `1..1031` in 622 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.4` — public-entry initialization belongs before the top rule, not inside
   indexed reads): Perl's history result comes from its public parser wrapper skipping complete leading blank and
   comment lines; direct generated handlers deliberately bypass that seam, and `payload[1]` remains a valid read.

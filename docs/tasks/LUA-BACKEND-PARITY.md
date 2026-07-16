@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.2.4` mirrors public leading-trivia initialization, raises exact offsets 40-98
-  to 59/59 on both Lua ABIs at 165/165, and activates successor remeasurement `.6.2.5`)
+- Last updated: `2026-07-15` (`.6.2.5` independently confirms exact offsets 40-98 at dual-ABI 59/59 with zero
+  residual and activates permanent admission `.6.2.6`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2632,18 +2632,26 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.6.2.4 - mirror Lua public leading trivia`
 
 - ID: `LUA-BACKEND-PARITY.6.2.5`
-  Status: `active`
+  Status: `done`
   Goal: Remeasure offsets 40-98 and dependency-split every successor residual before further behavior work.
   Dependencies: `.6.2.4`
   Acceptance: Execute the exact 59-case window on both Lua ABIs after the four measured repairs; classify every
     remaining failure with production trace, Knowledge Map retrieval, and canonical toolbox/generated-source
     evidence; create mechanism-sized child leaves before changing behavior; or record a zero-residual boundary and
     activate permanent admission when all 59 pass unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** Separately built PUC Lua and LuaJIT PCRE2 adapters executed the production
+    library corpus path with `{ offset = 40, limit = 59 }`. Each run first validated the complete 105-case
+    manifest, selected 59 results in manifest order from `terse_2_2_6_2_attached_while_blocks` through
+    `lib_reader_cattribute`, and reported 59 passes, zero failures, and true aggregate status. No successor
+    residual exists, so no behavior repair or new child leaf is needed; permanent admission `.6.2.6` activates.
+    The complete Lua local gate remains 165/165 on PUC Lua and LuaJIT. Production source, tests, corpus/oracle
+    data, expected JSON, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Mutation
+    testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0
+    true reach `1..1031` in 622 seconds.
+  Commit: `LUA-BACKEND-PARITY.6.2.5 - record Lua advanced zero residual`
 
 - ID: `LUA-BACKEND-PARITY.6.2.6`
-  Status: `pending`
+  Status: `active`
   Goal: Permanently admit exact advanced/shipped offsets 40-98 and close parent no-drift.
   Dependencies: `.6.2.5`
   Acceptance: One recurring production-library test locks all 59 names in manifest order, exact one-level wrapped
@@ -2802,7 +2810,9 @@ evaluated fluent value through zero-argument `.copy()`, closes the hash-receiver
 as ordered constructor pairs, closes unchanged `pplugin_empty`, and raises both ABIs to 58/59. Public leading-
 trivia initialization `.6.2.4` now updates cursor/register state past only complete leading blank or `#` comment
 lines, preserves ordinary indexed reads, closes unchanged history, and raises both ABIs to 59/59 at 165/165.
-Successor remeasurement `.6.2.5` is active before permanent admission.
+Successor remeasurement `.6.2.5` independently validates the full 105-case manifest and confirms exact offsets
+40-98 from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute` at 59 passes, zero failures, and
+true aggregate status on both ABIs. No successor repair is needed; permanent admission `.6.2.6` is active.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2930,7 +2940,8 @@ Successor remeasurement `.6.2.5` is active before permanent admission.
 | 122 | `LUA-BACKEND-PARITY.6.2.2` | `done` | Receiver `.copy()` preserves one evaluated typed value and raises both ABIs to 57/59 at 164/164. |
 | 123 | `LUA-BACKEND-PARITY.6.2.3` | `done` | Explicit flat-array hash pairs close `pplugin_empty` and raise both ABIs to 58/59 at 164/164. |
 | 124 | `LUA-BACKEND-PARITY.6.2.4` | `done` | Public leading trivia closes history and raises both ABIs to 59/59 at 165/165. |
-| 125 | `LUA-BACKEND-PARITY.6.2.5` | `active` | Remeasure 59/59 and prove a zero-residual handoff to permanent admission. |
+| 125 | `LUA-BACKEND-PARITY.6.2.5` | `done` | Independent dual-ABI successor measurement confirms exact 59/59 with zero residual. |
+| 126 | `LUA-BACKEND-PARITY.6.2.6` | `active` | Permanently lock exact ordered offsets 40-98 and close parent `.6.2` no-drift. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3231,6 +3242,25 @@ Successor remeasurement `.6.2.5` is active before permanent admission.
   was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook public API/status/handoff, Knowledge
   Map, changes/notes, and bounded memory record exact 59/59 and activate only remeasurement `.6.2.5`.
+
+### `LUA-BACKEND-PARITY.6.2.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — After the four owned repairs, the exact advanced/shipped window required an
+  independent successor run to prove that no newly exposed mechanism remained before permanent admission.
+- [x] **ROOT CAUSE (WHY + WHERE)** — There is no successor failure mechanism. The production library executor
+  validates the complete 105-case corpus before bounded selection, and both ABIs return the same fully green
+  ordered results for `{ offset = 40, limit = 59 }`.
+- [x] **FIX** — No production or test behavior changes. Record the zero-residual boundary and activate only the
+  already-owned recurring admission leaf `.6.2.6`; no repair child is created.
+- [x] **ADDRESSED (verified)** — Separately built PUC Lua and LuaJIT adapters select 59 cases from
+  `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, with 59 passes, zero failures, and true
+  aggregate status. Every checked expected JSON value remains unchanged.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` passes 165/165 on both ABIs. Production source, tests,
+  corpus/oracle data, status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Mutation testing was
+  not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+  `1..1031` in 622 seconds.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, task/index/live state, mdBook status/handoff, Knowledge Map,
+  changes/notes, and bounded memory record the zero-residual handoff and activate only permanent admission `.6.2.6`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4792,3 +4822,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.2.2` | `LUA-BACKEND-PARITY.6.2.2 - preserve Lua receiver copy values` | One-time evaluated receiver deep copy, typed continuation/isolation proof, exact hash-receiver fixture, and dual-ABI 57/59. |
 | `LUA-BACKEND-PARITY.6.2.3` | `LUA-BACKEND-PARITY.6.2.3 - splice Lua flat arrays into hashes` | Direct/receiver/empty/positioned copied token splicing, exact `pplugin_empty`, and dual-ABI 58/59. |
 | `LUA-BACKEND-PARITY.6.2.4` | `LUA-BACKEND-PARITY.6.2.4 - mirror Lua public leading trivia` | Unicode cursor/register initialization, comment EOF/content/indexed-read boundaries, exact history, and dual-ABI 59/59. |
+| `LUA-BACKEND-PARITY.6.2.5` | `LUA-BACKEND-PARITY.6.2.5 - record Lua advanced zero residual` | Full-manifest validation, exact ordered 40-98 selection, dual-ABI 59 passes/zero failures, and `.6.2.6` handoff without behavior change. |

@@ -165,8 +165,9 @@ preserves typed continuations, closes the exact hash-receiver fixture, and raise
 window at 57/59. Flat-array hash splicing `.6.2.3` now consumes direct/receiver `flat_array(...)` values as ordered
 hash pairs, closes unchanged `pplugin_empty`, and raises the window to 58/59. Public leading-trivia initialization
 `.6.2.4` now mirrors complete leading blank/`#` comment lines through the cursor/register seam, preserves ordinary
-indexed reads, closes unchanged history, and raises both ABIs to 59/59. Successor remeasurement `.6.2.5` is active
-before permanent admission `.6.2.6`.
+indexed reads, closes unchanged history, and raises both ABIs to 59/59. Successor remeasurement `.6.2.5`
+independently validates the full 105-case manifest and confirms exact offsets 40-98 at 59/59 with zero failures on
+both ABIs. Permanent admission `.6.2.6` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

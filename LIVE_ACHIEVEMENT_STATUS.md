@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.5 — record Lua advanced zero residual**
+  (DONE — exact dual-ABI 59/59 has no residual; permanent admission `.6.2.6` is next).
+
+  **Result:** Separately built PUC Lua and LuaJIT adapters each validate the complete 105-case manifest and execute
+  exact offsets 40-98 through the production library path. Both preserve order from
+  `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, with 59 passes, zero failures, and true
+  aggregate status. No repair child is needed. The complete Lua gate remains 165/165 per ABI. Production source,
+  tests, corpus/oracle data, expected JSON, status/CLI, coverage, and capability remain unchanged. Mutation testing
+  was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+  `1..1031` in 622 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.4 — mirror Lua public leading trivia**
   (DONE — unchanged history closes at dual-ABI 59/59; `.6.2.5` is next).
 

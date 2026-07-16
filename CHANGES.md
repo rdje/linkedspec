@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.5 — record Lua advanced zero residual
+
+Remeasured exact advanced/shipped offsets 40-98 through the production library corpus executor after all four
+owned repairs. Separately built PUC Lua and LuaJIT PCRE2 adapters each validated the complete 105-case manifest,
+selected 59 results in exact order from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, and
+reported 59 passes, zero failures, and true aggregate status. No successor mechanism or repair child exists;
+permanent admission/no-drift `.6.2.6` is active.
+
+This proof slice changes no production source, tests, corpus/oracle data, expected JSON, public status/CLI,
+coverage 246/105+1/122, or capability 64/0/0. The complete Lua local gate passes 165/165 on PUC Lua and LuaJIT.
+Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus
+Phase 0 true reach `1..1031` in 622 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.4 — mirror Lua public leading trivia
 
 Initialized Lua's public in-memory parser at the same leading-trivia boundary as Perl. After UTF-8 validation,

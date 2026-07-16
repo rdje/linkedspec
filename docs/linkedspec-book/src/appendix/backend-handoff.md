@@ -377,8 +377,9 @@ now complete. Direct and receiver `flat_array(...)` results splice ordered alter
 `harray(...)`, empty input yields an empty harray, and ordinary arrays remain one copied value. The unchanged
 `pplugin_empty` returns `[{}]`; both ABIs reach 58/59. Public leading-trivia `.6.2.4` then moves cursor/register
 state past only complete leading blank or `#` comment lines, preserves ordinary indexed reads, and closes unchanged
-history. Both ABIs pass 165/165 and the window reaches 59/59; successor remeasurement `.6.2.5` is active. The
-census stays 64/0/0 until `.8.4`.
+history. Both ABIs pass 165/165 and the window reaches 59/59. Successor remeasurement `.6.2.5` independently
+validates all 105 fixtures, selects exact offsets 40-98, and confirms stable first/last order plus 59 passes and
+zero failures on both ABIs. Permanent admission `.6.2.6` is active; the census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
