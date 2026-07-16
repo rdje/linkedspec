@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.7.2 — admit Lua primary CLI matrix
+
+Replaced the focused Lua command's three bespoke process smokes with the complete unchanged 61-case manifest under
+explicit default and `POSIXLY_CORRECT=1` environments. Both pass 61/61 while the same gate retains 169/169 native
+tests on PUC Lua and LuaJIT plus complete 105/105 developer-corpus execution.
+
+Extended the warmed shared primary matrix from four to five backends. It accepts a configurable PUC Lua command,
+builds its native adapters once in unique caller-owned temporary storage, scopes `LUA_CPATH` only to that command,
+and removes the build on every exit. Perl, Rust, Dart, Julia, and Lua pass the same 5x2x61 exact stdout/stderr/file/
+exit/display contract. Public Lua status advances to `runtime-corpus-primary-cli`; adapter semantics, corpus data,
+generated source, coverage 246/105+1/122, capability 64/0/0, and mutation policy are unchanged. Final no-drift
+`.7.3` is active.
+Canonical local CI exits 0 with reference CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+`1..1031` in 607 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.7.1 — implement Lua primary CLI adapter
 
 Replaced the Lua primary command's exit-2 scaffold with a thin reusable adapter over the existing in-memory

@@ -11,10 +11,10 @@ answers:
   - can corpus and status commands be in the primary CLI
   - is generated source required for complete backend parity
   - what task owns cross backend CLI parity
-date: 2026-07-13
+date: 2026-07-15
 status: accepted
 tags: [cli, parity, public-api, backends, ADR-0023, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 closes recurring 4x2x61 CLI identity; .1.6 and .3 close the original capability/generated rollout; .16.7 advances the live census to 16 capabilities and 64/0/0 states."
+evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 closes the original recurring 4x2x61 CLI identity; LUA-BACKEND-PARITY.7.2 extends that exact matrix to 5x2x61. The capability census remains 64/0/0 across four admitted backends until Lua generated-source admission."
 reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
 ---
 
@@ -36,7 +36,8 @@ parsing prints one canonical JSON value plus one newline. A neutral fixture suit
 status across variants. Corpus runners and status tools remain separate developer commands.
 
 `FUTURE-PARITY-BACKLOG.1.5` closes current Perl/Rust/Dart/Julia CLI convergence, `.1.6` establishes the public
-capability census, and `.3` closes generated-source parity. Because Rust publicly exports `source_emitter`, generated
+capability census, and `.3` closes generated-source parity. Lua `.7.2` extends exact CLI convergence to the fifth
+primary command at 5x2x61 without admitting Lua to the capability census. Because Rust publicly exports `source_emitter`, generated
 source is required before another active backend can claim complete user-visible parity, even though interpreter
 corpus execution remains the primary correctness oracle. Julia `.7.3.2.1` closes the missing parser/compiler/
 function-shell/staged trace meaning required by the shared trace options. `.7.3.2.2` closes exact options and

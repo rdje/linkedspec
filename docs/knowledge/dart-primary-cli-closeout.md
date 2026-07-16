@@ -6,7 +6,7 @@ answers:
   - does the Dart local gate run both 61 case environments
   - what does FUTURE-PARITY-BACKLOG 1.5.3.4 prove
   - what remains after Dart primary CLI closeout
-date: 2026-07-10
+date: 2026-07-15
 status: current
 tags: [dart, cli, verification, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 closes Dart after tools/run_dart_local.sh passes format/analyzer, 151 tests, 61/61 default, 61/61 POSIX, and 99/99 corpus; the broader core gate passes Phase 0 1..1028."
@@ -24,8 +24,9 @@ corpus execution. `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh` remains the
 machines with the Dart SDK. The core gate independently passes doctrines, focused suites, both Perl 61-case legs,
 and Phase 0 `1..1028`.
 
-This closes Dart's exact CLI obligation, not complete public backend parity. Global `.1.5.4.3` now also closes one
-recurring four-backend conformance driver; `.1.6` and generated-source `.3` still own capability/codegen gaps.
+This closes Dart's exact CLI obligation, not complete public backend parity. Global `.1.5.4.3` closes the original
+recurring four-backend conformance driver; Lua `.7.2` has since extended that driver to 5x2x61. `.1.6` and
+generated-source `.3` still own the historical capability/codegen rollout.
 
 Related facts: [[dart-primary-cli-boundary]], [[dart-primary-cli-native-execution-canonical-json]],
 [[dart-canonical-primary-cli-trace]], [[dart-local-verification-gate]],

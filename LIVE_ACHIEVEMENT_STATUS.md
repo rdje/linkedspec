@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.7.2 — admit Lua primary CLI matrix**
+  (DONE — focused 61x2 and warmed five-backend 5x2x61 are recurring; final no-drift `.7.3` is next).
+
+  **Result:** The focused Lua gate now consumes the entire unchanged primary manifest with `POSIXLY_CORRECT`
+  explicitly unset and set, passing 61/61 in both environments while preserving PUC Lua/LuaJIT 169/169 and
+  complete corpus 105/105. The shared matrix builds one disposable PUC Lua native adapter and passes
+  Perl/Rust/Dart/Julia/Lua at 5x2x61 exact channel/file/exit/display cases. Status is
+  `runtime-corpus-primary-cli`; primary semantics, generated source, coverage 246/105+1/122, capability 64/0/0,
+  and mutation policy are unchanged.
+
+  **Proof:** The focused and shared matrix gates pass exactly as recorded above. Canonical local CI exits 0 with
+  reference CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in 607 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.7.1 — implement Lua primary CLI adapter**
   (DONE — exact thin command is implemented; recurring shared-process/matrix admission `.7.2` is next).
 

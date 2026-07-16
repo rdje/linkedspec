@@ -121,7 +121,8 @@ trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; 
 exact boundary, reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
 unchanged cases in default/POSIX environments and adds recurring local verification. The Rust primary-command
 milestone is closed; Dart and Julia now also pass all 61 default/POSIX cases. `.1.5.4.3` owns recurring warmed
-four-command integration and now closes the exact CLI lane with one 4x2x61 driver.
+four-command integration and closed the original exact CLI lane; `LUA-BACKEND-PARITY.7.2` has since extended the
+same driver to Lua and 5x2x61.
 
 ### Call-name coverage versus executable parity
 
@@ -165,7 +166,7 @@ The neutral suite also returns an input file ending in `x` plus a newline throug
 `input_text()`. Its JSON bytes are `"x\n"` followed by the one record newline, which proves
 file loading does not trim content and output framing does not add a second newline.
 
-This contract now passes on every implemented executable through the recurring 4x2x61 matrix. The historical
+This contract now passes on every implemented executable through the recurring 5x2x61 matrix. The historical
 gap census found implicit Perl option aliases and trace leakage, no Rust primary binary, a corpus-oriented Dart
 primary, and Julia-local help/error/trace differences; the `.1.5.1` through `.1.5.4` repair lanes closed those
 gaps without backend-specific fixture expectations. Julia's repair was split under
@@ -385,8 +386,8 @@ through both the production library and separate developer runner, preserves val
 locks success/fixture/manifest exits 0/1/2. Both ABI suites pass 167/167 with status `runtime-corpus-full`; parent
 `.6` closes. Primary parser adapter `.7.1` now implements exact ADR `0023` options, strict UTF-8, native execution,
 canonical JSON, stable phases/exits, and the independent canonical phase trace at 169/169 per ABI plus diagnostic
-shared CLI 61x2. Recurring process/matrix admission `.7.2` is active; status remains `runtime-corpus-full`, and the
-census stays 64/0/0 until `.8.4`.
+shared CLI 61x2. Admission `.7.2` now makes both process legs recurring and extends the matrix to 5x2x61. Status is
+`runtime-corpus-primary-cli`, final no-drift `.7.3` is active, and the census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler

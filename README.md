@@ -163,9 +163,10 @@ This `README.md` is the **single entry point** to the project.
   argument failures exit 2, both ABI suites pass 167/167, and public status is `runtime-corpus-full`. Parent `.6`
   closes. Primary adapter `.7.1` now replaces the exit-2 scaffold with the exact strict ADR `0023` command: native
   named/file/inline execution, strict UTF-8, canonical JSON, stable phase failures/exits, and independent canonical
-  trace pass 169/169 on each ABI plus diagnostic shared CLI 61x2. Recurring process/matrix admission `.7.2` is
-  active; public status remains `runtime-corpus-full`, and corpus data, generated source, and capability 64/0/0
-  remain unchanged.
+  trace pass 169/169 on each ABI. Admission `.7.2` now runs the unchanged 61 cases under default and POSIX
+  environments in the focused Lua gate and extends the warmed shared matrix to five backends (5x2x61). Public
+  status advances to `runtime-corpus-primary-cli`; corpus data, generated source, and capability 64/0/0 remain
+  unchanged. Final CLI/native/corpus documentation no-drift `.7.3` is active.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
@@ -362,8 +363,9 @@ Top-level directories and files:
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
     Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
     `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,040
-    assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
-    recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` and exact descriptors `.1.6.2` are closed, and
+    assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` originally closed four-backend CLI identity with
+    one recurring warmed 4x2x61 driver; Lua admission `.7.2` extends that unchanged driver to 5x2x61. Exhaustive
+    current-surface `.1.6.1` and exact descriptors `.1.6.2` are closed, and
     generated-source `.3.0` is audited/split; neutral contract and strict all-105 Rust admission are closed.
     Dart's deterministic emitter, exact ten-family direct execution, and contract-sourced eight-case admission are
     green; Dart passes at census 59/0/1. Julia scaffold `.3.4.1` is active before final exact admission.
@@ -482,8 +484,8 @@ on current backend parity; no companion scaffold or content migration exists yet
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
-  `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
+  `tools/run_rust_local.sh`; Dart, Julia, and Lua are also 61/61 default/POSIX. Run
+  `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all five backends and proves
   the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution
@@ -499,9 +501,11 @@ on current backend parity; no companion scaffold or content migration exists yet
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
-- The canonical local gate stays core-only by default so it does not depend on Rust, Dart, or Julia toolchains. To
+- Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both exact 61-case primary-command
+  environments on PUC Lua, and complete 105-fixture corpus execution.
+- The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
-  `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed four-backend primary
+  `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary
   CLI matrix from that gate.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 

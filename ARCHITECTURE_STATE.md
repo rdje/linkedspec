@@ -5,13 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua primary admission `.7.2` replaces the focused command smoke with both unchanged
+  61-case option environments and adds PUC Lua to the shared warmed matrix. The matrix builds its native adapters
+  under caller-owned temporary storage, removes them on exit, and passes 5 backends x 2 environments x 61 exact
+  cases. PUC Lua and LuaJIT remain 169/169, complete corpus execution remains 105/105, public status advances to
+  `runtime-corpus-primary-cli`, and final CLI/native/corpus no-drift `.7.3` is active. Generated source and the
+  four-backend capability census 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua primary adapter `.7.1` replaces the exit-2 scaffold with a thin native-library command.
   `primary_cli.lua` owns only exact ADR `0023` options, strict UTF-8 process/file IO, phase ordering and headings,
   canonical JSON framing, and ADR `0024`'s deterministic independent phase trace. Named/file/inline semantics reuse
   existing loaders, staged compiler, identified engines, and runtime; a narrow native cwd query makes relative
   paths deterministic without a subprocess. Both ABIs pass 169/169 and the unchanged process manifest passes
-  61/61 in default and POSIX diagnostic runs. Recurring process/matrix admission `.7.2` is active; status remains
-  `runtime-corpus-full`, corpus stays 105/105, and capability remains 64/0/0.
+  61/61 in default and POSIX diagnostic runs. `.7.2` has since made both legs recurring and admitted Lua to the
+  shared matrix.
 - `2026-07-15` refresh: Lua full-corpus `.6.3` closes interpreter-corpus parent `.6`. One selection-free
   `execute_corpus_fixtures(...)` regression validates and executes all 105 fixtures in manifest order with exact
   wrapped outputs, 105 passes, and zero failures. The separate developer corpus runner keeps validation-only

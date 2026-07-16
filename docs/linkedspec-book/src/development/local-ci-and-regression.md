@@ -60,7 +60,7 @@ Schema version 1 workspace inputs use `path` plus exactly one checked-in `source
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.
 
-## Four-Backend Primary CLI Matrix
+## Five-Backend Primary CLI Matrix
 
 Run the complete exact-interface proof from the repository root:
 
@@ -68,10 +68,12 @@ Run the complete exact-interface proof from the repository root:
 bash tools/run_primary_cli_matrix.sh
 ```
 
-The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, and runs
-the same unchanged 61-case manifest against Perl, Rust, Dart, and Julia with `POSIXLY_CORRECT` unset and set. A
-green run is therefore 4 backends x 2 environments x 61 cases; only the executable command token changes. This
-recurring proof closes `FUTURE-PARITY-BACKLOG.1.5` exact primary CLI parity.
+The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
+Lua native adapters in disposable temporary storage, and runs the same unchanged 61-case manifest against Perl,
+Rust, Dart, Julia, and Lua with `POSIXLY_CORRECT` unset and set. A green run is therefore 5 backends x 2
+environments x 61 cases; only the executable command token changes. `FUTURE-PARITY-BACKLOG.1.5` originally closed
+the four-backend boundary; `LUA-BACKEND-PARITY.7.2` extends the same recurring proof to every current primary
+command.
 
 The core gate remains toolchain-independent by default. On a machine with all backends installed, include the
 matrix explicitly:
@@ -232,17 +234,20 @@ bash tools/run_lua_local.sh
 ```
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
-PUC Lua and LuaJIT, process-smokes the primary CLI adapter, and validates plus executes the exact 105-case manifest
+PUC Lua and LuaJIT, runs all 61 primary CLI cases under default and POSIX environments on PUC Lua, and validates
+plus executes the exact 105-case manifest
 through the developer corpus command. The current suite passes 169/169 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command validates by default and executes the complete manifest
 only when passed bare `--execute`. Primary adapter `.7.1` independently implements exact options, strict UTF-8,
-native execution/canonical JSON, stable failures/exits, and canonical phase trace. The unchanged shared process
-manifest is diagnostic-green at 61/61 in default and POSIX environments; `.7.2` owns wiring both runs into this
-recurring gate and the cross-backend matrix, so status remains `runtime-corpus-full` here.
+native execution/canonical JSON, stable failures/exits, and canonical phase trace. Admission `.7.2` makes both
+61-case process legs recurring here and extends the warmed matrix to 5x2x61. Status is
+`runtime-corpus-primary-cli`; final no-drift `.7.3` is active.
 The `.7.1` adapter passes the canonical local gate without recurring Lua admission: both reference CLI
 environments remain 61/61 and Phase 0 reaches `1..1031` in 606 seconds.
+Admission `.7.2` independently passes the canonical local gate with the same reference CLI legs at 61/61 and
+Phase 0 true reach `1..1031` in 607 seconds.
 The same suite permanently executes exact manifest offsets 0-39 at 40/40, locks first/last names, every wrapped
 expected output, and byte/character endpoint 1, without promoting the developer command.
 It also permanently executes exact capability offsets 99-104 at 6/6, locking all six governed names, unchanged
@@ -330,7 +335,7 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results,
 - optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set,
 - optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set,
-- optionally runs the complete warmed four-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
+- optionally runs the complete warmed five-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
 
 The command sequence includes:
 

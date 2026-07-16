@@ -10,7 +10,7 @@ answers:
   - how do I select the Rust target directory for LinkedSpec checks
   - does Rust pass primary CLI conformance with POSIXLY_CORRECT
   - what did FUTURE-PARITY-BACKLOG 1.5.2.4 implement
-date: 2026-07-10
+date: 2026-07-15
 status: current
 tags: [rust, cli, ci, conformance, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.2.4 adds tools/run_rust_local.sh and LINKEDSPEC_RUN_RUST opt-in; the gate passes the full runtime package plus 61/61 default and POSIX CLI cases."
@@ -31,7 +31,8 @@ broader default local gate through Phase 0 `1..1028`, closes the Rust primary-co
 Dart `.1.5.3`.
 
 For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` builds Rust and combines this command
-with Perl, Dart, and Julia across both environments. That recurring 4x2x61 proof is separately owned by `.1.5.4.3`.
+with Perl, Dart, Julia, and Lua across both environments. `.1.5.4.3` owns the original 4x2x61 proof; Lua `.7.2`
+extends the same matrix to 5x2x61.
 
 Related facts: [[neutral-cli-fixture-runner]], [[rust-canonical-primary-cli-trace]],
 [[hosted-ci-disabled-run-local-gate]], [[dart-local-verification-gate]],

@@ -146,8 +146,9 @@ recursively key-sorted JSON value plus one newline and exits 0; compilation/inpu
 stable phase heading and exit 1; usage exits 2. CLI trace is ADR `0024`'s portable phase protocol, not the rich
 native emitter stream. Relative paths use the actual process cwd queried through the narrow filesystem adapter,
 so no shell, subprocess, or environment option parser owns semantics. PUC Lua and LuaJIT pass 169/169, and the
-unchanged shared process manifest passes diagnostic 61/61 in default and POSIX environments. `.7.2` owns making
-those legs recurring; public status remains `runtime-corpus-full` until that admission.
+unchanged shared process manifest now passes recurring 61/61 runs in default and POSIX environments. The warmed
+cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli` and final no-drift `.7.3` is
+active.
 
 ## Lua automatic function parsing
 

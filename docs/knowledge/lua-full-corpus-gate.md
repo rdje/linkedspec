@@ -15,6 +15,7 @@ status: current
 tags: [lua, corpus, parity, runner, manifest, regression, PUC-Lua, LuaJIT, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.6.3 adds one no-selector production-library regression and bare developer-runner --execute. Both paths validate and execute all 105 fixtures in manifest order with exact wrapped output, 105 passes, and zero failures; missing-directory drift returns 2 and a controlled mismatch returns 1. PUC Lua and LuaJIT pass 167/167 with status runtime-corpus-full."
 evidence_update_2026_07_15_primary_cli: "LUA-BACKEND-PARITY.7.1 subsequently implements the separate primary parser adapter at 169/169 per ABI plus diagnostic shared CLI 61x2; this does not change the corpus command or runtime-corpus-full status."
+evidence_update_2026_07_15_primary_cli_admission: "LUA-BACKEND-PARITY.7.2 makes primary 61x2 recurring and extends the matrix to 5x2x61; status advances to runtime-corpus-primary-cli without changing this 105/105 corpus boundary."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -37,10 +38,11 @@ projection.
 Public Lua status is `runtime-corpus-full`, and both PUC Lua and LuaJIT pass
 167/167 at this corpus boundary. `.6.3` did not implement the primary parser
 command; `.7.1` has since replaced that scaffold with the exact thin adapter,
-while `.7.2` owns recurring process/matrix admission. Generated
+and `.7.2` makes its 61x2 process proof recurring plus extends the matrix to 5x2x61. Current public status is
+`runtime-corpus-primary-cli`; this does not change the historical `.6.3` corpus boundary. Generated
 Lua and capability-census admission remain `.8.1-.8.4`; the census stays
 64/0/0.
 
 Related facts: [[lua-controlled-corpus-execution]], [[lua-corpus-manifest-io]],
 [[lua-advanced-corpus-residual-split]], [[julia-full-corpus-gate]],
-[[language-agnostic-backend-vision]], [[lua-primary-cli-adapter]].
+[[language-agnostic-backend-vision]], [[lua-primary-cli-adapter]], [[lua-primary-cli-recurring-admission]].

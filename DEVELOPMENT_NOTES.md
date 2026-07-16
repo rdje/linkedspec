@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.7.2` — admit one existing contract, not a Lua-specific matrix): The neutral
+  runner already owns workspace isolation, raw concurrent channel capture, exact files/exits, and display-command
+  substitution. The focused Lua gate should invoke it twice after the one PUC native build rather than retain
+  overlapping smokes. The cross-backend matrix likewise needs only a configurable Lua executable and disposable
+  native module path; pass that path through `env LUA_CPATH=...` on the Lua command so no other backend inherits
+  it. PUC Lua is the conformance matrix leg; LuaJIT remains the secondary ABI tested by the focused gate. Focused
+  proof is 169/169 per ABI, 61x2 primary, and 105/105 corpus; the shared matrix is 5x2x61. Status advances only to
+  `runtime-corpus-primary-cli`; generated source and the four-backend capability census remain later-owned.
+  Canonical local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in 607 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.7.1` — make the command a projection, not a second runtime): Lua already had
   strict native resolution/loading, staged inline compilation, identified engines, exact runtime results, and a
   canonical typed JSON encoder. The primary command therefore owns only argument validation, phase ordering,

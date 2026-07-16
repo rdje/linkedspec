@@ -96,8 +96,9 @@ locks all 59 literal names, unchanged wrapped outputs, matches, and exact byte/c
 both ABIs. Complete-manifest `.6.3` then executes all 105 fixtures without selectors through the production
 library and developer runner. Both report 105 passes/zero failures, both ABI suites pass 167/167, public status is
 `runtime-corpus-full`, and parent `.6` closes. Primary adapter `.7.1` now implements the exact ADR `0023` command
-over those native APIs: both ABI suites pass 169/169 and diagnostic shared process proof passes 61x2. Recurring
-process/matrix admission `.7.2` is active; public status remains `runtime-corpus-full` until that proof is wired.
+over those native APIs: both ABI suites pass 169/169. Admission `.7.2` now runs the unchanged shared process proof
+at 61/61 in default and POSIX environments from the focused gate and extends the warmed matrix to 5x2x61. Public
+status is `runtime-corpus-primary-cli`; final no-drift `.7.3` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -332,8 +333,8 @@ reads are unchanged. History passes and the exact window is 59/59. `.6.2.5` reme
 first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` verifies a literal ordered
 59-name/endpoint ledger and every unchanged wrapped output at 166/166 per ABI. Final `.6.3` runs the complete
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
-implements the exact primary adapter at 169/169 per ABI plus diagnostic shared CLI 61x2. Recurring admission `.7.2`
-is active and status remains `runtime-corpus-full`.
+implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
+extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and final no-drift `.7.3` is active.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -388,8 +389,8 @@ Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. The staged registry now dispatches and stitches their bodies, and
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
 loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
-parser CLI adapter, and its diagnostic 61x2 process proof are current. Recurring CLI matrix admission is `.7.2`;
-generated source retains its later `.8` owner.
+parser CLI adapter, recurring focused 61x2 proof, and shared 5x2x61 matrix admission are current. Final CLI no-drift
+is `.7.3`; generated source retains its later `.8` owner.
 
 Run the local gate from the repository root:
 
@@ -413,7 +414,7 @@ rm -rf "$native_dir"
 
 The backend has no LuaRocks or global Lua package dependency. Runtime matching
 requires a C compiler, `pkg-config`, PCRE2 headers/library, and Lua development
-headers for the selected ABI. Validate the checked-in corpus without executing it:
+headers for the selected ABI.
 
 The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
 positionals:
@@ -432,8 +433,8 @@ removal, or newline conversion. Success prints one recursively key-sorted canoni
 exits `0`; compilation/input-load/invocation failures use one stable phase heading and exit `1`; usage exits `2`.
 The command delegates named/file compilation, staged inline compilation, engine construction, and execution to the
 same in-memory module APIs. Its canonical phase trace is intentionally separate from richer native trace. The
-unchanged shared 61-case process manifest is diagnostic-green in both default and POSIX environments; `.7.2`
-makes those legs recurring. Public status remains `runtime-corpus-full` at this implementation boundary.
+unchanged shared 61-case process manifest is now a recurring focused gate in both default and POSIX environments,
+and the warmed cross-backend matrix passes 5x2x61. Public status is `runtime-corpus-primary-cli`.
 
 Validate the checked-in corpus without executing it:
 
@@ -678,7 +679,7 @@ Registered keyword arguments diagnose as
 closed before body execution. Variadic signatures and declared contextual final codeblocks
 now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
 full corpus execution, and the thin primary CLI adapter are implemented; generated Lua remains the separate `.8`
-layer, while recurring CLI admission is `.7.2`.
+layer, while final CLI/native/corpus no-drift is `.7.3`.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

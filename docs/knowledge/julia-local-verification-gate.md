@@ -9,7 +9,7 @@ answers:
   - how do I select the Julia executable for LinkedSpec checks
   - how do I select the Julia depot for LinkedSpec checks
   - what does JULIA-BACKEND-PARITY.6.4 prove
-date: 2026-07-10
+date: 2026-07-15
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; FUTURE-PARITY-BACKLOG.1.5.4.2 proves its 1,019 assertions, nine canonical primary process families, and 99/99 corpus after trace convergence."
@@ -47,7 +47,8 @@ That boundary keeps ordinary core verification available on machines without Jul
 one explicit opt-in that composes the focused gate without duplicating its commands.
 
 For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` explicitly warms the Julia project and
-combines it with Perl, Rust, and Dart in both environments. `.1.5.4.3` closes that recurring 4x2x61 proof.
+combines it with Perl, Rust, Dart, and Lua in both environments. `.1.5.4.3` closes the original recurring 4x2x61
+proof; Lua `.7.2` extends the same matrix to 5x2x61.
 
 Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]],

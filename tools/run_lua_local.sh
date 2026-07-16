@@ -17,6 +17,7 @@ fail() {
 }
 
 command -v "$LUA_CMD" >/dev/null 2>&1 || fail "required primary runtime not found: $LUA_CMD"
+command -v perl >/dev/null 2>&1 || fail "required command not found: perl"
 
 native_root=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
 trap 'rm -rf "$native_root"' EXIT
@@ -38,20 +39,15 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
 log "running primary PUC Lua tests"
 "$LUA_CMD" lua/test/run.lua
 
-log "checking the primary parser CLI adapter"
-cli_help=$("$LUA_CMD" lua/bin/linkedspec-lua --help)
-printf '%s\n' "$cli_help" | grep -F 'lua/bin/linkedspec-lua --spec NAME --input TEXT [options]' >/dev/null ||
- fail "primary CLI help drifted"
-cli_output=$("$LUA_CMD" lua/bin/linkedspec-lua \
- --inline-spec $'Top::\n /x/ -> Done { return("lua-cli") }\n\nDone::\n /x/\n' --input x)
-[ "$cli_output" = '"lua-cli"' ] || fail "primary CLI execution drifted"
-set +e
-cli_stderr=$("$LUA_CMD" lua/bin/linkedspec-lua status 2>&1 >/dev/null)
-cli_status=$?
-set -e
-[ "$cli_status" -eq 2 ] || fail "primary CLI usage exit was $cli_status, expected 2"
-printf '%s\n' "$cli_stderr" | grep -F "linkedspec: unexpected positional argument 'status'" >/dev/null ||
- fail "primary CLI usage stderr drifted"
+log "running shared primary CLI contract (default environment)"
+env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
+ --display-command 'lua/bin/linkedspec-lua' -- \
+ "$LUA_CMD" '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
+
+log "running shared primary CLI contract (POSIX environment)"
+env POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
+ --display-command 'lua/bin/linkedspec-lua' -- \
+ "$LUA_CMD" '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
 
 log "validating the exact checked-in corpus through the developer command"
 corpus_output=$("$LUA_CMD" lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus)

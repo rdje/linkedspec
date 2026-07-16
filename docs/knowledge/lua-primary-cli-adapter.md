@@ -17,6 +17,7 @@ date: 2026-07-15
 status: current
 tags: [lua, cli, native-api, utf8, json, trace, parity, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.7.1 adds lua/src/linkedspec/primary_cli.lua and replaces the exit-2 command scaffold. Direct/process tests pass 169/169 on PUC Lua and LuaJIT; the unchanged shared process manifest passes diagnostic 61/61 in default and POSIX environments. Canonical local CI reaches phase0 1..1031 in 606 seconds. Public status remains runtime-corpus-full until .7.2 makes the two process legs recurring."
+evidence_update_2026_07_15_recurring_admission: "LUA-BACKEND-PARITY.7.2 makes both 61-case process environments recurring in the focused gate, extends the warmed matrix to 5x2x61, and advances status to runtime-corpus-primary-cli without changing primary_cli.lua semantics."
 reverify: "bash tools/run_lua_local.sh && rg -n 'primary_cli|current_directory|run_primary_cli' lua/bin/linkedspec-lua lua/native/filesystem_native.c lua/src/linkedspec lua/test/run.lua tools/run_lua_local.sh"
 ---
 
@@ -48,12 +49,13 @@ subprocess, or `PWD` environment assumption. Parser semantics remain wholly in
 the library.
 
 Both ABI suites pass 169/169. The unchanged 61-case process manifest is already
-diagnostic-green under default and `POSIXLY_CORRECT=1`; `.7.2` owns making those
-two legs recurring and adding Lua to the shared matrix. Status deliberately
-remains `runtime-corpus-full` at `.7.1`. Canonical local CI exits 0 with Phase 0
-true reach `1..1031` in 606 seconds.
+green under default and `POSIXLY_CORRECT=1`; `.7.2` has since made both legs
+recurring and extended the shared matrix to 5x2x61. Current status is
+`runtime-corpus-primary-cli`. The `.7.1` canonical local CI baseline exits 0
+with Phase 0 true reach `1..1031` in 606 seconds.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[primary-cli-strict-utf8-text-contract]], [[canonical-primary-cli-trace-protocol]],
 [[native-in-memory-backend-contract]], [[lua-native-spec-loading-closeout]],
-[[lua-full-corpus-gate]], [[lua-backend-full-parity-plan]].
+[[lua-full-corpus-gate]], [[lua-backend-full-parity-plan]],
+[[lua-primary-cli-recurring-admission]].

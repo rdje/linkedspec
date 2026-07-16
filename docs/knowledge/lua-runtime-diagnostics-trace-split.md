@@ -51,8 +51,9 @@ focused-test, status, public-book, task/index, roadmap, live-doc, and Knowledge 
 inventory agree on `runtime-trace-events`; parent `.4.4` is closed. Minimal staged
 dispatch `.5.1.1` later advanced status to `runtime-staged-registry`, and fixed-v1
 execution `.5.1.2` later advanced status. `.5.3.2` then completed the planned full-pipeline trace at
-`native-full-pipeline-trace-v1`; complete corpus `.6.3` has since advanced current status to `runtime-corpus-full`
-without changing these trace mechanisms.
+`native-full-pipeline-trace-v1`; complete corpus `.6.3` advanced it to `runtime-corpus-full`, and primary CLI
+admission `.7.2` has since advanced current status to `runtime-corpus-primary-cli` without changing these trace
+mechanisms.
 
 Related facts: [[trace-cross-variant-capability-contract]], [[dart-runtime-diagnostics-trace-split]],
 [[dart-full-pipeline-trace-gap]], [[julia-runtime-diagnostics-trace-split]],

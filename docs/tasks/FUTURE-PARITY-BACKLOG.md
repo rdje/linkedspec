@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua primary CLI adapter `.7.1` is implemented at 169/169 per ABI plus diagnostic
-  shared CLI 61x2; recurring process/matrix admission `.7.2` is active while diagnostic `.5.1` and logical `.5.2`
-  remain dependency-gated).
+- Last updated: `2026-07-15` (Lua primary admission `.7.2` makes shared CLI 61x2 recurring and extends the matrix
+  to 5x2x61; final no-drift `.7.3` is active while diagnostic `.5.1` and logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal

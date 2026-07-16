@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.7.1` implements the exact thin primary CLI adapter at 169/169 per ABI and diagnostic
-  61/61 in both option environments; recurring process/matrix admission `.7.2` is active)
+- Last updated: `2026-07-15` (`.7.2` makes exact shared CLI 61x2 recurring, extends the warmed matrix to 5x2x61,
+  advances status to `runtime-corpus-primary-cli`, and activates final no-drift `.7.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2735,15 +2735,25 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter`
 
 - ID: `LUA-BACKEND-PARITY.7.2`
-  Status: `active`
+  Status: `done`
   Goal: Pass the shared 61-case process suite in default and POSIX environments.
   Acceptance: Add Lua as a first-class backend to the recurring neutral CLI matrix; stdout/stderr/files/exit bytes
     and executable-display substitution are exact.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `tools/run_lua_local.sh` now replaces its three-case process smoke with the
+    unchanged shared manifest under explicit default and `POSIXLY_CORRECT=1` environments; both pass 61/61 while
+    PUC Lua and LuaJIT remain 169/169 and the developer corpus command remains 105/105. The warmed matrix accepts
+    `LINKEDSPEC_LUA_CMD`, builds only the primary PUC native adapters in unique caller-owned temporary storage,
+    removes that tree on exit, and runs the same command/display substitution as the focused gate. Perl, Rust,
+    Dart, Julia, and Lua pass 5 backends x 2 environments x 61 exact cases. The canonical local gate now tracks
+    and syntax-checks the matrix's native-build dependency and accurately labels its optional five-backend leg.
+    Public status advances from `runtime-corpus-full` to `runtime-corpus-primary-cli`. Primary adapter semantics,
+    corpus/oracles, generated-source state, coverage 246/105+1/122, and capability 64/0/0 do not change. Mutation
+    testing was not run. Canonical local CI exits 0 with reference CLI 61/61 in default and POSIX environments plus
+    Phase 0 true reach `1..1031` in 607 seconds.
+  Commit: `LUA-BACKEND-PARITY.7.2 - admit Lua primary CLI matrix`
 
 - ID: `LUA-BACKEND-PARITY.7.3`
-  Status: `pending`
+  Status: `active`
   Goal: Close CLI/native/corpus no-drift and public usage docs.
   Acceptance: Direct process families, package/corpus gates, executable installation guidance, limitations, mdBook,
     KM, and local CI agree; primary CLI contains no corpus/status extensions.
@@ -2868,8 +2878,9 @@ matches, and byte/character endpoints in one recurring production-library test. 
 fixtures without selectors through both the production library and separate developer runner, with ordered exact
 outputs, 105 passes, zero failures, and status `runtime-corpus-full`. Both ABIs pass 167/167, parent `.6` is closed,
 and primary CLI adapter `.7.1` now implements the exact thin command at 169/169 per ABI plus diagnostic 61x2.
-Recurring local/matrix admission `.7.2` is active; status remains `runtime-corpus-full`, and generated source plus
-census admission remain `.8.1-.8.4`.
+Admission `.7.2` now makes Lua 61x2 recurring and extends the warmed primary matrix to 5x2x61. Status is
+`runtime-corpus-primary-cli`, final CLI/native/corpus no-drift `.7.3` is active, and generated source plus census
+admission remain `.8.1-.8.4`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -3002,7 +3013,8 @@ census admission remain `.8.1-.8.4`.
 | 127 | `LUA-BACKEND-PARITY.6.3` | `done` | Ordered library/runner execution passes 105/105 at 167/167 per ABI. |
 | 128 | `LUA-BACKEND-PARITY.7` | `active` | Implement and admit the exact primary parser CLI. |
 | 129 | `LUA-BACKEND-PARITY.7.1` | `done` | Thin native adapter passes 169/169 per ABI and diagnostic shared CLI 61x2. |
-| 130 | `LUA-BACKEND-PARITY.7.2` | `active` | Make the shared 61x2 process proof recurring and add the Lua matrix leg. |
+| 130 | `LUA-BACKEND-PARITY.7.2` | `done` | Focused Lua 61x2 and shared 5x2x61 matrix pass exactly. |
+| 131 | `LUA-BACKEND-PARITY.7.3` | `active` | Close CLI/native/corpus no-drift and public usage guidance. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3385,6 +3397,26 @@ census admission remain `.8.1-.8.4`.
   environments plus Phase 0 true reach `1..1031` in 606 seconds.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook command/status/handoff,
   Knowledge Map, changes/notes, and bounded memory close implementation `.7.1` and activate only admission `.7.2`.
+
+### `LUA-BACKEND-PARITY.7.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua passed the unchanged 61 cases twice only as one-off diagnostic evidence; its
+  focused gate still ran three bespoke smokes and the recurring warmed matrix stopped at four backends.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `tools/run_lua_local.sh` had not delegated primary process proof to the
+  neutral runner, while `tools/run_primary_cli_matrix.sh` neither built Lua's required native adapters nor carried
+  a Lua command/display row. The in-memory adapter itself was already exact and required no semantic repair.
+- [x] **FIX** — Replace focused smokes with explicit default/POSIX neutral-runner invocations; add configurable PUC
+  Lua plus one disposable native build to the matrix; clean that build on every exit; and make local-CI dependency
+  auditing/syntax labels describe the five-backend matrix accurately.
+- [x] **ADDRESSED (verified)** — The focused Lua gate passes 169/169 on both ABIs, 61/61 in both PUC process
+  environments, and 105/105 corpus execution. The shared matrix passes Perl/Rust/Dart/Julia/Lua at 5x2x61 exact
+  stdout/stderr/file/exit/display cases.
+- [x] **NO REGRESSION** — Public status advances only to `runtime-corpus-primary-cli`; primary CLI code, native
+  embedding, corpus/oracles, generated source, coverage 246/105+1/122, capability 64/0/0, and mutation policy are
+  unchanged. Canonical local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in
+  607 seconds.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook CLI/local-gate/handoff,
+  Knowledge Map, changes/notes, and bounded memory close admission `.7.2` and activate only final no-drift `.7.3`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4950,3 +4982,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.2.6` | `LUA-BACKEND-PARITY.6.2.6 - admit Lua advanced corpus window` | Literal 59-name/endpoint ledger, exact wrapped outputs, dual-ABI 166/166 proof, parent `.6.2` closure, and `.6.3` handoff. |
 | `LUA-BACKEND-PARITY.6.3` | `LUA-BACKEND-PARITY.6.3 - close full Lua corpus gate` | Atomic ordered 105/105 library/runner execution, exits 0/1/2, `runtime-corpus-full`, parent `.6` closure, and `.7.1` handoff. |
 | `LUA-BACKEND-PARITY.7.1` | `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter` | Exact thin native adapter, strict UTF-8/canonical JSON/stable phases, independent canonical trace, dual-ABI 169/169, diagnostic 61x2, and `.7.2` handoff. |
+| `LUA-BACKEND-PARITY.7.2` | `LUA-BACKEND-PARITY.7.2 - admit Lua primary CLI matrix` | Recurring focused Lua 61x2, disposable PUC matrix adapter, exact five-backend 5x2x61 proof, status promotion, and `.7.3` handoff. |

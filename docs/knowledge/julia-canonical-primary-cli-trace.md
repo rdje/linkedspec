@@ -9,7 +9,7 @@ answers:
   - do Julia trace stdout route mirror reset and append match other backends
   - how many shared CLI cases does Julia pass after canonical trace
   - what did FUTURE-PARITY-BACKLOG 1.5.4.2 implement
-date: 2026-07-10
+date: 2026-07-15
 status: current
 tags: [julia, cli, trace, canonical, utf8, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.2 adds an adapter-local ADR 0024 recorder; 1,019 package assertions, nine process families, 99/99 corpus, and 61/61 default/POSIX shared cases pass."
@@ -28,7 +28,8 @@ failures. Trace setup/write failure becomes the stable compilation failure witho
 
 After `.1.5.4.2`, Julia passes all 61 unchanged primary-command fixtures under default and
 `POSIXLY_CORRECT=1` environments. The local gate also passes 1,019 assertions, nine direct process families, and
-99/99 corpus. `.1.5.4.3` closes recurring warmed four-command integration, not further Julia trace semantics.
+99/99 corpus. `.1.5.4.3` closes the original recurring warmed four-command integration; Lua `.7.2` extends the
+same matrix to five commands, not further Julia trace semantics.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[julia-primary-cli-failure-trace-routing]],
 [[julia-trace-controls-sinks]], [[julia-global-cli-61-audit]], [[cross-backend-cli-contract-gap]],

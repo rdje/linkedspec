@@ -8,7 +8,7 @@ answers:
   - is Julia primary trace canonical or native
   - how is FUTURE-PARITY-BACKLOG 1.5.4 split
   - why must the Julia conformance driver warm the project
-date: 2026-07-10
+date: 2026-07-15
 status: current
 tags: [julia, cli, utf8, trace, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.0 runs the unchanged suite against Julia, measures 13/61, and splits shared help/UTF-8/errors, canonical trace, and the recurring four-backend driver before code."
@@ -29,7 +29,8 @@ phase protocol. `.1.5.4.1` owns help/strict UTF-8/phase-only errors, `.2` canoni
 Current progression: `.1.5.4.1` is complete. Exact shared help, raw-byte `isvalid` UTF-8 validation, and phase-only
 primary stderr pass in default and POSIX environments, advancing Julia from 13 to 42/61. The 19 remaining failures
 were exclusively canonical rich-versus-portable trace differences. `.1.5.4.2` is now complete and closes Julia at
-61/61 default/POSIX; `.1.5.4.3` now closes recurring warmed four-command integration at 4x2x61.
+61/61 default/POSIX; `.1.5.4.3` closes the original warmed four-command integration at 4x2x61, and Lua `.7.2`
+extends the unchanged matrix to 5x2x61.
 
 A cold first `using LinkedSpecJulia` may print Julia precompile progress to process stderr before application code
 runs. The existing `tools/check_julia_primary_cli.sh` already warms the project explicitly. The final global driver
