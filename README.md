@@ -198,8 +198,10 @@ This `README.md` is the **single entry point** to the project.
   leaves `.5.2.1-.9` are dependency-ordered. Neutral `.5.2.1` now adopts ADR `0043` plus the executable
   `linkedspec-logical-helper-v1` authority: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity failure,
   real booleans, typed truthiness, receiver composition, and lazy-control separation. Its 17 truth rows, ten helper
-  cases, three effect scenarios, deterministic fixtures, and 15 drift mutations pass offline; all eight backend/
-  projection/admission legs remain pending under `.5.2.2-.9` before structured-format execution.
+  cases, three effect scenarios, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.2.2` now
+  owns typed logical ActionIR, eager once-only values, exact pre-effect diagnostics, and one truthiness seam shared
+  by logical values and lazy controls; rollout is 1 complete / 7 pending before Rust `.5.2.3` and the remaining
+  backend/projection/admission leaves.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

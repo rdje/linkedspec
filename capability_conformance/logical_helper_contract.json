@@ -192,7 +192,7 @@
     "trace": "logical helper evaluation does not invent a backend-specific trace contract"
   },
   "rollout": [
-    {"id": "perl_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.2"},
+    {"id": "perl_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.2"},
     {"id": "rust_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.3"},
     {"id": "dart_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.4"},
     {"id": "julia_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.5"},

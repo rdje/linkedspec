@@ -14,8 +14,9 @@ logical values: null, false, numeric zero, empty strings, and empty arrays/harra
 numbers, all nonempty strings (including `"0"` and `"false"`), nonempty aggregates, and codeblocks are true.
 `and`/`or` are eager value helpers with at least one argument and `not` is an exact-one helper; invalid arity fails
 before operand evaluation. The controls documented here remain lazy: only the selected branch/body executes.
-Backend rollout is still 0/8 under `FUTURE-PARITY-BACKLOG.5.2.2-.9`, so current Perl condition lowering still
-uses host short-circuit/truth behavior until `.5.2.2` lands.
+Perl `.5.2.2` is complete at 1/7 rollout: current Perl conditions and logical values both call
+`LinkedSpec::RuntimeLogical`, while control branches/bodies remain lazy and valid `and`/`or` operands remain
+eager. Rust/Dart/Julia/Lua and generated/primary/gate/public admission remain `.5.2.3-.9`-owned.
 
 Method-DSL migration note:
 - fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,

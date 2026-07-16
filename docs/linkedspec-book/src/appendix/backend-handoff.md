@@ -857,9 +857,11 @@ therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1`
 all results are booleans, and invalid arity fails before effects. Typed truth makes only null, false, numeric zero,
 empty strings, and empty aggregates false; codeblocks are true without invocation. The executable contract checks
 17 truth rows, ten helper cases, three eager-effect scenarios, receiver/lazy-control contrast, four invalid calls,
-deterministic fixtures, and 15 mutations. Its ledger remains deliberately 0 complete / 8 pending before Perl,
-Rust, Dart, Julia, Lua, generated/primary, recurring, and public leaves `.5.2.2-.9`. Explicit codeblock literals
-remain separately owned by `.11`; the logical contract's codeblock row does not activate that syntax.
+deterministic fixtures, and 15 mutations. Its ledger began deliberately at 0 complete / 8 pending before Perl,
+Rust, Dart, Julia, Lua, generated/primary, recurring, and public leaves `.5.2.2-.9`. Perl `.5.2.2` now consumes
+that policy through typed ActionIR/runtime lowering across native/live/standalone-emitted execution, moving the
+ledger to 1 complete / 7 pending before `.5.2.3-.9`. Explicit codeblock literals remain separately owned by
+`.11`; the logical contract's codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,
 host output bypassed the primary command's strict UTF-8 encoder, and lowered host `exit` bypassed canonical

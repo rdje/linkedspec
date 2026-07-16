@@ -92,6 +92,19 @@ sub _parse_method_function_expr {
  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr)
 }
 
+sub _call_semantic_fields {
+ my ($method) = @_;
+ return () unless defined($method)
+  && ($method eq 'and' || $method eq 'or' || $method eq 'not');
+ return (
+  semantic_family => 'logical',
+  evaluation_policy => 'eager_left_to_right',
+  result_kind => 'boolean',
+  minimum_arity => 1,
+  maximum_arity => $method eq 'not' ? 1 : undef,
+ )
+}
+
 sub _looks_like_slash_symbol_call_at {
  my ($text, $idx) = @_;
  _require_method_expr_pkg();
@@ -310,6 +323,7 @@ sub _parse_call_expr {
   name => $call->{method},
   source_method => $call->{source_method},
   args => \@args,
+  _call_semantic_fields($call->{method}),
  )
 }
 
@@ -345,6 +359,7 @@ sub _parse_trailing_block_call_expr {
   args => \@args,
   trailing_block_arg => 1,
   trailing_block_source_span => _span($block_start, $block_end),
+  _call_semantic_fields($call->{method}),
  )
 }
 

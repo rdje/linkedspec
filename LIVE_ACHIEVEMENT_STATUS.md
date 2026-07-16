@@ -8,6 +8,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.2 — repair Perl logical lowering**
+  (DONE — Perl native/live/standalone-emitted logical behavior is conforming at 1 complete / 7 pending; Rust
+  `.5.2.3` is next).
+
+  **Result:** `and`/`or`/`not` are typed eager-left-to-right boolean calls across direct, nested, assignment,
+  return, condition, function, block-value, and receiver sites. Invalid arity emits exact pre-effect diagnostics;
+  valid operands run once before composition. `LinkedSpec::RuntimeLogical` owns one typed truthiness seam shared
+  by lazy controls. Raw keyword calls and host `&&`/`||` are gone from admitted logical sites. The Perl shared
+  false/zero scalar edge is explicitly distinguished from nonempty string `"0"`, restoring the canonical
+  hash-tree callback behavior.
+
+  **Proof:** The focused neutral Perl consumer covers all 17 truth rows, ten helper cases, eager effects,
+  receiver/lazy-control contrast, invalid arities, live and standalone-emitted execution, typed call metadata,
+  descriptor readiness, and host-scalar regressions. The neutral checker passes 1/7 topology and 15 mutations;
+  focused ActionIR/generated/diagnostic/codeblock tests, exact Perl primary success/failure projection, and direct
+  Phase 0 `1..1031` in 647 seconds pass. Knowledge Map, governance, mdBook, and whitespace pass. Canonical local
+  CI passes reference CLI 62x2 and Phase 0 `1..1031` in 635 seconds; no implementation mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.1 — ratify logical-helper contract**
   (DONE — neutral semantics are executable at 0 complete / 8 pending; Perl rollout `.5.2.2` is next).
 

@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.2` — a typed policy still needs an explicit host-representation seam):
+  Moving Perl logical calls behind one runtime owner removed the obvious raw-keyword and short-circuit defects,
+  but the first full regression run exposed a subtler host boundary. Perl's shared zero returned by an empty array
+  in scalar context and by a false comparison advertises string, integer, and floating slots simultaneously.
+  Naive string precedence therefore turned numeric zero into the nonempty string `"0"` and selected the wrong
+  hash-tree callback branch. Inspect the scalar before conversion, recognize that simultaneous numeric signature,
+  then preserve ordinary string precedence so a real string `"0"` stays true even after numeric inspection. Lock
+  all three cases and the original hash-tree behavior. This is precisely why the same neutral algorithm across
+  languages is useful: a host's representation edge becomes a named, tested policy boundary instead of an
+  accidental truth operator.
+
+  Typed call data now carries the logical family, eager-left-to-right policy, boolean result, and arity. Invalid
+  arity produces its structured diagnostic before operand lowering; valid operands are stored once before
+  composition; all lazy controls call the same truthiness seam but select only one branch/body. Perl native/live/
+  standalone-emitted rollout moves the neutral ledger from 0/8 to 1/7. A descriptor-only assertion also dropped
+  its redundant `parse_mode => 'consume'` argument so a test-specific cursor choice is not presented as logical
+  API guidance.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.1` — language diversity becomes valuable when disagreement is promoted
   into a typed authority): The five implementations exposed the policy choices, but a matrix alone would merely
   preserve drift. ADR `0043` converts those observations into one executable contract: exact arities before
@@ -2647,8 +2665,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.1 — eager logical helpers; Perl comparison corrected 2026-07-16):
   Julia and Rust evaluate every `and`/`or`/`not` argument before boolean composition. Julia does so through
   `_runtime_truthy`; lazy branches remain the responsibility of `if`/`switch`. The later `.5.2.0` audit corrected
-  this note's former Perl comparison: current Perl conditions use lazy host operators and direct logical values
-  remain raw/broken. The portmap constant residual exposed a separate compatibility seam:
+  this note's former Perl comparison by recording the pre-`.5.2.2` split: conditions used lazy host operators and
+  direct logical values remained raw/broken. Perl `.5.2.2` has since replaced both paths with typed eager logical
+  values and a shared truthiness seam. The portmap constant residual exposed a separate compatibility seam:
   helper regex compilers must ignore Perl's compile-once `o` flag while retaining meaningful portable flags.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.1 — anonymous capture boundaries):

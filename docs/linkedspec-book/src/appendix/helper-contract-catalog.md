@@ -1258,9 +1258,9 @@ table because its runtime behavior is to terminate the parser process.
   `helper_arity_mismatch` before evaluating any operand.
 - **Scope boundary**: the codeblock value-kind row is model/backend-unit evidence; it does not activate the
   separately owned `{|...| ... }` literal syntax.
-- **Current portability status**: ADR `0043` and `linkedspec-logical-helper-v1` are adopted, but all eight backend/
-  projection/admission legs remain pending under `FUTURE-PARITY-BACKLOG.5.2.2-.9`. Current hosts still expose the
-  three profiles recorded in the Boolean composition reference; do not treat the target as landed behavior yet.
+- **Current portability status**: ADR `0043` and `linkedspec-logical-helper-v1` are adopted. Perl native/live/
+  standalone-emitted execution conforms under `FUTURE-PARITY-BACKLOG.5.2.2`; seven backend/projection/admission
+  legs remain pending under `.5.2.3-.9`. Do not treat the target as cross-backend behavior yet.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.

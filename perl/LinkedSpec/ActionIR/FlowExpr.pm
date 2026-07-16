@@ -452,20 +452,17 @@ sub _lower_flow_composite_expr {
  );
 
  if ($method eq 'or' || $method eq 'and') {
-  my $effective_args = $args;
-  return $finish->(undef, 'logical_missing_args', { method => $method }) unless $effective_args && @$effective_args;
-  my @parts = map { _lower_flow_composite_expr($_, $deps) } @$effective_args;
-  return $finish->(undef, 'logical_arg_lowering_failed', { method => $method }) if grep { !defined($_) || !length($_) } @parts;
-  my $joiner = $method eq 'or' ? ' || ' : ' && ';
-  return $finish->('('.join($joiner, map { "($_)" } @parts).')', 'logical_'.$method, { arg_count => scalar(@parts) });
+  my $logical = $lower_method_value_expr->($trimmed);
+  return $finish->(undef, 'logical_lowering_failed', { method => $method })
+   unless defined($logical) && length($logical);
+  return $finish->($logical, 'typed_logical_'.$method, { arg_count => scalar(@$args) });
  }
 
  if ($method eq 'not') {
-  my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
-  return $finish->(undef, 'not_missing_arg', {}) unless $effective_args;
-  my $value = _lower_flow_composite_expr($effective_args->[0], $deps);
-  return $finish->(undef, 'not_arg_lowering_failed', {}) unless defined($value) && length($value);
-  return $finish->("(!($value))", 'not', {});
+  my $logical = $lower_method_value_expr->($trimmed);
+  return $finish->(undef, 'logical_lowering_failed', { method => $method })
+   unless defined($logical) && length($logical);
+  return $finish->($logical, 'typed_logical_not', { arg_count => scalar(@$args) });
  }
 
  if ($method eq 'is_empty') {

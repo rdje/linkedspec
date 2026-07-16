@@ -15,8 +15,8 @@ answers:
 date: 2026-07-16
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, a 0-complete/8-pending rollout, and 15 representative drift mutations. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
-reverify: "python3 tools/check_logical_helper_contract.py && rg -n '0043|linkedspec-logical-helper-v1|0 complete / 8 pending' docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md capability_conformance/logical_helper_contract.json capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 15 representative drift mutations. FUTURE-PARITY-BACKLOG.5.2.2 adds the first conforming rollout leg through Perl typed ActionIR/native/live/standalone-emitted proof, moving the ledger to 1 complete / 7 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
+reverify: "python3 tools/check_logical_helper_contract.py && prove -Iperl t/logical_helper_perl_contract.t && rg -n '0043|linkedspec-logical-helper-v1|one complete / seven pending' docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md capability_conformance/logical_helper_contract.json capability_conformance/README.md"
 ---
 
 The adopted target treats `and`, `or`, and `not` as ordinary boolean value helpers. `and` and `or` accept at
@@ -40,8 +40,8 @@ The codeblock row fixes value-kind behavior only. Because explicit `{|...| ... }
 owned by `FUTURE-PARITY-BACKLOG.11`, the neutral portable source fixture excludes them; backend rollout proves the
 row at typed runtime/unit boundaries without silently expanding logical-helper scope.
 
-The target is adopted but not yet current backend behavior. Rollout is deliberately 0 complete / 8 pending under
-`FUTURE-PARITY-BACKLOG.5.2.2-.9`.
+The target is adopted and current on the Perl reference's native/live/standalone-emitted roles. Cross-backend and
+public rollout remains 1 complete / 7 pending under `FUTURE-PARITY-BACKLOG.5.2.3-.9`.
 
 Related facts: [[logical-helper-five-backend-audit]], [[callable-codeblock-literal-contract]],
 [[cross-backend-condition-truthiness-drift]].

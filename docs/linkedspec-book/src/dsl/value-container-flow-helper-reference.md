@@ -1160,24 +1160,24 @@ Current implementation status (2026-07-16):
 
 | Backend | Current evaluation | Empty `and/or/not` | `"0"` / `"false"` truth | Empty aggregates |
 | --- | --- | --- | --- | --- |
-| Perl | conditions lower `and/or` to lazy host operators; direct logical values are raw/broken | direct calls broken | false / true | true |
+| Perl | eager once left-to-right; lazy controls share truthiness but select one branch/body | diagnostic / diagnostic / diagnostic | true / true | false |
 | Rust | eager once left-to-right | false / false / true | false / false | false |
 | Dart | `and/or` short-circuit; `not` evaluates only its first argument | true / false / true | true / true | false |
 | Julia | eager once left-to-right | false / false / true | true / true | false |
 | Lua | eager once left-to-right | false / false / true | false / true | true |
 
-This is three current truthiness profiles, not one reference/interpreter split. Rust uniquely treats ordinary
-nonempty `"false"` as false; Dart/Julia use nonempty-string truth; Perl/Lua share the `"0"` and empty-aggregate
-boundaries. Rust, Dart, Julia, and Lua generated execution matches each native implementation, so emission is not
-the source of the difference. Perl's canonical descriptor has no logical-expression node: conditions lower through
-`FlowExpr`, while direct return/assignment/receiver calls remain raw keyword forms. Planning audit `.5.2.0`
+Truthiness still has three current profiles, not one reference/interpreter split. Rust uniquely treats ordinary
+nonempty `"false"` as false; Perl/Dart/Julia use nonempty-string and empty-aggregate truth; Lua retains the `"0"`
+and empty-aggregate boundaries. Rust, Dart, Julia, and Lua generated execution matches each native implementation,
+so emission is not the source of their remaining differences. Planning audit `.5.2.0`
 dependency-orders neutral policy, five backend repairs, generated/primary projection, a recurring gate, and public
 no-drift under `.5.2.1-.9`. Neutral policy `.5.2.1` is now executable as
 `linkedspec-logical-helper-v1`: 17 truthiness rows, ten helper cases, three eager-effect scenarios, four arity
-failures, deterministic fixtures, and 15 drift mutations pass offline. Its rollout is deliberately 0 complete / 8
-pending, so the matrix above remains the current behavior. Until `.5.2.2-.9` land, use explicit predicates at
-disputed boundaries and do not put side-effecting expressions after a decisive logical operand in portable
-`.spec` files.
+failures, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.2.2` now represents logical calls
+as typed ActionIR and lowers native/live/standalone-emitted execution through `LinkedSpec::RuntimeLogical`, with
+pre-effect arity failure, eager once-only operands, real booleans, and one typed condition/helper seam. Rollout is
+1 complete / 7 pending. Until `.5.2.3-.9` land, use explicit predicates at disputed cross-backend boundaries and
+do not rely on one backend's remaining evaluation/empty-call behavior.
 
 Examples:
 

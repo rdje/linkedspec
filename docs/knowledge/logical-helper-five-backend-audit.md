@@ -1,6 +1,6 @@
 ---
 id: logical-helper-five-backend-audit
-title: Logical helpers currently expose three truthiness profiles and a split Perl lowering path
+title: Logical-helper audit found three truthiness profiles; Perl now consumes the target
 answers:
   - "what are the current and or not semantics on all five LinkedSpec backends"
   - "are LinkedSpec logical helpers eager or short circuit"
@@ -12,37 +12,36 @@ answers:
   - "does ActionIR have a logical expression node"
   - "which task owns logical helper parity"
 date: 2026-07-16
-status: confirmed-gap
+status: rollout-in-progress
 tags: [logical, truthiness, arity, actionir, generated-source, perl, rust, dart, julia, lua, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.0 used call_spec_handler_subst, LinkedSpec::Get, return_descriptor, emitted-source execution, source ownership reads, and matching native/generated probes. Perl condition lowering uses lazy host &&/|| but direct value/return/receiver calls remain raw and broken; Rust/Julia/Lua eagerly evaluate every argument; Dart short-circuits. The same probes establish three truthiness profiles and confirm native/generated identity on Rust, Dart, Julia, and both Lua ABIs. The canonical narrative is the mdBook Boolean composition section and backend handoff; .5.2.1-.9 own policy and rollout."
-reverify: "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(q{Top}, q{return(and(true,false))}), qq{\n}, LinkedSpec::call_spec_handler_subst(q{Top}, q{return(if(and(false,true),\"T\",\"F\"))}), qq{\n}' && rg -n 'as_bool|_callLogicalAnd|_callLogicalOr|_callLogicalNot|_runtime_truthy|evaluate_runtime_logical|runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
+evidence_update_2026_07_16_perl_rollout: "FUTURE-PARITY-BACKLOG.5.2.2 repairs the audited Perl split through typed ActionIR and LinkedSpec::RuntimeLogical. Direct/nested/assignment/return/condition/function/block/receiver calls now enforce pre-effect arity, eager left-to-right operands, real booleans, and ADR 0043 truthiness; lazy controls share truth but not eager branch execution. Rollout is 1 complete / 7 pending."
+reverify: "prove -Iperl t/logical_helper_perl_contract.t && python3 tools/check_logical_helper_contract.py && rg -n 'as_bool|_callLogicalAnd|_callLogicalOr|_callLogicalNot|_runtime_truthy|evaluate_runtime_logical|runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
 ---
 
 The five implementations do not currently express one logical-helper contract:
 
 | Backend | Evaluation | Empty `and/or/not` | Scalar `"0"` / `"false"` | Empty aggregates |
 | --- | --- | --- | --- | --- |
-| Perl | condition-only `and/or` are lazy host operators; direct values are broken | direct calls broken | false / true | true |
+| Perl | eager, once, left-to-right; controls remain branch/body-lazy | diagnostic / diagnostic / diagnostic | true / true | false |
 | Rust | eager, once, left-to-right | false / false / true | false / false | false |
 | Dart | short-circuit `and/or`; `not` evaluates only its first argument | true / false / true | true / true | false |
 | Julia | eager, once, left-to-right | false / false / true | true / true | false |
 | Lua | eager, once, left-to-right | false / false / true | false / true | true |
 
 This is three truthiness profiles, not a simple reference-versus-interpreter split. Rust uniquely treats the
-ordinary nonempty string `"false"` as false; Dart and Julia use nonempty-string truth; Perl and Lua share scalar
-`"0"`/empty-aggregate host-compatible boundaries.
+ordinary nonempty string `"false"` as false; Perl, Dart, and Julia use nonempty-string/empty-aggregate truth; Lua
+retains scalar `"0"`/empty-aggregate host-compatible boundaries.
 
-Perl also has two mechanisms rather than an eager helper implementation. `FlowExpr.pm` lowers logical expressions
-inside conditions to host `&&`, `||`, and `!`, so decisive operands skip later side effects. Direct return,
-assignment, nested, and receiver forms remain raw keyword calls such as `return and(...)`, which miscompile or
-return `undef`. Logical expressions remain strings inside canonical `IF`/`ASSIGN`/`RETURN` descriptor arguments;
-there is no first-class logical ActionIR node. The legacy optional-scope normalizer can additionally reinterpret
-the first bare value token in `not(false, true)` as a scope and lower `!(true)`.
+At audit time Perl had two mechanisms rather than an eager helper implementation: host operators inside conditions
+and raw keyword calls in value sites, plus an optional-scope collision for `not(false, true)`. `.5.2.2` replaces
+that split with typed logical call data and one runtime seam. Its full regression also records the Perl shared
+false/zero scalar edge so numeric zero stays false without turning a real nonempty string `"0"` false.
 
 Rust, Dart, Julia, and Lua generated execution reproduces each backend's native behavior exactly, so generated
 projection is not the source of the drift. `FUTURE-PARITY-BACKLOG.5.2.1` has since ratified ADR `0043` and the
-executable neutral contract; the dependency-ordered Perl/Rust/Dart/Julia/Lua, generated/primary, recurring-gate,
-and public no-drift leaves `.5.2.2-.9` remain pending before behavior changes.
+executable neutral contract. Perl `.5.2.2` now consumes it; dependency-ordered Rust/Dart/Julia/Lua,
+generated/primary, recurring-gate, and public no-drift leaves `.5.2.3-.9` remain pending.
 
 Related facts: [[cross-backend-condition-truthiness-drift]], [[julia-logical-helper-execution]],
 [[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]], [[logical-helper-neutral-contract]].

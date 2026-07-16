@@ -103,6 +103,13 @@ sub _lower_control_flow_value_expr {
  return $lowered
 }
 
+sub _typed_condition_truth_expr {
+ my ($value_expr) = @_;
+ return undef unless defined($value_expr) && length($value_expr);
+ return 'do { require LinkedSpec::RuntimeLogical; '
+  .'LinkedSpec::RuntimeLogical::truthy('.$value_expr.') }'
+}
+
 sub _runtime_diagnostic_string_literal {
  my ($value) = @_;
  $value = '' unless defined $value;
@@ -554,6 +561,7 @@ sub _lower_if_flow_statement {
  return $finish->(undef, 'bad_arity', { method => $call->{method} }) unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return $finish->(undef, 'condition_lowering_failed', { method => $call->{method} }) unless defined($cond_expr) && length($cond_expr);
+ $cond_expr = _typed_condition_truth_expr($cond_expr);
  return $finish->(undef, 'attached_block_with_inline_args', { arg_count => scalar(@$effective_args) })
   if defined($attached_block) && @$effective_args > 1;
 
@@ -634,6 +642,7 @@ sub _lower_elseif_flow_statement {
  return undef unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return undef unless defined($cond_expr) && length($cond_expr);
+ $cond_expr = _typed_condition_truth_expr($cond_expr);
 
  my $if_stack = $ctx->{if_stack} || [];
  return undef unless @$if_stack;
@@ -1088,6 +1097,7 @@ sub _lower_inline_if_branch_expr {
 
   my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
   return undef unless defined($cond_expr) && length($cond_expr);
+  $cond_expr = _typed_condition_truth_expr($cond_expr);
 
   return undef if defined($attached_block) && @$effective_args > 1;
   my @branch_action_exprs = defined($attached_block)
@@ -1257,6 +1267,7 @@ sub _lower_while_flow_statement {
   unless $effective_args && @$effective_args == 1;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return $finish->(undef, 'condition_lowering_failed', {}) unless defined($cond_expr) && length($cond_expr);
+ $cond_expr = _typed_condition_truth_expr($cond_expr);
 
  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
  return $finish->(undef, 'actions_failed', {}) unless ref($actions) eq 'ARRAY';

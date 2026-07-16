@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.2 — repair Perl logical lowering
+
+Made `and`/`or`/`not` first-class typed Perl ActionIR calls across direct, nested, assignment, return, condition,
+user-function, block-value, and compatible receiver sites. Valid operands evaluate exactly once left-to-right
+before boolean composition; invalid one-plus/exact-one arities emit `helper_arity_mismatch` before any operand is
+lowered or evaluated. Raw Perl keyword-call residue, host `&&`/`||` short-circuiting, and the legacy
+`not(false, true)` optional-scope collision are removed from admitted logical calls.
+
+Added `LinkedSpec::RuntimeLogical` as the shared reference seam for real boolean results and ADR `0043` typed
+truthiness. Statement, attached, inline-value, and loop conditions call the same seam while preserving lazy branch
+and body selection. A full Phase 0 run caught Perl's shared false/zero scalar advertising simultaneous string,
+integer, and floating slots: the seam now recognizes that numeric host edge before applying string precedence, so
+empty counts and false comparisons remain false while nonempty string `"0"` remains true. The canonical hash-tree
+callback fixture again preserves scalar A/B leaves.
+
+Added a neutral Perl consumer covering all 17 truth rows, helper values, eager effects, receiver/lazy-control
+contrast, live and standalone-emitted execution, exact pre-effect diagnostics, typed sites, and the host-scalar
+regression. Promoted only `perl_native` in `linkedspec-logical-helper-v1`, leaving seven rollout legs pending, and
+aligned the checker, Perl guides, roadmap/live architecture, mdBook, task tree, and Knowledge Map. The
+descriptor-only test no longer supplies an irrelevant `parse_mode => 'consume'` example.
+
+Validation: the neutral checker passes 17 truthiness, ten helper, three effect, 1-complete/7-pending, and 15-
+mutation proof. The focused eight-subtest Perl consumer, ActionIR AST, callable-codeblock, generated-source, and
+diagnostic suites pass; the Perl primary command returns the exact canonical logical values and stable invalid-
+arity failure. A direct Phase 0 run passes `1..1031` in 647 seconds. The canonical local CI gate independently
+passes the registered contract, reference CLI 62x2, Phase 0 `1..1031` in 635 seconds, Knowledge Map, memory,
+doctrines, mdBook, and whitespace. No implementation mutation campaign ran.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.1 — ratify logical-helper contract
 
 Adopted ADR `0043` and `linkedspec-logical-helper-v1` as the backend-neutral authority before implementation.

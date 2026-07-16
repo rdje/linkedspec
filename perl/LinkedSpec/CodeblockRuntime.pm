@@ -6,6 +6,7 @@ use warnings;
 
 use Scalar::Util qw(blessed reftype);
 use Storable qw(dclone);
+use LinkedSpec::RuntimeLogical ();
 
 # Execute version-1 callable-codeblock records as typed data. Generated handlers
 # provide explicit references to caller working slots; this module never captures
@@ -118,6 +119,22 @@ sub _eval_call {
  my $args = $node->{args};
  _error('invalid_codeblock_body', detail => 'call arguments must be an array')
   unless ref($args) eq 'ARRAY';
+
+ if ($name eq 'and' || $name eq 'or' || $name eq 'not') {
+  my $argc = scalar @$args;
+  _error(
+   'helper_arity_mismatch',
+   helper_name => $name,
+   actual_arity => $argc,
+   expected_arity => LinkedSpec::RuntimeLogical::expected_arity($name),
+   arguments_evaluated => 0,
+  ) unless LinkedSpec::RuntimeLogical::arity_is_valid($name, $argc);
+  my @logical_values;
+  foreach my $arg (@$args) {
+   push @logical_values, _eval_expr($arg, $ctx);
+  }
+  return LinkedSpec::RuntimeLogical::evaluate($name, \@logical_values)
+ }
 
  my @values = map { _eval_expr($_, $ctx) } @$args;
 

@@ -222,19 +222,15 @@ Important nuance:
 - `return(payload)` is the preferred general return surface because nested `scalar`, direct access, `array`, `hash`, `array_copy`, compatibility `array_values`, `flat_*`, and `split_tagged_records(...)` helpers all lower inside the payload.
 
 ### Flow expressions (`FlowExpr.pm`)
-- `or(scalar(on), scalar(off))` -> `(($on) || ($off))`
-- `and(scalar(enabled), scalar(flag))` -> `(($enabled) && ($flag))`
-- `not(scalar(off))` -> `(!($off))`
+- `or(on, off)` -> `do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar($on); push @{$__ls_logical_values}, scalar($off); LinkedSpec::RuntimeLogical::evaluate('or', $__ls_logical_values) }`
+- `and(enabled, flag)` -> the same eager array-building shape ending in `RuntimeLogical::evaluate('and', ...)`.
+- `not(off)` -> the same exact-one shape ending in `RuntimeLogical::evaluate('not', ...)`.
 
-These three mappings currently describe condition-expression lowering only. `and`/`or` therefore inherit Perl's
-host short-circuit behavior. Direct logical values in return, assignment, nested, and receiver positions still
-remain raw keyword-call text and can miscompile or return `undef`; legacy optional-scope stripping can also turn
-`not(false, true)` into a negation of only the second argument. Planning audit
-`FUTURE-PARITY-BACKLOG.5.2.0` records the mechanism. ADR `0043` and executable neutral leaf `.5.2.1` now adopt
-at-least-one `and`/`or`, exactly-one `not`, eager once-only operands, real booleans, and typed nonempty-string/
-nonempty-aggregate truth. Perl has not implemented that target yet; `.5.2.2` owns the typed ActionIR/lowering
-repair. Until it lands, the three mappings above are current condition-only Perl behavior, not portable target
-code.
+Perl `.5.2.2` makes these typed logical value expressions in conditions, returns, assignments, nested calls,
+user functions, block values, and compatible receiver chains. Arity is checked before operand lowering; valid
+operands evaluate once left-to-right; composition returns a real boolean. The emitted source does not use host
+`&&`, `||`, or raw Perl keyword calls. `LinkedSpec::RuntimeLogical::truthy` is also the one condition seam, so
+logical helpers stay eager while `if`/`switch`/`while` branch or iterate lazily.
 - `is_defined(retv["content"])` -> `defined($retv->{"content"})`
 - `is_undefined(retv["type"])` -> `(!defined($retv->{"type"}))`
 - `is_defined(coalesce(retv["type"], scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`
@@ -273,13 +269,14 @@ code.
 Important nuance:
 - Nested forms compose recursively.
 - `is_defined(...)` and `is_undefined(...)` are presence checks, not emptiness checks, so `""` and `0` remain defined.
-- `if(or(scalar(on), and(not(scalar(off)), is_empty(scalar(name)))))` emits one Perl condition built from the same lowerings listed above.
+- `if(or(on, and(not(off), is_empty(name))))` emits nested `RuntimeLogical::evaluate(...)` values inside one
+  `RuntimeLogical::truthy(...)` condition.
 
 ### Structured control flow and output (`ControlFlow.pm`)
-- `if(scalar(on))` -> `if ($on) {`
-- `i(scalar(on))` -> `if ($on) {`
-- `elseif(scalar(alt_on))` -> `} elsif ($alt_on) {`
-- `elif(scalar(alt_on))` -> `} elsif ($alt_on) {`
+- `if(on)` -> `if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy($on) }) {`
+- `i(on)` -> the same typed-truth `if` shape.
+- `elseif(alt_on)` -> `} elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy($alt_on) }) {`
+- `elif(alt_on)` -> the same typed-truth `elsif` shape.
 - `else()` -> `} else {`
 - `endif()` -> `}`
 - `say("warn")` -> one evaluated-value array passed to

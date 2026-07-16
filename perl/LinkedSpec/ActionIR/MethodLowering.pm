@@ -72,6 +72,49 @@ sub _method_value_helper_family {
  return 'unknown'
 }
 
+sub _runtime_logical_string_literal {
+ my ($value) = @_;
+ $value = '' unless defined $value;
+ $value =~ s/\\/\\\\/g;
+ $value =~ s/'/\\'/g;
+ return "'$value'"
+}
+
+sub _runtime_logical_arity_expr {
+ my ($helper, $actual, $deps) = @_;
+ my $expected = ($helper eq 'not')
+  ? 'exactly 1 positional argument'
+  : 'at least 1 positional argument';
+ my $rule_label = ref($deps) eq 'HASH' ? ($deps->{rule_label} // '') : '';
+ return 'do { require LinkedSpec::RuntimeDiagnosticOutput; '
+  .'LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch('
+  .'$descr, '
+  ._runtime_logical_string_literal($rule_label).', '
+  ._runtime_logical_string_literal($helper).', '
+  .(0 + $actual).', '
+  ._runtime_logical_string_literal($expected)
+  .') }'
+}
+
+sub _runtime_logical_evaluate_expr {
+ my ($helper, $value_exprs) = @_;
+ my @evaluation = map {
+  'push @{$__ls_logical_values}, scalar('.$_ .');'
+ } @{$value_exprs || []};
+ return 'do { require LinkedSpec::RuntimeLogical; '
+  .'my $__ls_logical_values = []; '
+  .join(' ', @evaluation).' '
+  .'LinkedSpec::RuntimeLogical::evaluate('
+  ._runtime_logical_string_literal($helper).', $__ls_logical_values) }'
+}
+
+sub _runtime_typed_truthiness_expr {
+ my ($value_expr) = @_;
+ return undef unless defined($value_expr) && length($value_expr);
+ return 'do { require LinkedSpec::RuntimeLogical; '
+  .'LinkedSpec::RuntimeLogical::truthy('.$value_expr.') }'
+}
+
 #------------------------------------------------------------------------------
 # Package : LinkedSpec::ActionIR::MethodLowering
 # Purpose : ActionIR owner for method/value/assignment/return lowering and the
@@ -451,6 +494,7 @@ sub _lower_inline_if_value_expr {
 
  my $cond_expr = $lower_flow_composite_expr->($effective_args->[0]);
  return undef unless defined($cond_expr) && length($cond_expr);
+ $cond_expr = _runtime_typed_truthiness_expr($cond_expr);
  my $then_expr = _lower_inline_value_branch_payload_expr($effective_args->[1], $deps);
  return undef unless defined($then_expr) && length($then_expr);
 
@@ -467,6 +511,7 @@ sub _lower_inline_if_value_expr {
    return undef unless $branch_args;
    my $branch_cond = $lower_flow_composite_expr->($branch_args->[0]);
    return undef unless defined($branch_cond) && length($branch_cond);
+   $branch_cond = _runtime_typed_truthiness_expr($branch_cond);
    my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[1], $deps);
    return undef unless defined($branch_value) && length($branch_value);
    push @clauses, 'elsif ('.$branch_cond.') { $__ls_if_value = '.$branch_value.'; }';
@@ -2080,7 +2125,8 @@ sub _is_reserved_actionir_value_symbol {
 #           `array(...)`, `input_slice(...)`, `copy(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
 #           `length(...)`, `substr(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `cat(...)`, `split(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
-#           `split_tagged_records(...)`, `flat(...)`)
+#           `split_tagged_records(...)`, `flat(...)`, and typed eager
+#           `and(...)` / `or(...)` / `not(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -2834,8 +2880,53 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $lower_ast_user_function_call_node;
  my $lower_ast_codeblock_variable_call_node;
  my $lower_ast_with_trailing_block_call_node;
+ my $lower_ast_logical_call_node;
  my $ast_expr_source_node;
  my $lower_ast_supported_call_source_node;
+ $lower_ast_logical_call_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  my $helper = $node->{name} // '';
+  return undef unless $helper eq 'and' || $helper eq 'or' || $helper eq 'not';
+  my $args = $node->{args};
+  return undef unless ref($args) eq 'ARRAY';
+  my $argc = scalar @$args;
+  my $valid = $helper eq 'not' ? ($argc == 1) : ($argc >= 1);
+  unless ($valid) {
+   _trace_method_decision(
+    phase => 'lower_ast_logical_call_node',
+    label => 'logical',
+    decision => 'arity_rejected_before_operands',
+    taken => 1,
+    context => { helper => $helper, actual_arity => $argc },
+   );
+   return _runtime_logical_arity_expr($helper, $argc, $deps)
+  }
+
+  my @lowered_args;
+  foreach my $arg (@$args) {
+   my $arg_expr = ref($lower_ast_value_node) eq 'CODE'
+    ? $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
+    : undef;
+   my $source = _actionir_ast_value_source_expr($arg);
+   $source = $arg->{source}
+    if ref($arg) eq 'HASH' && !(defined($source) && length($source));
+   $arg_expr = _lower_method_value_expr($source, $deps)
+    unless defined($arg_expr) && length($arg_expr);
+   $arg_expr = $source unless defined($arg_expr) && length($arg_expr);
+   return undef unless defined($arg_expr) && length($arg_expr);
+   $arg_expr = '+'.$arg_expr if $arg_expr =~ /^\s*\{/s;
+   push @lowered_args, $arg_expr;
+  }
+  _trace_method_decision(
+   phase => 'lower_ast_logical_call_node',
+   label => 'logical',
+   decision => 'typed_eager_logical',
+   taken => 1,
+   context => { helper => $helper, actual_arity => $argc },
+  );
+  return _runtime_logical_evaluate_expr($helper, \@lowered_args)
+ };
  my $lower_user_function_node_source_expr = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
@@ -3196,6 +3287,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
     }
     return '=('.join(', ', @args).')';
    }
+   my $logical_call = $lower_ast_logical_call_node->($node);
+   return $logical_call if defined($logical_call) && length($logical_call);
    my $user_function_call = $lower_ast_user_function_call_node->($node);
    return $user_function_call if defined($user_function_call) && length($user_function_call);
    my $call_expr = $lower_ast_supported_call_source_node->($node);
@@ -3666,6 +3759,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $lower_ast_fluent_chain_node->($node)
    if $kind eq 'fluent_chain';
   if ($kind eq 'call') {
+   my $logical_call = $lower_ast_logical_call_node->($node);
+   return $logical_call if defined($logical_call) && length($logical_call);
    my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $node->{name});
    return _actionir_ast_unsupported_helper_expr($node->{name}) if defined($normalized->{error});
    $node = $normalized->{node};
@@ -4583,6 +4678,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
  }
  my $method_call = $parse_method_function_expr->($trimmed);
+ if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {
+  my $logical_node = _parse_method_value_ast_expr($trimmed, $deps);
+  my $logical_expr = $lower_ast_logical_call_node->($logical_node);
+  return $logical_expr if defined($logical_expr) && length($logical_expr);
+ }
  if ($method_call) {
   my $method_for_family = $method_call->{method};
   my $numeric_alias_for_family = _numeric_word_alias_helper_name($method_for_family);
@@ -6266,7 +6366,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:copy|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:and|or|not|copy|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

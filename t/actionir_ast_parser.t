@@ -363,19 +363,19 @@ subtest 'if-family control lowering consumes AST nodes' => sub {
             'Top',
             q{if(poison_if) { poison_then() } elseif(poison_alt) { poison_alt_body() } else { poison_else_body() }},
         );
-        like($attached, qr/if \(\$safe_if_flag\) \{ return \$safe_then \} elsif \(\$safe_alt_flag\) \{ return \$safe_alt \} else \{ return \$safe_else \}/, 'attached if/elseif/else lowers from AST condition and body fields');
+        like($attached, qr/if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_if_flag\) \}\) \{ return \$safe_then \} elsif \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_alt_flag\) \}\) \{ return \$safe_alt \} else \{ return \$safe_else \}/, 'attached if/elseif/else lowers typed truth from AST condition and body fields');
 
         my $aliases = LinkedSpec::call_spec_handler_subst(
             'Top',
             q{when(poison_when) { poison_when_body() } otherwise { poison_otherwise_body() }},
         );
-        like($aliases, qr/if \(\$safe_when_flag\) \{ return \$safe_when \} else \{ return \$safe_otherwise \}/, 'when/otherwise aliases lower from AST condition and body fields');
+        like($aliases, qr/if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_when_flag\) \}\) \{ return \$safe_when \} else \{ return \$safe_otherwise \}/, 'when/otherwise aliases lower typed truth from AST condition and body fields');
 
         my $markers = LinkedSpec::call_spec_handler_subst(
             'Top',
             q{if(poison_marker); return(poison_marker_then); elseif(poison_marker_alt); return(poison_marker_alt); else(); return(poison_marker_else); endif()},
         );
-        like($markers, qr/if \(\$safe_marker_flag\) \{; return \$safe_marker_then; \} elsif \(\$safe_marker_alt_flag\) \{; return \$safe_marker_alt; \} else \{; return \$safe_marker_else; \}/, 'marker if/elseif/else/endif lowers from AST condition fields');
+        like($markers, qr/if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_marker_flag\) \}\) \{; return \$safe_marker_then; \} elsif \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_marker_alt_flag\) \}\) \{; return \$safe_marker_alt; \} else \{; return \$safe_marker_else; \}/, 'marker if/elseif/else/endif lowers typed truth from AST condition fields');
 
         my $all = join("\n", $attached, $aliases, $markers);
         unlike($all, qr/poison|__bad_/, 'if-family control lowering does not reuse original text or AST source fields');
@@ -548,7 +548,7 @@ subtest 'while control lowering consumes AST nodes' => sub {
             'Top',
             q{while(poison_condition) { poison_body() }},
         );
-        like($loop, qr/do \{ my \$__ls_while_guard_\d+ = 0; for \(; \$safe_condition; \)/, 'attached while condition lowers from AST condition field');
+        like($loop, qr/do \{ my \$__ls_while_guard_\d+ = 0; for \(; do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$safe_condition\) \}; \)/, 'attached while condition lowers typed truth from AST condition field');
         like($loop, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/, 'attached while keeps the existing iteration-safety guard');
         like($loop, qr/return \$safe_loop_value/, 'attached while body lowers from AST body statements');
         unlike($loop, qr/poison|__bad_/, 'while control lowering does not reuse original text or AST source fields');

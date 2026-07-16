@@ -7041,7 +7041,7 @@ SPEC
     my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
     is(
         $emit_ctx->{lecode},
-        'if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; _trace_runtime_mark_event(operation => \'@mark\', rule_label => \'MoveTop\', mark_name => \'body_start\', string_ref => $STRING, mark_pos => $$info{marks}{\'MoveTop\'}{\'body_start\'}, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); }',
+        'if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy($$minfo{index} == 1) }) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; _trace_runtime_mark_event(operation => \'@mark\', rule_label => \'MoveTop\', mark_name => \'body_start\', string_ref => $STRING, mark_pos => $$info{marks}{\'MoveTop\'}{\'body_start\'}, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); }',
         'emit context preserves rule-local, slot-local named-mark split-boundary cursor shift'
     );
 
@@ -12443,13 +12443,14 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     ok($ok_run, 'EmitContext lowering succeeds without the removed LinkedSpec lowering facade helpers')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'EmitContext lowering does not call the trapped removed LinkedSpec facade helpers');
-    is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{assign}, q{$flag = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar($on); push @{$__ls_logical_values}, scalar($off); LinkedSpec::RuntimeLogical::evaluate('or', $__ls_logical_values) }},
+        'assign lowering stays inside EmitContext-owned lowering path');
     like($rewritten{push}, qr/my \$__ls_push_entry = \$\$descr\{spec\}\{items\}.*BindingRuntime::push_value/s,
         'push lowering stays inside EmitContext-owned lowering path');
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
     is($rewritten{pipeline}, 'do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::split_value($parts, "parts", $args, qr/\s*,\s*/); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "trim_each"); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "filter_nonempty"); $parts }',
         'array pipeline lowering stays inside EmitContext-owned lowering path');
-    like($rewritten{flow}, qr/^if \(\$on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*return undef/s,
+    like($rewritten{flow}, qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$on\) \}\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*return undef/s,
         'if/else flow lowering routes print through the parse-scoped diagnostic seam');
     like($rewritten{flow_empty}, qr/__ls_empty_value = \$items.*return undef/s, 'is_empty flow lowering stays inside EmitContext-owned lowering path');
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind;.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
@@ -12690,7 +12691,7 @@ subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
     like($empty_expr, qr/^do \{ my \$__ls_empty_value = \$items;.*ref\(\$__ls_empty_value\) eq 'ARRAY'.*ref\(\$__ls_empty_value\) eq 'HASH'/s,
         'EmitContext preserves runtime-typed empty-check lowering after moving default deps into FlowExpr');
     ok(defined($compound_expr), 'EmitContext still returns lowered composite flow output through the FlowExpr-owned default deps');
-    like($compound_expr, qr/__ls_str_cmp_lhs = \$foo.*__ls_empty_value = \$items/s,
+    like($compound_expr, qr/__ls_str_cmp_lhs = \$foo.*__ls_is_empty_value = \$items.*RuntimeLogical::evaluate\('not'.*RuntimeLogical::evaluate\('or'/s,
         'EmitContext preserves composite runtime-typed flow lowering after moving default deps into FlowExpr');
 };
 subtest 'emit_context_avoids_deps_array_pipeline_dep_builder' => sub {
@@ -12734,7 +12735,7 @@ subtest 'emit_context_avoids_deps_control_flow_dep_builder' => sub {
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__/, 'EmitContext does not call the trapped Deps control-flow dep builder');
     ok(defined($if_stmt), 'EmitContext still returns lowered if output through the ControlFlow-owned default deps');
-    like($if_stmt, qr/^if \(do \{ my \$__ls_empty_value = \$items;/,
+    like($if_stmt, qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(do \{ my \$__ls_empty_value = \$items;/,
         'EmitContext preserves runtime-typed if-flow lowering after moving default deps into ControlFlow');
     is(scalar(@{$ctx->{if_stack} || []}), 1, 'EmitContext preserves if-stack mutation after moving default deps into ControlFlow');
     ok(defined($print_stmt), 'EmitContext still returns lowered print output through the ControlFlow-owned default deps');
@@ -13028,7 +13029,7 @@ my $print_stmt = LinkedSpec::RuleIR::EmitContext::_lower_print_statement("print(
 print defined($if_stmt) && defined($print_stmt) ? "__CONTROL_FLOW_RESULT_OK__\n" : "__CONTROL_FLOW_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_AFTER_HELPER__\n" : "__CONTROL_FLOW_STILL_UNLOADED__\n";
-if (defined($if_stmt) && $if_stmt =~ /^if \(do \{ my \$__ls_empty_value = \$items;/ && defined($print_stmt) && $print_stmt =~ /RuntimeDiagnosticOutput::emit\(\$descr, '', 'print'/ && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
+if (defined($if_stmt) && $if_stmt =~ /^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(do \{ my \$__ls_empty_value = \$items;/ && defined($print_stmt) && $print_stmt =~ /RuntimeDiagnosticOutput::emit\(\$descr, '', 'print'/ && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
     print "__CONTROL_FLOW_PAYLOAD_OK__\n";
 } else {
     print "__CONTROL_FLOW_PAYLOAD_BAD__\n";
@@ -15847,7 +15848,7 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(Top, flag, or(on, off))'),
-        '$flag = (($on) || ($off))',
+        q{$flag = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar($on); push @{$__ls_logical_values}, scalar($off); LinkedSpec::RuntimeLogical::evaluate('or', $__ls_logical_values) }},
         'assign helper accepts flow/value expression sources used by if/elseif/switch'
     );
     is(
@@ -16015,9 +16016,9 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         q{return do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }},
         'return(payload) accepts ends_with(normalized-scalar, suffix) lowering'
     );
-    is(
+    like(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{and(starts_with(lowercase(trim(raw_name)), "pre"), ends_with(lowercase(trim(raw_name)), "fix"))}),
-        q{((do { my $__ls_starts_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_starts_with_prefix = "pre"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }) && (do { my $__ls_ends_with_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_ends_with_suffix = "fix"; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }))},
+        qr/^do \{ require LinkedSpec::RuntimeLogical; my \$__ls_logical_values = \[\]; push \@\{\$__ls_logical_values\}, scalar\(do \{ my \$__ls_starts_with_value = .*push \@\{\$__ls_logical_values\}, scalar\(do \{ my \$__ls_ends_with_value = .*RuntimeLogical::evaluate\('and', \$__ls_logical_values\) \}$/s,
         'starts_with(...) and ends_with(...) compose together inside flow conditions'
     );
     is(
@@ -36014,7 +36015,7 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     );
     like(
         $defined_if,
-        qr/if \(defined\(\$retv->\{"content"\}\)\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(defined\(\$retv->\{"content"\}\)\) \}\) \{/s,
         'if(is_defined(...)) lowers through the canonical flow-expression path inside branch conditions'
     );
 
@@ -36024,7 +36025,7 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     );
     like(
         $undefined_if,
-        qr/if \(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{"type"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : do \{ \$IMATCH \} \}\)\)\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{"type"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : do \{ \$IMATCH \} \}\)\)\) \}\) \{/s,
         'if(is_undefined(...)) lowers nested coalesce(...) targets inside the same canonical flow-expression path'
     );
 };
@@ -36143,7 +36144,7 @@ subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub
     );
     like(
         $array_if,
-        qr/if \(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{"parts"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{"parts"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \}\) \{/s,
         'if(is_empty(...)) lowers aggregate fallback arrays through the canonical empty-array flow path'
     );
 
@@ -36153,7 +36154,7 @@ subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub
     );
     like(
         $hash_if,
-        qr/if \(\(!\(do \{ my \$__ls_empty_hash = do \{ my \$__ls_pick_source = \\%meta; if \(defined\(\$__ls_pick_source\)\) \{ my %__ls_pick; foreach my \$__ls_pick_key \("kind"\) \{ \$__ls_pick\{\$__ls_pick_key\} = \$__ls_pick_source->\{\$__ls_pick_key\} if exists \$__ls_pick_source->\{\$__ls_pick_key\}; \} \\%__ls_pick \} else \{ \{\} \} \}; \(!defined\(\$__ls_empty_hash\) \|\| !scalar\(keys %\{\$__ls_empty_hash\}\)\) \}\)\)\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\(!\(do \{ my \$__ls_empty_hash = do \{ my \$__ls_pick_source = \\%meta;.*\(!defined\(\$__ls_empty_hash\) \|\| !scalar\(keys %\{\$__ls_empty_hash\}\)\) \}\)\)\) \}\) \{/s,
         'if(is_nonempty(...)) lowers projected hash expressions through the same aggregate-emptiness flow path'
     );
 };
@@ -39031,12 +39032,12 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
 
     like(
         LinkedSpec::call_spec_handler_subst('Top', 'if(on); push(pipe_operator, rule); elseif(alt_on); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$on\) \}\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$alt_on\) \}\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
         'if/elseif/else/endif fluent chain lowers to structured Perl control-flow with branch statements'
     );
     like(
         LinkedSpec::call_spec_handler_subst('Top', 'i(on); push(pipe_operator, rule); elif(alt_on); say("warn"); endif()'),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$on\) \}\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$alt_on\) \}\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
         'i/elif aliases lower to canonical if/elsif flow'
     );
     my $lisp_if = LinkedSpec::call_spec_handler_subst(
@@ -39045,12 +39046,12 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     );
     like(
         $lisp_if,
-        qr/\$on.*\|\|.*\$off.*&&.*\$__ls_empty_value = \$name.*!defined\(\$__ls_empty_value\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
+        qr/RuntimeLogical::truthy.*\$on.*\$off.*RuntimeLogical::evaluate\('not'.*\$__ls_is_empty_value = \$name.*!defined\(\$__ls_is_empty_value\).*RuntimeLogical::evaluate\('and'.*RuntimeLogical::evaluate\('or'.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
         'if(...) condition supports nested Lisp-style boolean expressions (or/and/not/is_empty)'
     );
     like(
         $lisp_if,
-        qr/ref\(\$__ls_empty_value\) eq 'ARRAY'.*ref\(\$__ls_empty_value\) eq 'HASH'.*!ref\(\$__ls_empty_value\).*eq ''/s,
+        qr/ref\(\$__ls_is_empty_value\) eq 'ARRAY'.*ref\(\$__ls_is_empty_value\) eq 'HASH'.*!ref\(\$__ls_is_empty_value\).*eq ''/s,
         'is_empty(...) lowers to typed scalar/array/hash emptiness in fluent conditions'
     );
     my $indexed_scalar_if = LinkedSpec::call_spec_handler_subst(
@@ -39101,7 +39102,7 @@ SPEC
     my $attached_if_stmt = 'if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") }';
     is(
         LinkedSpec::call_spec_handler_subst('Top', $attached_if_stmt),
-        'if (0) { return "bad" } elsif (1) { return "yes" } else { return "no" }',
+        q{if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { return "bad" } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { return "yes" } else { return "no" }},
         'compact attached-block if/elseif/else lowers to structured Perl without explicit endif',
     );
 
@@ -39126,7 +39127,7 @@ SPEC
     my $when_otherwise_stmt = 'when(true) { return("yes") } otherwise { return("no") }';
     is(
         LinkedSpec::call_spec_handler_subst('Top', $when_otherwise_stmt),
-        'if (1) { return "yes" } else { return "no" }',
+        q{if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { return "yes" } else { return "no" }},
         'compact attached-block when/otherwise lowers as canonical if/else flow',
     );
 
@@ -39363,7 +39364,7 @@ subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' =
     );
     like(
         $lisp_switch,
-        qr/my \$__ls_switch_value_1 = .*\$op_ready.*\|\|.*\$op_blocked.*&&.*\$__ls_empty_value = \$op_alt.*!defined\(\$__ls_empty_value\)/s,
+        qr/my \$__ls_switch_value_1 = .*\$op_ready.*\$op_blocked.*RuntimeLogical::evaluate\('not'.*\$__ls_is_empty_value = \$op_alt.*!defined\(\$__ls_is_empty_value\).*RuntimeLogical::evaluate\('and'.*RuntimeLogical::evaluate\('or'/s,
         'switch(...) condition supports nested Lisp-style boolean expressions through unified lowering'
     );
     my $composite_switch = LinkedSpec::call_spec_handler_subst(
@@ -39503,7 +39504,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
     my $lowered = LinkedSpec::call_spec_handler_subst('Top', $attached_while);
     like(
         $lowered,
-        qr/do \{ my \$__ls_while_guard_1 = 0; for \(; 0; \)/s,
+        qr/do \{ my \$__ls_while_guard_1 = 0; for \(; do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(0\) \}; \)/s,
         'compact attached while lowers to a scoped guarded host loop with pre-iteration condition evaluation',
     );
     unlike($lowered, qr/\bwhile\s*\(/, 'compact attached while lowering leaves no host-shaped while residue');
@@ -39584,7 +39585,7 @@ subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
             'Top',
             q{if(on); push(pipe_operator, rule); else(); say("Error: '|' operator occurrence with no container rule context"); return_undef(); endif()}
         ),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\$on\) \}\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
         'pipe_operator fluent if/else chain lowers to expected branch semantics without raw block code'
     );
 
@@ -45966,7 +45967,7 @@ subtest 'future_parity_backlog_1_6_1_1_universal_newline_statement_separation' =
     my $marker_lowered = LinkedSpec::call_spec_handler_subst(
         'Top', "if(false)\nbranch = \"bad\"\nelseif(true)\nbranch = \"ok\"\nendif()",
     );
-    is($marker_lowered, "if (0) {\n\$branch = \"bad\";\n} elsif (1) {\n\$branch = \"ok\";\n}",
+    is($marker_lowered, "if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) {\n\$branch = \"bad\";\n} elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) {\n\$branch = \"ok\";\n}",
         'newline marker chain lowers completely without raw branch assignments');
 
     my $switch_lowered = LinkedSpec::call_spec_handler_subst('Top', $switch_source);
@@ -46019,7 +46020,7 @@ subtest 'future_parity_backlog_1_6_1_2_1_newline_switch_close_terminator' => sub
         LinkedSpec::call_spec_handler_subst(
             'Top', "if(true)\nbranch = \"ok\"\nendif()\nreturn(branch)",
         ),
-        "if (1) {\n\$branch = \"ok\";\n}\nreturn \$branch",
+        "if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) {\n\$branch = \"ok\";\n}\nreturn \$branch",
         'ordinary if block closure remains unterminated before a newline-separated statement',
     );
 
@@ -48183,7 +48184,7 @@ subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
         return $src;
     };
 
-    like($L->('return(if(1, "yes", else("no")))'), qr/^return do \{ my \$__ls_if_value; if \(1\)/,
+    like($L->('return(if(1, "yes", else("no")))'), qr/^return do \{ my \$__ls_if_value; if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(1\) \}\)/,
         'return(if(...)) lowers through a value-producing if do-block');
     like($L->('set(out, if(false, "bad", else(cat("o","k"))))'), qr/^\$out = do \{ my \$__ls_if_value;/,
         'assignment source if(...) lowers as a scalar value expression');

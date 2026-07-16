@@ -98,14 +98,14 @@ RECEIVER_IDS = ["receiver_true", "receiver_false"]
 LAZY_IDS = ["if_false_selects_else", "if_true_selects_then"]
 INVALID_IDS = ["and_zero", "or_zero", "not_zero", "not_many"]
 ROLLOUT = [
-    ("perl_native", "FUTURE-PARITY-BACKLOG.5.2.2"),
-    ("rust_native", "FUTURE-PARITY-BACKLOG.5.2.3"),
-    ("dart_native", "FUTURE-PARITY-BACKLOG.5.2.4"),
-    ("julia_native", "FUTURE-PARITY-BACKLOG.5.2.5"),
-    ("lua_native", "FUTURE-PARITY-BACKLOG.5.2.6"),
-    ("generated_and_primary_cli", "FUTURE-PARITY-BACKLOG.5.2.7"),
-    ("recurring_five_backend_gate", "FUTURE-PARITY-BACKLOG.5.2.8"),
-    ("public_no_drift", "FUTURE-PARITY-BACKLOG.5.2.9"),
+    ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.2"),
+    ("rust_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.3"),
+    ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.4"),
+    ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.5"),
+    ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.6"),
+    ("generated_and_primary_cli", "pending", "FUTURE-PARITY-BACKLOG.5.2.7"),
+    ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.5.2.8"),
+    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.2.9"),
 ]
 ID = re.compile(r"[a-z][a-z0-9_]*\Z")
 
@@ -408,9 +408,9 @@ def validate_contract(contract: dict[str, Any]) -> None:
     )
     rollout = contract["rollout"]
     require(isinstance(rollout, list) and len(rollout) == len(ROLLOUT), "rollout topology drifted")
-    for index, (row, (row_id, owner)) in enumerate(zip(rollout, ROLLOUT, strict=True)):
+    for index, (row, (row_id, status, owner)) in enumerate(zip(rollout, ROLLOUT, strict=True)):
         require_fields(row, {"id", "status", "owner"}, f"rollout row {index}")
-        require(row == {"id": row_id, "status": "pending", "owner": owner}, f"rollout row {row_id} drifted or admitted prematurely")
+        require(row == {"id": row_id, "status": status, "owner": owner}, f"rollout row {row_id} drifted or admitted prematurely")
 
 
 def mutation_smoke(contract: dict[str, Any]) -> int:
@@ -423,7 +423,7 @@ def mutation_smoke(contract: dict[str, Any]) -> int:
         ("effect omission", lambda data: data["effect_scenarios"][0].__setitem__("expected_effects", ["and-first"])),
         ("arity effect", lambda data: data["invalid_arity_cases"][3].__setitem__("arguments_evaluated", 1)),
         ("diagnostic code", lambda data: data["error_schema"].__setitem__("code", "invalid_arity")),
-        ("premature rollout", lambda data: data["rollout"][0].__setitem__("status", "complete")),
+        ("premature rollout", lambda data: data["rollout"][1].__setitem__("status", "complete")),
         ("generated omission", lambda data: data["projections"].pop("generated")),
         ("duplicate truth case", lambda data: data["truthiness_cases"].append(copy.deepcopy(data["truthiness_cases"][0]))),
         ("fixture source", lambda data: data["fixtures"]["values"].__setitem__("spec_source", data["fixtures"]["values"]["spec_source"] + "\n")),
@@ -452,7 +452,7 @@ def main() -> None:
     print(
         "logical-helper-contract: OK "
         f"({len(contract['truthiness_cases'])} truthiness; {len(contract['helper_cases'])} helper; "
-        f"{len(contract['effect_scenarios'])} effect; 0 complete / {len(contract['rollout'])} pending; "
+        f"{len(contract['effect_scenarios'])} effect; 1 complete / {len(contract['rollout']) - 1} pending; "
         f"{mutations} drift mutations)"
     )
 

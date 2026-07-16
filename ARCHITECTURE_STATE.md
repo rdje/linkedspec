@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Perl logical rollout `FUTURE-PARITY-BACKLOG.5.2.2` gives direct, nested, assignment,
+  return, condition, function, block-value, and receiver `and`/`or`/`not` calls one typed ActionIR owner and
+  `LinkedSpec::RuntimeLogical` seam. Arity rejects before operand lowering; valid operands run once left-to-right;
+  results are real booleans; `if`/`switch`/`while` stay branch/body-lazy over the same typed truthiness. Raw Perl
+  keyword calls and host `&&`/`||` are gone from admitted logical sites. Perl's shared false/zero scalar requires
+  an explicit numeric-host edge before string precedence so numeric zero remains false while string `"0"` remains
+  true. Native/live/standalone-emitted reference proof advances the neutral ledger to 1/7; Rust `.5.2.3` is next.
 - `2026-07-16` refresh: neutral logical contract `FUTURE-PARITY-BACKLOG.5.2.1` adopts ADR `0043` and
   `linkedspec-logical-helper-v1`. `and`/`or` require one-plus operands and `not` exactly one; arity rejects before
   effects, valid operands run once left-to-right, and results are booleans. One typed seam makes null/false/zero/

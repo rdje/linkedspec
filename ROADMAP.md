@@ -951,7 +951,9 @@ contract `.1`, Perl/Rust/Dart/Julia/Lua `.2-.6`, generated/primary `.7`, recurri
 `.9` before behavior changes. Neutral `.5.2.1` now adopts ADR `0043` and an independently checked executable
 contract: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity diagnostics, real booleans, typed truthiness,
 receiver composition, and lazy-control separation. Fifteen drift mutations pass; rollout begins at 0 complete / 8
-pending, with Perl `.5.2.2` active before behavior changes.
+pending. Perl `.5.2.2` then replaces raw keyword calls and lazy host operators with typed eager logical values,
+pre-effect arity diagnostics, real booleans, and one truthiness seam shared by lazy conditions. Its native/live/
+emitted reference roles are complete, advancing rollout to 1 complete / 7 pending with Rust `.5.2.3` next.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

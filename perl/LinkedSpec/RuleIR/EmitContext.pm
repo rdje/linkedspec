@@ -24,6 +24,7 @@ use constant {
 
 our $__ls_current_function_registry;
 our $__ls_current_bare_type_memory;
+our $__ls_current_rule_label;
 
 sub _trace_should_dump {
  my @args = @_;
@@ -271,6 +272,14 @@ sub _actionir_owner_default_deps {
     %$owner_deps,
     bare_symbol_kind => \&_bare_symbol_kind,
     bare_symbol_names => [sort keys %$__ls_current_bare_type_memory],
+   };
+  }
+  if (ref($owner_deps) eq 'HASH'
+   && defined($__ls_current_rule_label)
+   && !ref($__ls_current_rule_label)) {
+   $owner_deps = {
+    %$owner_deps,
+    rule_label => $__ls_current_rule_label,
    };
   }
   _trace_emit_context_exit(
@@ -1158,6 +1167,7 @@ sub _canonicalize_helper_action_ir_event {
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
+ local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
  my $scope = _trace_emit_context_enter(
   'rewrite_action_code_with_diagnostics',
   $label,
@@ -1253,6 +1263,7 @@ sub _build_action_rewrite_rules {
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
   my $scope = _trace_emit_context_enter(
    'rewrite_action_code_for_compat',
    $label,
@@ -2314,6 +2325,7 @@ sub build_rule_ir_emit_context {
   ? $rule_ir->{function_registry}
   : undef;
  local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
+ local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
  _trace_emit_context_decision(
   phase => 'build_rule_ir_emit_context',
   label => $label,

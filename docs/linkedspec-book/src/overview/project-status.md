@@ -153,8 +153,8 @@ Three backbone items tracked major structural modernization — all done:
   checks `linkedspec-logical-helper-v1`: at-least-one eager `and`/`or`, exact-one eager `not`, pre-effect arity
   diagnostics, typed null/boolean/finite-number/string/aggregate/codeblock truth, boolean receiver results, and
   lazy-control separation. Its 17 truth rows, ten helper cases, three effect scenarios, deterministic fixtures,
-  and 15 mutations pass offline; backend/projection/admission rollout intentionally remains 0 complete / 8
-  pending under `.5.2.2-.9`.
+  and 15 mutations pass offline. Perl `.5.2.2` now supplies typed logical ActionIR/runtime behavior across native,
+  live, and standalone-emitted execution, advancing rollout to 1 complete / 7 pending under `.5.2.3-.9`.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
