@@ -15,6 +15,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::HandlerVariantEmitter ();
+use LinkedSpec::RuntimeDiagnosticOutput ();
 
 our $BACKEND;
 
@@ -322,10 +323,28 @@ sub _build_runtime_handler {
   }
   $__ls_recursion_active{$progress_key} = 1 if defined($progress_key);
 
-  my $retv = eval { $compiled_handler->($descr, $STRING, $info) };
+  my $retv;
+  my $eval_ok = eval {
+   $retv = $compiled_handler->($descr, $STRING, $info);
+   1
+  };
   my $eval_error = $@;
   delete $__ls_recursion_active{$progress_key} if defined($progress_key);
-  if ($eval_error) {
+  unless ($eval_ok) {
+   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)) {
+    _trace_decision("rule_handler_control:$label", 1, $eval_error, DUMP_DEBUG);
+    _trace_exit(
+     $runtime_scope,
+     {
+      status => 'control',
+      returned_defined => 0,
+      return_ref => ref($eval_error) || '',
+      return_size => undef,
+     },
+     DUMP_HIGH
+    );
+    die $eval_error
+   }
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,

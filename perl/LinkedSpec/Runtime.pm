@@ -120,7 +120,7 @@ sub run_get {
   if (ref($ret) eq 'CODE') {
    my $original_parser = $ret;
    $ret = sub {
-    my ($input_ref) = @_;
+    my ($input_ref, @invocation_options) = @_;
     # Only the SCALAR-ref fast path resets pos() and skips leading comment/blank
     # lines. For any other input shape, delegate straight to the inner parser, which
     # owns the documented input-boundary guard (Compiler.pm validate_input_ref:
@@ -144,7 +144,7 @@ sub run_get {
       }
      }
     }
-    return $original_parser->($input_ref);
+    return $original_parser->($input_ref, @invocation_options);
    };
   }
   return $ret

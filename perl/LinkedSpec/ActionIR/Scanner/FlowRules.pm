@@ -259,9 +259,9 @@ sub _scan_contract_say_stmt {
  my @events;
 while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
- next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- next unless $effective_args && @$effective_args;
+ next unless $call && ($call->{method} // '') eq 'say';
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY';
  push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
 }
  return \@events
@@ -272,9 +272,9 @@ sub _scan_contract_print_stmt {
  my @events;
 while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
- next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- next unless $effective_args && @$effective_args;
+ next unless $call && ($call->{method} // '') eq 'print';
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY';
  push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
 }
  return \@events
@@ -286,11 +286,11 @@ sub _scan_contract_print_each {
 while ($code =~ /\b(?<expr>print_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && $call->{method} eq 'print_each';
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 3);
- next unless $effective_args && @$effective_args >= 2;
+ my $effective_args = $call->{args} || [];
+ next unless ref($effective_args) eq 'ARRAY';
  push @events, {
   raw  => $+{expr},
-  args => {target => _trim_action_ir_value($effective_args->[0])},
+  args => {target => @$effective_args ? _trim_action_ir_value($effective_args->[0]) : ''},
  };
 }
  return \@events
@@ -301,9 +301,8 @@ sub _scan_contract_exit_now {
  my @events;
 while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
- next unless $call;
+ next unless $call && ($call->{method} // '') eq 'exit_now';
  my @args = @{$call->{args} || []};
- next unless @args <= 1;
  push @events, {raw => $+{expr}, args => {payload => @args ? _trim_action_ir_value($args[0]) : ''}};
 }
  return \@events

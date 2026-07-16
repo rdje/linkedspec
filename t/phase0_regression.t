@@ -2552,6 +2552,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_say_statement = sub { return 'say_ok' };
     local *Synthetic::ActionIROwner::_lower_print_statement = sub { return 'print_ok' };
     local *Synthetic::ActionIROwner::_lower_print_each_statement = sub { return 'print_each_ok' };
+    local *Synthetic::ActionIROwner::_lower_exit_now_statement = sub { return 'exit_now_ok' };
     local *Synthetic::ActionIROwner::_lower_return_undef_statement = sub { return 'return_undef_ok' };
     local *Synthetic::ActionIROwner::_trim_action_ir_value = sub { return 'trim_ok' };
     local *Synthetic::ActionIROwner::_lower_flow_composite_expr = sub { return 'flow_expr_ok' };
@@ -12448,11 +12449,11 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
     is($rewritten{pipeline}, 'do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::split_value($parts, "parts", $args, qr/\s*,\s*/); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "trim_each"); $parts }; do { require LinkedSpec::BindingRuntime; $parts = LinkedSpec::BindingRuntime::array_transform($parts, "parts", "filter_nonempty"); $parts }',
         'array pipeline lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{flow}, 'if ($on) {; print "warn"; } else {; return undef; }',
-        'if/else flow lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{flow}, qr/^if \(\$on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*return undef/s,
+        'if/else flow lowering routes print through the parse-scoped diagnostic seam');
     like($rewritten{flow_empty}, qr/__ls_empty_value = \$items.*return undef/s, 'is_empty flow lowering stays inside EmitContext-owned lowering path');
-    like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
-        'switch/case/default lowering stays inside EmitContext-owned lowering path');
+    like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind;.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
+        'switch/case/default lowering routes both diagnostic helpers through the event seam');
     like($rewritten{return_general}, qr/^return do \{ my \$__ls_copy_value = \$items;.*ref\(\$__ls_copy_value\) eq 'ARRAY'.*ref\(\$__ls_copy_value\) eq 'HASH'/s,
         'general return(payload) snapshots the runtime-typed binding inside EmitContext-owned lowering');
     like($rewritten{pipeline_match}, qr/BindingRuntime::array_transform\(\$parts, "parts", "lowercase_each"\)/,
@@ -12737,7 +12738,8 @@ subtest 'emit_context_avoids_deps_control_flow_dep_builder' => sub {
         'EmitContext preserves runtime-typed if-flow lowering after moving default deps into ControlFlow');
     is(scalar(@{$ctx->{if_stack} || []}), 1, 'EmitContext preserves if-stack mutation after moving default deps into ControlFlow');
     ok(defined($print_stmt), 'EmitContext still returns lowered print output through the ControlFlow-owned default deps');
-    is($print_stmt, 'print $foo', 'EmitContext preserves print lowering after moving default deps into ControlFlow');
+    like($print_stmt, qr/scalar\(\$foo\).*RuntimeDiagnosticOutput::emit\(\$descr, '', 'print'/s,
+        'EmitContext preserves print event lowering after moving default deps into ControlFlow');
 };
 subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
     plan tests => 6;
@@ -13026,7 +13028,7 @@ my $print_stmt = LinkedSpec::RuleIR::EmitContext::_lower_print_statement("print(
 print defined($if_stmt) && defined($print_stmt) ? "__CONTROL_FLOW_RESULT_OK__\n" : "__CONTROL_FLOW_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_AFTER_HELPER__\n" : "__CONTROL_FLOW_STILL_UNLOADED__\n";
-if (defined($if_stmt) && $if_stmt =~ /^if \(do \{ my \$__ls_empty_value = \$items;/ && defined($print_stmt) && $print_stmt eq "print \$foo" && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
+if (defined($if_stmt) && $if_stmt =~ /^if \(do \{ my \$__ls_empty_value = \$items;/ && defined($print_stmt) && $print_stmt =~ /RuntimeDiagnosticOutput::emit\(\$descr, '', 'print'/ && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
     print "__CONTROL_FLOW_PAYLOAD_OK__\n";
 } else {
     print "__CONTROL_FLOW_PAYLOAD_BAD__\n";
@@ -13151,14 +13153,14 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'ControlFlow',
             module      => 'LinkedSpec::ActionIR::ControlFlow',
-            callbacks   => [qw(_trim_action_ir_value _split_action_ir_statements _normalize_method_tag_expr _lower_flow_composite_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            callbacks   => [qw(_trim_action_ir_value _split_action_ir_statements _normalize_method_tag_expr _lower_flow_composite_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_method_value_expr)],
             sample_key  => 'normalize_method_tag_expr',
             sample_name => '_normalize_method_tag_expr',
         },
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_exit_now_statement _lower_return_undef_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -39029,12 +39031,12 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
 
     like(
         LinkedSpec::call_spec_handler_subst('Top', 'if(on); push(pipe_operator, rule); elseif(alt_on); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*print "warn".*else.*say "Error: no context"; return undef/s,
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print'.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
         'if/elseif/else/endif fluent chain lowers to structured Perl control-flow with branch statements'
     );
     like(
         LinkedSpec::call_spec_handler_subst('Top', 'i(on); push(pipe_operator, rule); elif(alt_on); say("warn"); endif()'),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*say "warn"/s,
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*\} elsif \(\$alt_on\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
         'i/elif aliases lower to canonical if/elsif flow'
     );
     my $lisp_if = LinkedSpec::call_spec_handler_subst(
@@ -39043,7 +39045,7 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     );
     like(
         $lisp_if,
-        qr/\$on.*\|\|.*\$off.*&&.*\$__ls_empty_value = \$name.*!defined\(\$__ls_empty_value\).*say \"ok\"/s,
+        qr/\$on.*\|\|.*\$off.*&&.*\$__ls_empty_value = \$name.*!defined\(\$__ls_empty_value\).*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
         'if(...) condition supports nested Lisp-style boolean expressions (or/and/not/is_empty)'
     );
     like(
@@ -39062,7 +39064,7 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
     );
     like(
         $indexed_scalar_if,
-        qr/say \"shape\"/s,
+        qr/RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'/s,
         'array/hash entry accessor expressions compose inside fluent if() branch conditions'
     );
 
@@ -39375,7 +39377,7 @@ subtest 'emit_context_lowers_fluent_switch_case_default_with_optional_endcase' =
     );
     like(
         $composite_switch,
-        qr/if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1; say \"Error\"; return undef \}/s,
+        qr/if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1;.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef \}/s,
         'inline switch(..., default(...)) composite form lowers default branch actions directly inside switch arguments'
     );
 
@@ -39400,7 +39402,7 @@ SPEC
     );
     like(
         $explicit,
-        qr/say \"x\";\s*\}\s*;\s*if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1/s,
+        qr/RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*\}\s*;\s*if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1/s,
         'explicit endcase() is accepted while remaining optional'
     );
 
@@ -39582,7 +39584,7 @@ subtest 'emit_context_showcase_pipe_operator_if_else_method_chain' => sub {
             'Top',
             q{if(on); push(pipe_operator, rule); else(); say("Error: '|' operator occurrence with no container rule context"); return_undef(); endif()}
         ),
-        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*else.*say "Error: '\|' operator occurrence with no container rule context"; return undef/s,
+        qr/^if \(\$on\).*\$__ls_push_entry = \$\$descr\{spec\}\{pipe_operator\}.*\$rule = LinkedSpec::BindingRuntime::push_value.*else.*RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'say'.*return undef/s,
         'pipe_operator fluent if/else chain lowers to expected branch semantics without raw block code'
     );
 
@@ -40368,7 +40370,8 @@ SPEC
     ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include EXIT for exit_now helper coverage');
 
     my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'exit_now(); exit_now(2); exit_now(status)');
-    is($rewritten, 'exit; exit(2); exit($status)', 'exit_now helper lowers to the runtime exit statement and value-lowers its optional status');
+    like($rewritten, qr/RuntimeDiagnosticOutput::terminate\(\$descr, 'Top', \$__ls_exit_status\).*scalar\(2\).*scalar\(\$status\)/s,
+        'exit_now helper lowers each optional status through typed parser control without host exit');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'exit_now-only rule remains language-agnostic action-IR ready');
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'exit_now helper does not create compatibility-surface summary entries');
     is_deeply($meta->{compatibility_surface_contract_ids}, [], 'exit_now helper exposes no compatibility-surface contract ids');
@@ -41156,7 +41159,8 @@ SPEC
     ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PRINT for print_each helper');
 
     my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'print_each(matches, "item<<", ">>\n")');
-    is($rewritten, 'print "item<<", $_, ">>\n" foreach (@matches)', 'print_each lowers to the existing iterable debug-output shape');
+    like($rewritten, qr/RuntimeDiagnosticOutput::emit\(\$descr, 'Top', 'print_each', \$__ls_diag_values\)/,
+        'print_each lowers to the parse-scoped diagnostic event seam');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'print_each-only rule remains language-agnostic action-IR ready');
 };
 subtest 'emit_context_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback' => sub {
@@ -42233,32 +42237,7 @@ subtest 'ifelse_return_undef_source_and_runtime_smoke' => sub {
 
     ok(!$err, 'ifelse parser executed without die') or diag(normalize_error($err));
     ok(!defined($ast), 'ifelse parser still returns undef for debug-flow smoke input');
-    is($stdout, <<'IFELSE_STDOUT', 'ifelse parser preserves expected debug trace output after return_undef migration');
-==== program =====
-program: --> IF
-==== if =====
-if: --> THEN
-==== then =====
-then: --> WHILE
-==== while =====
-while: --> WHILE_THEN
-==== while_then =====
-while_then: CLOSING BRACE SEEN
-then: --> ELSIF
-
-==== elsif =====
-
-elseif: --> IF_TOP_THEN
-==== then =====
-then: --> ELSE
-==== else =====
-else: --> IF
-==== if =====
-if: --> THEN
-==== then =====
-then: CLOSING Brace
-else: CLOSING BRACE SEEN
-IFELSE_STDOUT
+    is($stdout, '', 'ifelse diagnostic helpers remain quiet without a caller sink');
 };
 subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 64;
@@ -42930,7 +42909,7 @@ subtest 'tkgui_parser_smoke' => sub {
     ok($ok, 'tkgui parser executed without die') or diag(normalize_error($err));
     ok(defined($ast) && ref($ast) eq 'HASH', 'tkgui parser returned a hash AST');
     is($inner_eval_err, '', 'tkgui parser execution leaves no inner eval error');
-    is($stdout, "Found a SUB GUI entry point <start>\n", 'tkgui parser preserves the sub_gui entry-point debug print');
+    is($stdout, '', 'tkgui diagnostic helper remains quiet without a caller sink');
     is($stderr, '', 'tkgui parser emits no stderr for the smoke input');
     is_deeply($ast, {start => '((frame foo))'}, 'tkgui parser returns the current entry-name to captured-body hash shape');
 };
@@ -43153,8 +43132,8 @@ subtest 'simenv_parser_smoke_preserves_begin_end_ast_after_helper_cleanup' => su
         ],
         'simenv parser preserves the nested begin/end assignment AST'
     );
-    like($stdout, qr/begin_end_blocks: END\s+\(END top/, 'simenv parser reaches the matching END block after regex-literal name cleanup');
-    like($stdout, qr/singleline_value:<<HASH\(/, 'simenv parser preserves iterable debug printing through print_each()');
+    is(pos($input), length($input) - 1, 'simenv parser reaches the matching END block and leaves only the trailing newline');
+    is($stdout, '', 'simenv diagnostic helpers remain quiet without a caller sink');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 50;

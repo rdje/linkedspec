@@ -66,6 +66,7 @@ sub default_deps_for_package {
    'lower_flow_composite_expr',
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
+   'lower_method_value_expr',
    { dep => 'extract_array_symbol_name', pkg => 'LinkedSpec::ActionIR::ValueExpr' },
   ],
  )
@@ -88,10 +89,64 @@ sub _lower_control_flow_value_expr {
   return $cb;
  };
  my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ if (defined($trimmed) && $trimmed =~ /^\s*\{/s) {
+  my $lowered_block_or_hash = $lower_method_value_expr->($trimmed);
+  return $lowered_block_or_hash
+   if defined($lowered_block_or_hash) && length($lowered_block_or_hash);
+ }
  my $lowered = $lower_flow_composite_expr->($expr);
  return undef unless defined($lowered) && length($lowered);
  return $lowered
+}
+
+sub _runtime_diagnostic_string_literal {
+ my ($value) = @_;
+ $value = '' unless defined $value;
+ $value =~ s/\\/\\\\/g;
+ $value =~ s/'/\\'/g;
+ return "'$value'"
+}
+
+sub _normalize_runtime_diagnostic_lowering_args {
+ my ($rule_label, $deps) = @_;
+ if (ref($rule_label) eq 'HASH' && !defined $deps) {
+  $deps = $rule_label;
+  $rule_label = '';
+ }
+ $rule_label = '' if !defined($rule_label) || ref($rule_label);
+ return ($rule_label, $deps)
+}
+
+sub _runtime_diagnostic_arity_expr {
+ my (%args) = @_;
+ return 'do { require LinkedSpec::RuntimeDiagnosticOutput; '
+  .'LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch('
+  .'$descr, '
+  ._runtime_diagnostic_string_literal($args{rule_label}).', '
+  ._runtime_diagnostic_string_literal($args{helper_name}).', '
+  .(0 + ($args{actual_arity} // 0)).', '
+  ._runtime_diagnostic_string_literal($args{expected_arity})
+  .') }'
+}
+
+sub _runtime_diagnostic_emit_expr {
+ my (%args) = @_;
+ my @evaluation = map {
+  'push @{$__ls_diag_values}, scalar('.$_ .');'
+ } @{$args{value_exprs} || []};
+ return 'do { require LinkedSpec::RuntimeDiagnosticOutput; '
+  .'my $__ls_diag_values = []; '
+  .join(' ', @evaluation).' '
+  .'LinkedSpec::RuntimeDiagnosticOutput::emit('
+  .'$descr, '
+  ._runtime_diagnostic_string_literal($args{rule_label}).', '
+  ._runtime_diagnostic_string_literal($args{helper_name}).', '
+  .'$__ls_diag_values'
+  .') }'
 }
 
 #------------------------------------------------------------------------------
@@ -1548,7 +1603,8 @@ sub _lower_endswitch_flow_statement {
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_say_statement {
- my ($expr, $deps) = @_;
+ my ($expr, $rule_label, $deps) = @_;
+ ($rule_label, $deps) = _normalize_runtime_diagnostic_lowering_args($rule_label, $deps);
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1557,26 +1613,34 @@ sub _lower_say_statement {
   return $cb;
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
-
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'say';
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args;
+ my $effective_args = $call->{args} || [];
+ return _runtime_diagnostic_arity_expr(
+  rule_label => $rule_label,
+  helper_name => 'say',
+  actual_arity => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0,
+  expected_arity => 'at least 1 positional argument',
+ ) unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my @values = map { _lower_control_flow_value_expr($_, $deps) } @$effective_args;
  return undef unless @values && !grep { !defined($_) || !length($_) } @values;
- return 'say '.join(', ', @values)
+ return _runtime_diagnostic_emit_expr(
+  rule_label => $rule_label,
+  helper_name => 'say',
+  value_exprs => \@values,
+ )
 }
 
 #------------------------------------------------------------------------------
 # Function: _lower_print_statement
 # Purpose : Lower `print(...)` fluent output helper calls.
-# Args    : ($expr, $deps)
+# Args    : ($expr, $rule_label, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_print_statement {
- my ($expr, $deps) = @_;
+ my ($expr, $rule_label, $deps) = @_;
+ ($rule_label, $deps) = _normalize_runtime_diagnostic_lowering_args($rule_label, $deps);
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1585,26 +1649,34 @@ sub _lower_print_statement {
   return $cb;
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
-
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'print';
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args;
+ my $effective_args = $call->{args} || [];
+ return _runtime_diagnostic_arity_expr(
+  rule_label => $rule_label,
+  helper_name => 'print',
+  actual_arity => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0,
+  expected_arity => 'at least 1 positional argument',
+ ) unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my @values = map { _lower_control_flow_value_expr($_, $deps) } @$effective_args;
  return undef unless @values && !grep { !defined($_) || !length($_) } @values;
- return 'print '.join(', ', @values)
+ return _runtime_diagnostic_emit_expr(
+  rule_label => $rule_label,
+  helper_name => 'print',
+  value_exprs => \@values,
+ )
 }
 
 #------------------------------------------------------------------------------
 # Function: _lower_print_each_statement
 # Purpose : Lower `print_each(target, prefix, suffix?)` iterable output.
-# Args    : ($expr, $deps)
+# Args    : ($expr, $rule_label, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_print_each_statement {
- my ($expr, $deps) = @_;
+ my ($expr, $rule_label, $deps) = @_;
+ ($rule_label, $deps) = _normalize_runtime_diagnostic_lowering_args($rule_label, $deps);
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -1613,7 +1685,6 @@ sub _lower_print_each_statement {
   return $cb;
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
 
@@ -1621,37 +1692,87 @@ sub _lower_print_each_statement {
  return undef unless $call && $call->{method} eq 'print_each';
 
  my $raw_args = $call->{args} || [];
- my $effective_args = (
-  ref($raw_args) eq 'ARRAY'
-  && @$raw_args >= 2
-  && @$raw_args <= 3
- ) ? $raw_args : $normalize_method_args_with_optional_scope->($raw_args, 2, 3);
- return undef unless $effective_args && @$effective_args >= 2;
+ my $effective_args = $raw_args;
+ return _runtime_diagnostic_arity_expr(
+  rule_label => $rule_label,
+  helper_name => 'print_each',
+  actual_arity => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0,
+  expected_arity => '2 or 3 positional arguments',
+ ) unless ref($effective_args) eq 'ARRAY' && (@$effective_args == 2 || @$effective_args == 3);
 
  my $array_expr = $trim_action_ir_value->($effective_args->[0]);
  return undef unless defined($array_expr) && length($array_expr);
  my $array_symbol = $extract_array_symbol_name->($array_expr, $deps);
- return undef unless defined($array_symbol) && length($array_symbol);
  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
   ? $deps->{bare_symbol_kind}
   : sub { return undef };
- my $iterable_expr = '@'.$array_symbol;
- if ($array_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
-  && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
-  $iterable_expr = '@{$'.$1.' // []}';
+ my $target_expr;
+ if (defined($array_symbol) && length($array_symbol)
+  && $array_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
+  && (($bare_symbol_kind->($1) // '') ne 'scalar')) {
+  $target_expr = '[@'.$array_symbol.']';
+ } else {
+  $target_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  }
+ return undef unless defined($target_expr) && length($target_expr);
 
  my $prefix_expr = _lower_control_flow_value_expr($effective_args->[1], $deps);
  return undef unless defined($prefix_expr) && length($prefix_expr);
 
- my @parts = ($prefix_expr, '$_');
+ my @values = ($target_expr, $prefix_expr);
  if (@$effective_args > 2) {
   my $suffix_expr = _lower_control_flow_value_expr($effective_args->[2], $deps);
   return undef unless defined($suffix_expr) && length($suffix_expr);
-  push @parts, $suffix_expr;
+  push @values, $suffix_expr;
  }
 
- return 'print '.join(', ', @parts).' foreach ('.$iterable_expr.')'
+ return _runtime_diagnostic_emit_expr(
+  rule_label => $rule_label,
+  helper_name => 'print_each',
+  value_exprs => \@values,
+ )
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_exit_now_statement
+# Purpose : Lower immediate parser termination without invoking host `exit`.
+# Args    : ($expr, $rule_label, $deps)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_exit_now_statement {
+ my ($expr, $rule_label, $deps) = @_;
+ ($rule_label, $deps) = _normalize_runtime_diagnostic_lowering_args($rule_label, $deps);
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+
+ my $call = $parse_method_function_expr->($expr);
+ return undef unless $call && $call->{method} eq 'exit_now';
+ my $args = $call->{args} || [];
+ return _runtime_diagnostic_arity_expr(
+  rule_label => $rule_label,
+  helper_name => 'exit_now',
+  actual_arity => ref($args) eq 'ARRAY' ? scalar(@$args) : 0,
+  expected_arity => '0 or 1 positional arguments',
+ ) unless ref($args) eq 'ARRAY' && @$args <= 1;
+
+ my $status_expr = '1';
+ if (@$args) {
+  $status_expr = _lower_control_flow_value_expr($args->[0], $deps);
+  return undef unless defined($status_expr) && length($status_expr);
+ }
+ return 'do { require LinkedSpec::RuntimeDiagnosticOutput; '
+  .'my $__ls_exit_status = scalar('.$status_expr.'); '
+  .'LinkedSpec::RuntimeDiagnosticOutput::terminate('
+  .'$descr, '
+  ._runtime_diagnostic_string_literal($rule_label).', '
+  .'$__ls_exit_status'
+  .') }'
 }
 
 1;

@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.2 — add Perl diagnostic event seam
+
+Replaced Perl ActionIR's host `print`/`say`/`foreach` output and host `exit` coupling with
+`LinkedSpec::RuntimeDiagnosticOutput`. Live parser invocations may now supply an optional
+`{ diagnostic_sink => CODE }`; the sink receives synchronous `LinkedSpec::RuntimeDiagnosticOutputEvent` objects
+with exactly `helper_name`, `rule_label`, and Unicode `message`. Without a sink, valid helper calls still evaluate
+but write no host stdout or stderr and do not change structural parse values.
+
+Invalid `print`/`say`/`print_each` arities now lower to a typed failure before any argument expression. Valid
+arguments are snapshotted exactly once left-to-right before event formation, fixing Perl's former per-item
+`print_each` decoration effects. Sink exceptions retain object identity and stop later delivery. `exit_now` now
+raises typed `LinkedSpec::RuntimeExitNow` after preceding events instead of terminating the host process; compiler
+and nested-handler wrappers preserve both control classes without rewriting parser `last_error`.
+
+The focused Perl test consumes all neutral render/scenario/arity data, locks live and independently loaded handler
+source free of host output/exit coupling, and proves quiet primary behavior without claiming the separately owned
+generated-entrypoint projection. Focused contract/uniform-binding/generated-source checks and Phase 0 `1..1031`
+pass. The executable rollout ledger advances only `perl_native` to complete (1 complete / 7 pending); capability
+remains 80/0/0 and Rust native `.5.1.3` is next. Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.1 — ratify diagnostic output events
 
 Adopted ADR `0042` and the backend-neutral `linkedspec-diagnostic-output-v1` contract before changing any engine.

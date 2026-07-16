@@ -86,6 +86,7 @@ sub default_deps_for_package {
    'lower_say_statement',
    'lower_print_statement',
    'lower_print_each_statement',
+   'lower_exit_now_statement',
    'lower_return_undef_statement',
    'lower_method_value_expr',
   ],
@@ -140,6 +141,7 @@ sub _require_lowering_deps {
   lower_say_statement            => $require_dep->('lower_say_statement'),
   lower_print_statement          => $require_dep->('lower_print_statement'),
   lower_print_each_statement     => $require_dep->('lower_print_each_statement'),
+  lower_exit_now_statement       => $require_dep->('lower_exit_now_statement'),
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
   lower_method_value_expr        => $lower_method_value_expr,
   lower_dropped_value_statement  => $lower_dropped_value_statement,
@@ -2174,7 +2176,7 @@ sub _build_flow_control_contracts {
 # Purpose : Contracts for output statements and declaration lowering.
 #------------------------------------------------------------------------------
 sub _build_emit_and_declare_contracts {
- my ($d) = @_;
+ my ($label, $d) = @_;
  return [
   {
    id                 => 'say_stmt',
@@ -2184,7 +2186,7 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_say_statement};
-    $code =~ s/\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $label) || $&/ge;
     return $code
    },
   },
@@ -2196,7 +2198,7 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_print_each_statement};
-    $code =~ s/\b(?<expr>print_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>print_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $label) || $&/ge;
     return $code
    },
   },
@@ -2208,7 +2210,7 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_print_statement};
-    $code =~ s/\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $label) || $&/ge;
     return $code
    },
   },
@@ -2219,9 +2221,8 @@ sub _build_emit_and_declare_contracts {
    unresolved_pattern => qr/\bexit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code) = @_;
-    my $lower_value = $d->{lower_method_value_expr};
-    $code =~ s/\bexit_now\s*\(\s*\)/exit/g;
-    $code =~ s/\bexit_now\s*\(\s*(?<payload>(?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?<P>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&P))*\)))*)\s*\)/do { my $payload = defined($+{payload}) ? $+{payload} : ''; my $lowered = $lower_value->($payload); 'exit(' . (defined($lowered) && length($lowered) ? $lowered : $payload) . ')' }/ge;
+    my $lower = $d->{lower_exit_now_statement};
+    $code =~ s/\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $label) || $&/ge;
     return $code
    },
   },
@@ -2256,7 +2257,7 @@ sub build_action_lowering_contracts {
   @{_build_array_pipeline_contracts($d)},
   @{_build_dropped_value_contracts($d)},
   @{_build_flow_control_contracts($d)},
-  @{_build_emit_and_declare_contracts($d)},
+  @{_build_emit_and_declare_contracts($label, $d)},
  ]
 }
 

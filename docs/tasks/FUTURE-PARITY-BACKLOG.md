@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (ADR `0042` plus `linkedspec-diagnostic-output-v1` complete neutral contract
-  `.5.1.1` without backend claims; Perl native event-seam leaf `.5.1.2` is active)
+- Last updated: `2026-07-16` (Perl native diagnostic events `.5.1.2` consume
+  `linkedspec-diagnostic-output-v1`; Rust native event-seam leaf `.5.1.3` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2344,18 +2344,55 @@ before implementation.
   Knowledge Map, and bounded memory point to Perl native implementation `.5.1.2` only after this slice commits.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Replace Perl host diagnostic/control coupling with the neutral native event seam.
   Dependencies: `.5.1.1`
   Acceptance: Perl ActionIR/live generated handlers enforce the neutral arities and once-only evaluation, format
     exact typed events through a parse-scoped caller sink, remain quiet without one, propagate sink failure, keep
     parse values structural, preserve strict Unicode, and stop using raw host output or host `exit` as observable
     parser/primary-command behavior. Focused toolbox/generated-source evidence locks every former failure mode.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** The new `LinkedSpec::RuntimeDiagnosticOutput` seam consumes the unchanged
+    neutral fixture through exact scalar rendering, typed event delivery, invocation-local sink validation,
+    sink-failure identity, and typed immediate exit. ActionIR rejects invalid arities before emitting argument
+    expressions and snapshots valid arguments exactly once left-to-right before one-call/one-item delivery. Live
+    parsers accept `{ diagnostic_sink => CODE }`; absent sinks write no host output; wrapper boundaries preserve
+    marked caller/exit errors without `last_error` rewriting. The focused contract passes 16 top-level tests,
+    combined focused Perl proof passes 28, the offline contract checker reports 1 complete/7 pending rollout legs,
+    generated-source contract stays green, direct Phase 0 passes `1..1031` in 640 seconds, and canonical CI repeats
+    it in 637 seconds after CLI 61x2. Independently emitted
+    entrypoint option propagation, canonical primary projection admission, other backends, symmetric admission,
+    and capability/no-drift remain `.5.1.3-.9`.
+  Commit: `FUTURE-PARITY-BACKLOG.5.1.2 - add Perl diagnostic event seam`
+
+## `FUTURE-PARITY-BACKLOG.5.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Pre-change toolbox lowering and a two-rule live parse prove that `print`, `say`,
+  `print_each`, and `exit_now` compiled to Perl host output/process-control operations; exact captured
+  bytes and dumped generated source preserve the pre-change failure mechanism: `print "a", "b"`, `say "a"`,
+  host `foreach`, and `exit(23)`; a live parser writes `beforeline\n` while returning the structural value.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify the ActionIR contracts/lowerers that emit host operations, the live
+  descriptor/handler boundary that currently has no parse-scoped diagnostic sink, and the wrapper behavior that
+  would otherwise swallow a caller sink failure or typed immediate exit. `ControlFlow` owned host lowering,
+  `FlowRules` discarded invalid arities before typed lowering, `Compiler` installed no invocation-local channel,
+  and `Compiler`/`SpecEntry` eval wrappers converted thrown control into ordinary parser errors.
+- [x] **FIX** — Enforce the neutral helper arities before evaluation; evaluate every valid argument exactly once
+  left-to-right; deliver exact typed `RuntimeDiagnosticOutputEvent` values through one invocation-local optional
+  caller sink; make absent sinks quiet; preserve structural parse values and strict Unicode; replace raw host
+  `exit` with typed immediate parser control. `RuntimeDiagnosticOutput`, ActionIR contracts/lowering, scanner,
+  compiler/runtime invocation options, and error wrappers now share that one seam.
+- [x] **ADDRESSED (verified)** — Focused tests consume `linkedspec-diagnostic-output-v1` and prove exact event
+  grouping/order/text, quiet default behavior, once-only effects, wrong-kind handling, result neutrality, Unicode,
+  sink-failure identity/short-circuiting, typed exit, arity rejection before evaluation, and live/dumped generated
+  handler source free of observable host `print`/`say`/`exit` coupling.
+- [x] **NO REGRESSION** — Existing focused ActionIR/runtime/generated-source suites and the canonical local gate
+  pass; no generated-entrypoint, primary-CLI projection, other-backend admission, or capability claim moves from
+  its later owning leaf. Focused contract/uniform-binding/generated-source proof and Phase 0 `1..1031` are green;
+  the contract ledger advances only `perl_native`.
+- [x] **LOCKSTEP** — Perl source/tests, task/index/roadmap/live docs, mdBook, Knowledge Map, and bounded memory
+  describe the same parse-scoped native event seam and point to Rust rollout `.5.1.3` only after this slice commits.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Replace Rust direct stderr diagnostic output with the neutral native event seam.
   Dependencies: `.5.1.1`
   Acceptance: Rust exposes the same typed parse-scoped sink/events, exact arities, once-only evaluation, formatting,
@@ -4728,9 +4765,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0. Planning
-leaf `.5.1.0` has measured and split diagnostic-output drift without changing behavior. ADR `0042` and the neutral
-executable contract close `.5.1.1` without backend claims. Perl native event seam `.5.1.2` is the sole active
-frontier.
+leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, and Perl native event seam `.5.1.2` are
+complete. Rust native event seam `.5.1.3` is the sole active frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -4930,7 +4966,7 @@ frontier.
 | 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
-| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning `.5.1.0` is done; neutral executable contract `.5.1.1` is active before backend code. |
+| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, and Perl native event seam are done; Rust `.5.1.3` is active. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / parity prerequisite satisfied | Repair Perl logical lowering and align eager truthiness/arity after diagnostic-output `.5.1`. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
@@ -4946,16 +4982,16 @@ frontier.
 | 193 | `LUA-BACKEND-PARITY.8.3` | `done` | Exact contract-ordered interpreter-first generated 8/105 proof passes in fresh dual-ABI hosts at 177/177. |
 | 194 | `LUA-BACKEND-PARITY.8.4` | `done` | Lua closes the backend rollout at 16 capabilities and 80/0/0. |
 | 195 | `FUTURE-PARITY-BACKLOG.5.1.0` | `done` | Exact output/transport/error seams are measured and split into neutral/backend/generated/gate/no-drift owners. |
-| 196 | `FUTURE-PARITY-BACKLOG.5.1.1` | `done` | ADR 0042 and the checked neutral fixture fix exact output-event semantics with all rollout legs pending. |
-| 197 | `FUTURE-PARITY-BACKLOG.5.1.2` | `active` | Replace Perl host output/process-control coupling after the neutral contract. |
-| 198 | `FUTURE-PARITY-BACKLOG.5.1.3` | `pending` | Replace Rust direct stderr with typed caller-owned events. |
+| 196 | `FUTURE-PARITY-BACKLOG.5.1.1` | `done` | ADR 0042 and the checked neutral fixture fix exact output-event semantics before rollout. |
+| 197 | `FUTURE-PARITY-BACKLOG.5.1.2` | `done` | Perl native parsing uses exact typed parse-scoped events and typed exit without host output/process coupling. |
+| 198 | `FUTURE-PARITY-BACKLOG.5.1.3` | `active` | Replace Rust direct stderr with typed caller-owned events. |
 | 199 | `FUTURE-PARITY-BACKLOG.5.1.4` | `pending` | Replace Dart evaluate-and-discard with typed caller-owned events. |
 | 200 | `FUTURE-PARITY-BACKLOG.5.1.5` | `pending` | Separate Julia helper output from native trace and align exact semantics. |
 | 201 | `FUTURE-PARITY-BACKLOG.5.1.6` | `pending` | Admit both Lua ABIs against the neutral contract and repair only measured residuals. |
 | 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `pending` | Propagate sinks through generated APIs and lock quiet canonical primary commands. |
 | 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `pending` | Register one symmetric native/generated/CLI five-backend gate. |
 | 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `pending` | Close public docs, Knowledge Map, capability, and final no-drift state. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output Perl child `.5.1.2` is the current frontier before the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output Rust child `.5.1.3` is the current frontier before later native/generated/gate/no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
@@ -5419,6 +5455,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Decisions
 
+- `2026-07-16`: `.5.1.2` installs the optional Perl diagnostic sink in invocation-local descriptor slots used by
+  generated live handlers. Sink failures and `RuntimeExitNow` are marked by exact thrown-value identity so nested
+  handler and top-parser eval wrappers rethrow them before ordinary parser-error normalization. Independently
+  emitted entrypoint option propagation remains `.5.1.7`; the native repair does not widen that later claim.
 - `2026-07-13`: `.16.7` admits punctuation-light aliases as a current four-census-backend capability and records
   Lua's typed/serialized/native dual-ABI proof alongside it. This is not a claim that the overall Lua backend or
   generated Lua source is complete. The recurring composed command deliberately runs every implemented syntax
@@ -5578,9 +5618,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking active neutral-contract leaf `.5.1.1`. Five-backend native/generated/CLI parity is closed at
-  80/0/0. Planning `.5.1.0` has measured arity/evaluation/format/transport/process-control differences and split
-  the complete neutral/native/generated/gate/no-drift path before code.
+- None blocking active Rust native leaf `.5.1.3`. Five-backend capability parity remains 80/0/0. Planning
+  `.5.1.0`, neutral contract `.5.1.1`, and Perl native `.5.1.2` are complete; Rust/Dart/Julia/Lua native,
+  generated/CLI, recurring gate, and public no-drift retain `.5.1.3-.9`.
 - Generic explicit callable values/dynamic calls and remaining Rust/Dart/Julia callable-codeblock parity remain
   future-owned; contextual declared Lua helper/user-function/receiver forms are current and no longer an exclusion.
 - Aggregate selectors are already retired across all five backends; their historical implementation sequence is
@@ -5588,13 +5628,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.5.1.1` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
+- None. `.5.1.3` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
   prerequisites are satisfied, but their pending trees are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.2` | Pre-change toolbox/live/dump evidence; exact ActionIR arity/order lowering; 16-test neutral Perl contract; 28-test combined focused proof; generated-source contract; offline 1-complete/7-pending rollout checker; direct Phase 0 `1..1031`/640s; canonical CLI 61x2 plus Phase 0 `1..1031`/637s; docs/KM/governance/mdBook/whitespace. | PASS. Perl native output is caller-owned typed synchronous events, quiet by default, structurally neutral, and free of host output/exit coupling; only `perl_native` completes and Rust `.5.1.3` activates. |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.1` | ADR 0042; exact three-helper/11-render/five-invalid/four-program/six-scenario fixture; independent evaluator and eight mutations; capability/generated/coverage no-drift; memory/KM/doctrine/mdBook/whitespace; canonical primary CLI 61x2 and Phase 0 `1..1031`/609s. | PASS. Neutral event policy is executable with all rollout legs initially pending; Perl native `.5.1.2` activates without behavior claims in this leaf. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.0` | Knowledge Map and TOOLBOX retrieval; `call_spec_handler_subst`, `LinkedSpec::Get`, generated-source dump; exact five-primary Unicode/arity/exit channel captures; focused Rust/Dart native tests; direct Julia trace and Lua sink probes; source/generated/adapter inventory; memory/task/doctrine/KM/whitespace/mdBook; canonical primary CLI 61x2 and Phase 0 `1..1031`/607s. | PASS. Four independent drift mechanisms and two Perl host-coupling hazards are durable; `.5.1.1-.9` own neutral/native/generated/gate/no-drift correction; no behavior or capability changed; `.5.1.1` is active. |
 | `2026-07-16` | `LUA-BACKEND-PARITY.8.4` | Exact five-backend/16-row manifest with direct Lua evidence; capability and generated-source 80/0/0; Lua 177x2; primary 61x2; corpus 105/105; warmed matrix 5x2x61; callable/native-loading/coverage 246/105+1/122; canonical reference CLI 61x2 and Phase 0 `1..1031`/625s; governance/mdBook/cleanup. | PASS. Lua and backend parent `.1` close; diagnostic `.5.1` becomes the next clean-pivot candidate without being activated early. |
 | `2026-07-16` | `LUA-BACKEND-PARITY.8.3` | Executable contract owns Lua path/count/order/full-manifest/interpreter-first/fresh-load/metadata/plan/trace/cleanup registration; exact eight modules including fixed user functions; fresh PUC/LuaJIT exact observations and cleanup; Lua 177x2, primary 61x2, corpus 105/105; generated checker Dart/Julia/Lua 8/105, callable/capability 64/0/0; canonical CLI 61x2 and Phase 0 `1..1031`/620s. | PASS. Accepted subset closes without status/census promotion; sole admission/handoff `.8.4` activates. |
@@ -5737,6 +5779,9 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.1.2` | `FUTURE-PARITY-BACKLOG.5.1.2 - add Perl diagnostic event seam` | Exact native Perl events/arity/effects/quietness/failures/typed exit, host-coupling removal, rollout ledger, and Rust handoff. |
+| `FUTURE-PARITY-BACKLOG.5.1.1` | `FUTURE-PARITY-BACKLOG.5.1.1 - ratify diagnostic output events` | ADR 0042, exact executable neutral event contract/evaluator/mutations, initially pending rollout ledger, and Perl handoff. |
+| `FUTURE-PARITY-BACKLOG.5.1.0` | `FUTURE-PARITY-BACKLOG.5.1.0 - split diagnostic output parity` | Exact five-backend baseline, four-mechanism diagnosis, complete neutral/native/generated/gate/no-drift split, and no behavior change. |
 | `LUA-BACKEND-PARITY.8.4` | `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity` | Five-backend 80/0/0 admission, generated pass, future-exclusion retirement, Lua tree/backend-parent closure, and post-parity handoff. |
 | `LUA-BACKEND-PARITY.8.3` | `LUA-BACKEND-PARITY.8.3 - admit generated Lua subset` | Exact contract 8/105, interpreter-first values, fresh dual-ABI module load/metadata/plan/trace, checker ownership, cleanup, and `.8.4` handoff. |
 | `LUA-BACKEND-PARITY.8.2` | `LUA-BACKEND-PARITY.8.2 - execute generated Lua families` | Exact plans/rejections, authoritative nested dispatch, portable trace, isolated all-family/variadic proof, and subset handoff. |
@@ -5878,6 +5923,11 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-16`: `.5.1.2` replaces Perl host diagnostic output and host exit lowering with one parse-scoped runtime
+  seam. Exact arities reject before effects; valid arguments evaluate once left-to-right; typed call/item events
+  preserve Unicode and structural results; no sink is quiet; sink failure retains identity; immediate exit is
+  typed parser control. Focused neutral/generated proof and Phase 0 `1..1031` pass. Only `perl_native` completes in
+  the rollout ledger; capability stays 80/0/0 and Rust `.5.1.3` activates.
 - `2026-07-15`: Lua `.4.3.9.1` executes `and`/`or`/`not` through one eager evaluator over established
   `runtime_truthy`. Focused proof locks all-argument order after decisive operands, empty false/false/true,
   scalar-zero/aggregate boundaries, boolean values, and receiver continuation. PUC Lua and LuaJIT pass 123/123;

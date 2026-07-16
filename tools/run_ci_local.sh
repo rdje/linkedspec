@@ -127,6 +127,7 @@ require_tracked_file t/cli_conformance_runner.t
 require_tracked_file t/trace_cli.t
 require_tracked_file t/native_spec_resolution.t
 require_tracked_file t/generated_source_contract.t
+require_tracked_file t/diagnostic_output_perl_contract.t
 require_tracked_file t/scalar_numeric_contract.t
 require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/complete_named_mark_contract.t
@@ -178,6 +179,7 @@ perl -c -Iperl t/cli_conformance_runner.t
 perl -c -Iperl t/trace_cli.t
 perl -c -Iperl t/native_spec_resolution.t
 perl -c -Iperl t/generated_source_contract.t
+perl -c -Iperl t/diagnostic_output_perl_contract.t
 perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/punctuation_light_zero_arg_contract.t
@@ -208,6 +210,9 @@ python3 tools/check_complete_named_mark_contract.py
 
 log "checking backend-neutral diagnostic-output event contract"
 python3 tools/check_diagnostic_output_contract.py
+
+printf '%s\n' '[ci-local] Perl diagnostic-output event contract'
+PERL5LIB= prove -Iperl t/diagnostic_output_perl_contract.t
 
 log "running Perl complete named-mark behavior contract fixture"
 PERL5LIB= prove -Iperl t/complete_named_mark_contract.t

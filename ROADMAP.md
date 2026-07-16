@@ -926,7 +926,11 @@ effects per item, leaks invalid mixed-encoding bytes through the primary command
 to bypass canonical failure framing. `.5.1.1-.9` split neutral fixtures, five native repairs, generated/CLI
 propagation, recurring admission, and no-drift. ADR `0042` plus
 `capability_conformance/diagnostic_output_contract.json` now lock `.5.1.1`'s exact quiet caller-owned event target
-without claiming backend admission; Perl native repair `.5.1.2` is next before structured-format work.
+without claiming backend admission. Perl native `.5.1.2` now consumes that unchanged target: exact arities reject
+before effects, valid arguments evaluate once left-to-right, typed Unicode events use an optional parse-scoped
+sink, absent sinks are quiet, caller failures retain identity, and `exit_now` is typed parser control rather than
+host process termination. The rollout ledger is 1 complete / 7 pending while capability stays 80/0/0; Rust native
+`.5.1.3` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

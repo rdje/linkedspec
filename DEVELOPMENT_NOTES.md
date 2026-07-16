@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.2` — parser diagnostics need a marked control channel through eval
+  wrappers): Validate helper arity in ActionIR before emitting any argument expression, then snapshot every valid
+  argument with sequential scalar evaluation before calling the runtime seam. Store the optional sink in an
+  invocation-local descriptor slot so generated live handlers need no ambient global and nested parser calls stay
+  isolated. A synchronous sink failure and immediate exit both cross existing eval wrappers, so mark the exact
+  thrown value by identity and rethrow it before ordinary parser-error normalization; this also keeps
+  `runtime_ctx->{last_error}` reserved for parser failures. Internal exit control must not reuse the public
+  `exit_now` helper name because the unresolved-helper scanner discovers callable package methods. Focused neutral
+  proof passes 16 top-level tests, combined focused proof passes 28, direct Phase 0 passes `1..1031` in 640 seconds,
+  and canonical CI repeats it in 637 seconds after exact CLI 61x2.
+  Only Perl native rollout advances; generated APIs, other backends, admission, and capability remain later-owned.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.1` — output helpers are events, not process I/O or parser data):
   Validate arity before effects, evaluate valid-call arguments once left-to-right, render through an explicit
   diagnostic scalar seam, and group one typed event per call/item. Keep the sink per invocation and synchronous:

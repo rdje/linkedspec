@@ -8,6 +8,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.2 — add Perl diagnostic event seam**
+  (DONE — Perl native consumes the neutral event contract; Rust native `.5.1.3` is next).
+
+  **Result:** Perl live parser invocations accept an optional parse-scoped diagnostic sink and deliver exact typed
+  Unicode call/item events. Arity rejects before effects, valid arguments evaluate once left-to-right, missing
+  sinks are quiet, parse values remain structural, sink failure retains identity, and `exit_now` is typed parser
+  control rather than host process termination. Only the Perl native rollout leg completes; independently emitted
+  entrypoint propagation, canonical primary admission, other backends, symmetric gate, and capability stay owned
+  by `.5.1.3-.9`.
+
+  **Proof:** The neutral Perl contract passes 16 top-level tests; combined contract/uniform-binding proof passes
+  28; generated-source and offline contract checks pass with 1 complete / 7 pending legs. Direct Phase 0 passes
+  all 1,031 tests in 640 seconds; canonical local CI repeats them in 637 seconds after CLI 61x2. Governance,
+  Knowledge Map, mdBook, and whitespace pass. Mutation
+  testing was not run.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.1 — ratify diagnostic output events**
   (DONE — neutral executable target is exact; Perl native event seam `.5.1.2` is next).
 

@@ -1414,26 +1414,44 @@ once per call. Empty-array and wrong-kind targets emit no event after valid-call
 propagates unchanged and stops later items/actions; an event before `exit_now(status)` is delivered before the
 typed exit stops everything later. Generated entrypoints must propagate the same per-invocation sink. Primary
 commands install none, add no diagnostic-output option, and keep rich events out of ADR `0024`'s separate phase
-trace. Lua already implements the closest current form as
+trace.
+
+The Perl native parser returned by `LinkedSpec::Get` now accepts its sink in the optional second invocation
+argument:
+
+```perl
+my @events;
+my $input = "xx";
+my $value = $parser->(
+  \$input,
+  { diagnostic_sink => sub { push @events, $_[0] } },
+);
+```
+
+Every callback argument is a `LinkedSpec::RuntimeDiagnosticOutputEvent` hash object with exactly the three
+contract fields. Sink exceptions and `LinkedSpec::RuntimeExitNow` propagate out of the parser unchanged; neither
+is converted to a structural parse value or ordinary parser `last_error`. Omitting the second argument, or its
+`diagnostic_sink`, remains quiet. Lua exposes its corresponding native form as
 `runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`.
 
-Current execution is not yet aligned:
+Native rollout is only partly aligned:
 
-| Backend | Current caveat |
+| Backend | Current state or caveat |
 | --- | --- |
-| Perl | Lowers to host output. `print_each` reevaluates prefix and suffix once per item; invalid arities remain raw calls. Unicode helper text can bypass the primary command's strict UTF-8 encoder, and lowered `exit_now` can terminate that process before canonical failure framing. |
+| Perl | Native execution consumes the neutral contract: exact arities are rejected before effects, valid arguments evaluate once left-to-right, typed Unicode events use the parse-scoped optional sink, no sink is quiet, sink failures retain identity, and `exit_now` is typed parser control rather than host process termination. Generated-entrypoint propagation remains owned by `.5.1.7`. |
 | Rust | Eagerly evaluates arguments, then writes each argument/item as a separate stderr line and ignores authored `print_each` prefix/suffix. |
 | Dart | Eagerly evaluates arguments and discards every diagnostic message. |
 | Julia | Concatenates into low trace records, accepts permissive arities, and gives an omitted `print_each` suffix a newline. |
-| Lua | Uses typed caller-owned events, exact one-plus/two-or-three arities, once-only evaluation, and quiet default execution. |
+| Lua | Uses typed caller-owned events, exact one-plus/two-or-three arities, once-only evaluation, and quiet default execution; formal admission against the neutral fixture remains `.5.1.6`. |
 
-For example, the current Perl lowering of a stateful prefix/suffix places both expressions inside its host
-`foreach`; two items therefore advance each effect twice. That is a defect to normalize, not portable behavior.
-Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures these mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042`
-plus 11 rendering rows, five invalid arities, six semantic scenarios, and eight explicitly pending rollout legs.
-Leaves `.5.1.2-.9` own five native backends, generated/CLI propagation, a symmetric recurring gate, and public
-no-drift. Until those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing,
-invalid arity, or side-effect counts across backends.
+The pre-repair Perl lowering placed stateful prefix and suffix expressions inside a host `foreach`, so two items
+advanced each effect twice. Native Perl now snapshots all valid-call arguments before event delivery; that old
+result remains root-cause evidence, not portable behavior. Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures
+the mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042` plus 11 rendering rows, five invalid arities, and six
+semantic scenarios; Perl native leaf `.5.1.2` is the first complete rollout leg. Leaves `.5.1.3-.9` retain the
+other four native backends, generated/CLI propagation, a symmetric recurring gate, and public no-drift. Until
+those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing, invalid arity,
+or side-effect counts across all backends.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:

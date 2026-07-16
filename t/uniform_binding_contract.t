@@ -223,8 +223,8 @@ SPEC
  my $print_each_source = LinkedSpec::emit_generated_source(\$print_each_spec);
  like(
   $print_each_source,
-  qr/foreach \(\@\{\$items \/\/ \[\]\}\)/,
-  'print_each iterates the scalar-held bare array binding',
+  qr/push \@\{\$__ls_diag_values\}, scalar\(\$items\)/,
+  'print_each evaluates the scalar-held bare array binding through the diagnostic seam',
  );
 };
 

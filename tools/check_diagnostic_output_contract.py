@@ -125,14 +125,14 @@ PROJECTIONS = {
     "cli_options": "add no diagnostic-output-specific primary option",
 }
 ROLLOUT = [
-    ("perl_native", "FUTURE-PARITY-BACKLOG.5.1.2"),
-    ("rust_native", "FUTURE-PARITY-BACKLOG.5.1.3"),
-    ("dart_native", "FUTURE-PARITY-BACKLOG.5.1.4"),
-    ("julia_native", "FUTURE-PARITY-BACKLOG.5.1.5"),
-    ("lua_native", "FUTURE-PARITY-BACKLOG.5.1.6"),
-    ("generated_and_primary_cli", "FUTURE-PARITY-BACKLOG.5.1.7"),
-    ("recurring_five_backend_gate", "FUTURE-PARITY-BACKLOG.5.1.8"),
-    ("public_no_drift", "FUTURE-PARITY-BACKLOG.5.1.9"),
+    ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.2"),
+    ("rust_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.3"),
+    ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.4"),
+    ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.5"),
+    ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.6"),
+    ("generated_and_primary_cli", "pending", "FUTURE-PARITY-BACKLOG.5.1.7"),
+    ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.5.1.8"),
+    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.1.9"),
 ]
 
 
@@ -420,8 +420,8 @@ def validate_contract(contract: dict[str, Any]) -> None:
     if not isinstance(rollout, list) or len(rollout) != len(ROLLOUT):
         fail("backend rollout coverage drifted")
     task_text = TASK_PATH.read_text(encoding="utf-8")
-    for row, (leg, owner) in zip(rollout, ROLLOUT):
-        if row != {"leg": leg, "status": "pending", "owner": owner}:
+    for row, (leg, status, owner) in zip(rollout, ROLLOUT):
+        if row != {"leg": leg, "status": status, "owner": owner}:
             fail(f"backend rollout drifted for {leg}")
         if f"ID: `{owner}`" not in task_text:
             fail(f"backend rollout owner is absent from the task tree: {owner}")
@@ -447,11 +447,14 @@ def main() -> None:
     assert_mutation_rejected(contract, lambda value: value["scenarios"][0]["expected"]["events"][0].__setitem__("message", "drift"), "event text")
     assert_mutation_rejected(contract, lambda value: value["scenarios"][1]["expected"]["events"].append({}), "quiet default")
     assert_mutation_rejected(contract, lambda value: value["scenarios"][3]["sink"].__setitem__("invocation", 5), "item sink failure")
-    assert_mutation_rejected(contract, lambda value: value["backend_rollout"][0].__setitem__("status", "pass"), "early backend claim")
+    assert_mutation_rejected(contract, lambda value: value["backend_rollout"][0].__setitem__("status", "pending"), "Perl admission regression")
+    pending_count = sum(row["status"] == "pending" for row in contract["backend_rollout"])
+    complete_count = sum(row["status"] == "complete" for row in contract["backend_rollout"])
     print(
         "diagnostic output contract: "
         f"{len(contract['helpers'])} helpers, {len(contract['scalar_render_cases'])} render cases, "
-        f"{len(contract['scenarios'])} scenarios, {len(contract['backend_rollout'])} pending legs, 8 drift mutations"
+        f"{len(contract['scenarios'])} scenarios, {complete_count} complete / {pending_count} pending legs, "
+        "8 drift mutations"
     )
 
 

@@ -132,8 +132,11 @@ Three backbone items tracked major structural modernization — all done:
   portable errors, and direct/traced value roles. `.8.1.2` now proves persisted valid/corrupt modules in fresh PUC
   Lua/LuaJIT hosts, including exact result/trace/failure observations and cleanup. The capability census remained
   four-backend 64/0/0 until `.8.4`, which now admits Lua all-pass at 80/0/0.
-  Cross-backend
-  diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
+  Diagnostic-output planning `.5.1.0` and neutral contract `.5.1.1` are complete. Perl native `.5.1.2` is the
+  first admitted rollout leg: its generated handlers now deliver typed Unicode events through an optional
+  parse-scoped caller sink, remain quiet without one, enforce arity before effects, and use typed parser control
+  instead of host `exit`. Rust native `.5.1.3` is next; Dart/Julia/Lua native, generated/CLI propagation, the
+  recurring five-backend gate, and public no-drift remain `.5.1.4-.9`. Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

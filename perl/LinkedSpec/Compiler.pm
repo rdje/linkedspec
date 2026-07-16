@@ -14,6 +14,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::RuntimeDiagnosticOutput ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -110,6 +111,7 @@ sub _generated_source_preamble {
   . "no warnings 'void';\n"
   . "use re 'eval';\n"
   . "use LinkedSpec::GeneratedSource ();\n"
+  . "use LinkedSpec::RuntimeDiagnosticOutput ();\n"
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
@@ -1408,9 +1410,24 @@ if ($validate_dependency_regex_references_error) {
   die "$detail\n";
  }
  _trace_decision('validate_input_ref', 1, 'Top-level parser received SCALAR reference input', DUMP_DEBUG);
- my $retv = eval { &$handler($final_descriptor, $input_ref) };
+ my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options($_[1]);
+ my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
+ my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
+ local $final_descriptor->{$sink_slot} = $diagnostic_sink;
+ local $final_descriptor->{$control_error_slot} = undef;
+
+ my $retv;
+ my $eval_ok = eval {
+  $retv = &$handler($final_descriptor, $input_ref);
+  1
+ };
   my $eval_error = $@;
-  if ($eval_error) {
+  unless ($eval_ok) {
+   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($final_descriptor, $eval_error)) {
+    _trace_decision("invoke_top_rule_control:$top_rule", 1, $eval_error, DUMP_DEBUG);
+    _trace_exit($runtime_scope, { status => 'control', stage => 'invoke_top_rule', returned_defined => 0, return_ref => ref($eval_error) || '', return_size => undef }, DUMP_HIGH);
+    die $eval_error
+   }
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
