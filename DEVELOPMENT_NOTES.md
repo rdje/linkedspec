@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.6` — prior art still needs executable admission):
+  Lua already had the correct visible event formatting, arity, evaluation, quietness, and result behavior, so a
+  direct neutral-fixture consumer was more valuable than translating another backend's implementation. Its
+  baseline passed 105/109 assertions and exposed two host-boundary assumptions: `exit_now` reused the ordinary
+  runtime-error metatable, and `runtime_parse` cloned an unwrapped caller-thrown `RuntimeInterpreterException`
+  while adding engine attribution. Keep the sink call inside `pcall`, carry failures in a private marker with a
+  constant string representation through nested rule/action wrappers, and unwrap only at the public boundary;
+  this preserves even false/nil/table/error caller values without leaking caller text into native trace. Give
+  exit a separate metatable and public predicate while retaining its status/message compatibility fields. The
+  focused 109 assertions and existing 177 tests pass on both PUC Lua and LuaJIT; the complete Lua gate also passes
+  CLI 61x2 and corpus 105/105. Only Lua native admission advances; generated/primary remains `.5.1.7`, capability
+  stays 80/0/0, and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`/656s. No mutation campaign ran.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.5` — host exception types expose hidden interpreter ownership):
   Julia's visible drift was one `log_trace_output!` call plus permissive indexing, but caller-owned delivery also
   crosses `_execute_runtime_action_block!` and `runtime_parse`, both of which reinterpret selected exceptions.

@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.6 — admit Lua diagnostic events**
+  (DONE — all five native event seams consume the neutral contract; generated/primary `.5.1.7` is next).
+
+  **Result:** Lua's existing event formation already passed 105/109 neutral assertions. The exact residuals were
+  a caller-thrown interpreter exception losing identity when structured attribution copied it, and `exit_now`
+  sharing the ordinary runtime-error type. A private sink-failure carrier now restores every exact caller value at
+  the public boundary; distinct `RuntimeExitNow` retains the prior status/message and has a public predicate.
+  Event formatting, arity, evaluation, quietness, structural values, and trace separation remain unchanged.
+
+  **Proof:** The neutral consumer passes 109 assertions and the existing suite passes 177 tests on each of PUC Lua
+  and LuaJIT. The complete Lua gate passes primary CLI 61x2 and corpus 105/105. The contract checker reports
+  5 complete / 3 pending and rejects eight mutations. Canonical local CI passes primary CLI 61x2 and Phase 0
+  `1..1031` in 656 seconds. Generated/primary remains `.5.1.7`, capability stays 80/0/0, and mutation testing was
+  not run.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.5 — add Julia diagnostic event seam**
   (DONE — Julia native consumes the neutral event contract; Lua native admission `.5.1.6` is next).
 

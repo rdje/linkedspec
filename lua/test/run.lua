@@ -5594,7 +5594,7 @@ Top::
 ]])))
   local exit_ok, exit_error = pcall(linkedspec.runtime_parse, exit_engine, "x")
   assert_equal(exit_ok, false, "exit_now terminates immediately")
-  assert_equal(linkedspec.is_runtime_interpreter_error(exit_error), true, "exit_now typed error")
+  assert_equal(linkedspec.is_runtime_exit_now(exit_error), true, "exit_now typed control")
   assert_equal(exit_error.message, "exit_now(7) in rule Top", "exit_now detail")
   assert_equal(exit_error.status, 7, "exit_now status")
 end)
@@ -5683,7 +5683,7 @@ Top::
     diagnostic_sink = function(event) exit_events[#exit_events + 1] = event end,
   })
   assert_equal(exit_ok, false, "exit_now still terminates immediately")
-  assert_equal(linkedspec.is_runtime_interpreter_error(exit_error), true, "exit_now remains typed")
+  assert_equal(linkedspec.is_runtime_exit_now(exit_error), true, "exit_now remains typed")
   assert_equal(exit_error.status, 23, "exit_now retains status")
   assert_equal(#exit_events, 1, "post-exit output is not evaluated")
   assert_equal(exit_events[1].message, "before\n", "pre-exit event is delivered")
@@ -7429,7 +7429,7 @@ return({
     ))
   end)
   assert_equal(error_ok, false, "with callback errors propagate")
-  assert_equal(linkedspec.is_runtime_interpreter_error(error_failure), true, "with callback failure stays typed")
+  assert_equal(linkedspec.is_runtime_exit_now(error_failure), true, "with callback exit stays typed")
   assert_equal(error_failure.status, 86, "with callback failure stays exact")
 end)
 

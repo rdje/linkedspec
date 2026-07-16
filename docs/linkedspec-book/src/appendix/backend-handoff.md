@@ -858,9 +858,10 @@ generated propagation, and an ADR `0024`-separate quiet primary projection. Its 
 began pending. Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5` now consume the exact native contract through typed
 invocation-local events, quiet defaults, preserved sink failure, and typed immediate exit. Dart and Julia both
 use private carriers through their action/runtime wrappers so even a caller-thrown interpreter exception retains
-its exact identity; Julia additionally removes rich helper text from low trace. The ledger is 4 complete / 4
-pending; Lua formal native admission `.6` is next, while generated/CLI `.7`, recurring admission `.8`, and public
-no-drift `.9` own the remaining correction.
+its exact identity; Julia additionally removes rich helper text from low trace. Lua `.6` now consumes all 109
+neutral assertions on PUC Lua and LuaJIT, using the same private-carrier pattern for exact caller identity and a
+distinct `RuntimeExitNow`. The ledger is 5 complete / 3 pending; generated/CLI `.7`, recurring admission `.8`, and
+public no-drift `.9` own the remaining correction.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime

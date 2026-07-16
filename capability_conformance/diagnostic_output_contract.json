@@ -205,7 +205,7 @@
     {"leg": "rust_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.3"},
     {"leg": "dart_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.4"},
     {"leg": "julia_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.5"},
-    {"leg": "lua_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.6"},
+    {"leg": "lua_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.6"},
     {"leg": "generated_and_primary_cli", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.7"},
     {"leg": "recurring_five_backend_gate", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.8"},
     {"leg": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.9"}

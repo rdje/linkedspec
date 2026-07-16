@@ -16,6 +16,13 @@ local M = {}
 local ERROR_MT = {
   __runtime_interpreter_type = "RuntimeInterpreterException",
   __tostring = function(value) return "RuntimeInterpreterException: " .. value.message end,
+  exit_now = {
+    __runtime_interpreter_type = "RuntimeExitNow",
+    __tostring = function(value) return "RuntimeExitNow: " .. value.message end,
+  },
+  diagnostic_output_sink_failure = {
+    __tostring = function() return "RuntimeDiagnosticOutputSinkFailure" end,
+  },
 }
 local FLOW_MT = { __tostring = function(value) return "RuntimeActionFlow: " .. value.kind end }
 local ENGINE_MT = { __runtime_interpreter_type = "LinkedSpecRuntimeEngine" }
@@ -45,6 +52,7 @@ local function nextable(callback)
 end
 
 function M.is_runtime_interpreter_error(value) return getmetatable(value) == ERROR_MT end
+function M.is_runtime_exit_now(value) return getmetatable(value) == ERROR_MT.exit_now end
 function M.is_runtime_diagnostic(value) return getmetatable(value) == DIAGNOSTIC_MT end
 
 function M.node_type(value)
@@ -562,11 +570,14 @@ end
 local function emit_runtime_diagnostic_output(ctx, helper_name, message)
   if ctx.diagnostic_sink == nil then return end
   local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
-  ctx.diagnostic_sink(setmetatable({
+  local delivered, failure = pcall(ctx.diagnostic_sink, setmetatable({
     helper_name = helper_name,
     rule_label = rule_label,
     message = message,
   }, DIAGNOSTIC_OUTPUT_EVENT_MT))
+  if not delivered then
+    error(setmetatable({ failure = failure }, ERROR_MT.diagnostic_output_sink_failure), 0)
+  end
 end
 
 local function evaluate_runtime_diagnostic_output(
@@ -2278,10 +2289,11 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     ) or 1
     if type(status) ~= "number" then status = 1 end
     local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
-    fail("exit_now(" .. tostring(status) .. ") in rule " .. tostring(rule_label), {
+    error(setmetatable({
+      message = "exit_now(" .. tostring(status) .. ") in rule " .. tostring(rule_label),
       rule_label = rule_label,
       status = status,
-    })
+    }, ERROR_MT.exit_now), 0)
   elseif name == "call" then
     if not expr.args[1] then fail("call expects a rule name") end
     local label = target_name(argument_expr(expr.args[1]))
@@ -3830,7 +3842,8 @@ function M.runtime_parse(engine, input, options)
   end
   local ok, result = pcall(execute_rule, engine, top, 0, ctx)
   if not ok then
-    if getmetatable(result) == ERROR_MT then
+    local sink_failed = getmetatable(result) == ERROR_MT.diagnostic_output_sink_failure
+    if not sink_failed and getmetatable(result) == ERROR_MT then
       result = with_runtime_diagnostic(result, runtime_diagnostic(engine, {
         stage = "runtime_execution",
         summary = "Lua runtime interpreter failed",
@@ -3840,9 +3853,17 @@ function M.runtime_parse(engine, input, options)
       }))
     end
     if trace_scope ~= nil then
-      local message = M.is_runtime_interpreter_error(result) and result.message or tostring(result)
+      local message
+      if sink_failed then
+        message = "diagnostic_output_sink"
+      elseif M.is_runtime_interpreter_error(result) or M.is_runtime_exit_now(result) then
+        message = result.message
+      else
+        message = tostring(result)
+      end
       trace.exit_trace_scope(options.trace, trace_scope, "error=" .. message)
     end
+    if sink_failed then error(result.failure, 0) end
     error(result, 0)
   end
   local output = json.array({ copy_value(result.value) })
@@ -3887,6 +3908,8 @@ function M.to_json(value)
       message = value.message,
       diagnostic = value.diagnostic and M.to_json(value.diagnostic) or nil,
     })
+  elseif getmetatable(value) == ERROR_MT.exit_now then
+    return json.harray({ status = value.status })
   end
   local node_type = M.node_type(value)
   if node_type == "RuntimeDiagnostic" then
@@ -3922,7 +3945,10 @@ function M.to_json(value)
       lifecycle_events = events,
     })
   end
-  fail("runtime to_json expects a runtime error, diagnostic, parse result, lifecycle event, or diagnostic output event")
+  fail(
+    "runtime to_json expects a runtime error, exit, diagnostic, parse result, lifecycle event, or " ..
+      "diagnostic output event"
+  )
 end
 
 return M

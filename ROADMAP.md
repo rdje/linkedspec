@@ -935,8 +935,10 @@ Dart native `.5.1.4` now replaces evaluate-and-discard with the same typed parse
 arbitrary sink-error identity through its action/runtime wrappers, and separates `RuntimeExitNow` from structured
 runtime diagnostics and native trace. Julia native `.5.1.5` now replaces low-trace helper transport with the same
 typed invocation-local event seam, exact pre-effect arity, empty optional suffix, preserved sink-error identity,
-and typed exit. The rollout ledger is 4 complete / 4 pending while capability stays 80/0/0; Lua formal native
-admission `.5.1.6` is next before structured-format work.
+and typed exit. Lua native `.5.1.6` consumes the same 109-assertion fixture on PUC Lua and LuaJIT; a private carrier
+preserves arbitrary sink-error identity and distinct `RuntimeExitNow` replaces its former ordinary-runtime-error
+classification. The rollout ledger is 5 complete / 3 pending while capability stays 80/0/0; generated/primary
+propagation `.5.1.7` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

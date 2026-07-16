@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.6 — admit Lua diagnostic events
+
+Admitted Lua's existing per-parse diagnostic event seam against the unchanged
+`linkedspec-diagnostic-output-v1` fixture on both PUC Lua and LuaJIT. The focused consumer proves all 11 scalar
+render rows, five invalid arities before effects, six sink/quiet/wrong-kind/exit scenarios, all four native
+aliases, exact event JSON, once-only Unicode delivery, structural result neutrality, and native-trace separation.
+The unmodified baseline passed 105 of 109 assertions.
+
+Closed the two measured residual mechanisms only. `exit_now` formerly used the ordinary
+`RuntimeInterpreterException` constructor; it now raises distinct `RuntimeExitNow` control with the same status
+and compatibility message, exposed through `is_runtime_exit_now`. A caller sink that threw an unwrapped public
+interpreter exception was formerly copied while structured runtime attribution was added; a private carrier now
+passes every arbitrary sink failure through internal action/rule wrappers and restores the exact caller value at
+the public parse boundary. Ordinary runtime diagnostics and trace remain separate.
+
+The focused contract passes 109 assertions and the existing suite passes 177 tests on each Lua ABI. The complete
+Lua gate also passes primary CLI 61x2 and corpus 105/105. The rollout ledger advances only `lua_native` to
+complete (5 complete / 3 pending); generated sink propagation and exact primary projection remain `.5.1.7`,
+capability stays 80/0/0, and canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 656 seconds. Mutation
+campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.5 — add Julia diagnostic event seam
 
 Replaced Julia's low-trace diagnostic-helper transport with exported `RuntimeDiagnosticOutputEvent`,

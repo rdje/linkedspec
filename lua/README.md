@@ -293,8 +293,11 @@ cursor/control calls and proves exact agreement across contracts, interpreter di
 sources, plus four placement-marker spellings. Parent `.4.3.7` is closed. `.4.3.8` now evaluates diagnostic
 `print`/`say`/`print_each` arguments once left-to-right and delivers ordered Unicode-safe typed events through an
 optional per-parse caller sink. With no sink it stays quiet; events never alter parse values; `exit_now` remains
-immediate typed control. Both ABIs pass 122/122. Exhaustive `.4.3.9.0` probing partitions all 246 names into 230
-handled, thirteen intentional statement/receiver-only surfaces, and missing eager `and`/`or`/`not`; logical repair
+immediate typed control. Both ABIs pass 122/122. Later neutral admission `.5.1.6` proves 109 exact
+`linkedspec-diagnostic-output-v1` assertions per ABI, preserves arbitrary caller sink failures unchanged, and
+separates `RuntimeExitNow` from ordinary runtime interpreter errors. Exhaustive `.4.3.9.0` probing partitions all
+246 names into 230 handled, thirteen intentional statement/receiver-only surfaces, and missing eager
+`and`/`or`/`not`; logical repair
 `.4.3.9.1` first passes 123/123. Permanent `.4.3.9.2` now proves exact 233+13 ownership for all 246 names, direct
 `call(rule)` result/`retv`/cursor behavior, and public status `runtime-helper-value-control`; both ABIs pass 125/125
 and parent `.4.3` closes. Planning-only `.4.4.0` separates structured runtime failures, trace controls/sinks,
@@ -861,7 +864,9 @@ assert(linkedspec.interpreter.node_type(events[1]) == "RuntimeDiagnosticOutputEv
 `print(value, ...)` concatenates eager scalar-text values; `say(value, ...)` adds one newline;
 `print_each(array, prefix[, suffix])` emits one event per item, with an empty default suffix. The callback runs
 synchronously in message order. Omit `diagnostic_sink` for quiet execution; helper arguments still evaluate and
-`result.value` / `result.output` stay structural. A non-function sink is a typed runtime boundary error.
+`result.value` / `result.output` stay structural. A non-function sink is a typed runtime boundary error. If the
+callback throws, the exact caller value propagates unchanged and later items/actions do not run. The same sink
+option and behavior apply to `runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace`.
 
 `runtime_parse(...)` and its `runtime_execute(...)` alias execute default,
 AND, OR, single, optional, plus/star, and bounded families. Action and blind
@@ -869,8 +874,9 @@ edges dispatch children through `retv`; lifecycle payloads run in applicable
 `I`, `LS`, `LE`, `IT`, `EX`, `LX`, `E` order. Repetition has explicit bounds,
 zero-progress and recursion cutoffs, and `next()` advances to the next rule
 iteration. Rule-local writes are restored when a child returns. `return(...)`
-preserves false as distinct from `json.null`, while `exit_now(status)` raises a
-typed immediate runtime error. The result exposes the direct value, neutral
+preserves false as distinct from `json.null`, while `exit_now(status)` raises distinct typed `RuntimeExitNow`
+control. Catch it with `pcall`, identify it through `linkedspec.is_runtime_exit_now(error)`, and read
+`error.status`; it is not an ordinary `RuntimeInterpreterException`. The result exposes the direct value, neutral
 one-element output wrapper, byte/code-unit and character cursors, and lifecycle
 events. Helper/value breadth beyond the landed families remains owned by
 `.4.3`. That breadth is split before implementation: `.4.3.1` supplies

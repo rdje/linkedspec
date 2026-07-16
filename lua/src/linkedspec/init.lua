@@ -197,6 +197,7 @@ M.runtime_execute = interpreter.runtime_execute
 M.runtime_parse_with_trace = interpreter.runtime_parse_with_trace
 M.runtime_execute_with_trace = interpreter.runtime_execute_with_trace
 M.is_runtime_interpreter_error = interpreter.is_runtime_interpreter_error
+M.is_runtime_exit_now = interpreter.is_runtime_exit_now
 M.is_runtime_diagnostic = interpreter.is_runtime_diagnostic
 M.runtime_value_kind = interpreter.runtime_value_kind
 M.trace = trace
