@@ -34,8 +34,8 @@ environments x 61 exact stdout/stderr/file/exit/display cases.
 This admission changes no primary adapter semantics, corpus oracles,
 generated source, or capability census. Public Lua status advances from
 `runtime-corpus-full` to `runtime-corpus-primary-cli`; generated-source and
-capability admission remain `.8.1-.8.4`, while `.7.3` owns final
-CLI/native/corpus documentation no-drift.
+capability admission remain `.8.1-.8.4`. Final CLI/native/corpus documentation
+no-drift `.7.3` has since closed parent `.7` and activated scaffold `.8.1`.
 
 The canonical local CI gate independently exits 0 with its reference CLI
 legs at 61/61 under default and POSIX environments and Phase 0 at
@@ -43,4 +43,5 @@ legs at 61/61 under default and POSIX environments and Phase 0 at
 
 Related facts: [[lua-primary-cli-adapter]], [[primary-cli-four-backend-matrix]],
 [[neutral-cli-fixture-runner]], [[user-observable-backend-cli-parity-contract]],
-[[lua-full-corpus-gate]], [[lua-backend-full-parity-plan]].
+[[lua-full-corpus-gate]], [[lua-backend-full-parity-plan]],
+[[lua-primary-cli-no-drift-closeout]].

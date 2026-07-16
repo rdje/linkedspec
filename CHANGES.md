@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.7.3 — close Lua primary usage no drift
+
+Closed the Lua primary-command parent without changing implementation behavior. A current-surface audit found two
+public contradictions: the mdBook still described the historical exit-2/validation-only foundation scaffold as
+current, and `lua/README.md` deleted its caller-built native modules before the later primary/corpus examples used
+them. `git blame` traced those passages to the foundation/runtime-build boundaries that predated `.7.1-.7.2`.
+
+Public checkout guidance now keeps disposable PUC native modules alive for the whole shell behind an EXIT trap,
+exports exact `LUA_PATH`/`LUA_CPATH`, uses the tracked executable entrypoints, and states that no LuaRocks or global
+installation flow is claimed. The mdBook has one current Lua commands/embedding/status handoff, explicitly keeps
+the corpus runner separate, and retains generated Lua source as `.8.1-.8.4` rather than inflating local parity.
+
+One disposable PUC build directly proves `require("linkedspec")` status `runtime-corpus-primary-cli`, executable
+help, exact inline result `"usage-ok"`, and 105-fixture validation. Static manifest/adapter audit confirms `status`
+and `corpus` remain rejected positionals. Immediately prior proof remains 169/169 per ABI, focused 61x2, complete
+corpus 105/105, shared 5x2x61, and canonical Phase 0 `1..1031`/607s. Parent `.7` closes and generated-source
+scaffold `.8.1` activates; capability stays 64/0/0. Mutation testing was not run. The documentation-only closeout's
+canonical local CI exits 0 with reference CLI 61/61 in default and POSIX environments plus Phase 0 true reach
+`1..1031` in 608 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.7.2 — admit Lua primary CLI matrix
 
 Replaced the focused Lua command's three bespoke process smokes with the complete unchanged 61-case manifest under

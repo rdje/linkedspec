@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.7.3 — close Lua primary usage no drift**
+  (DONE — exact checkout usage and limitations align; parent `.7` closes and generated-source `.8.1` is next).
+
+  **Result:** Corrected stale mdBook exit-2/validation-only scaffold prose and a Lua README sequence that removed
+  native modules before later commands used them. Checkout guidance now retains a caller-built PUC adapter behind
+  an EXIT trap, exports exact module paths, uses tracked executables, claims no LuaRocks/global install, keeps the
+  corpus runner separate, and names generated source as the remaining `.8` boundary. A disposable direct probe
+  loads `runtime-corpus-primary-cli`, runs help and exact inline parsing, and validates 105 fixtures; `status` and
+  `corpus` remain rejected primary positionals. No behavior changes. Immediately prior exact proof is 169/169 per
+  ABI, focused 61x2, corpus 105/105, shared 5x2x61, and canonical Phase 0 `1..1031`/607s.
+
+  **Proof:** The checkout-local probe and static ownership audit pass exactly as recorded above. Canonical local CI
+  exits 0 with reference CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in 608
+  seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.7.2 — admit Lua primary CLI matrix**
   (DONE — focused 61x2 and warmed five-backend 5x2x61 are recurring; final no-drift `.7.3` is next).
 

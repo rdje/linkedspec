@@ -1020,7 +1020,8 @@ validation-only default use and exits 0/1/2 for pass/fixture/validation outcomes
 `runtime-corpus-full` at 167/167 per ABI. Parent `.6` closes. Primary adapter `.7.1` now implements exact ADR
 `0023` argument/UTF-8/native-execution/canonical-JSON/failure/phase-trace behavior at 169/169 per ABI and diagnostic
 shared CLI 61x2. Admission `.7.2` makes both process legs recurring, extends the shared matrix to 5x2x61, and
-advances status to `runtime-corpus-primary-cli`; final CLI/native/corpus no-drift `.7.3` is active.
+advances status to `runtime-corpus-primary-cli`. Final CLI/native/corpus no-drift `.7.3` closes parent `.7` and
+activates generated-source scaffold `.8.1`.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

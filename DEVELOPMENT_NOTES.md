@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.7.3` — checkout usability includes native-module lifetime): An executable Lua
+  script can locate repository Lua source, but it cannot load `linkedspec_filesystem_native` or
+  `linkedspec_regex_pcre2` after the caller deletes their build directory. Manual documentation must therefore
+  treat the disposable PUC build, `LUA_CPATH`, and cleanup trap as one session-scoped unit spanning embedding,
+  primary CLI, and corpus commands. The repo deliberately has no LuaRocks/global-install dependency. Historical
+  scaffold prose must say historical: the primary now passes recurring 61x2 and the separate runner executes
+  105/105. Static manifest ownership continues to reject `status`/`corpus` on the primary command. This is public
+  no-drift only; generated-source scaffold `.8.1` follows after parent `.7` closes.
+  Canonical local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in 608 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.7.2` — admit one existing contract, not a Lua-specific matrix): The neutral
   runner already owns workspace isolation, raw concurrent channel capture, exact files/exits, and display-command
   substitution. The focused Lua gate should invoke it twice after the one PUC native build rather than retain

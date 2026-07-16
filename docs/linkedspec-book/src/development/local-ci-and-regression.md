@@ -75,6 +75,11 @@ environments x 61 cases; only the executable command token changes. `FUTURE-PARI
 the four-backend boundary; `LUA-BACKEND-PARITY.7.2` extends the same recurring proof to every current primary
 command.
 
+The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
+gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at
+1,031/1,031 in 608 seconds; the immediately preceding recurring Lua proof remains 169/169 per ABI, focused 61x2,
+complete corpus 105/105, and shared matrix 5x2x61.
+
 The core gate remains toolchain-independent by default. On a machine with all backends installed, include the
 matrix explicitly:
 
@@ -243,7 +248,8 @@ continuation after failures. The developer corpus command validates by default a
 only when passed bare `--execute`. Primary adapter `.7.1` independently implements exact options, strict UTF-8,
 native execution/canonical JSON, stable failures/exits, and canonical phase trace. Admission `.7.2` makes both
 61-case process legs recurring here and extends the warmed matrix to 5x2x61. Status is
-`runtime-corpus-primary-cli`; final no-drift `.7.3` is active.
+`runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`, confirms the checkout-native setup plus separate
+corpus/primary boundaries, and activates generated-source scaffold `.8.1` without changing behavior.
 The `.7.1` adapter passes the canonical local gate without recurring Lua admission: both reference CLI
 environments remain 61/61 and Phase 0 reaches `1..1031` in 606 seconds.
 Admission `.7.2` independently passes the canonical local gate with the same reference CLI legs at 61/61 and

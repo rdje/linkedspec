@@ -98,7 +98,8 @@ library and developer runner. Both report 105 passes/zero failures, both ABI sui
 `runtime-corpus-full`, and parent `.6` closes. Primary adapter `.7.1` now implements the exact ADR `0023` command
 over those native APIs: both ABI suites pass 169/169. Admission `.7.2` now runs the unchanged shared process proof
 at 61/61 in default and POSIX environments from the focused gate and extends the warmed matrix to 5x2x61. Public
-status is `runtime-corpus-primary-cli`; final no-drift `.7.3` is active.
+status is `runtime-corpus-primary-cli`; final no-drift `.7.3` closes parent `.7`, and generated-source scaffold
+`.8.1` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -334,8 +335,8 @@ first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` 
 59-name/endpoint ledger and every unchanged wrapped output at 166/166 per ABI. Final `.6.3` runs the complete
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
 implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
-extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and final no-drift `.7.3` is active.
-Generated Lua preservation/execution remains `.8.1-.8.4`.
+extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drift `.7.3` closes parent `.7`.
+Generated Lua preservation/execution remains `.8.1-.8.4`, with scaffold `.8.1` active.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -400,30 +401,34 @@ bash tools/run_lua_local.sh
 
 The gate builds separate PUC Lua and LuaJIT PCRE2 modules into one disposable
 `/private/tmp/linkedspec-lua-native.*` directory and removes it on exit. To load
-the native module manually for PUC Lua, build into caller-owned storage and
-provide both module paths:
+the native module or either repository command manually for PUC Lua, build into
+caller-owned storage, retain it for the whole shell session, and provide both
+module paths:
 
 ```bash
 native_dir=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
+trap 'rm -rf "$native_dir"' EXIT
 bash tools/build_lua_native.sh puc "$native_dir"
-LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;" \
-LUA_CPATH="$native_dir/?.so;;" \
-  lua -e 'local linkedspec = require("linkedspec"); print(linkedspec.backend_name())'
-rm -rf "$native_dir"
+export LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;"
+export LUA_CPATH="$native_dir/?.so;;"
+lua -e 'local linkedspec = require("linkedspec"); print(linkedspec.backend_name())'
 ```
 
 The backend has no LuaRocks or global Lua package dependency. Runtime matching
 requires a C compiler, `pkg-config`, PCRE2 headers/library, and Lua development
-headers for the selected ABI.
+headers for the selected ABI. There is not yet a LuaRocks or system-wide
+installation flow: the tracked commands are executable checkout entrypoints,
+they locate `lua/src` themselves, and they consume the caller-built modules
+through `LUA_CPATH`. The shell `trap` above removes those modules on exit.
 
 The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
 positionals:
 
 ```bash
-lua lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
-lua lua/bin/linkedspec-lua \
+lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
+lua/bin/linkedspec-lua \
   --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
-lua lua/bin/linkedspec-lua \
+lua/bin/linkedspec-lua \
   --inline-spec $'Top::\n /x/' --input x \
   --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
 ```
@@ -439,13 +444,13 @@ and the warmed cross-backend matrix passes 5x2x61. Public status is `runtime-cor
 Validate the checked-in corpus without executing it:
 
 ```bash
-lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
+lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
 ```
 
 Execute all 105 fixtures through the same native in-memory library path:
 
 ```bash
-lua lua/bin/corpus_runner.lua \
+lua/bin/corpus_runner.lua \
   --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
@@ -679,7 +684,7 @@ Registered keyword arguments diagnose as
 closed before body execution. Variadic signatures and declared contextual final codeblocks
 now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
 full corpus execution, and the thin primary CLI adapter are implemented; generated Lua remains the separate `.8`
-layer, while final CLI/native/corpus no-drift is `.7.3`.
+layer, and scaffold `.8.1` is the active next leaf after CLI/native/corpus no-drift `.7.3` closes parent `.7`.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

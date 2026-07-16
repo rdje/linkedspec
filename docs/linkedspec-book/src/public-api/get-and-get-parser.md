@@ -242,6 +242,9 @@ Both paths feed the same compiled/runtime API.
 ### Lua named/file example
 
 Lua exposes the progressive stages and complete composition from `require("linkedspec")`:
+Repository-checkout use first needs the caller-owned `LUA_PATH`/`LUA_CPATH`
+setup documented under
+[Lua primary parser command](native-spec-loading.md#lua-primary-parser-command).
 
 ```lua
 local linkedspec = require("linkedspec")

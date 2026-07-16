@@ -5,12 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua primary no-drift `.7.3` confirms the native module, exact primary process contract,
+  separate corpus adapter, checkout-local executable/native-module setup, public limitations, and recurring gates
+  agree at `runtime-corpus-primary-cli`. It corrects stale mdBook foundation prose and a command setup that cleaned
+  native adapters before later examples used them. Parent `.7` closes without runtime change; generated-source
+  scaffold `.8.1` activates while census 64/0/0 remains unchanged.
 - `2026-07-15` refresh: Lua primary admission `.7.2` replaces the focused command smoke with both unchanged
   61-case option environments and adds PUC Lua to the shared warmed matrix. The matrix builds its native adapters
   under caller-owned temporary storage, removes them on exit, and passes 5 backends x 2 environments x 61 exact
   cases. PUC Lua and LuaJIT remain 169/169, complete corpus execution remains 105/105, public status advances to
-  `runtime-corpus-primary-cli`, and final CLI/native/corpus no-drift `.7.3` is active. Generated source and the
-  four-backend capability census 64/0/0 remain unchanged.
+  `runtime-corpus-primary-cli`; final CLI/native/corpus no-drift `.7.3` has since closed parent `.7`. Generated
+  source and the four-backend capability census 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua primary adapter `.7.1` replaces the exit-2 scaffold with a thin native-library command.
   `primary_cli.lua` owns only exact ADR `0023` options, strict UTF-8 process/file IO, phase ordering and headings,
   canonical JSON framing, and ADR `0024`'s deterministic independent phase trace. Named/file/inline semantics reuse

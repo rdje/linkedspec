@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua primary admission `.7.2` makes shared CLI 61x2 recurring and extends the matrix
-  to 5x2x61; final no-drift `.7.3` is active while diagnostic `.5.1` and logical `.5.2` remain dependency-gated).
+- Last updated: `2026-07-15` (Lua primary no-drift `.7.3` closes parent `.7` at exact native/61x2/105 checkout
+  usage and gate alignment; generated-source scaffold `.8.1` is active while diagnostic `.5.1` and logical `.5.2`
+  remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4717,7 +4718,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 156 | `FUTURE-PARITY-BACKLOG.16.5` | `done` | Julia aliases and native/generated/emitted/CLI paths are exact; helper drift is delegated to `.5`. |
 | 157 | `FUTURE-PARITY-BACKLOG.16.6` | `done` | Lua aliases, final-only receiver narrowing, serialized spec state, and 109x2 native paths are exact. |
 | 158 | `FUTURE-PARITY-BACKLOG.16.7` | `done` | Admitted at 64/0/0 with a recurring five-backend/two-Lua-ABI proof and honest generated routing. |
-| 159 | `LUA-BACKEND-PARITY.4.3.7` | `active` | Implement capture-slice, named-mark, input, and explicit cursor-state helpers. |
+| 159 | `LUA-BACKEND-PARITY.4.3.7` | `done` | Exact 62-call/four-marker native capture/cursor family is closed at 121/121 per ABI. |
 | 160 | `FUTURE-PARITY-BACKLOG.17.0` | `done` | Classified 16 differences and split the exact seven-helper public parity/gate correction. |
 | 161 | `LUA-BACKEND-PARITY.4.3.7.1` | `done` | Unicode input/live-cursor views and explicit controls pass 115/115 on both ABIs. |
 | 162 | `LUA-BACKEND-PARITY.4.3.7.2` | `done` | All 16 anonymous capture calls pass 116/116 over one byte-safe state seam. |
@@ -4745,6 +4746,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 184 | `FUTURE-PARITY-BACKLOG.20.0` | `done` | ADR 0039 governs explicit milestone-scoped Rust mutation testing; list-only baseline 3,333, no run. |
 | 185 | `FUTURE-PARITY-BACKLOG.21.0` | `done` | ADR 0040 governs one neutral mdBook plus five linked non-normative implementation companions; no scaffold yet. |
 | 186 | `FUTURE-PARITY-BACKLOG.21.1` | `pending` / dependency-gated | Run the companion inventory/scaffold/population program only after current backend parity. |
+| 187 | `LUA-BACKEND-PARITY.7.3` | `done` | Exact primary/native/corpus usage and gate no-drift closes parent `.7`. |
+| 188 | `LUA-BACKEND-PARITY.8.1` | `active` | Build the deterministic contract-v1 Lua emitter scaffold and isolated load/run proof. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |

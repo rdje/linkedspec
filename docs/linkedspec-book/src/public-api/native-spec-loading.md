@@ -21,6 +21,10 @@ non-file kind, the first such candidate is reported as `spec_path_not_file`.
 ## Lua API
 
 The Lua backend exposes the file-oriented stages directly from `require("linkedspec")`:
+When running from a repository checkout, first prepare the caller-owned
+`LUA_PATH`/`LUA_CPATH` session shown under
+[Lua primary parser command](#lua-primary-parser-command); the native modules
+are not installed globally.
 
 ```lua
 local linkedspec = require("linkedspec")
@@ -126,8 +130,9 @@ loaded top-level-function execution, named versus exact-path engine identity, ru
 missing-name JSON, and separate parse/validation/compile failure ownership. Full trace composition additionally
 proves one emitter identity, exact ordered phase/rule topics, routed sinks, level filtering, balanced attributed
 failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. That trace milestone passes
-155/155. Complete interpreter-corpus admission has since raised the current suite to 167/167 on both runtimes with
-status `runtime-corpus-full`.
+155/155. Complete interpreter-corpus admission raised the suite to 167/167 on both runtimes with status
+`runtime-corpus-full` at the `.6.3` boundary; primary CLI work subsequently raises the current suite to 169/169
+and status `runtime-corpus-primary-cli`.
 
 ## Lua primary parser command
 
@@ -136,10 +141,23 @@ and typed JSON APIs documented above. It accepts exactly ADR `0023`'s source/inp
 no subcommands or positional arguments:
 
 ```bash
-lua lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
-lua lua/bin/linkedspec-lua \
+# Run from the repository root. Keep this caller-owned native directory alive
+# for every module, primary-command, and corpus command in the shell.
+native_dir=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
+trap 'rm -rf "$native_dir"' EXIT
+bash tools/build_lua_native.sh puc "$native_dir"
+export LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;"
+export LUA_CPATH="$native_dir/?.so;;"
+
+lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
+lua/bin/linkedspec-lua \
   --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
 ```
+
+The checkout commands are tracked executables and locate `lua/src` themselves;
+`LUA_PATH` also enables direct `require("linkedspec")` embedding. Native PCRE2
+and filesystem modules are not installed globally, so every command needs the
+caller-built `LUA_CPATH` above. There is no LuaRocks installation dependency.
 
 Source, input, arguments, JSON, help/errors, and canonical trace are strict preserved UTF-8. Success emits one
 recursively key-sorted JSON value plus one newline and exits 0; compilation/input/invocation failures emit one
@@ -147,8 +165,8 @@ stable phase heading and exit 1; usage exits 2. CLI trace is ADR `0024`'s portab
 native emitter stream. Relative paths use the actual process cwd queried through the narrow filesystem adapter,
 so no shell, subprocess, or environment option parser owns semantics. PUC Lua and LuaJIT pass 169/169, and the
 unchanged shared process manifest now passes recurring 61/61 runs in default and POSIX environments. The warmed
-cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli` and final no-drift `.7.3` is
-active.
+cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli`, no-drift `.7.3` closes parent
+`.7`, and generated-source scaffold `.8.1` is active.
 
 ## Lua automatic function parsing
 
@@ -231,7 +249,7 @@ errors remain caller errors because no valid execution set exists. Query with `c
 The developer `lua/bin/corpus_runner.lua` validates only by default:
 
 ```bash
-lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
+lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
 ```
 
 Bare `--execute` runs the complete validated manifest through the same native in-memory API, prints each ordered
@@ -239,7 +257,7 @@ PASS/FAIL result and an exact pass/fail summary, and returns 0 for all-pass, 1 f
 arguments and manifest drift:
 
 ```bash
-lua lua/bin/corpus_runner.lua \
+lua/bin/corpus_runner.lua \
   --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 

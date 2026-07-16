@@ -174,7 +174,7 @@ at 166/166 per ABI. Complete-manifest `.6.3` then passes one ordered 105/105 lib
 `0023` options, strict UTF-8/native execution/canonical JSON, stable failures/exits, and canonical phase trace at
 169/169 per ABI plus diagnostic shared CLI 61x2. Admission `.7.2` now makes both Lua process legs recurring and
 extends the warmed shared matrix to 5x2x61. Public status is `runtime-corpus-primary-cli`; final no-drift `.7.3`
-is active.
+closes parent `.7` and activates generated-source scaffold `.8.1`.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

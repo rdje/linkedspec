@@ -387,7 +387,8 @@ locks success/fixture/manifest exits 0/1/2. Both ABI suites pass 167/167 with st
 `.6` closes. Primary parser adapter `.7.1` now implements exact ADR `0023` options, strict UTF-8, native execution,
 canonical JSON, stable phases/exits, and the independent canonical phase trace at 169/169 per ABI plus diagnostic
 shared CLI 61x2. Admission `.7.2` now makes both process legs recurring and extends the matrix to 5x2x61. Status is
-`runtime-corpus-primary-cli`, final no-drift `.7.3` is active, and the census stays 64/0/0 until `.8.4`.
+`runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`, generated-source scaffold `.8.1` is active, and
+the census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -599,9 +600,39 @@ tries rule-only parsing first and falls back only after a source parse error. Al
 `.6.3` then locks complete manifest validation plus ordered execution at 99/99 exact outputs and enables unbounded
 CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` has since added focused
 optional-SDK verification, and `.7.1` owns public documentation closeout.
+
+### Lua Backend Commands, Embedding, and Status
+
+Lua's current native boundary is `runtime-corpus-primary-cli`: PUC Lua 5.4 is
+the primary runtime, LuaJIT is the secondary ABI, both pass 169/169 native
+tests, the focused primary command passes 61/61 under default and POSIX option
+environments, and the complete corpus passes 105/105. The warmed shared matrix
+passes the same command contract at 5 backends x 2 environments x 61 cases.
+
+From the repository root, run the complete checkout-local proof with:
+
+```bash
+bash tools/run_lua_local.sh
+```
+
+For direct embedding, primary-command, and corpus examples, first build the
+PUC native PCRE2/filesystem adapters into caller-owned temporary storage and
+export `LUA_PATH` plus `LUA_CPATH` for the entire shell session. The complete,
+copyable setup and cleanup sequence is in
+[Native Spec Loading](../public-api/native-spec-loading.md#lua-primary-parser-command).
+There is no LuaRocks or system-wide installation dependency; the tracked
+checkout commands are executable, and native modules are never installed
+globally.
+
+The primary command has no corpus/status subcommands or backend-only options;
+the developer corpus runner remains separate. Generated Lua source is the
+explicit remaining limitation. Scaffold/isolation `.8.1`, exact ten-family
+execution `.8.2`, contract-sourced 8/105 admission `.8.3`, and final census/
+handoff `.8.4` own that work in order.
+
 The Lua backend now has a dedicated full-parity plan. PUC Lua 5.4 is the primary
-conformance runtime; LuaJIT is a secondary compatibility leg. The first active
-leaf locks package/test/cache policy before code. The plan owns a native
+conformance runtime; LuaJIT is a secondary compatibility leg. The rollout began
+by locking package/test/cache policy before code. The plan owns a native
 in-process module, `linkedspec-lua` with the exact shared command interface,
 typed source/ActionIR/compiled state, four value kinds, generic final-codeblock
 equivalence, regex/match-state proof, staged functions, diagnostics/trace,
@@ -616,16 +647,14 @@ The foundation policy uses `lua/src/linkedspec/`, a dependency-free
 required: corpus IO now uses a small pure-Lua codec with explicit null,
 array, and harray identity plus canonical object ordering. LPeg remains outside
 the scaffold dependency set. Any future LuaRocks tree must be caller-owned
-under temporary storage and recursively removed. The native scaffold is now
-implemented: `require("linkedspec")` returns exact backend/status/entrypoint
-identity, and the primary command fails explicitly with exit `2` rather than
-pretending parser behavior exists. The developer corpus command validates all
-105 manifest fixtures—the exact directory set, required source/input/expected
-files, strict UTF-8, and typed expected JSON—while explicitly declining parser
-execution. Unicode is the character/code-point model; strict UTF-8 is the
-selected byte encoding at this persisted boundary, and UTF-16/UTF-32 are not
-auto-detected. `tools/run_lua_local.sh` passes 10/10 tests on PUC Lua and 10/10
-on LuaJIT at the corpus boundary. The next completed layer adds data-only source
+under temporary storage and recursively removed. At the historical foundation
+boundary, `require("linkedspec")` returned exact backend/status/entrypoint
+identity, the still-unimplemented primary scaffold intentionally exited `2`,
+and the developer corpus command only validated the 105-fixture manifest. That
+10/10-per-ABI boundary did not claim parser execution; the current command,
+corpus, and 169/169 proof above supersede it. Unicode is the character/code-point
+model; strict UTF-8 is the selected byte encoding, and UTF-16/UTF-32 are not
+auto-detected. The next historical layer added data-only source
 ASTs for specs, functions, ordinary/staged spans, staged parse jobs, rules,
 simple/bounded modes, all ten body variants, targets, and fluent calls. Private
 node identities and typed JSON projection prevent arrays, harrays, and
