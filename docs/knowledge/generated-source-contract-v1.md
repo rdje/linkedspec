@@ -28,6 +28,7 @@ evidence_update_2026_07_16_lua_scaffold_split: "LUA-BACKEND-PARITY.8.1.0 correct
 evidence_update_2026_07_16_lua_emitter_core: "LUA-BACKEND-PARITY.8.1.1 adds Lua compatibility/source-identified emitters, exact v1 metadata and portable error stages/codes, deterministic effective fixed-v1/variadic-v2/final-codeblock-v3 SpecFile reconstruction, canonical strict-UTF-8 JSON/source-identity ASCII hex, and generated direct/traced result roles. Focused PUC Lua and LuaJIT gates pass 172/172; canonical reference CLI is 61x2 and Phase 0 is 1031/1031 in 620 seconds. Fresh-process isolation, plan families, subset proof, and census remain .8.1.2-.8.4."
 evidence_update_2026_07_16_lua_isolation: "LUA-BACKEND-PARITY.8.1.2 persists valid/corrupt generated Lua plus a host runner in unique caller-owned temporary storage, launches the exact PUC Lua or LuaJIT ABI runtime/native paths in fresh processes, captures exact metadata/result/trace/failure observations, and proves cleanup after normal and injected-failure paths. Lua passes 173/173 per ABI and canonical Phase 0 1031/1031 in 607 seconds. Family plan/trace remains .8.2."
 evidence_update_2026_07_16_lua_family_plan: "LUA-BACKEND-PARITY.8.2 adds exact typed ten-family ordered plans, row-count/label/family/unknown-family rejections, authoritative root/nested regex-versus-blind dispatch, portable enter/decision/exit trace, one isolated 26-row all-family module, and emitted neutral variadic execution. The exact seven explicit repetition mode names avoid Lua's broader native default-scanning repetition flag. Lua passes 176/176 per ABI and canonical Phase 0 1031/1031 in 626 seconds; subset admission remains .8.3."
+evidence_update_2026_07_16_lua_subset: "LUA-BACKEND-PARITY.8.3 adds corpus_proof.lua_accepted_subset_test and checker ownership for exact count/order/full-manifest/interpreter-first/load/metadata/plan/trace/cleanup/unconditional registration. Lua consumes all eight contract names directly and loads their emitted modules in fresh exact PUC Lua/LuaJIT hosts with fixed user-function execution. Both ABIs pass 177/177 and canonical Phase 0 1031/1031 in 620 seconds; sole census admission remains .8.4."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -50,9 +51,9 @@ The v1 contract requires:
 - interpreter-first comparison against a shared manifest subset.
 
 The accepted initial subset is the same eight fixtures already used by Rust's
-generated-source test. Rust must additionally expand to all 105 interpreter
-fixtures under `.3.2`; new Dart and Julia emitters must prove the subset plus
-all generated families. The interpreter corpus remains the primary oracle.
+generated-source test. Rust additionally expands to all 105 interpreter
+fixtures; Dart, Julia, and Lua prove the subset plus all generated families.
+The interpreter corpus remains the primary oracle.
 
 Generated-source v1 is deliberately a semantic contract, not an optimization claim. A future optional native
 accelerator may build on its normalized state, source identity, independent loading, trace roles, and dynamic-oracle
@@ -69,6 +70,12 @@ structural-family routing, and portable generated trace roles. `.3.3.3`
 completes manifest-backed admission: the contract checker locks its path/count/
 order/host proof/trace/cleanup/no-skip properties, and Dart passes.
 
+Julia and Lua likewise consume the exact contract list and prove interpreter
+values before emission. Lua's `.8.3` checker-owned path validates all 105
+fixtures first and locks fresh PUC Lua/LuaJIT load, exact metadata/plans/trace
+identity, fixed user-function execution, cleanup, and unconditional
+registration. Lua census admission remains `.8.4`.
+
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],
 [[rust-generated-source-contract-v1-gap]],
@@ -80,5 +87,6 @@ Related facts: [[generated-source-parity-audit]],
 [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-family-plan]],
+[[lua-generated-source-accepted-subset]],
 [[optional-native-parser-acceleration]],
 [[user-observable-backend-cli-parity-contract]].

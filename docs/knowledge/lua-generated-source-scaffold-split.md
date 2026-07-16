@@ -11,7 +11,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [lua, generated-source, source-emitter, callable-signature, codeblock, isolation, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.8.1.0 root-causes stale v1/v2-only wording: the leaf was drafted on 2026-07-11/12, while ADR 0041 and final_codeblock_v3 landed on 2026-07-15. LUA-BACKEND-PARITY.8.1.1 implements the mapped seam in source_emitter.lua: exact function_registry.entries plus compiled_rule_order reconstruct one typed effective SpecFile, canonical strict-UTF-8 JSON and source identity render as ASCII hex, and generated native Lua exposes metadata plus direct/traced result roles with portable errors. LUA-BACKEND-PARITY.8.1.2 closes fresh-process PUC/LuaJIT valid/corrupt load-run-cleanup. Parent .8.1 closes at 173/173 per ABI; LUA-BACKEND-PARITY.8.2 adds exact family plan/execution/trace and raises both ABIs to 176/176."
+evidence: "LUA-BACKEND-PARITY.8.1.0 root-causes stale v1/v2-only wording: the leaf was drafted on 2026-07-11/12, while ADR 0041 and final_codeblock_v3 landed on 2026-07-15. LUA-BACKEND-PARITY.8.1.1 implements the mapped seam in source_emitter.lua: exact function_registry.entries plus compiled_rule_order reconstruct one typed effective SpecFile, canonical strict-UTF-8 JSON and source identity render as ASCII hex, and generated native Lua exposes metadata plus direct/traced result roles with portable errors. LUA-BACKEND-PARITY.8.1.2 closes fresh-process PUC/LuaJIT valid/corrupt load-run-cleanup. Parent .8.1 closes at 173/173 per ABI; .8.2 adds exact family plan/execution/trace at 176/176; .8.3 adds contract-ordered interpreter-first 8/105 fresh-host proof at 177/177."
 reverify: "git blame -L 2781,2787 docs/tasks/LUA-BACKEND-PARITY.md; git log -S'final_codeblock_v3' --oneline -- capability_conformance/outward_descriptor_contract.json; python3 tools/check_callable_signature_contract.py; python3 tools/check_callable_codeblock_contract.py; perl tools/check_generated_source_contract.pl; rg -n '8.1.0|8.1.1|8.1.2|final-codeblock-v3|ASCII hex' docs/tasks/LUA-BACKEND-PARITY.md docs/linkedspec-book/src/appendix/backend-handoff.md"
 ---
 
@@ -49,11 +49,13 @@ The dependency order is intentionally narrow:
 Both `.8.1` children are complete: the first owns emitted-state construction,
 and the second proves the persisted artifact boundary without adding plan or
 family semantics. Parent `.8.1` is closed; `.8.2` has since added exact
-authoritative family execution, and `.8.3` is the active frontier.
+authoritative family execution, `.8.3` has closed exact contract-sourced 8/105
+fresh-host proof, and sole census/handoff `.8.4` is the active frontier.
 
 Implementation details and exact public roles: [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]].
-See also [[lua-generated-source-family-plan]].
+See also [[lua-generated-source-family-plan]],
+[[lua-generated-source-accepted-subset]].
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-outward-function-descriptor-union]], [[lua-final-codeblock-metadata]],

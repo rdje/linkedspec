@@ -53,10 +53,11 @@ exact trace and cleanup. The neutral callable-signature fixture also survives
 emission and executes mixed/empty fresh typed rest arrays; no host vararg
 semantics are introduced.
 
-Exact contract-sourced interpreter-first 8/105 admission remains `.8.3`, and
-sole census admission remains `.8.4`.
+Exact contract-sourced interpreter-first 8/105 admission is closed under
+`.8.3`, and sole census admission remains `.8.4`.
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-generated-source-emitter-core]],
+[[lua-generated-source-accepted-subset]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-scaffold-split]], [[lua-backend-full-parity-plan]].

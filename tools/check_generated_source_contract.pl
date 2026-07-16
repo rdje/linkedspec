@@ -220,6 +220,7 @@ for my $index (0 .. $#{$contract->{behavior_cases}}) {
 require_keys(
  'corpus_proof', $contract->{corpus_proof},
  [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset dart_accepted_subset_test julia_accepted_subset_test
+     lua_accepted_subset_test
      rust_breadth_target rust_full_manifest_test new_backend_admission_target)], []
 );
 my $manifest_path = repo_path('corpus_proof.interpreter_manifest', $contract->{corpus_proof}{interpreter_manifest});
@@ -291,6 +292,37 @@ fail('Julia accepted-subset test must prove portable trace roles and source iden
 fail('Julia accepted-subset test must clean its caller-owned project recursively')
  unless $julia_accepted_subset_text =~ /rm\(scratch;\s*recursive\s*=\s*true,\s*force\s*=\s*true\)/;
 fail('Julia accepted-subset test must not be skipped') if $julia_accepted_subset_text =~ /skip\s*=/;
+my $lua_accepted_subset_test = repo_path(
+ 'corpus_proof.lua_accepted_subset_test', $contract->{corpus_proof}{lua_accepted_subset_test}
+);
+fail('corpus_proof.lua_accepted_subset_test must be a regular file') unless -f $lua_accepted_subset_test;
+my $lua_accepted_subset_text = decode('UTF-8', read_bytes($lua_accepted_subset_test), FB_CROAK | LEAVE_SRC);
+fail('Lua accepted-subset test must lock the eight-case count')
+ unless $lua_accepted_subset_text =~ /LUA_GENERATED_SOURCE_ACCEPTED_SUBSET_COUNT\s*=\s*8/;
+fail('Lua accepted-subset test must consume the executable contract list in order')
+ unless $lua_accepted_subset_text =~ /generated_source_contract\.json/ &&
+        $lua_accepted_subset_text =~ /contract\.corpus_proof\.accepted_subset/ &&
+        $lua_accepted_subset_text =~ /ipairs\(accepted_subset\)/;
+fail('Lua accepted-subset test must validate the complete manifest before selection')
+ unless $lua_accepted_subset_text =~ /load_corpus_fixtures\(corpus_root\)/;
+fail('Lua accepted-subset test must compare the interpreter before emission')
+ unless $lua_accepted_subset_text =~ /local interpreter_value\s*=.*?runtime_parse.*?fixture\.expected_json.*?emit_lua_source_v1\(compiled, identity\)/s;
+fail('Lua accepted-subset test must independently load and run generated modules')
+ unless $lua_accepted_subset_text =~ /loadfile\(case\.path\)/ &&
+        $lua_accepted_subset_text =~ /run_generated_lua_host/;
+fail('Lua accepted-subset test must prove exact metadata and plans')
+ unless $lua_accepted_subset_text =~ /generated_source_metadata_to_json/ &&
+        $lua_accepted_subset_text =~ /generated_plan_row_to_json/;
+fail('Lua accepted-subset test must prove portable trace roles and source identity')
+ unless $lua_accepted_subset_text =~ /generated_rule_enter/ &&
+        $lua_accepted_subset_text =~ /generated_family_decision/ &&
+        $lua_accepted_subset_text =~ /generated_rule_exit/ &&
+        $lua_accepted_subset_text =~ m{generated-source/lua-subset};
+fail('Lua accepted-subset test must use caller-owned recursive cleanup')
+ unless $lua_accepted_subset_text =~ /with_temp_directory\(function\(root\)/ &&
+        $lua_accepted_subset_text =~ /linkedspec-lua-generated-subset/;
+fail('Lua accepted-subset test must be registered unconditionally')
+ unless $lua_accepted_subset_text =~ /test\("generated Lua source matches the contract accepted manifest subset"/;
 my $rust_full_manifest_test = repo_path(
  'corpus_proof.rust_full_manifest_test', $contract->{corpus_proof}{rust_full_manifest_test}
 );
@@ -332,6 +364,6 @@ for my $capability (@{$capability_manifest->{capabilities} || []}) {
  }
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart/Julia %d/105 + strict Rust 105/105; census states %d/%d/%d)\n",
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart/Julia/Lua %d/105 + strict Rust 105/105; census states %d/%d/%d)\n",
  scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset),
  @census{qw(pass partial gap)};

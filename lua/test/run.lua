@@ -43,6 +43,8 @@ local json = linkedspec.json
 local ast = linkedspec.spec_ast
 local scalar_numeric = require("linkedspec.scalar_numeric")
 
+local LUA_GENERATED_SOURCE_ACCEPTED_SUBSET_COUNT = 8
+
 local function shell_quote(value)
   return "'" .. value:gsub("'", "'\\''") .. "'"
 end
@@ -4797,6 +4799,147 @@ test("generated Lua all-family matrix loads and executes in fresh dual ABI hosts
     assert_equal(stderr, "", "fresh family host stderr")
   end, "linkedspec-lua-generated-families")
   assert_equal(directory_exists(cleaned_root), false, "fresh family host cleanup")
+end)
+
+local function generated_subset_host_runner()
+  return [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local subset_path = assert(arg[1], "generated subset path is required")
+local subset_file = assert(io.open(subset_path, "rb"))
+local subset = json.decode(assert(subset_file:read("*a")))
+assert(subset_file:close())
+local observations = json.harray({
+  names = json.array(),
+  values = json.harray(),
+  metadata = json.harray(),
+  plans = json.harray(),
+})
+
+for index, case in ipairs(subset.cases) do
+  local chunk, load_error = loadfile(case.path)
+  if chunk == nil then error(load_error, 0) end
+  local generated = chunk()
+  local plan = generated.plan()
+  generated.validate_plan(plan)
+  local metadata = linkedspec.generated_source_metadata_to_json(generated.metadata())
+  local plan_json = json.array()
+  for row_index, row in ipairs(plan) do
+    plan_json[row_index] = linkedspec.generated_plan_row_to_json(row)
+  end
+  local value = generated.execute(case.input)
+  assert(json.encode(value) == json.encode(case.expected), "generated subset value drift: " .. case.name)
+  assert(json.encode(metadata) == json.encode(case.metadata), "generated subset metadata drift: " .. case.name)
+  assert(json.encode(plan_json) == json.encode(case.plan), "generated subset plan drift: " .. case.name)
+
+  observations.names[index] = case.name
+  observations.values[case.name] = value
+  observations.metadata[case.name] = metadata
+  observations.plans[case.name] = plan_json
+
+  if index == 1 then
+    local trace_output = {}
+    local traced = generated.execute_with_trace(
+      case.input,
+      linkedspec.trace_config_enabled(linkedspec.TRACE_LOW),
+      { stdout_writer = function(payload) trace_output[#trace_output + 1] = payload end }
+    )
+    assert(json.encode(traced) == json.encode(case.expected), "generated subset traced value drift")
+    local trace = table.concat(trace_output)
+    assert(trace:find("generated_rule_enter", 1, true), "generated subset enter trace is missing")
+    assert(trace:find("generated_family_decision", 1, true), "generated subset decision trace is missing")
+    assert(trace:find("generated_rule_exit", 1, true), "generated subset exit trace is missing")
+    assert(trace:find("source_identity=" .. case.identity, 1, true), "generated subset identity trace is missing")
+  end
+end
+
+io.write(json.encode(observations), "\n")
+]]
+end
+
+test("generated Lua source matches the contract accepted manifest subset", function()
+  local runtime = os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME")
+  if runtime == nil or runtime == "" then
+    runtime = type(jit) == "table" and "luajit" or "lua"
+  end
+  local contract = json.decode(read_file("capability_conformance/generated_source_contract.json"))
+  local accepted_subset = contract.corpus_proof.accepted_subset
+  assert_equal(
+    #accepted_subset,
+    LUA_GENERATED_SOURCE_ACCEPTED_SUBSET_COUNT,
+    "generated subset contract count"
+  )
+  local corpus_root = "rust/linkedspec-runtime/tests/corpus"
+  local validation = linkedspec.load_corpus_fixtures(corpus_root)
+  local fixtures = {}
+  for _, fixture in ipairs(validation.fixtures) do fixtures[fixture.name] = fixture end
+
+  local cleaned_root = with_temp_directory(function(root)
+    local expected_observations = json.harray({
+      names = json.array(),
+      values = json.harray(),
+      metadata = json.harray(),
+      plans = json.harray(),
+    })
+    local subset_cases = json.array()
+    for index, case_name in ipairs(accepted_subset) do
+      local fixture = fixtures[case_name]
+      if fixture == nil then fail("generated subset fixture is absent from validated manifest: " .. case_name) end
+      local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(fixture.spec_source)
+      linkedspec.validate_spec(parsed)
+      local compiled = linkedspec.compile_spec(parsed, { validate_source = false })
+      local interpreter_value = linkedspec.runtime_parse(
+        linkedspec.runtime_engine(compiled),
+        fixture.input_text
+      ).value
+      assert_equal(
+        json.encode(interpreter_value),
+        json.encode(fixture.expected_json),
+        case_name .. " interpreter value"
+      )
+
+      local identity = "generated-source/lua-subset/" .. case_name .. ".spec"
+      local generated_path = root .. "/case_" .. index .. ".lua"
+      local plan = linkedspec.build_generated_rule_plan(compiled)
+      local plan_json = json.array()
+      for row_index, row in ipairs(plan) do
+        plan_json[row_index] = linkedspec.generated_plan_row_to_json(row)
+      end
+      local metadata = linkedspec.generated_source_metadata_to_json(
+        linkedspec.generated_source_metadata(identity)
+      )
+      write_file(generated_path, linkedspec.emit_lua_source_v1(compiled, identity))
+
+      expected_observations.names[index] = case_name
+      expected_observations.values[case_name] = fixture.expected_json
+      expected_observations.metadata[case_name] = metadata
+      expected_observations.plans[case_name] = plan_json
+      subset_cases[index] = json.harray({
+        name = case_name,
+        path = generated_path,
+        input = fixture.input_text,
+        expected = fixture.expected_json,
+        identity = identity,
+        metadata = metadata,
+        plan = plan_json,
+      })
+    end
+
+    local subset_path = root .. "/subset.json"
+    write_file(subset_path, json.encode(json.harray({ cases = subset_cases })))
+    write_file(root .. "/runner.lua", generated_subset_host_runner())
+    local ok, stdout, stderr = run_generated_lua_host(
+      runtime,
+      root,
+      "accepted-subset",
+      { subset_path }
+    )
+    assert_equal(ok, true, "generated subset host status")
+    assert_equal(stdout, json.encode(expected_observations) .. "\n", "generated subset host observations")
+    assert_equal(stderr, "", "generated subset host stderr")
+  end, "linkedspec-lua-generated-subset")
+  assert_equal(directory_exists(cleaned_root), false, "generated subset host cleanup")
 end)
 
 test("compiled spec reports typed dependency failures after optional validation", function()

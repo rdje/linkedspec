@@ -18,6 +18,7 @@ evidence_update_2026_07_15_primary_cli_admission: "LUA-BACKEND-PARITY.7.2 makes 
 evidence_update_2026_07_15_primary_no_drift: "LUA-BACKEND-PARITY.7.3 aligns checkout native-module lifetime, executable usage, separate corpus tooling, limitations, and gates; parent .7 closes and hands off without behavior change to generated-source work subsequently split by .8.1.0 into exact-v1/v2/v3 emitter core .8.1.1 and fresh-process proof .8.1.2."
 evidence_update_2026_07_16_generated_isolation: "LUA-BACKEND-PARITY.8.1.2 closes the generated scaffold at 173/173 per ABI with exact persisted valid/corrupt fresh-process execution and cleanup; family-plan .8.2 is active."
 evidence_update_2026_07_16_generated_families: "LUA-BACKEND-PARITY.8.2 adds exact plan/family authoritative nested execution, portable trace, isolated all-family and emitted variadic proof at 176/176 per ABI; subset .8.3 is active."
+evidence_update_2026_07_16_generated_subset: "LUA-BACKEND-PARITY.8.3 closes exact contract-ordered interpreter-first 8/105 fresh-host value/metadata/plan/trace/cleanup proof at 177/177 per ABI; sole census/handoff .8.4 is active."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -26,7 +27,7 @@ The repository now owns a native Lua module at `lua/src/linkedspec/init.lua`. Wi
 `backend_status()` call returns a fresh table, so caller mutation cannot alter later status.
 
 `lua/test/run.lua` is a dependency-free assertion driver. `tools/run_lua_local.sh` syntax-checks every Lua source,
-runs 176 current tests on PUC Lua and the same 176 on LuaJIT, passes the exact primary adapter at 61/61 under
+runs 177 current tests on PUC Lua and the same 177 on LuaJIT, passes the exact primary adapter at 61/61 under
 default and POSIX environments on PUC Lua, validates the exact 105-fixture corpus, and executes it at 105/105
 through the developer runner. It writes no cache or global module state.
 
@@ -35,7 +36,8 @@ separate corpus runner validates by default and executes the complete manifest b
 now exposes the complete native parse/validate/compile/function/staged/runtime/corpus surface with
 `runtime-corpus-primary-cli` status. CLI/native/corpus no-drift `.7.3` is closed;
 generated-source emitter core `.8.1.1` preserves exact-v1/v2/v3 state and fresh-process PUC Lua/LuaJIT proof
-`.8.1.2` is closed; exact ten-family `.8.2` is also closed and accepted-subset `.8.3` is active.
+`.8.1.2`, exact ten-family `.8.2`, and accepted-subset `.8.3` are closed at 177/177 per ABI; sole census/handoff
+`.8.4` is active.
 
 Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]], [[lua-actionir-ast-parser]],
 [[lua-actionir-contract-resolver]],
@@ -44,4 +46,5 @@ Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]
 See also [[lua-primary-cli-adapter]], [[lua-primary-cli-recurring-admission]],
 [[lua-primary-cli-no-drift-closeout]], [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-emitter-core]], [[lua-generated-source-fresh-process-isolation]],
+[[lua-generated-source-accepted-subset]],
 [[lua-generated-source-family-plan]].

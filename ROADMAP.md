@@ -1027,7 +1027,9 @@ contract/version/Unicode identity metadata, typed portable errors, and direct/tr
 JSON and identity bytes are embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup
 proof `.8.1.2` closes scaffold `.8.1` at 173/173 per ABI. Exact plan/family execution `.8.2` closes at 176/176
 per ABI with ten ordered families, four rejections, authoritative nested dispatch, portable trace, an isolated
-all-family host, and emitted variadic proof. Accepted-subset `.8.3` is active; census admission remains `.8.4`.
+all-family host, and emitted variadic proof. Contract-sourced `.8.3` closes at 177/177 per ABI with exact ordered
+interpreter-first 8/105 modules independently loaded in fresh PUC Lua/LuaJIT hosts, including metadata/plans,
+portable trace identity, fixed user functions, and cleanup. Sole census admission/handoff `.8.4` are active.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

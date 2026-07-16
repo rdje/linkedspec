@@ -23,6 +23,7 @@ evidence_update_2026_07_11_rust_admission: "FUTURE-PARITY-BACKLOG.3.2.2 removes 
 evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.1-.3 add deterministic Dart v1 emission, exact ten-family direct execution/four rejections/trace roles, and contract-sourced interpreter-first 8/105 isolated host proof. Complete 181/61x2/105 gates pass; Dart promotes and .3.3 closes at census 59/0/1."
 evidence_update_2026_07_11_julia_admission: "FUTURE-PARITY-BACKLOG.3.4.1-.3 add deterministic Unicode-safe Julia v1 emission, exact ten-family family-authoritative execution/four rejections/trace roles, and contract-sourced interpreter-first 8/105 namespaced host proof. Complete 1,168/61x2/105 gates pass; Julia promotes and .3.4 closes at census 60/0/0."
 evidence_update_2026_07_11_final_closeout: "FUTURE-PARITY-BACKLOG.3.5 rechecks contract/capability 60/0/0, focused Perl 69 assertions, Rust 5/5, Dart 6/6, and Julia 58/58 against adjacent complete backend gates, aligns every durable/public surface, removes over 1.23 GB of reproducible caches, closes generated-source .3, and activates Lua plan .1.3 without behavior changes."
+evidence_update_2026_07_16_lua_subset: "LUA-BACKEND-PARITY.8.1-.8.3 add deterministic exact-v1/v2/v3 Lua source, fresh PUC Lua/LuaJIT valid/corrupt isolation, exact ten-family authoritative execution/four rejections/portable trace, and contract-ordered interpreter-first 8/105 fresh-host proof. Both ABIs pass 177/177; sole census admission remains .8.4."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
@@ -40,6 +41,8 @@ features: generated host-language parser source. Its backend states differ:
 - Rust's focused subset still names eight fixtures, while its strict recurring
   full-manifest classifier passes 105/105 and is admitted.
 - Dart and Julia have admitted emitters/direct executors and exact accepted-subset proof.
+- Lua has equivalent exact emitter, ten-family, isolation, and accepted-subset proof on both ABIs; sole census
+  admission remains `.8.4`.
 
 The implementation order is deliberately contract-first:
 
@@ -59,4 +62,5 @@ The 105-case interpreter corpus remains the primary correctness oracle.
 
 Related facts: [[rust-generated-source-corpus-subset]], [[rust-source-emitter-lane-split]],
 [[dart-generated-source-deferred]], [[julia-generated-source-scaffold]],
+[[lua-generated-source-accepted-subset]],
 [[user-observable-backend-cli-parity-contract]], [[perl-generated-source-capture-not-standalone]].

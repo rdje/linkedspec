@@ -40,8 +40,10 @@ test from silently leaking host artifacts.
 
 Parent scaffold `.8.1` is closed. Exact ten-family plan, rejection, direct
 execution, and portable generated trace roles are current under `.8.2`, raising
-the suite to 176/176 per ABI; subset `.8.3` is active and census `.8.4` remains.
+the suite to 176/176 per ABI. Contract-sourced subset `.8.3` adds its own exact
+fresh-host boundary and raises both ABIs to 177/177; census `.8.4` remains.
 
 Related facts: [[lua-generated-source-emitter-core]],
 [[lua-generated-source-scaffold-split]], [[generated-source-contract-v1]],
-[[lua-generated-source-family-plan]], [[lua-toolchain-package-policy]].
+[[lua-generated-source-family-plan]], [[lua-generated-source-accepted-subset]],
+[[lua-toolchain-package-policy]].

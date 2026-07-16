@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.3 — admit generated Lua subset
+
+Added `lua/test/run.lua` as the exact Lua accepted-subset path in the neutral generated-source contract. The
+executable checker now enforces Lua's eight-case count, direct contract list and order, full-manifest validation,
+interpreter-before-emission proof, independent module loading, metadata/plan projection, portable trace identity,
+caller-owned cleanup, and unconditional test registration.
+
+Added one recurring contract-sourced proof. It validates all 105 fixtures before selecting the eight neutral rows,
+proves each interpreter value against expected JSON, emits eight source-identified Lua modules, and launches the
+exact current PUC Lua or LuaJIT runtime with explicit checkout/native paths. The fresh host loads every module,
+validates every plan, returns exact ordered value/metadata/plan observations, executes the fixed user-function
+fixture, and observes enter/decision/exit trace roles with the first identity. Stdout, empty stderr, and root absence
+are exact.
+
+PUC Lua and LuaJIT each pass 177/177; primary CLI stays 61/61 in default and POSIX environments and corpus stays
+105/105. The generated-source checker reports Dart/Julia/Lua 8/105 plus strict Rust 105/105; callable checks and
+capability 64/0/0 stay green. Knowledge Map, memory, doctrines, mdBook, and whitespace checks pass. Canonical local
+CI exits 0 with reference CLI 61/61 in both environments plus Phase 0 `1..1031` in 620 seconds. Sole census
+admission and backend handoff `.8.4` are active. Mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.2 — execute generated Lua families
 
 Added typed source-ordered generated plan rows, the exact ten-family vocabulary, public plan construction/

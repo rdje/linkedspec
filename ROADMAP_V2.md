@@ -180,7 +180,9 @@ state, with contract/version/Unicode identity metadata, typed portable errors, d
 strict-UTF-8 JSON embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup proof `.8.1.2`
 closes scaffold `.8.1` at 173/173 per ABI. Exact plan/family execution `.8.2` closes at 176/176 per ABI with ten
 ordered families, four rejections, authoritative nested dispatch, portable trace, an isolated all-family host,
-and emitted variadic proof. Accepted-subset `.8.3` is active; census admission remains `.8.4`.
+and emitted variadic proof. Contract-sourced `.8.3` closes at 177/177 per ABI with exact ordered interpreter-first
+8/105 fresh-host modules, metadata/plans/trace identity, fixed user-function execution, and cleanup. Sole census
+admission and backend handoff `.8.4` are active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

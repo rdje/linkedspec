@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Lua generated accepted-subset `.8.3` adds `lua/test/run.lua` to the executable contract and
+  makes its checker own exact count/order, full-manifest validation, interpreter-before-emission proof, independent
+  load, metadata/plans/trace identity, cleanup, and unconditional registration. The test consumes the eight neutral
+  names directly, validates all 105 fixtures first, proves every interpreter value, persists eight generated
+  modules, and launches the exact selected PUC Lua or LuaJIT runtime with explicit package/native paths. The fresh
+  host validates every plan, checks exact ordered values and metadata, executes fixed user functions, and observes
+  portable first-case trace identity; stdout/stderr and root absence are exact. Both ABIs pass 177/177, primary
+  stays 61x2, corpus stays 105/105, capability stays 64/0/0, and canonical Phase 0 passes `1..1031` in 620 seconds.
+  Sole census admission and backend handoff `.8.4` are active.
 - `2026-07-16` refresh: Lua generated family execution `.8.2` adds typed ordered plan rows and exact classification
   over the neutral ten-family vocabulary. Validation rejects row-count, label, known-family, and unknown-family
   drift before execution with portable attribution. The validated per-label map is threaded through every root and

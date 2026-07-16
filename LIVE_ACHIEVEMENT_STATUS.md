@@ -8,6 +8,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.3 — admit generated Lua subset**
+  (DONE — exact contract-owned interpreter-first 8/105 fresh-host proof closes; sole census/handoff `.8.4` is next).
+
+  **Result:** The neutral contract and executable checker now own Lua's exact test path, count/order,
+  full-manifest/interpreter-first proof sequence, independent load, metadata/plans/trace identity, cleanup, and
+  unconditional registration. One recurring test validates all 105 fixtures, consumes the eight contract names,
+  proves native values before emission, and persists eight modules. Fresh exact PUC Lua/LuaJIT hosts load every
+  module and return exact ordered value/metadata/plan observations, execute fixed user functions, observe portable
+  first-case trace identity, keep stderr empty, and remove the caller-owned root.
+
+  **Proof:** PUC Lua and LuaJIT each pass 177/177, primary CLI remains 61/61 under default and POSIX environments,
+  and corpus remains 105/105. Generated-source checking reports Dart/Julia/Lua 8/105 plus strict Rust 105/105;
+  callable/capability remain 64/0/0. Knowledge Map, memory, doctrine, mdBook, and whitespace checks pass. Canonical
+  local CI exits 0 with reference CLI 61/61 in both environments plus Phase 0 true reach `1..1031` in 620 seconds.
+  Mutation testing was not run. Status/census remain unchanged; sole admission and backend handoff `.8.4` are active.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.2 — execute generated Lua families**
   (DONE — exact authoritative ten-family execution closes; contract-sourced subset `.8.3` is next).
 

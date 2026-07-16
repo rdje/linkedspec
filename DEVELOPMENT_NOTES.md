@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.3` — generated breadth must consume the executable contract, not copy its
+  examples): Read the exact eight names from `generated_source_contract.json` after validating the complete
+  105-fixture corpus. For each row, compare the native interpreter with expected JSON before emitting source; then
+  persist all modules under one caller-owned root and load them in the exact ABI runtime already selected by the
+  enclosing gate. Return one exact ordered values/metadata/plans observation, and separately require portable trace
+  roles plus source identity. This proves fixed user-function reconstruction because that fixture is one of the
+  contract rows. Make the checker own the test path, count/order, proof sequence, fresh load, projections, trace,
+  cleanup, and unconditional registration so later drift cannot reduce the claim silently. PUC Lua and LuaJIT pass
+  177/177, primary stays 61x2, corpus stays 105/105, generated checking reports Dart/Julia/Lua 8/105 plus strict
+  Rust 105/105, capability stays 64/0/0, and canonical Phase 0 passes `1..1031` in 620 seconds. Mutation testing was
+  not run.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.2` — a generated plan must own dispatch, not merely describe it): Classify
   source-ordered compiled rules into typed contract rows, validate all rows before any execution, then thread the
   resulting per-label family map through root and nested calls. When a map exists, it chooses regex versus blind

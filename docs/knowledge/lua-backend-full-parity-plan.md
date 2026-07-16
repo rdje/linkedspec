@@ -42,6 +42,7 @@ evidence_update_2026_07_15_primary_no_drift: "LUA-BACKEND-PARITY.7.3 closes exac
 evidence_update_2026_07_16_generated_scaffold_split: "LUA-BACKEND-PARITY.8.1.0 corrects the pre-ADR-0041 v1/v2-only wording, requires the exact v1/v2/v3 effective-state union, and splits deterministic emission .8.1.1 from fresh-process PUC/LuaJIT isolation .8.1.2."
 evidence_update_2026_07_16_generated_isolation: "LUA-BACKEND-PARITY.8.1.2 closes parent scaffold .8.1 with recurring exact fresh-process PUC Lua/LuaJIT valid/corrupt module execution and normal/injected-failure cleanup at 173/173 per ABI. Ten-family plan/rejection/execution/portable trace .8.2 is active."
 evidence_update_2026_07_16_generated_families: "LUA-BACKEND-PARITY.8.2 closes exact ten-family ordered plans, four rejections, authoritative root/nested dispatch, portable trace, one isolated all-family module, and emitted neutral variadic execution at 176/176 per ABI. Contract-sourced subset .8.3 is active."
+evidence_update_2026_07_16_generated_subset: "LUA-BACKEND-PARITY.8.3 adds Lua's exact test path to the executable contract, consumes the eight names directly after full 105-fixture validation, proves interpreter expected values before emission, and loads eight modules in fresh exact PUC Lua/LuaJIT hosts with ordered values/metadata/plans, fixed user functions, trace identity, and cleanup. Both ABIs pass 177/177; sole census/handoff .8.4 is active."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -62,9 +63,10 @@ and exact 8/105 admission.
 Cross-backend syntax work may validate Lua today through the implemented typed AST,
 serialized `SpecFile`/ActionIR state, native PUC Lua/LuaJIT execution, and deterministic
 generated effective state through `.8.1.1`, exact persisted valid/corrupt host isolation
-through `.8.1.2`, and ten-family authoritative execution through `.8.2`. It must not
-claim accepted-subset proof or generated capability admission before
-`LUA-BACKEND-PARITY.8.3-.8.4` implements and admits those product surfaces.
+through `.8.1.2`, ten-family authoritative execution through `.8.2`, and exact
+contract-ordered interpreter-first 8/105 fresh-host proof through `.8.3`. It must not
+claim generated capability admission before `LUA-BACKEND-PARITY.8.4` admits that
+product surface.
 
 LPeg loads on both installed runtimes, but this does not make it the selected regex engine. Lua patterns and LPeg
 must be compared with the neutral regex/match-state fixtures; a native adapter is permissible if it preserves the
@@ -81,7 +83,7 @@ implements the exact thin command at 169/169 per ABI. Admission `.7.2` makes sha
 the matrix to 5x2x61, and advances status to `runtime-corpus-primary-cli`. Final no-drift `.7.3` closes parent
 `.7`. Generated-source planning `.8.1.0` split the exact v1/v2/v3 emitter core `.8.1.1` from isolated dual-ABI
 host proof `.8.1.2`; exact family `.8.2` is also complete, raising both ABIs to 176/176. Contract-sourced subset
-`.8.3` is active.
+`.8.3` is also complete, raising both ABIs to 177/177; sole census admission/handoff `.8.4` is active.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
@@ -92,4 +94,5 @@ Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-
 [[lua-controlled-corpus-admission-split]], [[lua-full-corpus-gate]], [[lua-primary-cli-adapter]],
 [[lua-primary-cli-recurring-admission]], [[lua-primary-cli-no-drift-closeout]],
 [[lua-generated-source-scaffold-split]], [[lua-generated-source-emitter-core]],
-[[lua-generated-source-fresh-process-isolation]], [[lua-generated-source-family-plan]].
+[[lua-generated-source-fresh-process-isolation]], [[lua-generated-source-family-plan]],
+[[lua-generated-source-accepted-subset]].

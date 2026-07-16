@@ -103,7 +103,9 @@ then corrects the older v1/v2-only scope, and emitter core `.8.1.1` now returns 
 exact fixed-v1/variadic-v2/final-codeblock-v3 effective state. Fresh-process PUC Lua/LuaJIT host proof `.8.1.2`
 closes scaffold `.8.1` at 173/173 per ABI. Exact family execution `.8.2` adds ten ordered plan families, four
 rejections, authoritative root/nested dispatch, portable trace, an isolated all-family host, and emitted variadic
-proof at 176/176 per ABI. Accepted-subset `.8.3` is active; census promotion remains `.8.4`.
+proof at 176/176 per ABI. Contract-sourced `.8.3` proves the exact ordered interpreter-first 8/105 modules in fresh
+PUC Lua and LuaJIT hosts at 177/177 per ABI, including metadata/plans/trace identity, fixed user functions, and
+cleanup. Sole census promotion and backend handoff `.8.4` are active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -340,8 +342,8 @@ first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` 
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
 implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
 extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drift `.7.3` closes parent `.7`.
-Generated Lua emission, isolated dual-ABI valid/corrupt execution, and exact family plans/execution are current
-through `.8.2`; subset proof and admission remain `.8.3-.8.4`.
+Generated Lua emission, isolated dual-ABI valid/corrupt execution, exact family plans/execution, and contract-owned
+8/105 fresh-host proof are current through `.8.3`; sole census admission and handoff remain `.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -396,7 +398,8 @@ be projected and composed with rule parsing. The staged registry now dispatches 
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
 loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
 parser CLI adapter, recurring focused 61x2 proof, and shared 5x2x61 matrix admission are current. Final CLI no-drift
-is `.7.3`; generated-source scaffold `.8.1` is closed, while plan/admission remains `.8.2-.8.4`.
+is `.7.3`; generated-source scaffold `.8.1`, exact family execution `.8.2`, and accepted-subset `.8.3` are closed,
+while sole census admission and backend handoff `.8.4` are active.
 
 Run the local gate from the repository root:
 
@@ -773,8 +776,12 @@ native execution stays unchanged. Traced generated execution adds portable
 `generated_rule_enter`, `generated_family_decision`, and `generated_rule_exit` events
 with source identity, rule, and family beside the native trace. A fresh-process matrix
 executes all ten families and the neutral variadic fixture reconstructs typed rest
-arrays from emitted state. Both ABIs pass 176/176. Contract-sourced 8/105 proof remains
-`.8.3`, so this surface is not yet capability-census admission.
+arrays from emitted state. Contract-sourced `.8.3` additionally validates the complete
+105-fixture manifest, consumes the exact eight neutral names in contract order, proves
+each interpreter value first, and independently loads all eight emitted modules in the
+selected ABI host. Exact results, metadata, plans, fixed user-function execution,
+portable trace identity, empty stderr, and cleanup pass at 177/177 on both ABIs. Sole
+capability-census admission remains `.8.4`.
 
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`

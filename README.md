@@ -174,10 +174,12 @@ This `README.md` is the **single entry point** to the project.
   Unicode metadata/results/failures and verified caller-owned cleanup. Exact plan/family execution `.8.2` now
   adds ten ordered families, four pre-execution rejections, authoritative root/nested dispatch, portable generated
   trace, an isolated all-family host, and emitted variadic execution at 176/176 per ABI. Contract-sourced subset
-  admission `.8.3` is active; census promotion `.8.4` remains.
+  `.8.3` now consumes the exact eight neutral names, proves interpreter values before emission, and independently
+  loads all eight modules with exact value/metadata/plan/trace observations in fresh PUC Lua and LuaJIT hosts at
+  177/177 per ABI. Sole census promotion and backend handoff `.8.4` are active.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
-  Generated Lua subset and census admission remain `.8.3-.8.4`. ADR
+  Generated Lua census admission remains `.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
@@ -420,7 +422,9 @@ on current backend parity; no companion scaffold or content migration exists yet
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case
-  primary interpreter oracle.
+  primary interpreter oracle. The checker owns the Dart, Julia, and Lua 8/105 test paths; Lua's path additionally
+  locks full-manifest validation, contract order, interpreter-first proof, fresh selected-ABI loading, exact
+  metadata/plans/trace identity, cleanup, and unconditional registration.
 - Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
   the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.

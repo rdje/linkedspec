@@ -202,8 +202,8 @@ across contract classification, runtime dispatch, and focused execution sources,
 spellings above remain separately timing-tested. Emitter core `LUA-BACKEND-PARITY.8.1.1` now preserves this typed
 effective state in deterministic native Lua, and `.8.1.2` proves fresh-process valid/corrupt execution and cleanup
 on both Lua ABIs. `.8.2` adds authoritative family routing and portable generated trace; subset proof and admission
-remain `.8.3-.8.4`, so the native closeout itself
-still does not claim that later surface.
+close under `.8.3` with exact interpreter-first 8/105 fresh-host proof. Census admission remains `.8.4`, so the
+native closeout itself still does not claim that later surface.
 
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 

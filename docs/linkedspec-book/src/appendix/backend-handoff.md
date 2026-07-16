@@ -393,8 +393,9 @@ final-codeblock-v3 effective state. It exposes contract/version/identity metadat
 traced value roles with canonical strict-UTF-8 JSON rendered as ASCII hex. `.8.1.2` now persists valid/corrupt
 modules and proves exact fresh-process PUC Lua/LuaJIT load, result, trace, failure, and cleanup behavior;
 `.8.2` adds exact ten-family plans, four rejections, authoritative root/nested dispatch, portable generated trace,
-one isolated all-family module, and emitted variadic execution at 176/176 per ABI. Subset proof is active under
-`.8.3`, and the census stays 64/0/0 until `.8.4`.
+one isolated all-family module, and emitted variadic execution at 176/176 per ABI. Contract-sourced `.8.3` proves
+the exact ordered interpreter-first 8/105 modules with metadata/plans/trace identity and cleanup in fresh PUC Lua
+and LuaJIT hosts at 177/177 per ABI. The census stays 64/0/0 until sole admission `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -610,7 +611,7 @@ optional-SDK verification, and `.7.1` owns public documentation closeout.
 ### Lua Backend Commands, Embedding, and Status
 
 Lua's current native boundary is `runtime-corpus-primary-cli`: PUC Lua 5.4 is
-the primary runtime, LuaJIT is the secondary ABI, both pass 176/176 native
+the primary runtime, LuaJIT is the secondary ABI, both pass 177/177 native
 tests, the focused primary command passes 61/61 under default and POSIX option
 environments, and the complete corpus passes 105/105. The warmed shared matrix
 passes the same command contract at 5 backends x 2 environments x 61 cases.
@@ -631,12 +632,11 @@ checkout commands are executable, and native modules are never installed
 globally.
 
 The primary command has no corpus/status subcommands or backend-only options;
-the developer corpus runner remains separate. Generated Lua source is the
-explicit remaining limitation. Planning `.8.1.0` corrects the original
+the developer corpus runner remains separate. Planning `.8.1.0` corrects the original
 v1/v2-only scope against descriptor v3; deterministic exact-v1/v2/v3 source
 construction `.8.1.1` and fresh-process PUC Lua/LuaJIT proof `.8.1.2` are closed.
-Exact ten-family execution `.8.2` is also closed; contract-sourced 8/105 admission `.8.3` is active before final
-census/handoff `.8.4`.
+Exact ten-family execution `.8.2` and contract-sourced interpreter-first 8/105 fresh-host proof `.8.3` are also
+closed. Sole census admission and backend handoff `.8.4` are active.
 
 The Lua backend now has a dedicated full-parity plan. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg. The rollout began
@@ -885,7 +885,8 @@ separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconst
 core `.8.1.1` now serializes that exact fixed-v1/variadic-v2/final-codeblock-v3 state into deterministic native
 Lua with metadata, errors, and direct/traced roles. Isolated PUC Lua/LuaJIT valid/corrupt load/run/cleanup proof
 is closed under `.8.1.2`; `.8.2` adds authoritative ten-family root/nested dispatch, exact rejections, portable
-trace, an isolated all-family host, and emitted variadic proof. Subset/capability ownership remains `.8.3-.8.4`.
+trace, an isolated all-family host, and emitted variadic proof. `.8.3` adds exact contract-ordered interpreter-first
+8/105 fresh-host values/metadata/plans/trace identity and cleanup. Capability ownership remains `.8.4`.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit
@@ -1260,7 +1261,7 @@ boundaries remain below as rollout history, not as live gaps:
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl, Rust, Dart, and Julia pass contract v1. Rust compiles/runs 105/105. Dart and Julia pass deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Julia also locks Unicode-safe strict-UTF-8/hex payloads and typed metadata/errors. | closed `.3.5`; census 60/0/0 |
+| Generated parser source | Perl, Rust, Dart, and Julia pass contract v1. Rust compiles/runs 105/105. Dart and Julia pass deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Julia also locks Unicode-safe strict-UTF-8/hex payloads and typed metadata/errors. Lua now proves the same exact ten families and contract-ordered 8/105 in fresh PUC Lua/LuaJIT hosts, but remains outside the census until `.8.4`. | closed `.3.5`; Lua admission `.8.4` |
 | Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 64/0/0 |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-

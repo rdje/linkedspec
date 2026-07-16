@@ -105,10 +105,11 @@ and CLI fixture results. Rust, Dart, and Julia's pre-existing `.contains()` miss
 drift owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome. Lua consumes
 the same AST/negative/native fixture cases inside `lua/test/run.lua` on PUC Lua and LuaJIT, including public
 SpecFile JSON reconstruction; its matching `.contains()` drift is also owned by `.5`. Generated Lua source does
-not exist yet and remains owned by `LUA-BACKEND-PARITY.8.1-.8.4`. The current syntax is admitted as
+exist through exact emitter/family/subset proof `.8.1-.8.3`, but this punctuation-light fixture's Lua route remains
+native plus serialized until final parity closeout `.8.4` audits its generated preservation. The current syntax is admitted as
 `language.punctuation_light_zero_argument_aliases` in the four-backend capability census. The composed recurring
 proof is `bash tools/check_punctuation_light_five_backend.sh`; it additionally exercises Lua on both ABIs without
-pretending that generated Lua exists.
+conflating serialized-state reconstruction with generated-source execution.
 The JSON key `future_fixture` is retained as the version-1 schema name; the fixture itself is now admitted current.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
@@ -148,8 +149,10 @@ does not by itself prove every helper and API described by the mdBook; `FUTURE-P
 coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`. `.3.1.0` demonstrated
 why execution proof matters by exposing Perl's lost dependency indexes; `.3.1.2` repairs that mechanism and passes
 focused contract proof. Rust v1 identity/metadata/errors plus exact neutral plan/direct result/trace roles align.
-Admission `.3.1.3.3` promotes Perl to pass. Rust's staged full-manifest classifier is now an unconditional recurring
-105/105 gate, and `.3.2.2` admits it. Rust generated source passes. Dart `.3.3.1`/`.3.3.2` add deterministic
-emission and exact ten-family direct execution; `.3.3.3` binds the exact accepted eight-case list to recurring
-interpreter-first isolated host proof and admits Dart. The current census is therefore 59 pass / zero partial /
-one gap; Julia remains owned by `.3.4`.
+Admission `.3.1.3.3` promotes Perl to pass. Rust's staged full-manifest classifier is an unconditional recurring
+105/105 gate, and `.3.2.2` admits it. Dart `.3.3.1-.3` and Julia `.3.4.1-.3` bind deterministic ten-family source
+to the exact accepted eight-case interpreter-first isolated-host proof and are admitted. Lua `.8.1-.8.3` now adds
+exact v1/v2/v3 emission, dual-ABI isolation, ten-family execution, and the same contract-ordered 8/105 proof in
+fresh PUC Lua/LuaJIT hosts; the checker owns Lua's path/order/proof/trace/cleanup registration. The current census
+is 64 pass / zero partial / zero gap across the four admitted backends. Lua remains outside that census until sole
+admission owner `.8.4` updates the backend manifest and handoff.

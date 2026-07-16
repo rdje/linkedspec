@@ -58,7 +58,9 @@ The audit distinguishes implementation gaps from proof gaps:
 - Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
   phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
 - generated source remains top-level `.3`: Perl, Rust, Dart, and Julia pass; Rust's strict full-manifest gate is
-  105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families.
+  105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families. Lua now proves
+  the same ten-family and contract-ordered 8/105 boundary in fresh dual-ABI hosts, but sole admission `.8.4` has
+  not yet added Lua to the census.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
 Generated-source `.3.5` closed the then-current census at 60/0/0; punctuation-light `.16.7` later adds four
@@ -72,4 +74,5 @@ totals from `manifest.json`; it does not freeze the census size in an output str
 Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
 [[perl-native-spec-resolution]], [[dart-native-spec-resolution]], [[julia-native-spec-resolution]],
 [[trace-cross-variant-capability-contract]], [[dart-generated-source-deferred]],
-[[julia-generated-source-scaffold]], [[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].
+[[julia-generated-source-scaffold]], [[lua-generated-source-accepted-subset]],
+[[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].

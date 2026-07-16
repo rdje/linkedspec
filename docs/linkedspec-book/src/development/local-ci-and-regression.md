@@ -241,7 +241,7 @@ bash tools/run_lua_local.sh
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
 PUC Lua and LuaJIT, runs all 61 primary CLI cases under default and POSIX environments on PUC Lua, and validates
 plus executes the exact 105-case manifest
-through the developer corpus command. The current suite passes 176/176 on each ABI. Its library-level controlled corpus tests
+through the developer corpus command. The current suite passes 177/177 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command validates by default and executes the complete manifest
@@ -258,8 +258,13 @@ runner in unique caller-owned storage, launches fresh PUC Lua and LuaJIT process
 paths, captures exact stdout/stderr observations, and requires cleanup after normal and injected-failure paths.
 `.8.2` adds exact plan rows/four rejections, plan-authoritative root/nested dispatch, portable generated trace, one
 isolated all-family module, and emitted neutral variadic execution. The family matrix consumes the exact ABI
-runtime passed by the gate and removes its caller-owned host root. Accepted-subset and census gates remain
-`.8.3-.8.4`.
+runtime passed by the gate and removes its caller-owned host root. The `.8.3` gate consumes the exact
+contract-owned 8/105 list after full-manifest validation, proves interpreter
+values before emission, and independently loads all eight modules with exact result/metadata/plan/trace identity
+and cleanup in the selected ABI host. Sole census admission remains `.8.4`.
+The completed `.8.3` slice passes generated-source/callable/capability checks, Lua 177/177 per ABI, primary CLI
+61/61 in both environments, corpus 105/105, and the canonical gate with both reference CLI legs at 61/61 plus
+Phase 0 true reach `1..1031` in 620 seconds.
 The completed `.8.2` slice passes generated-source/callable/capability checks, Lua 176/176 per ABI, primary CLI
 61/61 in both environments, corpus 105/105, and the canonical gate with both reference CLI legs at 61/61 plus
 Phase 0 true reach `1..1031` in 626 seconds.
