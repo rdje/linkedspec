@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.0 — split diagnostic output parity**
+  (DONE — planning-only evidence splits neutral/native/generated/gate/no-drift work; `.5.1.1` is next).
+
+  **Result:** Toolbox and native/process probes separate exact arity/evaluation, scalar/message, transport, and
+  process-control drift. Newly durable Perl hazards are per-item `print_each` decoration effects, raw invalid
+  calls, invalid mixed-encoding primary stdout, and host-exit bypass. Rust direct stderr, Dart discard, Julia trace
+  coupling, and Lua typed events are source-owned. `.5.1.1-.9` now cover the neutral contract, five native
+  backends, generated/CLI propagation, symmetric admission, and no-drift. No behavior or capability state changed.
+
+  **Proof:** `call_spec_handler_subst`, `LinkedSpec::Get`, `dump_parser_source`, exact five-command Unicode/arity/
+  exit captures, focused Rust/Dart native tests, direct Julia trace, and direct Lua sink-failure/quiet probes pass.
+  Governance, Knowledge Map, and mdBook pass. Canonical local CI passes primary CLI 61x2 and Phase 0 true reach
+  `1..1031` in 607 seconds. Mutation testing was not run.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.4 — admit Lua capability parity**
   (DONE — Lua is the fifth exact all-pass backend; its parity tree is closed).
 

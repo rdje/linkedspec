@@ -180,8 +180,10 @@ This `README.md` is the **single entry point** to the project.
   177/177 per ABI. Final admission `.8.4` adds Lua as an all-pass fifth backend across all 16 executable
   capabilities, advances the census to 80/0/0, retires the satisfied Lua-backend and variadic-function future
   exclusions, and closes the backend handoff without changing its PUC-primary/LuaJIT-compatibility policy.
-  Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
-  five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
+  Diagnostic-output audit `.5.1.0` has now separated arity/evaluation, formatting, transport, generated/CLI, and
+  host-process-control drift without changing behavior. Neutral executable contract `.5.1.1` is active before
+  five backend repairs and recurring admission; Perl logical keyword-lowering plus five-backend truthiness/arity
+  normalization remains separately owned by `.5.2` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

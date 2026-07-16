@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.0` — diagnostic output is four mechanisms, not one string repair):
+  Separate callable validation, argument evaluation, scalar/message formation, and delivery/process control before
+  implementation. The Perl reference cannot be copied blindly: its generated host `foreach` puts prefix/suffix
+  effects inside the loop, raw invalid calls are swallowed as null parser results, host Unicode output bypasses the
+  primary adapter's strict encoder, and host `exit` bypasses canonical failure framing. Rust's `eprintln!`, Dart's
+  `_evaluateValues` discard, Julia's `log_trace_output!`, and Lua's typed `diagnostic_sink` are likewise different
+  ownership seams. Generated APIs and ADR `0024` primary trace are separate projections: primary commands install
+  no rich event sink, so helper leakage is a native bypass, not canonical trace behavior. Split neutral policy and
+  fixtures `.5.1.1`, five native implementations `.2-.6`, generated/CLI propagation `.7`, symmetric admission
+  `.8`, and no-drift `.9`. No runtime behavior changed in the audit; mutation testing was not run.
+  Canonical local CI passes primary CLI 61x2 plus Phase 0 `1..1031` in 607 seconds.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.4` — capability admission is a completion-time proof, not a progress ledger):
   Keep an unadmitted backend out of the exact census until every current row can enter as `pass`; then require each
   row to cite its direct source and recurring test or gate rather than infer broad parity from one corpus result.

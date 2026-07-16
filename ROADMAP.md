@@ -919,9 +919,12 @@ Diagnostic-output parity note (2026-07-15, `LUA-BACKEND-PARITY.4.3.8`): Lua now 
 `print_each` eagerly and delivers typed ordered Unicode events through an optional per-parse caller sink while
 remaining quiet and parse-result neutral by default. PUC Lua and LuaJIT pass 122/122; exhaustive Lua helper
 no-drift `.4.3.9` has since closed. The implementation audit found existing Perl/Rust/Dart/Julia transport and
-`print_each` formatting drift. Lua `.8.4` now satisfies the parity prerequisite, so pending
-`FUTURE-PARITY-BACKLOG.5.1` is the next clean-pivot candidate for one neutral five-backend contract before the
-structured-format program may execute.
+`print_each` formatting drift. Lua `.8.4` now satisfies the parity prerequisite. Planning leaf
+`FUTURE-PARITY-BACKLOG.5.1.0` has since measured four distinct mechanisms: arity/invalid calls, evaluation count,
+scalar/message formatting, and transport/process control. Perl additionally repeats `print_each` prefix/suffix
+effects per item, leaks invalid mixed-encoding bytes through the primary command, and permits lowered host `exit`
+to bypass canonical failure framing. `.5.1.1-.9` split neutral fixtures, five native repairs, generated/CLI
+propagation, recurring admission, and no-drift; neutral contract `.5.1.1` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

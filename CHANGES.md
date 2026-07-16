@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.0 — split diagnostic output parity
+
+Completed the planning-only five-backend `print`/`say`/`print_each` audit without changing parser, compiler,
+runtime, generated-source, CLI, fixture, capability, or corpus behavior. Knowledge Map retrieval and the required
+`LinkedSpec::call_spec_handler_subst`, `LinkedSpec::Get`, and generated-source dump precede source classification;
+direct native tests/probes and exact five-command process captures then distinguish arity, evaluation, formatting,
+transport, and process-control drift.
+
+The audit found more than the known transport differences. Perl's host `foreach` lowering evaluates
+`print_each` prefix and suffix once per item (`1a12b2`, counters `[2,2]` for two items), invalid `print_each`
+arities remain raw generated-handler calls, Unicode host output can make strict primary stdout invalid UTF-8, and
+lowered host `exit` can terminate the primary command with authored status 23 before canonical framing. Rust
+eagerly evaluates but writes separate direct stderr lines and drops decoration; Dart eagerly discards; Julia uses
+low trace, permissive arity, and an omitted-suffix newline; Lua has typed synchronous caller-owned events, exact
+arity, quiet default execution, sink-failure propagation, and pre-exit-only delivery.
+
+Split `.5.1.1-.9` into a neutral executable contract, Perl/Rust/Dart/Julia/Lua native leaves, generated/CLI
+propagation, one recurring symmetric gate, and public no-drift. Neutral contract `.5.1.1` is the sole next leaf.
+Focused source/probe checks, governance, Knowledge Map, and mdBook pass. Canonical local CI passes exact primary
+CLI 61x2 and Phase 0 true reach `1..1031` in 607 seconds. Mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.4 — admit Lua capability parity
 
 Added Lua as the fifth exact backend across all 16 executable capability rows. Every new state is `pass` and cites

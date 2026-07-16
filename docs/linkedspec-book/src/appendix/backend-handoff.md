@@ -844,10 +844,15 @@ functions. Direct `call(rule)` result/`retv`/cursor behavior is focused, public 
 `runtime-helper-value-control`, both ABIs pass 125/125, and parent `.4.3` is closed. A source-history recheck also
 corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. The audit
 also records
-pre-existing diagnostic transport/format differences under pending `FUTURE-PARITY-BACKLOG.5.1`, while Perl
+pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl
 `and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately pending under `.5.2`;
 Lua `.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local
 closure is a false five-backend normalization claim.
+Planning `.5.1.0` has since split diagnostic parity without changing behavior. Exact probes add three important
+reference hazards to the older transport summary: Perl evaluates `print_each` prefix/suffix inside its host loop,
+host output bypasses the primary command's strict UTF-8 encoder, and lowered host `exit` bypasses canonical
+invocation failure framing. Neutral contract `.5.1.1`, Perl/Rust/Dart/Julia/Lua native `.2-.6`, generated/CLI
+`.7`, recurring admission `.8`, and public no-drift `.9` now own the complete correction.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime

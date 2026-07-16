@@ -1399,17 +1399,28 @@ print_each(matches, "match:<<", ">>\n")
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
-These helpers evaluate arguments once from left to right, return no parser value, and must not add diagnostic
-messages to a rule accumulator or parse-result output. Output routing is caller-owned and quiet by default in the
-typed runtime design. Lua implements that boundary as
+The portable design requires these helpers to evaluate arguments once from left to right, return no parser value,
+and keep diagnostic messages out of rule accumulators and parse-result output. Output routing is caller-owned and
+quiet by default. Lua implements that intended boundary as
 `runtime_parse(engine, input, { diagnostic_sink = function(event) ... end })`; each synchronous
 `RuntimeDiagnosticOutputEvent` carries `helper_name`, `rule_label`, and exact Unicode `message` text.
 
-Current backend routing is not yet fully aligned: Perl still lowers to host output, Rust writes direct stderr
-lines and does not honor authored `print_each` prefix/suffix, Dart evaluates without emitting, and Julia routes
-through trace but gives an omitted suffix a newline. Lua uses typed events and Perl-reference formatting.
-`FUTURE-PARITY-BACKLOG.5.1` owns the exact five-backend normalization; portable diagnostics should therefore
-supply an explicit `print_each` suffix until that leaf closes.
+Current execution is not yet aligned:
+
+| Backend | Current caveat |
+| --- | --- |
+| Perl | Lowers to host output. `print_each` reevaluates prefix and suffix once per item; invalid arities remain raw calls. Unicode helper text can bypass the primary command's strict UTF-8 encoder, and lowered `exit_now` can terminate that process before canonical failure framing. |
+| Rust | Eagerly evaluates arguments, then writes each argument/item as a separate stderr line and ignores authored `print_each` prefix/suffix. |
+| Dart | Eagerly evaluates arguments and discards every diagnostic message. |
+| Julia | Concatenates into low trace records, accepts permissive arities, and gives an omitted `print_each` suffix a newline. |
+| Lua | Uses typed caller-owned events, exact one-plus/two-or-three arities, once-only evaluation, and quiet default execution. |
+
+For example, the current Perl lowering of a stateful prefix/suffix places both expressions inside its host
+`foreach`; two items therefore advance each effect twice. That is a defect to normalize, not portable behavior.
+Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures these mechanisms and splits `.5.1.1-.9` across a neutral
+executable contract, five native backends, generated/CLI propagation, a symmetric recurring gate, and public
+no-drift. Until those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing,
+invalid arity, or side-effect counts across backends.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:
