@@ -1,5 +1,13 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.1.0` — composition must not create contextual rule meanings): The
+  director confirmed that a parent rule's OR/AND mode never propagates to or overrides any child's OR/AND mode.
+  Therefore an OR child stays seek under an AND wrapper, and an AND child stays consume under an OR wrapper,
+  regardless of blind-call, action-edge, explicit-call, or recursive entry. Parent mode owns parent composition;
+  child mode owns child matching. If strict contiguous child entry later proves necessary, it needs explicit
+  grammar rather than an invisible context-sensitive override. Exact ratification remains `.9.1.1.1`; this capture
+  changes no runtime behavior.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.9.1.0` — cursor discipline is semantic grammar state, not caller policy):
   The only defensible objective for a seek/consume selector is the real expressivity of the cross-combinations:
   AND+seek is an ordered landmark extractor, while OR+consume is an anchored choice. That still does not justify

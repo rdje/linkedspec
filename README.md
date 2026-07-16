@@ -3,9 +3,9 @@
 Current design frontier (2026-07-16): five-backend audit
 `FUTURE-PARITY-BACKLOG.9.1.0` recommends retiring the public/global `parse_mode`
 override in favor of intrinsic OR/default seek and AND consume semantics. Runtime
-behavior has not changed. Decision `.9.1.1` awaits one explicit nested-call rule:
-whether an AND blind-call preserves an OR child's seek behavior or requires
-contiguous child entry.
+behavior has not changed. The director has now fixed the nested-call rule:
+parent OR/AND mode never propagates to or overrides child mode. Exact contract
+ratification continues in `.9.1.1.1` before implementation.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (logical audit `.5.2.0`, executable neutral ADR/contract `.5.2.1`, and Perl typed-
-  AST/runtime rollout `.5.2.2` are complete at 1/7; director-priority AND/OR cursor-ownership audit `.9.1.0` is
-  complete, and decision `.9.1.1` is blocked on child-rule cursor ownership before returning to Rust `.5.2.3`)
+- Last updated: `2026-07-17` (cursor audit `.9.1.0` is complete; director decision capture `.9.1.1.0` establishes
+  that every child retains its intrinsic rule-local mode; exact contract ratification `.9.1.1.1` is next before
+  returning to Rust logical rollout `.5.2.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3029,8 +3029,8 @@ before implementation.
     action-edge `-> entry { ... }`. Decide whether explicit `->` action-edges remain legal in AND rules, whether
     explicit `=>` blind-calls remain legal in OR rules, how this composes with `entry[k]`, fluent `.push` /
     `.return(...)` continuations, grouped/shared blocks, and diagnostics for ambiguous cases. Keep the boundary
-    clear: blind-call means the parent does not preselect by the child rule's regex; the called child rule still
-    owns its own parser/matching semantics unless this design explicitly creates a separate bypass. Treat
+    clear: blind-call means the parent does not preselect by the child rule's regex; the called child rule owns its
+    own parser/matching semantics, and parent mode never propagates to or overrides it. Treat
     first-rule-as-top instead of `::` and optional OR pipe sugar as separate decisions under this design leaf.
     Resolve cursor ownership as part of the same rule-kind contract: audit the proposal that OR/default rules are
     intrinsically seek and AND rules are intrinsically consume, with no public/global `parse_mode` override capable
@@ -3075,16 +3075,38 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1`
-  Status: `blocked`
+  Status: `active`
   Goal: Ratify the corrected AND/OR edge and cursor-semantics contract before implementation.
   Dependencies: `.9.1.0`
+  Children: `.9.1.1.0`, `.9.1.1.1`
   Acceptance: Convert the measured audit into one backend-neutral grammar/runtime decision covering bare and
     explicit edges, indexed/grouped/fluent forms, nested calls, intrinsic cursor behavior, public API/CLI migration,
     descriptor/generated metadata, invalid legacy combinations, and cross-backend conformance. Keep implementation
     in a separately split follow-on leaf and return to `.5.2.3` after the design commitment is cleanly committed.
-  Blocker: Director decision required: when an AND rule blind-calls an OR child, does the child retain its intrinsic
-    OR seek behavior (recommended, consistent with child-owned parser semantics), or does the AND parent require a
-    contiguous/consume child entry (context-sensitive call semantics)?
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.0`
+  Status: `done`
+  Goal: Capture the director's rule-local child cursor-ownership decision before a fresh-session handoff.
+  Acceptance: Record that a parent OR/AND mode never propagates to or overrides any child OR/AND mode. An OR child
+    retains intrinsic seek behavior when called from an AND parent; an AND child retains intrinsic consume behavior
+    when called from an OR parent. The rule holds across blind calls, action-edge dispatch, explicit `call(...)`,
+    and recursion. Preserve the audit recommendation that callers cannot override rule semantics; leave exact
+    edge grammar, migration, implementation split, and runtime behavior to `.9.1.1.1` and its follow-ons. Align the
+    task tree, roadmap, live docs, mdBook status, bounded memory, and Knowledge Map; change no behavior code.
+  Verification: **PASS 2026-07-17.** Director confirmation is recorded in one durable fact and every current-
+    frontier document. Knowledge Map generation/check, memory architecture, task metadata, doctrine, mdBook,
+    and whitespace checks pass. No parser/compiler/runtime/generated/descriptor/CLI/test/capability behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.0 - capture rule-local cursor ownership`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.1`
+  Status: `active`
+  Goal: Ratify the complete backend-neutral AND/OR edge, cursor, and migration contract before implementation.
+  Dependencies: `.9.1.1.0`
+  Acceptance: Turn the accepted rule-local ownership principle and `.9.1.0` audit into the exact grammar/runtime/
+    descriptor/API/CLI/generated/conformance decision required by parent `.9.1.1`; split implementation into
+    separate dependency-ordered leaves, then return to `.5.2.3` only after a clean decision commit.
   Verification: `pending`
   Commit: `pending`
 
@@ -5289,9 +5311,10 @@ The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exac
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
 backend-neutral policy `.5.2.1` and Perl typed-AST/runtime rollout `.5.2.2` are complete at 1/7 rollout. The
-director-priority AND/OR cursor-ownership audit `.9.1.0` is complete. Decision `.9.1.1` is blocked on whether an
-AND blind-call parent preserves an OR child's intrinsic seek behavior or imposes contiguous child entry; Rust
-native logical alignment `.5.2.3` remains pending until that design decision is durably committed.
+director-priority AND/OR cursor-ownership audit `.9.1.0` is complete. Director capture `.9.1.1.0` now fixes the
+missing boundary: parent mode never propagates to or overrides a child, so an OR child remains seek under an AND
+parent and an AND child remains consume under an OR parent. Exact contract ratification `.9.1.1.1` is the next
+frontier; Rust native logical alignment `.5.2.3` remains pending until that design is durably committed.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5521,12 +5544,14 @@ native logical alignment `.5.2.3` remains pending until that design decision is 
 | 207 | `FUTURE-PARITY-BACKLOG.5.2.2` | `done` | Typed Perl logical ownership aligns eager values, exact arity, real booleans, and shared condition truthiness. |
 | 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `pending` | Align Rust native/serialized/generated-plan/direct logical behavior after the director-priority cursor audit. |
 | 209 | `FUTURE-PARITY-BACKLOG.9.1.0` | `done` | Five-backend audit rejects caller-global override, exposes default AND parity drift, and retains low-level matcher algorithms. |
-| 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `blocked` | Ratify the contract after the director decides whether an AND blind-call preserves an OR child's intrinsic seek behavior. |
+| 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `active` | Child ownership is decided; exact edge/cursor/migration ratification continues in `.9.1.1.1`. |
+| 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
+| 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `active` | Ratify exact grammar/runtime/descriptor/API/CLI/generated/conformance and split implementation. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; logical truthiness/arity/lowering `.5.2` is active before the remaining constructors/transforms/join/push, harray order/collisions, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` / blocked | Audit `.9.1.0` is complete; decision `.9.1.1` awaits the blind-call child-ownership answer. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | Child-owned cursor semantics are fixed; exact ratification `.9.1.1.1` is next. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6179,9 +6204,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- Blocking `.9.1.1`: when an AND rule blind-calls an OR child, should the called child keep its intrinsic OR seek
-  semantics, or should the parent impose contiguous/consume entry? The audit recommends child ownership; either
-  choice must be explicit before backend-neutral ratification and implementation splitting.
+- None blocking `.9.1.1.1`. The director confirmed on 2026-07-17 that parent OR/AND mode never propagates to or
+  overrides a child's intrinsic OR/AND mode; the next leaf must ratify the remaining exact contract and split code.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -6194,8 +6218,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- `FUTURE-PARITY-BACKLOG.9.1.1` awaits the director's blind-call child-ownership decision: preserve the OR child's
-  intrinsic seek behavior (recommended) or make AND-parent entry contextually contiguous. Rust logical native
+- None. Exact AND/OR edge/cursor/migration ratification `.9.1.1.1` is the sole active frontier. Rust logical native
   alignment `.5.2.3` resumes after this design is ratified. Structured-format, write-vivification, and companion-
   book parity prerequisites are satisfied, but their pending trees are not implicitly activated.
 
@@ -6203,6 +6226,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.1.0` | Director decision; existing `.9.1.0` audit; task/roadmap/live/mdBook/guide/KM/memory lockstep; Knowledge Map generation/check; memory architecture; task metadata; doctrines; mdBook; whitespace. | PASS. Parent modes never propagate to or override child modes across nested rule entry; exact ratification remains `.9.1.1.1`, no behavior changed, and the repo is fresh-session ready. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.9.1.0` | Knowledge Map/toolbox first; exact Perl descriptor/source/live/generated probes; five-backend API/CLI/engine/compiled/loaded/generated/descriptor/test/doc inventory; default/seek/consume `Top::AND` primary probes; AND+seek and OR+consume objective probes; governance, Knowledge Map, mdBook, and whitespace. | PASS. Global mode ownership is exact, default AND drift is root-caused, low-level cross-combinations are legitimate, no caller-global override objective survives, one nested-child decision is explicitly blocked, and no behavior changed. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.2` | Toolbox/source/descriptor/live/emitted baseline; strict neutral Perl consumer over 17 truth rows, ten helper cases, eager effects, receiver/lazy controls, four invalid arities, typed sites, host shared-zero edges, live and standalone-emitted roles; canonical hash-tree regression; neutral 1/7 checker plus 15 mutations; focused ActionIR/codeblock/generated/diagnostic tests; Phase 0 `1..1031`; KM/memory/doctrine/mdBook/whitespace and canonical local CI. | PASS. Perl now owns typed eager logical values and one condition/helper truth seam without raw keyword calls or host short-circuiting; only `perl_native` advances and Rust `.5.2.3` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.1` | ADR `0043`; strict neutral schema/checker; 17 truthiness rows; ten helper cases; three ordered-effect scenarios; receiver/lazy-control contrast; four pre-effect arity failures; deterministic embedded fixtures; exact projection/0-of-8 rollout topology; 15 drift mutations; shell syntax; Knowledge Map; memory/doctrines; mdBook; whitespace; canonical local CI with registered checker, reference CLI 62x2, and Phase 0 `1..1031`/639s. | PASS. One backend-neutral eager exact-arity boolean/truthiness contract is executable before rollout; explicit codeblock literals remain `.11`-owned, no backend behavior changes, and Perl `.5.2.2` activates. |
@@ -6358,6 +6382,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.1.0` | `FUTURE-PARITY-BACKLOG.9.1.1.0 - capture rule-local cursor ownership` | Director confirms parent modes never override child modes; exact ratification remains `.9.1.1.1`; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.9.1.0` | `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership` | Five-backend current-state audit, exact default AND drift, cross-combination objective proof, global-override rejection, migration surface, and blocked child-ownership handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.5.2.2` | `FUTURE-PARITY-BACKLOG.5.2.2 - repair Perl logical lowering` | Typed ActionIR/runtime logical ownership, exact eager/arity/boolean/truth semantics, host-zero regression, Perl neutral consumer, 1/7 rollout, and Rust handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.0` | `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity` | Exact current semantic/mechanism matrix, durable three-profile/two-Perl-path finding, and neutral/backend/generated/gate/public split; no behavior code. |

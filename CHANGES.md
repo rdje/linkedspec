@@ -1,5 +1,16 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.1.0 — capture rule-local cursor ownership
+
+Recorded the director's decision that parent OR/AND mode never propagates to or overrides child OR/AND mode. An OR
+child therefore retains intrinsic seek behavior under an AND parent, and an AND child retains intrinsic consume
+behavior under an OR parent. The boundary applies across blind calls, action-edge dispatch, explicit `call(...)`,
+and recursion, preserving one meaning for a reusable child rule in every call context.
+
+Split exact edge/cursor/API/CLI/descriptor/generated/conformance ratification into `.9.1.1.1` for the next fresh
+session. Updated the task tree, roadmaps, live architecture, guides, mdBook status, bounded memory, and Knowledge
+Map without changing parser, compiler, runtime, generated, descriptor, CLI, test, fixture, or capability behavior.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.9.1.0 — audit cursor semantic ownership
 
 Completed a read-only five-backend audit of public `parse_mode`, rule compilation, runtime matching, loaded-spec
@@ -15,8 +26,8 @@ engines default globally to seek. The 62-case matrix covers explicit modes but n
 Perl toolbox source proves its global selection is baked into every handler; outward descriptor mode ownership is
 also inconsistent. Added a durable Knowledge Map audit and synchronized task/index/roadmap/live guide/mdBook
 status without changing parser, compiler, runtime, generated, descriptor, CLI, fixture, or capability behavior.
-Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's intrinsic seek behavior or
-imposes contiguous child entry; the audit recommends child ownership.
+The audit initially left child ownership open and recommended child-owned semantics. Director capture `.9.1.1.0`
+has since accepted that recommendation; exact ratification continues in `.9.1.1.1`.
 
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.2 — repair Perl logical lowering
 

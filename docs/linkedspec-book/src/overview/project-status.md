@@ -159,7 +159,8 @@ Three backbone items tracked major structural modernization — all done:
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain
   semantically meaningful, but the audit recommends intrinsic OR/default seek plus AND consume and no global
-  override. Runtime behavior is unchanged pending the blind-call child-ownership decision and implementation split.
+  override. The director has since confirmed rule-local ownership: parent mode never propagates to or overrides a
+  child. Runtime behavior is unchanged pending exact `.9.1.1.1` ratification and implementation splitting.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

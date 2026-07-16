@@ -1375,9 +1375,10 @@ discipline from the authored rule kind—OR/default seek, AND consume—and remo
 the public/global override. Low-level matchers still need both algorithms. The
 four combinations above remain useful evidence (`AND + seek` finds ordered
 landmarks; `OR + consume` is anchored choice), but they do not justify silently
-rewriting a whole grammar at parser construction. Decision `.9.1.1` awaits
-whether an AND blind-call preserves an OR child's seek behavior or imposes
-contiguous entry. No API has changed yet.
+rewriting a whole grammar at parser construction. The director has since fixed
+the nested-call boundary: parent OR/AND mode never propagates to or overrides a
+child, so each child retains its intrinsic mode. Exact API/grammar migration is
+still being ratified under `.9.1.1.1`. No API has changed yet.
 
 If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
 If you ask for `return_descriptor => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.

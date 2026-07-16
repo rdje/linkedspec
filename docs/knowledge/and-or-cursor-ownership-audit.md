@@ -72,12 +72,11 @@ expressed clearly through rule structure or regex composition, that grammar
 should motivate a separately designed `.spec` surface rather than reviving a
 caller option.
 
-The decision leaf must still resolve one semantic boundary before
-implementation: when an AND blind-call wrapper invokes an OR child, does the
-child keep its intrinsic seek behavior, or does the parent require the child to
-enter contiguously? The existing edge-default design says a normal child owns
-its own parser semantics; changing that would create context-sensitive call
-semantics and needs an explicit decision.
+The director resolved the remaining semantic boundary on 2026-07-17: parent
+OR/AND mode never propagates to or overrides child OR/AND mode. An OR child
+therefore keeps intrinsic seek behavior when invoked by an AND parent, and an
+AND child keeps intrinsic consume behavior under an OR parent. Exact contract
+ratification remains `.9.1.1.1`; see [[rule-local-cursor-ownership-decision]].
 
 ## Migration surface
 

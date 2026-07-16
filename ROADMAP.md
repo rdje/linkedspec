@@ -956,8 +956,9 @@ pre-effect arity diagnostics, real booleans, and one truthiness seam shared by l
 emitted reference roles are complete, advancing rollout to 1 complete / 7 pending with Rust `.5.2.3` next in the
 backend sequence. Director-priority design audit `.9.1.0` finds no valid objective for a public/global
 `parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
-parity split. Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's intrinsic seek
-behavior or imposes contiguous entry; Rust `.5.2.3` resumes after ratification.
+parity split. Director capture `.9.1.1.0` now fixes rule-local ownership: parent OR/AND mode never propagates to or
+overrides a child, so an OR child remains seek under an AND parent and an AND child remains consume under an OR
+parent. Exact contract ratification `.9.1.1.1` is next; Rust `.5.2.3` resumes after ratification.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

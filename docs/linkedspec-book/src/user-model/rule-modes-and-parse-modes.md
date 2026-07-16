@@ -15,8 +15,10 @@ Keep those two ideas separate. A rule label such as `Item:AND` says "compose thi
 > no override is supplied. The proposed replacement makes OR/default families
 > intrinsically seek and AND families intrinsically consume, removes the public
 > global override, and retains seek/consume only as low-level matcher
-> algorithms. No runtime or API has changed yet; the follow-on decision must
-> first settle blind-call child ownership and the exact migration.
+> algorithms. The director has since confirmed that parent mode never
+> propagates to or overrides child mode: an OR child remains seek under an AND
+> parent, and an AND child remains consume under an OR parent. No runtime or API
+> has changed yet; `.9.1.1.1` owns exact migration ratification.
 
 ## Current rule-label surface
 

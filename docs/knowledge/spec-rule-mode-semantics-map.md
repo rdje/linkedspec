@@ -39,8 +39,10 @@ audit `FUTURE-PARITY-BACKLOG.9.1.0` has since shown that the separate
 caller-global parse-mode axis mutates all nested rules and already creates an
 uncovered default-AND backend drift. The proposed replacement makes OR/default
 families intrinsically seek and AND families intrinsically consume, without a
-public/global override; see [[and-or-cursor-ownership-audit]]. No runtime
-behavior changes until the follow-on decision and implementation land.
+public/global override; see [[and-or-cursor-ownership-audit]]. The director has
+also confirmed that parent mode never propagates to or overrides child mode;
+see [[rule-local-cursor-ownership-decision]]. No runtime behavior changes until
+exact ratification and implementation land.
 
 Bounds count complete iterations:
 

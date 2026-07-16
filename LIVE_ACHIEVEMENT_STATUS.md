@@ -8,9 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.1.0 — capture rule-local cursor ownership**
+  (DONE — the blocker is resolved; exact contract ratification `.9.1.1.1` is the fresh-session resume point).
+
+  **Result:** Parent OR/AND mode never propagates to or overrides child OR/AND mode. OR children retain seek and
+  AND children retain consume through every nested-rule entry path. No runtime behavior changed.
+
+  **Proof:** The director decision is durable in the task tree and Knowledge Map; roadmap, architecture, guide,
+  mdBook status, and bounded memory agree. Governance/book/whitespace checks pass.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.9.1.0 — audit cursor semantic ownership**
-  (DONE — global override is rejected by the audit recommendation; `.9.1.1` awaits the blind-call ownership
-  decision before ratification/implementation splitting).
+  (DONE — global override is rejected by the audit recommendation; the then-open child-ownership question was
+  resolved by `.9.1.1.0`, and `.9.1.1.1` owns exact ratification/implementation splitting).
 
   **Result:** Perl/Dart/Julia/Lua currently own one global seek-default engine mode; Rust derives AND consume / OR
   seek per rule but permits an invocation-wide override. That split is observably divergent for default

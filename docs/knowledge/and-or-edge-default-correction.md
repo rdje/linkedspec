@@ -47,9 +47,10 @@ The 2026-07-16 cursor-ownership audit extends this direction: a caller-global
 `parse_mode` rewrites every nested rule and has already produced uncovered
 default-AND parity drift. The audit recommends intrinsic OR/default seek and AND
 consume behavior with no public/global override, while retaining low-level
-seek/consume matcher primitives. The design decision still must settle whether
-an AND blind call imposes contiguous entry on an OR child or the called child
-keeps its own intrinsic mode.
+seek/consume matcher primitives. The director settled child ownership on
+2026-07-17: parent mode never propagates, so every called child keeps its own
+intrinsic mode. Exact edge and migration ratification remains `.9.1.1.1`.
 
 Related task: [[FUTURE-PARITY-BACKLOG]] leaf `.9.1`; audit:
 [[and-or-cursor-ownership-audit]].
+Child ownership: [[rule-local-cursor-ownership-decision]].

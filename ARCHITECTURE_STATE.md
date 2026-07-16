@@ -4,7 +4,12 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-16`
+- Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: director capture `FUTURE-PARITY-BACKLOG.9.1.1.0` fixes rule-local cursor ownership. Parent
+  OR/AND mode never propagates to or overrides a child; OR children remain seek and AND children remain consume
+  through blind calls, action-edge dispatch, explicit calls, and recursion. This preserves one meaning for a rule
+  in every composition context. Exact grammar/API/CLI/descriptor/generated/conformance ratification remains
+  `.9.1.1.1`; no runtime behavior has changed.
 - `2026-07-16` refresh: cursor-ownership audit `FUTURE-PARITY-BACKLOG.9.1.0` finds that Perl bakes one selected
   `parse_mode` into every handler, Dart/Julia/Lua own one seek-default engine mode, and Rust alone compiles AND as
   consume and OR/default as seek before permitting an execution-wide override. The same default `Top::AND` with
@@ -13,8 +18,8 @@ This document is the current high-level technical reading of the project shape. 
   OR+consume anchored choice are legitimate low-level algorithms, but no objective justifies a caller rewriting
   every nested rule. The audit recommends intrinsic rule-kind semantics, removal with targeted migration of the
   global API/CLI option, retained matcher primitives, and derived per-rule descriptor metadata. No behavior has
-  changed. Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's seek behavior or
-  imposes context-sensitive contiguous entry.
+  changed. The child-ownership question recorded here was resolved by `.9.1.1.0`: every child retains its
+  intrinsic mode and exact ratification continues in `.9.1.1.1`.
 - `2026-07-16` refresh: Perl logical rollout `FUTURE-PARITY-BACKLOG.5.2.2` gives direct, nested, assignment,
   return, condition, function, block-value, and receiver `and`/`or`/`not` calls one typed ActionIR owner and
   `LinkedSpec::RuntimeLogical` seam. Arity rejects before operand lowering; valid operands run once left-to-right;
