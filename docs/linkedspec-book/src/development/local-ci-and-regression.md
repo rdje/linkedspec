@@ -241,7 +241,7 @@ bash tools/run_lua_local.sh
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
 PUC Lua and LuaJIT, runs all 61 primary CLI cases under default and POSIX environments on PUC Lua, and validates
 plus executes the exact 105-case manifest
-through the developer corpus command. The current suite passes 169/169 on each ABI. Its library-level controlled corpus tests
+through the developer corpus command. The current suite passes 172/172 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command validates by default and executes the complete manifest
@@ -250,9 +250,11 @@ native execution/canonical JSON, stable failures/exits, and canonical phase trac
 61-case process legs recurring here and extends the warmed matrix to 5x2x61. Status is
 `runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`, confirms the checkout-native setup plus separate
 corpus/primary boundaries, and hands off to generated-source work without changing behavior. Planning `.8.1.0`
-corrects the earlier v1/v2-only scaffold wording against outward descriptor v3 and separates deterministic
-exact-v1/v2/v3 emitter core `.8.1.1` from fresh-process PUC Lua/LuaJIT load/run proof `.8.1.2`. No Lua emitter is
-claimed until those implementation leaves close.
+corrects the earlier v1/v2-only scaffold wording against outward descriptor v3. Deterministic exact-v1/v2/v3
+emitter core `.8.1.1` is now covered here: metadata/errors match contract v1, equivalent input emits byte-identical
+ASCII source, effective callable/rule state survives reconstruction, and direct/traced modules execute in process
+on both ABIs. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup proof remains `.8.1.2`; plan-family and
+admission gates remain `.8.2-.8.4`.
 The planning-only `.8.1.0` slice passes generated-source/callable/capability checks, Lua 169/169 per ABI, primary
 CLI 61/61 in both environments, corpus 105/105, and the canonical gate with both reference CLI legs at 61/61 plus
 Phase 0 true reach `1..1031` in 609 seconds.

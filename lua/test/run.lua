@@ -4070,6 +4070,229 @@ test("compiled descriptor matches the exact outward contract", function()
   assert_equal(json.decode(json.encode(descriptor)).meta.parse_mode, "seek", "descriptor JSON round-trip")
 end)
 
+test("generated source metadata and portable errors match the neutral contract", function()
+  assert_equal(
+    linkedspec.GENERATED_SOURCE_CONTRACT,
+    "linkedspec-generated-source-v1",
+    "generated contract id"
+  )
+  assert_equal(linkedspec.GENERATED_SOURCE_FORMAT, 1, "generated format")
+  assert_equal(
+    linkedspec.generated_source_stage_name(linkedspec.EMIT_SOURCE_STAGE),
+    "emit_source",
+    "emit stage"
+  )
+  assert_equal(
+    linkedspec.generated_source_code_name(linkedspec.GENERATED_EXECUTION_FAILED_CODE),
+    "generated_execution_failed",
+    "execution code"
+  )
+
+  local metadata = linkedspec.generated_source_metadata("generated/λ.spec")
+  assert_equal(linkedspec.is_generated_source_metadata(metadata), true, "metadata type")
+  assert_equal(
+    json.encode(linkedspec.generated_source_metadata_to_json(metadata)),
+    '{"contract_id":"linkedspec-generated-source-v1","format_version":1,"source_identity":"generated/λ.spec"}',
+    "metadata JSON"
+  )
+
+  local compile_error = linkedspec.generated_source_compile_failed("generated/λ.spec", "bad byte")
+  assert_equal(linkedspec.is_generated_source_error(compile_error), true, "compile error type")
+  assert_equal(compile_error.stage, "compile_or_load_generated_source", "compile stage")
+  assert_equal(compile_error.code, "generated_source_compile_failed", "compile code")
+  assert_equal(tostring(compile_error), "Generated Lua source failed to compile or load: bad byte", "compile text")
+
+  local execution_error = linkedspec.generated_source_execution_failed(
+    "generated/λ.spec",
+    "boom",
+    { rule_label = "Top", handler_family = "default" }
+  )
+  local execution_json = linkedspec.generated_source_error_to_json(execution_error)
+  assert_equal(execution_json.type, "generated_source_error", "execution error type field")
+  assert_equal(execution_json.stage, "execute_generated", "execution stage")
+  assert_equal(execution_json.code, "generated_execution_failed", "execution code")
+  assert_equal(execution_json.rule_label, "Top", "execution rule")
+  assert_equal(execution_json.handler_family, "default", "execution family")
+  assert_equal(execution_json.detail, "boom", "execution detail")
+
+  local plan_error = linkedspec.generated_source_error({
+    stage = linkedspec.VALIDATE_GENERATED_PLAN_STAGE,
+    code = linkedspec.GENERATED_PLAN_UNKNOWN_FAMILY_CODE,
+    summary = "Generated rule plan contains an unknown family",
+    source_identity = "generated/λ.spec",
+    rule_label = "Top",
+    handler_family = "unknown",
+  })
+  assert_equal(plan_error.stage, "validate_generated_plan", "plan stage")
+  assert_equal(plan_error.code, "generated_plan_unknown_family", "plan code")
+
+  local invalid_identity_ok, invalid_identity_error = pcall(
+    linkedspec.emit_lua_source_v1,
+    {},
+    string.char(0xFF)
+  )
+  assert_equal(invalid_identity_ok, false, "invalid identity rejected")
+  assert_equal(linkedspec.is_generated_source_error(invalid_identity_error), true, "invalid identity typed")
+  assert_equal(invalid_identity_error.stage, "emit_source", "invalid identity stage")
+  assert_equal(invalid_identity_error.code, "generated_source_emit_failed", "invalid identity code")
+  assert_equal(invalid_identity_error.source_identity, string.char(0xFF), "invalid identity retained")
+
+  local missing_identity_ok, missing_identity_error = pcall(linkedspec.emit_lua_source_v1, {}, "")
+  assert_equal(missing_identity_ok, false, "missing identity rejected")
+  assert_equal(linkedspec.is_generated_source_error(missing_identity_error), true, "missing identity typed")
+  assert_equal(missing_identity_error.detail, "source_identity is required", "missing identity detail")
+
+  local invalid_compiled_ok, invalid_compiled_error = pcall(
+    linkedspec.emit_lua_source_v1,
+    {},
+    "generated/invalid.spec"
+  )
+  assert_equal(invalid_compiled_ok, false, "invalid compiled state rejected")
+  assert_equal(linkedspec.is_generated_source_error(invalid_compiled_error), true, "invalid compiled typed")
+  assert_equal(invalid_compiled_error.stage, "emit_source", "invalid compiled stage")
+  assert_equal(invalid_compiled_error.code, "generated_source_emit_failed", "invalid compiled code")
+  assert_equal(invalid_compiled_error.source_identity, "generated/invalid.spec", "invalid compiled identity")
+  assert_equal(invalid_compiled_error.detail, "compiled must be a CompiledSpec", "invalid compiled detail")
+end)
+
+local function load_generated_lua_module(source)
+  local loader = loadstring or load
+  local chunk, load_error = loader(source, "@generated_linkedspec.lua")
+  if chunk == nil then fail("generated Lua source did not compile: " .. tostring(load_error)) end
+  local ok, module_or_error = pcall(chunk)
+  if not ok then error(module_or_error, 0) end
+  return module_or_error
+end
+
+test("generated Lua source is deterministic and preserves exact effective v1 v2 v3 state", function()
+  local fixed = registry_function(
+    "fixed",
+    { "value" },
+    0,
+    linkedspec.action_ast.to_json(linkedspec.parse_action_block("return(value)")),
+    "return(value)"
+  )
+  local variadic = variadic_registry_function(
+    "collect",
+    { "prefix" },
+    "items",
+    1,
+    linkedspec.action_ast.to_json(linkedspec.parse_action_block("return(items)")),
+    "return(items)"
+  )
+  local parameter_kinds = json.harray({ callback = "codeblock" })
+  local contextual = registry_function(
+    "apply",
+    { "value", "callback" },
+    2,
+    linkedspec.action_ast.to_json(linkedspec.parse_action_block("return(callback())")),
+    "return(callback())",
+    nil,
+    parameter_kinds
+  )
+  local first_top = compiled_test_rule("Top", true, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "old" }), source = "/old/", line = 1 }),
+  })
+  local child = compiled_test_rule("Child", false, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "c" }), source = "/c/", line = 2 }),
+  })
+  local last_top = compiled_test_rule("Top", true, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "x" }), source = "/x/", line = 3 }),
+    ast.body_element({
+      kind = ast.code_block_body_kind({
+        lifecycle = "E",
+        code = 'return(apply(collect("λ", "a"), { return(value) }))',
+      }),
+      source = 'E { return(apply(collect("λ", "a"), { return(value) })) }',
+      line = 3,
+    }),
+  })
+  local compiled = linkedspec.compile_spec(ast.spec_file({
+    functions = { fixed, variadic, contextual },
+    rules = { first_top, child, last_top },
+  }), { validate_source = false })
+  local identity = "generated/λ$parser.spec"
+  local first = linkedspec.emit_lua_source_v1(compiled, identity)
+  local second = linkedspec.emit_lua_source_v1(compiled, identity)
+
+  assert_equal(first, second, "deterministic source bytes")
+  assert_equal(first:find(identity, 1, true), nil, "identity is not embedded as a host literal")
+  assert_contains(first, "linkedspec-generated-source-v1", "contract marker")
+  assert_contains(first, "LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1", "format marker")
+  assert_contains(first, "function M.execute(input, options)", "direct role")
+  assert_contains(first, "function M.execute_with_trace(input, trace_config, options)", "trace role")
+  for index = 1, #first do
+    if first:byte(index) > 0x7F then fail("generated Lua source must be ASCII at byte " .. index) end
+  end
+
+  local payload_hex = assert(first:match('local _EFFECTIVE_SPEC_JSON_HEX = "([0-9a-f]+)"'))
+  local effective = ast.from_json("SpecFile", json.decode(bytes_from_hex(payload_hex)))
+  assert_equal(#effective.functions, 3, "effective function count")
+  assert_equal(effective.functions[1].name, "fixed", "fixed source order")
+  assert_equal(effective.functions[1].params[1], "value", "fixed params")
+  assert_equal(effective.functions[1].signature, nil, "fixed signature absence")
+  assert_equal(effective.functions[2].name, "collect", "variadic source order")
+  assert_equal(effective.functions[2].signature.min_arity, 1, "variadic minimum")
+  assert_equal(effective.functions[2].signature.rest_param, "items", "variadic rest")
+  assert_equal(effective.functions[2].parameter_kinds, nil, "variadic kind absence")
+  assert_equal(effective.functions[3].name, "apply", "codeblock source order")
+  assert_equal(effective.functions[3].params[2], "callback", "codeblock fixed params")
+  assert_equal(effective.functions[3].parameter_kinds.callback, "codeblock", "codeblock kind")
+  assert_equal(effective.functions[3].signature, nil, "codeblock signature absence")
+  assert_equal(#effective.rules, 2, "effective rule count")
+  assert_equal(effective.rules[1].header.label, "Child", "last-definition rule order first")
+  assert_equal(effective.rules[2].header.label, "Top", "last-definition rule order second")
+  assert_equal(effective.rules[2].body[1].kind.pattern, "x", "last definition preserved")
+end)
+
+test("generated Lua module executes direct and traced roles in process", function()
+  local contextual = registry_function(
+    "apply",
+    { "value", "callback" },
+    0,
+    linkedspec.action_ast.to_json(linkedspec.parse_action_block("return(callback())")),
+    "return(callback())",
+    nil,
+    json.harray({ callback = "codeblock" })
+  )
+  local rules = linkedspec.parse_spec(table.concat({
+    "Top::",
+    ' /x/ E { return(apply("λ", { return(value) })) }',
+  }, "\n")).rules
+  local compiled = linkedspec.compile_spec(ast.spec_file({ functions = { contextual }, rules = rules }))
+  local generated = load_generated_lua_module(
+    linkedspec.emit_lua_source_v1(compiled, "generated/λ$module.spec")
+  )
+  local metadata = linkedspec.generated_source_metadata_to_json(generated.metadata())
+  assert_equal(metadata.contract_id, "linkedspec-generated-source-v1", "module contract")
+  assert_equal(metadata.format_version, 1, "module format")
+  assert_equal(metadata.source_identity, "generated/λ$module.spec", "module identity")
+  assert_equal(generated.execute("x", { top_rule = "Top" }), "λ", "direct generated result")
+
+  local trace_output = {}
+  local traced = generated.execute_with_trace(
+    "x",
+    linkedspec.trace_config_enabled(linkedspec.TRACE_FULL),
+    {
+      top_rule = "Top",
+      stdout_writer = function(payload) trace_output[#trace_output + 1] = payload end,
+    }
+  )
+  assert_equal(traced, "λ", "traced generated result")
+  assert_contains(table.concat(trace_output), "lua_runtime:parse", "traced generated runtime scope")
+
+  local failed_ok, failed_error = pcall(generated.execute, "x", { top_rule = "Missing" })
+  assert_equal(failed_ok, false, "generated missing rule fails")
+  assert_equal(linkedspec.is_generated_source_error(failed_error), true, "generated failure type")
+  assert_equal(failed_error.stage, "execute_generated", "generated failure stage")
+  assert_equal(failed_error.code, "generated_execution_failed", "generated failure code")
+  assert_equal(failed_error.source_identity, "generated/λ$module.spec", "generated failure identity")
+  assert_equal(failed_error.rule_label, "Missing", "generated failure rule")
+
+  local compatibility = load_generated_lua_module(linkedspec.emit_lua_source(compiled))
+  assert_equal(compatibility.metadata().source_identity, "<inline>", "compatibility identity")
+end)
+
 test("compiled spec reports typed dependency failures after optional validation", function()
   local bad_slot = compiled_test_rule("Top", true, nil, {
     ast.body_element({

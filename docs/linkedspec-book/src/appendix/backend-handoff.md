@@ -388,9 +388,11 @@ locks success/fixture/manifest exits 0/1/2. Both ABI suites pass 167/167 with st
 canonical JSON, stable phases/exits, and the independent canonical phase trace at 169/169 per ABI plus diagnostic
 shared CLI 61x2. Admission `.7.2` now makes both process legs recurring and extends the matrix to 5x2x61. Status is
 `runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`. Planning `.8.1.0` corrects the pre-descriptor-v3
-scaffold scope and splits deterministic exact-v1/v2/v3 source construction `.8.1.1` from fresh-process PUC
-Lua/LuaJIT proof `.8.1.2`. `.8.1.1` is active, no generated Lua source is claimed yet, and the census stays
-64/0/0 until `.8.4`.
+scaffold scope, and `.8.1.1` now emits deterministic native Lua from exact fixed-v1/variadic-v2/
+final-codeblock-v3 effective state. It exposes contract/version/identity metadata, portable errors, and direct/
+traced value roles with canonical strict-UTF-8 JSON rendered as ASCII hex. Fresh-process PUC Lua/LuaJIT proof is
+active under `.8.1.2`; plan/family/portable generated trace remains `.8.2`, subset proof `.8.3`, and the census
+stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -606,7 +608,7 @@ optional-SDK verification, and `.7.1` owns public documentation closeout.
 ### Lua Backend Commands, Embedding, and Status
 
 Lua's current native boundary is `runtime-corpus-primary-cli`: PUC Lua 5.4 is
-the primary runtime, LuaJIT is the secondary ABI, both pass 169/169 native
+the primary runtime, LuaJIT is the secondary ABI, both pass 172/172 native
 tests, the focused primary command passes 61/61 under default and POSIX option
 environments, and the complete corpus passes 105/105. The warmed shared matrix
 passes the same command contract at 5 backends x 2 environments x 61 cases.
@@ -656,7 +658,7 @@ boundary, `require("linkedspec")` returned exact backend/status/entrypoint
 identity, the still-unimplemented primary scaffold intentionally exited `2`,
 and the developer corpus command only validated the 105-fixture manifest. That
 10/10-per-ABI boundary did not claim parser execution; the current command,
-corpus, and 169/169 proof above supersede it. Unicode is the character/code-point
+corpus, and 172/172 proof above supersede it. Unicode is the character/code-point
 model; strict UTF-8 is the selected byte encoding, and UTF-16/UTF-32 are not
 auto-detected. The next historical layer added data-only source
 ASTs for specs, functions, ordinary/staged spans, staged parse jobs, rules,
@@ -877,10 +879,10 @@ ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`
 are complete at 64/0/0 with one recurring five-backend/two-Lua-ABI command. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
-separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs; generated
-Lua source remains correctly owned by `.8.1-.8.4` because no emitter exists yet. Planning `.8.1.0` further
-splits exact fixed-v1/variadic-v2/final-codeblock-v3 source construction `.8.1.1` from isolated PUC Lua/LuaJIT
-load/run proof `.8.1.2`, without moving family execution, subset admission, or capability closeout.
+separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs, and emitter
+core `.8.1.1` now serializes that exact fixed-v1/variadic-v2/final-codeblock-v3 state into deterministic native
+Lua with metadata, errors, and direct/traced roles. Isolated PUC Lua/LuaJIT load/run proof remains `.8.1.2`,
+without moving family execution, subset admission, or capability closeout from `.8.2-.8.4`.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit

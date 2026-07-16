@@ -5,13 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
-- `2026-07-16` refresh: Lua generated-source planning `.8.1.0` root-causes a future-scope drift: `.8.1` and its
-  fixed-v1/variadic-v2 wording predated ADR `0041`'s exact final-codeblock-v3 union. The implementation is now
-  dependency-split into deterministic effective-state v1/v2/v3 emission `.8.1.1` and fresh-process PUC Lua/LuaJIT
-  valid/corrupt load, execution, trace, failure, and cleanup proof `.8.1.2`. Lua canonical JSON already supplies
-  strict-UTF-8 validation and stable key order; generated payloads will use dependency-free ASCII hex. Exact plan/
-  family/portable generated trace remains `.8.2`, subset admission `.8.3`, and sole census promotion `.8.4`.
-  Planning changes no backend behavior, status, or capability 64/0/0; `.8.1.1` is active.
+- `2026-07-16` refresh: Lua emitter core `.8.1.1` implements the deterministic half of the split created by
+  `.8.1.0`. `lua/src/linkedspec/source_emitter.lua` reconstructs one effective typed `SpecFile` from immutable,
+  source-ordered fixed-v1/variadic-v2/final-codeblock-v3 function definitions and last-definition rule order,
+  canonicalizes it with strict-UTF-8 sorted-key JSON, and embeds payload plus Unicode identity as lowercase ASCII
+  hex in a native Lua module. Public compatibility/source-identified emitters expose exact contract/version/
+  identity metadata, typed portable emit/compile-load/execution errors, and direct/traced value roles over the
+  ordinary runtime. Repeated equivalent input is byte-identical and focused PUC Lua/LuaJIT gates pass 172/172.
+  Fresh-process valid/corrupt load/run/cleanup proof is now active under `.8.1.2`; exact plan/family/portable
+  generated trace remains `.8.2`, subset admission `.8.3`, and sole census promotion `.8.4`. Public status and
+  capability 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua primary no-drift `.7.3` confirms the native module, exact primary process contract,
   separate corpus adapter, checkout-local executable/native-module setup, public limitations, and recurring gates
   agree at `runtime-corpus-primary-cli`. It corrects stale mdBook foundation prose and a command setup that cleaned

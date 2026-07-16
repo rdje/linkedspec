@@ -165,13 +165,16 @@ This `README.md` is the **single entry point** to the project.
   named/file/inline execution, strict UTF-8, canonical JSON, stable phase failures/exits, and independent canonical
   trace pass 169/169 on each ABI. Admission `.7.2` now runs the unchanged 61 cases under default and POSIX
   environments in the focused Lua gate and extends the warmed shared matrix to five backends (5x2x61). Public
-  status advances to `runtime-corpus-primary-cli`; corpus data, generated source, and capability 64/0/0 remain
-  unchanged. Final CLI/native/corpus documentation no-drift `.7.3` closes parent `.7`. Generated-source planning
-  `.8.1.0` corrects the older v1/v2-only wording against ADR `0041`, splits exact v1/v2/v3 emitter core `.8.1.1`
-  from isolated dual-ABI host proof `.8.1.2`, and activates `.8.1.1` without claiming an emitter early.
+  status advances to `runtime-corpus-primary-cli`; corpus data and capability 64/0/0 remain unchanged. Final
+  CLI/native/corpus documentation no-drift `.7.3` closes parent `.7`. Generated-source planning `.8.1.0` corrects
+  the older v1/v2-only wording against ADR `0041`; `.8.1.1` now emits deterministic contract-v1 native Lua from
+  exact fixed-v1/variadic-v2/final-codeblock-v3 effective state. It exposes strict metadata, portable errors, and
+  direct/traced entrypoint roles using canonical strict-UTF-8 JSON embedded as ASCII hex. Fresh-process PUC
+  Lua/LuaJIT valid/corrupt load/run proof remains `.8.1.2`, plan families `.8.2`, subset admission `.8.3`, and
+  census promotion `.8.4`.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
-  Generated Lua preservation/execution remains `.8.1-.8.4`. ADR
+  Generated Lua isolation, plan execution, and admission remain `.8.1.2-.8.4`. ADR
   `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

@@ -24,7 +24,7 @@ The repository now owns a native Lua module at `lua/src/linkedspec/init.lua`. Wi
 `backend_status()` call returns a fresh table, so caller mutation cannot alter later status.
 
 `lua/test/run.lua` is a dependency-free assertion driver. `tools/run_lua_local.sh` syntax-checks every Lua source,
-runs 169 current tests on PUC Lua and the same 169 on LuaJIT, passes the exact primary adapter at 61/61 under
+runs 172 current tests on PUC Lua and the same 172 on LuaJIT, passes the exact primary adapter at 61/61 under
 default and POSIX environments on PUC Lua, validates the exact 105-fixture corpus, and executes it at 105/105
 through the developer runner. It writes no cache or global module state.
 
@@ -32,12 +32,13 @@ through the developer runner. It writes no cache or global module state.
 separate corpus runner validates by default and executes the complete manifest behind bare `--execute`. The module
 now exposes the complete native parse/validate/compile/function/staged/runtime/corpus surface with
 `runtime-corpus-primary-cli` status. CLI/native/corpus no-drift `.7.3` is closed;
-generated-source planning `.8.1.0` splits exact-v1/v2/v3 emitter core `.8.1.1`
-from fresh-process PUC Lua/LuaJIT proof `.8.1.2`, and `.8.1.1` is active.
+generated-source emitter core `.8.1.1` now preserves exact-v1/v2/v3 state; fresh-process PUC Lua/LuaJIT proof
+`.8.1.2` is active.
 
 Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]], [[lua-actionir-ast-parser]],
 [[lua-actionir-contract-resolver]],
 [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[lua-full-corpus-gate]].
 See also [[lua-primary-cli-adapter]], [[lua-primary-cli-recurring-admission]],
-[[lua-primary-cli-no-drift-closeout]], [[lua-generated-source-scaffold-split]].
+[[lua-primary-cli-no-drift-closeout]], [[lua-generated-source-scaffold-split]],
+[[lua-generated-source-emitter-core]].

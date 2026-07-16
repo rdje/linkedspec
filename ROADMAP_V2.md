@@ -174,8 +174,11 @@ at 166/166 per ABI. Complete-manifest `.6.3` then passes one ordered 105/105 lib
 `0023` options, strict UTF-8/native execution/canonical JSON, stable failures/exits, and canonical phase trace at
 169/169 per ABI plus diagnostic shared CLI 61x2. Admission `.7.2` now makes both Lua process legs recurring and
 extends the warmed shared matrix to 5x2x61. Public status is `runtime-corpus-primary-cli`; final no-drift `.7.3`
-closes parent `.7`. Generated-source planning `.8.1.0` then corrects the pre-ADR-0041 v1/v2-only scope, splits
-exact v1/v2/v3 emission `.8.1.1` from isolated PUC/LuaJIT host proof `.8.1.2`, and activates `.8.1.1` before code.
+closes parent `.7`. Generated-source planning `.8.1.0` then corrects the pre-ADR-0041 v1/v2-only scope. Emitter
+core `.8.1.1` now returns deterministic native Lua from exact fixed-v1/variadic-v2/final-codeblock-v3 effective
+state, with contract/version/Unicode identity metadata, typed portable errors, direct/traced roles, and canonical
+strict-UTF-8 JSON embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT proof is active under `.8.1.2`; plan,
+accepted-subset, and census admission remain `.8.2-.8.4`.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

@@ -11,7 +11,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [lua, generated-source, source-emitter, callable-signature, codeblock, isolation, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.8.1.0 root-causes stale v1/v2-only wording: the leaf was drafted on 2026-07-11/12, while ADR 0041 and final_codeblock_v3 landed on 2026-07-15. The audit maps exact effective state through function_registry.entries, compiled_rule_order, spec_ast to_json/from_json, canonical strict-UTF-8 json.encode, and direct/traced runtime APIs. It splits deterministic v1/v2/v3 Lua emission .8.1.1 from fresh-process PUC/LuaJIT valid/corrupt load-run-cleanup .8.1.2; plan/family/portable generated trace remains .8.2. Focused Lua proof is 169/169 per ABI, primary 61x2, corpus 105/105; canonical Phase 0 is 1031/1031 in 609 seconds."
+evidence: "LUA-BACKEND-PARITY.8.1.0 root-causes stale v1/v2-only wording: the leaf was drafted on 2026-07-11/12, while ADR 0041 and final_codeblock_v3 landed on 2026-07-15. LUA-BACKEND-PARITY.8.1.1 now implements the mapped seam in source_emitter.lua: exact function_registry.entries plus compiled_rule_order reconstruct one typed effective SpecFile, canonical strict-UTF-8 JSON and source identity render as ASCII hex, and generated native Lua exposes metadata plus direct/traced result roles with portable errors. Focused Lua proof is 172/172 per ABI. Fresh-process PUC/LuaJIT valid/corrupt load-run-cleanup remains .8.1.2; plan/family/portable generated trace remains .8.2."
 reverify: "git blame -L 2781,2787 docs/tasks/LUA-BACKEND-PARITY.md; git log -S'final_codeblock_v3' --oneline -- capability_conformance/outward_descriptor_contract.json; python3 tools/check_callable_signature_contract.py; python3 tools/check_callable_codeblock_contract.py; perl tools/check_generated_source_contract.pl; rg -n '8.1.0|8.1.1|8.1.2|final-codeblock-v3|ASCII hex' docs/tasks/LUA-BACKEND-PARITY.md docs/linkedspec-book/src/appendix/backend-handoff.md"
 ---
 
@@ -21,7 +21,7 @@ contract adds an exact final-codeblock-v3 record. Generated Lua state must
 therefore preserve the full permanent union: fixed `params`/`arity`, variadic
 `signature`, or fixed `params`/`arity` plus final-only `parameter_kinds`.
 
-The emitter should reconstruct an effective typed `SpecFile`, not attempt to
+The emitter reconstructs an effective typed `SpecFile`; it does not attempt to
 revive Lua's internal compiled-state JSON. Function registry entries already
 retain immutable source-ordered definitions with all v1/v2/v3 metadata. The
 compiled rule order already identifies the last effective definition of each
@@ -29,10 +29,10 @@ rule and each compiled rule retains its typed header/body elements.
 `spec_ast.to_json/from_json` is the existing lossless reconstruction boundary.
 
 Lua's dependency-free JSON encoder validates every string as strict UTF-8 and
-sorts object keys. The deterministic generated file can therefore embed the
+sorts object keys. The deterministic generated file embeds the
 canonical JSON and source identity as ASCII hexadecimal, avoiding host literal
 escaping, interpolation, Base64 dependencies, and Unicode normalization.
-Generated source remains native Lua text and returns a module with exact
+Generated source is native Lua text and returns a module with exact
 metadata plus direct and traced execution roles.
 
 The dependency order is intentionally narrow:
@@ -45,6 +45,8 @@ The dependency order is intentionally narrow:
   portable generated trace roles;
 - `.8.3`: interpreter-first contract-sourced 8/105 admission;
 - `.8.4`: sole all-pass Lua capability-census admission.
+
+Implementation details and exact public roles: [[lua-generated-source-emitter-core]].
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-outward-function-descriptor-union]], [[lua-final-codeblock-metadata]],

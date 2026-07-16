@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.1.1` — generated state should reuse the typed public seam): Lua's compiled
+  structures do not need a second internal serialization format. Immutable `function_registry.entries` retain
+  exact source-ordered fixed-v1/variadic-v2/final-codeblock-v3 definitions, and `compiled_rule_order` plus each
+  compiled rule's typed header/body retain the last-definition effective rule set. Rebuild a typed `SpecFile`,
+  canonicalize it through existing strict-UTF-8 sorted-key JSON, and render its bytes plus identity as lowercase
+  ASCII hex. This makes emitted host source deterministic without relying on Lua literal escaping, Base64, locale,
+  or normalization. The generated module should compile through public APIs and return ordinary direct values so
+  it cannot become a second interpreter. Typed metadata/errors and direct/traced roles belong in the scaffold;
+  fresh-process/corrupt host proof remains `.8.1.2`, and plan/family/portable generated trace remains `.8.2`.
+  PUC Lua and LuaJIT pass 172/172, primary stays 61x2, corpus stays 105/105, capability stays 64/0/0, and canonical
+  local CI passes Phase 0 `1..1031` in 620 seconds. Mutation testing was not run.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.1.0` — future leaves must be refreshed after cross-cutting contracts land):
   The original Lua emitter leaf predates ADR `0041`, so fixed-v1/variadic-v2 wording is no longer sufficient.
   Generated reconstruction must preserve the exact fixed-v1/variadic-v2/final-codeblock-v3 union already present

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (Lua scaffold planning `.8.1.0` corrects v1/v2/v3 scope and splits deterministic
-  emission `.8.1.1` from isolated dual-ABI host proof `.8.1.2`; `.8.1.1` is active while diagnostic `.5.1` and
+- Last updated: `2026-07-16` (Lua emitter core `.8.1.1` deterministically preserves exact v1/v2/v3 effective
+  state, metadata, portable errors, and direct/traced roles; isolated dual-ABI host proof `.8.1.2` is active while diagnostic `.5.1` and
   logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
@@ -4749,8 +4749,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 187 | `LUA-BACKEND-PARITY.7.3` | `done` | Exact primary/native/corpus usage and gate no-drift closes parent `.7`. |
 | 188 | `LUA-BACKEND-PARITY.8.1` | `active` | Build the deterministic contract-v1 Lua emitter scaffold and isolated load/run proof. |
 | 189 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Corrected post-ADR-0041 v1/v2/v3 scope and split emitter core from isolated host proof. |
-| 190 | `LUA-BACKEND-PARITY.8.1.1` | `active` | Emit deterministic Lua source from exact v1/v2/v3 effective typed state. |
-| 191 | `LUA-BACKEND-PARITY.8.1.2` | `pending` | Prove fresh-process PUC/LuaJIT valid/corrupt load, run, failure, trace, and cleanup. |
+| 190 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic Lua source preserves exact v1/v2/v3 effective state, metadata, errors, and entrypoint roles. |
+| 191 | `LUA-BACKEND-PARITY.8.1.2` | `active` | Prove fresh-process PUC/LuaJIT valid/corrupt load, run, failure, trace, and cleanup. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5392,6 +5392,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `LUA-BACKEND-PARITY.8.1.1` | Public compatibility/v1 emitter; exact v1/v2/v3 effective state; strict-UTF-8 canonical JSON and Unicode identity ASCII hex; metadata/errors/direct+traced roles; PUC Lua 172/LuaJIT 172; primary 61x2; corpus 105/105; generated/callable/capability 64/0/0; Knowledge Map, memory, doctrines, mdBook, whitespace; canonical CLI 61x2 and Phase 0 `1..1031`/620s. | PASS. Deterministic Lua source core is current without plan/status/census promotion; fresh-process isolation `.8.1.2` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.21.0` | User proposal; existing neutral-book/backend-README architecture; ADR 0040; detailed task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. One canonical neutral book plus five linked implementation companions is adopted and dependency-gated; no scaffold/content migration or behavior change. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.20.0` | KM/Rust workspace/test/local-CI audit; cargo-mutants 27.0.0; list-only 3,333/file/package/genre census; generated Unicode provenance; ADR 0039; task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Mutation testing is adopted only for explicit campaigns, never per commit; no mutant ran, no score exists, and no Rust/test/CI behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR 0038; separate native-accelerator tree; program/task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. Dynamic parsing remains primary/oracle/fallback; any accelerator is optional, fingerprinted, equivalence-gated, trust-isolated, and measurement-admitted; no behavior or speed claim changed and Lua `.5.1.2` resumes. |
@@ -5528,6 +5529,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.8.1.1` | `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source` | Exact effective v1/v2/v3 state, canonical strict-UTF-8/ASCII hex, metadata/errors, direct/traced roles, and isolation handoff. |
 | `FUTURE-PARITY-BACKLOG.21.0` | `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books` | ADR 0040, one neutral normative owner, five implementation companions, routing/drift gates, and parity dependency. |
 | `FUTURE-PARITY-BACKLOG.20.0` | `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing` | ADR 0039, exact list-only census, no-per-commit rule, survivor taxonomy, narrow generated exclusion, and detailed tree. |
 | `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, explicit trust/measurement gates, and non-blocking horizon tree. |

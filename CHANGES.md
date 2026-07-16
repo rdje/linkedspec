@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.1.1 — emit deterministic Lua source
+
+Added Lua's public contract-v1 source-emitter core. `emit_lua_source_v1(compiled, source_identity)` reconstructs
+one effective typed `SpecFile` from immutable source-ordered function registry definitions and last-definition
+compiled rule order. It preserves exact fixed-v1 params/arity, variadic-v2 signature/rest state, and
+final-codeblock-v3 parameter kinds. `emit_lua_source(compiled)` remains the compatibility form with `<inline>`
+identity.
+
+Canonical sorted-key strict-UTF-8 JSON and Unicode source identity are encoded as lowercase ASCII hex inside a
+native Lua module, avoiding host literal escaping, interpolation, locale, and normalization drift. Equivalent
+compiled state and identity emit byte-identical source. Generated modules expose exact contract/version/identity
+metadata plus direct and traced result roles over the ordinary compiler/runtime. Public typed errors cover all
+contract stages/codes and retain stable identity, rule/family attribution, and detail.
+
+Added permanent dual-ABI proof for metadata/error JSON, invalid identities, ASCII determinism, source-ordered
+v1/v2/v3 callable preservation, last-definition rules, Unicode metadata/results, direct/traced execution,
+missing-rule attribution, and the compatibility identity. PUC Lua and LuaJIT each pass 172/172; primary CLI stays
+61/61 in default and POSIX environments and corpus stays 105/105. Generated-source, callable, capability 64/0/0,
+Knowledge Map, memory, doctrines, mdBook, and whitespace checks pass. Canonical local CI exits 0 with reference
+CLI 61/61 in both environments plus Phase 0 `1..1031` in 620 seconds. Fresh-process/corrupt isolation, ten-family
+plans, accepted-subset proof, and census admission remain `.8.1.2-.8.4`; mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.1.0 — split Lua generated scaffold
 
 Corrected a latent generated-source scope drift before emitter code. `git blame` shows the `.8.1` scaffold was

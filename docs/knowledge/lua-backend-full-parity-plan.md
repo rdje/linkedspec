@@ -58,9 +58,10 @@ diagnostics/trace, native resolution, 105/105 corpus, capability census, and gen
 and exact 8/105 admission.
 
 Cross-backend syntax work may validate Lua today through the implemented typed AST,
-serialized `SpecFile`/ActionIR state, and native PUC Lua/LuaJIT execution. It must not
-claim a generated-Lua preservation path before the distinct generated-source lane
-`LUA-BACKEND-PARITY.8.1-.8.4` implements and admits that product surface.
+serialized `SpecFile`/ActionIR state, native PUC Lua/LuaJIT execution, and deterministic
+generated effective state through `.8.1.1`. It must not claim fresh-process isolation,
+family-plan routing, accepted-subset proof, or generated capability admission before
+`LUA-BACKEND-PARITY.8.1.2-.8.4` implements and admits those product surfaces.
 
 LPeg loads on both installed runtimes, but this does not make it the selected regex engine. Lua patterns and LPeg
 must be compared with the neutral regex/match-state fixtures; a native adapter is permissible if it preserves the
@@ -75,8 +76,8 @@ window admission. Complete `.6.3` now executes the ordered 105/105 manifest thro
 runner at 167/167 per ABI with status `runtime-corpus-full` and closes parent `.6`. Primary adapter `.7.1` now
 implements the exact thin command at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring, extends
 the matrix to 5x2x61, and advances status to `runtime-corpus-primary-cli`. Final no-drift `.7.3` closes parent
-`.7`. Generated-source planning `.8.1.0` has since split the exact v1/v2/v3 emitter core `.8.1.1` from isolated
-dual-ABI host proof `.8.1.2`; `.8.1.1` is active.
+`.7`. Generated-source planning `.8.1.0` split the exact v1/v2/v3 emitter core `.8.1.1` from isolated dual-ABI
+host proof `.8.1.2`; `.8.1.1` is complete at 172/172 per ABI and `.8.1.2` is active.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
@@ -86,4 +87,4 @@ Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-
 [[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]],
 [[lua-controlled-corpus-admission-split]], [[lua-full-corpus-gate]], [[lua-primary-cli-adapter]],
 [[lua-primary-cli-recurring-admission]], [[lua-primary-cli-no-drift-closeout]],
-[[lua-generated-source-scaffold-split]].
+[[lua-generated-source-scaffold-split]], [[lua-generated-source-emitter-core]].

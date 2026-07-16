@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.1.1 — emit deterministic Lua source**
+  (DONE — exact v1/v2/v3 source core is current; fresh-process dual-ABI isolation `.8.1.2` is next).
+
+  **Result:** Public compatibility and source-identified emitters reconstruct exact source-ordered fixed-v1,
+  variadic-v2, and final-codeblock-v3 definitions plus last-definition rules into one typed effective `SpecFile`.
+  Canonical strict-UTF-8 JSON and Unicode identity are embedded as lowercase ASCII hex in deterministic native Lua.
+  Generated modules expose exact metadata, typed portable errors, and direct/traced result roles over public
+  compiler/runtime APIs. Equivalent inputs are byte-identical; status and capability census remain unchanged.
+
+  **Proof:** PUC Lua and LuaJIT each pass 172/172, primary CLI remains 61/61 under default and POSIX environments,
+  and corpus remains 105/105. Generated-source/callable/capability 64/0/0, Knowledge Map, memory, doctrine, mdBook,
+  and whitespace checks pass. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase
+  0 true reach `1..1031` in 620 seconds. Mutation testing was not run. Fresh-process/corrupt isolation remains
+  `.8.1.2`; plan/family/portable generated trace, subset proof, and census remain `.8.2-.8.4`.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.1.0 — split Lua generated scaffold**
   (DONE — exact v1/v2/v3 emitter and isolated-host leaves exist before behavior code; `.8.1.1` is next).
 

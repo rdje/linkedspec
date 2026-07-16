@@ -29,6 +29,26 @@ source .spec text
   -> outward descriptor or parser coderef
 ```
 
+Lua can now project the compiled-state branch into deterministic host source as well:
+
+```text
+Lua CompiledSpec + strict-UTF-8 source identity
+  -> source-ordered effective callable definitions
+  -> last-definition effective rule order
+  -> typed SpecFile
+  -> canonical sorted-key strict-UTF-8 JSON
+  -> lowercase ASCII-hex payload and identity
+  -> native Lua module source
+  -> metadata() / execute() / execute_with_trace()
+```
+
+This generated module reloads the effective typed spec through Lua's public AST/compiler APIs and delegates to the
+same runtime engine. It preserves fixed-v1, variadic-v2, and final-codeblock-v3 callable records rather than
+inventing a separate compiled-state decoder. Contract/version/identity markers and typed emit/compile-load/
+execution errors make the boundary inspectable. The scaffold is deterministic source generation, not an
+optimizing compiler: fresh-process dual-ABI proof, ten-family plans, portable generated-family trace, accepted
+subset admission, and census promotion remain subsequent Lua leaves.
+
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
 ## Staged linked parsing

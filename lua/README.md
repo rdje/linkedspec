@@ -99,8 +99,9 @@ library and developer runner. Both report 105 passes/zero failures, both ABI sui
 over those native APIs: both ABI suites pass 169/169. Admission `.7.2` now runs the unchanged shared process proof
 at 61/61 in default and POSIX environments from the focused gate and extends the warmed matrix to 5x2x61. Public
 status is `runtime-corpus-primary-cli`; final no-drift `.7.3` closes parent `.7`. Generated-source planning `.8.1.0`
-then corrects the older v1/v2-only scope, splits exact v1/v2/v3 emitter core `.8.1.1` from isolated dual-ABI host
-proof `.8.1.2`, and activates `.8.1.1` without claiming generated behavior early.
+then corrects the older v1/v2-only scope, and emitter core `.8.1.1` now returns deterministic native Lua from the
+exact fixed-v1/variadic-v2/final-codeblock-v3 effective state. Fresh-process PUC Lua/LuaJIT host proof `.8.1.2` is
+active; family plans, accepted-subset admission, and census promotion remain `.8.2-.8.4`.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -337,7 +338,8 @@ first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` 
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
 implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
 extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drift `.7.3` closes parent `.7`.
-Generated Lua preservation/execution remains `.8.1-.8.4`, with scaffold `.8.1` active.
+Generated Lua emission is current through `.8.1.1`; isolated dual-ABI execution, family plans, subset proof, and
+admission remain `.8.1.2-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -392,7 +394,7 @@ be projected and composed with rule parsing. The staged registry now dispatches 
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
 loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
 parser CLI adapter, recurring focused 61x2 proof, and shared 5x2x61 matrix admission are current. Final CLI no-drift
-is `.7.3`; generated source retains its later `.8` owner.
+is `.7.3`; deterministic generated-source core is `.8.1.1`, while isolation/plan/admission remains `.8.1.2-.8.4`.
 
 Run the local gate from the repository root:
 
@@ -684,9 +686,8 @@ Registered keyword arguments diagnose as
 `user_function_recursion` with the full cycle. Missing or mismatched staged bodies fail
 closed before body execution. Variadic signatures and declared contextual final codeblocks
 now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
-full corpus execution, and the thin primary CLI adapter are implemented; generated Lua remains the separate `.8`
-layer. Planning `.8.1.0` now requires the exact v1/v2/v3 effective-state union and splits emitter core `.8.1.1`
-from isolated PUC/LuaJIT host proof `.8.1.2`; `.8.1.1` is active.
+full corpus execution, and the thin primary CLI adapter are implemented. Generated Lua emitter core `.8.1.1`
+preserves the exact v1/v2/v3 effective-state union; isolated PUC/LuaJIT host proof remains `.8.1.2`.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:
@@ -707,6 +708,57 @@ rule order. Each compiled rule carries mode metadata, regex patterns,
 dependency refs, action/blind edges, lifecycle/plain payloads, parsed ActionIR,
 and registry-aware contracts. Child regex slots are resolved into structured
 `CompiledDependencyRegexState`; no regex is executed at this boundary.
+
+### Deterministic generated Lua modules
+
+`emit_lua_source_v1(compiled, source_identity)` returns native Lua source under
+contract `linkedspec-generated-source-v1`. The compatibility adapter
+`emit_lua_source(compiled)` uses identity `<inline>`. The source is byte-stable
+for equivalent compiled state and identity: it normalizes source-ordered callable
+records and last-definition rule order into one typed `SpecFile`, encodes its
+canonical strict-UTF-8 JSON plus identity as lowercase ASCII hex, and exposes
+metadata plus direct and traced result roles.
+
+```lua
+local parsed = linkedspec.parse_spec([[
+Top::
+ /x/ E { return("generated") }
+]])
+local compiled = linkedspec.compile_spec(parsed)
+local source = linkedspec.emit_lua_source_v1(
+  compiled,
+  "generated/example.spec"
+)
+
+-- An embedding host may compile the returned module source directly.
+local loader = loadstring or load
+local chunk = assert(loader(source, "@generated_example.lua"))
+local generated = chunk()
+
+local metadata = linkedspec.generated_source_metadata_to_json(
+  generated.metadata()
+)
+assert(metadata.contract_id == "linkedspec-generated-source-v1")
+assert(metadata.format_version == 1)
+assert(metadata.source_identity == "generated/example.spec")
+assert(generated.execute("x", { top_rule = "Top" }) == "generated")
+
+local trace_config = linkedspec.trace_config_enabled(linkedspec.TRACE_FULL)
+assert(generated.execute_with_trace(
+  "x",
+  trace_config,
+  { top_rule = "Top" }
+) == "generated")
+```
+
+The generated module still imports `linkedspec`; it is a deterministic source
+artifact over the current Lua runtime, not a standalone bundled runtime or an
+optimization claim. Emission failures, module compile/load failures, and generated
+execution failures use typed `GeneratedSourceError` values with stable stage, code,
+summary, identity, and optional attribution/detail fields. Fresh-process PUC Lua and
+LuaJIT persistence, corrupt-payload rejection, and cleanup are intentionally the next
+`.8.1.2` proof. `plan()`/family validation and portable generated-family trace roles
+do not exist until `.8.2`, so this scaffold is not yet capability-census admission.
 
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`

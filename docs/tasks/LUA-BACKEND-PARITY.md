@@ -2815,18 +2815,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold`
 
 - ID: `LUA-BACKEND-PARITY.8.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Emit deterministic contract-v1 Lua source from exact effective typed state.
   Dependencies: `.8.1.0`
   Acceptance: Add compatibility and source-identified public emitters, exact metadata and typed portable errors,
     last-definition rule order, source-ordered callable records across fixed-v1/variadic-v2/final-codeblock-v3,
     canonical strict-UTF-8 payload encoding, and generated direct/traced entrypoint roles. Repeated equivalent input
     emits identical native Lua source without changing native interpreter, CLI, corpus, plan, or census behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** `lua/src/linkedspec/source_emitter.lua` exposes compatibility and
+    source-identified emitters, exact contract/version/identity metadata, all four stable stages/seven codes, and
+    typed portable emit/compile-load/execution errors. It reconstructs one effective typed `SpecFile` from
+    source-ordered immutable function definitions plus last-definition compiled rule order, preserving fixed-v1,
+    variadic-v2, and final-codeblock-v3 records. Canonical strict-UTF-8 sorted-key JSON and Unicode source identity
+    are embedded as lowercase ASCII hex; equivalent input emits identical bytes. The native generated module
+    rebuilds compiled state through public APIs and exposes direct/traced result roles without changing the native
+    interpreter, CLI, corpus, plan, status, or census. PUC Lua and LuaJIT each pass 172/172, primary CLI 61/61 in
+    default and POSIX environments, and corpus 105/105. Generated-source, callable-signature, callable-codeblock,
+    capability 64/0/0, Knowledge Map, memory architecture, mdBook, doctrine, and whitespace checks pass. Canonical
+    local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in 620 seconds. Mutation
+    testing was not run. Fresh-process/corrupt dual-ABI proof remains `.8.1.2`; plans/families remain `.8.2`.
+  Commit: `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source`
 
 - ID: `LUA-BACKEND-PARITY.8.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Load and run generated Lua source in caller-owned fresh-process isolation.
   Dependencies: `.8.1.1`
   Acceptance: PUC Lua and LuaJIT write one generated module plus host runner into unique caller-owned temporary
@@ -2867,9 +2878,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 ## Current frontier
 
-Generated-source planning `.8.1.0` corrects the historical v1/v2-only wording against ADR `0041`, explicitly
-includes final-codeblock-v3 state, and splits deterministic emitter core `.8.1.1` from isolated dual-ABI host proof
-`.8.1.2`. No emitter exists yet; `.8.1.1` is the sole active Lua leaf.
+Emitter core `.8.1.1` now returns deterministic contract-v1 native Lua from the exact fixed-v1/variadic-v2/
+final-codeblock-v3 effective state, with metadata, typed portable errors, and direct/traced result roles. It passes
+172/172 on PUC Lua and LuaJIT plus canonical Phase 0 `1..1031`/620s. Fresh-process PUC Lua/LuaJIT valid/corrupt
+load, result/failure/trace, caller-owned storage, and cleanup proof `.8.1.2` is the sole active Lua leaf. Plan/
+family/portable generated trace remains `.8.2`, accepted-subset proof `.8.3`, and census admission `.8.4`.
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
@@ -3087,8 +3100,8 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 | 135 | `LUA-BACKEND-PARITY.8.3` | `pending` | Admit the exact contract-sourced generated 8/105 subset. |
 | 136 | `LUA-BACKEND-PARITY.8.4` | `pending` | Close Lua capability parity and backend handoff. |
 | 137 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Post-ADR-0041 contract audit splits exact v1/v2/v3 emission from isolated host proof. |
-| 138 | `LUA-BACKEND-PARITY.8.1.1` | `active` | Emit deterministic native Lua source from the exact v1/v2/v3 effective state. |
-| 139 | `LUA-BACKEND-PARITY.8.1.2` | `pending` | Prove fresh-process PUC/LuaJIT load/run, failures, tracing, and cleanup. |
+| 138 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic native Lua preserves exact v1/v2/v3 state, metadata, errors, and entrypoint roles at 172/172 per ABI. |
+| 139 | `LUA-BACKEND-PARITY.8.1.2` | `active` | Prove fresh-process PUC/LuaJIT load/run, failures, tracing, and cleanup. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3537,6 +3550,30 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
   testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook generated-source/handoff/
   status pages, Knowledge Map, changes/notes, and bounded memory identify `.8.1.1` as the sole next implementation.
+
+### `LUA-BACKEND-PARITY.8.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Contract-v1 checking and the post-ADR-0041 descriptor prove Lua needed one
+  deterministic host-source boundary that preserves exact fixed-v1, variadic-v2, and final-codeblock-v3 effective
+  callable state; no Lua emitter API or module existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `lua/src/linkedspec/compiled_spec.lua` retains rules as compiled internal
+  structures rather than a standalone decoder format, while `function_registry.entries`, `compiled_rule_order`,
+  and typed rule header/body elements retain the exact effective source model. `spec_ast.to_json/from_json` plus
+  canonical strict-UTF-8 `json.encode` is the lossless public seam identified by the `.8.1.0` generated-source audit.
+- [x] **FIX** — Add `lua/src/linkedspec/source_emitter.lua`, public compatibility/source-identified emitters,
+  exact v1 metadata/errors, effective typed `SpecFile` reconstruction, lowercase ASCII-hex payload/identity, and
+  generated `metadata`/`execute`/`execute_with_trace` roles over public compiler/runtime APIs.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 172/172 on both PUC Lua and LuaJIT. Permanent
+  tests lock exact metadata/error JSON, invalid identities, deterministic ASCII bytes, last-definition rule order,
+  source-ordered v1/v2/v3 records, Unicode metadata/results, direct/traced value identity, missing-rule attribution,
+  and compatibility identity. Primary CLI remains 61x2 and corpus remains 105/105.
+- [x] **NO REGRESSION** — Generated-source, callable-signature, callable-codeblock, and capability checks pass at
+  unchanged 64/0/0. Canonical local CI passes reference CLI 61/61 in both environments and Phase 0 `1..1031` in
+  620 seconds. Plan/family/portable generated trace, fresh-process isolation, subset, status, and census are not
+  claimed; mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, both roadmaps, architecture/task/index/live state, mdBook API/pipeline/status/
+  handoff/gate pages, Knowledge Map, changes/notes, and bounded memory describe the emitter and activate only
+  fresh-process isolation `.8.1.2`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -5105,3 +5142,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.7.2` | `LUA-BACKEND-PARITY.7.2 - admit Lua primary CLI matrix` | Recurring focused Lua 61x2, disposable PUC matrix adapter, exact five-backend 5x2x61 proof, status promotion, and `.7.3` handoff. |
 | `LUA-BACKEND-PARITY.7.3` | `LUA-BACKEND-PARITY.7.3 - close Lua primary usage no drift` | Correct historical scaffold prose and native-module lifetime guidance; close parent `.7` without behavior change; activate `.8.1`. |
 | `LUA-BACKEND-PARITY.8.1.0` | `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold` | Post-ADR-0041 v1/v2/v3 scope correction, emitter/isolation split, and `.8.1.1` handoff before code. |
+| `LUA-BACKEND-PARITY.8.1.1` | `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source` | Exact effective v1/v2/v3 state, canonical strict-UTF-8/ASCII hex, metadata/errors, direct/traced roles, and `.8.1.2` handoff. |

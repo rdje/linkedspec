@@ -1021,8 +1021,11 @@ validation-only default use and exits 0/1/2 for pass/fixture/validation outcomes
 `0023` argument/UTF-8/native-execution/canonical-JSON/failure/phase-trace behavior at 169/169 per ABI and diagnostic
 shared CLI 61x2. Admission `.7.2` makes both process legs recurring, extends the shared matrix to 5x2x61, and
 advances status to `runtime-corpus-primary-cli`. Final CLI/native/corpus no-drift `.7.3` closes parent `.7`.
-Generated-source planning `.8.1.0` then corrects the pre-ADR-0041 v1/v2-only scope, splits exact v1/v2/v3
-emission `.8.1.1` from isolated PUC/LuaJIT host proof `.8.1.2`, and activates `.8.1.1` before code.
+Generated-source planning `.8.1.0` then corrects the pre-ADR-0041 v1/v2-only scope. Emitter core `.8.1.1` now
+returns deterministic native Lua containing exact fixed-v1/variadic-v2/final-codeblock-v3 effective state,
+contract/version/Unicode identity metadata, typed portable errors, and direct/traced roles. Canonical strict-UTF-8
+JSON and identity bytes are embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run proof is
+active under `.8.1.2`; plan families, accepted-subset proof, and census admission remain `.8.2-.8.4`.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

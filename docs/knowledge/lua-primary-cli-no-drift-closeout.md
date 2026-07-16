@@ -36,13 +36,13 @@ globally, and LuaRocks is not a dependency.
 The primary command remains parser-oriented. The unchanged manifest proves
 that `status` and `corpus` are rejected positionals; validation and full
 105-case execution remain on the separate developer corpus runner. Public
-status stays `runtime-corpus-primary-cli`. Generated Lua source remains the
-honest limitation: planning `.8.1.0` corrected the pre-descriptor-v3 scope,
-exact-v1/v2/v3 emitter core `.8.1.1` is active, fresh-process PUC Lua/LuaJIT
-proof remains `.8.1.2`, and ten-family execution `.8.2`, contract-sourced
+status stays `runtime-corpus-primary-cli`. Deterministic generated Lua source
+core is current through `.8.1.1`; fresh-process PUC Lua/LuaJIT proof remains
+`.8.1.2`, and ten-family execution `.8.2`, contract-sourced
 8/105 admission `.8.3`, and final census/handoff `.8.4` follow.
 
 Related facts: [[lua-primary-cli-adapter]],
 [[lua-primary-cli-recurring-admission]], [[lua-native-backend-scaffold]],
 [[lua-toolchain-package-policy]], [[lua-full-corpus-gate]],
-[[lua-backend-full-parity-plan]], [[lua-generated-source-scaffold-split]].
+[[lua-backend-full-parity-plan]], [[lua-generated-source-scaffold-split]],
+[[lua-generated-source-emitter-core]].

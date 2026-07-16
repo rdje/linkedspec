@@ -131,8 +131,9 @@ missing-name JSON, and separate parse/validation/compile failure ownership. Full
 proves one emitter identity, exact ordered phase/rule topics, routed sinks, level filtering, balanced attributed
 failures, no hidden emitter creation, and traced/untraced descriptor/runtime identity. That trace milestone passes
 155/155. Complete interpreter-corpus admission raised the suite to 167/167 on both runtimes with status
-`runtime-corpus-full` at the `.6.3` boundary; primary CLI work subsequently raises the current suite to 169/169
-and status `runtime-corpus-primary-cli`.
+`runtime-corpus-full` at the `.6.3` boundary; primary CLI work raised the suite to 169/169 and status
+`runtime-corpus-primary-cli`, and generated-source core `.8.1.1` now raises the current suite to 172/172 without
+changing that status.
 
 ## Lua primary parser command
 
@@ -167,8 +168,69 @@ so no shell, subprocess, or environment option parser owns semantics. PUC Lua an
 unchanged shared process manifest now passes recurring 61/61 runs in default and POSIX environments. The warmed
 cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli`, no-drift `.7.3` closes parent
 `.7`. Planning leaf `.8.1.0` corrected the older v1/v2-only generated-source scope against current outward
-descriptor v3 and split deterministic exact-v1/v2/v3 source construction `.8.1.1` from fresh-process PUC
-Lua/LuaJIT proof `.8.1.2`; `.8.1.1` is active and no Lua emitter is claimed yet.
+descriptor v3. Emitter core `.8.1.1` now supplies deterministic exact-v1/v2/v3 source construction; fresh-process
+PUC Lua/LuaJIT proof remains `.8.1.2`, and capability admission remains `.8.4`.
+
+## Lua generated-source API
+
+The public Lua module now exposes two source emitters:
+
+- `emit_lua_source_v1(compiled, source_identity)` emits contract-v1 source with the caller's nonempty strict-UTF-8
+  identity;
+- `emit_lua_source(compiled)` is the compatibility form and uses identity `<inline>`.
+
+Both return native Lua source text. For equivalent effective compiled state and identity, the returned bytes are
+identical. The emitter reconstructs an effective typed `SpecFile` from source-ordered callable definitions and
+last-definition rule order. Fixed-v1 params/arity, variadic-v2 signature/rest metadata, and final-codeblock-v3
+parameter kinds survive that reconstruction exactly. Canonical sorted-key strict-UTF-8 JSON and the source
+identity are rendered as lowercase ASCII hex, so Lua literal escaping, interpolation, locale, and normalization
+cannot alter the payload.
+
+```lua
+local linkedspec = require("linkedspec")
+
+local parsed = linkedspec.parse_spec([[
+Top::
+ /x/ E { return("generated") }
+]])
+local compiled = linkedspec.compile_spec(parsed)
+local source = linkedspec.emit_lua_source_v1(
+  compiled,
+  "generated/example.spec"
+)
+
+local loader = loadstring or load -- Lua 5.1/LuaJIT or modern PUC Lua
+local chunk = assert(loader(source, "@generated_example.lua"))
+local generated = chunk()
+
+local metadata = linkedspec.generated_source_metadata_to_json(
+  generated.metadata()
+)
+assert(metadata.contract_id == "linkedspec-generated-source-v1")
+assert(metadata.format_version == 1)
+assert(metadata.source_identity == "generated/example.spec")
+assert(generated.execute("x", { top_rule = "Top" }) == "generated")
+```
+
+The emitted module exports:
+
+- `LINKEDSPEC_GENERATED_SOURCE_CONTRACT`, `LINKEDSPEC_GENERATED_SOURCE_FORMAT`, and
+  `LINKEDSPEC_GENERATED_SOURCE_IDENTITY` markers;
+- `metadata()` for typed contract/version/identity metadata;
+- `execute(input[, options])` for the direct result value;
+- `execute_with_trace(input, trace_config[, options])` for the same result while using the native caller-owned
+  trace configuration and writers in `options`.
+
+The module imports `linkedspec` when loaded and delegates execution to the current compiled runtime. It is a
+deterministic generated artifact and independent module boundary, not a bundled runtime or a performance claim.
+Its failures use typed `GeneratedSourceError` values. `generated_source_error_to_json(error)` projects stable
+`type`, `stage`, `code`, `summary`, and `source_identity` fields plus optional `rule_label`, `handler_family`, and
+`detail`. The four stages and seven codes are exported for callers that need exact classification.
+
+Fresh-process PUC Lua/LuaJIT persistence, corrupt-payload failure, and cleanup are intentionally proved by
+`.8.1.2`. The scaffold does not yet export `plan()` or validate/execute the ten structural handler families;
+those roles and portable generated-family trace events remain `.8.2`. Contract-sourced 8/105 admission is `.8.3`,
+and only `.8.4` may add Lua to the capability census.
 
 ## Lua automatic function parsing
 

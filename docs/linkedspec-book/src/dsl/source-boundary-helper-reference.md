@@ -199,8 +199,9 @@ action/child dispatch and before `LE`: use a later slot to observe a marker, or 
 
 Lua's native family is closed at exact no-drift: 62 unique current capture/mark/input/cursor/control calls agree
 across contract classification, runtime dispatch, and focused execution sources, while the four placement
-spellings above remain separately timing-tested. Generated Lua preservation and execution remain future-owned by
-`LUA-BACKEND-PARITY.8.1-.8.4`; the native closeout does not claim that later surface.
+spellings above remain separately timing-tested. Emitter core `LUA-BACKEND-PARITY.8.1.1` now preserves this typed
+effective state in deterministic native Lua; fresh-process execution, family routing, subset proof, and admission
+remain `.8.1.2-.8.4`, so the native closeout itself still does not claim that later surface.
 
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 
