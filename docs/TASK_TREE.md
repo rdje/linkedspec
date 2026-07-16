@@ -27,8 +27,8 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Lua `.6.1` is closed with permanent core 40/40 and governed capability 6/6 windows at 162/162 per ABI; advanced/shipped offsets 40-98 `.6.2` are active. Diagnostic drift `.5.1` and logical truthiness/Perl-lowering drift `.5.2` are dependency-gated; ADR `0036`/`.19` remains post-parity. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
-| `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | `.6.2.5` independently confirms exact offsets 40-98 at 59/59 with zero failures on both ABIs; permanent admission/no-drift `.6.2.6` is active. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Lua `.6.2` is closed with permanent advanced/shipped 59/59 at 166/166 per ABI; complete-manifest `.6.3` is active. Diagnostic drift `.5.1` and logical truthiness/Perl-lowering drift `.5.2` are dependency-gated; ADR `0036`/`.19` remains post-parity. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `LUA-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Lua third)` | `.6.2.6` permanently locks exact offsets 40-98 at 59/59 and 166/166 on both ABIs; parent `.6.2` is closed and complete-manifest `.6.3` is active. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `STRUCTURED-TEXT-FORMAT-PROGRAM` | `proposed` / dependency-gated | `Post-current-backend-parity format coverage and evidence-driven .spec evolution` | `.0` ratifies the exact 91-row program; backlog `.18.1` adds the authoring invariant, `.18.2` adds correlated compile/runtime trace plus exact emission-only rule filters, and `.18.3` links a separate optional native-acceleration horizon; `.1` is pending and `.2+` cannot execute until Perl/Rust/Dart/Julia/Lua parity is complete. | [docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md](docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md) |
 | `NATIVE-PARSER-ACCELERATOR` | `proposed` / non-blocking horizon | `Post-dynamic-parser optional backend-native performance acceleration` | `.0` ratifies dynamic/warm/native tiers and exact derivative invariants. No current frontier: `.1` requires full current parity, one completed realistic dynamic format parser, and measured evidence. | [docs/tasks/NATIVE-PARSER-ACCELERATOR.md](docs/tasks/NATIVE-PARSER-ACCELERATOR.md) |
 | `RUST-MUTATION-TESTING` | `proposed` | `Rust verification strength and mutation sensitivity` | `.0` ratifies an exact 3,333-candidate list-only baseline and prohibits per-commit mutation execution; `.1` is pending for safe manual configuration/commands before any pilot. | [docs/tasks/RUST-MUTATION-TESTING.md](docs/tasks/RUST-MUTATION-TESTING.md) |
@@ -1347,8 +1347,9 @@ nine residuals: one hash-receiver compare, three HLink executes, two EBNF compar
 and PPlugin compare. Knowledge Map retrieval plus canonical Perl generated-source/descriptor probes identify four
 current mechanisms: action-edge `call(child)` double dispatch; receiver `.copy()` value loss; missing `flat_array`
 hash splicing; and public leading-trivia cursor initialization. Repairs `.6.2.1-.4`, successor measurement/split
-`.6.2.5`, and permanent exact admission `.6.2.6` are owned before runtime changes. `.6.2.1` is active; production
-source, tests, corpus data, expected JSON, status/CLI, coverage, and capability census remain unchanged.
+`.6.2.5`, and permanent exact admission `.6.2.6` are owned before runtime changes. `.6.2.1` was the next leaf at
+that boundary; all children have since closed. Production source, tests, corpus data, expected JSON, status/CLI,
+coverage, and capability census remain unchanged.
 
 Index note 2026-07-15: `LUA-BACKEND-PARITY.6.2.1` routes `call(target)` through the current compiled action-edge
 state when labels agree, caches one child result/`retv`, skips structurally passive terminal re-search after the
@@ -1378,13 +1379,20 @@ after only complete leading blank or `#` comment lines, including a final commen
 locks absolute byte/character offsets, ordinary leading spaces remain content, the history-shaped minimal returns
 a null object, and ordinary scalar-held `payload[1]` still returns its item. PUC Lua and LuaJIT pass 165/165;
 unchanged `ds_vhistory_version_entry` returns its exact expected output at endpoint 62 and offsets 40-98 reach
-59/59 on both ABIs. `.6.2.5` is active for required successor remeasurement before permanent admission.
+59/59 on both ABIs. `.6.2.5` was next for required successor remeasurement and has since closed.
 
 Index note 2026-07-15: `LUA-BACKEND-PARITY.6.2.5` independently validates the complete 105-case manifest and
 selects exact offsets 40-98 through the production library executor on separately built PUC Lua and LuaJIT
 adapters. Both runs preserve order from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute` and
 report 59 passes, zero failures, and true aggregate status. No successor repair child is needed; permanent
-admission/no-drift `.6.2.6` is active. Production source, tests, corpus/oracle data, status/CLI, coverage, and
+admission/no-drift `.6.2.6` was next and has since closed. Production source, tests, corpus/oracle data, status/CLI,
+coverage, and capability remain unchanged.
+
+Index note 2026-07-15: `LUA-BACKEND-PARITY.6.2.6` adds one permanent production-library test with a literal
+59-name/endpoint ledger for exact offsets 40-98. Both PUC Lua and LuaJIT validate all 105 fixtures, select the
+same ordered window, match every unchanged one-level wrapped expected JSON value and byte/character endpoint,
+and report 59 passes, zero failures, and 166/166 complete suites. Parent `.6.2` closes and complete-manifest
+`.6.3` activates. Production source, corpus/oracle data, public status/CLI, generated-source state, coverage, and
 capability remain unchanged.
 
 Index note 2026-07-15: ADR `0040` and `FUTURE-PARITY-BACKLOG.21.0` adopt backend implementation companion

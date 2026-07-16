@@ -1268,6 +1268,102 @@ test("corpus library permanently admits the six governed capability fixtures", f
   end
 end)
 
+test("corpus library permanently admits the ordered 59-case advanced and shipped window", function()
+  local expected_cases = {
+    { "terse_2_2_6_2_attached_while_blocks", 1 },
+    { "terse_2_3_4_deep_pure_helper_composition", 1 },
+    { "terse_2_3_4_1_bare_hash_helper_arg_composition", 1 },
+    { "terse_2_3_4_1_bare_array_helper_arg_composition", 1 },
+    { "terse_2_3_4_2_inline_if_value_control", 1 },
+    { "terse_2_3_4_2_inline_switch_value_control", 1 },
+    { "terse_15_2_3_bare_value_reads_and_case_labels", 1 },
+    { "terse_2_3_5_1_array_receiver_value_chains", 1 },
+    { "terse_2_3_5_2_hash_receiver_value_chains", 1 },
+    { "terse_2_3_5_3_string_receiver_value_chains", 1 },
+    { "terse_2_3_5_4_number_receiver_value_chains", 1 },
+    { "terse_7_3_array_numeric_reducer_receiver_methods", 1 },
+    { "terse_3_2_1_numeric_word_aliases", 1 },
+    { "terse_3_2_2_arithmetic_symbol_callees", 1 },
+    { "terse_3_2_3_2_string_comparison_helpers", 1 },
+    { "terse_3_2_3_3_numeric_comparison_word_aliases", 1 },
+    { "terse_3_2_3_4_numeric_comparison_symbol_callees", 1 },
+    { "terse_3_3_1_scalar_assignment_expressions", 1 },
+    { "terse_3_3_2_aggregate_assignment_expressions", 1 },
+    { "terse_3_3_3_mutation_assignment_expressions", 1 },
+    { "terse_3_3_4_assignment_expression_closure", 1 },
+    { "terse_4_3_2_user_function_runtime", 1 },
+    { "terse_2_3_5_5_block_valued_receiver_chains", 1 },
+    { "terse_14_3_with_helper_trailing_block", 1 },
+    { "terse_14_4_receiver_with_trailing_block", 1 },
+    { "terse_12_3_hash_tree_traversal_receiver_blocks", 1 },
+    { "terse_13_3_array_tree_traversal_receiver_blocks", 1 },
+    { "terse_2_3_5_6_typed_wrapper_quoted_names", 1 },
+    { "tclite_command_subst", 2 },
+    { "tclite_double_quote", 2 },
+    { "lispish_x_y", 5 },
+    { "top_rule_body_recursion_sexpr", 7 },
+    { "top_rule_lx_recursion_nested", 7 },
+    { "top_rule_lx_recursion_sequence", 7 },
+    { "hlink_raw_string", 10 },
+    { "hlink_raw_escaped_brackets", 14 },
+    { "hlink_curly_brace", 5 },
+    { "hlink_bracket_body", 5 },
+    { "hlink_mixed_bracket_brace", 13 },
+    { "portmap_bare", 3 },
+    { "portmap_bit", 6 },
+    { "portmap_slice", 8 },
+    { "portmap_constant", 4 },
+    { "portmap_concatenation", 12 },
+    { "ebnf_expression_rules", 40 },
+    { "ebnf_logging_annotation", 39 },
+    { "spec_spec_minimal_rule", 10 },
+    { "spec_spec_action_edge", 47 },
+    { "spec_spec_user_function_definition", 94 },
+    { "spec_spec_comment_skip", 18 },
+    { "regdef_nested_register_fields", 79 },
+    { "tablegrep_simple_term", 15 },
+    { "simenv_multiline_value", 27 },
+    { "vhdl_library_use", 43 },
+    { "ds_vhistory_version_entry", 62 },
+    { "pplugin_empty", 0 },
+    { "tkgui_empty", 0 },
+    { "lib_reader_sattribute", 28 },
+    { "lib_reader_cattribute", 31 },
+  }
+  local execution = linkedspec.execute_corpus_fixtures(
+    "rust/linkedspec-runtime/tests/corpus",
+    { offset = 40, limit = #expected_cases }
+  )
+  assert_equal(execution.validation.manifest.case_count, 105, "advanced full manifest count")
+  assert_equal(#execution.results, #expected_cases, "advanced selected count")
+  assert_equal(linkedspec.corpus_execution_passed(execution), true, "advanced execution status")
+  assert_equal(linkedspec.corpus_passed_count(execution), #expected_cases, "advanced pass count")
+  assert_equal(#linkedspec.corpus_failures(execution), 0, "advanced failure count")
+
+  for index, expected in ipairs(expected_cases) do
+    local name = expected[1]
+    local endpoint = expected[2]
+    local result = execution.results[index]
+    assert_equal(result.name, name, "advanced selected order " .. index)
+    assert_equal(
+      execution.validation.manifest.cases[40 + index],
+      name,
+      "advanced manifest order " .. index
+    )
+    assert_equal(linkedspec.corpus_fixture_passed(result), true, "advanced fixture status " .. name)
+    assert_equal(result.matched, true, "advanced match " .. name)
+    assert_equal(result.cursor_code_unit, endpoint, "advanced byte endpoint " .. name)
+    assert_equal(result.cursor_char_offset, endpoint, "advanced character endpoint " .. name)
+    assert_equal(result.failure_stage, nil, "advanced failure stage " .. name)
+    assert_equal(result.failure, nil, "advanced failure text " .. name)
+    assert_equal(
+      json.encode(result.actual_output),
+      json.encode(json.array({ result.expected_json })),
+      "advanced exact wrapped output " .. name
+    )
+  end
+end)
+
 test("source AST round-trips with neutral fields and provenance", function()
   local payload = json.harray({ kind = "action_block" })
   local job = ast.staged_parse_job({

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.6.2.6` — make a measured green window durable with an independent literal
+  ledger): A bounded executor returning 59/59 proves current behavior but does not prevent a coordinated manifest
+  reorder, renamed case, or endpoint drift from hiding behind dynamic expectations. The permanent test therefore
+  keeps all 59 names and endpoints as literal data, checks each against both selected results and manifest order,
+  and derives only the expected value from the already strict fixture oracle. Exact wrapped output, match/failure
+  state, full-manifest validation, and aggregate 59-pass/zero-failure assertions make the relationship recurring
+  without duplicating fixture JSON. Both PUC Lua and LuaJIT pass 166/166. Parent `.6.2` closes; complete-manifest
+  `.6.3` is the next independent relationship gate. Production behavior, corpus/oracles, public status/CLI,
+  generated-source state, and capability 64/0/0 are unchanged. Mutation testing was not run.
+  Canonical local CI exits 0 with CLI 61/61 in both environments and Phase 0 `1..1031` in 621 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.2.5` — measure the post-repair window independently before making it
   permanent): A green result observed while closing the last mechanism is not itself the successor audit. Rebuild
   each ABI adapter, validate the full manifest, select the exact owned window through the production library API,

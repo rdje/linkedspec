@@ -5,15 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
-- `2026-07-15` refresh: Lua advanced/shipped planning `.6.2.0` executes exact manifest offsets 40-98 through the
-  production library executor and debug trace on both ABIs before behavior changes. PUC Lua and LuaJIT agree at
-  50/59 with nine identical residuals. Canonical Perl generated-source/descriptor probes separate four current
-  Lua mechanisms: `call(child)` bypasses the current action-edge cache and causes fallback double dispatch;
-  receiver `.copy()` drops its value; `hash(flat_array(...))` misses a hash splice; and public parse starts before
-  the Perl wrapper's leading blank/comment-line boundary. `.6.2.1-.4` own those repairs, `.6.2.5` remeasures and
-  splits any successor, and `.6.2.6` alone owns permanent exact 59/59 admission/no-drift. Production source,
-  tests, corpus/oracle, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 remain unchanged;
-  action-edge repair `.6.2.1` is active.
+- `2026-07-15` refresh: Lua advanced/shipped parent `.6.2` is closed. Planning `.6.2.0` measured exact offsets
+  40-98 at the same 50/59 on PUC Lua and LuaJIT; four toolbox-proven repairs raised the unchanged window through
+  56/59, 57/59, 58/59, and 59/59, and independent `.6.2.5` successor measurement found no residual. Permanent
+  `.6.2.6` now validates all 105 manifest entries, selects exact offsets 40-98, and locks all 59 literal names,
+  one-level wrapped expected outputs, matches, byte/character endpoints, 59 passes, and zero failures. Both ABIs
+  pass 166/166. Complete-manifest `.6.3` is active. Production source, corpus/oracle data, public status/CLI,
+  generated-source state, coverage 246/105+1/122, and capability 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua governed corpus admission `.6.1.4` permanently executes exact manifest offsets 99-104.
   The cursor-control, pure-helper, position-helper, control-marker, anonymous-capture, and named-capture fixtures
   pass 6/6 in exact order with unchanged wrapped outputs and byte/character endpoints `2,1,2,1,5,5`. PUC Lua and

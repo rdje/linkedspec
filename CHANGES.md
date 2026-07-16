@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.6.2.6 — admit Lua advanced corpus window
+
+Added one recurring production-library test for exact manifest offsets 40-98. Its independent literal ledger
+locks all 59 names in order from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, every
+byte/character endpoint, match state, absent failure fields, and structural equality with exactly one wrapping of
+each unchanged expected JSON value. Aggregate assertions require the complete 105-case manifest, 59 selected
+results, 59 passes, zero failures, and true status. PUC Lua and LuaJIT pass 166/166.
+
+Parent `.6.2` closes and complete-manifest `.6.3` activates. Production source, manifest/fixtures/oracles, public
+status, primary and developer CLI behavior, generated-source state, coverage 246/105+1/122, and capability 64/0/0
+remain unchanged. Mutation testing was not run.
+Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031`
+in 621 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.2.5 — record Lua advanced zero residual
 
 Remeasured exact advanced/shipped offsets 40-98 through the production library corpus executor after all four

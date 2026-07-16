@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.6.2.6 — admit Lua advanced corpus window**
+  (DONE — exact dual-ABI 59/59 is permanent; parent `.6.2` closes and complete-manifest `.6.3` is next).
+
+  **Result:** One recurring production-library test validates the full 105-case manifest, selects exact offsets
+  40-98, and checks all 59 literal names in manifest order. Every result matches, has its exact literal byte and
+  character endpoint, has no failure stage/text, and structurally equals exactly one wrapping of its unchanged
+  expected JSON. Both PUC Lua and LuaJIT report 59 passes, zero failures, true aggregate status, and 166/166 full
+  suites. Production source, corpus/oracle data, public status/CLI, generated-source state, coverage, and capability
+  remain unchanged. Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX
+  environments plus Phase 0 true reach `1..1031` in 621 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.2.5 — record Lua advanced zero residual**
   (DONE — exact dual-ABI 59/59 has no residual; permanent admission `.6.2.6` is next).
 

@@ -167,7 +167,8 @@ hash pairs, closes unchanged `pplugin_empty`, and raises the window to 58/59. Pu
 `.6.2.4` now mirrors complete leading blank/`#` comment lines through the cursor/register seam, preserves ordinary
 indexed reads, closes unchanged history, and raises both ABIs to 59/59. Successor remeasurement `.6.2.5`
 independently validates the full 105-case manifest and confirms exact offsets 40-98 at 59/59 with zero failures on
-both ABIs. Permanent admission `.6.2.6` is active.
+both ABIs. Permanent `.6.2.6` locks all 59 literal names, unchanged wrapped outputs, matches, and exact endpoints
+at 166/166 per ABI. Parent `.6.2` closes and complete-manifest `.6.3` is active.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

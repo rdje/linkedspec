@@ -156,8 +156,9 @@ This `README.md` is the **single entry point** to the project.
   now complete: only complete leading blank/`#` comment lines move the public start cursor, indexed reads stay
   ordinary, and unchanged history closes the window at 59/59. Successor remeasurement `.6.2.5` independently
   validates the full 105-case manifest, selects exact offsets 40-98, and records the same 59/59 with zero failures
-  on both ABIs. Permanent admission `.6.2.6` is active. Public status/CLI/corpus data remain unchanged and
-  capability stays four-backend 64/0/0.
+  on both ABIs. Permanent admission `.6.2.6` now locks all 59 literal names, unchanged wrapped outputs, matches,
+  and byte/character endpoints at 166/166 on both ABIs. Parent `.6.2` is closed and complete-manifest `.6.3` is
+  active. Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

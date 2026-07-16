@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua `.6.1` is closed with permanent core 40/40 and governed capability 6/6 windows
-  at 162/162 on both ABIs; advanced/shipped offsets 40-98 `.6.2` are active while diagnostic `.5.1` and logical
-  `.5.2` remain dependency-gated).
+- Last updated: `2026-07-15` (Lua `.6.2` is closed with permanent advanced/shipped 59/59 at 166/166 on both ABIs;
+  complete-manifest `.6.3` is active while diagnostic `.5.1` and logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal

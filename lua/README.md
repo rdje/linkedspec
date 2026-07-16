@@ -91,8 +91,9 @@ The unchanged `pplugin_empty` returns `[{}]` on both ABIs and the window reaches
 initialization `.6.2.4` now advances cursor/register state past only complete leading blank or `#` comment lines.
 Unicode byte/character offsets and ordinary indexed reads remain exact, unchanged `ds_vhistory_version_entry`
 passes, and the window reaches 59/59. Successor remeasurement `.6.2.5` independently validates all 105 fixtures,
-selects exact offsets 40-98, and confirms 59/59 with zero failures on both ABIs. Permanent admission `.6.2.6` is
-active.
+selects exact offsets 40-98, and confirms 59/59 with zero failures on both ABIs. Permanent admission `.6.2.6`
+locks all 59 literal names, unchanged wrapped outputs, matches, and exact byte/character endpoints at 166/166 on
+both ABIs. Parent `.6.2` is closed and complete-manifest `.6.3` is active.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -323,8 +324,9 @@ now complete: explicit direct/receiver `flat_array(...)` results splice ordered 
 and `harray(...)`, while ordinary arrays remain one copied value. `pplugin_empty` passes unchanged and the window
 reaches 58/59. `.6.2.4` now mirrors the public Perl boundary by skipping only complete leading blank/`#` comment
 lines before top-rule entry, including a comment ending at EOF; ordinary leading content and scalar-held indexed
-reads are unchanged. History passes and the exact window is 59/59. `.6.2.5` remeasurement now confirms exact
-first/last order, 59 passes, and zero failures on both ABIs; permanent admission `.6.2.6` is active.
+reads are unchanged. History passes and the exact window is 59/59. `.6.2.5` remeasurement confirms exact
+first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` now verifies a literal ordered
+59-name/endpoint ledger and every unchanged wrapped output at 166/166 per ABI; `.6.2` closes and `.6.3` activates.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
