@@ -1,5 +1,11 @@
 # Descriptor Introspection
 
+> **Accepted descriptor migration:** ADR `0044` removes descriptor-wide
+> `meta.parse_mode` and every public rule field named `parse_mode`. The future
+> shape exposes `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"` and
+> derived `spec.<label>.meta.cursor_policy`. Current descriptor examples below
+> remain accurate until implementation leaves `.9.1.2-.9` land.
+
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
 The descriptor is a backend-neutral concept: it is the compiler's output described as data (rule table, dependency-regex map, metadata) instead of as a runnable parser. The field names and structure below (`spec`, `dependency_regex_map`, `meta`, `dependency_refs`, …) are part of that contract. The concrete *encoding* shown — a parser coderef, a `sub { ... }` handler value, a `qr/.../` compiled regex — is the **Perl reference backend's** representation; another backend encodes the same descriptor in its own language's types.

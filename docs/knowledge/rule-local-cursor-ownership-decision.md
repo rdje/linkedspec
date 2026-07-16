@@ -8,7 +8,7 @@ answers:
   - "who owns cursor semantics across blind calls"
   - "what did the director decide about child parse modes"
 date: 2026-07-17
-status: accepted direction
+status: ratified by ADR 0044; implementation pending
 tags: [dsl, runtime, cursor, parse-mode, and-rule, or-rule, blind-call, composition, FUTURE-PARITY-BACKLOG]
 evidence: "Director confirmation on 2026-07-17: the mode of a parent OR/AND rule shall not propagate to or override child OR/AND modes. Therefore an OR child retains intrinsic seek behavior under an AND parent, and an AND child retains intrinsic consume behavior under an OR parent. FUTURE-PARITY-BACKLOG.9.1.1.0 captures this boundary before exact contract ratification in .9.1.1.1."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG\\.9\\.1\\.1|parent.*never.*propagat|child.*intrinsic.*mode|rule-local cursor' docs/tasks/FUTURE-PARITY-BACKLOG.md README.md ROADMAP.md ROADMAP_V2.md ARCHITECTURE_STATE.md docs/knowledge/rule-local-cursor-ownership-decision.md docs/linkedspec-book/src"
@@ -33,9 +33,10 @@ language construct with its own design and tests rather than contextual mode
 propagation.
 
 The decision also reinforces the audit conclusion that callers cannot override
-rule semantics globally. Exact bare/explicit edge grammar, API/CLI migration,
-descriptor shape, diagnostics, conformance, and implementation splitting remain
-owned by `FUTURE-PARITY-BACKLOG.9.1.1.1`. Current runtime behavior has not changed.
+rule semantics globally. ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1` now owns
+the ratified bare/explicit edge grammar, API/CLI migration, descriptor shape,
+generated-source v2, diagnostics, conformance, and `.9.1.2-.9` implementation
+split. Current runtime behavior has not changed.
 
 Related: [[and-or-cursor-ownership-audit]],
 [[and-or-edge-default-correction]], and [[FUTURE-PARITY-BACKLOG]].

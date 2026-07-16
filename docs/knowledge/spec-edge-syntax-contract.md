@@ -54,3 +54,10 @@ Existing locks are in `t/phase0_regression.t`:
 
 The user-facing contract is documented in the mdBook action/lifecycle placement
 chapter and the formal grammar appendix.
+
+ADR `0044` ratifies a future shorthand without changing this current explicit
+contract: a complete bare child member normalizes to blind ownership in AND and
+action ownership in OR/default. Explicit `->` and `=>` retain the meanings above,
+remain legal across families, and resolved ownership still cannot mix. Indexed
+and grouped bare forms obey the resolved edge family's existing limits. Rollout
+is pending under `FUTURE-PARITY-BACKLOG.9.1.2-.9`.

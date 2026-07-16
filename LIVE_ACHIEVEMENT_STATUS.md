@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.1.1 — ratify rule-local cursor and bare edges**
+  (DONE — ADR `0044` fixes the exact target; implementation `.9.1.2-.9` remains pending and Rust logical
+  `.5.2.3` is the next clean frontier).
+
+  **Result:** AND consumes, OR/default seeks, and every nested child retains its own family policy. Bare child
+  paragraph members normalize to blind calls in AND and action edges in OR/default. Explicit cross-family edges
+  remain legal; resolved ownership remains non-mixable. Public/global `parse_mode` retires with targeted failures;
+  descriptors expose derived per-rule policy; generated-source v2 derives policy from family. No behavior changed.
+
+  **Proof:** ADR `0044`, a durable Knowledge Map card, eight dependency-ordered implementation leaves, roadmap/
+  architecture/guide/mdBook alignment, and governance/book/whitespace checks establish one exact future contract.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.1.0 — capture rule-local cursor ownership**
   (DONE — the blocker is resolved; exact contract ratification `.9.1.1.1` is the fresh-session resume point).
 

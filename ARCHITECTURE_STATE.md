@@ -5,11 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1` ratifies the full future cursor and edge
+  contract. AND-family rules consume; OR/default-family rules seek; nested rules retain their own policy. Bare
+  rule-edge paragraph members normalize to blind calls in AND and action edges in OR/default, while explicit
+  cross-family markers remain legal and resolved action/blind ownership remains non-mixable. Public/global
+  `parse_mode` is removed with targeted API/CLI diagnostics. Descriptors use derived per-rule `cursor_policy` plus
+  `linkedspec-rule-local-cursor-v1`; generated-source v2 derives policy from its ten-family plan without storing a
+  second override. Implementation is dependency-split under `.9.1.2-.9`; no behavior has changed and Rust logical
+  `.5.2.3` resumes first.
 - `2026-07-17` refresh: director capture `FUTURE-PARITY-BACKLOG.9.1.1.0` fixes rule-local cursor ownership. Parent
   OR/AND mode never propagates to or overrides a child; OR children remain seek and AND children remain consume
   through blind calls, action-edge dispatch, explicit calls, and recursion. This preserves one meaning for a rule
-  in every composition context. Exact grammar/API/CLI/descriptor/generated/conformance ratification remains
-  `.9.1.1.1`; no runtime behavior has changed.
+  in every composition context. Exact grammar/API/CLI/descriptor/generated/conformance ratification is now ADR
+  `0044`; no runtime behavior has changed.
 - `2026-07-16` refresh: cursor-ownership audit `FUTURE-PARITY-BACKLOG.9.1.0` finds that Perl bakes one selected
   `parse_mode` into every handler, Dart/Julia/Lua own one seek-default engine mode, and Rust alone compiles AND as
   consume and OR/default as seek before permitting an execution-wide override. The same default `Top::AND` with

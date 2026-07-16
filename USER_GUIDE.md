@@ -1368,17 +1368,23 @@ So future implementation should keep these concepts independent:
 
 At the intuition level, `seek` can feel more extraction-like and `consume` can feel more grammar-like, but they are not aliases for `OR` and `AND`.
 
-**Completed design audit (not current behavior):** `FUTURE-PARITY-BACKLOG.9.1.0`
+**Ratified target (not current behavior):** `FUTURE-PARITY-BACKLOG.9.1.0`
 found that this global option changes every nested rule and already creates an
-uncovered default-AND backend split. The proposed replacement derives cursor
-discipline from the authored rule kind—OR/default seek, AND consume—and removes
-the public/global override. Low-level matchers still need both algorithms. The
-four combinations above remain useful evidence (`AND + seek` finds ordered
-landmarks; `OR + consume` is anchored choice), but they do not justify silently
-rewriting a whole grammar at parser construction. The director has since fixed
-the nested-call boundary: parent OR/AND mode never propagates to or overrides a
-child, so each child retains its intrinsic mode. Exact API/grammar migration is
-still being ratified under `.9.1.1.1`. No API has changed yet.
+uncovered default-AND backend split. ADR `0044` / `.9.1.1.1` now ratifies its
+replacement: OR/default rules intrinsically seek, AND rules intrinsically
+consume, parent and edge kind never override a child, and the public/global
+option is removed with targeted diagnostics. Low-level matchers retain both
+algorithms. Ordered landmarks remain expressible as AND over seek-owning OR
+children; anchored choice remains expressible as OR over consume-owning AND
+children.
+
+The same decision adds future mode-sensitive bare edge lines. A bare child
+member normalizes to a blind call in AND and an action edge in OR/default.
+Explicit cross-family `->` / `=>` remains legal, but resolved action/blind
+ownership still cannot mix. Descriptors move from root `meta.parse_mode` to
+derived per-rule `cursor_policy`; generated source moves to v2 and derives
+policy from family. Implementation is split under `.9.1.2-.9`. No API or
+runtime behavior has changed yet.
 
 If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
 If you ask for `return_descriptor => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.

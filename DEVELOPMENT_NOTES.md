@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.1.1` — cursor semantics must be derived, not duplicated): ADR `0044`
+  makes the authored rule family the only cursor authority. AND consumes; OR/default seeks; nested children keep
+  their own policy. The old AND+seek and OR+consume objectives are still expressible without an escape hatch by
+  composing AND over seek-owning OR children or OR over consume-owning one-anchor AND children.
+
+  Mode-sensitive bare edges normalize once, before typed validation: AND bare targets become blind calls and
+  OR/default bare targets become action edges. Explicit cross-family markers remain the intentional exception,
+  but normalized action/blind ownership still cannot mix. Lifecycle markers retain lexical priority, AND bare
+  indexing/grouping gets a targeted use-explicit-action diagnostic, and grouped actions retain their shared-block
+  requirement. Descriptors expose only derived per-rule `cursor_policy`; generated-source v2 stores family and
+  derives policy rather than serializing a second driftable fact. Public `parse_mode` is removed with targeted
+  diagnostics, never ignored. Eight follow-on leaves own executable contract through public closeout; no behavior
+  changes in this decision slice.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.1.0` — composition must not create contextual rule meanings): The
   director confirmed that a parent rule's OR/AND mode never propagates to or overrides any child's OR/AND mode.
   Therefore an OR child stays seek under an AND wrapper, and an AND child stays consume under an OR wrapper,
@@ -22,9 +36,8 @@
   its compiled AND=consume mode; the other engines default globally to seek. The 62-case primary matrix tests
   explicit modes but not default AND with leading junk. The migration should remove the global override, derive
   cursor semantics from rule kind, preserve low-level matcher primitives, replace global descriptor metadata with
-  derived per-rule facts, and fail legacy options explicitly rather than ignore them. Blind-call child ownership is
-  the one remaining language decision: an OR child can keep its own seek semantic, or an AND parent can impose
-  contiguous child entry; the latter is context-sensitive and should not happen accidentally.
+  derived per-rule facts, and fail legacy options explicitly rather than ignore them. ADR `0044` has since resolved
+  the remaining child boundary in favor of child-owned semantics and exact structural composition.
 
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.2` — a typed policy still needs an explicit host-representation seam):
   Moving Perl logical calls behind one runtime owner removed the obvious raw-keyword and short-circuit defects,

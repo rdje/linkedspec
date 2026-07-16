@@ -114,8 +114,10 @@ typed truthiness, receiver/lazy-control, fixture, projection, and 15-mutation pr
 legs initially pending. Perl `.5.2.2` now consumes the contract through typed ActionIR/runtime lowering and moves
 the ledger to 1/7. Director-priority cursor-ownership audit `.9.1.0` rejects public/global `parse_mode`, recommends
 intrinsic OR/default seek and AND consume, and exposes default-AND parity drift. Director capture `.9.1.1.0`
-confirms that parent mode never propagates to or overrides a child; exact contract ratification `.9.1.1.1` is
-next, and Rust `.5.2.3` resumes after ratification.
+confirms that parent mode never propagates to or overrides a child. ADR `0044` / `.9.1.1.1` now ratifies exact
+mode-sensitive bare edges, explicit cross-family legality, removal diagnostics, per-rule descriptor facts,
+generated-source v2 family derivation, and conformance. Implementation is split under `.9.1.2-.9`; Rust `.5.2.3`
+resumes before that program activates.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`

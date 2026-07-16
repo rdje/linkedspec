@@ -12,7 +12,7 @@ answers:
   - "should AND rules intrinsically consume"
   - "should parse_mode remain a public global override"
 date: 2026-07-09
-status: proposed
+status: ratified by ADR 0044; implementation pending
 tags: [dsl, grammar, edges, blind-call, action-edge, and-rule, or-rule, FUTURE-PARITY-BACKLOG]
 evidence: "Director clarification on 2026-07-09 supersedes the earlier brainstorm that action-edge markers might be optional in AND rules. The corrected future design direction is mode-sensitive: AND rules (`:&`, `::&`, `:AND`, `::AND`, and variants) should default bare entries such as `entry { ... }` to blind-call sequence semantics equivalent to `=> entry { ... }`; OR/default rules should default bare entries to action-edge regex-dispatch semantics equivalent to `-> entry { ... }`. Explicit `=>` remains the blind-call marker and explicit `-> entry[k]` remains action-edge dispatch through regex slot k. The design is parked under FUTURE-PARITY-BACKLOG.9.1 before any parser/runtime change."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG\\.9|AND rules should default|OR/default rules should default|blind-call sequence' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP.md ROADMAP_V2.md docs/knowledge/and-or-edge-default-correction.md"
@@ -49,7 +49,10 @@ default-AND parity drift. The audit recommends intrinsic OR/default seek and AND
 consume behavior with no public/global override, while retaining low-level
 seek/consume matcher primitives. The director settled child ownership on
 2026-07-17: parent mode never propagates, so every called child keeps its own
-intrinsic mode. Exact edge and migration ratification remains `.9.1.1.1`.
+intrinsic mode. ADR `0044` / `.9.1.1.1` has now ratified the exact line-level
+bare syntax, explicit cross-family exceptions, indexed/grouped/fluent limits,
+removal migration, descriptor/generated-v2 shape, diagnostics, and conformance.
+Implementation remains `.9.1.2-.9`; current behavior is unchanged.
 
 Related task: [[FUTURE-PARITY-BACKLOG]] leaf `.9.1`; audit:
 [[and-or-cursor-ownership-audit]].

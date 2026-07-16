@@ -1,5 +1,11 @@
 # Runtime Semantics
 
+> **Current implementation and accepted migration:** The executable details in
+> this appendix describe shipped behavior. ADR `0044` has ratified a future
+> rule-local replacement: OR/default families seek, AND families consume,
+> parent and edge kind never override a child, and the public/global
+> `parse_mode` option is removed. Implementation remains `.9.1.2-.9`.
+
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
 same `.spec` input. No Perl implementation knowledge is required.
@@ -52,7 +58,9 @@ The parse mode for a rule is determined by:
 1. The **rule mode** from the label (`:AND` → consume, `:OR` and default → seek).
 2. The **handler variant** selected by the compiler.
 3. AND variants use consume. OR and REP variants use seek.
-4. The `parse_mode` field in the HandlerIR node documents the resolved mode.
+4. The current `parse_mode` field in the HandlerIR node documents the selected
+   mode. Under ADR `0044`, the equivalent internal fact is derived from authored
+   family and cannot be caller-overridden.
 
 ## 2. Rule Execution Model
 

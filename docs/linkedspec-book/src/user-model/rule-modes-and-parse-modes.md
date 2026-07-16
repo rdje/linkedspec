@@ -7,18 +7,20 @@ LinkedSpec rule execution has two independent axes:
 
 Keep those two ideas separate. A rule label such as `Item:AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
 
-> **Current behavior versus completed audit:** This chapter documents the public
+> **Current behavior versus ratified target:** This chapter documents the public
 > implementation that exists today. Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
 > that the caller-global option changes every nested rule and already creates an
 > uncovered default-AND backend difference: Perl, Dart, Julia, and Lua default
 > to global `seek`, while Rust defaults to its compiled AND=`consume` mode when
-> no override is supplied. The proposed replacement makes OR/default families
+> no override is supplied. ADR `0044` now ratifies the replacement: OR/default families
 > intrinsically seek and AND families intrinsically consume, removes the public
 > global override, and retains seek/consume only as low-level matcher
-> algorithms. The director has since confirmed that parent mode never
+> algorithms. Parent mode never
 > propagates to or overrides child mode: an OR child remains seek under an AND
-> parent, and an AND child remains consume under an OR parent. No runtime or API
-> has changed yet; `.9.1.1.1` owns exact migration ratification.
+> parent, and an AND child remains consume under an OR parent. Mode-sensitive
+> bare edges, explicit exceptions, descriptor/generated metadata, and removal
+> diagnostics are also fixed below. No runtime or API has changed yet;
+> implementation remains `.9.1.2-.9`.
 
 ## Current rule-label surface
 
@@ -434,7 +436,7 @@ This design is intentional. LinkedSpec is built for extraction and recognition, 
 
 For more detail on cursor-stack helpers, anchor rewinds, and their interaction with `parse_mode`, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#explicit-cursor-controls).
 
-## Parse modes
+## Current implemented parse modes
 
 Parse modes control cursor discipline at runtime. They do not change rule composition.
 
@@ -503,7 +505,7 @@ For that input, the wrapper returns `["foo"]` under either mode.
 
 Use `consume` when the spec should behave more like a conventional parser step and reject leading junk before the next anchor. Use `seek` when the spec should act more like an extraction grammar over a larger body of text.
 
-## Public option shape
+## Current public option shape
 
 `parse_mode` is a backend-neutral compile option: both inline parser construction and file-oriented parser construction accept the same value. In the Perl reference backend:
 
@@ -551,10 +553,44 @@ Use `consume` when contiguity matters. Use `seek` when extraction from a larger 
 
 Rule modes, action/lifecycle placement, and parse modes are deliberately separate. If a rule does not behave as expected, debug those axes separately: first the label, then the body edge family (`->` versus `=>`), then the parse-mode option.
 
-The completed design audit does not deny that all four combinations have meaning.
-`AND + seek` can find ordered landmarks across ignored text, and `OR + consume`
-can express a strict choice at the current cursor. Its finding is narrower: a
-caller-global switch is the wrong owner because it silently rewrites the entire
-grammar. If either cross-combination later proves necessary as a first-class
-language feature, it needs an explicit `.spec` design justified by a real
-grammar—not resurrection of a whole-parser override.
+## Ratified rule-local target
+
+ADR `0044` replaces the current global option during the future `.9.1.2-.9`
+rollout. The authored family becomes the only cursor authority:
+
+| Rule family | Derived cursor policy |
+| --- | --- |
+| bare/default, `|`, `+`, `*`, `?`, `OR`, `OR+`, `OR{...}` | `seek` |
+| `&`, `AND`, `AND+`, `AND{...}` | `consume` |
+
+`::` remains only the marker for the rule entered first. A parent starts a
+child at its current cursor, but the child then applies its own family policy.
+Edge kind never overrides either family.
+
+The four low-level combinations still have structural expressions. An ordered
+landmark grammar is an AND parent over seek-owning OR/default children. An
+anchored choice is an OR parent over consume-owning one-anchor AND children.
+This keeps each reusable rule stable instead of reviving a caller or rule-local
+escape hatch.
+
+The same decision fixes future bare edge lines. A complete bare paragraph
+member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
+
+- `=> Child...` in an AND-family rule;
+- `-> Child...` in an OR/default-family rule.
+
+Explicit `->` remains legal in AND rules and explicit `=>` remains legal in
+OR/default rules. After bare normalization, one rule still cannot mix action
+and blind ownership. An indexed bare target in AND is invalid because blind
+calls cannot index; use explicit `-> Child[N]`. A grouped bare target is valid
+only in OR/default and still requires a shared block. Lifecycle markers `I`,
+`LS`, `LE`, `LX`, `E`, `EX`, and `IT` retain lexical priority, so an edge to a
+same-named rule must be explicit.
+
+During rollout, `parse_mode` / `--parse-mode` is removed with a targeted
+diagnostic rather than accepted and ignored. Descriptors replace root
+`meta.parse_mode` with `meta.cursor_contract` and per-rule `meta.cursor_policy`.
+Generated source moves to v2 and derives policy from its handler-family plan;
+version-1 artifacts must be regenerated. Until those implementation leaves
+land, use the current option behavior documented above and treat this section
+as the accepted migration target, not a claim about shipped behavior.

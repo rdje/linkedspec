@@ -1,11 +1,11 @@
 # LinkedSpec
 
-Current design frontier (2026-07-16): five-backend audit
-`FUTURE-PARITY-BACKLOG.9.1.0` recommends retiring the public/global `parse_mode`
-override in favor of intrinsic OR/default seek and AND consume semantics. Runtime
-behavior has not changed. The director has now fixed the nested-call rule:
-parent OR/AND mode never propagates to or overrides child mode. Exact contract
-ratification continues in `.9.1.1.1` before implementation.
+Current design frontier (2026-07-17): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
+ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
+mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
+override, per-rule descriptor facts, and generated-source v2 family derivation.
+Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. The
+active frontier returns to Rust logical-helper rollout `.5.2.3`.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

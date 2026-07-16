@@ -75,8 +75,10 @@ caller option.
 The director resolved the remaining semantic boundary on 2026-07-17: parent
 OR/AND mode never propagates to or overrides child OR/AND mode. An OR child
 therefore keeps intrinsic seek behavior when invoked by an AND parent, and an
-AND child keeps intrinsic consume behavior under an OR parent. Exact contract
-ratification remains `.9.1.1.1`; see [[rule-local-cursor-ownership-decision]].
+AND child keeps intrinsic consume behavior under an OR parent. ADR `0044` /
+`.9.1.1.1` now ratifies the exact contract and implementation split; see
+[[rule-local-cursor-ownership-decision]] and
+[[rule-local-cursor-and-bare-edge-contract]].
 
 ## Migration surface
 

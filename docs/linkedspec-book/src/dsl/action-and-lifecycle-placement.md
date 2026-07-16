@@ -1,5 +1,12 @@
 # Action and Lifecycle Placement
 
+> **Accepted future edge default:** ADR `0044` keeps the explicit `->` and `=>`
+> meanings documented in this chapter and adds mode-sensitive bare rule-edge
+> lines during `.9.1.2-.9`: a bare child member resolves to blind-call ownership
+> in AND-family rules and action-edge ownership in OR/default-family rules.
+> Explicit cross-family markers remain legal; resolved ownership still cannot
+> be mixed. Current parser behavior has not changed.
+
 This chapter explains where action blocks and lifecycle blocks sit in a LinkedSpec rule.
 
 Read [Declaration Helper Reference](declaration-helper-reference.md) first if you mainly need to know where to put working state. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) when you need the helper expressions that run inside these blocks.

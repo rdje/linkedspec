@@ -1,5 +1,11 @@
 # `Get(...)`, `get_parser(...)`, and `emit_generated_source(...)`
 
+> **Accepted API migration:** ADR `0044` removes public/global `parse_mode`
+> from all construction and execution surfaces once `.9.1.2-.9` lands. Legacy
+> dynamic options will fail with `parse_mode_override_removed`; the primary
+> `--parse-mode` flag will return usage exit 2. Current APIs still accept the
+> option, so examples below describe shipped behavior until rollout completes.
+
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
 backend as a native library and keeps `.spec` source, parser input, and results in memory.

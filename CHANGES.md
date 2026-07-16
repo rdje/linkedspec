@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.1.1 — ratify rule-local cursor and bare edges
+
+Adopted ADR `0044` as the exact backend-neutral target. AND-family rules intrinsically consume; OR/default-family
+rules intrinsically seek; parent and edge kind never override a child's policy. Complete bare rule-edge lines now
+have a future normalization contract: AND resolves them to blind calls and OR/default resolves them to action
+edges. Explicit cross-family `->` / `=>` remains legal, indexing/grouping keeps its current ownership limits,
+lifecycle markers remain reserved, and resolved action/blind ownership still cannot be mixed in one rule.
+
+Ratified removal rather than silent ignoring of public/global `parse_mode`, exact API/CLI migration diagnostics,
+per-rule `cursor_policy` descriptor facts, `linkedspec-rule-local-cursor-v1`, and generated-source v2 family-derived
+policy without a second mutable plan field. Split neutral, Perl, Rust, Dart, Julia, Lua/LuaJIT, symmetric admission,
+and public no-drift implementation leaves under `.9.1.2-.9`. Updated task, roadmap, live architecture, guide,
+mdBook, bounded memory, and Knowledge Map layers. This decision slice changes no parser, compiler, runtime,
+descriptor, generated-source, CLI, fixture, test, or capability behavior; Rust logical `.5.2.3` resumes next.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.1.0 — capture rule-local cursor ownership
 
 Recorded the director's decision that parent OR/AND mode never propagates to or overrides child OR/AND mode. An OR

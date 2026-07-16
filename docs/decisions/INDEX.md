@@ -54,6 +54,7 @@ changed* lives in git (layer D), not here.
 | [0041](0041-final-codeblock-descriptor-and-lua-census-admission.md) | Final-codeblock functions use outward descriptor v3; Lua census admission waits for full parity | 2026-07-15 | accepted | architecture, functions, codeblock, descriptor, capability-census, lua, portability, cross-variant-parity |
 | [0042](0042-caller-owned-diagnostic-output-events.md) | Diagnostic output uses caller-owned typed events with a quiet default | 2026-07-16 | accepted; backend rollout pending | architecture, diagnostics, helpers, embedding, generated-source, cli, portability, cross-variant-parity |
 | [0043](0043-eager-logical-helper-and-typed-truthiness.md) | Logical helpers are eager boolean values over one typed truthiness policy | 2026-07-16 | accepted; backend rollout pending | architecture, logical, truthiness, helpers, arity, actionir, generated-source, portability, cross-variant-parity |
+| [0044](0044-rule-local-cursor-and-mode-sensitive-bare-edges.md) | Rule families own cursor policy and bare edge ownership | 2026-07-17 | accepted; implementation pending | architecture, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptors, generated-source, cli, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

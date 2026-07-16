@@ -259,7 +259,9 @@ layer adds no flag system of its own beyond what the host regex engine supports.
 **Semantics**: A regex cluster anchors the parser at a specific input position.
 In `consume` mode (`\G`-anchored), the regex must match contiguously from the
 current position. In `seek` mode (ungrounded `//gcp`), the regex may match
-anywhere. The mode is determined by the rule mode and runtime parse mode.
+anywhere. In the current implementation, the mode is determined by rule mode
+and the public runtime parse-mode plumbing. ADR `0044` ratifies a future single
+authority: AND-family rules consume and OR/default-family rules seek.
 
 Multiple regex clusters in a row form an ordered sequence for AND-mode rules
 or a set of alternatives for OR-mode rules. When clusters are combined as
@@ -315,6 +317,30 @@ parent rule controls dispatch but does not transform the child's result.
 Blind-call behavior follows the **rule label mode**, not the edge alone. Explicit
 `:AND` on the child rule is required for sequential blind-call dispatch. A bare
 `rule:` label with blind-call edges still behaves as repeated choice.
+
+#### 3.3.1 Ratified future bare-edge normalization
+
+ADR `0044` adds this line-level source grammar during `.9.1.2-.9`:
+
+```text
+BareEdgeLine ::= TargetRule BareSuffix?
+BareSuffix   ::= ActionBlock | FluentChain
+```
+
+The member must begin a physical rule-paragraph line and `TargetRule` must be a
+declared rule (forward declarations are valid). It normalizes before typed
+validation:
+
+- AND family: `Child...` becomes `=> Child...`;
+- OR/default family: `Child...` becomes `-> Child...`.
+
+Explicit markers remain authoritative and legal across families. An indexed
+bare target in AND is invalid; write `-> Child[N]`. Grouped bare targets are
+valid only in OR/default and require the same shared block as grouped explicit
+action edges. Lifecycle words `I`, `LS`, `LE`, `LX`, `E`, `EX`, and `IT` take
+lexical precedence; use an explicit marker to call a same-named rule. After
+normalization, action and blind edge ownership still cannot coexist in one
+rule. This subsection is an accepted future grammar, not shipped parser syntax.
 
 ### 3.4 Code Blocks (Action / Lifecycle)
 
