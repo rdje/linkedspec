@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.4 — admit Lua capability parity**
+  (DONE — Lua is the fifth exact all-pass backend; its parity tree is closed).
+
+  **Result:** Lua now has `pass` evidence in every one of the 16 executable capability rows, and the checker
+  requires the exact five-backend set. The census is 80/0/0. Generated source is independently `pass`; the
+  satisfied Lua-backend and variadic exclusions are gone, while the generic callable-codeblock entry is narrowed
+  to genuinely future explicit-value/dynamic-call and Rust/Dart/Julia work. PUC Lua stays primary and LuaJIT stays
+  a behavior-identical compatibility leg. No successor task tree is activated while this slice is dirty.
+
+  **Proof:** PUC Lua and LuaJIT each pass 177/177, primary CLI passes 61x2, corpus passes 105/105, and the warmed
+  shared matrix passes 5x2x61. Capability and generated-source checkers report 80/0/0. Canonical local CI passes
+  reference CLI 61x2 plus Phase 0 `1..1031` in 625 seconds; governance, mdBook, and cleanup checks pass. Mutation
+  testing was not run.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.3 — admit generated Lua subset**
   (DONE — exact contract-owned interpreter-first 8/105 fresh-host proof closes; sole census/handoff `.8.4` is next).
 

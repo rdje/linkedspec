@@ -201,9 +201,9 @@ Lua's native family is closed at exact no-drift: 62 unique current capture/mark/
 across contract classification, runtime dispatch, and focused execution sources, while the four placement
 spellings above remain separately timing-tested. Emitter core `LUA-BACKEND-PARITY.8.1.1` now preserves this typed
 effective state in deterministic native Lua, and `.8.1.2` proves fresh-process valid/corrupt execution and cleanup
-on both Lua ABIs. `.8.2` adds authoritative family routing and portable generated trace; subset proof and admission
-close under `.8.3` with exact interpreter-first 8/105 fresh-host proof. Census admission remains `.8.4`, so the
-native closeout itself still does not claim that later surface.
+on both Lua ABIs. `.8.2` adds authoritative family routing and portable generated trace; subset proof closes under
+`.8.3` with exact interpreter-first 8/105 fresh-host proof. Final census admission `.8.4` is now complete at
+five-backend 80/0/0; the earlier native closeout did not claim that later surface prematurely.
 
 Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards.
 

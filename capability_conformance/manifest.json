@@ -2,7 +2,7 @@
   "schema_version": 1,
   "contract": "docs/decisions/0023-user-observable-backend-and-cli-parity.md",
   "task_owner": "FUTURE-PARITY-BACKLOG.1.6",
-  "backends": ["perl", "rust", "dart", "julia"],
+  "backends": ["perl", "rust", "dart", "julia", "lua"],
   "status_values": ["pass", "partial", "gap"],
   "capabilities": [
     {
@@ -14,7 +14,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/src/engine.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/linkedspec_dart.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/LinkedSpecJulia.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/LinkedSpecJulia.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/init.lua", "lua/src/linkedspec/compiled_spec.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -26,7 +27,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/SpecLoader.pm", "t/native_spec_resolution.t"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_loader.rs", "rust/linkedspec-runtime/tests/spec_loader.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/io/spec_loader.dart", "dart/test/spec_loader_test.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/io/SpecLoader.jl", "julia/test/spec_loader_test.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/io/SpecLoader.jl", "julia/test/spec_loader_test.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/spec_loader.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -38,7 +40,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/CompilerState.pm", "t/phase0_regression.t"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/descriptor.rs", "rust/linkedspec-core/tests/descriptor_test.rs", "capability_conformance/outward_descriptor_contract.json"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart", "dart/test/compiled_spec_test.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl", "julia/test/runtests.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl", "julia/test/runtests.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/compiled_spec.lua", "lua/test/run.lua", "capability_conformance/outward_descriptor_contract.json"]}
       }
     },
     {
@@ -50,7 +53,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/diagnostic.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs", "rust/linkedspec-runtime/tests/runtime_diagnostics.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/interpreter.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -62,7 +66,8 @@
         "perl": {"status": "pass", "references": ["tools/gen_oracle_corpus.pl", "rust/linkedspec-runtime/tests/corpus/manifest.json", "capability_conformance/fixtures"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/corpus_oracle.rs", "rust/linkedspec-runtime/tests/integration_test.rs"]},
         "dart": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/action_contracts_test.dart", "dart/test/corpus_manifest_test.dart", "dart/test/runtime_interpreter_test.dart"]},
-        "julia": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/src/action/ActionContracts.jl", "julia/test/runtests.jl"]}
+        "julia": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/src/action/ActionContracts.jl", "julia/test/runtests.jl"]},
+        "lua": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "lua/src/linkedspec/action_contracts.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -74,7 +79,8 @@
         "perl": {"status": "pass", "references": ["t/punctuation_light_zero_arg_contract.t"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs"]},
         "dart": {"status": "pass", "references": ["dart/test/punctuation_light_zero_arg_contract_test.dart"]},
-        "julia": {"status": "pass", "references": ["julia/test/punctuation_light_zero_arg_contract_test.jl"]}
+        "julia": {"status": "pass", "references": ["julia/test/punctuation_light_zero_arg_contract_test.jl"]},
+        "lua": {"status": "pass", "references": ["capability_conformance/punctuation_light_zero_arg_contract.json", "lua/test/run.lua"]}
       }
     },
     {
@@ -86,7 +92,8 @@
         "perl": {"status": "pass", "references": ["specs/user_function_definition.spec", "perl/LinkedSpec/Compiler.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_parser.rs", "rust/linkedspec-runtime/src/staged_parser_registry.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/parser/staged_parser_registry.dart", "dart/lib/src/action/function_registry.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/parser/StagedParserRegistry.jl", "julia/src/action/FunctionRegistry.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/parser/StagedParserRegistry.jl", "julia/src/action/FunctionRegistry.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/staged_parser_registry.lua", "lua/src/linkedspec/user_function_registry.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -98,7 +105,8 @@
         "perl": {"status": "pass", "references": ["t/phase0_regression.t"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart", "rust/linkedspec-runtime/tests/corpus/manifest.json"]},
-        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl", "rust/linkedspec-runtime/tests/corpus/manifest.json"]}
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl", "rust/linkedspec-runtime/tests/corpus/manifest.json"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/interpreter.lua", "rust/linkedspec-runtime/tests/corpus/manifest.json", "lua/test/run.lua"]}
       }
     },
     {
@@ -110,7 +118,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/runtime.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/matching.dart", "dart/lib/src/runtime/interpreter.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/runtime/Matching.jl", "julia/src/runtime/Interpreter.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Matching.jl", "julia/src/runtime/Interpreter.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/matching.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -122,7 +131,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/Trace.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/trace.rs", "rust/linkedspec-runtime/tests/trace_controls.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/trace/trace.dart", "dart/test/trace_test.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/test/runtests.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/test/runtests.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/trace.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -134,7 +144,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/SpecEntry.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/src/staged_parser_registry.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/io/spec_loader.dart", "dart/lib/src/parser/spec_parser.dart", "dart/lib/src/validation/spec_validator.dart", "dart/lib/src/compiler/compiled_spec.dart", "dart/lib/src/parser/user_function_definition_parser.dart", "dart/lib/src/parser/staged_parser_registry.dart", "dart/test/native_pipeline_trace_test.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/src/parser/StagedParserRegistry.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/src/parser/StagedParserRegistry.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/spec_loader.lua", "lua/src/linkedspec/spec_parser.lua", "lua/src/linkedspec/spec_validator.lua", "lua/src/linkedspec/compiled_spec.lua", "lua/src/linkedspec/staged_parser_registry.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -146,7 +157,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/engine.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/interpreter.lua", "lua/test/run.lua"]}
       }
     },
     {
@@ -158,7 +170,8 @@
         "perl": {"status": "pass", "references": ["bin/linkedspec"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/bin/linkedspec-rust.rs"]},
         "dart": {"status": "pass", "references": ["dart/bin/linkedspec_dart.dart"]},
-        "julia": {"status": "pass", "references": ["julia/bin/linkedspec_julia.jl"]}
+        "julia": {"status": "pass", "references": ["julia/bin/linkedspec_julia.jl"]},
+        "lua": {"status": "pass", "references": ["lua/bin/linkedspec-lua", "lua/src/linkedspec/primary_cli.lua", "tools/run_lua_local.sh"]}
       }
     },
     {
@@ -170,7 +183,8 @@
         "perl": {"status": "pass", "references": ["bin/linkedspec"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/primary_cli.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/cli/primary_cli.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/cli/LinkedSpecJuliaCli.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/cli/LinkedSpecJuliaCli.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/primary_cli.lua", "lua/test/run.lua", "tools/run_lua_local.sh"]}
       }
     },
     {
@@ -182,7 +196,8 @@
         "perl": {"status": "pass", "references": ["tools/gen_oracle_corpus.pl"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus_oracle.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/corpus/manifest_runner.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/corpus/CorpusManifest.jl"]}
+        "julia": {"status": "pass", "references": ["julia/src/corpus/CorpusManifest.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/corpus.lua", "lua/src/linkedspec/corpus_runner.lua", "tools/run_lua_local.sh"]}
       }
     },
     {
@@ -194,7 +209,8 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/GeneratedSource.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "t/generated_source_contract.t"], "note": "Standalone contract-v1 source emission, exact direct/trace/error/plan behavior, arbitrary-package load, dependency-index reconstruction, and complete canonical admission gates pass under FUTURE-PARITY-BACKLOG.3.1."},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs", "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs", "docs/knowledge/rust-generated-source-full-manifest-classification.md"], "note": "Contract-v1 baseline, all structural families, strict all-105 generated compile/run classification, complete Rust package gate, and 61x2 primary CLI admission pass under FUTURE-PARITY-BACKLOG.3.2."},
         "dart": {"status": "pass", "references": ["dart/lib/src/source_emitter.dart", "dart/lib/src/runtime/generated_plan.dart", "dart/lib/src/runtime/interpreter.dart", "dart/test/source_emitter_test.dart", "docs/knowledge/dart-generated-source-deferred.md"], "note": "Contract-v1 deterministic emission, exact ten-family direct structural execution, four plan rejections, portable trace roles, isolated host compilation, exact accepted eight-case manifest proof, and complete Dart package/CLI/corpus admission pass under FUTURE-PARITY-BACKLOG.3.3."},
-        "julia": {"status": "pass", "references": ["julia/src/source/SourceEmitter.jl", "julia/src/runtime/Interpreter.jl", "julia/test/source_emitter_test.jl", "docs/knowledge/julia-generated-source-family-plan.md"], "note": "Contract-v1 deterministic emission, exact ten-family direct structural execution, four plan rejections, portable trace roles, isolated valid/corrupt and all-family hosts, exact contract-sourced eight-case manifest proof, and complete Julia package/CLI/corpus admission pass under FUTURE-PARITY-BACKLOG.3.4."}
+        "julia": {"status": "pass", "references": ["julia/src/source/SourceEmitter.jl", "julia/src/runtime/Interpreter.jl", "julia/test/source_emitter_test.jl", "docs/knowledge/julia-generated-source-family-plan.md"], "note": "Contract-v1 deterministic emission, exact ten-family direct structural execution, four plan rejections, portable trace roles, isolated valid/corrupt and all-family hosts, exact contract-sourced eight-case manifest proof, and complete Julia package/CLI/corpus admission pass under FUTURE-PARITY-BACKLOG.3.4."},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/source_emitter.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/run.lua", "docs/knowledge/lua-generated-source-accepted-subset.md"], "note": "Contract-v1 deterministic exact v1/v2/v3 emission, exact ten-family authoritative execution, four plan rejections, portable trace roles, isolated valid/corrupt and all-family hosts, emitted variadic execution, exact contract-sourced eight-case manifest proof, and complete dual-ABI package/CLI/corpus admission pass under LUA-BACKEND-PARITY.8."}
       }
     }
   ],
@@ -202,8 +218,6 @@
     {"id": "legacy.perl_plugin_registry", "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.", "owner": "FUTURE-PARITY-BACKLOG.6"},
     {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
     {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
-    {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl construction, invocation, declared helper/user-function/receiver normalization, and closeout are current. Lua now executes declared helper/receiver with in attached and parenthesized form, while its tree callbacks, user functions, explicit callable values, generated paths, and Rust/Dart/Julia generic parity remain future.", "owner": "FUTURE-PARITY-BACKLOG.11.4.3"},
-    {"id": "future.variadic_user_functions", "reason": "The neutral fixed-prefix plus final-rest signature is implemented on Perl, Rust, Dart, and Julia; Lua native, descriptor, generated-source, and final admission remain future.", "owner": "LUA-BACKEND-PARITY.5.1"},
-    {"id": "future.lua_backend", "reason": "Lua follows convergence of the four implemented backends.", "owner": "FUTURE-PARITY-BACKLOG.1.3"}
+    {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl construction/invocation and declared helper/user-function/receiver normalization are current, and Lua's declared contextual helper/user-function/receiver forms are current. Explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia generic callable-codeblock parity remain future.", "owner": "FUTURE-PARITY-BACKLOG.11.4.3"}
   ]
 }

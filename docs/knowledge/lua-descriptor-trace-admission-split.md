@@ -50,10 +50,11 @@ The resolved dependency order is:
 - `.5.3.2`: done; propagate one emitter through the complete native pipeline;
 - `.5.3.3`: done; close no-drift and parents `.5.3`/`.5` while preserving the four-backend census;
 - `.6.1`: active; admit controlled/core and governed capability corpus windows;
-- `.8.4`: expand the census with all-pass Lua rows.
+- `.8.4`: done; expand the census with all-pass Lua rows at five-backend 80/0/0.
 
 No source, behavior, public status, emitted descriptor, capability row, or test expectation changes in `.5.3.0.1`.
 
 Related facts: [[lua-diagnostics-trace-boundary]], [[lua-variadic-v2-signature-state]],
 [[outward-function-descriptor-record-shape-drift]], [[trace-cross-variant-capability-contract]],
 [[backend-capability-census]], [[lua-native-full-pipeline-trace]], [[lua-descriptor-trace-closeout]].
+Final admission: [[lua-five-backend-capability-admission]].

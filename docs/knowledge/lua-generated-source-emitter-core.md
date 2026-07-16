@@ -46,11 +46,12 @@ Contract-v1 metadata and typed portable errors are current. Fresh-process PUC
 Lua/LuaJIT persistence, corrupt-payload behavior, and cleanup are recurring
 proof under `.8.1.2`. `plan()` and ten-family validation/execution plus portable
 generated-family trace roles are current under `.8.2`; the contract-sourced
-8/105 proof is closed under `.8.3`, and sole census promotion remains `.8.4`.
+8/105 proof is closed under `.8.3`; census promotion closes under `.8.4` at five-backend 80/0/0.
 
 Related facts: [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-family-plan]],
 [[lua-generated-source-accepted-subset]],
+[[lua-five-backend-capability-admission]],
 [[generated-source-contract-v1]], [[lua-outward-function-descriptor-union]],
 [[lua-final-codeblock-metadata]], [[optional-native-parser-acceleration]].

@@ -104,10 +104,10 @@ Validate the machine-readable broader census with:
 perl tools/check_capability_conformance.pl
 ```
 
-`capability_conformance/manifest.json` currently contains 16 capabilities and 64 backend states: all 64 pass.
+`capability_conformance/manifest.json` currently contains 16 capabilities and 80 backend states: all 80 pass.
 Every evidence path must exist, and legacy/future exclusions remain explicit and task-owned. The canonical local
 gate runs this check before focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light
-admission `.16.7` adds the four current passing states.
+admission `.16.7` added four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
 
 The file-oriented native API has a separate executable resolution/loading contract:
 
@@ -261,7 +261,7 @@ isolated all-family module, and emitted neutral variadic execution. The family m
 runtime passed by the gate and removes its caller-owned host root. The `.8.3` gate consumes the exact
 contract-owned 8/105 list after full-manifest validation, proves interpreter
 values before emission, and independently loads all eight modules with exact result/metadata/plan/trace identity
-and cleanup in the selected ABI host. Sole census admission remains `.8.4`.
+and cleanup in the selected ABI host. Final `.8.4` admits Lua across all 16 rows at 80/0/0.
 The completed `.8.3` slice passes generated-source/callable/capability checks, Lua 177/177 per ABI, primary CLI
 61/61 in both environments, corpus 105/105, and the canonical gate with both reference CLI legs at 61/61 plus
 Phase 0 true reach `1..1031` in 620 seconds.

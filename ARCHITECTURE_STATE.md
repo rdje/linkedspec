@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Lua capability admission `.8.4` makes Lua the fifth exact backend in the executable
+  16-capability census. Every Lua row is `pass` with direct implementation and recurring proof references, so the
+  census is 80 pass / 0 partial / 0 gap; generated-source state is independently `pass`. Satisfied Lua-backend and
+  variadic-function exclusions are removed, while the mixed generic callable-codeblock exclusion is narrowed to
+  explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. PUC Lua 5.4 remains the
+  conformance runtime and LuaJIT the behavior-identical compatibility leg. Focused proof is 177/177 on both ABIs,
+  primary 61x2, corpus 105/105, and the shared matrix 5x2x61. Canonical local CI passes reference CLI 61x2 and
+  Phase 0 `1..1031` in 625 seconds. The Lua parity tree is closed; post-parity work is eligible only after this
+  slice commits cleanly.
 - `2026-07-16` refresh: Lua generated accepted-subset `.8.3` adds `lua/test/run.lua` to the executable contract and
   makes its checker own exact count/order, full-manifest validation, interpreter-before-emission proof, independent
   load, metadata/plans/trace identity, cleanup, and unconditional registration. The test consumes the eight neutral

@@ -63,8 +63,8 @@ fail('schema_version must be 1') unless $manifest->{schema_version} == 1;
 require_repo_path('manifest.contract', $manifest->{contract});
 require_string('manifest.task_owner', $manifest->{task_owner});
 
-my @expected_backends = qw(perl rust dart julia);
-fail('manifest.backends must be [perl, rust, dart, julia]')
+my @expected_backends = qw(perl rust dart julia lua);
+fail('manifest.backends must be [perl, rust, dart, julia, lua]')
  unless ref($manifest->{backends}) eq 'ARRAY'
  && join("\0", @{$manifest->{backends}}) eq join("\0", @expected_backends);
 my %status = map { $_ => 1 } qw(pass partial gap);

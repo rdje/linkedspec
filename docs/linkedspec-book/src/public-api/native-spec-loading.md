@@ -170,8 +170,8 @@ cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli
 `.7`. Planning leaf `.8.1.0` corrected the older v1/v2-only generated-source scope against current outward
 descriptor v3. Emitter core `.8.1.1` supplies deterministic exact-v1/v2/v3 source construction, and `.8.1.2`
 proves persisted valid and corrupt modules in fresh PUC Lua/LuaJIT hosts with complete caller-owned cleanup.
-Exact generated family execution closes under `.8.2`, and contract-sourced accepted-subset `.8.3` is also closed.
-Sole capability admission and backend handoff remain `.8.4`.
+Exact generated family execution closes under `.8.2`, contract-sourced accepted-subset `.8.3` is closed, and
+final capability admission/handoff `.8.4` is complete at five-backend 80/0/0.
 
 ## Lua generated-source API
 
@@ -257,8 +257,8 @@ Contract-sourced `.8.3` validates the complete 105-fixture manifest before consu
 in contract order. It proves each interpreter value before emission, then independently loads all eight modules in
 the exact selected PUC Lua or LuaJIT host. Exact result, metadata, plan, fixed user-function execution, portable
 trace identity, stdout/stderr, and cleanup observations pass at 177/177 on both ABIs. The executable contract
-checker owns this test path and its order/proof/load/trace/cleanup/no-skip properties. Only `.8.4` may add Lua to
-the capability census.
+checker owns this test path and its order/proof/load/trace/cleanup/no-skip properties. `.8.4` now adds Lua to the
+capability census after that proof, not before it.
 
 ## Lua automatic function parsing
 

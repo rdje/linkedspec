@@ -32,12 +32,13 @@ parsing `.5.2.2`, full compile/engine composition `.5.2.3`, and no-drift `.5.2.4
 function parsing are complete at 151/151; full composition is complete at 153/153 on both ABIs, and `.5.2.4`
 closes parent `.5.2`. Outward descriptors and full-pipeline trace close through `.5.3.1/.2`, and no-drift `.5.3.3`
 closes parents `.5.3`/`.5` before corpus `.6.1`.
-Generated preservation remains `.8`; corpus `.6.1` is active and the parser CLI has a later owner; explicit
-`{|params| ...}` literals and general
-bound dynamic calls remain `.11.7`.
+Generated preservation and final admission later close under `.8` at five-backend 80/0/0. The historical corpus
+and parser-CLI frontiers are also closed; explicit `{|params| ...}` literals and general bound dynamic calls remain
+`.11.7`.
 
 Related facts: [[lua-staged-function-execution-split]], [[lua-staged-function-body-registry]],
 [[lua-fixed-v1-user-function-runtime]], [[lua-variadic-v2-runtime]],
 [[lua-contextual-user-function-codeblock-runtime]], [[lua-native-spec-resolution]],
 [[lua-spec-defined-function-parser]], [[lua-native-spec-loading-closeout]],
 [[lua-native-full-pipeline-trace]].
+Final admission: [[lua-five-backend-capability-admission]].

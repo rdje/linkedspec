@@ -28,12 +28,12 @@ four text cases; capability stays 64/0/0 and coverage stays 246/105+1/122. The p
 `native-spec-pipeline-v1`. Closing parent `.5.2` changes no behavior, capability, or test count.
 
 Outward function/rule descriptors and one-emitter loading/frontend/validation/compiler/function/staged/runtime
-trace are now implemented through `.5.3.1/.2`; `.5.3.3` closes no-drift. Generated Lua source remains `.8`, corpus
-execution is active under `.6.1`, and the exact parser CLI remains `.7`; the native-loading closeout does not
-claim those surfaces. `.6.3` and `.7.1` have since implemented the full corpus and thin primary adapter without
-changing the loader ownership described here.
+trace are implemented through `.5.3.1/.2`; `.5.3.3` closes no-drift. The later generated, corpus, and exact parser
+CLI owners close under `.8`, `.6`, and `.7`; the native-loading closeout did not claim those surfaces early.
+Final `.8.4` admits Lua at five-backend 80/0/0 without changing the loader ownership described here.
 
 Related facts: [[lua-native-spec-loading-split]], [[lua-native-spec-resolution]],
 [[lua-spec-defined-function-parser]], [[lua-native-spec-pipeline]],
 [[native-in-memory-backend-contract]], [[lua-backend-full-parity-plan]],
+[[lua-five-backend-capability-admission]],
 [[lua-native-full-pipeline-trace]], [[lua-primary-cli-adapter]].

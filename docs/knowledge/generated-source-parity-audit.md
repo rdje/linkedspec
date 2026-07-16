@@ -24,13 +24,14 @@ evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.1-.3 add d
 evidence_update_2026_07_11_julia_admission: "FUTURE-PARITY-BACKLOG.3.4.1-.3 add deterministic Unicode-safe Julia v1 emission, exact ten-family family-authoritative execution/four rejections/trace roles, and contract-sourced interpreter-first 8/105 namespaced host proof. Complete 1,168/61x2/105 gates pass; Julia promotes and .3.4 closes at census 60/0/0."
 evidence_update_2026_07_11_final_closeout: "FUTURE-PARITY-BACKLOG.3.5 rechecks contract/capability 60/0/0, focused Perl 69 assertions, Rust 5/5, Dart 6/6, and Julia 58/58 against adjacent complete backend gates, aligns every durable/public surface, removes over 1.23 GB of reproducible caches, closes generated-source .3, and activates Lua plan .1.3 without behavior changes."
 evidence_update_2026_07_16_lua_subset: "LUA-BACKEND-PARITY.8.1-.8.3 add deterministic exact-v1/v2/v3 Lua source, fresh PUC Lua/LuaJIT valid/corrupt isolation, exact ten-family authoritative execution/four rejections/portable trace, and contract-ordered interpreter-first 8/105 fresh-host proof. Both ABIs pass 177/177; sole census admission remains .8.4."
+evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 records Lua generated source pass in both the neutral contract and the five-backend capability census, which now reports 80/0/0."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
 # Generated-Source Parity Audit
 
-The active capability census has one residual mechanism, not three unrelated
-features: generated host-language parser source. Its backend states differ:
+The original capability audit isolated one residual mechanism, not three unrelated
+features: generated host-language parser source. That mechanism is now admitted on all five backends:
 
 - Perl's contract-v1 source reconstruction/API proof is admitted and passes.
 - Rust has a public versioned emitter, a validated typed family plan, direct
@@ -41,8 +42,8 @@ features: generated host-language parser source. Its backend states differ:
 - Rust's focused subset still names eight fixtures, while its strict recurring
   full-manifest classifier passes 105/105 and is admitted.
 - Dart and Julia have admitted emitters/direct executors and exact accepted-subset proof.
-- Lua has equivalent exact emitter, ten-family, isolation, and accepted-subset proof on both ABIs; sole census
-  admission remains `.8.4`.
+- Lua has equivalent exact emitter, ten-family, isolation, and accepted-subset proof on both ABIs; `.8.4` admits
+  it at five-backend 80/0/0.
 
 The implementation order is deliberately contract-first:
 

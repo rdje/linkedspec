@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.4` — capability admission is a completion-time proof, not a progress ledger):
+  Keep an unadmitted backend out of the exact census until every current row can enter as `pass`; then require each
+  row to cite its direct source and recurring test or gate rather than infer broad parity from one corpus result.
+  Generated source remains an independent contract because native execution cannot prove emission, fresh loading,
+  family plans, portable trace, or cleanup. When retiring future exclusions, remove only fully satisfied owners:
+  delete the Lua-backend and Lua variadic entries, but narrow the mixed callable-codeblock entry to its remaining
+  explicit-value/dynamic-call and Rust/Dart/Julia scope. This produces a useful binary handoff: exactly five
+  backends, 16 capabilities, and 80/0/0, with PUC Lua primary and LuaJIT compatibility roles still explicit.
+  Focused proof passes 177/177 per ABI, primary 61x2, corpus 105/105, and the shared matrix 5x2x61; canonical local
+  CI passes reference CLI 61x2 plus Phase 0 `1..1031` in 625 seconds. Mutation testing was not run.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.3` — generated breadth must consume the executable contract, not copy its
   examples): Read the exact eight names from `generated_source_contract.json` after validating the complete
   105-fixture corpus. For each row, compare the native interpreter with expected JSON before emitting source; then

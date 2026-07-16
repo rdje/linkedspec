@@ -50,12 +50,13 @@ Both `.8.1` children are complete: the first owns emitted-state construction,
 and the second proves the persisted artifact boundary without adding plan or
 family semantics. Parent `.8.1` is closed; `.8.2` has since added exact
 authoritative family execution, `.8.3` has closed exact contract-sourced 8/105
-fresh-host proof, and sole census/handoff `.8.4` is the active frontier.
+fresh-host proof, and final census/handoff `.8.4` closes at five-backend 80/0/0.
 
 Implementation details and exact public roles: [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]].
 See also [[lua-generated-source-family-plan]],
 [[lua-generated-source-accepted-subset]].
+[[lua-five-backend-capability-admission]].
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-outward-function-descriptor-union]], [[lua-final-codeblock-metadata]],

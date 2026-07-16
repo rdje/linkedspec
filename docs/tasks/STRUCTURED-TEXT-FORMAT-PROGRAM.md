@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `STRUCTURED-TEXT-FORMAT-PROGRAM`
-- Status: `proposed` (implementation dependency-gated on full current-backend parity)
+- Status: `proposed` (full current-backend parity prerequisite satisfied; readiness leaf `.1` not yet active)
 - Roadmap lane: `Post-parity format coverage and evidence-driven .spec language evolution`
 - Created: `2026-07-15`
-- Last updated: `2026-07-15`
+- Last updated: `2026-07-16` (Lua `.8.4` closes five-backend 80/0/0 parity; `.1` remains the explicit readiness gate)
 - Owner: repo-local workflow
 
 ## Goal
@@ -308,7 +308,7 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 | Order | Leaf | Status | Why next |
 | ---: | --- | --- | --- |
 | 1 | `STRUCTURED-TEXT-FORMAT-PROGRAM.0` | `done` | Ratified and durably decomposed without starting implementation. |
-| 2 | `STRUCTURED-TEXT-FORMAT-PROGRAM.1` | `pending` | Hard-gated until every current backend reaches full parity. |
+| 2 | `STRUCTURED-TEXT-FORMAT-PROGRAM.1` | `pending` | Backend parity is satisfied; explicit readiness audit/activation is still required. |
 
 ## Decisions
 

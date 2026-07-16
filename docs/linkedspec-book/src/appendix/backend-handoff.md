@@ -395,7 +395,7 @@ modules and proves exact fresh-process PUC Lua/LuaJIT load, result, trace, failu
 `.8.2` adds exact ten-family plans, four rejections, authoritative root/nested dispatch, portable generated trace,
 one isolated all-family module, and emitted variadic execution at 176/176 per ABI. Contract-sourced `.8.3` proves
 the exact ordered interpreter-first 8/105 modules with metadata/plans/trace identity and cleanup in fresh PUC Lua
-and LuaJIT hosts at 177/177 per ABI. The census stays 64/0/0 until sole admission `.8.4`.
+and LuaJIT hosts at 177/177 per ABI. Sole admission `.8.4` now expands the census to five-backend 80/0/0.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -636,7 +636,7 @@ the developer corpus runner remains separate. Planning `.8.1.0` corrects the ori
 v1/v2-only scope against descriptor v3; deterministic exact-v1/v2/v3 source
 construction `.8.1.1` and fresh-process PUC Lua/LuaJIT proof `.8.1.2` are closed.
 Exact ten-family execution `.8.2` and contract-sourced interpreter-first 8/105 fresh-host proof `.8.3` are also
-closed. Sole census admission and backend handoff `.8.4` are active.
+closed. Final `.8.4` admits all 16 Lua capability rows at 80/0/0 and closes the backend handoff.
 
 The Lua backend now has a dedicated full-parity plan. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg. The rollout began
@@ -844,8 +844,9 @@ functions. Direct `call(rule)` result/`retv`/cursor behavior is focused, public 
 `runtime-helper-value-control`, both ABIs pass 125/125, and parent `.4.3` is closed. A source-history recheck also
 corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. The audit
 also records
-pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl `and`/`or`
-keyword lowering and five-backend logical truthiness/arity stay dependency-gated under `.5.2`; neither Lua-local
+pre-existing diagnostic transport/format differences under pending `FUTURE-PARITY-BACKLOG.5.1`, while Perl
+`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately pending under `.5.2`;
+Lua `.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local
 closure is a false five-backend normalization claim.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
@@ -900,8 +901,8 @@ array, and reject keyword/overload/host-splat semantics. Perl, Rust, Dart, and J
 fixture through grammar/spec projection, staged/outward records, native and generated execution, diagnostics, and
 exact results. Lua `.5.1.3.1/.2` preserves and executes the native signature/rest contract, and `.5.3.1` now emits
 the exact shared fixed-v1/variadic-v2/final-codeblock-v3 outward descriptor union. Generated preservation,
-execution, and final census admission remain `.8.1-.4`, so six-runtime generated admission must not be claimed
-early.
+execution, and final census admission close under `.8.1-.4`; the callable signature is now admitted across all
+six runtime variants.
 
 The next Lua leaf reuses its in-process PCRE2 owner for helper regex values. Function and terminal-receiver
 `matches` apply `i/m/s/x`, accept `g/o` as predicate no-ops, and return false for null/non-text input, non-regex
@@ -1254,18 +1255,18 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 16 capabilities x four implemented backends. All 64 states pass. Earlier non-pass
+The current audit contains 16 capabilities x five admitted backends. All 80 states pass. Earlier non-pass
 boundaries remain below as rollout history, not as live gaps:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl, Rust, Dart, and Julia pass contract v1. Rust compiles/runs 105/105. Dart and Julia pass deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Julia also locks Unicode-safe strict-UTF-8/hex payloads and typed metadata/errors. Lua now proves the same exact ten families and contract-ordered 8/105 in fresh PUC Lua/LuaJIT hosts, but remains outside the census until `.8.4`. | closed `.3.5`; Lua admission `.8.4` |
-| Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 64/0/0 |
+| Generated parser source | Perl, Rust, Dart, Julia, and Lua pass contract v1. Rust compiles/runs 105/105. Dart, Julia, and Lua pass deterministic emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Lua uses fresh PUC Lua/LuaJIT hosts and exact v1/v2/v3 callable state. | closed `.3.5`; Lua admission `.8.4` |
+| Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 80/0/0 after Lua `.8.4` |
 
-Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
-codeblock equivalence, and the not-yet-complete Lua backend are explicit exclusions/future owners rather than
+Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, and generic
+first-class/dynamic callable-codeblock equivalence are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
@@ -1296,7 +1297,7 @@ metadata/errors, direct/traced generated entrypoints, and an 18-assertion isolat
 dispatch, portable trace roles, and one isolated emitted all-family module. `.3.4.3` consumes the exact contract
 subset, proves all eight interpreter values before emission, independently loads eight namespaced modules with
 exact metadata/plans/trace identity, and promotes Julia. The then-live census was 60/0/0; punctuation-light
-admission `.16.7` later advances the broader current census to 64/0/0.
+admission `.16.7` later advanced it to 64/0/0, and Lua `.8.4` now advances the live census to 80/0/0.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,

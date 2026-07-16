@@ -338,8 +338,8 @@ fail('corpus_proof.rust_breadth_target has an unexpected value')
 fail('corpus_proof.new_backend_admission_target has an unexpected value')
  unless $contract->{corpus_proof}{new_backend_admission_target} eq 'accepted_subset_plus_all_generated_families';
 
-require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia)], []);
-my %expected_state = (perl => 'pass', rust => 'pass', dart => 'pass', julia => 'pass');
+require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia lua)], []);
+my %expected_state = (perl => 'pass', rust => 'pass', dart => 'pass', julia => 'pass', lua => 'pass');
 fail("current_backend_states.$_ must be $expected_state{$_}")
  for grep { $contract->{current_backend_states}{$_} ne $expected_state{$_} } keys %expected_state;
 my $capability_manifest = read_json(

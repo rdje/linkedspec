@@ -39,10 +39,10 @@ Public Lua status is `runtime-corpus-full`, and both PUC Lua and LuaJIT pass
 167/167 at this corpus boundary. `.6.3` did not implement the primary parser
 command; `.7.1` has since replaced that scaffold with the exact thin adapter,
 and `.7.2` makes its 61x2 process proof recurring plus extends the matrix to 5x2x61. Current public status is
-`runtime-corpus-primary-cli`; this does not change the historical `.6.3` corpus boundary. Generated
-Lua and capability-census admission remain `.8.1-.8.4`; the census stays
-64/0/0.
+`runtime-corpus-primary-cli`; this does not change the historical `.6.3` corpus boundary. Generated Lua and
+capability-census admission later close under `.8.1-.8.4`, advancing the census to five-backend 80/0/0.
 
 Related facts: [[lua-controlled-corpus-execution]], [[lua-corpus-manifest-io]],
 [[lua-advanced-corpus-residual-split]], [[julia-full-corpus-gate]],
 [[language-agnostic-backend-vision]], [[lua-primary-cli-adapter]], [[lua-primary-cli-recurring-admission]].
+Later admission: [[lua-five-backend-capability-admission]].

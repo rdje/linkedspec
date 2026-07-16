@@ -17,6 +17,7 @@ evidence: "LUA-BACKEND-PARITY.7.3 corrects stale exit-2/validation-only mdBook p
 evidence_update_2026_07_16_generated_isolation: "LUA-BACKEND-PARITY.8.1.2 closes fresh-process PUC Lua/LuaJIT valid/corrupt execution and cleanup at 173/173 per ABI; exact family-plan .8.2 is active."
 evidence_update_2026_07_16_generated_families: "LUA-BACKEND-PARITY.8.2 closes exact family plans/execution/trace/all-family/variadic proof at 176/176 per ABI; subset .8.3 is active."
 evidence_update_2026_07_16_generated_subset: "LUA-BACKEND-PARITY.8.3 closes exact contract-ordered interpreter-first 8/105 fresh-host value/metadata/plan/trace/cleanup proof at 177/177 per ABI; sole census/handoff .8.4 is active."
+evidence_update_2026_07_16_final_admission: "LUA-BACKEND-PARITY.8.4 closes the handoff at capability 80/0/0 after focused 177x2, primary 61x2, corpus 105/105, and warmed shared matrix 5x2x61 proof."
 reverify: "bash tools/run_lua_local.sh && rg -n 'LUA_CPATH|LuaRocks|runtime-corpus-primary-cli|corpus/status|8.1' lua/README.md docs/linkedspec-book/src/public-api/native-spec-loading.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/LUA-BACKEND-PARITY.md"
 ---
 
@@ -43,7 +44,7 @@ status stays `runtime-corpus-primary-cli`. Deterministic generated Lua source
 core is current through `.8.1.1`, and fresh-process PUC Lua/LuaJIT valid/corrupt
 proof is closed under `.8.1.2`. Ten-family execution `.8.2` is also closed.
 Contract-sourced 8/105 admission `.8.3` is also closed, and final
-census/handoff `.8.4` is active.
+census/handoff `.8.4` closes the Lua tree at five-backend 80/0/0.
 
 Related facts: [[lua-primary-cli-adapter]],
 [[lua-primary-cli-recurring-admission]], [[lua-native-backend-scaffold]],
@@ -51,3 +52,4 @@ Related facts: [[lua-primary-cli-adapter]],
 [[lua-backend-full-parity-plan]], [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-emitter-core]], [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-family-plan]], [[lua-generated-source-accepted-subset]].
+[[lua-five-backend-capability-admission]].

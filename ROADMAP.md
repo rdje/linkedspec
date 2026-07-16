@@ -918,9 +918,10 @@ excluded. `.19.1-.19.7` own contracts, five backends, and admission; no current 
 Diagnostic-output parity note (2026-07-15, `LUA-BACKEND-PARITY.4.3.8`): Lua now evaluates `print`/`say`/
 `print_each` eagerly and delivers typed ordered Unicode events through an optional per-parse caller sink while
 remaining quiet and parse-result neutral by default. PUC Lua and LuaJIT pass 122/122; exhaustive Lua helper
-no-drift `.4.3.9` is active. The implementation audit found existing Perl/Rust/Dart/Julia transport and
-`print_each` formatting drift; dependency-gated `FUTURE-PARITY-BACKLOG.5.1` owns one neutral five-backend contract
-before the structured-format program may execute.
+no-drift `.4.3.9` has since closed. The implementation audit found existing Perl/Rust/Dart/Julia transport and
+`print_each` formatting drift. Lua `.8.4` now satisfies the parity prerequisite, so pending
+`FUTURE-PARITY-BACKLOG.5.1` is the next clean-pivot candidate for one neutral five-backend contract before the
+structured-format program may execute.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only
@@ -928,8 +929,8 @@ surfaces, and missing eager `and`/`or`/`not`. The audit activated logical repair
 `.2` now closes recurring exact admission, direct `call(rule)` proof, and public status. Its source-history recheck
 also corrects the audit's unreproducible duplicate-`or` note: every inspected revision contains one exact row.
 Toolbox probes also expose a
-separate Perl `and`/`or` keyword-precedence lowering defect, dependency-gated with five-backend truthiness/arity
-normalization under `FUTURE-PARITY-BACKLOG.5.2`.
+separate Perl `and`/`or` keyword-precedence lowering defect, pending with five-backend truthiness/arity
+normalization under `FUTURE-PARITY-BACKLOG.5.2` after diagnostic-output `.5.1`.
 
 Logical repair note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.1`): Lua now eagerly evaluates every authored
 `and`/`or`/`not` argument once left-to-right and returns booleans through the established Lua truthiness policy;
@@ -987,8 +988,8 @@ with status `native-spec-pipeline-v1`; `.5.2.4` closes native-loading no-drift. 
 fixed-v1/variadic-v2 outward schemas but no neutral final-codeblock outward record shape, plus a historical conflict
 between immediate Lua census expansion and the newer completion-time admission policy. Decision `.5.3.0.1` and
 ADR `0041` resolve both: final-codeblock functions use exact outward descriptor v3 with fixed `params`/`arity` plus
-final-only `parameter_kinds`, and Lua stays outside the four-backend all-pass census until sole expansion owner
-`.8.4`. Executable contract/emission `.5.3.1` now governs and emits the exact fixed-v1/variadic-v2/final-
+final-only `parameter_kinds`, and kept Lua outside the four-backend all-pass census until sole expansion owner
+`.8.4`. Executable contract/emission `.5.3.1` governs and emits the exact fixed-v1/variadic-v2/final-
 codeblock-v3 union on both Lua ABIs; Perl's existing final-codeblock projection is also correctly labeled v3.
 One-emitter trace `.5.3.2` now propagates caller ownership through IO, frontend/compiler/function/staged phases,
 engine construction, and runtime. Ordered sinks/filters/failure attribution and traced/untraced identity pass
@@ -1002,7 +1003,7 @@ controlled proof passes 160/160 on both Lua ABIs with the CLI still validation-o
 permanently locks exact offsets 0-39 at 40/40, exact wrapped outputs, and endpoint 1/1; both focused suites pass
 161/161. Governed admission `.6.1.4` permanently locks exact offsets 99-104 at 6/6 with endpoints
 `2,1,2,1,5,5`; both suites pass 162/162, `.6.1` closes, and advanced/shipped offsets 40-98 `.6.2` activate.
-Public status/CLI/corpus data remain unchanged and capability stays four-backend 64/0/0 until `.8.4`.
+Public status/CLI/corpus data remained unchanged and capability stayed four-backend 64/0/0 until `.8.4`.
 Planning `.6.2.0` measures that exact window at 50/59 on both Lua ABIs and splits four mechanisms. Action-edge
 repair `.6.2.1` now reuses the current child result once, skips body-less passive-terminal re-search after the
 parent match, and leaves unrelated named calls direct. Three HLink, two EBNF, and SimEnv cases pass unchanged;
@@ -1029,7 +1030,9 @@ proof `.8.1.2` closes scaffold `.8.1` at 173/173 per ABI. Exact plan/family exec
 per ABI with ten ordered families, four rejections, authoritative nested dispatch, portable trace, an isolated
 all-family host, and emitted variadic proof. Contract-sourced `.8.3` closes at 177/177 per ABI with exact ordered
 interpreter-first 8/105 modules independently loaded in fresh PUC Lua/LuaJIT hosts, including metadata/plans,
-portable trace identity, fixed user functions, and cleanup. Sole census admission/handoff `.8.4` are active.
+portable trace identity, fixed user functions, and cleanup. Final `.8.4` adds Lua to every current capability row,
+advances the executable census to 80/0/0, retires the satisfied Lua/variadic exclusions, preserves PUC Lua as the
+primary runtime and LuaJIT as a strict compatibility leg, and closes the Lua backend tree.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common
@@ -1037,13 +1040,13 @@ book remains the sole owner of language semantics, portable behavior, shared con
 Companions will later own user-relevant native setup/APIs/embedding, implementation architecture, diagnostics/
 trace, generated/native artifacts, performance/deployment, troubleshooting, and exact variant limitations. A
 read-only content inventory, shared template, independent builds, canonical-owner metadata, and drift checks must
-precede migration. `BACKEND-COMPANION-BOOKS.1+` is dependency-gated on full current-backend parity; no scaffold or
-content move exists yet.
+precede migration. Lua `.8.4` satisfies the full-backend parity prerequisite; `BACKEND-COMPANION-BOOKS.1` remains
+pending explicit activation, and no scaffold or content move exists yet.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
-| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: backend parity, staged parsing, generated-source breadth, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic final-codeblock arguments, post-settlement compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, narrow punctuation-light zero-argument aliases, complete current named-mark inventory parity, the parity-gated Unicode structured-text requirements program, explicit milestone-scoped Rust mutation testing, and backend implementation companion books. | Punctuation-light `.16` is complete at capability 64/0/0; parenthesis-free condition headers remain excluded. Lua callbacks close at 114/114, input/cursor controls at 115/115, all 16 anonymous capture calls at 116/116, and non-consuming earliest-boundary `.4.3.7.5` at 117/117 on PUC Lua and LuaJIT. Named-mark `.17.1-.17.5` align and admit the exact seven-helper contract at 246 shared names with 105 corpus plus one exact fixture, 122 independently checked public Perl contracts, and nine locked non-public exclusions. Lua `.4.3.7.3` extends the admitted store across governed named writers/spans/bridges at 120/120; `.4.3.7.4` executes typed post-action split/named-mark slot events at 121/121. Exhaustive `.4.3.7.6` proves exact 62-call/four-marker no-drift, closes parent `.4.3.7`, and activates diagnostic output `.4.3.8`. ADR `0034`/`.18` adopt an exact 91-row post-parity format program, but `.1+` remains dependency-gated until full Perl/Rust/Dart/Julia/Lua parity. ADR `0039`/`.20.0` records a 3,333-candidate list-only Rust mutation baseline and forbids per-commit execution; `.20.1+` is parked for an explicit later campaign. ADR `0040`/`.21.0` adopt one neutral normative book plus five linked implementation companions; inventory/scaffolding/population `.21.1+` waits for parity. Helper owner `.5` retains constructor/transform/truthiness/control caveats plus Perl's incidental `start_capture_slice()` result and zero-argument `capture_until_boundary()` drift. Generated Lua stays `.8.1-.8.4`; inspector `.13.1` and authoring `.14`/`.15` remain queued. |
+| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: staged parsing, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic first-class codeblocks, compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, the Unicode structured-text program, Rust mutation testing, and backend implementation companion books. | Lua `.8.4` closes the fifth backend at capability 80/0/0 after exact native, corpus, CLI, and generated-source proof. Parenthesis-free condition headers remain excluded. Helper owner `.5` retains diagnostic, constructor/transform/truthiness/control, `start_capture_slice()`, and zero-argument `capture_until_boundary()` drift. The full-backend parity prerequisites for ADR `0034`/`.18` and ADR `0040`/`.21` are now satisfied, while activating those programs remains separately task-tree owned. Mutation execution remains explicit and non-routine; inspector `.13.1` and authoring `.14`/`.15` remain queued. |
 | Dart backend parity | `done` | First future full-parity backend lane after Perl5 and Rust. | Proof is 181 tests, 61/61 default/POSIX, 105/105 interpreter corpus, exact CLI/native trace/API parity, deterministic v1 emission, ten-family direct dispatch/four rejections, and exact accepted 8/105 generated host proof. Dart passes the complete current capability census. |
 | Julia backend parity | `in progress` (local milestone closed; global obligations delegated) | Second future full-parity backend lane after Dart under ADR `0021`; native in-memory Julia library first under ADR `0022`. | Current proof is 105/105 interpreter corpus, 61/61 shared CLI default/POSIX, deterministic generated source with ten-family and accepted-subset admission, exact capability census, and ADR 0030 fixed-v1/variadic-v2 native/generated execution. Remaining work is only explicitly delegated future language evolution, not a Julia parity gap. |
 | Non-current helper code purge | `done` | Remove retired helper spellings from Perl/Rust code surfaces, active tests/tools/spec fixtures, and durable docs so deleted names are not preserved as name-specific recognition or diagnostics. | Task tree `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` complete through `.5`: Perl source cleanup, Rust source cleanup, active fixture/spec migration, and final no-drift closeout are done. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. |

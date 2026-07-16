@@ -156,6 +156,7 @@
     "perl": "pass",
     "rust": "pass",
     "dart": "pass",
-    "julia": "pass"
+    "julia": "pass",
+    "lua": "pass"
   }
 }

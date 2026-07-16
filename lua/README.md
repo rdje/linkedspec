@@ -70,7 +70,7 @@ identical signature/parameter-kind values through outward and staged records. PU
 Full-pipeline trace `.5.3.2` then propagates one caller-owned emitter through native resolution/loading, every
 frontend/compiler/function/staged owner, engine construction, and runtime without retaining it or creating a
 hidden emitter. Ordered scopes/decisions, routed output, quiet and filtered levels, attributed balanced failures,
-and traced/untraced identity pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Lua remains
+and traced/untraced identity pass 155/155 on both ABIs with status `native-full-pipeline-trace-v1`. Lua remained
 outside the four-backend 64/0/0 census until sole all-pass admission `.8.4`. Exact no-drift `.5.3.3` closes parents
 `.5.3`/`.5` without changing source, status, behavior, tests, or the manifest. Controlled/core planning `.6.1.0`
 measured offsets 0-39 and 99-104 at 45/46 on both ABIs. Typed nested-path repair `.6.1.1` preserves key/index
@@ -105,7 +105,9 @@ closes scaffold `.8.1` at 173/173 per ABI. Exact family execution `.8.2` adds te
 rejections, authoritative root/nested dispatch, portable trace, an isolated all-family host, and emitted variadic
 proof at 176/176 per ABI. Contract-sourced `.8.3` proves the exact ordered interpreter-first 8/105 modules in fresh
 PUC Lua and LuaJIT hosts at 177/177 per ABI, including metadata/plans/trace identity, fixed user functions, and
-cleanup. Sole census promotion and backend handoff `.8.4` are active.
+cleanup. Final `.8.4` adds Lua to all 16 executable capability rows at five-backend 80/0/0, retires the satisfied
+Lua-backend and variadic-function exclusions, preserves PUC Lua as primary and LuaJIT as the compatibility leg,
+and closes the backend handoff.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -342,8 +344,9 @@ first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` 
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
 implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
 extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drift `.7.3` closes parent `.7`.
-Generated Lua emission, isolated dual-ABI valid/corrupt execution, exact family plans/execution, and contract-owned
-8/105 fresh-host proof are current through `.8.3`; sole census admission and handoff remain `.8.4`.
+Generated Lua emission, isolated dual-ABI valid/corrupt execution, exact family plans/execution, contract-owned
+8/105 fresh-host proof, and five-backend 80/0/0 census admission are current through `.8.4`; the Lua parity tree
+and backend handoff are closed.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -398,8 +401,8 @@ be projected and composed with rule parsing. The staged registry now dispatches 
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
 loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
 parser CLI adapter, recurring focused 61x2 proof, and shared 5x2x61 matrix admission are current. Final CLI no-drift
-is `.7.3`; generated-source scaffold `.8.1`, exact family execution `.8.2`, and accepted-subset `.8.3` are closed,
-while sole census admission and backend handoff `.8.4` are active.
+is `.7.3`; generated-source scaffold `.8.1`, exact family execution `.8.2`, accepted-subset `.8.3`, and all-pass
+census/handoff `.8.4` are closed. Lua is an admitted fifth backend at 80/0/0.
 
 Run the local gate from the repository root:
 
@@ -780,8 +783,8 @@ arrays from emitted state. Contract-sourced `.8.3` additionally validates the co
 105-fixture manifest, consumes the exact eight neutral names in contract order, proves
 each interpreter value first, and independently loads all eight emitted modules in the
 selected ABI host. Exact results, metadata, plans, fixed user-function execution,
-portable trace identity, empty stderr, and cleanup pass at 177/177 on both ABIs. Sole
-capability-census admission remains `.8.4`.
+portable trace identity, empty stderr, and cleanup pass at 177/177 on both ABIs. Final
+capability-census admission `.8.4` is complete at five-backend 80/0/0.
 
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`

@@ -1,10 +1,10 @@
 ---
 id: backend-capability-census
-title: A validated 16-capability census is fully green across the four established backends
+title: A validated 16-capability census is fully green across five admitted backends
 answers:
   - where is the LinkedSpec backend capability matrix
   - how many backend capabilities are in the parity census
-  - which current capabilities are not yet equal across Perl Rust Dart and Julia
+  - which current capabilities are not yet equal across Perl Rust Dart Julia and Lua
   - does the 105 fixture corpus prove every current LinkedSpec language feature
   - does Rust expose the backend neutral compiled descriptor
   - does Rust expose structured runtime diagnostics
@@ -38,13 +38,14 @@ evidence_update_2026_07_11_rust_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.
 evidence_update_2026_07_11_rust_generated_admission: "FUTURE-PARITY-BACKLOG.3.2.2 makes the all-105 classifier unconditional and contract-gated, passes it independently and inside the complete Rust package/61x2 CLI gate, and promotes Rust generated source to pass. The census is now 58 pass, zero partial, and two gaps; only Dart/Julia generated source remains."
 evidence_update_2026_07_11_dart_generated_admission: "FUTURE-PARITY-BACKLOG.3.3.3 consumes the contract's exact eight-case subset, proves interpreter values before v1 emission, independently analyzes/runs all generated libraries with exact metadata/plans/trace identity, passes complete 181/61x2/105 gates, and promotes Dart. Census is 59 pass, zero partial, one gap; only Julia generated source remains."
 evidence_update_2026_07_13_punctuation_admission: "FUTURE-PARITY-BACKLOG.16.7 adds language.punctuation_light_zero_argument_aliases as four passing states, removes its future exclusion, and advances the live census from 15/60 to 16 capabilities and 64/0/0 states. tools/check_generated_source_contract.pl now derives census totals from the manifest instead of hard-coding 60/0/0."
+evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 adds Lua to the exact backend list and all 16 rows with direct source/recurring evidence, updates both capability and generated-source checkers, removes the satisfied Lua-backend and variadic exclusions, and narrows the mixed generic-codeblock reason. The executable census is five-backend 80/0/0."
 reverify: "perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After punctuation-light admission `.16.7`, its 16 rows and 64 backend states classify
-64 pass, zero partial, and zero gaps.
+exclusions. After Lua admission `.8.4`, its 16 rows and 80 backend states classify 80 pass, zero partial, and zero
+gaps across Perl, Rust, Dart, Julia, and Lua.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -57,16 +58,15 @@ The audit distinguishes implementation gaps from proof gaps:
   root contract directly; exact admission is closed under `.1.6.4`;
 - Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
   phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
-- generated source remains top-level `.3`: Perl, Rust, Dart, and Julia pass; Rust's strict full-manifest gate is
-  105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families. Lua now proves
-  the same ten-family and contract-ordered 8/105 boundary in fresh dual-ABI hosts, but sole admission `.8.4` has
-  not yet added Lua to the census.
+- generated source remains independently proved: Perl, Rust, Dart, Julia, and Lua pass; Rust's strict full-
+  manifest gate is 105/105, while Dart, Julia, and Lua each prove the exact accepted 8/105 subset plus all ten
+  families. Lua uses fresh PUC Lua/LuaJIT hosts and exact v1/v2/v3 callable state.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
-Generated-source `.3.5` closed the then-current census at 60/0/0; punctuation-light `.16.7` later adds four
-passing states. Deprecated Perl plugins and not-yet-current general parse jobs,
-semantic introspection/MCP, generic final-codeblock behavior, and Lua are explicit exclusions/future owners, not
-omitted rows.
+Generated-source `.3.5` closed the then-current census at 60/0/0; punctuation-light `.16.7` later added four
+passing states, and Lua `.8.4` adds 16 all-pass states. Deprecated Perl plugins and not-yet-current general parse
+jobs, semantic introspection/MCP, and generic first-class/dynamic callable-codeblock behavior remain explicit
+exclusions/future owners, not omitted rows.
 
 `tools/check_generated_source_contract.pl` validates its own capability row and derives the live pass/partial/gap
 totals from `manifest.json`; it does not freeze the census size in an output string.
@@ -75,4 +75,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memo
 [[perl-native-spec-resolution]], [[dart-native-spec-resolution]], [[julia-native-spec-resolution]],
 [[trace-cross-variant-capability-contract]], [[dart-generated-source-deferred]],
 [[julia-generated-source-scaffold]], [[lua-generated-source-accepted-subset]],
+[[lua-five-backend-capability-admission]],
 [[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].

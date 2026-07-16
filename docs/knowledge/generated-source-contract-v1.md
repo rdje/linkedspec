@@ -29,6 +29,7 @@ evidence_update_2026_07_16_lua_emitter_core: "LUA-BACKEND-PARITY.8.1.1 adds Lua 
 evidence_update_2026_07_16_lua_isolation: "LUA-BACKEND-PARITY.8.1.2 persists valid/corrupt generated Lua plus a host runner in unique caller-owned temporary storage, launches the exact PUC Lua or LuaJIT ABI runtime/native paths in fresh processes, captures exact metadata/result/trace/failure observations, and proves cleanup after normal and injected-failure paths. Lua passes 173/173 per ABI and canonical Phase 0 1031/1031 in 607 seconds. Family plan/trace remains .8.2."
 evidence_update_2026_07_16_lua_family_plan: "LUA-BACKEND-PARITY.8.2 adds exact typed ten-family ordered plans, row-count/label/family/unknown-family rejections, authoritative root/nested regex-versus-blind dispatch, portable enter/decision/exit trace, one isolated 26-row all-family module, and emitted neutral variadic execution. The exact seven explicit repetition mode names avoid Lua's broader native default-scanning repetition flag. Lua passes 176/176 per ABI and canonical Phase 0 1031/1031 in 626 seconds; subset admission remains .8.3."
 evidence_update_2026_07_16_lua_subset: "LUA-BACKEND-PARITY.8.3 adds corpus_proof.lua_accepted_subset_test and checker ownership for exact count/order/full-manifest/interpreter-first/load/metadata/plan/trace/cleanup/unconditional registration. Lua consumes all eight contract names directly and loads their emitted modules in fresh exact PUC Lua/LuaJIT hosts with fixed user-function execution. Both ABIs pass 177/177 and canonical Phase 0 1031/1031 in 620 seconds; sole census admission remains .8.4."
+evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 changes current_backend_states to exact five-backend all-pass, adds Lua to every executable capability row, and advances the derived census to 80/0/0 after focused dual-ABI/generated/CLI/corpus proof."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -74,7 +75,7 @@ Julia and Lua likewise consume the exact contract list and prove interpreter
 values before emission. Lua's `.8.3` checker-owned path validates all 105
 fixtures first and locks fresh PUC Lua/LuaJIT load, exact metadata/plans/trace
 identity, fixed user-function execution, cleanup, and unconditional
-registration. Lua census admission remains `.8.4`.
+registration. Lua census admission closes under `.8.4` at five-backend 80/0/0.
 
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],
@@ -88,5 +89,6 @@ Related facts: [[generated-source-parity-audit]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-family-plan]],
 [[lua-generated-source-accepted-subset]],
+[[lua-five-backend-capability-admission]],
 [[optional-native-parser-acceleration]],
 [[user-observable-backend-cli-parity-contract]].

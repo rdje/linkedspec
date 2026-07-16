@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.4 — admit Lua capability parity
+
+Added Lua as the fifth exact backend across all 16 executable capability rows. Every new state is `pass` and cites
+the direct Lua implementation plus recurring package, CLI, corpus, trace, loading, descriptor, or generated-source
+proof. The checker now requires exactly Perl, Rust, Dart, Julia, and Lua, producing 80 pass / 0 partial / 0 gap.
+The independent generated-source contract also records Lua `pass` after deterministic v1/v2/v3 emission,
+dual-ABI host isolation, all ten families, four rejections, portable trace, emitted variadic execution, and the
+exact interpreter-first 8/105 subset.
+
+Removed the satisfied Lua-backend and variadic-user-function future exclusions. Narrowed the mixed generic
+callable-codeblock exclusion to genuinely outstanding explicit callable values, arbitrary dynamic calls, and
+remaining Rust/Dart/Julia parity. PUC Lua 5.4 remains the primary conformance runtime; LuaJIT remains the
+behavior-identical compatibility leg.
+
+PUC Lua and LuaJIT each pass 177/177, primary CLI passes 61/61 in default and POSIX environments, corpus execution
+passes 105/105, and the shared warmed matrix passes 5 backends x 2 environments x 61 cases. Capability and
+generated-source checkers both report 80/0/0. Canonical local CI passes reference CLI 61x2 and Phase 0 `1..1031`
+in 625 seconds. The Lua parity tree closes without activating a successor tree; post-parity diagnostic alignment
+is the next clean-pivot candidate. Mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.3 — admit generated Lua subset
 
 Added `lua/test/run.lua` as the exact Lua accepted-subset path in the neutral generated-source contract. The

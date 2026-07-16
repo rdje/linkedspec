@@ -1,7 +1,7 @@
 # Capability conformance inventory
 
-`manifest.json` is the machine-readable census of current user-observable LinkedSpec capabilities across the four
-implemented backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
+`manifest.json` is the machine-readable census of current user-observable LinkedSpec capabilities across the five
+admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
 61-case primary CLI manifest.
 
 Run its structural and ownership gate from the repository root:
@@ -45,10 +45,10 @@ cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, kee
 defines version-2 signature objects whose outward placement is sourced from the descriptor union, binds extras as one fresh typed array, rejects keyword/overload/host-splat
 semantics, and locks representative purpose-specific helper/method arities. Validate its schema, definitions,
 bindings, diagnostics, and deterministically rendered future `.spec` fixture with
-`python3 tools/check_callable_signature_contract.py`. Perl, Rust, Dart, and Julia consume the unchanged
-source/result/record contract through native and generated execution. Lua consumes native signature/runtime and
-exact outward-descriptor variants through `LUA-BACKEND-PARITY.5.1/.5.3.1`; generated preservation/execution
-remains `.8`.
+`python3 tools/check_callable_signature_contract.py`. Perl, Rust, Dart, Julia, and Lua consume the unchanged
+source/result/record contract through native and generated execution. Lua's exact signature/runtime and outward
+descriptor variants close under `.5.1/.5.3.1`, while emitted variadic execution closes under `.8.2` and final
+five-backend admission under `.8.4`.
 
 `callable_codeblock_contract.json` adopts the future first-class callable-codeblock boundary without claiming
 backend support early. Exact `{|fixed, ...rest| body }` syntax constructs deferred typed codeblock data; `cb(args)`
@@ -64,8 +64,9 @@ assignment/copying, user-function preservation, dynamic caller execution, tempor
 standalone discard, receiver continuation, static precedence, and typed failures pass. Generic Perl final-block
 normalization audit `.11.3.3.0` found the declaration gap, ADR 0032 closes it in `.11.3.3.1`, and `.11.3.3.2`
 preserves metadata plus executes equivalent attached/parenthesized helper/user-function/receiver contextual forms.
-Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust/Dart/Julia/Lua parity keeps
-the overall capability future-owned under the remaining backend rollout leaves.
+Perl construction, invocation, normalization, and closeout `.11.3` are complete. Lua's declared contextual
+helper/user-function/receiver forms are also current, but explicit callable literals and arbitrary dynamic calls
+remain future alongside Rust/Dart/Julia generic parity; the overall generic capability therefore stays excluded.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The
@@ -104,12 +105,12 @@ and CLI fixture results. Julia consumes the same cases through
 and CLI fixture results. Rust, Dart, and Julia's pre-existing `.contains()` missing-argument outcomes remain helper
 drift owned by `FUTURE-PARITY-BACKLOG.5`; each alias preserves its backend's parenthesized outcome. Lua consumes
 the same AST/negative/native fixture cases inside `lua/test/run.lua` on PUC Lua and LuaJIT, including public
-SpecFile JSON reconstruction; its matching `.contains()` drift is also owned by `.5`. Generated Lua source does
-exist through exact emitter/family/subset proof `.8.1-.8.3`, but this punctuation-light fixture's Lua route remains
-native plus serialized until final parity closeout `.8.4` audits its generated preservation. The current syntax is admitted as
-`language.punctuation_light_zero_argument_aliases` in the four-backend capability census. The composed recurring
-proof is `bash tools/check_punctuation_light_five_backend.sh`; it additionally exercises Lua on both ABIs without
-conflating serialized-state reconstruction with generated-source execution.
+SpecFile JSON reconstruction; its matching `.contains()` drift is also owned by `.5`. Generated Lua source closes
+independently through exact emitter/family/subset proof `.8.1-.8.3`; the punctuation-light row relies on its exact
+AST/native/serialized proof and does not claim that this one fixture separately runs through emitted Lua. The
+current syntax is admitted for all five backends under `language.punctuation_light_zero_argument_aliases`. The
+composed recurring proof is `bash tools/check_punctuation_light_five_backend.sh`; it exercises Lua on both ABIs
+without conflating serialized-state reconstruction with generated-source execution.
 The JSON key `future_fixture` is retained as the version-1 schema name; the fixture itself is now admitted current.
 
 `uniform_binding_contract.json` adopts the selector-free one-binding target contract before backend behavior
@@ -146,13 +147,14 @@ perl tools/check_generated_source_contract.pl
 
 The census intentionally records proof quality separately from implementation belief. Passing the 105-case corpus
 does not by itself prove every helper and API described by the mdBook; `FUTURE-PARITY-BACKLOG.1.6.1` owns that
-coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`. `.3.1.0` demonstrated
+coverage mapping. Generated source was first owned by `FUTURE-PARITY-BACKLOG.3` and Lua completion by
+`LUA-BACKEND-PARITY.8`. `.3.1.0` demonstrated
 why execution proof matters by exposing Perl's lost dependency indexes; `.3.1.2` repairs that mechanism and passes
 focused contract proof. Rust v1 identity/metadata/errors plus exact neutral plan/direct result/trace roles align.
 Admission `.3.1.3.3` promotes Perl to pass. Rust's staged full-manifest classifier is an unconditional recurring
 105/105 gate, and `.3.2.2` admits it. Dart `.3.3.1-.3` and Julia `.3.4.1-.3` bind deterministic ten-family source
 to the exact accepted eight-case interpreter-first isolated-host proof and are admitted. Lua `.8.1-.8.3` now adds
 exact v1/v2/v3 emission, dual-ABI isolation, ten-family execution, and the same contract-ordered 8/105 proof in
-fresh PUC Lua/LuaJIT hosts; the checker owns Lua's path/order/proof/trace/cleanup registration. The current census
-is 64 pass / zero partial / zero gap across the four admitted backends. Lua remains outside that census until sole
-admission owner `.8.4` updates the backend manifest and handoff.
+fresh PUC Lua/LuaJIT hosts; the checker owns Lua's path/order/proof/trace/cleanup registration. Sole admission
+owner `.8.4` now adds Lua to every row in one all-pass expansion. The current census is 80 pass / zero partial /
+zero gap across five admitted backends, and the satisfied Lua-backend and variadic-function exclusions are retired.

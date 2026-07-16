@@ -13,6 +13,7 @@ date: 2026-07-15
 status: current
 tags: [cli, parity, matrix, perl, rust, dart, julia, lua, ci, FUTURE-PARITY-BACKLOG, LUA-BACKEND-PARITY]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.3 adds tools/run_primary_cli_matrix.sh at 4x2x61; LUA-BACKEND-PARITY.7.2 adds a disposable PUC Lua native build and extends the unchanged recurring manifest to Perl/Rust/Dart/Julia/Lua at 5x2x61."
+evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 reruns the complete 5x2x61 matrix as final all-pass evidence before admitting Lua to the five-backend 80/0/0 capability census."
 reverify: "bash tools/run_primary_cli_matrix.sh && rg -n 'LINKEDSPEC_RUN_CLI_MATRIX|run_primary_cli_matrix' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -34,10 +35,11 @@ LINKEDSPEC_RUN_CLI_MATRIX=1 bash tools/run_ci_local.sh
 ```
 
 The focused Rust, Dart, Julia, and Lua gates remain separate owners of native/package/corpus depth. The original
-four-backend matrix closed exact CLI parent `.1.5`; Lua `.7.2` extends the same command-identity proof without
-changing the still-four-backend capability census.
+four-backend matrix closed exact CLI parent `.1.5`; Lua `.7.2` extends the same command-identity proof, and final
+admission `.8.4` now includes Lua in the five-backend 80/0/0 capability census.
 
 Related facts: [[neutral-cli-fixture-runner]], [[cross-backend-cli-contract-gap]],
 [[canonical-primary-cli-trace-protocol]], [[rust-local-verification-gate]], [[dart-local-verification-gate]],
 [[julia-local-verification-gate]], [[lua-primary-cli-recurring-admission]],
 [[primary-cli-strict-utf8-text-contract]].
+Admission: [[lua-five-backend-capability-admission]].

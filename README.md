@@ -123,8 +123,9 @@ This `README.md` is the **single entry point** to the project.
   pass 153/153 with status `native-spec-pipeline-v1`. No-drift `.5.2.4` closes parent `.5.2` without changing
   behavior or capability. Planning `.5.3.0` splits outward descriptors, one-emitter full-pipeline trace, and final
   admission. Decision `.5.3.0.1` and ADR `0041` now adopt an exact final-codeblock outward descriptor version 3:
-  fixed `params`/`arity` plus final-only `parameter_kinds`. They also keep Lua outside the four-backend census until
-  sole all-pass admission owner `.8.4`. Descriptor leaf `.5.3.1` now makes the neutral executable union exact for
+  fixed `params`/`arity` plus final-only `parameter_kinds`. They also kept Lua outside the four-backend census
+  through `.8.3`; sole all-pass admission owner `.8.4` now expands the census. Descriptor leaf `.5.3.1` makes the
+  neutral executable union exact for
   fixed-v1, variadic-v2, and final-codeblock-v3, removes the Lua fences, preserves identical staged metadata, and
   aligns Perl's existing final-codeblock outward projection to v3. Full-pipeline trace `.5.3.2` now carries one
   caller-owned emitter through native resolution/loading, source/function frontends, validation, compilation,
@@ -176,11 +177,12 @@ This `README.md` is the **single entry point** to the project.
   trace, an isolated all-family host, and emitted variadic execution at 176/176 per ABI. Contract-sourced subset
   `.8.3` now consumes the exact eight neutral names, proves interpreter values before emission, and independently
   loads all eight modules with exact value/metadata/plan/trace observations in fresh PUC Lua and LuaJIT hosts at
-  177/177 per ABI. Sole census promotion and backend handoff `.8.4` are active.
+  177/177 per ABI. Final admission `.8.4` adds Lua as an all-pass fifth backend across all 16 executable
+  capabilities, advances the census to 80/0/0, retires the satisfied Lua-backend and variadic-function future
+  exclusions, and closes the backend handoff without changing its PUC-primary/LuaJIT-compatibility policy.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
-  Generated Lua census admission remains `.8.4`. ADR
-  `0034` also adopts a dependency-gated post-parity program: after Perl/Rust/Dart/Julia/Lua reach full parity, 91
+  ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
   immediate use on every backend; no format implementation has started. ADR `0035` additionally makes terse,
@@ -406,8 +408,9 @@ Top-level project docs:
 
 The current mdBook remains the sole normative backend-neutral manual. ADR `0040` adopts future linked Perl/Rust/
 Dart/Julia/Lua implementation companions for native setup, embedding, architecture, operation, performance, and
-troubleshooting detail that does not belong in the portable manual. `BACKEND-COMPANION-BOOKS` is dependency-gated
-on current backend parity; no companion scaffold or content migration exists yet.
+troubleshooting detail that does not belong in the portable manual. Five-backend parity now satisfies the
+`BACKEND-COMPANION-BOOKS` prerequisite; its read-only inventory remains pending and no companion scaffold or
+content migration exists yet.
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
@@ -415,10 +418,10 @@ on current backend parity; no companion scaffold or content migration exists yet
   pre-commit hooks, or in ordinary local CI. The list-only baseline is 3,333 candidates across 19 files; future
   runs are explicit on-demand or milestone/release campaigns, targeted before any resource-guarded sharded
   breadth. `RUST-MUTATION-TESTING` owns the safe manual command and pilot; no mutation score is claimed yet.
-- Run `perl tools/check_capability_conformance.pl` to validate the current 16-capability/four-backend census,
-  evidence paths, and future ownership. The live census is 64 pass, zero partial, and zero gap states. Generated
-  source reached the earlier 60/0/0 milestone under `.3`; punctuation-light admission `.16.7` adds the current
-  four passing states. Lua remains outside this full-backend census until its dedicated parity tree completes.
+- Run `perl tools/check_capability_conformance.pl` to validate the current 16-capability/five-backend census,
+  evidence paths, and future ownership. The live census is 80 pass, zero partial, and zero gap states. Generated
+  source reached the earlier four-backend 60/0/0 milestone under `.3`; punctuation-light admission `.16.7` added
+  four states, and Lua closeout `.8.4` adds 16 evidence-backed all-pass states in one admission.
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case

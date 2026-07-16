@@ -54,10 +54,11 @@ emission and executes mixed/empty fresh typed rest arrays; no host vararg
 semantics are introduced.
 
 Exact contract-sourced interpreter-first 8/105 admission is closed under
-`.8.3`, and sole census admission remains `.8.4`.
+`.8.3`; final census admission closes under `.8.4` at five-backend 80/0/0.
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-generated-source-emitter-core]],
 [[lua-generated-source-accepted-subset]],
+[[lua-five-backend-capability-admission]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-scaffold-split]], [[lua-backend-full-parity-plan]].

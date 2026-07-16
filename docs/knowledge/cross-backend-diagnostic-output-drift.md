@@ -23,8 +23,9 @@ Recognition is not semantic parity. The five current backends presently differ a
 | Julia | Concatenates and trace-routes messages; an omitted `print_each` suffix defaults to newline. |
 | Lua | Delivers typed caller-owned events, stays quiet without a sink, and follows Perl-reference formatting. |
 
-This is a parity prerequisite, not permission to add another backend-local convention. The pending,
-dependency-gated `FUTURE-PARITY-BACKLOG.5.1` must define exact arity, scalar text, newline/prefix/suffix behavior,
+This is a parity prerequisite, not permission to add another backend-local convention. With Lua `.8.4` complete,
+pending `FUTURE-PARITY-BACKLOG.5.1` is the next clean-pivot candidate to define exact
+arity, scalar text, newline/prefix/suffix behavior,
 wrong-kind handling, event grouping/order, sink/trace routing, quietness, error propagation, Unicode, parse-result
 neutrality, and `exit_now` interaction. It then aligns native and generated/CLI paths where applicable before the
 structured-format program may execute.

@@ -3,10 +3,11 @@
 ## Metadata
 
 - Tree ID: `BACKEND-COMPANION-BOOKS`
-- Status: `proposed` (implementation dependency-gated on full current-backend parity)
+- Status: `proposed` (full current-backend parity prerequisite satisfied; inventory `.1` not yet active)
 - Roadmap lane: `Documentation architecture - backend implementation companions`
 - Created: `2026-07-15`
-- Last updated: `2026-07-15` (architecture adoption `.0` complete; inventory `.1` dependency-gated)
+- Last updated: `2026-07-16` (architecture adoption `.0` complete; Lua `.8.4` satisfies the parity prerequisite;
+  inventory `.1` remains separately activatable)
 - Owner: repo-local workflow
 
 ## Goal
@@ -89,7 +90,8 @@ Every implementation leaf must:
 - ID: `BACKEND-COMPANION-BOOKS.1`
   Status: `pending`
   Goal: Inventory and classify current backend-specific content in the neutral book and backend READMEs.
-  Dependencies: `.0`, complete current Perl/Rust/Dart/Julia/Lua parity
+  Dependencies: `.0`, complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by `LUA-BACKEND-PARITY.8.4`;
+    inventory remains separately activatable)
   Acceptance: Produce a page-level retain/move/link/remove map; identify normative mixed-layer passages and one
     canonical owner for each; measure duplication before migration; make no content move in this leaf.
   Verification: `pending`
@@ -167,7 +169,7 @@ Every implementation leaf must:
 - ROOT CAUSE: portable semantics and host-specific implementation guidance serve different audiences and have
   different change boundaries; one undifferentiated book dilutes the neutral contract, while copied books drift.
 - FIX: ADR `0040` and this tree adopt one normative neutral book plus five linked, non-normative implementation
-  companions, dependency-gated until full current-backend parity.
+  companions. Full current-backend parity was the implementation gate and is now satisfied; `.1` remains pending.
 - ADDRESSED: content routing, scope, rollout order, canonical ownership, migration inventory, build/link/drift
   governance, five backend leaves, and closeout are explicit.
 - NO REGRESSION: this planning leaf adds no scaffold, moves no content, changes no parser/runtime behavior, and
@@ -177,15 +179,16 @@ Every implementation leaf must:
 
 ## Current Frontier
 
-Dependency-gated. After full current-backend parity, start `BACKEND-COMPANION-BOOKS.1` with a read-only content
-inventory. Until then, backend-specific material continues to be documented accurately in the neutral book and
-backend READMEs; no companion scaffold exists.
+The full current-backend parity prerequisite is satisfied by Lua `.8.4`. `BACKEND-COMPANION-BOOKS.1` remains
+pending until separately activated; it starts with a read-only content inventory. Backend-specific material
+continues to be documented accurately in the neutral book and backend READMEs; no companion scaffold exists.
 
 ## Decisions
 
 - The idea is adopted because backend implementation and embedding material is useful but dilutes a neutral book.
 - The architecture is one normative neutral book plus five non-normative implementation companions.
-- Implementation is deliberately parked until current backend parity is complete.
+- Implementation was deliberately parked until current backend parity completed; inventory `.1` is now eligible
+  for a later explicit activation.
 - Independent books are preferred over five large subsections in the neutral book, provided mechanical
   canonical-owner/drift checks exist before content migration.
 
@@ -194,12 +197,12 @@ backend READMEs; no companion scaffold exists.
 - Semantic duplication could create six conflicting truths; canonical-owner metadata and drift checks are gates.
 - Five books multiply maintenance cost; a shared template and optional sections keep structure consistent without
   forcing meaningless content.
-- Premature scaffolding could fossilize incomplete Lua behavior; parity is an explicit dependency.
+- Scaffolding before the read-only inventory could duplicate or misroute current implementation guidance.
 - Moving too much could make ordinary users hunt across books; portable concepts and common workflows stay neutral.
 
 ## Blockers
 
-- Implementation only: full current-backend parity is not yet complete.
+- Implementation: none from backend parity; `.1` still requires an explicit task-tree activation.
 - Planning/adoption: none.
 
 ## Verification Log

@@ -3,11 +3,10 @@
 ## Metadata
 
 - Tree ID: `LUA-BACKEND-PARITY`
-- Status: `active`
+- Status: `done` / `closed`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-16` (`.8.1.0` corrects the pre-ADR-0041 v1/v2-only scaffold scope, splits deterministic
-  v1/v2/v3 emission from isolated dual-ABI load/run, and activates `.8.1.1` without behavior change)
+- Last updated: `2026-07-16` (`.8.4` admits Lua as the fifth exact backend at 80/0/0 and closes the tree)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,9 +57,13 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 ## Task tree
 
 - ID: `LUA-BACKEND-PARITY`
-  Status: `active`
+  Status: `done`
   Goal: Implement Lua as the third full-parity future backend.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
+  Verification: **PASS 2026-07-16.** All eight parents and every implementation leaf are closed. Lua is the fifth
+    exact backend across 16 executable capabilities at 80/0/0; PUC Lua and LuaJIT pass 177/177, primary CLI 61x2,
+    corpus 105/105, shared CLI matrix 5x2x61, and canonical Phase 0 `1..1031` in 625 seconds.
+  Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
 
 - ID: `LUA-BACKEND-PARITY.1`
   Status: `done`
@@ -457,9 +460,12 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   and bounded memory close compiler layer `.3` and activate regex/match-state adapter `.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement matching and runtime execution.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`
+  Verification: **PASS 2026-07-16 reconciliation.** Children `.4.1-.4.4` were already complete; the stale parent
+    status is reconciled during `.8.4` closeout. Matching, runtime/helper execution, diagnostics, and native trace
+    remain proven at the `.4.4` boundary's 129/129 on PUC Lua and LuaJIT. No behavior changed in this reconciliation.
 
 - ID: `LUA-BACKEND-PARITY.4.1`
   Status: `done`
@@ -2774,9 +2780,13 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.7.3 - close Lua primary usage no drift`
 
 - ID: `LUA-BACKEND-PARITY.8`
-  Status: `active`
+  Status: `done`
   Goal: Implement generated Lua source and complete capability admission.
   Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`
+  Verification: **PASS 2026-07-16.** Deterministic exact v1/v2/v3 emission, fresh dual-ABI isolation, ten-family
+    execution/four rejections/portable trace, exact interpreter-first 8/105 proof, and all-pass census admission
+    are recurring. Generated source and the complete capability census both report 80/0/0.
+  Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
 
 - ID: `LUA-BACKEND-PARITY.8.1`
   Status: `done`
@@ -2907,23 +2917,32 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.8.3 - admit generated Lua subset`
 
 - ID: `LUA-BACKEND-PARITY.8.4`
-  Status: `active`
+  Status: `done`
   Goal: Close Lua capability parity and backend handoff.
   Acceptance: As the sole Lua census-admission owner under ADR `0041`, expand the capability manifest all-pass and
     retire the Lua-owned
     `future.variadic_user_functions` entry only after native and generated callable proofs pass; PUC Lua primary and
     LuaJIT compatibility policies are honest; roadmap/book/KM/live docs/local CI/cleanup pass; no outstanding Lua
     behavior is hidden as a limitation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** The manifest and checker require exactly Perl, Rust, Dart, Julia, and Lua;
+    every one of the 16 Lua rows is `pass` with direct source and recurring evidence, producing 80 pass / 0 partial
+    / 0 gap. The independent generated-source contract records Lua `pass`. Satisfied `future.lua_backend` and
+    `future.variadic_user_functions` entries are removed; the mixed generic callable-codeblock exclusion is
+    narrowed to explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. PUC Lua
+    and LuaJIT pass 177/177, primary 61x2, corpus 105/105, and the shared matrix 5x2x61. Generated, callable,
+    native-loading, capability, coverage 246/105+1/122, Knowledge Map, memory, doctrine, task metadata, mdBook,
+    cleanup, and whitespace gates pass. Canonical local CI passes both reference CLI legs at 61/61 and Phase 0
+    `1..1031` in 625 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
 
 ## Current frontier
 
-Generated-source scaffold `.8.1`, exact family execution `.8.2`, and contract-sourced subset `.8.3` are closed.
-Lua now has deterministic exact v1/v2/v3 source; dual-ABI valid/corrupt isolation; ordered ten-family plans and four
-rejections; plan-authoritative root/nested dispatch and portable generated trace; isolated all-family and variadic
-proof; and exact interpreter-first 8/105 modules independently loaded in fresh PUC Lua/LuaJIT hosts at 177/177 per
-ABI plus canonical Phase 0 `1..1031`/620s. Sole census admission and backend handoff `.8.4` are active.
+No active frontier remains. `.8.1-.8.4` are closed: Lua has deterministic exact v1/v2/v3 source, dual-ABI
+valid/corrupt isolation, ordered ten-family plans and four rejections, plan-authoritative root/nested dispatch,
+portable generated trace, isolated all-family and variadic proof, exact interpreter-first 8/105 modules, and
+all-pass five-backend admission. PUC Lua and LuaJIT pass 177/177, primary passes 61x2, corpus passes 105/105, the
+shared matrix passes 5x2x61, capability/generated census is 80/0/0, and canonical Phase 0 `1..1031` passes in 625
+seconds. The tree is exhausted; any later work requires a separately owned clean pivot.
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
@@ -3001,7 +3020,7 @@ and primary CLI adapter `.7.1` now implements the exact thin command at 169/169 
 Admission `.7.2` now makes Lua 61x2 recurring and extends the warmed primary matrix to 5x2x61. Status is
 `runtime-corpus-primary-cli`; final CLI/native/corpus no-drift `.7.3` closes parent `.7` without behavior change.
 Generated-source scaffold `.8.1`, exact family execution `.8.2`, and accepted-subset `.8.3` are closed at 177/177
-per ABI; sole census admission and backend handoff `.8.4` are active.
+per ABI; final census admission `.8.4` is also closed at five-backend 80/0/0.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -3136,11 +3155,11 @@ per ABI; sole census admission and backend handoff `.8.4` are active.
 | 129 | `LUA-BACKEND-PARITY.7.1` | `done` | Thin native adapter passes 169/169 per ABI and diagnostic shared CLI 61x2. |
 | 130 | `LUA-BACKEND-PARITY.7.2` | `done` | Focused Lua 61x2 and shared 5x2x61 matrix pass exactly. |
 | 131 | `LUA-BACKEND-PARITY.7.3` | `done` | Checkout setup, exact primary/corpus separation, limitations, docs, KM, and gates agree. |
-| 132 | `LUA-BACKEND-PARITY.8` | `active` | Implement generated Lua source and complete capability admission. |
+| 132 | `LUA-BACKEND-PARITY.8` | `done` | Generated source and all-pass five-backend capability admission are complete. |
 | 133 | `LUA-BACKEND-PARITY.8.1` | `done` | Deterministic emitter plus fresh-process dual-ABI valid/corrupt load/run/cleanup close at 173/173. |
 | 134 | `LUA-BACKEND-PARITY.8.2` | `done` | Exact plans, four rejections, root/nested dispatch, portable trace, all-family host, and variadic proof pass at 176/176 per ABI. |
 | 135 | `LUA-BACKEND-PARITY.8.3` | `done` | Exact contract-ordered interpreter-first 8/105 fresh-host proof passes at 177/177 per ABI. |
-| 136 | `LUA-BACKEND-PARITY.8.4` | `active` | Close Lua capability parity and backend handoff. |
+| 136 | `LUA-BACKEND-PARITY.8.4` | `done` | Lua is admitted across all 16 rows at 80/0/0; the backend handoff is closed. |
 | 137 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Post-ADR-0041 contract audit splits exact v1/v2/v3 emission from isolated host proof. |
 | 138 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic native Lua preserves exact v1/v2/v3 state, metadata, errors, and entrypoint roles at 172/172 per ABI. |
 | 139 | `LUA-BACKEND-PARITY.8.1.2` | `done` | Fresh PUC Lua/LuaJIT hosts prove Unicode values, failures, trace identity, corrupt payloads, and cleanup. |
@@ -3686,6 +3705,30 @@ per ABI; sole census admission and backend handoff `.8.4` are active.
   promote; sole census admission remains `.8.4`. Mutation testing was not run.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook generated-source/status/
   handoff/gate pages, Knowledge Map, changes/notes, and bounded memory close `.8.3` and activate only `.8.4`.
+
+### `LUA-BACKEND-PARITY.8.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua passes the native API, language/runtime, trace, CLI, 105-fixture corpus, and
+  generated-source obligations, but the executable capability manifest and checker still enumerate only Perl,
+  Rust, Dart, and Julia and retain Lua-owned future exclusions.
+- [x] **ROOT CAUSE (WHY + WHERE)** — ADR `0041` deliberately kept Lua outside
+  `capability_conformance/manifest.json` through `.8.3`; `.8.4` alone owns one all-pass expansion after every
+  product boundary has recurring evidence. The checker therefore still hard-codes four backends, and the future
+  ledger still describes completed Lua variadic/generated/backend work as pending.
+- [x] **FIX** — Audit every row against current recurring Lua evidence, add Lua to the exact backend list and all
+  16 rows only when each state is `pass`, update the checker to enforce the five-backend set, retire only satisfied
+  Lua exclusions, narrow any mixed future reason to its genuinely unimplemented scope, and close the public
+  PUC-primary/LuaJIT-compatibility handoff without hiding limitations.
+- [x] **ADDRESSED (verified)** — The executable census reports 16 capabilities and 80 pass/0 partial/0 gap states;
+  Lua row references exist and directly support each claim; generated-source and complete corpus/CLI proof remain
+  recurring; the satisfied Lua backend/variadic exclusions are absent; and generic callable-codeblock work stays
+  explicitly future without stale Lua claims.
+- [x] **NO REGRESSION** — Focused Lua, exact 61x2 primary CLI, complete 105 corpus, five-backend warmed matrix,
+  generated/callable/native-loading/capability/coverage contracts, canonical local CI, mdBook, doctrines, cleanup,
+  and whitespace pass. Mutation testing remains outside ordinary commit/local-CI workflow.
+- [x] **LOCKSTEP** — Root/Lua status and limitations, roadmaps, architecture/task/index/live state, mdBook API/
+  pipeline/status/handoff/gate pages, Knowledge Map, changes/notes, and bounded memory close `.8.4`, parent `.8`,
+  and the Lua parity tree only when the five-backend all-pass proof and honest handoff agree.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -5147,6 +5190,7 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.8.4` | `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity` | Exact five-backend 80/0/0 census, generated pass, future-exclusion retirement, runtime-role handoff, and tree closure. |
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Creates this full-parity plan; no Lua implementation code. |
 | `LUA-BACKEND-PARITY.1.1` | `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy` | Locks runtimes, layout, zero-dependency harness, JSON/regex ownership, and cache boundaries; no code. |
 | `LUA-BACKEND-PARITY.1.2` | `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend` | Native module identity, dependency-free dual-runtime tests, explicit command stubs, and `.1.3` handoff. |
