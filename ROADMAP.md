@@ -931,8 +931,10 @@ before effects, valid arguments evaluate once left-to-right, typed Unicode event
 sink, absent sinks are quiet, caller failures retain identity, and `exit_now` is typed parser control rather than
 host process termination. Rust native `.5.1.3` now adds the same exact per-execution typed event boundary,
 pre-effect arity checks, quiet default, preserved caller failure, and typed exit without direct helper stderr.
-The rollout ledger is 2 complete / 6 pending while capability stays 80/0/0; Dart native `.5.1.4` is next before
-structured-format work.
+Dart native `.5.1.4` now replaces evaluate-and-discard with the same typed parse-scoped event seam, preserves
+arbitrary sink-error identity through its action/runtime wrappers, and separates `RuntimeExitNow` from structured
+runtime diagnostics and native trace. The rollout ledger is 3 complete / 5 pending while capability stays 80/0/0;
+Julia native `.5.1.5` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

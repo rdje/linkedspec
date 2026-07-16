@@ -287,8 +287,8 @@ This document is the current high-level technical reading of the project shape. 
   optional-suffix drift, durably routed to `FUTURE-PARITY-BACKLOG.5.1` before structured-format execution. ADR
   `0042` and `linkedspec-diagnostic-output-v1` now define the exact backend-neutral arity, eager evaluation,
   rendering, typed event, quiet sink, failure, exit, generated, and phase-trace-separated target. Perl native
-  `.5.1.2` and Rust native `.5.1.3` now consume that exact target through separate per-invocation event seams;
-  the rollout ledger is 2 complete / 6 pending and Dart `.5.1.4` is next.
+  `.5.1.2`, Rust native `.5.1.3`, and Dart native `.5.1.4` now consume that exact target through separate
+  per-invocation event seams; the rollout ledger is 3 complete / 5 pending and Julia `.5.1.5` is next.
 - `2026-07-15` refresh: Lua native capture/cursor parity is closed. A source-derived inventory finds 62 unique
   current capture/mark/input/cursor/control calls and exact 62/62 agreement across ActionIR contract family,
   admitted names, interpreter dispatch, and focused execution sources. Four placement-marker spellings remain

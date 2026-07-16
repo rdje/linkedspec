@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.4` — a caller callback is control flow, not an interpreter failure):
+  Dart's visible gap was a three-case `_evaluateValues(...); return null`, but the cross-language contract exposed
+  the deeper boundary. `_executeActionBlock` caught every unfamiliar object and `_parse` specially wrapped
+  `RuntimeInterpreterException`; therefore a typed exit or arbitrary sink exception could not simply be thrown
+  from helper dispatch without losing its meaning. The native seam uses a private carrier only while unwinding,
+  explicitly passes that carrier and `RuntimeExitNow` through the action wrapper, then restores the caller's exact
+  object and stack with `Error.throwWithStackTrace` before ordinary runtime-diagnostic handling. This remains
+  correct even when the sink throws `RuntimeInterpreterException` itself. Raw `ActionArgument` arity validation
+  must precede user-function/helper dispatch and evaluation; valid arguments are then evaluated once and rendered
+  through the existing scalar conversion whose bool/finite-number/null/aggregate behavior already matches the
+  neutral contract. The complete Dart gate passes format/analyze, 220 tests, CLI 61x2, and corpus 105/105;
+  canonical local CI passes CLI 61x2 plus Phase 0 `1..1031`/613s. Only native Dart advances; generated entrypoint
+  propagation remains `.5.1.7`, capability stays 80/0/0, and no mutation campaign ran.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.3` — typed host outcomes can share a string-based interpreter without
   becoming strings): Validate output-helper arity while raw AST is still available, including fallback/fluent
   dispatch, then evaluate valid args once and form events at the helper boundary. Keep the caller sink in the fresh

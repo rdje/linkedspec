@@ -75,6 +75,43 @@ final class RuntimeInterpreterException implements Exception {
   String toString() => 'RuntimeInterpreterException: $message';
 }
 
+final class RuntimeDiagnosticOutputEvent {
+  const RuntimeDiagnosticOutputEvent({
+    required this.helperName,
+    required this.ruleLabel,
+    required this.message,
+  });
+
+  final String helperName;
+  final String ruleLabel;
+  final String message;
+
+  JsonObject toJson() => {
+    'helper_name': helperName,
+    'rule_label': ruleLabel,
+    'message': message,
+  };
+}
+
+typedef RuntimeDiagnosticOutputSink =
+    void Function(RuntimeDiagnosticOutputEvent event);
+
+final class RuntimeExitNow implements Exception {
+  const RuntimeExitNow(this.status);
+
+  final int status;
+
+  @override
+  String toString() => 'RuntimeExitNow($status)';
+}
+
+final class _RuntimeDiagnosticOutputSinkFailure implements Exception {
+  const _RuntimeDiagnosticOutputSinkFailure(this.error, this.stackTrace);
+
+  final Object error;
+  final StackTrace stackTrace;
+}
+
 final class RuntimeLifecycleEvent {
   const RuntimeLifecycleEvent({
     required this.ruleLabel,
@@ -140,8 +177,14 @@ final class LinkedSpecRuntimeEngine {
     String input, {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   }) {
-    return _parse(input, topRule: topRule, trace: trace);
+    return _parse(
+      input,
+      topRule: topRule,
+      trace: trace,
+      diagnosticOutputSink: diagnosticOutputSink,
+    );
   }
 
   /// Execute through a validated generated-family plan.
@@ -169,6 +212,7 @@ final class LinkedSpecRuntimeEngine {
     String input, {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
     Map<String, GeneratedRuleFamily>? generatedPlan,
     String? generatedSourceIdentity,
   }) {
@@ -180,6 +224,7 @@ final class LinkedSpecRuntimeEngine {
       maxIterations: maxIterations,
       topRule: label,
       trace: trace,
+      diagnosticOutputSink: diagnosticOutputSink,
       generatedPlan: generatedPlan,
       generatedSourceIdentity: generatedSourceIdentity,
     );
@@ -213,6 +258,16 @@ final class LinkedSpecRuntimeEngine {
         );
       }
       return parseResult;
+    } on _RuntimeDiagnosticOutputSinkFailure catch (failure) {
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'diagnostic_output_sink_error');
+      }
+      Error.throwWithStackTrace(failure.error, failure.stackTrace);
+    } on RuntimeExitNow catch (exit) {
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'exit_status=${exit.status}');
+      }
+      rethrow;
     } on RuntimeInterpreterException catch (error) {
       final wrapped = error.withDiagnostic(
         context.diagnostic(
@@ -233,25 +288,43 @@ final class LinkedSpecRuntimeEngine {
     String input,
     LinkedSpecTraceConfig traceConfig, {
     String? topRule,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   }) {
     final trace = LinkedSpecTraceEmitter(traceConfig);
-    return parse(input, topRule: topRule, trace: trace);
+    return parse(
+      input,
+      topRule: topRule,
+      trace: trace,
+      diagnosticOutputSink: diagnosticOutputSink,
+    );
   }
 
   RuntimeParseResult execute(
     String input, {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   }) {
-    return parse(input, topRule: topRule, trace: trace);
+    return parse(
+      input,
+      topRule: topRule,
+      trace: trace,
+      diagnosticOutputSink: diagnosticOutputSink,
+    );
   }
 
   RuntimeParseResult executeWithTrace(
     String input,
     LinkedSpecTraceConfig traceConfig, {
     String? topRule,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   }) {
-    return parseWithTrace(input, traceConfig, topRule: topRule);
+    return parseWithTrace(
+      input,
+      traceConfig,
+      topRule: topRule,
+      diagnosticOutputSink: diagnosticOutputSink,
+    );
   }
 
   String _defaultTopRuleLabel() {
@@ -1055,6 +1128,10 @@ final class LinkedSpecRuntimeEngine {
     } on _ActionReturn catch (returnSignal) {
       return returnSignal;
     } on _ActionNext {
+      rethrow;
+    } on RuntimeExitNow {
+      rethrow;
+    } on _RuntimeDiagnosticOutputSinkFailure {
       rethrow;
     } on RuntimeInterpreterException {
       rethrow;
@@ -2858,6 +2935,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
+    _validateDiagnosticOutputArity(call, helperName, context, ruleLabel);
     if (helperName == 'with' && call.trailingBlockArg) {
       return _callWithTrailingBlock(call, context, ruleLabel, currentEdge);
     }
@@ -3275,24 +3353,62 @@ final class LinkedSpecRuntimeEngine {
       case 'not':
         return _callLogicalNot(positionalArgs, context, ruleLabel, currentEdge);
       case 'print':
-      case 'print_each':
       case 'say':
-        _evaluateValues(positionalArgs, context, ruleLabel, currentEdge);
+        final values = _evaluateValues(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        final message = values.map(_diagnosticOutputFragment).join();
+        _emitDiagnosticOutput(
+          context,
+          RuntimeDiagnosticOutputEvent(
+            helperName: helperName,
+            ruleLabel: ruleLabel,
+            message: helperName == 'say' ? '$message\n' : message,
+          ),
+        );
+        return null;
+      case 'print_each':
+        final values = _evaluateValues(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        final target = values.first;
+        if (target is! List) {
+          return null;
+        }
+        final prefix = _diagnosticOutputFragment(values[1]);
+        final suffix = values.length == 3
+            ? _diagnosticOutputFragment(values[2])
+            : '';
+        for (final item in target) {
+          _emitDiagnosticOutput(
+            context,
+            RuntimeDiagnosticOutputEvent(
+              helperName: helperName,
+              ruleLabel: ruleLabel,
+              message: '$prefix${_diagnosticOutputFragment(item)}$suffix',
+            ),
+          );
+        }
         return null;
       case 'exit_now':
         final status = positionalArgs.isEmpty
-            ? ''
-            : _stringValue(
-                _evaluateExpression(
-                  positionalArgs.first,
-                  context,
-                  ruleLabel,
-                  currentEdge: currentEdge,
-                ),
-              );
-        throw RuntimeInterpreterException(
-          'exit_now($status) in rule $ruleLabel',
-        );
+            ? 1
+            : _intValue(
+                    _evaluateExpression(
+                      positionalArgs.first,
+                      context,
+                      ruleLabel,
+                      currentEdge: currentEdge,
+                    ),
+                  ) ??
+                  1;
+        throw RuntimeExitNow(status);
       default:
         if (_runtimeArrayHelperNames.contains(helperName)) {
           return _callArrayHelperFromExpressions(
@@ -3779,6 +3895,63 @@ final class LinkedSpecRuntimeEngine {
       for (final arg in args)
         _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
     ];
+  }
+
+  void _validateDiagnosticOutputArity(
+    ActionCallExpr call,
+    String helperName,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+  ) {
+    final expected = switch (helperName) {
+      'print' || 'say' => 'at least 1 positional argument',
+      'print_each' => '2 or 3 positional arguments',
+      _ => null,
+    };
+    if (expected == null) {
+      return;
+    }
+
+    final positionalCount = call.args
+        .whereType<ActionPositionalArgument>()
+        .length;
+    final allPositional = positionalCount == call.args.length;
+    final validCount = switch (helperName) {
+      'print' || 'say' => positionalCount >= 1,
+      'print_each' => positionalCount == 2 || positionalCount == 3,
+      _ => true,
+    };
+    if (allPositional && validCount) {
+      return;
+    }
+
+    final message =
+        "helper '$helperName' expects $expected, got $positionalCount "
+        'in rule $ruleLabel';
+    throw RuntimeInterpreterException(
+      message,
+      diagnostic: context.diagnostic(
+        stage: 'helper_arity_mismatch',
+        summary: 'Dart runtime helper arity mismatch',
+        detail: message,
+        ruleLabel: ruleLabel,
+      ),
+    );
+  }
+
+  void _emitDiagnosticOutput(
+    _RuntimeExecutionContext context,
+    RuntimeDiagnosticOutputEvent event,
+  ) {
+    final sink = context.diagnosticOutputSink;
+    if (sink == null) {
+      return;
+    }
+    try {
+      sink(event);
+    } on Object catch (error, stackTrace) {
+      throw _RuntimeDiagnosticOutputSinkFailure(error, stackTrace);
+    }
   }
 
   List<Object?> _evaluateArgumentValues(
@@ -6058,6 +6231,10 @@ String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
   return '$value';
 }
 
+String _diagnosticOutputFragment(Object? value) {
+  return _scalarString(value, nullAsEmpty: true) ?? '';
+}
+
 String _charSubstring(String value, int start, int? length) {
   final chars = value.runes.toList();
   if (start >= chars.length) {
@@ -6087,6 +6264,7 @@ final class _RuntimeExecutionContext {
     required this.maxIterations,
     required this.topRule,
     required this.trace,
+    required this.diagnosticOutputSink,
     this.generatedPlan,
     this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input);
@@ -6097,6 +6275,7 @@ final class _RuntimeExecutionContext {
   final int maxIterations;
   final String topRule;
   final LinkedSpecTraceEmitter? trace;
+  final RuntimeDiagnosticOutputSink? diagnosticOutputSink;
   final Map<String, GeneratedRuleFamily>? generatedPlan;
   final String? generatedSourceIdentity;
   final Map<String, Object?> variables = <String, Object?>{};

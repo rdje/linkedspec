@@ -171,6 +171,9 @@ export 'src/runtime/interpreter.dart'
     show
         LinkedSpecRuntimeEngine,
         RuntimeDiagnostic,
+        RuntimeDiagnosticOutputEvent,
+        RuntimeDiagnosticOutputSink,
+        RuntimeExitNow,
         RuntimeInterpreterException,
         RuntimeLifecycleEvent,
         RuntimeParseResult;

@@ -162,8 +162,24 @@ public lengths/positions. It includes stable/advancing slice, cursor, rest, from
 input-boundary, copied, and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND`
 blind-call rules surface ordered child returns when no explicit parent return overrides them.
 Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
-`and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime,
-and helper-call parsing preserves literal delimiters inside quoted arguments.
+`and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime.
+Diagnostic helpers validate their one-plus/two-or-three positional arities before effects and evaluate every
+valid argument once left-to-right. Native `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` calls may
+install a per-invocation `diagnosticOutputSink`; it receives typed `RuntimeDiagnosticOutputEvent` values with
+`helperName`, current `ruleLabel`, and exact Unicode `message`:
+
+```dart
+final events = <RuntimeDiagnosticOutputEvent>[];
+final result = engine.parse(
+  input,
+  diagnosticOutputSink: events.add,
+);
+```
+
+Without a sink execution remains eager but quiet, and event text never enters `RuntimeParseResult` or native
+trace. A thrown sink object propagates unchanged and aborts later delivery; `RuntimeExitNow.status` is separate
+typed immediate control. Generated parser entrypoint propagation remains owned by
+`FUTURE-PARITY-BACKLOG.5.1.7`. Helper-call parsing preserves literal delimiters inside quoted arguments.
 Compiled action edges now carry resolved regex-dispatch metadata, edge-only child
 regexes are folded into the parent alternation, and runtime action dispatch uses
 that metadata directly. Aggregate resets through `set(items, [])` and

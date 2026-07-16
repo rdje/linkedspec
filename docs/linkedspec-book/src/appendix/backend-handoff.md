@@ -855,10 +855,11 @@ invocation failure framing. Neutral contract `.5.1.1` now adopts ADR `0042` and 
 `linkedspec-diagnostic-output-v1` fixture: one-plus/two-or-three arities before evaluation, once-only arguments,
 typed scalar rendering, per-call/item Unicode events, quiet caller sinks, unchanged sink failure, immediate exit,
 generated propagation, and an ADR `0024`-separate quiet primary projection. Its eight rollout rows deliberately
-began pending. Perl `.2` and Rust `.3` now consume the exact native contract through typed invocation-local
-events, quiet defaults, preserved sink failure, and typed immediate exit. The ledger is 2 complete / 6 pending;
-Dart `.4` is next, while Julia/Lua native `.5-.6`, generated/CLI `.7`, recurring admission `.8`, and public
-no-drift `.9` own the remaining correction.
+began pending. Perl `.2`, Rust `.3`, and Dart `.4` now consume the exact native contract through typed
+invocation-local events, quiet defaults, preserved sink failure, and typed immediate exit. Dart's action-block
+and parse wrappers explicitly pass caller failures and exit control through without converting them to ordinary
+runtime diagnostics. The ledger is 3 complete / 5 pending; Julia `.5` is next, while Lua native `.6`,
+generated/CLI `.7`, recurring admission `.8`, and public no-drift `.9` own the remaining correction.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime

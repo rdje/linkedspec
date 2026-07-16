@@ -558,13 +558,7 @@ Top::
 
     expect(
       () => engine.parse('x'),
-      throwsA(
-        isA<RuntimeInterpreterException>().having(
-          (error) => error.message,
-          'message',
-          contains('exit_now(7) in rule Top'),
-        ),
-      ),
+      throwsA(isA<RuntimeExitNow>().having((exit) => exit.status, 'status', 7)),
     );
   });
 

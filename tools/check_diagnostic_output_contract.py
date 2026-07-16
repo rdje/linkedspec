@@ -127,7 +127,7 @@ PROJECTIONS = {
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.2"),
     ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.3"),
-    ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.4"),
+    ("dart_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.4"),
     ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.5"),
     ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.1.6"),
     ("generated_and_primary_cli", "pending", "FUTURE-PARITY-BACKLOG.5.1.7"),

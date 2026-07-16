@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.4 — add Dart diagnostic event seam
+
+Replaced Dart's diagnostic-helper evaluate-and-discard branch with exported `RuntimeDiagnosticOutputEvent` and
+`RuntimeDiagnosticOutputSink` types. Native `parse`, `execute`, `parseWithTrace`, and `executeWithTrace`
+invocations may install one callback; without it, valid calls remain eager but quiet. `print`/`say` form one exact
+Unicode event per call and `print_each` forms one event per array item from once-evaluated decoration.
+
+Raw-call validation now rejects the neutral one-plus/two-or-three arities before effects. Diagnostic rendering,
+empty/wrong-kind behavior, and structural result neutrality match `linkedspec-diagnostic-output-v1`. A private
+transport marker carries any caller-thrown object through Dart's action/runtime wrappers and restores the same
+object and stack at the public boundary; typed `RuntimeExitNow` separately represents immediate parser control.
+Ordinary `RuntimeDiagnostic` failures and native trace remain independent.
+
+The six-test Dart consumer covers all 11 render rows, five invalid arities, six neutral scenarios, all four native
+aliases, trace separation, exact sink-failure identity, and typed exit. The complete Dart gate passes formatter,
+analyzer, 220 tests, primary CLI 61x2, and all 105 corpus fixtures. The rollout ledger advances only `dart_native`
+to complete (3 complete / 5 pending); generated sink propagation remains `.5.1.7`, capability stays 80/0/0, and
+Julia native `.5.1.5` is next. Canonical local CI passes exact CLI 61x2 and Phase 0 `1..1031` in 613 seconds.
+Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.3 — add Rust diagnostic event seam
 
 Replaced Rust diagnostic helpers' direct `eprintln!` path with exported `RuntimeDiagnosticOutputEvent` and

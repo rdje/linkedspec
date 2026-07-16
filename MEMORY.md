@@ -10,22 +10,22 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.1.3` — Rust native diagnostic helpers consume the neutral
-  typed per-execution event contract without direct stderr, while preserving distinct runtime/sink/exit outcomes.
-- latest_commit: `2aef726e` — `FUTURE-PARITY-BACKLOG.5.1.2 - add Perl diagnostic event seam` (ahead of origin: 161;
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.1.4` — Dart native diagnostic helpers consume the neutral typed
+  per-invocation event contract while preserving exact caller failure, structured runtime, trace, and exit boundaries.
+- latest_commit: `17712710` — `FUTURE-PARITY-BACKLOG.5.1.3 - add Rust diagnostic event seam` (ahead of origin: 162;
   push at documented threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.1.3 - add Rust diagnostic event seam` (source/tests/docs and all
-  gates complete; commit workflow in flight).
-- active_work_unit: commit the fully verified Rust native diagnostic-output event seam
-  `FUTURE-PARITY-BACKLOG.5.1.3`; do not pivot while this tree is dirty.
-- next_action: commit `.5.1.3`, clear the brief, verify clean, then implement Dart native diagnostic-output event
-  seam `.5.1.4` test-first against the unchanged neutral fixture.
-- current_proof: six-test neutral Rust consumer covers 11 render rows, five invalid arities, six scenarios, trace
-  separation, concrete sink failure, and typed exit. Complete Rust gate passes 137 unit, 105 corpus, six
-  diagnostic-output, 105 generated-classifier, 197 integration, existing source/diagnostic/trace suites, and CLI
-  61x2. Offline checker reports 2 complete/6 pending and rejects eight mutations. Canonical local CI passes exact
-  CLI 61x2 and Phase 0 `1..1031` in 611 seconds. Capability remains 80/0/0; generated/primary propagation stays
-  `.5.1.7`. No mutation campaign ran.
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.1.4 - add Dart diagnostic event seam`; source/tests/docs and all gates
+  are complete, and the commit workflow is in flight.
+- active_work_unit: commit the fully verified Dart native diagnostic-output event seam
+  `FUTURE-PARITY-BACKLOG.5.1.4`; do not begin Julia while this tree is dirty.
+- next_action: stage the exact `.5.1.4` files, run staged doctrine hooks, commit, clear the brief, verify clean, then
+  implement Julia native diagnostic-output/trace separation `.5.1.5` test-first against the neutral fixture.
+- current_proof: six-test neutral Dart consumer covers 11 render rows, five invalid arities, six scenarios, all
+  four native aliases, trace separation, exact arbitrary sink-failure identity, and typed exit. Complete Dart gate
+  passes format/analyze, 220 tests, primary CLI 61x2, and corpus 105/105. Capability remains 80/0/0;
+  generated/primary propagation stays `.5.1.7`. Offline checker reports 3 complete/5 pending and rejects eight
+  mutations; Knowledge Map, doctrines, mdBook, whitespace, and canonical CLI 61x2 plus Phase 0 `1..1031`/613s pass.
+  No mutation campaign ran.
 - latest_bootstrap_read: 2026-07-16 — startup corpus, diagnostic Knowledge Map cards, TOOLBOX, ADR 0024, all five
   runtime/helper seams, generated entrypoints, primary adapters, current native tests, and public helper docs.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -36,7 +36,7 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none for `.5.1.3`; neutral contract and Perl precedent are committed. in_flight_uncommitted: the
-  complete verified Rust leaf source/tests/docs are staged for commit. Mutation campaigns remain parked and no mutant run belongs to
+- blockers: none for `.5.1.4`; neutral contract plus Perl and Rust precedents are committed. in_flight_uncommitted:
+  complete verified Dart native source/tests/docs await only the commit workflow. Mutation campaigns remain parked and no mutant run belongs to
   ordinary commit/local-CI workflow. Pre-existing modified/untracked `rgx/subs/pgen` work is not
   LinkedSpec-owned and remains untouched; root `.gitmodules` intentionally ignores dirty `rgx` worktree state.
