@@ -9,11 +9,12 @@ answers:
   - does Perl print_each evaluate prefix and suffix once
   - can Perl diagnostic helpers corrupt primary CLI UTF-8 or bypass canonical exit handling
   - which backend has typed diagnostic output events
+  - what prevents a diagnostic backend or generated path from dropping out of recurring CI
 date: 2026-07-16
 status: current
 tags: [parity, helpers, diagnostic-output, Perl, Rust, Dart, Julia, Lua, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.1.0 establishes the five-backend baseline with Knowledge Map/toolbox/native/process evidence. FUTURE-PARITY-BACKLOG.5.1.2-.6 admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT against exact arity-before-effects, once-only arguments, typed synchronous caller-owned events, quiet default execution, preserved sink failure, and typed immediate exit. FUTURE-PARITY-BACKLOG.5.1.7 propagates the same outcomes through every generated direct/traced entrypoint and locks quiet canonical primary projection across five backends, two environments, and 62 cases."
-reverify: "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{print_each(items, \"<\", \">\")}), qq{\\n}' && rg -n 'lower_(say|print|print_each)_statement|RuntimeDiagnosticOutput|_evaluateValues|_call_runtime_diagnostic_output_helper|diagnostic_sink' perl/LinkedSpec/ActionIR/ControlFlow.pm rust/linkedspec-runtime/src dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
+evidence: "FUTURE-PARITY-BACKLOG.5.1.0 establishes the five-backend baseline with Knowledge Map/toolbox/native/process evidence. FUTURE-PARITY-BACKLOG.5.1.2-.6 admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT against exact arity-before-effects, once-only arguments, typed synchronous caller-owned events, quiet default execution, preserved sink failure, and typed immediate exit. FUTURE-PARITY-BACKLOG.5.1.7 propagates the same outcomes through every generated direct/traced entrypoint and locks quiet canonical primary projection across five backends, two environments, and 62 cases. FUTURE-PARITY-BACKLOG.5.1.8 adds one topology-checked recurring driver over all six consumers, the selected quiet projection, and capability/generated-source/corpus ledgers."
+reverify: "bash tools/check_diagnostic_output_five_backend.sh"
 ---
 
 Recognition is not semantic parity. The planning audit established four independent mechanisms: arity/invalid
@@ -63,10 +64,11 @@ executes `print`, `say`, and `print_each` yet admits only canonical JSON `"visib
 empty stderr, and status 0. It passes unchanged for all five commands under default and POSIX environments as case
 62/62. ADR `0024`'s independent phase-trace cases pass unchanged and contain no rich diagnostic event.
 
-This is a parity prerequisite, not permission to add another backend-local convention. Planning leaf `.5.1.0`
-and neutral contract `.5.1.1` are complete; all five native `.5.1.2-.6` legs and generated/primary `.5.1.7` are
-complete. `.5.1.8` owns the symmetric recurring gate, and `.5.1.9` owns public no-drift closeout before the
-structured-format program may execute.
+This is a parity prerequisite, not permission to add another backend-local convention. Planning leaf `.5.1.0`,
+neutral contract `.5.1.1`, all five native `.5.1.2-.6` legs, generated/primary `.5.1.7`, and the recurring
+symmetric driver `.5.1.8` are complete. Its contract-declared topology prevents an omitted runtime, generated
+role, quiet-primary case, support ledger, or CI registration from silently passing. `.5.1.9` owns public no-drift
+closeout before the structured-format program may execute.
 
 Related facts: [[perl-diagnostic-output-events]], [[rust-diagnostic-output-events]],
 [[dart-diagnostic-output-events]], [[lua-diagnostic-output-events]], [[julia-diagnostic-output-helpers]],

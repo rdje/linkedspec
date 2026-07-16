@@ -939,8 +939,10 @@ and typed exit. Lua native `.5.1.6` consumes the same 109-assertion fixture on P
 preserves arbitrary sink-error identity and distinct `RuntimeExitNow` replaces its former ordinary-runtime-error
 classification. Generated/primary `.5.1.7` now extends every emitted direct/traced role with an idiomatic optional or paired sink,
 preserves caller failures and typed exit through generated framing, and locks exact quiet canonical JSON across
-all five primary commands under the shared 62-case default/POSIX matrix. The ledger is 6 complete / 2 pending;
-symmetric recurring admission `.5.1.8` is next before public no-drift and structured-format work.
+all five primary commands under the shared 62-case default/POSIX matrix. Symmetric recurring admission `.5.1.8`
+now locks one strict driver over the neutral model, all six native/generated consumers, the selected quiet five-
+command case, and generated-source/capability/corpus ledgers; the offline checker rejects 16 semantic/topology
+mutations. The ledger is 7 complete / 1 pending; public no-drift `.5.1.9` is next before structured-format work.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

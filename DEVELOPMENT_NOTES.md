@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.8` — multi-language parity needs an omission-checked composition layer):
+  Six backend consumers can all be correct while the project gate silently stops invoking one of them. Put the
+  recurring topology in the same neutral contract as the semantics: ordered runtime legs, native+generated roles,
+  exact primary case, support ledgers, and local-CI switch. The offline checker should verify real source paths,
+  runtime-specific command markers, exact primary bytes/status, and CI registration, then mutation-test omissions
+  as well as event semantics. Keep the executable driver simple and strict: require all toolchains, build both Lua
+  adapters disposably, run each focused consumer, select the one CLI case through the shared matrix, and finish
+  with generated-source/capability/corpus ledgers. A repeatable `--case` interface avoids duplicating five command
+  launch recipes; an empty selection must retain the full matrix. Direct 6-consumer/5x2x1 proof and the unchanged
+  5x2x62 default matrix pass. Canonical local CI with the diagnostic-matrix switch also passes reference CLI 62x2,
+  Phase 0 `1..1031`, and the registered driver. The ledger is 7 complete / 1 pending; `.5.1.9` owns public no-drift.
+  No runtime semantics changed and no mutation campaign ran.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.7` — generated framing is a second host exception boundary):
   Passing a native sink into an emitter is insufficient when generated execution catches ordinary runtime errors
   to attach source identity. Perl can distinguish its already marked control values in the descriptor. Rust's

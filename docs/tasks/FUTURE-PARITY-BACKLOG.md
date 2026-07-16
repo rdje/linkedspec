@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (all five native diagnostic event seams `.5.1.2-.6` and generated/primary projection
-  `.5.1.7` consume `linkedspec-diagnostic-output-v1`; recurring symmetry `.5.1.8` follows)
+- Last updated: `2026-07-16` (all five native diagnostic event seams `.5.1.2-.6`, generated/primary projection
+  `.5.1.7`, and recurring symmetric gate `.5.1.8` consume `linkedspec-diagnostic-output-v1`; public no-drift
+  `.5.1.9` follows)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2632,18 +2633,53 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.1.7 - propagate generated diagnostic events`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.8`
-  Status: `active`
+  Status: `done`
   Goal: Add one recurring symmetric five-backend diagnostic-output conformance gate.
   Dependencies: `.5.1.7`
   Acceptance: One checker drives the neutral native fixtures through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT,
     plus every available generated path and exact five-command quiet case. It rejects missing scenarios/backends,
     event-schema/order/message drift, stdout/stderr bypass, sink/error/exit drift, skipped generated proof, and
     capability/corpus regression, and is registered in canonical local CI.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / INVENTORY** — Use the neutral and cross-backend Knowledge Map records plus existing recurring
+    five-backend driver precedent to identify the authoritative contract checker, six focused native/generated
+    consumers, selected quiet-primary case, capability/generated-source/corpus ledgers, and canonical local-CI
+    registration seams before changing orchestration.
+  - [x] **LOCK GATE TOPOLOGY** — Extend the neutral contract and offline checker with one exact recurring-gate
+    topology: driver path, ordered Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers, required native+generated roles,
+    quiet CLI case, and capability/generated-source/corpus support checks. Reject omitted/reordered consumers,
+    skipped generated roles, wrong CLI projection, and missing support checks through explicit drift mutations.
+  - [x] **SYMMETRIC DRIVER** — Add one strict portable shell driver that fails fast, requires every selected host
+    toolchain, runs the unchanged neutral checker and each focused native/generated consumer, builds disposable Lua
+    adapters for both ABIs, and retains exact caller failure, typed exit, event order/message, and trace separation
+    as backend-owned assertions.
+  - [x] **EXACT PRIMARY PROJECTION** — Give the existing five-backend primary matrix a repeatable selected-case
+    interface and have the diagnostic driver execute only `success_diagnostic_helpers_quiet` under default and
+    POSIX environments, preserving full-matrix default behavior and exact stdout/stderr/status comparison.
+  - [x] **CAPABILITY / CORPUS REGRESSION** — Run the generated-source, capability-census, and exhaustive language-
+    coverage checkers inside the driver so generated-path/corpus proof references and the 80/0/0 census cannot
+    regress independently of diagnostic semantics.
+  - [x] **CANONICAL REGISTRATION** — Make the driver a tracked/audited/syntax-checked local-CI input and register
+    its all-toolchain execution through the established explicit optional-matrix switch; prove both the direct
+    driver and canonical registration path.
+  - [x] **NO REGRESSION** — Prove shell/Python syntax, offline mutation rejection, all six focused consumers, exact
+    five-command/default-POSIX quiet projection, generated-source/capability/corpus ledgers, mdBook, Knowledge Map,
+    governance, whitespace, and the complete canonical local gate. Do not change runtime semantics or run mutation
+    campaigns.
+  - [x] **LOCKSTEP** — Update the rollout ledger, task/index/roadmap/live docs, mdBook, Knowledge Map, and bounded
+    memory to recurring-gate admission only; leave public no-drift closeout solely to `.5.1.9`.
+  Verification: **PASS 2026-07-16.** Direct composed driver passes the neutral model, Perl 16 tests, Rust 7 tests,
+    Dart 7 tests, Julia 82 assertions, PUC Lua 119 assertions, LuaJIT 119 assertions, exact 5x2x1 quiet primary
+    projection, generated-source/capability 80/0/0, and exhaustive 246-name/105-corpus-plus-one/122-public-contract
+    ledgers. The offline checker reports 7 complete/1 pending and rejects 16 semantic/topology/admission mutations;
+    shell/Python syntax, unchanged default 5x2x62 matrix, mdBook, Knowledge Map, memory, doctrines, and whitespace
+    pass. Canonical local CI with `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1` passes reference CLI 62x2, Phase 0
+    `1..1031`, and the registered composed driver. No runtime semantics changed and mutation campaigns were not
+    run.
+  Commit: `FUTURE-PARITY-BACKLOG.5.1.8 - add recurring diagnostic-output gate`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.9`
-  Status: `pending`
+  Status: `active`
   Goal: Close diagnostic-output public documentation, Knowledge Map, capability, and no-drift state.
   Dependencies: `.5.1.8`
   Acceptance: The helper catalog, value-flow guide, tracing/API docs, backend handoff, roadmap, capability evidence,
@@ -4955,8 +4991,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0. Planning
 leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, all five native event seams `.5.1.2-.6`, and
-generated/primary projection `.5.1.7` are complete. Recurring symmetric diagnostic admission `.5.1.8` is the sole
-active frontier.
+generated/primary projection `.5.1.7` plus recurring symmetric admission `.5.1.8` are complete. Public
+documentation/capability/Knowledge-Map no-drift `.5.1.9` is the sole active frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5156,7 +5192,7 @@ active frontier.
 | 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
-| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, five native seams, and generated/primary projection are done; recurring symmetric gate `.5.1.8` is active. |
+| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, five native seams, generated/primary projection, and recurring symmetric gate are done; public no-drift `.5.1.9` is active. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / parity prerequisite satisfied | Repair Perl logical lowering and align eager truthiness/arity after diagnostic-output `.5.1`. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
@@ -5179,9 +5215,9 @@ active frontier.
 | 200 | `FUTURE-PARITY-BACKLOG.5.1.5` | `done` | Julia native parsing uses exact typed parse-scoped events, preserved caller failures, typed exit, and no helper trace coupling. |
 | 201 | `FUTURE-PARITY-BACKLOG.5.1.6` | `done` | Both Lua ABIs consume 109 neutral assertions with exact caller identity and distinct typed exit. |
 | 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `done` | Every generated role propagates the sink and the quiet canonical primary projection passes 5x2x62. |
-| 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `active` | Register one symmetric native/generated/CLI five-backend gate. |
-| 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `pending` | Close public docs, Knowledge Map, capability, and final no-drift state. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output recurring gate `.5.1.8` is the current frontier before no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
+| 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `done` | One topology-checked driver composes six native/generated consumers, exact quiet primary projection, and support ledgers. |
+| 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `active` | Close public docs, Knowledge Map, capability, and final no-drift state. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output public no-drift `.5.1.9` is the current frontier before the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
@@ -5808,9 +5844,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking active recurring-gate leaf `.5.1.8`. Five-backend capability parity remains 80/0/0. Planning
-  `.5.1.0`, neutral contract `.5.1.1`, all five native event seams `.5.1.2-.6`, and generated/CLI `.5.1.7` are
-  complete; recurring gate and public no-drift retain `.5.1.8-.9`.
+- None blocking active public no-drift leaf `.5.1.9`. Five-backend capability parity remains 80/0/0. Planning
+  `.5.1.0`, neutral contract `.5.1.1`, all five native event seams `.5.1.2-.6`, generated/CLI `.5.1.7`, and the
+  recurring symmetric gate `.5.1.8` are complete.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -5823,13 +5859,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.5.1.8` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
+- None. `.5.1.9` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
   prerequisites are satisfied, but their pending trees are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.8` | Contract-declared six-consumer/native+generated topology; offline model plus 16 drift mutations; direct Perl 16/Rust 7/Dart 7/Julia 82/PUC Lua 119/LuaJIT 119; exact selected CLI 5x2x1; unchanged default 5x2x62; generated-source/capability 80/0/0; 246 names/105 corpus plus one fixture/122 public contracts; canonical tracked-input/syntax registration, reference CLI 62x2, Phase 0 `1..1031`, and registered all-toolchain driver; docs/KM/governance/mdBook/whitespace. | PASS. One strict recurring gate now fails on semantic, consumer/generated-role, quiet-primary, support-ledger, or CI-registration drift; only `recurring_five_backend_gate` completes and public no-drift `.5.1.9` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.7` | Focused generated sink/value/event/trace/failure/exit proofs on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; ordinary generated attribution/source metadata/plan regression; direct-`E` calibration root-caused through `call_spec_handler_subst` plus `dump_parser_source`; complete Rust/Dart/Julia/Lua gates; corrected shared CLI 5x2x62; offline 6-complete/2-pending checker with eight mutations; generated-source/capability 80/0/0; canonical CLI 62x2 plus Phase 0 `1..1031`/623s; docs/KM/governance/mdBook/whitespace. | PASS. Every available generated direct/traced role consumes the neutral sink without changing legacy signatures or ordinary outcomes; primary commands remain quiet and phase-trace-only; only `generated_and_primary_cli` completes and recurring `.5.1.8` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.6` | Direct 105/109 baseline; two exact residual repairs; focused 109-assertion neutral Lua consumer over 11 render rows/five invalid arities/six scenarios on both ABIs; all four native aliases; exact sink-failure identity/typed exit/trace separation; complete Lua 177x2 + CLI 61x2 + corpus 105/105; offline 5-complete/3-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/656s; docs/KM/governance/mdBook/whitespace. | PASS. Lua native output consumes the unchanged neutral contract with exact arbitrary caller failure and distinct typed exit; only `lua_native` completes and generated/primary `.5.1.7` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.5` | Raw-call arity/effect validation; 74-assertion neutral Julia consumer over 11 render rows/five invalid arities/six scenarios; all four native aliases; exact sink-failure identity/typed exit/trace separation; complete Julia package + CLI 61x2 + corpus 105/105; offline 4-complete/4-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/616s; docs/KM/governance/mdBook/whitespace. | PASS. Julia native output is caller-owned typed synchronous events with quiet default, exact caller failure preservation, and no low-trace coupling; only `julia_native` completes and Lua `.5.1.6` activates. |
@@ -5979,6 +6016,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.1.8` | `FUTURE-PARITY-BACKLOG.5.1.8 - add recurring diagnostic-output gate` | Exact six-consumer topology, strict composed driver, selected 5x2x1 projection, 16 mutations, CI registration, and public no-drift handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.7` | `FUTURE-PARITY-BACKLOG.5.1.7 - propagate generated diagnostic events` | Five generated API shapes, exact caller/exit preservation, corrected portable quiet-primary fixture, 5x2x62 proof, rollout ledger, and recurring-gate handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.6` | `FUTURE-PARITY-BACKLOG.5.1.6 - admit Lua diagnostic events` | Exact dual-ABI neutral admission, caller-failure identity, distinct typed exit, rollout ledger, and generated/primary handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.5` | `FUTURE-PARITY-BACKLOG.5.1.5 - add Julia diagnostic event seam` | Exact native Julia events/arity/effects/quietness/failures/typed exit, trace separation, rollout ledger, and Lua handoff. |
@@ -6128,6 +6166,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-16`: `.5.1.8` adds one strict recurring diagnostic-output driver over the neutral model; Perl, Rust,
+  Dart, Julia, PUC Lua, and LuaJIT native+generated consumers; the exact quiet five-command/default-POSIX case;
+  and generated-source/capability/corpus ledgers. The neutral contract declares that topology and the offline
+  checker cross-checks real source paths, runtime command markers, exact CLI bytes/status, support checks, local-CI
+  registration, and 16 semantic/topology/admission mutations. `run_primary_cli_matrix.sh --case ID` provides the
+  focused composition while no arguments still pass the unchanged 5x2x62 matrix. Direct and canonical registered
+  gates pass, including reference CLI 62x2 and Phase 0 `1..1031`. Only `recurring_five_backend_gate` completes in
+  the rollout ledger (7 complete / 1 pending); capability stays 80/0/0 and public no-drift `.5.1.9` follows.
 - `2026-07-16`: `.5.1.7` propagates the neutral invocation-local diagnostic sink through every available
   generated direct/traced role. Perl extends emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust adds paired typed-v1
   and compatibility functions without changing legacy signatures; Dart and Julia add optional named/keyword

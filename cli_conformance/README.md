@@ -16,6 +16,12 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
+`bash tools/run_primary_cli_matrix.sh` runs all 62 cases through all five current commands in default and POSIX
+environments. Pass one or more `--case ID` arguments to that matrix driver for a contract-owned focused gate; for
+example, the recurring diagnostic-output gate uses
+`bash tools/run_primary_cli_matrix.sh --case success_diagnostic_helpers_quiet`. Omitting `--case` remains the full
+5x2x62 matrix.
+
 The current manifest contains 62 cases: exact long/short help, 20 strict usage
 families, eight successful source/input/parser-control/quiet-diagnostic families, four
 baseline operational failures, 20 canonical trace families, and eight strict UTF-8

@@ -200,6 +200,36 @@
     "primary_trace": "ADR 0024 phase events only when requested; never include RuntimeDiagnosticOutputEvent data",
     "cli_options": "add no diagnostic-output-specific primary option"
   },
+  "recurring_gate": {
+    "driver": "tools/check_diagnostic_output_five_backend.sh",
+    "consumer_schema": {
+      "fields": ["backend", "runtime", "test_path", "roles"],
+      "roles": ["native", "generated"]
+    },
+    "consumers": [
+      {"backend": "perl", "runtime": "perl", "test_path": "t/diagnostic_output_perl_contract.t", "roles": ["native", "generated"]},
+      {"backend": "rust", "runtime": "rust", "test_path": "rust/linkedspec-runtime/tests/diagnostic_output_contract.rs", "roles": ["native", "generated"]},
+      {"backend": "dart", "runtime": "dart", "test_path": "dart/test/diagnostic_output_contract_test.dart", "roles": ["native", "generated"]},
+      {"backend": "julia", "runtime": "julia", "test_path": "julia/test/diagnostic_output_contract_test.jl", "roles": ["native", "generated"]},
+      {"backend": "lua", "runtime": "puc_lua", "test_path": "lua/test/diagnostic_output_contract_test.lua", "roles": ["native", "generated"]},
+      {"backend": "lua", "runtime": "luajit", "test_path": "lua/test/diagnostic_output_contract_test.lua", "roles": ["native", "generated"]}
+    ],
+    "primary_cli": {
+      "matrix_driver": "tools/run_primary_cli_matrix.sh",
+      "case_id": "success_diagnostic_helpers_quiet",
+      "backend_count": 5,
+      "environments": ["default", "posix"]
+    },
+    "support_checks": [
+      "tools/check_generated_source_contract.pl",
+      "tools/check_capability_conformance.pl",
+      "tools/check_language_capability_coverage.pl"
+    ],
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX"
+    }
+  },
   "backend_rollout": [
     {"leg": "perl_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.2"},
     {"leg": "rust_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.3"},
@@ -207,7 +237,7 @@
     {"leg": "julia_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.5"},
     {"leg": "lua_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.6"},
     {"leg": "generated_and_primary_cli", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.7"},
-    {"leg": "recurring_five_backend_gate", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.8"},
+    {"leg": "recurring_five_backend_gate", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.1.8"},
     {"leg": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.1.9"}
   ]
 }

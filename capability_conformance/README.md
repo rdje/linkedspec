@@ -41,8 +41,12 @@ empty/wrong-kind behavior, Unicode order, structural-result neutrality, quiet ex
 failure, immediate `exit_now`, generated propagation, and the quiet ADR `0024` primary-CLI projection. Validate
 the 11 rendering rows, five invalid arities, six semantic scenarios, and the exact rollout ledger
 offline with `python3 tools/check_diagnostic_output_contract.py`. The checker independently evaluates the model and
-rejects eight representative drift mutations. Perl, Rust, Dart, and Julia native execution are complete; the
-remaining four Lua/generated/gate/public legs stay pending under `FUTURE-PARITY-BACKLOG.5.1.6-.9`.
+rejects 16 representative semantic, topology, and admission drift mutations. All five native legs, generated/
+primary propagation, and recurring admission are complete; only public no-drift `.5.1.9` remains. Run
+`bash tools/check_diagnostic_output_five_backend.sh` for the composed Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT native+
+generated proof, selected quiet five-command/default-POSIX case, and generated-source/capability/corpus ledgers.
+Canonical local CI registers that all-toolchain leg behind `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1` while auditing its
+schema, topology, syntax, and tracked inputs on every ordinary run.
 
 `scalar_numeric_contract.json` fixes strict scalar numeric helper inputs, arities, invalid-to-null results, numeric
 comparison truth, half-away rounding, min/max/clamp, division, and signed integer modulo. Its deterministic case

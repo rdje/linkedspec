@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: recurring diagnostic-output gate `.5.1.8` turns the five host implementations into one
+  omission-checked executable specification. The neutral contract now declares an exact ordered topology for Perl,
+  Rust, Dart, Julia, PUC Lua, and LuaJIT native+generated consumers; the quiet five-command case; generated-source,
+  80/0/0 capability, and 105-corpus coverage ledgers; and canonical local-CI registration. One strict driver runs
+  that topology with disposable dual-ABI Lua adapters. The offline checker cross-checks the driver, source paths,
+  CLI bytes/status, CI switch, and 16 semantic/topology/admission mutations. The direct driver and unchanged full
+  5x2x62 matrix pass. Canonical local CI with `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1` also passes reference CLI 62x2,
+  Phase 0 `1..1031`, and the registered driver. The rollout ledger is 7 complete / 1 pending and public no-drift
+  `.5.1.9` is next.
 - `2026-07-16` refresh: generated/primary diagnostic-output `.5.1.7` completes the sixth of eight neutral rollout
   legs. Perl emitted `Execute`/`ExecuteWithTrace`/`Get`, Dart and Julia emitted direct/traced functions, and Lua's
   option-bearing direct/traced functions now carry the invocation-local sink while preserving ordinary generated

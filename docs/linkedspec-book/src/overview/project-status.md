@@ -141,8 +141,10 @@ Three backbone items tracked major structural modernization — all done:
   arbitrary sink-failure identity, and separates `RuntimeExitNow` from ordinary runtime errors. Generated/primary
   `.5.1.7` now extends every direct/traced emitted role with an idiomatic optional or paired sink, preserves
   caller failures and typed exit across generated framing, and locks quiet canonical JSON through the shared
-  five-backend/two-environment 62nd CLI case. The ledger is 6 complete / 2 pending; recurring gate and final
-  public no-drift remain `.5.1.8-.9`. Perl
+  five-backend/two-environment 62nd CLI case. Recurring gate `.5.1.8` now composes the neutral model, six native+
+  generated consumers, selected quiet 5x2x1 projection, and generated-source/capability/corpus ledgers under one
+  topology-checked driver; the unchanged default matrix remains 5x2x62. The ledger is 7 complete / 1 pending;
+  final public no-drift remains `.5.1.9`. Perl
   logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument

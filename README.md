@@ -187,8 +187,10 @@ This `README.md` is the **single entry point** to the project.
   through quiet optional caller sinks, exact typed events, preserved caller failures, and typed immediate exit;
   generated/primary `.5.1.7` now threads that sink through every direct/traced emitted role, preserves caller
   failures and typed exit across generated framing, and adds one exact quiet diagnostic-helper primary case.
-  All five commands pass the shared 62 cases under default and POSIX environments; the ledger is 6 complete / 2
-  pending, with recurring admission `.5.1.8` next before public no-drift;
+  Recurring gate `.5.1.8` now composes the neutral model, six native/generated consumers, the selected five-command
+  quiet projection, and capability/generated-source/corpus ledgers under one omission-checked driver. All five
+  commands still pass the shared 62 cases under default and POSIX environments; the ledger is 7 complete / 1
+  pending, with public no-drift `.5.1.9` next;
   Perl logical keyword-lowering plus five-backend truthiness/arity
   normalization remains separately owned by `.5.2` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
@@ -440,6 +442,10 @@ content migration exists yet.
 - Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
   the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.
+- Run `bash tools/check_diagnostic_output_five_backend.sh` when all five backend toolchains are installed to prove
+  the neutral diagnostic event contract through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT native/generated
+  consumers, the exact quiet five-command projection, and capability/generated-source/corpus ledgers. The same leg
+  is available from local CI with `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1`.
 - Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
   its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
   live plus generated execution; Dart and Julia consume it through native/generated/CLI routes; and Lua consumes

@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.8 — add recurring diagnostic-output gate
+
+Added `tools/check_diagnostic_output_five_backend.sh`, one strict all-toolchain driver for the unchanged neutral
+diagnostic contract. It runs the offline semantic model, the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT focused consumers
+that each cover native and generated execution, and the exact quiet primary case across all five commands under
+default and POSIX environments. It also runs generated-source, 80/0/0 capability, and exhaustive 246-name/105-
+corpus/122-public-contract coverage ledgers. Lua adapters are disposable and both ABIs are mandatory for this gate.
+
+Made the recurring topology machine-readable and cross-checked it against real consumer paths, runtime command
+markers, exact quiet CLI stdout/stderr/status, supporting checkers, and canonical local-CI registration. Expanded
+the offline mutation set from eight reported cases to 16 exact semantic/topology/admission drifts. Canonical local
+CI always audits the new tracked input and runs the all-toolchain leg with
+`LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1`.
+
+Added repeatable `--case ID` selection to `tools/run_primary_cli_matrix.sh`. The diagnostic gate uses only
+`success_diagnostic_helpers_quiet`, while an argument-free invocation remains the full 5x2x62 matrix and passes
+unchanged. The composed gate passes all six consumers, 5x2x1 selected CLI projections, and all support ledgers.
+Canonical local CI with the diagnostic-matrix switch passes reference CLI 62x2, Phase 0 `1..1031`, and the
+registered composed driver.
+Only `recurring_five_backend_gate` advances, leaving the rollout at 7 complete / 1 pending and public no-drift
+`.5.1.9` next. Runtime semantics did not change; mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.7 — propagate generated diagnostic events
 
 Extended every available generated direct/traced execution role with the neutral invocation-local diagnostic

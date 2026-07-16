@@ -19,6 +19,28 @@ fail() {
  exit 1
 }
 
+CASE_ARGS=()
+CASE_IDS=()
+while (( $# > 0 )); do
+ case "$1" in
+  --case)
+   (( $# >= 2 )) || fail "--case requires an ID"
+   [[ -n "$2" ]] || fail "--case ID must not be empty"
+   CASE_ARGS+=(--case "$2")
+   CASE_IDS+=("$2")
+   shift 2
+   ;;
+  --help|-h)
+   printf 'Usage: %s [--case ID ...]\n' "$0"
+   printf 'Run the full five-backend matrix, or only the selected manifest cases.\n'
+   exit 0
+   ;;
+  *)
+   fail "unknown argument: $1"
+   ;;
+ esac
+done
+
 for command in perl "$CARGO_CMD" "$DART_CMD" "$JULIA_CMD" "$LUA_CMD"; do
  command -v "$command" >/dev/null 2>&1 || fail "required command not found: $command"
 done
@@ -66,11 +88,11 @@ run_contract() {
 
  log "running $backend contract (default environment)"
  env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
-  --display-command "$display_command" -- "$@"
+  "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
 
  log "running $backend contract (POSIX environment)"
  env POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
-  --display-command "$display_command" -- "$@"
+  "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
 }
 
 run_contract Perl 'perl bin/linkedspec' \
@@ -86,4 +108,8 @@ run_contract Lua 'lua/bin/linkedspec-lua' \
  env "LUA_CPATH=$LUA_NATIVE_ROOT/?.so;;" "$LUA_CMD" \
  '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
 
-log "primary CLI matrix passed: 5 backends x 2 environments x 62 cases"
+if (( ${#CASE_IDS[@]} == 0 )); then
+ log "primary CLI matrix passed: 5 backends x 2 environments x 62 cases"
+else
+ log "primary CLI matrix passed: 5 backends x 2 environments x ${#CASE_IDS[@]} selected case(s): ${CASE_IDS[*]}"
+fi

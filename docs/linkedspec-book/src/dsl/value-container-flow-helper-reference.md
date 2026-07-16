@@ -1576,14 +1576,26 @@ Rust, Dart, Julia, and Lua command emits exactly `"visible"\n` as canonical JSON
 status 0 in both default and POSIX environments. Existing ADR `0024` phase-trace cases remain unchanged and contain
 no `RuntimeDiagnosticOutputEvent` data.
 
+When all current host toolchains are installed, run the complete recurring proof with:
+
+```bash
+bash tools/check_diagnostic_output_five_backend.sh
+```
+
+That one driver runs the neutral model and 16 drift mutations; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+native+generated consumers; the exact quiet primary case through five commands in default and POSIX environments;
+and generated-source, capability, and corpus-coverage ledgers. It uses disposable Lua native adapters and fails if
+either ABI is unavailable. Canonical local CI registers the same all-toolchain leg behind
+`LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1` while its ordinary run still audits the driver, topology, and shell syntax.
+
 The pre-repair Perl lowering placed stateful prefix and suffix expressions inside a host `foreach`, so two items
 advanced each effect twice. Native Perl now snapshots all valid-call arguments before event delivery; that old
 result remains root-cause evidence, not portable behavior. Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures
 the mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042` plus 11 rendering rows, five invalid arities, and six
 semantic scenarios; Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, Julia `.5.1.5`, and Lua `.5.1.6` are complete
-native rollout legs. Generated/primary propagation `.5.1.7` is complete too. Leaves `.5.1.8-.9` retain a symmetric
-recurring gate and final public no-drift; the executable contract currently records six complete and two pending
-rollout legs.
+native rollout legs. Generated/primary propagation `.5.1.7` and recurring symmetric gate `.5.1.8` are complete
+too. Final public no-drift `.5.1.9` remains; the executable contract currently records seven complete and one
+pending rollout leg.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:

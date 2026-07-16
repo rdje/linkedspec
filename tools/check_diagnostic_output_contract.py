@@ -13,6 +13,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "diagnostic_output_contract.json"
 TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md"
+CLI_MANIFEST_PATH = ROOT / "cli_conformance" / "manifest.json"
 
 POLICY = {
     "arity_validation": "validate positional arity before evaluating any argument",
@@ -124,6 +125,74 @@ PROJECTIONS = {
     "primary_trace": "ADR 0024 phase events only when requested; never include RuntimeDiagnosticOutputEvent data",
     "cli_options": "add no diagnostic-output-specific primary option",
 }
+RECURRING_GATE = {
+    "driver": "tools/check_diagnostic_output_five_backend.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_path", "roles"],
+        "roles": ["native", "generated"],
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_path": "t/diagnostic_output_perl_contract.t",
+            "roles": ["native", "generated"],
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_path": "rust/linkedspec-runtime/tests/diagnostic_output_contract.rs",
+            "roles": ["native", "generated"],
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_path": "dart/test/diagnostic_output_contract_test.dart",
+            "roles": ["native", "generated"],
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_path": "julia/test/diagnostic_output_contract_test.jl",
+            "roles": ["native", "generated"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_path": "lua/test/diagnostic_output_contract_test.lua",
+            "roles": ["native", "generated"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_path": "lua/test/diagnostic_output_contract_test.lua",
+            "roles": ["native", "generated"],
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_id": "success_diagnostic_helpers_quiet",
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX",
+    },
+}
+GATE_CONSUMER_MARKERS = {
+    "perl": "t/diagnostic_output_perl_contract.t",
+    "rust": "--test diagnostic_output_contract",
+    "dart": "test/diagnostic_output_contract_test.dart",
+    "julia": "julia/test/diagnostic_output_contract_test.jl",
+    "puc_lua": "build_lua_native.sh puc",
+    "luajit": "build_lua_native.sh luajit",
+}
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.2"),
     ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.3"),
@@ -131,7 +200,7 @@ ROLLOUT = [
     ("julia_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.5"),
     ("lua_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.6"),
     ("generated_and_primary_cli", "complete", "FUTURE-PARITY-BACKLOG.5.1.7"),
-    ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.5.1.8"),
+    ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.5.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.1.9"),
 ]
 
@@ -338,6 +407,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
         "programs",
         "scenarios",
         "projections",
+        "recurring_gate",
         "backend_rollout",
     }:
         fail("top-level fields drifted")
@@ -416,6 +486,44 @@ def validate_contract(contract: dict[str, Any]) -> None:
 
     if contract["projections"] != PROJECTIONS:
         fail("native/generated/CLI projection drifted")
+    if contract["recurring_gate"] != RECURRING_GATE:
+        fail("recurring gate topology drifted")
+
+    gate_path = ROOT / RECURRING_GATE["driver"]
+    if not gate_path.is_file():
+        fail("recurring gate driver is missing")
+    gate_text = gate_path.read_text(encoding="utf-8")
+    for consumer in RECURRING_GATE["consumers"]:
+        test_path = consumer["test_path"]
+        if not (ROOT / test_path).is_file():
+            fail(f"recurring gate consumer is missing: {test_path}")
+        if GATE_CONSUMER_MARKERS[consumer["runtime"]] not in gate_text:
+            fail(f"recurring gate driver omits consumer: {consumer['runtime']}")
+    for support_path in RECURRING_GATE["support_checks"]:
+        if not (ROOT / support_path).is_file() or support_path not in gate_text:
+            fail(f"recurring gate omits support check: {support_path}")
+
+    primary = RECURRING_GATE["primary_cli"]
+    if primary["matrix_driver"] not in gate_text or primary["case_id"] not in gate_text:
+        fail("recurring gate omits the exact primary projection")
+    cli_manifest = json.loads(CLI_MANIFEST_PATH.read_text(encoding="utf-8"))
+    cli_cases = [case for case in cli_manifest.get("cases", []) if case.get("id") == primary["case_id"]]
+    if len(cli_cases) != 1:
+        fail("quiet primary projection case coverage drifted")
+    quiet_case = cli_cases[0]
+    if quiet_case.get("expect") != {
+        "exit": 0,
+        "stdout": {"text": '"visible"\n'},
+        "stderr": {"text": ""},
+        "files": [],
+    }:
+        fail("quiet primary projection bytes or status drifted")
+
+    local_ci = RECURRING_GATE["local_ci"]
+    local_ci_path = ROOT / local_ci["driver"]
+    local_ci_text = local_ci_path.read_text(encoding="utf-8")
+    if RECURRING_GATE["driver"] not in local_ci_text or local_ci["switch"] not in local_ci_text:
+        fail("recurring gate local-CI registration drifted")
     rollout = contract["backend_rollout"]
     if not isinstance(rollout, list) or len(rollout) != len(ROLLOUT):
         fail("backend rollout coverage drifted")
@@ -440,22 +548,48 @@ def assert_mutation_rejected(contract: dict[str, Any], mutate: Any, label: str) 
 def main() -> None:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     validate_contract(contract)
-    assert_mutation_rejected(contract, lambda value: value["helpers"][0]["arity"].__setitem__("minimum", 0), "print arity")
-    assert_mutation_rejected(contract, lambda value: value["event_schema"]["fields"].pop(), "event schema")
-    assert_mutation_rejected(contract, lambda value: value["scalar_render_cases"][7].__setitem__("expected", "null"), "null rendering")
-    assert_mutation_rejected(contract, lambda value: value["programs"][0].__setitem__("spec_source", "Top:: /x/"), "fixture source")
-    assert_mutation_rejected(contract, lambda value: value["scenarios"][0]["expected"]["events"][0].__setitem__("message", "drift"), "event text")
-    assert_mutation_rejected(contract, lambda value: value["scenarios"][1]["expected"]["events"].append({}), "quiet default")
-    assert_mutation_rejected(contract, lambda value: value["scenarios"][3]["sink"].__setitem__("invocation", 5), "item sink failure")
-    assert_mutation_rejected(contract, lambda value: value["backend_rollout"][0].__setitem__("status", "pending"), "Perl admission regression")
-    assert_mutation_rejected(contract, lambda value: value["backend_rollout"][1].__setitem__("status", "pending"), "Rust admission regression")
+    mutations = [
+        (lambda value: value["helpers"][0]["arity"].__setitem__("minimum", 0), "print arity"),
+        (lambda value: value["event_schema"]["fields"].pop(), "event schema"),
+        (lambda value: value["scalar_render_cases"][7].__setitem__("expected", "null"), "null rendering"),
+        (lambda value: value["programs"][0].__setitem__("spec_source", "Top:: /x/"), "fixture source"),
+        (lambda value: value["scenarios"].pop(), "scenario coverage"),
+        (
+            lambda value: value["scenarios"][0]["expected"]["events"][0].__setitem__("message", "drift"),
+            "event text",
+        ),
+        (
+            lambda value: value["scenarios"][0]["expected"]["events"].reverse(),
+            "event order",
+        ),
+        (lambda value: value["scenarios"][1]["expected"]["events"].append({}), "quiet default"),
+        (lambda value: value["scenarios"][3]["sink"].__setitem__("invocation", 5), "item sink failure"),
+        (lambda value: value["backend_rollout"][0].__setitem__("status", "pending"), "Perl admission regression"),
+        (lambda value: value["backend_rollout"][1].__setitem__("status", "pending"), "Rust admission regression"),
+        (lambda value: value["recurring_gate"]["consumers"].pop(), "recurring backend coverage"),
+        (
+            lambda value: value["recurring_gate"]["consumers"][0]["roles"].pop(),
+            "generated consumer coverage",
+        ),
+        (
+            lambda value: value["recurring_gate"]["primary_cli"].__setitem__("case_id", "wrong_case"),
+            "quiet primary projection",
+        ),
+        (lambda value: value["recurring_gate"]["support_checks"].pop(), "supporting proof coverage"),
+        (
+            lambda value: value["backend_rollout"][6].__setitem__("status", "pending"),
+            "recurring gate admission regression",
+        ),
+    ]
+    for mutate, label in mutations:
+        assert_mutation_rejected(contract, mutate, label)
     pending_count = sum(row["status"] == "pending" for row in contract["backend_rollout"])
     complete_count = sum(row["status"] == "complete" for row in contract["backend_rollout"])
     print(
         "diagnostic output contract: "
         f"{len(contract['helpers'])} helpers, {len(contract['scalar_render_cases'])} render cases, "
         f"{len(contract['scenarios'])} scenarios, {complete_count} complete / {pending_count} pending legs, "
-        "8 drift mutations"
+        f"{len(mutations)} drift mutations"
     )
 
 

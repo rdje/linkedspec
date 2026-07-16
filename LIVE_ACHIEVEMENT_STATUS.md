@@ -8,6 +8,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.8 — add recurring diagnostic-output gate**
+  (DONE — one symmetric driver protects every native/generated/primary projection; public no-drift `.5.1.9` is
+  next).
+
+  **Result:** `tools/check_diagnostic_output_five_backend.sh` now requires and executes the neutral model, Perl,
+  Rust, Dart, Julia, PUC Lua, and LuaJIT focused native+generated consumers, the exact quiet primary case across
+  five commands and two environments, and generated-source/capability/corpus ledgers. Its topology is part of the
+  neutral contract and is cross-checked against source paths, command markers, exact CLI bytes/status, and local-CI
+  registration. `tools/run_primary_cli_matrix.sh --case ID` adds focused composition without changing its default
+  full-matrix behavior.
+
+  **Proof:** The composed gate passes Perl 16 tests, Rust 7 tests, Dart 7 tests, Julia 82 assertions, PUC Lua 119
+  assertions, LuaJIT 119 assertions, and 5x2x1 exact quiet CLI projections. Generated-source and capability checks
+  pass at 80/0/0; exhaustive language coverage stays 246 names, 105 corpus fixtures plus one named-mark fixture,
+  and 122 independent public contracts. The offline checker reports 7 complete / 1 pending and rejects 16 drift
+  mutations; the unchanged default matrix passes 5x2x62. Canonical local CI with the diagnostic-matrix switch
+  passes reference CLI 62x2, Phase 0 `1..1031`, and the registered driver. No runtime semantics changed and no
+  mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.7 — propagate generated diagnostic events**
   (DONE — generated and primary projections consume the neutral contract; symmetric recurring gate `.5.1.8` is
   next).
