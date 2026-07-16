@@ -387,8 +387,10 @@ locks success/fixture/manifest exits 0/1/2. Both ABI suites pass 167/167 with st
 `.6` closes. Primary parser adapter `.7.1` now implements exact ADR `0023` options, strict UTF-8, native execution,
 canonical JSON, stable phases/exits, and the independent canonical phase trace at 169/169 per ABI plus diagnostic
 shared CLI 61x2. Admission `.7.2` now makes both process legs recurring and extends the matrix to 5x2x61. Status is
-`runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`, generated-source scaffold `.8.1` is active, and
-the census stays 64/0/0 until `.8.4`.
+`runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`. Planning `.8.1.0` corrects the pre-descriptor-v3
+scaffold scope and splits deterministic exact-v1/v2/v3 source construction `.8.1.1` from fresh-process PUC
+Lua/LuaJIT proof `.8.1.2`. `.8.1.1` is active, no generated Lua source is claimed yet, and the census stays
+64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler
@@ -626,9 +628,11 @@ globally.
 
 The primary command has no corpus/status subcommands or backend-only options;
 the developer corpus runner remains separate. Generated Lua source is the
-explicit remaining limitation. Scaffold/isolation `.8.1`, exact ten-family
-execution `.8.2`, contract-sourced 8/105 admission `.8.3`, and final census/
-handoff `.8.4` own that work in order.
+explicit remaining limitation. Planning `.8.1.0` corrects the original
+v1/v2-only scope against descriptor v3; deterministic exact-v1/v2/v3 source
+construction `.8.1.1` and fresh-process PUC Lua/LuaJIT proof `.8.1.2` precede
+exact ten-family execution `.8.2`, contract-sourced 8/105 admission `.8.3`,
+and final census/handoff `.8.4`.
 
 The Lua backend now has a dedicated full-parity plan. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg. The rollout began
@@ -874,7 +878,9 @@ ADR `0033` and
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`
 are complete at 64/0/0 with one recurring five-backend/two-Lua-ABI command. Rust, Dart, Julia, and Lua's pre-existing `.contains()` missing-argument outcomes are
 separately owned by helper backlog `.5`. Lua proves public SpecFile JSON reconstruction on both ABIs; generated
-Lua source remains correctly owned by `.8.1-.8.4` because no emitter exists yet.
+Lua source remains correctly owned by `.8.1-.8.4` because no emitter exists yet. Planning `.8.1.0` further
+splits exact fixed-v1/variadic-v2/final-codeblock-v3 source construction `.8.1.1` from isolated PUC Lua/LuaJIT
+load/run proof `.8.1.2`, without moving family execution, subset admission, or capability closeout.
 This also corrects the earlier Lua-only inert assignment scaffold expectation.
 Perl's direct-value/arity boundary for zero or variadic flat/concat calls, negative
 selection counts, Rust/Dart/Julia's three missing dropped-transform rebindings, invalid join sources, and implicit

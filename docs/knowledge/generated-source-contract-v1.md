@@ -24,6 +24,7 @@ evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.3 adds the
 evidence_update_2026_07_11_julia_admission: "FUTURE-PARITY-BACKLOG.3.4.3 adds the exact Julia accepted-subset test path, consumes the eight contract names directly, proves interpreter expected values before emission, loads eight modules in one isolated offline host with exact metadata/plans/trace identity, and passes complete 1,168/61x2/105 gates. Julia promotes at census 60/0/0."
 evidence_update_2026_07_11_final_closeout: "FUTURE-PARITY-BACKLOG.3.5 rechecks all four focused generated-source proofs plus adjacent complete backend gates, confirms executable contract/capability 60/0/0, closes .3, and hands the complete v1 obligation to active Lua planning .1.3."
 evidence_update_2026_07_15_acceleration_horizon: "ADR 0038 and FUTURE-PARITY-BACKLOG.18.3 preserve v1 as the semantic portability foundation for any future native parser accelerator. Existing source wrappers and state reconstruction prove identity, loadability, trace roles, and oracle equivalence; they do not by themselves establish optimizing compilation or a speed advantage."
+evidence_update_2026_07_16_lua_scaffold_split: "LUA-BACKEND-PARITY.8.1.0 corrects the older Lua leaf against ADR 0041's later final-codeblock-v3 union and splits deterministic v1/v2/v3 emitter core .8.1.1 from fresh-process dual-ABI load/run .8.1.2 before family-plan .8.2 and subset admission .8.3."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -72,5 +73,6 @@ Related facts: [[generated-source-parity-audit]],
 [[rust-generated-source-v1-result-projection]],
 [[rust-generated-source-corpus-subset]],
 [[dart-generated-source-deferred]],
+[[lua-generated-source-scaffold-split]],
 [[optional-native-parser-acceleration]],
 [[user-observable-backend-cli-parity-contract]].

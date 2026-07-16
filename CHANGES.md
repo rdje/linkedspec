@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.1.0 — split Lua generated scaffold
+
+Corrected a latent generated-source scope drift before emitter code. `git blame` shows the `.8.1` scaffold was
+drafted on 2026-07-11 and its fixed-v1/variadic-v2 wording on 2026-07-12; ADR `0041` and the executable
+final-codeblock-v3 descriptor union landed on 2026-07-15. The parent acceptance now requires all three permanent
+callable record variants rather than silently dropping final contextual codeblock intent during emission.
+
+Audited the exact neutral generated-source JSON contract, completed Dart/Julia source emitters and caller-owned
+isolation harnesses, and Lua's compiled state, function registry, spec-AST reconstruction, canonical strict-UTF-8
+JSON, runtime, and trace seams. Effective generated state will use source-ordered immutable v1/v2/v3 definitions
+plus last-definition compiled rule order, reconstruct one typed `SpecFile`, and embed canonical JSON/source identity
+as dependency-free ASCII hex. Deterministic source/metadata/errors/direct+traced roles are isolated under `.8.1.1`;
+fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup is `.8.1.2`. Plan families and portable generated trace
+remain `.8.2`, subset admission `.8.3`, and sole census admission `.8.4`.
+
+This planning slice changes no backend source, runtime, CLI, corpus/oracle, public status, generated-source claim,
+or capability 64/0/0. Generated-source v1, callable-signature, callable-codeblock, and capability checks pass; the
+complete Lua gate passes 169/169 on both ABIs, primary CLI 61/61 in default and POSIX environments, and corpus
+105/105. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase 0 true reach
+`1..1031` in 609 seconds. Mutation testing was not run.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.7.3 — close Lua primary usage no drift
 
 Closed the Lua primary-command parent without changing implementation behavior. A current-surface audit found two

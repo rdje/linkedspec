@@ -4,7 +4,14 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-15`
+- Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Lua generated-source planning `.8.1.0` root-causes a future-scope drift: `.8.1` and its
+  fixed-v1/variadic-v2 wording predated ADR `0041`'s exact final-codeblock-v3 union. The implementation is now
+  dependency-split into deterministic effective-state v1/v2/v3 emission `.8.1.1` and fresh-process PUC Lua/LuaJIT
+  valid/corrupt load, execution, trace, failure, and cleanup proof `.8.1.2`. Lua canonical JSON already supplies
+  strict-UTF-8 validation and stable key order; generated payloads will use dependency-free ASCII hex. Exact plan/
+  family/portable generated trace remains `.8.2`, subset admission `.8.3`, and sole census promotion `.8.4`.
+  Planning changes no backend behavior, status, or capability 64/0/0; `.8.1.1` is active.
 - `2026-07-15` refresh: Lua primary no-drift `.7.3` confirms the native module, exact primary process contract,
   separate corpus adapter, checkout-local executable/native-module setup, public limitations, and recurring gates
   agree at `runtime-corpus-primary-cli`. It corrects stale mdBook foundation prose and a command setup that cleaned

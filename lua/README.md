@@ -98,8 +98,9 @@ library and developer runner. Both report 105 passes/zero failures, both ABI sui
 `runtime-corpus-full`, and parent `.6` closes. Primary adapter `.7.1` now implements the exact ADR `0023` command
 over those native APIs: both ABI suites pass 169/169. Admission `.7.2` now runs the unchanged shared process proof
 at 61/61 in default and POSIX environments from the focused gate and extends the warmed matrix to 5x2x61. Public
-status is `runtime-corpus-primary-cli`; final no-drift `.7.3` closes parent `.7`, and generated-source scaffold
-`.8.1` is active.
+status is `runtime-corpus-primary-cli`; final no-drift `.7.3` closes parent `.7`. Generated-source planning `.8.1.0`
+then corrects the older v1/v2-only scope, splits exact v1/v2/v3 emitter core `.8.1.1` from isolated dual-ABI host
+proof `.8.1.2`, and activates `.8.1.1` without claiming generated behavior early.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -684,7 +685,8 @@ Registered keyword arguments diagnose as
 closed before body execution. Variadic signatures and declared contextual final codeblocks
 now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
 full corpus execution, and the thin primary CLI adapter are implemented; generated Lua remains the separate `.8`
-layer, and scaffold `.8.1` is the active next leaf after CLI/native/corpus no-drift `.7.3` closes parent `.7`.
+layer. Planning `.8.1.0` now requires the exact v1/v2/v3 effective-state union and splits emitter core `.8.1.1`
+from isolated PUC/LuaJIT host proof `.8.1.2`; `.8.1.1` is active.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

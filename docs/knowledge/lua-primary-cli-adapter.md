@@ -18,7 +18,7 @@ status: current
 tags: [lua, cli, native-api, utf8, json, trace, parity, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.7.1 adds lua/src/linkedspec/primary_cli.lua and replaces the exit-2 command scaffold. Direct/process tests pass 169/169 on PUC Lua and LuaJIT; the unchanged shared process manifest passes diagnostic 61/61 in default and POSIX environments. Canonical local CI reaches phase0 1..1031 in 606 seconds. Public status remains runtime-corpus-full until .7.2 makes the two process legs recurring."
 evidence_update_2026_07_15_recurring_admission: "LUA-BACKEND-PARITY.7.2 makes both 61-case process environments recurring in the focused gate, extends the warmed matrix to 5x2x61, and advances status to runtime-corpus-primary-cli without changing primary_cli.lua semantics."
-evidence_update_2026_07_15_no_drift: "LUA-BACKEND-PARITY.7.3 corrects checkout native-module lifetime and stale mdBook scaffold guidance, confirms status/corpus remain rejected primary positionals, closes parent .7 without behavior change, and activates generated-source scaffold .8.1."
+evidence_update_2026_07_15_no_drift: "LUA-BACKEND-PARITY.7.3 corrects checkout native-module lifetime and stale mdBook scaffold guidance, confirms status/corpus remain rejected primary positionals, closes parent .7 without behavior change, and hands off to generated-source work subsequently split by .8.1.0 into exact-v1/v2/v3 emitter core .8.1.1 and fresh-process proof .8.1.2."
 reverify: "bash tools/run_lua_local.sh && rg -n 'primary_cli|current_directory|run_primary_cli' lua/bin/linkedspec-lua lua/native/filesystem_native.c lua/src/linkedspec lua/test/run.lua tools/run_lua_local.sh"
 ---
 

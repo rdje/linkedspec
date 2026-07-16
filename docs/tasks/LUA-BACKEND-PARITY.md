@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.7.3` closes CLI/native/corpus usage and gate no-drift without behavior change,
-  closes parent `.7`, and activates generated-source scaffold `.8.1`)
+- Last updated: `2026-07-16` (`.8.1.0` corrects the pre-ADR-0041 v1/v2-only scaffold scope, splits deterministic
+  v1/v2/v3 emission from isolated dual-ABI load/run, and activates `.8.1.1` without behavior change)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2781,9 +2781,58 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.8.1`
   Status: `active`
   Goal: Add deterministic contract-v1 Lua emitter scaffold and isolated load/run.
-  Acceptance: Effective compiled state, including exact fixed-v1/variadic-v2 callable signatures, stable
+  Children: `.8.1.0`, `.8.1.1`, `.8.1.2`
+  Acceptance: Effective compiled state, including exact fixed-v1/variadic-v2/final-codeblock-v3 callable records, stable
     identity/metadata/errors, Unicode/strict-UTF-8 payload boundary, direct/traced entrypoints, caller-owned
     isolation, and cleanup pass without altering native interpreter/CLI.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.8.1.0`
+  Status: `done`
+  Goal: Audit the post-ADR-0041 generated-source scaffold contract and split implementation before code.
+  Dependencies: `.7.3`, `.5.3.1`
+  Acceptance: Root-cause the stale v1/v2-only wording against the executable v1/v2/v3 descriptor union; inventory
+    the neutral generated-source contract, effective Lua compiled state, canonical JSON/strict-UTF-8 boundary,
+    public trace/runtime seams, completed backend emitters, and fresh-process cleanup requirements; then create
+    separate deterministic-emission and isolated-load/run leaves with no runtime, CLI, corpus, or census change.
+  Verification: **PASS 2026-07-16.** `git blame` proves the broad `.8.1` emitter/isolation leaf was drafted on
+    2026-07-11 and its fixed-v1/variadic-v2 wording on 2026-07-12, before ADR `0041` and the executable
+    `final_codeblock_v3` descriptor landed on 2026-07-15. The neutral generated-source contract requires
+    compiled state plus source identity, deterministic Unicode host source, strict-UTF-8 persistence, exact
+    metadata/errors, and direct/traced roles; plan validation, ten-family routing, portable generated trace roles,
+    and accepted-subset admission remain later-owned. Lua's typed effective state is reconstructible without its
+    internal compiled JSON: source-ordered immutable function definitions preserve exact v1/v2/v3 metadata,
+    last-definition `compiled_rule_order` selects effective rules, `spec_ast.to_json/from_json` rebuilds `SpecFile`,
+    and `json.encode` validates UTF-8 and sorts object keys. Completed Dart/Julia precedents isolate generated host
+    loading in caller-owned temporary storage; ASCII hex is the dependency-free Lua payload/identity spelling.
+    `.8.1.1` now owns deterministic source/metadata/errors/entrypoints and `.8.1.2` owns fresh-process PUC/LuaJIT
+    valid/corrupt load, direct/traced run, stable failure, and cleanup proof. No source, runtime, CLI, corpus,
+    generated capability, public status, or census row changes. Generated-source/callable/capability checks pass;
+    the complete Lua gate passes 169/169 on both ABIs, primary CLI 61/61 in default and POSIX environments, and
+    corpus 105/105. Canonical local CI exits 0 with both reference CLI legs at 61/61 and Phase 0 `1..1031` in 609
+    seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold`
+
+- ID: `LUA-BACKEND-PARITY.8.1.1`
+  Status: `active`
+  Goal: Emit deterministic contract-v1 Lua source from exact effective typed state.
+  Dependencies: `.8.1.0`
+  Acceptance: Add compatibility and source-identified public emitters, exact metadata and typed portable errors,
+    last-definition rule order, source-ordered callable records across fixed-v1/variadic-v2/final-codeblock-v3,
+    canonical strict-UTF-8 payload encoding, and generated direct/traced entrypoint roles. Repeated equivalent input
+    emits identical native Lua source without changing native interpreter, CLI, corpus, plan, or census behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.8.1.2`
+  Status: `pending`
+  Goal: Load and run generated Lua source in caller-owned fresh-process isolation.
+  Dependencies: `.8.1.1`
+  Acceptance: PUC Lua and LuaJIT write one generated module plus host runner into unique caller-owned temporary
+    storage, load it in a fresh process with explicit repository/native module paths, prove exact Unicode metadata,
+    direct and traced result identity, stable missing-rule and corrupt-payload failures, and remove every generated
+    file/directory on success or failure. Portable generated family trace roles remain owned by `.8.2`.
   Verification: `pending`
   Commit: `pending`
 
@@ -2817,6 +2866,10 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 ## Current frontier
+
+Generated-source planning `.8.1.0` corrects the historical v1/v2-only wording against ADR `0041`, explicitly
+includes final-codeblock-v3 state, and splits deterministic emitter core `.8.1.1` from isolated dual-ABI host proof
+`.8.1.2`. No emitter exists yet; `.8.1.1` is the sole active Lua leaf.
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
@@ -3033,6 +3086,9 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 | 134 | `LUA-BACKEND-PARITY.8.2` | `pending` | Add exact ten-family plan and authoritative direct generated execution. |
 | 135 | `LUA-BACKEND-PARITY.8.3` | `pending` | Admit the exact contract-sourced generated 8/105 subset. |
 | 136 | `LUA-BACKEND-PARITY.8.4` | `pending` | Close Lua capability parity and backend handoff. |
+| 137 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Post-ADR-0041 contract audit splits exact v1/v2/v3 emission from isolated host proof. |
+| 138 | `LUA-BACKEND-PARITY.8.1.1` | `active` | Emit deterministic native Lua source from the exact v1/v2/v3 effective state. |
+| 139 | `LUA-BACKEND-PARITY.8.1.2` | `pending` | Prove fresh-process PUC/LuaJIT load/run, failures, tracing, and cleanup. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3458,6 +3514,29 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
   seconds.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook usage/status/local-gate,
   Knowledge Map, changes/notes, and bounded memory close parent `.7` and activate only scaffold `.8.1`.
+
+### `LUA-BACKEND-PARITY.8.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The active scaffold leaf named only fixed-v1/variadic-v2 callable state even though
+  Lua already exposes the governed fixed-v1/variadic-v2/final-codeblock-v3 descriptor union.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `git blame` dates the original `.8.1` scope to 2026-07-11 and its callable
+  wording to 2026-07-12. ADR `0041`, `outward_descriptor_contract.json:final_codeblock_v3`, and Lua's exact v3
+  projection landed on 2026-07-15, so the later cross-cutting policy never flowed back into this older future leaf.
+- [x] **FIX** — Make `.8.1` an explicit three-child parent. `.8.1.0` owns this audit; `.8.1.1` owns deterministic
+  v1/v2/v3 effective-state source, metadata, errors, and direct/traced roles; `.8.1.2` owns fresh-process PUC/LuaJIT
+  valid/corrupt loading, result/failure proof, and cleanup. Plan/family/portable generated trace remains `.8.2`.
+- [x] **ADDRESSED (verified)** — The neutral JSON contract, completed Dart/Julia emitters and isolation harnesses,
+  Lua compiled/function/spec-AST/JSON/runtime/trace seams, and current checker/census boundaries have been read and
+  mapped. The implementation path reconstructs an effective typed `SpecFile`, preserves all three callable
+  variants, and uses canonical strict-UTF-8 JSON rendered as dependency-free ASCII hex in native Lua source.
+- [x] **NO REGRESSION** — Planning changes no backend source, runtime, CLI, corpus/oracle, generated-source claim,
+  status, capability 64/0/0, or mutation policy. Generated-source v1, callable-signature, callable-codeblock, and
+  capability checks pass; the complete Lua gate passes 169/169 on both ABIs, primary CLI 61/61 in default and
+  POSIX environments, and corpus 105/105. mdBook, Knowledge Map, memory, doctrines, and whitespace pass. Canonical
+  local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in 609 seconds. Mutation
+  testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook generated-source/handoff/
+  status pages, Knowledge Map, changes/notes, and bounded memory identify `.8.1.1` as the sole next implementation.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -5025,3 +5104,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.7.1` | `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter` | Exact thin native adapter, strict UTF-8/canonical JSON/stable phases, independent canonical trace, dual-ABI 169/169, diagnostic 61x2, and `.7.2` handoff. |
 | `LUA-BACKEND-PARITY.7.2` | `LUA-BACKEND-PARITY.7.2 - admit Lua primary CLI matrix` | Recurring focused Lua 61x2, disposable PUC matrix adapter, exact five-backend 5x2x61 proof, status promotion, and `.7.3` handoff. |
 | `LUA-BACKEND-PARITY.7.3` | `LUA-BACKEND-PARITY.7.3 - close Lua primary usage no drift` | Correct historical scaffold prose and native-module lifetime guidance; close parent `.7` without behavior change; activate `.8.1`. |
+| `LUA-BACKEND-PARITY.8.1.0` | `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold` | Post-ADR-0041 v1/v2/v3 scope correction, emitter/isolation split, and `.8.1.1` handoff before code. |

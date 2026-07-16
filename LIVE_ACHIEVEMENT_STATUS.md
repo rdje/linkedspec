@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.1.0 — split Lua generated scaffold**
+  (DONE — exact v1/v2/v3 emitter and isolated-host leaves exist before behavior code; `.8.1.1` is next).
+
+  **Result:** `git blame` proves the older `.8.1` wording predates ADR `0041` and its governed
+  final-codeblock-v3 descriptor. The neutral contract, completed Dart/Julia emitters, and Lua compiled/spec-AST/
+  JSON/runtime/trace seams now map to two safe leaves: deterministic strict-UTF-8/ASCII-hex effective-state
+  emission with metadata/errors/entrypoints under `.8.1.1`, then fresh-process PUC Lua/LuaJIT valid/corrupt
+  load-run-cleanup proof under `.8.1.2`. Plan families and portable generated trace stay `.8.2`; admission stays
+  `.8.3-.8.4`. No emitter or behavior is claimed by this planning slice.
+
+  **Proof:** Generated-source v1, callable-signature, callable-codeblock, capability, mdBook, Knowledge Map,
+  memory, doctrine, and whitespace checks pass. The complete Lua gate passes 169/169 on both ABIs, primary CLI
+  61/61 in default and POSIX environments, and corpus 105/105. Canonical local CI exits 0 with reference CLI
+  61/61 in both environments plus Phase 0 true reach `1..1031` in 609 seconds. Mutation testing was not run.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.7.3 — close Lua primary usage no drift**
   (DONE — exact checkout usage and limitations align; parent `.7` closes and generated-source `.8.1` is next).
 

@@ -166,7 +166,9 @@ native emitter stream. Relative paths use the actual process cwd queried through
 so no shell, subprocess, or environment option parser owns semantics. PUC Lua and LuaJIT pass 169/169, and the
 unchanged shared process manifest now passes recurring 61/61 runs in default and POSIX environments. The warmed
 cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli`, no-drift `.7.3` closes parent
-`.7`, and generated-source scaffold `.8.1` is active.
+`.7`. Planning leaf `.8.1.0` corrected the older v1/v2-only generated-source scope against current outward
+descriptor v3 and split deterministic exact-v1/v2/v3 source construction `.8.1.1` from fresh-process PUC
+Lua/LuaJIT proof `.8.1.2`; `.8.1.1` is active and no Lua emitter is claimed yet.
 
 ## Lua automatic function parsing
 

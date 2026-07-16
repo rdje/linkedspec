@@ -356,8 +356,10 @@ Its registered calls likewise reject keyword arguments and bind a newly copied v
 stores. Fixed calls still require exact arity; variadic calls require at least `min_arity`. Lua now preserves the
 same exact state union and resolves the minimum/unbounded arity through native `.5.1.3.1`; `.5.1.3.2` now executes
 fresh typed rest arrays and the unchanged neutral fixture. Descriptor admission remains `.5.3`, and generated
-owners remain `.8.1-.4`. Four admitted backends implement the complete native/generated contract while Lua's
-native milestone deliberately does not claim six-runtime admission before those outward/generated owners close.
+owners remain `.8.1-.4`. Planning `.8.1.0` makes that boundary explicit: emitter core `.8.1.1` must reconstruct
+the effective fixed-v1, variadic-v2, and final-codeblock-v3 state union before isolation `.8.1.2` executes it in
+fresh PUC Lua and LuaJIT processes. Four admitted backends implement the complete native/generated contract while
+Lua's native milestone deliberately does not claim an emitter or six-runtime admission before those owners close.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by
 the typed AST path report unresolved-helper metadata instead of silently becoming Perl

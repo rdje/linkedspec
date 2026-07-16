@@ -249,7 +249,13 @@ only when passed bare `--execute`. Primary adapter `.7.1` independently implemen
 native execution/canonical JSON, stable failures/exits, and canonical phase trace. Admission `.7.2` makes both
 61-case process legs recurring here and extends the warmed matrix to 5x2x61. Status is
 `runtime-corpus-primary-cli`; no-drift `.7.3` closes parent `.7`, confirms the checkout-native setup plus separate
-corpus/primary boundaries, and activates generated-source scaffold `.8.1` without changing behavior.
+corpus/primary boundaries, and hands off to generated-source work without changing behavior. Planning `.8.1.0`
+corrects the earlier v1/v2-only scaffold wording against outward descriptor v3 and separates deterministic
+exact-v1/v2/v3 emitter core `.8.1.1` from fresh-process PUC Lua/LuaJIT load/run proof `.8.1.2`. No Lua emitter is
+claimed until those implementation leaves close.
+The planning-only `.8.1.0` slice passes generated-source/callable/capability checks, Lua 169/169 per ABI, primary
+CLI 61/61 in both environments, corpus 105/105, and the canonical gate with both reference CLI legs at 61/61 plus
+Phase 0 true reach `1..1031` in 609 seconds.
 The `.7.1` adapter passes the canonical local gate without recurring Lua admission: both reference CLI
 environments remain 61/61 and Phase 0 reaches `1..1031` in 606 seconds.
 Admission `.7.2` independently passes the canonical local gate with the same reference CLI legs at 61/61 and

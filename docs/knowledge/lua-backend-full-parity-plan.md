@@ -38,7 +38,8 @@ evidence_update_2026_07_15_controlled_corpus_closeout: "LUA-BACKEND-PARITY.6.1.4
 evidence_update_2026_07_15_full_corpus: "LUA-BACKEND-PARITY.6.3 executes one ordered 105/105 no-selector library gate and bare developer-runner --execute. PUC Lua and LuaJIT pass 167/167 with status runtime-corpus-full; parent .6 closes, primary CLI .7.1 activates, and census 64/0/0 remains unchanged."
 evidence_update_2026_07_15_primary_cli: "LUA-BACKEND-PARITY.7.1 implements exact ADR 0023 arguments, strict UTF-8, native execution, canonical JSON, stable phase exits, and ADR 0024 trace at 169/169 per ABI plus diagnostic shared CLI 61x2. Recurring process/matrix admission .7.2 is active; status stays runtime-corpus-full."
 evidence_update_2026_07_15_primary_cli_admission: "LUA-BACKEND-PARITY.7.2 makes focused default/POSIX 61x2 recurring, adds PUC Lua to the warmed shared matrix at 5x2x61, and advances status to runtime-corpus-primary-cli; final no-drift .7.3 is active."
-evidence_update_2026_07_15_primary_no_drift: "LUA-BACKEND-PARITY.7.3 closes exact native/CLI/corpus checkout usage, limitations, and recurring gate alignment without behavior change; parent .7 closes and deterministic generated-source scaffold .8.1 activates."
+evidence_update_2026_07_15_primary_no_drift: "LUA-BACKEND-PARITY.7.3 closes exact native/CLI/corpus checkout usage, limitations, and recurring gate alignment without behavior change; parent .7 closes and hands off to generated-source work subsequently split by .8.1.0 into exact-v1/v2/v3 emitter core .8.1.1 and fresh-process proof .8.1.2."
+evidence_update_2026_07_16_generated_scaffold_split: "LUA-BACKEND-PARITY.8.1.0 corrects the pre-ADR-0041 v1/v2-only wording, requires the exact v1/v2/v3 effective-state union, and splits deterministic emission .8.1.1 from fresh-process PUC/LuaJIT isolation .8.1.2."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -74,7 +75,8 @@ window admission. Complete `.6.3` now executes the ordered 105/105 manifest thro
 runner at 167/167 per ABI with status `runtime-corpus-full` and closes parent `.6`. Primary adapter `.7.1` now
 implements the exact thin command at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring, extends
 the matrix to 5x2x61, and advances status to `runtime-corpus-primary-cli`. Final no-drift `.7.3` closes parent
-`.7`; generated-source scaffold `.8.1` is active.
+`.7`. Generated-source planning `.8.1.0` has since split the exact v1/v2/v3 emitter core `.8.1.1` from isolated
+dual-ABI host proof `.8.1.2`; `.8.1.1` is active.
 
 Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[backend-capability-census]], [[generated-source-contract-v1]], [[language-agnostic-backend-vision]],
@@ -83,4 +85,5 @@ Related facts: [[native-in-memory-backend-contract]], [[user-observable-backend-
 [[lua-trace-controls-sinks]], [[lua-native-spec-resolution]], [[lua-spec-defined-function-parser]],
 [[lua-native-spec-pipeline]], [[lua-native-spec-loading-closeout]], [[lua-native-full-pipeline-trace]],
 [[lua-controlled-corpus-admission-split]], [[lua-full-corpus-gate]], [[lua-primary-cli-adapter]],
-[[lua-primary-cli-recurring-admission]], [[lua-primary-cli-no-drift-closeout]].
+[[lua-primary-cli-recurring-admission]], [[lua-primary-cli-no-drift-closeout]],
+[[lua-generated-source-scaffold-split]].

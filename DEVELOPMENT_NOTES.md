@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.1.0` — future leaves must be refreshed after cross-cutting contracts land):
+  The original Lua emitter leaf predates ADR `0041`, so fixed-v1/variadic-v2 wording is no longer sufficient.
+  Generated reconstruction must preserve the exact fixed-v1/variadic-v2/final-codeblock-v3 union already present
+  in immutable function registry entries. Reconstruct an effective typed `SpecFile` from those source-ordered
+  definitions and last-definition compiled rule order; do not invent a decoder for internal compiled-state JSON.
+  Existing `spec_ast.to_json/from_json` is the lossless typed seam, and `json.encode` already enforces strict UTF-8
+  plus deterministic object ordering. ASCII hex is the dependency-free literal boundary for canonical payload and
+  source identity. Keep deterministic emitter construction `.8.1.1` separate from fresh-process PUC/LuaJIT host
+  load/run/failure/cleanup `.8.1.2`; family plans and portable generated trace stay `.8.2`.
+  Generated-source v1, callable-signature, callable-codeblock, capability, mdBook, Knowledge Map, memory, and
+  doctrine checks pass. The complete Lua gate passes 169/169 per ABI, primary CLI 61/61 in both environments, and
+  corpus 105/105. Canonical local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031`
+  in 609 seconds. Mutation testing was not run.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.7.3` — checkout usability includes native-module lifetime): An executable Lua
   script can locate repository Lua source, but it cannot load `linkedspec_filesystem_native` or
   `linkedspec_regex_pcre2` after the caller deletes their build directory. Manual documentation must therefore

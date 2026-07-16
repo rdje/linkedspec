@@ -166,8 +166,9 @@ This `README.md` is the **single entry point** to the project.
   trace pass 169/169 on each ABI. Admission `.7.2` now runs the unchanged 61 cases under default and POSIX
   environments in the focused Lua gate and extends the warmed shared matrix to five backends (5x2x61). Public
   status advances to `runtime-corpus-primary-cli`; corpus data, generated source, and capability 64/0/0 remain
-  unchanged. Final CLI/native/corpus documentation no-drift `.7.3` closes parent `.7`; generated-source scaffold
-  `.8.1` is active.
+  unchanged. Final CLI/native/corpus documentation no-drift `.7.3` closes parent `.7`. Generated-source planning
+  `.8.1.0` corrects the older v1/v2-only wording against ADR `0041`, splits exact v1/v2/v3 emitter core `.8.1.1`
+  from isolated dual-ABI host proof `.8.1.2`, and activates `.8.1.1` without claiming an emitter early.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.
   Generated Lua preservation/execution remains `.8.1-.8.4`. ADR

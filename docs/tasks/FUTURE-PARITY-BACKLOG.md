@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua primary no-drift `.7.3` closes parent `.7` at exact native/61x2/105 checkout
-  usage and gate alignment; generated-source scaffold `.8.1` is active while diagnostic `.5.1` and logical `.5.2`
-  remain dependency-gated).
+- Last updated: `2026-07-16` (Lua scaffold planning `.8.1.0` corrects v1/v2/v3 scope and splits deterministic
+  emission `.8.1.1` from isolated dual-ABI host proof `.8.1.2`; `.8.1.1` is active while diagnostic `.5.1` and
+  logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
 ## Goal
@@ -4748,6 +4748,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 186 | `FUTURE-PARITY-BACKLOG.21.1` | `pending` / dependency-gated | Run the companion inventory/scaffold/population program only after current backend parity. |
 | 187 | `LUA-BACKEND-PARITY.7.3` | `done` | Exact primary/native/corpus usage and gate no-drift closes parent `.7`. |
 | 188 | `LUA-BACKEND-PARITY.8.1` | `active` | Build the deterministic contract-v1 Lua emitter scaffold and isolated load/run proof. |
+| 189 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Corrected post-ADR-0041 v1/v2/v3 scope and split emitter core from isolated host proof. |
+| 190 | `LUA-BACKEND-PARITY.8.1.1` | `active` | Emit deterministic Lua source from exact v1/v2/v3 effective typed state. |
+| 191 | `LUA-BACKEND-PARITY.8.1.2` | `pending` | Prove fresh-process PUC/LuaJIT valid/corrupt load, run, failure, trace, and cleanup. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
