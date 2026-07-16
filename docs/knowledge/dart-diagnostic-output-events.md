@@ -12,7 +12,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [Dart, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.1.4 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. diagnostic_output_contract_test.dart consumes all linkedspec-diagnostic-output-v1 render, arity, ordering, quiet, wrong-kind, sink-failure, and exit scenarios and proves trace separation. tools/run_dart_local.sh passes 220 tests, analyzer/formatter, primary CLI 61x2, and 105/105 corpus fixtures."
+evidence: "FUTURE-PARITY-BACKLOG.5.1.4 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. FUTURE-PARITY-BACKLOG.5.1.7 threads the optional sink through generated helpers and emitted direct/traced entrypoints. diagnostic_output_contract_test.dart consumes native and generated linkedspec-diagnostic-output-v1 scenarios and proves exact events, values, trace separation, caller-object identity, and typed exit."
 reverify: "cd dart && dart test test/diagnostic_output_contract_test.dart test/runtime_interpreter_test.dart test/trace_test.dart && cd .. && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnosticOutputSink' dart/lib dart/test/diagnostic_output_contract_test.dart"
 ---
 
@@ -41,7 +41,9 @@ caller. This includes a sink that throws `RuntimeInterpreterException` itself. `
 separate typed immediate outcome, so preceding events arrive and later actions do not run. Neither rich event
 data nor sink failures are `RuntimeDiagnostic` or native trace records.
 
-Generated Dart entrypoint propagation remains owned by `.5.1.7`; this native leaf does not claim it.
+Generated Dart callers pass `diagnosticOutputSink:` to `executeGeneratedParserV1` or its traced counterpart;
+emitted `execute` and `executeWithTrace` expose the same optional named argument. A private generated carrier
+restores arbitrary caller failures with their stack while ordinary failures retain generated-source attribution.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[dart-runtime-structured-diagnostics]], [[dart-trace-controls-sinks]], [[rust-diagnostic-output-events]],

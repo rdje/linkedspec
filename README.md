@@ -185,8 +185,10 @@ This `README.md` is the **single entry point** to the project.
   `0042` plus one checked fixture with exact arity/evaluation/rendering/events/sink/exit/generated/CLI semantics.
   Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, Julia `.5.1.5`, and Lua `.5.1.6` now consume its native contract
   through quiet optional caller sinks, exact typed events, preserved caller failures, and typed immediate exit;
-  the ledger is 5 complete / 3 pending. Generated propagation and exact quiet primary projection `.5.1.7` is next
-  before recurring admission and public no-drift;
+  generated/primary `.5.1.7` now threads that sink through every direct/traced emitted role, preserves caller
+  failures and typed exit across generated framing, and adds one exact quiet diagnostic-helper primary case.
+  All five commands pass the shared 62 cases under default and POSIX environments; the ledger is 6 complete / 2
+  pending, with recurring admission `.5.1.8` next before public no-drift;
   Perl logical keyword-lowering plus five-backend truthiness/arity
   normalization remains separately owned by `.5.2` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
@@ -499,16 +501,17 @@ content migration exists yet.
   accepted eight-case proof; Dart promotes and the live census is 59/0/1. Julia `.3.4.1` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
-  failure, 20 canonical trace, and eight strict UTF-8 behavior cases. Perl passes all 61 current cases. ADR `0025`
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, eight success (including quiet diagnostic
+  helpers), four baseline failure, 20 canonical trace, and eight strict UTF-8 behavior cases. Perl passes all 62
+  current cases. ADR `0025`
   defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
-  canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`; Dart, Julia, and Lua are also 61/61 default/POSIX. Run
+  canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
+  `tools/run_rust_local.sh`; Perl, Rust, Dart, Julia, and Lua now pass 62/62 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all five backends and proves
-  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
+  the shared 62-case suite under both environments. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution
   native resolution `.1.6.4`, Dart full-pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
@@ -519,11 +522,11 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, the full runtime package, and both
-  61-case primary-command environments.
+  62-case primary-command environments.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
-- Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both exact 61-case primary-command
+- Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both exact 62-case primary-command
   environments on PUC Lua, and complete 105-fixture corpus execution.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before

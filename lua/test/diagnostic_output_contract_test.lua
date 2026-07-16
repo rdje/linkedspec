@@ -51,6 +51,13 @@ local function engine(source)
   return linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source)))
 end
 
+local function generated_module(source, name)
+  local loader = loadstring or load
+  local chunk, failure = loader(source, name)
+  if chunk == nil then error(failure, 0) end
+  return chunk()
+end
+
 local function event_json(events)
   local result = json.array()
   for index, event in ipairs(events) do
@@ -249,6 +256,66 @@ do
   check_equal(events[1].message, marker .. "\n", "trace separation event")
   check_contains(trace_text, "lua_runtime:parse", "native trace remains active")
   check_equal(trace_text:find(marker, 1, true), nil, "event message stays out of native trace")
+end
+
+do
+  local identity = "diagnostic-output/generated-lua.spec"
+  local ordered_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("ordered_unicode")))
+  local generated = generated_module(
+    linkedspec.emit_lua_source_v1(ordered_compiled, identity),
+    "@generated-diagnostic-output"
+  )
+  local expected = scenario("ordered_unicode_with_sink").expected
+  local events = {}
+  local value = generated.execute("x", { diagnostic_sink = collect_sink(events) })
+  check_same_json(value, expected.outcome.value, "generated direct value")
+  check_same_json(event_json(events), expected.events, "generated direct events")
+
+  local traced_events = {}
+  local traced = generated.execute_with_trace(
+    "x",
+    linkedspec.trace_config_disabled(),
+    {
+      diagnostic_sink = collect_sink(traced_events),
+      stdout_writer = function() end,
+    }
+  )
+  check_same_json(traced, value, "generated traced value")
+  check_same_json(event_json(traced_events), expected.events, "generated traced events")
+
+  local failure_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("sink_failure")))
+  local failure_generated = generated_module(
+    linkedspec.emit_lua_source_v1(failure_compiled, identity),
+    "@generated-diagnostic-sink-failure"
+  )
+  local caller_failure = { id = "generated-caller-sink-failure" }
+  local invocation = 0
+  local sink_ok, sink_failure = pcall(failure_generated.execute, "x", {
+    diagnostic_sink = function()
+      invocation = invocation + 1
+      if invocation == 2 then error(caller_failure, 0) end
+    end,
+  })
+  check_equal(sink_ok, false, "generated sink failure propagated")
+  check_equal(sink_failure, caller_failure, "generated sink failure identity")
+
+  local exit_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("immediate_exit")))
+  local exit_generated = generated_module(
+    linkedspec.emit_lua_source_v1(exit_compiled, identity),
+    "@generated-diagnostic-exit"
+  )
+  local exit_events = {}
+  local exit_ok, exit_failure = pcall(exit_generated.execute, "x", {
+    diagnostic_sink = collect_sink(exit_events),
+  })
+  check_equal(exit_ok, false, "generated exit propagated")
+  check_equal(linkedspec.is_runtime_exit_now(exit_failure), true, "generated exit type")
+  check_equal(exit_failure.status, 23, "generated exit status")
+  check_same_json(
+    event_json(exit_events),
+    scenario("event_before_immediate_exit").expected.events,
+    "generated pre-exit events"
+  )
 end
 
 if #failures == 0 then

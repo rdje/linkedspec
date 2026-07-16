@@ -86,4 +86,4 @@ run_contract Lua 'lua/bin/linkedspec-lua' \
  env "LUA_CPATH=$LUA_NATIVE_ROOT/?.so;;" "$LUA_CMD" \
  '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
 
-log "primary CLI matrix passed: 5 backends x 2 environments x 61 cases"
+log "primary CLI matrix passed: 5 backends x 2 environments x 62 cases"

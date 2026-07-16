@@ -13,7 +13,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [lua, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
-evidence: "LUA-BACKEND-PARITY.4.3.8 adds the typed per-parse event seam. FUTURE-PARITY-BACKLOG.5.1.6 directly consumes linkedspec-diagnostic-output-v1 with 109 assertions on PUC Lua and LuaJIT, adds exact arbitrary sink-failure preservation through a private carrier, and exposes distinct typed RuntimeExitNow control. tools/run_lua_local.sh passes focused 109 plus 177/177 per ABI, primary CLI 61x2, and corpus 105/105."
+evidence: "LUA-BACKEND-PARITY.4.3.8 adds the typed per-parse event seam. FUTURE-PARITY-BACKLOG.5.1.6 consumes linkedspec-diagnostic-output-v1 natively on PUC Lua and LuaJIT with exact arbitrary sink-failure preservation and distinct typed RuntimeExitNow control. FUTURE-PARITY-BACKLOG.5.1.7 proves the emitted option-bearing direct/traced API and preserves the same outcomes across generated-source framing."
 reverify: "bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnosticOutputEvent|RuntimeExitNow|diagnostic_sink|evaluate_runtime_diagnostic_output' lua/src/linkedspec/interpreter.lua lua/test/diagnostic_output_contract_test.lua"
 ---
 
@@ -49,8 +49,11 @@ cloned or attributed as an engine failure.
 identifies it, `.status` carries the requested status, and `interpreter.to_json(error)` projects that status.
 Events emitted before it have already reached the caller; later helper expressions do not run.
 
-All five native engines now share this neutral behavior. Generated entrypoint and primary-command projection work
-remains separately owned; see [[cross-backend-diagnostic-output-drift]].
+Generated modules expose `execute(input, { diagnostic_sink = sink })` and
+`execute_with_trace(input, trace_config, { diagnostic_sink = sink })`. The emitter wraps callable sinks in a
+private carrier so an arbitrary caller value and `RuntimeExitNow` survive generated-source framing; invalid sink
+types still reach the native validator and ordinary failures remain source-attributed. All five native and
+generated engines now share the neutral behavior; see [[cross-backend-diagnostic-output-drift]].
 
 Related facts: [[lua-runtime-helper-family-split]], [[lua-runtime-rule-interpreter]],
 [[julia-diagnostic-output-helpers]].

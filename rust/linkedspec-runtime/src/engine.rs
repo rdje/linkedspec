@@ -1631,6 +1631,33 @@ impl Engine {
         self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None)
     }
 
+    /// Execute generated source with an optional caller-owned diagnostic sink.
+    pub fn execute_generated_with_plan_with_diagnostic_output(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        let mut ctx = RuntimeContext::new(input);
+        ctx.install_diagnostic_output_sink(sink);
+        let result = self.execute_generated_with_plan_context(generated_rules, &mut ctx, None);
+        self.finish_diagnostic_output_execution(&mut ctx, result)
+    }
+
+    /// Execute generated source's direct value with an optional diagnostic sink.
+    pub fn execute_generated_value_with_plan_with_diagnostic_output(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        let mut ctx = RuntimeContext::new(input);
+        ctx.install_diagnostic_output_sink(sink);
+        let result =
+            self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None);
+        self.finish_diagnostic_output_execution(&mut ctx, result)
+    }
+
     /// Execute generated source through a validated rule-family plan with
     /// explicit trace configuration.
     pub fn execute_generated_with_plan_with_trace(
@@ -1675,6 +1702,118 @@ impl Engine {
             &mut trace,
             Some(source_identity),
         )
+    }
+
+    /// Execute a generated direct value with portable trace roles and a
+    /// caller-owned diagnostic-output sink.
+    pub fn execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        source_identity: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
+            generated_rules,
+            input,
+            trace_config,
+            Some(source_identity),
+            true,
+            sink,
+        )
+    }
+
+    /// Execute the compatibility generated accumulator with native trace and a
+    /// caller-owned diagnostic-output sink.
+    pub fn execute_generated_with_plan_with_trace_and_diagnostic_output(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
+            generated_rules,
+            input,
+            trace_config,
+            None,
+            false,
+            sink,
+        )
+    }
+
+    fn execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        source_identity: Option<&str>,
+        direct_value: bool,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        let mut ctx = RuntimeContext::new(input);
+        ctx.install_diagnostic_output_sink(sink);
+        let mut trace = match TraceEmitter::new(trace_config) {
+            Ok(trace) => trace,
+            Err(error) => {
+                return self.finish_diagnostic_output_execution(
+                    &mut ctx,
+                    Err(format!("trace setup failed: {error}")),
+                );
+            }
+        };
+        let scope = match trace.enter_scope(
+            "rust_runtime:generated_plan:execute",
+            format!(
+                "input_bytes={} input_chars={} plan_rules={}",
+                input.len(),
+                input.chars().count(),
+                generated_rules.len()
+            ),
+            TraceLevel::LOW,
+        ) {
+            Ok(scope) => scope,
+            Err(error) => {
+                return self
+                    .finish_diagnostic_output_execution(&mut ctx, Err(trace_write_failed(error)));
+            }
+        };
+        if trace.should_emit(TraceLevel::LOW) {
+            ctx.enable_trace_events();
+        }
+        let raw_result = if direct_value {
+            self.execute_generated_value_with_plan_context(
+                generated_rules,
+                &mut ctx,
+                source_identity,
+            )
+        } else {
+            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+        };
+        let exit_details = match &raw_result {
+            Ok(value) => format!("status=ok output={value}"),
+            Err(error) => format!("status=error error={error}"),
+        };
+        let execution = self.finish_diagnostic_output_execution(&mut ctx, raw_result);
+
+        if let Err(error) = ctx.replay_trace_events(&mut trace) {
+            return match execution {
+                Err(RuntimeDiagnosticOutputExecutionError::Sink(_))
+                | Err(RuntimeDiagnosticOutputExecutionError::Exit(_)) => execution,
+                _ => self
+                    .finish_diagnostic_output_execution(&mut ctx, Err(trace_write_failed(error))),
+            };
+        }
+        if let Err(error) = trace.exit_scope(scope, exit_details) {
+            return match execution {
+                Err(RuntimeDiagnosticOutputExecutionError::Sink(_))
+                | Err(RuntimeDiagnosticOutputExecutionError::Exit(_)) => execution,
+                _ => self
+                    .finish_diagnostic_output_execution(&mut ctx, Err(trace_write_failed(error))),
+            };
+        }
+        execution
     }
 
     fn execute_generated_with_plan_with_trace_emitter_and_roles(

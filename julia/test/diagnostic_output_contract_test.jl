@@ -229,4 +229,82 @@ end
         @test occursin("julia_runtime:parse", trace_text)
         @test !occursin(marker, trace_text)
     end
+
+    @testset "generated direct and traced roles preserve diagnostic outcomes" begin
+        identity = "diagnostic-output/generated-julia.spec"
+        source = _diagnostic_output_program_source("ordered_unicode")
+        parsed = parse_spec_with_staged_user_function_definitions(source)
+        compiled = compile_spec(parsed)
+        plan = build_generated_rule_plan(compiled)
+        expected = _diagnostic_output_scenario("ordered_unicode_with_sink")["expected"]
+        events = RuntimeDiagnosticOutputEvent[]
+
+        value = execute_generated_parser_v1(
+            compiled,
+            plan,
+            "x",
+            identity;
+            diagnostic_output_sink = event -> push!(events, event),
+        )
+        @test value == expected["outcome"]["value"]
+        @test _diagnostic_output_event_json(events) == expected["events"]
+
+        traced_events = RuntimeDiagnosticOutputEvent[]
+        traced = execute_generated_parser_with_trace_v1(
+            compiled,
+            plan,
+            "x",
+            trace_config_disabled(),
+            identity;
+            stdout_io = IOBuffer(),
+            diagnostic_output_sink = event -> push!(traced_events, event),
+        )
+        @test traced == value
+        @test _diagnostic_output_event_json(traced_events) == expected["events"]
+
+        failure_source = _diagnostic_output_program_source("sink_failure")
+        failure_compiled = compile_spec(
+            parse_spec_with_staged_user_function_definitions(failure_source),
+        )
+        failure = DiagnosticOutputCallerSinkFailure("generated-caller-sink-failure")
+        invocation = Ref(0)
+        captured = try
+            execute_generated_parser_v1(
+                failure_compiled,
+                build_generated_rule_plan(failure_compiled),
+                "x",
+                identity;
+                diagnostic_output_sink = event -> begin
+                    invocation[] += 1
+                    invocation[] == 2 && throw(failure)
+                end,
+            )
+            nothing
+        catch error
+            error
+        end
+        @test captured === failure
+
+        exit_source = _diagnostic_output_program_source("immediate_exit")
+        exit_compiled = compile_spec(
+            parse_spec_with_staged_user_function_definitions(exit_source),
+        )
+        exit_events = RuntimeDiagnosticOutputEvent[]
+        captured_exit = try
+            execute_generated_parser_v1(
+                exit_compiled,
+                build_generated_rule_plan(exit_compiled),
+                "x",
+                identity;
+                diagnostic_output_sink = event -> push!(exit_events, event),
+            )
+            nothing
+        catch error
+            error
+        end
+        @test captured_exit isa RuntimeExitNow
+        @test captured_exit.status == 23
+        @test _diagnostic_output_event_json(exit_events) ==
+              _diagnostic_output_scenario("event_before_immediate_exit")["expected"]["events"]
+    end
 end

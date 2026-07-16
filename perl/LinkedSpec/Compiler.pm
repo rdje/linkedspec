@@ -183,8 +183,15 @@ sub ValidateGeneratedPlan {
 }
 
 sub Execute {
- my (\$input_ref) = \@_;
+ my (\$input_ref, \$invocation_options) = \@_;
  ValidateGeneratedPlan();
+ my \$diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(
+  \$invocation_options,
+ );
+ my \$sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
+ my \$control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
+ local \$descr->{\$sink_slot} = \$diagnostic_sink;
+ local \$descr->{\$control_error_slot} = undef;
  LinkedSpec::GeneratedSource::trace_role(
   role => 'generated_rule_enter',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
@@ -210,6 +217,11 @@ sub Execute {
   handler_family => $top_family_literal,
   status => \$ok ? 'ok' : 'error',
  );
+ die \$execution_error
+  if !\$ok && LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error(
+   \$descr,
+   \$execution_error,
+  );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
   code => 'generated_execution_failed',
@@ -223,10 +235,10 @@ sub Execute {
 }
 
 sub ExecuteWithTrace {
- my (\$input_ref, \$trace_config) = \@_;
+ my (\$input_ref, \$trace_config, \$invocation_options) = \@_;
  require LinkedSpec::Trace;
  LinkedSpec::Trace::configure_trace(%\$trace_config) if ref(\$trace_config) eq 'HASH';
- return Execute(\$input_ref)
+ return Execute(\$input_ref, \$invocation_options)
 }
 
 sub Get { return Execute(\@_) }

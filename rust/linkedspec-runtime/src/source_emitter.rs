@@ -8,6 +8,10 @@
 //! compatibility adapter.
 
 use crate::engine::Engine;
+use crate::{
+    RuntimeDiagnosticOutputExecutionError, RuntimeDiagnosticOutputSink,
+    RuntimeDiagnosticOutputSinkFailure, RuntimeExitNow,
+};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
 use linkedspec_core::trace::TraceConfig;
@@ -122,6 +126,44 @@ impl fmt::Display for GeneratedSourceError {
 }
 
 impl std::error::Error for GeneratedSourceError {}
+
+/// Typed outcome for generated execution with diagnostic-output delivery.
+///
+/// The generated-source layer retains its portable source-attributed failures,
+/// while caller sink failures and `exit_now` remain distinct native outcomes.
+#[derive(Debug, Clone)]
+pub enum GeneratedDiagnosticOutputExecutionError {
+    /// Contract-v1 emission, plan, or ordinary generated execution failure.
+    GeneratedSource(GeneratedSourceError),
+    /// Compatibility generated-parser failure retaining its prior text.
+    Compatibility(String),
+    /// The exact error payload returned by the caller's sink.
+    Sink(RuntimeDiagnosticOutputSinkFailure),
+    /// Immediate parser control requested by `exit_now(status)`.
+    Exit(RuntimeExitNow),
+}
+
+impl fmt::Display for GeneratedDiagnosticOutputExecutionError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::GeneratedSource(error) => error.fmt(formatter),
+            Self::Compatibility(error) => formatter.write_str(error),
+            Self::Sink(error) => error.fmt(formatter),
+            Self::Exit(error) => error.fmt(formatter),
+        }
+    }
+}
+
+impl std::error::Error for GeneratedDiagnosticOutputExecutionError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            Self::GeneratedSource(error) => Some(error),
+            Self::Compatibility(_) => None,
+            Self::Sink(error) => Some(error.as_ref()),
+            Self::Exit(error) => Some(error),
+        }
+    }
+}
 
 /// Public metadata embedded in and returned by generated Rust modules.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -291,8 +333,9 @@ pub fn emit_rust_source_v1(
     source.push_str("//! Source format: linkedspec-runtime source_emitter v1.\n");
     source.push_str("//! Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.\n\n");
     source.push_str(
-        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_trace, execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1, GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceError, GeneratedSourceMetadata};\n",
+        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_diagnostic_output, execute_generated_parser_with_diagnostic_output_v1, execute_generated_parser_with_trace, execute_generated_parser_with_trace_and_diagnostic_output, execute_generated_parser_with_trace_and_diagnostic_output_v1, execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceError, GeneratedSourceMetadata};\n",
     );
+    source.push_str("use linkedspec_runtime::RuntimeDiagnosticOutputSink;\n");
     source.push_str("use linkedspec_runtime::trace::TraceConfig;\n\n");
     source.push_str(&format!(
         "pub const LINKEDSPEC_GENERATED_SOURCE_CONTRACT: &str = {contract:?};\n",
@@ -365,6 +408,19 @@ pub fn execute(input: &str) -> Result<serde_json::Value, GeneratedSourceError> {
     )
 }
 
+pub fn execute_with_diagnostic_output(
+    input: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output_v1(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        sink,
+    )
+}
+
 pub fn execute_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, GeneratedSourceError> {
     execute_generated_parser_with_trace_v1(
         COMPILED_SPEC_JSON,
@@ -375,12 +431,53 @@ pub fn execute_with_trace(input: &str, trace_config: TraceConfig) -> Result<serd
     )
 }
 
+pub fn execute_with_trace_and_diagnostic_output(
+    input: &str,
+    trace_config: TraceConfig,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output_v1(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        trace_config,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        sink,
+    )
+}
+
 pub fn parse(input: &str) -> Result<serde_json::Value, String> {
     execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_RULES, input)
 }
 
+pub fn parse_with_diagnostic_output(
+    input: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output(
+        COMPILED_SPEC_JSON,
+        GENERATED_RULES,
+        input,
+        sink,
+    )
+}
+
 pub fn parse_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, String> {
     execute_generated_parser_with_trace(COMPILED_SPEC_JSON, GENERATED_RULES, input, trace_config)
+}
+
+pub fn parse_with_trace_and_diagnostic_output(
+    input: &str,
+    trace_config: TraceConfig,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output(
+        COMPILED_SPEC_JSON,
+        GENERATED_RULES,
+        input,
+        trace_config,
+        sink,
+    )
 }
 "#,
     );
@@ -403,6 +500,25 @@ pub fn execute_generated_parser_v1(
         .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
 }
 
+/// Execute generated Rust source with direct value and caller-owned diagnostics.
+pub fn execute_generated_parser_with_diagnostic_output_v1(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    source_identity: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)
+        .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let generated_rules =
+        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)
+            .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let top_context = generated_top_context(&compiled);
+    Engine::new(compiled)
+        .execute_generated_value_with_plan_with_diagnostic_output(&generated_rules, input, sink)
+        .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
+}
+
 /// Execute generated Rust source with direct value, portable trace roles, and v1 failures.
 pub fn execute_generated_parser_with_trace_v1(
     compiled_spec_json: &str,
@@ -423,6 +539,32 @@ pub fn execute_generated_parser_with_trace_v1(
             source_identity,
         )
         .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
+}
+
+/// Execute generated Rust source with portable trace roles and caller diagnostics.
+pub fn execute_generated_parser_with_trace_and_diagnostic_output_v1(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    trace_config: TraceConfig,
+    source_identity: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)
+        .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let generated_rules =
+        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)
+            .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let top_context = generated_top_context(&compiled);
+    Engine::new(compiled)
+        .execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output(
+            &generated_rules,
+            input,
+            trace_config,
+            source_identity,
+            sink,
+        )
+        .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
 }
 
 /// Validate an exposed contract-v1 plan against its embedded compiled specification.
@@ -482,6 +624,28 @@ fn generated_execution_error(
     error
 }
 
+fn generated_diagnostic_execution_error(
+    source_identity: &str,
+    top_context: Option<(String, &'static str)>,
+    error: RuntimeDiagnosticOutputExecutionError,
+) -> GeneratedDiagnosticOutputExecutionError {
+    match error {
+        RuntimeDiagnosticOutputExecutionError::Runtime(error) => {
+            GeneratedDiagnosticOutputExecutionError::GeneratedSource(generated_execution_error(
+                source_identity,
+                top_context,
+                error.message,
+            ))
+        }
+        RuntimeDiagnosticOutputExecutionError::Sink(error) => {
+            GeneratedDiagnosticOutputExecutionError::Sink(error)
+        }
+        RuntimeDiagnosticOutputExecutionError::Exit(error) => {
+            GeneratedDiagnosticOutputExecutionError::Exit(error)
+        }
+    }
+}
+
 /// Execute a generated parser module from its embedded compiled spec and family plan.
 ///
 /// The plan is validated first. `RUST-PARITY.8.4` closes the generated-source
@@ -501,6 +665,28 @@ pub fn execute_generated_parser(
     Engine::new(compiled).execute_generated_with_plan(generated_rules, input)
 }
 
+/// Execute a compatibility generated parser with caller-owned diagnostics.
+pub fn execute_generated_parser_with_diagnostic_output(
+    compiled_spec_json: &str,
+    generated_rules: &[GeneratedRuleSpec],
+    input: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
+        GeneratedDiagnosticOutputExecutionError::Compatibility(format!(
+            "generated CompiledSpec JSON is invalid: {error}"
+        ))
+    })?;
+    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
+        GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+    })?;
+    validate_generated_rule_plan(&compiled, generated_rules)
+        .map_err(GeneratedDiagnosticOutputExecutionError::Compatibility)?;
+    Engine::new(compiled)
+        .execute_generated_with_plan_with_diagnostic_output(generated_rules, input, sink)
+        .map_err(compatibility_diagnostic_execution_error)
+}
+
 /// Execute a generated parser module with explicit trace configuration.
 pub fn execute_generated_parser_with_trace(
     compiled_spec_json: &str,
@@ -517,6 +703,50 @@ pub fn execute_generated_parser_with_trace(
         input,
         trace_config,
     )
+}
+
+/// Execute a traced compatibility generated parser with caller diagnostics.
+pub fn execute_generated_parser_with_trace_and_diagnostic_output(
+    compiled_spec_json: &str,
+    generated_rules: &[GeneratedRuleSpec],
+    input: &str,
+    trace_config: TraceConfig,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
+        GeneratedDiagnosticOutputExecutionError::Compatibility(format!(
+            "generated CompiledSpec JSON is invalid: {error}"
+        ))
+    })?;
+    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
+        GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+    })?;
+    validate_generated_rule_plan(&compiled, generated_rules)
+        .map_err(GeneratedDiagnosticOutputExecutionError::Compatibility)?;
+    Engine::new(compiled)
+        .execute_generated_with_plan_with_trace_and_diagnostic_output(
+            generated_rules,
+            input,
+            trace_config,
+            sink,
+        )
+        .map_err(compatibility_diagnostic_execution_error)
+}
+
+fn compatibility_diagnostic_execution_error(
+    error: RuntimeDiagnosticOutputExecutionError,
+) -> GeneratedDiagnosticOutputExecutionError {
+    match error {
+        RuntimeDiagnosticOutputExecutionError::Runtime(error) => {
+            GeneratedDiagnosticOutputExecutionError::Compatibility(error.message)
+        }
+        RuntimeDiagnosticOutputExecutionError::Sink(error) => {
+            GeneratedDiagnosticOutputExecutionError::Sink(error)
+        }
+        RuntimeDiagnosticOutputExecutionError::Exit(error) => {
+            GeneratedDiagnosticOutputExecutionError::Exit(error)
+        }
+    }
 }
 
 /// Classify one compiled rule into the generated-source family plan.

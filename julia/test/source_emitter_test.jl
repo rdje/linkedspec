@@ -387,6 +387,7 @@ end
         bytes2hex(codeunits("<inline>")) => bytes2hex(codeunits(identity)),
     )
     @test occursin("module LinkedSpecGeneratedParser", generated)
+    @test occursin("diagnostic_output_sink = nothing", generated)
     @test occursin(bytes2hex(codeunits(identity)), generated)
     @test occursin(bytes2hex(codeunits(expected_value)), generated)
     @test !occursin(identity, generated)

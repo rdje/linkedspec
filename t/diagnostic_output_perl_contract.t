@@ -104,7 +104,11 @@ sub load_generated_source {
  my $failure = $@;
  ok($loaded, "$suffix generated source compiles independently") or diag($failure);
  no strict 'refs';
- return *{"${package}::Execute"}{CODE}
+ return {
+  execute => *{"${package}::Execute"}{CODE},
+  execute_with_trace => *{"${package}::ExecuteWithTrace"}{CODE},
+  get => *{"${package}::Get"}{CODE},
+ }
 }
 
 sub typed_value {
@@ -331,31 +335,105 @@ SPEC
  is($caught->{arguments_evaluated}, 0, 'runtime arity error confirms no argument evaluation');
 };
 
-subtest 'dumped and independently loaded generated handlers avoid host output and host exit' => sub {
+subtest 'generated entrypoints propagate sinks and preserve caller control outcomes' => sub {
  like($ordered->{generated_source}, qr/LinkedSpec::RuntimeDiagnosticOutput::emit/, 'dumped handler routes diagnostic helpers through the runtime seam');
  unlike($ordered->{generated_source}, qr/\bprint\s+["']/, 'dumped handler contains no raw host print statement');
  unlike($ordered->{generated_source}, qr/\bsay\s+["']/, 'dumped handler contains no raw host say statement');
  like($exit_program->{generated_source}, qr/LinkedSpec::RuntimeDiagnosticOutput::terminate/, 'dumped handler routes exit_now through typed control');
  unlike($exit_program->{generated_source}, qr/(?<!::)\bexit\s*\(/, 'dumped handler contains no raw host exit call');
 
- my $execute = load_generated_source($ordered->{generated_source}, 'Ordered');
+ my $generated = load_generated_source($ordered->{generated_source}, 'Ordered');
  my $input = input_for_program('ordered_unicode');
  my ($result, $stdout, $stderr, $ok, $failure) = capture_host_output(sub {
-  return $execute->(\$input)
+  return $generated->{execute}->(\$input)
  });
  ok($ok, 'independently loaded generated handler executes quietly') or diag($failure);
  is_deeply($result, $scenario{ordered_unicode_quiet}{expected}{outcome}{value}, 'generated handler preserves the structural value');
  is($stdout, '', 'generated handler writes no host stdout');
  is($stderr, '', 'generated handler writes no host stderr');
 
- my $exit_execute = load_generated_source($exit_program->{generated_source}, 'Exit');
+ my @events;
+ my $eventful_input = input_for_program('ordered_unicode');
+ my $eventful = $generated->{execute}->(
+  \$eventful_input,
+  {diagnostic_sink => sub { push @events, $_[0] }},
+ );
+ is_deeply(
+  $eventful,
+  $scenario{ordered_unicode_with_sink}{expected}{outcome}{value},
+  'generated Execute preserves the direct value with a sink',
+ );
+ is_deeply(
+  event_rows(\@events),
+  $scenario{ordered_unicode_with_sink}{expected}{events},
+  'generated Execute delivers the exact neutral event sequence',
+ );
+
+ my @traced_events;
+ my $traced_input = input_for_program('ordered_unicode');
+ my $traced = $generated->{execute_with_trace}->(
+  \$traced_input,
+  {trace_level => 'none'},
+  {diagnostic_sink => sub { push @traced_events, $_[0] }},
+ );
+ is_deeply($traced, $eventful, 'generated ExecuteWithTrace preserves the direct value');
+ is_deeply(event_rows(\@traced_events), event_rows(\@events), 'generated trace role propagates the same sink');
+
+ my @get_events;
+ my $get_input = input_for_program('ordered_unicode');
+ is_deeply(
+  $generated->{get}->(
+   \$get_input,
+   {diagnostic_sink => sub { push @get_events, $_[0] }},
+  ),
+  $eventful,
+  'generated Get compatibility role preserves the direct value',
+ );
+ is_deeply(event_rows(\@get_events), event_rows(\@events), 'generated Get propagates the same sink');
+
+ my $sink_program = compile_program('sink_failure');
+ my $sink_generated = load_generated_source($sink_program->{generated_source}, 'SinkFailure');
+ my @sink_events;
+ my $caller_failure = LinkedSpec::DiagnosticOutputSinkFailureProbe->new('generated-caller-failure');
+ my $sink_input = input_for_program('sink_failure');
+ my $sink_ok = eval {
+  $sink_generated->{execute}->(
+   \$sink_input,
+   {diagnostic_sink => sub {
+    push @sink_events, $_[0];
+    die $caller_failure if @sink_events == 2;
+   }},
+  );
+  1
+ };
+ my $sink_error = $@;
+ ok(!$sink_ok, 'generated caller sink failure aborts execution');
+ is(refaddr($sink_error), refaddr($caller_failure), 'generated caller sink failure preserves exact identity');
+ is_deeply(
+  event_rows(\@sink_events),
+  $scenario{synchronous_sink_failure}{expected}{events},
+  'generated caller sink failure stops later delivery',
+ );
+
+ my $exit_generated = load_generated_source($exit_program->{generated_source}, 'Exit');
+ my @exit_events;
  my $exit_input = input_for_program('immediate_exit');
- my $exit_ok = eval { $exit_execute->(\$exit_input); 1 };
+ my $exit_ok = eval {
+  $exit_generated->{execute}->(
+   \$exit_input,
+   {diagnostic_sink => sub { push @exit_events, $_[0] }},
+  );
+  1
+ };
  my $exit_error = $@;
- ok(!$exit_ok, 'generated exit handler fails through generated execution framing');
- is(ref($exit_error), 'HASH', 'generated entrypoint retains its current structured wrapper');
- isa_ok($exit_error->{detail}, 'LinkedSpec::RuntimeExitNow');
- is($exit_error->{detail}->status, 23, 'generated wrapper retains the typed exit status without host termination');
+ ok(!$exit_ok, 'generated exit handler aborts immediately');
+ isa_ok($exit_error, 'LinkedSpec::RuntimeExitNow');
+ is($exit_error->status, 23, 'generated entrypoint preserves the typed exit status');
+ is_deeply(
+  event_rows(\@exit_events),
+  $scenario{event_before_immediate_exit}{expected}{events},
+  'generated entrypoint delivers the preceding event only',
+ );
 };
 
 subtest 'primary command observes quiet helpers and no host-status exit' => sub {

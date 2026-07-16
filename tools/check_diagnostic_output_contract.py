@@ -130,7 +130,7 @@ ROLLOUT = [
     ("dart_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.4"),
     ("julia_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.5"),
     ("lua_native", "complete", "FUTURE-PARITY-BACKLOG.5.1.6"),
-    ("generated_and_primary_cli", "pending", "FUTURE-PARITY-BACKLOG.5.1.7"),
+    ("generated_and_primary_cli", "complete", "FUTURE-PARITY-BACKLOG.5.1.7"),
     ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.5.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.1.9"),
 ]

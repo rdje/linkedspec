@@ -81,8 +81,12 @@ void main() {
     expect(first, contains('linkedspec-generated-source-v1'));
     expect(first, contains('linkedspecGeneratedSourceFormat = 1'));
     expect(first, contains(r'generated-source/dart-\$-λ.spec'));
-    expect(first, contains('Object? execute(String input'));
+    expect(first, contains('Object? execute('));
     expect(first, contains('Object? executeWithTrace('));
+    expect(
+      first,
+      contains('RuntimeDiagnosticOutputSink? diagnosticOutputSink'),
+    );
     expect(first, isNot(contains('Top::')));
   });
 

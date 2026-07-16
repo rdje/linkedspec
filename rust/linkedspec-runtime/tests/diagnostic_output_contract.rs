@@ -3,6 +3,13 @@ use linkedspec_core::parser::parse_spec;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::source_emitter::{
+    GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedRuleFamily,
+    GeneratedRuleSpec, execute_generated_parser_with_diagnostic_output,
+    execute_generated_parser_with_diagnostic_output_v1,
+    execute_generated_parser_with_trace_and_diagnostic_output,
+    execute_generated_parser_with_trace_and_diagnostic_output_v1,
+};
 use linkedspec_runtime::{
     RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink,
@@ -326,4 +333,147 @@ fn keeps_diagnostic_events_out_of_native_trace() {
         "diagnostic event data entered native trace: {trace}"
     );
     std::fs::remove_file(trace_path).expect("remove focused trace artifact");
+}
+
+#[test]
+fn generated_direct_and_traced_roles_preserve_diagnostic_outcomes() {
+    let contract = contract();
+    let ordered = scenario(&contract, "ordered_unicode_with_sink");
+    let source = program_source(&contract, "ordered_unicode");
+    let parsed = parse_spec(&source).expect("parse generated diagnostic fixture");
+    validate(&parsed).expect("validate generated diagnostic fixture");
+    let compiled = compile(&parsed).expect("compile generated diagnostic fixture");
+    let compiled_json = serde_json::to_string(&compiled).expect("serialize generated fixture");
+    let plan = [GeneratedPlanRow {
+        label: "Top",
+        family: "default",
+    }];
+    let compatibility_plan = [GeneratedRuleSpec {
+        label: "Top",
+        family: GeneratedRuleFamily::Default,
+    }];
+    let identity = "diagnostic-output/generated-rust.spec";
+
+    let (sink, events) = collecting_sink();
+    let value = execute_generated_parser_with_diagnostic_output_v1(
+        &compiled_json,
+        &plan,
+        "x",
+        identity,
+        Some(&sink),
+    )
+    .expect("generated direct diagnostic execution");
+    assert_eq!(value, ordered["expected"]["outcome"]["value"]);
+    assert_eq!(event_json(&events.borrow()), ordered["expected"]["events"]);
+
+    let (trace_sink, trace_events) = collecting_sink();
+    let traced = execute_generated_parser_with_trace_and_diagnostic_output_v1(
+        &compiled_json,
+        &plan,
+        "x",
+        TraceConfig::default(),
+        identity,
+        Some(&trace_sink),
+    )
+    .expect("generated traced diagnostic execution");
+    assert_eq!(traced, value);
+    assert_eq!(
+        event_json(&trace_events.borrow()),
+        ordered["expected"]["events"]
+    );
+
+    let (compatibility_sink, compatibility_events) = collecting_sink();
+    let compatibility = execute_generated_parser_with_diagnostic_output(
+        &compiled_json,
+        &compatibility_plan,
+        "x",
+        Some(&compatibility_sink),
+    )
+    .expect("compatibility generated diagnostic execution");
+    assert_eq!(compatibility, ordered["expected"]["outcome"]["output"]);
+    assert_eq!(
+        event_json(&compatibility_events.borrow()),
+        ordered["expected"]["events"]
+    );
+
+    let (compatibility_trace_sink, compatibility_trace_events) = collecting_sink();
+    let compatibility_traced = execute_generated_parser_with_trace_and_diagnostic_output(
+        &compiled_json,
+        &compatibility_plan,
+        "x",
+        TraceConfig::default(),
+        Some(&compatibility_trace_sink),
+    )
+    .expect("compatibility traced diagnostic execution");
+    assert_eq!(compatibility_traced, compatibility);
+    assert_eq!(
+        event_json(&compatibility_trace_events.borrow()),
+        ordered["expected"]["events"]
+    );
+
+    let failure_row = scenario(&contract, "synchronous_sink_failure");
+    let failure_source = program_source(&contract, "sink_failure");
+    let failure_spec = parse_spec(&failure_source).expect("parse generated sink-failure fixture");
+    validate(&failure_spec).expect("validate generated sink-failure fixture");
+    let failure_json = serde_json::to_string(
+        &compile(&failure_spec).expect("compile generated sink-failure fixture"),
+    )
+    .expect("serialize generated sink-failure fixture");
+    let identity_token = Rc::new(());
+    let callback_token = Rc::clone(&identity_token);
+    let mut invocation = 0;
+    let failing_sink = RuntimeDiagnosticOutputSink::new(move |_event| {
+        invocation += 1;
+        if invocation == 2 {
+            Err(CallerSinkFailure {
+                id: "generated-caller-sink-failure".to_string(),
+                identity: Rc::clone(&callback_token),
+            })
+        } else {
+            Ok(())
+        }
+    });
+    let error = execute_generated_parser_with_diagnostic_output_v1(
+        &failure_json,
+        &plan,
+        "x",
+        identity,
+        Some(&failing_sink),
+    )
+    .expect_err("generated sink failure must abort");
+    match error {
+        GeneratedDiagnosticOutputExecutionError::Sink(error) => {
+            let caller = error
+                .downcast_ref::<CallerSinkFailure>()
+                .expect("generated path preserves caller failure type");
+            assert_eq!(caller.id, "generated-caller-sink-failure");
+            assert!(Rc::ptr_eq(&caller.identity, &identity_token));
+        }
+        other => panic!("generated sink failure returned wrong outcome: {other}"),
+    }
+    assert_eq!(failure_row["expected"]["outcome"]["kind"], "sink_failure");
+
+    let exit_source = program_source(&contract, "immediate_exit");
+    let exit_spec = parse_spec(&exit_source).expect("parse generated exit fixture");
+    validate(&exit_spec).expect("validate generated exit fixture");
+    let exit_json =
+        serde_json::to_string(&compile(&exit_spec).expect("compile generated exit fixture"))
+            .expect("serialize generated exit fixture");
+    let (exit_sink, exit_events) = collecting_sink();
+    let error = execute_generated_parser_with_diagnostic_output_v1(
+        &exit_json,
+        &plan,
+        "x",
+        identity,
+        Some(&exit_sink),
+    )
+    .expect_err("generated exit must remain typed");
+    match error {
+        GeneratedDiagnosticOutputExecutionError::Exit(exit) => assert_eq!(exit.status, 23),
+        other => panic!("generated exit returned wrong outcome: {other}"),
+    }
+    assert_eq!(
+        event_json(&exit_events.borrow()),
+        scenario(&contract, "event_before_immediate_exit")["expected"]["events"]
+    );
 }

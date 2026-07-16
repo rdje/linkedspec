@@ -861,7 +861,8 @@ use private carriers through their action/runtime wrappers so even a caller-thro
 its exact identity; Julia additionally removes rich helper text from low trace. Lua `.6` now consumes all 109
 neutral assertions on PUC Lua and LuaJIT, using the same private-carrier pattern for exact caller identity and a
 distinct `RuntimeExitNow`. The ledger is 5 complete / 3 pending; generated/CLI `.7`, recurring admission `.8`, and
-public no-drift `.9` own the remaining correction.
+public no-drift `.9` own the remaining correction. Generated/CLI `.7` has since closed at 6 complete / 2 pending;
+recurring admission `.8` is active.
 Planning-only `.4.4.0` follows the completed Dart/Julia dependency order: `.4.4.1-.4` separately own neutral
 structured runtime failures, ordered trace controls and caller-owned sinks, interpreter events, and runtime
 no-drift. Full native loading, frontend, validation, compiler, function-shell, staged-dispatch, and runtime

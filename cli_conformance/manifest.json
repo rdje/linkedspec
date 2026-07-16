@@ -315,6 +315,23 @@
       }
     },
     {
+      "id": "success_diagnostic_helpers_quiet",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { print(\"hidden\"); say(\"hidden-line\"); print_each([\"a\", \"b\"], \"<\", \">\"); return(\"visible\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"visible\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
       "id": "success_explicit_top_rule",
       "family": "success",
       "args": [

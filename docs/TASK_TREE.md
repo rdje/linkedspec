@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Diagnostic-output audit/contract `.5.1.0-.1` and all five native sink/event repairs `.5.1.2-.6` are done. Generated/primary propagation `.5.1.7` is active before symmetric gate `.8` and no-drift `.9`; logical truthiness `.5.2` plus ADR `0036`/`.19` remain later-owned. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Diagnostic-output audit/contract `.5.1.0-.1`, all five native sink/event repairs `.5.1.2-.6`, and generated/primary projection `.5.1.7` are done. Symmetric recurring gate `.5.1.8` is active before no-drift `.9`; logical truthiness `.5.2` plus ADR `0036`/`.19` remain later-owned. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `LUA-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Lua third)` | `.8.4` admits Lua as the fifth exact backend: 16 capabilities, 80/0/0, 177/177 on PUC Lua and LuaJIT, primary 61x2, corpus 105/105, and shared matrix 5x2x61. No Lua frontier remains. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `STRUCTURED-TEXT-FORMAT-PROGRAM` | `proposed` / parity prerequisite satisfied | `Post-current-backend-parity format coverage and evidence-driven .spec evolution` | `.0` ratifies the exact 91-row program; backlog `.18.1` adds the authoring invariant, `.18.2` adds correlated compile/runtime trace plus exact emission-only rule filters, and `.18.3` links a separate optional native-acceleration horizon. Five-backend parity is complete; readiness `.1` is pending and not active. | [docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md](docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md) |
 | `NATIVE-PARSER-ACCELERATOR` | `proposed` / non-blocking horizon | `Post-dynamic-parser optional backend-native performance acceleration` | `.0` ratifies dynamic/warm/native tiers and exact derivative invariants. No current frontier: `.1` requires full current parity, one completed realistic dynamic format parser, and measured evidence. | [docs/tasks/NATIVE-PARSER-ACCELERATOR.md](docs/tasks/NATIVE-PARSER-ACCELERATOR.md) |
@@ -2360,13 +2360,14 @@ decoration effects per item, can write invalid UTF-8 through the primary command
 canonical framing; Rust writes direct stderr, Dart discards, Julia conflates output with trace, and Lua has typed
 caller-owned events. `.5.1.1-.9` now own neutral policy/fixtures, five native backends, generated/CLI propagation,
 symmetric admission, and public no-drift. No behavior changed in that slice; `.5.1.1` and all five native seams
-`.5.1.2-.6` have since closed, and generated/primary propagation `.5.1.7` is active.
+`.5.1.2-.6` plus generated/primary propagation `.5.1.7` have since closed, and recurring gate `.5.1.8` is active.
 
 Index note 2026-07-16: `FUTURE-PARITY-BACKLOG.5.1.1` adopts ADR `0042` and the exact
 `linkedspec-diagnostic-output-v1` fixture before behavior code. Its offline evaluator locks 11 render rows, five
 invalid arities, six semantic scenarios, eight mutations, and eight explicitly pending rollout owners while
 capability stays 80/0/0. Canonical local CI passes primary CLI 61x2 and Phase 0 `1..1031`/609s. No backend claim or
-behavior changed in that slice; all five native seams `.5.1.2-.6` have since closed and `.5.1.7` is active.
+behavior changed in that slice; all five native seams `.5.1.2-.6` plus generated/primary `.5.1.7` have since
+closed and recurring gate `.5.1.8` is active.
 
 Index note 2026-07-16: `FUTURE-PARITY-BACKLOG.5.1.2` replaces Perl host `print`/`say`/`foreach`/`exit` lowering
 with exact typed parse-scoped diagnostic events and typed immediate parser control. Invalid arities reject before
@@ -2374,7 +2375,8 @@ effects; valid arguments evaluate once left-to-right; missing sinks are quiet; U
 sink-failure identity, and pre-exit delivery consume the neutral fixture. Focused proof and direct Phase 0
 `1..1031`/640s pass; canonical CI repeats Phase 0 in 637s after CLI 61x2. Only `perl_native` advances to complete;
 capability stays 80/0/0, generated/CLI remains `.5.1.7`, and
-Rust/Dart/Julia/Lua native `.5.1.3-.6` have since closed; generated/primary `.5.1.7` is active.
+Rust/Dart/Julia/Lua native `.5.1.3-.6` plus generated/primary `.5.1.7` have since closed; recurring gate `.5.1.8`
+is active.
 
 Index note 2026-07-16: `FUTURE-PARITY-BACKLOG.5.1.3` replaces Rust diagnostic helpers' direct stderr path with
 typed caller-owned per-execution events. Raw-AST arity rejects before effects; valid arguments evaluate once
@@ -2397,6 +2399,23 @@ from trace; absent sinks are quiet; and action/runtime wrappers preserve the exa
 74-assertion neutral consumer and complete Julia gate pass package tests, primary CLI 61x2, and corpus 105/105.
 Only `julia_native` advances, capability stays 80/0/0, generated propagation remains `.5.1.7`, and Lua `.5.1.6`
 is active.
+
+Index note 2026-07-16: `FUTURE-PARITY-BACKLOG.5.1.6` admits Lua's native diagnostic seam against all neutral
+render, arity, ordering, quiet, wrong-kind, sink-failure, exit, and trace-separation scenarios on PUC Lua and
+LuaJIT. A private carrier preserves every arbitrary caller sink value and distinct `RuntimeExitNow` preserves
+typed immediate control. Focused 109 and existing 177 tests pass per ABI; complete Lua CLI 61x2/corpus 105/105
+and canonical Phase 0 `1..1031`/656s pass. Only `lua_native` advances, capability stays 80/0/0, and generated/
+primary `.5.1.7` activates.
+
+Index note 2026-07-16: `FUTURE-PARITY-BACKLOG.5.1.7` propagates the same invocation-local sink through every
+available generated direct/traced role while retaining legacy signatures, values, portable trace roles,
+metadata/plans, ordinary generated-source attribution, exact caller sink failures, and typed immediate exit.
+Perl extends emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust adds paired typed-v1 and compatibility functions;
+Dart and Julia add optional named/keyword sinks; Lua preserves its option-bearing API across generated framing.
+Shared primary case 62 executes `print`/`say`/`print_each` but admits only canonical JSON plus newline, empty
+stderr, and status 0 across all five commands and both option environments. The neutral ledger is 6 complete / 2
+pending, capability stays 80/0/0, complete backend gates and corrected shared matrix pass, canonical CLI 62x2 plus
+Phase 0 `1..1031` pass in 623 seconds, and recurring symmetric admission `.5.1.8` is active.
 
 ## Proposed Task Trees
 

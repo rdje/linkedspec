@@ -12,6 +12,28 @@ const linkedSpecGeneratedSourceContract = 'linkedspec-generated-source-v1';
 /// Version of the generated Dart source scaffold.
 const linkedSpecGeneratedSourceFormatVersion = 1;
 
+final class _GeneratedDiagnosticOutputSinkFailure implements Exception {
+  const _GeneratedDiagnosticOutputSinkFailure(this.error, this.stackTrace);
+
+  final Object error;
+  final StackTrace stackTrace;
+}
+
+RuntimeDiagnosticOutputSink? _generatedDiagnosticOutputSink(
+  RuntimeDiagnosticOutputSink? sink,
+) {
+  if (sink == null) {
+    return null;
+  }
+  return (event) {
+    try {
+      sink(event);
+    } on Object catch (error, stackTrace) {
+      throw _GeneratedDiagnosticOutputSinkFailure(error, stackTrace);
+    }
+  };
+}
+
 /// Stable stage in the generated-source pipeline.
 enum GeneratedSourceStage {
   emitSource('emit_source'),
@@ -216,6 +238,7 @@ Object? executeGeneratedParserV1(
   String input,
   String sourceIdentity, {
   String? topRule,
+  RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
   final validated = _validatedGeneratedRulePlanV1(
     compiled,
@@ -229,9 +252,16 @@ Object? executeGeneratedParserV1(
           validated,
           sourceIdentity,
           topRule: topRule,
+          diagnosticOutputSink: _generatedDiagnosticOutputSink(
+            diagnosticOutputSink,
+          ),
         )
         .value;
   } on GeneratedSourceException {
+    rethrow;
+  } on _GeneratedDiagnosticOutputSinkFailure catch (failure) {
+    Error.throwWithStackTrace(failure.error, failure.stackTrace);
+  } on RuntimeExitNow {
     rethrow;
   } on RuntimeInterpreterException catch (error) {
     throw _generatedExecutionFailure(
@@ -261,6 +291,7 @@ Object? executeGeneratedParserWithTraceV1(
   LinkedSpecTraceConfig traceConfig,
   String sourceIdentity, {
   String? topRule,
+  RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
   final validated = _validatedGeneratedRulePlanV1(
     compiled,
@@ -275,9 +306,16 @@ Object? executeGeneratedParserWithTraceV1(
           sourceIdentity,
           topRule: topRule,
           trace: LinkedSpecTraceEmitter(traceConfig),
+          diagnosticOutputSink: _generatedDiagnosticOutputSink(
+            diagnosticOutputSink,
+          ),
         )
         .value;
   } on GeneratedSourceException {
+    rethrow;
+  } on _GeneratedDiagnosticOutputSinkFailure catch (failure) {
+    Error.throwWithStackTrace(failure.error, failure.stackTrace);
+  } on RuntimeExitNow {
     rethrow;
   } on RuntimeInterpreterException catch (error) {
     throw _generatedExecutionFailure(
@@ -408,13 +446,18 @@ void validatePlan(List<GeneratedPlanRow> actual) {
   );
 }
 
-Object? execute(String input, {String? topRule}) {
+Object? execute(
+  String input, {
+  String? topRule,
+  RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+}) {
   return executeGeneratedParserV1(
     _compiledSpec,
     _generatedPlan,
     input,
     linkedspecGeneratedSourceIdentity,
     topRule: topRule,
+    diagnosticOutputSink: diagnosticOutputSink,
   );
 }
 
@@ -422,6 +465,7 @@ Object? executeWithTrace(
   String input,
   LinkedSpecTraceConfig traceConfig, {
   String? topRule,
+  RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
   return executeGeneratedParserWithTraceV1(
     _compiledSpec,
@@ -430,6 +474,7 @@ Object? executeWithTrace(
     traceConfig,
     linkedspecGeneratedSourceIdentity,
     topRule: topRule,
+    diagnosticOutputSink: diagnosticOutputSink,
   );
 }
 ''';

@@ -1455,8 +1455,7 @@ let value = engine.execute_value_with_diagnostic_output("input", &options, Some(
 
 Passing `None` stays quiet. `RuntimeDiagnosticOutputExecutionError` keeps ordinary structured
 `RuntimeExecutionError`, the caller's concrete sink failure, and `RuntimeExitNow { status }` in separate variants;
-event text never enters native trace. Generated Rust parser functions do not yet accept the sink—that propagation
-remains owned by `.5.1.7`.
+event text never enters native trace.
 
 Dart exposes the same native boundary directly on its parse and traced aliases:
 
@@ -1471,8 +1470,7 @@ final result = engine.parse(
 `RuntimeDiagnosticOutputEvent` exposes `helperName`, `ruleLabel`, and `message`, with exact snake-case keys from
 `toJson()`. Omitting `diagnosticOutputSink` is quiet. If the callback throws, Dart restores the exact object and
 stack instead of letting action or runtime wrappers reinterpret it; `RuntimeExitNow.status` is the separate typed
-immediate-exit outcome. `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` accept the sink. Generated
-Dart parser functions remain separately owned by `.5.1.7`.
+immediate-exit outcome. `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` accept the sink.
 
 Julia exposes the sink as an optional keyword on its native parse and traced aliases:
 
@@ -1488,28 +1486,104 @@ result = runtime_parse(
 Each event exposes `helper_name`, `rule_label`, and `message`; `to_json(event)` returns the exact neutral record.
 Omitting `diagnostic_output_sink` is quiet. Callback failures retain exact object identity through Julia's
 action/runtime wrappers, and `RuntimeExitNow.status` is separate immediate control. `runtime_parse`,
-`runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace` accept the sink. Generated Julia
-parser functions remain separately owned by `.5.1.7`.
+`runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace` accept the sink.
 
-Native rollout is only partly aligned:
+Generated modules expose the same invocation-local channel without changing their existing sinkless signatures.
+The host-language shape stays idiomatic:
+
+```perl
+# Independently emitted Perl package
+my @events;
+my $value = GeneratedParser::Execute(
+  \$input,
+  { diagnostic_sink => sub { push @events, $_[0] } },
+);
+```
+
+```rust,ignore
+// Independently emitted Rust module
+let value = generated_parser::execute_with_diagnostic_output(
+    input,
+    Some(&sink),
+)?;
+let traced = generated_parser::execute_with_trace_and_diagnostic_output(
+    input,
+    trace_config,
+    Some(&sink),
+)?;
+```
+
+Rust uses paired functions because its existing `execute(input)` and `execute_with_trace(input, config)`
+signatures cannot acquire an optional argument. Compatibility generated roles likewise expose
+`parse_with_diagnostic_output` and `parse_with_trace_and_diagnostic_output`. All four return
+`GeneratedDiagnosticOutputExecutionError`, whose generated-source, compatibility, caller-sink, and immediate-exit
+variants remain distinct.
+
+```dart
+// Independently emitted Dart library
+final value = execute(
+  input,
+  diagnosticOutputSink: events.add,
+);
+final traced = executeWithTrace(
+  input,
+  traceConfig,
+  diagnosticOutputSink: events.add,
+);
+```
+
+```julia
+# Independently emitted Julia module
+value = LinkedSpecGeneratedParser.execute(
+    input;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+traced = LinkedSpecGeneratedParser.execute_with_trace(
+    input,
+    trace_config;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+```
+
+```lua
+-- Independently loaded generated Lua module
+local value = generated.execute(input, {
+  diagnostic_sink = function(event) events[#events + 1] = event end,
+})
+local traced = generated.execute_with_trace(input, trace_config, {
+  diagnostic_sink = function(event) events[#events + 1] = event end,
+})
+```
+
+Perl, Dart, Julia, and Lua add optional invocation data to their direct and traced generated roles. Rust adds
+paired entrypoints and preserves every legacy signature. In every language, no sink remains quiet, direct and
+traced results match, rich events do not enter portable generated trace, caller sink failures and typed immediate
+exit cross generated framing unchanged, and ordinary parser failures retain generated-source identity and stage.
+
+Native and generated rollout is aligned:
 
 | Backend | Current state or caveat |
 | --- | --- |
-| Perl | Native execution consumes the neutral contract: exact arities are rejected before effects, valid arguments evaluate once left-to-right, typed Unicode events use the parse-scoped optional sink, no sink is quiet, sink failures retain identity, and `exit_now` is typed parser control rather than host process termination. Generated-entrypoint propagation remains owned by `.5.1.7`. |
-| Rust | Native top/direct-value execution consumes the neutral contract through an optional typed sink; no sink is quiet, failures and exit stay typed, and generated sink propagation remains `.5.1.7`. |
-| Dart | Native parse/execute and traced aliases consume the neutral contract through an optional typed sink; no sink is quiet, caller failures and exit preserve their types, and generated sink propagation remains `.5.1.7`. |
-| Julia | Native parse/execute and traced aliases consume the neutral contract through an optional typed sink; no sink is quiet, caller failures and exit preserve their types, rich events stay out of native trace, and generated propagation remains `.5.1.7`. |
-| Lua | Native parse/execute and traced aliases consume the neutral contract on PUC Lua and LuaJIT; optional typed sinks are quiet when absent, caller failure identity is exact, and `RuntimeExitNow` is separate typed control. Generated propagation remains `.5.1.7`. |
+| Perl | Native and independently emitted `Execute`/`ExecuteWithTrace`/`Get` consume the neutral contract through invocation options; failures and exit cross generated framing unchanged. |
+| Rust | Native top/direct-value execution plus paired typed-v1 and compatibility generated functions consume the optional typed sink without changing legacy signatures. |
+| Dart | Native parse/execute/traced aliases and emitted direct/traced functions consume the optional named sink and preserve caller object plus stack. |
+| Julia | Native parse/execute/traced aliases and emitted direct/traced functions consume the optional keyword sink; rich events stay outside native and portable generated trace. |
+| Lua | Native and emitted option-bearing direct/traced functions consume the same sink on PUC Lua and LuaJIT with exact arbitrary caller identity and typed `RuntimeExitNow`. |
+
+Primary commands deliberately do not expose or install this rich sink. The shared
+`success_diagnostic_helpers_quiet` conformance case executes all three helpers and returns `"visible"`; every Perl,
+Rust, Dart, Julia, and Lua command emits exactly `"visible"\n` as canonical JSON on stdout, nothing on stderr, and
+status 0 in both default and POSIX environments. Existing ADR `0024` phase-trace cases remain unchanged and contain
+no `RuntimeDiagnosticOutputEvent` data.
 
 The pre-repair Perl lowering placed stateful prefix and suffix expressions inside a host `foreach`, so two items
 advanced each effect twice. Native Perl now snapshots all valid-call arguments before event delivery; that old
 result remains root-cause evidence, not portable behavior. Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures
 the mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042` plus 11 rendering rows, five invalid arities, and six
 semantic scenarios; Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, Julia `.5.1.5`, and Lua `.5.1.6` are complete
-native rollout legs. Leaves `.5.1.7-.9` retain generated/CLI propagation, a symmetric recurring gate, and public
-no-drift. Until
-those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing, invalid arity,
-or side-effect counts across all backends.
+native rollout legs. Generated/primary propagation `.5.1.7` is complete too. Leaves `.5.1.8-.9` retain a symmetric
+recurring gate and final public no-drift; the executable contract currently records six complete and two pending
+rollout legs.
 
 Use `next` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to
 the current accumulator. The parenthesized `next()` spelling remains equivalent on Perl, Rust, Dart, Julia, and Lua:

@@ -138,9 +138,11 @@ Three backbone items tracked major structural modernization — all done:
   immediate-exit control. Dart native `.5.1.4` and Julia native `.5.1.5` now provide the same quiet parse-scoped
   typed event seam while preserving exact caller failures outside ordinary runtime wrappers; Julia rich events
   are also separate from native trace. Lua native `.5.1.6` passes 109 fixture assertions on both ABIs, preserves
-  arbitrary sink-failure identity, and separates `RuntimeExitNow` from ordinary runtime errors. The ledger is
-  5 complete / 3 pending. Generated/CLI propagation, the recurring five-backend gate, and public no-drift remain
-  `.5.1.7-.9`. Perl
+  arbitrary sink-failure identity, and separates `RuntimeExitNow` from ordinary runtime errors. Generated/primary
+  `.5.1.7` now extends every direct/traced emitted role with an idiomatic optional or paired sink, preserves
+  caller failures and typed exit across generated framing, and locks quiet canonical JSON through the shared
+  five-backend/two-environment 62nd CLI case. The ledger is 6 complete / 2 pending; recurring gate and final
+  public no-drift remain `.5.1.8-.9`. Perl
   logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument

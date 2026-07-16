@@ -48,6 +48,9 @@ local ERROR_MT = {
 
 local METADATA_MT = { __generated_source_type = "GeneratedSourceMetadata" }
 local PLAN_ROW_MT = { __generated_source_type = "GeneratedPlanRow" }
+local GENERATED_DIAGNOSTIC_SINK_FAILURE_MT = {
+  __tostring = function() return "GeneratedDiagnosticOutputSinkFailure" end,
+}
 
 local FAMILY_NAMES = {
   "default",
@@ -351,6 +354,15 @@ local function execute_generated(compiled, plan, input, source_identity, options
   local identity = require_string(source_identity, "source_identity", false)
   local families = M.validate_generated_rule_plan_v1(compiled, plan, identity)
   local runtime_options = copy_options(options, "generated execution")
+  local diagnostic_sink = runtime_options.diagnostic_sink
+  if type(diagnostic_sink) == "function" then
+    runtime_options.diagnostic_sink = function(event)
+      local delivered, failure = pcall(diagnostic_sink, event)
+      if not delivered then
+        raise(setmetatable({ failure = failure }, GENERATED_DIAGNOSTIC_SINK_FAILURE_MT))
+      end
+    end
+  end
   runtime_options._generated_families = families
   runtime_options._generated_source_identity = identity
   local operation
@@ -372,6 +384,10 @@ local function execute_generated(compiled, plan, input, source_identity, options
   local ok, result = pcall(operation)
   if ok then return result.value end
   if M.is_generated_source_error(result) then raise(result) end
+  if getmetatable(result) == GENERATED_DIAGNOSTIC_SINK_FAILURE_MT then
+    raise(result.failure)
+  end
+  if interpreter.is_runtime_exit_now(result) then raise(result) end
   local rule_label = nil
   if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil then
     rule_label = result.diagnostic.rule_label

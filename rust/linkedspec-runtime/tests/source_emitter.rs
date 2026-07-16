@@ -345,8 +345,12 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
     assert!(generated.contains("pub fn plan()"));
     assert!(generated.contains("pub fn validate_plan(actual:"));
     assert!(generated.contains("pub fn execute(input:"));
+    assert!(generated.contains("pub fn execute_with_diagnostic_output("));
     assert!(generated.contains("pub fn execute_with_trace(input:"));
+    assert!(generated.contains("pub fn execute_with_trace_and_diagnostic_output("));
     assert!(generated.contains("pub fn parse(input:"));
+    assert!(generated.contains("pub fn parse_with_diagnostic_output("));
+    assert!(generated.contains("pub fn parse_with_trace_and_diagnostic_output("));
 
     let metadata = GeneratedSourceMetadata::new(identity);
     assert_eq!(

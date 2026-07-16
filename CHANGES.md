@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.7 — propagate generated diagnostic events
+
+Extended every available generated direct/traced execution role with the neutral invocation-local diagnostic
+sink. Independently emitted Perl packages accept invocation options on `Execute`, `ExecuteWithTrace`, and `Get`.
+Rust keeps every existing signature and adds paired typed-v1 and compatibility direct/traced functions whose new
+`GeneratedDiagnosticOutputExecutionError` keeps generated-source, compatibility, concrete caller-sink, and typed
+exit outcomes distinct. Dart and Julia add optional named/keyword sinks to their generated helpers and emitted
+functions. Lua's existing option-bearing API now carries arbitrary caller failures and `RuntimeExitNow` through
+generated-source framing. Values, event order, quiet sinkless behavior, portable generated trace roles, metadata,
+plans, and ordinary generated failure attribution remain unchanged.
+
+Added shared primary case `success_diagnostic_helpers_quiet`. It executes `print`, `say`, and `print_each`, returns
+`"visible"`, and permits exactly canonical JSON plus one newline on stdout, empty stderr, and status 0. Perl,
+Rust, Dart, Julia, and Lua pass the expanded 62-case manifest under default and POSIX environments; existing ADR
+`0024` phase-trace cases pass unchanged and contain no rich diagnostic event. An initial direct default-rule `E`
+fixture reproduced the separately recorded Perl lifecycle caveat and returned `0`; LinkedSpec's lowering/source
+probes isolated it, and the final case uses the established portable action-edge shape. The neutral rollout ledger advances
+only `generated_and_primary_cli` to complete (6 complete / 2 pending), capability remains 80/0/0, and recurring
+symmetric gate `.5.1.8` is next. Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.6 — admit Lua diagnostic events
 
 Admitted Lua's existing per-parse diagnostic event seam against the unchanged

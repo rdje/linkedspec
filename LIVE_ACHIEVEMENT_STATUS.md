@@ -8,6 +8,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.7 — propagate generated diagnostic events**
+  (DONE — generated and primary projections consume the neutral contract; symmetric recurring gate `.5.1.8` is
+  next).
+
+  **Result:** Every available generated direct/traced role now accepts an idiomatic invocation-local diagnostic
+  sink. Perl extends emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust adds paired typed-v1 and compatibility
+  functions while retaining legacy signatures; Dart and Julia add optional named/keyword arguments; and Lua
+  preserves its option-bearing API. All five retain exact values, event order, trace separation, source metadata/
+  plans, ordinary generated failure attribution, exact caller failure, and typed immediate exit.
+
+  **Proof:** Focused generated consumers pass on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The new shared
+  `success_diagnostic_helpers_quiet` case executes `print`, `say`, and `print_each` but permits only canonical
+  `"visible"` JSON plus newline, empty stderr, and status 0; all five commands pass all 62 cases under default and
+  POSIX environments, including unchanged ADR `0024` phase-trace cases. The neutral checker reports 6 complete / 2
+  pending and rejects eight mutations; capability stays 80/0/0. Complete backend and canonical gates are recorded
+  in the task-tree verification log: complete Rust, Dart, Julia, and dual-ABI Lua gates pass, canonical local CI
+  passes primary CLI 62x2 plus Phase 0 `1..1031` in 623 seconds, and the generated-source checker passes. No
+  mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.6 — admit Lua diagnostic events**
   (DONE — all five native event seams consume the neutral contract; generated/primary `.5.1.7` is next).
 

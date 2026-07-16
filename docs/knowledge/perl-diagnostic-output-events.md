@@ -12,7 +12,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [Perl, runtime, ActionIR, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.1.2 adds LinkedSpec::RuntimeDiagnosticOutput, rewires ActionIR output and exit lowering, and installs an invocation-local sink in Compiler-generated live parsers. t/diagnostic_output_perl_contract.t consumes linkedspec-diagnostic-output-v1 and proves 11 render rows, ordered once-only events, quiet execution, wrong-kind behavior, sink-failure identity, typed exit, arity-before-effects, generated-source freedom from host output/exit, and quiet primary behavior. Phase 0 passes 1..1031."
+evidence: "FUTURE-PARITY-BACKLOG.5.1.2 adds LinkedSpec::RuntimeDiagnosticOutput, rewires ActionIR output and exit lowering, and installs an invocation-local sink in Compiler-generated live parsers. FUTURE-PARITY-BACKLOG.5.1.7 extends independently emitted Execute/ExecuteWithTrace/Get while preserving generated failure attribution. t/diagnostic_output_perl_contract.t consumes linkedspec-diagnostic-output-v1 and proves native/generated ordered events, quietness, sink-failure identity, typed exit, and arity-before-effects."
 reverify: "prove -Iperl t/diagnostic_output_perl_contract.t t/uniform_binding_contract.t && rg -n 'RuntimeDiagnosticOutput::(emit|terminate)|diagnostic_sink' perl/LinkedSpec t/diagnostic_output_perl_contract.t"
 ---
 
@@ -39,8 +39,9 @@ results follow `linkedspec-diagnostic-output-v1`.
 If the sink throws, the same exception object escapes the parser immediately and is not rewritten into
 `runtime_ctx->{last_error}`. `exit_now(status)` similarly raises `LinkedSpec::RuntimeExitNow` after any preceding
 event and prevents later actions. Generated live handlers call `RuntimeDiagnosticOutput::emit`/`terminate`, not
-host `print`, `say`, or `exit`. Independently emitted execution-entrypoint option propagation remains the separate
-`.5.1.7` rollout leg.
+host `print`, `say`, or `exit`. Independently emitted `Execute($input_ref, $invocation_options)`,
+`ExecuteWithTrace($input_ref, $trace_config, $invocation_options)`, and `Get(...)` now expose the same sink and
+preserve these outcomes while ordinary failures retain generated-source attribution.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[lua-diagnostic-output-events]], [[perl-generated-handler-runtime-errors]].

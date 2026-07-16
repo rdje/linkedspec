@@ -101,8 +101,11 @@ pass 122/122. Exhaustive helper no-drift `.4.3.9` has since closed. The audit fo
 Julia transport and formatting drift; Lua `.8.4` satisfies its parity dependency. Planning `.5.1.0` now proves
 that arity, evaluation, scalar formatting, transport, and host process control need separate ownership. It splits
 neutral contract `.5.1.1`, five native leaves `.2-.6`, generated/CLI `.7`, symmetric gate `.8`, and no-drift `.9`.
-Neutral policy plus Perl `.5.1.2` and Rust `.5.1.3` native event seams are complete at 2 complete / 6 pending;
-Dart `.5.1.4` is the current five-backend normalization frontier before structured-format work.
+Neutral policy, all five native event seams, and generated/primary `.5.1.7` are complete at 6 complete / 2
+pending. Every emitted direct/traced role exposes an idiomatic optional or paired sink without changing legacy
+signatures, and all five primary commands remain quiet under the shared 62-case default/POSIX matrix. Symmetric
+recurring admission `.5.1.8` is the current normalization frontier before public no-drift and structured-format
+work.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`

@@ -12,7 +12,7 @@ answers:
 date: 2026-07-16
 status: current
 tags: [Rust, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.1.3 adds RuntimeDiagnosticOutputEvent/Sink/ExecutionError and top/direct-value Engine entrypoints. diagnostic_output_contract.rs consumes all linkedspec-diagnostic-output-v1 render, arity, ordering, quiet, wrong-kind, sink-failure, and exit scenarios and proves trace separation. tools/run_rust_local.sh passes 137 unit, 105 corpus, six diagnostic-output, 105 generated-classifier, 197 integration, existing diagnostics/trace/source-emitter suites, and primary CLI 61x2."
+evidence: "FUTURE-PARITY-BACKLOG.5.1.3 adds RuntimeDiagnosticOutputEvent/Sink/ExecutionError and top/direct-value Engine entrypoints. FUTURE-PARITY-BACKLOG.5.1.7 adds paired typed-v1 and compatibility generated direct/traced entrypoints plus GeneratedDiagnosticOutputExecutionError. diagnostic_output_contract.rs consumes native and generated linkedspec-diagnostic-output-v1 scenarios and proves exact events, values, trace separation, downcastable sink identity, and typed exit."
 reverify: "cd rust && cargo test -p linkedspec-runtime --test diagnostic_output_contract --test runtime_diagnostics --test trace_controls && cd .. && rg -n 'RuntimeDiagnosticOutput(Event|Sink|ExecutionError)|execute(_value)?_with_diagnostic_output' rust/linkedspec-runtime/src rust/linkedspec-runtime/tests/diagnostic_output_contract.rs"
 ---
 
@@ -43,8 +43,11 @@ structured `RuntimeExecutionError`; `Sink` retains the caller's concrete error v
 error payload and aborts synchronously; `Exit(RuntimeExitNow { status })` represents immediate parser control.
 This event channel does not enter `RuntimeDiagnostic`, native trace, or ADR `0024` primary phase trace.
 
-Generated Rust entrypoint sink propagation remains separately owned by `.5.1.7`; native completion does not claim
-that later projection.
+Generated Rust callers use paired `execute_generated_parser_with_diagnostic_output_v1` and
+`execute_generated_parser_with_trace_and_diagnostic_output_v1` functions, or their compatibility counterparts.
+Emitted modules expose `execute_with_diagnostic_output`, `execute_with_trace_and_diagnostic_output`,
+`parse_with_diagnostic_output`, and `parse_with_trace_and_diagnostic_output`. Existing signatures remain intact;
+`GeneratedDiagnosticOutputExecutionError` keeps generated-source, compatibility, sink, and exit outcomes distinct.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[rust-runtime-structured-diagnostics]], [[perl-diagnostic-output-events]], [[lua-diagnostic-output-events]].

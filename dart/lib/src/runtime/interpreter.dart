@@ -198,11 +198,13 @@ final class LinkedSpecRuntimeEngine {
     String sourceIdentity, {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
+    RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   }) {
     return _parse(
       input,
       topRule: topRule,
       trace: trace,
+      diagnosticOutputSink: diagnosticOutputSink,
       generatedPlan: Map.unmodifiable(generatedPlan),
       generatedSourceIdentity: sourceIdentity,
     );

@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.7` — generated framing is a second host exception boundary):
+  Passing a native sink into an emitter is insufficient when generated execution catches ordinary runtime errors
+  to attach source identity. Perl can distinguish its already marked control values in the descriptor. Rust's
+  typed public boundary needs paired methods because stable function signatures cannot gain optional arguments.
+  Dart, Julia, and Lua need a private carrier around only callable sinks so arbitrary caller failures cross the
+  generated attribution catch unchanged; invalid non-callable options must still reach native validation. In all
+  cases, unwrap caller failure and typed exit before ordinary generated-source wrapping, while preserving exact
+  metadata, plans, values, and portable trace roles. This same algorithm implemented in five host languages is an
+  active specification probe: each language reveals a different implicit boundary assumption that a single port
+  would leave hidden. The first quiet-primary fixture also rediscovered the canonical
+  `perl-lifecycle-final-value-e-drift`: `call_spec_handler_subst` lowered its direct default-rule `E` statements,
+  but `dump_parser_source` showed the generated handler omitted that path and the command returned `0`. Use the
+  established action-edge fixture shape here so diagnostic projection is isolated from separately owned lifecycle
+  normalization. The corrected shared case proves adapters install no rich sink—canonical JSON and ADR `0024`
+  phase trace remain the only process projections. Focused generated proof and the 5x2x62 matrix pass;
+  the rollout ledger is 6 complete / 2 pending, capability remains 80/0/0, and `.5.1.8` owns recurring symmetry.
+  Mutation campaigns were not run.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.6` — prior art still needs executable admission):
   Lua already had the correct visible event formatting, arity, evaluation, quietness, and result behavior, so a
   direct neutral-fixture consumer was more valuable than translating another backend's implementation. Its

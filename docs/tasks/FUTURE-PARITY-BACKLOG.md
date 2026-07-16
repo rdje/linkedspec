@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (all five native diagnostic event seams `.5.1.2-.6` consume
-  `linkedspec-diagnostic-output-v1`; generated/primary propagation `.5.1.7` is next)
+- Last updated: `2026-07-16` (all five native diagnostic event seams `.5.1.2-.6` and generated/primary projection
+  `.5.1.7` consume `linkedspec-diagnostic-output-v1`; recurring symmetry `.5.1.8` follows)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2584,18 +2584,55 @@ before implementation.
   leaf is verified, committed, and clean.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.7`
-  Status: `active`
+  Status: `done`
   Goal: Propagate diagnostic sinks through generated entrypoints and lock the exact primary-CLI projection.
   Dependencies: `.5.1.2`, `.5.1.3`, `.5.1.4`, `.5.1.5`, `.5.1.6`
   Acceptance: Every available generated-source API can receive the same caller-owned sink without changing direct
     values, portable generated trace, metadata, plans, or failure attribution. The five primary commands install no
     rich sink, retain ADR `0024`'s independent canonical phase trace, and produce only canonical JSON on successful
     default diagnostic-helper execution; no backend adds an exclusive CLI flag or semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / INVENTORY** — Read the generated-source v1, diagnostic-output, and canonical primary-trace
+    records; confirm that Perl exposes `Execute`/`ExecuteWithTrace`/`Get`, Rust exposes typed v1 plus compatibility
+    direct/traced roles, Dart and Julia expose direct/traced generated functions, Lua exposes option-bearing
+    direct/traced module functions, and all five primary adapters already omit rich sinks.
+  - [x] **PERL GENERATED** — Make independently loaded `Execute`, `ExecuteWithTrace`, and `Get` accept one validated
+    invocation-local sink; preserve exact caller failure and typed `RuntimeExitNow` instead of generated-error
+    wrapping, while retaining ordinary generated failure attribution.
+  - [x] **RUST GENERATED** — Add idiomatic direct/traced diagnostic-output entrypoints for both typed-v1 and
+    compatibility generated roles; preserve sink payload and typed exit in a public generated execution outcome,
+    while retaining legacy signatures and exact structured generated errors for existing callers.
+  - [x] **DART / JULIA GENERATED** — Thread optional named/keyword sinks through emitted and underlying direct/traced
+    APIs; carry arbitrary caller failures opaquely through generated framing, preserve typed exit, and keep ordinary
+    failures source-attributed.
+  - [x] **LUA GENERATED** — Prove the emitted option-bearing API and unwrap caller sink failures plus
+    `RuntimeExitNow` across generated execution framing without changing ordinary generated errors.
+  - [x] **PRIMARY PROJECTION** — Add one shared default-execution diagnostic-helper case whose exact projection is
+    canonical JSON plus newline, empty stderr, and no helper text; run it unchanged through all five commands under
+    default and POSIX environments, retaining the existing ADR `0024` phase-trace cases and adding no CLI option.
+    The initial direct default-rule `E` fixture reproduced the already recorded
+    `perl-lifecycle-final-value-e-drift`: `call_spec_handler_subst` lowered all four statements correctly, while
+    `dump_parser_source` showed the Perl handler body omitted that direct regex/`E` path and returned `0`. The
+    corrected fixture uses the established portable action-edge shape, keeping lifecycle normalization outside
+    this leaf while still executing all three diagnostic helpers before the exact visible return.
+  - [x] **NO REGRESSION** — Prove native and generated values/events/order, quietness, trace separation,
+    sink-failure identity, typed exit, metadata/plan/source attribution, all backend gates, generated-source and
+    capability contracts, mdBook, Knowledge Map, governance, whitespace, and canonical local CI.
+  - [x] **LOCKSTEP** — Update the neutral rollout ledger, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+    bounded memory to the exact generated/primary admission, leaving symmetric recurring orchestration solely to
+    `.5.1.8` and public no-drift closeout solely to `.5.1.9`.
+  Verification: **PASS 2026-07-16.** Focused Perl generated proof; Rust seven-test diagnostic contract and
+    source-emitter suite; Dart format/analyze and 13 focused tests; Julia 82-assertion diagnostic contract plus
+    emitted-source proof; Lua 119 focused assertions on PUC Lua and LuaJIT; complete Rust, Dart, Julia, and Lua
+    gates; exact five-backend/default-POSIX 62-case matrix; diagnostic checker 6 complete/2 pending with eight
+    rejected mutations; generated-source/capability 80/0/0, mdBook, Knowledge Map, doctrines, memory, and
+    whitespace; canonical CLI 62x2 plus Phase 0 `1..1031` in 623 seconds. The initial direct-`E` fixture failure
+    was root-caused with `call_spec_handler_subst` and `dump_parser_source`, then replaced by the already governed
+    portable action-edge form before these final passes. Mutation campaigns were not run.
+  Commit: `FUTURE-PARITY-BACKLOG.5.1.7 - propagate generated diagnostic events`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1.8`
-  Status: `pending`
+  Status: `active`
   Goal: Add one recurring symmetric five-backend diagnostic-output conformance gate.
   Dependencies: `.5.1.7`
   Acceptance: One checker drives the neutral native fixtures through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT,
@@ -4917,8 +4954,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0. Planning
-leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, and all five native event seams `.5.1.2-.6`
-are complete. Generated-entrypoint propagation and exact primary projection `.5.1.7` is the sole active frontier.
+leaf `.5.1.0`, ADR `0042` plus neutral executable contract `.5.1.1`, all five native event seams `.5.1.2-.6`, and
+generated/primary projection `.5.1.7` are complete. Recurring symmetric diagnostic admission `.5.1.8` is the sole
+active frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5118,7 +5156,7 @@ are complete. Generated-entrypoint propagation and exact primary projection `.5.
 | 177 | `LUA-BACKEND-PARITY.4.3.9.0` | `done` | Exact 230/16 probe isolates thirteen intentional non-function owners and missing `and`/`or`/`not`. |
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
-| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, and all five native event seams are done; generated/primary `.5.1.7` is active. |
+| 180 | `FUTURE-PARITY-BACKLOG.5.1` | `active` | Planning, neutral contract, five native seams, and generated/primary projection are done; recurring symmetric gate `.5.1.8` is active. |
 | 181 | `FUTURE-PARITY-BACKLOG.5.2` | `pending` / parity prerequisite satisfied | Repair Perl logical lowering and align eager truthiness/arity after diagnostic-output `.5.1`. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
@@ -5140,10 +5178,10 @@ are complete. Generated-entrypoint propagation and exact primary projection `.5.
 | 199 | `FUTURE-PARITY-BACKLOG.5.1.4` | `done` | Dart native parsing uses exact typed parse-scoped events, preserved caller failures, and typed exit. |
 | 200 | `FUTURE-PARITY-BACKLOG.5.1.5` | `done` | Julia native parsing uses exact typed parse-scoped events, preserved caller failures, typed exit, and no helper trace coupling. |
 | 201 | `FUTURE-PARITY-BACKLOG.5.1.6` | `done` | Both Lua ABIs consume 109 neutral assertions with exact caller identity and distinct typed exit. |
-| 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `active` | Propagate sinks through generated APIs and lock quiet canonical primary commands. |
-| 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `pending` | Register one symmetric native/generated/CLI five-backend gate. |
+| 202 | `FUTURE-PARITY-BACKLOG.5.1.7` | `done` | Every generated role propagates the sink and the quiet canonical primary projection passes 5x2x62. |
+| 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `active` | Register one symmetric native/generated/CLI five-backend gate. |
 | 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `pending` | Close public docs, Knowledge Map, capability, and final no-drift state. |
-| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output generated/primary child `.5.1.7` is the current frontier before gate/no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
+| 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; diagnostic-output recurring gate `.5.1.8` is the current frontier before no-drift and the remaining constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
@@ -5770,9 +5808,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking active generated/primary leaf `.5.1.7`. Five-backend capability parity remains 80/0/0. Planning
-  `.5.1.0`, neutral contract `.5.1.1`, and all five native event seams `.5.1.2-.6` are complete; generated/CLI,
-  recurring gate, and public no-drift retain `.5.1.7-.9`.
+- None blocking active recurring-gate leaf `.5.1.8`. Five-backend capability parity remains 80/0/0. Planning
+  `.5.1.0`, neutral contract `.5.1.1`, all five native event seams `.5.1.2-.6`, and generated/CLI `.5.1.7` are
+  complete; recurring gate and public no-drift retain `.5.1.8-.9`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -5785,13 +5823,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.5.1.7` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
+- None. `.5.1.8` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
   prerequisites are satisfied, but their pending trees are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.7` | Focused generated sink/value/event/trace/failure/exit proofs on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; ordinary generated attribution/source metadata/plan regression; direct-`E` calibration root-caused through `call_spec_handler_subst` plus `dump_parser_source`; complete Rust/Dart/Julia/Lua gates; corrected shared CLI 5x2x62; offline 6-complete/2-pending checker with eight mutations; generated-source/capability 80/0/0; canonical CLI 62x2 plus Phase 0 `1..1031`/623s; docs/KM/governance/mdBook/whitespace. | PASS. Every available generated direct/traced role consumes the neutral sink without changing legacy signatures or ordinary outcomes; primary commands remain quiet and phase-trace-only; only `generated_and_primary_cli` completes and recurring `.5.1.8` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.6` | Direct 105/109 baseline; two exact residual repairs; focused 109-assertion neutral Lua consumer over 11 render rows/five invalid arities/six scenarios on both ABIs; all four native aliases; exact sink-failure identity/typed exit/trace separation; complete Lua 177x2 + CLI 61x2 + corpus 105/105; offline 5-complete/3-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/656s; docs/KM/governance/mdBook/whitespace. | PASS. Lua native output consumes the unchanged neutral contract with exact arbitrary caller failure and distinct typed exit; only `lua_native` completes and generated/primary `.5.1.7` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.5` | Raw-call arity/effect validation; 74-assertion neutral Julia consumer over 11 render rows/five invalid arities/six scenarios; all four native aliases; exact sink-failure identity/typed exit/trace separation; complete Julia package + CLI 61x2 + corpus 105/105; offline 4-complete/4-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/616s; docs/KM/governance/mdBook/whitespace. | PASS. Julia native output is caller-owned typed synchronous events with quiet default, exact caller failure preservation, and no low-trace coupling; only `julia_native` completes and Lua `.5.1.6` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.4` | Raw-call arity/effect validation; six-test neutral Dart consumer over 11 render rows/five invalid arities/six scenarios; all four native aliases; exact sink-failure identity/typed exit/trace separation; complete Dart format/analyze + 220 tests + CLI 61x2 + corpus 105/105; offline 3-complete/5-pending checker with eight mutations; canonical CLI 61x2 and Phase 0 `1..1031`/613s; docs/KM/governance/mdBook/whitespace. | PASS. Dart native output is caller-owned typed synchronous events with quiet default and exact caller failure preservation; only `dart_native` completes and Julia `.5.1.5` activates. |
@@ -5940,6 +5979,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.1.7` | `FUTURE-PARITY-BACKLOG.5.1.7 - propagate generated diagnostic events` | Five generated API shapes, exact caller/exit preservation, corrected portable quiet-primary fixture, 5x2x62 proof, rollout ledger, and recurring-gate handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.6` | `FUTURE-PARITY-BACKLOG.5.1.6 - admit Lua diagnostic events` | Exact dual-ABI neutral admission, caller-failure identity, distinct typed exit, rollout ledger, and generated/primary handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.5` | `FUTURE-PARITY-BACKLOG.5.1.5 - add Julia diagnostic event seam` | Exact native Julia events/arity/effects/quietness/failures/typed exit, trace separation, rollout ledger, and Lua handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.4` | `FUTURE-PARITY-BACKLOG.5.1.4 - add Dart diagnostic event seam` | Exact native Dart events/arity/effects/quietness/failures/typed exit, wrapper passthrough, rollout ledger, and Julia handoff. |
@@ -6088,6 +6128,17 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-16`: `.5.1.7` propagates the neutral invocation-local diagnostic sink through every available
+  generated direct/traced role. Perl extends emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust adds paired typed-v1
+  and compatibility functions without changing legacy signatures; Dart and Julia add optional named/keyword
+  sinks; Lua preserves its option-bearing API across generated framing. All retain values, event order, portable
+  trace roles, metadata/plans, ordinary generated-source attribution, exact caller failure, and typed immediate
+  exit. The first quiet-primary fixture reproduced the already known direct-default-rule `E` Perl caveat;
+  `call_spec_handler_subst` was correct while `dump_parser_source` showed that handler path absent. The corrected
+  portable action-edge fixture executes all three helpers and admits only canonical `"visible"` JSON, empty stderr,
+  and status 0 across the five-command default/POSIX 62-case matrix. Only `generated_and_primary_cli` completes in
+  the rollout ledger (6 complete / 2 pending); capability stays 80/0/0 and symmetric recurring gate `.5.1.8`
+  follows.
 - `2026-07-16`: `.5.1.6` admits Lua native diagnostic output against the exact neutral fixture on PUC Lua and
   LuaJIT. The unmodified event design passed 105/109 assertions; only caller-thrown interpreter-error identity and
   ordinary-error classification of `exit_now` drifted. A private sink-failure carrier restores arbitrary caller

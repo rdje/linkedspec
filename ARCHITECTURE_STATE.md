@@ -5,6 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: generated/primary diagnostic-output `.5.1.7` completes the sixth of eight neutral rollout
+  legs. Perl emitted `Execute`/`ExecuteWithTrace`/`Get`, Dart and Julia emitted direct/traced functions, and Lua's
+  option-bearing direct/traced functions now carry the invocation-local sink while preserving ordinary generated
+  attribution, exact arbitrary caller failure, typed immediate exit, values, metadata, plans, and portable trace.
+  Rust adds paired typed-v1 and compatibility direct/traced functions so every legacy signature stays intact;
+  `GeneratedDiagnosticOutputExecutionError` distinguishes generated, compatibility, sink, and exit outcomes.
+  All primary adapters deliberately omit the rich sink. Shared case 62 executes all three helpers but admits only
+  canonical JSON plus newline, empty stderr, and status 0 across five commands and default/POSIX environments;
+  ADR `0024` trace cases remain phase-only. Capability stays 80/0/0, the rollout ledger is 6 complete / 2 pending,
+  and symmetric recurring gate `.5.1.8` is next. Complete backend gates, the 5x2x62 shared matrix, the generated-
+  source checker, and canonical CLI 62x2 plus Phase 0 `1..1031`/623s all pass.
 - `2026-07-16` refresh: Lua capability admission `.8.4` makes Lua the fifth exact backend in the executable
   16-capability census. Every Lua row is `pass` with direct implementation and recurring proof references, so the
   census is 80 pass / 0 partial / 0 gap; generated-source state is independently `pass`. Satisfied Lua-backend and

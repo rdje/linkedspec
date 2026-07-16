@@ -249,4 +249,94 @@ void main() {
     expect(traceText.toString(), contains('dart_runtime:parse'));
     expect(traceText.toString(), isNot(contains(marker)));
   });
+
+  test('generated direct and traced roles preserve diagnostic outcomes', () {
+    const identity = 'diagnostic-output/generated-dart.spec';
+    final source = _programSource(contract, 'ordered_unicode');
+    final parsed = parseSpecWithStagedUserFunctionDefinitions(source);
+    validateSpec(parsed);
+    final compiled = compileSpec(parsed);
+    final plan = buildGeneratedRulePlan(compiled);
+    final expected =
+        (_scenario(contract, 'ordered_unicode_with_sink')['expected']! as Map)
+            .cast<String, Object?>();
+    final outcome = (expected['outcome']! as Map).cast<String, Object?>();
+
+    final events = <RuntimeDiagnosticOutputEvent>[];
+    final value = executeGeneratedParserV1(
+      compiled,
+      plan,
+      'x',
+      identity,
+      diagnosticOutputSink: events.add,
+    );
+    expect(value, outcome['value']);
+    expect(_eventJson(events), expected['events']);
+
+    final tracedEvents = <RuntimeDiagnosticOutputEvent>[];
+    final traced = executeGeneratedParserWithTraceV1(
+      compiled,
+      plan,
+      'x',
+      LinkedSpecTraceConfig.disabled(),
+      identity,
+      diagnosticOutputSink: tracedEvents.add,
+    );
+    expect(traced, value);
+    expect(_eventJson(tracedEvents), expected['events']);
+
+    final failureScenario = _scenario(contract, 'synchronous_sink_failure');
+    final failureSource = _programSource(contract, 'sink_failure');
+    final failureParsed = parseSpecWithStagedUserFunctionDefinitions(
+      failureSource,
+    );
+    validateSpec(failureParsed);
+    final failureCompiled = compileSpec(failureParsed);
+    final failure = _CallerSinkFailure('generated-caller-sink-failure');
+    var invocation = 0;
+    try {
+      executeGeneratedParserV1(
+        failureCompiled,
+        buildGeneratedRulePlan(failureCompiled),
+        'x',
+        identity,
+        diagnosticOutputSink: (event) {
+          invocation += 1;
+          if (invocation == 2) {
+            throw failure;
+          }
+        },
+      );
+      fail('generated caller sink failure returned normally');
+    } on Object catch (error) {
+      expect(identical(error, failure), isTrue);
+    }
+    expect(
+      ((failureScenario['expected']! as Map)['outcome']! as Map)['kind'],
+      'sink_failure',
+    );
+
+    final exitSource = _programSource(contract, 'immediate_exit');
+    final exitParsed = parseSpecWithStagedUserFunctionDefinitions(exitSource);
+    validateSpec(exitParsed);
+    final exitCompiled = compileSpec(exitParsed);
+    final exitEvents = <RuntimeDiagnosticOutputEvent>[];
+    try {
+      executeGeneratedParserV1(
+        exitCompiled,
+        buildGeneratedRulePlan(exitCompiled),
+        'x',
+        identity,
+        diagnosticOutputSink: exitEvents.add,
+      );
+      fail('generated exit returned normally');
+    } on RuntimeExitNow catch (error) {
+      expect(error.status, 23);
+    }
+    expect(
+      _eventJson(exitEvents),
+      (_scenario(contract, 'event_before_immediate_exit')['expected']!
+          as Map)['events'],
+    );
+  });
 }

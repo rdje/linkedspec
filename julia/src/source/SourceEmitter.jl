@@ -15,6 +15,19 @@ end
     GeneratedExecutionFailedCode
 end
 
+struct _GeneratedDiagnosticOutputSinkFailure <: Exception
+    error::Any
+end
+
+function _generated_diagnostic_output_sink(sink)
+    sink === nothing && return nothing
+    return event -> try
+        sink(event)
+    catch error
+        throw(_GeneratedDiagnosticOutputSinkFailure(error))
+    end
+end
+
 const GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"
 const GENERATED_SOURCE_FORMAT = 1
 
@@ -188,6 +201,7 @@ function execute_generated_parser_v1(
     source_identity::AbstractString;
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
 )
     families = validate_generated_rule_plan_v1(compiled, plan, source_identity)
     try
@@ -196,11 +210,16 @@ function execute_generated_parser_v1(
             input;
             top_rule = top_rule,
             trace = trace,
+            diagnostic_output_sink = _generated_diagnostic_output_sink(
+                diagnostic_output_sink,
+            ),
             _generated_families = families,
             _generated_source_identity = source_identity,
         ).value
     catch error
         error isa GeneratedSourceException && rethrow()
+        error isa _GeneratedDiagnosticOutputSinkFailure && throw(error.error)
+        error isa RuntimeExitNow && rethrow()
         rule_label = error isa RuntimeInterpreterException && error.diagnostic !== nothing ?
             error.diagnostic.rule_label : nothing
         family = rule_label === nothing ? nothing : get(families, rule_label, nothing)
@@ -221,6 +240,7 @@ function execute_generated_parser_with_trace_v1(
     source_identity::AbstractString;
     top_rule = nothing,
     stdout_io::IO = stdout,
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
 )
     return execute_generated_parser_v1(
         compiled,
@@ -229,6 +249,7 @@ function execute_generated_parser_with_trace_v1(
         source_identity;
         top_rule = top_rule,
         trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io),
+        diagnostic_output_sink = diagnostic_output_sink,
     )
 end
 
@@ -467,13 +488,18 @@ function validate_plan(actual::AbstractVector{LinkedSpecJulia.GeneratedPlanRow})
     return nothing
 end
 
-function execute(input::AbstractString; top_rule = nothing)
+function execute(
+    input::AbstractString;
+    top_rule = nothing,
+    diagnostic_output_sink = nothing,
+)
     return LinkedSpecJulia.execute_generated_parser_v1(
         _COMPILED_SPEC,
         _GENERATED_PLAN,
         input,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
         top_rule = top_rule,
+        diagnostic_output_sink = diagnostic_output_sink,
     )
 end
 
@@ -482,6 +508,7 @@ function execute_with_trace(
     trace_config::LinkedSpecJulia.LinkedSpecTraceConfig;
     top_rule = nothing,
     stdout_io::IO = stdout,
+    diagnostic_output_sink = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_with_trace_v1(
         _COMPILED_SPEC,
@@ -491,6 +518,7 @@ function execute_with_trace(
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
         top_rule = top_rule,
         stdout_io = stdout_io,
+        diagnostic_output_sink = diagnostic_output_sink,
     )
 end
 
