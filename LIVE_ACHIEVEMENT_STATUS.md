@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.5 — add Julia diagnostic event seam**
+  (DONE — Julia native consumes the neutral event contract; Lua native admission `.5.1.6` is next).
+
+  **Result:** Julia native parse/execute and traced aliases accept an optional typed per-invocation diagnostic
+  sink. Exact arities reject before effects; valid calls evaluate once left-to-right; Unicode call/item events
+  remain structural and separate from trace; absent sinks are quiet; arbitrary caller failures retain exact
+  identity through action/runtime wrappers; and `RuntimeExitNow` is typed immediate control. Omitted
+  `print_each` suffix is now empty. Generated propagation remains `.5.1.7`; capability stays 80/0/0.
+
+  **Proof:** The neutral consumer passes 74 assertions over all 11 render rows, five invalid arities, six
+  scenarios, all four native aliases, trace separation, sink-failure identity, and typed exit. The complete Julia
+  gate passes package tests, primary CLI 61x2, and corpus 105/105. The contract checker reports 4 complete / 4
+  pending and rejects eight drift mutations. Canonical local CI passes primary CLI 61x2 and Phase 0 `1..1031`
+  in 616 seconds. Mutation testing was not run.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.4 — add Dart diagnostic event seam**
   (DONE — Dart native consumes the neutral event contract; Julia native `.5.1.5` is next).
 

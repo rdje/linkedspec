@@ -135,10 +135,11 @@ Three backbone items tracked major structural modernization — all done:
   Diagnostic-output planning `.5.1.0` and neutral contract `.5.1.1` are complete. Perl native `.5.1.2` and Rust
   native `.5.1.3` are admitted rollout legs: both deliver typed Unicode events through optional invocation-local
   caller sinks, remain quiet without one, enforce arity before effects, preserve sink failures, and use typed
-  immediate-exit control. Dart native `.5.1.4` now provides the same quiet parse-scoped typed event seam while
-  preserving exact caller failures outside its ordinary runtime wrapper. The ledger is 3 complete / 5 pending.
-  Julia native `.5.1.5` is next; Lua native, generated/CLI propagation, the recurring five-backend gate, and
-  public no-drift remain `.5.1.6-.9`. Perl logical keyword lowering plus Dart
+  immediate-exit control. Dart native `.5.1.4` and Julia native `.5.1.5` now provide the same quiet parse-scoped
+  typed event seam while preserving exact caller failures outside ordinary runtime wrappers; Julia rich events
+  are also separate from native trace. The ledger is 4 complete / 4 pending. Lua formal native admission,
+  generated/CLI propagation, the recurring five-backend gate, and public no-drift remain `.5.1.6-.9`. Perl
+  logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

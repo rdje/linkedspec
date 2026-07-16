@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.5` — host exception types expose hidden interpreter ownership):
+  Julia's visible drift was one `log_trace_output!` call plus permissive indexing, but caller-owned delivery also
+  crosses `_execute_runtime_action_block!` and `runtime_parse`, both of which reinterpret selected exceptions.
+  Carry a sink failure in a private marker while internal wrappers unwind, explicitly pass the marker and
+  `RuntimeExitNow`, and restore the exact caller object before ordinary structured-runtime attribution. This is
+  required even when the callback throws `RuntimeInterpreterException` itself. Store the callback in the fresh
+  execution context, validate raw `ActionArgument` shape before user-function resolution or argument evaluation,
+  and reuse Julia's existing scalar conversion for neutral boolean/finite-number/null/aggregate rendering. Event
+  delivery replaces—not augments—trace logging, keeping native trace independently configurable. The focused
+  consumer passes 74 assertions and the full Julia gate passes package tests, CLI 61x2, and corpus 105/105. Only
+  native Julia advances; generated APIs remain `.5.1.7`, capability stays 80/0/0, and canonical local CI passes
+  CLI 61x2 plus Phase 0 `1..1031`/616s. Mutation campaigns were not run.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.4` — a caller callback is control flow, not an interpreter failure):
   Dart's visible gap was a three-case `_evaluateValues(...); return null`, but the cross-language contract exposed
   the deeper boundary. `_executeActionBlock` caught every unfamiliar object and `_parse` specially wrapped

@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.5 — add Julia diagnostic event seam
+
+Replaced Julia's low-trace diagnostic-helper transport with exported `RuntimeDiagnosticOutputEvent`,
+`RuntimeDiagnosticOutputSink`, and `RuntimeExitNow` types. Native `runtime_parse`, `runtime_execute`, and both
+traced aliases accept an optional `diagnostic_output_sink`; omitted sinks stay quiet while valid arguments still
+evaluate once left-to-right. `print`/`say` form one exact Unicode event per call and `print_each` forms one event
+per array item from once-evaluated target and decoration.
+
+Raw `ActionArgument` validation now rejects the neutral one-plus/two-or-three positional arities before effects,
+and omitted `print_each` suffixes are empty rather than newlines. Null/aggregate/codeblock fragments, empty and
+wrong-kind targets, and structural parse results match `linkedspec-diagnostic-output-v1`. A private carrier keeps
+arbitrary caller sink failures—including `RuntimeInterpreterException`—out of Julia's action and structured-
+runtime wrappers, then restores the exact object at the public boundary. Typed `RuntimeExitNow` separately
+preserves immediate parser control; rich diagnostic events never enter native trace.
+
+The focused neutral consumer passes 74 assertions over all 11 render rows, five invalid arities, six scenarios,
+all four native aliases, exact sink-failure identity, typed exit, and trace separation. The complete Julia gate
+passes package tests, primary CLI 61x2, and all 105 corpus fixtures. The rollout ledger advances only
+`julia_native` to complete (4 complete / 4 pending); generated sink propagation remains `.5.1.7`, capability
+stays 80/0/0, and Lua formal native admission `.5.1.6` is next. Canonical local CI passes exact CLI 61x2 and
+Phase 0 `1..1031` in 616 seconds. Mutation campaigns were not run.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.4 — add Dart diagnostic event seam
 
 Replaced Dart's diagnostic-helper evaluate-and-discard branch with exported `RuntimeDiagnosticOutputEvent` and

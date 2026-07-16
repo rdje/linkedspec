@@ -1,38 +1,62 @@
 ---
 id: julia-diagnostic-output-helpers
-title: Julia diagnostic output helpers are trace-routed and parse-result neutral
+title: Julia native diagnostic helpers use typed caller-owned per-invocation events
 answers:
   - does Julia support print print_each and say
   - where does Julia diagnostic helper output go
-  - why does Julia simenv now fail on exit_now
-  - why does Julia ds_vhistory return proj foo
-  - what does JULIA-BACKEND-PARITY.6.2.4.2.2 prove
-date: 2026-07-10
+  - how do I capture Julia print say and print_each diagnostic output
+  - what is Julia RuntimeDiagnosticOutputEvent
+  - which Julia runtime methods accept diagnostic_output_sink
+  - is Julia diagnostic output quiet without a sink
+  - how do Julia diagnostic sink failures propagate
+  - what typed outcome does Julia exit_now throw
+  - are Julia diagnostic events part of RuntimeDiagnostic or native trace
+  - why did Julia simenv once fail on exit_now
+  - why did Julia ds_vhistory once return proj foo
+  - what did JULIA-BACKEND-PARITY.6.2.4.2.2 prove
+date: 2026-07-16
 status: current
-tags: [julia, runtime, helpers, diagnostic-output, trace, corpus, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.4.2.2 adds eager Julia runtime execution for print, print_each, and say. Messages emit through a configured low-level LinkedSpecTraceEmitter and never enter RuntimeParseResult output; absent or disabled tracing stays quiet. Focused runtime coverage locks concatenation, say newline behavior, print_each prefix/suffix array walking, and unchanged return value. simenv_multiline_value advances from unsupported print to unsupported exit_now; ds_vhistory_version_entry advances to the known expected-null versus actual-/proj/foo leading-trivia output mismatch. Seven permanent corpus assertions reject renewed unsupported-print failures. The full package passes with 780 assertions, the complete shipped-smoke window remains 18/31, and status is runtime-corpus-diagnostic-output."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case simenv_multiline_value --case ds_vhistory_version_entry || true"
+tags: [Julia, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
+evidence: "FUTURE-PARITY-BACKLOG.5.1.5 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. diagnostic_output_contract_test.jl consumes all linkedspec-diagnostic-output-v1 render, arity, ordering, quiet, wrong-kind, sink-failure, and exit scenarios and proves trace separation. tools/run_julia_local.sh passes package tests, primary CLI 61x2, and 105/105 corpus fixtures."
+reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnostic_output_sink' julia/src julia/test/diagnostic_output_contract_test.jl"
 ---
 
-Julia evaluates every diagnostic-output argument normally before applying the helper:
+Julia callers install a sink for one native invocation:
 
-- `print(...)` concatenates values without adding a newline.
-- `say(...)` concatenates values and adds a newline.
-- `print_each(array(items), prefix, suffix?)` emits one prefixed/suffixed item at a time; the default suffix is a
-  newline.
+```julia
+events = RuntimeDiagnosticOutputEvent[]
+result = runtime_parse(
+    engine,
+    input;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+```
 
-The helpers return `nothing` and never append to the parser accumulator. Julia routes their human-facing messages
-through the configured low-level trace sink, so traced callers can capture or route the diagnostics while ordinary
-and corpus execution remains quiet.
+`runtime_parse`, `runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace` accept the
+optional callback. Omitting it keeps valid calls eager and quiet. Every event has exact `helper_name`, current
+`rule_label`, and Unicode `message` fields; `to_json(event)` emits the same neutral record.
 
-This leaf deliberately advances rather than closes its two shipped fixtures. At the `.6.2.4.2.2` boundary,
-`simenv_multiline_value` reached unsupported `exit_now`. `.6.2.4.5.1` has since implemented that terminating
-control, and `.6.2.4.5.2` has since implemented its earlier statement-form mutation. Simenv now passes exact
-oracle output.
-`ds_vhistory_version_entry` executes to output comparison and returns `/proj/foo` where the checked oracle expects
-`null`; the existing cross-backend evidence attributes that boundary to public-parser leading-trivia handling, not
-diagnostic output or indexed access. `.6.2.4.5.3` has since mirrored that public-entry boundary in Julia, so
-history now passes without weakening direct access.
+Arity rejects before argument effects. Valid calls evaluate once left-to-right. `print` and `say` deliver one
+event per call; `print_each` evaluates target/prefix/suffix once and delivers one event per array item. An omitted
+suffix is empty. Null and aggregates render empty, booleans render `1`/`0`, empty and wrong-kind targets are
+eventless, and helper results remain `nothing` and structural.
 
-Related facts: [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
-[[ds-vhistory-leading-newline-oracle-boundary]], [[julia-controlled-corpus-execution]].
+Sink invocation is synchronous. A private transport marker carries any thrown object through Julia's action-
+block and runtime-diagnostic wrappers, then restores that exact object to the caller. This includes a sink that
+throws `RuntimeInterpreterException` itself. `RuntimeExitNow(status)` is a separate typed immediate outcome, so
+preceding events arrive and later actions do not run. Neither rich event data nor sink failures are
+`RuntimeDiagnostic` or native trace records.
+
+Before `.5.1.5`, Julia sent helper messages through low trace, accepted permissive arities, gave omitted
+`print_each` suffixes a newline, and wrapped `exit_now` as `RuntimeInterpreterException`. Those facts remain
+historical root-cause evidence; they are not current native behavior. Generated Julia entrypoint propagation
+remains owned by `.5.1.7`.
+
+The earlier `JULIA-BACKEND-PARITY.6.2.4.2.2` slice only added eager trace-routed helpers: simenv then advanced to
+unsupported `exit_now`, while ds_vhistory exposed a separate leading-trivia `/proj/foo` result. Later Julia
+exit, statement-mutation, and public-entry repairs closed both fixture paths. They remain useful implementation
+history, but the current 105/105 corpus no longer has either failure.
+
+Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
+[[julia-diagnostics-trace-boundary]], [[dart-diagnostic-output-events]], [[rust-diagnostic-output-events]],
+[[perl-diagnostic-output-events]], [[lua-diagnostic-output-events]].

@@ -126,6 +126,31 @@ detail, and a neutral `to_json(...)` projection. `create_engine(...)` carries th
 into later runtime diagnostics. The primary CLI delegates named/file sources to this API but keeps its stable
 phase-only process errors and deferred input-file order.
 
+## Native Diagnostic Output
+
+Parser-authored `print`, `say`, and `print_each` messages use a caller-owned event channel that is separate from
+parse results and trace. Install a callback for one invocation with the `diagnostic_output_sink` keyword:
+
+```julia
+events = RuntimeDiagnosticOutputEvent[]
+result = runtime_parse(
+    engine,
+    input;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+```
+
+Each event exposes exact `helper_name`, current `rule_label`, and Unicode `message` fields; `to_json(event)` emits
+the same three-key record. `runtime_parse`, `runtime_execute`, `runtime_parse_with_trace`, and
+`runtime_execute_with_trace` accept the optional callback. Omitting it stays quiet without skipping valid-call
+argument effects.
+
+Arity is validated before any argument evaluates: `print`/`say` require at least one positional argument and
+`print_each` requires two or three. Valid arguments evaluate once left-to-right. A callback failure propagates as
+the exact caller object, including `RuntimeInterpreterException`, and aborts later items/actions. `exit_now`
+throws `RuntimeExitNow(status)` after any preceding event. Neither event data nor callback failures become
+`RuntimeDiagnostic` or native trace records. Generated entrypoint propagation remains separately pending.
+
 ## Native Trace Propagation
 
 Julia uses one caller-owned `LinkedSpecTraceEmitter` across frontend, compiler, staged, and runtime phases. Pass it
@@ -219,7 +244,8 @@ cursor state, separate entry/local match registers, and zero-progress detection.
 accepts the currently required Python-style named captures, POSIX classes, inline/scoped flags, possessive
 quantifiers, and recursive patterns directly.
 `src/runtime/Interpreter.jl` exposes `LinkedSpecRuntimeEngine`, `runtime_parse(...)`, `runtime_execute(...)`,
-`RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. It executes compiled default,
+`RuntimeParseResult`, `RuntimeLifecycleEvent`, `RuntimeInterpreterException`, `RuntimeDiagnosticOutputEvent`,
+`RuntimeDiagnosticOutputSink`, and `RuntimeExitNow`. It executes compiled default,
 AND, OR, and bounded/unbounded repetition families; action/blind child edges; lifecycle order; `retv`; explicit
 returns; narrow array accumulators/capture reads; recursion guards; and zero-progress cutoffs in seek or consume
 mode. The embedded ActionIR evaluator now preserves scalar/array/hash/null/boolean/number shapes through separate

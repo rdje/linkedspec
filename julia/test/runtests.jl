@@ -15,6 +15,7 @@ include("variadic_user_function_contract_test.jl")
 include("uniform_binding_contract_test.jl")
 include("punctuation_light_zero_arg_contract_test.jl")
 include("complete_named_mark_contract_test.jl")
+include("diagnostic_output_contract_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(
@@ -2387,18 +2388,15 @@ Top::
    return("ok")
  }
 """)
-    diagnostic_io = IOBuffer()
-    diagnostic_trace = LinkedSpecTraceEmitter(
-        trace_config_enabled(LinkedSpecTraceLow);
-        stdout_io = diagnostic_io,
+    diagnostic_events = RuntimeDiagnosticOutputEvent[]
+    diagnostic_result = runtime_parse(
+        diagnostic_output,
+        "x";
+        diagnostic_output_sink = event -> push!(diagnostic_events, event),
     )
-    diagnostic_result = runtime_parse(diagnostic_output, "x"; trace = diagnostic_trace)
-    diagnostic_text = String(take!(diagnostic_io))
-    @test diagnostic_result.value == "ok" &&
-        occursin("prefix=x", diagnostic_text) &&
-        occursin(" line", diagnostic_text) &&
-        occursin("item:a!", diagnostic_text) &&
-        occursin("item:b!", diagnostic_text)
+    @test diagnostic_result.value == "ok"
+    @test [event.message for event in diagnostic_events] ==
+        ["prefix=x", " line\n", "item:a!", "item:b!"]
 
     explicit_exit = runtime_engine(raw"""
 Top::
@@ -2414,11 +2412,8 @@ Top::
     catch error
         error
     end
-    @test explicit_exit_error isa RuntimeInterpreterException
-    @test explicit_exit_error.message == "exit_now(7) in rule Top"
-    @test explicit_exit_error.diagnostic.stage == "runtime_execution"
-    @test explicit_exit_error.diagnostic.top_rule == "Top"
-    @test explicit_exit_error.diagnostic.rule_label == "Top"
+    @test explicit_exit_error isa RuntimeExitNow
+    @test explicit_exit_error.status == 7
 
     default_exit = runtime_engine(raw"""
 Top::
@@ -2431,8 +2426,8 @@ Top::
     catch error
         error
     end
-    @test default_exit_error isa RuntimeInterpreterException
-    @test default_exit_error.message == "exit_now(1) in rule Top"
+    @test default_exit_error isa RuntimeExitNow
+    @test default_exit_error.status == 1
 
     substitution_helpers = runtime_engine(raw"""
 Top::

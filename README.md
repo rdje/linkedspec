@@ -183,9 +183,10 @@ This `README.md` is the **single entry point** to the project.
   Diagnostic-output audit `.5.1.0` has now separated arity/evaluation, formatting, transport, generated/CLI, and
   host-process-control drift without changing behavior. Neutral executable contract `.5.1.1` now adopts ADR
   `0042` plus one checked fixture with exact arity/evaluation/rendering/events/sink/exit/generated/CLI semantics.
-  Perl `.5.1.2`, Rust `.5.1.3`, and Dart `.5.1.4` now consume its native contract through quiet optional caller
-  sinks, exact typed events, preserved caller failures, and typed immediate exit; the ledger is 3 complete / 5
-  pending. Julia `.5.1.5` is next before Lua native alignment, generated propagation, recurring admission, and public no-drift;
+  Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, and Julia `.5.1.5` now consume its native contract through quiet
+  optional caller sinks, exact typed events, preserved caller failures, and typed immediate exit; the ledger is 4
+  complete / 4 pending. Lua native admission `.5.1.6` is next before generated propagation, recurring admission,
+  and public no-drift;
   Perl logical keyword-lowering plus five-backend truthiness/arity
   normalization remains separately owned by `.5.2` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91

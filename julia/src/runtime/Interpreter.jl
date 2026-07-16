@@ -48,6 +48,24 @@ RuntimeInterpreterException(message::AbstractString; diagnostic = nothing) =
 
 Base.showerror(io::IO, error::RuntimeInterpreterException) = print(io, error.message)
 
+struct RuntimeDiagnosticOutputEvent
+    helper_name::String
+    rule_label::String
+    message::String
+end
+
+const RuntimeDiagnosticOutputSink = Function
+
+struct RuntimeExitNow <: Exception
+    status::Int
+end
+
+Base.showerror(io::IO, error::RuntimeExitNow) = print(io, "RuntimeExitNow($(error.status))")
+
+struct _RuntimeDiagnosticOutputSinkFailure <: Exception
+    error::Any
+end
+
 struct RuntimeLifecycleEvent
     rule_label::String
     lifecycle::String
@@ -116,6 +134,7 @@ mutable struct _RuntimeExecutionContext
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
     trace::Union{Nothing,LinkedSpecTraceEmitter}
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink}
     generated_families::Union{Nothing,Dict{String,String}}
     generated_source_identity::Union{Nothing,String}
 end
@@ -125,6 +144,7 @@ function _RuntimeExecutionContext(
     top_rule::AbstractString,
     trace::Union{Nothing,LinkedSpecTraceEmitter},
     ;
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
     generated_families = nothing,
     generated_source_identity = nothing,
 )
@@ -146,6 +166,7 @@ function _RuntimeExecutionContext(
         RuntimeLifecycleEvent[],
         String(top_rule),
         trace,
+        diagnostic_output_sink,
         generated_families === nothing ?
             nothing : Dict{String,String}(generated_families),
         generated_source_identity === nothing ?
@@ -280,6 +301,7 @@ function runtime_parse(
     input::AbstractString;
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
     _generated_families = nothing,
     _generated_source_identity = nothing,
 )
@@ -288,6 +310,7 @@ function runtime_parse(
         input,
         label,
         trace;
+        diagnostic_output_sink = diagnostic_output_sink,
         generated_families = _generated_families,
         generated_source_identity = _generated_source_identity,
     )
@@ -314,7 +337,13 @@ function runtime_parse(
             "matched=$(parse_result.matched) cursor=$(parse_result.cursor_codeunit)"
         return parse_result
     catch error
-        if error isa RuntimeInterpreterException
+        if error isa _RuntimeDiagnosticOutputSinkFailure
+            trace_exit_details = "error=diagnostic_output_sink"
+            throw(error.error)
+        elseif error isa RuntimeExitNow
+            trace_exit_details = "error=exit_now($(error.status))"
+            rethrow()
+        elseif error isa RuntimeInterpreterException
             wrapped = _with_runtime_diagnostic(
                 error,
                 _runtime_diagnostic(
@@ -343,7 +372,14 @@ runtime_execute(
     input::AbstractString;
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
-) = runtime_parse(engine, input; top_rule = top_rule, trace = trace)
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+) = runtime_parse(
+    engine,
+    input;
+    top_rule = top_rule,
+    trace = trace,
+    diagnostic_output_sink = diagnostic_output_sink,
+)
 
 function runtime_parse_with_trace(
     engine::LinkedSpecRuntimeEngine,
@@ -351,9 +387,16 @@ function runtime_parse_with_trace(
     config::LinkedSpecTraceConfig;
     top_rule = nothing,
     stdout_io::IO = stdout,
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
 )
     trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io)
-    return runtime_parse(engine, input; top_rule = top_rule, trace = trace)
+    return runtime_parse(
+        engine,
+        input;
+        top_rule = top_rule,
+        trace = trace,
+        diagnostic_output_sink = diagnostic_output_sink,
+    )
 end
 
 function runtime_execute_with_trace(
@@ -362,6 +405,7 @@ function runtime_execute_with_trace(
     config::LinkedSpecTraceConfig;
     top_rule = nothing,
     stdout_io::IO = stdout,
+    diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
 )
     return runtime_parse_with_trace(
         engine,
@@ -369,6 +413,7 @@ function runtime_execute_with_trace(
         config;
         top_rule = top_rule,
         stdout_io = stdout_io,
+        diagnostic_output_sink = diagnostic_output_sink,
     )
 end
 
@@ -1073,7 +1118,8 @@ function _execute_runtime_action_block!(
     catch error
         if error isa _RuntimeActionReturn
             return error
-        elseif error isa _RuntimeActionNext || error isa RuntimeInterpreterException
+        elseif error isa _RuntimeActionNext || error isa RuntimeInterpreterException ||
+               error isa RuntimeExitNow || error isa _RuntimeDiagnosticOutputSinkFailure
             rethrow()
         end
         throw(RuntimeInterpreterException(
@@ -2029,14 +2075,27 @@ function _evaluate_runtime_call!(
     statement_context::Bool,
 )
     keyword_arg_count = count(arg -> arg isa ActionKeywordArgument, call.args)
+    args = ActionExpr[getfield(arg, :value) for arg in call.args if arg isa ActionPositionalArgument]
+    helper_name = canonical_action_helper_name(call.name)
+
+    if helper_name in _RUNTIME_DIAGNOSTIC_OUTPUT_HELPER_NAMES
+        _validate_runtime_diagnostic_output_arity!(
+            engine,
+            call,
+            helper_name,
+            args,
+            keyword_arg_count,
+            context,
+            rule_label,
+        )
+    end
+
     if has_user_function_name(engine.compiled_spec.function_registry, call.name) && keyword_arg_count > 0
         throw(RuntimeInterpreterException(
             "user function '$(call.name)' accepts positional arguments only, " *
             "got $keyword_arg_count keyword argument(s) in rule $rule_label",
         ))
     end
-    args = ActionExpr[getfield(arg, :value) for arg in call.args if arg isa ActionPositionalArgument]
-    helper_name = canonical_action_helper_name(call.name)
 
     if helper_name == "with" && call.trailing_block_arg
         return _call_runtime_with_trailing_block!(
@@ -5074,14 +5133,48 @@ function _runtime_diagnostic_string(value)
     return scalar === nothing ? "" : scalar
 end
 
+function _validate_runtime_diagnostic_output_arity!(
+    engine,
+    call,
+    helper_name,
+    args,
+    keyword_arg_count,
+    context,
+    rule_label,
+)
+    positional_count = length(args)
+    expected = helper_name == "print_each" ?
+        "2 or 3 positional arguments" : "at least 1 positional argument"
+    valid_count = helper_name == "print_each" ?
+        positional_count in (2, 3) : positional_count >= 1
+    if valid_count && keyword_arg_count == 0 && !call.trailing_block_arg
+        return nothing
+    end
+
+    detail = "diagnostic helper '$helper_name' expects $expected, got " *
+        "$positional_count positional and $keyword_arg_count keyword argument(s) " *
+        "in rule $rule_label"
+    throw(RuntimeInterpreterException(
+        detail;
+        diagnostic = _runtime_context_diagnostic(
+            engine,
+            context;
+            stage = "helper_arity_mismatch",
+            summary = "Julia runtime diagnostic helper arity mismatch",
+            detail = detail,
+            rule_label = rule_label,
+        ),
+    ))
+end
+
 function _emit_runtime_diagnostic_output!(context, helper_name, rule_label, message)
-    if context.trace !== nothing
-        log_trace_output!(
-            context.trace,
-            LinkedSpecTraceLow,
-            message,
-            "helper=$helper_name rule=$rule_label",
-        )
+    if context.diagnostic_output_sink !== nothing
+        event = RuntimeDiagnosticOutputEvent(helper_name, rule_label, message)
+        try
+            context.diagnostic_output_sink(event)
+        catch error
+            throw(_RuntimeDiagnosticOutputSinkFailure(error))
+        end
     end
     return nothing
 end
@@ -5089,8 +5182,8 @@ end
 function _call_runtime_diagnostic_output_helper!(helper_name, values, context, rule_label)
     if helper_name == "print_each"
         items = !isempty(values) && first(values) isa AbstractVector ? first(values) : Any[]
-        prefix = length(values) >= 2 ? _runtime_diagnostic_string(values[2]) : ""
-        suffix = length(values) >= 3 ? _runtime_diagnostic_string(values[3]) : "\n"
+        prefix = _runtime_diagnostic_string(values[2])
+        suffix = length(values) == 3 ? _runtime_diagnostic_string(values[3]) : ""
         for item in items
             _emit_runtime_diagnostic_output!(
                 context,
@@ -5123,7 +5216,7 @@ function _call_runtime_exit_now!(engine, args, context, rule_label, current_edge
         )
         something(_runtime_int(value), 1)
     end
-    throw(RuntimeInterpreterException("exit_now($status) in rule $rule_label"))
+    throw(RuntimeExitNow(status))
 end
 
 function _runtime_codeunit_slice(input::String, start_codeunit::Int, end_codeunit::Int)
@@ -5707,6 +5800,12 @@ function to_json(diagnostic::RuntimeDiagnostic)
     end
     return value
 end
+
+to_json(event::RuntimeDiagnosticOutputEvent) = Dict{String,Any}(
+    "helper_name" => event.helper_name,
+    "rule_label" => event.rule_label,
+    "message" => event.message,
+)
 
 function to_json(error::RuntimeInterpreterException)
     value = Dict{String,Any}("message" => error.message)

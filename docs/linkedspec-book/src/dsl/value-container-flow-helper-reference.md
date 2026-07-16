@@ -1470,6 +1470,23 @@ stack instead of letting action or runtime wrappers reinterpret it; `RuntimeExit
 immediate-exit outcome. `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` accept the sink. Generated
 Dart parser functions remain separately owned by `.5.1.7`.
 
+Julia exposes the sink as an optional keyword on its native parse and traced aliases:
+
+```julia
+events = RuntimeDiagnosticOutputEvent[]
+result = runtime_parse(
+    engine,
+    input;
+    diagnostic_output_sink = event -> push!(events, event),
+)
+```
+
+Each event exposes `helper_name`, `rule_label`, and `message`; `to_json(event)` returns the exact neutral record.
+Omitting `diagnostic_output_sink` is quiet. Callback failures retain exact object identity through Julia's
+action/runtime wrappers, and `RuntimeExitNow.status` is separate immediate control. `runtime_parse`,
+`runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace` accept the sink. Generated Julia
+parser functions remain separately owned by `.5.1.7`.
+
 Native rollout is only partly aligned:
 
 | Backend | Current state or caveat |
@@ -1477,15 +1494,16 @@ Native rollout is only partly aligned:
 | Perl | Native execution consumes the neutral contract: exact arities are rejected before effects, valid arguments evaluate once left-to-right, typed Unicode events use the parse-scoped optional sink, no sink is quiet, sink failures retain identity, and `exit_now` is typed parser control rather than host process termination. Generated-entrypoint propagation remains owned by `.5.1.7`. |
 | Rust | Native top/direct-value execution consumes the neutral contract through an optional typed sink; no sink is quiet, failures and exit stay typed, and generated sink propagation remains `.5.1.7`. |
 | Dart | Native parse/execute and traced aliases consume the neutral contract through an optional typed sink; no sink is quiet, caller failures and exit preserve their types, and generated sink propagation remains `.5.1.7`. |
-| Julia | Concatenates into low trace records, accepts permissive arities, and gives an omitted `print_each` suffix a newline. |
+| Julia | Native parse/execute and traced aliases consume the neutral contract through an optional typed sink; no sink is quiet, caller failures and exit preserve their types, rich events stay out of native trace, and generated propagation remains `.5.1.7`. |
 | Lua | Uses typed caller-owned events, exact one-plus/two-or-three arities, once-only evaluation, and quiet default execution; formal admission against the neutral fixture remains `.5.1.6`. |
 
 The pre-repair Perl lowering placed stateful prefix and suffix expressions inside a host `foreach`, so two items
 advanced each effect twice. Native Perl now snapshots all valid-call arguments before event delivery; that old
 result remains root-cause evidence, not portable behavior. Planning leaf `FUTURE-PARITY-BACKLOG.5.1.0` measures
 the mechanisms; neutral leaf `.5.1.1` ratifies ADR `0042` plus 11 rendering rows, five invalid arities, and six
-semantic scenarios; Perl `.5.1.2`, Rust `.5.1.3`, and Dart `.5.1.4` are complete native rollout legs. Leaves
-`.5.1.5-.9` retain the other two native backends, generated/CLI propagation, a symmetric recurring gate, and public no-drift. Until
+semantic scenarios; Perl `.5.1.2`, Rust `.5.1.3`, Dart `.5.1.4`, and Julia `.5.1.5` are complete native rollout
+legs. Leaves `.5.1.6-.9` retain Lua formal admission, generated/CLI propagation, a symmetric recurring gate, and
+public no-drift. Until
 those leaves close, supply an explicit `print_each` suffix and do not depend on diagnostic routing, invalid arity,
 or side-effect counts across all backends.
 
