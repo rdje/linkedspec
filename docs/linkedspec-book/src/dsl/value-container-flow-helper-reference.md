@@ -1129,16 +1129,29 @@ Boolean helpers make branch conditions portable and analyzable.
 | `or(condition, condition, ...)` | any condition may pass. |
 | `not(condition)` | invert one condition. |
 
-These are eager value helpers: every argument is evaluated before truthiness is composed. They do not short-
-circuit side effects. Use structured or inline `if`/`switch` when an unselected expression must remain unevaluated.
+The intended portable contract treats these as eager boolean value helpers: every valid argument evaluates once
+left-to-right before truthiness is composed. They are distinct from lazy structured or inline `if`/`switch`, which
+authors should use when an unselected expression must remain unevaluated. The exact arities and truth table remain
+under neutral policy leaf `FUTURE-PARITY-BACKLOG.5.2.1`; current programs must not infer them from a host language.
 
-Current implementation status (2026-07-15): Rust and Julia execute this eager shape; Lua `.4.3.9.1` now does too
-after exhaustive audit `.4.3.9.0` isolated the exact three-name gap. Lua's complete native helper closeout then
-passes 125/125 on both ABIs with exact all-name ownership. Dart currently returns
-early after a decisive operand and gives empty `and()` true, so it is not yet the documented eager shape. Direct Perl
-toolbox probes expose a separate keyword-precedence lowering defect for `return(and(...))` / `return(or(...))`.
-`FUTURE-PARITY-BACKLOG.5.2` owns those evaluation/reference repairs plus truthiness and arity normalization; use
-the explicit predicates above when authoring a currently portable condition at a disputed truthiness boundary.
+Current implementation status (2026-07-16):
+
+| Backend | Current evaluation | Empty `and/or/not` | `"0"` / `"false"` truth | Empty aggregates |
+| --- | --- | --- | --- | --- |
+| Perl | conditions lower `and/or` to lazy host operators; direct logical values are raw/broken | direct calls broken | false / true | true |
+| Rust | eager once left-to-right | false / false / true | false / false | false |
+| Dart | `and/or` short-circuit; `not` evaluates only its first argument | true / false / true | true / true | false |
+| Julia | eager once left-to-right | false / false / true | true / true | false |
+| Lua | eager once left-to-right | false / false / true | false / true | true |
+
+This is three current truthiness profiles, not one reference/interpreter split. Rust uniquely treats ordinary
+nonempty `"false"` as false; Dart/Julia use nonempty-string truth; Perl/Lua share the `"0"` and empty-aggregate
+boundaries. Rust, Dart, Julia, and Lua generated execution matches each native implementation, so emission is not
+the source of the difference. Perl's canonical descriptor has no logical-expression node: conditions lower through
+`FlowExpr`, while direct return/assignment/receiver calls remain raw keyword forms. Planning audit `.5.2.0`
+dependency-orders neutral policy, five backend repairs, generated/primary projection, a recurring gate, and public
+no-drift under `.5.2.1-.9`. Until those land, use explicit predicates at disputed boundaries and do not put
+side-effecting expressions after a decisive logical operand in portable `.spec` files.
 
 Examples:
 

@@ -106,7 +106,10 @@ public no-drift `.5.1.9` are complete at 8 complete / 0 pending. Every emitted d
 idiomatic optional or paired sink without changing legacy signatures, all five primary commands remain quiet
 under the shared 62-case default/POSIX matrix, and one strict driver composes all six native/generated consumers
 plus capability/generated-source/corpus ledgers. Sixteen authoritative documents, nine forbidden stale claims,
-and 20 drift mutations lock the public contract. Parent `.5.1` is closed; logical truthiness `.5.2` is active.
+and 20 drift mutations lock the public contract. Parent `.5.1` is closed; logical audit `.5.2.0` is complete. It
+separates lazy condition-only Perl lowering and broken direct values, Dart short-circuiting, eager Rust/Julia/Lua,
+and three truthiness profiles before neutral/backend/generated/gate/public leaves `.5.2.1-.9` change behavior;
+executable neutral policy `.5.2.1` is active.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`

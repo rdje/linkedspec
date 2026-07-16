@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.0` — multiple implementations are executable specification probes):
+  Rewriting the same algorithm in several languages has value beyond portability. Each host forces implicit
+  decisions into observable behavior: evaluation order, arity, truth conversion, error boundaries, generated
+  projection, and continuation composition. This audit found three truthiness profiles where the backlog had
+  described a simpler drift, and found that Perl itself has two logical mechanisms rather than one reference
+  helper: lazy condition lowering and raw/broken value calls. Rust's nonempty `"false"` rule is a third profile;
+  Dart's short-circuiting and empty `and()` are independent of truthiness; generated execution faithfully repeats
+  native differences. AI makes producing and probing these implementations cheap, but the durable gain comes from
+  using disagreements to write one neutral executable contract and an omission-checked cross-language gate.
+  `.5.2.1-.9` now encode that dependency order. No behavior changed and no mutation campaign ran.
+  Focused Perl 4, Rust 137, Dart 60, complete Julia, and dual-ABI Lua 177/177 proof passes; canonical local CI
+  passes reference CLI 62x2 and Phase 0 `1..1031`.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.1.9` — executable parity must include the explanation users copy):
   Reimplementing one algorithm in several languages is an unusually strong specification probe: different type,
   exception, callback, and generated-code boundaries expose assumptions that one implementation can hide. But
@@ -2617,10 +2630,11 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   flags still fail closed. Centralizing this for predicate and split paths prevents per-helper drift and preserves
   the invalid-pattern false/empty contract.
 
-- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.1 — eager logical helpers):
-  `and`/`or`/`not` are value helpers, not lazy control-flow constructs: Perl call evaluation and Rust both evaluate
-  every argument before boolean composition. Julia now does the same through `_runtime_truthy`; lazy branches
-  remain the responsibility of `if`/`switch`. The portmap constant residual exposed a separate compatibility seam:
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.1 — eager logical helpers; Perl comparison corrected 2026-07-16):
+  Julia and Rust evaluate every `and`/`or`/`not` argument before boolean composition. Julia does so through
+  `_runtime_truthy`; lazy branches remain the responsibility of `if`/`switch`. The later `.5.2.0` audit corrected
+  this note's former Perl comparison: current Perl conditions use lazy host operators and direct logical values
+  remain raw/broken. The portmap constant residual exposed a separate compatibility seam:
   helper regex compilers must ignore Perl's compile-once `o` flag while retaining meaningful portable flags.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.1 — anonymous capture boundaries):

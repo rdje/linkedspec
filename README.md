@@ -192,8 +192,11 @@ This `README.md` is the **single entry point** to the project.
   commands still pass the shared 62 cases under default and POSIX environments. Public no-drift `.5.1.9` now
   locks 16 authoritative documents, nine forbidden stale claims, extensive native/generated examples, and 20
   semantic/topology/public-admission mutations; the ledger is 8 complete / 0 pending and parent `.5.1` is closed.
-  Perl logical keyword-lowering plus five-backend truthiness/arity normalization is the active `.5.2` frontier
-  before structured-format execution.
+  Planning audit `.5.2.0` splits Perl logical lowering plus five-backend truthiness/arity normalization before
+  behavior changes. It finds lazy condition-only Perl operators versus broken direct values, Dart short-circuiting,
+  eager Rust/Julia/Lua helpers, and three distinct truthiness profiles. Neutral/backend/generated/gate/public
+  leaves `.5.2.1-.9` are dependency-ordered; `.5.2.0` is complete and executable neutral contract `.5.2.1` is
+  active before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

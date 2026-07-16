@@ -1253,8 +1253,10 @@ table because its runtime behavior is to terminate the parser process.
   condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
-  fluent `.return(...)` value positions. Scalar `"0"` and empty-aggregate condition truthiness still differ;
-  `FUTURE-PARITY-BACKLOG.5` owns normalization.
+  fluent `.return(...)` value positions. Logical audit `.5.2.0` finds three current condition profiles: Perl/Lua
+  make scalar `"0"` false and empty aggregates true; Dart/Julia make all nonempty strings true and empty
+  aggregates false; Rust additionally makes nonempty scalar `"false"` false. `FUTURE-PARITY-BACKLOG.5.2.1-.9`
+  own neutral policy and five-backend normalization.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

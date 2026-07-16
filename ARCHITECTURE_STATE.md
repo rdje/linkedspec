@@ -5,6 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: planning audit `FUTURE-PARITY-BACKLOG.5.2.0` decomposes logical normalization before
+  behavior. Toolbox, descriptor, source, native, and generated probes expose two Perl mechanisms: conditions lower
+  through lazy host `&&`/`||`/`!`, while direct return/assignment/receiver logical values remain raw/broken and
+  `not(false, true)` can lose its first token as a legacy optional scope. Rust/Julia/Lua eagerly evaluate all
+  arguments, Dart short-circuits, and current empty calls differ. Truthiness has three profiles rather than two:
+  Perl/Lua (`"0"` false, empty aggregates true), Dart/Julia (all nonempty strings true, empty aggregates false),
+  and Rust (`"0"` and `"false"` false, empty aggregates false). Generated execution matches native behavior on
+  Rust, Dart, Julia, and both Lua ABIs, so neutral contract `.5.2.1` must precede backend `.2-.6`, generated/
+  primary `.7`, recurring gate `.8`, and public no-drift `.9`. This audit changes no runtime semantics.
+  Focused Perl 4, Rust 137, Dart 60, complete Julia, and dual-ABI Lua 177/177 proof passes; canonical local CI
+  passes reference CLI 62x2 and Phase 0 `1..1031`.
 - `2026-07-16` refresh: public diagnostic-output no-drift `.5.1.9` closes the eight-leg normalization program.
   The neutral contract now identifies 16 authoritative public documents and nine exact stale-current claims; the
   independent checker verifies every required contract marker and rejects 20 semantic, topology, documentation,

@@ -225,6 +225,12 @@ Important nuance:
 - `or(scalar(on), scalar(off))` -> `(($on) || ($off))`
 - `and(scalar(enabled), scalar(flag))` -> `(($enabled) && ($flag))`
 - `not(scalar(off))` -> `(!($off))`
+
+These three mappings currently describe condition-expression lowering only. `and`/`or` therefore inherit Perl's
+host short-circuit behavior. Direct logical values in return, assignment, nested, and receiver positions still
+remain raw keyword-call text and can miscompile or return `undef`; legacy optional-scope stripping can also turn
+`not(false, true)` into a negation of only the second argument. Planning audit
+`FUTURE-PARITY-BACKLOG.5.2.0` records the mechanism; `.5.2.1-.2` own the neutral contract and typed Perl repair.
 - `is_defined(retv["content"])` -> `defined($retv->{"content"})`
 - `is_undefined(retv["type"])` -> `(!defined($retv->{"type"}))`
 - `is_defined(coalesce(retv["type"], scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`

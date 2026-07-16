@@ -145,8 +145,12 @@ Three backbone items tracked major structural modernization — all done:
   generated consumers, selected quiet 5x2x1 projection, and generated-source/capability/corpus ledgers under one
   topology-checked driver; the unchanged default matrix remains 5x2x62. Public no-drift `.5.1.9` locks 16
   authoritative documents, nine forbidden stale claims, five-backend native/generated examples, and 20 drift
-  mutations. The ledger is 8 complete / 0 pending and parent `.5.1` is closed. Perl logical keyword lowering plus Dart
-  evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s
+  mutations. The ledger is 8 complete / 0 pending and parent `.5.1` is closed. Completed planning audit `.5.2.0` splits
+  Perl logical keyword lowering plus Dart evaluation/empty-`and` and five-backend truthiness/arity drift before
+  behavior. It proves Perl condition-only laziness versus broken direct values, Dart short-circuiting, eager
+  Rust/Julia/Lua execution, and three truthiness profiles; `.5.2.1-.9` own neutral policy, each backend,
+  generated/primary projection, recurring proof, and public no-drift; executable neutral policy `.5.2.1` is active.
+  This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
   and outward descriptor v3 are current in Lua; first-class callable block values remain `.11.7`;

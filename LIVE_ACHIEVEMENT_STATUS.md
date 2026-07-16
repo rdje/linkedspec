@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.0 — split logical-helper parity**
+  (DONE — exact planning audit is durable; executable neutral contract `.5.2.1` is active before behavior).
+
+  **Result:** Perl toolbox, descriptor, live, emitted, source, side-effect, arity, and receiver probes distinguish
+  lazy condition lowering from raw/broken direct logical values and the legacy optional-scope collision. Matching
+  native/primary/generated probes establish Dart short-circuiting versus eager Rust/Julia/Lua, exact empty-call
+  differences, native/generated identity within implemented emitters, and three truthiness profiles. Neutral
+  contract, five backend, generated/primary, recurring-gate, and public no-drift owners are split as `.5.2.1-.9`.
+
+  **Proof:** Focused Perl 4, Rust 137, Dart 60, complete Julia package, and PUC Lua/LuaJIT 177/177 tests pass.
+  Knowledge Map, memory, task/doctrine, mdBook, and whitespace checks pass. Canonical local CI passes reference
+  CLI 62x2 and Phase 0 `1..1031`. No runtime semantics changed and no mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.1.9 — close diagnostic-output public no-drift**
   (DONE — the diagnostic-output program is 8 complete / 0 pending; parent `.5.1` is closed and logical
   truthiness/arity/lowering `.5.2` is active).

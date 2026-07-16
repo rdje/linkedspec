@@ -16,8 +16,9 @@ evidence: "JULIA-BACKEND-PARITY.6.2.4.2.1 adds and/or/not to Julia's eager pure-
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
-Julia executes logical `and`, `or`, and `not` as normal eager value helpers, matching Perl call evaluation and the
-Rust runtime. Every argument is evaluated first, then Julia's established runtime truthiness is applied:
+Julia executes logical `and`, `or`, and `not` as normal eager value helpers, matching the Rust and Lua evaluation
+shape but not current Perl condition lowering or Dart. Every argument is evaluated first, then Julia's established
+runtime truthiness is applied:
 
 - `nothing`, false, zero, empty strings, empty arrays, and empty hashes are false.
 - Other values are true.
@@ -38,4 +39,5 @@ The full shipped-smoke window is 17/31, full tests pass with 772 assertions, and
 18/31 with status `runtime-corpus-helper-regex-flags`.
 
 Related facts: [[julia-helper-regex-flag-normalization]], [[julia-shipped-corpus-smoke-split]], [[julia-anonymous-capture-boundary-helpers]],
-[[dart-helper-action-surface-bridge]], [[rust-capture-group-helper-indexing]], [[rust-perl-output-oracle]].
+[[dart-helper-action-surface-bridge]], [[logical-helper-five-backend-audit]], [[rust-capture-group-helper-indexing]],
+[[rust-perl-output-oracle]].

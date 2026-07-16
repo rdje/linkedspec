@@ -845,9 +845,14 @@ functions. Direct `call(rule)` result/`retv`/cursor behavior is focused, public 
 corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. The audit
 also records
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl
-`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately pending under `.5.2`;
-Lua `.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local
-closure is a false five-backend normalization claim.
+`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately owned by `.5.2`; Lua
+`.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local closure is a false five-backend
+normalization claim. Planning audit `.5.2.0` now proves this is not one simple mismatch. Perl conditions use lazy
+host `&&`/`||` while direct logical values remain raw/broken; Dart short-circuits; Rust, Julia, and Lua are eager.
+Truthiness has three profiles: Perl/Lua (`"0"` false, empty aggregates true), Dart/Julia (all nonempty strings
+true, empty aggregates false), and Rust (`"0"` plus `"false"` false, empty aggregates false). Native/generated
+execution agrees within Rust, Dart, Julia, and Lua. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are
+therefore dependency-ordered before any behavior claim changes.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,
 host output bypassed the primary command's strict UTF-8 encoder, and lowered host `exit` bypassed canonical
@@ -1768,9 +1773,9 @@ behavior. All three hlink delimiter fixtures pass; a permanent corpus regression
 logging is routed as an output mismatch rather than an unsupported helper. At that boundary, the window is 13/31
 and package status is `runtime-corpus-capture-boundaries`.
 
-Logical `and`/`or`/`not` are eager value helpers, matching Perl call evaluation and Rust: all arguments evaluate
-before truthiness composition. They are not lazy branch constructs; use `if`/`switch` when skipped branches must
-remain unevaluated. Julia now applies its existing scalar/number/string/aggregate truthiness and Rust-compatible
+Julia logical `and`/`or`/`not` are eager value helpers: all arguments evaluate before truthiness composition. They
+are not lazy branch constructs in this backend; use `if`/`switch` when skipped branches must remain unevaluated.
+Julia applies its existing scalar/number/string/aggregate truthiness and Rust-compatible
 empty arities (false/false/true). Three portmap cases plus tablegrep pass. `portmap_constant` reaches output
 comparison but remains `?bare:` because helper `matches(..., /^\d/io)` passes Perl's no-op `o` flag to Julia
 `Regex`; `.6.2.4.2.3` owns that precise compatibility bridge.

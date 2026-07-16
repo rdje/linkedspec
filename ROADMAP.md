@@ -944,7 +944,11 @@ now locks one strict driver over the neutral model, all six native/generated con
 command case, and generated-source/capability/corpus ledgers. Public no-drift `.5.1.9` closes the program with 16
 authoritative documents, nine forbidden stale claims, copyable native/generated examples for all five backends,
 and 20 semantic/topology/public-admission mutations. The ledger is 8 complete / 0 pending, parent `.5.1` is done,
-and logical truthiness/arity/lowering `.5.2` is next before structured-format work.
+and logical truthiness/arity/lowering `.5.2` is next before structured-format work. Planning audit `.5.2.0`
+finds lazy condition-only Perl lowering plus broken direct logical values, Dart short-circuiting, eager
+Rust/Julia/Lua helpers, and three truthiness profiles rather than one binary drift. It dependency-orders neutral
+contract `.1`, Perl/Rust/Dart/Julia/Lua `.2-.6`, generated/primary `.7`, recurring gate `.8`, and public no-drift
+`.9` before behavior changes.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only
@@ -952,8 +956,8 @@ surfaces, and missing eager `and`/`or`/`not`. The audit activated logical repair
 `.2` now closes recurring exact admission, direct `call(rule)` proof, and public status. Its source-history recheck
 also corrects the audit's unreproducible duplicate-`or` note: every inspected revision contains one exact row.
 Toolbox probes also expose a
-separate Perl `and`/`or` keyword-precedence lowering defect, pending with five-backend truthiness/arity
-normalization under `FUTURE-PARITY-BACKLOG.5.2` after diagnostic-output `.5.1`.
+separate Perl `and`/`or` keyword-precedence lowering defect, now measured and split with five-backend truthiness/
+arity normalization under `FUTURE-PARITY-BACKLOG.5.2.0-.9` after diagnostic-output `.5.1`.
 
 Logical repair note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.1`): Lua now eagerly evaluates every authored
 `and`/`or`/`not` argument once left-to-right and returns booleans through the established Lua truthiness policy;

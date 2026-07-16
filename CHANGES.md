@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.0 — split logical-helper parity
+
+Completed a planning-only logical-helper audit before runtime changes. Perl toolbox, canonical descriptor, live,
+and independently emitted probes distinguish lazy condition lowering from raw/broken direct logical values and
+expose the legacy `not(false, true)` optional-scope collision. Matching source, native, primary, and generated
+probes show eager Rust/Julia/Lua evaluation versus Dart short-circuiting, divergent empty calls, and three current
+truthiness profiles rather than a single reference/interpreter split.
+
+Split the work into neutral contract `.5.2.1`, Perl/Rust/Dart/Julia/Lua `.2-.6`, generated/primary `.7`, recurring
+omission-checked gate `.8`, and public no-drift `.9`. Updated the Knowledge Map, roadmap/live architecture, mdBook,
+and Perl lowering guide with the exact current matrix. No parser, compiler, runtime, generated, CLI, fixture,
+capability, or corpus behavior changed; no mutation campaign ran.
+
+Focused Perl 4, Rust 137, Dart 60, complete Julia package, and PUC Lua/LuaJIT 177/177 tests pass. Knowledge Map,
+memory, task/doctrine, mdBook, and whitespace checks pass. Canonical local CI passes reference CLI 62x2 and Phase
+0 `1..1031`.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.1.9 — close diagnostic-output public no-drift
 
 Extended `linkedspec-diagnostic-output-v1` with an authoritative 16-document public contract and nine exact
