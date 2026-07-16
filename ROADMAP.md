@@ -1017,7 +1017,9 @@ Successor remeasurement `.6.2.5` independently validates all 105 fixtures and co
 outputs, matches, and exact byte/character endpoints at 166/166 per ABI. Parent `.6.2` closes and complete-manifest
 `.6.3` now executes one ordered no-selector 105/105 library gate plus bare developer-runner `--execute`, retains
 validation-only default use and exits 0/1/2 for pass/fixture/validation outcomes, and advances public status to
-`runtime-corpus-full` at 167/167 per ABI. Parent `.6` closes and primary parser CLI adapter `.7.1` is active.
+`runtime-corpus-full` at 167/167 per ABI. Parent `.6` closes. Primary adapter `.7.1` now implements exact ADR
+`0023` argument/UTF-8/native-execution/canonical-JSON/failure/phase-trace behavior at 169/169 per ABI and diagnostic
+shared CLI 61x2. Recurring local/matrix admission `.7.2` is active; public status remains `runtime-corpus-full`.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

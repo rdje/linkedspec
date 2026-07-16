@@ -383,7 +383,10 @@ zero failures on both ABIs. Permanent `.6.2.6` locks all 59 literal names, uncha
 exact byte/character endpoints at 166/166 per ABI. Final `.6.3` executes the complete ordered 105-case manifest
 through both the production library and separate developer runner, preserves validation-only default use, and
 locks success/fixture/manifest exits 0/1/2. Both ABI suites pass 167/167 with status `runtime-corpus-full`; parent
-`.6` closes, primary parser CLI adapter `.7.1` is active, and the census stays 64/0/0 until `.8.4`.
+`.6` closes. Primary parser adapter `.7.1` now implements exact ADR `0023` options, strict UTF-8, native execution,
+canonical JSON, stable phases/exits, and the independent canonical phase trace at 169/169 per ABI plus diagnostic
+shared CLI 61x2. Recurring process/matrix admission `.7.2` is active; status remains `runtime-corpus-full`, and the
+census stays 64/0/0 until `.8.4`.
 
 Rust is interpreted rather than generated Perl source, so the inspectable artifact is
 the compiled rule table plus lifecycle/action expression AST rather than emitted handler

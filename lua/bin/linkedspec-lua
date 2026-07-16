@@ -3,6 +3,11 @@
 local function prepend_repo_module_path()
   local source = debug.getinfo(1, "S").source
   local script_path = source:sub(1, 1) == "@" and source:sub(2) or source
+  local filesystem = require("linkedspec_filesystem_native")
+  local separator = package.config:sub(1, 1)
+  local absolute = separator == "/" and script_path:sub(1, 1) == "/" or
+    script_path:match("^[A-Za-z]:[\\/]") ~= nil or script_path:sub(1, 2) == "\\\\"
+  if not absolute then script_path = filesystem.current_directory() .. separator .. script_path end
   local bin_dir = script_path:match("^(.*)[/\\][^/\\]+$")
   local lua_root = bin_dir and bin_dir:match("^(.*)[/\\]bin$")
   if not lua_root then
@@ -10,10 +15,17 @@ local function prepend_repo_module_path()
     os.exit(2)
   end
   package.path = lua_root .. "/src/?.lua;" .. lua_root .. "/src/?/init.lua;" .. package.path
+  return lua_root, filesystem.current_directory()
 end
 
-prepend_repo_module_path()
-local linkedspec = require("linkedspec")
-local result = linkedspec.cli_scaffold_result(arg)
+local lua_root, cwd = prepend_repo_module_path()
+local primary_cli = require("linkedspec.primary_cli")
+local repo_root = lua_root:match("^(.*)[/\\]lua$")
+local result = primary_cli.run(arg, {
+  cwd = cwd,
+  repo_root = repo_root,
+  display_command = primary_cli.DISPLAY_COMMAND,
+})
+io.stdout:write(result.stdout)
 io.stderr:write(result.stderr)
 os.exit(result.exit_code)

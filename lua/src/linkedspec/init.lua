@@ -14,6 +14,7 @@ local user_function_definition_parser = require("linkedspec.user_function_defini
 local compiled_spec = require("linkedspec.compiled_spec")
 local matching = require("linkedspec.matching")
 local interpreter = require("linkedspec.interpreter")
+local primary_cli = require("linkedspec.primary_cli")
 local trace = require("linkedspec.trace")
 
 local M = {}
@@ -64,14 +65,10 @@ function M.backend_status()
   })
 end
 
-function M.cli_scaffold_result()
-  return {
-    exit_code = 2,
-    stderr = "linkedspec-lua: backend scaffold; parser CLI is not implemented\n",
-  }
-end
-
 M.json = json
+M.primary_cli = primary_cli
+M.primary_cli_help = primary_cli.help
+M.run_primary_cli = primary_cli.run
 M.load_corpus_fixtures = corpus.load_corpus_fixtures
 M.execute_corpus_fixtures = corpus.execute_corpus_fixtures
 M.corpus_node_type = corpus.node_type

@@ -123,7 +123,10 @@ Three backbone items tracked major structural modernization — all done:
   Complete-manifest `.6.3` then executes all 105 fixtures without selectors through the production library and
   separate developer runner, with exact order/output, 105 passes, zero failures, and exit classes 0/1/2. Both ABI
   suites pass 167/167, public status is `runtime-corpus-full`, parent `.6` closes, and primary parser CLI adapter
-  `.7.1` is active. The capability census remains four-backend 64/0/0 until `.8.4`.
+  `.7.1` then replaces the exit-2 scaffold with the exact thin native command. Options, strict UTF-8,
+  named/file/inline execution, canonical JSON, stable phase failures/exits, and canonical phase trace pass 169/169
+  per ABI plus diagnostic shared CLI 61x2. Recurring process/matrix admission `.7.2` is active; status remains
+  `runtime-corpus-full`, and the capability census remains four-backend 64/0/0 until `.8.4`.
   Cross-backend
   diagnostic transport/format drift is owned by helper-caveat `.5.1`; Perl logical keyword lowering plus Dart
   evaluation/empty-`and` and five-backend truthiness/arity drift is separately owned by `.5.2`, alongside `.5`'s

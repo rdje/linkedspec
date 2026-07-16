@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-15 — LUA-BACKEND-PARITY.7.1 — implement Lua primary CLI adapter
+
+Replaced the Lua primary command's exit-2 scaffold with a thin reusable adapter over the existing in-memory
+loader, staged compiler, engine, runtime, and typed JSON APIs. It implements the exact ADR `0023` help and strict
+case-sensitive source/input/parser/trace option schema, rejects subcommands/positionals/abbreviations/negations,
+preserves compile-before-input phase order and strict UTF-8 text, emits recursively key-sorted JSON, and normalizes
+only the three operational failure headings plus exits 0/1/2.
+
+Added ADR `0024`'s independent canonical phase trace with exact named/numeric levels, UTF-8 byte counts, field
+escaping, emoji, stdout/route/mirror, reset, and append behavior; native rich trace remains unchanged. A narrow
+native current-directory query gives relative paths the actual process cwd without a shell, subprocess, or `PWD`
+assumption. PUC Lua and LuaJIT pass 169/169. The unchanged neutral process suite passes diagnostic 61/61 under
+default and `POSIXLY_CORRECT=1`; recurring gate/matrix admission `.7.2` is active. Public status remains
+`runtime-corpus-full`; corpus 105/105, generated source, coverage 246/105+1/122, capability 64/0/0, and mutation
+policy are unchanged.
+Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031`
+in 606 seconds.
+
 ## 2026-07-15 — LUA-BACKEND-PARITY.6.3 — close full Lua corpus gate
 
 Added one selection-free production-library regression that validates and executes all 105 fixtures in manifest

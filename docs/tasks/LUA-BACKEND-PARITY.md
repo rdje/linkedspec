@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-15` (`.6.3` permanently admits ordered 105/105 library and developer-runner execution at
-  167/167 per ABI, closes parent `.6`, and activates primary CLI adapter `.7.1`)
+- Last updated: `2026-07-15` (`.7.1` implements the exact thin primary CLI adapter at 169/169 per ABI and diagnostic
+  61/61 in both option environments; recurring process/matrix admission `.7.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2715,16 +2715,27 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.7.1`, `.7.2`, `.7.3`
 
 - ID: `LUA-BACKEND-PARITY.7.1`
-  Status: `active`
+  Status: `done`
   Goal: Add `linkedspec-lua` as a thin native-library adapter.
   Acceptance: Implement the exact ADR `0023` option/argument schema, strict UTF-8 source/input boundaries,
     canonical JSON, failures/exits, and trace without subcommands, positionals, environment-dependent parsing, or
     semantics unavailable to in-memory callers.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-15.** `lua/src/linkedspec/primary_cli.lua` implements only the portable adapter:
+    exact long/short help, strict case-sensitive option parsing with no abbreviations/negations/positionals,
+    deterministic named/file/inline source selection, compile-before-input ordering, strict preserved UTF-8,
+    native loaded/inline engine execution, recursively canonical JSON, stable exits 0/1/2, and ADR `0024` phase
+    trace levels/escaping/emoji/stdout/route/mirror/reset/append behavior. The executable resolves its actual cwd
+    through the narrow native filesystem module and delegates all parser semantics to existing in-memory APIs.
+    Focused direct/process proof passes 169/169 on PUC Lua and LuaJIT. The unchanged neutral process suite passes
+    61/61 under both default and `POSIXLY_CORRECT=1` as diagnostic evidence; `.7.2` owns making those two legs
+    recurring and adding Lua to the shared matrix. Public status deliberately remains `runtime-corpus-full` until
+    that admission. Corpus 105/105, generated-source state, coverage 246/105+1/122, and capability 64/0/0 do not
+    change. Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX
+    environments plus Phase 0 true reach `1..1031` in 606 seconds.
+  Commit: `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter`
 
 - ID: `LUA-BACKEND-PARITY.7.2`
-  Status: `pending`
+  Status: `active`
   Goal: Pass the shared 61-case process suite in default and POSIX environments.
   Acceptance: Add Lua as a first-class backend to the recurring neutral CLI matrix; stdout/stderr/files/exit bytes
     and executable-display substitution are exact.
@@ -2856,7 +2867,9 @@ true aggregate status on both ABIs. Permanent `.6.2.6` now locks all 59 literal 
 matches, and byte/character endpoints in one recurring production-library test. Final `.6.3` executes all 105
 fixtures without selectors through both the production library and separate developer runner, with ordered exact
 outputs, 105 passes, zero failures, and status `runtime-corpus-full`. Both ABIs pass 167/167, parent `.6` is closed,
-and primary CLI adapter `.7.1` is active; generated source and census admission remain `.8.1-.8.4`.
+and primary CLI adapter `.7.1` now implements the exact thin command at 169/169 per ABI plus diagnostic 61x2.
+Recurring local/matrix admission `.7.2` is active; status remains `runtime-corpus-full`, and generated source plus
+census admission remain `.8.1-.8.4`.
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
@@ -2988,7 +3001,8 @@ and primary CLI adapter `.7.1` is active; generated source and census admission 
 | 126 | `LUA-BACKEND-PARITY.6.2.6` | `done` | Literal ordered names, exact outputs/endpoints, and zero failures pass at 166/166 per ABI. |
 | 127 | `LUA-BACKEND-PARITY.6.3` | `done` | Ordered library/runner execution passes 105/105 at 167/167 per ABI. |
 | 128 | `LUA-BACKEND-PARITY.7` | `active` | Implement and admit the exact primary parser CLI. |
-| 129 | `LUA-BACKEND-PARITY.7.1` | `active` | Add the thin native-library primary CLI adapter. |
+| 129 | `LUA-BACKEND-PARITY.7.1` | `done` | Thin native adapter passes 169/169 per ABI and diagnostic shared CLI 61x2. |
+| 130 | `LUA-BACKEND-PARITY.7.2` | `active` | Make the shared 61x2 process proof recurring and add the Lua matrix leg. |
 
 ### `LUA-BACKEND-PARITY.5.3.0` Acceptance Checklist
 
@@ -3351,6 +3365,26 @@ and primary CLI adapter `.7.1` is active; generated source and census admission 
   seconds.
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook usage/status/handoff,
   Knowledge Map, changes/notes, and bounded memory close parent `.6` and activate only primary adapter `.7.1`.
+
+### `LUA-BACKEND-PARITY.7.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The primary executable was still a hard-coded exit-2 scaffold despite complete
+  native loading/runtime/corpus semantics and an exact language-neutral command contract.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua already exposed every semantic operation required by ADRs `0022`/`0023`;
+  the missing layer was a thin option/IO/result/phase-trace projection. Standard Lua lacks a trustworthy process
+  cwd API, so relative file semantics additionally required one narrow native `current_directory()` query.
+- [x] **FIX** — Add `primary_cli.lua`, export its reusable result API, make `linkedspec-lua` write that result, and
+  delegate named/file/inline compilation plus execution to native library APIs. Keep CLI trace independent from
+  rich native trace, encode existing typed values with sorted JSON, and normalize only phase headings/exits.
+- [x] **ADDRESSED (verified)** — Direct API and real-process smoke pass 169/169 on PUC Lua and LuaJIT. The unchanged
+  shared manifest independently passes all 61 cases in default and POSIX option environments, covering help,
+  arguments, success, strict UTF-8, failures, and exact trace bytes.
+- [x] **NO REGRESSION** — The corpus developer command remains separate and 105/105; public status remains
+  `runtime-corpus-full` until recurring CLI admission `.7.2`. Generated source, coverage 246/105+1/122, capability
+  64/0/0, and mutation policy are unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX
+  environments plus Phase 0 true reach `1..1031` in 606 seconds.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook command/status/handoff,
+  Knowledge Map, changes/notes, and bounded memory close implementation `.7.1` and activate only admission `.7.2`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -4915,3 +4949,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.6.2.5` | `LUA-BACKEND-PARITY.6.2.5 - record Lua advanced zero residual` | Full-manifest validation, exact ordered 40-98 selection, dual-ABI 59 passes/zero failures, and `.6.2.6` handoff without behavior change. |
 | `LUA-BACKEND-PARITY.6.2.6` | `LUA-BACKEND-PARITY.6.2.6 - admit Lua advanced corpus window` | Literal 59-name/endpoint ledger, exact wrapped outputs, dual-ABI 166/166 proof, parent `.6.2` closure, and `.6.3` handoff. |
 | `LUA-BACKEND-PARITY.6.3` | `LUA-BACKEND-PARITY.6.3 - close full Lua corpus gate` | Atomic ordered 105/105 library/runner execution, exits 0/1/2, `runtime-corpus-full`, parent `.6` closure, and `.7.1` handoff. |
+| `LUA-BACKEND-PARITY.7.1` | `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter` | Exact thin native adapter, strict UTF-8/canonical JSON/stable phases, independent canonical trace, dual-ABI 169/169, diagnostic 61x2, and `.7.2` handoff. |

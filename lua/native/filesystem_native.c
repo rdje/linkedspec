@@ -1,6 +1,15 @@
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+#ifdef _WIN32
+#include <direct.h>
+#define LINKEDSPEC_GETCWD _getcwd
+#else
+#include <unistd.h>
+#define LINKEDSPEC_GETCWD getcwd
+#endif
 
 #include <lauxlib.h>
 #include <lua.h>
@@ -50,9 +59,34 @@ static int inspect_path(lua_State *state) {
     return 1;
 }
 
+static int current_directory(lua_State *state) {
+    size_t buffer_size = 256;
+    while (buffer_size <= 1024 * 1024) {
+        char *buffer = malloc(buffer_size);
+        if (buffer == NULL) {
+            return luaL_error(state, "unable to allocate current-directory buffer");
+        }
+        errno = 0;
+        if (LINKEDSPEC_GETCWD(buffer, buffer_size) != NULL) {
+            lua_pushstring(state, buffer);
+            free(buffer);
+            return 1;
+        }
+        int error_number = errno;
+        free(buffer);
+        if (error_number != ERANGE) {
+            return luaL_error(state, "unable to read current directory: %s", strerror(error_number));
+        }
+        buffer_size *= 2;
+    }
+    return luaL_error(state, "current directory exceeds the supported path length");
+}
+
 int luaopen_linkedspec_filesystem_native(lua_State *state) {
     lua_newtable(state);
     lua_pushcfunction(state, inspect_path);
     lua_setfield(state, -2, "inspect");
+    lua_pushcfunction(state, current_directory);
+    lua_setfield(state, -2, "current_directory");
     return 1;
 }

@@ -129,6 +129,26 @@ failures, no hidden emitter creation, and traced/untraced descriptor/runtime ide
 155/155. Complete interpreter-corpus admission has since raised the current suite to 167/167 on both runtimes with
 status `runtime-corpus-full`.
 
+## Lua primary parser command
+
+`lua/bin/linkedspec-lua` is now a thin adapter over the same native loading, staged compilation, engine, runtime,
+and typed JSON APIs documented above. It accepts exactly ADR `0023`'s source/input/parser/trace/help options, with
+no subcommands or positional arguments:
+
+```bash
+lua lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
+lua lua/bin/linkedspec-lua \
+  --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
+```
+
+Source, input, arguments, JSON, help/errors, and canonical trace are strict preserved UTF-8. Success emits one
+recursively key-sorted JSON value plus one newline and exits 0; compilation/input/invocation failures emit one
+stable phase heading and exit 1; usage exits 2. CLI trace is ADR `0024`'s portable phase protocol, not the rich
+native emitter stream. Relative paths use the actual process cwd queried through the narrow filesystem adapter,
+so no shell, subprocess, or environment option parser owns semantics. PUC Lua and LuaJIT pass 169/169, and the
+unchanged shared process manifest passes diagnostic 61/61 in default and POSIX environments. `.7.2` owns making
+those legs recurring; public status remains `runtime-corpus-full` until that admission.
+
 ## Lua automatic function parsing
 
 Lua can now execute the repository-owned function-definition grammar automatically:
@@ -222,7 +242,8 @@ lua lua/bin/corpus_runner.lua \
   --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
-This is a separate developer adapter; the primary `linkedspec-lua` parser CLI remains a later `.7` surface.
+This remains a separate developer adapter; `.7.1` has since implemented the parser-oriented primary command,
+without adding corpus or status extensions to it.
 Permanent ordered core offsets
 0-39 are admitted by `.6.1.3`; `.6.1.4` admits the six governed capability fixtures at offsets 99-104 in this
 exact order: `capability_cursor_control_surface`, `capability_pure_helper_surface`,

@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-15`
+- `2026-07-15` refresh: Lua primary adapter `.7.1` replaces the exit-2 scaffold with a thin native-library command.
+  `primary_cli.lua` owns only exact ADR `0023` options, strict UTF-8 process/file IO, phase ordering and headings,
+  canonical JSON framing, and ADR `0024`'s deterministic independent phase trace. Named/file/inline semantics reuse
+  existing loaders, staged compiler, identified engines, and runtime; a narrow native cwd query makes relative
+  paths deterministic without a subprocess. Both ABIs pass 169/169 and the unchanged process manifest passes
+  61/61 in default and POSIX diagnostic runs. Recurring process/matrix admission `.7.2` is active; status remains
+  `runtime-corpus-full`, corpus stays 105/105, and capability remains 64/0/0.
 - `2026-07-15` refresh: Lua full-corpus `.6.3` closes interpreter-corpus parent `.6`. One selection-free
   `execute_corpus_fixtures(...)` regression validates and executes all 105 fixtures in manifest order with exact
   wrapped outputs, 105 passes, and zero failures. The separate developer corpus runner keeps validation-only
   default behavior and now projects the same native API behind bare `--execute`, ordered PASS/FAIL reporting, and
   exits 0/1/2 for success, fixture failure, and argument/manifest failure. PUC Lua and LuaJIT pass 167/167 and
-  public status is `runtime-corpus-full`. The primary parser CLI remains an exit-2 scaffold; generated source,
-  coverage 246/105+1/122, and capability 64/0/0 remain unchanged. Primary adapter `.7.1` is active.
+  public status is `runtime-corpus-full`. The primary parser CLI was still an exit-2 scaffold at that boundary;
+  `.7.1` has since implemented it. Generated source, coverage 246/105+1/122, and capability 64/0/0 remain unchanged.
 - `2026-07-15` refresh: Lua advanced/shipped parent `.6.2` is closed. Planning `.6.2.0` measured exact offsets
   40-98 at the same 50/59 on PUC Lua and LuaJIT; four toolbox-proven repairs raised the unchanged window through
   56/59, 57/59, 58/59, and 59/59, and independent `.6.2.5` successor measurement found no residual. Permanent

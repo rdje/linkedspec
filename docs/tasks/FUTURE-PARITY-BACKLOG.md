@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-15` (Lua interpreter-corpus parent `.6` is closed with ordered 105/105 library/runner
-  execution at 167/167 on both ABIs; primary CLI `.7.1` is active while diagnostic `.5.1` and logical `.5.2`
+- Last updated: `2026-07-15` (Lua primary CLI adapter `.7.1` is implemented at 169/169 per ABI plus diagnostic
+  shared CLI 61x2; recurring process/matrix admission `.7.2` is active while diagnostic `.5.1` and logical `.5.2`
   remain dependency-gated).
 - Owner: repo-local workflow
 

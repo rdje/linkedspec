@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-15: **LUA-BACKEND-PARITY.7.1 — implement Lua primary CLI adapter**
+  (DONE — exact thin command is implemented; recurring shared-process/matrix admission `.7.2` is next).
+
+  **Result:** `linkedspec-lua` now implements exact strict options/help, deterministic named/file/inline loading,
+  strict preserved UTF-8, native engine execution, recursive canonical JSON, stable failure phases/exits, and the
+  independent canonical CLI phase trace. A narrow native cwd query preserves real relative-path semantics without
+  a subprocess. PUC Lua and LuaJIT pass 169/169; the unchanged process manifest passes diagnostic 61/61 under both
+  default and POSIX option environments. Status remains `runtime-corpus-full` until `.7.2` makes those legs
+  recurring. Corpus 105/105, generated source, coverage, capability 64/0/0, and mutation policy are unchanged.
+  Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031`
+  in 606 seconds.
+
 - 2026-07-15: **LUA-BACKEND-PARITY.6.3 — close full Lua corpus gate**
   (DONE — atomic library/runner execution is 105/105; parent `.6` closes and primary adapter `.7.1` is next).
 

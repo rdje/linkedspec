@@ -381,15 +381,108 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
   end, "trace must be a LinkedSpecTraceEmitter", "invalid trace emitter")
 end)
 
-test("parser CLI stays unavailable while native parser API is explicit", function()
-  local result = linkedspec.cli_scaffold_result({ "--help" })
-  assert_equal(result.exit_code, 2, "CLI scaffold status")
-  assert_equal(
-    result.stderr,
-    "linkedspec-lua: backend scaffold; parser CLI is not implemented\n",
-    "CLI scaffold error"
+test("primary CLI help and strict argument schema are exact", function()
+  local expected_help = read_file("cli_conformance/cases/help/stdout.txt"):gsub(
+    "{{COMMAND}}",
+    function() return "lua/bin/linkedspec-lua" end
   )
+  local help = linkedspec.run_primary_cli({ "--help" })
+  assert_equal(help.exit_code, 0, "help status")
+  assert_equal(help.stdout, expected_help, "help stdout")
+  assert_equal(help.stderr, "", "help stderr")
+
+  local usage = linkedspec.run_primary_cli({ "status", "--UNKNOWN", "extra" })
+  local message = "unexpected positional argument 'status'; unknown option '--UNKNOWN'; " ..
+    "unexpected positional argument 'extra'"
+  assert_equal(usage.exit_code, 2, "usage status")
+  assert_equal(usage.stdout, "", "usage stdout")
+  assert_equal(usage.stderr, "linkedspec: " .. message .. "\n\n" .. expected_help, "usage stderr")
   assert_equal(type(linkedspec.parse_spec), "function", "native parser API")
+end)
+
+test("primary CLI delegates named file and inline execution to native APIs", function()
+  with_temp_directory(function(root)
+    local source = "Top::\n /x/ -> Done { return(hash(\"z\", 0, \"a\", " ..
+      "hash(\"d\", 4, \"b\", 2))) }\n\nDone::\n /x/\n"
+    write_file(root .. "/Demo.spec", source)
+    write_file(root .. "/input.txt", "x\n")
+    local context = { cwd = root, repo_root = root }
+
+    local named = linkedspec.run_primary_cli({ "--spec", "Demo", "--input", "x" }, context)
+    assert_equal(named.exit_code, 0, "named status")
+    assert_equal(named.stdout, '{"a":{"b":2,"d":4},"z":0}\n', "named canonical JSON")
+    assert_equal(named.stderr, "", "named stderr")
+
+    local file = linkedspec.run_primary_cli({
+      "--spec-file",
+      "Demo.spec",
+      "--input-file",
+      "input.txt",
+    }, context)
+    assert_equal(file.exit_code, 0, "file status")
+    assert_equal(file.stdout, '{"a":{"b":2,"d":4},"z":0}\n', "file canonical JSON")
+
+    local inline = linkedspec.run_primary_cli({
+      "--inline-spec",
+      "Top::\n /x/ -> Done { return(\"alternate\") }\n\nAlternate:\n /b/ -> Done { " ..
+        "return(\"alternate\") }\n\nDone::\n /[xb]/\n",
+      "--input",
+      "b",
+      "--top-rule",
+      "Alternate",
+      "--parse-mode",
+      "consume",
+    }, context)
+    assert_equal(inline.exit_code, 0, "inline status")
+    assert_equal(inline.stdout, '"alternate"\n', "inline result")
+  end)
+end)
+
+test("primary CLI preserves strict UTF-8 phase order and canonical trace routing", function()
+  with_temp_directory(function(root)
+    local context = { cwd = root, repo_root = root }
+    local source = "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n"
+    write_file(root .. "/invalid.txt", "x" .. string.char(0xC3, 0x28, 0xFF) .. "\n")
+    local invalid_input = linkedspec.run_primary_cli({
+      "--inline-spec",
+      source,
+      "--input-file",
+      "invalid.txt",
+    }, context)
+    assert_equal(invalid_input.exit_code, 1, "invalid input status")
+    assert_equal(invalid_input.stdout, "", "invalid input stdout")
+    assert_equal(invalid_input.stderr, "linkedspec: input load failed\n", "invalid input stderr")
+
+    local compile_first = linkedspec.run_primary_cli({
+      "--inline-spec",
+      "not a spec",
+      "--input-file",
+      "missing.txt",
+    }, context)
+    assert_equal(compile_first.exit_code, 1, "compile-first status")
+    assert_equal(compile_first.stderr, "linkedspec: parser compilation failed\n", "compile-first stderr")
+
+    write_file(root .. "/trace.log", "stale\n")
+    local traced = linkedspec.run_primary_cli({
+      "--inline-spec",
+      source,
+      "--input",
+      "xé",
+      "--trace",
+      "full",
+      "--trace-file",
+      "trace.log",
+      "--trace-mode",
+      "route",
+      "--trace-reset",
+    }, context)
+    assert_equal(traced.exit_code, 0, "trace status")
+    assert_equal(traced.stdout, '"xé"\n', "trace JSON remains clean")
+    assert_equal(traced.stderr, "", "trace stderr")
+    local trace_text = read_file(root .. "/trace.log")
+    assert_contains(trace_text, "[linkedspec][high] arguments source_bytes=57 input_bytes=3\n", "trace argument bytes")
+    assert_contains(trace_text, "[linkedspec][full] result json_bytes=5\n", "trace result bytes")
+  end)
 end)
 
 test("strict JSON preserves null array and harray identity", function()

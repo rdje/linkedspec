@@ -16,6 +16,7 @@ date: 2026-07-10
 status: accepted
 tags: [cli, trace, protocol, deterministic, utf8, backends, ADR-0024, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0024 defines canonical primary phase trace; Perl, Rust, Dart, and Julia now pass the same 61/61 default/POSIX cases through independent adapter projections."
+evidence_update_2026_07_15_lua_adapter: "LUA-BACKEND-PARITY.7.1 implements the same independent canonical phase trace in Lua and passes diagnostic shared CLI 61/61 in default and POSIX environments; recurring matrix admission remains .7.2."
 reverify: "bash tools/run_primary_cli_matrix.sh"
 ---
 
@@ -73,3 +74,4 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[primary-cli-utf8-process-boundary-gap]],
 [[rust-canonical-primary-cli-trace]], [[rust-local-verification-gate]],
 [[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]].
+Lua implementation detail: [[lua-primary-cli-adapter]].

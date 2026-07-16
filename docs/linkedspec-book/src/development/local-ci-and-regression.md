@@ -232,12 +232,17 @@ bash tools/run_lua_local.sh
 ```
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
-PUC Lua and LuaJIT, locks the primary CLI scaffold boundary, and validates the exact 105-case manifest through the
-developer corpus command. The current suite passes 167/167 on each ABI. Its library-level controlled corpus tests
+PUC Lua and LuaJIT, process-smokes the primary CLI adapter, and validates plus executes the exact 105-case manifest
+through the developer corpus command. The current suite passes 169/169 on each ABI. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command validates by default and executes the complete manifest
-only when passed bare `--execute`; the primary parser CLI remains a separate later owner.
+only when passed bare `--execute`. Primary adapter `.7.1` independently implements exact options, strict UTF-8,
+native execution/canonical JSON, stable failures/exits, and canonical phase trace. The unchanged shared process
+manifest is diagnostic-green at 61/61 in default and POSIX environments; `.7.2` owns wiring both runs into this
+recurring gate and the cross-backend matrix, so status remains `runtime-corpus-full` here.
+The `.7.1` adapter passes the canonical local gate without recurring Lua admission: both reference CLI
+environments remain 61/61 and Phase 0 reaches `1..1031` in 606 seconds.
 The same suite permanently executes exact manifest offsets 0-39 at 40/40, locks first/last names, every wrapped
 expected output, and byte/character endpoint 1, without promoting the developer command.
 It also permanently executes exact capability offsets 99-104 at 6/6, locking all six governed names, unchanged

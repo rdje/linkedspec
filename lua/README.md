@@ -3,7 +3,7 @@
 This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
-Current status: repository-owned module/test/command scaffold, strict corpus IO and reusable selected execution,
+Current status: repository-owned module/test/command tree, strict corpus IO and reusable selected execution,
 typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
@@ -95,7 +95,9 @@ selects exact offsets 40-98, and confirms 59/59 with zero failures on both ABIs.
 locks all 59 literal names, unchanged wrapped outputs, matches, and exact byte/character endpoints at 166/166 on
 both ABIs. Complete-manifest `.6.3` then executes all 105 fixtures without selectors through the production
 library and developer runner. Both report 105 passes/zero failures, both ABI suites pass 167/167, public status is
-`runtime-corpus-full`, parent `.6` closes, and primary parser CLI adapter `.7.1` is active.
+`runtime-corpus-full`, and parent `.6` closes. Primary adapter `.7.1` now implements the exact ADR `0023` command
+over those native APIs: both ABI suites pass 169/169 and diagnostic shared process proof passes 61x2. Recurring
+process/matrix admission `.7.2` is active; public status remains `runtime-corpus-full` until that proof is wired.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -330,7 +332,8 @@ reads are unchanged. History passes and the exact window is 59/59. `.6.2.5` reme
 first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` verifies a literal ordered
 59-name/endpoint ledger and every unchanged wrapped output at 166/166 per ABI. Final `.6.3` runs the complete
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
-activates with status `runtime-corpus-full`.
+implements the exact primary adapter at 169/169 per ABI plus diagnostic shared CLI 61x2. Recurring admission `.7.2`
+is active and status remains `runtime-corpus-full`.
 Generated Lua preservation/execution remains `.8.1-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
@@ -385,7 +388,8 @@ Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. The staged registry now dispatches and stitches their bodies, and
 fixed-v1, variadic-v2, and contextual-final-block calls execute through the native runtime. Portable named/path
 loading, outward descriptors, and full-pipeline trace are current. Permanent full-corpus admission, the primary
-parser CLI contract, and generated source retain their later owners.
+parser CLI adapter, and its diagnostic 61x2 process proof are current. Recurring CLI matrix admission is `.7.2`;
+generated source retains its later `.8` owner.
 
 Run the local gate from the repository root:
 
@@ -411,6 +415,28 @@ The backend has no LuaRocks or global Lua package dependency. Runtime matching
 requires a C compiler, `pkg-config`, PCRE2 headers/library, and Lua development
 headers for the selected ABI. Validate the checked-in corpus without executing it:
 
+The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
+positionals:
+
+```bash
+lua lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
+lua lua/bin/linkedspec-lua \
+  --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
+lua lua/bin/linkedspec-lua \
+  --inline-spec $'Top::\n /x/' --input x \
+  --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
+```
+
+Arguments/source/input/results/help/errors/trace are strict UTF-8 text with no normalization, trimming, BOM
+removal, or newline conversion. Success prints one recursively key-sorted canonical JSON value plus a newline and
+exits `0`; compilation/input-load/invocation failures use one stable phase heading and exit `1`; usage exits `2`.
+The command delegates named/file compilation, staged inline compilation, engine construction, and execution to the
+same in-memory module APIs. Its canonical phase trace is intentionally separate from richer native trace. The
+unchanged shared 61-case process manifest is diagnostic-green in both default and POSIX environments; `.7.2`
+makes those legs recurring. Public status remains `runtime-corpus-full` at this implementation boundary.
+
+Validate the checked-in corpus without executing it:
+
 ```bash
 lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
 ```
@@ -424,8 +450,8 @@ lua lua/bin/corpus_runner.lua \
 
 Validation-only default use exits `0` after reporting format and fixture count. Bare `--execute` prints every
 ordered `PASS`/`FAIL` result and `summary: 105 passed, 0 failed`; it exits `0` when all fixtures pass, `1` for
-recorded fixture failures, and `2` for arguments or manifest drift. The primary `linkedspec-lua` parser CLI remains
-a distinct developer stub and exits `2`. Library callers can execute the complete validated manifest or a named/
+recorded fixture failures, and `2` for arguments or manifest drift. This developer runner remains distinct from
+the parser-oriented primary command. Library callers can execute the complete validated manifest or a named/
 bounded subset in process:
 
 ```lua
@@ -651,7 +677,8 @@ Registered keyword arguments diagnose as
 `user_function_recursion` with the full cycle. Missing or mismatched staged bodies fail
 closed before body execution. Variadic signatures and declared contextual final codeblocks
 now project through exact outward descriptor versions 2 and 3. Full-pipeline trace,
-generated Lua, corpus execution, and primary CLI promotion remain separately owned layers.
+full corpus execution, and the thin primary CLI adapter are implemented; generated Lua remains the separate `.8`
+layer, while recurring CLI admission is `.7.2`.
 
 Compile a typed spec and inspect either effective state or the exact shared
 outward descriptor without invoking a runtime:

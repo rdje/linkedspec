@@ -38,14 +38,20 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
 log "running primary PUC Lua tests"
 "$LUA_CMD" lua/test/run.lua
 
-log "checking explicit parser CLI scaffold failure"
+log "checking the primary parser CLI adapter"
+cli_help=$("$LUA_CMD" lua/bin/linkedspec-lua --help)
+printf '%s\n' "$cli_help" | grep -F 'lua/bin/linkedspec-lua --spec NAME --input TEXT [options]' >/dev/null ||
+ fail "primary CLI help drifted"
+cli_output=$("$LUA_CMD" lua/bin/linkedspec-lua \
+ --inline-spec $'Top::\n /x/ -> Done { return("lua-cli") }\n\nDone::\n /x/\n' --input x)
+[ "$cli_output" = '"lua-cli"' ] || fail "primary CLI execution drifted"
 set +e
-cli_stderr=$("$LUA_CMD" lua/bin/linkedspec-lua 2>&1 >/dev/null)
+cli_stderr=$("$LUA_CMD" lua/bin/linkedspec-lua status 2>&1 >/dev/null)
 cli_status=$?
 set -e
-[ "$cli_status" -eq 2 ] || fail "CLI scaffold exit was $cli_status, expected 2"
-[ "$cli_stderr" = 'linkedspec-lua: backend scaffold; parser CLI is not implemented' ] ||
- fail "CLI scaffold stderr drifted"
+[ "$cli_status" -eq 2 ] || fail "primary CLI usage exit was $cli_status, expected 2"
+printf '%s\n' "$cli_stderr" | grep -F "linkedspec: unexpected positional argument 'status'" >/dev/null ||
+ fail "primary CLI usage stderr drifted"
 
 log "validating the exact checked-in corpus through the developer command"
 corpus_output=$("$LUA_CMD" lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus)

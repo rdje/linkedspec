@@ -161,7 +161,10 @@ This `README.md` is the **single entry point** to the project.
   now complete: one no-selector production-library gate and bare developer-runner `--execute` pass all 105 cases
   in order with zero failures. Default runner use remains validation-only, fixture failures exit 1, manifest/
   argument failures exit 2, both ABI suites pass 167/167, and public status is `runtime-corpus-full`. Parent `.6`
-  closes and primary parser CLI adapter `.7.1` is active. Corpus data, generated source, and capability 64/0/0
+  closes. Primary adapter `.7.1` now replaces the exit-2 scaffold with the exact strict ADR `0023` command: native
+  named/file/inline execution, strict UTF-8, canonical JSON, stable phase failures/exits, and independent canonical
+  trace pass 169/169 on each ABI plus diagnostic shared CLI 61x2. Recurring process/matrix admission `.7.2` is
+  active; public status remains `runtime-corpus-full`, and corpus data, generated source, and capability 64/0/0
   remain unchanged.
   Existing diagnostic-output drift is owned by `FUTURE-PARITY-BACKLOG.5.1`; Perl logical keyword-lowering plus
   five-backend truthiness/arity normalization is separately owned by `.5.2` before structured-format execution.

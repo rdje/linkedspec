@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-15 (`LUA-BACKEND-PARITY.7.1` — make the command a projection, not a second runtime): Lua already had
+  strict native resolution/loading, staged inline compilation, identified engines, exact runtime results, and a
+  canonical typed JSON encoder. The primary command therefore owns only argument validation, phase ordering,
+  strict input-file decoding, result framing, stable headings/exits, and the independent portable phase trace.
+  It never creates a native trace emitter or adds command-only parser semantics. Standard Lua has no portable cwd
+  function, and `PWD` can be stale after a parent-process `chdir`, so extend the existing narrow filesystem module
+  with only `current_directory()` rather than invoking a shell. Direct and process proof passes 169/169 on both
+  ABIs; the unchanged shared manifest is diagnostic-green at 61x2. `.7.2` now owns recurring admission, so status
+  deliberately remains `runtime-corpus-full`. Corpus, generated source, coverage, census 64/0/0, and mutation
+  policy do not change. Canonical local CI exits 0 with CLI 61/61 in both environments and Phase 0 `1..1031` in
+  606 seconds.
+
 - 2026-07-15 (`LUA-BACKEND-PARITY.6.3` — close complete corpus with one atomic relationship and a thin developer
   projection): Disjoint permanent windows prove every fixture but not the all-manifest relationship in one call.
   Reuse the no-selector library path for the aggregate gate; do not concatenate window results or duplicate the

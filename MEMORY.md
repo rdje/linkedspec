@@ -10,19 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.6.3` — permanently admitted full 105/105 interpreter execution.
-- latest_commit: `HEAD` — prepared `LUA-BACKEND-PARITY.6.3 - close full Lua corpus gate`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.7.1` — implemented the exact thin Lua primary CLI adapter.
+- latest_commit: `HEAD` — committed `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter`.
 - prepared_commit: `none`.
-- active_work_unit: primary parser CLI adapter `LUA-BACKEND-PARITY.7.1` after `.6.3` commits cleanly.
-- next_action: commit verified `.6.3`; then inventory ADR `0023`, existing primary scaffold/native APIs, and the
-  shared CLI adapter precedents before implementing only the exact argument/loading/execution surface.
-- current_proof: One no-selector production-library regression and bare developer-runner `--execute` each validate
-  and execute all 105 fixtures in manifest order with exact wrapped outputs, 105 passes, and zero failures.
-  Validation-only default runner use remains; controlled mismatch and manifest drift prove exits 1 and 2. PUC Lua
-  and LuaJIT pass 167/167 with status `runtime-corpus-full`. Parent `.6` closes and `.7.1` activates. The primary
-  parser command remains an exit-2 scaffold; corpus/oracle data, generated source, coverage 246/105+1/122, and
-  capability 64/0/0 remain unchanged. Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` in 621
-  seconds.
+- active_work_unit: recurring primary CLI process/matrix admission `LUA-BACKEND-PARITY.7.2` after `.7.1` commits.
+- next_action: commit verified `.7.1`; then wire the unchanged 61-case Lua command under default/POSIX into the
+  focused local gate and shared primary CLI matrix without changing adapter behavior.
+- current_proof: `primary_cli.lua` delegates exact source/input selection, staged/native compilation, engine/runtime
+  execution, strict UTF-8, canonical JSON, stable failures/exits, and independent canonical phase trace to existing
+  native seams. The real command resolves cwd without a subprocess. PUC Lua and LuaJIT pass 169/169; the unchanged
+  neutral process manifest passes diagnostic 61/61 in default and POSIX environments. Public status remains
+  `runtime-corpus-full` until `.7.2`; corpus 105/105, generated source, coverage 246/105+1/122, and capability
+  64/0/0 are unchanged. Canonical local CI exits 0 with Phase 0 true reach `1..1031` in 606 seconds.
 - latest_bootstrap_read: 2026-07-15 — complete README/roadmaps, memory architecture, resume/task/decision records,
   Knowledge Map, toolbox, commit workflow, active Lua code/runtime/test surfaces, and every mdBook source file read
   and understood before implementation.
@@ -34,8 +33,8 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: Lua generated parser+stimuli roundtrip `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none for `.7.1`; full interpreter corpus and its developer runner are verified locally and through
-  canonical CI. in_flight_uncommitted: verified `.6.3` library/runner/status changes and durable sync await commit;
+- blockers: none for `.7.2`; the implemented adapter is already diagnostic-green across both process environments.
+  in_flight_uncommitted: none after the atomic `.7.1` commit; `.7.2` is the clean next frontier;
   mutation campaigns remain parked and no mutant run belongs to
   ordinary commit/local-CI workflow. Pre-existing modified/untracked `rgx/subs/pgen` work is not
   LinkedSpec-owned and remains untouched; root `.gitmodules` intentionally ignores dirty `rgx` worktree state.

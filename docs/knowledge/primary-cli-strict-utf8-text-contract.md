@@ -18,6 +18,7 @@ status: accepted
 tags: [cli, utf8, unicode, files, json, trace, parity, ADR-0025, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0025 defines strict preserved UTF-8 text; FUTURE-PARITY-BACKLOG.1.5.1.6.2 makes the Perl adapter decode argv/files with FB_CROAK, emit recursive UTF-8 JSON, and pass 61 exact shared cases including eight Unicode/invalid families."
 evidence_update_2026_07_11_native_files: "ADR 0026 extends the same strict preserved UTF-8 file rule to the backend-neutral native file-oriented API; UTF-16/UTF-32 remain valid Unicode encodings generally but are not auto-detected inputs."
+evidence_update_2026_07_15_lua_adapter: "LUA-BACKEND-PARITY.7.1 reuses strict native spec loading, validates input bytes, preserves BOM/newlines/normalization, and emits canonical UTF-8 JSON/trace; diagnostic shared CLI passes 61x2."
 reverify: "sed -n '1,240p' docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md; rg -n 'FUTURE-PARITY-BACKLOG.1.5.1.6.[0-3]|strict UTF-8|hex byte' docs/tasks/FUTURE-PARITY-BACKLOG.md tools/run_cli_conformance.pl bin/linkedspec cli_conformance"
 ---
 
@@ -62,3 +63,4 @@ Related facts: [[primary-cli-utf8-process-boundary-gap]],
 [[user-observable-backend-cli-parity-contract]],
 [[canonical-primary-cli-trace-protocol]], [[neutral-cli-fixture-runner]],
 [[native-spec-resolution-contract]].
+Lua implementation detail: [[lua-primary-cli-adapter]].
