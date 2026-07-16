@@ -178,8 +178,9 @@ closes parent `.7`. Generated-source planning `.8.1.0` then corrects the pre-ADR
 core `.8.1.1` now returns deterministic native Lua from exact fixed-v1/variadic-v2/final-codeblock-v3 effective
 state, with contract/version/Unicode identity metadata, typed portable errors, direct/traced roles, and canonical
 strict-UTF-8 JSON embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup proof `.8.1.2`
-closes scaffold `.8.1` at 173/173 per ABI. Exact plans are active under `.8.2`; accepted-subset and census
-admission remain `.8.3-.8.4`.
+closes scaffold `.8.1` at 173/173 per ABI. Exact plan/family execution `.8.2` closes at 176/176 per ABI with ten
+ordered families, four rejections, authoritative nested dispatch, portable trace, an isolated all-family host,
+and emitted variadic proof. Accepted-subset `.8.3` is active; census admission remains `.8.4`.
 
 Lua `.4.4.1` now carries neutral `RuntimeDiagnostic` values on typed runtime exceptions. Optional source identity,
 top/deepest-rule/handler attribution, specific selection/input/lookup/execution stages, deterministic JSON, richer

@@ -2865,16 +2865,29 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts`
 
 - ID: `LUA-BACKEND-PARITY.8.2`
-  Status: `active`
+  Status: `done`
   Goal: Add exact ten-family plan and authoritative direct generated execution.
   Acceptance: Ordered public rows, four rejections, per-root/nested family dispatch, portable trace/source identity,
     one isolated all-family matrix, and the unchanged variadic callable fixture execute independently with values
     equal to the native interpreter; generated Lua uses reconstructed typed rest arrays, not host vararg dispatch.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-16.** Lua exposes typed plan rows and the exact ordered ten-family vocabulary,
+    validates count/label/known-family/unknown-family drift before execution with exact portable codes and
+    attribution, and embeds an authoritative immutable internal plan plus fresh public plan copies. Generated
+    execution threads the validated per-label map through every root and nested rule; the map, not compiled edge
+    presence, selects regex versus blind dispatch. Low-level trace adds `generated_rule_enter`,
+    `generated_family_decision`, and `generated_rule_exit` with source identity/rule/family beside unchanged native
+    trace. One 26-row combined specification proves all ten root families, nested dispatch, interpreter-equal
+    values, four rejections, attributed execution failure, and one fresh-process all-family module on both ABIs.
+    The unchanged neutral callable fixture reconstructs exact variadic-v2 state and fresh typed rest arrays through
+    emitted source rather than host varargs. Initial focused proof classified ordinary `Default` as `rep_acode`
+    because Lua's native `is_repetition` also denotes repeated default scanning; exact contract mode enumeration
+    root-caused and corrected that boundary without changing runtime behavior. PUC Lua and LuaJIT each pass
+    176/176, primary remains 61x2, corpus remains 105/105, and capability remains 64/0/0. Canonical local CI passes
+    reference CLI 61x2 and Phase 0 `1..1031` in 626 seconds. Mutation testing was not run.
+  Commit: `LUA-BACKEND-PARITY.8.2 - execute generated Lua families`
 
 - ID: `LUA-BACKEND-PARITY.8.3`
-  Status: `pending`
+  Status: `active`
   Goal: Admit the exact contract-sourced generated 8/105 subset.
   Acceptance: Interpreter-first values, independent generated load, metadata/plans/trace identity, callable-
     signature preservation/execution, checker-owned path/order/no-skip/cleanup, and complete Lua package/CLI/corpus
@@ -2895,11 +2908,11 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 ## Current frontier
 
-Generated-source scaffold parent `.8.1` is closed. Deterministic core `.8.1.1` plus fresh-process isolation `.8.1.2`
-prove exact v1/v2/v3 effective state, metadata/errors, direct/traced result identity, corrupt-payload failure, and
-cleanup at 173/173 on PUC Lua and LuaJIT plus canonical Phase 0 `1..1031`/607s. Exact ten-family ordered plans,
-four rejections, authoritative structural execution, and portable generated trace under `.8.2` are the sole active
-Lua leaf. Accepted-subset proof remains `.8.3` and census admission `.8.4`.
+Generated-source scaffold `.8.1` and exact family execution `.8.2` are closed. Lua now has deterministic exact
+v1/v2/v3 source, dual-ABI valid/corrupt isolation, ordered ten-family plans, four rejections, plan-authoritative
+root/nested dispatch, portable generated trace, an isolated all-family module, and reconstructed variadic execution
+at 176/176 per ABI plus canonical Phase 0 `1..1031`/626s. Contract-sourced interpreter-first accepted-subset proof
+`.8.3` is the sole active Lua leaf; census admission remains `.8.4`.
 
 Global delegation note: selector-free uniform bindings and exact selector rejection remain part of the Lua gate.
 Numeric helper parent `.4.3.3` and complete non-callback array parent `.4.3.4` pass 99/99 on PUC Lua and LuaJIT.
@@ -3113,8 +3126,8 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 | 131 | `LUA-BACKEND-PARITY.7.3` | `done` | Checkout setup, exact primary/corpus separation, limitations, docs, KM, and gates agree. |
 | 132 | `LUA-BACKEND-PARITY.8` | `active` | Implement generated Lua source and complete capability admission. |
 | 133 | `LUA-BACKEND-PARITY.8.1` | `done` | Deterministic emitter plus fresh-process dual-ABI valid/corrupt load/run/cleanup close at 173/173. |
-| 134 | `LUA-BACKEND-PARITY.8.2` | `active` | Add exact ten-family plan and authoritative direct generated execution. |
-| 135 | `LUA-BACKEND-PARITY.8.3` | `pending` | Admit the exact contract-sourced generated 8/105 subset. |
+| 134 | `LUA-BACKEND-PARITY.8.2` | `done` | Exact plans, four rejections, root/nested dispatch, portable trace, all-family host, and variadic proof pass at 176/176 per ABI. |
+| 135 | `LUA-BACKEND-PARITY.8.3` | `active` | Admit the exact contract-sourced generated 8/105 subset. |
 | 136 | `LUA-BACKEND-PARITY.8.4` | `pending` | Close Lua capability parity and backend handoff. |
 | 137 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Post-ADR-0041 contract audit splits exact v1/v2/v3 emission from isolated host proof. |
 | 138 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic native Lua preserves exact v1/v2/v3 state, metadata, errors, and entrypoint roles at 172/172 per ABI. |
@@ -3614,6 +3627,32 @@ Generated-source scaffold `.8.1` is active; execution, admission, and census clo
 - [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook generated API/status/
   handoff/gate pages, Knowledge Map, changes/notes, and bounded memory close scaffold `.8.1` and activate only
   exact ten-family execution `.8.2`.
+
+### `LUA-BACKEND-PARITY.8.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The `.8.1` module exposes metadata plus direct/traced interpreter delegation, but no
+  public ordered plan, pre-execution plan validation, plan-authoritative root/nested dispatch, portable generated
+  trace roles, isolated all-family matrix, or generated-path variadic fixture proof exists.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `CompiledRule.mode_metadata`, `regex_patterns`, `action_edges`, and
+  `blind_edges` retain the exact ten-family classification inputs, while `interpreter.execute_rule` currently
+  chooses blind versus regex dispatch only from compiled structure. Generated execution needs a separately
+  validated per-label family map threaded through every nested rule; otherwise a plan would be inert metadata.
+  Initial proof also showed Lua's broad native `is_repetition` includes ordinary repeated default scanning, while
+  contract generated repetition is the exact seven explicitly named modes; classification must use those names.
+- [x] **FIX** — Add typed plan rows, exact family classification/order/four-way validation, generated direct/traced
+  execution APIs, per-root/nested plan dispatch and portable enter/decision/exit trace, emitted plan/validation
+  roles, one isolated ten-family host matrix, and generated reconstruction/execution of the neutral variadic
+  callable fixture.
+- [x] **ADDRESSED (verified)** — One combined 26-row spec proves all ten public root families, ordered/nested rows,
+  interpreter-equal direct values, four exact validation codes/attribution, attributed execution failure, and
+  portable trace/source identity. A persisted all-family module validates its plan and executes all ten roots in
+  fresh PUC Lua and LuaJIT hosts with exact output and cleanup. The unchanged variadic fixture reconstructs and
+  executes exact mixed/empty rest-array results. `bash tools/run_lua_local.sh` passes 176/176 on both ABIs.
+- [x] **NO REGRESSION** — Native interpreter/trace take the unchanged no-plan branch; primary CLI remains 61x2,
+  corpus remains 105/105, public status/capability 64/0/0 remain unchanged, and subset/census stay `.8.3-.8.4`.
+  Canonical local CI passes reference CLI 61x2 plus Phase 0 `1..1031` in 626 seconds. Mutation testing was not run.
+- [x] **LOCKSTEP** — Root/Lua docs, roadmaps, architecture/task/index/live state, mdBook API/pipeline/status/handoff/
+  gate pages, Knowledge Map, changes/notes, and bounded memory close `.8.2` and activate only subset `.8.3`.
 
 ### `LUA-BACKEND-PARITY.6.1.4` Acceptance Checklist
 
@@ -5184,3 +5223,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.8.1.0` | `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold` | Post-ADR-0041 v1/v2/v3 scope correction, emitter/isolation split, and `.8.1.1` handoff before code. |
 | `LUA-BACKEND-PARITY.8.1.1` | `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source` | Exact effective v1/v2/v3 state, canonical strict-UTF-8/ASCII hex, metadata/errors, direct/traced roles, and `.8.1.2` handoff. |
 | `LUA-BACKEND-PARITY.8.1.2` | `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts` | Fresh PUC Lua/LuaJIT valid/corrupt modules, exact metadata/results/failures/trace, verified cleanup, parent closure, and `.8.2` handoff. |
+| `LUA-BACKEND-PARITY.8.2` | `LUA-BACKEND-PARITY.8.2 - execute generated Lua families` | Exact ten-family plans/four rejections, authoritative nested dispatch, portable trace, isolated all-family/variadic proof, and `.8.3` handoff. |

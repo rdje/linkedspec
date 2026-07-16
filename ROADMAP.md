@@ -1025,8 +1025,9 @@ Generated-source planning `.8.1.0` then corrects the pre-ADR-0041 v1/v2-only sco
 returns deterministic native Lua containing exact fixed-v1/variadic-v2/final-codeblock-v3 effective state,
 contract/version/Unicode identity metadata, typed portable errors, and direct/traced roles. Canonical strict-UTF-8
 JSON and identity bytes are embedded as ASCII hex. Fresh-process PUC Lua/LuaJIT valid/corrupt load/run/cleanup
-proof `.8.1.2` closes scaffold `.8.1` at 173/173 per ABI. Exact plan families are active under `.8.2`;
-accepted-subset proof and census admission remain `.8.3-.8.4`.
+proof `.8.1.2` closes scaffold `.8.1` at 173/173 per ABI. Exact plan/family execution `.8.2` closes at 176/176
+per ABI with ten ordered families, four rejections, authoritative nested dispatch, portable trace, an isolated
+all-family host, and emitted variadic proof. Accepted-subset `.8.3` is active; census admission remains `.8.4`.
 
 Documentation architecture note (2026-07-15, ADR `0040` / `FUTURE-PARITY-BACKLOG.21.0`): adopt one normative
 backend-neutral mdBook plus five linked implementation companions for Perl, Rust, Dart, Julia, and Lua. The common

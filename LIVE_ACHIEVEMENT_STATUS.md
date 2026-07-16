@@ -8,6 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **LUA-BACKEND-PARITY.8.2 — execute generated Lua families**
+  (DONE — exact authoritative ten-family execution closes; contract-sourced subset `.8.3` is next).
+
+  **Result:** Typed source-ordered rows expose all ten contract families and four exact pre-execution rejections.
+  The validated map controls regex/blind selection at every root and nested rule; native execution remains on its
+  no-plan path. Generated trace adds portable enter/decision/exit roles with source/rule/family. One 26-row matrix
+  proves all ten roots, nested dispatch, interpreter-equal values, attributed failure, and a persisted dual-ABI
+  all-family host with cleanup. Emitted source also reconstructs and executes the neutral variadic fixture through
+  fresh typed rest arrays. The first run exposed Lua's broader native default-repetition flag; exact contract mode
+  enumeration corrected classification without changing results.
+
+  **Proof:** PUC Lua and LuaJIT each pass 176/176, primary CLI remains 61/61 under default and POSIX environments,
+  and corpus remains 105/105. Generated-source/callable/capability 64/0/0, Knowledge Map, memory, doctrine, mdBook,
+  and whitespace checks pass. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase
+  0 true reach `1..1031` in 626 seconds. Mutation testing was not run. Contract-sourced accepted-subset `.8.3` is
+  active; census `.8.4` remains.
+
 - 2026-07-16: **LUA-BACKEND-PARITY.8.1.2 — isolate generated Lua hosts**
   (DONE — persisted dual-ABI valid/corrupt proof closes scaffold `.8.1`; exact family-plan `.8.2` is next).
 

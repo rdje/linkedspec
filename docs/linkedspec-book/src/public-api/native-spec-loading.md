@@ -170,7 +170,8 @@ cross-backend matrix passes 5x2x61; public status is `runtime-corpus-primary-cli
 `.7`. Planning leaf `.8.1.0` corrected the older v1/v2-only generated-source scope against current outward
 descriptor v3. Emitter core `.8.1.1` supplies deterministic exact-v1/v2/v3 source construction, and `.8.1.2`
 proves persisted valid and corrupt modules in fresh PUC Lua/LuaJIT hosts with complete caller-owned cleanup.
-Exact generated family execution is active under `.8.2`; capability admission remains `.8.4`.
+Exact generated family execution closes under `.8.2`; accepted-subset `.8.3` is active and capability admission
+remains `.8.4`.
 
 ## Lua generated-source API
 
@@ -210,6 +211,10 @@ local metadata = linkedspec.generated_source_metadata_to_json(
 assert(metadata.contract_id == "linkedspec-generated-source-v1")
 assert(metadata.format_version == 1)
 assert(metadata.source_identity == "generated/example.spec")
+local plan = generated.plan()
+generated.validate_plan(plan)
+assert(plan[1].label == "Top")
+assert(plan[1].family == "default")
 assert(generated.execute("x", { top_rule = "Top" }) == "generated")
 ```
 
@@ -218,6 +223,8 @@ The emitted module exports:
 - `LINKEDSPEC_GENERATED_SOURCE_CONTRACT`, `LINKEDSPEC_GENERATED_SOURCE_FORMAT`, and
   `LINKEDSPEC_GENERATED_SOURCE_IDENTITY` markers;
 - `metadata()` for typed contract/version/identity metadata;
+- `plan()` for a fresh source-ordered list of typed `{ label, family }` rows;
+- `validate_plan(actual)` for exact pre-execution validation against the compiled state;
 - `execute(input[, options])` for the direct result value;
 - `execute_with_trace(input, trace_config[, options])` for the same result while using the native caller-owned
   trace configuration and writers in `options`.
@@ -228,15 +235,26 @@ Its failures use typed `GeneratedSourceError` values. `generated_source_error_to
 `type`, `stage`, `code`, `summary`, and `source_identity` fields plus optional `rule_label`, `handler_family`, and
 `detail`. The four stages and seven codes are exported for callers that need exact classification.
 
+The ten family names are `default`, `or_acode`, `and_single_acode`, `and_acode_seq`, `and_bcode`, `or_bcode`,
+`rep_acode`, `rep_bcode`, `rep_and_acode`, and `rep_and_bcode`. Validation distinguishes row-count, ordered-label,
+known-family mismatch, and unknown-family drift. Unknown names are rejected before expected-family comparison.
+The validated per-label map is authoritative: every generated root and nested rule reads it to select regex or
+blind dispatch. Ordinary native execution has no map and retains compiled-structure selection.
+
+Generated traced execution retains the native trace and adds `generated_rule_enter`,
+`generated_family_decision`, and `generated_rule_exit` at low level with source identity, rule, and family. The
+focused proof compares all ten root values with the native interpreter, observes nested-family events, attributes
+generated execution failures, runs one combined emitted all-family module in fresh PUC Lua and LuaJIT hosts, and
+reconstructs the neutral variadic callable fixture through typed rest arrays rather than host varargs.
+
 Fresh-process PUC Lua/LuaJIT persistence is recurring proof under `.8.1.2`. The focused host test writes a valid
 module, an invalid-payload variant, and a runner into one unique caller-owned temporary directory; launches the
 exact ABI runtime and native module paths used by the gate; captures stdout and stderr separately; and locks exact
 Unicode metadata/result, direct/traced results, native trace, missing-rule attribution, corrupt-payload stage/code,
 and source identity. The directory must be absent after normal completion and after an injected host failure.
 
-The scaffold does not yet export `plan()` or validate/execute the ten structural handler families; those roles and
-portable generated-family trace events are active under `.8.2`. Contract-sourced 8/105 admission is `.8.3`, and
-only `.8.4` may add Lua to the capability census.
+PUC Lua and LuaJIT pass 176/176. Contract-sourced 8/105 admission is active under `.8.3`; only `.8.4` may add Lua
+to the capability census.
 
 ## Lua automatic function parsing
 

@@ -5,6 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: Lua generated family execution `.8.2` adds typed ordered plan rows and exact classification
+  over the neutral ten-family vocabulary. Validation rejects row-count, label, known-family, and unknown-family
+  drift before execution with portable attribution. The validated per-label map is threaded through every root and
+  nested rule and authoritatively chooses regex versus blind dispatch; native execution without a plan retains its
+  compiled-structure choice. Low-level trace adds `generated_rule_enter`, `generated_family_decision`, and
+  `generated_rule_exit` with source identity/rule/family. One 26-row matrix proves all ten root families, nested
+  dispatch, four failures, interpreter-equal values, and fresh-host load/run/cleanup on both ABIs; emitted source
+  also reconstructs and executes the neutral variadic fixture through typed rest arrays. Initial classification
+  exposed Lua's broader native default-repetition flag; exact neutral mode enumeration fixed the plan without
+  changing runtime behavior. PUC Lua and LuaJIT pass 176/176, primary stays 61x2, corpus stays 105/105, capability
+  stays 64/0/0, and canonical Phase 0 passes `1..1031` in 626 seconds. Accepted-subset `.8.3` is active; census
+  admission remains `.8.4`.
 - `2026-07-16` refresh: Lua generated-source isolation `.8.1.2` closes scaffold parent `.8.1`. The focused gate
   passes the exact current runtime command into each ABI test; one unique caller-owned temporary root contains a
   valid generated module, corrupt-payload module, runner, and captured channels. Fresh PUC Lua/LuaJIT processes

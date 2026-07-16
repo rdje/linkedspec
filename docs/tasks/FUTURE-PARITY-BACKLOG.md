@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (fresh-process dual-ABI proof `.8.1.2` closes generated scaffold `.8.1` at 173/173;
-  exact ten-family plan/execution `.8.2` is active while diagnostic `.5.1` and
+- Last updated: `2026-07-16` (exact generated ten-family plan/execution `.8.2` closes at 176/176 per ABI;
+  contract-sourced accepted-subset `.8.3` is active while diagnostic `.5.1` and
   logical `.5.2` remain dependency-gated).
 - Owner: repo-local workflow
 
@@ -4751,6 +4751,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 | 189 | `LUA-BACKEND-PARITY.8.1.0` | `done` | Corrected post-ADR-0041 v1/v2/v3 scope and split emitter core from isolated host proof. |
 | 190 | `LUA-BACKEND-PARITY.8.1.1` | `done` | Deterministic Lua source preserves exact v1/v2/v3 effective state, metadata, errors, and entrypoint roles. |
 | 191 | `LUA-BACKEND-PARITY.8.1.2` | `done` | Fresh PUC/LuaJIT hosts prove exact Unicode metadata/results, failures, trace, and cleanup. |
+| 192 | `LUA-BACKEND-PARITY.8.2` | `done` | Exact ten-family plans, four rejections, authoritative root/nested execution, portable trace, all-family host, and variadic proof pass at 176/176. |
+| 193 | `LUA-BACKEND-PARITY.8.3` | `active` | Admit the exact contract-sourced interpreter-first generated 8/105 subset. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Normalize helper caveats: diagnostic output, constructors/transforms/join/push, harray order/collisions, truthiness, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -5392,6 +5394,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `LUA-BACKEND-PARITY.8.2` | Exact 10-family/26-row plan; four rejections; root/nested authoritative dispatch; portable source/rule/family trace; interpreter-equal direct values; attributed execution failure; emitted neutral variadic fixture; isolated all-family PUC/LuaJIT hosts and cleanup; Lua 176x2, primary 61x2, corpus 105/105; generated/callable/capability 64/0/0; canonical CLI 61x2 and Phase 0 `1..1031`/626s. | PASS. Family execution closes without status/census promotion; contract-sourced subset `.8.3` activates. |
 | `2026-07-16` | `LUA-BACKEND-PARITY.8.1.2` | Unique caller-owned valid/corrupt generated modules and runner; explicit PUC/LuaJIT runtime/LUA_PATH/LUA_CPATH; exact Unicode metadata/direct/traced/missing/corrupt output; cleanup success/injected failure; Lua 173x2, primary 61x2, corpus 105/105; generated/callable/capability 64/0/0; KM/memory/doctrines/mdBook/whitespace; canonical CLI 61x2 and Phase 0 `1..1031`/607s. | PASS. Scaffold `.8.1` closes without plan/status/census promotion; exact ten-family `.8.2` activates. |
 | `2026-07-16` | `LUA-BACKEND-PARITY.8.1.1` | Public compatibility/v1 emitter; exact v1/v2/v3 effective state; strict-UTF-8 canonical JSON and Unicode identity ASCII hex; metadata/errors/direct+traced roles; PUC Lua 172/LuaJIT 172; primary 61x2; corpus 105/105; generated/callable/capability 64/0/0; Knowledge Map, memory, doctrines, mdBook, whitespace; canonical CLI 61x2 and Phase 0 `1..1031`/620s. | PASS. Deterministic Lua source core is current without plan/status/census promotion; fresh-process isolation `.8.1.2` activates. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.21.0` | User proposal; existing neutral-book/backend-README architecture; ADR 0040; detailed task/index/roadmap/live-doc/book/KM sync; memory architecture; Knowledge Map; task metadata; doctrines; mdBook; whitespace. | PASS. One canonical neutral book plus five linked implementation companions is adopted and dependency-gated; no scaffold/content migration or behavior change. |
@@ -5530,6 +5533,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `LUA-BACKEND-PARITY.8.2` | `LUA-BACKEND-PARITY.8.2 - execute generated Lua families` | Exact plans/rejections, authoritative nested dispatch, portable trace, isolated all-family/variadic proof, and subset handoff. |
 | `LUA-BACKEND-PARITY.8.1.2` | `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts` | Fresh dual-ABI valid/corrupt load/run, exact channels/metadata/results/failures/trace, cleanup, and `.8.2` handoff. |
 | `LUA-BACKEND-PARITY.8.1.1` | `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source` | Exact effective v1/v2/v3 state, canonical strict-UTF-8/ASCII hex, metadata/errors, direct/traced roles, and isolation handoff. |
 | `FUTURE-PARITY-BACKLOG.21.0` | `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books` | ADR 0040, one neutral normative owner, five implementation companions, routing/drift gates, and parity dependency. |

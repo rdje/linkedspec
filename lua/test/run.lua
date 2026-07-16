@@ -4179,6 +4179,92 @@ local function load_generated_lua_module(source)
   return module_or_error
 end
 
+local function generated_family_matrix()
+  local source = [[
+DefaultRoot::
+ I { set(words, []) }
+ /hello[ \t]+(\w+)/
+ LE { push(words, match_group(0)) }
+ E { return(copy(words)) }
+
+OrAcode:OR
+ /go/ -> OrDone { return("or-acode") }
+OrDone: /go/
+
+AndSingle:AND
+ /one/ -> AndSingleDone { return("and-single") }
+AndSingleDone: /one/
+
+AndSeq:AND
+ /a/ -> AndSeqFirst
+ /[ \t]+b/ -> AndSeqSecond { return("and-seq") }
+AndSeqFirst: /a/
+AndSeqSecond: /[ \t]+b/
+
+AndBcode:AND
+ => AndBlindA
+ => AndBlindB
+ E { return("and-bcode") }
+AndBlindA: /a/
+AndBlindB: /[ \t]+b/
+
+OrBcode:OR
+ => OrBlindA
+ => OrBlindB
+ E { return(cat("or-bcode:", retv)) }
+OrBlindA: /a/ E { return("A") }
+OrBlindB: /b/ E { return("B") }
+
+RepAcode:OR{2,3}
+ I { set(rep_acode, []) }
+ /a/ -> RepA { push(rep_acode, match_text()) }
+ /b/ -> RepB { push(rep_acode, match_text()) }
+ E { return(copy(rep_acode)) }
+RepA: /a/
+RepB: /b/
+
+RepBcode:OR{2,3}
+ I { set(rep_bcode, []) }
+ => RepBlindA
+ => RepBlindB
+ LE { push(rep_bcode, retv) }
+ E { return(copy(rep_bcode)) }
+RepBlindA:& /a/ LE { return("A") }
+RepBlindB:& /b/ LE { return("B") }
+
+RepAndAcode:AND{2}
+ I { set(rep_and_acode, []); set(rep_and_acode_pair, []) }
+ /a/ -> RepAndA { push(rep_and_acode_pair, match_text()) }
+ /b/ -> RepAndB { push(rep_and_acode_pair, match_text()) }
+ IT { push(rep_and_acode, copy(rep_and_acode_pair)); set(rep_and_acode_pair, []) }
+ E { return(copy(rep_and_acode)) }
+RepAndA: /a/
+RepAndB: /b/
+
+RepAndBcode:AND{2}
+ I { set(rep_and_bcode, []); set(rep_and_bcode_group, []) }
+ => RepAndBlindA { push(rep_and_bcode_group, retv) }
+ => RepAndBlindB { push(rep_and_bcode_group, retv) }
+ IT { push(rep_and_bcode, copy(rep_and_bcode_group)); set(rep_and_bcode_group, []) }
+ E { return(copy(rep_and_bcode)) }
+RepAndBlindA:& /a/ LE { return("A") }
+RepAndBlindB:& /b/ LE { return("B") }
+]]
+  local cases = {
+    { label = "DefaultRoot", family = "default", input = "hello one hello two" },
+    { label = "OrAcode", family = "or_acode", input = "go" },
+    { label = "AndSingle", family = "and_single_acode", input = "one" },
+    { label = "AndSeq", family = "and_acode_seq", input = "a b" },
+    { label = "AndBcode", family = "and_bcode", input = "a b" },
+    { label = "OrBcode", family = "or_bcode", input = "a" },
+    { label = "RepAcode", family = "rep_acode", input = "abab" },
+    { label = "RepBcode", family = "rep_bcode", input = "abab" },
+    { label = "RepAndAcode", family = "rep_and_acode", input = "abab" },
+    { label = "RepAndBcode", family = "rep_and_bcode", input = "abab" },
+  }
+  return linkedspec.compile_spec(linkedspec.parse_spec(source)), cases
+end
+
 test("generated Lua source is deterministic and preserves exact effective v1 v2 v3 state", function()
   local fixed = registry_function(
     "fixed",
@@ -4308,6 +4394,176 @@ test("generated Lua module executes direct and traced roles in process", functio
   assert_equal(compatibility.metadata().source_identity, "<inline>", "compatibility identity")
 end)
 
+test("generated Lua plans classify validate execute and trace all ten structural families", function()
+  local compiled, cases = generated_family_matrix()
+  local identity = "generated-source/lua-family-matrix.spec"
+  local plan = linkedspec.build_generated_rule_plan(compiled)
+  local family_names = linkedspec.generated_rule_family_names()
+  assert_equal(
+    json.encode(family_names),
+    '["default","or_acode","and_single_acode","and_acode_seq","and_bcode",' ..
+      '"or_bcode","rep_acode","rep_bcode","rep_and_acode","rep_and_bcode"]',
+    "neutral generated family names"
+  )
+  assert_equal(#plan, #compiled.compiled_rule_order, "generated plan row count")
+
+  local by_label = {}
+  for index, row in ipairs(plan) do
+    assert_equal(linkedspec.is_generated_plan_row(row), true, "generated plan row type " .. index)
+    assert_equal(row.label, compiled.compiled_rule_order[index], "generated plan source order " .. index)
+    by_label[row.label] = row.family
+  end
+  linkedspec.validate_generated_rule_plan_v1(compiled, plan, identity)
+
+  local expected_values = json.harray()
+  for _, case in ipairs(cases) do
+    assert_equal(by_label[case.label], case.family, case.label .. " generated family")
+    local native = linkedspec.runtime_parse(
+      linkedspec.runtime_engine(compiled),
+      case.input,
+      { top_rule = case.label }
+    ).value
+    local generated = linkedspec.execute_generated_parser_v1(
+      compiled,
+      plan,
+      case.input,
+      identity,
+      { top_rule = case.label }
+    )
+    assert_equal(json.encode(generated), json.encode(native), case.label .. " generated/native value")
+    expected_values[case.label] = native
+  end
+
+  local function copied_plan()
+    local result = json.array()
+    for index, row in ipairs(plan) do
+      result[index] = linkedspec.generated_plan_row(row.label, row.family)
+    end
+    return result
+  end
+
+  local mutations = {
+    {
+      code = linkedspec.GENERATED_PLAN_ROW_COUNT_MISMATCH_CODE,
+      build = function()
+        local result = copied_plan()
+        result[#result] = nil
+        return result
+      end,
+    },
+    {
+      code = linkedspec.GENERATED_PLAN_LABEL_MISMATCH_CODE,
+      build = function()
+        local result = copied_plan()
+        result[1] = linkedspec.generated_plan_row("Wrong", result[1].family)
+        return result
+      end,
+      rule_label = "DefaultRoot",
+    },
+    {
+      code = linkedspec.GENERATED_PLAN_FAMILY_MISMATCH_CODE,
+      build = function()
+        local result = copied_plan()
+        result[1] = linkedspec.generated_plan_row(result[1].label, "or_acode")
+        return result
+      end,
+      rule_label = "DefaultRoot",
+      handler_family = "or_acode",
+    },
+    {
+      code = linkedspec.GENERATED_PLAN_UNKNOWN_FAMILY_CODE,
+      build = function()
+        local result = copied_plan()
+        result[1] = linkedspec.generated_plan_row(result[1].label, "invented")
+        return result
+      end,
+      rule_label = "DefaultRoot",
+      handler_family = "invented",
+    },
+  }
+  for _, mutation in ipairs(mutations) do
+    local ok, failure = pcall(
+      linkedspec.validate_generated_rule_plan_v1,
+      compiled,
+      mutation.build(),
+      identity
+    )
+    assert_equal(ok, false, mutation.code .. " rejected")
+    assert_equal(linkedspec.is_generated_source_error(failure), true, mutation.code .. " typed")
+    assert_equal(failure.stage, "validate_generated_plan", mutation.code .. " stage")
+    assert_equal(failure.code, mutation.code, mutation.code .. " code")
+    assert_equal(failure.source_identity, identity, mutation.code .. " identity")
+    assert_equal(failure.rule_label, mutation.rule_label, mutation.code .. " rule attribution")
+    assert_equal(failure.handler_family, mutation.handler_family, mutation.code .. " family attribution")
+  end
+
+  local trace_output = {}
+  local traced = linkedspec.execute_generated_parser_with_trace_v1(
+    compiled,
+    plan,
+    "a b",
+    linkedspec.trace_config_enabled(linkedspec.TRACE_LOW),
+    identity,
+    {
+      top_rule = "AndBcode",
+      stdout_writer = function(payload) trace_output[#trace_output + 1] = payload end,
+    }
+  )
+  assert_equal(json.encode(traced), json.encode(expected_values.AndBcode), "traced generated value")
+  local trace_text = table.concat(trace_output)
+  assert_contains(trace_text, "generated_rule_enter", "portable generated enter")
+  assert_contains(trace_text, "generated_family_decision", "portable generated decision")
+  assert_contains(trace_text, "generated_rule_exit", "portable generated exit")
+  assert_contains(trace_text, "source_identity=" .. identity, "portable generated identity")
+  assert_contains(trace_text, "rule=AndBcode family=and_bcode", "portable root family")
+  assert_contains(trace_text, "rule=AndBlindA family=default", "portable nested family")
+
+  local failed_ok, failed_error = pcall(
+    linkedspec.execute_generated_parser_v1,
+    compiled,
+    plan,
+    "a",
+    identity,
+    { top_rule = "RepAcode" }
+  )
+  assert_equal(failed_ok, false, "generated family failure status")
+  assert_equal(linkedspec.is_generated_source_error(failed_error), true, "generated family failure type")
+  assert_equal(failed_error.rule_label, "RepAcode", "generated family failure rule")
+  assert_equal(failed_error.handler_family, "rep_acode", "generated family failure attribution")
+end)
+
+test("generated Lua reconstructs and executes the neutral variadic callable fixture", function()
+  local contract = json.decode(read_file("capability_conformance/callable_signature_contract.json"))
+  local source = contract.fixture.spec_source
+  local nodes = json.array({
+    definition_node(source, "pair", { "left", "right" }, " return([left, right]) "),
+    variadic_definition_node(source, "all_values", {}, "items", " return(items) "),
+    variadic_definition_node(
+      source,
+      "collect",
+      { "prefix" },
+      "items",
+      ' return({ "prefix" : prefix, "items" : items }) '
+    ),
+  })
+  local staged = linkedspec.parse_spec_with_staged_user_function_definition_asts(source, nodes)
+  local compiled = linkedspec.compile_spec(staged)
+  local native = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(compiled),
+    contract.fixture.input
+  ).value
+  local generated = load_generated_lua_module(
+    linkedspec.emit_lua_source_v1(compiled, "generated-source/lua-variadic.spec")
+  )
+  local plan = generated.plan()
+  generated.validate_plan(plan)
+  plan[1] = linkedspec.generated_plan_row("Mutated", plan[1].family)
+  assert_equal(generated.plan()[1].label, "Top", "generated plan copy isolation")
+  local value = generated.execute(contract.fixture.input)
+  assert_equal(json.encode(native), json.encode(contract.fixture.expected), "native variadic fixture value")
+  assert_equal(json.encode(value), json.encode(native), "generated variadic fixture value")
+end)
+
 local function generated_source_host_runner()
   return [[
 local linkedspec = require("linkedspec")
@@ -4364,21 +4620,25 @@ end
 ]]
 end
 
-local function run_generated_source_host(runtime, root, generated_path, mode)
-  local stdout_path = root .. "/" .. mode .. ".stdout"
-  local stderr_path = root .. "/" .. mode .. ".stderr"
-  local command = table.concat({
+local function run_generated_lua_host(runtime, root, tag, arguments)
+  local stdout_path = root .. "/" .. tag .. ".stdout"
+  local stderr_path = root .. "/" .. tag .. ".stderr"
+  local command_parts = {
     "env",
     shell_quote("LUA_PATH=" .. (os.getenv("LUA_PATH") or package.path)),
     shell_quote("LUA_CPATH=" .. (os.getenv("LUA_CPATH") or package.cpath)),
     shell_quote(runtime),
     shell_quote(root .. "/runner.lua"),
-    shell_quote(generated_path),
-    shell_quote(mode),
-    ">" .. shell_quote(stdout_path),
-    "2>" .. shell_quote(stderr_path),
-  }, " ")
+  }
+  for _, argument in ipairs(arguments) do command_parts[#command_parts + 1] = shell_quote(argument) end
+  command_parts[#command_parts + 1] = ">" .. shell_quote(stdout_path)
+  command_parts[#command_parts + 1] = "2>" .. shell_quote(stderr_path)
+  local command = table.concat(command_parts, " ")
   return command_succeeded(command), read_file(stdout_path), read_file(stderr_path)
+end
+
+local function run_generated_source_host(runtime, root, generated_path, mode)
+  return run_generated_lua_host(runtime, root, mode, { generated_path, mode })
 end
 
 test("generated Lua source loads and fails in fresh dual ABI host processes with cleanup", function()
@@ -4451,6 +4711,92 @@ test("generated Lua source loads and fails in fresh dual ABI host processes with
   assert_equal(cleanup_ok, false, "fresh host cleanup failure path propagates")
   assert_contains(cleanup_error, "intentional generated-host cleanup probe", "cleanup failure propagation")
   assert_equal(directory_exists(failure_root), false, "fresh host directory cleanup after failure")
+end)
+
+local function generated_family_host_runner()
+  return [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local generated_path = assert(arg[1], "generated module path is required")
+local matrix_path = assert(arg[2], "family matrix path is required")
+local chunk, load_error = loadfile(generated_path)
+if chunk == nil then error(load_error, 0) end
+local generated = chunk()
+local matrix_file = assert(io.open(matrix_path, "rb"))
+local matrix = json.decode(assert(matrix_file:read("*a")))
+assert(matrix_file:close())
+
+local plan = generated.plan()
+generated.validate_plan(plan)
+local plan_by_label = {}
+for _, row in ipairs(plan) do plan_by_label[row.label] = row.family end
+for _, case in ipairs(matrix.cases) do
+  assert(plan_by_label[case.label] == case.family, "generated host family drift: " .. case.label)
+  local actual = generated.execute(case.input, { top_rule = case.label })
+  assert(json.encode(actual) == json.encode(case.expected), "generated host value drift: " .. case.label)
+end
+
+local trace_output = {}
+generated.execute_with_trace(
+  "a b",
+  linkedspec.trace_config_enabled(linkedspec.TRACE_LOW),
+  {
+    top_rule = "AndBcode",
+    stdout_writer = function(payload) trace_output[#trace_output + 1] = payload end,
+  }
+)
+local trace = table.concat(trace_output)
+assert(trace:find("generated_rule_enter", 1, true), "generated enter trace is missing")
+assert(trace:find("generated_family_decision", 1, true), "generated decision trace is missing")
+assert(trace:find("generated_rule_exit", 1, true), "generated exit trace is missing")
+assert(trace:find("source_identity=generated-source/lua-family-host.spec", 1, true), "identity trace is missing")
+assert(trace:find("rule=AndBcode family=and_bcode", 1, true), "root family trace is missing")
+assert(trace:find("rule=AndBlindA family=default", 1, true), "nested family trace is missing")
+io.write("generated-family-host-ok\n")
+]]
+end
+
+test("generated Lua all-family matrix loads and executes in fresh dual ABI hosts", function()
+  local runtime = os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME")
+  if runtime == nil or runtime == "" then
+    runtime = type(jit) == "table" and "luajit" or "lua"
+  end
+  local compiled, cases = generated_family_matrix()
+  local expected_cases = json.array()
+  for index, case in ipairs(cases) do
+    expected_cases[index] = json.harray({
+      label = case.label,
+      family = case.family,
+      input = case.input,
+      expected = linkedspec.runtime_parse(
+        linkedspec.runtime_engine(compiled),
+        case.input,
+        { top_rule = case.label }
+      ).value,
+    })
+  end
+
+  local cleaned_root = with_temp_directory(function(root)
+    local generated_path = root .. "/generated_family_parser.lua"
+    local matrix_path = root .. "/matrix.json"
+    write_file(
+      generated_path,
+      linkedspec.emit_lua_source_v1(compiled, "generated-source/lua-family-host.spec")
+    )
+    write_file(matrix_path, json.encode(json.harray({ cases = expected_cases })))
+    write_file(root .. "/runner.lua", generated_family_host_runner())
+    local ok, stdout, stderr = run_generated_lua_host(
+      runtime,
+      root,
+      "family-matrix",
+      { generated_path, matrix_path }
+    )
+    assert_equal(ok, true, "fresh family host status")
+    assert_equal(stdout, "generated-family-host-ok\n", "fresh family host output")
+    assert_equal(stderr, "", "fresh family host stderr")
+  end, "linkedspec-lua-generated-families")
+  assert_equal(directory_exists(cleaned_root), false, "fresh family host cleanup")
 end)
 
 test("compiled spec reports typed dependency failures after optional validation", function()

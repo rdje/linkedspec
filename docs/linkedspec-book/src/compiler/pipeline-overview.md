@@ -47,8 +47,8 @@ same runtime engine. It preserves fixed-v1, variadic-v2, and final-codeblock-v3 
 inventing a separate compiled-state decoder. Contract/version/identity markers and typed emit/compile-load/
 execution errors make the boundary inspectable. The scaffold is deterministic source generation, not an
 optimizing compiler. Fresh-process dual-ABI valid/corrupt load/run/cleanup is recurring proof under `.8.1.2`;
-ten-family plans, portable generated-family trace, accepted-subset admission, and census promotion remain
-subsequent Lua leaves.
+ten-family plans, authoritative root/nested dispatch, portable generated-family trace, and an isolated all-family
+module are current under `.8.2`. Accepted-subset admission and census promotion remain subsequent Lua leaves.
 
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
@@ -380,7 +380,7 @@ fresh typed rest arrays and the unchanged neutral fixture. Descriptor admission 
 owners remain `.8.1-.4`. Planning `.8.1.0` made that boundary explicit: emitter core `.8.1.1` reconstructs the
 effective fixed-v1, variadic-v2, and final-codeblock-v3 state union, and isolation `.8.1.2` executes persisted valid
 and corrupt modules in fresh PUC Lua and LuaJIT processes with exact cleanup. Four admitted backends implement the
-complete native/generated contract while Lua deliberately remains outside six-runtime admission until `.8.2-.8.4`
+complete native/generated contract while Lua deliberately remains outside six-runtime admission until `.8.3-.8.4`
 close.
 
 The current fallback boundary is deliberate. Malformed helper forms already covered by

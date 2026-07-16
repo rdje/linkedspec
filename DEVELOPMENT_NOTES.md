@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`LUA-BACKEND-PARITY.8.2` — a generated plan must own dispatch, not merely describe it): Classify
+  source-ordered compiled rules into typed contract rows, validate all rows before any execution, then thread the
+  resulting per-label family map through root and nested calls. When a map exists, it chooses regex versus blind
+  dispatch; when absent, native execution retains its compiled-edge choice. Emit portable enter/decision/exit
+  events beside native trace so source identity, rule, and neutral family are observable. Lua's native
+  `mode_metadata.is_repetition` cannot be reused directly: it includes ordinary repeated default scanning, while
+  contract generated repetition means the exact seven explicit Plus/Star/Optional/bounded modes. The first matrix
+  run misclassified `DefaultRoot` as `rep_acode`; exact mode enumeration fixed the contract boundary without
+  changing interpreter results. One 26-row spec plus fresh emitted host proves all ten roots, nested dispatch, four
+  rejections, trace, values, and cleanup; the neutral variadic fixture proves reconstructed typed rest arrays.
+  PUC Lua and LuaJIT pass 176/176, primary stays 61x2, corpus stays 105/105, capability stays 64/0/0, and canonical
+  local CI passes Phase 0 `1..1031` in 626 seconds. Mutation testing was not run.
+
 - 2026-07-16 (`LUA-BACKEND-PARITY.8.1.2` — process isolation must use the ABI already selected by the gate): A
   fresh-host test should not rediscover `lua` or `luajit` from `PATH`; pass the exact executable through a narrow
   test-only environment variable, and retain the enclosing gate's `LUA_PATH`/`LUA_CPATH`. Persist valid source,

@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-16 — LUA-BACKEND-PARITY.8.2 — execute generated Lua families
+
+Added typed source-ordered generated plan rows, the exact ten-family vocabulary, public plan construction/
+projection/validation/execution APIs, and emitted-module `plan()`/`validate_plan()` roles. Validation rejects row
+count, ordered label, known-family mismatch, and unknown family before execution with exact portable stage/code,
+identity, rule, family, and detail fields.
+
+Generated execution now threads the validated per-label map through every root and nested rule. The map
+authoritatively chooses regex versus blind dispatch; native execution without a plan retains its existing
+compiled-structure path. Traced generated execution preserves native events and adds portable
+`generated_rule_enter`, `generated_family_decision`, and `generated_rule_exit` with source identity/rule/family.
+
+Added one 26-row combined matrix covering all ten root families and nested rows, interpreter-equal direct values,
+all four rejections, attributed generated execution failure, and a persisted all-family module in fresh PUC Lua
+and LuaJIT hosts with exact output/trace/cleanup. The unchanged neutral callable fixture reconstructs and executes
+mixed and empty typed variadic rest arrays from emitted state rather than host varargs. Initial proof exposed that
+Lua's native `is_repetition` also describes ordinary default scanning; contract classification now enumerates the
+exact seven explicit repetition modes.
+
+PUC Lua and LuaJIT each pass 176/176; primary CLI stays 61/61 in default and POSIX environments and corpus stays
+105/105. Generated-source, callable, capability 64/0/0, Knowledge Map, memory, doctrines, mdBook, and whitespace
+checks pass. Canonical local CI exits 0 with reference CLI 61/61 in both environments plus Phase 0 `1..1031` in
+626 seconds. Contract-sourced subset `.8.3` is active; census `.8.4` remains. Mutation testing was not run.
+
 ## 2026-07-16 — LUA-BACKEND-PARITY.8.1.2 — isolate generated Lua hosts
 
 Added recurring fresh-process proof for generated Lua source. The focused gate now passes the exact selected ABI

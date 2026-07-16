@@ -177,7 +177,16 @@ local function public_parser_start_byte(input)
   return cursor_byte
 end
 
-local function context(engine, input, top_rule, compiled_rules, diagnostic_sink, trace_emitter)
+local function context(
+    engine,
+    input,
+    top_rule,
+    compiled_rules,
+    diagnostic_sink,
+    trace_emitter,
+    generated_families,
+    generated_source_identity
+  )
   local valid, position = json.validate_utf8(input)
   if not valid then
     local detail = "runtime input is not valid UTF-8 at byte " .. (position - 1)
@@ -212,6 +221,8 @@ local function context(engine, input, top_rule, compiled_rules, diagnostic_sink,
     cursor_stack = {},
     compiled_rules = compiled_rules,
     top_rule = top_rule,
+    generated_families = generated_families,
+    generated_source_identity = generated_source_identity,
   }
 end
 
@@ -3634,6 +3645,33 @@ execute_rule = function(engine, label, entry_index, ctx)
       " mode=" .. rule.mode_metadata.name .. " cursor=" .. tostring(ctx.cursor_byte),
     trace.TRACE_HIGH
   )
+  local generated_family = ctx.generated_families and ctx.generated_families[label] or nil
+  local generated_uses_blind_dispatch
+  if generated_family == nil then
+    generated_uses_blind_dispatch = #rule.blind_edges > 0
+  else
+    generated_uses_blind_dispatch = generated_family == "and_bcode" or
+      generated_family == "or_bcode" or generated_family == "rep_bcode" or
+      generated_family == "rep_and_bcode"
+  end
+  if generated_family ~= nil and ctx.generated_source_identity ~= nil then
+    runtime_trace_event(
+      ctx,
+      trace.TRACE_MARK,
+      "generated_rule_enter",
+      "source_identity=" .. ctx.generated_source_identity .. " rule=" .. label ..
+        " entry_regex=" .. tostring(entry_index) .. " cursor=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_LOW
+    )
+    runtime_trace_event(
+      ctx,
+      trace.TRACE_MARK,
+      "generated_family_decision",
+      "source_identity=" .. ctx.generated_source_identity .. " rule=" .. label ..
+        " family=" .. generated_family,
+      trace.TRACE_LOW
+    )
+  end
   local ok, result_or_flow = pcall(function()
     lifecycle(engine, rule, "I", ctx, accumulator)
     local minimum = rule.mode_metadata.rep_min
@@ -3643,7 +3681,7 @@ execute_rule = function(engine, label, entry_index, ctx)
       for _ = 1, engine.max_iterations do
         local before = ctx.cursor_byte
         local attempt = nextable(function()
-          if #rule.blind_edges > 0 then
+          if generated_uses_blind_dispatch then
             return blind_once(engine, rule, ctx, accumulator)
           end
           return regex_once(engine, rule, entry_index, ctx, accumulator)
@@ -3667,7 +3705,7 @@ execute_rule = function(engine, label, entry_index, ctx)
       local before = ctx.cursor_byte
       lifecycle(engine, rule, "LS", ctx, accumulator)
       local attempt = nextable(function()
-        if #rule.blind_edges > 0 then
+        if generated_uses_blind_dispatch then
           return blind_once(engine, rule, ctx, accumulator)
         end
         return regex_once(engine, rule, entry_index, ctx, accumulator)
@@ -3712,6 +3750,16 @@ execute_rule = function(engine, label, entry_index, ctx)
     local message = getmetatable(result_or_flow) == ERROR_MT and result_or_flow.message or tostring(result_or_flow)
     trace_exit_details = "error=" .. message .. " cursor=" .. tostring(ctx.cursor_byte)
   end
+  if generated_family ~= nil and ctx.generated_source_identity ~= nil then
+    runtime_trace_event(
+      ctx,
+      trace.TRACE_MARK,
+      "generated_rule_exit",
+      "source_identity=" .. ctx.generated_source_identity .. " rule=" .. label ..
+        " family=" .. generated_family .. " cursor=" .. tostring(ctx.cursor_byte),
+      trace.TRACE_LOW
+    )
+  end
   runtime_trace_scope_exit(ctx, trace_scope, trace_exit_details)
   ctx.accumulator_stack[#ctx.accumulator_stack] = nil
   ctx.rule_stack[#ctx.rule_stack] = nil
@@ -3739,6 +3787,15 @@ function M.runtime_parse(engine, input, options)
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     fail("trace must be a LinkedSpecTraceEmitter")
   end
+  if options._generated_families ~= nil and type(options._generated_families) ~= "table" then
+    fail("internal generated families must be a table")
+  end
+  if options._generated_source_identity ~= nil and type(options._generated_source_identity) ~= "string" then
+    fail("internal generated source identity must be a string")
+  end
+  if (options._generated_families == nil) ~= (options._generated_source_identity == nil) then
+    fail("internal generated plan and source identity must be provided together")
+  end
   local top = options.top_rule or default_top(engine)
   if not top then
     local detail = "compiled spec does not contain any rules"
@@ -3756,7 +3813,9 @@ function M.runtime_parse(engine, input, options)
     top,
     engine.compiled_spec.rules_by_label,
     options.diagnostic_sink,
-    options.trace
+    options.trace,
+    options._generated_families,
+    options._generated_source_identity
   )
   -- Mirror Perl's public parser wrapper; direct rule handlers bypass this boundary.
   set_live_cursor(ctx, public_parser_start_byte(input))

@@ -101,8 +101,9 @@ at 61/61 in default and POSIX environments from the focused gate and extends the
 status is `runtime-corpus-primary-cli`; final no-drift `.7.3` closes parent `.7`. Generated-source planning `.8.1.0`
 then corrects the older v1/v2-only scope, and emitter core `.8.1.1` now returns deterministic native Lua from the
 exact fixed-v1/variadic-v2/final-codeblock-v3 effective state. Fresh-process PUC Lua/LuaJIT host proof `.8.1.2`
-now closes scaffold `.8.1` at 173/173 per ABI; family plans `.8.2` are active, while accepted-subset admission and
-census promotion remain `.8.3-.8.4`.
+closes scaffold `.8.1` at 173/173 per ABI. Exact family execution `.8.2` adds ten ordered plan families, four
+rejections, authoritative root/nested dispatch, portable trace, an isolated all-family host, and emitted variadic
+proof at 176/176 per ABI. Accepted-subset `.8.3` is active; census promotion remains `.8.4`.
 
 ```lua
 local emitter = linkedspec.trace_emitter(
@@ -339,8 +340,8 @@ first/last order, 59 passes, and zero failures on both ABIs. Permanent `.6.2.6` 
 manifest through both the library and developer runner at 105/105 and 167/167 per ABI; `.6` closes and `.7.1`
 implements the exact primary adapter at 169/169 per ABI. Admission `.7.2` makes shared CLI 61x2 recurring and
 extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drift `.7.3` closes parent `.7`.
-Generated Lua emission and isolated dual-ABI valid/corrupt execution are current through `.8.1`; family plans,
-subset proof, and admission remain `.8.2-.8.4`.
+Generated Lua emission, isolated dual-ABI valid/corrupt execution, and exact family plans/execution are current
+through `.8.2`; subset proof and admission remain `.8.3-.8.4`.
 Cross-backend output routing/formatting is owned by
 `FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
 
@@ -762,10 +763,18 @@ The recurring gate persists a valid module, a corrupt-payload variant, and a hos
 runner under one unique caller-owned temporary root. It launches fresh PUC Lua and
 LuaJIT processes with explicit `LUA_PATH` and ABI-specific `LUA_CPATH`, locks exact
 Unicode metadata/direct/traced/missing/corrupt output with empty stderr, and verifies
-the root is absent after success and injected failure. Both ABIs pass 173/173 and no
-generated root remains. `plan()`/family validation and portable generated-family
-trace roles do not exist until `.8.2`, so this scaffold is not yet capability-census
-admission.
+the root is absent after success and injected failure.
+
+Generated modules now expose `plan()` as a fresh ordered list of typed rows and
+`validate_plan(actual)`. Exact row-count, label, known-family mismatch, and unknown-
+family drift fail at `validate_generated_plan` before execution. The validated map
+authoritatively selects regex or blind dispatch at every root and nested rule, while
+native execution stays unchanged. Traced generated execution adds portable
+`generated_rule_enter`, `generated_family_decision`, and `generated_rule_exit` events
+with source identity, rule, and family beside the native trace. A fresh-process matrix
+executes all ten families and the neutral variadic fixture reconstructs typed rest
+arrays from emitted state. Both ABIs pass 176/176. Contract-sourced 8/105 proof remains
+`.8.3`, so this surface is not yet capability-census admission.
 
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`
