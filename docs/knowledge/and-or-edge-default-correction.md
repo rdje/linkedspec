@@ -8,6 +8,9 @@ answers:
   - "what does bare entry mean in an OR rule"
   - "what owns the AND OR edge default correction"
   - "is first rule as top parked for future design"
+  - "should OR rules intrinsically seek"
+  - "should AND rules intrinsically consume"
+  - "should parse_mode remain a public global override"
 date: 2026-07-09
 status: proposed
 tags: [dsl, grammar, edges, blind-call, action-edge, and-rule, or-rule, FUTURE-PARITY-BACKLOG]
@@ -40,4 +43,13 @@ legal but explicit in OR rules, whether the first rule can replace `::` as the
 top marker, and whether OR-rule pipe sugar is worth adding despite possible
 confusion with grouped action-edge targets.
 
-Related task: [[FUTURE-PARITY-BACKLOG]] leaf `.9.1`.
+The 2026-07-16 cursor-ownership audit extends this direction: a caller-global
+`parse_mode` rewrites every nested rule and has already produced uncovered
+default-AND parity drift. The audit recommends intrinsic OR/default seek and AND
+consume behavior with no public/global override, while retaining low-level
+seek/consume matcher primitives. The design decision still must settle whether
+an AND blind call imposes contiguous entry on an OR child or the called child
+keeps its own intrinsic mode.
+
+Related task: [[FUTURE-PARITY-BACKLOG]] leaf `.9.1`; audit:
+[[and-or-cursor-ownership-audit]].

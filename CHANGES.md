@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.9.1.0 — audit cursor semantic ownership
+
+Completed a read-only five-backend audit of public `parse_mode`, rule compilation, runtime matching, loaded-spec
+factories, descriptors, generated execution, primary commands, tests, and documentation. The only substantive
+objective for independent modes is the real AND+seek ordered-landmark and OR+consume anchored-choice behavior;
+that does not justify one caller option rewriting every nested rule. The recommended contract is intrinsic
+OR/default seek and AND consume, no public/global override, and retained low-level seek/consume matcher primitives.
+
+The audit root-caused an uncovered default parity defect. A one-regex `Top::AND` over `prefix x` returns `"hit"`
+by default on Perl/Dart/Julia/Lua but null on Rust; explicit seek returns `"hit"` and explicit consume returns null
+on all five. Rust already compiles per-rule mode and leaves its execution override unset by default; the other four
+engines default globally to seek. The 62-case matrix covers explicit modes but not default AND leading junk.
+Perl toolbox source proves its global selection is baked into every handler; outward descriptor mode ownership is
+also inconsistent. Added a durable Knowledge Map audit and synchronized task/index/roadmap/live guide/mdBook
+status without changing parser, compiler, runtime, generated, descriptor, CLI, fixture, or capability behavior.
+Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's intrinsic seek behavior or
+imposes contiguous child entry; the audit recommends child ownership.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.2 — repair Perl logical lowering
 
 Made `and`/`or`/`not` first-class typed Perl ActionIR calls across direct, nested, assignment, return, condition,

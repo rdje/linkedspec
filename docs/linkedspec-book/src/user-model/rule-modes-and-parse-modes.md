@@ -7,6 +7,17 @@ LinkedSpec rule execution has two independent axes:
 
 Keep those two ideas separate. A rule label such as `Item:AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
 
+> **Current behavior versus completed audit:** This chapter documents the public
+> implementation that exists today. Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
+> that the caller-global option changes every nested rule and already creates an
+> uncovered default-AND backend difference: Perl, Dart, Julia, and Lua default
+> to global `seek`, while Rust defaults to its compiled AND=`consume` mode when
+> no override is supplied. The proposed replacement makes OR/default families
+> intrinsically seek and AND families intrinsically consume, removes the public
+> global override, and retains seek/consume only as low-level matcher
+> algorithms. No runtime or API has changed yet; the follow-on decision must
+> first settle blind-call child ownership and the exact migration.
+
 ## Current rule-label surface
 
 A rule label starts with a rule name and a colon form. The ordinary form uses one colon:
@@ -537,3 +548,11 @@ Use `AND{...}` when the repeated-sequence count matters.
 Use `consume` when contiguity matters. Use `seek` when extraction from a larger input is the goal.
 
 Rule modes, action/lifecycle placement, and parse modes are deliberately separate. If a rule does not behave as expected, debug those axes separately: first the label, then the body edge family (`->` versus `=>`), then the parse-mode option.
+
+The completed design audit does not deny that all four combinations have meaning.
+`AND + seek` can find ordered landmarks across ignored text, and `OR + consume`
+can express a strict choice at the current cursor. Its finding is narrower: a
+caller-global switch is the wrong owner because it silently rewrites the entire
+grammar. If either cross-combination later proves necessary as a first-class
+language feature, it needs an explicit `.spec` design justified by a real
+grammar—not resurrection of a whole-parser override.

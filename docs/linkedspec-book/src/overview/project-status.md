@@ -155,6 +155,11 @@ Three backbone items tracked major structural modernization — all done:
   lazy-control separation. Its 17 truth rows, ten helper cases, three effect scenarios, deterministic fixtures,
   and 15 mutations pass offline. Perl `.5.2.2` now supplies typed logical ActionIR/runtime behavior across native,
   live, and standalone-emitted execution, advancing rollout to 1 complete / 7 pending under `.5.2.3-.9`.
+  Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
+  rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
+  AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain
+  semantically meaningful, but the audit recommends intrinsic OR/default seek plus AND consume and no global
+  override. Runtime behavior is unchanged pending the blind-call child-ownership decision and implementation split.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

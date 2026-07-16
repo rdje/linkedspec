@@ -1368,6 +1368,17 @@ So future implementation should keep these concepts independent:
 
 At the intuition level, `seek` can feel more extraction-like and `consume` can feel more grammar-like, but they are not aliases for `OR` and `AND`.
 
+**Completed design audit (not current behavior):** `FUTURE-PARITY-BACKLOG.9.1.0`
+found that this global option changes every nested rule and already creates an
+uncovered default-AND backend split. The proposed replacement derives cursor
+discipline from the authored rule kind—OR/default seek, AND consume—and removes
+the public/global override. Low-level matchers still need both algorithms. The
+four combinations above remain useful evidence (`AND + seek` finds ordered
+landmarks; `OR + consume` is anchored choice), but they do not justify silently
+rewriting a whole grammar at parser construction. Decision `.9.1.1` awaits
+whether an AND blind-call preserves an OR child's seek behavior or imposes
+contiguous entry. No API has changed yet.
+
 If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
 If you ask for `return_descriptor => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
 

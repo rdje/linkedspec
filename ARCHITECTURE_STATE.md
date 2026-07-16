@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: cursor-ownership audit `FUTURE-PARITY-BACKLOG.9.1.0` finds that Perl bakes one selected
+  `parse_mode` into every handler, Dart/Julia/Lua own one seek-default engine mode, and Rust alone compiles AND as
+  consume and OR/default as seek before permitting an execution-wide override. The same default `Top::AND` with
+  leading junk therefore hits on Perl/Dart/Julia/Lua but returns null on Rust; explicit seek/consume agrees across
+  all five, and the shared 62-case matrix omits this default case. AND+seek ordered-landmark extraction and
+  OR+consume anchored choice are legitimate low-level algorithms, but no objective justifies a caller rewriting
+  every nested rule. The audit recommends intrinsic rule-kind semantics, removal with targeted migration of the
+  global API/CLI option, retained matcher primitives, and derived per-rule descriptor metadata. No behavior has
+  changed. Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's seek behavior or
+  imposes context-sensitive contiguous entry.
 - `2026-07-16` refresh: Perl logical rollout `FUTURE-PARITY-BACKLOG.5.2.2` gives direct, nested, assignment,
   return, condition, function, block-value, and receiver `and`/`or`/`not` calls one typed ActionIR owner and
   `LinkedSpec::RuntimeLogical` seam. Arity rejects before operand lowering; valid operands run once left-to-right;

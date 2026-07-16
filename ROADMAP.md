@@ -953,7 +953,11 @@ contract: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity diagnosti
 receiver composition, and lazy-control separation. Fifteen drift mutations pass; rollout begins at 0 complete / 8
 pending. Perl `.5.2.2` then replaces raw keyword calls and lazy host operators with typed eager logical values,
 pre-effect arity diagnostics, real booleans, and one truthiness seam shared by lazy conditions. Its native/live/
-emitted reference roles are complete, advancing rollout to 1 complete / 7 pending with Rust `.5.2.3` next.
+emitted reference roles are complete, advancing rollout to 1 complete / 7 pending with Rust `.5.2.3` next in the
+backend sequence. Director-priority design audit `.9.1.0` finds no valid objective for a public/global
+`parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
+parity split. Decision `.9.1.1` is blocked on whether an AND blind-call preserves an OR child's intrinsic seek
+behavior or imposes contiguous entry; Rust `.5.2.3` resumes after ratification.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

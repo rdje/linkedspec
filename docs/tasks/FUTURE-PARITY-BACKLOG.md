@@ -7,7 +7,8 @@
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
 - Last updated: `2026-07-16` (logical audit `.5.2.0`, executable neutral ADR/contract `.5.2.1`, and Perl typed-
-  AST/runtime rollout `.5.2.2` are complete at 1/7; Rust `.5.2.3` is active)
+  AST/runtime rollout `.5.2.2` are complete at 1/7; director-priority AND/OR cursor-ownership audit `.9.1.0` is
+  complete, and decision `.9.1.1` is blocked on child-rule cursor ownership before returning to Rust `.5.2.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2874,10 +2875,10 @@ before implementation.
     Neutral checker passes 1 complete / 7 pending with 15 mutations; focused ActionIR, codeblock, generated-source,
     and diagnostic tests pass; direct Phase 0 passes `1..1031` in 647 seconds. Knowledge Map, governance, mdBook,
     and whitespace pass; canonical local CI passes reference CLI 62x2 and Phase 0 `1..1031` in 635 seconds.
-  Commit: prepared in `FUTURE-PARITY-BACKLOG.5.2.2 - repair Perl logical lowering`
+  Commit: `dcc3a71d` (`FUTURE-PARITY-BACKLOG.5.2.2 - repair Perl logical lowering`)
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.3`
-  Status: `active`
+  Status: `pending`
   Goal: Align Rust logical helpers and condition truthiness with the neutral contract.
   Dependencies: `.5.2.1`
   Acceptance: Native, serialized, generated-plan, emitted, and direct-value Rust paths enforce exact logical arity,
@@ -3019,8 +3020,9 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1`
-  Status: `pending`
+  Status: `active`
   Goal: Design the corrected AND/OR edge-default contract before code.
+  Children: `.9.1.0`, `.9.1.1`
   Acceptance: Specify grammar and runtime semantics for mode-sensitive bare edge lines. In AND rules (`:&`, `::&`,
     `:AND`, `::AND`, and bounded/repeated variants), a bare `entry { ... }` line should mean an explicit
     blind-call `=> entry { ... }`; in OR/default rules, a bare `entry { ... }` line should mean an explicit
@@ -3030,6 +3032,59 @@ before implementation.
     clear: blind-call means the parent does not preselect by the child rule's regex; the called child rule still
     owns its own parser/matching semantics unless this design explicitly creates a separate bypass. Treat
     first-rule-as-top instead of `::` and optional OR pipe sugar as separate decisions under this design leaf.
+    Resolve cursor ownership as part of the same rule-kind contract: audit the proposal that OR/default rules are
+    intrinsically seek and AND rules are intrinsically consume, with no public/global `parse_mode` override capable
+    of contradicting the rule kind. Retain an override only if the audit proves a concrete semantic objective that
+    cannot be expressed by rule kind or ordinary grammar composition.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.0`
+  Status: `done`
+  Goal: Audit cursor-semantic ownership and every current `parse_mode` override path before choosing compatibility.
+  Acceptance: Use the Knowledge Map and LinkedSpec toolbox first; trace Perl/Rust/Dart/Julia/Lua parser construction,
+    descriptors/generated plans, primary CLI fixtures, nested rule dispatch, top-rule behavior, tests, and public
+    documentation. Distinguish rule-local AND/OR matching semantics from caller-selected entry policy and historical
+    plumbing. Inventory every default, explicit seek/consume use, contradictory combination, and compatibility
+    dependency. Produce a concrete objective test for retaining any public override; if none exists, recommend that
+    OR/default rules intrinsically seek and AND rules intrinsically consume and specify the migration/diagnostic
+    boundary without changing runtime behavior in this audit leaf.
+  Checklist:
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Check the Knowledge Map and use the Perl descriptor, lowering, generated-
+    source, and live-execution probes before reading implementation seams or classifying behavior.
+  - [x] **FIVE-BACKEND INVENTORY** — Trace public APIs, primary commands, parser/engine construction, compiled
+    state, rule dispatch, loaded-spec factories, generated roles, descriptors, tests, and current documentation
+    across Perl, Rust, Dart, Julia, and Lua.
+  - [x] **EXACT DEFAULT / EXPLICIT PROBE** — Prove the same one-regex `Top::AND` and leading-junk input under
+    omitted, explicit-seek, and explicit-consume policy on all five backends; root-cause the default disagreement
+    and identify the missing shared-matrix case.
+  - [x] **OBJECTIVE TEST** — Prove that AND+seek is ordered-landmark extraction and OR+consume is anchored choice,
+    while distinguishing those real low-level algorithms from a caller-global switch that mutates all nested rules.
+  - [x] **RECOMMEND / MIGRATE** — Recommend intrinsic OR/default seek and AND consume, retain low-level matcher
+    primitives, remove public/global override rather than ignore it, replace global descriptor metadata with
+    derived per-rule facts, and enumerate the API/CLI/generated/test/documentation migration surface.
+  - [x] **LOCKSTEP / NO BEHAVIOR CHANGE** — Record the audit, parity defect, recommendation, and one unresolved
+    blind-call child-ownership decision in the task tree, roadmaps, live docs, mdBook, guides, architecture, and
+    Knowledge Map without changing parser/compiler/runtime/descriptor/generated/CLI/fixture/capability behavior.
+  Verification: **PASS 2026-07-16.** Exact five-backend probes show default `Top::AND` over `prefix x` returns
+    `"hit"` on Perl/Dart/Julia/Lua and null on Rust; explicit seek returns `"hit"` and explicit consume returns null
+    on all five. Perl toolbox evidence and five-backend source tracing identify global mode ownership versus Rust's
+    derived per-rule mode plus execution override. Cross-combination probes establish the legitimate matcher
+    algorithms but no objective for a caller-global grammar rewrite. Governance, Knowledge Map, mdBook, and
+    whitespace checks pass; no runtime behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1`
+  Status: `blocked`
+  Goal: Ratify the corrected AND/OR edge and cursor-semantics contract before implementation.
+  Dependencies: `.9.1.0`
+  Acceptance: Convert the measured audit into one backend-neutral grammar/runtime decision covering bare and
+    explicit edges, indexed/grouped/fluent forms, nested calls, intrinsic cursor behavior, public API/CLI migration,
+    descriptor/generated metadata, invalid legacy combinations, and cross-backend conformance. Keep implementation
+    in a separately split follow-on leaf and return to `.5.2.3` after the design commitment is cleanly committed.
+  Blocker: Director decision required: when an AND rule blind-calls an OR child, does the child retain its intrinsic
+    OR seek behavior (recommended, consistent with child-owned parser semantics), or does the AND parent require a
+    contiguous/consume child entry (context-sensitive call semantics)?
   Verification: `pending`
   Commit: `pending`
 
@@ -5233,8 +5288,10 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
-backend-neutral policy `.5.2.1` and Perl typed-AST/runtime rollout `.5.2.2` are complete at 1/7 rollout. Rust
-native alignment `.5.2.3` is the sole active frontier before Dart/Julia/Lua/generated/gate/public behavior.
+backend-neutral policy `.5.2.1` and Perl typed-AST/runtime rollout `.5.2.2` are complete at 1/7 rollout. The
+director-priority AND/OR cursor-ownership audit `.9.1.0` is complete. Decision `.9.1.1` is blocked on whether an
+AND blind-call parent preserves an OR child's intrinsic seek behavior or imposes contiguous child entry; Rust
+native logical alignment `.5.2.3` remains pending until that design decision is durably committed.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5462,12 +5519,14 @@ native alignment `.5.2.3` is the sole active frontier before Dart/Julia/Lua/gene
 | 205 | `FUTURE-PARITY-BACKLOG.5.2.0` | `done` | Exact Perl/toolbox and five-backend native/generated audit records three truthiness profiles and locks the safe split. |
 | 206 | `FUTURE-PARITY-BACKLOG.5.2.1` | `done` | ADR `0043`, strict neutral schema/checker/fixtures, 15 mutations, canonical CI, and 0/8 rollout are locked. |
 | 207 | `FUTURE-PARITY-BACKLOG.5.2.2` | `done` | Typed Perl logical ownership aligns eager values, exact arity, real booleans, and shared condition truthiness. |
-| 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `active` | Align Rust native/serialized/generated-plan/direct logical behavior with the neutral contract. |
+| 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `pending` | Align Rust native/serialized/generated-plan/direct logical behavior after the director-priority cursor audit. |
+| 209 | `FUTURE-PARITY-BACKLOG.9.1.0` | `done` | Five-backend audit rejects caller-global override, exposes default AND parity drift, and retains low-level matcher algorithms. |
+| 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `blocked` | Ratify the contract after the director decides whether an AND blind-call preserves an OR child's intrinsic seek behavior. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; logical truthiness/arity/lowering `.5.2` is active before the remaining constructors/transforms/join/push, harray order/collisions, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` / blocked | Audit `.9.1.0` is complete; decision `.9.1.1` awaits the blind-call child-ownership answer. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6120,8 +6179,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking active logical-contract leaf `.5.2`. Five-backend capability parity remains 80/0/0 and the full
-  diagnostic-output sequence `.5.1.0-.9` is closed at 8 complete / 0 pending.
+- Blocking `.9.1.1`: when an AND rule blind-calls an OR child, should the called child keep its intrinsic OR seek
+  semantics, or should the parent impose contiguous/consume entry? The audit recommends child ownership; either
+  choice must be explicit before backend-neutral ratification and implementation splitting.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -6134,14 +6194,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Rust logical native alignment `.5.2.3` is the sole active frontier. Structured-format,
-  write-vivification, and companion-book parity prerequisites are satisfied, but their pending trees are not
-  implicitly activated.
+- `FUTURE-PARITY-BACKLOG.9.1.1` awaits the director's blind-call child-ownership decision: preserve the OR child's
+  intrinsic seek behavior (recommended) or make AND-parent entry contextually contiguous. Rust logical native
+  alignment `.5.2.3` resumes after this design is ratified. Structured-format, write-vivification, and companion-
+  book parity prerequisites are satisfied, but their pending trees are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.9.1.0` | Knowledge Map/toolbox first; exact Perl descriptor/source/live/generated probes; five-backend API/CLI/engine/compiled/loaded/generated/descriptor/test/doc inventory; default/seek/consume `Top::AND` primary probes; AND+seek and OR+consume objective probes; governance, Knowledge Map, mdBook, and whitespace. | PASS. Global mode ownership is exact, default AND drift is root-caused, low-level cross-combinations are legitimate, no caller-global override objective survives, one nested-child decision is explicitly blocked, and no behavior changed. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.2` | Toolbox/source/descriptor/live/emitted baseline; strict neutral Perl consumer over 17 truth rows, ten helper cases, eager effects, receiver/lazy controls, four invalid arities, typed sites, host shared-zero edges, live and standalone-emitted roles; canonical hash-tree regression; neutral 1/7 checker plus 15 mutations; focused ActionIR/codeblock/generated/diagnostic tests; Phase 0 `1..1031`; KM/memory/doctrine/mdBook/whitespace and canonical local CI. | PASS. Perl now owns typed eager logical values and one condition/helper truth seam without raw keyword calls or host short-circuiting; only `perl_native` advances and Rust `.5.2.3` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.1` | ADR `0043`; strict neutral schema/checker; 17 truthiness rows; ten helper cases; three ordered-effect scenarios; receiver/lazy-control contrast; four pre-effect arity failures; deterministic embedded fixtures; exact projection/0-of-8 rollout topology; 15 drift mutations; shell syntax; Knowledge Map; memory/doctrines; mdBook; whitespace; canonical local CI with registered checker, reference CLI 62x2, and Phase 0 `1..1031`/639s. | PASS. One backend-neutral eager exact-arity boolean/truthiness contract is executable before rollout; explicit codeblock literals remain `.11`-owned, no backend behavior changes, and Perl `.5.2.2` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.0` | Knowledge Map/toolbox first; exact Perl substitution/live/descriptor/emitted/side-effect/arity/receiver probes; five-backend source/native/primary/generated matrix including both Lua ABIs; Perl 4, Rust 137, Dart 60, complete Julia, Lua 177/177; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 62x2 and Phase 0 `1..1031`. | PASS. Three truthiness profiles, two Perl mechanisms, Dart short-circuiting, eager Rust/Julia/Lua, and matching native/generated projections are durable; `.5.2.1-.9` are dependency-ordered, `.5.2.1` activates, no behavior changes, and no mutation campaign runs. |
@@ -6296,6 +6358,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.0` | `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership` | Five-backend current-state audit, exact default AND drift, cross-combination objective proof, global-override rejection, migration surface, and blocked child-ownership handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.5.2.2` | `FUTURE-PARITY-BACKLOG.5.2.2 - repair Perl logical lowering` | Typed ActionIR/runtime logical ownership, exact eager/arity/boolean/truth semantics, host-zero regression, Perl neutral consumer, 1/7 rollout, and Rust handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.0` | `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity` | Exact current semantic/mechanism matrix, durable three-profile/two-Perl-path finding, and neutral/backend/generated/gate/public split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.5.2.1` | `FUTURE-PARITY-BACKLOG.5.2.1 - ratify logical helper contract` | ADR `0043`, strict neutral schema/checker/fixtures, 15 drift mutations, 0/8 rollout, canonical CI registration, and public target alignment; no backend behavior code. |

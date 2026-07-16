@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.9.1.0 — audit cursor semantic ownership**
+  (DONE — global override is rejected by the audit recommendation; `.9.1.1` awaits the blind-call ownership
+  decision before ratification/implementation splitting).
+
+  **Result:** Perl/Dart/Julia/Lua currently own one global seek-default engine mode; Rust derives AND consume / OR
+  seek per rule but permits an invocation-wide override. That split is observably divergent for default
+  `Top::AND` with leading junk. AND+seek and OR+consume have meaningful extraction/anchored-choice behavior, but
+  no concrete objective justifies changing every nested rule from a caller. The audit recommends intrinsic rule-
+  kind semantics, no public/global override, low-level matcher primitives retained, and targeted legacy migration.
+
+  **Proof:** Perl descriptor/source/live probes expose the global baked mode and cross-combination results. Exact
+  primary probes show default `Top::AND` returns `"hit"` on Perl/Dart/Julia/Lua and null on Rust; explicit seek hits
+  and explicit consume returns null on all five. Source tracing covers engines, compiled state, loaded factories,
+  generated roles, descriptors, commands, tests, and docs. No behavior changed.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.2 — repair Perl logical lowering**
   (DONE — Perl native/live/standalone-emitted logical behavior is conforming at 1 complete / 7 pending; Rust
   `.5.2.3` is next).

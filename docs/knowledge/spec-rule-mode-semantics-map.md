@@ -34,6 +34,14 @@ Current public rule-label semantics:
 | `Rule:OR`, `Rule:OR+`, `Rule:OR{...}` | explicit repeated choice, optionally bounded |
 | `Rule:AND+`, `Rule:AND{...}` | repeated ordered sequence, optionally bounded |
 
+This card describes the current public implementation. Director-priority design
+audit `FUTURE-PARITY-BACKLOG.9.1.0` has since shown that the separate
+caller-global parse-mode axis mutates all nested rules and already creates an
+uncovered default-AND backend drift. The proposed replacement makes OR/default
+families intrinsically seek and AND families intrinsically consume, without a
+public/global override; see [[and-or-cursor-ownership-audit]]. No runtime
+behavior changes until the follow-on decision and implementation land.
+
 Bounds count complete iterations:
 
 - `{N}` means exactly `N`;

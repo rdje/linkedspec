@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.9.1.0` — cursor discipline is semantic grammar state, not caller policy):
+  The only defensible objective for a seek/consume selector is the real expressivity of the cross-combinations:
+  AND+seek is an ordered landmark extractor, while OR+consume is an anchored choice. That still does not justify
+  the current global API. Perl bakes one construction option into every generated handler; Dart/Julia/Lua keep one
+  engine-wide mode; Rust correctly derives per-rule AND/OR mode and then offers an execution-wide override that
+  erases it. The same `.spec` therefore means something different depending on caller options, violating the
+  universal-contract principle.
+
+  The audit also exposed a concrete uncovered parity defect. For a one-regex `Top::AND` and input `prefix x`,
+  default Perl/Dart/Julia/Lua return `"hit"`, while default Rust returns null; explicit seek returns `"hit"` and
+  explicit consume returns null on all five. Rust leaves `ExecutionOptions.parse_mode` unset by default and obeys
+  its compiled AND=consume mode; the other engines default globally to seek. The 62-case primary matrix tests
+  explicit modes but not default AND with leading junk. The migration should remove the global override, derive
+  cursor semantics from rule kind, preserve low-level matcher primitives, replace global descriptor metadata with
+  derived per-rule facts, and fail legacy options explicitly rather than ignore them. Blind-call child ownership is
+  the one remaining language decision: an OR child can keep its own seek semantic, or an AND parent can impose
+  contiguous child entry; the latter is context-sensitive and should not happen accidentally.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.2` — a typed policy still needs an explicit host-representation seam):
   Moving Perl logical calls behind one runtime owner removed the obvious raw-keyword and short-circuit defects,
   but the first full regression run exposed a subtler host boundary. Perl's shared zero returned by an empty array
