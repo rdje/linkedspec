@@ -1129,10 +1129,32 @@ Boolean helpers make branch conditions portable and analyzable.
 | `or(condition, condition, ...)` | any condition may pass. |
 | `not(condition)` | invert one condition. |
 
-The intended portable contract treats these as eager boolean value helpers: every valid argument evaluates once
-left-to-right before truthiness is composed. They are distinct from lazy structured or inline `if`/`switch`, which
-authors should use when an unselected expression must remain unevaluated. The exact arities and truth table remain
-under neutral policy leaf `FUTURE-PARITY-BACKLOG.5.2.1`; current programs must not infer them from a host language.
+ADR `0043` adopts the portable target: these are eager boolean value helpers. `and` and `or` require at least one
+positional argument; `not` requires exactly one. An invalid call fails with `helper_arity_mismatch` before any
+argument runs. On a valid call, every argument evaluates exactly once from left to right—even an operand after the
+result is already known—and the result is a real boolean. A one-argument `and(value)` or `or(value)` is therefore
+an explicit boolean projection. Empty `and()`/`or()` are diagnostics, not mathematical identity values.
+
+The target truth table is typed rather than inherited from a host:
+
+| Value | Target truth |
+| --- | --- |
+| `undef`, `false` | false |
+| numeric zero, including `-0.0` | false |
+| any other finite number | true |
+| empty string `""` | false |
+| every nonempty string, including `"0"`, `"false"`, whitespace, and Unicode | true |
+| empty array or harray | false |
+| nonempty array or harray, even when its only value is `undef` | true |
+| codeblock value | true, without invoking it |
+
+The codeblock row defines value-kind semantics; it does not activate the separately planned first-class
+`{|...| ... }` literal syntax. Backends can lock that row at their typed runtime boundary while generic literal
+admission remains under `FUTURE-PARITY-BACKLOG.11`.
+
+Logical helpers are distinct from lazy structured or inline `if`/`switch` and loop control. Those controls use
+the same target truthiness for conditions but execute only the selected branch or body. Use a control when later
+side effects must be skipped; use `and`/`or` when all operand effects must occur.
 
 Current implementation status (2026-07-16):
 
@@ -1150,8 +1172,12 @@ boundaries. Rust, Dart, Julia, and Lua generated execution matches each native i
 the source of the difference. Perl's canonical descriptor has no logical-expression node: conditions lower through
 `FlowExpr`, while direct return/assignment/receiver calls remain raw keyword forms. Planning audit `.5.2.0`
 dependency-orders neutral policy, five backend repairs, generated/primary projection, a recurring gate, and public
-no-drift under `.5.2.1-.9`. Until those land, use explicit predicates at disputed boundaries and do not put
-side-effecting expressions after a decisive logical operand in portable `.spec` files.
+no-drift under `.5.2.1-.9`. Neutral policy `.5.2.1` is now executable as
+`linkedspec-logical-helper-v1`: 17 truthiness rows, ten helper cases, three eager-effect scenarios, four arity
+failures, deterministic fixtures, and 15 drift mutations pass offline. Its rollout is deliberately 0 complete / 8
+pending, so the matrix above remains the current behavior. Until `.5.2.2-.9` land, use explicit predicates at
+disputed boundaries and do not put side-effecting expressions after a decisive logical operand in portable
+`.spec` files.
 
 Examples:
 
@@ -1177,6 +1203,18 @@ endif()
 ```
 
 Prefer helper conditions over raw host-language boolean expressions. The helper form gives the compiler one explicit expression tree to lower, inspect, and port.
+
+Target-value examples once the pending backend rollout completes:
+
+```text
+string_flag = and("0")       # true: nonempty string
+empty_items = not([])        # true: empty array is false
+all_ready = and(check_a(), check_b())
+```
+
+Both `check_a()` and `check_b()` run once in the last call, even if `check_a()` is false. For lazy behavior, write
+an `if(check_a()) { ... }` branch instead. `and()`, `or()`, `not()`, and `not(a, b)` fail before evaluating an
+operand.
 
 ## Structured `if` flow
 

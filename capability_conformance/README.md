@@ -56,6 +56,21 @@ list also renders one backend-neutral `.spec` fixture. Validate schema, independ
 source offline with `python3 tools/check_scalar_numeric_contract.py`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
 consume the unchanged 55 cases; `bash tools/check_scalar_numeric_six_runtime.sh` is the composed admission proof.
 
+`logical_helper_contract.json` adopts ADR `0043`'s backend-neutral `and`/`or`/`not` value contract without
+claiming backend admission early. `and` and `or` require at least one positional argument; `not` requires exactly
+one. Invalid arity produces `helper_arity_mismatch` before any argument runs. Valid calls evaluate every argument
+once left-to-right and return a real boolean, while `if`/`switch`/`while` remain lazy controls over the same typed
+truthiness seam. Null, false, numeric zero, empty strings, and empty arrays/harrays are false; all other finite
+numbers, nonempty strings (including `"0"` and `"false"`), nonempty aggregates, and codeblock values are true.
+Testing a codeblock does not invoke it. The codeblock row is model/backend-unit evidence only until the separately
+owned first-class literal program lands; this contract does not activate `{|...| ... }` syntax.
+
+Run `python3 tools/check_logical_helper_contract.py` to validate 17 truthiness rows, ten helper cases, three eager
+effect scenarios, receiver and lazy-control contrast, four pre-effect arity failures, deterministic embedded
+fixtures, exact projection obligations, and 15 representative drift mutations. The eight rollout legs begin at
+zero complete / eight pending: Perl, Rust, Dart, Julia, Lua, generated/primary projection, recurring composed
+proof, and public no-drift remain owned by `FUTURE-PARITY-BACKLOG.5.2.2-.9`.
+
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,
 defines version-2 signature objects whose outward placement is sourced from the descriptor union, binds extras as one fresh typed array, rejects keyword/overload/host-splat

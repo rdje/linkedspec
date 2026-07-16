@@ -53,6 +53,7 @@ changed* lives in git (layer D), not here.
 | [0040](0040-backend-implementation-companion-books.md) | Backend implementation details live in linked companion books | 2026-07-15 | accepted direction; implementation dependency-gated | documentation, mdbook, backends, architecture, public-api, maintenance, drift |
 | [0041](0041-final-codeblock-descriptor-and-lua-census-admission.md) | Final-codeblock functions use outward descriptor v3; Lua census admission waits for full parity | 2026-07-15 | accepted | architecture, functions, codeblock, descriptor, capability-census, lua, portability, cross-variant-parity |
 | [0042](0042-caller-owned-diagnostic-output-events.md) | Diagnostic output uses caller-owned typed events with a quiet default | 2026-07-16 | accepted; backend rollout pending | architecture, diagnostics, helpers, embedding, generated-source, cli, portability, cross-variant-parity |
+| [0043](0043-eager-logical-helper-and-typed-truthiness.md) | Logical helpers are eager boolean values over one typed truthiness policy | 2026-07-16 | accepted; backend rollout pending | architecture, logical, truthiness, helpers, arity, actionir, generated-source, portability, cross-variant-parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

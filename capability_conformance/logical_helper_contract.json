@@ -1,0 +1,204 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-logical-helper-v1",
+  "policy": {
+    "arity_validation": "validate positional arity before evaluating any argument",
+    "evaluation": "evaluate every valid call argument exactly once from left to right before boolean composition",
+    "result_kind": "real boolean for every valid helper call",
+    "truthiness": "typed null, boolean, finite-number, string, array, harray, and codeblock policy; never raw host truth",
+    "string_truth": "false exactly when empty; nonempty 0, false, whitespace, and Unicode strings are true",
+    "aggregate_truth": "false exactly when empty; true when at least one item or entry exists",
+    "codeblock_truth": "true without invoking the codeblock",
+    "codeblock_fixture_boundary": "codeblock truth is model and backend-unit evidence until FUTURE-PARITY-BACKLOG.11 admits portable explicit literals; this contract does not activate that syntax",
+    "receiver": "a compatible continuation receives the boolean helper result",
+    "lazy_controls": "if, switch, and while share typed truthiness but retain selected-branch or selected-body laziness"
+  },
+  "error_schema": {
+    "code": "helper_arity_mismatch",
+    "fields": ["code", "helper_name", "actual_arity", "expected_arity"],
+    "evaluation": "no argument is evaluated"
+  },
+  "helpers": [
+    {
+      "name": "and",
+      "arity": {"minimum": 1, "maximum": null, "expected_text": "at least 1 positional argument"},
+      "composition": "true exactly when every value is truthful",
+      "return_kind": "boolean"
+    },
+    {
+      "name": "or",
+      "arity": {"minimum": 1, "maximum": null, "expected_text": "at least 1 positional argument"},
+      "composition": "true exactly when at least one value is truthful",
+      "return_kind": "boolean"
+    },
+    {
+      "name": "not",
+      "arity": {"minimum": 1, "maximum": 1, "expected_text": "exactly 1 positional argument"},
+      "composition": "negate the single value's truthiness",
+      "return_kind": "boolean"
+    }
+  ],
+  "truthiness_cases": [
+    {"id": "null", "value": {"kind": "null"}, "expected": false},
+    {"id": "boolean_false", "value": {"kind": "boolean", "value": false}, "expected": false},
+    {"id": "boolean_true", "value": {"kind": "boolean", "value": true}, "expected": true},
+    {"id": "number_zero", "value": {"kind": "number", "value": 0}, "expected": false},
+    {"id": "number_negative_zero", "value": {"kind": "number", "value": -0.0}, "expected": false},
+    {"id": "number_negative", "value": {"kind": "number", "value": -2}, "expected": true},
+    {"id": "number_fraction", "value": {"kind": "number", "value": 0.25}, "expected": true},
+    {"id": "string_empty", "value": {"kind": "string", "value": ""}, "expected": false},
+    {"id": "string_zero", "value": {"kind": "string", "value": "0"}, "expected": true},
+    {"id": "string_false", "value": {"kind": "string", "value": "false"}, "expected": true},
+    {"id": "string_whitespace", "value": {"kind": "string", "value": " "}, "expected": true},
+    {"id": "string_unicode", "value": {"kind": "string", "value": "pré🙂"}, "expected": true},
+    {"id": "array_empty", "value": {"kind": "array", "items": []}, "expected": false},
+    {"id": "array_nonempty_null", "value": {"kind": "array", "items": [{"kind": "null"}]}, "expected": true},
+    {"id": "harray_empty", "value": {"kind": "harray", "entries": {}}, "expected": false},
+    {"id": "harray_nonempty_null", "value": {"kind": "harray", "entries": {"k": {"kind": "null"}}}, "expected": true},
+    {"id": "codeblock", "value": {"kind": "codeblock", "id": "fixture-block"}, "expected": true}
+  ],
+  "helper_cases": [
+    {"id": "and_one_true", "helper": "and", "args": [{"kind": "string", "value": "0"}], "expected": true},
+    {"id": "and_one_false", "helper": "and", "args": [{"kind": "array", "items": []}], "expected": false},
+    {"id": "and_many_true", "helper": "and", "args": [{"kind": "boolean", "value": true}, {"kind": "number", "value": -1}, {"kind": "harray", "entries": {"k": {"kind": "null"}}}], "expected": true},
+    {"id": "and_many_false", "helper": "and", "args": [{"kind": "boolean", "value": true}, {"kind": "string", "value": ""}, {"kind": "string", "value": "later"}], "expected": false},
+    {"id": "or_one_false", "helper": "or", "args": [{"kind": "number", "value": 0}], "expected": false},
+    {"id": "or_one_true", "helper": "or", "args": [{"kind": "string", "value": "false"}], "expected": true},
+    {"id": "or_many_false", "helper": "or", "args": [{"kind": "null"}, {"kind": "array", "items": []}, {"kind": "harray", "entries": {}}], "expected": false},
+    {"id": "or_many_true", "helper": "or", "args": [{"kind": "string", "value": ""}, {"kind": "array", "items": [{"kind": "null"}]}, {"kind": "boolean", "value": false}], "expected": true},
+    {"id": "not_false", "helper": "not", "args": [{"kind": "harray", "entries": {}}], "expected": true},
+    {"id": "not_true", "helper": "not", "args": [{"kind": "codeblock", "id": "not-block"}], "expected": false}
+  ],
+  "effect_scenarios": [
+    {
+      "id": "and_decisive_false_is_eager",
+      "helper": "and",
+      "args": [
+        {"effect": "and-first", "value": {"kind": "boolean", "value": false}},
+        {"effect": "and-second", "value": {"kind": "boolean", "value": true}}
+      ],
+      "expected_effects": ["and-first", "and-second"],
+      "expected": false
+    },
+    {
+      "id": "or_decisive_true_is_eager",
+      "helper": "or",
+      "args": [
+        {"effect": "or-first", "value": {"kind": "boolean", "value": true}},
+        {"effect": "or-second", "value": {"kind": "boolean", "value": false}}
+      ],
+      "expected_effects": ["or-first", "or-second"],
+      "expected": true
+    },
+    {
+      "id": "not_single_argument_once",
+      "helper": "not",
+      "args": [
+        {"effect": "not-first", "value": {"kind": "boolean", "value": false}}
+      ],
+      "expected_effects": ["not-first"],
+      "expected": true
+    }
+  ],
+  "receiver_scenarios": [
+    {"id": "receiver_true", "helper": "and", "args": [{"kind": "number", "value": 1}, {"kind": "string", "value": "x"}], "expected": true},
+    {"id": "receiver_false", "helper": "or", "args": [{"kind": "number", "value": 0}, {"kind": "string", "value": ""}], "expected": false}
+  ],
+  "lazy_control_scenarios": [
+    {
+      "id": "if_false_selects_else",
+      "condition": {"kind": "boolean", "value": false},
+      "then": {"effect": "if-false-then-skipped", "result": true},
+      "else": {"effect": "if-false-else", "result": false},
+      "expected_effects": ["if-false-else"],
+      "expected": false
+    },
+    {
+      "id": "if_true_selects_then",
+      "condition": {"kind": "string", "value": "0"},
+      "then": {"effect": "if-true-then", "result": true},
+      "else": {"effect": "if-true-else-skipped", "result": false},
+      "expected_effects": ["if-true-then"],
+      "expected": true
+    }
+  ],
+  "invalid_arity_cases": [
+    {"id": "and_zero", "helper_name": "and", "actual_arity": 0, "expected_arity": "at least 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "or_zero", "helper_name": "or", "actual_arity": 0, "expected_arity": "at least 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "not_zero", "helper_name": "not", "actual_arity": 0, "expected_arity": "exactly 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0},
+    {"id": "not_many", "helper_name": "not", "actual_arity": 2, "expected_arity": "exactly 1 positional argument", "expected_code": "helper_arity_mismatch", "arguments_evaluated": 0}
+  ],
+  "fixtures": {
+    "values": {
+      "spec_source": "Top::\n /x/\n E {\n   return({\n     \"truth_null\" : and(undef),\n     \"truth_boolean_false\" : and(false),\n     \"truth_boolean_true\" : and(true),\n     \"truth_number_zero\" : and(0),\n     \"truth_number_negative_zero\" : and(-0.0),\n     \"truth_number_negative\" : and(-2),\n     \"truth_number_fraction\" : and(0.25),\n     \"truth_string_empty\" : and(\"\"),\n     \"truth_string_zero\" : and(\"0\"),\n     \"truth_string_false\" : and(\"false\"),\n     \"truth_string_whitespace\" : and(\" \"),\n     \"truth_string_unicode\" : and(\"pré🙂\"),\n     \"truth_array_empty\" : and([]),\n     \"truth_array_nonempty_null\" : and([undef]),\n     \"truth_harray_empty\" : and({}),\n     \"truth_harray_nonempty_null\" : and({ \"k\" : undef }),\n     \"and_one_true\" : and(\"0\"),\n     \"and_one_false\" : and([]),\n     \"and_many_true\" : and(true, -1, { \"k\" : undef }),\n     \"and_many_false\" : and(true, \"\", \"later\"),\n     \"or_one_false\" : or(0),\n     \"or_one_true\" : or(\"false\"),\n     \"or_many_false\" : or(undef, [], {}),\n     \"or_many_true\" : or(\"\", [undef], false),\n     \"not_false\" : not({})\n   })\n }\n",
+      "expected": {
+        "truth_null": false,
+        "truth_boolean_false": false,
+        "truth_boolean_true": true,
+        "truth_number_zero": false,
+        "truth_number_negative_zero": false,
+        "truth_number_negative": true,
+        "truth_number_fraction": true,
+        "truth_string_empty": false,
+        "truth_string_zero": true,
+        "truth_string_false": true,
+        "truth_string_whitespace": true,
+        "truth_string_unicode": true,
+        "truth_array_empty": false,
+        "truth_array_nonempty_null": true,
+        "truth_harray_empty": false,
+        "truth_harray_nonempty_null": true,
+        "and_one_true": true,
+        "and_one_false": false,
+        "and_many_true": true,
+        "and_many_false": false,
+        "or_one_false": false,
+        "or_one_true": true,
+        "or_many_false": false,
+        "or_many_true": true,
+        "not_false": true
+      }
+    },
+    "effects": {
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   and_decisive_false_is_eager = and(\n     { push(seen, \"and-first\"); return(false) },\n     { push(seen, \"and-second\"); return(true) }\n   )\n   or_decisive_true_is_eager = or(\n     { push(seen, \"or-first\"); return(true) },\n     { push(seen, \"or-second\"); return(false) }\n   )\n   not_single_argument_once = not(\n     { push(seen, \"not-first\"); return(false) }\n   )\n   return({\n     \"and_decisive_false_is_eager\" : and_decisive_false_is_eager,\n     \"or_decisive_true_is_eager\" : or_decisive_true_is_eager,\n     \"not_single_argument_once\" : not_single_argument_once,\n     \"seen\" : copy(seen)\n   })\n }\n",
+      "expected": {
+        "and_decisive_false_is_eager": false,
+        "or_decisive_true_is_eager": true,
+        "not_single_argument_once": true,
+        "seen": ["and-first", "and-second", "or-first", "or-second", "not-first"]
+      }
+    },
+    "receiver_and_lazy_control": {
+      "spec_source": "Top::\n /x/\n E {\n   seen = []\n   receiver_true = and(1, \"x\").with() { return(value) }\n   receiver_false = or(0, \"\").with() { return(value) }\n   if_false_selects_else = if(\n     false,\n     { push(seen, \"if-false-then-skipped\"); return(true) },\n     { push(seen, \"if-false-else\"); return(false) }\n   )\n   if_true_selects_then = if(\n     \"0\",\n     { push(seen, \"if-true-then\"); return(true) },\n     { push(seen, \"if-true-else-skipped\"); return(false) }\n   )\n   return({\n     \"receiver_true\" : receiver_true,\n     \"receiver_false\" : receiver_false,\n     \"if_false_selects_else\" : if_false_selects_else,\n     \"if_true_selects_then\" : if_true_selects_then,\n     \"seen\" : copy(seen)\n   })\n }\n",
+      "expected": {
+        "receiver_true": true,
+        "receiver_false": false,
+        "if_false_selects_else": false,
+        "if_true_selects_then": true,
+        "seen": ["if-false-else", "if-true-then"]
+      }
+    },
+    "invalid_arity": [
+      {"id": "and_zero", "spec_source": "Top::\n /x/\n E { return(and()) }\n"},
+      {"id": "or_zero", "spec_source": "Top::\n /x/\n E { return(or()) }\n"},
+      {"id": "not_zero", "spec_source": "Top::\n /x/\n E { return(not()) }\n"},
+      {"id": "not_many", "spec_source": "Top::\n /x/\n E { return(not({ fail(\"first must not run\") }, { fail(\"second must not run\") })) }\n"}
+    ]
+  },
+  "projections": {
+    "native": "typed helper calls and lazy controls share one truthiness seam while retaining distinct evaluation semantics",
+    "generated": "every available generated execution role preserves values, effects, receiver behavior, and typed arity failures",
+    "primary_cli": "one shared case returns the same canonical JSON and failure projection under all five commands and both option environments",
+    "trace": "logical helper evaluation does not invent a backend-specific trace contract"
+  },
+  "rollout": [
+    {"id": "perl_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.2"},
+    {"id": "rust_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.3"},
+    {"id": "dart_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.4"},
+    {"id": "julia_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.5"},
+    {"id": "lua_native", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.6"},
+    {"id": "generated_and_primary_cli", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.7"},
+    {"id": "recurring_five_backend_gate", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.8"},
+    {"id": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.9"}
+  ]
+}

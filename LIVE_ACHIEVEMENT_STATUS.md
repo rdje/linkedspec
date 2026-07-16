@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.1 — ratify logical-helper contract**
+  (DONE — neutral semantics are executable at 0 complete / 8 pending; Perl rollout `.5.2.2` is next).
+
+  **Result:** ADR `0043` adopts eager one-plus `and`/`or`, exact-one `not`, pre-effect structured arity failure,
+  real booleans, typed null/boolean/finite-number/string/array/harray/codeblock truthiness, receiver composition,
+  and explicit lazy-control separation. The strict neutral artifact embeds deterministic value, effect, receiver/
+  control, and invalid-arity fixtures plus exact native/generated/primary obligations and an eight-leg pending
+  rollout. Codeblock truth stays a model/backend-unit rule without activating separately owned literal syntax.
+
+  **Proof:** The independent checker validates 17 truthiness rows, ten helper cases, three ordered effect scenarios,
+  four pre-effect arity failures, deterministic fixture regeneration, exact 0/8 topology, and 15 drift mutations.
+  Governance, Knowledge Map, mdBook, and whitespace pass. Canonical local CI passes the registered checker,
+  reference CLI 62x2, and Phase 0 `1..1031` in 639 seconds. No parser/compiler/runtime/generated/primary/corpus/
+  capability behavior changed and no implementation mutation campaign ran.
+
 - 2026-07-16: **FUTURE-PARITY-BACKLOG.5.2.0 — split logical-helper parity**
   (DONE — exact planning audit is durable; executable neutral contract `.5.2.1` is active before behavior).
 

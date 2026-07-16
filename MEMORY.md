@@ -10,23 +10,23 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.0` — exact Perl/toolbox and five-backend native/generated
-  audit records three truthiness profiles, two Perl mechanisms, and the dependency-correct `.5.2.1-.9` split.
-- latest_commit: `b86f5754` — `FUTURE-PARITY-BACKLOG.5.1.9 - close diagnostic-output public no-drift` (ahead: 168;
-  push at the documented threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity`; implementation/docs/verification
-  are complete, and the commit/brief-clear/clean-pivot check remain.
-- active_work_unit: executable backend-neutral logical evaluation/arity/truthiness contract
-  `FUTURE-PARITY-BACKLOG.5.2.1` is active after the prepared planning commit lands cleanly.
-- next_action: commit `.5.2.0`, clear the brief, verify the tree clean, then retrieve applicable decision precedent
-  and expand `.5.2.1` acceptance before authoring the neutral decision, fixture, and checker.
-- current_proof: exact toolbox/live/emitted Perl probes distinguish lazy condition lowering, raw/broken direct
-  values, and the `not(false,true)` optional-scope collision. Primary side effects prove eager Rust/Julia versus
-  short-circuit Dart; generated probes match native Rust/Dart/Julia/PUC-Lua/LuaJIT. Three truthiness profiles are
-  durable in the task/KM/book, and `.5.2.1-.9` are dependency-ordered. Focused Perl 4/Rust 137/Dart 60/complete
-  Julia/Lua 177x2 and canonical CLI 62x2/Phase 0 `1..1031` pass; no behavior or mutant run.
-- latest_bootstrap_read: 2026-07-16 — startup corpus, logical Knowledge Map/toolbox, all five helper/truthiness/
-  generated seams, exact current probes, relevant tests, and public helper docs.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.1` — ADR `0043` plus
+  `linkedspec-logical-helper-v1` ratify eager exact-arity boolean helpers over one typed truthiness seam.
+- latest_commit: `38181c35` — `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity` (ahead: 169; push at
+  the documented threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.1 - ratify logical helper contract`; implementation/docs/
+  verification are complete, and only commit, brief clear, and clean pivot remain.
+- active_work_unit: Perl typed-AST/lowering rollout `FUTURE-PARITY-BACKLOG.5.2.2` activates after the prepared
+  neutral-contract commit lands cleanly.
+- next_action: commit `.5.2.1`, clear the brief, verify clean, then expand `.5.2.2` acceptance before Perl behavior
+  changes.
+- current_proof: the offline checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios,
+  receiver/lazy-control contrast, four pre-effect arity failures, deterministic fixtures, exact projections,
+  0/8 rollout, and 15 mutations. Codeblock truth remains model/backend-unit evidence without activating `.11`
+  literal syntax. Canonical CI passes reference CLI 62x2 and Phase 0 `1..1031`/639s. No parser/compiler/runtime/
+  generated/primary/corpus/capability behavior or mutant run.
+- latest_bootstrap_read: 2026-07-16 — full startup corpus plus logical audit/decision precedents, current five-
+  backend mechanisms, helper book surfaces, callable-codeblock scope, and canonical CI registration.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 20-minute timeout; allow
@@ -35,8 +35,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR edge defaults `.9.1`;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none for neutral contract `.5.2.1` after the prepared commit lands.
-  in_flight_uncommitted: completed and verified `.5.2.0` awaiting commit/brief clear/clean pivot only. Mutation campaigns remain
-  parked and no mutant run belongs to ordinary commit/local-CI workflow. Pre-existing dirty `rgx/subs/pgen`
-  work is not LinkedSpec-owned and remains untouched; root `.gitmodules` intentionally ignores dirty `rgx`
-  worktree state.
+- blockers: none. in_flight_uncommitted: completed/verified `.5.2.1` awaits commit, brief clear, and clean pivot.
+  Mutation campaigns remain parked; pre-existing ignored `rgx/subs/pgen` work remains untouched.

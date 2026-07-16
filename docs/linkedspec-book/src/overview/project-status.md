@@ -8,7 +8,7 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 Phases 0–9 of the modernization roadmap are done:
 
-- **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 21 shipped specs with a green `1028`-test baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
+- **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 21 shipped specs with a green `1031`-test baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
 - **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a lazy public facade over owner modules that route through uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
 - **Phase 1A**: Thin-façade modularization — `LinkedSpec.pm` delegated into focused owner modules (`Trace`, `Validation`, `Resolver`, `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `RuleIR`, `EmitContext`); the shared `OwnerDispatch` seam replaced per-owner lazy-loading wrappers.
 - **Phase 2**: DSL frontend hardening — rule-label parsing, inside-block rejection, extra-colon rejection, fluent-continuation recognition, `strict_syntax` mode, construct-recognition alignment with bootstrap grammar.
@@ -149,7 +149,12 @@ Three backbone items tracked major structural modernization — all done:
   Perl logical keyword lowering plus Dart evaluation/empty-`and` and five-backend truthiness/arity drift before
   behavior. It proves Perl condition-only laziness versus broken direct values, Dart short-circuiting, eager
   Rust/Julia/Lua execution, and three truthiness profiles; `.5.2.1-.9` own neutral policy, each backend,
-  generated/primary projection, recurring proof, and public no-drift; executable neutral policy `.5.2.1` is active.
+  generated/primary projection, recurring proof, and public no-drift. Neutral `.5.2.1` now adopts ADR `0043` and
+  checks `linkedspec-logical-helper-v1`: at-least-one eager `and`/`or`, exact-one eager `not`, pre-effect arity
+  diagnostics, typed null/boolean/finite-number/string/aggregate/codeblock truth, boolean receiver results, and
+  lazy-control separation. Its 17 truth rows, ten helper cases, three effect scenarios, deterministic fixtures,
+  and 15 mutations pass offline; backend/projection/admission rollout intentionally remains 0 complete / 8
+  pending under `.5.2.2-.9`.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

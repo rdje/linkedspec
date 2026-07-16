@@ -9,6 +9,14 @@ Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
 Read this when you want canonical `if/else` flow, switch/case branching, and helper-based output statements inside those branches.
 For exact DSL-to-Perl examples for every control-flow marker and emitted branch shape discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
+Logical target/current boundary (2026-07-16): ADR `0043` adopts one typed truthiness policy for conditions and
+logical values: null, false, numeric zero, empty strings, and empty arrays/harrays are false; nonzero finite
+numbers, all nonempty strings (including `"0"` and `"false"`), nonempty aggregates, and codeblocks are true.
+`and`/`or` are eager value helpers with at least one argument and `not` is an exact-one helper; invalid arity fails
+before operand evaluation. The controls documented here remain lazy: only the selected branch/body executes.
+Backend rollout is still 0/8 under `FUTURE-PARITY-BACKLOG.5.2.2-.9`, so current Perl condition lowering still
+uses host short-circuit/truth behavior until `.5.2.2` lands.
+
 Method-DSL migration note:
 - fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,
 - so `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same method-like DSL equivalence target,

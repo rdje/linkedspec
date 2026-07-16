@@ -1246,6 +1246,22 @@ value to `demo`'s accumulator.
 (`ready=1`, `raw=0`, `fallback=0`, `unresolved=0`, canonical nodes `["EXIT"]`). It is not run in the example
 table because its runtime behavior is to terminate the parser process.
 
+### `and(value, ...)`, `or(value, ...)`, and `not(value)`
+- **Target signatures**: `and` and `or` require at least one positional value; `not` requires exactly one.
+- **Target returns**: a real boolean. One-argument `and`/`or` are boolean projections.
+- **Target evaluation**: after arity succeeds, every operand runs exactly once from left to right. Logical helpers
+  do not short-circuit; `if`/`switch`/`while` remain the lazy mechanisms.
+- **Target truthiness**: null, false, numeric zero, the empty string, and empty arrays/harrays are false. Other
+  finite numbers, every nonempty string (including `"0"` and `"false"`), nonempty aggregates, and codeblocks are
+  true. Testing a codeblock does not invoke it.
+- **Target failures**: empty `and`/`or`, empty `not`, and multi-argument `not` report
+  `helper_arity_mismatch` before evaluating any operand.
+- **Scope boundary**: the codeblock value-kind row is model/backend-unit evidence; it does not activate the
+  separately owned `{|...| ... }` literal syntax.
+- **Current portability status**: ADR `0043` and `linkedspec-logical-helper-v1` are adopted, but all eight backend/
+  projection/admission legs remain pending under `FUTURE-PARITY-BACKLOG.5.2.2-.9`. Current hosts still expose the
+  three profiles recorded in the Boolean composition reference; do not treat the target as landed behavior yet.
+
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
 - **Returns**: value of the selected branch in supported value positions.
@@ -1255,8 +1271,9 @@ table because its runtime behavior is to terminate the parser process.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
   fluent `.return(...)` value positions. Logical audit `.5.2.0` finds three current condition profiles: Perl/Lua
   make scalar `"0"` false and empty aggregates true; Dart/Julia make all nonempty strings true and empty
-  aggregates false; Rust additionally makes nonempty scalar `"false"` false. `FUTURE-PARITY-BACKLOG.5.2.1-.9`
-  own neutral policy and five-backend normalization.
+  aggregates false; Rust additionally makes nonempty scalar `"false"` false. ADR `0043` adopts nonempty-string/
+  nonempty-aggregate typed truth as the target, and `FUTURE-PARITY-BACKLOG.5.2.2-.9` own the still-pending
+  five-backend/projection/admission rollout.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

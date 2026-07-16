@@ -195,8 +195,11 @@ This `README.md` is the **single entry point** to the project.
   Planning audit `.5.2.0` splits Perl logical lowering plus five-backend truthiness/arity normalization before
   behavior changes. It finds lazy condition-only Perl operators versus broken direct values, Dart short-circuiting,
   eager Rust/Julia/Lua helpers, and three distinct truthiness profiles. Neutral/backend/generated/gate/public
-  leaves `.5.2.1-.9` are dependency-ordered; `.5.2.0` is complete and executable neutral contract `.5.2.1` is
-  active before structured-format execution.
+  leaves `.5.2.1-.9` are dependency-ordered. Neutral `.5.2.1` now adopts ADR `0043` plus the executable
+  `linkedspec-logical-helper-v1` authority: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity failure,
+  real booleans, typed truthiness, receiver composition, and lazy-control separation. Its 17 truth rows, ten helper
+  cases, three effect scenarios, deterministic fixtures, and 15 drift mutations pass offline; all eight backend/
+  projection/admission legs remain pending under `.5.2.2-.9` before structured-format execution.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

@@ -40,9 +40,9 @@ there is no first-class logical ActionIR node. The legacy optional-scope normali
 the first bare value token in `not(false, true)` as a scope and lower `!(true)`.
 
 Rust, Dart, Julia, and Lua generated execution reproduces each backend's native behavior exactly, so generated
-projection is not the source of the drift. `FUTURE-PARITY-BACKLOG.5.2.1` must ratify the neutral semantics before
-the dependency-ordered Perl/Rust/Dart/Julia/Lua, generated/primary, recurring-gate, and public no-drift leaves
-change behavior.
+projection is not the source of the drift. `FUTURE-PARITY-BACKLOG.5.2.1` has since ratified ADR `0043` and the
+executable neutral contract; the dependency-ordered Perl/Rust/Dart/Julia/Lua, generated/primary, recurring-gate,
+and public no-drift leaves `.5.2.2-.9` remain pending before behavior changes.
 
 Related facts: [[cross-backend-condition-truthiness-drift]], [[julia-logical-helper-execution]],
-[[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]].
+[[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]], [[logical-helper-neutral-contract]].

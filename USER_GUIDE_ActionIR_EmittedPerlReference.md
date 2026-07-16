@@ -230,7 +230,11 @@ These three mappings currently describe condition-expression lowering only. `and
 host short-circuit behavior. Direct logical values in return, assignment, nested, and receiver positions still
 remain raw keyword-call text and can miscompile or return `undef`; legacy optional-scope stripping can also turn
 `not(false, true)` into a negation of only the second argument. Planning audit
-`FUTURE-PARITY-BACKLOG.5.2.0` records the mechanism; `.5.2.1-.2` own the neutral contract and typed Perl repair.
+`FUTURE-PARITY-BACKLOG.5.2.0` records the mechanism. ADR `0043` and executable neutral leaf `.5.2.1` now adopt
+at-least-one `and`/`or`, exactly-one `not`, eager once-only operands, real booleans, and typed nonempty-string/
+nonempty-aggregate truth. Perl has not implemented that target yet; `.5.2.2` owns the typed ActionIR/lowering
+repair. Until it lands, the three mappings above are current condition-only Perl behavior, not portable target
+code.
 - `is_defined(retv["content"])` -> `defined($retv->{"content"})`
 - `is_undefined(retv["type"])` -> `(!defined($retv->{"type"}))`
 - `is_defined(coalesce(retv["type"], scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`

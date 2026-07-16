@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-16`
+- `2026-07-16` refresh: neutral logical contract `FUTURE-PARITY-BACKLOG.5.2.1` adopts ADR `0043` and
+  `linkedspec-logical-helper-v1`. `and`/`or` require one-plus operands and `not` exactly one; arity rejects before
+  effects, valid operands run once left-to-right, and results are booleans. One typed seam makes null/false/zero/
+  empty-string/empty-aggregate false and nonzero finite numbers/nonempty strings/nonempty aggregates/codeblocks
+  true; lazy controls share truthiness without sharing eager evaluation. The independent checker locks 17 truth
+  rows, ten helper cases, three effect scenarios, receiver/control contrast, four invalid arities, deterministic
+  fixtures, projections, 0/8 rollout, and 15 mutations. Explicit codeblock literals remain `.11`-owned. No backend
+  behavior changes; Perl `.5.2.2` is active.
 - `2026-07-16` refresh: planning audit `FUTURE-PARITY-BACKLOG.5.2.0` decomposes logical normalization before
   behavior. Toolbox, descriptor, source, native, and generated probes expose two Perl mechanisms: conditions lower
   through lazy host `&&`/`||`/`!`, while direct return/assignment/receiver logical values remain raw/broken and

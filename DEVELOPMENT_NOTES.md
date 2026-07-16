@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.1` — language diversity becomes valuable when disagreement is promoted
+  into a typed authority): The five implementations exposed the policy choices, but a matrix alone would merely
+  preserve drift. ADR `0043` converts those observations into one executable contract: exact arities before
+  effects, eager once-only operands, boolean results, typed truthiness, receiver composition, and a deliberate
+  boundary between eager logical values and lazy controls. The checker independently evaluates the model,
+  regenerates embedded fixtures, verifies projection/rollout topology, and rejects 15 mutations. All eight rollout
+  rows start pending so documentation cannot confuse an adopted target with current backend behavior.
+
+  A scope audit caught a subtle trap: rendering the codeblock truth row as `{|| ... }` would have quietly activated
+  generic callable-codeblock syntax still owned by `.11`. The final contract keeps codeblock truth normative but
+  proves it through the model/backend-unit boundary; the portable source fixture omits explicit literals. This is
+  exactly the upside of multi-language/spec triangulation: it reveals not only semantic disagreement, but hidden
+  dependency and scope coupling before implementation hardens it. No runtime behavior changed.
+
 - 2026-07-16 (`FUTURE-PARITY-BACKLOG.5.2.0` — multiple implementations are executable specification probes):
   Rewriting the same algorithm in several languages has value beyond portability. Each host forces implicit
   decisions into observable behavior: evaluation order, arity, truth conversion, error boundaries, generated

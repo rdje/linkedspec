@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-16` (logical audit-and-split `.5.2.0` is complete without behavior change; executable
-  backend-neutral contract `.5.2.1` is active before backend rollout)
+- Last updated: `2026-07-16` (logical audit `.5.2.0` and executable neutral ADR/contract `.5.2.1` are complete
+  without backend behavior change; Perl typed-AST/lowering rollout `.5.2.2` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -2785,18 +2785,50 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Ratify an executable backend-neutral logical-helper and truthiness contract.
   Dependencies: `.5.2.0`
   Acceptance: Adopt a decision plus machine-readable fixtures/checker for exact `and`/`or`/`not` arities, eager
     once-only left-to-right evaluation, boolean results, scalar/aggregate/null/boolean/number/string truthiness,
     receiver composition, wrong-arity diagnostics, generated propagation, primary projection, and explicit
     separation from lazy controls. Begin with every backend rollout leg pending.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / PRECEDENT** — Apply ADR `0011` typed-AST ownership, ADR `0023` user-observable parity, ADR
+    `0029` host-coercion prohibition/exact-arity precedent, ADR `0030` explicit arity metadata, and ADR `0042`
+    pre-evaluation arity/eager-once fixture structure; keep ADR `0028` text rendering separate from truthiness.
+  - [x] **DECIDE / ADR 0043** — Ratify one typed truth table, eager once-only left-to-right helper evaluation,
+    valid zero/one/variadic arities, real boolean results, pre-evaluation structured arity failure, receiver
+    composition, and explicit separation from lazy controls. Explain why scalar `"0"`, scalar `"false"`, empty
+    aggregates, and codeblocks do or do not pass without delegating policy to any host.
+  - [x] **NEUTRAL SCHEMA** — Add strict `linkedspec-logical-helper-v1` data covering every value kind, disputed
+    rows, ordinary/edge numbers and strings, zero/one/many calls, decisive-operand side effects, receiver results,
+    lazy-control contrast, diagnostic fields, generated/primary obligations, and an eight-leg rollout initialized
+    at zero complete / eight pending.
+  - [x] **INDEPENDENT CHECKER** — Validate exact schema/order/uniqueness, independently evaluate the truth table and
+    helper calls, reject unknown/missing/duplicate cases and premature rollout admission, render deterministic
+    `.spec`/expected fixtures, and expose a concise report suitable for canonical CI.
+  - [x] **FIXTURE PROOF** — Check in deterministic valid-call, side-effect, receiver/lazy-control, and invalid-arity
+    fixtures with exact expected values/effects/diagnostics; prove regeneration is byte-identical and the checker
+    rejects representative semantic, arity, effect, diagnostic, topology, and premature-admission mutations.
+  - [x] **CI REGISTRATION** — Register only the backend-neutral offline checker in canonical local CI. Backend
+    consumers remain pending under `.5.2.2-.7`; recurring composed execution remains `.5.2.8` and public admission
+    remains `.5.2.9`.
+  - [x] **PUBLIC TARGET** — Update the mdBook, roadmap/architecture/live docs, task/index, changes/notes, decision
+    index, Knowledge Map, and bounded memory to distinguish adopted target semantics from measured current backend
+    behavior. Do not present any pending backend as conforming.
+  - [x] **NO REGRESSION** — Change no parser/compiler/runtime/generated/primary/corpus/capability behavior or current
+    backend expectations; run the neutral checker/mutations, focused governance/KM/book/whitespace checks, and the
+    canonical local gate. Do not run implementation mutation campaigns.
+  - [x] **LOCKSTEP** — Close `.5.2.1` only with exact verification/commit evidence and activate Perl typed-AST/
+    lowering rollout `.5.2.2` after a clean commit.
+  Verification: `python3 tools/check_logical_helper_contract.py` passes 17 truthiness, ten helper, three effect,
+    0-complete/8-pending, and 15-mutation proof; shell syntax, Knowledge Map, memory, doctrines, mdBook, and
+    whitespace pass. Canonical local CI passes the registered checker, reference CLI 62x2, and Phase 0 `1..1031`
+    in 639 seconds. No behavior change or implementation mutation campaign.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.1 - ratify logical helper contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Repair Perl logical lowering and align the neutral reference truthiness/arity contract.
   Dependencies: `.5.2.1`
   Acceptance: Typed ActionIR owns direct, nested, assignment, return, condition, user-function, receiver, live,
@@ -5164,7 +5196,8 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
-backend-neutral policy `.5.2.1` is the sole active frontier before behavior code.
+backend-neutral policy `.5.2.1` is complete at 0/8 rollout; Perl typed-AST/lowering `.5.2.2` is the sole active
+frontier before other backend behavior.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5365,7 +5398,7 @@ backend-neutral policy `.5.2.1` is the sole active frontier before behavior code
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
 | 180 | `FUTURE-PARITY-BACKLOG.5.1` | `done` | All eight rollout legs are complete; 16 public documents, nine stale-claim guards, and 20 mutations close diagnostic-output no-drift. |
-| 181 | `FUTURE-PARITY-BACKLOG.5.2` | `active` | Audit `.5.2.0` is complete; executable neutral contract `.5.2.1` is active before backend/generated/gate/public rollout. |
+| 181 | `FUTURE-PARITY-BACKLOG.5.2` | `active` | Audit `.5.2.0` and neutral ADR/contract `.5.2.1` are complete; Perl `.5.2.2` is active before other backend/generated/gate/public rollout. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
 | 184 | `FUTURE-PARITY-BACKLOG.20.0` | `done` | ADR 0039 governs explicit milestone-scoped Rust mutation testing; list-only baseline 3,333, no run. |
@@ -5390,7 +5423,8 @@ backend-neutral policy `.5.2.1` is the sole active frontier before behavior code
 | 203 | `FUTURE-PARITY-BACKLOG.5.1.8` | `done` | One topology-checked driver composes six native/generated consumers, exact quiet primary projection, and support ledgers. |
 | 204 | `FUTURE-PARITY-BACKLOG.5.1.9` | `done` | Public docs, Knowledge Map, capability, examples, and final no-drift state close parent `.5.1`. |
 | 205 | `FUTURE-PARITY-BACKLOG.5.2.0` | `done` | Exact Perl/toolbox and five-backend native/generated audit records three truthiness profiles and locks the safe split. |
-| 206 | `FUTURE-PARITY-BACKLOG.5.2.1` | `active` | Ratify one executable backend-neutral logical evaluation/arity/truthiness contract before backend behavior. |
+| 206 | `FUTURE-PARITY-BACKLOG.5.2.1` | `done` | ADR `0043`, strict neutral schema/checker/fixtures, 15 mutations, canonical CI, and 0/8 rollout are locked. |
+| 207 | `FUTURE-PARITY-BACKLOG.5.2.2` | `active` | Add first-class typed Perl logical ownership and align eager arity/truthiness before other backends. |
 | 69 | `FUTURE-PARITY-BACKLOG.5` | `active` | Normalize helper caveats; logical truthiness/arity/lowering `.5.2` is active before the remaining constructors/transforms/join/push, harray order/collisions, switch equality/ranges, control aliases, and while limits/next. |
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
@@ -6062,13 +6096,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Neutral logical contract `.5.2.1` is the sole active frontier. Structured-format, write-vivification, and companion-book parity
-  prerequisites are satisfied, but their pending trees are not implicitly activated.
+- None. Perl logical typed-AST/lowering `.5.2.2` is the sole active frontier. Structured-format,
+  write-vivification, and companion-book parity prerequisites are satisfied, but their pending trees are not
+  implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.1` | ADR `0043`; strict neutral schema/checker; 17 truthiness rows; ten helper cases; three ordered-effect scenarios; receiver/lazy-control contrast; four pre-effect arity failures; deterministic embedded fixtures; exact projection/0-of-8 rollout topology; 15 drift mutations; shell syntax; Knowledge Map; memory/doctrines; mdBook; whitespace; canonical local CI with registered checker, reference CLI 62x2, and Phase 0 `1..1031`/639s. | PASS. One backend-neutral eager exact-arity boolean/truthiness contract is executable before rollout; explicit codeblock literals remain `.11`-owned, no backend behavior changes, and Perl `.5.2.2` activates. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.2.0` | Knowledge Map/toolbox first; exact Perl substitution/live/descriptor/emitted/side-effect/arity/receiver probes; five-backend source/native/primary/generated matrix including both Lua ABIs; Perl 4, Rust 137, Dart 60, complete Julia, Lua 177/177; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 62x2 and Phase 0 `1..1031`. | PASS. Three truthiness profiles, two Perl mechanisms, Dart short-circuiting, eager Rust/Julia/Lua, and matching native/generated projections are durable; `.5.2.1-.9` are dependency-ordered, `.5.2.1` activates, no behavior changes, and no mutation campaign runs. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.9` | Exact 16-document/nine-stale-claim public contract; copyable native/generated examples for five backends; offline 8-complete/0-pending checker with 20 mutations; exact Perl lowering probe; complete Rust/Dart/Julia/dual-ABI-Lua gates; recurring Perl 16/Rust 7/Dart 7/Julia 82/PUC Lua 119/LuaJIT 119 plus selected CLI 5x2x1; unchanged full 5x2x62; generated/capability 80/0/0 and exhaustive coverage; canonical reference CLI 62x2, Phase 0 `1..1031`, and registered driver; docs/KM/governance/mdBook/whitespace. | PASS. Public guidance is an executable projection of the same native/generated event contract, all stale-current caveats are removed or historicized, the rollout ledger closes at 8/0, parent `.5.1` closes, and logical `.5.2` activates without runtime change. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.5.1.8` | Contract-declared six-consumer/native+generated topology; offline model plus 16 drift mutations; direct Perl 16/Rust 7/Dart 7/Julia 82/PUC Lua 119/LuaJIT 119; exact selected CLI 5x2x1; unchanged default 5x2x62; generated-source/capability 80/0/0; 246 names/105 corpus plus one fixture/122 public contracts; canonical tracked-input/syntax registration, reference CLI 62x2, Phase 0 `1..1031`, and registered all-toolchain driver; docs/KM/governance/mdBook/whitespace. | PASS. One strict recurring gate now fails on semantic, consumer/generated-role, quiet-primary, support-ledger, or CI-registration drift; only `recurring_five_backend_gate` completes and public no-drift `.5.1.9` activates. |
@@ -6222,6 +6258,7 @@ Read-only evidence recorded on 2026-07-10:
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.5.2.0` | `FUTURE-PARITY-BACKLOG.5.2.0 - split logical helper parity` | Exact current semantic/mechanism matrix, durable three-profile/two-Perl-path finding, and neutral/backend/generated/gate/public split; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.5.2.1` | `FUTURE-PARITY-BACKLOG.5.2.1 - ratify logical helper contract` | ADR `0043`, strict neutral schema/checker/fixtures, 15 drift mutations, 0/8 rollout, canonical CI registration, and public target alignment; no backend behavior code. |
 | `FUTURE-PARITY-BACKLOG.5.1.9` | `FUTURE-PARITY-BACKLOG.5.1.9 - close diagnostic-output public no-drift` | Sixteen authoritative documents, nine stale-claim guards, five-backend examples, 20 mutations, 8/0 ledger, parent closure, and logical handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.8` | `FUTURE-PARITY-BACKLOG.5.1.8 - add recurring diagnostic-output gate` | Exact six-consumer topology, strict composed driver, selected 5x2x1 projection, 16 mutations, CI registration, and public no-drift handoff. |
 | `FUTURE-PARITY-BACKLOG.5.1.7` | `FUTURE-PARITY-BACKLOG.5.1.7 - propagate generated diagnostic events` | Five generated API shapes, exact caller/exit preservation, corrected portable quiet-primary fixture, 5x2x62 proof, rollout ledger, and recurring-gate handoff. |
@@ -6373,6 +6410,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-16`: `.5.2.1` adopts ADR `0043` and `linkedspec-logical-helper-v1`: eager one-plus `and`/`or`,
+  exact-one `not`, pre-effect arity errors, real booleans, typed truthiness, receiver composition, and lazy-control
+  separation. The independent checker validates 17 truth rows, ten helper cases, three effect scenarios, four
+  invalid arities, deterministic fixtures, exact projections/0-of-8 rollout, and 15 drift mutations. A scope audit
+  keeps explicit codeblock literals under `.11`. Canonical reference CLI 62x2 and Phase 0 `1..1031`/639s pass;
+  no backend behavior or implementation mutation campaign changes, and Perl `.5.2.2` activates.
 - `2026-07-16`: `.5.2.0` audits logical helpers before behavior. Perl toolbox/descriptor/live/emitted proof
   distinguishes lazy condition operators from raw/broken value calls and the optional-scope collision; native and
   generated probes distinguish Dart short-circuiting from eager Rust/Julia/Lua and establish three truthiness

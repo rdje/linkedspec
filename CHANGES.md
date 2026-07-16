@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.1 — ratify logical-helper contract
+
+Adopted ADR `0043` and `linkedspec-logical-helper-v1` as the backend-neutral authority before implementation.
+`and`/`or` require at least one positional argument, `not` exactly one, invalid arity fails before effects, valid
+operands run once left-to-right, and every result is a real boolean. One typed truthiness policy makes null, false,
+finite numeric zero, empty strings, and empty aggregates false; nonzero finite numbers, all nonempty strings,
+nonempty aggregates, and codeblocks are true. Lazy controls share truthiness but retain selected-branch/body
+evaluation. Codeblock truth is a model/backend-unit rule and does not activate separately owned literal syntax.
+
+Added an independent checker and deterministic embedded value, eager-effect, receiver/lazy-control, and
+invalid-arity fixtures. The checker locks 17 truthiness cases, ten helper cases, three effect scenarios, four
+pre-effect arity failures, exact native/generated/primary projections, a deliberately pending eight-leg rollout,
+and 15 representative drift mutations. Registered only this offline neutral check in canonical local CI and
+aligned the roadmap, live architecture, mdBook, user guides, decision index, task tree, and Knowledge Map without
+changing parser/compiler/runtime/generated/primary/corpus/capability behavior.
+
+Validation: neutral checker/mutations, shell syntax, governance, Knowledge Map, mdBook, and whitespace pass.
+Canonical local CI passes the registered checker, reference CLI 62x2, and Phase 0 `1..1031` in 639 seconds. No
+implementation mutation campaign ran. Perl `.5.2.2` is active.
+
 ## 2026-07-16 — FUTURE-PARITY-BACKLOG.5.2.0 — split logical-helper parity
 
 Completed a planning-only logical-helper audit before runtime changes. Perl toolbox, canonical descriptor, live,
