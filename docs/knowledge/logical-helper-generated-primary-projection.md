@@ -12,7 +12,7 @@ answers:
 date: 2026-07-17
 status: current
 tags: [logical, generated-source, primary-cli, trace, diagnostics, perl, rust, dart, julia, lua, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.7 expands the unchanged linkedspec-logical-helper-v1 fixtures over every supported generated direct/traced role. Perl covers emitted Execute, ExecuteWithTrace, and Get; Rust covers typed-v1 plus legacy compatibility direct/traced pairs; Dart, Julia, and Lua cover generated-plan plus independently emitted direct/traced functions. Exact values, eager effects, pre-effect arity diagnostics, source/rule/family attribution where exposed, and trace/direct identity pass. Rust typed v1 returns the direct top-rule value while its compatibility pair intentionally retains the historical parse-output array. Shared manifest case success_logical_helpers_eager uses a portable action edge and passes all five commands in default and POSIX environments. FUTURE-PARITY-BACKLOG.5.2.8 now makes those exact generated and primary roles recurring; rollout is 7 complete / 1 pending."
+evidence: "FUTURE-PARITY-BACKLOG.5.2.7 expands the unchanged linkedspec-logical-helper-v1 fixtures over every supported generated direct/traced role. Perl covers emitted Execute, ExecuteWithTrace, and Get; Rust covers typed-v1 plus legacy compatibility direct/traced pairs; Dart, Julia, and Lua cover generated-plan plus independently emitted direct/traced functions. Exact values, eager effects, pre-effect arity diagnostics, source/rule/family attribution where exposed, and trace/direct identity pass. Rust typed v1 returns the direct top-rule value while its compatibility pair intentionally retains the historical parse-output array. Shared manifest case success_logical_helpers_eager uses a portable action edge and passes all five commands in default and POSIX environments. FUTURE-PARITY-BACKLOG.5.2.8 makes those exact generated and primary roles recurring; .5.2.9 closes public no-drift at 8 complete / 0 pending."
 reverify: "prove -lv t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && dart test test/logical_helper_contract_test.dart) && JULIA_DEPOT_PATH=/tmp/linkedspec-julia-writable:$HOME/.julia julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/logical_helper_contract_test.jl && bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager"
 ---
 
@@ -39,4 +39,4 @@ environments. The full manifest has 63 cases after this admission.
 
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
 [[generated-source-contract-v1]], [[cross-backend-diagnostic-output-drift]],
-[[logical-helper-recurring-five-backend-gate]].
+[[logical-helper-recurring-five-backend-gate]], [[logical-helper-public-no-drift]].

@@ -10,20 +10,21 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.8` — one omission-checked recurring driver composes the exact
-  six-consumer native/generated topology, selected 5x2x1 primary case, support ledgers, and canonical registration;
-  rollout is 7/1 with 22 rejected semantic/topology mutations.
-- latest_commit: `53a108ea` — `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection`
-  (ahead: 179; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate`.
-- active_work_unit: verified recurring five-backend logical-helper gate `FUTURE-PARITY-BACKLOG.5.2.8` closing;
-  public no-drift `.5.2.9` follows only after the clean commit, before cursor implementation `.9.1.2-.9`.
-- next_action: run final governance/mdBook/diff checks, commit `.5.2.8`, verify clean, then activate `.5.2.9`.
-- current_proof: direct and registered recurring drivers pass neutral logical 7/1 plus 22 semantic/topology
-  mutations, Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT focused consumers, selected primary 5x2x1, and generated-source/
-  capability 80/0/0 plus exhaustive 246/105+1/122 coverage. Unchanged full primary 5x2x63 passes. Canonical local
-  CI passes reference CLI 63x2, Phase 0 `1..1031`/623s, and the registered logical leg. No runtime implementation
-  or mutation campaign occurred.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.9` — 20 public documents and 13 stale-current guards are an
+  executable projection of the same native/generated contract; rollout and parent `.5.2` close at 8/0 with 26
+  rejected semantic/topology/public mutations.
+- latest_commit: `9ab68eeb` — `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate`
+  (ahead: 180; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.9 - close logical-helper public no-drift`.
+- active_work_unit: verified logical public no-drift `FUTURE-PARITY-BACKLOG.5.2.9` closing at the commit boundary;
+  cursor contract/inventory `.9.1.2` follows only after this commit is clean.
+- next_action: run final governance/diff checks, stage the closeout record, commit `.5.2.9`, clear the brief, and
+  verify the handoff-ready clean boundary.
+- current_proof: logical checker 8/0, 20 documents, 13 forbidden current claims, and 26 mutations; direct and
+  registered recurring Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT 8/4/24/232/359/359; selected 5x2x1 and full 5x2x63;
+  complete backend gates; diagnostic 8/0; generated/capability 80/0/0; coverage 246/105+1/122; governance/KM/book;
+  canonical reference CLI 63x2, Phase 0 `1..1031`/640s, and registered logical leg. No runtime implementation or
+  implementation mutation campaign occurred.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -34,6 +35,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.5.2.8` recurring contract/checker/driver/local-CI registration
-  and lockstep docs/KM await final governance checks and commit; no background job is running. Mutation campaigns remain parked;
-  ignored `rgx/subs/pgen` work remains untouched.
+- blockers: none. in_flight_uncommitted: verified `.5.2.9` public contract/checker, guide/backend/status docs,
+  task/live, and Knowledge Map sources await the prepared commit; no background gate remains. Mutation campaigns
+  remain parked; ignored `rgx/subs/pgen` work remains untouched.

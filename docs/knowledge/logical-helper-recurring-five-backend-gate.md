@@ -11,7 +11,7 @@ answers:
 date: 2026-07-17
 status: current
 tags: [logical, recurring-gate, generated-source, primary-cli, ci, perl, rust, dart, julia, lua, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.8 adds tools/check_logical_helper_five_backend.sh and an exact recurring_gate topology to linkedspec-logical-helper-v1. The driver passes the neutral checker, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT focused consumers, success_logical_helpers_eager through 5 commands x 2 environments, and generated-source/capability/coverage ledgers. The checker reports 7 complete / 1 pending and rejects 22 mutations, including backend, generated-role, primary, support, driver, CI-registration, and rollout omissions. Canonical local CI registers the same all-toolchain leg behind LINKEDSPEC_RUN_LOGICAL_MATRIX=1."
+evidence: "FUTURE-PARITY-BACKLOG.5.2.8 adds tools/check_logical_helper_five_backend.sh and an exact recurring_gate topology to linkedspec-logical-helper-v1. The driver passes the neutral checker, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT focused consumers, success_logical_helpers_eager through 5 commands x 2 environments, and generated-source/capability/coverage ledgers. FUTURE-PARITY-BACKLOG.5.2.9 adds public no-drift; the checker reports 8 complete / 0 pending and rejects 26 mutations, including backend, generated-role, primary, support, driver, CI-registration, public-surface, and rollout omissions. Canonical local CI registers the same all-toolchain leg behind LINKEDSPEC_RUN_LOGICAL_MATRIX=1."
 reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
@@ -34,4 +34,4 @@ generated-plan direct/traced, and emitted direct/traced. The offline checker req
 role and mutates each omission class, so a still-green test file cannot silently stop covering an entrypoint.
 
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-generated-primary-projection]],
-[[logical-helper-five-backend-audit]], [[generated-source-contract-v1]].
+[[logical-helper-five-backend-audit]], [[generated-source-contract-v1]], [[logical-helper-public-no-drift]].

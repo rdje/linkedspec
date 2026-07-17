@@ -5,12 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: logical public no-drift `FUTURE-PARITY-BACKLOG.5.2.9` makes the native/generated/primary
+  contract and recurring proof the one public story. Twenty authoritative documents cover the control/value
+  guides, emitted Perl, four backend READMEs, mdBook catalog/reference/action/handoff/status, capability/CLI,
+  roadmaps/architecture/live/task state, and Knowledge Map; 13 stale-current claims are forbidden. The checker
+  rejects 26 semantic/topology/public mutations. Rollout is 8 complete / 0 pending and parent `.5.2` is closed;
+  no runtime implementation changed.
 - `2026-07-17` refresh: recurring logical admission `FUTURE-PARITY-BACKLOG.5.2.8` adds one strict
   omission-checked driver over `linkedspec-logical-helper-v1`, the exact native/generated role inventory for
   Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, selected primary case `success_logical_helpers_eager` under five
   commands and two environments, and generated-source/capability/coverage ledgers. The offline checker rejects
   22 semantic/topology mutations, canonical local CI registers the all-toolchain leg behind
-  `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`, and rollout is 7 complete / 1 pending before public no-drift `.5.2.9`.
+  `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`; that boundary advanced the ledger to 7/1 before public no-drift `.5.2.9`.
   No runtime implementation changed.
 - `2026-07-17` refresh: logical generated/primary rollout `FUTURE-PARITY-BACKLOG.5.2.7` expands the unchanged
   neutral consumers across every available direct/traced generated role. Perl proves emitted `Execute`,

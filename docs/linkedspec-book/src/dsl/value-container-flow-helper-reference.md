@@ -1182,9 +1182,11 @@ aligns `runtime_truthy`, validates arity before effects, and proves native, reco
 emitted-module, and primary roles on both PUC Lua and LuaJIT. Generated/primary `.5.2.7` now locks every available
 direct/traced generated role, exact typed failure/source attribution, Rust's direct-value versus compatibility-
 output distinction, and shared five-command case `success_logical_helpers_eager` under default and POSIX options.
-Recurring `.5.2.8` now locks the neutral checker, six exact native/generated runtime consumers, selected 5x2x1
-primary case, and generated-source/capability/coverage ledgers under one strict driver. Rollout is 7 complete / 1
-pending; `.5.2.9` retains public no-drift, with no known native or generated truthiness split.
+Recurring `.5.2.8` locks the neutral checker, six exact native/generated runtime consumers, selected 5x2x1
+primary case, and generated-source/capability/coverage ledgers under one strict driver. Public no-drift `.5.2.9`
+locks this truth table, the action/value guides, every backend README, status/capability/CLI guidance, and the
+Knowledge Map. Rollout is 8 complete / 0 pending and parent `.5.2` is closed, with no known native or generated
+truthiness split.
 
 When all five backend toolchains are installed, run the complete recurring logical proof with:
 

@@ -10,8 +10,8 @@ rule/function execution with direct canonical JSON, stable failure/trace routing
 conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
 parity closeout remain open. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
 identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
-status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the native and
-generated/primary legs of `linkedspec-logical-helper-v1`; recurring and public no-drift admission remain pending.
+status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the complete native,
+generated, primary, and recurring `linkedspec-logical-helper-v1` proof; its public no-drift admission is closed.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -81,14 +81,14 @@ subcommands. The separate corpus runner validates
 `expected.json` files, and expected JSON syntax. Bare `--execute` runs all 105 fixtures; selectors narrow a run
 without bypassing complete manifest validation.
 
-## Native Logical Helpers
+## Native and Generated Logical Helpers
 
 `and`, `or`, and `not` are eager boolean value helpers. `and` and `or` require at least one positional argument;
 `not` requires exactly one. Invalid calls fail before evaluating any operand with `helper_arity_mismatch` and
 structured `code`, `helper_name`, `actual_arity`, and `expected_arity` fields. Valid operands evaluate exactly once
 from left to right, so use `if`, `switch`, or `while` when later side effects must be skipped.
 
-Logical helpers and lazy controls share one typed truth policy: `nothing`, false, numeric zero, the empty string,
+Logical helpers and lazy controls share one `_runtime_truthy` typed policy: `nothing`, false, numeric zero, the empty string,
 and empty vectors/dictionaries are false; nonzero numbers, every nonempty string (including `"0"` and `"false"`),
 and nonempty aggregates are true. A typed codeblock value is true without invocation; this runtime rule does not
 activate the separately future explicit callable-literal syntax.
@@ -105,9 +105,15 @@ Top::
 ```
 
 The result is `{"eager":true,"lazy":false,"seen":["still-runs"]}`. Native, reconstructed, generated-plan,
-emitted-module, and primary-command paths share these semantics. The primary command keeps its stable generic
+emitted-module, and primary-command paths share these semantics. Direct/traced generated-plan calls and
+`LinkedSpecGeneratedParser.execute` / `LinkedSpecGeneratedParser.execute_with_trace` retain the same value,
+effect order, failure attribution, and trace-result identity. The primary command keeps its stable generic
 `linkedspec: parser invocation failed` process projection for invalid calls; native callers can inspect
 `to_json(error.diagnostic)` for the structured fields.
+
+Run `bash tools/check_logical_helper_five_backend.sh` from the repository root for the full recurring neutral,
+six-runtime, selected-primary, and support-ledger proof. Canonical local CI exposes the same all-toolchain leg as
+`LINKEDSPEC_RUN_LOGICAL_MATRIX=1 bash tools/run_ci_local.sh`.
 
 Under managed harnesses where the default Julia depot is not writable, prefix commands with a writable depot:
 

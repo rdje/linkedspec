@@ -228,9 +228,15 @@ Important nuance:
 
 Perl `.5.2.2` makes these typed logical value expressions in conditions, returns, assignments, nested calls,
 user functions, block values, and compatible receiver chains. Arity is checked before operand lowering; valid
-operands evaluate once left-to-right; composition returns a real boolean. The emitted source does not use host
-`&&`, `||`, or raw Perl keyword calls. `LinkedSpec::RuntimeLogical::truthy` is also the one condition seam, so
+operands evaluate once left-to-right; composition returns a real boolean. Logical lowering must never use host `&&` / `||`
+or raw Perl keyword calls. Every value path ends in `LinkedSpec::RuntimeLogical::evaluate`, and
+`LinkedSpec::RuntimeLogical::truthy` is also the one condition seam, so
 logical helpers stay eager while `if`/`switch`/`while` branch or iterate lazily.
+
+Standalone generated `Execute`, generated `ExecuteWithTrace`, and `Get` all call the same emitted runtime seam.
+Trace wrapping does not change the top-rule value or effect order, and arity failures retain the typed
+`helper_arity_mismatch` record. The other host emitters are allowed different source text and public signatures;
+their direct/traced observations are governed by the same `linkedspec-logical-helper-v1` contract.
 - `is_defined(retv["content"])` -> `defined($retv->{"content"})`
 - `is_undefined(retv["type"])` -> `(!defined($retv->{"type"}))`
 - `is_defined(coalesce(retv["type"], scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`

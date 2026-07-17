@@ -1268,7 +1268,9 @@ table because its runtime behavior is to terminate the parser process.
   attribution, Rust's established direct-value versus compatibility-output split, and one common five-command
   default/POSIX primary case. Recurring `.5.2.8` now composes the neutral checker, exact native/generated roles
   for Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT, selected 5x2x1 case, and support ledgers under one omission-checked
-  driver. Only public no-drift `.5.2.9` remains before closeout.
+  driver. Public no-drift `.5.2.9` locks the authoritative guide/backend/status set and closes rollout at
+  8 complete / 0 pending. Run `bash tools/check_logical_helper_five_backend.sh` for the recurring all-toolchain
+  behavior proof; the offline checker also rejects public document, marker, stale-claim, and admission drift.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
@@ -1278,8 +1280,8 @@ table because its runtime behavior is to terminate the parser process.
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
   fluent `.return(...)` value positions. Perl, Rust, Dart, Julia, and Lua consume ADR `0043` through one
-  helper/condition truth seam per backend. `FUTURE-PARITY-BACKLOG.5.2.8` now owns the recurring six-consumer
-  native/generated/primary/support proof; `.5.2.9` owns the remaining public no-drift closeout.
+  helper/condition truth seam per backend. `FUTURE-PARITY-BACKLOG.5.2.8` owns the recurring six-consumer
+  native/generated/primary/support proof; `.5.2.9` closes public no-drift and parent `.5.2` at 8/0.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

@@ -5,8 +5,8 @@ ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. Logical-helper
-generated/primary projection `.5.2.7` and the omission-checked recurring gate `.5.2.8`
-are complete at 7/1 rollout; public no-drift `.5.2.9` is next.
+native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
+`FUTURE-PARITY-BACKLOG.5.2`; cursor implementation `.9.1.2` is next after the clean closeout commit.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -207,7 +207,7 @@ This `README.md` is the **single entry point** to the project.
   leaves `.5.2.1-.9` are dependency-ordered. Neutral `.5.2.1` now adopts ADR `0043` plus the executable
   `linkedspec-logical-helper-v1` authority: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity failure,
   real booleans, typed truthiness, receiver composition, and lazy-control separation. Its 17 truth rows, ten helper
-  cases, three effect scenarios, deterministic fixtures, and 22 semantic/topology drift mutations pass offline. Perl `.5.2.2` now
+  cases, three effect scenarios, deterministic fixtures, and 26 semantic/topology/public drift mutations pass offline. Perl `.5.2.2` now
   owns typed logical ActionIR, eager once-only values, exact pre-effect diagnostics, and one truthiness seam shared
   by logical values and lazy controls. Rust `.5.2.3` now consumes that same policy through `RuntimeValue::as_bool`
   and one pre-evaluation arity guard across native, serialized, direct-value, generated-plan, and standalone-
@@ -219,8 +219,9 @@ This `README.md` is the **single entry point** to the project.
   output signature split. Shared case `success_logical_helpers_eager` proves the same canonical result through
   all five commands in both option environments. Recurring `.5.2.8` now composes that neutral checker, the exact
   native/generated role inventory for Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, selected 5x2x1 primary case,
-  and generated-source/capability/coverage ledgers under one strict omission-checked driver. Rollout is 7
-  complete / 1 pending before public no-drift `.5.2.9`.
+  and generated-source/capability/coverage ledgers under one strict omission-checked driver. Public no-drift
+  `.5.2.9` locks 20 authoritative documents, 13 forbidden current claims, copyable backend/generated examples,
+  and four additional public mutation classes. The ledger is 8 complete / 0 pending and parent `.5.2` is done.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

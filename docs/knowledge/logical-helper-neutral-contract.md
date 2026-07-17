@@ -15,7 +15,7 @@ answers:
 date: 2026-07-16
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 22 semantic/topology drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, and recurring admission .5.2.8 consume and lock the unchanged target, moving the ledger to 7 complete / 1 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
+evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 26 semantic/topology/public drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 consume and lock the unchanged target. Rollout is 8 complete / 0 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
 reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
@@ -44,10 +44,10 @@ The target is adopted and current on the Perl reference's native/live/standalone
 serialized/generated-plan/direct-value/compiled-emitted roles, Dart's native/normalized/generated-plan/
 standalone-emitted/primary roles, and Julia's native/normalized/generated-plan/standalone-emitted/primary roles.
 Lua also conforms through native/reconstructed/generated-plan/loaded-emitted/primary roles on both ABIs.
-Generated/primary and recurring admission are complete at 7/1 rollout. Public no-drift remains under
-`FUTURE-PARITY-BACKLOG.5.2.9`.
+Generated/primary, recurring admission, and public no-drift are complete at 8 complete / 0 pending. Parent
+`FUTURE-PARITY-BACKLOG.5.2` is closed.
 
 Related facts: [[logical-helper-five-backend-audit]], [[callable-codeblock-literal-contract]],
 [[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]],
 [[dart-logical-helper-neutral-runtime]], [[julia-logical-helper-execution]],
-[[logical-helper-recurring-five-backend-gate]].
+[[logical-helper-recurring-five-backend-gate]], [[logical-helper-public-no-drift]].

@@ -165,8 +165,9 @@ Three backbone items tracked major structural modernization — all done:
   metadata, Rust's typed direct-value versus legacy compatibility-output split, and common case
   `success_logical_helpers_eager` through all five commands under default and POSIX options. Recurring `.5.2.8`
   now composes the neutral checker, six exact native/generated consumers, selected 5x2x1 case, support ledgers,
-  and opt-in canonical-CI leg under one omission-checked driver. Rollout is 7 complete / 1 pending under public
-  no-drift `.5.2.9`.
+  and opt-in canonical-CI leg under one omission-checked driver. Public no-drift `.5.2.9` locks the authoritative
+  guide, backend, status, capability, CLI, task/live, and Knowledge Map surfaces plus four public mutation classes.
+  Rollout is 8 complete / 0 pending and parent `.5.2` is closed.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

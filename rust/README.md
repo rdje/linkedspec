@@ -168,6 +168,38 @@ The engine implements 80+ helpers covering:
 - **Debug**: `print`, `say`, `print_each`
 - **Dispatch**: `call`
 
+## Logical Helpers
+
+`and`, `or`, and `not` are ordinary eager boolean value helpers. `and` and `or` require at least one positional
+operand; `not` requires exactly one. The runtime validates those arities before evaluating an operand, so
+`and()` and `not(false, side_effect())` fail with `helper_arity_mismatch` without running `side_effect()`.
+After a valid call is admitted, every operand evaluates exactly once from left to right—even after a decisive
+false `and` value or true `or` value.
+
+`RuntimeValue::as_bool` is the shared typed truth seam for those helpers and lazy `if`/`switch`/`while` controls.
+Null, false, numeric zero, empty strings, and empty arrays/harrays are false. Nonzero numbers, every nonempty
+string (including `"0"` and `"false"`), and nonempty aggregates are true. A typed codeblock is true without being
+invoked; this does not activate the separately owned explicit callable-literal syntax.
+
+```text
+Top::
+ /x/
+ E {
+   seen = []
+   eager = or(true, { push(seen, "still-runs"); return(false) })
+   lazy = if(false, { push(seen, "skipped"); return(true) }, { return(false) })
+   return(hash("eager", eager, "lazy", lazy, "seen", copy(seen)))
+ }
+```
+
+The result is `{"eager":true,"lazy":false,"seen":["still-runs"]}`. Native and serialized execution, generated
+plans, typed `execute_generated_parser_v1` / traced v1, compatibility direct/traced calls, and independently
+compiled emitted `execute`/`execute_with_trace`/`parse`/`parse_with_trace` roles preserve that behavior. Typed v1
+returns the direct top-rule value; compatibility roles intentionally retain their historical parse-output array.
+Shared primary case `success_logical_helpers_eager` passes every backend command in default and POSIX
+environments. Run the whole recurring cross-backend proof from the repository root with
+`bash tools/check_logical_helper_five_backend.sh`.
+
 ## Diagnostic Output Events
 
 Parser-authored `print`, `say`, and `print_each` use a caller-owned typed event channel; they never write host

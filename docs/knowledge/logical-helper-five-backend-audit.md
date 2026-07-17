@@ -22,6 +22,7 @@ evidence_update_2026_07_17_julia_rollout: "FUTURE-PARITY-BACKLOG.5.2.5 preserves
 evidence_update_2026_07_17_lua_rollout: "FUTURE-PARITY-BACKLOG.5.2.6 aligns Lua runtime_truthy and built-in arity while retaining eager once-left-to-right composition and registry-first user-function precedence. Native, reconstructed, generated-plan, loaded emitted-module, primary, lazy-control, inert-codeblock, and exact diagnostic roles pass 238/238 on PUC Lua and LuaJIT. Rollout is 5 complete / 3 pending."
 evidence_update_2026_07_17_generated_primary: "FUTURE-PARITY-BACKLOG.5.2.7 expands all five consumers across every available direct/traced generated role and adds success_logical_helpers_eager to the shared 63-case primary manifest. Values, eager effects, typed arity failures, source attribution, and direct/trace identity agree; Rust intentionally keeps direct-value typed v1 distinct from compatibility parse-output arrays. Rollout is 6 complete / 2 pending."
 evidence_update_2026_07_17_recurring_gate: "FUTURE-PARITY-BACKLOG.5.2.8 composes the neutral checker, exact native/generated role inventory for Perl/Rust/Dart/Julia/PUC Lua/LuaJIT, success_logical_helpers_eager across five commands and two environments, and generated-source/capability/coverage ledgers. The checker reports 7 complete / 1 pending and rejects 22 semantic/topology mutations."
+evidence_update_2026_07_17_public_no_drift: "FUTURE-PARITY-BACKLOG.5.2.9 locks 20 authoritative public documents, forbids 13 stale-current claims, adds four public mutation classes, and closes rollout at 8 complete / 0 pending. Parent .5.2 is closed."
 reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
@@ -51,10 +52,10 @@ seam. Normalized/reconstructed, generated-plan, compiled emitted, and primary pr
 backend. `FUTURE-PARITY-BACKLOG.5.2.1` ratified ADR `0043`; all five native leaves `.5.2.2-.6` consume it.
 Generated/primary `.5.2.7` now closes every available direct/traced role and one shared default/POSIX primary case.
 Recurring gate `.5.2.8` makes that exact six-consumer/primary/support topology omission-checked. Public no-drift
-leaf `.5.2.9` remains.
+`.5.2.9` locks the authoritative guidance and closes parent `.5.2` at 8/0.
 
 Related facts: [[cross-backend-condition-truthiness-drift]], [[julia-logical-helper-execution]],
 [[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]], [[logical-helper-neutral-contract]],
 [[rust-logical-helper-neutral-runtime]], [[dart-logical-helper-neutral-runtime]].
 Generated/primary details: [[logical-helper-generated-primary-projection]]. Recurring gate details:
-[[logical-helper-recurring-five-backend-gate]].
+[[logical-helper-recurring-five-backend-gate]]. Public contract details: [[logical-helper-public-no-drift]].

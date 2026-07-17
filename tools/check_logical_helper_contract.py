@@ -31,6 +31,7 @@ TOP_LEVEL_FIELDS = [
     "fixtures",
     "projections",
     "recurring_gate",
+    "public_contract",
     "rollout",
 ]
 POLICY = {
@@ -209,6 +210,181 @@ RECURRING_GATE = {
         "switch": "LINKEDSPEC_RUN_LOGICAL_MATRIX",
     },
 }
+PUBLIC_CONTRACT = {
+    "documents": [
+        {
+            "path": "README.md",
+            "required_markers": [
+                "linkedspec-logical-helper-v1",
+                "tools/check_logical_helper_five_backend.sh",
+                "8 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "USER_GUIDE_ActionIR_ControlFlow.md",
+            "required_markers": ["ADR `0043`", "`helper_arity_mismatch`", "all five backends"],
+        },
+        {
+            "path": "USER_GUIDE_ActionIR_EmittedPerlReference.md",
+            "required_markers": [
+                "`LinkedSpec::RuntimeLogical::evaluate`",
+                "never use host `&&` / `||`",
+                "generated `ExecuteWithTrace`",
+            ],
+        },
+        {
+            "path": "rust/README.md",
+            "required_markers": [
+                "## Logical Helpers",
+                "`RuntimeValue::as_bool`",
+                "`execute_generated_parser_v1`",
+                "`success_logical_helpers_eager`",
+            ],
+        },
+        {
+            "path": "dart/README.md",
+            "required_markers": [
+                "ADR `0043`",
+                "`runtimeLogicalTruth`",
+                "standalone-emitted direct/traced roles",
+                "tools/check_logical_helper_five_backend.sh",
+            ],
+        },
+        {
+            "path": "julia/README.md",
+            "required_markers": [
+                "## Native and Generated Logical Helpers",
+                "`_runtime_truthy`",
+                "`LinkedSpecGeneratedParser.execute_with_trace`",
+                "tools/check_logical_helper_five_backend.sh",
+            ],
+        },
+        {
+            "path": "lua/README.md",
+            "required_markers": [
+                "## Native and Generated logical helpers",
+                "`runtime_truthy`",
+                "`generated.execute_with_trace`",
+                "tools/check_logical_helper_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "required_markers": [
+                "ADR `0043`",
+                "8 complete / 0 pending",
+                "tools/check_logical_helper_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "required_markers": [
+                "`linkedspec-logical-helper-v1`",
+                "8 complete / 0 pending",
+                "tools/check_logical_helper_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "required_markers": ["### Logical value helpers", "`helper_arity_mismatch`", "all five backends"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": ["`linkedspec-logical-helper-v1`", "8 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": [
+                "`success_logical_helpers_eager`",
+                "8 complete / 0 pending",
+                "parent `.5.2` is closed",
+            ],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": ["26 semantic/topology/public drift mutations", "8 complete / 0 pending"],
+        },
+        {
+            "path": "cli_conformance/README.md",
+            "required_markers": ["success_logical_helpers_eager", "5x2x63 matrix"],
+        },
+        {
+            "path": "ROADMAP.md",
+            "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"],
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"],
+        },
+        {
+            "path": "ARCHITECTURE_STATE.md",
+            "required_markers": ["logical public no-drift", "8 complete / 0 pending"],
+        },
+        {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "required_markers": [
+                "FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift",
+                "8 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "docs/TASK_TREE.md",
+            "required_markers": ["Logical helper parent `.5.2` is closed at 8/0"],
+        },
+        {
+            "path": "docs/knowledge/logical-helper-neutral-contract.md",
+            "required_markers": ["8 complete / 0 pending", "public no-drift"],
+        },
+    ],
+    "forbidden_current_claims": [
+        {
+            "path": "USER_GUIDE_ActionIR_ControlFlow.md",
+            "text": "Perl `.5.2.2` is complete at 1/7 rollout",
+        },
+        {
+            "path": "julia/README.md",
+            "text": "recurring and public no-drift admission remain pending",
+        },
+        {
+            "path": "lua/README.md",
+            "text": "`.5.2.7-.9` retain cross-backend projection",
+        },
+        {
+            "path": "lua/README.md",
+            "text": "generated/primary, recurring-gate, and public\ncloseout remain `.5.2.7-.9`",
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "text": "Perl typed logical rollout `.5.2.2` advances the ledger to 1/7 before",
+        },
+        {
+            "path": "ROADMAP.md",
+            "text": "and logical truthiness/arity/lowering `.5.2` is next",
+        },
+        {"path": "README.md", "text": "public no-drift `.5.2.9` is next"},
+        {
+            "path": "capability_conformance/README.md",
+            "text": "seven complete / one pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "Rollout is 7 complete / 1 pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "ledger is 7 complete / 1 pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "text": "Only public no-drift `.5.2.9` remains",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "text": "Rollout is 7 complete / 1 pending",
+        },
+        {"path": "ARCHITECTURE_STATE.md", "text": "rollout is 7 complete / 1 pending"},
+    ],
+}
 GATE_CONSUMER_MARKERS = {
     "perl": "t/logical_helper_perl_contract.t",
     "rust": "--test logical_helper_contract",
@@ -282,7 +458,7 @@ ROLLOUT = [
     ("lua_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.6"),
     ("generated_and_primary_cli", "complete", "FUTURE-PARITY-BACKLOG.5.2.7"),
     ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.5.2.8"),
-    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.2.9"),
+    ("public_no_drift", "complete", "FUTURE-PARITY-BACKLOG.5.2.9"),
 ]
 ID = re.compile(r"[a-z][a-z0-9_]*\Z")
 
@@ -637,6 +813,23 @@ def validate_contract(contract: dict[str, Any]) -> None:
         "recurring gate local-CI registration drifted",
     )
 
+    require(contract["public_contract"] == PUBLIC_CONTRACT, "public logical-helper contract drifted")
+    for document in PUBLIC_CONTRACT["documents"]:
+        public_path = ROOT / document["path"]
+        require(public_path.is_file(), f"public logical-helper document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            require(
+                marker in public_text,
+                f"public logical-helper marker is missing from {document['path']}: {marker}",
+            )
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        public_text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        require(
+            forbidden["text"] not in public_text,
+            f"stale public logical-helper claim remains in {forbidden['path']}: {forbidden['text']}",
+        )
+
     rollout = contract["rollout"]
     require(isinstance(rollout, list) and len(rollout) == len(ROLLOUT), "rollout topology drifted")
     task_text = TASK_PATH.read_text(encoding="utf-8")
@@ -656,12 +849,7 @@ def mutation_smoke(contract: dict[str, Any]) -> int:
         ("effect omission", lambda data: data["effect_scenarios"][0].__setitem__("expected_effects", ["and-first"])),
         ("arity effect", lambda data: data["invalid_arity_cases"][3].__setitem__("arguments_evaluated", 1)),
         ("diagnostic code", lambda data: data["error_schema"].__setitem__("code", "invalid_arity")),
-        (
-            "premature rollout",
-            lambda data: next(row for row in data["rollout"] if row["status"] == "pending").__setitem__(
-                "status", "complete"
-            ),
-        ),
+        ("native admission regression", lambda data: data["rollout"][0].__setitem__("status", "pending")),
         ("generated omission", lambda data: data["projections"].pop("generated")),
         ("duplicate truth case", lambda data: data["truthiness_cases"].append(copy.deepcopy(data["truthiness_cases"][0]))),
         ("fixture source", lambda data: data["fixtures"]["values"].__setitem__("spec_source", data["fixtures"]["values"]["spec_source"] + "\n")),
@@ -675,6 +863,16 @@ def mutation_smoke(contract: dict[str, Any]) -> int:
         ("CI registration omission", lambda data: data["recurring_gate"]["local_ci"].__setitem__("switch", "wrong_switch")),
         ("driver omission", lambda data: data["recurring_gate"].__setitem__("driver", "tools/missing.sh")),
         ("recurring admission regression", lambda data: data["rollout"][6].__setitem__("status", "pending")),
+        ("public document omission", lambda data: data["public_contract"]["documents"].pop()),
+        (
+            "public marker omission",
+            lambda data: data["public_contract"]["documents"][0]["required_markers"].pop(),
+        ),
+        (
+            "stale public claim omission",
+            lambda data: data["public_contract"]["forbidden_current_claims"].pop(),
+        ),
+        ("public admission regression", lambda data: data["rollout"][7].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         candidate = copy.deepcopy(contract)
@@ -700,6 +898,8 @@ def main() -> None:
         f"({len(contract['truthiness_cases'])} truthiness; {len(contract['helper_cases'])} helper; "
         f"{len(contract['effect_scenarios'])} effect; {complete} complete / "
         f"{len(contract['rollout']) - complete} pending; "
+        f"{len(contract['public_contract']['documents'])} public documents; "
+        f"{len(contract['public_contract']['forbidden_current_claims'])} forbidden current claims; "
         f"{mutations} drift mutations)"
     )
 

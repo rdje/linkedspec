@@ -350,11 +350,11 @@ extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drif
 Generated Lua emission, isolated dual-ABI valid/corrupt execution, exact family plans/execution, contract-owned
 8/105 fresh-host proof, and five-backend 80/0/0 census admission are current through `.8.4`; the Lua parity tree
 and backend handoff are closed.
-Cross-backend output routing/formatting is complete under `FUTURE-PARITY-BACKLOG.5.1`. Native logical truthiness
-and arity are aligned on all five backends through `.5.2.6`; generated/primary, recurring-gate, and public
-closeout remain `.5.2.7-.9`.
+Cross-backend output routing/formatting is complete under `FUTURE-PARITY-BACKLOG.5.1`. Logical helper truthiness,
+arity, generated/primary projection, recurring admission, and public no-drift are complete on all five backends
+under `FUTURE-PARITY-BACKLOG.5.2`.
 
-## Native logical helpers
+## Native and Generated logical helpers
 
 Lua executes `and`, `or`, and `not` as eager boolean value helpers on both PUC Lua and LuaJIT. `and` and `or`
 require at least one positional operand; `not` requires exactly one. Arity is validated before any operand runs.
@@ -387,6 +387,12 @@ loaded emitted-module direct/traced, and primary roles with exact generated sour
 gate remains 177/177 per ABI plus shared CLI 63x2 and corpus
 105/105.
 
+Generated plans expose `execute_generated_parser_v1` and `execute_generated_parser_with_trace_v1`; emitted modules
+expose `generated.execute` and `generated.execute_with_trace`. Each pair preserves values, eager effects, typed
+arity failure/source attribution, and direct/trace identity on PUC Lua and LuaJIT. Run
+`bash tools/check_logical_helper_five_backend.sh` for the complete recurring proof, or enable its canonical local-
+CI registration with `LINKEDSPEC_RUN_LOGICAL_MATRIX=1 bash tools/run_ci_local.sh`.
+
 The original logical proof first raised both ABI suites to 123/123; the complete helper closeout then passed
 125/125 and diagnostics/trace planning `.4.4.0` completed. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
 trace controls/sinks `.4.4.2` raise it to 128/128, runtime instrumentation `.4.4.3` raises it to 129/129, and the
@@ -401,8 +407,8 @@ flatten calls, negative selection counts, newer-backend dropped-transform omissi
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
 Lua now follows ADR `0043` condition truthiness: scalar `"0"` is true and empty arrays/harrays are false. The same
-`runtime_truthy` seam serves eager logical helpers and lazy controls; `.5.2.7-.9` retain cross-backend projection,
-recurring-gate, and public closeout.
+`runtime_truthy` seam serves eager logical helpers and lazy controls. Cross-backend generated projection,
+recurring admission, and public no-drift are complete at 8/0 rollout.
 Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
 codeblock. A trailing block remains structural until its signature-governed callable consumes it. For example,
 `with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are

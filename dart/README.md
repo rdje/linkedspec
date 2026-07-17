@@ -170,7 +170,9 @@ controls: null, false, numeric zero, empty strings, and empty aggregates are fal
 aggregate is true. Neutral native/normalized/generated-plan/standalone-emitted/primary proof is locked by
 `logical_helper_contract_test.dart`; generated-plan and standalone-emitted direct/traced roles preserve the same
 value, eager effects, typed arity fields, and source identity. Shared case `success_logical_helpers_eager` passes
-all five primary commands under default and POSIX option environments.
+all five primary commands under default and POSIX option environments. From the repository root,
+`bash tools/check_logical_helper_five_backend.sh` repeats the neutral, native/generated, selected primary, and
+support-ledger proof; `LINKEDSPEC_RUN_LOGICAL_MATRIX=1 bash tools/run_ci_local.sh` executes the registered path.
 Diagnostic helpers validate their one-plus/two-or-three positional arities before effects and evaluate every
 valid argument once left-to-right. Native `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` calls may
 install a per-invocation `diagnosticOutputSink`; it receives typed `RuntimeDiagnosticOutputEvent` values with

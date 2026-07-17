@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift
+
+Closed the public projection of `linkedspec-logical-helper-v1`. The neutral contract now orders 20 authoritative
+documents covering the root/control/emitted guides, Rust/Dart/Julia/Lua READMEs, mdBook catalog/value/action/
+handoff/status, capability/CLI, both roadmaps, architecture/live/task state, and the Knowledge Map. Required
+markers lock eager once-left-to-right values, exact pre-effect arity, typed truth, lazy-control contrast,
+backend-specific generated entrypoints/result shapes, the selected primary case, recurring command/CI switch,
+and final status. Thirteen measured historical or stale-current claims are explicitly forbidden.
+
+Added the missing Rust logical-helper section and copyable examples to the control-flow and action-surface guides;
+aligned Julia/Lua generated and recurring guidance; and closed all current roadmap/status/capability/KM claims.
+The offline checker now rejects 26 semantic, topology, and public mutations, adding public-document, required-
+marker, stale-claim, and final-admission classes. Only `public_no_drift` advances: rollout is 8/0 and parent `.5.2`
+closes without runtime implementation changes or an implementation mutation campaign.
+
+Verification passes the logical checker at 8/0 over 20 documents and 13 forbidden claims; complete Rust, Dart,
+Julia, and dual-ABI Lua gates; recurring Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT 8/4/24/232/359/359 plus selected
+5x2x1; unchanged full 5x2x63; diagnostic 8/0 plus 20 mutations; generated-source/capability 80/0/0; coverage
+246/105+1/122; governance, Knowledge Map, mdBook, and whitespace. Canonical local CI passes reference CLI 63x2,
+Phase 0 `1..1031` in 640 seconds, and the registered all-toolchain logical leg.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.8 — add recurring logical-helper gate
 
 Added `tools/check_logical_helper_five_backend.sh` as the strict recurring composition for

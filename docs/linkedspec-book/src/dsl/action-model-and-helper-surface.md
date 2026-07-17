@@ -155,6 +155,32 @@ Chain operations fluently on values:
 
 Detailed reference: [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md).
 
+### Logical value helpers
+
+Compose real boolean values without borrowing a host language's truth or short-circuit operators:
+
+- `and(value, ...)` — at least one operand; true only when every operand is truthful;
+- `or(value, ...)` — at least one operand; true when any operand is truthful;
+- `not(value)` — exactly one operand; negates its typed truth.
+
+After arity succeeds, every logical operand evaluates once from left to right. A decisive false `and` operand or
+true `or` operand does not skip later effects. Empty `and`/`or`, empty `not`, and multi-argument `not` raise
+`helper_arity_mismatch` before any operand runs. Null, false, numeric zero, empty strings, and empty aggregates are
+false; all nonempty strings (including `"0"` and `"false"`), nonzero finite numbers, nonempty aggregates, and
+typed codeblocks are true. Testing a codeblock does not invoke it.
+
+```text
+seen = []
+eager = or(true, { push(seen, "still-runs"); return(false) })
+selected = if(eager, { return(not(false)) }, { push(seen, "skipped"); return(false) })
+```
+
+`seen` is `["still-runs"]` and `selected` is true. `if`, `switch`, and `while` use the same truthiness but remain
+lazy controls. ADR `0043` and `linkedspec-logical-helper-v1` govern this behavior on all five backends and every
+current native/generated execution role. See [Value, Container, and Flow Helper
+Reference](value-container-flow-helper-reference.md#boolean-composition) for the complete
+truth table, generated entrypoints, and recurring proof command.
+
 ### Diagnostic output helpers
 
 Emit caller-owned `RuntimeDiagnosticOutputEvent` values during parsing:

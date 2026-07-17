@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.9` — public guidance is part of the executable contract): A green
+  native/generated gate does not prevent a backend README or control-flow guide from preserving an obsolete
+  rollout boundary. Store an ordered public document inventory beside the semantic and recurring topology. Give
+  each document markers for the fact it uniquely owns, and forbid exact stale-current phrases where history has
+  already shown realistic drift.
+
+  Do not force host APIs into one synthetic signature. Public examples should share portable observations while
+  naming real backend roles: Perl `Execute`/`ExecuteWithTrace`/`Get`; Rust typed-v1 versus compatibility result
+  shapes; Dart/Julia/Lua generated-plan and emitted direct/traced pairs. The four new public mutation classes prove
+  that document, marker, forbidden-claim, and final-admission coverage cannot disappear while semantics remain
+  green. Historical 1/7 through 7/1 evidence stays durable in dated change/task records; only current guidance is
+  normalized to 8/0.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.8` — recurring admission needs role topology, not only test paths):
   A backend test can remain green while a generated entrypoint silently disappears. Store the ordered consumers
   and every backend-specific role in the neutral contract, then make the offline checker prove both driver

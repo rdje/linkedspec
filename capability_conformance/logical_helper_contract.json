@@ -251,6 +251,45 @@
       "switch": "LINKEDSPEC_RUN_LOGICAL_MATRIX"
     }
   },
+  "public_contract": {
+    "documents": [
+      {"path": "README.md", "required_markers": ["linkedspec-logical-helper-v1", "tools/check_logical_helper_five_backend.sh", "8 complete / 0 pending"]},
+      {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "required_markers": ["ADR `0043`", "`helper_arity_mismatch`", "all five backends"]},
+      {"path": "USER_GUIDE_ActionIR_EmittedPerlReference.md", "required_markers": ["`LinkedSpec::RuntimeLogical::evaluate`", "never use host `&&` / `||`", "generated `ExecuteWithTrace`"]},
+      {"path": "rust/README.md", "required_markers": ["## Logical Helpers", "`RuntimeValue::as_bool`", "`execute_generated_parser_v1`", "`success_logical_helpers_eager`"]},
+      {"path": "dart/README.md", "required_markers": ["ADR `0043`", "`runtimeLogicalTruth`", "standalone-emitted direct/traced roles", "tools/check_logical_helper_five_backend.sh"]},
+      {"path": "julia/README.md", "required_markers": ["## Native and Generated Logical Helpers", "`_runtime_truthy`", "`LinkedSpecGeneratedParser.execute_with_trace`", "tools/check_logical_helper_five_backend.sh"]},
+      {"path": "lua/README.md", "required_markers": ["## Native and Generated logical helpers", "`runtime_truthy`", "`generated.execute_with_trace`", "tools/check_logical_helper_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "required_markers": ["ADR `0043`", "8 complete / 0 pending", "tools/check_logical_helper_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md", "required_markers": ["`linkedspec-logical-helper-v1`", "8 complete / 0 pending", "tools/check_logical_helper_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md", "required_markers": ["### Logical value helpers", "`helper_arity_mismatch`", "all five backends"]},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["`linkedspec-logical-helper-v1`", "8 complete / 0 pending"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["`success_logical_helpers_eager`", "8 complete / 0 pending", "parent `.5.2` is closed"]},
+      {"path": "capability_conformance/README.md", "required_markers": ["26 semantic/topology/public drift mutations", "8 complete / 0 pending"]},
+      {"path": "cli_conformance/README.md", "required_markers": ["success_logical_helpers_eager", "5x2x63 matrix"]},
+      {"path": "ROADMAP.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
+      {"path": "ROADMAP_V2.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
+      {"path": "ARCHITECTURE_STATE.md", "required_markers": ["logical public no-drift", "8 complete / 0 pending"]},
+      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift", "8 complete / 0 pending"]},
+      {"path": "docs/TASK_TREE.md", "required_markers": ["Logical helper parent `.5.2` is closed at 8/0"]},
+      {"path": "docs/knowledge/logical-helper-neutral-contract.md", "required_markers": ["8 complete / 0 pending", "public no-drift"]}
+    ],
+    "forbidden_current_claims": [
+      {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "text": "Perl `.5.2.2` is complete at 1/7 rollout"},
+      {"path": "julia/README.md", "text": "recurring and public no-drift admission remain pending"},
+      {"path": "lua/README.md", "text": "`.5.2.7-.9` retain cross-backend projection"},
+      {"path": "lua/README.md", "text": "generated/primary, recurring-gate, and public\ncloseout remain `.5.2.7-.9`"},
+      {"path": "ROADMAP_V2.md", "text": "Perl typed logical rollout `.5.2.2` advances the ledger to 1/7 before"},
+      {"path": "ROADMAP.md", "text": "and logical truthiness/arity/lowering `.5.2` is next"},
+      {"path": "README.md", "text": "public no-drift `.5.2.9` is next"},
+      {"path": "capability_conformance/README.md", "text": "seven complete / one pending"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Rollout is 7 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "ledger is 7 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "text": "Only public no-drift `.5.2.9` remains"},
+      {"path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md", "text": "Rollout is 7 complete / 1 pending"},
+      {"path": "ARCHITECTURE_STATE.md", "text": "rollout is 7 complete / 1 pending"}
+    ]
+  },
   "rollout": [
     {"id": "perl_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.2"},
     {"id": "rust_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.3"},
@@ -259,6 +298,6 @@
     {"id": "lua_native", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.6"},
     {"id": "generated_and_primary_cli", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.7"},
     {"id": "recurring_five_backend_gate", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.8"},
-    {"id": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.5.2.9"}
+    {"id": "public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.5.2.9"}
   ]
 }

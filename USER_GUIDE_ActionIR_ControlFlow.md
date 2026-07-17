@@ -9,14 +9,32 @@ Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
 Read this when you want canonical `if/else` flow, switch/case branching, and helper-based output statements inside those branches.
 For exact DSL-to-Perl examples for every control-flow marker and emitted branch shape discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
-Logical target/current boundary (2026-07-16): ADR `0043` adopts one typed truthiness policy for conditions and
-logical values: null, false, numeric zero, empty strings, and empty arrays/harrays are false; nonzero finite
-numbers, all nonempty strings (including `"0"` and `"false"`), nonempty aggregates, and codeblocks are true.
-`and`/`or` are eager value helpers with at least one argument and `not` is an exact-one helper; invalid arity fails
-before operand evaluation. The controls documented here remain lazy: only the selected branch/body executes.
-Perl `.5.2.2` is complete at 1/7 rollout: current Perl conditions and logical values both call
-`LinkedSpec::RuntimeLogical`, while control branches/bodies remain lazy and valid `and`/`or` operands remain
-eager. Rust/Dart/Julia/Lua and generated/primary/gate/public admission remain `.5.2.3-.9`-owned.
+Logical target/current boundary (2026-07-17): ADR `0043` is current on all five backends and every admitted
+generated role. One typed policy makes null, false, numeric zero, empty strings, and empty arrays/harrays false;
+nonzero finite numbers, all nonempty strings (including `"0"` and `"false"`), nonempty aggregates, and codeblocks
+are true. Testing a codeblock does not invoke it. `and`/`or` are eager value helpers with at least one argument and
+`not` is an exact-one helper. Invalid arity raises `helper_arity_mismatch` before any operand runs. The controls
+documented here remain lazy over the same truthiness: only the selected branch/body executes.
+
+For example, this records both eager logical effects but skips the unselected control branch:
+
+```text
+Top::
+ /x/
+ E {
+   seen = []
+   ready = or(true, { push(seen, "or-second"); return(false) })
+   complete = and("0", { push(seen, "and-second"); return(true) })
+   result = if(ready, { return(not(false)) }, { push(seen, "skipped"); return(false) })
+   return(hash("complete", complete, "result", result, "seen", copy(seen)))
+ }
+```
+
+The result is `{"complete":true,"result":true,"seen":["or-second","and-second"]}`. By contrast, invalid
+`and()` and `not(false, true)` calls fail before evaluating any supplied operand. Perl uses
+`LinkedSpec::RuntimeLogical`; Rust, Dart, Julia, and Lua use their typed runtime seams. Native,
+normalized/reconstructed, generated direct/traced,
+and primary-command projections all retain the same values, effects, and arity outcome.
 
 Method-DSL migration note:
 - fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,

@@ -20,7 +20,9 @@ backends consume this same manifest without backend-specific fixture copies.
 environments. Pass one or more `--case ID` arguments to that matrix driver for a contract-owned focused gate; for
 example, the recurring diagnostic-output gate uses
 `bash tools/run_primary_cli_matrix.sh --case success_diagnostic_helpers_quiet`. Omitting `--case` remains the full
-5x2x63 matrix.
+5x2x63 matrix. The recurring logical gate selects
+`bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`; that case records eager effects and
+the same canonical boolean result across all five commands and both environments.
 
 The current manifest contains 63 cases: exact long/short help, 20 strict usage families, nine successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20

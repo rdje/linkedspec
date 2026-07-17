@@ -860,8 +860,9 @@ conditions used lazy host `&&`/`||` while direct logical values remained raw/bro
 Julia, and Lua were eager. Truthiness had three profiles: Perl/Lua (`"0"` false, empty aggregates true),
 Dart/Julia (all nonempty strings true, empty aggregates false), and Rust (`"0"` plus `"false"` false, empty
 aggregates false). Native/generated execution agreed within each backend. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are
-therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1` now adopts ADR `0043`: valid
-`and`/`or` take one or more operands, `not` takes exactly one, all valid operands evaluate once left-to-right,
+therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1` now adopts ADR `0043` and the
+executable `linkedspec-logical-helper-v1` contract: valid `and`/`or` take one or more operands, `not` takes exactly
+one, all valid operands evaluate once left-to-right,
 all results are booleans, and invalid arity fails before effects. Typed truth makes only null, false, numeric zero,
 empty strings, and empty aggregates false; codeblocks are true without invocation. The executable contract checks
 17 truth rows, ten helper cases, three eager-effect scenarios, receiver/lazy-control contrast, four invalid calls,
@@ -882,8 +883,9 @@ failure/source metadata, and trace identity. Rust retains the intentional typed 
 output-array signature. Shared case `success_logical_helpers_eager` passes all five commands in default and POSIX
 environments. Recurring `.5.2.8` now locks one strict driver over that neutral checker, all six runtime consumers
 and their exact native/generated roles, selected 5x2x1 primary case, and generated-source/capability/coverage
-ledgers. Canonical local CI registers the same all-toolchain proof behind `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`; the
-ledger is 7 complete / 1 pending before public `.5.2.9`. Explicit codeblock literals remain
+ledgers. Canonical local CI registers the same all-toolchain proof behind `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`.
+Public no-drift `.5.2.9` locks the authoritative guide/backend/status surface; the ledger is 8 complete / 0
+pending and parent `.5.2` is closed. Explicit codeblock literals remain
 separately owned by `.11`; the logical contract's
 typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important

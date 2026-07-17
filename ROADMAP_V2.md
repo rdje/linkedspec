@@ -110,25 +110,26 @@ and 20 drift mutations lock the public contract. Parent `.5.1` is closed; logica
 separates lazy condition-only Perl lowering and broken direct values, Dart short-circuiting, eager Rust/Julia/Lua,
 and three truthiness profiles before neutral/backend/generated/gate/public leaves `.5.2.1-.9` change behavior;
 neutral `.5.2.1` now adopts ADR `0043` and executable `linkedspec-logical-helper-v1`. Its eager arity/effect,
-typed truthiness, receiver/lazy-control, fixture, projection, and 22-mutation proof passes with all eight rollout
+typed truthiness, receiver/lazy-control, fixture, projection, and 26-mutation proof passes with all eight rollout
 legs initially pending. Perl `.5.2.2` now consumes the contract through typed ActionIR/runtime lowering and moves
 the ledger to 1/7. Rust `.5.2.3` aligns its shared truth seam and pre-effect arity; Dart `.5.2.4` removes helper
 short-circuit drift; Julia `.5.2.5` preserves eager `_runtime_truthy` composition while rejecting all four invalid
-arities before effects across native, normalized, generated-plan, compiled-emitted, and primary roles. The ledger
-is 7 complete / 1 pending after generated/primary `.5.2.7` and recurring gate `.5.2.8`. Every available direct/traced generated role now
+arities before effects across native, normalized, generated-plan, compiled-emitted, and primary roles. Every available direct/traced generated role now
 preserves the neutral values, eager effects, typed failures, and source attribution; Rust's compatibility pair
 retains its established output-array signature while typed v1 returns the direct value. Shared case
 `success_logical_helpers_eager` passes all five commands under default and POSIX options. One strict recurring
 driver now locks the neutral checker, exact native/generated roles for six runtime consumers, selected 5x2x1
-projection, three support ledgers, and canonical opt-in registration; public `.5.2.9` is next.
+projection, three support ledgers, and canonical opt-in registration. Public `.5.2.9` locks 20 authoritative
+documents, 13 forbidden current claims, and public topology mutations; the ledger is 8 complete / 0 pending and
+parent `.5.2` is done.
 Director-priority cursor-ownership audit `.9.1.0`
 rejects public/global `parse_mode`, recommends
 intrinsic OR/default seek and AND consume, and exposes default-AND parity drift. Director capture `.9.1.1.0`
 confirms that parent mode never propagates to or overrides a child. ADR `0044` / `.9.1.1.1` now ratifies exact
 mode-sensitive bare edges, explicit cross-family legality, removal diagnostics, per-rule descriptor facts,
 generated-source v2 family derivation, and conformance. Implementation is split under `.9.1.2-.9`; generated/
-primary logical projection `.5.2.7` and recurring logical gate `.5.2.8` are complete; public no-drift `.5.2.9`
-follows before that program activates.
+primary logical projection `.5.2.7`, recurring logical gate `.5.2.8`, and public no-drift `.5.2.9` are complete;
+cursor implementation `.9.1.2` follows after the clean logical closeout commit.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`
@@ -234,7 +235,7 @@ and final admission `.8.4` have since closed; Lua is the fifth exact backend and
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and Rust implementation. | All phases 0–9 done. Phase 9 Rust variant operational: .spec parser, compiler, runtime engine, helpers, integration tests. Cargo workspace at rust/. mdBook reframed variant-agnostic across all chapters (`.spec` = universal contract; Perl = reference backend) — `MDBOOK-VARIANT-AGNOSTIC` tree complete (7 leaves). Deferred future parity work is now owned by `FUTURE-PARITY-BACKLOG`. |
-| Future parity backlog | `in progress` | Deferred/future lanes after the closed language-reference, terse-format, and five-backend implementation trees: staged parsing, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic first-class codeblocks, compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, the Unicode structured-text program, and explicit Rust mutation campaigns. | Lua `.8.4` closes full current backend parity at capability 80/0/0 and diagnostic-output `.5.1` is closed at 8/0. Logical audit `.5.2.0` and neutral ADR `0043`/contract `.5.2.1` are complete; Perl typed logical rollout `.5.2.2` advances the ledger to 1/7 before Rust/Dart/Julia/Lua, generated/primary, recurring, and public leaves `.5.2.3-.9`. Parenthesis-free conditions remain excluded; other `.5` helper decisions stay owned. Format-program activation remains separate; mutation execution stays manual; inspector `.13.1` and authoring `.14`/`.15` remain queued. |
+| Future parity backlog | `in progress` | Deferred/future lanes after the closed language-reference, terse-format, and five-backend implementation trees: staged parsing, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic first-class codeblocks, compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, the Unicode structured-text program, and explicit Rust mutation campaigns. | Lua `.8.4` closes full current backend parity at capability 80/0/0; diagnostic-output `.5.1` and logical-helper `.5.2` are closed at 8/0. ADR `0043` is current across all native/generated roles and public no-drift. Parenthesis-free conditions remain excluded; other `.5` helper decisions stay owned. Cursor implementation `.9.1.2` follows after the clean logical closeout. Format-program activation remains separate; mutation execution stays manual; inspector `.13.1` and authoring `.14`/`.15` remain queued. |
 | Dart backend parity | `done` | First future full-parity backend lane after Perl5 and Rust. | Global proof is 190 tests, 61/61 default/POSIX, 105/105 interpreter corpus, exact CLI/native trace/API parity, deterministic v1 emission, ten-family direct dispatch/four rejections, exact accepted 8/105 generated host proof, and variadic callable-signature execution. Dart passes the complete current capability census. |
 | Julia backend parity | `in progress` (local milestone closed; global obligations delegated) | Second future full-parity backend lane after Dart under ADR `0021`; native in-memory Julia library first under ADR `0022`. | Current proof is 105/105, 1,339 package assertions, and 61/61 shared CLI default/POSIX. Native resolution and generated source are current; later explicitly delegated language evolution remains. |
 | Non-current helper code purge | `done` | Remove retired helper spellings from Perl/Rust code surfaces, active tests/tools/spec fixtures, and durable docs so deleted names are not preserved as name-specific recognition or diagnostics. | Task tree `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` complete through `.5`: Perl source cleanup, Rust source cleanup, active fixture/spec migration, and final no-drift closeout are done. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. |

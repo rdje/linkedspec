@@ -16,7 +16,7 @@ answers:
 date: 2026-07-17
 status: current
 tags: [julia, runtime, logical, truthiness, arity, generated-source, primary-cli, corpus, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's _runtime_truthy helper/control seam and eager once-only left-to-right pure-helper evaluation, then adds direct pre-effect arity for one-plus and/or and exact-one not. The exact 177-assertion neutral consumer covers 17 typed truth rows, values, effects, receiver/lazy controls, four invalid calls, native, normalized, generated-plan, primary, and independently compiled emitted modules. Full package proof passes 1,671 assertions, primary and shared CLI conformance, and corpus 105/105; canonical local CI passes Phase 0 1..1031/607s plus the optional complete Julia gate. Generated/primary .5.2.7 and recurring admission .5.2.8 have since advanced the shared ledger to 7 complete / 1 pending."
+evidence: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's _runtime_truthy helper/control seam and eager once-only left-to-right pure-helper evaluation, then adds direct pre-effect arity for one-plus and/or and exact-one not. The exact 177-assertion neutral consumer covers 17 typed truth rows, values, effects, receiver/lazy controls, four invalid calls, native, normalized, generated-plan, primary, and independently compiled emitted modules. Full package proof passes 1,671 assertions, primary and shared CLI conformance, and corpus 105/105; canonical local CI passes Phase 0 1..1031/607s plus the optional complete Julia gate. Generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 have since closed the shared ledger at 8 complete / 0 pending."
 evidence_prior_2026_07_10: "JULIA-BACKEND-PARITY.6.2.4.2.1 first added eager and/or/not through _runtime_truthy with legacy empty false/false/true results. Four portmap/tablegrep fixtures passed; the remaining portmap_constant failure was separately root-caused to unsupported Regex flag o and later repaired."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no julia/test/logical_helper_contract_test.jl && LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh && python3 tools/check_logical_helper_contract.py"
 ---
@@ -41,8 +41,8 @@ collection and real boolean composition. `if`, `switch`, and `while` share truth
 emitted-payload reconstruction, generated-plan, primary, and independently compiled emitted-module roles.
 Unrelated diagnostics, generated source attribution, trace, and primary failure text remain unchanged. Canonical
 local CI passes reference CLI 62x2, Phase 0 `1..1031` in 607 seconds, and the optional complete Julia gate.
-Generated/primary `.5.2.7` and recurring admission `.5.2.8` make this role part of the current 7 complete / 1
-pending shared proof; public no-drift `.5.2.9` remains.
+Generated/primary `.5.2.7`, recurring admission `.5.2.8`, and public no-drift `.5.2.9` make this role part of the
+closed 8 complete / 0 pending shared proof.
 
 The earlier Julia-local logical slice also closed `portmap_bare`, `portmap_bit`, `portmap_concatenation`, and
 `tablegrep_simple_term`. Its `portmap_constant` residual was not logical evaluation: direct compiled capture and

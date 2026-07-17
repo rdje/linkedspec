@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift**
+  (DONE — the authoritative guide/backend/status/KM surface is locked at 8 complete / 0 pending and parent `.5.2`
+  is closed; cursor implementation `.9.1.2` follows after the clean commit).
+
+  **Result:** Twenty public documents now teach one eager exact-arity typed-truth contract across native and every
+  generated role, with backend-appropriate entrypoints and copyable examples. Thirteen stale current claims are
+  forbidden, including the former Perl-only 1/7, pending Julia/Lua projection, and pending public-closeout text.
+
+  **Proof:** The offline checker passes 8/0 over 20 documents and 13 forbidden claims while rejecting 26
+  semantic/topology/public mutations. Complete Rust/Dart/Julia/dual-ABI-Lua gates, recurring
+  8/4/24/232/359/359 consumers, selected 5x2x1, unchanged full 5x2x63, diagnostic 8/0 plus 20 mutations,
+  generated-source/capability 80/0/0, coverage 246/105+1/122, mdBook, Knowledge Map, and governance pass.
+  Canonical local CI passes reference CLI 63x2, Phase 0 `1..1031` in 640 seconds, and the registered logical leg.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.8 — add recurring logical-helper gate**
   (DONE — one omission-checked all-toolchain driver admits recurring native/generated/primary/support proof at
   7 complete / 1 pending; public no-drift `.5.2.9` follows after the clean commit).
