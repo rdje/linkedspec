@@ -173,7 +173,9 @@ Three backbone items tracked major structural modernization — all done:
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain
   semantically meaningful, but the audit recommends intrinsic OR/default seek plus AND consume and no global
   override. The director has since confirmed rule-local ownership: parent mode never propagates to or overrides a
-  child. Runtime behavior is unchanged pending exact `.9.1.1.1` ratification and implementation splitting.
+  child. ADR `0044` supplies the exact ratification. Neutral `.9.1.2` now checks 36 family spellings, 18 edge
+  cases, eight parent/child mechanisms, 91 migration files, and 27 drift mutations at 1 complete / 7 pending;
+  no backend behavior is admitted by that contract leaf.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

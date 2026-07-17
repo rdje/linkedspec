@@ -973,8 +973,9 @@ Director-priority design audit `.9.1.0` finds no valid objective for a public/gl
 parity split. Director capture `.9.1.1.0` fixes rule-local ownership: parent OR/AND mode never propagates to or
 overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edges, explicit cross-family legality,
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
-is dependency-split under `.9.1.2-.9`; logical parent `.5.2` is complete and `.9.1.2` follows after its clean
-public closeout commit.
+is dependency-split under `.9.1.2-.9`; logical parent `.5.2` is complete. Neutral `.9.1.2` now owns an executable
+36-family/18-edge/8-parent-child contract, exact 91-file migration inventory, 27 drift mutations, and a 1/7
+rollout ledger without changing backend behavior; Perl `.9.1.3` remains dependency-gated until clean commit.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

@@ -10,21 +10,21 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.9` — 20 public documents and 13 stale-current guards are an
-  executable projection of the same native/generated contract; rollout and parent `.5.2` close at 8/0 with 26
-  rejected semantic/topology/public mutations.
-- latest_commit: `5870bae1` — `FUTURE-PARITY-BACKLOG.5.2.9 - close logical-helper public no-drift`
-  (ahead: 181; push at threshold 300).
-- prepared_commit: `REPO-HYGIENE.5 - clean recurring generated artifacts`.
-- active_work_unit: verified urgent artifact cleanup `REPO-HYGIENE.5` closing at the commit boundary; roadmap cursor
-  contract/inventory `.9.1.2` resumes only after this commit is clean.
-- next_action: run final memory/KM/task/doctrine/diff gates, stage the hygiene evidence, commit `.5`, clear the
-  brief, and verify a clean 71G/85% handoff before resuming `.9.1.2`.
-- current_proof: removed 2.6G Rust target, 30M Dart tool output, 267M across two Julia compiled caches, and fifteen
-  exact unwritten July 15-16 generation logs totaling about 13.6GB decimal. Immediate availability rose 16G from
-  55G/89% to 71G/85%; the earlier session observation was 29G/94% before unrelated external cleanup. All exact
-  targets are absent; depot registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx` corpus files,
-  and tracked content remain.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.2` — executable neutral rule-local cursor/edge contract and
+  exact 91-file dependency-ordered migration inventory are verified at 1 complete / 7 pending.
+- latest_commit: `6df03e1f` — `REPO-HYGIENE.5 - clean recurring generated artifacts`
+  (ahead: 182; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.2 - adopt rule-local cursor contract`.
+- active_work_unit: verified `.9.1.2` closeout at the commit boundary; Perl reference behavior `.9.1.3` remains
+  dependency-gated until this candidate commits cleanly.
+- next_action: run final governance/whitespace checks, stage the closeout docs, commit `.9.1.2`, clear the brief,
+  verify a clean tree, then activate and execute Perl rollout `.9.1.3`.
+- current_proof: `linkedspec-rule-local-cursor-v1` independently checks 36 exact family spellings, 18 edge cases,
+  six normalized ownership sets, eight parent/child mechanisms, two structural replacements, API/CLI retirement,
+  descriptor/generated-v2 rules, eight diagnostics, and exact 91-file dependency-ordered migration ownership. It
+  passes at 1/7 and rejects 27 mutations; capability remains 80/0/0, generated v1 remains 80/0/0, exhaustive
+  coverage remains 246/105+1/122, and descriptor/schema/syntax/governance/KM/mdBook pass. Canonical local CI passes
+  reference CLI 63x2 and Phase 0 `1..1031` in 634 seconds. No backend behavior changed.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -35,5 +35,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `REPO-HYGIENE.5` task/index/live/KM evidence awaits the prepared
-  commit; no background job remains. Mutation campaigns remain parked; ignored `rgx/subs/pgen` work is untouched.
+- blockers: none. in_flight_uncommitted: verified `.9.1.2` contract/checker, exact inventory, CI registration, and
+  lockstep sources await final closeout checks and commit. No background job remains; no backend behavior changed;
+  mutation campaigns remain parked and ignored `rgx/subs/pgen` work is untouched.

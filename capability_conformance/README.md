@@ -29,6 +29,16 @@ Perl, Rust, Dart, Julia, and Lua descriptor tests consume the applicable exact v
 serialization convention cannot silently become public API. Final-codeblock-v3 admission by Perl and Lua does not
 promote the separately future generic callable-codeblock capability.
 
+`rule_local_cursor_contract.json` makes ADR `0044` executable before behavior rollout. Run
+`python3 tools/check_rule_local_cursor_contract.py` to validate 36 exact rule-family spellings, 18 bare/explicit/
+indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
+mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
+per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
+The checker owns an exact 91-file current migration inventory and rejects 27 representative semantic, topology,
+diagnostic, generated, inventory, and admission mutations. Only `neutral_contract_and_inventory` is complete:
+the rollout is 1 complete / 7 pending, current global `parse_mode` behavior remains accurately admitted above,
+and backend behavior does not change in this contract-only slice.
+
 `scalar_text_contract.json` fixes the portable `cat` conversion boundary across Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite decimal text, and makes null plus
 the non-text value kinds propagate null. The executable fixture covers current portable source values; codeblock is

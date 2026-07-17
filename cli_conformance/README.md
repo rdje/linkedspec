@@ -24,6 +24,13 @@ example, the recurring diagnostic-output gate uses
 `bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`; that case records eager effects and
 the same canonical boolean result across all five commands and both environments.
 
+ADR `0044`'s future primary-command migration is now executable in
+`capability_conformance/rule_local_cursor_contract.json`. The target removes `--parse-mode` from help and returns
+usage exit `2` with the exact targeted removal message if the legacy flag is supplied. This is a 1-complete /
+7-pending neutral contract, not shipped CLI behavior: the current 63-case manifest and all five commands continue
+to accept the existing seek/consume option until their dependency-ordered `.9.1.3-.8` rollout changes the shared
+fixtures and commands together.
+
 The current manifest contains 63 cases: exact long/short help, 20 strict usage families, nine successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20
 canonical trace families, and eight strict UTF-8 behavior cases. Success cases lock named/file/inline source,

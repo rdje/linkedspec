@@ -6,7 +6,8 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; cursor implementation `.9.1.2` is next after the clean closeout commit.
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor contract/inventory `.9.1.2` is verified at 1 complete / 7 pending,
+and Perl reference rollout `.9.1.3` follows after the clean commit boundary.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

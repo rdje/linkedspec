@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.2 — adopt executable rule-local cursor contract
+
+Made ADR `0044` executable before backend rollout. `linkedspec-rule-local-cursor-v1` covers all 36 top/body rule-
+family spellings, 18 deterministic bare/explicit/block/fluent/index/group/reserved edge fixtures, six complete
+post-normalization ownership sets, eight parent/child pairs across every call mechanism, and both structural
+replacements for the retired global cross-combinations. It locks exact option/CLI removal failures, per-rule
+descriptor facts, generated-source v2's five seek and five consume families, and eight portable diagnostics.
+
+The independent checker derives family, edge, ownership, parent/child, and structural results rather than reading
+backend implementation. It scans tracked/candidate content and requires exactly 91 current migration files, each
+owned once in `.9.1.2-.9` dependency order. It rejects 27 semantic, topology, diagnostic, descriptor, generated,
+inventory, and rollout mutations. Only `neutral_contract_and_inventory` completes, leaving rollout at 1 complete /
+7 pending. Capability stays 80/0/0, current generated-source v1 remains admitted, and no parser/compiler/runtime/
+descriptor/generated/CLI behavior or implementation mutation campaign changes in this leaf.
+
+Verification passes the neutral checker at 1/7 with 27 rejected mutations; capability and current generated-source
+v1 at 80/0/0; exhaustive coverage at 246/105+1/122; Python, shell, and JSON syntax; Knowledge Map, memory/task/
+doctrine governance, mdBook, and whitespace. Canonical local CI passes reference CLI 63x2 and Phase 0 `1..1031`
+in 634 seconds.
+
 ## 2026-07-17 — REPO-HYGIENE.5 — clean recurring generated artifacts
 
 Reclaimed 16G without touching source or unknown data. The immediate deletion baseline was 55G available / 89%

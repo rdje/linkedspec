@@ -20,7 +20,8 @@ Keep those two ideas separate. A rule label such as `Item:AND` says "compose thi
 > parent, and an AND child remains consume under an OR parent. Mode-sensitive
 > bare edges, explicit exceptions, descriptor/generated metadata, and removal
 > diagnostics are also fixed below. No runtime or API has changed yet;
-> implementation remains `.9.1.2-.9`.
+> neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
+> backend behavior remains dependency-ordered under `.9.1.3-.9`.
 
 ## Current rule-label surface
 
@@ -555,8 +556,11 @@ Rule modes, action/lifecycle placement, and parse modes are deliberately separat
 
 ## Ratified rule-local target
 
-ADR `0044` replaces the current global option during the future `.9.1.2-.9`
-rollout. The authored family becomes the only cursor authority:
+ADR `0044` replaces the current global option during `.9.1.3-.9` rollout. The
+target is already executable, before backend changes, in
+`capability_conformance/rule_local_cursor_contract.json`; run
+`python3 tools/check_rule_local_cursor_contract.py` from the repository root.
+The authored family becomes the only cursor authority:
 
 | Rule family | Derived cursor policy |
 | --- | --- |
@@ -587,10 +591,44 @@ only in OR/default and still requires a shared block. Lifecycle markers `I`,
 `LS`, `LE`, `LX`, `E`, `EX`, and `IT` retain lexical priority, so an edge to a
 same-named rule must be explicit.
 
+For example, this AND parent resolves both bare child lines as blind calls. It
+consumes at the parent level, while each default child still seeks from the
+cursor at which it was entered:
+
+```text
+Top::AND
+ Header
+ Body.return(child_result)
+
+Header:
+ /BEGIN/
+
+Body:
+ /payload=(\w+)/
+```
+
+This OR parent resolves a bare grouped line as an action edge; the shared block
+is still required:
+
+```text
+Top::OR
+ Header | Body { return(child_result) }
+```
+
+Cross-family exceptions remain explicit. An AND rule that intentionally owns
+action edges writes every edge with `->`; an OR rule that intentionally makes
+blind calls writes every edge with `=>`. Mixing a bare AND child (resolved
+blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
+as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
+dispatch is intended.
+
 During rollout, `parse_mode` / `--parse-mode` is removed with a targeted
 diagnostic rather than accepted and ignored. Descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract` and per-rule `meta.cursor_policy`.
 Generated source moves to v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Until those implementation leaves
 land, use the current option behavior documented above and treat this section
-as the accepted migration target, not a claim about shipped behavior.
+as the accepted migration target, not a claim about shipped behavior. The
+neutral checker currently reports 36 family spellings, 18 edge cases, eight
+parent/child cases, 91 migration files, 1 complete / 7 pending, and 27 rejected
+drift mutations.

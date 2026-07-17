@@ -8,6 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.2 — adopt executable rule-local cursor contract**
+  (DONE — ADR `0044` is executable at 1 complete / 7 pending; Perl `.9.1.3` follows after the clean commit).
+
+  **Result:** The strict neutral schema/checker locks 36 family spellings, 18 edge cases, six ownership sets,
+  eight parent/child mechanisms, two structural replacements, exact option/CLI retirement, per-rule descriptor
+  facts, generated-source v2 derivation, eight diagnostics, and exactly 91 dependency-ordered migration files.
+
+  **Proof:** The checker rejects 27 mutations and passes at 1/7. Capability/current-generated stay 80/0/0;
+  coverage stays 246/105+1/122; syntax, Knowledge Map, governance, mdBook, and whitespace pass. Canonical local CI
+  passes reference CLI 63x2 and Phase 0 `1..1031` in 634 seconds. No backend behavior changed.
+
 - 2026-07-17: **REPO-HYGIENE.5 — clean recurring generated artifacts**
   (DONE — exact rebuildable caches and stale logs reclaimed 16G; cursor implementation `.9.1.2` resumes after the
   clean hygiene commit).

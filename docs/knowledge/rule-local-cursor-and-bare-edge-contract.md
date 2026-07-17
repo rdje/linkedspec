@@ -12,10 +12,10 @@ answers:
   - "how does generated source derive cursor policy"
   - "how do I express AND seek or OR consume without parse_mode"
 date: 2026-07-17
-status: accepted; implementation pending
+status: accepted; neutral contract complete, backend implementation pending
 tags: [dsl, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptor, generated-source, parity]
-evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. The decision leaf changes no runtime behavior."
-reverify: "rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
+evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, eight parent/child cases, 91 migration files, and 27 mutations at 1 complete / 7 pending without changing backend behavior."
+reverify: "python3 tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
 ---
 
 ADR `0044` fixes the future contract before implementation:
@@ -51,9 +51,10 @@ Generated source moves to `linkedspec-generated-source-v2`. Its plan remains
 families, so no second mutable policy field can drift. Version-1 artifacts must
 be regenerated for v2 admission.
 
-Implementation is split under `FUTURE-PARITY-BACKLOG.9.1.2-.9`. Current
-parser/runtime/API/CLI behavior remains unchanged until those leaves land.
+Neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
+backend and public rollout remains `.9.1.3-.9`. Current parser/runtime/API/CLI
+behavior remains unchanged until those leaves land.
 
 Related: [[and-or-cursor-ownership-audit]],
 [[rule-local-cursor-ownership-decision]], [[spec-edge-syntax-contract]], and
-[[FUTURE-PARITY-BACKLOG]].
+[[rule-local-cursor-neutral-contract]], [[FUTURE-PARITY-BACKLOG]].

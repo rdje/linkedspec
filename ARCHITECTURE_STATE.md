@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: neutral cursor contract `FUTURE-PARITY-BACKLOG.9.1.2` makes ADR `0044` executable without
+  behavior admission. `linkedspec-rule-local-cursor-v1` checks 36 family spellings, 18 edge cases, six ownership
+  sets, eight parent/child mechanisms, two structural replacements, targeted option/CLI removal, per-rule
+  descriptor facts, generated-source v2 derivation, eight portable diagnostics, an exact 91-file migration
+  inventory, and 27 mutations. Rollout is 1 complete / 7 pending; capability/current-generated remain 80/0/0,
+  coverage remains 246/105+1/122, and canonical local CI passes CLI 63x2 plus Phase 0 `1..1031`/634s. Current
+  backend behavior remains unchanged.
 - `2026-07-17` refresh: logical public no-drift `FUTURE-PARITY-BACKLOG.5.2.9` makes the native/generated/primary
   contract and recurring proof the one public story. Twenty authoritative documents cover the control/value
   guides, emitted Perl, four backend READMEs, mdBook catalog/reference/action/handoff/status, capability/CLI,

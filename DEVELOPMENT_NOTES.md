@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.2` — inventory tokens, but assign semantic owners): A raw repository
+  search mixes executable callers, shared fixtures, present-tense docs, and historical records. Define the actual
+  migration roots, then require every token-bearing file in those roots to appear exactly once in a dependency-
+  ordered owner group. The resulting 91-file inventory catches new unowned current surfaces without forcing
+  cumulative `CHANGES.md`, task history, or Knowledge Map evidence to disappear during migration.
+
+  Keep authored spelling and generated mechanism inventories distinct. The language has 36 exact top/body family
+  spellings once exact/ranged/lower-open/upper-open bounds are counted, but generated plans have ten handler
+  families. Version 2 should derive five seek and five consume policies from those handler families; serializing a
+  second cursor field would recreate the drift ADR `0044` removes. A neutral checker can model both layers now
+  while leaving generated-source v1 and current backend behavior accurate until their owners migrate.
+
 - 2026-07-17 (`REPO-HYGIENE.5` — compare immediate and initial disk baselines): Filesystem availability can change
   between the first low-space observation and the exact deletion boundary because another process may reclaim
   space. Preserve both readings rather than attributing the whole delta to this cleanup. Here, the session first
