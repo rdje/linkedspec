@@ -10,8 +10,8 @@ rule/function execution with direct canonical JSON, stable failure/trace routing
 conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
 parity closeout remain open. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
 identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
-status remains a Julia-local milestone, not a complete backend-parity claim. Julia also consumes the native leg
-of `linkedspec-logical-helper-v1`; Lua and cross-backend admission remain separately pending.
+status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the native and
+generated/primary legs of `linkedspec-logical-helper-v1`; recurring and public no-drift admission remain pending.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing

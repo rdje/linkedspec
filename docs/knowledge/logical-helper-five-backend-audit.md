@@ -20,6 +20,7 @@ evidence_update_2026_07_17_rust_rollout: "FUTURE-PARITY-BACKLOG.5.2.3 repairs Ru
 evidence_update_2026_07_17_dart_rollout: "FUTURE-PARITY-BACKLOG.5.2.4 repairs Dart helper short-circuit and empty/extra arities through runtimeLogicalTruth plus direct ActionCallExpr validation. Native, normalized, generated-plan, primary, and compiled standalone-emitted roles match the unchanged values/effects/receiver/control/arity fixtures; all 17 typed rows include an inert model-level codeblock. Rollout is 3 complete / 5 pending."
 evidence_update_2026_07_17_julia_rollout: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's already-correct _runtime_truthy and eager composition, then rejects empty and/or/not plus multi-argument not before operand effects. Native, normalized, generated-plan, primary, and independently compiled emitted roles match all 17 typed rows and unchanged fixtures. Rollout is 4 complete / 4 pending."
 evidence_update_2026_07_17_lua_rollout: "FUTURE-PARITY-BACKLOG.5.2.6 aligns Lua runtime_truthy and built-in arity while retaining eager once-left-to-right composition and registry-first user-function precedence. Native, reconstructed, generated-plan, loaded emitted-module, primary, lazy-control, inert-codeblock, and exact diagnostic roles pass 238/238 on PUC Lua and LuaJIT. Rollout is 5 complete / 3 pending."
+evidence_update_2026_07_17_generated_primary: "FUTURE-PARITY-BACKLOG.5.2.7 expands all five consumers across every available direct/traced generated role and adds success_logical_helpers_eager to the shared 63-case primary manifest. Values, eager effects, typed arity failures, source attribution, and direct/trace identity agree; Rust intentionally keeps direct-value typed v1 distinct from compatibility parse-output arrays. Rollout is 6 complete / 2 pending."
 reverify: "prove -Iperl t/logical_helper_perl_contract.t && python3 tools/check_logical_helper_contract.py && (cd dart && dart test test/logical_helper_contract_test.dart) && bash tools/run_lua_local.sh && rg -n 'as_bool|runtimeLogicalTruth|_runtime_truthy|evaluate_runtime_logical|runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
 ---
 
@@ -47,8 +48,10 @@ values. Julia `.5.2.5` preserves its correct truth/evaluation seam and fixes onl
 replaces its audited string-zero, empty-aggregate, and legacy arity boundaries through the shared `runtime_truthy`
 seam. Normalized/reconstructed, generated-plan, compiled emitted, and primary projections agree within every
 backend. `FUTURE-PARITY-BACKLOG.5.2.1` ratified ADR `0043`; all five native leaves `.5.2.2-.6` consume it.
-Generated/primary, recurring-gate, and public no-drift leaves `.5.2.7-.9` remain.
+Generated/primary `.5.2.7` now closes every available direct/traced role and one shared default/POSIX primary case.
+Recurring-gate and public no-drift leaves `.5.2.8-.9` remain.
 
 Related facts: [[cross-backend-condition-truthiness-drift]], [[julia-logical-helper-execution]],
 [[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]], [[logical-helper-neutral-contract]],
 [[rust-logical-helper-neutral-runtime]], [[dart-logical-helper-neutral-runtime]].
+Generated/primary details: [[logical-helper-generated-primary-projection]].

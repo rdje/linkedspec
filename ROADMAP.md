@@ -939,7 +939,7 @@ and typed exit. Lua native `.5.1.6` consumes the same 109-assertion fixture on P
 preserves arbitrary sink-error identity and distinct `RuntimeExitNow` replaces its former ordinary-runtime-error
 classification. Generated/primary `.5.1.7` now extends every emitted direct/traced role with an idiomatic optional or paired sink,
 preserves caller failures and typed exit through generated framing, and locks exact quiet canonical JSON across
-all five primary commands under the shared 62-case default/POSIX matrix. Symmetric recurring admission `.5.1.8`
+all five primary commands under the shared 63-case default/POSIX matrix. Symmetric recurring admission `.5.1.8`
 now locks one strict driver over the neutral model, all six native/generated consumers, the selected quiet five-
 command case, and generated-source/capability/corpus ledgers. Public no-drift `.5.1.9` closes the program with 16
 authoritative documents, nine forbidden stale claims, copyable native/generated examples for all five backends,
@@ -960,15 +960,18 @@ helper/control truth seam, pre-effect arity, eager once-only operands, structure
 generated-plan/standalone-emitted/primary proof. Julia `.5.2.5` retains its eager typed `_runtime_truthy` seam
 while adding exact pre-effect arity, optional structured fields, and native/normalized/generated-plan/
 independently compiled emitted/primary proof. Lua `.5.2.6` now aligns `runtime_truthy`, pre-effect arity, and exact
-structured diagnostics across native/reconstructed/generated-plan/emitted/primary roles on both ABIs. Rollout is
-5 complete / 3 pending with generated/primary projection `.5.2.7` next.
+structured diagnostics across native/reconstructed/generated-plan/emitted/primary roles on both ABIs.
+Generated/primary `.5.2.7` now proves every available direct/traced generated role, exact typed failure/source
+metadata, Rust's intentional typed-value versus compatibility-output split, and shared eager logical case
+`success_logical_helpers_eager` across all five commands and both option environments. Rollout is 6 complete / 2
+pending with recurring projection `.5.2.8` next.
 Director-priority design audit `.9.1.0` finds no valid objective for a public/global
 `parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
 parity split. Director capture `.9.1.1.0` fixes rule-local ownership: parent OR/AND mode never propagates to or
 overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edges, explicit cross-family legality,
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
-is dependency-split under `.9.1.2-.9`; generated/primary logical projection `.5.2.7` follows the clean Lua commit
-before that program activates.
+is dependency-split under `.9.1.2-.9`; recurring logical projection `.5.2.8` follows completed generated/primary
+`.5.2.7` before that program activates.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

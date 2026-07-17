@@ -143,7 +143,7 @@ Three backbone items tracked major structural modernization — all done:
   caller failures and typed exit across generated framing, and locks quiet canonical JSON through the shared
   five-backend/two-environment 62nd CLI case. Recurring gate `.5.1.8` now composes the neutral model, six native+
   generated consumers, selected quiet 5x2x1 projection, and generated-source/capability/corpus ledgers under one
-  topology-checked driver; the unchanged default matrix remains 5x2x62. Public no-drift `.5.1.9` locks 16
+  topology-checked driver; the expanded default matrix now runs 5x2x63. Public no-drift `.5.1.9` locks 16
   authoritative documents, nine forbidden stale claims, five-backend native/generated examples, and 20 drift
   mutations. The ledger is 8 complete / 0 pending and parent `.5.1` is closed. Completed planning audit `.5.2.0` splits
   Perl logical keyword lowering plus Dart evaluation/empty-`and` and five-backend truthiness/arity drift before
@@ -161,7 +161,10 @@ Three backbone items tracked major structural modernization — all done:
   generated-plan/standalone-emitted/primary proof. Julia `.5.2.5` preserves its typed eager truth seam and adds
   exact arity plus native/normalized/generated-plan/standalone-emitted/primary proof. Lua `.5.2.6` aligns the
   same truth/arity contract through native/reconstructed/generated-plan/emitted/primary proof on both ABIs.
-  Rollout is 5 complete / 3 pending under `.5.2.7-.9`.
+  Generated/primary `.5.2.7` now proves all available direct/traced generated roles, exact values/effects/failure
+  metadata, Rust's typed direct-value versus legacy compatibility-output split, and common case
+  `success_logical_helpers_eager` through all five commands under default and POSIX options. Rollout is 6 complete
+  / 2 pending under recurring/public `.5.2.8-.9`.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

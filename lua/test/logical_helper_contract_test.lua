@@ -75,6 +75,16 @@ local function execute_generated(compiled, id)
   )
 end
 
+local function execute_generated_with_trace(compiled, id)
+  return linkedspec.execute_generated_parser_with_trace_v1(
+    compiled,
+    linkedspec.build_generated_rule_plan(compiled),
+    "x",
+    linkedspec.trace_config_disabled(),
+    generated_identity(id, "generated")
+  )
+end
+
 local function emitted_module(compiled, id)
   return generated_module(
     linkedspec.emit_lua_source_v1(compiled, generated_identity(id, "emitted")),
@@ -116,7 +126,7 @@ local function check_runtime_arity_failure(ok, failure, row, label)
   check_equal(diagnostic_json.rule_label, "Top", label .. " diagnostic rule")
 end
 
-local function check_generated_arity_failure(ok, failure, row, label)
+local function check_generated_arity_failure(ok, failure, row, identity, label)
   check_equal(ok, false, label .. " rejected")
   local typed = not ok and linkedspec.is_generated_source_error(failure)
   check_equal(typed, true, label .. " typed generated failure")
@@ -131,6 +141,9 @@ local function check_generated_arity_failure(ok, failure, row, label)
     "generated_execution_failed",
     label .. " code"
   )
+  check_equal(fields.source_identity, identity, label .. " source identity")
+  check_equal(fields.rule_label, "Top", label .. " rule label")
+  check_equal(fields.handler_family, "default", label .. " handler family")
   local detail = fields.detail or ""
   check_contains(detail, "helper_arity_mismatch", label .. " detail code")
   check_contains(detail, "helper_name=" .. row.helper_name, label .. " detail helper")
@@ -165,8 +178,26 @@ for _, fixture_id in ipairs({ "values", "effects", "receiver_and_lazy_control" }
     fixture.expected,
     fixture_id .. " reconstructed"
   )
-  check_same_json(execute_generated(compiled, fixture_id), fixture.expected, fixture_id .. " generated")
-  check_same_json(emitted_module(compiled, fixture_id).execute("x"), fixture.expected, fixture_id .. " emitted")
+  local generated = execute_generated(compiled, fixture_id)
+  check_same_json(generated, fixture.expected, fixture_id .. " generated direct")
+  check_same_json(
+    execute_generated_with_trace(compiled, fixture_id),
+    generated,
+    fixture_id .. " generated traced"
+  )
+  local emitted = emitted_module(compiled, fixture_id)
+  local emitted_value = emitted.execute("x")
+  check_same_json(emitted_value, fixture.expected, fixture_id .. " emitted direct")
+  check_same_json(
+    emitted.execute_with_trace("x", linkedspec.trace_config_disabled()),
+    emitted_value,
+    fixture_id .. " emitted traced"
+  )
+  check_equal(
+    emitted.metadata().source_identity,
+    generated_identity(fixture_id, "emitted"),
+    fixture_id .. " emitted source identity"
+  )
 
   local primary_result = primary(fixture.spec_source)
   check_equal(primary_result.exit_code, 0, fixture_id .. " primary exit")
@@ -194,11 +225,45 @@ for _, fixture in ipairs(contract.fixtures.invalid_arity) do
   local generated_ok, generated_failure = capture(function()
     return execute_generated(compiled, fixture.id)
   end)
-  check_generated_arity_failure(generated_ok, generated_failure, row, fixture.id .. " generated")
+  local generated_source_identity = generated_identity(fixture.id, "generated")
+  check_generated_arity_failure(
+    generated_ok,
+    generated_failure,
+    row,
+    generated_source_identity,
+    fixture.id .. " generated direct"
+  )
+  local traced_ok, traced_failure = capture(function()
+    return execute_generated_with_trace(compiled, fixture.id)
+  end)
+  check_generated_arity_failure(
+    traced_ok,
+    traced_failure,
+    row,
+    generated_source_identity,
+    fixture.id .. " generated traced"
+  )
 
   local emitted = emitted_module(compiled, fixture.id)
   local emitted_ok, emitted_failure = capture(function() return emitted.execute("x") end)
-  check_generated_arity_failure(emitted_ok, emitted_failure, row, fixture.id .. " emitted")
+  local emitted_source_identity = generated_identity(fixture.id, "emitted")
+  check_generated_arity_failure(
+    emitted_ok,
+    emitted_failure,
+    row,
+    emitted_source_identity,
+    fixture.id .. " emitted direct"
+  )
+  local emitted_traced_ok, emitted_traced_failure = capture(function()
+    return emitted.execute_with_trace("x", linkedspec.trace_config_disabled())
+  end)
+  check_generated_arity_failure(
+    emitted_traced_ok,
+    emitted_traced_failure,
+    row,
+    emitted_source_identity,
+    fixture.id .. " emitted traced"
+  )
 
   local primary_result = primary(fixture.spec_source)
   check_equal(primary_result.exit_code, 1, fixture.id .. " primary exit")

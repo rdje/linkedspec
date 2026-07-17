@@ -66,14 +66,29 @@ function _logical_helper_native_failure(compiled::CompiledSpec)
     return nothing
 end
 
-function _logical_helper_generated_failure(compiled::CompiledSpec, identity::AbstractString)
+function _logical_helper_generated_failure(
+    compiled::CompiledSpec,
+    identity::AbstractString;
+    traced::Bool = false,
+)
     try
-        execute_generated_parser_v1(
-            compiled,
-            build_generated_rule_plan(compiled),
-            "x",
-            identity,
-        )
+        if traced
+            execute_generated_parser_with_trace_v1(
+                compiled,
+                build_generated_rule_plan(compiled),
+                "x",
+                trace_config_disabled(),
+                identity;
+                stdout_io = IOBuffer(),
+            )
+        else
+            execute_generated_parser_v1(
+                compiled,
+                build_generated_rule_plan(compiled),
+                "x",
+                identity,
+            )
+        end
     catch error
         return error
     end
@@ -98,11 +113,14 @@ function _expect_logical_helper_arity_failure(error, row)
     @test !occursin("must not run", error.message)
 end
 
-function _expect_logical_helper_generated_arity_failure(error, row)
+function _expect_logical_helper_generated_arity_failure(error, row, identity)
     @test error isa GeneratedSourceException
     error isa GeneratedSourceException || return
     @test error.stage == ExecuteGeneratedStage
     @test error.code == GeneratedExecutionFailedCode
+    @test error.source_identity == identity
+    @test error.rule_label == "Top"
+    @test error.handler_family == "default"
     detail = something(error.detail, "")
     @test occursin("helper_arity_mismatch", detail)
     @test occursin("helper_name=$(row["helper_name"])", detail)
@@ -170,12 +188,23 @@ end
             )
             @test runtime_parse(LinkedSpecRuntimeEngine(reconstructed), "x").value == expected
 
-            @test execute_generated_parser_v1(
+            plan = build_generated_rule_plan(compiled)
+            identity = "logical-helper/$fixture_id-generated.spec"
+            generated = execute_generated_parser_v1(
                 compiled,
-                build_generated_rule_plan(compiled),
+                plan,
                 "x",
-                "logical-helper/$fixture_id-generated.spec",
-            ) == expected
+                identity,
+            )
+            @test generated == expected
+            @test execute_generated_parser_with_trace_v1(
+                compiled,
+                plan,
+                "x",
+                trace_config_disabled(),
+                identity;
+                stdout_io = IOBuffer(),
+            ) == generated
 
             status, output, error_output = _logical_helper_primary(fixture["spec_source"])
             @test status == 0
@@ -204,12 +233,23 @@ end
                 row,
             )
 
+            identity = "logical-helper/$id-generated.spec"
             _expect_logical_helper_generated_arity_failure(
                 _logical_helper_generated_failure(
                     compiled,
-                    "logical-helper/$id-generated.spec",
+                    identity,
                 ),
                 row,
+                identity,
+            )
+            _expect_logical_helper_generated_arity_failure(
+                _logical_helper_generated_failure(
+                    compiled,
+                    identity;
+                    traced = true,
+                ),
+                row,
+                identity,
             )
 
             status, output, error_output = _logical_helper_primary(fixture["spec_source"])
@@ -280,8 +320,29 @@ end
 
 expected = JSON3.read(read(joinpath(@__DIR__, "expected.json"), String), Dict{String,Any})
 @assert LogicalValues.LinkedSpecGeneratedParser.execute("x") == expected["values"]
+@assert LogicalValues.LinkedSpecGeneratedParser.execute_with_trace(
+    "x",
+    LinkedSpecJulia.trace_config_disabled();
+    stdout_io = IOBuffer(),
+) == expected["values"]
+@assert LogicalValues.LinkedSpecGeneratedParser.metadata().source_identity ==
+        "logical-helper/values-emitted.spec"
 @assert LogicalEffects.LinkedSpecGeneratedParser.execute("x") == expected["effects"]
+@assert LogicalEffects.LinkedSpecGeneratedParser.execute_with_trace(
+    "x",
+    LinkedSpecJulia.trace_config_disabled();
+    stdout_io = IOBuffer(),
+) == expected["effects"]
+@assert LogicalEffects.LinkedSpecGeneratedParser.metadata().source_identity ==
+        "logical-helper/effects-emitted.spec"
 @assert LogicalReceiver.LinkedSpecGeneratedParser.execute("x") == expected["receiver_and_lazy_control"]
+@assert LogicalReceiver.LinkedSpecGeneratedParser.execute_with_trace(
+    "x",
+    LinkedSpecJulia.trace_config_disabled();
+    stdout_io = IOBuffer(),
+) == expected["receiver_and_lazy_control"]
+@assert LogicalReceiver.LinkedSpecGeneratedParser.metadata().source_identity ==
+        "logical-helper/receiver_and_lazy_control-emitted.spec"
 
 failure = try
     LogicalInvalid.LinkedSpecGeneratedParser.execute("x")
@@ -297,6 +358,19 @@ detail = something(failure.detail, "")
 @assert occursin("helper_name=not", detail)
 @assert occursin("actual_arity=2", detail)
 @assert !occursin("must not run", detail)
+
+traced_failure = try
+    LogicalInvalid.LinkedSpecGeneratedParser.execute_with_trace(
+        "x",
+        LinkedSpecJulia.trace_config_disabled();
+        stdout_io = IOBuffer(),
+    )
+    nothing
+catch error
+    error
+end
+@assert traced_failure isa LinkedSpecJulia.GeneratedSourceException
+@assert LinkedSpecJulia.to_json(traced_failure) == LinkedSpecJulia.to_json(failure)
 print("logical-helper-emitted-host-ok")
 """,
             )

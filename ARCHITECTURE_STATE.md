@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: logical generated/primary rollout `FUTURE-PARITY-BACKLOG.5.2.7` expands the unchanged
+  neutral consumers across every available direct/traced generated role. Perl proves emitted `Execute`,
+  `ExecuteWithTrace`, and `Get`; Rust proves typed-v1 and compatibility direct/traced pairs; Dart, Julia, and Lua
+  prove generated-plan plus standalone-emitted direct/traced roles. Values, eager effects, exact arity failures,
+  source attribution, and ordinary trace/result identity agree. Rust intentionally retains direct values for v1
+  and parse-output arrays for its legacy compatibility pair. Shared case `success_logical_helpers_eager` passes
+  all five primary commands under default and POSIX options, expanding the manifest to 63 cases. The ledger is
+  6 complete / 2 pending; recurring gate `.5.2.8` follows without runtime implementation changes.
 - `2026-07-17` refresh: Lua logical rollout `FUTURE-PARITY-BACKLOG.5.2.6` makes `runtime_truthy` the exact typed
   seam for eager logical helpers and lazy controls on both ABIs. Built-in one-plus `and`/`or` and exact-one `not`
   arity reject before effects while registered user functions retain precedence; valid values remain eager once-

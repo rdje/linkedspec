@@ -96,6 +96,23 @@ void _expectArityDiagnostic(
   expect(error.message, isNot(contains('must not run')));
 }
 
+void _expectGeneratedArityDiagnostic(
+  GeneratedSourceException error,
+  Map<String, Object?> row,
+  String identity,
+) {
+  final diagnostic = error.toJson();
+  expect(diagnostic['stage'], 'execute_generated');
+  expect(diagnostic['code'], 'generated_execution_failed');
+  expect(diagnostic['source_identity'], identity);
+  expect(diagnostic['rule_label'], 'Top');
+  expect(diagnostic['handler_family'], 'default');
+  expect(diagnostic['detail'], contains('helper_arity_mismatch'));
+  expect(diagnostic['detail'], contains('helper_name=${row['helper_name']}'));
+  expect(diagnostic['detail'], contains('actual_arity=${row['actual_arity']}'));
+  expect(diagnostic['detail'], isNot(contains('must not run')));
+}
+
 Future<ProcessResult> _expectDartSuccess(
   Directory workingDirectory,
   Map<String, String> environment,
@@ -172,14 +189,19 @@ void main() {
       final source = fixture['spec_source']! as String;
       final compiled = _compileSource(source);
 
+      final plan = buildGeneratedRulePlan(compiled);
+      final identity = 'logical-helper/$fixtureId-generated.spec';
+      final direct = executeGeneratedParserV1(compiled, plan, 'x', identity);
+      expect(direct, fixture['expected']);
       expect(
-        executeGeneratedParserV1(
+        executeGeneratedParserWithTraceV1(
           compiled,
-          buildGeneratedRulePlan(compiled),
+          plan,
           'x',
-          'logical-helper/$fixtureId-generated.spec',
+          LinkedSpecTraceConfig.disabled(),
+          identity,
         ),
-        fixture['expected'],
+        direct,
       );
     });
 
@@ -234,22 +256,30 @@ void main() {
         fail('$id normalized state evaluated an operand or threw $error');
       }
 
+      final identity = 'logical-helper/$id-generated.spec';
+      final plan = buildGeneratedRulePlan(compiled);
       try {
-        executeGeneratedParserV1(
-          compiled,
-          buildGeneratedRulePlan(compiled),
-          'x',
-          'logical-helper/$id-generated.spec',
-        );
+        executeGeneratedParserV1(compiled, plan, 'x', identity);
         fail('$id generated plan accepted invalid arity');
       } on GeneratedSourceException catch (error) {
-        final detail = error.detail ?? '';
-        expect(detail, contains('helper_arity_mismatch'));
-        expect(detail, contains('helper_name=${row['helper_name']}'));
-        expect(detail, contains('actual_arity=${row['actual_arity']}'));
-        expect(detail, isNot(contains('must not run')));
+        _expectGeneratedArityDiagnostic(error, row, identity);
       } on Object catch (error) {
         fail('$id generated plan evaluated an operand or threw $error');
+      }
+
+      try {
+        executeGeneratedParserWithTraceV1(
+          compiled,
+          plan,
+          'x',
+          LinkedSpecTraceConfig.disabled(),
+          identity,
+        );
+        fail('$id traced generated plan accepted invalid arity');
+      } on GeneratedSourceException catch (error) {
+        _expectGeneratedArityDiagnostic(error, row, identity);
+      } on Object catch (error) {
+        fail('$id traced generated plan evaluated an operand or threw $error');
       }
     });
 
@@ -333,11 +363,31 @@ void main() {
   } on GeneratedSourceException catch (error) {
     invalidFailure = error.toJson();
   }
+  Object? invalidTracedFailure;
+  try {
+    invalid.executeWithTrace('x', LinkedSpecTraceConfig.disabled());
+    throw StateError('traced not_many unexpectedly executed');
+  } on GeneratedSourceException catch (error) {
+    invalidTracedFailure = error.toJson();
+  }
   print(jsonEncode({
-    'values': values.execute('x'),
-    'effects': effects.execute('x'),
-    'receiver_and_lazy_control': receiver.execute('x'),
+    'values': {
+      'direct': values.execute('x'),
+      'traced': values.executeWithTrace('x', LinkedSpecTraceConfig.disabled()),
+      'source_identity': values.metadata().sourceIdentity,
+    },
+    'effects': {
+      'direct': effects.execute('x'),
+      'traced': effects.executeWithTrace('x', LinkedSpecTraceConfig.disabled()),
+      'source_identity': effects.metadata().sourceIdentity,
+    },
+    'receiver_and_lazy_control': {
+      'direct': receiver.execute('x'),
+      'traced': receiver.executeWithTrace('x', LinkedSpecTraceConfig.disabled()),
+      'source_identity': receiver.metadata().sourceIdentity,
+    },
     'invalid': invalidFailure,
+    'invalid_traced': invalidTracedFailure,
   }));
 }
 ''');
@@ -367,10 +417,16 @@ void main() {
           'effects',
           'receiver_and_lazy_control',
         ]) {
+          final roles = (observed[fixtureId]! as Map).cast<String, Object?>();
           expect(
-            observed[fixtureId],
+            roles['direct'],
             _fixture(contract, fixtureId)['expected'],
-            reason: fixtureId,
+            reason: '$fixtureId direct',
+          );
+          expect(roles['traced'], roles['direct'], reason: '$fixtureId traced');
+          expect(
+            roles['source_identity'],
+            'logical-helper/$fixtureId-emitted.spec',
           );
         }
         final failure = (observed['invalid']! as Map).cast<String, Object?>();
@@ -380,6 +436,13 @@ void main() {
         expect(failure['detail'], contains('helper_name=not'));
         expect(failure['detail'], contains('actual_arity=2'));
         expect(failure['detail'], isNot(contains('must not run')));
+        expect(
+          failure['source_identity'],
+          'logical-helper/not_many-emitted.spec',
+        );
+        final tracedFailure = (observed['invalid_traced']! as Map)
+            .cast<String, Object?>();
+        expect(tracedFailure, failure);
       } finally {
         scratch.deleteSync(recursive: true);
       }

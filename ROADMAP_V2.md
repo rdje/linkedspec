@@ -104,7 +104,7 @@ neutral contract `.5.1.1`, five native leaves `.2-.6`, generated/CLI `.7`, symme
 Neutral policy, all five native event seams, generated/primary `.5.1.7`, recurring symmetric gate `.5.1.8`, and
 public no-drift `.5.1.9` are complete at 8 complete / 0 pending. Every emitted direct/traced role exposes an
 idiomatic optional or paired sink without changing legacy signatures, all five primary commands remain quiet
-under the shared 62-case default/POSIX matrix, and one strict driver composes all six native/generated consumers
+under the shared 63-case default/POSIX matrix, and one strict driver composes all six native/generated consumers
 plus capability/generated-source/corpus ledgers. Sixteen authoritative documents, nine forbidden stale claims,
 and 20 drift mutations lock the public contract. Parent `.5.1` is closed; logical audit `.5.2.0` is complete. It
 separates lazy condition-only Perl lowering and broken direct values, Dart short-circuiting, eager Rust/Julia/Lua,
@@ -115,14 +115,17 @@ legs initially pending. Perl `.5.2.2` now consumes the contract through typed Ac
 the ledger to 1/7. Rust `.5.2.3` aligns its shared truth seam and pre-effect arity; Dart `.5.2.4` removes helper
 short-circuit drift; Julia `.5.2.5` preserves eager `_runtime_truthy` composition while rejecting all four invalid
 arities before effects across native, normalized, generated-plan, compiled-emitted, and primary roles. The ledger
-is 5 complete / 3 pending after dual-ABI Lua `.5.2.6`; generated/primary projection `.5.2.7` is next.
+is 6 complete / 2 pending after generated/primary `.5.2.7`. Every available direct/traced generated role now
+preserves the neutral values, eager effects, typed failures, and source attribution; Rust's compatibility pair
+retains its established output-array signature while typed v1 returns the direct value. Shared case
+`success_logical_helpers_eager` passes all five commands under default and POSIX options; recurring `.5.2.8` is next.
 Director-priority cursor-ownership audit `.9.1.0`
 rejects public/global `parse_mode`, recommends
 intrinsic OR/default seek and AND consume, and exposes default-AND parity drift. Director capture `.9.1.1.0`
 confirms that parent mode never propagates to or overrides a child. ADR `0044` / `.9.1.1.1` now ratifies exact
 mode-sensitive bare edges, explicit cross-family legality, removal diagnostics, per-rule descriptor facts,
 generated-source v2 family derivation, and conformance. Implementation is split under `.9.1.2-.9`; generated/
-primary logical projection `.5.2.7` follows the clean Lua commit before that program activates.
+primary logical projection `.5.2.7` is complete; recurring logical gate `.5.2.8` follows before that program activates.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`

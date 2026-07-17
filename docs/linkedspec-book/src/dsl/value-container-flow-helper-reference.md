@@ -1179,9 +1179,11 @@ and controls, validates arity before effects, and proves native, normalized, gen
 and primary roles. Julia `.5.2.5` preserves `_runtime_truthy` plus eager composition, validates arity before
 effects, and proves native, normalized, generated-plan, standalone-emitted, and primary roles. Lua `.5.2.6`
 aligns `runtime_truthy`, validates arity before effects, and proves native, reconstructed, generated-plan, loaded
-emitted-module, and primary roles on both PUC Lua and LuaJIT. Rollout is 5 complete / 3 pending. The remaining
-`.5.2.7-.9` leaves lock cross-backend generated/primary projection, recurring proof, and public no-drift; they do
-not leave a known native truthiness split.
+emitted-module, and primary roles on both PUC Lua and LuaJIT. Generated/primary `.5.2.7` now locks every available
+direct/traced generated role, exact typed failure/source attribution, Rust's direct-value versus compatibility-
+output distinction, and shared five-command case `success_logical_helpers_eager` under default and POSIX options.
+Rollout is 6 complete / 2 pending; `.5.2.8-.9` retain recurring proof and public no-drift, with no known native or
+generated truthiness split.
 
 Examples:
 

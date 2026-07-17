@@ -2,7 +2,7 @@
 
 `manifest.json` is the machine-readable census of current user-observable LinkedSpec capabilities across the five
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
-62-case primary CLI manifest.
+63-case primary CLI manifest.
 
 Run its structural and ownership gate from the repository root:
 

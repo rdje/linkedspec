@@ -61,7 +61,12 @@ sub load_generated_source {
  my $failure = $@;
  ok($loaded, "$suffix emitted source loads independently") or diag($failure);
  no strict 'refs';
- return *{"${package}::Execute"}{CODE};
+ return {
+  execute => *{"${package}::Execute"}{CODE},
+  execute_with_trace => *{"${package}::ExecuteWithTrace"}{CODE},
+  get => *{"${package}::Get"}{CODE},
+  metadata => *{"${package}::LinkedSpecGeneratedMetadata"}{CODE},
+ };
 }
 
 sub compile_source {
@@ -91,6 +96,24 @@ sub run_parser {
  my ($parser) = @_;
  my $input = 'xx';
  return $parser->(\$input)
+}
+
+sub generated_roles {
+ my ($generated) = @_;
+ return (
+  [Execute => sub {
+   my $input = 'xx';
+   return $generated->{execute}->(\$input)
+  }],
+  [ExecuteWithTrace => sub {
+   my $input = 'xx';
+   return $generated->{execute_with_trace}->(\$input, {trace_level => 'none'})
+  }],
+  [Get => sub {
+   my $input = 'xx';
+   return $generated->{get}->(\$input)
+  }],
+ )
 }
 
 sub run_primary_command {
@@ -180,9 +203,13 @@ subtest 'neutral live and emitted fixtures agree' => sub {
  foreach my $fixture_id (qw(values effects receiver_and_lazy_control)) {
   my $fixture = $contract->{fixtures}{$fixture_id};
   my $source = perl_reference_spec($fixture->{spec_source});
-  my ($live, $emitted) = compile_source($source, "logical-helper/$fixture_id.spec");
+  my $identity = "logical-helper/$fixture_id.spec";
+  my ($live, $emitted) = compile_source($source, $identity);
   is_deeply(run_parser($live), $fixture->{expected}, "$fixture_id live result matches the neutral fixture");
-  is_deeply(run_parser($emitted), $fixture->{expected}, "$fixture_id emitted result matches the neutral fixture");
+  is($emitted->{metadata}->()->{source_identity}, $identity, "$fixture_id emitted metadata preserves source identity");
+  foreach my $role (generated_roles($emitted)) {
+   is_deeply($role->[1]->(), $fixture->{expected}, "$fixture_id emitted $role->[0] matches the neutral fixture");
+  }
  }
 };
 
@@ -190,9 +217,12 @@ subtest 'invalid arity precedes effects in live and emitted execution' => sub {
  my %expected = map { $_->{id} => $_ } @{$contract->{invalid_arity_cases}};
  foreach my $fixture (@{$contract->{fixtures}{invalid_arity}}) {
   my $source = perl_reference_spec($fixture->{spec_source});
-  my ($live, $emitted) = compile_source($source, "logical-helper/$fixture->{id}.spec");
-  foreach my $surface ([live => $live], [emitted => $emitted]) {
-   my $ok = eval { run_parser($surface->[1]); 1 };
+  my $identity = "logical-helper/$fixture->{id}.spec";
+  my ($live, $emitted) = compile_source($source, $identity);
+  is($emitted->{metadata}->()->{source_identity}, $identity, "$fixture->{id} emitted metadata preserves source identity");
+  my @surfaces = ([live => sub { run_parser($live) }], generated_roles($emitted));
+  foreach my $surface (@surfaces) {
+   my $ok = eval { $surface->[1]->(); 1 };
    my $caught = $@;
    ok(!$ok, "$fixture->{id} $surface->[0] execution rejects invalid arity");
    isa_ok($caught, 'LinkedSpec::RuntimeDiagnosticOutput::Error', "$fixture->{id} $surface->[0] error");
@@ -244,7 +274,8 @@ SPEC
  my ($live, $emitted) = compile_source($source, 'logical-helper/typed-sites.spec');
  my $expected = [JSON::PP::true, JSON::PP::false, JSON::PP::true, ['body']];
  is_deeply(run_parser($live), $expected, 'live typed sites preserve values and one lazy while body');
- is_deeply(run_parser($emitted), $expected, 'emitted typed sites preserve values and one lazy while body');
+ my $emitted_input = 'xx';
+ is_deeply($emitted->{execute}->(\$emitted_input), $expected, 'emitted typed sites preserve values and one lazy while body');
 
  my $descriptor = LinkedSpec::Get(\$source, return_descriptor => 1);
  my $meta = $descriptor->{spec}{Top}{meta}{action_rewriter};

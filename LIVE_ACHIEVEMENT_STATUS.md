@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.7 — propagate logical generated and primary projection**
+  (DONE — all direct/traced generated roles and one shared five-command primary case conform at 6 complete / 2
+  pending; recurring logical gate `.5.2.8` follows after the clean commit).
+
+  **Result:** Perl emitted `Execute`/`ExecuteWithTrace`/`Get`, Rust typed-v1 and compatibility direct/traced pairs,
+  and Dart/Julia/Lua generated-plan plus independently emitted direct/traced roles preserve the neutral values,
+  eager effect order, exact pre-effect failures, source attribution, and result/trace identity. Rust's legacy
+  compatibility pair retains its established parse-output array while typed v1 returns the direct value.
+
+  **Proof:** Expanded consumers pass Perl 8 top-level subtests, Rust 4 integration tests, Dart 24 tests, Julia 232
+  assertions, and PUC Lua/LuaJIT 359 assertions. `success_logical_helpers_eager` passes 5x2x1 and the logical
+  checker reports 6/2 with 15 mutations. The complete 5x2x63 and canonical gates are recorded in the owning task.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.6 — align Lua logical helpers and truthiness**
   (DONE — PUC Lua/LuaJIT native, reconstructed, generated-plan/emitted, and primary roles conform at 5 complete /
   3 pending; generated/primary `.5.2.7` follows after the clean commit).

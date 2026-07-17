@@ -1,13 +1,16 @@
 //! FUTURE-PARITY-BACKLOG.5.2.3 — Rust logical-helper contract.
 
 use linkedspec_core::compiler::compile;
+use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledSpec, RuntimeValue};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::diagnostic::RuntimeExecutionError;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, emit_rust_source_v1, execute_generated_parser_v1,
-    validate_generated_parser_plan_v1,
+    GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode,
+    GeneratedSourceError, GeneratedSourceStage, emit_rust_source_v1, execute_generated_parser,
+    execute_generated_parser_v1, execute_generated_parser_with_trace,
+    execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::Value;
@@ -24,6 +27,11 @@ const CONTRACT_JSON: &str = include_str!(concat!(
 const TOP_PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
     label: "Top",
     family: "default",
+}];
+
+const COMPATIBILITY_TOP_PLAN: &[GeneratedRuleSpec] = &[GeneratedRuleSpec {
+    label: "Top",
+    family: GeneratedRuleFamily::Default,
 }];
 
 fn contract() -> Value {
@@ -114,6 +122,50 @@ fn assert_arity_error(error: &RuntimeExecutionError, case: &Value) {
     );
 }
 
+fn assert_generated_arity_error(error: &GeneratedSourceError, case: &Value, identity: &str) {
+    let detail = error.detail.as_deref().unwrap_or_default();
+    assert_eq!(error.stage, GeneratedSourceStage::ExecuteGenerated);
+    assert_eq!(error.code, GeneratedSourceCode::GeneratedExecutionFailed);
+    assert_eq!(error.source_identity, identity);
+    assert_eq!(error.rule_label.as_deref(), Some("Top"));
+    assert_eq!(error.handler_family.as_deref(), Some("default"));
+    assert!(detail.contains("helper_arity_mismatch"), "{detail}");
+    assert!(
+        detail.contains(&format!(
+            "helper_name={}",
+            case["helper_name"].as_str().expect("helper name")
+        )),
+        "{detail}"
+    );
+    assert!(
+        detail.contains(&format!(
+            "actual_arity={}",
+            case["actual_arity"].as_u64().expect("actual arity")
+        )),
+        "{detail}"
+    );
+    assert!(!detail.contains("must not run"), "{detail}");
+}
+
+fn assert_compatibility_arity_error(detail: &str, case: &Value) {
+    assert!(detail.contains("helper_arity_mismatch"), "{detail}");
+    assert!(
+        detail.contains(&format!(
+            "helper_name={}",
+            case["helper_name"].as_str().expect("helper name")
+        )),
+        "{detail}"
+    );
+    assert!(
+        detail.contains(&format!(
+            "actual_arity={}",
+            case["actual_arity"].as_u64().expect("actual arity")
+        )),
+        "{detail}"
+    );
+    assert!(!detail.contains("must not run"), "{detail}");
+}
+
 #[test]
 fn every_representable_neutral_value_uses_one_typed_truth_seam() {
     let contract = contract();
@@ -169,11 +221,38 @@ fn neutral_fixtures_match_native_serialized_and_generated_plan_execution() {
         assert!(emitted.contains("linkedspec-generated-source-v1"));
         validate_generated_parser_plan_v1(&compiled_json, TOP_PLAN, &identity)
             .expect("validate generated logical plan");
+        let generated = execute_generated_parser_v1(&compiled_json, TOP_PLAN, "x", &identity)
+            .unwrap_or_else(|error| panic!("generated-plan {fixture_id}: {error}"));
+        assert_eq!(generated, expected, "generated-plan {fixture_id}");
         assert_eq!(
-            execute_generated_parser_v1(&compiled_json, TOP_PLAN, "x", &identity)
-                .unwrap_or_else(|error| panic!("generated-plan {fixture_id}: {error}")),
-            expected,
-            "generated-plan {fixture_id}"
+            execute_generated_parser_with_trace_v1(
+                &compiled_json,
+                TOP_PLAN,
+                "x",
+                TraceConfig::default(),
+                &identity,
+            )
+            .unwrap_or_else(|error| panic!("generated-plan traced {fixture_id}: {error}")),
+            generated,
+            "generated-plan traced {fixture_id}"
+        );
+        let compatibility = execute_generated_parser(&compiled_json, COMPATIBILITY_TOP_PLAN, "x")
+            .unwrap_or_else(|error| panic!("compatibility generated {fixture_id}: {error}"));
+        assert_eq!(
+            compatibility,
+            Value::Array(vec![expected.clone()]),
+            "compatibility generated {fixture_id}"
+        );
+        assert_eq!(
+            execute_generated_parser_with_trace(
+                &compiled_json,
+                COMPATIBILITY_TOP_PLAN,
+                "x",
+                TraceConfig::default(),
+            )
+            .unwrap_or_else(|error| panic!("compatibility traced {fixture_id}: {error}")),
+            compatibility,
+            "compatibility traced {fixture_id}"
         );
     }
 }
@@ -212,23 +291,30 @@ fn invalid_arity_precedes_effects_with_exact_native_and_generated_fields() {
         let identity = format!("logical-helper/{id}.spec");
         let generated = execute_generated_parser_v1(&compiled_json, TOP_PLAN, "x", &identity)
             .expect_err("generated invalid arity must fail");
-        let detail = generated.detail.as_deref().unwrap_or_default();
-        assert!(detail.contains("helper_arity_mismatch"), "{id}: {detail}");
-        assert!(
-            detail.contains(&format!(
-                "helper_name={}",
-                case["helper_name"].as_str().expect("helper name")
-            )),
-            "{id}: {detail}"
-        );
-        assert!(
-            detail.contains(&format!(
-                "actual_arity={}",
-                case["actual_arity"].as_u64().expect("actual arity")
-            )),
-            "{id}: {detail}"
-        );
-        assert!(!detail.contains("must not run"), "{id}: {detail}");
+        assert_generated_arity_error(&generated, case, &identity);
+
+        let traced = execute_generated_parser_with_trace_v1(
+            &compiled_json,
+            TOP_PLAN,
+            "x",
+            TraceConfig::default(),
+            &identity,
+        )
+        .expect_err("traced generated invalid arity must fail");
+        assert_generated_arity_error(&traced, case, &identity);
+
+        let compatibility = execute_generated_parser(&compiled_json, COMPATIBILITY_TOP_PLAN, "x")
+            .expect_err("compatibility generated invalid arity must fail");
+        assert_compatibility_arity_error(&compatibility, case);
+
+        let compatibility_traced = execute_generated_parser_with_trace(
+            &compiled_json,
+            COMPATIBILITY_TOP_PLAN,
+            "x",
+            TraceConfig::default(),
+        )
+        .expect_err("compatibility traced invalid arity must fail");
+        assert_compatibility_arity_error(&compatibility_traced, case);
     }
 }
 
@@ -308,7 +394,14 @@ fn standalone_emitted_modules_compile_and_run_values_effects_receivers_and_arity
         .map(|(fixture_id, expected)| {
             format!(
                 r#"let expected: serde_json::Value = serde_json::from_str({expected}).unwrap();
-        assert_eq!(super::{fixture_id}::execute("x").unwrap(), expected);"#
+        assert_eq!(super::{fixture_id}::LINKEDSPEC_GENERATED_SOURCE_IDENTITY, "logical-helper/{fixture_id}.spec");
+        assert_eq!(super::{fixture_id}::metadata().source_identity, "logical-helper/{fixture_id}.spec");
+        let direct = super::{fixture_id}::execute("x").unwrap();
+        assert_eq!(direct, expected);
+        assert_eq!(super::{fixture_id}::execute_with_trace("x", linkedspec_runtime::trace::TraceConfig::default()).unwrap(), direct);
+        let compatibility = super::{fixture_id}::parse("x").unwrap();
+        assert_eq!(compatibility, serde_json::json!([expected]));
+        assert_eq!(super::{fixture_id}::parse_with_trace("x", linkedspec_runtime::trace::TraceConfig::default()).unwrap(), compatibility);"#
             )
         })
         .collect::<Vec<_>>()
@@ -326,6 +419,21 @@ mod emitted_contract_tests {{
         assert!(detail.contains("helper_name=not"), "{{detail}}");
         assert!(detail.contains("actual_arity=2"), "{{detail}}");
         assert!(!detail.contains("must not run"), "{{detail}}");
+        assert_eq!(error.source_identity, "logical-helper/not_many-emitted.spec");
+        let traced_error = super::invalid_not_many::execute_with_trace(
+            "x",
+            linkedspec_runtime::trace::TraceConfig::default(),
+        ).unwrap_err();
+        assert_eq!(traced_error.source_identity, "logical-helper/not_many-emitted.spec");
+        assert_eq!(traced_error.detail, error.detail);
+        let compatibility_error = super::invalid_not_many::parse("x").unwrap_err();
+        assert!(compatibility_error.contains("helper_arity_mismatch"), "{{compatibility_error}}");
+        assert!(!compatibility_error.contains("must not run"), "{{compatibility_error}}");
+        let compatibility_traced_error = super::invalid_not_many::parse_with_trace(
+            "x",
+            linkedspec_runtime::trace::TraceConfig::default(),
+        ).unwrap_err();
+        assert_eq!(compatibility_traced_error, compatibility_error);
     }}
 }}
 "#

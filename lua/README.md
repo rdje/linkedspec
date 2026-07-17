@@ -382,8 +382,9 @@ Top::
 
 This returns boolean `true`. `and()` and `not(false, true)` instead raise `helper_arity_mismatch` before an
 operand can run, with `code`, `helper_name`, `actual_arity`, and `expected_arity` in the typed diagnostic. The
-unchanged neutral consumer passes 238/238 on both ABIs across native, reconstructed, generated-plan, loaded
-emitted-module, and primary roles. The complete local gate remains 177/177 per ABI plus shared CLI 62x2 and corpus
+expanded neutral consumer passes 359/359 on both ABIs across native, reconstructed, generated-plan direct/traced,
+loaded emitted-module direct/traced, and primary roles with exact generated source attribution. The complete local
+gate remains 177/177 per ABI plus shared CLI 63x2 and corpus
 105/105.
 
 The original logical proof first raised both ABI suites to 123/123; the complete helper closeout then passed

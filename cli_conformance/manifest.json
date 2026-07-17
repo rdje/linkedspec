@@ -332,6 +332,23 @@
       }
     },
     {
+      "id": "success_logical_helpers_eager",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done {\n   seen = []\n   and_decisive_false_is_eager = and(\n     { push(seen, \"and-first\"); return(false) },\n     { push(seen, \"and-second\"); return(true) }\n   )\n   or_decisive_true_is_eager = or(\n     { push(seen, \"or-first\"); return(true) },\n     { push(seen, \"or-second\"); return(false) }\n   )\n   not_single_argument_once = not(\n     { push(seen, \"not-first\"); return(false) }\n   )\n   return({\n     \"and_decisive_false_is_eager\" : and_decisive_false_is_eager,\n     \"or_decisive_true_is_eager\" : or_decisive_true_is_eager,\n     \"not_single_argument_once\" : not_single_argument_once,\n     \"seen\" : copy(seen)\n   })\n }\n\nDone::\n /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "{\"and_decisive_false_is_eager\":false,\"not_single_argument_once\":true,\"or_decisive_true_is_eager\":true,\"seen\":[\"and-first\",\"and-second\",\"or-first\",\"or-second\",\"not-first\"]}\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
       "id": "success_explicit_top_rule",
       "family": "success",
       "args": [

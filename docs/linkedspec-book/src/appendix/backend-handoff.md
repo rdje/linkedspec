@@ -875,9 +875,13 @@ operand once left-to-right, and proves native, normalized, generated-plan, compi
 Julia `.5.2.5` preserves its typed eager `_runtime_truthy` seam, rejects all four invalid arities before effects,
 and proves native, normalized, generated-plan, compiled emitted, and primary roles with optional exact diagnostic
 fields. Lua `.5.2.6` aligns `runtime_truthy` and pre-effect arity across native, reconstructed, generated-plan,
-loaded emitted-module, and primary roles on PUC Lua and LuaJIT. Its unchanged consumer passes 238/238 per ABI and
-the complete Lua gate remains 177/177 per ABI plus CLI 62x2 and corpus 105/105. The ledger is 5 complete / 3
-pending before `.5.2.7-.9`. Explicit codeblock literals remain separately owned by `.11`; the logical contract's
+loaded emitted-module, and primary roles on PUC Lua and LuaJIT. Its expanded consumer passes 359/359 per ABI and
+the complete Lua gate remains 177/177 per ABI plus CLI 63x2 and corpus 105/105. Generated/primary `.5.2.7` proves
+every available direct/traced role across Perl, Rust, Dart, Julia, and Lua with exact values, eager effects,
+failure/source metadata, and trace identity. Rust retains the intentional typed direct-value versus compatibility-
+output-array signature. Shared case `success_logical_helpers_eager` passes all five commands in default and POSIX
+environments. The ledger is 6 complete / 2 pending before `.5.2.8-.9`. Explicit codeblock literals remain
+separately owned by `.11`; the logical contract's
 typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,

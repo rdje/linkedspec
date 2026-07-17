@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.7` — inventory roles before asserting one generated shape):
+  Generated APIs are not signature-identical across backends. Perl has `Execute`, `ExecuteWithTrace`, and `Get`;
+  Rust has typed-v1 and legacy compatibility direct/traced pairs; Dart, Julia, and Lua have typed direct/traced
+  plan functions and independently emitted module functions. Drive the same neutral values/effects/invalid
+  fixtures through each real role and assert source identity at the typed generated boundary.
+
+  Rust's compatibility executor returns the historical parse-output array, while typed v1 returns the direct
+  top-rule value. This is deliberate API compatibility, not logical drift; trace must equal the corresponding
+  direct role, not a different signature family. For the shared CLI, reuse the neutral eager-effects program but
+  move its `E` body to a portable action edge plus `Done` rule, following the diagnostic-output toolbox precedent.
+  That avoids Perl's known direct-default-rule lifecycle caveat and introduces no backend flag or expectation.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.6` — validate before evaluation and stay within Lua's chunk budget):
   Lua already collected valid logical operands eagerly once left-to-right and resolved registered user functions
   before built-in helpers. Preserve both properties. Validate the original built-in call before collection, then

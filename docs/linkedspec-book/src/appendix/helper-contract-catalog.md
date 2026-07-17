@@ -1264,7 +1264,9 @@ table because its runtime behavior is to terminate the parser process.
   generated-plan, standalone-emitted, and primary execution conforms under `.5.2.4`; Julia native, normalized,
   generated-plan, independently compiled emitted, and primary execution conforms under `.5.2.5`; Lua native,
   reconstructed, generated-plan, loaded emitted-module, and primary execution conforms on both ABIs under
-  `.5.2.6`. Three projection/admission legs remain pending under `.5.2.7-.9` before public closeout.
+  `.5.2.6`. Generated/primary `.5.2.7` proves every available direct/traced generated role, exact failure/source
+  attribution, Rust's established direct-value versus compatibility-output split, and one common five-command
+  default/POSIX primary case. Recurring and public legs `.5.2.8-.9` remain before closeout.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
@@ -1274,8 +1276,8 @@ table because its runtime behavior is to terminate the parser process.
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
   fluent `.return(...)` value positions. Perl, Rust, Dart, Julia, and Lua consume ADR `0043` through one
-  helper/condition truth seam per backend. `FUTURE-PARITY-BACKLOG.5.2.7-.9` own the remaining cross-backend
-  generated/primary, recurring-gate, and public no-drift rollout.
+  helper/condition truth seam per backend. `FUTURE-PARITY-BACKLOG.5.2.8-.9` own the remaining recurring-gate and
+  public no-drift rollout after generated/primary `.5.2.7` completed.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

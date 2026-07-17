@@ -3007,14 +3007,39 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.7`
-  Status: `pending`
+  Status: `done`
   Goal: Propagate the aligned logical contract through generated entrypoints and primary projection.
   Dependencies: `.5.2.2`, `.5.2.3`, `.5.2.4`, `.5.2.5`, `.5.2.6`
   Acceptance: Every available generated direct/traced role preserves exact logical values/effects/diagnostics and
     source metadata; one shared primary case proves the same canonical result under all five commands and both
     option environments without backend-specific flags or semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0043`, the logical neutral/audit/backend Knowledge Map facts, unchanged
+    JSON/checker, TOOLBOX guidance, and the existing diagnostic-output generated/primary precedent before changing
+    any projection. Run the current generated consumers and primary matrix to measure the exact residual.
+  - [x] **GENERATED ROLE INVENTORY** — Enumerate every supported direct/traced/plan/reconstructed/emitted generated
+    role on Perl, Rust, Dart, Julia, and Lua; identify exact contract fixture, diagnostic, source-attribution, and
+    caller-owned isolation seams without inventing a role a backend does not expose.
+  - [x] **UNCHANGED CROSS-BACKEND PROJECTION** — Drive the neutral values/effects/receiver/arity fixture through
+    every available generated role and prove booleans, eager order, exact diagnostic tokens/fields, metadata, and
+    ordinary result/trace identity. Repair only projection drift found by that unchanged proof.
+  - [x] **SHARED PRIMARY CASE** — Add one backend-neutral logical case to the shared primary manifest with exact
+    canonical JSON and invalid-call projection where supported; run all five commands in default and POSIX option
+    environments without backend flags or per-command expectations.
+  - [x] **LEDGER / NO REGRESSION** — Promote only `generated_and_primary_cli`; keep recurring/public legs pending,
+    preserve capability 80/0/0, existing corpus/generated-source contracts, and unrelated diagnostics/traces.
+  - [x] **LOCKSTEP / COMMIT** — Run focused consumers, complete affected backend gates, shared primary matrix,
+    neutral checker, governance/KM/mdBook/whitespace, and canonical local CI; synchronize all durable layers and
+    commit cleanly before recurring gate `.5.2.8`. Do not run an implementation mutation campaign.
+  Verification: **PASS 2026-07-17.** Expanded consumers pass Perl 8 top-level subtests, Rust 4 integration tests,
+    Dart 24 tests, Julia 232 assertions, and PUC Lua/LuaJIT 359 assertions across every available generated role.
+    Complete Rust, Dart, Julia, and dual-ABI Lua gates pass, as do the exact five-backend/default-POSIX 63-case
+    matrix, logical checker at 6 complete / 2 pending with 15 rejected mutations, diagnostic checker at 8/0 with
+    20 mutations, generated-source/capability 80/0/0, and exhaustive 246-name/105-corpus-plus-one/122-public-
+    contract ledgers. Knowledge Map, memory, task metadata, doctrines, mdBook, and whitespace pass. Canonical local
+    CI passes reference CLI 63x2 and Phase 0 `1..1031` in 618 seconds. No runtime implementation changed and no
+    implementation mutation campaign ran.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.8`
   Status: `pending`
@@ -5515,13 +5540,13 @@ The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exac
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
 backend-neutral policy `.5.2.1` plus Perl `.5.2.2`, Rust `.5.2.3`, Dart `.5.2.4`, Julia `.5.2.5`, and dual-ABI
-Lua `.5.2.6` native rollouts are complete at 5/3. Focused, authoritative, and canonical gates are green;
-generated/primary `.5.2.7` is next after the clean `.5.2.6` commit. The
+Lua `.5.2.6` native rollouts are committed. Generated/primary projection `.5.2.7` is verified at 6/2 and closing
+in its exact commit. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the pending `.9.1.2-.9` rollout. The logical-helper parent remains the selected
-program, with generated/primary `.5.2.7` next after the clean `.5.2.6` commit and before that separately split
-cursor implementation program.
+program, with recurring logical gate `.5.2.8` next after the clean `.5.2.7` commit and before that split cursor
+implementation program.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6420,7 +6445,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None. ADR `0044` resolves the remaining `.9.1.1.1` grammar/runtime/metadata/migration questions. The separately
-  split implementation program `.9.1.2-.9` remains pending while the clean frontier returns to `.5.2.3`.
+  split implementation program `.9.1.2-.9` remains pending while the clean logical frontier advances to `.5.2.8`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -6433,15 +6458,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Dual-ABI Lua logical alignment `.5.2.6` is verified and closing in its exact commit; generated/primary
-  `.5.2.7` follows only after the repo is clean. Cursor/edge
-  implementation `.9.1.2-.9`, structured-format, write-vivification, and companion-book work remain pending and
-  are not implicitly activated.
+- None. Generated/primary logical projection `.5.2.7` is verified and closing in its exact commit; recurring gate
+  `.5.2.8` follows only after that clean boundary. Cursor/edge implementation `.9.1.2-.9`, structured-format,
+  write-vivification, and companion-book work remain pending and are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.7` | Every available generated role: Perl `Execute`/`ExecuteWithTrace`/`Get`; Rust typed-v1 and compatibility direct/traced plus standalone emitted execute/parse pairs; Dart/Julia/Lua generated-plan and independently emitted direct/traced roles. Focused Perl 8, Rust 4, Dart 24, Julia 232, PUC Lua/LuaJIT 359; complete Rust/Dart/Julia/Lua gates; exact primary 5x2x63; logical 6/2 plus 15 mutations; diagnostic 8/0 plus 20 mutations; generated-source/capability 80/0/0; coverage 246/105+1/122; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 63x2 and Phase 0 `1..1031`/618s. | PASS. Values, eager effects, exact pre-effect failures, source metadata, and direct/trace identity agree through all real generated shapes; Rust retains its intentional typed-value versus compatibility-output distinction; one shared primary case passes everywhere; only `generated_and_primary_cli` advances and recurring `.5.2.8` follows. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.6` | Identical 51/238 PUC Lua/LuaJIT baselines; repaired 238/238 unchanged consumer over all 17 typed rows, values/effects/receiver/lazy controls/four pre-effect arities, native/reconstructed/generated-plan/loaded-emitted/primary roles, and inert contextual blocks; authoritative dual-ABI diagnostic 119/logical 238/full 177, CLI 62x2, corpus 105/105; neutral 5/3 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 62x2 and Phase 0 `1..1031`/609s. | PASS. One typed Lua helper/control truth seam, pre-effect arity, eager valid values, exact optional fields, registry precedence, and generated routing align both ABIs; only `lua_native` advances and generated/primary `.5.2.7` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.5` | Exact 177-assertion Julia consumer over 17 typed truth rows, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; full 1,671-assertion package, primary process, CLI 62x2, corpus 105/105; neutral 4/4 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`/607s, and the optional complete Julia gate. | PASS. Existing typed truth/eager evaluation stay intact, built-in logical arity now rejects before effects with exact structured fields, only `julia_native` advances, and dual-ABI Lua `.5.2.6` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.4` | Exact 24/24 Dart consumer over typed truth, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; format/analyze, all 245 tests, CLI 62x2, corpus 105/105; neutral 3/5 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`, and the optional complete Dart gate. | PASS. One typed helper/control truth seam, eager logical values, pre-effect arity, and exact structured fields align Dart; only `dart_native` advances and Julia `.5.2.5` follows. |
@@ -6603,6 +6628,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.2.7` | `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection` | Every real direct/traced generated role, exact source/failure/value preservation, shared primary 5x2x63, 6/2 rollout, and recurring-gate handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.6` | `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers` | Shared typed truth seam, pre-effect arity, exact optional fields, dual-ABI native/reconstructed/generated-plan/loaded-emitted/primary consumer, 5/3 rollout, and generated/primary handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.5` | `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers` | Existing typed truth/eager semantics, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 4/4 rollout, and Lua handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.4` | `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers` | Shared typed truth seam, eager once-only values, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 3/5 rollout, and Julia handoff. |
@@ -6764,6 +6790,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.5.2.7` expands the unchanged logical consumer across every available generated direct/traced
+  role: Perl emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust typed-v1 and compatibility pairs plus standalone
+  emitted execute/parse pairs; Dart, Julia, and Lua generated-plan plus independently emitted pairs. Exact values,
+  eager effects, pre-effect arity diagnostics, source attribution, and direct/trace identity pass. Rust retains
+  its established typed direct-value versus compatibility parse-output array. Shared case
+  `success_logical_helpers_eager` expands the primary manifest to 63 and passes all five commands under default
+  and POSIX environments. Complete backend gates, 6/2 neutral checker, 80/0/0 support ledgers, KM/governance/book,
+  and canonical CLI 63x2 plus Phase 0 `1..1031`/618s pass. No runtime implementation changed; recurring `.5.2.8`
+  follows after the clean commit.
 - `2026-07-17`: `.5.2.6` aligns Lua's `runtime_truthy` helper/control seam with ADR `0043`, validates one-plus
   `and`/`or` and exact-one `not` before effects, retains eager once-left-to-right valid operands and registry-first
   functions, and adds exact logical-only optional diagnostic fields. The unchanged consumer moves from identical

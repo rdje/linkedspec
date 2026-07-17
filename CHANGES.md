@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.7 — propagate logical generated and primary projection
+
+Expanded the unchanged `linkedspec-logical-helper-v1` consumers across every generated execution role each
+backend actually exposes. Perl now proves standalone-emitted `Execute`, `ExecuteWithTrace`, and `Get`; Rust proves
+typed-v1 and legacy compatibility direct/traced pairs; Dart, Julia, and Lua prove generated-plan and independently
+emitted direct/traced roles. All retain exact booleans, eager once-left-to-right effects, typed pre-effect arity
+failures, generated source identity, rule/family attribution where exposed, and ordinary result/trace identity.
+
+Rust's compatibility pair intentionally preserves its historical parse-output array while typed v1 returns the
+direct top-rule value; this is the same signature split already locked by diagnostic generated projection. No
+runtime implementation changed. Shared manifest case `success_logical_helpers_eager` uses the portable action-
+edge form and returns one exact canonical object through all five primary commands under default and POSIX option
+environments. The manifest is now 63 cases and only `generated_and_primary_cli` advances, leaving rollout at 6
+complete / 2 pending before recurring `.5.2.8` and public `.5.2.9`.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.6 — align Lua logical helpers and truthiness
 
 Aligned PUC Lua and LuaJIT with ADR `0043` and `linkedspec-logical-helper-v1`. `runtime_truthy` now makes only
