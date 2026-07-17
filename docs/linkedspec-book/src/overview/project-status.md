@@ -158,7 +158,9 @@ Three backbone items tracked major structural modernization — all done:
   pre-effect logical arity, native structured fields, and native/serialized/generated-plan/direct/compiled-
   emitted roles. Dart `.5.2.4` now removes helper short-circuit and empty-call drift through one typed
   helper/control seam, pre-effect arity, eager values, logical-only structured fields, and native/normalized/
-  generated-plan/standalone-emitted/primary proof. Rollout is 3 complete / 5 pending under `.5.2.5-.9`.
+  generated-plan/standalone-emitted/primary proof. Julia `.5.2.5` preserves its typed eager truth seam and adds
+  exact arity plus native/normalized/generated-plan/standalone-emitted/primary proof. Rollout is 4 complete / 4
+  pending under `.5.2.6-.9`.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

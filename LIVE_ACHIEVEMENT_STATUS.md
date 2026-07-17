@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.5 — align Julia logical helpers and truthiness**
+  (DONE — Julia native/normalized/generated-plan/standalone-emitted/CLI behavior conforms at 4 complete / 4
+  pending; dual-ABI Lua `.5.2.6` follows after the clean commit).
+
+  **Result:** Julia retains `_runtime_truthy` as its single typed helper/control truth seam and its existing eager
+  once-only left-to-right composition. Direct helper dispatch now rejects empty `and`/`or`, empty `not`, and
+  multi-argument `not` before operand effects. Logical failures alone add exact `code`, `helper_name`,
+  `actual_arity`, and `expected_arity` fields to the shared diagnostic; unrelated projections stay unchanged.
+
+  **Proof:** The unchanged neutral consumer passes 177 assertions across all 17 typed rows, values, ordered
+  effects, receiver continuation, lazy controls, four invalid calls, native/normalized/generated-plan/primary,
+  and independently compiled emitted modules. Full package tests pass 1,671 assertions; the primary process suite
+  and shared CLI 62x2 pass; the corpus passes 105/105; the checker reports 4/4 and rejects 15 mutations. Canonical
+  local CI passes reference CLI 62x2, Phase 0 `1..1031` in 607 seconds, and the optional complete Julia gate.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.4 — align Dart logical helpers and truthiness**
   (DONE — Dart native/normalized/generated-plan/standalone-emitted/CLI behavior conforms at 3 complete / 5
   pending; Julia `.5.2.5` is next after the clean commit).

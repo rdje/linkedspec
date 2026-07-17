@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.5 — align Julia logical helpers and truthiness
+
+Aligned Julia with ADR `0043` and `linkedspec-logical-helper-v1` without replacing its already-correct typed
+truth or eager evaluation. `_runtime_truthy` remains the one helper/control truth seam: only null, false, numeric
+zero, empty strings, and empty arrays/harrays are false. Valid logical calls still evaluate every operand once
+left-to-right before returning a real boolean.
+
+Added a direct-call arity guard after user-function resolution and before helper operand evaluation. Empty
+`and`/`or`, empty `not`, and multi-argument `not` now produce `helper_arity_mismatch` with exact `code`,
+`helper_name`, `actual_arity`, and `expected_arity` fields. These additions are optional on `RuntimeDiagnostic`, so
+unrelated diagnostic JSON, source attribution, generated framing, trace, and primary failure text remain stable.
+
+The exact neutral consumer proves all 17 typed truth rows, including an inert parsed `ActionBlock`, plus valid
+values, eager effect order, receiver continuation, lazy controls, and four invalid calls. Native, normalized/
+reconstructed, generated-plan, primary CLI, and independently compiled emitted modules pass. The focused consumer
+passes 177 assertions; the full package passes 1,671 assertions; the process CLI suite passes; the complete corpus
+passes 105/105. The checker reports 4 complete / 4 pending and rejects 15 mutations. Only `julia_native` advances;
+dual-ABI Lua `.5.2.6` is next. Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031` in 607 seconds, and
+the optional complete Julia gate.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.4 — align Dart logical helpers and truthiness
 
 Aligned Dart with ADR `0043` and `linkedspec-logical-helper-v1`. `runtimeLogicalTruth` now explicitly owns the

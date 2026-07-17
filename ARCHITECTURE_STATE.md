@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Julia logical rollout `FUTURE-PARITY-BACKLOG.5.2.5` preserves the existing
+  `_runtime_truthy` seam shared by eager logical values and lazy controls. Direct call dispatch resolves user
+  functions first, then validates one-plus `and`/`or` and exact-one `not` before evaluating any operand; valid
+  pure-helper operands retain eager once-only left-to-right collection and boolean composition. Four optional
+  `RuntimeDiagnostic` fields expose the neutral code/name/actual/expected schema without changing unrelated JSON.
+  The exact 177-assertion consumer covers all 17 typed rows, native/normalized/generated-plan/compiled-emitted/
+  primary values and effects, receiver and lazy-control behavior, and four inert invalid calls. Full package,
+  process CLI, shared CLI 62x2, and 105/105 corpus proof pass. Canonical local CI also passes reference CLI 62x2,
+  Phase 0 `1..1031`/607s, and the optional complete Julia gate. The ledger is 4/4; dual-ABI Lua `.5.2.6` is next.
 - `2026-07-17` refresh: Dart logical rollout `FUTURE-PARITY-BACKLOG.5.2.4` makes
   `runtimeLogicalTruth` the one typed truth boundary for eager helpers and lazy controls. `ActionCallExpr` arity
   rejects empty `and`/`or`, empty `not`, multi-argument `not`, and non-positional calls before operand evaluation;

@@ -11,6 +11,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
+include("logical_helper_contract_test.jl")
 include("variadic_user_function_contract_test.jl")
 include("uniform_binding_contract_test.jl")
 include("punctuation_light_zero_arg_contract_test.jl")
@@ -2323,11 +2324,8 @@ Top::
      "empty_array", is_empty(array()),
      "nonempty_hash", is_nonempty(hash("k", "v")),
      "and", and(true, 1, "x"),
-     "and_empty", and(),
      "or", or(0, "yes"),
-     "or_empty", or(),
      "not", not(0),
-     "not_empty", not(),
      "eager_or", eager_or,
      "eager", eager,
      "unicode_length", length("🙂a"),
@@ -2362,11 +2360,8 @@ Top::
         "empty_array" => true,
         "nonempty_hash" => true,
         "and" => true,
-        "and_empty" => false,
         "or" => true,
-        "or_empty" => false,
         "not" => true,
-        "not_empty" => true,
         "eager_or" => true,
         "eager" => "after",
         "unicode_length" => 2,

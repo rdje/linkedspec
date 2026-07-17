@@ -1,43 +1,52 @@
 ---
 id: julia-logical-helper-execution
-title: Julia logical and/or/not helpers are eager boolean composition values
+title: Julia consumes the typed eager logical-helper contract through one truth seam
 answers:
   - does Julia support and or not helpers
-  - are LinkedSpec logical helpers short circuit
-  - are and or not eager or lazy in LinkedSpec
-  - what are empty and or not results
+  - are Julia LinkedSpec logical helpers short circuit
+  - what arity do Julia and or not accept
+  - do Julia logical arity failures run operands
+  - what is Julia LinkedSpec truthiness
+  - are Julia empty arrays and hashes truthful
+  - do generated Julia logical helpers match native execution
+  - which Julia test consumes the neutral logical helper contract
+  - what does FUTURE-PARITY-BACKLOG.5.2.5 prove
   - which Julia portmap fixtures pass after logical helpers
-  - why does Julia portmap_constant still fail after logical helpers
-  - what does JULIA-BACKEND-PARITY.6.2.4.2.1 prove
-date: 2026-07-10
+  - why did Julia portmap_constant fail after its first logical implementation
+date: 2026-07-17
 status: current
-tags: [julia, runtime, logical, truthiness, corpus, regex-flags, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.4.2.1 adds and/or/not to Julia's eager pure-helper dispatcher through _runtime_truthy. Existing runtime coverage locks truthiness, empty false/false/true arities, and eager assignment side effects; six corpus assertions lock four passes plus one routed residual. Full Pkg.test() passes with 772 assertions. Direct compiled-regex capture and traced corpus probes prove portmap_constant's residual is helper Regex flag `o`, not logical evaluation."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+tags: [julia, runtime, logical, truthiness, arity, generated-source, primary-cli, corpus, FUTURE-PARITY-BACKLOG]
+evidence: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's _runtime_truthy helper/control seam and eager once-only left-to-right pure-helper evaluation, then adds direct pre-effect arity for one-plus and/or and exact-one not. The exact 177-assertion neutral consumer covers 17 typed truth rows, values, effects, receiver/lazy controls, four invalid calls, native, normalized, generated-plan, primary, and independently compiled emitted modules. Full package proof passes 1,671 assertions, primary and shared CLI conformance, and corpus 105/105; canonical local CI passes Phase 0 1..1031/607s plus the optional complete Julia gate, and the ledger is 4 complete / 4 pending."
+evidence_prior_2026_07_10: "JULIA-BACKEND-PARITY.6.2.4.2.1 first added eager and/or/not through _runtime_truthy with legacy empty false/false/true results. Four portmap/tablegrep fixtures passed; the remaining portmap_constant failure was separately root-caused to unsupported Regex flag o and later repaired."
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no julia/test/logical_helper_contract_test.jl && LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh && python3 tools/check_logical_helper_contract.py"
 ---
 
-Julia executes logical `and`, `or`, and `not` as normal eager value helpers, matching the Rust and Lua evaluation
-shape but not current Perl condition lowering or Dart. Every argument is evaluated first, then Julia's established
-runtime truthiness is applied:
+Julia executes `and`, `or`, and `not` as ordinary eager boolean value helpers. `_runtime_truthy` is the single
+typed policy used by those helpers and by lazy conditions:
 
-- `nothing`, false, zero, empty strings, empty arrays, and empty hashes are false.
-- Other values are true.
-- Empty `and()`, `or()`, and `not()` return false, false, and true, matching Rust.
+- `nothing`, false, numeric zero, empty strings, empty arrays, and empty hashes are false;
+- nonzero numbers, every nonempty string, and nonempty aggregates are true;
+- an inert typed codeblock is true without invocation.
 
-These helpers do not short-circuit side effects. Use structured or inline `if`/`switch` for lazy branch selection.
-Focused coverage locks eager scalar assignment in an `or(true, ...)` argument.
+The codeblock row is proven with a parsed `ActionBlock` at the runtime boundary. It does not activate the explicit
+callable-codeblock literal syntax owned by `FUTURE-PARITY-BACKLOG.11`.
 
-`portmap_bare`, `portmap_bit`, `portmap_concatenation`, and `tablegrep_simple_term` now pass. `portmap_constant`
-no longer fails on unsupported `or`, but returns `?bare:` instead of `?constant:`. A direct compiled-rule probe
-shows the compacted capture is correctly `["0x1f"]`; a runtime trace shows the expected `bare_bit_slice` action
-executes. The residual comes from `matches(entry_group(0), /^\d/io)`: Julia passes `io` directly to `Regex`, where
-Perl's compile-once `o` flag is invalid, so the predicate returns false. `.6.2.4.2.3` has since closed that exact
-bridge and `portmap_constant` passes.
+Direct call dispatch preserves static precedence by resolving registered user functions first. For built-in
+logical calls it then validates one-plus positional `and`/`or` and exact-one positional `not` before evaluating
+any operand. Invalid calls throw `helper_arity_mismatch` with optional structured `code`, `helper_name`,
+`actual_arity`, and `expected_arity` fields. Valid operands retain the existing eager once-only left-to-right
+collection and real boolean composition. `if`, `switch`, and `while` share truthiness but remain branch/body-lazy.
 
-The full shipped-smoke window is 17/31, full tests pass with 772 assertions, and status is
-`runtime-corpus-logical-helpers` at that boundary. Helper regex flag normalization has since moved the window to
-18/31 with status `runtime-corpus-helper-regex-flags`.
+`julia/test/logical_helper_contract_test.jl` consumes the unchanged neutral JSON across native compiled,
+emitted-payload reconstruction, generated-plan, primary, and independently compiled emitted-module roles.
+Unrelated diagnostics, generated source attribution, trace, and primary failure text remain unchanged. Canonical
+local CI passes reference CLI 62x2, Phase 0 `1..1031` in 607 seconds, and the optional complete Julia gate. The
+neutral ledger is 4 complete / 4 pending; dual-ABI Lua is next under `.5.2.6`.
 
-Related facts: [[julia-helper-regex-flag-normalization]], [[julia-shipped-corpus-smoke-split]], [[julia-anonymous-capture-boundary-helpers]],
-[[dart-helper-action-surface-bridge]], [[logical-helper-five-backend-audit]], [[rust-capture-group-helper-indexing]],
-[[rust-perl-output-oracle]].
+The earlier Julia-local logical slice also closed `portmap_bare`, `portmap_bit`, `portmap_concatenation`, and
+`tablegrep_simple_term`. Its `portmap_constant` residual was not logical evaluation: direct compiled capture and
+trace probes isolated Perl's compile-once Regex flag `o`, which a later dedicated bridge normalized.
+
+Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
+[[cross-backend-condition-truthiness-drift]], [[julia-generated-source-scaffold]],
+[[julia-helper-regex-flag-normalization]].

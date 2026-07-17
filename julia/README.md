@@ -10,7 +10,8 @@ rule/function execution with direct canonical JSON, stable failure/trace routing
 conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
 parity closeout remain open. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
 identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
-status remains a Julia-local milestone, not a complete backend-parity claim.
+status remains a Julia-local milestone, not a complete backend-parity claim. Julia also consumes the native leg
+of `linkedspec-logical-helper-v1`; Lua and cross-backend admission remain separately pending.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -79,6 +80,34 @@ subcommands. The separate corpus runner validates
 `manifest.json`, fixture directory drift, required `input.spec` / `input.txt` /
 `expected.json` files, and expected JSON syntax. Bare `--execute` runs all 105 fixtures; selectors narrow a run
 without bypassing complete manifest validation.
+
+## Native Logical Helpers
+
+`and`, `or`, and `not` are eager boolean value helpers. `and` and `or` require at least one positional argument;
+`not` requires exactly one. Invalid calls fail before evaluating any operand with `helper_arity_mismatch` and
+structured `code`, `helper_name`, `actual_arity`, and `expected_arity` fields. Valid operands evaluate exactly once
+from left to right, so use `if`, `switch`, or `while` when later side effects must be skipped.
+
+Logical helpers and lazy controls share one typed truth policy: `nothing`, false, numeric zero, the empty string,
+and empty vectors/dictionaries are false; nonzero numbers, every nonempty string (including `"0"` and `"false"`),
+and nonempty aggregates are true. A typed codeblock value is true without invocation; this runtime rule does not
+activate the separately future explicit callable-literal syntax.
+
+```text
+Top::
+ /x/
+ E {
+   seen = []
+   eager = or(true, { push(seen, "still-runs"); return(false) })
+   lazy = if(false, { push(seen, "skipped"); return(true) }, { return(false) })
+   return(hash("eager", eager, "lazy", lazy, "seen", copy(seen)))
+ }
+```
+
+The result is `{"eager":true,"lazy":false,"seen":["still-runs"]}`. Native, reconstructed, generated-plan,
+emitted-module, and primary-command paths share these semantics. The primary command keeps its stable generic
+`linkedspec: parser invocation failed` process projection for invalid calls; native callers can inspect
+`to_json(error.diagnostic)` for the structured fields.
 
 Under managed harnesses where the default Julia depot is not writable, prefix commands with a writable depot:
 

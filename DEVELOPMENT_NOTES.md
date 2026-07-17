@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.5` — preserve the evaluator; validate at its typed call boundary):
+  Julia already had both selected semantics: `_runtime_truthy` encoded nonempty-string/empty-aggregate truth for
+  helpers and controls, and pure-helper arguments were collected eagerly once left-to-right. The repair therefore
+  belongs before that collection, not inside boolean composition. Resolve registered user functions first so
+  static callable precedence is unchanged; then reject invalid built-in logical arity while the original
+  `ActionCallExpr` is still inert.
+
+  Optional structured fields keep the general runtime diagnostic stable while generated execution can continue
+  carrying deterministic causal tokens through its existing textual detail. An inert parsed `ActionBlock` proves
+  the codeblock value-kind row without invoking it or activating explicit callable literals. Reconstructing the
+  emitter payload proves normalized state; loading emitted modules in a fresh caller-owned Julia process proves
+  the generated artifact itself. The baseline is as important as the pass: all valid projections and truth rows
+  were already green, while empty calls returned legacy booleans and multi-argument `not` ran the forbidden first
+  operand. The narrow guard changes exactly that measured boundary.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.4` — validate call shape, then evaluate values, then compose):
   Dart's truth table was already correct; the drift lived in evaluation control and arity. Validate the original
   `ActionCallExpr` while argument kinds and counts are still visible, before any `ActionExpr` is evaluated. After

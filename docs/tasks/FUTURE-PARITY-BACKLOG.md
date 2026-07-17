@@ -2939,13 +2939,37 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Align Julia logical arity and truthiness with the neutral contract.
   Dependencies: `.5.2.1`
   Acceptance: Preserve Julia's eager once-only composition while normalizing exact arity and the disputed scalar/
     aggregate truthiness rows across native, reconstructed, emitted, generated, CLI, and lazy-control paths.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0043`, logical neutral/audit/Julia/Dart Knowledge Map cards, unchanged
+    JSON/checker, and Julia parser/compiler/runtime/generated/diagnostic owners; run focused native/generated/
+    primary probes before editing behavior.
+  - [x] **UNCHANGED NEUTRAL CONSUMER** — Add or extend one Julia consumer of the exact neutral truth/value/effect/
+    receiver/control/arity fixtures. Cover every Julia-representable typed row and explicitly classify any syntax
+    or runtime kind the current model cannot construct.
+  - [x] **ONE JULIA TRUTH SEAM** — Route logical helpers and lazy controls through one explicit typed truth function,
+    preserving numeric-zero, nonempty-string, empty-aggregate, null, boolean, and inert-codeblock policy without
+    host conversion or rendering shortcuts.
+  - [x] **ARITY BEFORE EFFECTS / EAGER VALUES** — Enforce one-plus positional `and`/`or` and exact-one positional
+    `not` before any operand evaluation; retain valid once-only left-to-right evaluation and real booleans.
+  - [x] **ALL JULIA PROJECTIONS** — Lock native compiled, normalized/reconstructed, generated-plan/emitted,
+    receiver, lazy-control, structured-diagnostic, and primary roles from the unchanged fixture. Preserve existing
+    unrelated diagnostic shapes, trace behavior, and source attribution.
+  - [x] **NO REGRESSION / LOCKSTEP** — Promote only `julia_native`; keep Lua/generated/gate/public legs pending,
+    run focused and complete Julia/corpus/CLI/contract/governance gates, synchronize docs/KM/task/memory, and commit
+    cleanly before Lua `.5.2.6` becomes active. Do not run an implementation mutation campaign.
+  Verification: Baseline target consumer passed all typed truth and valid value/effect/control projections while
+    empty helpers returned false/false/true and `not_many` executed its forbidden first operand. After repair, the
+    unchanged consumer passes 177 assertions across native/normalized/generated-plan/primary and independently
+    compiled emitted roles. Full package 1,671, primary process, shared CLI 62x2, corpus 105/105, neutral 4/4 with
+    15 mutations, Knowledge Map, mdBook, memory, task metadata, doctrines, and whitespace pass. Canonical local CI
+    passes reference CLI 62x2, Phase 0 `1..1031` in 607 seconds, and the optional complete Julia gate including
+    177/177 logical assertions, primary process conformance, and corpus 105/105.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.6`
   Status: `pending`
@@ -5465,12 +5489,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
-backend-neutral policy `.5.2.1`, Perl typed-AST/runtime rollout `.5.2.2`, and Rust typed-runtime rollout `.5.2.3`
-are complete at 2/6 rollout. Dart native logical alignment `.5.2.4` is next. The
+backend-neutral policy `.5.2.1` plus Perl `.5.2.2`, Rust `.5.2.3`, Dart `.5.2.4`, and Julia `.5.2.5` native
+rollouts are complete at 4/4. Dual-ABI Lua logical alignment `.5.2.6` is next. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the pending `.9.1.2-.9` rollout. The logical-helper parent remains the selected
-program, with Dart `.5.2.4` next after the clean Rust commit and before that separately split cursor implementation
+program, with Lua `.5.2.6` next after the clean Julia commit and before that separately split cursor implementation
 program.
 
 | Order | Leaf | Status | Why next |
@@ -6383,7 +6407,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Rust logical native alignment `.5.2.3` resumes after the clean `.9.1.1.1` decision commit. Cursor/edge
+- None. Dual-ABI Lua logical alignment `.5.2.6` activates after the clean Julia `.5.2.5` commit. Cursor/edge
   implementation `.9.1.2-.9`, structured-format, write-vivification, and companion-book work remain pending and
   are not implicitly activated.
 
@@ -6391,6 +6415,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.5` | Exact 177-assertion Julia consumer over 17 typed truth rows, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; full 1,671-assertion package, primary process, CLI 62x2, corpus 105/105; neutral 4/4 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`/607s, and the optional complete Julia gate. | PASS. Existing typed truth/eager evaluation stay intact, built-in logical arity now rejects before effects with exact structured fields, only `julia_native` advances, and dual-ABI Lua `.5.2.6` is next. |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.4` | Exact 24/24 Dart consumer over typed truth, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; format/analyze, all 245 tests, CLI 62x2, corpus 105/105; neutral 3/5 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`, and the optional complete Dart gate. | PASS. One typed helper/control truth seam, eager logical values, pre-effect arity, and exact structured fields align Dart; only `dart_native` advances and Julia `.5.2.5` follows. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.3` | Neutral Rust consumer over representable truth rows, exact values/effects/receiver/lazy controls/four arity failures; native/serialized/direct/generated-plan/compiled-emitted roles; complete 188-core/137-runtime/105-oracle/105-generated/197-integration and all focused Rust suites; Rust primary 62x2; neutral 2/6 checker plus 15 mutations; KM/memory/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2 and Phase 0 `1..1031`/649s. | PASS. One typed Rust truth seam and pre-effect logical arity now match ADR `0043`; only `rust_native` advances, explicit codeblock syntax stays `.11`-owned, and Dart `.5.2.4` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.1.1` | Full startup roadmap/codebase/mdBook review; cursor/edge KM and exact five-backend owner seams; ADR `0044`; eight-leaf implementation split; task/roadmap/live/guide/mdBook/KM lockstep; Knowledge Map generation/check; memory architecture; task metadata; doctrines; mdBook; whitespace. | PASS. Exact rule-local cursor, mode-sensitive bare-edge, explicit/index/group/fluent, migration, descriptor, generated-v2, diagnostic, and conformance target is durable; no behavior changes and Rust logical `.5.2.3` resumes. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.1.0` | Director decision; existing `.9.1.0` audit; task/roadmap/live/mdBook/guide/KM/memory lockstep; Knowledge Map generation/check; memory architecture; task metadata; doctrines; mdBook; whitespace. | PASS. Parent modes never propagate to or override child modes across nested rule entry; exact ratification remains `.9.1.1.1`, no behavior changed, and the repo is fresh-session ready. |
@@ -6549,6 +6575,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.2.5` | `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers` | Existing typed truth/eager semantics, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 4/4 rollout, and Lua handoff. |
+| `FUTURE-PARITY-BACKLOG.5.2.4` | `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers` | Shared typed truth seam, eager once-only values, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 3/5 rollout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.3` | `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers` | Shared typed truth seam, pre-effect arity, exact structured fields, native/serialized/generated-plan/compiled-emitted consumer, 2/6 rollout, and Dart handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `FUTURE-PARITY-BACKLOG.9.1.1.1 - ratify rule-local cursor and bare edges` | ADR `0044`, exact metadata/migration/conformance contract, pending `.9.1.2-.9` rollout, and Rust logical handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `FUTURE-PARITY-BACKLOG.9.1.1.0 - capture rule-local cursor ownership` | Director confirms parent modes never override child modes; exact ratification remains `.9.1.1.1`; no behavior code. |
@@ -6707,6 +6735,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.5.2.5` preserves Julia's existing `_runtime_truthy` helper/control seam and eager once-only
+  left-to-right logical evaluation, while direct built-in call dispatch now rejects invalid arity before operand
+  effects with exact optional structured fields. The unchanged consumer passes 177 assertions across native,
+  normalized, generated-plan, primary, and compiled-emitted roles; the full package passes 1,671 assertions, CLI
+  62x2, corpus 105/105, and the 4/4 neutral checker with 15 mutations. Canonical local CI passes reference CLI
+  62x2, Phase 0 `1..1031`/607s, and the optional complete Julia gate. Only `julia_native` advances; Lua `.5.2.6`
+  is next.
+- `2026-07-17`: `.5.2.4` aligns Dart logical helpers through one typed helper/control truth seam, eager once-only
+  value evaluation, pre-effect arity, and exact optional structured fields. The unchanged consumer passes all 24
+  cases across native, normalized, generated-plan, primary, and compiled-emitted roles; format/analyze, all 245
+  tests, CLI 62x2, corpus 105/105, and the 3/5 neutral checker with 15 mutations pass. Only `dart_native`
+  advances; Julia `.5.2.5` follows.
 - `2026-07-17`: `.5.2.3` aligns Rust logical values and lazy conditions through one typed
   `RuntimeValue::as_bool` seam. One-plus `and`/`or` and exact-one `not` reject before operand effects; valid calls
   remain eager once-left-to-right booleans; native diagnostics expose the exact four neutral arity fields. Native,

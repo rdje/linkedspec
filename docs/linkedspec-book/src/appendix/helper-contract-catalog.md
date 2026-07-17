@@ -1261,8 +1261,9 @@ table because its runtime behavior is to terminate the parser process.
 - **Current portability status**: ADR `0043` and `linkedspec-logical-helper-v1` are adopted. Perl native/live/
   standalone-emitted execution conforms under `FUTURE-PARITY-BACKLOG.5.2.2`; Rust native, serialized,
   generated-plan, direct-value, and compiled emitted execution conforms under `.5.2.3`; Dart native, normalized,
-  generated-plan, standalone-emitted, and primary execution conforms under `.5.2.4`. Five backend/projection/
-  admission legs remain pending under `.5.2.5-.9`. Do not treat the target as cross-backend behavior yet.
+  generated-plan, standalone-emitted, and primary execution conforms under `.5.2.4`; Julia native, normalized,
+  generated-plan, independently compiled emitted, and primary execution conforms under `.5.2.5`. Four backend/
+  projection/admission legs remain pending under `.5.2.6-.9`. Do not treat the target as cross-backend behavior yet.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
@@ -1272,8 +1273,8 @@ table because its runtime behavior is to terminate the parser process.
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
   fluent `.return(...)` value positions. Perl, Rust, and Dart now consume ADR `0043` through one helper/condition
-  truth seam. Julia already shares its nonempty-string/empty-aggregate truth rows but retains helper arity drift;
-  Lua still makes scalar `"0"` false and empty aggregates true. `FUTURE-PARITY-BACKLOG.5.2.5-.9` own the remaining
+  truth seam, and Julia now does the same while retaining its existing `_runtime_truthy` owner. Lua still makes
+  scalar `"0"` false and empty aggregates true. `FUTURE-PARITY-BACKLOG.5.2.6-.9` own the remaining
   backend/projection/admission rollout.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`

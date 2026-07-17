@@ -20,6 +20,7 @@ evidence_update_2026_07_16_logical_audit: "FUTURE-PARITY-BACKLOG.5.2.0 establish
 evidence_update_2026_07_16_perl_logical: "FUTURE-PARITY-BACKLOG.5.2.2 moves Perl conditions and logical values to LinkedSpec::RuntimeLogical. Perl now follows ADR 0043: string \"0\" and \"false\" are true, empty aggregates are false, numeric zero is false, and controls stay lazy over the same seam. Rust/Dart/Julia/Lua remain pending, so cross-backend drift persists at 1/7 rollout."
 evidence_update_2026_07_17_rust_logical: "FUTURE-PARITY-BACKLOG.5.2.3 moves Rust conditions and logical values to the exact ADR 0043 policy through RuntimeValue::as_bool. String \"0\" and \"false\" are true, empty aggregates and numeric zero are false, empty logical calls diagnose before effects, and controls remain lazy over the same seam. Dart/Julia/Lua plus projection/gate/public legs remain pending at 2/6 rollout."
 evidence_update_2026_07_17_dart_logical: "FUTURE-PARITY-BACKLOG.5.2.4 makes runtimeLogicalTruth the exact Dart helper/control boundary. Dart retains its already-correct nonempty-string/empty-aggregate rows, makes helpers eager, rejects empty and extra logical arities before effects, and proves native plus generated/emitted/primary roles. Julia/Lua plus projection/gate/public legs remain pending at 3/5 rollout."
+evidence_update_2026_07_17_julia_logical: "FUTURE-PARITY-BACKLOG.5.2.5 retains Julia's already-correct _runtime_truthy rows and eager helper evaluation while adding exact arity before effects. Native, normalized, generated-plan, emitted, and primary roles agree. Lua plus projection/gate/public legs remain pending at 4/4 rollout."
 reverify: "prove -Iperl t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && dart test test/logical_helper_contract_test.dart) && rg -n 'as_bool|runtimeLogicalTruth|function _runtime_truthy|local function runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
 ---
 
@@ -32,17 +33,18 @@ The public language does not yet have one enforced five-backend condition truth 
 | empty array/harray | false | false | false | false | true |
 
 Null, boolean false, numeric zero, and the empty string are false on all five implementations; nonempty ordinary
-values are true. Perl, Rust, and Dart now consume the ADR `0043` target, while Julia already matches its
-representable truth rows and Lua retains the pre-normalization scalar-`"0"`/empty-aggregate profile.
-`FUTURE-PARITY-BACKLOG.5.2.5-.6` own the remaining backend rollout across lazy controls plus eager
-`and`/`or`/`not` helpers. Until the parent and its public no-drift leaf close, portable `.spec` files should use
+values are true. Perl, Rust, Dart, and Julia now consume the ADR `0043` target, while Lua retains the
+pre-normalization scalar-`"0"`/empty-aggregate profile. `FUTURE-PARITY-BACKLOG.5.2.6` owns the remaining backend
+rollout across lazy controls plus eager `and`/`or`/`not` helpers. Until the parent and its public no-drift leaf close,
+portable `.spec` files should use
 explicit emptiness, definedness, numeric, or string predicates at the disputed boundaries.
 
 The `.5.2.0` audit also found a reference-lowering defect independent of truthiness selection: direct logical
 values were raw Perl keyword calls, conditions used host `&&`/`||`, and optional-scope stripping could reinterpret
 `not(false, true)`. Perl `.5.2.2` repairs that path with typed ActionIR, pre-effect arity, eager operands, booleans,
-and one condition/helper truth seam. Rust `.5.2.3` and Dart `.5.2.4` apply the same policy through their typed
-runtime seams. The remaining table difference and helper evaluation/arity differences are owned by `.5.2.5-.6`.
+and one condition/helper truth seam. Rust `.5.2.3`, Dart `.5.2.4`, and Julia `.5.2.5` apply the same policy through
+their typed runtime seams. The remaining table difference and helper evaluation/arity differences are owned by
+Lua `.5.2.6`.
 
 Related facts: [[logical-helper-five-backend-audit]], [[lua-runtime-lazy-inline-controls]],
 [[lua-logical-helper-execution]], [[julia-logical-helper-execution]],

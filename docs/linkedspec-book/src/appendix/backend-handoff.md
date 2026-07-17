@@ -872,7 +872,9 @@ now routes helpers and lazy conditions through one `RuntimeValue::as_bool` seam,
 and proves native, serialized, generated-plan, direct-value, and compiled emitted roles. Dart `.5.2.4` now routes
 helpers and lazy controls through `runtimeLogicalTruth`, rejects call shape before effects, evaluates every valid
 operand once left-to-right, and proves native, normalized, generated-plan, compiled emitted, and primary roles.
-The ledger is 3 complete / 5 pending before `.5.2.5-.9`. Explicit codeblock literals remain separately owned by
+Julia `.5.2.5` preserves its typed eager `_runtime_truthy` seam, rejects all four invalid arities before effects,
+and proves native, normalized, generated-plan, compiled emitted, and primary roles with optional exact diagnostic
+fields. The ledger is 4 complete / 4 pending before `.5.2.6-.9`. Explicit codeblock literals remain separately owned by
 `.11`; the logical contract's typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,

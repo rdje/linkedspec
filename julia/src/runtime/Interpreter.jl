@@ -9,6 +9,10 @@ struct RuntimeDiagnostic
     top_rule::Union{Nothing,String}
     rule_label::Union{Nothing,String}
     handler_source_label::Union{Nothing,String}
+    code::Union{Nothing,String}
+    helper_name::Union{Nothing,String}
+    actual_arity::Union{Nothing,Int}
+    expected_arity::Union{Nothing,String}
 end
 
 function RuntimeDiagnostic(;
@@ -22,6 +26,10 @@ function RuntimeDiagnostic(;
     top_rule = nothing,
     rule_label = nothing,
     handler_source_label = nothing,
+    code = nothing,
+    helper_name = nothing,
+    actual_arity = nothing,
+    expected_arity = nothing,
 )
     optional_string(value) = value === nothing ? nothing : String(value)
     return RuntimeDiagnostic(
@@ -35,6 +43,10 @@ function RuntimeDiagnostic(;
         optional_string(top_rule),
         optional_string(rule_label),
         optional_string(handler_source_label),
+        optional_string(code),
+        optional_string(helper_name),
+        actual_arity === nothing ? nothing : Int(actual_arity),
+        optional_string(expected_arity),
     )
 end
 
@@ -2151,6 +2163,16 @@ function _evaluate_runtime_call!(
         ))
     end
 
+    if helper_name in _RUNTIME_LOGICAL_HELPER_NAMES
+        _validate_runtime_logical_helper_arity!(
+            engine,
+            helper_name,
+            length(args),
+            context,
+            rule_label,
+        )
+    end
+
     if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
             engine,
             args,
@@ -3059,6 +3081,40 @@ const _RUNTIME_PURE_HELPER_NAMES = Set{String}([
     "trim",
     "uppercase",
 ])
+
+const _RUNTIME_LOGICAL_HELPER_NAMES = Set{String}(["and", "or", "not"])
+
+function _validate_runtime_logical_helper_arity!(
+    engine,
+    helper_name::String,
+    actual_arity::Int,
+    context,
+    rule_label::String,
+)
+    expected_arity = helper_name == "not" ?
+        "exactly 1 positional argument" : "at least 1 positional argument"
+    valid = helper_name == "not" ? actual_arity == 1 : actual_arity >= 1
+    valid && return nothing
+
+    detail = "helper_arity_mismatch: helper_name=$helper_name " *
+             "actual_arity=$actual_arity expected_arity=$expected_arity " *
+             "in rule $rule_label"
+    throw(RuntimeInterpreterException(
+        detail;
+        diagnostic = _runtime_context_diagnostic(
+            engine,
+            context;
+            stage = "helper_arity_mismatch",
+            summary = "Julia logical helper arity failed",
+            detail = detail,
+            rule_label = rule_label,
+            code = "helper_arity_mismatch",
+            helper_name = helper_name,
+            actual_arity = actual_arity,
+            expected_arity = expected_arity,
+        ),
+    ))
+end
 
 const _RUNTIME_ARRAY_HELPER_NAMES = Set{String}([
     "concat_arrays",
@@ -5740,6 +5796,10 @@ function _runtime_diagnostic(
     top_rule = nothing,
     rule_label = nothing,
     handler_source_label = nothing,
+    code = nothing,
+    helper_name = nothing,
+    actual_arity = nothing,
+    expected_arity = nothing,
 )
     effective_rule = rule_label === nothing ? top_rule : rule_label
     return RuntimeDiagnostic(
@@ -5755,6 +5815,10 @@ function _runtime_diagnostic(
         handler_source_label = handler_source_label === nothing ?
             (effective_rule === nothing ? "julia_runtime" : "julia_runtime:rule:$effective_rule") :
             handler_source_label,
+        code = code,
+        helper_name = helper_name,
+        actual_arity = actual_arity,
+        expected_arity = expected_arity,
     )
 end
 
@@ -5766,6 +5830,10 @@ function _runtime_context_diagnostic(
     detail,
     rule_label = nothing,
     handler_source_label = nothing,
+    code = nothing,
+    helper_name = nothing,
+    actual_arity = nothing,
+    expected_arity = nothing,
 )
     return _runtime_diagnostic(
         engine;
@@ -5775,6 +5843,10 @@ function _runtime_context_diagnostic(
         top_rule = context.top_rule,
         rule_label = rule_label,
         handler_source_label = handler_source_label,
+        code = code,
+        helper_name = helper_name,
+        actual_arity = actual_arity,
+        expected_arity = expected_arity,
     )
 end
 
@@ -5792,6 +5864,10 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "top_rule" => diagnostic.top_rule,
         "rule_label" => diagnostic.rule_label,
         "handler_source_label" => diagnostic.handler_source_label,
+        "code" => diagnostic.code,
+        "helper_name" => diagnostic.helper_name,
+        "actual_arity" => diagnostic.actual_arity,
+        "expected_arity" => diagnostic.expected_arity,
     )
     for (key, field_value) in optional_fields
         if field_value !== nothing

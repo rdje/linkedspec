@@ -10,20 +10,21 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.4` — Dart now consumes ADR `0043` through one typed
-  helper/control truth seam, pre-effect logical arity, eager booleans, exact structured fields, and native/
-  normalized/generated-plan/compiled-emitted/primary proof; rollout is 3 complete / 5 pending.
-- latest_commit: `8905e9f5` — `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers`
-  (ahead: 175; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers`.
-- active_work_unit: closing Dart logical-helper rollout `FUTURE-PARITY-BACKLOG.5.2.4`; cursor implementation
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.5` — Julia preserves its existing typed helper/control truth
+  seam and eager booleans while adding pre-effect logical arity, exact optional structured fields, and native/
+  normalized/generated-plan/compiled-emitted/primary proof; rollout is 4 complete / 4 pending.
+- latest_commit: `709104a0` — `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers`
+  (ahead: 176; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers`.
+- active_work_unit: closing Julia logical-helper rollout `FUTURE-PARITY-BACKLOG.5.2.5`; cursor implementation
   `.9.1.2-.9` is dependency-ordered but remains pending until explicitly reached after the logical program.
-- next_action: after this verified `.5.2.4` slice commits cleanly, activate Julia logical rollout
-  `FUTURE-PARITY-BACKLOG.5.2.5`; preserve pending cursor implementation `.9.1.2-.9` until logical rollout closes.
-- current_proof: Perl, Rust, and Dart consume ADR `0043` at 3 complete / 5 pending. Dart's 24-case neutral consumer,
-  all 245 tests, analyzer/format, CLI 62x2, corpus 105/105, compiled emitted package, and checker mutations are green.
-  Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031`, and optional Dart. ADR `0044` remains the exact
-  pending future cursor authority.
+- next_action: run final governance checks, commit `.5.2.5`, verify a clean handoff, then activate dual-ABI Lua
+  logical rollout `.5.2.6` with task/MEMORY ownership before behavior work.
+- current_proof: Julia's exact neutral consumer passes 177 assertions across typed truth, native/normalized/
+  generated-plan/compiled-emitted/primary values/effects/controls and four pre-effect arities. Full package proof
+  passes 1,671 assertions, the authoritative Julia gate and shared CLI 62x2 pass, corpus is 105/105, and the checker
+  is 4 complete / 4 pending with 15 mutations. Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031`
+  in 607 seconds, and the optional complete Julia gate. ADR `0044` remains the exact pending future cursor authority.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -34,5 +35,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.5.2.4` implementation/docs await their owning commit; no
-  background job remains. Mutation campaigns remain parked; ignored `rgx/subs/pgen` work remains untouched.
+- blockers: none. in_flight_uncommitted: verified Julia implementation/tests/docs and completed canonical proof
+  await final governance checks and the owning commit; no background job remains. Mutation campaigns remain parked;
+  ignored `rgx/subs/pgen` work remains untouched.
