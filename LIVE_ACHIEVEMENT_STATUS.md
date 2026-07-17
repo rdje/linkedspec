@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.3 — project Perl cursor descriptors**
+  (DONE — descriptor identity/edge projection and complete signoff pass; the clean commit is the only remaining
+  workflow step before generated-source v2 `.9.1.3.4` can activate).
+
+  **Result:** Perl descriptors identify `linkedspec-rule-local-cursor-v1`, omit root global-mode metadata, and
+  publish family-derived per-rule policy plus ordered resolved ownership/target/index/block/fluent edge facts.
+  Optional bare/explicit source provenance is observational only. Live and descriptor handlers agree, while
+  standalone generated source deliberately remains v1 for its next leaf.
+
+  **Proof:** Focused descriptor/normalization/live proof passes 383 assertions; neutral cursor checks remain
+  36/18/8/90 at 1/7 plus 27 mutations. Standalone Phase 0 passes 1,031/1,031 in 662 seconds. Canonical local CI
+  passes doctrines, capability 80/0/0, generated v1, logical/diagnostic 8/0, coverage 246/105+1/122, reference CLI
+  63/63 twice, and Phase 0 1,031/1,031 in 634 seconds.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.2 — execute Perl rule-local cursors**
   (DONE — focused, lockstep, and canonical signoff pass; clean commit is the only remaining workflow step before
   descriptor projection `.9.1.3.3` can activate).

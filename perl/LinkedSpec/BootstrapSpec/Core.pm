@@ -154,11 +154,20 @@ sub _parse_action_edge_targets {
 }
 
 sub _build_action_edge_entries {
- my ($targets, $code) = @_;
+ my ($targets, $code, $descriptor_edge) = @_;
  return undef unless ref($targets) eq 'ARRAY' && @$targets;
 
  my @entries = map {
-  ['ACODE', { relabel => $_->{label}, reidx => $_->{reidx}, code => $code }]
+  ['ACODE', {
+   relabel => $_->{label},
+   reidx => $_->{reidx},
+   code => $code,
+   descriptor_edge => {
+    %{ref($descriptor_edge) eq 'HASH' ? $descriptor_edge : {}},
+    target => $_->{label},
+    regex_index => $_->{reidx},
+   },
+  }]
  } @$targets;
 
  return @entries == 1 ? $entries[0] : \@entries
@@ -557,7 +566,16 @@ sub _build_action_code_block_rule {
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
-     return _build_action_edge_entries($targets, substr($$string, $ipos, pos($$string) - $ipos - 1))
+     return _build_action_edge_entries(
+      $targets,
+      substr($$string, $ipos, pos($$string) - $ipos - 1),
+      {
+       ownership => 'action',
+       block => 1,
+       fluent => undef,
+       source_form => 'explicit',
+      },
+     )
     } elsif ($$minfo{index} == 0) {
      _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
@@ -588,7 +606,19 @@ sub _build_method_empty_action_code_block_rule {
      }
     }
    }
-   return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>$code}]
+   return ['ACODE', {
+    relabel => $entry_label,
+    reidx => $reidx // 0,
+    code => $code,
+    descriptor_edge => {
+     ownership => 'action',
+     target => $entry_label,
+     regex_index => $reidx // 0,
+     block => defined($block) && length($block) ? 1 : 0,
+     fluent => $chain,
+     source_form => 'explicit',
+    },
+   }]
   },
  }
 }
@@ -602,7 +632,19 @@ sub _build_empty_action_code_block_rule {
    my ($info) = @_;
 
    my ($entry_label) = $$info{match} =~ /(\w+)/o;
-   return ['ACODE', {relabel=>$entry_label, reidx=>0, code=>"call($entry_label)"}]
+   return ['ACODE', {
+    relabel => $entry_label,
+    reidx => 0,
+    code => "call($entry_label)",
+    descriptor_edge => {
+     ownership => 'action',
+     target => $entry_label,
+     regex_index => 0,
+     block => 0,
+     fluent => undef,
+     source_form => 'explicit',
+    },
+   }]
   },
  }
 }
@@ -660,7 +702,18 @@ sub _build_blind_call_code_block_rule {
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
-     return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call);\n".substr($$string, $ipos, pos($$string) - $ipos - 1)}]
+     return ['BCODE', {
+      call => $call,
+      code => "\$$dispatch_state->{current_rule_label} = call($call);\n".substr($$string, $ipos, pos($$string) - $ipos - 1),
+      descriptor_edge => {
+       ownership => 'blind',
+       target => $call,
+       regex_index => undef,
+       block => 1,
+       fluent => undef,
+       source_form => 'explicit',
+      },
+     }]
     } elsif ($$minfo{index} == 0) {
      _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
@@ -691,7 +744,18 @@ sub _build_method_empty_blind_code_block_rule {
      }
     }
    }
-   return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call);\n" . $code}]
+   return ['BCODE', {
+    call => $call,
+    code => "\$$dispatch_state->{current_rule_label} = call($call);\n" . $code,
+    descriptor_edge => {
+     ownership => 'blind',
+     target => $call,
+     regex_index => undef,
+     block => defined($block) && length($block) ? 1 : 0,
+     fluent => $chain,
+     source_form => 'explicit',
+    },
+   }]
   },
  }
 }
@@ -720,7 +784,18 @@ sub _build_empty_blind_code_block_rule {
    my ($info, undef, undef, $dispatch_state) = @_;
 
    my ($call) = $$info{match} =~ /(\w+)/o;
-   return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call)"}]
+   return ['BCODE', {
+    call => $call,
+    code => "\$$dispatch_state->{current_rule_label} = call($call)",
+    descriptor_edge => {
+     ownership => 'blind',
+     target => $call,
+     regex_index => undef,
+     block => 0,
+     fluent => undef,
+     source_form => 'explicit',
+    },
+   }]
   },
  }
 }

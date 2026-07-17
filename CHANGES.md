@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.3 — project Perl cursor descriptor v1
+
+Perl outward descriptors now identify `linkedspec-rule-local-cursor-v1`, omit descriptor-wide `meta.parse_mode`,
+and retain each rule's authored-family-derived `meta.cursor_policy`. Transitional option input can no longer alter
+descriptor identity or policy facts, even though option/CLI removal remains separately owned by `.9.1.3.5`.
+
+Every rule also publishes ordered `meta.resolved_edges`. Each target row exposes semantic `ownership`, `target`,
+`regex_index`, `block`, and `fluent` facts after bare-edge normalization. Optional `source_form` records `bare` or
+`explicit` provenance only; equivalent spellings have identical rows when that observational field is removed,
+and dispatch continues to consume normalized ACODE/BCODE ownership rather than provenance text.
+
+Focused descriptor, normalization, and live-agreement proof passes 383 assertions, covering descriptor identity,
+all family rows, bare/explicit/indexed/grouped/block/fluent projections, all eight parent/child mechanisms, both
+structural replacements, exact normalization failures, and generated-source v1 isolation. The token-derived
+migration inventory is now 90 files because migrated `CompilerState.pm` contains no legacy token and leaves its
+owner group. Rollout remains 1 complete / 7 pending until composed Perl admission `.9.1.3.6`.
+
+The first full regression run correctly exposed two stale descriptor-test expectations: the retired root field and
+an explicit subtest plan that had not advanced with its added schema assertion. After correcting only those tests,
+standalone Phase 0 passes 1,031/1,031 in 662 seconds. Canonical local CI passes all doctrines and registered
+contracts, reference CLI 63/63 in both option environments, and Phase 0 1,031/1,031 in 634 seconds.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.2 — execute Perl rule-local cursors
 
 Normal live and loaded Perl handlers now select cursor behavior from each normalized rule's intrinsic policy:

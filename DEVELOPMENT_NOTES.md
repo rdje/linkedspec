@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.3` — project resolved semantics, keep provenance observational):
+  A descriptor should expose the same normalized facts that execution spends, not reconstruct intent from emitted
+  handler text. Bootstrap edge tokens therefore carry a small descriptor-only fact record; RuleIR orders those
+  records beside bare candidates, resolves default action indexes to zero, uses no index for blind calls, and
+  copies the finished rows into rule metadata. ACODE/BCODE construction remains the execution authority, so
+  `source_form` can document bare versus explicit spelling without becoming a semantic branch.
+
+  Version boundaries need independent identities. CompilerState now owns `linkedspec-rule-local-cursor-v1` and no
+  longer accepts a global mode into outward descriptor metadata, while Compiler and SpecEntry still build the
+  separate legacy artifact handler required by generated-source v1. Focused tests compare live and descriptor
+  policies across every parent/child mechanism and structural replacement, and explicitly prove equivalent bare
+  and explicit rows differ only in provenance. Removing the final migration token from CompilerState also removes
+  that file from the executable inventory; keeping a stale token merely to preserve the old count would defeat the
+  inventory's purpose.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.2` — separate live policy from staged artifact compatibility):
   A live-only migration cannot reuse one emitted handler string for every outward role. Normal parser execution
   must spend `rule_meta.cursor_policy`, but descriptor/generated-source v1 must remain byte-compatible until their

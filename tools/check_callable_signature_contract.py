@@ -126,6 +126,8 @@ def validate_outward_descriptor_contract(descriptor: Any) -> None:
         "format",
         "top_level_keys",
         "required_meta_keys",
+        "required_meta_keys_variant",
+        "meta_contract_variants",
         "function_record_keys",
         "function_record_variants",
         "model_values",
@@ -149,6 +151,20 @@ def validate_outward_descriptor_contract(descriptor: Any) -> None:
         "function_count",
     ]:
         fail("invalid_descriptor_contract", "outward descriptor metadata fields drifted")
+    if descriptor["required_meta_keys_variant"] != "legacy_global_v0":
+        fail("invalid_descriptor_contract", "outward descriptor default metadata variant drifted")
+    if descriptor["meta_contract_variants"] != {
+        "legacy_global_v0": {
+            "required_keys": ["parse_mode"],
+            "forbidden_keys": ["cursor_contract"],
+        },
+        "rule_local_cursor_v1": {
+            "required_keys": ["cursor_contract"],
+            "forbidden_keys": ["parse_mode"],
+            "cursor_contract": "linkedspec-rule-local-cursor-v1",
+        },
+    }:
+        fail("invalid_descriptor_contract", "outward descriptor metadata variants drifted")
     if descriptor["model_values"] != {
         "descriptor_model": "compiled_descriptor_state",
         "compiled_spec_model": "compiled_spec_state",

@@ -174,14 +174,17 @@ Three backbone items tracked major structural modernization — all done:
   semantically meaningful, but the audit recommends intrinsic OR/default seek plus AND consume and no global
   override. The director has since confirmed rule-local ownership: parent mode never propagates to or overrides a
   child. ADR `0044` supplies the exact ratification. Neutral `.9.1.2` now checks 36 family spellings, 18 edge
-  cases, eight parent/child mechanisms, 91 migration files, and 27 drift mutations at 1 complete / 7 pending;
+  cases, eight parent/child mechanisms, a token-derived migration inventory, and 27 drift mutations at 1 complete / 7 pending;
   no backend behavior is admitted by that contract leaf. Perl rollout is split into `.9.1.3.0-.6`; verified preflight
   maps the bootstrap/RuleIR/emitter/descriptor/generated/CLI boundaries and assigns reference-breaking shared
   byte fixtures to the reference CLI slice so canonical CI never relies on a hidden compatibility flag or skip.
   Perl `.9.1.3.1` now retains typed complete-line bare candidates, resolves forward declarations, normalizes
   AND to blind ownership and OR/default to action ownership, preserves lifecycle priority, emits portable
-  normalization diagnostics, and publishes derived per-rule family/cursor/ownership metadata. Live handlers still
-  spend the existing global mode; `.9.1.3.2` owns that separate behavior boundary.
+  normalization diagnostics, and publishes derived per-rule family/cursor/ownership metadata. Live slice
+  `.9.1.3.2` makes normal handlers spend those policies independently. Descriptor `.9.1.3.3` now publishes the
+  v1 cursor identity, removes root global-mode metadata, and projects ordered resolved-edge facts while preserving
+  generated-source v1 for `.9.1.3.4`. The current inventory is 90 after the migrated CompilerState path becomes
+  token-free.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

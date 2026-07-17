@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-17` (Perl live rule-local cursor execution `.9.1.3.2` is fully verified and closing through
-  its clean commit; descriptor projection `.9.1.3.3` remains pending until that boundary)
+- Last updated: `2026-07-17` (Perl live rule-local cursor execution `.9.1.3.2` is committed at `2660de23`;
+  descriptor projection `.9.1.3.3` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3458,14 +3458,36 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.3.2 - execute Perl rule-local cursors`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Project the Perl v1 rule-local cursor descriptor and resolved-edge facts exactly.
   Dependencies: `.9.1.3.2`
   Acceptance: Add contract identity and family-derived `cursor_policy` per rule; remove global/per-rule
     `parse_mode`; expose normalized resolved-edge ownership/target/index/block/fluent facts without making source
     provenance semantic; and prove deterministic live versus descriptor agreement and exact failure shapes.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **KNOWLEDGE MAP / TOOLBOX BASELINE** — Retrieve the current outward-descriptor, CompilerState, RuleIR,
+    runtime-context, and generated-v1 boundaries before changing descriptor schema; use `return_descriptor` and
+    exact JSON/source probes rather than inferring from implementation text.
+  - [x] **V1 IDENTITY / ROOT RETIREMENT** — Add `linkedspec-rule-local-cursor-v1`, remove root and per-rule legacy
+    `parse_mode`, and retain only authored-family-derived cursor facts without advancing generated-source v1.
+  - [x] **RESOLVED EDGE PROJECTION** — Emit deterministic per-rule normalized edge rows with ownership, target,
+    optional regex index, block/fluent facts, and explicitly non-semantic source provenance.
+  - [x] **LIVE / DESCRIPTOR AGREEMENT** — Prove every family and parent/child mechanism agrees between normalized
+    descriptor policy and live execution, including default-family, explicit exceptions, and loaded source.
+  - [x] **FAILURE / VERSION BOUNDARY** — Preserve exact portable normalization failures and prove descriptor v1 is
+    current while standalone generated source remains v1/legacy until `.9.1.3.4`.
+  - [x] **REGRESSION / LOCKSTEP / COMMIT** — Run focused and canonical gates; synchronize task/roadmap/live/memory,
+    Knowledge Map and mdBook; clean generated artifacts; commit before activating generated-source v2 `.9.1.3.4`.
+  Verification: **PASS 2026-07-17.** Focused descriptor/normalization/live suites pass 383 assertions. Toolbox JSON
+    proves exact root, rule, resolved-edge, and generated-v1 identities. Neutral checker passes 36/18/8/90 at 1/7
+    plus 27 mutations; callable schema, generated v1, capability 80/0/0, logical/diagnostic 8/0, and coverage
+    246/105+1/122 remain exact. The first complete Phase 0 run exposed only two stale descriptor expectations: the
+    retired root field and an explicit plan count that had not advanced with its new assertion. After those
+    contract-test corrections, standalone Phase 0 passes 1,031/1,031 in 662 seconds. Canonical local CI passes all
+    doctrines, focused registered contracts, reference CLI 63/63 twice, and Phase 0 1,031/1,031 in 634 seconds.
+    Knowledge Map, memory/task governance, mdBook, whitespace, and safe generated-artifact cleanup pass. Generated
+    source remains v1, rollout remains 1/7 until `.9.1.3.6`, and `.9.1.3.4` stays unactivated until the clean commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.3.3 - project Perl cursor descriptors`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.4`
   Status: `pending`
@@ -5804,9 +5826,9 @@ director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the `.9.1.2-.9` rollout. After the clean logical closeout and urgent hygiene boundary,
 cursor contract/inventory `.9.1.2` is committed at 1/7; Perl `.9.1.3` is split into `.0-.6`, gate-safety audit
-`.9.1.3.0` and family/bare-edge normalization `.9.1.3.1` are committed. Live cursor-policy execution `.9.1.3.2`
-is fully verified and closing through its commit; descriptor/generated/CLI behavior remains later-owned and
-`.9.1.3.3` cannot activate before the clean boundary.
+`.9.1.3.0`, family/bare-edge normalization `.9.1.3.1`, and live cursor-policy execution `.9.1.3.2` are committed.
+Descriptor projection `.9.1.3.3` is fully verified and closing through its clean commit; generated-source v2
+`.9.1.3.4` is the next eligible leaf after that boundary, and CLI behavior remains later-owned.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6040,11 +6062,11 @@ is fully verified and closing through its commit; descriptor/generated/CLI behav
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
-| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `active` | Perl preflight/normalization `.0-.1` are committed; live cursor `.2` is verified/closing before descriptor `.3`. |
+| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `active` | Perl `.0-.3` are complete through descriptor v1; generated-source v2 `.4` follows after the clean commit. |
 | 214.0 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `done` | Exact Perl roles, bare-edge prerequisite, and gate-safe shared-CLI fixture order are durable. |
 | 214.1 | `FUTURE-PARITY-BACKLOG.9.1.3.1` | `done` | Family-derived policy, typed bare edges, exact diagnostics, source/self-host parity, and canonical proof are complete. |
 | 214.2 | `FUTURE-PARITY-BACKLOG.9.1.3.2` | `done` | Live/loaded/trace per-rule cursor execution and staged v1 boundary pass focused plus canonical proof. |
-| 214.3 | `FUTURE-PARITY-BACKLOG.9.1.3.3` | `pending` | Project v1 cursor descriptors and normalized resolved-edge facts. |
+| 214.3 | `FUTURE-PARITY-BACKLOG.9.1.3.3` | `done` | Cursor descriptor v1, normalized resolved-edge facts, and full signoff are complete. |
 | 214.4 | `FUTURE-PARITY-BACKLOG.9.1.3.4` | `pending` | Emit/validate/load generated-source v2 without serialized cursor overrides. |
 | 214.5 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `pending` | Remove Perl CLI option/help/trace and migrate reference fixtures at the gate-safe boundary. |
 | 214.6 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `pending` | Compose Perl admission, advance 2/6, close parent, and hand off Rust after a clean commit. |
@@ -6065,7 +6087,7 @@ is fully verified and closing through its commit; descriptor/generated/CLI behav
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, Perl preflight/normalization, and live execution are verified; descriptor `.9.1.3.3` follows after clean commit. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and Perl preflight/normalization/live `.0-.2` are committed; descriptor `.3` is active. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6718,9 +6740,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`,
-  Perl preflight `.9.1.3.0`, normalization `.9.1.3.1`, and live implementation `.9.1.3.2` are proven; `.3` follows
-  only after `.2` commits cleanly. Identical dependency-regex slot identity is a non-blocking separate
+- None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
+  and Perl `.9.1.3.0-.3` are complete through descriptor v1; generated-source v2 `.9.1.3.4` is next after the clean
+  descriptor commit. Identical
+  dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
@@ -6735,7 +6758,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` and Perl
-  preflight/normalization/live `.9.1.3.0-.2` are complete while pending `.9.1.3.3-.6`, later
+  `.9.1.3.0-.3` are complete through descriptor v1 while `.9.1.3.4-.6`, later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 
@@ -6743,6 +6766,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.3` | Toolbox/KM descriptor and generated-source baseline; cursor identity/root retirement; ordered bare/explicit/indexed/grouped/block/fluent rows; all eight parent/child mechanisms and two structural replacements; focused descriptor/normalization/live 383; neutral cursor 36/18/8/90 at 1/7 plus 27 mutations; callable/generation/capability/logical/diagnostic/coverage ledgers; standalone Phase 0 `1..1031`/662s; Knowledge Map, memory/task/doctrine/mdBook/whitespace/cleanup; canonical reference CLI 63x2 and Phase 0 `1..1031`/634s. | PASS. Descriptor handlers join live intrinsic policy, root global-mode metadata retires, source provenance stays non-semantic, generated source remains v1, and `.9.1.3.4` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.2` | Toolbox descriptor/source/routed-trace baseline; normal live HandlerIR/LinkedRE rule policy plus separate legacy v1 artifact handler; all eight parent/child mechanisms, two structural replacements, top/loaded/trace roles, and v1 boundary in 38 assertions; normalization 272; exact 91-file inventory swap at unchanged 1/7 plus 27 mutations; three-module syntax; adjacent logical/generated/diagnostic/scalar/Unicode/trace contracts; KM 581/4082; memory/task/doctrine/mdBook/whitespace; capability 80/0/0; generated v1; logical/diagnostic 8/0; coverage 246/105+1/122; reference CLI 63x2; Phase 0 `1..1031`/629s. | PASS. Every normal Perl rule spends intrinsic AND consume or default/OR seek without parent/legacy-option propagation; descriptor/generated-source v1 bytes stay staged; seek-dependent fixtures are structurally explicit; identical regex slot aliasing is tracked under `.9.1.8.1`; `.9.1.3.3` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.1` | Typed complete-line bootstrap/self-hosted grammar; full declared-set RuleIR normalization; derived family/cursor/ownership metadata; exact portable diagnostics; 272 source assertions over 36 family/18 edge/six ownership cases plus boundary/live proof; trace 5; fuzz 5; neutral 36/18/8/91 at 1/7 plus 27 mutations; six-module syntax; KM 580/4077; memory/task/doctrine/mdBook/whitespace; capability/generated/logical/diagnostic/coverage gates; reference CLI 63x2; Phase 0 `1..1031`/641s. | PASS. Bare edges resolve once before planning with reserved lifecycle priority and forward declarations; portable failures survive RuntimeContext; root task-index marker drift is repaired; global live cursor, API/CLI, generated v1, fixtures, and rollout ledger remain unchanged; `.9.1.3.2` follows only after clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.0` | Four KM/ADR authorities; `run_bootstrap_parse`, descriptor/generated/source seams; exact 14 original Perl token files plus non-token owners; 35 affected CLI cases partitioned 2/20/2/11; canonical registration; corrected exact 91-file owner set; neutral 36/18/8/91 at 1/7 plus 27 mutations; JSON; KM 580/4075; memory/task/doctrine/mdBook/whitespace; reference CLI 63/63 default and 63/63 POSIX. | PASS. Six implementation boundaries are split before code; typed complete-line candidates and declared-rule normalization are required; ten shared byte fixtures migrate reference-first in `.9.1.3.5`; no compatibility/skip/red-main path or behavior change; `.9.1.3.1` follows only after clean commit. |
@@ -6911,6 +6935,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.3.3` | `FUTURE-PARITY-BACKLOG.9.1.3.3 - project Perl cursor descriptors` | Cursor descriptor v1, ordered semantic edge rows, non-semantic provenance, live/descriptor agreement, generated-v1 boundary, and 90-file inventory. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.2` | `FUTURE-PARITY-BACKLOG.9.1.3.2 - execute Perl rule-local cursors` | Intrinsic live/loaded HandlerIR policy, separate legacy-v1 artifact boundary, 38 focused assertions, exact 91-file inventory, Phase 0/canonical proof, and descriptor handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.1` | `FUTURE-PARITY-BACKLOG.9.1.3.1 - normalize Perl rule edges` | Typed bare-edge source, declared-set normalization, per-rule family/cursor/ownership facts, portable diagnostics, 272 focused assertions, canonical CI, and live-execution handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `FUTURE-PARITY-BACKLOG.9.1.3.0 - audit Perl cursor rollout boundaries` | Six exact mechanism boundaries, bare-edge root cause, 35-case CLI impact, ten-file reference-first ownership correction, and `.1-.6` split; no behavior code. |
@@ -7079,6 +7104,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.9.1.3.3` projects Perl descriptor v1 after Toolbox/KM baseline. CompilerState now emits
+  `linkedspec-rule-local-cursor-v1` without root global-mode metadata; RuleIR publishes ordered resolved-edge
+  ownership/target/index/block/fluent rows, and Bootstrap explicit-edge tokens retain optional source provenance.
+  Descriptor handlers join live handlers on intrinsic policy, while only generated-source v1 keeps the separate
+  legacy artifact handler. In-memory/file-oriented descriptor, direct handler, all eight parent/child mechanisms,
+  both structural replacements, exact failures, and v1 isolation pass in the 383-assertion focused composition.
+  The current inventory is 90 after token-free CompilerState leaves its owner set; ledger remains 1/7 until
+  composed Perl admission.
 - `2026-07-17`: `.9.1.3.0` splits Perl rollout into six safe leaves and maps bootstrap/validation, RuleIR,
   handler emission, descriptors, generated v2, and primary/test owners. Toolbox proof finds bare `Child` is
   currently dropped and bare fluent/block forms become arbitrary `ChildCODE`, requiring typed complete-line

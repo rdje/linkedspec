@@ -5,11 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Perl descriptor projection `FUTURE-PARITY-BACKLOG.9.1.3.3` now identifies
+  `linkedspec-rule-local-cursor-v1`, removes descriptor-wide global-mode metadata, and publishes each rule's
+  intrinsic `cursor_policy` plus ordered `resolved_edges`. Every resolved row contains semantic ownership,
+  target, regex index, block, and fluent facts; optional `source_form` provenance is observational only. The
+  descriptor and live paths agree across all eight parent/child mechanisms and both structural replacements.
+  Standalone generated source remains v1 for `.9.1.3.4`, and option/CLI removal remains `.9.1.3.5`. The current
+  token-derived migration inventory is 90 after `CompilerState.pm` becomes token-free.
 - `2026-07-17` refresh: Perl live cursor execution `FUTURE-PARITY-BACKLOG.9.1.3.2` now feeds normalized per-rule
   `cursor_policy` into normal live/loaded HandlerIR and LinkedRE calls. AND families consume; default/OR families
   seek; parent/option state does not propagate across top, blind/action, explicit-call, or recursive entry. Rule
-  trace records the intrinsic policy. Descriptor/generated-source v1 still use a separately built legacy artifact
-  handler, preserving their staged `.9.1.3.3-.4` boundary; API/CLI removal remains `.9.1.3.5`. Focused live 38,
+  trace records the intrinsic policy. Generated-source v1 still uses a separately built legacy artifact handler,
+  preserving its staged `.9.1.3.4` boundary; API/CLI removal remains `.9.1.3.5`. Focused live 38,
   normalization 272, and Phase 0 1,031 pass. A pre-existing identical-regex dependency-index alias is tracked by
   `.9.1.8.1` rather than folded into cursor semantics.
 - `2026-07-17` refresh: Perl normalization `FUTURE-PARITY-BACKLOG.9.1.3.1` implements the preflight seam without

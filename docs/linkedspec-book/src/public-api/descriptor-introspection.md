@@ -1,10 +1,11 @@
 # Descriptor Introspection
 
-> **Accepted descriptor migration:** ADR `0044` removes descriptor-wide
+> **Perl rule-local descriptor v1:** ADR `0044` removes descriptor-wide
 > `meta.parse_mode` and every public rule field named `parse_mode`. Perl
-> `.9.1.3.1` already exposes derived per-rule `family`, `cursor_policy`, and
-> `edge_ownership`; root `meta.parse_mode` remains until the later descriptor/API
-> slices replace it with `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`.
+> `.9.1.3.3` now exposes `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
+> derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
+> `resolved_edges`. Generated-source v2 and option/CLI removal remain separately
+> staged under `.9.1.3.4-.5`; other backends migrate in `.9.1.4-.7`.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
@@ -69,6 +70,16 @@ In rough form:
         family => 'and',
         cursor_policy => 'consume',
         edge_ownership => 'blind',
+        resolved_edges => [
+          {
+            ownership => 'blind',
+            target => 'Child',
+            regex_index => undef,
+            block => 0,
+            fluent => undef,
+            source_form => 'bare',
+          },
+        ],
         ...
       },
     },
@@ -121,7 +132,7 @@ In rough form:
   },
   meta => {
     descriptor_model => 'compiled_descriptor_state',
-    parse_mode => 'seek',
+    cursor_contract => 'linkedspec-rule-local-cursor-v1',
     definition_order => [ ... ],
     compiled_rule_order => [ ... ],
     redefined_rule_labels => [ ... ],
@@ -146,6 +157,15 @@ dependency_refs
 ```
 
 That list describes which other rule regexes this rule depends on when building combined dependency regex dispatch.
+
+Perl rule metadata also exposes `resolved_edges` in source order. A grouped action edge produces one row per
+target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`:
+
+- action edges always carry their resolved zero-based regex index, including `0` when the source omitted it;
+- blind edges use `undef` for `regex_index` because blind dispatch does not select a parent-owned regex slot;
+- `block` is `0` or `1`, and `fluent` is the normalized method chain or `undef`;
+- optional `source_form` is `bare` or `explicit`, but is provenance only. Removing it yields identical semantic
+  rows for equivalent bare and explicit spellings, and runtime dispatch never reads it.
 
 ## `dependency_regex_map`
 
@@ -294,7 +314,7 @@ functions. This descriptor fact does not promote the separately future generic c
 Important current fields include:
 
 - `descriptor_model`
-- `parse_mode`
+- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on the migrated Perl reference)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`

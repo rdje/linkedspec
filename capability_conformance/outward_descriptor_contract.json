@@ -17,6 +17,18 @@
     "function_order",
     "function_count"
   ],
+  "required_meta_keys_variant": "legacy_global_v0",
+  "meta_contract_variants": {
+    "legacy_global_v0": {
+      "required_keys": ["parse_mode"],
+      "forbidden_keys": ["cursor_contract"]
+    },
+    "rule_local_cursor_v1": {
+      "required_keys": ["cursor_contract"],
+      "forbidden_keys": ["parse_mode"],
+      "cursor_contract": "linkedspec-rule-local-cursor-v1"
+    }
+  },
   "function_record_keys": [
     "index",
     "kind",

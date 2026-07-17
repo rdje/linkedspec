@@ -7,10 +7,11 @@ answers:
   - "do Perl Rust Dart and Julia expose the same descriptor shape"
   - "how is descriptor shape drift prevented"
   - "is compiled descriptor parity complete"
+  - "which outward descriptor metadata variant does Perl use"
 date: 2026-07-11
-status: current
+status: current; shared function shape with staged cursor metadata variants
 tags: [descriptor, public-api, perl, rust, dart, julia, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.6.2.3 adds capability_conformance/outward_descriptor_contract.json and focused consumers in t/phase0_regression.t, rust/linkedspec-core/tests/descriptor_test.rs, dart/test/compiled_spec_test.dart, and julia/test/runtests.jl. All variants expose the same four top-level keys, required metadata identities, and exact function record; complete relevant backend gates pass."
+evidence: "FUTURE-PARITY-BACKLOG.1.6.2.3 adds capability_conformance/outward_descriptor_contract.json and focused consumers. All variants expose the same four top-level keys, model/order/count identities, and exact function record. FUTURE-PARITY-BACKLOG.9.1.3.3 adds explicit metadata variants: unmigrated backends use legacy_global_v0 with parse_mode, while Perl uses rule_local_cursor_v1 with cursor_contract and no parse_mode."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && dart test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t"
 ---
 
@@ -22,6 +23,11 @@ identities plus order/count metadata; and fixes each function record to:
 
 `index`, `kind`, `version`, `name`, `params`, `arity`, `source_text`, `source_span`, `body_span`, `body_source`,
 `body_payload`, `body_parse_job`, and `body_ast`.
+
+Cursor migration is explicitly staged rather than hidden as schema drift. `required_meta_keys` is labeled
+`legacy_global_v0` for unmigrated backends. `meta_contract_variants.rule_local_cursor_v1` instead requires
+`cursor_contract`, forbids `parse_mode`, and fixes `linkedspec-rule-local-cursor-v1`; Perl consumes that variant
+from `.9.1.3.3`, while Rust/Dart/Julia/Lua migrate in their later leaves.
 
 Focused tests in every implemented variant load this same file. Perl adds the zero-based source-order index during
 outward projection. Dart and Julia use descriptor-specific projections, preserving their internal AST JSON shape.

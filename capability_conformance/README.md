@@ -22,6 +22,10 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 `capabilities`; deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
 
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
+Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while
+`meta_contract_variants.rule_local_cursor_v1` requires `cursor_contract`, forbids `parse_mode`, and fixes the v1
+identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`; later backends remain on the legacy
+variant until their dependency-ordered leaves.
 Its `function_record_variants` object is the authoritative three-way union: fixed-v1 stores `params`/`arity`,
 variadic-v2 stores `signature`, and final-codeblock-v3 stores `params`/`arity` plus exact final-only
 `parameter_kinds`. `tools/check_callable_signature_contract.py` rejects schema/order/version/storage/policy drift.
@@ -34,10 +38,11 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker owns an exact 91-file current migration inventory and rejects 27 representative semantic, topology,
-diagnostic, generated, inventory, and admission mutations. Only `neutral_contract_and_inventory` is complete:
-the rollout is 1 complete / 7 pending, current global `parse_mode` behavior remains accurately admitted above,
-and backend behavior does not change in this contract-only slice.
+The checker currently owns an exact 90-file migration inventory and rejects 27 representative semantic, topology,
+diagnostic, generated, inventory, and admission mutations. Only `neutral_contract_and_inventory` is complete in
+the composed ledger, so rollout remains 1 complete / 7 pending. Perl implementation is current through live and
+descriptor-v1 semantics; generated-source v2, option/CLI migration, composed Perl admission, and the later
+backends remain dependency-ordered.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always

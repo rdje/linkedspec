@@ -258,6 +258,7 @@ sub _collect_rule_ir {
   acode_entries => [],
   bcode_entries => [],
   bare_edge_entries => [],
+  edge_sequence => [],
   and_icode_entries => [],   # Per-regex I-blocks for AND rules (not acode_entries)
  };
 
@@ -397,6 +398,9 @@ sub _collect_rule_ir {
     reidx   => $$centry[1]{reidx},
     code    => $$centry[1]{code},
    };
+   if (ref($$centry[1]{descriptor_edge}) eq 'HASH') {
+    push @{$rule_ir->{edge_sequence}}, { %{$$centry[1]{descriptor_edge}} };
+   }
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},
@@ -415,6 +419,9 @@ sub _collect_rule_ir {
     call => $$centry[1]{call},
     code => $$centry[1]{code},
    };
+   if (ref($$centry[1]{descriptor_edge}) eq 'HASH') {
+    push @{$rule_ir->{edge_sequence}}, { %{$$centry[1]{descriptor_edge}} };
+   }
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},
@@ -429,6 +436,7 @@ sub _collect_rule_ir {
   }
   elsif ($entry_type eq 'BARE_EDGE') {
    push @{$rule_ir->{bare_edge_entries}}, $$centry[1];
+   push @{$rule_ir->{edge_sequence}}, { bare_edge => $$centry[1] };
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},
@@ -501,6 +509,14 @@ sub _rule_ir_diagnostic {
   map { exists($args{$_}) ? ($_ => $args{$_}) : () }
    qw/rule_label target targets regex_index ownerships/,
  }
+}
+
+sub _normalize_descriptor_edge_fluent {
+ my ($fluent) = @_;
+ return undef unless defined $fluent;
+ $fluent =~ s/^\s*\.\s*//o;
+ $fluent =~ s/\s+\z//o;
+ return $fluent
 }
 
 sub _normalize_rule_ir_edges {
@@ -579,24 +595,12 @@ sub _normalize_rule_ir_edges {
    ownership => $ownership,
    source_form => 'bare',
    has_block => $bare->{has_block} ? 1 : 0,
-   fluent => do {
-    my $fluent = $bare->{fluent};
-    if (defined $fluent) {
-     $fluent =~ s/^\s*\.\s*//o;
-     $fluent =~ s/\s+//go;
-    }
-    $fluent
-   },
+   fluent => _normalize_descriptor_edge_fluent($bare->{fluent}),
    targets => [map {
-    my $target_fluent = $bare->{fluent};
-    if (defined $target_fluent) {
-     $target_fluent =~ s/^\s*\.\s*//o;
-     $target_fluent =~ s/\s+//go;
-    }
     {
      label => $_->{label},
      index => $_->{index},
-     fluent => $target_fluent,
+     fluent => _normalize_descriptor_edge_fluent($bare->{fluent}),
     }
    } @$targets],
   };
@@ -617,6 +621,35 @@ sub _normalize_rule_ir_edges {
  }
 
  $rule_ir->{edge_ownership} = @ownerships ? $ownerships[0] : 'none';
+ my @resolved_edges;
+ for my $edge (@{$rule_ir->{edge_sequence} || []}) {
+  if (ref($edge->{bare_edge}) eq 'HASH') {
+   my $bare = $edge->{bare_edge};
+   my $targets = ref($bare->{targets}) eq 'ARRAY' ? $bare->{targets} : [];
+   for my $target (@$targets) {
+    push @resolved_edges, {
+     ownership => $ownership,
+     target => $target->{label},
+     regex_index => $ownership eq 'action'
+      ? (defined($target->{index}) ? 0 + $target->{index} : 0)
+     : undef,
+     block => $bare->{has_block} ? 1 : 0,
+     fluent => _normalize_descriptor_edge_fluent($bare->{fluent}),
+     source_form => 'bare',
+    };
+   }
+   next;
+  }
+  push @resolved_edges, {
+   ownership => $edge->{ownership},
+   target => $edge->{target},
+   regex_index => $edge->{ownership} eq 'action' ? 0 + ($edge->{regex_index} // 0) : undef,
+   block => $edge->{block} ? 1 : 0,
+   fluent => _normalize_descriptor_edge_fluent($edge->{fluent}),
+   source_form => $edge->{source_form} // 'explicit',
+  };
+ }
+ $rule_ir->{resolved_edges} = \@resolved_edges;
  $rule_ir->{bare_edge_entries} = [];
  return $rule_ir
 }
@@ -636,6 +669,7 @@ sub _plan_rule_ir_meta {
  $meta->{family} = $rule_ir->{family} if defined $rule_ir->{family};
  $meta->{cursor_policy} = $rule_ir->{cursor_policy} if defined $rule_ir->{cursor_policy};
  $meta->{edge_ownership} = $rule_ir->{edge_ownership} if defined $rule_ir->{edge_ownership};
+ $meta->{resolved_edges} = [map { { %$_ } } @{$rule_ir->{resolved_edges} || []}];
  return $meta
 }
 

@@ -676,7 +676,7 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
 }
 
 sub _build_final_descriptor_state {
- my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
+ my ($compiled_spec_input, $dependency_regex_builder_cb) = @_;
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
  my $use_default_dependency_regex_builder = !defined($dependency_regex_builder_cb);
  $dependency_regex_builder_cb ||= \&build_dependency_regex_map;
@@ -689,7 +689,6 @@ sub _build_final_descriptor_state {
  my $compiled_state_meta = _call_compiler_state(
   'build_compiled_descriptor_meta',
   $compiled_state,
-  parse_mode => $args{parse_mode},
   action_rewriter_migration => _build_action_rewriter_migration_summary($compiled_state),
  );
 
@@ -820,10 +819,10 @@ sub run_get_pipeline {
      $entry,
      {
       runtime_ctx => $runtime_ctx,
-      # Normal live handlers spend their rule-family policy. Descriptor and
-      # generated-source v1 paths retain the legacy option until their staged
-      # contract migrations land.
-      use_rule_local_cursor => (!$generate_only && !$return_descriptor) ? 1 : 0,
+      # Normal live and descriptor handlers spend their rule-family policy.
+      # Generated-source v1 alone retains the legacy option until its staged
+      # contract migration lands.
+      use_rule_local_cursor => !$generate_only ? 1 : 0,
       legacy_artifact_cursor_policy => $parse_mode,
       function_registry => $function_registry,
       declared_rule_labels => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_labels} : undef,
@@ -1200,7 +1199,7 @@ if ($function_registry_validation_error) {
  return undef;
 }
  $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
- my $final_descriptor_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
+ my $final_descriptor_state = eval { _build_final_descriptor_state($compiled_spec_state, undef) };
 my $build_final_descriptor_error = $@;
 my $build_final_descriptor_rule_label = $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
  my $build_final_descriptor_handler_source_label =

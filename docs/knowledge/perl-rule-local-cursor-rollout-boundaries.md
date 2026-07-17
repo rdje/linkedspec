@@ -12,10 +12,10 @@ answers:
   - "does the Perl reference support bare rule edges"
   - "where does Perl derive per rule cursor policy"
 date: 2026-07-17
-status: confirmed live rule-local execution; descriptor/generated/CLI boundaries pending
+status: confirmed live and descriptor-v1 rule-local semantics; generated/CLI boundaries pending
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization: BootstrapSpec::Core retains complete-line BARE_EDGE candidates after reserved lifecycle forms; Compiler supplies the declared-rule set; RuleIR resolves and derives per-rule family/cursor_policy/edge_ownership. FUTURE-PARITY-BACKLOG.9.1.3.2 makes normal live and loaded Perl handlers spend that intrinsic policy across all eight parent/child mechanisms and both structural replacements. Compiler/SpecEntry deliberately build a separate legacy artifact handler so descriptor and generated-source v1 remain unchanged for `.9.1.3.3-.4`; accepted parse_mode no longer owns normal live execution but CLI/fixture removal remains `.9.1.3.5`. Focused live 38/38, normalization 272/272, and Phase 0 1031/1031 pass."
-reverify: "prove -Iperl t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/SpecEntry.pm; perl -Iperl -c perl/LinkedSpec/HandlerVariantEmitter.pm; rg -n 'use_rule_local_cursor|legacy_artifact_cursor_policy|cursor_policy|parse-mode' perl/LinkedSpec/Compiler.pm perl/LinkedSpec/SpecEntry.pm perl/LinkedSpec/HandlerVariantEmitter.pm bin/linkedspec cli_conformance"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .9.1.3.2 makes normal live/loaded handlers spend intrinsic policy; and .9.1.3.3 projects linkedspec-rule-local-cursor-v1 plus ordered resolved_edges while making descriptor handlers spend the same intrinsic policy. Each row exposes ownership/target/regex_index/block/fluent; source_form is optional non-semantic provenance. Only generated-source v1 retains a legacy artifact handler for .9.1.3.4, while option/CLI removal remains .9.1.3.5. Focused descriptor/normalization/live proof passes 383 assertions; the migration inventory is 90 files at 1/7 after CompilerState becomes token-free."
+reverify: "prove -Iperl t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; python3 tools/check_rule_local_cursor_contract.py; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/CompilerState.pm; perl -Iperl -c perl/LinkedSpec/RuleIR.pm"
 ---
 
 The Perl rollout has six distinct implementation boundaries:
@@ -27,10 +27,11 @@ The Perl rollout has six distinct implementation boundaries:
    known.
 3. `perl/LinkedSpec/Compiler.pm`, `perl/LinkedSpec/SpecEntry.pm`, and
    `perl/LinkedSpec/HandlerVariantEmitter.pm` now pass each normalized rule's
-   intrinsic policy into normal live `LinkedRE::or(...)` execution. A separate
-   legacy artifact handler preserves descriptor/generated-source v1 bytes.
-4. `perl/LinkedSpec/CompilerState.pm` currently publishes that global mode in
-   descriptor metadata.
+   intrinsic policy into normal live and descriptor `LinkedRE::or(...)`
+   execution. A separate legacy artifact handler now exists only for
+   generated-source v1.
+4. `perl/LinkedSpec/CompilerState.pm` publishes the v1 cursor identity, while
+   RuleIR metadata carries per-rule policy and ordered resolved-edge rows.
 5. `perl/LinkedSpec/Compiler.pm`, `perl/LinkedSpec/GeneratedSource.pm`,
    `perl/LinkedSpec.pm`, and the generated-source contract/test own standalone
    emission, metadata, plan validation, and reconstruction.
@@ -48,10 +49,12 @@ before planning or emission rather than guessing from generated handler text.
 Every rule records family (`and` or `or_default`), derived `cursor_policy`
 (`consume` or `seek`), and post-normalization `edge_ownership`. AND bare lines
 lower to BCODE; OR/default bare lines lower to ACODE. Normal live and loaded Perl
-handlers now spend that policy independently, so parent and accepted legacy
-option state cannot override a child. Descriptor v1 and generated-source v1
-still serialize the legacy option through a separate artifact-only handler;
-their migrations remain `.9.1.3.3-.4`, and CLI removal remains `.9.1.3.5`.
+handlers and descriptor handlers now spend that policy independently, so
+parent and accepted legacy option state cannot override a child. Descriptor
+metadata identifies `linkedspec-rule-local-cursor-v1`, removes root global-mode
+metadata, and exposes resolved semantic edge rows. Only generated-source v1
+still uses the separate artifact-only handler; its migration remains
+`.9.1.3.4`, and CLI removal remains `.9.1.3.5`.
 
 The initial migration inventory assigned all shared CLI fixtures to final
 admission `.9.1.8`. That order cannot preserve a green canonical branch: removing

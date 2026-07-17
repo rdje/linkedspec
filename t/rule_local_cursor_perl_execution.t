@@ -44,6 +44,29 @@ sub assert_live_case {
  } else {
   ok(!defined($result), "$case->{id} rejects when the child-owned consume boundary is not contiguous");
  }
+ my %descriptor_ctx;
+ my $descriptor_source = $case->{source};
+ my $descriptor = LinkedSpec::Get(\$descriptor_source, return_descriptor => 1, runtime_ctx_ref => \%descriptor_ctx);
+ ok(ref($descriptor) eq 'HASH', "$case->{id} descriptor compiles beside live execution")
+  or diag(JSON::PP->new->canonical->encode($descriptor_ctx{last_error} // {}));
+ return unless ref($descriptor) eq 'HASH';
+ is(
+  $descriptor->{meta}{cursor_contract},
+  $contract->{descriptor_contract}{meta}{cursor_contract},
+  "$case->{id} descriptor identifies the rule-local cursor contract",
+ );
+ is(
+  $descriptor->{spec}{Top}{meta}{cursor_policy},
+  $case->{descriptor_parent_cursor},
+  "$case->{id} descriptor agrees with the live parent policy",
+ );
+ for my $child_label (@{$case->{descriptor_child_labels} || ['Child']}) {
+  is(
+   $descriptor->{spec}{$child_label}{meta}{cursor_policy},
+   $case->{descriptor_child_cursor},
+   "$case->{id} descriptor agrees with the live $child_label policy",
+  );
+ }
 }
 
 my %parent_child_case = (
@@ -160,6 +183,8 @@ is_deeply(
 for my $contract_case (@{$contract->{parent_child_cases}}) {
  my $case = $parent_child_case{$contract_case->{id}};
  $case->{id} = $contract_case->{id};
+ $case->{descriptor_parent_cursor} = $contract_case->{expected}{parent_cursor};
+ $case->{descriptor_child_cursor} = $contract_case->{expected}{child_cursor};
  assert_live_case($case);
 }
 
@@ -244,6 +269,11 @@ is_deeply(
 for my $contract_case (@{$contract->{structural_replacements}}) {
  my $case = $structural_case{$contract_case->{id}};
  $case->{id} = $contract_case->{id};
+ $case->{descriptor_parent_cursor} = $contract_case->{expected_parent_cursor};
+ $case->{descriptor_child_cursor} = $contract_case->{expected_child_cursor};
+ $case->{descriptor_child_labels} = $contract_case->{id} eq 'ordered_landmarks'
+  ? ['Header', 'Body']
+  : ['X', 'Y'];
  assert_live_case($case);
 }
 

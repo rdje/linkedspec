@@ -43801,7 +43801,7 @@ PERL
     like($accept_out, qr/\$VAR1 = 1;/, 'AND family accepts contiguous matching input');
 };
 
-subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
+subtest 'return_descriptor_exposes_rule_local_cursor_contract_and_consume_parser_source' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -43811,7 +43811,11 @@ SPEC
 
     my $default_descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descriptor still builds descriptor hash');
-    is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
+    is(
+        $default_descr->{meta}{cursor_contract},
+        'linkedspec-rule-local-cursor-v1',
+        'default descriptor records the rule-local cursor contract identity',
+    );
     is($default_descr->{meta}{descriptor_model}, 'compiled_descriptor_state', 'default parse mode descriptor records the composing descriptor-state model');
     is($default_descr->{meta}{compiled_spec_model}, 'compiled_spec_state', 'default descriptor identifies its nested compiled-spec model');
     is($default_descr->{meta}{compiled_dependency_regex_model}, 'compiled_dependency_regex_state', 'default descriptor identifies its nested dependency-regex model');
@@ -43825,7 +43829,11 @@ SPEC
         parse_mode => 'consume',
     );
     ok(defined($consume_descr) && ref($consume_descr) eq 'HASH', 'consume parse mode return_descriptor still builds descriptor hash');
-    is($consume_descr->{meta}{parse_mode}, 'consume', 'consume parse mode is recorded in descriptor metadata');
+    is(
+        $consume_descr->{meta}{cursor_contract},
+        'linkedspec-rule-local-cursor-v1',
+        'legacy consume option does not alter the descriptor cursor-contract identity',
+    );
 
     my $snippet = <<'PERL';
 use LinkedSpec;
@@ -44347,7 +44355,7 @@ SPEC
 };
 
 subtest 'user_function_registry_descriptor_seam' => sub {
-    plan tests => 62;
+    plan tests => 63;
 
     my $spec = <<'SPEC';
 fn normalize(value) {
@@ -44381,10 +44389,18 @@ SPEC
     require JSON::PP;
     my $contract_path = File::Spec->catfile($Bin, '..', 'capability_conformance', 'outward_descriptor_contract.json');
     my $contract = JSON::PP->new->decode(slurp($contract_path));
+    my $cursor_contract_path = File::Spec->catfile($Bin, '..', 'capability_conformance', 'rule_local_cursor_contract.json');
+    my $cursor_contract = JSON::PP->new->decode(slurp($cursor_contract_path));
     is_deeply([sort keys %$descriptor], [sort @{$contract->{top_level_keys}}],
         'descriptor top-level keys match the neutral contract exactly');
-    ok(!(grep { !exists $descriptor->{meta}{$_} } @{$contract->{required_meta_keys}}),
-        'descriptor metadata contains every neutral required key');
+    my ($retired_descriptor_field) = @{$cursor_contract->{descriptor_contract}{removed_fields}};
+    $retired_descriptor_field =~ s/^meta\.//;
+    my @perl_required_meta_keys = grep { $_ ne $retired_descriptor_field } @{$contract->{required_meta_keys}};
+    push @perl_required_meta_keys, keys %{$cursor_contract->{descriptor_contract}{meta}};
+    ok(!(grep { !exists $descriptor->{meta}{$_} } @perl_required_meta_keys),
+        'Perl descriptor metadata contains every common key plus the rule-local cursor identity');
+    ok(!exists($descriptor->{meta}{$retired_descriptor_field}),
+        'Perl descriptor metadata omits the retired global cursor field');
     is_deeply(
         [map { $descriptor->{meta}{$_} } sort keys %{$contract->{model_values}}],
         [map { $contract->{model_values}{$_} } sort keys %{$contract->{model_values}}],
