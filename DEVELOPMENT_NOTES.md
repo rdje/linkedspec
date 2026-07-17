@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.0` — test topology must follow behavior ownership):
+  Rust cursor behavior crosses two Cargo packages, but the focused gate runs only `cargo test -p
+  linkedspec-runtime`. Cargo dependency compilation does not execute the dependency crate's own unit or integration
+  tests, so parser/compiler/validation/descriptor regressions in `linkedspec-core` could pass the documented gate.
+  Independent proof is green at 188 core unit, three descriptor, and eight type tests. Gate-hardening `.9.1.4.1`
+  therefore precedes every behavior leaf and will add the full core package rather than selecting a fragile test
+  subset.
+
+  The mechanism split follows representation dependencies. Family classification and bare-edge normalization must
+  become typed before execution can derive policy; live/loaded/serialized execution must be authoritative before
+  descriptors project it; generated-source v2 must consume the minimal family plan before public option/CLI bytes
+  are removed; omission-sensitive admission comes last. This avoids compatibility flags and prevents a shared
+  63-case fixture migration from hiding incomplete internal roles.
+
+  Two current Rust details explain otherwise surprising probe output. `RuleMode::is_and()` includes compact `|`,
+  and bcode execution recognizes only explicit `RuleMode::Or`; default/Pipe blind calls therefore accumulate
+  `undef` like AND rather than representing unrelated result-shape drift. Separately, complete-line bare candidates
+  become `BodyElementKind::Raw`, which the compiler ignores, so missing validation is a lost typed edge rather
+  than a runtime target-resolution failure. These causes fix the `.2` boundary without expanding it into result-
+  shape redesign.
+
+  The staged CLI red state is exact and useful: both default and POSIX runs pass 51/63, with only the one retired-
+  flag diagnostic and eleven trace projections retaining `parse_mode=seek`. Perl reference passes 63/63 twice.
+  Full runtime-package and independent core baselines are green; no executable mutation belongs in this leaf.
+  Canonical local CI independently passes the composed Perl consumer, both 63-case reference environments, and
+  Phase 0 1,031/1,031 in 640 seconds before exiting 0.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.6` — make Perl admission contract-declared and omission-sensitive):
   Admission is a composition problem, not another runtime implementation seam. Extending the existing neutral
   Perl contract consumer keeps family/edge/diagnostic proof and the final projection in one contract-driven place.

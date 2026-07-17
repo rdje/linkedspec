@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-17` (composed Perl admission `.9.1.3.6` is verified at 2/6 and closes parent
-  `.9.1.3`; Rust `.9.1.4` follows after the clean commit)
+- Last updated: `2026-07-17` (Rust rollout preflight `.9.1.4.0` is verified; local-gate hardening
+  `.9.1.4.1` is next after the clean preflight commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3607,13 +3607,135 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Align Rust parsed/compiled/serialized/native/generated/primary behavior with ADR `0044`.
+  Children: `.9.1.4.0` (preflight/split), `.9.1.4.1` (local-gate hardening), `.9.1.4.2` (family/edge
+    normalization), `.9.1.4.3` (live/reconstructed execution), `.9.1.4.4` (descriptor v1), `.9.1.4.5`
+    (generated-source v2), `.9.1.4.6` (option/CLI migration), `.9.1.4.7` (composed admission/closeout)
   Dependencies: `.9.1.3`
   Acceptance: Remove `ExecutionOptions` and runtime-context global override ownership plus the blind-call consume
     special case; normalize bare edges into typed AST; derive rule/plan cursor facts from family; consume the v2
     descriptor/generated contracts and portable failures; migrate fixtures/callers; and prove direct, reconstructed,
     emitted/generated, trace, recursion, loaded-state, and rebuilt primary-command projections.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.0`
+  Status: `done`
+  Goal: Audit and split the Rust rule-local cursor rollout into gate-safe mechanism leaves before behavior code.
+  Dependencies: `.9.1.3`
+  Acceptance: Use the Knowledge Map and LinkedSpec/Rust probes first; map every Rust-owned token and non-token
+    parser/compiler/runtime/descriptor/serialized/emitter/primary/test seam; measure current family, bare-edge,
+    parent/child, option/CLI, v1/v2, and shared-fixture behavior; identify the exact canonical and Rust-local gates;
+    and replace the broad parent with dependency-ordered safe children without changing executable behavior.
+  Acceptance Checklist:
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read ADR `0044`, neutral/Perl/Rust generated/descriptor/CLI Knowledge Map
+    authorities, `TOOLBOX.md`, the neutral checker/inventory, and current Rust local-gate commands before probing.
+  - [x] **EXACT RUST SURFACE MAP** — Account for all eight token-owned Rust files plus non-token grammar/AST,
+    serialization, emitter, generated-plan/source, corpus/primary adapters, fixtures, tests, and documentation seams.
+  - [x] **REPRODUCE CURRENT BOUNDARIES** — Prove default/AND cursor behavior, all four mixed parent/child mechanisms,
+    bare-edge handling, explicit-edge exceptions, dynamic/typed option and CLI behavior, descriptor shape,
+    generated/serialized contract versions, and current shared 63-case impact with exact source locations.
+  - [x] **SAFE IMPLEMENTATION SPLIT** — Add dependency-ordered child leaves for syntax/typed normalization, live and
+    reconstructed execution, descriptor/generated-v2 projection, option/CLI/fixture migration, composed Rust
+    admission, and any separately necessary gate/no-drift boundary found by evidence.
+  - [x] **NO REGRESSION / LOCKSTEP** — Change no Rust or shared executable behavior; run focused Rust baseline,
+    neutral checker, reference CLI, governance/KM/mdBook/whitespace checks, update task/index/roadmap/live/memory,
+    and commit the preflight before activating the first behavior child.
+  Verification: **PASS 2026-07-17.** The audit accounts for all eight token-owned Rust files and the non-token
+    AST/parser/validation/error, loader/parser adapters, source emitter, generated classifier, runtime/trace,
+    fixture, test, gate, and public-document seams. Toolbox-first probes prove current default seek and AND
+    consume, global option override, compact `|` misclassification, silently ignored complete-line bare edges,
+    missing indexed/grouped bare-edge rejection, and eight parent/child mechanism results. Compiled rules and
+    descriptors serialize mutable `parse_mode`; generated source remains v1/format 1 and its blind-family branch
+    recognizes only explicit OR. The full runtime-package baseline passes, including 137 unit tests, 197
+    integrations, the 105-case generated classifier, and all emitted/contract suites. The omitted core package
+    independently passes 188 unit + 3 descriptor + 8 type tests. Rust primary reaches 51/63 in both default and
+    POSIX environments with exactly one retired-flag and eleven trace-field failures; Perl reference remains
+    63/63 twice. The neutral checker passes 36/18/8/14/72 at 2/6 and rejects 29 mutations. No Rust/shared
+    executable behavior changes. The audit discovers that `tools/run_rust_local.sh` does not run the core
+    package's own tests despite central parser/compiler ownership; `.9.1.4.1` repairs that gate before semantic
+    work, and the durable Knowledge Map card records the current topology. Knowledge Map passes at 584 facts /
+    4,129 question keys; mdBook, memory, task, doctrine, cursor, whitespace, and syntax checks pass. Canonical
+    local CI repeats the 288-test Perl admission consumer and 63x2 reference CLI, passes Phase 0 1,031/1,031 in
+    640 seconds, and exits 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.4.0 - audit Rust cursor rollout boundaries`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.1`
+  Status: `pending`
+  Goal: Make the focused Rust gate cover the core package before cursor behavior changes.
+  Dependencies: `.9.1.4.0`
+  Acceptance: `tools/run_rust_local.sh` must run the complete `linkedspec-core` package, including its parser,
+    compiler, validation, descriptor, serialization, and integration tests, before the runtime package; update
+    operational docs/KM and prove that the gate still reaches only the already-measured 12 primary migration
+    failures, without changing parser/compiler/runtime behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.2`
+  Status: `pending`
+  Goal: Normalize Rust rule families and bare edges into exact typed ownership before runtime policy changes.
+  Dependencies: `.9.1.4.1`
+  Acceptance: Correct compact/default/OR versus AND family classification; retain complete-line and header-rest
+    bare plain/indexed/grouped/block/fluent candidates as typed AST; lower family-derived action/blind ownership;
+    preserve explicit cross-family exceptions; reject mixed, undefined, invalid-index, and missing-shared-block
+    forms with the neutral portable diagnostics; and prove parser/compiler/validation source locations and no
+    silent `Raw` loss without changing cursor execution yet.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.3`
+  Status: `pending`
+  Goal: Make Rust live, loaded, serialized, and reconstructed execution spend each rule's family-derived policy.
+  Dependencies: `.9.1.4.2`
+  Acceptance: Remove the blind-call consume special case and mutable compiled-rule policy field; derive AND
+    consume and OR/default seek independently for each entered rule across action, blind, direct call, recursion,
+    loaded compiled state, JSON roundtrip, and trace; preserve low-level seek/consume matcher algorithms and the
+    staged public override until `.9.1.4.6`; prove all eight parent/child mechanisms and structural replacements.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.4`
+  Status: `pending`
+  Goal: Project Rust's rule-local cursor descriptor v1 from normalized compiled semantics.
+  Dependencies: `.9.1.4.3`
+  Acceptance: Emit the neutral descriptor identity, remove root/rule global `parse_mode`, publish authored family,
+    derived `cursor_policy`, and ordered resolved-edge ownership facts, prove direct and compiled-JSON-roundtrip
+    identity plus live agreement, and keep generated-source v1 independently staged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.5`
+  Status: `pending`
+  Goal: Emit and reconstruct Rust generated-source v2 from the minimal family plan.
+  Dependencies: `.9.1.4.4`
+  Acceptance: Identify v2/format 2, retain only ordered label/family rows, derive cursor policy from all ten
+    families with no serialized cursor field, reject v1 reconstruction with exact expected/actual contract and
+    regeneration guidance, and prove deterministic emission, fresh compile/load, direct/traced execution, all
+    families, source identity, corpus subset, and the exhaustive 105-case generated classifier.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.6`
+  Status: `pending`
+  Goal: Remove Rust global cursor overrides and migrate the shared primary-command projection.
+  Dependencies: `.9.1.4.5`
+  Acceptance: Remove `ExecutionOptions::with_parse_mode`, runtime-context override/effective-mode ownership, the
+    primary `--parse-mode` flag/help/request-trace field, and every non-removal caller; return the exact targeted
+    usage exit 2; migrate the shared 63-case fixture bytes owned by the Perl reference; and pass Rust 63/63 in
+    default and POSIX environments with unchanged non-retired output/trace bytes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.4.7`
+  Status: `pending`
+  Goal: Admit and close the complete Rust projection of the neutral rule-local cursor contract.
+  Dependencies: `.9.1.4.6`
+  Acceptance: Add one omission-sensitive contract-driven consumer spanning native, loaded, serialized,
+    descriptor, emitted/generated, trace, diagnostics, recursion/mixed parents, structural replacement, and
+    primary roles; register it canonically; advance only `rust_parity` in the rollout ledger; run focused/core/
+    runtime/63x2/canonical gates; synchronize public/live/KM docs; close `.9.1.4`; and hand off Dart only after a
+    clean commit.
   Verification: `pending`
   Commit: `pending`
 
@@ -5913,8 +6035,9 @@ diagnostics, conformance, and the `.9.1.2-.9` rollout. After the clean logical c
 cursor contract/inventory `.9.1.2` established the 1/7 baseline; Perl `.9.1.3` is split into `.0-.6`, gate-safety audit
 `.9.1.3.0`, family/bare-edge normalization `.9.1.3.1`, and live cursor-policy execution `.9.1.3.2` are committed.
 Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/reference-fixture migration
-`.9.1.3.5` are committed through `b7c28156`. Composed admission `.9.1.3.6` is verified, advances only Perl to
-2/6, and closes the parent at the clean commit boundary; Rust `.9.1.4` is next.
+`.9.1.3.5` are committed through `b7c28156`; composed admission `.9.1.3.6` closes the parent at `c35755f7` and
+advances only Perl to 2/6. Rust preflight/split `.9.1.4.0` is verified without behavior changes; local-gate
+hardening `.9.1.4.1` is next after its clean commit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6156,7 +6279,15 @@ Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/re
 | 214.4 | `FUTURE-PARITY-BACKLOG.9.1.3.4` | `done` | Generated-source v2, exact family derivation, v1 rejection, fresh load/execution, and canonical proof are complete. |
 | 214.5 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `done` | Exact API/emitter/CLI removal, 63x2 reference migration, 72-file inventory, and canonical proof are complete. |
 | 214.6 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `done` | Composed Perl admission advances only `perl_reference`, closes parent, and hands off Rust after commit. |
-| 215 | `FUTURE-PARITY-BACKLOG.9.1.4` | `pending` | Align Rust parsed/compiled/serialized/native/generated/primary roles. |
+| 215 | `FUTURE-PARITY-BACKLOG.9.1.4` | `active` | Align Rust parsed/compiled/serialized/native/generated/primary roles after exact preflight. |
+| 215.0 | `FUTURE-PARITY-BACKLOG.9.1.4.0` | `done` | Exact Rust seams/current drift, the omitted-core gate risk, and dependency-safe `.1-.7` implementation split are durable. |
+| 215.1 | `FUTURE-PARITY-BACKLOG.9.1.4.1` | `pending` | Add complete core-package coverage to the focused Rust gate before behavior changes. |
+| 215.2 | `FUTURE-PARITY-BACKLOG.9.1.4.2` | `pending` | Normalize family classification and complete typed bare-edge ownership with exact diagnostics. |
+| 215.3 | `FUTURE-PARITY-BACKLOG.9.1.4.3` | `pending` | Derive live/loaded/serialized/reconstructed policy per entered rule. |
+| 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `pending` | Project descriptor v1 family, policy, and resolved-edge facts. |
+| 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `pending` | Emit/reconstruct Rust generated-source v2 from minimal family plans. |
+| 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `pending` | Remove Rust option/CLI/trace overrides and migrate exact 63x2 bytes. |
+| 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `pending` | Compose Rust admission, advance only Rust, and close the backend parent. |
 | 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `pending` | Align Dart native/reconstructed/generated/primary roles. |
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
@@ -6173,7 +6304,7 @@ Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/re
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` is next. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and Perl `.9.1.3` reach 2/6; Rust preflight `.9.1.4.0` is done and gate hardening `.1` is next. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6827,7 +6958,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` follows after the clean `.9.1.3.6` commit. Identical
+  and complete Perl parent `.9.1.3` reach 2/6; Rust preflight `.9.1.4.0` is verified and `.1` is next. Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -6843,7 +6974,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` and later
+  Perl parent `.9.1.3` reach 2/6; Rust preflight `.9.1.4.0` is verified and gate hardening `.1` is next while later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 

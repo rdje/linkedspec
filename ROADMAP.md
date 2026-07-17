@@ -982,8 +982,11 @@ complete-line candidates, resolves forward declarations, lowers family-derived e
 lifecycle precedence, publishes per-rule family/cursor/ownership facts, and emits portable diagnostics. Live slice
 `.9.1.3.2` makes normal Perl handlers spend intrinsic AND consume / default-OR seek policy independently.
 Descriptor slice `.9.1.3.3` replaces root global-mode metadata with `linkedspec-rule-local-cursor-v1`, publishes
-per-rule ordered resolved-edge facts, and proves live/descriptor policy agreement while generated-source v1 stays
-staged for `.9.1.3.4`. The current token inventory is 90 after retiring migrated `CompilerState.pm`.
+per-rule ordered resolved-edge facts, and proves live/descriptor policy agreement; `.9.1.3.4-.6` then close Perl
+generated-source v2, API/CLI removal, and composed admission at 2/6. Rust preflight `.9.1.4.0` accounts for all
+typed/non-typed seams and measures compact-`|`, bare-edge, serialized/global override, v1 generated, and 51/63
+primary drift without behavior changes. It splits `.9.1.4.1-.7`; `.1` first repairs the focused Rust gate's
+omission of the core package's own parser/compiler/validation tests. The current token inventory is 72.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

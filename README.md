@@ -8,8 +8,11 @@ Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 2 complete / 6 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
-removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer. Rust
-`.9.1.4` is the next backend after the clean Perl closeout commit.
+removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
+Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
+ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Rust work is
+split into `.9.1.4.1-.7`; `.1` first adds the omitted `linkedspec-core` package tests to the focused Rust gate
+before parser/compiler/runtime behavior changes.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -553,9 +556,10 @@ content migration exists yet.
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`; Perl, Rust, Dart, Julia, and Lua now pass 63/63 default/POSIX. Run
-  `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all five backends and proves
-  the shared 63-case suite under both environments. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
+  `tools/run_rust_local.sh`. The later rule-local cursor migration has advanced the shared manifest to 63 cases:
+  Perl is current at 63/63 in both environments, while Rust is intentionally 51/63 until `.9.1.4.6` removes its
+  retired flag/trace field; Dart, Julia, and Lua remain owned by their subsequent cursor leaves. The all-five
+  63x2 primary matrix is therefore the rollout target, not a current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution `.1.6.4`, Dart full-
   pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
@@ -566,7 +570,9 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, the full runtime package, and both
-  63-case primary-command environments.
+  63-case primary-command environments. At the `.9.1.4.0` audit boundary it omits the core package's own tests;
+  run `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core` alongside it until `.9.1.4.1` hardens the
+  gate. The primary leg is expected to stop at the measured 51/63 cursor-migration boundary until `.9.1.4.6`.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

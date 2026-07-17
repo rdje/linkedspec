@@ -45,16 +45,18 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite locks both help forms, 20 strict usage cases, seven baseline success cases, four baseline operational
-failures, 20 canonical trace cases, and eight strict UTF-8 behavior cases on Perl. All 61 pass with
+The suite currently locks both help forms, 20 strict usage cases, nine success cases, four baseline operational
+failures, 20 canonical trace cases, and eight strict UTF-8 behavior cases on Perl. All 63 pass with
 `POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
 UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/aliases, emoji, byte counts, field
 escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
 ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at process/file boundaries. `.6.2`
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
 preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
-the reference. Rust `.1.5.2.4` closes reusable direct execution plus the exact canonical trace projection at all
-61 unchanged cases in both option environments. UTF-16/UTF-32 are not implicit inputs.
+the reference. Rust `.1.5.2.4` historically closed reusable direct execution plus the then-current 61-case
+canonical trace projection. During the rule-local cursor migration, Perl now owns the 63-case reference bytes;
+Rust is 51/63 until `.9.1.4.6`, and later backend leaves own the remaining migrations. UTF-16/UTF-32 are not
+implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
@@ -69,11 +71,11 @@ bash tools/run_primary_cli_matrix.sh
 ```
 
 The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
-Lua native adapters in disposable temporary storage, and runs the same unchanged 61-case manifest against Perl,
-Rust, Dart, Julia, and Lua with `POSIXLY_CORRECT` unset and set. A green run is therefore 5 backends x 2
-environments x 61 cases; only the executable command token changes. `FUTURE-PARITY-BACKLOG.1.5` originally closed
-the four-backend boundary; `LUA-BACKEND-PARITY.7.2` extends the same recurring proof to every current primary
-command.
+Lua native adapters in disposable temporary storage, and runs the shared manifest against Perl, Rust, Dart,
+Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The current
+rule-local cursor manifest has 63 cases: Perl is current at 63/63, Rust is measured at 51/63, and subsequent
+backend leaves own Dart/Julia/Lua migration. A green 5x2x63 run is therefore the rollout target, not the current
+state.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at
@@ -139,10 +141,22 @@ Run the repo-owned Rust gate from the repository root:
 bash tools/run_rust_local.sh
 ```
 
-It checks formatting, runs the complete `linkedspec-runtime` package (including the 105-fixture interpreter oracle,
-generated-source subset, and native trace controls), builds `linkedspec-rust`, then runs all 61 primary-command
-fixtures with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
+At the `.9.1.4.0` audit boundary it checks formatting, runs the complete `linkedspec-runtime` package (including
+the 105-fixture interpreter oracle, exhaustive generated classifier, and native trace controls), builds
+`linkedspec-rust`, then runs all 63 primary-command fixtures with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
 `LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
+
+The script currently omits `linkedspec-core`'s own parser/compiler/validation/descriptor/serialization tests.
+Those pass independently at 188 unit + 3 descriptor + 8 type tests. Until gate-hardening leaf `.9.1.4.1` lands,
+run this beside the focused gate:
+
+```bash
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-core
+```
+
+The primary leg currently stops at 51/63 in each environment: one retired-flag diagnostic and eleven request-
+trace bytes still expose the legacy global mode field. That is the exact staged migration boundary owned by
+`.9.1.4.6`.
 
 The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
 

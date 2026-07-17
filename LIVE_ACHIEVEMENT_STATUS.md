@@ -8,6 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.4.0 — audit and split Rust cursor rollout**
+  (DONE — exact preflight, staged-red baseline, documentation, and task split are complete; clean commit remains).
+
+  **Result:** Eight token-owned files plus the adjacent AST/parser/validation/error, loader/parser adapters,
+  runtime/trace, descriptor/serialization, source emitter/generated classifier, fixture, test, gate, and public
+  seams are accounted for. Current compact-`|`, bare-edge, blind-consume, serialized/global override, descriptor,
+  generated-v1, and parent/child behavior is measured. Seven dependency-ordered children `.1-.7` now own gate
+  hardening, typed normalization, execution, descriptor v1, generated v2, option/CLI removal, and admission.
+
+  **Proof:** The full runtime package is green, including 137 unit tests, 197 integrations, and the exhaustive
+  generated classifier. The separately invoked core package passes 188 unit + 3 descriptor + 8 type tests. Rust
+  primary is exactly 51/63 in default and POSIX environments; Perl remains 63/63 twice. Neutral cursor remains
+  36/18/8/14/72 at 2/6 and rejects 29 mutations. No executable behavior changes.
+
+  **Canonical:** Knowledge Map passes at 584/4,129; mdBook, memory, task, doctrine, cursor, whitespace, and syntax
+  checks pass. Local CI repeats the 288-test Perl admission consumer and reference CLI 63x2, then passes Phase 0
+  1,031/1,031 in 640 seconds and exits 0.
+
+  **Finding:** The documented Rust gate omits `linkedspec-core`'s own tests even though core owns the parser,
+  compiler, validation, descriptor, and serialization paths about to change. Knowledge Map card
+  `rust-local-verification-gate` records the gap; `.9.1.4.1` must harden the gate before behavior work.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.6 — admit the composed Perl cursor projection**
   (DONE — focused, standalone, canonical, documentation, governance, and cleanup signoff pass; clean commit is the
   only remaining workflow step before Rust cursor rollout `.9.1.4`).

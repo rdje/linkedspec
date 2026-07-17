@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.4.0 — audit and split Rust cursor rollout
+
+The Rust preflight maps every token-owned and adjacent parser/compiler/validation/runtime/descriptor/loader/
+serialization/emitter/generated/trace/CLI/test seam before behavior changes. Current source classifies compact
+`|` as AND, silently lowers complete-line bare edges to ignored `Raw` nodes, forces blind calls to consume,
+serializes mutable `parse_mode` into compiled rules/descriptors, retains the global execution/CLI override, and
+emits generated-source v1 whose blind-family branch recognizes only explicit OR.
+
+Toolbox probes lock default seek, AND consume, option override, eight mixed parent/child mechanism results,
+structural syntax gaps, and current generated/descriptor identities. The implementation is split into seven
+dependency-ordered leaves: first harden the gate, then typed normalization, rule-local execution, descriptor v1,
+generated-source v2, option/CLI migration, and composed Rust admission.
+
+The complete runtime package passes, including 137 unit tests, 197 integrations, the 105-case generated-source
+classifier, and all emitted/contract suites. The independently invoked core package passes 188 unit, three
+descriptor, and eight type tests. Rust primary is exactly 51/63 in both environments: one retired-option
+diagnostic and eleven request-trace bytes retain the global mode. Perl remains 63/63 twice; the neutral cursor
+checker remains 36/18/8/14/72 at 2/6 plus 29 mutations. No Rust or shared executable behavior changes.
+
+The audit finds a verification-topology risk: `tools/run_rust_local.sh` runs only `linkedspec-runtime` tests even
+though the cursor migration changes core parser/compiler/validation code. This is recorded in the Knowledge Map,
+and `.9.1.4.1` must add the complete core package before semantic work.
+
+Knowledge Map validation passes at 584 facts / 4,129 question keys; mdBook, memory, task, doctrine, cursor,
+whitespace, and syntax checks pass. Canonical local CI repeats the 288-test Perl admission consumer, reference CLI
+63/63 twice, and Phase 0 1,031/1,031 in 640 seconds, then exits 0.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.6 — admit the composed Perl cursor projection
 
 The neutral cursor contract now declares one exact 14-role Perl consumer. The existing contract-driven Perl test

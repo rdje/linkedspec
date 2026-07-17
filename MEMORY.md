@@ -10,20 +10,22 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.3.6` — one 14-role omission-sensitive consumer admits the
-  complete Perl cursor projection at 2/6 and closes parent `.9.1.3` without runtime behavior changes.
-- latest_commit: `b7c28156` — `FUTURE-PARITY-BACKLOG.9.1.3.5 - remove Perl cursor overrides`
-  (ahead: 190; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection`.
-- active_work_unit: commit the fully verified composed Perl admission/parent closeout, clear/verify the brief, and
-  establish a clean pivot boundary before Rust cursor rollout `.9.1.4`.
-- next_action: commit `.9.1.3.6`, clear/verify `git_message_brief.txt`, confirm a clean tree, then activate
-  `FUTURE-PARITY-BACKLOG.9.1.4`.
-- current_proof: The contract-declared Perl consumer passes 288 tests and focused four-suite composition passes
-  410. Neutral cursor passes 36/18/8/14/72 at 2/6 plus 29 mutations; generated/capability stay 80/0/0. Reference
-  CLI passes 63/63 twice. Standalone Phase 0 passes 1,031/1,031 in 641 seconds. Canonical local CI runs the new
-  consumer, passes CLI 63x2 and Phase 0 1,031/1,031 in 642 seconds, and exits 0. KM 584/4,126, mdBook, JSON,
-  syntax, memory/task/doctrine/whitespace, and safe cleanup pass. No implementation mutation campaign.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.4.0` — exact Rust cursor preflight maps current drift and
+  splits gate-safe `.1-.7` implementation leaves without executable behavior changes.
+- latest_commit: `c35755f7` — `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection`
+  (ahead: 191; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.4.0 - audit Rust cursor rollout boundaries`.
+- active_work_unit: finish documentation/governance/canonical verification for Rust preflight `.9.1.4.0`, commit,
+  clear/verify the brief, and establish the clean boundary before gate-hardening child `.9.1.4.1`.
+- next_action: commit `.9.1.4.0`, clear/verify `git_message_brief.txt`, confirm a clean tree, then activate
+  `FUTURE-PARITY-BACKLOG.9.1.4.1` and add complete `linkedspec-core` tests to `tools/run_rust_local.sh`.
+- current_proof: Full Rust runtime package passes, including 137 unit, 197 integration, and exhaustive generated
+  suites. Independent core passes 188 unit + 3 descriptor + 8 type tests. Rust primary is exactly 51/63 in both
+  environments (one retired flag + eleven trace bytes); Perl remains 63/63 twice. Neutral cursor remains
+  36/18/8/14/72 at 2/6 plus 29 mutations. The focused Rust gate's omitted-core risk is durable in task/KM/book;
+  `.9.1.4.1` repairs it before behavior. Canonical CI repeats the 288-test Perl consumer and 63x2 reference CLI,
+  passes Phase 0 1,031/1,031 in 640 seconds, and exits 0. KM is 584/4,129; mdBook/governance pass. No executable
+  mutation campaign.
 - latest_bootstrap_read: 2026-07-17 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0044`, and generated-source/live/descriptor seams reviewed before implementation.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -34,5 +36,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; cursor `.9.1.4-.9`; inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: fully verified `.9.1.3.6` awaits commit; no background job. Parked mutation
-  work and ignored `rgx/subs/pgen` work are untouched.
+- blockers: none. in_flight_uncommitted: documentation-only `.9.1.4.0` preflight awaits final gates and commit; no
+  background job. Parked mutation work and ignored `rgx/subs/pgen` work are untouched.
