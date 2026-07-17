@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.4.1 — run Rust core tests in the focused gate
+
+`tools/run_rust_local.sh` now runs the complete `linkedspec-core` package immediately after formatting and before
+the complete runtime package. It uses the same configurable Cargo executable and workspace manifest, with no test
+filter or compatibility bypass. This closes the preflight's topology gap: compiling core as a runtime dependency
+did not execute core's own parser/compiler/validation/descriptor/serialization tests.
+
+The actual hardened gate proves the order and breadth. Core passes 188 unit tests, three descriptor integration
+tests, eight type integration tests, and doc tests. Runtime then passes all 137 unit tests, the 105-fixture oracle,
+the exhaustive 105-case generated-source classifier, 197 integrations, and every emitted/diagnostic/trace/loader/
+Unicode/binding/variadic suite. Only after both packages pass does the gate build the primary command.
+
+The command leg stops at the exact staged boundary measured by preflight: 51/63 default cases pass, with only the
+retired-option diagnostic and eleven legacy request-trace fields differing. Preflight independently proves POSIX
+is identically 51/63. Canonical local CI passes all doctrines, the 288-test composed Perl admission consumer,
+reference CLI 63/63 in both option environments, and Phase 0 1,031/1,031 in 646 seconds, then exits 0. Its first
+attempt correctly caught a dropped governed logical-helper marker in the task index; the repaired composed row
+passes the focused checker and the complete rerun. No Rust parser/compiler/runtime behavior changes; `.9.1.4.2`
+owns typed normalization next.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.4.0 — audit and split Rust cursor rollout
 
 The Rust preflight maps every token-owned and adjacent parser/compiler/validation/runtime/descriptor/loader/

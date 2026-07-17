@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.1` — dependency compilation is not dependency test execution):
+  The focused gate's old `cargo test -p linkedspec-runtime` compiled `linkedspec-core` but did not run core's unit
+  or integration test binaries. The correct topology is two explicit unfiltered package commands, core first and
+  runtime second. This ordering makes parser/compiler/validation failures stop the gate before the much longer
+  oracle/classifier work and keeps package ownership visible in the log.
+
+  A workspace-wide command would currently cover the same two crates, but separate package commands are the more
+  durable contract: the gate's intent is ordered ownership, and future workspace members should not silently
+  expand this focused seam or obscure which package failed. Both commands reuse `LINKEDSPEC_CARGO_CMD` and the
+  root manifest, so existing toolchain/target customization remains unchanged.
+
+  The expected-red primary boundary stays after all package proof. Fail-fast means the current script does not
+  reach POSIX after default fails 12/63; this is intentional and honest, not a skipped case. Preflight ran POSIX
+  separately and proved the same twelve failures. `.9.1.4.6` will make the normal gate reach and pass both; until
+  then, `.1` proves the topology without introducing a compatibility flag.
+
+  Canonical CI also demonstrates why current-status rows must preserve unrelated governed markers. Replacing the
+  FUTURE-PARITY-BACKLOG index summary with only the new cursor frontier deleted the exact logical `.5.2` closure
+  sentence consumed by the public no-drift checker. The repair composes both facts in the same row; a live summary
+  is not free-form when multiple executable contracts use it as public evidence. The complete canonical rerun
+  passes the 288-test Perl consumer, reference CLI 63x2, and Phase 0 1,031/1,031 in 646 seconds before exiting 0.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.0` — test topology must follow behavior ownership):
   Rust cursor behavior crosses two Cargo packages, but the focused gate runs only `cargo test -p
   linkedspec-runtime`. Cargo dependency compilation does not execute the dependency crate's own unit or integration

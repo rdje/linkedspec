@@ -8,6 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.4.1 — run Rust core tests in the focused gate**
+  (DONE — exact ordered gate execution and operational documentation are complete; clean commit remains).
+
+  **Result:** `tools/run_rust_local.sh` now runs complete, unfiltered `linkedspec-core` tests after formatting and
+  before complete runtime tests. The same Cargo selector/manifest is retained; no parser/compiler/runtime source
+  or behavior changes. README, Rust README, mdBook, Knowledge Map, roadmap/task/live/memory all state the current
+  two-package topology.
+
+  **Proof:** Shell syntax passes. Actual gate execution passes core 188 unit + 3 descriptor + 8 type tests, then
+  the full runtime package: 137 unit, 105-fixture oracle, exhaustive 105-case classifier, 197 integrations, and
+  all emitted/diagnostic/trace/loader/Unicode/binding/variadic suites. The command builds only afterward and stops
+  at exactly the expected default 51/63; preflight independently proved POSIX 51/63. Neutral cursor remains
+  36/18/8/14/72 at 2/6 plus 29 mutations. Canonical local CI repeats the 288-test Perl consumer, reference CLI
+  63x2, and Phase 0 1,031/1,031 in 646 seconds, then exits 0. Typed normalization `.9.1.4.2` is next after the
+  clean commit.
+
+  **Gate correction:** The first canonical attempt caught removal of the logical `.5.2` closure marker while the
+  task-index summary was updated for the cursor frontier. The repaired row preserves both governed facts; the
+  focused checker and complete canonical rerun pass.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.4.0 — audit and split Rust cursor rollout**
   (DONE — exact preflight, staged-red baseline, documentation, and task split are complete; clean commit remains).
 

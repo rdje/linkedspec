@@ -22,6 +22,9 @@ cd "$REPO_ROOT"
 log "checking Rust formatting"
 "$CARGO_CMD" fmt --manifest-path rust/Cargo.toml --all -- --check
 
+log "running Rust core package tests"
+"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-core
+
 log "running Rust runtime package tests"
 "$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime
 

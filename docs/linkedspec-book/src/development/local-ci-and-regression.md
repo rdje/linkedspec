@@ -141,22 +141,19 @@ Run the repo-owned Rust gate from the repository root:
 bash tools/run_rust_local.sh
 ```
 
-At the `.9.1.4.0` audit boundary it checks formatting, runs the complete `linkedspec-runtime` package (including
-the 105-fixture interpreter oracle, exhaustive generated classifier, and native trace controls), builds
-`linkedspec-rust`, then runs all 63 primary-command fixtures with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
+After gate hardening `.9.1.4.1`, it checks formatting, runs the complete `linkedspec-core` package, runs the
+complete `linkedspec-runtime` package (including the 105-fixture interpreter oracle, exhaustive generated
+classifier, and native trace controls), builds `linkedspec-rust`, then runs all 63 primary-command fixtures with
+`POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
 `LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
 
-The script currently omits `linkedspec-core`'s own parser/compiler/validation/descriptor/serialization tests.
-Those pass independently at 188 unit + 3 descriptor + 8 type tests. Until gate-hardening leaf `.9.1.4.1` lands,
-run this beside the focused gate:
+Core runs first because dependency compilation never executes a dependency crate's own tests. Its current complete
+proof is 188 unit + 3 descriptor + 8 type tests, covering the parser/compiler/validation/descriptor/serialization
+paths central to the cursor rollout.
 
-```bash
-cargo test --manifest-path rust/Cargo.toml -p linkedspec-core
-```
-
-The primary leg currently stops at 51/63 in each environment: one retired-flag diagnostic and eleven request-
-trace bytes still expose the legacy global mode field. That is the exact staged migration boundary owned by
-`.9.1.4.6`.
+The primary leg currently stops after the default environment at 51/63: one retired-flag diagnostic and eleven
+request-trace bytes still expose the legacy global mode field. Preflight separately proves the identical POSIX
+51/63 result. That is the exact staged migration boundary owned by `.9.1.4.6`.
 
 The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
 

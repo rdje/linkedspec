@@ -56,6 +56,12 @@ cargo build
 cargo test
 ```
 
+From the repository root, `bash tools/run_rust_local.sh` is the focused operational gate. It checks formatting,
+runs the complete `linkedspec-core` package before the complete `linkedspec-runtime` package, builds the primary
+command, and runs the shared byte-exact CLI manifest in default and POSIX option environments. During the staged
+rule-local cursor migration the package tests are green and the primary leg is intentionally 51/63 until
+`FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection.
+
 ### Compiled descriptor introspection
 
 Rust exposes the backend-neutral outward descriptor directly from its in-memory compiled state:

@@ -195,8 +195,9 @@ Three backbone items tracked major structural modernization — all done:
   rollout is 2 complete / 6 pending. Rust preflight `.9.1.4.0` changes no executable behavior and records the
   exact current boundary: compact `|` is misclassified, complete-line bare edges are ignored, compiled/
   descriptor/generated state still owns global cursor facts, generated source is v1, and primary conformance is
-  51/63 in both environments. The implementation is split into `.9.1.4.1-.7`; `.1` first adds the core package's
-  omitted parser/compiler/validation tests to the focused gate before behavior changes.
+  51/63 in both environments. Gate-hardening `.9.1.4.1` now runs all 188 core unit, three descriptor, and eight
+  type tests before the complete runtime package. Typed family/edge normalization `.9.1.4.2` is next after the
+  clean gate commit.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

@@ -10,9 +10,9 @@ native/generated behavior, recurring admission, and public no-drift are complete
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
-ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Rust work is
-split into `.9.1.4.1-.7`; `.1` first adds the omitted `linkedspec-core` package tests to the focused Rust gate
-before parser/compiler/runtime behavior changes.
+ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
+`.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package; typed family/edge
+normalization `.9.1.4.2` is next after its clean commit.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -570,9 +570,9 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, the full runtime package, and both
-  63-case primary-command environments. At the `.9.1.4.0` audit boundary it omits the core package's own tests;
-  run `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core` alongside it until `.9.1.4.1` hardens the
-  gate. The primary leg is expected to stop at the measured 51/63 cursor-migration boundary until `.9.1.4.6`.
+  complete core and runtime packages, and both 63-case primary-command environments. During the staged cursor
+  migration it is expected to stop after the measured default 51/63 boundary until `.9.1.4.6`; preflight proves
+  POSIX is identically 51/63.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
