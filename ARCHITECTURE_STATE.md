@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Dart logical rollout `FUTURE-PARITY-BACKLOG.5.2.4` makes
+  `runtimeLogicalTruth` the one typed truth boundary for eager helpers and lazy controls. `ActionCallExpr` arity
+  rejects empty `and`/`or`, empty `not`, multi-argument `not`, and non-positional calls before operand evaluation;
+  valid operands are then collected once left-to-right before boolean composition. Optional `RuntimeDiagnostic`
+  fields expose the exact neutral code/name/actual/expected schema only when supplied, preserving unrelated JSON.
+  The unchanged fixture passes native, normalized reconstruction, generated-plan, compiled standalone-emitted,
+  primary CLI, receiver, lazy-control, and inert typed-codeblock roles. The ledger is 3/5; Julia `.5.2.5` is next.
 - `2026-07-17` refresh: Rust logical rollout `FUTURE-PARITY-BACKLOG.5.2.3` makes
   `RuntimeValue::as_bool` the one typed truth seam for logical helpers and lazy controls. A shared eager-helper
   guard validates positional one-plus `and`/`or` and exact-one `not` before any operand evaluation; valid operands
   retain eager once-only left-to-right evaluation and real boolean results. Native structured failures now expose
   `code`, `helper_name`, `actual_arity`, and `expected_arity` without changing unrelated diagnostic JSON. Neutral
   values/effects/receivers/controls/invalid calls pass through native, serialized, direct-value, generated-plan,
-  and independently compiled standalone-emitted roles. The ledger is 2/6; Dart `.5.2.4` is next.
+  and independently compiled standalone-emitted roles. That slice advanced the ledger to 2/6 before Dart.
 - `2026-07-17` refresh: ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1` ratifies the full future cursor and edge
   contract. AND-family rules consume; OR/default-family rules seek; nested rules retain their own policy. Bare
   rule-edge paragraph members normalize to blind calls in AND and action edges in OR/default, while explicit

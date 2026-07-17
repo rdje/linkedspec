@@ -15,8 +15,8 @@ answers:
 date: 2026-07-16
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 15 representative drift mutations. FUTURE-PARITY-BACKLOG.5.2.2 adds Perl typed ActionIR/native/live/standalone-emitted proof; .5.2.3 adds Rust native/serialized/generated-plan/direct/compiled-emitted proof, moving the ledger to 2 complete / 6 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
-reverify: "python3 tools/check_logical_helper_contract.py && prove -Iperl t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && rg -n '0043|linkedspec-logical-helper-v1|two complete / six pending' docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md capability_conformance/logical_helper_contract.json capability_conformance/README.md"
+evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 15 representative drift mutations. Perl .5.2.2, Rust .5.2.3, and Dart .5.2.4 now consume the unchanged target across their native and available generated/emitted roles, moving the ledger to 3 complete / 5 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
+reverify: "python3 tools/check_logical_helper_contract.py && prove -Iperl t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && dart test test/logical_helper_contract_test.dart) && rg -n '0043|linkedspec-logical-helper-v1|three complete / five pending' docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md capability_conformance/logical_helper_contract.json capability_conformance/README.md"
 ---
 
 The adopted target treats `and`, `or`, and `not` as ordinary boolean value helpers. `and` and `or` accept at
@@ -40,9 +40,11 @@ The codeblock row fixes value-kind behavior only. Because explicit `{|...| ... }
 owned by `FUTURE-PARITY-BACKLOG.11`, the neutral portable source fixture excludes them; backend rollout proves the
 row at typed runtime/unit boundaries without silently expanding logical-helper scope.
 
-The target is adopted and current on the Perl reference's native/live/standalone-emitted roles and Rust's native,
-serialized, generated-plan, direct-value, and compiled emitted roles. Cross-backend and public rollout remains
-2 complete / 6 pending under `FUTURE-PARITY-BACKLOG.5.2.4-.9`.
+The target is adopted and current on the Perl reference's native/live/standalone-emitted roles, Rust's native/
+serialized/generated-plan/direct-value/compiled-emitted roles, and Dart's native/normalized/generated-plan/
+standalone-emitted/primary roles. Cross-backend and public rollout remains 3 complete / 5 pending under
+`FUTURE-PARITY-BACKLOG.5.2.5-.9`.
 
 Related facts: [[logical-helper-five-backend-audit]], [[callable-codeblock-literal-contract]],
-[[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]].
+[[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]],
+[[dart-logical-helper-neutral-runtime]].

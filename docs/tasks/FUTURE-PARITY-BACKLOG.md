@@ -2906,14 +2906,37 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Replace Dart logical short-circuit/empty-call drift with the neutral contract.
   Dependencies: `.5.2.1`
   Acceptance: Dart evaluates every valid logical argument once left-to-right before composition, enforces exact
     arities and boolean results, uses the neutral truth table across helpers and conditions, and preserves native/
     generated/emitted/CLI values plus structured diagnostics.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0043`, the logical audit/neutral-contract/Rust/Dart Knowledge Map
+    cards, unchanged JSON/checker, and Dart interpreter/compiler/generated/diagnostic owners; run focused current
+    native/generated/primary probes before editing behavior.
+  - [x] **UNCHANGED NEUTRAL CONSUMER** — Add or extend one Dart consumer of the exact neutral truth/value/effect/
+    receiver/control/arity fixtures. Cover every Dart-representable typed row and explicitly classify any syntax or
+    runtime kind the current Dart model cannot construct.
+  - [x] **ONE DART TRUTH SEAM** — Route logical helpers and lazy control conditions through the same explicit typed
+    truth function, preserving ADR `0043` numeric-zero, nonempty-string, empty-aggregate, null, and boolean edges
+    without borrowing scalar rendering or host truth.
+  - [x] **ARITY BEFORE EFFECTS / EAGER VALUES** — Enforce one-plus positional `and`/`or` and exact-one positional
+    `not` before any operand evaluation; evaluate every valid operand once left-to-right and return real booleans.
+  - [x] **ALL DART PROJECTIONS** — Lock native compiled, normalized/reconstructed, generated-plan/emitted,
+    receiver, lazy-control, structured-diagnostic, and primary roles from the unchanged fixture. Preserve existing
+    unrelated diagnostic shapes and source metadata.
+  - [x] **NO REGRESSION / LOCKSTEP** — Promote only `dart_native`; keep Julia/Lua/generated/gate/public legs
+    pending, run focused and complete Dart/corpus/CLI/contract/governance gates, synchronize docs/KM/task/memory,
+    and commit cleanly before Julia `.5.2.5` becomes active. Do not run an implementation mutation campaign.
+  Verification: Baseline target consumer recorded skipped decisive effects and all four legacy arity failures.
+    After repair, the unchanged consumer passes 24/24 across typed truth, native/normalized/generated-plan/primary,
+    four structured failures, and a compiled standalone emitted package. Dart format/analyze, all 245 tests,
+    primary 62/62 default plus 62/62 POSIX, full corpus 105/105, neutral checker 3/5 with 15 mutations, governance,
+    Knowledge Map, mdBook, and whitespace checks pass. Canonical local CI passes reference CLI 62x2, Phase 0
+    `1..1031`, and its optional complete Dart gate. No implementation mutation campaign.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.5`
   Status: `pending`

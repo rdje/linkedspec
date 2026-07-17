@@ -8,9 +8,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.4 — align Dart logical helpers and truthiness**
+  (DONE — Dart native/normalized/generated-plan/standalone-emitted/CLI behavior conforms at 3 complete / 5
+  pending; Julia `.5.2.5` is next after the clean commit).
+
+  **Result:** `runtimeLogicalTruth` is Dart's single typed helper/control truth seam. Direct `ActionCallExpr`
+  validation rejects one-plus `and`/`or` and exact-one `not` arity failures before effects; valid operands evaluate
+  once left-to-right before boolean composition. Logical failures alone add `code`, `helper_name`, `actual_arity`,
+  and `expected_arity` to the existing structured diagnostic, while unrelated shapes remain unchanged.
+
+  **Proof:** The unchanged neutral consumer covers all 17 typed rows, including an inert model-level codeblock,
+  values, ordered effects, receivers, lazy controls, four invalid calls, native/normalized/generated-plan, primary,
+  and a compiled standalone emitted package. Format/analyze and all 245 tests pass; both primary environments pass
+  62/62; the complete corpus passes 105/105; the neutral checker reports 3/5 and rejects 15 mutations. Canonical
+  local CI passes reference CLI 62x2, Phase 0 `1..1031`, and the optional complete Dart gate.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.3 — align Rust logical helpers and truthiness**
-  (DONE — Rust native/serialized/generated-plan/standalone-emitted behavior conforms at 2 complete / 6 pending;
-  Dart `.5.2.4` is next).
+  (DONE — Rust native/serialized/generated-plan/standalone-emitted behavior advanced the ledger to 2 complete / 6
+  pending; Dart `.5.2.4` has since followed).
 
   **Result:** `RuntimeValue::as_bool` now implements the neutral typed truth table for both eager logical values
   and lazy controls. Logical arity rejects positional one-plus `and`/`or` and exact-one `not` failures before
@@ -22,7 +37,7 @@ Current execution status for interruption-safe batch workflow recovery.
   receiver and lazy-control behavior, four invalid calls, native/serialized/direct/generated-plan roles, and an
   independently compiled emitted crate. Complete core/runtime tests pass, including the Perl-oracle corpus, full
   generated manifest classifier, 197 integrations, and all emitted/contract suites. Rust primary passes 62/62 in
-  default and POSIX environments; the neutral checker reports 2/6 and rejects 15 mutations.
+  default and POSIX environments; the neutral checker reported 2/6 and rejected 15 mutations before Dart landed.
 
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.1.1 — ratify rule-local cursor and bare edges**
   (DONE — ADR `0044` fixes the exact target; implementation `.9.1.2-.9` remains pending and Rust logical

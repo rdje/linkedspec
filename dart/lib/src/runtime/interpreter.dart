@@ -20,6 +20,10 @@ final class RuntimeDiagnostic {
     required this.stage,
     required this.summary,
     required this.detail,
+    this.code,
+    this.helperName,
+    this.actualArity,
+    this.expectedArity,
     this.ownerStage,
     this.specName,
     this.specPath,
@@ -33,6 +37,10 @@ final class RuntimeDiagnostic {
   final String? ownerStage;
   final String summary;
   final String detail;
+  final String? code;
+  final String? helperName;
+  final int? actualArity;
+  final String? expectedArity;
   final String? specName;
   final String? specPath;
   final String? topRule;
@@ -45,6 +53,10 @@ final class RuntimeDiagnostic {
     if (ownerStage != null) 'owner_stage': ownerStage,
     'summary': summary,
     'detail': detail,
+    if (code != null) 'code': code,
+    if (helperName != null) 'helper_name': helperName,
+    if (actualArity != null) 'actual_arity': actualArity,
+    if (expectedArity != null) 'expected_arity': expectedArity,
     if (specName != null) 'spec_name': specName,
     if (specPath != null) 'spec_path': specPath,
     if (topRule != null) 'top_rule': topRule,
@@ -503,6 +515,10 @@ final class LinkedSpecRuntimeEngine {
     required String stage,
     required String summary,
     required String detail,
+    String? code,
+    String? helperName,
+    int? actualArity,
+    String? expectedArity,
     String? topRule,
     String? ruleLabel,
     String? handlerSourceLabel,
@@ -514,6 +530,10 @@ final class LinkedSpecRuntimeEngine {
       ownerStage: 'dart_runtime',
       summary: summary,
       detail: detail,
+      code: code,
+      helperName: helperName,
+      actualArity: actualArity,
+      expectedArity: expectedArity,
       specName: specName,
       specPath: specPath,
       topRule: topRule,
@@ -1223,7 +1243,7 @@ final class LinkedSpecRuntimeEngine {
       final expr = statements[cursor].expr;
       if (cursor == index) {
         final first = expr as ActionControlIfExpr;
-        if (_truthy(
+        if (runtimeLogicalTruth(
           _evaluateExpression(
             first.condition,
             context,
@@ -1235,7 +1255,7 @@ final class LinkedSpecRuntimeEngine {
         }
       } else if (expr is ActionControlIfExpr && expr.branchRole == 'elseif') {
         if (selectedBody == null &&
-            _truthy(
+            runtimeLogicalTruth(
               _evaluateExpression(
                 expr.condition,
                 context,
@@ -1355,7 +1375,7 @@ final class LinkedSpecRuntimeEngine {
       return;
     }
     for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
-      if (!_truthy(
+      if (!runtimeLogicalTruth(
         _evaluateExpression(
           expr.condition,
           context,
@@ -1581,7 +1601,7 @@ final class LinkedSpecRuntimeEngine {
       final expr = statements[cursor].expr;
       if (cursor == index) {
         final first = expr as ActionControlIfExpr;
-        if (_truthy(
+        if (runtimeLogicalTruth(
           _evaluateExpression(
             first.condition,
             context,
@@ -1593,7 +1613,7 @@ final class LinkedSpecRuntimeEngine {
         }
       } else if (expr is ActionControlIfExpr && expr.branchRole == 'elseif') {
         if (selectedBody == null &&
-            _truthy(
+            runtimeLogicalTruth(
               _evaluateExpression(
                 expr.condition,
                 context,
@@ -1780,7 +1800,7 @@ final class LinkedSpecRuntimeEngine {
     var depth = 0;
     var nextIndex = statements.length - 1;
 
-    if (_truthy(
+    if (runtimeLogicalTruth(
       _evaluateExpression(
         first.condition,
         context,
@@ -1819,7 +1839,7 @@ final class LinkedSpecRuntimeEngine {
           selectedEnd = cursor;
         }
         if (!selected &&
-            _truthy(
+            runtimeLogicalTruth(
               _evaluateExpression(
                 expr.condition,
                 context,
@@ -1982,7 +2002,7 @@ final class LinkedSpecRuntimeEngine {
       return const _ValueBlockFlow.continued();
     }
     for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
-      if (!_truthy(
+      if (!runtimeLogicalTruth(
         _evaluateExpression(
           expr.condition,
           context,
@@ -2136,7 +2156,7 @@ final class LinkedSpecRuntimeEngine {
     if (args.isEmpty) {
       return null;
     }
-    if (_truthy(
+    if (runtimeLogicalTruth(
       _evaluateExpression(
         args[0],
         context,
@@ -2167,7 +2187,7 @@ final class LinkedSpecRuntimeEngine {
       final branchArgs = arg.args.map((item) => item.value).toList();
       if (branchName == 'elseif') {
         if (branchArgs.length >= 2 &&
-            _truthy(
+            runtimeLogicalTruth(
               _evaluateExpression(
                 branchArgs[0],
                 context,
@@ -2994,6 +3014,7 @@ final class LinkedSpecRuntimeEngine {
         'got ${positionalArgs.length} in rule $ruleLabel',
       );
     }
+    _validateLogicalHelperArity(call, helperName, context, ruleLabel);
     switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
@@ -3937,6 +3958,54 @@ final class LinkedSpecRuntimeEngine {
         summary: 'Dart runtime helper arity mismatch',
         detail: message,
         ruleLabel: ruleLabel,
+      ),
+    );
+  }
+
+  void _validateLogicalHelperArity(
+    ActionCallExpr call,
+    String helperName,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+  ) {
+    final expected = switch (helperName) {
+      'and' || 'or' => 'at least 1 positional argument',
+      'not' => 'exactly 1 positional argument',
+      _ => null,
+    };
+    if (expected == null) {
+      return;
+    }
+
+    final positionalCount = call.args
+        .whereType<ActionPositionalArgument>()
+        .length;
+    final allPositional = positionalCount == call.args.length;
+    final validCount = switch (helperName) {
+      'and' || 'or' => positionalCount >= 1,
+      'not' => positionalCount == 1,
+      _ => true,
+    };
+    if (allPositional && validCount) {
+      return;
+    }
+
+    final message =
+        'helper_arity_mismatch helper_name=$helperName '
+        'actual_arity=$positionalCount expected_arity="$expected" '
+        'rule_label=$ruleLabel';
+    throw RuntimeInterpreterException(
+      message,
+      diagnostic: context.diagnostic(
+        stage: 'helper_arity_mismatch',
+        summary: 'Dart runtime logical-helper arity mismatch',
+        detail: message,
+        code: 'helper_arity_mismatch',
+        helperName: helperName,
+        actualArity: positionalCount,
+        expectedArity: expected,
+        ruleLabel: ruleLabel,
+        handlerSourceLabel: 'dart_runtime:helper:$helperName',
       ),
     );
   }
@@ -4902,14 +4971,14 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    for (final arg in args) {
-      if (!_truthy(
-        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
-      )) {
-        return false;
+    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+    var result = true;
+    for (final value in values) {
+      if (!runtimeLogicalTruth(value)) {
+        result = false;
       }
     }
-    return true;
+    return result;
   }
 
   bool _callLogicalOr(
@@ -4918,14 +4987,14 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    for (final arg in args) {
-      if (_truthy(
-        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
-      )) {
-        return true;
+    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+    var result = false;
+    for (final value in values) {
+      if (runtimeLogicalTruth(value)) {
+        result = true;
       }
     }
-    return false;
+    return result;
   }
 
   bool _callLogicalNot(
@@ -4934,17 +5003,8 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (args.isEmpty) {
-      return true;
-    }
-    return !_truthy(
-      _evaluateExpression(
-        args.first,
-        context,
-        ruleLabel,
-        currentEdge: currentEdge,
-      ),
-    );
+    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+    return !runtimeLogicalTruth(values.single);
   }
 
   Object? _readRetv(
@@ -6391,6 +6451,10 @@ final class _RuntimeExecutionContext {
     required String stage,
     required String summary,
     required String detail,
+    String? code,
+    String? helperName,
+    int? actualArity,
+    String? expectedArity,
     String? ruleLabel,
     String? handlerSourceLabel,
   }) {
@@ -6399,6 +6463,10 @@ final class _RuntimeExecutionContext {
       stage: stage,
       summary: summary,
       detail: detail,
+      code: code,
+      helperName: helperName,
+      actualArity: actualArity,
+      expectedArity: expectedArity,
       topRule: topRule,
       ruleLabel: effectiveRule,
       handlerSourceLabel: handlerSourceLabel,
@@ -7385,7 +7453,8 @@ String _stringValue(Object? value) {
   return '$value';
 }
 
-bool _truthy(Object? value) {
+/// Apply LinkedSpec's typed logical truth policy without invoking [value].
+bool runtimeLogicalTruth(Object? value) {
   return switch (value) {
     null => false,
     bool value => value,

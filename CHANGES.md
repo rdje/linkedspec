@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.4 — align Dart logical helpers and truthiness
+
+Aligned Dart with ADR `0043` and `linkedspec-logical-helper-v1`. `runtimeLogicalTruth` now explicitly owns the
+typed policy already represented by Dart values and is shared by eager logical helpers plus lazy condition paths.
+`and`/`or` now evaluate every valid operand exactly once left-to-right before composition; `not` accepts exactly
+one operand. Every valid helper returns a real boolean.
+
+Added direct `ActionCallExpr` arity validation before operand evaluation. Empty `and`/`or`, empty `not`,
+multi-argument `not`, and non-positional logical calls produce `helper_arity_mismatch` with exact `code`,
+`helper_name`, `actual_arity`, and `expected_arity` fields. Those fields are optional on the shared diagnostic type,
+so unrelated runtime diagnostic JSON and source attribution remain unchanged.
+
+The unchanged neutral consumer proves all 17 typed truth rows, including an inert model-level codeblock without
+activating portable explicit literals, plus values, eager effect order, receiver continuation, lazy controls, and
+four invalid calls. Native, normalized/reconstructed, generated-plan, primary CLI, and an independently compiled
+standalone emitted package pass. Format/analyze and all 245 Dart tests pass; the primary CLI passes 62/62 in both
+default and POSIX environments; the full corpus passes 105/105. The checker reports 3 complete / 5 pending and
+rejects 15 mutations. Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031`, and the optional complete
+Dart gate. Only `dart_native` advances; Julia `.5.2.5` is next.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.3 — align Rust logical helpers and truthiness
 
 Aligned Rust with ADR `0043` and `linkedspec-logical-helper-v1`. `RuntimeValue::as_bool` now makes only undef,

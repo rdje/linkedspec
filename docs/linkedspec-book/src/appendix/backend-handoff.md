@@ -869,9 +869,11 @@ deterministic fixtures, and 15 mutations. Its ledger began deliberately at 0 com
 Rust, Dart, Julia, Lua, generated/primary, recurring, and public leaves `.5.2.2-.9`. Perl `.5.2.2` consumes that
 policy through typed ActionIR/runtime lowering across native/live/standalone-emitted execution. Rust `.5.2.3`
 now routes helpers and lazy conditions through one `RuntimeValue::as_bool` seam, rejects arity before operands,
-and proves native, serialized, generated-plan, direct-value, and compiled emitted roles. The ledger is 2 complete
-/ 6 pending before `.5.2.4-.9`. Explicit codeblock literals remain separately owned by `.11`; the logical
-contract's codeblock row does not activate that syntax.
+and proves native, serialized, generated-plan, direct-value, and compiled emitted roles. Dart `.5.2.4` now routes
+helpers and lazy controls through `runtimeLogicalTruth`, rejects call shape before effects, evaluates every valid
+operand once left-to-right, and proves native, normalized, generated-plan, compiled emitted, and primary roles.
+The ledger is 3 complete / 5 pending before `.5.2.5-.9`. Explicit codeblock literals remain separately owned by
+`.11`; the logical contract's typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,
 host output bypassed the primary command's strict UTF-8 encoder, and lowered host `exit` bypassed canonical

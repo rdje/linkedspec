@@ -5,7 +5,7 @@ ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. The
-Rust logical-helper rollout `.5.2.3` is now complete; Dart `.5.2.4` is next.
+Dart logical-helper rollout `.5.2.4` is now complete; Julia `.5.2.5` is next.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -210,8 +210,10 @@ This `README.md` is the **single entry point** to the project.
   owns typed logical ActionIR, eager once-only values, exact pre-effect diagnostics, and one truthiness seam shared
   by logical values and lazy controls. Rust `.5.2.3` now consumes that same policy through `RuntimeValue::as_bool`
   and one pre-evaluation arity guard across native, serialized, direct-value, generated-plan, and standalone-
-  emitted execution. Exact structured helper fields, receiver flow, and lazy-control separation pass; rollout is
-  2 complete / 6 pending before Dart `.5.2.4` and the remaining backend/projection/admission leaves.
+  emitted execution. Dart `.5.2.4` now shares one typed helper/control truth seam, validates logical arity before
+  operand effects, and eagerly composes once-only values across native, normalized, generated-plan, standalone-
+  emitted, and primary roles. Exact structured helper fields, receiver flow, and lazy-control separation pass;
+  rollout is 3 complete / 5 pending before Julia `.5.2.5` and the remaining backend/projection/admission leaves.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

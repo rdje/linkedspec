@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.4` — validate call shape, then evaluate values, then compose):
+  Dart's truth table was already correct; the drift lived in evaluation control and arity. Validate the original
+  `ActionCallExpr` while argument kinds and counts are still visible, before any `ActionExpr` is evaluated. After
+  admission, collect every value once left-to-right and only then apply pure typed truth and boolean composition.
+  This structure prevents both short-circuit effects and post-effect arity failures without touching lazy controls.
+
+  Keep the truth seam independent from string rendering and numeric parsing. Dart can prove the codeblock value-kind
+  row with an inert parsed `ActionBlock` at the typed runtime boundary; source block expressions remain executable
+  operands, and this slice does not activate the separately owned explicit literal program. Optional diagnostic
+  fields preserve unrelated JSON. Reconstruct the emitted payload and also compile a real standalone emitted
+  package: the former proves normalized state, while the latter proves generated source as caller-consumable code.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.3` — a shared coercion method is a language seam, not a convenience):
   Rust already routed logical helpers and lazy controls through `RuntimeValue::as_bool`; the defect was that this
   supposedly shared seam still encoded host-flavored string exceptions. Correcting that one typed boundary made

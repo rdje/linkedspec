@@ -68,10 +68,11 @@ owned first-class literal program lands; this contract does not activate `{|...|
 Run `python3 tools/check_logical_helper_contract.py` to validate 17 truthiness rows, ten helper cases, three eager
 effect scenarios, receiver and lazy-control contrast, four pre-effect arity failures, deterministic embedded
 fixtures, exact projection obligations, and 15 representative drift mutations. The eight rollout legs begin at
-zero complete / eight pending. Perl consumes the neutral artifact through typed ActionIR/runtime proof, and Rust
-now consumes it through its shared typed truth/arity seam plus native, serialized, generated-plan, and emitted
-proof. The current ledger is two complete / six pending: Dart, Julia, Lua, generated/primary projection, recurring
-composed proof, and public no-drift remain owned by `FUTURE-PARITY-BACKLOG.5.2.4-.9`.
+zero complete / eight pending. Perl consumes the neutral artifact through typed ActionIR/runtime proof; Rust uses
+its shared typed truth/arity seam plus native, serialized, generated-plan, and emitted proof; Dart uses one typed
+helper/control seam plus native, normalized, generated-plan, standalone-emitted, and primary proof. The current
+ledger is three complete / five pending: Julia, Lua, generated/primary projection, recurring composed proof, and
+public no-drift remain owned by `FUTURE-PARITY-BACKLOG.5.2.5-.9`.
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,

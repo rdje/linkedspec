@@ -1162,14 +1162,14 @@ Current implementation status (2026-07-17):
 | --- | --- | --- | --- | --- |
 | Perl | eager once left-to-right; lazy controls share truthiness but select one branch/body | diagnostic / diagnostic / diagnostic | true / true | false |
 | Rust | eager once left-to-right; lazy controls share truthiness but select one branch/body | diagnostic / diagnostic / diagnostic | true / true | false |
-| Dart | `and/or` short-circuit; `not` evaluates only its first argument | true / false / true | true / true | false |
+| Dart | eager once left-to-right; lazy controls share truthiness but select one branch/body | diagnostic / diagnostic / diagnostic | true / true | false |
 | Julia | eager once left-to-right | false / false / true | true / true | false |
 | Lua | eager once left-to-right | false / false / true | false / true | true |
 
 Truthiness now has two current profiles. Perl, Rust, Dart, and Julia use nonempty-string/empty-aggregate truth;
-Lua retains the `"0"` and empty-aggregate boundaries. Helper evaluation and arity still differ on Dart, Julia,
-and Lua even where their truth rows agree. Dart, Julia, and Lua generated execution matches each native
-implementation, so emission is not the source of their remaining differences. Planning audit `.5.2.0`
+Lua retains the `"0"` and empty-aggregate boundaries. Helper evaluation and arity still differ on Julia and Lua
+even where their truth rows agree. Julia and Lua generated execution matches each native implementation, so
+emission is not the source of their remaining differences. Planning audit `.5.2.0`
 dependency-orders neutral policy, five backend repairs, generated/primary projection, a recurring gate, and public
 no-drift under `.5.2.1-.9`. Neutral policy `.5.2.1` is now executable as
 `linkedspec-logical-helper-v1`: 17 truthiness rows, ten helper cases, three eager-effect scenarios, four arity
@@ -1177,9 +1177,10 @@ failures, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.
 as typed ActionIR and lowers native/live/standalone-emitted execution through `LinkedSpec::RuntimeLogical`, with
 pre-effect arity failure, eager once-only operands, real booleans, and one typed condition/helper seam. Rust
 `.5.2.3` now applies the same truth and arity policy through `RuntimeValue::as_bool` across native, serialized,
-generated-plan, direct-value, and compiled emitted roles. Rollout is 2 complete / 6 pending. Until `.5.2.4-.9`
-land, use explicit predicates at disputed cross-backend boundaries and do not rely on one backend's remaining
-evaluation/empty-call behavior.
+generated-plan, direct-value, and compiled emitted roles. Dart `.5.2.4` shares `runtimeLogicalTruth` across helpers
+and controls, validates arity before effects, and proves native, normalized, generated-plan, standalone-emitted,
+and primary roles. Rollout is 3 complete / 5 pending. Until `.5.2.5-.9` land, use explicit predicates at disputed
+cross-backend boundaries and do not rely on one backend's remaining evaluation/empty-call behavior.
 
 Examples:
 

@@ -163,6 +163,12 @@ input-boundary, copied, and anonymous-bridge marks; and symbolic bare mark argum
 blind-call rules surface ordered child returns when no explicit parent return overrides them.
 Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
 `and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime.
+Logical helpers implement ADR `0043`: `and`/`or` require one or more positional operands, `not` requires exactly
+one, invalid arity fails before operand effects, and every valid operand evaluates once left-to-right before a
+real boolean is composed. `runtimeLogicalTruth` is the internal shared truth boundary for helpers and lazy
+controls: null, false, numeric zero, empty strings, and empty aggregates are false; every nonempty string and
+aggregate is true. Neutral native/normalized/generated-plan/standalone-emitted/primary proof is locked by
+`logical_helper_contract_test.dart`.
 Diagnostic helpers validate their one-plus/two-or-three positional arities before effects and evaluate every
 valid argument once left-to-right. Native `parse`, `execute`, `parseWithTrace`, and `executeWithTrace` calls may
 install a per-invocation `diagnosticOutputSink`; it receives typed `RuntimeDiagnosticOutputEvent` values with

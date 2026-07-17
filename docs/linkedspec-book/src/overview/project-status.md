@@ -156,7 +156,9 @@ Three backbone items tracked major structural modernization — all done:
   and 15 mutations pass offline. Perl `.5.2.2` supplies typed logical ActionIR/runtime behavior across native,
   live, and standalone-emitted execution. Rust `.5.2.3` now aligns the shared condition/helper truth seam,
   pre-effect logical arity, native structured fields, and native/serialized/generated-plan/direct/compiled-
-  emitted roles, advancing rollout to 2 complete / 6 pending under `.5.2.4-.9`.
+  emitted roles. Dart `.5.2.4` now removes helper short-circuit and empty-call drift through one typed
+  helper/control seam, pre-effect arity, eager values, logical-only structured fields, and native/normalized/
+  generated-plan/standalone-emitted/primary proof. Rollout is 3 complete / 5 pending under `.5.2.5-.9`.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

@@ -100,7 +100,7 @@ INVALID_IDS = ["and_zero", "or_zero", "not_zero", "not_many"]
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.2"),
     ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.3"),
-    ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.4"),
+    ("dart_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.4"),
     ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.5"),
     ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.6"),
     ("generated_and_primary_cli", "pending", "FUTURE-PARITY-BACKLOG.5.2.7"),
