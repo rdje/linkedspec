@@ -162,7 +162,7 @@ Perl rule metadata also exposes `resolved_edges` in source order. A grouped acti
 target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`:
 
 - action edges always carry their resolved zero-based regex index, including `0` when the source omitted it;
-- blind edges use `undef` for `regex_index` because blind dispatch does not select a parent-owned regex slot;
+- blind edges use `undef` for `regex_index` because blind dispatch does not select a target regex slot through the action-edge matcher;
 - `block` is `0` or `1`, and `fluent` is the normalized method chain or `undef`;
 - optional `source_form` is `bare` or `explicit`, but is provenance only. Removing it yields identical semantic
   rows for equivalent bare and explicit spellings, and runtime dispatch never reads it.

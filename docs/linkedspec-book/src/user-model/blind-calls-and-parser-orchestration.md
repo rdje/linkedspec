@@ -23,9 +23,9 @@ Read that as "call `ChildRule` as the next parser step." This is different from 
 -> ChildRule
 ```
 
-Read that as "the current rule owns the regex slot, and this edge targets `ChildRule` through the regex/action-edge machinery."
+Read that as "the enclosing rule owns action-edge selection, and this edge selects the regex slot declared by `ChildRule` (slot zero when unindexed)."
 
-The distinction matters because `=>` changes who owns the next match. With `->`, the parent rule is still driven by its own local regex slots. With `=>`, the child parser owns the matching step and the parent acts as the composition shell.
+The distinction matters because `=>` changes who owns the next match. With `->`, the enclosing rule selects a regex slot identified by the action edge's target rule and index. With `=>`, the child parser owns the matching step and the parent acts as the composition shell.
 
 ## Why blind calls exist
 
@@ -38,6 +38,10 @@ Blind calls are useful when a parent rule is mostly about composition:
 - staged extraction where an outer parser coordinates child parsers that own the real local anchors.
 
 They are not a replacement for ordinary action edges. If the parent rule needs to inspect a local regex match with `entry_text()`, `entry_group(...)`, source-location helpers, or a slot-specific action, an ordinary `-> Rule[index] { ... }` action edge is usually the right tool.
+
+Historical “super split” is not a blind-call use case. It is automatic inter-match gap capture in a
+repeated OR/default action rule whose `-> Rule[index]` edges select regex slots owned by their target
+rules. See [Capture, Marks, and Source Locations](../dsl/capture-marks-and-source-locations.md).
 
 ## Supported surface
 
@@ -70,10 +74,14 @@ The invalid cases fail for different reasons:
 Slot indexing belongs to regex/action edges:
 
 ```text
-/[A-Za-z_]+/ -> Name[0] { return(entry_text()) }
+Name: /[A-Za-z_]+/
+
+Top::
+ -> Name[0] { return(call(Name)) }
 ```
 
-It does not belong to blind calls, because the child parser owns the next matching step.
+Here `Name` owns the regex slot and its lifecycle; `Top` owns action selection. Slot indexing does not
+belong to blind calls, because the child parser owns the next matching step.
 
 ## Rule labels still decide composition
 
@@ -316,12 +324,14 @@ Use fluent post-call chains only when they remain short and obvious. Use an expl
 The examples above use explicit `return(array(...))` payloads because the returned shape is visible at the call site. For more complex shaping, prefer helper-style action blocks or explicit child-result dataflow:
 
 ```text
+ChildAnchor: /child-anchor/
+
 Parent:AND
  I {
    retv = undef;
    children = [];
  }
- /child-anchor/ -> Parent[0] {
+ -> ChildAnchor {
    retv = call(Child);
    push(children, retv);
    return(hash("kind", "parent", "children", copy(children)));
@@ -337,29 +347,34 @@ One rule body should use one edge family.
 This is invalid:
 
 ```text
+Header: /header/
+Body: /body/
+
 BadRule:AND
- /header/ -> Header
+ -> Header
  => Body
 ```
 
-The single-colon label is deliberate here: the negative example owns a regex slot, so the
-error being illustrated is the mixed edge family, not the entry marker.
-
-The reason is semantic, not cosmetic. `-> Header` says the parent owns a regex slot and then dispatches through an action edge. `=> Body` says the parent directly invokes `Body` as a parser step. Mixing both in one rule makes ownership unclear:
+The reason is semantic, not cosmetic. `-> Header` says the enclosing rule selects the regex slot
+declared by `Header` through its action-edge matcher. `=> Body` says the enclosing rule directly
+invokes `Body` as a parser step. Mixing both in one rule makes execution ownership unclear:
 
 - which matcher owns input progress,
 - which result shape should the parent return,
-- whether repeated grouping applies to parent regex slots or child parser calls,
+- whether repeated grouping applies to target-slot selection or child parser calls,
 - whether failure should be interpreted as local regex failure or child parser failure.
 
 Split the rule instead.
 
-If the parent owns regex slots, keep it action-edge oriented:
+If the enclosing rule selects target regex slots, keep it action-edge oriented:
 
 ```text
+Header: /header/
+ I { return(hash("kind", "header", "text", entry_text())) }
+
 HeaderRule:AND
- /header/ -> HeaderRule[0] {
-   return(hash("kind", "header", "text", entry_text()));
+ -> Header {
+   return(call(Header));
  }
 ```
 

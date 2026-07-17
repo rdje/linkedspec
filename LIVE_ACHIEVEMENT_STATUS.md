@@ -8,6 +8,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **INTER-MATCH-GAP-CAPTURE.0 — ratify inter-match gap capture**
+  (DONE — historical/runtime truth and future syntax direction are aligned; clean commit is the remaining workflow
+  step before returning to cursor generated-source v2 `.9.1.3.4`).
+
+  **Result:** ADR `0045` recovers “super split” as automatic prefix/interstitial gap access in repeated OR/default
+  action rules. Target rules own regex slots and lifecycle; enclosing rules own selection/gap orchestration.
+  `@capture_gaps` is the accepted future semantic name. Stable slots use future spacing-insensitive
+  `name=/regex/` declarations and `Rule[name]` selectors while unindexed/numeric forms remain compatible. No
+  executable behavior changed; `.1-.7` remain gated behind the full cursor rollout and explicit activation.
+
+  **Finding:** Existing marker-member parity is not real: Perl anonymous markers roll rule-wide, Lua/LuaJIT use
+  preceding-slot events, and Rust/Dart/Julia do not execute them natively. The exact matrix is durable and `.1`
+  owns reconciliation; explicit helper contracts are unchanged.
+
+  **Proof:** Imported baseline `cf25bd37`, drift commits `8588b07b`/`300e6950`, current descriptor projection, and
+  a live `Top::OR` → `Document[0..2]` probe prove exact target ownership, three gap/lifecycle pairs, post-action
+  rolling, and no automatic tail. Knowledge Map passes at 583 facts / 4,106 keys; mdBook, memory architecture,
+  doctrine enforcement, and whitespace checks pass.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.3 — project Perl cursor descriptors**
   (DONE — descriptor identity/edge projection and complete signoff pass; the clean commit is the only remaining
   workflow step before generated-source v2 `.9.1.3.4` can activate).

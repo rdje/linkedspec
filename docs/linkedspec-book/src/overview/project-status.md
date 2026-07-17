@@ -55,6 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
+- **Inter-match gap capture direction** — ADR `0045` recovers historical “super split” as automatic prefix/interstitial source-gap access around repeated OR/default action edges. Target rules own referenced regex slots and lifecycle code; the enclosing rule owns selection and gap orchestration. The accepted future `@capture_gaps` spelling and spacing-insensitive `name=/regex/` → `Rule[name]` slot contract are not implemented; their neutral contract/rollout remains dependency-gated behind the active rule-local cursor program. The same audit records existing marker drift: Perl anonymous scope is rule-level, Lua's is preceding-slot-local, and Rust/Dart/Julia do not execute marker members natively.
 - **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred/future work. Lua input/live-cursor
   controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls `.4.3.7.2` pass 116/116, and non-consuming
   earliest-boundary `.4.3.7.5` passes 117/117 on PUC Lua and LuaJIT. Complete named-mark `.17.1-.17.5` align and

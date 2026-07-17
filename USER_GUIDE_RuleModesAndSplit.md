@@ -544,8 +544,9 @@ The same idea extends to longer chains:
 This distinction is worth keeping very explicit.
 
 `-> child_rule` means:
-- match through the current rule's regex/edge machinery,
-- and use `child_rule` as the action-edge target for that regex slot.
+- let the enclosing rule select through its action-edge matcher,
+- using the regex slot declared by `child_rule` (slot zero when no index is written),
+- and run this edge's action with that selected match.
 
 `=> child_rule` means:
 - invoke `child_rule` directly as a parser step,
@@ -578,9 +579,9 @@ This rule is not just stylistic.
 The two edge families describe two different execution models.
 
 `-> child_rule` means:
-- this rule is still driven by its own regex-slot machinery,
-- a local regex hit decides which slot matched,
-- and the action edge then follows that regex-slot decision.
+- this rule is driven by action-edge selection,
+- the named target rule and optional index identify the regex slot to select,
+- and the enclosing rule runs the corresponding action after that target slot matches.
 
 `=> child_rule` means:
 - this rule is acting as a composition shell,
@@ -603,7 +604,7 @@ So if one rule mixes both families, several semantic questions become muddy very
 That is why the current contract stays strict:
 - one rule, one execution model.
 
-If the rule is mainly choosing among its own regex slots, use `->`.
+If the rule is mainly selecting explicitly targeted regex slots, use `->`.
 
 If the rule is mainly orchestrating child parsers as building blocks, use `=>`.
 
@@ -679,8 +680,11 @@ Blind calls make the most sense when the parent rule is mainly composition logic
 That happens in patterns like:
 - wrapper rules,
 - staged outer orchestration,
-- coarse-to-fine parsing where child rules own the real local anchors,
-- and “super split” or segmentation passes where the parent rule coordinates child parsers instead of owning all the regex slots itself.
+- and coarse-to-fine parsing where child rules own the real local anchors.
+
+Do not call this blind-call surface “super split.” The historical term refers to automatic
+inter-match gap capture in repeated OR/default rules with action edges, described below. It is not a
+blind-call mode.
 
 Representative staged-orchestration sketch:
 
@@ -781,20 +785,108 @@ There is no extra shorthand in this immediate rule-mode family still waiting to 
 
 The remaining deferred work is broader grouped-rule exploration that should only move when real authoring needs justify it, not because the DSL needs every possible combinator spelling up front.
 
-## `@capture_slice`: The Split Boundary Cursor
-`@capture_slice` is now the preferred grammar surface for this feature.
+## Historical “Super Split”: Inter-Match Gap Capture
+
+The original split-like feature belongs to a repeated OR/default rule with action edges. The target
+rule owns the regexes and retains its lifecycle/code; the enclosing rule refers to target slots and
+receives the otherwise unmatched text before each selected match.
+
+The ownership shape is:
+
+```text
+Document:
+ /HEADER[^\n]*/
+ /SECTION[^\n]*/
+ /FOOTER[^\n]*/
+ I {
+   return(hash("text", entry_text()))
+ }
+
+Top::OR
+ @move_pos
+ -> Document[0] { ... }
+ -> Document[1] { ... }
+ -> Document[2] { ... }
+```
+
+`Document[0]`, `Document[1]`, and `Document[2]` identify the regex slots declared by `Document`.
+`Document` without an index is the slot-zero compatibility form. A regex written immediately before
+an action edge does not trigger or qualify that edge; inline same-rule forms that appear elsewhere in
+this guide are compact paragraph layouts, not an adjacency relationship.
+
+On the Perl reference, `@move_pos` enables this repeated sequence:
+
+1. select the next action edge from its named target rule/slot;
+2. expose the exact source text from the rolling boundary to that match's left edge through the
+   historical `$CAPTURE` channel and current capture helpers;
+3. run the selected edge action, which may call the target and receive its lifecycle result;
+4. update the rolling boundary to the parser cursor after the action;
+5. repeat.
+
+The current reference exposes entry-to-first-match prefix text and interstitial gaps. It does not
+automatically expose the final tail after the last match because no next match triggers another
+action. Trimming, conditional storage, and result shape belong to action code; the mechanism does not
+force one AST layout.
+
+ADR `0045` adopts **inter-match gap capture** as the formal concept, **lossless segmentation** as the
+broader model, and `@capture_gaps` as the accepted future backend-neutral directive. That spelling is
+not implemented. Its executable contract must still decide exact prefix, tail, empty-span,
+failure/backtracking, recursion, typed-span, diagnostic, and compatibility behavior after the active
+rule-local cursor rollout completes.
+
+The same future contract also has ratified terse named regex slots:
+
+```text
+Document:
+ header=/HEADER[^\n]*/
+ section = /SECTION[^\n]*/
+ footer= /FOOTER[^\n]*/
+ I {
+   return(hash("kind", entry_slot(), "text", entry_text()))
+ }
+
+Top::OR
+ @capture_gaps
+ -> Document[header]  { ... }
+ -> Document[section] { ... }
+ -> Document[footer]  { ... }
+```
+
+Horizontal whitespace around `=` is insignificant. At rule-paragraph level this form declares a
+stable rule-local regex slot; it is not mutable assignment. Named selectors avoid declaration-order
+magic numbers, while existing unindexed/numeric selectors remain compatibility forms. Neither the
+named declaration/selector nor the illustrative `entry_slot()` accessor is implemented; the accessor
+name remains executable-contract work.
+
+## `@capture_slice`: The Legacy Split Boundary Marker
+On the Perl reference, `@capture_slice` is the preferred alias for the legacy split-boundary marker.
 
 Older spellings `@capture_from_here` and `@move_pos` are still supported as compatibility aliases.
 
-There is now also a named checkpoint form:
+There is also a named checkpoint form:
 - `@mark(name)`
 
-That named form stores the current parser position under `name` so later `capture_from(name)` and `capture_len_from(name)` calls can read the current-edge span that starts at that named checkpoint.
+On Perl, that named form is guarded by the preceding regex index and stores the current parser
+position under `name` so later `capture_from(name)` and `capture_len_from(name)` calls can read the
+current-edge span that starts at that checkpoint.
 
 It is easy to misunderstand what it does, so here is the precise version:
 - it does not collect text by itself,
 - it does not return an AST node by itself,
 - it advances the capture-start cursor used by later `$CAPTURE`-style span extraction.
+
+For the historical repeated-action use, the directive lowers to rule-level local-end code and rolls
+after each successful action; it is not attached to the nearest regex or edge by textual adjacency.
+The later explicit helpers such as `start_capture_slice()` also let action/lifecycle code move the
+same anonymous boundary manually. Those generalized helpers are useful, but they do not redefine the
+original inter-match gap feature.
+
+Do not assume marker-member parity across backends. Lua/LuaJIT later implemented all anonymous and
+named marker members as preceding-regex-slot events. Rust drops parsed markers from native compiled
+state; Dart and Julia preserve them as source body data but do not execute them natively. Explicit
+helpers such as `start_capture_slice()` and `mark_here(name)` are separate contracts and are the clear
+choice when timing must be portable. ADR `0045` leaves legacy reconciliation to the executable
+`@capture_gaps` contract.
 
 In compiler terms, it lowers to:
 
@@ -827,8 +919,8 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input,
 - and `cursor_rest()` / `cursor_rest_len()` read from the live parser cursor through end-of-input.
 
-That means the full current mental model is:
-- `@capture_slice` moves the anonymous boundary at paragraph level,
+That means the current Perl anonymous-boundary mental model is:
+- `@capture_slice` enables rule-level post-action rolling at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
 - `capture_take_until_cursor()` reads the current anonymous through-cursor span and also advances that anonymous boundary,
@@ -2452,7 +2544,7 @@ The current supported contract is:
 - the clearest documented blind-call shapes today are ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`),
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
-- `@capture_slice` is the preferred split-boundary cursor feature,
+- on the Perl reference, `@capture_slice` is the preferred alias for the legacy rule-level split-boundary marker,
 - `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_take_until_cursor()`, `capture_take_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `start_capture_slice_from(name)` is the preferred named-to-anonymous bridge helper when one stored named checkpoint should become the active anonymous split boundary again,
@@ -2463,9 +2555,9 @@ The current supported contract is:
 - `capture_take_between_len(start_mark, end_mark)` is the preferred advancing explicit two-mark width helper when both boundaries should stay fully explicit,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
-- `@mark(name)` is the preferred named checkpoint surface,
+- `@mark(name)` remains an accepted marker-member spelling with backend-specific scope; use `mark_here(name)` in action code when portable timing matters,
 - `mark_input_start(name)` and `mark_input_end(name)` are the preferred absolute whole-input boundary writers when the rule wants explicit named checkpoints for the input start or input end,
-- `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
+- on Perl, `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same rule-level lowering; Lua/LuaJIT give all three spellings preceding-slot scope, while Rust/Dart/Julia do not execute marker members natively,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_until_cursor_from(name)` means “text from the named checkpoint through the live parser cursor,”

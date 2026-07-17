@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-17 — INTER-MATCH-GAP-CAPTURE.0 — recover and ratify inter-match gap capture
+
+Recovered the director's historical “super split” contract from the imported Perl baseline and current runtime.
+The enclosing repeated OR/default rule resolves every action edge from the named target rule and zero-based regex
+slot; target rules retain their lifecycle/code. `@move_pos` makes prefix/interstitial source text available to the
+selected action and advances the boundary after that action. A live `Top::OR` → `Document[0..2]` probe returned
+three exact `[gap, Document lifecycle result]` pairs and confirmed that no final tail is automatic.
+
+ADR `0045` fixes the formal name as inter-match gap capture, the broader architecture as lossless segmentation,
+and `@capture_gaps` as the accepted future neutral directive. It explicitly rejects the later blind-call and
+regex/edge-adjacency interpretations. `@move_pos`, `@capture_from_here`, and `@capture_slice` remain current Perl
+compatibility spellings; this slice changes no parser, compiler, runtime, descriptor, generated source, CLI,
+fixture, test, or capability behavior.
+
+The closeout audit also corrected a foundational parity overclaim. Perl's anonymous marker is
+unconditional rule-level local-end code; Lua/LuaJIT later made it a preceding-regex-slot event; Rust
+drops the parsed marker during native compilation; Dart and Julia retain it only as non-executed body
+state. The task, ADR, Knowledge Map, and book now record that exact matrix. Explicit capture/mark
+helpers are unaffected; `.1` owns marker migration and the neutral contract.
+
+Public guides, the mdBook, roadmap/status surfaces, task index, ADR index, and Knowledge Map now preserve the
+correct ownership and automatic rolling model. Stable named regex-slot identity is accepted as the direction for
+replacing positional-only `Document[N]` coupling while keeping numeric compatibility. The terse
+`name=/regex/` declaration selected as `Document[name]` is ratified future syntax; horizontal whitespace around
+`=` is insignificant. Implementation remains behind the dependency-gated executable contract.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.3 — project Perl cursor descriptor v1
 
 Perl outward descriptors now identify `linkedspec-rule-local-cursor-v1`, omit descriptor-wide `meta.parse_mode`,

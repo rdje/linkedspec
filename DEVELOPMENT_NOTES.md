@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`INTER-MATCH-GAP-CAPTURE.0` — target identity, not adjacency, defines automatic gaps):
+  The imported baseline already contains the authoritative mechanism. An ACODE stores `relabel` and `reidx`;
+  `spec_gdata` copies that target rule's regex slot into the enclosing rule's matcher; the repeated action handler
+  computes `$CAPTURE` before action code and spends `@move_pos` as local-end `$IPOS = pos $$STRING` afterward.
+  Current RuleIR retains the same target/index identity. A live three-slot external-target probe proves exact
+  prefix/interstitial gaps plus `Document` lifecycle results and no automatic tail. Thus the implementation did
+  not adopt regex/edge adjacency; later examples merely made that false model look plausible.
+
+  Documentation drift is now source-located. Commit `8588b07b` introduced inline-regex guide examples and reduced
+  the feature to a split-cursor explanation; `300e6950` later associated “super split” with blind-call
+  orchestration. ADR `0045` corrects both without rewriting history: inter-match gap capture is an automatic
+  repeated OR/default action-edge facility, target rules own regex slots and lifecycle, and `@capture_gaps` is the
+  accepted future semantic name. The generalized manual capture/mark API remains related but is not the original
+  definition.
+
+  Positional target indexes are a separate maintainability seam. The accepted direction is stable rule-local
+  regex-slot identity compiled into `{target_rule, target_slot_id}` and carried through matcher results, including
+  identical regex patterns. Numeric selectors remain compatible. The ratified future syntax is same-line
+  `header=/.../` inside the target rule plus `Document[header]` at the edge, with insignificant horizontal space
+  around `=`. Name rules, anonymous/named mixing, lifecycle accessors, diagnostics, descriptors, and migration
+  remain dependency-gated executable-contract work.
+
+  A closeout compiler/runtime audit invalidated one later parity assumption. Perl `MOVE_POS` appends
+  unconditional rule-level `LECODE`, while Perl `MARK_POS` alone records and guards the preceding
+  regex index. Lua models all anonymous/named markers as preceding-slot events. Rust discards
+  `SplitMarker` during compilation; Dart and Julia retain original body elements but their native
+  interpreters never consume them. This is existing drift, not a reason to mutate runtimes in a
+  decision leaf. `INTER-MATCH-GAP-CAPTURE.1` must start from this matrix and decide migration before
+  the new `@capture_gaps` rollout.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.3` — project resolved semantics, keep provenance observational):
   A descriptor should expose the same normalized facts that execution spends, not reconstruct intent from emitted
   handler text. Bootstrap edge tokens therefore carry a small descriptor-only fact record; RuleIR orders those

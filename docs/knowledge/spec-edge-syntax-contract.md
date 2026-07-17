@@ -7,6 +7,8 @@ answers:
   - "what is the action-vs-blind edge dispatch model"
   - "when should I use -> instead of =>"
   - "who owns the match for action and blind-call edges"
+  - "does a regex preceding an action edge trigger that edge"
+  - "which rule owns the regex selected by Rule[index]"
   - "are grouped action-edge targets valid"
   - "is -> A | B valid without a code block"
   - "where is grouped action-edge syntax regression locked"
@@ -33,9 +35,12 @@ As of `SPEC-FORMAT-TERSE.3.1`, Round 3 keeps the existing edge syntax:
 
 ## Dispatch model
 
-Use `->` when the current rule owns the regex slot and the attached code needs
-the current local match, capture groups, source locations, or slot-indexed
-action placement. The parent remains regex-slot oriented.
+Use `->` when the enclosing rule should own selection and attached action code.
+The edge's target rule owns the selected regex slot: `-> Document` selects its
+default slot and `-> Document[index]` selects an explicit zero-based slot. The
+target retains its lifecycle/code. A preceding regex line has no trigger or
+qualification relationship with the following edge; compact same-rule layouts
+still resolve through the written target and index.
 
 Use `=>` when the parent is a composition shell and the child parser should own
 the next match. The parent rule label still decides whether those blind child
@@ -61,3 +66,7 @@ action ownership in OR/default. Explicit `->` and `=>` retain the meanings above
 remain legal across families, and resolved ownership still cannot mix. Indexed
 and grouped bare forms obey the resolved edge family's existing limits. Rollout
 is pending under `FUTURE-PARITY-BACKLOG.9.1.2-.9`.
+
+ADR `0045` additionally fixes historical “super split” as inter-match gap
+capture around these externally resolved action-edge matches. It is unrelated
+to blind calls; the accepted future `@capture_gaps` spelling is not implemented.

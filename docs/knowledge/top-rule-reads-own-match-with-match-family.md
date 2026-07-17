@@ -1,6 +1,6 @@
 ---
 id: top-rule-reads-own-match-with-match-family
-title: "Authoring mechanics (TOP-RULE-AS-NORMAL.4): a top (::) rule matching its OWN regex slots reads its match with the match_* family from a POST-MATCH edge action, NOT entry_*/an I-block. Nothing 'enters' a top rule, so entry_* is empty and an I-block runs before the rule matches; entry_text()/entry_group() on a top rule yield null. A dispatched body rule is the opposite (use entry_* — the parent's dispatch is the entering match). Also: a bare edge-less regex slot in an AND rule is a positional anchor that is NOT separately consumed/captured, so fold a separator like \\s*=\\s* into an adjacent slot that owns an edge."
+title: "Authoring mechanics (TOP-RULE-AS-NORMAL.4): a top (::) rule matching its OWN regex slots reads its match with the match_* family from a POST-MATCH edge action, NOT entry_*/an I-block. Nothing 'enters' a top rule, so entry_* is empty and an I-block runs before the rule matches; entry_text()/entry_group() on a top rule yield null. A dispatched body rule is the opposite (use entry_* — the parent's dispatch is the entering match). Also: a bare edge-less regex slot in an AND rule is a positional anchor that is NOT separately consumed/captured, so fold a separator like \\s*=\\s* into a slot explicitly selected by an edge."
 answers:
   - "how does a top rule read its own regex match (match_* vs entry_*)"
   - "why does entry_text() / entry_group() return null on a top rule"
@@ -39,10 +39,12 @@ reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $J=JSON::PP->new->canonica
 ```text
 Pair::AND
  I { set(hash(pair), {}) }
- /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
+ /([A-Za-z_]\w*)\s*=\s*/
+ /([^,\n]+)/
+ -> Pair[0] {
    set(hash(pair), set_key(hash(pair), "name", match_group(0)));
  }
- /([^,\n]+)/ -> Pair[1] {
+ -> Pair[1] {
    return(set_key(hash(pair), "value", match_group(0)));
  }
 ```
@@ -55,7 +57,7 @@ the book now warns against.
 A bare regex slot with **no edge** in an `AND` rule (e.g. a middle `/\s*=\s*/`) is a
 positional anchor that does not separately advance/capture: the next captured slot's
 `match_*` still starts where the previous edge slot left the cursor. Fold a separator into
-a slot that owns an edge (the `name` slot above eats `\s*=\s*`), rather than leaving it as
+a slot explicitly selected by an edge (the `name` slot above eats `\s*=\s*`), rather than leaving it as
 a standalone middle slot. (A bare-slot structural sketch with no action returns `null`
 because no edge action returns a payload — it illustrates mode shape only.)
 

@@ -47,18 +47,20 @@ edge action** and the `match_*` family:
 ```text
 Pair::AND
  I { pair = {} }
- /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
+ /([A-Za-z_]\w*)\s*=\s*/
+ /([^,\n]+)/
+ -> Pair[0] {
    set(pair, set_key(pair, "name", match_group(0)));
  }
- /([^,\n]+)/ -> Pair[1] {
+ -> Pair[1] {
    return(set_key(pair, "value", match_group(0)));
  }
 ```
 
 On input `name = value` (parse mode `consume`) this returns
-`{ "name": "name", "value": "value" }`. (A bare edge-less regex slot in an `AND` rule is
-an anchor that is not separately consumed, so fold a separator like `\s*=\s*` into an
-adjacent slot that owns an edge, as the name slot does here.)
+`{ "name": "name", "value": "value" }`. The two declarations belong to `Pair`; the later
+`Pair[0]` and `Pair[1]` targets select them explicitly. Their code blocks are not attached by textual
+adjacency. The separator `\s*=\s*` belongs in the first declared slot because that slot consumes it.
 
 ### Recursion and termination (consume before you recurse)
 

@@ -54,6 +54,81 @@ Read it as:
 read the current segment, then roll the segment start forward
 ```
 
+## Historical “super split”: automatic inter-match gaps
+
+The historical nickname “super split” refers to one specific use of the anonymous boundary:
+automatic inter-match gap capture in a repeated OR/default rule with action edges. It is unrelated to
+blind calls.
+
+Keep regex ownership and action ownership separate:
+
+```text
+Document:
+ /HEADER[^\n]*/
+ /SECTION[^\n]*/
+ /FOOTER[^\n]*/
+ I {
+   return(hash("text", entry_text()))
+ }
+
+Top::OR
+ @move_pos
+ -> Document[0] { ... }
+ -> Document[1] { ... }
+ -> Document[2] { ... }
+```
+
+`Document` declares the three regex slots and retains its lifecycle/code. `Top` owns repeated action
+selection and refers to those slots explicitly. A regex line immediately before `-> Document` would
+not trigger that edge; action matching resolves from the written target rule and index.
+
+On the Perl reference, the legacy directive initializes a rule-invocation boundary, makes the exact
+text before each selected match available to that action, then advances the boundary after the action.
+The target action may call `Document` and combine the gap with its lifecycle result. Current reference
+behavior includes entry-to-first-match prefix text and interstitial gaps; it does not automatically
+deliver a final unmatched tail after the last selected match.
+
+That marker-member behavior is not currently portable. Lua/LuaJIT later attach the anonymous marker
+to the preceding regex slot, while Rust, Dart, and Julia parse marker syntax without executing it in
+their native runtime paths. Explicit capture/mark helper calls are a separate governed surface. The
+future `@capture_gaps` contract must reconcile this matrix rather than silently inheriting Lua's
+positional reinterpretation.
+
+The active baseline leaves storage and AST shape to action code. “Automatic” describes supplying the
+gap and rolling its boundary, not appending a mandatory result node.
+
+ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
+broader model. `@capture_gaps` is the accepted future neutral directive, but it is not implemented.
+Its executable contract must decide prefix/tail, empty spans, failure and backtracking, recursion,
+typed source spans, diagnostics, and compatibility before backend work begins.
+
+The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
+automatic repeated-action behavior.
+
+The future contract also adopts terse named regex slots so action edges need not depend on declaration
+order:
+
+```text
+Document:
+ header=/HEADER[^\n]*/
+ section = /SECTION[^\n]*/
+ footer= /FOOTER[^\n]*/
+ I {
+   return(hash("kind", entry_slot(), "text", entry_text()))
+ }
+
+Top::OR
+ @capture_gaps
+ -> Document[header]  { ... }
+ -> Document[section] { ... }
+ -> Document[footer]  { ... }
+```
+
+Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
+declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
+selectors remain compatibility forms. This named-slot syntax, `@capture_gaps`, and the illustrative
+`entry_slot()` accessor are not implemented; the exact lifecycle accessor remains unsettled.
+
 ## `mark_*`: named checkpoints
 
 Marks are named checkpoints.

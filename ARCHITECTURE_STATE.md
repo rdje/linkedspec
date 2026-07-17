@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: ADR `0045` recovers historical “super split” as inter-match gap capture in repeated
+  OR/default action rules, not blind calls. The enclosing rule owns repeated selection/gap orchestration; each
+  action edge identifies the target rule and zero-based regex slot that own the match, and the target retains its
+  lifecycle/code. Imported-baseline and current live proof confirm automatic prefix/interstitial capture followed
+  by post-action boundary advance; no final tail is automatic. Accepted future `@capture_gaps`, typed invocation-local
+  spans, exact failure/tail policy, and five-backend rollout remain dependency-gated. Stable named slots use the
+  ratified future same-line `name=/regex/` declaration and `Rule[name]` selector with non-semantic horizontal
+  spacing around `=`; that surface is also unimplemented. The audit additionally records current marker drift:
+  Perl anonymous markers are rule-level, Lua's are preceding-slot events, and Rust/Dart/Julia do not execute them
+  natively. Explicit helpers are separate; this decision slice changes no runtime behavior.
 - `2026-07-17` refresh: Perl descriptor projection `FUTURE-PARITY-BACKLOG.9.1.3.3` now identifies
   `linkedspec-rule-local-cursor-v1`, removes descriptor-wide global-mode metadata, and publishes each rule's
   intrinsic `cursor_policy` plus ordered `resolved_edges`. Every resolved row contains semantic ownership,

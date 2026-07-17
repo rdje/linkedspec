@@ -24,6 +24,11 @@ Use the simple forms first. Reach for the advanced lifecycle hooks only when the
 
 Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragment. Complete public examples should use the two-rule shape: a no-regex `::` entry rule dispatches to one or more normal `:` rules that own the regexes. In a dispatched normal rule, `I { ... }` sees the entry match, while `-> Rule[index] { ... }` actions run for later local slots in that rule.
 
+Action-edge identity comes from the written target, never adjacency. `-> Document[2]` selects regex
+slot 2 declared by `Document`, even when the enclosing rule is `Top`; a regex line immediately before
+the edge does not trigger its block. Compact same-rule examples below place declarations and edges in
+one paragraph, but their edges still resolve by explicit rule name and zero-based slot index.
+
 ## Rule paragraph members
 
 A rule paragraph can contain several kinds of members:
@@ -36,7 +41,7 @@ A rule paragraph can contain several kinds of members:
 | Empty action edge | `-> Token` | dispatch to the target rule with default call behavior. |
 | Blind-call edge | `=> Child` / `=> Child { ... }` | call another rule as part of the rule body without tying the body to one regex slot action. |
 | Lifecycle block | `I { ... }` | run placement-specific setup or hook code. |
-| Split/mark marker | `@capture_slice` / `@mark(body_start)` | emit a placement-specific source-boundary update. |
+| Split/mark marker | `@capture_slice` / `@mark(body_start)` | request a backend-specific compatibility update; see the scope caveat below. |
 
 Example:
 
@@ -83,7 +88,8 @@ Token: /[A-Za-z_]+/
 
 ## Action edges: `-> Rule[index] { ... }`
 
-Action edges attach code to one local match slot.
+Action edges attach code to one regex slot declared by their named target rule. The enclosing rule
+owns selection/action orchestration; the target rule owns the regex and retains its lifecycle code.
 
 Example:
 
@@ -424,7 +430,7 @@ Items:*
 
 Use these hooks when the default collection behavior is not the shape you want. Otherwise prefer explicit action-edge returns or normal accumulator logic in action blocks because they are easier for readers to follow.
 
-## Split and mark markers are placement-sensitive
+## Marker members currently differ by backend
 
 Marker forms such as:
 
@@ -433,14 +439,13 @@ Marker forms such as:
 @mark(body_start)
 ```
 
-are not ordinary return-value helpers. They are placement-sensitive rule members.
+are rule members, not ordinary return-value helpers, but they do not currently have one portable
+execution contract. Perl treats the three anonymous spellings as one rule-level rolling switch;
+Perl's named marker alone is guarded by the preceding regex index. Lua/LuaJIT treat both anonymous
+and named markers as preceding-slot events. Rust, Dart, and Julia parse marker members but do not
+execute them in their native runtime paths.
 
-`@capture_slice` moves the anonymous capture boundary after the matched grammar
-slot. `@mark(name)` stores a named checkpoint for later same-rule reads. In
-action-bearing examples, make the boundary slot explicit and read the marker
-effects from a later action.
-
-Example:
+This example demonstrates Lua's current positional behavior only:
 
 ```text
 Top::AND
@@ -467,7 +472,7 @@ MarkerBody:AND
  }
 ```
 
-With `parse_mode => "seek"`, input `foo(alpha)` returns
+On Lua/LuaJIT, with seek cursor policy, input `foo(alpha)` returns
 `[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
 The opener slot establishes both the anonymous boundary and the named mark after
 its action runs; the closing slot can then read the same span through
@@ -479,7 +484,10 @@ boundary. It applies each event after the owning slot's action/child dispatch an
 before `LE`, matching the timing above. Malformed marker names and trailing marker
 fragments are rejected rather than silently ignored.
 
-Use the helper-call form such as `start_capture_slice()` when the boundary move belongs inside an action or lifecycle block. Use the marker form when the grammar slot itself is the boundary.
+Use explicit helper calls such as `start_capture_slice()` and `mark_here(name)` when portable timing
+matters. Marker members remain compatibility surfaces until `INTER-MATCH-GAP-CAPTURE.1` reconciles
+their scope. Historical automatic rule-level gap rolling is documented separately as the future
+`@capture_gaps` contract.
 
 ## Choosing the right placement
 
@@ -492,8 +500,8 @@ Use this as the default decision guide:
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
 | Append repeated child results | `push(items, retv)` inside action/iteration logic |
-| Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
-| Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
+| Mark or move a boundary portably | `mark_here(name)` or `start_capture_slice()` inside a block |
+| Maintain a backend-specific marker member | `@mark(name)` / `@capture_slice`, only with the backend-scope caveat above |
 | Return a shaped optional fallback | `LX { return(...) }`, used sparingly |
 | Customize repetition collection | `IT { ... }`, `EX { ... }`, or `E { ... }`, used only when default behavior is not enough |
 

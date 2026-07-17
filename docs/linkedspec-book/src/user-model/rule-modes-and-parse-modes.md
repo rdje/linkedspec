@@ -362,7 +362,7 @@ That is different from an action edge:
 
 The short version is:
 
-- `-> Header` is regex-slot oriented: the current rule owns the regex slot, then the edge targets a rule/action path.
+- `-> Header` is regex-slot oriented: the enclosing rule selects slot zero declared by `Header`, then runs the action path.
 - `=> Header` is parser-step oriented: the parent directly calls the child rule and works with the child result.
 
 Blind calls do not secretly turn a rule into a sequence. The rule label still decides the composition model.
@@ -425,12 +425,16 @@ For a deeper walkthrough of `=>`, post-call processing, edge-family selection, a
 Do not mix action edges and blind calls in the same rule body:
 
 ```text
+ChildA: /.../
+ChildB: /.../
+
 BadRule:
- /.../ -> ChildA
+ -> ChildA
  => ChildB
 ```
 
-Keep one rule body on one execution model. Use `->` when the parent owns regex slots. Use `=>` when the parent is a composition shell around child parsers.
+Keep one rule body on one execution model. Use `->` when the enclosing rule selects explicitly
+targeted regex slots. Use `=>` when it is a composition shell around child parsers.
 
 ### Forward-moving, non-backtracking model
 
