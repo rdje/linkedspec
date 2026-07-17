@@ -99,7 +99,7 @@ LAZY_IDS = ["if_false_selects_else", "if_true_selects_then"]
 INVALID_IDS = ["and_zero", "or_zero", "not_zero", "not_many"]
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.2"),
-    ("rust_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.3"),
+    ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.3"),
     ("dart_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.4"),
     ("julia_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.5"),
     ("lua_native", "pending", "FUTURE-PARITY-BACKLOG.5.2.6"),
@@ -423,7 +423,12 @@ def mutation_smoke(contract: dict[str, Any]) -> int:
         ("effect omission", lambda data: data["effect_scenarios"][0].__setitem__("expected_effects", ["and-first"])),
         ("arity effect", lambda data: data["invalid_arity_cases"][3].__setitem__("arguments_evaluated", 1)),
         ("diagnostic code", lambda data: data["error_schema"].__setitem__("code", "invalid_arity")),
-        ("premature rollout", lambda data: data["rollout"][1].__setitem__("status", "complete")),
+        (
+            "premature rollout",
+            lambda data: next(row for row in data["rollout"] if row["status"] == "pending").__setitem__(
+                "status", "complete"
+            ),
+        ),
         ("generated omission", lambda data: data["projections"].pop("generated")),
         ("duplicate truth case", lambda data: data["truthiness_cases"].append(copy.deepcopy(data["truthiness_cases"][0]))),
         ("fixture source", lambda data: data["fixtures"]["values"].__setitem__("spec_source", data["fixtures"]["values"]["spec_source"] + "\n")),
@@ -449,10 +454,12 @@ def main() -> None:
         mutations = mutation_smoke(contract)
     except (OSError, json.JSONDecodeError, ContractError) as error:
         raise SystemExit(f"logical-helper-contract: {error}") from error
+    complete = sum(row["status"] == "complete" for row in contract["rollout"])
     print(
         "logical-helper-contract: OK "
         f"({len(contract['truthiness_cases'])} truthiness; {len(contract['helper_cases'])} helper; "
-        f"{len(contract['effect_scenarios'])} effect; 1 complete / {len(contract['rollout']) - 1} pending; "
+        f"{len(contract['effect_scenarios'])} effect; {complete} complete / "
+        f"{len(contract['rollout']) - complete} pending; "
         f"{mutations} drift mutations)"
     )
 

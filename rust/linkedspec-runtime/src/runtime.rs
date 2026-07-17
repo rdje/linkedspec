@@ -141,6 +141,10 @@ pub(crate) struct RuntimeFailureContext {
     pub(crate) stage: &'static str,
     pub(crate) summary: &'static str,
     pub(crate) rule_label: Option<String>,
+    pub(crate) code: Option<&'static str>,
+    pub(crate) helper_name: Option<String>,
+    pub(crate) actual_arity: Option<usize>,
+    pub(crate) expected_arity: Option<&'static str>,
 }
 
 #[derive(Debug, Clone)]
@@ -263,6 +267,30 @@ impl RuntimeContext {
                 stage,
                 summary,
                 rule_label: rule_label.map(str::to_string),
+                code: None,
+                helper_name: None,
+                actual_arity: None,
+                expected_arity: None,
+            });
+        }
+    }
+
+    pub(crate) fn capture_helper_arity_failure(
+        &mut self,
+        helper_name: &str,
+        actual_arity: usize,
+        expected_arity: &'static str,
+        rule_label: &str,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage: "helper_arity_mismatch",
+                summary: "Rust runtime helper arity mismatch",
+                rule_label: Some(rule_label.to_string()),
+                code: Some("helper_arity_mismatch"),
+                helper_name: Some(helper_name.to_string()),
+                actual_arity: Some(actual_arity),
+                expected_arity: Some(expected_arity),
             });
         }
     }

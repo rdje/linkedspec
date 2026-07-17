@@ -953,13 +953,15 @@ contract: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity diagnosti
 receiver composition, and lazy-control separation. Fifteen drift mutations pass; rollout begins at 0 complete / 8
 pending. Perl `.5.2.2` then replaces raw keyword calls and lazy host operators with typed eager logical values,
 pre-effect arity diagnostics, real booleans, and one truthiness seam shared by lazy conditions. Its native/live/
-emitted reference roles are complete, advancing rollout to 1 complete / 7 pending with Rust `.5.2.3` next in the
-backend sequence. Director-priority design audit `.9.1.0` finds no valid objective for a public/global
+emitted reference roles are complete. Rust `.5.2.3` now aligns the shared `RuntimeValue::as_bool` condition/helper
+seam, exact pre-effect logical arity, eager booleans, structured fields, and native/serialized/generated-plan/
+standalone-emitted execution, advancing rollout to 2 complete / 6 pending with Dart `.5.2.4` next in the backend
+sequence. Director-priority design audit `.9.1.0` finds no valid objective for a public/global
 `parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
 parity split. Director capture `.9.1.1.0` fixes rule-local ownership: parent OR/AND mode never propagates to or
 overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edges, explicit cross-family legality,
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
-is dependency-split under `.9.1.2-.9`; Rust logical `.5.2.3` resumes before that program activates.
+is dependency-split under `.9.1.2-.9`; Dart logical `.5.2.4` continues before that program activates.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

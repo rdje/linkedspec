@@ -2449,6 +2449,11 @@ boolean calls across value/control sites and routes both helpers and lazy condit
 shared-zero versus string-zero host edge, and the canonical hash-tree callback regression pass. Only
 `perl_native` advances; rollout is 1/7 and Rust `.5.2.3` is active.
 
+Index note 2026-07-17: Rust logical rollout `.5.2.3` routes helpers and lazy controls through one typed
+`RuntimeValue::as_bool` seam, validates logical arity before operand effects, and preserves eager booleans.
+Native, serialized, direct-value, generated-plan, and independently compiled emitted proof passes with exact
+structured arity fields. Only `rust_native` advances; rollout is 2/6 and Dart `.5.2.4` is next.
+
 ## Proposed Task Trees
 
 Proposed trees record accepted backlog direction, but they are not

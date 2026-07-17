@@ -5,7 +5,7 @@ ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. The
-active frontier returns to Rust logical-helper rollout `.5.2.3`.
+Rust logical-helper rollout `.5.2.3` is now complete; Dart `.5.2.4` is next.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -208,8 +208,10 @@ This `README.md` is the **single entry point** to the project.
   real booleans, typed truthiness, receiver composition, and lazy-control separation. Its 17 truth rows, ten helper
   cases, three effect scenarios, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.2.2` now
   owns typed logical ActionIR, eager once-only values, exact pre-effect diagnostics, and one truthiness seam shared
-  by logical values and lazy controls; rollout is 1 complete / 7 pending before Rust `.5.2.3` and the remaining
-  backend/projection/admission leaves.
+  by logical values and lazy controls. Rust `.5.2.3` now consumes that same policy through `RuntimeValue::as_bool`
+  and one pre-evaluation arity guard across native, serialized, direct-value, generated-plan, and standalone-
+  emitted execution. Exact structured helper fields, receiver flow, and lazy-control separation pass; rollout is
+  2 complete / 6 pending before Dart `.5.2.4` and the remaining backend/projection/admission leaves.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

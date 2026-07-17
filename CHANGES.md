@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.3 — align Rust logical helpers and truthiness
+
+Aligned Rust with ADR `0043` and `linkedspec-logical-helper-v1`. `RuntimeValue::as_bool` now makes only undef,
+false, numeric zero, empty strings, and empty aggregates false; nonempty strings such as `"0"` and `"false"` are
+true. The same seam feeds eager `and`/`or`/`not` composition and lazy `if`/`switch`/`while` conditions without
+reusing scalar rendering or numeric parsing.
+
+Added pre-operand positional arity validation for one-plus `and`/`or` and exact-one `not`. Native structured
+failures expose exact `code`, `helper_name`, `actual_arity`, and `expected_arity` fields; generated execution keeps
+the same deterministic detail. Valid operands remain eager, once-only, left-to-right and return real booleans.
+The unchanged neutral fixture now passes native compiled, serialized reconstruction, direct-value, generated-plan,
+and independently compiled standalone-emitted roles, including effects, receivers, lazy controls, and invalid
+calls. Rust's current runtime value enum has no first-class codeblock variant, so this slice does not activate the
+separately owned explicit literal syntax.
+
+Complete Rust core/runtime, Perl-oracle corpus, full generated-source classifier, 197 integration, emitted-source,
+diagnostic, binding, Unicode, variadic, and doc-test suites pass. Rust primary passes 62/62 under both default and
+POSIX environments. The neutral checker passes 17 truth rows, ten helper cases, three effect scenarios, 2 complete
+/ 6 pending, and 15 mutations. Only `rust_native` advances; Dart `.5.2.4` is next.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.1.1 — ratify rule-local cursor and bare edges
 
 Adopted ADR `0044` as the exact backend-neutral target. AND-family rules intrinsically consume; OR/default-family

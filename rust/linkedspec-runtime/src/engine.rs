@@ -132,6 +132,48 @@ fn validate_diagnostic_output_arity(
     ))
 }
 
+fn logical_helper_expected_arity(
+    name: &str,
+    raw_args: &[Arg],
+    actual_arity: usize,
+) -> Option<&'static str> {
+    let positional_only = raw_args.iter().all(|arg| matches!(arg, Arg::Positional(_)));
+    match name {
+        "and" | "or" if positional_only && actual_arity >= 1 => None,
+        "and" | "or" => Some("at least 1 positional argument"),
+        "not" if positional_only && actual_arity == 1 => None,
+        "not" => Some("exactly 1 positional argument"),
+        _ => None,
+    }
+}
+
+fn validate_logical_helper_arity(
+    name: &str,
+    raw_args: &[Arg],
+    actual_arity: usize,
+    ctx: &mut RuntimeContext,
+    rule_label: &str,
+) -> Result<(), String> {
+    let Some(expected) = logical_helper_expected_arity(name, raw_args, actual_arity) else {
+        return Ok(());
+    };
+    ctx.capture_helper_arity_failure(name, actual_arity, expected, rule_label);
+    Err(format!(
+        "helper_arity_mismatch helper_name={name} actual_arity={actual_arity} expected_arity={expected:?} rule_label={rule_label:?}"
+    ))
+}
+
+fn validate_eager_helper_arity(
+    name: &str,
+    raw_args: &[Arg],
+    actual_arity: usize,
+    ctx: &mut RuntimeContext,
+    rule_label: &str,
+) -> Result<(), String> {
+    validate_diagnostic_output_arity(name, raw_args, actual_arity, ctx, rule_label)?;
+    validate_logical_helper_arity(name, raw_args, actual_arity, ctx, rule_label)
+}
+
 /// Per-invocation controls for direct top-rule value execution.
 ///
 /// These options do not mutate the compiled specification. They select an
@@ -1882,6 +1924,7 @@ impl Engine {
             RuntimeDiagnostic {
                 diagnostic_type: "runtime_parser".to_string(),
                 stage: stage.to_string(),
+                code: failure.and_then(|context| context.code.map(str::to_string)),
                 owner_stage: Some("rust_runtime".to_string()),
                 summary: summary.to_string(),
                 detail: message,
@@ -1889,6 +1932,10 @@ impl Engine {
                 spec_path: self.spec_path.clone(),
                 top_rule: ctx.diagnostic_top_rule().map(str::to_string),
                 rule_label,
+                helper_name: failure.and_then(|context| context.helper_name.clone()),
+                actual_arity: failure.and_then(|context| context.actual_arity),
+                expected_arity: failure
+                    .and_then(|context| context.expected_arity.map(str::to_string)),
                 handler_source_label,
             },
         )
@@ -4087,7 +4134,7 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
-                validate_diagnostic_output_arity(name, args, args.len(), ctx, rule_label)?;
+                validate_eager_helper_arity(name, args, args.len(), ctx, rule_label)?;
                 // Lazy-evaluation calls: if/switch/while/with/elseif/else/case/default
                 // Branch bodies must NOT be evaluated eagerly — they are
                 // evaluated only when their condition matches.
@@ -4279,7 +4326,7 @@ impl Engine {
                 }
                 self.eval_expr(receiver, ctx, rule_label)?;
                 for call in calls {
-                    validate_diagnostic_output_arity(
+                    validate_eager_helper_arity(
                         &call.method,
                         &call.args,
                         call.args.len(),
@@ -6104,7 +6151,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let name = Self::numeric_word_helper_name(name).unwrap_or(name);
-        validate_diagnostic_output_arity(name, raw_args, args.len(), ctx, rule_label)?;
+        validate_eager_helper_arity(name, raw_args, args.len(), ctx, rule_label)?;
         if Self::is_mark_capture_helper(name) {
             ctx.trace_mark(
                 "rust_runtime:engine:mark_capture",
@@ -7337,12 +7384,8 @@ impl Engine {
                 }
             }
             "or" => Ok(RuntimeValue::Bool(args.iter().any(RuntimeValue::as_bool))),
-            "and" => Ok(RuntimeValue::Bool(
-                !args.is_empty() && args.iter().all(RuntimeValue::as_bool),
-            )),
-            "not" => Ok(RuntimeValue::Bool(
-                args.first().is_none_or(|arg| !arg.as_bool()),
-            )),
+            "and" => Ok(RuntimeValue::Bool(args.iter().all(RuntimeValue::as_bool))),
+            "not" => Ok(RuntimeValue::Bool(!args[0].as_bool())),
             // ── Coalesce ──
             "coalesce_nonempty" => {
                 for a in args {

@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.3` — a shared coercion method is a language seam, not a convenience):
+  Rust already routed logical helpers and lazy controls through `RuntimeValue::as_bool`; the defect was that this
+  supposedly shared seam still encoded host-flavored string exceptions. Correcting that one typed boundary made
+  `"0"` and `"false"` ordinary nonempty strings everywhere without touching rendering or numeric parsing.
+
+  Arity must be checked at the expression boundary, before the existing eager argument collection. Checking only
+  inside helper dispatch would produce the right error after the wrong side effects. Keep a defensive dispatch
+  check too, but make the pre-evaluation guard authoritative. Optional fields on the general runtime diagnostic
+  preserve byte-for-byte unrelated JSON while giving governed arity failures the neutral schema. Prove emitted
+  behavior by compiling the emitted module, not merely by inspecting its embedded compiled JSON. The complete
+  corpus and generated-manifest passes confirm that changing the shared truth seam did not silently reroute
+  existing grammars.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.1.1` — cursor semantics must be derived, not duplicated): ADR `0044`
   makes the authored rule family the only cursor authority. AND consumes; OR/default seeks; nested children keep
   their own policy. The old AND+seek and OR+consume objectives are still expressible without an escape hatch by

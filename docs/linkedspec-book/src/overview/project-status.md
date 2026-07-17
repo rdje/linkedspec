@@ -153,8 +153,10 @@ Three backbone items tracked major structural modernization — all done:
   checks `linkedspec-logical-helper-v1`: at-least-one eager `and`/`or`, exact-one eager `not`, pre-effect arity
   diagnostics, typed null/boolean/finite-number/string/aggregate/codeblock truth, boolean receiver results, and
   lazy-control separation. Its 17 truth rows, ten helper cases, three effect scenarios, deterministic fixtures,
-  and 15 mutations pass offline. Perl `.5.2.2` now supplies typed logical ActionIR/runtime behavior across native,
-  live, and standalone-emitted execution, advancing rollout to 1 complete / 7 pending under `.5.2.3-.9`.
+  and 15 mutations pass offline. Perl `.5.2.2` supplies typed logical ActionIR/runtime behavior across native,
+  live, and standalone-emitted execution. Rust `.5.2.3` now aligns the shared condition/helper truth seam,
+  pre-effect logical arity, native structured fields, and native/serialized/generated-plan/direct/compiled-
+  emitted roles, advancing rollout to 2 complete / 6 pending under `.5.2.4-.9`.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

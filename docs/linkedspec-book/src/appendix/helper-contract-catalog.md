@@ -1259,8 +1259,9 @@ table because its runtime behavior is to terminate the parser process.
 - **Scope boundary**: the codeblock value-kind row is model/backend-unit evidence; it does not activate the
   separately owned `{|...| ... }` literal syntax.
 - **Current portability status**: ADR `0043` and `linkedspec-logical-helper-v1` are adopted. Perl native/live/
-  standalone-emitted execution conforms under `FUTURE-PARITY-BACKLOG.5.2.2`; seven backend/projection/admission
-  legs remain pending under `.5.2.3-.9`. Do not treat the target as cross-backend behavior yet.
+  standalone-emitted execution conforms under `FUTURE-PARITY-BACKLOG.5.2.2`; Rust native, serialized,
+  generated-plan, direct-value, and compiled emitted execution conforms under `.5.2.3`. Six backend/projection/
+  admission legs remain pending under `.5.2.4-.9`. Do not treat the target as cross-backend behavior yet.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
@@ -1269,11 +1270,10 @@ table because its runtime behavior is to terminate the parser process.
   condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
-  fluent `.return(...)` value positions. Logical audit `.5.2.0` finds three current condition profiles: Perl/Lua
-  make scalar `"0"` false and empty aggregates true; Dart/Julia make all nonempty strings true and empty
-  aggregates false; Rust additionally makes nonempty scalar `"false"` false. ADR `0043` adopts nonempty-string/
-  nonempty-aggregate typed truth as the target, and `FUTURE-PARITY-BACKLOG.5.2.2-.9` own the still-pending
-  five-backend/projection/admission rollout.
+  fluent `.return(...)` value positions. Perl and Rust now consume ADR `0043` through one helper/condition truth
+  seam. Dart and Julia already share its nonempty-string/empty-aggregate truth rows but retain helper arity or
+  evaluation drift; Lua still makes scalar `"0"` false and empty aggregates true. `FUTURE-PARITY-BACKLOG.5.2.4-.9`
+  own the remaining backend/projection/admission rollout.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

@@ -2878,14 +2878,32 @@ before implementation.
   Commit: `dcc3a71d` (`FUTURE-PARITY-BACKLOG.5.2.2 - repair Perl logical lowering`)
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Align Rust logical helpers and condition truthiness with the neutral contract.
   Dependencies: `.5.2.1`
   Acceptance: Native, serialized, generated-plan, emitted, and direct-value Rust paths enforce exact logical arity,
     eager evaluation, boolean results, and the neutral truth table through one runtime seam without changing lazy
     control selection or unrelated scalar conversion.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0043`, the logical audit/neutral-contract/Perl-host Knowledge Map
+    cards, neutral JSON/checker, and Rust typed runtime/generated owners; run focused current probes before edits.
+  - [x] **ONE RUST TRUTH SEAM** — Give every RuntimeValue kind the exact neutral truth table without reusing text
+    rendering or numeric parsing; helper and lazy-control conditions consume the same seam.
+  - [x] **ARITY BEFORE EFFECTS / EAGER VALUES** — Enforce one-plus `and`/`or` and exact-one `not` before operand
+    evaluation, then evaluate valid arguments once left-to-right and return real booleans.
+  - [x] **ALL RUST PROJECTIONS** — Lock native compiled, serialized reconstruction, generated-plan, emitted-source,
+    direct-value, receiver, and condition behavior plus exact portable diagnostics from the unchanged fixture.
+  - [x] **NO REGRESSION / LOCKSTEP** — Promote only `rust_native`, keep later rollout legs pending, run focused and
+    complete Rust/contract/corpus/generated/CLI/governance gates, update docs/KM/task/memory, and commit cleanly.
+  Verification: Contract-driven truth/value/effect/receiver/control/four-invalid-call proof passes native,
+    serialized, direct-value, generated-plan, and an independently compiled standalone-emitted crate. Complete
+    Rust core/runtime packages pass: 188 core units, 137 runtime units, 3-case Perl-oracle corpus including all
+    105 fixtures, full 105-case generated-source classifier, 197 integrations, and all contract/emitter/
+    diagnostic/binding/Unicode/variadic/doc suites. Rust primary passes 62/62 in default and POSIX environments.
+    Neutral checker passes 17 truth rows, ten helper cases, three effects, 2 complete / 6 pending, and 15
+    mutations; KM/governance/mdBook/whitespace pass. Canonical local CI passes reference CLI 62x2 and Phase 0
+    `1..1031` in 649 seconds. No implementation mutation campaign.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.4`
   Status: `pending`
@@ -5424,11 +5442,13 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
-backend-neutral policy `.5.2.1` and Perl typed-AST/runtime rollout `.5.2.2` are complete at 1/7 rollout. The
+backend-neutral policy `.5.2.1`, Perl typed-AST/runtime rollout `.5.2.2`, and Rust typed-runtime rollout `.5.2.3`
+are complete at 2/6 rollout. Dart native logical alignment `.5.2.4` is next. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
-diagnostics, conformance, and the pending `.9.1.2-.9` rollout. Rust native logical alignment `.5.2.3` is the clean
-active frontier before that separately split cursor implementation program.
+diagnostics, conformance, and the pending `.9.1.2-.9` rollout. The logical-helper parent remains the selected
+program, with Dart `.5.2.4` next after the clean Rust commit and before that separately split cursor implementation
+program.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5629,7 +5649,7 @@ active frontier before that separately split cursor implementation program.
 | 178 | `LUA-BACKEND-PARITY.4.3.9.1` | `done` | Eager ordered logical values and empty-call false/false/true pass 123/123 on both ABIs. |
 | 179 | `LUA-BACKEND-PARITY.4.3.9.2` | `done` | Exact recurring 233+13 runtime-call ownership, direct-call proof, and public status close at 125/125. |
 | 180 | `FUTURE-PARITY-BACKLOG.5.1` | `done` | All eight rollout legs are complete; 16 public documents, nine stale-claim guards, and 20 mutations close diagnostic-output no-drift. |
-| 181 | `FUTURE-PARITY-BACKLOG.5.2` | `active` | Audit `.5.2.0`, neutral ADR/contract `.5.2.1`, and Perl `.5.2.2` are complete at 1/7; Rust `.5.2.3` is active. |
+| 181 | `FUTURE-PARITY-BACKLOG.5.2` | `active` | Audit `.5.2.0`, neutral ADR/contract `.5.2.1`, Perl `.5.2.2`, and Rust `.5.2.3` are complete at 2/6; Dart `.5.2.4` is next. |
 | 182 | `FUTURE-PARITY-BACKLOG.18.2` | `done` | ADR 0037 governs correlated construction/runtime trace and exact emission-only rule filters. |
 | 183 | `FUTURE-PARITY-BACKLOG.18.3` | `done` | ADR 0038 governs optional measured native parser derivatives without weakening dynamic authority. |
 | 184 | `FUTURE-PARITY-BACKLOG.20.0` | `done` | ADR 0039 governs explicit milestone-scoped Rust mutation testing; list-only baseline 3,333, no run. |
@@ -5656,7 +5676,7 @@ active frontier before that separately split cursor implementation program.
 | 205 | `FUTURE-PARITY-BACKLOG.5.2.0` | `done` | Exact Perl/toolbox and five-backend native/generated audit records three truthiness profiles and locks the safe split. |
 | 206 | `FUTURE-PARITY-BACKLOG.5.2.1` | `done` | ADR `0043`, strict neutral schema/checker/fixtures, 15 mutations, canonical CI, and 0/8 rollout are locked. |
 | 207 | `FUTURE-PARITY-BACKLOG.5.2.2` | `done` | Typed Perl logical ownership aligns eager values, exact arity, real booleans, and shared condition truthiness. |
-| 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `active` | Align Rust native/serialized/generated-plan/direct logical behavior after the clean ADR `0044` decision commit. |
+| 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `done` | Rust shares one typed helper/control truth seam, validates arity before effects, and passes native/serialized/generated-plan/compiled-emitted proof. |
 | 209 | `FUTURE-PARITY-BACKLOG.9.1.0` | `done` | Five-backend audit rejects caller-global override, exposes default AND parity drift, and retains low-level matcher algorithms. |
 | 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `done` | ADR `0044` ratifies exact edge/cursor/migration semantics and separately splits rollout. |
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
@@ -6348,6 +6368,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.3` | Neutral Rust consumer over representable truth rows, exact values/effects/receiver/lazy controls/four arity failures; native/serialized/direct/generated-plan/compiled-emitted roles; complete 188-core/137-runtime/105-oracle/105-generated/197-integration and all focused Rust suites; Rust primary 62x2; neutral 2/6 checker plus 15 mutations; KM/memory/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2 and Phase 0 `1..1031`/649s. | PASS. One typed Rust truth seam and pre-effect logical arity now match ADR `0043`; only `rust_native` advances, explicit codeblock syntax stays `.11`-owned, and Dart `.5.2.4` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.1.1` | Full startup roadmap/codebase/mdBook review; cursor/edge KM and exact five-backend owner seams; ADR `0044`; eight-leaf implementation split; task/roadmap/live/guide/mdBook/KM lockstep; Knowledge Map generation/check; memory architecture; task metadata; doctrines; mdBook; whitespace. | PASS. Exact rule-local cursor, mode-sensitive bare-edge, explicit/index/group/fluent, migration, descriptor, generated-v2, diagnostic, and conformance target is durable; no behavior changes and Rust logical `.5.2.3` resumes. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.1.0` | Director decision; existing `.9.1.0` audit; task/roadmap/live/mdBook/guide/KM/memory lockstep; Knowledge Map generation/check; memory architecture; task metadata; doctrines; mdBook; whitespace. | PASS. Parent modes never propagate to or override child modes across nested rule entry; exact ratification remains `.9.1.1.1`, no behavior changed, and the repo is fresh-session ready. |
 | `2026-07-16` | `FUTURE-PARITY-BACKLOG.9.1.0` | Knowledge Map/toolbox first; exact Perl descriptor/source/live/generated probes; five-backend API/CLI/engine/compiled/loaded/generated/descriptor/test/doc inventory; default/seek/consume `Top::AND` primary probes; AND+seek and OR+consume objective probes; governance, Knowledge Map, mdBook, and whitespace. | PASS. Global mode ownership is exact, default AND drift is root-caused, low-level cross-combinations are legitimate, no caller-global override objective survives, one nested-child decision is explicitly blocked, and no behavior changed. |
@@ -6505,6 +6526,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.2.3` | `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers` | Shared typed truth seam, pre-effect arity, exact structured fields, native/serialized/generated-plan/compiled-emitted consumer, 2/6 rollout, and Dart handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `FUTURE-PARITY-BACKLOG.9.1.1.1 - ratify rule-local cursor and bare edges` | ADR `0044`, exact metadata/migration/conformance contract, pending `.9.1.2-.9` rollout, and Rust logical handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `FUTURE-PARITY-BACKLOG.9.1.1.0 - capture rule-local cursor ownership` | Director confirms parent modes never override child modes; exact ratification remains `.9.1.1.1`; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.9.1.0` | `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership` | Five-backend current-state audit, exact default AND drift, cross-combination objective proof, global-override rejection, migration surface, and blocked child-ownership handoff; no behavior code. |
@@ -6662,6 +6684,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.5.2.3` aligns Rust logical values and lazy conditions through one typed
+  `RuntimeValue::as_bool` seam. One-plus `and`/`or` and exact-one `not` reject before operand effects; valid calls
+  remain eager once-left-to-right booleans; native diagnostics expose the exact four neutral arity fields. Native,
+  serialized, direct-value, generated-plan, and compiled emitted fixtures pass, as do complete Rust packages,
+  oracle/generated corpora, 197 integrations, Rust primary 62x2, and the 2/6 neutral checker with 15 mutations.
+  Only `rust_native` advances; Dart `.5.2.4` is next and explicit codeblock literal syntax remains `.11`-owned.
 - `2026-07-17`: `.9.1.1.1` adopts ADR `0044`: AND-family consume, OR/default seek, child-owned policy,
   mode-sensitive line-level bare edges, explicit cross-family legality, exact index/group/fluent/reserved/mixed
   boundaries, structural cross-combination recipes, targeted public-option/CLI removal, derived per-rule

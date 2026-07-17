@@ -5,14 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Rust logical rollout `FUTURE-PARITY-BACKLOG.5.2.3` makes
+  `RuntimeValue::as_bool` the one typed truth seam for logical helpers and lazy controls. A shared eager-helper
+  guard validates positional one-plus `and`/`or` and exact-one `not` before any operand evaluation; valid operands
+  retain eager once-only left-to-right evaluation and real boolean results. Native structured failures now expose
+  `code`, `helper_name`, `actual_arity`, and `expected_arity` without changing unrelated diagnostic JSON. Neutral
+  values/effects/receivers/controls/invalid calls pass through native, serialized, direct-value, generated-plan,
+  and independently compiled standalone-emitted roles. The ledger is 2/6; Dart `.5.2.4` is next.
 - `2026-07-17` refresh: ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1` ratifies the full future cursor and edge
   contract. AND-family rules consume; OR/default-family rules seek; nested rules retain their own policy. Bare
   rule-edge paragraph members normalize to blind calls in AND and action edges in OR/default, while explicit
   cross-family markers remain legal and resolved action/blind ownership remains non-mixable. Public/global
   `parse_mode` is removed with targeted API/CLI diagnostics. Descriptors use derived per-rule `cursor_policy` plus
   `linkedspec-rule-local-cursor-v1`; generated-source v2 derives policy from its ten-family plan without storing a
-  second override. Implementation is dependency-split under `.9.1.2-.9`; no behavior has changed and Rust logical
-  `.5.2.3` resumes first.
+  second override. Implementation is dependency-split under `.9.1.2-.9`; no cursor behavior has changed and the
+  logical rollout continues first.
 - `2026-07-17` refresh: director capture `FUTURE-PARITY-BACKLOG.9.1.1.0` fixes rule-local cursor ownership. Parent
   OR/AND mode never propagates to or overrides a child; OR children remain seek and AND children remain consume
   through blind calls, action-edge dispatch, explicit calls, and recursion. This preserves one meaning for a rule

@@ -11,6 +11,9 @@ pub struct RuntimeDiagnostic {
     pub diagnostic_type: String,
     /// Stable failure stage within the runtime owner.
     pub stage: String,
+    /// Stable portable failure code when the runtime contract defines one.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub code: Option<String>,
     /// Host-backend owner identity (`rust_runtime` when present).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub owner_stage: Option<String>,
@@ -30,6 +33,15 @@ pub struct RuntimeDiagnostic {
     /// Deepest rule that observed the failure, when available.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rule_label: Option<String>,
+    /// Governed helper that rejected its authored arity, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub helper_name: Option<String>,
+    /// Authored helper arity, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub actual_arity: Option<usize>,
+    /// Portable expected-arity spelling, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expected_arity: Option<String>,
     /// Stable Rust runtime handler identity.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub handler_source_label: Option<String>,

@@ -155,11 +155,22 @@ fn runtime_value_json_conversion() {
 fn runtime_value_as_bool() {
     assert!(!RuntimeValue::Undef.as_bool());
     assert!(!RuntimeValue::Scalar("".into()).as_bool());
-    assert!(!RuntimeValue::Scalar("0".into()).as_bool());
+    assert!(RuntimeValue::Scalar("0".into()).as_bool());
+    assert!(RuntimeValue::Scalar("false".into()).as_bool());
+    assert!(RuntimeValue::Scalar(" ".into()).as_bool());
+    assert!(RuntimeValue::Scalar("pré🙂".into()).as_bool());
     assert!(RuntimeValue::Scalar("hello".into()).as_bool());
     assert!(RuntimeValue::Number(1.0).as_bool());
+    assert!(RuntimeValue::Number(-2.0).as_bool());
+    assert!(RuntimeValue::Number(0.25).as_bool());
     assert!(!RuntimeValue::Number(0.0).as_bool());
+    assert!(!RuntimeValue::Number(-0.0).as_bool());
+    assert!(!RuntimeValue::Bool(false).as_bool());
     assert!(RuntimeValue::Bool(true).as_bool());
+    assert!(!RuntimeValue::Array(vec![]).as_bool());
+    assert!(RuntimeValue::Array(vec![RuntimeValue::Undef]).as_bool());
+    assert!(!RuntimeValue::Hash(vec![]).as_bool());
+    assert!(RuntimeValue::Hash(vec![("k".into(), RuntimeValue::Undef)]).as_bool());
 }
 
 #[test]

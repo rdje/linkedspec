@@ -8,6 +8,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.3 — align Rust logical helpers and truthiness**
+  (DONE — Rust native/serialized/generated-plan/standalone-emitted behavior conforms at 2 complete / 6 pending;
+  Dart `.5.2.4` is next).
+
+  **Result:** `RuntimeValue::as_bool` now implements the neutral typed truth table for both eager logical values
+  and lazy controls. Logical arity rejects positional one-plus `and`/`or` and exact-one `not` failures before
+  operand evaluation; valid operands remain once-only left-to-right and return booleans. Native diagnostics expose
+  the exact four portable fields while generated errors preserve them in deterministic detail. Scalar rendering
+  and numeric conversion are unchanged.
+
+  **Proof:** The contract-driven Rust consumer covers all representable truth rows, values, ordered effects,
+  receiver and lazy-control behavior, four invalid calls, native/serialized/direct/generated-plan roles, and an
+  independently compiled emitted crate. Complete core/runtime tests pass, including the Perl-oracle corpus, full
+  generated manifest classifier, 197 integrations, and all emitted/contract suites. Rust primary passes 62/62 in
+  default and POSIX environments; the neutral checker reports 2/6 and rejects 15 mutations.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.1.1 — ratify rule-local cursor and bare edges**
   (DONE — ADR `0044` fixes the exact target; implementation `.9.1.2-.9` remains pending and Rust logical
   `.5.2.3` is the next clean frontier).

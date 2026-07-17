@@ -147,13 +147,16 @@ impl RuntimeValue {
         }
     }
 
-    /// Interpret this value as a boolean. Undef/empty/"0"/"false" → false.
+    /// Interpret this value using LinkedSpec's typed truthiness contract.
+    ///
+    /// Undef, false, numeric zero, empty strings, and empty aggregates are
+    /// false. Every non-empty string is true, including `"0"` and `"false"`.
     pub fn as_bool(&self) -> bool {
         match self {
             Self::Undef => false,
             Self::Bool(b) => *b,
             Self::Number(n) => *n != 0.0,
-            Self::Scalar(s) => !s.is_empty() && s != "0" && s != "false",
+            Self::Scalar(s) => !s.is_empty(),
             Self::Array(a) => !a.is_empty(),
             Self::Hash(h) => !h.is_empty(),
         }
