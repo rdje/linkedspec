@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-17` (Rust local-gate hardening `.9.1.4.1` is verified; typed family/edge normalization
-  `.9.1.4.2` follows after the clean gate commit)
+- Last updated: `2026-07-18` (Rust typed family/edge normalization `.9.1.4.2` passes focused, neutral,
+  governance, mdBook, and canonical proof; its clean commit precedes `.9.1.4.3` activation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3697,7 +3697,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.4.1 - run Rust core tests in local gate`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Normalize Rust rule families and bare edges into exact typed ownership before runtime policy changes.
   Dependencies: `.9.1.4.1`
   Acceptance: Correct compact/default/OR versus AND family classification; retain complete-line and header-rest
@@ -3705,8 +3705,57 @@ before implementation.
     preserve explicit cross-family exceptions; reject mixed, undefined, invalid-index, and missing-shared-block
     forms with the neutral portable diagnostics; and prove parser/compiler/validation source locations and no
     silent `Raw` loss without changing cursor execution yet.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow Knowledge Map, ADR `0044`, neutral contract, toolbox probes, and the
+    `.9.1.4.0` preflight to exact Rust AST/parser/compiler/validation source locations; reproduce compact-family,
+    bare-edge `Raw` loss, cross-family override, and diagnostic boundaries before editing executable code.
+  - [x] **NORMALIZE FAMILY / TYPED EDGES** — Classify default/OR/compact-OR versus AND/compact-AND correctly and
+    retain complete-line plus header-rest bare plain/indexed/grouped/block/fluent candidates as typed AST, with
+    family-derived action/blind ownership and explicit cross-family exceptions.
+  - [x] **VALIDATE EXACTLY** — Reject mixed edge modes, undefined targets, invalid indices, and missing shared
+    edge blocks through the neutral portable diagnostic identities, with no silently ignored `Raw` candidate.
+  - [x] **PROVE REPRESENTATION / FREEZE EXECUTION** — Add focused parser/compiler/validation tests for every
+    governed family and bare-edge shape, prove typed compiled ownership/serialization source locations, and show
+    live cursor execution remains at the staged pre-`.3` behavior boundary.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, and operational
+    docs; run focused core/runtime and neutral/governance/canonical gates; commit before activating execution
+    leaf `.9.1.4.3`.
+  Verification: **PASS 2026-07-18.** Knowledge Map routes to ADR `0044`, the 36-family/18-edge neutral
+    contract, parent/child ownership, and the Perl reference normalization seam before source inspection. Exact
+    Rust CLI probes reproduce `null` for complete-line bare, header-rest bare, undefined bare, AND bare-index,
+    and compact-`|` leading-junk inputs. Source pins the losses to parser `Raw` fallback, blind-index suffix
+    discard, missing grouped/shared-block checks, `is_and()` conflating `|` with AND, compiler ignoring `Raw`,
+    and the later-leaf blind-call consume special case. No executable edit preceded this evidence. Implementation
+    now keeps authored `is_and()` exact and isolates old runtime/artifact consumers behind the explicitly temporary
+    `uses_legacy_and_interpretation()` seam. `BareEdge` retains complete-line/header-rest targets, optional index,
+    shared block, and fluent facts through whole-spec validation; valid AND ownership lowers to bcode and valid
+    OR/default ownership to acode, while explicit cross-family edges retain their written ownership. A sorted,
+    serializable `PortableDiagnostic` carries every neutral code/stage/field.
+
+    Contract-driven core proof passes all five tests over 36 family rows, 18 edge rows, six rule-edge ownership
+    sets, complete-line/header-rest/multiline scope, exact diagnostics, compiled dispatch tables, and JSON
+    roundtrip. Three runtime boundary tests pass: embedding execution reaches the typed AND blind table as
+    `[["hit"]]` but default/header-rest action entry and compact-OR leading-junk remain staged as `[]`; the primary
+    command projects the same split as `["hit"]` versus `null`. The full core and runtime packages pass, including
+    137 runtime unit, 105-fixture oracle/classifier, 197 integration, and all adjacent suites. Production-library
+    Clippy exits 0 with only the established baseline warnings; all-target Clippy reaches the already-tracked
+    test-only `approx_constant` denial. The neutral checker returns 36/18/8/14/72 at 2/6 plus 29 mutations;
+    lockstep documentation and canonical signoff pass as recorded below.
+
+    An initial actual-gate attempt exhausted its final 1.1 GiB during generated host compilation after core,
+    runtime unit, named-mark, oracle, and diagnostic proof had passed. Safe cleanup removed only reproducible
+    target/book/temp/log artifacts and preserved tracked RGX evidence plus the pre-existing dirty nested pgen tree.
+    On resume, the focused classifier passes all 105 cases through read/parse/validate/compile/interpreter/emission/
+    host compile/run in 247.75 seconds. The complete `tools/run_rust_local.sh` then passes formatting; core 189 unit,
+    three descriptor, five normalization, and eight type tests; runtime 137 unit, named-mark, 105-fixture oracle
+    (219.46 seconds), seven diagnostic, generated classifier 105/105 (256.48 seconds), 197 integration, and every
+    adjacent suite. It builds the primary command and stops only at the exact staged default 51/63 boundary: the
+    retired-option diagnostic plus eleven request-trace `parse_mode=seek` projections. `.9.1.4.0` independently
+    pins POSIX to the same 51/63. The neutral checker passes 36/18/8/14/72 at 2/6 and rejects 29 mutations;
+    Knowledge Map reaches 585 facts/4,138 keys; memory architecture, task metadata, all four doctrines, mdBook,
+    and whitespace pass. Canonical local CI repeats the 288-test composed Perl consumer, reference CLI 63/63 in
+    both option environments, and Phase 0 1,031/1,031 in 646 seconds, then exits 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.4.2 - normalize Rust rule edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.3`
   Status: `pending`
@@ -6061,7 +6110,8 @@ cursor contract/inventory `.9.1.2` established the 1/7 baseline; Perl `.9.1.3` i
 Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/reference-fixture migration
 `.9.1.3.5` are committed through `b7c28156`; composed admission `.9.1.3.6` closes the parent at `c35755f7` and
 advances only Perl to 2/6. Rust preflight/split `.9.1.4.0` is verified without behavior changes; local-gate
-hardening `.9.1.4.1` is verified; typed normalization `.9.1.4.2` follows after its clean commit.
+hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are verified; live per-rule execution `.9.1.4.3` follows
+only after the clean `.2` commit boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6306,7 +6356,7 @@ hardening `.9.1.4.1` is verified; typed normalization `.9.1.4.2` follows after i
 | 215 | `FUTURE-PARITY-BACKLOG.9.1.4` | `active` | Align Rust parsed/compiled/serialized/native/generated/primary roles after exact preflight. |
 | 215.0 | `FUTURE-PARITY-BACKLOG.9.1.4.0` | `done` | Exact Rust seams/current drift, the omitted-core gate risk, and dependency-safe `.1-.7` implementation split are durable. |
 | 215.1 | `FUTURE-PARITY-BACKLOG.9.1.4.1` | `done` | Complete core-package tests now run before the complete runtime package in the focused gate. |
-| 215.2 | `FUTURE-PARITY-BACKLOG.9.1.4.2` | `pending` | Normalize family classification and complete typed bare-edge ownership with exact diagnostics. |
+| 215.2 | `FUTURE-PARITY-BACKLOG.9.1.4.2` | `done` | Family classification, typed bare-edge ownership, exact diagnostics, and staged execution proof pass. |
 | 215.3 | `FUTURE-PARITY-BACKLOG.9.1.4.3` | `pending` | Derive live/loaded/serialized/reconstructed policy per entered rule. |
 | 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `pending` | Project descriptor v1 family, policy, and resolved-edge facts. |
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `pending` | Emit/reconstruct Rust generated-source v2 from minimal family plans. |
@@ -6982,7 +7032,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and complete Perl parent `.9.1.3` reach 2/6; Rust preflight/gate `.9.1.4.0-.1` are verified and `.2` is next. Identical
+  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.1` are committed and verified `.2` awaits its clean
+  commit before `.3` activation. Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -6998,7 +7049,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl parent `.9.1.3` reach 2/6; Rust preflight/gate `.9.1.4.0-.1` are verified and normalization `.2` is next while later
+  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.1` are committed and normalization `.2` is verified while later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 
@@ -7006,6 +7057,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.2` | ADR/KM/toolbox retrieval; compact-family and bare-edge probes; five core contract tests over 36 families, 18 edges, six ownership sets, line scope, exact diagnostics, lowering, and JSON roundtrip; three runtime staging tests; complete focused gate with core 189/3/5/8 and runtime 137/105 oracle/105 generated/197 integration plus adjacent suites; production-library Clippy; exact default 51/63 staged boundary and prior POSIX 51/63 pin; neutral 36/18/8/14/72 at 2/6 plus 29 mutations; KM 585/4,138; memory/task/four doctrines/mdBook/whitespace; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/646s. | PASS. Rust retains typed complete-line/header-rest bare edges, derives family ownership into acode/bcode, emits exact portable diagnostics, and keeps later execution/artifact policy behind one named transitional classifier. Disk exhaustion was isolated as environmental; only successful reruns count as proof. `.9.1.4.3` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.6` | ADR/KM/contract baseline; exact 14-role consumer and canonical registration; all eight diagnostics; focused constituent baseline 394 and composed 410; neutral cursor 36/18/8/14/72 at 2/6 plus 29 mutations; generated/capability 80/0/0; reference CLI 63x2; standalone Phase 0 `1..1031`/641s; KM 584/4126; JSON/Python/Perl/shell, memory/task/doctrine/mdBook/whitespace/cleanup; canonical consumer 288, CLI 63x2, and Phase 0 `1..1031`/642s. | PASS. One omission-sensitive consumer composes every Perl projection exactly once, only `perl_reference` advances, parent `.9.1.3` closes, and Rust `.9.1.4` waits for the clean commit. A mislabelled manual POSIX display probe was root-caused to template substitution; the exact canonical command passes twice. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.5` | Clean 63x2 and exact 35-case/ten-file baseline; API/Get/get-parser/emitter pre-parse removal; focused Perl API/cursor/generated/trace/scalar/logical/diagnostic/Unicode 191 plus descriptor 31; exact help/usage/success/trace bytes; reference CLI 63x2; standalone Phase 0 `1..1031`/606s; neutral cursor 36/18/8/72 at 1/7 plus 27 mutations; generated/capability 80/0/0; KM 584/4121; JSON/syntax/memory/task/doctrine/mdBook/whitespace/cleanup; canonical rerun reference CLI 63x2 and Phase 0 `1..1031`/634s. | PASS. Global override keys reject at option preparation, primary CLI returns targeted usage exit 2, structural cases replace global-mode successes, and sixteen completed paths become token-free. The first canonical attempt strictly caught one descriptor assertion's newly literal unowned token; contract-derived assertion repair restored the exact 72-file inventory before the full exit-0 rerun. `.9.1.3.6` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.4` | Toolbox/descriptor/generated-v1 baseline; v2 metadata and minimal family plan; exact five-seek/five-consume derivation; option-independent bytes; fresh load/direct/trace/source identity; v1 explicit and inferred-caller rejection; focused generated/cursor/trace 400 plus adjacent 92; touched-module syntax; neutral cursor 36/18/8/87 at 1/7 plus 27 mutations; shared generated/capability 80/0/0; standalone Phase 0 `1..1031`; Knowledge Map, memory/task/doctrine/mdBook/whitespace/cleanup; canonical reference CLI 63x2 and Phase 0 `1..1031`/619s. | PASS. New Perl artifacts are v2 and spend intrinsic family policy without a serialized override; v1 requires `.spec` regeneration; one stale Phase-0 expectation and clean-HEAD `ccf4cad7` inventory omission are root-caused and repaired; `.9.1.3.5` waits for the clean commit. |
@@ -7350,6 +7402,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: `.9.1.4.2` makes Rust's authored family classification exact, retains physical-line/header-rest
+  bare edges as typed AST, derives AND blind versus OR/default action ownership, lowers normalized acode/bcode,
+  and emits sorted serializable portable diagnostics for every governed invalid form. Five core and three runtime
+  contract tests freeze representation plus the staged live boundary; the complete focused gate passes core,
+  runtime, oracle, classifier, integration, and adjacent suites before exactly 51/63 default CLI. Neutral proof,
+  Knowledge Map, governance, mdBook, and canonical local CI pass. A disk-exhaustion interruption is recovered by
+  safe artifact cleanup and successful reruns; `.9.1.4.3` waits for the clean commit.
 - `2026-07-17`: `.9.1.3.6` admits and closes the complete Perl cursor projection through one exact 14-role
   contract-driven consumer. Role keys must equal the neutral declaration, each executes once, the checker requires
   every marker and canonical registration, and two new omission mutations raise drift proof to 29. Live default/

@@ -11,8 +11,11 @@ native/generated behavior, recurring admission, and public no-drift are complete
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
-`.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package; typed family/edge
-normalization `.9.1.4.2` is next after its clean commit.
+`.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
+`.9.1.4.2` correctly classifies compact `|` as OR, retains complete-line and header-rest bare edges as typed AST,
+lowers family-derived ownership into compiled action/blind tables, and emits the neutral portable diagnostics.
+Transitional runtime/descriptor/generated callers preserve the pre-`.3` cursor boundary; rule-local execution
+`.9.1.4.3` remains next and activates only after this slice commits cleanly.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

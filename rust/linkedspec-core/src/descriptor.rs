@@ -246,7 +246,7 @@ fn project_rule(rule: &CompiledRule) -> CompiledRuleDescriptor {
             mode: CompiledRuleModeMetadata {
                 name: rule_mode_name(&rule.mode).to_string(),
                 is_top: rule.is_top,
-                is_and: rule.mode.is_and(),
+                is_and: rule.mode.uses_legacy_and_interpretation(),
                 is_repetition: rule.mode.is_repetition(),
                 rep_min: rule.rep_min,
                 rep_max: rule.rep_max,

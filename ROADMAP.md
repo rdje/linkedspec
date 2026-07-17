@@ -987,7 +987,10 @@ generated-source v2, API/CLI removal, and composed admission at 2/6. Rust prefli
 typed/non-typed seams and measures compact-`|`, bare-edge, serialized/global override, v1 generated, and 51/63
 primary drift without behavior changes. It splits `.9.1.4.1-.7`; `.1` first repairs the focused Rust gate's
 omission of the core package's own parser/compiler/validation tests by running the complete core package before
-runtime. Typed normalization `.9.1.4.2` follows after the clean gate commit. The current token inventory is 72.
+runtime. Verified typed normalization `.9.1.4.2` now separates authored family identity from transitional execution,
+retains complete-line/header-rest bare candidates as typed AST, derives action/blind ownership, lowers typed
+dispatch tables, and emits exact neutral diagnostics. `.9.1.4.3` remains the next clean-boundary leaf for live,
+loaded, and serialized per-rule cursor execution. The current token inventory is 72.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

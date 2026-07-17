@@ -8,8 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.2 — normalize Rust rule edges**
+  (DONE — implementation, focused proof, lockstep documentation, governance, and canonical signoff are complete;
+  the clean commit boundary remains).
+
+  **Result:** Rust now classifies compact `|` as authored OR, retains complete-line/header-rest bare edges as
+  typed AST, validates family-derived ownership with exact portable diagnostics, and lowers valid bare edges into
+  typed acode/bcode dispatch tables plus compiled JSON. Existing runtime/descriptor/generated consumers use one
+  explicit transitional classifier so `.9.1.4.3-.5` retain their assigned migrations.
+
+  **Proof:** Five core contract tests cover 36 family rows, 18 edge rows, six ownership sets, line scope,
+  diagnostics, lowering, and serialization. Three runtime tests lock the live staging boundary. The 2026-07-18
+  focused gate passes core 189/3/5/8, runtime 137 unit, named-mark, 105 oracle, seven diagnostic, 105/105 generated
+  classifier, 197 integration, and every adjacent suite before reaching only the exact staged default CLI 51/63
+  boundary. Production-library Clippy exits 0 with baseline warnings. Neutral cursor stays 36/18/8/14/72 at 2/6
+  and rejects 29 mutations. The all-target test-only `approx_constant` denial is the existing tracked baseline,
+  not a regression. Knowledge Map, memory/task/doctrine, mdBook, and whitespace gates pass; canonical local CI
+  repeats the 288-test Perl consumer, reference CLI 63x2, and Phase 0 1,031/1,031 in 646 seconds and exits 0.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.4.1 — run Rust core tests in the focused gate**
-  (DONE — exact ordered gate execution and operational documentation are complete; clean commit remains).
+  (DONE — exact ordered gate execution and operational documentation are committed at `9a36b98f`).
 
   **Result:** `tools/run_rust_local.sh` now runs complete, unfiltered `linkedspec-core` tests after formatting and
   before complete runtime tests. The same Cargo selector/manifest is retained; no parser/compiler/runtime source
@@ -29,7 +47,7 @@ Current execution status for interruption-safe batch workflow recovery.
   focused checker and complete canonical rerun pass.
 
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.4.0 — audit and split Rust cursor rollout**
-  (DONE — exact preflight, staged-red baseline, documentation, and task split are complete; clean commit remains).
+  (DONE — exact preflight, staged-red baseline, documentation, and task split are committed at `1ea716ce`).
 
   **Result:** Eight token-owned files plus the adjacent AST/parser/validation/error, loader/parser adapters,
   runtime/trace, descriptor/serialization, source emitter/generated classifier, fixture, test, gate, and public

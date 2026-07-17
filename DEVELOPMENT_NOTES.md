@@ -1,5 +1,53 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.2` — disk-pressure interruption and safe artifact cleanup):
+  The final focused Rust-gate run passed the complete core package, the 137 runtime unit tests, complete named-mark
+  proof, the 105-fixture corpus oracle, and diagnostic-output tests before the exhaustive generated-source
+  classifier's host compilation failed with `No space left on device`. The volume had only 1.1 GiB available.
+  The classifier's temporary project was removed by normal unwinding; a focused rerun rebuilt successfully after
+  clearing the Rust incremental cache, but the director stopped that run while its isolated host tests were still
+  executing.
+
+  Cleanup then stopped every matching Cargo/rustc process and removed only reproducible LinkedSpec artifacts:
+  the complete `rust/target` tree, rendered `docs/linkedspec-book/book`, the interrupted classifier scratch
+  directory, LinkedSpec Julia/Lua scratch depots, phase-0 TAP files, and generated LinkedSpec/pgen regeneration,
+  CI, Clippy, and build logs under `/private/tmp`. Tracked RGX diagnostic logs and the already-dirty nested pgen
+  source/generated tree were deliberately preserved. The filesystem reported 91 GiB available afterward versus
+  1.2 GiB immediately before cleanup. Only about 3.5 GiB was directly measured in the deleted files; the remainder
+  is recorded as macOS/APFS reclamation under disk pressure, not attributed to an unmeasured LinkedSpec artifact.
+  On 2026-07-18 the rebuilt focused classifier passed 105/105 in 247.75 seconds. The complete focused gate then
+  passed the same classifier in 256.48 seconds after the 105-fixture interpreter oracle passed in 219.46 seconds,
+  completed all remaining runtime suites, and reached only the exact staged 51/63 default CLI boundary. This
+  closes the disk event as environmental; no interrupted result is counted as proof. Canonical local CI then
+  passed the 288-test Perl admission consumer, reference CLI 63x2, and Phase 0 1,031/1,031 in 646 seconds.
+
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.2` — normalize representation before spending policy):
+  Rust had one overloaded `RuleMode::is_and()` predicate serving syntax classification, compiler lowering,
+  runtime behavior, descriptors, and generated-family selection. Correcting compact `|` in place would therefore
+  have changed four rollout leaves at once. The safe split gives `is_and()` its authored meaning and places only
+  legacy runtime/artifact callers behind `uses_legacy_and_interpretation()`. The temporary name is deliberate:
+  later `.3-.5` can enumerate and remove every compatibility caller instead of preserving an ambiguous helper.
+
+  Bare-edge recognition is physical-line scoped, not token scoped. A complete line or header rest may become
+  `BareEdge`, but a leftover suffix after `/regex/` or a lifecycle member must not. Retaining unresolved target,
+  optional index, shared block, fluent calls, and source form through parsing lets validation use the complete
+  declared-rule set: forward references work, reserved lifecycle markers win first, and malformed candidates can
+  no longer disappear through `Raw`. Explicit blind indices also retain `[0]`, closing the old false-negative
+  where the parser discarded the suffix before validation.
+
+  Representation and live execution are not identical milestones. Lowering an AND bare edge into bcode makes its
+  existing blind dispatcher reachable immediately; OR/default bare action entry still needs the rule-local
+  execution repair in `.3`. Direct proof records both public projections: the primary command returns `["hit"]`
+  versus `null`, while `Engine::execute` returns accumulated `[["hit"]]` versus `[]`. Tests lock those exact shapes
+  so `.3` must make an intentional change rather than inheriting an undocumented side effect.
+
+  Portable normalization failures now use one serializable sorted record (`code`, `stage`, message, fields)
+  inside `LinkedSpecError`, and the neutral fixture drives every identity. The new focused tests initially became
+  a 73rd token-inventory candidate because a fresh file mentioned the governed legacy field; moving that freeze
+  assertion into the already-owned compiler module restores the exact 72-file inventory without weakening proof.
+  Production-library Clippy exits 0 after removing both new suggestions. The all-target command still stops on the
+  already-tracked test-only `approx_constant` baseline; no unrelated hygiene edit is bundled here.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.1` — dependency compilation is not dependency test execution):
   The focused gate's old `cargo test -p linkedspec-runtime` compiled `linkedspec-core` but did not run core's unit
   or integration test binaries. The correct topology is two explicit unfiltered package commands, core first and

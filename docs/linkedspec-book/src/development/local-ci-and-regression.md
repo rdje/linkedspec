@@ -147,9 +147,10 @@ classifier, and native trace controls), builds `linkedspec-rust`, then runs all 
 `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
 `LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
 
-Core runs first because dependency compilation never executes a dependency crate's own tests. Its current complete
-proof is 188 unit + 3 descriptor + 8 type tests, covering the parser/compiler/validation/descriptor/serialization
-paths central to the cursor rollout.
+Core runs first because dependency compilation never executes a dependency crate's own tests. Normalization
+`.9.1.4.2` raises current proof to 189 unit + 3 descriptor + 5 contract-driven family/edge integration + 8 type
+tests. A separate three-test runtime integration locks the staged live boundary. Together they cover the parser/
+compiler/validation/descriptor/serialization and embedding paths central to the cursor rollout.
 
 The primary leg currently stops after the default environment at 51/63: one retired-flag diagnostic and eleven
 request-trace bytes still expose the legacy global mode field. Preflight separately proves the identical POSIX

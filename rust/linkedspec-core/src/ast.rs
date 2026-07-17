@@ -97,7 +97,7 @@ pub enum RuleMode {
     OrBounded { min: usize, max: Option<usize> },
     /// `:&` — single-match choice.
     Single,
-    /// `:|` — pipe (equivalent to `AND`).
+    /// `:|` — compact OR choice.
     Pipe,
     /// `:+` — one-or-more repeated choice.
     Plus,
@@ -108,8 +108,19 @@ pub enum RuleMode {
 }
 
 impl RuleMode {
-    /// True if this mode is an AND-type (ordered sequence) variant.
+    /// True if this authored mode belongs to the AND family.
     pub fn is_and(&self) -> bool {
+        matches!(
+            self,
+            RuleMode::And | RuleMode::AndPlus | RuleMode::AndBounded { .. } | RuleMode::Single
+        )
+    }
+
+    /// Transitional pre-rule-local-cursor classification used only to freeze
+    /// existing runtime, descriptor, and generated-source behavior while the
+    /// normalized AST/IR lands. Cursor rollout leaves `.9.1.4.3-.5` remove
+    /// these callers; new syntax and validation must use [`Self::is_and`].
+    pub fn uses_legacy_and_interpretation(&self) -> bool {
         matches!(
             self,
             RuleMode::And
@@ -186,9 +197,25 @@ pub enum BodyElementKind {
     #[serde(rename = "blind_edge")]
     BlindEdge {
         target: String,
+        /// An explicitly authored regex index. Validation rejects every
+        /// blind-call index, including `[0]`, before compilation.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        index: Option<usize>,
         /// The attached code block, if present.
         code: Option<String>,
         /// Fluent chain methods on this edge, if any.
+        fluent_chain: Vec<FluentCall>,
+    },
+    /// A complete-line rule edge with ownership derived from the parent family.
+    ///
+    /// This remains distinct through validation so forward declarations,
+    /// invalid indices/groups, and source provenance cannot be lost to `Raw`.
+    #[serde(rename = "bare_edge")]
+    BareEdge {
+        targets: Vec<BareEdgeTarget>,
+        /// The attached code block, if present.
+        code: Option<String>,
+        /// Fluent continuation methods attached to the edge.
         fluent_chain: Vec<FluentCall>,
     },
     /// A lifecycle code block: `I { set(results, []) }`
@@ -224,6 +251,16 @@ pub enum BodyElementKind {
 pub struct EdgeTarget {
     pub label: String,
     pub index: usize,
+}
+
+/// A target retained from a bare edge before family-derived normalization.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct BareEdgeTarget {
+    /// Referenced rule label.
+    pub label: String,
+    /// Optional child regex index retained until family-sensitive validation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub index: Option<usize>,
 }
 
 /// A single fluent chain method call: `.method(args)`.

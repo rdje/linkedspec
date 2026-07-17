@@ -432,6 +432,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 target,
                 code,
                 fluent_chain,
+                ..
             } => {
                 last_regex_line = None;
                 dependency_refs.push(DependencyRef {
@@ -455,6 +456,64 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                     code: parsed_code,
                     fluent_chain: fluent,
                 });
+            }
+
+            BodyElementKind::BareEdge {
+                targets,
+                code,
+                fluent_chain,
+            } => {
+                last_regex_line = None;
+                let fluent: Vec<(String, String)> = fluent_chain
+                    .iter()
+                    .map(|call| (call.method.clone(), call.args.clone()))
+                    .collect();
+
+                if rule.header.mode.is_and() {
+                    let target = targets.first().ok_or_else(|| {
+                        LinkedSpecError::Compile(format!(
+                            "rule '{}': normalized bare edge has no target",
+                            rule.header.label
+                        ))
+                    })?;
+                    dependency_refs.push(DependencyRef {
+                        label: target.label.clone(),
+                        index: 0,
+                    });
+                    let parsed_code = code
+                        .as_deref()
+                        .map(|source| {
+                            parse_rule_code_block(&rule.header.label, "blind-call", source)
+                        })
+                        .transpose()?
+                        .flatten();
+                    bcode_dispatch.push(BcodeEntry {
+                        child_label: target.label.clone(),
+                        code: parsed_code,
+                        fluent_chain: fluent,
+                    });
+                } else {
+                    let parsed_code = code
+                        .as_deref()
+                        .map(|source| parse_rule_code_block(&rule.header.label, "action", source))
+                        .transpose()?
+                        .flatten();
+                    for target in targets {
+                        let child_regex_idx = target.index.unwrap_or(0);
+                        dependency_refs.push(DependencyRef {
+                            label: target.label.clone(),
+                            index: child_regex_idx,
+                        });
+                        acode_dispatch.push(AcodeEntry {
+                            regex_idx: 0,
+                            child_label: target.label.clone(),
+                            child_regex_idx,
+                            code: parsed_code.clone(),
+                            fluent_chain: fluent.clone(),
+                            has_parent_regex: false,
+                        });
+                    }
+                }
             }
 
             BodyElementKind::CodeBlock { lifecycle, code } => {
@@ -505,11 +564,12 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
 
     // Determine parse mode: AND-type → consume, otherwise seek.
     // Blind-call-dispatch rules also use consume mode (sequential stepping).
-    let parse_mode = if rule.header.mode.is_and() || !bcode_dispatch.is_empty() {
-        ParseMode::Consume
-    } else {
-        ParseMode::Seek
-    };
+    let parse_mode =
+        if rule.header.mode.uses_legacy_and_interpretation() || !bcode_dispatch.is_empty() {
+            ParseMode::Consume
+        } else {
+            ParseMode::Seek
+        };
 
     let rep_min = rule.header.mode.rep_min();
     let rep_max = rule.header.mode.rep_max();
@@ -724,6 +784,23 @@ mod tests {
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         assert_eq!(compiled.rules[0].parse_mode, ParseMode::Consume);
+    }
+
+    #[test]
+    fn compile_preserves_staged_cursor_boundary_after_family_normalization() {
+        let pipe = parse_spec("Top::|\n /x/ -> Top { return(\"hit\") }\n").unwrap();
+        let pipe = compile(&pipe).unwrap();
+        assert!(!pipe.rules[0].mode.is_and());
+        assert_eq!(
+            pipe.rules[0].parse_mode,
+            ParseMode::Consume,
+            "cursor execution remains frozen until FUTURE-PARITY-BACKLOG.9.1.4.3"
+        );
+
+        let blind = parse_spec("Top::\n => Child\n\nChild:\n /x/\n").unwrap();
+        let blind = compile(&blind).unwrap();
+        assert_eq!(blind.rules[0].bcode_dispatch.len(), 1);
+        assert_eq!(blind.rules[0].parse_mode, ParseMode::Consume);
     }
 
     #[test]

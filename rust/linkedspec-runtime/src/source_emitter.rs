@@ -762,13 +762,13 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
             | RuleMode::AndBounded { .. }
     ) {
         if !rule.bcode_dispatch.is_empty() {
-            return if rule.mode.is_and() {
+            return if rule.mode.uses_legacy_and_interpretation() {
                 GeneratedRuleFamily::RepAndBcode
             } else {
                 GeneratedRuleFamily::RepBcode
             };
         }
-        return if rule.mode.is_and() {
+        return if rule.mode.uses_legacy_and_interpretation() {
             GeneratedRuleFamily::RepAndAcode
         } else {
             GeneratedRuleFamily::RepAcode

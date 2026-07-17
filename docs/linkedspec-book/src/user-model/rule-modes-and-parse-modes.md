@@ -32,6 +32,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > `prepare_options` and the primary `--parse-mode` flag at usage exit 2. Help and
 > canonical request trace no longer expose the global field;
 > composed Perl admission `.9.1.3.6` is executable through 14 required roles;
+> Rust `.9.1.4.2` now parses and validates the same family/bare-edge shapes and
+> lowers them into typed action/blind dispatch tables. Rust live cursor spending,
+> descriptor v1, generated-source v2, and option/CLI removal remain staged under
+> `.9.1.4.3-.6`; normalization alone is not a claim of completed Rust execution.
 > rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
 > dependency-ordered under `.9.1.4-.9`.
 
@@ -574,8 +578,10 @@ anchored choice is an OR parent over consume-owning one-anchor AND children.
 This keeps each reusable rule stable instead of reviving a caller or rule-local
 escape hatch.
 
-The Perl reference now implements both the decision's bare-edge normalization and normal live cursor spending. A complete bare paragraph
-member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
+The Perl reference implements both the decision's bare-edge normalization and normal live cursor spending. Rust
+implements the same typed normalization and portable validation through `.9.1.4.2`, while its live policy migration
+remains the next leaf. A complete bare paragraph member such as `Child`, `Child { ... }`, or
+`Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
 - `-> Child...` in an OR/default-family rule.

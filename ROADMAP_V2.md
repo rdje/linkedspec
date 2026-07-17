@@ -146,8 +146,9 @@ migration inventory is 72 after sixteen completed Perl test/fixture paths become
 `GeneratedSource.pm` gains the emitter-removal envelope. Composed admission `.9.1.3.6` now requires 14 exact
 live/descriptor/emitted/generated/loaded/trace/diagnostic/recursive/structural/primary roles, registers that
 consumer in canonical CI, rejects 29 total drift mutations, and advances only `perl_reference` to complete. The
-cursor rollout is 2 complete / 6 pending at an unchanged 72-file inventory; Rust `.9.1.4` follows after the clean
-Perl parent closeout commit.
+cursor rollout is 2 complete / 6 pending at an unchanged 72-file inventory; Rust gate hardening `.9.1.4.1` is
+committed. Verified normalization `.9.1.4.2` now retains typed bare edges, derives family ownership, and emits exact
+portable diagnostics while preserving the staged execution boundary assigned to `.9.1.4.3`.
 identical dependency-regex index identity is tracked under `.9.1.8.1` before public closeout.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are

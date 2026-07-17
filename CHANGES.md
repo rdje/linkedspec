@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.2 — normalize Rust rule edges
+
+Rust now distinguishes authored family identity from staged execution compatibility. Compact `|` is an
+OR/default-family spelling; compact `&`, `AND`, `AND+`, and bounded AND are the AND family. An explicitly named
+transitional helper preserves the old runtime/descriptor/generated interpretation until `.9.1.4.3-.5`, so this
+representation slice does not silently absorb those later behavior/artifact migrations.
+
+Complete physical-line and header-rest bare plain/indexed/grouped/block/fluent members now survive as typed
+`BareEdge` AST instead of ignored `Raw` text. Whole-spec validation resolves forward declarations, derives blind
+ownership for AND and action ownership for OR/default, preserves explicit cross-family arrows, and rejects
+undefined targets, invalid blind indices, invalid AND groups, grouped actions without a shared block, and mixed
+ownership with exact portable code/stage/fields. Explicit blind `[0]` is retained long enough to reject rather
+than being silently discarded. Compilation lowers valid normalized ownership into typed bcode/acode dispatch
+tables and preserves it across compiled JSON roundtrip.
+
+Five contract-driven core tests consume all 36 family cases, 18 edge cases, and six rule-edge ownership sets,
+plus line-scope/serialization locks. Three runtime tests make the staging explicit: typed AND bare dispatch is
+live, while default/header-rest bare action entry and compact-OR cursor spending remain assigned to `.9.1.4.3`.
+The primary command projects the same boundary as `["hit"]` versus `null`; embedding accumulation is
+`[["hit"]]` versus `[]`. Complete core/runtime packages and production-library Clippy pass; the neutral checker
+remains 36/18/8/14/72 at 2/6 and rejects 29 mutations. The known all-target test-only `approx_constant` denial
+remains tracked outside this slice.
+
+Final focused-gate proof on 2026-07-18 passes formatting; core 189 unit, three descriptor, five normalization,
+and eight type tests; runtime 137 unit, the complete named-mark contract, the 105-fixture oracle, seven diagnostic
+tests, the exhaustive 105/105 generated classifier, 197 integration tests, and every adjacent suite. The gate then
+reaches exactly the staged default primary boundary: 51/63 pass, with only the retired-option diagnostic and eleven
+legacy request-trace fields failing. A prior disk-pressure interruption was recovered after safe generated-artifact
+cleanup; the classifier independently passed 105/105 before also passing in the complete gate.
+
+Knowledge Map, memory/task/doctrine, mdBook, and whitespace gates pass. Canonical local CI repeats the 288-test
+composed Perl consumer, reference CLI 63/63 in both option environments, and Phase 0 1,031/1,031 in 646 seconds,
+then exits 0.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.4.1 — run Rust core tests in the focused gate
 
 `tools/run_rust_local.sh` now runs the complete `linkedspec-core` package immediately after formatting and before

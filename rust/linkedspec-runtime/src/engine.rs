@@ -2369,7 +2369,7 @@ impl Engine {
                         return_if_rule_returned!();
                     }
 
-                    let matched = if rule.mode.is_and() {
+                    let matched = if rule.mode.uses_legacy_and_interpretation() {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
@@ -2525,8 +2525,11 @@ impl Engine {
         }
 
         // ── Regex-based matching loop ──
-        let is_rep_and_acode_seq = is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
-        let is_and_acode_seq = (!is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1)
+        let is_rep_and_acode_seq =
+            is_rep && rule.mode.uses_legacy_and_interpretation() && rule.regex_patterns.len() > 1;
+        let is_and_acode_seq = (!is_rep
+            && rule.mode.uses_legacy_and_interpretation()
+            && rule.regex_patterns.len() > 1)
             || is_rep_and_acode_seq;
         let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;

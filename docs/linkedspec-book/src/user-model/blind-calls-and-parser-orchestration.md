@@ -5,9 +5,10 @@
 > OR/default-family rule the same bare member becomes a `->` action edge.
 > Explicit `=>` remains legal in OR/default and explicit `->` remains legal in
 > AND. Parent family never changes a child's intrinsic cursor policy. This syntax
-> is implemented on Perl as of `.9.1.3.1`; live rule-local cursor execution and
-> descriptor projection are current through `.9.1.3.3`, while generated v2,
-> CLI removal, and the other backends remain in the `.9.1.3.4-.9` rollout.
+> is fully admitted on Perl through `.9.1.3.6`. Rust `.9.1.4.2` now retains and
+> validates the same bare forms as typed AST and lowers their family-derived
+> ownership; Rust live rule-local execution, descriptor/generated artifacts,
+> CLI removal, and later backends remain in `.9.1.4-.9`.
 
 Blind calls are LinkedSpec's parser-orchestration edge family.
 

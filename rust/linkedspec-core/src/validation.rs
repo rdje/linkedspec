@@ -6,10 +6,11 @@
 //! 3. User-function names are unique and do not collide with rule labels,
 //!    lifecycle markers, reserved runtime symbols, or built-in helper/control names
 //! 4. User-function parameters are valid, unique, and not reserved runtime symbols
-//! 5. No rule mixes action (`->`) and blind-call (`=>`) edges
-//! 6. All `{` blocks are balanced (no unclosed blocks)
-//! 7. All edge targets reference existing rules
-//! 8. Rule headers are not inside open blocks (handled by parser)
+//! 5. Bare edges resolve against the complete rule set and obey family shape
+//! 6. No rule mixes action and blind ownership after bare normalization
+//! 7. All `{` blocks are balanced (no unclosed blocks)
+//! 8. All edge targets reference existing rules
+//! 9. Rule headers are not inside open blocks (handled by parser)
 //!
 //! Strict mode (`validate_with_options(spec, strict_syntax = true)`) promotes the
 //! Perl reference's *reference warnings* to hard errors:
@@ -24,7 +25,7 @@
 //! check 5 runs before the strict check.
 
 use crate::ast::{BodyElementKind, SpecFile};
-use crate::error::{LinkedSpecError, Result};
+use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use rgx_core::Regex;
 use std::collections::HashSet;
@@ -58,6 +59,7 @@ pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()>
     check_duplicate_labels(spec)?;
     check_duplicate_function_names(spec)?;
     check_function_registry(spec)?;
+    check_edge_structure(spec)?;
     check_mixed_edges(spec)?;
     check_balanced_braces(spec)?;
     check_edge_targets(spec)?;
@@ -101,6 +103,7 @@ pub fn validate_with_options_with_trace_emitter(
             check_duplicate_function_names(spec)
         })?;
         trace_validation_pass(trace, "function_registry", || check_function_registry(spec))?;
+        trace_validation_pass(trace, "edge_structure", || check_edge_structure(spec))?;
         trace_validation_pass(trace, "mixed_edges", || check_mixed_edges(spec))?;
         trace_validation_pass(trace, "balanced_braces", || check_balanced_braces(spec))?;
         trace_validation_pass(trace, "edge_targets", || check_edge_targets(spec))?;
@@ -546,22 +549,164 @@ fn is_numeric_word_alias_name(name: &str) -> bool {
     )
 }
 
-/// A rule must not mix action edges (`->`) and blind-call edges (`=>`).
+fn diagnostic(code: &str, stage: &str, message: impl Into<String>) -> PortableDiagnostic {
+    PortableDiagnostic::new(code, stage, message)
+}
+
+/// Validate family-sensitive and explicit edge shapes before compilation.
+fn check_edge_structure(spec: &SpecFile) -> Result<()> {
+    let labels: HashSet<&str> = spec
+        .rules
+        .iter()
+        .map(|rule| rule.header.label.as_str())
+        .collect();
+
+    for rule in &spec.rules {
+        for element in &rule.body {
+            match &element.kind {
+                BodyElementKind::BareEdge { targets, code, .. } => {
+                    for target in targets {
+                        if !labels.contains(target.label.as_str()) {
+                            return Err(LinkedSpecError::Diagnostic(
+                                diagnostic(
+                                    "bare_edge_target_undefined",
+                                    "normalize_edges",
+                                    format!(
+                                        "bare edge in rule '{}' targets undefined rule '{}'",
+                                        rule.header.label, target.label
+                                    ),
+                                )
+                                .with_field("rule_label", rule.header.label.clone())
+                                .with_field("target", target.label.clone()),
+                            ));
+                        }
+                    }
+
+                    if rule.header.mode.is_and() {
+                        if let Some(target) = targets.iter().find(|target| target.index.is_some()) {
+                            return Err(LinkedSpecError::Diagnostic(
+                                diagnostic(
+                                    "bare_edge_index_requires_action",
+                                    "normalize_edges",
+                                    format!(
+                                        "indexed bare edge in AND rule '{}' requires explicit action ownership",
+                                        rule.header.label
+                                    ),
+                                )
+                                .with_field("rule_label", rule.header.label.clone())
+                                .with_field("target", target.label.clone())
+                                .with_field("regex_index", target.index.unwrap()),
+                            ));
+                        }
+                        if targets.len() > 1 {
+                            let labels = targets
+                                .iter()
+                                .map(|target| target.label.clone())
+                                .collect::<Vec<_>>();
+                            return Err(LinkedSpecError::Diagnostic(
+                                diagnostic(
+                                    "bare_edge_group_requires_action",
+                                    "normalize_edges",
+                                    format!(
+                                        "grouped bare edge in AND rule '{}' requires explicit action ownership",
+                                        rule.header.label
+                                    ),
+                                )
+                                .with_field("rule_label", rule.header.label.clone())
+                                .with_field("targets", serde_json::json!(labels)),
+                            ));
+                        }
+                    } else if targets.len() > 1 && code.is_none() {
+                        let labels = targets
+                            .iter()
+                            .map(|target| target.label.clone())
+                            .collect::<Vec<_>>();
+                        return Err(LinkedSpecError::Diagnostic(
+                            diagnostic(
+                                "grouped_action_shared_block_required",
+                                "validate_rule",
+                                format!(
+                                    "grouped action-edge targets in rule '{}' require a shared code block",
+                                    rule.header.label
+                                ),
+                            )
+                            .with_field("rule_label", rule.header.label.clone())
+                            .with_field("targets", serde_json::json!(labels)),
+                        ));
+                    }
+                }
+                BodyElementKind::ActionEdge { targets, code, .. }
+                    if targets.len() > 1 && code.is_none() =>
+                {
+                    let labels = targets
+                        .iter()
+                        .map(|target| target.label.clone())
+                        .collect::<Vec<_>>();
+                    return Err(LinkedSpecError::Diagnostic(
+                        diagnostic(
+                            "grouped_action_shared_block_required",
+                            "validate_rule",
+                            format!(
+                                "grouped action-edge targets in rule '{}' require a shared code block",
+                                rule.header.label
+                            ),
+                        )
+                        .with_field("rule_label", rule.header.label.clone())
+                        .with_field("targets", serde_json::json!(labels)),
+                    ));
+                }
+                BodyElementKind::BlindEdge {
+                    target,
+                    index: Some(regex_index),
+                    ..
+                } => {
+                    return Err(LinkedSpecError::Diagnostic(
+                        diagnostic(
+                            "blind_call_index_forbidden",
+                            "validate_rule",
+                            format!(
+                                "blind-call target '{}' in rule '{}' cannot select a regex index",
+                                target, rule.header.label
+                            ),
+                        )
+                        .with_field("rule_label", rule.header.label.clone())
+                        .with_field("target", target.clone())
+                        .with_field("regex_index", *regex_index),
+                    ));
+                }
+                _ => {}
+            }
+        }
+    }
+    Ok(())
+}
+
+/// A rule must not mix action and blind ownership after bare normalization.
 fn check_mixed_edges(spec: &SpecFile) -> Result<()> {
     for rule in &spec.rules {
-        let has_action = rule
-            .body
-            .iter()
-            .any(|e| matches!(e.kind, BodyElementKind::ActionEdge { .. }));
-        let has_blind = rule
-            .body
-            .iter()
-            .any(|e| matches!(e.kind, BodyElementKind::BlindEdge { .. }));
+        let has_action = rule.body.iter().any(|element| match element.kind {
+            BodyElementKind::ActionEdge { .. } => true,
+            BodyElementKind::BareEdge { .. } => !rule.header.mode.is_and(),
+            _ => false,
+        });
+        let has_blind = rule.body.iter().any(|element| match element.kind {
+            BodyElementKind::BlindEdge { .. } => true,
+            BodyElementKind::BareEdge { .. } => rule.header.mode.is_and(),
+            _ => false,
+        });
         if has_action && has_blind {
-            return Err(LinkedSpecError::Validation(format!(
-                "rule '{}' mixes action (->) and blind-call (=>) edges",
-                rule.header.label
-            )));
+            return Err(LinkedSpecError::Diagnostic(
+                diagnostic(
+                    "mixed_edge_ownership",
+                    "validate_rule",
+                    format!(
+                        "rule '{}' mixes action and blind edge ownership",
+                        rule.header.label
+                    ),
+                )
+                .with_field("rule_label", rule.header.label.clone())
+                .with_field("ownerships", serde_json::json!(["action", "blind"])),
+            ));
         }
     }
     Ok(())
@@ -605,6 +750,15 @@ fn check_balanced_braces(spec: &SpecFile) -> Result<()> {
                         }
                     }
                 }
+                BodyElementKind::BareEdge { code: Some(c), .. } => {
+                    for ch in c.chars() {
+                        match ch {
+                            '{' => depth += 1,
+                            '}' => depth -= 1,
+                            _ => {}
+                        }
+                    }
+                }
                 BodyElementKind::PlainBlock { code } => {
                     for ch in code.chars() {
                         match ch {
@@ -639,6 +793,9 @@ fn check_edge_targets(spec: &SpecFile) -> Result<()> {
                     targets.iter().map(|t| t.label.as_str()).collect()
                 }
                 BodyElementKind::BlindEdge { target, .. } => vec![target.as_str()],
+                BodyElementKind::BareEdge { targets, .. } => {
+                    targets.iter().map(|target| target.label.as_str()).collect()
+                }
                 _ => continue,
             };
             for t in targets {
@@ -691,6 +848,11 @@ fn check_unused_rules(spec: &SpecFile) -> Result<()> {
                 }
                 BodyElementKind::BlindEdge { target, .. } => {
                     used.insert(target.as_str());
+                }
+                BodyElementKind::BareEdge { targets, .. } => {
+                    for target in targets {
+                        used.insert(target.label.as_str());
+                    }
                 }
                 _ => {}
             }

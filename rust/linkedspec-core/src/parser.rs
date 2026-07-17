@@ -8,7 +8,8 @@
 //! Code blocks (`{ ... }`) are properly captured as multi-line content.
 
 use crate::ast::{
-    BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader, RuleMode, SpecFile,
+    BareEdgeTarget, BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader,
+    RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
@@ -267,7 +268,7 @@ fn parse_inline_body(
 
         let before = trimmed.clone();
         let Some((element, remainder, _advanced)) =
-            parse_single_element(&trimmed, lines, i, line_num)
+            parse_single_element(&trimmed, lines, i, line_num, elements.is_empty())
         else {
             break;
         };
@@ -379,7 +380,8 @@ fn parse_body_elements(lines: &[&str], i: &mut usize) -> Vec<BodyElement> {
             break;
         }
 
-        if let Some((element, rest, advanced)) = parse_single_element(&trimmed, lines, i, line_num)
+        if let Some((element, rest, advanced)) =
+            parse_single_element(&trimmed, lines, i, line_num, elements.is_empty())
         {
             elements.push(element);
             remaining = rest;
@@ -419,12 +421,13 @@ fn parse_single_element(
     lines: &[&str],
     i: &mut usize,
     line_num: usize,
+    allow_bare_edge: bool,
 ) -> Option<(BodyElement, String, bool)> {
     // Regex patterns for classification (order matters!)
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
     let re_action =
         Regex::compile(r"^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
-    let re_blind = Regex::compile(r"^=>[ \t]*(\w+)").unwrap();
+    let re_blind = Regex::compile(r"^=>[ \t]*(\w+)(?:[ \t]*\[[ \t]*(\d+)[ \t]*\])?").unwrap();
     let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
     let re_split = Regex::compile(
         r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
@@ -514,6 +517,7 @@ fn parse_single_element(
     if let Some(caps) = re_blind.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let target = caps.get(1).unwrap().as_str().to_string();
+        let index = caps.get(2).map(|value| value.as_str().parse().unwrap());
         let rest = trimmed[full_match.end()..].trim_start().to_string();
 
         let (code, fluent_chain, advanced, remainder) = if rest.starts_with('{') {
@@ -528,6 +532,7 @@ fn parse_single_element(
         let elem = BodyElement::new(
             BodyElementKind::BlindEdge {
                 target,
+                index,
                 code,
                 fluent_chain,
             },
@@ -639,8 +644,88 @@ fn parse_single_element(
         return Some((elem, remainder, advanced));
     }
 
-    // 9. Fallback: not a recognized element
+    // 9. Bare rule edge. It is deliberately admitted only for the first
+    // physical-line element; `/regex/ Child` and `I Child` must not turn their
+    // suffix into a line-level edge.
+    if allow_bare_edge && let Some(parsed) = parse_bare_edge(trimmed, lines, i, line_num) {
+        return Some(parsed);
+    }
+
+    // 10. Fallback: not a recognized element
     None
+}
+
+/// Parse one complete-line bare rule edge while retaining unresolved target
+/// and suffix facts for whole-spec validation.
+fn parse_bare_edge(
+    trimmed: &str,
+    lines: &[&str],
+    i: &mut usize,
+    line_num: usize,
+) -> Option<(BodyElement, String, bool)> {
+    let targets_re = Regex::compile(
+        r"^(\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?(?:[ \t]*\|[ \t]*\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?)*)",
+    )
+    .ok()?;
+    let target_re = Regex::compile(r"^(\w+)(?:[ \t]*\[[ \t]*(\d+)[ \t]*\])?$").ok()?;
+    let captures = targets_re.captures(trimmed)?;
+    let targets_match = captures.get(1)?;
+    let targets = targets_match
+        .as_str()
+        .split('|')
+        .map(str::trim)
+        .map(|target| {
+            let captures = target_re.captures(target)?;
+            Some(BareEdgeTarget {
+                label: captures.get(1)?.as_str().to_string(),
+                index: captures
+                    .get(2)
+                    .map(|value| value.as_str().parse())
+                    .transpose()
+                    .ok()?,
+            })
+        })
+        .collect::<Option<Vec<_>>>()?;
+    if targets.is_empty() {
+        return None;
+    }
+
+    let start_i = *i;
+    let mut rest = trimmed[targets_match.end()..].trim_start().to_string();
+    let mut code = None;
+    let mut fluent_chain = Vec::new();
+
+    if rest.starts_with('.') {
+        let (calls, remainder) = parse_fluent_chain_with_remainder(&rest);
+        if calls.is_empty() {
+            return None;
+        }
+        fluent_chain = calls;
+        rest = remainder.trim_start().to_string();
+    }
+
+    if rest.starts_with('{') {
+        let (block, remainder) = consume_block_from_rest(lines, i, &rest)?;
+        code = Some(block);
+        rest = remainder.trim_start().to_string();
+    }
+
+    if !rest.is_empty() && !rest.starts_with('#') {
+        *i = start_i;
+        return None;
+    }
+
+    let advanced = *i > start_i;
+    let element = BodyElement::new(
+        BodyElementKind::BareEdge {
+            targets,
+            code,
+            fluent_chain,
+        },
+        trimmed,
+        line_num,
+    );
+    Some((element, String::new(), advanced))
 }
 
 /// Consume a `{ ... }` block that starts in `rest` and may continue on subsequent lines.
