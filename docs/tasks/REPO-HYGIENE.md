@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-07-10` (`REPO-HYGIENE.4` done: recurring Rust/Julia generated-artifact cleanup)
+- Last updated: `2026-07-17` (`REPO-HYGIENE.5` done: urgent recurring generated-artifact cleanup reclaimed 16G)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,7 +38,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -97,12 +97,46 @@ the durable handoff state current.
     their noncompiled content, unrelated temp trees remain, and the tracked tree contains only this leaf's docs.
   Commit: `REPO-HYGIENE.4 - clean Rust and Julia generated caches`
 
+- ID: `REPO-HYGIENE.5`
+  Status: `done` (2026-07-17)
+  Goal: `Repeat urgent safe artifact cleanup under measured low-disk pressure`
+  Acceptance: Retrieve the established cleanup boundary before scanning; measure filesystem pressure and exact
+    candidate sizes; prove repo outputs ignored/untracked and temp logs both provenance-identified and unwritten;
+    delete only rebuildable Rust, mdBook, Dart, and Julia compiled output plus exact stale generation logs; preserve
+    Julia depot data, `rgx` fixtures, unrelated temp trees, and all user-authored content; measure reclaimed space,
+    synchronize durable evidence, and return the repo to a clean committed handoff state.
+  Checklist:
+  - [x] **RETRIEVE / MEASURE** — Read the existing generated-artifact Knowledge Map card; measure the filesystem,
+    repo build outputs, Julia depot components, `/private/tmp`, and the largest exact candidate files.
+  - [x] **PROVE OWNERSHIP / SAFETY** — Confirm repo targets are ignored and untracked; inspect exact log headers;
+    verify no open handles or matching active generation process; exclude the unrelated `claude-501` tree, whole
+    Julia depots, `rgx` log/bin fixtures, and every unknown temp target.
+  - [x] **DELETE EXACT TARGETS** — Remove only `rust/target`, mdBook `book`, Dart `.dart_tool`, the two dedicated
+    Julia `compiled/` directories, and the exact fifteen closed generation logs recorded in verification evidence.
+  - [x] **POST-MEASURE / PRESERVATION** — Prove targets absent, measure available space gained, and confirm depot
+    noncompiled content, unrelated temp trees, tracked source, and worktree ownership remain intact.
+  - [x] **LOCKSTEP / COMMIT** — Refresh the existing Knowledge Map fact and live continuity docs with exact evidence;
+    run memory/KM/task/doctrine/whitespace checks and commit this leaf before resuming the roadmap frontier.
+  Verification: **PASS.** The session first observed 29G available / 94% used; unrelated external cleanup raised
+    the immediate deletion baseline to 55G / 89%. `git check-ignore` and `git ls-files` prove `rust/target` (2.6G),
+    Dart `.dart_tool` (30M), and mdBook `book` are ignored/untracked; the mdBook output was already absent after
+    the preceding closeout gate cleanup. Exact depot measurement isolates 142M and 125M `compiled/` directories.
+    Fifteen July 15-16 pgen/RGX generation logs total about 13.6GB decimal (about 12.7GiB); headers identify the
+    completed commands, `lsof` finds no writer, and process inspection finds no active matching generation job.
+    Removing only those exact targets raises availability from the immediate 55G / 89% baseline to 71G / 85%, a
+    measured 16G gain. Every target is absent; dedicated depots retain registries/logs; the unrelated 18G
+    `claude-501` tree, unknown temp trees, `rgx` corpus artifacts, source, and tracked fixtures remain untouched.
+    Memory, Knowledge Map, task metadata, doctrines, and whitespace pass; build/test/mdBook commands are not rerun
+    because they would recreate the artifacts and no product behavior changed.
+  Commit: `REPO-HYGIENE.5 - clean recurring generated artifacts`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
 | 2 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
+| 3 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
 
 ## Decisions
 
@@ -131,6 +165,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `REPO-HYGIENE.5` | Existing cleanup fact retrieval; `df -h`; exact `du`; ignored/tracked checks; main-checkout log/bin/temp scan; exact log header/process/`lsof` proof; removal of Rust/Dart build output, two Julia compiled caches, and 15 exact stale logs; post-absence/depot/unrelated-tree/status checks; memory/KM/task/doctrine/diff gates | PASS — immediate deletion baseline 55G/89% became 71G/85%, reclaiming 16G. Dedicated depot registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx` fixtures, and all tracked content remain. The earlier 29G/94% session observation is retained separately because external cleanup occurred before deletion. |
 | `2026-07-06` | `REPO-HYGIENE.2` | `.gitignore` update; `.gitmodules` `ignore = dirty`; `git status --ignored`; `git ls-files --stage rgx`; `git submodule status -- rgx`; memory/doctrine/Knowledge Map/diff checks | `.claude/projects/` is ignored; `rgx` remains a tracked submodule/gitlink at `8763a0e`; dirty submodule worktree state no longer dirties parent status. |
 | `2026-07-07` | `REPO-HYGIENE.3` | `du -sh rust/target docs/linkedspec-book/book`; ignored/tracked checks; artifact scans for `.log`, `.bin`, `.tmp`, `.bak`, `.DS_Store`, and `.swp`; `rm -rf rust/target docs/linkedspec-book/book`; post-clean existence/status checks; memory/KM/doctrine/diff gates | PASS — removed ignored/untracked `rust/target` (5.2G) and `docs/linkedspec-book/book` (7.0M). Main checkout has no remaining safe log/bin/temp artifact hits outside `.git`, ignored targets, and `rgx`. Submodule `rgx` log/bin hits were preserved as fixture/stimulus/issue corpus material. Cargo/mdBook were not run because they would recreate the removed artifacts. |
 | `2026-07-10` | `REPO-HYGIENE.4` | `df -h .`; `du -sh` over Rust target/mdBook output, Julia depot components, `/private/tmp`, and user temp; ignored/tracked checks; Julia `jl_*` scan; process/`lsof`/header provenance checks; removal of four generated cache targets plus twelve stale LinkedSpec/RGX generation logs; post-clean existence/depot/status checks; memory/KM/task/doctrine/diff gates | PASS — removed 1.7G Rust target, 7.8M mdBook output, 148M dedicated-depot Julia compiled cache, 261M user-depot Julia compiled cache, and about 18G of stale generation logs. Availability increased from 50G/90% to 68G/86%; Julia depot data, `claude-501`, unrelated cargo-mutants trees, and `rgx` corpus artifacts remain. |
@@ -140,6 +175,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.5` | `REPO-HYGIENE.5 - clean recurring generated artifacts` | Exact ignored caches and 15 stale generation logs removed; 16G reclaimed; depot and unrelated content preserved. |
 | `REPO-HYGIENE.2` | `REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt` | `.claude/projects/` ignore plus `rgx` submodule local-dirt ignore. |
 | `REPO-HYGIENE.3` | `REPO-HYGIENE.3 - remove generated artifacts` | Removed ignored/untracked `rust/target` and mdBook build output; left `rgx` corpus artifacts intact. |
 | `REPO-HYGIENE.4` | `REPO-HYGIENE.4 - clean Rust and Julia generated caches` | Depot-aware cache and provenance-checked temp-log cleanup; preserved package, registry, and unrelated temp data. |
@@ -155,3 +191,6 @@ the durable handoff state current.
 - `2026-07-10`: Completed REPO-HYGIENE.4 — reclaimed roughly 20G from regenerated Rust/mdBook output, Julia
   compiled/precompile caches, and twelve stale repo generation logs; preserved Julia depot content, unrelated temp
   trees, and all source data.
+- `2026-07-17`: Completed REPO-HYGIENE.5 — reclaimed 16G from ignored Rust/Dart output, two Julia compiled
+  caches, and fifteen provenance/liveness-checked stale generation logs; preserved depot content, the unrelated
+  18G `claude-501` tree, unknown temp trees, `rgx` corpus artifacts, and all tracked content.

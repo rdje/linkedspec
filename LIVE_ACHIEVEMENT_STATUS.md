@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **REPO-HYGIENE.5 — clean recurring generated artifacts**
+  (DONE — exact rebuildable caches and stale logs reclaimed 16G; cursor implementation `.9.1.2` resumes after the
+  clean hygiene commit).
+
+  **Result:** Removed 2.6G Rust output, 30M Dart output, 267M Julia compiled caches, and fifteen exact unwritten
+  July 15-16 generation logs totaling about 13.6GB decimal. Immediate availability rose from 55G/89% to 71G/85%;
+  the earlier 29G/94% observation is retained separately because unrelated external cleanup preceded deletion.
+
+  **Proof:** Ignored/tracked checks, header provenance, process/`lsof`, exact post-absence, depot preservation, and
+  filesystem measurements pass. Julia registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx`
+  corpus artifacts, and tracked content remain. Governance proof is recorded in the owning task.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift**
   (DONE — the authoritative guide/backend/status/KM surface is locked at 8 complete / 0 pending and parent `.5.2`
   is closed; cursor implementation `.9.1.2` follows after the clean commit).

@@ -16,17 +16,21 @@ answers:
   - "why was private tmp using 46 gigabytes"
   - "what did REPO-HYGIENE.3 remove"
   - "what did REPO-HYGIENE.4 remove"
-date: 2026-07-10
+  - "what did REPO-HYGIENE.5 remove"
+  - "is Dart dot dart tool safe to delete"
+  - "how much space did the July 17 artifact cleanup reclaim"
+date: 2026-07-17
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
-evidence: "REPO-HYGIENE.3 established ignored/untracked rust/target and docs/linkedspec-book/book as rebuildable cleanup targets while preserving rgx corpus artifacts. REPO-HYGIENE.4 repeated that proof and added Julia-aware measurement: /private/tmp/linkedspec-julia-depot/compiled was 148M and ~/.julia/compiled was 261M, distinct from packages, registries, environments, logs, and scratchspaces. A follow-up root-cause scan found /private/tmp at 46G: twelve July 6–9 LinkedSpec/RGX generation logs accounted for about 18G, their headers named repo parser-generation commands, and process/lsof checks found no writer. The leaf removed only those logs plus the four build/cache targets, reclaiming about 20G and moving availability from 50G/90% to 68G/86%. The unrelated 29G claude-501 directory and unrelated cargo-mutants trees were preserved."
+evidence: "REPO-HYGIENE.3 established ignored/untracked rust/target and docs/linkedspec-book/book as rebuildable cleanup targets while preserving rgx corpus artifacts. REPO-HYGIENE.4 repeated that proof and added Julia-aware compiled-cache and stale-log cleanup, reclaiming about 20G while preserving depot and unrelated temp content. REPO-HYGIENE.5 proved dart/.dart_tool is also ignored/untracked; removed rust/target (2.6G), Dart .dart_tool (30M), two dedicated Julia compiled directories (142M + 125M), and fifteen exact July 15-16 generation logs totaling about 13.6GB decimal after header, process, and lsof proof. The immediate deletion baseline moved from 55G available/89% used to 71G/85%, a measured 16G gain. Both dedicated depots retained registries/logs; unrelated claude-501 (18G), unknown temp trees, and rgx corpus artifacts were preserved."
 reverify: "git check-ignore -v rust/target docs/linkedspec-book/book; git ls-files rust/target docs/linkedspec-book/book; du -sh /private/tmp; du -sk /private/tmp/* 2>/dev/null | sort -n | tail -n 25"
 ---
 
 # Repo Generated Artifact Cleanup Boundary
 
 `rust/target` and `docs/linkedspec-book/book` are ignored, untracked, rebuildable generated outputs in the parent
-checkout. They are safe cleanup targets when disk space matters.
+checkout. Dart's ignored/untracked `dart/.dart_tool` is the same class of rebuildable package/build metadata. They
+are safe cleanup targets when disk space matters.
 
 Julia places compiled/precompile output under the active depot's `compiled/` directory rather than under a Rust-
 style project target. The repo's dedicated test depot uses `/private/tmp/linkedspec-julia-depot/compiled`; ordinary
@@ -45,3 +49,8 @@ outside the safe boundary even when they are large.
 Do not delete `.log` or `.bin` hits under `rgx/` as part of parent-repo cleanup. Those files are inside the tracked
 `rgx` submodule's stimulus, fixture, or issue-artifact corpus. Any pruning there needs an explicit submodule-owned
 task and its own status check.
+
+`REPO-HYGIENE.5` repeated the boundary on 2026-07-17. It removed 2.6G of Rust output, 30M of Dart output, 267M of
+dedicated Julia compiled caches, and fifteen exact stale generation logs totaling about 13.6GB decimal. Available
+space increased by 16G at the deletion boundary (55G/89% to 71G/85%). The two Julia depots retained noncompiled
+content, and the unrelated 18G `claude-501` tree remained untouched.

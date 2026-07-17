@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-17 — REPO-HYGIENE.5 — clean recurring generated artifacts
+
+Reclaimed 16G without touching source or unknown data. The immediate deletion baseline was 55G available / 89%
+used (after unrelated external cleanup from the session's first 29G / 94% observation); the final filesystem is
+71G / 85%. Removed only ignored/untracked `rust/target` (2.6G), Dart `.dart_tool` (30M), two dedicated Julia
+`compiled/` caches (142M + 125M), and fifteen exact July 15-16 pgen/RGX generation logs totaling about 13.6GB
+decimal. Each log's header identified a completed repo generation command, and process plus `lsof` checks found no
+writer. The mdBook output was already absent after the preceding closeout verification cleanup.
+
+All targets are absent. Dedicated Julia depots retain registries/logs; the unrelated 18G `claude-501` tree,
+unknown temp trees, full depots, `rgx` log/bin corpus artifacts, source, fixtures, and tracked content remain.
+Memory, Knowledge Map, task metadata, doctrines, and whitespace checks pass. Product/build gates were not rerun
+because no behavior changed and they would recreate the deleted artifacts.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift
 
 Closed the public projection of `linkedspec-logical-helper-v1`. The neutral contract now orders 20 authoritative

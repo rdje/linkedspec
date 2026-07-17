@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`REPO-HYGIENE.5` — compare immediate and initial disk baselines): Filesystem availability can change
+  between the first low-space observation and the exact deletion boundary because another process may reclaim
+  space. Preserve both readings rather than attributing the whole delta to this cleanup. Here, the session first
+  saw 29G/94%, the immediate baseline was 55G/89%, and exact target deletion produced 71G/85%: a defensible 16G
+  gain.
+
+  Re-run safety proof immediately before deletion. Require ignored/untracked evidence for repo outputs and exact
+  header plus process/`lsof` proof for temp logs. Dart `.dart_tool` joins Rust `target`, mdBook `book`, and Julia
+  depot `compiled/` as a measured rebuildable target. Keep full depots, unknown temp content, `rgx` fixtures, and
+  unrelated large trees outside the boundary even when disk pressure is urgent.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.9` — public guidance is part of the executable contract): A green
   native/generated gate does not prevent a backend README or control-flow guide from preserving an obsolete
   rollout boundary. Store an ordered public document inventory beside the semantic and recurring topology. Give

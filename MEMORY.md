@@ -13,18 +13,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.9` — 20 public documents and 13 stale-current guards are an
   executable projection of the same native/generated contract; rollout and parent `.5.2` close at 8/0 with 26
   rejected semantic/topology/public mutations.
-- latest_commit: `9ab68eeb` — `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate`
-  (ahead: 180; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.9 - close logical-helper public no-drift`.
-- active_work_unit: verified logical public no-drift `FUTURE-PARITY-BACKLOG.5.2.9` closing at the commit boundary;
-  cursor contract/inventory `.9.1.2` follows only after this commit is clean.
-- next_action: run final governance/diff checks, stage the closeout record, commit `.5.2.9`, clear the brief, and
-  verify the handoff-ready clean boundary.
-- current_proof: logical checker 8/0, 20 documents, 13 forbidden current claims, and 26 mutations; direct and
-  registered recurring Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT 8/4/24/232/359/359; selected 5x2x1 and full 5x2x63;
-  complete backend gates; diagnostic 8/0; generated/capability 80/0/0; coverage 246/105+1/122; governance/KM/book;
-  canonical reference CLI 63x2, Phase 0 `1..1031`/640s, and registered logical leg. No runtime implementation or
-  implementation mutation campaign occurred.
+- latest_commit: `5870bae1` — `FUTURE-PARITY-BACKLOG.5.2.9 - close logical-helper public no-drift`
+  (ahead: 181; push at threshold 300).
+- prepared_commit: `REPO-HYGIENE.5 - clean recurring generated artifacts`.
+- active_work_unit: verified urgent artifact cleanup `REPO-HYGIENE.5` closing at the commit boundary; roadmap cursor
+  contract/inventory `.9.1.2` resumes only after this commit is clean.
+- next_action: run final memory/KM/task/doctrine/diff gates, stage the hygiene evidence, commit `.5`, clear the
+  brief, and verify a clean 71G/85% handoff before resuming `.9.1.2`.
+- current_proof: removed 2.6G Rust target, 30M Dart tool output, 267M across two Julia compiled caches, and fifteen
+  exact unwritten July 15-16 generation logs totaling about 13.6GB decimal. Immediate availability rose 16G from
+  55G/89% to 71G/85%; the earlier session observation was 29G/94% before unrelated external cleanup. All exact
+  targets are absent; depot registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx` corpus files,
+  and tracked content remain.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -35,6 +35,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.5.2.9` public contract/checker, guide/backend/status docs,
-  task/live, and Knowledge Map sources await the prepared commit; no background gate remains. Mutation campaigns
-  remain parked; ignored `rgx/subs/pgen` work remains untouched.
+- blockers: none. in_flight_uncommitted: verified `REPO-HYGIENE.5` task/index/live/KM evidence awaits the prepared
+  commit; no background job remains. Mutation campaigns remain parked; ignored `rgx/subs/pgen` work is untouched.
