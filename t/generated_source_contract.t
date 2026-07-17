@@ -113,6 +113,40 @@ subtest 'v2 derives the exact ten handler-family cursor policies' => sub {
  );
 };
 
+subtest 'removed public cursor overrides reject before source parsing or emission' => sub {
+ my $invalid_spec = "not a spec\n";
+ foreach my $option_name (qw(parse_mode parseMode)) {
+  my %runtime_ctx;
+  my $result = LinkedSpec::Get(
+   \$invalid_spec,
+   $option_name => 'seek',
+   runtime_ctx_ref => \%runtime_ctx,
+  );
+  ok(!defined($result), "$option_name override rejects before invalid source parsing");
+  my $error = $runtime_ctx{last_error} || {};
+  is($error->{stage}, 'prepare_options', "$option_name rejection uses the portable option stage");
+  is($error->{code}, 'parse_mode_override_removed', "$option_name rejection uses the portable code");
+  is($error->{option_name}, 'parse_mode', "$option_name rejection reports the normalized option name");
+ }
+
+ my $emitter_error = generated_error(sub {
+  LinkedSpec::emit_generated_source(
+   \$invalid_spec,
+   parse_mode => 'consume',
+   source_identity => 'generated-source/removed-option.spec',
+  );
+ });
+ is($emitter_error->{type}, 'generated_source_error', 'emitter removal uses the generated-source error envelope');
+ is($emitter_error->{stage}, 'prepare_options', 'emitter removal rejects during option preparation');
+ is($emitter_error->{code}, 'parse_mode_override_removed', 'emitter removal preserves the portable code');
+ is($emitter_error->{option_name}, 'parse_mode', 'emitter removal preserves the normalized option name');
+ is(
+  $emitter_error->{source_identity},
+  'generated-source/removed-option.spec',
+  'emitter removal preserves source identity before parsing',
+ );
+};
+
 subtest 'v2 emitted plans retain every exact structural family' => sub {
  my $spec = <<'SPEC';
 DefaultRoot::
@@ -215,34 +249,21 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
  my $identity = 'generated-source/default-action-result.spec';
 
  my $normal_input = $input;
- my $normal = LinkedSpec::Get(\$spec, parse_mode => 'consume')->(\$normal_input);
+ my $normal = LinkedSpec::Get(\$spec)->(\$normal_input);
  is_deeply($normal, $expected, 'normal generated Perl parser satisfies the neutral expected value');
 
  my $source = capture_source(
   $spec,
-  parse_mode => 'consume',
   generated_source_identity => $identity,
  );
  my $source_again = capture_source(
   $spec,
-  parse_mode => 'consume',
   generated_source_identity => $identity,
  );
  is($source_again, $source, 'same compiled input and identity emit deterministic source');
- my $source_from_seek_option = capture_source(
-  $spec,
-  parse_mode => 'seek',
-  generated_source_identity => $identity,
- );
- is(
-  $source_from_seek_option,
-  $source,
-  'transitional caller option cannot change generated-source v2 bytes',
- );
  my $legacy_source = '';
  my $legacy_result = LinkedSpec::Get(
   \$spec,
-  parse_mode => 'consume',
   generate_only => 1,
   dump_parser_source => 1,
   parser_source_ref => \$legacy_source,
@@ -401,12 +422,10 @@ SPEC
 
  my $seek_source = capture_source(
   $seek_spec,
-  parse_mode => 'consume',
   generated_source_identity => 'generated-source/v2-seek.spec',
  );
  my $consume_source = capture_source(
   $consume_spec,
-  parse_mode => 'seek',
   generated_source_identity => 'generated-source/v2-consume.spec',
  );
  my $seek_module = load_generated_source($seek_source, 'V2Seek');
@@ -421,12 +440,12 @@ SPEC
  unlike(
   $seek_source,
   qr/LinkedRE::or\([^\n]+,\s*'consume'/,
-  'default generated handler uses the seek matcher form despite a consume option',
+  'default generated handler uses the family-derived seek matcher form',
  );
  like(
   $consume_source,
   qr/LinkedRE::or\([^\n]+,\s*'consume'/,
-  'AND generated handler uses the contiguous matcher form despite a seek option',
+  'AND generated handler uses the family-derived contiguous matcher form',
  );
 
  my $seek_input = 'junkx';
@@ -452,7 +471,6 @@ SPEC
 
  my $source = capture_source(
   $spec,
-  parse_mode => 'consume',
   generated_source_identity => 'generated-source/indexes.spec',
  );
  my $module = load_generated_source($source, 'Indexes');
@@ -464,7 +482,7 @@ SPEC
  ) {
   my ($text, $expected, $label) = @$case;
   my $normal_input = $text;
-  my $normal = LinkedSpec::Get(\$spec, parse_mode => 'consume')->(\$normal_input);
+  my $normal = LinkedSpec::Get(\$spec)->(\$normal_input);
   my $generated_input = $text;
   my $generated = $module->{execute}->(\$generated_input);
   is_deeply($normal, $expected, "$label normal result is exact");

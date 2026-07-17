@@ -9,12 +9,13 @@ answers:
   - "why must a Perl generated-source v1 artifact be regenerated"
   - "what is generated_source_contract_version_mismatch"
   - "does parse_mode change Perl generated source bytes"
+  - "what happens if emit_generated_source receives parse_mode"
   - "what functions does generated Perl source expose"
 date: 2026-07-17
 status: current
 supersedes: perl-generated-source-contract-v1
 tags: [perl, generated-source, cursor, public-api, trace, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.4 advances Compiler/GeneratedSource emission to linkedspec-generated-source-v2 format 2, removes SpecEntry's second legacy caller-mode handler, keeps exact label/family plan rows, derives five seek plus five consume policies, and rejects explicit or legacy-caller v1 reconstruction with validate_generated_plan/generated_source_contract_version_mismatch plus expected_contract/actual_contract and .spec regeneration. t/generated_source_contract.t proves option-independent deterministic bytes, fresh load, direct/traced execution, identity, plan drift, and both version-boundary paths."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.4 advances Compiler/GeneratedSource emission to linkedspec-generated-source-v2 format 2, removes SpecEntry's second legacy caller-mode handler, keeps exact label/family plan rows, derives five seek plus five consume policies, and rejects explicit or legacy-caller v1 reconstruction with validate_generated_plan/generated_source_contract_version_mismatch plus expected_contract/actual_contract and .spec regeneration. FUTURE-PARITY-BACKLOG.9.1.3.5 removes the transitional emitter option: parse_mode/parseMode reject at prepare_options with parse_mode_override_removed and normalized option_name while preserving source_identity."
 reverify: "PERL5LIB= prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_descriptor.t; python3 tools/check_rule_local_cursor_contract.py; perl -Iperl -c perl/LinkedSpec/GeneratedSource.pm; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/SpecEntry.pm"
 ---
 
@@ -32,8 +33,10 @@ and `family`. Cursor policy is derived, never serialized independently:
 - consume: `and_single_acode`, `and_acode_seq`, `and_bcode`,
   `rep_and_acode`, `rep_and_bcode`.
 
-The transitional Perl `parse_mode` option is still accepted until
-`.9.1.3.5`, but it cannot change new source bytes or generated behavior.
+The Perl `parse_mode` / `parseMode` option is removed. Supplying it to the
+emitter fails before source parsing at `prepare_options` with
+`parse_mode_override_removed`, normalized `option_name=parse_mode`, and the
+caller's source identity.
 Loaded v2 packages expose `Execute`, `ExecuteWithTrace`, metadata/plan readers,
 and `ValidateGeneratedPlan`. Plan row/label/family checks remain unchanged.
 

@@ -75,7 +75,6 @@ sub compile_source {
  my %ctx;
  my $parser = LinkedSpec::Get(
   \$source,
-  parse_mode => 'consume',
   runtime_ctx_ref => \%ctx,
   dump_parser_source => 1,
   parser_source_ref => \$captured,
@@ -85,7 +84,6 @@ sub compile_source {
   or diag($json->encode($ctx{last_error} // {}));
  my $emitted = LinkedSpec::emit_generated_source(
   \$source,
-  parse_mode => 'consume',
   source_identity => $identity,
  );
  is($captured, $emitted, "$identity live capture equals independently emitted source");

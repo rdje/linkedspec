@@ -28,9 +28,9 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > and exposes normalized resolved-edge rows. Generated-source slice `.9.1.3.4`
 > now emits `linkedspec-generated-source-v2`, derives its five seek and five
 > consume policies from the ten handler families, and rejects v1 reconstruction.
-> The transitional Perl `parse_mode` argument remains accepted at the API/CLI
-> boundary but cannot override live, descriptor, or emitted behavior. Its removal
-> remains separately staged under `.9.1.3.5`;
+> Perl `.9.1.3.5` now rejects the removed `parse_mode` argument during
+> `prepare_options` and the primary `--parse-mode` flag at usage exit 2. Help and
+> canonical request trace no longer expose the global field;
 > neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
 > Rust, Dart, Julia, and Lua behavior remains dependency-ordered under `.9.1.4-.9`.
 
@@ -494,39 +494,37 @@ Word:
 
 That separation is what makes a reusable extraction rule remain an extraction rule inside a strict ordered parent.
 
-## Transitional Perl option boundary
+## Removed Perl option boundary
 
-The Perl reference still accepts `parse_mode` in inline and file-oriented construction until the staged removal
-slice lands. It no longer controls normal live handlers, descriptors, or generated-source v2:
+The Perl reference rejects `parse_mode` in inline, file-oriented, and generated-source construction. The failure
+occurs before source parsing with `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, and
+`option_name = "parse_mode"`:
 
 ```perl
 my $parser = LinkedSpec::Get(
   \$and_spec_text,
-  parse_mode => 'seek', # transitional; AND still consumes live
+  parse_mode => 'seek', # rejected
+  runtime_ctx_ref => \%ctx,
 );
 
-my $loaded = LinkedSpec::get_parser(
-  'AndGrammar',
-  parse_mode => 'seek', # transitional; each loaded rule still owns its policy
-);
+die $ctx{last_error}{code}; # parse_mode_override_removed
 ```
 
-Descriptor v1 and generated-source v2 both expose only derived rule facts. The accepted option is not projected
-into descriptor metadata or serialized into emitted source:
+Construct the intended structure instead. Descriptor v1 and generated-source v2 expose only the resulting derived
+rule facts; no caller override is projected into descriptor metadata or serialized into emitted source:
 
 ```perl
 my $descriptor = LinkedSpec::Get(
   \$spec_text,
   return_descriptor => 1,
-  parse_mode => 'consume',
 );
 
 my $cursor_contract = $descriptor->{meta}{cursor_contract};
 # linkedspec-rule-local-cursor-v1
 ```
 
-Inspect each rule's family-derived `cursor_policy`. The public option and `--parse-mode` command flag are scheduled
-for targeted removal, not permanent ignored compatibility.
+Inspect each rule's family-derived `cursor_policy`. The primary `--parse-mode` flag is recognized only far enough
+to produce usage exit 2 and the targeted structural-migration message; it is never accepted or ignored.
 
 ## Choosing a mode
 
@@ -549,8 +547,8 @@ input is the goal. Compose strict and progressive rules structurally when one gr
 
 Rule composition, action/lifecycle placement, and cursor discipline remain distinct diagnostic axes. If a rule
 does not behave as expected, inspect the label-derived family/policy first, then the body edge family (`->` versus
-`=>`), then the exact cursor at which the rule was entered. In the staged Perl reference, do not debug normal live
-execution by changing the transitional `parse_mode` option; it no longer owns that behavior.
+`=>`), then the exact cursor at which the rule was entered. Do not try to debug normal Perl execution with the
+removed `parse_mode` option; author or inspect the rule structure instead.
 
 ## Rule-local rollout
 
@@ -620,14 +618,14 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-The remaining Perl rollout slices remove `parse_mode` / `--parse-mode` with a targeted
-diagnostic rather than preserving an accepted-and-ignored option. Perl descriptors now replace root
+Perl now removes `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
+accepted-and-ignored option. Perl descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract`, retain per-rule `meta.cursor_policy`, and expose ordered
 `meta.resolved_edges` rows with ownership/target/index/block/fluent facts.
 Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
-in the Perl reference are current. Primary-command/API removal is not yet migrated. The
+in the Perl reference are current. Primary-command/API removal is also current. The
 neutral checker currently reports 36 family spellings, 18 edge cases, eight
-parent/child cases, 87 migration files, 1 complete / 7 pending, and 27 rejected
+parent/child cases, 72 migration files, 1 complete / 7 pending, and 27 rejected
 drift mutations.

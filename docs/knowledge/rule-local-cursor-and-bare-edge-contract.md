@@ -12,9 +12,9 @@ answers:
   - "how does generated source derive cursor policy"
   - "how do I express AND seek or OR consume without parse_mode"
 date: 2026-07-17
-status: accepted; Perl implemented through descriptor v1, remaining rollout pending
+status: accepted; Perl implemented through API/CLI removal, remaining rollout pending
 tags: [dsl, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptor, generated-source, parity]
-evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3.1-.3` now implements normalization, live spending, descriptor v1 identity, and resolved-edge facts; generated v2/CLI/admission and later backends remain pending."
+evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3.1-.5` implements normalization, live spending, descriptor v1 identity/resolved edges, generated v2, and exact API/CLI override removal; composed admission and later backends remain pending."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
 ---
 
@@ -53,8 +53,8 @@ be regenerated for v2 admission.
 
 Neutral contract/inventory `.9.1.2` remains at 1 complete / 7 pending until
 composed admissions land. Perl parser/runtime/descriptor behavior is current
-through `.9.1.3.3`; generated v2, CLI retirement, later backends, and public
-closeout remain `.9.1.3.4-.9`.
+through `.9.1.3.5`; composed admission, later backends, and public closeout
+remain `.9.1.3.6-.9`.
 
 Related: [[and-or-cursor-ownership-audit]],
 [[rule-local-cursor-ownership-decision]], [[spec-edge-syntax-contract]], and

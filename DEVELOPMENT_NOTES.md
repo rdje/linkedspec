@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.5` — reject at option preparation, migrate shared bytes reference-first):
+  The dynamic boundary must test key presence, not value validity: both `parse_mode` and `parseMode` reject even
+  when their old value was valid or undefined. Compiler clears the caller-owned runtime context first, then records
+  the portable stage/code/normalized option name before bootstrap parsing. The generated-source facade promotes
+  that failure into its typed envelope and preserves `source_identity`; ordinary emission failures remain unchanged.
+
+  The primary parser keeps a single targeted recognition branch outside its value-option table. This makes bare,
+  valued, or `--parse-mode=...` legacy forms unambiguously removed without an ignored compatibility route. Help
+  omits the flag, request trace omits the global field, and structural default/AND fixtures preserve the two success
+  roles at a stable 63-case count. All usage cases share the synchronized help template, explaining the audited
+  2-help/20-usage/2-success/11-trace impact.
+
+  Token-derived inventory movement is exact rather than estimated: nine shared byte files and seven migrated Perl
+  tests leave the owner set; `GeneratedSource.pm` enters because its typed error contains the portable code. The
+  resulting 72-file inventory passes all 27 drift mutations.
+
+  The strict canonical gate initially stopped before behavior tests because the descriptor migration test supplied
+  the retired key through a contract-derived variable but newly asserted the removal code as a literal. That made
+  the test an unowned token path rather than a semantic failure. Reading the expected code from the same neutral
+  contract preserves the behavioral assertion and restores exact inventory accounting; the complete rerun then
+  passes 63x2 reference cases and Phase 0 1,031/1,031 in 634 seconds.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.4` — make the minimal family plan authoritative for generated cursor policy):
   Generated-source v2 does not add a cursor field. `GeneratedSource.pm` owns one exact ten-family map, validation
   treats an unknown family as invalid, and emitted handlers reuse the same intrinsic RuleIR policy already spent

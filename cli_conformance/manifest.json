@@ -223,14 +223,14 @@
       }
     },
     {
-      "id": "usage_invalid_parse_mode",
+      "id": "usage_removed_parse_mode",
       "family": "usage",
       "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--parse-mode", "scan"],
       "files": [],
       "expect": {
         "exit": 2,
         "stdout": {"text": ""},
-        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--parse-mode must be 'seek' or 'consume'"}},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)"}},
         "files": []
       }
     },
@@ -368,15 +368,13 @@
       }
     },
     {
-      "id": "success_seek_mode",
+      "id": "success_default_rule_seeks",
       "family": "success",
       "args": [
         "--inline-spec",
         "Top::\n /x/ -> Done { return(\"seek\") }\n\nDone::\n /x/\n",
         "--input",
-        "prefix x",
-        "--parse-mode",
-        "seek"
+        "prefix x"
       ],
       "files": [],
       "expect": {
@@ -387,15 +385,13 @@
       }
     },
     {
-      "id": "success_consume_mode",
+      "id": "success_and_rule_consumes",
       "family": "success",
       "args": [
         "--inline-spec",
-        "Top::\n /x/ -> Done { return(\"consume\") }\n\nDone::\n /x/\n",
+        "Top::AND\n /x/ -> Done { return(\"consume\") }\n\nDone::\n /x/\n",
         "--input",
-        "x",
-        "--parse-mode",
-        "consume"
+        "x"
       ],
       "files": [],
       "expect": {
@@ -558,7 +554,7 @@
       "files": [],
       "expect": {
         "exit": 0,
-        "stdout": {"text": "[linkedspec][low] compile:start\n[linkedspec][medium] request source=inline input=literal top_rule=<default> parse_mode=seek\n[linkedspec][high] arguments source_bytes=57 input_bytes=3\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][high] input bytes=3\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[linkedspec][full] result json_bytes=5\n\"xé\"\n"},
+        "stdout": {"text": "[linkedspec][low] compile:start\n[linkedspec][medium] request source=inline input=literal top_rule=<default>\n[linkedspec][high] arguments source_bytes=57 input_bytes=3\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][high] input bytes=3\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[linkedspec][full] result json_bytes=5\n\"xé\"\n"},
         "stderr": {"text": ""},
         "files": []
       }

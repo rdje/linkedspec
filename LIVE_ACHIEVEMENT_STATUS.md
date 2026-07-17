@@ -8,9 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.5 — remove Perl global cursor overrides**
+  (DONE — focused, standalone, canonical, documentation, inventory, and cleanup signoff pass; clean commit is the
+  only remaining workflow step before composed Perl admission `.9.1.3.6`).
+
+  **Result:** Perl `Get`, `get_parser`, and generated emission reject either legacy dynamic spelling during option
+  preparation before source parsing, with exact portable fields and retained source identity. The primary command
+  removes the flag from help and request trace and returns the targeted usage-exit-2 diagnostic. Authored
+  default-family seek and AND-family consume cases replace the two mode-controlled successes at an unchanged 63.
+
+  **Proof:** Focused Perl proof passes 191 assertions plus descriptor 31; default/POSIX CLI each pass 63/63;
+  standalone Phase 0 passes 1,031/1,031 in 606 seconds. Neutral cursor passes 36/18/8/72 at 1/7 plus 27 mutations;
+  generated/capability remain 80/0/0. Canonical local CI passes all registered contracts, CLI 63x2, and Phase 0
+  1,031/1,031 in 634 seconds. Knowledge Map 584/4,121, mdBook, governance, syntax, whitespace, and cleanup pass.
+
+  **Gate correction:** The first canonical attempt strictly caught one descriptor test's newly literal removal
+  code as an unowned token path. The assertion now reads its expected value from the neutral contract; exact
+  ownership remains 72 and the complete rerun exits 0.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.4 — emit Perl generated-source v2**
-  (DONE — focused, standalone, canonical, documentation, and cleanup signoff pass; the clean commit is the only
-  remaining workflow step before API/CLI migration `.9.1.3.5`).
+  (DONE — focused, standalone, canonical, documentation, and cleanup signoff pass; committed at `95fde033`, and
+  API/CLI migration `.9.1.3.5` has since completed).
 
   **Result:** New Perl artifacts identify `linkedspec-generated-source-v2` / format 2, retain minimal ordered
   `label`/`family` rows, and derive exactly five seek and five consume policies from the ten admitted families.

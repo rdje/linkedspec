@@ -5,9 +5,10 @@
 > public/global overrides with portable diagnostics, project per-rule
 > `cursor_policy`, and emit/consume `linkedspec-generated-source-v2`. Version-2
 > plan rows retain `{label, family}` and derive policy from family. Perl now
-> emits and validates v2; its API/CLI option removal and composed admission are
-> still pending. Rust, Dart, Julia, and Lua retain their admitted generated-source
-> v1 behavior until their dependency-ordered rollout leaves.
+> emits and validates v2 and rejects the removed API/CLI override; its composed
+> admission is still pending. Rust, Dart, Julia, and Lua retain their admitted
+> generated-source-v1 and global-option behavior until their dependency-ordered
+> rollout leaves.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
@@ -58,13 +59,17 @@ selection requires exactly one of `--input` or `--input-file`. Every primary com
 the same optional controls:
 
 - `--top-rule NAME`
-- `--parse-mode seek|consume`
 - `--trace LEVEL`
 - `--trace-file PATH`
 - `--trace-mode stdout|route|mirror`
 - `--trace-reset`
 - `--trace-emoji`
 - `--help` / `-h`
+
+The retired `--parse-mode` flag is recognized only as a usage error: exit `2`
+with `--parse-mode has been removed; cursor policy is derived from each rule
+(OR/default=seek, AND=consume)`. The Perl reference and shared fixtures now
+project that target; later backends migrate to the same interface in order.
 
 There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
 status probes are separate developer commands. Trace levels accept numeric values plus the

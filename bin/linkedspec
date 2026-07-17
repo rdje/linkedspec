@@ -33,7 +33,6 @@ Text encoding:
 
 Parser options:
   --top-rule NAME      Select the entry rule
-  --parse-mode MODE    MODE is seek or consume
 
 Trace options:
   --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
@@ -198,7 +197,6 @@ sub _parse_args {
   '--input'       => 'input',
   '--input-file'  => 'input_file',
   '--top-rule'    => 'top_rule',
-  '--parse-mode'  => 'parse_mode',
   '--trace'       => 'trace_level',
   '--trace-file'  => 'trace_file',
   '--trace-mode'  => 'trace_mode',
@@ -223,6 +221,8 @@ sub _parse_args {
     my $key = $option eq '--trace-reset' ? 'trace_reset' : 'trace_emoji';
     $opt{$key} = 1;
    }
+  } elsif ($option eq '--parse-mode') {
+   _usage_error('--parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)');
   } elsif (exists $value_option{$option}) {
    my $value;
    if (defined $inline_value) {
@@ -249,9 +249,6 @@ sub _parse_args {
   unless _defined_count(@opt{qw/spec spec_file inline_spec/}) == 1;
  _usage_error('choose exactly one input option: --input or --input-file')
   unless _defined_count(@opt{qw/input input_file/}) == 1;
- if (defined($opt{parse_mode}) && $opt{parse_mode} !~ /\A(?:seek|consume)\z/) {
-  _usage_error("--parse-mode must be 'seek' or 'consume'");
- }
  if (!_valid_trace_level($opt{trace_level})) {
   _usage_error("--trace has an unsupported level '$opt{trace_level}'");
  }
@@ -296,7 +293,6 @@ my %compile_opts;
 my %runtime_ctx;
 $compile_opts{runtime_ctx_ref} = \%runtime_ctx;
 $compile_opts{top_rule} = $opt{top_rule} if defined $opt{top_rule};
-$compile_opts{parse_mode} = $opt{parse_mode} if defined $opt{parse_mode};
 delete @ENV{qw(
  LINKEDSPEC_TRACE_LEVEL
  LINKEDSPEC_DUMP_VERBOSITY
@@ -317,14 +313,13 @@ my $source_argument = defined($opt{spec})
  : defined($opt{spec_file}) ? $opt{spec_file} : $opt{inline_spec};
 my $input_argument = defined($opt{input_file}) ? $opt{input_file} : $opt{input};
 my $top_rule = defined($opt{top_rule}) ? _trace_field($opt{top_rule}) : '<default>';
-my $parse_mode = defined($opt{parse_mode}) ? $opt{parse_mode} : 'seek';
 
 _trace_emit($trace, 100, 'low', 'compile:start');
 _trace_emit(
  $trace,
  200,
  'medium',
- "request source=$source_kind input=$input_kind top_rule=$top_rule parse_mode=$parse_mode",
+ "request source=$source_kind input=$input_kind top_rule=$top_rule",
 );
 _trace_emit(
  $trace,

@@ -33,7 +33,7 @@ sub _build_parser_quiet {
   trace_log_mode => 'stdout',
   trace_topic_spacing => 0,
  );
- return LinkedSpec::Get(\$spec, parse_mode => 'consume', %opts);
+ return LinkedSpec::Get(\$spec, %opts);
 }
 
 sub _run_with_routed_debug_trace {

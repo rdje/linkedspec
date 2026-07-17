@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.5 — remove Perl global cursor overrides
+
+Perl `Get`, `get_parser`, and `emit_generated_source` now reject both legacy dynamic option spellings before
+source parsing. Structured failures use `stage=prepare_options`, `code=parse_mode_override_removed`, and normalized
+`option_name=parse_mode`; generated emission retains its source identity in the same portable envelope.
+
+The primary command no longer advertises or accepts `--parse-mode`. It recognizes the retired flag only far enough
+to return usage exit 2 with the exact structural-migration message. Canonical medium trace no longer publishes a
+global request field. The unchanged 63-case manifest replaces its two mode-controlled successes with authored
+default-family seek and AND-family consume cases; help, all usage bytes, and the seven shared trace files follow the
+new reference target. Default and POSIX reference runs pass 63/63 each.
+
+Every Perl-owned caller that was not an explicit removal test now omits the option. Sixteen completed test/fixture
+paths become token-free; `GeneratedSource.pm` deliberately gains the emitter diagnostic token, so the exact
+migration inventory moves from 87 to 72 while the rollout ledger remains 1/7 pending composed Perl admission.
+
+Focused Perl proof passes 191 assertions plus the 31-assertion descriptor suite; standalone Phase 0 passes
+1,031/1,031 in 606 seconds. The canonical gate passes both 63-case CLI environments and Phase 0 1,031/1,031 in
+634 seconds. Its first strict attempt caught a descriptor assertion that dynamically supplied the removed key but
+newly spelled the portable code literally; deriving that expected value from the neutral contract restores exact
+72-file ownership before the complete exit-0 rerun.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.4 — emit Perl generated-source v2
 
 New Perl generated artifacts now identify `linkedspec-generated-source-v2` / format 2. Ordered plans retain only

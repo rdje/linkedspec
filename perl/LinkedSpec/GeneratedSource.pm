@@ -96,6 +96,14 @@ sub emit_source {
   ? $runtime_ctx->{last_error}
   : {};
  die new_error(
+  stage => 'prepare_options',
+  code => 'parse_mode_override_removed',
+  summary => 'Parser cursor override has been removed',
+  source_identity => $source_identity,
+  option_name => 'parse_mode',
+  detail => 'parse_mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)',
+ ) if ($last_error->{code} // '') eq 'parse_mode_override_removed';
+ die new_error(
   stage => 'emit_source',
   code => 'generated_source_emit_failed',
   summary => 'Generated parser source emission failed',
@@ -128,6 +136,7 @@ sub new_error {
  };
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
  $error->{handler_family} = $args{handler_family} if defined $args{handler_family};
+ $error->{option_name} = $args{option_name} if defined $args{option_name};
  $error->{expected_contract} = $args{expected_contract} if defined $args{expected_contract};
  $error->{actual_contract} = $args{actual_contract} if defined $args{actual_contract};
  $error->{detail} = $args{detail} if defined $args{detail};

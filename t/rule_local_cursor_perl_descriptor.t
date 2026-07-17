@@ -61,20 +61,24 @@ is($bare_descriptor->{spec}{Child}{meta}{cursor_policy}, 'seek', 'default child 
 for my $label (qw(Top Child)) {
  ok(!exists($bare_descriptor->{spec}{$label}{meta}{$legacy_root_path}), "$label metadata has no legacy cursor field");
 }
-my $legacy_option_descriptor = compile_descriptor($bare_source, $legacy_root_path => 'consume');
-is_deeply(
- [map { $legacy_option_descriptor->{spec}{$_}{meta}{cursor_policy} } qw(Top Child)],
- [map { $bare_descriptor->{spec}{$_}{meta}{cursor_policy} } qw(Top Child)],
- 'accepted transitional option input cannot override descriptor rule policies',
+my %removed_option_ctx;
+my $removed_option_descriptor = LinkedSpec::Get(
+ \$bare_source,
+ return_descriptor => 1,
+ runtime_ctx_ref => \%removed_option_ctx,
+ $legacy_root_path => 'consume',
+);
+ok(!defined($removed_option_descriptor), 'removed global cursor option rejects descriptor construction');
+is($removed_option_ctx{last_error}{stage}, 'prepare_options', 'descriptor removal rejects during option preparation');
+is(
+ $removed_option_ctx{last_error}{code},
+ $contract->{option_retirement}{error}{code},
+ 'descriptor removal reports the portable code',
 );
 is(
- $legacy_option_descriptor->{meta}{cursor_contract},
- $bare_descriptor->{meta}{cursor_contract},
- 'accepted transitional option input cannot override descriptor identity',
-);
-ok(
- !exists($legacy_option_descriptor->{meta}{$legacy_root_path}),
- 'accepted transitional option input is not projected back into descriptor metadata',
+ $removed_option_ctx{last_error}{option_name},
+ $contract->{option_retirement}{error}{fields}{option_name},
+ 'descriptor removal reports the normalized option name',
 );
 my $descriptor_handler_source = <<'SPEC';
 Top::AND
@@ -83,7 +87,6 @@ Top::AND
 SPEC
 my $descriptor_handler = compile_descriptor(
  $descriptor_handler_source,
- $legacy_root_path => 'seek',
 );
 my $leading_input = 'prefix x';
 pos($leading_input) = 0;
@@ -92,7 +95,7 @@ my $leading_result = $descriptor_handler->{spec}{Top}{handler}->(
  \$leading_input,
  {},
 );
-ok(!defined($leading_result), 'descriptor handler consumes intrinsically despite transitional seek input');
+ok(!defined($leading_result), 'descriptor handler consumes intrinsically without a global cursor input');
 my $exact_input = 'x';
 pos($exact_input) = 0;
 is(
@@ -106,7 +109,6 @@ close $loaded_fh or die "cannot close $loaded_path: $!";
 my $loaded_descriptor = LinkedSpec::get_parser(
  $loaded_path,
  return_descriptor => 1,
- $legacy_root_path => 'seek',
 );
 ok(ref($loaded_descriptor) eq 'HASH', 'file-oriented descriptor path returns descriptor v1');
 is(

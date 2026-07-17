@@ -60,7 +60,7 @@ foreach my $fixture (@{$contract->{fixtures}}) {
   . "$literal.uppercase(), copy(lower_items), copy(upper_items)))\n"
   . " }\n\n"
   . "Done::\n /x/\n";
- my $parser = LinkedSpec::Get(\$spec, parse_mode => 'consume');
+ my $parser = LinkedSpec::Get(\$spec);
  ok(ref($parser) eq 'CODE', "$id Perl runtime compiles") or next;
  my $input = 'xx';
  is_deeply(
@@ -78,7 +78,7 @@ foreach my $fixture (@{$contract->{fixtures}}) {
 }
 
 my $source_probe = "Top::\n /x/ -> Done { return(lowercase(\"X\")) }\n\nDone::\n /x/\n";
-my $generated = LinkedSpec::emit_generated_source(\$source_probe, parse_mode => 'consume');
+my $generated = LinkedSpec::emit_generated_source(\$source_probe);
 like(
  $generated,
  qr/use LinkedSpec::UnicodeCaseMapping \(\);/,

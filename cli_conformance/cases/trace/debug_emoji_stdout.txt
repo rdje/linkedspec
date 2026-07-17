@@ -1,5 +1,5 @@
 [linkedspec][low] ℹ️ compile:start
-[linkedspec][medium] 🔎 request source=inline input=literal top_rule=<default> parse_mode=seek
+[linkedspec][medium] 🔎 request source=inline input=literal top_rule=<default>
 [linkedspec][high] 🧭 arguments source_bytes=52 input_bytes=1
 [linkedspec][debug] 🔥 protocol version=1
 [linkedspec][low] ℹ️ compile:ok

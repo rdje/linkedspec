@@ -1,11 +1,11 @@
 # `Get(...)`, `get_parser(...)`, and `emit_generated_source(...)`
 
-> **Accepted API migration:** ADR `0044` removes public/global `parse_mode`
-> from all construction and execution surfaces once `.9.1.2-.9` lands. Legacy
-> dynamic options will fail with `parse_mode_override_removed`; the primary
-> `--parse-mode` flag will return usage exit 2. Current APIs still accept the
-> option until the reference removal slice lands, but normal live execution,
-> descriptors, and generated-source v2 already ignore it in favor of rule-family policy.
+> **Current Perl API:** ADR `0044` removes public/global `parse_mode` from all
+> construction and execution surfaces. Perl `Get`, `get_parser`, and
+> `emit_generated_source` now reject the legacy dynamic key during
+> `prepare_options` with `parse_mode_override_removed`; the primary
+> `--parse-mode` flag returns usage exit 2 with a targeted migration message.
+> Rust, Dart, Julia, and Lua follow in their dependency-ordered rollout leaves.
 
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
@@ -373,8 +373,9 @@ ten admitted family names; it does not serialize a separate cursor field. Supply
 fails with `generated_source_contract_version_mismatch`, `expected_contract`, and `actual_contract`; regenerate the
 artifact from its `.spec` source.
 
-The transitional `parse_mode` option is still accepted by this emitter until the next removal slice, but cannot
-change the emitted bytes or behavior. Do not use it in new generated-source calls.
+The emitter rejects the removed `parse_mode` key before parsing source. Its structured error retains
+`stage = "prepare_options"`, `code = "parse_mode_override_removed"`, `option_name = "parse_mode"`, and the caller's
+`source_identity`.
 
 The older `Get(... generate_only => 1, dump_parser_source => 1, parser_source_ref => \$source)` path remains
 compatible and emits the same text. The dedicated method is preferred for application code because it returns the
@@ -388,20 +389,17 @@ Both entry points support the same core option style:
 my $parser = LinkedSpec::Get(
   \$spec,
   top_rule => 'Top',
-  parse_mode => 'seek',
 );
 
 my $parser = LinkedSpec::get_parser(
   'Lispish',
   top_rule => 'Lispish',
-  parse_mode => 'consume',
 );
 ```
 
 Important options include:
 
 - `top_rule`
-- `parse_mode`
 - `return_descriptor`
 - `runtime_ctx_ref`
 
@@ -423,22 +421,30 @@ my $parser = LinkedSpec::Get(
 );
 ```
 
-## `parse_mode`
+## Removed `parse_mode`
 
-`parse_mode` is a transitional accepted option scheduled for removal. It no longer controls normal live execution,
-descriptors, or generated-source v2. Cursor discipline comes from each authored rule family:
+`parse_mode` no longer controls or configures a Perl parser. Cursor discipline comes from each authored rule
+family:
 
 - default/OR families derive `seek`
 - AND families derive `consume`
 
 ```perl
-my $parser = LinkedSpec::get_parser(
-  'Lispish',
-  parse_mode => 'consume',
+my %ctx;
+my $parser = LinkedSpec::Get(
+  \$spec,
+  parse_mode => 'consume', # removed
+  runtime_ctx_ref => \%ctx,
 );
+
+die $ctx{last_error}{code};
+# parse_mode_override_removed
 ```
 
-The call above remains accepted only for staged compatibility; its value does not override any rule.
+The failure occurs at `prepare_options`, normalizes `option_name` to `parse_mode` (including callers that use the
+camel-case legacy spelling), and happens before `.spec` parsing or action execution. Author an `AND` family for
+contiguous consumption, a default/OR family for progressive seeking, and explicit child-rule composition for mixed
+cursor structures.
 
 ## `runtime_ctx_ref`
 

@@ -185,9 +185,10 @@ Three backbone items tracked major structural modernization — all done:
   `.9.1.3.2` makes normal handlers spend those policies independently. Descriptor `.9.1.3.3` now publishes the
   v1 cursor identity, removes root global-mode metadata, and projects ordered resolved-edge facts. Generated-source
   `.9.1.3.4` now emits/validates Perl v2, derives the exact five seek/five consume family map, removes the separate
-  legacy artifact handler, and rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI removal
-  remains `.9.1.3.5`. The current inventory is 87 after `CompilerState.pm`, `SpecEntry.pm`, the synchronized
-  generated-handlers chapter, and the independently migrated action/lifecycle chapter become token-free.
+  legacy artifact handler, and rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI `.9.1.3.5`
+  now rejects dynamic overrides at `prepare_options`, removes the flag from help/request trace, returns targeted
+  usage exit 2, and keeps all 63 reference cases. The current inventory is 72 after sixteen completed Perl test and
+  shared byte owners become token-free while `GeneratedSource.pm` gains the portable emitter-removal envelope.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

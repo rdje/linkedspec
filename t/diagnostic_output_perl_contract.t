@@ -52,7 +52,6 @@ sub compile_program {
  my $runtime_ctx = {};
  my $parser = LinkedSpec::Get(
   \$source,
-  parse_mode => 'consume',
   runtime_ctx_ref => $runtime_ctx,
   dump_parser_source => 1,
   parser_source_ref => \$generated_source,
@@ -321,7 +320,7 @@ Top::
 Done::
  /x/
 SPEC
- my $parser = LinkedSpec::Get(\$source, parse_mode => 'consume');
+ my $parser = LinkedSpec::Get(\$source);
  ok(ref($parser) eq 'CODE', 'representative invalid-arity handler compiles');
  my $input = 'xx';
  my $ok = eval { $parser->(\$input); 1 };
@@ -443,7 +442,6 @@ subtest 'primary command observes quiet helpers and no host-status exit' => sub 
   $bin,
   '--inline-spec', $ordered->{source},
   '--input', input_for_program('ordered_unicode'),
-  '--parse-mode', 'consume',
  );
  is($status, 0, 'primary command succeeds without installing a rich sink');
  is($stderr, '', 'primary command receives no raw diagnostic stderr');
@@ -454,7 +452,6 @@ subtest 'primary command observes quiet helpers and no host-status exit' => sub 
   $bin,
   '--inline-spec', $exit_program->{source},
   '--input', input_for_program('immediate_exit'),
-  '--parse-mode', 'consume',
  );
  is($exit_status, 1, 'typed exit is normalized as a primary runtime failure rather than host status 23');
  is($exit_stdout, '', 'typed exit produces no raw helper stdout');

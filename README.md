@@ -4,12 +4,12 @@ Current design frontier (2026-07-17): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.
 ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
-Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. Logical-helper
+Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`; executable cursor contract/inventory `.9.1.2` is verified at 1 complete / 7 pending,
-and Perl reference rollout `.9.1.3` is split before code. Verified preflight `.9.1.3.0` maps the parser/RuleIR/emitter/
-descriptor/generated/CLI seams and assigns reference-breaking shared fixtures early enough to keep canonical CI
-green; normalization `.9.1.3.1` follows after its clean commit and runtime behavior remains unchanged.
+and Perl reference rollout `.9.1.3.1-.5` now implements normalization, intrinsic live policy, descriptor v1,
+generated-source v2, and targeted API/CLI override removal. The Perl primary matrix remains 63/63 in both option
+environments; composed Perl admission `.9.1.3.6` is next before later backend migrations.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

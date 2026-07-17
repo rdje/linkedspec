@@ -703,13 +703,6 @@ sub _build_final_descriptor_state {
  );
 }
 
-sub _normalize_parse_mode {
- my ($parse_mode) = @_;
- return 'seek' unless defined($parse_mode) && length($parse_mode);
- return $parse_mode if $parse_mode eq 'seek' || $parse_mode eq 'consume';
- die "(LinkedSpec::Compiler::_normalize_parse_mode) -E- option 'parse_mode' must be 'seek' or 'consume'"
-}
-
 sub _require_runtime_ctx {
  my ($deps) = @_;
  my $runtime_ctx = (ref($deps) eq 'HASH') ? $deps->{runtime_ctx} : undef;
@@ -779,20 +772,31 @@ sub run_get_pipeline {
  my $requested_top_rule = defined($option->{top_rule}) && length($option->{top_rule})
   ? $option->{top_rule}
   : undef;
- my $parse_mode = defined($option->{parse_mode}) && length($option->{parse_mode})
-  ? $option->{parse_mode}
-  : 'seek';
+
+ _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
+ if (exists($option->{parse_mode}) || exists($option->{parseMode})) {
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
+   $runtime_ctx,
+   'compiler_pipeline',
+   stage => 'prepare_options',
+   code => 'parse_mode_override_removed',
+   option_name => 'parse_mode',
+   summary => 'Parser cursor override has been removed',
+   detail => 'parse_mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)',
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Parser cursor override has been removed");
+  return undef;
+ }
 
  my $trace_scope = _trace_enter('LinkedSpec::Get', {
   parse_only => $parse_only ? 1 : 0,
   generate_only => $generate_only ? 1 : 0,
   return_descriptor => $return_descriptor ? 1 : 0,
   dump_parser_source => $dump_parser_source ? 1 : 0,
-  parse_mode => $parse_mode,
   trace_level => _trace_level_name_for_current_verbosity(),
  }, DUMP_LOW);
-
- _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
 
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
@@ -800,7 +804,6 @@ sub run_get_pipeline {
  my $function_registry;
  my ($bootstrap_parse, $compile_spec_entry);
  my $pipeline_setup_ok = eval {
-  $parse_mode = _normalize_parse_mode($option->{parse_mode});
   if (exists $deps->{bootstrap_parse}) {
    $bootstrap_parse = $deps->{bootstrap_parse};
    die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency 'bootstrap_parse'"

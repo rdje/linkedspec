@@ -20,22 +20,31 @@ This document is the current high-level technical reading of the project shape. 
   `{label, family}`; `LinkedSpec::GeneratedSource` owns the exact five seek/five consume derivation. Transitional
   option values cannot change source bytes. V1 reconstruction fails at `validate_generated_plan` with portable
   expected/actual contract fields and requires regeneration from `.spec`. Fresh load, direct/traced execution,
-  source identity, and existing plan drift diagnostics remain intact. The token inventory is 87: this slice makes
+  source identity, and existing plan drift diagnostics remain intact. The token inventory at that boundary was 87:
+  this slice makes
   `SpecEntry.pm` and the synchronized generated-handlers chapter token-free, and also reconciles the action/
-  lifecycle chapter token removed by `ccf4cad7` without its required inventory update. API/CLI removal remains
-  `.9.1.3.5`.
+  lifecycle chapter token removed by `ccf4cad7` without its required inventory update. API/CLI removal has since
+  landed under `.9.1.3.5`.
+- `2026-07-17` refresh: Perl API/CLI `FUTURE-PARITY-BACKLOG.9.1.3.5` now rejects both dynamic legacy option
+  spellings at `prepare_options` with `parse_mode_override_removed` and normalized `option_name=parse_mode`;
+  generated emission preserves that portable failure with source identity. The primary command removes the flag
+  from help and request trace, recognizes it only for the exact targeted usage-exit-2 message, and replaces the
+  two global-mode success cases with structural default-seek/AND-consume cases. All 63 cases pass in default and
+  POSIX environments. Sixteen completed test/fixture paths become token-free; `GeneratedSource.pm` joins the
+  error-envelope ownership set, leaving an exact 72-file migration inventory. Composed Perl admission remains
+  `.9.1.3.6`.
 - `2026-07-17` refresh: Perl descriptor projection `FUTURE-PARITY-BACKLOG.9.1.3.3` now identifies
   `linkedspec-rule-local-cursor-v1`, removes descriptor-wide global-mode metadata, and publishes each rule's
   intrinsic `cursor_policy` plus ordered `resolved_edges`. Every resolved row contains semantic ownership,
   target, regex index, block, and fluent facts; optional `source_form` provenance is observational only. The
   descriptor and live paths agree across all eight parent/child mechanisms and both structural replacements.
-  That slice deliberately left standalone generated source v1 for `.9.1.3.4`; generated v2 is now current and
-  option/CLI removal remains `.9.1.3.5`.
+  That slice deliberately left standalone generated source v1 for `.9.1.3.4`; generated v2 and option/CLI removal
+  are now current.
 - `2026-07-17` refresh: Perl live cursor execution `FUTURE-PARITY-BACKLOG.9.1.3.2` now feeds normalized per-rule
   `cursor_policy` into normal live/loaded HandlerIR and LinkedRE calls. AND families consume; default/OR families
   seek; parent/option state does not propagate across top, blind/action, explicit-call, or recursive entry. Rule
   trace records the intrinsic policy. That slice retained a separately built generated-source-v1 artifact handler
-  for the staged `.9.1.3.4` boundary; v2 has since removed it. API/CLI removal remains `.9.1.3.5`. Focused live 38,
+  for the staged `.9.1.3.4` boundary; v2 has since removed it and `.9.1.3.5` has retired the API/CLI override. Focused live 38,
   normalization 272, and Phase 0 1,031 pass. A pre-existing identical-regex dependency-index alias is tracked by
   `.9.1.8.1` rather than folded into cursor semantics.
 - `2026-07-17` refresh: Perl normalization `FUTURE-PARITY-BACKLOG.9.1.3.1` implements the preflight seam without

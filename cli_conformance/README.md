@@ -26,16 +26,18 @@ the same canonical boolean result across all five commands and both environments
 
 ADR `0044`'s future primary-command migration is now executable in
 `capability_conformance/rule_local_cursor_contract.json`. The target removes `--parse-mode` from help and returns
-usage exit `2` with the exact targeted removal message if the legacy flag is supplied. This is a 1-complete /
-7-pending neutral contract, not shipped CLI behavior: the current 63-case manifest and all five commands continue
-to accept the existing seek/consume option until their dependency-ordered `.9.1.3-.8` rollout changes the shared
-fixtures and commands together.
+usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 63-case manifest
+and Perl reference now project that target: structural default-rule seeking and AND-rule consumption replace the
+two global-mode success cases, and request trace omits the retired field. Rust, Dart, Julia, and Lua retain their
+prior interface until their dependency-ordered `.9.1.4-.8` migrations consume the same shared target; final
+five-backend symmetry remains pending.
 
 The current manifest contains 63 cases: exact long/short help, 20 strict usage families, nine successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20
 canonical trace families, and eight strict UTF-8 behavior cases. Success cases lock named/file/inline source,
-literal/file input, explicit top rule, seek/consume, canonical JSON, exact input bytes, quiet diagnostic helpers,
-eager logical-helper effects, empty stderr, exit `0`, and one record newline. Failure cases lock compile-before-
+literal/file input, explicit top rule, default-family seek, AND-family consume, canonical JSON, exact input bytes,
+quiet diagnostic helpers, eager logical-helper effects, empty stderr, exit `0`, and one record newline. Failure
+cases lock compile-before-
 input order, stable one-line stderr,
 empty stdout, exit `1`, and no output files. Trace cases lock deterministic UTF-8
 phase records, stdout/route/mirror, reset/persistence/append, every named level and alias,

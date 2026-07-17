@@ -19,7 +19,6 @@ Text encoding:
 
 Parser options:
   --top-rule NAME      Select the entry rule
-  --parse-mode MODE    MODE is seek or consume
 
 Trace options:
   --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,

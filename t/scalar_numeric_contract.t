@@ -31,7 +31,7 @@ is($contract->{contract_id}, $LinkedSpec::Numeric::CONTRACT_ID, 'Perl adapter co
 is(scalar(@{$contract->{cases}}), 55, 'contract case count is pinned');
 
 my $spec = $contract->{spec_source};
-my $parser = LinkedSpec::Get(\$spec, parse_mode => 'consume');
+my $parser = LinkedSpec::Get(\$spec);
 ok(ref($parser) eq 'CODE', 'Perl reference compiles the neutral scalar numeric fixture');
 my $input = 'xx';
 is_deeply($parser->(\$input), $contract->{expected}, 'Perl reference matches all scalar numeric cases');
@@ -40,7 +40,7 @@ is(LinkedSpec::Numeric::scalar_number(1e20), 1e20, 'numeric SV flags preserve fi
 ok(!defined(LinkedSpec::Numeric::scalar_number('1e2')), 'string exponent remains invalid');
 ok(!defined(LinkedSpec::Numeric::scalar_number(JSON::PP::true)), 'typed boolean remains nonnumeric');
 
-my $generated = LinkedSpec::emit_generated_source(\$spec, parse_mode => 'consume');
+my $generated = LinkedSpec::emit_generated_source(\$spec);
 like(
  $generated,
  qr/use LinkedSpec::Numeric \(\);/,

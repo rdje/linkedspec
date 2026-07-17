@@ -31,7 +31,7 @@ is_deeply($contract->{retired_names}, ['concat'], 'retired concat is not restore
 ok(!defined($contract->{policy}{codeblock}), 'codeblock is explicitly non-text');
 
 my $spec = $contract->{spec_source};
-my $parser = LinkedSpec::Get(\$spec, parse_mode => 'consume');
+my $parser = LinkedSpec::Get(\$spec);
 ok(ref($parser) eq 'CODE', 'Perl reference compiles the neutral scalar-text fixture');
 my $input = 'xx';
 is_deeply($parser->(\$input), $contract->{expected}, 'Perl reference matches the neutral scalar-text fixture');

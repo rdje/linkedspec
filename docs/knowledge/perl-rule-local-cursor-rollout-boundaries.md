@@ -13,11 +13,12 @@ answers:
   - "where does Perl derive per rule cursor policy"
   - "how does Perl generated source v2 reject a v1 artifact"
   - "why did the rule local cursor checker fail at clean commit ccf4cad7"
+  - "does the Perl reference still accept parse_mode or --parse-mode"
 date: 2026-07-17
-status: confirmed live, descriptor-v1, and generated-source-v2 rule-local semantics; CLI boundary pending
+status: confirmed Perl live, descriptor-v1, generated-source-v2, and API/CLI removal semantics; admission pending
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .9.1.3.2 makes normal live/loaded handlers spend intrinsic policy; .9.1.3.3 projects linkedspec-rule-local-cursor-v1 plus ordered resolved_edges; and .9.1.3.4 emits linkedspec-generated-source-v2 from the ten-family map, removes the legacy artifact handler, and rejects v1 reconstruction with exact expected/actual contract fields plus .spec regeneration. The inventory is 87 after SpecEntry and the generated-handlers chapter become token-free and the action/lifecycle token removed by ccf4cad7 is reconciled. Option/CLI removal remains .9.1.3.5."
-reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; python3 tools/check_rule_local_cursor_contract.py; perl -Iperl -c perl/LinkedSpec/GeneratedSource.pm; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/SpecEntry.pm"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .9.1.3.2 makes normal live/loaded handlers spend intrinsic policy; .9.1.3.3 projects linkedspec-rule-local-cursor-v1 plus ordered resolved_edges; .9.1.3.4 emits linkedspec-generated-source-v2 and rejects v1 reconstruction; and .9.1.3.5 rejects parse_mode/parseMode at prepare_options, removes --parse-mode from help/request trace with targeted usage exit 2, migrates all owned callers and exact shared bytes, and passes the 63-case reference suite in both environments. The inventory is 72 after sixteen paths become token-free and GeneratedSource joins diagnostic ownership."
+reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
 The Perl rollout has six distinct implementation boundaries:
@@ -38,7 +39,9 @@ The Perl rollout has six distinct implementation boundaries:
    emission, metadata, ten-family policy derivation, plan validation, and v1
    reconstruction rejection.
 6. `bin/linkedspec`, the Perl contract tests, and the shared CLI manifest/byte
-   fixtures own the reference primary-command projection.
+   fixtures own the reference primary-command projection. They now reject the
+   global override, omit it from help/request trace, and use structural cursor
+   success cases while retaining all 63 registered cases.
 
 The bootstrap probe established the prerequisite: before `.9.1.3.1`, a complete
 bare declared-child line produced no token, while fluent and block forms became
@@ -56,8 +59,9 @@ parent and accepted legacy option state cannot override a child. Descriptor
 metadata identifies `linkedspec-rule-local-cursor-v1`, removes root global-mode
 metadata, and exposes resolved semantic edge rows. Generated-source v2 keeps
 only label/family plan facts, derives five seek and five consume families, and
-rejects v1 reconstruction with mandatory `.spec` regeneration. CLI removal
-remains `.9.1.3.5`.
+rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI removal
+is current: both dynamic spellings reject at `prepare_options`, and the retired
+flag returns the targeted usage failure rather than being accepted or ignored.
 
 The exact token inventory has a cross-tree coupling worth preserving. Commit
 `ccf4cad7` removed the last `parse_mode` token from the action/lifecycle book
@@ -65,7 +69,9 @@ chapter while leaving that path in the executable 90-file inventory, so the
 clean HEAD checker failed despite the commit's recorded signoff. Generated-v2
 then removed SpecEntry's last token and synchronized the generated-handlers
 chapter past its last token. The reconciled observed inventory is 87;
-future changes in any owner tree must update the neutral inventory in the same
+API/CLI migration then made nine shared byte fixtures and seven Perl tests
+token-free while adding the portable emitter error to `GeneratedSource.pm`; the
+current observed inventory is 72. Future changes in any owner tree must update the neutral inventory in the same
 slice when a listed path becomes token-free.
 
 The initial migration inventory assigned all shared CLI fixtures to final

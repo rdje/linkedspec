@@ -9136,7 +9136,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor-state test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef);
 
     ok(ref($descriptor_state) eq 'HASH', 'final descriptor state build returns a hashref');
     is($descriptor_state->{kind}, 'compiled_descriptor_state', 'final descriptor state exposes the explicit descriptor-state kind');
@@ -9171,7 +9171,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for descriptor-state validation-view test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef);
     my $validation_view = LinkedSpec::CompilerState::compiled_descriptor_state_validation_view($descriptor_state);
 
     ok(ref($validation_view) eq 'HASH', 'compiled descriptor validation view returns a hashref');
@@ -9222,7 +9222,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor validation test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef);
     my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
 
     ok($valid, 'compiled descriptor state passes generated-descriptor validation');
@@ -9263,7 +9263,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor direct-validation test') or diag(normalize_error($parse_error));
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef);
     my ($ok_run, $valid, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
@@ -13726,7 +13726,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for rule-local named-mark coverage');
 
     my $input = 'foo(bar)';
@@ -13756,7 +13756,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_len_from(name) coverage');
 
     my $input = 'foo(bar)';
@@ -13785,7 +13785,7 @@ Child:
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds when a child rule references a same-name mark');
 
     my $input = 'foo(bar)';
@@ -13810,7 +13810,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for absolute input-boundary mark writer coverage');
 
     my $input = 'foo(bar)';
@@ -13842,7 +13842,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for whole-input helper coverage');
 
     my $input = 'foo(bar)';
@@ -13874,7 +13874,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for whole-input end-boundary helper coverage');
 
     my $input = "foo(\nbar\n)";
@@ -13913,7 +13913,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for advancing anonymous capture-boundary coverage');
 
     my $input = 'foo(alpha, beta, gamma)';
@@ -13951,7 +13951,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for advancing anonymous capture-boundary width coverage');
 
     my $input = 'foo(alpha, beta, gamma)';
@@ -13990,7 +13990,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for advancing named-mark coverage');
 
     my $input = 'foo(alpha, beta, gamma)';
@@ -14029,7 +14029,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for advancing named-mark width coverage');
 
     my $input = 'foo(alpha, beta, gamma)';
@@ -14067,7 +14067,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit anonymous/named boundary bridge coverage');
 
     my $input = 'foo(alpha, beta, gamma)';
@@ -14101,7 +14101,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark tail helper coverage');
 
     my $input = '(bar)';
@@ -14134,7 +14134,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing tail helper coverage');
 
     my $input = '(alpha)';
@@ -14165,7 +14165,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing tail-width helper coverage');
 
     my $input = '(alpha)';
@@ -14193,7 +14193,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous capture-through-cursor helper coverage');
 
     my $input = '(bar';
@@ -14227,7 +14227,7 @@ Boundary: /END/
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'seek', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_until_boundary helper coverage');
 
     my $input = '@a: first @b: second END';
@@ -14262,7 +14262,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing through-cursor helper coverage');
 
     my $input = '(alpha)';
@@ -14293,7 +14293,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing through-cursor width helper coverage');
 
     my $input = '(alpha)';
@@ -14322,7 +14322,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark capture-through-cursor helper coverage');
 
     my $input = '(bar';
@@ -14356,7 +14356,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing through-cursor helper coverage');
 
     my $input = '(alpha)';
@@ -14388,7 +14388,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing through-cursor width helper coverage');
 
     my $input = '(alpha)';
@@ -14424,7 +14424,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for two-mark capture_between coverage');
 
     my $input = 'foo(alpha,beta)';
@@ -14459,7 +14459,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_len_between(start_mark,end_mark) coverage');
 
     my $input = 'foo(alpha,beta)';
@@ -14492,7 +14492,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_copy(target_mark,source_mark) coverage');
 
     my $input = 'fooalphabetaEND';
@@ -14525,7 +14525,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_take_between(start_mark,end_mark) coverage');
 
     my $input = 'fooalphabetaEND';
@@ -14558,7 +14558,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_take_between_len(start_mark,end_mark) coverage');
 
     my $input = 'fooalphabetaEND';
@@ -14587,7 +14587,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice helper coverage');
 
     my $input = '(bar)';
@@ -14620,7 +14620,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_rest helper coverage');
 
     my $input = '(bar)';
@@ -14653,7 +14653,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing tail helper coverage');
 
     my $input = '(alpha)';
@@ -14684,7 +14684,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing tail-width helper coverage');
 
     my $input = '(alpha)';
@@ -14716,7 +14716,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_pos(name) position-read coverage');
 
     my $input = 'foo(bar)';
@@ -14747,7 +14747,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_line(name) line-read coverage');
 
     my $input = "foo\nbar\nbaz";
@@ -14778,7 +14778,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_col(name) column-read coverage');
 
     my $input = 'foo bar baz';
@@ -14808,7 +14808,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_pos() coverage');
 
     my $input = 'foo(bar)';
@@ -14838,7 +14838,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_line() coverage');
 
     my $input = "foo\nbar\nbaz";
@@ -14868,7 +14868,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_col() coverage');
 
     my $input = 'foo(bar)';
@@ -14898,7 +14898,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_rest() and cursor_rest_len() coverage');
 
     my $input = 'foo(bar)';
@@ -14929,7 +14929,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_line() coverage');
 
     my $input = "prefix\n(foo";
@@ -14958,7 +14958,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_col() coverage');
 
     my $input = 'foo (bar';
@@ -14985,7 +14985,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_pos() coverage');
 
     my $input = 'prefix(foo';
@@ -15015,7 +15015,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for match_start_pos() and match_end_pos() boundary-read coverage');
 
     my $input = 'foo(bar)';
@@ -15046,7 +15046,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for match_text() current-local-match content coverage');
 
     my $input = 'foo(bar)';
@@ -15076,7 +15076,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for match_len() current-local-match width coverage');
 
     my $input = 'foo(bar)';
@@ -15109,7 +15109,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_text() current-immediate-match coverage');
 
     my $input = 'foo(bar)';
@@ -15144,7 +15144,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_col() and match_col() coverage');
 
     my $input = 'foo(bar)';
@@ -15177,7 +15177,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_group(index) and match_group(index) coverage');
 
     my $input = 'foo(bar)';
@@ -15210,7 +15210,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_groups() and match_groups() coverage');
 
     my $input = 'foo(bar)';
@@ -15243,7 +15243,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_named(name) and match_named(name) coverage');
 
     my $input = 'foo(bar)';
@@ -15276,7 +15276,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_has(name) and match_has(name) coverage');
 
     my $input = 'foo(bar)';
@@ -15309,7 +15309,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_map() and match_map() coverage');
 
     my $input = 'foo(bar)';
@@ -15341,7 +15341,7 @@ Top::
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for typed slot/container coverage');
 
     my $input = 'foo';
@@ -15385,7 +15385,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_len() current-immediate-match width coverage');
 
     my $input = 'foo(bar)';
@@ -15419,7 +15419,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_pos() and entry_end_pos() coverage');
 
     my $input = 'foo(bar)';
@@ -15453,7 +15453,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_end_line() and match_end_line() coverage');
 
     my $input = "foo\nbar\nbaz";
@@ -15486,7 +15486,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_end_col() and match_end_col() coverage');
 
     my $input = 'foo(bar)';
@@ -15519,7 +15519,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_line() and match_start_line() coverage');
 
     my $input = "foo\nbar\nbaz";
@@ -15560,7 +15560,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_col() and match_start_col() coverage');
 
     my $input = 'foo(bar)';
@@ -15598,13 +15598,13 @@ Child::AND
 SPEC
 
     my %default_ctx;
-    my $default_parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%default_ctx);
+    my $default_parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%default_ctx);
     my $foo_input = 'foo';
     is_deeply($default_parser->(\$foo_input), ['?Top:', 'foo'], 'multi-rule parser defaults to the first parsed rule as the top-level entry');
     is($default_ctx{top_rule}, 'Top', 'runtime context records the first parsed rule as the selected top rule by default');
 
     my %explicit_ctx;
-    my $explicit_parser = LinkedSpec::Get(\$spec_content, top_rule => 'Child', parse_mode => 'consume', runtime_ctx_ref => \%explicit_ctx);
+    my $explicit_parser = LinkedSpec::Get(\$spec_content, top_rule => 'Child', runtime_ctx_ref => \%explicit_ctx);
     my $bar_input = 'bar';
     is_deeply($explicit_parser->(\$bar_input), ['?Child:', 'bar'], 'explicit top_rule option selects a later rule as the parser entry');
     is($explicit_ctx{top_rule}, 'Child', 'runtime context records the explicit top_rule selection');
@@ -15625,7 +15625,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_match_start(name) left-edge coverage');
 
     my $input = 'foo(bar)';
@@ -15657,7 +15657,7 @@ Child::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit entry/match boundary mark coverage');
 
     my $input = 'foo(bar)';
@@ -15698,7 +15698,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit mark-here coverage');
 
     my $input = 'foo(alpha,beta)';
@@ -15733,7 +15733,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit clear-mark coverage');
 
     my $input = 'foo(alpha,beta)';
@@ -15768,7 +15768,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit mark-exists coverage');
 
     my $input = 'foo(alpha,beta)';
@@ -15802,7 +15802,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds when mark_exists(name) is used inside if(...) flow conditions');
 
     my $input = 'foo(alpha,beta)';
@@ -39117,7 +39117,7 @@ SPEC
     is($attached_meta->{unresolved_helper_count}, 0, 'compact attached-block if/elseif/else avoids unresolved-helper hits');
 
     require JSON::PP;
-    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top');
     my $attached_input = 'xx';
     is(
         JSON::PP->new->canonical(1)->allow_nonref(1)->encode($attached_parser->(\$attached_input)),
@@ -39151,7 +39151,7 @@ SPEC
     LinkedSpec::Get(\$when_otherwise_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$when_otherwise_source);
     unlike($when_otherwise_source, qr/\b(?:when|otherwise)\b/, 'compact attached-block when/otherwise does not leak host Perl keywords into generated source');
 
-    my $when_otherwise_parser = LinkedSpec::Get(\$when_otherwise_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $when_otherwise_parser = LinkedSpec::Get(\$when_otherwise_spec, top_rule => 'Top');
     my $when_otherwise_input = 'xx';
     is(
         JSON::PP->new->canonical(1)->allow_nonref(1)->encode($when_otherwise_parser->(\$when_otherwise_input)),
@@ -39218,7 +39218,7 @@ subtest 'spec_format_terse_2_3_1_locks_perl_fluent_when_otherwise_block_chains' 
         my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
         $assert_clean_branch_meta->($meta, $case->{label}, $case->{expects_assign});
 
-        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top', parse_mode => 'consume');
+        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top');
         my $input = 'x';
         is(
             $json->encode($parser->(\$input)),
@@ -39312,7 +39312,7 @@ SPEC
         my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
         $assert_clean_meta->($meta, $case->{label});
 
-        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top', parse_mode => 'consume');
+        my $parser = LinkedSpec::Get(\$case->{spec}, top_rule => 'Top');
         ok(ref($parser) eq 'CODE', "$case->{label} parser builds");
         my $input = 'x';
         my $actual_json = eval {
@@ -39530,7 +39530,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
     );
     ok($attached_meta->{language_agnostic_action_ir_ready}, 'compact attached while is language-agnostic ActionIR ready');
 
-    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $attached_parser = LinkedSpec::Get(\$attached_spec, top_rule => 'Top');
     my $attached_input = 'x';
     is(
         $json->encode($attached_parser->(\$attached_input)),
@@ -39547,7 +39547,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
     is($counting_meta->{unresolved_helper_count}, 0, 'condition-mutating attached while avoids unresolved-helper hits');
     ok($counting_meta->{language_agnostic_action_ir_ready}, 'condition-mutating attached while remains language-agnostic ActionIR ready');
 
-    my $counting_parser = LinkedSpec::Get(\$counting_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $counting_parser = LinkedSpec::Get(\$counting_spec, top_rule => 'Top');
     my $counting_input = 'x';
     is(
         $json->encode($counting_parser->(\$counting_input)),
@@ -39560,7 +39560,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
     LinkedSpec::Get(\$guard_spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$guard_source);
     like($guard_source, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/s, 'generated source contains the attached-while safety guard');
 
-    my $guard_parser = LinkedSpec::Get(\$guard_spec, top_rule => 'Top', parse_mode => 'consume');
+    my $guard_parser = LinkedSpec::Get(\$guard_spec, top_rule => 'Top');
     my $guard_input = 'x';
     my ($guard_ok, $guard_ret, $guard_err, $guard_stdout, $guard_stderr) = run_parser_with_captured_io($guard_parser, \$guard_input);
     ok($guard_ok, 'non-terminating attached while returns control to the parser');
@@ -43745,36 +43745,31 @@ SPEC
     );
 };
 
-subtest 'parse_mode_default_and_explicit_seek_preserve_progressive_matching' => sub {
-    plan tests => 6;
+subtest 'default_family_seeks_progressively_without_a_global_cursor_option' => sub {
+    plan tests => 3;
 
     my $snippet = <<'PERL';
 use LinkedSpec;
-my ($mode, $input) = @ARGV;
+my ($input) = @ARGV;
 my $spec_content = <<'SPEC';
 Top::
  /a/ -> Top { return(1) }
 SPEC
-my @opt = defined($mode) && length($mode) ? (parse_mode => $mode) : ();
-my $parser = LinkedSpec::Get(\$spec_content, @opt);
+my $parser = LinkedSpec::Get(\$spec_content);
 print(ref($parser) || "<undef>", "\n");
 my $ast = $parser->(\$input);
 require Data::Dumper;
 print defined($ast) ? Data::Dumper::Dumper($ast) : "__AST_UNDEF__\n";
 PERL
 
-    my ($default_exit, $default_out, $default_err) = run_perl_snippet_in_subprocess($snippet, '', 'xxa');
-    my ($seek_exit, $seek_out, $seek_err) = run_perl_snippet_in_subprocess($snippet, 'seek', 'xxa');
+    my ($exit, $out, $err) = run_perl_snippet_in_subprocess($snippet, 'xxa');
 
-    is($default_exit, 0, 'default parse mode subprocess exits cleanly') or diag($default_err || $default_out);
-    is($seek_exit, 0, 'explicit seek parse mode subprocess exits cleanly') or diag($seek_err || $seek_out);
-    like($default_out, qr/^CODE\n/s, 'default parse mode still builds parser coderef');
-    like($seek_out, qr/^CODE\n/s, 'explicit seek parse mode still builds parser coderef');
-    like($default_out, qr/\$VAR1 = 1;/, 'default parse mode still seeks forward to a later anchor (returns the matched value)');
-    is($seek_out, $default_out, 'explicit seek parse mode matches the default parser result end to end');
+    is($exit, 0, 'default-family subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/^CODE\n/s, 'default-family source builds a parser coderef');
+    like($out, qr/\$VAR1 = 1;/, 'default family seeks forward to a later anchor and returns its value');
 };
 
-subtest 'and_family_requires_contiguous_match_independent_of_legacy_option' => sub {
+subtest 'and_family_requires_contiguous_match_without_a_global_cursor_option' => sub {
     plan tests => 5;
 
     my $snippet = <<'PERL';
@@ -43784,7 +43779,7 @@ my $spec_content = <<'SPEC';
 Top::AND
  /a/ -> Top { return(1) }
 SPEC
-my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume');
+my $parser = LinkedSpec::Get(\$spec_content);
 print(ref($parser) || "<undef>", "\n");
 my $ast = $parser->(\$input);
 require Data::Dumper;
@@ -43794,8 +43789,8 @@ PERL
     my ($reject_exit, $reject_out, $reject_err) = run_perl_snippet_in_subprocess($snippet, 'xxa');
     my ($accept_exit, $accept_out, $accept_err) = run_perl_snippet_in_subprocess($snippet, 'a');
 
-    is($reject_exit, 0, 'consume parse mode leading-junk subprocess exits cleanly') or diag($reject_err || $reject_out);
-    is($accept_exit, 0, 'consume parse mode contiguous-input subprocess exits cleanly') or diag($accept_err || $accept_out);
+    is($reject_exit, 0, 'AND-family leading-junk subprocess exits cleanly') or diag($reject_err || $reject_out);
+    is($accept_exit, 0, 'AND-family contiguous-input subprocess exits cleanly') or diag($accept_err || $accept_out);
     like($reject_out, qr/^CODE\n__AST_UNDEF__\n\z/s, 'AND family rejects leading junk before the first anchor');
     like($accept_out, qr/^CODE\n/s, 'AND-family source still builds a parser coderef');
     like($accept_out, qr/\$VAR1 = 1;/, 'AND family accepts contiguous matching input');
@@ -43810,29 +43805,32 @@ Top::
 SPEC
 
     my $default_descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
-    ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descriptor still builds descriptor hash');
+    ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default-family return_descriptor builds descriptor hash');
     is(
         $default_descr->{meta}{cursor_contract},
         'linkedspec-rule-local-cursor-v1',
         'default descriptor records the rule-local cursor contract identity',
     );
-    is($default_descr->{meta}{descriptor_model}, 'compiled_descriptor_state', 'default parse mode descriptor records the composing descriptor-state model');
+    is($default_descr->{meta}{descriptor_model}, 'compiled_descriptor_state', 'default-family descriptor records the composing descriptor-state model');
     is($default_descr->{meta}{compiled_spec_model}, 'compiled_spec_state', 'default descriptor identifies its nested compiled-spec model');
     is($default_descr->{meta}{compiled_dependency_regex_model}, 'compiled_dependency_regex_state', 'default descriptor identifies its nested dependency-regex model');
-    is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default parse mode descriptor preserves definition-order metadata');
-    is_deeply($default_descr->{meta}{compiled_rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic compiled-rule-order metadata');
-    is_deeply($default_descr->{meta}{redefined_rule_labels}, [], 'default parse mode descriptor preserves redefined-rule metadata');
+    is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default-family descriptor preserves definition-order metadata');
+    is_deeply($default_descr->{meta}{compiled_rule_order}, ['Top'], 'default-family descriptor preserves deterministic compiled-rule-order metadata');
+    is_deeply($default_descr->{meta}{redefined_rule_labels}, [], 'default-family descriptor preserves redefined-rule metadata');
 
-    my $consume_descr = LinkedSpec::Get(
-        \$spec_content,
+    my $and_spec = <<'SPEC';
+Top::AND
+ /a/ -> Top { return(1) }
+SPEC
+    my $and_descr = LinkedSpec::Get(
+        \$and_spec,
         return_descriptor => 1,
-        parse_mode => 'consume',
     );
-    ok(defined($consume_descr) && ref($consume_descr) eq 'HASH', 'consume parse mode return_descriptor still builds descriptor hash');
+    ok(defined($and_descr) && ref($and_descr) eq 'HASH', 'AND-family return_descriptor builds descriptor hash');
     is(
-        $consume_descr->{meta}{cursor_contract},
-        'linkedspec-rule-local-cursor-v1',
-        'legacy consume option does not alter the descriptor cursor-contract identity',
+        $and_descr->{spec}{Top}{meta}{cursor_policy},
+        'consume',
+        'AND-family descriptor derives its consume policy from authored structure',
     );
 
     my $snippet = <<'PERL';
@@ -43847,22 +43845,21 @@ my $descr = LinkedSpec::Get(
   return_descriptor => 1,
   dump_parser_source => 1,
   parser_source_ref => \$parser_source,
-  parse_mode => 'consume',
 );
 die "__NO_DESCR__\n" unless defined($descr) && ref($descr) eq 'HASH';
 print $parser_source;
 PERL
     my ($source_exit, $source_out, $source_err) = run_perl_snippet_in_subprocess($snippet);
-    is($source_exit, 0, 'consume parse mode dump_parser_source subprocess exits cleanly') or diag($source_err || $source_out);
+    is($source_exit, 0, 'default-family dump_parser_source subprocess exits cleanly') or diag($source_err || $source_out);
     unlike(
         $source_out,
         qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
-        'legacy consume option cannot force default-family generated source into contiguous dispatch'
+        'default-family generated source keeps seek dispatch without a global override'
     );
 };
 
-subtest 'invalid_parse_mode_records_structured_prepare_pipeline_error' => sub {
-    plan tests => 10;
+subtest 'removed_parse_mode_records_structured_prepare_options_error' => sub {
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -43874,20 +43871,22 @@ SPEC
         \$spec_content,
         return_descriptor => 1,
         top_rule => 'RequestedTop',
-        parse_mode => 'sideways',
+        parse_mode => 'seek',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
-    ok(!defined($ret), 'invalid parse mode returns undef');
-    ok(ref($runtime_ctx) eq 'HASH', 'invalid parse mode still exposes runtime context through runtime_ctx_ref');
-    is($runtime_ctx->{top_rule}, 'RequestedTop', 'invalid parse mode keeps the requested top_rule visible in runtime context before parser selection');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid parse mode records structured last_error');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid parse mode records compiler_pipeline error type');
-    is($runtime_ctx->{last_error}{stage}, 'prepare_pipeline', 'invalid parse mode records prepare_pipeline stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'invalid parse mode records combined compiler owner stage');
-    like($runtime_ctx->{last_error}{detail}, qr/option 'parse_mode' must be 'seek' or 'consume'/, 'invalid parse mode preserves parse-mode contract detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'invalid parse mode records the requested top_rule in structured diagnostics');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'invalid parse mode preserves label-scoped generated handler source label when top_rule is known');
+    ok(!defined($ret), 'removed parse mode returns undef');
+    ok(ref($runtime_ctx) eq 'HASH', 'removed parse mode still exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{top_rule}, 'RequestedTop', 'removed parse mode keeps the requested top_rule visible before parser selection');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'removed parse mode records structured last_error');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'removed parse mode records compiler_pipeline error type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_options', 'removed parse mode records the portable option stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_options', 'removed parse mode records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{code}, 'parse_mode_override_removed', 'removed parse mode records the portable code');
+    is($runtime_ctx->{last_error}{option_name}, 'parse_mode', 'removed parse mode records the normalized option name');
+    is($runtime_ctx->{last_error}{detail}, 'parse_mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)', 'removed parse mode preserves the migration detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'removed parse mode records the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'removed parse mode preserves label-scoped generated handler source label when top_rule is known');
 };
 
 subtest 'tracked_markdown_docs_do_not_capture_machine_local_absolute_paths' => sub {
@@ -44830,7 +44829,7 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
                 . "   set(pair, set_key(pair, \"name\", match_group(0)));\n }\n"
                 . " /([^,\\n]+)/ -> Pair[1] {\n"
                 . "   return(set_key(pair, \"value\", match_group(0)));\n }\n";
-    my $p = eval { LinkedSpec::Get(\$ok_spec, top_rule => 'Pair', parse_mode => 'consume') };
+    my $p = eval { LinkedSpec::Get(\$ok_spec, top_rule => 'Pair') };
     ok(ref($p) eq 'CODE', 'regex-on-top AND rule builds a parser')
         or diag(normalize_error($@));
     my ($s1, $o1) = _ls_run_bounded($p, 'name = value', 6);
@@ -44843,7 +44842,7 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
                   . "   set(pair, set_key(pair, \"name\", entry_text()));\n }\n"
                   . " /([^,\\n]+)/ -> Pair[1] {\n"
                   . "   return(set_key(pair, \"value\", entry_text()));\n }\n";
-    my $pf = eval { LinkedSpec::Get(\$foot_spec, top_rule => 'Pair', parse_mode => 'consume') };
+    my $pf = eval { LinkedSpec::Get(\$foot_spec, top_rule => 'Pair') };
     my ($s2, $o2) = _ls_run_bounded($pf, 'name = value', 6);
     is($o2, '{"name":null,"value":null}',
         'entry_text() on a top rule (no entering match) yields null -- the footgun the book steers away from');
@@ -45058,7 +45057,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     };
     my $run = sub {
         my ($spec, $input) = @_;
-        my $p = eval { LinkedSpec::Get(\$spec, top_rule => 'top', parse_mode => 'seek') };
+        my $p = eval { LinkedSpec::Get(\$spec, top_rule => 'top') };
         return 'ERR:' . normalize_error($@) unless ref($p) eq 'CODE';
         my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$input); alarm(0); $J->encode($r) };
         return defined($out) ? $out : ('ERR:' . normalize_error($@));
@@ -45102,7 +45101,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
 
     my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(copy(items))}\n";
-    my $ap = eval { LinkedSpec::Get(\$array_accum_spec, top_rule => 'top', parse_mode => 'seek') };
+    my $ap = eval { LinkedSpec::Get(\$array_accum_spec, top_rule => 'top') };
     ok(ref($ap) eq 'CODE', 'bare copy(items) accumulator compiles to a parser')
         or diag(normalize_error($@));
     my $input_array_first = 'a b';
@@ -45114,7 +45113,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
 
     my $hash_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), true) }\n"
                          . "LX {return(copy(meta))}\n";
-    my $hp = eval { LinkedSpec::Get(\$hash_accum_spec, top_rule => 'top', parse_mode => 'seek') };
+    my $hp = eval { LinkedSpec::Get(\$hash_accum_spec, top_rule => 'top') };
     ok(ref($hp) eq 'CODE', 'bare copy(meta) mutation/read spec compiles to a parser')
         or diag(normalize_error($@));
     my $input_hash_first = 'a';
@@ -45197,7 +45196,7 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
 
     my $runtime_spec = "top:: /(\\w+)\\s*/ -> top[0] { set(out, match_group(0)) }\n"
                      . "LX { return(out) }\n";
-    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top', parse_mode => 'seek') };
+    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top') };
     ok(ref($p) eq 'CODE', 'bare return(out) runtime no-leak spec compiles to a parser')
         or diag(normalize_error($@));
     my $first_input = 'a b';
@@ -45285,7 +45284,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
 
     my $runtime_spec = "top:: /(\\w+)=(\\w+)\\s*/ -> top[0] { set(key, match_group(0)); set(value, match_group(1)); items += value; set_key(meta, key, value); meta[\"last\"] = value }\n"
                      . "LX { return(hash(\"items\", copy(items), \"meta\", copy(meta))) }\n";
-    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top', parse_mode => 'seek') };
+    my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top') };
     ok(ref($p) eq 'CODE', 'mutation-slot bare-read runtime spec compiles to a parser')
         or diag(normalize_error($@));
     is($run->($p, 'a=1 b=2'), '{"items":["1","2"],"meta":{"a":"1","b":"2","last":"2"}}',
