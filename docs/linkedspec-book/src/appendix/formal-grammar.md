@@ -318,9 +318,10 @@ Blind-call behavior follows the **rule label mode**, not the edge alone. Explici
 `:AND` on the child rule is required for sequential blind-call dispatch. A bare
 `rule:` label with blind-call edges still behaves as repeated choice.
 
-#### 3.3.1 Ratified future bare-edge normalization
+#### 3.3.1 Bare-edge normalization
 
-ADR `0044` adds this line-level source grammar during `.9.1.2-.9`:
+ADR `0044` defines this line-level source grammar, implemented by the Perl
+reference in `.9.1.3.1` and pending in the later backends:
 
 ```text
 BareEdgeLine ::= TargetRule BareSuffix?
@@ -340,7 +341,7 @@ valid only in OR/default and require the same shared block as grouped explicit
 action edges. Lifecycle words `I`, `LS`, `LE`, `LX`, `E`, `EX`, and `IT` take
 lexical precedence; use an explicit marker to call a same-named rule. After
 normalization, action and blind edge ownership still cannot coexist in one
-rule. This subsection is an accepted future grammar, not shipped parser syntax.
+rule.
 
 ### 3.4 Code Blocks (Action / Lifecycle)
 

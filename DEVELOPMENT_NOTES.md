@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.1` — normalize before planning, spend policy later):
+  Preserve syntax identity until the declaration graph is available. The bootstrap can know that a complete line
+  is a bare-edge candidate, but it cannot know whether the target is declared later; Compiler is the first owner
+  with the complete label set. Pass that set into SpecEntry and let RuleIR resolve and lower candidates before
+  handler-family selection. This keeps forward references valid and makes undefined targets deterministic instead
+  of silently dropping them or guessing during handler emission.
+
+  Lexical precedence and semantic ownership are separate. Reserved `I`/`LS`/`LE`/`LX`/`E`/`EX`/`IT` forms match
+  before bare candidates, while explicit `->`/`=>` retain authored ownership. After bare lowering, validate the
+  one ownership set and carry portable diagnostic fields through Compiler and RuntimeContext. Derive per-rule
+  family/cursor metadata now, but do not feed it into HandlerIR until the separately gated live-execution slice;
+  this prevents a syntax/normalization repair from silently becoming a partial runtime migration.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.0` — move shared breaking fixtures with the canonical reference):
   A dependency-ordered backend rollout cannot leave shared byte fixtures behind when the mandatory gate executes
   the first migrated backend. Removing Perl `--parse-mode` changes 35 of 63 canonical cases: 2 help, 20 usage,

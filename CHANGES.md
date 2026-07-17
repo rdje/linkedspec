@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.1 — normalize Perl rule families and bare edges
+
+The Perl reference now retains complete-line bare plain, indexed, grouped, block, and fluent rule-edge candidates.
+Reserved lifecycle names keep lexical priority, including the empty `I` form, while explicit `->` and `=>` forms
+remain authoritative. The self-hosted grammar and early validation recognize the same source boundary.
+
+Compiler supplies every SpecEntry compile with the complete declared-rule set. RuleIR resolves forward-declared
+targets before planning, lowers AND-family bare edges to blind ownership and OR/default bare edges to action
+ownership, and rejects undefined targets, AND bare indexes/groups, explicit blind indexes, missing grouped-action
+blocks, and mixed normalized ownership with exact portable code/stage/field payloads. Every rule records derived
+`family`, `cursor_policy`, and `edge_ownership` metadata before handler emission.
+
+This slice does not change live cursor spending: HandlerIR and `LinkedRE::or` still receive the existing global
+mode, which remains owned by `.9.1.3.2`. The focused source contract passes 272 assertions across all 36 family
+spellings, 18 edge cases, and six ownership sets; focused RuleIR tracing and validation fuzzing pass. Broader gate
+results are recorded in the task-tree verification log.
+
+Canonical preflight also exposed a pre-existing exact-marker mismatch in `docs/TASK_TREE.md`: the logical-helper
+public checker requires “Logical helper parent `.5.2` is closed at 8/0”, while the committed index omitted
+“parent”. The root index now uses the governed marker and points at the current Perl normalization/live frontier.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.0 — audit Perl cursor rollout boundaries
 
 Split the Perl rollout into six safe implementation/closeout leaves before behavior code and mapped the exact

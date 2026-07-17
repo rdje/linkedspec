@@ -26,6 +26,9 @@
 #     blind_block      `=> Child { code }`                  -> { type: blind_edge }
 #     blind_fluent     `=> Child.method(args) { blk }`      -> { type: blind_edge }
 #     blind_bare       `=> Child`                           -> { type: blind_edge }
+#     bare_edge_block  `Child { code }` / `A | B { code }` -> { type: bare_edge }
+#     bare_edge_fluent `Child.method(args) { blk }`         -> { type: bare_edge }
+#     bare_edge_plain  `Child` / `Child[i]`                 -> { type: bare_edge }
 #     lifecycle_block  `Marker { code }`  (I LS LE E EX IT LX) -> { type: lifecycle }
 #     lifecycle_fluent `Marker.method(args) { blk }`        -> { type: lifecycle }
 #     variadic_function_definition `fn name(args, ...rest) { body }` -> { type: function_definition }
@@ -88,6 +91,9 @@ spec_file::
  -> blind_bare       { push(blind_bare, current) }
  -> lifecycle_block  { push(lifecycle_block, current) }
  -> lifecycle_fluent { push(lifecycle_fluent, current) }
+ -> bare_edge_block  { push(bare_edge_block, current) }
+ -> bare_edge_fluent { push(bare_edge_fluent, current) }
+ -> bare_edge_plain  { push(bare_edge_plain, current) }
  -> variadic_function_definition { push(variadic_function_definition, current) }
  -> function_definition { push(function_definition, current) }
  -> split_marker     { push(split_marker, current) }
@@ -135,12 +141,24 @@ blind_fluent: /=>[ \t]*(\w+)(?<chBF>(?:\s*\.\s*\w+(?<prnBF>\s*\((?:[^()"']++|"(?
 blind_bare: /=>[ \t]*(\w+)/
  I.return(hash("type", "blind_edge", "target", entry_group(0)))
 
-# ---- lifecycle / code block: `Marker { code }` (I LS LE E EX IT LX, or any word)
-lifecycle_block: /(\w++)[ \t]*(?<blkLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLB))*+\})/
+# ---- complete-line bare edge with one/grouped target and a shared code block --
+bare_edge_block: /(?m:^[ \t]*(\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?(?:[ \t]*\|[ \t]*\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?)*)[ \t]*(?<blkBE>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkBE))*\})[ \t]*(?=\r?$))/
+ I.return(hash("type", "bare_edge", "targets", trim(entry_group(0)), "code", entry_group(1), "source_form", "bare"))
+
+# ---- complete-line bare edge with a fluent chain and optional attached block -
+bare_edge_fluent: /(?m:^[ \t]*(\w+)[ \t]*(?:\[[ \t]*(\d+)[ \t]*\][ \t]*)?((?:\s*\.\s*\w+(?<prnBE>\s*\((?:[^()"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&prnBE))*\))?)+)(?:\s*(?<blkBEF>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkBEF))*\}))?[ \t]*(?=\r?$))/
+ I.return(hash("type", "bare_edge", "target", entry_group(0), "index", entry_group(1), "fluent", entry_group(2), "source_form", "bare"))
+
+# ---- complete-line bare edge: `Child` or `Child[index]` ----------------------
+bare_edge_plain: /(?m:^[ \t]*(\w+)[ \t]*(?:\[[ \t]*(\d+)[ \t]*\][ \t]*)?[ \t]*(?=\r?$))/
+ I.return(hash("type", "bare_edge", "target", entry_group(0), "index", entry_group(1), "source_form", "bare"))
+
+# ---- lifecycle / code block: `Marker { code }` (I LS LE E EX IT LX) ---------
+lifecycle_block: /(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLB))*+\})/
  I.return(hash("type", "lifecycle", "marker", entry_group(0), "code", entry_group(1)))
 
 # ---- lifecycle / code with a fluent chain: `Marker.method(args) { block }` ----
-lifecycle_fluent: /(\w++)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[^()"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&prnLF))*+\))?+)++)(?:\s*(?<blkLF>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLF))*+\}))?+/
+lifecycle_fluent: /(I|LS|LE|LX|E|EX|IT)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[^()"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&prnLF))*+\))?+)++)(?:\s*(?<blkLF>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLF))*+\}))?+/
  I.return(hash("type", "lifecycle", "marker", entry_group(0), "fluent", "1", "raw", entry_text()))
 
 # ---- user function definition: `fn name(args) { body }` ----------------------

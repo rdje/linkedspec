@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Perl normalization `FUTURE-PARITY-BACKLOG.9.1.3.1` implements the preflight seam without
+  crossing into live cursor execution. Bootstrap retains typed complete-line bare candidates after reserved
+  lifecycle forms; Compiler supplies the full declaration set; RuleIR resolves forward references, lowers AND
+  bare edges to blind ownership and OR/default bare edges to action ownership, validates one ownership set, and
+  publishes derived per-rule `family`, `cursor_policy`, and `edge_ownership`. Exact portable failures survive
+  RuntimeContext. The focused source contract covers 36 family spellings, 18 edge cases, and six ownership sets
+  in 272 assertions. HandlerIR/LinkedRE still receives the global mode; `.9.1.3.2` owns live spending.
 - `2026-07-17` refresh: verified Perl cursor preflight `FUTURE-PARITY-BACKLOG.9.1.3.0` maps six implementation boundaries:
   bootstrap/validation, RuleIR normalization, live handler emission, descriptor state, generated v2, and primary
   CLI/tests. Toolbox bootstrap proof finds bare `Child` is currently dropped while bare fluent/block forms become

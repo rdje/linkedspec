@@ -247,6 +247,7 @@ GENERATED_SOURCE_POSTAMBLE
 
 my $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
 my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
+my $LAST_BUILD_COMPILED_RULE_TABLE_DIAGNOSTIC;
 
 sub _trace_log_output {
  my @args = @_;
@@ -319,6 +320,14 @@ sub _default_compile_spec_entry_cb {
  return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::SpecEntry', 'compile_spec_entry')
 }
 
+sub _portable_diagnostic_fields {
+ my ($diagnostic) = @_;
+ return () unless ref($diagnostic) eq 'HASH';
+ return map {
+  exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
+ } qw/code option_name target targets regex_index ownerships expected_contract actual_contract/
+}
+
 sub _build_action_rewriter_migration_summary {
  my ($spec_or_state) = @_;
  my $summary = _call_compiler_state('build_action_rewriter_migration_summary', $spec_or_state);
@@ -389,6 +398,7 @@ sub build_compiled_rule_table {
  }
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
  $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
+ $LAST_BUILD_COMPILED_RULE_TABLE_DIAGNOSTIC = undef;
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::build_compiled_rule_table', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
@@ -430,6 +440,11 @@ sub build_compiled_rule_table {
   return undef
  }
 
+ my %declared_rule_labels = map {
+  my $declared_label = ref($_) eq 'ARRAY' ? _parsed_rule_label($_) : undef;
+  defined($declared_label) && length($declared_label) ? ($declared_label => 1) : ()
+ } @$specretv;
+ my $compile_context = { declared_rule_labels => \%declared_rule_labels };
  my $compiled_state = _call_compiler_state('new_compiled_spec_state');
  my %redefined_seen;
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
@@ -459,12 +474,16 @@ sub build_compiled_rule_table {
    : undef;
   my ($label, $info);
   my $compile_ok = eval {
-   ($label, $info) = $compile_spec_entry->($entry);
+   ($label, $info) = $compile_spec_entry->($entry, $compile_context);
    1;
   };
   my $compile_error = $@;
   unless ($compile_ok) {
-   my $detail = defined($compile_error) && length($compile_error)
+   my $diagnostic = ref($compile_error) eq 'HASH' ? $compile_error : undef;
+   $LAST_BUILD_COMPILED_RULE_TABLE_DIAGNOSTIC = $diagnostic;
+   my $detail = ref($diagnostic) eq 'HASH'
+    ? ($diagnostic->{detail} // $diagnostic->{summary} // $diagnostic->{code} // 'compile_spec_entry failed')
+    : defined($compile_error) && length($compile_error)
     ? $compile_error
     : 'compile_spec_entry died without diagnostic detail';
    $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
@@ -472,11 +491,14 @@ sub build_compiled_rule_table {
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
     'compiler_pipeline',
-    stage => 'build_compiled_rule_table',
-    summary => 'Compiled rule-table generation failed',
+    stage => ref($diagnostic) eq 'HASH' ? ($diagnostic->{stage} // 'build_compiled_rule_table') : 'build_compiled_rule_table',
+    summary => ref($diagnostic) eq 'HASH' ? ($diagnostic->{summary} // 'Compiled rule-table generation failed') : 'Compiled rule-table generation failed',
     detail => $detail,
     rule_label => $active_rule_label,
     handler_source_label => $active_handler_source_label,
+    (ref($diagnostic) eq 'HASH' ? map {
+     exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
+    } qw/code target targets regex_index ownerships/ : ()),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
    _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
@@ -793,12 +815,14 @@ sub run_get_pipeline {
     unless defined $compile_spec_entry;
   } else {
    $compile_spec_entry = sub {
+    my ($entry, $entry_deps) = @_;
     return $default_compile_spec_entry->(
-     $_[0],
+     $entry,
      {
       runtime_ctx => $runtime_ctx,
       parse_mode => $parse_mode,
       function_registry => $function_registry,
+      declared_rule_labels => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_labels} : undef,
      },
     )
    };
@@ -949,7 +973,7 @@ sub run_get_pipeline {
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
     'compiler_pipeline',
-    stage => 'validate_dsl_syntax',
+    stage => $validate_dsl_failure{stage} // 'validate_dsl_syntax',
     summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
      ? $validate_dsl_failure{summary}
      : 'DSL syntax validation failed',
@@ -958,6 +982,7 @@ sub run_get_pipeline {
      : $validate_dsl_syntax_error,
     rule_label => $validate_dsl_failure{rule_label},
     handler_source_label => $validate_dsl_handler_source_label,
+    _portable_diagnostic_fields(\%validate_dsl_failure),
    );
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - trapped exception during validation");
    _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
@@ -972,7 +997,7 @@ sub run_get_pipeline {
      'set_runtime_ctx_last_error_for_owner',
      $runtime_ctx,
      'compiler_pipeline',
-     stage => 'validate_dsl_syntax',
+     stage => $validate_dsl_failure{stage} // 'validate_dsl_syntax',
      summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
       ? $validate_dsl_failure{summary}
       : 'DSL syntax validation failed',
@@ -981,6 +1006,7 @@ sub run_get_pipeline {
       : 'Rule-level DSL syntax validation failed',
      rule_label => $validate_dsl_failure{rule_label},
      handler_source_label => $validate_dsl_handler_source_label,
+     _portable_diagnostic_fields(\%validate_dsl_failure),
     );
     _trace_log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
    } else {
@@ -988,7 +1014,7 @@ sub run_get_pipeline {
      'set_runtime_ctx_last_error_for_owner',
      $runtime_ctx,
      'compiler_pipeline',
-     stage => 'validate_dsl_syntax',
+     stage => $validate_dsl_failure{stage} // 'validate_dsl_syntax',
      summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
       ? $validate_dsl_failure{summary}
       : 'DSL syntax validation failed',
@@ -997,6 +1023,7 @@ sub run_get_pipeline {
       : 'Rule-level DSL syntax validation failed',
      rule_label => $validate_dsl_failure{rule_label},
      handler_source_label => $validate_dsl_handler_source_label,
+     _portable_diagnostic_fields(\%validate_dsl_failure),
     );
     _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
     _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
@@ -1093,11 +1120,12 @@ sub run_get_pipeline {
 
 my $active_build_compiled_rule_table_rule_label = undef;
 $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
+$LAST_BUILD_COMPILED_RULE_TABLE_DIAGNOSTIC = undef;
 my $compiled_spec_state = eval {
  build_compiled_rule_table($retv, sub {
-   my ($entry) = @_;
+   my ($entry, $entry_deps) = @_;
    $active_build_compiled_rule_table_rule_label = _parsed_rule_label($entry);
-   return $compile_spec_entry->($entry)
+   return $compile_spec_entry->($entry, $entry_deps)
   }, { return_state => 1 })
 };
 my $build_compiled_rule_table_error = $@;
@@ -1119,12 +1147,13 @@ if ($build_compiled_rule_table_error) {
   return undef;
  }
 unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
+ my $diagnostic = $LAST_BUILD_COMPILED_RULE_TABLE_DIAGNOSTIC;
  _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
    'compiler_pipeline',
-   stage => 'build_compiled_rule_table',
-   summary => 'Compiled rule-table generation failed',
+   stage => ref($diagnostic) eq 'HASH' ? ($diagnostic->{stage} // 'build_compiled_rule_table') : 'build_compiled_rule_table',
+   summary => ref($diagnostic) eq 'HASH' ? ($diagnostic->{summary} // 'Compiled rule-table generation failed') : 'Compiled rule-table generation failed',
    detail => do {
     my $detail = $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL;
     defined($detail) && length($detail)
@@ -1133,6 +1162,9 @@ unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
    },
    rule_label => $active_build_compiled_rule_table_rule_label,
    handler_source_label => $active_build_compiled_rule_table_handler_source_label,
+   (ref($diagnostic) eq 'HASH' ? map {
+    exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
+   } qw/code target targets regex_index ownerships/ : ()),
   );
  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiled rule-table generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);

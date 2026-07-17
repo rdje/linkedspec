@@ -508,7 +508,7 @@ sub _build_entry_label_rule {
  return {
   id => 'ENTRY_LABEL',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*::?\s*(?:(?:&|\||\+|\*|\?|OR(?:\+|\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
+  re=> [qr/\w+[ \t]*::?[ \t]*(?:(?:&|\||\+|\*|\?|OR(?:\+|[ \t]*\{[^}]+\})?|AND(?:\+|[ \t]*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
   handler=> sub {
    my ($info, undef, undef, $dispatch_state) = @_;
    my $parsed = _parse_entry_label_token($$info{match}, $ctx);
@@ -612,7 +612,7 @@ sub _build_non_action_code_block_rule {
  return {
   id => 'NON_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*\{/o, qr/\}/o],
+  re=> [qr/(?m:(?:^[ \t]*)?(?:I|LS|LE|LX|E|EX|IT)\s*\{)/o, qr/\}/o],
   handler=> sub {
    my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
@@ -729,7 +729,7 @@ sub _build_method_empty_non_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
+  re=> [qr/(?m:(?:^[ \t]*)?)(?<TYPE>I|LS|LE|LX|E|EX|IT)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
    my ($info, undef, $string, $dispatch_state) = @_;
    my ($type, $chain, $block) = @{$$info{match_hash}}{qw/TYPE CHAIN BLOCK/};
@@ -747,6 +747,103 @@ sub _build_method_empty_non_action_code_block_rule {
     }
    }
    return ["${type}CODE", $code]
+  },
+ }
+}
+
+sub _build_empty_non_action_code_block_rule {
+ return {
+  id => 'EMPTY_NON_ACTION_CODE_BLOCK',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*(?<TYPE>I|LS|LE|LX|E|EX|IT)[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info) = @_;
+   return ["$$info{match_hash}{TYPE}CODE", '']
+  },
+ }
+}
+
+sub _bare_edge_targets_from_text {
+ my ($targets_text) = @_;
+ my $trimmed = _trim_bootstrap_value($targets_text);
+ return undef unless defined($trimmed) && length($trimmed);
+ my @targets;
+ pos($trimmed) = 0;
+ while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*(\d+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+  push @targets, {
+   label => $1,
+   index => defined($2) ? 0 + $2 : undef,
+  };
+ }
+ return undef unless @targets;
+ return undef unless defined(pos($trimmed)) && pos($trimmed) == length($trimmed);
+ return \@targets
+}
+
+sub _build_bare_edge_block_rule {
+ return {
+  id => 'BARE_EDGE_BLOCK',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*(?<TARGETS>\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*(?<BLOCK>(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info, undef, undef, $dispatch_state) = @_;
+   my $targets = _bare_edge_targets_from_text($$info{match_hash}{TARGETS});
+   return undef unless ref($targets) eq 'ARRAY' && @$targets;
+   my $block = $$info{match_hash}{BLOCK};
+   $block =~ s/^\{//o;
+   $block =~ s/\}$//o;
+   my $target = $targets->[0]{label};
+   return ['BARE_EDGE', {
+    targets => $targets,
+    source_form => 'bare',
+    has_block => 1,
+    fluent => undef,
+    action_code => $block,
+    blind_code => "\$$dispatch_state->{current_rule_label} = call($target);\n" . $block,
+   }]
+  },
+ }
+}
+
+sub _build_bare_edge_fluent_rule {
+ return {
+  id => 'BARE_EDGE_FLUENT',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<INDEX>\d+)[ \t]*\][ \t]*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info, undef, undef, $dispatch_state) = @_;
+   my ($target, $index, $chain, $block) = @{$$info{match_hash}}{qw/TARGET INDEX CHAIN BLOCK/};
+   my $action_code = _render_method_call_chain($target, $chain, $block);
+   my $blind_tail = _render_method_call_chain($dispatch_state->{current_rule_label}, $chain, $block);
+   return undef unless defined($action_code) && defined($blind_tail);
+   return ['BARE_EDGE', {
+    targets => [{ label => $target, index => defined($index) ? 0 + $index : undef }],
+    source_form => 'bare',
+    has_block => defined($block) && length($block) ? 1 : 0,
+    fluent => $chain,
+    action_code => $action_code,
+    blind_code => "\$$dispatch_state->{current_rule_label} = call($target);\n" . $blind_tail,
+   }]
+  },
+ }
+}
+
+sub _build_bare_edge_plain_rule {
+ return {
+  id => 'BARE_EDGE_PLAIN',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<INDEX>\d+)[ \t]*\][ \t]*)?[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info, undef, undef, $dispatch_state) = @_;
+   my ($target, $index) = @{$$info{match_hash}}{qw/TARGET INDEX/};
+   return ['BARE_EDGE', {
+    targets => [{ label => $target, index => defined($index) ? 0 + $index : undef }],
+    source_form => 'bare',
+    has_block => 0,
+    fluent => undef,
+    action_code => "call($target)",
+    blind_code => "\$$dispatch_state->{current_rule_label} = call($target)",
+   }]
   },
  }
 }
@@ -787,12 +884,16 @@ sub _build_bootstrap_rule_descriptors {
   _build_method_empty_action_code_block_rule(),
   _build_empty_action_code_block_rule(),
   _build_non_action_code_block_rule($ctx),
+  _build_method_empty_non_action_code_block_rule(),
+  _build_empty_non_action_code_block_rule(),
+  _build_bare_edge_block_rule(),
+  _build_bare_edge_fluent_rule(),
+  _build_bare_edge_plain_rule(),
   _build_comment_rule(),
   _build_blind_call_code_block_rule($ctx),
   _build_method_empty_blind_code_block_rule(),
   _build_split_like_code_rule(),
   _build_empty_blind_code_block_rule(),
-  _build_method_empty_non_action_code_block_rule(),
   _build_curly_brace_rule($ctx),
  ]
 }

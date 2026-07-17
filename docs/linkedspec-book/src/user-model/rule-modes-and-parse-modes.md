@@ -7,7 +7,7 @@ LinkedSpec rule execution has two independent axes:
 
 Keep those two ideas separate. A rule label such as `Item:AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
 
-> **Current behavior versus ratified target:** This chapter documents the public
+> **Current behavior versus rollout target:** This chapter documents the public
 > implementation that exists today. Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
 > that the caller-global option changes every nested rule and already creates an
 > uncovered default-AND backend difference: Perl, Dart, Julia, and Lua default
@@ -19,7 +19,9 @@ Keep those two ideas separate. A rule label such as `Item:AND` says "compose thi
 > propagates to or overrides child mode: an OR child remains seek under an AND
 > parent, and an AND child remains consume under an OR parent. Mode-sensitive
 > bare edges, explicit exceptions, descriptor/generated metadata, and removal
-> diagnostics are also fixed below. No runtime or API has changed yet;
+> diagnostics are also fixed below. Perl `.9.1.3.1` now parses and normalizes
+> those bare edges and records derived family/cursor facts before handler
+> emission. Live handlers and the public API still use the current global mode;
 > neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
 > backend behavior remains dependency-ordered under `.9.1.3-.9`.
 
@@ -554,7 +556,7 @@ Use `consume` when contiguity matters. Use `seek` when extraction from a larger 
 
 Rule modes, action/lifecycle placement, and parse modes are deliberately separate. If a rule does not behave as expected, debug those axes separately: first the label, then the body edge family (`->` versus `=>`), then the parse-mode option.
 
-## Ratified rule-local target
+## Rule-local rollout
 
 ADR `0044` replaces the current global option during `.9.1.3-.9` rollout. The
 target is already executable, before backend changes, in
@@ -577,7 +579,7 @@ anchored choice is an OR parent over consume-owning one-anchor AND children.
 This keeps each reusable rule stable instead of reviving a caller or rule-local
 escape hatch.
 
-The same decision fixes future bare edge lines. A complete bare paragraph
+The Perl reference now implements the decision's bare-edge normalization. A complete bare paragraph
 member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -622,13 +624,15 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-During rollout, `parse_mode` / `--parse-mode` is removed with a targeted
+Later Perl rollout slices make the derived policy drive live execution and remove
+`parse_mode` / `--parse-mode` with a targeted
 diagnostic rather than accepted and ignored. Descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract` and per-rule `meta.cursor_policy`.
 Generated source moves to v2 and derives policy from its handler-family plan;
-version-1 artifacts must be regenerated. Until those implementation leaves
-land, use the current option behavior documented above and treat this section
-as the accepted migration target, not a claim about shipped behavior. The
+version-1 artifacts must be regenerated. Until those later implementation leaves
+land, use the current option behavior documented above. Bare-edge source and
+per-rule `family`, `cursor_policy`, and `edge_ownership` metadata in the Perl
+reference are current; live cursor spending and outward root metadata are not yet migrated. The
 neutral checker currently reports 36 family spellings, 18 edge cases, eight
 parent/child cases, 91 migration files, 1 complete / 7 pending, and 27 rejected
 drift mutations.

@@ -1,10 +1,10 @@
 # Descriptor Introspection
 
 > **Accepted descriptor migration:** ADR `0044` removes descriptor-wide
-> `meta.parse_mode` and every public rule field named `parse_mode`. The future
-> shape exposes `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"` and
-> derived `spec.<label>.meta.cursor_policy`. Current descriptor examples below
-> remain accurate until implementation leaves `.9.1.2-.9` land.
+> `meta.parse_mode` and every public rule field named `parse_mode`. Perl
+> `.9.1.3.1` already exposes derived per-rule `family`, `cursor_policy`, and
+> `edge_ownership`; root `meta.parse_mode` remains until the later descriptor/API
+> slices replace it with `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
@@ -65,7 +65,12 @@ In rough form:
       dependency_refs => [
         { label => 'Child', idx => 0 },
       ],
-      meta => { ... },
+      meta => {
+        family => 'and',
+        cursor_policy => 'consume',
+        edge_ownership => 'blind',
+        ...
+      },
     },
   },
   dependency_regex_map => {

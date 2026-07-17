@@ -178,6 +178,10 @@ Three backbone items tracked major structural modernization — all done:
   no backend behavior is admitted by that contract leaf. Perl rollout is split into `.9.1.3.0-.6`; verified preflight
   maps the bootstrap/RuleIR/emitter/descriptor/generated/CLI boundaries and assigns reference-breaking shared
   byte fixtures to the reference CLI slice so canonical CI never relies on a hidden compatibility flag or skip.
+  Perl `.9.1.3.1` now retains typed complete-line bare candidates, resolves forward declarations, normalizes
+  AND to blind ownership and OR/default to action ownership, preserves lifecycle priority, emits portable
+  normalization diagnostics, and publishes derived per-rule family/cursor/ownership metadata. Live handlers still
+  spend the existing global mode; `.9.1.3.2` owns that separate behavior boundary.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

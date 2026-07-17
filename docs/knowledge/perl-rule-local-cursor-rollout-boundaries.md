@@ -9,11 +9,13 @@ answers:
   - "where should Perl bare edge normalization happen"
   - "which files own Perl generated source v2"
   - "what did FUTURE-PARITY-BACKLOG.9.1.3.0 find"
+  - "does the Perl reference support bare rule edges"
+  - "where does Perl derive per rule cursor policy"
 date: 2026-07-17
-status: confirmed audit; implementation pending
+status: confirmed normalization implementation; live cursor execution pending
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.0 used run_bootstrap_parse, return_descriptor, generated-source inspection, the exact migration contract, and canonical-CI registration. A standalone declared-rule name in an AND body is currently silently absent from the bootstrap token stream; Name.fluent and Name { block } become arbitrary NameCODE entries rather than rule edges. Global parse_mode flows Compiler -> SpecEntry -> HandlerVariantEmitter and CompilerState metadata. Ten shared manifest/help/usage/trace files affect 35 canonical reference cases (2 help, 20 usage, 2 success, 11 trace), and tools/run_ci_local.sh unconditionally runs all 63 cases twice. They therefore migrate with the Perl reference in .9.1.3.5; .9.1.8 retains final symmetric admission and CLI documentation ownership."
-reverify: "perl -Iperl -MLinkedSpec::BootstrapSpec -MData::Dumper -e 'for my $body (q{Child},q{-> Child},q{=> Child},q{Child.push},q{Child { return(1) }}) { my $s=qq{Top::AND\\n $body\\n\\nChild:\\n /x/\\n}; my ($ok,$ret,$err)=LinkedSpec::BootstrapSpec::run_bootstrap_parse(\\$s); print qq{=== $body ===\\n},Dumper($ret); }'; rg -n 'parse_mode|parse-mode|run_cli_conformance' perl/LinkedSpec/Compiler.pm perl/LinkedSpec/SpecEntry.pm perl/LinkedSpec/HandlerVariantEmitter.pm perl/LinkedSpec/CompilerState.pm bin/linkedspec tools/run_ci_local.sh cli_conformance"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements the preflight boundary: BootstrapSpec::Core retains complete-line BARE_EDGE candidates after reserved lifecycle forms; Compiler supplies the complete declared-rule set to SpecEntry; RuleIR resolves forward declarations, lowers AND bare edges to blind ownership and OR/default bare edges to action ownership, rejects invalid or mixed ownership with portable code/stage/fields, and derives per-rule family/cursor_policy/edge_ownership before handler emission. The 272-assertion source contract covers all 36 family spellings, 18 edge cases, and six ownership sets. Live HandlerIR/LinkedRE still receives global parse_mode and remains .9.1.3.2-owned. Ten shared manifest/help/usage/trace files still migrate in .9.1.3.5 because they affect 35 canonical cases."
+reverify: "prove -Iperl t/rule_local_cursor_perl_contract.t; perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm; perl -Iperl -c perl/LinkedSpec/RuleIR.pm; rg -n 'parse_mode|parse-mode|run_cli_conformance' perl/LinkedSpec/Compiler.pm perl/LinkedSpec/SpecEntry.pm perl/LinkedSpec/HandlerVariantEmitter.pm perl/LinkedSpec/CompilerState.pm bin/linkedspec tools/run_ci_local.sh cli_conformance"
 ---
 
 The Perl rollout has six distinct implementation boundaries:
@@ -34,14 +36,20 @@ The Perl rollout has six distinct implementation boundaries:
 6. `bin/linkedspec`, the Perl contract tests, and the shared CLI manifest/byte
    fixtures own the reference primary-command projection.
 
-The bootstrap probe establishes an important pre-implementation fact. A complete
-bare line containing a declared child name currently produces no token at all.
-Bare fluent and block forms are instead captured as generic `NameCODE` entries,
-which RuleIR does not treat as child edges. Bare-edge support therefore cannot be
-implemented as a late text guess in handler emission. The parser must preserve a
-typed bare-edge candidate at the complete line boundary, and semantic
-normalization must resolve it against the full declared-rule set before RuleIR
-validation. Reserved lifecycle/control names keep their existing meaning.
+The bootstrap probe established the prerequisite: before `.9.1.3.1`, a complete
+bare declared-child line produced no token, while fluent and block forms became
+generic `NameCODE` entries. The implementation now preserves typed `BARE_EDGE`
+candidates only at complete physical-line boundaries. Reserved lifecycle names
+are matched first. Compiler passes one complete declared-label set to each
+SpecEntry compile, so RuleIR can resolve forward declarations and normalize
+before planning or emission rather than guessing from generated handler text.
+
+Normalized metadata is deliberately ahead of live behavior. Every rule now
+records family (`and` or `or_default`), derived `cursor_policy` (`consume` or
+`seek`), and post-normalization `edge_ownership`. AND bare lines lower to BCODE;
+OR/default bare lines lower to ACODE. The current global `parse_mode` still feeds
+HandlerIR and `LinkedRE::or`, so `.9.1.3.1` must not be cited as live rule-local
+cursor execution; `.9.1.3.2` owns that change.
 
 The initial migration inventory assigned all shared CLI fixtures to final
 admission `.9.1.8`. That order cannot preserve a green canonical branch: removing

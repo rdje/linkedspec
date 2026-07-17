@@ -1,11 +1,12 @@
 # Blind Calls and Parser Orchestration
 
-> **Accepted future shorthand:** ADR `0044` makes a complete bare child member
+> **Perl reference shorthand:** ADR `0044` makes a complete bare child member
 > in an AND-family rule shorthand for the `=>` forms taught here. In an
 > OR/default-family rule the same bare member becomes a `->` action edge.
 > Explicit `=>` remains legal in OR/default and explicit `->` remains legal in
 > AND. Parent family never changes a child's intrinsic cursor policy. This is a
-> ratified `.9.1.2-.9` target; current syntax still requires the markers.
+> implemented Perl syntax as of `.9.1.3.1`; live rule-local cursor execution and
+> the other backends remain in the `.9.1.3-.9` rollout.
 
 Blind calls are LinkedSpec's parser-orchestration edge family.
 

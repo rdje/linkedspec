@@ -277,11 +277,12 @@ sub _notify_dsl_validation_failure {
 sub _report_dsl_validation_failure {
  my ($spec_content, $position, $error_msg, $suggestion, $option, %info) = @_;
  my $detail = _build_dsl_error_message($spec_content, $position, $error_msg, $suggestion);
+ my %payload = %info;
+ $payload{summary} = defined($info{summary}) ? $info{summary} : $error_msg;
+ $payload{detail} = $detail;
  _notify_dsl_validation_failure(
   $option,
-  summary => defined($info{summary}) ? $info{summary} : $error_msg,
-  detail => $detail,
-  (defined($info{rule_label}) ? (rule_label => $info{rule_label}) : ()),
+  %payload,
  );
  return report_dsl_error($spec_content, $position, $error_msg, $suggestion)
 }
@@ -631,6 +632,10 @@ sub validate_dsl_syntax {
     my $position = index($$spec_content, $line);
     return _report_split_marker_syntax_error($spec_content, $position, $option, $current_rule->{label});
    }
+   if ($start_depth == 0 && (my $targets = _bare_group_targets_without_block($line))) {
+    my $position = index($$spec_content, $line);
+    return _report_bare_group_without_block($spec_content, $position, $option, $current_rule->{label}, $targets);
+   }
    if ($start_depth == 0 && !_looks_like_supported_rule_paragraph_member_line($line)) {
     my $position = index($$spec_content, $line);
     _report_dsl_validation_failure($spec_content, $position,
@@ -764,9 +769,36 @@ sub _looks_like_supported_rule_paragraph_member_line {
  return 1 if $line =~ /^\s*-\?\s+\w+\b/o;
  return 1 if $line =~ /^\s*\.\s*\w/o;
  return 1 if $line =~ /^\s*\w+\s*\(/o;
-  return 1 if $line =~ /^\s*\w+\s*\{/o;
-  return 1 if $line =~ /^\s*\w+\s*\./o;
-  return 0;
+ return 1 if $line =~ /^\s*\w+\s*\{/o;
+ return 1 if $line =~ /^\s*\w+\s*\./o;
+ return 1 if $line =~ /^\s*\w+(?:\s*\[\s*\d+\s*\])?\s*$/o;
+ return 1 if $line =~ /^\s*\w+(?:\s*\[\s*\d+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*\d+\s*\])?)+(?:\s*\{|\s*$)/o;
+ return 0;
+}
+
+sub _bare_group_targets_without_block {
+ my ($line) = @_;
+ return undef unless defined $line;
+ return undef unless $line =~ /^\s*(\w+(?:\s*\[\s*\d+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*\d+\s*\])?)+)\s*$/o;
+ my $targets_text = $1;
+ my @targets = $targets_text =~ /(\w+)\s*(?:\[\s*\d+\s*\])?/go;
+ return @targets > 1 ? \@targets : undef
+}
+
+sub _report_bare_group_without_block {
+ my ($spec_content, $position, $option, $rule_label, $targets) = @_;
+ return _report_dsl_validation_failure(
+  $spec_content,
+  $position,
+  'Grouped action-edge targets require a shared code block',
+  "Use '" . join(' | ', @$targets) . " { ... }' when grouped bare targets share action ownership",
+  $option,
+  summary => 'Grouped action-edge targets require a shared code block',
+  rule_label => $rule_label,
+  code => 'grouped_action_shared_block_required',
+  stage => 'validate_rule',
+  targets => $targets,
+ )
 }
 
 sub _looks_like_split_marker_prefix {
@@ -840,6 +872,10 @@ sub _validate_rule_header_rhs_start {
  }
 
  return 1 unless length($remaining);
+ if (my $targets = _bare_group_targets_without_block($remaining)) {
+  my $position = index($$spec_content, $line);
+  return _report_bare_group_without_block($spec_content, $position, $option, $rule_label, $targets);
+ }
  return 1 if _looks_like_supported_rule_paragraph_member_line($remaining);
 
  my $position = index($$spec_content, $line);
@@ -957,20 +993,31 @@ sub _scan_rule_edges_in_fragment {
 
     if ($target_cursor < $len && substr($fragment, $target_cursor, 1) eq '[') {
      if ($kind eq 'blind_call') {
+      my $index_cursor = $target_cursor + 1;
+      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
+      my $digit_start = $index_cursor;
+      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/o;
+      my $regex_index = $index_cursor > $digit_start
+       ? 0 + substr($fragment, $digit_start, $index_cursor - $digit_start)
+       : undef;
       return {
        error => {
         kind   => $kind,
         reason => 'indexed_target_not_supported',
         label  => $label,
+        regex_index => $regex_index,
        },
       };
      }
 
      my $index_cursor = $target_cursor + 1;
+     ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
      my $digit_start = $index_cursor;
      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/;
+     my $digit_end = $index_cursor;
+     ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
 
-     if ($index_cursor == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
+     if ($digit_end == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
       return {
        error => {
         kind   => $kind,
@@ -1034,6 +1081,7 @@ sub _scan_rule_edges_in_fragment {
        kind   => $kind,
        reason => 'grouped_targets_require_block',
        label  => $edge_targets[0]{label},
+       targets => [map { $_->{label} } @edge_targets],
       },
      };
     }
@@ -1224,6 +1272,9 @@ sub _report_edge_target_syntax_error {
    $option,
    summary => 'Grouped action-edge targets require a shared code block',
    rule_label => $rule_label,
+   code => 'grouped_action_shared_block_required',
+   stage => 'validate_rule',
+   targets => $error->{targets} || [$error->{label}],
   );
  }
 
@@ -1236,6 +1287,10 @@ sub _report_edge_target_syntax_error {
    $option,
    summary => 'Blind-call targets do not support regex-slot indexing',
    rule_label => $rule_label,
+   code => 'blind_call_index_forbidden',
+   stage => 'validate_rule',
+   target => $error->{label},
+   regex_index => $error->{regex_index},
   );
  }
 
@@ -1343,6 +1398,9 @@ sub _report_mixed_rule_action_modes {
   summary => $error_msg,
   detail => $detail,
   rule_label => $label,
+  code => 'mixed_edge_ownership',
+  stage => 'validate_rule',
+  ownerships => ['action', 'blind'],
  );
  _trace_log_output(DUMP_NONE, $error_msg, $context);
  print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";

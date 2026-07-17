@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.1 — normalize Perl rule families and bare edges**
+  (DONE — source normalization and per-rule policy facts are implemented; live cursor execution `.9.1.3.2` follows
+  after the clean commit).
+
+  **Result:** Complete-line bare plain/index/group/block/fluent candidates retain source identity; reserved
+  lifecycle forms win lexically; Compiler supplies the complete declaration set; RuleIR resolves forward targets,
+  lowers AND to blind and OR/default to action ownership, rejects invalid/mixed ownership with portable fields,
+  and publishes per-rule family/cursor/ownership metadata. Global HandlerIR/LinkedRE mode behavior is unchanged.
+
+  **Proof:** The source contract passes 272 assertions over 36 family spellings, 18 edge cases, and six ownership
+  sets; focused RuleIR tracing and validation fuzzing pass. Canonical local CI passes capability 80/0/0,
+  generated v1, logical and diagnostic 8/0, reference CLI 63/63 twice, and Phase 0 `1..1031`.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.0 — audit Perl cursor rollout boundaries**
   (DONE — six implementation leaves are explicit and shared breaking fixtures follow the canonical reference;
   family/bare-edge normalization `.9.1.3.1` follows after the clean commit).

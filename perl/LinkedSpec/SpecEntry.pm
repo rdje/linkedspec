@@ -401,6 +401,10 @@ sub compile_spec_entry {
  }
 
  my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($einfo);
+ LinkedSpec::RuleIR::_normalize_rule_ir_edges(
+  $rule_ir,
+  declared_rule_labels => $deps->{declared_rule_labels},
+ );
  my $rule_meta = LinkedSpec::RuleIR::_plan_rule_ir_meta($rule_ir);
  unless (LinkedSpec::RuleIR::_validate_rule_ir_or_exit($rule_ir, $rule_meta)) {
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_rule_ir', label => $rule_ir->{label} }, DUMP_HIGH);

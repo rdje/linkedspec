@@ -186,6 +186,8 @@ sub _build_rule_execution_meta {
   handler_variant => $handler_variant,
   execution_shape => $execution_shape,
   uses_loop       => $uses_loop ? 1 : 0,
+  family          => $node_type =~ /AND/o ? 'and' : 'or_default',
+  cursor_policy   => $node_type =~ /AND/o ? 'consume' : 'seek',
  };
 
  _trace_rule_ir_decision(
@@ -255,6 +257,7 @@ sub _collect_rule_ir {
   },
   acode_entries => [],
   bcode_entries => [],
+  bare_edge_entries => [],
   and_icode_entries => [],   # Per-regex I-blocks for AND rules (not acode_entries)
  };
 
@@ -424,6 +427,20 @@ sub _collect_rule_ir {
     },
    );
   }
+  elsif ($entry_type eq 'BARE_EDGE') {
+   push @{$rule_ir->{bare_edge_entries}}, $$centry[1];
+   _trace_rule_ir_decision(
+    phase => 'collect',
+    label => $rule_ir->{label},
+    decision => 'bare_edge_candidate',
+    taken => 1,
+    reason => 'retained line-level bare edge for declared-rule normalization',
+    context => {
+     target_count => scalar(@{$$centry[1]{targets} || []}),
+     bare_edge_count => scalar(@{$rule_ir->{bare_edge_entries}}),
+    },
+   );
+  }
   elsif ($entry_type eq 'MOVE_POS') {
    push @{$rule_ir->{code_blocks}{LECODE}}, '$IPOS = pos $$STRING';
    _trace_rule_ir_decision(
@@ -471,10 +488,143 @@ sub _collect_rule_ir {
  return $rule_ir
 }
 
+sub _rule_ir_diagnostic {
+ my (%args) = @_;
+ my $code = $args{code} // 'rule_ir_normalization_failed';
+ my $stage = $args{stage} // 'normalize_edges';
+ return {
+  type => 'compiler_pipeline',
+  code => $code,
+  stage => $stage,
+  summary => $args{summary} // $code,
+  detail => $args{detail} // $code,
+  map { exists($args{$_}) ? ($_ => $args{$_}) : () }
+   qw/rule_label target targets regex_index ownerships/,
+ }
+}
+
+sub _normalize_rule_ir_edges {
+ my ($rule_ir, %args) = @_;
+ my $declared = ref($args{declared_rule_labels}) eq 'HASH'
+  ? $args{declared_rule_labels}
+  : {};
+ my $label = $rule_ir->{label} // '<undefined>';
+ my $family = ($rule_ir->{node_type} // '') =~ /AND/o ? 'and' : 'or_default';
+ my $ownership = $family eq 'and' ? 'blind' : 'action';
+
+ $rule_ir->{family} = $family;
+ $rule_ir->{cursor_policy} = $family eq 'and' ? 'consume' : 'seek';
+ $rule_ir->{normalized_edges} = [];
+
+ for my $bare (@{$rule_ir->{bare_edge_entries} || []}) {
+  my $targets = ref($bare->{targets}) eq 'ARRAY' ? $bare->{targets} : [];
+  for my $target (@$targets) {
+   my $target_label = $target->{label};
+   unless (defined($target_label) && exists($declared->{$target_label})) {
+    die _rule_ir_diagnostic(
+     code => 'bare_edge_target_undefined',
+     stage => 'normalize_edges',
+     summary => "Bare edge in rule '$label' targets undefined rule '$target_label'",
+     detail => "Declare rule '$target_label' before compiling bare edges or use an explicit non-rule construct",
+     rule_label => $label,
+     target => $target_label,
+    )
+   }
+  }
+
+  if ($ownership eq 'blind') {
+   my ($indexed) = grep { defined($_->{index}) } @$targets;
+   if ($indexed) {
+    die _rule_ir_diagnostic(
+     code => 'bare_edge_index_requires_action',
+     stage => 'normalize_edges',
+     summary => "Indexed bare edge in AND rule '$label' requires explicit action ownership",
+     detail => "Use '-> " . $indexed->{label} . '[' . $indexed->{index} . "]' for an indexed action edge",
+     rule_label => $label,
+     target => $indexed->{label},
+     regex_index => $indexed->{index},
+    )
+   }
+   if (@$targets > 1) {
+    my @labels = map { $_->{label} } @$targets;
+    die _rule_ir_diagnostic(
+     code => 'bare_edge_group_requires_action',
+     stage => 'normalize_edges',
+     summary => "Grouped bare edge in AND rule '$label' requires explicit action ownership",
+     detail => "Use '-> " . join(' | ', @labels) . " { ... }' for a grouped action edge",
+     rule_label => $label,
+     targets => \@labels,
+    )
+   }
+  }
+
+  if ($ownership eq 'action') {
+   for my $target (@$targets) {
+    push @{$rule_ir->{acode_entries}}, {
+     relabel => $target->{label},
+     reidx => defined($target->{index}) ? $target->{index} : 0,
+     code => $bare->{action_code},
+    };
+   }
+  } else {
+   my $target = $targets->[0];
+   push @{$rule_ir->{bcode_entries}}, {
+    call => $target->{label},
+    code => $bare->{blind_code},
+   };
+  }
+
+  push @{$rule_ir->{normalized_edges}}, {
+   kind => 'edge',
+   ownership => $ownership,
+   source_form => 'bare',
+   has_block => $bare->{has_block} ? 1 : 0,
+   fluent => do {
+    my $fluent = $bare->{fluent};
+    if (defined $fluent) {
+     $fluent =~ s/^\s*\.\s*//o;
+     $fluent =~ s/\s+//go;
+    }
+    $fluent
+   },
+   targets => [map {
+    my $target_fluent = $bare->{fluent};
+    if (defined $target_fluent) {
+     $target_fluent =~ s/^\s*\.\s*//o;
+     $target_fluent =~ s/\s+//go;
+    }
+    {
+     label => $_->{label},
+     index => $_->{index},
+     fluent => $target_fluent,
+    }
+   } @$targets],
+  };
+ }
+
+ my @ownerships;
+ push @ownerships, 'action' if @{$rule_ir->{acode_entries}};
+ push @ownerships, 'blind' if @{$rule_ir->{bcode_entries}};
+ if (@ownerships > 1) {
+  die _rule_ir_diagnostic(
+   code => 'mixed_edge_ownership',
+   stage => 'validate_rule',
+   summary => "Rule '$label' mixes action and blind edge ownership",
+   detail => "Choose one edge ownership for every edge in rule '$label'",
+   rule_label => $label,
+   ownerships => \@ownerships,
+  )
+ }
+
+ $rule_ir->{edge_ownership} = @ownerships ? $ownerships[0] : 'none';
+ $rule_ir->{bare_edge_entries} = [];
+ return $rule_ir
+}
+
 sub _plan_rule_ir_meta {
  my ($rule_ir) = @_;
 
- return _build_rule_execution_meta(
+ my $meta = _build_rule_execution_meta(
   label       => $rule_ir->{label},
   node_type   => $rule_ir->{node_type},
   rep_min     => $rule_ir->{rep_min},
@@ -482,7 +632,11 @@ sub _plan_rule_ir_meta {
   regex_count => scalar(@{$rule_ir->{REs}}),
   acode_count => scalar(@{$rule_ir->{acode_entries}}),
   bcode_count => scalar(@{$rule_ir->{bcode_entries}}),
- )
+ );
+ $meta->{family} = $rule_ir->{family} if defined $rule_ir->{family};
+ $meta->{cursor_policy} = $rule_ir->{cursor_policy} if defined $rule_ir->{cursor_policy};
+ $meta->{edge_ownership} = $rule_ir->{edge_ownership} if defined $rule_ir->{edge_ownership};
+ return $meta
 }
 
 sub _validate_rule_ir_or_exit {
