@@ -31,6 +31,7 @@ evidence_update_2026_07_16_lua_family_plan: "LUA-BACKEND-PARITY.8.2 adds exact t
 evidence_update_2026_07_16_lua_subset: "LUA-BACKEND-PARITY.8.3 adds corpus_proof.lua_accepted_subset_test and checker ownership for exact count/order/full-manifest/interpreter-first/load/metadata/plan/trace/cleanup/unconditional registration. Lua consumes all eight contract names directly and loads their emitted modules in fresh exact PUC Lua/LuaJIT hosts with fixed user-function execution. Both ABIs pass 177/177 and canonical Phase 0 1031/1031 in 620 seconds; sole census admission remains .8.4."
 evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 changes current_backend_states to exact five-backend all-pass, adds Lua to every executable capability row, and advances the derived census to 80/0/0 after focused dual-ABI/generated/CLI/corpus proof."
 evidence_update_2026_07_16_diagnostic_output: "FUTURE-PARITY-BACKLOG.5.1.7 extends every available generated direct/traced role with an idiomatic optional or paired caller-owned diagnostic sink while preserving legacy APIs, values, portable trace roles, ordinary generated-source attribution, caller sink failures, and typed immediate exit. The five primary commands deliberately omit the sink and pass the shared quiet 62nd CLI case under default and POSIX environments."
+evidence_update_2026_07_17_perl_v2: "FUTURE-PARITY-BACKLOG.9.1.3.4 advances new Perl emission to generated-source v2 for rule-local cursor semantics. This card remains the shared semantic convergence baseline and historical Perl admission record; Rust, Dart, Julia, and Lua retain v1 until their ordered cursor migrations."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -77,6 +78,11 @@ values before emission. Lua's `.8.3` checker-owned path validates all 105
 fixtures first and locks fresh PUC Lua/LuaJIT load, exact metadata/plans/trace
 identity, fixed user-function execution, cleanup, and unconditional
 registration. Lua census admission closes under `.8.4` at five-backend 80/0/0.
+
+ADR `0044` now migrates current emitters in dependency order. Perl new emission
+has advanced to v2 under `.9.1.3.4`; this v1 card remains the shared convergence
+baseline and historical admission record for unmigrated backends. See
+[[perl-generated-source-contract-v2]].
 
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],

@@ -10,10 +10,12 @@ answers:
   - "what is the rule local cursor rollout status"
   - "does the neutral cursor contract change backend behavior"
   - "how do I run the rule local cursor checker"
+  - "why is the rule local cursor migration inventory 87 files"
+  - "which commit left the cursor migration inventory stale"
 date: 2026-07-17
-status: accepted neutral contract; Perl implemented through descriptor v1, composed admission pending
+status: accepted neutral contract; Perl implemented through generated-source v2, composed admission pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker. It derives and checks 36 exact family spellings, 18 edge normalization/error cases, six post-normalization ownership sets, eight parent/child mechanisms, two structural cross-combination replacements, option/CLI removal, per-rule descriptor facts, generated-source v2 family mapping, and eight portable diagnostics. The tracked-content scan currently owns exactly 90 parse_mode/parseMode/parse-mode migration files after Perl descriptor slice .9.1.3.3 makes CompilerState token-free. The checker rejects 27 mutations. Rollout remains 1 complete / 7 pending until composed backend admission."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker. It derives and checks 36 exact family spellings, 18 edge normalization/error cases, six post-normalization ownership sets, eight parent/child mechanisms, two structural cross-combination replacements, option/CLI removal, per-rule descriptor facts, generated-source v2 family mapping, and eight portable diagnostics. The tracked-content scan owns exactly 87 migration files after CompilerState, SpecEntry, and the generated-handlers chapter become token-free and the action/lifecycle token removal in ccf4cad7 is reconciled. The checker rejects 27 mutations. Rollout remains 1 complete / 7 pending until composed backend admission."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -38,9 +40,11 @@ The neutral contract covers:
 
 The migration inventory scans tracked and candidate files under the executable,
 contract, test, CLI-fixture, and current public-document roots. It began at 91
-files and currently owns 90 after Perl descriptor migration retires the now-
-token-free `CompilerState.pm`. Files are partitioned once, in dependency order,
-among `.9.1.2-.9`. An unowned
+files and currently owns 87 after Perl descriptor/generated migration retires
+the now-token-free `CompilerState.pm`, `SpecEntry.pm`, and generated-handlers
+chapter, and after reconciling
+the action/lifecycle chapter token removed by `ccf4cad7`. Files are partitioned
+once, in dependency order, among `.9.1.2-.9`. An unowned
 new file or a listed file that loses every migration token fails the checker,
 so backend leaves must deliberately update the inventory as they migrate.
 
@@ -52,11 +56,11 @@ twice. Shared CLI documentation and final symmetric admission remain `.9.1.8`-
 owned. See [[perl-rule-local-cursor-rollout-boundaries]].
 
 Only `neutral_contract_and_inventory` is admitted in the composed rollout
-ledger. Perl implementation is current through descriptor v1, while its
-generated-source v2, option/CLI migration, and composed admission remain
-pending; Rust, Dart, Julia, dual-ABI Lua, recurring five-backend admission, and
+ledger. Perl implementation is current through generated-source v2, while its
+option/CLI migration and composed admission remain pending; Rust, Dart, Julia,
+dual-ABI Lua, recurring five-backend admission, and
 public no-drift follow. Generated-source v1 and the 63-case primary interface
-remain current until their owners land.
+remain the unmigrated-backend/shared baseline until their owners land.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[and-or-cursor-ownership-audit]], and [[rule-local-cursor-ownership-decision]].

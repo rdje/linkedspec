@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Package: LinkedSpec::GeneratedSource
-# Purpose: Shared generated-source v1 plan validation, structured errors, and
+# Purpose: Shared generated-source v2 plan validation, structured errors, and
 #          semantic trace-role events for independently loaded Perl source.
 #------------------------------------------------------------------------------
 package LinkedSpec::GeneratedSource;
@@ -14,21 +14,48 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 
-our $CONTRACT_ID = 'linkedspec-generated-source-v1';
-our $FORMAT_VERSION = 1;
+our $CONTRACT_ID = 'linkedspec-generated-source-v2';
+our $FORMAT_VERSION = 2;
 
-my %FAMILY = map { $_ => 1 } qw(
+my @FAMILY_ORDER = qw(
  default
  or_acode
- and_single_acode
- and_acode_seq
- and_bcode
  or_bcode
  rep_acode
  rep_bcode
+ and_single_acode
+ and_acode_seq
+ and_bcode
  rep_and_acode
  rep_and_bcode
 );
+my %FAMILY_CURSOR_POLICY = (
+ default => 'seek',
+ or_acode => 'seek',
+ or_bcode => 'seek',
+ rep_acode => 'seek',
+ rep_bcode => 'seek',
+ and_single_acode => 'consume',
+ and_acode_seq => 'consume',
+ and_bcode => 'consume',
+ rep_and_acode => 'consume',
+ rep_and_bcode => 'consume',
+);
+
+sub family_cursor_policy {
+ my ($family) = @_;
+ return undef unless defined $family;
+ return $FAMILY_CURSOR_POLICY{$family}
+}
+
+sub family_cursor_policy_rows {
+ return [map {
+  {
+   family => $_,
+   cursor_policy => $FAMILY_CURSOR_POLICY{$_},
+  }
+ } @FAMILY_ORDER]
+}
 
 sub trace_mark_event {
  my (%args) = @_;
@@ -101,6 +128,8 @@ sub new_error {
  };
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
  $error->{handler_family} = $args{handler_family} if defined $args{handler_family};
+ $error->{expected_contract} = $args{expected_contract} if defined $args{expected_contract};
+ $error->{actual_contract} = $args{actual_contract} if defined $args{actual_contract};
  $error->{detail} = $args{detail} if defined $args{detail};
  return $error
 }
@@ -114,8 +143,19 @@ sub _reject_plan {
   summary => $args{summary},
   defined($args{rule_label}) ? (rule_label => $args{rule_label}) : (),
   defined($args{handler_family}) ? (handler_family => $args{handler_family}) : (),
+  defined($args{expected_contract}) ? (expected_contract => $args{expected_contract}) : (),
+  defined($args{actual_contract}) ? (actual_contract => $args{actual_contract}) : (),
   defined($args{detail}) ? (detail => $args{detail}) : (),
  )
+}
+
+sub _caller_generated_contract {
+ my $caller_package = caller(1);
+ return undef unless defined($caller_package) && length($caller_package);
+ no strict 'refs';
+ my $slot = $caller_package . '::LINKEDSPEC_GENERATED_SOURCE_CONTRACT';
+ return undef unless defined ${$slot};
+ return ${$slot}
 }
 
 sub validate_plan {
@@ -123,6 +163,25 @@ sub validate_plan {
  my $expected = $args{expected};
  my $actual = $args{actual};
  my $source_identity = defined($args{source_identity}) ? $args{source_identity} : '';
+ my $expected_contract = defined($args{expected_contract})
+  ? $args{expected_contract}
+  : $CONTRACT_ID;
+ my $actual_contract = defined($args{actual_contract})
+  ? $args{actual_contract}
+  : _caller_generated_contract();
+ $actual_contract = $expected_contract unless defined($actual_contract) && length($actual_contract);
+
+ _reject_plan(
+  source_identity => $source_identity,
+  code => 'generated_source_contract_version_mismatch',
+  summary => 'Generated source contract does not match the active validator',
+  expected_contract => $expected_contract,
+  actual_contract => $actual_contract,
+  detail => 'regenerate the generated artifact from its .spec source',
+ ) unless defined($expected_contract)
+  && defined($actual_contract)
+  && $expected_contract eq $CONTRACT_ID
+  && $actual_contract eq $expected_contract;
 
  _reject_plan(
   source_identity => $source_identity,
@@ -168,7 +227,7 @@ sub validate_plan {
    rule_label => $expected_label,
    handler_family => defined($actual_family) ? $actual_family : '',
    detail => 'row=' . $index,
-  ) unless defined($actual_family) && $FAMILY{$actual_family};
+  ) unless defined($actual_family) && defined family_cursor_policy($actual_family);
 
   _reject_plan(
    source_identity => $source_identity,

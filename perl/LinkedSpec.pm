@@ -164,7 +164,7 @@ sub Get {
 #------------------------------------------------------------------------------
 # Function: emit_generated_source
 # Purpose : Compile a .spec source and return independently loadable Perl source
-#           conforming to linkedspec-generated-source-v1.
+#           conforming to linkedspec-generated-source-v2.
 # Args    : ($spec_scalar_ref, %options), including source_identity
 # Returns : generated Perl source string; dies with generated_source_error on failure
 #------------------------------------------------------------------------------

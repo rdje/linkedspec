@@ -137,8 +137,11 @@ cases. Normalization `.9.1.3.1` implements typed complete-line candidates, forwa
 family-derived action/blind ownership, reserved lifecycle precedence, per-rule cursor facts, and portable
 diagnostics. Live slice `.9.1.3.2` makes normal Perl rules spend those policies independently. Descriptor
 projection `.9.1.3.3` now publishes the v1 cursor identity, removes root global-mode metadata, projects ordered
-resolved-edge facts, and proves live/descriptor agreement while generated source remains v1 for `.9.1.3.4`.
-The token-derived migration inventory is 90 after the migrated CompilerState owner becomes token-free;
+resolved-edge facts, and proves live/descriptor agreement. Generated-source `.9.1.3.4` now emits and validates
+Perl v2 from the exact ten-family/five-seek/five-consume map, rejects v1 reconstruction with mandatory `.spec`
+regeneration, and makes transitional option values source-byte neutral. The token-derived migration inventory is
+87 after the migrated CompilerState, SpecEntry, and generated-handlers chapter owners become token-free and the
+token independently removed from the action/lifecycle chapter is reconciled; API/CLI removal remains `.9.1.3.5`.
 identical dependency-regex index identity is tracked under `.9.1.8.1` before public closeout.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are

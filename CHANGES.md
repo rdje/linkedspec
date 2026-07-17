@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.4 — emit Perl generated-source v2
+
+New Perl generated artifacts now identify `linkedspec-generated-source-v2` / format 2. Ordered plans retain only
+`label` and `family`; `LinkedSpec::GeneratedSource` derives the exact five seek families and five consume families
+from the ten admitted names. Compiler/SpecEntry no longer build a second caller-mode artifact handler, so the still-
+accepted transitional option cannot change generated source bytes or behavior.
+
+Plan validation retains exact row-count, label, family, and unknown-family diagnostics. A v1 contract at the v2
+reconstruction boundary now fails at `validate_generated_plan` with
+`generated_source_contract_version_mismatch`, `expected_contract`, and `actual_contract`, and directs callers to
+regenerate from `.spec`. Fresh deterministic emission, independent load, direct/traced execution, portable source
+identity, and the legacy generate-only byte identity remain covered.
+
+The token inventory is now 87. `SpecEntry.pm` and the synchronized generated-handlers book chapter become
+token-free in this slice. The same correction also
+reconciles one pre-existing clean-HEAD gate defect: commit `ccf4cad7` removed the last inventory token from the
+action/lifecycle book chapter but did not update the executable inventory, so the neutral checker could not pass
+at that commit despite its recorded signoff. Git history locates the exact removal; the active task and Knowledge
+Map now preserve the cause.
+
 ## 2026-07-17 — INTER-MATCH-GAP-CAPTURE.0 — recover and ratify inter-match gap capture
 
 Recovered the director's historical “super split” contract from the imported Perl baseline and current runtime.

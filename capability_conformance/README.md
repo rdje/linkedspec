@@ -38,11 +38,12 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 90-file migration inventory and rejects 27 representative semantic, topology,
+The checker currently owns an exact 87-file migration inventory and rejects 27 representative semantic, topology,
 diagnostic, generated, inventory, and admission mutations. Only `neutral_contract_and_inventory` is complete in
-the composed ledger, so rollout remains 1 complete / 7 pending. Perl implementation is current through live and
-descriptor-v1 semantics; generated-source v2, option/CLI migration, composed Perl admission, and the later
-backends remain dependency-ordered.
+the composed ledger, so rollout remains 1 complete / 7 pending. Perl implementation is current through live,
+descriptor-v1, and generated-source-v2 semantics; option/CLI migration, composed Perl admission, and the later
+backends remain dependency-ordered. The shared generated-source-v1 capability ledger remains the convergence
+baseline for unmigrated backends while the cursor rollout advances each current emitter in order.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always

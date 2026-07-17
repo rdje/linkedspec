@@ -394,7 +394,6 @@ sub compile_spec_entry {
 
  my %info;
  my %handlers;
- my %legacy_artifact_handlers;
 
  if (_trace_should_dump(DUMP_HIGH)) {
   _trace_log_dump("=== SPEC ENTRY DUMP ===\n");
@@ -486,21 +485,9 @@ sub compile_spec_entry {
   );
   my $variants = _build_handler_variants(
    %variant_args,
-   cursor_policy => $deps->{use_rule_local_cursor}
-    ? ($rule_meta->{cursor_policy} // 'seek')
-    : ($deps->{legacy_artifact_cursor_policy} // 'seek'),
+   cursor_policy => $rule_meta->{cursor_policy} // 'seek',
   );
   %handlers = %$variants if ref($variants) eq 'HASH';
-  # Generated-source contract v1 still serializes the public legacy parse_mode.
-  # Build that artifact handler separately while normal live execution spends the
-  # rule-derived cursor policy; the v2 artifact migration owns their convergence.
-  if ($deps->{use_rule_local_cursor}) {
-   my $legacy_variants = _build_handler_variants(
-    %variant_args,
-    cursor_policy => $deps->{legacy_artifact_cursor_policy} // 'seek',
-   );
-   %legacy_artifact_handlers = %$legacy_variants if ref($legacy_variants) eq 'HASH';
-  }
  }
 
  if(@REs) {
@@ -515,12 +502,6 @@ sub compile_spec_entry {
   $info{handler_json} = $handler;
  } else {
   my $external_handler = $handler;
-  if ($deps->{use_rule_local_cursor}) {
-   $external_handler = $handler_preamble;
-   $external_handler .= defined($selected_handler_variant) && exists($legacy_artifact_handlers{$selected_handler_variant})
-    ? $legacy_artifact_handlers{$selected_handler_variant}
-    : (defined($selected_handler_variant) ? ($handlers{$selected_handler_variant} || '') : '');
-  }
   $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n $label => sub {\n$external_handler\n },\n");
 

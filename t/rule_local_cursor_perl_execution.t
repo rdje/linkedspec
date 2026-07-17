@@ -201,10 +201,10 @@ my ($and_parser, $and_result, $and_ctx, $and_parser_source) = run_live(
 ok(ref($and_parser) eq 'CODE', 'AND top rule compiles with the transitional legacy option present')
  or diag(JSON::PP->new->canonical->encode($and_ctx->{last_error} // {}));
 ok(!defined($and_result), 'AND top rule consumes at the current cursor despite a legacy seek override');
-unlike(
+like(
  $and_parser_source,
  qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
- 'captured generated-source v1 keeps its legacy seek artifact boundary while live AND consumes',
+ 'captured generated-source v2 derives the same consume policy as live AND execution',
 );
 
 my $or_source = <<'SPEC';
@@ -220,10 +220,10 @@ my ($or_parser, $or_result, $or_ctx, $or_parser_source) = run_live(
 ok(ref($or_parser) eq 'CODE', 'default/OR top rule compiles with the transitional legacy option present')
  or diag(JSON::PP->new->canonical->encode($or_ctx->{last_error} // {}));
 is($or_result, 'hit', 'default/OR top rule seeks despite a legacy consume override');
-like(
+unlike(
  $or_parser_source,
  qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
- 'captured generated-source v1 keeps its legacy consume artifact boundary while live default/OR seeks',
+ 'captured generated-source v2 derives the same seek policy as live default/OR execution',
 );
 
 my %structural_case = (
@@ -316,16 +316,17 @@ like(
 );
 LinkedSpec::configure_trace(trace_level => 'none', trace_log_file => '', trace_log_mode => 'stdout');
 
-my $legacy_generated = LinkedSpec::emit_generated_source(
+my $generated_v2 = LinkedSpec::emit_generated_source(
  \$or_source,
  parse_mode => 'consume',
- source_identity => 'rule-local-cursor-v1-boundary.spec',
+ source_identity => 'rule-local-cursor-v2-boundary.spec',
 );
-like(
- $legacy_generated,
+unlike(
+ $generated_v2,
  qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
- 'generated-source v1 retains its legacy serialized mode until the v2 migration leaf',
+ 'generated-source v2 does not serialize the transitional caller-global mode',
 );
-like($legacy_generated, qr/linkedspec-generated-source-v1/, 'generated-source contract identity remains v1 in the live-only slice');
+like($generated_v2, qr/linkedspec-generated-source-v2/, 'generated-source contract identity advances to v2');
+unlike($generated_v2, qr/linkedspec-generated-source-v1/, 'fresh generated source does not retain the v1 identity');
 
 done_testing;

@@ -43801,7 +43801,7 @@ PERL
     like($accept_out, qr/\$VAR1 = 1;/, 'AND family accepts contiguous matching input');
 };
 
-subtest 'return_descriptor_exposes_rule_local_cursor_contract_and_consume_parser_source' => sub {
+subtest 'return_descriptor_and_generated_source_share_rule_local_cursor_contract' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -43854,10 +43854,10 @@ print $parser_source;
 PERL
     my ($source_exit, $source_out, $source_err) = run_perl_snippet_in_subprocess($snippet);
     is($source_exit, 0, 'consume parse mode dump_parser_source subprocess exits cleanly') or diag($source_err || $source_out);
-    like(
+    unlike(
         $source_out,
         qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
-        'consume parse mode parser source emits explicit contiguous LinkedRE dispatch'
+        'legacy consume option cannot force default-family generated source into contiguous dispatch'
     );
 };
 

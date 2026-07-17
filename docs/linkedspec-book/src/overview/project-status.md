@@ -183,9 +183,11 @@ Three backbone items tracked major structural modernization — all done:
   AND to blind ownership and OR/default to action ownership, preserves lifecycle priority, emits portable
   normalization diagnostics, and publishes derived per-rule family/cursor/ownership metadata. Live slice
   `.9.1.3.2` makes normal handlers spend those policies independently. Descriptor `.9.1.3.3` now publishes the
-  v1 cursor identity, removes root global-mode metadata, and projects ordered resolved-edge facts while preserving
-  generated-source v1 for `.9.1.3.4`. The current inventory is 90 after the migrated CompilerState path becomes
-  token-free.
+  v1 cursor identity, removes root global-mode metadata, and projects ordered resolved-edge facts. Generated-source
+  `.9.1.3.4` now emits/validates Perl v2, derives the exact five seek/five consume family map, removes the separate
+  legacy artifact handler, and rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI removal
+  remains `.9.1.3.5`. The current inventory is 87 after `CompilerState.pm`, `SpecEntry.pm`, the synchronized
+  generated-handlers chapter, and the independently migrated action/lifecycle chapter become token-free.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

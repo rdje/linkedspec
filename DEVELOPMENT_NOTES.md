@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.4` — make the minimal family plan authoritative for generated cursor policy):
+  Generated-source v2 does not add a cursor field. `GeneratedSource.pm` owns one exact ten-family map, validation
+  treats an unknown family as invalid, and emitted handlers reuse the same intrinsic RuleIR policy already spent
+  by live/descriptor execution. Removing SpecEntry's second legacy artifact handler makes source bytes invariant
+  under the transitional global option while preserving the low-level seek/consume matcher algorithms.
+
+  Version rejection must also work for genuinely old self-contained artifacts, whose v1 wrapper cannot pass a
+  new validator argument. `validate_plan` therefore infers the caller package's generated contract when no explicit
+  contract is supplied, rejects v1 before row validation, returns exact expected/actual fields, and requires `.spec`
+  regeneration. New v2 wrappers pass the contract explicitly; tests cover both paths.
+
+  The first neutral-checker run exposed a separate clean-HEAD integrity defect. `ccf4cad7` replaced the only
+  `parse_mode` token in `action-and-lifecycle-placement.md` with backend-scoped prose but left the file in the
+  exact token-derived migration inventory. Git `-S` history and the contract blame identify that removal after
+  `.9.1.3.3`; current source additionally removes SpecEntry's final token, and current book synchronization removes
+  the generated-handlers chapter's final token. The correct observed inventory is 87, not 90. The task-tree
+  checklist and updated Knowledge Map facts make this cross-tree gate coupling discoverable.
+
 - 2026-07-17 (`INTER-MATCH-GAP-CAPTURE.0` — target identity, not adjacency, defines automatic gaps):
   The imported baseline already contains the authoritative mechanism. An ACODE stores `relabel` and `reidx`;
   `spec_gdata` copies that target rule's regex slot into the enclosing rule's matcher; the repeated action handler

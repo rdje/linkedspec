@@ -16,6 +16,7 @@ BEGIN {
 }
 
 use LinkedSpec;
+use LinkedSpec::GeneratedSource;
 use LinkedSpec::Trace;
 
 my $repo_root = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..'));
@@ -79,6 +80,134 @@ sub generated_error {
  return $error
 }
 
+{
+ package LinkedSpec::GeneratedSourceContract::LegacyV1Artifact;
+ our $LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v1';
+
+ sub validate_plan {
+  return LinkedSpec::GeneratedSource::validate_plan(@_)
+ }
+}
+
+subtest 'v2 derives the exact ten handler-family cursor policies' => sub {
+ is_deeply(
+  LinkedSpec::GeneratedSource::family_cursor_policy_rows(),
+  [
+   { family => 'default', cursor_policy => 'seek' },
+   { family => 'or_acode', cursor_policy => 'seek' },
+   { family => 'or_bcode', cursor_policy => 'seek' },
+   { family => 'rep_acode', cursor_policy => 'seek' },
+   { family => 'rep_bcode', cursor_policy => 'seek' },
+   { family => 'and_single_acode', cursor_policy => 'consume' },
+   { family => 'and_acode_seq', cursor_policy => 'consume' },
+   { family => 'and_bcode', cursor_policy => 'consume' },
+   { family => 'rep_and_acode', cursor_policy => 'consume' },
+   { family => 'rep_and_bcode', cursor_policy => 'consume' },
+  ],
+  'the ten admitted families derive exactly five seek and five consume policies',
+ );
+ is(
+  LinkedSpec::GeneratedSource::family_cursor_policy('invented'),
+  undef,
+  'an unknown family has no cursor policy',
+ );
+};
+
+subtest 'v2 emitted plans retain every exact structural family' => sub {
+ my $spec = <<'SPEC';
+DefaultRoot::
+ I { set(words, []) }
+ /hello[ \t]+(\w+)/
+ LE { push(words, match_group(0)) }
+ E { return(copy(words)) }
+
+OrAcode:|
+ /go/ -> OrDone { return("or-acode") }
+OrDone: /go/
+
+AndSingle:AND
+ /one/ -> AndSingleDone { return("and-single") }
+AndSingleDone: /one/
+
+AndSeq:AND
+ /a/ -> AndSeqFirst
+ /[ \t]+b/ -> AndSeqSecond { return("and-seq") }
+AndSeqFirst: /a/
+AndSeqSecond: /[ \t]+b/
+
+AndBcode:AND
+ => AndBlindA
+ => AndBlindB
+ E { return("and-bcode") }
+AndBlindA: /a/
+AndBlindB: /[ \t]+b/
+
+OrBcode:|
+ => OrBlindA
+ => OrBlindB
+ E { return(cat("or-bcode:", retv)) }
+OrBlindA: /a/ E { return("A") }
+OrBlindB: /b/ E { return("B") }
+
+RepAcode:OR{2,3}
+ I { set(rep_acode, []) }
+ /a/ -> RepA { push(rep_acode, match_text()) }
+ /b/ -> RepB { push(rep_acode, match_text()) }
+ E { return(copy(rep_acode)) }
+RepA: /a/
+RepB: /b/
+
+RepBcode:OR{2,3}
+ I { set(rep_bcode, []) }
+ => RepBlindA
+ => RepBlindB
+ LE { push(rep_bcode, retv) }
+ E { return(copy(rep_bcode)) }
+RepBlindA:& /a/ LE { return("A") }
+RepBlindB:& /b/ LE { return("B") }
+
+RepAndAcode:AND{2}
+ I { set(rep_and_acode, []); set(rep_and_acode_pair, []) }
+ /a/ -> RepAndA { push(rep_and_acode_pair, match_text()) }
+ /b/ -> RepAndB { push(rep_and_acode_pair, match_text()) }
+ IT { push(rep_and_acode, copy(rep_and_acode_pair)); set(rep_and_acode_pair, []) }
+ E { return(copy(rep_and_acode)) }
+RepAndA: /a/
+RepAndB: /b/
+
+RepAndBcode:AND{2}
+ I { set(rep_and_bcode, []); set(rep_and_bcode_group, []) }
+ => RepAndBlindA { push(rep_and_bcode_group, retv) }
+ => RepAndBlindB { push(rep_and_bcode_group, retv) }
+ IT { push(rep_and_bcode, copy(rep_and_bcode_group)); set(rep_and_bcode_group, []) }
+ E { return(copy(rep_and_bcode)) }
+RepAndBlindA:& /a/ LE { return("A") }
+RepAndBlindB:& /b/ LE { return("B") }
+SPEC
+ my @expected = (
+  { label => 'DefaultRoot', family => 'default' },
+  { label => 'OrAcode', family => 'or_acode' },
+  { label => 'AndSingle', family => 'and_single_acode' },
+  { label => 'AndSeq', family => 'and_acode_seq' },
+  { label => 'AndBcode', family => 'and_bcode' },
+  { label => 'OrBcode', family => 'or_bcode' },
+  { label => 'RepAcode', family => 'rep_acode' },
+  { label => 'RepBcode', family => 'rep_bcode' },
+  { label => 'RepAndAcode', family => 'rep_and_acode' },
+  { label => 'RepAndBcode', family => 'rep_and_bcode' },
+ );
+ my %target = map { $_->{label} => 1 } @expected;
+ my $source = capture_source(
+  $spec,
+  generated_source_identity => 'generated-source/v2-all-families.spec',
+ );
+ my $module = load_generated_source($source, 'V2AllFamilies');
+ my $plan = $module->{plan}->();
+ my @actual = grep { $target{$_->{label}} } @$plan;
+ is_deeply(\@actual, \@expected, 'emitted plan classifies all ten structural families exactly');
+ ok($module->{validate_plan}->($plan), 'complete emitted all-family plan validates');
+};
+
 subtest 'neutral direct result, deterministic source, metadata, trace, and errors' => sub {
  my $spec = read_text(File::Spec->catfile($fixture_dir, 'input.spec'));
  my $input = read_text(File::Spec->catfile($fixture_dir, 'input.txt'));
@@ -100,6 +229,16 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
   generated_source_identity => $identity,
  );
  is($source_again, $source, 'same compiled input and identity emit deterministic source');
+ my $source_from_seek_option = capture_source(
+  $spec,
+  parse_mode => 'seek',
+  generated_source_identity => $identity,
+ );
+ is(
+  $source_from_seek_option,
+  $source,
+  'transitional caller option cannot change generated-source v2 bytes',
+ );
  my $legacy_source = '';
  my $legacy_result = LinkedSpec::Get(
   \$spec,
@@ -111,9 +250,11 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
  );
  is($legacy_result, undef, 'legacy generate-only capture keeps its return contract');
  is($legacy_source, $source, 'public emitter and legacy capture return identical source');
- like($source, qr/contract_id: linkedspec-generated-source-v1/, 'source carries contract marker');
- like($source, qr/format_version: 1/, 'source carries format marker');
+ like($source, qr/contract_id: linkedspec-generated-source-v2/, 'source carries contract marker');
+ like($source, qr/format_version: 2/, 'source carries format marker');
  like($source, qr/our \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY = '\Q$identity\E'/, 'source carries quoted identity');
+ unlike($source, qr/\bparse_mode\b/, 'source does not serialize a global parse-mode constructor or field');
+ unlike($source, qr/\bcursor_policy\s*=>/, 'plan does not serialize a mutable cursor-policy field');
  like($source, qr/LinkedRE::oredRE\(/, 'source reconstructs indexed dependency alternation');
  unlike($source, qr/dependency_regex_map.*=>\s*qr\/.*\(\?\{\$pos=/s, 'source does not stringify indexed dependency regex state');
 
@@ -123,8 +264,8 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
  ok(ref($module->{validate_plan}) eq 'CODE', 'generated source exposes plan validation');
 
  my $metadata = $module->{metadata}->();
- is($metadata->{contract_id}, 'linkedspec-generated-source-v1', 'metadata reports contract id');
- is($metadata->{format_version}, 1, 'metadata reports format version');
+ is($metadata->{contract_id}, 'linkedspec-generated-source-v2', 'metadata reports contract id');
+ is($metadata->{format_version}, 2, 'metadata reports format version');
  is($metadata->{source_identity}, $identity, 'metadata reports exact source identity');
  is_deeply(
   $metadata->{plan},
@@ -162,6 +303,47 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
 
  my $plan = $module->{plan}->();
  ok($module->{validate_plan}->($plan), 'exact generated plan validates');
+ my $version_error = generated_error(sub {
+  $module->{validate_plan}->($plan, 'linkedspec-generated-source-v1');
+ });
+ is($version_error->{stage}, 'validate_generated_plan', 'v1 reconstruction rejects at plan-validation stage');
+ is(
+  $version_error->{code},
+  'generated_source_contract_version_mismatch',
+  'v1 reconstruction uses the portable contract mismatch code',
+ );
+ is(
+  $version_error->{expected_contract},
+  'linkedspec-generated-source-v2',
+  'v1 reconstruction reports the expected v2 contract',
+ );
+ is(
+  $version_error->{actual_contract},
+  'linkedspec-generated-source-v1',
+  'v1 reconstruction reports the actual v1 contract',
+ );
+ like(
+  $version_error->{detail},
+  qr/regenerate .* \.spec\s+source/x,
+  'v1 reconstruction requires regeneration from the .spec source',
+ );
+ my $legacy_artifact_error = generated_error(sub {
+  LinkedSpec::GeneratedSourceContract::LegacyV1Artifact::validate_plan(
+   expected => $plan,
+   actual => $plan,
+   source_identity => $identity,
+  );
+ });
+ is(
+  $legacy_artifact_error->{code},
+  'generated_source_contract_version_mismatch',
+  'a self-contained v1 caller is rejected even without the new explicit contract argument',
+ );
+ is(
+  $legacy_artifact_error->{actual_contract},
+  'linkedspec-generated-source-v1',
+  'legacy caller inference preserves the v1 artifact identity',
+ );
  my @rejections = (
   [row_count_mismatch => sub { [] }, 'generated_plan_row_count_mismatch'],
   [label_mismatch => sub { my $copy = clone_plan($plan); $copy->[0]{label} = 'Wrong'; $copy }, 'generated_plan_label_mismatch'],
@@ -203,6 +385,56 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
   $expected,
   'same source executes outside its first package without binding drift',
  );
+};
+
+subtest 'fresh v2 handlers spend family-derived seek and consume policies' => sub {
+ my $seek_spec = <<'SPEC';
+Top::
+ /x/ -> Done { return("x") }
+Done: /x/
+SPEC
+ my $consume_spec = <<'SPEC';
+Top::AND
+ /x/ -> Done { return("x") }
+Done: /x/
+SPEC
+
+ my $seek_source = capture_source(
+  $seek_spec,
+  parse_mode => 'consume',
+  generated_source_identity => 'generated-source/v2-seek.spec',
+ );
+ my $consume_source = capture_source(
+  $consume_spec,
+  parse_mode => 'seek',
+  generated_source_identity => 'generated-source/v2-consume.spec',
+ );
+ my $seek_module = load_generated_source($seek_source, 'V2Seek');
+ my $consume_module = load_generated_source($consume_source, 'V2Consume');
+
+ is($seek_module->{plan}->()->[0]{family}, 'default', 'default plan row identifies a seek family');
+ is(
+  $consume_module->{plan}->()->[0]{family},
+  'and_single_acode',
+  'AND plan row identifies a consume family',
+ );
+ unlike(
+  $seek_source,
+  qr/LinkedRE::or\([^\n]+,\s*'consume'/,
+  'default generated handler uses the seek matcher form despite a consume option',
+ );
+ like(
+  $consume_source,
+  qr/LinkedRE::or\([^\n]+,\s*'consume'/,
+  'AND generated handler uses the contiguous matcher form despite a seek option',
+ );
+
+ my $seek_input = 'junkx';
+ is($seek_module->{execute}->(\$seek_input), 'x', 'fresh default-family source seeks forward');
+ my $consume_input = 'junkx';
+ is($consume_module->{execute}->(\$consume_input), undef, 'fresh AND-family source rejects leading junk');
+ my $exact_input = 'x';
+ is($consume_module->{execute}->(\$exact_input), 'x', 'fresh AND-family source consumes at its cursor');
 };
 
 subtest 'multiple dependency alternatives and slash-bearing regexes retain indexes' => sub {

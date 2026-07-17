@@ -4,7 +4,8 @@
 > from all construction and execution surfaces once `.9.1.2-.9` lands. Legacy
 > dynamic options will fail with `parse_mode_override_removed`; the primary
 > `--parse-mode` flag will return usage exit 2. Current APIs still accept the
-> option, so examples below describe shipped behavior until rollout completes.
+> option until the reference removal slice lands, but normal live execution,
+> descriptors, and generated-source v2 already ignore it in favor of rule-family policy.
 
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
@@ -339,7 +340,7 @@ Internally, both flow into the same broader runtime/compiler story, but they car
 ## `LinkedSpec::emit_generated_source(...)`
 
 `emit_generated_source(...)` compiles in-memory `.spec` text and returns deterministic, independently loadable
-Perl source conforming to `linkedspec-generated-source-v1`:
+Perl source conforming to `linkedspec-generated-source-v2`:
 
 ```perl
 use LinkedSpec;
@@ -347,7 +348,6 @@ use LinkedSpec;
 my $source = LinkedSpec::emit_generated_source(
   \$spec,
   source_identity => 'examples/words.spec',
-  parse_mode => 'consume',
 );
 
 my $loaded = eval "package My::GeneratedWords;\n$source\n1;";
@@ -363,11 +363,18 @@ The generated package exposes semantic roles:
 - `Execute($input_ref)`;
 - `ExecuteWithTrace($input_ref, \%trace_config)`;
 - `LinkedSpecGeneratedMetadata()` and `LinkedSpecGeneratedPlan()`;
-- `ValidateGeneratedPlan($plan)`.
+- `ValidateGeneratedPlan($plan, [$actual_contract])`.
 
 Metadata contains the contract id, format version, source identity, and ordered `label` / `family` rows. Plan
 validation rejects count, label, family, and unknown-family drift before execution. Emission, validation, and
 execution failures are thrown as `generated_source_error` hashrefs with stable stage/code/identity fields.
+The plan remains the minimal `{label, family}` shape. Perl v2 derives five seek and five consume policies from the
+ten admitted family names; it does not serialize a separate cursor field. Supplying a v1 contract at reconstruction
+fails with `generated_source_contract_version_mismatch`, `expected_contract`, and `actual_contract`; regenerate the
+artifact from its `.spec` source.
+
+The transitional `parse_mode` option is still accepted by this emitter until the next removal slice, but cannot
+change the emitted bytes or behavior. Do not use it in new generated-source calls.
 
 The older `Get(... generate_only => 1, dump_parser_source => 1, parser_source_ref => \$source)` path remains
 compatible and emits the same text. The dedicated method is preferred for application code because it returns the
@@ -418,10 +425,11 @@ my $parser = LinkedSpec::Get(
 
 ## `parse_mode`
 
-`parse_mode` controls cursor discipline:
+`parse_mode` is a transitional accepted option scheduled for removal. It no longer controls normal live execution,
+descriptors, or generated-source v2. Cursor discipline comes from each authored rule family:
 
-- `seek` preserves progressive extraction behavior and is the default
-- `consume` requires contiguous matching from the current cursor
+- default/OR families derive `seek`
+- AND families derive `consume`
 
 ```perl
 my $parser = LinkedSpec::get_parser(
@@ -429,6 +437,8 @@ my $parser = LinkedSpec::get_parser(
   parse_mode => 'consume',
 );
 ```
+
+The call above remains accepted only for staged compatibility; its value does not override any rule.
 
 ## `runtime_ctx_ref`
 

@@ -471,6 +471,8 @@ content migration exists yet.
   primary interpreter oracle. The checker owns the Dart, Julia, and Lua 8/105 test paths; Lua's path additionally
   locks full-manifest validation, contract order, interpreter-first proof, fresh selected-ABI loading, exact
   metadata/plans/trace identity, cleanup, and unconditional registration.
+  ADR `0044` now advances new Perl emission to generated-source v2 while this shared v1 ledger remains the
+  convergence baseline for Rust, Dart, Julia, and Lua until their dependency-ordered cursor migrations.
 - Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
   the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.

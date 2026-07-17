@@ -120,7 +120,8 @@ check, not proof that the cited commands were run.
 
 ### 1.5 `LinkedSpec::emit_generated_source` — standalone source proof
 - **WHAT:** compile inline `.spec` text into deterministic, independently loadable Perl source conforming to
-  generated-source contract v1.
+  Perl generated-source contract v2. Plan rows stay `{label, family}`; the validator derives cursor policy from
+  the exact ten-family map and rejects v1 reconstruction with a regeneration diagnostic.
 - **WHEN:** distinguish “the live compiler-generated parser works” from “captured source is genuinely standalone,”
   or reproduce generated plan, identity, trace, and execution errors.
 - **HOW:**
@@ -128,7 +129,7 @@ check, not proof that the cited commands were run.
   perl -Iperl -MLinkedSpec -e '
     my $s = qq{Top::\n /x/ -> Done { return("ok") }\n\nDone::\n /[a-z]+/\n};
     my $src = LinkedSpec::emit_generated_source(\$s,
-      source_identity => "probe.spec", parse_mode => "consume");
+      source_identity => "probe.spec");
     eval "package Probe::Generated; $src; 1" or die $@;
     my $input = "xhello";
     print Probe::Generated::Execute(\$input), "\n";'

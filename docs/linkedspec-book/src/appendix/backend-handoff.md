@@ -4,9 +4,10 @@
 > derive cursor policy from authored family, preserve child ownership, remove
 > public/global overrides with portable diagnostics, project per-rule
 > `cursor_policy`, and emit/consume `linkedspec-generated-source-v2`. Version-2
-> plan rows retain `{label, family}` and derive policy from family. This remains
-> a pending `.9.1.2-.9` rollout; current backend APIs and generated-source v1
-> behavior elsewhere in this appendix are still the shipped contract.
+> plan rows retain `{label, family}` and derive policy from family. Perl now
+> emits and validates v2; its API/CLI option removal and composed admission are
+> still pending. Rust, Dart, Julia, and Lua retain their admitted generated-source
+> v1 behavior until their dependency-ordered rollout leaves.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,

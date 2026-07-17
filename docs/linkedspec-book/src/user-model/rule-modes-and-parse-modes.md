@@ -25,11 +25,12 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > bare edges, and `.9.1.3.2` makes normal live and loaded Perl handlers spend
 > each rule's derived policy independently. Descriptor slice `.9.1.3.3` now
 > publishes `linkedspec-rule-local-cursor-v1`, removes root global-mode metadata,
-> and exposes normalized resolved-edge rows. The transitional Perl `parse_mode`
-> argument remains accepted at the transitional API boundary, but only generated-source
-> v1 still spends its value; it cannot override normal live execution or descriptor
-> facts. Generated source
-> v2 and CLI removal remain separately staged under `.9.1.3.4-.5`;
+> and exposes normalized resolved-edge rows. Generated-source slice `.9.1.3.4`
+> now emits `linkedspec-generated-source-v2`, derives its five seek and five
+> consume policies from the ten handler families, and rejects v1 reconstruction.
+> The transitional Perl `parse_mode` argument remains accepted at the API/CLI
+> boundary but cannot override live, descriptor, or emitted behavior. Its removal
+> remains separately staged under `.9.1.3.5`;
 > neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
 > Rust, Dart, Julia, and Lua behavior remains dependency-ordered under `.9.1.4-.9`.
 
@@ -495,8 +496,8 @@ That separation is what makes a reusable extraction rule remain an extraction ru
 
 ## Transitional Perl option boundary
 
-The Perl reference still accepts `parse_mode` in inline and file-oriented construction while the staged migration
-keeps descriptor and generated-source v1 contracts loadable. It no longer controls normal live handler execution:
+The Perl reference still accepts `parse_mode` in inline and file-oriented construction until the staged removal
+slice lands. It no longer controls normal live handlers, descriptors, or generated-source v2:
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -510,8 +511,8 @@ my $loaded = LinkedSpec::get_parser(
 );
 ```
 
-Descriptor v1 still reports the legacy root field, and generated-source v1 still serializes the legacy mode until
-their owning migration leaves land:
+Descriptor v1 and generated-source v2 both expose only derived rule facts. The accepted option is not projected
+into descriptor metadata or serialized into emitted source:
 
 ```perl
 my $descriptor = LinkedSpec::Get(
@@ -520,12 +521,12 @@ my $descriptor = LinkedSpec::Get(
   parse_mode => 'consume',
 );
 
-my $legacy_mode = $descriptor->{meta}{parse_mode}; # consume (v1 compatibility)
+my $cursor_contract = $descriptor->{meta}{cursor_contract};
+# linkedspec-rule-local-cursor-v1
 ```
 
-Do not use that field to infer the behavior of a normal live Perl rule. Inspect the rule's family-derived
-`cursor_policy` instead. The public option and `--parse-mode` command flag are scheduled for targeted removal,
-not permanent ignored compatibility.
+Inspect each rule's family-derived `cursor_policy`. The public option and `--parse-mode` command flag are scheduled
+for targeted removal, not permanent ignored compatibility.
 
 ## Choosing a mode
 
@@ -623,10 +624,10 @@ The remaining Perl rollout slices remove `parse_mode` / `--parse-mode` with a ta
 diagnostic rather than preserving an accepted-and-ignored option. Perl descriptors now replace root
 `meta.parse_mode` with `meta.cursor_contract`, retain per-rule `meta.cursor_policy`, and expose ordered
 `meta.resolved_edges` rows with ownership/target/index/block/fluent facts.
-Generated source moves to v2 and derives policy from its handler-family plan;
+Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
-in the Perl reference are current. Generated-source v2 and primary-command removal are not yet migrated. The
+in the Perl reference are current. Primary-command/API removal is not yet migrated. The
 neutral checker currently reports 36 family spellings, 18 edge cases, eight
-parent/child cases, 90 migration files, 1 complete / 7 pending, and 27 rejected
+parent/child cases, 87 migration files, 1 complete / 7 pending, and 27 rejected
 drift mutations.

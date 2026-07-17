@@ -42,6 +42,20 @@ named fixtures; Rust must broaden to the complete 105-case manifest, while new
 emitters prove the accepted subset plus every structural family. The interpreter
 manifest stays the primary correctness oracle.
 
+The shared five-backend capability ledger remains the version-1 convergence
+baseline while ADR `0044` rolls out in dependency order. The Perl reference has
+now crossed its generated-source boundary: new Perl artifacts identify
+`linkedspec-generated-source-v2` / format 2, retain the same minimal ordered
+`label` / `family` rows, and derive cursor policy from the family instead of a
+caller-global mode. The five seek families are `default`, `or_acode`,
+`or_bcode`, `rep_acode`, and `rep_bcode`; the five consume families are
+`and_single_acode`, `and_acode_seq`, `and_bcode`, `rep_and_acode`, and
+`rep_and_bcode`. A v1 artifact presented to the active Perl v2 validator fails
+at `validate_generated_plan` with
+`generated_source_contract_version_mismatch`, including `expected_contract`
+and `actual_contract`; regenerate it from the original `.spec` source. Other
+backends retain their admitted v1 emitters until their ordered cursor leaves.
+
 Rust's source-emitter now implements contract-v1 identity, metadata, and typed
 errors. Native callers use
 `emit_rust_source_v1(&compiled, "path/to/input.spec")`; the generated module
@@ -242,7 +256,7 @@ Generated handlers use it to dispatch efficiently:
 LinkedRE::or($STRING, $$descr{dependency_regex_map}{Top}, $info)
 ```
 
-In `consume` parse mode, the generated dispatch is contiguous:
+With a `consume` cursor policy, the generated dispatch is contiguous:
 
 ```perl
 LinkedRE::or($STRING, $$descr{dependency_regex_map}{Top}, 'consume', $info)
@@ -315,7 +329,8 @@ HandlerIR is a hashref-based AST that captures everything the emitter needs with
 
 - `kind` — the variant kind (one of ten: `default`, `and_bcode`, `and_single_acode`, `and_acode_seq`, `or_bcode`, `or_acode`, `rep_bcode`, `rep_and_bcode`, `rep_and_acode`, `rep_acode`)
 - `label` — the rule label
-- `parse_mode` — `'seek'` or `'consume'`, controlling how `LinkedRE::or` matches
+- `cursor_policy` — `'seek'` or `'consume'`, derived from the authored rule family and controlling how
+  `LinkedRE::or` matches
 - Lifecycle blocks: `preamble` (icode), `lxcode` (loop exit / no-match), `lscode` (loop start / after match), `lecode` (loop end / before collection), `ecode` (end / exhaustion), `excode` (REP exhaustion fallback), `itcode` (REP per-iteration collection)
 - Dispatch refs: `acodes_ref` (array of action-code strings), `bcodes_ref` (hash of call-name to bcode string), `bcalls_ref` (ordered list of bcode call names)
 - Repetition bounds (REP variants only): `rep_min`, `rep_max`
@@ -324,7 +339,7 @@ HandlerIR is a hashref-based AST that captures everything the emitter needs with
 
 ### Ten variant builders
 
-Each `_build_*_variant` function takes a normalized argument hash (label, parse mode, lifecycle code strings, dispatch refs, node type, and optional repetition bounds) and returns either a HandlerIR hashref or `undef` if preconditions are not met (e.g., no acodes present for an acode variant).
+Each `_build_*_variant` function takes a normalized argument hash (label, derived cursor policy, lifecycle code strings, dispatch refs, node type, and optional repetition bounds) and returns either a HandlerIR hashref or `undef` if preconditions are not met (e.g., no acodes present for an acode variant).
 
 | Builder | Returns | When used |
 |---|---|---|
@@ -347,7 +362,7 @@ Repetition bounds are resolved by `_resolve_rep_bounds`, which maps node types (
 
 **Perl backend** (`_emit_handler_perl`). Dispatches on `kind` to one of ten template functions (`_emit_default_handler`, `_emit_and_bcode_handler`, etc.). Each template assembles a Perl source string from HandlerIR fields using helper functions:
 
-- `_linkedre_or_expr` — builds the `LinkedRE::or(...)` call expression from label and parse mode
+- `_linkedre_or_expr` — builds the `LinkedRE::or(...)` call expression from label and derived cursor policy
 - `_build_acodes_dispatch_block` — builds the `if/elsif` chain over `$$minfo{index}` values
 - `_build_bcodes_dispatch_block` — builds the `if/elsif` chain over `$call` values
 - `_build_lmatch_extraction` — emits the common `$LMATCH`, `@LMATCH_LIST`, `%LMATCH_HASH`, `$LINDEX`, `$LSPOS` extraction block

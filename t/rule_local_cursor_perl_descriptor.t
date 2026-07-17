@@ -240,9 +240,9 @@ Top::
 SPEC
 my $generated = LinkedSpec::emit_generated_source(
  \$generated_source,
- source_identity => 'descriptor-v1-generated-boundary.spec',
+ source_identity => 'descriptor-v1-generated-v2.spec',
 );
-like($generated, qr/linkedspec-generated-source-v1/, 'standalone generated source remains version 1 until its owning leaf');
-unlike($generated, qr/linkedspec-generated-source-v2/, 'descriptor migration does not advance generated-source identity');
+like($generated, qr/linkedspec-generated-source-v2/, 'standalone generated source now carries the v2 identity');
+unlike($generated, qr/linkedspec-generated-source-v1/, 'standalone generated source no longer emits the v1 identity');
 
 done_testing;

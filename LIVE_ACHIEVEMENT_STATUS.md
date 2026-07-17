@@ -8,9 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.4 — emit Perl generated-source v2**
+  (DONE — focused, standalone, canonical, documentation, and cleanup signoff pass; the clean commit is the only
+  remaining workflow step before API/CLI migration `.9.1.3.5`).
+
+  **Result:** New Perl artifacts identify `linkedspec-generated-source-v2` / format 2, retain minimal ordered
+  `label`/`family` rows, and derive exactly five seek and five consume policies from the ten admitted families.
+  The separate legacy artifact handler is removed, so transitional option values cannot change emitted bytes or
+  behavior. V1 reconstruction rejects before row validation with expected/actual contract fields and mandatory
+  `.spec` regeneration. Fresh load, direct/traced execution, identity, and existing drift failures remain exact.
+
+  **Proof:** Focused generated/cursor/trace suites pass 400 assertions and adjacent contracts pass 92; touched Perl
+  modules compile. The neutral checker passes 36/18/8/87 at 1/7 plus 27 mutations; shared generated/capability truth
+  remains 80/0/0. Standalone Phase 0 passes 1,031/1,031 after correcting one stale option-owned source expectation.
+  Canonical local CI passes reference CLI 63/63 twice and Phase 0 1,031/1,031 in 619 seconds. Knowledge Map,
+  mdBook, memory/task/doctrine/whitespace gates, and safe removal of 10 MB generated book/bytecode artifacts pass.
+
+  **Finding:** Clean commit `ccf4cad7` had independently removed the action/lifecycle chapter's final migration
+  token without updating the exact inventory, so its recorded neutral-checker signoff was not reproducible. Git
+  history locates the removal; this leaf reconciles the count at 87 and preserves the cause in task/live/change/KM
+  records.
+
 - 2026-07-17: **INTER-MATCH-GAP-CAPTURE.0 — ratify inter-match gap capture**
-  (DONE — historical/runtime truth and future syntax direction are aligned; clean commit is the remaining workflow
-  step before returning to cursor generated-source v2 `.9.1.3.4`).
+  (DONE — historical/runtime truth and future syntax direction are aligned and committed at `ccf4cad7`; cursor
+  generated-source v2 `.9.1.3.4` has since completed).
 
   **Result:** ADR `0045` recovers “super split” as automatic prefix/interstitial gap access in repeated OR/default
   action rules. Target rules own regex slots and lifecycle; enclosing rules own selection/gap orchestration.
@@ -28,8 +49,8 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrine enforcement, and whitespace checks pass.
 
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.3 — project Perl cursor descriptors**
-  (DONE — descriptor identity/edge projection and complete signoff pass; the clean commit is the only remaining
-  workflow step before generated-source v2 `.9.1.3.4` can activate).
+  (DONE — descriptor identity/edge projection and complete signoff are committed at `7caaf9ca`; generated-source
+  v2 `.9.1.3.4` has since completed).
 
   **Result:** Perl descriptors identify `linkedspec-rule-local-cursor-v1`, omit root global-mode metadata, and
   publish family-derived per-rule policy plus ordered resolved ownership/target/index/block/fluent edge facts.

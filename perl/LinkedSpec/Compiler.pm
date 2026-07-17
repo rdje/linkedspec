@@ -104,8 +104,8 @@ sub _generated_source_preamble {
  my ($source_identity) = @_;
  my $identity_literal = _quote_generated_source_string($source_identity);
  return "# LinkedSpec generated parser source.\n"
-  . "# contract_id: linkedspec-generated-source-v1\n"
-  . "# format_version: 1\n"
+  . "# contract_id: linkedspec-generated-source-v2\n"
+  . "# format_version: 2\n"
   . "# source_identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY\n"
   . "no strict;\n"
   . "no warnings 'void';\n"
@@ -115,8 +115,8 @@ sub _generated_source_preamble {
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
-  . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v1';\n"
-  . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1;\n"
+  . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\n"
+  . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY = $identity_literal;\n\n"
 }
 
@@ -173,12 +173,15 @@ sub LinkedSpecGeneratedPlan {
 }
 
 sub ValidateGeneratedPlan {
- my (\$plan) = \@_;
+ my (\$plan, \$actual_contract) = \@_;
  \$plan = \$LINKEDSPEC_GENERATED_ACTIVE_PLAN unless defined \$plan;
+ \$actual_contract = \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT unless defined \$actual_contract;
  return LinkedSpec::GeneratedSource::validate_plan(
   expected => \$LINKEDSPEC_GENERATED_EXPECTED_PLAN,
   actual => \$plan,
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  expected_contract => 'linkedspec-generated-source-v2',
+  actual_contract => \$actual_contract,
  )
 }
 
@@ -819,11 +822,6 @@ sub run_get_pipeline {
      $entry,
      {
       runtime_ctx => $runtime_ctx,
-      # Normal live and descriptor handlers spend their rule-family policy.
-      # Generated-source v1 alone retains the legacy option until its staged
-      # contract migration lands.
-      use_rule_local_cursor => !$generate_only ? 1 : 0,
-      legacy_artifact_cursor_policy => $parse_mode,
       function_registry => $function_registry,
       declared_rule_labels => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_labels} : undef,
      },
