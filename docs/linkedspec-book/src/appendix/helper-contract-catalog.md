@@ -1262,8 +1262,9 @@ table because its runtime behavior is to terminate the parser process.
   standalone-emitted execution conforms under `FUTURE-PARITY-BACKLOG.5.2.2`; Rust native, serialized,
   generated-plan, direct-value, and compiled emitted execution conforms under `.5.2.3`; Dart native, normalized,
   generated-plan, standalone-emitted, and primary execution conforms under `.5.2.4`; Julia native, normalized,
-  generated-plan, independently compiled emitted, and primary execution conforms under `.5.2.5`. Four backend/
-  projection/admission legs remain pending under `.5.2.6-.9`. Do not treat the target as cross-backend behavior yet.
+  generated-plan, independently compiled emitted, and primary execution conforms under `.5.2.5`; Lua native,
+  reconstructed, generated-plan, loaded emitted-module, and primary execution conforms on both ABIs under
+  `.5.2.6`. Three projection/admission legs remain pending under `.5.2.7-.9` before public closeout.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
@@ -1272,10 +1273,9 @@ table because its runtime behavior is to terminate the parser process.
   condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
   returned. If no fallback matches, returns `undef`.
 - **Portability status**: Implemented on Perl, Rust, Dart, Julia, and Lua in `return(...)`, assignment RHS, and
-  fluent `.return(...)` value positions. Perl, Rust, and Dart now consume ADR `0043` through one helper/condition
-  truth seam, and Julia now does the same while retaining its existing `_runtime_truthy` owner. Lua still makes
-  scalar `"0"` false and empty aggregates true. `FUTURE-PARITY-BACKLOG.5.2.6-.9` own the remaining
-  backend/projection/admission rollout.
+  fluent `.return(...)` value positions. Perl, Rust, Dart, Julia, and Lua consume ADR `0043` through one
+  helper/condition truth seam per backend. `FUTURE-PARITY-BACKLOG.5.2.7-.9` own the remaining cross-backend
+  generated/primary, recurring-gate, and public no-drift rollout.
 
 ### `if(cond); ... elseif(cond2); ... else(); ... endif()`
 - **Signature**: Statement-marker form.

@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.6 — align Lua logical helpers and truthiness
+
+Aligned PUC Lua and LuaJIT with ADR `0043` and `linkedspec-logical-helper-v1`. `runtime_truthy` now makes only
+null, false, numeric zero, the empty string, and empty arrays/harrays false; string `"0"`, every other nonempty
+string, nonempty aggregates, and inert codeblocks are true. The same seam governs eager logical helpers and lazy
+conditions without borrowing host Lua truth or scalar rendering.
+
+Built-in dispatch now validates one-plus `and`/`or` and exact-one `not` before evaluating operands. Valid calls
+retain their existing once-only left-to-right collection and real boolean composition. Arity failures carry exact
+`code`, `helper_name`, `actual_arity`, and `expected_arity` fields on the shared diagnostic, while unrelated JSON,
+trace, source attribution, user-function precedence, and generated routing remain unchanged.
+
+The unchanged neutral consumer passes 238/238 on each ABI across all 17 typed rows, values, eager effects,
+receiver continuation, lazy controls, four pre-effect failures, native/reconstructed/generated-plan/emitted/
+primary roles, and inert contextual codeblocks. The authoritative Lua gate passes diagnostic 119/119, logical
+238/238, full 177/177, shared CLI 62x2, and corpus 105/105. The checker reports 5 complete / 3 pending and rejects
+15 mutations. Canonical local CI passes reference CLI 62x2 and Phase 0 `1..1031` in 609 seconds. Only `lua_native`
+advances; generated/primary `.5.2.7` is next.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.5 — align Julia logical helpers and truthiness
 
 Aligned Julia with ADR `0043` and `linkedspec-logical-helper-v1` without replacing its already-correct typed

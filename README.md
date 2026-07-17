@@ -4,8 +4,9 @@ Current design frontier (2026-07-17): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.
 ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
-Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. The
-Julia logical-helper rollout `.5.2.5` is now complete; dual-ABI Lua `.5.2.6` is next.
+Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. All five
+native logical-helper rollouts are now complete through dual-ABI Lua `.5.2.6`;
+generated/primary projection `.5.2.7` is next.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -215,8 +216,9 @@ This `README.md` is the **single entry point** to the project.
   emitted, and primary roles. Exact structured helper fields, receiver flow, and lazy-control separation pass;
   Julia `.5.2.5` preserves its existing eager `_runtime_truthy` helper/control seam and adds exact pre-effect
   arity plus optional structured fields across native, normalized, generated-plan, independently compiled
-  emitted, and primary roles. Rollout is 4 complete / 4 pending before Lua `.5.2.6` and the remaining projection/
-  admission leaves.
+  emitted, and primary roles. Lua `.5.2.6` now shares that typed helper/control truth seam, validates arity before
+  effects, and proves native/reconstructed/generated-plan/emitted/primary roles on PUC Lua and LuaJIT. Rollout is
+  5 complete / 3 pending before generated/primary projection, recurring proof, and public no-drift `.5.2.7-.9`.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for

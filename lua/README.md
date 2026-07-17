@@ -350,15 +350,44 @@ extends the matrix to 5x2x61; status is `runtime-corpus-primary-cli` and no-drif
 Generated Lua emission, isolated dual-ABI valid/corrupt execution, exact family plans/execution, contract-owned
 8/105 fresh-host proof, and five-backend 80/0/0 census admission are current through `.8.4`; the Lua parity tree
 and backend handoff are closed.
-Cross-backend output routing/formatting is owned by
-`FUTURE-PARITY-BACKLOG.5.1`; logical truthiness/arity and Perl keyword lowering are separately owned by `.5.2`.
+Cross-backend output routing/formatting is complete under `FUTURE-PARITY-BACKLOG.5.1`. Native logical truthiness
+and arity are aligned on all five backends through `.5.2.6`; generated/primary, recurring-gate, and public
+closeout remain `.5.2.7-.9`.
 
-Lua now executes `and`, `or`, and `not` as eager boolean value helpers: all authored arguments evaluate once
-left-to-right before `runtime_truthy` composition. Empty calls return false, false, and true respectively. Current
-Lua truthiness still treats scalar `"0"` as false and empty arrays/harrays as true; portable specs should use
-explicit predicates at disputed boundaries until `FUTURE-PARITY-BACKLOG.5.2` aligns all backends. The logical
-proof first raised both ABI suites to 123/123; the complete helper closeout now passes 125/125 and diagnostics/
-trace planning `.4.4.0` is complete. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
+## Native logical helpers
+
+Lua executes `and`, `or`, and `not` as eager boolean value helpers on both PUC Lua and LuaJIT. `and` and `or`
+require at least one positional operand; `not` requires exactly one. Arity is validated before any operand runs.
+After a valid call is admitted, every operand evaluates exactly once from left to right, including operands after
+a decisive value. Results are real booleans and can feed compatible receiver continuations.
+
+`runtime_truthy` is the common language seam for eager logical helpers and lazy `if`/`switch`/`while` conditions:
+
+- null, false, numeric zero, the empty string, and empty arrays/harrays are false;
+- every other finite number, every nonempty string (including `"0"` and `"false"`), nonempty aggregates, and
+  codeblocks are true;
+- testing a codeblock does not invoke it;
+- controls still execute only the selected branch/body, while logical helper operands are all eager.
+
+For example:
+
+```text
+Top::
+ /x/
+ E {
+   result = and("0", [undef])
+   return(or(not(false), result))
+ }
+```
+
+This returns boolean `true`. `and()` and `not(false, true)` instead raise `helper_arity_mismatch` before an
+operand can run, with `code`, `helper_name`, `actual_arity`, and `expected_arity` in the typed diagnostic. The
+unchanged neutral consumer passes 238/238 on both ABIs across native, reconstructed, generated-plan, loaded
+emitted-module, and primary roles. The complete local gate remains 177/177 per ABI plus shared CLI 62x2 and corpus
+105/105.
+
+The original logical proof first raised both ABI suites to 123/123; the complete helper closeout then passed
+125/125 and diagnostics/trace planning `.4.4.0` completed. Structured runtime diagnostic `.4.4.1` raises the suite to 126/126; native
 trace controls/sinks `.4.4.2` raise it to 128/128, runtime instrumentation `.4.4.3` raises it to 129/129, and the
 minimal staged function-body registry `.5.1.1` raises it to 130/130.
 Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
@@ -370,8 +399,9 @@ explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Z
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
-Lua currently follows Perl-oracle condition truthiness, including false scalar `"0"` and truthful empty
-array/harray reference values. Cross-backend truthiness normalization is explicitly owned by backlog `.5`.
+Lua now follows ADR `0043` condition truthiness: scalar `"0"` is true and empty arrays/harrays are false. The same
+`runtime_truthy` seam serves eager logical helpers and lazy controls; `.5.2.7-.9` retain cross-backend projection,
+recurring-gate, and public closeout.
 Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
 codeblock. A trailing block remains structural until its signature-governed callable consumes it. For example,
 `with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are

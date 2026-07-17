@@ -7712,9 +7712,9 @@ return({
   "true" : if(true, false, exit_now(12)),
   "null" : if(false, exit_now(13)),
   "plain" : if(0, exit_now(14), "fallback"),
-  "zero_string" : if("0", exit_now(15), "zero"),
-  "empty_array" : if([], "array-reference", exit_now(16)),
-  "empty_harray" : if({}, "harray-reference", exit_now(17)),
+  "zero_string" : if("0", "zero", exit_now(15)),
+  "empty_array" : if([], exit_now(16), "empty-array"),
+  "empty_harray" : if({}, exit_now(17), "empty-harray"),
   "assigned" : assigned,
   "subject_once" : subject_once,
   "selector_calls" : count(selector_calls),
@@ -7729,9 +7729,9 @@ return({
   assert_equal(result["true"], false, "selected false payload is preserved")
   assert_equal(result.null, json.null, "missing if fallback yields null")
   assert_equal(result.plain, "fallback", "plain fallback is selected lazily")
-  assert_equal(result.zero_string, "zero", "Perl-oracle string zero is false")
-  assert_equal(result.empty_array, "array-reference", "empty array value remains reference-truthful")
-  assert_equal(result.empty_harray, "harray-reference", "empty harray value remains reference-truthful")
+  assert_equal(result.zero_string, "zero", "nonempty string zero is truthful")
+  assert_equal(result.empty_array, "empty-array", "empty array is false")
+  assert_equal(result.empty_harray, "empty-harray", "empty harray is false")
   assert_equal(result.assigned, "elseif", "selected elseif block returns locally")
   assert_equal(result.subject_once, "literal", "bare case label stays literal")
   assert_equal(result.selector_calls, 1, "switch subject evaluates exactly once")
@@ -8168,7 +8168,7 @@ test("Lua matches the neutral scalar numeric contract exactly", function()
   assert_json_equal(actual, contract.expected, "all scalar numeric cases")
 end)
 
-test("runtime logical helpers are eager boolean values over governed truthiness", function()
+test("runtime logical helpers are eager boolean values over typed truthiness", function()
   local source = uniform_binding_action_source([[
 seen = []
 and_value = and(
@@ -8180,18 +8180,15 @@ or_value = or(
   { push(seen, "or-second"); return(false) }
 )
 not_value = not(
-  { push(seen, "not-first"); return(false) },
-  { push(seen, "not-extra"); return(true) }
+  { push(seen, "not-first"); return(false) }
 )
 return({
   "and_value" : and_value,
   "or_value" : or_value,
   "not_value" : not_value,
-  "and_empty" : and(),
-  "or_empty" : or(),
-  "not_empty" : not(),
-  "lua_aggregate_truthiness" : and([], {}, true),
-  "lua_zero_truthiness" : or("0", 0, ""),
+  "empty_aggregate_truthiness" : or([], {}),
+  "nonempty_aggregate_truthiness" : and([undef], { "k" : undef }),
+  "string_zero_truthiness" : and("0"),
   "receiver_value" : and(1, 2).with() { return(value) },
   "seen" : copy(seen)
 })
@@ -8200,11 +8197,9 @@ return({
     and_value = false,
     or_value = true,
     not_value = true,
-    and_empty = false,
-    or_empty = false,
-    not_empty = true,
-    lua_aggregate_truthiness = true,
-    lua_zero_truthiness = false,
+    empty_aggregate_truthiness = false,
+    nonempty_aggregate_truthiness = true,
+    string_zero_truthiness = true,
     receiver_value = true,
     seen = json.array({
       "and-first",
@@ -8212,7 +8207,6 @@ return({
       "or-first",
       "or-second",
       "not-first",
-      "not-extra",
     }),
   }), "logical helper values and eager order")
 end)

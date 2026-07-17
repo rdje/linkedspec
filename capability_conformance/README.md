@@ -72,8 +72,10 @@ zero complete / eight pending. Perl consumes the neutral artifact through typed 
 its shared typed truth/arity seam plus native, serialized, generated-plan, and emitted proof; Dart uses one typed
 helper/control seam plus native, normalized, generated-plan, standalone-emitted, and primary proof. Julia
 preserves its typed eager helper/control seam and adds native, normalized, generated-plan, standalone-emitted,
-primary, and exact diagnostic proof. The current ledger is four complete / four pending: Lua, generated/primary
-projection, recurring composed proof, and public no-drift remain owned by `FUTURE-PARITY-BACKLOG.5.2.6-.9`.
+primary, and exact diagnostic proof. Lua consumes the same contract through native, reconstructed, generated-plan,
+emitted-module, primary, and exact diagnostic proof on PUC Lua and LuaJIT. The current ledger is five complete /
+three pending: generated/primary projection, recurring composed proof, and public no-drift remain owned by
+`FUTURE-PARITY-BACKLOG.5.2.7-.9`.
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,

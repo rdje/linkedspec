@@ -139,7 +139,7 @@ end
 
 local function runtime_diagnostic(engine, fields)
   local effective_rule = fields.rule_label or fields.top_rule
-  return setmetatable({
+  local diagnostic = {
     type = "runtime_parser",
     stage = fields.stage,
     owner_stage = "lua_runtime",
@@ -151,7 +151,11 @@ local function runtime_diagnostic(engine, fields)
     rule_label = fields.rule_label,
     handler_source_label = fields.handler_source_label or
       (effective_rule and ("lua_runtime:rule:" .. effective_rule) or "lua_runtime"),
-  }, DIAGNOSTIC_MT)
+  }
+  for _, name in ipairs({ "code", "helper_name", "actual_arity", "expected_arity" }) do
+    if fields[name] ~= nil then diagnostic[name] = fields[name] end
+  end
+  return setmetatable(diagnostic, DIAGNOSTIC_MT)
 end
 
 local function with_runtime_diagnostic(value, diagnostic)
@@ -814,9 +818,10 @@ local function runtime_truthy(value)
   if value == json.null then return false end
   if type(value) == "boolean" then return value end
   if type(value) == "number" then return value ~= 0 end
-  if type(value) == "string" then return value ~= "" and value ~= "0" end
+  if type(value) == "string" then return value ~= "" end
   local kind = json.kind(value)
-  if kind == "array" or kind == "harray" then return true end
+  if kind == "array" then return #value > 0 end
+  if kind == "harray" then return next(value) ~= nil end
   return true
 end
 
@@ -834,13 +839,47 @@ local function evaluate_runtime_logical(
   accumulator,
   edge_state
 )
+  local expected = name == "not" and
+    "exactly 1 positional argument" or "at least 1 positional argument"
+  local valid
+  if name == "not" then
+    valid = #expr.args == 1
+  else
+    valid = #expr.args >= 1
+  end
+  for _, argument in ipairs(expr.args) do
+    if argument.argument_kind ~= "positional" then valid = false end
+  end
+  if not valid then
+    local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+    local detail = "helper_arity_mismatch: helper_name=" .. name ..
+      " actual_arity=" .. #expr.args .. " expected_arity=" .. expected ..
+      " in rule " .. tostring(rule_label)
+    fail(detail, {
+      code = "helper_arity_mismatch",
+      helper_name = name,
+      actual_arity = #expr.args,
+      expected_arity = expected,
+      diagnostic = runtime_diagnostic(engine, {
+        stage = "helper_arity_mismatch",
+        summary = "Lua logical helper arity failed",
+        detail = detail,
+        top_rule = ctx.top_rule,
+        rule_label = rule_label,
+        code = "helper_arity_mismatch",
+        helper_name = name,
+        actual_arity = #expr.args,
+        expected_arity = expected,
+      }),
+    })
+  end
+
   local values = {}
   for _, arg in ipairs(expr.args) do
     values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
   end
 
   if name == "and" then
-    if #values == 0 then return false end
     for _, value in ipairs(values) do
       if not runtime_truthy(value) then return false end
     end
@@ -851,7 +890,7 @@ local function evaluate_runtime_logical(
     end
     return false
   end
-  return #values == 0 or not runtime_truthy(values[1])
+  return not runtime_truthy(values[1])
 end
 
 invalid_helper_arity = function(name, expected, actual)
@@ -3913,7 +3952,7 @@ function M.to_json(value)
   end
   local node_type = M.node_type(value)
   if node_type == "RuntimeDiagnostic" then
-    return json.harray({
+    local diagnostic = json.harray({
       type = value.type,
       stage = value.stage,
       owner_stage = value.owner_stage,
@@ -3925,6 +3964,10 @@ function M.to_json(value)
       rule_label = value.rule_label,
       handler_source_label = value.handler_source_label,
     })
+    for _, name in ipairs({ "code", "helper_name", "actual_arity", "expected_arity" }) do
+      if value[name] ~= nil then diagnostic[name] = value[name] end
+    end
+    return diagnostic
   elseif node_type == "RuntimeLifecycleEvent" then
     return json.harray({ rule_label = value.rule_label, lifecycle = value.lifecycle, line = value.line })
   elseif node_type == "RuntimeDiagnosticOutputEvent" then

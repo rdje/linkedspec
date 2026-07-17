@@ -855,11 +855,11 @@ also records
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl
 `and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately owned by `.5.2`; Lua
 `.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local closure is a false five-backend
-normalization claim. Planning audit `.5.2.0` now proves this is not one simple mismatch. Perl conditions use lazy
-host `&&`/`||` while direct logical values remain raw/broken; Dart short-circuits; Rust, Julia, and Lua are eager.
-Truthiness has three profiles: Perl/Lua (`"0"` false, empty aggregates true), Dart/Julia (all nonempty strings
-true, empty aggregates false), and Rust (`"0"` plus `"false"` false, empty aggregates false). Native/generated
-execution agrees within Rust, Dart, Julia, and Lua. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are
+normalization claim. Planning audit `.5.2.0` proved this was not one simple mismatch. At that audit boundary Perl
+conditions used lazy host `&&`/`||` while direct logical values remained raw/broken; Dart short-circuited; Rust,
+Julia, and Lua were eager. Truthiness had three profiles: Perl/Lua (`"0"` false, empty aggregates true),
+Dart/Julia (all nonempty strings true, empty aggregates false), and Rust (`"0"` plus `"false"` false, empty
+aggregates false). Native/generated execution agreed within each backend. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are
 therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1` now adopts ADR `0043`: valid
 `and`/`or` take one or more operands, `not` takes exactly one, all valid operands evaluate once left-to-right,
 all results are booleans, and invalid arity fails before effects. Typed truth makes only null, false, numeric zero,
@@ -874,8 +874,11 @@ helpers and lazy controls through `runtimeLogicalTruth`, rejects call shape befo
 operand once left-to-right, and proves native, normalized, generated-plan, compiled emitted, and primary roles.
 Julia `.5.2.5` preserves its typed eager `_runtime_truthy` seam, rejects all four invalid arities before effects,
 and proves native, normalized, generated-plan, compiled emitted, and primary roles with optional exact diagnostic
-fields. The ledger is 4 complete / 4 pending before `.5.2.6-.9`. Explicit codeblock literals remain separately owned by
-`.11`; the logical contract's typed codeblock row does not activate that syntax.
+fields. Lua `.5.2.6` aligns `runtime_truthy` and pre-effect arity across native, reconstructed, generated-plan,
+loaded emitted-module, and primary roles on PUC Lua and LuaJIT. Its unchanged consumer passes 238/238 per ABI and
+the complete Lua gate remains 177/177 per ABI plus CLI 62x2 and corpus 105/105. The ledger is 5 complete / 3
+pending before `.5.2.7-.9`. Explicit codeblock literals remain separately owned by `.11`; the logical contract's
+typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
 reference hazards in the pre-repair transport: Perl evaluated `print_each` prefix/suffix inside its host loop,
 host output bypassed the primary command's strict UTF-8 encoder, and lowered host `exit` bypassed canonical

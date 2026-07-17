@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.6` — validate before evaluation and stay within Lua's chunk budget):
+  Lua already collected valid logical operands eagerly once left-to-right and resolved registered user functions
+  before built-in helpers. Preserve both properties. Validate the original built-in call before collection, then
+  compose retained values through `runtime_truthy`; this produces pre-effect arity failures without changing
+  static callable precedence or turning lazy controls eager.
+
+  The interpreter chunk is already at Lua's 200-local-variable ceiling, so a new top-level local validator makes
+  both PUC Lua and LuaJIT reject the module. Keep this small guard inside the existing logical evaluator instead of
+  adding another chunk local. Optional diagnostic fields preserve unrelated projections. Prove the same emitted
+  module that a caller loads, not only the plan, and run one unchanged 238-assertion consumer on both ABIs: the
+  pre-repair 51/238 baseline precisely isolated string-zero, empty-aggregate, lazy-control, legacy arity, and
+  diagnostic drift; the repaired consumer is 238/238 on each runtime.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.5` — preserve the evaluator; validate at its typed call boundary):
   Julia already had both selected semantics: `_runtime_truthy` encoded nonempty-string/empty-aggregate truth for
   helpers and controls, and pure-helper arguments were collected eagerly once left-to-right. The repair therefore

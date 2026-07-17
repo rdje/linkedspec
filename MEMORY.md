@@ -10,21 +10,22 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.5` — Julia preserves its existing typed helper/control truth
-  seam and eager booleans while adding pre-effect logical arity, exact optional structured fields, and native/
-  normalized/generated-plan/compiled-emitted/primary proof; rollout is 4 complete / 4 pending.
-- latest_commit: `709104a0` — `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers`
-  (ahead: 176; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers`.
-- active_work_unit: closing Julia logical-helper rollout `FUTURE-PARITY-BACKLOG.5.2.5`; cursor implementation
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.6` — Lua aligns its typed helper/control truth, pre-effect
+  logical arity, exact optional structured fields, and native/reconstructed/generated-plan/loaded-emitted/primary
+  proof on PUC Lua and LuaJIT; rollout is 5 complete / 3 pending.
+- latest_commit: `c6e39861` — `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers`
+  (ahead: 177; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers` after canonical closeout.
+- active_work_unit: verified dual-ABI Lua logical-helper rollout `FUTURE-PARITY-BACKLOG.5.2.6` closing in its
+  exact commit; cursor implementation
   `.9.1.2-.9` is dependency-ordered but remains pending until explicitly reached after the logical program.
-- next_action: run final governance checks, commit `.5.2.5`, verify a clean handoff, then activate dual-ABI Lua
-  logical rollout `.5.2.6` with task/MEMORY ownership before behavior work.
-- current_proof: Julia's exact neutral consumer passes 177 assertions across typed truth, native/normalized/
-  generated-plan/compiled-emitted/primary values/effects/controls and four pre-effect arities. Full package proof
-  passes 1,671 assertions, the authoritative Julia gate and shared CLI 62x2 pass, corpus is 105/105, and the checker
-  is 4 complete / 4 pending with 15 mutations. Canonical local CI passes reference CLI 62x2, Phase 0 `1..1031`
-  in 607 seconds, and the optional complete Julia gate. ADR `0044` remains the exact pending future cursor authority.
+- next_action: run final governance/mdBook/whitespace checks, commit `.5.2.6`, clear the message file, verify the
+  repo clean, then activate generated/primary logical projection `.5.2.7` as the next task-owned PNT slice.
+- current_proof: Lua's unchanged consumer moved from identical 51/238 baselines to 238/238 on PUC Lua and LuaJIT
+  across typed truth, native/reconstructed/generated-plan/loaded-emitted/primary values/effects/controls and four
+  pre-effect arities. The authoritative dual-ABI gate passes diagnostic 119, logical 238, full 177, shared CLI
+  62x2, and corpus 105/105. The neutral checker is 5 complete / 3 pending with 15 mutations. Canonical local CI
+  passes reference CLI 62x2 and Phase 0 `1..1031` in 609 seconds. ADR `0044` remains the exact pending future cursor authority.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -35,6 +36,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified Julia implementation/tests/docs and completed canonical proof
-  await final governance checks and the owning commit; no background job remains. Mutation campaigns remain parked;
+- blockers: none. in_flight_uncommitted: verified Lua `.5.2.6` implementation/tests/docs/ledger await final
+  governance/mdBook checks and the exact prepared commit; no background job remains. Mutation campaigns remain parked;
   ignored `rgx/subs/pgen` work remains untouched.

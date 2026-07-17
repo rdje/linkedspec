@@ -8,6 +8,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.6 — align Lua logical helpers and truthiness**
+  (DONE — PUC Lua/LuaJIT native, reconstructed, generated-plan/emitted, and primary roles conform at 5 complete /
+  3 pending; generated/primary `.5.2.7` follows after the clean commit).
+
+  **Result:** `runtime_truthy` is now Lua's single typed helper/control truth seam: only null, false, numeric zero,
+  empty strings, and empty arrays/harrays are false. Built-in `and`/`or` require one-plus operands and `not`
+  requires exactly one before effects; valid calls remain eager once-left-to-right booleans. Logical failures alone
+  add exact `code`, `helper_name`, `actual_arity`, and `expected_arity` fields to `RuntimeDiagnostic`.
+
+  **Proof:** The unchanged consumer passes 238/238 on each ABI across all 17 typed rows, values, effects, receiver,
+  lazy controls, four inert invalid calls, native/reconstructed/generated-plan/emitted/primary roles, and inert
+  contextual codeblocks. The authoritative gate passes diagnostic 119/119, logical 238/238, and full 177/177 per
+  ABI, plus shared CLI 62x2 and corpus 105/105. The checker reports 5/3 and rejects 15 mutations.
+  Canonical local CI passes governance/contracts, reference CLI 62x2, and Phase 0 `1..1031` in 609 seconds.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.5 — align Julia logical helpers and truthiness**
   (DONE — Julia native/normalized/generated-plan/standalone-emitted/CLI behavior conforms at 4 complete / 4
   pending; dual-ABI Lua `.5.2.6` follows after the clean commit).

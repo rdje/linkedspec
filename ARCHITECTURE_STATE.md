@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Lua logical rollout `FUTURE-PARITY-BACKLOG.5.2.6` makes `runtime_truthy` the exact typed
+  seam for eager logical helpers and lazy controls on both ABIs. Built-in one-plus `and`/`or` and exact-one `not`
+  arity reject before effects while registered user functions retain precedence; valid values remain eager once-
+  left-to-right booleans. Four optional `RuntimeDiagnostic` fields preserve unrelated JSON. The unchanged neutral
+  consumer moves from identical 51/238 baselines to 238/238 on PUC Lua and LuaJIT across native/reconstructed/
+  generated-plan/loaded-emitted/primary roles. The authoritative gate passes diagnostic 119, full 177, CLI 62x2,
+  and corpus 105/105; canonical local CI passes reference CLI 62x2 and Phase 0 `1..1031`/609s. The ledger is 5/3;
+  generated/primary `.5.2.7` is next.
 - `2026-07-17` refresh: Julia logical rollout `FUTURE-PARITY-BACKLOG.5.2.5` preserves the existing
   `_runtime_truthy` seam shared by eager logical values and lazy controls. Direct call dispatch resolves user
   functions first, then validates one-plus `and`/`or` and exact-one `not` before evaluating any operand; valid
@@ -13,7 +21,7 @@ This document is the current high-level technical reading of the project shape. 
   The exact 177-assertion consumer covers all 17 typed rows, native/normalized/generated-plan/compiled-emitted/
   primary values and effects, receiver and lazy-control behavior, and four inert invalid calls. Full package,
   process CLI, shared CLI 62x2, and 105/105 corpus proof pass. Canonical local CI also passes reference CLI 62x2,
-  Phase 0 `1..1031`/607s, and the optional complete Julia gate. The ledger is 4/4; dual-ABI Lua `.5.2.6` is next.
+  Phase 0 `1..1031`/607s, and the optional complete Julia gate. That slice advanced the ledger to 4/4 before Lua.
 - `2026-07-17` refresh: Dart logical rollout `FUTURE-PARITY-BACKLOG.5.2.4` makes
   `runtimeLogicalTruth` the one typed truth boundary for eager helpers and lazy controls. `ActionCallExpr` arity
   rejects empty `and`/`or`, empty `not`, multi-argument `not`, and non-positional calls before operand evaluation;
@@ -70,9 +78,9 @@ This document is the current high-level technical reading of the project shape. 
   behavior. Toolbox, descriptor, source, native, and generated probes expose two Perl mechanisms: conditions lower
   through lazy host `&&`/`||`/`!`, while direct return/assignment/receiver logical values remain raw/broken and
   `not(false, true)` can lose its first token as a legacy optional scope. Rust/Julia/Lua eagerly evaluate all
-  arguments, Dart short-circuits, and current empty calls differ. Truthiness has three profiles rather than two:
+  arguments, Dart short-circuits, and pre-repair empty calls differ. At that audit boundary truthiness had three profiles:
   Perl/Lua (`"0"` false, empty aggregates true), Dart/Julia (all nonempty strings true, empty aggregates false),
-  and Rust (`"0"` and `"false"` false, empty aggregates false). Generated execution matches native behavior on
+  and Rust (`"0"` and `"false"` false, empty aggregates false). Generated execution matched native behavior on
   Rust, Dart, Julia, and both Lua ABIs, so neutral contract `.5.2.1` must precede backend `.2-.6`, generated/
   primary `.7`, recurring gate `.8`, and public no-drift `.9`. This audit changes no runtime semantics.
   Focused Perl 4, Rust 137, Dart 60, complete Julia, and dual-ABI Lua 177/177 proof passes; canonical local CI
@@ -390,8 +398,8 @@ This document is the current high-level technical reading of the project shape. 
   `0042` and `linkedspec-diagnostic-output-v1` now define the exact backend-neutral arity, eager evaluation,
   rendering, typed event, quiet sink, failure, exit, generated, and phase-trace-separated target. Perl native
   `.5.1.2`, Rust native `.5.1.3`, Dart native `.5.1.4`, and Julia native `.5.1.5` now consume that exact target
-  through separate per-invocation event seams; the rollout ledger is 4 complete / 4 pending and Lua formal native
-  admission `.5.1.6` is next.
+  through separate per-invocation event seams; that historical rollout ledger was 4 complete / 4 pending before
+  Lua formal native admission `.5.1.6`, which has since closed.
 - `2026-07-15` refresh: Lua native capture/cursor parity is closed. A source-derived inventory finds 62 unique
   current capture/mark/input/cursor/control calls and exact 62/62 agreement across ActionIR contract family,
   admitted names, interpreter dispatch, and focused execution sources. Four placement-marker spellings remain

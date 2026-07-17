@@ -2972,14 +2972,39 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.6`
-  Status: `pending`
+  Status: `done`
   Goal: Align Lua logical arity and truthiness with the neutral contract on both ABIs.
   Dependencies: `.5.2.1`
   Acceptance: Preserve eager ordered boolean composition and receiver flow while enforcing the selected arities/
     truth table through native and serialized execution on PUC Lua and LuaJIT; retain existing helper ownership,
     generated routing, and lazy-control separation.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0043`, the neutral/audit/Lua logical Knowledge Map facts, unchanged
+    JSON/checker, TOOLBOX guidance, and exact Lua parser/compiler/runtime/generated/diagnostic owners before
+    behavior edits; measure both PUC Lua and LuaJIT through one target-level consumer.
+  - [x] **UNCHANGED DUAL-ABI CONSUMER** — Add or extend one exact neutral consumer over every Lua-representable
+    truth/value/effect/receiver/control/arity row across native, serialized/reconstructed, generated, and primary
+    roles on both ABIs; classify any model-level row Lua cannot construct without expanding syntax scope.
+  - [x] **ONE LUA TRUTH SEAM** — Route eager logical helpers and lazy controls through one explicit typed truth
+    function, preserving numeric zero, nonempty strings, empty aggregates, null, booleans, and inert codeblocks
+    without host Lua truth coercion or rendering shortcuts.
+  - [x] **ARITY BEFORE EFFECTS / EAGER VALUES** — Enforce one-plus positional `and`/`or` and exact-one positional
+    `not` before any operand evaluation while preserving valid once-only left-to-right evaluation and booleans.
+  - [x] **ALL LUA PROJECTIONS / BOTH ABIS** — Lock native compiled, serialized/reconstructed, generated-plan/
+    emitted, receiver, lazy-control, structured-diagnostic, primary, PUC Lua, and LuaJIT roles from the unchanged
+    fixture without changing unrelated diagnostics, trace, source attribution, or generated routing.
+  - [x] **NO REGRESSION / LOCKSTEP** — Promote only `lua_native`; keep generated/gate/public legs pending, run
+    focused and complete dual-ABI Lua/corpus/CLI/contract/governance gates, synchronize docs/KM/task/memory, and
+    commit cleanly before generated/primary `.5.2.7` becomes active. Do not run an implementation mutation campaign.
+  Verification: Baseline: the unchanged 238-assertion consumer passed 51 and failed 187 identically on PUC Lua
+    and LuaJIT; valid eager effects and inert codeblock truth already passed, while failures were confined to
+    string-zero/empty-aggregate truth, lazy controls, legacy arity, and exact diagnostic projection. After repair,
+    the consumer passes 238/238 on each ABI across native/reconstructed/generated-plan/loaded-emitted/primary roles.
+    The authoritative Lua gate passes diagnostic 119/119, logical 238/238, full 177/177 per ABI, shared CLI 62x2,
+    and corpus 105/105. The neutral checker passes 5 complete / 3 pending with 15 mutations. Canonical local CI
+    passes governance/contracts, reference CLI 62x2, and Phase 0 `1..1031` in 609 seconds. Knowledge Map, memory,
+    task metadata, doctrines, mdBook, and whitespace pass; no implementation mutation campaign ran.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.7`
   Status: `pending`
@@ -5489,13 +5514,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
-backend-neutral policy `.5.2.1` plus Perl `.5.2.2`, Rust `.5.2.3`, Dart `.5.2.4`, and Julia `.5.2.5` native
-rollouts are complete at 4/4. Dual-ABI Lua logical alignment `.5.2.6` is next. The
+backend-neutral policy `.5.2.1` plus Perl `.5.2.2`, Rust `.5.2.3`, Dart `.5.2.4`, Julia `.5.2.5`, and dual-ABI
+Lua `.5.2.6` native rollouts are complete at 5/3. Focused, authoritative, and canonical gates are green;
+generated/primary `.5.2.7` is next after the clean `.5.2.6` commit. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the pending `.9.1.2-.9` rollout. The logical-helper parent remains the selected
-program, with Lua `.5.2.6` next after the clean Julia commit and before that separately split cursor implementation
-program.
+program, with generated/primary `.5.2.7` next after the clean `.5.2.6` commit and before that separately split
+cursor implementation program.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6407,7 +6433,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Dual-ABI Lua logical alignment `.5.2.6` activates after the clean Julia `.5.2.5` commit. Cursor/edge
+- None. Dual-ABI Lua logical alignment `.5.2.6` is verified and closing in its exact commit; generated/primary
+  `.5.2.7` follows only after the repo is clean. Cursor/edge
   implementation `.9.1.2-.9`, structured-format, write-vivification, and companion-book work remain pending and
   are not implicitly activated.
 
@@ -6415,6 +6442,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.6` | Identical 51/238 PUC Lua/LuaJIT baselines; repaired 238/238 unchanged consumer over all 17 typed rows, values/effects/receiver/lazy controls/four pre-effect arities, native/reconstructed/generated-plan/loaded-emitted/primary roles, and inert contextual blocks; authoritative dual-ABI diagnostic 119/logical 238/full 177, CLI 62x2, corpus 105/105; neutral 5/3 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 62x2 and Phase 0 `1..1031`/609s. | PASS. One typed Lua helper/control truth seam, pre-effect arity, eager valid values, exact optional fields, registry precedence, and generated routing align both ABIs; only `lua_native` advances and generated/primary `.5.2.7` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.5` | Exact 177-assertion Julia consumer over 17 typed truth rows, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; full 1,671-assertion package, primary process, CLI 62x2, corpus 105/105; neutral 4/4 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`/607s, and the optional complete Julia gate. | PASS. Existing typed truth/eager evaluation stay intact, built-in logical arity now rejects before effects with exact structured fields, only `julia_native` advances, and dual-ABI Lua `.5.2.6` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.4` | Exact 24/24 Dart consumer over typed truth, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; format/analyze, all 245 tests, CLI 62x2, corpus 105/105; neutral 3/5 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`, and the optional complete Dart gate. | PASS. One typed helper/control truth seam, eager logical values, pre-effect arity, and exact structured fields align Dart; only `dart_native` advances and Julia `.5.2.5` follows. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.3` | Neutral Rust consumer over representable truth rows, exact values/effects/receiver/lazy controls/four arity failures; native/serialized/direct/generated-plan/compiled-emitted roles; complete 188-core/137-runtime/105-oracle/105-generated/197-integration and all focused Rust suites; Rust primary 62x2; neutral 2/6 checker plus 15 mutations; KM/memory/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2 and Phase 0 `1..1031`/649s. | PASS. One typed Rust truth seam and pre-effect logical arity now match ADR `0043`; only `rust_native` advances, explicit codeblock syntax stays `.11`-owned, and Dart `.5.2.4` is next. |
@@ -6575,6 +6603,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.2.6` | `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers` | Shared typed truth seam, pre-effect arity, exact optional fields, dual-ABI native/reconstructed/generated-plan/loaded-emitted/primary consumer, 5/3 rollout, and generated/primary handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.5` | `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers` | Existing typed truth/eager semantics, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 4/4 rollout, and Lua handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.4` | `FUTURE-PARITY-BACKLOG.5.2.4 - align Dart logical helpers` | Shared typed truth seam, eager once-only values, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 3/5 rollout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.3` | `FUTURE-PARITY-BACKLOG.5.2.3 - align Rust logical helpers` | Shared typed truth seam, pre-effect arity, exact structured fields, native/serialized/generated-plan/compiled-emitted consumer, 2/6 rollout, and Dart handoff. |
@@ -6735,6 +6764,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.5.2.6` aligns Lua's `runtime_truthy` helper/control seam with ADR `0043`, validates one-plus
+  `and`/`or` and exact-one `not` before effects, retains eager once-left-to-right valid operands and registry-first
+  functions, and adds exact logical-only optional diagnostic fields. The unchanged consumer moves from identical
+  51/238 baselines to 238/238 on PUC Lua and LuaJIT across native/reconstructed/generated-plan/loaded-emitted/
+  primary roles. The authoritative gate passes diagnostic 119, logical 238, full 177 per ABI, CLI 62x2, corpus
+  105/105, and the 5/3 neutral checker with 15 mutations. Canonical local CI passes reference CLI 62x2 and Phase
+  0 `1..1031`/609s. Only `lua_native` advances; generated/primary `.5.2.7` is next.
 - `2026-07-17`: `.5.2.5` preserves Julia's existing `_runtime_truthy` helper/control seam and eager once-only
   left-to-right logical evaluation, while direct built-in call dispatch now rejects invalid arity before operand
   effects with exact optional structured fields. The unchanged consumer passes 177 assertions across native,

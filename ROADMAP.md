@@ -959,14 +959,16 @@ standalone-emitted execution. Dart `.5.2.4` removes helper short-circuit and emp
 helper/control truth seam, pre-effect arity, eager once-only operands, structured fields, and native/normalized/
 generated-plan/standalone-emitted/primary proof. Julia `.5.2.5` retains its eager typed `_runtime_truthy` seam
 while adding exact pre-effect arity, optional structured fields, and native/normalized/generated-plan/
-independently compiled emitted/primary proof. Rollout is 4 complete / 4 pending with dual-ABI Lua `.5.2.6` next.
+independently compiled emitted/primary proof. Lua `.5.2.6` now aligns `runtime_truthy`, pre-effect arity, and exact
+structured diagnostics across native/reconstructed/generated-plan/emitted/primary roles on both ABIs. Rollout is
+5 complete / 3 pending with generated/primary projection `.5.2.7` next.
 Director-priority design audit `.9.1.0` finds no valid objective for a public/global
 `parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
 parity split. Director capture `.9.1.1.0` fixes rule-local ownership: parent OR/AND mode never propagates to or
 overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edges, explicit cross-family legality,
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
-is dependency-split under `.9.1.2-.9`; Lua logical `.5.2.6` continues after the clean Julia commit and before that
-program activates.
+is dependency-split under `.9.1.2-.9`; generated/primary logical projection `.5.2.7` follows the clean Lua commit
+before that program activates.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only
