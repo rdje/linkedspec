@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.6` — make Perl admission contract-declared and omission-sensitive):
+  Admission is a composition problem, not another runtime implementation seam. Extending the existing neutral
+  Perl contract consumer keeps family/edge/diagnostic proof and the final projection in one contract-driven place.
+  The JSON declares 14 ordered roles; the test requires an exact key set, executes in contract order, and proves
+  each completed once. Generated direct/trace state intentionally follows emitted-source state in that order.
+
+  The offline checker separately requires one `role => sub { ... }` marker per declaration and the exact
+  `tools/run_ci_local.sh` invocation. A deleted role, renamed consumer, missing CI registration, or premature
+  rollout state therefore cannot pass through a self-consistent test edit. Two new mutations cover role-list and
+  consumer-path omission; the existing rollout mutation reverses direction now that only Perl is complete.
+
+  The consumer reads removed option names and exact primary diagnostics from the neutral contract instead of
+  respelling migration tokens. This both proves the dynamic API/CLI boundaries and preserves the exact 72-file
+  token-derived inventory. No compatibility route, runtime branch, fixture fork, or backend claim is introduced.
+
+  Focused admission/constituent composition passes 410 assertions. Standalone Phase 0 passes 1,031/1,031 in 641
+  seconds; canonical CI runs the 288-test consumer, preserves CLI 63x2, passes Phase 0 1,031/1,031 in 642 seconds,
+  and exits 0. This is sufficient to advance only `perl_reference`, close `.9.1.3`, and keep Rust inactive until
+  the clean commit boundary.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.5` — reject at option preparation, migrate shared bytes reference-first):
   The dynamic boundary must test key presence, not value validity: both `parse_mode` and `parseMode` reject even
   when their old value was valid or undefined. Compiler clears the caller-owned runtime context first, then records

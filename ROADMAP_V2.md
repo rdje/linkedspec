@@ -130,7 +130,7 @@ mode-sensitive bare edges, explicit cross-family legality, removal diagnostics, 
 generated-source v2 family derivation, and conformance. Implementation is split under `.9.1.2-.9`; generated/
 primary logical projection `.5.2.7`, recurring logical gate `.5.2.8`, and public no-drift `.5.2.9` are complete;
 neutral cursor `.9.1.2` is verified with an executable 36-family/18-edge/8-parent-child contract, a token-derived
-migration inventory, 27 drift mutations, and 1-complete/7-pending rollout ledger. Perl `.9.1.3` is split into
+migration inventory and 27 drift mutations. Perl `.9.1.3` is split into
 `.0-.6`; verified gate-safety preflight `.9.1.3.0` maps exact implementation
 seams and assigns ten shared reference byte fixtures to `.9.1.3.5` because their removal affects 35 canonical
 cases. Normalization `.9.1.3.1` implements typed complete-line candidates, forward-declaration resolution,
@@ -143,7 +143,11 @@ regeneration, and makes transitional option values source-byte neutral. API/CLI 
 legacy spellings during option preparation, removes the primary flag/help/request field with exact usage exit 2,
 and keeps the reference matrix at 63x2 through structural default-seek/AND-consume cases. The token-derived
 migration inventory is 72 after sixteen completed Perl test/fixture paths become token-free and
-`GeneratedSource.pm` gains the emitter-removal envelope; composed Perl admission `.9.1.3.6` follows.
+`GeneratedSource.pm` gains the emitter-removal envelope. Composed admission `.9.1.3.6` now requires 14 exact
+live/descriptor/emitted/generated/loaded/trace/diagnostic/recursive/structural/primary roles, registers that
+consumer in canonical CI, rejects 29 total drift mutations, and advances only `perl_reference` to complete. The
+cursor rollout is 2 complete / 6 pending at an unchanged 72-file inventory; Rust `.9.1.4` follows after the clean
+Perl parent closeout commit.
 identical dependency-regex index identity is tracked under `.9.1.8.1` before public closeout.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are

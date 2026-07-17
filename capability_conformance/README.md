@@ -38,12 +38,13 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 72-file migration inventory and rejects 27 representative semantic, topology,
-diagnostic, generated, inventory, and admission mutations. Only `neutral_contract_and_inventory` is complete in
-the composed ledger, so rollout remains 1 complete / 7 pending. Perl implementation is current through live,
-descriptor-v1, generated-source-v2, and API/CLI removal semantics; composed Perl admission and the later backends
-remain dependency-ordered. The shared generated-source-v1 capability ledger remains the convergence baseline for
-unmigrated backends while the cursor rollout advances each current emitter in order.
+The checker currently owns an exact 72-file migration inventory and rejects 29 representative semantic, topology,
+diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
+live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
+both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
+runs that consumer. `neutral_contract_and_inventory` and `perl_reference` are complete, so rollout is 2 complete /
+6 pending; Rust and the later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
+remains the convergence baseline for unmigrated backends while the cursor rollout advances each current emitter.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always

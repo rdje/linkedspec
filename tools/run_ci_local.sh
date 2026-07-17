@@ -100,6 +100,7 @@ require_tracked_file tools/check_language_capability_coverage.pl
 require_tracked_file tools/check_native_spec_resolution_contract.pl
 require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
+require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
 require_tracked_file capability_conformance/callable_codeblock_contract.json
@@ -191,6 +192,7 @@ perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
+perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
@@ -211,6 +213,9 @@ python3 tools/check_logical_helper_contract.py
 
 log "checking backend-neutral rule-local cursor and bare-edge contract"
 python3 tools/check_rule_local_cursor_contract.py
+
+log "running composed Perl rule-local cursor admission consumer"
+PERL5LIB= prove -Iperl t/rule_local_cursor_perl_contract.t
 
 log "checking portable callable-signature contract"
 python3 tools/check_callable_signature_contract.py

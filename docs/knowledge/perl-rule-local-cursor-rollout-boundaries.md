@@ -14,10 +14,13 @@ answers:
   - "how does Perl generated source v2 reject a v1 artifact"
   - "why did the rule local cursor checker fail at clean commit ccf4cad7"
   - "does the Perl reference still accept parse_mode or --parse-mode"
+  - "where is composed Perl rule local cursor admission"
+  - "what roles does Perl cursor admission cover"
+  - "is Perl rule local cursor rollout admitted"
 date: 2026-07-17
-status: confirmed Perl live, descriptor-v1, generated-source-v2, and API/CLI removal semantics; admission pending
+status: confirmed and admitted Perl live, descriptor-v1, generated-source-v2, API/CLI, and composed projection
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .9.1.3.2 makes normal live/loaded handlers spend intrinsic policy; .9.1.3.3 projects linkedspec-rule-local-cursor-v1 plus ordered resolved_edges; .9.1.3.4 emits linkedspec-generated-source-v2 and rejects v1 reconstruction; and .9.1.3.5 rejects parse_mode/parseMode at prepare_options, removes --parse-mode from help/request trace with targeted usage exit 2, migrates all owned callers and exact shared bytes, and passes the 63-case reference suite in both environments. The inventory is 72 after sixteen paths become token-free and GeneratedSource joins diagnostic ownership."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .2 makes live/loaded handlers intrinsic; .3 projects descriptor v1; .4 emits generated-source v2; and .5 removes the API/CLI override while preserving 63x2. Admission .6 declares and executes 14 exact live default/AND, descriptor, emitted, generated direct/trace, loaded, mixed, recursive, structural, removal, primary, and diagnostic roles. The checker verifies every marker plus canonical registration, observes all eight portable codes, rejects 29 mutations, retains 72 migration files, and advances only perl_reference for a 2/6 rollout."
 reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -62,6 +65,12 @@ only label/family plan facts, derives five seek and five consume families, and
 rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI removal
 is current: both dynamic spellings reject at `prepare_options`, and the retired
 flag returns the targeted usage failure rather than being accepted or ignored.
+
+Composed admission is `t/rule_local_cursor_perl_contract.t`. Its role table is read from the neutral JSON and must
+match exactly; each role runs once, then the test proves the completed role set. The independent checker also
+requires one source marker for each role and the test's canonical `tools/run_ci_local.sh` registration. Thus a
+missing live, descriptor, emitted, generated direct/trace, loaded, mixed-parent, recursion, structural, removal,
+primary-command, or diagnostic projection fails before rollout can claim the Perl leg.
 
 The exact token inventory has a cross-tree coupling worth preserving. Commit
 `ccf4cad7` removed the last `parse_mode` token from the action/lifecycle book

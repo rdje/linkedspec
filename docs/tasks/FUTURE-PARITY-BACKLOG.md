@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-17` (Perl API/CLI and reference-fixture migration `.9.1.3.5` is complete;
-  composed Perl admission `.9.1.3.6` follows after the clean commit)
+- Last updated: `2026-07-17` (composed Perl admission `.9.1.3.6` is verified at 2/6 and closes parent
+  `.9.1.3`; Rust `.9.1.4` follows after the clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3330,7 +3330,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.2 - adopt rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Make the Perl reference consume the neutral rule-local cursor and bare-edge contract.
   Children: `.9.1.3.0`, `.9.1.3.1`, `.9.1.3.2`, `.9.1.3.3`, `.9.1.3.4`, `.9.1.3.5`, `.9.1.3.6`
   Dependencies: `.9.1.2`
@@ -3338,8 +3338,14 @@ before implementation.
     remove public/global override paths; project the v1 cursor descriptor; emit/validate generated-source v2;
     migrate reference specs/tests; preserve low-level matcher primitives; and prove live, descriptor, emitted,
     generated, loaded-spec, trace, diagnostic, and primary-command roles without mixed-ownership ambiguity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-17.** Children `.0-.6` normalize all bare/explicit edges, derive and spend
+    intrinsic rule policy through live/loaded/descriptor/emitted/generated/trace paths, remove global API/CLI
+    ownership, preserve 63x2 reference bytes, and compose 14 required roles plus all eight portable diagnostics.
+    The exact inventory is 72, checker rollout is 2/6 with 29 rejected mutations, capability/current generated
+    truth stays 80/0/0, focused composition passes 410 assertions, standalone Phase 0 passes 1,031/1,031 in 641
+    seconds, and canonical CI passes the 288-test admission consumer, CLI 63x2, and Phase 0 1,031/1,031 in 642
+    seconds. Rust remains unchanged and dependency-gated until this closeout commits cleanly.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.0`
   Status: `done`
@@ -3564,15 +3570,41 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.3.5 - remove Perl cursor overrides`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit and close the complete Perl reference projection of the neutral contract.
   Dependencies: `.9.1.3.5`
   Acceptance: One omission-sensitive Perl consumer composes live, descriptor, emitted, generated, loaded-spec,
     trace, diagnostic, recursive/mixed-parent, default-family, structural-replacement, and primary-command roles;
     advance only `perl_reference` to complete; synchronize roadmap/book/KM/live docs; run canonical gates; close
     parent `.9.1.3`; and hand off Rust `.9.1.4` only after a clean commit.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / BASELINE** — Read ADR `0044`, the neutral contract/rollout/Perl boundary Knowledge Map cards,
+    executable checker, all `.9.1.3.1-.5` consumers, and canonical registration; reverify the exact 1/7, 72-file,
+    63x2, descriptor-v1, generated-v2, live/loaded/trace, and diagnostic baseline before edits.
+  - [x] **OMISSION-SENSITIVE COMPOSITION** — Add one contract-driven Perl admission consumer that requires every
+    declared Perl projection: live, descriptor, emitted source, generated direct/traced, loaded `.spec`, default
+    and AND families, recursion/mixed parents, structural replacements, portable diagnostics, and primary CLI.
+  - [x] **ADVANCE ONLY PERL** — Promote only `perl_reference` from pending to complete after the composed consumer
+    passes; keep Rust/Dart/Julia/Lua/generated/gate legs pending and preserve exact 72-file migration ownership.
+  - [x] **NO REGRESSION / TRUE STOP** — Run focused composed and constituent Perl suites, neutral checker with all
+    mutations, shared generated/capability contracts, reference CLI 63x2, Phase 0, and canonical local CI with
+    true-stop evidence; do not run an implementation mutation campaign.
+  - [x] **LOCKSTEP / CLOSE PARENT** — Synchronize task/index/roadmap/live/memory, changes/notes, mdBook, Knowledge
+    Map, contract documentation, and cleanup; close `.9.1.3`, activate Rust `.9.1.4` only after the clean commit,
+    and clear/verify the commit brief.
+  Verification: **PASS 2026-07-17.** Clean baseline passes four constituent suites at 394 assertions, the checker
+    at 1/7 with 27 mutations, and the already-current 63x2 reference matrix. The extended consumer passes 288
+    tests across all 14 contract-declared roles exactly once and observes all eight diagnostic codes; focused
+    composition with execution/descriptor/generated suites passes 410 assertions. The independent checker
+    requires every role marker plus canonical registration, rejects 29 mutations, retains exactly 72 migration
+    files, and advances only `perl_reference` to reach 2 complete / 6 pending. Generated-source/capability remain
+    80/0/0; reference CLI passes 63/63 in default and POSIX environments. One manual POSIX probe used a deliberately
+    different display label and therefore failed only 22 substituted help/usage bytes; the corrected canonical
+    label passes 63/63 and canonical CI independently repeats that result. Standalone Phase 0 passes 1,031/1,031
+    in 641 seconds. Knowledge Map is 584 facts / 4,126 question keys; JSON, Python/Perl/shell syntax, mdBook,
+    memory/task/doctrine/whitespace/cleanup pass. Canonical local CI runs the new 288-test consumer, passes CLI
+    63x2 and Phase 0 1,031/1,031 in 642 seconds, and exits 0. No runtime or implementation mutation campaign.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4`
   Status: `pending`
@@ -5878,11 +5910,11 @@ and public no-drift `.5.2.9` are committed at 8/0; parent `.5.2` is closed. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the `.9.1.2-.9` rollout. After the clean logical closeout and urgent hygiene boundary,
-cursor contract/inventory `.9.1.2` is committed at 1/7; Perl `.9.1.3` is split into `.0-.6`, gate-safety audit
+cursor contract/inventory `.9.1.2` established the 1/7 baseline; Perl `.9.1.3` is split into `.0-.6`, gate-safety audit
 `.9.1.3.0`, family/bare-edge normalization `.9.1.3.1`, and live cursor-policy execution `.9.1.3.2` are committed.
-Descriptor projection `.9.1.3.3` and generated-source v2 `.9.1.3.4` are committed. API/CLI and reference-fixture
-migration `.9.1.3.5` is verified and closing at the clean commit boundary; composed Perl admission `.9.1.3.6`
-is the next dependency-ordered leaf.
+Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/reference-fixture migration
+`.9.1.3.5` are committed through `b7c28156`. Composed admission `.9.1.3.6` is verified, advances only Perl to
+2/6, and closes the parent at the clean commit boundary; Rust `.9.1.4` is next.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6116,14 +6148,14 @@ is the next dependency-ordered leaf.
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
-| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `active` | Perl `.0-.5` are complete through API/CLI removal and reference migration; composed admission `.6` is next. |
+| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `done` | All `.0-.6` Perl roles compose at 2/6 with 14-role, 72-file, 29-mutation, and canonical proof. |
 | 214.0 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `done` | Exact Perl roles, bare-edge prerequisite, and gate-safe shared-CLI fixture order are durable. |
 | 214.1 | `FUTURE-PARITY-BACKLOG.9.1.3.1` | `done` | Family-derived policy, typed bare edges, exact diagnostics, source/self-host parity, and canonical proof are complete. |
 | 214.2 | `FUTURE-PARITY-BACKLOG.9.1.3.2` | `done` | Live/loaded/trace per-rule cursor execution and staged v1 boundary pass focused plus canonical proof. |
 | 214.3 | `FUTURE-PARITY-BACKLOG.9.1.3.3` | `done` | Cursor descriptor v1, normalized resolved-edge facts, and full signoff are complete. |
 | 214.4 | `FUTURE-PARITY-BACKLOG.9.1.3.4` | `done` | Generated-source v2, exact family derivation, v1 rejection, fresh load/execution, and canonical proof are complete. |
 | 214.5 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `done` | Exact API/emitter/CLI removal, 63x2 reference migration, 72-file inventory, and canonical proof are complete. |
-| 214.6 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `pending` | Compose Perl admission, advance 2/6, close parent, and hand off Rust after a clean commit. |
+| 214.6 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `done` | Composed Perl admission advances only `perl_reference`, closes parent, and hands off Rust after commit. |
 | 215 | `FUTURE-PARITY-BACKLOG.9.1.4` | `pending` | Align Rust parsed/compiled/serialized/native/generated/primary roles. |
 | 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `pending` | Align Dart native/reconstructed/generated/primary roles. |
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
@@ -6141,7 +6173,7 @@ is the next dependency-ordered leaf.
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and Perl `.9.1.3.0-.5` are complete; composed Perl admission `.6` is next. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` is next. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6795,8 +6827,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and Perl `.9.1.3.0-.4` are committed; API/CLI and reference-fixture migration `.9.1.3.5` is verified and
-  closing at the clean commit boundary before composed Perl admission `.9.1.3.6`. Identical
+  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` follows after the clean `.9.1.3.6` commit. Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -6811,8 +6842,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` and Perl
-  `.9.1.3.0-.4` are committed while verified `.9.1.3.5` closes at the clean boundary; `.9.1.3.6`, later
+- None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
+  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4` and later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 
@@ -6820,6 +6851,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.6` | ADR/KM/contract baseline; exact 14-role consumer and canonical registration; all eight diagnostics; focused constituent baseline 394 and composed 410; neutral cursor 36/18/8/14/72 at 2/6 plus 29 mutations; generated/capability 80/0/0; reference CLI 63x2; standalone Phase 0 `1..1031`/641s; KM 584/4126; JSON/Python/Perl/shell, memory/task/doctrine/mdBook/whitespace/cleanup; canonical consumer 288, CLI 63x2, and Phase 0 `1..1031`/642s. | PASS. One omission-sensitive consumer composes every Perl projection exactly once, only `perl_reference` advances, parent `.9.1.3` closes, and Rust `.9.1.4` waits for the clean commit. A mislabelled manual POSIX display probe was root-caused to template substitution; the exact canonical command passes twice. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.5` | Clean 63x2 and exact 35-case/ten-file baseline; API/Get/get-parser/emitter pre-parse removal; focused Perl API/cursor/generated/trace/scalar/logical/diagnostic/Unicode 191 plus descriptor 31; exact help/usage/success/trace bytes; reference CLI 63x2; standalone Phase 0 `1..1031`/606s; neutral cursor 36/18/8/72 at 1/7 plus 27 mutations; generated/capability 80/0/0; KM 584/4121; JSON/syntax/memory/task/doctrine/mdBook/whitespace/cleanup; canonical rerun reference CLI 63x2 and Phase 0 `1..1031`/634s. | PASS. Global override keys reject at option preparation, primary CLI returns targeted usage exit 2, structural cases replace global-mode successes, and sixteen completed paths become token-free. The first canonical attempt strictly caught one descriptor assertion's newly literal unowned token; contract-derived assertion repair restored the exact 72-file inventory before the full exit-0 rerun. `.9.1.3.6` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.4` | Toolbox/descriptor/generated-v1 baseline; v2 metadata and minimal family plan; exact five-seek/five-consume derivation; option-independent bytes; fresh load/direct/trace/source identity; v1 explicit and inferred-caller rejection; focused generated/cursor/trace 400 plus adjacent 92; touched-module syntax; neutral cursor 36/18/8/87 at 1/7 plus 27 mutations; shared generated/capability 80/0/0; standalone Phase 0 `1..1031`; Knowledge Map, memory/task/doctrine/mdBook/whitespace/cleanup; canonical reference CLI 63x2 and Phase 0 `1..1031`/619s. | PASS. New Perl artifacts are v2 and spend intrinsic family policy without a serialized override; v1 requires `.spec` regeneration; one stale Phase-0 expectation and clean-HEAD `ccf4cad7` inventory omission are root-caused and repaired; `.9.1.3.5` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.3` | Toolbox/KM descriptor and generated-source baseline; cursor identity/root retirement; ordered bare/explicit/indexed/grouped/block/fluent rows; all eight parent/child mechanisms and two structural replacements; focused descriptor/normalization/live 383; neutral cursor 36/18/8/90 at 1/7 plus 27 mutations; callable/generation/capability/logical/diagnostic/coverage ledgers; standalone Phase 0 `1..1031`/662s; Knowledge Map, memory/task/doctrine/mdBook/whitespace/cleanup; canonical reference CLI 63x2 and Phase 0 `1..1031`/634s. | PASS. Descriptor handlers join live intrinsic policy, root global-mode metadata retires, source provenance stays non-semantic, generated source remains v1, and `.9.1.3.4` waits for the clean commit. |
@@ -6991,6 +7023,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.3.6` | `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection` | Exact 14-role consumer, canonical registration, 2/6 rollout, 29 mutations, parent closure, and Rust handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `FUTURE-PARITY-BACKLOG.9.1.3.5 - remove Perl cursor overrides` | Exact API/emitter/CLI removal, structural 63x2 fixture migration, 72-file inventory, Phase 0, and canonical signoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.4` | `FUTURE-PARITY-BACKLOG.9.1.3.4 - emit Perl generated-source v2` | Exact ten-family policy derivation, intrinsic generated handlers, v1 mismatch/regeneration boundary, fresh execution proof, 87-file inventory, and canonical signoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.3` | `FUTURE-PARITY-BACKLOG.9.1.3.3 - project Perl cursor descriptors` | Cursor descriptor v1, ordered semantic edge rows, non-semantic provenance, live/descriptor agreement, generated-v1 boundary, and 90-file inventory. |
@@ -7162,6 +7195,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.9.1.3.6` admits and closes the complete Perl cursor projection through one exact 14-role
+  contract-driven consumer. Role keys must equal the neutral declaration, each executes once, the checker requires
+  every marker and canonical registration, and two new omission mutations raise drift proof to 29. Live default/
+  AND, descriptor v1, emitted v2, generated direct/trace, loaded, mixed/recursive, both structural replacements,
+  dynamic removal, primary CLI, and all eight diagnostics pass. Only `perl_reference` advances, yielding 2/6 at
+  unchanged 72 files. Focused 410, CLI 63x2, standalone Phase 0 1,031/641s, and canonical consumer 288 plus CLI
+  63x2 and Phase 0 1,031/642s pass; parent `.9.1.3` closes and Rust `.9.1.4` follows after the clean commit.
 - `2026-07-17`: `.9.1.3.5` removes Perl's public/global cursor override at the reference-first boundary. Dynamic
   API and emitter keys reject before source parsing with exact portable option fields; the primary command removes
   the flag from help/request trace and returns its targeted usage-exit-2 message. Two authored structural cases

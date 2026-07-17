@@ -29,8 +29,9 @@ ADR `0044`'s future primary-command migration is now executable in
 usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 63-case manifest
 and Perl reference now project that target: structural default-rule seeking and AND-rule consumption replace the
 two global-mode success cases, and request trace omits the retired field. Rust, Dart, Julia, and Lua retain their
-prior interface until their dependency-ordered `.9.1.4-.8` migrations consume the same shared target; final
-five-backend symmetry remains pending.
+prior interface until their dependency-ordered `.9.1.4-.8` migrations consume the same shared target. Perl's
+14-role composed admission now includes representative primary help, default/AND success, and retired-flag proof;
+the complete byte-exact 63x2 suite remains the authoritative reference gate. Final five-backend symmetry is pending.
 
 The current manifest contains 63 cases: exact long/short help, 20 strict usage families, nine successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20

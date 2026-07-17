@@ -51,7 +51,7 @@ DIAGNOSTICS = [
 ]
 ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.9.1.2"),
-    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.9.1.3"),
+    ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.3"),
     ("rust_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.4"),
     ("dart_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.5"),
     ("julia_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.6"),
@@ -59,6 +59,26 @@ ROLLOUT = [
     ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.9.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.9"),
 ]
+PERL_REFERENCE_ADMISSION = {
+    "consumer_path": "t/rule_local_cursor_perl_contract.t",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": [
+        "live_default_family",
+        "live_and_family",
+        "descriptor_v1",
+        "emitted_source_v2",
+        "generated_direct",
+        "generated_trace",
+        "loaded_spec",
+        "mixed_parent_child",
+        "recursion",
+        "structural_ordered_landmarks",
+        "structural_anchored_choice",
+        "dynamic_option_removal",
+        "primary_command",
+        "portable_diagnostics",
+    ],
+}
 GROUPS = [
     ("FUTURE-PARITY-BACKLOG.9.1.2", "neutral_contract_and_shared_authority"),
     ("FUTURE-PARITY-BACKLOG.9.1.3", "perl_reference"),
@@ -234,6 +254,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "option_retirement",
             "descriptor_contract",
             "generated_source_v2",
+            "perl_reference_admission",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -465,6 +486,27 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     }:
         fail("generated-source v2 contract drifted")
 
+    admission = require_fields(
+        contract["perl_reference_admission"],
+        {"consumer_path", "canonical_driver", "roles"},
+        "Perl reference admission",
+    )
+    if admission != PERL_REFERENCE_ADMISSION:
+        fail("Perl reference admission topology drifted")
+    consumer_path = ROOT / admission["consumer_path"]
+    driver_path = ROOT / admission["canonical_driver"]
+    if not consumer_path.is_file() or not driver_path.is_file():
+        fail("Perl reference admission consumer or driver is missing")
+    consumer_text = consumer_path.read_text(encoding="utf-8")
+    for role in admission["roles"]:
+        marker = re.compile(rf"^\s*{re.escape(role)}\s*=>\s*sub\s*\{{", re.MULTILINE)
+        if len(marker.findall(consumer_text)) != 1:
+            fail(f"Perl reference admission role marker drifted: {role}")
+    driver_text = driver_path.read_text(encoding="utf-8")
+    canonical_marker = f"prove -Iperl {admission['consumer_path']}"
+    if canonical_marker not in driver_text:
+        fail("canonical driver omits the Perl reference admission consumer")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -549,6 +591,8 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("descriptor_removed", lambda c: c["descriptor_contract"]["removed_fields"].pop()),
         ("generated_id", lambda c: c["generated_source_v2"].__setitem__("contract_id", "linkedspec-generated-source-v1")),
         ("generated_family", lambda c: c["generated_source_v2"]["seek_families"].pop()),
+        ("Perl admission role", lambda c: c["perl_reference_admission"]["roles"].pop()),
+        ("Perl admission consumer", lambda c: c["perl_reference_admission"].__setitem__("consumer_path", "missing")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -556,7 +600,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("inventory_path", lambda c: c["migration_inventory"]["groups"][0]["paths"].pop()),
         ("inventory_owner", lambda c: c["migration_inventory"]["groups"][1].__setitem__("owner", "wrong")),
         ("rollout_removed", lambda c: c["rollout"].pop()),
-        ("rollout_admission", lambda c: c["rollout"][1].__setitem__("status", "complete")),
+        ("rollout_admission", lambda c: c["rollout"][1].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -574,6 +618,7 @@ def main() -> int:
         f"({len(contract['family_cases'])} family spellings; "
         f"{len(contract['edge_resolution_cases'])} edge cases; "
         f"{len(contract['parent_child_cases'])} parent/child cases; "
+        f"{len(contract['perl_reference_admission']['roles'])} Perl admission roles; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )

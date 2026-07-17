@@ -6,10 +6,10 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor contract/inventory `.9.1.2` is verified at 1 complete / 7 pending,
-and Perl reference rollout `.9.1.3.1-.5` now implements normalization, intrinsic live policy, descriptor v1,
-generated-source v2, and targeted API/CLI override removal. The Perl primary matrix remains 63/63 in both option
-environments; composed Perl admission `.9.1.3.6` is next before later backend migrations.
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 2 complete / 6 pending. Perl reference parent
+`.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
+removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer. Rust
+`.9.1.4` is the next backend after the clean Perl closeout commit.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

@@ -12,10 +12,12 @@ answers:
   - "how do I run the rule local cursor checker"
   - "why is the rule local cursor migration inventory 87 files"
   - "which commit left the cursor migration inventory stale"
+  - "how many Perl cursor admission roles exist"
+  - "what is the rule local cursor rollout after Perl admission"
 date: 2026-07-17
-status: accepted neutral contract; Perl implemented through API/CLI removal, composed admission pending
+status: accepted neutral contract; Perl reference admitted at 2 complete / 6 pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker. It derives and checks 36 exact family spellings, 18 edge normalization/error cases, six post-normalization ownership sets, eight parent/child mechanisms, two structural cross-combination replacements, option/CLI removal, per-rule descriptor facts, generated-source v2 family mapping, and eight portable diagnostics. The tracked-content scan owns exactly 72 migration files after Perl API/CLI .9.1.3.5 makes nine shared byte fixtures and seven Perl tests token-free while GeneratedSource gains the portable emitter error. The checker rejects 27 mutations. Rollout remains 1 complete / 7 pending until composed backend admission."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. The scan owns exactly 72 files. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration; checker omissions are mutation-tested. The checker now rejects 29 mutations and rollout is 2 complete / 6 pending after only perl_reference advances."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -56,11 +58,10 @@ with Perl `.9.1.3.5`, because the mandatory local gate runs that reference suite
 twice. Shared CLI documentation and final symmetric admission remain `.9.1.8`-
 owned. See [[perl-rule-local-cursor-rollout-boundaries]].
 
-Only `neutral_contract_and_inventory` is admitted in the composed rollout
-ledger. Perl implementation is current through API/CLI removal, while its
-composed admission remains pending; Rust, Dart, Julia,
-dual-ABI Lua, recurring five-backend admission, and
-public no-drift follow. Generated-source v1 and the 63-case primary interface
+`neutral_contract_and_inventory` and `perl_reference` are admitted in the composed rollout ledger. The Perl
+consumer declares 14 exact roles and canonical registration; checker mutation proof rejects role or consumer
+omission. Rust, Dart, Julia, dual-ABI Lua, recurring five-backend admission, and public no-drift follow.
+Generated-source v1 and the 63-case primary interface
 remain the unmigrated-backend/shared baseline until their owners land.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]],

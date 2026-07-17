@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.6 — admit the composed Perl cursor projection
+
+The neutral cursor contract now declares one exact 14-role Perl consumer. The existing contract-driven Perl test
+composes live default and AND families, descriptor v1, emitted source v2, generated direct and traced execution,
+loaded `.spec`, mixed parent/child policy, recursion, both structural replacements, dynamic option removal, the
+primary command, and all eight portable diagnostic codes. Its role keys must equal the contract list and each role
+must complete exactly once.
+
+The independent checker requires every role marker and the consumer's canonical-CI registration. Two additional
+omission mutations cover the role list and consumer path, bringing strict drift proof to 29 mutations. Only
+`perl_reference` advances, so rollout is 2 complete / 6 pending at the unchanged 72-file inventory. This admission
+slice changes no parser/compiler/runtime behavior and leaves capability/current generated-source truth at 80/0/0.
+
+Focused composition passes 410 assertions across the admission, live execution, descriptor, and generated-source
+suites. The Perl primary target passes all 63 cases in default and POSIX environments.
+
+Standalone Phase 0 passes 1,031/1,031 in 641 seconds. Canonical local CI runs the newly registered 288-test
+consumer, passes both 63-case primary environments, passes Phase 0 1,031/1,031 in 642 seconds, and exits 0. Parent
+`.9.1.3` is closed; Rust `.9.1.4` remains unchanged until this slice commits cleanly.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.5 — remove Perl global cursor overrides
 
 Perl `Get`, `get_parser`, and `emit_generated_source` now reject both legacy dynamic option spellings before

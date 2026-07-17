@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
+  consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
+  mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight
+  portable diagnostics. The neutral checker verifies the consumer markers plus canonical registration and rejects
+  29 mutations. Only `perl_reference` advances, so rollout is 2 complete / 6 pending at the unchanged 72-file
+  migration inventory; capability/current generated-source truth remains 80/0/0. Rust `.9.1.4` is next after the
+  clean Perl parent closeout.
 - `2026-07-17` refresh: ADR `0045` recovers historical “super split” as inter-match gap capture in repeated
   OR/default action rules, not blind calls. The enclosing rule owns repeated selection/gap orchestration; each
   action edge identifies the target rule and zero-based regex slot that own the match, and the target retains its

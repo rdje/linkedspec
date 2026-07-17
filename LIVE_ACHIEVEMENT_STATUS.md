@@ -8,9 +8,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.6 — admit the composed Perl cursor projection**
+  (DONE — focused, standalone, canonical, documentation, governance, and cleanup signoff pass; clean commit is the
+  only remaining workflow step before Rust cursor rollout `.9.1.4`).
+
+  **Result:** One contract-declared Perl consumer executes 14 exact roles once each: live default/AND, descriptor
+  v1, emitted source v2, generated direct/trace, loaded `.spec`, mixed parent/child, recursion, both structural
+  replacements, dynamic removal, primary command, and complete portable diagnostics. The checker requires every
+  role marker and canonical registration. Only `perl_reference` advances, reaching 2/6 at unchanged 72 files;
+  parent `.9.1.3` closes without changing runtime behavior.
+
+  **Proof:** The consumer passes 288 tests and the four-suite composition passes 410. The neutral checker passes
+  36/18/8/14/72 at 2/6 and rejects 29 mutations; generated-source/capability remain 80/0/0. Reference CLI passes
+  63/63 twice. Standalone Phase 0 passes 1,031/1,031 in 641 seconds; canonical CI runs the new consumer, passes CLI
+  63x2 and Phase 0 1,031/1,031 in 642 seconds, and exits 0. Knowledge Map 584/4,126, mdBook, memory/task/doctrine,
+  JSON/syntax/whitespace, and safe artifact cleanup pass.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.5 — remove Perl global cursor overrides**
-  (DONE — focused, standalone, canonical, documentation, inventory, and cleanup signoff pass; clean commit is the
-  only remaining workflow step before composed Perl admission `.9.1.3.6`).
+  (DONE — focused, standalone, canonical, documentation, inventory, and cleanup signoff pass; committed at
+  `b7c28156`, and composed Perl admission `.9.1.3.6` has since completed).
 
   **Result:** Perl `Get`, `get_parser`, and generated emission reject either legacy dynamic spelling during option
   preparation before source parsing, with exact portable fields and retained source identity. The primary command

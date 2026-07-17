@@ -120,6 +120,26 @@
     "v1_reconstruction_error": "generated_source_contract_version_mismatch",
     "legacy_v1_policy": "regenerate_from_spec_source"
   },
+  "perl_reference_admission": {
+    "consumer_path": "t/rule_local_cursor_perl_contract.t",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": [
+      "live_default_family",
+      "live_and_family",
+      "descriptor_v1",
+      "emitted_source_v2",
+      "generated_direct",
+      "generated_trace",
+      "loaded_spec",
+      "mixed_parent_child",
+      "recursion",
+      "structural_ordered_landmarks",
+      "structural_anchored_choice",
+      "dynamic_option_removal",
+      "primary_command",
+      "portable_diagnostics"
+    ]
+  },
   "diagnostics": [
     {"code": "parse_mode_override_removed", "stage": "prepare_options", "fields": ["option_name"]},
     {"code": "bare_edge_target_undefined", "stage": "normalize_edges", "fields": ["rule_label", "target"]},
@@ -147,7 +167,7 @@
   },
   "rollout": [
     {"leg": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.2"},
-    {"leg": "perl_reference", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.3"},
+    {"leg": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.3"},
     {"leg": "rust_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.4"},
     {"leg": "dart_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.5"},
     {"leg": "julia_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.6"},

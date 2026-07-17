@@ -31,8 +31,9 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > Perl `.9.1.3.5` now rejects the removed `parse_mode` argument during
 > `prepare_options` and the primary `--parse-mode` flag at usage exit 2. Help and
 > canonical request trace no longer expose the global field;
-> neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
-> Rust, Dart, Julia, and Lua behavior remains dependency-ordered under `.9.1.4-.9`.
+> composed Perl admission `.9.1.3.6` is executable through 14 required roles;
+> rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
+> dependency-ordered under `.9.1.4-.9`.
 
 ## Current rule-label surface
 
@@ -625,7 +626,9 @@ accepted-and-ignored option. Perl descriptors replace root
 Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
-in the Perl reference are current. Primary-command/API removal is also current. The
-neutral checker currently reports 36 family spellings, 18 edge cases, eight
-parent/child cases, 72 migration files, 1 complete / 7 pending, and 27 rejected
-drift mutations.
+in the Perl reference are current. Primary-command/API removal is also current.
+One canonical 14-role consumer composes live default/AND, descriptor, emitted,
+generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
+and diagnostic projections. The neutral checker currently reports 36 family
+spellings, 18 edge cases, eight parent/child cases, 72 migration files,
+2 complete / 6 pending, and 29 rejected drift mutations.
