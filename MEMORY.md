@@ -10,21 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.7` — every available generated direct/traced role preserves
-  logical values, eager effects, exact failure/source metadata, and role-local result shape; shared primary case
-  `success_logical_helpers_eager` passes five commands in both environments and rollout is 6/2.
-- latest_commit: `3196dc60` — `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers`
-  (ahead: 178; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection` after exact closeout.
-- active_work_unit: verified generated/primary logical projection `FUTURE-PARITY-BACKLOG.5.2.7` closing in its
-  exact commit; recurring gate `.5.2.8` follows only after the clean boundary. Cursor implementation `.9.1.2-.9`
-  remains pending behind the logical program.
-- next_action: run final post-edit memory/task/doctrine/KM/mdBook/whitespace checks, commit `.5.2.7`, clear the
-  message file, verify the repo clean, then activate recurring logical gate `.5.2.8` as the next task-owned slice.
-- current_proof: focused generated consumers pass Perl 8, Rust 4, Dart 24, Julia 232, and PUC Lua/LuaJIT 359;
-  complete Rust/Dart/Julia/Lua gates and exact primary 5x2x63 pass. Neutral logical 6/2 plus 15 mutations,
-  diagnostic 8/0 plus 20, generated-source/capability 80/0/0, exhaustive 246/105+1/122 coverage, and canonical
-  reference CLI 63x2 plus Phase 0 `1..1031`/618s pass. No runtime implementation or mutation campaign occurred.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.5.2.8` — one omission-checked recurring driver composes the exact
+  six-consumer native/generated topology, selected 5x2x1 primary case, support ledgers, and canonical registration;
+  rollout is 7/1 with 22 rejected semantic/topology mutations.
+- latest_commit: `53a108ea` — `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection`
+  (ahead: 179; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate`.
+- active_work_unit: verified recurring five-backend logical-helper gate `FUTURE-PARITY-BACKLOG.5.2.8` closing;
+  public no-drift `.5.2.9` follows only after the clean commit, before cursor implementation `.9.1.2-.9`.
+- next_action: run final governance/mdBook/diff checks, commit `.5.2.8`, verify clean, then activate `.5.2.9`.
+- current_proof: direct and registered recurring drivers pass neutral logical 7/1 plus 22 semantic/topology
+  mutations, Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT focused consumers, selected primary 5x2x1, and generated-source/
+  capability 80/0/0 plus exhaustive 246/105+1/122 coverage. Unchanged full primary 5x2x63 passes. Canonical local
+  CI passes reference CLI 63x2, Phase 0 `1..1031`/623s, and the registered logical leg. No runtime implementation
+  or mutation campaign occurred.
 - latest_bootstrap_read: 2026-07-17 — full required roadmap, codebase ownership seams, mdBook, active task, Knowledge
   Map, TOOLBOX-relevant audit facts, and ADR context reviewed before the decision-only slice.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -35,6 +34,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli roundtrip backlog `.8.1`; AND/OR implementation `.9.1.2-.9` after logical;
   semantic/MCP `.10.1`; toolbox inspector `.13.1`; structural/progressive authoring `.14`; rule-level lifecycle
   shorthand `.15`; parenthesis-free condition headers; lexical codeblock capture only if later justified.
-- blockers: none. in_flight_uncommitted: verified `.5.2.7` tests/manifest/ledgers/docs await final governance and
-  the exact prepared commit; no background job remains. Mutation campaigns remain parked;
+- blockers: none. in_flight_uncommitted: verified `.5.2.8` recurring contract/checker/driver/local-CI registration
+  and lockstep docs/KM await final governance checks and commit; no background job is running. Mutation campaigns remain parked;
   ignored `rgx/subs/pgen` work remains untouched.

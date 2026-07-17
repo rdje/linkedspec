@@ -4,9 +4,9 @@ Current design frontier (2026-07-17): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.
 ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
-Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. All five
-native logical-helper rollouts are now complete through dual-ABI Lua `.5.2.6`;
-generated/primary projection `.5.2.7` is next.
+Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. Logical-helper
+generated/primary projection `.5.2.7` and the omission-checked recurring gate `.5.2.8`
+are complete at 7/1 rollout; public no-drift `.5.2.9` is next.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -207,7 +207,7 @@ This `README.md` is the **single entry point** to the project.
   leaves `.5.2.1-.9` are dependency-ordered. Neutral `.5.2.1` now adopts ADR `0043` plus the executable
   `linkedspec-logical-helper-v1` authority: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity failure,
   real booleans, typed truthiness, receiver composition, and lazy-control separation. Its 17 truth rows, ten helper
-  cases, three effect scenarios, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.2.2` now
+  cases, three effect scenarios, deterministic fixtures, and 22 semantic/topology drift mutations pass offline. Perl `.5.2.2` now
   owns typed logical ActionIR, eager once-only values, exact pre-effect diagnostics, and one truthiness seam shared
   by logical values and lazy controls. Rust `.5.2.3` now consumes that same policy through `RuntimeValue::as_bool`
   and one pre-evaluation arity guard across native, serialized, direct-value, generated-plan, and standalone-
@@ -217,7 +217,10 @@ This `README.md` is the **single entry point** to the project.
   Generated/primary `.5.2.7` now drives every available generated direct/traced role, retaining exact values,
   eager effects, typed diagnostics, source attribution, and Rust's established direct-value versus compatibility-
   output signature split. Shared case `success_logical_helpers_eager` proves the same canonical result through
-  all five commands in both option environments; rollout is 6 complete / 2 pending before recurring `.5.2.8`.
+  all five commands in both option environments. Recurring `.5.2.8` now composes that neutral checker, the exact
+  native/generated role inventory for Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, selected 5x2x1 primary case,
+  and generated-source/capability/coverage ledgers under one strict omission-checked driver. Rollout is 7
+  complete / 1 pending before public no-drift `.5.2.9`.
   ADR `0034` also adopts a post-parity program: after Perl/Rust/Dart/Julia/Lua reached full current parity, 91
   cataloged Unicode structured-text rows will drive reusable `.spec` feature evolution and accurate, measured
   text-to-AST parsers. Each composed format `.spec` graph will be the sole parser source, dynamically compiled for
@@ -471,6 +474,10 @@ content migration exists yet.
   the neutral diagnostic event contract through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT native/generated
   consumers, the exact quiet five-command projection, and capability/generated-source/corpus ledgers. The same leg
   is available from local CI with `LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1`.
+- Run `bash tools/check_logical_helper_five_backend.sh` when all five backend toolchains are installed to prove
+  the neutral logical contract through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT native/generated consumers,
+  the exact eager five-command projection, and generated-source/capability/corpus ledgers. The same leg is
+  available from local CI with `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`.
 - Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
   its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
   live plus generated execution; Dart and Julia consume it through native/generated/CLI routes; and Lua consumes

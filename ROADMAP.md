@@ -950,7 +950,7 @@ Rust/Julia/Lua helpers, and three truthiness profiles rather than one binary dri
 contract `.1`, Perl/Rust/Dart/Julia/Lua `.2-.6`, generated/primary `.7`, recurring gate `.8`, and public no-drift
 `.9` before behavior changes. Neutral `.5.2.1` now adopts ADR `0043` and an independently checked executable
 contract: eager one-plus `and`/`or`, exact-one `not`, pre-effect arity diagnostics, real booleans, typed truthiness,
-receiver composition, and lazy-control separation. Fifteen drift mutations pass; rollout begins at 0 complete / 8
+receiver composition, and lazy-control separation. Twenty-two semantic/topology drift mutations pass; rollout began at 0 complete / 8
 pending. Perl `.5.2.2` then replaces raw keyword calls and lazy host operators with typed eager logical values,
 pre-effect arity diagnostics, real booleans, and one truthiness seam shared by lazy conditions. Its native/live/
 emitted reference roles are complete. Rust `.5.2.3` now aligns the shared `RuntimeValue::as_bool` condition/helper
@@ -963,15 +963,17 @@ independently compiled emitted/primary proof. Lua `.5.2.6` now aligns `runtime_t
 structured diagnostics across native/reconstructed/generated-plan/emitted/primary roles on both ABIs.
 Generated/primary `.5.2.7` now proves every available direct/traced generated role, exact typed failure/source
 metadata, Rust's intentional typed-value versus compatibility-output split, and shared eager logical case
-`success_logical_helpers_eager` across all five commands and both option environments. Rollout is 6 complete / 2
-pending with recurring projection `.5.2.8` next.
+`success_logical_helpers_eager` across all five commands and both option environments. Recurring `.5.2.8` now
+locks one strict driver over the neutral checker, exact native/generated role inventory for all six runtime
+consumers, selected 5x2x1 primary case, support ledgers, and opt-in canonical-CI registration. Rollout is 7
+complete / 1 pending with public no-drift `.5.2.9` next.
 Director-priority design audit `.9.1.0` finds no valid objective for a public/global
 `parse_mode` override, recommends intrinsic OR/default seek and AND consume, and exposes an uncovered default-AND
 parity split. Director capture `.9.1.1.0` fixes rule-local ownership: parent OR/AND mode never propagates to or
 overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edges, explicit cross-family legality,
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
-is dependency-split under `.9.1.2-.9`; recurring logical projection `.5.2.8` follows completed generated/primary
-`.5.2.7` before that program activates.
+is dependency-split under `.9.1.2-.9`; recurring logical projection `.5.2.8` is complete and public no-drift
+`.5.2.9` remains before that program activates.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

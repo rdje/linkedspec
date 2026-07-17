@@ -153,7 +153,7 @@ Three backbone items tracked major structural modernization — all done:
   checks `linkedspec-logical-helper-v1`: at-least-one eager `and`/`or`, exact-one eager `not`, pre-effect arity
   diagnostics, typed null/boolean/finite-number/string/aggregate/codeblock truth, boolean receiver results, and
   lazy-control separation. Its 17 truth rows, ten helper cases, three effect scenarios, deterministic fixtures,
-  and 15 mutations pass offline. Perl `.5.2.2` supplies typed logical ActionIR/runtime behavior across native,
+  and 22 semantic/topology mutations pass offline. Perl `.5.2.2` supplies typed logical ActionIR/runtime behavior across native,
   live, and standalone-emitted execution. Rust `.5.2.3` now aligns the shared condition/helper truth seam,
   pre-effect logical arity, native structured fields, and native/serialized/generated-plan/direct/compiled-
   emitted roles. Dart `.5.2.4` now removes helper short-circuit and empty-call drift through one typed
@@ -163,8 +163,10 @@ Three backbone items tracked major structural modernization — all done:
   same truth/arity contract through native/reconstructed/generated-plan/emitted/primary proof on both ABIs.
   Generated/primary `.5.2.7` now proves all available direct/traced generated roles, exact values/effects/failure
   metadata, Rust's typed direct-value versus legacy compatibility-output split, and common case
-  `success_logical_helpers_eager` through all five commands under default and POSIX options. Rollout is 6 complete
-  / 2 pending under recurring/public `.5.2.8-.9`.
+  `success_logical_helpers_eager` through all five commands under default and POSIX options. Recurring `.5.2.8`
+  now composes the neutral checker, six exact native/generated consumers, selected 5x2x1 case, support ledgers,
+  and opt-in canonical-CI leg under one omission-checked driver. Rollout is 7 complete / 1 pending under public
+  no-drift `.5.2.9`.
   Director-priority cursor audit `.9.1.0` then establishes that public/global `parse_mode` rewrites every nested
   rule and exposes an uncovered default-AND parity split: Perl/Dart/Julia/Lua seek while Rust follows compiled
   AND-consume behavior. Explicit seek/consume agrees on all five, and the two cross-combinations remain

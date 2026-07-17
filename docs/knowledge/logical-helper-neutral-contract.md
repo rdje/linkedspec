@@ -15,8 +15,8 @@ answers:
 date: 2026-07-16
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 15 representative drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, and dual-ABI Lua .5.2.6 consume the unchanged target across their native and available reconstructed/generated/emitted/primary roles, moving the ledger to 5 complete / 3 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
-reverify: "python3 tools/check_logical_helper_contract.py && prove -Iperl t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && dart test test/logical_helper_contract_test.dart) && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia julia/test/logical_helper_contract_test.jl && bash tools/run_lua_local.sh"
+evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 22 semantic/topology drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, and recurring admission .5.2.8 consume and lock the unchanged target, moving the ledger to 7 complete / 1 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
+reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
 The adopted target treats `and`, `or`, and `not` as ordinary boolean value helpers. `and` and `or` accept at
@@ -44,9 +44,10 @@ The target is adopted and current on the Perl reference's native/live/standalone
 serialized/generated-plan/direct-value/compiled-emitted roles, Dart's native/normalized/generated-plan/
 standalone-emitted/primary roles, and Julia's native/normalized/generated-plan/standalone-emitted/primary roles.
 Lua also conforms through native/reconstructed/generated-plan/loaded-emitted/primary roles on both ABIs.
-Cross-backend generated/primary, recurring-gate, and public rollout remains 5 complete / 3 pending under
-`FUTURE-PARITY-BACKLOG.5.2.7-.9`.
+Generated/primary and recurring admission are complete at 7/1 rollout. Public no-drift remains under
+`FUTURE-PARITY-BACKLOG.5.2.9`.
 
 Related facts: [[logical-helper-five-backend-audit]], [[callable-codeblock-literal-contract]],
 [[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]],
-[[dart-logical-helper-neutral-runtime]], [[julia-logical-helper-execution]].
+[[dart-logical-helper-neutral-runtime]], [[julia-logical-helper-execution]],
+[[logical-helper-recurring-five-backend-gate]].

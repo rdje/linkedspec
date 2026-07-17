@@ -1,6 +1,6 @@
 ---
 id: cross-backend-condition-truthiness-drift
-title: Native condition truthiness is aligned; projection and public closeout remain
+title: Native and generated condition truthiness are aligned; public closeout remains
 answers:
   - "is LinkedSpec condition truthiness identical across backends"
   - "is string zero truthy in LinkedSpec"
@@ -22,7 +22,8 @@ evidence_update_2026_07_17_rust_logical: "FUTURE-PARITY-BACKLOG.5.2.3 moves Rust
 evidence_update_2026_07_17_dart_logical: "FUTURE-PARITY-BACKLOG.5.2.4 makes runtimeLogicalTruth the exact Dart helper/control boundary. Dart retains its already-correct nonempty-string/empty-aggregate rows, makes helpers eager, rejects empty and extra logical arities before effects, and proves native plus generated/emitted/primary roles. Julia/Lua plus projection/gate/public legs remain pending at 3/5 rollout."
 evidence_update_2026_07_17_julia_logical: "FUTURE-PARITY-BACKLOG.5.2.5 retains Julia's already-correct _runtime_truthy rows and eager helper evaluation while adding exact arity before effects. Native, normalized, generated-plan, emitted, and primary roles agree. Lua plus projection/gate/public legs remain pending at 4/4 rollout."
 evidence_update_2026_07_17_lua_logical: "FUTURE-PARITY-BACKLOG.5.2.6 makes Lua runtime_truthy the exact helper/control boundary: string zero is true, empty aggregates are false, logical arity rejects before effects, and controls remain lazy. Native, reconstructed, generated-plan, emitted, and primary roles agree on both ABIs. All five native backends are aligned at 5/3 rollout; generated/primary, recurring, and public closeout remain."
-reverify: "prove -Iperl t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && dart test test/logical_helper_contract_test.dart) && bash tools/run_lua_local.sh && rg -n 'as_bool|runtimeLogicalTruth|function _runtime_truthy|local function runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
+evidence_update_2026_07_17_generated_recurring: "FUTURE-PARITY-BACKLOG.5.2.7 proves every available direct/traced generated role and the shared success_logical_helpers_eager primary case. FUTURE-PARITY-BACKLOG.5.2.8 makes the exact six-consumer/primary/support topology recurring. Rollout is 7 complete / 1 pending."
+reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
 All five native backends now enforce one condition truth table at the formerly disputed boundaries:
@@ -35,8 +36,9 @@ All five native backends now enforce one condition truth table at the formerly d
 
 Null, boolean false, numeric zero, and the empty string are false on all five implementations; nonempty ordinary
 values are true. Perl, Rust, Dart, Julia, and Lua consume the ADR `0043` target across lazy controls plus eager
-`and`/`or`/`not` helpers. `FUTURE-PARITY-BACKLOG.5.2.7-.9` retain generated/primary projection, recurring proof,
-and public no-drift; they do not own a known remaining native truth-table difference.
+`and`/`or`/`not` helpers. Generated/primary `.5.2.7` and recurring gate `.5.2.8` lock the same truth table through
+all available direct/traced roles; only public no-drift `.5.2.9` remains. There is no known native or generated
+truth-table difference.
 
 The `.5.2.0` audit also found a reference-lowering defect independent of truthiness selection: direct logical
 values were raw Perl keyword calls, conditions used host `&&`/`||`, and optional-scope stripping could reinterpret

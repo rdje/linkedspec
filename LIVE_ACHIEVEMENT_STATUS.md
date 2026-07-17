@@ -8,6 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.8 — add recurring logical-helper gate**
+  (DONE — one omission-checked all-toolchain driver admits recurring native/generated/primary/support proof at
+  7 complete / 1 pending; public no-drift `.5.2.9` follows after the clean commit).
+
+  **Result:** The logical contract now names six ordered runtime consumers and every required backend-specific
+  role, the exact selected primary case, three support ledgers, and one canonical-CI switch. The checker rejects
+  backend, generated-role, primary, support, driver, registration, and rollout omissions.
+
+  **Proof:** The direct driver passes the neutral checker at 7/1 with 22 mutations, focused Perl/Rust/Dart/Julia/
+  PUC Lua/LuaJIT consumers, the 5x2x1 primary projection, and generated-source/capability/coverage ledgers. Full
+  5x2x63 and canonical registered-CI proofs are recorded in the owning task.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.5.2.7 — propagate logical generated and primary projection**
   (DONE — all direct/traced generated roles and one shared five-command primary case conform at 6 complete / 2
   pending; recurring logical gate `.5.2.8` follows after the clean commit).

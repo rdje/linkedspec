@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.8 — add recurring logical-helper gate
+
+Added `tools/check_logical_helper_five_backend.sh` as the strict recurring composition for
+`linkedspec-logical-helper-v1`. It runs the neutral checker; focused Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+consumers; the exact `success_logical_helpers_eager` case through five primary commands in default and POSIX
+environments; and generated-source, capability, and exhaustive language-coverage ledgers. Lua native adapters
+are disposable and both ABIs are mandatory.
+
+The contract now stores the ordered six-consumer topology, backend-specific native/generated role inventory,
+selected primary case, support checks, and canonical-CI registration. The offline checker rejects 22 semantic and
+topology mutations, including backend, generated-role, primary, support, driver, registration, and rollout
+omissions. `tools/run_ci_local.sh` tracks, audits, syntax-checks, and optionally executes the composed leg behind
+`LINKEDSPEC_RUN_LOGICAL_MATRIX=1`. Only `recurring_five_backend_gate` advances, leaving rollout at 7 complete / 1
+pending before public no-drift `.5.2.9`; no runtime implementation changed.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.5.2.7 — propagate logical generated and primary projection
 
 Expanded the unchanged `linkedspec-logical-helper-v1` consumers across every generated execution role each

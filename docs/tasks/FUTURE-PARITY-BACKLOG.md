@@ -3042,14 +3042,41 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.8`
-  Status: `pending`
+  Status: `done`
   Goal: Add one recurring omission-checked five-backend logical-helper conformance gate.
   Dependencies: `.5.2.7`
   Acceptance: One strict driver composes the neutral checker, all native/generated consumers, exact primary case,
     capability/generated-source/corpus ledgers, and canonical local-CI registration; deterministic mutations reject
     semantic, backend, generated-role, CLI, support-ledger, and registration omissions.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist:
+  - [x] **RETRIEVE / INVENTORY** — Read the logical neutral/audit/generated-primary Knowledge Map facts and the
+    diagnostic-output recurring-gate precedent; enumerate the authoritative checker, six focused consumers, exact
+    selected primary case, support ledgers, shell/toolchain requirements, and canonical local-CI registration seam.
+  - [x] **LOCK GATE TOPOLOGY** — Extend the logical contract and offline checker with one exact recurring-gate
+    topology: driver, ordered Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers, required native+generated roles,
+    selected CLI case, support checks, and CI registration. Add deterministic mutations for every omission class.
+  - [x] **SYMMETRIC DRIVER** — Add one strict fail-fast portable shell driver that requires every host toolchain,
+    runs the neutral checker and each focused native/generated consumer, and builds disposable Lua adapters for
+    PUC Lua and LuaJIT without weakening backend-owned value/effect/diagnostic/source assertions.
+  - [x] **EXACT PRIMARY PROJECTION** — Run only `success_logical_helpers_eager` through the existing five-command
+    matrix under default and POSIX environments, retaining unchanged full-matrix behavior and exact bytes/status.
+  - [x] **SUPPORT-LEDGER REGRESSION** — Compose generated-source, capability-census, and exhaustive language-
+    coverage checkers so the 80/0/0 census and generated/corpus/public proof cannot drift independently.
+  - [x] **CANONICAL REGISTRATION** — Make the driver a tracked/audited/syntax-checked local-CI input and register
+    explicit opt-in all-toolchain execution through one exact environment switch; prove direct and registered paths.
+  - [x] **NO REGRESSION** — Prove shell/Python syntax, offline mutation rejection, all six consumers, selected
+    5x2x1 primary projection, support ledgers, unchanged full 5x2x63 matrix, governance/KM/mdBook/whitespace, and
+    canonical local CI. Do not run an implementation mutation campaign.
+  - [x] **LOCKSTEP / COMMIT** — Promote only `recurring_five_backend_gate`, leave public no-drift `.5.2.9` pending,
+    synchronize every durable layer, and commit cleanly before public closeout activates.
+  Verification: **PASS 2026-07-17.** Direct and canonical registered drivers pass the 7/1 neutral checker with 22
+    rejected semantic/topology mutations; focused Perl 8, Rust 4, Dart 24, Julia 232, and PUC Lua/LuaJIT 359
+    consumers; exact selected primary 5x2x1; generated-source/capability 80/0/0; and exhaustive
+    246-name/105-corpus-plus-one/122-public-contract ledgers. The unchanged full primary matrix passes 5x2x63.
+    Shell/Python syntax, Knowledge Map, memory, task/doctrine, mdBook, and whitespace checks pass. Canonical local
+    CI passes reference CLI 63x2, Phase 0 `1..1031` in 623 seconds, and the registered all-toolchain logical leg.
+    Only `recurring_five_backend_gate` advances; no runtime implementation or implementation mutation campaign.
+  Commit: `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate`
 
 - ID: `FUTURE-PARITY-BACKLOG.5.2.9`
   Status: `pending`
@@ -5540,12 +5567,12 @@ The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exac
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
 backend-neutral policy `.5.2.1` plus Perl `.5.2.2`, Rust `.5.2.3`, Dart `.5.2.4`, Julia `.5.2.5`, and dual-ABI
-Lua `.5.2.6` native rollouts are committed. Generated/primary projection `.5.2.7` is verified at 6/2 and closing
-in its exact commit. The
+Lua `.5.2.6` native rollouts are committed. Generated/primary projection `.5.2.7` is committed; recurring logical
+gate `.5.2.8` is verified at 7/1 and is closing before public no-drift `.5.2.9`. The
 director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9.1.1` are complete. ADR `0044` /
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the pending `.9.1.2-.9` rollout. The logical-helper parent remains the selected
-program, with recurring logical gate `.5.2.8` next after the clean `.5.2.7` commit and before that split cursor
+program, with public logical closeout `.5.2.9` next after the clean `.5.2.8` commit and before that split cursor
 implementation program.
 
 | Order | Leaf | Status | Why next |
@@ -6445,7 +6472,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None. ADR `0044` resolves the remaining `.9.1.1.1` grammar/runtime/metadata/migration questions. The separately
-  split implementation program `.9.1.2-.9` remains pending while the clean logical frontier advances to `.5.2.8`.
+  split implementation program `.9.1.2-.9` remains pending while logical recurring gate `.5.2.8` closes and
+  public no-drift `.5.2.9` follows.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -6458,14 +6486,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Generated/primary logical projection `.5.2.7` is verified and closing in its exact commit; recurring gate
-  `.5.2.8` follows only after that clean boundary. Cursor/edge implementation `.9.1.2-.9`, structured-format,
-  write-vivification, and companion-book work remain pending and are not implicitly activated.
+- None. Recurring logical gate `.5.2.8` is verified and closing after generated/primary commit `53a108ea`; public
+  no-drift `.5.2.9` follows only after the clean commit. Cursor/edge
+  implementation `.9.1.2-.9`, structured-format, write-vivification, and companion-book work remain pending and
+  are not implicitly activated.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.8` | Exact contract-declared six-consumer/backend-specific native+generated topology; direct and registered driver; logical 7/1 plus 22 mutations; focused Perl 8/Rust 4/Dart 24/Julia 232/PUC Lua 359/LuaJIT 359; selected primary 5x2x1; unchanged full 5x2x63; generated-source/capability 80/0/0; coverage 246/105+1/122; shell/Python syntax; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 63x2, Phase 0 `1..1031`/623s, and registered all-toolchain driver. | PASS. One strict recurring gate rejects semantic, backend, generated-role, primary, support, driver, CI-registration, and rollout omission; only `recurring_five_backend_gate` advances and public `.5.2.9` follows after the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.7` | Every available generated role: Perl `Execute`/`ExecuteWithTrace`/`Get`; Rust typed-v1 and compatibility direct/traced plus standalone emitted execute/parse pairs; Dart/Julia/Lua generated-plan and independently emitted direct/traced roles. Focused Perl 8, Rust 4, Dart 24, Julia 232, PUC Lua/LuaJIT 359; complete Rust/Dart/Julia/Lua gates; exact primary 5x2x63; logical 6/2 plus 15 mutations; diagnostic 8/0 plus 20 mutations; generated-source/capability 80/0/0; coverage 246/105+1/122; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 63x2 and Phase 0 `1..1031`/618s. | PASS. Values, eager effects, exact pre-effect failures, source metadata, and direct/trace identity agree through all real generated shapes; Rust retains its intentional typed-value versus compatibility-output distinction; one shared primary case passes everywhere; only `generated_and_primary_cli` advances and recurring `.5.2.8` follows. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.6` | Identical 51/238 PUC Lua/LuaJIT baselines; repaired 238/238 unchanged consumer over all 17 typed rows, values/effects/receiver/lazy controls/four pre-effect arities, native/reconstructed/generated-plan/loaded-emitted/primary roles, and inert contextual blocks; authoritative dual-ABI diagnostic 119/logical 238/full 177, CLI 62x2, corpus 105/105; neutral 5/3 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 62x2 and Phase 0 `1..1031`/609s. | PASS. One typed Lua helper/control truth seam, pre-effect arity, eager valid values, exact optional fields, registry precedence, and generated routing align both ABIs; only `lua_native` advances and generated/primary `.5.2.7` is next. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.5.2.5` | Exact 177-assertion Julia consumer over 17 typed truth rows, values/effects/receiver/lazy controls/four pre-effect arities; native/normalized/generated-plan/primary/compiled-emitted roles; full 1,671-assertion package, primary process, CLI 62x2, corpus 105/105; neutral 4/4 checker plus 15 mutations; KM/memory/task/doctrine/mdBook/whitespace; canonical local CI with reference CLI 62x2, Phase 0 `1..1031`/607s, and the optional complete Julia gate. | PASS. Existing typed truth/eager evaluation stay intact, built-in logical arity now rejects before effects with exact structured fields, only `julia_native` advances, and dual-ABI Lua `.5.2.6` is next. |
@@ -6628,6 +6658,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.5.2.8` | `FUTURE-PARITY-BACKLOG.5.2.8 - add recurring logical-helper gate` | Exact six-consumer/native+generated topology, selected primary/support composition, 22 mutation classes, registered canonical leg, 7/1 rollout, and public no-drift handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.7` | `FUTURE-PARITY-BACKLOG.5.2.7 - propagate logical generated projection` | Every real direct/traced generated role, exact source/failure/value preservation, shared primary 5x2x63, 6/2 rollout, and recurring-gate handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.6` | `FUTURE-PARITY-BACKLOG.5.2.6 - align Lua logical helpers` | Shared typed truth seam, pre-effect arity, exact optional fields, dual-ABI native/reconstructed/generated-plan/loaded-emitted/primary consumer, 5/3 rollout, and generated/primary handoff. |
 | `FUTURE-PARITY-BACKLOG.5.2.5` | `FUTURE-PARITY-BACKLOG.5.2.5 - align Julia logical helpers` | Existing typed truth/eager semantics, pre-effect arity, exact structured fields, native/normalized/generated-plan/compiled-emitted consumer, 4/4 rollout, and Lua handoff. |
@@ -6790,6 +6821,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-17`: `.5.2.8` adds one strict recurring logical driver and an exact contract-declared topology for
+  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT native/generated consumers, selected
+  `success_logical_helpers_eager` 5x2x1 primary projection, and generated-source/capability/coverage ledgers. The
+  checker rejects 22 semantic/topology mutations including every omission class. Direct and registered paths,
+  focused 8/4/24/232/359/359 consumers, unchanged full 5x2x63, 80/0/0 support, governance/KM/book, and canonical
+  CLI 63x2 plus Phase 0 `1..1031`/623s pass. Only recurring admission advances to 7/1; no runtime implementation
+  changes and public no-drift `.5.2.9` follows after the clean commit.
 - `2026-07-17`: `.5.2.7` expands the unchanged logical consumer across every available generated direct/traced
   role: Perl emitted `Execute`/`ExecuteWithTrace`/`Get`; Rust typed-v1 and compatibility pairs plus standalone
   emitted execute/parse pairs; Dart, Julia, and Lua generated-plan plus independently emitted pairs. Exact values,

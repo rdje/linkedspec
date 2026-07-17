@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.8` — recurring admission needs role topology, not only test paths):
+  A backend test can remain green while a generated entrypoint silently disappears. Store the ordered consumers
+  and every backend-specific role in the neutral contract, then make the offline checker prove both driver
+  composition and literal role markers in each focused test. Mutate backend, generated-role, selected-primary,
+  support-ledger, driver, CI-registration, and rollout edges independently so an omission cannot masquerade as a
+  semantic pass.
+
+  Keep the all-toolchain driver focused and fail-fast: one neutral check, six consumers, one selected 5x2 primary
+  case, then the three existing support authorities. Build Lua adapters in a disposable root for each ABI. Julia
+  may need a writable first `JULIA_DEPOT_PATH` segment stacked before the installed depot; use that first segment
+  for generated precompile output rather than assuming the whole colon-separated value is one path. Register the
+  expensive composition explicitly behind `LINKEDSPEC_RUN_LOGICAL_MATRIX=1` while ordinary local CI still audits
+  its tracked path and shell syntax.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.5.2.7` — inventory roles before asserting one generated shape):
   Generated APIs are not signature-identical across backends. Perl has `Execute`, `ExecuteWithTrace`, and `Get`;
   Rust has typed-v1 and legacy compatibility direct/traced pairs; Dart, Julia, and Lua have typed direct/traced

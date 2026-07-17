@@ -21,10 +21,11 @@ evidence_update_2026_07_17_dart_rollout: "FUTURE-PARITY-BACKLOG.5.2.4 repairs Da
 evidence_update_2026_07_17_julia_rollout: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's already-correct _runtime_truthy and eager composition, then rejects empty and/or/not plus multi-argument not before operand effects. Native, normalized, generated-plan, primary, and independently compiled emitted roles match all 17 typed rows and unchanged fixtures. Rollout is 4 complete / 4 pending."
 evidence_update_2026_07_17_lua_rollout: "FUTURE-PARITY-BACKLOG.5.2.6 aligns Lua runtime_truthy and built-in arity while retaining eager once-left-to-right composition and registry-first user-function precedence. Native, reconstructed, generated-plan, loaded emitted-module, primary, lazy-control, inert-codeblock, and exact diagnostic roles pass 238/238 on PUC Lua and LuaJIT. Rollout is 5 complete / 3 pending."
 evidence_update_2026_07_17_generated_primary: "FUTURE-PARITY-BACKLOG.5.2.7 expands all five consumers across every available direct/traced generated role and adds success_logical_helpers_eager to the shared 63-case primary manifest. Values, eager effects, typed arity failures, source attribution, and direct/trace identity agree; Rust intentionally keeps direct-value typed v1 distinct from compatibility parse-output arrays. Rollout is 6 complete / 2 pending."
-reverify: "prove -Iperl t/logical_helper_perl_contract.t && python3 tools/check_logical_helper_contract.py && (cd dart && dart test test/logical_helper_contract_test.dart) && bash tools/run_lua_local.sh && rg -n 'as_bool|runtimeLogicalTruth|_runtime_truthy|evaluate_runtime_logical|runtime_truthy' rust/linkedspec-core/src/types.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
+evidence_update_2026_07_17_recurring_gate: "FUTURE-PARITY-BACKLOG.5.2.8 composes the neutral checker, exact native/generated role inventory for Perl/Rust/Dart/Julia/PUC Lua/LuaJIT, success_logical_helpers_eager across five commands and two environments, and generated-source/capability/coverage ledgers. The checker reports 7 complete / 1 pending and rejects 22 semantic/topology mutations."
+reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
-The five implementations do not currently express one logical-helper contract:
+All five implementations now express one logical-helper contract:
 
 | Backend | Evaluation | Empty `and/or/not` | Scalar `"0"` / `"false"` | Empty aggregates |
 | --- | --- | --- | --- | --- |
@@ -49,9 +50,11 @@ replaces its audited string-zero, empty-aggregate, and legacy arity boundaries t
 seam. Normalized/reconstructed, generated-plan, compiled emitted, and primary projections agree within every
 backend. `FUTURE-PARITY-BACKLOG.5.2.1` ratified ADR `0043`; all five native leaves `.5.2.2-.6` consume it.
 Generated/primary `.5.2.7` now closes every available direct/traced role and one shared default/POSIX primary case.
-Recurring-gate and public no-drift leaves `.5.2.8-.9` remain.
+Recurring gate `.5.2.8` makes that exact six-consumer/primary/support topology omission-checked. Public no-drift
+leaf `.5.2.9` remains.
 
 Related facts: [[cross-backend-condition-truthiness-drift]], [[julia-logical-helper-execution]],
 [[lua-logical-helper-execution]], [[dart-helper-action-surface-bridge]], [[logical-helper-neutral-contract]],
 [[rust-logical-helper-neutral-runtime]], [[dart-logical-helper-neutral-runtime]].
-Generated/primary details: [[logical-helper-generated-primary-projection]].
+Generated/primary details: [[logical-helper-generated-primary-projection]]. Recurring gate details:
+[[logical-helper-recurring-five-backend-gate]].

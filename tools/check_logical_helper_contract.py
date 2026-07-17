@@ -13,6 +13,8 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "logical_helper_contract.json"
+TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md"
+CLI_MANIFEST_PATH = ROOT / "cli_conformance" / "manifest.json"
 CONTRACT_ID = "linkedspec-logical-helper-v1"
 TOP_LEVEL_FIELDS = [
     "format",
@@ -28,6 +30,7 @@ TOP_LEVEL_FIELDS = [
     "invalid_arity_cases",
     "fixtures",
     "projections",
+    "recurring_gate",
     "rollout",
 ]
 POLICY = {
@@ -97,6 +100,180 @@ EFFECT_IDS = ["and_decisive_false_is_eager", "or_decisive_true_is_eager", "not_s
 RECEIVER_IDS = ["receiver_true", "receiver_false"]
 LAZY_IDS = ["if_false_selects_else", "if_true_selects_then"]
 INVALID_IDS = ["and_zero", "or_zero", "not_zero", "not_many"]
+RECURRING_GATE = {
+    "driver": "tools/check_logical_helper_five_backend.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_path", "roles"],
+        "role_policy": "ordered backend-specific roles; every listed role is required",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_path": "t/logical_helper_perl_contract.t",
+            "roles": [
+                "native",
+                "primary",
+                "generated_execute",
+                "generated_execute_with_trace",
+                "generated_get",
+            ],
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_path": "rust/linkedspec-runtime/tests/logical_helper_contract.rs",
+            "roles": [
+                "native",
+                "serialized",
+                "generated_v1_direct",
+                "generated_v1_traced",
+                "generated_compatibility_direct",
+                "generated_compatibility_traced",
+                "emitted_execute",
+                "emitted_execute_with_trace",
+                "emitted_parse",
+                "emitted_parse_with_trace",
+            ],
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_path": "dart/test/logical_helper_contract_test.dart",
+            "roles": [
+                "native",
+                "reconstructed",
+                "primary",
+                "generated_plan_direct",
+                "generated_plan_traced",
+                "emitted_direct",
+                "emitted_traced",
+            ],
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_path": "julia/test/logical_helper_contract_test.jl",
+            "roles": [
+                "native",
+                "reconstructed",
+                "primary",
+                "generated_plan_direct",
+                "generated_plan_traced",
+                "emitted_direct",
+                "emitted_traced",
+            ],
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_path": "lua/test/logical_helper_contract_test.lua",
+            "roles": [
+                "native",
+                "reconstructed",
+                "primary",
+                "generated_plan_direct",
+                "generated_plan_traced",
+                "emitted_direct",
+                "emitted_traced",
+            ],
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_path": "lua/test/logical_helper_contract_test.lua",
+            "roles": [
+                "native",
+                "reconstructed",
+                "primary",
+                "generated_plan_direct",
+                "generated_plan_traced",
+                "emitted_direct",
+                "emitted_traced",
+            ],
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_id": "success_logical_helpers_eager",
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_LOGICAL_MATRIX",
+    },
+}
+GATE_CONSUMER_MARKERS = {
+    "perl": "t/logical_helper_perl_contract.t",
+    "rust": "--test logical_helper_contract",
+    "dart": "test/logical_helper_contract_test.dart",
+    "julia": "julia/test/logical_helper_contract_test.jl",
+    "puc_lua": "build_lua_native.sh puc",
+    "luajit": "build_lua_native.sh luajit",
+}
+GATE_ROLE_MARKERS = {
+    "perl": {
+        "native": "run_parser($live)",
+        "primary": "run_primary_command",
+        "generated_execute": "[Execute =>",
+        "generated_execute_with_trace": "[ExecuteWithTrace =>",
+        "generated_get": "[Get =>",
+    },
+    "rust": {
+        "native": "Engine::new(compiled.clone())",
+        "serialized": "serde_json::from_str(&compiled_json)",
+        "generated_v1_direct": "execute_generated_parser_v1(",
+        "generated_v1_traced": "execute_generated_parser_with_trace_v1(",
+        "generated_compatibility_direct": "execute_generated_parser(&compiled_json",
+        "generated_compatibility_traced": "execute_generated_parser_with_trace(",
+        "emitted_execute": "::execute(\"x\")",
+        "emitted_execute_with_trace": "::execute_with_trace(\"x\"",
+        "emitted_parse": "::parse(\"x\")",
+        "emitted_parse_with_trace": "::parse_with_trace(\"x\"",
+    },
+    "dart": {
+        "native": "LinkedSpecRuntimeEngine(compiled).parse('x')",
+        "reconstructed": "LinkedSpecRuntimeEngine(reconstructed).parse('x')",
+        "primary": "runLinkedSpecDartPrimaryCli",
+        "generated_plan_direct": "executeGeneratedParserV1(",
+        "generated_plan_traced": "executeGeneratedParserWithTraceV1(",
+        "emitted_direct": "values.execute('x')",
+        "emitted_traced": "values.executeWithTrace('x'",
+    },
+    "julia": {
+        "native": "runtime_parse(LinkedSpecRuntimeEngine(compiled), \"x\")",
+        "reconstructed": "runtime_parse(LinkedSpecRuntimeEngine(reconstructed), \"x\")",
+        "primary": "_logical_helper_primary",
+        "generated_plan_direct": "execute_generated_parser_v1(",
+        "generated_plan_traced": "execute_generated_parser_with_trace_v1(",
+        "emitted_direct": "LinkedSpecGeneratedParser.execute(\"x\")",
+        "emitted_traced": "LinkedSpecGeneratedParser.execute_with_trace(",
+    },
+    "puc_lua": {
+        "native": "execute_native(compiled)",
+        "reconstructed": "execute_native(reconstructed)",
+        "primary": "primary(fixture.spec_source)",
+        "generated_plan_direct": "execute_generated(compiled, fixture_id)",
+        "generated_plan_traced": "execute_generated_with_trace(compiled, fixture_id)",
+        "emitted_direct": "emitted.execute(\"x\")",
+        "emitted_traced": "emitted.execute_with_trace(\"x\"",
+    },
+    "luajit": {
+        "native": "execute_native(compiled)",
+        "reconstructed": "execute_native(reconstructed)",
+        "primary": "primary(fixture.spec_source)",
+        "generated_plan_direct": "execute_generated(compiled, fixture_id)",
+        "generated_plan_traced": "execute_generated_with_trace(compiled, fixture_id)",
+        "emitted_direct": "emitted.execute(\"x\")",
+        "emitted_traced": "emitted.execute_with_trace(\"x\"",
+    },
+}
 ROLLOUT = [
     ("perl_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.2"),
     ("rust_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.3"),
@@ -104,7 +281,7 @@ ROLLOUT = [
     ("julia_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.5"),
     ("lua_native", "complete", "FUTURE-PARITY-BACKLOG.5.2.6"),
     ("generated_and_primary_cli", "complete", "FUTURE-PARITY-BACKLOG.5.2.7"),
-    ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.5.2.8"),
+    ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.5.2.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.5.2.9"),
 ]
 ID = re.compile(r"[a-z][a-z0-9_]*\Z")
@@ -406,11 +583,67 @@ def validate_contract(contract: dict[str, Any]) -> None:
         },
         "projection obligations drifted",
     )
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology drifted")
+
+    gate_path = ROOT / RECURRING_GATE["driver"]
+    require(gate_path.is_file(), "recurring gate driver is missing")
+    gate_text = gate_path.read_text(encoding="utf-8")
+    for consumer in RECURRING_GATE["consumers"]:
+        test_path = ROOT / consumer["test_path"]
+        require(test_path.is_file(), f"recurring gate consumer is missing: {consumer['test_path']}")
+        require(
+            GATE_CONSUMER_MARKERS[consumer["runtime"]] in gate_text,
+            f"recurring gate driver omits consumer: {consumer['runtime']}",
+        )
+        test_text = test_path.read_text(encoding="utf-8")
+        for role in consumer["roles"]:
+            require(
+                GATE_ROLE_MARKERS[consumer["runtime"]][role] in test_text,
+                f"recurring gate consumer omits role: {consumer['runtime']} {role}",
+            )
+    for support_path in RECURRING_GATE["support_checks"]:
+        require(
+            (ROOT / support_path).is_file() and support_path in gate_text,
+            f"recurring gate omits support check: {support_path}",
+        )
+
+    primary = RECURRING_GATE["primary_cli"]
+    require(
+        primary["matrix_driver"] in gate_text and primary["case_id"] in gate_text,
+        "recurring gate omits the exact primary projection",
+    )
+    cli_manifest = json.loads(CLI_MANIFEST_PATH.read_text(encoding="utf-8"))
+    cli_cases = [case for case in cli_manifest.get("cases", []) if case.get("id") == primary["case_id"]]
+    require(len(cli_cases) == 1, "logical primary projection case coverage drifted")
+    require(
+        cli_cases[0].get("expect")
+        == {
+            "exit": 0,
+            "stdout": {
+                "text": '{"and_decisive_false_is_eager":false,"not_single_argument_once":true,'
+                '"or_decisive_true_is_eager":true,"seen":["and-first","and-second",'
+                '"or-first","or-second","not-first"]}\n'
+            },
+            "stderr": {"text": ""},
+            "files": [],
+        },
+        "logical primary projection bytes or status drifted",
+    )
+
+    local_ci = RECURRING_GATE["local_ci"]
+    local_ci_text = (ROOT / local_ci["driver"]).read_text(encoding="utf-8")
+    require(
+        RECURRING_GATE["driver"] in local_ci_text and local_ci["switch"] in local_ci_text,
+        "recurring gate local-CI registration drifted",
+    )
+
     rollout = contract["rollout"]
     require(isinstance(rollout, list) and len(rollout) == len(ROLLOUT), "rollout topology drifted")
+    task_text = TASK_PATH.read_text(encoding="utf-8")
     for index, (row, (row_id, status, owner)) in enumerate(zip(rollout, ROLLOUT, strict=True)):
         require_fields(row, {"id", "status", "owner"}, f"rollout row {index}")
         require(row == {"id": row_id, "status": status, "owner": owner}, f"rollout row {row_id} drifted or admitted prematurely")
+        require(f"ID: `{owner}`" in task_text, f"rollout owner is absent from the task tree: {owner}")
 
 
 def mutation_smoke(contract: dict[str, Any]) -> int:
@@ -435,6 +668,13 @@ def mutation_smoke(contract: dict[str, Any]) -> int:
         ("lazy double effect", lambda data: data["lazy_control_scenarios"][0].__setitem__("expected_effects", ["if-false-then-skipped", "if-false-else"])),
         ("receiver result", lambda data: data["receiver_scenarios"][0].__setitem__("expected", False)),
         ("codeblock syntax scope", lambda data: data["policy"].__setitem__("codeblock_fixture_boundary", "portable source literal")),
+        ("recurring backend omission", lambda data: data["recurring_gate"]["consumers"].pop()),
+        ("generated role omission", lambda data: data["recurring_gate"]["consumers"][0]["roles"].pop()),
+        ("logical primary omission", lambda data: data["recurring_gate"]["primary_cli"].__setitem__("case_id", "wrong_case")),
+        ("support-ledger omission", lambda data: data["recurring_gate"]["support_checks"].pop()),
+        ("CI registration omission", lambda data: data["recurring_gate"]["local_ci"].__setitem__("switch", "wrong_switch")),
+        ("driver omission", lambda data: data["recurring_gate"].__setitem__("driver", "tools/missing.sh")),
+        ("recurring admission regression", lambda data: data["rollout"][6].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         candidate = copy.deepcopy(contract)

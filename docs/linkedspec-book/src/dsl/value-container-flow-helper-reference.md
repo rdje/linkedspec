@@ -1170,7 +1170,7 @@ All five native backends now share the target evaluation, arity, and truth table
 dependency-orders neutral policy, five backend repairs, generated/primary projection, a recurring gate, and public
 no-drift under `.5.2.1-.9`. Neutral policy `.5.2.1` is now executable as
 `linkedspec-logical-helper-v1`: 17 truthiness rows, ten helper cases, three eager-effect scenarios, four arity
-failures, deterministic fixtures, and 15 drift mutations pass offline. Perl `.5.2.2` now represents logical calls
+failures, deterministic fixtures, and 22 semantic/topology drift mutations pass offline. Perl `.5.2.2` now represents logical calls
 as typed ActionIR and lowers native/live/standalone-emitted execution through `LinkedSpec::RuntimeLogical`, with
 pre-effect arity failure, eager once-only operands, real booleans, and one typed condition/helper seam. Rust
 `.5.2.3` now applies the same truth and arity policy through `RuntimeValue::as_bool` across native, serialized,
@@ -1182,8 +1182,20 @@ aligns `runtime_truthy`, validates arity before effects, and proves native, reco
 emitted-module, and primary roles on both PUC Lua and LuaJIT. Generated/primary `.5.2.7` now locks every available
 direct/traced generated role, exact typed failure/source attribution, Rust's direct-value versus compatibility-
 output distinction, and shared five-command case `success_logical_helpers_eager` under default and POSIX options.
-Rollout is 6 complete / 2 pending; `.5.2.8-.9` retain recurring proof and public no-drift, with no known native or
-generated truthiness split.
+Recurring `.5.2.8` now locks the neutral checker, six exact native/generated runtime consumers, selected 5x2x1
+primary case, and generated-source/capability/coverage ledgers under one strict driver. Rollout is 7 complete / 1
+pending; `.5.2.9` retains public no-drift, with no known native or generated truthiness split.
+
+When all five backend toolchains are installed, run the complete recurring logical proof with:
+
+```bash
+bash tools/check_logical_helper_five_backend.sh
+```
+
+The driver requires Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, builds disposable Lua native adapters, and fails
+on any missing native/generated role, primary projection, or support ledger. Canonical local CI exposes the same
+all-toolchain leg behind `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`; ordinary local CI still audits the tracked driver and
+its shell syntax.
 
 Examples:
 

@@ -67,15 +67,18 @@ owned first-class literal program lands; this contract does not activate `{|...|
 
 Run `python3 tools/check_logical_helper_contract.py` to validate 17 truthiness rows, ten helper cases, three eager
 effect scenarios, receiver and lazy-control contrast, four pre-effect arity failures, deterministic embedded
-fixtures, exact projection obligations, and 15 representative drift mutations. The eight rollout legs begin at
-zero complete / eight pending. Perl consumes the neutral artifact through typed ActionIR/runtime proof; Rust uses
+fixtures, exact projection obligations, and 22 semantic/topology drift mutations. Perl consumes the neutral
+artifact through typed ActionIR/runtime proof; Rust uses
 its shared typed truth/arity seam plus native, serialized, generated-plan, and emitted proof; Dart uses one typed
 helper/control seam plus native, normalized, generated-plan, standalone-emitted, and primary proof. Julia
 preserves its typed eager helper/control seam and adds native, normalized, generated-plan, standalone-emitted,
 primary, and exact diagnostic proof. Lua consumes the same contract through native, reconstructed, generated-plan,
-emitted-module, primary, and exact diagnostic proof on PUC Lua and LuaJIT. The current ledger is five complete /
-three pending: generated/primary projection, recurring composed proof, and public no-drift remain owned by
-`FUTURE-PARITY-BACKLOG.5.2.7-.9`.
+emitted-module, primary, and exact diagnostic proof on PUC Lua and LuaJIT. Run
+`bash tools/check_logical_helper_five_backend.sh` for the strict recurring composition: the checker, all six
+backend/runtime consumers with their exact native/generated roles, `success_logical_helpers_eager` through the
+5x2 selected primary matrix, and generated-source/capability/coverage ledgers. Canonical local CI exposes the
+same all-toolchain leg with `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`. The current ledger is seven complete / one pending;
+only public no-drift remains under `FUTURE-PARITY-BACKLOG.5.2.9`.
 
 `callable_signature_contract.json` adopts the definition-time variadic user-function contract without claiming
 cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, keeps version-1 fixed definitions exact,

@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: recurring logical admission `FUTURE-PARITY-BACKLOG.5.2.8` adds one strict
+  omission-checked driver over `linkedspec-logical-helper-v1`, the exact native/generated role inventory for
+  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, selected primary case `success_logical_helpers_eager` under five
+  commands and two environments, and generated-source/capability/coverage ledgers. The offline checker rejects
+  22 semantic/topology mutations, canonical local CI registers the all-toolchain leg behind
+  `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`, and rollout is 7 complete / 1 pending before public no-drift `.5.2.9`.
+  No runtime implementation changed.
 - `2026-07-17` refresh: logical generated/primary rollout `FUTURE-PARITY-BACKLOG.5.2.7` expands the unchanged
   neutral consumers across every available direct/traced generated role. Perl proves emitted `Execute`,
   `ExecuteWithTrace`, and `Get`; Rust proves typed-v1 and compatibility direct/traced pairs; Dart, Julia, and Lua

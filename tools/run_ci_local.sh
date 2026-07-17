@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -88,6 +88,7 @@ require_tracked_file tools/check_complete_named_mark_contract.py
 require_tracked_file tools/check_diagnostic_output_contract.py
 require_tracked_file tools/check_diagnostic_output_five_backend.sh
 require_tracked_file tools/check_logical_helper_contract.py
+require_tracked_file tools/check_logical_helper_five_backend.sh
 require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
 require_tracked_file tools/check_uniform_binding_contract.py
@@ -169,7 +170,8 @@ audit_no_machine_specific_absolute_paths
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/build_lua_native.sh \
- tools/check_diagnostic_output_five_backend.sh tools/check_punctuation_light_five_backend.sh
+ tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
+ tools/check_punctuation_light_five_backend.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
 perl -c tools/run_cli_conformance.pl
@@ -347,6 +349,14 @@ if [[ "${LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh"
 else
  log "skipping optional five-backend diagnostic-output matrix (set LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_LOGICAL_MATRIX:-0}" == "1" ]]; then
+ log "running optional five-backend logical-helper matrix (LINKEDSPEC_RUN_LOGICAL_MATRIX=1)"
+ require_tracked_file tools/check_logical_helper_five_backend.sh
+ bash "$REPO_ROOT/tools/check_logical_helper_five_backend.sh"
+else
+ log "skipping optional five-backend logical-helper matrix (set LINKEDSPEC_RUN_LOGICAL_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_PUNCTUATION_MATRIX:-0}" == "1" ]]; then

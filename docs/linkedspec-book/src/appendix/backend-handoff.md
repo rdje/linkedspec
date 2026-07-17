@@ -865,7 +865,7 @@ therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1`
 all results are booleans, and invalid arity fails before effects. Typed truth makes only null, false, numeric zero,
 empty strings, and empty aggregates false; codeblocks are true without invocation. The executable contract checks
 17 truth rows, ten helper cases, three eager-effect scenarios, receiver/lazy-control contrast, four invalid calls,
-deterministic fixtures, and 15 mutations. Its ledger began deliberately at 0 complete / 8 pending before Perl,
+deterministic fixtures, and 22 semantic/topology mutations. Its ledger began deliberately at 0 complete / 8 pending before Perl,
 Rust, Dart, Julia, Lua, generated/primary, recurring, and public leaves `.5.2.2-.9`. Perl `.5.2.2` consumes that
 policy through typed ActionIR/runtime lowering across native/live/standalone-emitted execution. Rust `.5.2.3`
 now routes helpers and lazy conditions through one `RuntimeValue::as_bool` seam, rejects arity before operands,
@@ -880,7 +880,10 @@ the complete Lua gate remains 177/177 per ABI plus CLI 63x2 and corpus 105/105. 
 every available direct/traced role across Perl, Rust, Dart, Julia, and Lua with exact values, eager effects,
 failure/source metadata, and trace identity. Rust retains the intentional typed direct-value versus compatibility-
 output-array signature. Shared case `success_logical_helpers_eager` passes all five commands in default and POSIX
-environments. The ledger is 6 complete / 2 pending before `.5.2.8-.9`. Explicit codeblock literals remain
+environments. Recurring `.5.2.8` now locks one strict driver over that neutral checker, all six runtime consumers
+and their exact native/generated roles, selected 5x2x1 primary case, and generated-source/capability/coverage
+ledgers. Canonical local CI registers the same all-toolchain proof behind `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`; the
+ledger is 7 complete / 1 pending before public `.5.2.9`. Explicit codeblock literals remain
 separately owned by `.11`; the logical contract's
 typed codeblock row does not activate that syntax.
 Planning `.5.1.0` split diagnostic parity before behavior changes. Its historical probes found three important
