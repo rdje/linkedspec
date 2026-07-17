@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: Perl live cursor execution `FUTURE-PARITY-BACKLOG.9.1.3.2` now feeds normalized per-rule
+  `cursor_policy` into normal live/loaded HandlerIR and LinkedRE calls. AND families consume; default/OR families
+  seek; parent/option state does not propagate across top, blind/action, explicit-call, or recursive entry. Rule
+  trace records the intrinsic policy. Descriptor/generated-source v1 still use a separately built legacy artifact
+  handler, preserving their staged `.9.1.3.3-.4` boundary; API/CLI removal remains `.9.1.3.5`. Focused live 38,
+  normalization 272, and Phase 0 1,031 pass. A pre-existing identical-regex dependency-index alias is tracked by
+  `.9.1.8.1` rather than folded into cursor semantics.
 - `2026-07-17` refresh: Perl normalization `FUTURE-PARITY-BACKLOG.9.1.3.1` implements the preflight seam without
   crossing into live cursor execution. Bootstrap retains typed complete-line bare candidates after reserved
   lifecycle forms; Compiler supplies the full declaration set; RuleIR resolves forward references, lowers AND
   bare edges to blind ownership and OR/default bare edges to action ownership, validates one ownership set, and
   publishes derived per-rule `family`, `cursor_policy`, and `edge_ownership`. Exact portable failures survive
   RuntimeContext. The focused source contract covers 36 family spellings, 18 edge cases, and six ownership sets
-  in 272 assertions. HandlerIR/LinkedRE still receives the global mode; `.9.1.3.2` owns live spending.
+  in 272 assertions. This is the normalization boundary consumed by live-execution slice `.9.1.3.2`.
 - `2026-07-17` refresh: verified Perl cursor preflight `FUTURE-PARITY-BACKLOG.9.1.3.0` maps six implementation boundaries:
   bootstrap/validation, RuleIR normalization, live handler emission, descriptor state, generated v2, and primary
   CLI/tests. Toolbox bootstrap proof finds bare `Child` is currently dropped while bare fluent/block forms become

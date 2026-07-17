@@ -8,6 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.2 — execute Perl rule-local cursors**
+  (DONE — focused, lockstep, and canonical signoff pass; clean commit is the only remaining workflow step before
+  descriptor projection `.9.1.3.3` can activate).
+
+  **Result:** Normal live/loaded Perl handlers spend intrinsic AND=`consume` and default/OR=`seek` policy across
+  every parent/child mechanism. The accepted legacy option no longer owns live behavior. A separate legacy
+  artifact handler preserves descriptor/generated-source v1 until their assigned migration leaves.
+
+  **Proof:** Focused live 38/38 covers eight parent/child rows, both structural replacements, loaded and trace
+  roles; normalization remains 272/272; three modules compile. Canonical local CI passes capability 80/0/0,
+  cursor 36/18/8/91 at 1/7 plus 27 mutations, generated v1, logical/diagnostic 8/0, coverage 246/105+1/122,
+  reference CLI 63/63 twice, and Phase 0 1,031/1,031 in 629 seconds. Two seek-dependent historical fixtures were
+  structurally migrated from exact descriptor/source/trace evidence.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.1 — normalize Perl rule families and bare edges**
   (DONE — source normalization and per-rule policy facts are implemented; live cursor execution `.9.1.3.2` follows
   after the clean commit).

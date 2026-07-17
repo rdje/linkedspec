@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.2 — execute Perl rule-local cursors
+
+Normal live and loaded Perl handlers now select cursor behavior from each normalized rule's intrinsic policy:
+AND families consume contiguously, while default/OR families seek. Parent mode, entry mechanism, recursion, and
+the still-accepted legacy `parse_mode` option cannot override a child rule. Handler trace scopes now record the
+rule-owned policy.
+
+The staged compatibility boundary remains deliberate. Descriptor and generated-source contract v1 paths build a
+separate artifact handler from the legacy option so their bytes and reconstruction behavior remain unchanged for
+`.9.1.3.3-.4`; the primary option/CLI and shared-fixture removal remains `.9.1.3.5`-owned. Low-level LinkedRE seek
+and consume algorithms remain available.
+
+The focused live contract passes 38 assertions over all eight neutral parent/child entry rows, both structural
+replacements, top/loaded/trace execution, and the legacy artifact boundary; the 272-assertion normalization
+contract remains green. Full Phase 0 passes 1,031/1,031. Two historical AND fixtures that relied on seek skipping
+edge-less slots now express every consumed slot explicitly. Toolbox trace also exposed a pre-existing identical-
+regex dependency-index alias; the fixture uses delimiter-sensitive anchors, while the cross-backend semantic
+decision and engine repair/rejection are tracked by `FUTURE-PARITY-BACKLOG.9.1.8.1`.
+
+The neutral migration inventory remains exactly 91 files: the now-token-free HandlerVariantEmitter path leaves the
+token-derived list and the new token-bearing live execution contract enters the same Perl owner group. Rollout
+status remains 1 complete / 7 pending; this implementation slice does not claim final Perl admission.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.1 — normalize Perl rule families and bare edges
 
 The Perl reference now retains complete-line bare plain, indexed, grouped, block, and fluent rule-edge candidates.

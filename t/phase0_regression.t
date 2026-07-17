@@ -16393,6 +16393,7 @@ subtest 'emit_context_lowers_explicit_nonempty_push_guard' => sub {
     my $spec_content = <<'SPEC';
 Top::AND I.set(items, array())
  /a/
+ -> Top[0] { }
  /,/
  /b/
  -> Top[1] { if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif() }
@@ -43411,11 +43412,13 @@ Top::AND
  I { set(first, undef) }
  /foo\(/
  -> Top[0] { mark_here(body_start) }
- /\w+/
+ /\w+(?=,)/
  @mark(first_value_end)
+ -> Top[1] { }
  /,/
  -> Top[2] { set(first, capture_take(body_start)) }
- /\w+/
+ /\w+(?=\))/
+ -> Top[3] { }
  /\)/
  -> Top[4] { mark_match_start(end_mark); mark_here(after_end); return(array("?Top:", first, capture_between(body_start, end_mark), capture_between(body_start, after_end))) }
 SPEC
@@ -43771,14 +43774,14 @@ PERL
     is($seek_out, $default_out, 'explicit seek parse mode matches the default parser result end to end');
 };
 
-subtest 'parse_mode_consume_requires_contiguous_match' => sub {
+subtest 'and_family_requires_contiguous_match_independent_of_legacy_option' => sub {
     plan tests => 5;
 
     my $snippet = <<'PERL';
 use LinkedSpec;
 my ($input) = @ARGV;
 my $spec_content = <<'SPEC';
-Top::
+Top::AND
  /a/ -> Top { return(1) }
 SPEC
 my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume');
@@ -43793,9 +43796,9 @@ PERL
 
     is($reject_exit, 0, 'consume parse mode leading-junk subprocess exits cleanly') or diag($reject_err || $reject_out);
     is($accept_exit, 0, 'consume parse mode contiguous-input subprocess exits cleanly') or diag($accept_err || $accept_out);
-    like($reject_out, qr/^CODE\n__AST_UNDEF__\n\z/s, 'consume parse mode rejects leading junk before the first anchor');
-    like($accept_out, qr/^CODE\n/s, 'consume parse mode still builds parser coderef');
-    like($accept_out, qr/\$VAR1 = 1;/, 'consume parse mode still accepts contiguous matching input');
+    like($reject_out, qr/^CODE\n__AST_UNDEF__\n\z/s, 'AND family rejects leading junk before the first anchor');
+    like($accept_out, qr/^CODE\n/s, 'AND-family source still builds a parser coderef');
+    like($accept_out, qr/\$VAR1 = 1;/, 'AND family accepts contiguous matching input');
 };
 
 subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source' => sub {

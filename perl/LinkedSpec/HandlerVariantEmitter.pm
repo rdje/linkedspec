@@ -16,7 +16,7 @@
 #                 | 'or_bcode' | 'or_acode' | 'rep_bcode' | 'rep_and_bcode'
 #                 | 'rep_and_acode' | 'rep_acode',
 #     label      => '<rule_label>',
-#     parse_mode => 'seek' | 'consume',
+#     cursor_policy => 'seek' | 'consume',
 #
 #     # Lifecycle code bodies (strings from ActionIR lowering)
 #     preamble   => '<icode>;',         # I-block (Initial) — code executed when the handler is first entered
@@ -104,7 +104,7 @@ sub _build_default_handler_variant {
     return {
         kind       => 'default',
         label      => $args{label},
-        parse_mode => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble   => $args{preamble}   // '',
         lxcode     => $args{lxcode}     // '',
         lscode     => $args{lscode}     // '',
@@ -135,7 +135,7 @@ sub _build_and_bcode_sequence_body {
     # Optional fields for AND rules that also have a regex + per-regex I-block:
     # REs (for match expression) and and_icode (IMATCH bridge + return->assignment).
     $ir->{REs} = $args{REs} if ref($args{REs}) eq 'ARRAY' && @{$args{REs}};
-    $ir->{parse_mode} = $args{parse_mode} if defined($args{parse_mode});
+    $ir->{cursor_policy} = $args{cursor_policy} if defined($args{cursor_policy});
     $ir->{and_icode} = $args{and_icode} if defined($args{and_icode}) && length($args{and_icode});
     return $ir;
 }
@@ -159,7 +159,7 @@ sub _build_and_single_acode_variant {
     my $ir = {
         kind       => 'and_single_acode',
         label      => $args{label},
-        parse_mode => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble   => $args{preamble} // '',
         lxcode     => $args{lxcode}   // '',
         lscode     => $args{lscode}   // '',
@@ -182,7 +182,7 @@ sub _build_and_acode_sequence_body {
     return {
         kind        => 'and_acode_seq',
         label       => $args{label},
-        parse_mode  => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble    => $args{preamble} // '',
         lxcode      => $args{lxcode}   // '',
         lscode      => $args{lscode}   // '',
@@ -227,7 +227,7 @@ sub _build_or_acode_variant {
     return {
         kind       => 'or_acode',
         label      => $args{label},
-        parse_mode => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble   => $args{preamble} // '',
         lxcode     => $args{lxcode}   // '',
         acodes_ref => $acodes_ref,
@@ -307,7 +307,7 @@ sub _build_rep_and_acode_variant {
     return {
         kind        => 'rep_and_acode',
         label       => $args{label},
-        parse_mode  => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble    => $args{preamble} // '',
         excode      => $args{excode}   // '',
         ecode       => $args{ecode}    // '',
@@ -331,7 +331,7 @@ sub _build_rep_acode_variant {
     return {
         kind       => 'rep_acode',
         label      => $args{label},
-        parse_mode => $args{parse_mode} // 'seek',
+        cursor_policy => $args{cursor_policy} // 'seek',
         preamble   => $args{preamble} // '',
         lscode     => $args{lscode}   // '',
         lecode     => $args{lecode}   // '',
@@ -355,10 +355,10 @@ sub _build_rep_acode_variant {
 sub _linkedre_or_expr {
     my (%args) = @_;
     my $label      = $args{label};
-    my $parse_mode = defined($args{parse_mode}) && length($args{parse_mode})
-        ? $args{parse_mode}
+    my $cursor_policy = defined($args{cursor_policy}) && length($args{cursor_policy})
+        ? $args{cursor_policy}
         : 'seek';
-    return $parse_mode eq 'consume'
+    return $cursor_policy eq 'consume'
         ? "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, 'consume', \$info)"
         : "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, \$info)";
 }
@@ -1591,7 +1591,7 @@ sub _emit_rep_acode_handler {
 
 #------------------------------------------------------------------------------
 # _emit_handler_json — emit HandlerIR as a JSON document.
-# Returns a JSON string with kind, label, parse_mode, lifecycle slots,
+# Returns a JSON string with kind, label, cursor_policy, lifecycle slots,
 # dispatch refs, and repetition bounds (where applicable).
 #------------------------------------------------------------------------------
 sub _emit_handler_json {
@@ -1605,7 +1605,8 @@ sub _emit_handler_json {
     my %obj;
     $obj{kind}       = $ir->{kind};
     $obj{label}      = $ir->{label};
-    $obj{parse_mode} = $ir->{parse_mode} if defined $ir->{parse_mode} && length($ir->{parse_mode});
+    $obj{cursor_policy} = $ir->{cursor_policy}
+        if defined $ir->{cursor_policy} && length($ir->{cursor_policy});
 
     # Lifecycle slots (only include non-empty)
     foreach my $slot (qw(preamble lxcode lscode lecode ecode excode itcode)) {

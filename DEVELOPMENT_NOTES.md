@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.2` — separate live policy from staged artifact compatibility):
+  A live-only migration cannot reuse one emitted handler string for every outward role. Normal parser execution
+  must spend `rule_meta.cursor_policy`, but descriptor/generated-source v1 must remain byte-compatible until their
+  own versioned migrations. Compiler therefore tells SpecEntry whether it is building a normal live handler;
+  SpecEntry builds the intrinsic handler for runtime and, only at that boundary, a second legacy-policy handler for
+  v1 source capture. This keeps the runtime truthful without silently producing a half-v2 artifact.
+
+  Full regression proof must distinguish authored migration debt from an engine regression. The two failing
+  Phase 0 AND fixtures owned only selected regex slots, so the legacy seek path skipped intervening text that
+  rule-owned consume correctly rejected. Descriptor dependency refs and routed trace proved the exact omitted
+  indices. Adding the missing edges repaired the first fixture. In the marker fixture, two identical `/\\w+/`
+  alternatives then both reported the earlier index because `LinkedRE::oredRE` is a left-to-right alternation;
+  delimiter-sensitive word anchors made the fixture's slot identity explicit. That identical-alternative behavior
+  is a separate durable risk, not something to conceal in this slice; `.9.1.8.1` owns its portable decision and
+  cross-backend repair/rejection. Focused live 38/38, normalization 272/272, and Phase 0 1,031/1,031 pass.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.1` — normalize before planning, spend policy later):
   Preserve syntax identity until the declaration graph is available. The bootstrap can know that a complete line
   is a bare-edge candidate, but it cannot know whether the target is declared later; Compiler is the first owner

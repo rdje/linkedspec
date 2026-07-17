@@ -1,14 +1,16 @@
 # Rule Modes and Parse Modes
 
-LinkedSpec rule execution has two independent axes:
+LinkedSpec rule execution has two related axes:
 
 - the rule mode, which is written on the rule label and controls how that rule composes its body,
-- the parse mode, which is passed to parser construction and controls cursor discipline while the parser runs.
+- the cursor policy derived from that rule family, which controls whether matching may seek forward or must consume
+  contiguously.
 
-Keep those two ideas separate. A rule label such as `Item:AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
+Keep composition and cursor discipline conceptually separate even though one authored family now determines both.
+A label such as `Item:AND` says "compose this body as an ordered sequence" and gives that rule the `consume` policy.
+A default/OR-family label composes choices or repetition and gives that rule the `seek` policy.
 
-> **Current behavior versus rollout target:** This chapter documents the public
-> implementation that exists today. Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
+> **Current staged implementation:** Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
 > that the caller-global option changes every nested rule and already creates an
 > uncovered default-AND backend difference: Perl, Dart, Julia, and Lua default
 > to global `seek`, while Rust defaults to its compiled AND=`consume` mode when
@@ -19,11 +21,14 @@ Keep those two ideas separate. A rule label such as `Item:AND` says "compose thi
 > propagates to or overrides child mode: an OR child remains seek under an AND
 > parent, and an AND child remains consume under an OR parent. Mode-sensitive
 > bare edges, explicit exceptions, descriptor/generated metadata, and removal
-> diagnostics are also fixed below. Perl `.9.1.3.1` now parses and normalizes
-> those bare edges and records derived family/cursor facts before handler
-> emission. Live handlers and the public API still use the current global mode;
+> diagnostics are also fixed below. Perl `.9.1.3.1` parses and normalizes those
+> bare edges, and `.9.1.3.2` makes normal live and loaded Perl handlers spend
+> each rule's derived policy independently. The transitional Perl `parse_mode`
+> argument remains accepted for descriptor/generated-source v1 compatibility,
+> but it no longer overrides normal live execution. Descriptor v1, generated
+> source v2, and CLI removal remain separately staged under `.9.1.3.3-.5`;
 > neutral contract/inventory `.9.1.2` is executable at 1 complete / 7 pending;
-> backend behavior remains dependency-ordered under `.9.1.3-.9`.
+> Rust, Dart, Julia, and Lua behavior remains dependency-ordered under `.9.1.4-.9`.
 
 ## Current rule-label surface
 
@@ -435,96 +440,71 @@ The engine does not maintain a search tree. It does not remember which alternati
 
 This means the parser will not automatically reorder alternatives to find a successful match, will not retry a different decomposition of the input, and will not explore multiple parse paths. The only way the cursor moves backward is through explicit cursor controls such as `restore_cursor()`, `rewind_match_start()`, or `rewind_entry_start()` — not search-tree operations.
 
-This design is intentional. LinkedSpec is built for extraction and recognition, not for exhaustive ambiguity resolution. The rule modes (`AND`, `OR`, `:|`, etc.) control composition within this forward-moving framework; the parse modes (`seek`, `consume`) control cursor discipline within this framework. Neither implies systemic backtracking.
+This design is intentional. LinkedSpec is built for extraction and recognition, not for exhaustive ambiguity resolution. The rule modes (`AND`, `OR`, `:|`, etc.) control composition within this forward-moving framework; their derived cursor policies (`seek`, `consume`) control cursor discipline within it. Neither implies systemic backtracking.
 
-For more detail on cursor-stack helpers, anchor rewinds, and their interaction with `parse_mode`, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#explicit-cursor-controls).
+For more detail on cursor-stack helpers, anchor rewinds, and their interaction with rule-local cursor policy, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#explicit-cursor-controls).
 
-## Current implemented parse modes
+## Current cursor policies
 
-Parse modes control cursor discipline at runtime. They do not change rule composition.
-
-The public modes are:
-
-- `seek`
-- `consume`
-
-If `parse_mode` is omitted, LinkedSpec uses `seek`.
+Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
+The two low-level algorithms are `seek` and `consume`, but normal Perl live execution selects them from the rule
+family rather than a parser-wide override.
 
 ### `seek`
 
-`seek` preserves LinkedSpec's progressive extraction behavior: the parser can seek forward to a later anchor.
-
-This is useful when a grammar is being used to extract structure from a larger input rather than to require the very next input byte to match.
-
-Example:
+`seek` preserves LinkedSpec's progressive extraction behavior: a rule can move forward to a later anchor. Every
+default/OR-family rule owns this policy.
 
 ```text
-Top::
- -> Word .push
-LX { return(copy(Top)) }
-
-Word:
- /foo/ I.return(entry_text())
+Word::
+ /foo/ -> Word { return(entry_text()) }
 ```
 
-With `seek`, this input can still match:
-
-```text
-junk foo
-```
-
-The parser is allowed to move forward until it finds `foo`; this wrapper returns `["foo"]`.
+Given `junk foo`, `Word` seeks to `foo` and returns `"foo"`.
 
 ### `consume`
 
-`consume` is stricter. It requires matching to proceed contiguously from the current input position.
-
-The same spec:
+`consume` requires a match to begin at the current cursor. Every AND-family rule owns this policy.
 
 ```text
-Top::
- -> Word .push
-LX { return(copy(Top)) }
+Word::AND
+ /foo/ -> Word { return(entry_text()) }
+```
+
+Given `junk foo`, `Word` fails because its cursor begins at `j`. Given `foo`, it returns `"foo"`.
+
+The parent does not lend its policy to the child. This ordered wrapper consumes its own structural steps, but its
+default-family child still seeks from the cursor at which it was called:
+
+```text
+Top::AND
+ Word.return(child_result)
 
 Word:
- /foo/ I.return(entry_text())
+ /foo/ -> Word { return(entry_text()) }
 ```
 
-rejects this input under `consume`:
+That separation is what makes a reusable extraction rule remain an extraction rule inside a strict ordered parent.
 
-```text
-junk foo
-```
+## Transitional Perl option boundary
 
-because the current cursor is at `j`, not at `f`; this wrapper returns no matches (`[]`).
-
-This input is acceptable under both modes:
-
-```text
-foo
-```
-
-For that input, the wrapper returns `["foo"]` under either mode.
-
-Use `consume` when the spec should behave more like a conventional parser step and reject leading junk before the next anchor. Use `seek` when the spec should act more like an extraction grammar over a larger body of text.
-
-## Current public option shape
-
-`parse_mode` is a backend-neutral compile option: both inline parser construction and file-oriented parser construction accept the same value. In the Perl reference backend:
+The Perl reference still accepts `parse_mode` in inline and file-oriented construction while the staged migration
+keeps descriptor and generated-source v1 contracts loadable. It no longer controls normal live handler execution:
 
 ```perl
 my $parser = LinkedSpec::Get(
-  \$spec_text,
-  parse_mode => 'consume',
+  \$and_spec_text,
+  parse_mode => 'seek', # transitional; AND still consumes live
 );
 
-my $parser = LinkedSpec::get_parser(
-  'Lispish',
-  parse_mode => 'consume',
+my $loaded = LinkedSpec::get_parser(
+  'AndGrammar',
+  parse_mode => 'seek', # transitional; each loaded rule still owns its policy
 );
 ```
 
-Descriptor introspection reports the selected mode in descriptor metadata (Perl reference backend shown):
+Descriptor v1 still reports the legacy root field, and generated-source v1 still serializes the legacy mode until
+their owning migration leaves land:
 
 ```perl
 my $descriptor = LinkedSpec::Get(
@@ -533,8 +513,12 @@ my $descriptor = LinkedSpec::Get(
   parse_mode => 'consume',
 );
 
-my $mode = $descriptor->{meta}{parse_mode}; # consume
+my $legacy_mode = $descriptor->{meta}{parse_mode}; # consume (v1 compatibility)
 ```
+
+Do not use that field to infer the behavior of a normal live Perl rule. Inspect the rule's family-derived
+`cursor_policy` instead. The public option and `--parse-mode` command flag are scheduled for targeted removal,
+not permanent ignored compatibility.
 
 ## Choosing a mode
 
@@ -552,13 +536,17 @@ Use `OR{...}` when the repeated-choice count matters.
 
 Use `AND{...}` when the repeated-sequence count matters.
 
-Use `consume` when contiguity matters. Use `seek` when extraction from a larger input is the goal.
+Choose an AND-family label when contiguity matters. Choose a default/OR-family label when extraction from a larger
+input is the goal. Compose strict and progressive rules structurally when one grammar needs both behaviors.
 
-Rule modes, action/lifecycle placement, and parse modes are deliberately separate. If a rule does not behave as expected, debug those axes separately: first the label, then the body edge family (`->` versus `=>`), then the parse-mode option.
+Rule composition, action/lifecycle placement, and cursor discipline remain distinct diagnostic axes. If a rule
+does not behave as expected, inspect the label-derived family/policy first, then the body edge family (`->` versus
+`=>`), then the exact cursor at which the rule was entered. In the staged Perl reference, do not debug normal live
+execution by changing the transitional `parse_mode` option; it no longer owns that behavior.
 
 ## Rule-local rollout
 
-ADR `0044` replaces the current global option during `.9.1.3-.9` rollout. The
+ADR `0044` replaces the former global option during `.9.1.3-.9` rollout. The
 target is already executable, before backend changes, in
 `capability_conformance/rule_local_cursor_contract.json`; run
 `python3 tools/check_rule_local_cursor_contract.py` from the repository root.
@@ -579,7 +567,7 @@ anchored choice is an OR parent over consume-owning one-anchor AND children.
 This keeps each reusable rule stable instead of reviving a caller or rule-local
 escape hatch.
 
-The Perl reference now implements the decision's bare-edge normalization. A complete bare paragraph
+The Perl reference now implements both the decision's bare-edge normalization and normal live cursor spending. A complete bare paragraph
 member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -624,15 +612,13 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-Later Perl rollout slices make the derived policy drive live execution and remove
-`parse_mode` / `--parse-mode` with a targeted
-diagnostic rather than accepted and ignored. Descriptors replace root
+The remaining Perl rollout slices remove `parse_mode` / `--parse-mode` with a targeted
+diagnostic rather than preserving an accepted-and-ignored option. Descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract` and per-rule `meta.cursor_policy`.
 Generated source moves to v2 and derives policy from its handler-family plan;
-version-1 artifacts must be regenerated. Until those later implementation leaves
-land, use the current option behavior documented above. Bare-edge source and
-per-rule `family`, `cursor_policy`, and `edge_ownership` metadata in the Perl
-reference are current; live cursor spending and outward root metadata are not yet migrated. The
+version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
+`cursor_policy`, and `edge_ownership` metadata, and normal live/loaded cursor spending in the Perl
+reference are current. Outward root metadata, generated-source v2, and primary-command removal are not yet migrated. The
 neutral checker currently reports 36 family spellings, 18 edge cases, eight
 parent/child cases, 91 migration files, 1 complete / 7 pending, and 27 rejected
 drift mutations.

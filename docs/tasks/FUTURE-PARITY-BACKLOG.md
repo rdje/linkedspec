@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-17` (Perl authored-family/bare-edge normalization `.9.1.3.1` is implemented and verified;
-  live rule-local cursor execution `.9.1.3.2` follows only after the clean commit)
+- Last updated: `2026-07-17` (Perl live rule-local cursor execution `.9.1.3.2` is fully verified and closing through
+  its clean commit; descriptor projection `.9.1.3.3` remains pending until that boundary)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3195,7 +3195,8 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.9.1`
   Status: `active`
   Goal: Ratify and dependency-order the corrected AND/OR edge-default and cursor contract before rollout.
-  Children: `.9.1.0`, `.9.1.1`, `.9.1.2`, `.9.1.3`, `.9.1.4`, `.9.1.5`, `.9.1.6`, `.9.1.7`, `.9.1.8`, `.9.1.9`
+  Children: `.9.1.0`, `.9.1.1`, `.9.1.2`, `.9.1.3`, `.9.1.4`, `.9.1.5`, `.9.1.6`, `.9.1.7`, `.9.1.8`,
+    `.9.1.8.1`, `.9.1.9`
   Acceptance: Specify grammar and runtime semantics for mode-sensitive bare edge lines. In AND rules (`:&`, `::&`,
     `:AND`, `::AND`, and bounded/repeated variants), a bare `entry { ... }` line should mean an explicit
     blind-call `=> entry { ... }`; in OR/default rules, a bare `entry { ... }` line should mean an explicit
@@ -3414,15 +3415,47 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.3.1 - normalize Perl rule edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Make Perl live execution spend per-rule cursor policy across every parent/child entry mechanism.
   Dependencies: `.9.1.3.1`
   Acceptance: Derive handler seek/consume behavior from the normalized rule family, never caller or parent state;
     remove public/global override ownership at the gate-safe boundary fixed by `.0`; preserve low-level seek and
     consume matcher primitives; and prove top-level, blind/action/explicit-call/recursion, loaded-spec, trace, and
     structural replacement behavior without cross-rule propagation.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — The 37-assertion initial focused contract failed exactly 17 live assertions when
+    parent/child family policy contradicted the legacy caller option; the first full Phase 0 run then isolated two
+    authored AND fixtures at subtests 477 and 949 that depended on seek skipping unowned regex slots.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `return_descriptor`, emitted-source inspection, and routed debug trace prove
+    `Compiler::build_dependency_regex_map` contains only edge-owned regex indices, while `LinkedRE::or` now spends
+    the rule's `cursor_policy`. The marker fixture additionally proved identical dependency alternatives select
+    the first Perl alternation index; that separate latent risk is durably owned by `.9.1.8.1`.
+  - [x] **FIX** — Normal live Compiler→SpecEntry→HandlerIR construction uses normalized per-rule `cursor_policy`;
+    generated-source/descriptor v1 builds a separate legacy artifact handler until `.3-.4`; trace entry records
+    policy. The two Phase 0 fixtures now explicitly own every consumed slot, and the marker fixture uses distinct
+    delimiter-sensitive word anchors so dependency indices remain unambiguous.
+  - [x] **ADDRESSED (verified)** — Focused live proof moves 17 failures to zero and passes 38 assertions across all
+    eight neutral parent/child rows, both structural replacements, top/loaded/trace roles, and the preserved v1
+    boundary; normalization remains 272/272. The exact Phase 0 failure set `{477,949}` becomes empty. The exact
+    91-file migration inventory swaps the now-token-free emitter for the new token-bearing live contract without
+    changing ownership order or the 1/7 rollout ledger.
+  - [x] **NO REGRESSION** — Three touched Perl modules compile; focused rule-local 310/310 and adjacent logical,
+    diagnostic, generated-source, scalar, Unicode, and trace suites pass. Full `PERL5LIB=` Phase 0 reaches its true
+    `1..1031` stop with 1,031/1,031 PASS in 638 seconds.
+  - [x] **LOCKSTEP** — Task/roadmap/architecture/live/change/development/memory, mdBook, Knowledge Map facts, and the
+    `.9.1.8.1` latent-risk owner are synchronized; canonical CI, doctrine, memory, task, book, and cleanup proof are
+    recorded before commit, and `.9.1.3.3` remains unactivated until the repository is clean.
+  Verification: **PASS 2026-07-17.** Perl live and loaded parsers now spend intrinsic AND=`consume` and
+    OR/default=`seek` independently at every top, blind/action, explicit-call, and recursive entry. Routed trace
+    records each rule-owned policy. The accepted legacy API option no longer owns normal live execution, while
+    descriptor/generated-source v1 output remains byte-compatible for `.9.1.3.3-.4`. Focused live 38/38,
+    normalization 272/272, adjacent contracts, three-module syntax, and Phase 0 1,031/1,031 pass. Two seek-dependent
+    historical fixtures were structurally migrated after exact descriptor/source/trace proof; the 91-file inventory
+    remains exact through a one-for-one emitter/live-test swap. No matcher primitive, descriptor root, generated
+    contract, CLI, shared fixture, or rollout-ledger boundary moved prematurely. Canonical local CI passes all
+    doctrines, capability 80/0/0, neutral cursor 36/18/8/91 at 1/7 plus 27 mutations, generated v1, logical and
+    diagnostic 8/0, coverage 246/105+1/122, reference CLI 63/63 twice, and Phase 0 1,031/1,031 in 629 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.3.2 - execute Perl rule-local cursors`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.3.3`
   Status: `pending`
@@ -3523,10 +3556,22 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1`
+  Status: `pending`
+  Goal: Decide and repair indexed dependency identity when one rule owns textually identical regex alternatives.
+  Dependencies: `.9.1.8`
+  Acceptance: Reproduce the Perl `LinkedRE::oredRE` leftmost-alternative index alias with the toolbox; inventory
+    whether native/generated roles in all five backends preserve slot identity for identical patterns; ratify the
+    language-level expectation; implement the narrow compiler/runtime representation or emit a portable rejection;
+    and lock repeated identical slots, actions, marks, generated plans, traces, and non-identical behavior without
+    relying on author-written regex distinctions.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `FUTURE-PARITY-BACKLOG.9.1.9`
   Status: `pending`
   Goal: Close cursor/edge rollout with public no-drift, migration guidance, and exact parent status.
-  Dependencies: `.9.1.8`
+  Dependencies: `.9.1.8.1`
   Acceptance: README, guides, mdBook, API/backend companions, examples, help, architecture, Knowledge Map,
     capability/status ledgers, and recurring scanners describe only the current implemented rule-local contract;
     stale current `parse_mode` guidance and v1 generated admission fail mechanically while explicit historical
@@ -5759,8 +5804,9 @@ director-priority AND/OR cursor-ownership audit `.9.1.0` and decision parent `.9
 `.9.1.1.1` fixes intrinsic family policy, mode-sensitive bare edges, override removal, descriptor/generated-v2,
 diagnostics, conformance, and the `.9.1.2-.9` rollout. After the clean logical closeout and urgent hygiene boundary,
 cursor contract/inventory `.9.1.2` is committed at 1/7; Perl `.9.1.3` is split into `.0-.6`, gate-safety audit
-`.9.1.3.0` is committed, and family/bare-edge normalization `.9.1.3.1` is implemented and verified. No live
-cursor-policy behavior rollout has begun; `.9.1.3.2` follows only after this leaf's clean commit.
+`.9.1.3.0` and family/bare-edge normalization `.9.1.3.1` are committed. Live cursor-policy execution `.9.1.3.2`
+is fully verified and closing through its commit; descriptor/generated/CLI behavior remains later-owned and
+`.9.1.3.3` cannot activate before the clean boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -5994,10 +6040,10 @@ cursor-policy behavior rollout has begun; `.9.1.3.2` follows only after this lea
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
-| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `active` | Perl preflight and normalization `.9.1.3.0-.1` are verified; live cursor execution `.9.1.3.2` follows. |
+| 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `active` | Perl preflight/normalization `.0-.1` are committed; live cursor `.2` is verified/closing before descriptor `.3`. |
 | 214.0 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `done` | Exact Perl roles, bare-edge prerequisite, and gate-safe shared-CLI fixture order are durable. |
 | 214.1 | `FUTURE-PARITY-BACKLOG.9.1.3.1` | `done` | Family-derived policy, typed bare edges, exact diagnostics, source/self-host parity, and canonical proof are complete. |
-| 214.2 | `FUTURE-PARITY-BACKLOG.9.1.3.2` | `pending` | Route live/loaded/trace parent-child execution through per-rule cursor ownership. |
+| 214.2 | `FUTURE-PARITY-BACKLOG.9.1.3.2` | `done` | Live/loaded/trace per-rule cursor execution and staged v1 boundary pass focused plus canonical proof. |
 | 214.3 | `FUTURE-PARITY-BACKLOG.9.1.3.3` | `pending` | Project v1 cursor descriptors and normalized resolved-edge facts. |
 | 214.4 | `FUTURE-PARITY-BACKLOG.9.1.3.4` | `pending` | Emit/validate/load generated-source v2 without serialized cursor overrides. |
 | 214.5 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `pending` | Remove Perl CLI option/help/trace and migrate reference fixtures at the gate-safe boundary. |
@@ -6007,6 +6053,7 @@ cursor-policy behavior rollout has begun; `.9.1.3.2` follows only after this lea
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
+| 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
@@ -6018,7 +6065,7 @@ cursor-policy behavior rollout has begun; `.9.1.3.2` follows only after this lea
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, Perl preflight, and normalization are complete; live Perl cursor execution `.9.1.3.2` follows. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, Perl preflight/normalization, and live execution are verified; descriptor `.9.1.3.3` follows after clean commit. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -6671,8 +6718,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None. ADR `0044` resolves the grammar/runtime/metadata/migration policy. Neutral `.9.1.2`, Perl preflight
-  `.9.1.3.0`, and normalization `.9.1.3.1` are complete; live execution `.9.1.3.2` follows after clean commit.
+- None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`,
+  Perl preflight `.9.1.3.0`, normalization `.9.1.3.1`, and live implementation `.9.1.3.2` are proven; `.3` follows
+  only after `.2` commits cleanly. Identical dependency-regex slot identity is a non-blocking separate
+  question with an explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -6686,13 +6735,15 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` and Perl
-  preflight/normalization `.9.1.3.0-.1` are complete while `.9.1.3.2-.6`, later backends
-  `.9.1.4-.9`, structured-format, write-vivification, and companion-book work remain pending.
+  preflight/normalization/live `.9.1.3.0-.2` are complete while pending `.9.1.3.3-.6`, later
+  backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
+  work remain pending.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.2` | Toolbox descriptor/source/routed-trace baseline; normal live HandlerIR/LinkedRE rule policy plus separate legacy v1 artifact handler; all eight parent/child mechanisms, two structural replacements, top/loaded/trace roles, and v1 boundary in 38 assertions; normalization 272; exact 91-file inventory swap at unchanged 1/7 plus 27 mutations; three-module syntax; adjacent logical/generated/diagnostic/scalar/Unicode/trace contracts; KM 581/4082; memory/task/doctrine/mdBook/whitespace; capability 80/0/0; generated v1; logical/diagnostic 8/0; coverage 246/105+1/122; reference CLI 63x2; Phase 0 `1..1031`/629s. | PASS. Every normal Perl rule spends intrinsic AND consume or default/OR seek without parent/legacy-option propagation; descriptor/generated-source v1 bytes stay staged; seek-dependent fixtures are structurally explicit; identical regex slot aliasing is tracked under `.9.1.8.1`; `.9.1.3.3` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.1` | Typed complete-line bootstrap/self-hosted grammar; full declared-set RuleIR normalization; derived family/cursor/ownership metadata; exact portable diagnostics; 272 source assertions over 36 family/18 edge/six ownership cases plus boundary/live proof; trace 5; fuzz 5; neutral 36/18/8/91 at 1/7 plus 27 mutations; six-module syntax; KM 580/4077; memory/task/doctrine/mdBook/whitespace; capability/generated/logical/diagnostic/coverage gates; reference CLI 63x2; Phase 0 `1..1031`/641s. | PASS. Bare edges resolve once before planning with reserved lifecycle priority and forward declarations; portable failures survive RuntimeContext; root task-index marker drift is repaired; global live cursor, API/CLI, generated v1, fixtures, and rollout ledger remain unchanged; `.9.1.3.2` follows only after clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.0` | Four KM/ADR authorities; `run_bootstrap_parse`, descriptor/generated/source seams; exact 14 original Perl token files plus non-token owners; 35 affected CLI cases partitioned 2/20/2/11; canonical registration; corrected exact 91-file owner set; neutral 36/18/8/91 at 1/7 plus 27 mutations; JSON; KM 580/4075; memory/task/doctrine/mdBook/whitespace; reference CLI 63/63 default and 63/63 POSIX. | PASS. Six implementation boundaries are split before code; typed complete-line candidates and declared-rule normalization are required; ten shared byte fixtures migrate reference-first in `.9.1.3.5`; no compatibility/skip/red-main path or behavior change; `.9.1.3.1` follows only after clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.2` | Independent executable contract over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, option/CLI retirement, descriptor/generated-v2 rules, eight diagnostics, and exact 91-file migration ownership; 1/7 rollout plus 27 mutations; capability/generated-source 80/0/0; coverage 246/105+1/122; Python/shell/JSON syntax; KM/memory/task/doctrine/mdBook/whitespace; canonical reference CLI 63x2 and Phase 0 `1..1031`/634s. | PASS. ADR `0044` is executable and omission-checked before rollout; current generated-source stays v1, no parser/compiler/runtime/descriptor/generated/CLI behavior changes, no implementation mutations run, and Perl `.9.1.3` follows only after the clean commit boundary. |
@@ -6860,6 +6911,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.3.2` | `FUTURE-PARITY-BACKLOG.9.1.3.2 - execute Perl rule-local cursors` | Intrinsic live/loaded HandlerIR policy, separate legacy-v1 artifact boundary, 38 focused assertions, exact 91-file inventory, Phase 0/canonical proof, and descriptor handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.1` | `FUTURE-PARITY-BACKLOG.9.1.3.1 - normalize Perl rule edges` | Typed bare-edge source, declared-set normalization, per-rule family/cursor/ownership facts, portable diagnostics, 272 focused assertions, canonical CI, and live-execution handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `FUTURE-PARITY-BACKLOG.9.1.3.0 - audit Perl cursor rollout boundaries` | Six exact mechanism boundaries, bare-edge root cause, 35-case CLI impact, ten-file reference-first ownership correction, and `.1-.6` split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.9.1.2` | `FUTURE-PARITY-BACKLOG.9.1.2 - adopt rule-local cursor contract` | Strict neutral schema/checker, exact 91-file inventory, 27 mutations, 1/7 ledger, canonical CI, and Perl rollout handoff; no backend behavior code. |

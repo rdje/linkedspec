@@ -820,7 +820,11 @@ sub run_get_pipeline {
      $entry,
      {
       runtime_ctx => $runtime_ctx,
-      parse_mode => $parse_mode,
+      # Normal live handlers spend their rule-family policy. Descriptor and
+      # generated-source v1 paths retain the legacy option until their staged
+      # contract migrations land.
+      use_rule_local_cursor => (!$generate_only && !$return_descriptor) ? 1 : 0,
+      legacy_artifact_cursor_policy => $parse_mode,
       function_registry => $function_registry,
       declared_rule_labels => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_labels} : undef,
      },

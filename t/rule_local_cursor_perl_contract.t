@@ -169,8 +169,8 @@ Top::AND
  -> Top { return("hit") }
 SPEC
 my $live_parser = LinkedSpec::Get(\$live_boundary_source);
-ok($live_parser, 'derived AND policy compiles without changing live handler mode in the normalization slice');
+ok($live_parser, 'derived AND policy compiles for live rule-local cursor execution');
 my $live_input = 'prefix x';
-is($live_parser->(\$live_input), 'hit', 'live Perl execution still spends the existing global seek default');
+ok(!defined($live_parser->(\$live_input)), 'live Perl execution spends the derived AND consume policy');
 
 done_testing;
