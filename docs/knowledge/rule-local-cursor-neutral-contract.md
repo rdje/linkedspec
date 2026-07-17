@@ -42,6 +42,13 @@ files are partitioned once, in dependency order, among `.9.1.2-.9`. An unowned
 new file or a listed file that loses every migration token fails the checker,
 so backend leaves must deliberately update the inventory as they migrate.
 
+Perl preflight `.9.1.3.0` corrected one ordering detail without changing the 91-
+file set or runtime semantics: the ten shared manifest/help/usage/trace files
+whose bytes change when the canonical reference removes `--parse-mode` migrate
+with Perl `.9.1.3.5`, because the mandatory local gate runs that reference suite
+twice. Shared CLI documentation and final symmetric admission remain `.9.1.8`-
+owned. See [[perl-rule-local-cursor-rollout-boundaries]].
+
 Only `neutral_contract_and_inventory` is complete. Perl, Rust, Dart, Julia,
 dual-ABI Lua, recurring five-backend admission, and public no-drift remain
 pending. Existing global option behavior, generated-source v1, descriptors,

@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-17`
+- `2026-07-17` refresh: verified Perl cursor preflight `FUTURE-PARITY-BACKLOG.9.1.3.0` maps six implementation boundaries:
+  bootstrap/validation, RuleIR normalization, live handler emission, descriptor state, generated v2, and primary
+  CLI/tests. Toolbox bootstrap proof finds bare `Child` is currently dropped while bare fluent/block forms become
+  arbitrary `ChildCODE`, so typed line-level candidates must resolve against the full declared-rule set before
+  RuleIR validation. Removing the reference option changes 35 mandatory canonical cases; ten shared manifest/
+  help/usage/trace files therefore migrate with `.9.1.3.5`, while `.9.1.8` retains final symmetric admission and
+  shared documentation. Reference CLI 63x2 and all governance checks pass; no runtime behavior changes in the
+  preflight.
 - `2026-07-17` refresh: neutral cursor contract `FUTURE-PARITY-BACKLOG.9.1.2` makes ADR `0044` executable without
   behavior admission. `linkedspec-rule-local-cursor-v1` checks 36 family spellings, 18 edge cases, six ownership
   sets, eight parent/child mechanisms, two structural replacements, targeted option/CLI removal, per-rule

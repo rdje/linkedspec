@@ -39,6 +39,12 @@ diagnostic, generated, inventory, and admission mutations. Only `neutral_contrac
 the rollout is 1 complete / 7 pending, current global `parse_mode` behavior remains accurately admitted above,
 and backend behavior does not change in this contract-only slice.
 
+Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
+`.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always
+runs twice. Shared CLI documentation and final symmetric five-backend admission remain `.9.1.8`-owned. This keeps
+main green without an ignored flag, hidden compatibility route, or skipped case while backends roll forward in
+dependency order.
+
 `scalar_text_contract.json` fixes the portable `cat` conversion boundary across Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT. It preserves strings, spells booleans as `1`/`0`, normalizes finite decimal text, and makes null plus
 the non-text value kinds propagate null. The executable fixture covers current portable source values; codeblock is

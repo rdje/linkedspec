@@ -7,7 +7,9 @@ override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`; runtime behavior has not changed. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`; executable cursor contract/inventory `.9.1.2` is verified at 1 complete / 7 pending,
-and Perl reference rollout `.9.1.3` follows after the clean commit boundary.
+and Perl reference rollout `.9.1.3` is split before code. Verified preflight `.9.1.3.0` maps the parser/RuleIR/emitter/
+descriptor/generated/CLI seams and assigns reference-breaking shared fixtures early enough to keep canonical CI
+green; normalization `.9.1.3.1` follows after its clean commit and runtime behavior remains unchanged.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

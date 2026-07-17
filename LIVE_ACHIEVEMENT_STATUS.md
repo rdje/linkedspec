@@ -8,6 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.3.0 — audit Perl cursor rollout boundaries**
+  (DONE — six implementation leaves are explicit and shared breaking fixtures follow the canonical reference;
+  family/bare-edge normalization `.9.1.3.1` follows after the clean commit).
+
+  **Result:** Six exact boundaries cover bootstrap/validation, RuleIR, live handler emission, descriptors,
+  generated v2, and primary/tests. Toolbox proof finds bare `Child` is currently dropped and bare fluent/block
+  forms become arbitrary `ChildCODE`, requiring typed line candidates and declared-rule normalization. Ten shared
+  files move to `.9.1.3.5` because option/help/trace removal affects 35 mandatory CLI cases; `.9.1.8` retains final
+  symmetry and shared documentation. No behavior changed.
+
+  **Proof:** Exact 14-file original Perl map plus non-token code owners; 2/20/2/11 CLI partition; unchanged 91-file
+  checker at 1/7 with 27 mutations; JSON/KM/governance/mdBook/whitespace and reference CLI 63x2 pass.
+
 - 2026-07-17: **FUTURE-PARITY-BACKLOG.9.1.2 — adopt executable rule-local cursor contract**
   (DONE — ADR `0044` is executable at 1 complete / 7 pending; Perl `.9.1.3` follows after the clean commit).
 

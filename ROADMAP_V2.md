@@ -131,7 +131,9 @@ generated-source v2 family derivation, and conformance. Implementation is split 
 primary logical projection `.5.2.7`, recurring logical gate `.5.2.8`, and public no-drift `.5.2.9` are complete;
 neutral cursor `.9.1.2` is verified with an executable 36-family/18-edge/8-parent-child contract, exact 91-file
 migration inventory, 27 drift mutations, and 1-complete/7-pending rollout ledger. Backend behavior remains
-unchanged; Perl `.9.1.3` consumes the contract after its clean commit boundary.
+unchanged. Perl `.9.1.3` is split into `.0-.6`; verified gate-safety preflight `.9.1.3.0` maps exact implementation
+seams and assigns ten shared reference byte fixtures to `.9.1.3.5` because their removal affects 35 canonical
+cases. Normalization `.9.1.3.1` follows after the clean commit boundary.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are
 intentional statement/receiver-only forms, and eager `and`/`or`/`not` are the exact missing family. `.4.3.9.1`

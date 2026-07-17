@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.3.0 — audit Perl cursor rollout boundaries
+
+Split the Perl rollout into six safe implementation/closeout leaves before behavior code and mapped the exact
+mechanism. Bootstrap/validation preserve source syntax, RuleIR owns semantic normalization, Compiler/SpecEntry/
+HandlerVariantEmitter currently propagate one global mode into every LinkedRE handler, CompilerState publishes
+global descriptor metadata, Compiler/GeneratedSource/the facade own generated artifacts, and the primary command
+plus contract tests own outward execution.
+
+LinkedSpec's bootstrap probe exposed a prerequisite: a complete bare `Child` line is currently dropped, while
+bare fluent and block forms become arbitrary `ChildCODE` entries rather than rule edges. The planned parser leaf
+therefore preserves typed complete-line candidates and resolves them against the full declared-rule set before
+RuleIR validation; it does not guess from handler source or steal reserved lifecycle forms.
+
+Corrected the 91-file migration order after exact CLI inspection. Removing Perl `--parse-mode` changes 35 of the
+63 mandatory cases: 2 help, 20 usage, 2 explicit success, and 11 trace. Ten shared manifest/help/usage/trace files
+now migrate with reference CLI `.9.1.3.5`, while shared documentation and final symmetric admission remain
+`.9.1.8`-owned. This keeps canonical main green without an ignored option, hidden compatibility route, or skipped
+case. No parser/compiler/runtime/descriptor/generated/CLI behavior changed in this audit.
+
+Verification passes the neutral checker at 36 family / 18 edge / 8 parent-child / 91 files / 1 complete and
+7 pending with 27 rejected mutations; JSON syntax; Knowledge Map 580/4075; memory/task/doctrine governance;
+mdBook; whitespace; and reference CLI 63/63 in both default and POSIX option environments.
+
 ## 2026-07-17 — FUTURE-PARITY-BACKLOG.9.1.2 — adopt executable rule-local cursor contract
 
 Made ADR `0044` executable before backend rollout. `linkedspec-rule-local-cursor-v1` covers all 36 top/body rule-

@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.3.0` — move shared breaking fixtures with the canonical reference):
+  A dependency-ordered backend rollout cannot leave shared byte fixtures behind when the mandatory gate executes
+  the first migrated backend. Removing Perl `--parse-mode` changes 35 of 63 canonical cases: 2 help, 20 usage,
+  2 explicit success, and 11 trace cases. Assign the ten manifest/help/usage/trace files to reference migration
+  `.9.1.3.5`; let later backends consume the already-current target; keep `.9.1.8` for shared documentation and
+  final symmetric admission. This preserves green main without accepting an ignored option, hiding a flag, or
+  skipping affected cases.
+
+  Preserve syntax candidates before semantic resolution. The current bootstrap silently drops a complete bare
+  `Child` line, while `Child.push` and `Child { ... }` become arbitrary `ChildCODE` entries rather than edges.
+  A handler-emission text guess would be too late and could collide with lifecycle names. Parse complete-line
+  unknown identifier forms into typed bare-edge candidates, retain reserved forms, then resolve against the full
+  declared-rule set and normalize to ACODE/BCODE ownership before RuleIR validation. Global cursor ownership is a
+  separate seam: Compiler passes one option through SpecEntry into every HandlerIR/LinkedRE call and CompilerState
+  descriptor; generated v2 also spans Compiler, GeneratedSource, the public emitter facade, and its contract.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.2` — inventory tokens, but assign semantic owners): A raw repository
   search mixes executable callers, shared fixtures, present-tense docs, and historical records. Define the actual
   migration roots, then require every token-bearing file in those roots to appear exactly once in a dependency-

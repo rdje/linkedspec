@@ -975,7 +975,10 @@ overrides a child. ADR `0044` / `.9.1.1.1` now ratifies mode-sensitive bare edge
 targeted override removal, per-rule descriptors, generated-source v2, diagnostics, and conformance. Implementation
 is dependency-split under `.9.1.2-.9`; logical parent `.5.2` is complete. Neutral `.9.1.2` now owns an executable
 36-family/18-edge/8-parent-child contract, exact 91-file migration inventory, 27 drift mutations, and a 1/7
-rollout ledger without changing backend behavior; Perl `.9.1.3` remains dependency-gated until clean commit.
+rollout ledger without changing backend behavior. Perl `.9.1.3` is split into `.0-.6` before code; verified `.9.1.3.0`
+maps the bootstrap/RuleIR/emitter/descriptor/generated/CLI seams and reassigns ten reference-breaking shared
+fixtures to `.9.1.3.5` because they affect 35 mandatory canonical cases. Normalization `.9.1.3.1` follows after
+the clean commit boundary; no behavior changes in the preflight.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
 partition the exact 246-name inventory into 230 handled names, thirteen intentional structural/receiver-only

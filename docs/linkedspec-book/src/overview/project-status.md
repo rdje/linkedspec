@@ -175,7 +175,9 @@ Three backbone items tracked major structural modernization — all done:
   override. The director has since confirmed rule-local ownership: parent mode never propagates to or overrides a
   child. ADR `0044` supplies the exact ratification. Neutral `.9.1.2` now checks 36 family spellings, 18 edge
   cases, eight parent/child mechanisms, 91 migration files, and 27 drift mutations at 1 complete / 7 pending;
-  no backend behavior is admitted by that contract leaf.
+  no backend behavior is admitted by that contract leaf. Perl rollout is split into `.9.1.3.0-.6`; verified preflight
+  maps the bootstrap/RuleIR/emitter/descriptor/generated/CLI boundaries and assigns reference-breaking shared
+  byte fixtures to the reference CLI slice so canonical CI never relies on a hidden compatibility flag or skip.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
