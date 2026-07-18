@@ -339,7 +339,7 @@ void main() {
             'summary': 'Generated Dart parser execution failed',
             'source_identity': identity,
             'rule_label': 'Missing',
-            'detail': contains("rule 'Missing' is not compiled"),
+            'detail': contains("entry rule 'Missing' is not defined"),
           },
         });
         final trace = File(

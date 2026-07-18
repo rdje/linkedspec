@@ -74,7 +74,7 @@ Child:
     ]);
     expect(parseTrace.events.last.details, contains('error='));
 
-    final invalidSpec = parseSpec('Rule:\n /x/');
+    final invalidSpec = parseSpec('# no rules\n');
     final expectedError = _compileError(invalidSpec);
     final compileTrace = _debugTrace();
     final actualError = _compileError(invalidSpec, trace: compileTrace);

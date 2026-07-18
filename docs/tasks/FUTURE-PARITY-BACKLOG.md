@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (clean commit `41ed8300` admits Rust root selection at 3/7; Dart parent `.2.3` is
-  active and behavior-free seam preflight `.2.3.0` is fully signed off at exact 64/65x2, package 260, corpus 105,
-  and canonical Phase 0; core `.1` waits for the clean preflight commit)
+- Last updated: `2026-07-18` (Dart core/descriptor `.9.1.1.2.3.1` is fully signed off and ready for its prepared
+  commit; composed route convergence remains `.3.2` and rollout stays 3/7)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3683,7 +3682,7 @@ before implementation.
   Acceptance: Remove the validator contradiction that makes the existing runtime/source first-rule fallback
     unreachable; align loaded/normalized/generated/descriptor/trace/strict/CLI routes and prove explicit
     `--top-rule` wins over an authored marker.
-  Verification: `active; behavior-free preflight .0 PASS, core .1 pending`
+  Verification: `active; behavior-free preflight .0 PASS, core .1 active`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0`
@@ -3721,14 +3720,34 @@ before implementation.
     artifacts, commit `.0`, clear the brief, and only then activate Dart core `.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement Dart marker-optional validation, ordered native selection, portable failures, and descriptor identity.
   Dependencies: `.9.1.1.2.3.0`
   Acceptance: Accept one-or-more-rule markerless sources; preserve ordered authored markers; centralize explicit >
     first marker > first rule selection for ordinary native/default execution; reject zero/unknown selection at the
     neutral stages; retain authored-edge-only strict behavior; and publish immutable descriptor identity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused 107; package 266; analyzer/format; corpus 105; primary 65x2; root 29; mdBook; KM 605/4,348;
+    canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031; cleanup all pass
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 - implement Dart root resolution`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVE / BASELINE** — Re-read the preflight fact, neutral selection/failure/strict rows, exact Dart
+    validator/compiler/runtime/descriptor owners, and admitted Perl/Rust precedents before changing behavior.
+  - [x] **VALIDATION / ORDER** — Accept one-or-more-rule markerless sources, reject zero rules with portable
+    `no_rules_defined` / `validate_spec`, preserve duplicate/source failure precedence, definition order, and every
+    authored `is_top` bit.
+  - [x] **ONE RESOLVER / NATIVE** — Add one compiled-state resolver for explicit selector > first authored marker
+    > first authored rule, route ordinary native default/explicit execution through it, and reject unknown exact
+    selectors before user code with `entry_rule_not_found` / `select_entry_rule` / requested `entry_rule`.
+  - [x] **STRICT / DESCRIPTOR** — Keep selected/marked rules outside the authored reference graph; pass all three
+    neutral strict rows; publish `entry_rule_contract = linkedspec-root-rule-selection-v1`, ordered definitions,
+    and immutable per-rule `is_top` without dynamic selected identity.
+  - [x] **FOCUSED / DART LOCAL** — Pass one neutral-consuming Dart core test plus validator/runtime/compiled/
+    descriptor/primary focused suites, complete package/corpus, format/analyze, and exact primary 65x2 without
+    advancing Dart rollout or claiming generated/emitted route admission.
+  - [x] **LOCKSTEP / CANONICAL / COMMIT** — Update partial capability/public/book/KM/task/live state, pass root
+    governance and canonical CI, safely clean artifacts, commit `.1`, clear the brief, and only then activate `.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2`
   Status: `pending`
@@ -7357,9 +7376,9 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `done` | Markerless validation, ordered native resolution, portable diagnostics, strict no-drift, and immutable descriptor identity pass Rust-local and canonical proof. |
 | 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `done` | Loaded/serde/generated/emitted routes, exact identities, Rust-local/canonical proof, durable marker repair, and cleanup pass. |
 | 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `done` | Exact 15-role topology, 29 mutations, Rust-local/canonical 65x2, public/KM lockstep, and cleanup admit Rust at 3/7. |
-| 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `active` | Dart root selection is split into preflight/core/routes/admission; behavior-free seam map `.0` is active. |
+| 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `active` | Dart root selection is split into preflight/core/routes/admission; `.0-.1` are done and composed routes `.2` are next after the clean core commit. |
 | 212.2.3.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` | `done` | Exact 64/65x2, fallback/validation/failure/descriptor map, package 260, corpus 105, canonical proof, and cleanup pass without behavior. |
-| 212.2.3.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | `pending` | Implement marker-optional core selection, portable failures, strict no-drift, and descriptor identity. |
+| 212.2.3.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | `done` | Marker-optional core selection, portable failures, strict no-drift, descriptor identity, package 266, corpus 105, primary 65x2, and canonical signoff pass. |
 | 212.2.3.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` | `pending` | Converge loaded/normalized/generated/emitted/trace/diagnostic routes. |
 | 212.2.3.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `pending` | Topology-check Dart, pass shared primary bytes, promote only Dart, and close parent `.3`. |
 | 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
@@ -8086,6 +8105,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | Parser-envelope/validation ownership; neutral 8/3/3 core consumer; one compiled resolver; native default/explicit and early portable failures; strict authored-edge no-drift; descriptor contract/order/immutable `is_top`; focused 107; Dart format 58/0, analyzer, package 266, primary 65x2, corpus 105; root governance 3/4 plus 29 mutations; public/book/capability/KM/task/live lockstep; mdBook; KM 605/4,348; memory/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031; safe generated book/cache cleanup retaining Dart package state and Rust 99 MiB baseline. | PASS. Dart core/native/primary now implements the contract; composed route proof `.2` and topology admission `.3` remain, so rollout stays 3/7. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` | ADR/KM/neutral/Perl/Rust precedent and exact Dart validator/runtime/loader/generated/emitted/descriptor/trace/strict/primary/gate retrieval; direct source/API probes; exact primary 64/65 default and POSIX with markerless-only compile failure; focused owners 97; format/analyze/package 260; corpus 105; root governance 3/4 plus 29 mutations; mdBook; KM 604/4,336; memory/task/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 655s; safe generated book/cache cleanup. | PASS. Behavior is untouched; `.1` centralizes validation/resolution/failures/descriptor, `.2` proves composed routes, and `.3` alone admits Dart after the clean preflight commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | Exact 15-role once-only admission consumer; six shared primary case identities; focused admission/core/routes/emitter 1+6+6+6; root governance 8/3/3/5 at 3/4 plus 29 mutations; complete Rust-local core 193+4+5+8, runtime 137, oracle 105, classifier 105, integration 197, admission 1, emitter 6, and primary 65x2; public/book/capability/live lockstep; KM 603/4,328; memory/task/four doctrines/whitespace; canonical Perl root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 627s; cleanup 10,626 Cargo files / target 2.4 GiB to 99 MiB plus generated book/cache/logs. | PASS. Only Rust advances, reaching 3 complete / 4 pending; Dart `.3` waits for this leaf's clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | Loaded/serde/reconstructed order and marker identity; all generated/emitted direct, compatibility, trace, and diagnostic-output roles; exact zero/unknown/stale precedence and effective trace/failure identity; routes 6, emitter 6 with fresh crate, root 6, diagnostics 5, loader 5, trace 10, diagnostic output 7, descriptor/types; generated governance and classifier 105; complete Rust-local oracle 105, integration 197, primary 65x2; root governance 8/3/3/5 at 2/5 plus 24 mutations; logical-helper marker root cause and 26 mutations; KM 602/4,320; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 627s; cleanup 16,558 Cargo files / target 2.9 GiB to 99 MiB plus generated book/cache. | PASS. Every Rust composed route shares the ordered resolver without format, descriptor, or rollout promotion; `.2.3` waits for the clean commit. |
@@ -8440,6 +8460,17 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart core `.9.1.1.2.3.1` is fully signed off: complete Dart format/analyzer/package 266/primary
+  65x2/corpus 105, root governance 29, mdBook, KM 605/4,348, all four doctrines, canonical Perl root 7+5, cursor
+  288, reference primary 65x2, Phase 0 1,031/1,031, and safe generated book/cache cleanup pass. Rollout stays 3/7;
+  `.3.2` may activate only after the clean prepared commit.
+- `2026-07-18`: Dart core `.9.1.1.2.3.1` now preserves empty/comment-only parser envelopes for portable zero-rule
+  validation, applies one compiled-state explicit/marker/first resolver before user code, publishes immutable
+  descriptor identity, and passes focused 107, package 266, corpus 105, primary 65x2, analyzer/format, and root
+  governance with 29 mutations. Canonical signoff remains; rollout stays 3/7 and composed routes stay `.3.2`.
+- `2026-07-18`: Clean commit `94780b05` lands Dart root-selection preflight; tree and brief are clean. Core/
+  descriptor `.9.1.1.2.3.1` activates task-tree-first for one resolver, marker-optional validation, portable
+  zero/unknown failures, strict no-drift, and immutable descriptor identity. Composed routes remain `.2`.
 - `2026-07-18`: Dart behavior-free root preflight `.9.1.1.2.3.0` freezes exact 64/65x2 current primary behavior,
   proves the runtime/normalized/generated fallback behind marker-required validation, maps zero/unknown/descriptor/
   emitted gaps, passes package 260, corpus 105, canonical Phase 0 1,031/1,031, and cleanup, then leaves `.1-.3`

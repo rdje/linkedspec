@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution
+
+Dart core now implements `linkedspec-root-rule-selection-v1`. Validation accepts every one-or-more-rule source
+without requiring `Rule::`, and `CompiledSpec.resolveEntryRule(...)` is the single ordered owner: an explicit exact
+selector wins, otherwise the first authored marker wins, otherwise the first authored rule wins. Native execution
+resolves before constructing runtime context or evaluating user code. Empty compiled state returns portable
+`no_rules_defined` / `validate_spec`; an unknown requested label returns `entry_rule_not_found` /
+`select_entry_rule` with `entry_rule` attribution.
+
+Making zero-rule validation portable exposed a pre-existing ownership inversion: `parseSpec` rejected empty and
+comment-only sources before the validator could classify them. The parser now preserves those valid source
+envelopes as an empty `SpecFile`; non-trivia text that is not a rule remains a parser error. This keeps syntax
+recognition separate from structural validity and gives every zero-rule source the neutral validation identity.
+
+Descriptor root metadata publishes `entry_rule_contract` while definition order and every authored `is_top` bit
+remain immutable across default and explicit selection. Neutral strict-unused cases still analyze authored edges
+only. A new Dart core consumer executes all eight neutral selection rows, all three failures, and all three strict
+rows, then verifies native precedence, early failures, and descriptor no-drift. Focused core/owner proof passes
+107 tests; complete package proof passes 266/266, analyzer/format pass, corpus remains 105/105, and the shared
+primary manifest passes 65/65 with `POSIXLY_CORRECT` unset and set.
+
+The capability inventory advances only Dart validation and markerless fallback facts. Root governance remains
+3 complete / 4 pending with 29 rejected mutations: loaded/normalized/generated/emitted/trace route composition is
+still `.3.2`, and only topology/reference admission `.3.3` may promote Dart.
+
+Complete Dart-local signoff repeats format 58/0, analyzer clean, package 266/266, primary 65/65 twice, and corpus
+105/105. Canonical CI passes all four doctrines, root governance, Perl root consumers 7+5, cursor admission 288,
+reference primary 65/65 twice, and Phase 0 1,031/1,031. The mdBook builds; Knowledge Map closes at 605 facts /
+4,348 question keys. Safe cleanup removes the generated 11 MiB book and Python cache while retaining the required
+30 MiB Dart package configuration and clean 99 MiB Rust target baseline.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 — map Dart root selection
 
 The behavior-free Dart preflight freezes the exact root-selection boundary before implementation. The complete

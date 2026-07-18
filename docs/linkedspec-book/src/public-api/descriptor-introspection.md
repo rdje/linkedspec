@@ -393,7 +393,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, and Dart)
-- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl and Rust)
+- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl, Rust, and Dart; Dart composed admission is pending)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`

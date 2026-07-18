@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` — parsing must retain a structurally invalid envelope when
+  validation owns the portable failure): Dart had the same hidden zero-rule ownership inversion previously found
+  in Rust. Replacing marker-required validation with one-or-more-rule validation was insufficient because
+  `parseSpec` rejected empty/comment-only input first. Empty and comment-only input is syntactically a valid
+  source envelope containing zero declarations; preserving it as `SpecFile(rules: [])` lets `validateSpec` emit
+  `no_rules_defined` at `validate_spec`. Arbitrary non-rule text still fails inside the parser loop, so this does
+  not weaken syntax rejection.
+
+  Root selection now belongs to `CompiledSpec.resolveEntryRule` rather than a runtime-private default helper.
+  The resolver checks empty state before explicit lookup, then applies exact explicit > first authored marker >
+  first authored rule order over `compiledRuleOrder`. This ordering is intentional: a zero-rule artifact with a
+  requested selector is structurally invalid first, while an unknown selector in a valid spec is a selection
+  failure. Runtime catches only the typed selection exception and projects it into the established diagnostic
+  envelope before constructing execution context, which proves user code cannot run first.
+
+  Descriptor state records the contract but never the effective selection. `definition_order` and rule-local
+  `header.isTop` remain authored identity, and neither explicit nor fallback selection changes strict-unused's
+  authored-edge graph. The new neutral-consuming core test locks those separations. Existing loaded, normalized,
+  generated, and emitted adapters naturally reach the same compiled owner, but `.3.1` does not claim their full
+  trace/diagnostic/contract composition: `.3.2` must prove and repair those routes, and `.3.3` alone may promote
+  rollout.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` — Dart already has the selection algorithm; validation and
   failure ownership are the real work): `LinkedSpecRuntimeEngine._defaultTopRuleLabel` walks
   `compiledRuleOrder`, returns the first authored marker, then the first rule. `_parse` lets an explicit

@@ -91,8 +91,9 @@ Lua native adapters in disposable temporary storage, and runs the shared manifes
 Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The later
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
-65/65 in both environments; Dart, Julia, and Lua remain staged until `.9.1.1.2.3-.5`. A green 5x2x65 run is the final
-rollout target rather than a current cross-backend claim.
+admitted at 65/65 in both environments; Dart core/native/primary is also 65/65 twice, with composed routes and
+admission still `.9.1.1.2.3.2-.3`; Julia and Lua remain `.4-.5`. A green 5x2x65 run is the final rollout target
+rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at

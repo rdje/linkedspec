@@ -114,18 +114,19 @@ linkedspec: --parse-mode has been removed; cursor policy is derived from each ru
 
 `--top-rule` remains available for entry selection. An explicit value has
 priority over any authored `Rule::` and may select an ordinary `Rule:`; the
-primary CLI regression suite locks that precedence. The separately directed
-first-ordinary-rule fallback for sources with no `::` is not claimed here yet:
-current Dart validation still requires a marker, and neutral/five-backend
-rollout is tracked under `FUTURE-PARITY-BACKLOG.9.1.1.2`. Canonical medium
+primary CLI regression suite locks that precedence. Core leaf `.9.1.1.2.3.1`
+also accepts markerless one-or-more-rule sources and selects their first authored
+rule. Neutral/five-backend rollout remains tracked under
+`FUTURE-PARITY-BACKLOG.9.1.1.2` until Dart's composed routes and admission land. Canonical medium
 request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
-Behavior-free preflight `.9.1.1.2.3.0` measures this boundary exactly: the shared primary suite is 64/65 in both
-default and POSIX option environments, with markerless first-rule execution as the only failure. Direct runtime,
-normalized-JSON, and generated-plan probes already select the first ordinary rule when validation is deliberately
-bypassed, and explicit selection already wins. The remaining implementation is owned in order by core/descriptor
-`.3.1`, composed loaded/generated/emitted/trace routes `.3.2`, and topology/reference admission `.3.3`.
+Core/descriptor leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: one compiled resolver applies explicit
+selector > first authored marker > first authored rule before user code; validation accepts markerless sources,
+zero/unknown selection failures use the portable stages and codes, and descriptors retain immutable authored
+`is_top` facts plus the root-selection contract identity. Dart now passes 266 package tests, the shared 65-case
+primary suite in default and POSIX environments, and 105/105 corpus fixtures. Composed loaded/generated/emitted/
+trace proof remains `.3.2`, followed by topology/reference admission `.3.3`; Dart is not yet counted as admitted.
 
 ## Status
 

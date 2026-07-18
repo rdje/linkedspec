@@ -177,7 +177,7 @@ void main() {
       ).writeAsStringSync('not a spec\n');
       File(
         '${scratch.path}${Platform.pathSeparator}validation.spec',
-      ).writeAsStringSync('Only:\n /x/\n');
+      ).writeAsStringSync('# no rules\n');
 
       final parseFailure = _pipelineFailure(
         () => loadAndCompileSpec(

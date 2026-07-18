@@ -202,9 +202,11 @@ plan or rewrites descriptor `is_top`. Typed zero/unknown generated failures reta
 `validate_spec` and `entry_rule_not_found` / `select_entry_rule`, while stale generated v1 artifacts still fail at
 their earlier contract boundary. One omission-sensitive 15-role Rust consumer topology-locks all neutral/native/
 loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary roles, and exact primary proof is 65x2.
-Dart, Julia, and Lua contain the marker-then-first fallback but their validators make its
-last branch unreachable. Until `.9.1.1.2.3-.6` close, use at least one `::` for portable cross-backend execution
-and pass an explicit selector when its identity matters.
+Dart core now accepts markerless sources, applies the same resolver in native/primary execution, reports portable
+zero/unknown failures, and publishes immutable descriptor identity; composed route proof and admission remain
+`.9.1.1.2.3.2-.3`. Julia and Lua still contain an unreachable markerless fallback behind marker-required
+validation. Until `.3.2-.6` close, use at least one `::` for portable cross-backend execution and pass an explicit
+selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
@@ -1019,9 +1021,10 @@ accept bare-keyword form in addition to parenthesized form.
 A valid `.spec` file must satisfy the following current portable checks. Item 1 distinguishes the implemented Perl
 and Rust envelopes from the temporary cross-backend boundary while `.9.1.1.2.2-.6` roll out:
 
-1. At least one rule exists. Perl reference routes and Rust validation/native/primary execution accept a
-   markerless file. Rust generated/emitted execution, Dart, Julia, and Lua still require at least one marked rule
-   (`::`) for portable cross-backend execution. A zero-rule executable spec is always invalid.
+1. At least one rule exists. Perl, Rust, and Dart validation/native/primary execution accept a markerless file;
+   Dart composed-route admission is still pending, while Julia and Lua still require at least one marked rule
+   (`::`). Use a marker until the remaining rollout closes when portable cross-backend execution matters. A
+   zero-rule executable spec is always invalid.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.

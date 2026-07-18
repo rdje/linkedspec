@@ -102,7 +102,11 @@ export 'src/compiler/compiled_spec.dart'
         CompiledSpec,
         CompiledSpecException,
         DependencyRef,
+        EntryRuleSelectionBasis,
+        EntryRuleSelectionException,
+        ResolvedEntryRule,
         compileSpec,
+        linkedSpecRootRuleSelectionContract,
         validateNoRemovedAggregateSelectors;
 export 'src/corpus/manifest_runner.dart'
     show

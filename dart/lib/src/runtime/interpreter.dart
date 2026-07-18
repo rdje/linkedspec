@@ -28,6 +28,7 @@ final class RuntimeDiagnostic {
     this.specName,
     this.specPath,
     this.topRule,
+    this.entryRule,
     this.ruleLabel,
     this.handlerSourceLabel,
   });
@@ -44,6 +45,7 @@ final class RuntimeDiagnostic {
   final String? specName;
   final String? specPath;
   final String? topRule;
+  final String? entryRule;
   final String? ruleLabel;
   final String? handlerSourceLabel;
 
@@ -60,6 +62,7 @@ final class RuntimeDiagnostic {
     if (specName != null) 'spec_name': specName,
     if (specPath != null) 'spec_path': specPath,
     if (topRule != null) 'top_rule': topRule,
+    if (entryRule != null) 'entry_rule': entryRule,
     if (ruleLabel != null) 'rule_label': ruleLabel,
     if (handlerSourceLabel != null) 'handler_source_label': handlerSourceLabel,
   };
@@ -228,7 +231,24 @@ final class LinkedSpecRuntimeEngine {
     Map<String, GeneratedRuleFamily>? generatedPlan,
     String? generatedSourceIdentity,
   }) {
-    final label = topRule ?? _defaultTopRuleLabel();
+    final ResolvedEntryRule selection;
+    try {
+      selection = compiledSpec.resolveEntryRule(topRule);
+    } on EntryRuleSelectionException catch (error) {
+      throw RuntimeInterpreterException(
+        error.message,
+        diagnostic: _diagnostic(
+          stage: error.stage,
+          code: error.code,
+          summary: 'Dart runtime entry-rule selection failed',
+          detail: error.message,
+          topRule: error.entryRule,
+          entryRule: error.entryRule,
+          ruleLabel: error.entryRule,
+        ),
+      );
+    }
+    final label = selection.rule.label;
     final context = _RuntimeExecutionContext(
       engine: this,
       input: input,
@@ -336,26 +356,6 @@ final class LinkedSpecRuntimeEngine {
       topRule: topRule,
       diagnosticOutputSink: diagnosticOutputSink,
     );
-  }
-
-  String _defaultTopRuleLabel() {
-    for (final label in compiledSpec.compiledRuleOrder) {
-      final rule = compiledSpec.rule(label)!;
-      if (rule.header.isTop) {
-        return label;
-      }
-    }
-    if (compiledSpec.compiledRuleOrder.isEmpty) {
-      throw RuntimeInterpreterException(
-        'compiled spec does not contain any rules',
-        diagnostic: _diagnostic(
-          stage: 'top_rule_selection',
-          summary: 'Dart runtime top-rule selection failed',
-          detail: 'compiled spec does not contain any rules',
-        ),
-      );
-    }
-    return compiledSpec.compiledRuleOrder.first;
   }
 
   int _publicParserStartCursor(String input) {
@@ -548,6 +548,7 @@ final class LinkedSpecRuntimeEngine {
     int? actualArity,
     String? expectedArity,
     String? topRule,
+    String? entryRule,
     String? ruleLabel,
     String? handlerSourceLabel,
   }) {
@@ -565,6 +566,7 @@ final class LinkedSpecRuntimeEngine {
       specName: specName,
       specPath: specPath,
       topRule: topRule,
+      entryRule: entryRule,
       ruleLabel: ruleLabel,
       handlerSourceLabel:
           handlerSourceLabel ??

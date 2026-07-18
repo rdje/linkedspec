@@ -6,6 +6,8 @@ import '../ast/spec_ast.dart';
 import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 
+const linkedSpecRootRuleSelectionContract = 'linkedspec-root-rule-selection-v1';
+
 final class CompiledSpecException implements Exception {
   const CompiledSpecException(this.message);
 
@@ -13,6 +15,64 @@ final class CompiledSpecException implements Exception {
 
   @override
   String toString() => 'CompiledSpecException: $message';
+}
+
+enum EntryRuleSelectionBasis {
+  explicitSelector('explicit_selector'),
+  firstAuthoredMarker('first_authored_marker'),
+  firstAuthoredRule('first_authored_rule');
+
+  const EntryRuleSelectionBasis(this.contractName);
+
+  final String contractName;
+}
+
+final class ResolvedEntryRule {
+  const ResolvedEntryRule({required this.rule, required this.basis});
+
+  final CompiledRule rule;
+  final EntryRuleSelectionBasis basis;
+}
+
+final class EntryRuleSelectionException implements Exception {
+  const EntryRuleSelectionException._({
+    required this.code,
+    required this.stage,
+    required this.message,
+    this.entryRule,
+  });
+
+  const EntryRuleSelectionException.noRules()
+    : this._(
+        code: 'no_rules_defined',
+        stage: 'validate_spec',
+        message: 'compiled spec does not contain any rules',
+      );
+
+  EntryRuleSelectionException.unknownRule(String entryRule)
+    : this._(
+        code: 'entry_rule_not_found',
+        stage: 'select_entry_rule',
+        message: "entry rule '$entryRule' is not defined",
+        entryRule: entryRule,
+      );
+
+  final String code;
+  final String stage;
+  final String message;
+  final String? entryRule;
+
+  JsonObject toJson() {
+    return {
+      'code': code,
+      'stage': stage,
+      'message': message,
+      'fields': {if (entryRule != null) 'entry_rule': entryRule},
+    };
+  }
+
+  @override
+  String toString() => 'EntryRuleSelectionException: $message';
 }
 
 CompiledSpec compileSpec(
@@ -121,6 +181,47 @@ final class CompiledSpec {
   Iterable<UserFunctionEntry> get functions => functionRegistry.entries;
 
   CompiledRule? rule(String label) => rulesByLabel[label];
+
+  ResolvedEntryRule resolveEntryRule(String? explicitSelector) {
+    if (compiledRuleOrder.isEmpty) {
+      throw const EntryRuleSelectionException.noRules();
+    }
+
+    if (explicitSelector != null) {
+      final selected = rulesByLabel[explicitSelector];
+      if (selected == null) {
+        throw EntryRuleSelectionException.unknownRule(explicitSelector);
+      }
+      return ResolvedEntryRule(
+        rule: selected,
+        basis: EntryRuleSelectionBasis.explicitSelector,
+      );
+    }
+
+    for (final label in compiledRuleOrder) {
+      final candidate = _orderedRule(label);
+      if (candidate.header.isTop) {
+        return ResolvedEntryRule(
+          rule: candidate,
+          basis: EntryRuleSelectionBasis.firstAuthoredMarker,
+        );
+      }
+    }
+    return ResolvedEntryRule(
+      rule: _orderedRule(compiledRuleOrder.first),
+      basis: EntryRuleSelectionBasis.firstAuthoredRule,
+    );
+  }
+
+  CompiledRule _orderedRule(String label) {
+    final rule = rulesByLabel[label];
+    if (rule == null) {
+      throw CompiledSpecException(
+        "compiled rule order refers to missing rule '$label'",
+      );
+    }
+    return rule;
+  }
 
   CompiledDescriptorState get descriptorState {
     return CompiledDescriptorState(
@@ -584,6 +685,7 @@ final class CompiledDescriptorState {
         'compiled_spec_model': 'compiled_spec_state',
         'compiled_dependency_regex_model': 'compiled_dependency_regex_state',
         'cursor_contract': 'linkedspec-rule-local-cursor-v1',
+        'entry_rule_contract': linkedSpecRootRuleSelectionContract,
         'definition_order': compiledSpecState.definitionOrder,
         'compiled_rule_order': compiledSpecState.compiledRuleOrder,
         'redefined_rule_labels': compiledSpecState.redefinedRuleLabels,

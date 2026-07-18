@@ -24,7 +24,8 @@ void main() {
     final expectedMetaKeys =
         {..._strings(_descriptorContract['required_meta_keys'])}
           ..removeAll(_strings(legacyVariant['required_keys']))
-          ..addAll(_strings(outwardCursorVariant['required_keys']));
+          ..addAll(_strings(outwardCursorVariant['required_keys']))
+          ..add('entry_rule_contract');
 
     for (final row in _rows('family_cases')) {
       final id = row['id']! as String;
@@ -52,6 +53,11 @@ void main() {
             ? _object(cursorDescriptor['meta'])['cursor_contract']
             : outwardCursorVariant['cursor_contract'],
         reason: id,
+      );
+      expect(
+        rootMeta['entry_rule_contract'],
+        linkedSpecRootRuleSelectionContract,
+        reason: '$id root selection contract',
       );
       for (final field in _strings(outwardCursorVariant['forbidden_keys'])) {
         expect(rootMeta, isNot(contains(field)), reason: '$id root $field');

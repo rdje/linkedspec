@@ -4,6 +4,12 @@ import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('preserves empty and comment-only envelopes for validation', () {
+    expect(parseSpec('').rules, isEmpty);
+    expect(parseSpec('  \n# no rules\n\t').rules, isEmpty);
+    expect(() => parseSpec('not a rule'), throwsA(isA<SpecParseException>()));
+  });
+
   test('parses rule headers, inline body elements, and mode variants', () {
     final modes = <String, RuleMode>{
       'R1:AND': RuleMode.and,

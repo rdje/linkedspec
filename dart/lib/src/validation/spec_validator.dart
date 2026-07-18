@@ -70,7 +70,7 @@ void validateSpec(
     LinkedSpecTraceLevel.high,
   );
   try {
-    _checkTopRuleExists(spec);
+    _checkAtLeastOneRule(spec);
     _checkDuplicateRuleLabels(spec);
     _checkDuplicateFunctionNames(spec);
     _checkFunctionRegistry(spec);
@@ -99,12 +99,15 @@ void validateSpec(
   }
 }
 
-void _checkTopRuleExists(SpecFile spec) {
-  if (spec.rules.any((rule) => rule.header.isTop)) {
+void _checkAtLeastOneRule(SpecFile spec) {
+  if (spec.rules.isNotEmpty) {
     return;
   }
-  throw const SpecValidationException(
-    "no top rule found: at least one rule must use '::' (double colon)",
+  throw _portableDiagnostic(
+    code: 'no_rules_defined',
+    stage: 'validate_spec',
+    message: 'spec does not define any rules',
+    fields: const {},
   );
 }
 

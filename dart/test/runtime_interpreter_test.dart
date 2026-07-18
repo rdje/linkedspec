@@ -1507,18 +1507,20 @@ Top::
       engine.parse('x', topRule: 'Missing');
       fail('missing runtime rule should throw');
     } on RuntimeInterpreterException catch (error) {
-      expect(error.message, "rule 'Missing' is not compiled");
+      expect(error.message, "entry rule 'Missing' is not defined");
       final diagnostic = error.diagnostic;
       expect(diagnostic, isNotNull);
       expect(diagnostic!.toJson(), {
         'type': 'runtime_parser',
-        'stage': 'rule_lookup',
+        'stage': 'select_entry_rule',
         'owner_stage': 'dart_runtime',
-        'summary': 'Dart runtime rule lookup failed',
-        'detail': "rule 'Missing' is not compiled",
+        'summary': 'Dart runtime entry-rule selection failed',
+        'detail': "entry rule 'Missing' is not defined",
+        'code': 'entry_rule_not_found',
         'spec_name': 'diagnostic.spec',
         'spec_path': 'specs/diagnostic.spec',
         'top_rule': 'Missing',
+        'entry_rule': 'Missing',
         'rule_label': 'Missing',
         'handler_source_label': 'dart_runtime:rule:Missing',
       });

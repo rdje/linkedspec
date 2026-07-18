@@ -119,7 +119,7 @@ void main() {
       });
       final specFile = File(
         '${scratch.path}${Platform.pathSeparator}invalid.spec',
-      )..writeAsStringSync('Only:\n /x/\n');
+      )..writeAsStringSync('# no rules\n');
       final request = SpecRequest.path(specFile.path);
       final options = SpecLoadOptions(cwd: scratch);
       final expected = _pipelineError(request, options);

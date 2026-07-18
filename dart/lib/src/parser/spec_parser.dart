@@ -68,13 +68,6 @@ SpecFile parseSpec(String source, {LinkedSpecTraceEmitter? trace}) {
       index += 1;
     }
 
-    if (rules.isEmpty) {
-      throw const SpecParseException(
-        line: 1,
-        message: 'no rule definitions found in spec',
-      );
-    }
-
     trace?.traceDecision(
       'dart_frontend:parse_spec:rules',
       true,

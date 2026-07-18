@@ -69,14 +69,16 @@ emitted direct/traced execution. Existing generated signatures remain intact; op
 per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
 authored descriptor identity and the minimal family plan. One omission-sensitive consumer composes all 15 neutral,
 native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly once;
-the Rust primary command passes all 65 cases in default and POSIX option environments. Dart, Julia, Lua/LuaJIT,
-and cross-backend no-drift leg `.6` are pending. Current backend differences stay explicit in the inventory until
-their owning leaves land.
+the Rust primary command passes all 65 cases in default and POSIX option environments. Dart composed routes,
+Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6` are pending. Current backend differences stay explicit in
+the inventory until their owning leaves land.
 
-Dart preflight `.9.1.1.2.3.0` proves the current shared-primary boundary is exactly 64/65 twice: only markerless
-first-rule default is rejected at validation. Ordered runtime, normalized-state, and generated-direct fallback
-already work when reached; loaded/emitted source re-enter the marker-required validator, portable zero/unknown
-selection stages and root descriptor contract identity remain absent, and rollout correctly stays pending.
+Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary without advancing admission: validation now
+accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and
+65x2 primary execution use it, zero/unknown selection failures have portable identities, strict-unused stays an
+authored-edge analysis, and descriptors publish immutable `is_top` plus the root contract identity. Composed
+loaded/normalized/generated/emitted/trace proof remains `.3.2`, followed by topology admission `.3.3`; rollout
+therefore remains 3 complete / 4 pending.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

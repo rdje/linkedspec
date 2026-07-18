@@ -16,11 +16,11 @@ The neutral decision plus composed Perl and Rust backends are complete at 3/7, w
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust admission is one omission-sensitive 15-role consumer and exact 65x2 command
-proof. Dart/Julia/Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
-Dart behavior-free preflight `.9.1.1.2.3.0` measures the exact current boundary at 64/65 in both option
-environments: markerless default is the sole failure. Its runtime, normalized, and generated-direct fallback is
-already ordered correctly behind validation; portable zero/unknown failures, descriptor contract identity,
-emitted reconstruction, topology, and admission remain split across `.3.1-.3`.
+proof. Julia/Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
+Dart core leaf `.9.1.1.2.3.1` now accepts markerless one-or-more-rule sources, resolves explicit > first marker >
+first rule once before user code, reports portable zero/unknown failures, preserves descriptor identity, and passes
+the 65-case primary manifest twice. Composed loaded/generated/emitted/trace proof and topology admission remain
+split across `.3.2-.3`, so rollout correctly remains 3/7 rather than admitting Dart early.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -606,9 +606,10 @@ content migration exists yet.
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`. The later rule-local cursor migration established the 63-case boundary on Perl, Rust,
   and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl and
-  Rust are current at 65/65 in both environments, while Dart, Julia, and Lua remain owned by `.9.1.1.2.3-.5`
-  before final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not a
-  current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
+  Rust are admitted at 65/65 in both environments. Dart core/native/primary proof is also 65/65 twice, but its
+  composed routes and admission remain `.9.1.1.2.3.2-.3`; Julia and Lua remain `.4-.5` before final five-backend
+  admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not a current green claim.
+  Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution `.1.6.4`, Dart full-
   pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
@@ -621,7 +622,8 @@ content migration exists yet.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
   packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
-  registration, exact primary cases, rollout, and omission mutations. Dart/Julia/Lua root leaves remain staged.
+  registration, exact primary cases, rollout, and omission mutations. Dart route/admission plus Julia/Lua root
+  leaves remain staged.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

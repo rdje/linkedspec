@@ -9,12 +9,26 @@ void main() {
     validateSpec(spec);
   });
 
-  test('rejects specs without a top rule', () {
-    final spec = parseSpec('Rule:\n /a/');
-    expect(
-      () => validateSpec(spec),
-      throwsA(_validationMessage(contains('no top rule'))),
-    );
+  test('accepts markerless rules and rejects zero rules portably', () {
+    validateSpec(parseSpec('Rule:\n /a/'));
+
+    for (final source in ['', '# no rules\n']) {
+      expect(
+        () => validateSpec(parseSpec(source)),
+        throwsA(
+          isA<SpecValidationException>().having(
+            (error) => error.diagnostic?.toJson(),
+            'portable diagnostic',
+            {
+              'code': 'no_rules_defined',
+              'stage': 'validate_spec',
+              'message': 'spec does not define any rules',
+              'fields': <String, Object?>{},
+            },
+          ),
+        ),
+      );
+    }
   });
 
   test('rejects duplicate rule labels', () {

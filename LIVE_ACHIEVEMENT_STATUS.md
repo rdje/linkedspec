@@ -7,9 +7,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Push policy: **push every 300 commits** (per 2026-06-16 user directive; raised from 200). Otherwise do not push mid-batch. Currently tracking via `git status -sb` ahead-count.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
+## Active Slice
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` — complete, fully verified, cleaned, and staged for the prepared commit.
+  No `.3.2` work has started. Rollout stays 3/7 until Dart topology admission `.3.3`.
+
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution**
+  (DONE, signed off and awaiting its prepared clean commit).
+
+  **Result:** Dart accepts markerless one-or-more-rule sources and preserves empty/comment-only envelopes so
+  validation owns portable zero-rule failure. One compiled resolver applies explicit > first marker > first rule
+  before user code; unknown selection is portable, strict stays authored-edge-only, and descriptor identity is
+  immutable. Composed routes/admission remain `.3.2-.3`, so rollout stays 3/7.
+
+  **Proof:** Focused 107; complete Dart format 58/0, analyzer, package 266, primary 65x2, corpus 105; root
+  governance 29; mdBook; KM 605/4,348; all four doctrines; canonical Perl root 7+5, cursor 288, reference primary
+  65x2, and Phase 0 1,031/1,031 pass. Cleanup removes generated book/cache and retains required Dart package state.
+
+  **Next:** Commit `.3.1`, clear and prove clean, then activate composed Dart root routes `.3.2` task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 — map Dart root selection**
-  (DONE, behavior-free signoff complete and awaiting its prepared clean commit).
+  (DONE at clean commit `94780b05` — behavior-free signoff complete).
 
   **Result:** Dart's current primary boundary is exactly 64/65 in both option environments; markerless first-rule
   default alone fails compile validation. The ordered native, normalized, and generated-direct fallback plus
@@ -22,7 +40,8 @@ Current execution status for interruption-safe batch workflow recovery.
   288, reference primary 65x2, and Phase 0 1,031/1,031 in 655 seconds. Safe cleanup removes generated book/cache;
   no Dart source/test/fixture/contract/capability behavior changes.
 
-  **Next:** Commit `.3.0`, clear the brief, prove the tree clean, then activate Dart core/descriptor `.3.1`.
+  **Next:** Dart core/descriptor `.3.1` is implemented and locally green; complete Dart/canonical signoff and
+  cleanup remain before its commit. Composed routes remain `.3.2`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 — admit Rust root selection**
   (DONE at clean commit `41ed8300` — fully signed off at 3/7 root-selection rollout).
