@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 — implement Perl root resolution
+
+The Perl core now implements `linkedspec-root-rule-selection-v1`: an explicit `top_rule` may name any declared
+rule and wins; otherwise the first authored `Rule::` wins; without a marker, the first authored rule wins.
+Envelope validation accepts one-or-more-rule markerless sources and reports zero-rule input as
+`no_rules_defined` at `validate_spec`. An unknown explicit selector preserves compile-before-input ordering but
+fails the returned parser at `select_entry_rule` with `entry_rule_not_found` before any user handler runs.
+
+One ordered `LinkedSpec::EntryRuleSelection` resolver owns the precedence instead of duplicating conditionals.
+Bootstrap source order and marker tokens now reach the outward descriptor as exact `definition_order`, root
+`entry_rule_contract`, and normalized per-rule `is_top`. Explicit execution state never rewrites those authored
+bits. Direct strict-unused validation remains defined rules minus authored edge references; selection and marker
+identity add no edge or exemption, and the unsupported `Get(strict_syntax => 1)` boundary remains unchanged.
+
+The focused Perl consumer executes all eight neutral selection cases and three failures, native marked/
+markerless/explicit paths, descriptor identity, structured unknown/zero-rule diagnostics, and strict no-drift.
+Phase 0 adds the later-marker default lock and updates markerless validation fuzz. The neutral inventory now
+records the implemented Perl core while the composed rollout correctly remains 1 complete / 6 pending; loaded,
+generated, trace, and reference admission remain owned by `.9.1.1.2.1.2-.3`.
+
+The first canonical run caught an adjacent native-loading fixture that had used a single markerless rule as its
+validation failure. That source is now valid by design, so the fixture uses a duplicate definition to retain its
+intended `validate_spec`/`spec_validation_failed` projection. The focused loader test passes. Knowledge Map is
+596 facts / 4,258 question keys; mdBook, memory/task metadata, all four doctrines, and whitespace pass. Canonical
+CI passes the root consumer, cursor admission 288, primary 63/63 twice, and Phase 0 1,031/1,031 in 609 seconds.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 — map Perl root selection
 
 The behavior-free Perl preflight now maps the complete root-selection path before implementation. Envelope

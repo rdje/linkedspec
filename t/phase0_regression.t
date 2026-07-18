@@ -15584,30 +15584,30 @@ SPEC
         'match_start_col() lowering matches the existing match_col() left-edge semantics exactly'
     );
 };
-subtest 'multi_rule_parsers_default_to_first_rule_and_honor_explicit_top_rule_option' => sub {
+subtest 'multi_rule_parsers_default_to_first_marker_and_honor_explicit_top_rule_option' => sub {
     plan tests => 4;
 
     my $spec_content = <<'SPEC';
-Top::AND
+First:AND
  /foo/
- -> Top[0] { return(array("?Top:", match_text())) }
+-> First[0] { return(array("?First:", match_text())) }
 
-Child::AND
+Marked::AND
  /bar/
- -> Child[0] { return(array("?Child:", match_text())) }
+-> Marked[0] { return(array("?Marked:", match_text())) }
 SPEC
 
     my %default_ctx;
     my $default_parser = LinkedSpec::Get(\$spec_content, runtime_ctx_ref => \%default_ctx);
-    my $foo_input = 'foo';
-    is_deeply($default_parser->(\$foo_input), ['?Top:', 'foo'], 'multi-rule parser defaults to the first parsed rule as the top-level entry');
-    is($default_ctx{top_rule}, 'Top', 'runtime context records the first parsed rule as the selected top rule by default');
+    my $bar_input = 'bar';
+    is_deeply($default_parser->(\$bar_input), ['?Marked:', 'bar'], 'multi-rule parser defaults to the first authored marker over an earlier ordinary rule');
+    is($default_ctx{top_rule}, 'Marked', 'runtime context records the first authored marker as the selected top rule by default');
 
     my %explicit_ctx;
-    my $explicit_parser = LinkedSpec::Get(\$spec_content, top_rule => 'Child', runtime_ctx_ref => \%explicit_ctx);
-    my $bar_input = 'bar';
-    is_deeply($explicit_parser->(\$bar_input), ['?Child:', 'bar'], 'explicit top_rule option selects a later rule as the parser entry');
-    is($explicit_ctx{top_rule}, 'Child', 'runtime context records the explicit top_rule selection');
+    my $explicit_parser = LinkedSpec::Get(\$spec_content, top_rule => 'First', runtime_ctx_ref => \%explicit_ctx);
+    my $foo_input = 'foo';
+    is_deeply($explicit_parser->(\$foo_input), ['?First:', 'foo'], 'explicit top_rule option selects an ordinary rule before the marker');
+    is($explicit_ctx{top_rule}, 'First', 'runtime context records the explicit ordinary top_rule selection');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

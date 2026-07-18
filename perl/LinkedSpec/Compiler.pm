@@ -15,6 +15,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
+use LinkedSpec::EntryRuleSelection ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -328,7 +329,7 @@ sub _portable_diagnostic_fields {
  return () unless ref($diagnostic) eq 'HASH';
  return map {
   exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
- } qw/code option_name target targets regex_index ownerships expected_contract actual_contract/
+ } qw/code option_name target targets regex_index ownerships expected_contract actual_contract entry_rule/
 }
 
 sub _build_action_rewriter_migration_summary {
@@ -389,9 +390,14 @@ sub build_compiled_rule_table {
  }
  my $runtime_ctx = undef;
  if (ref($option) eq 'HASH') {
-  my $top_rule = defined($option->{top_rule}) && length($option->{top_rule})
+  my $requested_top_rule = defined($option->{top_rule}) && length($option->{top_rule})
    ? $option->{top_rule}
-   : (ref($specretv) eq 'ARRAY' && @$specretv ? _parsed_rule_label($specretv->[0]) : undef);
+   : undef;
+  my $selection = LinkedSpec::EntryRuleSelection::select_entry_rule(
+   _parsed_entry_rule_rows($specretv),
+   $requested_top_rule,
+  );
+  my $top_rule = $selection->{ok} ? $selection->{entry_rule} : $requested_top_rule;
   $runtime_ctx = _call_runtime_ctx(
    'prepare_runtime_ctx_for_build_compiled_rule_table',
    $option,
@@ -729,6 +735,31 @@ sub _parsed_rule_label {
  return undef
 }
 
+sub _parsed_rule_is_top {
+ my ($parsed_entry) = @_;
+ return 0 unless ref($parsed_entry) eq 'ARRAY';
+ foreach my $centry (@$parsed_entry) {
+  next unless ref($centry) eq 'ARRAY';
+  return 1 if defined($centry->[0]) && $centry->[0] eq 'ELABEL_INITIAL';
+ }
+ return 0
+}
+
+sub _parsed_entry_rule_rows {
+ my ($parsed_entries) = @_;
+ return [] unless ref($parsed_entries) eq 'ARRAY';
+ my @rows;
+ foreach my $entry (@$parsed_entries) {
+  my $label = _parsed_rule_label($entry);
+  next unless defined($label) && length($label);
+  push @rows, {
+   label => $label,
+   is_top => _parsed_rule_is_top($entry),
+  };
+ }
+ return \@rows
+}
+
 sub _describe_contract_value_kind {
  my ($value) = @_;
 
@@ -898,7 +929,7 @@ sub run_get_pipeline {
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
    'compiler_pipeline',
-   stage => 'validate_spec_content',
+   stage => $validate_spec_content_failure{stage} // 'validate_spec_content',
    summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
     ? $validate_spec_content_failure{summary}
     : 'Spec content validation failed',
@@ -907,6 +938,7 @@ sub run_get_pipeline {
     : $validate_spec_content_error,
    rule_label => $validate_spec_content_failure{rule_label},
    handler_source_label => $validate_spec_content_handler_source_label,
+   _portable_diagnostic_fields(\%validate_spec_content_failure),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - trapped exception during validation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
@@ -921,7 +953,7 @@ sub run_get_pipeline {
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
     'compiler_pipeline',
-    stage => 'validate_spec_content',
+    stage => $validate_spec_content_failure{stage} // 'validate_spec_content',
     summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
      ? $validate_spec_content_failure{summary}
      : 'Spec content validation failed',
@@ -930,6 +962,7 @@ sub run_get_pipeline {
      : 'Input envelope validation failed',
     rule_label => $validate_spec_content_failure{rule_label},
     handler_source_label => $validate_spec_content_handler_source_label,
+    _portable_diagnostic_fields(\%validate_spec_content_failure),
    );
    _trace_log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
   } else {
@@ -937,7 +970,7 @@ sub run_get_pipeline {
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
     'compiler_pipeline',
-    stage => 'validate_spec_content',
+    stage => $validate_spec_content_failure{stage} // 'validate_spec_content',
     summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
      ? $validate_spec_content_failure{summary}
      : 'Spec content validation failed',
@@ -946,6 +979,7 @@ sub run_get_pipeline {
      : 'Input envelope validation failed',
     rule_label => $validate_spec_content_failure{rule_label},
     handler_source_label => $validate_spec_content_handler_source_label,
+    _portable_diagnostic_fields(\%validate_spec_content_failure),
    );
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
    _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
@@ -1298,9 +1332,13 @@ if ($validate_dependency_regex_references_error) {
 }
  my $final_descriptor = _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $final_descriptor_state);
 
- my $selected_top_rule =
-    defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
-  : (ref($retv) eq 'ARRAY' && @$retv ? _parsed_rule_label($retv->[0]) : undef);
+ my $entry_selection = LinkedSpec::EntryRuleSelection::select_entry_rule(
+  _parsed_entry_rule_rows($retv),
+  $requested_top_rule,
+ );
+ my $selected_top_rule = $entry_selection->{ok}
+  ? $entry_selection->{entry_rule}
+  : $requested_top_rule;
  _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
  my $rule_count = _call_compiler_state('compiled_spec_state_rule_count', $compiled_spec_state);
@@ -1362,7 +1400,7 @@ if ($validate_dependency_regex_references_error) {
  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
  return sub {
   _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
- my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descriptor->{spec}{$top_rule}) eq 'HASH')
+  my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descriptor->{spec}{$top_rule}) eq 'HASH')
    ? $final_descriptor->{spec}{$top_rule}
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
@@ -1384,6 +1422,26 @@ if ($validate_dependency_regex_references_error) {
    },
    DUMP_HIGH
   );
+  if (!$entry_selection->{ok} && ($entry_selection->{code} // '') eq 'entry_rule_not_found') {
+   my $entry_rule = $entry_selection->{entry_rule};
+   my $detail = "No declared rule matches explicit entry selector '$entry_rule'";
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
+    $runtime_ctx,
+    'compiler_pipeline',
+    type => 'runtime_parser',
+    stage => 'select_entry_rule',
+    code => 'entry_rule_not_found',
+    summary => 'Entry rule selection failed',
+    detail => $detail,
+    entry_rule => $entry_rule,
+    rule_label => $entry_rule,
+    handler_source_label => $top_handler_source_label,
+   );
+   _trace_decision('select_entry_rule', 0, $detail, DUMP_NONE);
+   _trace_exit($runtime_scope, { status => 'error', stage => 'select_entry_rule', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
+   die "$detail\n";
+  }
   if (!defined($top_rule) || !length($top_rule)) {
    my $detail = "No top-level rule label is available for parser invocation";
    _call_runtime_ctx(

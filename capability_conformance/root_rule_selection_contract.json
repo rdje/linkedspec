@@ -216,12 +216,12 @@
   "implementation_inventory": [
     {
       "backend": "perl",
-      "validation": "requires_authored_marker",
-      "default_selection": "first_authored_rule_even_when_a_later_marker_exists",
+      "validation": "marker_optional_one_or_more_rules",
+      "default_selection": "first_authored_marker_then_first_authored_rule",
       "explicit_selection": "supported_and_wins",
-      "markerless_fallback": "blocked_by_validation",
+      "markerless_fallback": "implemented",
       "generated_selection": "compiler_selected_label_is_embedded",
-      "descriptor_authored_is_top": "absent",
+      "descriptor_authored_is_top": "present",
       "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"
     },
     {

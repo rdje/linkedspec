@@ -244,6 +244,7 @@ sub _collect_rule_ir {
   node_type     => 'default',
   rep_min       => undef,
   rep_max       => undef,
+  is_top        => 0,
   top_rule      => undef,
   REs           => [],
   code_blocks   => {
@@ -284,6 +285,7 @@ sub _collect_rule_ir {
 
   my $entry_type = $$centry[0];
   if ($entry_type =~ /ELABEL_INITIAL/o) {
+   $rule_ir->{is_top} = 1;
    $rule_ir->{top_rule} = $$centry[1];
    _trace_rule_ir_decision(
     phase => 'collect',
@@ -667,6 +669,7 @@ sub _plan_rule_ir_meta {
   bcode_count => scalar(@{$rule_ir->{bcode_entries}}),
  );
  $meta->{family} = $rule_ir->{family} if defined $rule_ir->{family};
+ $meta->{is_top} = $rule_ir->{is_top} ? 1 : 0;
  $meta->{cursor_policy} = $rule_ir->{cursor_policy} if defined $rule_ir->{cursor_policy};
  $meta->{edge_ownership} = $rule_ir->{edge_ownership} if defined $rule_ir->{edge_ownership};
  $meta->{resolved_edges} = [map { { %$_ } } @{$rule_ir->{resolved_edges} || []}];

@@ -287,8 +287,8 @@ subtest 'validate_spec_content' => sub {
     # --- Edge: blank lines before first rule ---
     push @cases, [\"\n\nTop::\n /x/\n", 1, 'leading blank lines before rule'];
 
-    # --- Edge: no top rule (only child rules) ---
-    push @cases, [\"child:\n /x/\n", 0, 'only child rules rejected'];
+    # --- Root selection: a markerless one-rule source is valid ---
+    push @cases, [\"child:\n /x/\n", 1, 'single ordinary rule accepted as fallback entry'];
 
     # --- Edge: malformed first line ---
     push @cases, [\"/regex/\nTop::\n /x/\n", 0, 'regex before first rule'];

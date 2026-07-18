@@ -8,6 +8,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 — implement Perl root resolution**
+  (DONE — exact core precedence, markerless validation, authored descriptor identity, strict no-drift, and
+  canonical proof pass; clean commit is the only boundary before `.1.2`).
+
+  **Result:** One ordered resolver now selects explicit `top_rule`, otherwise the first authored `::`, otherwise
+  the first authored rule. Markerless one-or-more-rule sources compile; zero rules report `no_rules_defined` at
+  `validate_spec`. Unknown explicit labels retain compile-before-input ordering but fail at `select_entry_rule`
+  before handler lookup. Descriptor metadata publishes the contract id, exact definition order, and immutable
+  per-rule `is_top`; explicit selection never rewrites source identity. Strict-unused remains authored-edge-only.
+
+  **Proof:** The focused consumer passes all 8 neutral selections, 3 failures, native execution, descriptor,
+  structured diagnostics, and strict boundaries; validation fuzz and native loading pass. The first canonical run
+  exposed and corrected an obsolete marker-required native-loading fixture. Root governance is 8/3/3/5 at 1/6
+  with 24 mutations; Knowledge Map is 596/4,258; mdBook and all doctrines pass. Canonical CI passes cursor
+  admission 288, primary 63x2, and Phase 0 1,031/1,031 in 609 seconds.
+
+  **Next:** After the clean `.1.1` commit, activate `.9.1.1.2.1.2` for loaded/generated/runtime-context/trace/
+  diagnostic convergence. The Perl rollout row remains pending until composed admission `.1.3`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 — map Perl root selection**
   (DONE — behavior-free seam map, durable rollout plan, focused proof, and canonical signoff pass; clean commit is
   the only remaining boundary before `.1.1`).
@@ -27,8 +46,8 @@ Current execution status for interruption-safe batch workflow recovery.
   four doctrines/mdBook/whitespace pass. Canonical CI repeats cursor admission 288, primary 63x2, and Phase 0
   1,031/1,031 in 632 seconds before exit 0. No executable behavior changed.
 
-  **Next:** Commit the clean preflight, then activate `.9.1.1.2.1.1` for validation, the shared resolver, unknown-
-  selector diagnostics, and authored marker metadata.
+  **Next:** Clean commit `2e01e13b` is durable; `.9.1.1.2.1.1` is active for validation, the shared resolver,
+  unknown-selector diagnostics, and authored marker metadata. Generated/trace route convergence remains `.1.2`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.0 — ratify root rule selection**
   (DONE — exact neutral contract, governance, mdBook, and canonical signoff are clean at `7abbc593`).

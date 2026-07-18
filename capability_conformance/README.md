@@ -55,9 +55,12 @@ backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to 
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker rejects 24 semantic, topology, inventory, and
-rollout drift mutations. The neutral decision is complete; Perl, Rust, Dart, Julia, Lua/LuaJIT, and composed public
-admission remain pending, so the rollout is 1 complete / 6 pending. Current backend differences stay explicit in
-the inventory until their owning leaves land.
+rollout drift mutations. The neutral decision is complete; rollout remains 1 complete / 6 pending until each
+composed backend leg is admitted. Perl's staged inventory now records its implemented core: marker-optional
+validation, exact explicit/first-marker/first-rule resolution, markerless fallback, and descriptor `is_top`. Its
+loaded/generated/trace and reference admission work remains `.9.1.1.2.1.2-.3`; Rust, Dart, Julia, Lua/LuaJIT,
+and composed public admission remain pending. Current backend differences stay explicit in the inventory until
+their owning leaves land.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always

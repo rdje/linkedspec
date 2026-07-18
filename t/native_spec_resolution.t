@@ -175,7 +175,7 @@ subtest 'projects parse validation and missing failures as structured records' =
  my $scratch = tempdir('linkedspec-perl-spec-errors-XXXXXX', TMPDIR => 1, CLEANUP => 1);
  foreach my $entry (
   ['parse.spec', "not a spec\n"],
-  ['validation.spec', "Only:\n /x/\n"],
+  ['validation.spec', "Only:\n /x/\nOnly:\n /y/\n"],
  ) {
   my $path = File::Spec->catfile($scratch, $entry->[0]);
   open my $fh, '>:raw', $path or die "cannot write $path: $!";

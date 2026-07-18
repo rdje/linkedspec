@@ -176,6 +176,7 @@ sub build_compiled_descriptor_meta {
  return {} unless is_compiled_spec_state($compiled_spec_state);
  my $meta = compiled_spec_state_meta($compiled_spec_state);
  $meta->{cursor_contract} = 'linkedspec-rule-local-cursor-v1';
+ $meta->{entry_rule_contract} = 'linkedspec-root-rule-selection-v1';
  $meta->{action_rewriter_migration} = $args{action_rewriter_migration}
   if exists $args{action_rewriter_migration};
  return $meta

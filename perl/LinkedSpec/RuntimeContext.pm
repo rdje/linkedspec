@@ -358,7 +358,7 @@ sub set_runtime_ctx_last_error {
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
  $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};
  $error->{handler_source_label} = $args{handler_source_label} if defined $args{handler_source_label};
- for my $field (qw/code option_name target targets regex_index ownerships expected_contract actual_contract/) {
+ for my $field (qw/code option_name target targets regex_index ownerships expected_contract actual_contract entry_rule/) {
   $error->{$field} = $args{$field} if exists $args{$field};
  }
  $runtime_ctx->{last_error} = $error;

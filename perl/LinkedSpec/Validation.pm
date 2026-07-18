@@ -158,13 +158,19 @@ sub validate_spec_content {
  }
 
  unless (length($$spec_content) > 0) {
-  _trace_log_output(DUMP_NONE, "Spec content is empty", "Spec file must contain content");
+  _report_dsl_validation_failure($spec_content, 0,
+   "Spec file must define at least one rule",
+   "Add a rule like 'RuleName:' or 'RuleName::'",
+   $option,
+   stage => 'validate_spec',
+   code => 'no_rules_defined',
+   summary => 'Spec file must define at least one rule',
+  );
   return 0;
  }
 
  my @lines = split(/\n/, $$spec_content);
  my $found_rule = 0;
- my $found_top_rule = 0;
  my $first_significant_line_seen = 0;
 
  foreach my $line (@lines) {
@@ -199,27 +205,18 @@ sub validate_spec_content {
   my $parsed = _parse_rule_label_line($line);
   if ($parsed) {
    $found_rule = 1;
-   $found_top_rule = 1 if $parsed->{is_top};
-   last if $found_top_rule;
+   last;
   }
  }
 
  unless ($found_rule) {
   _report_dsl_validation_failure($spec_content, 0,
-   "Spec file must start with a rule definition",
-   "Add a rule like 'RuleName::' at the beginning",
+   "Spec file must define at least one rule",
+   "Add a rule like 'RuleName:' or 'RuleName::'",
    $option,
-   summary => 'Spec file must start with a rule definition',
-  );
-  return 0;
- }
-
- unless ($found_top_rule) {
-  _report_dsl_validation_failure($spec_content, 0,
-   "Spec file must define a top rule with '::'",
-   "Add a top rule like 'RuleName::' so the parser has an entrypoint",
-   $option,
-   summary => "Spec file must define a top rule with '::'",
+   stage => 'validate_spec',
+   code => 'no_rules_defined',
+   summary => 'Spec file must define at least one rule',
   );
   return 0;
  }

@@ -188,19 +188,19 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 1 complete / 6 pending, the neutral contract is executable but backend behavior is not yet uniform.
-Current validators still require at least one marker; Perl currently defaults to the first parsed rule even when a
-later marker exists; Rust defaults to the first marker but has no markerless fallback; Dart, Julia, and Lua contain
-the marker-then-first fallback but validation makes its last branch unreachable. Until `.9.1.1.2.1-.6` close, use
-at least one `::` for portable current execution and pass an explicit selector when its identity matters.
+At rollout 1 complete / 6 pending, the neutral contract is executable but full backend parity is not yet uniform.
+The Perl core now accepts markerless one-or-more-rule sources, applies the exact precedence above, rejects an unknown
+explicit selector at `select_entry_rule` before invoking user code, and publishes definition order plus immutable
+per-rule `is_top` descriptor facts. Its loaded/generated/trace and composed CLI admission remain staged in
+`.9.1.1.2.1.2-.3`. Rust still requires and defaults to a marker. Dart, Julia, and Lua contain the
+marker-then-first fallback but their validators make its last branch unreachable. Until `.9.1.1.2.1-.6` close,
+use at least one `::` for portable cross-backend execution and pass an explicit selector when its identity matters.
 
-The Perl preflight identifies why its current behavior differs. Bootstrap already preserves source order and tags
-each `Rule::` distinctly, but compiled rule metadata drops that tag; after compiling all rules, the compiler chooses
-an explicit `top_rule` or row zero. The outward descriptor consequently has definition order but no authored
-`is_top`, and independently loaded generated source contains ordered label/family rows while hardcoding that same
-compiler-selected entry. The Perl rollout therefore restores immutable marker identity before changing generated or
-loaded execution. Its strict-unused validator remains separate: only authored rule edges count as references, and
-selection or `::` contributes neither a reference nor an exemption.
+Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
+each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
+An explicit selection of an ordinary rule does not rewrite that rule as marked or clear any authored marker.
+Strict-unused validation is also separate: only authored rule edges count as references, and selection or `::`
+contributes neither a reference nor an exemption.
 
 The double colon is purely authored default-selection metadata. A marked rule is otherwise an **ordinary rule** —
 it may carry a regex, take any rule

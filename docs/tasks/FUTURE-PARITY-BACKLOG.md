@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Perl root-selection preflight `.9.1.1.2.1.0` has complete behavior-free seam mapping
-  and canonical signoff; its clean commit is the only boundary before core implementation `.1.1`)
+- Last updated: `2026-07-18` (Perl root-selection core `.9.1.1.2.1.1` is complete and canonically verified;
+  clean commit is the only boundary before loaded/generated/trace convergence `.1.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3369,14 +3369,26 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 - map Perl root selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement Perl validation, ordered default selection, and authored marker identity.
   Dependencies: `.9.1.1.2.1.0`
   Acceptance: Accept one-or-more-rule markerless sources, reject zero rules before selection, preserve first marker
     and definition order, make explicit selection win, reject unknown selectors before user code, preserve strict-
     unused graph semantics, and project authored `is_top` without changing ordinary rule execution.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** `LinkedSpec::EntryRuleSelection` now owns one ordered
+    explicit/first-marker/first-rule resolver. Perl accepts one-or-more-rule markerless sources, reports zero rules
+    as `no_rules_defined` / `validate_spec`, and records unknown explicit labels as `entry_rule_not_found` /
+    `select_entry_rule` before handler lookup while preserving compile-before-input primary ordering. RuleIR and
+    the descriptor retain exact order plus immutable normalized `is_top`; root metadata publishes
+    `linkedspec-root-rule-selection-v1`. Explicit execution does not rewrite authored marker identity. Direct
+    strict-unused remains authored-edge graph analysis and `Get(strict_syntax => 1)` remains unwired. The focused
+    consumer passes all 8 neutral selections, 3 failures, native marked/markerless/explicit execution, descriptor,
+    zero/unknown diagnostics, and strict boundaries; validation fuzz and native loading pass. The first canonical
+    run correctly exposed an obsolete native-loading fixture whose single markerless rule had become valid; it now
+    uses a duplicate rule to retain its intended validation-stage assertion. Root governance remains 8/3/3/5 at
+    1/6 with 24 mutations; Knowledge Map is 596/4,258; memory/task/four doctrines, mdBook, and whitespace pass.
+    Canonical CI passes cursor admission 288, primary 63/63 twice, and Phase 0 1,031/1,031 in 609 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 - implement Perl root resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2`
   Status: `pending`
@@ -7013,7 +7025,7 @@ remains staged for `.9.1.5.6`.
 | 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `done` | ADR `0046`, exact 8/3/3 cases, 5-backend audit, 24 mutations, mdBook, and canonical proof are complete without behavior. |
 | 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `active` | Perl rollout is split into preflight, core/descriptor, generated/trace, and composed admission leaves. |
 | 212.2.1.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` | `done` | Exact Perl validation/bootstrap/selection/descriptor/generated/strict/CLI seams and safe `.1-.3` order are durably mapped without behavior. |
-| 212.2.1.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` | `pending` | Implement markerless validation, exact default/explicit resolution, strict boundary, and authored marker metadata. |
+| 212.2.1.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` | `done` | Markerless validation, exact resolver/default, structured unknown failure, strict no-drift, and authored marker metadata pass canonical proof. |
 | 212.2.1.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` | `pending` | Align loaded/generated/runtime-context/trace/diagnostic routes. |
 | 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `pending` | Compose Perl admission, shared reference CLI bytes, docs, rollout, and parent closeout. |
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `pending` | Implement exact Rust core/runtime/generated/primary selection. |
@@ -8098,6 +8110,14 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-18`: Perl preflight `.9.1.1.2.1.0` completes the exact behavior-free seam map. Bootstrap retains marker
   identity that compiled metadata loses; Compiler uses explicit-or-row-zero; descriptor/generated/unknown/strict/
   primary boundaries and safe `.1-.3` order are durable. Canonical proof passes Phase 0 1,031/1,031 in 632 seconds.
+- `2026-07-18`: Clean commit `2e01e13b` lands behavior-free Perl root-selection preflight `.9.1.1.2.1.0`; the
+  worktree is clean and the brief is zero bytes. Core implementation `.1.1` activates task-tree-first and owns only
+  markerless envelope validation, ordered resolver/default, unknown explicit diagnostic, strict no-drift, and
+  immutable authored `is_top`/definition-order projection. Loaded/generated/trace routes remain `.1.2`.
+- `2026-07-18`: Perl root-selection core `.9.1.1.2.1.1` implements marker-optional validation, one exact ordered
+  resolver, structured unknown/zero-rule failures, immutable descriptor `is_top`, and strict-unused no-drift.
+  Focused contract/native-loading proof passes; canonical CI passes primary 63x2 and Phase 0 1,031 in 609 seconds.
+  The rollout remains correctly pending at 1/6 until `.1.2-.3` compose generated/trace/reference routes.
 - `2026-07-18`: Root-selection neutral decision `.9.1.1.2.0` completes ADR `0046` and
   `linkedspec-root-rule-selection-v1` without backend behavior. Full audit distinguishes Perl row-zero default,
   Rust marker-only routes, and Dart/Julia/Lua unreachable fallbacks; selection remains separate from authored

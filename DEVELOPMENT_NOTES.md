@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` — authored identity and effective selection are different
+  state): the safe Perl seam is an ordered resolver over parsed `{label,is_top}` rows. The resolver does not parse
+  source, compile handlers, mutate metadata, or perform duplicate-definition validation; those remain owned by
+  validation/bootstrap. It returns explicit, first-marker, or first-rule identity plus its basis. Both the early
+  rule-table diagnostic seed and the final returned-parser closure consume that result, preventing the historical
+  row-zero overwrite without introducing a second selection policy.
+
+  Unknown explicit labels need compiled declaration state but must not execute user code. Keeping `Get`'s
+  compile-before-input behavior and checking the resolver result at the start of the returned parser preserves the
+  primary command's established invocation-failure ordering. The inner structured diagnostic becomes portable:
+  `runtime_parser`, `select_entry_rule`, `entry_rule_not_found`, and the requested `entry_rule`; no handler lookup
+  or user action occurs.
+
+  Markerless acceptance belongs to the envelope validator, while zero rules fail before selection. Empty and
+  comment-only sources now share `no_rules_defined` / `validate_spec`; malformed preamble and rule syntax retain
+  their existing owners. RuleIR projects each bootstrap `ELABEL_INITIAL` as immutable `is_top`, and root descriptor
+  metadata publishes the contract id. Explicit selection of an ordinary rule therefore changes runtime context
+  only—it does not fabricate a source marker or clear real ones.
+
+  Strict-unused remains a static authored graph. Direct strict validation still rejects an unreferenced marked
+  entry and two unreferenced markerless rules, while a closed authored cycle passes. `Get(strict_syntax => 1)`
+  stays unwired. The focused consumer and Phase 0 lock these separations; loaded/generated/trace composition is
+  deliberately deferred to `.1.2`, and only `.1.3` may advance the Perl rollout row.
+
+  Markerless acceptance also changes what constitutes a valid negative fixture. Canonical CI found that native
+  loading's historical `Only: /x/` validation-failure source now succeeds correctly. Replacing it with two `Only:`
+  definitions preserves the test's real purpose—projection of a validation-stage compiler failure—without using
+  the retired marker requirement as an accidental oracle. The canonical rerun passes Phase 0 1,031/1,031.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` — preserve identity before resolving execution): Perl already
   carries the information needed for the directed contract, but only in the bootstrap token stream. Ordinary
   headers produce `ELABEL`; every authored marker produces `ELABEL_INITIAL`; source row order is stable. The loss

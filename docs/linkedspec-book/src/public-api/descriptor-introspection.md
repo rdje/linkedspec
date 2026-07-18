@@ -69,6 +69,7 @@ In rough form:
         { label => 'Child', idx => 0 },
       ],
       meta => {
+        is_top => 1,
         family => 'and',
         cursor_policy => 'consume',
         edge_ownership => 'blind',
@@ -135,6 +136,7 @@ In rough form:
   meta => {
     descriptor_model => 'compiled_descriptor_state',
     cursor_contract => 'linkedspec-rule-local-cursor-v1',
+    entry_rule_contract => 'linkedspec-root-rule-selection-v1',
     definition_order => [ ... ],
     compiled_rule_order => [ ... ],
     redefined_rule_labels => [ ... ],
@@ -143,6 +145,21 @@ In rough form:
   },
 }
 ```
+
+### Root-selection identity
+
+The Perl reference descriptor publishes
+`meta.entry_rule_contract = "linkedspec-root-rule-selection-v1"`, exact
+`meta.definition_order`, and a normalized `0`/`1` `spec.<label>.meta.is_top`
+value for every rule. `is_top` records whether the source used `Rule::`; it is
+not the current invocation choice.
+
+For example, given `Earlier:` followed by `Marked::`, a descriptor requested
+with `top_rule => 'Earlier'` still reports `Earlier.is_top = 0` and
+`Marked.is_top = 1`. The explicit selector controls execution and wins over the
+marker, but it does not rewrite authored source identity. With no explicit
+selector, the first marked rule wins; with no marker, the first rule in
+`definition_order` wins.
 
 In the Perl reference backend, `handler` is a coderef (`sub { ... }`) and each `dependency_regex_map` value is a compiled regex (`qr/.../`). Those are encoding details: another backend represents the same `handler` and dependency-regex fields with its own callable and regex types. The field names and their meaning are the backend-neutral part.
 

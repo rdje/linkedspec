@@ -74,12 +74,12 @@ ROUTES = [
 INVENTORY = [
     (
         "perl",
-        "requires_authored_marker",
-        "first_authored_rule_even_when_a_later_marker_exists",
+        "marker_optional_one_or_more_rules",
+        "first_authored_marker_then_first_authored_rule",
         "supported_and_wins",
-        "blocked_by_validation",
+        "implemented",
         "compiler_selected_label_is_embedded",
-        "absent",
+        "present",
         "FUTURE-PARITY-BACKLOG.9.1.1.2.1",
     ),
     (
