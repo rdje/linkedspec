@@ -49,8 +49,13 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > and diagnostic roles. The neutral checker requires every role plus canonical
 > registration and advances only `rust_parity`. Dart `.9.1.5.1` now parses and
 > validates the same typed family/bare-edge surface and lowers it into compiled
-> action/blind tables. Dart live cursor spending, descriptors, generated source,
-> option/CLI removal, and admission remain staged under `.9.1.5.2-.6`.
+> action/blind tables. Dart `.9.1.5.2` now derives seek/consume and sequence/choice
+> independently at every normal live, loaded, or normalized-JSON rule entry;
+> mixed action, blind, direct-call, and recursive children keep their own family
+> policy, and trace scopes report that entered policy. Descriptor projection,
+> generated-source v2, option/CLI removal, and admission remain staged under
+> `.9.1.5.3-.6`; generated-source v1 keeps its bounded legacy execution path
+> until `.4`.
 > Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
 > five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`.
 

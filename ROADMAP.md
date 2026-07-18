@@ -1008,8 +1008,11 @@ the exact compact-pipe, bare-edge, global-propagation, descriptor/generated-v1, 
 Dart normalization `.9.1.5.1` now makes compact `|` authored OR, retains complete-line/header-rest bare references
 as typed AST, resolves family-derived action/blind ownership against the whole declaration set, lowers typed
 dispatch tables, and exposes the exact neutral diagnostics through Dart validation. Its bounded legacy runtime
-adapter deliberately preserves the pre-`.2` compact-pipe execution boundary; live/reconstructed execution,
-descriptor v1, generated v2, option/CLI removal, and admission remain `.2-.6`.
+adapter deliberately preserved the pre-`.2` compact-pipe execution boundary. Dart execution `.9.1.5.2` now
+removes that compiled adapter and derives cursor plus structural policy independently at every normal rule entry
+across live, loaded, normalized-JSON, action, blind, direct-call, recursive, and traced routes. Generated v1 keeps
+its bounded compatibility path until `.4`; descriptor v1, generated v2, option/CLI removal, and admission remain
+`.3-.6`.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

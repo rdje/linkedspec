@@ -34,9 +34,10 @@ migrated shared help/trace boundary is exactly 244/1 package and 30/63 primary i
 Dart normalization `.9.1.5.1` now classifies compact `|` as authored OR, retains complete-line and header-rest
 bare references as typed AST, derives action ownership for OR/default and blind ownership for AND, lowers both
 forms into compiled dispatch tables, and attaches the neutral portable diagnostic envelope to Dart validation
-failures. The runtime still spends its explicitly named legacy compact-pipe adapter, so rule-local live cursor
-execution, descriptor v1, generated-source v2, option/CLI removal, and composed admission remain owned in order by
-`.9.1.5.2-.6`.
+failures. Dart execution `.9.1.5.2` removes the compiled legacy adapter and derives AND-consume / OR-default-seek
+plus sequence/choice independently at each normal live, loaded, normalized-JSON, recursive, and traced rule entry.
+Generated-source v1 remains intentionally compatible until `.4`; descriptor v1, generated-source v2, option/CLI
+removal, and composed admission remain owned in order by `.9.1.5.3-.6`.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

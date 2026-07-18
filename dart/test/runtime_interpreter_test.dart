@@ -519,9 +519,9 @@ Boundary: /END/
 
   test('executes capture-slice logical and diagnostic helper surfaces', () {
     final engine = _engine(r'''
-Body::AND /BEGIN/ /END/
+Body::AND /BEGIN/ / body / /END/
  -> Body[0] { start_capture_slice() }
- -> Body[1] {
+ -> Body[2] {
    print("closing (", match_text(), "\n");
    say("ignored");
    return(hash(

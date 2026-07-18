@@ -35,5 +35,6 @@ helpers, hash helpers, value blocks, structured controls, with-blocks, and tree
 traversal callbacks.
 
 Related facts: [[dart-runtime-matching-state]], [[dart-compiled-spec-state]],
+[[dart-rule-local-cursor-execution]],
 [[dart-runtime-core-value-capture-helpers]], [[dart-runtime-value-control-tree-helpers]],
 [[dart-backend-interpreter-first-plan]].

@@ -7,15 +7,15 @@ answers:
   - "how does Dart classify compact pipe now"
   - "where are Dart cursor normalization diagnostics represented"
   - "what is SpecPortableDiagnostic"
-  - "why does Dart have usesLegacyAndInterpretation"
+  - "when was Dart usesLegacyAndInterpretation removed"
   - "does Dart generated source classify compact pipe correctly yet"
   - "which Dart leaf changes live cursor execution"
   - "how is Dart cursor execution frozen during normalization"
   - "what tests prove Dart bare edge normalization"
 date: 2026-07-18
-status: verified normalization; live cursor execution remains assigned to FUTURE-PARITY-BACKLOG.9.1.5.2
+status: verified normalization; live cursor execution completed in FUTURE-PARITY-BACKLOG.9.1.5.2
 tags: [dart, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "Dart classifies compact `|` as authored OR and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through sorted SpecPortableDiagnostic code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. A bounded usesLegacyAndInterpretation predicate preserves pre-.2 runtime family behavior, and generated-source v1 remains intentionally staged for .4. The five-test contract consumer covers all 36 family and 18 edge rows, six ownership sets, JSON roundtrips, line boundaries, compiled dispatch, and staging. Focused proof is 109/109, corpus 105/105, complete package 249/1 only at the inherited help seam, and primary 30/63 twice."
+evidence: "Dart classifies compact `|` as authored OR and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through sorted SpecPortableDiagnostic code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. Execution leaf .9.1.5.2 removed usesLegacyAndInterpretation from compiled metadata; generated-source v1 remains intentionally staged for .4 behind an interpreter-local compatibility path. The five-test normalization consumer covers all 36 family and 18 edge rows, six ownership sets, JSON roundtrips, line boundaries, compiled dispatch, and staging."
 reverify: "(cd dart && dart test test/rule_local_cursor_normalization_test.dart); (cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart test/compiled_spec_test.dart test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/source_emitter_test.dart test/spec_loader_test.dart test/rule_local_cursor_normalization_test.dart); python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -49,12 +49,12 @@ Their stages and exact field sets come directly from
 `capability_conformance/rule_local_cursor_contract.json`; generic raw-syntax
 messages no longer own governed bare candidates.
 
-Normalization deliberately stops before cursor execution. `CompiledRuleModeMetadata`
-exposes exact `isAnd=false` for compact pipe, while its temporary
-`usesLegacyAndInterpretation` predicate keeps existing runtime sequence/choice
-behavior unchanged until `.9.1.5.2` removes the adapter while deriving policy for
-each entered rule. `classifyGeneratedRuleFamily` still emits the v1 compact-pipe
-family intentionally; `.9.1.5.4` owns generated-source v2 and the hard v1
+Normalization stops at exact compiled family/ownership state.
+`CompiledRuleModeMetadata` exposes `isAnd=false` for compact pipe; execution leaf
+`.9.1.5.2` subsequently removed `usesLegacyAndInterpretation` and made normal
+sequence/choice plus seek/consume execution use exact entered-rule metadata.
+`classifyGeneratedRuleFamily` still emits the v1 compact-pipe family
+intentionally; `.9.1.5.4` owns generated-source v2 and the hard v1
 reconstruction boundary. Root descriptor global metadata and public/CLI global
 options likewise remain assigned to `.3` and `.5`.
 
@@ -68,6 +68,7 @@ already own that staged boundary; the exact migration inventory therefore remain
 68 rather than expanding for redundant evidence.
 
 Related: [[dart-rule-local-cursor-preflight]],
+[[dart-rule-local-cursor-execution]],
 [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-normalization]],
 and [[FUTURE-PARITY-BACKLOG]].

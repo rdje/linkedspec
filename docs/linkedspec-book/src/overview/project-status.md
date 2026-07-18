@@ -219,8 +219,11 @@ Three backbone items tracked major structural modernization — all done:
   `.9.1.5.1` now gives compact `|` its authored OR identity, retains complete-line/header-rest bare references as
   typed AST, derives action ownership for OR/default and blind ownership for AND, lowers both into compiled
   dispatch tables, and exposes the neutral portable diagnostics through Dart validation. A named legacy runtime
-  adapter preserves the staged pre-`.2` execution boundary; live/reconstructed cursor spending, descriptor v1,
-  generated v2, option/CLI removal, and composed admission remain `.2-.6`.
+  adapter preserved the staged pre-`.2` execution boundary. Dart `.9.1.5.2` now removes that compiled adapter and
+  derives AND-consume / OR-default-seek plus sequence/choice independently at every normal rule entry. All 36
+  family spellings, eight mixed parent/child mechanisms, and both structural replacements agree across live,
+  loaded, normalized-JSON, recursion, and trace routes. Generated v1 remains explicitly compatible until `.4`;
+  descriptor v1, generated v2, option/CLI removal, and composed admission remain `.3-.6`.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

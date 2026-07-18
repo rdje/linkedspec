@@ -8,6 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.2 — derive Dart rule-local cursor execution**
+  (DONE — normal live, loaded, normalized-JSON, recursive, and traced rule entries own cursor plus structural
+  policy; generated v1/public/descriptor surfaces remain staged; complete Dart, neutral, governance, mdBook, and
+  canonical signoff pass before the clean commit boundary and descriptor `.9.1.5.3` activation).
+
+  **Goal:** Remove parent/global cursor propagation from normal Dart execution and make every entered rule spend
+  the policy derived from its exact authored family.
+
+  **Result:** `_executeRule` derives AND=`consume` plus sequence or OR/default=`seek` plus choice once per entry and
+  passes that immutable policy to regex matching and trace. Nested action/blind/direct-call/recursive rules derive
+  independently. `usesLegacyAndInterpretation` is gone from compiled metadata. Generated-source v1 alone retains
+  the old engine-global/compact-pipe behavior behind one bounded interpreter adapter for `.4`; descriptor root
+  metadata and public/CLI options remain owned by `.3` and `.5`.
+
+  **Proof:** Contract-driven execution covers 36 family spellings, all eight parent/child mechanisms, and
+  both structural replacements across live and normalized JSON, plus loaded and trace identity. The focused
+  eleven-suite set passes 142/142; full corpus passes 105/105; complete package reaches 253 passes plus only the
+  inherited shared-help failure; primary remains exactly 30/63 in both environments. Neutral inventory remains
+  68 files at 3/5 with 34 rejected mutations. Knowledge Map is 590/4,197; all governance and mdBook checks pass.
+  Canonical CI repeats Perl cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 629 seconds,
+  then exits 0.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.1 — normalize Dart rule edges**
   (DONE — exact authored family identity, typed bare-edge normalization, portable diagnostics, compiled ownership,
   staged runtime/artifact boundary, focused/full boundary proof, mdBook/Knowledge Map, and canonical signoff pass;

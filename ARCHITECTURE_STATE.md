@@ -19,8 +19,12 @@ This document is the current high-level technical reading of the project shape. 
   removes compact-pipe identity drift, retains bare references only at a physical line's first member or header
   rest, resolves them after all labels are known, derives family-owned action/blind dispatch, and attaches exact
   neutral diagnostics to the existing validation exception. Compiled state carries those normalized tables while
-  a named legacy adapter preserves pre-`.2` runtime interpretation; global policy, descriptor/generated versions,
-  public options, and rollout admission therefore remain unchanged until `.2-.6`.
+  a named legacy adapter preserved pre-`.2` runtime interpretation. Dart execution `.9.1.5.2` now removes that
+  compiled adapter and computes one immutable entry policy from exact rule family: AND consumes/sequences and
+  OR/default seeks/chooses. Child action, blind, direct-call, and recursive entries derive again from their own
+  metadata; live, loaded, normalized-JSON, and traced routes share this seam. The engine-global field is now read
+  only by generated-v1 compatibility until `.4`; descriptor/generated versions, public options, and rollout
+  admission remain unchanged for `.3-.6`.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight

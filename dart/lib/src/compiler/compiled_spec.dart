@@ -338,10 +338,6 @@ final class CompiledRuleModeMetadata {
   final int? repMin;
   final int? repMax;
 
-  /// Preserve pre-rule-local runtime interpretation until execution leaf
-  /// FUTURE-PARITY-BACKLOG.9.1.5.2 removes this bounded adapter.
-  bool get usesLegacyAndInterpretation => isAnd || name == 'Pipe';
-
   JsonObject toJson() {
     return {
       'name': name,

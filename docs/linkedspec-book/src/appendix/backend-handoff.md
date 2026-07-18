@@ -1983,7 +1983,15 @@ Dart also has the first runtime rule interpreter in `dart/lib/src/runtime/interp
 AND, OR, and repetition rule families with action-edge and blind-call child
 dispatch, entry/local match handoff, lifecycle blocks, explicit returns, `retv`,
 accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
-cutoffs. Its core ActionIR evaluator now also preserves scalar, array, hash,
+cutoffs. Normal runtime entry now derives cursor discipline and structural
+composition directly from the entered rule: AND consumes and sequences, while
+OR/default seeks and chooses. A nested action edge, blind edge, direct call, or
+recursive call re-enters through the child rule and therefore cannot inherit the
+parent's cursor policy. The same derivation is used by in-memory, loaded, and
+normalized-`SpecFile`-JSON execution, and rule trace scopes expose the policy
+spent at each entry. Generated-source v1 remains behind its explicit global/
+compact-pipe compatibility adapter until Dart generated-source v2 migration.
+Its core ActionIR evaluator now also preserves scalar, array, hash,
 null, boolean, and number shapes through assignment and wrapper snapshots;
 supports `array(...)`, `hash(...)`, `copy(...)`, `set(hash(...), ...)`,
 hash-index mutation, nested reads, non-numeric map keys, regex literals as

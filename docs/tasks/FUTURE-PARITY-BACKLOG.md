@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart preflight `.9.1.5.0` is committed at `b700c11a`; typed family/bare-edge
-  normalization `.9.1.5.1` has complete focused/canonical signoff and execution `.9.1.5.2` follows after commit)
+- Last updated: `2026-07-18` (Dart normalization `.9.1.5.1` is committed at `fc31fc12`; live/loaded/
+  reconstructed rule-local execution `.9.1.5.2` is complete and awaiting its clean commit boundary)
 - Owner: repo-local workflow
 
 ## Goal
@@ -4104,15 +4104,55 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.1 - normalize Dart rule edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Make Dart live, loaded, normalized, and reconstructed execution spend each entered rule's derived policy.
   Dependencies: `.9.1.5.1`
   Acceptance: Derive seek/consume independently from every entered rule family across action, blind, direct,
     recursion, loaded compiled state, normalized JSON reconstruction, and trace; remove parent/global propagation
     from execution while preserving low-level matcher primitives and staged public/descriptor/generated surfaces;
     prove all eight parent/child mechanisms and both structural replacements.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the neutral contract, Dart preflight/normalization/runtime Knowledge
+    cards, ADR `0044`, and toolbox paths to the exact live/global policy seams; reproduce all eight current
+    parent/child propagation cases and both structural replacements before editing.
+  - [x] **DERIVE POLICY PER ENTRY** — Remove caller/global policy authority from normal runtime matching and derive
+    seek/consume from each entered compiled rule family across action, blind, direct call, recursion, and trace,
+    while retaining only the low-level seek/consume matcher algorithms.
+  - [x] **PRESERVE LOADED / RECONSTRUCTED IDENTITY** — Make in-memory, file-loaded, and normalized `SpecFile`-JSON
+    reconstructed state spend identical family-derived policy without storing or accepting a second mutable
+    cursor field.
+  - [x] **PROVE ALL COMPOSITIONS** — Consume all eight neutral parent/child mechanisms plus ordered-landmark and
+    anchored-choice structural replacements through contract-driven runtime tests, including recursive and trace
+    evidence that the child owns its entered policy.
+  - [x] **FREEZE LATER LEAVES / NO REGRESSION** — Leave descriptor root metadata for `.3`, generated v1 for `.4`,
+    public options/CLI/shared fixtures for `.5`, and rollout admission for `.6`; keep the exact staged full-driver
+    boundary, primary 30/63x2, corpus 105/105, and neutral 68-file/34-mutation state unless this leaf's owned
+    runtime evidence requires a contract-governed inventory update.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, changes/notes;
+    pass focused and complete Dart proof plus neutral/governance/canonical signoff; commit before descriptor leaf
+    `.9.1.5.3`.
+  Verification: Activated task-tree-first only after clean normalization commit `fc31fc12`. Knowledge Map,
+    ADR, neutral-contract, admitted Rust/Perl fixture, and exact Dart runtime/compiler/generated/load seams were
+    retrieved before diagnosis. A disposable pre-edit engine probe consumes all eight parent/child cases and both
+    structural replacements: global seek yields `hit`/`done`, ordered landmarks, and the wrongly unanchored
+    choice, while global consume yields `null` for every case. This proves the prior engine option propagated
+    across entered rules and structural composition. The probe was removed.
+
+    Normal `_executeRule` now derives one immutable entry policy: exact AND consumes/sequences and OR/default
+    seeks/chooses. Regex alternation/specific-slot matching and trace receive that policy explicitly; action,
+    blind, direct-call, and recursive child entry derives again. The compiled legacy predicate is removed.
+    Live, loaded, and normalized `SpecFile`-JSON routes agree over all 36 family rows, all eight parent/child
+    mechanisms, and both structural replacements. Generated v1 alone retains its engine-global/compact-pipe
+    compatibility adapter for `.4`; descriptor and public surfaces remain unchanged for `.3`/`.5`.
+
+    Strict analysis passes. The affected five-suite set passes 82/82 and the broader eleven-suite set passes
+    142/142; corpus remains 105/105. The complete package reaches 253 passes plus only the staged shared-help
+    failure, and primary remains exact 30/63 in default and POSIX environments. The neutral checker retains
+    68 governed files, rollout 3/5, and all 34 mutations. The Knowledge Map passes at 590 facts / 4,197 question
+    keys; memory architecture, task metadata, all four doctrines, mdBook, and whitespace pass. Canonical CI
+    repeats the 288-test Perl cursor admission consumer and reference primary 63/63 in both environments, passes
+    Phase 0 1,031/1,031 in 629 seconds, and exits 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.2 - derive Dart rule-local cursor execution`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.3`
   Status: `pending`
@@ -6450,10 +6490,12 @@ hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are committed through `8
 focused and canonical signoff. Generated source `.9.1.4.5` is committed at `727cccc3`, public option/CLI removal
 `.9.1.4.6` is committed at `2bba1e91`; composed Rust admission/closeout `.9.1.4.7` implements one exact 15-role
 consumer, advances only Rust to 3/5, and closes parent `.9.1.4` at `288da21a` after complete Rust/canonical proof.
-Dart `.9.1.5.0` now records the exact eleven-path/non-token audit, compact-pipe/bare-edge/global-policy drift,
-descriptor/generated v1 state, 244/1 package boundary, 104/104 focused and 105/105 corpus proof, and exact 30/63
-primary result in both environments. Dependency-safe implementation children `.1-.6` are fixed; `.0` is in
-lockstep signoff without executable changes.
+Dart `.9.1.5.0` records the exact eleven-path/non-token audit and dependency-safe `.1-.6` split. Normalization
+`.9.1.5.1` is committed at `fc31fc12`. Live/loaded/reconstructed execution `.9.1.5.2` is complete: every normal
+entered rule derives AND-consume/sequence or OR-default-seek/choice independently, while generated v1 remains a
+bounded `.4` compatibility surface. Focused/complete Dart, 105 corpus, neutral 68-file/34-mutation, Knowledge Map,
+governance, mdBook, and canonical Phase 0 1,031/1,031 proof pass. Descriptor `.9.1.5.3` remains pending until the
+clean `.2` commit boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6704,10 +6746,10 @@ lockstep signoff without executable changes.
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; normalization `.1` is done and execution `.2` is next after its clean commit. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; normalization `.1` is committed, live execution `.2` is complete awaiting commit, and descriptor `.3` follows only after a clean pivot. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
 | 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
-| 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `pending` | Derive policy independently for every live/loaded/reconstructed rule entry. |
+| 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `done` | Every normal live/loaded/reconstructed rule entry derives its own cursor and structural policy; full signoff passes. |
 | 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `pending` | Project neutral cursor descriptor v1. |
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `pending` | Emit/reconstruct minimal generated-source v2 and reject v1. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `pending` | Remove public/global overrides and reach exact shared primary 63x2. |
@@ -7757,6 +7799,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart `.9.1.5.2` removes normal engine-global/parent cursor propagation and derives one immutable
+  cursor plus structural policy at every entered rule. All 36 families, eight mixed parent/child mechanisms, and
+  two structural replacements agree across live, loaded, normalized JSON, recursion, and trace. Generated v1 is
+  deliberately frozen behind one bounded compatibility adapter for `.4`; descriptor/public surfaces remain
+  staged. Focused eleven suites pass 142/142, corpus 105/105, the complete package reaches 253/1 only at shared
+  help, primary remains exact 30/63 twice, neutral remains 68 files/34 mutations, and canonical CI passes the
+  288-test Perl consumer, reference primary 63x2, and Phase 0 1,031/1,031 in 629 seconds.
 - `2026-07-18`: `.9.1.4.7` adds one exact contract-declared 15-role Rust consumer and requires every role marker,
   canonical tracked-input registration, complete runtime-package execution, and canonical optional-Rust
   reachability. Native/serialized/loaded/descriptor/emitted/generated/trace/composition/removal/primary and all

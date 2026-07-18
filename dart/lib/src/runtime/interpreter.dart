@@ -409,6 +409,7 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
     }
+    final executionPolicy = _executionPolicyFor(rule, context);
 
     final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
     if (!context.activeRuleEntries.add(recursionKey)) {
@@ -451,7 +452,9 @@ final class LinkedSpecRuntimeEngine {
     final traceScope = context.trace?.enterScope(
       'dart_runtime:rule',
       'label=$label entry_regex=$entryRegexIndex '
-          'mode=${rule.modeMetadata.name} cursor=${context.cursorCodeUnit}',
+          'mode=${rule.modeMetadata.name} '
+          'cursor_policy=${executionPolicy.cursorPolicy.name} '
+          'cursor=${context.cursorCodeUnit}',
       LinkedSpecTraceLevel.high,
     );
     var traceExitDetails = 'matched=false cursor=${context.cursorCodeUnit}';
@@ -469,8 +472,18 @@ final class LinkedSpecRuntimeEngine {
         final usesBlindDispatch =
             generatedFamily?.usesBlindDispatch ?? rule.blindEdges.isNotEmpty;
         final result = usesBlindDispatch
-            ? _executeBlindRule(rule, context)
-            : _executeRegexRule(rule, entryRegexIndex, context);
+            ? _executeBlindRule(
+                rule,
+                context,
+                usesAndExecution: executionPolicy.usesAndExecution,
+              )
+            : _executeRegexRule(
+                rule,
+                entryRegexIndex,
+                context,
+                cursorPolicy: executionPolicy.cursorPolicy,
+                usesAndExecution: executionPolicy.usesAndExecution,
+              );
         traceExitDetails =
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
@@ -511,6 +524,28 @@ final class LinkedSpecRuntimeEngine {
     }
   }
 
+  _RuleExecutionPolicy _executionPolicyFor(
+    CompiledRule rule,
+    _RuntimeExecutionContext context,
+  ) {
+    if (context.generatedPlan != null) {
+      // Contract-v1 generated artifacts historically spend the engine-global
+      // cursor option and treat compact Pipe as AND. Generated-source v2 owns
+      // removing this bounded compatibility path.
+      return _RuleExecutionPolicy(
+        cursorPolicy: context.parseMode,
+        usesAndExecution:
+            rule.modeMetadata.isAnd || rule.modeMetadata.name == 'Pipe',
+      );
+    }
+    return _RuleExecutionPolicy(
+      cursorPolicy: rule.modeMetadata.isAnd
+          ? LinkedSpecParseMode.consume
+          : LinkedSpecParseMode.seek,
+      usesAndExecution: rule.modeMetadata.isAnd,
+    );
+  }
+
   RuntimeDiagnostic _diagnostic({
     required String stage,
     required String summary,
@@ -548,8 +583,9 @@ final class LinkedSpecRuntimeEngine {
 
   _RuleResult _executeBlindRule(
     CompiledRule rule,
-    _RuntimeExecutionContext context,
-  ) {
+    _RuntimeExecutionContext context, {
+    required bool usesAndExecution,
+  }) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
       final implicitAndResult = <Object?>[];
@@ -564,6 +600,7 @@ final class LinkedSpecRuntimeEngine {
           () => _executeBlindOnce(
             rule,
             context,
+            usesAndExecution: usesAndExecution,
             implicitAndResult: implicitAndResult,
           ),
         );
@@ -586,9 +623,7 @@ final class LinkedSpecRuntimeEngine {
         }
         return _RuleResult(
           matched: matched.value || matchedAny,
-          value:
-              rule.modeMetadata.usesLegacyAndInterpretation &&
-                  implicitAndResult.isNotEmpty
+          value: usesAndExecution && implicitAndResult.isNotEmpty
               ? List<Object?>.unmodifiable(implicitAndResult)
               : null,
         );
@@ -603,9 +638,7 @@ final class LinkedSpecRuntimeEngine {
       }
       return _RuleResult(
         matched: matchedAny,
-        value:
-            rule.modeMetadata.usesLegacyAndInterpretation &&
-                implicitAndResult.isNotEmpty
+        value: usesAndExecution && implicitAndResult.isNotEmpty
             ? List<Object?>.unmodifiable(implicitAndResult)
             : null,
       );
@@ -624,7 +657,13 @@ final class LinkedSpecRuntimeEngine {
         return _returned(loopStart.value);
       }
 
-      final matched = _nextableBool(() => _executeBlindOnce(rule, context));
+      final matched = _nextableBool(
+        () => _executeBlindOnce(
+          rule,
+          context,
+          usesAndExecution: usesAndExecution,
+        ),
+      );
       if (matched.nexted) {
         matches += 1;
         if (context.cursorCodeUnit == before) {
@@ -681,9 +720,10 @@ final class LinkedSpecRuntimeEngine {
   bool _executeBlindOnce(
     CompiledRule rule,
     _RuntimeExecutionContext context, {
+    required bool usesAndExecution,
     List<Object?>? implicitAndResult,
   }) {
-    if (rule.modeMetadata.usesLegacyAndInterpretation) {
+    if (usesAndExecution) {
       var matchedAll = true;
       for (
         var edgeIndex = 0;
@@ -764,8 +804,10 @@ final class LinkedSpecRuntimeEngine {
   _RuleResult _executeRegexRule(
     CompiledRule rule,
     int entryRegexIndex,
-    _RuntimeExecutionContext context,
-  ) {
+    _RuntimeExecutionContext context, {
+    required LinkedSpecParseMode cursorPolicy,
+    required bool usesAndExecution,
+  }) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
       var matchedAny = false;
@@ -780,9 +822,8 @@ final class LinkedSpecRuntimeEngine {
             rule,
             context,
             entryRegexIndex: entryRegexIndex,
-            andSequence:
-                rule.modeMetadata.usesLegacyAndInterpretation &&
-                rule.regexPatterns.length > 1,
+            cursorPolicy: cursorPolicy,
+            andSequence: usesAndExecution && rule.regexPatterns.length > 1,
           ),
         );
         if (matched.nexted) {
@@ -832,9 +873,8 @@ final class LinkedSpecRuntimeEngine {
         () => _executeRegexOnce(
           rule,
           context,
-          andSequence:
-              rule.modeMetadata.usesLegacyAndInterpretation &&
-              rule.regexPatterns.length > 1,
+          cursorPolicy: cursorPolicy,
+          andSequence: usesAndExecution && rule.regexPatterns.length > 1,
         ),
       );
       if (matched.nexted) {
@@ -890,6 +930,7 @@ final class LinkedSpecRuntimeEngine {
     CompiledRule rule,
     _RuntimeExecutionContext context, {
     int entryRegexIndex = 0,
+    required LinkedSpecParseMode cursorPolicy,
     bool andSequence = false,
   }) {
     final plan = _regexPlanFor(rule);
@@ -900,6 +941,7 @@ final class LinkedSpecRuntimeEngine {
         rule,
         matched: false,
         cursorBefore: cursorBefore,
+        cursorPolicy: cursorPolicy,
         reason: 'patterns=0',
       );
       return false;
@@ -911,13 +953,19 @@ final class LinkedSpecRuntimeEngine {
         expectedIndex < plan.patterns.length;
         expectedIndex += 1
       ) {
-        final match = _matchSpecific(plan, expectedIndex, context);
+        final match = _matchSpecific(
+          plan,
+          expectedIndex,
+          context,
+          cursorPolicy,
+        );
         if (match == null) {
           _traceRegexDecision(
             context,
             rule,
             matched: false,
             cursorBefore: context.cursorCodeUnit,
+            cursorPolicy: cursorPolicy,
             reason: 'mode=AND expected_index=$expectedIndex',
           );
           return false;
@@ -927,6 +975,7 @@ final class LinkedSpecRuntimeEngine {
           rule,
           matched: true,
           cursorBefore: context.cursorCodeUnit,
+          cursorPolicy: cursorPolicy,
           match: match,
           reason: 'mode=AND expected_index=$expectedIndex',
         );
@@ -940,16 +989,19 @@ final class LinkedSpecRuntimeEngine {
     }
 
     final match = entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
-        ? _matchSpecific(plan, entryRegexIndex, context)
-        : RuntimeRegexAlternation.compile(
-            plan.patterns,
-          ).match(context.input, context.cursorCodeUnit, parseMode: parseMode);
+        ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
+        : RuntimeRegexAlternation.compile(plan.patterns).match(
+            context.input,
+            context.cursorCodeUnit,
+            parseMode: cursorPolicy,
+          );
     if (match == null) {
       _traceRegexDecision(
         context,
         rule,
         matched: false,
         cursorBefore: cursorBefore,
+        cursorPolicy: cursorPolicy,
         reason: 'entry_regex=$entryRegexIndex',
       );
       return false;
@@ -960,6 +1012,7 @@ final class LinkedSpecRuntimeEngine {
       rule,
       matched: true,
       cursorBefore: cursorBefore,
+      cursorPolicy: cursorPolicy,
       match: match,
       reason: 'entry_regex=$entryRegexIndex',
     );
@@ -976,13 +1029,15 @@ final class LinkedSpecRuntimeEngine {
     CompiledRule rule, {
     required bool matched,
     required int cursorBefore,
+    required LinkedSpecParseMode cursorPolicy,
     required String reason,
     RuntimeRegexMatch? match,
   }) {
     context.trace?.traceDecision(
       'dart_runtime:regex_match',
       matched,
-      'rule=${rule.label} $reason alternative=${match?.alternativeIndex ?? -1} '
+      'rule=${rule.label} $reason parse_mode=${cursorPolicy.name} '
+          'alternative=${match?.alternativeIndex ?? -1} '
           'match_start=${match?.codeUnitStart ?? -1} '
           'match_end=${match?.codeUnitEnd ?? -1} '
           'cursor_before=$cursorBefore',
@@ -994,10 +1049,11 @@ final class LinkedSpecRuntimeEngine {
     _RegexPlan plan,
     int expectedIndex,
     _RuntimeExecutionContext context,
+    LinkedSpecParseMode cursorPolicy,
   ) {
     final match = RuntimeRegexAlternation.compile([
       plan.patterns[expectedIndex],
-    ]).match(context.input, context.cursorCodeUnit, parseMode: parseMode);
+    ]).match(context.input, context.cursorCodeUnit, parseMode: cursorPolicy);
     if (match == null) {
       return null;
     }
@@ -6323,6 +6379,16 @@ final class _RuntimeRegexPattern {
   const _RuntimeRegexPattern(this.pattern);
 
   final String pattern;
+}
+
+final class _RuleExecutionPolicy {
+  const _RuleExecutionPolicy({
+    required this.cursorPolicy,
+    required this.usesAndExecution,
+  });
+
+  final LinkedSpecParseMode cursorPolicy;
+  final bool usesAndExecution;
 }
 
 final class _RuntimeExecutionContext {

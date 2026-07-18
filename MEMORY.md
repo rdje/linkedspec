@@ -10,22 +10,21 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.5.1` — exact Dart family/bare-edge normalization, portable
-  diagnostics, compiled ownership, staged runtime boundary, and canonical signoff pass.
-- latest_commit: `b700c11a` — `FUTURE-PARITY-BACKLOG.9.1.5.0 - audit and split Dart cursor rollout`
-  (ahead: 200; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.5.1 - normalize Dart rule edges`.
-- active_work_unit: Dart `.9.1.5.1` is fully verified and awaits its clean commit; live cursor execution and
-  generated v2 remain explicitly staged for `.2` and `.4`.
-- next_action: commit `.9.1.5.1`, clear/verify the brief and clean tree, then activate execution `.9.1.5.2`
-  task-tree-first.
-- current_proof: typed `BareEdge` AST/nullable indices, exact compact-pipe identity, six portable diagnostics, and
-  family-derived compiled action/blind tables consume all 36 family, 18 edge, and six ownership-set rows. A named
-  runtime adapter and exact v1 classifier freeze later leaves. New suite passes 5/5; parser/validator/compiler
-  26/26; focused eight suites 109/109; corpus 105/105; strict analysis passes. Complete driver reaches 249 passes
-  plus only the staged shared-help failure; primary remains exact 30/63 twice. Neutral checker remains 68 files,
-  3/5 rollout, and 34 rejected mutations. Knowledge Map is 589/4,188; canonical CI passes reference primary
-  63x2 and Phase 0 1,031/1,031 in 610 seconds. No background job is running.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.5.2` — normal Dart live/loaded/reconstructed rule entries
+  derive cursor plus structure locally; generated v1 stays staged; full canonical signoff passes.
+- latest_commit: `fc31fc12` — `FUTURE-PARITY-BACKLOG.9.1.5.1 - normalize Dart rule edges`
+  (ahead: 201; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.5.2 - derive Dart rule-local cursor execution`.
+- active_work_unit: Dart `.9.1.5.2` implementation and full signoff are complete; commit workflow is in progress.
+- next_action: prepare the brief, stage/commit `.9.1.5.2`, clear it, verify a clean tree, then activate descriptor
+  `.9.1.5.3` task-tree-first.
+- current_proof: normal Dart entry derives AND consume/sequence and OR-default seek/choice once per entered rule;
+  nested action/blind/call/recursion re-derives child policy. Live, loaded, normalized JSON, and trace consume all
+  36 family, eight parent/child, and two structural rows. Generated v1 alone retains bounded compatibility.
+  Strict analysis passes; affected five suites 82/82; broader eleven suites 142/142; corpus 105/105; complete
+  package 253/1 only at staged shared help; primary remains exact 30/63x2. Neutral remains 68 files, 3/5 rollout,
+  34 rejected mutations. Canonical CI repeats Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031
+  in 629 seconds, then exits 0. No background job is running.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0044`, neutral/admitted references, Dart generated/live/descriptor/CLI seams, and gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -36,5 +35,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; cursor `.9.1.6-.9`; inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.5.1` is fully verified and awaits only commit/clean-boundary
-  checks. Parked mutation and ignored `rgx/subs/pgen` work are untouched.
+- blockers: none. in_flight_uncommitted: completed/verified `.9.1.5.2` source, tests, Knowledge Map, task, live docs,
+  and mdBook await the commit workflow. Parked ignored work is untouched.

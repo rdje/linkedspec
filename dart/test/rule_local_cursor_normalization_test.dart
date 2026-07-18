@@ -214,7 +214,6 @@ void main() {
     () {
       final pipe = compileSpec(parseSpec('Top::|\n /x/\n')).rule('Top')!;
       expect(pipe.modeMetadata.isAnd, isFalse);
-      expect(pipe.modeMetadata.usesLegacyAndInterpretation, isTrue);
       expect(
         classifyGeneratedRuleFamily(pipe),
         GeneratedRuleFamily.andSingleAcode,

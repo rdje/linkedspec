@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.2 — derive Dart rule-local cursor execution
+
+Dart normal runtime execution now derives its cursor and structural policy once at every entered compiled rule.
+Exact AND families consume contiguously and execute as ordered sequences; OR/default families seek forward and
+execute as choices. Action edges, blind calls, explicit `call(...)`, and recursion all re-enter through the child
+rule, so a parent's policy cannot propagate or override the child. The derived value is passed explicitly through
+specific-slot and alternation matching and is exposed on rule scopes and regex trace decisions.
+
+`CompiledRuleModeMetadata.usesLegacyAndInterpretation` has been removed. Live in-memory execution, native loaded
+specs, and normalized `SpecFile` JSON reconstruction now share the same family-derived path without another
+serialized cursor field. Low-level seek/consume algorithms and entry/local match registers are unchanged.
+
+Generated-source v1 remains intentionally frozen behind a private runtime compatibility path: it still spends the
+engine-global cursor setting and legacy compact-pipe structural interpretation until `.9.1.5.4`. Descriptor root
+metadata is untouched for `.3`; constructor/loader/CLI/help/request-trace option surfaces remain for `.5`. The
+source-emitter family matrix now pins its one expected v1/live divergence instead of assuming the staged artifact
+already has v2 semantics. A capture-slice helper fixture now expresses contiguous AND semantics with an explicit
+middle slot while preserving its original result.
+
+The new token-free contract consumer covers all 36 family spellings, eight mixed parent/child mechanisms, and two
+structural replacements across live and normalized JSON, plus loaded execution, trace attribution, and generated-v1
+staging. The affected five-suite set passes 82/82; the broader eleven-suite set passes 142/142; strict analysis
+passes; corpus remains 105/105. The complete package reaches 253 passes plus only the inherited shared-help seam,
+and primary remains exactly 30/63 in both environments. Neutral governance remains 68 files, rollout 3/5, and 34
+rejected mutations. The Knowledge Map passes at 590 facts / 4,197 question keys; memory/task/doctrine/mdBook/
+whitespace checks pass. Canonical CI repeats Perl cursor admission 288, reference primary 63x2, and Phase 0
+1,031/1,031 in 629 seconds, then exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.1 — normalize Dart rule edges
 
 Dart now represents authored rule families and bare declared-rule edges exactly before runtime cursor migration.

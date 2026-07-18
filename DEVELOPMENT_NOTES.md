@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.2` — derive policy at the rule-entry boundary, not at each matcher call):
+  Dart's global propagation was narrower than the size of the public surface suggested. Entry/local registers,
+  loaded compilation, normalized `SpecFile` reconstruction, and low-level seek/consume algorithms were already
+  correct. Normal `_executeRule` simply reached back to the engine field for every regex decision, while sequence/
+  choice reached a transitional compiled predicate. Deriving one `_RuleExecutionPolicy` immediately after rule
+  lookup makes ownership explicit and prevents a caller or parent from changing nested execution accidentally.
+
+  Cursor discipline and structural composition must migrate together. If AND derived `consume` but compact pipe
+  still took the old sequence branch, or if child regexes derived locally while blind dispatch retained the parent
+  interpretation, the eight contract mechanisms would disagree. The entry policy therefore contains both the
+  matcher policy and the exact AND/OR structural decision; every child and recursive call recalculates both.
+
+  Generated v1 is a real version boundary, not an incidental test expectation. Its emitted plan and compact-pipe
+  classifier still encode legacy structure, and its executor historically uses the engine default. The normal path
+  now ignores that engine field, but generated-plan execution takes a separately named compatibility branch. The
+  source-emitter matrix exposed one intentional divergence (`rep_bcode`: live consumes nested `:&`, v1 still seeks);
+  pinning the v1 value makes `.4` responsible for changing it instead of silently migrating artifacts in `.2`.
+
+  Existing tests can encode retired combinations even when their feature is unrelated. The capture-slice helper
+  fixture used `AND+seek` to jump from `BEGIN` to `END`. Adding an explicit contiguous middle slot preserves the
+  exact captured body, lengths, and positions while expressing current AND semantics. This is preferable to
+  weakening runtime policy for an incidental fixture.
+
+  Proof is contract-first and route-composed: 36 family rows, eight parent/child mechanisms, two structural
+  replacements, live plus normalized JSON, loading, trace, and generated-v1 freeze. Focused eleven-suite proof is
+  142/142, corpus is 105/105, the complete package reaches 253/1 solely at staged shared help, and primary stays
+  30/63 twice. The new test avoids governed global-option spellings, keeping the neutral inventory at 68 and all
+  34 mutations effective. Canonical CI independently repeats the 288-test Perl cursor admission consumer,
+  reference primary 63/63 in both environments, and Phase 0 1,031/1,031 in 629 seconds before exiting 0.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.1` — authored family identity and runtime interpretation need a named
   migration boundary): Dart's old `RuleMode.isAnd` did three jobs at once: described authored syntax, selected
   runtime sequence/choice behavior, and helped classify generated-v1 plans. Compact `|` made those meanings

@@ -286,7 +286,7 @@ dependencies:
           final plan = buildGeneratedRulePlan(compiled);
           final topFamily = plan.first.family;
           expect(topFamily, item.family, reason: item.name);
-          expectedValues[item.name] = interpreterValue;
+          expectedValues[item.name] = item.generatedV1Value ?? interpreterValue;
           expectedFamilies[item.name] = item.family;
 
           final identity = 'generated-source/dart-family-${item.name}.spec';
@@ -631,6 +631,7 @@ B: /b/
     name: 'rep_bcode_case',
     family: 'rep_bcode',
     input: 'abab',
+    generatedV1Value: ['A', 'A', 'B'],
     spec: r'''
 Top::OR{2,3}
  I { set(out, []) }
@@ -680,12 +681,14 @@ final class _FamilyCase {
     required this.family,
     required this.input,
     required this.spec,
+    this.generatedV1Value,
   });
 
   final String name;
   final String family;
   final String input;
   final String spec;
+  final Object? generatedV1Value;
 }
 
 CompiledSpec _compileProbe() {
