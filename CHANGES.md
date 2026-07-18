@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.3 — derive Rust rule-local cursor policy
+
+Rust normal live execution now derives cursor policy from the rule being entered: every AND-family rule consumes
+at the current cursor, while every default/OR-family rule may seek forward. Parent policy and the still-staged
+caller option no longer propagate into child, direct-call, recursive, loaded, or reconstructed rule execution.
+Compact `|` therefore spends seek policy, and blind-call orchestration follows the authored family instead of
+forcing every blind-call rule through the legacy sequence path.
+
+`CompiledRule` no longer stores or serializes an independently mutable `parse_mode` field. `cursor_policy()`
+derives the live value from `RuleMode`; ordinary `CompiledSpec` JSON reconstruction does the same, including when
+legacy JSON contains an ignored unknown field. Descriptor v1 and generated-source v1 remain intentionally staged
+for `.9.1.4.4-.5`: one explicitly named adapter recreates their old policy, and the v1 source emitter uses a
+private wire serializer so its embedded compatibility JSON retains the old field without restoring it to normal
+compiled state.
+
+The contract-driven runtime suite covers all 36 family spellings, all eight parent/child mechanisms, both
+structural replacements, action and blind entry, direct calls, recursion, loaded files, ordinary JSON roundtrip,
+and trace attribution. It also locks the descriptor/generated-v1 boundary and proves that the staged public
+option cannot change normal live policy. Focused proof passes execution 6/6, runtime normalization 3/3, core
+normalization 5/5, types 8/8, descriptor 3/3, source emitter 5/5, core 189/189, runtime 137/137, formatting, and
+production-library Clippy. The complete Rust package gate passes the 105-fixture oracle in 216.25 seconds, the
+105-case generated classifier in 243.60 seconds, all 197 integrations, and every adjacent suite; its primary leg
+reaches exactly the governed 51/63 boundary, with only the option-retirement case and eleven request-trace
+projections assigned to `.9.1.4.6`.
+
+The exact migration inventory grows from 72 to 74 because the source-emitter compatibility adapter and the new
+execution contract are governed Rust migration files. The neutral checker passes 36/18/8/14/74 at 2/6 and rejects
+29 drift mutations.
+
+Knowledge Map passes at 586 facts / 4,151 question keys; memory architecture, task metadata, all four doctrines,
+mdBook, JSON, formatting, and whitespace pass. Canonical local CI repeats the 288-test composed Perl cursor
+consumer, reference CLI 63/63 in default and POSIX environments, and Phase 0 1,031/1,031 in 612 seconds, then
+exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.2 — normalize Rust rule edges
 
 Rust now distinguishes authored family identity from staged execution compatibility. Compact `|` is an

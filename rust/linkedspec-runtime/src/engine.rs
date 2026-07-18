@@ -39,7 +39,6 @@ use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
 };
-use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
@@ -913,7 +912,9 @@ impl GeneratedPlanExecutor<'_> {
                 return_if_rule_returned!();
             }
 
-            let parse_mode = ctx.effective_parse_mode(rule.parse_mode);
+            // Contract-v1 generated artifacts retain their legacy cursor view
+            // until FUTURE-PARITY-BACKLOG.9.1.4.5 advances the plan to v2.
+            let parse_mode = rule.legacy_artifact_parse_mode();
             let match_result = if has_entry_idx && matches == 0 {
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
                 let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
@@ -2369,7 +2370,7 @@ impl Engine {
                         return_if_rule_returned!();
                     }
 
-                    let matched = if rule.mode.uses_legacy_and_interpretation() {
+                    let matched = if rule.mode.is_and() {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
                             let child_retv = self.execute_child_rule(&entry.child_label, 0, ctx)?;
@@ -2455,7 +2456,7 @@ impl Engine {
                     self.execute_lifecycle_block("EX", excode, ctx, label)?;
                     return_if_rule_returned!();
                 }
-            } else if !matches!(rule.mode, RuleMode::Or) {
+            } else if rule.mode.is_and() {
                 for entry in &rule.bcode_dispatch {
                     // Execute child rule; its return value becomes the parent's
                     // `retv` (Runtime Semantics §6.2), readable by the attached
@@ -2510,7 +2511,7 @@ impl Engine {
                 return_if_rule_returned!();
             }
             let my_return = ctx.take_return_value().unwrap_or_else(|| {
-                if !is_rep && !matches!(rule.mode, RuleMode::Or) {
+                if !is_rep && rule.mode.is_and() {
                     RuntimeValue::Array(implicit_and_result)
                 } else {
                     RuntimeValue::Undef
@@ -2525,11 +2526,8 @@ impl Engine {
         }
 
         // ── Regex-based matching loop ──
-        let is_rep_and_acode_seq =
-            is_rep && rule.mode.uses_legacy_and_interpretation() && rule.regex_patterns.len() > 1;
-        let is_and_acode_seq = (!is_rep
-            && rule.mode.uses_legacy_and_interpretation()
-            && rule.regex_patterns.len() > 1)
+        let is_rep_and_acode_seq = is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
+        let is_and_acode_seq = (!is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1)
             || is_rep_and_acode_seq;
         let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;
@@ -2571,7 +2569,7 @@ impl Engine {
             }
 
             // ── Match ──
-            let parse_mode = ctx.effective_parse_mode(rule.parse_mode);
+            let parse_mode = rule.cursor_policy();
             let match_result = if has_entry_idx && matches == 0 {
                 // Self-recursive entry: only try the specified regex slot.
                 // Build a single-pattern alternation for this slot.
@@ -8155,7 +8153,7 @@ Child::
     }
 
     #[test]
-    fn execute_value_applies_entry_rule_and_parse_mode_per_invocation() {
+    fn execute_value_selects_entry_rule_without_global_policy_propagation() {
         let grammar = r#"Top::
  /x/ -> Done { return("top") }
 
@@ -8182,7 +8180,8 @@ Done::
             engine
                 .execute_value("prefix x", &alternate_consume)
                 .unwrap(),
-            Value::Null
+            serde_json::json!("alternate"),
+            "staged caller option cannot replace Alternate's authored seek policy"
         );
         assert!(
             engine

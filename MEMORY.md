@@ -10,26 +10,24 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.4.2` — Rust now retains typed bare edges, derives exact
-  family ownership, lowers normalized dispatch tables, and emits portable diagnostics without spending `.3` policy.
-- latest_commit: `9a36b98f` — `FUTURE-PARITY-BACKLOG.9.1.4.1 - run Rust core tests in local gate`
-  (ahead: 193; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.4.2 - normalize Rust rule edges`.
-- active_work_unit: finish the clean commit boundary for verified Rust family/bare-edge normalization `.9.1.4.2`,
-  then activate live per-rule execution `.9.1.4.3` in its owning task-tree leaf.
-- next_action: commit `.9.1.4.2`, clear/verify `git_message_brief.txt`, confirm a clean tree, and only then activate
-  `.9.1.4.3` before its first executable edit.
-- current_proof: Authored `is_and()` is exact; complete-line/header-rest bare edges retain typed target/index/block/
-  fluent facts; validation emits exact portable diagnostics; compiler lowers family ownership into acode/bcode and
-  compiled JSON. Five core contract tests cover 36 family + 18 edge + 6 ownership rows; three runtime tests lock
-  AND live dispatch versus staged default/header-rest/compact-OR behavior. Complete core/runtime packages pass,
-  production-library Clippy exits 0, and neutral cursor remains 36/18/8/14/72 at 2/6 plus 29 mutations. The known
-  all-target test-only `approx_constant` denial remains tracked. After artifact cleanup, the focused classifier
-  passes 105/105 independently and inside the complete gate; core passes 189/3/5/8 and runtime passes 137 unit,
-  105 oracle, seven diagnostic, 197 integration, and every adjacent suite. The gate reaches exactly the governed
-  default CLI 51/63 boundary. Knowledge Map, memory/task/doctrine, mdBook, and whitespace gates pass; canonical
-  local CI repeats the 288-test Perl consumer, reference CLI 63x2, and Phase 0 1,031/1,031 in 646 seconds and exits
-  0. No background job is running.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.4.3` — Rust normal live, loaded, and ordinary reconstructed
+  rules derive cursor policy from every entered family without parent/global propagation or mutable compiled state.
+- latest_commit: `8780990a` — `FUTURE-PARITY-BACKLOG.9.1.4.2 - normalize Rust rule edges`
+  (ahead: 194; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.4.3 - derive Rust rule-local cursor policy`.
+- active_work_unit: finish the clean commit boundary for fully verified Rust live execution `.9.1.4.3`; do not
+  activate descriptor `.9.1.4.4` while the tree is dirty.
+- next_action: commit `.9.1.4.3`, clear/verify `git_message_brief.txt`, confirm a clean tree, and only then activate
+  descriptor leaf `.9.1.4.4` before its first executable edit.
+- current_proof: `CompiledRule` no longer stores mutable cursor policy; live, loaded, ordinary JSON-reconstructed,
+  action, blind, direct-call, recursive, and traced execution derives exact AND consume versus default/OR seek from
+  each entered rule. Descriptor/generated v1 retain one bounded adapter; the staged public option cannot override
+  live behavior. Execution 6/6 covers 36 family + 8 parent/child + 2 structural rows; core passes 189/3/5/8;
+  runtime passes 137, oracle 105/216.25s, diagnostics 7, classifier 105/243.60s, integrations 197, and all adjacent
+  suites. Formatting and production-library Clippy pass. The focused gate reaches only the governed 51/63 `.6`
+  CLI boundary. Neutral cursor passes 36/18/8/14/74 at 2/6 plus 29 mutations; Knowledge Map is 586/4,151; all
+  governance/mdBook checks pass; canonical CI passes Perl consumer 288, CLI 63x2, and Phase 0 1,031/612s. No
+  background job is running.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0044`, and generated-source/live/descriptor seams reviewed before implementation.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -40,5 +38,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; cursor `.9.1.4-.9`; inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: verified `.9.1.4.2` code/tests/docs await only their clean commit boundary;
-  no background job. Parked mutation work and ignored `rgx/subs/pgen` work are untouched.
+- blockers: none. in_flight_uncommitted: verified `.9.1.4.3` code/tests/docs await only their clean commit; no
+  background job. Parked mutation work and ignored `rgx/subs/pgen` work are untouched.

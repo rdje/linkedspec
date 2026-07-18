@@ -1,6 +1,6 @@
 # LinkedSpec
 
-Current design frontier (2026-07-17): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
+Current design frontier (2026-07-18): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
 ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
@@ -14,8 +14,10 @@ ownership, v1 generated state, and the exact 51/63 primary boundary without exec
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
 `.9.1.4.2` correctly classifies compact `|` as OR, retains complete-line and header-rest bare edges as typed AST,
 lowers family-derived ownership into compiled action/blind tables, and emits the neutral portable diagnostics.
-Transitional runtime/descriptor/generated callers preserve the pre-`.3` cursor boundary; rule-local execution
-`.9.1.4.3` remains next and activates only after this slice commits cleanly.
+Verified `.9.1.4.3` removes independently mutable compiled cursor state and makes normal live, loaded, serialized,
+and reconstructed execution derive policy from each entered rule. Parent/global policy no longer propagates into
+children. Descriptor v1, generated-source v1-to-v2 migration, and public option/CLI removal remain explicitly
+staged under `.9.1.4.4-.6`; the governed inventory is 74 files and rollout remains 2/6 until composed Rust admission.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

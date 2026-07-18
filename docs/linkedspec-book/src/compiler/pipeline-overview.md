@@ -412,9 +412,14 @@ Pipeline preparation normalizes options and callback ownership before real parsi
 This is where the compiler knows about requested options such as:
 
 - `top_rule`
-- `parse_mode`
 - `return_descriptor`
 - runtime context plumbing
+
+The Perl reference no longer accepts a parser-wide `parse_mode`; it rejects that retired option during option
+preparation. Rust `.9.1.4.3` still retains its public option shape pending `.9.1.4.6`, but normal live execution no
+longer consults it: every entered rule derives seek/consume from its authored family. Dart, Julia, and Lua remain
+on their dependency-ordered migration leaves. Pipeline preparation must therefore not be read as a semantic
+license for a caller-global cursor policy.
 
 Two specialty compilation modes are also set here: `parse_only` (build compiled rule-table state without generating handlers or emitting parser code) and `generate_only` (regenerate handlers from an already-compiled rule table without re-parsing). These modes support introspection and tooling workflows that need intermediate compiler artifacts.
 

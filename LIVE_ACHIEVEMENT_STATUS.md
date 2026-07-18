@@ -8,9 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.3 — derive Rust rule-local cursor policy**
+  (DONE — implementation, focused/complete Rust proof, lockstep documentation, governance, and canonical signoff
+  pass; the clean commit is the remaining boundary before descriptor `.9.1.4.4` activation).
+
+  **Goal:** Make every live, loaded, serialized, and reconstructed rule spend seek/consume from its own authored
+  family across action, blind, direct, recursive, and traced entry. Remove the blind-call consume special case and
+  mutable compiled policy while preserving descriptor v1, generated-source v1, and public option/CLI staging.
+
+  **Result:** `CompiledRule` no longer stores independent cursor policy. Normal live, loaded, ordinary serialized/
+  reconstructed, action, blind, direct-call, recursive, and traced entry derives exact AND consume versus
+  default/OR seek from the entered rule. Parent/global policy cannot propagate. Descriptor/generated v1 retain one
+  bounded compatibility adapter for `.4-.5`; the staged public option remains visible for `.6` but cannot override
+  normal execution.
+
+  **Proof:** Execution 6/6 covers 36 family rows, eight parent/child mechanisms, two structural replacements,
+  live/JSON, loaded trace, recursion, and staged artifacts. Core 189/3/5/8, runtime 137, oracle 105 in 216.25s,
+  diagnostics 7, generated classifier 105/105 in 243.60s, integrations 197, every adjacent suite, formatting, and
+  production-library Clippy pass. The focused gate reaches exactly 51/63 primary cases, with only the `.6` option/
+  request-trace boundary. Neutral cursor is 36/18/8/14/74 at 2/6 plus 29 mutations.
+  Knowledge Map is 586/4,151; canonical local CI passes the Perl consumer 288, reference CLI 63x2, and Phase 0
+  1,031/1,031 in 612 seconds.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.2 — normalize Rust rule edges**
-  (DONE — implementation, focused proof, lockstep documentation, governance, and canonical signoff are complete;
-  the clean commit boundary remains).
+  (DONE — committed at `8780990a`; implementation, proof, documentation, governance, and canonical signoff pass).
 
   **Result:** Rust now classifies compact `|` as authored OR, retains complete-line/header-rest bare edges as
   typed AST, validates family-derived ownership with exact portable diagnostics, and lowers valid bare edges into

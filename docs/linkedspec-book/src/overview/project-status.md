@@ -187,19 +187,22 @@ Three backbone items tracked major structural modernization — all done:
   `.9.1.3.4` now emits/validates Perl v2, derives the exact five seek/five consume family map, removes the separate
   legacy artifact handler, and rejects v1 reconstruction with mandatory `.spec` regeneration. API/CLI `.9.1.3.5`
   now rejects dynamic overrides at `prepare_options`, removes the flag from help/request trace, returns targeted
-  usage exit 2, and keeps all 63 reference cases. The current inventory is 72 after sixteen completed Perl test and
+  usage exit 2, and keeps all 63 reference cases. The Perl-admission inventory reached 72 after sixteen completed Perl test and
   shared byte owners become token-free while `GeneratedSource.pm` gains the portable emitter-removal envelope.
   Admission `.9.1.3.6` composes all of that behavior through 14 exact live/descriptor/emitted/generated/loaded/
   trace/diagnostic/recursive/structural/primary roles, registers the consumer in canonical CI, and observes all
   eight portable diagnostic codes. The checker rejects 29 drift mutations and advances only `perl_reference`, so
   rollout is 2 complete / 6 pending. Rust preflight `.9.1.4.0` changes no executable behavior and records the
-  exact current boundary: compact `|` is misclassified, complete-line bare edges are ignored, compiled/
-  descriptor/generated state still owns global cursor facts, generated source is v1, and primary conformance is
-  51/63 in both environments. Gate-hardening `.9.1.4.1` now runs the complete core package before runtime; active
+  exact prior boundary: compact `|` was misclassified, complete-line bare edges were ignored, compiled/
+  descriptor/generated state owned global cursor facts, generated source was v1, and primary conformance was
+  51/63 in both environments. Gate-hardening `.9.1.4.1` runs the complete core package before runtime; verified
   normalization `.9.1.4.2` proves 189 unit, three descriptor, five normalization, and eight type tests. It classifies compact `|` as
   authored OR, retains complete-line/header-rest bare edges as typed AST, derives action/blind ownership, lowers
-  typed dispatch tables, and emits neutral portable diagnostics. Runtime, descriptor, and generated-source
-  consumers retain an explicit transitional classifier until `.9.1.4.3-.5` migrate their assigned behavior.
+  typed dispatch tables, and emits neutral portable diagnostics. Verified `.9.1.4.3` removes mutable compiled
+  policy and makes normal live, loaded, and ordinary reconstructed execution derive seek/consume from each entered
+  family across action, blind, direct call, and recursion. Descriptor v1 and generated-source v1 remain explicit
+  compatibility projections for `.4-.5`; public option/CLI removal remains `.6`. The inventory is now 74 files,
+  while rollout stays 2/6 until complete Rust admission.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

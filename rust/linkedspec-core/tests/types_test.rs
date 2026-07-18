@@ -25,7 +25,6 @@ fn compiled_rule_json_roundtrip() {
     let rule = CompiledRule {
         label: "TestRule".into(),
         is_top: true,
-        parse_mode: ParseMode::Seek,
         mode: RuleMode::Default,
         regex_patterns: vec!["hello".into(), "world".into()],
         dependency_refs: Vec::new(),
@@ -54,7 +53,7 @@ fn compiled_rule_json_roundtrip() {
 
     assert_eq!(parsed.label, "TestRule");
     assert!(parsed.is_top);
-    assert_eq!(parsed.parse_mode, ParseMode::Seek);
+    assert_eq!(parsed.cursor_policy(), ParseMode::Seek);
     assert_eq!(parsed.regex_patterns.len(), 2);
 }
 
@@ -66,7 +65,6 @@ fn compiled_spec_json_roundtrip() {
             CompiledRule {
                 label: "Top".into(),
                 is_top: true,
-                parse_mode: ParseMode::Seek,
                 mode: RuleMode::Default,
                 regex_patterns: vec!["/a/".into()],
                 dependency_refs: Vec::new(),
@@ -92,7 +90,6 @@ fn compiled_spec_json_roundtrip() {
             CompiledRule {
                 label: "Child".into(),
                 is_top: false,
-                parse_mode: ParseMode::Consume,
                 mode: RuleMode::And,
                 regex_patterns: vec!["/b/".into()],
                 dependency_refs: Vec::new(),

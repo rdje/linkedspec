@@ -32,10 +32,13 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > `prepare_options` and the primary `--parse-mode` flag at usage exit 2. Help and
 > canonical request trace no longer expose the global field;
 > composed Perl admission `.9.1.3.6` is executable through 14 required roles;
-> Rust `.9.1.4.2` now parses and validates the same family/bare-edge shapes and
-> lowers them into typed action/blind dispatch tables. Rust live cursor spending,
-> descriptor v1, generated-source v2, and option/CLI removal remain staged under
-> `.9.1.4.3-.6`; normalization alone is not a claim of completed Rust execution.
+> Rust `.9.1.4.2` parses and validates the same family/bare-edge shapes and
+> lowers them into typed action/blind dispatch tables. Rust `.9.1.4.3` now makes
+> normal live, loaded, and ordinary JSON-reconstructed rules derive policy at
+> each rule entry. Its compiled rule no longer stores an independent mutable
+> policy, and the still-present caller option cannot override normal execution.
+> Rust descriptor v1, generated-source v1-to-v2 migration, and option/CLI removal
+> remain staged under `.9.1.4.4-.6` through explicit compatibility boundaries.
 > rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
 > dependency-ordered under `.9.1.4-.9`.
 
@@ -460,8 +463,8 @@ For more detail on cursor-stack helpers, anchor rewinds, and their interaction w
 ## Current cursor policies
 
 Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
-The two low-level algorithms are `seek` and `consume`, but normal Perl live execution selects them from the rule
-family rather than a parser-wide override.
+The two low-level algorithms are `seek` and `consume`, but normal Perl and Rust live execution select them from
+the rule family rather than a parser-wide override.
 
 ### `seek`
 
@@ -498,6 +501,42 @@ Word:
 ```
 
 That separation is what makes a reusable extraction rule remain an extraction rule inside a strict ordered parent.
+
+The inverse composition is equally important. An OR/default parent may seek to a
+structural landmark and then call an AND child that must begin exactly at the cursor it
+receives:
+
+```text
+Top::|
+ /BEGIN/ -> Top { return(call(Fields)) }
+
+Fields:AND
+ /name=/
+ /[A-Za-z_]\w*/ -> Fields { return(entry_text()) }
+```
+
+`Top` may seek to `BEGIN`; `Fields` does not inherit that permission. Its first regex
+must consume where `Top` calls it. Action edges, blind calls, explicit calls, and
+recursion all obey this same child-owned rule.
+
+### Rust live and reconstruction boundary
+
+Rust normal compiled state stores the authored family, not a second mutable cursor
+field. Serializing a `CompiledSpec` to ordinary JSON and reconstructing it therefore
+re-derives the same policy. A legacy JSON field can be tolerated as unknown input, but
+it cannot change behavior. File loading feeds the same compiled state into the same
+runtime, so loaded and in-memory execution agree.
+
+Rust trace records the policy used by the rule that performed each match. In an AND
+parent calling a default child, the parent match row reports `Consume`; a later child
+match may report `Seek` from the cursor passed by the parent. That is evidence of two
+rule entries, not a mid-run global mode change.
+
+During the ordered migration, descriptor v1 and generated-source v1 remain deliberately
+older projections. They use a bounded compatibility adapter until `.9.1.4.4-.5` migrate
+their contracts. The Rust option/CLI/request-trace surface also remains visible until
+`.9.1.4.6`, but its value no longer overrides normal live rule policy. Do not use that
+staged surface to author cursor semantics; express the structure with rule families.
 
 ## Removed Perl option boundary
 
@@ -579,8 +618,9 @@ This keeps each reusable rule stable instead of reviving a caller or rule-local
 escape hatch.
 
 The Perl reference implements both the decision's bare-edge normalization and normal live cursor spending. Rust
-implements the same typed normalization and portable validation through `.9.1.4.2`, while its live policy migration
-remains the next leaf. A complete bare paragraph member such as `Child`, `Child { ... }`, or
+implements the same typed normalization and portable validation through `.9.1.4.2`, and `.9.1.4.3` now applies
+the derived policy to normal live, loaded, and ordinary reconstructed execution. A complete bare paragraph member
+such as `Child`, `Child { ... }`, or
 `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -636,5 +676,5 @@ in the Perl reference are current. Primary-command/API removal is also current.
 One canonical 14-role consumer composes live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic projections. The neutral checker currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 72 migration files,
+spellings, 18 edge cases, eight parent/child cases, 74 migration files,
 2 complete / 6 pending, and 29 rejected drift mutations.

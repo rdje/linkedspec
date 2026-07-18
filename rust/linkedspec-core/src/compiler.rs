@@ -33,7 +33,6 @@ use crate::expr::{CodeBlock, RemovedAggregateSelector};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
-    ParseMode,
 };
 
 /// Compile a parsed `SpecFile` into a `CompiledSpec` ready for the runtime.
@@ -128,7 +127,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
                         "index={index} label={} mode={:?} parse_mode={:?} regexes={} acode={} bcode={}",
                         compiled.label,
                         compiled.mode,
-                        compiled.parse_mode,
+                        compiled.cursor_policy(),
                         compiled.regex_patterns.len(),
                         compiled.acode_dispatch.len(),
                         compiled.bcode_dispatch.len()
@@ -562,22 +561,12 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         }
     }
 
-    // Determine parse mode: AND-type → consume, otherwise seek.
-    // Blind-call-dispatch rules also use consume mode (sequential stepping).
-    let parse_mode =
-        if rule.header.mode.uses_legacy_and_interpretation() || !bcode_dispatch.is_empty() {
-            ParseMode::Consume
-        } else {
-            ParseMode::Seek
-        };
-
     let rep_min = rule.header.mode.rep_min();
     let rep_max = rule.header.mode.rep_max();
 
     Ok(CompiledRule {
         label: rule.header.label.clone(),
         is_top: rule.header.is_top,
-        parse_mode,
         mode: rule.header.mode.clone(),
         regex_patterns,
         dependency_refs,
@@ -709,6 +698,7 @@ mod tests {
     use super::*;
     use crate::ast::{FunctionDefinition, SourceSpan};
     use crate::parser::parse_spec;
+    use crate::types::ParseMode;
 
     fn spec_with_user_functions(functions: Vec<FunctionDefinition>, rules_src: &str) -> SpecFile {
         let mut spec = parse_spec(rules_src).unwrap();
@@ -746,7 +736,7 @@ mod tests {
         assert_eq!(compiled.rules.len(), 2);
         assert_eq!(compiled.rules[0].label, "DemoParser");
         assert!(compiled.rules[0].is_top);
-        assert_eq!(compiled.rules[0].parse_mode, ParseMode::Seek);
+        assert_eq!(compiled.rules[0].cursor_policy(), ParseMode::Seek);
     }
 
     #[test]
@@ -783,24 +773,33 @@ mod tests {
         let src = "Top::AND\n /a/ /b/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
-        assert_eq!(compiled.rules[0].parse_mode, ParseMode::Consume);
+        assert_eq!(compiled.rules[0].cursor_policy(), ParseMode::Consume);
     }
 
     #[test]
-    fn compile_preserves_staged_cursor_boundary_after_family_normalization() {
+    fn compile_derives_live_policy_and_isolates_staged_artifact_policy() {
         let pipe = parse_spec("Top::|\n /x/ -> Top { return(\"hit\") }\n").unwrap();
         let pipe = compile(&pipe).unwrap();
         assert!(!pipe.rules[0].mode.is_and());
         assert_eq!(
-            pipe.rules[0].parse_mode,
+            pipe.rules[0].cursor_policy(),
+            ParseMode::Seek,
+            "compact | must spend authored OR policy in live execution"
+        );
+        assert_eq!(
+            pipe.rules[0].legacy_artifact_parse_mode(),
             ParseMode::Consume,
-            "cursor execution remains frozen until FUTURE-PARITY-BACKLOG.9.1.4.3"
+            "descriptor/generated v1 retain their bounded later-leaf adapter"
         );
 
         let blind = parse_spec("Top::\n => Child\n\nChild:\n /x/\n").unwrap();
         let blind = compile(&blind).unwrap();
         assert_eq!(blind.rules[0].bcode_dispatch.len(), 1);
-        assert_eq!(blind.rules[0].parse_mode, ParseMode::Consume);
+        assert_eq!(blind.rules[0].cursor_policy(), ParseMode::Seek);
+        assert_eq!(
+            blind.rules[0].legacy_artifact_parse_mode(),
+            ParseMode::Consume
+        );
     }
 
     #[test]
@@ -808,7 +807,7 @@ mod tests {
         let src = "Top::\n /a/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
-        assert_eq!(compiled.rules[0].parse_mode, ParseMode::Seek);
+        assert_eq!(compiled.rules[0].cursor_policy(), ParseMode::Seek);
         assert_eq!(compiled.rules[0].rep_min, Some(0));
         assert_eq!(compiled.rules[0].rep_max, None);
     }

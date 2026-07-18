@@ -16,7 +16,7 @@ use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
 use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
-use serde::Serialize;
+use serde::{Serialize, ser::SerializeStruct};
 use std::fmt;
 
 /// Backend-neutral generated-source contract implemented by this emitter.
@@ -265,6 +265,62 @@ pub struct GeneratedPlanRow {
     pub family: &'static str,
 }
 
+/// Contract-v1 wire adapter for the compiled rule shape that existed before
+/// live rule-local cursor execution removed the mutable `parse_mode` field.
+///
+/// Fresh in-memory and ordinary serialized `CompiledSpec` values no longer
+/// carry that field. Generated-source v1 remains byte-structural-compatible
+/// until its separately owned v2 migration.
+struct GeneratedCompiledRuleV1<'a>(&'a CompiledRule);
+
+impl Serialize for GeneratedCompiledRuleV1<'_> {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let rule = self.0;
+        let mut state = serializer.serialize_struct("CompiledRule", 17)?;
+        state.serialize_field("label", &rule.label)?;
+        state.serialize_field("is_top", &rule.is_top)?;
+        state.serialize_field("parse_mode", &rule.legacy_artifact_parse_mode())?;
+        state.serialize_field("mode", &rule.mode)?;
+        state.serialize_field("regex_patterns", &rule.regex_patterns)?;
+        state.serialize_field("dependency_refs", &rule.dependency_refs)?;
+        state.serialize_field("acode_dispatch", &rule.acode_dispatch)?;
+        state.serialize_field("bcode_dispatch", &rule.bcode_dispatch)?;
+        state.serialize_field("preamble", &rule.preamble)?;
+        state.serialize_field("lxcode", &rule.lxcode)?;
+        state.serialize_field("lscode", &rule.lscode)?;
+        state.serialize_field("lecode", &rule.lecode)?;
+        state.serialize_field("ecode", &rule.ecode)?;
+        state.serialize_field("excode", &rule.excode)?;
+        state.serialize_field("itcode", &rule.itcode)?;
+        state.serialize_field("rep_min", &rule.rep_min)?;
+        state.serialize_field("rep_max", &rule.rep_max)?;
+        state.end()
+    }
+}
+
+struct GeneratedCompiledSpecV1<'a>(&'a CompiledSpec);
+
+impl Serialize for GeneratedCompiledSpecV1<'_> {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let mut state = serializer.serialize_struct("CompiledSpec", 2)?;
+        state.serialize_field("functions", &self.0.functions)?;
+        let rules = self
+            .0
+            .rules
+            .iter()
+            .map(GeneratedCompiledRuleV1)
+            .collect::<Vec<_>>();
+        state.serialize_field("rules", &rules)?;
+        state.end()
+    }
+}
+
 /// Emit a standalone Rust module for `compiled`.
 ///
 /// The returned source expects dependencies on `linkedspec-runtime` and
@@ -299,7 +355,7 @@ pub fn emit_rust_source_v1(
         .with_detail(error.to_string())
     })?;
 
-    let spec_json = serde_json::to_string(compiled).map_err(|error| {
+    let spec_json = serde_json::to_string(&GeneratedCompiledSpecV1(compiled)).map_err(|error| {
         GeneratedSourceError::new(
             GeneratedSourceStage::EmitSource,
             GeneratedSourceCode::GeneratedSourceEmitFailed,

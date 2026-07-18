@@ -1,5 +1,44 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.3` — live policy is derived state, not compiled state):
+  `CompiledRule.parse_mode` duplicated information already present in `RuleMode`, admitted caller/global mutation,
+  and survived ordinary JSON serialization. Rust now exposes `CompiledRule::cursor_policy()` as the only normal
+  execution authority: exact authored AND maps to consume and every default/OR family maps to seek. This is
+  recomputed whenever `Engine::execute_rule` enters a rule, so parent policy cannot leak through action edges,
+  blind edges, explicit `call(...)`, or recursion. Low-level `CompiledAlternation::seek` and `consume` algorithms
+  remain unchanged.
+
+  Blind-call dispatch previously had two independent legacy couplings: compilation assigned consume whenever
+  bcode was nonempty, and runtime treated almost every non-explicit-OR blind rule as an implicit AND sequence.
+  Removing only the stored field would therefore have left compact `|` and default blind orchestration wrong.
+  Normal runtime branching now uses exact `rule.mode.is_and()` both for bcode orchestration and implicit result
+  projection; the live regex loop uses `rule.cursor_policy()`.
+
+  Artifact migration remains dependency-split. Descriptor v1 and generated-source v1 must not change during
+  `.3`, so `legacy_artifact_parse_mode()` deliberately reproduces the old family-or-bcode rule only for those
+  later-leaf surfaces. Because removing the field from derived `Serialize` would otherwise change emitted-v1
+  reconstruction before `.5`, `source_emitter.rs` owns a private `GeneratedCompiledRuleV1` serializer that writes
+  the old 17-field wire shape. Ordinary `CompiledSpec` JSON has no cursor field and derives policy after decode;
+  serde's default unknown-field tolerance means old ordinary JSON can still be read, but its legacy field is no
+  longer semantic.
+
+  The still-public Rust `ExecutionOptions::with_parse_mode` and CLI flag remain present for `.9.1.4.6`, and the
+  request trace still projects their staged value. They no longer override normal live execution. Tests state
+  this transition explicitly so the removal leaf cannot confuse API presence with semantic authority. Descriptor
+  v1 and generated-plan/source v1 likewise remain intentionally legacy until `.4-.5`.
+
+  The new execution suite mirrors the neutral contract exactly: 36 family rows, eight parent/child mechanisms,
+  and two structural rows, each through live and ordinary serialized state where applicable. Loaded-file trace
+  evidence records an AND parent consuming `p` at byte 0 and its default child seeking from byte 1 to `x` at byte
+  7. Rust direct recursion returns the established native scalar `"done"` rather than Perl's compatibility
+  accumulator wrapper; the test is about reachability/policy and preserves that existing projection.
+
+  Adding the governed source-emitter adapter and execution test legitimately expands the exact token inventory
+  from 72 to 74; both are assigned to the Rust backend group rather than hidden by spelling tricks. Focused and
+  complete package proof passes, including oracle 216.25s, classifier 243.60s, and 197 integrations. The focused
+  gate ends only at the known 51/63 public-option/request-trace boundary owned by `.6`. Canonical local CI then
+  passes the 288-test Perl cursor consumer, reference CLI 63x2, and Phase 0 1,031/1,031 in 612 seconds.
+
 - 2026-07-17 (`FUTURE-PARITY-BACKLOG.9.1.4.2` — disk-pressure interruption and safe artifact cleanup):
   The final focused Rust-gate run passed the complete core package, the 137 runtime unit tests, complete named-mark
   proof, the 105-fixture corpus oracle, and diagnostic-output tests before the exhaustive generated-source

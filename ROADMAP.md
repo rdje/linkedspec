@@ -989,8 +989,10 @@ primary drift without behavior changes. It splits `.9.1.4.1-.7`; `.1` first repa
 omission of the core package's own parser/compiler/validation tests by running the complete core package before
 runtime. Verified typed normalization `.9.1.4.2` now separates authored family identity from transitional execution,
 retains complete-line/header-rest bare candidates as typed AST, derives action/blind ownership, lowers typed
-dispatch tables, and emits exact neutral diagnostics. `.9.1.4.3` remains the next clean-boundary leaf for live,
-loaded, and serialized per-rule cursor execution. The current token inventory is 72.
+dispatch tables, and emits exact neutral diagnostics. Verified live slice `.9.1.4.3` removes mutable compiled
+policy and derives seek/consume from every entered rule across action, blind, call, recursion, loading, ordinary
+JSON reconstruction, and trace. Descriptor/generated/public projections remain `.4-.6`; `.4` follows only after
+the clean `.3` commit. The current token inventory is 74.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

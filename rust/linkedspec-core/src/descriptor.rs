@@ -242,7 +242,7 @@ fn project_rule(rule: &CompiledRule) -> CompiledRuleDescriptor {
         meta: CompiledRuleDescriptorMeta {
             label: rule.label.clone(),
             is_top: rule.is_top,
-            parse_mode: rule.parse_mode,
+            parse_mode: rule.legacy_artifact_parse_mode(),
             mode: CompiledRuleModeMetadata {
                 name: rule_mode_name(&rule.mode).to_string(),
                 is_top: rule.is_top,

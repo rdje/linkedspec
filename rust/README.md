@@ -62,12 +62,14 @@ command, and runs the shared byte-exact CLI manifest in default and POSIX option
 rule-local cursor migration the package tests are green and the primary leg is intentionally 51/63 until
 `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection.
 
-Rust normalization is current through `.9.1.4.2`. The parser retains complete-line and header-rest bare edges as
+Rust execution is current through `.9.1.4.3`. The parser retains complete-line and header-rest bare edges as
 typed nodes; validation derives AND bare edges as blind calls and OR/default bare edges as action edges, rejects
 undefined/mixed/index/group shapes with portable code/stage/fields, and compilation preserves that ownership in
-the corresponding dispatch table. Compact `|` is authored OR and compact `&` is authored AND. Live cursor policy,
-descriptor v1, generated-source v2, and public option/CLI removal remain staged under `.9.1.4.3-.6`, so callers
-should not infer completed Rust rule-local execution from the normalized AST alone.
+the corresponding dispatch table. Compact `|` is authored OR and compact `&` is authored AND. Normal live,
+loaded, and ordinary JSON-reconstructed rules derive seek/consume from the rule being entered; compiled rules no
+longer store an independently mutable policy, and the staged caller option cannot override live behavior.
+Descriptor v1, generated-source v1-to-v2 migration, and public option/CLI removal remain staged under
+`.9.1.4.4-.6` through explicit compatibility adapters.
 
 ### Compiled descriptor introspection
 

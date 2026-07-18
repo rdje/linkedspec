@@ -40,11 +40,11 @@ fn default_and_header_rest_bare_edges_retain_the_staged_live_boundary() {
 }
 
 #[test]
-fn compact_or_retains_legacy_live_cursor_behavior_until_the_execution_leaf() {
+fn compact_or_spends_authored_seek_policy_in_live_execution() {
     let source = "Top::|\n /x/ -> Top { return(\"hit\") }\n";
     assert_eq!(
         execute(source, "prefix x"),
-        json!([]),
-        "FUTURE-PARITY-BACKLOG.9.1.4.3 owns compact-OR cursor execution"
+        json!(["hit"]),
+        "compact OR must seek from the current cursor"
     );
 }

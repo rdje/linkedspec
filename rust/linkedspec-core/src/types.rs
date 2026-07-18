@@ -297,8 +297,6 @@ pub struct CompiledRule {
     pub label: String,
     /// Whether this is a top rule.
     pub is_top: bool,
-    /// Parse mode (seek or consume).
-    pub parse_mode: ParseMode,
     /// Original parsed rule mode, preserved for generated-source family planning.
     #[serde(default)]
     pub mode: crate::ast::RuleMode,
@@ -322,6 +320,33 @@ pub struct CompiledRule {
     /// Repetition bounds.
     pub rep_min: Option<usize>,
     pub rep_max: Option<usize>,
+}
+
+impl CompiledRule {
+    /// Return the live cursor policy derived from this rule's authored family.
+    ///
+    /// Cursor policy is intentionally not stored as an independently mutable
+    /// compiled field. AND-family rules consume; every OR/default family seeks.
+    pub fn cursor_policy(&self) -> ParseMode {
+        if self.mode.is_and() {
+            ParseMode::Consume
+        } else {
+            ParseMode::Seek
+        }
+    }
+
+    /// Reproduce the pre-rule-local policy only for staged v1 artifact views.
+    ///
+    /// Descriptor v1 and generated-source v1 migrate in
+    /// `FUTURE-PARITY-BACKLOG.9.1.4.4-.5`. Normal live, loaded, and serialized
+    /// execution must use [`Self::cursor_policy`] instead.
+    pub fn legacy_artifact_parse_mode(&self) -> ParseMode {
+        if self.mode.uses_legacy_and_interpretation() || !self.bcode_dispatch.is_empty() {
+            ParseMode::Consume
+        } else {
+            ParseMode::Seek
+        }
+    }
 }
 
 /// A compiled top-level user-defined function definition.

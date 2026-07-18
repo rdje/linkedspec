@@ -17,10 +17,10 @@ answers:
   - "where is composed Perl rule local cursor admission"
   - "what roles does Perl cursor admission cover"
   - "is Perl rule local cursor rollout admitted"
-date: 2026-07-17
+date: 2026-07-18
 status: confirmed and admitted Perl live, descriptor-v1, generated-source-v2, API/CLI, and composed projection
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .2 makes live/loaded handlers intrinsic; .3 projects descriptor v1; .4 emits generated-source v2; and .5 removes the API/CLI override while preserving 63x2. Admission .6 declares and executes 14 exact live default/AND, descriptor, emitted, generated direct/trace, loaded, mixed, recursive, structural, removal, primary, and diagnostic roles. The checker verifies every marker plus canonical registration, observes all eight portable codes, rejects 29 mutations, retains 72 migration files, and advances only perl_reference for a 2/6 rollout."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .2 makes live/loaded handlers intrinsic; .3 projects descriptor v1; .4 emits generated-source v2; and .5 removes the API/CLI override while preserving 63x2. Admission .6 declares and executes 14 exact live default/AND, descriptor, emitted, generated direct/trace, loaded, mixed, recursive, structural, removal, primary, and diagnostic roles. The checker verifies every marker plus canonical registration, observes all eight portable codes, rejects 29 mutations, and advances only perl_reference for a 2/6 rollout. Inventory was 72 at Perl admission and is 74 after Rust execution adds two governed files."
 reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -80,8 +80,9 @@ then removed SpecEntry's last token and synchronized the generated-handlers
 chapter past its last token. The reconciled observed inventory is 87;
 API/CLI migration then made nine shared byte fixtures and seven Perl tests
 token-free while adding the portable emitter error to `GeneratedSource.pm`; the
-current observed inventory is 72. Future changes in any owner tree must update the neutral inventory in the same
-slice when a listed path becomes token-free.
+inventory was 72 at Perl admission. Rust execution `.9.1.4.3` later added two governed files, so the current
+observed inventory is 74. Future changes in any owner tree must update the neutral inventory in the same slice when
+a listed path becomes token-free or a new candidate becomes governed.
 
 The initial migration inventory assigned all shared CLI fixtures to final
 admission `.9.1.8`. That order cannot preserve a green canonical branch: removing
