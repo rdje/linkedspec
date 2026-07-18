@@ -412,15 +412,45 @@ Two specialty compilation modes are also available:
 
 ## `top_rule`
 
-`top_rule` selects the parser entrypoint rule.
+`top_rule` explicitly selects the parser entry rule. It may name any declared rule, including an ordinary
+single-colon rule, and has priority over every authored `::` marker. The primary-command equivalent is
+`--top-rule NAME`.
 
-If omitted, LinkedSpec uses the first parsed rule paragraph as the default top-level rule.
+ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
+has no marker, select the first authored rule. That contract is at 1 complete / 6 pending. The current Perl
+reference still selects the first parsed rule even when a later marker exists, Rust requires and selects a marker,
+and Dart/Julia/Lua validation still blocks their existing markerless runtime fallback. Use an explicit selector
+when current multi-backend execution must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
   \$spec,
   top_rule => 'Expression',
 );
+```
+
+For example, the accepted default for this source is `Marked`, not `Earlier`; `top_rule => 'Later'` still wins:
+
+```text
+Earlier:
+ /earlier/
+
+Marked::
+ /marked/
+
+Later:
+ /later/
+```
+
+With no `::`, the accepted default is simply the first declared rule. A markerless file remains implementation-
+pending until the backend rollout closes, so this example currently needs an explicit selector on portable paths:
+
+```text
+First:
+ /first/
+
+Second:
+ /second/
 ```
 
 ## Removed `parse_mode`

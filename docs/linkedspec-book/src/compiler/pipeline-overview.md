@@ -446,7 +446,11 @@ Before bootstrap parsing, LinkedSpec validates obvious `.spec` source-shape prob
 
 This stage exists to reject malformed input early and clearly. The validation owner provides three layers of defense:
 
-**Envelope validation** (`validate_spec_content`): checks the input is a non-empty SCALAR ref, verifies the first content line is a valid rule label, and requires at least one top rule (`RuleName::`) as the parser entry point.
+**Envelope validation** (`validate_spec_content`): checks the input is a non-empty SCALAR ref, verifies the first
+content line is a valid rule label, and currently requires at least one marked rule (`RuleName::`). ADR `0046` /
+`linkedspec-root-rule-selection-v1` replaces that last condition with at least one rule after the dependency-ordered
+backend rollout: explicit selector > first authored marker > first authored rule. The neutral decision is complete,
+but this validator remains unchanged in its later Perl implementation leaf.
 
 **Paragraph-level validation** (`validate_dsl_syntax`): the deepest layer. It detects duplicate rule definitions, rejects rule definitions inside still-open blocks, checks that action edges (`->`) and blind-call edges (`=>`) have valid target labels and block-depth balance, rejects mixed action/blind-call modes within one rule, validates Perl regex literals for compile-ability, verifies rule-header right-hand-side content, checks split-marker syntax, and reports unused/undefined rule references. When `strict_syntax => 1` is set, unused-rule and undefined-reference warnings become hard errors, which is useful for CI regressions.
 

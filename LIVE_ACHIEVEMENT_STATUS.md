@@ -8,6 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.0 — ratify root rule selection**
+  (DONE — exact neutral contract, governance, mdBook, and canonical signoff pass; clean commit remains).
+
+  **Goal:** Fix one backend-neutral entry-rule selection order before any backend behavior changes.
+
+  **Result:** ADR `0046` ratifies explicit selector > first authored `::` > first authored rule. Authored `is_top`
+  remains source identity, effective selection remains execution state, request/runtime trace facts stay distinct,
+  and strict-unused receives no synthetic reference or exemption. The five-backend inventory records Perl's
+  row-zero default, Rust's marker-only routes, and Dart/Julia/Lua's validation-blocked fallback.
+
+  **Proof:** The neutral checker passes 8 selection, 3 failure, 3 strict, 5 backend, 1/6 rollout, and 24 mutation
+  checks. Knowledge Map is 594/4,238; memory/task/four-doctrine/mdBook/whitespace pass. Canonical CI repeats Perl
+  cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 642 seconds before exit 0. No backend
+  behavior file changed.
+
+  **Next:** Commit clean, then activate Perl `.9.1.1.2.1`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.5 — remove Dart global cursor overrides**
   (DONE — caller-global API/CLI/trace ownership is removed, exact Dart and canonical signoff pass, and clean commit
   is the only boundary before the director-prioritized root-selection decision leaf).

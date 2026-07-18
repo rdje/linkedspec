@@ -3,6 +3,12 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 
 Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.
 
+Root-selection contract (2026-07-18): ADR `0046` / `linkedspec-root-rule-selection-v1` fixes explicit selector >
+first authored `Rule::` > first authored `Rule:` precedence, keeps authored `is_top` separate from effective
+execution state, and preserves strict-unused as defined-minus-authored-references. Neutral contract `.9.1.1.2.0`
+is complete without behavior changes; Perl, Rust, Dart, Julia, Lua/LuaJIT, and composed public admission
+`.9.1.1.2.1-.6` remain pending, so rollout is 1 complete / 6 pending.
+
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.
 - Preserve the current strengths:

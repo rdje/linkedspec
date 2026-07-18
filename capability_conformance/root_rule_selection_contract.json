@@ -1,0 +1,277 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-root-rule-selection-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.9.1.1.2",
+  "terminology": {
+    "entry_rule": "the declared rule entered first for one parser execution",
+    "authored_marker": "the double colon in an authored Rule:: header",
+    "explicit_selector": "a caller-supplied exact declared-rule label, exposed by the primary command as --top-rule NAME",
+    "top_level": "source nesting terminology only; entry selection does not change whether a declaration is top-level"
+  },
+  "precedence": [
+    {
+      "rank": 1,
+      "id": "explicit_selector",
+      "rule": "an explicit selector names any declared rule and wins over every authored marker"
+    },
+    {
+      "rank": 2,
+      "id": "first_authored_marker",
+      "rule": "without an explicit selector, select the first authored Rule:: in definition order"
+    },
+    {
+      "rank": 3,
+      "id": "first_authored_rule",
+      "rule": "without an explicit selector or authored marker, select the first authored Rule: in definition order"
+    }
+  ],
+  "validation": {
+    "minimum_rule_count": 1,
+    "authored_marker_required": false,
+    "definition_order_is_semantic": true,
+    "selection_occurs_after_structural_validation": true,
+    "duplicate_rule_labels": "invalid under the existing grammar contract before entry selection"
+  },
+  "selector": {
+    "native_name": "top_rule",
+    "primary_cli_flag": "--top-rule",
+    "label_matching": "exact declared label",
+    "may_select_ordinary_rule": true,
+    "may_select_later_marker": true,
+    "unknown_selector": {
+      "code": "entry_rule_not_found",
+      "stage": "select_entry_rule",
+      "fields": ["entry_rule"],
+      "user_code_evaluated": false,
+      "primary_cli": {
+        "exit": 1,
+        "stderr_error": "parser invocation failed"
+      }
+    }
+  },
+  "source_identity": {
+    "authored_is_top_meaning": "true exactly when the source header used double colon",
+    "selection_rewrites_authored_is_top": false,
+    "multiple_authored_markers_allowed": true,
+    "definition_order_preserved": true,
+    "selected_entry_rule_is_execution_state": true
+  },
+  "strict_unused": {
+    "definition": "declared rule labels minus labels referenced by authored rule edges",
+    "entry_selection_counts_as_reference": false,
+    "selected_entry_rule_is_exempt": false,
+    "authored_marker_counts_as_reference": false,
+    "purpose": "entry selection is orthogonal to the static dependency graph"
+  },
+  "selection_cases": [
+    {
+      "id": "explicit_ordinary_beats_markers",
+      "rules": [
+        {"label": "FirstMarked", "authored_is_top": true},
+        {"label": "Ordinary", "authored_is_top": false},
+        {"label": "LaterMarked", "authored_is_top": true}
+      ],
+      "explicit_selector": "Ordinary",
+      "expected_label": "Ordinary",
+      "expected_basis": "explicit_selector"
+    },
+    {
+      "id": "explicit_later_marker_beats_first_marker",
+      "rules": [
+        {"label": "FirstMarked", "authored_is_top": true},
+        {"label": "LaterMarked", "authored_is_top": true}
+      ],
+      "explicit_selector": "LaterMarked",
+      "expected_label": "LaterMarked",
+      "expected_basis": "explicit_selector"
+    },
+    {
+      "id": "marker_beats_earlier_ordinary",
+      "rules": [
+        {"label": "EarlierOrdinary", "authored_is_top": false},
+        {"label": "Marked", "authored_is_top": true},
+        {"label": "LaterOrdinary", "authored_is_top": false}
+      ],
+      "explicit_selector": null,
+      "expected_label": "Marked",
+      "expected_basis": "first_authored_marker"
+    },
+    {
+      "id": "first_marker_beats_later_marker",
+      "rules": [
+        {"label": "EarlierOrdinary", "authored_is_top": false},
+        {"label": "FirstMarked", "authored_is_top": true},
+        {"label": "LaterMarked", "authored_is_top": true}
+      ],
+      "explicit_selector": null,
+      "expected_label": "FirstMarked",
+      "expected_basis": "first_authored_marker"
+    },
+    {
+      "id": "first_ordinary_without_marker",
+      "rules": [
+        {"label": "First", "authored_is_top": false},
+        {"label": "Second", "authored_is_top": false}
+      ],
+      "explicit_selector": null,
+      "expected_label": "First",
+      "expected_basis": "first_authored_rule"
+    },
+    {
+      "id": "explicit_later_ordinary_without_marker",
+      "rules": [
+        {"label": "First", "authored_is_top": false},
+        {"label": "Second", "authored_is_top": false}
+      ],
+      "explicit_selector": "Second",
+      "expected_label": "Second",
+      "expected_basis": "explicit_selector"
+    },
+    {
+      "id": "single_ordinary_fallback",
+      "rules": [
+        {"label": "Only", "authored_is_top": false}
+      ],
+      "explicit_selector": null,
+      "expected_label": "Only",
+      "expected_basis": "first_authored_rule"
+    },
+    {
+      "id": "single_marker_default",
+      "rules": [
+        {"label": "Only", "authored_is_top": true}
+      ],
+      "explicit_selector": null,
+      "expected_label": "Only",
+      "expected_basis": "first_authored_marker"
+    }
+  ],
+  "failure_cases": [
+    {
+      "id": "unknown_explicit_selector",
+      "rules": [
+        {"label": "Known", "authored_is_top": true}
+      ],
+      "explicit_selector": "Missing",
+      "expected_code": "entry_rule_not_found",
+      "expected_stage": "select_entry_rule"
+    },
+    {
+      "id": "zero_rules_without_selector",
+      "rules": [],
+      "explicit_selector": null,
+      "expected_code": "no_rules_defined",
+      "expected_stage": "validate_spec"
+    },
+    {
+      "id": "zero_rules_with_selector",
+      "rules": [],
+      "explicit_selector": "Missing",
+      "expected_code": "no_rules_defined",
+      "expected_stage": "validate_spec"
+    }
+  ],
+  "strict_cases": [
+    {
+      "id": "explicit_selection_is_not_reference",
+      "rules": ["A", "B"],
+      "referenced_rules": [],
+      "explicit_selector": "B",
+      "expected_unused": ["A", "B"]
+    },
+    {
+      "id": "marker_selection_is_not_reference",
+      "rules": ["Top", "Child"],
+      "referenced_rules": ["Child"],
+      "explicit_selector": null,
+      "expected_unused": ["Top"]
+    },
+    {
+      "id": "closed_reference_cycle_has_no_unused_rules",
+      "rules": ["A", "B"],
+      "referenced_rules": ["B", "A"],
+      "explicit_selector": null,
+      "expected_unused": []
+    }
+  ],
+  "projections": {
+    "native": "resolve the effective entry rule once per execution before user code",
+    "loaded_and_reconstructed": "preserve definition order and authored marker bits, then apply the same precedence",
+    "descriptor": "publish definition order and per-rule authored is_top identity; do not rewrite marker bits for an explicit or fallback selection",
+    "generated_source": "preserve enough ordered authored state to recompute the default; accept an explicit execution selector without serializing it as source identity",
+    "trace": "primary request trace records the requested selector or <default>; runtime trace and diagnostics attribute the resolved effective entry label",
+    "primary_cli": "--top-rule NAME uses the explicit branch; omission uses marker then first-rule fallback; an unknown name returns invocation exit 1",
+    "strict_unused": "compute only from authored references; entry selection and marker identity do not add graph edges or exemptions"
+  },
+  "required_execution_routes": [
+    "native",
+    "loaded",
+    "reconstructed",
+    "generated_direct",
+    "generated_traced",
+    "emitted_source_direct",
+    "emitted_source_traced",
+    "primary_cli"
+  ],
+  "implementation_inventory": [
+    {
+      "backend": "perl",
+      "validation": "requires_authored_marker",
+      "default_selection": "first_authored_rule_even_when_a_later_marker_exists",
+      "explicit_selection": "supported_and_wins",
+      "markerless_fallback": "blocked_by_validation",
+      "generated_selection": "compiler_selected_label_is_embedded",
+      "descriptor_authored_is_top": "absent",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"
+    },
+    {
+      "backend": "rust",
+      "validation": "requires_authored_marker",
+      "default_selection": "first_authored_marker",
+      "explicit_selection": "execute_value_and_primary_only",
+      "markerless_fallback": "absent",
+      "generated_selection": "first_authored_marker_only",
+      "descriptor_authored_is_top": "present",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.2"
+    },
+    {
+      "backend": "dart",
+      "validation": "requires_authored_marker",
+      "default_selection": "first_authored_marker_then_first_authored_rule",
+      "explicit_selection": "supported_and_wins",
+      "markerless_fallback": "implemented_but_blocked_by_validation",
+      "generated_selection": "shares_runtime_fallback",
+      "descriptor_authored_is_top": "present",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.3"
+    },
+    {
+      "backend": "julia",
+      "validation": "requires_authored_marker",
+      "default_selection": "first_authored_marker_then_first_authored_rule",
+      "explicit_selection": "supported_and_wins",
+      "markerless_fallback": "implemented_but_blocked_by_validation",
+      "generated_selection": "shares_runtime_fallback",
+      "descriptor_authored_is_top": "present",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.4"
+    },
+    {
+      "backend": "lua",
+      "validation": "requires_authored_marker",
+      "default_selection": "first_authored_marker_then_first_authored_rule",
+      "explicit_selection": "supported_and_wins",
+      "markerless_fallback": "implemented_but_blocked_by_validation",
+      "generated_selection": "shares_runtime_fallback",
+      "descriptor_authored_is_top": "present",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.5"
+    }
+  ],
+  "rollout": [
+    {"id": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.0"},
+    {"id": "perl_reference", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"},
+    {"id": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.2"},
+    {"id": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.3"},
+    {"id": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.4"},
+    {"id": "lua", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.5"},
+    {"id": "admission_and_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.6"}
+  ]
+}

@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.0` — selection state is not source identity): the useful seam is
+  a pure ordered resolver over declared rule rows, not another parser mode. Explicit selector wins; otherwise scan
+  definition order for the first authored marker; otherwise take row zero. This same resolver belongs at native,
+  loaded/reconstructed, generated/emitted, traced, and primary boundaries. An invocation may select an ordinary
+  rule without rewriting its `is_top` bit, and generated artifacts must retain ordered authored facts rather than
+  serializing the caller's choice back into grammar identity.
+
+  The audit exposed a non-obvious reference divergence: Perl validation requires `::`, yet final compilation
+  ignores marker position and overwrites discovered marker state with parsed row zero. Rust is marker-only on
+  default native/generated paths. Dart, Julia, and Lua already have correct marker-then-first helpers, but their
+  validators make the markerless branch unreachable. This makes the rollout asymmetric: Perl needs selection plus
+  validation/descriptor repair, Rust needs fallback and route convergence, while Dart/Julia/Lua primarily need
+  validation reachability and route proof.
+
+  Strict-unused must not be “fixed” as part of root selection. Its established contract is the static authored
+  graph: defined labels minus referenced labels. Treating the effective entry as a reference or exempting it would
+  change current strict results and blur invocation state into source analysis. The neutral contract therefore
+  locks both booleans false and includes three independent graph cases.
+
+  ADR `0046`, eight success cases, three failure cases, three strict cases, the exact current backend inventory,
+  seven rollout legs, and 24 mutations are behavior-free authority for `.9.1.1.2.1-.6`. The primary request trace
+  continues to show the request (`NAME` or `<default>`); runtime trace/diagnostics show the resolved effective
+  label. The mdBook exposes both the target and current staged divergences so users are not promised markerless
+  parity early.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.5` — remove authority, not matcher capability): Dart's remaining
   `LinkedSpecParseMode` tokens fell into two fundamentally different groups. Engine/loader/corpus/parser/CLI
   parameters let a caller rewrite every nested rule and therefore had to disappear. The matcher enum and exact

@@ -1,7 +1,7 @@
 # 0010 — The top rule is an ordinary rule that is merely entered first; authorize making Perl handle it uniformly w.r.t. regex + recursion
 
 - Date: 2026-06-23
-- Status: accepted
+- Status: accepted; root-selection precedence and marker-required validity superseded by ADR `0046`
 - Tags: engine, parser, dsl, language-model, top-rule, recursion, doctrine-exception, cross-variant-parity
 
 ## Context
@@ -92,3 +92,9 @@ regex, mode, edge, lifecycle, and recursion feature surface.
 - Precedent for a sanctioned engine-frozen exception: [0008](0008-authorize-reference-engine-defect-fixes.md)
 - Universal-contract / parity doctrine: [0006](0006-multi-backend-vision.md), [[spec-contract-is-unique]], [[cross-variant-output-parity]]
 - Knowledge: [[top-rule-is-ordinary-rule-entered-first]], [[spec-top-rule-no-regex-two-rule-minimum]], [[lispish-corpus-catastrophic-backtracking]]
+
+## Supersession note (2026-07-18)
+
+ADR `0046` supersedes this record only for entry-rule selection precedence and the requirement that a valid spec
+contain a `::` marker. This record remains authoritative for the selected rule being an ordinary rule, uniform
+regex/mode behavior, recursion, and forward-progress termination.

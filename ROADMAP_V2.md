@@ -1,12 +1,13 @@
 # ROADMAP V2
 Execution-oriented companion to `ROADMAP.md`.
 
-Root-selection direction (2026-07-18): an explicit selector, including primary-command
+Root-selection contract (ADR `0046`, 2026-07-18): an explicit selector, including primary-command
 `--top-rule NAME`, may name any declared rule and wins over authored markers. Without one, the first authored
 `Rule::` wins; without any `::`, the first authored ordinary `Rule:` wins. Subtree
-`FUTURE-PARITY-BACKLOG.9.1.1.2` owns the neutral contract and Perl/Rust/Dart/Julia/Lua rollout. The no-marker
-fallback is not yet a uniform current capability because existing validation still requires `::` on multiple
-backends.
+`FUTURE-PARITY-BACKLOG.9.1.1.2` owns the rollout. Executable neutral contract `.0` is complete at 1/7; Perl,
+Rust, Dart, Julia, Lua/LuaJIT, and composed public admission `.1-.6` remain pending. The no-marker fallback is not
+yet a uniform current capability because existing validation still requires `::`; Perl also currently chooses the
+first parsed rule ahead of a later marker.
 
 This file exists to make the active plan easier to follow without replacing the fuller historical and architectural roadmap in `ROADMAP.md`.
 

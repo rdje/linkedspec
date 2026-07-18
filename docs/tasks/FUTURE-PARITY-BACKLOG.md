@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart global option/CLI migration `.9.1.5.5` has full signoff;
-  clean commit is the only boundary before root-selection `.9.1.1.2.0`)
+- Last updated: `2026-07-18` (root-selection neutral decision `.9.1.1.2.0` has complete canonical signoff and awaits
+  only its clean commit before Perl implementation `.9.1.1.2.1`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3292,7 +3292,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.1 - ratify rule-local cursor and bare edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Ratify and implement deterministic root-rule selection without requiring a `::` marker.
   Dependencies: `.9.1.5.5`
   Children: `.9.1.1.2.0`, `.9.1.1.2.1`, `.9.1.1.2.2`, `.9.1.1.2.3`, `.9.1.1.2.4`, `.9.1.1.2.5`,
@@ -3304,23 +3304,30 @@ before implementation.
     error, authored `is_top` metadata remains source identity rather than dynamic selection state, and every
     compiler, validator, runtime, loaded/generated route, strict-unused check, descriptor, trace, CLI, neutral
     fixture, backend, and mdBook statement must agree.
-  Verification: `pending` — captured during active Dart leaf `.9.1.5.5` after the director fixed explicit
-    `--top-rule` as higher priority than `Rule::`. Read-only retrieval found the Dart runtime/source wrapper already
-    contains the marker-then-first-rule fallback, but Dart, Rust, Julia, and Lua validators still reject every
-    no-marker spec; current doctrine/docs also require `::`. No one-backend behavior change is permitted before
-    the neutral decision leaf and contract exist.
+  Verification: **ACTIVE 2026-07-18 at 1/7 rollout.** Neutral decision `.0` is done with canonical signoff;
+    backend behavior remains owned by `.1-.5` and composed admission by `.6`.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.0`
-  Status: `pending`
+  Status: `done`
   Goal: Ratify the exact root-selection precedence and make it executable as a neutral contract before behavior.
   Dependencies: `.9.1.1.2`
   Acceptance: Update/supersede ADR `0010` as needed; inventory all five backends plus reference validation and
     explicit-selector seams; define marker, first-rule fallback, explicit override, multiple-marker definition
     order, empty-spec, unknown-selector, strict-unused, descriptor/generated/trace, and CLI outcomes; add a strict
     neutral fixture/checker with mutations; split or confirm the implementation leaves; change no runtime behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** ADR `0046` supersedes only ADR `0010`'s
+    selection/marker-required boundary. Exact audit: Perl requires a marker yet defaults to parsed row zero;
+    Rust requires/defaults to the first marker and exposes explicit selection only on value/primary routes;
+    Dart/Julia/Lua require a marker while their runtime/generated helpers already implement marker-then-first
+    fallback. The shared CLI already proves an explicit ordinary rule beats two markers. Strict-unused remains
+    defined-minus-authored-references with no selection/marker reference or exemption. The executable contract
+    locks 8 selections, 3 failures, 3 strict cases, 8 execution routes, 5 inventory rows, 7 rollout legs, and 24
+    mutations at 1 complete / 6 pending. JSON, Python compile, checker, Knowledge Map 594/4,238, memory/task/all
+    four doctrines, mdBook build, and whitespace pass; no backend behavior file changed. Canonical CI repeats the
+    neutral checker, Perl cursor admission 288, reference primary 63/63 in default and POSIX environments, and
+    Phase 0 1,031/1,031 in 642 seconds before exit 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.0 - ratify root rule selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1`
   Status: `pending`
@@ -6943,8 +6950,8 @@ remains staged for `.9.1.5.6`.
 | 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `active` | Cursor/edge design is complete; root-selection subtree `.2` now owns the directed precedence correction. |
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
-| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `pending` | Explicit selector > first authored `::` > first authored `:` precedence is directed; neutral/five-backend rollout pending. |
-| 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `pending` | Ratify the exact neutral precedence, contract, mutations, and rollout split before behavior. |
+| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `active` | ADR `0046` makes exact precedence executable at 1/7; five-backend and public rollout remains `.1-.6`. |
+| 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `done` | ADR `0046`, exact 8/3/3 cases, 5-backend audit, 24 mutations, mdBook, and canonical proof are complete without behavior. |
 | 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `pending` | Implement the unchanged contract on the Perl reference. |
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `pending` | Implement exact Rust core/runtime/generated/primary selection. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
@@ -8022,6 +8029,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Root-selection neutral decision `.9.1.1.2.0` completes ADR `0046` and
+  `linkedspec-root-rule-selection-v1` without backend behavior. Full audit distinguishes Perl row-zero default,
+  Rust marker-only routes, and Dart/Julia/Lua unreachable fallbacks; selection remains separate from authored
+  `is_top` and strict-unused. The executable checker passes 8 selection, 3 failure, 3 strict, 5 backend, 1/6
+  rollout, and 24 mutation proof. Knowledge Map is 594/4,238; memory/task/four-doctrine/mdBook/whitespace pass.
+  Canonical CI repeats Perl cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 642 seconds,
+  then exits 0. The clean commit is the only remaining boundary before Perl implementation `.1`.
+- `2026-07-18`: Clean commit `82999046` lands Dart option/CLI removal `.9.1.5.5`; tracked/untracked state is clean
+  and the brief is zero bytes. Director-prioritized root-selection neutral decision `.9.1.1.2.0` activates
+  task-tree-first before implementation inspection or behavior changes.
 - `2026-07-18`: Dart option/CLI migration `.9.1.5.5` removes all caller-global cursor authority, retains low-level
   matcher algorithms, returns exact retired-option guidance, and passes focused 120, complete package 260,
   primary 63x2, corpus 105, neutral 66/3-of-5/34, KM 594/4,235, governance/mdBook, and canonical Perl admission

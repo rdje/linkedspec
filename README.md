@@ -9,10 +9,12 @@ native/generated behavior, recurring admission, and public no-drift are complete
 `FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 3 complete / 5 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
-The separately parked root-selection question is now directed under `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit
-entry selector such as `--top-rule NAME` has priority over authored `Rule::`; absent an explicit selector, the
-first authored `::` wins; absent any `::`, the first ordinary `:` wins. The first-rule fallback is a tracked target,
-not yet uniform current behavior: four backend validators and current doctrine still require an entry marker.
+ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
+`FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
+`Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
+The executable neutral decision is complete at 1/7, with 24 drift mutations. No backend behavior changed: current
+Perl instead chooses the first parsed rule, Rust has marker-only defaults, and Dart/Julia/Lua fallbacks remain
+blocked by validation. Backend and public admission leaves `.1-.6` own that rollout.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

@@ -4,6 +4,12 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
+The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
+authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
+backend-neutral executable contract is complete and rejects 24 drift mutations, so rollout is 1 complete / 6
+pending. No backend behavior changed in that decision slice: current validators still require `::`, Perl still
+defaults to the first parsed rule, and the five backend plus composed-admission leaves remain `.9.1.1.2.1-.6`.
+
 ## Completed phases
 
 Phases 0–9 of the modernization roadmap are done:

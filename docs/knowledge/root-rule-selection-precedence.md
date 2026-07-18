@@ -9,11 +9,14 @@ answers:
   - "is Rule:: required in every spec"
   - "what task owns first rule as top"
   - "which backends currently reject a spec without Rule::"
+  - "does selecting the entry rule count as a strict unused reference"
+  - "does root selection rewrite descriptor is_top metadata"
+  - "why does Perl currently select an ordinary rule before a later Rule:: marker"
 date: 2026-07-18
-status: director decision captured; neutral contract and implementation pending
-tags: [dsl, root-rule, top-rule, entry-selection, cli, backend-parity, FUTURE-PARITY-BACKLOG]
-evidence: "Director clarification on 2026-07-18 fixes exact precedence: (1) an explicit entry selector, specifically CLI `--top-rule NAME`, has highest priority and may designate any declared rule, including an ordinary `Rule:` even when a `Rule::` exists; (2) without an explicit selector, the first authored `Rule::` is the default; (3) when no rule ends in `::`, the first authored ordinary `Rule:` is the default. Read-only retrieval found Dart runtime `_parse` already uses `topRule ?? _defaultTopRuleLabel()`, and `_defaultTopRuleLabel()` scans authored top markers before falling back to `compiledRuleOrder.first`; source-emitter failure attribution mirrors that fallback. The normal path is inconsistent because Dart `validateSpec`, Rust core validation, Julia validation, and Lua validation still reject a source with no `::`; current mdBook doctrine also says a marker is required. No single backend may move alone. Dedicated subtree `FUTURE-PARITY-BACKLOG.9.1.1.2` owns neutral decision/contract, Perl reference, Rust, Dart, Julia, Lua, and public no-drift leaves."
-reverify: "rg -n '_defaultTopRuleLabel|topRule \\?\\?|_topRuleLabel' dart/lib/src/runtime/interpreter.dart dart/lib/src/source_emitter.dart dart/lib/src/cli/primary_cli.dart; rg -n \"no top rule found|at least one rule must use\" dart/lib/src/validation rust/linkedspec-core/src/validation.rs julia/src/spec/Validator.jl lua/src/linkedspec/spec_validator.lua; rg -n 'FUTURE-PARITY-BACKLOG\\.9\\.1\\.1\\.2' docs/tasks/FUTURE-PARITY-BACKLOG.md"
+status: neutral contract accepted under ADR 0046; backend rollout 1 complete / 6 pending
+tags: [dsl, root-rule, top-rule, entry-selection, cli, descriptor, generated-source, strict-syntax, backend-parity, ADR-0046, FUTURE-PARITY-BACKLOG]
+evidence: "Director clarification on 2026-07-18 fixes exact precedence: (1) an explicit entry selector, specifically CLI `--top-rule NAME`, has highest priority and may designate any declared rule, including an ordinary `Rule:` even when a `Rule::` exists; (2) without an explicit selector, the first authored `Rule::` is the default; (3) when no rule ends in `::`, the first authored ordinary `Rule:` is the default. Full five-backend audit under `.9.1.1.2.0` found: Perl validation requires a marker but `Compiler::run_get_pipeline` finally selects requested label or parsed row zero, so an earlier ordinary rule defeats a later marker; Rust validation and native/generated defaults require the first marker, with explicit selection confined to `execute_value`/primary; Dart, Julia, and Lua validation require a marker while their ordered runtime helpers already implement marker-then-first fallback. The existing shared CLI case proves an explicit ordinary rule beats two markers. Strict-unused remains defined-minus-statically-referenced with no selected/marked-rule exemption. ADR 0046 plus `capability_conformance/root_rule_selection_contract.json` now lock eight selections, three failures, three strict cases, source identity, route projections, exact current inventory, seven rollout legs, and 24 mutations without changing backend behavior."
+reverify: "python3 tools/check_root_rule_selection_contract.py; perl -Iperl -MLinkedSpec -e 'my %ctx; my $s=\"Earlier:\\n /a/\\n\\nMarked::\\n /b/\\n\"; LinkedSpec::Get(\\$s, runtime_ctx_ref=>\\%ctx); print qq{$ctx{top_rule}\\n}'  # current Perl prints Earlier until .9.1.1.2.1; rg -n \"no top rule found|at least one rule must use|must define a top rule\" perl/LinkedSpec/Validation.pm rust/linkedspec-core/src/validation.rs dart/lib/src/validation julia/src/spec/Validator.jl lua/src/linkedspec/spec_validator.lua"
 ---
 
 # Root-rule selection precedence
@@ -27,7 +30,14 @@ The durable target contract is ordered, not ambiguous:
 
 Zero-rule input remains invalid and an explicit unknown name remains an error. A rule selected by any route remains
 an ordinary rule at execution time; authored `is_top` metadata records source syntax and is not rewritten to mimic
-the dynamic selector.
+the dynamic selector. Generated and reconstructed paths preserve definition order plus authored markers, while
+request trace keeps the requested selector/`<default>` distinction and runtime attribution records the resolved
+label.
 
-This is the directed language contract, not yet the uniform current implementation. The validators named in the
-front matter still make the no-marker fallback unreachable. Follow task subtree `.9.1.1.2` for rollout state.
+Strict-unused is deliberately orthogonal. Selecting or marking a rule does not add an authored edge and does not
+exempt the selected rule from the existing defined-minus-referenced check.
+
+ADR [0046](../decisions/0046-root-rule-selection-precedence.md) and the executable neutral contract are complete.
+The validators named in the front matter still make the no-marker fallback unreachable, and current Perl still
+uses parsed row zero ahead of a later marker. Follow task subtree `.9.1.1.2` for the 1/7 rollout state; do not report
+markerless selection as uniformly implemented until the remaining six legs close.

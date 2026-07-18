@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.0 — ratify root-rule selection
+
+ADR `0046` now fixes one cross-backend selection order: an explicit entry selector, including
+`--top-rule NAME`, may name any declared rule and wins over authored markers; otherwise the first authored `::`
+wins; without a marker, the first authored rule wins. Zero-rule input remains invalid and an unknown explicit
+label fails before user code. Authored `is_top` remains source identity rather than dynamic selection state.
+
+The five-backend audit found three distinct staged baselines. Perl requires a marker but finally selects parsed row
+zero even before a later marker. Rust requires and defaults to a marker, with explicit selection on its value/
+primary path but not every native/generated route. Dart, Julia, and Lua require a marker even though their runtime
+helpers already implement marker-then-first fallback. The existing shared CLI case proves that an explicit ordinary
+rule beats two markers. Strict-unused remains defined-minus-statically-referenced: selection and marker identity add
+neither a reference nor an exemption.
+
+`capability_conformance/root_rule_selection_contract.json` makes the target executable through eight successful
+selections, three failures, three strict-graph cases, seven route projections, an exact five-backend inventory, and
+a seven-leg rollout. `tools/check_root_rule_selection_contract.py` independently evaluates those cases, verifies
+the CLI and documentation topology, and rejects 24 drift mutations. Canonical local CI now registers the checker.
+Rollout is 1 complete / 6 pending; this neutral slice changes no parser, validator, runtime, descriptor, generated
+artifact, CLI, or shared conformance behavior.
+
+The mdBook distinguishes the accepted contract from current behavior and provides marker/markerless examples.
+The adjacent capability README's stale cursor-inventory count is corrected from 68 to the already-authoritative
+66 while that file is updated for the new contract.
+
+Knowledge Map passes at 594 facts / 4,238 question keys. Memory architecture, task metadata, all four doctrines,
+mdBook build, JSON, Python compilation, and whitespace pass. Canonical local CI repeats the root checker, Perl
+cursor admission 288, reference primary 63/63 in both environments, and Phase 0 1,031/1,031 in 642 seconds before
+exit 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.5 — remove Dart global cursor overrides
 
 Dart no longer accepts a caller-owned cursor policy at any normal execution boundary. The public runtime engine,

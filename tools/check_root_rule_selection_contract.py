@@ -1,0 +1,573 @@
+#!/usr/bin/env python3
+"""Validate the neutral root-rule selection contract and its drift mutations."""
+
+from __future__ import annotations
+
+import copy
+import json
+from pathlib import Path
+from typing import Any, Callable
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CONTRACT_PATH = ROOT / "capability_conformance" / "root_rule_selection_contract.json"
+CONTRACT_ID = "linkedspec-root-rule-selection-v1"
+TASK_OWNER = "FUTURE-PARITY-BACKLOG.9.1.1.2"
+TOP_LEVEL_FIELDS = {
+    "format",
+    "contract_id",
+    "task_owner",
+    "terminology",
+    "precedence",
+    "validation",
+    "selector",
+    "source_identity",
+    "strict_unused",
+    "selection_cases",
+    "failure_cases",
+    "strict_cases",
+    "projections",
+    "required_execution_routes",
+    "implementation_inventory",
+    "rollout",
+}
+PRECEDENCE = ["explicit_selector", "first_authored_marker", "first_authored_rule"]
+SELECTION_CASE_IDS = [
+    "explicit_ordinary_beats_markers",
+    "explicit_later_marker_beats_first_marker",
+    "marker_beats_earlier_ordinary",
+    "first_marker_beats_later_marker",
+    "first_ordinary_without_marker",
+    "explicit_later_ordinary_without_marker",
+    "single_ordinary_fallback",
+    "single_marker_default",
+]
+FAILURE_CASE_IDS = [
+    "unknown_explicit_selector",
+    "zero_rules_without_selector",
+    "zero_rules_with_selector",
+]
+STRICT_CASE_IDS = [
+    "explicit_selection_is_not_reference",
+    "marker_selection_is_not_reference",
+    "closed_reference_cycle_has_no_unused_rules",
+]
+PROJECTIONS = {
+    "native",
+    "loaded_and_reconstructed",
+    "descriptor",
+    "generated_source",
+    "trace",
+    "primary_cli",
+    "strict_unused",
+}
+ROUTES = [
+    "native",
+    "loaded",
+    "reconstructed",
+    "generated_direct",
+    "generated_traced",
+    "emitted_source_direct",
+    "emitted_source_traced",
+    "primary_cli",
+]
+INVENTORY = [
+    (
+        "perl",
+        "requires_authored_marker",
+        "first_authored_rule_even_when_a_later_marker_exists",
+        "supported_and_wins",
+        "blocked_by_validation",
+        "compiler_selected_label_is_embedded",
+        "absent",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.1",
+    ),
+    (
+        "rust",
+        "requires_authored_marker",
+        "first_authored_marker",
+        "execute_value_and_primary_only",
+        "absent",
+        "first_authored_marker_only",
+        "present",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.2",
+    ),
+    (
+        "dart",
+        "requires_authored_marker",
+        "first_authored_marker_then_first_authored_rule",
+        "supported_and_wins",
+        "implemented_but_blocked_by_validation",
+        "shares_runtime_fallback",
+        "present",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.3",
+    ),
+    (
+        "julia",
+        "requires_authored_marker",
+        "first_authored_marker_then_first_authored_rule",
+        "supported_and_wins",
+        "implemented_but_blocked_by_validation",
+        "shares_runtime_fallback",
+        "present",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.4",
+    ),
+    (
+        "lua",
+        "requires_authored_marker",
+        "first_authored_marker_then_first_authored_rule",
+        "supported_and_wins",
+        "implemented_but_blocked_by_validation",
+        "shares_runtime_fallback",
+        "present",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.5",
+    ),
+]
+ROLLOUT = [
+    ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.0"),
+    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.1"),
+    ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
+    ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
+    ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.4"),
+    ("lua", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
+    (
+        "admission_and_public_no_drift",
+        "pending",
+        "FUTURE-PARITY-BACKLOG.9.1.1.2.6",
+    ),
+]
+
+
+class ContractError(ValueError):
+    """A deterministic neutral-contract validation failure."""
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ContractError(message)
+
+
+def require_fields(value: Any, fields: set[str], context: str) -> dict[str, Any]:
+    require(isinstance(value, dict), f"{context} must be an object")
+    require(set(value) == fields, f"{context} fields drifted")
+    return value
+
+
+def require_unique_strings(value: Any, context: str) -> list[str]:
+    require(isinstance(value, list), f"{context} must be a list")
+    require(all(isinstance(item, str) and item for item in value), f"{context} has an invalid value")
+    require(len(value) == len(set(value)), f"{context} contains duplicates")
+    return value
+
+
+def validate_rules(value: Any, context: str) -> list[dict[str, Any]]:
+    require(isinstance(value, list), f"{context} must be a list")
+    labels: list[str] = []
+    for index, rule in enumerate(value):
+        require_fields(rule, {"label", "authored_is_top"}, f"{context}[{index}]")
+        require(isinstance(rule["label"], str) and rule["label"], f"{context}[{index}] label is invalid")
+        require(isinstance(rule["authored_is_top"], bool), f"{context}[{index}] marker is invalid")
+        labels.append(rule["label"])
+    require(len(labels) == len(set(labels)), f"{context} contains duplicate labels")
+    return value
+
+
+def select_entry(
+    rules: list[dict[str, Any]], explicit_selector: str | None
+) -> tuple[str, str]:
+    if not rules:
+        raise ContractError("no_rules_defined:validate_spec")
+    labels = [rule["label"] for rule in rules]
+    if explicit_selector is not None:
+        require(isinstance(explicit_selector, str) and explicit_selector, "explicit selector is invalid")
+        if explicit_selector not in labels:
+            raise ContractError("entry_rule_not_found:select_entry_rule")
+        return explicit_selector, "explicit_selector"
+    for rule in rules:
+        if rule["authored_is_top"]:
+            return rule["label"], "first_authored_marker"
+    return rules[0]["label"], "first_authored_rule"
+
+
+def validate_selection_cases(contract: dict[str, Any]) -> None:
+    cases = contract["selection_cases"]
+    require(isinstance(cases, list), "selection_cases must be a list")
+    require([case.get("id") for case in cases] == SELECTION_CASE_IDS, "selection case order drifted")
+    for case in cases:
+        require_fields(
+            case,
+            {"id", "rules", "explicit_selector", "expected_label", "expected_basis"},
+            f"selection case {case.get('id')!r}",
+        )
+        rules = validate_rules(case["rules"], f"selection case {case['id']} rules")
+        actual = select_entry(rules, case["explicit_selector"])
+        require(
+            actual == (case["expected_label"], case["expected_basis"]),
+            f"selection case {case['id']} drifted",
+        )
+
+
+def validate_failure_cases(contract: dict[str, Any]) -> None:
+    cases = contract["failure_cases"]
+    require(isinstance(cases, list), "failure_cases must be a list")
+    require([case.get("id") for case in cases] == FAILURE_CASE_IDS, "failure case order drifted")
+    for case in cases:
+        require_fields(
+            case,
+            {"id", "rules", "explicit_selector", "expected_code", "expected_stage"},
+            f"failure case {case.get('id')!r}",
+        )
+        rules = validate_rules(case["rules"], f"failure case {case['id']} rules")
+        try:
+            select_entry(rules, case["explicit_selector"])
+        except ContractError as error:
+            actual = str(error).split(":", 1)
+            require(
+                actual == [case["expected_code"], case["expected_stage"]],
+                f"failure case {case['id']} drifted",
+            )
+        else:
+            raise ContractError(f"failure case {case['id']} unexpectedly selected a rule")
+
+
+def validate_strict_cases(contract: dict[str, Any]) -> None:
+    cases = contract["strict_cases"]
+    require(isinstance(cases, list), "strict_cases must be a list")
+    require([case.get("id") for case in cases] == STRICT_CASE_IDS, "strict case order drifted")
+    for case in cases:
+        require_fields(
+            case,
+            {"id", "rules", "referenced_rules", "explicit_selector", "expected_unused"},
+            f"strict case {case.get('id')!r}",
+        )
+        rules = require_unique_strings(case["rules"], f"strict case {case['id']} rules")
+        referenced = require_unique_strings(
+            case["referenced_rules"], f"strict case {case['id']} referenced rules"
+        )
+        require(set(referenced) <= set(rules), f"strict case {case['id']} has an unknown reference")
+        if case["explicit_selector"] is not None:
+            require(case["explicit_selector"] in rules, f"strict case {case['id']} selector is unknown")
+        actual_unused = [label for label in rules if label not in set(referenced)]
+        require(actual_unused == case["expected_unused"], f"strict case {case['id']} drifted")
+
+
+def validate_filesystem_contract() -> None:
+    markers = {
+        "docs/decisions/0046-root-rule-selection-precedence.md": [CONTRACT_ID, TASK_OWNER],
+        "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
+        "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
+        "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
+        "capability_conformance/README.md": [CONTRACT_ID, "1 complete / 6 pending"],
+        "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
+        "tools/run_ci_local.sh": [
+            "require_tracked_file tools/check_root_rule_selection_contract.py",
+            "require_tracked_file capability_conformance/root_rule_selection_contract.json",
+            "python3 tools/check_root_rule_selection_contract.py",
+        ],
+    }
+    for relative, required in markers.items():
+        path = ROOT / relative
+        require(path.is_file(), f"required contract path is missing: {relative}")
+        text = path.read_text(encoding="utf-8")
+        for marker in required:
+            require(marker in text, f"{relative} is missing marker {marker!r}")
+
+    cli_manifest = json.loads((ROOT / "cli_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    cases = {case["id"]: case for case in cli_manifest["cases"]}
+    explicit = cases.get("success_explicit_top_rule")
+    require(isinstance(explicit, dict), "shared CLI explicit top-rule case is missing")
+    require(
+        "--top-rule" in explicit["args"] and "Alternate" in explicit["args"],
+        "shared CLI explicit selector drifted",
+    )
+    require(explicit["expect"]["exit"] == 0, "shared CLI explicit selector exit drifted")
+    require(
+        explicit["expect"]["stdout"] == {"text": '"alternate"\n'},
+        "shared CLI explicit selector output drifted",
+    )
+
+
+def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True) -> None:
+    require_fields(contract, TOP_LEVEL_FIELDS, "contract")
+    require(contract["format"] == 1, "format drifted")
+    require(contract["contract_id"] == CONTRACT_ID, "contract_id drifted")
+    require(contract["task_owner"] == TASK_OWNER, "task_owner drifted")
+
+    terminology = require_fields(
+        contract["terminology"],
+        {"entry_rule", "authored_marker", "explicit_selector", "top_level"},
+        "terminology",
+    )
+    require(
+        all(isinstance(value, str) and value for value in terminology.values()),
+        "terminology is incomplete",
+    )
+
+    precedence = contract["precedence"]
+    require(isinstance(precedence, list) and len(precedence) == 3, "precedence must have three entries")
+    require([item.get("id") for item in precedence] == PRECEDENCE, "precedence order drifted")
+    for rank, item in enumerate(precedence, start=1):
+        require_fields(item, {"rank", "id", "rule"}, f"precedence rank {rank}")
+        require(
+            item["rank"] == rank
+            and isinstance(item["rule"], str)
+            and item["rule"],
+            f"precedence rank {rank} drifted",
+        )
+
+    validation = require_fields(
+        contract["validation"],
+        {
+            "minimum_rule_count",
+            "authored_marker_required",
+            "definition_order_is_semantic",
+            "selection_occurs_after_structural_validation",
+            "duplicate_rule_labels",
+        },
+        "validation",
+    )
+    require(validation["minimum_rule_count"] == 1, "minimum rule count drifted")
+    require(validation["authored_marker_required"] is False, "marker became required")
+    require(validation["definition_order_is_semantic"] is True, "definition order became non-semantic")
+    require(validation["selection_occurs_after_structural_validation"] is True, "selection order drifted")
+
+    selector = require_fields(
+        contract["selector"],
+        {
+            "native_name",
+            "primary_cli_flag",
+            "label_matching",
+            "may_select_ordinary_rule",
+            "may_select_later_marker",
+            "unknown_selector",
+        },
+        "selector",
+    )
+    require(selector["native_name"] == "top_rule", "native selector name drifted")
+    require(selector["primary_cli_flag"] == "--top-rule", "CLI selector drifted")
+    require(selector["label_matching"] == "exact declared label", "selector matching drifted")
+    require(selector["may_select_ordinary_rule"] is True, "ordinary-rule selection was disabled")
+    require(selector["may_select_later_marker"] is True, "later-marker selection was disabled")
+    unknown = require_fields(
+        selector["unknown_selector"],
+        {"code", "stage", "fields", "user_code_evaluated", "primary_cli"},
+        "unknown selector",
+    )
+    require(
+        (unknown["code"], unknown["stage"])
+        == ("entry_rule_not_found", "select_entry_rule"),
+        "unknown-selector diagnostic drifted",
+    )
+    require(unknown["fields"] == ["entry_rule"], "unknown-selector fields drifted")
+    require(unknown["user_code_evaluated"] is False, "unknown selector may evaluate user code")
+    require(
+        unknown["primary_cli"]
+        == {"exit": 1, "stderr_error": "parser invocation failed"},
+        "unknown-selector CLI projection drifted",
+    )
+
+    identity = require_fields(
+        contract["source_identity"],
+        {
+            "authored_is_top_meaning",
+            "selection_rewrites_authored_is_top",
+            "multiple_authored_markers_allowed",
+            "definition_order_preserved",
+            "selected_entry_rule_is_execution_state",
+        },
+        "source identity",
+    )
+    require(identity["selection_rewrites_authored_is_top"] is False, "selection rewrites source identity")
+    require(identity["multiple_authored_markers_allowed"] is True, "multiple markers became invalid")
+    require(identity["definition_order_preserved"] is True, "definition order is not preserved")
+    require(
+        identity["selected_entry_rule_is_execution_state"] is True,
+        "selection ceased to be execution state",
+    )
+
+    strict = require_fields(
+        contract["strict_unused"],
+        {
+            "definition",
+            "entry_selection_counts_as_reference",
+            "selected_entry_rule_is_exempt",
+            "authored_marker_counts_as_reference",
+            "purpose",
+        },
+        "strict unused",
+    )
+    require(
+        strict["entry_selection_counts_as_reference"] is False,
+        "entry selection became a strict reference",
+    )
+    require(strict["selected_entry_rule_is_exempt"] is False, "selected entry became strict-exempt")
+    require(strict["authored_marker_counts_as_reference"] is False, "marker became a strict reference")
+
+    validate_selection_cases(contract)
+    validate_failure_cases(contract)
+    validate_strict_cases(contract)
+
+    projections = require_fields(contract["projections"], PROJECTIONS, "projections")
+    require(all(isinstance(value, str) and value for value in projections.values()), "projection is empty")
+    require(contract["required_execution_routes"] == ROUTES, "execution route order drifted")
+
+    inventory = contract["implementation_inventory"]
+    require(isinstance(inventory, list) and len(inventory) == 5, "implementation inventory count drifted")
+    actual_inventory = []
+    inventory_fields = {
+        "backend",
+        "validation",
+        "default_selection",
+        "explicit_selection",
+        "markerless_fallback",
+        "generated_selection",
+        "descriptor_authored_is_top",
+        "owner",
+    }
+    for item in inventory:
+        require_fields(item, inventory_fields, "implementation inventory row")
+        actual_inventory.append(
+            (
+                item["backend"],
+                item["validation"],
+                item["default_selection"],
+                item["explicit_selection"],
+                item["markerless_fallback"],
+                item["generated_selection"],
+                item["descriptor_authored_is_top"],
+                item["owner"],
+            )
+        )
+    require(actual_inventory == INVENTORY, "implementation inventory drifted")
+
+    rollout = contract["rollout"]
+    require(isinstance(rollout, list), "rollout must be a list")
+    actual_rollout = []
+    for item in rollout:
+        require_fields(item, {"id", "status", "owner"}, "rollout row")
+        actual_rollout.append((item["id"], item["status"], item["owner"]))
+    require(actual_rollout == ROLLOUT, "rollout drifted")
+
+    if check_filesystem:
+        validate_filesystem_contract()
+
+
+def expect_mutation_failure(
+    contract: dict[str, Any], name: str, mutate: Callable[[dict[str, Any]], None]
+) -> None:
+    candidate = copy.deepcopy(contract)
+    mutate(candidate)
+    try:
+        validate_contract(candidate, check_filesystem=False)
+    except ContractError:
+        return
+    raise ContractError(f"mutation {name!r} was not rejected")
+
+
+def mutation_checks(contract: dict[str, Any]) -> int:
+    mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
+        ("format", lambda value: value.__setitem__("format", 2)),
+        ("contract id", lambda value: value.__setitem__("contract_id", "drift")),
+        ("task owner", lambda value: value.__setitem__("task_owner", "drift")),
+        ("precedence order", lambda value: value["precedence"].reverse()),
+        ("marker required", lambda value: value["validation"].__setitem__("authored_marker_required", True)),
+        (
+            "definition order",
+            lambda value: value["validation"].__setitem__(
+                "definition_order_is_semantic", False
+            ),
+        ),
+        (
+            "ordinary explicit selection",
+            lambda value: value["selector"].__setitem__(
+                "may_select_ordinary_rule", False
+            ),
+        ),
+        (
+            "unknown selector code",
+            lambda value: value["selector"]["unknown_selector"].__setitem__(
+                "code", "unknown"
+            ),
+        ),
+        (
+            "authored identity rewrite",
+            lambda value: value["source_identity"].__setitem__(
+                "selection_rewrites_authored_is_top", True
+            ),
+        ),
+        (
+            "multiple markers",
+            lambda value: value["source_identity"].__setitem__(
+                "multiple_authored_markers_allowed", False
+            ),
+        ),
+        (
+            "strict selection reference",
+            lambda value: value["strict_unused"].__setitem__(
+                "entry_selection_counts_as_reference", True
+            ),
+        ),
+        (
+            "strict selection exemption",
+            lambda value: value["strict_unused"].__setitem__(
+                "selected_entry_rule_is_exempt", True
+            ),
+        ),
+        ("selection case removed", lambda value: value["selection_cases"].pop()),
+        (
+            "selection expected label",
+            lambda value: value["selection_cases"][0].__setitem__(
+                "expected_label", "FirstMarked"
+            ),
+        ),
+        (
+            "selection expected basis",
+            lambda value: value["selection_cases"][2].__setitem__(
+                "expected_basis", "first_authored_rule"
+            ),
+        ),
+        ("failure case removed", lambda value: value["failure_cases"].pop()),
+        (
+            "failure precedence",
+            lambda value: value["failure_cases"][2].__setitem__(
+                "expected_code", "entry_rule_not_found"
+            ),
+        ),
+        ("strict case expected", lambda value: value["strict_cases"][0]["expected_unused"].pop()),
+        ("descriptor projection", lambda value: value["projections"].__setitem__("descriptor", "")),
+        ("execution route", lambda value: value["required_execution_routes"].pop()),
+        ("backend inventory", lambda value: value["implementation_inventory"].pop()),
+        (
+            "Perl inventory",
+            lambda value: value["implementation_inventory"][0].__setitem__(
+                "default_selection", "first_authored_marker"
+            ),
+        ),
+        ("rollout removed", lambda value: value["rollout"].pop()),
+        ("premature Perl rollout", lambda value: value["rollout"][1].__setitem__("status", "complete")),
+    ]
+    for name, mutate in mutations:
+        expect_mutation_failure(contract, name, mutate)
+    return len(mutations)
+
+
+def main() -> int:
+    contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+    validate_contract(contract)
+    mutation_count = mutation_checks(contract)
+    complete = sum(item["status"] == "complete" for item in contract["rollout"])
+    pending = len(contract["rollout"]) - complete
+    print(
+        "root-rule-selection-contract: OK "
+        f"({len(contract['selection_cases'])} selection cases; "
+        f"{len(contract['failure_cases'])} failures; "
+        f"{len(contract['strict_cases'])} strict cases; "
+        f"{len(contract['implementation_inventory'])} backends; "
+        f"{complete} complete / {pending} pending; "
+        f"{mutation_count} drift mutations)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

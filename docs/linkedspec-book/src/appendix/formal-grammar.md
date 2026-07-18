@@ -177,17 +177,25 @@ rule_label  :: [mode]  [rest-of-line]
 
 A rule label is one or more word characters: `[A-Za-z0-9_]+`.
 
-- **Single colon** (`rule_name:`): a **body rule** — may appear anywhere in the file.
-- **Double colon** (`rule_name::`): a **top rule** — the parser entry point. At least
-  one top rule must exist. A `.spec` file may define multiple top rules.
+- **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
+  the entry rule.
+- **Double colon** (`rule_name::`): an ordinary rule carrying an authored **default-entry marker**. A `.spec` may
+  define multiple marked rules.
 
-The requirement above describes the current portable validation boundary. The directed
-selection correction is explicit selector > first authored `::` > first authored `:` when
-no marker exists. Its no-marker fallback remains implementation-pending under
-`FUTURE-PARITY-BACKLOG.9.1.1.2`; do not treat it as admitted grammar until that rollout closes.
+ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order:
 
-The double colon is purely an **entry marker**: it designates the rule a backend enters
-first. A top rule is otherwise an **ordinary rule** — it may carry a regex, take any rule
+1. an explicit selector such as `--top-rule NAME` wins and may name any declared rule;
+2. otherwise the first authored `::` in definition order wins;
+3. otherwise the first authored rule wins.
+
+At rollout 1 complete / 6 pending, the neutral contract is executable but backend behavior is not yet uniform.
+Current validators still require at least one marker; Perl currently defaults to the first parsed rule even when a
+later marker exists; Rust defaults to the first marker but has no markerless fallback; Dart, Julia, and Lua contain
+the marker-then-first fallback but validation makes its last branch unreachable. Until `.9.1.1.2.1-.6` close, use
+at least one `::` for portable current execution and pass an explicit selector when its identity matters.
+
+The double colon is purely authored default-selection metadata. A marked rule is otherwise an **ordinary rule** —
+it may carry a regex, take any rule
 mode (§2.2), and be recursive (§5.4), exactly like a body rule. The common "no regex on
 the top rule, dispatch to body rules that carry the regex" two-rule shape is recommended
 **idiom**, not a constraint a backend enforces.
@@ -990,9 +998,11 @@ accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 
-A valid `.spec` file must satisfy:
+A valid `.spec` file must satisfy the following current portable checks. Item 1 is the temporary implementation
+boundary that ADR `0046` replaces with “at least one rule exists” as `.9.1.1.2.1-.6` roll out:
 
-1. At least one top rule (`::`) exists.
+1. At least one marked rule (`::`) currently exists; the accepted target permits markerless files but never a
+   zero-rule executable spec.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.

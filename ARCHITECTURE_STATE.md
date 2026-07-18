@@ -5,12 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
-- `2026-07-18` direction capture: root selection is now ordered as explicit selector (including
-  `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:` when no marker exists. Existing
-  explicit selection already outranks markers, but the no-marker fallback is not uniformly admitted: Dart runtime/
-  source attribution contains it while Dart/Rust/Julia/Lua validation still rejects no-marker specs. Dedicated
-  subtree `FUTURE-PARITY-BACKLOG.9.1.1.2` owns the neutral contract, five backend leaves, and public no-drift; the
-  active Dart cursor slice does not create a one-backend semantic exception.
+- `2026-07-18` root-selection decision: ADR `0046` and `linkedspec-root-rule-selection-v1` order selection as
+  explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
+  Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains
+  explicit/`<default>` identity, and strict-unused receives no synthetic reference or exemption. Eight selection,
+  three failure, and three strict cases plus 24 mutations make the neutral decision executable at 1/7. No backend
+  behavior changed: Perl currently picks parsed row zero, Rust has marker-only native/generated defaults, and
+  Dart/Julia/Lua contain marker-then-first fallback behind marker-requiring validation. Dedicated leaves `.1-.6`
+  own Perl, Rust, Dart, Julia, Lua/LuaJIT, and composed public admission.
 - `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
   spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/
   trace, mixed parent/child, recursion, both structural replacements, static removal, primary command, and all
