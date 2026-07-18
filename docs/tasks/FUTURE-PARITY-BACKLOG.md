@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart cursor descriptor projection `.9.1.5.3` is committed at `39338616`;
-  generated-source v2 `.9.1.5.4` has full signoff and awaits its clean commit)
+- Last updated: `2026-07-18` (Dart global option/CLI migration `.9.1.5.5` has full signoff;
+  clean commit is the only boundary before root-selection `.9.1.1.2.0`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3249,17 +3249,17 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1`
-  Status: `done`
+  Status: `active`
   Goal: Ratify the corrected AND/OR edge and cursor-semantics contract before implementation.
   Dependencies: `.9.1.0`
-  Children: `.9.1.1.0`, `.9.1.1.1`
+  Children: `.9.1.1.0`, `.9.1.1.1`, `.9.1.1.2`
   Acceptance: Convert the measured audit into one backend-neutral grammar/runtime decision covering bare and
     explicit edges, indexed/grouped/fluent forms, nested calls, intrinsic cursor behavior, public API/CLI migration,
     descriptor/generated metadata, invalid legacy combinations, and cross-backend conformance. Keep implementation
     in a separately split follow-on leaf and return to `.5.2.3` after the design commitment is cleanly committed.
-  Verification: **PASS 2026-07-17.** `.9.1.1.0` fixes nested child ownership and `.9.1.1.1` adopts ADR `0044`
-    plus the exact grammar/runtime/API/CLI/descriptor/generated-v2/diagnostic/conformance implementation split.
-    No behavior code changed; implementation remains separately pending under `.9.1.2-.9`.
+  Verification: Cursor/edge design is complete: `.9.1.1.0` fixes nested child ownership and `.9.1.1.1` adopts
+    ADR `0044` plus the exact implementation split. Director clarification on 2026-07-18 resolves the separately
+    parked entry-selection question; `.9.1.1.2` now owns its neutral decision and five-backend rollout.
   Commit: `.9.1.1.0` and `.9.1.1.1` commit rows below
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.0`
@@ -3290,6 +3290,94 @@ before implementation.
     leaves are pending. Knowledge Map, memory architecture, task metadata, doctrines, mdBook, and whitespace pass;
     no parser/compiler/runtime/descriptor/generated/CLI/fixture/test/capability behavior changed.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.1 - ratify rule-local cursor and bare edges`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2`
+  Status: `pending`
+  Goal: Ratify and implement deterministic root-rule selection without requiring a `::` marker.
+  Dependencies: `.9.1.5.5`
+  Children: `.9.1.1.2.0`, `.9.1.1.2.1`, `.9.1.1.2.2`, `.9.1.1.2.3`, `.9.1.1.2.4`, `.9.1.1.2.5`,
+    `.9.1.1.2.6`
+  Acceptance: Apply one backend-neutral precedence: an explicit entry selector, including CLI
+    `--top-rule NAME`, has highest priority and may select any declared rule; without an explicit selector, the
+    first authored `Rule::` in definition order is the default; when no rule uses `::`, the first authored
+    ordinary `Rule:` is the default. A spec with zero rules remains invalid, an unknown explicit name remains an
+    error, authored `is_top` metadata remains source identity rather than dynamic selection state, and every
+    compiler, validator, runtime, loaded/generated route, strict-unused check, descriptor, trace, CLI, neutral
+    fixture, backend, and mdBook statement must agree.
+  Verification: `pending` — captured during active Dart leaf `.9.1.5.5` after the director fixed explicit
+    `--top-rule` as higher priority than `Rule::`. Read-only retrieval found the Dart runtime/source wrapper already
+    contains the marker-then-first-rule fallback, but Dart, Rust, Julia, and Lua validators still reject every
+    no-marker spec; current doctrine/docs also require `::`. No one-backend behavior change is permitted before
+    the neutral decision leaf and contract exist.
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.0`
+  Status: `pending`
+  Goal: Ratify the exact root-selection precedence and make it executable as a neutral contract before behavior.
+  Dependencies: `.9.1.1.2`
+  Acceptance: Update/supersede ADR `0010` as needed; inventory all five backends plus reference validation and
+    explicit-selector seams; define marker, first-rule fallback, explicit override, multiple-marker definition
+    order, empty-spec, unknown-selector, strict-unused, descriptor/generated/trace, and CLI outcomes; add a strict
+    neutral fixture/checker with mutations; split or confirm the implementation leaves; change no runtime behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1`
+  Status: `pending`
+  Goal: Implement root-selection precedence on the Perl reference.
+  Dependencies: `.9.1.1.2.0`
+  Acceptance: Make validation, compilation, `Get`/`get_parser`, generated source, trace/diagnostics, strict checks,
+    and the primary command consume the neutral contract; add focused and Phase 0 proof without compatibility
+    guessing or changing ordinary rule execution.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2`
+  Status: `pending`
+  Goal: Implement root-selection precedence on Rust.
+  Dependencies: `.9.1.1.2.1`
+  Acceptance: Align parser/validation, core/runtime, loaded/serialized/generated execution, descriptor/trace,
+    strict checks, and primary CLI with the unchanged neutral contract and Perl reference bytes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3`
+  Status: `pending`
+  Goal: Implement root-selection precedence on Dart.
+  Dependencies: `.9.1.1.2.2`
+  Acceptance: Remove the validator contradiction that makes the existing runtime/source first-rule fallback
+    unreachable; align loaded/normalized/generated/descriptor/trace/strict/CLI routes and prove explicit
+    `--top-rule` wins over an authored marker.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4`
+  Status: `pending`
+  Goal: Implement root-selection precedence on Julia.
+  Dependencies: `.9.1.1.2.3`
+  Acceptance: Align parser/validation, runtime, reconstructed/generated routes, descriptors/traces, strict checks,
+    and primary CLI with the unchanged neutral contract and reference bytes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5`
+  Status: `pending`
+  Goal: Implement root-selection precedence on Lua.
+  Dependencies: `.9.1.1.2.4`
+  Acceptance: Align parser/validation, PUC Lua/LuaJIT runtime and generated routes, descriptors/traces, strict
+    checks, and primary CLI with the unchanged neutral contract and reference bytes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.6`
+  Status: `pending`
+  Goal: Admit and close root-selection parity with public no-drift.
+  Dependencies: `.9.1.1.2.5`
+  Acceptance: Require all five backend consumers and canonical registration; update the normative mdBook, public
+    guides/examples/help, status/capability/Knowledge Map records, and recurring scanners; pass exact focused,
+    primary, corpus, governance, book, and canonical gates before closing `.9.1.1.2`.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.2`
   Status: `done`
@@ -4255,7 +4343,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.4 - emit Dart generated-source v2`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.5`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Dart global cursor overrides and migrate the shared primary-command projection.
   Dependencies: `.9.1.5.4`
   Acceptance: Remove engine-constructor, loader, corpus, parser-adapter, and every other caller-owned global
@@ -4263,8 +4351,53 @@ before implementation.
     `--parse-mode` flag/help/request-trace field; return the exact targeted retired-option usage failure; migrate
     every non-removal caller/test; and pass the exact shared 63 cases in default and POSIX environments with
     unchanged unrelated output and trace bytes.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / AUDIT** — Follow the Knowledge Map to ADR `0044`, Dart preflight/runtime/descriptor/generated/
+    primary facts, and the admitted Rust removal design; classify every Dart token as caller-owned, rule-derived,
+    historical/diagnostic, or permitted low-level matcher state before editing behavior.
+  - [x] **REMOVE PUBLIC/GLOBAL OVERRIDES** — Delete engine-constructor, loaded-engine, corpus, staged-parser, and
+    internal runtime-context global policy parameters without deleting the low-level seek/consume matcher.
+  - [x] **MIGRATE PRIMARY COMMAND** — Remove the help/execution/request-trace field, retain top-rule selection,
+    and reject exact `--parse-mode` spellings at usage exit 2 with the neutral migration message.
+  - [x] **PROVE STATIC AND EXECUTABLE BOUNDARIES** — Add focused source-removal and retired-flag proof; pass the
+    affected suite, complete package, exact shared primary 63x2, corpus 105/105, and the updated neutral inventory
+    with every mutation effective.
+  - [x] **CAPTURE ROOT-SELECTION DECISION WITHOUT DIVERGENCE** — Record the director's exact explicit-selector >
+    authored-`::` > first-ordinary-`:` precedence under dedicated subtree `.9.1.1.2`; preserve current behavior in
+    this Dart-only cursor slice because four backend validators and current doctrine still require `::`.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, public Dart docs,
+    mdBook, changes/notes, and pass governance plus canonical local CI before commit; leave composed admission
+    exclusively to `.9.1.5.6`.
+  Verification: Activated task-tree-first only after generated-source v2 commit `79c51a21`, a zero-byte brief,
+    clean tracked/untracked boundary, and safe generated-artifact cleanup. Knowledge Map retrieval precedes option,
+    loader, corpus, parser-adapter, primary CLI, trace, test, and recurring-gate inspection. The exact audit found
+    one caller-owned field in `LinkedSpecRuntimeEngine` and `_RuntimeExecutionContext`, optional overrides in
+    `LoadedCompiledSpec.createEngine(...)` and `executeCorpusFixtures(...)`, one staged-parser fixed override, and
+    primary help/options/execution/request-trace ownership. `LinkedSpecParseMode` plus matcher arguments and
+    rule-local/generated policy derivation are contract-permitted low-level/internal uses.
+
+    The caller-owned seams are removed. Primary `--parse-mode` returns exact targeted guidance before ordinary
+    value parsing; help and medium request trace omit the field; `--top-rule` remains. A focused source-boundary
+    test proves engine/loader/corpus/parser removal and explicitly retains both matcher algorithms. Strict analysis
+    passes and eight affected suites pass 120/120. The authoritative Dart driver passes format, strict analysis,
+    all 260 package tests, exact primary 63/63 in default and POSIX environments, and corpus 105/105. Generated-
+    source and logical recurring checkers remain green. Neutral inventory removes four token-free option-owner
+    paths, adds the source-removal test plus public Dart guidance, contracts 68 -> 66 files, remains 3/5 pending
+    composed Dart admission, and rejects all 34 mutations. During signoff, the director resolved the separately
+    parked first-rule-as-top design:
+    explicit `--top-rule` wins over an authored `Rule::`; absent an explicit selector, the first authored `::`
+    wins; absent any `::`, the first ordinary `:` wins. Retrieval exposed a cross-backend implementation gap:
+    Dart's runtime/source wrapper already contains the latter fallback, but Dart/Rust/Julia/Lua validators reject
+    no-marker specs and current doctrine still requires the marker. Subtree `.9.1.1.2` owns neutral ratification,
+    all five backends, and public no-drift; this leaf deliberately makes no one-backend semantic change.
+
+    Knowledge Map passes at 594 facts / 4,235 question keys. Memory architecture, task metadata, all four doctrines,
+    formatting, strict analysis, mdBook, generated-source, logical-helper, neutral mutation, JSON, and whitespace
+    checks pass. Canonical local CI accepts the 66-file contract, repeats composed Perl admission at 288 tests,
+    passes reference primary 63/63 in both environments, completes Phase 0 at 1,031/1,031 in 627 seconds, and exits
+    0. The clean commit is the sole remaining boundary before root-selection decision leaf `.9.1.1.2.0` may
+    activate; Dart composed admission `.9.1.5.6` remains intact behind that director-prioritized pivot.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.5 - remove Dart global cursor overrides`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.6`
   Status: `pending`
@@ -6573,9 +6706,11 @@ Dart `.9.1.5.0` records the exact eleven-path/non-token audit and dependency-saf
 `.9.1.5.1` is committed at `fc31fc12`; live/loaded/reconstructed execution `.9.1.5.2` is committed at `7dea1f6b`
 after focused/complete Dart, 105 corpus, neutral 68-file/34-mutation, Knowledge Map, governance, mdBook, and
 canonical Phase 0 1,031/1,031 proof. Descriptor projection `.9.1.5.3` is committed at `39338616`: root global-mode
-metadata is gone and normalized rule/edge/source facts are current. Generated-source v2 `.9.1.5.4` has full
-focused/complete/governance/mdBook/canonical signoff and awaits its clean commit; public/admission surfaces remain
-staged, with `.9.1.5.5` next only after that clean boundary.
+metadata is gone and normalized rule/edge/source facts are current. Generated-source v2 `.9.1.5.4` is committed at
+`79c51a21` after full focused/complete/governance/mdBook/canonical signoff. Public/global option and shared primary
+migration `.9.1.5.5` now has complete 260/63x2/105, 66-file mutation, governance/mdBook, and canonical signoff;
+clean commit is the only boundary before director-prioritized root-selection `.9.1.1.2.0`. Dart composed admission
+remains staged for `.9.1.5.6`.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6805,9 +6940,17 @@ staged, with `.9.1.5.5` next only after that clean boundary.
 | 207 | `FUTURE-PARITY-BACKLOG.5.2.2` | `done` | Typed Perl logical ownership aligns eager values, exact arity, real booleans, and shared condition truthiness. |
 | 208 | `FUTURE-PARITY-BACKLOG.5.2.3` | `done` | Rust shares one typed helper/control truth seam, validates arity before effects, and passes native/serialized/generated-plan/compiled-emitted proof. |
 | 209 | `FUTURE-PARITY-BACKLOG.9.1.0` | `done` | Five-backend audit rejects caller-global override, exposes default AND parity drift, and retains low-level matcher algorithms. |
-| 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `done` | ADR `0044` ratifies exact edge/cursor/migration semantics and separately splits rollout. |
+| 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `active` | Cursor/edge design is complete; root-selection subtree `.2` now owns the directed precedence correction. |
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
+| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `pending` | Explicit selector > first authored `::` > first authored `:` precedence is directed; neutral/five-backend rollout pending. |
+| 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `pending` | Ratify the exact neutral precedence, contract, mutations, and rollout split before behavior. |
+| 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `pending` | Implement the unchanged contract on the Perl reference. |
+| 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `pending` | Implement exact Rust core/runtime/generated/primary selection. |
+| 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
+| 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
+| 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `pending` | Implement exact PUC Lua/LuaJIT selection across native/generated/primary routes. |
+| 212.2.6 | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | `pending` | Admit five-backend parity and close public no-drift. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
 | 214 | `FUTURE-PARITY-BACKLOG.9.1.3` | `done` | All `.0-.6` Perl roles compose at 2/6 with 14-role, 72-file, 29-mutation, and canonical proof. |
 | 214.0 | `FUTURE-PARITY-BACKLOG.9.1.3.0` | `done` | Exact Perl roles, bare-edge prerequisite, and gate-safe shared-CLI fixture order are durable. |
@@ -6826,13 +6969,13 @@ staged, with `.9.1.5.5` next only after that clean boundary.
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.3` are committed and generated-source v2 `.4` has full signoff awaiting its clean commit. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.4` are committed, `.5` has full signoff, and `.6` admission remains. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
 | 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
 | 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `done` | Every normal live/loaded/reconstructed rule entry derives its own cursor and structural policy; full signoff passes. |
 | 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `done` | Cursor descriptor v1 projects normalized family/policy/ownership/edge/source facts and passes full signoff. |
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
-| 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `pending` | Remove public/global overrides and reach exact shared primary 63x2. |
+| 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `pending` | Compose Dart admission, advance only Dart, and close the parent. |
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
@@ -7879,6 +8022,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart option/CLI migration `.9.1.5.5` removes all caller-global cursor authority, retains low-level
+  matcher algorithms, returns exact retired-option guidance, and passes focused 120, complete package 260,
+  primary 63x2, corpus 105, neutral 66/3-of-5/34, KM 594/4,235, governance/mdBook, and canonical Perl admission
+  288 + reference CLI 63x2 + Phase 0 1,031/1,031 in 627 seconds. Clean commit is the only remaining boundary.
+- `2026-07-18`: Director clarification resolves the parked first-rule-as-top question with exact precedence:
+  explicit `--top-rule NAME` wins over authored `Rule::`; otherwise the first authored `::` wins; if none exists,
+  the first ordinary `:` wins. Retrieval exposed a cross-backend gap—Dart contains an unreachable fallback while
+  Dart/Rust/Julia/Lua validators and current doctrine require `::`. Dedicated subtree `.9.1.1.2` now owns neutral
+  ratification, five backend leaves, and public no-drift. Active Dart cursor leaf `.9.1.5.5` does not diverge.
+- `2026-07-18`: Clean commit `79c51a21` lands Dart generated-source v2 `.9.1.5.4`; the tree, zero-byte brief,
+  and disposable-artifact boundary are verified clean, and global option/CLI migration `.9.1.5.5` activates
+  task-tree-first before source or runtime inspection.
 - `2026-07-18`: Dart `.9.1.5.4` emits generated-source v2/format 2 from normalized `SpecFile` state plus an exact
   ordered label/family plan, derives seek/consume and choice/sequence/acode/bcode at every generated rule entry,
   corrects compact Pipe to OR, and removes the generated-v1 runtime exception. A fresh corrupt-payload host proves

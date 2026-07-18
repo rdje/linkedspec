@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
+- `2026-07-18` direction capture: root selection is now ordered as explicit selector (including
+  `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:` when no marker exists. Existing
+  explicit selection already outranks markers, but the no-marker fallback is not uniformly admitted: Dart runtime/
+  source attribution contains it while Dart/Rust/Julia/Lua validation still rejects no-marker specs. Dedicated
+  subtree `FUTURE-PARITY-BACKLOG.9.1.1.2` owns the neutral contract, five backend leaves, and public no-drift; the
+  active Dart cursor slice does not create a one-backend semantic exception.
 - `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
   spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/
   trace, mixed parent/child, recursion, both structural replacements, static removal, primary command, and all
@@ -29,7 +35,12 @@ This document is the current high-level technical reading of the project shape. 
   or mutable cursor field exists. Generated-source `.9.1.5.4` now emits v2/format 2 and reconstructs only normalized
   `SpecFile` state plus one ordered label/family plan. Each validated family derives cursor and sequence/choice;
   no cursor field is serialized. Fresh modules reject v1 before payload reconstruction with exact contract ids and
-  regeneration guidance. Public options and rollout admission remain unchanged for `.5-.6`.
+  regeneration guidance. Public option/CLI `.9.1.5.5` now removes the engine, loader, corpus, and staged-parser
+  global override seams, preserves only the low-level seek/consume matcher primitive, recognizes `--parse-mode`
+  only for the targeted exit-2 migration error, and omits the request-trace field. Complete Dart is 260/260,
+  primary is 63/63 in both environments, corpus remains 105/105, and the migration inventory contracts from 68 to
+  66 files with all 34 mutations intact. Canonical CI passes Perl admission 288, reference primary 63x2, and Phase
+  0 1,031/1,031 in 627 seconds. Composed admission remains `.9.1.5.6`.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight
@@ -166,8 +177,9 @@ This document is the current high-level technical reading of the project shape. 
   through blind calls, action-edge dispatch, explicit calls, and recursion. This preserves one meaning for a rule
   in every composition context. Exact grammar/API/CLI/descriptor/generated/conformance ratification is now ADR
   `0044`; no runtime behavior has changed.
-- `2026-07-16` refresh: cursor-ownership audit `FUTURE-PARITY-BACKLOG.9.1.0` finds that Perl bakes one selected
-  `parse_mode` into every handler, Dart/Julia/Lua own one seek-default engine mode, and Rust alone compiles AND as
+- `2026-07-16` refresh (historical pre-migration audit): cursor-ownership audit
+  `FUTURE-PARITY-BACKLOG.9.1.0` found that Perl baked one selected `parse_mode` into every handler, Dart/Julia/Lua
+  owned one seek-default engine mode, and Rust alone compiled AND as
   consume and OR/default as seek before permitting an execution-wide override. The same default `Top::AND` with
   leading junk therefore hits on Perl/Dart/Julia/Lua but returns null on Rust; explicit seek/consume agrees across
   all five, and the shared 62-case matrix omits this default case. AND+seek ordered-landmark extraction and

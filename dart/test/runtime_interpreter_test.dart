@@ -475,7 +475,7 @@ Top::AND
  /ab/ -> Top[0] { save_cursor() }
  /cd/
  E { restore_cursor(); return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
-''', parseMode: LinkedSpecParseMode.consume);
+''');
 
     final result = engine.parse('abcd');
 
@@ -568,7 +568,7 @@ Top::AND
  /ab/ -> Top[0] { rewind_match_start() }
  /ab/
  E { return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
-''', parseMode: LinkedSpecParseMode.consume);
+''');
 
     final result = engine.parse('ab');
 
@@ -596,7 +596,7 @@ Top::AND
      "end_col", input_end_col()
    ))
  }
-''', parseMode: LinkedSpecParseMode.consume);
+''');
 
     final result = engine.parse('éx');
 
@@ -629,7 +629,7 @@ Top::AND
      "match_col", match_col()
    ))
  }
-''', parseMode: LinkedSpecParseMode.consume);
+''');
 
     final result = engine.parse('a\nb');
 
@@ -1771,13 +1771,11 @@ Top::
 
 LinkedSpecRuntimeEngine _engine(
   String source, {
-  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
   String? specName,
   String? specPath,
 }) {
   return LinkedSpecRuntimeEngine(
     compileSpec(parseSpec(source)),
-    parseMode: parseMode,
     specName: specName,
     specPath: specPath,
   );
@@ -1785,13 +1783,11 @@ LinkedSpecRuntimeEngine _engine(
 
 LinkedSpecRuntimeEngine _engineWithFunctions(
   String source,
-  List<FunctionDefinition> functions, {
-  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
-}) {
+  List<FunctionDefinition> functions,
+) {
   final parsed = parseSpec(source);
   return LinkedSpecRuntimeEngine(
     compileSpec(SpecFile(functions: functions, rules: parsed.rules)),
-    parseMode: parseMode,
   );
 }
 

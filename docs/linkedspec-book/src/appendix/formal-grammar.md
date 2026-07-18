@@ -181,6 +181,11 @@ A rule label is one or more word characters: `[A-Za-z0-9_]+`.
 - **Double colon** (`rule_name::`): a **top rule** — the parser entry point. At least
   one top rule must exist. A `.spec` file may define multiple top rules.
 
+The requirement above describes the current portable validation boundary. The directed
+selection correction is explicit selector > first authored `::` > first authored `:` when
+no marker exists. Its no-marker fallback remains implementation-pending under
+`FUTURE-PARITY-BACKLOG.9.1.1.2`; do not treat it as admitted grammar until that rollout closes.
+
 The double colon is purely an **entry marker**: it designates the rule a backend enters
 first. A top rule is otherwise an **ordinary rule** — it may carry a regex, take any rule
 mode (§2.2), and be recursive (§5.4), exactly like a body rule. The common "no regex on

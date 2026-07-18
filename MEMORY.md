@@ -10,24 +10,24 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.5.4` — Dart generated-source v2 retains a minimal family plan,
-  derives rule-local cursor/structure, rejects v1 before payload decode, and passes full canonical signoff.
-- latest_commit: `39338616` — `FUTURE-PARITY-BACKLOG.9.1.5.3 - project Dart cursor descriptor v1`
-  (ahead: 203; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.5.4 - emit Dart generated-source v2`.
-- active_work_unit: Dart `.9.1.5.4` is complete with full signoff; its commit workflow is the only remaining step
-  before the clean pivot to `.9.1.5.5`.
-- next_action: regenerate/check the Knowledge Map after final signoff text, run lightweight governance/mdBook
-  checks, commit `.9.1.5.4`, clear the brief, verify clean, then activate option/CLI migration `.9.1.5.5`.
-- current_proof: current Dart artifacts are generated-source v2/format 2 with deterministic cursor-free ordered
-  label/family rows. All ten families derive cursor/structure at every generated rule entry; compact Pipe is OR.
-  An isolated corrupt-payload host proves exact v1 expected/actual/regeneration rejection occurs before decode,
-  while current v2 reaches a distinct compile/load failure. All 36 classifier spellings, eight parent/child cases,
-  two structural replacements, direct/trace/subset and adjacent generated roles pass. Strict analysis and affected
-  76/76 pass; complete package is 257/1 only at staged shared help; corpus 105/105; primary remains expected
-  30/63x2 until `.5`; neutral is 68 files, 3/5 rollout, 34 mutations. Knowledge Map is 592/4,215; memory/task/all
-  four doctrines/mdBook/whitespace pass. Canonical CI passes Perl admission 288, reference primary 63x2, and
-  Phase 0 1,031/1,031 in 641 seconds; no background job is running.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.5.5` — Dart exposes no caller-global cursor override, passes
+  exact 260/63x2/105 plus neutral/canonical signoff, and awaits only its clean commit.
+- latest_commit: `79c51a21` — `FUTURE-PARITY-BACKLOG.9.1.5.4 - emit Dart generated-source v2`
+  (ahead: 204; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.5.5 - remove Dart global cursor overrides`.
+- active_work_unit: Dart `.9.1.5.5` is complete and verified but uncommitted; no pivot is allowed until its clean
+  commit. Root-selection `.9.1.1.2.0` is the next leaf; Dart admission remains staged for `.9.1.5.6`.
+- next_action: rerun lightweight post-evidence checks, clean generated artifacts, commit `.9.1.5.5` per `COMMIT.md`,
+  clear the brief, verify clean, then activate root-selection decision leaf `.9.1.1.2.0` task-tree-first.
+- current_proof: caller-global cursor authority is removed from the Dart engine, loader, corpus, staged parser,
+  runtime context, primary help/options/execution, and request trace. Retired `--parse-mode` returns exact usage 2;
+  `--top-rule` remains and its existing ordinary-rule test explicitly locks priority over authored markers. Strict
+  analysis, affected 120/120, complete package 260/260, primary 63/63 default+POSIX, corpus 105/105, generated and
+  logical recurring gates pass. Neutral inventory is 66 files at 3/5 with all 34 mutations rejected. Director
+  root-selection precedence (explicit selector > first `::` > first `:` if no marker) is durably split under
+  pending `.9.1.1.2`; current Dart/Rust/Julia/Lua validators still require `::`, so `.5` introduces no divergence.
+  Knowledge Map is 594/4,235; governance/mdBook pass. Canonical CI passes Perl admission 288, reference primary
+  63x2, and Phase 0 1,031/1,031 in 627 seconds, exit 0. No background job is running.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0044`, neutral/admitted references, Dart generated/live/descriptor/CLI seams, and gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -35,8 +35,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 20-minute timeout; allow
   at least 30 minutes for the complete canonical gate when the machine is under concurrent build load.
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
-- deferred: generated parser+stimuli `.8.1`; cursor `.9.1.6-.9`; inter-match gap/named-slot contract `.1-.7` only
+- deferred: root selection `.9.1.1.2` becomes the next pivot after clean `.9.1.5.5`; generated parser+stimuli `.8.1`;
+  cursor `.9.1.5.6-.9`; inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.5.4` generated-v2 code/tests/checkers/docs/KM card are fully signed
-  off and await only the required commit workflow. Parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: `.9.1.5.5` implementation, tests, docs, Knowledge facts, root-selection
+  follow-up split, and signoff evidence are owned and uncommitted. Parked ignored work is untouched.

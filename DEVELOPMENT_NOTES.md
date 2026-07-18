@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.5` — remove authority, not matcher capability): Dart's remaining
+  `LinkedSpecParseMode` tokens fell into two fundamentally different groups. Engine/loader/corpus/parser/CLI
+  parameters let a caller rewrite every nested rule and therefore had to disappear. The matcher enum and exact
+  seek/consume arguments implement rule-derived policy and remain internal executable primitives. A source-boundary
+  test accounts for both sides so later cleanup cannot delete the algorithms or resurrect a public override.
+
+  The retired CLI branch intentionally runs before generic option-value parsing. That yields one exact actionable
+  error for `--parse-mode`, with or without `=value`, rather than accidental missing-value or unsupported-value
+  messages. Request traces drop only the caller-global field; source/input/top-rule identity and every canonical
+  phase record remain stable. Existing explicit-top proof selects an ordinary rule in a source containing two
+  `::` markers, so renaming that test makes the already-current precedence contract visible without changing bytes.
+
+  The director's no-marker clarification exposed a separate language-contract gap, not a reason to weaken the
+  Dart slice. Runtime `_defaultTopRuleLabel()` and generated failure attribution already scan `::` then fall back
+  to definition order, but normal Dart validation rejects no-marker input; Rust, Julia, and Lua carry the same
+  validation requirement. Subtree `.9.1.1.2` therefore owns an executable neutral decision followed by Perl,
+  Rust, Dart, Julia, Lua, and public closeout leaves. Until those land, docs distinguish the directed precedence
+  from current portable validation and no backend moves alone.
+
+  Focused proof is 120/120; the complete Dart driver passes 260 package tests, exact primary 63x2, and corpus
+  105/105. The neutral inventory is 66 governed files at 3/5 with all 34 mutations effective. Knowledge Map is
+  594/4,235; all governance and mdBook checks pass. Canonical CI independently repeats Perl cursor admission 288,
+  reference primary 63x2, and Phase 0 1,031/1,031 in 627 seconds before exit 0.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.4` — the family row is executable authority, while cursor policy stays
   derived): generated v1 already serialized the correct minimal shape, `label` plus `family`; its remaining drift
   lived in version identity, compact-Pipe classification, and an interpreter compatibility path that spent the

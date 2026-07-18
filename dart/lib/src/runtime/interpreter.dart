@@ -172,14 +172,12 @@ final class RuntimeParseResult {
 final class LinkedSpecRuntimeEngine {
   LinkedSpecRuntimeEngine(
     this.compiledSpec, {
-    this.parseMode = LinkedSpecParseMode.seek,
     this.maxIterations = 10000,
     this.specName,
     this.specPath,
   });
 
   final CompiledSpec compiledSpec;
-  final LinkedSpecParseMode parseMode;
   final int maxIterations;
   final String? specName;
   final String? specPath;
@@ -234,7 +232,6 @@ final class LinkedSpecRuntimeEngine {
     final context = _RuntimeExecutionContext(
       engine: this,
       input: input,
-      parseMode: parseMode,
       maxIterations: maxIterations,
       topRule: label,
       trace: trace,
@@ -6391,7 +6388,6 @@ final class _RuntimeExecutionContext {
   _RuntimeExecutionContext({
     required this.engine,
     required this.input,
-    required this.parseMode,
     required this.maxIterations,
     required this.topRule,
     required this.trace,
@@ -6402,7 +6398,6 @@ final class _RuntimeExecutionContext {
 
   final LinkedSpecRuntimeEngine engine;
   final String input;
-  final LinkedSpecParseMode parseMode;
   final int maxIterations;
   final String topRule;
   final LinkedSpecTraceEmitter? trace;

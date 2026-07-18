@@ -1,6 +1,6 @@
 ---
 id: top-rule-is-ordinary-rule-entered-first
-title: "Current doctrine (adopted 2026-06-23): `::` marks the rule entered first; after entry selection, `::` and `:` have the same regex/mode/action feature surface."
+title: "A selected top rule is ordinary; root selection now follows explicit selector, authored `::`, then first authored `:` precedence."
 answers:
   - "is the top (::) rule special-cased in the engine vs a normal (:) rule"
   - "what does :: actually do mechanically (entry marker vs dispatch loop)"
@@ -16,11 +16,15 @@ answers:
   - "how does recursion into / re-entry of the top rule behave"
   - "why does naive top-rule recursion hang (termination / forward progress)"
   - "what did ADR 0010 decide about the top rule"
+  - "what is the root rule selection precedence"
+  - "does --top-rule override Rule::"
+  - "what is the default root rule when there is no double colon rule"
 date: 2026-06-23
-status: confirmed
+status: confirmed runtime mechanics; 2026-07-18 selection correction implementation pending
 tags: [engine, parser, top-rule, codegen, recursion, language-model, TOP-RULE-AS-NORMAL, ADR-0010]
 evidence: "Read-only TOOLBOX investigation 2026-06-23 (TOP-RULE-AS-NORMAL.1). (1) Entry point is just `sub Get { &{$descr->{spec}{$top_rule}}($descr,$_[0]) }` (Compiler.pm:1006) -- the top rule is NOT specially wrapped; it is invoked like any handler. (2) The while(1) loops live in HandlerVariantEmitter.pm and are MODE-driven (default/repeated-choice/REP repeat; :AND is a single ordered pass) -- the 'top = while(1) dispatch loop' behavior is an emergent idiom (default-mode top + dispatch edges + LX accumulator), not a property of `::`. (3) Regex on a top rule already compiles as a normal rule: `generate_only`+`dump_parser_source` on `Pair::AND` + regex slots emits a standard AND handler (`while ($idx < 2) { LinkedRE::or(...) ... }`) -- identical to a body rule; the earlier breakage was the AND-codegen defect already fixed under ADR 0008 / PHASE0-BACKHALF-TRIAGE.3. (4) Idiomatic recursion is body-rule + consume-before-recurse (specs/Lispish.spec: `parenthesis: /\\(/ ... -> parenthesis ... /\\)/`, green). Naive grammars recursing BACK INTO the top rule, or using zero-progress blind-call dispatch, HANG -- the genuinely open dimension (same family as the PHASE0-BACKHALF-TRIAGE.5.2 never-undef/while(1) non-termination). Design decision + engine-touch authorization recorded in ADR 0010."
 evidence_update_2026_07_08: "SPEC-LANG-REFERENCE.8 reverified the current doctrine after a stale June 17 no-regex correction resurfaced. In a single spec defining both `Entry:: /foo/ -> Entry { return(match_text()) }` and `Body: /foo/ -> Body { return(match_text()) }`, selecting `top_rule=>Entry` and `top_rule=>Body` both returns `\"foo\"`; similarly, `Entry::AND` and selected `Body:AND` with equivalent regex slots both return `{name:\"name\",value:\"value\"}`. The remaining structural requirement is an entry marker in the spec so there is a default start rule; it is not a ban on regex-bearing `::` rule bodies."
+decision_update_2026_07_18: "The director superseded the final structural-requirement sentence above. Exact intended precedence is: an explicit selector, including CLI `--top-rule NAME`, wins over authored markers and may name any declared rule; otherwise the first authored `Rule::` is the default; if no rule uses `::`, the first authored ordinary `Rule:` is the default. Read-only retrieval found marker-then-first fallback code in Dart runtime/source emission, but Dart/Rust/Julia/Lua validators still reject no-marker specs and current neutral docs still require `::`. `FUTURE-PARITY-BACKLOG.9.1.1.2` owns neutral ratification and five-backend rollout; do not report the fallback as implemented everywhere until that tree closes."
 reverify: "perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b/\\n\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, runtime_ctx_ref=>\\%c); print ${$c{parser_source_chunks_ref}};'  # emits a standard `Pair => sub { ... while ($idx < 2) { LinkedRE::or(...) } ... }` AND handler -- a top rule compiled exactly like a body rule"
 ---
 
@@ -46,7 +50,10 @@ This supersedes the earlier June 17 "no regex on top / two-rule minimum" validit
 - **The feature surface is shared.** After a rule is selected as the parser entry point, a `::` rule
   can use the same regex slots, rule modes, action/blind-call edges, lifecycle blocks, and recursion
   model as a `:` rule. The only semantic distinction is entry selection: `::` marks the rule entered
-  first by default.
+  first by the authored-marker default. The accepted 2026-07-18 direction adds two surrounding selection rules:
+  an explicit selector has higher priority than the marker, while the first authored ordinary rule is the fallback
+  when no marker exists. That selection correction is tracked under `FUTURE-PARITY-BACKLOG.9.1.1.2` and remains
+  implementation-pending across the full backend set.
 
 ## The idiom vs the law (ADR 0010)
 

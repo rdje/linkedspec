@@ -6,7 +6,6 @@ import '../compiler/compiled_spec.dart';
 import '../io/spec_loader.dart';
 import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
-import '../runtime/matching.dart';
 
 const linkedspecDartDisplayCommand = 'dart run bin/linkedspec_dart.dart';
 
@@ -31,7 +30,6 @@ Text encoding:
 
 Parser options:
   --top-rule NAME      Select the entry rule
-  --parse-mode MODE    MODE is seek or consume
 
 Trace options:
   --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
@@ -62,6 +60,10 @@ Examples:
   {{COMMAND}} --spec-file demo.spec --input-file demo.txt \
     --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
 ''';
+
+const _removedParseModeMessage =
+    '--parse-mode has been removed; cursor policy is derived from each rule '
+    '(OR/default=seek, AND=consume)';
 
 String linkedspecDartPrimaryCliHelp() => _primaryCliHelpTemplate.replaceAll(
   '{{COMMAND}}',
@@ -157,7 +159,6 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
   final topRule = parseResult.options!.topRule == null
       ? '<default>'
       : _traceField(parseResult.options!.topRule!);
-  final parseMode = parseResult.options!.parseMode ?? 'seek';
 
   PrimaryCliCommandOutput? emit(int threshold, String level, String event) {
     if (trace.emit(threshold, level, event)) {
@@ -182,8 +183,7 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
       emit(
         200,
         'medium',
-        'request source=$sourceKind input=$inputKind '
-            'top_rule=$topRule parse_mode=$parseMode',
+        'request source=$sourceKind input=$inputKind top_rule=$topRule',
       ) ??
       emit(
         300,
@@ -241,17 +241,9 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
   }
 
   try {
-    final parseMode = prepared.options.parseMode == 'consume'
-        ? LinkedSpecParseMode.consume
-        : LinkedSpecParseMode.seek;
     final engine = switch (prepared.spec) {
-      _NativePreparedSpec(:final loaded) => loaded.createEngine(
-        parseMode: parseMode,
-      ),
-      _InlinePreparedSpec() => LinkedSpecRuntimeEngine(
-        compiled,
-        parseMode: parseMode,
-      ),
+      _NativePreparedSpec(:final loaded) => loaded.createEngine(),
+      _InlinePreparedSpec() => LinkedSpecRuntimeEngine(compiled),
     };
     final result = engine.execute(input, topRule: prepared.options.topRule);
     final json = jsonEncode(_canonicalJson(result.value));
@@ -285,7 +277,6 @@ final class _PrimaryCliOptions {
   String? input;
   String? inputFile;
   String? topRule;
-  String? parseMode;
   String? traceLevel;
   String? traceFile;
   String? traceMode;
@@ -335,6 +326,8 @@ _ArgumentParseResult _parseArguments(List<String> arguments) {
       } else {
         options.traceEmoji = true;
       }
+    } else if (option == '--parse-mode') {
+      return const _ArgumentParseResult.failure(_removedParseModeMessage);
     } else if (_valueOptions.contains(option)) {
       final String value;
       if (inlineValue != null) {
@@ -373,13 +366,6 @@ _ArgumentParseResult _parseArguments(List<String> arguments) {
       'choose exactly one input option: --input or --input-file',
     );
   }
-  if (options.parseMode != null &&
-      options.parseMode != 'seek' &&
-      options.parseMode != 'consume') {
-    return const _ArgumentParseResult.failure(
-      "--parse-mode must be 'seek' or 'consume'",
-    );
-  }
   if (options.traceLevel != null && !_validTraceLevel(options.traceLevel!)) {
     return _ArgumentParseResult.failure(
       "--trace has an unsupported level '${options.traceLevel}'",
@@ -403,7 +389,6 @@ const _valueOptions = <String>{
   '--input',
   '--input-file',
   '--top-rule',
-  '--parse-mode',
   '--trace',
   '--trace-file',
   '--trace-mode',
@@ -436,8 +421,6 @@ void _setValueOption(_PrimaryCliOptions options, String option, String value) {
       options.inputFile = value;
     case '--top-rule':
       options.topRule = value;
-    case '--parse-mode':
-      options.parseMode = value;
     case '--trace':
       options.traceLevel = value;
     case '--trace-file':

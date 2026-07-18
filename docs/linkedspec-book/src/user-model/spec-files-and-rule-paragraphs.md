@@ -36,6 +36,19 @@ Two long-standing recommendations are therefore **idiom, not engine law**:
 A **single recursive document** can be expressed with a recursive top rule directly,
 instead of being forced through a stream-of-records dispatcher.
 
+### Entry-selection precedence and the pending no-marker correction
+
+An explicit entry selector has highest priority. On the shared primary command,
+`--top-rule NAME` may select any declared rule—including an ordinary single-colon rule—and
+wins even when the source contains one or more `Rule::` markers. Without an explicit
+selector, current backends choose the first authored `Rule::` in definition order.
+
+The directed next contract adds the final fallback: if a source has no `::`, its first
+authored ordinary `Rule:` becomes the default entry. That fallback is tracked under
+`FUTURE-PARITY-BACKLOG.9.1.1.2`; it is **not yet uniform current behavior** because current
+validation still requires an entry marker on multiple backends. Until that rollout closes,
+portable current specs should retain a `::` marker.
+
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 
 A rule reached **by dispatch** reads the *entering* match with the `entry_*` family

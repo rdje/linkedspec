@@ -16,7 +16,8 @@ reverify: "cd dart && dart analyze --fatal-infos --fatal-warnings && dart test t
 ---
 
 `dart/bin/linkedspec_dart.dart` now owns only ADR `0023`'s primary parser interface. Its manual parser accepts the
-same source/input/top-rule/parse-mode/trace options as the shared commands, rejects positionals, subcommands,
+same source/input/top-rule/trace options as the shared commands, rejects the retired `--parse-mode` flag with
+targeted migration guidance, rejects positionals, subcommands,
 abbreviations, case drift, undocumented negations, invalid values, and selector conflicts, and renders exact help
 and usage bytes for `dart run bin/linkedspec_dart.dart`. Corpus validation/execution remains under
 `dart/bin/corpus_runner.dart`.
@@ -35,7 +36,8 @@ sources retain the existing staged path. A native regression locks both cases.
 
 The exact boundary/loading/failure subset is 29/29 under default and `POSIXLY_CORRECT=1`. The remaining 32 shared
 cases were 11 successful direct result cases plus 21 trace-tagged cases. `.1.5.3.2` now closes all direct results
-and the silent quiet-trace case at 41/61; `.1.5.3.3` has since closed the remaining 20 trace cases at 61/61.
+and the silent quiet-trace case at 41/61; `.1.5.3.3` closes the remaining 20 trace cases at 61/61. Cursor option
+removal `.9.1.5.5` advances the expanded manifest to exact 63/63 in both environments.
 
 Related facts: [[dart-primary-cli-mechanism-audit]], [[primary-cli-strict-utf8-text-contract]],
 [[user-observable-backend-cli-parity-contract]], [[dart-local-verification-gate]], [[dart-specific-cli]],

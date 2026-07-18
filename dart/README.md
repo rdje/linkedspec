@@ -15,7 +15,7 @@ cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
 registered user-function runtime execution. Its corpus layer now has a
 manifest-backed executable harness whose checked-in 105-fixture corpus gate is
-green. The public package also exports deterministic generated-source v1
+green. The public package also exports deterministic generated-source v2
 emission, typed metadata/errors, the exact ten-family plan/direct executor, and
 isolated caller-package compile/run proof. Contract-sourced manifest admission
 now passes too.
@@ -66,16 +66,74 @@ contract fails before payload reconstruction with expected/actual contract ids
 and guidance to regenerate from the original `.spec`. The recurring admission
 test also reads and passes the contract's exact eight-case subset.
 
+## Rule-local cursor policy
+
+`LinkedSpecRuntimeEngine` no longer accepts a parser-wide `parseMode`. Each
+entered rule derives its own cursor and composition policy from its authored
+family: default/OR rules seek, while AND rules consume. The same rule therefore
+behaves identically whether entered directly, through an action or blind edge,
+through `call(...)`, recursively, from loaded state, or from generated-source
+v2.
+
+```dart
+final compiled = compileSpec(parseSpec('''
+Top::AND
+ Header
+ Body
+
+Header:
+ /BEGIN/
+
+Body:
+ /payload=(\\w+)/
+'''));
+
+final engine = LinkedSpecRuntimeEngine(compiled);
+final result = engine.execute('junk BEGIN junk payload=value');
+```
+
+Here `Top` consumes its ordered child calls, while each default-family child
+retains `seek`; no caller option can rewrite either rule. A loaded parser uses
+the same option-free boundary:
+
+```dart
+final loaded = loadAndCompileSpec(request, loadOptions);
+final engine = loaded.createEngine(maxIterations: 10000);
+```
+
+The low-level `LinkedSpecParseMode` enum remains available to the regex matcher
+primitives that implement seek and consume. It is not an engine, loader, corpus,
+or staged-parser override.
+
+The primary command omits `--parse-mode` from help and recognizes the retired
+flag only to return usage exit 2 with migration guidance:
+
+```text
+linkedspec: --parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)
+```
+
+`--top-rule` remains available for entry selection. An explicit value has
+priority over any authored `Rule::` and may select an ordinary `Rule:`; the
+primary CLI regression suite locks that precedence. The separately directed
+first-ordinary-rule fallback for sources with no `::` is not claimed here yet:
+current Dart validation still requires a marker, and neutral/five-backend
+rollout is tracked under `FUTURE-PARITY-BACKLOG.9.1.1.2`. Canonical medium
+request trace records contain source, input, and top-rule identity but no
+global cursor field.
+
 ## Status
 
 `FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold; `.3.3.2`
 closes exact ten-family plan/direct execution and four plan rejections;
 `.3.3.3` admits the exact interpreter-first eight-case generated proof. Focused
-6/6 and complete format/analyze/181 tests/61x2 CLI/105 corpus pass. Dart now
+6/6 and complete format/analyze/181 tests/61x2 CLI/105 corpus passed at that
+historical boundary. Dart now
 passes the complete current capability census. Later cursor migration
 `.9.1.5.4` advances current emitted/generated direct/traced roles from v1 to v2
-without changing that admitted semantic capability; public option removal and
-composed cursor admission remain `.9.1.5.5-.6`.
+without changing that admitted semantic capability. Public option removal
+`.9.1.5.5` deletes all caller-owned global overrides and reaches 260/260 package,
+63/63 default and POSIX primary, and 105/105 corpus proof. Composed cursor
+admission remains `.9.1.5.6`.
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
 `FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:
@@ -86,7 +144,8 @@ execution/results and canonical trace remain the immediately following `.2` and 
 `bin/corpus_runner.dart` retains all corpus validation/execution and selector behavior. `.1.5.3.2` composes that
 boundary through the native staged parser, validator/compiler, and `LinkedSpecRuntimeEngine`, selects top rule and
 global parse mode through native controls, and emits the direct result as recursively key-sorted compact UTF-8
-JSON. `.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
+JSON. That global-mode seam was later removed by `.9.1.5.5`; entry selection and direct-result framing remain.
+`.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
 stdout/route/mirror, reset/append, and failures. Dart now passes all 61 unchanged primary cases in default/POSIX;
 `.1.5.3.4` makes both legs recurring in the focused gate alongside the package suite (now 160 tests) and 105/105 corpus, and closes the Dart
 primary-command parent. The earlier

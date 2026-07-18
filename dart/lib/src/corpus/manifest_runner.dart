@@ -7,7 +7,6 @@ import '../parser/spec_parser.dart' show SpecParseException, parseSpec;
 import '../parser/staged_parser_registry.dart';
 import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
-import '../runtime/matching.dart';
 import '../validation/spec_validator.dart';
 
 final class CorpusManifestException implements Exception {
@@ -161,7 +160,6 @@ CorpusValidationResult loadCorpusFixtures(String corpusPath) {
 
 CorpusExecutionResult executeCorpusFixtures(
   String corpusPath, {
-  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
   Iterable<String> caseNames = const <String>[],
   int offset = 0,
   int? limit,
@@ -174,8 +172,7 @@ CorpusExecutionResult executeCorpusFixtures(
     limit: limit,
   );
   final results = [
-    for (final fixture in selectedFixtures)
-      _executeFixture(fixture, parseMode: parseMode),
+    for (final fixture in selectedFixtures) _executeFixture(fixture),
   ];
   return CorpusExecutionResult(validation: validation, results: results);
 }
@@ -235,16 +232,12 @@ List<CorpusFixture> _selectExecutionFixtures(
   return List<CorpusFixture>.unmodifiable(fixtures.sublist(offset, end));
 }
 
-CorpusFixtureExecutionResult _executeFixture(
-  CorpusFixture fixture, {
-  required LinkedSpecParseMode parseMode,
-}) {
+CorpusFixtureExecutionResult _executeFixture(CorpusFixture fixture) {
   try {
     final spec = _parseCorpusSpec(fixture.specSource);
     final compiled = compileSpec(spec);
     final parseResult = LinkedSpecRuntimeEngine(
       compiled,
-      parseMode: parseMode,
       specName: fixture.name,
     ).execute(fixture.inputText);
 

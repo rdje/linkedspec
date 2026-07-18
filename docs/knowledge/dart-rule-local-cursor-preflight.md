@@ -14,12 +14,13 @@ answers:
   - "which task leaves own the Dart cursor rollout"
   - "does the Dart cursor rollout need gate hardening"
 date: 2026-07-18
-status: verified historical preflight; normalization through generated-source v2 implemented through .9.1.5.4
+status: verified historical preflight; normalization through public removal implemented through .9.1.5.5
 tags: [dart, dsl, cursor, parse-mode, bare-edge, descriptor, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
 evidence: "Read-only family/edge/parent-child/artifact probes plus the actual local driver establish Dart's exact pre-edit boundary. Compact pipe alone is misclassified as AND; bare edges become generic raw syntax; one engine-global parseMode controls all entered rules; descriptor metadata owns root parse_mode; generated source remains v1/format 1; focused non-primary tests pass 104/104 and corpus execution passes 105/105. The complete package reaches 244 pass / 1 expected shared-help failure, while the shared primary projection is exactly 30/63 in both default and POSIX environments because the reference fixtures already removed the option and trace field. The neutral checker remains 36/18/8 with 14 Perl roles, 15 Rust roles, 68 files, 3 complete / 5 pending, and 34 rejected mutations."
 evidence_update_2026_07_18_descriptor: "FUTURE-PARITY-BACKLOG.9.1.5.3 replaces the preflight descriptor boundary with cursor v1. Root parse_mode is gone; every rule publishes derived family/policy/ownership/resolved edges; direct, normalized SpecFile-JSON, and loaded projections agree. Generated v1 and public/CLI options remain staged for .4-.5."
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.5.4 replaces the preflight generated boundary with linkedspec-generated-source-v2 / format 2. Exact label/family rows reconstruct each rule's cursor/composition policy; compact Pipe is OR; v1 is rejected before lazy payload decoding. Public/CLI options remain staged for .5."
-reverify: "python3 tools/check_rule_local_cursor_contract.py; (cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart test/compiled_spec_test.dart test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/source_emitter_test.dart test/spec_loader_test.dart); (cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute); bash tools/run_dart_local.sh # expected to stop at the staged shared-help assertion until .9.1.5.5"
+evidence_update_2026_07_18_public_removal: "FUTURE-PARITY-BACKLOG.9.1.5.5 removes every caller-owned Dart global cursor override and the primary request field, returns exact retired-flag guidance, and passes 260 package tests, 63x2 primary, and 105/105 corpus. Neutral inventory is 66/3-of-5/34."
+reverify: "python3 tools/check_rule_local_cursor_contract.py; bash tools/run_dart_local.sh"
 ---
 
 The governed token inventory has eleven Dart paths:
@@ -95,8 +96,9 @@ v1 are current; generated plans now reconstruct rule-local execution from exact
 family rows and reject v1. Follow [[dart-rule-local-cursor-normalization]],
 [[dart-rule-local-cursor-execution]], and
 [[dart-rule-local-cursor-descriptor]], and
-[[dart-generated-source-v2-rule-local-cursor]] instead of re-running this
-historical pre-edit audit. Public/CLI removal and admission remain `.5-.6`.
+[[dart-generated-source-v2-rule-local-cursor]] and
+[[dart-global-cursor-option-removal]] instead of re-running this historical
+pre-edit audit. Composed admission alone remains `.6`.
 
 Related: [[rule-local-cursor-neutral-contract]],
 [[rule-local-cursor-and-bare-edge-contract]],

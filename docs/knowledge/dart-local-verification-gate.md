@@ -10,7 +10,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, ci, verification, corpus, DART-BACKEND-PARITY]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 makes tools/run_dart_local.sh run format, analyzer, 151 tests, primary help, bounded corpus smoke, 61/61 default, 61/61 POSIX, and 99/99 corpus."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 makes tools/run_dart_local.sh recurring. FUTURE-PARITY-BACKLOG.9.1.5.5 current proof is format, strict analyzer, 260 tests, primary help, bounded corpus smoke, 63/63 default, 63/63 POSIX, and 105/105 corpus."
 reverify: "rg -n 'LINKEDSPEC_RUN_DART|run_dart_local' tools/run_ci_local.sh tools/run_dart_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md && bash tools/run_dart_local.sh"
 ---
 
@@ -22,8 +22,8 @@ bash tools/run_dart_local.sh
 
 The script runs `dart format --set-exit-if-changed .`, `dart analyze
 --fatal-infos --fatal-warnings`, `dart test`, shared primary-CLI help, a bounded
-`bin/corpus_runner.dart` smoke, both 61-case primary environments, and the full
-checked-in 99-fixture corpus execution.
+`bin/corpus_runner.dart` smoke, both 63-case primary environments, and the full
+checked-in 105-fixture corpus execution.
 
 The canonical local CI gate remains Perl/core-only unless explicitly opted in:
 

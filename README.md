@@ -9,6 +9,10 @@ native/generated behavior, recurring admission, and public no-drift are complete
 `FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 3 complete / 5 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
+The separately parked root-selection question is now directed under `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit
+entry selector such as `--top-rule NAME` has priority over authored `Rule::`; absent an explicit selector, the
+first authored `::` wins; absent any `::`, the first ordinary `:` wins. The first-rule fallback is a tracked target,
+not yet uniform current behavior: four backend validators and current doctrine still require an entry marker.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -41,7 +45,12 @@ per-rule family, derived policy, ownership, ordered resolved edges, and source i
 state; direct, normalized-JSON, and loaded projections agree. Generated-source `.9.1.5.4` now emits v2/format 2,
 retains only ordered label/family plan rows, and derives cursor plus structure from all ten families across direct,
 traced, and fresh-loaded roles. A v1 artifact fails with exact contract identities and `.spec` regeneration
-guidance. Option/CLI removal and composed admission remain owned in order by `.9.1.5.5-.6`.
+guidance. Option/CLI removal `.9.1.5.5` now deletes the engine, loader, corpus, and staged-parser global override,
+retains only low-level matcher policy primitives, removes the help/request-trace field, and returns the targeted
+usage error for `--parse-mode`. The complete Dart package passes 260 tests, the shared primary matrix passes 63/63
+in both environments, corpus remains 105/105, and the governed inventory contracts to 66 files. Composed
+admission remains owned by `.9.1.5.6`. Canonical signoff repeats Perl cursor admission 288, reference primary
+63x2, and Phase 0 1,031/1,031 in 627 seconds.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -587,7 +596,7 @@ content migration exists yet.
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`. The later rule-local cursor migration has advanced the shared manifest to 63 cases:
-  Perl and Rust are current at 63/63 in both environments; Dart, Julia, and Lua remain owned by their subsequent
+  Perl, Rust, and Dart are current at 63/63 in both environments; Julia and Lua remain owned by their subsequent
   cursor leaves. The all-five
   63x2 primary matrix is therefore the rollout target, not a current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete

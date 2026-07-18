@@ -5,8 +5,8 @@
 > `.9.1.3.3`, Rust `.9.1.4.4`, and Dart `.9.1.5.3` expose
 > `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
-> `resolved_edges`. Perl and Rust generated-source v2 and option/CLI removal are complete.
-> Dart generated-source v2, option/CLI removal, and admission remain `.9.1.5.4-.6`;
+> `resolved_edges`. Perl, Rust, and Dart generated-source v2 and option/CLI removal are complete.
+> Dart composed admission remains `.9.1.5.6`;
 > Julia, Lua, recurring five-backend admission, and public no-drift remain dependency-ordered.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.

@@ -37,6 +37,34 @@ void main() {
     );
   });
 
+  test(
+    'rejects the removed global parse-mode flag with migration guidance',
+    () {
+      final output = runLinkedSpecDartPrimaryCli(const [
+        '--inline-spec',
+        'Top:: /x/',
+        '--input',
+        'x',
+        '--parse-mode',
+        'seek',
+      ]);
+
+      expect(output.exitCode, 2);
+      expect(output.stdoutBytes, isEmpty);
+      expect(
+        utf8.decode(output.stderrBytes),
+        startsWith(
+          'linkedspec: --parse-mode has been removed; cursor policy is derived '
+          'from each rule (OR/default=seek, AND=consume)\n\nUsage:\n',
+        ),
+      );
+      expect(
+        utf8.decode(output.stderrBytes),
+        isNot(contains('parse-mode MODE')),
+      );
+    },
+  );
+
   test('compiles source before loading a deferred input file', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-primary-order-',
@@ -151,7 +179,7 @@ void main() {
     }
   });
 
-  test('executes the selected rule and emits recursively canonical JSON', () {
+  test('--top-rule overrides authored top markers and canonicalizes JSON', () {
     const source = '''
 Top::
  /a/ -> Done { return("top") }
@@ -170,8 +198,6 @@ Done::
       'x',
       '--top-rule',
       'Alternate',
-      '--parse-mode',
-      'consume',
     ]);
 
     expect(output.exitCode, 0);

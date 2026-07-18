@@ -3,7 +3,6 @@ import 'dart:io';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../runtime/interpreter.dart';
-import '../runtime/matching.dart';
 import '../trace/trace.dart';
 import 'spec_parser.dart';
 import 'staged_parser_registry.dart';
@@ -81,7 +80,6 @@ final class UserFunctionDefinitionAstParser {
       try {
         result = LinkedSpecRuntimeEngine(
           _compiledSpec,
-          parseMode: LinkedSpecParseMode.seek,
           specName: 'user_function_definition.spec',
         ).execute(source, trace: trace);
       } on RuntimeInterpreterException catch (error) {

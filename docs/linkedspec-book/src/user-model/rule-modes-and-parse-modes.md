@@ -55,11 +55,15 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > policy, and trace scopes report that entered policy. Dart `.9.1.5.3` now
 > publishes descriptor-v1 contract/family/policy/ownership/resolved-edge facts
 > from normalized compiled state with no root global field; direct,
-> normalized-JSON, and loaded projections agree. Generated-source v2,
-> option/CLI removal, and admission remain staged under `.9.1.5.4-.6`;
-> generated-source v1 keeps its bounded legacy execution path until `.4`.
+> normalized-JSON, and loaded projections agree. Dart `.9.1.5.4` emits
+> generated-source v2 from only ordered label/family rows and rejects v1 before
+> payload reconstruction. Dart `.9.1.5.5` removes engine/loader/corpus/parser
+> global options, rejects primary `--parse-mode`, omits the request-trace field,
+> and passes exact 63/63 primary cases in both environments. Only composed Dart
+> admission remains `.9.1.5.6`.
 > Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
-> five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`.
+> five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`;
+> the current governed inventory is 66 files with 34 effective mutations.
 
 ## Current rule-label surface
 
@@ -85,6 +89,11 @@ Item:AND
 Here `Top::` is the no-regex entry wrapper, and `Item:AND` is the regex-carrying ordered sequence. A no-regex entry or dispatcher can still carry a mode suffix when it composes child parser calls, as shown later in this chapter.
 
 Mechanically, `::` is an **entry marker**: it designates the rule entered first. The Perl reference engine treats that rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)). After entry selection, `::` and `:` have the same rule feature surface: either form can carry regex slots, rule modes, action or blind-call edges, lifecycle blocks, and recursion. Recursion through any rule — including the top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
+
+Entry selection is separate from cursor policy. An explicit selector such as `--top-rule`
+wins over authored `::` markers and may name any declared rule. The directed fallback from
+no marker to the first ordinary rule remains implementation-pending across the complete
+backend set; see [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-the-pending-no-marker-correction).
 
 The current public suffix surface is intentionally small and exact:
 
@@ -483,8 +492,8 @@ For more detail on cursor-stack helpers, anchor rewinds, and their interaction w
 
 Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
 The two low-level algorithms are `seek` and `consume`, but normal Perl and Rust live execution select them from
-the rule family rather than a parser-wide override. Dart now has the same authored family identity in normalized
-state, but its live rule-local spending remains the next staged implementation slice.
+the rule family rather than a parser-wide override. Dart normal, loaded, normalized-JSON, and generated-v2
+execution now do the same at every entered rule.
 
 ### `seek`
 
@@ -563,7 +572,7 @@ Generated-source v2 now derives the same policy from its minimal ordered family 
 cursor field. Rust execution options now select only an entry rule; the primary command rejects the retired
 global flag and request traces carry no global cursor field. Express cursor semantics with rule families.
 
-## Removed Perl and Rust option boundaries
+## Removed Perl, Rust, and Dart option boundaries
 
 The Perl reference rejects `parse_mode` in inline, file-oriented, and generated-source construction. The failure
 occurs before source parsing with `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, and
@@ -592,10 +601,24 @@ my $cursor_contract = $descriptor->{meta}{cursor_contract};
 # linkedspec-rule-local-cursor-v1
 ```
 
-Inspect each rule's family-derived `cursor_policy`. The Perl and Rust primary `--parse-mode` flag is recognized
-only far enough to produce usage exit 2 and the targeted structural-migration message; it is never accepted or
-ignored. Rust native callers use `ExecutionOptions` only to select an entry rule; there is no runtime-context
-override/effective-mode state.
+Inspect each rule's family-derived `cursor_policy`. The Perl, Rust, and Dart primary `--parse-mode` flag is
+recognized only far enough to produce usage exit 2 and the targeted structural-migration message.
+The flag is never accepted or ignored. Rust native callers use `ExecutionOptions` only to select an entry rule.
+Dart native callers construct `LinkedSpecRuntimeEngine(compiled)` and loaded callers use
+`loaded.createEngine()`; neither accepts a cursor override. There is no engine/runtime-context effective-mode
+state in either backend:
+
+```dart
+final compiled = compileSpec(parseSpec(source));
+final engine = LinkedSpecRuntimeEngine(compiled);
+final value = engine.execute(input, topRule: 'Top').value;
+
+final loaded = loadAndCompileSpec(request, loadOptions);
+final loadedValue = loaded.createEngine().execute(input).value;
+```
+
+Dart still exports `LinkedSpecParseMode` for the low-level regex matcher primitives that implement seek and
+consume. That primitive is not a parser, loader, corpus, or staged-parser option.
 
 ## Choosing a mode
 
@@ -647,8 +670,8 @@ escape hatch.
 The Perl reference implements both the decision's bare-edge normalization and normal live cursor spending. Rust
 implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
 derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
-family/policy/edge facts through descriptor v1. Dart `.9.1.5.1` now implements the same typed normalization and
-validation boundary; its runtime still uses an explicit temporary compact-pipe adapter until `.9.1.5.2`. A
+family/policy/edge facts through descriptor v1. Dart `.9.1.5.1-.5` now implements the same typed normalization,
+live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. A
 complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -693,7 +716,7 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-Perl and Rust now remove `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
+Perl, Rust, and Dart now remove `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
 accepted-and-ignored option. Their descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract`, retain per-rule `meta.cursor_policy`, and expose ordered
 `meta.resolved_edges` rows with ownership/target/index/block/fluent facts.
@@ -702,9 +725,9 @@ version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
 in Perl and Rust are current. Primary-command/API removal is also current in both backends.
 In Dart, authored family identity, typed bare edges, family-derived ownership, compiled action/blind lowering,
-and the six neutral normalization/validation diagnostics are current. Dart live/reconstructed policy spending,
-descriptor-v1 projection, generated-source-v2 reconstruction, public option/CLI removal, and composed admission
-are not yet current and remain dependency-ordered under `.9.1.5.2-.6`.
+the six neutral normalization/validation diagnostics, live/reconstructed policy spending, descriptor-v1
+projection, generated-source-v2 reconstruction, and public option/CLI removal are current. Only composed
+admission remains `.9.1.5.6`.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/
@@ -712,4 +735,4 @@ AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 neutral checker requires every declared role and canonical registration. It
 currently reports 36 family spellings, 18 edge cases, eight parent/child cases,
-68 migration files, 3 complete / 5 pending, and 34 rejected drift mutations.
+66 migration files, 3 complete / 5 pending, and 34 rejected drift mutations.

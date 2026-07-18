@@ -2051,6 +2051,12 @@ no decoder that could override runtime behavior. Generated-source v2 is now
 current too: fresh emitted modules retain only ordered label/family rows, derive
 all ten cursor/structure policies, and reject v1 before payload reconstruction
 with exact contract identities and `.spec` regeneration guidance.
+Dart's public execution boundary is now rule-local too. `LinkedSpecRuntimeEngine(compiled)`,
+`loaded.createEngine()`, corpus execution, and the staged function parser expose no caller-global mode. The
+primary command omits the option and request-trace field, while retired `--parse-mode` invocations return the
+exact structural-migration usage error. Complete Dart proof is 260 package tests, 63/63 primary cases in both
+environments, and 105/105 corpus fixtures. Canonical signoff passes Perl admission 288, reference primary 63x2,
+and Phase 0 1,031/1,031 in 627 seconds; composed cursor admission remains the next Dart leaf.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

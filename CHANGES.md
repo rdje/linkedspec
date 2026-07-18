@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.5 — remove Dart global cursor overrides
+
+Dart no longer accepts a caller-owned cursor policy at any normal execution boundary. The public runtime engine,
+loaded-spec engine factory, corpus executor, staged user-function parser, and internal execution context have no
+global override parameter. Each entered rule continues to derive seek/consume and choice/sequence behavior from
+its normalized family; only the low-level regex matcher retains the two algorithms.
+
+The primary command removes `--parse-mode` from help, options, execution, and medium request traces. Either retired
+spelling returns usage exit 2 with exact migration guidance before ordinary option-value validation. `--top-rule`
+remains: the focused CLI test now names its real precedence boundary explicitly and proves an ordinary selected
+rule overrides authored `Rule::` markers. Unrelated result, error, and trace bytes remain unchanged.
+
+Static removal proof covers the engine, loader, corpus, staged parser, and primary command while explicitly
+retaining the matcher primitives. The affected eight suites pass 120/120. The authoritative Dart driver passes
+strict formatting/analysis, all 260 package tests, exact shared primary 63/63 in default and POSIX environments,
+and corpus 105/105. The neutral migration inventory contracts from 68 to 66 governed files, remains 3/5 until
+composed admission `.9.1.5.6`, and rejects all 34 mutations. Generated-source and logical-helper recurring gates
+remain green.
+
+The Knowledge Map passes at 594 facts / 4,235 question keys. Memory architecture, task metadata, all four
+doctrines, formatting, strict analysis, mdBook, JSON, and whitespace checks pass. Canonical local CI accepts the
+66-file contract, runs the composed Perl cursor consumer at 288 tests, passes reference primary 63/63 in both
+environments, completes Phase 0 at 1,031/1,031 in 627 seconds, and exits 0.
+
+During signoff the director resolved the separately parked root-selection question: explicit selector > first
+authored `::` > first authored `:` when no marker exists. Retrieval found Dart's runtime/source fallback but also
+the Dart/Rust/Julia/Lua validation gates that still require `::`. Dedicated subtree `.9.1.1.2` records neutral
+ratification plus five backend and public no-drift leaves; this Dart-only cursor slice deliberately introduces no
+semantic divergence.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.4 — emit Dart generated-source v2
 
 Dart's current generated artifact identity is now `linkedspec-generated-source-v2` / format 2. The deterministic

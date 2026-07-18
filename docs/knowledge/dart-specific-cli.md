@@ -23,7 +23,9 @@ dart run bin/linkedspec_dart.dart --help
 
 It exposes the exact shared parser-oriented options and rejects corpus subcommands.
 `.1.5.3.4` closes native direct execution/canonical JSON plus the independent
-canonical trace protocol at recurring 61/61 default/POSIX.
+canonical trace protocol at recurring 61/61 default/POSIX. Rule-local cursor
+`.9.1.5.5` removes the global mode flag/trace field and advances the current
+shared command to 63/63 in both environments.
 
 `dart/bin/corpus_runner.dart` is the separate corpus-focused command. It retains
 `--corpus`, `--execute`, `--case`, `--offset`, and `--limit`; without a selector,

@@ -11,6 +11,7 @@ date: 2026-07-10
 status: current
 tags: [dart, cli, trace, utf8, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.3.3 adds an adapter-local ADR 0024 trace and passes all 61 unchanged cases in default and POSIX environments; rich LinkedSpecTraceEmitter behavior remains independent."
+evidence_update_2026_07_18_cursor: "FUTURE-PARITY-BACKLOG.9.1.5.5 removes the global parse_mode request field while preserving every unrelated trace byte; the expanded shared matrix passes 63/63 in both environments."
 reverify: "cd dart && dart test test/primary_cli_test.dart && cd .. && perl tools/run_cli_conformance.pl --display-command 'dart run bin/linkedspec_dart.dart' -- dart --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
 ---
 
@@ -27,7 +28,8 @@ stdout remain available exactly as in the shared contract.
 
 Ambient/native Dart trace configuration cannot enable this protocol, and primary CLI options do not configure the
 native trace emitter. The unchanged suite passes 61/61 under default and `POSIXLY_CORRECT=1` environments;
-`.1.5.3.4` makes both legs recurring in the focused Dart gate.
+`.1.5.3.4` makes both legs recurring in the focused Dart gate. Rule-local cursor removal later deletes the global
+request field and advances the recurring expanded suite to 63/63 twice.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[dart-trace-controls-sinks]],
 [[dart-primary-cli-native-execution-canonical-json]], [[user-observable-backend-cli-parity-contract]],

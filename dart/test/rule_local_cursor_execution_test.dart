@@ -299,6 +299,37 @@ void main() {
     expect(scratch.existsSync(), isFalse);
   });
 
+  test('public global cursor override source is removed', () {
+    final engineSource = File(
+      'lib/src/runtime/interpreter.dart',
+    ).readAsStringSync();
+    final loaderSource = File('lib/src/io/spec_loader.dart').readAsStringSync();
+    final corpusSource = File(
+      'lib/src/corpus/manifest_runner.dart',
+    ).readAsStringSync();
+    final parserAdapterSource = File(
+      'lib/src/parser/user_function_definition_parser.dart',
+    ).readAsStringSync();
+    final primarySource = File(
+      'lib/src/cli/primary_cli.dart',
+    ).readAsStringSync();
+
+    expect(engineSource, isNot(contains('this.parseMode =')));
+    expect(engineSource, isNot(contains('required this.parseMode')));
+    expect(loaderSource, isNot(contains('LinkedSpecParseMode parseMode')));
+    expect(corpusSource, isNot(contains('LinkedSpecParseMode parseMode')));
+    expect(parserAdapterSource, isNot(contains('parseMode:')));
+    expect(primarySource, isNot(contains('parse_mode=')));
+    expect(primarySource, isNot(contains('--parse-mode MODE')));
+
+    final matcherSource = File(
+      'lib/src/runtime/matching.dart',
+    ).readAsStringSync();
+    expect(matcherSource, contains('LinkedSpecParseMode parseMode'));
+    expect(matcherSource, contains('seekMatch'));
+    expect(matcherSource, contains('consumeMatch'));
+  });
+
   test('generated-source v2 derives policy from each family row', () {
     final andCompiled = compileSpec(
       parseSpec('Top::AND\n /x/ -> Top { return("hit") }\n'),

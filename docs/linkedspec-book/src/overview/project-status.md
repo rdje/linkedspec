@@ -226,7 +226,11 @@ Three backbone items tracked major structural modernization — all done:
   publishes cursor-v1 identity plus exact family/policy/ownership/ordered-edge/source facts across direct,
   normalized-JSON, and loaded projection. Generated-source `.9.1.5.4` now emits v2/format 2, retains only ordered
   label/family rows, derives all ten policies and structures, and rejects v1 before reconstruction with exact
-  identities and regeneration guidance. Public option/CLI removal and composed admission remain `.5-.6`.
+  identities and regeneration guidance. Public option/CLI `.9.1.5.5` now removes engine, loader, corpus, staged-
+  parser, help, execution, and request-trace global state; `--parse-mode` returns the targeted usage error. Dart
+  passes 260 package tests, 63/63 primary cases in both environments, and 105/105 corpus fixtures. The inventory
+  contracts to 66 files with all 34 mutations. Canonical signoff repeats Perl admission 288, reference primary
+  63x2, and Phase 0 1,031/1,031 in 627 seconds; only composed admission remains `.6`.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

@@ -81,8 +81,8 @@ bash tools/run_primary_cli_matrix.sh
 The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
 Lua native adapters in disposable temporary storage, and runs the shared manifest against Perl, Rust, Dart,
 Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The current
-rule-local cursor manifest has 63 cases: Perl and Rust are current at 63/63, and subsequent backend leaves own
-Dart/Julia/Lua migration. A green 5x2x63 run remains the rollout target rather than the current cross-backend
+rule-local cursor manifest has 63 cases: Perl, Rust, and Dart are current at 63/63, and subsequent backend leaves
+own Julia/Lua migration. A green 5x2x63 run remains the rollout target rather than the current cross-backend
 state.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local

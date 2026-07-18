@@ -6,7 +6,6 @@ import '../ast/spec_ast.dart' show SpecFile;
 import '../compiler/compiled_spec.dart';
 import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
-import '../runtime/matching.dart';
 import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 
@@ -137,18 +136,15 @@ final class LoadedCompiledSpec {
   final LoadedSpec loaded;
   final CompiledSpec compiled;
 
-  LinkedSpecRuntimeEngine createEngine({
-    LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
-    int maxIterations = 10000,
-  }) => LinkedSpecRuntimeEngine(
-    compiled,
-    parseMode: parseMode,
-    maxIterations: maxIterations,
-    specName: loaded.resolved.request.kind == SpecRequestKind.name
-        ? loaded.resolved.request.requested
-        : null,
-    specPath: loaded.resolved.file.path,
-  );
+  LinkedSpecRuntimeEngine createEngine({int maxIterations = 10000}) =>
+      LinkedSpecRuntimeEngine(
+        compiled,
+        maxIterations: maxIterations,
+        specName: loaded.resolved.request.kind == SpecRequestKind.name
+            ? loaded.resolved.request.requested
+            : null,
+        specPath: loaded.resolved.file.path,
+      );
 }
 
 void validateSpecRequest(SpecRequest request) {

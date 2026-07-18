@@ -8,6 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.5 — remove Dart global cursor overrides**
+  (DONE — caller-global API/CLI/trace ownership is removed, exact Dart and canonical signoff pass, and clean commit
+  is the only boundary before the director-prioritized root-selection decision leaf).
+
+  **Goal:** Remove every Dart caller-owned cursor override while retaining rule-derived low-level matcher
+  capability and exact shared primary-command behavior.
+
+  **Result:** `LinkedSpecRuntimeEngine`, loaded engine construction, corpus execution, the staged user-function
+  parser, and internal execution context expose no global cursor choice. The primary command omits `--parse-mode`
+  from help/execution/request trace and returns exact usage-2 migration guidance for the retired flag. Explicit
+  `--top-rule` selection remains and its focused test proves an ordinary rule overrides authored `::` markers.
+
+  **Proof:** Focused affected tests pass 120/120. The authoritative Dart gate passes format, strict analysis, all
+  260 package tests, exact primary 63/63 in default and POSIX environments, and corpus 105/105. Neutral inventory
+  is 66 files at 3/5 with all 34 mutations effective; generated/logical recurring gates remain green. Knowledge
+  Map is 594/4,235; memory/task/four-doctrine/mdBook/whitespace checks pass. Canonical CI accepts the neutral
+  contract, runs Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 627 seconds, then exits 0.
+
+  **Next:** After the clean `.9.1.5.5` commit, activate `.9.1.1.2.0` to ratify explicit selector > first authored
+  `::` > first ordinary `:` fallback neutrally before any backend changes. Dart admission `.9.1.5.6` remains
+  intact behind that priority pivot.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.4 — emit Dart generated-source v2**
   (DONE — exact v2 identity, minimal family plan, derived execution, v1-before-decode rejection, affected-role
   proof, complete lockstep, governance, mdBook, and canonical signoff pass before the clean commit boundary).

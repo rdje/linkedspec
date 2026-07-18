@@ -13,6 +13,7 @@ date: 2026-07-18
 status: current and fully verified
 tags: [dart, generated-source, cursor, rule-family, contract-v2, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.5.4 advances Dart emission to linkedspec-generated-source-v2 / format 2. The deterministic plan remains exactly ordered label/family rows. Validation rejects any non-v2 contract before lazy payload decoding, then execution derives seek for default/OR/repetition families and consume for every AND family at each entered rule. Compact Pipe classifies as or_acode. Focused affected tests pass 76/76, the complete package reaches 257/1 at the staged shared-help seam, corpus execution passes 105/105, and primary CLI remains the expected 30/63 twice until .5. Neutral governance remains 68 files / 3-of-5 / 34 mutations; canonical CI passes Perl cursor admission 288, reference primary 63/63 twice, and Phase 0 1,031/1,031 in 641 seconds."
+evidence_update_2026_07_18_public_removal: "FUTURE-PARITY-BACKLOG.9.1.5.5 leaves generated-source v2 unchanged while deleting surrounding public/global options. Current Dart proof is 260 package tests, primary 63x2, corpus 105/105, and neutral 66 files/34 mutations."
 reverify: "cd dart && dart analyze --fatal-infos --fatal-warnings && dart test test/source_emitter_test.dart test/rule_local_cursor_execution_test.dart test/rule_local_cursor_normalization_test.dart test/punctuation_light_zero_arg_contract_test.dart test/diagnostic_output_contract_test.dart test/logical_helper_contract_test.dart test/complete_named_mark_contract_test.dart test/variadic_user_function_contract_test.dart test/uniform_binding_contract_test.dart"
 ---
 
@@ -46,7 +47,7 @@ through the v2 entrypoints in focused proof.
 
 The neutral generated-source v1 ledger remains the cross-backend semantic
 baseline and still owns its accepted subset. Dart's current source format is v2;
-the public/loader/corpus/CLI global parse-mode seam remains assigned to `.5`.
+the public/loader/corpus/CLI global parse-mode seam is removed by `.9.1.5.5`.
 
 Related: [[generated-source-contract-v1]],
 [[dart-rule-local-cursor-execution]],
