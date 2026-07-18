@@ -85,6 +85,18 @@ subtest 'neutral resolver success and failure rows execute exactly' => sub {
  }
 };
 
+subtest 'neutral strict rows remain independent from entry selection' => sub {
+ for my $case (@{$contract->{strict_cases}}) {
+  my %referenced = map { $_ => 1 } @{$case->{referenced_rules}};
+  my @actual_unused = grep { !$referenced{$_} } @{$case->{rules}};
+  is_deeply(
+   \@actual_unused,
+   $case->{expected_unused},
+   "$case->{id} retains exact authored-edge unused labels",
+  );
+ }
+};
+
 my $marked_source = <<'SPEC';
 Earlier:
  /x/ -> EarlierDone { return("earlier") }

@@ -11,12 +11,13 @@ answers:
   - "which backends currently reject a spec without Rule::"
   - "does selecting the entry rule count as a strict unused reference"
   - "does root selection rewrite descriptor is_top metadata"
-  - "why does Perl currently select an ordinary rule before a later Rule:: marker"
+  - "why did pre-implementation Perl select an ordinary rule before a later Rule:: marker"
 date: 2026-07-18
-status: neutral contract accepted under ADR 0046; backend rollout 1 complete / 6 pending
+status: neutral contract and Perl reference admitted; rollout 2 complete / 5 pending
 tags: [dsl, root-rule, top-rule, entry-selection, cli, descriptor, generated-source, strict-syntax, backend-parity, ADR-0046, FUTURE-PARITY-BACKLOG]
 evidence: "Director clarification on 2026-07-18 fixes exact precedence: (1) an explicit entry selector, specifically CLI `--top-rule NAME`, has highest priority and may designate any declared rule, including an ordinary `Rule:` even when a `Rule::` exists; (2) without an explicit selector, the first authored `Rule::` is the default; (3) when no rule ends in `::`, the first authored ordinary `Rule:` is the default. Full five-backend audit under `.9.1.1.2.0` found: Perl validation requires a marker but `Compiler::run_get_pipeline` finally selects requested label or parsed row zero, so an earlier ordinary rule defeats a later marker; Rust validation and native/generated defaults require the first marker, with explicit selection confined to `execute_value`/primary; Dart, Julia, and Lua validation require a marker while their ordered runtime helpers already implement marker-then-first fallback. The existing shared CLI case proves an explicit ordinary rule beats two markers. Strict-unused remains defined-minus-statically-referenced with no selected/marked-rule exemption. ADR 0046 plus `capability_conformance/root_rule_selection_contract.json` now lock eight selections, three failures, three strict cases, source identity, route projections, exact current inventory, seven rollout legs, and 24 mutations without changing backend behavior."
-reverify: "python3 tools/check_root_rule_selection_contract.py; perl -Iperl -MLinkedSpec -e 'my %ctx; my $s=\"Earlier:\\n /a/\\n\\nMarked::\\n /b/\\n\"; LinkedSpec::Get(\\$s, runtime_ctx_ref=>\\%ctx); print qq{$ctx{top_rule}\\n}'  # current Perl prints Earlier until .9.1.1.2.1; rg -n \"no top rule found|at least one rule must use|must define a top rule\" perl/LinkedSpec/Validation.pm rust/linkedspec-core/src/validation.rs dart/lib/src/validation julia/src/spec/Validator.jl lua/src/linkedspec/spec_validator.lua"
+evidence_update_2026_07_18_perl_admission: "Leaves `.9.1.1.2.1.1-.3` implement and admit the Perl reference across native, loaded, reconstructed, generated direct/traced/Get, descriptor, structured diagnostic, runtime/request trace, strict, and primary routes. The shared manifest is now 65 cases with exact first-marker and markerless-default successes beside explicit and unknown selection. The checker topology-locks the core/routes consumers and canonical registration; rollout is 2 complete / 5 pending. Rust, Dart, Julia, and Lua retain their audited staged differences until `.2-.5`, followed by final admission `.6`."
+reverify: "python3 tools/check_root_rule_selection_contract.py && PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t t/root_rule_selection_perl_routes.t && PERL5LIB= perl tools/run_cli_conformance.pl --case success_default_first_authored_marker --case success_markerless_first_authored_rule --case success_explicit_top_rule --case failure_invocation_missing_top_rule --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
 ---
 
 # Root-rule selection precedence
@@ -37,7 +38,8 @@ label.
 Strict-unused is deliberately orthogonal. Selecting or marking a rule does not add an authored edge and does not
 exempt the selected rule from the existing defined-minus-referenced check.
 
-ADR [0046](../decisions/0046-root-rule-selection-precedence.md) and the executable neutral contract are complete.
-The validators named in the front matter still make the no-marker fallback unreachable, and current Perl still
-uses parsed row zero ahead of a later marker. Follow task subtree `.9.1.1.2` for the 1/7 rollout state; do not report
-markerless selection as uniformly implemented until the remaining six legs close.
+ADR [0046](../decisions/0046-root-rule-selection-precedence.md), the executable neutral contract, and the composed
+Perl reference are complete. Rust still requires/defaults through authored markers, while Dart, Julia, and Lua
+still make their existing no-marker fallbacks unreachable in validation. Follow task subtree `.9.1.1.2` for the
+2/7 rollout state; do not report markerless selection as uniformly implemented until the remaining five legs
+close.

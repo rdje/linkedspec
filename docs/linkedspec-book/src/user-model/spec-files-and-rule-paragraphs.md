@@ -45,8 +45,8 @@ wins even when the source contains one or more `Rule::` markers. Without an expl
 selector, the first authored `Rule::` in definition order wins; without a marker, the first
 authored rule wins.
 
-The Perl library implements all three branches across native, loaded, generated-direct,
-generated-traced, and generated `Get` routes. Other backends still require an entry marker,
+The composed Perl reference implements all three branches across native, loaded, generated-direct,
+generated-traced, generated `Get`, and primary-command routes. Other backends still require an entry marker,
 so markerless execution is **not yet uniform portable behavior**. Until
 `FUTURE-PARITY-BACKLOG.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 

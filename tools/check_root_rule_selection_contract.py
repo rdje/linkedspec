@@ -125,7 +125,7 @@ INVENTORY = [
 ]
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.0"),
-    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.1"),
+    ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.1"),
     ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
     ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.4"),
@@ -257,12 +257,34 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
         "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
-        "capability_conformance/README.md": [CONTRACT_ID, "1 complete / 6 pending"],
+        "capability_conformance/README.md": [CONTRACT_ID, "2 complete / 5 pending"],
         "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
+        "t/root_rule_selection_perl_core.t": [
+            "selection_cases",
+            "failure_cases",
+            "strict_cases",
+            "native execution applies explicit marker fallback precedence",
+        ],
+        "t/root_rule_selection_perl_routes.t": [
+            "LinkedSpec::get_parser",
+            "LinkedSpec::SpecLoader::load_and_compile_spec",
+            "generated_role_cases",
+            "entry_rule_contract",
+            "configured-missing.spec",
+            "generated_entry_selection",
+        ],
+        "cli_conformance/cases/trace/medium_stdout.txt": ["top_rule=<default>"],
+        "cli_conformance/cases/trace/failure_invoke_escaped_medium.txt": [
+            "top_rule=Top%0AInjected"
+        ],
         "tools/run_ci_local.sh": [
             "require_tracked_file tools/check_root_rule_selection_contract.py",
             "require_tracked_file capability_conformance/root_rule_selection_contract.json",
+            "require_tracked_file t/root_rule_selection_perl_core.t",
+            "require_tracked_file t/root_rule_selection_perl_routes.t",
             "python3 tools/check_root_rule_selection_contract.py",
+            "prove -Iperl t/root_rule_selection_perl_core.t",
+            "prove -Iperl t/root_rule_selection_perl_routes.t",
         ],
     }
     for relative, required in markers.items():
@@ -284,6 +306,88 @@ def validate_filesystem_contract() -> None:
     require(
         explicit["expect"]["stdout"] == {"text": '"alternate"\n'},
         "shared CLI explicit selector output drifted",
+    )
+
+    default_marker = cases.get("success_default_first_authored_marker")
+    require(isinstance(default_marker, dict), "shared CLI first-marker default case is missing")
+    require("--top-rule" not in default_marker["args"], "first-marker case became explicit")
+    default_marker_source = default_marker["args"][1]
+    require(
+        "Earlier:\n" in default_marker_source
+        and "Marked::\n" in default_marker_source
+        and "Later::\n" in default_marker_source,
+        "shared CLI first-marker topology drifted",
+    )
+    require(default_marker["expect"]["exit"] == 0, "shared CLI first-marker exit drifted")
+    require(
+        default_marker["expect"]["stdout"] == {"text": '"marked"\n'},
+        "shared CLI first-marker output drifted",
+    )
+    require(
+        default_marker["expect"]["stderr"] == {"text": ""},
+        "shared CLI first-marker stderr drifted",
+    )
+
+    markerless = cases.get("success_markerless_first_authored_rule")
+    require(isinstance(markerless, dict), "shared CLI markerless default case is missing")
+    require("--top-rule" not in markerless["args"], "markerless default case became explicit")
+    markerless_source = markerless["args"][1]
+    require(
+        "First:\n" in markerless_source
+        and "Second:\n" in markerless_source
+        and "::" not in markerless_source,
+        "shared CLI markerless topology drifted",
+    )
+    require(markerless["expect"]["exit"] == 0, "shared CLI markerless exit drifted")
+    require(
+        markerless["expect"]["stdout"] == {"text": '"first"\n'},
+        "shared CLI markerless output drifted",
+    )
+    require(
+        markerless["expect"]["stderr"] == {"text": ""},
+        "shared CLI markerless stderr drifted",
+    )
+
+    unknown = cases.get("failure_invocation_missing_top_rule")
+    require(isinstance(unknown, dict), "shared CLI unknown-selector case is missing")
+    require(
+        "--top-rule" in unknown["args"] and "Missing" in unknown["args"],
+        "shared CLI unknown selector drifted",
+    )
+    require(unknown["expect"]["exit"] == 1, "shared CLI unknown-selector exit drifted")
+    require(
+        unknown["expect"]["stderr"]
+        == {
+            "file": "cases/failure/stderr.txt",
+            "variables": {"ERROR": "parser invocation failed"},
+        },
+        "shared CLI unknown-selector stderr drifted",
+    )
+
+    default_trace = cases.get("trace_stdout_medium")
+    require(isinstance(default_trace, dict), "shared CLI default request-trace case is missing")
+    require("--top-rule" not in default_trace["args"], "default request trace became explicit")
+    require(
+        default_trace["expect"]["stdout"] == {"file": "cases/trace/medium_stdout.txt"},
+        "shared CLI default request trace drifted",
+    )
+
+    explicit_trace = cases.get("trace_failure_invoke_escaped_field")
+    require(isinstance(explicit_trace, dict), "shared CLI explicit request-trace case is missing")
+    require(
+        "--top-rule" in explicit_trace["args"] and "Top\nInjected" in explicit_trace["args"],
+        "shared CLI explicit request trace drifted",
+    )
+    require(explicit_trace["expect"]["exit"] == 1, "shared CLI explicit request-trace exit drifted")
+    require(
+        explicit_trace["expect"]["files"]
+        == [
+            {
+                "path": "trace.log",
+                "content": {"file": "cases/trace/failure_invoke_escaped_medium.txt"},
+            }
+        ],
+        "shared CLI explicit request-trace file drifted",
     )
 
 
@@ -544,7 +648,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ),
         ),
         ("rollout removed", lambda value: value["rollout"].pop()),
-        ("premature Perl rollout", lambda value: value["rollout"][1].__setitem__("status", "complete")),
+        ("regressed Perl rollout", lambda value: value["rollout"][1].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

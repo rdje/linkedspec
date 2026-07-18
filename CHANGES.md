@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 — admit Perl root selection
+
+The composed Perl reference now owns the complete `linkedspec-root-rule-selection-v1` admission boundary. The
+shared primary manifest adds exact default-selection cases for an earlier ordinary rule followed by two authored
+markers and for a markerless two-rule source. Their required outputs are respectively `"marked"\n` and
+`"first"\n`; existing explicit ordinary, unknown-selector, default request-trace, and escaped explicit trace
+cases retain the other public byte boundaries. The manifest grows from the historical cursor boundary of 63 to
+65 cases, and Perl passes 65/65 with `POSIXLY_CORRECT` unset and set.
+
+Root governance now topology-checks the Perl core and route consumers, their canonical registration, the exact
+first-marker/markerless/explicit/unknown CLI sources and results, and default/escaped-explicit request-trace
+fixtures. The core consumer directly reads the neutral strict-case rows in addition to selection/failure rows, so
+all neutral data has recurring Perl evidence. The checker still rejects 24 drift mutations and now reports
+2 complete / 5 pending; only `perl_reference` advances.
+
+Public and operational documentation now states one exact order—explicit selector, first authored `::`, first
+authored rule—and distinguishes the admitted Perl reference from staged Rust, Dart, Julia, and Lua behavior.
+`TOOLBOX.md` no longer claims that every valid `.spec` requires `::`. Historical 63-case cursor evidence remains
+identified as historical instead of being rewritten into a false current-manifest claim. Focused root/generated/
+CLI proof passes five files / 27 tests, and exact primary proof passes 65/65 twice. Canonical CI passes root core
+7, routes 5, cursor admission 288, and Phase 0 1,031/1,031 in 611 seconds before exit 0. Knowledge Map is 598
+facts / 4,277 question keys; book, memory, task, all four doctrines, syntax, whitespace, and cleanup pass.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 — converge Perl root execution
 
 Perl loaded and generated library execution now consumes the same root-rule resolver as native `Get`. Generated

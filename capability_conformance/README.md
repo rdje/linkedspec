@@ -2,7 +2,7 @@
 
 `manifest.json` is the machine-readable census of current user-observable LinkedSpec capabilities across the five
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
-63-case primary CLI manifest.
+65-case primary CLI manifest.
 
 Run its structural and ownership gate from the repository root:
 
@@ -54,18 +54,20 @@ claiming markerless execution before the
 backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to validate explicit selector > first
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
-primary projections, and the exact five-backend audit. The checker rejects 24 semantic, topology, inventory, and
-rollout drift mutations. The neutral decision is complete; rollout remains 1 complete / 6 pending until each
-composed backend leg is admitted. Perl's staged inventory now records marker-optional validation, exact
-explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor `is_top`, and the same
-resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
+primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
+configured CI execution, first-marker/markerless/explicit/unknown primary cases, and default/explicit request
+trace while rejecting 24 semantic, topology, inventory, and rollout drift mutations. Rollout is
+2 complete / 5 pending: neutral decision plus the composed Perl reference are admitted. Perl records marker-
+optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
+`is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
-selector overrides an emission-time configured selector. Shared CLI/public admission remains `.9.1.1.2.1.3`;
-Rust, Dart, Julia, Lua/LuaJIT, and composed public admission remain pending. Current backend differences stay
-explicit in the inventory until their owning leaves land.
+selector overrides an emission-time configured selector. The reference-first shared manifest now has 65 cases,
+including exact first-marker and markerless-default bytes beside explicit and unknown selection. Rust, Dart,
+Julia, Lua/LuaJIT, and final composed public admission remain pending. Current backend differences stay explicit
+in the inventory until their owning leaves land.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
-`.9.1.3.5`: removing the reference option affects 35 cases in the canonical 63-case suite that local CI always
+`.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always
 runs twice. That reference-first migration is now implemented; shared CLI documentation and final symmetric
 five-backend admission remain `.9.1.8`-owned. This keeps
 main green without an ignored flag, hidden compatibility route, or skipped case while backends roll forward in

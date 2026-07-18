@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` — reference-first admission is a deliberate staged boundary):
+  after `.1.1-.2`, no Perl engine or adapter defect remained. `bin/linkedspec` already forwarded explicit
+  `top_rule`, delegated omission to the shared resolver, preserved requested-versus-default trace identity, and
+  normalized unknown invocation failure. The remaining work was observable admission: the shared manifest lacked
+  first-marker and markerless-default bytes, the neutral checker did not require the complete core/routes
+  consumers, and rollout/public text still described the pre-admission state.
+
+  The two new success cases are intentionally minimal but discriminating. An earlier ordinary rule plus two
+  markers proves both marker-over-ordinary and first-marker-over-later-marker in one default invocation; a
+  markerless two-rule source proves the final fallback without an explicit selector. Existing cases separately
+  prove explicit ordinary authority, unknown-selector failure, `<default>` request trace, and escaped explicit
+  trace. Keeping those cases in the shared manifest makes Perl the exact 65-case byte oracle before later variants
+  migrate, matching the established reference-first rollout doctrine.
+
+  That expansion makes old “passes all current 63 cases” wording actively misleading. The 63-case result remains
+  valid evidence for the earlier cursor milestone, but it is no longer the size of the current manifest. Public
+  docs therefore call it the then-63-case boundary and state that Rust, Dart, Julia, and Lua remain staged on the
+  root-selection expansion. Their optional full gates are not claimed green against 65 until their ordered
+  `.9.1.1.2.2-.5` leaves land; final all-five symmetry remains `.6`.
+
+  Topology checks now bind semantic data to recurring proof: core consumes selection, failure, and strict rows;
+  routes cover loaded/SpecLoader/generated direct-traced-Get/metadata/configured failure/effective trace; local CI
+  requires and runs both; primary and trace cases retain exact source and expected-file identities. This closes
+  Perl at 2 complete / 5 pending without changing any non-Perl rollout row or runtime implementation.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` — generated execution needs authored identity beside its
   family plan): the v2 generated-source plan is deliberately only ordered `{label,family}` execution data. Adding
   `is_top` to that plan would conflate two contracts and widen an already-admitted shape. Compiler therefore emits

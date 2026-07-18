@@ -59,7 +59,8 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > generated-source v2 from only ordered label/family rows and rejects v1 before
 > payload reconstruction. Dart `.9.1.5.5` removes engine/loader/corpus/parser
 > global options, rejects primary `--parse-mode`, omits the request-trace field,
-> and passes exact 63/63 primary cases in both environments. Only composed Dart
+> and passed the exact then-63-case primary manifest in both environments. The current
+> root-selection expansion remains owned by `.9.1.1.2.3`. Only composed Dart
 > admission remains `.9.1.5.6`.
 > Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
 > five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`;
@@ -92,7 +93,7 @@ Mechanically, `::` is an authored **default-entry marker**. Without an explicit 
 
 Entry selection is separate from cursor policy. An explicit selector such as `--top-rule`
 wins over authored `::` markers and may name any declared rule. Otherwise the first marker,
-then the first authored rule, wins. Perl library routes implement all three branches; full
+then the first authored rule, wins. Perl reference library and primary routes implement all three branches; full
 backend parity remains staged. See [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
 
 The current public suffix surface is intentionally small and exact:

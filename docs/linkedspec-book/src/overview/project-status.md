@@ -6,11 +6,12 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract is complete and rejects 24 drift mutations, so rollout is 1 complete / 6
-pending. Perl library execution now implements the contract across native, loaded, generated-direct,
-generated-traced, and generated `Get` routes while preserving authored marker identity in descriptors and generated
-metadata. Its shared CLI/public admission is still pending, as are Rust, Dart, Julia, Lua/LuaJIT, and composed
-five-backend admission under `.9.1.1.2.1.3-.6`.
+backend-neutral executable contract is complete and rejects 24 drift mutations, so rollout is 2 complete / 5
+pending. The composed Perl reference implements native, loaded, generated-direct, generated-traced, generated
+`Get`, descriptor, diagnostics, runtime trace, and primary-command routes while preserving authored marker identity.
+Its 65-case shared primary proof includes exact first-marker and markerless defaults beside explicit/unknown and
+request-trace cases. Rust, Dart, Julia, Lua/LuaJIT, and final composed five-backend admission remain
+`.9.1.1.2.2-.6`.
 
 ## Completed phases
 
@@ -236,7 +237,8 @@ Three backbone items tracked major structural modernization — all done:
   label/family rows, derives all ten policies and structures, and rejects v1 before reconstruction with exact
   identities and regeneration guidance. Public option/CLI `.9.1.5.5` now removes engine, loader, corpus, staged-
   parser, help, execution, and request-trace global state; `--parse-mode` returns the targeted usage error. Dart
-  passes 260 package tests, 63/63 primary cases in both environments, and 105/105 corpus fixtures. The inventory
+  passed 260 package tests, the then-63-case primary manifest in both environments, and 105/105 corpus fixtures.
+  The current 65-case manifest's root-selection expansion remains owned by `.9.1.1.2.3`. The inventory
   contracts to 66 files with all 34 mutations. Canonical signoff repeats Perl admission 288, reference primary
   63x2, and Phase 0 1,031/1,031 in 627 seconds; only composed admission remains `.6`.
   This remains alongside `.5`'s

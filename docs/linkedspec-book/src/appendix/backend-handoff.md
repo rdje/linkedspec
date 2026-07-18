@@ -881,7 +881,7 @@ Julia `.5.2.5` preserves its typed eager `_runtime_truthy` seam, rejects all fou
 and proves native, normalized, generated-plan, compiled emitted, and primary roles with optional exact diagnostic
 fields. Lua `.5.2.6` aligns `runtime_truthy` and pre-effect arity across native, reconstructed, generated-plan,
 loaded emitted-module, and primary roles on PUC Lua and LuaJIT. Its expanded consumer passes 359/359 per ABI and
-the complete Lua gate remains 177/177 per ABI plus CLI 63x2 and corpus 105/105. Generated/primary `.5.2.7` proves
+the complete Lua gate at that boundary was 177/177 per ABI plus CLI 63x2 and corpus 105/105. Generated/primary `.5.2.7` proves
 every available direct/traced role across Perl, Rust, Dart, Julia, and Lua with exact values, eager effects,
 failure/source metadata, and trace identity. Rust retains the intentional typed direct-value versus compatibility-
 output-array signature. Shared case `success_logical_helpers_eager` passes all five commands in default and POSIX
@@ -2054,8 +2054,9 @@ with exact contract identities and `.spec` regeneration guidance.
 Dart's public execution boundary is now rule-local too. `LinkedSpecRuntimeEngine(compiled)`,
 `loaded.createEngine()`, corpus execution, and the staged function parser expose no caller-global mode. The
 primary command omits the option and request-trace field, while retired `--parse-mode` invocations return the
-exact structural-migration usage error. Complete Dart proof is 260 package tests, 63/63 primary cases in both
-environments, and 105/105 corpus fixtures. Canonical signoff passes Perl admission 288, reference primary 63x2,
+exact structural-migration usage error. Complete Dart cursor proof is 260 package tests, the then-63-case primary
+manifest in both environments, and 105/105 corpus fixtures. Root-selection leaf `.9.1.1.2.3` owns convergence to
+the current 65-case manifest. Canonical cursor signoff passed Perl admission 288, reference primary 63x2,
 and Phase 0 1,031/1,031 in 627 seconds; composed cursor admission remains the next Dart leaf.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40

@@ -45,8 +45,8 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite currently locks both help forms, 20 strict usage cases, nine success cases, four baseline operational
-failures, 20 canonical trace cases, and eight strict UTF-8 behavior cases on Perl. All 63 pass with
+The suite currently locks both help forms, 20 strict usage cases, eleven success cases, four baseline operational
+failures, 20 canonical trace cases, and eight strict UTF-8 behavior cases on Perl. All 65 pass with
 `POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
 UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/aliases, emoji, byte counts, field
 escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
@@ -54,9 +54,10 @@ ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at proc
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
 preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
 the reference. Rust `.1.5.2.4` historically closed reusable direct execution plus the then-current 61-case
-canonical trace projection. During the rule-local cursor migration, Perl owns the 63-case reference bytes and
-Rust now passes them unchanged in both environments after `.9.1.4.6`; later backend leaves own the remaining
-migrations. UTF-16/UTF-32 are not
+canonical trace projection. During the rule-local cursor migration, Perl established the 63-case reference bytes
+and Rust later passed them unchanged in both environments after `.9.1.4.6`. Root-selection admission advances the
+shared manifest reference-first to 65 cases: Perl owns the new first-marker and markerless-default bytes, while
+root-selection leaves `.9.1.1.2.2-.5` own the remaining backend migrations. UTF-16/UTF-32 are not
 implicit inputs.
 
 Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
@@ -80,10 +81,11 @@ bash tools/run_primary_cli_matrix.sh
 
 The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
 Lua native adapters in disposable temporary storage, and runs the shared manifest against Perl, Rust, Dart,
-Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The current
-rule-local cursor manifest has 63 cases: Perl, Rust, and Dart are current at 63/63, and subsequent backend leaves
-own Julia/Lua migration. A green 5x2x63 run remains the rollout target rather than the current cross-backend
-state.
+Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The later
+rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
+leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl is 65/65 in both
+environments; Rust, Dart, Julia, and Lua remain staged until `.9.1.1.2.2-.5`. A green 5x2x65 run is the final
+rollout target rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at
@@ -151,8 +153,8 @@ bash tools/run_rust_local.sh
 
 After gate hardening `.9.1.4.1`, it checks formatting, runs the complete `linkedspec-core` package, runs the
 complete `linkedspec-runtime` package (including the 105-fixture interpreter oracle, exhaustive generated
-classifier, and native trace controls), builds `linkedspec-rust`, then runs all 63 primary-command fixtures with
-`POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
+classifier, and native trace controls), builds `linkedspec-rust`, then runs every current primary-command fixture
+with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
 `LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
 
 Core runs first because dependency compilation never executes a dependency crate's own tests. Normalization
@@ -160,8 +162,9 @@ Core runs first because dependency compilation never executes a dependency crate
 tests. A separate three-test runtime integration locks the staged live boundary. Together they cover the parser/
 compiler/validation/descriptor/serialization and embedding paths central to the cursor rollout.
 
-After `.9.1.4.6`, the primary leg passes all 63 cases in default and POSIX environments. The retired flag returns
-the reference-owned targeted usage error and all eleven request-trace projections omit the legacy global field.
+The `.9.1.4.6` cursor boundary passed the then-63-case manifest in default and POSIX environments. The retired
+flag returns the reference-owned targeted usage error and all eleven cursor-era request-trace projections omit
+the legacy global field. Root-selection leaf `.9.1.1.2.2` owns Rust convergence to the current 65-case manifest.
 
 The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
 

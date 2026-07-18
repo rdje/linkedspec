@@ -368,6 +368,40 @@
       }
     },
     {
+      "id": "success_default_first_authored_marker",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Earlier:\n /x/ -> EarlierDone { return(\"earlier\") }\nEarlierDone: /x/\nMarked::\n /x/ -> MarkedDone { return(\"marked\") }\nMarkedDone: /x/\nLater::\n /x/ -> LaterDone { return(\"later\") }\nLaterDone: /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"marked\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_markerless_first_authored_rule",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "First:\n /x/ -> FirstDone { return(\"first\") }\nFirstDone: /x/\nSecond:\n /x/ -> SecondDone { return(\"second\") }\nSecondDone: /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"first\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
       "id": "success_default_rule_seeks",
       "family": "success",
       "args": [

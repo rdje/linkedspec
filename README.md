@@ -12,9 +12,11 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The executable neutral decision is complete at 1/7, with 24 drift mutations. No backend behavior changed: current
-Perl instead chooses the first parsed rule, Rust has marker-only defaults, and Dart/Julia/Lua fallbacks remain
-blocked by validation. Backend and public admission leaves `.1-.6` own that rollout.
+The neutral decision and composed Perl reference are complete at 2/7, with 24 drift mutations. Perl applies that
+order across native, loaded, generated, traced, diagnostic, descriptor, and primary-command routes; the expanded
+65-case shared primary manifest locks first-marker and markerless defaults beside explicit and unknown selection.
+Rust retains marker-only defaults, and Dart/Julia/Lua fallbacks remain blocked by validation. Backend and final
+public admission leaves `.2-.6` own the remaining rollout.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -589,18 +591,20 @@ content migration exists yet.
   accepted eight-case proof; Dart promotes and the live census is 59/0/1. Julia `.3.4.1` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, nine success (including quiet diagnostic
-  and eager logical helpers), four baseline failure, 20 canonical trace, and eight strict UTF-8 behavior cases.
-  Perl passes all 63 current cases. ADR `0025`
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, eleven success (including root-selection,
+  quiet diagnostic, and eager logical helpers), four baseline failure, 20 canonical trace, and eight strict UTF-8
+  behavior cases.
+  Perl passes all 65 current cases. ADR `0025`
   defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`. The later rule-local cursor migration has advanced the shared manifest to 63 cases:
-  Perl, Rust, and Dart are current at 63/63 in both environments; Julia and Lua remain owned by their subsequent
-  cursor leaves. The all-five
-  63x2 primary matrix is therefore the rollout target, not a current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
+  `tools/run_rust_local.sh`. The later rule-local cursor migration established the 63-case boundary on Perl, Rust,
+  and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl is
+  current at 65/65 in both environments, while Rust, Dart, Julia, and Lua remain owned by `.9.1.1.2.2-.5` before
+  final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not a
+  current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution `.1.6.4`, Dart full-
   pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
@@ -611,13 +615,14 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
-  packages, and both 63-case primary-command environments. After `.9.1.4.6`, the focused gate passes all 63
-  cases with `POSIXLY_CORRECT` unset and set.
+  packages, and both shared primary-command environments. Its last admitted cursor boundary is 63/63 in each
+  environment; root-selection leaf `.9.1.1.2.2` owns convergence to the current 65-case manifest.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
-- Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both exact 63-case primary-command
-  environments on PUC Lua, and complete 105-fixture corpus execution.
+- Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both shared primary-command
+  environments on PUC Lua, and complete 105-fixture corpus execution. Root-selection leaf `.9.1.1.2.5` owns
+  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
   `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary

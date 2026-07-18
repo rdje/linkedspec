@@ -267,7 +267,7 @@
   ],
   "rollout": [
     {"id": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.0"},
-    {"id": "perl_reference", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"},
+    {"id": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"},
     {"id": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.2"},
     {"id": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.3"},
     {"id": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.4"},

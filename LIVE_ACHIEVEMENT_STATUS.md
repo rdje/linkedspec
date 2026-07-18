@@ -8,9 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 — admit Perl root selection**
+  (DONE — complete implementation/admission and canonical proof pass; clean commit is the only remaining boundary
+  before Rust `.2`).
+
+  **Result:** The shared primary manifest adds exact first-authored-marker and markerless-first-rule default cases
+  beside existing explicit ordinary, unknown-selector, default request-trace, and escaped explicit trace cases.
+  Root governance now topology-locks neutral selection/failure/strict consumption, loaded/SpecLoader/generated/
+  metadata/configured-failure/effective-trace routes, canonical registration, and exact primary/trace sources and
+  expected bytes. `TOOLBOX.md`, README, capability docs, mdBook, and Knowledge Map state the admitted Perl versus
+  staged later-backend boundary without rewriting historical 63-case cursor evidence.
+
+  **Proof:** Focused root/generated/CLI proof passes 5 files / 27 tests; primary passes 65/65 with
+  `POSIXLY_CORRECT` unset and set. The root checker rejects 24 mutations at 2 complete / 5 pending, advancing only
+  `perl_reference`; Knowledge Map is 598/4,277. Canonical CI passes all four doctrines, root core 7, routes 5,
+  cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 611 seconds before exit 0. Book, memory, task,
+  syntax, whitespace, and artifact cleanup pass. Perl parent `.9.1.1.2.1` is closed.
+
+  **Next:** Commit `.1.3` cleanly, clear the brief, verify a clean tree, then activate Rust root-selection `.2`
+  task-tree-first. Rust, Dart, Julia, Lua, and final public admission remain pending; rollout is 2/7.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 — converge Perl root execution**
-  (DONE — loaded/generated/runtime-context/trace/diagnostic convergence and canonical proof pass; clean commit is
-  the only boundary before `.1.3`).
+  (DONE at clean commit `2e175103` — loaded/generated/runtime-context/trace/diagnostic convergence and canonical
+  proof pass; `.1.3` is active).
 
   **Result:** Generated v2 source preserves ordered authored `{label,is_top}` identity separately from its
   unchanged minimal `{label,family}` plan. Generated `Execute`, `ExecuteWithTrace`, and `Get` resolve configured
@@ -24,8 +44,8 @@ Current execution status for interruption-safe batch workflow recovery.
   whitespace, and cleanup pass. Canonical CI passes the route consumer 5, cursor admission 288, reference primary
   63x2, and Phase 0 1,031/1,031 in 610 seconds.
 
-  **Next:** Commit `.9.1.1.2.1.2`, clear/verify the brief and clean tree, then activate composed Perl admission
-  `.9.1.1.2.1.3` task-tree-first. Rollout remains 1 complete / 6 pending until that admission leaf closes.
+  **Next:** `.9.1.1.2.1.3` is active for neutral-route topology, reference-first CLI bytes, public/toolbox
+  correction, Perl rollout promotion, and parent closeout. Rollout remains 1 complete / 6 pending until it closes.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 — implement Perl root resolution**
   (DONE at clean commit `f33d6d24` — exact core precedence, markerless validation, authored descriptor identity,

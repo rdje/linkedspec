@@ -2,8 +2,8 @@
 id: perl-root-rule-selection-preflight
 title: "Perl root selection loses authored marker identity between bootstrap tokens and compiled metadata"
 answers:
-  - "where does Perl currently select the root rule"
-  - "why does Perl choose an ordinary rule before a later Rule:: marker"
+  - "where did Perl select the root rule before root-selection implementation"
+  - "why did Perl choose an ordinary rule before a later Rule:: marker"
   - "where does Perl preserve Rule:: during bootstrap parsing"
   - "does the Perl descriptor expose authored is_top"
   - "does Perl generated source preserve authored root markers"
@@ -13,16 +13,18 @@ answers:
   - "which Perl leaves own root selection implementation"
   - "how will shared CLI root selection fixtures migrate"
 date: 2026-07-18
-status: confirmed pre-implementation map; behavior remains unchanged through FUTURE-PARITY-BACKLOG.9.1.1.2.1.0
+status: historical pre-implementation map; superseded by core, routes, and admission cards
 tags: [perl, root-rule, top-rule, bootstrap, validation, descriptor, generated-source, strict-syntax, cli, FUTURE-PARITY-BACKLOG]
 evidence: "Read-only TOOLBOX probes and exact owner retrieval under `.9.1.1.2.1.0` establish the complete pre-edit path. `validate_spec_content` rejects a one-or-more-rule markerless source. Bootstrap preserves definition order and emits `ELABEL` for `Rule:` plus `ELABEL_INITIAL` for every `Rule::`. RuleIR temporarily records the marker, but SpecEntry metadata omits authored `is_top`; Compiler then sets the effective label to explicit `top_rule` or parsed row zero. The descriptor preserves definition order but has no per-rule `is_top`. Generated-source v2 preserves only label/family plan rows and hardcodes the compiler-selected label in direct and traced execution. An unknown explicit selector compiles and fails only when the returned parser resolves its handler, at `resolve_top_rule_handler` without the target portable code. Direct `Validation::validate_dsl_syntax(..., strict_syntax => 1)` still computes defined minus authored-edge references and rejects an unreferenced marked Top, while `LinkedSpec::Get(strict_syntax => 1)` does not forward that option to the validator. The dependency-safe rollout is `.1.1` validation/resolver/metadata, `.1.2` loaded/generated/trace/diagnostic routes, then `.1.3` composed admission and reference-first shared CLI bytes."
 evidence_update_2026_07_18_signoff: "Focused existing root CLI cases pass 2/2 in default and POSIX environments; generated-source proof passes 6/6. Root checker remains 8/3/3/5 at 1/6 with 24 mutations. Knowledge Map is 595/4,248; canonical CI passes cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 632 seconds."
-reverify: "perl -Iperl -MLinkedSpec -MLinkedSpec::BootstrapSpec -MLinkedSpec::Validation -e 'my $s=qq{Earlier:\\n /a/\\nMarked::\\n /b/\\n}; my ($ok,$p)=LinkedSpec::BootstrapSpec::run_bootstrap_parse(\\$s); print join(q{,}, map { $_->[0][0] } @$p), qq{\\n}; my %ctx; LinkedSpec::Get(\\$s, runtime_ctx_ref=>\\%ctx); print qq{$ctx{top_rule}\\n}' ; rg -n \"found_top_rule|ELABEL_INITIAL|selected_top_rule|top_rule_literal|strict_syntax\" perl/LinkedSpec/Validation.pm perl/LinkedSpec/RuleIR.pm perl/LinkedSpec/Compiler.pm"
+superseded_by: "[[perl-root-rule-selection-core]], [[perl-root-rule-selection-routes]], and [[perl-root-rule-selection-admission]] describe current behavior."
+reverify: "git show 2e01e13b:perl/LinkedSpec/Validation.pm | rg 'found_top_rule|top rule'; git show 2e01e13b:perl/LinkedSpec/Compiler.pm | rg 'selected_top_rule|top_rule_literal'"
 ---
 
 # Perl root-selection seam map
 
-The current path has four distinct identities that must not be collapsed:
+The pre-implementation path at clean commit `2e01e13b` had four distinct identities that were not to be
+collapsed:
 
 1. `Validation::validate_spec_content` recognizes at least one rule but separately requires at least one authored
    `::`. This is the only block on the markerless fallback; comment-only or zero-rule input already fails first.
@@ -42,7 +44,7 @@ The current path has four distinct identities that must not be collapsed:
 `--top-rule` at compile time. Its medium request trace correctly records the requested label or `<default>` before
 compilation; runtime context and handler trace currently use the compiler's effective label.
 
-Unknown explicit selection is late today. Compilation and descriptor return can succeed with a missing requested
+Unknown explicit selection was late at that boundary. Compilation and descriptor return could succeed with a missing requested
 label. Only parser invocation discovers that no descriptor row exists, records `runtime_parser` /
 `resolve_top_rule_handler`, and dies without `entry_rule_not_found` or `select_entry_rule`. The primary command still
 normalizes that die to exit 1 and `linkedspec: parser invocation failed`, which the target preserves while improving

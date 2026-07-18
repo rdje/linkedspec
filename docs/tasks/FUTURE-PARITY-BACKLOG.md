@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Perl loaded/generated/runtime-context/trace convergence `.9.1.1.2.1.2` is complete
-  and canonically verified; clean commit is the boundary before composed admission `.1.3`)
+- Last updated: `2026-07-18` (composed Perl root-selection admission `.9.1.1.2.1.3` and parent `.1` are complete
+  with canonical proof; clean commit is the boundary before Rust `.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3304,8 +3304,8 @@ before implementation.
     error, authored `is_top` metadata remains source identity rather than dynamic selection state, and every
     compiler, validator, runtime, loaded/generated route, strict-unused check, descriptor, trace, CLI, neutral
     fixture, backend, and mdBook statement must agree.
-  Verification: **ACTIVE 2026-07-18 at 1/7 rollout.** Neutral decision `.0` is done with canonical signoff;
-    backend behavior remains owned by `.1-.5` and composed admission by `.6`.
+  Verification: **ACTIVE 2026-07-18 at 2/7 rollout.** Neutral decision `.0` and composed Perl reference `.1` are
+    done with canonical signoff; Rust/Dart/Julia/Lua remain `.2-.5` and final composed admission remains `.6`.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.0`
@@ -3330,15 +3330,23 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.0 - ratify root rule selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement root-selection precedence on the Perl reference.
   Dependencies: `.9.1.1.2.0`
   Children: `.9.1.1.2.1.0`, `.9.1.1.2.1.1`, `.9.1.1.2.1.2`, `.9.1.1.2.1.3`
   Acceptance: Make validation, compilation, `Get`/`get_parser`, generated source, trace/diagnostics, strict checks,
     and the primary command consume the neutral contract; add focused and Phase 0 proof without compatibility
     guessing or changing ordinary rule execution.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** Leaves `.0-.3` map, implement, converge, and admit one exact Perl reference.
+    Markerless validation, ordered explicit/first-marker/first-rule resolution, immutable authored identity,
+    descriptor/generated metadata, loaded/reconstructed/generated direct/traced/Get execution, structured
+    diagnostics, runtime/request trace, strict-unused no-drift, and primary bytes all consume the neutral contract.
+    The topology-checked core/routes pair passes 12 tests; focused root/generated/CLI proof passes 5 files / 27
+    tests; the shared primary manifest passes 65/65 twice. Root governance rejects 24 mutations at 2 complete / 5
+    pending. Knowledge Map is 598/4,277; book, memory, task, all four doctrines, syntax, whitespace, and cleanup
+    pass. Canonical CI repeats root core 7, routes 5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in
+    611 seconds before exit 0. No non-Perl rollout row or runtime implementation changed.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 - admit Perl root selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0`
   Status: `done`
@@ -3434,15 +3442,45 @@ before implementation.
     cleanup, and memory before the clean commit; leave rollout promotion and shared CLI admission to `.1.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Admit the complete Perl root-selection contract and reference primary bytes.
   Dependencies: `.9.1.1.2.1.2`
   Acceptance: Add one topology-checked Perl consumer for all neutral routes and failures; migrate shared CLI cases
     reference-first for marker/markerless/default/explicit/unknown behavior; advance only the Perl rollout row;
     update live docs/mdBook and correct the stale marker-required entry-model sentence in `TOOLBOX.md`; pass
-    focused, 63x2 primary, Phase 0, and canonical signoff; close parent `.1`.
-  Verification: `pending`
-  Commit: `pending`
+    focused, 65x2 primary, Phase 0, and canonical signoff; close parent `.1`.
+  Verification: **PASS 2026-07-18.** The shared manifest adds exact first-marker and markerless-default cases
+    beside explicit ordinary, unknown-selector, default request-trace, and escaped explicit trace boundaries. Perl
+    passes all 65 exact cases with `POSIXLY_CORRECT` unset and set. The independent checker now requires the
+    neutral selection/failure/strict core consumer, loaded/SpecLoader/generated/metadata/configured-failure/trace
+    routes consumer, canonical registration, and exact CLI/trace topology; it rejects all 24 mutations and advances
+    only `perl_reference`, reaching 2 complete / 5 pending. Focused root/generated/CLI proof passes 5 files / 27
+    tests; Knowledge Map is 598/4,277; capability/docs/toolbox/book/live/memory/task/doctrine/whitespace/cleanup
+    lockstep passes. Canonical CI passes root core 7, routes 5, cursor admission 288, primary 65x2, and Phase 0
+    1,031/1,031 in 611 seconds, then exits 0. Parent `.1` closes; Rust `.2` is next only after the clean commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 - admit Perl root selection`
+
+  #### Acceptance checklist
+
+  - [x] **REPRODUCE / ISSUE** — Knowledge Map plus canonical runner prove the existing explicit/unknown/default-
+    request/failure-trace cases 4/4 in both default and POSIX environments. Exact candidate primary probes return
+    `"marked"` for earlier ordinary + two markers and `"first"` for markerless two-rule source. Yet the shared
+    manifest has only explicit/unknown root cases, the root checker topology requires only the explicit case, the
+    rollout stays 1/6, and `TOOLBOX.md` still says a `.spec` requires `::`.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — No remaining Perl engine/adapter defect: `bin/linkedspec` forwards
+    `top_rule`, delegates omission to the compiled resolver, preserves request trace, and normalizes unknown
+    invocation failure correctly. Drift is admission-only: `cli_conformance/manifest.json` lacks first-marker and
+    markerless-default bytes; `tools/check_root_rule_selection_contract.py` does not topology-check those cases or
+    the complete core/routes consumers; capability rollout/public text remain deliberately pending/stale.
+  - [x] **FIX** — Compose one topology-checked Perl admission consumer plus reference-first shared CLI cases for
+    marker, markerless, default, explicit, and unknown selection; correct only the owned public/toolbox drift and
+    advance only the Perl rollout row.
+  - [x] **ADDRESSED (verified)** — Prove every neutral Perl route/failure and exact primary stdout/stderr/exit/
+    request-trace byte case through recurring focused and canonical gates, then close parent `.1`.
+  - [x] **NO REGRESSION** — Focused Perl/root/generated/CLI suites, primary 65x2, Phase 0, neutral
+    checkers, mdBook, and canonical CI pass with no backend rollout change beyond Perl.
+  - [x] **LOCKSTEP** — Update capability inventory/rollout, `TOOLBOX.md`, mdBook, Knowledge Map, task/live docs,
+    recurring CI, cleanup, and memory before the clean commit; leave Rust and later backend leaves pending.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2`
   Status: `pending`
@@ -7057,13 +7095,13 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `active` | Cursor/edge design is complete; root-selection subtree `.2` now owns the directed precedence correction. |
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
-| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `active` | ADR `0046` makes exact precedence executable at 1/7; five-backend and public rollout remains `.1-.6`. |
+| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `active` | ADR `0046` and Perl are complete at 2/7; Rust/Dart/Julia/Lua and final admission remain `.2-.6`. |
 | 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `done` | ADR `0046`, exact 8/3/3 cases, 5-backend audit, 24 mutations, mdBook, and canonical proof are complete without behavior. |
-| 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `active` | Perl rollout is split into preflight, core/descriptor, generated/trace, and composed admission leaves. |
+| 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `done` | All Perl preflight, core/descriptor, generated/trace, and composed 65-case admission leaves pass canonical proof. |
 | 212.2.1.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` | `done` | Exact Perl validation/bootstrap/selection/descriptor/generated/strict/CLI seams and safe `.1-.3` order are durably mapped without behavior. |
 | 212.2.1.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` | `done` | Markerless validation, exact resolver/default, structured unknown failure, strict no-drift, and authored marker metadata pass canonical proof. |
 | 212.2.1.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` | `done` | Loaded/generated direct/traced/Get, runtime context, effective diagnostics/trace, metadata, and canonical proof pass. |
-| 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `pending` | Compose Perl admission, shared reference CLI bytes, docs, rollout, and parent closeout. |
+| 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `done` | Topology-checked Perl admission, 65x2 reference bytes, docs, rollout, and parent closeout pass. |
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `pending` | Implement exact Rust core/runtime/generated/primary selection. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
 | 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
@@ -8168,6 +8206,16 @@ Read-only evidence recorded on 2026-07-10:
   Focused proof is 8 files / 49 tests; Knowledge Map is 597/4,269; root/generated governance, mdBook, doctrines,
   cleanup, reference primary 63x2, cursor admission 288, and canonical Phase 0 1,031/1,031 in 610 seconds pass.
   Rollout correctly remains 1/6 until `.1.3` composes shared CLI/public admission.
+- `2026-07-18`: Clean commit `2e175103` lands Perl root execution convergence `.9.1.1.2.1.2`; tracked/untracked
+  state is clean and `git_message_brief.txt` is zero bytes. Composed Perl admission `.1.3` activates task-tree-first
+  for exact neutral-route topology, reference-first CLI bytes, public/toolbox correction, Perl rollout promotion,
+  and parent closeout.
+- `2026-07-18`: Composed Perl root-selection admission `.9.1.1.2.1.3` adds exact first-marker and markerless-
+  default shared primary bytes, topology-locks the complete core/routes consumers and canonical registration,
+  corrects public/toolbox/current-manifest drift, and advances only `perl_reference` to 2/7. Focused proof passes
+  5 files / 27 tests; primary passes 65/65 twice; Knowledge Map is 598/4,277; canonical CI passes root 7+5, cursor
+  admission 288, and Phase 0 1,031/1,031 in 611 seconds. Perl parent `.1` closes; the clean commit is the required
+  boundary before Rust `.2`.
 - `2026-07-18`: Root-selection neutral decision `.9.1.1.2.0` completes ADR `0046` and
   `linkedspec-root-rule-selection-v1` without backend behavior. Full audit distinguishes Perl row-zero default,
   Rust marker-only routes, and Dart/Julia/Lua unreachable fallbacks; selection remains separate from authored

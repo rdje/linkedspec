@@ -427,11 +427,12 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 1 complete / 6 pending. The current Perl library
-implements the exact order across native, loaded, generated-direct, generated-traced, and generated `Get` routes.
-Rust requires and selects a marker, and Dart/Julia/Lua validation still blocks their existing markerless runtime
-fallback. Use an explicit selector and retain a marker when current multi-backend execution must be independent of
-those staged differences.
+has no marker, select the first authored rule. That contract is at 2 complete / 5 pending. The composed Perl
+reference implements the exact order across native, loaded, generated-direct, generated-traced, generated `Get`,
+and primary-command routes; the shared 65-case CLI manifest locks first-marker, markerless, explicit, unknown, and
+request-trace outcomes. Rust requires and selects a marker, and Dart/Julia/Lua validation still blocks their
+existing markerless runtime fallback. Use an explicit selector and retain a marker when current multi-backend
+execution must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -453,7 +454,7 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. Perl library routes now accept this shape;
+With no `::`, the accepted default is simply the first declared rule. Perl reference routes now accept this shape;
 other backends still require a marker, so it is not yet a portable cross-backend source:
 
 ```text
