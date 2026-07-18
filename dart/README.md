@@ -117,16 +117,19 @@ priority over any authored `Rule::` and may select an ordinary `Rule:`; the
 primary CLI regression suite locks that precedence. Core leaf `.9.1.1.2.3.1`
 also accepts markerless one-or-more-rule sources and selects their first authored
 rule. Neutral/five-backend rollout remains tracked under
-`FUTURE-PARITY-BACKLOG.9.1.1.2` until Dart's composed routes and admission land. Canonical medium
+`FUTURE-PARITY-BACKLOG.9.1.1.2` until Dart's topology admission lands. Canonical medium
 request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
 Core/descriptor leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: one compiled resolver applies explicit
 selector > first authored marker > first authored rule before user code; validation accepts markerless sources,
 zero/unknown selection failures use the portable stages and codes, and descriptors retain immutable authored
-`is_top` facts plus the root-selection contract identity. Dart now passes 266 package tests, the shared 65-case
-primary suite in default and POSIX environments, and 105/105 corpus fixtures. Composed loaded/generated/emitted/
-trace proof remains `.3.2`, followed by topology/reference admission `.3.3`; Dart is not yet counted as admitted.
+`is_top` facts plus the root-selection contract identity. Route leaf `.9.1.1.2.3.2` now proves loaded and
+normalized-JSON reconstructed state plus generated and fresh emitted direct/traced execution reuse that resolver.
+Low trace records requested/effective/basis, route failures keep portable zero/unknown fields, stale generated
+contract validation remains first, and generated v2/format 2 identity plus its minimal family plan are unchanged.
+Dart now passes 269 package tests, the shared 65-case primary suite in default and POSIX environments, and 105/105
+corpus fixtures. Topology/reference admission remains `.3.3`; Dart is not yet counted as admitted.
 
 ## Status
 

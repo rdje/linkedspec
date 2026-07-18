@@ -195,7 +195,15 @@ void main() {
         ),
       );
       expect(validationFailure.stage, SpecPipelineStage.validateSpec);
-      expect(validationFailure.code, SpecPipelineCode.specValidationFailed);
+      expect(validationFailure.code, SpecPipelineCode.noRulesDefined);
+      expect(
+        validationFailure.toJson(),
+        containsPair('code', 'no_rules_defined'),
+      );
+      expect(
+        validationFailure.toJson(),
+        containsPair('stage', 'validate_spec'),
+      );
 
       final missing = _pipelineFailure(
         () => resolveSpec(

@@ -202,9 +202,10 @@ plan or rewrites descriptor `is_top`. Typed zero/unknown generated failures reta
 `validate_spec` and `entry_rule_not_found` / `select_entry_rule`, while stale generated v1 artifacts still fail at
 their earlier contract boundary. One omission-sensitive 15-role Rust consumer topology-locks all neutral/native/
 loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary roles, and exact primary proof is 65x2.
-Dart core now accepts markerless sources, applies the same resolver in native/primary execution, reports portable
-zero/unknown failures, and publishes immutable descriptor identity; composed route proof and admission remain
-`.9.1.1.2.3.2-.3`. Julia and Lua still contain an unreachable markerless fallback behind marker-required
+Dart accepts markerless sources and applies the same resolver across native, loaded/reconstructed,
+generated/emitted direct/traced, and primary execution. It reports portable zero/unknown failures, publishes
+immutable descriptor identity, retains generated v2/format-2 identity, and traces the selection basis; topology
+admission remains `.9.1.1.2.3.3`. Julia and Lua still contain an unreachable markerless fallback behind marker-required
 validation. Until `.3.2-.6` close, use at least one `::` for portable cross-backend execution and pass an explicit
 selector when its identity matters.
 
@@ -1021,8 +1022,8 @@ accept bare-keyword form in addition to parenthesized form.
 A valid `.spec` file must satisfy the following current portable checks. Item 1 distinguishes the implemented Perl
 and Rust envelopes from the temporary cross-backend boundary while `.9.1.1.2.2-.6` roll out:
 
-1. At least one rule exists. Perl, Rust, and Dart validation/native/primary execution accept a markerless file;
-   Dart composed-route admission is still pending, while Julia and Lua still require at least one marked rule
+1. At least one rule exists. Perl, Rust, and Dart validation plus native/composed execution accept a markerless
+   file; Dart topology admission is still pending, while Julia and Lua still require at least one marked rule
    (`::`). Use a marker until the remaining rollout closes when portable cross-backend execution matters. A
    zero-rule executable spec is always invalid.
 2. Every rule label is unique. Duplicate labels are rejected.

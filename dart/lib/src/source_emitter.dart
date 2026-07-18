@@ -39,6 +39,8 @@ enum GeneratedSourceStage {
   emitSource('emit_source'),
   compileOrLoadGeneratedSource('compile_or_load_generated_source'),
   validateGeneratedPlan('validate_generated_plan'),
+  validateSpec('validate_spec'),
+  selectEntryRule('select_entry_rule'),
   executeGenerated('execute_generated');
 
   const GeneratedSourceStage(this.wireName);
@@ -57,6 +59,8 @@ enum GeneratedSourceCode {
   generatedSourceContractVersionMismatch(
     'generated_source_contract_version_mismatch',
   ),
+  noRulesDefined('no_rules_defined'),
+  entryRuleNotFound('entry_rule_not_found'),
   generatedExecutionFailed('generated_execution_failed');
 
   const GeneratedSourceCode(this.wireName);
@@ -71,6 +75,7 @@ final class GeneratedSourceException implements Exception {
     required this.code,
     required this.summary,
     required this.sourceIdentity,
+    this.entryRule,
     this.ruleLabel,
     this.handlerFamily,
     this.detail,
@@ -126,6 +131,7 @@ final class GeneratedSourceException implements Exception {
   final GeneratedSourceCode code;
   final String summary;
   final String sourceIdentity;
+  final String? entryRule;
   final String? ruleLabel;
   final String? handlerFamily;
   final String? detail;
@@ -139,6 +145,7 @@ final class GeneratedSourceException implements Exception {
       'code': code.wireName,
       'summary': summary,
       'source_identity': sourceIdentity,
+      if (entryRule != null) 'entry_rule': entryRule,
       if (ruleLabel != null) 'rule_label': ruleLabel,
       if (handlerFamily != null) 'handler_family': handlerFamily,
       if (detail != null) 'detail': detail,
@@ -625,7 +632,33 @@ GeneratedSourceException _generatedExecutionFailure(
   String? topRule,
   String? ruleLabel,
 }) {
-  final effectiveRule = ruleLabel ?? topRule ?? _topRuleLabel(compiled);
+  if (error is RuntimeInterpreterException) {
+    final diagnostic = error.diagnostic;
+    if (diagnostic?.code == 'no_rules_defined' ||
+        diagnostic?.code == 'entry_rule_not_found') {
+      return GeneratedSourceException(
+        stage: diagnostic!.stage == 'validate_spec'
+            ? GeneratedSourceStage.validateSpec
+            : GeneratedSourceStage.selectEntryRule,
+        code: diagnostic.code == 'no_rules_defined'
+            ? GeneratedSourceCode.noRulesDefined
+            : GeneratedSourceCode.entryRuleNotFound,
+        summary: 'Generated Dart parser entry-rule selection failed',
+        sourceIdentity: sourceIdentity,
+        entryRule: diagnostic.entryRule,
+        ruleLabel: diagnostic.ruleLabel,
+        detail: diagnostic.detail,
+      );
+    }
+  }
+  String? effectiveRule = ruleLabel;
+  if (effectiveRule == null) {
+    try {
+      effectiveRule = compiled.resolveEntryRule(topRule).rule.label;
+    } on EntryRuleSelectionException {
+      effectiveRule = topRule;
+    }
+  }
   return GeneratedSourceException.executionFailed(
     sourceIdentity,
     error,
@@ -634,17 +667,6 @@ GeneratedSourceException _generatedExecutionFailure(
         ? null
         : validatedPlan[effectiveRule]?.wireName,
   );
-}
-
-String? _topRuleLabel(CompiledSpec compiled) {
-  for (final label in compiled.compiledRuleOrder) {
-    if (compiled.rulesByLabel[label]!.header.isTop) {
-      return label;
-    }
-  }
-  return compiled.compiledRuleOrder.isEmpty
-      ? null
-      : compiled.compiledRuleOrder.first;
 }
 
 String _dartStringLiteral(String value) {

@@ -1,5 +1,37 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 — converge Dart root routes
+
+Dart loaded and normalized-JSON reconstructed state now has explicit route proof for the one compiled root
+resolver. Default execution selects the first authored marker or, for markerless source, the first authored rule;
+an invocation-local explicit selector still wins. Every route preserves definition order, authored `is_top`, and
+descriptor JSON rather than turning the effective selection into source identity.
+
+Generated direct/traced execution and a fresh isolated emitted package now prove the same marker/default/explicit
+precedence. The public generated entrypoints already accepted an optional `topRule`, so no API sibling, generated
+contract bump, or family-plan widening was necessary: artifacts remain `linkedspec-generated-source-v2` / format
+2 with only the existing ordered label/family plan rows. Contract and plan validation still precede root
+selection, so a stale v1 request fails at the established generated boundary before a zero/unknown selector can
+run.
+
+The runtime emits a low-level `dart_runtime:entry_rule_selection` decision containing requested selector,
+effective rule, and `explicit_selector`, `first_authored_marker`, or `first_authored_rule` basis. Selection failure
+records retain the requested selector and portable stage/code. Loaded zero-rule validation now preserves exact
+`no_rules_defined` / `validate_spec`, and generated execution projects exact `no_rules_defined` /
+`validate_spec` or `entry_rule_not_found` / `select_entry_rule` instead of wrapping those failures as generic
+generated execution errors. Other runtime failures keep their established generic wrapper.
+
+One route-focused consumer locks loaded/reconstructed identity, generated/emitted direct and traced behavior,
+portable failures, and stale-contract ordering. Focused route/owner proof passes 86+14 tests. The complete Dart
+gate passes format 59/0, analyzer, package 269/269, shared primary 65/65 in default and POSIX environments, and
+105/105 corpus fixtures. This leaf deliberately does not add the topology admission object or promote Dart:
+admission `.3.3` remains pending, so root-selection rollout stays 3 complete / 4 pending.
+
+Canonical signoff passes all four doctrines, root governance with 29 rejected mutations, Perl root consumers
+7+5, cursor admission 288, reference primary 65/65 twice, and Phase 0 1,031/1,031 in 628 seconds. The mdBook
+builds, Knowledge Map closes at 606 facts / 4,360 question keys, and safe cleanup removes the generated 11 MiB
+book plus Python bytecode cache. Required Dart package state and the clean Rust target baseline remain intact.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution
 
 Dart core now implements `linkedspec-root-rule-selection-v1`. Validation accepts every one-or-more-rule source

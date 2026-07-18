@@ -55,6 +55,7 @@ enum SpecPipelineCode {
   specReadFailed('spec_read_failed'),
   invalidUtf8('invalid_utf8'),
   specParseFailed('spec_parse_failed'),
+  noRulesDefined('no_rules_defined'),
   specValidationFailed('spec_validation_failed'),
   specCompileFailed('spec_compile_failed');
 
@@ -297,7 +298,9 @@ LoadedCompiledSpec _loadAndCompileSpec(
     throw _error(
       request,
       stage: SpecPipelineStage.validateSpec,
-      code: SpecPipelineCode.specValidationFailed,
+      code: error.diagnostic?.code == 'no_rules_defined'
+          ? SpecPipelineCode.noRulesDefined
+          : SpecPipelineCode.specValidationFailed,
       summary: 'Spec validation failed',
       resolvedPath: loaded.resolved.file.path,
       detail: error.message,

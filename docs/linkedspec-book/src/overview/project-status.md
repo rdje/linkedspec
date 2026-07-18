@@ -11,10 +11,12 @@ Perl and Rust backends implement native, loaded/reconstructed, generated-direct/
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
 marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
 markerless, explicit/unknown, and request-trace outcomes. Rust additionally has one topology-checked 15-role
-consumer that executes every declared admission role exactly once. Dart core `.9.1.1.2.3.1` now accepts markerless
+consumer that executes every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
 one-or-more-rule sources, resolves explicit > first marker > first rule once before user code, reports portable
-zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Its
-composed route proof and topology admission remain `.3.2-.3`; Julia, Lua/LuaJIT, and final composed five-backend
+zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Route
+leaf `.3.2` now proves loaded/normalized and generated/emitted direct/traced reuse, low
+requested/effective/basis trace, portable failures, unchanged generated-v2 identity, and contract-first rejection.
+Its topology admission remains `.3.3`; Julia, Lua/LuaJIT, and final composed five-backend
 admission remain `.4-.6`. The backend-neutral rollout therefore remains 3 complete / 4 pending.
 
 ## Completed phases
@@ -242,10 +244,12 @@ Three backbone items tracked major structural modernization — all done:
   identities and regeneration guidance. Public option/CLI `.9.1.5.5` now removes engine, loader, corpus, staged-
   parser, help, execution, and request-trace global state; `--parse-mode` returns the targeted usage error. Dart
   passed 260 package tests, the then-63-case primary manifest in both environments, and 105/105 corpus fixtures.
-  Root-selection core `.9.1.1.2.3.1` now removes the preflight's marker-required validation block, preserves an
+  Root-selection core `.9.1.1.2.3.1` removes the preflight's marker-required validation block, preserves an
   empty/comment-only parser envelope for portable zero-rule validation, applies one ordered resolver before user
   code, publishes the root descriptor identity without rewriting `is_top`, and passes 266 package tests plus
-  65/65 primary cases twice and 105/105 corpus fixtures. Routes/admission remain `.3.2-.3`. The inventory
+  65/65 primary cases twice and 105/105 corpus fixtures. Route `.3.2` now proves loaded/normalized and
+  generated/emitted direct/traced composition, portable diagnostics, low selection basis trace, and unchanged
+  generated v2 identity; package proof reaches 269. Topology admission remains `.3.3`. The inventory
   contracts to 66 files with all 34 mutations. Canonical signoff repeats Perl admission 288, reference primary
   63x2, and Phase 0 1,031/1,031 in 627 seconds; only composed admission remains `.6`.
   This remains alongside `.5`'s

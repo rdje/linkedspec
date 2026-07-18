@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart core/descriptor `.9.1.1.2.3.1` is fully signed off and ready for its prepared
-  commit; composed route convergence remains `.3.2` and rollout stays 3/7)
+- Last updated: `2026-07-18` (Dart composed root routes `.9.1.1.2.3.2` are fully signed off and ready for their
+  prepared commit; topology admission `.3` remains next and rollout stays 3/7)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3750,14 +3750,36 @@ before implementation.
     governance and canonical CI, safely clean artifacts, commit `.1`, clear the brief, and only then activate `.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Dart loaded, normalized/reconstructed, generated/emitted, trace, and diagnostic root-selection routes.
   Dependencies: `.9.1.1.2.3.1`
   Acceptance: Make every composed route reuse the ordered resolver with invocation-local explicit selection;
     preserve generated contract and descriptor identity; attribute trace/failures to the effective rule; and keep
     stale-format rejection at its existing contract boundary.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused route/owners 86+14; Dart format 59/0, analyzer, package 269, primary 65x2, corpus 105;
+    root 29; KM 606/4,360; mdBook; all four doctrines; canonical Perl root 7+5, cursor 288, reference primary
+    65x2, Phase 0 1,031/1,031 in 628 seconds; safe cleanup all pass
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 - converge Dart root routes`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVE / ROUTE MAP** — Re-read Dart preflight/core facts, neutral projections, admitted Perl/Rust route
+    precedent, and exact loader/normalized/generated/emitted/trace/diagnostic owners and tests before behavior edits.
+  - [x] **LOADED / RECONSTRUCTED** — Prove file-loaded and normalized-JSON reconstructed state preserves ordered
+    authored markers and reuses the compiled resolver for default marker, markerless fallback, and invocation-local
+    explicit selection without descriptor mutation.
+  - [x] **GENERATED / EMITTED** — Prove generated direct/traced and fresh emitted-source direct/traced execution
+    applies the same precedence without changing generated-source v2/format 2 identity or its minimal family plan;
+    preserve existing default API signatures and add only necessary option-bearing siblings.
+  - [x] **TRACE / DIAGNOSTIC / ORDER** — Attribute runtime trace and execution failures to the effective selected
+    rule/basis, retain requested selector identity where required, return portable zero/unknown fields, and keep
+    generated contract/plan rejection ahead of entry selection.
+  - [x] **FOCUSED / DART LOCAL** — Add one route-focused Dart consumer; pass loader/normalized/emitter/trace/
+    diagnostic owners, generated governance, complete package/corpus, format/analyze, and primary 65x2 without
+    advancing Dart rollout or adding topology admission.
+  - [x] **LOCKSTEP / CANONICAL / COMMIT** — Card durable route facts, synchronize partial public/book/capability/
+    task/live/memory state, pass root governance and canonical CI, safely clean artifacts, commit `.2`, clear the
+    brief, prove clean, and only then activate Dart admission `.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3`
   Status: `pending`
@@ -7376,10 +7398,10 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `done` | Markerless validation, ordered native resolution, portable diagnostics, strict no-drift, and immutable descriptor identity pass Rust-local and canonical proof. |
 | 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `done` | Loaded/serde/generated/emitted routes, exact identities, Rust-local/canonical proof, durable marker repair, and cleanup pass. |
 | 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `done` | Exact 15-role topology, 29 mutations, Rust-local/canonical 65x2, public/KM lockstep, and cleanup admit Rust at 3/7. |
-| 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `active` | Dart root selection is split into preflight/core/routes/admission; `.0-.1` are done and composed routes `.2` are next after the clean core commit. |
+| 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `active` | Dart root selection is split into preflight/core/routes/admission; `.0-.2` are fully signed off and route `.2` awaits its prepared commit, after which admission `.3` is next. |
 | 212.2.3.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` | `done` | Exact 64/65x2, fallback/validation/failure/descriptor map, package 260, corpus 105, canonical proof, and cleanup pass without behavior. |
 | 212.2.3.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | `done` | Marker-optional core selection, portable failures, strict no-drift, descriptor identity, package 266, corpus 105, primary 65x2, and canonical signoff pass. |
-| 212.2.3.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` | `pending` | Converge loaded/normalized/generated/emitted/trace/diagnostic routes. |
+| 212.2.3.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` | `done` | Loaded/normalized/generated/emitted/trace/diagnostic routes, Dart-local/canonical proof, public/KM lockstep, and cleanup pass without rollout promotion. |
 | 212.2.3.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `pending` | Topology-check Dart, pass shared primary bytes, promote only Dart, and close parent `.3`. |
 | 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
 | 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `pending` | Implement exact PUC Lua/LuaJIT selection across native/generated/primary routes. |
@@ -8460,6 +8482,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart route `.9.1.1.2.3.2` is fully signed off: canonical CI passes all four doctrines, root
+  governance 29, Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 628 seconds.
+  Public/book/KM/task/live state agrees at KM 606/4,360; safe cleanup removes the generated 11 MiB book/cache.
+  Rollout stays 3/7 and topology admission `.3` follows only after the clean route commit.
+- `2026-07-18`: Dart route leaf `.9.1.1.2.3.2` converges loaded/normalized and generated/emitted direct/traced
+  execution on the one compiled resolver. Low trace records requested/effective/basis, generated failures preserve
+  portable zero/unknown stages and codes, stale contract rejection stays first, and v2/format 2 plus the minimal
+  family plan remain unchanged. Focused 86+14, package 269, primary 65x2, analyzer/format, and corpus 105 pass;
+  topology/admission `.3` remains pending and rollout stays 3/7.
+- `2026-07-18`: Clean commit `241a34f0` lands Dart core `.9.1.1.2.3.1`; tree and brief are clean. Composed route
+  leaf `.3.2` activates task-tree-first for loaded/reconstructed/generated/emitted/trace/diagnostic convergence
+  while generated v2 identity and rollout 3/7 remain fixed.
 - `2026-07-18`: Dart core `.9.1.1.2.3.1` is fully signed off: complete Dart format/analyzer/package 266/primary
   65x2/corpus 105, root governance 29, mdBook, KM 605/4,348, all four doctrines, canonical Perl root 7+5, cursor
   288, reference primary 65x2, Phase 0 1,031/1,031, and safe generated book/cache cleanup pass. Rollout stays 3/7;

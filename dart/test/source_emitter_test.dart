@@ -173,7 +173,7 @@ void main() {
     'generated source analyzes and runs in an isolated caller package',
     () async {
       const identity = 'generated-source/dart-isolated.spec';
-      final generated = emitDartSourceV2(_compileProbe(), identity);
+      final generated = emitDartSourceV2(_compileRootRouteProbe(), identity);
       final packageRoot = Directory.current.absolute;
       final scratch = Directory.systemTemp.createTempSync(
         'linkedspec-dart-generated-source-',
@@ -241,9 +241,13 @@ void main() {
   } on GeneratedSourceException catch (error) {
     corruptPayloadFailure = error.toJson();
   }
-  final value = generated.execute('x');
-  if (value != r'λ:$') {
-    throw StateError('unexpected generated result: $value');
+  final defaultValue = generated.execute('x');
+  if (defaultValue != 'first') {
+    throw StateError('unexpected generated default result: $defaultValue');
+  }
+  final explicitValue = generated.execute('x', topRule: 'Second');
+  if (explicitValue != r'λ:$') {
+    throw StateError('unexpected generated explicit result: $explicitValue');
   }
   Object? failure;
   try {
@@ -261,10 +265,12 @@ void main() {
       sinkMode: LinkedSpecTraceSinkMode.route,
       resetFile: true,
     ),
+    topRule: 'Second',
   );
   print(jsonEncode({
     'metadata': metadata,
-    'value': value,
+    'default_value': defaultValue,
+    'explicit_value': explicitValue,
     'plan': [for (final row in plan) row.toJson()],
     'version_failure': versionFailure,
     'corrupt_version_failure': corruptVersionFailure,
@@ -298,9 +304,11 @@ void main() {
             'format_version': 2,
             'source_identity': identity,
           },
-          'value': r'λ:$',
+          'default_value': 'first',
+          'explicit_value': r'λ:$',
           'plan': [
-            {'label': 'Top', 'family': 'default'},
+            {'label': 'First', 'family': 'default'},
+            {'label': 'Second', 'family': 'default'},
           ],
           'version_failure': {
             'type': 'generated_source_error',
@@ -334,10 +342,11 @@ void main() {
           },
           'failure': {
             'type': 'generated_source_error',
-            'stage': 'execute_generated',
-            'code': 'generated_execution_failed',
-            'summary': 'Generated Dart parser execution failed',
+            'stage': 'select_entry_rule',
+            'code': 'entry_rule_not_found',
+            'summary': 'Generated Dart parser entry-rule selection failed',
             'source_identity': identity,
+            'entry_rule': 'Missing',
             'rule_label': 'Missing',
             'detail': contains("entry rule 'Missing' is not defined"),
           },
@@ -350,6 +359,9 @@ void main() {
         expect(trace, contains('generated_rule_exit'));
         expect(trace, contains(identity));
         expect(trace, contains('family=default'));
+        expect(trace, contains('requested=Second'));
+        expect(trace, contains('effective=Second'));
+        expect(trace, contains('basis=explicit_selector'));
       } finally {
         scratch.deleteSync(recursive: true);
       }
@@ -625,6 +637,20 @@ dependencies:
       expect(scratch.existsSync(), isFalse);
     },
     timeout: const Timeout(Duration(minutes: 3)),
+  );
+}
+
+CompiledSpec _compileRootRouteProbe() {
+  return compileSpec(
+    parseSpec(r'''
+First:
+ /x/
+ E { return("first") }
+
+Second:
+ /x/
+ E { return("λ:$") }
+'''),
   );
 }
 

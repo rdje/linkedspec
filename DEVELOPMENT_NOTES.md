@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` — route convergence should expose the core decision, not
+  reproduce it): loaded source, normalized JSON, generated execution, and emitted source already reconstruct or
+  retain `CompiledSpec`; once `.3.1` installed `CompiledSpec.resolveEntryRule`, their success paths naturally
+  shared the same ordered decision. The route leaf therefore adds composition proof rather than route-local
+  selection algorithms. Authored definition order and `is_top` remain sufficient state, and the existing emitted
+  v2 `{label, family}` plan remains intentionally minimal.
+
+  The actual gaps were outward attribution boundaries. `SpecLoader` collapsed zero-rule validation into generic
+  `spec_validation_failed`, and generated execution collapsed both portable root-selection failures into generic
+  `execution_failed`. Those wrappers now recognize only the two neutral root diagnostics and preserve their
+  exact stage/code/requested-entry fields; unrelated runtime failures continue through the generic contract. This
+  narrow mapping keeps the generated failure vocabulary useful without silently changing all execution errors.
+
+  Runtime trace needs the selection decision at the lowest enabled level because emitted callers can request low
+  trace and must still identify which rule was entered. The first focused run placed the new decision at medium,
+  and the isolated emitted low-trace test correctly exposed the absence. Moving the single decision event to low
+  aligns it with the entry boundary while retaining requested selector, effective label, and decision basis. On
+  failure the same topic records requested identity plus portable stage/code and no effective label.
+
+  Validation order is a compatibility contract. Generated v2/format-2 and family-plan checks must run before
+  reconstructing or selecting an entry rule; a stale artifact must not be reclassified as a root-selection
+  failure. The route consumer explicitly sends a stale v1 contract beside zero/selection-invalid state and locks
+  the existing contract-first result. Admission is intentionally separate: `.3.2` proves mechanisms and full
+  Dart-local health, while `.3.3` must declare the exact role topology, make it omission-sensitive, pass canonical
+  reference checks, and only then advance the Dart rollout row.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` — parsing must retain a structurally invalid envelope when
   validation owns the portable failure): Dart had the same hidden zero-rule ownership inversion previously found
   in Rust. Replacing marker-required validation with one-or-more-rule validation was insufficient because

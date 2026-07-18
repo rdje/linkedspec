@@ -69,16 +69,18 @@ emitted direct/traced execution. Existing generated signatures remain intact; op
 per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
 authored descriptor identity and the minimal family plan. One omission-sensitive consumer composes all 15 neutral,
 native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly once;
-the Rust primary command passes all 65 cases in default and POSIX option environments. Dart composed routes,
-Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6` are pending. Current backend differences stay explicit in
+the Rust primary command passes all 65 cases in default and POSIX option environments. Dart route convergence is
+implemented and Dart-local green across loaded/normalized/generated/emitted/trace/diagnostic paths, but its
+topology admission remains pending beside Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6`. Current backend differences stay explicit in
 the inventory until their owning leaves land.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary without advancing admission: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and
 65x2 primary execution use it, zero/unknown selection failures have portable identities, strict-unused stays an
-authored-edge analysis, and descriptors publish immutable `is_top` plus the root contract identity. Composed
-loaded/normalized/generated/emitted/trace proof remains `.3.2`, followed by topology admission `.3.3`; rollout
-therefore remains 3 complete / 4 pending.
+authored-edge analysis, and descriptors publish immutable `is_top` plus the root contract identity. Route leaf
+`.3.2` proves loaded/normalized and generated/emitted direct/traced execution, low requested/effective/basis trace,
+portable route failures, and stale-contract-first ordering without changing v2 identity. Topology admission `.3.3`
+still gates promotion; rollout therefore remains 3 complete / 4 pending.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

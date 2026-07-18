@@ -53,8 +53,8 @@ caller-global mode. The five seek families are `default`, `or_acode`,
 `rep_and_bcode`. A v1 artifact presented to the active Perl v2 validator fails
 at `validate_generated_plan` with
 `generated_source_contract_version_mismatch`, including `expected_contract`
-and `actual_contract`; regenerate it from the original `.spec` source. Rust now
-implements the same v2 contract; Dart, Julia, and Lua retain their admitted v1
+and `actual_contract`; regenerate it from the original `.spec` source. Rust and
+Dart now implement the same v2/format-2 contract; Julia and Lua retain their admitted v1
 emitters until their ordered cursor leaves.
 
 Perl generated artifacts also preserve root-selection identity without widening
@@ -103,6 +103,15 @@ Zero-failure closeout found no repair mechanism. The classifier is now an
 unconditional ordinary runtime-package test, contract checking prevents it
 from becoming ignored or conditional, and complete admission gates pass. Rust
 generated source is therefore admitted pass.
+
+Dart generated artifacts likewise keep only ordered label/family plan rows and reconstruct authored marker state
+through their compiled payload. Direct, traced, and freshly emitted execution accept the existing optional
+`topRule` invocation selector and reuse `CompiledSpec.resolveEntryRule`; no API family, plan field, or format bump
+is required. The low `dart_runtime:entry_rule_selection` decision records requested selector, effective rule, and
+selection basis. Generated zero/unknown failures retain the neutral stage/code/requested-entry fields, while v1
+contract or invalid-plan rejection still occurs before entry selection. Route proof is complete under
+`.9.1.1.2.3.2`; topology admission `.3.3` remains pending, so Dart is not yet promoted in the root-selection
+rollout.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

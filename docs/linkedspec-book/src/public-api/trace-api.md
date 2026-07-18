@@ -159,6 +159,12 @@ both the effective `label` and the selection `basis` (`explicit_selector`, `firs
 `first_authored_rule`). Later rule, family, and failure attribution use that same effective identity. The explicit
 selector is invocation state and is not written into the generated family plan or compiled descriptor.
 
+Dart emits the equivalent low-level `dart_runtime:entry_rule_selection` decision for native, generated, and
+freshly emitted traced execution. Its detail records `requested`, `effective`, and `basis`; failed selection uses
+`effective=<none>` and retains the portable stage/code. Because the decision is low-level, every enabled Dart
+trace observes the entry boundary. The route proof is complete, while omission-sensitive topology admission
+remains `.9.1.1.2.3.3`.
+
 Example Rust usage:
 
 ```rust

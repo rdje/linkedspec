@@ -59,9 +59,9 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > generated-source v2 from only ordered label/family rows and rejects v1 before
 > payload reconstruction. Dart `.9.1.5.5` removes engine/loader/corpus/parser
 > global options, rejects primary `--parse-mode`, omits the request-trace field,
-> and passed the exact then-63-case primary manifest in both environments. The current
-> root-selection expansion remains owned by `.9.1.1.2.3`. Only composed Dart
-> admission remains `.9.1.5.6`.
+> and passed the exact then-63-case primary manifest in both environments.
+> Root-selection route convergence is complete under `.9.1.1.2.3.2`; topology
+> admission remains `.3.3`. Only composed Dart cursor admission remains `.9.1.5.6`.
 > Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
 > five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`;
 > the current governed inventory is 66 files with 34 effective mutations.

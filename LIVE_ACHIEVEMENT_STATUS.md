@@ -8,12 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` — complete, fully verified, cleaned, and staged for the prepared commit.
-  No `.3.2` work has started. Rollout stays 3/7 until Dart topology admission `.3.3`.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` — complete, fully verified, safely cleaned, and staged for the prepared
+  commit. No `.3.3` work has started; rollout stays 3/7 until topology admission.
 
 ## Latest Completed Slice
-- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution**
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 — converge Dart root routes**
   (DONE, signed off and awaiting its prepared clean commit).
+
+  **Result:** Loaded/normalized and generated/emitted direct/traced execution reuse the one compiled resolver.
+  Low trace records requested/effective/basis; loader and generated failures preserve portable zero/unknown
+  fields; stale contracts fail first; descriptors, APIs, generated v2/format 2, and the minimal plan are unchanged.
+  Admission remains `.3.3`, so rollout stays 3/7.
+
+  **Proof:** Focused 86+14; Dart format 59/0, analyzer, package 269, primary 65x2, corpus 105; root 29; mdBook; KM
+  606/4,360; all four doctrines; canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0
+  1,031/1,031 in 628 seconds pass. Cleanup removes the generated 11 MiB book and Python cache.
+
+  **Next:** Commit `.3.2`, clear and prove clean, then activate Dart topology admission `.3.3` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution**
+  (DONE at clean commit `241a34f0` — core/native/primary signoff complete).
 
   **Result:** Dart accepts markerless one-or-more-rule sources and preserves empty/comment-only envelopes so
   validation owns portable zero-rule failure. One compiled resolver applies explicit > first marker > first rule
@@ -24,7 +38,7 @@ Current execution status for interruption-safe batch workflow recovery.
   governance 29; mdBook; KM 605/4,348; all four doctrines; canonical Perl root 7+5, cursor 288, reference primary
   65x2, and Phase 0 1,031/1,031 pass. Cleanup removes generated book/cache and retains required Dart package state.
 
-  **Next:** Commit `.3.1`, clear and prove clean, then activate composed Dart root routes `.3.2` task-tree-first.
+  **Next:** Composed Dart root routes `.3.2` are active task-tree-first; topology admission remains `.3.3`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 — map Dart root selection**
   (DONE at clean commit `94780b05` — behavior-free signoff complete).

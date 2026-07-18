@@ -235,6 +235,13 @@ final class LinkedSpecRuntimeEngine {
     try {
       selection = compiledSpec.resolveEntryRule(topRule);
     } on EntryRuleSelectionException catch (error) {
+      trace?.traceDecision(
+        'dart_runtime:entry_rule_selection',
+        false,
+        'requested=${error.entryRule ?? '<default>'} effective=<none> '
+            'basis=<none> stage=${error.stage} code=${error.code}',
+        LinkedSpecTraceLevel.low,
+      );
       throw RuntimeInterpreterException(
         error.message,
         diagnostic: _diagnostic(
@@ -249,6 +256,13 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     final label = selection.rule.label;
+    trace?.traceDecision(
+      'dart_runtime:entry_rule_selection',
+      true,
+      'requested=${topRule ?? '<default>'} effective=$label '
+          'basis=${selection.basis.contractName}',
+      LinkedSpecTraceLevel.low,
+    );
     final context = _RuntimeExecutionContext(
       engine: this,
       input: input,
