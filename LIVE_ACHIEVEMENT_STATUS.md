@@ -8,9 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.0 — audit and split Dart cursor rollout**
+  (DONE — no executable behavior change; exact Dart preflight, staged gate baselines, Knowledge Map, task split,
+  mdBook, memory, task, doctrine, neutral-mutation, and whitespace signoff pass; clean commit remains before `.1`).
+
+  **Goal:** Map every Dart cursor seam and current behavior, prove the existing gate boundary, and split the broad
+  backend parent into safe mechanism leaves before editing parser/compiler/runtime code.
+
+  **Result:** Eleven governed token paths plus all non-token AST/validation/compiler/normalized-state/emitter/
+  loader/corpus/primary/trace/test/gate/doc seams are owned. Compact `|` alone is currently AND-classified, bare
+  edges fail as generic raw syntax, global `parseMode` propagates into children, descriptor root metadata retains
+  `parse_mode: seek`, and generated source remains v1/format 1. Children `.1-.6` now own typed normalization,
+  live/reconstructed execution, descriptor v1, generated v2, public/CLI migration, and composed admission.
+
+  **Proof:** Format and strict analysis pass. The full package reaches 244 passes plus one expected reference-
+  migrated help failure. Focused non-primary tests pass 104/104; corpus passes 105/105; exact primary is 30/63 in
+  both default and POSIX environments (22 help/usage plus eleven trace failures). Neutral proof is 36/18/8, Perl
+  14, Rust 15, inventory 68, rollout 3/5, and 34 mutations. Knowledge Map is 588/4,178; mdBook and all governance
+  checks pass.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.7 — admit Rust rule-local cursor contract**
   (DONE — one 15-role consumer, exact omission-sensitive topology, 3/5 rollout, complete Rust and canonical
-  signoff, and parent closeout; the clean commit remains before Dart activation).
+  signoff, and parent closeout at clean commit `288da21a`; Dart `.9.1.5.0` preflight/split is in signoff with
+  104/104 focused, 105/105 corpus, and the exact staged 30/63x2 primary boundary; no executable edit).
 
   **Goal:** Compose every completed Rust cursor projection through one contract-declared admission boundary,
   advance only Rust, and close the backend parent without duplicating the exhaustive constituent suites.

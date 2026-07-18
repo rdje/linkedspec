@@ -28,7 +28,9 @@ passes 63/63 in both environments. Composed Rust admission/parent closeout `.9.1
 direct/trace, mixed/recursive, structural, static-removal, primary, and portable diagnostic projections. The
 neutral checker requires every role plus canonical/default-to-optional-Rust registration, retains the 68-file
 inventory, rejects 34 drift mutations, and advances only `rust_parity` to reach 3/5. Complete Rust and canonical
-signoff pass; the clean commit remains the sole boundary before Dart `.9.1.5` activates.
+signoff pass at clean commit `288da21a`. Dart preflight `.9.1.5.0` maps all governed/non-token seams and fixes the
+safe `.1-.6` order before behavior code: current focused proof is 104/104 plus corpus 105/105, while the reference-
+migrated shared help/trace boundary is exactly 244/1 package and 30/63 primary in both option environments.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

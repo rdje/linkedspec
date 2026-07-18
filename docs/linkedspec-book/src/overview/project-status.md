@@ -212,7 +212,10 @@ Three backbone items tracked major structural modernization — all done:
   both structural replacements, static removal, primary, and all portable diagnostic/removal outcomes. The
   checker requires every role marker plus canonical/default-to-optional-Rust registration, rejects 34 mutations,
   and advances only `rust_parity`. The inventory remains 68 files and rollout is 3/5; complete focused Rust proof
-  and canonical signoff are green; the Rust parent is closed while the clean commit remains before Dart activates.
+  and canonical signoff are green at clean commit `288da21a`; the Rust parent is closed. Dart preflight `.9.1.5.0`
+  records all governed/non-token seams, compact-pipe/bare-edge/global-policy drift, descriptor/generated v1 state,
+  104/104 focused plus 105/105 corpus proof, and the exact staged 244/1 package plus 30/63x2 primary boundary.
+  Implementation is dependency-ordered across `.1-.6`; no Dart behavior changed in the preflight.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

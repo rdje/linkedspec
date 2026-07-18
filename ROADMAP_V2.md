@@ -157,8 +157,10 @@ override projection is removed in implemented `.6`: execution options retain ent
 flag returns the targeted usage error, request traces omit the global field, and Rust passes the exact 63-case
 matrix in both environments. Focused and canonical signoff pass at commit `2bba1e91`; composed admission/parent
 closeout `.7` now composes 15 exact Rust roles, requires canonical registration, retains the 68-file inventory,
-rejects 34 mutations, and advances only `rust_parity` to reach 3/5. Complete Rust and canonical proof pass, parent
-`.9.1.4` is closed, and a clean commit remains before Dart `.9.1.5`.
+rejects 34 mutations, and advances only `rust_parity` to reach 3/5. Complete Rust and canonical proof pass at clean
+commit `288da21a`; parent `.9.1.4` is closed. Dart preflight `.9.1.5.0` fixes the exact current boundary and
+dependency-ordered `.1-.6` implementation split without executable changes; focused proof is 104/104 plus corpus
+105/105, and the staged reference-migration boundary is 244/1 package plus 30/63 primary twice.
 identical dependency-regex index identity is tracked under `.9.1.8.1` before public closeout.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are

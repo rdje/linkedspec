@@ -1002,7 +1002,9 @@ field, and passes the exact 63-case matrix in both environments. Focused and can
 native, loaded, ordinary serialized, descriptor, emitted/generated direct/trace, mixed/recursive, structural,
 removal, primary, and diagnostic projections. The checker requires every role plus canonical registration,
 retains the 68-file inventory, rejects 34 mutations, and advances only `rust_parity` to reach 3/5. Complete Rust
-and canonical proof are green; parent `.9.1.4` is closed and the clean commit remains before Dart `.9.1.5`.
+and canonical proof are green; clean commit `288da21a` closes parent `.9.1.4`. Dart preflight `.9.1.5.0` records
+the exact compact-pipe, bare-edge, global-propagation, descriptor/generated-v1, 244/1 package, 104/104 focused,
+105/105 corpus, and 30/63x2 primary boundaries and splits implementation into `.1-.6` before behavior code.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

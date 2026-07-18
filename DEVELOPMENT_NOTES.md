@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.0` — Dart already has complete gate breadth, but its semantic layers
+  need ordered migration): the focused driver is not missing a central package the way the pre-Rust gate was. It
+  formats, strictly analyzes, runs the full Dart package, runs the exact shared primary projection in default and
+  POSIX environments, and executes the complete corpus. Its current early stop is itself useful evidence: the
+  Perl-owned shared help fixture has migrated, while Dart's primary help has not. Therefore the safe split starts
+  directly with typed normalization after the preflight commit; adding a gate-only child would create ceremony
+  without closing a coverage gap.
+
+  Family classification must precede runtime policy and generated source. `RuleMode.pipe` currently makes both
+  `isAnd` and the generated plan report an AND family, while the same predicate drives structured sequence/choice
+  dispatch. Fixing only the matcher would leave compiled ownership and emitted plan identity wrong. Bare edges
+  likewise need typed parser/validator/compiler ownership before execution can derive action versus blind behavior
+  or emit portable diagnostic fields. This establishes `.1` as the common prerequisite for `.2-.6`.
+
+  Live/loaded/normalized execution precedes descriptors and generated artifacts because those projections must
+  describe an already-working semantic source of truth. Descriptor v1 then proves family/policy/resolved-edge
+  projection without asking generated reconstruction to infer behavior. Generated v2 can subsequently serialize
+  only label/family rows and derive policy after exact contract validation. Public option deletion comes last: it
+  removes the temporary caller-owned adapter only after every native and generated path has intrinsic policy, and
+  it consumes the already-migrated shared help/usage/trace target to move 30/63 to 63/63 twice.
+
+  The baseline cleanly separates staged migration from regression. Formatting and analysis pass; the complete
+  package reaches 244 pass / one known shared-help failure; a focused seven-suite selection passes 104/104; full
+  corpus execution passes 105/105. Both primary environments fail the same 33 cases—22 help/usage and eleven
+  request-trace projections—and pass the other 30 exactly. Those numbers are the acceptance boundary for `.5`,
+  not compatibility debt to hide in earlier leaves.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.7` — backend admission should compose projections, not duplicate
   exhaustive constituent suites): Rust already had deep independent proof for 36 authored family spellings,
   normalization, every parent/child mechanism, descriptor rows, generated family plans, loading, serialization,

@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.0 — audit and split Dart cursor rollout
+
+The Dart rule-local cursor rollout now has a complete read-only preflight and six dependency-ordered behavior
+leaves. The audit accounts for all eleven governed Dart inventory paths plus AST, validation, compiled dispatch,
+normalized-state reconstruction, source emission, generated-host, loader, corpus, primary, trace, test, gate, and
+documentation seams. No Dart or shared executable behavior changes in this slice.
+
+Exact probes show that compact `|` alone is misclassified as AND across the 36 authored family spellings; complete-
+line bare declared-rule edges remain raw and fail with a generic validation message; and the engine-global
+`parseMode` controls every entered rule, including mixed and recursive children. Root descriptor metadata still
+emits `parse_mode: seek` without per-rule cursor/edge facts. Generated artifacts remain v1/format 1 with minimal
+label/family plans, the compact-pipe classifier drift, and no v2 contract mismatch diagnostic.
+
+The actual Dart driver passes formatting and strict analysis before reaching 244 passing package tests and one
+expected shared-help failure: the reference-owned fixture has already removed `--parse-mode`, while Dart has not.
+The focused non-primary parser/validator/compiler/runtime/loader/generated suite passes 104/104, and full corpus
+execution passes 105/105. The exact shared primary projection is 30/63 in both default and POSIX environments:
+22 help/usage cases retain the old option/help/validation, and eleven traces retain `parse_mode=seek`; every other
+case is byte-exact. The neutral checker remains 36/18/8 with 14 Perl roles, 15 Rust roles, 68 governed files,
+3 complete / 5 pending, and 34 rejected mutations.
+
+Implementation is now owned by `.9.1.5.1-.6`: typed family/edge normalization, live/loaded/reconstructed policy,
+descriptor v1, generated-source v2, public/CLI migration with exact 63x2, then composed Dart admission. A separate
+gate-hardening leaf is unnecessary because the existing driver already covers the complete package, both primary
+environments, and all 105 fixtures.
+
+The derived Knowledge Map passes at 588 facts / 4,178 question keys. Memory architecture, task metadata, all four
+doctrine checks, the neutral checker and 34 drift mutations, mdBook build, whitespace, resume-pointer cap, and
+temporary-probe cleanup pass. The preflight commit is the clean boundary before normalization `.9.1.5.1`.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.7 — admit Rust rule-local cursor contract
 
 The neutral rule-local cursor authority now declares one exact Rust admission consumer with 15 ordered roles:
@@ -31,7 +61,7 @@ integrations 197 in 75.60 seconds, composed admission 1 in 23.79 seconds, rule-l
 source emitter 5 in 36.90 seconds, every adjacent suite, and primary 63/63 twice. Formatting and advisory Clippy
 for the new consumer are clean. Canonical CI then accepts the staged consumer as an auditable tracked input,
 repeats the 288-test Perl admission consumer and reference primary 63/63 twice, passes Phase 0 1,031/1,031 in 612
-seconds, and exits 0. Rust parent `.9.1.4` is closed; only the clean commit remains before Dart activates.
+seconds, and exits 0. Clean commit `288da21a` closes Rust parent `.9.1.4`; Dart preflight follows from that boundary.
 
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.6 — remove Rust global cursor overrides
 

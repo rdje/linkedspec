@@ -12,8 +12,10 @@ This document is the current high-level technical reading of the project shape. 
   completion. The neutral checker requires every source marker, canonical tracked-file registration, the complete
   runtime-package Rust gate, and canonical optional-Rust reachability; it rejects 34 mutations. Only
   `rust_parity` advances, so rollout is 3 complete / 5 pending at the unchanged 68-file migration inventory.
-  Complete Rust and canonical proof are green; the parent is closed and only the clean commit remains before Dart
-  activates.
+  Complete Rust and canonical proof are green at clean commit `288da21a`; the parent is closed. Dart preflight
+  `.9.1.5.0` now records eleven governed paths, compact-pipe/bare-edge/global-propagation drift, descriptor and
+  generated v1 seams, 104/104 focused plus 105/105 corpus proof, the exact staged 30/63x2 primary boundary, and
+  dependency-safe implementation children `.1-.6` without executable changes.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight
