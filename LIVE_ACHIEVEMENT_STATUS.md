@@ -8,6 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.4 — project Rust cursor descriptor v1**
+  (DONE — implementation, focused/complete Rust proof, lockstep documentation, governance, and canonical signoff
+  pass; the clean commit is the remaining boundary before generated-source `.9.1.4.5` activation).
+
+  **Goal:** Make Rust's outward descriptor an exact projection of normalized rule-local cursor semantics, retire
+  root/rule global mode fields, and preserve generated-source v1 as a separately staged artifact.
+
+  **Result:** Root metadata now identifies `linkedspec-rule-local-cursor-v1`. Every rule publishes exact authored
+  family, derived cursor policy, aggregate ownership, and ordered semantic edge rows. Action edges expose child
+  regex indices, blind edges expose null, and compiled block/fluent facts remain deterministic. Direct, loaded,
+  and ordinary compiled-JSON-reconstructed descriptor state is identical and agrees with normal live execution;
+  optional non-semantic source provenance is not guessed after normalization.
+
+  **Proof:** Descriptor 4/4 covers all 36 family spellings and every valid neutral edge; execution 6/6 covers
+  descriptor/live and loaded parent/child agreement. Core passes 189/4/5/8, runtime 137, oracle 105 in 206.35s,
+  diagnostics 7, generated classifier 105/105 in 235.29s, integrations 197, every adjacent suite, formatting, and
+  production-library Clippy. The focused gate reaches only the exact `.6` CLI boundary at 51/63. Neutral cursor
+  passes 36/18/8/14/73 at 2/6 plus 29 mutations; Knowledge Map is 586/4,155. Canonical local CI passes the Perl
+  consumer 288, reference CLI 63x2, and Phase 0 1,031/1,031 in 610 seconds.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.3 — derive Rust rule-local cursor policy**
   (DONE — implementation, focused/complete Rust proof, lockstep documentation, governance, and canonical signoff
   pass; the clean commit is the remaining boundary before descriptor `.9.1.4.4` activation).

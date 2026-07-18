@@ -15,9 +15,9 @@ answers:
   - "is Rust generated source v1 migrated to rule local cursor"
   - "what tests prove Rust rule local cursor execution"
 date: 2026-07-18
-status: current normal Rust execution; descriptor/generated/public migrations remain FUTURE-PARITY-BACKLOG.9.1.4.4-.6
+status: current normal Rust execution and descriptor v1; generated/public migrations remain FUTURE-PARITY-BACKLOG.9.1.4.5-.6
 tags: [rust, cursor, runtime, serialization, loading, recursion, trace, generated-source, descriptor, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. Descriptor v1 and generated-source v1 retain a bounded legacy_artifact_parse_mode adapter and private v1 wire serializer for .4-.5, while the still-present public option/CLI projection is removal debt for .6 and cannot override normal live execution. Contract proof covers 36 family rows, eight parent/child mechanisms, two structural cases, loaded trace, JSON reconstruction, recursion, and staged artifacts."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state, removes root/rule global fields, and publishes cursor identity/family/policy/resolved edges. Generated-source v1 retains the bounded legacy adapter/private wire serializer for .5, while public option/CLI projection remains .6 debt and cannot override normal live execution."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -41,18 +41,20 @@ The compiled rule no longer stores or normally serializes an independently mutab
 cursor field. Old ordinary JSON may still decode because unknown fields are tolerated,
 but such a field cannot change the derived policy.
 
-Three staged surfaces remain explicit rather than implicit. Descriptor v1 projects
-the old policy until `.9.1.4.4`; generated-plan/source v1 uses the same compatibility
-policy until `.9.1.4.5`; and Rust's public option/CLI/request-trace surface remains
-present until removal leaf `.9.1.4.6`. `legacy_artifact_parse_mode()` and the private
-`GeneratedCompiledRuleV1` serializer exist only for those artifact boundaries. The
+Descriptor v1 now consumes the same derived state. It identifies the neutral cursor
+contract, publishes normalized family/policy/resolved edges, and has no root or rule
+global field. Two staged surfaces remain: generated-plan/source v1 uses the bounded
+compatibility policy until `.9.1.4.5`, and Rust's public option/CLI/request-trace
+surface remains present until `.9.1.4.6`. `legacy_artifact_parse_mode()` and the
+private `GeneratedCompiledRuleV1` serializer now exist only for generated v1. The
 still-present option does not override normal live execution.
 
 The contract test consumes all 36 family spellings, all eight neutral parent/child
 mechanisms, and both structural replacements. Loaded trace proof shows the AND parent
 consume at its entry cursor and the default child seek from the cursor it receives.
-The same suite locks live/ordinary-serialized identity, recursive reachability, and
-the deliberately unchanged descriptor/generated-v1 projections.
+The same suite locks live/ordinary-serialized identity, recursive reachability,
+descriptor/live agreement for all 36 families, loaded descriptor policy, and the
+deliberately unchanged generated-v1 projection.
 
 Related: [[rust-rule-local-cursor-normalization]],
 [[rule-local-cursor-neutral-contract]], [[rule-local-cursor-and-bare-edge-contract]],

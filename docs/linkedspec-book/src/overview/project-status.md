@@ -200,9 +200,11 @@ Three backbone items tracked major structural modernization — all done:
   authored OR, retains complete-line/header-rest bare edges as typed AST, derives action/blind ownership, lowers
   typed dispatch tables, and emits neutral portable diagnostics. Verified `.9.1.4.3` removes mutable compiled
   policy and makes normal live, loaded, and ordinary reconstructed execution derive seek/consume from each entered
-  family across action, blind, direct call, and recursion. Descriptor v1 and generated-source v1 remain explicit
-  compatibility projections for `.4-.5`; public option/CLI removal remains `.6`. The inventory is now 74 files,
-  while rollout stays 2/6 until complete Rust admission.
+  family across action, blind, direct call, and recursion. Verified descriptor `.9.1.4.4` now publishes cursor-v1
+  identity, normalized family/policy, aggregate ownership, and ordered semantic edge rows across direct, loaded,
+  and reconstructed state, with no root/rule global fields. Generated-source v1 remains the explicit `.5`
+  compatibility projection; public option/CLI removal remains `.6`. The inventory is now 73 files, while rollout
+  stays 2/6 until complete Rust admission.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

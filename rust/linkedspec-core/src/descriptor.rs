@@ -51,8 +51,21 @@ pub struct CompiledRuleDescriptor {
 pub struct CompiledRuleDescriptorMeta {
     pub label: String,
     pub is_top: bool,
-    pub parse_mode: ParseMode,
+    pub family: String,
+    pub cursor_policy: ParseMode,
+    pub edge_ownership: String,
+    pub resolved_edges: Vec<CompiledResolvedEdgeDescriptor>,
     pub mode: CompiledRuleModeMetadata,
+}
+
+/// One normalized semantic edge in deterministic source order.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CompiledResolvedEdgeDescriptor {
+    pub ownership: String,
+    pub target: String,
+    pub regex_index: Option<usize>,
+    pub block: bool,
+    pub fluent: Option<String>,
 }
 
 /// Stable rule-mode projection shared with the other native variants.
@@ -108,7 +121,7 @@ pub struct CompiledDescriptorMeta {
     pub descriptor_model: String,
     pub compiled_spec_model: String,
     pub compiled_dependency_regex_model: String,
-    pub parse_mode: ParseMode,
+    pub cursor_contract: String,
     pub definition_order: Vec<String>,
     pub compiled_rule_order: Vec<String>,
     pub redefined_rule_labels: Vec<String>,
@@ -214,7 +227,7 @@ impl CompiledSpec {
                 descriptor_model: "compiled_descriptor_state".to_string(),
                 compiled_spec_model: "compiled_spec_state".to_string(),
                 compiled_dependency_regex_model: "compiled_dependency_regex_state".to_string(),
-                parse_mode: ParseMode::Seek,
+                cursor_contract: "linkedspec-rule-local-cursor-v1".to_string(),
                 definition_order,
                 compiled_rule_order,
                 redefined_rule_labels,
@@ -242,17 +255,76 @@ fn project_rule(rule: &CompiledRule) -> CompiledRuleDescriptor {
         meta: CompiledRuleDescriptorMeta {
             label: rule.label.clone(),
             is_top: rule.is_top,
-            parse_mode: rule.legacy_artifact_parse_mode(),
+            family: rule_family(&rule.mode).to_string(),
+            cursor_policy: rule.cursor_policy(),
+            edge_ownership: edge_ownership(rule).to_string(),
+            resolved_edges: resolved_edges(rule),
             mode: CompiledRuleModeMetadata {
                 name: rule_mode_name(&rule.mode).to_string(),
                 is_top: rule.is_top,
-                is_and: rule.mode.uses_legacy_and_interpretation(),
+                is_and: rule.mode.is_and(),
                 is_repetition: rule.mode.is_repetition(),
                 rep_min: rule.rep_min,
                 rep_max: rule.rep_max,
             },
         },
     }
+}
+
+fn rule_family(mode: &RuleMode) -> &'static str {
+    if mode.is_and() { "and" } else { "or_default" }
+}
+
+fn edge_ownership(rule: &CompiledRule) -> &'static str {
+    match (
+        rule.acode_dispatch.is_empty(),
+        rule.bcode_dispatch.is_empty(),
+    ) {
+        (false, true) => "action",
+        (true, false) => "blind",
+        (true, true) => "none",
+        (false, false) => "mixed",
+    }
+}
+
+fn resolved_edges(rule: &CompiledRule) -> Vec<CompiledResolvedEdgeDescriptor> {
+    rule.acode_dispatch
+        .iter()
+        .map(|entry| CompiledResolvedEdgeDescriptor {
+            ownership: "action".to_string(),
+            target: entry.child_label.clone(),
+            regex_index: Some(entry.child_regex_idx),
+            block: entry.code.is_some(),
+            fluent: project_fluent(&entry.fluent_chain),
+        })
+        .chain(
+            rule.bcode_dispatch
+                .iter()
+                .map(|entry| CompiledResolvedEdgeDescriptor {
+                    ownership: "blind".to_string(),
+                    target: entry.child_label.clone(),
+                    regex_index: None,
+                    block: entry.code.is_some(),
+                    fluent: project_fluent(&entry.fluent_chain),
+                }),
+        )
+        .collect()
+}
+
+fn project_fluent(chain: &[(String, String)]) -> Option<String> {
+    (!chain.is_empty()).then(|| {
+        chain
+            .iter()
+            .map(|(method, args)| {
+                if args.is_empty() {
+                    method.clone()
+                } else {
+                    format!("{method}({args})")
+                }
+            })
+            .collect::<Vec<_>>()
+            .join(".")
+    })
 }
 
 fn dependency_refs(rule: &CompiledRule) -> Vec<DependencyRef> {

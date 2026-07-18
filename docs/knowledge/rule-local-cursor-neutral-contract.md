@@ -15,10 +15,11 @@ answers:
   - "how many Perl cursor admission roles exist"
   - "what is the rule local cursor rollout after Perl admission"
   - "why is the rule local cursor migration inventory 74 files"
+  - "why is the rule local cursor migration inventory 73 files"
 date: 2026-07-18
-status: accepted neutral contract; Perl reference admitted and Rust live execution migrated at 2 complete / 6 pending
+status: accepted neutral contract; Perl admitted and Rust live plus descriptor migrated at 2 complete / 6 pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust execution .9.1.4.3 adds two legitimately governed files—the v1 source-emitter compatibility adapter and contract-driven execution suite—so the exact scan grows from 72 to 74. The checker rejects 29 mutations and rollout remains 2 complete / 6 pending until complete Rust admission."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust execution .9.1.4.3 grows the scan from 72 to 74 with a governed v1 adapter and execution suite; descriptor .9.1.4.4 makes descriptor.rs token-free and retires it for an exact 73. The checker rejects 29 mutations and rollout remains 2 complete / 6 pending until complete Rust admission."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -43,12 +44,13 @@ The neutral contract covers:
 
 The migration inventory scans tracked and candidate files under the executable,
 contract, test, CLI-fixture, and current public-document roots. It began at 91
-files and owns 74 after Perl descriptor/generated/API/CLI migration retires
+files and owns 73 after Perl descriptor/generated/API/CLI migration retires
 the now-token-free `CompilerState.pm`, `SpecEntry.pm`, and generated-handlers
 chapter, and after reconciling
 the action/lifecycle chapter token removed by `ccf4cad7`, then retires sixteen
-Perl/shared paths while adding `GeneratedSource.pm`'s portable emitter error, then adds the Rust v1 source-emitter
-compatibility adapter and contract-driven execution suite during `.9.1.4.3`. Files are partitioned
+Perl/shared paths while adding `GeneratedSource.pm`'s portable emitter error, adds the Rust v1 source-emitter
+compatibility adapter and contract-driven execution suite during `.9.1.4.3`, and retires token-free
+`descriptor.rs` during `.9.1.4.4`. Files are partitioned
 once, in dependency order, among `.9.1.2-.9`. An unowned
 new file or a listed file that loses every migration token fails the checker,
 so backend leaves must deliberately update the inventory as they migrate.
@@ -62,9 +64,9 @@ owned. See [[perl-rule-local-cursor-rollout-boundaries]].
 
 `neutral_contract_and_inventory` and `perl_reference` are admitted in the composed rollout ledger. The Perl
 consumer declares 14 exact roles and canonical registration; checker mutation proof rejects role or consumer
-omission. Rust `.9.1.4.3` now completes its normal live/loaded/ordinary-reconstructed execution slice, but the
-`rust_backend` rollout leg stays pending until descriptor, generated-source, public-option, and composed-admission
-leaves `.9.1.4.4-.7` complete. Dart, Julia, dual-ABI Lua, recurring five-backend admission, and public no-drift follow.
+omission. Rust `.9.1.4.3-.4` now complete normal live/loaded/ordinary-reconstructed execution and descriptor v1,
+but the `rust_backend` rollout leg stays pending until generated-source, public-option, and composed-admission
+leaves `.9.1.4.5-.7` complete. Dart, Julia, dual-ABI Lua, recurring five-backend admission, and public no-drift follow.
 Generated-source v1 and the 63-case primary interface
 remain the unmigrated-backend/shared baseline until their owners land.
 

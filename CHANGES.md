@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.4 — project Rust cursor descriptor v1
+
+Rust's outward `CompiledSpec` descriptor now identifies
+`linkedspec-rule-local-cursor-v1`. Descriptor-wide and per-rule `parse_mode` fields are removed. Every rule instead
+publishes its normalized `and` or `or_default` family, derived `consume` or `seek` cursor policy, aggregate edge
+ownership, and deterministic `resolved_edges` rows containing exactly `ownership`, `target`, `regex_index`,
+`block`, and `fluent` semantic facts. Compact `|` and default rules with explicit blind edges therefore remain
+seek in descriptor state rather than inheriting the old family-or-bcode compatibility classifier.
+
+The projection derives entirely from normalized compiled semantics. Action rows use the selected child regex
+index, blind rows use JSON null, attached ActionIR blocks and fluent chains remain explicit, and valid dispatch
+order is preserved. The neutral contract makes `source_form` optional and non-semantic, so Rust does not invent
+bare/explicit provenance after compilation has intentionally normalized both forms. Direct, loaded, and ordinary
+compiled-JSON-reconstructed descriptor state is identical and agrees with normal live execution. Generated-source
+v1 remains independently staged and byte-structurally unchanged for `.9.1.4.5`.
+
+Contract-driven core proof passes four descriptor tests across all 36 family spellings and every valid one-edge
+fixture, exact metadata variants, exact semantic row fields/order, and direct/reconstructed identity. Runtime
+execution remains 6/6 and now also proves descriptor/live agreement for all 36 families plus loaded parent/child
+policy. Full core passes 189 unit + 4 descriptor + 5 normalization + 8 type tests; runtime passes 137 unit;
+production-library Clippy exits green with the established baseline warnings. The complete focused gate passes
+the 105-fixture oracle in 206.35 seconds, seven diagnostics, the generated classifier 105/105 in 235.29 seconds,
+all 197 integrations, and every adjacent suite before reaching exactly the staged primary 51/63 boundary owned
+by `.9.1.4.6`.
+
+`descriptor.rs` is now migration-token-free, so the exact governed inventory contracts from 74 to 73 files. The
+neutral checker passes 36/18/8/14/73 at 2/6 and rejects all 29 drift mutations. Rust rollout remains pending until
+generated-source v2, public removal, and composed admission `.9.1.4.5-.7` complete.
+
+Knowledge Map passes at 586 facts / 4,155 question keys; memory architecture, task metadata, all four doctrines,
+mdBook, JSON, formatting, whitespace, and generated-artifact cleanup pass. Canonical local CI repeats the 288-test
+composed Perl cursor consumer, reference CLI 63/63 in default and POSIX environments, and Phase 0 1,031/1,031 in
+610 seconds, then exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.3 — derive Rust rule-local cursor policy
 
 Rust normal live execution now derives cursor policy from the rule being entered: every AND-family rule consumes

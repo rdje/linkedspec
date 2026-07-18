@@ -62,14 +62,15 @@ command, and runs the shared byte-exact CLI manifest in default and POSIX option
 rule-local cursor migration the package tests are green and the primary leg is intentionally 51/63 until
 `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection.
 
-Rust execution is current through `.9.1.4.3`. The parser retains complete-line and header-rest bare edges as
+Rust execution and descriptor projection are current through `.9.1.4.4`. The parser retains complete-line and header-rest bare edges as
 typed nodes; validation derives AND bare edges as blind calls and OR/default bare edges as action edges, rejects
 undefined/mixed/index/group shapes with portable code/stage/fields, and compilation preserves that ownership in
 the corresponding dispatch table. Compact `|` is authored OR and compact `&` is authored AND. Normal live,
 loaded, and ordinary JSON-reconstructed rules derive seek/consume from the rule being entered; compiled rules no
 longer store an independently mutable policy, and the staged caller option cannot override live behavior.
-Descriptor v1, generated-source v1-to-v2 migration, and public option/CLI removal remain staged under
-`.9.1.4.4-.6` through explicit compatibility adapters.
+Descriptor v1 publishes the neutral cursor identity plus each rule's normalized family, derived policy, aggregate
+ownership, and ordered semantic edge rows without root/rule global fields. Generated-source v1-to-v2 migration
+and public option/CLI removal remain staged under `.9.1.4.5-.6` through explicit compatibility boundaries.
 
 ### Compiled descriptor introspection
 
@@ -84,8 +85,12 @@ let compiled = compile(&spec)?;
 
 let typed = compiled.descriptor_state();
 assert_eq!(typed.meta.descriptor_model, "compiled_descriptor_state");
+assert_eq!(typed.meta.cursor_contract, "linkedspec-rule-local-cursor-v1");
 assert_eq!(typed.meta.compiled_rule_order, ["Top", "Child"]);
 assert_eq!(typed.spec["Top"].dependency_refs[0].label, "Child");
+assert_eq!(typed.spec["Top"].meta.family, "or_default");
+assert_eq!(typed.spec["Top"].meta.cursor_policy, linkedspec_core::types::ParseMode::Seek);
+assert_eq!(typed.spec["Top"].meta.resolved_edges[0].ownership, "action");
 
 let json = compiled.to_descriptor_json()?;
 assert!(json.get("dependency_regex_map").is_some());
@@ -95,7 +100,8 @@ assert!(json.get("dependency_regex_map").is_some());
 `descriptor_state()` returns typed, serializable records from `linkedspec_core::descriptor`;
 `to_descriptor_json()` returns the same public `spec` / `functions` / `dependency_regex_map` / `meta` projection
 as JSON. Neither API depends on `linkedspec-runtime` or launches a subprocess. Runtime execution continues to use
-`CompiledSpec` directly.
+`CompiledSpec` directly. Each resolved-edge row contains `ownership`, `target`, child `regex_index`, `block`, and
+`fluent`; bare/explicit provenance is optional and intentionally omitted after semantic normalization.
 
 ### Structured runtime diagnostics
 

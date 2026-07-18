@@ -1,4 +1,4 @@
-//! FUTURE-PARITY-BACKLOG.9.1.4.3 — live Rust rule-local cursor execution.
+//! FUTURE-PARITY-BACKLOG.9.1.4.3-.4 — live execution and descriptor projection.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
@@ -251,6 +251,7 @@ fn every_neutral_parent_child_and_structural_case_is_rule_local_live_and_seriali
 fn every_neutral_family_spelling_spends_its_authored_policy() {
     let contract = contract();
     let family_cases = contract["family_cases"].as_array().unwrap();
+    let descriptor_contract = &contract["descriptor_contract"];
     assert_eq!(family_cases.len(), 36);
 
     for case in family_cases {
@@ -263,6 +264,21 @@ fn every_neutral_family_spelling_spends_its_authored_policy() {
         };
         let source = format!("{top_prefix}{header}\n /x/ -> Top {{ return(\"hit\") }}\n");
         let compiled = compile_source(&source);
+        let descriptor = compiled
+            .to_descriptor_json()
+            .expect("project family descriptor");
+        assert_eq!(
+            descriptor["meta"]["cursor_contract"], descriptor_contract["meta"]["cursor_contract"],
+            "{id}: descriptor contract"
+        );
+        assert_eq!(
+            descriptor["spec"]["Top"]["meta"]["family"], case["family"],
+            "{id}: descriptor family"
+        );
+        assert_eq!(
+            descriptor["spec"]["Top"]["meta"]["cursor_policy"], case["cursor_policy"],
+            "{id}: descriptor/live policy agreement"
+        );
         let options = ExecutionOptions::new().with_entry_rule("Top");
         let expected = if case["cursor_policy"] == "consume" {
             Value::Null
@@ -357,6 +373,18 @@ fn loaded_execution_and_trace_use_each_entered_rule_family() {
     let request = SpecRequest::path(path.to_string_lossy().into_owned());
     let options = SpecLoadOptions::new(std::env::temp_dir());
     let loaded = load_and_compile_spec(&request, &options).expect("load cursor fixture");
+    let loaded_descriptor = loaded
+        .compiled()
+        .to_descriptor_json()
+        .expect("project loaded descriptor");
+    assert_eq!(
+        loaded_descriptor["spec"]["Top"]["meta"]["cursor_policy"],
+        json!("consume")
+    );
+    assert_eq!(
+        loaded_descriptor["spec"]["Child"]["meta"]["cursor_policy"],
+        json!("seek")
+    );
     let loaded_value = loaded
         .into_engine()
         .execute_value("p junk x", &ExecutionOptions::new())
@@ -386,7 +414,8 @@ fn loaded_execution_and_trace_use_each_entered_rule_family() {
 }
 
 #[test]
-fn descriptor_and_generated_source_v1_remain_explicitly_staged() {
+fn descriptor_v1_is_current_while_generated_source_v1_remains_staged() {
+    let contract = contract();
     let compiled = compile_source("Top::|\n /x/ -> Top { return(\"hit\") }\n");
     assert_eq!(
         execute_compiled(compiled.clone(), "prefix x", &ExecutionOptions::new()),
@@ -396,11 +425,28 @@ fn descriptor_and_generated_source_v1_remain_explicitly_staged() {
 
     let descriptor = compiled
         .to_descriptor_json()
-        .expect("project staged descriptor v1");
+        .expect("project descriptor v1");
     assert_eq!(
-        descriptor["spec"]["Top"]["meta"]["parse_mode"],
-        json!("consume"),
-        "FUTURE-PARITY-BACKLOG.9.1.4.4 owns descriptor migration"
+        descriptor["meta"]["cursor_contract"],
+        contract["descriptor_contract"]["meta"]["cursor_contract"]
+    );
+    assert_eq!(
+        descriptor["spec"]["Top"]["meta"]["family"],
+        json!("or_default")
+    );
+    assert_eq!(
+        descriptor["spec"]["Top"]["meta"]["cursor_policy"],
+        json!("seek")
+    );
+    assert_eq!(
+        descriptor["spec"]["Top"]["meta"]["resolved_edges"],
+        json!([{
+            "ownership": "action",
+            "target": "Top",
+            "regex_index": 0,
+            "block": true,
+            "fluent": null
+        }])
     );
 
     let family = classify_generated_rule_family(compiled.top_rule().unwrap());

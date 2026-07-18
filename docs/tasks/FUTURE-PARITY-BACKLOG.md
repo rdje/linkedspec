@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Rust live per-rule execution `.9.1.4.3` passes complete focused proof; lockstep,
-  canonical signoff, and its clean commit precede descriptor `.9.1.4.4`)
+- Last updated: `2026-07-18` (Rust live per-rule execution `.9.1.4.3` is committed at `9fffe9bd`; descriptor
+  projection `.9.1.4.4` is verified through canonical signoff and awaits its clean commit before `.9.1.4.5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3807,14 +3807,50 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.4.3 - derive Rust rule-local cursor policy`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Project Rust's rule-local cursor descriptor v1 from normalized compiled semantics.
   Dependencies: `.9.1.4.3`
   Acceptance: Emit the neutral descriptor identity, remove root/rule global `parse_mode`, publish authored family,
     derived `cursor_policy`, and ordered resolved-edge ownership facts, prove direct and compiled-JSON-roundtrip
     identity plus live agreement, and keep generated-source v1 independently staged.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map, ADR `0044`, neutral descriptor contract, Perl
+    reference projection, Rust normalization/execution cards, and toolbox probes to the exact descriptor builder,
+    schema, consumer, and roundtrip seams; record direct and reconstructed pre-edit output before executable edits.
+  - [x] **PROJECT NEUTRAL V1** — Emit the exact neutral descriptor identity, remove root/rule `parse_mode`, and
+    publish each rule's authored family plus derived `cursor_policy` without independently mutable policy state.
+  - [x] **RESOLVE ORDERED EDGES** — Publish normalized ordered action/blind resolved-edge ownership, including
+    plain/indexed/grouped/shared-block/fluent and explicit cross-family cases, with exact portable facts.
+  - [x] **PROVE IDENTITY / LIVE AGREEMENT** — Prove direct descriptor and compiled-JSON-roundtrip byte identity,
+    family/policy/edge coverage, and agreement between descriptor facts and normal live rule entry while generated
+    source v1 remains independently staged for `.9.1.4.5`.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, and operational
+    docs; run focused Rust plus neutral/governance/canonical gates; commit before generated-source leaf `.9.1.4.5`.
+  Verification: Focused implementation proof passes. Knowledge Map/ADR/neutral/Perl retrieval and the isolated
+    pre-edit probe identified exact source locations and reproduced direct/reconstructed identity alongside root
+    and rule global fields, absent cursor identity/family/resolved rows, and the wrong consume description for a
+    default blind parent. The disposable probe build was deleted immediately after evidence capture.
+
+    `CompiledDescriptorMeta` now emits `linkedspec-rule-local-cursor-v1` without a global field. Every rule emits
+    normalized `family`, `cursor_policy`, aggregate `edge_ownership`, exact authored-mode facts, and ordered
+    semantic `resolved_edges`. Action rows use the selected child regex index; blind rows use null; block and
+    fluent facts come from compiled state. Optional non-semantic bare/explicit provenance is deliberately omitted
+    rather than guessed after normalization. Generated-source v1 remains unchanged and exclusively owns the
+    bounded compatibility adapter until `.5`.
+
+    Contract-driven descriptor proof passes 4/4 across all 36 family spellings, every valid neutral edge case,
+    exact metadata variants/semantic fields/order, and direct/ordinary compiled-JSON identity. Runtime execution
+    passes 6/6 with descriptor/live agreement for all 36 families and loaded parent/child projection. Full core
+    passes 189 unit + 4 descriptor + 5 normalization + 8 type tests; runtime library passes 137; formatting and
+    production-library Clippy pass. Complete `tools/run_rust_local.sh` passes the 105-fixture oracle in 206.35
+    seconds, seven diagnostics, generated classifier 105/105 in 235.29 seconds, 197 integrations, and every
+    adjacent suite, then reaches only the exact governed `.6` CLI boundary at 51/63. Token-free `descriptor.rs`
+    retires from the inventory, and the neutral checker passes 36/18/8/14/73 at 2/6 plus 29 mutations. Knowledge
+    Map passes at 586 facts/4,155 keys; memory architecture, task metadata, all four doctrines, mdBook, JSON,
+    formatting, whitespace, and cleanup pass. Canonical local CI repeats the 288-test composed Perl consumer,
+    reference CLI 63/63 in default and POSIX environments, and Phase 0 1,031/1,031 in 610 seconds, then exits 0.
+    Generated-source `.9.1.4.5` follows only after this verified leaf commits cleanly.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.4.4 - project Rust cursor descriptor v1`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.5`
   Status: `pending`
@@ -6148,8 +6184,9 @@ cursor contract/inventory `.9.1.2` established the 1/7 baseline; Perl `.9.1.3` i
 Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/reference-fixture migration
 `.9.1.3.5` are committed through `b7c28156`; composed admission `.9.1.3.6` closes the parent at `c35755f7` and
 advances only Perl to 2/6. Rust preflight/split `.9.1.4.0` is verified without behavior changes; local-gate
-hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are committed through `8780990a`; verified live per-rule
-execution `.9.1.4.3` awaits its clean commit before descriptor `.9.1.4.4` activates.
+hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are committed through `8780990a`; live per-rule execution
+`.9.1.4.3` is committed at `9fffe9bd`. Descriptor projection `.9.1.4.4` is verified through focused and canonical
+signoff and awaits its clean commit; generated source `.9.1.4.5` remains pending behind that boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6396,7 +6433,7 @@ execution `.9.1.4.3` awaits its clean commit before descriptor `.9.1.4.4` activa
 | 215.1 | `FUTURE-PARITY-BACKLOG.9.1.4.1` | `done` | Complete core-package tests now run before the complete runtime package in the focused gate. |
 | 215.2 | `FUTURE-PARITY-BACKLOG.9.1.4.2` | `done` | Family classification, typed bare-edge ownership, exact diagnostics, and staged execution proof pass. |
 | 215.3 | `FUTURE-PARITY-BACKLOG.9.1.4.3` | `done` | Live/loaded/serialized/reconstructed policy derives from every entered rule; artifact/public staging remains explicit. |
-| 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `pending` | Project descriptor v1 family, policy, and resolved-edge facts. |
+| 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `done` | Descriptor v1 projects family, policy, ordered resolved edges, identity, and full signoff. |
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `pending` | Emit/reconstruct Rust generated-source v2 from minimal family plans. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `pending` | Remove Rust option/CLI/trace overrides and migrate exact 63x2 bytes. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `pending` | Compose Rust admission, advance only Rust, and close the backend parent. |
@@ -7070,8 +7107,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.2` are committed and verified live execution `.3`
-  awaits its clean commit before descriptor `.4` activation.
+  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.3` are committed and descriptor `.4` has complete
+  focused/canonical signoff before its clean commit and generated-source `.5` activation.
   Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
@@ -7088,7 +7125,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.2` are committed and live execution `.3` is verified while later
+  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.3` are committed and descriptor `.4` is verified while later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 
@@ -7096,6 +7133,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.4` | KM/ADR/neutral/Perl retrieval and disposable pre-edit descriptor probe; normalized descriptor v1 identity/family/policy/ownership/ordered-edge projection; 4 descriptor tests over 36 families and every valid neutral edge; exact semantic fields/order and direct/compiled-JSON identity; runtime execution 6 with loaded/live agreement; core 189/4/5/8, runtime 137, oracle 105/206.35s, diagnostics 7, classifier 105/235.29s, integrations 197 and adjacent suites; formatting and production-library Clippy; exact 51/63 `.6` primary boundary; neutral 36/18/8/14/73 at 2/6 plus 29 mutations; KM 586/4,155; memory/task/four doctrines/mdBook/JSON/whitespace/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/610s. | PASS. Rust descriptor v1 is a deterministic projection of normalized compiled semantics and agrees across direct, loaded, reconstructed, and live routes. Generated v1 remains independently staged; `.5` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.3` | ADR/KM/toolbox retrieval and pre-edit runtime/trace probes; mutable compiled-policy removal; exact per-entered-rule action/blind/call/recursion/load/JSON/trace execution; staged descriptor/generated/public adapters; 6 execution tests over 36 families, eight parent/child mechanisms, and two structural replacements; normalization 3+5, types 8, descriptor 3, source emitter 5; core 189, runtime 137, oracle 105/216.25s, diagnostics 7, classifier 105/243.60s, integrations 197 and adjacent suites; formatting; production-library Clippy; exact 51/63 `.6` primary boundary; neutral 36/18/8/14/74 at 2/6 plus 29 mutations; KM 586/4,151; memory/task/four doctrines/mdBook/JSON/whitespace; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/612s. | PASS. Rust normal live, loaded, and ordinary reconstructed execution derives cursor policy from every entered rule with no parent/global propagation or mutable compiled field. Descriptor/generated v1 and public removal stay explicitly owned by `.4-.6`; `.4` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.2` | ADR/KM/toolbox retrieval; compact-family and bare-edge probes; five core contract tests over 36 families, 18 edges, six ownership sets, line scope, exact diagnostics, lowering, and JSON roundtrip; three runtime staging tests; complete focused gate with core 189/3/5/8 and runtime 137/105 oracle/105 generated/197 integration plus adjacent suites; production-library Clippy; exact default 51/63 staged boundary and prior POSIX 51/63 pin; neutral 36/18/8/14/72 at 2/6 plus 29 mutations; KM 585/4,138; memory/task/four doctrines/mdBook/whitespace; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/646s. | PASS. Rust retains typed complete-line/header-rest bare edges, derives family ownership into acode/bcode, emits exact portable diagnostics, and keeps later execution/artifact policy behind one named transitional classifier. Disk exhaustion was isolated as environmental; only successful reruns count as proof. `.9.1.4.3` waits for the clean commit. |
 | `2026-07-17` | `FUTURE-PARITY-BACKLOG.9.1.3.6` | ADR/KM/contract baseline; exact 14-role consumer and canonical registration; all eight diagnostics; focused constituent baseline 394 and composed 410; neutral cursor 36/18/8/14/72 at 2/6 plus 29 mutations; generated/capability 80/0/0; reference CLI 63x2; standalone Phase 0 `1..1031`/641s; KM 584/4126; JSON/Python/Perl/shell, memory/task/doctrine/mdBook/whitespace/cleanup; canonical consumer 288, CLI 63x2, and Phase 0 `1..1031`/642s. | PASS. One omission-sensitive consumer composes every Perl projection exactly once, only `perl_reference` advances, parent `.9.1.3` closes, and Rust `.9.1.4` waits for the clean commit. A mislabelled manual POSIX display probe was root-caused to template substitution; the exact canonical command passes twice. |
@@ -7442,6 +7480,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: `.9.1.4.4` replaces Rust descriptor-wide and per-rule global cursor fields with the exact neutral
+  v1 identity and normalized per-rule family, cursor policy, ownership, and ordered resolved-edge facts. Action
+  rows publish child indices, blind rows publish null indices, and block/fluent facts remain deterministic; optional
+  source provenance is omitted rather than guessed. Four descriptor tests cover 36 families and every valid edge,
+  runtime proof locks loaded/live agreement, and direct versus reconstructed descriptors are identical. Complete
+  Rust, neutral, Knowledge Map, governance, mdBook, and canonical gates pass; token-free `descriptor.rs` contracts
+  the exact inventory to 73 while rollout stays 2/6. Generated-source `.5` waits for the clean commit.
 - `2026-07-18`: `.9.1.4.3` removes independently mutable Rust compiled cursor state and makes normal live, loaded,
   ordinary reconstructed, action, blind, direct-call, recursive, and traced rule entry derive policy from the
   entered family. One explicit adapter preserves descriptor/generated v1 for `.4-.5`; the still-present public

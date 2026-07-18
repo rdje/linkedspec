@@ -37,8 +37,9 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > normal live, loaded, and ordinary JSON-reconstructed rules derive policy at
 > each rule entry. Its compiled rule no longer stores an independent mutable
 > policy, and the still-present caller option cannot override normal execution.
-> Rust descriptor v1, generated-source v1-to-v2 migration, and option/CLI removal
-> remain staged under `.9.1.4.4-.6` through explicit compatibility boundaries.
+> Rust `.9.1.4.4` now publishes descriptor-v1 family/policy/resolved-edge facts
+> without root/rule global fields. Generated-source v1-to-v2 migration and
+> option/CLI removal remain staged under `.9.1.4.5-.6` through explicit boundaries.
 > rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
 > dependency-ordered under `.9.1.4-.9`.
 
@@ -532,11 +533,17 @@ parent calling a default child, the parent match row reports `Consume`; a later 
 match may report `Seek` from the cursor passed by the parent. That is evidence of two
 rule entries, not a mid-run global mode change.
 
-During the ordered migration, descriptor v1 and generated-source v1 remain deliberately
-older projections. They use a bounded compatibility adapter until `.9.1.4.4-.5` migrate
-their contracts. The Rust option/CLI/request-trace surface also remains visible until
-`.9.1.4.6`, but its value no longer overrides normal live rule policy. Do not use that
-staged surface to author cursor semantics; express the structure with rule families.
+Rust descriptor v1 now uses the same derived state as live execution. Root metadata identifies
+`linkedspec-rule-local-cursor-v1`; rule metadata publishes normalized `family`, derived `cursor_policy`, aggregate
+`edge_ownership`, and ordered `resolved_edges`, with no root or rule global cursor field. Direct, loaded, and
+ordinary reconstructed descriptors agree. Resolved rows expose action/blind ownership, target, child regex index,
+compiled block presence, and fluent continuation. Bare-versus-explicit provenance is optional and non-semantic,
+so Rust omits it after normalization rather than inventing it.
+
+Generated-source v1 remains the deliberately older projection until `.9.1.4.5` migrates it to v2. The Rust
+option/CLI/request-trace surface also remains visible until `.9.1.4.6`, but its value no longer overrides normal
+live rule policy. Do not use either staged surface to author cursor semantics; express the structure with rule
+families.
 
 ## Removed Perl option boundary
 
@@ -618,9 +625,9 @@ This keeps each reusable rule stable instead of reviving a caller or rule-local
 escape hatch.
 
 The Perl reference implements both the decision's bare-edge normalization and normal live cursor spending. Rust
-implements the same typed normalization and portable validation through `.9.1.4.2`, and `.9.1.4.3` now applies
-the derived policy to normal live, loaded, and ordinary reconstructed execution. A complete bare paragraph member
-such as `Child`, `Child { ... }`, or
+implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
+derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
+family/policy/edge facts through descriptor v1. A complete bare paragraph member such as `Child`, `Child { ... }`, or
 `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -676,5 +683,5 @@ in the Perl reference are current. Primary-command/API removal is also current.
 One canonical 14-role consumer composes live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic projections. The neutral checker currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 74 migration files,
+spellings, 18 edge cases, eight parent/child cases, 73 migration files,
 2 complete / 6 pending, and 29 rejected drift mutations.

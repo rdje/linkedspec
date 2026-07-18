@@ -337,9 +337,9 @@ impl CompiledRule {
 
     /// Reproduce the pre-rule-local policy only for staged v1 artifact views.
     ///
-    /// Descriptor v1 and generated-source v1 migrate in
-    /// `FUTURE-PARITY-BACKLOG.9.1.4.4-.5`. Normal live, loaded, and serialized
-    /// execution must use [`Self::cursor_policy`] instead.
+    /// Generated-source v1 migrates in `FUTURE-PARITY-BACKLOG.9.1.4.5`.
+    /// Normal live, loaded, serialized, and descriptor execution must use
+    /// [`Self::cursor_policy`] instead.
     pub fn legacy_artifact_parse_mode(&self) -> ParseMode {
         if self.mode.uses_legacy_and_interpretation() || !self.bcode_dispatch.is_empty() {
             ParseMode::Consume

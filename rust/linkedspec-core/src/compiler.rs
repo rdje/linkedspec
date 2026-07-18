@@ -777,7 +777,7 @@ mod tests {
     }
 
     #[test]
-    fn compile_derives_live_policy_and_isolates_staged_artifact_policy() {
+    fn compile_derives_current_policy_and_isolates_generated_v1_policy() {
         let pipe = parse_spec("Top::|\n /x/ -> Top { return(\"hit\") }\n").unwrap();
         let pipe = compile(&pipe).unwrap();
         assert!(!pipe.rules[0].mode.is_and());
@@ -789,7 +789,7 @@ mod tests {
         assert_eq!(
             pipe.rules[0].legacy_artifact_parse_mode(),
             ParseMode::Consume,
-            "descriptor/generated v1 retain their bounded later-leaf adapter"
+            "generated v1 retains its bounded later-leaf adapter"
         );
 
         let blind = parse_spec("Top::\n => Child\n\nChild:\n /x/\n").unwrap();

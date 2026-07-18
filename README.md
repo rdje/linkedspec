@@ -16,8 +16,10 @@ ownership, v1 generated state, and the exact 51/63 primary boundary without exec
 lowers family-derived ownership into compiled action/blind tables, and emits the neutral portable diagnostics.
 Verified `.9.1.4.3` removes independently mutable compiled cursor state and makes normal live, loaded, serialized,
 and reconstructed execution derive policy from each entered rule. Parent/global policy no longer propagates into
-children. Descriptor v1, generated-source v1-to-v2 migration, and public option/CLI removal remain explicitly
-staged under `.9.1.4.4-.6`; the governed inventory is 74 files and rollout remains 2/6 until composed Rust admission.
+children. Verified descriptor `.9.1.4.4` now publishes the neutral v1 identity, normalized family/policy, and
+ordered resolved-edge facts without root/rule global cursor fields; direct, loaded, and reconstructed projections
+agree with live execution. Generated-source v1-to-v2 migration and public option/CLI removal remain explicitly
+staged under `.9.1.4.5-.6`; the governed inventory is 73 files and rollout remains 2/6 until composed Rust admission.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

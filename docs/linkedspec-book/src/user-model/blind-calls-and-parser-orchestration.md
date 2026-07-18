@@ -7,8 +7,9 @@
 > AND. Parent family never changes a child's intrinsic cursor policy. This syntax
 > is fully admitted on Perl through `.9.1.3.6`. Rust `.9.1.4.2` now retains and
 > validates the same bare forms as typed AST and lowers their family-derived
-> ownership; Rust live rule-local execution, descriptor/generated artifacts,
-> CLI removal, and later backends remain in `.9.1.4-.9`.
+> ownership; `.9.1.4.3` makes Rust live/loaded/reconstructed execution rule-local,
+> and `.9.1.4.4` projects descriptor-v1 family/policy/resolved-edge facts. Rust
+> generated v2, CLI removal, and later backends remain in `.9.1.4.5-.9`.
 
 Blind calls are LinkedSpec's parser-orchestration edge family.
 

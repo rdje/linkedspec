@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.4` — descriptors project normalized semantics, not compatibility
+  controls): Rust's original outward descriptor duplicated the global mode at both `meta.parse_mode` and each
+  rule's `meta.parse_mode`. After live execution became rule-local, those fields were not merely stale names: the
+  rule projection still called `legacy_artifact_parse_mode()`, so compact `|` and any default rule containing a
+  blind edge could be described as consume while normal execution correctly sought. The descriptor now derives
+  `family`, `cursor_policy`, and exact `mode.is_and` from the authored `RuleMode`; root metadata carries the neutral
+  v1 contract identity instead of a global cursor value.
+
+  Ordered resolved-edge projection deliberately consumes the normalized compiled tables rather than re-reading
+  source. Valid rules have one ownership after validation, so table order is source-semantic order. Action rows
+  expose `child_regex_idx`, not the parent's triggering `regex_idx`; blind rows expose no regex index. Block
+  presence follows the compiled ActionIR payload, and a fluent chain is rendered deterministically as dotted
+  `method(args)` segments. The aggregate `edge_ownership` is `action`, `blind`, or `none`; `mixed` is retained only
+  as an honest projection of externally reconstructed invalid state and cannot arise from the validated compiler.
+
+  The neutral contract permits `source_form` only as optional, non-semantic provenance. `CompiledRule` does not
+  retain that provenance after bare/explicit normalization, so the Rust descriptor omits it instead of guessing.
+  Bare and explicit equivalents consequently project byte-identical semantic rows, which is the dispatch/parity
+  guarantee. This avoids widening the compiler representation merely for optional introspection.
+
+  Pre-edit isolated probing proved direct/reconstructed identity but exposed root/rule global fields, absent
+  cursor identity/family/resolved rows, and the wrong consume description for a default blind parent. The probe
+  project and build were deleted immediately after evidence capture. Post-edit proof consumes all 36 families and
+  every valid neutral edge case, exact metadata/row schemas, direct JSON roundtrip, loaded policy, live agreement,
+  and the separately unchanged generated-v1 wire. `descriptor.rs` therefore leaves the token-derived migration
+  inventory, reducing it from 74 to 73. Full focused proof passes core 189/4/5/8, runtime 137, execution 6,
+  oracle 105/206.35s, diagnostics 7, classifier 105/235.29s, integrations 197, every adjacent suite, formatting,
+  and production-library Clippy before the exact staged `.6` CLI boundary at 51/63.
+
+  Final lockstep proof passes the 73-file neutral checker at 2/6 plus all 29 mutations, Knowledge Map at 586
+  facts/4,155 keys, memory/task/four-doctrine/mdBook/JSON/formatting/whitespace/cleanup checks, and canonical local
+  CI through the 288-test composed Perl cursor consumer, reference CLI 63/63 twice, and Phase 0 1,031/1,031 in
+  610 seconds. Generated-source v1 remains the only cursor-bearing artifact boundary for `.9.1.4.5`.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.3` — live policy is derived state, not compiled state):
   `CompiledRule.parse_mode` duplicated information already present in `RuleMode`, admitted caller/global mutation,
   and survived ordinary JSON serialization. Rust now exposes `CompiledRule::cursor_policy()` as the only normal

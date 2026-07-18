@@ -348,8 +348,14 @@ let compiled = compile(&spec)?;
 
 let descriptor = compiled.descriptor_state();
 assert_eq!(descriptor.meta.descriptor_model, "compiled_descriptor_state");
+assert_eq!(descriptor.meta.cursor_contract, "linkedspec-rule-local-cursor-v1");
 assert_eq!(descriptor.meta.compiled_rule_order, ["Top", "Child"]);
 assert_eq!(descriptor.spec["Top"].dependency_refs[0].label, "Child");
+assert_eq!(descriptor.spec["Top"].meta.family, "or_default");
+assert_eq!(
+    descriptor.spec["Top"].meta.cursor_policy,
+    linkedspec_core::types::ParseMode::Seek,
+);
 
 let json = compiled.to_descriptor_json()?;
 assert!(json.get("functions").is_some());
@@ -362,6 +368,42 @@ launches a subprocess or requires `linkedspec-runtime`. Ordered `dependency_refs
 `body_payload` / `body_parse_job` / `body_ast`, definition order, last-definition compile order, and model
 identities survive compiled-state serialization round trips.
 
+Rust uses the rule-local cursor descriptor-v1 metadata variant. Descriptor-wide metadata contains
+`cursor_contract = "linkedspec-rule-local-cursor-v1"` and no global cursor field. Each rule's metadata contains:
+
+- `family`: normalized `and` or `or_default` authored identity;
+- `cursor_policy`: derived `consume` or `seek`;
+- `edge_ownership`: `action`, `blind`, or `none`; and
+- `resolved_edges`: deterministic semantic rows with `ownership`, `target`, child `regex_index`, `block`, and
+  `fluent`.
+
+For example, this AND-family action exception remains consume at the rule level while its explicit edge selects
+child regex slot 1:
+
+```rust
+let spec = parse_spec(
+    "Top::AND\n -> Child[1] { return(\"hit\") }\nChild:\n /a/\n /b/\n",
+)?;
+let descriptor = compile(&spec)?.descriptor_state();
+let top = &descriptor.spec["Top"].meta;
+
+assert_eq!(top.family, "and");
+assert_eq!(top.cursor_policy, linkedspec_core::types::ParseMode::Consume);
+assert_eq!(top.edge_ownership, "action");
+assert_eq!(top.resolved_edges[0].target, "Child");
+assert_eq!(top.resolved_edges[0].regex_index, Some(1));
+assert!(top.resolved_edges[0].block);
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+Bare and explicit equivalent edges project the same semantic row. The neutral contract allows an optional
+non-semantic `source_form`, but Rust intentionally omits it because compiled normalization does not retain that
+provenance. Direct, file-loaded, and ordinary compiled-JSON-reconstructed descriptors agree, and their policy is
+the same policy normal live execution spends. Generated-source v1 is a separate artifact contract and remains
+staged until its v2 migration.
+
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
-contract and final four-backend admission closed under `.1.6.2.3`.
+contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrates by explicit
+variant: Perl and Rust currently consume rule-local v1, while Dart and Julia retain the legacy variant until their
+ordered cursor-rollout leaves.

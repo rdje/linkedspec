@@ -8,11 +8,15 @@ answers:
   - "does Rust descriptor introspection require the runtime engine"
   - "does Rust preserve dependency refs in source order"
   - "does Rust descriptor projection survive CompiledSpec JSON round trips"
-date: 2026-07-11
-status: current
+  - "does Rust descriptor v1 use rule local cursor policy"
+  - "what fields are in Rust resolved edge descriptors"
+  - "does Rust descriptor retain bare versus explicit edge provenance"
+date: 2026-07-18
+status: current through rule-local cursor descriptor v1
 tags: [rust, descriptor, compiler-state, public-api, staged-parsing, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.2.2 adds rust/linkedspec-core/src/descriptor.rs, CompiledSpec::descriptor_state(), CompiledSpec::to_descriptor_json(), and ordered CompiledRule.dependency_refs. Three focused tests prove the four-key shape, model/order/rule/dependency/staged-function values, compiled-state JSON round-trip identity, and deterministic last-definition projection. The full core package and full Rust gate pass: formatting, 137 runtime tests, 105 oracle fixtures, 196 integration tests, three generated-source tests, ten trace tests, and 61/61 CLI cases in both environments."
 evidence_update_2026_07_11: "FUTURE-PARITY-BACKLOG.1.6.2.3 makes the focused Rust shape test consume capability_conformance/outward_descriptor_contract.json alongside Perl, Dart, and Julia. Exact four-backend descriptor admission is closed."
+evidence_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.4.4 migrates Rust to linkedspec-rule-local-cursor-v1: root/rule global mode fields are absent; every rule publishes normalized family, derived cursor_policy, edge_ownership, and ordered ownership/target/regex_index/block/fluent rows. All 36 families, every valid neutral edge case, direct/CompiledSpec-JSON identity, loaded projection, and live agreement pass; generated-source v1 remains separately staged."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && bash tools/run_rust_local.sh"
 ---
 
@@ -30,3 +34,14 @@ does not contain the new field.
 
 The focused Rust test consumes the same exact outer descriptor and function-record schema as Perl, Dart, and Julia;
 four-backend admission closed under `FUTURE-PARITY-BACKLOG.1.6.2.3`.
+
+Cursor metadata now consumes the shared `rule_local_cursor_v1` descriptor variant. Root metadata identifies
+`linkedspec-rule-local-cursor-v1`; it has no global cursor field. Rule metadata publishes `family` (`and` or
+`or_default`), derived `cursor_policy`, aggregate `edge_ownership`, and ordered `resolved_edges`. Each semantic row
+has exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`. Action indexes select the child regex slot;
+blind rows use null. Bare/explicit `source_form` is omitted because the neutral contract declares it optional and
+non-semantic and normalized `CompiledRule` state deliberately does not retain it.
+
+The projection is pure derived state: direct, loaded, and ordinary compiled-JSON-reconstructed values agree, and
+descriptor policy is the same `CompiledRule::cursor_policy()` normal execution spends. Generated-source v1 remains
+the only consumer of `legacy_artifact_parse_mode()` until its separately owned v2 migration.
