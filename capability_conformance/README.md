@@ -55,9 +55,10 @@ backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to 
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
-configured CI execution, first-marker/markerless/explicit/unknown primary cases, and default/explicit request
-trace while rejecting 24 semantic, topology, inventory, and rollout drift mutations. Rollout is
-2 complete / 5 pending: neutral decision plus the composed Perl reference are admitted. Perl records marker-
+the 15-role Rust admission consumer, configured CI/backend execution, first-marker/markerless/explicit/unknown
+primary cases, and default/explicit request trace while rejecting 29 semantic, topology, inventory, and rollout
+drift mutations. Rollout is 3 complete / 4 pending: neutral decision plus the composed Perl and Rust backends are
+admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
@@ -66,9 +67,11 @@ including exact first-marker and markerless-default bytes beside explicit and un
 the same marker-optional resolver through native, loaded, serialized/reconstructed, generated direct/traced, and
 emitted direct/traced execution. Existing generated signatures remain intact; option-bearing siblings accept
 per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
-authored descriptor identity and the minimal family plan. The Rust rollout row deliberately remains pending until
-topology and exact shared-primary admission `.9.1.1.2.2.3`. Dart, Julia, Lua/LuaJIT, and cross-backend no-drift
-leg `.6` are pending. Current backend differences stay explicit in the inventory until their owning leaves land.
+authored descriptor identity and the minimal family plan. One omission-sensitive consumer composes all 15 neutral,
+native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly once;
+the Rust primary command passes all 65 cases in default and POSIX option environments. Dart, Julia, Lua/LuaJIT,
+and cross-backend no-drift leg `.6` are pending. Current backend differences stay explicit in the inventory until
+their owning leaves land.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

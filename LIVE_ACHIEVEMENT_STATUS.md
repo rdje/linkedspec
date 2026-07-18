@@ -8,6 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 — admit Rust root selection**
+  (DONE, fully signed off and awaiting its prepared clean commit).
+
+  **Result:** One omission-sensitive Rust admission consumer executes all 15 contract-declared semantic roles
+  exactly once. Governance locks its path, drivers, roles, six shared primary identities, and rollout with 29
+  mutations. Only Rust advances, so root-selection parity is 3 complete / 4 pending; Dart, Julia, Lua, and final
+  admission remain separately owned.
+
+  **Proof:** Focused admission/core/routes/emitter passes 1+6+6+6. Complete Rust-local passes core 193+4+5+8,
+  runtime 137, oracle 105, classifier 105, integration 197, admission 1, emitter 6, and primary 65x2. Canonical CI
+  passes all four doctrines, root governance, Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0
+  1,031/1,031 in 627 seconds. Public/book/capability/live records agree; KM is 603/4,328. Cleanup removes 10,626
+  Cargo files and reduces `rust/target` from 2.4 GiB to 99 MiB, plus the generated book/cache/logs.
+
+  **Next:** Commit `.2.3`, clear the brief, prove the tree clean, then activate Dart root selection `.9.1.1.2.3`
+  task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 — converge Rust root routes**
   (DONE, signed off and awaiting its prepared clean commit).
 
@@ -24,8 +41,9 @@ Current execution status for interruption-safe batch workflow recovery.
   mutable-frontier storage and moved to stable canonical storage; all 26 mutations pass. KM is 602/4,320. Cleanup
   removes 16,558 Cargo files, reducing `rust/target` from 2.9 GiB to 99 MiB, plus the generated book/cache.
 
-  **Next:** Commit `.2.2`, clear the brief, prove the tree clean, then activate `.9.1.1.2.2.3` task-tree-first for
-  exact topology and 65-case Rust rollout admission.
+  **Next:** Clean commit `1b57294d` landed `.2.2`; `.9.1.1.2.2.3` now has one 15-role admission consumer, exact
+  topology with 29 mutations, and complete Rust-local 65x2 proof green at 3/7. Public/KM plus canonical closeout
+  remain before commit and Rust parent closure.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 — implement Rust root resolution**
   (DONE at clean commit `e39db876` — implementation, Rust-local proof, and canonical signoff pass).

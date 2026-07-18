@@ -6,16 +6,13 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract is complete and rejects 24 drift mutations, so rollout is 2 complete / 5
-pending. The composed Perl reference implements native, loaded, generated-direct, generated-traced, generated
-`Get`, descriptor, diagnostics, runtime trace, and primary-command routes while preserving authored marker identity.
-Its 65-case shared primary proof includes exact first-marker and markerless defaults beside explicit/unknown and
-request-trace cases. Rust preflight now measures exactly 64/65 in both option environments: explicit selection,
-first-marker default, unknown selection, request trace, and every unrelated case pass; markerless fallback alone
-is rejected by marker-required validation. Ordered authored markers already survive Rust parse, compiled JSON,
-descriptors, and generated v2 artifacts, while core resolver/diagnostic work `.2.1`, composed route work `.2.2`,
-and exact admission `.2.3` remain. Dart, Julia, Lua/LuaJIT, and final composed five-backend admission remain
-`.9.1.1.2.3-.6`.
+backend-neutral executable contract rejects 29 drift mutations, so rollout is 3 complete / 4 pending. Composed
+Perl and Rust backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
+descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
+marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
+markerless, explicit/unknown, and request-trace outcomes. Rust additionally has one topology-checked 15-role
+consumer that executes every declared admission role exactly once. Dart, Julia, Lua/LuaJIT, and final composed
+five-backend admission remain `.9.1.1.2.3-.6`.
 
 ## Completed phases
 

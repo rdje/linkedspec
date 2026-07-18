@@ -105,6 +105,7 @@ require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/root_rule_selection_perl_core.t
 require_tracked_file t/root_rule_selection_perl_routes.t
 require_tracked_file rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs
 require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
 require_tracked_file capability_conformance/callable_codeblock_contract.json

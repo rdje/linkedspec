@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from pathlib import Path
 from typing import Any, Callable
 
@@ -28,6 +29,7 @@ TOP_LEVEL_FIELDS = {
     "strict_cases",
     "projections",
     "required_execution_routes",
+    "rust_admission",
     "implementation_inventory",
     "rollout",
 }
@@ -126,7 +128,7 @@ INVENTORY = [
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.0"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.1"),
-    ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
+    ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
     ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.4"),
     ("lua", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
@@ -136,6 +138,36 @@ ROLLOUT = [
         "FUTURE-PARITY-BACKLOG.9.1.1.2.6",
     ),
 ]
+RUST_ADMISSION = {
+    "consumer_path": "rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_rust_local.sh",
+    "roles": [
+        "neutral_selection",
+        "neutral_failures",
+        "neutral_strict",
+        "native",
+        "loaded",
+        "reconstructed",
+        "generated_direct",
+        "generated_traced",
+        "emitted_source_direct",
+        "emitted_source_traced",
+        "descriptor",
+        "diagnostic",
+        "runtime_trace",
+        "primary_cli",
+        "primary_request_trace",
+    ],
+    "primary_case_ids": [
+        "success_default_first_authored_marker",
+        "success_markerless_first_authored_rule",
+        "success_explicit_top_rule",
+        "failure_invocation_missing_top_rule",
+        "trace_stdout_medium",
+        "trace_failure_invoke_escaped_field",
+    ],
+}
 
 
 class ContractError(ValueError):
@@ -257,7 +289,7 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
         "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
-        "capability_conformance/README.md": [CONTRACT_ID, "2 complete / 5 pending"],
+        "capability_conformance/README.md": [CONTRACT_ID, "3 complete / 4 pending"],
         "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
         "t/root_rule_selection_perl_core.t": [
             "selection_cases",
@@ -285,6 +317,7 @@ def validate_filesystem_contract() -> None:
             "python3 tools/check_root_rule_selection_contract.py",
             "prove -Iperl t/root_rule_selection_perl_core.t",
             "prove -Iperl t/root_rule_selection_perl_routes.t",
+            "require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",
         ],
     }
     for relative, required in markers.items():
@@ -388,6 +421,55 @@ def validate_filesystem_contract() -> None:
             }
         ],
         "shared CLI explicit request-trace file drifted",
+    )
+
+
+def validate_rust_admission(contract: dict[str, Any], *, check_filesystem: bool) -> None:
+    admission = require_fields(
+        contract["rust_admission"],
+        {"consumer_path", "canonical_driver", "backend_driver", "roles", "primary_case_ids"},
+        "Rust admission",
+    )
+    require(admission == RUST_ADMISSION, "Rust admission topology drifted")
+    if not check_filesystem:
+        return
+
+    consumer_path = ROOT / admission["consumer_path"]
+    canonical_path = ROOT / admission["canonical_driver"]
+    backend_path = ROOT / admission["backend_driver"]
+    require(
+        all(path.is_file() for path in (consumer_path, canonical_path, backend_path)),
+        "Rust admission consumer or driver is missing",
+    )
+
+    consumer_text = consumer_path.read_text(encoding="utf-8")
+    for role in admission["roles"]:
+        marker = re.compile(rf"^fn role_{re.escape(role)}\(", re.MULTILINE)
+        require(
+            len(marker.findall(consumer_text)) == 1,
+            f"Rust admission role marker drifted: {role}",
+        )
+
+    canonical_text = canonical_path.read_text(encoding="utf-8")
+    require(
+        f"require_tracked_file {admission['consumer_path']}" in canonical_text,
+        "canonical driver omits the Rust admission consumer",
+    )
+    require(
+        f'bash "$REPO_ROOT/{admission["backend_driver"]}"' in canonical_text,
+        "canonical driver omits the registered Rust backend driver",
+    )
+    backend_text = backend_path.read_text(encoding="utf-8")
+    require(
+        'test --manifest-path rust/Cargo.toml -p linkedspec-runtime' in backend_text,
+        "Rust backend driver omits the runtime package containing admission",
+    )
+
+    manifest = json.loads((ROOT / "cli_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    manifest_ids = {case["id"] for case in manifest["cases"]}
+    require(
+        set(admission["primary_case_ids"]) <= manifest_ids,
+        "Rust admission primary case identity is missing from the shared manifest",
     )
 
 
@@ -514,6 +596,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     projections = require_fields(contract["projections"], PROJECTIONS, "projections")
     require(all(isinstance(value, str) and value for value in projections.values()), "projection is empty")
     require(contract["required_execution_routes"] == ROUTES, "execution route order drifted")
+    validate_rust_admission(contract, check_filesystem=check_filesystem)
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list) and len(inventory) == 5, "implementation inventory count drifted")
@@ -649,6 +732,20 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ),
         ("rollout removed", lambda value: value["rollout"].pop()),
         ("regressed Perl rollout", lambda value: value["rollout"][1].__setitem__("status", "pending")),
+        ("Rust admission role", lambda value: value["rust_admission"]["roles"].pop()),
+        (
+            "Rust admission consumer",
+            lambda value: value["rust_admission"].__setitem__("consumer_path", "missing"),
+        ),
+        (
+            "Rust admission primary case",
+            lambda value: value["rust_admission"]["primary_case_ids"].pop(),
+        ),
+        (
+            "Rust admission canonical driver",
+            lambda value: value["rust_admission"].__setitem__("canonical_driver", "missing"),
+        ),
+        ("regressed Rust rollout", lambda value: value["rollout"][2].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

@@ -457,14 +457,13 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 2 complete / 5 pending. The composed Perl
-reference implements the exact order across native, loaded, generated-direct, generated-traced, generated `Get`,
-and primary-command routes; the shared 65-case CLI manifest locks first-marker, markerless, explicit, unknown, and
-request-trace outcomes. Rust now implements the same order across native, loaded, serialized/reconstructed,
-generated direct/traced, emitted direct/traced, and primary-command routes; its formal rollout row remains pending
-only for topology and exact shared-primary admission. Dart/Julia/Lua validation still blocks their existing
-markerless runtime fallback. Use an explicit selector and retain a marker when current multi-backend execution
-must be independent of those staged differences.
+has no marker, select the first authored rule. That contract is at 3 complete / 4 pending. Composed Perl and Rust
+backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
+available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
+markerless, explicit, unknown, and request-trace outcomes. Rust admission also topology-checks one 15-role
+consumer across the neutral rows and all real Rust route families. Dart/Julia/Lua validation still blocks their
+existing markerless runtime fallback. Use an explicit selector and retain a marker when current multi-backend
+execution must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(

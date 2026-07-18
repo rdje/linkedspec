@@ -17,10 +17,10 @@ answers:
   - "does invoking a Rust entry rule alter descriptor identity"
   - "which Rust root-selection work remains after route convergence"
 date: 2026-07-18
-status: current, admission pending
+status: superseded by rust-root-rule-selection-admission
 supersedes: rust-root-rule-selection-core
 tags: [rust, root-rule, top-rule, generated-source, emitted-source, serialized-spec, trace, diagnostics, descriptor, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 threads `ExecutionOptions` through loaded/serde-reconstructed and generated-plan execution, while preserving every existing default API. Generated and emitted option-bearing execute/parse, traced, and diagnostic-output siblings select any declared rule; omission resolves first authored marker then first declared rule. Generated source keeps format v2 and its ordered `{label,family}` plan because `CompiledSpec` already serializes ordered `CompiledRule { label, is_top, ... }`; the selector remains invocation state. Typed unknown selection returns `entry_rule_not_found` at `select_entry_rule` with `entry_rule`, and zero-rule reconstructed state returns `no_rules_defined` at `validate_spec`. Contract-v1 mismatch still rejects before selection. Trace topic `rust_runtime:generated_plan:top_rule` reports effective label and basis; runtime failures use the effective label/family. Descriptor JSON remains identical before and after execution. `.2.3` still owns topology-check admission, primary-manifest cases, and promotion of the Rust rollout row."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 threads `ExecutionOptions` through loaded/serde-reconstructed and generated-plan execution, while preserving every existing default API. Generated and emitted option-bearing execute/parse, traced, and diagnostic-output siblings select any declared rule; omission resolves first authored marker then first declared rule. Generated source keeps format v2 and its ordered `{label,family}` plan because `CompiledSpec` already serializes ordered `CompiledRule { label, is_top, ... }`; the selector remains invocation state. Typed unknown selection returns `entry_rule_not_found` at `select_entry_rule` with `entry_rule`, and zero-rule reconstructed state returns `no_rules_defined` at `validate_spec`. Contract-v1 mismatch still rejects before selection. Trace topic `rust_runtime:generated_plan:top_rule` reports effective label and basis; runtime failures use the effective label/family. Descriptor JSON remains identical before and after execution. `rust-root-rule-selection-admission` supersedes the former pending statement after `.2.3` topology-checks these routes and promotes Rust."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test root_rule_selection_core --test root_rule_selection_routes --test source_emitter && python3 tools/check_root_rule_selection_contract.py"
 ---
 
@@ -39,7 +39,8 @@ Typed generated-source validation preserves precedence between boundaries. Contr
 before root selection; then zero-rule structural validation precedes explicit lookup; only a valid selected rule
 can enter user execution. Successful trace and failure attribution use the same effective identity. Rust library
 and generated/emitted routes are aligned, but `.2.3` must still admit the primary-command and topology surfaces
-before the Rust rollout row can be declared complete.
+before admission. That proof is now complete; follow [[rust-root-rule-selection-admission]] for the current
+topology and rollout state.
 
 Related: [[root-rule-selection-precedence]], [[rust-root-rule-selection-core]],
 [[rust-generated-source-family-plan]], [[rust-outward-compiled-descriptor-projection]], and

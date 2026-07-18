@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (clean commit `eced5e5d` lands Rust root-selection preflight `.2.0`; core
-  validation/resolution/diagnostic leaf `.2.1` is active task-tree-first)
+- Last updated: `2026-07-18` (Rust root-selection parent `.2.2` is fully signed off at 3/7 rollout with exact
+  15-role topology, 29 mutations, Rust-local 65x2, canonical Phase 0, public/book/KM lockstep, and cleanup;
+  Dart `.2.3` remains next after the clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3304,8 +3305,10 @@ before implementation.
     error, authored `is_top` metadata remains source identity rather than dynamic selection state, and every
     compiler, validator, runtime, loaded/generated route, strict-unused check, descriptor, trace, CLI, neutral
     fixture, backend, and mdBook statement must agree.
-  Verification: **ACTIVE 2026-07-18 at 2/7 rollout.** Neutral decision `.0` and composed Perl reference `.1` are
-    done with canonical signoff; Rust/Dart/Julia/Lua remain `.2-.5` and final composed admission remains `.6`.
+  Verification: **ACTIVE 2026-07-18 at 3/7 rollout.** Neutral decision `.0` and composed Perl `.1` are canonically
+    signed off; Rust `.2` has implementation, one 15-role admission consumer, root governance 29 mutations, and
+    complete Rust-local 65x2 proof green while canonical closeout remains. Dart/Julia/Lua stay `.3-.5`, followed
+    by final composed admission `.6`.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.0`
@@ -3483,14 +3486,16 @@ before implementation.
     recurring CI, cleanup, and memory before the clean commit; leave Rust and later backend leaves pending.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement root-selection precedence on Rust.
   Dependencies: `.9.1.1.2.1`
   Children: `.9.1.1.2.2.0`, `.9.1.1.2.2.1`, `.9.1.1.2.2.2`, `.9.1.1.2.2.3`
   Acceptance: Align parser/validation, core/runtime, loaded/serialized/generated execution, descriptor/trace,
     strict checks, and primary CLI with the unchanged neutral contract and Perl reference bytes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** Preflight, core, composed routes, and one topology-checked 15-role admission
+    consumer pass 29 drift mutations and exact primary 65x2. Complete Rust-local and canonical proof pass;
+    public/mdBook/capability/live/Knowledge Map records agree at 3 complete / 4 pending, and cleanup is complete.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 - admit Rust root selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0`
   Status: `done`
@@ -3632,15 +3637,43 @@ before implementation.
     topology/admission leaf `.2.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Admit composed Rust root selection against the 65-case shared primary reference.
   Dependencies: `.9.1.1.2.2.2`
   Acceptance: Add one topology-checked Rust admission consumer across all neutral routes/failures; pass exact
     shared marker/markerless/default/explicit/unknown/request-trace bytes with and without `POSIXLY_CORRECT`;
     advance only the Rust rollout row; synchronize public/book/capability/live docs; and close parent `.2` after
     complete focused, Rust-local, governance, and canonical signoff.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** One contract-declared 15-role consumer
+    executes every neutral/native/loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary role
+    exactly once. Root governance is 3 complete / 4 pending with 29 mutations. Focused admission/core/routes/
+    emitter pass 1+6+6+6; complete Rust-local passes core 193+4+5+8, runtime 137, oracle 105/215.90s, classifier
+    105/249.47s, integration 197, admission 1/16.89s, emitter 6/49.64s, and primary 65x2. Canonical CI passes all
+    four doctrines, root governance, Perl root consumers 7+5, cursor 288, reference primary 65x2, and Phase 0
+    1,031/1,031 in 627 seconds. Public/book/capability/live records agree; Knowledge Map is 603/4,328. Cleanup
+    removes 10,626 Cargo files, reducing `rust/target` from 2.4 GiB to 99 MiB, plus generated book/cache/logs.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 - admit Rust root selection`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVE / BASELINE** — Read the composed Rust route fact, Perl admission precedent, neutral contract,
+    checker topology, exact primary cases/runner, canonical registration, capability rollout, and public status
+    owners before changing admission state.
+  - [x] **ONE ADMISSION CONSUMER** — Add one omission-sensitive Rust consumer that composes every neutral
+    selection, failure, strict, native, loaded/serde, generated/emitted, descriptor, trace, and diagnostic role
+    exactly once without duplicating their semantic owners.
+  - [x] **TOPOLOGY / MUTATION PROOF** — Extend the neutral inventory/checker with the exact Rust consumer path,
+    role markers, canonical registration, shared primary case identities, and deterministic omission mutations.
+  - [x] **PRIMARY REFERENCE** — Pass all 65 shared primary cases against `linkedspec-rust` with
+    `POSIXLY_CORRECT` unset and set, including first-marker, markerless-first-rule, explicit override, unknown
+    selector, and request-trace bytes.
+  - [x] **ROLLOUT / PUBLIC LOCKSTEP** — Advance only `rust` to complete, close Rust parent `.2`, and align
+    capability docs, mdBook, Knowledge Map, task/live/change/development/memory records without claiming later
+    backend or final public admission.
+  - [x] **FOCUSED / RUST LOCAL** — Pass the composed consumer, constituent root suites, generated governance,
+    root mutation checker, complete Rust-local gate, formatting, and whitespace.
+  - [x] **CANONICAL / COMMIT** — Pass canonical CI, safely clean generated artifacts, commit `.2.3`, clear the
+    brief, prove the tree clean, and only then activate Dart root-selection leaf `.3` task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.3`
   Status: `pending`
@@ -7246,18 +7279,18 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 210 | `FUTURE-PARITY-BACKLOG.9.1.1` | `active` | Cursor/edge design is complete; root-selection subtree `.2` now owns the directed precedence correction. |
 | 211 | `FUTURE-PARITY-BACKLOG.9.1.1.0` | `done` | Director confirms parent modes never propagate to or override child modes; no behavior changed. |
 | 212 | `FUTURE-PARITY-BACKLOG.9.1.1.1` | `done` | Exact grammar/runtime/descriptor/API/CLI/generated/conformance contract and `.9.1.2-.9` split are durable. |
-| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `active` | ADR `0046` and Perl are complete at 2/7; Rust/Dart/Julia/Lua and final admission remain `.2-.6`. |
+| 212.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2` | `active` | ADR `0046`, Perl, and Rust are at 3/7; Dart/Julia/Lua and final admission remain `.3-.6`. |
 | 212.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.0` | `done` | ADR `0046`, exact 8/3/3 cases, 5-backend audit, 24 mutations, mdBook, and canonical proof are complete without behavior. |
 | 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `done` | All Perl preflight, core/descriptor, generated/trace, and composed 65-case admission leaves pass canonical proof. |
 | 212.2.1.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` | `done` | Exact Perl validation/bootstrap/selection/descriptor/generated/strict/CLI seams and safe `.1-.3` order are durably mapped without behavior. |
 | 212.2.1.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` | `done` | Markerless validation, exact resolver/default, structured unknown failure, strict no-drift, and authored marker metadata pass canonical proof. |
 | 212.2.1.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` | `done` | Loaded/generated direct/traced/Get, runtime context, effective diagnostics/trace, metadata, and canonical proof pass. |
 | 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `done` | Topology-checked Perl admission, 65x2 reference bytes, docs, rollout, and parent closeout pass. |
-| 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `active` | Rust rollout is split into read-only preflight, core identity/resolution, composed routes, and 65-case admission. |
+| 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `done` | Rust preflight, core, routes, 15-role admission, 29 mutations, 65x2, canonical proof, public/KM lockstep, and cleanup pass. |
 | 212.2.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` | `done` | Rust is exactly 64/65 twice; ordered identity is preserved, validation/default/generated gaps are mapped, and `.1-.3` order is frozen without behavior. |
 | 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `done` | Markerless validation, ordered native resolution, portable diagnostics, strict no-drift, and immutable descriptor identity pass Rust-local and canonical proof. |
 | 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `done` | Loaded/serde/generated/emitted routes, exact identities, Rust-local/canonical proof, durable marker repair, and cleanup pass. |
-| 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `pending` | Topology-check and admit exact Rust 65-case primary parity, then close parent `.2`. |
+| 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `done` | Exact 15-role topology, 29 mutations, Rust-local/canonical 65x2, public/KM lockstep, and cleanup admit Rust at 3/7. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
 | 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
 | 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `pending` | Implement exact PUC Lua/LuaJIT selection across native/generated/primary routes. |
@@ -7983,6 +8016,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | Exact 15-role once-only admission consumer; six shared primary case identities; focused admission/core/routes/emitter 1+6+6+6; root governance 8/3/3/5 at 3/4 plus 29 mutations; complete Rust-local core 193+4+5+8, runtime 137, oracle 105, classifier 105, integration 197, admission 1, emitter 6, and primary 65x2; public/book/capability/live lockstep; KM 603/4,328; memory/task/four doctrines/whitespace; canonical Perl root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 627s; cleanup 10,626 Cargo files / target 2.4 GiB to 99 MiB plus generated book/cache/logs. | PASS. Only Rust advances, reaching 3 complete / 4 pending; Dart `.3` waits for this leaf's clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | Loaded/serde/reconstructed order and marker identity; all generated/emitted direct, compatibility, trace, and diagnostic-output roles; exact zero/unknown/stale precedence and effective trace/failure identity; routes 6, emitter 6 with fresh crate, root 6, diagnostics 5, loader 5, trace 10, diagnostic output 7, descriptor/types; generated governance and classifier 105; complete Rust-local oracle 105, integration 197, primary 65x2; root governance 8/3/3/5 at 2/5 plus 24 mutations; logical-helper marker root cause and 26 mutations; KM 602/4,320; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 627s; cleanup 16,558 Cargo files / target 2.9 GiB to 99 MiB plus generated book/cache. | PASS. Every Rust composed route shares the ordered resolver without format, descriptor, or rollout promotion; `.2.3` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | Neutral 8/3/3 resolver consumer; markerless/zero parser-validation boundary; native legacy/value default+explicit execution; portable unknown diagnostics; descriptor order/contract/immutable markers; strict no-drift; core 193+4+5+8; runtime 137; integration 197; diagnostics 5; loader 5; trace 10; Rust-local oracle 105, generated classifier, adjacent suites, format, exact-primary 65x2; strict-new-code Clippy over 28 exact pre-existing Rust 1.95 findings; root governance 8/3/3/5 at 2/5 plus 24 mutations; KM 600/4,301; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 633s; cleanup. | PASS. Rust native/core/primary mechanisms advance without generated-route or rollout promotion; `.2.2` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.7` | KM/ADR/neutral/checker/Perl-consumer/canonical-seam retrieval; pre-edit neutral 36/18/8/14/68 at 2/6 plus 29 mutations; constituent normalization 5, descriptor 4, execution 6, emitter 5, primary 63x2; exact 15-role Rust topology and once-only consumer; canonical/default-to-optional-Rust registration; all eight diagnostic/removal outcomes; neutral 36/18/8/14+15/68 at 3/5 plus 34 mutations; focused consumer 1/23.37s; complete Rust core 189/4/5/8, runtime 137, oracle 3/205.40s, diagnostics 7, classifier 105/234.99s, integrations 197/75.60s, composed 1/23.79s, execution 6/59.58s, emitter 5/36.90s, adjacent suites, formatting, advisory consumer Clippy, and primary 63x2; memory/KM/four doctrines/mdBook/JSON/shell/whitespace; canonical Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 612s. | PASS. Only `rust_parity` advances, parent `.9.1.4` closes, and the clean commit is the sole boundary before Dart. |
@@ -8335,6 +8369,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Rust admission `.9.1.1.2.2.3` composes 15 exact roles once, locks six primary identities and 29
+  mutations, passes complete Rust-local 65x2 plus canonical Phase 0 1,031/1,031, synchronizes public/book/KM at
+  603/4,328, and safely cleans generated artifacts. Only Rust advances to 3/7; parent `.2.2` closes and Dart `.3`
+  may activate only after the clean commit.
 - `2026-07-18`: `.9.1.1.2.2.1` implements one Rust compiled-state resolver, marker-optional validation, exact
   zero/unknown diagnostics, native/effective entry behavior, immutable descriptor identity, and strict no-drift.
   Rust-local and canonical proof pass; generated/emitted routes and rollout remain `.2.2-.3`, and `.2.2` may not

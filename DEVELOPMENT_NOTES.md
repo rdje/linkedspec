@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` — admission should compose semantic owners, not duplicate
+  them): the focused Rust core and route suites already prove every root-selection mechanism deeply, but a green
+  collection of independent tests does not prove that the project still recognizes the complete route topology.
+  The admission consumer therefore uses the same contract-declared role-map pattern as rule-local cursor
+  admission. Each role is a named function, the test compares the exact role set against the neutral artifact,
+  and contract order executes every role once while rejecting repeats.
+
+  The roles deliberately divide semantic depth from composition. Neutral selection/failure/strict roles consume
+  all data rows; native, loaded, reconstructed, generated, emitted, descriptor, diagnostic, trace, and primary
+  roles exercise one exact representative boundary apiece. The source-emitter suite remains responsible for
+  compiling a fresh standalone emitted crate and calling every option-bearing function; the admission consumer
+  topology-locks the emitted direct/traced API families rather than compiling a redundant second crate.
+
+  Primary admission has two independent locks. The consumer invokes default marker, markerless fallback, explicit
+  override, unknown selection, `<default>` request trace, and escaped explicit request trace in process-local form.
+  The checker separately requires those six shared manifest case ids and their exact bytes/topology, while the
+  complete Rust gate runs all 65 cases in default and POSIX option environments. This prevents a consumer-only
+  approximation from promoting rollout and prevents a manifest-only result from hiding a missing library route.
+
+  Canonical CI remains toolchain-independent by default. Its required-file inventory and root checker make the
+  Rust consumer plus optional backend-driver registration non-optional repository topology; setting
+  `LINKEDSPEC_RUN_RUST=1` executes the complete package containing the consumer. Advancing only the Rust row keeps
+  Dart/Julia/Lua validator drift and final public no-drift visibly staged.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` — generated execution should carry invocation state through
   existing authored state, not widen artifact identity): Rust generated-source v2 already embeds ordered
   `CompiledSpec` JSON. That state contains every authored `CompiledRule { label, is_top, ... }`, so root selection

@@ -188,21 +188,22 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 2 complete / 5 pending, the neutral contract and composed Perl reference are executable but full backend
-parity is not yet uniform. Perl accepts markerless one-or-more-rule sources, applies the exact precedence above
-across native, loaded, generated-direct, generated-traced, and generated `Get` execution, rejects an unknown
-explicit selector at `select_entry_rule` before invoking user code, and publishes definition order plus immutable
-per-rule `is_top` identity in descriptors and generated metadata. The 65-case shared primary manifest locks
-first-marker, markerless, explicit, unknown, and request-trace bytes on Perl.
+At rollout 3 complete / 4 pending, the neutral contract plus composed Perl and Rust backends are executable but
+full backend parity is not yet uniform. Both accept markerless one-or-more-rule sources, apply the exact precedence
+above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
+explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
+per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,
+and request-trace bytes twice on each admitted backend.
 
 Rust now applies the same ordered resolver across native, loaded, serialized/reconstructed, generated direct/
 traced, emitted direct/traced, and primary-command routes. Generated Rust keeps existing entrypoints and adds
 option-bearing siblings that take per-invocation `ExecutionOptions`; the selector never enters the minimal family
 plan or rewrites descriptor `is_top`. Typed zero/unknown generated failures retain `no_rules_defined` /
 `validate_spec` and `entry_rule_not_found` / `select_entry_rule`, while stale generated v1 artifacts still fail at
-their earlier contract boundary. Rust's rollout row remains pending only for `.9.1.1.2.2.3` topology and exact
-shared-primary admission. Dart, Julia, and Lua contain the marker-then-first fallback but their validators make its
-last branch unreachable. Until `.9.1.1.2.2-.6` close, use at least one `::` for portable cross-backend execution
+their earlier contract boundary. One omission-sensitive 15-role Rust consumer topology-locks all neutral/native/
+loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary roles, and exact primary proof is 65x2.
+Dart, Julia, and Lua contain the marker-then-first fallback but their validators make its
+last branch unreachable. Until `.9.1.1.2.3-.6` close, use at least one `::` for portable cross-backend execution
 and pass an explicit selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes

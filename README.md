@@ -12,11 +12,11 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The neutral decision and composed Perl reference are complete at 2/7, with 24 drift mutations. Perl applies that
-order across native, loaded, generated, traced, diagnostic, descriptor, and primary-command routes; the expanded
-65-case shared primary manifest locks first-marker and markerless defaults beside explicit and unknown selection.
-Rust retains marker-only defaults, and Dart/Julia/Lua fallbacks remain blocked by validation. Backend and final
-public admission leaves `.2-.6` own the remaining rollout.
+The neutral decision plus composed Perl and Rust backends are complete at 3/7, with 29 drift mutations. Both apply
+that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
+routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
+and request-trace selection. Rust admission is one omission-sensitive 15-role consumer and exact 65x2 command
+proof. Dart/Julia/Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -601,9 +601,9 @@ content migration exists yet.
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`. The later rule-local cursor migration established the 63-case boundary on Perl, Rust,
-  and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl is
-  current at 65/65 in both environments, while Rust, Dart, Julia, and Lua remain owned by `.9.1.1.2.2-.5` before
-  final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not a
+  and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl and
+  Rust are current at 65/65 in both environments, while Dart, Julia, and Lua remain owned by `.9.1.1.2.3-.5`
+  before final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not a
   current green claim. Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution `.1.6.4`, Dart full-
@@ -615,10 +615,9 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
-  packages, and both shared primary-command environments. Its last admitted cursor boundary is 63/63 in each
-  environment; root-selection preflight `.9.1.1.2.2.0` now measures exactly 64/65 twice, with only markerless
-  validation failing. Core/routes/admission `.2.1-.3` own convergence to the current 65-case manifest, so the
-  complete optional Rust gate is intentionally staged red until `.2.3` closes.
+  packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
+  the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
+  registration, exact primary cases, rollout, and omission mutations. Dart/Julia/Lua root leaves remain staged.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

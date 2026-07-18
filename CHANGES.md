@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 — admit Rust root selection
+
+Rust is now the second backend admitted to `linkedspec-root-rule-selection-v1`. A new omission-sensitive
+`root_rule_selection_admission` consumer reads the neutral contract and executes 15 declared roles exactly once:
+selection, failure, and strict rows; native, loaded, reconstructed, generated direct/traced, emitted direct/traced,
+descriptor, diagnostic, effective runtime trace, primary command, and primary request trace. It composes the
+focused semantic owners without replacing their deeper assertions.
+
+The neutral contract now records the consumer path, canonical/backend drivers, exact role inventory, and six
+shared primary case identities. Governance requires one `role_*` function marker per role, tracked canonical
+registration, the complete Rust runtime-package driver, and the optional canonical driver seam. Five new omission
+mutations cover the consumer roles/path/primary cases/canonical registration and Rust rollout regression, raising
+root governance from 24 to 29 rejected mutations. Only the Rust rollout row advances, reaching 3 complete / 4
+pending; Dart, Julia, Lua/LuaJIT, and final public admission remain staged.
+
+Focused admission/core/routes/emitter proof passes 1+6+6+6 plus generated-source governance. The complete
+Rust-local gate passes core 193+4+5+8, runtime 137, oracle 105 in 215.90 seconds, generated classifier 105 in
+249.47 seconds, integration 197, admission 1 in 16.89 seconds, emitted source 6 in 49.64 seconds, adjacent suites,
+formatting, and exact shared primary 65/65 with `POSIXLY_CORRECT` unset and set.
+
+The complete canonical rerun passes all four doctrines, root governance with 29 mutations, Perl root consumers
+7+5, cursor admission 288, reference primary 65/65 twice, and Phase 0 1,031/1,031 in 627 seconds. Its tracked-input
+and task-acceptance guards correctly required the new consumer and owning task record to be staged; a known
+public-checker phrase collision was narrowed to the exact root no-drift leaf without weakening either checker.
+Knowledge Map closes at 603 facts / 4,328 question keys. After every result is consumed, safe cleanup removes
+10,626 Rust dependency/incremental files, reducing `rust/target` from 2.4 GiB to 99 MiB, plus the generated 11 MiB
+mdBook tree, Python bytecode cache, and temporary verification logs.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 — converge Rust root routes
 
 Rust loaded, ordinary serialized/reconstructed, generated-plan, and emitted-module execution now reuse the single
