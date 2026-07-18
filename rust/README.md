@@ -22,14 +22,14 @@ and a manifest-backed corpus subset; the full 105-fixture corpus remains the int
 
 ### Generated Rust source
 
-New native callers should use the typed v1 API and supply the identity that owns the compiled input:
+New native callers should use the typed v2 API and supply the identity that owns the compiled input:
 
 ```rust
 use linkedspec_runtime::source_emitter::{
-    GeneratedSourceError, emit_rust_source_v1,
+    GeneratedSourceError, emit_rust_source_v2,
 };
 
-let source = emit_rust_source_v1(&compiled, "specs/example.spec")?;
+let source = emit_rust_source_v2(&compiled, "specs/example.spec")?;
 
 // If a caller's Rust compiler rejects the emitted module, project that host
 // boundary into the same portable generated-source error contract.
@@ -41,7 +41,12 @@ assert_eq!(compile_error.source_identity, "specs/example.spec");
 # Ok::<(), Box<dyn std::error::Error>>(())
 ```
 
-The generated module exports exact contract id, format version, source identity, and `metadata()`. Its typed
+The generated module identifies `linkedspec-generated-source-v2` / format 2 and exports exact contract id, source
+identity, and `metadata()`. Its sole embedded plan contains deterministic ordered `label` / neutral `family` rows;
+neither a global cursor mode nor a per-row cursor policy is serialized. During reconstruction, the five default/OR
+families derive `seek` and the five AND families derive `consume`. A v1 contract is rejected before plan
+reconstruction with `generated_source_contract_version_mismatch`, exact `expected_contract` / `actual_contract`,
+and guidance to regenerate from the original `.spec` source. Typed
 `execute`/`execute_with_trace` entrypoints return the direct top-rule value or `GeneratedSourceError`; legacy
 `parse`/`parse_with_trace` retain their original accumulator result and `String` error API. `plan()` exposes exact
 ordered `label`/neutral-family rows, and `validate_plan(...)` distinguishes count, label, known-family mismatch,
@@ -62,15 +67,16 @@ command, and runs the shared byte-exact CLI manifest in default and POSIX option
 rule-local cursor migration the package tests are green and the primary leg is intentionally 51/63 until
 `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection.
 
-Rust execution and descriptor projection are current through `.9.1.4.4`. The parser retains complete-line and header-rest bare edges as
+Rust execution, descriptor projection, and generated-source v2 are current through `.9.1.4.5`. The parser retains complete-line and header-rest bare edges as
 typed nodes; validation derives AND bare edges as blind calls and OR/default bare edges as action edges, rejects
 undefined/mixed/index/group shapes with portable code/stage/fields, and compilation preserves that ownership in
 the corresponding dispatch table. Compact `|` is authored OR and compact `&` is authored AND. Normal live,
 loaded, and ordinary JSON-reconstructed rules derive seek/consume from the rule being entered; compiled rules no
 longer store an independently mutable policy, and the staged caller option cannot override live behavior.
 Descriptor v1 publishes the neutral cursor identity plus each rule's normalized family, derived policy, aggregate
-ownership, and ordered semantic edge rows without root/rule global fields. Generated-source v1-to-v2 migration
-and public option/CLI removal remain staged under `.9.1.4.5-.6` through explicit compatibility boundaries.
+ownership, and ordered semantic edge rows without root/rule global fields. Generated source likewise derives
+policy from its minimal neutral family plan and has no serialized cursor field. Public option/CLI removal remains
+staged under `.9.1.4.6` through an explicit boundary.
 
 ### Compiled descriptor introspection
 

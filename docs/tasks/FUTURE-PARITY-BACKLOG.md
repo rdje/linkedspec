@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Rust live per-rule execution `.9.1.4.3` is committed at `9fffe9bd`; descriptor
-  projection `.9.1.4.4` is verified through canonical signoff and awaits its clean commit before `.9.1.4.5`)
+- Last updated: `2026-07-18` (Rust descriptor projection `.9.1.4.4` is committed at `d7b1a5e7`; generated-source
+  v2 `.9.1.4.5` is fully verified with its clean commit pending)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3853,14 +3853,40 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.4.4 - project Rust cursor descriptor v1`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.5`
-  Status: `pending`
+  Status: `done`
   Goal: Emit and reconstruct Rust generated-source v2 from the minimal family plan.
   Dependencies: `.9.1.4.4`
   Acceptance: Identify v2/format 2, retain only ordered label/family rows, derive cursor policy from all ten
     families with no serialized cursor field, reject v1 reconstruction with exact expected/actual contract and
     regeneration guidance, and prove deterministic emission, fresh compile/load, direct/traced execution, all
     families, source identity, corpus subset, and the exhaustive 105-case generated classifier.
-  Verification: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map, ADR `0044`, neutral generated-v2 contract, Perl v2
+    reference, Rust generated-v1 architecture, and toolbox source dump to the exact emitter/reconstructor/trace/
+    test seams; capture deterministic pre-edit v1 metadata/plan/reconstruction behavior before executable edits.
+  - [x] **EMIT MINIMAL V2 PLAN** — Identify new artifacts as generated-source v2 / format 2 and serialize only
+    deterministic ordered rule labels plus authored families, with no cursor policy or global mode field.
+  - [x] **DERIVE / RECONSTRUCT / REJECT V1** — Derive seek/consume from all ten emitted families during fresh
+    reconstruction, preserve direct and traced behavior/source identity, and reject v1 with exact expected/actual
+    metadata plus `.spec` regeneration guidance rather than inferring caller/global policy.
+  - [x] **PROVE ARTIFACT BREADTH** — Prove deterministic emission, fresh host compile/load, direct/trace execution,
+    all families, the governed corpus subset, and the exhaustive 105-case generated classifier without weakening
+    existing semantic/diagnostic/source locks.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, and operational
+    docs; run focused Rust plus neutral/governance/canonical gates; commit before public-removal leaf `.9.1.4.6`.
+  Verification: Retrieval and pre-edit v1 probes are complete. Focused v2 testing caught a classifier seam before
+    signoff: core `RuleMode::is_repetition()` intentionally includes unsuffixed `Default` because live execution
+    loops, while the generated-v2 family contract reserves the `default` row and uses `rep_*` only for explicit
+    repetition suffixes. The emitter now keeps those predicates distinct. Core passes 189/4/5/8; runtime 137;
+    oracle 105 in 205.58 seconds; diagnostics 7; the exhaustive generated classifier passes 105/105 in 234.84
+    seconds; integrations 197; source emitter 5 in 37.16 seconds; rule-local execution 6 in 59.37 seconds; every
+    adjacent suite, formatting, and production-library Clippy pass. The focused driver reaches only the exact
+    staged `.6` primary boundary at 51/63. Canonical signoff caught and repaired stale recurring logical-helper
+    v1 role names; its checker passes all 26 mutations. Neutral cursor passes 36/18/8/14/71 at 2/6 plus 29
+    mutations; Knowledge Map passes at 587/4,165; memory/task/four-doctrine/mdBook/JSON/whitespace checks pass.
+    Canonical CI passes Perl cursor 288, reference CLI 63/63 twice, and Phase 0 1,031/1,031 in 609 seconds, then
+    exits 0. Clean commit remains the sole boundary before `.9.1.4.6` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.4.5 - emit Rust generated-source v2`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.6`
@@ -6185,8 +6211,8 @@ Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/re
 `.9.1.3.5` are committed through `b7c28156`; composed admission `.9.1.3.6` closes the parent at `c35755f7` and
 advances only Perl to 2/6. Rust preflight/split `.9.1.4.0` is verified without behavior changes; local-gate
 hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are committed through `8780990a`; live per-rule execution
-`.9.1.4.3` is committed at `9fffe9bd`. Descriptor projection `.9.1.4.4` is verified through focused and canonical
-signoff and awaits its clean commit; generated source `.9.1.4.5` remains pending behind that boundary.
+`.9.1.4.3` is committed at `9fffe9bd`, and descriptor projection `.9.1.4.4` is committed at `d7b1a5e7` after
+focused and canonical signoff. Generated source `.9.1.4.5` is fully verified with its clean commit pending.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6434,7 +6460,7 @@ signoff and awaits its clean commit; generated source `.9.1.4.5` remains pending
 | 215.2 | `FUTURE-PARITY-BACKLOG.9.1.4.2` | `done` | Family classification, typed bare-edge ownership, exact diagnostics, and staged execution proof pass. |
 | 215.3 | `FUTURE-PARITY-BACKLOG.9.1.4.3` | `done` | Live/loaded/serialized/reconstructed policy derives from every entered rule; artifact/public staging remains explicit. |
 | 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `done` | Descriptor v1 projects family, policy, ordered resolved edges, identity, and full signoff. |
-| 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `pending` | Emit/reconstruct Rust generated-source v2 from minimal family plans. |
+| 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `pending` | Remove Rust option/CLI/trace overrides and migrate exact 63x2 bytes. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `pending` | Compose Rust admission, advance only Rust, and close the backend parent. |
 | 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `pending` | Align Dart native/reconstructed/generated/primary roles. |
@@ -7107,8 +7133,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.3` are committed and descriptor `.4` has complete
-  focused/canonical signoff before its clean commit and generated-source `.5` activation.
+  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.4` are committed and generated-source `.5` is fully
+  verified with its clean commit pending.
   Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
@@ -7125,7 +7151,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.3` are committed and descriptor `.4` is verified while later
+  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.4` are committed and generated-source `.5` is active while later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 

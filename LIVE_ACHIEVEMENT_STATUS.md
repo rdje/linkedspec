@@ -8,9 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.5 — emit Rust generated-source v2**
+  (DONE — implementation, complete/focused Rust proof, lockstep documentation, governance, and canonical signoff
+  pass; the clean commit is the remaining boundary before public-removal `.9.1.4.6` activation).
+
+  **Goal:** Emit and reconstruct generated Rust from only ordered rule labels plus authored families, with exact
+  v2 identity, family-derived cursor policy, and a hard v1 regeneration boundary.
+
+  **Result:** New artifacts identify `linkedspec-generated-source-v2` / format 2, embed cursor-free ordinary
+  `CompiledSpec` JSON plus one minimal plan, derive seek for five default/OR families and consume for five AND
+  families, and reject v1 before decoding with exact expected/actual contracts and `.spec` regeneration guidance.
+  Direct/traced typed roles preserve values and attribution; compatibility parse roles preserve their established
+  result envelope. The recurring logical-helper topology now requires the exact Rust v2 direct/traced roles.
+
+  **Proof:** Core passes 189/4/5/8; runtime 137; oracle 105 in 205.58s; diagnostics 7; classifier 105/105 in
+  234.84s; integrations 197; emitter 5 in 37.16s; rule-local execution 6 in 59.37s; every adjacent suite,
+  formatting, and production-library Clippy pass. The focused gate reaches only the exact `.6` CLI boundary at
+  51/63. Neutral cursor passes 36/18/8/14/71 at 2/6 plus 29 mutations; logical-helper topology rejects all 26
+  mutations; Knowledge Map is 587/4,165. Canonical local CI passes Perl cursor 288, reference CLI 63x2, and Phase
+  0 1,031/1,031 in 609 seconds.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.4 — project Rust cursor descriptor v1**
-  (DONE — implementation, focused/complete Rust proof, lockstep documentation, governance, and canonical signoff
-  pass; the clean commit is the remaining boundary before generated-source `.9.1.4.5` activation).
+  (DONE — committed at `d7b1a5e7`; implementation, focused/complete Rust proof, lockstep documentation,
+  governance, and canonical signoff pass; generated-source `.9.1.4.5` followed and is now fully verified).
 
   **Goal:** Make Rust's outward descriptor an exact projection of normalized rule-local cursor semantics, retire
   root/rule global mode fields, and preserve generated-source v1 as a separately staged artifact.

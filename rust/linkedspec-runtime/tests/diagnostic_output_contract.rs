@@ -4,11 +4,11 @@ use linkedspec_core::trace::{TraceConfig, TraceLevel};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedRuleFamily,
-    GeneratedRuleSpec, execute_generated_parser_with_diagnostic_output,
-    execute_generated_parser_with_diagnostic_output_v1,
+    GENERATED_SOURCE_CONTRACT, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow,
+    execute_generated_parser_with_diagnostic_output,
+    execute_generated_parser_with_diagnostic_output_v2,
     execute_generated_parser_with_trace_and_diagnostic_output,
-    execute_generated_parser_with_trace_and_diagnostic_output_v1,
+    execute_generated_parser_with_trace_and_diagnostic_output_v2,
 };
 use linkedspec_runtime::{
     RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
@@ -348,18 +348,19 @@ fn generated_direct_and_traced_roles_preserve_diagnostic_outcomes() {
         label: "Top",
         family: "default",
     }];
-    let compatibility_plan = [GeneratedRuleSpec {
+    let compatibility_plan = [GeneratedPlanRow {
         label: "Top",
-        family: GeneratedRuleFamily::Default,
+        family: "default",
     }];
     let identity = "diagnostic-output/generated-rust.spec";
 
     let (sink, events) = collecting_sink();
-    let value = execute_generated_parser_with_diagnostic_output_v1(
+    let value = execute_generated_parser_with_diagnostic_output_v2(
         &compiled_json,
         &plan,
         "x",
         identity,
+        GENERATED_SOURCE_CONTRACT,
         Some(&sink),
     )
     .expect("generated direct diagnostic execution");
@@ -367,12 +368,13 @@ fn generated_direct_and_traced_roles_preserve_diagnostic_outcomes() {
     assert_eq!(event_json(&events.borrow()), ordered["expected"]["events"]);
 
     let (trace_sink, trace_events) = collecting_sink();
-    let traced = execute_generated_parser_with_trace_and_diagnostic_output_v1(
+    let traced = execute_generated_parser_with_trace_and_diagnostic_output_v2(
         &compiled_json,
         &plan,
         "x",
         TraceConfig::default(),
         identity,
+        GENERATED_SOURCE_CONTRACT,
         Some(&trace_sink),
     )
     .expect("generated traced diagnostic execution");
@@ -433,11 +435,12 @@ fn generated_direct_and_traced_roles_preserve_diagnostic_outcomes() {
             Ok(())
         }
     });
-    let error = execute_generated_parser_with_diagnostic_output_v1(
+    let error = execute_generated_parser_with_diagnostic_output_v2(
         &failure_json,
         &plan,
         "x",
         identity,
+        GENERATED_SOURCE_CONTRACT,
         Some(&failing_sink),
     )
     .expect_err("generated sink failure must abort");
@@ -460,11 +463,12 @@ fn generated_direct_and_traced_roles_preserve_diagnostic_outcomes() {
         serde_json::to_string(&compile(&exit_spec).expect("compile generated exit fixture"))
             .expect("serialize generated exit fixture");
     let (exit_sink, exit_events) = collecting_sink();
-    let error = execute_generated_parser_with_diagnostic_output_v1(
+    let error = execute_generated_parser_with_diagnostic_output_v2(
         &exit_json,
         &plan,
         "x",
         identity,
+        GENERATED_SOURCE_CONTRACT,
         Some(&exit_sink),
     )
     .expect_err("generated exit must remain typed");

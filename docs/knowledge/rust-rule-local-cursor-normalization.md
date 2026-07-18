@@ -14,7 +14,7 @@ answers:
 date: 2026-07-18
 status: verified normalization; normal live policy migrated by FUTURE-PARITY-BACKLOG.9.1.4.3
 tags: [rust, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "Rust core classifies compact `|` as authored OR and `&` as authored AND, retains complete-line/header-rest bare targets as `BareEdge`, validates all neutral edge diagnostics with stable code/stage/fields, and lowers family-derived ownership into typed acode/bcode tables. FUTURE-PARITY-BACKLOG.9.1.4.3 spends that normalized family in normal live/loaded/ordinary-reconstructed execution; .9.1.4.4 projects it through descriptor v1. Only generated-source v1 retains the bounded legacy artifact adapter for .5. Contract-driven core tests consume all 36 family and 18 edge cases plus six ownership sets; runtime execution tests consume all 36 family rows, eight parent/child mechanisms, and two structural replacements."
+evidence: "Rust core classifies compact `|` as authored OR and `&` as authored AND, retains complete-line/header-rest bare targets as `BareEdge`, validates all neutral edge diagnostics with stable code/stage/fields, and lowers family-derived ownership into typed acode/bcode tables. FUTURE-PARITY-BACKLOG.9.1.4.3 spends that normalized family in normal live/loaded/ordinary-reconstructed execution; .9.1.4.4 projects it through descriptor v1; .9.1.4.5 derives generated-source-v2 policy from its minimal neutral family plan and removes the bounded legacy artifact adapter. Contract-driven core tests consume all 36 family and 18 edge cases plus six ownership sets; runtime execution tests consume all 36 family rows, eight parent/child mechanisms, and two structural replacements."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -37,9 +37,8 @@ Normalization `.9.1.4.2` deliberately stopped before cursor execution. Follow-up
 `.9.1.4.3` now makes normal live, loaded, and ordinary reconstructed rules derive
 policy from their exact authored family and makes blind orchestration follow that
 family. Descriptor `.9.1.4.4` now projects the same normalized family/policy/edges.
-Generated-source v1 alone retains the bounded `legacy_artifact_parse_mode()` adapter
-until `.9.1.4.5`; the compatibility predicate is no longer a live or descriptor
-authority.
+Generated-source `.9.1.4.5` now derives policy from its minimal neutral v2 family
+plan; `legacy_artifact_parse_mode()` and the private v1 wire serializer are gone.
 
 `PortableDiagnostic` is a sorted, serializable Rust core record with stable `code`,
 `stage`, human message, and contract-declared fields. The normalization suite checks

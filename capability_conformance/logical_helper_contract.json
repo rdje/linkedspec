@@ -208,7 +208,7 @@
         "backend": "rust",
         "runtime": "rust",
         "test_path": "rust/linkedspec-runtime/tests/logical_helper_contract.rs",
-        "roles": ["native", "serialized", "generated_v1_direct", "generated_v1_traced", "generated_compatibility_direct", "generated_compatibility_traced", "emitted_execute", "emitted_execute_with_trace", "emitted_parse", "emitted_parse_with_trace"]
+        "roles": ["native", "serialized", "generated_v2_direct", "generated_v2_traced", "generated_compatibility_direct", "generated_compatibility_traced", "emitted_execute", "emitted_execute_with_trace", "emitted_parse", "emitted_parse_with_trace"]
       },
       {
         "backend": "dart",

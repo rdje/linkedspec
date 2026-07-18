@@ -53,10 +53,6 @@ fn contract_family_cases_use_exact_authored_classification() {
     }
 
     assert!(!RuleMode::Pipe.is_and(), "compact | is authored OR");
-    assert!(
-        RuleMode::Pipe.uses_legacy_and_interpretation(),
-        "later execution/artifact leaves retain the staged legacy boundary"
-    );
     assert!(RuleMode::Single.is_and(), "compact & is authored AND");
 }
 

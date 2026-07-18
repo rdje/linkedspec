@@ -1,5 +1,48 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.5 — emit Rust generated-source v2
+
+New Rust artifacts now identify `linkedspec-generated-source-v2` / format 2. Emission embeds cursor-free ordinary
+`CompiledSpec` JSON plus exactly one deterministic ordered `GeneratedPlanRow` table containing only `label` and
+neutral `family`. The prior typed `GENERATED_RULES` table, historical `Repetition` fallback, private v1 wire
+serializer, serialized global mode, and `legacy_artifact_parse_mode()` compatibility authority are removed.
+`emit_rust_source_v2(compiled, source_identity)` is the typed API;
+`emit_rust_source(compiled)` remains the raw-string `<inline>` compatibility adapter.
+
+Reconstruction validates the artifact contract before JSON decoding or family-plan reconstruction. The five
+`default`/OR families derive seek; the five AND families derive consume. All typed direct, trace, diagnostic-output,
+and combined roles use that validated v2 plan, while compatibility `parse` roles retain their historical
+accumulator result. Presenting a v1 artifact now fails at `validate_generated_plan` with
+`generated_source_contract_version_mismatch`, exact `expected_contract` / `actual_contract`, and guidance to
+regenerate from the original `.spec` source rather than infer a caller/global policy.
+
+Focused proof exposed and repaired one important predicate boundary: core `RuleMode::is_repetition()` correctly
+includes unsuffixed `Default` because live default execution loops, but the generated contract reserves the
+`default` row and uses `rep_*` only for explicit repetition suffixes. Generated classification now names that
+distinction directly. The five-test emitter suite proves deterministic metadata, exact structured failures, plan
+mutations, all ten JSON-declared family policies, fresh host compile/load, direct/compatibility results, portable
+trace/source identity, termination, and the governed corpus subset. The six-test cursor execution suite proves all
+36 authored spellings plus compact `|`; the unconditional full-manifest classifier passes all 105 emitted-v2
+fixtures in 233.60 seconds.
+
+The exact cursor migration inventory contracts from 73 to 71 files: compiler, compiled-type, and emitter
+implementation paths become token-free, while the source-emitter test becomes the explicit v1-rejection token
+owner. The neutral checker passes 36/18/8/14/71 at 2/6 and rejects all 29 mutations. Public Rust option/CLI/request-
+trace removal remains independently owned by `.9.1.4.6`; rollout does not advance until composed Rust admission.
+The Knowledge Map is synchronized at 587 facts / 4,165 question keys. Rust formatting and production-library
+Clippy pass; v2 contract mismatch fields use one flattened boxed context so the exact outward JSON does not enlarge
+every generated error result beyond Clippy's large-error boundary.
+
+Canonical signoff caught one omission before its expensive phases: the recurring logical-helper topology still
+required Rust role names `generated_v1_direct` / `generated_v1_traced` after the consumer had migrated to the v2
+entrypoints. The neutral contract and its omission-sensitive checker now require the v2 roles and still reject all
+26 drift mutations. The complete focused Rust gate passes core 189/4/5/8, runtime 137, oracle 105 in 205.58 seconds,
+diagnostics 7, the exhaustive generated classifier in 234.84 seconds, integrations 197, source emitter 5 in 37.16
+seconds, rule-local execution 6 in 59.37 seconds, every adjacent suite, formatting, and production-library Clippy;
+it then reaches only the exact staged `.9.1.4.6` primary boundary at 51/63. Canonical local CI passes the composed
+Perl cursor consumer at 288 tests, reference CLI at 63/63 in default and POSIX environments, and Phase 0 at
+1,031/1,031 in 609 seconds, then exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.4 — project Rust cursor descriptor v1
 
 Rust's outward `CompiledSpec` descriptor now identifies

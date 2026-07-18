@@ -9,7 +9,8 @@
 > validates the same bare forms as typed AST and lowers their family-derived
 > ownership; `.9.1.4.3` makes Rust live/loaded/reconstructed execution rule-local,
 > and `.9.1.4.4` projects descriptor-v1 family/policy/resolved-edge facts. Rust
-> generated v2, CLI removal, and later backends remain in `.9.1.4.5-.9`.
+> `.9.1.4.5` now emits generated v2 from the same minimal family plan; CLI
+> removal and later backends remain in `.9.1.4.6-.9`.
 
 Blind calls are LinkedSpec's parser-orchestration edge family.
 

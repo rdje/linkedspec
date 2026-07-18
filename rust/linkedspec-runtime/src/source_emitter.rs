@@ -3,7 +3,7 @@
 //! `RUST-PARITY.8.2` introduced the generated-source path. The emitted module
 //! embeds a serialized `CompiledSpec` plus generated-family metadata; direct
 //! generated execution now covers all non-repetition families and explicit
-//! repetition subfamilies. Contract-v1 callers can attach source identity and
+//! repetition subfamilies. Contract-v2 callers can attach source identity and
 //! consume typed metadata/errors; the original string-returning API remains a
 //! compatibility adapter.
 
@@ -16,13 +16,13 @@ use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
 use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
-use serde::{Serialize, ser::SerializeStruct};
+use serde::Serialize;
 use std::fmt;
 
 /// Backend-neutral generated-source contract implemented by this emitter.
-pub const GENERATED_SOURCE_CONTRACT: &str = "linkedspec-generated-source-v1";
+pub const GENERATED_SOURCE_CONTRACT: &str = "linkedspec-generated-source-v2";
 /// Version of the generated-source scaffold format.
-pub const GENERATED_SOURCE_FORMAT: u32 = 1;
+pub const GENERATED_SOURCE_FORMAT: u32 = 2;
 
 /// Stable stage in the generated-source pipeline.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -44,7 +44,14 @@ pub enum GeneratedSourceCode {
     GeneratedPlanLabelMismatch,
     GeneratedPlanFamilyMismatch,
     GeneratedPlanUnknownFamily,
+    GeneratedSourceContractVersionMismatch,
     GeneratedExecutionFailed,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+struct GeneratedSourceContractMismatch {
+    expected_contract: Box<str>,
+    actual_contract: Box<str>,
 }
 
 /// Serializable generated-source failure with portable source attribution.
@@ -54,7 +61,7 @@ pub struct GeneratedSourceError {
     pub error_type: &'static str,
     pub stage: GeneratedSourceStage,
     pub code: GeneratedSourceCode,
-    pub summary: String,
+    pub summary: &'static str,
     pub source_identity: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rule_label: Option<Box<str>>,
@@ -62,24 +69,27 @@ pub struct GeneratedSourceError {
     pub handler_family: Option<Box<str>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub detail: Option<Box<str>>,
+    #[serde(flatten, skip_serializing_if = "Option::is_none")]
+    contract_mismatch: Option<Box<GeneratedSourceContractMismatch>>,
 }
 
 impl GeneratedSourceError {
     fn new(
         stage: GeneratedSourceStage,
         code: GeneratedSourceCode,
-        summary: impl Into<String>,
+        summary: &'static str,
         source_identity: impl Into<String>,
     ) -> Self {
         Self {
             error_type: "generated_source_error",
             stage,
             code,
-            summary: summary.into(),
+            summary,
             source_identity: source_identity.into(),
             rule_label: None,
             handler_family: None,
             detail: None,
+            contract_mismatch: None,
         }
     }
 
@@ -96,6 +106,32 @@ impl GeneratedSourceError {
     fn with_detail(mut self, detail: impl Into<String>) -> Self {
         self.detail = Some(detail.into().into_boxed_str());
         self
+    }
+
+    fn with_contracts(
+        mut self,
+        expected_contract: impl Into<String>,
+        actual_contract: impl Into<String>,
+    ) -> Self {
+        self.contract_mismatch = Some(Box::new(GeneratedSourceContractMismatch {
+            expected_contract: expected_contract.into().into_boxed_str(),
+            actual_contract: actual_contract.into().into_boxed_str(),
+        }));
+        self
+    }
+
+    /// Return the active contract expected by a version-mismatch failure.
+    pub fn expected_contract(&self) -> Option<&str> {
+        self.contract_mismatch
+            .as_deref()
+            .map(|mismatch| mismatch.expected_contract.as_ref())
+    }
+
+    /// Return the artifact contract supplied to a version-mismatch failure.
+    pub fn actual_contract(&self) -> Option<&str> {
+        self.contract_mismatch
+            .as_deref()
+            .map(|mismatch| mismatch.actual_contract.as_ref())
     }
 
     /// Project a host compiler/loader failure into the portable error contract.
@@ -117,7 +153,7 @@ impl GeneratedSourceError {
 
 impl fmt::Display for GeneratedSourceError {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-        formatter.write_str(&self.summary)?;
+        formatter.write_str(self.summary)?;
         if let Some(detail) = &self.detail {
             write!(formatter, ": {detail}")?;
         }
@@ -133,7 +169,7 @@ impl std::error::Error for GeneratedSourceError {}
 /// while caller sink failures and `exit_now` remain distinct native outcomes.
 #[derive(Debug, Clone)]
 pub enum GeneratedDiagnosticOutputExecutionError {
-    /// Contract-v1 emission, plan, or ordinary generated execution failure.
+    /// Contract-v2 emission, plan, or ordinary generated execution failure.
     GeneratedSource(GeneratedSourceError),
     /// Compatibility generated-parser failure retaining its prior text.
     Compatibility(String),
@@ -193,7 +229,6 @@ pub enum GeneratedRuleFamily {
     AndAcodeSeq,
     AndBcode,
     OrBcode,
-    Repetition,
     RepAcode,
     RepBcode,
     RepAndAcode,
@@ -201,36 +236,34 @@ pub enum GeneratedRuleFamily {
 }
 
 impl GeneratedRuleFamily {
-    fn variant_name(self) -> &'static str {
+    /// Return the exact backend-neutral family name.
+    pub fn contract_name(self) -> &'static str {
         match self {
-            Self::Default => "Default",
-            Self::OrAcode => "OrAcode",
-            Self::AndSingleAcode => "AndSingleAcode",
-            Self::AndAcodeSeq => "AndAcodeSeq",
-            Self::AndBcode => "AndBcode",
-            Self::OrBcode => "OrBcode",
-            Self::Repetition => "Repetition",
-            Self::RepAcode => "RepAcode",
-            Self::RepBcode => "RepBcode",
-            Self::RepAndAcode => "RepAndAcode",
-            Self::RepAndBcode => "RepAndBcode",
+            Self::Default => "default",
+            Self::OrAcode => "or_acode",
+            Self::AndSingleAcode => "and_single_acode",
+            Self::AndAcodeSeq => "and_acode_seq",
+            Self::AndBcode => "and_bcode",
+            Self::OrBcode => "or_bcode",
+            Self::RepAcode => "rep_acode",
+            Self::RepBcode => "rep_bcode",
+            Self::RepAndAcode => "rep_and_acode",
+            Self::RepAndBcode => "rep_and_bcode",
         }
     }
 
-    /// Return the exact backend-neutral family name, or `None` for the legacy marker.
-    pub fn contract_name(self) -> Option<&'static str> {
+    /// Derive the generated cursor policy from the validated family row.
+    pub fn cursor_policy(self) -> linkedspec_core::types::ParseMode {
+        use linkedspec_core::types::ParseMode;
         match self {
-            Self::Default => Some("default"),
-            Self::OrAcode => Some("or_acode"),
-            Self::AndSingleAcode => Some("and_single_acode"),
-            Self::AndAcodeSeq => Some("and_acode_seq"),
-            Self::AndBcode => Some("and_bcode"),
-            Self::OrBcode => Some("or_bcode"),
-            Self::RepAcode => Some("rep_acode"),
-            Self::RepBcode => Some("rep_bcode"),
-            Self::RepAndAcode => Some("rep_and_acode"),
-            Self::RepAndBcode => Some("rep_and_bcode"),
-            Self::Repetition => None,
+            Self::Default | Self::OrAcode | Self::OrBcode | Self::RepAcode | Self::RepBcode => {
+                ParseMode::Seek
+            }
+            Self::AndSingleAcode
+            | Self::AndAcodeSeq
+            | Self::AndBcode
+            | Self::RepAndAcode
+            | Self::RepAndBcode => ParseMode::Consume,
         }
     }
 
@@ -258,67 +291,11 @@ pub struct GeneratedRuleSpec {
     pub family: GeneratedRuleFamily,
 }
 
-/// One backend-neutral generated-plan row exposed by contract-v1 modules.
+/// One backend-neutral generated-plan row exposed by contract-v2 modules.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub struct GeneratedPlanRow {
     pub label: &'static str,
     pub family: &'static str,
-}
-
-/// Contract-v1 wire adapter for the compiled rule shape that existed before
-/// live rule-local cursor execution removed the mutable `parse_mode` field.
-///
-/// Fresh in-memory and ordinary serialized `CompiledSpec` values no longer
-/// carry that field. Generated-source v1 remains byte-structural-compatible
-/// until its separately owned v2 migration.
-struct GeneratedCompiledRuleV1<'a>(&'a CompiledRule);
-
-impl Serialize for GeneratedCompiledRuleV1<'_> {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let rule = self.0;
-        let mut state = serializer.serialize_struct("CompiledRule", 17)?;
-        state.serialize_field("label", &rule.label)?;
-        state.serialize_field("is_top", &rule.is_top)?;
-        state.serialize_field("parse_mode", &rule.legacy_artifact_parse_mode())?;
-        state.serialize_field("mode", &rule.mode)?;
-        state.serialize_field("regex_patterns", &rule.regex_patterns)?;
-        state.serialize_field("dependency_refs", &rule.dependency_refs)?;
-        state.serialize_field("acode_dispatch", &rule.acode_dispatch)?;
-        state.serialize_field("bcode_dispatch", &rule.bcode_dispatch)?;
-        state.serialize_field("preamble", &rule.preamble)?;
-        state.serialize_field("lxcode", &rule.lxcode)?;
-        state.serialize_field("lscode", &rule.lscode)?;
-        state.serialize_field("lecode", &rule.lecode)?;
-        state.serialize_field("ecode", &rule.ecode)?;
-        state.serialize_field("excode", &rule.excode)?;
-        state.serialize_field("itcode", &rule.itcode)?;
-        state.serialize_field("rep_min", &rule.rep_min)?;
-        state.serialize_field("rep_max", &rule.rep_max)?;
-        state.end()
-    }
-}
-
-struct GeneratedCompiledSpecV1<'a>(&'a CompiledSpec);
-
-impl Serialize for GeneratedCompiledSpecV1<'_> {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let mut state = serializer.serialize_struct("CompiledSpec", 2)?;
-        state.serialize_field("functions", &self.0.functions)?;
-        let rules = self
-            .0
-            .rules
-            .iter()
-            .map(GeneratedCompiledRuleV1)
-            .collect::<Vec<_>>();
-        state.serialize_field("rules", &rules)?;
-        state.end()
-    }
 }
 
 /// Emit a standalone Rust module for `compiled`.
@@ -327,11 +304,11 @@ impl Serialize for GeneratedCompiledSpecV1<'_> {
 /// `serde_json`. The generated entry point validates its family plan before
 /// routing through generated-family execution.
 pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
-    emit_rust_source_v1(compiled, "<inline>").map_err(|error| error.to_string())
+    emit_rust_source_v2(compiled, "<inline>").map_err(|error| error.to_string())
 }
 
-/// Emit a standalone Rust module with contract-v1 source identity and typed errors.
-pub fn emit_rust_source_v1(
+/// Emit a standalone Rust module with contract-v2 source identity and typed errors.
+pub fn emit_rust_source_v2(
     compiled: &CompiledSpec,
     source_identity: &str,
 ) -> Result<String, GeneratedSourceError> {
@@ -355,7 +332,7 @@ pub fn emit_rust_source_v1(
         .with_detail(error.to_string())
     })?;
 
-    let spec_json = serde_json::to_string(&GeneratedCompiledSpecV1(compiled)).map_err(|error| {
+    let spec_json = serde_json::to_string(compiled).map_err(|error| {
         GeneratedSourceError::new(
             GeneratedSourceStage::EmitSource,
             GeneratedSourceCode::GeneratedSourceEmitFailed,
@@ -385,11 +362,11 @@ pub fn emit_rust_source_v1(
 
     let mut source = String::new();
     source.push_str("//! Generated LinkedSpec parser module.\n");
-    source.push_str("//! Contract id: linkedspec-generated-source-v1.\n");
-    source.push_str("//! Source format: linkedspec-runtime source_emitter v1.\n");
+    source.push_str("//! Contract id: linkedspec-generated-source-v2.\n");
+    source.push_str("//! Source format: linkedspec-runtime source_emitter v2.\n");
     source.push_str("//! Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.\n\n");
     source.push_str(
-        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_diagnostic_output, execute_generated_parser_with_diagnostic_output_v1, execute_generated_parser_with_trace, execute_generated_parser_with_trace_and_diagnostic_output, execute_generated_parser_with_trace_and_diagnostic_output_v1, execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceError, GeneratedSourceMetadata};\n",
+        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v2, execute_generated_parser_with_diagnostic_output, execute_generated_parser_with_diagnostic_output_v2, execute_generated_parser_with_trace, execute_generated_parser_with_trace_and_diagnostic_output, execute_generated_parser_with_trace_and_diagnostic_output_v2, execute_generated_parser_with_trace_v2, validate_generated_parser_plan_v2, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedSourceError, GeneratedSourceMetadata};\n",
     );
     source.push_str("use linkedspec_runtime::RuntimeDiagnosticOutputSink;\n");
     source.push_str("use linkedspec_runtime::trace::TraceConfig;\n\n");
@@ -406,7 +383,6 @@ pub fn emit_rust_source_v1(
     source.push_str("const COMPILED_SPEC_JSON: &str = ");
     source.push_str(&spec_literal);
     source.push_str(";\n\n");
-    source.push_str("const GENERATED_RULES: &[GeneratedRuleSpec] = &[\n");
     let mut neutral_plan_rows = String::new();
     for rule in &compiled.rules {
         let label_literal = rust_string_literal(&rule.label).map_err(|error| {
@@ -419,22 +395,12 @@ pub fn emit_rust_source_v1(
             .with_rule_label(&rule.label)
             .with_detail(error)
         })?;
-        source.push_str("    GeneratedRuleSpec { label: ");
-        source.push_str(&label_literal);
-        source.push_str(", family: GeneratedRuleFamily::");
-        source.push_str(classify_generated_rule_family(rule).variant_name());
-        source.push_str(" },\n");
         neutral_plan_rows.push_str("    GeneratedPlanRow { label: ");
         neutral_plan_rows.push_str(&label_literal);
         neutral_plan_rows.push_str(", family: \"");
-        neutral_plan_rows.push_str(
-            classify_generated_rule_family(rule)
-                .contract_name()
-                .expect("classified generated rule must have a contract-v1 family"),
-        );
+        neutral_plan_rows.push_str(classify_generated_rule_family(rule).contract_name());
         neutral_plan_rows.push_str("\" },\n");
     }
-    source.push_str("];\n\n");
     source.push_str("const GENERATED_PLAN: &[GeneratedPlanRow] = &[\n");
     source.push_str(&neutral_plan_rows);
     source.push_str("];\n\n");
@@ -448,19 +414,28 @@ pub fn plan() -> &'static [GeneratedPlanRow] {
 }
 
 pub fn validate_plan(actual: &[GeneratedPlanRow]) -> Result<(), GeneratedSourceError> {
-    validate_generated_parser_plan_v1(
+    validate_plan_for_contract(actual, LINKEDSPEC_GENERATED_SOURCE_CONTRACT)
+}
+
+pub fn validate_plan_for_contract(
+    actual: &[GeneratedPlanRow],
+    actual_contract: &str,
+) -> Result<(), GeneratedSourceError> {
+    validate_generated_parser_plan_v2(
         COMPILED_SPEC_JSON,
         actual,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        actual_contract,
     )
 }
 
 pub fn execute(input: &str) -> Result<serde_json::Value, GeneratedSourceError> {
-    execute_generated_parser_v1(
+    execute_generated_parser_v2(
         COMPILED_SPEC_JSON,
         GENERATED_PLAN,
         input,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 }
 
@@ -468,22 +443,24 @@ pub fn execute_with_diagnostic_output(
     input: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    execute_generated_parser_with_diagnostic_output_v1(
+    execute_generated_parser_with_diagnostic_output_v2(
         COMPILED_SPEC_JSON,
         GENERATED_PLAN,
         input,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
         sink,
     )
 }
 
 pub fn execute_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, GeneratedSourceError> {
-    execute_generated_parser_with_trace_v1(
+    execute_generated_parser_with_trace_v2(
         COMPILED_SPEC_JSON,
         GENERATED_PLAN,
         input,
         trace_config,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 }
 
@@ -492,18 +469,19 @@ pub fn execute_with_trace_and_diagnostic_output(
     trace_config: TraceConfig,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    execute_generated_parser_with_trace_and_diagnostic_output_v1(
+    execute_generated_parser_with_trace_and_diagnostic_output_v2(
         COMPILED_SPEC_JSON,
         GENERATED_PLAN,
         input,
         trace_config,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
         sink,
     )
 }
 
 pub fn parse(input: &str) -> Result<serde_json::Value, String> {
-    execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_RULES, input)
+    execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_PLAN, input)
 }
 
 pub fn parse_with_diagnostic_output(
@@ -512,14 +490,14 @@ pub fn parse_with_diagnostic_output(
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     execute_generated_parser_with_diagnostic_output(
         COMPILED_SPEC_JSON,
-        GENERATED_RULES,
+        GENERATED_PLAN,
         input,
         sink,
     )
 }
 
 pub fn parse_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, String> {
-    execute_generated_parser_with_trace(COMPILED_SPEC_JSON, GENERATED_RULES, input, trace_config)
+    execute_generated_parser_with_trace(COMPILED_SPEC_JSON, GENERATED_PLAN, input, trace_config)
 }
 
 pub fn parse_with_trace_and_diagnostic_output(
@@ -529,7 +507,7 @@ pub fn parse_with_trace_and_diagnostic_output(
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     execute_generated_parser_with_trace_and_diagnostic_output(
         COMPILED_SPEC_JSON,
-        GENERATED_RULES,
+        GENERATED_PLAN,
         input,
         trace_config,
         sink,
@@ -540,16 +518,18 @@ pub fn parse_with_trace_and_diagnostic_output(
     Ok(source)
 }
 
-/// Execute generated Rust source with the direct top-rule value and v1 failures.
-pub fn execute_generated_parser_v1(
+/// Execute generated Rust source with the direct top-rule value and v2 failures.
+pub fn execute_generated_parser_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
     input: &str,
     source_identity: &str,
+    actual_contract: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
-    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
+    validate_generated_source_contract_v2(actual_contract, source_identity)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)?;
     let generated_rules =
-        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)?;
+        validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)?;
     let top_context = generated_top_context(&compiled);
     Engine::new(compiled)
         .execute_generated_value_with_plan(&generated_rules, input)
@@ -557,17 +537,20 @@ pub fn execute_generated_parser_v1(
 }
 
 /// Execute generated Rust source with direct value and caller-owned diagnostics.
-pub fn execute_generated_parser_with_diagnostic_output_v1(
+pub fn execute_generated_parser_with_diagnostic_output_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
     input: &str,
     source_identity: &str,
+    actual_contract: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)
+    validate_generated_source_contract_v2(actual_contract, source_identity)
+        .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)
         .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let generated_rules =
-        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)
+        validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)
             .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let top_context = generated_top_context(&compiled);
     Engine::new(compiled)
@@ -575,17 +558,19 @@ pub fn execute_generated_parser_with_diagnostic_output_v1(
         .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
 }
 
-/// Execute generated Rust source with direct value, portable trace roles, and v1 failures.
-pub fn execute_generated_parser_with_trace_v1(
+/// Execute generated Rust source with direct value, portable trace roles, and v2 failures.
+pub fn execute_generated_parser_with_trace_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
     input: &str,
     trace_config: TraceConfig,
     source_identity: &str,
+    actual_contract: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
-    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
+    validate_generated_source_contract_v2(actual_contract, source_identity)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)?;
     let generated_rules =
-        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)?;
+        validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)?;
     let top_context = generated_top_context(&compiled);
     Engine::new(compiled)
         .execute_generated_with_plan_with_trace_roles(
@@ -598,18 +583,21 @@ pub fn execute_generated_parser_with_trace_v1(
 }
 
 /// Execute generated Rust source with portable trace roles and caller diagnostics.
-pub fn execute_generated_parser_with_trace_and_diagnostic_output_v1(
+pub fn execute_generated_parser_with_trace_and_diagnostic_output_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
     input: &str,
     trace_config: TraceConfig,
     source_identity: &str,
+    actual_contract: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)
+    validate_generated_source_contract_v2(actual_contract, source_identity)
+        .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)
         .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let generated_rules =
-        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)
+        validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)
             .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let top_context = generated_top_context(&compiled);
     Engine::new(compiled)
@@ -623,17 +611,36 @@ pub fn execute_generated_parser_with_trace_and_diagnostic_output_v1(
         .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
 }
 
-/// Validate an exposed contract-v1 plan against its embedded compiled specification.
-pub fn validate_generated_parser_plan_v1(
+/// Validate an exposed contract-v2 plan against its embedded compiled specification.
+pub fn validate_generated_parser_plan_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
     source_identity: &str,
+    actual_contract: &str,
 ) -> Result<(), GeneratedSourceError> {
-    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
-    validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity).map(|_| ())
+    validate_generated_source_contract_v2(actual_contract, source_identity)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)?;
+    validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity).map(|_| ())
 }
 
-fn decode_generated_compiled_spec_v1(
+fn validate_generated_source_contract_v2(
+    actual_contract: &str,
+    source_identity: &str,
+) -> Result<(), GeneratedSourceError> {
+    if actual_contract == GENERATED_SOURCE_CONTRACT {
+        return Ok(());
+    }
+    Err(GeneratedSourceError::new(
+        GeneratedSourceStage::ValidateGeneratedPlan,
+        GeneratedSourceCode::GeneratedSourceContractVersionMismatch,
+        "Generated source contract does not match the active validator",
+        source_identity,
+    )
+    .with_contracts(GENERATED_SOURCE_CONTRACT, actual_contract)
+    .with_detail("regenerate the generated artifact from its .spec source"))
+}
+
+fn decode_generated_compiled_spec_v2(
     compiled_spec_json: &str,
     source_identity: &str,
 ) -> Result<CompiledSpec, GeneratedSourceError> {
@@ -653,9 +660,7 @@ fn generated_top_context(compiled: &CompiledSpec) -> Option<(String, &'static st
     compiled.top_rule().map(|rule| {
         (
             rule.label.clone(),
-            classify_generated_rule_family(rule)
-                .contract_name()
-                .expect("classified generated rule must have a contract-v1 family"),
+            classify_generated_rule_family(rule).contract_name(),
         )
     })
 }
@@ -704,58 +709,54 @@ fn generated_diagnostic_execution_error(
 
 /// Execute a generated parser module from its embedded compiled spec and family plan.
 ///
-/// The plan is validated first. `RUST-PARITY.8.4` closes the generated-source
+/// The v2 plan is validated first. `RUST-PARITY.8.4` closes the generated-source
 /// structural family matrix by routing non-REP and explicit REP subfamilies
-/// through the generated-plan executor directly. Older v1 generated modules
-/// that still carry the coarse `Repetition` marker remain accepted for REP
-/// rules and are specialized at execution time.
+/// through the generated-plan executor directly.
 pub fn execute_generated_parser(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
 ) -> Result<serde_json::Value, String> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
-        .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
-    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| error.to_string())?;
-    validate_generated_rule_plan(&compiled, generated_rules)?;
-    Engine::new(compiled).execute_generated_with_plan(generated_rules, input)
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>")
+        .map_err(|error| error.to_string())?;
+    let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
+        .map_err(|error| error.to_string())?;
+    Engine::new(compiled).execute_generated_with_plan(&generated_rules, input)
 }
 
 /// Execute a compatibility generated parser with caller-owned diagnostics.
 pub fn execute_generated_parser_with_diagnostic_output(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
-        GeneratedDiagnosticOutputExecutionError::Compatibility(format!(
-            "generated CompiledSpec JSON is invalid: {error}"
-        ))
-    })?;
-    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
-        GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
-    })?;
-    validate_generated_rule_plan(&compiled, generated_rules)
-        .map_err(GeneratedDiagnosticOutputExecutionError::Compatibility)?;
+    let compiled =
+        decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>").map_err(|error| {
+            GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+        })?;
+    let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
+        .map_err(|error| {
+            GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+        })?;
     Engine::new(compiled)
-        .execute_generated_with_plan_with_diagnostic_output(generated_rules, input, sink)
+        .execute_generated_with_plan_with_diagnostic_output(&generated_rules, input, sink)
         .map_err(compatibility_diagnostic_execution_error)
 }
 
 /// Execute a generated parser module with explicit trace configuration.
 pub fn execute_generated_parser_with_trace(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
     trace_config: TraceConfig,
 ) -> Result<serde_json::Value, String> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
-        .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
-    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| error.to_string())?;
-    validate_generated_rule_plan(&compiled, generated_rules)?;
+    let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>")
+        .map_err(|error| error.to_string())?;
+    let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
+        .map_err(|error| error.to_string())?;
     Engine::new(compiled).execute_generated_with_plan_with_trace(
-        generated_rules,
+        &generated_rules,
         input,
         trace_config,
     )
@@ -764,24 +765,22 @@ pub fn execute_generated_parser_with_trace(
 /// Execute a traced compatibility generated parser with caller diagnostics.
 pub fn execute_generated_parser_with_trace_and_diagnostic_output(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
     trace_config: TraceConfig,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
-        GeneratedDiagnosticOutputExecutionError::Compatibility(format!(
-            "generated CompiledSpec JSON is invalid: {error}"
-        ))
-    })?;
-    validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
-        GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
-    })?;
-    validate_generated_rule_plan(&compiled, generated_rules)
-        .map_err(GeneratedDiagnosticOutputExecutionError::Compatibility)?;
+    let compiled =
+        decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>").map_err(|error| {
+            GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+        })?;
+    let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
+        .map_err(|error| {
+            GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
+        })?;
     Engine::new(compiled)
         .execute_generated_with_plan_with_trace_and_diagnostic_output(
-            generated_rules,
+            &generated_rules,
             input,
             trace_config,
             sink,
@@ -807,6 +806,11 @@ fn compatibility_diagnostic_execution_error(
 
 /// Classify one compiled rule into the generated-source family plan.
 pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamily {
+    // `RuleMode::Default` executes as a repeated choice, so the core
+    // `is_repetition()` predicate intentionally includes it. Generated-source
+    // classification is narrower: the neutral v2 table reserves `default`
+    // for that authored form and uses `rep_*` only for explicit repetition
+    // suffixes.
     if matches!(
         rule.mode,
         RuleMode::Plus
@@ -818,13 +822,13 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
             | RuleMode::AndBounded { .. }
     ) {
         if !rule.bcode_dispatch.is_empty() {
-            return if rule.mode.uses_legacy_and_interpretation() {
+            return if rule.mode.is_and() {
                 GeneratedRuleFamily::RepAndBcode
             } else {
                 GeneratedRuleFamily::RepBcode
             };
         }
-        return if rule.mode.uses_legacy_and_interpretation() {
+        return if rule.mode.is_and() {
             GeneratedRuleFamily::RepAndAcode
         } else {
             GeneratedRuleFamily::RepAcode
@@ -832,17 +836,18 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
     }
 
     if !rule.bcode_dispatch.is_empty() {
-        return match rule.mode {
-            RuleMode::Or => GeneratedRuleFamily::OrBcode,
-            _ => GeneratedRuleFamily::AndBcode,
+        return if rule.mode.is_and() {
+            GeneratedRuleFamily::AndBcode
+        } else {
+            GeneratedRuleFamily::OrBcode
         };
     }
 
     match rule.mode {
         RuleMode::Default => GeneratedRuleFamily::Default,
-        RuleMode::Or => GeneratedRuleFamily::OrAcode,
+        RuleMode::Or | RuleMode::Pipe => GeneratedRuleFamily::OrAcode,
         RuleMode::Single => GeneratedRuleFamily::AndSingleAcode,
-        RuleMode::And | RuleMode::Pipe => {
+        RuleMode::And => {
             if rule.regex_patterns.len() <= 1 && rule.acode_dispatch.len() <= 1 {
                 GeneratedRuleFamily::AndSingleAcode
             } else {
@@ -859,38 +864,7 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
     }
 }
 
-fn validate_generated_rule_plan(
-    compiled: &CompiledSpec,
-    generated_rules: &[GeneratedRuleSpec],
-) -> Result<(), String> {
-    if compiled.rules.len() != generated_rules.len() {
-        return Err(format!(
-            "generated rule plan has {} rows but compiled spec has {} rules",
-            generated_rules.len(),
-            compiled.rules.len()
-        ));
-    }
-
-    for (compiled_rule, generated_rule) in compiled.rules.iter().zip(generated_rules.iter()) {
-        if compiled_rule.label != generated_rule.label {
-            return Err(format!(
-                "generated rule plan label mismatch: compiled '{}' vs generated '{}'",
-                compiled_rule.label, generated_rule.label
-            ));
-        }
-        let expected = classify_generated_rule_family(compiled_rule);
-        if !generated_rule_family_matches(expected, generated_rule.family) {
-            return Err(format!(
-                "generated rule plan family mismatch for '{}': compiled {:?} vs generated {:?}",
-                compiled_rule.label, expected, generated_rule.family
-            ));
-        }
-    }
-
-    Ok(())
-}
-
-fn validate_generated_rule_plan_v1(
+fn validate_generated_rule_plan_v2(
     compiled: &CompiledSpec,
     generated_plan: &[GeneratedPlanRow],
     source_identity: &str,
@@ -952,9 +926,7 @@ fn validate_generated_rule_plan_v1(
             .with_handler_family(generated_row.family)
             .with_detail(format!(
                 "row={row_index} expected={} actual={}",
-                expected
-                    .contract_name()
-                    .expect("classified generated rule must have a contract-v1 family"),
+                expected.contract_name(),
                 generated_row.family
             )));
         }
@@ -965,21 +937,6 @@ fn validate_generated_rule_plan_v1(
     }
 
     Ok(typed_plan)
-}
-
-fn generated_rule_family_matches(
-    expected: GeneratedRuleFamily,
-    generated: GeneratedRuleFamily,
-) -> bool {
-    expected == generated
-        || (generated == GeneratedRuleFamily::Repetition
-            && matches!(
-                expected,
-                GeneratedRuleFamily::RepAcode
-                    | GeneratedRuleFamily::RepBcode
-                    | GeneratedRuleFamily::RepAndAcode
-                    | GeneratedRuleFamily::RepAndBcode
-            ))
 }
 
 fn rust_string_literal(value: &str) -> Result<String, String> {

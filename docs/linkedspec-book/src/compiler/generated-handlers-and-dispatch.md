@@ -53,12 +53,13 @@ caller-global mode. The five seek families are `default`, `or_acode`,
 `rep_and_bcode`. A v1 artifact presented to the active Perl v2 validator fails
 at `validate_generated_plan` with
 `generated_source_contract_version_mismatch`, including `expected_contract`
-and `actual_contract`; regenerate it from the original `.spec` source. Other
-backends retain their admitted v1 emitters until their ordered cursor leaves.
+and `actual_contract`; regenerate it from the original `.spec` source. Rust now
+implements the same v2 contract; Dart, Julia, and Lua retain their admitted v1
+emitters until their ordered cursor leaves.
 
-Rust's source-emitter now implements contract-v1 identity, metadata, and typed
+Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use
-`emit_rust_source_v1(&compiled, "path/to/input.spec")`; the generated module
+`emit_rust_source_v2(&compiled, "path/to/input.spec")`; the generated module
 exports contract/version/identity constants, `metadata()`, and typed `execute`
 and `execute_with_trace` roles. `GeneratedSourceError` records the portable
 stage, code, summary, identity, and available rule/family/detail attribution;
@@ -67,23 +68,25 @@ compiler/load boundary into that same record.
 
 The original `emit_rust_source(&compiled) -> Result<String, String>` remains a
 compatibility adapter with `<inline>` identity. Generated `parse` and
-`parse_with_trace` likewise retain raw-string diagnostics, so adopting v1 does
+`parse_with_trace` likewise retain raw-string diagnostics, so adopting v2 does
 not silently alter existing Rust callers.
 
-Rust now emits a separate `GeneratedPlanRow` table with exact neutral family
-strings, plus `plan()` and `validate_plan(...)`. Count, label, known-family
+Rust emits exactly one `GeneratedPlanRow` table with ordered labels and neutral
+family strings, plus `plan()` and `validate_plan(...)`. No global mode or derived
+cursor policy is serialized. Reconstruction maps the same five seek and five
+consume families listed above. Count, label, known-family
 mismatch, and arbitrary unknown-family mutations have distinct pre-execution
-codes. The legacy typed enum table remains private to compatibility adapters;
-its historical `Repetition` marker is not a v1 family.
+codes. A v1 contract is rejected before JSON decoding or plan reconstruction
+with exact expected/actual contract fields and `.spec` regeneration guidance.
 
-The neutral fixture also locks result projection. Typed v1 `execute` and
+The neutral fixture also locks result projection. Typed v2 `execute` and
 `execute_with_trace` return the direct top-rule value, matching the public
 native/CLI value contract. Legacy `parse` and `parse_with_trace` retain Rust's
 historical accumulator envelope. The three portable generated-rule enter,
 family-decision, and exit roles carry source/rule/family context beside native
 `rust_runtime:generated_plan:*` detail. The Perl/Rust baseline is admitted.
 Perl is pass. Rust's staged classifier now proves all 105 interpreter fixtures
-through v1 emission, one isolated host compile, and separate generated tests
+through v2 emission, one isolated host compile, and separate generated tests
 with exact direct/compatibility results. That diagnostic is 105/105 green;
 Zero-failure closeout found no repair mechanism. The classifier is now an
 unconditional ordinary runtime-package test, contract checking prevents it
@@ -92,10 +95,10 @@ generated source is therefore admitted pass.
 
 ```rust
 use linkedspec_runtime::source_emitter::{
-    GeneratedSourceError, emit_rust_source_v1,
+    GeneratedSourceError, emit_rust_source_v2,
 };
 
-let generated = emit_rust_source_v1(&compiled, "specs/example.spec")?;
+let generated = emit_rust_source_v2(&compiled, "specs/example.spec")?;
 let host_failure = GeneratedSourceError::compile_failed(
     "specs/example.spec",
     "rustc rejected generated.rs",

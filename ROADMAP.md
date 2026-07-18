@@ -993,8 +993,9 @@ dispatch tables, and emits exact neutral diagnostics. Verified live slice `.9.1.
 policy and derives seek/consume from every entered rule across action, blind, call, recursion, loading, ordinary
 JSON reconstruction, and trace. Verified descriptor `.9.1.4.4` removes root/rule global fields and publishes the
 neutral v1 identity, family-derived policy, aggregate ownership, and ordered semantic edge rows across direct,
-loaded, and compiled-JSON projections. Generated/public projections remain `.5-.6`; generated v2 `.5` follows
-only after the clean `.4` commit. The current token inventory is 73.
+loaded, and compiled-JSON projections. Generated `.5` now emits v2/format 2 with one minimal neutral plan, derives
+policy across all ten families, rejects v1, and passes fresh host/corpus/exhaustive-classifier plus focused and
+canonical proof. Public option/CLI projection remains `.6`; the current token inventory is 71.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

@@ -1,4 +1,4 @@
-//! FUTURE-PARITY-BACKLOG.9.1.4.3-.4 — live execution and descriptor projection.
+//! FUTURE-PARITY-BACKLOG.9.1.4.3-.5 — live, descriptor, and generated projection.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
@@ -6,7 +6,7 @@ use linkedspec_core::types::{CompiledSpec, ParseMode};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedRuleFamily, GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source_v1,
+    GeneratedRuleFamily, GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source_v2,
 };
 use linkedspec_runtime::spec_loader::{SpecLoadOptions, SpecRequest, load_and_compile_spec};
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
@@ -414,7 +414,7 @@ fn loaded_execution_and_trace_use_each_entered_rule_family() {
 }
 
 #[test]
-fn descriptor_v1_is_current_while_generated_source_v1_remains_staged() {
+fn descriptor_v1_and_generated_source_v2_share_rule_local_policy() {
     let contract = contract();
     let compiled = compile_source("Top::|\n /x/ -> Top { return(\"hit\") }\n");
     assert_eq!(
@@ -450,7 +450,7 @@ fn descriptor_v1_is_current_while_generated_source_v1_remains_staged() {
     );
 
     let family = classify_generated_rule_family(compiled.top_rule().unwrap());
-    assert_eq!(family, GeneratedRuleFamily::AndSingleAcode);
+    assert_eq!(family, GeneratedRuleFamily::OrAcode);
     let generated_plan = [GeneratedRuleSpec {
         label: "Top",
         family,
@@ -458,16 +458,17 @@ fn descriptor_v1_is_current_while_generated_source_v1_remains_staged() {
     assert_eq!(
         Engine::new(compiled.clone())
             .execute_generated_value_with_plan(&generated_plan, "prefix x")
-            .expect("execute staged generated v1 plan"),
-        Value::Null,
-        "FUTURE-PARITY-BACKLOG.9.1.4.5 owns generated execution migration"
+            .expect("execute generated v2 plan"),
+        json!("hit"),
+        "generated execution derives seek from the compact-OR family row"
     );
 
     let generated_source =
-        emit_rust_source_v1(&compiled, "cursor-v1-boundary.spec").expect("emit staged v1");
-    assert!(generated_source.contains("linkedspec-generated-source-v1"));
-    assert!(
-        generated_source.contains(r#"\"parse_mode\":\"consume\""#),
-        "v1's embedded compatibility wire shape must remain explicit"
-    );
+        emit_rust_source_v2(&compiled, "cursor-v2-boundary.spec").expect("emit generated v2");
+    assert!(generated_source.contains("linkedspec-generated-source-v2"));
+    assert!(generated_source.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT: u32 = 2"));
+    assert!(generated_source.contains(r#"family: "or_acode""#));
+    assert!(!generated_source.contains("GENERATED_RULES"));
+    assert!(!generated_source.contains(r#"\"parse_mode\""#));
+    assert!(!generated_source.contains("cursor_policy:"));
 }

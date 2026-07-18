@@ -1,5 +1,47 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.5` — generated repetition is narrower than live repetition):
+  Rust core's `RuleMode::is_repetition()` answers an execution question, so it intentionally includes the
+  unsuffixed `Default` mode: default rules repeat alternatives. Generated-source family classification answers a
+  different serialization question. The neutral v2 plan reserves `default` for that authored form and uses
+  `rep_acode` / `rep_bcode` only when an explicit repetition suffix was authored. Reusing the broader predicate
+  initially classified ordinary default fixtures as `rep_acode`; the exact neutral plan and family matrix rejected
+  them before execution. The emitter now enumerates explicit repetition variants and documents why the broader
+  core predicate is not interchangeable.
+
+  Generated v2 state is deliberately minimal and reconstructible. `CompiledSpec` JSON has no cursor field, and the
+  emitted plan has only ordered `label` / `family` rows. `GeneratedRuleFamily::cursor_policy()` is the single v2
+  reconstruction map: five default/OR families seek and five AND families consume. The engine receives that policy
+  only after contract, JSON, row count, label, known-family, and exact-family validation. Native trace may render
+  the derived `cursor_policy`, but that observation is not serialized input state.
+
+  Contract-version validation precedes JSON decoding. This ordering prevents a v1 artifact's private wire shape or
+  stale global field from being treated as a partially valid v2 plan. The portable failure carries stage
+  `validate_generated_plan`, code `generated_source_contract_version_mismatch`, exact expected/actual contract
+  fields, and `.spec` regeneration guidance. There is no inference path because the authored source is the only
+  reliable authority after the rule-local migration.
+
+  `expected_contract` and `actual_contract` remain exact top-level JSON fields, but are stored behind one flattened
+  boxed mismatch context. Stable summaries are static strings. This keeps `GeneratedSourceError` below Clippy's
+  large-error threshold without boxing every public `Result` error or weakening typed access; callers use
+  `expected_contract()` / `actual_contract()`.
+
+  Result compatibility remains orthogonal to policy migration. Typed `execute` roles return the direct top-rule
+  value; string-error `parse` roles retain the accumulator envelope. All source-emitter-dependent runtime tests
+  now call the v2 seam explicitly, and emitted modules expose only `GENERATED_PLAN`. The focused emitter suite
+  passes 5/5, rule-local execution passes 6/6 over all 36 spellings, and the exact 105-case classifier passes in
+  233.60 seconds. Inventory reconciliation is semantic rather than spelling-based: three implementation paths
+  become token-free, the explicit v1 rejection test becomes governed, and the checker passes at 71 files.
+
+  The canonical gate then exposed a separate topology invariant: the recurring logical-helper checker names every
+  required backend role, so migrating the Rust consumer functions without migrating the neutral role names is a
+  real omission even when the focused Rust test itself passes. The contract/checker now require
+  `generated_v2_direct` and `generated_v2_traced` and look for the exact v2 entrypoint calls; all 26 omission
+  mutations remain effective. Final focused proof passes core 189/4/5/8, runtime 137, oracle 105/205.58s,
+  diagnostics 7, classifier 105/234.84s, integrations 197, emitter 5/37.16s, execution 6/59.37s, and every adjacent
+  suite before only the staged `.6` CLI boundary at 51/63. Canonical CI passes Perl cursor 288, reference CLI 63x2,
+  and Phase 0 1,031/1,031 in 609 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.4` — descriptors project normalized semantics, not compatibility
   controls): Rust's original outward descriptor duplicated the global mode at both `meta.parse_mode` and each
   rule's `meta.parse_mode`. After live execution became rule-local, those fields were not merely stale names: the

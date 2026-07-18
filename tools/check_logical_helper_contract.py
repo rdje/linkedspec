@@ -127,8 +127,8 @@ RECURRING_GATE = {
             "roles": [
                 "native",
                 "serialized",
-                "generated_v1_direct",
-                "generated_v1_traced",
+                "generated_v2_direct",
+                "generated_v2_traced",
                 "generated_compatibility_direct",
                 "generated_compatibility_traced",
                 "emitted_execute",
@@ -404,8 +404,8 @@ GATE_ROLE_MARKERS = {
     "rust": {
         "native": "Engine::new(compiled.clone())",
         "serialized": "serde_json::from_str(&compiled_json)",
-        "generated_v1_direct": "execute_generated_parser_v1(",
-        "generated_v1_traced": "execute_generated_parser_with_trace_v1(",
+        "generated_v2_direct": "execute_generated_parser_v2(",
+        "generated_v2_traced": "execute_generated_parser_with_trace_v2(",
         "generated_compatibility_direct": "execute_generated_parser(&compiled_json",
         "generated_compatibility_traced": "execute_generated_parser_with_trace(",
         "emitted_execute": "::execute(\"x\")",

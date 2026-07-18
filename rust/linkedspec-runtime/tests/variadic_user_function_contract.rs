@@ -5,7 +5,7 @@ use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::source_emitter::{
-    GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source, execute_generated_parser,
+    GeneratedPlanRow, classify_generated_rule_family, emit_rust_source, execute_generated_parser,
 };
 use linkedspec_runtime::spec_parser::{
     parse_spec_with_user_functions, parse_user_function_definition_asts,
@@ -198,13 +198,13 @@ fn compiled_json_and_generated_source_preserve_variadic_signature() {
     assert!(generated.contains("\\\"max_arity\\\":null"));
 
     let generated_rules = [
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "Top",
-            family: classify_generated_rule_family(&compiled.rules[0]),
+            family: classify_generated_rule_family(&compiled.rules[0]).contract_name(),
         },
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "Done",
-            family: classify_generated_rule_family(&compiled.rules[1]),
+            family: classify_generated_rule_family(&compiled.rules[1]).contract_name(),
         },
     ];
     assert_eq!(

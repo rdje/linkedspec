@@ -602,9 +602,7 @@ impl GeneratedPlanExecutor<'_> {
                     "generated_family_decision",
                     format!(
                         "source_identity={source_identity:?} rule={label} family={}",
-                        family
-                            .contract_name()
-                            .expect("validated v1 plan must use a contract family")
+                        family.contract_name()
                     ),
                     TraceLevel::LOW,
                 );
@@ -631,16 +629,6 @@ impl GeneratedPlanExecutor<'_> {
                 GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
                     self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
                 }
-                GeneratedRuleFamily::Repetition => {
-                    let rule = self.engine.spec.find(label).ok_or_else(|| {
-                        format!(
-                            "rule '{}' (entry idx {}) not found in compiled spec",
-                            label, entry_regex_idx
-                        )
-                    })?;
-                    let family = crate::source_emitter::classify_generated_rule_family(rule);
-                    self.execute_rule_by_family(label, entry_regex_idx, family, ctx)
-                }
             }
         })();
         let status = match &result {
@@ -660,34 +648,6 @@ impl GeneratedPlanExecutor<'_> {
             );
         }
         result
-    }
-
-    fn execute_rule_by_family(
-        &self,
-        label: &str,
-        entry_regex_idx: usize,
-        family: GeneratedRuleFamily,
-        ctx: &mut RuntimeContext,
-    ) -> Result<RuntimeValue, String> {
-        match family {
-            GeneratedRuleFamily::Default
-            | GeneratedRuleFamily::OrAcode
-            | GeneratedRuleFamily::AndSingleAcode
-            | GeneratedRuleFamily::AndAcodeSeq
-            | GeneratedRuleFamily::RepAcode
-            | GeneratedRuleFamily::RepAndAcode => {
-                self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
-            }
-            GeneratedRuleFamily::AndBcode
-            | GeneratedRuleFamily::OrBcode
-            | GeneratedRuleFamily::RepBcode
-            | GeneratedRuleFamily::RepAndBcode => {
-                self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
-            }
-            GeneratedRuleFamily::Repetition => Err(format!(
-                "generated rule '{label}' retained unspecialized repetition family"
-            )),
-        }
     }
 
     fn generated_rule_family(&self, label: &str) -> Result<GeneratedRuleFamily, String> {
@@ -912,13 +872,13 @@ impl GeneratedPlanExecutor<'_> {
                 return_if_rule_returned!();
             }
 
-            // Contract-v1 generated artifacts retain their legacy cursor view
-            // until FUTURE-PARITY-BACKLOG.9.1.4.5 advances the plan to v2.
-            let parse_mode = rule.legacy_artifact_parse_mode();
+            // Generated-source v2 derives cursor spending from the validated
+            // family row; no mutable/global cursor field crosses the artifact.
+            let cursor_policy = family.cursor_policy();
             let match_result = if has_entry_idx && matches == 0 {
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
                 let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
-                match parse_mode {
+                match cursor_policy {
                     ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -927,7 +887,7 @@ impl GeneratedPlanExecutor<'_> {
                     m
                 })
             } else {
-                match parse_mode {
+                match cursor_policy {
                     ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -939,8 +899,8 @@ impl GeneratedPlanExecutor<'_> {
                         "rust_runtime:generated_plan:regex_match",
                         true,
                         format!(
-                            "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            m.index, m.start, m.end, parse_mode
+                            "rule={label} regex_idx={} start={} end={} pos_before={pos_before} cursor_policy={:?} entry_regex_idx={entry_regex_idx}",
+                            m.index, m.start, m.end, cursor_policy
                         ),
                         TraceLevel::MEDIUM,
                     );
@@ -950,8 +910,8 @@ impl GeneratedPlanExecutor<'_> {
                         "rust_runtime:generated_plan:regex_match",
                         false,
                         format!(
-                            "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            parse_mode
+                            "rule={label} pos_before={pos_before} cursor_policy={:?} entry_regex_idx={entry_regex_idx}",
+                            cursor_policy
                         ),
                         TraceLevel::MEDIUM,
                     );

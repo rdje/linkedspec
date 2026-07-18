@@ -399,8 +399,8 @@ assert!(top.resolved_edges[0].block);
 Bare and explicit equivalent edges project the same semantic row. The neutral contract allows an optional
 non-semantic `source_form`, but Rust intentionally omits it because compiled normalization does not retain that
 provenance. Direct, file-loaded, and ordinary compiled-JSON-reconstructed descriptors agree, and their policy is
-the same policy normal live execution spends. Generated-source v1 is a separate artifact contract and remains
-staged until its v2 migration.
+the same policy normal live execution spends. Generated-source v2 is a separate artifact contract that derives
+the same policy from its minimal neutral family plan rather than copying descriptor fields.
 
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable

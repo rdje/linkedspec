@@ -38,8 +38,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > each rule entry. Its compiled rule no longer stores an independent mutable
 > policy, and the still-present caller option cannot override normal execution.
 > Rust `.9.1.4.4` now publishes descriptor-v1 family/policy/resolved-edge facts
-> without root/rule global fields. Generated-source v1-to-v2 migration and
-> option/CLI removal remain staged under `.9.1.4.5-.6` through explicit boundaries.
+> without root/rule global fields. Rust `.9.1.4.5` emits and reconstructs
+> generated-source v2 from only ordered label/family rows, derives the same five
+> seek and five consume policies, and rejects v1 before reconstruction. Only
+> option/CLI removal remains staged under `.9.1.4.6` through an explicit boundary.
 > rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
 > dependency-ordered under `.9.1.4-.9`.
 
@@ -540,10 +542,10 @@ ordinary reconstructed descriptors agree. Resolved rows expose action/blind owne
 compiled block presence, and fluent continuation. Bare-versus-explicit provenance is optional and non-semantic,
 so Rust omits it after normalization rather than inventing it.
 
-Generated-source v1 remains the deliberately older projection until `.9.1.4.5` migrates it to v2. The Rust
-option/CLI/request-trace surface also remains visible until `.9.1.4.6`, but its value no longer overrides normal
-live rule policy. Do not use either staged surface to author cursor semantics; express the structure with rule
-families.
+Generated-source v2 now derives the same policy from its minimal ordered family plan and carries no serialized
+cursor field. The Rust option/CLI/request-trace surface remains visible until `.9.1.4.6`, but its value no longer
+overrides normal live rule policy. Do not use that staged surface to author cursor semantics; express the
+structure with rule families.
 
 ## Removed Perl option boundary
 

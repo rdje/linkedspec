@@ -7,10 +7,10 @@ use linkedspec_core::validation::validate;
 use linkedspec_runtime::diagnostic::RuntimeExecutionError;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode,
-    GeneratedSourceError, GeneratedSourceStage, emit_rust_source_v1, execute_generated_parser,
-    execute_generated_parser_v1, execute_generated_parser_with_trace,
-    execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError,
+    GeneratedSourceStage, emit_rust_source_v2, execute_generated_parser,
+    execute_generated_parser_v2, execute_generated_parser_with_trace,
+    execute_generated_parser_with_trace_v2, validate_generated_parser_plan_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::Value;
@@ -29,9 +29,9 @@ const TOP_PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
     family: "default",
 }];
 
-const COMPATIBILITY_TOP_PLAN: &[GeneratedRuleSpec] = &[GeneratedRuleSpec {
+const COMPATIBILITY_TOP_PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
     label: "Top",
-    family: GeneratedRuleFamily::Default,
+    family: "default",
 }];
 
 fn contract() -> Value {
@@ -217,20 +217,32 @@ fn neutral_fixtures_match_native_serialized_and_generated_plan_execution() {
         );
 
         let identity = format!("logical-helper/{fixture_id}.spec");
-        let emitted = emit_rust_source_v1(&compiled, &identity).expect("emit Rust fixture");
-        assert!(emitted.contains("linkedspec-generated-source-v1"));
-        validate_generated_parser_plan_v1(&compiled_json, TOP_PLAN, &identity)
-            .expect("validate generated logical plan");
-        let generated = execute_generated_parser_v1(&compiled_json, TOP_PLAN, "x", &identity)
-            .unwrap_or_else(|error| panic!("generated-plan {fixture_id}: {error}"));
+        let emitted = emit_rust_source_v2(&compiled, &identity).expect("emit Rust fixture");
+        assert!(emitted.contains("linkedspec-generated-source-v2"));
+        validate_generated_parser_plan_v2(
+            &compiled_json,
+            TOP_PLAN,
+            &identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect("validate generated logical plan");
+        let generated = execute_generated_parser_v2(
+            &compiled_json,
+            TOP_PLAN,
+            "x",
+            &identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .unwrap_or_else(|error| panic!("generated-plan {fixture_id}: {error}"));
         assert_eq!(generated, expected, "generated-plan {fixture_id}");
         assert_eq!(
-            execute_generated_parser_with_trace_v1(
+            execute_generated_parser_with_trace_v2(
                 &compiled_json,
                 TOP_PLAN,
                 "x",
                 TraceConfig::default(),
                 &identity,
+                GENERATED_SOURCE_CONTRACT,
             )
             .unwrap_or_else(|error| panic!("generated-plan traced {fixture_id}: {error}")),
             generated,
@@ -289,16 +301,23 @@ fn invalid_arity_precedes_effects_with_exact_native_and_generated_fields() {
         assert_arity_error(&serialized, case);
 
         let identity = format!("logical-helper/{id}.spec");
-        let generated = execute_generated_parser_v1(&compiled_json, TOP_PLAN, "x", &identity)
-            .expect_err("generated invalid arity must fail");
+        let generated = execute_generated_parser_v2(
+            &compiled_json,
+            TOP_PLAN,
+            "x",
+            &identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect_err("generated invalid arity must fail");
         assert_generated_arity_error(&generated, case, &identity);
 
-        let traced = execute_generated_parser_with_trace_v1(
+        let traced = execute_generated_parser_with_trace_v2(
             &compiled_json,
             TOP_PLAN,
             "x",
             TraceConfig::default(),
             &identity,
+            GENERATED_SOURCE_CONTRACT,
         )
         .expect_err("traced generated invalid arity must fail");
         assert_generated_arity_error(&traced, case, &identity);
@@ -360,7 +379,7 @@ fn standalone_emitted_modules_compile_and_run_values_effects_receivers_and_arity
     for fixture_id in ["values", "effects", "receiver_and_lazy_control"] {
         let fixture = &contract["fixtures"][fixture_id];
         let compiled = compile_source(fixture["spec_source"].as_str().expect("fixture source"));
-        let emitted = emit_rust_source_v1(&compiled, &format!("logical-helper/{fixture_id}.spec"))
+        let emitted = emit_rust_source_v2(&compiled, &format!("logical-helper/{fixture_id}.spec"))
             .expect("emit standalone fixture");
         modules.push_str(&format!("pub mod {fixture_id} {{\n{emitted}\n}}\n"));
         expected_literals.push((
@@ -383,7 +402,7 @@ fn standalone_emitted_modules_compile_and_run_values_effects_receivers_and_arity
             .expect("invalid fixture source"),
     );
     let invalid_emitted =
-        emit_rust_source_v1(&invalid_compiled, "logical-helper/not_many-emitted.spec")
+        emit_rust_source_v2(&invalid_compiled, "logical-helper/not_many-emitted.spec")
             .expect("emit invalid standalone fixture");
     modules.push_str(&format!(
         "pub mod invalid_not_many {{\n{invalid_emitted}\n}}\n"

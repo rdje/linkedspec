@@ -8,10 +8,10 @@ answers:
   - "which generated roles does the logical gate require"
   - "what is LINKEDSPEC_RUN_LOGICAL_MATRIX"
   - "which primary case does the logical gate run"
-date: 2026-07-17
+date: 2026-07-18
 status: current
 tags: [logical, recurring-gate, generated-source, primary-cli, ci, perl, rust, dart, julia, lua, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.8 adds tools/check_logical_helper_five_backend.sh and an exact recurring_gate topology to linkedspec-logical-helper-v1. The driver passes the neutral checker, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT focused consumers, success_logical_helpers_eager through 5 commands x 2 environments, and generated-source/capability/coverage ledgers. FUTURE-PARITY-BACKLOG.5.2.9 adds public no-drift; the checker reports 8 complete / 0 pending and rejects 26 mutations, including backend, generated-role, primary, support, driver, CI-registration, public-surface, and rollout omissions. Canonical local CI registers the same all-toolchain leg behind LINKEDSPEC_RUN_LOGICAL_MATRIX=1."
+evidence: "FUTURE-PARITY-BACKLOG.5.2.8 adds tools/check_logical_helper_five_backend.sh and an exact recurring_gate topology to linkedspec-logical-helper-v1. The driver passes the neutral checker, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT focused consumers, success_logical_helpers_eager through 5 commands x 2 environments, and generated-source/capability/coverage ledgers. FUTURE-PARITY-BACKLOG.5.2.9 adds public no-drift; the checker reports 8 complete / 0 pending and rejects 26 mutations, including backend, generated-role, primary, support, driver, CI-registration, public-surface, and rollout omissions. FUTURE-PARITY-BACKLOG.9.1.4.5 migrates the exact Rust typed role names and source markers to generated-source v2; canonical local CI registers the same all-toolchain leg behind LINKEDSPEC_RUN_LOGICAL_MATRIX=1."
 reverify: "bash tools/check_logical_helper_five_backend.sh"
 ---
 
@@ -28,7 +28,7 @@ language-coverage authorities. Canonical local CI executes this expensive all-to
 `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`, while every ordinary run still audits its tracked path and shell syntax.
 
 The neutral contract stores more than test paths. It records the exact ordered role set for each backend: Perl
-native/primary plus `Execute`/`ExecuteWithTrace`/`Get`; Rust native/serialized, typed-v1 and compatibility
+native/primary plus `Execute`/`ExecuteWithTrace`/`Get`; Rust native/serialized, typed-v2 and compatibility
 direct/traced, plus emitted execute/parse direct/traced; and Dart/Julia/Lua native/reconstructed/primary,
 generated-plan direct/traced, and emitted direct/traced. The offline checker requires literal evidence for every
 role and mutates each omission class, so a still-green test file cannot silently stop covering an entrypoint.

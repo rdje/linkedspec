@@ -18,8 +18,11 @@ Verified `.9.1.4.3` removes independently mutable compiled cursor state and make
 and reconstructed execution derive policy from each entered rule. Parent/global policy no longer propagates into
 children. Verified descriptor `.9.1.4.4` now publishes the neutral v1 identity, normalized family/policy, and
 ordered resolved-edge facts without root/rule global cursor fields; direct, loaded, and reconstructed projections
-agree with live execution. Generated-source v1-to-v2 migration and public option/CLI removal remain explicitly
-staged under `.9.1.4.5-.6`; the governed inventory is 73 files and rollout remains 2/6 until composed Rust admission.
+agree with live execution. Generated-source `.9.1.4.5` now emits v2/format 2 from only ordered label/family rows,
+derives policy across all ten families, rejects v1 before reconstruction, and passes the exhaustive 105-case host
+classifier plus focused and canonical signoff. Public option/CLI removal remains explicitly split under
+`.9.1.4.6`; the governed inventory is 71
+files, and rollout remains 2/6 until composed Rust admission.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -481,8 +484,9 @@ content migration exists yet.
   primary interpreter oracle. The checker owns the Dart, Julia, and Lua 8/105 test paths; Lua's path additionally
   locks full-manifest validation, contract order, interpreter-first proof, fresh selected-ABI loading, exact
   metadata/plans/trace identity, cleanup, and unconditional registration.
-  ADR `0044` now advances new Perl emission to generated-source v2 while this shared v1 ledger remains the
-  convergence baseline for Rust, Dart, Julia, and Lua until their dependency-ordered cursor migrations.
+  ADR `0044` now advances new Perl and Rust emission to generated-source v2 while this shared v1 capability ledger
+  remains the convergence baseline for all five backends; Dart, Julia, and Lua artifacts migrate in dependency
+  order.
 - Run `bash tools/check_punctuation_light_five_backend.sh` when all five backend toolchains are installed to prove
   the admitted zero-argument aliases and exclusions across Perl/Rust/Dart/Julia plus both Lua ABIs. The same leg is
   available from local CI with `LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1`.

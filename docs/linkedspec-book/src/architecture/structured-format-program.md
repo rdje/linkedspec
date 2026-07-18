@@ -32,7 +32,7 @@ dynamic construction and warm cache reuse, not a replacement parser. Loading `fo
 usable parser without a native compiler or prebuilt artifact, and the dynamic route remains the correctness oracle
 and fallback.
 
-Generated-source v1 supplies important foundations—deterministic identity, independently loadable host source,
+Generated-source artifacts supply important foundations—deterministic identity, independently loadable host source,
 normalized state, trace roles, and interpreter-first equivalence—but does not itself claim optimizing compilation
 or higher speed. A native accelerator must separately match ASTs, spans, diagnostics, Unicode behavior, recovery,
 limits, and trace semantics; correlate compile/runtime behavior back to `.spec` rules; use complete deterministic

@@ -124,7 +124,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
                     "rust_core:compile:rule",
                     true,
                     format!(
-                        "index={index} label={} mode={:?} parse_mode={:?} regexes={} acode={} bcode={}",
+                        "index={index} label={} mode={:?} cursor_policy={:?} regexes={} acode={} bcode={}",
                         compiled.label,
                         compiled.mode,
                         compiled.cursor_policy(),
@@ -777,7 +777,7 @@ mod tests {
     }
 
     #[test]
-    fn compile_derives_current_policy_and_isolates_generated_v1_policy() {
+    fn compile_derives_policy_only_from_authored_family() {
         let pipe = parse_spec("Top::|\n /x/ -> Top { return(\"hit\") }\n").unwrap();
         let pipe = compile(&pipe).unwrap();
         assert!(!pipe.rules[0].mode.is_and());
@@ -786,20 +786,10 @@ mod tests {
             ParseMode::Seek,
             "compact | must spend authored OR policy in live execution"
         );
-        assert_eq!(
-            pipe.rules[0].legacy_artifact_parse_mode(),
-            ParseMode::Consume,
-            "generated v1 retains its bounded later-leaf adapter"
-        );
-
         let blind = parse_spec("Top::\n => Child\n\nChild:\n /x/\n").unwrap();
         let blind = compile(&blind).unwrap();
         assert_eq!(blind.rules[0].bcode_dispatch.len(), 1);
         assert_eq!(blind.rules[0].cursor_policy(), ParseMode::Seek);
-        assert_eq!(
-            blind.rules[0].legacy_artifact_parse_mode(),
-            ParseMode::Consume
-        );
     }
 
     #[test]

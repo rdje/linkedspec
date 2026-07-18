@@ -4,7 +4,7 @@ use linkedspec_core::trace::{TraceConfig, TraceLevel};
 use linkedspec_core::validation::{validate, validate_with_trace};
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::source_emitter::{
-    GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source, execute_generated_parser,
+    GeneratedPlanRow, classify_generated_rule_family, emit_rust_source, execute_generated_parser,
     execute_generated_parser_with_trace,
 };
 use linkedspec_runtime::spec_parser::{
@@ -81,9 +81,10 @@ fn generated_parser_traced_entrypoint_matches_untraced_output_when_quiet() {
     let compiled = compile_valid_spec();
     let compiled_spec_json =
         serde_json::to_string(&compiled).expect("serialize compiled spec for generated parser");
-    let generated_rules = [GeneratedRuleSpec {
+    let generated_rules = [GeneratedPlanRow {
         label: "Top",
-        family: classify_generated_rule_family(compiled.top_rule().expect("top rule")),
+        family: classify_generated_rule_family(compiled.top_rule().expect("top rule"))
+            .contract_name(),
     }];
 
     let untraced =
@@ -173,7 +174,7 @@ fn generated_runtime_trace_emits_plan_and_branch_events() {
     let compiled_spec_json =
         serde_json::to_string(&compiled).expect("serialize compiled spec for generated parser");
     let generated_rules = [
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "Top",
             family: classify_generated_rule_family(
                 compiled
@@ -181,9 +182,10 @@ fn generated_runtime_trace_emits_plan_and_branch_events() {
                     .iter()
                     .find(|rule| rule.label == "Top")
                     .expect("Top rule"),
-            ),
+            )
+            .contract_name(),
         },
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "Child",
             family: classify_generated_rule_family(
                 compiled
@@ -191,7 +193,8 @@ fn generated_runtime_trace_emits_plan_and_branch_events() {
                     .iter()
                     .find(|rule| rule.label == "Child")
                     .expect("Child rule"),
-            ),
+            )
+            .contract_name(),
         },
     ];
 

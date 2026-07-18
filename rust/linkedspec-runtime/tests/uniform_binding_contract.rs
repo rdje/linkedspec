@@ -4,8 +4,9 @@ use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError, GeneratedSourceStage,
-    emit_rust_source_v1, execute_generated_parser_v1, validate_generated_parser_plan_v1,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError,
+    GeneratedSourceStage, emit_rust_source_v2, execute_generated_parser_v2,
+    validate_generated_parser_plan_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
@@ -58,7 +59,13 @@ fn execute_generated_value(
     plan: &[GeneratedPlanRow],
 ) -> Result<Value, GeneratedSourceError> {
     let compiled_json = serde_json::to_string(&compile_source(source)).expect("serialize fixture");
-    execute_generated_parser_v1(&compiled_json, plan, "xx", "uniform-binding-test.spec")
+    execute_generated_parser_v2(
+        &compiled_json,
+        plan,
+        "xx",
+        "uniform-binding-test.spec",
+        GENERATED_SOURCE_CONTRACT,
+    )
 }
 
 fn assert_native_and_generated(source: &str, plan: &[GeneratedPlanRow], expected: Value) {
@@ -139,7 +146,7 @@ fn generated_compiled_spec_decode_rejects_selector_ast() {
     compiled.rules[0].preamble =
         Some(CodeBlock::parse("array(items)").expect("parse synthetic selector code block")); // selector-rejection fixture
 
-    let emit_error = emit_rust_source_v1(&compiled, "selector-generated.spec")
+    let emit_error = emit_rust_source_v2(&compiled, "selector-generated.spec")
         .expect_err("generated source emission must reject selector AST");
     assert_eq!(emit_error.stage, GeneratedSourceStage::EmitSource);
     assert_eq!(
@@ -154,9 +161,13 @@ fn generated_compiled_spec_decode_rejects_selector_ast() {
     );
 
     let compiled_json = serde_json::to_string(&compiled).expect("serialize synthetic fixture");
-    let error =
-        validate_generated_parser_plan_v1(&compiled_json, TOP_DONE_PLAN, "selector-generated.spec")
-            .expect_err("generated plan must reject selector AST");
+    let error = validate_generated_parser_plan_v2(
+        &compiled_json,
+        TOP_DONE_PLAN,
+        "selector-generated.spec",
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .expect_err("generated plan must reject selector AST");
     assert_eq!(
         error.stage,
         GeneratedSourceStage::CompileOrLoadGeneratedSource
@@ -213,11 +224,22 @@ fn neutral_future_fixture_runs_natively_and_through_generated_plan() {
 
     let compiled_json = serde_json::to_string(&compiled).expect("serialize compiled fixture");
     let identity = "uniform-binding-fixture.spec";
-    validate_generated_parser_plan_v1(&compiled_json, TOP_DONE_PLAN, identity)
-        .expect("uniform-binding generated plan");
+    validate_generated_parser_plan_v2(
+        &compiled_json,
+        TOP_DONE_PLAN,
+        identity,
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .expect("uniform-binding generated plan");
     assert_eq!(
-        execute_generated_parser_v1(&compiled_json, TOP_DONE_PLAN, input, identity)
-            .expect("generated uniform-binding fixture"),
+        execute_generated_parser_v2(
+            &compiled_json,
+            TOP_DONE_PLAN,
+            input,
+            identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect("generated uniform-binding fixture"),
         expected
     );
 }
@@ -470,11 +492,12 @@ Reset: /,/
     );
     let compiled_json = serde_json::to_string(&compile_source(source)).expect("serialize fixture");
     assert_eq!(
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             &compiled_json,
             plan,
             "x,x",
-            "uniform-binding-action-edge-push.spec"
+            "uniform-binding-action-edge-push.spec",
+            GENERATED_SOURCE_CONTRACT,
         )
         .expect("generated action-edge fluent push fixture"),
         expected

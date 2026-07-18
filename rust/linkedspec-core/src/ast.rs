@@ -116,21 +116,6 @@ impl RuleMode {
         )
     }
 
-    /// Transitional pre-rule-local-cursor classification used only to freeze
-    /// existing runtime, descriptor, and generated-source behavior while the
-    /// normalized AST/IR lands. Cursor rollout leaves `.9.1.4.3-.5` remove
-    /// these callers; new syntax and validation must use [`Self::is_and`].
-    pub fn uses_legacy_and_interpretation(&self) -> bool {
-        matches!(
-            self,
-            RuleMode::And
-                | RuleMode::AndPlus
-                | RuleMode::AndBounded { .. }
-                | RuleMode::Pipe
-                | RuleMode::Single
-        )
-    }
-
     /// True if this mode involves repetition (looping).
     pub fn is_repetition(&self) -> bool {
         matches!(

@@ -1647,7 +1647,7 @@ Native and generated rollout is aligned:
 | Backend | Current state or caveat |
 | --- | --- |
 | Perl | Native and independently emitted `Execute`/`ExecuteWithTrace`/`Get` consume the neutral contract through invocation options; failures and exit cross generated framing unchanged. |
-| Rust | Native top/direct-value execution plus paired typed-v1 and compatibility generated functions consume the optional typed sink without changing legacy signatures. |
+| Rust | Native top/direct-value execution plus paired typed-v2 and compatibility generated functions consume the optional typed sink without changing compatibility signatures. |
 | Dart | Native parse/execute/traced aliases and emitted direct/traced functions consume the optional named sink and preserve caller object plus stack. |
 | Julia | Native parse/execute/traced aliases and emitted direct/traced functions consume the optional keyword sink; rich events stay outside native and portable generated trace. |
 | Lua | Native and emitted option-bearing direct/traced functions consume the same sink on PUC Lua and LuaJIT with exact arbitrary caller identity and typed `RuntimeExitNow`. |

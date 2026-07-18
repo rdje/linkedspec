@@ -14,7 +14,7 @@
 use linkedspec_core::compiler::compile;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
-use linkedspec_runtime::source_emitter::emit_rust_source_v1;
+use linkedspec_runtime::source_emitter::emit_rust_source_v2;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde::Deserialize;
 use serde_json::{Value, json};
@@ -248,7 +248,7 @@ fn prepare_case(dir: &Path, case_name: &str) -> Result<PreparedCase, CaseFailure
     }
 
     let identity = format!("corpus/{case_name}/input.spec");
-    let generated_source = emit_rust_source_v1(&compiled, &identity)
+    let generated_source = emit_rust_source_v2(&compiled, &identity)
         .map_err(|error| CaseFailure::new("emit_source", error.to_string()))?;
 
     Ok(PreparedCase {

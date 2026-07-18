@@ -1,18 +1,19 @@
 ---
 id: rust-generated-source-family-plan
-title: Rust generated source embeds a validated rule-family plan and routes direct-capable families through it
+title: Rust generated source embeds one validated neutral family plan and routes every family through it
 answers:
   - "how does Rust generated source classify rule families"
   - "what is GeneratedRuleFamily"
-  - "what is GENERATED_RULES in emitted Rust source"
+  - "what is GENERATED_PLAN in emitted Rust source"
+  - "did Rust generated source remove GENERATED_RULES"
   - "does generated Rust source validate its family plan"
   - "does generated Rust source execute directly yet"
   - "what did RUST-PARITY.8.3.1 add"
-date: 2026-07-04
-status: accepted
+date: 2026-07-18
+status: current
 tags: [rust, codegen, source-emitter, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.3.1 preserves parsed RuleMode on CompiledRule and adds source_emitter GeneratedRuleFamily / GeneratedRuleSpec planning. emit_rust_source emits COMPILED_SPEC_JSON plus GENERATED_RULES rows. execute_generated_parser deserializes the embedded CompiledSpec, validates generated labels/families against classify_generated_rule_family, and then enters Engine::execute_generated_with_plan. classify_generated_rule_family distinguishes Default, OrAcode, AndSingleAcode, AndAcodeSeq, AndBcode, OrBcode, RepAcode, RepBcode, RepAndAcode, and RepAndBcode. RUST-PARITY.8.3.2 made Default and OrAcode run directly inside the generated-plan executor; RUST-PARITY.8.3.3 made AndSingleAcode and AndAcodeSeq run directly with ordered AND sequence semantics; RUST-PARITY.8.3.4 made AndBcode and OrBcode run directly with shared blind-edge tail handling and OR first-match semantics; RUST-PARITY.8.4 made all four REP generated families run directly and added REP matrix coverage. RUST-PARITY.8.5 added a manifest-backed corpus subset to the generated-source compile/run proof. The focused source_emitter test builds generated modules in an isolated temp crate for every non-REP and REP generated family plus zero-progress/recursion termination cases and the curated corpus subset."
-reverify: "rg -n 'GeneratedRuleFamily|GeneratedRuleSpec|GENERATED_RULES|classify_generated_rule_family|execute_generated_parser|RuleMode' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs rust/linkedspec-core/src/types.rs docs/tasks/RUST-PARITY.md && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
+evidence: "RUST-PARITY.8.3.1-.8.5 established ten generated families and direct execution across them. FUTURE-PARITY-BACKLOG.9.1.4.5 replaces the emitted typed GENERATED_RULES table with exactly one ordered GENERATED_PLAN of label/family rows, removes the historical Repetition compatibility marker, validates v2 plan rows against current compiled classification, and derives cursor policy from each validated family. The focused source_emitter test builds generated modules in an isolated temp crate for all ten families plus zero-progress/recursion termination and the governed corpus subset."
+reverify: "rg -n 'GeneratedRuleFamily|GeneratedPlanRow|GENERATED_PLAN|classify_generated_rule_family|execute_generated_parser_v2|RuleMode' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs docs/tasks/RUST-PARITY.md && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter"
 ---
 
 # Rust Generated-Source Family Plan
@@ -21,20 +22,24 @@ reverify: "rg -n 'GeneratedRuleFamily|GeneratedRuleSpec|GENERATED_RULES|classify
 `RUST-PARITY.8.3.2`, `.8.3.3`, `.8.3.4`, `.8.3.5`, and `.8.4` route every
 current generated family through it directly.
 
-Generated source now carries two embedded artifacts:
+Generated source v2 now carries two embedded artifacts:
 
-- `COMPILED_SPEC_JSON`: the serialized interpreted `CompiledSpec`.
-- `GENERATED_RULES`: a table of labels and generated rule families.
+- `COMPILED_SPEC_JSON`: cursor-free serialized interpreted `CompiledSpec` state.
+- `GENERATED_PLAN`: one table of ordered labels and neutral family strings.
 
-The current family markers emitted by classification are `Default`, `OrAcode`,
-`AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, `OrBcode`, `RepAcode`,
-`RepBcode`, `RepAndAcode`, and `RepAndBcode`. `Repetition` remains only as a
-compatibility enum value for the older opaque bucket.
+The current family markers are `default`, `or_acode`, `and_single_acode`,
+`and_acode_seq`, `and_bcode`, `or_bcode`, `rep_acode`, `rep_bcode`,
+`rep_and_acode`, and `rep_and_bcode`. The historical `Repetition` compatibility
+marker and emitted typed table are gone.
 
-At runtime, `execute_generated_parser(...)` deserializes the compiled spec,
+At runtime, `execute_generated_parser_v2(...)` first validates the artifact
+contract, then deserializes the compiled spec,
 validates the generated labels and family classifications against the embedded
-compiled rules, and then calls `Engine::execute_generated_with_plan(...)`.
+compiled rules, derives seek/consume from the validated family, and enters the
+generated-plan engine.
 
 Direct generated execution has landed for every current family marker. `.8.5`
 added the manifest-backed corpus-subset proof; see
-[[rust-generated-source-corpus-subset]].
+[[rust-generated-source-corpus-subset]]. See
+[[rust-generated-source-v2-rule-local-cursor]] for the v2 reconstruction and
+v1 rejection boundary.

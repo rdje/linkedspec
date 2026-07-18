@@ -4,14 +4,14 @@ use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
+use linkedspec_core::types::ParseMode;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode,
-    GeneratedSourceError, GeneratedSourceMetadata, GeneratedSourceStage,
-    classify_generated_rule_family, emit_rust_source, emit_rust_source_v1,
-    execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_trace_v1,
-    validate_generated_parser_plan_v1,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError,
+    GeneratedSourceMetadata, GeneratedSourceStage, classify_generated_rule_family,
+    emit_rust_source, emit_rust_source_v2, execute_generated_parser_v2,
+    execute_generated_parser_with_trace_v2, validate_generated_parser_plan_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde::Deserialize;
@@ -316,28 +316,28 @@ fn rust_module_name_for_case(case_name: &str) -> String {
 }
 
 #[test]
-fn generated_source_v1_metadata_and_structured_errors_are_exact() {
-    let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v1 metadata spec");
-    validate(&parsed).expect("validate v1 metadata spec");
-    let compiled = compile(&parsed).expect("compile v1 metadata spec");
+fn generated_source_v2_metadata_and_structured_errors_are_exact() {
+    let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v2 metadata spec");
+    validate(&parsed).expect("validate v2 metadata spec");
+    let compiled = compile(&parsed).expect("compile v2 metadata spec");
     let identity = "generated-source/rüst-'identity.spec";
 
-    let generated = emit_rust_source_v1(&compiled, identity).expect("emit v1 Rust source");
+    let generated = emit_rust_source_v2(&compiled, identity).expect("emit v2 Rust source");
     assert_eq!(
         generated,
-        emit_rust_source_v1(&compiled, identity).expect("repeat deterministic v1 emission")
+        emit_rust_source_v2(&compiled, identity).expect("repeat deterministic v2 emission")
     );
     assert_ne!(
         generated,
-        emit_rust_source_v1(&compiled, "generated-source/other.spec")
+        emit_rust_source_v2(&compiled, "generated-source/other.spec")
             .expect("emit alternate identity")
     );
     assert_eq!(
         emit_rust_source(&compiled).expect("emit compatibility source"),
-        emit_rust_source_v1(&compiled, "<inline>").expect("emit inline v1 source"),
-        "compatibility emitter must delegate to the typed v1 path"
+        emit_rust_source_v2(&compiled, "<inline>").expect("emit inline v2 source"),
+        "compatibility emitter must delegate to the typed v2 path"
     );
-    assert!(generated.contains("linkedspec-generated-source-v1"));
+    assert!(generated.contains("linkedspec-generated-source-v2"));
     assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_CONTRACT"));
     assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_IDENTITY"));
     assert!(generated.contains("generated-source/rüst-'identity.spec"));
@@ -351,19 +351,22 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
     assert!(generated.contains("pub fn parse(input:"));
     assert!(generated.contains("pub fn parse_with_diagnostic_output("));
     assert!(generated.contains("pub fn parse_with_trace_and_diagnostic_output("));
+    assert!(!generated.contains("\"parse_mode\""));
+    assert!(!generated.contains("\"cursor_policy\""));
+    assert!(!generated.contains("GENERATED_RULES"));
 
     let metadata = GeneratedSourceMetadata::new(identity);
     assert_eq!(
         serde_json::to_value(&metadata).expect("serialize generated metadata"),
         json!({
-            "contract_id": "linkedspec-generated-source-v1",
-            "format_version": 1,
+            "contract_id": "linkedspec-generated-source-v2",
+            "format_version": 2,
             "source_identity": identity,
         })
     );
 
     let emission_error =
-        emit_rust_source_v1(&compiled, "").expect_err("empty generated source identity must fail");
+        emit_rust_source_v2(&compiled, "").expect_err("empty generated source identity must fail");
     assert_eq!(emission_error.error_type, "generated_source_error");
     assert_eq!(emission_error.stage, GeneratedSourceStage::EmitSource);
     assert_eq!(
@@ -394,8 +397,9 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
     );
     assert_eq!(compile_error.source_identity, identity);
 
-    let invalid_json_error = execute_generated_parser_v1("not json", &[], "", identity)
-        .expect_err("invalid embedded compiled spec must fail as generated load");
+    let invalid_json_error =
+        execute_generated_parser_v2("not json", &[], "", identity, GENERATED_SOURCE_CONTRACT)
+            .expect_err("invalid embedded compiled spec must fail as generated load");
     assert_eq!(
         invalid_json_error.stage,
         GeneratedSourceStage::CompileOrLoadGeneratedSource
@@ -405,9 +409,15 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
         GeneratedSourceCode::GeneratedSourceCompileFailed
     );
 
-    let compiled_json = serde_json::to_string(&compiled).expect("serialize compiled v1 fixture");
-    let plan_error = execute_generated_parser_v1(&compiled_json, &[], "hello one", identity)
-        .expect_err("missing generated plan rows must fail before execution");
+    let compiled_json = serde_json::to_string(&compiled).expect("serialize compiled v2 fixture");
+    let plan_error = execute_generated_parser_v2(
+        &compiled_json,
+        &[],
+        "hello one",
+        identity,
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .expect_err("missing generated plan rows must fail before execution");
     assert_eq!(
         plan_error.stage,
         GeneratedSourceStage::ValidateGeneratedPlan
@@ -428,9 +438,14 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
         label: "Top",
         family: "default",
     }];
-    let execution_error =
-        execute_generated_parser_v1(&compiled_failure_json, &failure_plan, "bye", identity)
-            .expect_err("exit_now must become a typed generated execution failure");
+    let execution_error = execute_generated_parser_v2(
+        &compiled_failure_json,
+        &failure_plan,
+        "bye",
+        identity,
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .expect_err("exit_now must become a typed generated execution failure");
     assert_eq!(
         execution_error.stage,
         GeneratedSourceStage::ExecuteGenerated
@@ -445,7 +460,7 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
 }
 
 #[test]
-fn generated_source_v1_neutral_plan_and_trace_roles_are_exact() {
+fn generated_source_v2_neutral_plan_and_trace_roles_are_exact() {
     let fixture_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join(
         "../../capability_conformance/generated_source/fixtures/default_action_result_trace_identity",
     );
@@ -475,17 +490,28 @@ fn generated_source_v1_neutral_plan_and_trace_roles_are_exact() {
         },
     ];
 
-    validate_generated_parser_plan_v1(&compiled_json, &plan, identity)
+    validate_generated_parser_plan_v2(&compiled_json, &plan, identity, GENERATED_SOURCE_CONTRACT)
         .expect("exact neutral plan must validate");
     assert_eq!(
-        execute_generated_parser_v1(&compiled_json, &plan, &input, identity)
-            .expect("neutral generated fixture must execute"),
+        execute_generated_parser_v2(
+            &compiled_json,
+            &plan,
+            &input,
+            identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect("neutral generated fixture must execute"),
         expected
     );
 
     let rejection = |actual: &[GeneratedPlanRow], expected_code: GeneratedSourceCode| {
-        let error = validate_generated_parser_plan_v1(&compiled_json, actual, identity)
-            .expect_err("mutated generated plan must be rejected");
+        let error = validate_generated_parser_plan_v2(
+            &compiled_json,
+            actual,
+            identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect_err("mutated generated plan must be rejected");
         assert_eq!(error.error_type, "generated_source_error");
         assert_eq!(error.stage, GeneratedSourceStage::ValidateGeneratedPlan);
         assert_eq!(error.code, expected_code);
@@ -532,12 +558,13 @@ fn generated_source_v1_neutral_plan_and_trace_roles_are_exact() {
         .with_trace_file(trace_path.clone())
         .with_reset_file(true);
     assert_eq!(
-        execute_generated_parser_with_trace_v1(
+        execute_generated_parser_with_trace_v2(
             &compiled_json,
             &plan,
             &input,
             trace_config,
             identity,
+            GENERATED_SOURCE_CONTRACT,
         )
         .expect("neutral traced generated fixture must execute"),
         expected
@@ -575,7 +602,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: SIMPLE_SOURCE_EMITTER_SPEC,
             input: "hello one hello two",
             expected: json!([["one", "two"]]),
-            expected_family: "GeneratedRuleFamily::Default",
+            expected_family: "default",
             expected_mode: RuleMode::Default,
         },
         Case {
@@ -583,7 +610,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: OR_ACODE_SOURCE_EMITTER_SPEC,
             input: "go",
             expected: json!(["or-acode:go"]),
-            expected_family: "GeneratedRuleFamily::OrAcode",
+            expected_family: "or_acode",
             expected_mode: RuleMode::Or,
         },
         Case {
@@ -591,7 +618,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: AND_SINGLE_ACODE_SOURCE_EMITTER_SPEC,
             input: "one",
             expected: json!(["and-single"]),
-            expected_family: "GeneratedRuleFamily::AndSingleAcode",
+            expected_family: "and_single_acode",
             expected_mode: RuleMode::And,
         },
         Case {
@@ -599,7 +626,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: AND_ACODE_SEQ_SOURCE_EMITTER_SPEC,
             input: "a b",
             expected: json!(["and-seq"]),
-            expected_family: "GeneratedRuleFamily::AndAcodeSeq",
+            expected_family: "and_acode_seq",
             expected_mode: RuleMode::And,
         },
         Case {
@@ -607,7 +634,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: AND_BCODE_SOURCE_EMITTER_SPEC,
             input: "a b",
             expected: json!([["A", "B"]]),
-            expected_family: "GeneratedRuleFamily::AndBcode",
+            expected_family: "and_bcode",
             expected_mode: RuleMode::And,
         },
         Case {
@@ -615,7 +642,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: AND_BCODE_IMPLICIT_RESULT_SOURCE_EMITTER_SPEC,
             input: "a b",
             expected: json!([["A", "B"]]),
-            expected_family: "GeneratedRuleFamily::AndBcode",
+            expected_family: "and_bcode",
             expected_mode: RuleMode::And,
         },
         Case {
@@ -623,7 +650,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: OR_BCODE_SOURCE_EMITTER_SPEC,
             input: "a b",
             expected: json!(["or-bcode:A"]),
-            expected_family: "GeneratedRuleFamily::OrBcode",
+            expected_family: "or_bcode",
             expected_mode: RuleMode::Or,
         },
         Case {
@@ -631,7 +658,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: OR_BCODE_LX_SOURCE_EMITTER_SPEC,
             input: "c",
             expected: json!(["or-miss"]),
-            expected_family: "GeneratedRuleFamily::OrBcode",
+            expected_family: "or_bcode",
             expected_mode: RuleMode::Or,
         },
         Case {
@@ -639,7 +666,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_ACODE_SOURCE_EMITTER_SPEC,
             input: "abab",
             expected: json!([["a", "b", "a"]]),
-            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_family: "rep_acode",
             expected_mode: RuleMode::OrBounded {
                 min: 2,
                 max: Some(3),
@@ -650,7 +677,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_BCODE_SOURCE_EMITTER_SPEC,
             input: "abab",
             expected: json!([["A", "B", "A"]]),
-            expected_family: "GeneratedRuleFamily::RepBcode",
+            expected_family: "rep_bcode",
             expected_mode: RuleMode::OrBounded {
                 min: 2,
                 max: Some(3),
@@ -661,7 +688,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_AND_ACODE_SOURCE_EMITTER_SPEC,
             input: "abab",
             expected: json!([[["a", "b"], ["a", "b"]]]),
-            expected_family: "GeneratedRuleFamily::RepAndAcode",
+            expected_family: "rep_and_acode",
             expected_mode: RuleMode::AndBounded {
                 min: 2,
                 max: Some(2),
@@ -672,7 +699,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_AND_BCODE_SOURCE_EMITTER_SPEC,
             input: "abab",
             expected: json!([[["A", "B"], ["A", "B"]]]),
-            expected_family: "GeneratedRuleFamily::RepAndBcode",
+            expected_family: "rep_and_bcode",
             expected_mode: RuleMode::AndBounded {
                 min: 2,
                 max: Some(2),
@@ -683,7 +710,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_ZERO_PROGRESS_SOURCE_EMITTER_SPEC,
             input: "abc",
             expected: json!([["i"]]),
-            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_family: "rep_acode",
             expected_mode: RuleMode::OrPlus,
         },
         Case {
@@ -691,39 +718,46 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             spec: REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC,
             input: "abc",
             expected: json!([null]),
-            expected_family: "GeneratedRuleFamily::RepAcode",
+            expected_family: "rep_acode",
             expected_mode: RuleMode::OrPlus,
         },
     ];
 
     let expected_non_rep_families = BTreeSet::from([
-        "GeneratedRuleFamily::Default",
-        "GeneratedRuleFamily::OrAcode",
-        "GeneratedRuleFamily::AndSingleAcode",
-        "GeneratedRuleFamily::AndAcodeSeq",
-        "GeneratedRuleFamily::AndBcode",
-        "GeneratedRuleFamily::OrBcode",
-    ]);
-    let mut covered_non_rep_families = BTreeSet::new();
-    let expected_rep_families = BTreeSet::from([
-        "GeneratedRuleFamily::RepAcode",
-        "GeneratedRuleFamily::RepBcode",
-        "GeneratedRuleFamily::RepAndAcode",
-        "GeneratedRuleFamily::RepAndBcode",
-    ]);
-    let mut covered_rep_families = BTreeSet::new();
-    let expected_contract_families = BTreeSet::from([
         "default",
         "or_acode",
         "and_single_acode",
         "and_acode_seq",
         "and_bcode",
         "or_bcode",
-        "rep_acode",
-        "rep_bcode",
-        "rep_and_acode",
-        "rep_and_bcode",
     ]);
+    let mut covered_non_rep_families = BTreeSet::new();
+    let expected_rep_families =
+        BTreeSet::from(["rep_acode", "rep_bcode", "rep_and_acode", "rep_and_bcode"]);
+    let mut covered_rep_families = BTreeSet::new();
+    let cursor_contract: Value = serde_json::from_str(include_str!(
+        "../../../capability_conformance/rule_local_cursor_contract.json"
+    ))
+    .expect("neutral rule-local cursor contract must be valid JSON");
+    let contract_families = |field: &str| -> BTreeSet<&str> {
+        cursor_contract["generated_source_v2"][field]
+            .as_array()
+            .unwrap_or_else(|| panic!("generated_source_v2.{field} must be an array"))
+            .iter()
+            .map(|family| {
+                family
+                    .as_str()
+                    .unwrap_or_else(|| panic!("generated_source_v2.{field} must contain strings"))
+            })
+            .collect()
+    };
+    let expected_seek_families = contract_families("seek_families");
+    let expected_consume_families = contract_families("consume_families");
+    assert!(expected_seek_families.is_disjoint(&expected_consume_families));
+    let expected_contract_families = expected_seek_families
+        .union(&expected_consume_families)
+        .copied()
+        .collect::<BTreeSet<_>>();
     let mut covered_contract_families = BTreeSet::new();
     let mut generated_modules = String::new();
     let mut generated_tests = String::from("#[cfg(test)]\nmod generated_source_tests {\n");
@@ -755,11 +789,9 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         assert_eq!(top.mode, case.expected_mode);
 
         let generated = emit_rust_source(&compiled).expect("emit generated Rust source");
-        covered_contract_families.insert(
-            classify_generated_rule_family(top)
-                .contract_name()
-                .expect("classified matrix rule has a contract family"),
-        );
+        let generated_family = classify_generated_rule_family(top);
+        let family_name = generated_family.contract_name();
+        covered_contract_families.insert(family_name);
         if expected_non_rep_families.contains(case.expected_family) {
             covered_non_rep_families.insert(case.expected_family);
         }
@@ -768,15 +800,25 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         }
         assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT"));
         assert!(generated.contains("COMPILED_SPEC_JSON"));
-        assert!(generated.contains("GENERATED_RULES"));
+        assert!(generated.contains("GENERATED_PLAN"));
+        assert!(!generated.contains("GENERATED_RULES"));
+        assert!(!generated.contains("\"parse_mode\""));
+        assert!(!generated.contains("\"cursor_policy\""));
         assert!(!generated.contains("Engine::new"));
-        assert!(generated.contains(case.expected_family));
+        assert_eq!(family_name, case.expected_family);
+        let expected_policy = if expected_seek_families.contains(family_name) {
+            ParseMode::Seek
+        } else if expected_consume_families.contains(family_name) {
+            ParseMode::Consume
+        } else {
+            panic!("family {family_name} is absent from the neutral v2 policy map")
+        };
         assert_eq!(
-            format!("{:?}", classify_generated_rule_family(top)),
-            case.expected_family
-                .strip_prefix("GeneratedRuleFamily::")
-                .expect("family marker has enum prefix")
+            generated_family.cursor_policy(),
+            expected_policy,
+            "family {family_name} must derive its cursor policy from the neutral v2 map"
         );
+        assert!(generated.contains(&format!("family: {:?}", case.expected_family)));
 
         generated_modules.push_str("pub mod ");
         generated_modules.push_str(case.module);
@@ -836,43 +878,67 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
 }
 
 #[test]
-fn legacy_repetition_family_plan_marker_still_executes_directly() {
-    let parsed =
-        parse_spec(REP_AND_BCODE_SOURCE_EMITTER_SPEC).expect("parse legacy repetition smoke spec");
-    validate(&parsed).expect("validate legacy repetition smoke spec");
-    let compiled = compile(&parsed).expect("compile legacy repetition smoke spec");
-
-    let labels: Vec<&str> = compiled
-        .rules
-        .iter()
-        .map(|rule| rule.label.as_str())
-        .collect();
-    assert_eq!(labels.as_slice(), ["Top", "A", "B"]);
-    assert_eq!(
-        classify_generated_rule_family(compiled.top_rule().expect("top rule")),
-        GeneratedRuleFamily::RepAndBcode
-    );
-
+fn generated_source_v2_rejects_v1_before_plan_reconstruction() {
+    let parsed = parse_spec(REP_AND_BCODE_SOURCE_EMITTER_SPEC)
+        .expect("parse contract-version rejection spec");
+    validate(&parsed).expect("validate contract-version rejection spec");
+    let compiled = compile(&parsed).expect("compile contract-version rejection spec");
     let compiled_spec_json =
-        serde_json::to_string(&compiled).expect("serialize legacy repetition compiled spec");
-    let legacy_generated_rules = [
-        GeneratedRuleSpec {
+        serde_json::to_string(&compiled).expect("serialize contract-version rejection spec");
+    let plan = [
+        GeneratedPlanRow {
             label: "Top",
-            family: GeneratedRuleFamily::Repetition,
+            family: "rep_and_bcode",
         },
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "A",
-            family: GeneratedRuleFamily::AndSingleAcode,
+            family: "and_single_acode",
         },
-        GeneratedRuleSpec {
+        GeneratedPlanRow {
             label: "B",
-            family: GeneratedRuleFamily::AndSingleAcode,
+            family: "and_single_acode",
         },
     ];
 
-    let actual = execute_generated_parser(&compiled_spec_json, &legacy_generated_rules, "abab")
-        .expect("legacy repetition marker should execute through direct specialization");
-    assert_eq!(actual, json!([[["A", "B"], ["A", "B"]]]));
+    let error = validate_generated_parser_plan_v2(
+        &compiled_spec_json,
+        &plan,
+        "generated-source/legacy-v1.spec",
+        "linkedspec-generated-source-v1",
+    )
+    .expect_err("v1 artifact must be rejected by the v2 reconstruction boundary");
+    assert_eq!(error.stage, GeneratedSourceStage::ValidateGeneratedPlan);
+    assert_eq!(
+        error.code,
+        GeneratedSourceCode::GeneratedSourceContractVersionMismatch
+    );
+    assert_eq!(
+        error.expected_contract(),
+        Some("linkedspec-generated-source-v2")
+    );
+    assert_eq!(
+        error.actual_contract(),
+        Some("linkedspec-generated-source-v1")
+    );
+    assert!(
+        error
+            .detail
+            .as_deref()
+            .is_some_and(|detail| detail.contains("regenerate") && detail.contains(".spec"))
+    );
+    assert_eq!(
+        error.to_json().expect("serialize v1 contract rejection"),
+        json!({
+            "type": "generated_source_error",
+            "stage": "validate_generated_plan",
+            "code": "generated_source_contract_version_mismatch",
+            "summary": "Generated source contract does not match the active validator",
+            "source_identity": "generated-source/legacy-v1.spec",
+            "detail": "regenerate the generated artifact from its .spec source",
+            "expected_contract": "linkedspec-generated-source-v2",
+            "actual_contract": "linkedspec-generated-source-v1",
+        })
+    );
 }
 
 #[test]
@@ -953,7 +1019,8 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
         let generated = emit_rust_source(&compiled).unwrap_or_else(|e| {
             panic!("emit failed for generated-source corpus subset case {case_name}: {e}")
         });
-        assert!(generated.contains("GENERATED_RULES"));
+        assert!(generated.contains("GENERATED_PLAN"));
+        assert!(!generated.contains("GENERATED_RULES"));
 
         let module = rust_module_name_for_case(case_name);
         generated_modules.push_str("pub mod ");

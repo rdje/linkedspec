@@ -5,8 +5,8 @@ use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, emit_rust_source_v1, execute_generated_parser_v1,
-    validate_generated_parser_plan_v1,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2, execute_generated_parser_v2,
+    validate_generated_parser_plan_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::Value;
@@ -67,13 +67,24 @@ fn seven_helper_contract_matches_perl_oracle_natively_serialized_and_generated()
     );
 
     let identity = "complete-named-mark.spec";
-    let generated = emit_rust_source_v1(&compiled, identity).expect("emit generated Rust source");
-    assert!(generated.contains("linkedspec-generated-source-v1"));
-    validate_generated_parser_plan_v1(&compiled_json, TOP_CHILD_PLAN, identity)
-        .expect("validate complete named-mark generated plan");
+    let generated = emit_rust_source_v2(&compiled, identity).expect("emit generated Rust source");
+    assert!(generated.contains("linkedspec-generated-source-v2"));
+    validate_generated_parser_plan_v2(
+        &compiled_json,
+        TOP_CHILD_PLAN,
+        identity,
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .expect("validate complete named-mark generated plan");
     assert_eq!(
-        execute_generated_parser_v1(&compiled_json, TOP_CHILD_PLAN, input, identity)
-            .expect("execute complete named-mark generated parser"),
+        execute_generated_parser_v2(
+            &compiled_json,
+            TOP_CHILD_PLAN,
+            input,
+            identity,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect("execute complete named-mark generated parser"),
         expected
     );
 }
