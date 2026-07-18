@@ -62,13 +62,6 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
         }
     }
 
-    if rules.is_empty() {
-        return Err(LinkedSpecError::Parse {
-            line: 1,
-            message: "no rule definitions found in spec".into(),
-        });
-    }
-
     Ok(SpecFile {
         functions: Vec::new(),
         rules,
@@ -1144,6 +1137,21 @@ mod tests {
         assert_eq!(spec.rules.len(), 1);
         assert_eq!(spec.rules[0].header.label, "DemoParser");
         assert!(spec.rules[0].header.is_top);
+    }
+
+    #[test]
+    fn parse_zero_rule_envelope_for_structural_validation() {
+        for source in ["", "\n# no rule declarations\n\n"] {
+            let spec = parse_spec(source).unwrap();
+            assert!(spec.functions.is_empty());
+            assert!(spec.rules.is_empty());
+        }
+    }
+
+    #[test]
+    fn parse_still_rejects_non_rule_content_before_any_rule() {
+        let error = parse_spec("not a rule\n").unwrap_err().to_string();
+        assert!(error.contains("expected rule definition"), "{error}");
     }
 
     #[test]

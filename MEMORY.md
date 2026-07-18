@@ -11,18 +11,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` — behavior-free Rust root-selection preflight maps
-  every seam, exact current failure, and dependency-safe `.2.1-.3` order; commit closeout is in flight.
-- latest_commit: `7029624d` — `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 - admit Perl root selection`
-  (ahead: 210; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 - map Rust root selection`.
-- active_work_unit: Rust parent `.9.1.1.2.2` remains active; preflight `.2.0` is fully verified and awaits only its
-  clean commit. Core implementation `.2.1`, composed routes `.2.2`, and admission `.2.3` remain pending.
-- next_action: commit `.2.0`, clear/verify the brief and clean tree, then activate `.2.1` task-tree-first for
-  marker-optional validation and one ordered compiled-state resolver.
-- current_proof: Rust shared primary is exactly 64/65 twice; only markerless compilation fails. Focused existing
-  validation/strict 18, descriptor 4, types 8, explicit entry 1, diagnostics 5, loader 5, trace 10, and generated
-  1+1 pass. Knowledge Map is 599/4,291. Canonical CI passes root 7+5, cursor 288, Perl primary 65x2, and Phase 0
-  1,031/1,031 in 627 seconds. Root rollout remains 2/7. No background job runs.
+  every seam, exact current failure, and dependency-safe `.2.1-.3` order; it is cleanly committed.
+- latest_commit: `eced5e5d` — `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 - map Rust root selection`
+  (ahead: 211; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 - implement Rust root resolution`.
+- active_work_unit: Rust core leaf `.9.1.1.2.2.1` is done and fully signed off but awaits its clean commit.
+  Composed routes `.2.2` and exact admission `.2.3` remain pending and are not active.
+- next_action: clean generated artifacts, rerun lightweight closeout checks, commit `.2.1`, clear the brief, verify
+  clean state, and only then activate composed routes `.2.2` task-tree-first.
+- current_proof: One Rust resolver implements explicit > first marker > first rule for native/default/value/
+  primary execution; validation is marker-optional, zero/unknown diagnostics are portable, descriptor identity is
+  immutable, and strict is unchanged. Rust local passes core 193+4+5+8, runtime 137, integration 197, root 6,
+  oracle 105, generated classifier, adjacent suites, and primary 65x2. Strict new-code Clippy passes over the exact
+  Rust 1.95 baseline. Canonical passes root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031 in 633s.
+  Root rollout remains 2/7 because generated/emitted `.2.2` is pending. KM is 600/4,301.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0046`, neutral/Perl root precedent, exact Rust owners/tests/routes, and gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -34,6 +36,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: Rust `.2.0` durable causal map/task/live/book docs await only commit;
-  gates and cleanup pass. No Rust behavior file changed or background job runs.
-  Cleanup removed 3.3 GiB Cargo output plus generated book/bytecode. Parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: Rust `.2.1` behavior/tests/docs are fully implemented, Rust-local and
+  canonical verified, but not committed; only cleanup/closeout/commit remain and no background job runs. Parked
+  ignored work is untouched.

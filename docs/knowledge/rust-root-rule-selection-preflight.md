@@ -16,13 +16,16 @@ answers:
   - "which Rust leaves own root selection implementation"
   - "is staged parser registry top_rule part of spec root selection"
 date: 2026-07-18
-status: current pre-implementation map
+status: superseded
 tags: [rust, root-rule, top-rule, validation, compiled-spec, descriptor, generated-source, trace, diagnostics, cli, FUTURE-PARITY-BACKLOG]
 evidence: "At clean base 7029624d, the full shared primary runner passes Rust 64/65 with POSIXLY_CORRECT unset and set. Explicit ordinary selection, first-authored-marker default, unknown-selector failure, request trace, and every unrelated case pass; only success_markerless_first_authored_rule fails at compile validation with exit 1 and `linkedspec: parser compilation failed`. `parser.rs` preserves source order and `is_top = colon == \"::\"`; compiler, ordered `Vec<CompiledRule>`, serde round trip, descriptor `definition_order`, and per-rule `is_top` retain that identity. `validation.rs::check_top_rule_exists` rejects markerless and zero-rule sources. `SpecFile::top_rule` and `CompiledSpec::top_rule` return only the first marked row. Native direct `ExecutionOptions.entry_rule` already overrides markers and rejects unknown labels before rule execution, but uses current `rule_lookup` diagnostics; legacy/default and every generated-plan path call marker-only `top_rule`. Emitted v2 source embeds ordered CompiledSpec JSON, so it has enough authored state, but its execute/parse/traced APIs expose no selector. Strict unused remains declared labels minus authored edge references. The unrelated staged parser registry `top_rule` is parse-job grammar identity and is outside this contract. Safe rollout: .2.1 validation/core resolver/native diagnostics, .2.2 loaded/serialized/generated/emitted/descriptor/trace convergence, .2.3 topology-checked 65-case admission."
 reverify: "cargo build --manifest-path rust/Cargo.toml -p linkedspec-runtime --bin linkedspec-rust; PERL5LIB= perl tools/run_cli_conformance.pl --display-command linkedspec-rust -- /absolute/path/to/rust/target/debug/linkedspec-rust; POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl --display-command linkedspec-rust -- /absolute/path/to/rust/target/debug/linkedspec-rust"
 ---
 
 # Rust root-selection seam map
+
+This pre-implementation map remains historical evidence for base `7029624d`. Current core/native behavior is
+recorded by [[rust-root-rule-selection-core]], which supersedes this card.
 
 Rust already retains the source facts required by `linkedspec-root-rule-selection-v1`. The parser appends rules in
 definition order and records `Rule::` as `RuleHeader.is_top = true`. Compilation copies that bit to each

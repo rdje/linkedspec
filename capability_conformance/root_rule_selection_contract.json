@@ -226,10 +226,10 @@
     },
     {
       "backend": "rust",
-      "validation": "requires_authored_marker",
-      "default_selection": "first_authored_marker",
+      "validation": "marker_optional_one_or_more_rules",
+      "default_selection": "first_authored_marker_then_first_authored_rule",
       "explicit_selection": "execute_value_and_primary_only",
-      "markerless_fallback": "absent",
+      "markerless_fallback": "native_and_primary_only",
       "generated_selection": "first_authored_marker_only",
       "descriptor_authored_is_top": "present",
       "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.2"

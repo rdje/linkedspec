@@ -13,6 +13,7 @@
 pub mod ast;
 pub mod compiler;
 pub mod descriptor;
+pub mod entry_rule;
 pub mod error;
 pub mod expr;
 pub mod parser;

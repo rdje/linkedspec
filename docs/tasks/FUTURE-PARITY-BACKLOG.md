@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Rust root-selection preflight `.9.1.1.2.2.0` is complete with exact 64/65x2 baseline,
-  canonical proof, and cleanup; its clean commit is the boundary before core `.2.1`)
+- Last updated: `2026-07-18` (clean commit `eced5e5d` lands Rust root-selection preflight `.2.0`; core
+  validation/resolution/diagnostic leaf `.2.1` is active task-tree-first)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3542,7 +3542,7 @@ before implementation.
     clean artifacts, and commit `.2.0` before activating Rust implementation `.2.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement Rust marker-optional validation, ordered selection, and immutable authored entry identity.
   Dependencies: `.9.1.1.2.2.0`
   Acceptance: Replace marker-required validation with one-or-more-rule validation; preserve definition order plus
@@ -3550,8 +3550,40 @@ before implementation.
     precedence; route normal native default/explicit entry through it; reject zero rules before selection and
     unknown selectors before user code with exact portable diagnostics; preserve strict-unused semantics; and
     publish root contract identity without changing ordinary rule execution.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** One compiled-state resolver
+    consumes all eight neutral selection rows and three failure rows; the focused Rust consumer also locks all
+    three strict rows, native legacy/value default+explicit behavior, markerless/zero-rule validation, portable
+    diagnostics, descriptor identity, and immutable marker bits. Core 193+4+5+8, runtime 137, integration 197,
+    diagnostics 5, loader 5, trace 10, and root 6 pass. The full Rust-local gate passes the 105-case Perl oracle,
+    generated-source classifier, all adjacent contract suites, and primary 65/65 in both option environments.
+    Strict Clippy passes for both changed packages after exempting only 28 pre-existing findings in untouched
+    hunks exposed by Rust 1.95; no slice-owned warning remains. Root governance remains 2 complete / 5 pending.
+    Knowledge Map is 600/4,301; mdBook, memory/task metadata, four doctrines, and whitespace pass. Canonical CI
+    passes root core 7/routes 5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 633s.
+    Its first run caught and the rerun proves a generic public-checker wording collision without weakening either
+    capability gate. Generated/emitted route convergence remains exclusively `.2.2`; no rollout row advances.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 - implement Rust root resolution`
+
+  #### Acceptance checklist
+
+  - [x] **VALIDATION / ORDER** — Accept one-or-more-rule markerless sources, preserve empty/comment-only parsing as
+    an envelope for exact `no_rules_defined` / `validate_spec`, and keep non-rule garbage a parse error.
+  - [x] **ONE RESOLVER** — Add `CompiledSpec::resolve_entry_rule` with explicit selector > first authored marker >
+    first authored rule precedence, zero-rule-before-selector failure, and no mutation of definition order or
+    `is_top`.
+  - [x] **NATIVE EXECUTION** — Route legacy/default and value/explicit execution through the resolver and make
+    entry-sensitive accumulator/return behavior follow the resolved effective rule rather than authored marker
+    identity.
+  - [x] **DIAGNOSTICS / STRICT** — Reject unknown explicit identity before user code with
+    `entry_rule_not_found` / `select_entry_rule` and requested `entry_rule`; retain compatibility text and
+    authored-edge-only strict-unused behavior.
+  - [x] **DESCRIPTOR / CONTRACT** — Publish `entry_rule_contract = linkedspec-root-rule-selection-v1`, preserve
+    definition order and per-rule boolean `is_top`, and update the partial Rust inventory without promoting
+    generated routes or rollout.
+  - [x] **FOCUSED / RUST LOCAL** — Pass formatting, neutral/root, core, runtime, integration, adjacent contracts,
+    oracle, generated classifier, strict-new-code Clippy, and exact primary 65x2.
+  - [x] **LOCKSTEP / CANONICAL / COMMIT** — Synchronize live/task/book/Knowledge Map state, pass canonical CI,
+    clean generated artifacts, commit `.2.1`, clear the brief, and only then activate `.2.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2`
   Status: `pending`
@@ -7189,7 +7221,7 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `done` | Topology-checked Perl admission, 65x2 reference bytes, docs, rollout, and parent closeout pass. |
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `active` | Rust rollout is split into read-only preflight, core identity/resolution, composed routes, and 65-case admission. |
 | 212.2.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` | `done` | Rust is exactly 64/65 twice; ordered identity is preserved, validation/default/generated gaps are mapped, and `.1-.3` order is frozen without behavior. |
-| 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `pending` | Implement markerless validation, ordered resolution, diagnostics, strict no-drift, and authored identity. |
+| 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `done` | Markerless validation, ordered native resolution, portable diagnostics, strict no-drift, and immutable descriptor identity pass Rust-local and canonical proof. |
 | 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `pending` | Converge loaded/serialized/generated/emitted/descriptor/trace/diagnostic routes. |
 | 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `pending` | Topology-check and admit exact Rust 65-case primary parity, then close parent `.2`. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
@@ -7917,6 +7949,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | Neutral 8/3/3 resolver consumer; markerless/zero parser-validation boundary; native legacy/value default+explicit execution; portable unknown diagnostics; descriptor order/contract/immutable markers; strict no-drift; core 193+4+5+8; runtime 137; integration 197; diagnostics 5; loader 5; trace 10; Rust-local oracle 105, generated classifier, adjacent suites, format, exact-primary 65x2; strict-new-code Clippy over 28 exact pre-existing Rust 1.95 findings; root governance 8/3/3/5 at 2/5 plus 24 mutations; KM 600/4,301; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 633s; cleanup. | PASS. Rust native/core/primary mechanisms advance without generated-route or rollout promotion; `.2.2` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.7` | KM/ADR/neutral/checker/Perl-consumer/canonical-seam retrieval; pre-edit neutral 36/18/8/14/68 at 2/6 plus 29 mutations; constituent normalization 5, descriptor 4, execution 6, emitter 5, primary 63x2; exact 15-role Rust topology and once-only consumer; canonical/default-to-optional-Rust registration; all eight diagnostic/removal outcomes; neutral 36/18/8/14+15/68 at 3/5 plus 34 mutations; focused consumer 1/23.37s; complete Rust core 189/4/5/8, runtime 137, oracle 3/205.40s, diagnostics 7, classifier 105/234.99s, integrations 197/75.60s, composed 1/23.79s, execution 6/59.58s, emitter 5/36.90s, adjacent suites, formatting, advisory consumer Clippy, and primary 63x2; memory/KM/four doctrines/mdBook/JSON/shell/whitespace; canonical Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 612s. | PASS. Only `rust_parity` advances, parent `.9.1.4` closes, and the clean commit is the sole boundary before Dart. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.6` | KM/ADR/neutral/Perl-removal/Rust option-runtime-primary-trace retrieval; exact pre-edit 51/63 default and POSIX boundary; static/runtime override deletion; targeted retired flag plus request-trace migration; exact Rust 63x2; runtime 137, oracle 3/205.44s, diagnostics 7, classifier 105/235.42s, integrations 197/75.12s, execution 6/59.52s, emitter 5/37.18s and adjacent suites; core 189/4/5/8; formatting and production-library Clippy; structural mdBook/public migration; neutral 36/18/8/14/68 at 2/6 plus 29 mutations; logical topology/public-v2 repair plus 26 mutations; KM 587/4,165; four doctrines/mdBook/JSON/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/611s. | PASS. Rust has no caller/global cursor authority: normal policy is rule-derived, entry selection remains, the retired primary flag fails exactly, and request trace omits the global field. Public docs now teach structure. A stale logical public v1 marker is root-caused and migrated to v2. `.7` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.5` | KM/ADR/neutral/Perl-v2/Rust-v1 retrieval and pre-edit source probe; v2/format 2 minimal ordered label/family plan; exact five-seek/five-consume reconstruction; v1 expected/actual/regeneration rejection; fresh host/direct/trace/source/corpus proof; core 189/4/5/8, runtime 137, oracle 105/205.58s, diagnostics 7, classifier 105/234.84s, integrations 197, emitter 5/37.16s, execution 6/59.37s, and adjacent suites; formatting and production-library Clippy; exact 51/63 `.6` primary boundary; logical topology 8/0 plus 26 mutations; neutral 36/18/8/14/71 at 2/6 plus 29 mutations; KM 587/4,165; memory/task/four doctrines/mdBook/JSON/whitespace/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/609s. | PASS. Rust generated-source v2 derives every cursor policy from the minimal family plan, rejects v1 before decode, and preserves typed versus compatibility result roles. Canonical signoff repaired the stale recurring logical v1 role names; `.6` activates after clean commit `727cccc3`. |
@@ -8267,6 +8300,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: `.9.1.1.2.2.1` implements one Rust compiled-state resolver, marker-optional validation, exact
+  zero/unknown diagnostics, native/effective entry behavior, immutable descriptor identity, and strict no-drift.
+  Rust-local and canonical proof pass; generated/emitted routes and rollout remain `.2.2-.3`, and `.2.2` may not
+  activate before the clean `.2.1` commit.
 - `2026-07-18`: Clean commit `7abbc593` lands root-selection neutral decision `.9.1.1.2.0`; tracked/untracked
   state is clean and the brief is zero bytes. Perl parent `.9.1.1.2.1` activates and splits task-tree-first into
   behavior-free seam preflight `.0`, core/descriptor `.1`, generated/trace `.2`, and composed admission `.3`.
@@ -8317,6 +8354,10 @@ Read-only evidence recorded on 2026-07-10:
   native diagnostics, loader, trace, and generated contracts pass; `.2.1-.3` retain the dependency-safe plan.
   Canonical CI passes root 7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 627 seconds.
   Cleanup removes 3.3 GiB of Cargo output, the generated mdBook tree, and Python bytecode cache.
+- `2026-07-18`: Clean commit `eced5e5d` lands Rust root-selection preflight `.9.1.1.2.2.0`; tracked/untracked state
+  is clean, `git_message_brief.txt` is zero bytes, and generated build/book caches are absent. Core leaf `.2.1`
+  activates task-tree-first for marker-optional one-or-more-rule validation, one compiled-state resolver, native
+  default/explicit selection, exact zero/unknown diagnostics, strict no-drift, and root contract identity.
 - `2026-07-18`: Root-selection neutral decision `.9.1.1.2.0` completes ADR `0046` and
   `linkedspec-root-rule-selection-v1` without backend behavior. Full audit distinguishes Perl row-zero default,
   Rust marker-only routes, and Dart/Julia/Lua unreachable fallbacks; selection remains separate from authored

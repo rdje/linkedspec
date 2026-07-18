@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` — a portable validation stage requires the parser to preserve
+  the empty envelope): changing Rust validation from “a marker exists” to “a rule exists” initially left the
+  neutral zero-rule code unreachable because `parse_spec` rejected empty/comment-only input first. The correct
+  separation is parser versus structural validation: blank/comment-only source is a syntactically empty envelope,
+  so parsing returns an empty `SpecFile`; `validate` then owns `no_rules_defined` at `validate_spec`. Arbitrary
+  preamble text still fails parsing. This is not weaker validation—the invalidity stays exact, but at the portable
+  owner and stage required by the neutral contract.
+
+  The implementation keeps three kinds of identity separate. `CompiledRule.is_top` is immutable authored source
+  identity. `EntryRuleSelectionBasis` explains which precedence branch won. `RuntimeContext` holds the effective
+  per-execution label. Native return/accumulator behavior must consult the third, not the first: otherwise explicit
+  or markerless entry can select the right rule yet still apply body-rule return semantics. The shared resolver is
+  therefore necessary but insufficient unless every entry-sensitive runtime branch follows its result.
+
+  Marker-optional validation changes negative-fixture meaning. A one-rule `Only:` source no longer tests the
+  validation-error projection; it is a valid executable spec. The loader suite now uses duplicate labels, which
+  remain a structural validation failure independent of root-selection policy. This is the same adjacent-fixture
+  class the Perl migration exposed and is a useful migration sweep rule for Dart, Julia, and Lua.
+
+  The Rust inventory advances only its implemented mechanisms: validation/default native/primary selection and
+  descriptor identity. Generated/emitted APIs still scan markers and lack an invocation selector, so `.2.2` owns
+  that composition and `.2.3` alone may promote rollout. Exact primary 65x2 is useful behavioral evidence here,
+  not permission to collapse the dependency-ordered admission boundary.
+
+  Rust 1.95's `-D warnings` output is layered: suppressing the first 15 established untouched Clippy findings
+  revealed 10 more production findings and then three test findings from newly active lint classes. A final pass
+  exempting only those exact 28 pre-existing findings is green for `linkedspec-core` and `linkedspec-runtime`, so
+  the slice does not hide new warnings behind a blanket allow. Separately, canonical public no-drift proof showed
+  that generic wording such as “final public admission … remain” is intentionally reserved by the aggregate-
+  selector retirement checker. Root-selection status now names its exact `.6` leg instead of colliding with that
+  cross-capability stale-status guard.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` — Rust has the authored facts but not one resolver):
   Rust does not need source reparsing or a generated-plan format bump for root selection. Parser order,
   `CompiledRule.is_top`, `Vec<CompiledRule>` serde order, descriptor `definition_order`, and generated v2 embedded

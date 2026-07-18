@@ -241,6 +241,10 @@ impl RuntimeContext {
         self.diagnostic_top_rule.as_deref()
     }
 
+    pub(crate) fn is_effective_entry_rule(&self, label: &str) -> bool {
+        self.diagnostic_top_rule() == Some(label)
+    }
+
     pub(crate) fn capture_diagnostic_failure(
         &mut self,
         stage: &'static str,
@@ -253,6 +257,26 @@ impl RuntimeContext {
                 summary,
                 rule_label: rule_label.map(str::to_string),
                 code: None,
+                helper_name: None,
+                actual_arity: None,
+                expected_arity: None,
+            });
+        }
+    }
+
+    pub(crate) fn capture_portable_diagnostic_failure(
+        &mut self,
+        stage: &'static str,
+        code: &'static str,
+        summary: &'static str,
+        rule_label: Option<&str>,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage,
+                summary,
+                rule_label: rule_label.map(str::to_string),
+                code: Some(code),
                 helper_name: None,
                 actual_arity: None,
                 expected_arity: None,

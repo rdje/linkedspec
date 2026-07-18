@@ -1,7 +1,7 @@
 //! Validation passes for parsed `.spec` AST.
 //!
 //! Checks performed (every mode):
-//! 1. At least one top rule (`::`) exists
+//! 1. At least one rule exists (an authored `::` marker is optional)
 //! 2. No duplicate rule labels
 //! 3. User-function names are unique and do not collide with rule labels,
 //!    lifecycle markers, reserved runtime symbols, or built-in helper/control names
@@ -25,6 +25,7 @@
 //! check 5 runs before the strict check.
 
 use crate::ast::{BodyElementKind, SpecFile};
+use crate::entry_rule::no_rules_defined_diagnostic;
 use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use rgx_core::Regex;
@@ -55,7 +56,7 @@ pub fn validate_with_trace_emitter(spec: &SpecFile, trace: &mut TraceEmitter) ->
 /// "undefined before unused" order), so strict mode's observable addition is the
 /// unused-rule rejection.
 pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()> {
-    check_top_rule_exists(spec)?;
+    check_rules_exist(spec)?;
     check_duplicate_labels(spec)?;
     check_duplicate_function_names(spec)?;
     check_function_registry(spec)?;
@@ -97,7 +98,7 @@ pub fn validate_with_options_with_trace_emitter(
         TraceLevel::LOW,
     )?;
     let result = (|| {
-        trace_validation_pass(trace, "top_rule_exists", || check_top_rule_exists(spec))?;
+        trace_validation_pass(trace, "rules_exist", || check_rules_exist(spec))?;
         trace_validation_pass(trace, "duplicate_labels", || check_duplicate_labels(spec))?;
         trace_validation_pass(trace, "duplicate_function_names", || {
             check_duplicate_function_names(spec)
@@ -154,12 +155,10 @@ where
     result
 }
 
-/// At least one rule must use `::` (top rule marker).
-fn check_top_rule_exists(spec: &SpecFile) -> Result<()> {
-    if !spec.rules.iter().any(|r| r.header.is_top) {
-        return Err(LinkedSpecError::Validation(
-            "no top rule found: at least one rule must use '::' (double colon)".into(),
-        ));
+/// At least one rule declaration must exist; an authored marker is optional.
+fn check_rules_exist(spec: &SpecFile) -> Result<()> {
+    if spec.rules.is_empty() {
+        return Err(LinkedSpecError::Diagnostic(no_rules_defined_diagnostic()));
     }
     Ok(())
 }
@@ -915,15 +914,20 @@ mod tests {
     }
 
     #[test]
-    fn validate_rejects_no_top_rule() {
+    fn validate_accepts_markerless_rule() {
         let src = "R:\n /a/";
         let spec = parse_spec(src).unwrap();
-        assert!(
-            validate(&spec)
-                .unwrap_err()
-                .to_string()
-                .contains("no top rule")
-        );
+        validate(&spec).unwrap();
+    }
+
+    #[test]
+    fn validate_rejects_zero_rules_with_portable_diagnostic() {
+        let spec = parse_spec("# no rule declarations\n").unwrap();
+        let error = validate(&spec).unwrap_err();
+        let diagnostic = error.diagnostic().expect("portable rule-count diagnostic");
+        assert_eq!(diagnostic.code, "no_rules_defined");
+        assert_eq!(diagnostic.stage, "validate_spec");
+        assert!(diagnostic.fields.is_empty());
     }
 
     #[test]
@@ -1101,6 +1105,21 @@ mod tests {
         let spec = parse_spec(src).unwrap();
         validate(&spec).unwrap();
         validate_with_options(&spec, false).unwrap();
+    }
+
+    #[test]
+    fn validate_strict_markerless_rules_keep_authored_edge_semantics() {
+        let unreferenced = parse_spec("A:\n /a/\n\nB:\n /b/\n").unwrap();
+        let error = validate_with_options(&unreferenced, true)
+            .unwrap_err()
+            .to_string();
+        assert!(
+            error.contains("unused rule(s) in strict mode: A, B"),
+            "{error}"
+        );
+
+        let closed_cycle = parse_spec("A:\n /a/ -> B\n\nB:\n /b/ -> A\n").unwrap();
+        validate_with_options(&closed_cycle, true).unwrap();
     }
 
     #[test]

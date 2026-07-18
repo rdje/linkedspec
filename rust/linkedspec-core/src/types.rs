@@ -371,7 +371,10 @@ impl CompiledSpec {
         self.rules.iter().find(|r| r.label == label)
     }
 
-    /// Find the top rule.
+    /// Find the first rule whose source header used the `::` marker.
+    ///
+    /// This is authored identity, not effective entry selection. Execution
+    /// callers should use [`Self::resolve_entry_rule`] instead.
     pub fn top_rule(&self) -> Option<&CompiledRule> {
         self.rules.iter().find(|r| r.is_top)
     }

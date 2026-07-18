@@ -430,9 +430,10 @@ ADR `0046` fixes the cross-backend default when the option is omitted: select th
 has no marker, select the first authored rule. That contract is at 2 complete / 5 pending. The composed Perl
 reference implements the exact order across native, loaded, generated-direct, generated-traced, generated `Get`,
 and primary-command routes; the shared 65-case CLI manifest locks first-marker, markerless, explicit, unknown, and
-request-trace outcomes. Rust requires and selects a marker, and Dart/Julia/Lua validation still blocks their
-existing markerless runtime fallback. Use an explicit selector and retain a marker when current multi-backend
-execution must be independent of those staged differences.
+request-trace outcomes. Rust validation plus native and primary-command execution now implement the same order,
+while Rust generated/emitted execution remains marker-only until its composed-route leaf. Dart/Julia/Lua
+validation still blocks their existing markerless runtime fallback. Use an explicit selector and retain a marker
+when current multi-backend execution must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(

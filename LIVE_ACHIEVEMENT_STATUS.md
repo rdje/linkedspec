@@ -8,6 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 — implement Rust root resolution**
+  (DONE pending clean commit — implementation, Rust-local proof, and canonical signoff pass).
+
+  **Result:** `CompiledSpec::resolve_entry_rule` now applies explicit selector > first authored `Rule::` > first
+  authored rule over immutable definition order. Markerless one-or-more-rule sources validate; blank/comment-only
+  envelopes reach exact `no_rules_defined` / `validate_spec`; unknown selectors fail before user code as
+  `entry_rule_not_found` / `select_entry_rule`. Native legacy/default and value/explicit execution share the
+  resolver and effective-entry return behavior. Descriptors publish the root contract without rewriting `is_top`,
+  and strict-unused remains authored-edge-only. The Rust capability inventory advances these partial mechanisms
+  while generated/emitted routes and the rollout row remain staged for `.2.2-.3`.
+
+  **Proof:** Root 6 consumes all 8 selection, 3 failure, and 3 strict rows. Core 193+4+5+8, runtime 137,
+  integration 197, diagnostics 5, loader 5, and trace 10 pass. The complete Rust gate passes the 105-case oracle,
+  generated classifier, adjacent suites, and primary 65x2. Strict new-code Clippy passes over 28 exact pre-existing
+  Rust 1.95 findings. Root governance is 8/3/3/5 at 2/5 with 24 mutations; Knowledge Map is 600/4,301. Canonical
+  CI passes root core 7/routes 5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 633s.
+  The first canonical run's public-checker phrase collision is root-caused, narrowed, and green on rerun. Cleanup
+  removes 20,691 Cargo files / 4.4 GiB, the 11 MiB generated book, and Python bytecode cache.
+
+  **Next:** Commit `.2.1`, clear the brief, verify clean state, then activate `.9.1.1.2.2.2` for loaded/serde/
+  generated/emitted/descriptor/trace convergence. Exact topology/rollout admission stays `.2.3`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 — map Rust root selection**
   (DONE pending clean commit — behavior-free causal map and dependency-safe `.2.1-.3` plan complete).
 
@@ -27,9 +49,9 @@ Current execution status for interruption-safe batch workflow recovery.
   65x2, and Phase 0 1,031/1,031 in 627 seconds. Cleanup removes 15,136 Cargo files / 3.3 GiB, the 11 MiB generated
   book, and Python bytecode cache. Only commit closeout remains.
 
-  **Next:** After the clean `.2.0` commit, activate `.9.1.1.2.2.1` task-tree-first for marker-optional validation,
-  one ordered compiled-state resolver, native selection/portable diagnostics, strict no-drift, and root contract
-  identity. Loaded/serde/generated/emitted/descriptor/trace work stays `.2.2`; exact 65-case admission stays `.2.3`.
+  **Next:** Clean commit `eced5e5d` has landed `.2.0`; `.9.1.1.2.2.1` is active task-tree-first for marker-optional
+  validation, one ordered compiled-state resolver, native selection/portable diagnostics, strict no-drift, and root
+  contract identity. Loaded/serde/generated/emitted/descriptor/trace work stays `.2.2`; exact admission stays `.2.3`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 — admit Perl root selection**
   (DONE at clean commit `7029624d` — complete implementation/admission and canonical proof pass; Rust `.2.0` is

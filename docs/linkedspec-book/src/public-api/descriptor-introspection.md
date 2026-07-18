@@ -148,11 +148,11 @@ In rough form:
 
 ### Root-selection identity
 
-The Perl reference descriptor publishes
+The Perl reference and Rust descriptors publish
 `meta.entry_rule_contract = "linkedspec-root-rule-selection-v1"`, exact
-`meta.definition_order`, and a normalized `0`/`1` `spec.<label>.meta.is_top`
-value for every rule. `is_top` records whether the source used `Rule::`; it is
-not the current invocation choice.
+`meta.definition_order`, and per-rule `spec.<label>.meta.is_top` authored identity
+(normalized `0`/`1` on Perl and a boolean on Rust). `is_top` records whether the
+source used `Rule::`; it is not the current invocation choice.
 
 For example, given `Earlier:` followed by `Marked::`, a descriptor requested
 with `top_rule => 'Earlier'` still reports `Earlier.is_top = 0` and
@@ -388,6 +388,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, and Dart)
+- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl and Rust)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`
@@ -422,6 +423,7 @@ let compiled = compile(&spec)?;
 let descriptor = compiled.descriptor_state();
 assert_eq!(descriptor.meta.descriptor_model, "compiled_descriptor_state");
 assert_eq!(descriptor.meta.cursor_contract, "linkedspec-rule-local-cursor-v1");
+assert_eq!(descriptor.meta.entry_rule_contract, "linkedspec-root-rule-selection-v1");
 assert_eq!(descriptor.meta.compiled_rule_order, ["Top", "Child"]);
 assert_eq!(descriptor.spec["Top"].dependency_refs[0].label, "Child");
 assert_eq!(descriptor.spec["Top"].meta.family, "or_default");
@@ -441,8 +443,11 @@ launches a subprocess or requires `linkedspec-runtime`. Ordered `dependency_refs
 `body_payload` / `body_parse_job` / `body_ast`, definition order, last-definition compile order, and model
 identities survive compiled-state serialization round trips.
 
-Rust uses the rule-local cursor descriptor-v1 metadata variant. Descriptor-wide metadata contains
-`cursor_contract = "linkedspec-rule-local-cursor-v1"` and no global cursor field. Each rule's metadata contains:
+Rust uses the rule-local cursor descriptor-v1 metadata variant and root-rule selection v1. Descriptor-wide
+metadata contains `cursor_contract = "linkedspec-rule-local-cursor-v1"`,
+`entry_rule_contract = "linkedspec-root-rule-selection-v1"`, and no global cursor field. Definition order and
+each rule's boolean `is_top` remain authored identity even when an explicit ordinary rule executes first. Each
+rule's metadata also contains:
 
 - `family`: normalized `and` or `or_default` authored identity;
 - `cursor_policy`: derived `consume` or `seek`;

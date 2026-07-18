@@ -232,7 +232,8 @@ fn projects_parse_and_validation_failures_as_structured_json() {
     assert_eq!(parse_error.code, SpecPipelineCode::SpecParseFailed);
 
     let validation_path = scratch.path.join("validation.spec");
-    fs::write(&validation_path, "Only:\n /x/\n").expect("write validation failure");
+    fs::write(&validation_path, "Duplicate:\n /x/\n\nDuplicate:\n /y/\n")
+        .expect("write validation failure");
     let validation_error = load_and_compile_spec(
         &SpecRequest::path("validation.spec"),
         &SpecLoadOptions::new(&scratch.path),

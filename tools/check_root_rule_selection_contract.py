@@ -84,10 +84,10 @@ INVENTORY = [
     ),
     (
         "rust",
-        "requires_authored_marker",
-        "first_authored_marker",
+        "marker_optional_one_or_more_rules",
+        "first_authored_marker_then_first_authored_rule",
         "execute_value_and_primary_only",
-        "absent",
+        "native_and_primary_only",
         "first_authored_marker_only",
         "present",
         "FUTURE-PARITY-BACKLOG.9.1.1.2.2",

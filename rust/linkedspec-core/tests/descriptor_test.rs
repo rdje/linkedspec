@@ -1,5 +1,6 @@
 use linkedspec_core::ast::{FunctionDefinition, SourceSpan};
 use linkedspec_core::compiler::compile;
+use linkedspec_core::entry_rule::ENTRY_RULE_CONTRACT_ID;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::types::CompiledSpec;
 use serde_json::{Value, json};
@@ -87,6 +88,7 @@ fn projects_backend_neutral_descriptor_shape_and_staged_function_metadata() {
     assert_eq!(descriptor.meta.compiled_rule_order, ["Top", "Child"]);
     assert_eq!(descriptor.meta.function_order, ["normalize"]);
     assert_eq!(descriptor.meta.function_count, 1);
+    assert_eq!(descriptor.meta.entry_rule_contract, ENTRY_RULE_CONTRACT_ID);
 
     let top = &descriptor.spec["Top"];
     assert_eq!(top.handler.kind, "rust_interpreter_rule");

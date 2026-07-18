@@ -10,6 +10,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::ast::{RuleMode, SourceSpan};
+use crate::entry_rule::ENTRY_RULE_CONTRACT_ID;
 use crate::types::{CompiledRule, CompiledSpec, DependencyRef, ParseMode};
 
 /// Public compiled descriptor returned to Rust tooling.
@@ -122,6 +123,7 @@ pub struct CompiledDescriptorMeta {
     pub compiled_spec_model: String,
     pub compiled_dependency_regex_model: String,
     pub cursor_contract: String,
+    pub entry_rule_contract: String,
     pub definition_order: Vec<String>,
     pub compiled_rule_order: Vec<String>,
     pub redefined_rule_labels: Vec<String>,
@@ -228,6 +230,7 @@ impl CompiledSpec {
                 compiled_spec_model: "compiled_spec_state".to_string(),
                 compiled_dependency_regex_model: "compiled_dependency_regex_state".to_string(),
                 cursor_contract: "linkedspec-rule-local-cursor-v1".to_string(),
+                entry_rule_contract: ENTRY_RULE_CONTRACT_ID.to_string(),
                 definition_order,
                 compiled_rule_order,
                 redefined_rule_labels,

@@ -1,5 +1,41 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 — implement Rust root resolution
+
+Rust core and ordinary native execution now implement `linkedspec-root-rule-selection-v1`. One
+`CompiledSpec::resolve_entry_rule` resolver applies explicit exact selector, first authored `Rule::`, then first
+authored rule precedence over immutable compiled declaration order. Both legacy/default and value/explicit native
+entrypoints use it; an explicit ordinary or later marked rule wins without rewriting any authored `is_top` bit.
+Effective-entry accumulator behavior follows the resolved rule rather than assuming that only a marked rule can be
+entered first.
+
+Validation now requires one or more rules rather than one marker. Empty or comment-only source parses to an empty
+structural envelope so validation owns the portable `no_rules_defined` / `validate_spec` failure; stray non-rule
+content remains a parse error. Unknown explicit identity fails before user code as `entry_rule_not_found` /
+`select_entry_rule`, preserves the compatibility message, and exposes the requested `entry_rule` in structured
+runtime diagnostics. The descriptor publishes `entry_rule_contract`, definition order, and unchanged per-rule
+boolean `is_top`; strict-unused remains declared labels minus authored edge references.
+
+A neutral Rust consumer executes all eight selection rows, three failure rows, and three strict rows, then locks
+native marker/default/explicit behavior, zero/unknown diagnostics, descriptor identity, and marker immutability.
+The markerless validator change exposed the same obsolete-negative-fixture class previously found on Perl: the
+loader's single markerless-rule fixture is now valid, so it uses duplicate labels to keep testing the validation
+projection. Core tests pass 193 unit + 4 descriptor + 5 cursor-normalization + 8 types; runtime unit passes 137,
+integration passes 197, and focused diagnostics/loader/trace/root suites pass 5/5/10/6. The Rust primary command
+passes the exact shared 65/65 cases with `POSIXLY_CORRECT` unset and set. Generated/emitted selection remains
+marker-only for `.2.2`, so capability rollout correctly stays 2 complete / 5 pending until `.2.3` admission.
+
+The complete Rust-local gate passes formatting, all core/runtime/integration/adjacent suites, the 105-case oracle,
+the full generated-source classifier, and primary 65x2. Rust 1.95 strict Clippy exposes 28 pre-existing findings in
+untouched hunks; rerunning with only those exact lint classes exempted passes both changed packages with no
+slice-owned warning. Canonical CI first exposed a generic public-checker denylist collision with the phrase
+“final public admission … remain” in the root capability paragraph; the wording is narrowed to root leaf `.6`,
+and the focused aggregate-selector public checker passes without weakening it. The complete canonical rerun passes
+all four doctrines, root core 7/routes 5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in
+633 seconds. Knowledge Map is 600 facts / 4,301 question keys; root governance remains 2/5 by design. After all
+verification is consumed, safe cleanup removes 20,691 Cargo files / 4.4 GiB, the 11 MiB generated mdBook tree,
+and Python bytecode cache.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 — map Rust root selection
 
 The behavior-free Rust preflight maps every root-selection seam against ADR `0046` and the neutral contract.

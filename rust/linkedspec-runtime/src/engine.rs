@@ -39,6 +39,10 @@ use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
 };
+use linkedspec_core::entry_rule::{
+    ENTRY_RULE_NOT_FOUND_CODE, EntryRuleSelectionBasis, NO_RULES_DEFINED_CODE,
+    SELECT_ENTRY_RULE_STAGE, VALIDATE_SPEC_STAGE,
+};
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
@@ -1857,6 +1861,10 @@ impl Engine {
             .unwrap_or("Rust runtime interpreter failed");
         let rule_label = failure.and_then(|context| context.rule_label.clone());
         let effective_rule = rule_label.as_deref().or_else(|| ctx.diagnostic_top_rule());
+        let entry_rule = failure
+            .filter(|context| context.code == Some(ENTRY_RULE_NOT_FOUND_CODE))
+            .and_then(|_| ctx.diagnostic_top_rule())
+            .map(str::to_string);
         let handler_source_label = Some(match effective_rule {
             Some(label) => format!("rust_runtime:rule:{label}"),
             None => "rust_runtime".to_string(),
@@ -1873,6 +1881,7 @@ impl Engine {
                 spec_name: self.spec_name.clone(),
                 spec_path: self.spec_path.clone(),
                 top_rule: ctx.diagnostic_top_rule().map(str::to_string),
+                entry_rule,
                 rule_label,
                 helper_name: failure.and_then(|context| context.helper_name.clone()),
                 actual_arity: failure.and_then(|context| context.actual_arity),
@@ -1906,21 +1915,62 @@ impl Engine {
         }
     }
 
+    fn resolve_entry_rule_label(
+        &self,
+        ctx: &mut RuntimeContext,
+        explicit_selector: Option<&str>,
+    ) -> Result<(String, EntryRuleSelectionBasis), String> {
+        match self.spec.resolve_entry_rule(explicit_selector) {
+            Ok(selection) => {
+                let label = selection.rule.label.clone();
+                ctx.set_diagnostic_top_rule(label.clone());
+                Ok((label, selection.basis))
+            }
+            Err(diagnostic) if diagnostic.code == NO_RULES_DEFINED_CODE => {
+                ctx.capture_portable_diagnostic_failure(
+                    VALIDATE_SPEC_STAGE,
+                    NO_RULES_DEFINED_CODE,
+                    "Rust runtime spec validation failed",
+                    None,
+                );
+                Err(diagnostic.message)
+            }
+            Err(diagnostic) if diagnostic.code == ENTRY_RULE_NOT_FOUND_CODE => {
+                let requested = diagnostic
+                    .field("entry_rule")
+                    .and_then(Value::as_str)
+                    .or(explicit_selector);
+                if let Some(label) = requested {
+                    ctx.set_diagnostic_top_rule(label);
+                }
+                ctx.capture_portable_diagnostic_failure(
+                    SELECT_ENTRY_RULE_STAGE,
+                    ENTRY_RULE_NOT_FOUND_CODE,
+                    "Rust runtime entry-rule selection failed",
+                    requested,
+                );
+                Err(diagnostic.message)
+            }
+            Err(diagnostic) => {
+                ctx.capture_diagnostic_failure(
+                    "entry_rule_selection",
+                    "Rust runtime entry-rule selection failed",
+                    explicit_selector,
+                );
+                Err(diagnostic.message)
+            }
+        }
+    }
+
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
-        let Some(top) = self.spec.top_rule() else {
-            ctx.capture_diagnostic_failure(
-                "top_rule_selection",
-                "Rust runtime top-rule selection failed",
-                None,
-            );
-            return Err("no top rule in compiled spec".to_string());
-        };
-        let label = top.label.clone();
-        ctx.set_diagnostic_top_rule(label.clone());
+        let (label, basis) = self.resolve_entry_rule_label(ctx, None)?;
         ctx.trace_decision(
             "rust_runtime:engine:top_rule",
             true,
-            format!("label={label} input_bytes={}", ctx.input.len()),
+            format!(
+                "label={label} basis={basis} input_bytes={}",
+                ctx.input.len()
+            ),
             TraceLevel::LOW,
         );
         self.execute_rule(&label, 0, ctx)?;
@@ -1932,34 +1982,14 @@ impl Engine {
         ctx: &mut RuntimeContext,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
-        let label = if let Some(label) = options.entry_rule() {
-            ctx.set_diagnostic_top_rule(label);
-            if self.spec.find(label).is_none() {
-                ctx.capture_diagnostic_failure(
-                    "rule_lookup",
-                    "Rust runtime rule lookup failed",
-                    Some(label),
-                );
-                return Err(format!("entry rule '{label}' is not defined"));
-            }
-            label.to_string()
-        } else {
-            let Some(top) = self.spec.top_rule() else {
-                ctx.capture_diagnostic_failure(
-                    "top_rule_selection",
-                    "Rust runtime top-rule selection failed",
-                    None,
-                );
-                return Err("no top rule in compiled spec".to_string());
-            };
-            let label = top.label.clone();
-            ctx.set_diagnostic_top_rule(label.clone());
-            label
-        };
+        let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:engine:entry_rule",
             true,
-            format!("label={label} input_bytes={}", ctx.input.len()),
+            format!(
+                "label={label} basis={basis} input_bytes={}",
+                ctx.input.len()
+            ),
             TraceLevel::LOW,
         );
         self.execute_rule(&label, 0, ctx)
@@ -2450,7 +2480,7 @@ impl Engine {
                     RuntimeValue::Undef
                 }
             });
-            if rule.is_top && !matches!(my_return, RuntimeValue::Undef) {
+            if ctx.is_effective_entry_rule(label) && !matches!(my_return, RuntimeValue::Undef) {
                 ctx.push_accumulator(my_return.clone());
             }
             ctx.restore_return_value(caller_return);
@@ -2953,7 +2983,7 @@ impl Engine {
                 }
                 "return" => {
                     let value = self.eval_action_edge_fluent_return(args, ctx, rule_label)?;
-                    if self.spec.find(rule_label).is_some_and(|rule| rule.is_top) {
+                    if ctx.is_effective_entry_rule(rule_label) {
                         ctx.push_accumulator(value.clone());
                     }
                     ctx.set_return_value(value);

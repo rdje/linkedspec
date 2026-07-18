@@ -30,6 +30,9 @@ pub struct RuntimeDiagnostic {
     /// Selected top or explicit entry rule, when available.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub top_rule: Option<String>,
+    /// Explicit selector that failed before rule entry, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub entry_rule: Option<String>,
     /// Deepest rule that observed the failure, when available.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rule_label: Option<String>,

@@ -245,10 +245,7 @@ fn core_traced_entrypoints_emit_parse_validate_and_compile_events() {
 
     let trace = std::fs::read_to_string(&path).expect("read trace file");
     assert!(trace.contains("rust_core:parse_spec"), "{trace}");
-    assert!(
-        trace.contains("rust_core:validate:top_rule_exists"),
-        "{trace}"
-    );
+    assert!(trace.contains("rust_core:validate:rules_exist"), "{trace}");
     assert!(trace.contains("rust_core:compile:rule"), "{trace}");
     assert!(
         trace.contains("rust_core:compile:dependency_regex_map"),

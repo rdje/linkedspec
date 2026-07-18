@@ -88,8 +88,17 @@ fn attributes_missing_selected_entry_rule_without_string_scraping() {
         .execute_value_with_diagnostics("x", &options)
         .expect_err("missing selected entry must fail");
     assert_eq!(error.message(), "entry rule 'Missing' is not defined");
-    assert_eq!(error.diagnostic.stage, "rule_lookup");
+    assert_eq!(error.diagnostic.stage, "select_entry_rule");
+    assert_eq!(
+        error.diagnostic.code.as_deref(),
+        Some("entry_rule_not_found")
+    );
+    assert_eq!(
+        error.diagnostic.summary,
+        "Rust runtime entry-rule selection failed"
+    );
     assert_eq!(error.diagnostic.top_rule.as_deref(), Some("Missing"));
+    assert_eq!(error.diagnostic.entry_rule.as_deref(), Some("Missing"));
     assert_eq!(error.diagnostic.rule_label.as_deref(), Some("Missing"));
     assert_eq!(
         error.diagnostic.handler_source_label.as_deref(),
@@ -106,14 +115,19 @@ fn reports_top_rule_selection_with_only_available_context() {
 
     let error = engine
         .execute_with_diagnostics("")
-        .expect_err("empty compiled state has no top rule");
-    assert_eq!(error.message(), "no top rule in compiled spec");
-    assert_eq!(error.diagnostic.stage, "top_rule_selection");
+        .expect_err("empty compiled state has no rules");
+    assert_eq!(
+        error.message(),
+        "no rules defined: at least one rule declaration is required"
+    );
+    assert_eq!(error.diagnostic.stage, "validate_spec");
+    assert_eq!(error.diagnostic.code.as_deref(), Some("no_rules_defined"));
     assert_eq!(
         error.diagnostic.summary,
-        "Rust runtime top-rule selection failed"
+        "Rust runtime spec validation failed"
     );
     assert_eq!(error.diagnostic.top_rule, None);
+    assert_eq!(error.diagnostic.entry_rule, None);
     assert_eq!(error.diagnostic.rule_label, None);
     assert_eq!(
         error.diagnostic.handler_source_label.as_deref(),
@@ -123,6 +137,7 @@ fn reports_top_rule_selection_with_only_available_context() {
     assert!(diagnostic_json.get("spec_name").is_none());
     assert!(diagnostic_json.get("spec_path").is_none());
     assert!(diagnostic_json.get("top_rule").is_none());
+    assert!(diagnostic_json.get("entry_rule").is_none());
     assert!(diagnostic_json.get("rule_label").is_none());
 }
 
