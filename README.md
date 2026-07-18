@@ -36,8 +36,10 @@ bare references as typed AST, derives action ownership for OR/default and blind 
 forms into compiled dispatch tables, and attaches the neutral portable diagnostic envelope to Dart validation
 failures. Dart execution `.9.1.5.2` removes the compiled legacy adapter and derives AND-consume / OR-default-seek
 plus sequence/choice independently at each normal live, loaded, normalized-JSON, recursive, and traced rule entry.
-Generated-source v1 remains intentionally compatible until `.4`; descriptor v1, generated-source v2, option/CLI
-removal, and composed admission remain owned in order by `.9.1.5.3-.6`.
+Dart descriptor `.9.1.5.3` now removes root global-mode metadata and projects the neutral cursor-v1 identity plus
+per-rule family, derived policy, ownership, ordered resolved edges, and source identity from normalized compiled
+state; direct, normalized-JSON, and loaded projections agree. Generated-source v1 remains intentionally compatible
+until `.4`; generated-source v2, option/CLI removal, and composed admission remain owned in order by `.9.1.5.4-.6`.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

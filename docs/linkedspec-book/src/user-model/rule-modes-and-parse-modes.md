@@ -52,10 +52,12 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > action/blind tables. Dart `.9.1.5.2` now derives seek/consume and sequence/choice
 > independently at every normal live, loaded, or normalized-JSON rule entry;
 > mixed action, blind, direct-call, and recursive children keep their own family
-> policy, and trace scopes report that entered policy. Descriptor projection,
-> generated-source v2, option/CLI removal, and admission remain staged under
-> `.9.1.5.3-.6`; generated-source v1 keeps its bounded legacy execution path
-> until `.4`.
+> policy, and trace scopes report that entered policy. Dart `.9.1.5.3` now
+> publishes descriptor-v1 contract/family/policy/ownership/resolved-edge facts
+> from normalized compiled state with no root global field; direct,
+> normalized-JSON, and loaded projections agree. Generated-source v2,
+> option/CLI removal, and admission remain staged under `.9.1.5.4-.6`;
+> generated-source v1 keeps its bounded legacy execution path until `.4`.
 > Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
 > five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`.
 

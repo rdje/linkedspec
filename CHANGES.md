@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.3 — project Dart cursor descriptor v1
+
+Dart's outward compiled descriptor now consumes the neutral `rule_local_cursor_v1` metadata variant. Root
+`meta.parse_mode` is removed and replaced by `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`. Each rule
+projects its exact authored `family`, derived `cursor_policy`, aggregate `edge_ownership`, and deterministic
+`resolved_edges` rows with exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`.
+
+Action rows publish the resolved child regex index, defaulting omitted indices to zero; blind rows publish null.
+Blocks and fluent chains are derived from the normalized compiled action/blind tables. Existing handler label and
+rule label/line/top/mode metadata retain source identity. Optional bare/explicit provenance is omitted because it
+is non-semantic and no longer retained in compiled state. The descriptor remains a pure output projection; Dart
+does not gain a descriptor-input decoder or an independently mutable cursor field.
+
+The new contract consumer covers all 36 family spellings, every valid neutral edge, exact outward/root/row fields,
+direct versus normalized `SpecFile`-JSON identity, file-loaded identity, unchanged loaded execution, and every
+portable invalid-edge failure after reconstruction. Its four tests pass; adjacent descriptor/normalization/
+execution suites pass 18/18; strict analysis passes. The complete package reaches 257/1 only at staged shared help,
+corpus remains 105/105, and primary remains exact 30/63 in both environments. Removing the compiler's last global-
+mode token and adding the forbidden-field assertion swaps one governed path at unchanged 68 files and 34 mutations.
+The Knowledge Map passes at 591 facts / 4,207 question keys; memory architecture, task metadata, all four
+doctrines, mdBook, and whitespace pass. Canonical CI repeats Perl cursor admission 288, reference primary 63/63 in
+both environments, and Phase 0 1,031/1,031 in 624 seconds, then exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.2 — derive Dart rule-local cursor execution
 
 Dart normal runtime execution now derives its cursor and structural policy once at every entered compiled rule.

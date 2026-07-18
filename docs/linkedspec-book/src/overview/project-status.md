@@ -222,8 +222,10 @@ Three backbone items tracked major structural modernization — all done:
   adapter preserved the staged pre-`.2` execution boundary. Dart `.9.1.5.2` now removes that compiled adapter and
   derives AND-consume / OR-default-seek plus sequence/choice independently at every normal rule entry. All 36
   family spellings, eight mixed parent/child mechanisms, and both structural replacements agree across live,
-  loaded, normalized-JSON, recursion, and trace routes. Generated v1 remains explicitly compatible until `.4`;
-  descriptor v1, generated v2, option/CLI removal, and composed admission remain `.3-.6`.
+  loaded, normalized-JSON, recursion, and trace routes. Descriptor `.9.1.5.3` now removes root global metadata and
+  publishes cursor-v1 identity plus exact family/policy/ownership/ordered-edge/source facts across direct,
+  normalized-JSON, and loaded projection. Generated v1 remains explicitly compatible until `.4`; generated v2,
+  option/CLI removal, and composed admission remain `.4-.6`.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

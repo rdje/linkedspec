@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart normalization `.9.1.5.1` is committed at `fc31fc12`; live/loaded/
-  reconstructed rule-local execution `.9.1.5.2` is complete and awaiting its clean commit boundary)
+- Last updated: `2026-07-18` (Dart cursor descriptor projection `.9.1.5.3` is complete with full signoff and
+  awaits its clean commit boundary before generated-source v2 `.9.1.5.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -4155,14 +4155,51 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.2 - derive Dart rule-local cursor execution`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Project Dart cursor descriptor v1 from normalized compiled rule state.
   Dependencies: `.9.1.5.2`
   Acceptance: Remove root global-mode metadata; identify the neutral descriptor contract; project each rule's
     authored family, derived cursor policy, ordered resolved semantic edges, and exact source identity; validate
     reconstructed descriptor state and portable failures; and preserve native/loaded execution identity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, the neutral descriptor contract, admitted
+    Perl/Rust descriptor projections, and Dart descriptor/load/reconstruction seams; reproduce the exact current
+    root-global/per-rule descriptor drift before editing.
+  - [x] **PROJECT NORMALIZED FACTS** — Remove descriptor root global-mode metadata and project contract identity,
+    authored family, derived cursor policy, ordered resolved action/blind edges, block/fluent ownership, and exact
+    source identity from normalized compiled state without adding mutable cursor storage.
+  - [x] **VALIDATE RECONSTRUCTION / FAILURES** — Prove direct and reconstructed descriptors are identical, malformed
+    reconstructed state fails through the portable contract, and native/loaded execution remains unchanged.
+  - [x] **FREEZE LATER LEAVES / NO REGRESSION** — Leave generated-source v1 for `.4`, public/global options and
+    shared primary migration for `.5`, and composed rollout admission for `.6`; preserve the exact staged Dart,
+    corpus, primary, neutral-inventory, and mutation boundaries.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, changes/notes;
+    pass focused/complete Dart plus neutral/governance/canonical proof; commit before generated-source `.9.1.5.4`.
+  Verification: Activated task-tree-first only after clean execution commit `7dea1f6b`. Knowledge Map retrieval
+    followed ADR `0044`, the neutral cursor and outward descriptor contracts, the admitted Perl/Rust descriptor
+    projections, and Dart's compiled/load/normalized-state seams. A disposable pre-edit Dart probe reproduced the
+    exact drift: root metadata hard-coded global `seek`, while `Top::AND` exposed label/line/top/mode only and no
+    family, derived policy, ownership, or resolved rows. The probe was removed before implementation.
+
+    Root metadata now identifies `linkedspec-rule-local-cursor-v1` and has no global cursor field. Every rule
+    derives family/policy from exact compiled mode metadata, aggregate ownership from normalized action/blind
+    tables, and ordered semantic rows with exactly ownership/target/regex-index/block/fluent. Action rows use the
+    resolved child slot and blind rows use null. Handler label plus rule label/line/top/mode preserve exact source
+    identity; optional bare/explicit provenance is omitted because compiled state does not retain it and the
+    neutral contract marks it non-semantic. Dart remains descriptor-output-only: normalized `SpecFile` JSON is the
+    legitimate reconstruction boundary, so no descriptor decoder or mutable cursor state is introduced.
+
+    The new four-test consumer passes all 36 family rows, every valid edge row, exact outward/root/semantic fields,
+    direct/normalized-JSON identity, file-loaded identity, unchanged loaded AND execution, and every reconstructed
+    portable invalid-edge failure. Adjacent descriptor/normalization/execution suites pass 18/18 and strict
+    analysis passes. The complete package reaches 257 passes plus only the staged shared-help failure; corpus is
+    105/105 and primary remains exact 30/63 in default and POSIX environments. The compiler becomes token-free
+    while the new forbidden-field test becomes governed, so the neutral inventory swaps one path and remains 68
+    files at rollout 3/5 with all 34 mutations. The Knowledge Map passes at 591 facts / 4,207 question keys;
+    memory architecture, task metadata, all four doctrines, mdBook, and whitespace pass. Canonical CI repeats the
+    288-test Perl cursor admission consumer and reference primary 63/63 in both environments, passes Phase 0
+    1,031/1,031 in 624 seconds, and exits 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.3 - project Dart cursor descriptor v1`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.4`
   Status: `pending`
@@ -6491,11 +6528,11 @@ focused and canonical signoff. Generated source `.9.1.4.5` is committed at `727c
 `.9.1.4.6` is committed at `2bba1e91`; composed Rust admission/closeout `.9.1.4.7` implements one exact 15-role
 consumer, advances only Rust to 3/5, and closes parent `.9.1.4` at `288da21a` after complete Rust/canonical proof.
 Dart `.9.1.5.0` records the exact eleven-path/non-token audit and dependency-safe `.1-.6` split. Normalization
-`.9.1.5.1` is committed at `fc31fc12`. Live/loaded/reconstructed execution `.9.1.5.2` is complete: every normal
-entered rule derives AND-consume/sequence or OR-default-seek/choice independently, while generated v1 remains a
-bounded `.4` compatibility surface. Focused/complete Dart, 105 corpus, neutral 68-file/34-mutation, Knowledge Map,
-governance, mdBook, and canonical Phase 0 1,031/1,031 proof pass. Descriptor `.9.1.5.3` remains pending until the
-clean `.2` commit boundary.
+`.9.1.5.1` is committed at `fc31fc12`; live/loaded/reconstructed execution `.9.1.5.2` is committed at `7dea1f6b`
+after focused/complete Dart, 105 corpus, neutral 68-file/34-mutation, Knowledge Map, governance, mdBook, and
+canonical Phase 0 1,031/1,031 proof. Descriptor projection `.9.1.5.3` is complete with the same layered signoff:
+root global-mode metadata is gone, normalized rule/edge/source facts are current, and generated/public/admission
+surfaces remain staged. Generated-source v2 `.9.1.5.4` activates only after the clean descriptor commit boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6746,11 +6783,11 @@ clean `.2` commit boundary.
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; normalization `.1` is committed, live execution `.2` is complete awaiting commit, and descriptor `.3` follows only after a clean pivot. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.2` are committed, descriptor `.3` is complete awaiting its clean commit, and generated v2 `.4` follows only after that pivot. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
 | 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
 | 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `done` | Every normal live/loaded/reconstructed rule entry derives its own cursor and structural policy; full signoff passes. |
-| 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `pending` | Project neutral cursor descriptor v1. |
+| 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `done` | Cursor descriptor v1 projects normalized family/policy/ownership/edge/source facts and passes full signoff. |
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `pending` | Emit/reconstruct minimal generated-source v2 and reject v1. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `pending` | Remove public/global overrides and reach exact shared primary 63x2. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `pending` | Compose Dart admission, advance only Dart, and close the parent. |
@@ -7799,6 +7836,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart `.9.1.5.3` removes root global-mode descriptor metadata and projects cursor-v1 identity plus
+  exact normalized family/policy/ownership/resolved-edge/source facts without a descriptor decoder or mutable
+  cursor field. Direct, normalized-JSON, and loaded projections agree; reconstructed invalid state retains every
+  portable edge diagnostic and loaded AND execution is unchanged. Focused tests pass 4/4 plus adjacent 18/18,
+  complete Dart reaches 257/1 only at staged help, corpus 105/105, primary 30/63x2, neutral 68 files/34 mutations,
+  Knowledge Map 591/4,207, governance/mdBook, canonical Perl admission 288, reference primary 63x2, and Phase 0
+  1,031/1,031 in 624 seconds all pass. Generated/public/admission surfaces remain staged for `.4-.6`.
+- `2026-07-18`: Clean commit `7dea1f6b` lands Dart live/loaded/reconstructed execution `.9.1.5.2`; the tree and
+  zero-byte brief are verified clean, generated artifacts are absent, and cursor descriptor projection
+  `.9.1.5.3` activates task-tree-first before retrieval or implementation edits.
 - `2026-07-18`: Dart `.9.1.5.2` removes normal engine-global/parent cursor propagation and derives one immutable
   cursor plus structural policy at every entered rule. All 36 families, eight mixed parent/child mechanisms, and
   two structural replacements agree across live, loaded, normalized JSON, recursion, and trace. Generated v1 is

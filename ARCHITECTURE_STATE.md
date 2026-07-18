@@ -23,8 +23,10 @@ This document is the current high-level technical reading of the project shape. 
   compiled adapter and computes one immutable entry policy from exact rule family: AND consumes/sequences and
   OR/default seeks/chooses. Child action, blind, direct-call, and recursive entries derive again from their own
   metadata; live, loaded, normalized-JSON, and traced routes share this seam. The engine-global field is now read
-  only by generated-v1 compatibility until `.4`; descriptor/generated versions, public options, and rollout
-  admission remain unchanged for `.3-.6`.
+  only by generated-v1 compatibility until `.4`. Descriptor `.9.1.5.3` now projects pure normalized state: root
+  `cursor_contract`, per-rule family/derived policy/aggregate ownership, exact five-field resolved-edge rows, and
+  existing label/line/top/mode identity. Direct, normalized-JSON, and loaded descriptors agree; no descriptor input
+  or mutable cursor field exists. Generated v2, public options, and rollout admission remain unchanged for `.4-.6`.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight

@@ -1011,8 +1011,10 @@ dispatch tables, and exposes the exact neutral diagnostics through Dart validati
 adapter deliberately preserved the pre-`.2` compact-pipe execution boundary. Dart execution `.9.1.5.2` now
 removes that compiled adapter and derives cursor plus structural policy independently at every normal rule entry
 across live, loaded, normalized-JSON, action, blind, direct-call, recursive, and traced routes. Generated v1 keeps
-its bounded compatibility path until `.4`; descriptor v1, generated v2, option/CLI removal, and admission remain
-`.3-.6`.
+its bounded compatibility path until `.4`. Dart descriptor `.9.1.5.3` now replaces root global-mode metadata with
+the neutral cursor-v1 identity and derives per-rule family, policy, ownership, ordered resolved edges, and exact
+rule source identity across direct, normalized-JSON, and loaded projections. Generated v2, option/CLI removal, and
+admission remain `.4-.6`.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

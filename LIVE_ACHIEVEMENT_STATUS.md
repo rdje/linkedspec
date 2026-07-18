@@ -8,6 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.3 — project Dart cursor descriptor v1**
+  (DONE — descriptor root/rule global metadata is replaced by pure normalized cursor-v1 facts; generated
+  v1/public/admission surfaces remain staged; complete Dart, governance, mdBook, and canonical signoff pass before
+  the clean commit boundary).
+
+  **Goal:** Project the neutral descriptor contract from Dart compiled state without creating descriptor-owned
+  mutable cursor data or advancing generated/public surfaces.
+
+  **Result:** Root `meta` identifies `linkedspec-rule-local-cursor-v1` and omits the global mode. Every rule reports
+  exact authored family, derived cursor policy, aggregate edge ownership, and ordered five-field semantic edge
+  rows while retaining handler label plus rule label/line/top/mode source identity. Bare/explicit provenance is
+  omitted because normalized compiled state does not retain it and the neutral contract makes it non-semantic.
+
+  **Proof:** The new 4-test consumer covers all 36 families, every valid neutral edge, direct versus
+  normalized-JSON identity, loading/live no-drift, and every reconstructed portable invalid-edge failure. Adjacent
+  descriptor/normalization/execution suites pass 18/18; strict analysis passes. The complete package reaches
+  257 passes plus only staged shared help, corpus stays 105/105, and primary stays exact 30/63 twice. The governed
+  path swaps from now-token-free compiler projection to the forbidden-field test at unchanged 68/3-of-5/34.
+  Knowledge Map is 591/4,207; all governance and mdBook checks pass. Canonical CI repeats Perl cursor admission
+  288, reference primary 63x2, and Phase 0 1,031/1,031 in 624 seconds, then exits 0.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.2 — derive Dart rule-local cursor execution**
   (DONE — normal live, loaded, normalized-JSON, recursive, and traced rule entries own cursor plus structural
   policy; generated v1/public/descriptor surfaces remain staged; complete Dart, neutral, governance, mdBook, and

@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.3` — descriptors should project normalized semantics, not own a
+  second executable state): Dart already had all descriptor inputs in `CompiledRule`: exact mode metadata,
+  normalized action/blind tables, target indices, block payloads, fluent chains, and label/line/top identity. The
+  only cursor field was a hard-coded root `parse_mode: seek`. Replacing that field with a contract identity and
+  deriving rule facts during projection avoids a decoder, migration state, or mutable policy that could disagree
+  with normal execution.
+
+  Resolved-edge projection uses `childRegexIndex`, not the parent's action-dispatch `regexIndex`. The neutral row
+  describes which target regex slot an action edge selects; blind calls select no target slot and therefore use
+  null. Valid normalized rules contain only one ownership kind, so action and blind tables preserve deterministic
+  source order without reconstructing source text. Optional `source_form` is deliberately absent: Dart discarded
+  that provenance during normalization, and ADR `0044` says runtime/parity may not depend on it.
+
+  Dart has no `CompiledSpec.fromJson` or descriptor-input API. Its legitimate reconstruction route is normalized
+  `SpecFile` JSON followed by ordinary validation/compilation. The descriptor test therefore proves direct versus
+  normalized-JSON identity and ensures every invalid reconstructed edge fails with the existing portable
+  diagnostic before projection. A loaded spec reaches the same compiled projection and retains exact AND runtime
+  behavior. This closes descriptor semantics without expanding `.4` generated-v2 or `.5` public-option scope.
+
+  The compiler file becomes token-free when its last root global-mode field disappears; the new test necessarily
+  contains the forbidden legacy field assertion. The neutral inventory swaps those exact paths and remains 68,
+  with all 34 drift mutations effective. Focused descriptor/normalization/execution proof is 18/18, the full Dart
+  package is 257/1 only at staged shared help, corpus is 105/105, and primary remains 30/63 twice. Knowledge Map
+  591/4,207 plus memory/task/doctrine/mdBook/whitespace checks pass; canonical CI independently repeats Perl
+  cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 624 seconds before exiting 0.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.2` — derive policy at the rule-entry boundary, not at each matcher call):
   Dart's global propagation was narrower than the size of the public surface suggested. Entry/local registers,
   loaded compilation, normalized `SpecFile` reconstruction, and low-level seek/consume algorithms were already

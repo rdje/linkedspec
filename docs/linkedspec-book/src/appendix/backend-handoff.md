@@ -2042,6 +2042,13 @@ or local `return(...)`, receiver chains can continue from returned values,
 standalone calls discard their results, and direct/mutual recursion is
 diagnosed. Dart also preserves staged user-function descriptor shapes across
 parsed functions, compiled registry jobs, descriptor records, and runtime output.
+Dart cursor descriptor v1 is also current: root metadata identifies
+`linkedspec-rule-local-cursor-v1`, and each rule projects authored family,
+derived cursor policy, normalized ownership, and exact ordered semantic edge
+rows from compiled state. Direct, normalized `SpecFile`-JSON, and file-loaded
+projections agree; the descriptor carries no independent cursor field and has
+no decoder that could override runtime behavior. Generated-source v1 remains a
+separate bounded compatibility surface until `.9.1.5.4`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

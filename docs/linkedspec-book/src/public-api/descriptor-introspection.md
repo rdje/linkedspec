@@ -1,13 +1,13 @@
 # Descriptor Introspection
 
-> **Perl rule-local descriptor v1:** ADR `0044` removes descriptor-wide
+> **Rule-local descriptor v1:** ADR `0044` removes descriptor-wide
 > `meta.parse_mode` and every public rule field named `parse_mode`. Perl
-> `.9.1.3.3` now exposes `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
+> `.9.1.3.3`, Rust `.9.1.4.4`, and Dart `.9.1.5.3` expose
+> `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
-> `resolved_edges`. Perl generated-source v2 and option/CLI removal are complete;
-> Rust now exposes the same descriptor-v1, generated-v2, and removal boundary,
-> and one 15-role composed consumer admits those Rust projections. Dart, Julia,
-> Lua, recurring five-backend admission, and public no-drift remain dependency-ordered.
+> `resolved_edges`. Perl and Rust generated-source v2 and option/CLI removal are complete.
+> Dart generated-source v2, option/CLI removal, and admission remain `.9.1.5.4-.6`;
+> Julia, Lua, recurring five-backend admission, and public no-drift remain dependency-ordered.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
@@ -146,6 +146,59 @@ In rough form:
 
 In the Perl reference backend, `handler` is a coderef (`sub { ... }`) and each `dependency_regex_map` value is a compiled regex (`qr/.../`). Those are encoding details: another backend represents the same `handler` and dependency-regex fields with its own callable and regex types. The field names and their meaning are the backend-neutral part.
 
+### Dart projection example
+
+Dart projects the same semantic descriptor as JSON-compatible maps without
+creating a second descriptor-owned runtime state:
+
+```dart
+final compiled = compileSpec(parseSpec(r'''
+Top::AND
+ Child.return(child_result)
+Child:
+ /x/
+'''));
+
+final descriptor = compiled.toDescriptorJson();
+```
+
+The relevant result is:
+
+```json
+{
+  "meta": {
+    "cursor_contract": "linkedspec-rule-local-cursor-v1"
+  },
+  "spec": {
+    "Top": {
+      "meta": {
+        "label": "Top",
+        "line": 1,
+        "is_top": true,
+        "family": "and",
+        "cursor_policy": "consume",
+        "edge_ownership": "blind",
+        "resolved_edges": [
+          {
+            "ownership": "blind",
+            "target": "Child",
+            "regex_index": null,
+            "block": false,
+            "fluent": "return(child_result)"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+The full root `meta` object also retains the model identities, deterministic rule/function order, redefinition
+labels, and function count shown earlier. Dart has no descriptor-input decoder. To reconstruct, serialize the
+normalized `SpecFile`, call `SpecFile.fromJson(...)`, compile normally, and project again; direct, reconstructed,
+and file-loaded descriptor values are identical. Invalid reconstructed AST state fails validation with the same
+portable diagnostic before a descriptor is produced.
+
 ## `spec`
 
 `spec` is the outward rule table.
@@ -160,14 +213,15 @@ dependency_refs
 
 That list describes which other rule regexes this rule depends on when building combined dependency regex dispatch.
 
-Perl rule metadata also exposes `resolved_edges` in source order. A grouped action edge produces one row per
+Migrated Perl, Rust, and Dart rule metadata exposes `resolved_edges` in normalized source order. A grouped action edge produces one row per
 target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`:
 
 - action edges always carry their resolved zero-based regex index, including `0` when the source omitted it;
 - blind edges use `undef` for `regex_index` because blind dispatch does not select a target regex slot through the action-edge matcher;
 - `block` is `0` or `1`, and `fluent` is the normalized method chain or `undef`;
-- optional `source_form` is `bare` or `explicit`, but is provenance only. Removing it yields identical semantic
-  rows for equivalent bare and explicit spellings, and runtime dispatch never reads it.
+- optional `source_form` is `bare` or `explicit`, but is provenance only. Perl retains it; Rust and Dart omit it
+  because their normalized compiled state does not retain it. Removing it yields identical semantic rows for
+  equivalent bare and explicit spellings, and runtime dispatch never reads it.
 
 ## `dependency_regex_map`
 
@@ -316,7 +370,7 @@ functions. This descriptor fact does not promote the separately future generic c
 Important current fields include:
 
 - `descriptor_model`
-- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on the migrated Perl reference)
+- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, and Dart)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`
@@ -407,5 +461,5 @@ the same policy from its minimal neutral family plan rather than copying descrip
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
 contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrates by explicit
-variant: Perl and Rust currently consume rule-local v1, while Dart and Julia retain the legacy variant until their
-ordered cursor-rollout leaves.
+variant: Perl, Rust, and Dart currently consume rule-local v1, while Julia retains the legacy variant until its
+ordered cursor-rollout leaf.

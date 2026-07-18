@@ -304,9 +304,44 @@ final class CompiledRule {
         'label': label,
         'line': header.line,
         'is_top': header.isTop,
+        'family': modeMetadata.family,
+        'cursor_policy': modeMetadata.cursorPolicy,
+        'edge_ownership': _edgeOwnership,
+        'resolved_edges': _resolvedEdgeDescriptorJson(),
         'mode': modeMetadata.toJson(),
       },
     };
+  }
+
+  String get _edgeOwnership {
+    return switch ((actionEdges.isEmpty, blindEdges.isEmpty)) {
+      (false, true) => 'action',
+      (true, false) => 'blind',
+      (true, true) => 'none',
+      (false, false) => 'mixed',
+    };
+  }
+
+  List<JsonObject> _resolvedEdgeDescriptorJson() {
+    return [
+      for (final edge in actionEdges)
+        for (final target in edge.targets)
+          {
+            'ownership': 'action',
+            'target': target.label,
+            'regex_index': edge.childRegexIndex,
+            'block': edge.code != null,
+            'fluent': _descriptorFluentText(edge.fluentChain),
+          },
+      for (final edge in blindEdges)
+        {
+          'ownership': 'blind',
+          'target': edge.target.label,
+          'regex_index': null,
+          'block': edge.code != null,
+          'fluent': _descriptorFluentText(edge.fluentChain),
+        },
+    ];
   }
 }
 
@@ -337,6 +372,10 @@ final class CompiledRuleModeMetadata {
   final bool isRepetition;
   final int? repMin;
   final int? repMax;
+
+  String get family => isAnd ? 'and' : 'or_default';
+
+  String get cursorPolicy => isAnd ? 'consume' : 'seek';
 
   JsonObject toJson() {
     return {
@@ -544,7 +583,7 @@ final class CompiledDescriptorState {
         'descriptor_model': 'compiled_descriptor_state',
         'compiled_spec_model': 'compiled_spec_state',
         'compiled_dependency_regex_model': 'compiled_dependency_regex_state',
-        'parse_mode': 'seek',
+        'cursor_contract': 'linkedspec-rule-local-cursor-v1',
         'definition_order': compiledSpecState.definitionOrder,
         'compiled_rule_order': compiledSpecState.compiledRuleOrder,
         'redefined_rule_labels': compiledSpecState.redefinedRuleLabels,
@@ -555,6 +594,18 @@ final class CompiledDescriptorState {
       },
     };
   }
+}
+
+String? _descriptorFluentText(List<FluentCall> chain) {
+  if (chain.isEmpty) {
+    return null;
+  }
+  return chain
+      .map(
+        (call) =>
+            call.args.isEmpty ? call.method : '${call.method}(${call.args})',
+      )
+      .join('.');
 }
 
 CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
