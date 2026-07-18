@@ -195,12 +195,15 @@ explicit selector at `select_entry_rule` before invoking user code, and publishe
 per-rule `is_top` identity in descriptors and generated metadata. The 65-case shared primary manifest locks
 first-marker, markerless, explicit, unknown, and request-trace bytes on Perl.
 
-Rust validation plus ordinary native and primary-command execution now implement the same ordered resolver,
-including markerless fallback, portable zero/unknown diagnostics, and immutable descriptor identity. Rust
-generated/emitted execution is still marker-only and exposes no invocation selector until composed-route leaf
-`.9.1.1.2.2.2`, so its rollout row remains pending. Dart, Julia, and Lua contain the marker-then-first fallback but
-their validators make its last branch unreachable. Until `.9.1.1.2.2-.6` close, use at least one `::` for portable
-cross-backend execution and pass an explicit selector when its identity matters.
+Rust now applies the same ordered resolver across native, loaded, serialized/reconstructed, generated direct/
+traced, emitted direct/traced, and primary-command routes. Generated Rust keeps existing entrypoints and adds
+option-bearing siblings that take per-invocation `ExecutionOptions`; the selector never enters the minimal family
+plan or rewrites descriptor `is_top`. Typed zero/unknown generated failures retain `no_rules_defined` /
+`validate_spec` and `entry_rule_not_found` / `select_entry_rule`, while stale generated v1 artifacts still fail at
+their earlier contract boundary. Rust's rollout row remains pending only for `.9.1.1.2.2.3` topology and exact
+shared-primary admission. Dart, Julia, and Lua contain the marker-then-first fallback but their validators make its
+last branch unreachable. Until `.9.1.1.2.2-.6` close, use at least one `::` for portable cross-backend execution
+and pass an explicit selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.

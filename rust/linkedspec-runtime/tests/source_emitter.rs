@@ -348,9 +348,17 @@ fn generated_source_v2_metadata_and_structured_errors_are_exact() {
     assert!(generated.contains("pub fn execute_with_diagnostic_output("));
     assert!(generated.contains("pub fn execute_with_trace(input:"));
     assert!(generated.contains("pub fn execute_with_trace_and_diagnostic_output("));
+    assert!(generated.contains("pub fn execute_with_options("));
+    assert!(generated.contains("pub fn execute_with_options_and_diagnostic_output("));
+    assert!(generated.contains("pub fn execute_with_trace_and_options("));
+    assert!(generated.contains("pub fn execute_with_trace_and_options_and_diagnostic_output("));
     assert!(generated.contains("pub fn parse(input:"));
     assert!(generated.contains("pub fn parse_with_diagnostic_output("));
     assert!(generated.contains("pub fn parse_with_trace_and_diagnostic_output("));
+    assert!(generated.contains("pub fn parse_with_options("));
+    assert!(generated.contains("pub fn parse_with_options_and_diagnostic_output("));
+    assert!(generated.contains("pub fn parse_with_trace_and_options("));
+    assert!(generated.contains("pub fn parse_with_trace_and_options_and_diagnostic_output("));
     assert!(!generated.contains("\"parse_mode\""));
     assert!(!generated.contains("\"cursor_policy\""));
     assert!(!generated.contains("GENERATED_RULES"));
@@ -457,6 +465,87 @@ fn generated_source_v2_metadata_and_structured_errors_are_exact() {
     assert_eq!(execution_error.rule_label.as_deref(), Some("Top"));
     assert_eq!(execution_error.handler_family.as_deref(), Some("default"));
     assert_eq!(execution_error.detail.as_deref(), Some("exit_now(7)"));
+}
+
+#[test]
+fn emitted_source_option_roles_compile_and_select_an_ordinary_rule() {
+    let source = r#"Earlier:
+ /x/
+ E { return("earlier") }
+
+Marked::
+ /x/
+ E { return("marked") }
+"#;
+    let parsed = parse_spec(source).expect("parse emitted root-selection fixture");
+    validate(&parsed).expect("validate emitted root-selection fixture");
+    let compiled = compile(&parsed).expect("compile emitted root-selection fixture");
+    let mut generated = emit_rust_source_v2(&compiled, "generated-source/root-selection.spec")
+        .expect("emit root-selection source");
+    generated.push_str(
+        r#"
+#[cfg(test)]
+mod root_selection_options {
+    use super::*;
+    use linkedspec_runtime::engine::ExecutionOptions;
+    use linkedspec_runtime::source_emitter::{GeneratedSourceCode, GeneratedSourceStage};
+
+    #[test]
+    fn all_option_roles_select_per_invocation() {
+        let options = ExecutionOptions::new().with_entry_rule("Earlier");
+        let direct = serde_json::json!("earlier");
+        let compatibility = serde_json::json!(["earlier"]);
+
+        assert_eq!(execute_with_options("x", &options).unwrap(), direct);
+        assert_eq!(
+            execute_with_options_and_diagnostic_output("x", &options, None).unwrap(),
+            direct
+        );
+        assert_eq!(
+            execute_with_trace_and_options("x", TraceConfig::disabled(), &options).unwrap(),
+            direct
+        );
+        assert_eq!(
+            execute_with_trace_and_options_and_diagnostic_output(
+                "x",
+                TraceConfig::disabled(),
+                &options,
+                None,
+            )
+            .unwrap(),
+            direct
+        );
+
+        assert_eq!(parse_with_options("x", &options).unwrap(), compatibility);
+        assert_eq!(
+            parse_with_options_and_diagnostic_output("x", &options, None).unwrap(),
+            compatibility
+        );
+        assert_eq!(
+            parse_with_trace_and_options("x", TraceConfig::disabled(), &options).unwrap(),
+            compatibility
+        );
+        assert_eq!(
+            parse_with_trace_and_options_and_diagnostic_output(
+                "x",
+                TraceConfig::disabled(),
+                &options,
+                None,
+            )
+            .unwrap(),
+            compatibility
+        );
+
+        let missing = ExecutionOptions::new().with_entry_rule("Missing");
+        let error = execute_with_options("x", &missing).unwrap_err();
+        assert_eq!(error.stage, GeneratedSourceStage::SelectEntryRule);
+        assert_eq!(error.code, GeneratedSourceCode::EntryRuleNotFound);
+        assert_eq!(error.entry_rule.as_deref(), Some("Missing"));
+    }
+}
+"#,
+    );
+    run_generated_crate("linkedspec-generated-root-selection", generated);
 }
 
 #[test]

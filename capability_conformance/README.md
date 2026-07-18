@@ -62,12 +62,13 @@ optional validation, exact explicit/first-marker/first-rule resolution, markerle
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
 selector overrides an emission-time configured selector. The reference-first shared manifest now has 65 cases,
-including exact first-marker and markerless-default bytes beside explicit and unknown selection. Rust
-core/native/primary execution now has marker-optional validation, the ordered resolver, portable zero/unknown
-diagnostics, immutable descriptor identity, and exact markerless primary behavior. Its generated/emitted routes
-remain marker-only until `.9.1.1.2.2.2`, so the Rust rollout row deliberately remains pending until composed
-admission `.2.3`. Dart, Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6` are pending. Current backend
-differences stay explicit in the inventory until their owning leaves land.
+including exact first-marker and markerless-default bytes beside explicit and unknown selection. Rust now carries
+the same marker-optional resolver through native, loaded, serialized/reconstructed, generated direct/traced, and
+emitted direct/traced execution. Existing generated signatures remain intact; option-bearing siblings accept
+per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
+authored descriptor identity and the minimal family plan. The Rust rollout row deliberately remains pending until
+topology and exact shared-primary admission `.9.1.1.2.2.3`. Dart, Julia, Lua/LuaJIT, and cross-backend no-drift
+leg `.6` are pending. Current backend differences stay explicit in the inventory until their owning leaves land.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

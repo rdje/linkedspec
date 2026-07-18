@@ -26,7 +26,7 @@ in-process data path, not identical spelling:
 | Backend | Native in-memory composition |
 | --- | --- |
 | Perl | Inline: `LinkedSpec::Get(...)` → parser coderef. Portable file-oriented: `LinkedSpec::SpecLoader::load_and_compile_spec(...)`; legacy `get_parser(...)` retains compatibility discovery. Generated source: `LinkedSpec::emit_generated_source(...)`. |
-| Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
+| Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. Generated source: `source_emitter::emit_rust_source_v2(...)`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
 | Lua | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `runtime_engine(...)`. File-oriented: `load_and_compile_spec(...)` → `LoadedCompiledSpec:create_engine(...)`. |
@@ -393,6 +393,36 @@ The older `Get(... generate_only => 1, dump_parser_source => 1, parser_source_re
 compatible and emits the same text. The dedicated method is preferred for application code because it returns the
 source directly and normalizes emission failures.
 
+### Rust generated-source entry selection
+
+Rust `emit_rust_source_v2(&compiled, source_identity)` emits generated-source v2 as ordered `CompiledSpec` state
+plus the minimal ordered `{label, family}` plan. Every historical generated function remains source-compatible.
+Option-bearing siblings add per-invocation entry selection through the same `ExecutionOptions` used by native
+`Engine::execute_value(...)`:
+
+```rust
+use linkedspec_runtime::engine::ExecutionOptions;
+
+let options = ExecutionOptions::new().with_entry_rule("Expression");
+
+// Typed/direct result:
+let value = generated::execute_with_options(input, &options)?;
+
+// Historical compatibility accumulator result:
+let values = generated::parse_with_options(input, &options)?;
+```
+
+The typed direct family also exposes `execute_with_options_and_diagnostic_output(...)`,
+`execute_with_trace_and_options(...)`, and `execute_with_trace_and_options_and_diagnostic_output(...)`. The
+compatibility family has the corresponding `parse_*` spellings. Existing `execute*` and `parse*` functions omit
+the selector and therefore remain unchanged.
+
+The selector is execution state, not generated source identity: it is absent from the family plan and does not
+rewrite compiled or descriptor `is_top`. Omission selects the first authored marker and then the first authored
+rule. Typed unknown selection returns `entry_rule_not_found` at `select_entry_rule` with `entry_rule`; zero-rule
+state returns `no_rules_defined` at `validate_spec`. Generated contract-v2 validation still runs first, so a stale
+v1 artifact is rejected at `validate_generated_plan` before selector resolution.
+
 ## Shared options
 
 Both entry points support the same core option style:
@@ -430,10 +460,11 @@ ADR `0046` fixes the cross-backend default when the option is omitted: select th
 has no marker, select the first authored rule. That contract is at 2 complete / 5 pending. The composed Perl
 reference implements the exact order across native, loaded, generated-direct, generated-traced, generated `Get`,
 and primary-command routes; the shared 65-case CLI manifest locks first-marker, markerless, explicit, unknown, and
-request-trace outcomes. Rust validation plus native and primary-command execution now implement the same order,
-while Rust generated/emitted execution remains marker-only until its composed-route leaf. Dart/Julia/Lua
-validation still blocks their existing markerless runtime fallback. Use an explicit selector and retain a marker
-when current multi-backend execution must be independent of those staged differences.
+request-trace outcomes. Rust now implements the same order across native, loaded, serialized/reconstructed,
+generated direct/traced, emitted direct/traced, and primary-command routes; its formal rollout row remains pending
+only for topology and exact shared-primary admission. Dart/Julia/Lua validation still blocks their existing
+markerless runtime fallback. Use an explicit selector and retain a marker when current multi-backend execution
+must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -455,8 +486,8 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. Perl reference routes now accept this shape;
-other backends still require a marker, so it is not yet a portable cross-backend source:
+With no `::`, the accepted default is simply the first declared rule. Perl reference and Rust routes now accept
+this shape; Dart, Julia, and Lua still require a marker, so it is not yet a portable five-backend source:
 
 ```text
 First:

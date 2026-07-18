@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` — generated execution should carry invocation state through
+  existing authored state, not widen artifact identity): Rust generated-source v2 already embeds ordered
+  `CompiledSpec` JSON. That state contains every authored `CompiledRule { label, is_top, ... }`, so root selection
+  requires neither source reparsing nor another `{label,family}` plan field nor a format bump. The plan continues
+  to describe execution shape only. Authored marker identity stays in compiled state, and the optional selector
+  stays in `ExecutionOptions` for exactly one call.
+
+  Compatibility is an API-family obligation, not merely a result check. Every old engine adapter, low-level
+  source-emitter adapter, and emitted `execute*` / `parse*` function keeps its signature and delegates with default
+  options. Parallel option-bearing siblings cover direct versus accumulator results, quiet versus traced calls,
+  and absent versus caller-owned diagnostic output. The two result families deliberately remain distinct: typed
+  v2 returns the selected rule value and structured `GeneratedSourceError`; compatibility returns the historical
+  accumulator array and string-compatible failures.
+
+  Boundary order matters when an artifact is stale or malformed. Generated contract/plan validation must run
+  before selection, zero-rule structural validation must run before explicit lookup, and only then may execution
+  enter the selected rule. Pre-resolving typed attribution at the source-emitter boundary and resolving again
+  through the same immutable core method inside `Engine` is intentional: the outer layer can construct the exact
+  portable source-attributed error, while the executor remains unable to drift to a second selection policy.
+  Trace and runtime failure attribution use the same effective label/family; descriptor output remains authored
+  identity and is byte-for-byte unchanged by invocation.
+
+  Adding options to compatibility-shaped public seams naturally crosses Clippy's argument-count threshold, and
+  returning the established structured error value triggers its large-error lint on each new sibling. Narrow
+  per-function allowances document that choice. Grouping only the new signatures or boxing only their errors
+  would make the family inconsistent and would not improve runtime correctness. The full Clippy run now reports
+  no lint at any new option-bearing function; its nonzero exit remains the established untouched approximate-PI
+  test literal.
+
+  Canonical CI exposed an unrelated but real durability defect because changing generated-source code activates
+  the logical-helper checker. Its required `docs/TASK_TREE.md` completion marker had originally been written into
+  the `FUTURE-PARITY-BACKLOG` table's mutable current-frontier cell. Subsequent PNT updates correctly replaced
+  that cell and silently erased the historical marker; earlier slices that did not activate the logical checker
+  could not see the drift. The repair moves checker-owned closed-capability facts into a stable section outside
+  mutable frontier summaries. General rule: a canonical public marker must not be stored solely in overwrite-style
+  live status text.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` — a portable validation stage requires the parser to preserve
   the empty envelope): changing Rust validation from “a marker exists” to “a rule exists” initially left the
   neutral zero-rule code unreachable because `parse_spec` rejected empty/comment-only input first. The correct

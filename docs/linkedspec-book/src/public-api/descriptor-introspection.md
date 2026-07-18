@@ -161,6 +161,11 @@ marker, but it does not rewrite authored source identity. With no explicit
 selector, the first marked rule wins; with no marker, the first rule in
 `definition_order` wins.
 
+Rust direct, loaded, ordinary `CompiledSpec` JSON-reconstructed, generated-plan, and emitted-source execution all
+reuse that identity. A generated invocation selector lives only in `ExecutionOptions`; neither descriptor JSON nor
+the generated `{label, family}` plan gains `entry_rule` or `selected_entry_rule`. Projecting a descriptor before
+and after explicit generated or native execution therefore produces the same definition order and authored bits.
+
 In the Perl reference backend, `handler` is a coderef (`sub { ... }`) and each `dependency_regex_map` value is a compiled regex (`qr/.../`). Those are encoding details: another backend represents the same `handler` and dependency-regex fields with its own callable and regex types. The field names and their meaning are the backend-neutral part.
 
 ### Dart projection example

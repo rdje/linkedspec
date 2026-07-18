@@ -1,5 +1,48 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 — converge Rust root routes
+
+Rust loaded, ordinary serialized/reconstructed, generated-plan, and emitted-module execution now reuse the single
+compiled-state root resolver. Existing generated and emitted signatures remain source-compatible and perform the
+neutral default selection: first authored `Rule::`, then first authored rule. New option-bearing siblings accept
+`ExecutionOptions::with_entry_rule(...)` across direct-value, compatibility-accumulator, traced, and caller-owned
+diagnostic-output roles; the explicit selector may name any declared rule and always wins over authored markers.
+
+Generated source remains `linkedspec-generated-source-v2` / format 2. Its minimal ordered `{label, family}` plan
+does not acquire marker or selector fields: ordered `CompiledSpec` state already preserves every authored
+`CompiledRule.is_top`, while the selector belongs to one invocation. Loaded and serde-round-tripped compiled state
+preserve definition order and descriptor JSON exactly. Explicit execution does not add `entry_rule` or
+`selected_entry_rule` to the descriptor and does not rewrite any authored marker.
+
+Typed generated selection now returns the neutral `entry_rule_not_found` / `select_entry_rule` failure with the
+requested `entry_rule`; reconstructed zero-rule state returns `no_rules_defined` / `validate_spec`. Existing
+generated contract and plan validation still run first, so a stale v1 contract fails at
+`validate_generated_plan` before selector resolution. Compatibility roles retain their exact historical error
+text. Generated trace retains the established `rust_runtime:generated_plan:top_rule` topic but records the
+effective label and `explicit_selector`, `first_authored_marker`, or `first_authored_rule` basis; runtime failures
+carry that same effective label and family.
+
+Focused proof passes the new six-test route consumer, all six emitted-source tests including a fresh standalone
+crate that calls every option-bearing role, root core 6, diagnostics 5, loader 5, trace 10, diagnostic-output 7,
+descriptor/types, generated-source governance, and strict generated classifier 105/105. The complete Rust-local
+gate passes core/runtime/integration/adjacent suites, oracle 105 in 206.37 seconds, classifier 105 in 235.54
+seconds, emitted source in 43.76 seconds, and exact primary 65/65 in default and POSIX environments. Narrow lint
+annotations cover only compatibility-preserving new large-error/eight-argument siblings; strict Clippy exposes
+only the established production findings and the untouched integration-test approximate-PI failure. Root rollout
+remains deliberately 2 complete / 5 pending until topology/admission leaf `.2.3`.
+
+The first canonical run also exposed a latent logical-helper documentation-topology defect: its required closed
+marker had been stored only in the mutable `FUTURE-PARITY-BACKLOG` current-frontier cell and was erased by later
+PNT updates. `docs/TASK_TREE.md` now has a stable canonical closed-capability marker section outside that mutable
+table, with a Knowledge Map fact recording the rule. No logical-helper runtime, contract, or rollout state changes.
+
+The complete canonical rerun passes all four doctrines, the logical-helper contract with all 26 mutations, root
+core/routes consumers 7+5, cursor admission 288, generated-source governance, reference primary 65/65 twice, and
+Phase 0 1,031/1,031 in 627 seconds. Knowledge Map closes at 602 facts / 4,320 question keys. After verification is
+fully consumed, safe generated-artifact cleanup removes 16,558 Cargo dependency/incremental files and reduces
+`rust/target` from 2.9 GiB to 99 MiB; it also removes the generated 11 MiB mdBook tree and Python bytecode cache.
+
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 — implement Rust root resolution
 
 Rust core and ordinary native execution now implement `linkedspec-root-rule-selection-v1`. One

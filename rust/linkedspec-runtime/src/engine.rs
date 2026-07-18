@@ -177,7 +177,7 @@ fn validate_eager_helper_arity(
     validate_logical_helper_arity(name, raw_args, actual_arity, ctx, rule_label)
 }
 
-/// Per-invocation controls for direct top-rule value execution.
+/// Per-invocation controls for direct effective-entry value execution.
 ///
 /// These options do not mutate the compiled specification. They select only an
 /// optional entry rule; every entered rule retains its authored cursor policy.
@@ -187,7 +187,7 @@ pub struct ExecutionOptions {
 }
 
 impl ExecutionOptions {
-    /// Create default options that enter the compiled top rule.
+    /// Create default options that use authored default entry selection.
     pub fn new() -> Self {
         Self::default()
     }
@@ -1396,7 +1396,7 @@ impl GeneratedPlanExecutor<'_> {
                 RuntimeValue::Undef
             }
         });
-        if rule.is_top && !matches!(my_return, RuntimeValue::Undef) {
+        if ctx.is_effective_entry_rule(label) && !matches!(my_return, RuntimeValue::Undef) {
             ctx.push_accumulator(my_return.clone());
         }
         ctx.restore_return_value(caller_return);
@@ -1437,21 +1437,21 @@ impl Engine {
         self.spec_path.as_deref()
     }
 
-    /// Execute the top rule against the given input.
+    /// Execute the default effective entry rule against the given input.
     /// Returns the accumulator as a JSON array.
     pub fn execute(&self, input: &str) -> Result<Value, String> {
         self.execute_with_diagnostics(input)
             .map_err(RuntimeExecutionError::into_message)
     }
 
-    /// Execute the top rule and return a structured native runtime failure.
+    /// Execute the default effective entry rule and return a structured failure.
     pub fn execute_with_diagnostics(&self, input: &str) -> Result<Value, RuntimeExecutionError> {
         let mut ctx = RuntimeContext::new(input);
         self.execute_with_context(&mut ctx)
             .map_err(|message| self.structured_runtime_error(&ctx, message))
     }
 
-    /// Execute the top rule with an optional caller-owned diagnostic-output sink.
+    /// Execute the default effective entry rule with a diagnostic-output sink.
     ///
     /// With no sink, diagnostic helpers remain quiet. The typed result keeps
     /// ordinary runtime failures, caller sink failures, and `exit_now` control
@@ -1549,7 +1549,7 @@ impl Engine {
         result
     }
 
-    /// Execute the top rule with explicit trace configuration.
+    /// Execute the default effective entry rule with explicit trace configuration.
     pub fn execute_with_trace(
         &self,
         input: &str,
@@ -1560,7 +1560,7 @@ impl Engine {
         self.execute_with_trace_emitter(input, &mut trace)
     }
 
-    /// Execute the top rule with a caller-owned trace emitter.
+    /// Execute the default effective entry rule with a caller-owned trace emitter.
     pub fn execute_with_trace_emitter(
         &self,
         input: &str,
@@ -1605,18 +1605,46 @@ impl Engine {
         generated_rules: &[GeneratedRuleSpec],
         input: &str,
     ) -> Result<Value, String> {
-        let mut ctx = RuntimeContext::new(input);
-        self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+        self.execute_generated_with_plan_and_options(
+            generated_rules,
+            input,
+            &ExecutionOptions::new(),
+        )
     }
 
-    /// Execute generated source and return the top rule's value directly.
+    /// Execute generated source with per-invocation entry selection.
+    pub fn execute_generated_with_plan_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
+        let mut ctx = RuntimeContext::new(input);
+        self.execute_generated_with_plan_context(generated_rules, &mut ctx, None, options)
+    }
+
+    /// Execute generated source and return the default effective-entry value.
     pub fn execute_generated_value_with_plan(
         &self,
         generated_rules: &[GeneratedRuleSpec],
         input: &str,
     ) -> Result<Value, String> {
+        self.execute_generated_value_with_plan_and_options(
+            generated_rules,
+            input,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute generated source's selected entry-rule value directly.
+    pub fn execute_generated_value_with_plan_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
         let mut ctx = RuntimeContext::new(input);
-        self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None)
+        self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None, options)
     }
 
     /// Execute generated source with an optional caller-owned diagnostic sink.
@@ -1626,9 +1654,27 @@ impl Engine {
         input: &str,
         sink: Option<&RuntimeDiagnosticOutputSink>,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_with_plan_with_diagnostic_output_and_options(
+            generated_rules,
+            input,
+            sink,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute the generated compatibility projection with invocation options
+    /// and an optional caller-owned diagnostic sink.
+    pub fn execute_generated_with_plan_with_diagnostic_output_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+        options: &ExecutionOptions,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
         let mut ctx = RuntimeContext::new(input);
         ctx.install_diagnostic_output_sink(sink);
-        let result = self.execute_generated_with_plan_context(generated_rules, &mut ctx, None);
+        let result =
+            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None, options);
         self.finish_diagnostic_output_execution(&mut ctx, result)
     }
 
@@ -1639,10 +1685,31 @@ impl Engine {
         input: &str,
         sink: Option<&RuntimeDiagnosticOutputSink>,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_value_with_plan_with_diagnostic_output_and_options(
+            generated_rules,
+            input,
+            sink,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute the selected generated entry-rule value with invocation options
+    /// and an optional caller-owned diagnostic sink.
+    pub fn execute_generated_value_with_plan_with_diagnostic_output_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+        options: &ExecutionOptions,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
         let mut ctx = RuntimeContext::new(input);
         ctx.install_diagnostic_output_sink(sink);
-        let result =
-            self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None);
+        let result = self.execute_generated_value_with_plan_context(
+            generated_rules,
+            &mut ctx,
+            None,
+            options,
+        );
         self.finish_diagnostic_output_execution(&mut ctx, result)
     }
 
@@ -1654,9 +1721,30 @@ impl Engine {
         input: &str,
         trace_config: TraceConfig,
     ) -> Result<Value, String> {
+        self.execute_generated_with_plan_with_trace_and_options(
+            generated_rules,
+            input,
+            trace_config,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute generated source with trace and per-invocation entry selection.
+    pub fn execute_generated_with_plan_with_trace_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
         let mut trace =
             TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
-        self.execute_generated_with_plan_with_trace_emitter(generated_rules, input, &mut trace)
+        self.execute_generated_with_plan_with_trace_emitter_and_options(
+            generated_rules,
+            input,
+            &mut trace,
+            options,
+        )
     }
 
     /// Execute generated source with a caller-owned trace emitter.
@@ -1666,11 +1754,29 @@ impl Engine {
         input: &str,
         trace: &mut TraceEmitter,
     ) -> Result<Value, String> {
+        self.execute_generated_with_plan_with_trace_emitter_and_options(
+            generated_rules,
+            input,
+            trace,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute generated source with a caller-owned trace emitter and
+    /// per-invocation entry selection.
+    pub fn execute_generated_with_plan_with_trace_emitter_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace: &mut TraceEmitter,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
         self.execute_generated_with_plan_with_trace_emitter_and_roles(
             generated_rules,
             input,
             trace,
             None,
+            options,
         )
     }
 
@@ -1682,6 +1788,24 @@ impl Engine {
         trace_config: TraceConfig,
         source_identity: &str,
     ) -> Result<Value, String> {
+        self.execute_generated_with_plan_with_trace_roles_and_options(
+            generated_rules,
+            input,
+            trace_config,
+            source_identity,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute a selected generated entry rule with portable trace roles.
+    pub fn execute_generated_with_plan_with_trace_roles_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        source_identity: &str,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
         let mut trace =
             TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
         self.execute_generated_with_plan_with_trace_emitter_and_roles(
@@ -1689,6 +1813,7 @@ impl Engine {
             input,
             &mut trace,
             Some(source_identity),
+            options,
         )
     }
 
@@ -1702,6 +1827,27 @@ impl Engine {
         source_identity: &str,
         sink: Option<&RuntimeDiagnosticOutputSink>,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output_and_options(
+            generated_rules,
+            input,
+            trace_config,
+            source_identity,
+            sink,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute a selected generated entry-rule value with portable trace roles
+    /// and a caller-owned diagnostic-output sink.
+    pub fn execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        source_identity: &str,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+        options: &ExecutionOptions,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
         self.execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
             generated_rules,
             input,
@@ -1709,6 +1855,7 @@ impl Engine {
             Some(source_identity),
             true,
             sink,
+            options,
         )
     }
 
@@ -1721,6 +1868,25 @@ impl Engine {
         trace_config: TraceConfig,
         sink: Option<&RuntimeDiagnosticOutputSink>,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
+        self.execute_generated_with_plan_with_trace_and_diagnostic_output_and_options(
+            generated_rules,
+            input,
+            trace_config,
+            sink,
+            &ExecutionOptions::new(),
+        )
+    }
+
+    /// Execute a selected generated compatibility projection with native trace
+    /// and a caller-owned diagnostic-output sink.
+    pub fn execute_generated_with_plan_with_trace_and_diagnostic_output_and_options(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        sink: Option<&RuntimeDiagnosticOutputSink>,
+        options: &ExecutionOptions,
+    ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
         self.execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
             generated_rules,
             input,
@@ -1728,9 +1894,13 @@ impl Engine {
             None,
             false,
             sink,
+            options,
         )
     }
 
+    // This internal seam carries every independently optional execution channel so
+    // the public compatibility signatures can remain unchanged.
+    #[allow(clippy::too_many_arguments)]
     fn execute_generated_with_plan_with_trace_and_diagnostic_output_internal(
         &self,
         generated_rules: &[GeneratedRuleSpec],
@@ -1739,6 +1909,7 @@ impl Engine {
         source_identity: Option<&str>,
         direct_value: bool,
         sink: Option<&RuntimeDiagnosticOutputSink>,
+        options: &ExecutionOptions,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
         let mut ctx = RuntimeContext::new(input);
         ctx.install_diagnostic_output_sink(sink);
@@ -1775,9 +1946,10 @@ impl Engine {
                 generated_rules,
                 &mut ctx,
                 source_identity,
+                options,
             )
         } else {
-            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None, options)
         };
         let exit_details = match &raw_result {
             Ok(value) => format!("status=ok output={value}"),
@@ -1810,6 +1982,7 @@ impl Engine {
         input: &str,
         trace: &mut TraceEmitter,
         source_identity: Option<&str>,
+        options: &ExecutionOptions,
     ) -> Result<Value, String> {
         let scope = trace
             .enter_scope(
@@ -1832,9 +2005,10 @@ impl Engine {
                 generated_rules,
                 &mut ctx,
                 source_identity,
+                options,
             )
         } else {
-            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None, options)
         };
         ctx.replay_trace_events(trace).map_err(trace_write_failed)?;
         let exit_details = match &result {
@@ -2001,14 +2175,14 @@ impl Engine {
         generated_rules: &[GeneratedRuleSpec],
         ctx: &mut RuntimeContext,
         source_identity: Option<&str>,
+        options: &ExecutionOptions,
     ) -> Result<Value, String> {
-        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
-        let label = top.label.clone();
+        let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
             true,
             format!(
-                "label={label} input_bytes={} plan_rules={}",
+                "label={label} basis={basis} input_bytes={} plan_rules={}",
                 ctx.input.len(),
                 generated_rules.len()
             ),
@@ -2028,14 +2202,14 @@ impl Engine {
         generated_rules: &[GeneratedRuleSpec],
         ctx: &mut RuntimeContext,
         source_identity: Option<&str>,
+        options: &ExecutionOptions,
     ) -> Result<Value, String> {
-        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
-        let label = top.label.clone();
+        let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
             true,
             format!(
-                "label={label} input_bytes={} plan_rules={} result_projection=direct",
+                "label={label} basis={basis} input_bytes={} plan_rules={} result_projection=direct",
                 ctx.input.len(),
                 generated_rules.len()
             ),

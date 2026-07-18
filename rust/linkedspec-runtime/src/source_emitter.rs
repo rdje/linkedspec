@@ -5,15 +5,19 @@
 //! generated execution now covers all non-repetition families and explicit
 //! repetition subfamilies. Contract-v2 callers can attach source identity and
 //! consume typed metadata/errors; the original string-returning API remains a
-//! compatibility adapter.
+//! compatibility adapter. Existing generated entrypoints preserve their
+//! signatures and use the neutral default entry-rule resolution. Their
+//! `*_with_options` siblings accept an invocation-local explicit selector
+//! without storing it in generated metadata.
 
-use crate::engine::Engine;
+use crate::engine::{Engine, ExecutionOptions};
 use crate::{
     RuntimeDiagnosticOutputExecutionError, RuntimeDiagnosticOutputSink,
     RuntimeDiagnosticOutputSinkFailure, RuntimeExitNow,
 };
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
+use linkedspec_core::entry_rule::{ENTRY_RULE_NOT_FOUND_CODE, NO_RULES_DEFINED_CODE};
 use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
 use serde::Serialize;
@@ -31,6 +35,8 @@ pub enum GeneratedSourceStage {
     EmitSource,
     CompileOrLoadGeneratedSource,
     ValidateGeneratedPlan,
+    ValidateSpec,
+    SelectEntryRule,
     ExecuteGenerated,
 }
 
@@ -45,6 +51,8 @@ pub enum GeneratedSourceCode {
     GeneratedPlanFamilyMismatch,
     GeneratedPlanUnknownFamily,
     GeneratedSourceContractVersionMismatch,
+    NoRulesDefined,
+    EntryRuleNotFound,
     GeneratedExecutionFailed,
 }
 
@@ -65,6 +73,8 @@ pub struct GeneratedSourceError {
     pub source_identity: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rule_label: Option<Box<str>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub entry_rule: Option<Box<str>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub handler_family: Option<Box<str>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -87,6 +97,7 @@ impl GeneratedSourceError {
             summary,
             source_identity: source_identity.into(),
             rule_label: None,
+            entry_rule: None,
             handler_family: None,
             detail: None,
             contract_mismatch: None,
@@ -95,6 +106,11 @@ impl GeneratedSourceError {
 
     fn with_rule_label(mut self, rule_label: impl Into<String>) -> Self {
         self.rule_label = Some(rule_label.into().into_boxed_str());
+        self
+    }
+
+    fn with_entry_rule(mut self, entry_rule: impl Into<String>) -> Self {
+        self.entry_rule = Some(entry_rule.into().into_boxed_str());
         self
     }
 
@@ -366,8 +382,9 @@ pub fn emit_rust_source_v2(
     source.push_str("//! Source format: linkedspec-runtime source_emitter v2.\n");
     source.push_str("//! Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.\n\n");
     source.push_str(
-        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v2, execute_generated_parser_with_diagnostic_output, execute_generated_parser_with_diagnostic_output_v2, execute_generated_parser_with_trace, execute_generated_parser_with_trace_and_diagnostic_output, execute_generated_parser_with_trace_and_diagnostic_output_v2, execute_generated_parser_with_trace_v2, validate_generated_parser_plan_v2, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedSourceError, GeneratedSourceMetadata};\n",
+        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v2, execute_generated_parser_v2_with_options, execute_generated_parser_with_diagnostic_output, execute_generated_parser_with_diagnostic_output_and_options, execute_generated_parser_with_diagnostic_output_v2, execute_generated_parser_with_diagnostic_output_v2_with_options, execute_generated_parser_with_options, execute_generated_parser_with_trace, execute_generated_parser_with_trace_and_diagnostic_output, execute_generated_parser_with_trace_and_diagnostic_output_and_options, execute_generated_parser_with_trace_and_diagnostic_output_v2, execute_generated_parser_with_trace_and_diagnostic_output_v2_with_options, execute_generated_parser_with_trace_and_options, execute_generated_parser_with_trace_v2, execute_generated_parser_with_trace_v2_with_options, validate_generated_parser_plan_v2, GeneratedDiagnosticOutputExecutionError, GeneratedPlanRow, GeneratedSourceError, GeneratedSourceMetadata};\n",
     );
+    source.push_str("use linkedspec_runtime::engine::ExecutionOptions;\n");
     source.push_str("use linkedspec_runtime::RuntimeDiagnosticOutputSink;\n");
     source.push_str("use linkedspec_runtime::trace::TraceConfig;\n\n");
     source.push_str(&format!(
@@ -480,6 +497,70 @@ pub fn execute_with_trace_and_diagnostic_output(
     )
 }
 
+pub fn execute_with_options(
+    input: &str,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedSourceError> {
+    execute_generated_parser_v2_with_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        options,
+    )
+}
+
+pub fn execute_with_options_and_diagnostic_output(
+    input: &str,
+    options: &ExecutionOptions,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output_v2_with_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        sink,
+        options,
+    )
+}
+
+pub fn execute_with_trace_and_options(
+    input: &str,
+    trace_config: TraceConfig,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedSourceError> {
+    execute_generated_parser_with_trace_v2_with_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        trace_config,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        options,
+    )
+}
+
+pub fn execute_with_trace_and_options_and_diagnostic_output(
+    input: &str,
+    trace_config: TraceConfig,
+    options: &ExecutionOptions,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output_v2_with_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        trace_config,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        sink,
+        options,
+    )
+}
+
 pub fn parse(input: &str) -> Result<serde_json::Value, String> {
     execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_PLAN, input)
 }
@@ -513,12 +594,63 @@ pub fn parse_with_trace_and_diagnostic_output(
         sink,
     )
 }
+
+pub fn parse_with_options(
+    input: &str,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, String> {
+    execute_generated_parser_with_options(COMPILED_SPEC_JSON, GENERATED_PLAN, input, options)
+}
+
+pub fn parse_with_options_and_diagnostic_output(
+    input: &str,
+    options: &ExecutionOptions,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output_and_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        sink,
+        options,
+    )
+}
+
+pub fn parse_with_trace_and_options(
+    input: &str,
+    trace_config: TraceConfig,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, String> {
+    execute_generated_parser_with_trace_and_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        trace_config,
+        options,
+    )
+}
+
+pub fn parse_with_trace_and_options_and_diagnostic_output(
+    input: &str,
+    trace_config: TraceConfig,
+    options: &ExecutionOptions,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output_and_options(
+        COMPILED_SPEC_JSON,
+        GENERATED_PLAN,
+        input,
+        trace_config,
+        sink,
+        options,
+    )
+}
 "#,
     );
     Ok(source)
 }
 
-/// Execute generated Rust source with the direct top-rule value and v2 failures.
+/// Execute generated Rust source with the direct effective-entry value and v2 failures.
 pub fn execute_generated_parser_v2(
     compiled_spec_json: &str,
     generated_plan: &[GeneratedPlanRow],
@@ -526,14 +658,40 @@ pub fn execute_generated_parser_v2(
     source_identity: &str,
     actual_contract: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
+    execute_generated_parser_v2_with_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        source_identity,
+        actual_contract,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute generated Rust source with direct value, v2 failures, and
+/// per-invocation entry selection.
+// Preserve the existing typed error value instead of boxing only this sibling.
+#[allow(clippy::result_large_err)]
+pub fn execute_generated_parser_v2_with_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    source_identity: &str,
+    actual_contract: &str,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedSourceError> {
     validate_generated_source_contract_v2(actual_contract, source_identity)?;
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)?;
     let generated_rules =
         validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)?;
-    let top_context = generated_top_context(&compiled);
+    let entry_context = Some(resolve_generated_entry_context(
+        &compiled,
+        options.entry_rule(),
+        source_identity,
+    )?);
     Engine::new(compiled)
-        .execute_generated_value_with_plan(&generated_rules, input)
-        .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
+        .execute_generated_value_with_plan_and_options(&generated_rules, input, options)
+        .map_err(|detail| generated_execution_error(source_identity, entry_context, detail))
 }
 
 /// Execute generated Rust source with direct value and caller-owned diagnostics.
@@ -545,6 +703,30 @@ pub fn execute_generated_parser_with_diagnostic_output_v2(
     actual_contract: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output_v2_with_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        source_identity,
+        actual_contract,
+        sink,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute generated Rust source with direct value, invocation options, and
+/// caller-owned diagnostics.
+// Preserve the existing typed error value instead of boxing only this sibling.
+#[allow(clippy::result_large_err)]
+pub fn execute_generated_parser_with_diagnostic_output_v2_with_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    source_identity: &str,
+    actual_contract: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     validate_generated_source_contract_v2(actual_contract, source_identity)
         .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)
@@ -552,10 +734,20 @@ pub fn execute_generated_parser_with_diagnostic_output_v2(
     let generated_rules =
         validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)
             .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
-    let top_context = generated_top_context(&compiled);
+    let entry_context = Some(
+        resolve_generated_entry_context(&compiled, options.entry_rule(), source_identity)
+            .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?,
+    );
     Engine::new(compiled)
-        .execute_generated_value_with_plan_with_diagnostic_output(&generated_rules, input, sink)
-        .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
+        .execute_generated_value_with_plan_with_diagnostic_output_and_options(
+            &generated_rules,
+            input,
+            sink,
+            options,
+        )
+        .map_err(|error| {
+            generated_diagnostic_execution_error(source_identity, entry_context, error)
+        })
 }
 
 /// Execute generated Rust source with direct value, portable trace roles, and v2 failures.
@@ -567,19 +759,48 @@ pub fn execute_generated_parser_with_trace_v2(
     source_identity: &str,
     actual_contract: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
+    execute_generated_parser_with_trace_v2_with_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        trace_config,
+        source_identity,
+        actual_contract,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute generated Rust source with direct value, portable trace roles, v2
+/// failures, and per-invocation entry selection.
+// Preserve the existing typed error value instead of boxing only this sibling.
+#[allow(clippy::result_large_err)]
+pub fn execute_generated_parser_with_trace_v2_with_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    trace_config: TraceConfig,
+    source_identity: &str,
+    actual_contract: &str,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedSourceError> {
     validate_generated_source_contract_v2(actual_contract, source_identity)?;
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)?;
     let generated_rules =
         validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)?;
-    let top_context = generated_top_context(&compiled);
+    let entry_context = Some(resolve_generated_entry_context(
+        &compiled,
+        options.entry_rule(),
+        source_identity,
+    )?);
     Engine::new(compiled)
-        .execute_generated_with_plan_with_trace_roles(
+        .execute_generated_with_plan_with_trace_roles_and_options(
             &generated_rules,
             input,
             trace_config,
             source_identity,
+            options,
         )
-        .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
+        .map_err(|detail| generated_execution_error(source_identity, entry_context, detail))
 }
 
 /// Execute generated Rust source with portable trace roles and caller diagnostics.
@@ -592,6 +813,33 @@ pub fn execute_generated_parser_with_trace_and_diagnostic_output_v2(
     actual_contract: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output_v2_with_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        trace_config,
+        source_identity,
+        actual_contract,
+        sink,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute generated Rust source with direct value, portable trace roles,
+/// invocation options, and caller-owned diagnostics.
+// The option sibling mirrors the existing public role; grouping or boxing only
+// this function would make the compatibility family inconsistent.
+#[allow(clippy::result_large_err, clippy::too_many_arguments)]
+pub fn execute_generated_parser_with_trace_and_diagnostic_output_v2_with_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    trace_config: TraceConfig,
+    source_identity: &str,
+    actual_contract: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     validate_generated_source_contract_v2(actual_contract, source_identity)
         .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, source_identity)
@@ -599,16 +847,22 @@ pub fn execute_generated_parser_with_trace_and_diagnostic_output_v2(
     let generated_rules =
         validate_generated_rule_plan_v2(&compiled, generated_plan, source_identity)
             .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?;
-    let top_context = generated_top_context(&compiled);
+    let entry_context = Some(
+        resolve_generated_entry_context(&compiled, options.entry_rule(), source_identity)
+            .map_err(GeneratedDiagnosticOutputExecutionError::GeneratedSource)?,
+    );
     Engine::new(compiled)
-        .execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output(
+        .execute_generated_value_with_plan_with_trace_roles_and_diagnostic_output_and_options(
             &generated_rules,
             input,
             trace_config,
             source_identity,
             sink,
+            options,
         )
-        .map_err(|error| generated_diagnostic_execution_error(source_identity, top_context, error))
+        .map_err(|error| {
+            generated_diagnostic_execution_error(source_identity, entry_context, error)
+        })
 }
 
 /// Validate an exposed contract-v2 plan against its embedded compiled specification.
@@ -656,18 +910,56 @@ fn decode_generated_compiled_spec_v2(
     Ok(compiled)
 }
 
-fn generated_top_context(compiled: &CompiledSpec) -> Option<(String, &'static str)> {
-    compiled.top_rule().map(|rule| {
-        (
-            rule.label.clone(),
-            classify_generated_rule_family(rule).contract_name(),
+fn resolve_generated_entry_context(
+    compiled: &CompiledSpec,
+    explicit_selector: Option<&str>,
+    source_identity: &str,
+) -> Result<(String, &'static str), GeneratedSourceError> {
+    match compiled.resolve_entry_rule(explicit_selector) {
+        Ok(selection) => Ok((
+            selection.rule.label.clone(),
+            classify_generated_rule_family(selection.rule).contract_name(),
+        )),
+        Err(diagnostic) if diagnostic.code == NO_RULES_DEFINED_CODE => {
+            Err(GeneratedSourceError::new(
+                GeneratedSourceStage::ValidateSpec,
+                GeneratedSourceCode::NoRulesDefined,
+                "Generated Rust parser spec validation failed",
+                source_identity,
+            )
+            .with_detail(diagnostic.message))
+        }
+        Err(diagnostic) if diagnostic.code == ENTRY_RULE_NOT_FOUND_CODE => {
+            let requested = diagnostic
+                .field("entry_rule")
+                .and_then(serde_json::Value::as_str)
+                .or(explicit_selector)
+                .map(str::to_string);
+            let mut error = GeneratedSourceError::new(
+                GeneratedSourceStage::SelectEntryRule,
+                GeneratedSourceCode::EntryRuleNotFound,
+                "Generated Rust parser entry-rule selection failed",
+                source_identity,
+            )
+            .with_detail(diagnostic.message);
+            if let Some(label) = requested {
+                error = error.with_entry_rule(label);
+            }
+            Err(error)
+        }
+        Err(diagnostic) => Err(GeneratedSourceError::new(
+            GeneratedSourceStage::ExecuteGenerated,
+            GeneratedSourceCode::GeneratedExecutionFailed,
+            "Generated Rust parser entry-rule selection failed",
+            source_identity,
         )
-    })
+        .with_detail(diagnostic.message)),
+    }
 }
 
 fn generated_execution_error(
     source_identity: &str,
-    top_context: Option<(String, &'static str)>,
+    entry_context: Option<(String, &'static str)>,
     detail: String,
 ) -> GeneratedSourceError {
     let mut error = GeneratedSourceError::new(
@@ -677,7 +969,7 @@ fn generated_execution_error(
         source_identity,
     )
     .with_detail(detail);
-    if let Some((rule_label, handler_family)) = top_context {
+    if let Some((rule_label, handler_family)) = entry_context {
         error = error
             .with_rule_label(rule_label)
             .with_handler_family(handler_family);
@@ -687,14 +979,14 @@ fn generated_execution_error(
 
 fn generated_diagnostic_execution_error(
     source_identity: &str,
-    top_context: Option<(String, &'static str)>,
+    entry_context: Option<(String, &'static str)>,
     error: RuntimeDiagnosticOutputExecutionError,
 ) -> GeneratedDiagnosticOutputExecutionError {
     match error {
         RuntimeDiagnosticOutputExecutionError::Runtime(error) => {
             GeneratedDiagnosticOutputExecutionError::GeneratedSource(generated_execution_error(
                 source_identity,
-                top_context,
+                entry_context,
                 error.message,
             ))
         }
@@ -717,11 +1009,27 @@ pub fn execute_generated_parser(
     generated_plan: &[GeneratedPlanRow],
     input: &str,
 ) -> Result<serde_json::Value, String> {
+    execute_generated_parser_with_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute a compatibility generated parser with per-invocation entry
+/// selection.
+pub fn execute_generated_parser_with_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, String> {
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>")
         .map_err(|error| error.to_string())?;
     let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
         .map_err(|error| error.to_string())?;
-    Engine::new(compiled).execute_generated_with_plan(&generated_rules, input)
+    Engine::new(compiled).execute_generated_with_plan_and_options(&generated_rules, input, options)
 }
 
 /// Execute a compatibility generated parser with caller-owned diagnostics.
@@ -730,6 +1038,26 @@ pub fn execute_generated_parser_with_diagnostic_output(
     generated_plan: &[GeneratedPlanRow],
     input: &str,
     sink: Option<&RuntimeDiagnosticOutputSink>,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_diagnostic_output_and_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        sink,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute a compatibility generated parser with invocation options and
+/// caller-owned diagnostics.
+// Preserve the existing typed error value instead of boxing only this sibling.
+#[allow(clippy::result_large_err)]
+pub fn execute_generated_parser_with_diagnostic_output_and_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+    options: &ExecutionOptions,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     let compiled =
         decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>").map_err(|error| {
@@ -740,7 +1068,12 @@ pub fn execute_generated_parser_with_diagnostic_output(
             GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
         })?;
     Engine::new(compiled)
-        .execute_generated_with_plan_with_diagnostic_output(&generated_rules, input, sink)
+        .execute_generated_with_plan_with_diagnostic_output_and_options(
+            &generated_rules,
+            input,
+            sink,
+            options,
+        )
         .map_err(compatibility_diagnostic_execution_error)
 }
 
@@ -751,14 +1084,33 @@ pub fn execute_generated_parser_with_trace(
     input: &str,
     trace_config: TraceConfig,
 ) -> Result<serde_json::Value, String> {
+    execute_generated_parser_with_trace_and_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        trace_config,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute a traced compatibility generated parser with per-invocation entry
+/// selection.
+pub fn execute_generated_parser_with_trace_and_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    trace_config: TraceConfig,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, String> {
     let compiled = decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>")
         .map_err(|error| error.to_string())?;
     let generated_rules = validate_generated_rule_plan_v2(&compiled, generated_plan, "<inline>")
         .map_err(|error| error.to_string())?;
-    Engine::new(compiled).execute_generated_with_plan_with_trace(
+    Engine::new(compiled).execute_generated_with_plan_with_trace_and_options(
         &generated_rules,
         input,
         trace_config,
+        options,
     )
 }
 
@@ -770,6 +1122,28 @@ pub fn execute_generated_parser_with_trace_and_diagnostic_output(
     trace_config: TraceConfig,
     sink: Option<&RuntimeDiagnosticOutputSink>,
 ) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
+    execute_generated_parser_with_trace_and_diagnostic_output_and_options(
+        compiled_spec_json,
+        generated_plan,
+        input,
+        trace_config,
+        sink,
+        &ExecutionOptions::new(),
+    )
+}
+
+/// Execute a traced compatibility generated parser with invocation options and
+/// caller-owned diagnostics.
+// Preserve the existing typed error value instead of boxing only this sibling.
+#[allow(clippy::result_large_err)]
+pub fn execute_generated_parser_with_trace_and_diagnostic_output_and_options(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    input: &str,
+    trace_config: TraceConfig,
+    sink: Option<&RuntimeDiagnosticOutputSink>,
+    options: &ExecutionOptions,
+) -> Result<serde_json::Value, GeneratedDiagnosticOutputExecutionError> {
     let compiled =
         decode_generated_compiled_spec_v2(compiled_spec_json, "<inline>").map_err(|error| {
             GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
@@ -779,11 +1153,12 @@ pub fn execute_generated_parser_with_trace_and_diagnostic_output(
             GeneratedDiagnosticOutputExecutionError::Compatibility(error.to_string())
         })?;
     Engine::new(compiled)
-        .execute_generated_with_plan_with_trace_and_diagnostic_output(
+        .execute_generated_with_plan_with_trace_and_diagnostic_output_and_options(
             &generated_rules,
             input,
             trace_config,
             sink,
+            options,
         )
         .map_err(compatibility_diagnostic_execution_error)
 }

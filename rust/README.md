@@ -47,11 +47,19 @@ neither a global cursor mode nor a per-row cursor policy is serialized. During r
 families derive `seek` and the five AND families derive `consume`. A v1 contract is rejected before plan
 reconstruction with `generated_source_contract_version_mismatch`, exact `expected_contract` / `actual_contract`,
 and guidance to regenerate from the original `.spec` source. Typed
-`execute`/`execute_with_trace` entrypoints return the direct top-rule value or `GeneratedSourceError`; legacy
-`parse`/`parse_with_trace` retain their original accumulator result and `String` error API. `plan()` exposes exact
-ordered `label`/neutral-family rows, and `validate_plan(...)` distinguishes count, label, known-family mismatch,
+`execute`/`execute_with_trace` entrypoints return the direct effective-entry value or `GeneratedSourceError`;
+legacy `parse`/`parse_with_trace` retain their original accumulator result and `String` error API. Existing
+signatures resolve the first authored `Rule::`, falling back to the first declared rule. Their
+`execute_with_options` / `execute_with_trace_and_options` and `parse_with_options` /
+`parse_with_trace_and_options` sibling families accept `ExecutionOptions::with_entry_rule(...)`; that explicit
+selector wins over every authored marker. Diagnostic-output combinations have corresponding option-bearing
+siblings. The selector is invocation state: generated metadata and `plan()` expose only exact ordered
+`label`/neutral-family rows, and `validate_plan(...)` distinguishes count, label, known-family mismatch,
 and unknown-family failures before execution. Portable generated-rule enter/family/exit trace roles appear beside
-the richer native trace. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>` identity.
+the richer native trace. The generated-plan selection event reports the effective label and whether its basis was
+an explicit selector, the first authored marker, or the first authored rule. Unknown explicit selection returns
+`entry_rule_not_found` at `select_entry_rule`; zero-rule reconstructed state returns `no_rules_defined` at
+`validate_spec`. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>` identity.
 
 ## Quick Start
 

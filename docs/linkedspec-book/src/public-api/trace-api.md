@@ -143,10 +143,21 @@ The Rust opt-in traced entrypoints are:
   `execute_parse_job_with_trace_emitter(...)`, `execute_parse_jobs_with_trace(...)`, and
   `execute_parse_jobs_with_trace_emitter(...)`;
 - `Engine::execute_with_trace(...)`, `Engine::execute_with_trace_emitter(...)`,
-  `Engine::execute_generated_with_plan_with_trace(...)`, and
-  `Engine::execute_generated_with_plan_with_trace_emitter(...)`;
-- `source_emitter::execute_generated_parser_with_trace(...)`; newly emitted Rust parser modules also expose
-  `parse_with_trace(input, trace_config)` beside the existing `parse(input)`.
+  `Engine::execute_generated_with_plan_with_trace(...)`, and the generated-plan trace/emitter option-bearing
+  siblings;
+- `source_emitter::execute_generated_parser_with_trace(...)` and
+  `execute_generated_parser_with_trace_and_options(...)`; emitted Rust parser modules expose the unchanged
+  `execute_with_trace(...)` / `parse_with_trace(...)` roles plus
+  `execute_with_trace_and_options(...)` / `parse_with_trace_and_options(...)` siblings. Diagnostic-output
+  combinations have the same option-bearing shape.
+
+Generated-plan execution resolves its effective entry rule before entering a rule handler. An explicit
+`ExecutionOptions::with_entry_rule(label)` wins over authored markers; omission selects the first authored
+`Rule::`, then falls back to the first declared rule. The existing
+`rust_runtime:generated_plan:top_rule` trace topic is retained for compatibility, and its detail now identifies
+both the effective `label` and the selection `basis` (`explicit_selector`, `first_authored_marker`, or
+`first_authored_rule`). Later rule, family, and failure attribution use that same effective identity. The explicit
+selector is invocation state and is not written into the generated family plan or compiled descriptor.
 
 Example Rust usage:
 

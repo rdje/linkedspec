@@ -8,8 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 — converge Rust root routes**
+  (DONE, signed off and awaiting its prepared clean commit).
+
+  **Result:** Loaded and serde-reconstructed state plus generated-plan and emitted-module execution now reuse the
+  ordered explicit > first authored marker > first authored rule resolver. Existing APIs remain compatible; eight
+  option-bearing direct/compatibility, quiet/traced, and diagnostic-output siblings add per-invocation selection.
+  Generated format v2, descriptor bytes/order/`is_top`, and authored identity remain unchanged. Portable zero and
+  unknown failures, stale-format precedence, trace basis, and effective runtime attribution agree across routes.
+
+  **Proof:** New route 6 and emitter 6 tests pass, including a fresh crate calling every emitted option API;
+  focused root/diagnostic/loader/trace/descriptor/generated suites pass. Full Rust-local passes oracle 105,
+  classifier 105, integration 197, emitted source 6, and primary 65x2. Canonical CI passes four doctrines, root
+  7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 627s. A latent logical-helper marker was root-caused to
+  mutable-frontier storage and moved to stable canonical storage; all 26 mutations pass. KM is 602/4,320. Cleanup
+  removes 16,558 Cargo files, reducing `rust/target` from 2.9 GiB to 99 MiB, plus the generated book/cache.
+
+  **Next:** Commit `.2.2`, clear the brief, prove the tree clean, then activate `.9.1.1.2.2.3` task-tree-first for
+  exact topology and 65-case Rust rollout admission.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 — implement Rust root resolution**
-  (DONE pending clean commit — implementation, Rust-local proof, and canonical signoff pass).
+  (DONE at clean commit `e39db876` — implementation, Rust-local proof, and canonical signoff pass).
 
   **Result:** `CompiledSpec::resolve_entry_rule` now applies explicit selector > first authored `Rule::` > first
   authored rule over immutable definition order. Markerless one-or-more-rule sources validate; blank/comment-only
@@ -27,8 +46,8 @@ Current execution status for interruption-safe batch workflow recovery.
   The first canonical run's public-checker phrase collision is root-caused, narrowed, and green on rerun. Cleanup
   removes 20,691 Cargo files / 4.4 GiB, the 11 MiB generated book, and Python bytecode cache.
 
-  **Next:** Commit `.2.1`, clear the brief, verify clean state, then activate `.9.1.1.2.2.2` for loaded/serde/
-  generated/emitted/descriptor/trace convergence. Exact topology/rollout admission stays `.2.3`.
+  **Next:** `.9.1.1.2.2.2` is active task-tree-first for loaded/serialized/reconstructed/generated/emitted/
+  descriptor/trace/diagnostic convergence. Exact topology and rollout admission stay `.2.3`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 — map Rust root selection**
   (DONE pending clean commit — behavior-free causal map and dependency-safe `.2.1-.3` plan complete).

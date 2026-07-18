@@ -3586,7 +3586,7 @@ before implementation.
     clean generated artifacts, commit `.2.1`, clear the brief, and only then activate `.2.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Rust loaded, serialized, reconstructed, generated/emitted, descriptor, trace, and diagnostic routes.
   Dependencies: `.9.1.1.2.2.1`
   Acceptance: Prove loaded and ordinary serialized/reconstructed state reuse the core resolver; add
@@ -3594,8 +3594,42 @@ before implementation.
     traced roles; keep configured selection separate from source identity; attribute trace and failures to the
     effective rule; retain descriptor order/per-rule `is_top`; and reject stale generated formats at their existing
     contract boundary.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** Loaded/serde and all generated/emitted role families pass exact diagnostic,
+    trace, descriptor, and stale-format boundaries. Routes 6, emitter 6 with a fresh standalone crate, focused
+    adjacent suites, classifier 105, complete Rust-local proof, and primary 65x2 pass without rollout promotion.
+    Canonical CI passes four doctrines, logical-helper 26 mutations, root consumers 7+5, cursor 288, primary 65x2,
+    and Phase 0 1,031/1,031 in 627 seconds. The first canonical run exposed a latent checker-owned logical-helper
+    marker stored in mutable frontier text; stable canonical storage plus a Knowledge Map card repairs that
+    durability defect without logical behavior change. KM is 602/4,320. Cleanup removes 16,558 Cargo files,
+    reducing `rust/target` from 2.9 GiB to 99 MiB, plus the generated 11 MiB book and Python cache.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 - converge Rust root routes`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVAL / ROUTE MAP** — Re-read the Rust root-selection core/preflight facts and retrieve the exact
+    loaded, serialized, reconstructed, generated/emitted, descriptor, trace, diagnostic, and stale-format owners
+    before changing behavior.
+  - [x] **LOADED / SERIALIZED** — Prove direct, loaded, serde round-trip, and reconstructed compiled state preserve
+    authored order/`is_top` while reusing the single core resolver for default and explicit selection.
+  - [x] **GENERATED / EMITTED API** — Add a compatibility-preserving per-invocation selector to every generated
+    direct, diagnostic, compatibility, and traced role; default selection must use first marker then first rule,
+    and explicit selection must win without mutating embedded authored identity.
+  - [x] **DIAGNOSTIC / TRACE IDENTITY** — Return the portable zero/unknown codes and stages before user code,
+    attribute runtime failures and trace entry to the effective selected rule, and keep configured selector state
+    separate from descriptor/source `is_top` identity.
+  - [x] **FORMAT / DESCRIPTOR** — Preserve the existing generated-format rejection boundary, deterministic source,
+    definition order, per-rule `is_top`, and `entry_rule_contract` across direct, loaded, reconstructed, and
+    generated descriptor projections.
+  - [x] **FOCUSED / RUST LOCAL** — Pass neutral route consumers, generated-source execution/classifier/emitter,
+    loader/serde/descriptor/diagnostic/trace suites, formatting, strict-new-code Clippy, full Rust-local proof, and
+    exact primary 65x2 without advancing rollout admission.
+  - [x] **CANONICAL DRIFT REPAIR** — Root-cause the latent logical-helper marker failure exposed by this slice's
+    generated-source diff: the checker-owned completion marker had lived in a mutable current-frontier cell and
+    was erased by later PNT updates. Move it to a stable canonical-marker section, card the rule, and re-pass the
+    focused logical checker without changing logical-helper behavior or rollout.
+  - [x] **LOCKSTEP / CANONICAL / COMMIT** — Synchronize task/live/book/Knowledge Map/capability state, pass root
+    governance and canonical CI, clean safe artifacts, commit `.2.2`, clear the brief, and only then activate
+    topology/admission leaf `.2.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3`
   Status: `pending`
@@ -7222,7 +7256,7 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `active` | Rust rollout is split into read-only preflight, core identity/resolution, composed routes, and 65-case admission. |
 | 212.2.2.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` | `done` | Rust is exactly 64/65 twice; ordered identity is preserved, validation/default/generated gaps are mapped, and `.1-.3` order is frozen without behavior. |
 | 212.2.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | `done` | Markerless validation, ordered native resolution, portable diagnostics, strict no-drift, and immutable descriptor identity pass Rust-local and canonical proof. |
-| 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `pending` | Converge loaded/serialized/generated/emitted/descriptor/trace/diagnostic routes. |
+| 212.2.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | `done` | Loaded/serde/generated/emitted routes, exact identities, Rust-local/canonical proof, durable marker repair, and cleanup pass. |
 | 212.2.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` | `pending` | Topology-check and admit exact Rust 65-case primary parity, then close parent `.2`. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
 | 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
@@ -7949,6 +7983,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2` | Loaded/serde/reconstructed order and marker identity; all generated/emitted direct, compatibility, trace, and diagnostic-output roles; exact zero/unknown/stale precedence and effective trace/failure identity; routes 6, emitter 6 with fresh crate, root 6, diagnostics 5, loader 5, trace 10, diagnostic output 7, descriptor/types; generated governance and classifier 105; complete Rust-local oracle 105, integration 197, primary 65x2; root governance 8/3/3/5 at 2/5 plus 24 mutations; logical-helper marker root cause and 26 mutations; KM 602/4,320; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 627s; cleanup 16,558 Cargo files / target 2.9 GiB to 99 MiB plus generated book/cache. | PASS. Every Rust composed route shares the ordered resolver without format, descriptor, or rollout promotion; `.2.3` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.2.1` | Neutral 8/3/3 resolver consumer; markerless/zero parser-validation boundary; native legacy/value default+explicit execution; portable unknown diagnostics; descriptor order/contract/immutable markers; strict no-drift; core 193+4+5+8; runtime 137; integration 197; diagnostics 5; loader 5; trace 10; Rust-local oracle 105, generated classifier, adjacent suites, format, exact-primary 65x2; strict-new-code Clippy over 28 exact pre-existing Rust 1.95 findings; root governance 8/3/3/5 at 2/5 plus 24 mutations; KM 600/4,301; mdBook/memory/task/four doctrines/whitespace; canonical root consumers 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 633s; cleanup. | PASS. Rust native/core/primary mechanisms advance without generated-route or rollout promotion; `.2.2` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.7` | KM/ADR/neutral/checker/Perl-consumer/canonical-seam retrieval; pre-edit neutral 36/18/8/14/68 at 2/6 plus 29 mutations; constituent normalization 5, descriptor 4, execution 6, emitter 5, primary 63x2; exact 15-role Rust topology and once-only consumer; canonical/default-to-optional-Rust registration; all eight diagnostic/removal outcomes; neutral 36/18/8/14+15/68 at 3/5 plus 34 mutations; focused consumer 1/23.37s; complete Rust core 189/4/5/8, runtime 137, oracle 3/205.40s, diagnostics 7, classifier 105/234.99s, integrations 197/75.60s, composed 1/23.79s, execution 6/59.58s, emitter 5/36.90s, adjacent suites, formatting, advisory consumer Clippy, and primary 63x2; memory/KM/four doctrines/mdBook/JSON/shell/whitespace; canonical Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 612s. | PASS. Only `rust_parity` advances, parent `.9.1.4` closes, and the clean commit is the sole boundary before Dart. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.6` | KM/ADR/neutral/Perl-removal/Rust option-runtime-primary-trace retrieval; exact pre-edit 51/63 default and POSIX boundary; static/runtime override deletion; targeted retired flag plus request-trace migration; exact Rust 63x2; runtime 137, oracle 3/205.44s, diagnostics 7, classifier 105/235.42s, integrations 197/75.12s, execution 6/59.52s, emitter 5/37.18s and adjacent suites; core 189/4/5/8; formatting and production-library Clippy; structural mdBook/public migration; neutral 36/18/8/14/68 at 2/6 plus 29 mutations; logical topology/public-v2 repair plus 26 mutations; KM 587/4,165; four doctrines/mdBook/JSON/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/611s. | PASS. Rust has no caller/global cursor authority: normal policy is rule-derived, entry selection remains, the retired primary flag fails exactly, and request trace omits the global field. Public docs now teach structure. A stale logical public v1 marker is root-caused and migrated to v2. `.7` waits for the clean commit. |
