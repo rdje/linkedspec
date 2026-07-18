@@ -190,12 +190,13 @@ export 'src/source_emitter.dart'
         buildGeneratedRulePlan,
         classifyGeneratedRuleFamily,
         emitDartSource,
-        emitDartSourceV1,
-        executeGeneratedParserV1,
-        executeGeneratedParserWithTraceV1,
+        emitDartSourceV2,
+        executeGeneratedParserV2,
+        executeGeneratedParserWithTraceV2,
         linkedSpecGeneratedSourceContract,
         linkedSpecGeneratedSourceFormatVersion,
-        validateGeneratedRulePlanV1;
+        validateGeneratedRulePlanV2,
+        validateGeneratedSourceContractV2;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

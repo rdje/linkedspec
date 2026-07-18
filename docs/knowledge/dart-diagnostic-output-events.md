@@ -42,7 +42,7 @@ caller. This includes a sink that throws `RuntimeInterpreterException` itself. `
 separate typed immediate outcome, so preceding events arrive and later actions do not run. Neither rich event
 data nor sink failures are `RuntimeDiagnostic` or native trace records.
 
-Generated Dart callers pass `diagnosticOutputSink:` to `executeGeneratedParserV1` or its traced counterpart;
+Generated Dart callers pass `diagnosticOutputSink:` to `executeGeneratedParserV2` or its traced counterpart;
 emitted `execute` and `executeWithTrace` expose the same optional named argument. A private generated carrier
 restores arbitrary caller failures with their stack while ordinary failures retain generated-source attribution.
 

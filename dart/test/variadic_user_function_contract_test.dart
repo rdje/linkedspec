@@ -204,11 +204,11 @@ Done::
     final compiled = _compileSource(_fixtureSource());
     final plan = buildGeneratedRulePlan(compiled);
     expect(
-      executeGeneratedParserV1(compiled, plan, 'xx', 'variadic-contract.spec'),
+      executeGeneratedParserV2(compiled, plan, 'xx', 'variadic-contract.spec'),
       _expectedFixtureValue(),
     );
 
-    final generated = emitDartSourceV1(compiled, 'variadic-contract.spec');
+    final generated = emitDartSourceV2(compiled, 'variadic-contract.spec');
     final encoded = RegExp(
       "const _compiledSpecJsonBase64 = '([^']+)';",
     ).firstMatch(generated)![1]!;

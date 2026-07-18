@@ -8,14 +8,14 @@ answers:
   - "where are Dart cursor normalization diagnostics represented"
   - "what is SpecPortableDiagnostic"
   - "when was Dart usesLegacyAndInterpretation removed"
-  - "does Dart generated source classify compact pipe correctly yet"
+  - "does Dart generated source classify compact pipe correctly"
   - "which Dart leaf changes live cursor execution"
   - "how is Dart cursor execution frozen during normalization"
   - "what tests prove Dart bare edge normalization"
 date: 2026-07-18
 status: verified normalization; live cursor execution completed in FUTURE-PARITY-BACKLOG.9.1.5.2
 tags: [dart, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "Dart classifies compact `|` as authored OR and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through sorted SpecPortableDiagnostic code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. Execution leaf .9.1.5.2 removed usesLegacyAndInterpretation from compiled metadata; generated-source v1 remains intentionally staged for .4 behind an interpreter-local compatibility path. The five-test normalization consumer covers all 36 family and 18 edge rows, six ownership sets, JSON roundtrips, line boundaries, compiled dispatch, and staging."
+evidence: "Dart classifies compact `|` as authored OR and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through sorted SpecPortableDiagnostic code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. Execution leaf .9.1.5.2 removed usesLegacyAndInterpretation from compiled metadata; generated-source v2 leaf .4 now classifies Pipe as or_acode and reconstructs policy from exact family rows. The normalization consumer covers all 36 family and 18 edge rows, six ownership sets, JSON roundtrips, line boundaries, compiled dispatch, and v2 execution."
 reverify: "(cd dart && dart test test/rule_local_cursor_normalization_test.dart); (cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart test/compiled_spec_test.dart test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/source_emitter_test.dart test/spec_loader_test.dart test/rule_local_cursor_normalization_test.dart); python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -53,22 +53,23 @@ Normalization stops at exact compiled family/ownership state.
 `CompiledRuleModeMetadata` exposes `isAnd=false` for compact pipe; execution leaf
 `.9.1.5.2` subsequently removed `usesLegacyAndInterpretation` and made normal
 sequence/choice plus seek/consume execution use exact entered-rule metadata.
-`classifyGeneratedRuleFamily` still emits the v1 compact-pipe family
-intentionally; `.9.1.5.4` owns generated-source v2 and the hard v1
-reconstruction boundary. Root descriptor global metadata and public/CLI global
-options likewise remain assigned to `.3` and `.5`.
+`classifyGeneratedRuleFamily` now maps compact pipe to `or_acode` for
+generated-source v2, and the validated family row reconstructs its seek policy.
+Root descriptor global metadata was removed in `.3`; public/CLI global options
+remain assigned to `.5`.
 
 `dart/test/rule_local_cursor_normalization_test.dart` is the contract-driven
 consumer. It covers all 36 top/body family spellings, 18 valid/invalid edge rows,
 six multi-edge ownership sets, complete-line/header-rest/multiline recognition,
 same-line exclusion, AST and diagnostic JSON roundtrips, compiled dispatch tables,
-and explicit runtime/generated-v1 staging. The test intentionally contains none
+and explicit runtime/generated-v2 proof. The test intentionally contains none
 of the governed global-option spellings, because existing runtime/primary tests
 already own that staged boundary; the exact migration inventory therefore remains
 68 rather than expanding for redundant evidence.
 
 Related: [[dart-rule-local-cursor-preflight]],
 [[dart-rule-local-cursor-execution]],
+[[dart-generated-source-v2-rule-local-cursor]],
 [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-normalization]],
 and [[FUTURE-PARITY-BACKLOG]].

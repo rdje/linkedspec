@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.4 — emit Dart generated-source v2
+
+Dart's current generated artifact identity is now `linkedspec-generated-source-v2` / format 2. The deterministic
+plan remains deliberately minimal: each ordered rule row contains exactly `label` and `family`, with no serialized
+cursor or caller-selected global mode. All ten typed generated families derive seek/consume, choice/sequence, and
+regex/acode versus blind/bcode behavior at the entered rule. Compact `Pipe` now classifies as `or_acode`, and
+nested generated execution selects the child's validated family rather than inheriting parent policy.
+
+The versioned Dart surface advances to `emitDartSourceV2`, `validateGeneratedRulePlanV2`,
+`executeGeneratedParserV2`, and `executeGeneratedParserWithTraceV2`; the unversioned emitter remains a current-
+version adapter. Emitted libraries expose plan validation for an expected contract and validate v2 before touching
+the lazy normalized `SpecFile` Base64 payload. The portable mismatch reports
+`generated_source_contract_version_mismatch` at `validate_generated_plan`, includes exact expected/actual contract
+ids, and instructs callers to regenerate from the `.spec` source. An isolated host with a deliberately corrupt
+payload proves the v1 mismatch wins before decode; a v2 identity reaches the distinct compile/load error instead.
+
+The generated source, rule-local execution, normalization, diagnostic-output, logical-helper, named-mark,
+variadic, punctuation-light, and uniform-binding suites now use v2 roles. The affected nine-suite set passes 76/76;
+strict analysis passes; the complete package reaches 257 passes plus only the staged shared-help failure; corpus
+execution remains 105/105; exact primary remains the expected 30/63 twice until `.9.1.5.5`. The shared generated-
+source v1 ledger still passes as the semantic admission baseline, while the neutral cursor checker remains 68
+governed files at 3/5 with 34 rejected mutations. The Knowledge Map is synchronized at 592 facts / 4,215 question
+keys; memory architecture, task metadata, all four doctrines, mdBook, formatting, strict analysis, and whitespace
+pass. Canonical CI repeats Perl cursor admission 288, reference primary 63/63 in both environments, and Phase 0
+1,031/1,031 in 641 seconds before exiting 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.3 — project Dart cursor descriptor v1
 
 Dart's outward compiled descriptor now consumes the neutral `rule_local_cursor_v1` metadata variant. Root

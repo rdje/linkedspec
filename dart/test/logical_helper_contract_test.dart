@@ -47,7 +47,7 @@ CompiledSpec _reconstructFromEmittedPayload(
   CompiledSpec compiled,
   String identity,
 ) {
-  final emitted = emitDartSourceV1(compiled, identity);
+  final emitted = emitDartSourceV2(compiled, identity);
   final encoded = RegExp(
     "const _compiledSpecJsonBase64 = '([^']+)';",
   ).firstMatch(emitted)![1]!;
@@ -191,10 +191,10 @@ void main() {
 
       final plan = buildGeneratedRulePlan(compiled);
       final identity = 'logical-helper/$fixtureId-generated.spec';
-      final direct = executeGeneratedParserV1(compiled, plan, 'x', identity);
+      final direct = executeGeneratedParserV2(compiled, plan, 'x', identity);
       expect(direct, fixture['expected']);
       expect(
-        executeGeneratedParserWithTraceV1(
+        executeGeneratedParserWithTraceV2(
           compiled,
           plan,
           'x',
@@ -259,7 +259,7 @@ void main() {
       final identity = 'logical-helper/$id-generated.spec';
       final plan = buildGeneratedRulePlan(compiled);
       try {
-        executeGeneratedParserV1(compiled, plan, 'x', identity);
+        executeGeneratedParserV2(compiled, plan, 'x', identity);
         fail('$id generated plan accepted invalid arity');
       } on GeneratedSourceException catch (error) {
         _expectGeneratedArityDiagnostic(error, row, identity);
@@ -268,7 +268,7 @@ void main() {
       }
 
       try {
-        executeGeneratedParserWithTraceV1(
+        executeGeneratedParserWithTraceV2(
           compiled,
           plan,
           'x',
@@ -330,7 +330,7 @@ dependencies:
           final source =
               _fixture(contract, fixtureId)['spec_source']! as String;
           File('${libraryDirectory.path}/$fixtureId.dart').writeAsStringSync(
-            emitDartSourceV1(
+            emitDartSourceV2(
               _compileSource(source),
               'logical-helper/$fixtureId-emitted.spec',
             ),
@@ -340,7 +340,7 @@ dependencies:
           contract,
         ).singleWhere((row) => row['id'] == 'not_many');
         File('${libraryDirectory.path}/invalid.dart').writeAsStringSync(
-          emitDartSourceV1(
+          emitDartSourceV2(
             _compileSource(invalid['spec_source']! as String),
             'logical-helper/not_many-emitted.spec',
           ),

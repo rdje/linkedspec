@@ -26,7 +26,10 @@ This document is the current high-level technical reading of the project shape. 
   only by generated-v1 compatibility until `.4`. Descriptor `.9.1.5.3` now projects pure normalized state: root
   `cursor_contract`, per-rule family/derived policy/aggregate ownership, exact five-field resolved-edge rows, and
   existing label/line/top/mode identity. Direct, normalized-JSON, and loaded descriptors agree; no descriptor input
-  or mutable cursor field exists. Generated v2, public options, and rollout admission remain unchanged for `.4-.6`.
+  or mutable cursor field exists. Generated-source `.9.1.5.4` now emits v2/format 2 and reconstructs only normalized
+  `SpecFile` state plus one ordered label/family plan. Each validated family derives cursor and sequence/choice;
+  no cursor field is serialized. Fresh modules reject v1 before payload reconstruction with exact contract ids and
+  regeneration guidance. Public options and rollout admission remain unchanged for `.5-.6`.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight

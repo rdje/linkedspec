@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.4` — the family row is executable authority, while cursor policy stays
+  derived): generated v1 already serialized the correct minimal shape, `label` plus `family`; its remaining drift
+  lived in version identity, compact-Pipe classification, and an interpreter compatibility path that spent the
+  engine default. V2 therefore does not add a cursor field. `GeneratedRuleFamily.cursorPolicy` derives five AND
+  families as consume and default/OR/repetition as seek, while the same family continues to select structural
+  acode/bcode and sequence/choice behavior. Every nested lookup resolves its own row.
+
+  Compact `Pipe` required two classifier corrections rather than a broad `isAnd` substitution. Regex-bearing Pipe
+  is `or_acode`; blind Pipe is `or_bcode`. Keeping those cases explicit makes the ten-family mapping auditable and
+  prevents the historical compact spelling from leaking into generated structure again.
+
+  A top-level Dart `late final` payload is lazy, which supplies a clean version boundary. Emitted modules call
+  `validateGeneratedSourceContractV2` before any reference to `_compiledSpec`; an isolated deliberately corrupted
+  Base64 payload proves a v1 contract mismatch is observable before decode. Replacing only the contract id with v2
+  then reaches the separate compile/load failure. This is stronger than asserting call order inside one process.
+
+  Versioned v1 Dart entrypoints are removed rather than maintained as a second execution semantic. Persisted v1
+  artifacts remain historical admission evidence and must regenerate from `.spec`; the unversioned emitter points
+  to v2. The recurring logical-helper and generated-source checkers had current Dart v1 role names, so the same
+  slice migrates those governed markers while retaining the cross-backend contract-v1 semantic ledger.
+
+  Focused proof passes 76/76 across nine affected suites, strict analysis passes, complete Dart reaches the staged
+  257/1 boundary, corpus stays 105/105, and primary stays the expected 30/63 twice for `.5`. The synchronized
+  Knowledge Map is 592 facts / 4,215 question keys; memory/task/doctrine/mdBook/whitespace checks pass. Canonical
+  CI independently repeats Perl cursor admission 288, reference primary 63/63 in both environments, and Phase 0
+  1,031/1,031 in 641 seconds before exiting 0.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.3` — descriptors should project normalized semantics, not own a
   second executable state): Dart already had all descriptor inputs in `CompiledRule`: exact mode metadata,
   normalized action/blind tables, target indices, block payloads, fluent chains, and label/line/top identity. The

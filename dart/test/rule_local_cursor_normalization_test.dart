@@ -209,18 +209,11 @@ void main() {
     );
   });
 
-  test(
-    'keeps runtime-family and generated-v1 boundaries explicitly staged',
-    () {
-      final pipe = compileSpec(parseSpec('Top::|\n /x/\n')).rule('Top')!;
-      expect(pipe.modeMetadata.isAnd, isFalse);
-      expect(
-        classifyGeneratedRuleFamily(pipe),
-        GeneratedRuleFamily.andSingleAcode,
-        reason: 'generated-source v1 migration is owned by .9.1.5.4',
-      );
-    },
-  );
+  test('shares normalized authored family with generated-source v2', () {
+    final pipe = compileSpec(parseSpec('Top::|\n /x/\n')).rule('Top')!;
+    expect(pipe.modeMetadata.isAnd, isFalse);
+    expect(classifyGeneratedRuleFamily(pipe), GeneratedRuleFamily.orAcode);
+  });
 }
 
 List<Map<String, Object?>> _rows(String name) {

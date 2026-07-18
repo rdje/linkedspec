@@ -254,8 +254,8 @@ fail('Dart accepted-subset test must consume the executable contract list')
         $dart_accepted_subset_text =~ /\['accepted_subset'\]/;
 fail('Dart accepted-subset test must compare the interpreter before emission')
  unless $dart_accepted_subset_text =~ /expect\(interpreterValue, expected, reason: caseName\)/;
-fail('Dart accepted-subset test must emit contract-v1 source')
- unless $dart_accepted_subset_text =~ /emitDartSourceV1\(compiled, identity\)/;
+fail('Dart accepted-subset test must emit current contract-v2 source')
+ unless $dart_accepted_subset_text =~ /emitDartSourceV2\(compiled, identity\)/;
 fail('Dart accepted-subset test must independently analyze and run the generated package')
  unless $dart_accepted_subset_text =~ /'analyze'/ &&
         $dart_accepted_subset_text =~ /'run'/ &&

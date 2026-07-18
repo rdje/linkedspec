@@ -56,7 +56,7 @@ void main() {
 
     final plan = buildGeneratedRulePlan(compiled);
     expect(
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         compiled,
         plan,
         input,
@@ -65,8 +65,8 @@ void main() {
       expected,
     );
 
-    final generated = emitDartSourceV1(compiled, 'complete-named-mark.spec');
-    expect(generated, contains('linkedspec-generated-source-v1'));
+    final generated = emitDartSourceV2(compiled, 'complete-named-mark.spec');
+    expect(generated, contains('linkedspec-generated-source-v2'));
     final encoded = RegExp(
       "const _compiledSpecJsonBase64 = '([^']+)';",
     ).firstMatch(generated)![1]!;

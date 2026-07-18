@@ -7,18 +7,18 @@ import 'package:test/test.dart';
 const dartGeneratedSourceAcceptedSubsetCount = 8;
 
 void main() {
-  test('v1 metadata and structured emission failure are exact', () {
+  test('v2 metadata and structured emission failure are exact', () {
     const identity = 'generated-source/dart-unicode-λ.spec';
     const metadata = GeneratedSourceMetadata(sourceIdentity: identity);
 
     expect(metadata.toJson(), {
-      'contract_id': 'linkedspec-generated-source-v1',
-      'format_version': 1,
+      'contract_id': 'linkedspec-generated-source-v2',
+      'format_version': 2,
       'source_identity': identity,
     });
 
     expect(
-      () => emitDartSourceV1(_compileProbe(), ''),
+      () => emitDartSourceV2(_compileProbe(), ''),
       throwsA(
         isA<GeneratedSourceException>()
             .having((error) => error.toJson(), 'portable JSON', {
@@ -74,12 +74,12 @@ void main() {
     const identity = r'generated-source/dart-$-λ.spec';
     final compiled = _compileProbe();
 
-    final first = emitDartSourceV1(compiled, identity);
-    final second = emitDartSourceV1(compiled, identity);
+    final first = emitDartSourceV2(compiled, identity);
+    final second = emitDartSourceV2(compiled, identity);
 
     expect(first, second);
-    expect(first, contains('linkedspec-generated-source-v1'));
-    expect(first, contains('linkedspecGeneratedSourceFormat = 1'));
+    expect(first, contains('linkedspec-generated-source-v2'));
+    expect(first, contains('linkedspecGeneratedSourceFormat = 2'));
     expect(first, contains(r'generated-source/dart-\$-λ.spec'));
     expect(first, contains('Object? execute('));
     expect(first, contains('Object? executeWithTrace('));
@@ -88,9 +88,10 @@ void main() {
       contains('RuntimeDiagnosticOutputSink? diagnosticOutputSink'),
     );
     expect(first, isNot(contains('Top::')));
+    expect(first, isNot(contains('"cursor_policy"')));
   });
 
-  test('classifies and rejects contract-v1 plans exactly', () {
+  test('classifies and rejects contract-v2 plans exactly', () {
     const identity = 'generated-source/dart-plan.spec';
     final compiled = _compileProbe();
     final plan = buildGeneratedRulePlan(compiled);
@@ -98,26 +99,70 @@ void main() {
     expect(plan.map((row) => row.toJson()), [
       {'label': 'Top', 'family': 'default'},
     ]);
-    validateGeneratedRulePlanV1(compiled, plan, identity);
+    validateGeneratedRulePlanV2(compiled, plan, identity);
+    expect(
+      () => validateGeneratedRulePlanV2(
+        compiled,
+        plan,
+        identity,
+        actualContract: 'linkedspec-generated-source-v1',
+      ),
+      throwsA(
+        isA<GeneratedSourceException>().having(
+          (error) => error.toJson(),
+          'portable contract mismatch',
+          {
+            'type': 'generated_source_error',
+            'stage': 'validate_generated_plan',
+            'code': 'generated_source_contract_version_mismatch',
+            'summary':
+                'Generated source contract does not match the active validator',
+            'source_identity': identity,
+            'detail': 'regenerate the generated artifact from its .spec source',
+            'expected_contract': 'linkedspec-generated-source-v2',
+            'actual_contract': 'linkedspec-generated-source-v1',
+          },
+        ),
+      ),
+    );
+
+    expect(
+      {
+        for (final family in GeneratedRuleFamily.values)
+          family.wireName: family.cursorPolicy.name,
+      },
+      {
+        'default': 'seek',
+        'or_acode': 'seek',
+        'and_single_acode': 'consume',
+        'and_acode_seq': 'consume',
+        'and_bcode': 'consume',
+        'or_bcode': 'seek',
+        'rep_acode': 'seek',
+        'rep_bcode': 'seek',
+        'rep_and_acode': 'consume',
+        'rep_and_bcode': 'consume',
+      },
+    );
 
     _expectPlanFailure(
-      () => validateGeneratedRulePlanV1(compiled, const [], identity),
+      () => validateGeneratedRulePlanV2(compiled, const [], identity),
       GeneratedSourceCode.generatedPlanRowCountMismatch,
     );
     _expectPlanFailure(
-      () => validateGeneratedRulePlanV1(compiled, const [
+      () => validateGeneratedRulePlanV2(compiled, const [
         GeneratedPlanRow(label: 'Wrong', family: 'default'),
       ], identity),
       GeneratedSourceCode.generatedPlanLabelMismatch,
     );
     _expectPlanFailure(
-      () => validateGeneratedRulePlanV1(compiled, const [
+      () => validateGeneratedRulePlanV2(compiled, const [
         GeneratedPlanRow(label: 'Top', family: 'or_acode'),
       ], identity),
       GeneratedSourceCode.generatedPlanFamilyMismatch,
     );
     _expectPlanFailure(
-      () => validateGeneratedRulePlanV1(compiled, const [
+      () => validateGeneratedRulePlanV2(compiled, const [
         GeneratedPlanRow(label: 'Top', family: 'invented_family'),
       ], identity),
       GeneratedSourceCode.generatedPlanUnknownFamily,
@@ -128,7 +173,7 @@ void main() {
     'generated source analyzes and runs in an isolated caller package',
     () async {
       const identity = 'generated-source/dart-isolated.spec';
-      final generated = emitDartSourceV1(_compileProbe(), identity);
+      final generated = emitDartSourceV2(_compileProbe(), identity);
       final packageRoot = Directory.current.absolute;
       final scratch = Directory.systemTemp.createTempSync(
         'linkedspec-dart-generated-source-',
@@ -148,19 +193,53 @@ dependencies:
     path: ${jsonEncode(packageRoot.path)}
 ''');
         File('${scratch.path}/lib/generated.dart').writeAsStringSync(generated);
+        final corrupted = generated.replaceFirst(
+          RegExp("const _compiledSpecJsonBase64 = '[^']+';"),
+          "const _compiledSpecJsonBase64 = '%%%';",
+        );
+        File('${scratch.path}/lib/corrupt.dart').writeAsStringSync(corrupted);
         File('${scratch.path}/bin/main.dart').writeAsStringSync(r'''
 import 'dart:convert';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_generated_source_probe/corrupt.dart' as corrupt;
 import 'package:linkedspec_generated_source_probe/generated.dart' as generated;
 
 void main() {
   final metadata = generated.metadata().toJson();
-  if (metadata['contract_id'] != 'linkedspec-generated-source-v1' ||
-      metadata['format_version'] != 1 ||
+  if (metadata['contract_id'] != 'linkedspec-generated-source-v2' ||
+      metadata['format_version'] != 2 ||
       metadata['source_identity'] !=
           'generated-source/dart-isolated.spec') {
     throw StateError('unexpected generated metadata: $metadata');
+  }
+  final plan = generated.plan();
+  Object? versionFailure;
+  try {
+    generated.validatePlanForContract(
+      plan,
+      'linkedspec-generated-source-v1',
+    );
+    throw StateError('v1 contract unexpectedly reconstructed');
+  } on GeneratedSourceException catch (error) {
+    versionFailure = error.toJson();
+  }
+  Object? corruptVersionFailure;
+  try {
+    corrupt.validatePlanForContract(
+      corrupt.plan(),
+      'linkedspec-generated-source-v1',
+    );
+    throw StateError('corrupt v1 contract unexpectedly reconstructed');
+  } on GeneratedSourceException catch (error) {
+    corruptVersionFailure = error.toJson();
+  }
+  Object? corruptPayloadFailure;
+  try {
+    corrupt.validatePlan(corrupt.plan());
+    throw StateError('corrupt v2 payload unexpectedly reconstructed');
+  } on GeneratedSourceException catch (error) {
+    corruptPayloadFailure = error.toJson();
   }
   final value = generated.execute('x');
   if (value != r'λ:$') {
@@ -173,7 +252,6 @@ void main() {
   } on GeneratedSourceException catch (error) {
     failure = error.toJson();
   }
-  final plan = generated.plan();
   generated.validatePlan(plan);
   generated.executeWithTrace(
     'x',
@@ -188,6 +266,9 @@ void main() {
     'metadata': metadata,
     'value': value,
     'plan': [for (final row in plan) row.toJson()],
+    'version_failure': versionFailure,
+    'corrupt_version_failure': corruptVersionFailure,
+    'corrupt_payload_failure': corruptPayloadFailure,
     'failure': failure,
   }));
 }
@@ -213,14 +294,44 @@ void main() {
         ]);
         expect(jsonDecode((run.stdout as String).trim()), {
           'metadata': {
-            'contract_id': 'linkedspec-generated-source-v1',
-            'format_version': 1,
+            'contract_id': 'linkedspec-generated-source-v2',
+            'format_version': 2,
             'source_identity': identity,
           },
           'value': r'λ:$',
           'plan': [
             {'label': 'Top', 'family': 'default'},
           ],
+          'version_failure': {
+            'type': 'generated_source_error',
+            'stage': 'validate_generated_plan',
+            'code': 'generated_source_contract_version_mismatch',
+            'summary':
+                'Generated source contract does not match the active validator',
+            'source_identity': identity,
+            'detail': 'regenerate the generated artifact from its .spec source',
+            'expected_contract': 'linkedspec-generated-source-v2',
+            'actual_contract': 'linkedspec-generated-source-v1',
+          },
+          'corrupt_version_failure': {
+            'type': 'generated_source_error',
+            'stage': 'validate_generated_plan',
+            'code': 'generated_source_contract_version_mismatch',
+            'summary':
+                'Generated source contract does not match the active validator',
+            'source_identity': identity,
+            'detail': 'regenerate the generated artifact from its .spec source',
+            'expected_contract': 'linkedspec-generated-source-v2',
+            'actual_contract': 'linkedspec-generated-source-v1',
+          },
+          'corrupt_payload_failure': {
+            'type': 'generated_source_error',
+            'stage': 'compile_or_load_generated_source',
+            'code': 'generated_source_compile_failed',
+            'summary': 'Generated Dart source failed to compile or load',
+            'source_identity': identity,
+            'detail': contains('Invalid character'),
+          },
           'failure': {
             'type': 'generated_source_error',
             'stage': 'execute_generated',
@@ -286,13 +397,13 @@ dependencies:
           final plan = buildGeneratedRulePlan(compiled);
           final topFamily = plan.first.family;
           expect(topFamily, item.family, reason: item.name);
-          expectedValues[item.name] = item.generatedV1Value ?? interpreterValue;
+          expectedValues[item.name] = interpreterValue;
           expectedFamilies[item.name] = item.family;
 
           final identity = 'generated-source/dart-family-${item.name}.spec';
           File(
             '${scratch.path}/lib/${item.name}.dart',
-          ).writeAsStringSync(emitDartSourceV1(compiled, identity));
+          ).writeAsStringSync(emitDartSourceV2(compiled, identity));
           imports.writeln(
             "import 'package:linkedspec_generated_family_matrix/"
             "${item.name}.dart' as ${item.name};",
@@ -426,15 +537,15 @@ dependencies:
           final plan = buildGeneratedRulePlan(compiled);
           expectedValues[caseName] = expected;
           expectedMetadata[caseName] = {
-            'contract_id': 'linkedspec-generated-source-v1',
-            'format_version': 1,
+            'contract_id': 'linkedspec-generated-source-v2',
+            'format_version': 2,
             'source_identity': identity,
           };
           expectedPlans[caseName] = [for (final row in plan) row.toJson()];
 
           File(
             '${scratch.path}/lib/case_$index.dart',
-          ).writeAsStringSync(emitDartSourceV1(compiled, identity));
+          ).writeAsStringSync(emitDartSourceV2(compiled, identity));
           imports.writeln(
             "import 'package:linkedspec_generated_subset/case_$index.dart' "
             'as case$index;',
@@ -631,7 +742,6 @@ B: /b/
     name: 'rep_bcode_case',
     family: 'rep_bcode',
     input: 'abab',
-    generatedV1Value: ['A', 'A', 'B'],
     spec: r'''
 Top::OR{2,3}
  I { set(out, []) }
@@ -681,14 +791,12 @@ final class _FamilyCase {
     required this.family,
     required this.input,
     required this.spec,
-    this.generatedV1Value,
   });
 
   final String name;
   final String family;
   final String input;
   final String spec;
-  final Object? generatedV1Value;
 }
 
 CompiledSpec _compileProbe() {

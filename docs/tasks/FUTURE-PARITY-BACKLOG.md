@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart cursor descriptor projection `.9.1.5.3` is complete with full signoff and
-  awaits its clean commit boundary before generated-source v2 `.9.1.5.4`)
+- Last updated: `2026-07-18` (Dart cursor descriptor projection `.9.1.5.3` is committed at `39338616`;
+  generated-source v2 `.9.1.5.4` has full signoff and awaits its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3996,10 +3996,11 @@ before implementation.
     surface; remove legacy public and command options with exact diagnostics; consume descriptor/generated v2;
     migrate fixtures/callers; and prove native, normalized emitted, reconstructed plan, trace, recursion, loaded-
     spec, and primary-command parity against the unchanged neutral contract.
-  Verification: Child `.0` owns the completed read-only preflight and safe split. Normalization `.1` is done with
-    typed family/bare-edge representation, derived compiled ownership, exact portable validation diagnostics, an
-    explicit legacy runtime staging adapter, and canonical signoff. Children `.2-.6` retain execution, descriptor,
-    generated, option/CLI, and composed-admission ownership.
+  Verification: Child `.0` owns the completed read-only preflight and safe split. Normalization `.1`, rule-local
+    execution `.2`, cursor descriptor v1 `.3`, and generated-source v2 `.4` are done in dependency order; `.4`
+    retains exact minimal label/family plans and reconstructs cursor/structure from each validated family with full
+    focused/governance/canonical signoff. Children `.5-.6` retain public option/CLI migration and composed-admission
+    ownership.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.0`
@@ -4202,15 +4203,56 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.3 - project Dart cursor descriptor v1`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Emit and reconstruct Dart generated-source v2 from the minimal family plan.
   Dependencies: `.9.1.5.3`
   Acceptance: Identify v2/format 2, retain only ordered label/family rows, derive policy from all ten families with
     no serialized cursor field, reject v1 reconstruction with exact expected/actual contract and regeneration
     guidance, and prove deterministic emission, fresh host compile/load, direct/traced execution, all families,
     source identity, corpus subset, and exhaustive classifier breadth.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, neutral generated-source v2, admitted
+    Perl/Rust implementations, and exact Dart emitter/loader/runtime seams; reproduce v1 format and execution drift
+    before implementation edits.
+  - [x] **EMIT MINIMAL V2 PLAN** — Identify contract v2/format 2, serialize only ordered label/family rows, derive
+    policy and structure from all ten generated families, and remove serialized/global cursor ownership.
+  - [x] **RECONSTRUCT / REJECT EXACTLY** — Reconstruct v2 through a fresh host process, reject v1 with exact
+    expected/actual portable contract plus regeneration guidance, and preserve exact source identity.
+  - [x] **COMPOSE EXECUTION PROOF** — Prove deterministic bytes, direct/traced execution, every family, nested
+    composition, exhaustive classifier breadth, and a representative corpus subset across emitted/fresh-loaded
+    code.
+  - [x] **FREEZE LATER LEAVES / SIGNOFF** — Leave public/global option and shared primary migration for `.5` and
+    composed admission for `.6`; synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, changes/notes,
+    and pass focused/complete Dart plus neutral/governance/canonical signoff before commit.
+  Verification: Activated task-tree-first only after clean descriptor commit `39338616`. Knowledge Map retrieval
+    followed ADR `0044`, the shared v1 semantic ledger, the admitted Perl/Rust v2 designs, and exact Dart emitter,
+    generated-plan, normalized-state, runtime, host-isolation, diagnostic, and recurring-checker seams. After the
+    toolbox check found no Dart-specific generated-source dump, a disposable Dart probe reproduced the exact
+    pre-edit boundary: `linkedspec-generated-source-v1` / format 1, `Top=and_single_acode`, no v2 identity, and
+    generated-v1 AND returning `hit` for `prefix x` where normal rule-local execution returned null. The probe was
+    removed before implementation.
+
+    Dart now emits `linkedspec-generated-source-v2` / format 2. The deterministic plan remains exactly ordered
+    `label`/`family` rows with no cursor field. `GeneratedRuleFamily.cursorPolicy` derives seek for default, OR,
+    and repetition families and consume for all five AND families; structural acode/bcode and choice/sequence
+    execution derive from the same validated family at each entered rule. Compact `Pipe` classifies as `or_acode`.
+    Public versioned entrypoints advance to v2 while the unversioned emitter remains the current adapter. Emitted
+    modules validate the contract before touching their lazy Base64 normalized-state payload. An isolated host with
+    a deliberately corrupt payload proves v1 fails first at `validate_generated_plan` with exact expected/actual
+    contracts and `.spec` regeneration guidance, while current v2 proceeds to the separate compile/load failure.
+
+    All ten families, all 36 authored classifier spellings, eight parent/child mechanisms, two structural
+    replacements, direct/traced values, source identity, deterministic bytes, accepted 8/105 subset, and adjacent
+    diagnostic/logical/named-mark/variadic/punctuation/uniform-binding generated roles use v2. Strict analysis
+    passes; the affected nine-suite proof is 76/76; complete package proof reaches 257 passes plus only the staged
+    shared-help failure; corpus is 105/105; primary remains the exact expected 30/63 in default and POSIX pending
+    `.5`. The generated-source v1 semantic ledger passes with Dart's current v2 role, neutral cursor stays 68
+    governed files / 3-of-5 / 34 mutations, and the logical recurring checker passes 8/0 plus 26 mutations. The
+    Knowledge Map passes at 592 facts / 4,215 question keys; memory architecture, task metadata, all four doctrines,
+    mdBook, formatting, strict analysis, and whitespace pass. Canonical CI repeats Perl cursor admission 288,
+    reference primary 63/63 in both environments, passes Phase 0 1,031/1,031 in 641 seconds, and exits 0. Public/
+    CLI global option migration and composed admission remain untouched for `.5-.6`.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.4 - emit Dart generated-source v2`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.5`
   Status: `pending`
@@ -6530,9 +6572,10 @@ consumer, advances only Rust to 3/5, and closes parent `.9.1.4` at `288da21a` af
 Dart `.9.1.5.0` records the exact eleven-path/non-token audit and dependency-safe `.1-.6` split. Normalization
 `.9.1.5.1` is committed at `fc31fc12`; live/loaded/reconstructed execution `.9.1.5.2` is committed at `7dea1f6b`
 after focused/complete Dart, 105 corpus, neutral 68-file/34-mutation, Knowledge Map, governance, mdBook, and
-canonical Phase 0 1,031/1,031 proof. Descriptor projection `.9.1.5.3` is complete with the same layered signoff:
-root global-mode metadata is gone, normalized rule/edge/source facts are current, and generated/public/admission
-surfaces remain staged. Generated-source v2 `.9.1.5.4` activates only after the clean descriptor commit boundary.
+canonical Phase 0 1,031/1,031 proof. Descriptor projection `.9.1.5.3` is committed at `39338616`: root global-mode
+metadata is gone and normalized rule/edge/source facts are current. Generated-source v2 `.9.1.5.4` has full
+focused/complete/governance/mdBook/canonical signoff and awaits its clean commit; public/admission surfaces remain
+staged, with `.9.1.5.5` next only after that clean boundary.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6783,12 +6826,12 @@ surfaces remain staged. Generated-source v2 `.9.1.5.4` activates only after the 
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.2` are committed, descriptor `.3` is complete awaiting its clean commit, and generated v2 `.4` follows only after that pivot. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.3` are committed and generated-source v2 `.4` has full signoff awaiting its clean commit. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
 | 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
 | 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `done` | Every normal live/loaded/reconstructed rule entry derives its own cursor and structural policy; full signoff passes. |
 | 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `done` | Cursor descriptor v1 projects normalized family/policy/ownership/edge/source facts and passes full signoff. |
-| 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `pending` | Emit/reconstruct minimal generated-source v2 and reject v1. |
+| 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `pending` | Remove public/global overrides and reach exact shared primary 63x2. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `pending` | Compose Dart admission, advance only Dart, and close the parent. |
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
@@ -7836,6 +7879,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Dart `.9.1.5.4` emits generated-source v2/format 2 from normalized `SpecFile` state plus an exact
+  ordered label/family plan, derives seek/consume and choice/sequence/acode/bcode at every generated rule entry,
+  corrects compact Pipe to OR, and removes the generated-v1 runtime exception. A fresh corrupt-payload host proves
+  v1 rejection occurs before decode with exact expected/actual contracts and regeneration guidance. Affected
+  generated roles pass 76/76, the complete package reaches the staged 257/1 boundary, corpus stays 105/105, and
+  primary remains the expected 30/63x2 until `.5`. Neutral remains 68/3-of-5/34, governance/mdBook pass, and
+  canonical CI repeats Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 641 seconds.
+- `2026-07-18`: Clean commit `39338616` lands Dart cursor descriptor v1 `.9.1.5.3`; the tree, zero-byte brief,
+  and generated-artifact boundary are verified clean, and generated-source v2 `.9.1.5.4` activates task-tree-first
+  before retrieval or implementation edits.
 - `2026-07-18`: Dart `.9.1.5.3` removes root global-mode descriptor metadata and projects cursor-v1 identity plus
   exact normalized family/policy/ownership/resolved-edge/source facts without a descriptor decoder or mutable
   cursor field. Direct, normalized-JSON, and loaded projections agree; reconstructed invalid state retains every

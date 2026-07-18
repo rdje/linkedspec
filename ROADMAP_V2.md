@@ -167,8 +167,10 @@ and exposes the portable diagnostic envelope. Dart execution `.9.1.5.2` removes 
 derives cursor plus sequence/choice policy independently at every normal live, loaded, normalized-JSON, nested,
 recursive, and traced rule entry. Descriptor `.3` is now implemented: root metadata identifies
 `linkedspec-rule-local-cursor-v1`, every rule projects family/policy/ownership/ordered semantic edges, and direct,
-normalized-JSON, and loaded projections agree. Generated v1 retains its bounded compatibility behavior until
-`.4`; generated v2, option/CLI removal, and admission remain staged under `.4-.6`.
+normalized-JSON, and loaded projections agree. Generated v1 retained its bounded compatibility behavior through
+`.3`; `.4` is now implemented and emits v2/format 2 with cursor-free ordered label/family rows, derives policy and
+structure from all ten families, rejects v1 exactly, and passes fresh-host/direct/trace/family/subset proof. Public
+option/CLI removal and admission remain staged under `.5-.6`.
 identical dependency-regex index identity is tracked under `.9.1.8.1` before public closeout.
 
 The first exhaustive `.4.3.9.0` pass now measures every admitted Lua name: 230 reach an owner, thirteen are

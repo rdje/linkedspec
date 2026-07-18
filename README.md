@@ -38,8 +38,10 @@ failures. Dart execution `.9.1.5.2` removes the compiled legacy adapter and deri
 plus sequence/choice independently at each normal live, loaded, normalized-JSON, recursive, and traced rule entry.
 Dart descriptor `.9.1.5.3` now removes root global-mode metadata and projects the neutral cursor-v1 identity plus
 per-rule family, derived policy, ownership, ordered resolved edges, and source identity from normalized compiled
-state; direct, normalized-JSON, and loaded projections agree. Generated-source v1 remains intentionally compatible
-until `.4`; generated-source v2, option/CLI removal, and composed admission remain owned in order by `.9.1.5.4-.6`.
+state; direct, normalized-JSON, and loaded projections agree. Generated-source `.9.1.5.4` now emits v2/format 2,
+retains only ordered label/family plan rows, and derives cursor plus structure from all ten families across direct,
+traced, and fresh-loaded roles. A v1 artifact fails with exact contract identities and `.spec` regeneration
+guidance. Option/CLI removal and composed admission remain owned in order by `.9.1.5.5-.6`.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

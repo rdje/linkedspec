@@ -64,7 +64,7 @@ void main() {
     final plan = buildGeneratedRulePlan(invalid);
 
     expect(
-      () => emitDartSourceV1(invalid, 'selector-generated.spec'),
+      () => emitDartSourceV2(invalid, 'selector-generated.spec'),
       throwsA(
         isA<GeneratedSourceException>()
             .having(
@@ -87,7 +87,7 @@ void main() {
 
     expect(
       () =>
-          validateGeneratedRulePlanV1(invalid, plan, 'selector-generated.spec'),
+          validateGeneratedRulePlanV2(invalid, plan, 'selector-generated.spec'),
       throwsA(
         isA<GeneratedSourceException>()
             .having(
@@ -321,7 +321,7 @@ Done::
 
     GeneratedSourceException? generatedError;
     try {
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         compiled,
         buildGeneratedRulePlan(compiled),
         'xx',
@@ -468,7 +468,7 @@ void _expectNativeAndGenerated(
     reason: 'native execution',
   );
   expect(
-    executeGeneratedParserV1(
+    executeGeneratedParserV2(
       compiled,
       buildGeneratedRulePlan(compiled),
       input,

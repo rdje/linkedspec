@@ -2047,8 +2047,10 @@ Dart cursor descriptor v1 is also current: root metadata identifies
 derived cursor policy, normalized ownership, and exact ordered semantic edge
 rows from compiled state. Direct, normalized `SpecFile`-JSON, and file-loaded
 projections agree; the descriptor carries no independent cursor field and has
-no decoder that could override runtime behavior. Generated-source v1 remains a
-separate bounded compatibility surface until `.9.1.5.4`.
+no decoder that could override runtime behavior. Generated-source v2 is now
+current too: fresh emitted modules retain only ordered label/family rows, derive
+all ten cursor/structure policies, and reject v1 before payload reconstruction
+with exact contract identities and `.spec` regeneration guidance.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

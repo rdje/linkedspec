@@ -163,7 +163,7 @@ void main() {
 
     final plan = buildGeneratedRulePlan(compiled);
     expect(
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         compiled,
         plan,
         input,
@@ -172,11 +172,11 @@ void main() {
       expected,
     );
 
-    final generated = emitDartSourceV1(
+    final generated = emitDartSourceV2(
       compiled,
       'punctuation-light-zero-arg.spec',
     );
-    expect(generated, contains('linkedspec-generated-source-v1'));
+    expect(generated, contains('linkedspec-generated-source-v2'));
     final encoded = RegExp(
       "const _compiledSpecJsonBase64 = '([^']+)';",
     ).firstMatch(generated)![1]!;

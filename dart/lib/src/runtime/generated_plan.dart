@@ -1,4 +1,6 @@
-/// Contract-v1 generated rule families shared by emission and execution.
+import 'matching.dart';
+
+/// Contract-v2 generated rule families shared by emission and execution.
 enum GeneratedRuleFamily {
   defaultFamily('default', usesBlindDispatch: false),
   orAcode('or_acode', usesBlindDispatch: false),
@@ -15,6 +17,25 @@ enum GeneratedRuleFamily {
 
   final String wireName;
   final bool usesBlindDispatch;
+
+  /// Derive cursor policy from the validated neutral family row.
+  LinkedSpecParseMode get cursorPolicy {
+    return switch (this) {
+      defaultFamily ||
+      orAcode ||
+      orBcode ||
+      repAcode ||
+      repBcode => LinkedSpecParseMode.seek,
+      andSingleAcode ||
+      andAcodeSeq ||
+      andBcode ||
+      repAndAcode ||
+      repAndBcode => LinkedSpecParseMode.consume,
+    };
+  }
+
+  /// Derive sequence/choice structure from the validated neutral family row.
+  bool get usesAndExecution => cursorPolicy == LinkedSpecParseMode.consume;
 
   static GeneratedRuleFamily? fromWireName(String wireName) {
     for (final family in values) {

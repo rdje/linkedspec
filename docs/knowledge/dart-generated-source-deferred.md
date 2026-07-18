@@ -10,11 +10,12 @@ answers:
   - "how does Dart embed Unicode generated spec state"
   - "where is the Dart generated-source compile run harness"
   - "does Dart generated source preserve punctuation light aliases"
+  - "what generated source contract version does Dart currently emit"
 date: 2026-07-13
 status: current
 tags: [dart, codegen, source-emitter, corpus, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.2 deferred codegen; FUTURE-PARITY-BACKLOG.3.3 later closes deterministic source, family routing, isolation, and admission. FUTURE-PARITY-BACKLOG.4.3.1 carries typed variadic signatures through normalized emitted Base64 state, generated-plan execution, and reconstruction. FUTURE-PARITY-BACKLOG.16.4 proves punctuation-light typed AST equivalence plus exact native, generated-plan, emitted-state reconstruction, and CLI results; the complete 211/61x2/105 gate passes."
-reverify: "cd dart && dart test test/source_emitter_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.3\\.3|emitDartSourceV1|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
+evidence: "DART-BACKEND-PARITY.7.2 deferred codegen; FUTURE-PARITY-BACKLOG.3.3 later closes deterministic source, family routing, isolation, and admission. FUTURE-PARITY-BACKLOG.9.1.5.4 advances current emission to v2/format 2 with family-derived rule-local cursor semantics and exact v1 rejection before payload decoding. FUTURE-PARITY-BACKLOG.4.3.1 carries typed variadic signatures through normalized emitted Base64 state, generated-plan execution, and reconstruction. FUTURE-PARITY-BACKLOG.16.4 proves punctuation-light typed AST equivalence plus exact native, generated-plan, emitted-state reconstruction, and CLI results."
+reverify: "cd dart && dart test test/source_emitter_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.9\\.1\\.5\\.4|emitDartSourceV2|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
 ---
 
 Generated Dart source now exists as a public scaffold. It was not required for
@@ -48,6 +49,12 @@ Punctuation-light zero-argument aliases reuse the same typed state rather than c
 The `.16.4` contract reconstructs emitted Base64 normalized state and returns the same exact fixture value as the
 native and generated-plan paths.
 
+Current Dart emission is `linkedspec-generated-source-v2` / format 2 under
+`.9.1.5.4`. Its plan remains exactly ordered `label`/`family` rows; execution
+derives rule-local cursor and composition policy from each validated family.
+Persisted v1 Dart artifacts must be regenerated from their `.spec` source.
+
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[dart-backend-interpreter-first-plan]], [[rust-source-emitter-lane-split]],
-[[rust-generated-source-corpus-subset]], [[dart-mdbook-usage-status]].
+[[rust-generated-source-corpus-subset]],
+[[dart-generated-source-v2-rule-local-cursor]], [[dart-mdbook-usage-status]].

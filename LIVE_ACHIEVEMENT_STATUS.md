@@ -8,6 +8,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.4 — emit Dart generated-source v2**
+  (DONE — exact v2 identity, minimal family plan, derived execution, v1-before-decode rejection, affected-role
+  proof, complete lockstep, governance, mdBook, and canonical signoff pass before the clean commit boundary).
+
+  **Goal:** Advance Dart generated source to rule-local cursor semantics without serializing a second cursor state.
+
+  **Result:** Current artifacts identify v2/format 2 and retain exactly ordered label/family rows. Every validated
+  family derives cursor and structural policy; compact Pipe is OR; nested rules select their own row. V1 fails at
+  plan validation with exact expected/actual ids and regeneration guidance before the lazy payload is decoded.
+
+  **Proof:** A deliberately corrupt fresh-host artifact proves mismatch-before-decode and separate v2 payload
+  failure. All ten families, 36 classifier spellings, eight parent/child mechanisms, both structural replacements,
+  direct/trace, accepted subset, and adjacent generated roles pass. Affected tests are 76/76; strict analysis
+  passes; full Dart is the staged 257/1 boundary; corpus is 105/105; primary is the expected 30/63x2 until `.5`.
+  Neutral remains 68/3-of-5/34 and the Knowledge Map is synchronized at 592/4,215. Memory/task/doctrine/mdBook/
+  whitespace checks pass. Canonical CI repeats Perl cursor admission 288, reference primary 63x2, and Phase 0
+  1,031/1,031 in 641 seconds before exiting 0.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.3 — project Dart cursor descriptor v1**
   (DONE — descriptor root/rule global metadata is replaced by pure normalized cursor-v1 facts; generated
   v1/public/admission surfaces remain staged; complete Dart, governance, mdBook, and canonical signoff pass before

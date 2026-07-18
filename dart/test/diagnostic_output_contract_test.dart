@@ -263,7 +263,7 @@ void main() {
     final outcome = (expected['outcome']! as Map).cast<String, Object?>();
 
     final events = <RuntimeDiagnosticOutputEvent>[];
-    final value = executeGeneratedParserV1(
+    final value = executeGeneratedParserV2(
       compiled,
       plan,
       'x',
@@ -274,7 +274,7 @@ void main() {
     expect(_eventJson(events), expected['events']);
 
     final tracedEvents = <RuntimeDiagnosticOutputEvent>[];
-    final traced = executeGeneratedParserWithTraceV1(
+    final traced = executeGeneratedParserWithTraceV2(
       compiled,
       plan,
       'x',
@@ -295,7 +295,7 @@ void main() {
     final failure = _CallerSinkFailure('generated-caller-sink-failure');
     var invocation = 0;
     try {
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         failureCompiled,
         buildGeneratedRulePlan(failureCompiled),
         'x',
@@ -322,7 +322,7 @@ void main() {
     final exitCompiled = compileSpec(exitParsed);
     final exitEvents = <RuntimeDiagnosticOutputEvent>[];
     try {
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         exitCompiled,
         buildGeneratedRulePlan(exitCompiled),
         'x',

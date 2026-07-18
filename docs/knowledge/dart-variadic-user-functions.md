@@ -28,6 +28,6 @@ resolution reject keyword arguments for registered functions, so Dart named-argu
 stores, binds fixed params, and uses the ordinary deep-copying parameter binder to store a newly allocated list of
 all extras under the rest name. Empty, nested, hash, boolean, and null values preserve their shapes.
 
-`emitDartSourceV1` needs no host-specific rest logic: `SpecFile.toJson()` emits the v1/v2 union into its strict
+`emitDartSourceV2` needs no host-specific rest logic: `SpecFile.toJson()` emits the v1/v2 union into its strict
 UTF-8/Base64 payload, and the generated library reconstructs `SpecFile.fromJson()` before compiling and executing
 the same runtime. The neutral fixture passes both direct generated-plan execution and this serialization round-trip.

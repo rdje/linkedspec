@@ -43,13 +43,13 @@ bash ../tools/run_dart_local.sh
 
 ## Generated source
 
-`emitDartSourceV1(compiled, sourceIdentity)` emits a deterministic Dart library
+`emitDartSourceV2(compiled, sourceIdentity)` emits a deterministic Dart library
 with contract/format/identity metadata plus ordinary and traced direct-value
 entrypoints. `emitDartSource(compiled)` is the `<inline>` compatibility adapter.
 
 ```dart
 final compiled = compileSpec(parseSpec(source));
-final generated = emitDartSourceV1(compiled, 'specs/example.spec');
+final generated = emitDartSourceV2(compiled, 'specs/example.spec');
 ```
 
 Write `generated` as UTF-8 into a caller-owned Dart package that depends on
@@ -57,10 +57,14 @@ Write `generated` as UTF-8 into a caller-owned Dart package that depends on
 Unicode Dart source; normalized spec state is strict-UTF-8/Base64 data inside
 it. Structured failures use `GeneratedSourceException.toJson()`.
 
-Generated libraries expose `plan()` and `validatePlan(...)`. All ten neutral
-families route directly through validated per-rule structural dispatch, and
-count/label/family/unknown-family drift fails before execution. The recurring
-admission test also reads and passes the contract's exact eight-case subset.
+Generated libraries expose `plan()`, `validatePlan(...)`, and
+`validatePlanForContract(...)`. V2/format 2 plan rows contain exactly `label`
+and `family`; cursor policy is never serialized. All ten neutral families derive
+seek/consume plus choice/sequence directly during validated execution.
+Count/label/family/unknown-family drift fails before execution, while a v1
+contract fails before payload reconstruction with expected/actual contract ids
+and guidance to regenerate from the original `.spec`. The recurring admission
+test also reads and passes the contract's exact eight-case subset.
 
 ## Status
 
@@ -68,7 +72,10 @@ admission test also reads and passes the contract's exact eight-case subset.
 closes exact ten-family plan/direct execution and four plan rejections;
 `.3.3.3` admits the exact interpreter-first eight-case generated proof. Focused
 6/6 and complete format/analyze/181 tests/61x2 CLI/105 corpus pass. Dart now
-passes the complete current capability census.
+passes the complete current capability census. Later cursor migration
+`.9.1.5.4` advances current emitted/generated direct/traced roles from v1 to v2
+without changing that admitted semantic capability; public option removal and
+composed cursor admission remain `.9.1.5.5-.6`.
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
 `FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:

@@ -7,10 +7,10 @@ import 'runtime/interpreter.dart';
 import 'trace/trace.dart';
 
 /// Backend-neutral generated-source contract implemented by this emitter.
-const linkedSpecGeneratedSourceContract = 'linkedspec-generated-source-v1';
+const linkedSpecGeneratedSourceContract = 'linkedspec-generated-source-v2';
 
 /// Version of the generated Dart source scaffold.
-const linkedSpecGeneratedSourceFormatVersion = 1;
+const linkedSpecGeneratedSourceFormatVersion = 2;
 
 final class _GeneratedDiagnosticOutputSinkFailure implements Exception {
   const _GeneratedDiagnosticOutputSinkFailure(this.error, this.stackTrace);
@@ -54,6 +54,9 @@ enum GeneratedSourceCode {
   generatedPlanLabelMismatch('generated_plan_label_mismatch'),
   generatedPlanFamilyMismatch('generated_plan_family_mismatch'),
   generatedPlanUnknownFamily('generated_plan_unknown_family'),
+  generatedSourceContractVersionMismatch(
+    'generated_source_contract_version_mismatch',
+  ),
   generatedExecutionFailed('generated_execution_failed');
 
   const GeneratedSourceCode(this.wireName);
@@ -71,6 +74,8 @@ final class GeneratedSourceException implements Exception {
     this.ruleLabel,
     this.handlerFamily,
     this.detail,
+    this.expectedContract,
+    this.actualContract,
   });
 
   factory GeneratedSourceException.emitFailed(
@@ -124,6 +129,8 @@ final class GeneratedSourceException implements Exception {
   final String? ruleLabel;
   final String? handlerFamily;
   final String? detail;
+  final String? expectedContract;
+  final String? actualContract;
 
   JsonObject toJson() {
     return {
@@ -135,6 +142,8 @@ final class GeneratedSourceException implements Exception {
       if (ruleLabel != null) 'rule_label': ruleLabel,
       if (handlerFamily != null) 'handler_family': handlerFamily,
       if (detail != null) 'detail': detail,
+      if (expectedContract != null) 'expected_contract': expectedContract,
+      if (actualContract != null) 'actual_contract': actualContract,
     };
   }
 
@@ -166,7 +175,7 @@ final class GeneratedSourceMetadata {
   }
 }
 
-/// Classify one compiled rule into the exact contract-v1 structural family.
+/// Classify one compiled rule into the exact contract-v2 structural family.
 GeneratedRuleFamily classifyGeneratedRuleFamily(CompiledRule rule) {
   final mode = rule.modeMetadata.name;
   final isRepetition = switch (mode) {
@@ -192,16 +201,16 @@ GeneratedRuleFamily classifyGeneratedRuleFamily(CompiledRule rule) {
   }
 
   if (rule.blindEdges.isNotEmpty) {
-    return mode == 'Or'
-        ? GeneratedRuleFamily.orBcode
-        : GeneratedRuleFamily.andBcode;
+    return rule.modeMetadata.isAnd
+        ? GeneratedRuleFamily.andBcode
+        : GeneratedRuleFamily.orBcode;
   }
 
   return switch (mode) {
     'Default' => GeneratedRuleFamily.defaultFamily,
-    'Or' => GeneratedRuleFamily.orAcode,
+    'Or' || 'Pipe' => GeneratedRuleFamily.orAcode,
     'Single' => GeneratedRuleFamily.andSingleAcode,
-    'And' || 'Pipe' =>
+    'And' =>
       rule.regexPatterns.length <= 1 && rule.actionEdges.length <= 1
           ? GeneratedRuleFamily.andSingleAcode
           : GeneratedRuleFamily.andAcodeSeq,
@@ -222,25 +231,48 @@ List<GeneratedPlanRow> buildGeneratedRulePlan(CompiledSpec compiled) {
   ]);
 }
 
-/// Validate an exposed contract-v1 plan before generated execution.
-void validateGeneratedRulePlanV1(
-  CompiledSpec compiled,
-  List<GeneratedPlanRow> generatedPlan,
+/// Validate the artifact contract before payload reconstruction or execution.
+void validateGeneratedSourceContractV2(
+  String actualContract,
   String sourceIdentity,
 ) {
-  _validatedGeneratedRulePlanV1(compiled, generatedPlan, sourceIdentity);
+  if (actualContract == linkedSpecGeneratedSourceContract) {
+    return;
+  }
+  throw GeneratedSourceException(
+    stage: GeneratedSourceStage.validateGeneratedPlan,
+    code: GeneratedSourceCode.generatedSourceContractVersionMismatch,
+    summary: 'Generated source contract does not match the active validator',
+    sourceIdentity: sourceIdentity,
+    detail: 'regenerate the generated artifact from its .spec source',
+    expectedContract: linkedSpecGeneratedSourceContract,
+    actualContract: actualContract,
+  );
+}
+
+/// Validate an exposed contract-v2 plan before generated execution.
+void validateGeneratedRulePlanV2(
+  CompiledSpec compiled,
+  List<GeneratedPlanRow> generatedPlan,
+  String sourceIdentity, {
+  String actualContract = linkedSpecGeneratedSourceContract,
+}) {
+  validateGeneratedSourceContractV2(actualContract, sourceIdentity);
+  _validatedGeneratedRulePlanV2(compiled, generatedPlan, sourceIdentity);
 }
 
 /// Execute through a validated generated structural-family plan.
-Object? executeGeneratedParserV1(
+Object? executeGeneratedParserV2(
   CompiledSpec compiled,
   List<GeneratedPlanRow> generatedPlan,
   String input,
   String sourceIdentity, {
   String? topRule,
+  String actualContract = linkedSpecGeneratedSourceContract,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
-  final validated = _validatedGeneratedRulePlanV1(
+  validateGeneratedSourceContractV2(actualContract, sourceIdentity);
+  final validated = _validatedGeneratedRulePlanV2(
     compiled,
     generatedPlan,
     sourceIdentity,
@@ -284,16 +316,18 @@ Object? executeGeneratedParserV1(
 }
 
 /// Execute through a validated plan while emitting native and portable trace.
-Object? executeGeneratedParserWithTraceV1(
+Object? executeGeneratedParserWithTraceV2(
   CompiledSpec compiled,
   List<GeneratedPlanRow> generatedPlan,
   String input,
   LinkedSpecTraceConfig traceConfig,
   String sourceIdentity, {
   String? topRule,
+  String actualContract = linkedSpecGeneratedSourceContract,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
-  final validated = _validatedGeneratedRulePlanV1(
+  validateGeneratedSourceContractV2(actualContract, sourceIdentity);
+  final validated = _validatedGeneratedRulePlanV2(
     compiled,
     generatedPlan,
     sourceIdentity,
@@ -339,15 +373,15 @@ Object? executeGeneratedParserWithTraceV1(
 
 /// Emit a generated Dart library for [compiled] using the compatibility identity.
 String emitDartSource(CompiledSpec compiled) {
-  return emitDartSourceV1(compiled, '<inline>');
+  return emitDartSourceV2(compiled, '<inline>');
 }
 
-/// Emit a deterministic contract-v1 Dart library from compiled parser state.
+/// Emit a deterministic contract-v2 Dart library from compiled parser state.
 ///
 /// The generated library reconstructs a normalized effective specification from
 /// the compiled state. Its embedded payload is strict UTF-8 represented as
 /// Base64, so arbitrary Unicode and Dart interpolation characters are safe.
-String emitDartSourceV1(CompiledSpec compiled, String sourceIdentity) {
+String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
   if (sourceIdentity.isEmpty) {
     throw GeneratedSourceException.emitFailed(
       sourceIdentity,
@@ -393,8 +427,8 @@ String emitDartSourceV1(CompiledSpec compiled, String sourceIdentity) {
     }
 
     return '''// Generated LinkedSpec parser library.
-// Contract id: linkedspec-generated-source-v1.
-// Source format: linkedspec_dart source_emitter v1.
+// Contract id: linkedspec-generated-source-v2.
+// Source format: linkedspec_dart source_emitter v2.
 // Source identity: linkedspecGeneratedSourceIdentity.
 
 import 'dart:convert';
@@ -402,8 +436,8 @@ import 'dart:convert';
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 
 const linkedspecGeneratedSourceContract =
-    'linkedspec-generated-source-v1';
-const linkedspecGeneratedSourceFormat = 1;
+    'linkedspec-generated-source-v2';
+const linkedspecGeneratedSourceFormat = 2;
 const linkedspecGeneratedSourceIdentity = $identityLiteral;
 const _compiledSpecJsonBase64 = '$specJsonBase64';
 const _generatedPlan = <GeneratedPlanRow>[
@@ -439,10 +473,22 @@ final _compiledSpec = _loadCompiledSpec();
 List<GeneratedPlanRow> plan() => _generatedPlan;
 
 void validatePlan(List<GeneratedPlanRow> actual) {
-  validateGeneratedRulePlanV1(
+  validatePlanForContract(actual, linkedspecGeneratedSourceContract);
+}
+
+void validatePlanForContract(
+  List<GeneratedPlanRow> actual,
+  String actualContract,
+) {
+  validateGeneratedSourceContractV2(
+    actualContract,
+    linkedspecGeneratedSourceIdentity,
+  );
+  validateGeneratedRulePlanV2(
     _compiledSpec,
     actual,
     linkedspecGeneratedSourceIdentity,
+    actualContract: actualContract,
   );
 }
 
@@ -451,12 +497,17 @@ Object? execute(
   String? topRule,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
-  return executeGeneratedParserV1(
+  validateGeneratedSourceContractV2(
+    linkedspecGeneratedSourceContract,
+    linkedspecGeneratedSourceIdentity,
+  );
+  return executeGeneratedParserV2(
     _compiledSpec,
     _generatedPlan,
     input,
     linkedspecGeneratedSourceIdentity,
     topRule: topRule,
+    actualContract: linkedspecGeneratedSourceContract,
     diagnosticOutputSink: diagnosticOutputSink,
   );
 }
@@ -467,13 +518,18 @@ Object? executeWithTrace(
   String? topRule,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
 }) {
-  return executeGeneratedParserWithTraceV1(
+  validateGeneratedSourceContractV2(
+    linkedspecGeneratedSourceContract,
+    linkedspecGeneratedSourceIdentity,
+  );
+  return executeGeneratedParserWithTraceV2(
     _compiledSpec,
     _generatedPlan,
     input,
     traceConfig,
     linkedspecGeneratedSourceIdentity,
     topRule: topRule,
+    actualContract: linkedspecGeneratedSourceContract,
     diagnosticOutputSink: diagnosticOutputSink,
   );
 }
@@ -489,7 +545,7 @@ Object? executeWithTrace(
   }
 }
 
-Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV1(
+Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV2(
   CompiledSpec compiled,
   List<GeneratedPlanRow> generatedPlan,
   String sourceIdentity,

@@ -107,8 +107,8 @@ assert_eq!(host_failure.source_identity, "specs/example.spec");
 # Ok::<(), Box<dyn std::error::Error>>(())
 ```
 
-Dart now has the contract-v1 scaffold too. Native callers pass the compiled
-state and identity to `emitDartSourceV1(...)`; `emitDartSource(...)` is the
+Dart now emits current contract-v2 source. Native callers pass the compiled
+state and identity to `emitDartSourceV2(...)`; `emitDartSource(...)` is the
 `<inline>` compatibility adapter. The emitter uses the effective compiled
 function/rule order to build a normalized specification, then emits a Dart
 library with metadata plus `execute(...)` and `executeWithTrace(...)` direct-
@@ -117,7 +117,7 @@ requested rule when available.
 
 ```dart
 final compiled = compileSpec(parseSpec(source));
-final generated = emitDartSourceV1(
+final generated = emitDartSourceV2(
   compiled,
   'specs/example.spec',
 );
@@ -139,11 +139,15 @@ The scaffold proof creates a caller-owned temporary package and private package
 cache, resolves offline, analyzes the emitted library, runs its direct result,
 checks structured execution failure, and deletes the package/cache.
 
-Dart now also emits `plan()` and `validatePlan(...)`. The ordered plan uses the
-same ten family strings listed above. Row-count, label, known-family mismatch,
-and unknown-family errors are distinct and occur before parser execution. Once
-validated, each typed family controls whether that rule takes the acode/regex
-or bcode/blind structural executor; the plan is not merely descriptive.
+Dart also emits `plan()`, `validatePlan(...)`, and
+`validatePlanForContract(...)`. The ordered plan uses the same ten family
+strings listed above and contains exactly `label` plus `family`; it carries no
+cursor field. Row-count, label, known-family mismatch, and unknown-family errors
+are distinct. A v1 contract fails before payload reconstruction with
+`generated_source_contract_version_mismatch`, exact expected/actual ids, and
+`.spec` regeneration guidance. Once validated, each typed family derives both
+seek/consume and whether that rule takes choice/sequence plus acode/regex or
+bcode/blind execution; the plan is executable authority, not merely descriptive.
 
 Generated traced execution adds `generated_rule_enter`,
 `generated_family_decision`, and `generated_rule_exit` beside Dart's richer

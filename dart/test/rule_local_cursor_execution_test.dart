@@ -145,32 +145,46 @@ Y:AND
 ];
 
 void main() {
-  test('executes every neutral composition live and reconstructed', () {
-    expect(
-      _parentChildCases.map((item) => item.id).toSet(),
-      _rows('parent_child_cases').map((row) => row['id']).toSet(),
-    );
-    expect(
-      _structuralCases.map((item) => item.id).toSet(),
-      _rows('structural_replacements').map((row) => row['id']).toSet(),
-    );
-
-    for (final item in [..._parentChildCases, ..._structuralCases]) {
-      final parsed = parseSpec(item.source);
-      final reconstructed = SpecFile.fromJson(
-        _jsonObject(jsonDecode(jsonEncode(parsed.toJson()))),
+  test(
+    'executes every neutral composition live reconstructed and generated',
+    () {
+      expect(
+        _parentChildCases.map((item) => item.id).toSet(),
+        _rows('parent_child_cases').map((row) => row['id']).toSet(),
       );
-      for (final (route, spec) in [
-        ('live', parsed),
-        ('normalized JSON', reconstructed),
-      ]) {
-        final result = LinkedSpecRuntimeEngine(
-          compileSpec(spec),
-        ).parse(item.input);
-        expect(result.value, item.expected, reason: '${item.id}: $route');
+      expect(
+        _structuralCases.map((item) => item.id).toSet(),
+        _rows('structural_replacements').map((row) => row['id']).toSet(),
+      );
+
+      for (final item in [..._parentChildCases, ..._structuralCases]) {
+        final parsed = parseSpec(item.source);
+        final reconstructed = SpecFile.fromJson(
+          _jsonObject(jsonDecode(jsonEncode(parsed.toJson()))),
+        );
+        for (final (route, spec) in [
+          ('live', parsed),
+          ('normalized JSON', reconstructed),
+        ]) {
+          final result = LinkedSpecRuntimeEngine(
+            compileSpec(spec),
+          ).parse(item.input);
+          expect(result.value, item.expected, reason: '${item.id}: $route');
+        }
+        final compiled = compileSpec(parsed);
+        expect(
+          executeGeneratedParserV2(
+            compiled,
+            buildGeneratedRulePlan(compiled),
+            item.input,
+            'rule-local-cursor/${item.id}.spec',
+          ),
+          item.expected,
+          reason: '${item.id}: generated v2',
+        );
       }
-    }
-  });
+    },
+  );
 
   test('every neutral family spelling spends its entered policy', () {
     final rows = _rows('family_cases');
@@ -203,6 +217,33 @@ void main() {
           expect(seeks, isFalse, reason: '$id: $route: $error');
           expect(error.message, contains('expected at least'));
         }
+      }
+
+      final compiled = compileSpec(parsed);
+      final generatedPlan = buildGeneratedRulePlan(compiled);
+      final topPlan = generatedPlan.singleWhere((plan) => plan.label == 'Top');
+      final generatedFamily = GeneratedRuleFamily.fromWireName(topPlan.family)!;
+      expect(
+        generatedFamily.cursorPolicy.name,
+        row['cursor_policy'],
+        reason: '$id: generated family policy',
+      );
+      for (final plan in generatedPlan) {
+        expect(plan.toJson().keys.toSet(), {'label', 'family'});
+      }
+      try {
+        final value = executeGeneratedParserV2(
+          compiled,
+          generatedPlan,
+          'prefix x',
+          'rule-local-cursor/$id.spec',
+          topRule: 'Top',
+        );
+        expect(value, seeks ? 'hit' : null, reason: '$id: generated v2');
+      } on GeneratedSourceException catch (error) {
+        expect(seeks, isFalse, reason: '$id: generated v2: $error');
+        expect(error.code, GeneratedSourceCode.generatedExecutionFailed);
+        expect(error.detail, contains('expected at least'));
       }
     }
   });
@@ -258,7 +299,7 @@ void main() {
     expect(scratch.existsSync(), isFalse);
   });
 
-  test('generated-source v1 retains its bounded compatibility behavior', () {
+  test('generated-source v2 derives policy from each family row', () {
     final andCompiled = compileSpec(
       parseSpec('Top::AND\n /x/ -> Top { return("hit") }\n'),
     );
@@ -267,13 +308,13 @@ void main() {
       isNull,
     );
     expect(
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         andCompiled,
         buildGeneratedRulePlan(andCompiled),
         'prefix x',
-        'cursor-v1-and.spec',
+        'cursor-v2-and.spec',
       ),
-      'hit',
+      isNull,
     );
 
     final pipeCompiled = compileSpec(
@@ -289,16 +330,16 @@ Y: /y/ E { return("y") }
     expect(LinkedSpecRuntimeEngine(pipeCompiled).parse('xy').value, 'x');
     expect(
       classifyGeneratedRuleFamily(pipeCompiled.rule('Top')!),
-      GeneratedRuleFamily.andBcode,
+      GeneratedRuleFamily.orBcode,
     );
     expect(
-      executeGeneratedParserV1(
+      executeGeneratedParserV2(
         pipeCompiled,
         buildGeneratedRulePlan(pipeCompiled),
         'xy',
-        'cursor-v1-pipe.spec',
+        'cursor-v2-pipe.spec',
       ),
-      'y',
+      'x',
     );
   });
 }

@@ -409,7 +409,7 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
     }
-    final executionPolicy = _executionPolicyFor(rule, context);
+    final executionPolicy = _executionPolicyFor(rule, generatedFamily);
 
     final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
     if (!context.activeRuleEntries.add(recursionKey)) {
@@ -526,16 +526,12 @@ final class LinkedSpecRuntimeEngine {
 
   _RuleExecutionPolicy _executionPolicyFor(
     CompiledRule rule,
-    _RuntimeExecutionContext context,
+    GeneratedRuleFamily? generatedFamily,
   ) {
-    if (context.generatedPlan != null) {
-      // Contract-v1 generated artifacts historically spend the engine-global
-      // cursor option and treat compact Pipe as AND. Generated-source v2 owns
-      // removing this bounded compatibility path.
+    if (generatedFamily != null) {
       return _RuleExecutionPolicy(
-        cursorPolicy: context.parseMode,
-        usesAndExecution:
-            rule.modeMetadata.isAnd || rule.modeMetadata.name == 'Pipe',
+        cursorPolicy: generatedFamily.cursorPolicy,
+        usesAndExecution: generatedFamily.usesAndExecution,
       );
     }
     return _RuleExecutionPolicy(
