@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` — root and cursor failures must remain separately owned):
+  Julia's raw 31/65 shared-primary result initially looks like a large root-selection gap, but case identity and
+  exact bytes prove two independent mechanisms. Twenty-two help/usage cases expose the still-accepted global
+  `--parse-mode`; eleven medium-or-higher request-trace cases expose the same legacy field. Those 33 failures are
+  owned by cursor rollout `.9.1.6`. Root selection owns exactly one primary failure: markerless source is rejected
+  by `_check_top_rule_exists` during compilation. Default/POSIX results are identical.
+
+  This separation changes the safe commit graph. Julia root core and routes can land before cursor migration
+  because their native state already has ordered rules and authored markers. Root admission cannot: its contract
+  requires exact shared 65x2 bytes, and claiming that result while 33 cursor-owned cases fail would be false.
+  Conversely, cursor migration's unchanged 65-case target includes markerless root selection, so it should not run
+  before the root resolver/routes exist. The acyclic order is `.4.1` core, `.4.2` routes, cursor `.9.1.6`, then
+  `.4.3` topology admission. The task dependencies now encode that order.
+
+  Keep selection state centralized in compiled definition order. `Parser.jl` already records `colon == "::"` as
+  `RuleHeader.is_top`; `CompiledSpec` preserves both `definition_order` and `compiled_rule_order`. Runtime's
+  private fallback already scans the first marker and then row zero, while an invocation-local selector wins
+  before it. The implementation leaf should move this decision to one compiled-state resolver rather than copy
+  it into loader, generated, or CLI adapters. It must check zero-rule structure before explicit lookup, preserve
+  strict's authored-edge-only graph, and publish the contract without rewriting per-rule `is_top`.
+
+  Adapter behavior identifies the route work precisely. Loaded source validates separately before compiling with
+  `validate_source=false`; normalized reconstruction enters normal validating `compile_spec`; emitted source's
+  `_load_compiled_spec()` also validates reconstructed JSON. Generated direct execution can run bypass-compiled
+  markerless state but collapses unknown selection into `GeneratedExecutionFailedCode`. High runtime trace names
+  only the effective rule at parse entry; low trace is silent and no event records requested/effective/basis.
+  `.4.2` should reuse the core resolver and repair only these wrappers/attribution boundaries.
+
+  A governance gap was found alongside the runtime map. `ROADMAP.md` and `ROADMAP_V2.md` were last touched by
+  neutral commit `7abbc593` and still claimed 1/7 after Perl, Rust, and Dart had advanced truth to 4/7. The root
+  checker locks semantic, topology, inventory, and rollout artifacts but does not require either roadmap, so all
+  34 mutations and canonical CI could pass around stale roadmap prose. The active behavior-free leaf repairs the
+  text; final public no-drift `.9.1.1.2.6` now explicitly owns adding both roadmaps to the recurring checker.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` — admission proves topology without cloning semantic tests):
   Dart's core and route suites already own the deep behavior: one compiled resolver, loader/JSON identity,
   generated failures and trace, and fresh emitted-package compile/run. The admission consumer therefore follows

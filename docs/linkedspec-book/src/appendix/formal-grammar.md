@@ -206,8 +206,12 @@ Dart accepts markerless sources and applies the same resolver across native, loa
 generated/emitted direct/traced, and primary execution. It reports portable zero/unknown failures, publishes
 immutable descriptor identity, retains generated v2/format-2 identity, traces the selection basis, and composes
 all 15 contract-declared admission roles exactly once. Julia and Lua still contain an unreachable markerless
-fallback behind marker-required validation. Until `.4-.6` close, use at least one `::` for portable cross-backend execution and pass an explicit
-selector when its identity matters.
+fallback behind marker-required validation. Julia's behavior-free preflight proves explicit ordinary override and
+first-marker default are already correct, while bypass-only markerless runtime selects row zero. Its exact shared
+primary result is 31/65 in both option environments: one root-owned markerless compile failure plus 33 separately
+owned legacy cursor help/usage/trace failures. Root core/routes `.4.1-.2`, cursor migration `.9.1.6`, and root
+admission `.4.3` are dependency-ordered accordingly. Until `.4-.6` close, use at least one `::` for portable
+cross-backend execution and pass an explicit selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
@@ -1025,7 +1029,9 @@ and Rust envelopes from the temporary cross-backend boundary while `.9.1.1.2.2-.
 1. At least one rule exists. Perl, Rust, and Dart validation plus native/composed execution accept a markerless
    file and are admitted, while Julia and Lua still require at least one marked rule
    (`::`). Use a marker until the remaining rollout closes when portable cross-backend execution matters. A
-   zero-rule executable spec is always invalid.
+   zero-rule executable spec is always invalid. Julia's current bypass-only zero-rule default reports legacy
+   `top_rule_selection`; an explicit unknown selector against the same empty state reaches `rule_lookup`, so the
+   portable structure-before-selector failure order remains owned by Julia core leaf `.4.1`.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.

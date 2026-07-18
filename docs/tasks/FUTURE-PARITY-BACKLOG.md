@@ -3815,13 +3815,96 @@ before implementation.
     commit `.3`, clear the brief, prove clean, and only then activate Julia root-selection `.4` task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement root-selection precedence on Julia.
   Dependencies: `.9.1.1.2.3`
+  Children: `.9.1.1.2.4.0`, `.9.1.1.2.4.1`, `.9.1.1.2.4.2`, `.9.1.1.2.4.3`
   Acceptance: Align parser/validation, runtime, reconstructed/generated routes, descriptors/traces, strict checks,
     and primary CLI with the unchanged neutral contract and reference bytes.
-  Verification: `pending`
+  Verification: `active; behavior-free preflight .0 owns the exact seam map`
   Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0`
+  Status: `done`
+  Goal: Map every Julia root-selection seam and freeze a dependency-safe implementation/admission plan.
+  Dependencies: `.9.1.1.2.4`
+  Acceptance: Retrieve the neutral/admitted precedents and Julia knowledge before source inspection; use exact
+    parser/validator/runtime/descriptor/generated/emitted/trace/diagnostic/strict/primary/gate probes to classify
+    marker, markerless, explicit, unknown, zero, reconstruction, and reference-byte behavior; split core, composed
+    routes, and topology admission without changing Julia behavior or advancing rollout.
+  Verification: **PASS 2026-07-18.** Exact Julia shared primary is 31/65 in both default and POSIX environments:
+    one markerless root failure, 22 cursor-owned help/usage failures, and 11 cursor-owned request-trace failures.
+    Direct API probes map native, loaded, normalized, generated, emitted, descriptor, diagnostic, trace, strict,
+    zero, and unknown seams. `Pkg.test()` exposes the known cursor help mismatch at 56/57 in primary arguments;
+    standalone corpus is 105/105. Root governance stays 4/7 with 34 mutations; KM is 609/4,390; mdBook, memory,
+    task metadata, all four doctrines, cursor governance, and whitespace pass. Canonical CI passes Perl root 7+5,
+    cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 641 seconds. No Julia source, test,
+    fixture, contract, capability, runtime, or rollout behavior changes. Both roadmaps are repaired from stale 1/7
+    to 4/7, and final no-drift `.6` owns mechanical recurrence. Cleanup removes generated book/cache/temp-log
+    artifacts while retaining immediate-next-task Julia compiled state and the clean Rust target baseline.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 - map Julia root selection`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVE / PRECEDENT** — Read ADR `0046`, the neutral contract/checker, admitted Perl/Rust/Dart facts
+    and consumers, Julia architecture/runtime/CLI facts, toolbox, backend gate, and shared primary owners before
+    re-deriving behavior or inspecting implementation details.
+  - [x] **REPRODUCE / ISSUE** — Run the narrowest exact real probes for explicit ordinary override, first/multiple
+    markers, markerless fallback, zero/unknown failures, strict-unused, descriptor identity, loaded/normalized/
+    generated/emitted, trace, and default/POSIX primary behavior; record exact values, fields, bytes, and counts.
+  - [x] **ROOT CAUSE / INVENTORY** — Trace every divergent or already-correct projection to its parser, validator,
+    compiler, runtime, adapter, source emitter, descriptor, trace, diagnostic, strict, and gate owner without
+    guessing from `.spec` text.
+  - [x] **SAFE SPLIT** — Confirm or refine `.1` core/descriptor, `.2` composed routes, and `.3` topology/reference
+    admission so each later behavior slice has one semantic owner and no premature rollout claim.
+  - [x] **NO BEHAVIOR CHANGE** — Keep `.0` read-only for Julia source/test/fixture/capability behavior and run
+    focused plus complete Julia/reference/governance proof proportionate to the audit.
+  - [x] **LOCKSTEP / COMMIT** — Card the durable seam map, synchronize task/live/development/memory/book status,
+    clean safe artifacts, commit `.0`, clear the brief, and only then activate Julia core `.1` task-tree-first.
+
+  Exact pre-implementation finding: normal Julia validation rejects markerless source through
+  `_check_top_rule_exists`, but bypass-compiled native and generated-direct state already resolves explicit
+  selector > first authored marker > first authored rule. Loaded, normalized, and emitted paths re-enter
+  validation. Zero/unknown diagnostics use legacy `top_rule_selection`/`rule_lookup`; generated execution wraps
+  unknown selection; descriptor metadata lacks `entry_rule_contract` and retains cursor `parse_mode`; high trace
+  names the effective rule while low trace has no selection-basis event. Shared primary passes 31/65 in both
+  environments: one markerless root failure, 22 cursor-owned help/usage failures, and 11 cursor-owned request-trace
+  failures. Therefore `.4.3` depends on cursor `.9.1.6`, and `.9.1.6` depends on root routes `.4.2`.
+
+  The audit also found `ROADMAP.md` and `ROADMAP_V2.md` frozen at the neutral 1/7 state because root governance
+  does not require either projection. `.4.0` repairs current prose; final no-drift `.6` now owns mechanical
+  inclusion in the recurring checker.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1`
+  Status: `pending`
+  Goal: Implement Julia marker-optional validation, ordered native selection, portable failures, and descriptor identity.
+  Dependencies: `.9.1.1.2.4.0`
+  Acceptance: Accept one-or-more-rule markerless sources; centralize explicit > first marker > first rule selection
+    before user code; preserve authored markers and strict-reference semantics; publish the root contract and
+    portable zero/unknown failures; pass native plus root-owned primary proof while preserving the exact
+    cursor-owned baseline failure set; do not claim composed route or topology admission.
+  Verification: `pending`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 - implement Julia root resolution`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2`
+  Status: `pending`
+  Goal: Align Julia loaded, normalized/reconstructed, generated/emitted, trace, and diagnostic root-selection routes.
+  Dependencies: `.9.1.1.2.4.1`
+  Acceptance: Make every composed route reuse the ordered resolver with invocation-local selection; preserve
+    generated/descriptor identity and validation order; attribute trace/failures to effective selection; pass
+    focused and complete Julia library/corpus/root-case proof without advancing rollout or absorbing cursor work.
+  Verification: `pending`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 - converge Julia root routes`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3`
+  Status: `pending`
+  Goal: Admit composed Julia root selection against the shared primary reference.
+  Dependencies: `.9.1.1.2.4.2`, `.9.1.6`
+  Acceptance: Add one exact omission-sensitive topology consumer over all neutral and real Julia projections; lock
+    drivers, cases, and mutations; pass exact shared 65x2 bytes; advance only Julia; synchronize public/book/KM/
+    live records; close parent `.4`; and leave Lua `.5` plus final no-drift `.6` pending.
+  Verification: `pending`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 - admit Julia root selection`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5`
   Status: `pending`
@@ -3837,8 +3920,9 @@ before implementation.
   Goal: Admit and close root-selection parity with public no-drift.
   Dependencies: `.9.1.1.2.5`
   Acceptance: Require all five backend consumers and canonical registration; update the normative mdBook, public
-    guides/examples/help, status/capability/Knowledge Map records, and recurring scanners; pass exact focused,
-    primary, corpus, governance, book, and canonical gates before closing `.9.1.1.2`.
+    guides/examples/help, both roadmap projections, status/capability/Knowledge Map records, and recurring
+    scanners; make both roadmaps required current-state checker inputs; pass exact focused, primary, corpus,
+    governance, book, and canonical gates before closing `.9.1.1.2`.
   Verification: `pending`
   Commit: `pending`
 
@@ -4876,7 +4960,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6`
   Status: `pending`
   Goal: Align Julia native/reconstructed/generated/primary behavior with ADR `0044`.
-  Dependencies: `.9.1.5`
+  Dependencies: `.9.1.5`, `.9.1.1.2.4.2`
   Acceptance: Replace engine-wide seek ownership with family-derived rule policy; normalize the full bare-edge
     surface; remove legacy public and command options with exact diagnostics; consume descriptor/generated v2;
     migrate fixtures/callers; and prove native, emitted-state, reconstructed plan, trace, recursion, loaded-spec,
@@ -7425,7 +7509,11 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.3.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | `done` | Marker-optional core selection, portable failures, strict no-drift, descriptor identity, package 266, corpus 105, primary 65x2, and canonical signoff pass. |
 | 212.2.3.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` | `done` | Loaded/normalized/generated/emitted/trace/diagnostic routes, Dart-local/canonical proof, public/KM lockstep, and cleanup pass without rollout promotion. |
 | 212.2.3.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `done` | Exact 15-role topology, driver/case locks, 34 mutations, package 270, primary 65x2, corpus 105, canonical proof, and 4/7 promotion pass. |
-| 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `pending` | Implement exact Julia selection across native/generated/primary routes. |
+| 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `active` | Julia root selection is split into behavior-free preflight, core/descriptor, routes, and final admission; `.0` is active task-tree-first. |
+| 212.2.4.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` | `done` | Exact 31/65x2 seam map, root/cursor dependency split, corpus 105, 34 mutations, canonical proof, and roadmap repair land without behavior. |
+| 212.2.4.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` | `pending` | Implement marker-optional Julia core resolution, failures, strict no-drift, descriptor, and native/primary proof. |
+| 212.2.4.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | `pending` | Converge Julia loaded/normalized/generated/emitted/trace/diagnostic routes without promotion. |
+| 212.2.4.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `pending` | After Julia cursor `.9.1.6`, topology-check Julia, pass shared primary 65x2, promote only Julia, and close parent `.4`. |
 | 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `pending` | Implement exact PUC Lua/LuaJIT selection across native/generated/primary routes. |
 | 212.2.6 | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | `pending` | Admit five-backend parity and close public no-drift. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
@@ -7454,7 +7542,7 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `pending` | Compose Dart admission, advance only Dart, and close the parent. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | After root routes `.9.1.1.2.4.2`, align Julia native/reconstructed/generated/primary cursor roles. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
@@ -8122,12 +8210,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  plus complete Perl/Rust parents `.9.1.3-.4` reach 3/5 at 68 files; Dart preflight `.9.1.5.0` fixes exact current
-  behavior and implementation order, and normalization `.9.1.5.1` follows only after its clean commit.
-  Identical
-  dependency-regex slot identity is a non-blocking separate
-  question with an explicit post-admission owner `.9.1.8.1`.
+- None blocking. Root selection is 4/7 after neutral, Perl, Rust, and Dart. Julia behavior-free preflight `.4.0`
+  freezes root core `.4.1`, routes `.4.2`, cursor `.9.1.6`, then exact root admission `.4.3`; the clean `.4.0`
+  commit is the next boundary. Identical dependency-regex slot identity remains a non-blocking separate question
+  with explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -8140,15 +8226,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl/Rust parents `.9.1.3-.4` reach 3/5. Dart `.9.1.5.0` signoff passes and its clean commit is active while
-  behavior children `.1-.6`, later backend/admission/identity/public leaves `.9.1.6-.9`, structured-format,
-  write-vivification, and companion-book work remain pending.
+- None. Julia root preflight `.9.1.1.2.4.0` is fully signed off without behavior; its clean commit is the sole
+  boundary before root core `.4.1`. Julia's 33 cursor-owned shared-primary failures are a dependency, not an
+  unresolved test surprise: root routes `.4.2` precede cursor `.9.1.6`, and root admission `.4.3` follows it.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` | ADR/KM/admitted precedent; exact parser/validator/runtime/loader/normalized/generated/emitted/descriptor/diagnostic/trace/strict/zero/unknown probes; shared Julia primary 31/65 default and POSIX split as one root plus 33 cursor failures; current package help boundary 56/57; corpus 105; root governance 4/7 plus 34 mutations; roadmap 1/7 drift root cause/repair and `.6` enforcement owner; KM 609/4,390; memory/task/four doctrines/cursor/whitespace/mdBook; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 641s; generated book/cache/temp-log cleanup. | PASS. No Julia behavior/contract/capability/rollout change; safe order is root core `.4.1`, routes `.4.2`, cursor `.9.1.6`, then admission `.4.3`; clean commit is the only remaining boundary. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | Exact ordered 15-role once-only consumer; no missing/duplicate/reordered/invented roles; canonical/package drivers; six shared primary ids; focused admission/core/routes/emitter 1+14; Dart format 60/0, analyzer, package 270, primary 65x2, corpus 105; root governance 8/3/3/5 at 4/3 plus 34 mutations; public/book/capability/live lockstep; KM 607/4,371; memory/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 656s. | PASS. Only Dart advances, reaching 4 complete / 3 pending; parent `.3` closes and Julia `.4` waits for this leaf's clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | Parser-envelope/validation ownership; neutral 8/3/3 core consumer; one compiled resolver; native default/explicit and early portable failures; strict authored-edge no-drift; descriptor contract/order/immutable `is_top`; focused 107; Dart format 58/0, analyzer, package 266, primary 65x2, corpus 105; root governance 3/4 plus 29 mutations; public/book/capability/KM/task/live lockstep; mdBook; KM 605/4,348; memory/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031; safe generated book/cache cleanup retaining Dart package state and Rust 99 MiB baseline. | PASS. Dart core/native/primary now implements the contract; composed route proof `.2` and topology admission `.3` remain, so rollout stays 3/7. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` | ADR/KM/neutral/Perl/Rust precedent and exact Dart validator/runtime/loader/generated/emitted/descriptor/trace/strict/primary/gate retrieval; direct source/API probes; exact primary 64/65 default and POSIX with markerless-only compile failure; focused owners 97; format/analyze/package 260; corpus 105; root governance 3/4 plus 29 mutations; mdBook; KM 604/4,336; memory/task/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 655s; safe generated book/cache cleanup. | PASS. Behavior is untouched; `.1` centralizes validation/resolution/failures/descriptor, `.2` proves composed routes, and `.3` alone admits Dart after the clean preflight commit. |
@@ -8506,6 +8592,17 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Julia root preflight measures 31/65 shared primary cases passing identically in default/POSIX:
+  one markerless root failure plus 33 cursor-owned help/usage/request-trace failures. Native bypass already orders
+  explicit > first marker > first rule; validation blocks loaded/normalized/emitted fallback and legacy failure/
+  descriptor/trace identities remain. Safe dependencies are root core `.4.1`, routes `.4.2`, cursor `.9.1.6`,
+  then admission `.4.3`. Both roadmap headers are repaired from stale 1/7 to current 4/7; final `.6` owns adding
+  them to recurring governance. Corpus 105, root 34, KM 609/4,390, mdBook/doctrines, and canonical Perl root 7+5,
+  cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 641 seconds pass. No Julia behavior or rollout
+  changes; cleanup and commit remain.
+- `2026-07-18`: Clean commit `31cc78ae` lands exact Dart root-selection admission at 4/7 with brief empty and
+  tree clean. Julia parent `.9.1.1.2.4` activates task-tree-first and splits into behavior-free seam preflight
+  `.0`, core/descriptor `.1`, composed routes `.2`, and topology/reference admission `.3`.
 - `2026-07-18`: Dart admission `.9.1.1.2.3.3` adds one exact ordered 15-role consumer, package/canonical driver
   registration, six shared primary ids, and five omission mutations. Focused 1+14 and complete Dart format 60/0,
   analyzer, package 270, primary 65x2, and corpus 105 pass. Public/book/KM state advances only Dart to 4/7;

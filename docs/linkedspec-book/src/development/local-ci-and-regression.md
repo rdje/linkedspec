@@ -62,6 +62,12 @@ and Dart `.3.1-.3` now pass them exactly at 65/65 in both environments, while Ju
 green against the expanded manifest. UTF-16/UTF-32 are not
 implicit inputs.
 
+Julia preflight `.9.1.1.2.4.0` measures the expanded manifest at 31/65 in each environment. The identical 34-case
+failure set is classified rather than treated as one feature gap: one markerless compilation case belongs to root
+selection; 22 help/usage and 11 medium-or-higher request-trace cases belong to the separately pending cursor
+migration. Julia root admission waits for that migration after root core/routes, so 65x2 remains the admission
+standard rather than being weakened around known failures.
+
 Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
 descriptor, diagnostic, trace, and primary routes. Its checker requires one exact function marker per role, the
@@ -93,9 +99,9 @@ Lua native adapters in disposable temporary storage, and runs the shared manifes
 Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The later
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
-admitted at 65/65 in both environments; Dart core/native/primary is also 65/65 twice and its composed routes are
-Dart-local green, with topology admission still `.9.1.1.2.3.3`; Julia and Lua remain `.4-.5`. A green 5x2x65 run is the final rollout target
-rather than a current cross-backend claim.
+admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
+Julia is measured at 31/65 twice before root/cursor convergence, and Lua remains `.5`. A green 5x2x65 run is the
+final rollout target rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at
@@ -246,10 +252,13 @@ zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
-stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
-passes with 1,023 assertions and status `runtime-corpus-primary-cli`. `.1.5.4.1` updates exact help/errors and adds
-strict UTF-8 coverage; `.1.5.4.2` switches only primary trace to the independent canonical projection. Julia now
-passes 61/61 default/POSIX, while separate package tests continue to exercise rich native trace.
+stable primary failure/trace routing, and unbounded full-manifest CLI execution. At the active preflight boundary,
+the complete package command reaches `Primary CLI arguments resolution and loading` and fails exactly 1/57 there:
+Julia help still includes the cursor-owned global option while the shared reference has removed it. The
+independent full shared runner then classifies the complete current boundary as 31/65 twice, including one
+root-owned markerless failure and 33 cursor-owned help/usage/trace failures. The standalone complete corpus remains
+105/105. This is an expected dependency boundary, not a green local-gate claim; root core/routes, Julia cursor
+migration, and final root admission must land in that order before this section can report complete Julia green.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

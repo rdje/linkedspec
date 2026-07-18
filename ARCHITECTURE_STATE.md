@@ -9,10 +9,13 @@ This document is the current high-level technical reading of the project shape. 
   explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
   Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains
   explicit/`<default>` identity, and strict-unused receives no synthetic reference or exemption. Eight selection,
-  three failure, and three strict cases plus 24 mutations make the neutral decision executable at 1/7. No backend
-  behavior changed: Perl currently picks parsed row zero, Rust has marker-only native/generated defaults, and
-  Dart/Julia/Lua contain marker-then-first fallback behind marker-requiring validation. Dedicated leaves `.1-.6`
-  own Perl, Rust, Dart, Julia, Lua/LuaJIT, and composed public admission.
+  three failure, and three strict cases plus 34 mutations now govern 4/7: neutral, Perl, Rust, and Dart are
+  admitted. Julia preflight `.9.1.1.2.4.0` measures exact shared primary at 31/65 in both environments. Its one
+  root-owned failure is markerless validation; 22 help/usage and 11 request-trace failures belong to pending
+  cursor migration `.9.1.6`. Julia already preserves ordered authored markers and its bypass-only runtime resolves
+  explicit > first marker > first rule. Root core `.4.1`, composed routes `.4.2`, cursor `.9.1.6`, and exact 65x2
+  admission `.4.3` are dependency-ordered. Julia and Lua remain marker-required in normal validation; final
+  public no-drift remains `.6`.
 - `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
   spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/
   trace, mixed parent/child, recursion, both structural replacements, static removal, primary command, and all

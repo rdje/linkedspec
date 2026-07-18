@@ -500,6 +500,39 @@ Second:
  /second/
 ```
 
+### Julia pre-implementation boundary
+
+Julia already retains enough authored state to implement the same rule. Its parser preserves definition order and
+records each `Rule::` as immutable `is_top` metadata. Given a normally valid marked source, an explicit ordinary
+rule wins over one or more markers; without an explicit selector, the first marker wins. A diagnostic-only compile
+with validation bypassed also proves the existing runtime falls back to the first rule in markerless state.
+
+Normal Julia source must still contain a marker today. `validate_spec(...)`, loaded compilation, normalized-state
+compilation, and emitted-source reconstruction all stop at:
+
+```text
+no top rule found: at least one rule must use '::' (double colon)
+```
+
+The exact shared primary boundary is 31/65 twice. The root-owned markerless case is one failure. The remaining 33
+are not root selection: 22 help/usage cases still expose the pending global `--parse-mode` removal, and 11
+medium-or-higher request traces still include `parse_mode=seek`. Root core `.9.1.1.2.4.1` and route convergence
+`.4.2` remain isolated from that cursor work. Exact 65x2 topology admission `.4.3` waits for cursor migration
+`.9.1.6`, preventing either semantic program from hiding the other's failures.
+
+Until those leaves land, use a marker for Julia and Lua portability even when supplying `--top-rule`:
+
+```text
+FallbackMarker::
+ /default/
+
+RequestedOrdinary:
+ /selected/
+```
+
+`--top-rule RequestedOrdinary` selects the ordinary rule on current Julia and has priority over
+`FallbackMarker::`; omission selects `FallbackMarker`.
+
 ## Removed `parse_mode`
 
 `parse_mode` no longer controls or configures a Perl parser. Cursor discipline comes from each authored rule

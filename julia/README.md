@@ -13,6 +13,13 @@ identity, and structured pipeline exceptions now also live in the native module 
 status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the complete native,
 generated, primary, and recurring `linkedspec-logical-helper-v1` proof; its public no-drift admission is closed.
 
+Current global rollout is intentionally ahead of this historical local milestone. Root-selection preflight
+`FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` measures Julia at 31/65 shared primary cases in both default and POSIX
+environments. One failure is root-owned markerless validation; 33 are the separately pending cursor migration's
+legacy global-option help/usage/request-trace projection. The package gate currently exposes the same cursor
+boundary at 56/57 in its primary-arguments testset, while standalone corpus execution remains 105/105. Root core
+and routes `.4.1-.2` precede cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows it.
+
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
 was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
@@ -50,6 +57,10 @@ core gate includes it only when explicitly requested:
 ```bash
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
+
+At the active preflight boundary this complete driver is expected to stop at the pending cursor-owned help
+mismatch; do not report it green. Use the exact shared runner to classify 31/65 twice and the standalone corpus
+command to verify 105/105 until root core/routes and cursor migration converge.
 
 Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
 `LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot. Without a depot override, the script
@@ -397,9 +408,10 @@ matches. Marker-form switch siblings also execute as one nesting-aware first-mat
 anonymous/named capture family now uses rule-local code-unit marks with character-based public positions and
 lengths. It covers stable/advancing slice, cursor, rest, from, and between reads; current/input-boundary, copied,
 and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND` blind-call rules surface ordered
-child returns when no explicit parent return overrides them. Native named/file resolution adds 82 direct contract
-and pipeline assertions, bringing the current package suite to 1,110 assertions; 61/61 shared CLI cases in both
-environments and the 105/105 corpus remain green.
+child returns when no explicit parent return overrides them. Native named/file resolution added 82 direct contract
+and pipeline assertions; at that historical boundary the package suite reached 1,110 assertions, shared CLI was
+61/61 in both environments, and corpus was 105/105. The current global 65-case/root-and-cursor boundary is
+described at the top of this file and supersedes those counts for present gate status.
 
 Library example:
 

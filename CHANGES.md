@@ -1,5 +1,51 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 — map Julia root selection
+
+The behavior-free Julia preflight freezes the complete root-selection seam before implementation. Exact shared
+primary execution passes 31/65 cases with `POSIXLY_CORRECT` unset and set. The 34 failures are identical in both
+environments and split cleanly: 22 help/usage and 11 request-trace cases retain the separately owned legacy
+`--parse-mode` projection, while only `success_markerless_first_authored_rule` belongs to root selection. That
+case exits 1 with empty stdout and `linkedspec: parser compilation failed`; explicit ordinary override, first
+authored marker, unknown selector, seek-default, and AND-consume cases already pass.
+
+Exact API probes establish the causal boundary. The parser preserves definition order plus every authored
+`is_top` bit. `_check_top_rule_exists` is the normal-source blocker; validation runs before all other checks,
+including strict-unused. When validation is deliberately bypassed, native and generated-direct execution already
+resolve explicit selector > first marker > first rule. Loaded and normalized state re-enter validation, and
+emitted source reconstructs through ordinary validating compilation. Unknown explicit selection still reports
+legacy `rule_lookup`; zero-rule default reports `top_rule_selection`, while explicit selection against zero rules
+incorrectly reaches `rule_lookup`. The descriptor preserves definition order and authored markers but lacks
+`entry_rule_contract` and still publishes cursor `parse_mode`; high trace names the effective rule, while low
+trace has no selection-basis event. Generated execution wraps unknown selection in its generic execution failure.
+
+The dependency-safe split keeps root work narrow. `.4.1` owns marker-optional one-or-more-rule validation, a
+single ordered resolver, portable zero/unknown failures, strict no-drift, and descriptor root identity. `.4.2`
+owns loaded/normalized/generated/emitted/diagnostic/trace convergence. Final topology/reference admission `.4.3`
+now depends on the existing Julia cursor migration `.9.1.6`, and `.9.1.6` depends on root routes `.4.2`, so exact
+65x2 proof can be honest without either task absorbing the other.
+
+Current complete-Julia proof exposes the known cursor boundary rather than hiding it: `Pkg.test()` reaches the
+primary argument suite and fails exactly 1/57 there because help still includes `--parse-mode`; the independent
+shared runner reports the broader 34/65 byte boundary. The complete executable corpus remains 105/105, and root
+governance remains 4 complete / 3 pending with 34 rejected mutations. No Julia source, test, fixture, contract,
+capability, or rollout behavior changes in this preflight.
+
+The audit also found both roadmap headers frozen at the initial 1/7 neutral state even though task, README,
+mdBook, capability, and Knowledge Map truth had reached 4/7. Git history shows neither roadmap had changed since
+the neutral commit, and the root checker does not currently require them as current-state inputs. This leaf repairs
+both projections; final public no-drift `.6` now owns making that requirement mechanical.
+
+Signoff passes the mdBook, memory/task metadata, all four doctrines, cursor governance, whitespace, root
+governance at 4/7 with 34 mutations, and Knowledge Map at 609 facts / 4,390 question keys. Canonical CI passes
+Perl root consumers 7+5, cursor admission 288, reference primary 65/65 in both environments, and Phase 0
+1,031/1,031 in 641 seconds. The first canonical attempts correctly stopped before Phase 0 on a post-generation
+Knowledge Map edit and then two redundant cursor tokens in unowned summary files; regeneration and wording those
+summaries through already-governed terminology restored exact contract boundaries before the full exit-0 rerun.
+Cleanup removes the generated 11 MiB mdBook, one Python bytecode cache, and the consumed 14 KiB Julia preflight
+log. It retains the 125 MiB Julia compiled cache because root core `.4.1` immediately reuses it, the clean 99 MiB
+Rust target baseline, and tracked RGX issue evidence logs.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 — admit Dart root selection
 
 Dart root-rule selection is now admitted against `linkedspec-root-rule-selection-v1`. One new package test reads
