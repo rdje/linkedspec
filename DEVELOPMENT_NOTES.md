@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.7` — backend admission should compose projections, not duplicate
+  exhaustive constituent suites): Rust already had deep independent proof for 36 authored family spellings,
+  normalization, every parent/child mechanism, descriptor rows, generated family plans, loading, serialization,
+  recursion, tracing, and the primary matrix. The admission boundary therefore adds one compact orchestration
+  consumer whose contract-declared role table is the authority. Exact set equality detects an extra or missing
+  implementation role; declaration-order execution plus a completed-role map proves each role runs once. The
+  independent Python checker separately requires one exact source function marker for every declared role, so a
+  consumer edit cannot silently retain rollout credit after omitting a projection.
+
+  Canonical registration has two layers because the default local gate is deliberately Rust-toolchain-independent.
+  `tools/run_ci_local.sh` must require the new consumer as a tracked input and must retain its registered optional
+  Rust-driver invocation. `tools/run_rust_local.sh` must retain the complete `linkedspec-runtime` package command,
+  which automatically executes every integration test including the admission consumer. The neutral checker
+  validates all three seams. This gives omission-sensitive canonical topology without redundantly executing the
+  same composed test a second time inside the focused Rust gate.
+
+  Portable diagnostic closure is accumulated across roles. Rust's typed API removal cannot emit the dynamic
+  `parse_mode_override_removed` object because the method no longer exists; the static-removal role proves the
+  symbols are absent and the primary role proves the exact retired-flag failure, then records that removal outcome.
+  Generated direct execution contributes the contract-version mismatch after proving expected/actual identities.
+  The final diagnostic role executes every invalid neutral edge/ownership fixture, validates exact stages and
+  field sets, and requires the accumulated set to equal all eight contract codes. Repeated neutral fixtures may
+  report the same code, so observation is set-valued while role completion remains exactly-once.
+
+  The generated admission plan uses family `default`, not `or_acode`: generated family names describe the authored
+  rule mode first, while action/blind dispatch is a separate compiled dimension. The first focused run caught that
+  distinction before admission. The corrected emitter, direct executor, and trace all agree on the minimal
+  `{label: "Top", family: "default"}` row, source identity, exact direct value, and portable trace roles.
+
+  Focused proof passes the one composed test in 23.37 seconds. The complete Rust gate then passes core 189/4/5/8,
+  runtime 137, oracle 3/205.40s, diagnostics 7, classifier 105/234.99s, integrations 197/75.60s, composed admission
+  1/23.79s, cursor execution 6/59.58s, emitter 5/36.90s, all adjacent suites, and exact primary 63x2. The neutral
+  checker retains the exact 68-file migration inventory, advances only `rust_parity` to reach 3/5, and rejects 34
+  mutations. Canonical CI then passes the 288-test Perl admission consumer, reference primary 63x2, and Phase 0
+  1,031/1,031 in 612 seconds before exiting 0. Rust parent `.9.1.4` closes at this boundary; the clean commit is the
+  only remaining prerequisite for the Dart pivot.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.6` — deleting global ownership does not delete derived matcher
   policy): Rust still needs both seek and consume internally. The safe boundary is therefore not a spelling purge:
   remove only public/static selection (`ExecutionOptions`), per-invocation runtime override storage, and the

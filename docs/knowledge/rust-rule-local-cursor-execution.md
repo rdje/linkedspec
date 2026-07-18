@@ -15,10 +15,10 @@ answers:
   - "is Rust generated source v2 migrated to rule local cursor"
   - "what tests prove Rust rule local cursor execution"
 date: 2026-07-18
-status: current through Rust public option and primary CLI removal; composed admission remains FUTURE-PARITY-BACKLOG.9.1.4.7
+status: current and admitted through the 15-role Rust parity consumer
 tags: [rust, cursor, runtime, serialization, loading, recursion, trace, generated-source, descriptor, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state and publishes cursor identity/family/policy/resolved edges. FUTURE-PARITY-BACKLOG.9.1.4.5 removes legacy_artifact_parse_mode plus the private v1 wire serializer and makes generated-source v2 derive policy from its minimal family plan. FUTURE-PARITY-BACKLOG.9.1.4.6 deletes ExecutionOptions/runtime-context global mode state, rejects the primary flag with the targeted usage error, removes the request-trace field, and passes exact 63/63 default and POSIX projections."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; python3 tools/check_rule_local_cursor_contract.py"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state and publishes cursor identity/family/policy/resolved edges. FUTURE-PARITY-BACKLOG.9.1.4.5 removes legacy_artifact_parse_mode plus the private v1 wire serializer and makes generated-source v2 derive policy from its minimal family plan. FUTURE-PARITY-BACKLOG.9.1.4.6 deletes ExecutionOptions/runtime-context global mode state, rejects the primary flag with the targeted usage error, removes the request-trace field, and passes exact 63/63 default and POSIX projections. Admission .9.1.4.7 composes 15 exact roles, requires canonical registration, observes all eight diagnostic/removal outcomes, and advances only rust_parity to reach 3/5 at 68 files plus 34 mutations."
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_contract; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
 Normal Rust cursor execution has one semantic authority: the family on the rule
@@ -55,6 +55,14 @@ consume at its entry cursor and the default child seek from the cursor it receiv
 The same suite locks live/ordinary-serialized identity, recursive reachability,
 descriptor/live agreement for all 36 families, loaded descriptor policy, and the
 generated-v2 plan/reconstruction identity and exact v1 rejection.
+
+The composed admission consumer is intentionally narrower than those exhaustive
+constituent suites. Its 15 contract-declared roles join native default/AND,
+ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
+mixed/recursive, structural, static-removal, primary, and portable diagnostic
+projections. Exact role-set equality and once-only completion run inside Rust;
+the independent checker requires every function marker plus canonical tracked-
+input and optional-Rust driver registration. Only the Rust rollout leg advances.
 
 Related: [[rust-rule-local-cursor-normalization]],
 [[rule-local-cursor-neutral-contract]], [[rule-local-cursor-and-bare-edge-contract]],

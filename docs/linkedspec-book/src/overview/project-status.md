@@ -192,7 +192,7 @@ Three backbone items tracked major structural modernization — all done:
   Admission `.9.1.3.6` composes all of that behavior through 14 exact live/descriptor/emitted/generated/loaded/
   trace/diagnostic/recursive/structural/primary roles, registers the consumer in canonical CI, and observes all
   eight portable diagnostic codes. The checker rejects 29 drift mutations and advances only `perl_reference`, so
-  rollout is 2 complete / 6 pending. Rust preflight `.9.1.4.0` changes no executable behavior and records the
+  rollout reached 2 complete / 6 pending there. Rust preflight `.9.1.4.0` changes no executable behavior and records the
   exact prior boundary: compact `|` was misclassified, complete-line bare edges were ignored, compiled/
   descriptor/generated state owned global cursor facts, generated source was v1, and primary conformance was
   51/63 in both environments. Gate-hardening `.9.1.4.1` runs the complete core package before runtime; verified
@@ -207,9 +207,12 @@ Three backbone items tracked major structural modernization — all done:
   classifier plus focused and canonical signoff. Implemented public option/CLI removal `.6` deletes the global
   runtime/option state, retains entry-rule selection only, returns the targeted retired-flag usage error, removes
   the request-trace field, and passes all 63 primary cases in both environments. Focused and canonical signoff
-  pass; only the clean commit remains.
-  The inventory is now 68 files, while rollout stays 2/6 until
-  complete Rust admission.
+  pass at commit `2bba1e91`. Composed admission `.7` now declares one exact 15-role Rust consumer over native
+  default/AND, ordinary serialized, loaded, descriptor-v1, emitted-v2, generated direct/trace, mixed/recursive,
+  both structural replacements, static removal, primary, and all portable diagnostic/removal outcomes. The
+  checker requires every role marker plus canonical/default-to-optional-Rust registration, rejects 34 mutations,
+  and advances only `rust_parity`. The inventory remains 68 files and rollout is 3/5; complete focused Rust proof
+  and canonical signoff are green; the Rust parent is closed while the clean commit remains before Dart activates.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution

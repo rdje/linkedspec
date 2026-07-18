@@ -6,7 +6,7 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 2 complete / 6 pending. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 3 complete / 5 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
@@ -20,11 +20,15 @@ children. Verified descriptor `.9.1.4.4` now publishes the neutral v1 identity, 
 ordered resolved-edge facts without root/rule global cursor fields; direct, loaded, and reconstructed projections
 agree with live execution. Generated-source `.9.1.4.5` now emits v2/format 2 from only ordered label/family rows,
 derives policy across all ten families, rejects v1 before reconstruction, and passes the exhaustive 105-case host
-classifier plus focused and canonical signoff. Public option/CLI removal `.9.1.4.6` is fully verified and awaiting
-its clean commit: Rust execution options now select only the entry rule, the primary command rejects the
+classifier plus focused and canonical signoff. Public option/CLI removal `.9.1.4.6` is committed at `2bba1e91`:
+Rust execution options now select only the entry rule, the primary command rejects the
 retired flag with the targeted usage error, request traces have no global cursor field, and the primary matrix
-passes 63/63 in both environments. The governed inventory is 68 files, and rollout remains 2/6 until composed
-Rust admission.
+passes 63/63 in both environments. Composed Rust admission/parent closeout `.9.1.4.7` now declares one exact
+15-role consumer spanning native default/AND, ordinary serialized, loaded, descriptor-v1, emitted-v2, generated
+direct/trace, mixed/recursive, structural, static-removal, primary, and portable diagnostic projections. The
+neutral checker requires every role plus canonical/default-to-optional-Rust registration, retains the 68-file
+inventory, rejects 34 drift mutations, and advances only `rust_parity` to reach 3/5. Complete Rust and canonical
+signoff pass; the clean commit remains the sole boundary before Dart `.9.1.5` activates.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

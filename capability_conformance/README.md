@@ -24,8 +24,8 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
 Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while
 `meta_contract_variants.rule_local_cursor_v1` requires `cursor_contract`, forbids `parse_mode`, and fixes the v1
-identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`; later backends remain on the legacy
-variant until their dependency-ordered leaves.
+identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`, and Rust consumes it as of
+`.9.1.4.4`; later backends remain on the legacy variant until their dependency-ordered leaves.
 Its `function_record_variants` object is the authoritative three-way union: fixed-v1 stores `params`/`arity`,
 variadic-v2 stores `signature`, and final-codeblock-v3 stores `params`/`arity` plus exact final-only
 `parameter_kinds`. `tools/check_callable_signature_contract.py` rejects schema/order/version/storage/policy drift.
@@ -38,12 +38,15 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 72-file migration inventory and rejects 29 representative semantic, topology,
+The checker currently owns an exact 68-file migration inventory and rejects 34 representative semantic, topology,
 diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
-runs that consumer. `neutral_contract_and_inventory` and `perl_reference` are complete, so rollout is 2 complete /
-6 pending; Rust and the later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
+runs that consumer. A separate 15-role Rust consumer composes native default/AND, ordinary serialized, loaded,
+descriptor-v1, emitted-v2, generated direct/trace, mixed/recursive, structural, static-removal, primary, and
+portable-diagnostic projections. The checker requires every role marker plus the canonical/default-to-optional-
+Rust driver topology. `neutral_contract_and_inventory`, `perl_reference`, and `rust_parity` are complete, so
+rollout is 3 complete / 5 pending; later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
 remains the convergence baseline for unmigrated backends while the cursor rollout advances each current emitter.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf

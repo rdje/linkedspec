@@ -997,8 +997,12 @@ loaded, and compiled-JSON projections. Generated `.5` now emits v2/format 2 with
 policy across all ten families, rejects v1, and passes fresh host/corpus/exhaustive-classifier plus focused and
 canonical proof. Implemented public option/CLI projection `.6` removes runtime/global option ownership, retains
 entry-rule selection only, rejects the retired flag with the targeted usage error, removes the request-trace
-field, and passes the exact 63-case matrix in both environments. Focused and canonical signoff pass; only the clean
-commit remains, and the current token inventory is 68.
+field, and passes the exact 63-case matrix in both environments. Focused and canonical signoff pass at commit
+`2bba1e91`. Composed admission/parent closeout `.7` now adds one exact contract-declared 15-role consumer across
+native, loaded, ordinary serialized, descriptor, emitted/generated direct/trace, mixed/recursive, structural,
+removal, primary, and diagnostic projections. The checker requires every role plus canonical registration,
+retains the 68-file inventory, rejects 34 mutations, and advances only `rust_parity` to reach 3/5. Complete Rust
+and canonical proof are green; parent `.9.1.4` is closed and the clean commit remains before Dart `.9.1.5`.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

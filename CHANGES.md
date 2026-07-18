@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.7 — admit Rust rule-local cursor contract
+
+The neutral rule-local cursor authority now declares one exact Rust admission consumer with 15 ordered roles:
+native default and AND families, ordinary `CompiledSpec` reconstruction, loaded specs, descriptor v1, emitted
+source v2, generated direct and traced execution, mixed parent/child families, recursion, both structural
+replacements, static option removal, the primary command, and all portable diagnostic/removal outcomes. The
+consumer requires its role set to equal the contract declaration and executes each declared role exactly once.
+
+The independent checker now requires the consumer file, one exact function marker per role, canonical tracked-file
+registration, the complete runtime-package Rust driver, and the canonical driver's optional-Rust invocation. It
+also verifies an exact `rust_parity_admission` topology. Omitting a role, consumer, canonical/backend driver, or
+Rust rollout completion is mutation-rejected. Only `rust_parity` advances from pending to complete; every Dart,
+Julia, dual-ABI Lua, recurring five-backend, and public no-drift leg remains pending. The checker reports 36 family
+spellings, 18 edge cases, eight parent/child cases, 14 Perl roles, 15 Rust roles, 68 migration files, 3 complete /
+5 pending, and 34 rejected drift mutations.
+
+The composed Rust consumer uses compact admission fixtures rather than copying the exhaustive constituent suites.
+It proves rule-local results through native, serialized, and loaded state; exact descriptor identity/family/policy/
+resolved-edge facts; deterministic generated-v2 source identity and minimal family plan; direct/trace result
+identity; v1 reconstruction rejection; recursive and cross-family composition; the two structural substitutes for
+retired global combinations; source-level deletion of the static/runtime override; exact primary success/help/
+retired-flag behavior; and the complete eight-code portable outcome set.
+
+Pre-edit reproduction passed the neutral 2/6 checker plus core normalization 5/5, descriptors 4/4, runtime cursor
+execution 6/6, source emitter 5/5, and Rust primary 63/63 in default and POSIX environments. Post-edit focused
+proof passes the one composed test in 23.37 seconds and its complete authoritative Rust gate: core 189/4/5/8,
+runtime 137, oracle 3 in 205.40 seconds, diagnostics 7, generated classifier 105/105 in 234.99 seconds,
+integrations 197 in 75.60 seconds, composed admission 1 in 23.79 seconds, rule-local execution 6 in 59.58 seconds,
+source emitter 5 in 36.90 seconds, every adjacent suite, and primary 63/63 twice. Formatting and advisory Clippy
+for the new consumer are clean. Canonical CI then accepts the staged consumer as an auditable tracked input,
+repeats the 288-test Perl admission consumer and reference primary 63/63 twice, passes Phase 0 1,031/1,031 in 612
+seconds, and exits 0. Rust parent `.9.1.4` is closed; only the clean commit remains before Dart activates.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.6 — remove Rust global cursor overrides
 
 Rust native direct-value options now select only an optional entry rule. `ExecutionOptions::with_parse_mode`,

@@ -8,9 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.7 — admit Rust rule-local cursor contract**
+  (DONE — one 15-role consumer, exact omission-sensitive topology, 3/5 rollout, complete Rust and canonical
+  signoff, and parent closeout; the clean commit remains before Dart activation).
+
+  **Goal:** Compose every completed Rust cursor projection through one contract-declared admission boundary,
+  advance only Rust, and close the backend parent without duplicating the exhaustive constituent suites.
+
+  **Result:** The neutral contract declares 15 ordered native/serialized/loaded/descriptor/emitted/generated/
+  trace/mixed/recursive/structural/removal/primary/diagnostic roles. One Rust integration test requires exact role
+  set equality, executes each role once, and observes all eight portable diagnostic/removal outcomes. The checker
+  requires every role marker, the consumer as a canonical tracked input, the complete runtime-package Rust gate,
+  and the canonical optional-Rust invocation. Only `rust_parity` advances: inventory remains 68 and rollout is
+  3 complete / 5 pending with 34 rejected mutations.
+
+  **Proof:** Pre-edit constituents pass normalization 5, descriptors 4, execution 6, emitter 5, and primary 63x2.
+  Post-edit composed proof passes 1/1 in 23.37s. The complete Rust gate passes core 189/4/5/8, runtime 137, oracle
+  3/205.40s, diagnostics 7, classifier 105/234.99s, integrations 197/75.60s, composed 1/23.79s, execution 6/59.58s,
+  emitter 5/36.90s, every adjacent suite, and primary 63x2. Formatting and advisory consumer Clippy are clean.
+  Canonical CI passes Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 612s, then exits 0.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.6 — remove Rust global cursor overrides**
-  (DONE — implementation, exact 63x2 migration, public/mdBook/KM lockstep, focused Rust, governance, mutation,
-  and canonical signoff pass; the clean commit is the only boundary before composed admission `.9.1.4.7`).
+  (DONE — committed at `2bba1e91`; implementation, exact 63x2 migration, public/mdBook/KM lockstep, focused Rust,
+  governance, mutation, and canonical signoff pass; composed admission `.9.1.4.7` is active before retrieval).
 
   **Goal:** Delete Rust's caller/global seek/consume authority without deleting the internal rule-derived matcher
   algorithms, and migrate the primary command to the unchanged reference-owned 63-case interface.

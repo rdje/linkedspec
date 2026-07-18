@@ -6,7 +6,8 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl generated-source v2 and option/CLI removal are complete;
 > Rust now exposes the same descriptor-v1, generated-v2, and removal boundary,
-> while composed Rust admission and later backends remain dependency-ordered.
+> and one 15-role composed consumer admits those Rust projections. Dart, Julia,
+> Lua, recurring five-backend admission, and public no-drift remain dependency-ordered.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

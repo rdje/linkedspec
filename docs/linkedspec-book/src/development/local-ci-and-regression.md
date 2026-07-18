@@ -59,6 +59,13 @@ Rust now passes them unchanged in both environments after `.9.1.4.6`; later back
 migrations. UTF-16/UTF-32 are not
 implicit inputs.
 
+Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
+checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package
+command in `tools/run_rust_local.sh`, and that optional Rust driver's registration in `tools/run_ci_local.sh`.
+The default canonical gate remains toolchain-independent; setting `LINKEDSPEC_RUN_RUST=1` executes the same complete
+Rust package that contains the consumer. The current cursor ledger is 3 complete / 5 pending with 68 governed
+migration files and 34 rejected drift mutations.
+
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.

@@ -44,8 +44,12 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > `.9.1.4.6` removes static `ExecutionOptions` and runtime-context global mode
 > state, rejects primary `--parse-mode` with the targeted usage error, omits the
 > global request-trace field, and passes all 63 primary cases in both environments.
-> rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
-> dependency-ordered under `.9.1.4-.9`.
+> Rust admission `.9.1.4.7` composes 15 exact native, serialized, loaded,
+> descriptor, emitted/generated, trace, recursive/structural, removal, primary,
+> and diagnostic roles. The neutral checker requires every role plus canonical
+> registration and advances only `rust_parity`. Rollout is 3 complete / 5
+> pending, with Dart, Julia, Lua, recurring five-backend, and public no-drift
+> work dependency-ordered under `.9.1.5-.9`.
 
 ## Current rule-label surface
 
@@ -685,8 +689,11 @@ Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
 in Perl and Rust are current. Primary-command/API removal is also current in both backends.
-One canonical 14-role consumer composes live default/AND, descriptor, emitted,
+The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
-and diagnostic projections. The neutral checker currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 68 migration files,
-2 complete / 6 pending, and 29 rejected drift mutations.
+and diagnostic roles. The Rust consumer separately composes 15 native default/
+AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
+mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
+neutral checker requires every declared role and canonical registration. It
+currently reports 36 family spellings, 18 edge cases, eight parent/child cases,
+68 migration files, 3 complete / 5 pending, and 34 rejected drift mutations.

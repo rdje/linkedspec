@@ -52,7 +52,7 @@ DIAGNOSTICS = [
 ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.9.1.2"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.3"),
-    ("rust_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.4"),
+    ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.9.1.4"),
     ("dart_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.5"),
     ("julia_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.6"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.7"),
@@ -75,6 +75,28 @@ PERL_REFERENCE_ADMISSION = {
         "structural_ordered_landmarks",
         "structural_anchored_choice",
         "dynamic_option_removal",
+        "primary_command",
+        "portable_diagnostics",
+    ],
+}
+RUST_PARITY_ADMISSION = {
+    "consumer_path": "rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_rust_local.sh",
+    "roles": [
+        "native_default_family",
+        "native_and_family",
+        "ordinary_serialized",
+        "loaded_spec",
+        "descriptor_v1",
+        "emitted_source_v2",
+        "generated_direct",
+        "generated_trace",
+        "mixed_parent_child",
+        "recursion",
+        "structural_ordered_landmarks",
+        "structural_anchored_choice",
+        "static_option_removal",
         "primary_command",
         "portable_diagnostics",
     ],
@@ -255,6 +277,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "descriptor_contract",
             "generated_source_v2",
             "perl_reference_admission",
+            "rust_parity_admission",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -507,6 +530,37 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if canonical_marker not in driver_text:
         fail("canonical driver omits the Perl reference admission consumer")
 
+    rust_admission = require_fields(
+        contract["rust_parity_admission"],
+        {"consumer_path", "canonical_driver", "backend_driver", "roles"},
+        "Rust parity admission",
+    )
+    if rust_admission != RUST_PARITY_ADMISSION:
+        fail("Rust parity admission topology drifted")
+    rust_consumer_path = ROOT / rust_admission["consumer_path"]
+    rust_canonical_path = ROOT / rust_admission["canonical_driver"]
+    rust_backend_path = ROOT / rust_admission["backend_driver"]
+    if not all(
+        path.is_file()
+        for path in (rust_consumer_path, rust_canonical_path, rust_backend_path)
+    ):
+        fail("Rust parity admission consumer or driver is missing")
+    rust_consumer_text = rust_consumer_path.read_text(encoding="utf-8")
+    for role in rust_admission["roles"]:
+        marker = re.compile(rf"^fn role_{re.escape(role)}\(", re.MULTILINE)
+        if len(marker.findall(rust_consumer_text)) != 1:
+            fail(f"Rust parity admission role marker drifted: {role}")
+    rust_canonical_text = rust_canonical_path.read_text(encoding="utf-8")
+    if f"require_tracked_file {rust_admission['consumer_path']}" not in rust_canonical_text:
+        fail("canonical driver omits the Rust parity admission consumer")
+    rust_backend_text = rust_backend_path.read_text(encoding="utf-8")
+    runtime_package_marker = 'test --manifest-path rust/Cargo.toml -p linkedspec-runtime'
+    if runtime_package_marker not in rust_backend_text:
+        fail("Rust backend driver omits the runtime package containing cursor admission")
+    backend_invocation = f'bash "$REPO_ROOT/{rust_admission["backend_driver"]}"'
+    if backend_invocation not in rust_canonical_text:
+        fail("canonical driver omits the registered Rust backend driver")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -593,6 +647,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("generated_family", lambda c: c["generated_source_v2"]["seek_families"].pop()),
         ("Perl admission role", lambda c: c["perl_reference_admission"]["roles"].pop()),
         ("Perl admission consumer", lambda c: c["perl_reference_admission"].__setitem__("consumer_path", "missing")),
+        ("Rust admission role", lambda c: c["rust_parity_admission"]["roles"].pop()),
+        ("Rust admission consumer", lambda c: c["rust_parity_admission"].__setitem__("consumer_path", "missing")),
+        ("Rust admission canonical driver", lambda c: c["rust_parity_admission"].__setitem__("canonical_driver", "missing")),
+        ("Rust admission driver", lambda c: c["rust_parity_admission"].__setitem__("backend_driver", "missing")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -601,6 +659,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("inventory_owner", lambda c: c["migration_inventory"]["groups"][1].__setitem__("owner", "wrong")),
         ("rollout_removed", lambda c: c["rollout"].pop()),
         ("rollout_admission", lambda c: c["rollout"][1].__setitem__("status", "pending")),
+        ("Rust rollout admission", lambda c: c["rollout"][2].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -619,6 +678,7 @@ def main() -> int:
         f"{len(contract['edge_resolution_cases'])} edge cases; "
         f"{len(contract['parent_child_cases'])} parent/child cases; "
         f"{len(contract['perl_reference_admission']['roles'])} Perl admission roles; "
+        f"{len(contract['rust_parity_admission']['roles'])} Rust admission roles; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )

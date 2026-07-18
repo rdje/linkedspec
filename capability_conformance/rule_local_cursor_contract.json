@@ -140,6 +140,28 @@
       "portable_diagnostics"
     ]
   },
+  "rust_parity_admission": {
+    "consumer_path": "rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_rust_local.sh",
+    "roles": [
+      "native_default_family",
+      "native_and_family",
+      "ordinary_serialized",
+      "loaded_spec",
+      "descriptor_v1",
+      "emitted_source_v2",
+      "generated_direct",
+      "generated_trace",
+      "mixed_parent_child",
+      "recursion",
+      "structural_ordered_landmarks",
+      "structural_anchored_choice",
+      "static_option_removal",
+      "primary_command",
+      "portable_diagnostics"
+    ]
+  },
   "diagnostics": [
     {"code": "parse_mode_override_removed", "stage": "prepare_options", "fields": ["option_name"]},
     {"code": "bare_edge_target_undefined", "stage": "normalize_edges", "fields": ["rule_label", "target"]},
@@ -168,7 +190,7 @@
   "rollout": [
     {"leg": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.2"},
     {"leg": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.3"},
-    {"leg": "rust_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.4"},
+    {"leg": "rust_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.4"},
     {"leg": "dart_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.5"},
     {"leg": "julia_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.6"},
     {"leg": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.7"},

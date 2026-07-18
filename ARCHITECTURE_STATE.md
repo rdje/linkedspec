@@ -4,7 +4,16 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-17`
+- Last refreshed: `2026-07-18`
+- `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
+  spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/
+  trace, mixed parent/child, recursion, both structural replacements, static removal, primary command, and all
+  eight portable diagnostic/removal outcomes. The consumer requires exact role-set equality and once-only
+  completion. The neutral checker requires every source marker, canonical tracked-file registration, the complete
+  runtime-package Rust gate, and canonical optional-Rust reachability; it rejects 34 mutations. Only
+  `rust_parity` advances, so rollout is 3 complete / 5 pending at the unchanged 68-file migration inventory.
+  Complete Rust and canonical proof are green; the parent is closed and only the clean commit remains before Dart
+  activates.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight
