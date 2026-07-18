@@ -10,23 +10,25 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.0` — root selection is ratified as an executable neutral
-  contract with exact five-backend audit and canonical signoff, without behavior changes.
-- latest_commit: `82999046` — `FUTURE-PARITY-BACKLOG.9.1.5.5 - remove Dart global cursor overrides`
-  (ahead: 205; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.0 - ratify root rule selection`.
-- active_work_unit: root-selection `.9.1.1.2.0` is complete, verified, staged, and uncommitted; pivot is prohibited
-  until its clean commit. Perl behavior remains frozen for `.9.1.1.2.1`.
-- next_action: prepare the exact commit brief, commit `.9.1.1.2.0`, clear the brief, verify clean, then activate
-  Perl implementation `.9.1.1.2.1` task-tree-first.
-- current_proof: ADR `0046` fixes explicit selector > first authored `::` > first authored rule, optional marker,
-  authored `is_top` identity, request-vs-runtime trace attribution, and unchanged strict-unused graph semantics.
-  Audit finds current Perl row-zero default, Rust marker-only default/routes, and Dart/Julia/Lua fallback blocked by
-  validation. Neutral JSON/checker passes 8 selections, 3 failures, 3 strict cases, 5 backend rows, 1 complete / 6
-  pending rollout, and 24 mutations. Knowledge Map is 594/4,238; memory/task/four-doctrine/mdBook/whitespace pass.
-  Canonical CI repeats Perl cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 642 seconds,
-  exit 0. No parser, validator, runtime, descriptor, generated-source, CLI, fixture, or shared conformance behavior
-  changed. No background job is running.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` — exact Perl root-selection seams and safe `.1-.3`
+  implementation order are durably mapped and canonically verified without behavior changes.
+- latest_commit: `7abbc593` — `FUTURE-PARITY-BACKLOG.9.1.1.2.0 - ratify root rule selection`
+  (ahead: 206; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 - map Perl root selection`.
+- active_work_unit: Perl root-selection preflight `.9.1.1.2.1.0` is complete and canonically verified in the dirty
+  tree; its clean commit is the only boundary before implementation `.1.1`.
+- next_action: prepare the exact brief, commit `.1.0`, clear and verify the brief, confirm clean, then activate
+  `.9.1.1.2.1.1` task-tree-first.
+- current_proof: Perl envelope validation requires a marker after finding a rule. Bootstrap preserves order and
+  uses `ELABEL`/`ELABEL_INITIAL`, but RuleIR/SpecEntry omit authored `is_top`; Compiler finally chooses explicit
+  `top_rule` or row zero. Descriptor order survives without marker identity; emitted v2 label/family plan hardcodes
+  the compiler-selected label for direct/traced execution. Unknown explicit selection compiles and fails only at
+  `resolve_top_rule_handler`. Direct strict validation remains defined-minus-authored-edge references and rejects
+  unreferenced marked Top; Get does not forward strict_syntax. get_parser and primary forward the same selector,
+  while request trace already preserves NAME versus `<default>`. Focused CLI is 2/2 twice; generated source 6/6;
+  root checker 8/3/3/5 at 1/6 plus 24 mutations; Knowledge Map 595/4,248; four doctrines/mdBook/whitespace pass.
+  Canonical CI passes cursor admission 288, primary 63x2, and Phase 0 1,031/1,031 in 632 seconds, exit 0. No
+  executable behavior file changed and no background job is running.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0044`, neutral/admitted references, Dart generated/live/descriptor/CLI seams, and gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -38,5 +40,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed/verified `.9.1.1.2.0` neutral decision/contract/checker/book/
-  live-doc slice awaits only its commit. Parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: completed/verified behavior-free `.9.1.1.2.1.0` seam-map/docs/KM/live
+  slice awaits only its commit. Parked ignored work is untouched.

@@ -8,8 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 — map Perl root selection**
+  (DONE — behavior-free seam map, durable rollout plan, focused proof, and canonical signoff pass; clean commit is
+  the only remaining boundary before `.1.1`).
+
+  **Goal:** Establish every current Perl validation, bootstrap, selection, descriptor, generated, strict, loaded,
+  trace, diagnostic, and primary seam before changing root behavior.
+
+  **Result:** Bootstrap retains exact order and `ELABEL`/`ELABEL_INITIAL` marker identity, but RuleIR makes the
+  marker transient, SpecEntry metadata omits `is_top`, and Compiler finally selects explicit `top_rule` or row zero.
+  Descriptors retain order without marker bits; emitted v2 hardcodes that selected label. Unknown selectors fail
+  only during parser invocation. Direct strict validation retains authored-edge graph semantics, while Get does
+  not wire the strict option. Children `.1-.3` now have a proven dependency order.
+
+  **Proof:** Read-only runtime/bootstrap/strict/generated/descriptor probes and exact owner/test retrieval are
+  recorded in the task, Knowledge Map card, CHANGES, development notes, and mdBook. Focused root CLI is 2/2 twice
+  and generated source is 6/6. Root governance is 8/3/3/5 at 1/6 with 24 mutations; Knowledge Map is 595/4,248;
+  four doctrines/mdBook/whitespace pass. Canonical CI repeats cursor admission 288, primary 63x2, and Phase 0
+  1,031/1,031 in 632 seconds before exit 0. No executable behavior changed.
+
+  **Next:** Commit the clean preflight, then activate `.9.1.1.2.1.1` for validation, the shared resolver, unknown-
+  selector diagnostics, and authored marker metadata.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.0 — ratify root rule selection**
-  (DONE — exact neutral contract, governance, mdBook, and canonical signoff pass; clean commit remains).
+  (DONE — exact neutral contract, governance, mdBook, and canonical signoff are clean at `7abbc593`).
 
   **Goal:** Fix one backend-neutral entry-rule selection order before any backend behavior changes.
 
@@ -23,7 +45,7 @@ Current execution status for interruption-safe batch workflow recovery.
   cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 642 seconds before exit 0. No backend
   behavior file changed.
 
-  **Next:** Commit clean, then activate Perl `.9.1.1.2.1`.
+  **Next:** Perl parent `.9.1.1.2.1` is active; behavior-free seam preflight `.1.0` runs before implementation.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.5 — remove Dart global cursor overrides**
   (DONE — caller-global API/CLI/trace ownership is removed, exact Dart and canonical signoff pass, and clean commit

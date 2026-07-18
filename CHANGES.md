@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 — map Perl root selection
+
+The behavior-free Perl preflight now maps the complete root-selection path before implementation. Envelope
+validation separately requires a `::` after recognizing at least one rule. Bootstrap preserves definition order
+and distinguishes `Rule:` as `ELABEL` from every `Rule::` as `ELABEL_INITIAL`, but RuleIR/SpecEntry do not project
+that authored marker into rule metadata. Compiler then replaces discovered marker state with explicit `top_rule`
+or parsed row zero, explaining why an earlier ordinary rule currently defeats a later marker.
+
+The outward descriptor preserves definition order but exposes no per-rule `is_top`. Generated-source v2 retains
+only ordered label/family rows and hardcodes the compiler-selected label for both direct and traced entrypoints.
+`get_parser` forwards the same selector path. Unknown explicit selection currently compiles and fails only when the
+returned parser looks up its handler, using `resolve_top_rule_handler` rather than the target portable diagnostic.
+The primary request trace already correctly distinguishes an explicit label from `<default>`.
+
+Direct `Validation::validate_dsl_syntax(..., strict_syntax => 1)` remains defined rules minus authored-edge
+references and rejects an unreferenced marked Top. `LinkedSpec::Get(strict_syntax => 1)` does not forward that
+option, so the root rollout will preserve the validator contract without silently inventing a compiler API. The
+dependency-safe implementation order is frozen as `.1.1` validation/resolver/authored metadata, `.1.2` loaded and
+generated execution plus trace/diagnostics, and `.1.3` composed Perl admission plus reference-first shared CLI
+bytes. A new Knowledge Map card and mdBook paragraph retain the causal map; executable behavior is unchanged.
+
+Focused existing primary cases pass 2/2 in both default and POSIX environments, and the generated-source contract
+passes 6/6. The root checker remains 8 selections / 3 failures / 3 strict cases / 5 backends at 1 complete and 6
+pending with 24 rejected mutations. Knowledge Map is 595 facts / 4,248 question keys; memory architecture, task
+metadata, all four doctrines, mdBook, and whitespace pass. Canonical local CI repeats composed cursor admission
+288, exact reference primary 63/63 twice, and Phase 0 1,031/1,031 in 632 seconds before exit 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.0 — ratify root-rule selection
 
 ADR `0046` now fixes one cross-backend selection order: an explicit entry selector, including

@@ -194,6 +194,14 @@ later marker exists; Rust defaults to the first marker but has no markerless fal
 the marker-then-first fallback but validation makes its last branch unreachable. Until `.9.1.1.2.1-.6` close, use
 at least one `::` for portable current execution and pass an explicit selector when its identity matters.
 
+The Perl preflight identifies why its current behavior differs. Bootstrap already preserves source order and tags
+each `Rule::` distinctly, but compiled rule metadata drops that tag; after compiling all rules, the compiler chooses
+an explicit `top_rule` or row zero. The outward descriptor consequently has definition order but no authored
+`is_top`, and independently loaded generated source contains ordered label/family rows while hardcoding that same
+compiler-selected entry. The Perl rollout therefore restores immutable marker identity before changing generated or
+loaded execution. Its strict-unused validator remains separate: only authored rule edges count as references, and
+selection or `::` contributes neither a reference nor an exemption.
+
 The double colon is purely authored default-selection metadata. A marked rule is otherwise an **ordinary rule** —
 it may carry a regex, take any rule
 mode (§2.2), and be recursive (§5.4), exactly like a body rule. The common "no regex on

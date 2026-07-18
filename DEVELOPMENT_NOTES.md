@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` — preserve identity before resolving execution): Perl already
+  carries the information needed for the directed contract, but only in the bootstrap token stream. Ordinary
+  headers produce `ELABEL`; every authored marker produces `ELABEL_INITIAL`; source row order is stable. The loss
+  happens when RuleIR turns the marker into transient `top_rule` state instead of immutable `is_top` metadata.
+  SpecEntry writes each discovered marker into runtime context, and Compiler later overwrites that state with the
+  explicit request or row zero. Fixing only the last conditional would select the right default while leaving
+  descriptors and emitted source unable to explain or reconstruct it.
+
+  Generated-source v2 deliberately has a minimal label/family plan. Root selection does not justify serializing a
+  caller's explicit choice as source identity. The emitted artifact instead needs immutable authored selection
+  facts and an execution-time resolver, with direct and traced roles sharing it. This is why core identity/resolution
+  is `.1.1` and generated/loaded propagation is `.1.2`, rather than one broad compiler edit.
+
+  Unknown selectors are currently deferred until handler lookup. The returned parser dies before invoking any user
+  handler, but its structured error is the old `resolve_top_rule_handler` shape and descriptor-return mode can still
+  succeed. The target should validate the explicit label after structural parse/compile state exists, retain the
+  primary command's invocation exit/stderr bytes, and attribute inner failure to `entry_rule_not_found` /
+  `select_entry_rule` with the effective label field.
+
+  A probe using `LinkedSpec::Get(strict_syntax => 1)` initially appeared to contradict strict-unused. Exact source
+  retrieval showed that Compiler calls `validate_dsl_syntax` with only `on_failure`; strict mode is a direct
+  Validation API, not a wired Get option. Direct strict proof still reports marked `Top` unused when only `Child`
+  is referenced. The root work therefore changes neither the static graph nor the unsupported compiler option.
+
+  The shared CLI manifest can migrate reference-first in `.1.3`, following the established cursor rollout: the
+  canonical branch gates the Perl reference at every commit, while later backend leaves consume the same staged
+  target in dependency order. Final five-backend symmetry remains owned by `.9.1.1.2.6`.
+
+  Signoff preserves the behavior-free boundary: focused current root CLI cases are 2/2 twice, generated source is
+  6/6, and the neutral checker remains 1/7 with 24 mutations. Canonical CI passes cursor admission 288, reference
+  primary 63x2, and Phase 0 1,031/1,031 in 632 seconds. Knowledge Map is 595/4,248 and every doctrine passes.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.0` — selection state is not source identity): the useful seam is
   a pure ordered resolver over declared rule rows, not another parser mode. Explicit selector wins; otherwise scan
   definition order for the first authored marker; otherwise take row zero. This same resolver belongs at native,
