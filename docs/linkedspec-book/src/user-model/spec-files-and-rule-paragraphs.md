@@ -15,14 +15,15 @@ Once that rule start is seen at top level, the rest of the paragraph belongs to 
 
 This is a better mental model than thinking of `.spec` files as rigid line-by-line mini-programs.
 
-## The top (`::`) rule is an ordinary rule, entered first
+## Default-entry markers are ordinary rules
 
-The double colon is an **entry marker**, not a special construct. `top_rule::` says
-"this is the rule a backend enters first." In every other respect a top rule is an
-**ordinary rule**: it can carry a regex, take any rule mode, dispatch with `->`/`=>`
-edges, and be recursive — exactly like a single-colon rule. The runnable stream examples
-in this book still use the clearer two-rule shape: a no-regex entry rule that dispatches
-to normal matcher rules.
+The double colon is an authored **default-entry marker**, not a special construct.
+Without an explicit selector, the first `Rule::` is entered before any ordinary rule.
+An explicit selector may instead enter any declared rule. In every other respect a marked
+rule is an **ordinary rule**: it can carry a regex, take any rule mode, dispatch with
+`->`/`=>` edges, and be recursive — exactly like a single-colon rule. The runnable stream
+examples in this book still use the clearer two-rule shape: a no-regex default entry that
+dispatches to normal matcher rules.
 
 Two long-standing recommendations are therefore **idiom, not engine law**:
 
@@ -36,18 +37,18 @@ Two long-standing recommendations are therefore **idiom, not engine law**:
 A **single recursive document** can be expressed with a recursive top rule directly,
 instead of being forced through a stream-of-records dispatcher.
 
-### Entry-selection precedence and the pending no-marker correction
+### Entry-selection precedence and current rollout
 
 An explicit entry selector has highest priority. On the shared primary command,
 `--top-rule NAME` may select any declared rule—including an ordinary single-colon rule—and
 wins even when the source contains one or more `Rule::` markers. Without an explicit
-selector, current backends choose the first authored `Rule::` in definition order.
+selector, the first authored `Rule::` in definition order wins; without a marker, the first
+authored rule wins.
 
-The directed next contract adds the final fallback: if a source has no `::`, its first
-authored ordinary `Rule:` becomes the default entry. That fallback is tracked under
-`FUTURE-PARITY-BACKLOG.9.1.1.2`; it is **not yet uniform current behavior** because current
-validation still requires an entry marker on multiple backends. Until that rollout closes,
-portable current specs should retain a `::` marker.
+The Perl library implements all three branches across native, loaded, generated-direct,
+generated-traced, and generated `Get` routes. Other backends still require an entry marker,
+so markerless execution is **not yet uniform portable behavior**. Until
+`FUTURE-PARITY-BACKLOG.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 

@@ -125,6 +125,27 @@ sub clone_plan {
  } @$plan]
 }
 
+sub clone_entry_rules {
+ my ($rows) = @_;
+ return [] unless ref($rows) eq 'ARRAY';
+ return [map {
+  ref($_) eq 'HASH'
+   ? { label => $_->{label}, is_top => $_->{is_top} ? 1 : 0 }
+   : $_
+ } @$rows]
+}
+
+sub family_for_rule {
+ my ($plan, $rule_label) = @_;
+ return undef unless ref($plan) eq 'ARRAY' && defined($rule_label);
+ foreach my $row (@$plan) {
+  next unless ref($row) eq 'HASH';
+  return $row->{family}
+   if defined($row->{label}) && $row->{label} eq $rule_label;
+ }
+ return undef
+}
+
 sub new_error {
  my (%args) = @_;
  my $error = {
@@ -135,6 +156,7 @@ sub new_error {
   source_identity => defined($args{source_identity}) ? $args{source_identity} : '',
  };
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
+ $error->{entry_rule} = $args{entry_rule} if defined $args{entry_rule};
  $error->{handler_family} = $args{handler_family} if defined $args{handler_family};
  $error->{option_name} = $args{option_name} if defined $args{option_name};
  $error->{expected_contract} = $args{expected_contract} if defined $args{expected_contract};
@@ -261,6 +283,7 @@ sub trace_role {
   'rule=' . (defined($args{rule_label}) ? $args{rule_label} : ''),
  );
  push @context, 'family=' . $args{handler_family} if defined $args{handler_family};
+ push @context, 'basis=' . $args{selection_basis} if defined $args{selection_basis};
  push @context, 'status=' . $args{status} if defined $args{status};
  return LinkedSpec::Trace::log_output(
   500,

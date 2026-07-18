@@ -288,6 +288,19 @@ subtest 'neutral direct result, deterministic source, metadata, trace, and error
  is($metadata->{contract_id}, 'linkedspec-generated-source-v2', 'metadata reports contract id');
  is($metadata->{format_version}, 2, 'metadata reports format version');
  is($metadata->{source_identity}, $identity, 'metadata reports exact source identity');
+ is(
+  $metadata->{entry_rule_contract},
+  'linkedspec-root-rule-selection-v1',
+  'metadata reports root-rule selection contract',
+ );
+ is_deeply(
+  $metadata->{entry_rules},
+  [
+   { label => 'Top', is_top => 1 },
+   { label => 'Done', is_top => 1 },
+  ],
+  'metadata preserves ordered authored default-entry markers',
+ );
  is_deeply(
   $metadata->{plan},
   [

@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 — converge Perl root execution
+
+Perl loaded and generated library execution now consumes the same root-rule resolver as native `Get`. Generated
+source embeds ordered authored `{label,is_top}` rows separately from the unchanged minimal `{label,family}` plan.
+`LinkedSpecGeneratedMetadata()` exposes `entry_rule_contract` and `entry_rules`, so an independently loaded
+artifact can select the first authored marker or, without one, the first authored rule without fabricating source
+identity.
+
+Generated `Execute`, `ExecuteWithTrace`, and `Get` accept invocation options containing `top_rule`. An invocation-
+local selector overrides an emission-time configured selector; either may name an ordinary rule or a later marker.
+An unknown name fails before user code as `generated_source_error` / `entry_rule_not_found` at
+`select_entry_rule`, retaining requested rule and source identity. `generated_entry_selection` records the
+effective label, family, basis, and status, and subsequent enter/family/exit roles plus execution failures use that
+same effective identity.
+
+The recurring route consumer covers `get_parser`, portable `SpecLoader`, all three generated roles, markerless
+default/explicit selection, configured and invocation-local selectors, metadata, source-byte compatibility,
+structured failures, runtime context, and native/generated trace attribution. The general generated-source suite
+also locks the new metadata projection. Focused adjacent proof passes eight files / 49 tests, and standalone Phase
+0 passes 1,031/1,031. Root/generated governance, mdBook, Knowledge Map 597/4,269, live docs, and doctrines pass.
+Canonical CI passes the 5-test route consumer, cursor admission 288, reference primary 63/63 twice, and Phase 0
+1,031/1,031 in 610 seconds. The Perl rollout row deliberately remains pending at 1 complete / 6 pending until
+shared CLI/public admission `.9.1.1.2.1.3` closes.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 — implement Perl root resolution
 
 The Perl core now implements `linkedspec-root-rule-selection-v1`: an explicit `top_rule` may name any declared

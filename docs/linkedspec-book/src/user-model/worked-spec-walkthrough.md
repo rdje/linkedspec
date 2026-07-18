@@ -57,8 +57,8 @@ Top::
 LX { return(copy(Top)) }
 ```
 
-`Top::` is the entry rule. The double-colon `::` label marks the single top rule of the spec —
-the rule a backend starts from. It carries **no regex of its own**. Instead it runs a dispatch
+`Top::` is the default entry rule for this example. The double-colon `::` marks it as the
+rule a backend starts from when no explicit selector is supplied. It carries **no regex of its own**. Instead it runs a dispatch
 loop: it repeatedly hands off to the `Pair` matcher (`-> Pair`) and `.push`es each result onto
 its own accumulator. When the input is exhausted, the `LX { ... }` lifecycle block returns a
 snapshot of that accumulator with `copy(Top)` — that snapshot (a list) is the parser's
@@ -121,7 +121,8 @@ The top `::` entry rule and the normal `:` matcher rule play different roles:
 
 - The **entry rule** (`Top::`) names the whole parser and owns the result. In this example it carries
   no regex: it loops, dispatches to matchers, collects their payloads, and returns the collection.
-  There is exactly one default entry marker per spec.
+  A source may contain multiple default-entry markers; the first one wins unless an explicit
+  selector chooses any declared rule.
 - The **matcher rule** (`Pair:`) carries the regex and turns one match into one payload.
 
 In this idiom the regex lives on the normal `:` matcher rule and the `::` entry rule

@@ -220,7 +220,7 @@
       "default_selection": "first_authored_marker_then_first_authored_rule",
       "explicit_selection": "supported_and_wins",
       "markerless_fallback": "implemented",
-      "generated_selection": "compiler_selected_label_is_embedded",
+      "generated_selection": "ordered_authored_state_and_explicit_execution",
       "descriptor_authored_is_top": "present",
       "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"
     },

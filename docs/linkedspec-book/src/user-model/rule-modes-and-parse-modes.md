@@ -88,17 +88,17 @@ Item:AND
 
 Here `Top::` is the no-regex entry wrapper, and `Item:AND` is the regex-carrying ordered sequence. A no-regex entry or dispatcher can still carry a mode suffix when it composes child parser calls, as shown later in this chapter.
 
-Mechanically, `::` is an **entry marker**: it designates the rule entered first. The Perl reference engine treats that rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)). After entry selection, `::` and `:` have the same rule feature surface: either form can carry regex slots, rule modes, action or blind-call edges, lifecycle blocks, and recursion. Recursion through any rule — including the top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
+Mechanically, `::` is an authored **default-entry marker**. Without an explicit selector, the first marked rule is entered; a selector may enter any declared rule instead. The Perl reference engine treats a marked rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#default-entry-markers-are-ordinary-rules)). After entry selection, `::` and `:` have the same rule feature surface: either form can carry regex slots, rule modes, action or blind-call edges, lifecycle blocks, and recursion. Recursion through any rule — including the entry rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
 
 Entry selection is separate from cursor policy. An explicit selector such as `--top-rule`
-wins over authored `::` markers and may name any declared rule. The directed fallback from
-no marker to the first ordinary rule remains implementation-pending across the complete
-backend set; see [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-the-pending-no-marker-correction).
+wins over authored `::` markers and may name any declared rule. Otherwise the first marker,
+then the first authored rule, wins. Perl library routes implement all three branches; full
+backend parity remains staged. See [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
 
 The current public suffix surface is intentionally small and exact:
 
 - `Rule:` is the historical baseline repeated-alternative rule shape.
-- `Rule::` is the entry marker for the rule entered first; its body supports the same modes and regex slots as `Rule:`.
+- `Rule::` is a default-entry marker; its body supports the same modes and regex slots as `Rule:`.
 - `Rule:&` is ordered sequence.
 - `Rule:AND` is the worded ordered-sequence spelling.
 - `Rule:AND+` is open-ended repeated ordered sequence with an implicit lower bound of one.
@@ -657,8 +657,9 @@ The authored family becomes the only cursor authority:
 | bare/default, `|`, `+`, `*`, `?`, `OR`, `OR+`, `OR{...}` | `seek` |
 | `&`, `AND`, `AND+`, `AND{...}` | `consume` |
 
-`::` remains only the marker for the rule entered first. A parent starts a
-child at its current cursor, but the child then applies its own family policy.
+`::` remains only authored default-entry identity; it is not cursor policy. An
+explicit selector may enter any declared rule. A parent starts a child at its
+current cursor, but the child then applies its own family policy.
 Edge kind never overrides either family.
 
 The four low-level combinations still have structural expressions. An ordered

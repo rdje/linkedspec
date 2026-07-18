@@ -93,12 +93,36 @@ sub _generated_source_plan_rows {
  return \@rows
 }
 
+sub _generated_source_entry_rule_rows {
+ my ($compiled_spec_state) = @_;
+ my @rows;
+ foreach my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state)}) {
+  my ($label, $info) = @$row;
+  my $meta = (ref($info) eq 'HASH' && ref($info->{meta}) eq 'HASH')
+   ? $info->{meta}
+   : {};
+  push @rows, {
+   label => $label,
+   is_top => $meta->{is_top} ? 1 : 0,
+  };
+ }
+ return \@rows
+}
+
 sub _generated_source_plan_literal {
  my ($plan) = @_;
  return "[\n" . join('', map {
   ' { label => ' . _quote_generated_source_string($_->{label})
    . ', family => ' . _quote_generated_source_string($_->{family}) . " },\n"
  } @$plan) . ']'
+}
+
+sub _generated_source_entry_rule_literal {
+ my ($rows) = @_;
+ return "[\n" . join('', map {
+  ' { label => ' . _quote_generated_source_string($_->{label})
+   . ', is_top => ' . ($_->{is_top} ? 1 : 0) . " },\n"
+ } @$rows) . ']'
 }
 
 sub _generated_source_preamble {
@@ -112,6 +136,7 @@ sub _generated_source_preamble {
   . "no warnings 'void';\n"
   . "use re 'eval';\n"
   . "use LinkedSpec::GeneratedSource ();\n"
+  . "use LinkedSpec::EntryRuleSelection ();\n"
   . "use LinkedSpec::RuntimeDiagnosticOutput ();\n"
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
@@ -146,19 +171,17 @@ sub _dependency_regex_source_expression {
 sub _generated_source_postamble {
  my (%args) = @_;
  my $plan_literal = _generated_source_plan_literal($args{plan});
- my $top_rule_literal = _quote_generated_source_string($args{top_rule});
- my $top_family = 'default';
- foreach my $row (@{$args{plan}}) {
-  if ($row->{label} eq $args{top_rule}) {
-   $top_family = $row->{family};
-   last;
-  }
- }
- my $top_family_literal = _quote_generated_source_string($top_family);
+ my $entry_rule_literal = _generated_source_entry_rule_literal($args{entry_rules});
+ my $configured_entry_rule_literal = defined($args{configured_entry_rule})
+  && length($args{configured_entry_rule})
+  ? _quote_generated_source_string($args{configured_entry_rule})
+  : 'undef';
  return <<"GENERATED_SOURCE_POSTAMBLE";
 
 my \$LINKEDSPEC_GENERATED_EXPECTED_PLAN = $plan_literal;
 my \$LINKEDSPEC_GENERATED_ACTIVE_PLAN = LinkedSpec::GeneratedSource::clone_plan(\$LINKEDSPEC_GENERATED_EXPECTED_PLAN);
+my \$LINKEDSPEC_GENERATED_ENTRY_RULES = $entry_rule_literal;
+my \$LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE = $configured_entry_rule_literal;
 
 sub LinkedSpecGeneratedMetadata {
  return {
@@ -166,6 +189,8 @@ sub LinkedSpecGeneratedMetadata {
   format_version => \$LINKEDSPEC_GENERATED_SOURCE_FORMAT,
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
   plan => LinkedSpec::GeneratedSource::clone_plan(\$LINKEDSPEC_GENERATED_EXPECTED_PLAN),
+  entry_rule_contract => \$LinkedSpec::EntryRuleSelection::CONTRACT_ID,
+  entry_rules => LinkedSpec::GeneratedSource::clone_entry_rules(\$LINKEDSPEC_GENERATED_ENTRY_RULES),
  }
 }
 
@@ -192,33 +217,75 @@ sub Execute {
  my \$diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(
   \$invocation_options,
  );
+ my \$explicit_entry_rule = \$LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;
+ if (ref(\$invocation_options) eq 'HASH'
+  && defined(\$invocation_options->{top_rule})
+  && length(\$invocation_options->{top_rule})) {
+  \$explicit_entry_rule = \$invocation_options->{top_rule};
+ }
+ my \$entry_selection = LinkedSpec::EntryRuleSelection::select_entry_rule(
+  \$LINKEDSPEC_GENERATED_ENTRY_RULES,
+  \$explicit_entry_rule,
+ );
+ unless (\$entry_selection->{ok}) {
+  my \$entry_rule = \$entry_selection->{entry_rule};
+  LinkedSpec::GeneratedSource::trace_role(
+   role => 'generated_entry_selection',
+   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+   rule_label => defined(\$entry_rule) ? \$entry_rule : '',
+   status => 'error',
+  );
+  die LinkedSpec::GeneratedSource::new_error(
+   stage => \$entry_selection->{stage},
+   code => \$entry_selection->{code},
+   summary => 'Generated parser entry-rule selection failed',
+   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+   defined(\$entry_rule) ? (entry_rule => \$entry_rule, rule_label => \$entry_rule) : (),
+   detail => defined(\$entry_rule)
+    ? "No declared rule matches explicit entry selector '\$entry_rule'"
+    : 'Generated parser source has no declared entry rule',
+  )
+ }
+ my \$entry_rule = \$entry_selection->{entry_rule};
+ my \$entry_family = LinkedSpec::GeneratedSource::family_for_rule(
+  \$LINKEDSPEC_GENERATED_EXPECTED_PLAN,
+  \$entry_rule,
+ );
  my \$sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
  my \$control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
  local \$descr->{\$sink_slot} = \$diagnostic_sink;
  local \$descr->{\$control_error_slot} = undef;
  LinkedSpec::GeneratedSource::trace_role(
+  role => 'generated_entry_selection',
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  rule_label => \$entry_rule,
+  handler_family => \$entry_family,
+  selection_basis => \$entry_selection->{basis},
+  status => 'ok',
+ );
+ LinkedSpec::GeneratedSource::trace_role(
   role => 'generated_rule_enter',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-  rule_label => $top_rule_literal,
-  handler_family => $top_family_literal,
+  rule_label => \$entry_rule,
+  handler_family => \$entry_family,
  );
  LinkedSpec::GeneratedSource::trace_role(
   role => 'generated_family_decision',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-  rule_label => $top_rule_literal,
-  handler_family => $top_family_literal,
+  rule_label => \$entry_rule,
+  handler_family => \$entry_family,
  );
  my (\$result, \$execution_error);
  my \$ok = eval {
-  \$result = &{\$descr->{spec}{$top_rule_literal}}(\$descr, \$input_ref);
+  \$result = &{\$descr->{spec}{\$entry_rule}}(\$descr, \$input_ref);
   1
  };
  \$execution_error = \$@;
  LinkedSpec::GeneratedSource::trace_role(
   role => 'generated_rule_exit',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-  rule_label => $top_rule_literal,
-  handler_family => $top_family_literal,
+  rule_label => \$entry_rule,
+  handler_family => \$entry_family,
   status => \$ok ? 'ok' : 'error',
  );
  die \$execution_error
@@ -231,8 +298,8 @@ sub Execute {
   code => 'generated_execution_failed',
   summary => 'Generated parser execution failed',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-  rule_label => $top_rule_literal,
-  handler_family => $top_family_literal,
+  rule_label => \$entry_rule,
+  handler_family => \$entry_family,
   detail => \$execution_error,
  ) unless \$ok;
  return \$result
@@ -1359,17 +1426,18 @@ if ($validate_dependency_regex_references_error) {
    my $prefix = $i ? ",\n" : '';
    _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $prefix . " $label\t=> $gregex");
   }
-  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
   my $source_identity = _generated_source_identity($option, $runtime_ctx);
   my $plan = _generated_source_plan_rows($compiled_spec_state);
+  my $entry_rules = _generated_source_entry_rule_rows($compiled_spec_state);
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n");
   _call_runtime_ctx(
    'emit_runtime_ctx_parser_source_line',
    $runtime_ctx,
    _generated_source_postamble(
     source_identity => $source_identity,
-    top_rule => $top_rule,
     plan => $plan,
+    entry_rules => $entry_rules,
+    configured_entry_rule => $requested_top_rule,
    ),
   );
   _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref);

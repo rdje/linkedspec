@@ -362,18 +362,28 @@ my $metadata = My::GeneratedWords::LinkedSpecGeneratedMetadata();
 
 The generated package exposes semantic roles:
 
-- `Execute($input_ref)`;
-- `ExecuteWithTrace($input_ref, \%trace_config)`;
+- `Execute($input_ref, [\%invocation_options])`;
+- `ExecuteWithTrace($input_ref, \%trace_config, [\%invocation_options])`;
+- `Get($input_ref, [\%invocation_options])`, an alias of `Execute`;
 - `LinkedSpecGeneratedMetadata()` and `LinkedSpecGeneratedPlan()`;
 - `ValidateGeneratedPlan($plan, [$actual_contract])`.
 
-Metadata contains the contract id, format version, source identity, and ordered `label` / `family` rows. Plan
-validation rejects count, label, family, and unknown-family drift before execution. Emission, validation, and
-execution failures are thrown as `generated_source_error` hashrefs with stable stage/code/identity fields.
+Metadata contains the generated-source contract id, format version, source identity, ordered `label` / `family`
+plan rows, `entry_rule_contract = linkedspec-root-rule-selection-v1`, and ordered `entry_rules` rows containing
+`label` plus immutable authored `is_top`. Plan validation rejects count, label, family, and unknown-family drift
+before execution. Emission, validation, selection, and execution failures are thrown as `generated_source_error`
+hashrefs with stable stage/code/identity fields.
 The plan remains the minimal `{label, family}` shape. Perl v2 derives five seek and five consume policies from the
 ten admitted family names; it does not serialize a separate cursor field. Supplying a v1 contract at reconstruction
 fails with `generated_source_contract_version_mismatch`, `expected_contract`, and `actual_contract`; regenerate the
 artifact from its `.spec` source.
+
+All three execution roles accept `top_rule` in their invocation-options hash. It overrides any selector configured
+when the artifact was emitted, then normal resolution uses the first authored marker or first authored rule. An
+unknown selector fails at `select_entry_rule` with `code = entry_rule_not_found`, `entry_rule`, `rule_label`, and
+source identity before a rule handler runs. Generated trace adds `generated_entry_selection` with the effective
+label and selection basis; subsequent enter, family, exit, and execution-error attribution use that same effective
+rule. An emission-time `top_rule` remains execution configuration only: it does not rewrite metadata `is_top`.
 
 The emitter rejects the removed `parse_mode` key before parsing source. Its structured error retains
 `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, `option_name = "parse_mode"`, and the caller's
@@ -417,10 +427,11 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 1 complete / 6 pending. The current Perl
-reference still selects the first parsed rule even when a later marker exists, Rust requires and selects a marker,
-and Dart/Julia/Lua validation still blocks their existing markerless runtime fallback. Use an explicit selector
-when current multi-backend execution must be independent of those staged differences.
+has no marker, select the first authored rule. That contract is at 1 complete / 6 pending. The current Perl library
+implements the exact order across native, loaded, generated-direct, generated-traced, and generated `Get` routes.
+Rust requires and selects a marker, and Dart/Julia/Lua validation still blocks their existing markerless runtime
+fallback. Use an explicit selector and retain a marker when current multi-backend execution must be independent of
+those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -442,8 +453,8 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. A markerless file remains implementation-
-pending until the backend rollout closes, so this example currently needs an explicit selector on portable paths:
+With no `::`, the accepted default is simply the first declared rule. Perl library routes now accept this shape;
+other backends still require a marker, so it is not yet a portable cross-backend source:
 
 ```text
 First:

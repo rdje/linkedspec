@@ -78,7 +78,7 @@ INVENTORY = [
         "first_authored_marker_then_first_authored_rule",
         "supported_and_wins",
         "implemented",
-        "compiler_selected_label_is_embedded",
+        "ordered_authored_state_and_explicit_execution",
         "present",
         "FUTURE-PARITY-BACKLOG.9.1.1.2.1",
     ),

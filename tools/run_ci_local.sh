@@ -103,6 +103,7 @@ require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/root_rule_selection_perl_core.t
+require_tracked_file t/root_rule_selection_perl_routes.t
 require_tracked_file rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs
 require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
@@ -198,6 +199,7 @@ perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/root_rule_selection_perl_core.t
+perl -c -Iperl t/root_rule_selection_perl_routes.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
@@ -224,6 +226,9 @@ python3 tools/check_root_rule_selection_contract.py
 
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t
+
+log "running focused Perl root-rule loaded/generated/trace consumer"
+PERL5LIB= prove -Iperl t/root_rule_selection_perl_routes.t
 
 log "running composed Perl rule-local cursor admission consumer"
 PERL5LIB= prove -Iperl t/rule_local_cursor_perl_contract.t

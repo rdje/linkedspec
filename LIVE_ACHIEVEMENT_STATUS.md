@@ -8,9 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 — converge Perl root execution**
+  (DONE — loaded/generated/runtime-context/trace/diagnostic convergence and canonical proof pass; clean commit is
+  the only boundary before `.1.3`).
+
+  **Result:** Generated v2 source preserves ordered authored `{label,is_top}` identity separately from its
+  unchanged minimal `{label,family}` plan. Generated `Execute`, `ExecuteWithTrace`, and `Get` resolve configured
+  or invocation-local selectors through the shared resolver; invocation-local authority wins. Unknown selection
+  fails before user code with structured requested-rule/source identity. Selection plus existing enter/family/exit
+  trace and execution errors consistently use the effective label. Loaded `get_parser`/`SpecLoader` and runtime
+  context agree; metadata publishes the root contract and immutable entry rows.
+
+  **Proof:** Focused routes plus seven adjacent suites pass 8 files / 49 tests. Root governance remains 8/3/3/5
+  at 1/6 with 24 mutations; generated governance is 80/0/0; Knowledge Map is 597/4,269; mdBook, doctrines, syntax,
+  whitespace, and cleanup pass. Canonical CI passes the route consumer 5, cursor admission 288, reference primary
+  63x2, and Phase 0 1,031/1,031 in 610 seconds.
+
+  **Next:** Commit `.9.1.1.2.1.2`, clear/verify the brief and clean tree, then activate composed Perl admission
+  `.9.1.1.2.1.3` task-tree-first. Rollout remains 1 complete / 6 pending until that admission leaf closes.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 — implement Perl root resolution**
-  (DONE — exact core precedence, markerless validation, authored descriptor identity, strict no-drift, and
-  canonical proof pass; clean commit is the only boundary before `.1.2`).
+  (DONE at clean commit `f33d6d24` — exact core precedence, markerless validation, authored descriptor identity,
+  strict no-drift, and canonical proof pass; `.1.2` is active).
 
   **Result:** One ordered resolver now selects explicit `top_rule`, otherwise the first authored `::`, otherwise
   the first authored rule. Markerless one-or-more-rule sources compile; zero rules report `no_rules_defined` at
@@ -24,8 +43,8 @@ Current execution status for interruption-safe batch workflow recovery.
   with 24 mutations; Knowledge Map is 596/4,258; mdBook and all doctrines pass. Canonical CI passes cursor
   admission 288, primary 63x2, and Phase 0 1,031/1,031 in 609 seconds.
 
-  **Next:** After the clean `.1.1` commit, activate `.9.1.1.2.1.2` for loaded/generated/runtime-context/trace/
-  diagnostic convergence. The Perl rollout row remains pending until composed admission `.1.3`.
+  **Next:** `.9.1.1.2.1.2` is active for loaded/generated/runtime-context/trace/diagnostic convergence. The Perl
+  rollout row remains pending until composed admission `.1.3`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.0 — map Perl root selection**
   (DONE — behavior-free seam map, durable rollout plan, focused proof, and canonical signoff pass; clean commit is

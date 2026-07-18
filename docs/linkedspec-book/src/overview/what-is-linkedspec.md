@@ -78,7 +78,7 @@ This is a two-rule spec — the **recommended idiom** for stream-of-records pars
 - The **entry rule** `top::` carries **no regex of its own**. It is the dispatch loop: it repeatedly hands off to `pair` and `.push`es each result onto its accumulator, then `LX` returns a snapshot of that accumulator when the input is exhausted.
 - The **`pair` rule** carries the regex. On each match it returns a hash built from the two capture groups — `entry_group(0)` is the first group, `entry_group(1)` the second (group numbering is 0-based and captures-only; see [Regex in `.spec`](../user-model/regex-in-spec.md)).
 
-For input `foo=bar baz=qux` the parser returns `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]` — one hash per matched pair, collected by the entry rule. (In this idiom the regex lives on the normal `:` rule, not the `::` entry rule. That is a style choice, not a rule: `::` is just an *entry marker*, and a top rule is otherwise an ordinary rule that may carry a regex, take a mode, or recurse — see [.spec Files and Rule Paragraphs](../user-model/spec-files-and-rule-paragraphs.md).)
+For input `foo=bar baz=qux` the parser returns `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]` — one hash per matched pair, collected by the entry rule. (In this idiom the regex lives on the normal `:` rule, not the `::` entry rule. That is a style choice, not a rule: `::` is an authored *default-entry marker*, and a marked rule is otherwise an ordinary rule that may carry a regex, take a mode, or recurse. An explicit selector may enter any declared rule instead — see [.spec Files and Rule Paragraphs](../user-model/spec-files-and-rule-paragraphs.md).)
 
 ## Where LinkedSpec fits
 

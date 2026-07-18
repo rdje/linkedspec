@@ -57,6 +57,17 @@ and `actual_contract`; regenerate it from the original `.spec` source. Rust now
 implements the same v2 contract; Dart, Julia, and Lua retain their admitted v1
 emitters until their ordered cursor leaves.
 
+Perl generated artifacts also preserve root-selection identity without widening
+the minimal family plan. `LinkedSpecGeneratedMetadata()` publishes
+`entry_rule_contract = linkedspec-root-rule-selection-v1` and ordered
+`entry_rules` rows containing each label and its authored `is_top` bit. Direct,
+traced, and generated `Get` execution accept an invocation-local `top_rule`;
+that selector overrides an emission-time configured selector, which in turn
+overrides the first authored marker / first authored rule default. Selection
+does not rewrite `is_top`. An unknown label fails at `select_entry_rule` before
+user code, and `generated_entry_selection` trace records the effective label
+and basis before the existing enter/family/exit roles.
+
 Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use
 `emit_rust_source_v2(&compiled, "path/to/input.spec")`; the generated module

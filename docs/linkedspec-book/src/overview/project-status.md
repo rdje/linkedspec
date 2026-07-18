@@ -7,8 +7,10 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
 backend-neutral executable contract is complete and rejects 24 drift mutations, so rollout is 1 complete / 6
-pending. No backend behavior changed in that decision slice: current validators still require `::`, Perl still
-defaults to the first parsed rule, and the five backend plus composed-admission leaves remain `.9.1.1.2.1-.6`.
+pending. Perl library execution now implements the contract across native, loaded, generated-direct,
+generated-traced, and generated `Get` routes while preserving authored marker identity in descriptors and generated
+metadata. Its shared CLI/public admission is still pending, as are Rust, Dart, Julia, Lua/LuaJIT, and composed
+five-backend admission under `.9.1.1.2.1.3-.6`.
 
 ## Completed phases
 

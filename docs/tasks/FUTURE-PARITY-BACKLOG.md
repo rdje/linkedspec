@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Perl root-selection core `.9.1.1.2.1.1` is complete and canonically verified;
-  clean commit is the only boundary before loaded/generated/trace convergence `.1.2`)
+- Last updated: `2026-07-18` (Perl loaded/generated/runtime-context/trace convergence `.9.1.1.2.1.2` is complete
+  and canonically verified; clean commit is the boundary before composed admission `.1.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3391,14 +3391,47 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 - implement Perl root resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Perl loaded/generated execution plus trace and diagnostics with the effective entry rule.
   Dependencies: `.9.1.1.2.1.1`
   Acceptance: Make `Get`, `get_parser`, returned parsers, generated-source direct/traced/get roles, runtime context,
     structured failure attribution, and request-versus-effective trace identity consume the same resolver without
     serializing an explicit selector as authored marker state.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** Generated Perl v2 source retains its unchanged minimal ordered
+    `{label,family}` plan and separately embeds ordered authored `{label,is_top}` entry rows. Metadata publishes
+    `linkedspec-root-rule-selection-v1` plus those immutable rows. Generated `Execute`, `ExecuteWithTrace`, and
+    `Get` resolve every invocation through `EntryRuleSelection`; invocation-local `top_rule` overrides configured
+    emission selection, then defaulting uses first marker / first rule. Unknown selection fails before user code as
+    structured `generated_source_error` with `entry_rule_not_found` / `select_entry_rule`, requested rule, and
+    source identity. Successful selection drives execution family, error attribution, and the new
+    `generated_entry_selection` label/family/basis/status trace before existing enter/family/exit roles. Loaded
+    `get_parser` and portable `SpecLoader` share the same resolver/runtime-context identity. The focused route and
+    seven adjacent suites pass 8 files / 49 tests; standalone and canonical Phase 0 each pass 1,031/1,031, with the
+    canonical run completing in 610 seconds. Root governance remains 8/3/3/5 at 1/6 plus 24 mutations; generated
+    governance is 80/0/0; Knowledge Map is 597/4,269; mdBook, memory/task/four doctrines, syntax, whitespace, and
+    cleanup pass. Canonical CI also passes the new 5-test route consumer, generated-source 6, cursor admission 288,
+    and reference primary 63/63 twice. Shared CLI/public admission and rollout promotion remain `.1.3` only.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 - converge Perl root execution`
+
+  #### Acceptance checklist
+
+  - [x] **REPRODUCE / ISSUE** — `LinkedSpec::Get` plus `emit_generated_source`/isolated-package execution over an
+    earlier ordinary rule, two markers, explicit ordinary/later/missing selectors proves native default/explicit
+    values and runtime `top_rule` are correct, while generated `Execute` ignores invocation `top_rule`, silently
+    runs the emitted label for an unknown selector, and lets an emission-time selector remain authoritative.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `dump_parser_source` and `Compiler::_generated_source_postamble` show one
+    compiler-selected `$top_rule_literal`/family hardcoded into generated `Execute`, `ExecuteWithTrace`, and `Get`;
+    the v2 plan contains only `{label,family}`, so independently loaded source lacks ordered authored `is_top`
+    identity and cannot run `EntryRuleSelection` at invocation.
+  - [x] **FIX** — Preserve ordered authored entry rows beside the unchanged v2 family plan, resolve configured or
+    invocation-local `top_rule` through the shared resolver, and use the effective label/family for execution,
+    trace, and structured selection/execution failures.
+  - [x] **ADDRESSED (verified)** — Lock live, loaded, generated direct/traced/Get, markerless, explicit, configured,
+    unknown, runtime-context, trace, source-identity, and diagnostic outcomes in one focused Perl route suite.
+  - [x] **NO REGRESSION** — Focused generated/loading/trace suites and full `PERL5LIB=` Phase 0 reach their true
+    stops with no new failure names; touched modules compile and canonical CI passes.
+  - [x] **LOCKSTEP** — Update generated API/book text, task/live docs, Knowledge Map, recurring CI, governance,
+    cleanup, and memory before the clean commit; leave rollout promotion and shared CLI admission to `.1.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3`
   Status: `pending`
@@ -3406,7 +3439,8 @@ before implementation.
   Dependencies: `.9.1.1.2.1.2`
   Acceptance: Add one topology-checked Perl consumer for all neutral routes and failures; migrate shared CLI cases
     reference-first for marker/markerless/default/explicit/unknown behavior; advance only the Perl rollout row;
-    update live docs/mdBook; pass focused, 63x2 primary, Phase 0, and canonical signoff; close parent `.1`.
+    update live docs/mdBook and correct the stale marker-required entry-model sentence in `TOOLBOX.md`; pass
+    focused, 63x2 primary, Phase 0, and canonical signoff; close parent `.1`.
   Verification: `pending`
   Commit: `pending`
 
@@ -6788,7 +6822,9 @@ metadata is gone and normalized rule/edge/source facts are current. Generated-so
 `79c51a21` after full focused/complete/governance/mdBook/canonical signoff. Public/global option and shared primary
 migration `.9.1.5.5` now has complete 260/63x2/105, 66-file mutation, governance/mdBook, and canonical signoff;
 clean commit is the only boundary before director-prioritized root-selection `.9.1.1.2.0`. Dart composed admission
-remains staged for `.9.1.5.6`.
+remains staged for `.9.1.5.6`. Root-selection neutral decision `.9.1.1.2.0` and Perl preflight/core `.1.0-.1`
+are now committed through `f33d6d24`; loaded/generated/runtime-context/trace convergence `.9.1.1.2.1.2` is
+complete and canonically verified. Its clean commit is the required boundary before Perl composed admission `.1.3`.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -7026,7 +7062,7 @@ remains staged for `.9.1.5.6`.
 | 212.2.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1` | `active` | Perl rollout is split into preflight, core/descriptor, generated/trace, and composed admission leaves. |
 | 212.2.1.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.0` | `done` | Exact Perl validation/bootstrap/selection/descriptor/generated/strict/CLI seams and safe `.1-.3` order are durably mapped without behavior. |
 | 212.2.1.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` | `done` | Markerless validation, exact resolver/default, structured unknown failure, strict no-drift, and authored marker metadata pass canonical proof. |
-| 212.2.1.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` | `pending` | Align loaded/generated/runtime-context/trace/diagnostic routes. |
+| 212.2.1.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` | `done` | Loaded/generated direct/traced/Get, runtime context, effective diagnostics/trace, metadata, and canonical proof pass. |
 | 212.2.1.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` | `pending` | Compose Perl admission, shared reference CLI bytes, docs, rollout, and parent closeout. |
 | 212.2.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.2` | `pending` | Implement exact Rust core/runtime/generated/primary selection. |
 | 212.2.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3` | `pending` | Make Dart's existing fallback reachable and align every route. |
@@ -8118,6 +8154,20 @@ Read-only evidence recorded on 2026-07-10:
   resolver, structured unknown/zero-rule failures, immutable descriptor `is_top`, and strict-unused no-drift.
   Focused contract/native-loading proof passes; canonical CI passes primary 63x2 and Phase 0 1,031 in 609 seconds.
   The rollout remains correctly pending at 1/6 until `.1.2-.3` compose generated/trace/reference routes.
+- `2026-07-18`: Clean commit `f33d6d24` lands Perl root-selection core `.9.1.1.2.1.1`; the worktree is clean and
+  `git_message_brief.txt` is zero bytes. Loaded/generated/runtime-context/trace convergence `.1.2` activates
+  task-tree-first; composed Perl admission and rollout promotion remain exclusively owned by `.1.3`.
+- `2026-07-18`: `.1.2` toolbox probes isolate generated-route drift in
+  `Compiler::_generated_source_postamble`: emitted v2 source hardcodes one compiler-selected label/family, its
+  family plan lacks authored marker bits, and invocation `top_rule` is ignored—including unknown labels. Native
+  and loaded compiler routes already share the resolver. The stale `TOOLBOX.md` marker-required entry sentence is
+  durably routed to `.1.3` public/admission lockstep rather than repaired opportunistically in this engine slice.
+- `2026-07-18`: Perl route convergence `.9.1.1.2.1.2` embeds ordered authored entry identity beside the unchanged
+  minimal generated family plan and resolves configured/invocation-local selectors across generated direct,
+  traced, and `Get` roles. Loaded routes, effective errors/runtime context, and selection/enter/exit trace agree.
+  Focused proof is 8 files / 49 tests; Knowledge Map is 597/4,269; root/generated governance, mdBook, doctrines,
+  cleanup, reference primary 63x2, cursor admission 288, and canonical Phase 0 1,031/1,031 in 610 seconds pass.
+  Rollout correctly remains 1/6 until `.1.3` composes shared CLI/public admission.
 - `2026-07-18`: Root-selection neutral decision `.9.1.1.2.0` completes ADR `0046` and
   `linkedspec-root-rule-selection-v1` without backend behavior. Full audit distinguishes Perl row-zero default,
   Rust marker-only routes, and Dart/Julia/Lua unreachable fallbacks; selection remains separate from authored

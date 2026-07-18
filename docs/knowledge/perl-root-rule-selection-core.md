@@ -11,12 +11,12 @@ answers:
   - "what code and stage identify a missing Perl top_rule"
   - "what does the Perl descriptor publish for root selection"
   - "does root selection affect Perl strict unused rules"
-  - "which Perl root-selection routes remain pending"
+  - "which Perl root-selection routes are implemented"
 date: 2026-07-18
-status: confirmed Perl core implementation; loaded/generated/trace composition and reference admission remain staged
+status: confirmed Perl library implementation; shared CLI/reference admission remains staged
 tags: [perl, root-rule, top-rule, markerless, descriptor, diagnostics, strict-syntax, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 adds `LinkedSpec::EntryRuleSelection::select_entry_rule`, an ordered resolver over source-ordered `{label,is_top}` rows. Explicit selection wins, then the first authored marker, then row zero; zero rows return `no_rules_defined`/`validate_spec`, and an unknown explicit label returns `entry_rule_not_found`/`select_entry_rule`. Perl envelope validation accepts one-or-more-rule markerless sources. RuleIR projects normalized authored `is_top`, CompilerState publishes `entry_rule_contract = linkedspec-root-rule-selection-v1`, and definition order remains exact. The returned native parser checks an unknown selector before handler lookup while preserving compile-before-input ordering. Direct strict validation remains authored-edge graph analysis and `Get(strict_syntax => 1)` remains unwired. Focused proof consumes all 8 neutral selections, 3 failures, marked/markerless/explicit native execution, descriptor identity, unknown/zero diagnostics, and strict no-drift. Loaded/generated/trace convergence remains `.1.2`; composed reference admission remains `.1.3`, so the rollout row is still pending."
-reverify: "PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t && python3 tools/check_root_rule_selection_contract.py"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.1.1 adds `LinkedSpec::EntryRuleSelection::select_entry_rule`, an ordered resolver over source-ordered `{label,is_top}` rows. Explicit selection wins, then the first authored marker, then row zero; zero rows return `no_rules_defined`/`validate_spec`, and an unknown explicit label returns `entry_rule_not_found`/`select_entry_rule`. Perl envelope validation accepts one-or-more-rule markerless sources. RuleIR projects normalized authored `is_top`, CompilerState publishes `entry_rule_contract = linkedspec-root-rule-selection-v1`, and definition order remains exact. The returned native parser checks an unknown selector before handler lookup while preserving compile-before-input ordering. Direct strict validation remains authored-edge graph analysis and `Get(strict_syntax => 1)` remains unwired. `.9.1.1.2.1.2` composes the same resolver through loaded, generated direct/traced/Get, and effective runtime-trace routes. Shared CLI/reference admission remains `.1.3`, so the rollout row is still pending."
+reverify: "PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t t/root_rule_selection_perl_routes.t && python3 tools/check_root_rule_selection_contract.py"
 ---
 
 # Perl core root-rule selection
@@ -38,8 +38,8 @@ compiles, preserving compilation-before-input behavior, but the returned parser 
 the requested label for attribution.
 
 Selection does not participate in strict-unused analysis. Only authored rule edges are references. Loaded,
-independently reconstructed, generated/emitted, and trace projections require their `.1.2` convergence proof;
-shared CLI/reference admission and rollout completion require `.1.3`.
+generated-direct, generated-traced, generated `Get`, and effective runtime-trace projections consume the same
+resolver. Shared CLI/reference admission and rollout completion require `.1.3`.
 
 Related: [[root-rule-selection-precedence]], [[perl-root-rule-selection-preflight]], and
-[[top-rule-is-ordinary-rule-entered-first]].
+[[perl-root-rule-selection-routes]], [[top-rule-is-ordinary-rule-entered-first]].

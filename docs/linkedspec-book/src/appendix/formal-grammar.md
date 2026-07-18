@@ -189,12 +189,13 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 3. otherwise the first authored rule wins.
 
 At rollout 1 complete / 6 pending, the neutral contract is executable but full backend parity is not yet uniform.
-The Perl core now accepts markerless one-or-more-rule sources, applies the exact precedence above, rejects an unknown
-explicit selector at `select_entry_rule` before invoking user code, and publishes definition order plus immutable
-per-rule `is_top` descriptor facts. Its loaded/generated/trace and composed CLI admission remain staged in
-`.9.1.1.2.1.2-.3`. Rust still requires and defaults to a marker. Dart, Julia, and Lua contain the
-marker-then-first fallback but their validators make its last branch unreachable. Until `.9.1.1.2.1-.6` close,
-use at least one `::` for portable cross-backend execution and pass an explicit selector when its identity matters.
+The Perl library now accepts markerless one-or-more-rule sources, applies the exact precedence above across native,
+loaded, generated-direct, generated-traced, and generated `Get` execution, rejects an unknown explicit selector at
+`select_entry_rule` before invoking user code, and publishes definition order plus immutable per-rule `is_top`
+identity in descriptors and generated metadata. Shared CLI/public admission remains `.9.1.1.2.1.3`. Rust still
+requires and defaults to a marker. Dart, Julia, and Lua contain the marker-then-first fallback but their validators
+make its last branch unreachable. Until `.9.1.1.2.1-.6` close, use at least one `::` for portable cross-backend
+execution and pass an explicit selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
@@ -1006,11 +1007,11 @@ accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 
-A valid `.spec` file must satisfy the following current portable checks. Item 1 is the temporary implementation
-boundary that ADR `0046` replaces with “at least one rule exists” as `.9.1.1.2.1-.6` roll out:
+A valid `.spec` file must satisfy the following current portable checks. Item 1 distinguishes the implemented Perl
+library envelope from the temporary cross-backend boundary while `.9.1.1.2.1-.6` roll out:
 
-1. At least one marked rule (`::`) currently exists; the accepted target permits markerless files but never a
-   zero-rule executable spec.
+1. At least one rule exists. Perl library routes now accept a markerless file; Rust, Dart, Julia, and Lua still
+   require at least one marked rule (`::`) for portable execution. A zero-rule executable spec is always invalid.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.

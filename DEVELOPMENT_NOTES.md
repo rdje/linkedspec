@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.2` — generated execution needs authored identity beside its
+  family plan): the v2 generated-source plan is deliberately only ordered `{label,family}` execution data. Adding
+  `is_top` to that plan would conflate two contracts and widen an already-admitted shape. Compiler therefore emits
+  a separate ordered `{label,is_top}` table, clones it through metadata, and passes it to the same
+  `EntryRuleSelection` resolver used by native execution.
+
+  An emitter-level `top_rule` is retained as configured execution state for compatibility, but it is not serialized
+  as authored identity. Generated invocation options have the narrowest authority: their `top_rule` overrides the
+  configured selector for that call, followed by the normal first-marker / first-rule default. Direct, traced, and
+  `Get` roles all delegate to `Execute`, which prevents three generated selection policies from diverging.
+
+  Selection occurs after generated-plan validation and invocation-option validation but before handler entry.
+  Unknown labels therefore keep the generated error envelope and source identity while reporting the portable
+  `entry_rule_not_found` / `select_entry_rule` boundary. Successful selection resolves the family from the already-
+  validated minimal plan. One `generated_entry_selection` trace event records label, family, basis, and status;
+  existing enter/family/exit trace and execution errors use that effective label rather than the emission default.
+
+  Loaded `get_parser` and `SpecLoader` already reached the core resolver after `.1.1`; focused route proof makes
+  that structural fact recurring alongside runtime-context attribution. Shared request-trace bytes, markerless CLI
+  fixtures, `TOOLBOX.md` correction, Perl rollout promotion, and parent closeout remain intentionally isolated in
+  `.1.3`.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.1` — authored identity and effective selection are different
   state): the safe Perl seam is an ordered resolver over parsed `{label,is_top}` rows. The resolver does not parse
   source, compile handlers, mutate metadata, or perform duplicate-definition validation; those remain owned by
