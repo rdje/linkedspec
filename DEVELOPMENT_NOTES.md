@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.0` — Rust has the authored facts but not one resolver):
+  Rust does not need source reparsing or a generated-plan format bump for root selection. Parser order,
+  `CompiledRule.is_top`, `Vec<CompiledRule>` serde order, descriptor `definition_order`, and generated v2 embedded
+  `CompiledSpec` JSON already preserve every authored fact. The minimal generated `{label,family}` plan should
+  remain minimal; selection belongs to invocation state over the embedded compiled declaration order.
+
+  The current 64/65 result is caused by two distinct layers. `check_top_rule_exists` makes markerless fallback
+  unreachable and conflates marker absence with zero rules. Separately, `SpecFile::top_rule`,
+  `CompiledSpec::top_rule`, legacy execution, and generated-plan execution scan markers only. Direct
+  `execute_value` is the partial exception: `ExecutionOptions.entry_rule` already overrides markers and rejects a
+  missing label before handler execution, but reports `rule_lookup` rather than the neutral
+  `entry_rule_not_found` / `select_entry_rule` shape.
+
+  One compiled-state resolver should therefore own explicit, first-marker, and first-rule selection. `.2.1` can
+  make validation marker-optional, distinguish zero-rule failure, route native default/explicit execution, and
+  lock diagnostics without touching generated APIs. `.2.2` can add compatibility-preserving option-bearing
+  generated/emitted siblings and prove loaded/serde/descriptor/trace composition. `.2.3` alone should advance the
+  Rust rollout row and require the complete 65x2 gate.
+
+  Strict-unused is deliberately excluded from resolution: it remains declared labels minus authored edge targets,
+  with no selected-rule reference or exemption. The `top_rule` strings in the staged parser registry and function
+  body parse jobs select a production in a different parser grammar (`action_block`); they are not `.spec`
+  entry-rule state and must not be swept into this work.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.1.3` — reference-first admission is a deliberate staged boundary):
   after `.1.1-.2`, no Perl engine or adapter defect remained. `bin/linkedspec` already forwarded explicit
   `top_rule`, delegated omission to the shared resolver, preserved requested-versus-default trace identity, and

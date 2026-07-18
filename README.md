@@ -616,7 +616,9 @@ content migration exists yet.
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
   packages, and both shared primary-command environments. Its last admitted cursor boundary is 63/63 in each
-  environment; root-selection leaf `.9.1.1.2.2` owns convergence to the current 65-case manifest.
+  environment; root-selection preflight `.9.1.1.2.2.0` now measures exactly 64/65 twice, with only markerless
+  validation failing. Core/routes/admission `.2.1-.3` own convergence to the current 65-case manifest, so the
+  complete optional Rust gate is intentionally staged red until `.2.3` closes.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

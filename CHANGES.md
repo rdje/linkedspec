@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 — map Rust root selection
+
+The behavior-free Rust preflight maps every root-selection seam against ADR `0046` and the neutral contract.
+Rust already preserves source order and authored `Rule::` identity through `RuleHeader`, `CompiledRule`, ordinary
+`CompiledSpec` JSON reconstruction, outward descriptor definition order/per-rule `is_top`, and generated-source v2
+embedded state. Its primary `--top-rule` path already selects an ordinary rule over authored markers, and omission
+already selects the first authored marker.
+
+Two mechanism gaps explain the staged result. Validation requires at least one marker, and both AST/compiled
+`top_rule()` helpers are marker-only. Native direct explicit selection uses the older `rule_lookup` diagnostic,
+while legacy/default and every generated-plan route use separate marker-only paths; emitted modules expose no
+execution selector even though their embedded ordered compiled state is sufficient. Loaded sources share the
+validator, serialized/reconstructed state preserves the needed facts, descriptor identity is already correct, and
+strict-unused remains the authored dependency graph. Staged parser-registry `top_rule` fields are unrelated
+parse-job grammar identity and are explicitly excluded.
+
+The complete shared runner passes exactly 64/65 in both default and POSIX environments. Explicit ordinary,
+first-marker, unknown-selector, request-trace, and all unrelated cases pass; only markerless fallback fails at
+validation with empty stdout, exit 1, and `linkedspec: parser compilation failed`. Focused existing proof passes
+validation/strict 18, descriptor 4, compiled types 8, native explicit entry 1, diagnostics 5, loading 5, trace 10,
+and generated-source contracts 1+1. A new Knowledge Map card freezes the implementation order: `.2.1` core
+validation/resolver/native diagnostics, `.2.2` composed artifact/routes/trace convergence, then `.2.3` exact
+65-case admission. Knowledge Map is 599 facts / 4,291 question keys. No Rust source, test, fixture, capability, or
+runtime behavior changes in this leaf. Root governance, mdBook, memory/task metadata, all four doctrines, and
+whitespace pass. Canonical CI passes root core 7, routes 5, cursor admission 288, exact Perl primary 65x2, and
+Phase 0 1,031/1,031 in 627 seconds before exit 0. After consuming verification, artifact cleanup removes 15,136
+Cargo files / 3.3 GiB, the 11 MiB generated mdBook output, and Python bytecode cache.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 — admit Perl root selection
 
 The composed Perl reference now owns the complete `linkedspec-root-rule-selection-v1` admission boundary. The

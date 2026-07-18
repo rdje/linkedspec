@@ -57,8 +57,10 @@ the reference. Rust `.1.5.2.4` historically closed reusable direct execution plu
 canonical trace projection. During the rule-local cursor migration, Perl established the 63-case reference bytes
 and Rust later passed them unchanged in both environments after `.9.1.4.6`. Root-selection admission advances the
 shared manifest reference-first to 65 cases: Perl owns the new first-marker and markerless-default bytes, while
-root-selection leaves `.9.1.1.2.2-.5` own the remaining backend migrations. UTF-16/UTF-32 are not
-implicit inputs.
+root-selection leaves `.9.1.1.2.2-.5` own the remaining backend migrations. Rust preflight `.2.0` measures the
+current focused command at exactly 64/65 in both environments: markerless compilation is the sole failure. Thus
+`tools/run_rust_local.sh` is deliberately staged red against the expanded manifest until Rust core/routes/admission
+`.2.1-.3` land; its complete core/runtime test topology is unchanged. UTF-16/UTF-32 are not implicit inputs.
 
 Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
 checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package

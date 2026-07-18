@@ -8,9 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.0 — map Rust root selection**
+  (DONE pending clean commit — behavior-free causal map and dependency-safe `.2.1-.3` plan complete).
+
+  **Result:** Rust already preserves ordered authored marker identity through parsing, compilation, ordinary
+  compiled-state JSON, descriptors, and generated v2 embedded state. Explicit `ExecutionOptions.entry_rule` and
+  primary `--top-rule` already override markers. Marker-required validation blocks markerless sources; default
+  native/generated helpers remain marker-only; generated/emitted APIs expose no invocation selector; and current
+  missing-entry diagnostics use `rule_lookup`. Strict-unused remains correctly independent, and staged parser-job
+  `top_rule` identity is excluded as unrelated.
+
+  **Proof:** Complete shared primary execution is exactly 64/65 with `POSIXLY_CORRECT` unset and set. Explicit
+  ordinary, first-marker, unknown-selector, request-trace, and every unrelated case pass; markerless fallback alone
+  fails at compilation. Focused existing proof passes validation/strict 18, descriptor 4, compiled types 8, native
+  explicit entry 1, diagnostics 5, loader 5, trace 10, and generated contracts 1+1. No Rust source/test/fixture/
+  capability behavior changed. Knowledge Map is 599 facts / 4,291 question keys. Root checker, mdBook, memory/task,
+  all four doctrines, and whitespace pass. Canonical CI passes root core 7, routes 5, cursor admission 288, primary
+  65x2, and Phase 0 1,031/1,031 in 627 seconds. Cleanup removes 15,136 Cargo files / 3.3 GiB, the 11 MiB generated
+  book, and Python bytecode cache. Only commit closeout remains.
+
+  **Next:** After the clean `.2.0` commit, activate `.9.1.1.2.2.1` task-tree-first for marker-optional validation,
+  one ordered compiled-state resolver, native selection/portable diagnostics, strict no-drift, and root contract
+  identity. Loaded/serde/generated/emitted/descriptor/trace work stays `.2.2`; exact 65-case admission stays `.2.3`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.3 — admit Perl root selection**
-  (DONE — complete implementation/admission and canonical proof pass; clean commit is the only remaining boundary
-  before Rust `.2`).
+  (DONE at clean commit `7029624d` — complete implementation/admission and canonical proof pass; Rust `.2.0` is
+  active).
 
   **Result:** The shared primary manifest adds exact first-authored-marker and markerless-first-rule default cases
   beside existing explicit ordinary, unknown-selector, default request-trace, and escaped explicit trace cases.
@@ -25,8 +48,9 @@ Current execution status for interruption-safe batch workflow recovery.
   cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 611 seconds before exit 0. Book, memory, task,
   syntax, whitespace, and artifact cleanup pass. Perl parent `.9.1.1.2.1` is closed.
 
-  **Next:** Commit `.1.3` cleanly, clear the brief, verify a clean tree, then activate Rust root-selection `.2`
-  task-tree-first. Rust, Dart, Julia, Lua, and final public admission remain pending; rollout is 2/7.
+  **Next:** Rust root-selection parent `.9.1.1.2.2` is split task-tree-first; read-only preflight `.2.0` is active
+  before core `.2.1`, composed routes `.2.2`, and exact 65-case admission `.2.3`. Dart, Julia, Lua, and final public
+  admission remain pending; rollout is 2/7.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.1.2 — converge Perl root execution**
   (DONE at clean commit `2e175103` — loaded/generated/runtime-context/trace/diagnostic convergence and canonical

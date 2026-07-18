@@ -10,8 +10,12 @@ backend-neutral executable contract is complete and rejects 24 drift mutations, 
 pending. The composed Perl reference implements native, loaded, generated-direct, generated-traced, generated
 `Get`, descriptor, diagnostics, runtime trace, and primary-command routes while preserving authored marker identity.
 Its 65-case shared primary proof includes exact first-marker and markerless defaults beside explicit/unknown and
-request-trace cases. Rust, Dart, Julia, Lua/LuaJIT, and final composed five-backend admission remain
-`.9.1.1.2.2-.6`.
+request-trace cases. Rust preflight now measures exactly 64/65 in both option environments: explicit selection,
+first-marker default, unknown selection, request trace, and every unrelated case pass; markerless fallback alone
+is rejected by marker-required validation. Ordered authored markers already survive Rust parse, compiled JSON,
+descriptors, and generated v2 artifacts, while core resolver/diagnostic work `.2.1`, composed route work `.2.2`,
+and exact admission `.2.3` remain. Dart, Julia, Lua/LuaJIT, and final composed five-backend admission remain
+`.9.1.1.2.3-.6`.
 
 ## Completed phases
 
