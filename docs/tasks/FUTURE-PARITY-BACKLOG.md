@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Rust descriptor projection `.9.1.4.4` is committed at `d7b1a5e7`; generated-source
-  v2 `.9.1.4.5` is fully verified with its clean commit pending)
+- Last updated: `2026-07-18` (Rust generated-source v2 `.9.1.4.5` is committed at `727cccc3`; fully verified public
+  option/CLI removal `.9.1.4.6` awaits its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3887,18 +3887,49 @@ before implementation.
     Canonical CI passes Perl cursor 288, reference CLI 63/63 twice, and Phase 0 1,031/1,031 in 609 seconds, then
     exits 0. Clean commit remains the sole boundary before `.9.1.4.6` activation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.4.5 - emit Rust generated-source v2`
-  Commit: `pending`
+  Commit: `727cccc3`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.6`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Rust global cursor overrides and migrate the shared primary-command projection.
   Dependencies: `.9.1.4.5`
   Acceptance: Remove `ExecutionOptions::with_parse_mode`, runtime-context override/effective-mode ownership, the
     primary `--parse-mode` flag/help/request-trace field, and every non-removal caller; return the exact targeted
     usage exit 2; migrate the shared 63-case fixture bytes owned by the Perl reference; and pass Rust 63/63 in
     default and POSIX environments with unchanged non-retired output/trace bytes.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map, ADR `0044`, neutral cursor contract, Perl removal
+    reference, Rust option/runtime/primary/trace seams, and shared 63-case authorities; reproduce the exact 51/63
+    default and POSIX baseline before executable edits.
+  - [x] **REMOVE LIBRARY OVERRIDE** — Remove `ExecutionOptions::with_parse_mode`, runtime-context override and
+    effective-mode ownership, and every non-removal caller without changing family-derived normal execution.
+  - [x] **REMOVE PRIMARY SURFACE** — Remove `--parse-mode` parsing/help/request-trace projection, reject the retired
+    spelling with the exact targeted usage exit 2, and preserve every unrelated help/output/trace byte.
+  - [x] **MIGRATE EXACT 63x2 PROJECTION** — Consume the reference-owned shared fixture bytes, keep structural
+    default-seek and AND-consume successes, and pass all 63 Rust cases in default and POSIX option environments.
+  - [x] **REPAIR STALE PUBLIC GENERATED MARKER** — Root-cause the logical-helper public no-drift gate's obsolete
+    Rust generated-v1 marker exposed by mdBook/backend documentation lockstep, migrate both neutral and checker
+    authorities to the already-current generated-v2 API, and retain omission-mutation proof.
+  - [x] **LOCKSTEP / SIGNOFF** — Reconcile the exact migration inventory, task/index/roadmap/live/memory, Knowledge
+    Map, mdBook, and operational docs; run focused Rust plus neutral/governance/canonical gates; commit before
+    composed-admission leaf `.9.1.4.7`.
+  Verification: Knowledge Map cards for Rust rule-local execution/primary CLI and Perl removal, ADR `0044`, the
+    neutral option/CLI/inventory contract, exact reference implementation, and focused-gate command were retrieved
+    before executable inspection. Both default and `POSIXLY_CORRECT=1` Rust runs reproduce exactly 51/63: only
+    `usage_removed_parse_mode` plus 11 canonical trace cases retaining `parse_mode=seek` fail. After removal,
+    rule-local execution passes 6/6 in 59.31 seconds, primary adapter units pass 6/6, and the exact Rust primary
+    projection passes 63/63 in default and POSIX environments. Complete runtime passes 137 units, oracle 3 in
+    205.39 seconds, diagnostics 7, classifier 105/105 in 235.07 seconds, integrations 197, source emitter 5 in
+    37.10 seconds, execution 6 in 59.57 seconds, and every adjacent suite; core passes 189/4/5/8, formatting and
+    production-library Clippy pass, and the neutral checker passes 36/18/8/14/68 at 2/6 plus 29 mutations. Three
+    obsolete mdBook option-teaching pages become token-free while `rust/README.md` becomes the explicit retired-
+    flag owner. The full focused gate exits 0: core passes 189/4/5/8, runtime 137, oracle 3 in 205.44 seconds,
+    diagnostics 7, classifier 105/105 in 235.42 seconds, integrations 197 in 75.12 seconds, rule-local execution 6
+    in 59.52 seconds, source emitter 5 in 37.18 seconds, every adjacent suite, and exact primary 63/63 twice.
+    The logical-helper checker's stale v1 public marker is migrated to the already-current v2 API and all 26 drift
+    mutations still reject. Canonical local CI exits 0 with the composed Perl cursor consumer at 288 tests,
+    reference CLI 63/63 in default and POSIX environments, and Phase 0 `1..1031` in 611 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.4.6 - remove Rust global cursor overrides`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.4.7`
   Status: `pending`
@@ -6212,7 +6243,8 @@ Descriptor projection `.9.1.3.3`, generated-source v2 `.9.1.3.4`, and API/CLI/re
 advances only Perl to 2/6. Rust preflight/split `.9.1.4.0` is verified without behavior changes; local-gate
 hardening `.9.1.4.1` and typed normalization `.9.1.4.2` are committed through `8780990a`; live per-rule execution
 `.9.1.4.3` is committed at `9fffe9bd`, and descriptor projection `.9.1.4.4` is committed at `d7b1a5e7` after
-focused and canonical signoff. Generated source `.9.1.4.5` is fully verified with its clean commit pending.
+focused and canonical signoff. Generated source `.9.1.4.5` is committed at `727cccc3`; fully verified public
+option/CLI removal `.9.1.4.6` awaits its clean commit before `.9.1.4.7` activation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -6461,7 +6493,7 @@ focused and canonical signoff. Generated source `.9.1.4.5` is fully verified wit
 | 215.3 | `FUTURE-PARITY-BACKLOG.9.1.4.3` | `done` | Live/loaded/serialized/reconstructed policy derives from every entered rule; artifact/public staging remains explicit. |
 | 215.4 | `FUTURE-PARITY-BACKLOG.9.1.4.4` | `done` | Descriptor v1 projects family, policy, ordered resolved edges, identity, and full signoff. |
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
-| 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `pending` | Remove Rust option/CLI/trace overrides and migrate exact 63x2 bytes. |
+| 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `pending` | Compose Rust admission, advance only Rust, and close the backend parent. |
 | 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `pending` | Align Dart native/reconstructed/generated/primary roles. |
 | 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | Align Julia native/reconstructed/generated/primary roles. |
@@ -7133,8 +7165,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. ADR `0044` resolves the cursor/edge grammar/runtime/metadata/migration policy. Neutral `.9.1.2`
-  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.4` are committed and generated-source `.5` is fully
-  verified with its clean commit pending.
+  and complete Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.5` are committed and fully verified public
+  option/CLI removal `.6` awaits its clean commit.
   Identical
   dependency-regex slot identity is a non-blocking separate
   question with an explicit post-admission owner `.9.1.8.1`.
@@ -7151,7 +7183,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Public logical no-drift `.5.2.9` and parent `.5.2` are closed. Cursor/edge contract `.9.1.2` plus complete
-  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.4` are committed and generated-source `.5` is active while later
+  Perl parent `.9.1.3` reach 2/6; Rust `.9.1.4.0-.5` are committed and fully verified public option/CLI removal
+  `.6` awaits its clean commit while later
   backends/admission/identity/public leaves `.9.1.4-.9`, structured-format, write-vivification, and companion-book
   work remain pending.
 
@@ -7159,6 +7192,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.6` | KM/ADR/neutral/Perl-removal/Rust option-runtime-primary-trace retrieval; exact pre-edit 51/63 default and POSIX boundary; static/runtime override deletion; targeted retired flag plus request-trace migration; exact Rust 63x2; runtime 137, oracle 3/205.44s, diagnostics 7, classifier 105/235.42s, integrations 197/75.12s, execution 6/59.52s, emitter 5/37.18s and adjacent suites; core 189/4/5/8; formatting and production-library Clippy; structural mdBook/public migration; neutral 36/18/8/14/68 at 2/6 plus 29 mutations; logical topology/public-v2 repair plus 26 mutations; KM 587/4,165; four doctrines/mdBook/JSON/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/611s. | PASS. Rust has no caller/global cursor authority: normal policy is rule-derived, entry selection remains, the retired primary flag fails exactly, and request trace omits the global field. Public docs now teach structure. A stale logical public v1 marker is root-caused and migrated to v2. `.7` waits for the clean commit. |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.5` | KM/ADR/neutral/Perl-v2/Rust-v1 retrieval and pre-edit source probe; v2/format 2 minimal ordered label/family plan; exact five-seek/five-consume reconstruction; v1 expected/actual/regeneration rejection; fresh host/direct/trace/source/corpus proof; core 189/4/5/8, runtime 137, oracle 105/205.58s, diagnostics 7, classifier 105/234.84s, integrations 197, emitter 5/37.16s, execution 6/59.37s, and adjacent suites; formatting and production-library Clippy; exact 51/63 `.6` primary boundary; logical topology 8/0 plus 26 mutations; neutral 36/18/8/14/71 at 2/6 plus 29 mutations; KM 587/4,165; memory/task/four doctrines/mdBook/JSON/whitespace/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/609s. | PASS. Rust generated-source v2 derives every cursor policy from the minimal family plan, rejects v1 before decode, and preserves typed versus compatibility result roles. Canonical signoff repaired the stale recurring logical v1 role names; `.6` activates after clean commit `727cccc3`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.4` | KM/ADR/neutral/Perl retrieval and disposable pre-edit descriptor probe; normalized descriptor v1 identity/family/policy/ownership/ordered-edge projection; 4 descriptor tests over 36 families and every valid neutral edge; exact semantic fields/order and direct/compiled-JSON identity; runtime execution 6 with loaded/live agreement; core 189/4/5/8, runtime 137, oracle 105/206.35s, diagnostics 7, classifier 105/235.29s, integrations 197 and adjacent suites; formatting and production-library Clippy; exact 51/63 `.6` primary boundary; neutral 36/18/8/14/73 at 2/6 plus 29 mutations; KM 586/4,155; memory/task/four doctrines/mdBook/JSON/whitespace/cleanup; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/610s. | PASS. Rust descriptor v1 is a deterministic projection of normalized compiled semantics and agrees across direct, loaded, reconstructed, and live routes. Generated v1 remains independently staged; `.5` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.3` | ADR/KM/toolbox retrieval and pre-edit runtime/trace probes; mutable compiled-policy removal; exact per-entered-rule action/blind/call/recursion/load/JSON/trace execution; staged descriptor/generated/public adapters; 6 execution tests over 36 families, eight parent/child mechanisms, and two structural replacements; normalization 3+5, types 8, descriptor 3, source emitter 5; core 189, runtime 137, oracle 105/216.25s, diagnostics 7, classifier 105/243.60s, integrations 197 and adjacent suites; formatting; production-library Clippy; exact 51/63 `.6` primary boundary; neutral 36/18/8/14/74 at 2/6 plus 29 mutations; KM 586/4,151; memory/task/four doctrines/mdBook/JSON/whitespace; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/612s. | PASS. Rust normal live, loaded, and ordinary reconstructed execution derives cursor policy from every entered rule with no parent/global propagation or mutable compiled field. Descriptor/generated v1 and public removal stay explicitly owned by `.4-.6`; `.4` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.4.2` | ADR/KM/toolbox retrieval; compact-family and bare-edge probes; five core contract tests over 36 families, 18 edges, six ownership sets, line scope, exact diagnostics, lowering, and JSON roundtrip; three runtime staging tests; complete focused gate with core 189/3/5/8 and runtime 137/105 oracle/105 generated/197 integration plus adjacent suites; production-library Clippy; exact default 51/63 staged boundary and prior POSIX 51/63 pin; neutral 36/18/8/14/72 at 2/6 plus 29 mutations; KM 585/4,138; memory/task/four doctrines/mdBook/whitespace; canonical Perl consumer 288, reference CLI 63x2, and Phase 0 `1..1031`/646s. | PASS. Rust retains typed complete-line/header-rest bare edges, derives family ownership into acode/bcode, emits exact portable diagnostics, and keeps later execution/artifact policy behind one named transitional classifier. Disk exhaustion was isolated as environmental; only successful reruns count as proof. `.9.1.4.3` waits for the clean commit. |
@@ -7506,6 +7541,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: `.9.1.4.6` deletes Rust's static/runtime global cursor ownership while retaining entry selection
+  and low-level derived seek/consume algorithms. The primary command returns the exact retired-flag usage failure,
+  omits the global request-trace field, and advances from the reproduced 51/63 boundary to exact 63x2. Public and
+  mdBook examples teach structural family ownership; the token-derived inventory contracts to 68. The logical-
+  helper public checker/contract's stale generated-v1 marker is repaired to v2 with all 26 mutations effective.
+  Focused Rust and canonical Perl/Phase-0 signoff pass; `.7` waits for the clean commit.
+- `2026-07-18`: `.9.1.4.5` emits Rust generated-source v2/format 2 from cursor-free CompiledSpec JSON plus one
+  ordered label/family plan, derives all ten policies during validated reconstruction, and rejects v1 with exact
+  expected/actual contracts and `.spec` regeneration guidance. Typed direct/traced roles preserve direct values;
+  compatibility parse roles retain their established envelope. Complete Rust, logical/neutral, Knowledge Map,
+  governance, mdBook, and canonical proof pass; the exact inventory contracts to 71 files and commit `727cccc3`
+  activates public option/CLI removal `.6`.
 - `2026-07-18`: `.9.1.4.4` replaces Rust descriptor-wide and per-rule global cursor fields with the exact neutral
   v1 identity and normalized per-rule family, cursor policy, ownership, and ordered resolved-edge facts. Action
   rows publish child indices, blind rows publish null indices, and block/fluent facts remain deterministic; optional

@@ -374,7 +374,7 @@ MarkerBody:AND
  }
 ```
 
-With `parse_mode => "seek"`, input `foo(alpha)` returns
+With the shown AND-family rules' intrinsic contiguous policy, input `foo(alpha)` returns
 `[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
 The three text readers all see the same body span:
 
@@ -556,10 +556,10 @@ The previous `BACKTRACK()` / `IBACKTRACK()` and lowercase `backtrack(label)` /
 `ibacktrack(label)` spellings are not current portable API. Use the explicit
 helpers above in new specs.
 
-Because a rewind is just a local cursor move, the current `parse_mode` still
-applies to the next match that follows. Under `consume` mode, the next match
-must succeed contiguously from the rewound cursor position. Under `seek` mode,
-the parser may seek forward from the rewound position.
+Because a rewind is just a local cursor move, the family of the rule entered for
+the next match still determines its policy. An AND-family rule must succeed
+contiguously from the rewound cursor; a default/OR-family rule may seek forward
+from that position.
 
 For open-ended captures, prefer a structural boundary when available:
 `capture_until_boundary(rule[, ...])` can detect that the next named structural

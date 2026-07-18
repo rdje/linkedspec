@@ -237,7 +237,7 @@ PUBLIC_CONTRACT = {
             "required_markers": [
                 "## Logical Helpers",
                 "`RuntimeValue::as_bool`",
-                "`execute_generated_parser_v1`",
+                "`execute_generated_parser_v2`",
                 "`success_logical_helpers_eager`",
             ],
         },

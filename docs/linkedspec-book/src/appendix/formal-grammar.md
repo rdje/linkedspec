@@ -259,9 +259,9 @@ layer adds no flag system of its own beyond what the host regex engine supports.
 **Semantics**: A regex cluster anchors the parser at a specific input position.
 In `consume` mode (`\G`-anchored), the regex must match contiguously from the
 current position. In `seek` mode (ungrounded `//gcp`), the regex may match
-anywhere. In the current implementation, the mode is determined by rule mode
-and the public runtime parse-mode plumbing. ADR `0044` ratifies a future single
-authority: AND-family rules consume and OR/default-family rules seek.
+anywhere. ADR `0044` fixes one semantic authority: AND-family rules consume and
+OR/default-family rules seek. Perl and Rust are current through public override
+removal; remaining backend rollout does not change this authored contract.
 
 Multiple regex clusters in a row form an ordered sequence for AND-mode rules
 or a set of alternatives for OR-mode rules. When clusters are combined as

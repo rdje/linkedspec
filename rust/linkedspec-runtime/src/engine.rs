@@ -175,18 +175,15 @@ fn validate_eager_helper_arity(
 
 /// Per-invocation controls for direct top-rule value execution.
 ///
-/// These options do not mutate the compiled specification. They select an
-/// optional entry rule and optionally override every rule's compiled parse mode
-/// for this execution only.
+/// These options do not mutate the compiled specification. They select only an
+/// optional entry rule; every entered rule retains its authored cursor policy.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ExecutionOptions {
     entry_rule: Option<String>,
-    parse_mode: Option<ParseMode>,
 }
 
 impl ExecutionOptions {
-    /// Create default options: enter the compiled top rule and retain each
-    /// rule's compiled parse mode.
+    /// Create default options that enter the compiled top rule.
     pub fn new() -> Self {
         Self::default()
     }
@@ -197,20 +194,9 @@ impl ExecutionOptions {
         self
     }
 
-    /// Override every rule's compiled parse mode for this execution.
-    pub fn with_parse_mode(mut self, mode: ParseMode) -> Self {
-        self.parse_mode = Some(mode);
-        self
-    }
-
     /// Return the selected entry rule, if any.
     pub fn entry_rule(&self) -> Option<&str> {
         self.entry_rule.as_deref()
-    }
-
-    /// Return the global parse-mode override, if any.
-    pub fn parse_mode(&self) -> Option<ParseMode> {
-        self.parse_mode
     }
 }
 
@@ -1494,7 +1480,7 @@ impl Engine {
         input: &str,
         options: &ExecutionOptions,
     ) -> Result<Value, RuntimeExecutionError> {
-        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        let mut ctx = RuntimeContext::new(input);
         self.execute_value_with_context(&mut ctx, options)
             .map_err(|message| self.structured_runtime_error(&ctx, message))
     }
@@ -1506,7 +1492,7 @@ impl Engine {
         options: &ExecutionOptions,
         sink: Option<&RuntimeDiagnosticOutputSink>,
     ) -> Result<Value, RuntimeDiagnosticOutputExecutionError> {
-        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        let mut ctx = RuntimeContext::new(input);
         ctx.install_diagnostic_output_sink(sink);
         let result = self.execute_value_with_context(&mut ctx, options);
         self.finish_diagnostic_output_execution(&mut ctx, result)
@@ -1535,20 +1521,15 @@ impl Engine {
             .enter_scope(
                 "rust_runtime:engine:execute_value",
                 format!(
-                    "input_bytes={} input_chars={} entry_rule={} parse_mode={}",
+                    "input_bytes={} input_chars={} entry_rule={}",
                     input.len(),
                     input.chars().count(),
-                    options.entry_rule().unwrap_or("<default>"),
-                    match options.parse_mode() {
-                        Some(ParseMode::Seek) => "seek",
-                        Some(ParseMode::Consume) => "consume",
-                        None => "<compiled>",
-                    }
+                    options.entry_rule().unwrap_or("<default>")
                 ),
                 TraceLevel::LOW,
             )
             .map_err(trace_write_failed)?;
-        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        let mut ctx = RuntimeContext::new(input);
         if trace.should_emit(TraceLevel::LOW) {
             ctx.enable_trace_events();
         }
@@ -1978,15 +1959,7 @@ impl Engine {
         ctx.trace_decision(
             "rust_runtime:engine:entry_rule",
             true,
-            format!(
-                "label={label} input_bytes={} parse_mode={}",
-                ctx.input.len(),
-                match options.parse_mode() {
-                    Some(ParseMode::Seek) => "seek",
-                    Some(ParseMode::Consume) => "consume",
-                    None => "compiled",
-                }
-            ),
+            format!("label={label} input_bytes={}", ctx.input.len()),
             TraceLevel::LOW,
         );
         self.execute_rule(&label, 0, ctx)
@@ -8113,7 +8086,7 @@ Child::
     }
 
     #[test]
-    fn execute_value_selects_entry_rule_without_global_policy_propagation() {
+    fn execute_value_selects_entry_rule_without_cursor_override_state() {
         let grammar = r#"Top::
  /x/ -> Done { return("top") }
 
@@ -8126,22 +8099,11 @@ Done::
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
         let engine = Engine::new(compile(&spec).unwrap());
-        let alternate_seek = ExecutionOptions::new()
-            .with_entry_rule("Alternate")
-            .with_parse_mode(ParseMode::Seek);
-        let alternate_consume = ExecutionOptions::new()
-            .with_entry_rule("Alternate")
-            .with_parse_mode(ParseMode::Consume);
+        let alternate = ExecutionOptions::new().with_entry_rule("Alternate");
         assert_eq!(
-            engine.execute_value("prefix x", &alternate_seek).unwrap(),
-            serde_json::json!("alternate")
-        );
-        assert_eq!(
-            engine
-                .execute_value("prefix x", &alternate_consume)
-                .unwrap(),
+            engine.execute_value("prefix x", &alternate).unwrap(),
             serde_json::json!("alternate"),
-            "staged caller option cannot replace Alternate's authored seek policy"
+            "Alternate retains its authored seek policy"
         );
         assert!(
             engine

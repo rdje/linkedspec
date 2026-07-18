@@ -1,5 +1,43 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.6 — remove Rust global cursor overrides
+
+Rust native direct-value options now select only an optional entry rule. `ExecutionOptions::with_parse_mode`,
+`RuntimeContext` override state, and the effective-mode adapter are deleted; fresh execution contexts enter every
+rule with policy derived from that rule's authored family. The low-level `ParseMode` enum and per-match trace
+observation remain because seek and consume are still the two derived matcher algorithms, not caller-owned
+semantic state. Source-level regression assertions make the deleted public/runtime seams omission-sensitive.
+
+The primary command removes global mode parsing and request projection. Help already consumed the reference-owned
+removed surface; either `--parse-mode VALUE` or `--parse-mode=VALUE` now returns usage exit 2 with the exact
+targeted migration message, without validating or accepting a legacy value. Canonical request trace no longer
+contains `parse_mode=seek`. The exact pre-edit boundary was reproduced at 51/63 in both default and POSIX option
+environments: only the removed-flag case and eleven request-trace cases failed. After removal, Rust passes all
+63 shared cases in both environments with every unrelated output and trace byte unchanged.
+
+Public documentation now teaches structural cursor ownership instead of the rejected construction option. Rust
+embedding examples retain entry selection only; the mdBook walkthrough, capture examples, formal grammar, runtime
+semantics, backend handoff, local-gate guide, and public API pages agree with current Perl/Rust behavior while
+identifying Dart/Julia/Lua as later rollout leaves. That cleanup makes three obsolete option-teaching pages token-
+free and adds `rust/README.md` as the explicit retired-flag owner, so the mechanically exact migration inventory
+contracts from 71 after `.5` to 68. The neutral checker passes 36/18/8/14/68 at 2/6 and rejects all 29 mutations.
+
+The documentation sweep exposed a stale logical-helper public marker left behind by the generated-v2 migration:
+the neutral contract and checker still required `execute_generated_parser_v1` in Rust's README even though the
+consumer topology already required v2. Both authorities now require the current v2 API and all 26 omission/drift
+mutations still reject. Knowledge Map remains synchronized at 587 facts / 4,165 question keys; all four doctrines,
+capability/generated contracts, formatting, production-library Clippy, JSON, and mdBook checks pass.
+
+The complete focused Rust gate exits 0 with core 189/4/5/8, runtime 137, oracle 3 in 205.44 seconds, diagnostics 7,
+the exhaustive 105-case generated classifier in 235.42 seconds, integrations 197 in 75.12 seconds, rule-local
+execution 6 in 59.52 seconds, source emitter 5 in 37.18 seconds, every adjacent suite, and Rust primary 63/63 in
+both environments. Canonical local CI passes the composed Perl cursor consumer at 288 tests, reference CLI 63/63
+twice, and Phase 0 at 1,031/1,031 in 611 seconds, then exits 0.
+
+After all proof was consumed, safe artifact cleanup removed the regenerated mdBook output, Python cache, slice
+logs, and 1.2 GB Rust incremental tree. No source, durable proof, release output, or `target/debug/deps` artifact
+was removed; the filesystem reports 107 GB free afterward.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.4.5 — emit Rust generated-source v2
 
 New Rust artifacts now identify `linkedspec-generated-source-v2` / format 2. Emission embeds cursor-free ordinary

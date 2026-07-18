@@ -1419,7 +1419,7 @@ match-start readers (`capture_take`, `capture_take_len`, `capture_take_len_from`
 read up to the match start but still advance the origin to the scan position.
 
 > **Worked examples.** Boundary-oriented capture examples are often naturally
-> `seek`-mode snippets: an opener match records a boundary, the parser seeks to a
+> default/OR-family snippets: an opener match records a boundary, the rule seeks to a
 > later delimiter match, and the capture helper reads the text between them.
 
 Anonymous capture cursor:
@@ -1435,7 +1435,7 @@ body: /BEGIN/ /END/
  }
 ```
 
-With `parse_mode => "seek"`, input `BEGIN alpha END` returns
+With `body:` deriving intrinsic `seek`, input `BEGIN alpha END` returns
 `[{"body":"alpha","width":7}]`: `capture_slice()` spans the text between the
 `BEGIN` match and the later `END` match, while `trim(...)` removes the surrounding
 spaces for the displayed body.
@@ -1468,7 +1468,7 @@ pair:AND
  }
 ```
 
-With `parse_mode => "seek"`, input `[left:right]` returns
+With `pair:AND` deriving intrinsic contiguous `consume`, input `[left:right]` returns
 `[{"left":"left","left_len":4,"right":"right"}]`. The first action records the
 left boundary, the colon action records an exact right boundary for `left` and a
 new start for `right`, and the closing-bracket action records the final right edge.

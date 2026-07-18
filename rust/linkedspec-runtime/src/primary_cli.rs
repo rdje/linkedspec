@@ -10,7 +10,6 @@ use crate::engine::{Engine, ExecutionOptions};
 use crate::spec_loader::{LoadedCompiledSpec, SpecLoadOptions, SpecRequest, load_and_compile_spec};
 use crate::spec_parser::parse_spec_with_user_functions;
 use linkedspec_core::compiler::compile;
-use linkedspec_core::types::ParseMode;
 use linkedspec_core::validation::validate;
 use std::ffi::OsString;
 use std::fs;
@@ -20,6 +19,7 @@ use std::path::{Path, PathBuf};
 
 const DISPLAY_COMMAND: &str = "linkedspec-rust";
 const HELP_TEMPLATE: &str = include_str!("../../../cli_conformance/cases/help/stdout.txt");
+const REMOVED_PARSE_MODE_MESSAGE: &str = "--parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)";
 
 /// Exact primary-command process result before it is written to OS channels.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -69,7 +69,6 @@ struct PrimaryCliOptions {
     input: Option<String>,
     input_file: Option<String>,
     top_rule: Option<String>,
-    parse_mode: Option<String>,
     trace_level: Option<String>,
     trace_file: Option<String>,
     trace_mode: Option<String>,
@@ -241,7 +240,6 @@ fn run_prepared_options(options: PrimaryCliOptions, cwd: &Path, repo_root: &Path
         .as_deref()
         .map(trace_field)
         .unwrap_or_else(|| "<default>".into());
-    let parse_mode = options.parse_mode.as_deref().unwrap_or("seek");
 
     if let Err(output) = emit_trace(&mut trace, 100, "low", "compile:start") {
         return output;
@@ -250,9 +248,7 @@ fn run_prepared_options(options: PrimaryCliOptions, cwd: &Path, repo_root: &Path
         &mut trace,
         200,
         "medium",
-        &format!(
-            "request source={source_kind} input={input_kind} top_rule={top_rule} parse_mode={parse_mode}"
-        ),
+        &format!("request source={source_kind} input={input_kind} top_rule={top_rule}"),
     ) {
         return output;
     }
@@ -306,15 +302,6 @@ fn run_prepared_options(options: PrimaryCliOptions, cwd: &Path, repo_root: &Path
     if let Some(top_rule) = request.options.top_rule.clone() {
         execution_options = execution_options.with_entry_rule(top_rule);
     }
-    if let Some(ref parse_mode) = request.options.parse_mode {
-        let mode = if parse_mode == "consume" {
-            ParseMode::Consume
-        } else {
-            ParseMode::Seek
-        };
-        execution_options = execution_options.with_parse_mode(mode);
-    }
-
     if let Err(output) = emit_trace(&mut trace, 100, "low", "input:start") {
         return output;
     }
@@ -433,8 +420,9 @@ fn parse_arguments(arguments: Vec<String>) -> Result<ParseOutcome, String> {
                     options.trace_emoji = true;
                 }
             }
+            "--parse-mode" => return Err(REMOVED_PARSE_MODE_MESSAGE.into()),
             "--spec" | "--spec-file" | "--inline-spec" | "--input" | "--input-file"
-            | "--top-rule" | "--parse-mode" | "--trace" | "--trace-file" | "--trace-mode" => {
+            | "--top-rule" | "--trace" | "--trace-file" | "--trace-mode" => {
                 let value = if let Some(value) = inline_value {
                     value.to_string()
                 } else if index + 1 >= arguments.len() {
@@ -468,13 +456,6 @@ fn parse_arguments(arguments: Vec<String>) -> Result<ParseOutcome, String> {
     if defined_count([&options.input, &options.input_file]) != 1 {
         return Err("choose exactly one input option: --input or --input-file".into());
     }
-    if options
-        .parse_mode
-        .as_deref()
-        .is_some_and(|mode| mode != "seek" && mode != "consume")
-    {
-        return Err("--parse-mode must be 'seek' or 'consume'".into());
-    }
     if let Some(level) = options.trace_level.as_deref()
         && !valid_trace_level(level)
     {
@@ -507,7 +488,6 @@ fn set_value_option(options: &mut PrimaryCliOptions, option: &str, value: String
         "--input" => options.input = Some(value),
         "--input-file" => options.input_file = Some(value),
         "--top-rule" => options.top_rule = Some(value),
-        "--parse-mode" => options.parse_mode = Some(value),
         "--trace" => options.trace_level = Some(value),
         "--trace-file" => options.trace_file = Some(value),
         "--trace-mode" => options.trace_mode = Some(value),

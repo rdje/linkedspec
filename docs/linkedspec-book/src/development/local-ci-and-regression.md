@@ -54,8 +54,9 @@ ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at proc
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
 preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
 the reference. Rust `.1.5.2.4` historically closed reusable direct execution plus the then-current 61-case
-canonical trace projection. During the rule-local cursor migration, Perl now owns the 63-case reference bytes;
-Rust is 51/63 until `.9.1.4.6`, and later backend leaves own the remaining migrations. UTF-16/UTF-32 are not
+canonical trace projection. During the rule-local cursor migration, Perl owns the 63-case reference bytes and
+Rust now passes them unchanged in both environments after `.9.1.4.6`; later backend leaves own the remaining
+migrations. UTF-16/UTF-32 are not
 implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
@@ -73,8 +74,8 @@ bash tools/run_primary_cli_matrix.sh
 The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
 Lua native adapters in disposable temporary storage, and runs the shared manifest against Perl, Rust, Dart,
 Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The current
-rule-local cursor manifest has 63 cases: Perl is current at 63/63, Rust is measured at 51/63, and subsequent
-backend leaves own Dart/Julia/Lua migration. A green 5x2x63 run is therefore the rollout target, not the current
+rule-local cursor manifest has 63 cases: Perl and Rust are current at 63/63, and subsequent backend leaves own
+Dart/Julia/Lua migration. A green 5x2x63 run remains the rollout target rather than the current cross-backend
 state.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
@@ -152,9 +153,8 @@ Core runs first because dependency compilation never executes a dependency crate
 tests. A separate three-test runtime integration locks the staged live boundary. Together they cover the parser/
 compiler/validation/descriptor/serialization and embedding paths central to the cursor rollout.
 
-The primary leg currently stops after the default environment at 51/63: one retired-flag diagnostic and eleven
-request-trace bytes still expose the legacy global mode field. Preflight separately proves the identical POSIX
-51/63 result. That is the exact staged migration boundary owned by `.9.1.4.6`.
+After `.9.1.4.6`, the primary leg passes all 63 cases in default and POSIX environments. The retired flag returns
+the reference-owned targeted usage error and all eleven request-trace projections omit the legacy global field.
 
 The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
 

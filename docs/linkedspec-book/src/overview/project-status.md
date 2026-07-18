@@ -204,8 +204,11 @@ Three backbone items tracked major structural modernization — all done:
   identity, normalized family/policy, aggregate ownership, and ordered semantic edge rows across direct, loaded,
   and reconstructed state, with no root/rule global fields. Generated `.9.1.4.5` now emits and reconstructs v2
   from one minimal label/family plan, derives all ten policies, rejects v1, and passes the exhaustive 105-case
-  classifier plus focused and canonical signoff. Public option/CLI removal remains `.6`. The inventory is now 71
-  files, while rollout stays 2/6 until
+  classifier plus focused and canonical signoff. Implemented public option/CLI removal `.6` deletes the global
+  runtime/option state, retains entry-rule selection only, returns the targeted retired-flag usage error, removes
+  the request-trace field, and passes all 63 primary cases in both environments. Focused and canonical signoff
+  pass; only the clean commit remains.
+  The inventory is now 68 files, while rollout stays 2/6 until
   complete Rust admission.
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument

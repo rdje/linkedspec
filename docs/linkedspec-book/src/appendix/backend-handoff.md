@@ -4,11 +4,12 @@
 > derive cursor policy from authored family, preserve child ownership, remove
 > public/global overrides with portable diagnostics, project per-rule
 > `cursor_policy`, and emit/consume `linkedspec-generated-source-v2`. Version-2
-> plan rows retain `{label, family}` and derive policy from family. Perl now
-> emits and validates v2 and rejects the removed API/CLI override; its composed
-> admission is still pending. Rust, Dart, Julia, and Lua retain their admitted
-> generated-source-v1 and global-option behavior until their dependency-ordered
-> rollout leaves.
+> plan rows retain `{label, family}` and derive policy from family. Perl is
+> admitted across the composed contract. Rust now emits/validates v2, derives
+> policy in live and reconstructed execution, and removes the API/CLI override;
+> its composed admission remains the next Rust leaf. Dart, Julia, and Lua retain
+> their staged generated-source-v1 and global-option behavior until their
+> dependency-ordered rollout leaves.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
@@ -68,8 +69,8 @@ the same optional controls:
 
 The retired `--parse-mode` flag is recognized only as a usage error: exit `2`
 with `--parse-mode has been removed; cursor policy is derived from each rule
-(OR/default=seek, AND=consume)`. The Perl reference and shared fixtures now
-project that target; later backends migrate to the same interface in order.
+(OR/default=seek, AND=consume)`. Perl and Rust project those shared fixture
+bytes; later backends migrate to the same interface in order.
 
 There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
 status probes are separate developer commands. Trace levels accept numeric values plus the
@@ -105,17 +106,14 @@ behavior. Native in-memory APIs retain their
 backend-internal scope/decision/mark/dump streams.
 
 The Rust rollout audit found that its libraries already owned full-source parsing, validation, compilation,
-structured execution, and rich native tracing. `linkedspec-rust` now exists, and its remaining work is split into
-adapter-only policy and portable phase trace. Entry/mode/direct-result controls are library capabilities—not
-CLI-only mutations—so native callers retain the same observable operation:
+structured execution, and rich native tracing. `linkedspec-rust` now exists. Direct-result execution and optional
+entry selection are library capabilities—not CLI-only mutations—so native callers retain the same observable
+operation while cursor policy stays intrinsic to each entered rule:
 
 ```rust
-use linkedspec_core::types::ParseMode;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 
-let options = ExecutionOptions::new()
-    .with_entry_rule("Alternate")
-    .with_parse_mode(ParseMode::Consume);
+let options = ExecutionOptions::new().with_entry_rule("Alternate");
 let value = engine.execute_value(input, &options)?;
 ```
 
@@ -132,7 +130,7 @@ outside the portable text interface, and arbitrary binary parsing would require 
 future explicit byte-stream contract. Perl implementation is exact through `.1.5.1.6.2`: strict argv/file
 decoding, preserved BOM/code points/newlines, recursive canonical JSON, stable invalid-file phases, and exact
 trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; Rust `.1.5.2.4` combines its
-exact boundary, reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
+exact boundary, historically reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
 unchanged cases in default/POSIX environments and adds recurring local verification. The Rust primary-command
 milestone is closed; Dart and Julia now also pass all 61 default/POSIX cases. `.1.5.4.3` owns recurring warmed
 four-command integration and closed the original exact CLI lane; `LUA-BACKEND-PARITY.7.2` has since extended the

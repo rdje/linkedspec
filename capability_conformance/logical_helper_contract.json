@@ -256,7 +256,7 @@
       {"path": "README.md", "required_markers": ["linkedspec-logical-helper-v1", "tools/check_logical_helper_five_backend.sh", "8 complete / 0 pending"]},
       {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "required_markers": ["ADR `0043`", "`helper_arity_mismatch`", "all five backends"]},
       {"path": "USER_GUIDE_ActionIR_EmittedPerlReference.md", "required_markers": ["`LinkedSpec::RuntimeLogical::evaluate`", "never use host `&&` / `||`", "generated `ExecuteWithTrace`"]},
-      {"path": "rust/README.md", "required_markers": ["## Logical Helpers", "`RuntimeValue::as_bool`", "`execute_generated_parser_v1`", "`success_logical_helpers_eager`"]},
+      {"path": "rust/README.md", "required_markers": ["## Logical Helpers", "`RuntimeValue::as_bool`", "`execute_generated_parser_v2`", "`success_logical_helpers_eager`"]},
       {"path": "dart/README.md", "required_markers": ["ADR `0043`", "`runtimeLogicalTruth`", "standalone-emitted direct/traced roles", "tools/check_logical_helper_five_backend.sh"]},
       {"path": "julia/README.md", "required_markers": ["## Native and Generated Logical Helpers", "`_runtime_truthy`", "`LinkedSpecGeneratedParser.execute_with_trace`", "tools/check_logical_helper_five_backend.sh"]},
       {"path": "lua/README.md", "required_markers": ["## Native and Generated logical helpers", "`runtime_truthy`", "`generated.execute_with_trace`", "tools/check_logical_helper_five_backend.sh"]},

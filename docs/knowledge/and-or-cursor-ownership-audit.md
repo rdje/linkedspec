@@ -9,39 +9,40 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.9.1.0 find"
   - "are AND seek and OR consume meaningful combinations"
   - "what should replace the global parse_mode option"
-date: 2026-07-16
-status: confirmed
+date: 2026-07-18
+status: confirmed historical audit; Perl and Rust rollout now removes the audited override
 tags: [dsl, runtime, cursor, parse-mode, and-rule, or-rule, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.0 traced parser construction, compiled state, engines, primary commands, descriptors, generated execution, tests, and public docs across Perl/Rust/Dart/Julia/Lua. Exact primary probes over `Top::AND /x/` plus input `prefix x` return `hit` by default on Perl/Dart/Julia/Lua but null on Rust; explicit seek returns hit and explicit consume returns null on all five. Perl toolbox output proves the selected global mode is baked into every generated LinkedRE call. Rust compiler.rs derives Consume for AND and Seek otherwise, but ExecutionOptions can globally overwrite every compiled rule. The shared 62-case CLI matrix does not contain default-AND-leading-junk coverage."
-reverify: "rg -n 'parse_mode|parseMode|effective_parse_mode|Determine parse mode' perl/LinkedSpec/Compiler.pm perl/LinkedSpec/HandlerVariantEmitter.pm rust/linkedspec-core/src/compiler.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/runtime.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua cli_conformance/manifest.json"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.0 traced parser construction, compiled state, engines, primary commands, descriptors, generated execution, tests, and public docs across Perl/Rust/Dart/Julia/Lua. Exact primary probes over `Top::AND /x/` plus input `prefix x` return `hit` by default on Perl/Dart/Julia/Lua but null on Rust; explicit seek returns hit and explicit consume returns null on all five. Perl toolbox output proves the selected global mode was baked into every generated LinkedRE call. Rust compiler.rs derived Consume for AND and Seek otherwise, but ExecutionOptions could globally overwrite every compiled rule. The shared 62-case CLI matrix did not contain default-AND-leading-junk coverage. ADR 0044 adopts the recommendation; Perl .9.1.3 and Rust .9.1.4.2-.6 now implement intrinsic family policy and override removal."
+reverify: "rg -n 'FUTURE-PARITY-BACKLOG.9.1.0|Top::AND|ExecutionOptions::with_parse_mode|default parity defect' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
-## Confirmed current architecture
+## Confirmed architecture at the audit boundary
 
-The public `parse_mode` / `--parse-mode` surface is a whole-parser override, not
-an entry-only preference:
+Before the ADR `0044` rollout, the public `parse_mode` / `--parse-mode` surface
+was a whole-parser override, not an entry-only preference:
 
 - Perl defaults to `seek` and injects the selected value into every generated
   handler.
 - Dart, Julia, and Lua store one engine-wide mode, defaulting to `seek`, and use
   it for every rule match.
-- Rust alone compiles a per-rule mode (`AND` -> `consume`, otherwise `seek`;
-  blind-call-dispatch rules currently receive an additional consume special
-  case), but `ExecutionOptions::with_parse_mode` can replace every compiled
+- Rust alone compiled a per-rule mode (`AND` -> `consume`, otherwise `seek`;
+  blind-call-dispatch rules received an additional consume special
+  case), but `ExecutionOptions::with_parse_mode` could replace every compiled
   rule's mode for one invocation.
-- The primary commands expose the same global override. Rust leaves its override
-  unset when the flag is omitted; the other four effectively run global seek.
+- The primary commands exposed the same global override. Rust left its override
+  unset when the flag was omitted; the other four effectively ran global seek.
 
-That last difference creates an uncovered default parity defect. For the same
+That last difference created an uncovered default parity defect. For the same
 one-regex `Top::AND` grammar and leading-junk input, Perl/Dart/Julia/Lua seek and
 return the match while Rust obeys its compiled AND mode and returns null. The
 existing cross-backend primary matrix proves explicit seek and consume but does
 not cover default AND behavior.
 
-Descriptor state is also inconsistent with runtime ownership. Perl records the
+Descriptor state was also inconsistent with runtime ownership. Perl recorded the
 selected global mode; Dart/Julia/Lua and Rust outward descriptor metadata
-hard-code global `seek`; only Rust rule metadata carries a derived per-rule
-mode.
+hard-coded global `seek`; only Rust rule metadata carried a derived per-rule
+mode. Perl and Rust have since migrated; later backend leaves own the remaining
+staged surfaces.
 
 ## The legitimate semantic objective
 
@@ -82,7 +83,7 @@ AND child keeps intrinsic consume behavior under an OR parent. ADR `0044` /
 
 ## Migration surface
 
-Implementation must migrate, not silently ignore:
+Implementation migrates, rather than silently ignoring:
 
 - Perl `Get` / `get_parser` / emitted-source construction and descriptor
   metadata;
@@ -95,8 +96,9 @@ Implementation must migrate, not silently ignore:
   cursor metadata;
 - current tests and examples that use global consume to obtain strict parsing.
 
-Legacy public options should fail with a targeted migration diagnostic rather
-than be accepted and ignored. Current behavior remains unchanged until the
-backend-neutral decision and implementation leaves land.
+Legacy public options fail with a targeted migration diagnostic rather than
+being accepted and ignored. Perl is composed-admitted and Rust is current
+through public removal; Dart, Julia, and Lua remain dependency-ordered rollout
+work.
 
 Related task: [[FUTURE-PARITY-BACKLOG]] `.9.1.0` / `.9.1.1`.

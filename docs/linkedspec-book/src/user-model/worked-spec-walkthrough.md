@@ -162,10 +162,7 @@ Pair:
  }
 SPEC
 
-my $parser = LinkedSpec::Get(
-  \$spec,
-  parse_mode => 'consume',
-);
+my $parser = LinkedSpec::Get(\$spec);
 
 my $input = 'answer = 42';
 my $ast = $parser->(\$input);
@@ -190,56 +187,44 @@ is:
 ]
 ```
 
-That two-pair result is what the `seek` parser (built below) returns: after the first
-pair the cursor sits on the `, ` separator, and `seek` skips forward to the next `b = 2`
-anchor. The **strict `consume` parser built above** instead returns only the first pair
-`[{ kind => "pair", name => "a", value => "1" }]`, because `consume` will not skip the
-separator — the cursor stops at `,` and no further pair matches contiguously. This is the
-`consume` versus `seek` distinction in miniature; the next section makes it explicit.
+That two-pair result follows from the default/OR-family `Pair:` rule: after the first
+pair the cursor sits on the `, ` separator, and the rule's intrinsic `seek` policy skips
+forward to the next `b = 2` anchor. The next section contrasts that structure with an
+AND-family rule whose intrinsic policy is `consume`.
 
 Do not depend on hash key order when printing these payloads (for example with a debug dumper such as Perl's `Data::Dumper`); the semantic payload is the key/value content of each hash, not its serialization order.
 
 ## `consume` versus `seek`
 
-The parser construction above used:
-
-```perl
-parse_mode => 'consume'
-```
-
-That means the regex must match at the current cursor position.
-
-This input matches the pair and returns the one-element list:
+Cursor discipline is authored on each rule, not selected by a construction option. The
+walkthrough's matcher uses:
 
 ```text
-answer = 42
+Pair:
 ```
 
-This input extracts nothing under `consume`:
+The default/OR family seeks forward from the cursor. Therefore both `answer = 42` and
+`junk answer = 42` return the same one-element payload.
+
+To require a match at the current cursor, make the matcher an AND-family rule:
 
 ```text
-junk answer = 42
+Pair:AND
+ /([A-Za-z_]\w*)\s*=\s*([^,\n]+)/ I {
+   return(hash("kind", "pair", "name", entry_group(0), "value", trim(entry_group(1))));
+ }
 ```
 
-The current cursor starts at `j`, not at the `answer = 42` pair, so no match occurs at the
-cursor and the parser returns an empty list `[]`.
-
-If you compile the same spec with `seek`, LinkedSpec can skip forward to the later anchor:
-
-```perl
-my $parser = LinkedSpec::Get(
-  \$spec,
-  parse_mode => 'seek',
-);
-```
-
-Under `seek`, this input matches:
+This structurally strict variant matches `answer = 42`, but does not match a pair in:
 
 ```text
 junk answer = 42
 ```
 
-The returned payload is still the one-element list of the pair:
+The current cursor starts at `j`, not at the `answer = 42` pair, so the AND-family
+matcher returns its falsey failure sentinel. The walkthrough's unconditional `.push`
+preserves that sentinel as `[0]`; it contains no pair payload. Restore the default
+`Pair:` label when extraction from a larger text body is intended; its returned payload is:
 
 ```text
 [
@@ -247,7 +232,9 @@ The returned payload is still the one-element list of the pair:
 ]
 ```
 
-Use `consume` when the spec is acting as a strict parser. Use `seek` when the spec is acting as an extractor over a larger text body.
+Use an AND-family rule when that rule must consume contiguously. Use a default/OR-family
+rule when that rule should extract from a larger text body. Parent family does not
+override child family, so compose mixed disciplines through explicit child rules.
 
 ## Inspecting the descriptor instead of building a parser
 
@@ -259,7 +246,6 @@ Use `return_descriptor => 1`:
 my $descriptor = LinkedSpec::Get(
   \$spec,
   return_descriptor => 1,
-  parse_mode => 'consume',
 );
 ```
 
@@ -269,7 +255,8 @@ For this walkthrough, the useful checks are:
 
 ```perl
 ref($descriptor) eq 'HASH';
-$descriptor->{meta}{parse_mode} eq 'consume';
+$descriptor->{meta}{cursor_contract} eq 'linkedspec-rule-local-cursor-v1';
+$descriptor->{spec}{Pair}{meta}{cursor_policy} eq 'seek';
 exists $descriptor->{spec}{Top};   # the entry rule
 exists $descriptor->{spec}{Pair};  # the matcher rule
 ```
@@ -286,7 +273,6 @@ my %ctx;
 
 my $parser = LinkedSpec::Get(
   \$spec,
-  parse_mode => 'consume',
   runtime_ctx_ref => \%ctx,
 );
 ```

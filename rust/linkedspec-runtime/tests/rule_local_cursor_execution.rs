@@ -2,7 +2,7 @@
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
-use linkedspec_core::types::{CompiledSpec, ParseMode};
+use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
@@ -337,28 +337,14 @@ fn compiled_json_derives_policy_from_family_without_a_mutable_field() {
 }
 
 #[test]
-fn staged_public_override_no_longer_propagates_into_rule_execution() {
-    let and_compiled = compile_source("Top::AND\n /x/ -> Top { return(\"hit\") }\n");
-    assert_eq!(
-        execute_compiled(
-            and_compiled,
-            "prefix x",
-            &ExecutionOptions::new().with_parse_mode(ParseMode::Seek),
-        ),
-        Value::Null,
-        "caller seek cannot override authored AND consume"
-    );
+fn public_global_cursor_override_source_is_removed() {
+    let engine_source = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/engine.rs"));
+    let runtime_source = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/runtime.rs"));
 
-    let default_compiled = compile_source("Top::\n /x/ -> Top { return(\"hit\") }\n");
-    assert_eq!(
-        execute_compiled(
-            default_compiled,
-            "prefix x",
-            &ExecutionOptions::new().with_parse_mode(ParseMode::Consume),
-        ),
-        json!("hit"),
-        "caller consume cannot override authored default seek"
-    );
+    assert!(!engine_source.contains("pub fn with_parse_mode"));
+    assert!(!engine_source.contains("options.parse_mode"));
+    assert!(!runtime_source.contains("parse_mode_override"));
+    assert!(!runtime_source.contains("effective_parse_mode"));
 }
 
 #[test]

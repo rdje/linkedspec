@@ -265,11 +265,11 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - `seek` mode (progressive extraction; can skip to anchors).
   - `consume` mode (contiguous matching discipline).
 - Keep default behavior backward compatible.
-- Landed first slice:
-  - public `parse_mode => 'seek' | 'consume'` is now supported through `LinkedSpec::Get(...)`, `LinkedSpec::get_parser(...)`, and `return_descriptor => 1`,
+- Historical first slice (superseded by ADR `0044` and the `.9.1.3-.9` rule-local rollout):
+  - public `parse_mode => 'seek' | 'consume'` was supported through `LinkedSpec::Get(...)`, `LinkedSpec::get_parser(...)`, and `return_descriptor => 1`,
   - the default remains backward-compatible `seek`,
   - `consume` now drives contiguous `LinkedRE::or(...)` matching from the current input position,
-  - generated descriptors now expose the selected mode at `meta->{parse_mode}`,
+  - generated descriptors exposed the selected mode at `meta->{parse_mode}`,
 - Recent landed follow-up: the public descriptor-introspection option is now `return_descriptor => 1` with no active `return_descr` alias preserved, so the active runtime/parser-factory/compiler path and the current docs all use one explicit descriptor-return term.
   - the documented contract now states explicitly that `seek` / `consume` is cursor discipline while `OR` / `AND` is rule composition, so those axes should stay orthogonal as Phase 3 continues,
   - and the Phase 3 semantics notes now also state explicitly that current LinkedSpec is not targeting full parser-engine backtracking: `BACKTRACK()` / `IBACKTRACK()` are local cursor-rewind helpers inside a mostly forward-moving model, and well-written `.spec` files should not depend on systemic search-tree rollback.
@@ -995,7 +995,10 @@ JSON reconstruction, and trace. Verified descriptor `.9.1.4.4` removes root/rule
 neutral v1 identity, family-derived policy, aggregate ownership, and ordered semantic edge rows across direct,
 loaded, and compiled-JSON projections. Generated `.5` now emits v2/format 2 with one minimal neutral plan, derives
 policy across all ten families, rejects v1, and passes fresh host/corpus/exhaustive-classifier plus focused and
-canonical proof. Public option/CLI projection remains `.6`; the current token inventory is 71.
+canonical proof. Implemented public option/CLI projection `.6` removes runtime/global option ownership, retains
+entry-rule selection only, rejects the retired flag with the targeted usage error, removes the request-trace
+field, and passes the exact 63-case matrix in both environments. Focused and canonical signoff pass; only the clean
+commit remains, and the current token inventory is 68.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes
@@ -1130,7 +1133,7 @@ pending explicit activation, and no scaffold or content move exists yet.
 | Phase 1 | `done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Task tree `docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md` completed 2026-05-18 (3 leaves: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation). ActionRewriter.pm deleted (118 lines, 59 forwarders). |
 | Phase 1A | `done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Task tree `docs/tasks/PHASE1A-CLOSE-OUT.md` completed 2026-05-16. `LinkedSpec.pm` is a thin façade; the lazy owner-dispatch / callback-value lookup / `$@` preservation plumbing is centralized in `LinkedSpec::OwnerDispatch` and shared across the owner modules. The then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1; the focused helper-rewrite entrypoint now lives in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`. |
 | Phase 2 | `done` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Task tree `docs/tasks/PHASE2-DSL-FRONTEND.md` completed 2026-05-16 (6 leaves). Syntax-aware validation hardened across rule-paragraph, token, and error surfaces; further hardening is incidental follow-up. |
-| Phase 3 | `done` | Formal parse-mode semantics, especially `seek` versus `consume` behavior. | Task tree `docs/tasks/PHASE3-EXECUTION-SEMANTICS.md` completed 2026-05-17 (4 leaves). Option-level `seek`/`consume` modes are real; the forward-moving (non-backtracking) model and the BACKTRACK/IBACKTRACK local-rewind contract are documented. |
+| Phase 3 | `done` | Formal parse-mode semantics, especially `seek` versus `consume` behavior. | Task tree `docs/tasks/PHASE3-EXECUTION-SEMANTICS.md` completed 2026-05-17 (4 leaves). Seek/consume remain real low-level matching algorithms, while ADR `0044` later supersedes the caller option with authored family ownership; the forward-moving (non-backtracking) model and local-rewind contract remain documented. |
 | Phase 4 | `done` | Capture/mark API formalization and clearer staged-extraction authoring primitives. | Task tree `docs/tasks/PHASE4-CAPTURE-MARK-API.md` completed 2026-05-17 (4 leaves). The capture/mark API is formalized: anonymous `@capture_slice`, named `@mark(name)`, and the full capture / cursor / whole-input / entry / match reader family, all documented with the helper-split guidance. |
 | Phase 5 | `done` | Runtime modernization, diagnostics consistency, and reduced dynamic-eval fragility. | Task tree `docs/tasks/PHASE5-RUNTIME-DIAGNOSTICS.md` completed 2026-05-17 (2 leaves). Structured `runtime_ctx->{last_error}` diagnostics span the compiler-pipeline and parser-factory owner stages, the SpecEntry stderr leak is fixed, and dynamic-eval fragility is reduced. |
 | Phase 6 | `done` | User/developer documentation, architecture rationale, and live project-state upkeep. | Task tree `docs/tasks/PHASE6-DOCUMENTATION.md` completed 2026-05-17 (8 leaves). Book, USER_GUIDE, and architecture docs are maintained live; repo-root-relative doc paths are policy and regression-locked. Ongoing upkeep continues under the no-drift doctrine. |

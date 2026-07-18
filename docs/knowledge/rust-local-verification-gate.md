@@ -13,10 +13,10 @@ answers:
   - how do I select the Rust target directory for LinkedSpec checks
   - does Rust pass primary CLI conformance with POSIXLY_CORRECT
   - what did FUTURE-PARITY-BACKLOG 1.5.2.4 implement
-date: 2026-07-17
+date: 2026-07-18
 status: current
 tags: [rust, cli, ci, conformance, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.4.1 adds unfiltered cargo test -p linkedspec-core immediately before cargo test -p linkedspec-runtime; actual gate execution passes 188 core unit, 3 descriptor, and 8 type tests plus the complete runtime package before reaching the expected cursor-migration CLI boundary."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.4.1 adds unfiltered cargo test -p linkedspec-core immediately before cargo test -p linkedspec-runtime. FUTURE-PARITY-BACKLOG.9.1.4.6 removes the staged global cursor projection, so the focused gate passes the complete core/runtime packages and all 63 primary cases with POSIXLY_CORRECT unset and set."
 reverify: "bash -n tools/run_rust_local.sh && sed -n '1,90p' tools/run_rust_local.sh && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime && rg -n 'LINKEDSPEC_RUN_RUST|run_rust_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -29,7 +29,8 @@ the emitted/trace/contract suites.
 `FUTURE-PARITY-BACKLOG.9.1.4.1` closes the preflight's verification-topology gap. Immediately after formatting,
 the script runs unfiltered `cargo test -p linkedspec-core`, then unfiltered `cargo test -p linkedspec-runtime`.
 The core package owns the Rust `.spec` parser, compiler, validation, descriptor, and compiled serialization types;
-its current proof is 188 unit tests, three descriptor integration tests, and eight type integration tests. A
+its current proof is 189 unit tests, four descriptor integration tests, five contract-driven normalization tests,
+and eight type integration tests. A
 runtime dependency build alone never substitutes for those tests.
 
 `LINKEDSPEC_CARGO_CMD` selects the Cargo executable. `CARGO_TARGET_DIR` selects the build directory and is also
@@ -37,9 +38,8 @@ used to locate the built primary binary. The script defaults to `cargo` and `rus
 
 The canonical `tools/run_ci_local.sh` remains toolchain-independent by default and includes this focused Rust gate
 only when `LINKEDSPEC_RUN_RUST=1` is set, matching the explicit Dart/Julia opt-in model. `.1.5.2.4` also proves the
-historical gate introduction. The current rule-local cursor migration intentionally leaves Rust primary at 51/63
-until `.9.1.4.6` removes the retired flag and trace field. Because the script is fail-fast, it stops after the
-default environment at that exact boundary; `.9.1.4.0` separately proved the same 51/63 POSIX result.
+historical gate introduction. Rule-local cursor slice `.9.1.4.6` removes the retired flag and request-trace field;
+the fail-fast gate now completes all 63 primary cases in both default and POSIX environments.
 
 For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` builds Rust and combines this command
 with Perl, Dart, Julia, and Lua across both environments. `.1.5.4.3` owns the original 4x2x61 proof; Lua `.7.2`

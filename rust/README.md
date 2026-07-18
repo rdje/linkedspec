@@ -63,20 +63,22 @@ cargo test
 
 From the repository root, `bash tools/run_rust_local.sh` is the focused operational gate. It checks formatting,
 runs the complete `linkedspec-core` package before the complete `linkedspec-runtime` package, builds the primary
-command, and runs the shared byte-exact CLI manifest in default and POSIX option environments. During the staged
-rule-local cursor migration the package tests are green and the primary leg is intentionally 51/63 until
-`FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection.
+command, and runs the shared byte-exact CLI manifest in default and POSIX option environments. Rule-local cursor
+slice `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection, so the focused primary
+leg now passes all 63 cases in both environments.
 
-Rust execution, descriptor projection, and generated-source v2 are current through `.9.1.4.5`. The parser retains complete-line and header-rest bare edges as
+Rust execution, descriptor projection, generated-source v2, and public option/CLI removal are current through
+`.9.1.4.6`. The parser retains complete-line and header-rest bare edges as
 typed nodes; validation derives AND bare edges as blind calls and OR/default bare edges as action edges, rejects
 undefined/mixed/index/group shapes with portable code/stage/fields, and compilation preserves that ownership in
 the corresponding dispatch table. Compact `|` is authored OR and compact `&` is authored AND. Normal live,
 loaded, and ordinary JSON-reconstructed rules derive seek/consume from the rule being entered; compiled rules no
-longer store an independently mutable policy, and the staged caller option cannot override live behavior.
+longer store an independently mutable policy, and execution options select only an entry rule.
 Descriptor v1 publishes the neutral cursor identity plus each rule's normalized family, derived policy, aggregate
 ownership, and ordered semantic edge rows without root/rule global fields. Generated source likewise derives
-policy from its minimal neutral family plan and has no serialized cursor field. Public option/CLI removal remains
-staged under `.9.1.4.6` through an explicit boundary.
+policy from its minimal neutral family plan and has no serialized cursor field. The primary command recognizes
+the retired `--parse-mode` spelling only to return the targeted usage error; help and request traces expose no
+global cursor field.
 
 ### Compiled descriptor introspection
 
@@ -220,8 +222,8 @@ Top::
 ```
 
 The result is `{"eager":true,"lazy":false,"seen":["still-runs"]}`. Native and serialized execution, generated
-plans, typed `execute_generated_parser_v1` / traced v1, compatibility direct/traced calls, and independently
-compiled emitted `execute`/`execute_with_trace`/`parse`/`parse_with_trace` roles preserve that behavior. Typed v1
+plans, typed `execute_generated_parser_v2` / traced v2, compatibility direct/traced calls, and independently
+compiled emitted `execute`/`execute_with_trace`/`parse`/`parse_with_trace` roles preserve that behavior. Typed v2
 returns the direct top-rule value; compatibility roles intentionally retain their historical parse-output array.
 Shared primary case `success_logical_helpers_eager` passes every backend command in default and POSIX
 environments. Run the whole recurring cross-backend proof from the repository root with

@@ -36,12 +36,14 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > lowers them into typed action/blind dispatch tables. Rust `.9.1.4.3` now makes
 > normal live, loaded, and ordinary JSON-reconstructed rules derive policy at
 > each rule entry. Its compiled rule no longer stores an independent mutable
-> policy, and the still-present caller option cannot override normal execution.
+> policy.
 > Rust `.9.1.4.4` now publishes descriptor-v1 family/policy/resolved-edge facts
 > without root/rule global fields. Rust `.9.1.4.5` emits and reconstructs
 > generated-source v2 from only ordered label/family rows, derives the same five
-> seek and five consume policies, and rejects v1 before reconstruction. Only
-> option/CLI removal remains staged under `.9.1.4.6` through an explicit boundary.
+> seek and five consume policies, and rejects v1 before reconstruction. Rust
+> `.9.1.4.6` removes static `ExecutionOptions` and runtime-context global mode
+> state, rejects primary `--parse-mode` with the targeted usage error, omits the
+> global request-trace field, and passes all 63 primary cases in both environments.
 > rollout is 2 complete / 6 pending, with Rust, Dart, Julia, and Lua behavior
 > dependency-ordered under `.9.1.4-.9`.
 
@@ -543,11 +545,10 @@ compiled block presence, and fluent continuation. Bare-versus-explicit provenanc
 so Rust omits it after normalization rather than inventing it.
 
 Generated-source v2 now derives the same policy from its minimal ordered family plan and carries no serialized
-cursor field. The Rust option/CLI/request-trace surface remains visible until `.9.1.4.6`, but its value no longer
-overrides normal live rule policy. Do not use that staged surface to author cursor semantics; express the
-structure with rule families.
+cursor field. Rust execution options now select only an entry rule; the primary command rejects the retired
+global flag and request traces carry no global cursor field. Express cursor semantics with rule families.
 
-## Removed Perl option boundary
+## Removed Perl and Rust option boundaries
 
 The Perl reference rejects `parse_mode` in inline, file-oriented, and generated-source construction. The failure
 occurs before source parsing with `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, and
@@ -576,8 +577,10 @@ my $cursor_contract = $descriptor->{meta}{cursor_contract};
 # linkedspec-rule-local-cursor-v1
 ```
 
-Inspect each rule's family-derived `cursor_policy`. The primary `--parse-mode` flag is recognized only far enough
-to produce usage exit 2 and the targeted structural-migration message; it is never accepted or ignored.
+Inspect each rule's family-derived `cursor_policy`. The Perl and Rust primary `--parse-mode` flag is recognized
+only far enough to produce usage exit 2 and the targeted structural-migration message; it is never accepted or
+ignored. Rust native callers use `ExecutionOptions` only to select an entry rule; there is no runtime-context
+override/effective-mode state.
 
 ## Choosing a mode
 
@@ -674,16 +677,16 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-Perl now removes `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
-accepted-and-ignored option. Perl descriptors replace root
+Perl and Rust now remove `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
+accepted-and-ignored option. Their descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract`, retain per-rule `meta.cursor_policy`, and expose ordered
 `meta.resolved_edges` rows with ownership/target/index/block/fluent facts.
 Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
-in the Perl reference are current. Primary-command/API removal is also current.
+in Perl and Rust are current. Primary-command/API removal is also current in both backends.
 One canonical 14-role consumer composes live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic projections. The neutral checker currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 73 migration files,
+spellings, 18 edge cases, eight parent/child cases, 68 migration files,
 2 complete / 6 pending, and 29 rejected drift mutations.

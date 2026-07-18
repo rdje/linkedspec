@@ -4,8 +4,9 @@
 > `meta.parse_mode` and every public rule field named `parse_mode`. Perl
 > `.9.1.3.3` now exposes `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
-> `resolved_edges`. Generated-source v2 and option/CLI removal remain separately
-> staged under `.9.1.3.4-.5`; other backends migrate in `.9.1.4-.7`.
+> `resolved_edges`. Perl generated-source v2 and option/CLI removal are complete;
+> Rust now exposes the same descriptor-v1, generated-v2, and removal boundary,
+> while composed Rust admission and later backends remain dependency-ordered.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

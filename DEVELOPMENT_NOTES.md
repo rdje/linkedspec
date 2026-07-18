@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.6` — deleting global ownership does not delete derived matcher
+  policy): Rust still needs both seek and consume internally. The safe boundary is therefore not a spelling purge:
+  remove only public/static selection (`ExecutionOptions`), per-invocation runtime override storage, and the
+  adapter that preferred that storage over rule policy. `CompiledRule::cursor_policy()` remains the semantic
+  authority, and native trace can still report the policy that a rule actually derived. The six-test cursor suite
+  locks this distinction with direct negative source assertions for the removed seams plus live/loaded/serialized/
+  descriptor/generated behavior across all 36 families and eight parent/child mechanisms.
+
+  The primary adapter treats the retired flag as a structural migration diagnostic, not as an old enum parser.
+  Both split and equals spellings return the same exact usage message immediately; no legacy value validation,
+  option assignment, or execution override survives. Removing the request's default `parse_mode=seek` field is a
+  separate byte-contract change, which is why the pre-edit 51/63 baseline consisted of exactly one usage case plus
+  eleven trace projections and the post-edit proof must be exact 63x2.
+
+  Token-derived inventory is deliberately reconciled after documentation, not guessed from code edits. Runtime
+  deletion alone reduced 71 to 70. Replacing three live mdBook option examples with structural family examples
+  made those pages token-free, while the Rust README gained the exact retired flag for user guidance; the net
+  governed inventory is 68. The checker found this delta mechanically and all 29 mutations remain effective.
+
+  The same public sweep surfaced a prior generated-v2 lockstep omission. The recurring logical consumer roles had
+  moved to `generated_v2_direct` / `generated_v2_traced`, but the public no-drift marker still required the old v1
+  name in Rust's README. Updating both the JSON authority and checker's independent default to v2 restores one
+  consistent contract; the public-marker mutation and all 26 total drift mutations still fail as intended.
+
+  Final focused proof passes core 189/4/5/8, runtime 137, oracle 3/205.44s, diagnostics 7, generated classifier
+  105/235.42s, integrations 197/75.12s, rule-local execution 6/59.52s, emitter 5/37.18s, every adjacent suite, and
+  exact Rust primary 63x2. Canonical CI independently passes Perl cursor 288, reference primary 63x2, and Phase 0
+  1,031/1,031 in 611 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.4.5` — generated repetition is narrower than live repetition):
   Rust core's `RuleMode::is_repetition()` answers an execution question, so it intentionally includes the
   unsuffixed `Default` mode: default rules repeat alternatives. Generated-source family classification answers a

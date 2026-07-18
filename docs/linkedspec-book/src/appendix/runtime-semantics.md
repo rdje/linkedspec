@@ -1,10 +1,11 @@
 # Runtime Semantics
 
 > **Current implementation and accepted migration:** The executable details in
-> this appendix describe shipped behavior. ADR `0044` has ratified a future
-> rule-local replacement: OR/default families seek, AND families consume,
+> this appendix describe shipped behavior. ADR `0044` ratifies the rule-local
+> contract: OR/default families seek, AND families consume,
 > parent and edge kind never override a child, and the public/global
-> `parse_mode` option is removed. Implementation remains `.9.1.2-.9`.
+> `parse_mode` option is removed. Perl is composed-admitted and Rust is current
+> through public removal; remaining backends are dependency-ordered in `.9.1.5-.9`.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -38,7 +39,7 @@ it can, where it can.
 
 ### 1.2 Consume Mode
 
-**Used for AND-type rules** (ordered sequence: `AND` mode, `:&`, `:|`).
+**Used for AND-type rules** (ordered sequence: `AND` mode and `:&`).
 
 The regex is **`\G`-anchored** — it must match contiguously from the current
 position. The match must start exactly at the current cursor.
@@ -58,16 +59,14 @@ The parse mode for a rule is determined by:
 1. The **rule mode** from the label (`:AND` → consume, `:OR` and default → seek).
 2. The **handler variant** selected by the compiler.
 3. AND variants use consume. OR and REP variants use seek.
-4. The current `parse_mode` field in the HandlerIR node documents the selected
-   mode. Under ADR `0044`, the equivalent internal fact is derived from authored
-   family and cannot be caller-overridden.
+4. Any internal runtime representation derives the policy from authored family;
+   it cannot be caller-overridden or serialized as a second semantic authority.
 
 ## 2. Rule Execution Model
 
 ### 2.1 Non-Repeated Rules
 
-A rule with mode `:AND` (bounded, non-repeated) or with a single-match mode
-(`:&`, `:?`):
+A rule with mode `:AND` (bounded, non-repeated) or compact AND `:&`:
 
 1. If the rule has an **I-block**: execute it once.
 2. Match the child regex(es) once.

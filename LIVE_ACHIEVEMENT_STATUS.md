@@ -8,9 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.6 — remove Rust global cursor overrides**
+  (DONE — implementation, exact 63x2 migration, public/mdBook/KM lockstep, focused Rust, governance, mutation,
+  and canonical signoff pass; the clean commit is the only boundary before composed admission `.9.1.4.7`).
+
+  **Goal:** Delete Rust's caller/global seek/consume authority without deleting the internal rule-derived matcher
+  algorithms, and migrate the primary command to the unchanged reference-owned 63-case interface.
+
+  **Result:** `ExecutionOptions` retains only optional entry selection; runtime-context override/effective-mode
+  state is gone. Every entered rule derives cursor policy from authored family. Primary `--parse-mode` returns the
+  targeted usage error and request trace has no global field. The exact pre-edit 51/63 default/POSIX boundary moves
+  to 63/63 twice. Public examples now teach structural policy. Neutral inventory is 68 at 2/6; the stale logical-
+  helper public v1 marker is corrected to v2 while all 26 drift mutations remain effective.
+
+  **Proof:** Complete focused Rust passes core 189/4/5/8, runtime 137, oracle 3/205.44s, diagnostics 7, classifier
+  105/235.42s, integrations 197/75.12s, execution 6/59.52s, emitter 5/37.18s, adjacent suites, and primary 63x2.
+  Neutral cursor rejects 29 mutations; Knowledge Map is 587/4,165; four doctrines and mdBook pass. Canonical CI
+  passes Perl cursor 288, reference CLI 63x2, and Phase 0 1,031/1,031 in 611 seconds.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.5 — emit Rust generated-source v2**
-  (DONE — implementation, complete/focused Rust proof, lockstep documentation, governance, and canonical signoff
-  pass; the clean commit is the remaining boundary before public-removal `.9.1.4.6` activation).
+  (DONE — committed at `727cccc3`; implementation, complete/focused Rust proof, lockstep documentation,
+  governance, and canonical signoff pass; public-removal `.9.1.4.6` is implemented and awaiting final signoff).
 
   **Goal:** Emit and reconstruct generated Rust from only ordered rule labels plus authored families, with exact
   v2 identity, family-derived cursor policy, and a hard v1 regeneration boundary.

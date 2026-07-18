@@ -15,9 +15,9 @@ answers:
   - "is Rust generated source v2 migrated to rule local cursor"
   - "what tests prove Rust rule local cursor execution"
 date: 2026-07-18
-status: current normal Rust execution, descriptor v1, and generated-source v2; public removal remains FUTURE-PARITY-BACKLOG.9.1.4.6
+status: current through Rust public option and primary CLI removal; composed admission remains FUTURE-PARITY-BACKLOG.9.1.4.7
 tags: [rust, cursor, runtime, serialization, loading, recursion, trace, generated-source, descriptor, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state and publishes cursor identity/family/policy/resolved edges. FUTURE-PARITY-BACKLOG.9.1.4.5 removes legacy_artifact_parse_mode plus the private v1 wire serializer and makes generated-source v2 derive policy from its minimal family plan. Only public option/CLI projection remains .6 debt and cannot override normal live execution."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state and publishes cursor identity/family/policy/resolved edges. FUTURE-PARITY-BACKLOG.9.1.4.5 removes legacy_artifact_parse_mode plus the private v1 wire serializer and makes generated-source v2 derive policy from its minimal family plan. FUTURE-PARITY-BACKLOG.9.1.4.6 deletes ExecutionOptions/runtime-context global mode state, rejects the primary flag with the targeted usage error, removes the request-trace field, and passes exact 63/63 default and POSIX projections."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -45,8 +45,9 @@ Descriptor v1 consumes the same derived state. It identifies the neutral cursor
 contract, publishes normalized family/policy/resolved edges, and has no root or rule
 global field. Generated-source v2 now carries only ordered label/family rows and
 derives the same policy during reconstruction; the legacy adapter and private v1
-wire serializer are gone. Rust's public option/CLI/request-trace surface remains
-present until `.9.1.4.6`, but does not override normal live execution.
+wire serializer are gone. Rust execution options retain entry-rule selection only;
+the primary command rejects the retired global flag and request traces have no
+global cursor field.
 
 The contract test consumes all 36 family spellings, all eight neutral parent/child
 mechanisms, and both structural replacements. Loaded trace proof shows the AND parent
