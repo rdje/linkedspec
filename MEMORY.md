@@ -10,22 +10,23 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` — exact 15-role topology, 29 mutations, Rust-local
-  and canonical 65x2 proof, public/book/KM lockstep, and cleanup admit Rust root selection at 3/7; commit pending.
-- latest_commit: `1b57294d` — `FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 - converge Rust root routes`
-  (ahead: 213; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 - admit Rust root selection`.
-- active_work_unit: Rust admission `.9.1.1.2.2.3` and parent `.2.2` are fully signed off; their prepared commit is
-  the only in-flight boundary. Dart `.9.1.1.2.3` is not active and must wait for a clean tree.
-- next_action: commit `.2.3`, clear `git_message_brief.txt`, prove the tree clean, then activate and safely split
-  Dart root selection `.9.1.1.2.3` task-tree-first before any Dart change.
-- current_proof: One omission-sensitive Rust consumer executes all 15 declared roles exactly once; governance
-  locks six primary cases and 29 mutations. Focused admission/core/routes/emitter passes 1+6+6+6. Full Rust-local
-  passes core 193+4+5+8, runtime 137, oracle 105/215.90s, classifier 105/249.47s, integration 197, admission
-  1/16.89s, emitter 6/49.64s, and primary 65x2. Canonical passes all four doctrines, root governance, Perl root
-  7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 627s. Public/book/capability/live records
-  agree at 3 complete / 4 pending; KM is 603/4,328. Cleanup removes 10,626 Cargo dependency/incremental files,
-  reducing `rust/target` from 2.4 GiB to 99 MiB, plus generated book/cache/logs. No background job runs.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` — behavior-free Dart seam map proves exact 64/65x2,
+  package 260, corpus 105, fallback/validation/failure/descriptor causality, canonical signoff, and cleanup.
+- latest_commit: `41ed8300` — `FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 - admit Rust root selection`
+  (ahead: 214; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 - map Dart root selection`.
+- active_work_unit: Dart parent `.9.1.1.2.3` remains active; preflight `.3.0` is fully signed off and awaiting its
+  prepared commit. Core `.3.1` is not active and must wait for the clean boundary.
+- next_action: commit `.3.0`, clear the brief, prove the tree clean, then activate core/descriptor `.3.1`
+  task-tree-first and implement only its centralized validation/resolution/failure/identity boundary.
+- current_proof: Dart primary is exactly 64/65 twice; markerless first-rule alone fails compile validation. Direct
+  probes prove ordered native, normalized, generated-default, and explicit selection already work behind
+  `_checkTopRuleExists`; loaded and emitted source re-enter validation. Unknown/zero failures still use untyped
+  `rule_lookup`/`top_rule_selection`, descriptor root metadata lacks `entry_rule_contract`, and strict/request
+  trace are already independent. Focused owners pass 97; complete Dart passes format, analysis, package 260, and
+  corpus 105. Root governance stays 3/4 plus 29 mutations; mdBook and KM 604/4,336 pass. Canonical passes all four
+  doctrines, Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 655s. Cleanup removes
+  generated book/cache only. No Dart behavior/capability changed; rollout remains 3/7. No background job runs.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0046`, neutral/Perl root precedent, exact Rust owners/tests/routes, and gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -37,5 +38,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed `.2.3` admission closeout awaits its prepared commit only;
-  Dart is not activated. No background job runs. Parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: completed Dart `.3.0` map/signoff awaits its prepared commit only; core
+  `.3.1` is not activated. No background job runs. Parked ignored work is untouched.

@@ -73,6 +73,11 @@ the Rust primary command passes all 65 cases in default and POSIX option environ
 and cross-backend no-drift leg `.6` are pending. Current backend differences stay explicit in the inventory until
 their owning leaves land.
 
+Dart preflight `.9.1.1.2.3.0` proves the current shared-primary boundary is exactly 64/65 twice: only markerless
+first-rule default is rejected at validation. Ordered runtime, normalized-state, and generated-direct fallback
+already work when reached; loaded/emitted source re-enter the marker-required validator, portable zero/unknown
+selection stages and root descriptor contract identity remain absent, and rollout correctly stays pending.
+
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always
 runs twice. That reference-first migration is now implemented; shared CLI documentation and final symmetric

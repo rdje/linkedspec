@@ -8,8 +8,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 — map Dart root selection**
+  (DONE, behavior-free signoff complete and awaiting its prepared clean commit).
+
+  **Result:** Dart's current primary boundary is exactly 64/65 in both option environments; markerless first-rule
+  default alone fails compile validation. The ordered native, normalized, and generated-direct fallback plus
+  explicit override already work behind `_checkTopRuleExists`. Loaded/emitted source re-enter validation; zero and
+  unknown selection retain old untyped stages; root descriptor contract identity is absent. `.3.1-.3` now own
+  core/descriptor, composed routes, and topology/admission without overlap. Rollout stays 3/7.
+
+  **Proof:** Focused owners pass 97; Dart format/analyze/package 260/corpus 105 pass. Root governance remains 3/4
+  with 29 mutations; mdBook and KM 604/4,336 pass. Canonical CI passes all four doctrines, Perl root 7+5, cursor
+  288, reference primary 65x2, and Phase 0 1,031/1,031 in 655 seconds. Safe cleanup removes generated book/cache;
+  no Dart source/test/fixture/contract/capability behavior changes.
+
+  **Next:** Commit `.3.0`, clear the brief, prove the tree clean, then activate Dart core/descriptor `.3.1`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 — admit Rust root selection**
-  (DONE, fully signed off and awaiting its prepared clean commit).
+  (DONE at clean commit `41ed8300` — fully signed off at 3/7 root-selection rollout).
 
   **Result:** One omission-sensitive Rust admission consumer executes all 15 contract-declared semantic roles
   exactly once. Governance locks its path, drivers, roles, six shared primary identities, and rollout with 29
@@ -22,8 +38,9 @@ Current execution status for interruption-safe batch workflow recovery.
   1,031/1,031 in 627 seconds. Public/book/capability/live records agree; KM is 603/4,328. Cleanup removes 10,626
   Cargo files and reduces `rust/target` from 2.4 GiB to 99 MiB, plus the generated book/cache/logs.
 
-  **Next:** Commit `.2.3`, clear the brief, prove the tree clean, then activate Dart root selection `.9.1.1.2.3`
-  task-tree-first.
+  **Next:** Dart behavior-free seam preflight `.9.1.1.2.3.0` proves exact 64/65 primary twice, package 260, and
+  corpus 105. Its causal map isolates marker-required validation plus portable failure/descriptor gaps; canonical
+  closeout remains before the clean commit and core `.3.1` activation.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.2.2 — converge Rust root routes**
   (DONE, signed off and awaiting its prepared clean commit).

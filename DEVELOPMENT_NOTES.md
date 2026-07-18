@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.0` — Dart already has the selection algorithm; validation and
+  failure ownership are the real work): `LinkedSpecRuntimeEngine._defaultTopRuleLabel` walks
+  `compiledRuleOrder`, returns the first authored marker, then the first rule. `_parse` lets an explicit
+  `topRule` win before that helper. `CompiledSpec` and AST JSON preserve definition order and `header.isTop`, and
+  generated direct/traced execution passes the invocation selector to the same runtime. The normal frontend
+  nevertheless calls `_checkTopRuleExists`, loaded source calls `validateSpec` before `compileSpec(...,
+  validateSource: false)`, and emitted v2 source reconstructs through validating `compileSpec`; therefore the
+  existing fallback is intentionally reachable only in a diagnostic bypass probe. Do not duplicate selection in
+  each adapter. `.3.1` should install one compiled-state resolver with portable zero/unknown results, make
+  validation require one-or-more rules instead of a marker, preserve strict graph semantics, and publish root
+  descriptor contract identity. `.3.2` should prove all existing adapters consume that owner and repair only
+  effective diagnostic/trace or emitted boundaries that still diverge. Exact pre-change proof is package 260,
+  corpus 105, and primary 64/65 twice; markerless alone fails compilation.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.2.3` — admission should compose semantic owners, not duplicate
   them): the focused Rust core and route suites already prove every root-selection mechanism deeply, but a green
   collection of independent tests does not prove that the project still recognizes the complete route topology.

@@ -121,6 +121,12 @@ rollout is tracked under `FUTURE-PARITY-BACKLOG.9.1.1.2`. Canonical medium
 request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
+Behavior-free preflight `.9.1.1.2.3.0` measures this boundary exactly: the shared primary suite is 64/65 in both
+default and POSIX option environments, with markerless first-rule execution as the only failure. Direct runtime,
+normalized-JSON, and generated-plan probes already select the first ordinary rule when validation is deliberately
+bypassed, and explicit selection already wins. The remaining implementation is owned in order by core/descriptor
+`.3.1`, composed loaded/generated/emitted/trace routes `.3.2`, and topology/reference admission `.3.3`.
+
 ## Status
 
 `FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold; `.3.3.2`

@@ -17,6 +17,10 @@ that order across native, loaded/reconstructed, generated, traced, diagnostic, d
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust admission is one omission-sensitive 15-role consumer and exact 65x2 command
 proof. Dart/Julia/Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
+Dart behavior-free preflight `.9.1.1.2.3.0` measures the exact current boundary at 64/65 in both option
+environments: markerless default is the sole failure. Its runtime, normalized, and generated-direct fallback is
+already ordered correctly behind validation; portable zero/unknown failures, descriptor contract identity,
+emitted reconstruction, topology, and admission remain split across `.3.1-.3`.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

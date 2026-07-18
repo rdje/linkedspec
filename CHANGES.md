@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.0 — map Dart root selection
+
+The behavior-free Dart preflight freezes the exact root-selection boundary before implementation. The complete
+shared primary runner passes 64/65 with `POSIXLY_CORRECT` unset and set; only
+`success_markerless_first_authored_rule` fails, with empty stdout, compile exit 1, and
+`linkedspec: parser compilation failed`. Medium trace proves the failure is in compile validation after recording
+`top_rule=<default>`, not in runtime selection.
+
+Exact Dart API probes establish that `_checkTopRuleExists` is the sole normal-source blocker. Ordered compiled
+state already preserves every authored `is_top` bit, and bypass-only native, normalized-JSON, generated-direct,
+and explicit routes already implement explicit selector > first marker > first rule. Loaded source validates
+before compilation, while emitted v2 source reconstructs its payload through ordinary validating `compileSpec`,
+so both make the fallback unreachable. Explicit unknown selection is still reported as untyped `rule_lookup`,
+zero-rule compiled state as untyped `top_rule_selection`, and descriptor root metadata lacks
+`entry_rule_contract`; request trace and strict defined-minus-referenced behavior are already correctly separate.
+
+The dependency-safe plan assigns marker-optional validation, one ordered resolver, portable zero/unknown failure,
+strict no-drift, and descriptor identity to `.3.1`; loaded/normalized/generated/emitted/trace/diagnostic convergence
+to `.3.2`; and one omission-sensitive topology consumer, shared 65x2 reference admission, Dart-only rollout, and
+public closeout to `.3.3`. No Dart source, test, fixture, contract, capability, or runtime behavior changes here.
+Focused owner tests pass 97/97; the complete package passes formatting, analysis, 260/260 tests, and corpus
+105/105. Root governance remains 3 complete / 4 pending with 29 mutations.
+
+The behavior-free canonical gate passes all four doctrines, root governance, Perl root consumers 7+5, cursor
+admission 288, reference primary 65/65 twice, and Phase 0 1,031/1,031 in 655 seconds. Knowledge Map closes at 604
+facts / 4,336 question keys, and the mdBook builds cleanly. Artifact audit retains Dart's required 30 MiB local
+package configuration and tracked RGX evidence logs; safe cleanup removes only the generated 11 MiB mdBook tree
+and Python bytecode cache. Rust remains at its already-clean 99 MiB target baseline.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.2.3 — admit Rust root selection
 
 Rust is now the second backend admitted to `linkedspec-root-rule-selection-v1`. A new omission-sensitive
