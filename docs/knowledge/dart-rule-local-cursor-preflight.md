@@ -14,7 +14,7 @@ answers:
   - "which task leaves own the Dart cursor rollout"
   - "does the Dart cursor rollout need gate hardening"
 date: 2026-07-18
-status: verified preflight; implementation assigned to FUTURE-PARITY-BACKLOG.9.1.5.1-.6
+status: verified preflight; normalization implemented by FUTURE-PARITY-BACKLOG.9.1.5.1 and later roles remain assigned to .2-.6
 tags: [dart, dsl, cursor, parse-mode, bare-edge, descriptor, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
 evidence: "Read-only family/edge/parent-child/artifact probes plus the actual local driver establish Dart's exact pre-edit boundary. Compact pipe alone is misclassified as AND; bare edges become generic raw syntax; one engine-global parseMode controls all entered rules; descriptor metadata owns root parse_mode; generated source remains v1/format 1; focused non-primary tests pass 104/104 and corpus execution passes 105/105. The complete package reaches 244 pass / 1 expected shared-help failure, while the shared primary projection is exactly 30/63 in both default and POSIX environments because the reference fixtures already removed the option and trace field. The neutral checker remains 36/18/8 with 14 Perl roles, 15 Rust roles, 68 files, 3 complete / 5 pending, and 34 rejected mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; (cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart test/compiled_spec_test.dart test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/source_emitter_test.dart test/spec_loader_test.dart); (cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute); bash tools/run_dart_local.sh # expected to stop at the staged shared-help assertion until .9.1.5.5"
@@ -84,6 +84,13 @@ generated-source v2, `.5` API/loader/corpus/CLI/trace removal and exact 63x2, an
 `.6` composed admission/closeout. No gate-hardening child is required: the Dart
 driver already runs the complete package, exact primary projection twice, and all
 105 corpus fixtures once the staged shared-help failure is resolved.
+
+Normalization `.9.1.5.1` now implements the first child exactly: typed bare
+AST/JSON, authored compact-pipe identity, six portable diagnostic identities, and
+family-derived compiled action/blind tables are current. Follow
+[[dart-rule-local-cursor-normalization]] instead of re-running this historical
+pre-edit audit when investigating those seams. Runtime policy, descriptor,
+generated-v2, public/CLI removal, and admission remain later children.
 
 Related: [[rule-local-cursor-neutral-contract]],
 [[rule-local-cursor-and-bare-edge-contract]],

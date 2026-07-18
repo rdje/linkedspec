@@ -586,7 +586,9 @@ final class LinkedSpecRuntimeEngine {
         }
         return _RuleResult(
           matched: matched.value || matchedAny,
-          value: rule.modeMetadata.isAnd && implicitAndResult.isNotEmpty
+          value:
+              rule.modeMetadata.usesLegacyAndInterpretation &&
+                  implicitAndResult.isNotEmpty
               ? List<Object?>.unmodifiable(implicitAndResult)
               : null,
         );
@@ -601,7 +603,9 @@ final class LinkedSpecRuntimeEngine {
       }
       return _RuleResult(
         matched: matchedAny,
-        value: rule.modeMetadata.isAnd && implicitAndResult.isNotEmpty
+        value:
+            rule.modeMetadata.usesLegacyAndInterpretation &&
+                implicitAndResult.isNotEmpty
             ? List<Object?>.unmodifiable(implicitAndResult)
             : null,
       );
@@ -679,7 +683,7 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context, {
     List<Object?>? implicitAndResult,
   }) {
-    if (rule.modeMetadata.isAnd) {
+    if (rule.modeMetadata.usesLegacyAndInterpretation) {
       var matchedAll = true;
       for (
         var edgeIndex = 0;
@@ -777,7 +781,8 @@ final class LinkedSpecRuntimeEngine {
             context,
             entryRegexIndex: entryRegexIndex,
             andSequence:
-                rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
+                rule.modeMetadata.usesLegacyAndInterpretation &&
+                rule.regexPatterns.length > 1,
           ),
         );
         if (matched.nexted) {
@@ -827,7 +832,9 @@ final class LinkedSpecRuntimeEngine {
         () => _executeRegexOnce(
           rule,
           context,
-          andSequence: rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
+          andSequence:
+              rule.modeMetadata.usesLegacyAndInterpretation &&
+              rule.regexPatterns.length > 1,
         ),
       );
       if (matched.nexted) {

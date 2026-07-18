@@ -47,9 +47,12 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > Rust admission `.9.1.4.7` composes 15 exact native, serialized, loaded,
 > descriptor, emitted/generated, trace, recursive/structural, removal, primary,
 > and diagnostic roles. The neutral checker requires every role plus canonical
-> registration and advances only `rust_parity`. Rollout is 3 complete / 5
-> pending, with Dart, Julia, Lua, recurring five-backend, and public no-drift
-> work dependency-ordered under `.9.1.5-.9`.
+> registration and advances only `rust_parity`. Dart `.9.1.5.1` now parses and
+> validates the same typed family/bare-edge surface and lowers it into compiled
+> action/blind tables. Dart live cursor spending, descriptors, generated source,
+> option/CLI removal, and admission remain staged under `.9.1.5.2-.6`.
+> Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
+> five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`.
 
 ## Current rule-label surface
 
@@ -473,7 +476,8 @@ For more detail on cursor-stack helpers, anchor rewinds, and their interaction w
 
 Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
 The two low-level algorithms are `seek` and `consume`, but normal Perl and Rust live execution select them from
-the rule family rather than a parser-wide override.
+the rule family rather than a parser-wide override. Dart now has the same authored family identity in normalized
+state, but its live rule-local spending remains the next staged implementation slice.
 
 ### `seek`
 
@@ -636,8 +640,9 @@ escape hatch.
 The Perl reference implements both the decision's bare-edge normalization and normal live cursor spending. Rust
 implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
 derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
-family/policy/edge facts through descriptor v1. A complete bare paragraph member such as `Child`, `Child { ... }`, or
-`Child.return(...)` normalizes to:
+family/policy/edge facts through descriptor v1. Dart `.9.1.5.1` now implements the same typed normalization and
+validation boundary; its runtime still uses an explicit temporary compact-pipe adapter until `.9.1.5.2`. A
+complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
 - `-> Child...` in an OR/default-family rule.
@@ -689,6 +694,10 @@ Generated source now emits v2 and derives policy from its handler-family plan;
 version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 `cursor_policy`, `edge_ownership`, descriptor identity/resolved-edge metadata, and normal live/loaded cursor spending
 in Perl and Rust are current. Primary-command/API removal is also current in both backends.
+In Dart, authored family identity, typed bare edges, family-derived ownership, compiled action/blind lowering,
+and the six neutral normalization/validation diagnostics are current. Dart live/reconstructed policy spending,
+descriptor-v1 projection, generated-source-v2 reconstruction, public option/CLI removal, and composed admission
+are not yet current and remain dependency-ordered under `.9.1.5.2-.6`.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

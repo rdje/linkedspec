@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Dart preflight `.9.1.5.0` records exact current behavior and the dependency-safe
-  `.1-.6` split without executable changes; signoff passes and only the clean commit remains before `.1`)
+- Last updated: `2026-07-18` (Dart preflight `.9.1.5.0` is committed at `b700c11a`; typed family/bare-edge
+  normalization `.9.1.5.1` has complete focused/canonical signoff and execution `.9.1.5.2` follows after commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3996,8 +3996,10 @@ before implementation.
     surface; remove legacy public and command options with exact diagnostics; consume descriptor/generated v2;
     migrate fixtures/callers; and prove native, normalized emitted, reconstructed plan, trace, recursion, loaded-
     spec, and primary-command parity against the unchanged neutral contract.
-  Verification: Child `.0` owns the completed read-only preflight and safe split. Children `.1-.6` remain pending;
-    no Dart executable behavior changes in `.0`.
+  Verification: Child `.0` owns the completed read-only preflight and safe split. Normalization `.1` is done with
+    typed family/bare-edge representation, derived compiled ownership, exact portable validation diagnostics, an
+    explicit legacy runtime staging adapter, and canonical signoff. Children `.2-.6` retain execution, descriptor,
+    generated, option/CLI, and composed-admission ownership.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.0`
@@ -4052,7 +4054,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.0 - audit and split Dart cursor rollout`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Normalize Dart rule families and bare edges into exact typed ownership before runtime policy changes.
   Dependencies: `.9.1.5.0`
   Acceptance: Correct compact/default/OR versus AND family classification; retain complete-line and header-rest
@@ -4060,8 +4062,46 @@ before implementation.
     preserve explicit cross-family exceptions; reject mixed, undefined, invalid-index, and missing-shared-block
     forms with neutral portable diagnostics; and prove parser/compiler/validation locations without changing live
     cursor execution yet.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the preflight Knowledge card, ADR `0044`, neutral edge/family/diagnostic
+    rows, and admitted Perl/Rust normalization references to the exact Dart AST/parser/validator/compiler/test
+    seams; reproduce compact-pipe, raw bare-edge, explicit exception, and diagnostic baselines before editing.
+  - [x] **NORMALIZE FAMILY / TYPED EDGES** — Classify all default/OR/compact-OR versus AND/compact-AND forms
+    exactly and retain complete-line plus header-rest bare plain/indexed/grouped/block/fluent candidates as typed
+    AST with family-derived action/blind ownership and explicit cross-family exceptions.
+  - [x] **VALIDATE EXACTLY** — Resolve against the complete declared-rule set and reject mixed ownership,
+    undefined targets, blind/bare invalid indices, AND bare groups, and grouped actions without shared blocks via
+    stable neutral code/stage/field diagnostics rather than generic raw-syntax messages.
+  - [x] **PROVE REPRESENTATION / FREEZE EXECUTION** — Add contract-driven parser/compiler/validation tests for all
+    36 family spellings, 18 edge cases, and six ownership sets; prove typed compiled tables and normalized JSON
+    source locations while locking live cursor execution at the staged pre-`.2` global-policy boundary.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmap/live/memory, Knowledge Map, mdBook, changes/notes;
+    pass focused Dart, prove the complete driver reaches only the exact staged shared-CLI boundary, and pass
+    neutral/governance/canonical proof; commit before execution leaf `.9.1.5.2`.
+  Verification: Activated only after clean preflight commit `b700c11a`. Retrieval followed the preflight and
+    neutral Knowledge cards to ADR `0044`, all 36 family / 18 edge / six ownership-set rows, admitted Rust
+    `BareEdge`/`PortableDiagnostic` normalization, and exact Dart AST/parser/validator/compiler/runtime/v1 seams.
+    `RuleMode.isAnd` now excludes compact `|`; `BareEdgeBodyElementKind` plus nullable `BareEdgeTarget.index`
+    retains complete-line/header-rest plain, block, fluent, grouped, forward, and indexed candidates through AST
+    JSON. Explicit blind indices are retained instead of suffix-discarded. Validation resolves against the full
+    declared-label set, derives bare ownership from parent family, and returns sorted `SpecPortableDiagnostic`
+    code/stage/field payloads for all six neutral normalization/validation failures. The compiler lowers OR/default
+    bare targets to action dispatch and AND bare targets to blind dispatch while retaining explicit exceptions.
+    A named `usesLegacyAndInterpretation` adapter keeps compact-pipe runtime behavior staged for `.2`, and the
+    explicit v1 classifier remains staged for `.4`; neither global cursor execution nor artifact version changes.
+
+    The contract-driven five-test suite passes all 36 family rows, 18 edge rows, six ownership sets, AST/diagnostic
+    JSON roundtrips, complete-line/header-rest/multiline boundaries, typed compiled tables, and staging assertions.
+    Strict analysis passes; existing parser/validator/compiler tests pass 26/26; the focused eight-suite set passes
+    109/109; corpus execution remains 105/105. The actual complete driver passes formatting/analysis and reaches
+    249 package passes plus only the already-owned shared-help assertion. Exact primary remains 30/63 in default
+    and POSIX environments with the same 22 help/usage plus eleven trace migration failures. The neutral checker
+    retains 68 governed files and rejects all 34 mutations; the new proof deliberately remains token-free rather
+    than expanding inventory with a redundant global-option spelling. The Knowledge Map passes at 589 facts /
+    4,188 question keys; memory, task metadata, all four doctrines, mdBook, and whitespace pass. Canonical CI
+    repeats the 288-test Perl cursor admission consumer and reference primary 63/63 in both environments, passes
+    Phase 0 1,031/1,031 in 610 seconds, and exits 0.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.1 - normalize Dart rule edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.2`
   Status: `pending`
@@ -6664,9 +6704,9 @@ lockstep signoff without executable changes.
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; preflight `.0` is active. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; normalization `.1` is done and execution `.2` is next after its clean commit. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
-| 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `pending` | Normalize typed family/bare-edge ownership and portable diagnostics. |
+| 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
 | 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `pending` | Derive policy independently for every live/loaded/reconstructed rule entry. |
 | 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `pending` | Project neutral cursor descriptor v1. |
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `pending` | Emit/reconstruct minimal generated-source v2 and reject v1. |
@@ -7731,6 +7771,8 @@ Read-only evidence recorded on 2026-07-10:
   remain v1. Format/analyze pass, package reaches 244/1 at the migrated help seam, focused tests pass 104/104,
   corpus passes 105/105, and primary is exactly 30/63 twice. Children `.1-.6` own normalization through admission;
   no executable behavior changes.
+- `2026-07-18`: Clean commit `b700c11a` lands Dart preflight `.9.1.5.0`; generated book/preflight logs are safely
+  reclaimed, the clean pivot boundary is verified, and typed normalization `.9.1.5.1` activates task-tree-first.
 - `2026-07-18`: `.9.1.4.6` deletes Rust's static/runtime global cursor ownership while retaining entry selection
   and low-level derived seek/consume algorithms. The primary command returns the exact retired-flag usage failure,
   omits the global request-trace field, and advances from the reproduced 51/63 boundary to exact 63x2. Public and

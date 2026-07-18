@@ -1005,6 +1005,11 @@ retains the 68-file inventory, rejects 34 mutations, and advances only `rust_par
 and canonical proof are green; clean commit `288da21a` closes parent `.9.1.4`. Dart preflight `.9.1.5.0` records
 the exact compact-pipe, bare-edge, global-propagation, descriptor/generated-v1, 244/1 package, 104/104 focused,
 105/105 corpus, and 30/63x2 primary boundaries and splits implementation into `.1-.6` before behavior code.
+Dart normalization `.9.1.5.1` now makes compact `|` authored OR, retains complete-line/header-rest bare references
+as typed AST, resolves family-derived action/blind ownership against the whole declaration set, lowers typed
+dispatch tables, and exposes the exact neutral diagnostics through Dart validation. Its bounded legacy runtime
+adapter deliberately preserves the pre-`.2` compact-pipe execution boundary; live/reconstructed execution,
+descriptor v1, generated v2, option/CLI removal, and admission remain `.2-.6`.
 Identical dependency-regex slot identity is durably queued under `.9.1.8.1` before public closeout.
 
 Exhaustive Lua call audit note (2026-07-15, `LUA-BACKEND-PARITY.4.3.9.0`): generated parse/compile/runtime probes

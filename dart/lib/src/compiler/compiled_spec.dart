@@ -338,6 +338,10 @@ final class CompiledRuleModeMetadata {
   final int? repMin;
   final int? repMax;
 
+  /// Preserve pre-rule-local runtime interpretation until execution leaf
+  /// FUTURE-PARITY-BACKLOG.9.1.5.2 removes this bounded adapter.
+  bool get usesLegacyAndInterpretation => isAnd || name == 'Pipe';
+
   JsonObject toJson() {
     return {
       'name': name,
@@ -631,6 +635,56 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
             actionPayload: payload,
           ),
         );
+      case BareEdgeBodyElementKind(
+        :final targets,
+        :final code,
+        :final fluentChain,
+      ):
+        lastRegexLine = null;
+        final payload = _compileOptionalActionPayload(
+          role: rule.header.mode.isAnd ? 'blind_edge' : 'action_edge',
+          element: element,
+          sourceCode: code,
+          fluentChain: fluentChain,
+          functionRegistry: functionRegistry,
+        );
+        if (rule.header.mode.isAnd) {
+          final target = targets.single;
+          final ref = DependencyRef(label: target.label, index: 0);
+          dependencyRefs.add(ref);
+          blindEdges.add(
+            CompiledBlindEdge(
+              line: element.line,
+              source: element.source,
+              target: ref,
+              code: code,
+              fluentChain: List.unmodifiable(fluentChain),
+              actionPayload: payload,
+            ),
+          );
+        } else {
+          for (final target in targets) {
+            final childRegexIndex = target.index ?? 0;
+            final ref = DependencyRef(
+              label: target.label,
+              index: childRegexIndex,
+            );
+            dependencyRefs.add(ref);
+            actionEdges.add(
+              CompiledActionEdge(
+                line: element.line,
+                source: element.source,
+                targets: List.unmodifiable([ref]),
+                regexIndex: 0,
+                childRegexIndex: childRegexIndex,
+                hasParentRegex: false,
+                code: code,
+                fluentChain: List.unmodifiable(fluentChain),
+                actionPayload: payload,
+              ),
+            );
+          }
+        }
       case CodeBlockBodyElementKind(:final lifecycle, :final code):
         lastRegexLine = null;
         lifecycleActionPayloads.add(

@@ -15,7 +15,12 @@ This document is the current high-level technical reading of the project shape. 
   Complete Rust and canonical proof are green at clean commit `288da21a`; the parent is closed. Dart preflight
   `.9.1.5.0` now records eleven governed paths, compact-pipe/bare-edge/global-propagation drift, descriptor and
   generated v1 seams, 104/104 focused plus 105/105 corpus proof, the exact staged 30/63x2 primary boundary, and
-  dependency-safe implementation children `.1-.6` without executable changes.
+  dependency-safe implementation children `.1-.6` without executable changes. Dart normalization `.9.1.5.1` now
+  removes compact-pipe identity drift, retains bare references only at a physical line's first member or header
+  rest, resolves them after all labels are known, derives family-owned action/blind dispatch, and attaches exact
+  neutral diagnostics to the existing validation exception. Compiled state carries those normalized tables while
+  a named legacy adapter preserves pre-`.2` runtime interpretation; global policy, descriptor/generated versions,
+  public options, and rollout admission therefore remain unchanged until `.2-.6`.
 - `2026-07-17` refresh: composed Perl cursor admission `FUTURE-PARITY-BACKLOG.9.1.3.6` declares one exact 14-role
   consumer spanning live default/AND, descriptor v1, emitted source v2, generated direct/trace, loaded spec,
   mixed parent/child, recursion, both structural replacements, dynamic removal, primary command, and all eight

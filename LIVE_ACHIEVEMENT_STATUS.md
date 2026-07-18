@@ -8,9 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.1 — normalize Dart rule edges**
+  (DONE — exact authored family identity, typed bare-edge normalization, portable diagnostics, compiled ownership,
+  staged runtime/artifact boundary, focused/full boundary proof, mdBook/Knowledge Map, and canonical signoff pass;
+  clean commit is the boundary before live execution `.9.1.5.2`).
+
+  **Goal:** Normalize Dart syntax and compiled ownership against ADR `0044` without prematurely migrating live
+  cursor spending, descriptors, generated artifacts, or public options.
+
+  **Result:** Compact `|` is authored OR and `&` remains AND. Complete-line/header-rest bare plain/indexed/grouped/
+  block/fluent references survive as typed AST with nullable authored indices, whole-spec forward resolution,
+  lifecycle priority, family-derived action/blind ownership, and exact six-code portable diagnostics. Compilation
+  lowers valid bare references into existing action/blind tables. The named `usesLegacyAndInterpretation` adapter
+  freezes compact-pipe runtime behavior for `.2`, while generated v1 remains explicitly staged for `.4`.
+
+  **Proof:** Dart format and strict analysis pass. The new contract consumer passes 5/5 over all 36 family, 18 edge,
+  and six ownership-set rows; existing parser/validator/compiler passes 26/26; focused eight suites pass 109/109;
+  corpus remains 105/105. The complete driver reaches 249 passes plus only the inherited shared-help failure; exact
+  Dart primary remains the same staged 30/63 twice. The neutral checker retains 68 files, rollout 3/5, and rejects
+  34 mutations. Knowledge Map is 589/4,188; mdBook and all governance pass. Canonical CI passes Perl admission 288,
+  reference primary 63x2, Phase 0 1,031/1,031 in 610 seconds, and exits 0.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.0 — audit and split Dart cursor rollout**
   (DONE — no executable behavior change; exact Dart preflight, staged gate baselines, Knowledge Map, task split,
-  mdBook, memory, task, doctrine, neutral-mutation, and whitespace signoff pass; clean commit remains before `.1`).
+  mdBook, memory, task, doctrine, neutral-mutation, and whitespace signoff pass; committed at `b700c11a`).
 
   **Goal:** Map every Dart cursor seam and current behavior, prove the existing gate boundary, and split the broad
   backend parent into safe mechanism leaves before editing parser/compiler/runtime code.
@@ -29,8 +50,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.4.7 — admit Rust rule-local cursor contract**
   (DONE — one 15-role consumer, exact omission-sensitive topology, 3/5 rollout, complete Rust and canonical
-  signoff, and parent closeout at clean commit `288da21a`; Dart `.9.1.5.0` preflight/split is in signoff with
-  104/104 focused, 105/105 corpus, and the exact staged 30/63x2 primary boundary; no executable edit).
+  signoff, and parent closeout at clean commit `288da21a`; Dart `.9.1.5.0` preflight is committed at `b700c11a`
+  and normalization `.9.1.5.1` now has complete focused/canonical proof).
 
   **Goal:** Compose every completed Rust cursor projection through one contract-declared admission boundary,
   advance only Rust, and close the backend parent without duplicating the exhaustive constituent suites.

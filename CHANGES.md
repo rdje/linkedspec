@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.1 — normalize Dart rule edges
+
+Dart now represents authored rule families and bare declared-rule edges exactly before runtime cursor migration.
+`RuleMode.isAnd` excludes compact `|` and retains compact `&`. A typed `BareEdgeBodyElementKind` carries ordered
+targets, nullable authored indices, shared blocks, and fluent chains through AST JSON. The parser recognizes this
+candidate only at a complete physical body-line or header-rest boundary, after lifecycle-marker precedence; a
+label-like suffix after another same-line member is not reinterpreted. Explicit blind-call indices are retained
+for validation instead of being discarded with the unparsed suffix.
+
+Whole-spec validation resolves forward bare targets against the complete declared-label set and derives bare
+ownership from the parent family: AND lowers to blind, OR/default to action. `SpecPortableDiagnostic` supplies
+stable code, stage, human message, and deterministically sorted fields. All six neutral normalization/validation
+failures are exact: undefined bare target, indexed/grouped AND bare edge, mixed ownership, grouped action without
+a shared block, and indexed blind call. Existing unrelated validation messages remain compatible.
+
+Compilation lowers normalized bare edges into the existing typed action/blind tables, dependency refs, action
+payloads, blocks, and fluent chains while preserving explicit cross-family exceptions. A named temporary
+`usesLegacyAndInterpretation` predicate retains pre-`.2` compact-pipe runtime behavior even though compiled
+authored metadata is now exact. Generated-source v1 classification is also intentionally unchanged until `.4`;
+descriptor and public/CLI global-mode surfaces remain assigned to `.3` and `.5`.
+
+The new contract-driven five-test suite consumes all 36 family spellings, 18 edge rows, six ownership sets,
+AST/diagnostic JSON roundtrips, complete-line/header-rest/multiline boundaries, compiled tables, and staging
+assertions. Strict analysis passes; existing parser/validator/compiler tests pass 26/26; the focused eight-suite
+set passes 109/109; corpus execution remains 105/105. The complete driver reaches 249 package passes plus only the
+known shared-help assertion, and exact primary remains 30/63 in default and POSIX environments with the same
+22 help/usage plus eleven trace migration failures. The neutral checker retains 68 files, 3/5 rollout, and all
+34 rejected mutations. Knowledge Map, memory, task metadata, all four doctrines, mdBook, and whitespace pass.
+Canonical CI repeats the 288-test Perl cursor admission consumer and reference primary 63/63 twice, passes Phase
+0 1,031/1,031 in 610 seconds, and exits 0.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.0 — audit and split Dart cursor rollout
 
 The Dart rule-local cursor rollout now has a complete read-only preflight and six dependency-ordered behavior

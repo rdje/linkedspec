@@ -428,7 +428,6 @@ final class RuleMode {
     return name == 'And' ||
         name == 'AndPlus' ||
         name == 'AndBounded' ||
-        name == 'Pipe' ||
         name == 'Single';
   }
 
@@ -517,6 +516,17 @@ sealed class BodyElementKind {
       ),
       'blind_edge' => BlindEdgeBodyElementKind(
         target: _stringField(json, 'target'),
+        index: _optionalIntField(json, 'index'),
+        code: _optionalStringField(json, 'code'),
+        fluentChain: _objectList(
+          json,
+          'fluent_chain',
+          FluentCall.fromJson,
+          defaultValue: const [],
+        ),
+      ),
+      'bare_edge' => BareEdgeBodyElementKind(
+        targets: _objectList(json, 'targets', BareEdgeTarget.fromJson),
         code: _optionalStringField(json, 'code'),
         fluentChain: _objectList(
           json,
@@ -586,11 +596,13 @@ final class ActionEdgeBodyElementKind extends BodyElementKind {
 final class BlindEdgeBodyElementKind extends BodyElementKind {
   const BlindEdgeBodyElementKind({
     required this.target,
+    this.index,
     this.code,
     this.fluentChain = const [],
   }) : super('blind_edge');
 
   final String target;
+  final int? index;
   final String? code;
   final List<FluentCall> fluentChain;
 
@@ -599,6 +611,34 @@ final class BlindEdgeBodyElementKind extends BodyElementKind {
     return {
       'kind': kind,
       'target': target,
+      if (index != null) 'index': index,
+      'code': code,
+      'fluent_chain': [for (final call in fluentChain) call.toJson()],
+    };
+  }
+}
+
+/// A rule reference written without an explicit `->` or `=>` ownership token.
+///
+/// Validation resolves ownership from the parent rule family after the complete
+/// declared-rule set is known. A nullable target index preserves the semantic
+/// difference between an omitted slot and an authored `[0]` for diagnostics.
+final class BareEdgeBodyElementKind extends BodyElementKind {
+  const BareEdgeBodyElementKind({
+    required this.targets,
+    this.code,
+    this.fluentChain = const [],
+  }) : super('bare_edge');
+
+  final List<BareEdgeTarget> targets;
+  final String? code;
+  final List<FluentCall> fluentChain;
+
+  @override
+  JsonObject toJson() {
+    return {
+      'kind': kind,
+      'targets': [for (final target in targets) target.toJson()],
       'code': code,
       'fluent_chain': [for (final call in fluentChain) call.toJson()],
     };
@@ -692,6 +732,24 @@ final class EdgeTarget {
   }
 
   JsonObject toJson() => {'label': label, 'index': index};
+}
+
+final class BareEdgeTarget {
+  const BareEdgeTarget({required this.label, this.index});
+
+  final String label;
+  final int? index;
+
+  factory BareEdgeTarget.fromJson(JsonObject json) {
+    return BareEdgeTarget(
+      label: _stringField(json, 'label'),
+      index: _optionalIntField(json, 'index'),
+    );
+  }
+
+  JsonObject toJson() {
+    return {'label': label, if (index != null) 'index': index};
+  }
 }
 
 final class FluentCall {

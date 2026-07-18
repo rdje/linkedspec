@@ -186,12 +186,22 @@ A rule paragraph can include supported paragraph members such as:
 - regex tokens such as `/.../`
 - action edges such as `-> Child`
 - blind-call edges such as `=> Child`
+- mode-sensitive bare rule references such as `Child`, `Child { ... }`, or
+  `Child.return(...)`: AND-family paragraphs normalize them as blind calls,
+  while OR/default-family paragraphs normalize them as action edges
 - action blocks such as `{ ... }`
 - lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and `LX { ... }`
 - split/capture markers such as `@capture_slice` and `@mark(name)`
 - method-like helper forms that lower through ActionIR
 
 The exact set of supported forms is intentionally validated. Stray top-level text is not “mostly okay.” It should be rejected clearly so users do not accidentally depend on token loss or partial parsing.
+
+A bare reference is recognized only as the first member of a physical body line or as the first member in a rule
+header's body rest. This keeps `Child.return(...)` convenient without reinterpreting arbitrary same-line suffixes
+after another paragraph member. All rule labels are collected before bare targets are validated, so forward
+references work. Lifecycle names keep lexical priority: write an explicit `-> I` or `=> I` when a rule is actually
+named `I`. Grouped and indexed bare forms still obey the ownership rules described in
+[Rule Modes and Parse Modes](rule-modes-and-parse-modes.md#current-cursor-policies).
 
 ## Same-line and multiline styles
 

@@ -183,7 +183,10 @@ final _regexPattern = RegExp(r'^/([^/\\]*(?:\\.[^/\\]*)*)/');
 final _actionPattern = RegExp(
   r'^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)',
 );
-final _blindPattern = RegExp(r'^=>[ \t]*(\w+)');
+final _blindPattern = RegExp(r'^=>[ \t]*(\w+)(?:[ \t]*\[(\d+)\])?');
+final _bareEdgePattern = RegExp(
+  r'^(\w+(?:[ \t]*\|[ \t]*\w+)*)(?:[ \t]*\[(\d+)\])?',
+);
 final _lifecyclePattern = RegExp(r'^(I|LS|LE|LX|E|EX|IT)\b');
 final _splitPattern = RegExp(
   r'^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))',
@@ -316,7 +319,13 @@ List<BodyElement>? _parseInlineBody(
     }
 
     final before = trimmed;
-    final parsed = _parseSingleElement(trimmed, lines, cursor, lineNumber);
+    final parsed = _parseSingleElement(
+      trimmed,
+      lines,
+      cursor,
+      lineNumber,
+      allowBareEdge: elements.isEmpty,
+    );
     if (parsed == null) {
       break;
     }
@@ -413,7 +422,13 @@ List<BodyElement> _parseBodyElements(List<String> lines, _LineCursor cursor) {
       break;
     }
 
-    final parsed = _parseSingleElement(trimmed, lines, cursor, lineNumber);
+    final parsed = _parseSingleElement(
+      trimmed,
+      lines,
+      cursor,
+      lineNumber,
+      allowBareEdge: elements.isEmpty,
+    );
     if (parsed == null) {
       break;
     }
@@ -439,8 +454,9 @@ _ParsedElement? _parseSingleElement(
   String trimmed,
   List<String> lines,
   _LineCursor cursor,
-  int lineNumber,
-) {
+  int lineNumber, {
+  required bool allowBareEdge,
+}) {
   final regexMatch = _regexPattern.firstMatch(trimmed);
   if (regexMatch != null) {
     final fullMatch = regexMatch[0]!;
@@ -543,6 +559,7 @@ _ParsedElement? _parseSingleElement(
       element: BodyElement(
         kind: BlindEdgeBodyElementKind(
           target: target,
+          index: int.tryParse(blindMatch[2] ?? ''),
           code: code,
           fluentChain: fluentChain,
         ),
@@ -675,6 +692,92 @@ _ParsedElement? _parseSingleElement(
       ),
       remainder: block.remainder,
       advanced: cursor.index > savedIndex,
+    );
+  }
+
+  if (allowBareEdge) {
+    final bare = _parseBareEdge(trimmed, lines, cursor, lineNumber);
+    if (bare != null) {
+      return bare;
+    }
+  }
+
+  return null;
+}
+
+_ParsedElement? _parseBareEdge(
+  String trimmed,
+  List<String> lines,
+  _LineCursor cursor,
+  int lineNumber,
+) {
+  final match = _bareEdgePattern.firstMatch(trimmed);
+  if (match == null) {
+    return null;
+  }
+
+  final fullMatch = match[0]!;
+  final labels = [
+    for (final label in match[1]!.split('|').map((value) => value.trim()))
+      if (label.isNotEmpty) label,
+  ];
+  if (labels.isEmpty) {
+    return null;
+  }
+
+  final index = int.tryParse(match[2] ?? '');
+  final targets = [
+    for (final label in labels) BareEdgeTarget(label: label, index: index),
+  ];
+  final rest = trimmed.substring(fullMatch.length).trimLeft();
+  final savedIndex = cursor.index;
+
+  if (rest.isEmpty || rest.startsWith('#')) {
+    return _ParsedElement(
+      element: BodyElement(
+        kind: BareEdgeBodyElementKind(targets: targets),
+        source: fullMatch,
+        line: lineNumber,
+      ),
+      remainder: rest,
+      advanced: false,
+    );
+  }
+
+  if (rest.startsWith('{')) {
+    final block = _consumeBlockFromRest(lines, cursor, rest);
+    if (block == null) {
+      return null;
+    }
+    return _ParsedElement(
+      element: BodyElement(
+        kind: BareEdgeBodyElementKind(targets: targets, code: block.code),
+        source: fullMatch,
+        line: lineNumber,
+      ),
+      remainder: block.remainder,
+      advanced: cursor.index > savedIndex,
+    );
+  }
+
+  if (rest.startsWith('.')) {
+    final fluent = _parseFluentChainWithRemainder(rest);
+    final remainder = fluent.remainder.trim();
+    if (fluent.calls.isEmpty ||
+        (remainder.isNotEmpty && !remainder.startsWith('#'))) {
+      return null;
+    }
+    return _ParsedElement(
+      element: BodyElement(
+        kind: BareEdgeBodyElementKind(
+          targets: targets,
+          fluentChain: fluent.calls,
+        ),
+        source: fullMatch,
+        line: lineNumber,
+      ),
+      remainder: fluent.remainder,
+      advanced: false,
     );
   }
 

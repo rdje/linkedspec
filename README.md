@@ -31,6 +31,12 @@ inventory, rejects 34 drift mutations, and advances only `rust_parity` to reach 
 signoff pass at clean commit `288da21a`. Dart preflight `.9.1.5.0` maps all governed/non-token seams and fixes the
 safe `.1-.6` order before behavior code: current focused proof is 104/104 plus corpus 105/105, while the reference-
 migrated shared help/trace boundary is exactly 244/1 package and 30/63 primary in both option environments.
+Dart normalization `.9.1.5.1` now classifies compact `|` as authored OR, retains complete-line and header-rest
+bare references as typed AST, derives action ownership for OR/default and blind ownership for AND, lowers both
+forms into compiled dispatch tables, and attaches the neutral portable diagnostic envelope to Dart validation
+failures. The runtime still spends its explicitly named legacy compact-pipe adapter, so rule-local live cursor
+execution, descriptor v1, generated-source v2, option/CLI removal, and composed admission remain owned in order by
+`.9.1.5.2-.6`.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

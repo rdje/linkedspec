@@ -3,12 +3,59 @@ import '../action/action_contracts.dart';
 import '../trace/trace.dart';
 
 final class SpecValidationException implements Exception {
-  const SpecValidationException(this.message);
+  const SpecValidationException(this.message, {this.diagnostic});
 
   final String message;
+  final SpecPortableDiagnostic? diagnostic;
 
   @override
   String toString() => 'SpecValidationException: $message';
+}
+
+/// A stable backend-neutral validation/normalization failure.
+final class SpecPortableDiagnostic {
+  SpecPortableDiagnostic({
+    required this.code,
+    required this.stage,
+    required this.message,
+    Map<String, Object?> fields = const {},
+  }) : fields = Map.unmodifiable(
+         Map.fromEntries(
+           (fields.entries.toList()
+                 ..sort((left, right) => left.key.compareTo(right.key)))
+               .map((entry) => MapEntry(entry.key, entry.value)),
+         ),
+       );
+
+  final String code;
+  final String stage;
+  final String message;
+  final Map<String, Object?> fields;
+
+  factory SpecPortableDiagnostic.fromJson(JsonObject json) {
+    final code = json['code'];
+    final stage = json['stage'];
+    final message = json['message'];
+    final rawFields = json['fields'];
+    if (code is! String ||
+        stage is! String ||
+        message is! String ||
+        rawFields is! Map) {
+      throw const FormatException('invalid portable spec diagnostic JSON');
+    }
+    return SpecPortableDiagnostic(
+      code: code,
+      stage: stage,
+      message: message,
+      fields: Map<String, Object?>.from(rawFields),
+    );
+  }
+
+  Object? field(String name) => fields[name];
+
+  JsonObject toJson() {
+    return {'code': code, 'stage': stage, 'message': message, 'fields': fields};
+  }
 }
 
 void validateSpec(
@@ -28,8 +75,8 @@ void validateSpec(
     _checkDuplicateFunctionNames(spec);
     _checkFunctionRegistry(spec);
     _checkMalformedRawBodyLines(spec);
+    _checkEdgeStructure(spec);
     _checkMixedEdges(spec);
-    _checkGroupedActionEdges(spec);
     _checkEdgeTargets(spec);
     _checkRegexSyntax(spec);
     if (strictSyntax) {
@@ -177,6 +224,131 @@ bool _stringListsEqual(List<String> left, List<String> right) {
   return true;
 }
 
+void _checkEdgeStructure(SpecFile spec) {
+  final declaredLabels = {for (final rule in spec.rules) rule.header.label};
+
+  for (final rule in spec.rules) {
+    for (final element in rule.body) {
+      switch (element.kind) {
+        case BareEdgeBodyElementKind(:final targets, :final code):
+          for (final target in targets) {
+            if (!declaredLabels.contains(target.label)) {
+              throw _portableDiagnostic(
+                code: 'bare_edge_target_undefined',
+                stage: 'normalize_edges',
+                message:
+                    "bare edge in rule '${rule.header.label}' targets "
+                    "undefined rule '${target.label}'",
+                fields: {
+                  'rule_label': rule.header.label,
+                  'target': target.label,
+                },
+              );
+            }
+          }
+
+          if (rule.header.mode.isAnd) {
+            final indexed = targets.where((target) => target.index != null);
+            if (indexed.isNotEmpty) {
+              final target = indexed.first;
+              throw _portableDiagnostic(
+                code: 'bare_edge_index_requires_action',
+                stage: 'normalize_edges',
+                message:
+                    "indexed bare edge in AND rule '${rule.header.label}' "
+                    'requires explicit action ownership',
+                fields: {
+                  'rule_label': rule.header.label,
+                  'target': target.label,
+                  'regex_index': target.index,
+                },
+              );
+            }
+            if (targets.length > 1) {
+              throw _portableDiagnostic(
+                code: 'bare_edge_group_requires_action',
+                stage: 'normalize_edges',
+                message:
+                    "grouped bare edge in AND rule '${rule.header.label}' "
+                    'requires explicit action ownership',
+                fields: {
+                  'rule_label': rule.header.label,
+                  'targets': [for (final target in targets) target.label],
+                },
+              );
+            }
+          } else if (targets.length > 1 && code == null) {
+            throw _groupedActionDiagnostic(rule, targets);
+          }
+        case ActionEdgeBodyElementKind(:final targets, :final code):
+          if (targets.length > 1 && code == null) {
+            throw _portableDiagnostic(
+              code: 'grouped_action_shared_block_required',
+              stage: 'validate_rule',
+              message:
+                  "rule '${rule.header.label}': grouped action-edge targets "
+                  'require a shared code block',
+              fields: {
+                'rule_label': rule.header.label,
+                'targets': [for (final target in targets) target.label],
+              },
+            );
+          }
+        case BlindEdgeBodyElementKind(:final target, :final index)
+            when index != null:
+          throw _portableDiagnostic(
+            code: 'blind_call_index_forbidden',
+            stage: 'validate_rule',
+            message:
+                "blind-call target '$target' in rule '${rule.header.label}' "
+                'cannot select a regex index',
+            fields: {
+              'rule_label': rule.header.label,
+              'target': target,
+              'regex_index': index,
+            },
+          );
+        default:
+          break;
+      }
+    }
+  }
+}
+
+SpecValidationException _groupedActionDiagnostic(
+  Rule rule,
+  List<BareEdgeTarget> targets,
+) {
+  return _portableDiagnostic(
+    code: 'grouped_action_shared_block_required',
+    stage: 'validate_rule',
+    message:
+        "rule '${rule.header.label}': grouped action-edge targets require "
+        'a shared code block',
+    fields: {
+      'rule_label': rule.header.label,
+      'targets': [for (final target in targets) target.label],
+    },
+  );
+}
+
+SpecValidationException _portableDiagnostic({
+  required String code,
+  required String stage,
+  required String message,
+  required Map<String, Object?> fields,
+}) {
+  return SpecValidationException(
+    message,
+    diagnostic: SpecPortableDiagnostic(
+      code: code,
+      stage: stage,
+      message: message,
+      fields: fields,
+    ),
+  );
+}
+
 void _checkMixedEdges(SpecFile spec) {
   for (final rule in spec.rules) {
     var hasAction = false;
@@ -187,30 +359,27 @@ void _checkMixedEdges(SpecFile spec) {
           hasAction = true;
         case BlindEdgeBodyElementKind():
           hasBlind = true;
+        case BareEdgeBodyElementKind():
+          if (rule.header.mode.isAnd) {
+            hasBlind = true;
+          } else {
+            hasAction = true;
+          }
         default:
           break;
       }
     }
     if (hasAction && hasBlind) {
-      throw SpecValidationException(
-        "rule '${rule.header.label}' mixes action (->) and blind-call (=>) edges",
+      throw _portableDiagnostic(
+        code: 'mixed_edge_ownership',
+        stage: 'validate_rule',
+        message:
+            "rule '${rule.header.label}' mixes action and blind edge ownership",
+        fields: {
+          'rule_label': rule.header.label,
+          'ownerships': ['action', 'blind'],
+        },
       );
-    }
-  }
-}
-
-void _checkGroupedActionEdges(SpecFile spec) {
-  for (final rule in spec.rules) {
-    for (final element in rule.body) {
-      final kind = element.kind;
-      if (kind is ActionEdgeBodyElementKind &&
-          kind.targets.length > 1 &&
-          kind.code == null) {
-        throw SpecValidationException(
-          "rule '${rule.header.label}': grouped action-edge targets require "
-          'a shared code block',
-        );
-      }
     }
   }
 }
@@ -226,6 +395,10 @@ void _checkEdgeTargets(SpecFile spec) {
           }
         case BlindEdgeBodyElementKind(:final target):
           _checkTarget(rule, rulesByLabel, target, 0);
+        case BareEdgeBodyElementKind(:final targets):
+          for (final target in targets) {
+            _checkTarget(rule, rulesByLabel, target.label, target.index ?? 0);
+          }
         default:
           break;
       }
@@ -339,6 +512,8 @@ void _checkUnusedRules(SpecFile spec) {
           used.addAll(targets.map((target) => target.label));
         case BlindEdgeBodyElementKind(:final target):
           used.add(target);
+        case BareEdgeBodyElementKind(:final targets):
+          used.addAll(targets.map((target) => target.label));
         default:
           break;
       }

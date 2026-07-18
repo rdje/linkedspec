@@ -1,5 +1,38 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.1` — authored family identity and runtime interpretation need a named
+  migration boundary): Dart's old `RuleMode.isAnd` did three jobs at once: described authored syntax, selected
+  runtime sequence/choice behavior, and helped classify generated-v1 plans. Compact `|` made those meanings
+  conflict. The normalized AST/compiled metadata now answers the authored question exactly (`Pipe` is not AND),
+  while `CompiledRuleModeMetadata.usesLegacyAndInterpretation` is the sole temporary runtime adapter. Generated v1
+  keeps its explicit `Pipe` branch. This makes `.2` and `.4` removals auditable instead of letting one predicate
+  edit silently migrate runtime and artifacts early.
+
+  Bare-edge recognition is physical-line scoped. The parser receives `allowBareEdge` only for the first member of
+  a body line or header rest; after parsing another same-line member it cannot reinterpret the suffix. Reserved
+  lifecycle markers are tried before the bare candidate. The candidate itself is syntactic and forward-reference
+  safe: it retains labels before the parser knows the complete declared set, then validation resolves ownership
+  and existence with whole-spec context. A separate `BareEdgeTarget` is preferable to reusing `EdgeTarget` because
+  existing explicit action targets normalize omitted indices to zero, whereas the neutral diagnostic contract must
+  distinguish omitted from authored `[0]`.
+
+  Portable failures attach to the existing exception rather than replacing its human message surface. Existing
+  callers can keep matching `SpecValidationException.message`; contract-aware callers inspect
+  `error.diagnostic.code`, `stage`, and sorted `fields`. This preserves compatibility while giving later primary,
+  descriptor, generated, and admission leaves one exact backend-neutral identity. AST and diagnostic JSON
+  roundtrips are locked before normal execution starts consuming these records.
+
+  The new test originally repeated the global `parseMode` baseline. The neutral inventory checker correctly
+  reported that as an unowned 69th governed file. Existing runtime and primary suites already own that spelling,
+  so the redundant assertion was removed; the stronger structural freeze remains through exact `isAnd`, the named
+  runtime adapter, and generated-v1 family assertion. The inventory stays 68 and all 34 mutations remain effective.
+
+  Proof is deliberately layered: contract consumer 5/5; existing parser/validator/compiler 26/26; focused eight
+  suites 109/109; corpus 105/105; complete package 249/1 only at the inherited shared-help seam; exact primary
+  30/63 twice with the same staged 33 failures. No cursor-policy, descriptor-version, generated-version, API, CLI,
+  shared fixture, or rollout-ledger behavior changes in this normalization leaf. Canonical CI independently
+  repeats reference cursor admission 288, primary 63x2, and Phase 0 1,031/1,031 in 610 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.0` — Dart already has complete gate breadth, but its semantic layers
   need ordered migration): the focused driver is not missing a central package the way the pre-Rust gate was. It
   formats, strictly analyzes, runs the full Dart package, runs the exact shared primary projection in default and

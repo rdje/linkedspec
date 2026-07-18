@@ -65,6 +65,8 @@ export 'src/action/action_parser.dart'
 export 'src/ast/spec_ast.dart'
     show
         ActionEdgeBodyElementKind,
+        BareEdgeBodyElementKind,
+        BareEdgeTarget,
         BlindEdgeBodyElementKind,
         BodyElement,
         BodyElementKind,
@@ -216,4 +218,4 @@ export 'src/trace/trace.dart'
         linkedSpecTraceDumpMedium,
         linkedSpecTraceDumpNone;
 export 'src/validation/spec_validator.dart'
-    show SpecValidationException, validateSpec;
+    show SpecPortableDiagnostic, SpecValidationException, validateSpec;
