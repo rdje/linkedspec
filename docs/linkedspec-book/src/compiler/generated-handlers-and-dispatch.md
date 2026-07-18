@@ -110,8 +110,8 @@ through their compiled payload. Direct, traced, and freshly emitted execution ac
 is required. The low `dart_runtime:entry_rule_selection` decision records requested selector, effective rule, and
 selection basis. Generated zero/unknown failures retain the neutral stage/code/requested-entry fields, while v1
 contract or invalid-plan rejection still occurs before entry selection. Route proof is complete under
-`.9.1.1.2.3.2`; topology admission `.3.3` remains pending, so Dart is not yet promoted in the root-selection
-rollout.
+`.9.1.1.2.3.2`; admission `.3.3` composes every declared Dart route role exactly once and promotes Dart at the
+4/7 root-selection boundary without changing generated behavior.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

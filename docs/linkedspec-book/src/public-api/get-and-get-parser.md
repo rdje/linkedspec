@@ -457,13 +457,12 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 3 complete / 4 pending. Composed Perl and Rust
+has no marker, select the first authored rule. That contract is at 4 complete / 3 pending. Composed Perl, Rust,
+and Dart
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
-markerless, explicit, unknown, and request-trace outcomes. Rust admission also topology-checks one 15-role
-consumer across the neutral rows and all real Rust route families. Dart accepts markerless sources and now proves
-loaded/normalized/generated/emitted direct/traced routes plus native/primary behavior; its topology admission
-remains `.9.1.1.2.3.3`. Julia/Lua validation
+markerless, explicit, unknown, and request-trace outcomes. Rust and Dart admission each topology-check one 15-role
+consumer across the neutral rows and every real backend route family. Julia/Lua validation
 still blocks fallback. Use
 an explicit selector and retain a marker when current multi-backend execution must be independent of those staged
 differences.
@@ -489,8 +488,8 @@ Later:
 ```
 
 With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, and Dart native,
-loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape; Dart topology admission,
-Julia, and Lua remain pending, so it is not yet a
+loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted. Julia and
+Lua remain pending, so it is not yet a
 portable five-backend source:
 
 ```text

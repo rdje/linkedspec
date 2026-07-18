@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` — admission proves topology without cloning semantic tests):
+  Dart's core and route suites already own the deep behavior: one compiled resolver, loader/JSON identity,
+  generated failures and trace, and fresh emitted-package compile/run. The admission consumer therefore follows
+  the Rust precedent and composes those public mechanisms at a smaller boundary. Its role map executes every
+  contract row and real route family exactly once, while the checker compares the complete ordered `role_*`
+  source inventory with the contract. That exact comparison matters: checking only required markers would catch
+  omissions and duplicates but allow an invented unused role to drift into the supposed topology.
+
+  Emitted-source admission checks the generated contract, direct/traced entrypoint signatures, optional selector,
+  and call-through markers. It deliberately leaves fresh isolated-package analysis/execution in
+  `root_rule_selection_routes_test.dart` and `source_emitter_test.dart`, both of which run in the same focused and
+  complete package gates. Repeating that expensive mechanism inside admission would create a second semantic owner
+  and make failures harder to classify. Admission's job is to prove that the existing owners remain present,
+  registered, and collectively complete.
+
+  Backend registration is package-wide: `tools/run_dart_local.sh` executes `dart test`, so the admission consumer
+  cannot be omitted by a stale named-test list. Canonical CI additionally requires the consumer as a tracked input
+  and retains the optional Dart-driver seam. Six exact shared primary ids lock the two default branches, explicit
+  override, unknown selection, default request trace, and escaped explicit request trace. Advancing only Dart makes
+  the ledger 4/7 and adds five omission mutations without changing parser/compiler/runtime/generated/CLI behavior.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` — route convergence should expose the core decision, not
   reproduce it): loaded source, normalized JSON, generated execution, and emitted source already reconstruct or
   retain `CompiledSpec`; once `.3.1` installed `CompiledSpec.resolveEntryRule`, their success paths naturally

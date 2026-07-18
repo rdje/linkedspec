@@ -8,12 +8,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` — complete, fully verified, safely cleaned, and staged for the prepared
-  commit. No `.3.3` work has started; rollout stays 3/7 until topology admission.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` — exact 15-role consumer, package/canonical driver topology, six shared
+  primary ids, 34-mutation governance, Dart-only promotion, and 4/7 public/book/KM lockstep are implemented.
+  Focused 1+14 and complete Dart format 60/0, analyzer, package 270, primary 65x2, and corpus 105 pass. Canonical
+  root 34, Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 656 seconds pass. Cleanup,
+  commit, and clean-tree proof remain before Julia `.4` may activate.
 
 ## Latest Completed Slice
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 — converge Dart root routes**
-  (DONE, signed off and awaiting its prepared clean commit).
+  (DONE at clean commit `5be5fc55` — composed route signoff complete).
 
   **Result:** Loaded/normalized and generated/emitted direct/traced execution reuse the one compiled resolver.
   Low trace records requested/effective/basis; loader and generated failures preserve portable zero/unknown
@@ -24,7 +27,7 @@ Current execution status for interruption-safe batch workflow recovery.
   606/4,360; all four doctrines; canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0
   1,031/1,031 in 628 seconds pass. Cleanup removes the generated 11 MiB book and Python cache.
 
-  **Next:** Commit `.3.2`, clear and prove clean, then activate Dart topology admission `.3.3` task-tree-first.
+  **Next:** Dart topology/reference admission `.3.3` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 — implement Dart root resolution**
   (DONE at clean commit `241a34f0` — core/native/primary signoff complete).

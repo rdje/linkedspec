@@ -57,15 +57,17 @@ the reference. Rust `.1.5.2.4` historically closed reusable direct execution plu
 canonical trace projection. During the rule-local cursor migration, Perl established the 63-case reference bytes
 and Rust later passed them unchanged in both environments after `.9.1.4.6`. Root-selection admission advances the
 shared manifest reference-first to 65 cases. Perl owns the reference bytes; Rust core/routes/admission `.2.1-.3`
-now pass them exactly at 65/65 in both environments, while Dart/Julia/Lua leaves `.9.1.1.2.3-.5` own the remaining
-backend migrations. `tools/run_rust_local.sh` is green against the expanded manifest. UTF-16/UTF-32 are not
+and Dart `.3.1-.3` now pass them exactly at 65/65 in both environments, while Julia/Lua leaves
+`.9.1.1.2.4-.5` own the remaining backend migrations. `tools/run_rust_local.sh` and `tools/run_dart_local.sh` are
+green against the expanded manifest. UTF-16/UTF-32 are not
 implicit inputs.
 
-Rust root-selection admission is omission-sensitive too. The neutral contract declares one 15-role consumer over
-selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace,
-and primary routes. Its checker requires one exact function marker per role, the six shared root-selection/request-
-trace primary case identities, the tracked canonical input, the complete runtime-package driver, and its optional
-canonical registration; 29 mutations reject semantic, topology, inventory, and rollout drift.
+Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
+consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
+descriptor, diagnostic, trace, and primary routes. Its checker requires one exact function marker per role, the
+six shared root-selection/request-trace primary case identities, each tracked canonical input, the complete
+backend-package driver, and optional canonical registration; 34 mutations reject semantic, topology, inventory,
+and rollout drift.
 
 Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
 checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package

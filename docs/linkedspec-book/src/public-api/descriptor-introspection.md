@@ -148,10 +148,10 @@ In rough form:
 
 ### Root-selection identity
 
-The Perl reference and Rust descriptors publish
+The Perl reference, Rust, and Dart descriptors publish
 `meta.entry_rule_contract = "linkedspec-root-rule-selection-v1"`, exact
 `meta.definition_order`, and per-rule `spec.<label>.meta.is_top` authored identity
-(normalized `0`/`1` on Perl and a boolean on Rust). `is_top` records whether the
+(normalized `0`/`1` on Perl and a boolean on Rust/Dart). `is_top` records whether the
 source used `Rule::`; it is not the current invocation choice.
 
 For example, given `Earlier:` followed by `Marked::`, a descriptor requested

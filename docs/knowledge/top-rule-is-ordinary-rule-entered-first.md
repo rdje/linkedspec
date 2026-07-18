@@ -20,7 +20,7 @@ answers:
   - "does --top-rule override Rule::"
   - "what is the default root rule when there is no double colon rule"
 date: 2026-06-23
-status: confirmed runtime mechanics; ADR 0046 admitted on Perl/Rust and implemented across Dart routes
+status: confirmed runtime mechanics; ADR 0046 admitted on Perl, Rust, and Dart
 tags: [engine, parser, top-rule, codegen, recursion, language-model, TOP-RULE-AS-NORMAL, ADR-0010, ADR-0046]
 evidence: "Read-only TOOLBOX investigation 2026-06-23 (TOP-RULE-AS-NORMAL.1). (1) Entry point is just `sub Get { &{$descr->{spec}{$top_rule}}($descr,$_[0]) }` (Compiler.pm:1006) -- the top rule is NOT specially wrapped; it is invoked like any handler. (2) The while(1) loops live in HandlerVariantEmitter.pm and are MODE-driven (default/repeated-choice/REP repeat; :AND is a single ordered pass) -- the 'top = while(1) dispatch loop' behavior is an emergent idiom (default-mode top + dispatch edges + LX accumulator), not a property of `::`. (3) Regex on a top rule already compiles as a normal rule: `generate_only`+`dump_parser_source` on `Pair::AND` + regex slots emits a standard AND handler (`while ($idx < 2) { LinkedRE::or(...) ... }`) -- identical to a body rule; the earlier breakage was the AND-codegen defect already fixed under ADR 0008 / PHASE0-BACKHALF-TRIAGE.3. (4) Idiomatic recursion is body-rule + consume-before-recurse (specs/Lispish.spec: `parenthesis: /\\(/ ... -> parenthesis ... /\\)/`, green). Naive grammars recursing BACK INTO the top rule, or using zero-progress blind-call dispatch, HANG -- the genuinely open dimension (same family as the PHASE0-BACKHALF-TRIAGE.5.2 never-undef/while(1) non-termination). Design decision + engine-touch authorization recorded in ADR 0010."
 evidence_update_2026_07_08: "SPEC-LANG-REFERENCE.8 reverified the current doctrine after a stale June 17 no-regex correction resurfaced. In a single spec defining both `Entry:: /foo/ -> Entry { return(match_text()) }` and `Body: /foo/ -> Body { return(match_text()) }`, selecting `top_rule=>Entry` and `top_rule=>Body` both returns `\"foo\"`; similarly, `Entry::AND` and selected `Body:AND` with equivalent regex slots both return `{name:\"name\",value:\"value\"}`. The remaining structural requirement is an entry marker in the spec so there is a default start rule; it is not a ban on regex-bearing `::` rule bodies."
@@ -30,6 +30,7 @@ implementation_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.1.1-.3 implemen
 rust_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.1-.3 implement and admit complete Rust parity through one topology-checked 15-role consumer and exact 65/65 primary cases in both option environments. The rollout ledger is 3 complete / 4 pending; Dart, Julia, Lua, and final admission remain ordered under `.3-.6`."
 dart_core_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 implements the same precedence in one Dart compiled-state resolver, accepts markerless one-or-more-rule sources, returns portable zero/unknown failures before user code, and preserves descriptor marker identity. Dart composed routes and admission remain `.3.2-.3`; rollout therefore remains 3/7."
 dart_routes_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 proves Dart loaded/normalized and generated/emitted direct/traced routes reuse that resolver, trace requested/effective/basis, preserve portable failures and generated v2 identity, and reject stale contracts before selection. Topology admission `.3.3` remains pending, so rollout stays 3/7."
+dart_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 admits Dart through one topology-checked 15-role consumer and exact package 270 / primary 65x2 / corpus 105 proof. Root-selection rollout is now 4 complete / 3 pending; Julia, Lua/LuaJIT, and final no-drift remain."
 reverify: "perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b/\\n\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, runtime_ctx_ref=>\\%c); print ${$c{parser_source_chunks_ref}};'  # emits a standard `Pair => sub { ... while ($idx < 2) { LinkedRE::or(...) } ... }` AND handler -- a top rule compiled exactly like a body rule"
 ---
 
@@ -57,8 +58,8 @@ This supersedes the earlier June 17 "no regex on top / two-rule minimum" validit
   model as a `:` rule. The only semantic distinction is entry selection: `::` marks the rule entered
   first by the authored-marker default. The accepted 2026-07-18 direction adds two surrounding selection rules:
   an explicit selector has higher priority than the marker, while the first authored ordinary rule is the fallback
-  when no marker exists. Perl and Rust implement and admit that exact order; Dart core implements it while route/
-  topology admission remains pending. Julia, Lua, and final five-backend admission remain tracked under
+  when no marker exists. Perl, Rust, and Dart implement and admit that exact order. Julia, Lua, and final five-
+  backend admission remain tracked under
   `FUTURE-PARITY-BACKLOG.9.1.1.2.4-.6`.
 
 ## The idiom vs the law (ADR 0010)

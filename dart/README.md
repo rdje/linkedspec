@@ -117,7 +117,7 @@ priority over any authored `Rule::` and may select an ordinary `Rule:`; the
 primary CLI regression suite locks that precedence. Core leaf `.9.1.1.2.3.1`
 also accepts markerless one-or-more-rule sources and selects their first authored
 rule. Neutral/five-backend rollout remains tracked under
-`FUTURE-PARITY-BACKLOG.9.1.1.2` until Dart's topology admission lands. Canonical medium
+`FUTURE-PARITY-BACKLOG.9.1.1.2`; Dart is now admitted while Julia, Lua, and final no-drift remain. Canonical medium
 request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
@@ -128,8 +128,9 @@ zero/unknown selection failures use the portable stages and codes, and descripto
 normalized-JSON reconstructed state plus generated and fresh emitted direct/traced execution reuse that resolver.
 Low trace records requested/effective/basis, route failures keep portable zero/unknown fields, stale generated
 contract validation remains first, and generated v2/format 2 identity plus its minimal family plan are unchanged.
-Dart now passes 269 package tests, the shared 65-case primary suite in default and POSIX environments, and 105/105
-corpus fixtures. Topology/reference admission remains `.3.3`; Dart is not yet counted as admitted.
+Dart now passes 270 package tests, the shared 65-case primary suite in default and POSIX environments, and 105/105
+corpus fixtures. Admission leaf `.3.3` composes all 15 contract-declared roles exactly once, topology-locks the
+package-wide and canonical drivers plus six shared primary case ids, and advances Dart at the honest 4/7 boundary.
 
 ## Status
 

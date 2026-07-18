@@ -30,6 +30,7 @@ TOP_LEVEL_FIELDS = {
     "projections",
     "required_execution_routes",
     "rust_admission",
+    "dart_admission",
     "implementation_inventory",
     "rollout",
 }
@@ -129,7 +130,7 @@ ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.0"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.1"),
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
-    ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
+    ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.4"),
     ("lua", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
     (
@@ -142,6 +143,36 @@ RUST_ADMISSION = {
     "consumer_path": "rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",
     "canonical_driver": "tools/run_ci_local.sh",
     "backend_driver": "tools/run_rust_local.sh",
+    "roles": [
+        "neutral_selection",
+        "neutral_failures",
+        "neutral_strict",
+        "native",
+        "loaded",
+        "reconstructed",
+        "generated_direct",
+        "generated_traced",
+        "emitted_source_direct",
+        "emitted_source_traced",
+        "descriptor",
+        "diagnostic",
+        "runtime_trace",
+        "primary_cli",
+        "primary_request_trace",
+    ],
+    "primary_case_ids": [
+        "success_default_first_authored_marker",
+        "success_markerless_first_authored_rule",
+        "success_explicit_top_rule",
+        "failure_invocation_missing_top_rule",
+        "trace_stdout_medium",
+        "trace_failure_invoke_escaped_field",
+    ],
+}
+DART_ADMISSION = {
+    "consumer_path": "dart/test/root_rule_selection_admission_test.dart",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_dart_local.sh",
     "roles": [
         "neutral_selection",
         "neutral_failures",
@@ -289,7 +320,7 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
         "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
-        "capability_conformance/README.md": [CONTRACT_ID, "3 complete / 4 pending"],
+        "capability_conformance/README.md": [CONTRACT_ID, "4 complete / 3 pending"],
         "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
         "t/root_rule_selection_perl_core.t": [
             "selection_cases",
@@ -318,6 +349,7 @@ def validate_filesystem_contract() -> None:
             "prove -Iperl t/root_rule_selection_perl_core.t",
             "prove -Iperl t/root_rule_selection_perl_routes.t",
             "require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",
+            "require_tracked_file dart/test/root_rule_selection_admission_test.dart",
         ],
     }
     for relative, required in markers.items():
@@ -473,6 +505,71 @@ def validate_rust_admission(contract: dict[str, Any], *, check_filesystem: bool)
     )
 
 
+def validate_dart_admission(
+    contract: dict[str, Any], *, check_filesystem: bool
+) -> None:
+    admission = require_fields(
+        contract["dart_admission"],
+        {
+            "consumer_path",
+            "canonical_driver",
+            "backend_driver",
+            "roles",
+            "primary_case_ids",
+        },
+        "Dart admission",
+    )
+    require(admission == DART_ADMISSION, "Dart admission topology drifted")
+    if not check_filesystem:
+        return
+
+    consumer_path = ROOT / admission["consumer_path"]
+    canonical_path = ROOT / admission["canonical_driver"]
+    backend_path = ROOT / admission["backend_driver"]
+    require(
+        all(path.is_file() for path in (consumer_path, canonical_path, backend_path)),
+        "Dart admission consumer or driver is missing",
+    )
+
+    consumer_text = consumer_path.read_text(encoding="utf-8")
+    source_roles = re.findall(
+        r"^void role_([A-Za-z0-9_]+)\(", consumer_text, re.MULTILINE
+    )
+    require(
+        source_roles == admission["roles"],
+        "Dart admission source role order or inventory drifted",
+    )
+    for role in admission["roles"]:
+        marker = re.compile(rf"^void role_{re.escape(role)}\(", re.MULTILINE)
+        require(
+            len(marker.findall(consumer_text)) == 1,
+            f"Dart admission role marker drifted: {role}",
+        )
+
+    canonical_text = canonical_path.read_text(encoding="utf-8")
+    require(
+        f"require_tracked_file {admission['consumer_path']}" in canonical_text,
+        "canonical driver omits the Dart admission consumer",
+    )
+    require(
+        f'bash "$REPO_ROOT/{admission["backend_driver"]}"' in canonical_text,
+        "canonical driver omits the registered Dart backend driver",
+    )
+    backend_text = backend_path.read_text(encoding="utf-8")
+    require(
+        '"$DART_CMD" test' in backend_text,
+        "Dart backend driver omits the package containing admission",
+    )
+
+    manifest_path = ROOT / "cli_conformance" / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest_ids = {case["id"] for case in manifest["cases"]}
+    require(
+        set(admission["primary_case_ids"]) <= manifest_ids,
+        "Dart admission primary case identity is missing from the shared manifest",
+    )
+
+
 def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True) -> None:
     require_fields(contract, TOP_LEVEL_FIELDS, "contract")
     require(contract["format"] == 1, "format drifted")
@@ -597,6 +694,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     require(all(isinstance(value, str) and value for value in projections.values()), "projection is empty")
     require(contract["required_execution_routes"] == ROUTES, "execution route order drifted")
     validate_rust_admission(contract, check_filesystem=check_filesystem)
+    validate_dart_admission(contract, check_filesystem=check_filesystem)
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list) and len(inventory) == 5, "implementation inventory count drifted")
@@ -746,6 +844,20 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda value: value["rust_admission"].__setitem__("canonical_driver", "missing"),
         ),
         ("regressed Rust rollout", lambda value: value["rollout"][2].__setitem__("status", "pending")),
+        ("Dart admission role", lambda value: value["dart_admission"]["roles"].pop()),
+        (
+            "Dart admission consumer",
+            lambda value: value["dart_admission"].__setitem__("consumer_path", "missing"),
+        ),
+        (
+            "Dart admission primary case",
+            lambda value: value["dart_admission"]["primary_case_ids"].pop(),
+        ),
+        (
+            "Dart admission canonical driver",
+            lambda value: value["dart_admission"].__setitem__("canonical_driver", "missing"),
+        ),
+        ("regressed Dart rollout", lambda value: value["rollout"][3].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 — admit Dart root selection
+
+Dart root-rule selection is now admitted against `linkedspec-root-rule-selection-v1`. One new package test reads
+the neutral artifact, compares its exact declared role inventory with one Dart role map, and executes every role
+once and only once: neutral selection/failure/strict rows; native; loaded; reconstructed; generated direct/traced;
+emitted-source direct/traced; descriptor; diagnostic; runtime trace; primary CLI; and primary request trace.
+
+The root checker now requires the ordered 15-role source inventory, consumer path, package-wide Dart driver,
+canonical registration, and six shared marker/markerless/explicit/unknown/request-trace case ids. Five additional
+mutations cover Dart role, consumer, case, canonical-driver, and rollout omission, bringing the complete checker to
+34 rejected semantic/topology/inventory/rollout mutations. Only Dart advances: neutral, Perl, Rust, and Dart are
+complete at 4/7; Julia, Lua/LuaJIT, and final public no-drift remain pending.
+
+Admission composes the existing semantic owners rather than adding another resolver or execution API. Emitted-
+source roles topology-check the public generated selector plumbing, while the route/source-emitter suite retains
+fresh isolated-package compilation and direct/traced execution. The complete Dart gate runs both and passes format
+60/0, analyzer, package 270/270, shared primary 65/65 with `POSIXLY_CORRECT` unset and set, and corpus 105/105.
+
+Capability, project, Dart, mdBook, task/live, and Knowledge Map records now report the exact 4 complete / 3 pending
+boundary. The generated/source contracts, descriptor identity, runtime behavior, primary bytes, and family plan do
+not change in this admission-only leaf.
+
+Canonical signoff passes all four doctrines, root governance with 34 rejected mutations, Perl root consumers 7+5,
+cursor admission 288, reference primary 65/65 twice, and Phase 0 1,031/1,031 in 656 seconds. The mdBook and
+Knowledge Map at 607 facts / 4,371 question keys pass before final cleanup and commit.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 — converge Dart root routes
 
 Dart loaded and normalized-JSON reconstructed state now has explicit route proof for the one compiled root

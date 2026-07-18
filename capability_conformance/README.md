@@ -55,10 +55,10 @@ backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to 
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
-the 15-role Rust admission consumer, configured CI/backend execution, first-marker/markerless/explicit/unknown
-primary cases, and default/explicit request trace while rejecting 29 semantic, topology, inventory, and rollout
-drift mutations. Rollout is 3 complete / 4 pending: neutral decision plus the composed Perl and Rust backends are
-admitted. Perl records marker-
+the exact 15-role Rust and Dart admission consumers, configured CI/backend execution, first-marker/markerless/
+explicit/unknown primary cases, and default/explicit request trace while rejecting 34 semantic, topology,
+inventory, and rollout drift mutations. Rollout is 4 complete / 3 pending: neutral decision plus the composed
+Perl, Rust, and Dart backends are admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
@@ -67,20 +67,22 @@ including exact first-marker and markerless-default bytes beside explicit and un
 the same marker-optional resolver through native, loaded, serialized/reconstructed, generated direct/traced, and
 emitted direct/traced execution. Existing generated signatures remain intact; option-bearing siblings accept
 per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
-authored descriptor identity and the minimal family plan. One omission-sensitive consumer composes all 15 neutral,
-native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly once;
-the Rust primary command passes all 65 cases in default and POSIX option environments. Dart route convergence is
-implemented and Dart-local green across loaded/normalized/generated/emitted/trace/diagnostic paths, but its
-topology admission remains pending beside Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6`. Current backend differences stay explicit in
-the inventory until their owning leaves land.
+authored descriptor identity and the minimal family plan. One omission-sensitive Rust consumer composes all 15
+neutral, native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly
+once; the Rust primary command passes all 65 cases in default and POSIX option environments. Dart now has the same
+exact 15-role admission topology across loaded/normalized/generated/emitted/trace/diagnostic paths. Its package-
+wide driver passes 270 tests, the shared command passes 65/65 in both option environments, and the corpus passes
+105/105. Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay
+explicit in the inventory until their owning leaves land.
 
-Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary without advancing admission: validation now
+Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and
 65x2 primary execution use it, zero/unknown selection failures have portable identities, strict-unused stays an
 authored-edge analysis, and descriptors publish immutable `is_top` plus the root contract identity. Route leaf
 `.3.2` proves loaded/normalized and generated/emitted direct/traced execution, low requested/effective/basis trace,
-portable route failures, and stale-contract-first ordering without changing v2 identity. Topology admission `.3.3`
-still gates promotion; rollout therefore remains 3 complete / 4 pending.
+portable route failures, and stale-contract-first ordering without changing v2 identity. Admission `.3.3` adds one
+contract-declared 15-role consumer, exact driver/case registration, and five additional omission mutations; Dart
+is therefore admitted and rollout is 4 complete / 3 pending.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

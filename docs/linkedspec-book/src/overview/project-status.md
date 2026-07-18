@@ -6,18 +6,18 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract rejects 29 drift mutations, so rollout is 3 complete / 4 pending. Composed
-Perl and Rust backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
+backend-neutral executable contract rejects 34 drift mutations, so rollout is 4 complete / 3 pending. Composed
+Perl, Rust, and Dart backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
 marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
-markerless, explicit/unknown, and request-trace outcomes. Rust additionally has one topology-checked 15-role
-consumer that executes every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
+markerless, explicit/unknown, and request-trace outcomes. Rust and Dart additionally have topology-checked 15-role
+consumers that each execute every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
 one-or-more-rule sources, resolves explicit > first marker > first rule once before user code, reports portable
 zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Route
 leaf `.3.2` now proves loaded/normalized and generated/emitted direct/traced reuse, low
 requested/effective/basis trace, portable failures, unchanged generated-v2 identity, and contract-first rejection.
-Its topology admission remains `.3.3`; Julia, Lua/LuaJIT, and final composed five-backend
-admission remain `.4-.6`. The backend-neutral rollout therefore remains 3 complete / 4 pending.
+Admission `.3.3` locks driver/case topology and advances Dart after a 270-test package gate, 65x2 primary proof,
+and 105/105 corpus proof. Julia, Lua/LuaJIT, and final composed five-backend admission remain `.4-.6`.
 
 ## Completed phases
 

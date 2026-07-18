@@ -12,17 +12,16 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The neutral decision plus composed Perl and Rust backends are complete at 3/7, with 29 drift mutations. Both apply
+The neutral decision plus composed Perl, Rust, and Dart backends are complete at 4/7, with 34 drift mutations. All
+three apply
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
-and request-trace selection. Rust admission is one omission-sensitive 15-role consumer and exact 65x2 command
-proof. Julia/Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
-Dart core leaf `.9.1.1.2.3.1` accepts markerless one-or-more-rule sources, resolves explicit > first marker > first
-rule once before user code, reports portable zero/unknown failures, preserves descriptor identity, and passes the
-65-case primary manifest twice. Route leaf `.3.2` now proves loaded/normalized and generated/emitted direct/traced
-execution reuse that resolver, preserves v2/format-2 identity and the minimal family plan, records
-requested/effective/basis at low trace, and retains portable route failures plus stale-contract-first ordering.
-Topology admission alone remains `.3.3`, so rollout correctly remains 3/7 rather than admitting Dart early.
+and request-trace selection. Rust and Dart each have one omission-sensitive 15-role admission consumer and exact
+65x2 command proof. Dart core/route leaves `.9.1.1.2.3.1-.2` accept markerless one-or-more-rule sources, resolve
+explicit > first marker > first rule once before user code, preserve descriptor and generated-v2 identity, record
+requested/effective/basis at low trace, and retain portable failures plus stale-contract-first ordering. Admission
+leaf `.3.3` topology-locks every neutral and real Dart projection exactly once and closes the Dart parent. Julia/
+Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -608,8 +607,9 @@ content migration exists yet.
   canonical trace projection. `.1.5.2.4` historically closed Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`. The later rule-local cursor migration established the 63-case boundary on Perl, Rust,
   and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl and
-  Rust are admitted at 65/65 in both environments. Dart core/native/primary proof is also 65/65 twice and its
-  composed routes are Dart-local green; topology admission remains `.9.1.1.2.3.3`. Julia and Lua remain `.4-.5`
+  Rust and Dart are admitted at 65/65 in both environments. Dart's exact 15-role consumer composes native, loaded/
+  reconstructed, generated/emitted, descriptor, diagnostic, runtime-trace, primary, and request-trace roles.
+  Julia and Lua remain `.4-.5`
   before final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not
   a current green claim.
   Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
@@ -625,8 +625,8 @@ content migration exists yet.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
   packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
-  registration, exact primary cases, rollout, and omission mutations. Dart route proof is green; Dart topology
-  admission plus Julia/Lua root leaves remain staged.
+  registration, exact primary cases, rollout, and omission mutations. Dart admission has the same exact 15-role
+  topology and package-wide driver proof; Julia/Lua root leaves remain staged.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

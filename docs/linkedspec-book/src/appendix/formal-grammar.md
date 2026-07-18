@@ -188,8 +188,8 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 3 complete / 4 pending, the neutral contract plus composed Perl and Rust backends are executable but
-full backend parity is not yet uniform. Both accept markerless one-or-more-rule sources, apply the exact precedence
+At rollout 4 complete / 3 pending, the neutral contract plus composed Perl, Rust, and Dart backends are executable
+but full backend parity is not yet uniform. All three accept markerless one-or-more-rule sources, apply the exact precedence
 above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
 explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
 per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,
@@ -204,9 +204,9 @@ their earlier contract boundary. One omission-sensitive 15-role Rust consumer to
 loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary roles, and exact primary proof is 65x2.
 Dart accepts markerless sources and applies the same resolver across native, loaded/reconstructed,
 generated/emitted direct/traced, and primary execution. It reports portable zero/unknown failures, publishes
-immutable descriptor identity, retains generated v2/format-2 identity, and traces the selection basis; topology
-admission remains `.9.1.1.2.3.3`. Julia and Lua still contain an unreachable markerless fallback behind marker-required
-validation. Until `.3.2-.6` close, use at least one `::` for portable cross-backend execution and pass an explicit
+immutable descriptor identity, retains generated v2/format-2 identity, traces the selection basis, and composes
+all 15 contract-declared admission roles exactly once. Julia and Lua still contain an unreachable markerless
+fallback behind marker-required validation. Until `.4-.6` close, use at least one `::` for portable cross-backend execution and pass an explicit
 selector when its identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
@@ -1023,7 +1023,7 @@ A valid `.spec` file must satisfy the following current portable checks. Item 1 
 and Rust envelopes from the temporary cross-backend boundary while `.9.1.1.2.2-.6` roll out:
 
 1. At least one rule exists. Perl, Rust, and Dart validation plus native/composed execution accept a markerless
-   file; Dart topology admission is still pending, while Julia and Lua still require at least one marked rule
+   file and are admitted, while Julia and Lua still require at least one marked rule
    (`::`). Use a marker until the remaining rollout closes when portable cross-backend execution matters. A
    zero-rule executable spec is always invalid.
 2. Every rule label is unique. Duplicate labels are rejected.
