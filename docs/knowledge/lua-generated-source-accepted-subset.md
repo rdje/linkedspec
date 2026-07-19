@@ -10,8 +10,8 @@ answers:
   - does the generated Lua subset preserve user functions
   - which Lua runtimes run the generated source subset
   - what remains before Lua generated source enters the capability census
-date: 2026-07-16
-status: current
+date: 2026-07-19
+status: current; emitted modules use generated-source v2
 tags: [lua, generated-source, corpus, accepted-subset, interpreter-oracle, PUC-Lua, LuaJIT, contract]
 evidence: "LUA-BACKEND-PARITY.8.3 adds corpus_proof.lua_accepted_subset_test to capability_conformance/generated_source_contract.json and checker enforcement for exact count, contract list/order, full-manifest validation, interpreter-before-emission proof, independent load/run, metadata/plans/trace identity, caller-owned cleanup, and unconditional registration. lua/test/run.lua validates all 105 fixtures, consumes the eight contract names directly, proves expected interpreter values, emits eight source-identified modules, and launches the exact selected PUC Lua or LuaJIT ABI host with explicit package/native paths. The host loads each module, validates plans, returns exact ordered value/metadata/plan observations, executes the fixed user-function fixture, observes portable first-case trace identity, emits empty stderr, and cleans its root. Both ABIs pass 177/177; primary is 61x2, corpus 105/105, capability 64/0/0, and canonical Phase 0 1031/1031 in 620 seconds."
 evidence_update_2026_07_16_admission: "LUA-BACKEND-PARITY.8.4 admits this proof as the Lua codegen.generated_parser_source pass state and advances the five-backend census to 80/0/0."
@@ -48,8 +48,10 @@ the count, contract consumption/order, full validation, proof order, fresh
 load, metadata/plan projection, trace identity, cleanup, and unconditional test
 registration. This closes `.8.3`; capability-census admission and backend
 handoff `.8.4` are now complete at five-backend 80/0/0.
+Cursor leaf `.9.1.7.4` migrates the emitted subset modules to v2 without changing the shared contract-v1 semantic
+ledger, accepted names, interpreter-first order, or 8/105 boundary.
 
-Related facts: [[generated-source-contract-v1]],
+Related facts: [[lua-generated-source-v2-rule-local-cursor]], [[generated-source-contract-v1]],
 [[lua-generated-source-family-plan]], [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-backend-full-parity-plan]].

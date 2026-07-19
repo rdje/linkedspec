@@ -10,22 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.2` — intrinsic PUC Lua/LuaJIT runtime is verified,
-  documented, cleaned, and committed.
-- latest_commit: `d4b910e8` — `FUTURE-PARITY-BACKLOG.9.1.7.2 - derive Lua rule-local runtime`
-  (ahead: 236; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.3` is complete and prepared for commit from clean base `d4b910e8`.
-- next_action: commit `.9.1.7.3`, clear and verify `git_message_brief.txt`, confirm the clean commit, and only then
-  activate generated-source v2 `.9.1.7.4` task-tree-first.
-- current_proof: PUC Lua and LuaJIT shared identical 44/110 runtime RED failures and now pass 110/110 each over all
-  36 families, 8/8 parent-child mechanisms, 2/2 structural replacements, loaded/normalized/recursive/trace, and
-  explicit outer/generated-v1 isolation. Six focused consumers pass 1,046 assertions per ABI. Missing engine
-  policy is intrinsic at every entered rule; children rederive. Explicit outer policy remains staged for `.5`,
-  generated v1 retains historical seek/family semantics for `.4`, and descriptor/public/rollout do not move.
-  Package remains 176/177x2 with only staged help; primary remains 32/65x4, corpus 105/105x2, governance is
-  68/5+3/44 after registering the execution consumer. KM is 628/4,600; mdBook/all four doctrines pass; canonical
-  closes root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Safe artifacts are removed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.4` — Lua/LuaJIT generated-source v2 is verified,
+  documented, cleaned, and prepared for commit.
+- latest_commit: `79422858` — `FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`
+  (ahead: 237; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.4 - emit Lua generated-source v2`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.4` is complete but uncommitted; `.5` is not active yet.
+- next_action: commit `.4`, clear the brief, verify a clean handoff, then activate public option removal `.5`.
+- current_lua_generated_v2: ADR/contract/admitted mechanisms and every Lua v1 owner are retrieved. Identical dual-
+  ABI RED is 44/106 and green is 106/106. New modules identify v2/format 2, retain only ordered label/family rows,
+  derive exact five-seek/five-consume policy, classify compact Pipe as OR, and reject stale v1 before payload decode
+  with expected/actual/regeneration fields. Direct/traced/fresh execution agrees on both ABIs. Eight focused
+  consumers total 2,027 assertions per ABI; package is 176/177x2 only at staged help, primary 32/65x4, corpus
+  105/105x2, and governance 69/5+3/44. KM is 630/4,622; mdBook/four doctrines and canonical root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass. Generated book/cache/native trees are removed.
 - current_lua_descriptor: Exact descriptor RED is 364/776 on each ABI and green is 875/875. Root metadata now
   names cursor v1 and omits global mode; rule metadata derives family/policy/ownership plus ordered semantic edges
   from normalized compiled state. Direct/normalized/loaded bytes and loaded AND execution agree. Seven focused
@@ -56,5 +54,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed, fully verified descriptor `.9.1.7.3` is prepared for its
-  per-slice commit; no background job remains.
+- blockers: none. in_flight_uncommitted: `.9.1.7.4` is fully verified/documented/cleaned and awaits only its commit;
+  no background job remains.

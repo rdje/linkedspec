@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.4 — emit Lua generated-source v2
+
+New PUC Lua and LuaJIT generated modules now identify `linkedspec-generated-source-v2` / format 2. Their ordered
+plan remains exactly `{label, family}`; no cursor policy or global parse mode is serialized. Generated execution
+derives seek for `default`, `or_acode`, `or_bcode`, `rep_acode`, and `rep_bcode`, and consume for the five AND
+families. Compact Pipe now classifies as OR and executes choice, matching normalized/native structure.
+
+Generated module load validates the artifact contract before reconstructing the embedded effective-spec payload.
+A stale v1 marker therefore returns `generated_source_contract_version_mismatch` at `validate_generated_plan`
+with source identity, expected v2, actual v1, and exact regenerate-from-`.spec` guidance even when its payload is
+also corrupt. The public v1 validator, direct/traced executors, and emitter are retired; the unversioned emitter
+now delegates to v2. Deterministic emission, direct/traced load, fresh-host execution, source identity, family
+mapping, both structural replacements, v1-before-payload ordering, and the contract-sourced 8/105 subset pass.
+
+The new dual-ABI test first failed identically at 44 of 106 assertions and now passes 106/106 on both ABIs. Eight
+focused consumers total 2,027 assertions per ABI. Complete package execution remains at the intentionally staged
+176/177 help boundary; all four default/POSIX primary legs remain exactly 32/65 with the same 33 option-removal
+residuals; corpus remains 105/105 per ABI. Registering the generated-v2 proof moves only the governed migration
+inventory to 69 files; rollout remains 5 complete / 3 pending and all 44 mutations remain rejected. Public/global
+option removal and exact dual-ABI admission remain `.5-.6`.
+
+Knowledge Map generation reaches 630 facts / 4,622 question keys. The mdBook, memory/task/KM checks, JSON,
+whitespace, and all four doctrines pass; canonical local CI closes with root consumers 7+5, cursor admission 288,
+reference primary 65x2, and Phase 0 1,031/1,031 in 644 seconds. Cleanup removes the generated 11 MiB mdBook,
+Python bytecode cache, and every caller-created native tree. Referenced reproduction-bundle logs remain because
+they are durable evidence rather than disposable output.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.3 — project Lua cursor descriptor v1
 
 PUC Lua and LuaJIT outward compiled descriptors now use the neutral `rule_local_cursor_v1` metadata variant.

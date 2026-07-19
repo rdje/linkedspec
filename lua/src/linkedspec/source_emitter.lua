@@ -5,8 +5,8 @@ local spec_ast = require("linkedspec.spec_ast")
 
 local M = {}
 
-M.GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"
-M.GENERATED_SOURCE_FORMAT = 1
+M.GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"
+M.GENERATED_SOURCE_FORMAT = 2
 
 M.EMIT_SOURCE_STAGE = "emit_source"
 M.COMPILE_OR_LOAD_GENERATED_SOURCE_STAGE = "compile_or_load_generated_source"
@@ -21,6 +21,7 @@ M.GENERATED_PLAN_ROW_COUNT_MISMATCH_CODE = "generated_plan_row_count_mismatch"
 M.GENERATED_PLAN_LABEL_MISMATCH_CODE = "generated_plan_label_mismatch"
 M.GENERATED_PLAN_FAMILY_MISMATCH_CODE = "generated_plan_family_mismatch"
 M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE = "generated_plan_unknown_family"
+M.GENERATED_SOURCE_CONTRACT_VERSION_MISMATCH_CODE = "generated_source_contract_version_mismatch"
 M.GENERATED_NO_RULES_DEFINED_CODE = "no_rules_defined"
 M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE = "entry_rule_not_found"
 M.GENERATED_EXECUTION_FAILED_CODE = "generated_execution_failed"
@@ -41,6 +42,7 @@ local CODES = {
   [M.GENERATED_PLAN_LABEL_MISMATCH_CODE] = true,
   [M.GENERATED_PLAN_FAMILY_MISMATCH_CODE] = true,
   [M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE] = true,
+  [M.GENERATED_SOURCE_CONTRACT_VERSION_MISMATCH_CODE] = true,
   [M.GENERATED_NO_RULES_DEFINED_CODE] = true,
   [M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE] = true,
   [M.GENERATED_EXECUTION_FAILED_CODE] = true,
@@ -142,6 +144,8 @@ function M.generated_source_error(options)
     entry_rule = optional_string(options.entry_rule, "generated source error entry_rule"),
     rule_label = optional_string(options.rule_label, "generated source error rule_label"),
     handler_family = optional_string(options.handler_family, "generated source error handler_family"),
+    expected_contract = optional_string(options.expected_contract, "generated source error expected_contract"),
+    actual_contract = optional_string(options.actual_contract, "generated source error actual_contract"),
     detail = optional_string(options.detail, "generated source error detail"),
   }, ERROR_MT)
 end
@@ -160,6 +164,8 @@ function M.generated_source_error_to_json(value)
   if value.entry_rule ~= nil then result.entry_rule = value.entry_rule end
   if value.rule_label ~= nil then result.rule_label = value.rule_label end
   if value.handler_family ~= nil then result.handler_family = value.handler_family end
+  if value.expected_contract ~= nil then result.expected_contract = value.expected_contract end
+  if value.actual_contract ~= nil then result.actual_contract = value.actual_contract end
   if value.detail ~= nil then result.detail = value.detail end
   return result
 end
@@ -252,6 +258,13 @@ function M.generated_rule_family_names()
   return result
 end
 
+function M.generated_family_cursor_policy(family)
+  if type(family) ~= "string" or not FAMILY_NAME_SET[family] then
+    fail("unsupported generated rule family")
+  end
+  return interpreter.generated_family_execution_policy(family).cursor_policy
+end
+
 function M.classify_generated_rule_family(rule)
   if compiled_spec.node_type(rule) ~= "CompiledRule" then
     fail("classify_generated_rule_family expects CompiledRule")
@@ -266,12 +279,12 @@ function M.classify_generated_rule_family(rule)
     return rule.mode_metadata.is_and and "rep_and_acode" or "rep_acode"
   end
   if #rule.blind_edges > 0 then
-    return mode == "Or" and "or_bcode" or "and_bcode"
+    return (mode == "Or" or mode == "Pipe") and "or_bcode" or "and_bcode"
   end
   if mode == "Default" then return "default" end
-  if mode == "Or" then return "or_acode" end
+  if mode == "Or" or mode == "Pipe" then return "or_acode" end
   if mode == "Single" then return "and_single_acode" end
-  if mode == "And" or mode == "Pipe" then
+  if mode == "And" then
     if #rule.regex_patterns <= 1 and #rule.action_edges <= 1 then
       return "and_single_acode"
     end
@@ -303,12 +316,31 @@ local function generated_plan_failure(source_identity, code, summary, options)
     source_identity = source_identity,
     rule_label = options.rule_label,
     handler_family = options.handler_family,
+    expected_contract = options.expected_contract,
+    actual_contract = options.actual_contract,
     detail = options.detail,
   }))
 end
 
-function M.validate_generated_rule_plan_v1(compiled, plan, source_identity)
+function M.validate_generated_source_contract_v2(actual_contract, source_identity)
   local identity = require_string(source_identity, "source_identity", false)
+  local actual = require_string(actual_contract, "actual generated source contract", false)
+  if actual == M.GENERATED_SOURCE_CONTRACT then return end
+  generated_plan_failure(
+    identity,
+    M.GENERATED_SOURCE_CONTRACT_VERSION_MISMATCH_CODE,
+    "Generated source contract does not match the active validator",
+    {
+      expected_contract = M.GENERATED_SOURCE_CONTRACT,
+      actual_contract = actual,
+      detail = "regenerate the generated artifact from its .spec source",
+    }
+  )
+end
+
+function M.validate_generated_rule_plan_v2(compiled, plan, source_identity, actual_contract)
+  local identity = require_string(source_identity, "source_identity", false)
+  M.validate_generated_source_contract_v2(actual_contract or M.GENERATED_SOURCE_CONTRACT, identity)
   if compiled_spec.node_type(compiled) ~= "CompiledSpec" then
     raise(M.generated_source_compile_failed(identity, "compiled must be a CompiledSpec"))
   end
@@ -383,7 +415,7 @@ end
 
 local function execute_generated(compiled, plan, input, source_identity, options, trace_config)
   local identity = require_string(source_identity, "source_identity", false)
-  local families = M.validate_generated_rule_plan_v1(compiled, plan, identity)
+  local families = M.validate_generated_rule_plan_v2(compiled, plan, identity)
   local runtime_options = copy_options(options, "generated execution")
   local diagnostic_sink = runtime_options.diagnostic_sink
   if type(diagnostic_sink) == "function" then
@@ -434,11 +466,11 @@ local function execute_generated(compiled, plan, input, source_identity, options
   }))
 end
 
-function M.execute_generated_parser_v1(compiled, plan, input, source_identity, options)
+function M.execute_generated_parser_v2(compiled, plan, input, source_identity, options)
   return execute_generated(compiled, plan, input, source_identity, options, nil)
 end
 
-function M.execute_generated_parser_with_trace_v1(
+function M.execute_generated_parser_with_trace_v2(
     compiled,
     plan,
     input,
@@ -488,15 +520,15 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
   end
   return table.concat({
     "-- Generated LinkedSpec parser module.",
-    "-- Contract id: linkedspec-generated-source-v1.",
-    "-- Source format: linkedspec_lua source_emitter v1.",
+    "-- Contract id: linkedspec-generated-source-v2.",
+    "-- Source format: linkedspec_lua source_emitter v2.",
     "-- Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.",
     "",
     'local linkedspec = require("linkedspec")',
     "local M = {}",
     "",
-    'M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"',
-    "M.LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1",
+    'M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"',
+    "M.LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2",
     'local _SOURCE_IDENTITY_HEX = "' .. identity_hex .. '"',
     'local _EFFECTIVE_SPEC_JSON_HEX = "' .. spec_json_hex .. '"',
     "",
@@ -515,6 +547,11 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
     "local _GENERATED_PLAN = {",
     table.concat(plan_lines, "\n"),
     "}",
+    "",
+    "linkedspec.validate_generated_source_contract_v2(",
+    "  M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT,",
+    "  M.LINKEDSPEC_GENERATED_SOURCE_IDENTITY",
+    ")",
     "",
     "function M.metadata()",
     "  return linkedspec.generated_source_metadata(M.LINKEDSPEC_GENERATED_SOURCE_IDENTITY)",
@@ -545,7 +582,7 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
     "end",
     "",
     "function M.validate_plan(actual)",
-    "  linkedspec.validate_generated_rule_plan_v1(",
+    "  linkedspec.validate_generated_rule_plan_v2(",
     "    _COMPILED_SPEC,",
     "    actual,",
     "    M.LINKEDSPEC_GENERATED_SOURCE_IDENTITY",
@@ -553,7 +590,7 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
     "end",
     "",
     "function M.execute(input, options)",
-    "  return linkedspec.execute_generated_parser_v1(",
+    "  return linkedspec.execute_generated_parser_v2(",
     "    _COMPILED_SPEC,",
     "    _GENERATED_PLAN,",
     "    input,",
@@ -563,7 +600,7 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
     "end",
     "",
     "function M.execute_with_trace(input, trace_config, options)",
-    "  return linkedspec.execute_generated_parser_with_trace_v1(",
+    "  return linkedspec.execute_generated_parser_with_trace_v2(",
     "    _COMPILED_SPEC,",
     "    _GENERATED_PLAN,",
     "    input,",
@@ -579,10 +616,10 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
 end
 
 function M.emit_lua_source(compiled)
-  return M.emit_lua_source_v1(compiled, "<inline>")
+  return M.emit_lua_source_v2(compiled, "<inline>")
 end
 
-function M.emit_lua_source_v1(compiled, source_identity)
+function M.emit_lua_source_v2(compiled, source_identity)
   local identity = type(source_identity) == "string" and source_identity or ""
   if type(source_identity) ~= "string" then
     emit_failure(identity, "Generated Lua source identity must be Unicode text", "source_identity must be a string")

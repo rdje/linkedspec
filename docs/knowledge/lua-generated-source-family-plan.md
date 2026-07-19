@@ -10,14 +10,14 @@ answers:
   - how is the generated Lua all-family matrix tested
   - why must Lua generated repetition classification use mode names
   - does generated Lua preserve variadic rest arrays
-date: 2026-07-16
-status: current
+date: 2026-07-19
+status: current at generated-source v2
 tags: [lua, generated-source, family-plan, direct-execution, trace, variadic, PUC-Lua, LuaJIT]
 evidence: "LUA-BACKEND-PARITY.8.2 adds typed GeneratedPlanRow APIs, exact classification/order/validation/execution in lua/src/linkedspec/source_emitter.lua, plan-authoritative nested dispatch and portable trace in lua/src/linkedspec/interpreter.lua, public exports, and three permanent tests. One 26-row combined spec covers all ten root families and nested rows; four mutations lock row-count/label/family/unknown-family errors; a fresh emitted all-family module runs through exact PUC Lua/LuaJIT hosts with cleanup; the neutral variadic fixture reconstructs and executes typed rest arrays. Initial DefaultRoot classification as rep_acode proved Lua's broad native is_repetition flag includes ordinary default scanning, so generated classification uses the exact seven explicit repetition mode names. Both ABIs pass 176/176; primary is 61x2, corpus 105/105, capability 64/0/0, and canonical Phase 0 1031/1031 in 626 seconds."
-reverify: "bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; rg -n 'build_generated_rule_plan|validate_generated_rule_plan_v1|generated_rule_enter|generated_family_decision|generated_rule_exit|generated Lua plans classify' lua/src/linkedspec/source_emitter.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/init.lua lua/test/run.lua"
+reverify: "bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; rg -n 'build_generated_rule_plan|validate_generated_rule_plan_v2|generated_rule_enter|generated_family_decision|generated_rule_exit|generated Lua plans classify' lua/src/linkedspec/source_emitter.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/init.lua lua/test/run.lua"
 ---
 
-Lua uses the exact contract-v1 family names: `default`, `or_acode`,
+Lua generated-source v2 uses the exact ten family names: `default`, `or_acode`,
 `and_single_acode`, `and_acode_seq`, `and_bcode`, `or_bcode`, `rep_acode`,
 `rep_bcode`, `rep_and_acode`, and `rep_and_bcode`.
 `build_generated_rule_plan(...)` classifies effective compiled rule order into
@@ -55,6 +55,8 @@ semantics are introduced.
 
 Exact contract-sourced interpreter-first 8/105 admission is closed under
 `.8.3`; final census admission closes under `.8.4` at five-backend 80/0/0.
+Rule-local cursor leaf `.9.1.7.4` now derives the five seek and five consume policies from these rows, classifies
+compact Pipe as OR, and rejects v1 before payload reconstruction; see [[lua-generated-source-v2-rule-local-cursor]].
 
 Related facts: [[generated-source-contract-v1]],
 [[lua-generated-source-emitter-core]],

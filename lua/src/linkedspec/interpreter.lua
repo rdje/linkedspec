@@ -3668,6 +3668,18 @@ local function copy_store(source)
   return result
 end
 
+function M.generated_family_execution_policy(family)
+  local uses_and_execution = family == "and_single_acode" or family == "and_acode_seq" or
+    family == "and_bcode" or family == "rep_and_acode" or family == "rep_and_bcode"
+  return {
+    family = uses_and_execution and "and" or "or_default",
+    cursor_policy = uses_and_execution and "consume" or "seek",
+    uses_and_execution = uses_and_execution,
+    uses_blind_dispatch = family == "and_bcode" or family == "or_bcode" or
+      family == "rep_bcode" or family == "rep_and_bcode",
+  }
+end
+
 execute_rule = function(engine, label, entry_index, ctx)
   local rule = engine.compiled_spec.rules_by_label[label]
   if not rule then
@@ -3692,14 +3704,10 @@ execute_rule = function(engine, label, entry_index, ctx)
     uses_blind_dispatch = #rule.blind_edges > 0
     cursor_policy = engine.parse_mode or (uses_and_execution and "consume" or "seek")
   else
-    -- Contract-v1 generated artifacts retain their validated handler-family
-    -- interpretation and historical seek default until generated-source v2.
-    uses_and_execution = generated_family == "and_single_acode" or
-      generated_family == "and_acode_seq" or generated_family == "and_bcode" or
-      generated_family == "rep_and_acode" or generated_family == "rep_and_bcode"
-    uses_blind_dispatch = generated_family == "and_bcode" or generated_family == "or_bcode" or
-      generated_family == "rep_bcode" or generated_family == "rep_and_bcode"
-    cursor_policy = engine.parse_mode or "seek"
+    local generated_policy = M.generated_family_execution_policy(generated_family)
+    uses_and_execution = generated_policy.uses_and_execution
+    uses_blind_dispatch = generated_policy.uses_blind_dispatch
+    cursor_policy = generated_policy.cursor_policy
   end
   local execution_policy = {
     family = uses_and_execution and "and" or "or_default",

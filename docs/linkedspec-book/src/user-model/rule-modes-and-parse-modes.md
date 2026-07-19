@@ -100,13 +100,14 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > direct-call, or recursive child derives again from its own family. Both ABIs
 > pass the same 110 assertions over all 36 families, eight child mechanisms, two
 > structural replacements, loaded/normalized routes, and policy-bearing trace.
-> An explicit outer policy remains a compatibility seam until `.5`, while
-> generated-source v1 deliberately retains historical seek and its legacy
-> handler-family interpretation until `.4`. Descriptor `.9.1.7.3` is now v1 on
+> An explicit outer policy remains a compatibility seam until `.5`. Descriptor `.9.1.7.3` is now v1 on
 > both ABIs: root metadata contains the cursor contract rather than a global
 > mode, and every rule projects normalized family, policy, ownership, and exact
 > semantic edge rows. Its focused proof passes 875 assertions per ABI. Generated
-> v2, public option removal, and rollout admission remain `.4-.6`.
+> source `.9.1.7.4` is now v2/format 2 on both ABIs: its unchanged label/family
+> plan derives exact cursor policy, compact Pipe is OR/choice, and v1 is rejected
+> before payload reconstruction. Public option removal and rollout admission
+> remain `.5-.6`.
 
 ## Current rule-label surface
 
@@ -585,7 +586,8 @@ Cursor policy controls where a rule may find its next match. It does not replace
 The two low-level algorithms are `seek` and `consume`, but normal Perl, Rust, Dart, Julia, and Lua live execution
 select them from the rule family rather than a parser-wide override. Their loaded, reconstructed, and
 ordinary runtime routes preserve that identity at every entered rule. Perl, Rust, Dart, and Julia generated-v2
-routes do too; Lua generated-v1 remains an explicit versioned compatibility seam until `.9.1.7.4`.
+routes do too. Lua generated-v2 now derives the same policy from its minimal label/family plan on both PUC Lua and
+LuaJIT; v1 artifacts must be regenerated from their `.spec` source.
 
 ### `seek`
 
@@ -857,8 +859,9 @@ through `.9.1.6.6`, so Julia now advances the rollout row.
 Lua and LuaJIT now share exact authored family identity, typed bare edges, family-derived compiled ownership, and
 the six portable diagnostics through normalization `.9.1.7.1`. Runtime `.2` makes omitted-policy normal, loaded,
 normalized, recursive, and traced execution intrinsic at each entered rule; all eight child mechanisms rederive
-independently. Descriptor metadata still publishes global seek, generated source still identifies v1, and an
-explicit outer policy remains accepted; descriptor, generated v2, option removal, and admission remain `.3-.6`.
+independently. Descriptor `.3` publishes cursor v1 with exact per-rule facts, and generated-source `.4` emits v2,
+derives the five seek/five consume policies, and rejects v1 before reconstruction. An explicit outer policy
+remains accepted; option removal and admission remain `.5-.6`.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

@@ -3,20 +3,20 @@ id: lua-generated-source-emitter-core
 title: Lua generated-source core emits deterministic exact effective state without claiming plan admission
 answers:
   - how do I emit generated Lua source
-  - what does emit_lua_source_v1 return
+  - what does emit_lua_source_v2 return
   - what metadata does a generated Lua module expose
   - how does generated Lua preserve fixed variadic and codeblock functions
   - is generated Lua standalone or optimized
   - which generated Lua roles are still pending
   - what errors can the Lua source emitter return
-date: 2026-07-16
-status: current
+date: 2026-07-19
+status: current at generated-source v2
 tags: [lua, generated-source, source-emitter, metadata, errors, utf8, callable-signature]
 evidence: "LUA-BACKEND-PARITY.8.1.1 adds lua/src/linkedspec/source_emitter.lua and public exports. Equivalent CompiledSpec plus identity emits byte-identical ASCII native Lua. Source-ordered function registry definitions preserve fixed-v1 params/arity, variadic-v2 signature/rest, and final-codeblock-v3 parameter_kinds; compiled_rule_order preserves last-definition effective rules. spec_ast JSON is canonical strict UTF-8 and embedded with identity as lowercase hex. Loaded modules expose metadata(), execute(), and execute_with_trace(); typed portable emit/compile-load/execution failures retain identity and attribution. LUA-BACKEND-PARITY.8.1.2 adds exact fresh-process valid/corrupt load-run-cleanup proof; .8.2 adds plan()/validate_plan(), exact ten-family authoritative nested execution, portable trace, all-family isolation, and emitted variadic proof; .8.3 adds exact contract-ordered interpreter-first 8/105 fresh-host load/value/metadata/plan/trace proof. PUC Lua and LuaJIT each pass 177/177; canonical reference CLI is 61x2 and Phase 0 is 1031/1031 in 620 seconds. Census .8.4 remains."
-reverify: "bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; rg -n 'emit_lua_source_v1|LINKEDSPEC_GENERATED_SOURCE|function M.execute' lua/src/linkedspec/source_emitter.lua lua/test/run.lua lua/README.md docs/linkedspec-book/src/public-api/native-spec-loading.md"
+reverify: "bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; rg -n 'emit_lua_source_v2|LINKEDSPEC_GENERATED_SOURCE|function M.execute' lua/src/linkedspec/source_emitter.lua lua/test/run.lua lua/README.md docs/linkedspec-book/src/public-api/native-spec-loading.md"
 ---
 
-Use `emit_lua_source_v1(compiled, source_identity)` when the artifact needs a
+Use `emit_lua_source_v2(compiled, source_identity)` when the artifact needs a
 stable caller identity. `emit_lua_source(compiled)` is the compatibility form
 and uses `<inline>`. Both return module source; neither writes a file.
 
@@ -42,13 +42,14 @@ return the direct runtime value, not its result envelope. The generated module
 still requires `linkedspec`; it is not a bundled runtime or an optimization
 claim.
 
-Contract-v1 metadata and typed portable errors are current. Fresh-process PUC
+Contract-v2 metadata and typed portable errors are current. Fresh-process PUC
 Lua/LuaJIT persistence, corrupt-payload behavior, and cleanup are recurring
 proof under `.8.1.2`. `plan()` and ten-family validation/execution plus portable
 generated-family trace roles are current under `.8.2`; the contract-sourced
 8/105 proof is closed under `.8.3`; census promotion closes under `.8.4` at five-backend 80/0/0.
 
-Related facts: [[lua-generated-source-scaffold-split]],
+Rule-local cursor leaf `.9.1.7.4` additionally locks contract-before-payload validation and family-derived policy
+without widening the plan. Related facts: [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-family-plan]],
 [[lua-generated-source-accepted-subset]],

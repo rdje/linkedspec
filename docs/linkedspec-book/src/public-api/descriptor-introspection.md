@@ -7,16 +7,16 @@
 > `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2, option/CLI removal, and composed cursor
-> admission are complete through `.9.1.6.6`; Lua generated v2, option removal, dual-ABI admission, recurring
+> admission are complete through `.9.1.6.6`; Lua generated v2 is complete, while option removal, dual-ABI admission, recurring
 > five-backend admission, and public no-drift remain dependency-ordered. Independently, Julia root admission now composes the immutable
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
 > legacy field.
 >
 > Lua/LuaJIT descriptor `.9.1.7.3` now projects cursor v1 directly from normalized compiled rules. Direct,
 > normalized, and loaded descriptor bytes agree, including handler/root-marker identity and exact action/blind
-> semantic rows. An explicit global engine option remains a separate compatibility seam until `.9.1.7.5`, and
-> generated source remains version 1 until `.4`; neither compatibility boundary appears in or alters the v1
-> descriptor.
+> semantic rows. An explicit global engine option remains a separate compatibility seam until `.9.1.7.5`.
+> Generated source is v2/format 2 and derives policy from family without copying cursor state into this descriptor
+> or its minimal generated plan.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

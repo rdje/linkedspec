@@ -262,7 +262,7 @@ do
   local identity = "diagnostic-output/generated-lua.spec"
   local ordered_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("ordered_unicode")))
   local generated = generated_module(
-    linkedspec.emit_lua_source_v1(ordered_compiled, identity),
+    linkedspec.emit_lua_source_v2(ordered_compiled, identity),
     "@generated-diagnostic-output"
   )
   local expected = scenario("ordered_unicode_with_sink").expected
@@ -285,7 +285,7 @@ do
 
   local failure_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("sink_failure")))
   local failure_generated = generated_module(
-    linkedspec.emit_lua_source_v1(failure_compiled, identity),
+    linkedspec.emit_lua_source_v2(failure_compiled, identity),
     "@generated-diagnostic-sink-failure"
   )
   local caller_failure = { id = "generated-caller-sink-failure" }
@@ -301,7 +301,7 @@ do
 
   local exit_compiled = linkedspec.compile_spec(linkedspec.parse_spec(program_source("immediate_exit")))
   local exit_generated = generated_module(
-    linkedspec.emit_lua_source_v1(exit_compiled, identity),
+    linkedspec.emit_lua_source_v2(exit_compiled, identity),
     "@generated-diagnostic-exit"
   )
   local exit_events = {}

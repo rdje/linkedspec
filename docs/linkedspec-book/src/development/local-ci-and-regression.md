@@ -107,6 +107,16 @@ ABI. Package, primary, corpus, inventory, rollout, and mutation boundaries remai
 their later owners. Full signoff also passes memory/Knowledge Map checks, all four doctrines, and canonical root
 consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 621 seconds.
 
+Generated-source leaf `.9.1.7.4` adds one 106-assertion consumer to both ABI legs. Identical 44/106 RED now passes
+v2/format-2 identity, the minimal ordered plan, five seek and five consume families, compact-Pipe choice, both
+structural replacements, deterministic direct/traced/persisted execution, and stale-v1 rejection before corrupt
+payload reconstruction. All eight focused consumers total 2,027 assertions per ABI. Package remains 176/177x2
+only at staged help, every default/POSIX primary leg remains 32/65, corpus remains 105/105 per ABI, and registering
+the consumer moves only inventory to 69 files at unchanged rollout 5+3 and 44 mutations.
+Knowledge Map generation is 630 facts / 4,622 keys. The mdBook, four doctrines, root consumers 7+5, cursor
+admission 288, reference primary 65x2, and canonical Phase 0 1,031/1,031 in 644 seconds all pass. The generated
+book, Python cache, and disposable native trees are removed after proof.
+
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace

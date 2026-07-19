@@ -4137,10 +4137,10 @@ end)
 test("generated source metadata and portable errors match the neutral contract", function()
   assert_equal(
     linkedspec.GENERATED_SOURCE_CONTRACT,
-    "linkedspec-generated-source-v1",
+    "linkedspec-generated-source-v2",
     "generated contract id"
   )
-  assert_equal(linkedspec.GENERATED_SOURCE_FORMAT, 1, "generated format")
+  assert_equal(linkedspec.GENERATED_SOURCE_FORMAT, 2, "generated format")
   assert_equal(
     linkedspec.generated_source_stage_name(linkedspec.EMIT_SOURCE_STAGE),
     "emit_source",
@@ -4156,7 +4156,7 @@ test("generated source metadata and portable errors match the neutral contract",
   assert_equal(linkedspec.is_generated_source_metadata(metadata), true, "metadata type")
   assert_equal(
     json.encode(linkedspec.generated_source_metadata_to_json(metadata)),
-    '{"contract_id":"linkedspec-generated-source-v1","format_version":1,"source_identity":"generated/λ.spec"}',
+    '{"contract_id":"linkedspec-generated-source-v2","format_version":2,"source_identity":"generated/λ.spec"}',
     "metadata JSON"
   )
 
@@ -4191,7 +4191,7 @@ test("generated source metadata and portable errors match the neutral contract",
   assert_equal(plan_error.code, "generated_plan_unknown_family", "plan code")
 
   local invalid_identity_ok, invalid_identity_error = pcall(
-    linkedspec.emit_lua_source_v1,
+    linkedspec.emit_lua_source_v2,
     {},
     string.char(0xFF)
   )
@@ -4201,13 +4201,13 @@ test("generated source metadata and portable errors match the neutral contract",
   assert_equal(invalid_identity_error.code, "generated_source_emit_failed", "invalid identity code")
   assert_equal(invalid_identity_error.source_identity, string.char(0xFF), "invalid identity retained")
 
-  local missing_identity_ok, missing_identity_error = pcall(linkedspec.emit_lua_source_v1, {}, "")
+  local missing_identity_ok, missing_identity_error = pcall(linkedspec.emit_lua_source_v2, {}, "")
   assert_equal(missing_identity_ok, false, "missing identity rejected")
   assert_equal(linkedspec.is_generated_source_error(missing_identity_error), true, "missing identity typed")
   assert_equal(missing_identity_error.detail, "source_identity is required", "missing identity detail")
 
   local invalid_compiled_ok, invalid_compiled_error = pcall(
-    linkedspec.emit_lua_source_v1,
+    linkedspec.emit_lua_source_v2,
     {},
     "generated/invalid.spec"
   )
@@ -4362,13 +4362,13 @@ test("generated Lua source is deterministic and preserves exact effective v1 v2 
     rules = { first_top, child, last_top },
   }), { validate_source = false })
   local identity = "generated/λ$parser.spec"
-  local first = linkedspec.emit_lua_source_v1(compiled, identity)
-  local second = linkedspec.emit_lua_source_v1(compiled, identity)
+  local first = linkedspec.emit_lua_source_v2(compiled, identity)
+  local second = linkedspec.emit_lua_source_v2(compiled, identity)
 
   assert_equal(first, second, "deterministic source bytes")
   assert_equal(first:find(identity, 1, true), nil, "identity is not embedded as a host literal")
-  assert_contains(first, "linkedspec-generated-source-v1", "contract marker")
-  assert_contains(first, "LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1", "format marker")
+  assert_contains(first, "linkedspec-generated-source-v2", "contract marker")
+  assert_contains(first, "LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2", "format marker")
   assert_contains(first, "function M.execute(input, options)", "direct role")
   assert_contains(first, "function M.execute_with_trace(input, trace_config, options)", "trace role")
   for index = 1, #first do
@@ -4411,11 +4411,11 @@ test("generated Lua module executes direct and traced roles in process", functio
   }, "\n")).rules
   local compiled = linkedspec.compile_spec(ast.spec_file({ functions = { contextual }, rules = rules }))
   local generated = load_generated_lua_module(
-    linkedspec.emit_lua_source_v1(compiled, "generated/λ$module.spec")
+    linkedspec.emit_lua_source_v2(compiled, "generated/λ$module.spec")
   )
   local metadata = linkedspec.generated_source_metadata_to_json(generated.metadata())
-  assert_equal(metadata.contract_id, "linkedspec-generated-source-v1", "module contract")
-  assert_equal(metadata.format_version, 1, "module format")
+  assert_equal(metadata.contract_id, "linkedspec-generated-source-v2", "module contract")
+  assert_equal(metadata.format_version, 2, "module format")
   assert_equal(metadata.source_identity, "generated/λ$module.spec", "module identity")
   assert_equal(generated.execute("x", { top_rule = "Top" }), "λ", "direct generated result")
 
@@ -4462,7 +4462,7 @@ test("generated Lua plans classify validate execute and trace all ten structural
     assert_equal(row.label, compiled.compiled_rule_order[index], "generated plan source order " .. index)
     by_label[row.label] = row.family
   end
-  linkedspec.validate_generated_rule_plan_v1(compiled, plan, identity)
+  linkedspec.validate_generated_rule_plan_v2(compiled, plan, identity)
 
   local expected_values = json.harray()
   for _, case in ipairs(cases) do
@@ -4472,7 +4472,7 @@ test("generated Lua plans classify validate execute and trace all ten structural
       case.input,
       { top_rule = case.label }
     ).value
-    local generated = linkedspec.execute_generated_parser_v1(
+    local generated = linkedspec.execute_generated_parser_v2(
       compiled,
       plan,
       case.input,
@@ -4532,7 +4532,7 @@ test("generated Lua plans classify validate execute and trace all ten structural
   }
   for _, mutation in ipairs(mutations) do
     local ok, failure = pcall(
-      linkedspec.validate_generated_rule_plan_v1,
+      linkedspec.validate_generated_rule_plan_v2,
       compiled,
       mutation.build(),
       identity
@@ -4547,7 +4547,7 @@ test("generated Lua plans classify validate execute and trace all ten structural
   end
 
   local trace_output = {}
-  local traced = linkedspec.execute_generated_parser_with_trace_v1(
+  local traced = linkedspec.execute_generated_parser_with_trace_v2(
     compiled,
     plan,
     "a b",
@@ -4568,7 +4568,7 @@ test("generated Lua plans classify validate execute and trace all ten structural
   assert_contains(trace_text, "rule=AndBlindA family=default", "portable nested family")
 
   local failed_ok, failed_error = pcall(
-    linkedspec.execute_generated_parser_v1,
+    linkedspec.execute_generated_parser_v2,
     compiled,
     plan,
     "a",
@@ -4602,7 +4602,7 @@ test("generated Lua reconstructs and executes the neutral variadic callable fixt
     contract.fixture.input
   ).value
   local generated = load_generated_lua_module(
-    linkedspec.emit_lua_source_v1(compiled, "generated-source/lua-variadic.spec")
+    linkedspec.emit_lua_source_v2(compiled, "generated-source/lua-variadic.spec")
   )
   local plan = generated.plan()
   generated.validate_plan(plan)
@@ -4700,7 +4700,7 @@ test("generated Lua source loads and fails in fresh dual ABI host processes with
     "Top::",
     ' /é/ E { return("λ:$") }',
   }, "\n")))
-  local generated = linkedspec.emit_lua_source_v1(compiled, identity)
+  local generated = linkedspec.emit_lua_source_v2(compiled, identity)
   local corrupt, replacements = generated:gsub(
     'local _EFFECTIVE_SPEC_JSON_HEX = "[0-9a-f]+"',
     'local _EFFECTIVE_SPEC_JSON_HEX = "00"',
@@ -4725,8 +4725,8 @@ test("generated Lua source loads and fails in fresh dual ABI host processes with
     assert_equal(valid_stderr, "", "fresh valid host stderr")
     assert_equal(
       valid_stdout,
-      '{"direct":"λ:$","metadata":{"contract_id":"linkedspec-generated-source-v1",' ..
-        '"format_version":1,"source_identity":"generated/λ$isolated.spec"},' ..
+      '{"direct":"λ:$","metadata":{"contract_id":"linkedspec-generated-source-v2",' ..
+        '"format_version":2,"source_identity":"generated/λ$isolated.spec"},' ..
         '"missing":{"code":"entry_rule_not_found","rule_label":"Missing",' ..
         '"stage":"select_entry_rule"},"trace_has_runtime":true,"traced":"λ:$"}\n',
       "fresh valid host output"
@@ -4831,7 +4831,7 @@ test("generated Lua all-family matrix loads and executes in fresh dual ABI hosts
     local matrix_path = root .. "/matrix.json"
     write_file(
       generated_path,
-      linkedspec.emit_lua_source_v1(compiled, "generated-source/lua-family-host.spec")
+      linkedspec.emit_lua_source_v2(compiled, "generated-source/lua-family-host.spec")
     )
     write_file(matrix_path, json.encode(json.harray({ cases = expected_cases })))
     write_file(root .. "/runner.lua", generated_family_host_runner())
@@ -4956,7 +4956,7 @@ test("generated Lua source matches the contract accepted manifest subset", funct
       local metadata = linkedspec.generated_source_metadata_to_json(
         linkedspec.generated_source_metadata(identity)
       )
-      write_file(generated_path, linkedspec.emit_lua_source_v1(compiled, identity))
+      write_file(generated_path, linkedspec.emit_lua_source_v2(compiled, identity))
 
       expected_observations.names[index] = case_name
       expected_observations.values[case_name] = fixture.expected_json

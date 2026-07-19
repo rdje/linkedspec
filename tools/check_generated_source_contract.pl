@@ -306,7 +306,7 @@ fail('Lua accepted-subset test must consume the executable contract list in orde
 fail('Lua accepted-subset test must validate the complete manifest before selection')
  unless $lua_accepted_subset_text =~ /load_corpus_fixtures\(corpus_root\)/;
 fail('Lua accepted-subset test must compare the interpreter before emission')
- unless $lua_accepted_subset_text =~ /local interpreter_value\s*=.*?runtime_parse.*?fixture\.expected_json.*?emit_lua_source_v1\(compiled, identity\)/s;
+ unless $lua_accepted_subset_text =~ /local interpreter_value\s*=.*?runtime_parse.*?fixture\.expected_json.*?emit_lua_source_v2\(compiled, identity\)/s;
 fail('Lua accepted-subset test must independently load and run generated modules')
  unless $lua_accepted_subset_text =~ /loadfile\(case\.path\)/ &&
         $lua_accepted_subset_text =~ /run_generated_lua_host/;

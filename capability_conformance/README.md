@@ -53,8 +53,9 @@ loaded, descriptor-v1, emitted/generated-v2, trace, composition, removal, primar
 The checker locks its markers, complete package driver, canonical tracked input, and optional backend registration.
 `neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, and `julia_backend` are complete,
 so rollout is 5 complete / 3 pending; later legs remain dependency-ordered. The shared generated-source-v1
-capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, and Julia emitters use
-v2 and Lua awaits its cursor rollout.
+capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, Julia, and Lua
+emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
+composed rollout still waits for `.9.1.7.6`.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the

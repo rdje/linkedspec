@@ -30,6 +30,7 @@ status: accepted neutral contract; Perl, Rust, Dart, and Julia admitted at 5 com
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust .9.1.4.7 adds a 15-role consumer and advances only rust_parity. Dart .9.1.5.6 adds a governed 15-role consumer and reaches 67 files, 4 complete / 4 pending, and 39 mutations. Julia .9.1.6.6 adds its governed 15-role consumer, advances only julia_backend, retains 67 files, and reaches 5 complete / 3 pending with 44 effective mutations."
 evidence_update_2026_07_19_lua_runtime: "Lua runtime leaf .9.1.7.2 registers its new dual-ABI execution consumer, moving inventory from 67 to 68 files without advancing the pending lua_dual_abi rollout row or changing the 44 effective mutations."
+evidence_update_2026_07_19_lua_generated_v2: "Lua generated-source leaf .9.1.7.4 registers its dedicated dual-ABI consumer, moving inventory from 68 to 69 files without advancing the pending lua_dual_abi rollout row or changing the 44 effective mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -73,6 +74,8 @@ so backend leaves must deliberately update the inventory as they migrate.
 
 Lua runtime `.9.1.7.2` adds its governed execution consumer because the proof itself names the staged
 `parse_mode` compatibility seam. That produces the current 68-file inventory without advancing rollout.
+Lua generated-source `.9.1.7.4` adds its governed v2 consumer because that proof names both the retired v1 API and
+the still-staged public override field. That produces the current 69-file inventory without advancing rollout.
 
 Perl preflight `.9.1.3.0` corrected one ordering detail without changing the 91-
 file set or runtime semantics: the ten shared manifest/help/usage/trace files

@@ -8,14 +8,47 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.3` — Lua/LuaJIT cursor descriptor v1 is complete after task-tree-first activation from clean runtime
-  commit `d4b910e8` at ahead 236. Exact identical 364/776 RED is now 875/875 green per ABI; seven focused
-  consumers total 1,921 assertions per ABI, package remains at the staged 176/177 help boundary, primary remains
-  32/65x4, corpus is 105/105x2, and cursor governance is 68/5+3/44. KM is 629/4,611; mdBook/four doctrines and
-  canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 621 seconds pass. Safe artifacts are
-  removed and the slice is prepared for commit; generated/public/admission owners remain `.4-.6`.
+- `FUTURE-PARITY-BACKLOG.9.1.7.4` — Lua/LuaJIT generated-source v2 is complete and prepared from clean descriptor
+  commit `79422858` at ahead 237. Authority/current-owner retrieval is complete. Identical 44/106 RED is now
+  106/106 green on both ABIs: v2/format 2, minimal label/family rows, exact five-seek/five-consume derivation,
+  compact-pipe choice, contract-first stale-v1 rejection, and deterministic direct/traced/fresh execution pass.
+  Eight focused consumers total 2,027 assertions per ABI; package remains 176/177x2 only at staged help, primary
+  remains 32/65x4, corpus 105/105x2, and governance is 69/5+3/44. KM is 630/4,622; mdBook/four doctrines and
+  canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass. Cleanup removes the
+  generated 11 MiB book, Python cache, and temporary native trees while retaining cited durable logs. `.4` is
+  prepared for commit; public option removal and admission stay `.5-.6`.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.4 — emit Lua generated-source v2**
+  (DONE and prepared for commit).
+
+  **Result:** New Lua artifacts identify v2/format 2, retain only ordered label/family rows, derive the exact five
+  seek and five consume policies, classify compact Pipe as OR/choice, and reject stale v1 before payload decode
+  with portable expected/actual/regeneration identity. Deterministic direct/traced/fresh execution passes both
+  ABIs; v1 public generated APIs are retired. Public option removal/admission remain `.5-.6`.
+
+  **Proof:** Identical 44/106 RED becomes 106/106 per ABI; eight focused consumers pass 2,027 per ABI. Package
+  remains 176/177x2 only at staged help, primary 32/65x4, corpus 105/105x2, governance 69/5+3/44, and KM
+  630/4,622. mdBook/four doctrines pass; canonical closes root 7+5, cursor 288, primary 65x2, and Phase 0
+  1,031/1,031 in 644 seconds. Safe generated artifacts are removed; cited durable logs remain.
+
+  **Next:** Commit `.4`, verify the clean handoff, then activate public option removal `.5`.
+
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.3 — project Lua cursor descriptor v1**
+  (DONE at clean commit `79422858`).
+
+  **Result:** Root descriptor metadata now publishes the neutral cursor-v1 contract without a global mode. Every
+  rule projects family, derived policy, aggregate ownership, and ordered semantic edges from normalized compiled
+  state; direct, normalized, and loaded descriptors are byte-identical on both ABIs. Generated/public/admission
+  owners remain `.4-.6`.
+
+  **Proof:** Identical 364/776 RED becomes 875/875 per ABI; seven focused consumers pass 1,921 per ABI. Package
+  remains 176/177x2, primary 32/65x4, corpus 105/105x2, cursor governance 68/5+3/44, and KM is 629/4,611.
+  mdBook/four doctrines pass; canonical closes root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
+  621 seconds. Safe generated artifacts are removed; referenced durable reproduction logs are retained.
+
+  **Next:** Generated-source v2 `.9.1.7.4` is active task-tree-first from the clean commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.2 — derive Lua rule-local runtime policy**
   (DONE at clean commit `d4b910e8`).
 

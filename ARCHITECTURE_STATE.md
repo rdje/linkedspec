@@ -5,6 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` Lua generated-source-v2 refresh: `FUTURE-PARITY-BACKLOG.9.1.7.4` advances newly emitted modules to
+  `linkedspec-generated-source-v2` / format 2 while retaining only the minimal ordered `{label, family}` plan.
+  Generated entry derives seek for default/OR families and consume for AND families; compact Pipe now classifies
+  as OR/choice. Module load validates contract identity before decoding the embedded spec payload, so stale v1
+  returns portable expected/actual/regeneration fields even when its payload is independently corrupt. The public
+  v1 validator/executors/emitter are retired. Deterministic direct, traced, persisted-fresh, all-family, structural,
+  and contract-sourced subset proof passes both PUC Lua and LuaJIT at 106/106 dedicated and 2,027 focused assertions
+  per ABI. Package remains 176/177x2 only at staged help, every primary ABI/environment leg remains 32/65, corpus
+  remains 105/105x2, and governance advances only to 69/5+3/44; public removal/admission remain `.5-.6`. KM is
+  630/4,622; mdBook/four doctrines and canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
+  644 seconds pass. Generated book/cache/native artifacts are removed.
 - `2026-07-19` Lua cursor-descriptor refresh: `FUTURE-PARITY-BACKLOG.9.1.7.3` replaces the descriptor-global
   seek field with `linkedspec-rule-local-cursor-v1`. Each rule projects authored family, derived cursor policy,
   normalized aggregate ownership, and ordered semantic edge rows directly from `mode_metadata`, `action_edges`,

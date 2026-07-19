@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.4` — versioned generated execution derives; plans stay minimal):
+  Lua's existing ten-family plan already carried sufficient structural identity. Advancing generated source did
+  not require a cursor field, a second compiled representation, or a generated-only parser. One runtime policy
+  helper maps the validated family row to seek/consume plus choice/sequence and blind/action dispatch; generated
+  entry uses that derived record while normal entry continues deriving from compiled rule metadata. This removes
+  the deliberate v1 historical-seek seam without widening plan serialization.
+
+  Contract validation must precede payload reconstruction, not merely plan execution. Emitted modules therefore
+  decode only the small source identity and plan labels, validate their literal v2 marker, and only then decode
+  and compile the effective spec. A test corrupts the payload and independently rewrites the marker to v1; exact
+  expected/actual/regeneration failure proves the version mismatch wins. Current direct APIs may supply the
+  artifact identity as the optional fourth validator argument for the same portable boundary.
+
+  Compact Pipe required an explicit generated-classifier correction. Normalization had already made Pipe an
+  OR/default family, but v1 intentionally retained AND semantics until this contract bump. V2 now maps both
+  action and blind Pipe shapes to the matching OR family. The dedicated regression uses lifecycle `I` in authored
+  entry rules where selection itself is observed; the older frozen request-trace fixtures keep their established
+  `E` bytes.
+
+  Exact dual-ABI RED is 44/106 and green is 106/106. Eight focused consumers pass 2,027 assertions per ABI;
+  package stays 176/177x2 only at staged help, primary stays 32/65x4, corpus stays 105/105x2, and governance moves
+  only to 69 files / 5 complete + 3 pending / 44 mutations. This proves artifact migration without pre-empting
+  public option removal or composed admission `.5-.6`.
+
+  Final signoff is KM 630/4,622, mdBook, all four doctrines, root consumers 7+5, cursor admission 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 644 seconds. Disk-pressure cleanup removes the generated 11 MiB book,
+  Python bytecode, and caller-created dual-ABI native trees. The roughly 109 MiB reproduction-bundle logs remain
+  because tracked documentation and manifests cite them; deletion is not 100% safe.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.3` — descriptors project normalized facts; they do not own policy):
   Lua's stale descriptor field was isolated to `descriptor_state_to_json(...)`; normal runtime was already
   intrinsic and normalized compiled rules already carried every fact required by the neutral v1 schema. The fix

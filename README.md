@@ -78,7 +78,15 @@ ownership and ordered semantic edges from normalized compiled state; direct/norm
 agree. Seven focused consumers total 1,921 assertions per ABI, while package 176/177, primary 32/65x4, corpus
 105/105x2, and governance 68/5+3/44 remain staged. Generated v2, option removal, and dual-ABI admission remain
 `.4-.6`. KM is 629/4,611; mdBook/four doctrines and canonical root 7+5, cursor 288, primary 65x2, and Phase 0
-1,031/1,031 in 621 seconds pass. The descriptor slice is prepared for commit before `.4` activates.
+1,031/1,031 in 621 seconds pass. Clean descriptor commit `79422858` activates generated-source v2 `.4`
+task-tree-first. That leaf now advances new Lua artifacts to `linkedspec-generated-source-v2` / format 2 without
+widening the ordered `{label, family}` plan. Generated execution derives the exact five seek and five consume
+policies from family, treats compact Pipe as OR/choice, and rejects stale v1 before payload reconstruction with
+portable expected/actual/regeneration fields. Identical 44/106 RED is 106/106 green on PUC Lua and LuaJIT; eight
+focused consumers total 2,027 assertions per ABI, package remains 176/177x2 only at staged help, all four primary
+legs remain 32/65, corpus remains 105/105x2, and governance advances only to 69/5+3/44. Public option removal and
+dual-ABI admission remain `.5-.6`. KM is 630/4,622; mdBook/four doctrines and canonical root 7+5, cursor 288,
+primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass. Safe generated artifacts are removed.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

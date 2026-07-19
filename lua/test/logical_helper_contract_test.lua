@@ -67,7 +67,7 @@ local function generated_identity(id, role)
 end
 
 local function execute_generated(compiled, id)
-  return linkedspec.execute_generated_parser_v1(
+  return linkedspec.execute_generated_parser_v2(
     compiled,
     linkedspec.build_generated_rule_plan(compiled),
     "x",
@@ -76,7 +76,7 @@ local function execute_generated(compiled, id)
 end
 
 local function execute_generated_with_trace(compiled, id)
-  return linkedspec.execute_generated_parser_with_trace_v1(
+  return linkedspec.execute_generated_parser_with_trace_v2(
     compiled,
     linkedspec.build_generated_rule_plan(compiled),
     "x",
@@ -87,7 +87,7 @@ end
 
 local function emitted_module(compiled, id)
   return generated_module(
-    linkedspec.emit_lua_source_v1(compiled, generated_identity(id, "emitted")),
+    linkedspec.emit_lua_source_v2(compiled, generated_identity(id, "emitted")),
     "@logical-helper-" .. id .. "-emitted"
   )
 end

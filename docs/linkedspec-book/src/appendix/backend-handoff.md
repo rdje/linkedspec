@@ -9,11 +9,12 @@
 > topology-checked consumers. Julia is fully admitted with typed normalization,
 > intrinsic execution, cursor descriptor v1, generated-source v2, and no public
 > override. Lua now has typed normalization, intrinsic normal live/loaded/
-> normalized/recursive/traced execution, and cursor descriptor v1 with exact
-> direct/normalized/loaded byte identity on both ABIs. Its generated-source v2,
-> global-option removal, and dual-ABI admission remain dependency-ordered
-> under `.9.1.7.4-.6`; generated-source v1 and explicit outer callers keep their
-> test-locked compatibility behavior until those owners move.
+> normalized/recursive/traced execution, cursor descriptor v1 with exact
+> direct/normalized/loaded byte identity, and generated-source v2 with exact
+> five-seek/five-consume derivation on both ABIs. Global-option removal and
+> dual-ABI admission remain dependency-ordered under `.9.1.7.5-.6`; v1
+> generated artifacts must be regenerated, while explicit outer callers retain
+> their test-locked compatibility behavior until `.5` moves.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,

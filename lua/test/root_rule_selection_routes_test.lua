@@ -175,12 +175,12 @@ with_temp_directory(function(root)
     local identity = "root-routes/" .. route.name .. ".spec"
     local descriptor = linkedspec.to_descriptor_json(compiled)
     check_equal(
-      linkedspec.execute_generated_parser_v1(compiled, plan, "x", identity),
+      linkedspec.execute_generated_parser_v2(compiled, plan, "x", identity),
       route.default_value,
       route.name .. " generated default"
     )
     check_equal(
-      linkedspec.execute_generated_parser_v1(compiled, plan, "x", identity, { top_rule = route.explicit }),
+      linkedspec.execute_generated_parser_v2(compiled, plan, "x", identity, { top_rule = route.explicit }),
       route.explicit_value,
       route.name .. " generated explicit"
     )
@@ -192,7 +192,7 @@ with_temp_directory(function(root)
 
     local emitter, output = trace_emitter()
     check_equal(
-      linkedspec.execute_generated_parser_v1(compiled, plan, "x", identity, { trace = emitter }),
+      linkedspec.execute_generated_parser_v2(compiled, plan, "x", identity, { trace = emitter }),
       route.default_value,
       route.name .. " generated traced value"
     )
@@ -207,7 +207,7 @@ with_temp_directory(function(root)
 
     local explicit_emitter = trace_emitter()
     check_equal(
-      linkedspec.execute_generated_parser_v1(
+      linkedspec.execute_generated_parser_v2(
         compiled,
         plan,
         "x",
@@ -222,9 +222,9 @@ with_temp_directory(function(root)
     check_contains(explicit_event.details, "effective=" .. route.explicit, route.name .. " explicit trace effective")
     check_contains(explicit_event.details, "basis=explicit_selector", route.name .. " explicit trace basis")
 
-    local source = linkedspec.emit_lua_source_v1(compiled, identity)
-    check_contains(source, 'M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"', route.name .. " emitted contract")
-    check_contains(source, "M.LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1", route.name .. " emitted format")
+    local source = linkedspec.emit_lua_source_v2(compiled, identity)
+    check_contains(source, 'M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"', route.name .. " emitted contract")
+    check_contains(source, "M.LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2", route.name .. " emitted format")
     local emitted_path = root .. "/" .. route.name .. "_generated.lua"
     write_file(emitted_path, source)
     local emitted = assert(loadfile(emitted_path))()
@@ -267,7 +267,7 @@ with_temp_directory(function(root)
   local identity = "root-routes/failure.spec"
   local emitter, output = trace_emitter()
   local unknown_ok, unknown = capture(function()
-    return linkedspec.execute_generated_parser_v1(
+    return linkedspec.execute_generated_parser_v2(
       compiled,
       plan,
       "x",
@@ -301,7 +301,7 @@ with_temp_directory(function(root)
 
   local empty = linkedspec.compile_spec(linkedspec.spec_ast.spec_file({ rules = {} }), { validate_source = false })
   local zero_generated_ok, zero_generated = capture(function()
-    return linkedspec.execute_generated_parser_v1(empty, {}, "", identity, { top_rule = "Missing" })
+    return linkedspec.execute_generated_parser_v2(empty, {}, "", identity, { top_rule = "Missing" })
   end)
   check_equal(zero_generated_ok, false, "generated zero rejected")
   check_equal(linkedspec.is_generated_source_error(zero_generated), true, "generated zero type")
@@ -321,7 +321,7 @@ with_temp_directory(function(root)
   local stale_plan = {}
   for index = 1, #plan - 1 do stale_plan[index] = plan[index] end
   local stale_ok, stale = capture(function()
-    return linkedspec.execute_generated_parser_v1(
+    return linkedspec.execute_generated_parser_v2(
       compiled,
       stale_plan,
       "x",

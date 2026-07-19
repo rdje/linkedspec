@@ -374,14 +374,14 @@ Top::|
   )
 
   check_equal(
-    linkedspec.execute_generated_parser_v1(
+    linkedspec.execute_generated_parser_v2(
       and_compiled,
       linkedspec.build_generated_rule_plan(and_compiled),
       "prefix x",
-      "cursor-v1-and.spec"
+      "cursor-v2-and.spec"
     ),
-    "hit",
-    "generated v1 retains seek compatibility"
+    json.null,
+    "generated v2 derives AND consume"
   )
 
   local pipe_compiled = compile_source([[
@@ -397,16 +397,16 @@ Y:
 ]])
   check_equal(runtime_value(pipe_compiled, "xy"), "x", "normal compact pipe is choice")
   local pipe_plan = linkedspec.build_generated_rule_plan(pipe_compiled)
-  check_equal(pipe_plan[1].family, "and_bcode", "generated v1 compact pipe retains AND family")
-  check_same_json(
-    linkedspec.execute_generated_parser_v1(
+  check_equal(pipe_plan[1].family, "or_bcode", "generated v2 compact pipe is OR family")
+  check_equal(
+    linkedspec.execute_generated_parser_v2(
       pipe_compiled,
       pipe_plan,
       "xy",
-      "cursor-v1-pipe.spec"
+      "cursor-v2-pipe.spec"
     ),
-    json.array({ "x", "y" }),
-    "generated v1 compact pipe retains sequence interpretation"
+    "x",
+    "generated v2 compact pipe uses choice interpretation"
   )
 end
 

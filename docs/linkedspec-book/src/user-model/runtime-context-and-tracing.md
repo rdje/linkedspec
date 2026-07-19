@@ -478,7 +478,8 @@ rule-entry details such as `rule=Top entry_regex=0 mode=And family=and cursor_po
 regex decision includes the effective policy. Normalized-AST and loaded engines enter the same owner on PUC Lua
 and LuaJIT; action, blind, direct-call, and recursive children record their independently derived family/policy.
 An explicitly supplied outer policy remains a staged compatibility adapter, so request-trace/CLI removal still
-belongs to `.9.1.7.5`; generated-source-v1 trace retains its versioned legacy family/seek semantics until `.4`.
+belongs to `.9.1.7.5`. Generated-source v2 trace reports the validated family while execution derives that rule's
+seek/consume and choice/sequence behavior; v1 artifacts must be regenerated.
 
 ADR `0025` requires Unicode scalar text encoded as strict UTF-8 while preserving BOM/code points/newlines and
 performing no trimming or normalization. The Perl command now enforces that boundary: invalid spec/input bytes

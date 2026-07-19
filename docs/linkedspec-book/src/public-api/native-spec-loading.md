@@ -177,9 +177,9 @@ final capability admission/handoff `.8.4` is complete at five-backend 80/0/0.
 
 The public Lua module now exposes two source emitters:
 
-- `emit_lua_source_v1(compiled, source_identity)` emits contract-v1 source with the caller's nonempty strict-UTF-8
+- `emit_lua_source_v2(compiled, source_identity)` emits contract-v2/format-2 source with the caller's nonempty strict-UTF-8
   identity;
-- `emit_lua_source(compiled)` is the compatibility form and uses identity `<inline>`.
+- `emit_lua_source(compiled)` is the current-version convenience form and uses identity `<inline>`.
 
 Both return native Lua source text. For equivalent effective compiled state and identity, the returned bytes are
 identical. The emitter reconstructs an effective typed `SpecFile` from source-ordered callable definitions and
@@ -193,10 +193,11 @@ local linkedspec = require("linkedspec")
 
 local parsed = linkedspec.parse_spec([[
 Top::
- /x/ E { return("generated") }
+ I { return("generated") }
+ /x/
 ]])
 local compiled = linkedspec.compile_spec(parsed)
-local source = linkedspec.emit_lua_source_v1(
+local source = linkedspec.emit_lua_source_v2(
   compiled,
   "generated/example.spec"
 )
@@ -208,8 +209,8 @@ local generated = chunk()
 local metadata = linkedspec.generated_source_metadata_to_json(
   generated.metadata()
 )
-assert(metadata.contract_id == "linkedspec-generated-source-v1")
-assert(metadata.format_version == 1)
+assert(metadata.contract_id == "linkedspec-generated-source-v2")
+assert(metadata.format_version == 2)
 assert(metadata.source_identity == "generated/example.spec")
 local plan = generated.plan()
 generated.validate_plan(plan)
@@ -232,14 +233,18 @@ The emitted module exports:
 The module imports `linkedspec` when loaded and delegates execution to the current compiled runtime. It is a
 deterministic generated artifact and independent module boundary, not a bundled runtime or a performance claim.
 Its failures use typed `GeneratedSourceError` values. `generated_source_error_to_json(error)` projects stable
-`type`, `stage`, `code`, `summary`, and `source_identity` fields plus optional `rule_label`, `handler_family`, and
-`detail`. The four stages and seven codes are exported for callers that need exact classification.
+`type`, `stage`, `code`, `summary`, and `source_identity` fields plus optional `rule_label`, `handler_family`,
+`detail`, `expected_contract`, and `actual_contract`. Stage/code constants are exported for callers that need exact
+classification. V1 identities fail at `validate_generated_plan` with
+`generated_source_contract_version_mismatch` before embedded spec-payload decoding and direct callers must
+regenerate the artifact from its `.spec` source.
 
 The ten family names are `default`, `or_acode`, `and_single_acode`, `and_acode_seq`, `and_bcode`, `or_bcode`,
 `rep_acode`, `rep_bcode`, `rep_and_acode`, and `rep_and_bcode`. Validation distinguishes row-count, ordered-label,
 known-family mismatch, and unknown-family drift. Unknown names are rejected before expected-family comparison.
 The validated per-label map is authoritative: every generated root and nested rule reads it to select regex or
-blind dispatch. Ordinary native execution has no map and retains compiled-structure selection.
+blind dispatch and to derive seek for the five default/OR families or consume for the five AND families. No cursor
+field is serialized. Ordinary native execution has no map and retains compiled-structure selection.
 
 Generated traced execution retains the native trace and adds `generated_rule_enter`,
 `generated_family_decision`, and `generated_rule_exit` at low level with source identity, rule, and family. The

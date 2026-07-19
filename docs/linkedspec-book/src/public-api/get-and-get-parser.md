@@ -526,8 +526,8 @@ assert(linkedspec.runtime_parse(engine, "x").value == "first")
 assert(linkedspec.runtime_parse(engine, "x", { top_rule = "Second" }).value == "second")
 ```
 
-The compiled descriptor and generated family plan do not change between calls. Generated source remains
-`linkedspec-generated-source-v1` / format 1, and plan rows remain `{label, family}` only. A low traced call emits
+The compiled descriptor and generated family plan do not change between calls. Current Lua generated source is
+`linkedspec-generated-source-v2` / format 2, and plan rows remain `{label, family}` only. A low traced call emits
 one selection decision for the invocation:
 
 ```text

@@ -44,6 +44,7 @@ evidence_update_2026_07_16_generated_isolation: "LUA-BACKEND-PARITY.8.1.2 closes
 evidence_update_2026_07_16_generated_families: "LUA-BACKEND-PARITY.8.2 closes exact ten-family ordered plans, four rejections, authoritative root/nested dispatch, portable trace, one isolated all-family module, and emitted neutral variadic execution at 176/176 per ABI. Contract-sourced subset .8.3 is active."
 evidence_update_2026_07_16_generated_subset: "LUA-BACKEND-PARITY.8.3 adds Lua's exact test path to the executable contract, consumes the eight names directly after full 105-fixture validation, proves interpreter expected values before emission, and loads eight modules in fresh exact PUC Lua/LuaJIT hosts with ordered values/metadata/plans, fixed user functions, trace identity, and cleanup. Both ABIs pass 177/177; sole census/handoff .8.4 is active."
 evidence_update_2026_07_16_final_admission: "LUA-BACKEND-PARITY.8.4 adds Lua pass evidence to all 16 capability rows, updates exact backend and generated-state checker sets, retires satisfied Lua/variadic exclusions, and closes the backend tree at five-backend 80/0/0 while preserving PUC-primary/LuaJIT-compatibility policy."
+evidence_update_2026_07_19_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.7.4 advances the already admitted generated surface to contract v2/format 2 for rule-local cursor reconstruction, retaining the ten-family plan and exact 8/105 semantic subset."
 reverify: "lua -v; luajit -v; lua -e 'print(pcall(require,\"lpeg\"))'; rg -n 'LUA-BACKEND-PARITY|linkedspec-lua|Generated Lua source' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -58,7 +59,7 @@ separate product or semantics owner.
 The plan inherits every admitted contract: universal source/ActionIR, scalar/array/harray/codeblock values,
 newline-only statement separation with semicolons only between same-line statements, single/double quotes,
 generic final-codeblock equivalence, matching/cursor/capture semantics, staged functions, descriptors,
-diagnostics/trace, native resolution, 105/105 corpus, capability census, and generated-source v1 with ten families
+diagnostics/trace, native resolution, 105/105 corpus, capability census, and generated-source v2 with ten families
 and exact 8/105 admission.
 
 Cross-backend syntax work may validate Lua today through the implemented typed AST,

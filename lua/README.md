@@ -31,11 +31,13 @@ and fields. Normal live, loaded, normalized, recursive, and traced execution now
 each entered rule: AND consumes/sequences and OR/default seeks/chooses, while every child re-enters the same owner
 and derives from its own family. Rule and regex trace records expose the effective family/policy. An explicitly
 supplied outer `parse_mode` remains a staged compatibility adapter until `.9.1.7.5`; generated source remains
-v1/format 1 with its historical seek and handler-family interpretation until `.4`. Outward descriptors now use
+separately versioned. Generated-source v2/format 2 now validates its contract before payload reconstruction,
+keeps only ordered `{label, family}` plan rows, and derives seek/consume plus choice/sequence at every entered
+generated rule. Outward descriptors use
 `linkedspec-rule-local-cursor-v1`: root metadata has no global mode, and every rule projects its authored family,
 derived policy, aggregate ownership, and ordered semantic edge rows from normalized compiled state. Direct,
 normalized, and loaded descriptor bytes agree. This descriptor projection does not remove the separately staged
-outer runtime/CLI option and does not change generated-v1 behavior.
+outer runtime/CLI option; that removal remains `.5`.
 
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
@@ -399,10 +401,9 @@ This returns boolean `true`. `and()` and `not(false, true)` instead raise `helpe
 operand can run, with `code`, `helper_name`, `actual_arity`, and `expected_arity` in the typed diagnostic. The
 expanded neutral consumer passes 359/359 on both ABIs across native, reconstructed, generated-plan direct/traced,
 loaded emitted-module direct/traced, and primary roles with exact generated source attribution. The complete local
-gate remains 177/177 per ABI plus shared CLI 63x2 and corpus
-105/105.
+gate remains at the staged 176/177 per-ABI help boundary; corpus is 105/105 per ABI.
 
-Generated plans expose `execute_generated_parser_v1` and `execute_generated_parser_with_trace_v1`; emitted modules
+Generated plans expose `execute_generated_parser_v2` and `execute_generated_parser_with_trace_v2`; emitted modules
 expose `generated.execute` and `generated.execute_with_trace`. Each pair preserves values, eager effects, typed
 arity failure/source attribution, and direct/trace identity on PUC Lua and LuaJIT. Run
 `bash tools/check_logical_helper_five_backend.sh` for the complete recurring proof, or enable its canonical local-
@@ -789,8 +790,8 @@ and registry-aware contracts. Child regex slots are resolved into structured
 
 ### Deterministic generated Lua modules
 
-`emit_lua_source_v1(compiled, source_identity)` returns native Lua source under
-contract `linkedspec-generated-source-v1`. The compatibility adapter
+`emit_lua_source_v2(compiled, source_identity)` returns native Lua source under
+contract `linkedspec-generated-source-v2` / format 2. The current-version adapter
 `emit_lua_source(compiled)` uses identity `<inline>`. The source is byte-stable
 for equivalent compiled state and identity: it normalizes source-ordered callable
 records and last-definition rule order into one typed `SpecFile`, encodes its
@@ -800,10 +801,11 @@ metadata plus direct and traced result roles.
 ```lua
 local parsed = linkedspec.parse_spec([[
 Top::
- /x/ E { return("generated") }
+ I { return("generated") }
+ /x/
 ]])
 local compiled = linkedspec.compile_spec(parsed)
-local source = linkedspec.emit_lua_source_v1(
+local source = linkedspec.emit_lua_source_v2(
   compiled,
   "generated/example.spec"
 )
@@ -816,8 +818,8 @@ local generated = chunk()
 local metadata = linkedspec.generated_source_metadata_to_json(
   generated.metadata()
 )
-assert(metadata.contract_id == "linkedspec-generated-source-v1")
-assert(metadata.format_version == 1)
+assert(metadata.contract_id == "linkedspec-generated-source-v2")
+assert(metadata.format_version == 2)
 assert(metadata.source_identity == "generated/example.spec")
 assert(generated.execute("x", { top_rule = "Top" }) == "generated")
 
@@ -835,6 +837,11 @@ optimization claim. Emission failures, module compile/load failures, and generat
 execution failures use typed `GeneratedSourceError` values with stable stage, code,
 summary, identity, and optional attribution/detail fields.
 
+The v2 validator runs before embedded `SpecFile` payload decoding. A v1 identity therefore fails at
+`validate_generated_plan` with `generated_source_contract_version_mismatch`, exact `expected_contract` /
+`actual_contract`, and guidance to regenerate from the originating `.spec`; a corrupt v2 payload proceeds to the
+separate `generated_source_compile_failed` boundary. Versioned v1 Lua entrypoints are no longer exported.
+
 The recurring gate persists a valid module, a corrupt-payload variant, and a host
 runner under one unique caller-owned temporary root. It launches fresh PUC Lua and
 LuaJIT processes with explicit `LUA_PATH` and ABI-specific `LUA_CPATH`, locks exact
@@ -843,8 +850,9 @@ the root is absent after success and injected failure.
 
 Generated modules now expose `plan()` as a fresh ordered list of typed rows and
 `validate_plan(actual)`. Exact row-count, label, known-family mismatch, and unknown-
-family drift fail at `validate_generated_plan` before execution. The validated map
-authoritatively selects regex or blind dispatch at every root and nested rule, while
+family drift fail at `validate_generated_plan` before execution. The validated map derives seek for `default`,
+`or_acode`, `or_bcode`, `rep_acode`, and `rep_bcode`, and consume for all five `and_*` families. It
+authoritatively selects choice/sequence and regex/blind dispatch at every root and nested rule, while
 native execution stays unchanged. Traced generated execution adds portable
 `generated_rule_enter`, `generated_family_decision`, and `generated_rule_exit` events
 with source identity, rule, and family beside the native trace. A fresh-process matrix
@@ -854,7 +862,10 @@ arrays from emitted state. Contract-sourced `.8.3` additionally validates the co
 each interpreter value first, and independently loads all eight emitted modules in the
 selected ABI host. Exact results, metadata, plans, fixed user-function execution,
 portable trace identity, empty stderr, and cleanup pass at 177/177 on both ABIs. Final
-capability-census admission `.8.4` is complete at five-backend 80/0/0.
+capability-census admission `.8.4` is complete at five-backend 80/0/0; cursor-v2 rollout proof is separately owned
+by `FUTURE-PARITY-BACKLOG.9.1.7.4`, whose dedicated 106 assertions and eight-consumer 2,027-assertion focused
+total pass on both ABIs. Current complete-package execution remains 176/177 only because `.5` owns the staged
+primary-help change.
 
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`
