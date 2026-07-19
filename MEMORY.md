@@ -10,26 +10,27 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` — exact 15-role Dart root admission, 34 mutations,
-  package 270, primary 65x2, corpus 105, canonical signoff, parent closeout, and cleanup land at clean `31cc78ae`.
-- latest_commit: `31cc78ae` — `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 - admit Dart root selection`
-  (ahead: 218; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 - map Julia root selection`.
-- active_work_unit: Behavior-free Julia root-selection preflight `.9.1.1.2.4.0` is active task-tree-first after the
-  clean Dart commit; root core `.4.1` and routes `.4.2` precede cursor `.9.1.6`, then final admission `.4.3`.
-- next_action: stage/commit signed-off `.4.0`, clear the brief, prove clean, then activate Julia root core `.4.1`
-  task-tree-first before any behavior change.
-- current_proof: Root-selection rollout stays 4 complete / 3 pending. Default-environment Julia shared primary
-  fails 34/65: markerless root selection is one failure; the other 33 are the separately pending Julia cursor
-  migration's help/usage/request-trace projection. Explicit ordinary override, first authored marker, unknown
-  selector, and native seek/consume cases pass. Exact API probes prove marker-required validation blocks an
-  otherwise-correct explicit > first marker > first rule runtime fallback; loaded/normalized/emitted routes
-  re-enter validation; generated direct bypass works; zero/unknown/descriptor/trace identities remain legacy.
-  `Pkg.test()` exposes the known cursor help mismatch at 56/57 in primary arguments; corpus execution passes
-  105/105. Root governance remains 4/7 with 34 mutations. Roadmap 1/7 drift is repaired and mechanically parked
-  for final no-drift `.6`. KM 609/4,390, mdBook, four doctrines, cursor governance, and canonical Perl root 7+5,
-  cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 641 seconds pass. Generated 11 MiB book, Python
-  cache, and consumed temp log are removed; Julia compiled cache is retained for immediate `.4.1` reuse.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` — Julia marker-optional core resolution, portable
+  failures, descriptor/strict identity, neutral 79, primary 32/65x2, corpus 105, and canonical signoff are ready
+  for the prepared commit; composed routes and rollout remain unclaimed.
+- latest_commit: `a10bec0d` — `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 - map Julia root selection`
+  (ahead: 219; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 - implement Julia root resolution`.
+- active_work_unit: Julia root core/descriptor `.9.1.1.2.4.1` is implemented, documented, fully verified, and
+  cleaned; only its prepared commit, brief clearing, and clean-tree proof remain. Composed routes `.4.2`, cursor
+  `.9.1.6`, and final admission `.4.3` stay dependency-ordered and unclaimed.
+- next_action: run the final staged/doctrine/whitespace review, commit `.4.1`, clear the brief, prove clean, and
+  only then activate composed routes `.4.2` task-tree-first.
+- current_proof: Root-selection rollout stays 4 complete / 3 pending. Julia now accepts markerless one-or-more-rule
+  source and one compiled resolver owns zero-first then explicit > first marker > first rule selection before
+  context/user code. Portable zero/unknown failures, strict authored-edge no-drift, and immutable descriptor root
+  identity pass neutral 79/79; loader 82/82 passes after replacing an obsolete markerless negative fixture.
+  Shared primary is exactly 32/65 in default and POSIX environments; all 33 failures are the pending cursor help/
+  usage/request-trace projection. `Pkg.test()` reaches only the known 56/57 cursor help mismatch; corpus is
+  105/105 and root governance is 4/7 with 34 mutations. KM 611/4,408, public/book/live synchronization, mdBook,
+  memory/task/all four doctrines, whitespace, and canonical CI pass; Phase 0 is 1,031/1,031 in 619 seconds.
+  Verification also proves a compiled-only temp Julia depot must explicitly layer the source-bearing user depot;
+  trailing `:` adds system depots, not the user depot here.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0046`, neutral/Perl/Rust/Dart root precedent, and exact Julia preflight seams/gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -41,7 +42,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: Julia `.4.0` behavior-free task/task-index/live/memory activation; no
-  Julia behavior, contract, fixture, test, capability, or rollout state changed. Exact default/POSIX primary,
-  package/corpus, docs/KM, canonical, and cleanup results are consumed; commit remains. No background job runs.
-  Parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: fully verified Julia `.4.1` code/tests/docs await their atomic commit;
+  no background job runs. Generated book/Python cache cleanup is complete; parked ignored work is untouched.

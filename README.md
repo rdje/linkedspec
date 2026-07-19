@@ -20,13 +20,15 @@ and request-trace selection. Rust and Dart each have one omission-sensitive 15-r
 65x2 command proof. Dart core/route leaves `.9.1.1.2.3.1-.2` accept markerless one-or-more-rule sources, resolve
 explicit > first marker > first rule once before user code, preserve descriptor and generated-v2 identity, record
 requested/effective/basis at low trace, and retain portable failures plus stale-contract-first ordering. Admission
-leaf `.3.3` topology-locks every neutral and real Dart projection exactly once and closes the Dart parent. Julia/
-Lua fallbacks remain blocked by validation, and root no-drift leg `.6` remains separately owned. Julia preflight
-`.9.1.1.2.4.0` measures 31/65 shared primary cases passing in both default and POSIX environments: the one
-root-owned failure is markerless compilation, while 22 help/usage and 11 request-trace failures belong to the
-separately pending Julia cursor migration. Native bypass proves Julia already orders explicit selector > first
-marker > first rule. Core `.4.1` and composed routes `.4.2` therefore remain root-only; exact 65x2 admission `.4.3`
-waits for cursor leaf `.9.1.6` instead of absorbing unrelated option/trace work.
+leaf `.3.3` topology-locks every neutral and real Dart projection exactly once and closes the Dart parent. Julia
+core `.9.1.1.2.4.1` now accepts markerless one-or-more-rule sources, resolves explicit selector > first marker >
+first rule once from compiled state before user code, returns portable zero/unknown failures, preserves strict
+authored-edge analysis, and publishes immutable descriptor identity. Its focused neutral consumer passes 79
+assertions, shared primary improves from 31/65 to exactly 32/65 in both option environments, and corpus remains
+105/105; the identical 33 remaining help/usage/request-trace failures belong to cursor migration `.9.1.6`.
+Composed Julia routes `.4.2` remain root-owned and precede that cursor leaf; exact 65x2 admission `.4.3` follows
+without absorbing unrelated option/trace work. Lua fallback remains blocked by validation, and root no-drift leg
+`.6` remains separately owned, so rollout stays 4/7.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

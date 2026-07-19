@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` — make compiled state the only Julia entry-selection owner):
+  Julia's preflight fallback loop already knew how to choose the first marker and then row zero, but explicit
+  selection bypassed it and went straight to rule execution. Keeping those branches split made failure ordering
+  wrong: zero rules plus an explicit selector reached `rule_lookup`, and an unknown selector was indistinguishable
+  from a missing dispatched child. `resolve_entry_rule(compiled, selector)` now checks structural emptiness first
+  and owns all three successful bases plus the two portable failure identities. Runtime wraps only that typed
+  selection failure before context creation; `_execute_runtime_rule!` still owns later child lookup.
+
+  The parser/validator split matters. Empty and comment-only text is a recognizable source envelope but not a
+  valid executable spec. Returning `SpecFile(rules=[])` lets validation report stable
+  `no_rules_defined` / `validate_spec`; arbitrary non-rule text continues to fail parsing. Changing markerless
+  validity also invalidates tests that used a lone ordinary rule as a generic validation failure. The native
+  loader fixture now uses duplicate labels, preserving its validation-stage purpose without encoding obsolete
+  root semantics.
+
+  Selection must not mutate identity. Descriptor `definition_order` and per-rule `is_top` are compared before and
+  after explicit resolution and execution, while strict rows prove neither an explicit selector nor a marker is a
+  reference/exemption. The descriptor adds only the root contract id; its legacy cursor `parse_mode` remains owned
+  by `.9.1.6`. Likewise, this slice does not claim loaded/normalized/generated/emitted route composition or low
+  selection-basis trace. Those are `.4.2`, followed by cursor migration and topology admission.
+
+  The exact proof boundary moved by one case and no more: neutral core 79/79, shared primary 32/65 in default and
+  POSIX environments, package progression through the unchanged cursor-owned 56/57 help mismatch, corpus 105/105,
+  and root governance 4/7 with 34 mutations. The remaining 33 primary failures are byte-identical cursor work.
+
+  Artifact cleanup exposed a separate reproducibility fact. Retaining only
+  `/private/tmp/linkedspec-julia-depot/compiled` preserves regenerable bytecode, not package sources. A lone temp
+  depot therefore reports JSON3 missing. In this Julia 1.12.6/Homebrew environment, a trailing empty depot entry
+  adds system depots but not `$HOME/.julia`; direct offline verification must explicitly compose the
+  writable temp depot first and the source-bearing user depot second. Never classify package-source directories
+  as compiled-cache artifacts.
+
+  Final signoff passes Knowledge Map 611/4,408, mdBook, memory/task/all four doctrines, whitespace, and canonical
+  local CI: reference root 7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 619 seconds.
+  Generated mdBook and Python cache artifacts are removed; Julia compiled state remains available for the
+  immediate composed-route leaf.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` — root and cursor failures must remain separately owned):
   Julia's raw 31/65 shared-primary result initially looks like a large root-selection gap, but case identity and
   exact bytes prove two independent mechanisms. Twenty-two help/usage cases expose the still-accepted global

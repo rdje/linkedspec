@@ -152,10 +152,6 @@ function _parse_spec(source::String)
         index += 1
     end
 
-    if isempty(rules)
-        throw(SpecParseException(1, "no rule definitions found in spec"))
-    end
-
     return SpecFile(rules = rules)
 end
 

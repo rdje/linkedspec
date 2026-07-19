@@ -142,7 +142,7 @@ end
 @testset "Native spec structured pipeline failures" begin
     mktempdir() do scratch
         write(joinpath(scratch, "parse.spec"), "not a spec\n")
-        write(joinpath(scratch, "validation.spec"), "Only:\n /x/\n")
+        write(joinpath(scratch, "validation.spec"), "Only::\n /x/\n\nOnly:\n /y/\n")
         options = SpecLoadOptions(scratch)
 
         parse_failure = _native_spec_pipeline_failure(

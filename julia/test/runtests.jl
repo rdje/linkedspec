@@ -9,6 +9,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
     Dict{String,Any},
 )
 
+include("root_rule_selection_core_test.jl")
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
 include("logical_helper_contract_test.jl")
@@ -3510,18 +3511,20 @@ Top::
     end
     @test missing_rule_error isa RuntimeInterpreterException
     @test to_json(missing_rule_error) == Dict{String,Any}(
-        "message" => "rule 'Missing' is not compiled",
+        "message" => "entry rule 'Missing' is not defined",
         "diagnostic" => Dict{String,Any}(
             "type" => "runtime_parser",
-            "stage" => "rule_lookup",
+            "stage" => "select_entry_rule",
             "owner_stage" => "julia_runtime",
-            "summary" => "Julia runtime rule lookup failed",
-            "detail" => "rule 'Missing' is not compiled",
+            "summary" => "Julia runtime entry-rule selection failed",
+            "detail" => "entry rule 'Missing' is not defined",
             "spec_name" => "diagnostic-example",
             "spec_path" => "/specs/diagnostic-example.spec",
             "top_rule" => "Missing",
+            "entry_rule" => "Missing",
             "rule_label" => "Missing",
             "handler_source_label" => "julia_runtime:rule:Missing",
+            "code" => "entry_rule_not_found",
         ),
     )
 
@@ -4075,8 +4078,8 @@ end
     valid = parse_spec("Top::\n /a/ -> Child\n\nChild:\n /b/")
     @test validate_spec(valid) === nothing
 
-    no_top = parse_spec("Rule:\n /a/")
-    @test _throws_validation_message(() -> validate_spec(no_top), "no top rule")
+    markerless = parse_spec("Rule:\n /a/")
+    @test validate_spec(markerless) === nothing
 
     duplicate = parse_spec("Top::\n /a/\n\nTop:\n /b/")
     @test _throws_validation_message(() -> validate_spec(duplicate), "duplicate rule label")

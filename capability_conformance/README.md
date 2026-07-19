@@ -72,8 +72,11 @@ neutral, native, loaded/reconstructed, generated/emitted, descriptor, diagnostic
 once; the Rust primary command passes all 65 cases in default and POSIX option environments. Dart now has the same
 exact 15-role admission topology across loaded/normalized/generated/emitted/trace/diagnostic paths. Its package-
 wide driver passes 270 tests, the shared command passes 65/65 in both option environments, and the corpus passes
-105/105. Julia, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay
-explicit in the inventory until their owning leaves land.
+105/105. Julia core `.4.1` now consumes every neutral selection/failure/strict row, accepts markerless
+one-or-more-rule sources, reports portable zero/unknown failures, and publishes the descriptor contract without
+advancing rollout; native/root-primary proof is exactly 32/65 twice with only the 33 cursor-owned cases remaining.
+Julia composed routes/admission, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend
+differences stay explicit in the inventory until their owning leaves land.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

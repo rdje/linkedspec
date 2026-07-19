@@ -13,12 +13,15 @@ identity, and structured pipeline exceptions now also live in the native module 
 status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the complete native,
 generated, primary, and recurring `linkedspec-logical-helper-v1` proof; its public no-drift admission is closed.
 
-Current global rollout is intentionally ahead of this historical local milestone. Root-selection preflight
-`FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` measures Julia at 31/65 shared primary cases in both default and POSIX
-environments. One failure is root-owned markerless validation; 33 are the separately pending cursor migration's
-legacy global-option help/usage/request-trace projection. The package gate currently exposes the same cursor
-boundary at 56/57 in its primary-arguments testset, while standalone corpus execution remains 105/105. Root core
-and routes `.4.1-.2` precede cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows it.
+Current global rollout is intentionally ahead of this historical local milestone. Root-selection core
+`FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` accepts one-or-more-rule markerless sources and resolves an explicit selector,
+the first authored marker, or the first authored rule from one compiled-state owner before runtime context or user
+code. Portable zero/unknown failures, strict authored-edge behavior, and immutable descriptor root identity are
+locked by a neutral-consuming focused suite. Shared primary now passes exactly 32/65 cases in both default and
+POSIX environments; the identical 33 remaining failures are the separately pending cursor migration's legacy
+global-option help/usage/request-trace projection. The package gate reaches the same cursor boundary at 56/57 in
+its primary-arguments testset, while standalone corpus execution remains 105/105. Composed root routes `.4.2`
+precede cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows it, so rollout remains 4/7.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -58,9 +61,9 @@ core gate includes it only when explicitly requested:
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
-At the active preflight boundary this complete driver is expected to stop at the pending cursor-owned help
-mismatch; do not report it green. Use the exact shared runner to classify 31/65 twice and the standalone corpus
-command to verify 105/105 until root core/routes and cursor migration converge.
+At the active core boundary this complete driver is expected to stop at the pending cursor-owned help mismatch;
+do not report it green. Use the exact shared runner to classify 32/65 twice and the standalone corpus command to
+verify 105/105 until composed root routes and cursor migration converge.
 
 Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
 `LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot. Without a depot override, the script
@@ -68,6 +71,18 @@ respects `JULIA_DEPOT_PATH` or uses a platform temp directory outside the reposi
 The focused gate prints the resolved depot. Under disk pressure, remove only that depot's regenerable `compiled/`
 subdirectory after confirming no Julia process is using it; preserve packages, registries, environments, and
 artifacts.
+
+A temporary depot containing only regenerated `compiled/` cache entries does not contain package source. For a
+direct offline command after such cleanup, put the writable temporary depot first and the existing package depot
+second:
+
+```bash
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
+  julia --project=julia -e 'import Pkg; Pkg.test()'
+```
+
+The first entry owns new cache writes; the second supplies already-installed package sources. Do not use a lone
+compiled-only depot and do not delete the source-bearing package depot as cache cleanup.
 
 Direct commands from the repository root:
 

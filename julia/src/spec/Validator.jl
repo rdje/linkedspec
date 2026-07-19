@@ -1,8 +1,35 @@
-struct SpecValidationException <: Exception
+struct SpecPortableDiagnostic
+    code::String
+    stage::String
     message::String
+    fields::Dict{String,Any}
 end
 
+function SpecPortableDiagnostic(; code, stage, message, fields = Dict{String,Any}())
+    return SpecPortableDiagnostic(
+        String(code),
+        String(stage),
+        String(message),
+        Dict{String,Any}(String(key) => value for (key, value) in fields),
+    )
+end
+
+struct SpecValidationException <: Exception
+    message::String
+    diagnostic::Union{Nothing,SpecPortableDiagnostic}
+end
+
+SpecValidationException(message::AbstractString; diagnostic = nothing) =
+    SpecValidationException(String(message), diagnostic)
+
 Base.showerror(io::IO, error::SpecValidationException) = print(io, error.message)
+
+to_json(diagnostic::SpecPortableDiagnostic) = Dict{String,Any}(
+    "code" => diagnostic.code,
+    "stage" => diagnostic.stage,
+    "message" => diagnostic.message,
+    "fields" => diagnostic.fields,
+)
 
 function validate_spec(
     spec::SpecFile;
@@ -21,8 +48,8 @@ function validate_spec(
     )
     exit_details = "status=error error=unknown"
     try
-        _trace_validation_check!(trace, "top_rule_exists") do
-            _check_top_rule_exists(spec)
+        _trace_validation_check!(trace, "at_least_one_rule") do
+            _check_at_least_one_rule(spec)
         end
         _trace_validation_check!(trace, "duplicate_rule_labels") do
             _check_duplicate_rule_labels(spec)
@@ -72,7 +99,7 @@ function validate_spec(
 end
 
 function _validate_spec(spec::SpecFile, strict_syntax::Bool)
-    _check_top_rule_exists(spec)
+    _check_at_least_one_rule(spec)
     _check_duplicate_rule_labels(spec)
     _check_duplicate_function_names(spec)
     _check_function_registry(spec)
@@ -110,11 +137,16 @@ function _trace_validation_check!(operation::Function, trace::LinkedSpecTraceEmi
     end
 end
 
-function _check_top_rule_exists(spec::SpecFile)
-    if any(rule -> rule.header.is_top, spec.rules)
+function _check_at_least_one_rule(spec::SpecFile)
+    if !isempty(spec.rules)
         return nothing
     end
-    throw(SpecValidationException("no top rule found: at least one rule must use '::' (double colon)"))
+    diagnostic = SpecPortableDiagnostic(
+        code = "no_rules_defined",
+        stage = "validate_spec",
+        message = "spec does not define any rules",
+    )
+    throw(SpecValidationException(diagnostic.message; diagnostic = diagnostic))
 end
 
 function _check_duplicate_rule_labels(spec::SpecFile)

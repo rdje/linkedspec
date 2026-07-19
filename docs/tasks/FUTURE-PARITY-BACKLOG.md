@@ -3821,7 +3821,7 @@ before implementation.
   Children: `.9.1.1.2.4.0`, `.9.1.1.2.4.1`, `.9.1.1.2.4.2`, `.9.1.1.2.4.3`
   Acceptance: Align parser/validation, runtime, reconstructed/generated routes, descriptors/traces, strict checks,
     and primary CLI with the unchanged neutral contract and reference bytes.
-  Verification: `active; behavior-free preflight .0 owns the exact seam map`
+  Verification: `active; preflight .0 is committed and core/descriptor .1 is active task-tree-first`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0`
@@ -3876,15 +3876,42 @@ before implementation.
   inclusion in the recurring checker.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement Julia marker-optional validation, ordered native selection, portable failures, and descriptor identity.
   Dependencies: `.9.1.1.2.4.0`
   Acceptance: Accept one-or-more-rule markerless sources; centralize explicit > first marker > first rule selection
     before user code; preserve authored markers and strict-reference semantics; publish the root contract and
     portable zero/unknown failures; pass native plus root-owned primary proof while preserving the exact
     cursor-owned baseline failure set; do not claim composed route or topology admission.
-  Verification: `pending`
+  Verification: **PASS 2026-07-18.** Neutral core 79/79, loader 82/82, root governance 4/7 plus 34 mutations,
+    exact shared primary 32/65 in default and POSIX environments, package progression through the frozen
+    cursor-owned 56/57 help boundary, and corpus 105/105 pass. KM is 611/4,408; memory/task/all four doctrines,
+    mdBook, and whitespace pass. Canonical CI passes Perl root 7+5, cursor admission 288, reference primary 65x2,
+    and Phase 0 1,031/1,031 in 619 seconds. Generated book/Python-cache cleanup passes; composed routes and rollout
+    are unchanged.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 - implement Julia root resolution`
+
+  #### Acceptance checklist
+
+  - [x] **RETRIEVE / CORE OWNER** — Re-read the Julia preflight card, neutral selection/failure/strict rows,
+    admitted Perl/Rust/Dart core precedents, current parser/validator/compiler/runtime/descriptor owners, and
+    focused gate seams before editing behavior.
+  - [x] **PARSER / ENVELOPE VALIDATION** — Preserve empty/comment-only source as a zero-rule envelope; reject
+    malformed non-rule text in parsing; make validation require one-or-more rules rather than an authored marker.
+  - [x] **ONE ORDERED RESOLVER** — Add one compiled-state resolver that checks zero structure first, then exact
+    explicit selector, first authored marker, and first authored rule; route native default/explicit execution
+    through it before runtime context or user code.
+  - [x] **PORTABLE FAILURES** — Return exact `no_rules_defined` / `validate_spec` and `entry_rule_not_found` /
+    `select_entry_rule` identities with requested selector attribution; preserve unrelated runtime diagnostics.
+  - [x] **STRICT / DESCRIPTOR IDENTITY** — Keep strict-unused authored-edge-only; publish
+    `entry_rule_contract=linkedspec-root-rule-selection-v1`; preserve definition order and immutable per-rule
+    `is_top`; do not absorb cursor descriptor migration.
+  - [x] **FOCUSED / CURRENT JULIA PROOF** — Add one neutral-consuming core suite; pass parser/validator/runtime/
+    descriptor owners, marker/markerless/explicit/zero/unknown/strict cases, corpus 105, root governance, and exact
+    shared primary 32/65 twice with only the frozen 33 cursor failures remaining.
+  - [x] **LOCKSTEP / CANONICAL / COMMIT** — Synchronize capability/task/live/book/KM/current docs without route or
+    rollout promotion; pass memory/task/doctrines/mdBook/whitespace and canonical CI; clean safe artifacts, commit
+    `.1`, clear the brief, prove clean, and only then activate composed routes `.2` task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2`
   Status: `pending`
@@ -7509,9 +7536,9 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 212.2.3.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.1` | `done` | Marker-optional core selection, portable failures, strict no-drift, descriptor identity, package 266, corpus 105, primary 65x2, and canonical signoff pass. |
 | 212.2.3.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2` | `done` | Loaded/normalized/generated/emitted/trace/diagnostic routes, Dart-local/canonical proof, public/KM lockstep, and cleanup pass without rollout promotion. |
 | 212.2.3.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `done` | Exact 15-role topology, driver/case locks, 34 mutations, package 270, primary 65x2, corpus 105, canonical proof, and 4/7 promotion pass. |
-| 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `active` | Julia root selection is split into behavior-free preflight, core/descriptor, routes, and final admission; `.0` is active task-tree-first. |
+| 212.2.4 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4` | `active` | Julia root selection is split into behavior-free preflight, signed-off core/descriptor, routes, and final admission; `.2` is next after the clean `.1` commit. |
 | 212.2.4.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` | `done` | Exact 31/65x2 seam map, root/cursor dependency split, corpus 105, 34 mutations, canonical proof, and roadmap repair land without behavior. |
-| 212.2.4.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` | `pending` | Implement marker-optional Julia core resolution, failures, strict no-drift, descriptor, and native/primary proof. |
+| 212.2.4.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` | `done` | Marker-optional Julia core resolution, failures, strict no-drift, descriptor, neutral 79, primary 32/65x2, corpus 105, and canonical signoff pass without route/admission promotion. |
 | 212.2.4.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | `pending` | Converge Julia loaded/normalized/generated/emitted/trace/diagnostic routes without promotion. |
 | 212.2.4.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `pending` | After Julia cursor `.9.1.6`, topology-check Julia, pass shared primary 65x2, promote only Julia, and close parent `.4`. |
 | 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `pending` | Implement exact PUC Lua/LuaJIT selection across native/generated/primary routes. |
@@ -8592,6 +8619,19 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Julia root core `.4.1` completes canonical signoff: KM 611/4,408, mdBook, memory/task/all four
+  doctrines, whitespace, root governance 34, Perl root 7+5, cursor admission 288, reference primary 65x2, and
+  Phase 0 1,031/1,031 in 619 seconds pass. Cleanup removes generated book and Python cache. The prepared `.4.1`
+  commit is the only boundary before composed routes `.4.2` activate; rollout remains 4/7.
+- `2026-07-18`: Julia root core `.4.1` implements marker-optional one-or-more-rule validation, empty/comment-only
+  parser envelopes, one structure-first compiled resolver, portable zero/unknown identities before context/user
+  code, strict authored-edge no-drift, and immutable descriptor root identity. Neutral core 79, loader 82, exact
+  primary 32/65 default/POSIX with only 33 cursor failures, corpus 105, and root governance 4/7 plus 34 mutations
+  pass. The mdBook/current docs and two durable KM facts now distinguish core implementation from pending routes/
+  cursor/admission; canonical signoff and cleanup subsequently pass before the commit boundary.
+- `2026-07-18`: Clean commit `a10bec0d` lands Julia root preflight `.4.0`; tree and brief are clean at ahead 219.
+  Core/descriptor `.4.1` activates task-tree-first with exact parser-envelope, one-resolver, portable-failure,
+  strict/descriptor, 32/65x2 current-boundary, canonical, cleanup, and commit acceptance before behavior changes.
 - `2026-07-18`: Julia root preflight measures 31/65 shared primary cases passing identically in default/POSIX:
   one markerless root failure plus 33 cursor-owned help/usage/request-trace failures. Native bypass already orders
   explicit > first marker > first rule; validation blocks loaded/normalized/emitted fallback and legacy failure/

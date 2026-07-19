@@ -462,10 +462,10 @@ and Dart
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
 markerless, explicit, unknown, and request-trace outcomes. Rust and Dart admission each topology-check one 15-role
-consumer across the neutral rows and every real backend route family. Julia/Lua validation
-still blocks fallback. Use
-an explicit selector and retain a marker when current multi-backend execution must be independent of those staged
-differences.
+consumer across the neutral rows and every real backend route family. Julia core/native/primary execution now
+implements the same order, while its composed routes remain `.4.2`; Lua validation still blocks fallback. Use an
+explicit selector and retain a marker when current composed multi-backend execution must be independent of those
+staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -488,8 +488,8 @@ Later:
 ```
 
 With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, and Dart native,
-loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted. Julia and
-Lua remain pending, so it is not yet a
+loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted. Julia
+core/native/primary execution also accepts it; Julia composed routes and Lua remain pending, so it is not yet a
 portable five-backend source:
 
 ```text
@@ -500,27 +500,36 @@ Second:
  /second/
 ```
 
-### Julia pre-implementation boundary
+### Julia core boundary
 
-Julia already retains enough authored state to implement the same rule. Its parser preserves definition order and
-records each `Rule::` as immutable `is_top` metadata. Given a normally valid marked source, an explicit ordinary
-rule wins over one or more markers; without an explicit selector, the first marker wins. A diagnostic-only compile
-with validation bypassed also proves the existing runtime falls back to the first rule in markerless state.
+Julia's parser preserves definition order and records each `Rule::` as immutable `is_top` metadata. Validation now
+requires one or more rules, not a marker. `resolve_entry_rule(compiled, selector)` is the single compiled-state
+owner: it checks zero structure first, then exact explicit selection, the first authored marker, and finally the
+first authored rule. Native execution calls it before creating runtime context or entering user code.
 
-Normal Julia source must still contain a marker today. `validate_spec(...)`, loaded compilation, normalized-state
-compilation, and emitted-source reconstruction all stop at:
+For example, omitted selection returns `First`, while the explicit call returns `Second`:
 
-```text
-no top rule found: at least one rule must use '::' (double colon)
+```julia
+using LinkedSpecJulia
+
+compiled = compile_spec(parse_spec("First:\n /x/\n\nSecond:\n /x/\n"))
+resolve_entry_rule(compiled).rule.label              # "First"
+resolve_entry_rule(compiled, "Second").rule.label   # "Second"
 ```
 
-The exact shared primary boundary is 31/65 twice. The root-owned markerless case is one failure. The remaining 33
-are not root selection: 22 help/usage cases still expose the pending global `--parse-mode` removal, and 11
-medium-or-higher request traces still include `parse_mode=seek`. Root core `.9.1.1.2.4.1` and route convergence
-`.4.2` remain isolated from that cursor work. Exact 65x2 topology admission `.4.3` waits for cursor migration
-`.9.1.6`, preventing either semantic program from hiding the other's failures.
+Empty/comment-only source remains a parser envelope so validation can return `no_rules_defined` at
+`validate_spec`; malformed non-rule text is still a syntax error. An unknown explicit selector returns
+`entry_rule_not_found` at `select_entry_rule` with `entry_rule=Requested`. The descriptor publishes
+`entry_rule_contract=linkedspec-root-rule-selection-v1` while selection leaves definition order and every authored
+`is_top` bit unchanged. Strict-unused still derives only from authored rule edges.
 
-Until those leaves land, use a marker for Julia and Lua portability even when supplying `--top-rule`:
+The exact shared primary boundary is now 32/65 twice. All 33 remaining failures are not root selection: 22
+help/usage cases still expose the pending global `--parse-mode` removal, and 11 medium-or-higher request traces
+still include `parse_mode=seek`. Route convergence `.4.2` remains isolated from cursor work. Exact 65x2 topology
+admission `.4.3` waits for cursor migration `.9.1.6`, preventing either semantic program from hiding the other's
+failures.
+
+Until those leaves land, use a marker for composed Julia and Lua portability even when supplying `--top-rule`:
 
 ```text
 FallbackMarker::
@@ -531,7 +540,8 @@ RequestedOrdinary:
 ```
 
 `--top-rule RequestedOrdinary` selects the ordinary rule on current Julia and has priority over
-`FallbackMarker::`; omission selects `FallbackMarker`.
+`FallbackMarker::`; omission selects `FallbackMarker`. A markerless Julia native call may omit the option and
+select its first declared rule.
 
 ## Removed `parse_mode`
 

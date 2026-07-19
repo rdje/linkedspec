@@ -1,5 +1,42 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 — implement Julia root resolution
+
+Julia now accepts valid one-or-more-rule `.spec` sources without requiring an authored `Rule::` marker.
+`parse_spec(...)` preserves empty and comment-only source as an empty `SpecFile` envelope so validation, rather
+than parsing, owns the portable zero-rule outcome; malformed non-rule text remains a parse error. Validation
+replaces the old marker-presence check with structural rule-count validation and returns
+`no_rules_defined` / `validate_spec` through a typed `SpecPortableDiagnostic`.
+
+`resolve_entry_rule(...)` is the single compiled-state selection owner. It checks empty structure first, then an
+exact explicit selector, the first authored `is_top` marker, and the first compiled rule. Native runtime calls it
+before constructing execution context or entering lifecycle/user actions. Unknown explicit selection now returns
+`entry_rule_not_found` / `select_entry_rule` with requested `entry_rule`; zero rules win over an explicit selector
+and retain an empty field set. Child dispatch keeps its unrelated `rule_lookup` diagnostic. The outward descriptor
+publishes `entry_rule_contract = linkedspec-root-rule-selection-v1` while definition order and every authored
+`is_top` bit remain immutable. Strict-unused remains the original authored-edge graph analysis.
+
+`julia/test/root_rule_selection_core_test.jl` consumes all eight neutral selections, three failures, and three
+strict rows and adds parser/validation, native precedence, pre-user-code failure, and descriptor-identity proof.
+It passes 79/79. The markerless source unlocks the one root-owned primary case: the full shared runner now passes
+exactly 32/65 in both default and POSIX environments, leaving the identical 22 help/usage plus 11 request-trace
+cursor failures. `Pkg.test()` passes every reached group and stops only at the frozen 56/57 cursor-owned help
+boundary; the obsolete loader negative fixture now uses duplicate labels instead of newly valid markerless source.
+Standalone corpus execution remains 105/105, and root governance remains 4 complete / 3 pending with all 34
+mutations rejected. Loaded/normalized/generated/emitted/trace composition stays `.4.2`; cursor `.9.1.6` and exact
+65x2 admission `.4.3` remain dependency-ordered.
+
+Verification also established an artifact-cleanup boundary: a temporary Julia depot containing only `compiled/`
+cache cannot resolve package source. Direct offline commands must layer that writable depot before an explicit
+source-bearing depot; a trailing empty `JULIA_DEPOT_PATH` entry expands system depots, not the user depot in this
+Homebrew Julia environment. The Julia README, mdBook, and a durable Knowledge Map card now preserve that fact.
+
+Verification passes the 79-assertion neutral core, 82 loader assertions, exact shared primary 32/65 twice,
+standalone corpus 105/105, root governance 4/7 with 34 rejected mutations, Knowledge Map 611/4,408, mdBook,
+memory/task/all four doctrines, and whitespace. Canonical local CI passes reference root 7+5, cursor admission
+288, reference primary 65x2, and Phase 0 1,031/1,031 in 619 seconds. Generated book and Python cache artifacts
+are removed before commit.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 — map Julia root selection
 
 The behavior-free Julia preflight freezes the complete root-selection seam before implementation. Exact shared

@@ -7,6 +7,7 @@ struct RuntimeDiagnostic
     spec_name::Union{Nothing,String}
     spec_path::Union{Nothing,String}
     top_rule::Union{Nothing,String}
+    entry_rule::Union{Nothing,String}
     rule_label::Union{Nothing,String}
     handler_source_label::Union{Nothing,String}
     code::Union{Nothing,String}
@@ -24,6 +25,7 @@ function RuntimeDiagnostic(;
     spec_name = nothing,
     spec_path = nothing,
     top_rule = nothing,
+    entry_rule = nothing,
     rule_label = nothing,
     handler_source_label = nothing,
     code = nothing,
@@ -41,6 +43,7 @@ function RuntimeDiagnostic(;
         optional_string(spec_name),
         optional_string(spec_path),
         optional_string(top_rule),
+        optional_string(entry_rule),
         optional_string(rule_label),
         optional_string(handler_source_label),
         optional_string(code),
@@ -317,7 +320,27 @@ function runtime_parse(
     _generated_families = nothing,
     _generated_source_identity = nothing,
 )
-    label = top_rule === nothing ? _default_runtime_top_rule(engine) : String(top_rule)
+    selection = try
+        resolve_entry_rule(engine.compiled_spec, top_rule)
+    catch error
+        if error isa EntryRuleSelectionException
+            throw(RuntimeInterpreterException(
+                error.message;
+                diagnostic = _runtime_diagnostic(
+                    engine;
+                    stage = error.stage,
+                    summary = "Julia runtime entry-rule selection failed",
+                    detail = error.message,
+                    top_rule = error.entry_rule,
+                    entry_rule = error.entry_rule,
+                    rule_label = error.entry_rule,
+                    code = error.code,
+                ),
+            ))
+        end
+        rethrow()
+    end
+    label = selection.rule.label
     context = _RuntimeExecutionContext(
         input,
         label,
@@ -427,29 +450,6 @@ function runtime_execute_with_trace(
         stdout_io = stdout_io,
         diagnostic_output_sink = diagnostic_output_sink,
     )
-end
-
-function _default_runtime_top_rule(engine::LinkedSpecRuntimeEngine)
-    compiled = engine.compiled_spec
-    for label in compiled.compiled_rule_order
-        rule = compiled.rules_by_label[label]
-        if rule.header.is_top
-            return label
-        end
-    end
-    if isempty(compiled.compiled_rule_order)
-        detail = "compiled spec does not contain any rules"
-        throw(RuntimeInterpreterException(
-            detail;
-            diagnostic = _runtime_diagnostic(
-                engine;
-                stage = "top_rule_selection",
-                summary = "Julia runtime top-rule selection failed",
-                detail = detail,
-            ),
-        ))
-    end
-    return first(compiled.compiled_rule_order)
 end
 
 function _execute_runtime_rule!(
@@ -5794,6 +5794,7 @@ function _runtime_diagnostic(
     summary,
     detail,
     top_rule = nothing,
+    entry_rule = nothing,
     rule_label = nothing,
     handler_source_label = nothing,
     code = nothing,
@@ -5811,6 +5812,7 @@ function _runtime_diagnostic(
         spec_name = engine.spec_name,
         spec_path = engine.spec_path,
         top_rule = top_rule,
+        entry_rule = entry_rule,
         rule_label = rule_label,
         handler_source_label = handler_source_label === nothing ?
             (effective_rule === nothing ? "julia_runtime" : "julia_runtime:rule:$effective_rule") :
@@ -5862,6 +5864,7 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "spec_name" => diagnostic.spec_name,
         "spec_path" => diagnostic.spec_path,
         "top_rule" => diagnostic.top_rule,
+        "entry_rule" => diagnostic.entry_rule,
         "rule_label" => diagnostic.rule_label,
         "handler_source_label" => diagnostic.handler_source_label,
         "code" => diagnostic.code,

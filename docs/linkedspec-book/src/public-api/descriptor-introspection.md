@@ -7,7 +7,9 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, and Dart generated-source v2 and option/CLI removal are complete.
 > Dart composed admission remains `.9.1.5.6`;
-> Julia, Lua, recurring five-backend admission, and public no-drift remain dependency-ordered.
+> Julia and Lua cursor migration, recurring five-backend admission, and public no-drift remain dependency-ordered.
+> Independently, Julia root core now publishes root-selection identity while retaining its cursor-owned legacy
+> `parse_mode` field until `.9.1.6`.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
@@ -393,7 +395,8 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, and Dart)
-- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl, Rust, and Dart; Dart composed admission is pending)
+- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl, Rust, Dart, and Julia; Julia composed
+  root-route admission is pending)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`

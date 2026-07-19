@@ -4,6 +4,54 @@ end
 
 Base.showerror(io::IO, error::CompiledSpecException) = print(io, error.message)
 
+const ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
+
+@enum EntryRuleSelectionBasis begin
+    ExplicitSelectorBasis
+    FirstAuthoredMarkerBasis
+    FirstAuthoredRuleBasis
+end
+
+function entry_rule_selection_basis_name(basis::EntryRuleSelectionBasis)
+    if basis == ExplicitSelectorBasis
+        return "explicit_selector"
+    elseif basis == FirstAuthoredMarkerBasis
+        return "first_authored_marker"
+    end
+    return "first_authored_rule"
+end
+
+struct EntryRuleSelectionException <: Exception
+    code::String
+    stage::String
+    message::String
+    entry_rule::Union{Nothing,String}
+end
+
+function EntryRuleSelectionException(; code, stage, message, entry_rule = nothing)
+    return EntryRuleSelectionException(
+        String(code),
+        String(stage),
+        String(message),
+        entry_rule === nothing ? nothing : String(entry_rule),
+    )
+end
+
+Base.showerror(io::IO, error::EntryRuleSelectionException) = print(io, error.message)
+
+function to_json(error::EntryRuleSelectionException)
+    fields = Dict{String,Any}()
+    if error.entry_rule !== nothing
+        fields["entry_rule"] = error.entry_rule
+    end
+    return Dict{String,Any}(
+        "code" => error.code,
+        "stage" => error.stage,
+        "message" => error.message,
+        "fields" => fields,
+    )
+end
+
 struct DependencyRef
     label::String
     index::Int
@@ -219,6 +267,11 @@ struct CompiledSpec
     dependency_regex_state::CompiledDependencyRegexState
 end
 
+struct ResolvedEntryRule
+    rule::CompiledRule
+    basis::EntryRuleSelectionBasis
+end
+
 function CompiledSpec(;
     definition_order,
     compiled_rule_order,
@@ -235,6 +288,49 @@ function CompiledSpec(;
         function_registry,
         dependency_regex_state,
     )
+end
+
+function resolve_entry_rule(compiled::CompiledSpec, explicit_selector = nothing)
+    if isempty(compiled.compiled_rule_order)
+        throw(EntryRuleSelectionException(
+            code = "no_rules_defined",
+            stage = "validate_spec",
+            message = "compiled spec does not contain any rules",
+        ))
+    end
+
+    if explicit_selector !== nothing
+        selector = String(explicit_selector)
+        selected = compiled_rule(compiled, selector)
+        if selected === nothing
+            throw(EntryRuleSelectionException(
+                code = "entry_rule_not_found",
+                stage = "select_entry_rule",
+                message = "entry rule '$selector' is not defined",
+                entry_rule = selector,
+            ))
+        end
+        return ResolvedEntryRule(selected, ExplicitSelectorBasis)
+    end
+
+    for label in compiled.compiled_rule_order
+        candidate = _ordered_compiled_rule(compiled, label)
+        if candidate.header.is_top
+            return ResolvedEntryRule(candidate, FirstAuthoredMarkerBasis)
+        end
+    end
+    return ResolvedEntryRule(
+        _ordered_compiled_rule(compiled, first(compiled.compiled_rule_order)),
+        FirstAuthoredRuleBasis,
+    )
+end
+
+function _ordered_compiled_rule(compiled::CompiledSpec, label::AbstractString)
+    rule = compiled_rule(compiled, label)
+    if rule === nothing
+        throw(CompiledSpecException("compiled rule order refers to missing rule '$label'"))
+    end
+    return rule
 end
 
 struct CompiledDescriptorState
@@ -619,6 +715,7 @@ function to_json(state::CompiledDescriptorState)
             "compiled_spec_model" => "compiled_spec_state",
             "compiled_dependency_regex_model" => "compiled_dependency_regex_state",
             "parse_mode" => "seek",
+            "entry_rule_contract" => ENTRY_RULE_CONTRACT_ID,
             "definition_order" => compiled.definition_order,
             "compiled_rule_order" => compiled.compiled_rule_order,
             "redefined_rule_labels" => compiled.redefined_rule_labels,

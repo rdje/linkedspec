@@ -113,6 +113,11 @@ contract or invalid-plan rejection still occurs before entry selection. Route pr
 `.9.1.1.2.3.2`; admission `.3.3` composes every declared Dart route role exactly once and promotes Dart at the
 4/7 root-selection boundary without changing generated behavior.
 
+Julia core `.9.1.1.2.4.1` publishes the same root contract in compiled descriptors and makes native selection use
+one ordered compiled-state resolver. Julia generated direct/emitted/traced failure and selection composition is
+intentionally not claimed here yet; route leaf `.4.2` owns proving those artifacts reuse the resolver while
+preserving generated-source v1 identity and validation order.
+
 ```rust
 use linkedspec_runtime::source_emitter::{
     GeneratedSourceError, emit_rust_source_v2,

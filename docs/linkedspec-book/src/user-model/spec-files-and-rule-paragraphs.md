@@ -45,9 +45,10 @@ wins even when the source contains one or more `Rule::` markers. Without an expl
 selector, the first authored `Rule::` in definition order wins; without a marker, the first
 authored rule wins.
 
-The composed Perl reference implements all three branches across native, loaded, generated-direct,
-generated-traced, generated `Get`, and primary-command routes. Other backends still require an entry marker,
-so markerless execution is **not yet uniform portable behavior**. Until
+The composed Perl, Rust, and Dart backends implement all three branches across their admitted native,
+loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command routes. Julia core/native/
+primary execution now does too, but its composed route proof remains pending and Lua still requires an entry
+marker. Markerless execution is therefore **not yet uniform portable behavior**. Until
 `FUTURE-PARITY-BACKLOG.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
