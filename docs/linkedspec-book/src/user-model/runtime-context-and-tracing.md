@@ -468,8 +468,9 @@ freshly emitted direct/traced execution on both ABIs. A low success decision has
 
 Omitted selection writes `requested=<default>` and either `basis=first_authored_marker` or
 `basis=first_authored_rule`. Failure writes `effective=<none>` followed by portable `stage` and `code`; it occurs
-before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua topology admission remains
-pending, so markerless behavior is implemented but not yet uniformly admitted.
+before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua cursor admission is now
+complete; the separate 15-role root-selection topology admission remains pending, so markerless behavior is
+implemented but not yet uniformly admitted.
 Cursor policy comes from each authored rule family. All five backends reject the retired `--parse-mode` flag with
 the targeted usage diagnostic.
 

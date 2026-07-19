@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-19` (Lua/LuaJIT public option removal `.9.1.7.5` is fully verified, documented,
-  cleaned, and prepared for its per-leaf commit; admission `.9.1.7.6` remains pending)
+- Last updated: `2026-07-19` (Lua/LuaJIT exact dual-ABI admission `.9.1.7.6` and parent `.9.1.7` are signoff-
+  complete; the clean commit boundary remains before root admission)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1431,7 +1431,13 @@ before implementation.
   Acceptance: Public `parse_job(...)` authoring, import/provider search roots, multiple payload
     parser families, recursive staged queues, cycle diagnostics, docs, and corpus fixtures are
     split before implementation and kept implementation-language neutral.
-  Verification: `pending`
+  Verification: `activated task-tree-first on 2026-07-19 only after option-removal commit e96d389e landed cleanly
+    at ahead 239 with a zero-byte brief and no generated artifacts. Knowledge Map retrieval covers ADR 0044, the
+    neutral contract/checker, Perl 14-role plus Rust/Dart/Julia 15-role precedents, all committed Lua .1-.5 owner
+    tests/facts, the complete dual-ABI driver, canonical optional-driver seams, rollout, inventory, and mutations.
+    No semantic repair is indicated: the exact bounded change is one Lua 15-role consumer run on each ABI,
+    backend/canonical topology registration, inventory 68 -> 69, rollout 5+3 -> 6+2, and five omission mutations
+    44 -> 49. Root admission .9.1.1.2.5.3 remains untouched.`
   Commit: `d472c136` — `FUTURE-PARITY-BACKLOG.9.1.7.4 - emit Lua generated-source v2`
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
@@ -5554,7 +5560,7 @@ before implementation.
     `.9.1.1.2.4.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7`
-  Status: `active`
+  Status: `done`
   Goal: Align Lua and LuaJIT native/reconstructed/generated/primary behavior with ADR `0044`.
   Children: `.9.1.7.0` (preflight/split), `.9.1.7.1` (family/edge normalization), `.9.1.7.2`
     (live/loaded/reconstructed execution), `.9.1.7.3` (descriptor v1), `.9.1.7.4` (generated-source v2),
@@ -5569,9 +5575,12 @@ before implementation.
     `git_message_brief.txt` was zero bytes, generated book/cache/native artifacts were absent, and the branch was
     clean at ahead 233. Child `.0` completed exact dual-ABI boundary reproduction and the dependency-safe `.1-.6`
     split at clean commit `47a1d166`; `.1` completed at clean commit `67909eb6`; `.2` completed at clean commit
-    `d4b910e8`; descriptor `.3` completed at clean commit `79422858`; generated-source v2 `.4` is active from
-    that handoff.
-  Commit: through `79422858` — `FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`
+    `d4b910e8`; descriptor `.3` completed at clean commit `79422858`; generated-source v2 `.4` completed at clean
+    commit `d472c136`; option removal `.5` completed at clean commit `e96d389e`; admission `.6` adds the exact
+    shared-source 15-role consumer and passes 119/119 per ABI, package 177/177x2, primary 65/65x4, corpus
+    105/105x2, governance 69/6+2/49, KM 632/4,642, mdBook/four doctrines, and canonical Phase 0 1,031/1,031 in
+    647 seconds. Only the clean `.6` commit boundary remains before root admission activates.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.7.6 - admit Lua rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.0`
   Status: `done`
@@ -5810,7 +5819,7 @@ before implementation.
     synchronize docs/KM/book, clean artifacts, commit `.5`, and only then activate admission `.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit and close the complete dual-ABI Lua projection of the neutral rule-local cursor contract.
   Dependencies: `.9.1.7.5`
   Acceptance: Add one omission-sensitive contract-driven Lua consumer spanning the exact 15 native, normalized,
@@ -5819,22 +5828,31 @@ before implementation.
     mutations; advance only `lua_dual_abi` from pending to complete; pass full dual-ABI/65x4/corpus/canonical proof;
     synchronize public/live/KM/book records; close `.9.1.7`; and hand off root admission `.9.1.1.2.5.3` only after
     a clean commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `Activated task-tree-first from clean e96d389e at ahead 239. Retrieval confirms one shared-source
+    15-role consumer and topology/governance changes only; no semantic repair is needed. Exact pre-contract RED is
+    3/3 failures on PUC Lua and LuaJIT. Green is 119/119 per ABI. The complete dual-ABI driver passes package
+    177/177 per ABI, primary 65/65 in all four ABI/default-POSIX legs, and corpus 105/105 per ABI. Neutral
+    governance is 69 files / 6 complete + 2 pending / 49 rejected mutations, and adjacent root/generated/logical/
+    capability plus memory/doctrine gates pass. Knowledge Map is 632 facts / 4,642 keys; mdBook and all four
+    doctrines pass. Canonical local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary
+    65/65 in default and POSIX environments, and Phase 0 1,031/1,031 in 647 seconds. Safe cleanup removes the
+    generated 11 MiB book and Python cache while preserving durable tracked issue logs. The commit is prepared;
+    root admission remains untouched until its clean boundary.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.7.6 - admit Lua rule-local cursor contract`
 
   #### Acceptance Checklist
 
-  - [ ] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, neutral checker, all admitted 15-role
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, neutral checker, all admitted 15-role
     consumers, every committed Lua `.1-.5` owner, current dual-ABI driver/canonical registration, rollout,
     inventory, and mutation families before behavior or governance edits.
-  - [ ] **ADD ONE DUAL-ABI CONSUMER** — Run every contract-declared role exactly once in order on PUC Lua and
+  - [x] **ADD ONE DUAL-ABI CONSUMER** — Run every contract-declared role exactly once in order on PUC Lua and
     LuaJIT, with explicit assertions against skipping, duplication, stale v1, or ABI asymmetry.
-  - [ ] **REGISTER / ADVANCE LUA ONLY** — Lock consumer path/markers/order, complete Lua driver, canonical opt-in,
+  - [x] **REGISTER / ADVANCE LUA ONLY** — Lock consumer path/markers/order, complete Lua driver, canonical opt-in,
     migration inventory, exact primary cases, and mutations; promote only `lua_dual_abi`.
-  - [ ] **PROVE COMPOSITION / NO REGRESSION** — Pass the focused consumer and all constituent suites, complete
+  - [x] **PROVE COMPOSITION / NO REGRESSION** — Pass the focused consumer and all constituent suites, complete
     dual-ABI package/process/65x4/corpus proof, neutral checker with every mutation rejected, adjacent root/
     generated/logical/capability governance, and canonical local CI without shared fixture byte drift.
-  - [ ] **LOCKSTEP / CLOSEOUT** — Synchronize task/index/roadmaps/architecture/live/memory, Knowledge Map, Lua and
+  - [x] **LOCKSTEP / CLOSEOUT** — Synchronize task/index/roadmaps/architecture/live/memory, Knowledge Map, Lua and
     public mdBook status, changes/notes, and cleanup; close `.9.1.7`, commit `.6`, clear the brief, and only then
     activate root topology admission `.9.1.1.2.5.3`.
 
@@ -8418,14 +8436,14 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
 | 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `done` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff pass. |
-| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Dual-ABI preflight through option removal `.0-.5` are complete; `.5` is prepared for its clean commit, then admission `.6`. |
+| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `done` | Dual-ABI preflight through exact composed admission `.0-.6` are complete; clean `.6` commit is prepared before root admission. |
 | 218.0 | `FUTURE-PARITY-BACKLOG.9.1.7.0` | `done` | Exact dual-ABI behavior-free boundary recorded: 36/34/22 families, 5/13+2/4 valid edges, 0/7 diagnostics, 4/8 parent-child, 1/2 structural, 176/177x2 package, 32/65x4 primary, and 105/105x2 corpus. |
 | 218.1 | `FUTURE-PARITY-BACKLOG.9.1.7.1` | `done` | Exact RED 44/166x2 repaired to 258/258x2; package 176/177x2, primary 32/65x4, corpus 105/105x2, governance/KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.2 | `FUTURE-PARITY-BACKLOG.9.1.7.2` | `done` | Exact 44/110x2 RED repaired to 110/110x2; focused 1,046x2, package 176/177x2, primary 32/65x4, corpus 105/105x2, governance 68/5+3/44, KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.3 | `FUTURE-PARITY-BACKLOG.9.1.7.3` | `done` | Exact 364/776x2 RED repaired to 875/875x2; focused 1,921x2, byte-identical direct/normalized/loaded descriptors, governance/KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.4 | `FUTURE-PARITY-BACKLOG.9.1.7.4` | `done` | Exact 44/106x2 RED repaired to 106/106x2; focused 2,027x2, package 176/177x2, primary 32/65x4, corpus 105/105x2, governance 69/5+3/44, KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.5 | `FUTURE-PARITY-BACKLOG.9.1.7.5` | `done` | Global API/CLI/trace ownership removed; exact 96/96x2, package 177/177x2, primary 65/65x4, corpus 105/105x2, governance 68/5+3/44, KM 631/4,632, canonical 1,031/646s, and cleanup pass. |
-| 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `pending` | Add exact dual-ABI 15-role admission, promote only Lua, close parent, and hand off root admission. |
+| 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `done` | Exact 15-role admission passes 119x2, package 177x2, primary 65x4, corpus 105x2, 69/6+2/49 governance, KM/mdBook/doctrines, and canonical 1,031/647s. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
@@ -9109,13 +9127,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Lua public option removal `.9.1.7.5` is fully verified and prepared for its per-leaf commit; admission
-  `.9.1.7.6` remains pending until that clean boundary.
+- None. Lua exact dual-ABI admission `.9.1.7.6` is signoff-complete from clean base `e96d389e`; its per-leaf
+  commit is prepared before root admission activation.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.6` | Exact 3/3x2 pre-contract RED; one shared-source 15-role consumer; focused 119/119x2; complete dual-ABI package 177/177x2; primary 65/65x4; corpus 105/105x2; cursor 69/6+2/49; adjacent root/generated/logical/capability; KM 632/4,642; mdBook/memory/task/KM/JSON/shell/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 647s; safe book/cache cleanup with durable issue logs retained. | PASS. Only Lua advances; parent `.9.1.7` closes and the clean commit precedes root admission `.9.1.1.2.5.3`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.5` | Exact 75/96x2 RED and 33/65x4 primary residuals; high-level snake/camel override removal; pre-effect portable API diagnostic; targeted retired-CLI usage exit 2; entry-`I` `--top-rule` precedence; focused 96/96x2; package 177/177x2; primary 65/65x4; corpus 105/105x2; cursor 68/5+3/44; KM 631/4,632; mdBook/memory/task/KM/JSON/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 646s; generated 11 MiB book/Python-cache cleanup with no native/Rust/Dart build tree. | PASS. Lua has no caller-global cursor option on either ABI; low-level matcher primitives remain and only the clean `.5` commit may precede composed admission `.6`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.3` | Exact 364/776x2 RED; cursor-v1 root/rule/semantic-edge projection; all 36 families and valid/invalid edge rows; direct/normalized/loaded byte identity and loaded AND execution; focused 1,921x2; package 176/177x2; primary 32/65x4; corpus 105/105x2; cursor 68/5+3/44; KM 629/4,611; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 621s; generated book/cache/build/native-tree cleanup. | PASS. Lua descriptors use cursor v1 on both ABIs without generated-source, public-option, fixture, or rollout promotion; only the clean `.3` commit may precede generated v2 `.4`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.2` | Exact 44/110x2 RED; entered-rule family/cursor/sequence-choice derivation; 36 families; 8/8 parent-child; 2/2 structural; live/loaded/normalized/recursive/trace; explicit outer and generated-v1 isolation; focused 1,046x2; package 176/177x2; primary 32/65x4; corpus 105/105x2; cursor 68/5+3/44; KM 628/4,600; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 624s; generated book/cache/native-tree cleanup. | PASS. Ordinary Lua runtime policy is intrinsic on both ABIs without descriptor, artifact, public-option, fixture, or rollout promotion; only the clean `.2` commit may precede descriptor `.3`. |
@@ -9496,6 +9515,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-19`: Lua exact dual-ABI cursor admission `.9.1.7.6` adds one contract-declared 15-role consumer shared
+  by PUC Lua and LuaJIT. Exact 3/3 pre-contract RED becomes 119/119 green per ABI; package 177/177x2, primary
+  65/65x4, corpus 105/105x2, governance 69/6+2/49, KM 632/4,642, mdBook/four doctrines, and canonical Phase 0
+  1,031/1,031 in 647 seconds pass. Parent `.9.1.7` closes; the commit is prepared before root admission.
+- `2026-07-19`: Clean commit `e96d389e` lands Lua public/global cursor option removal `.9.1.7.5`; tracked and
+  untracked state is clean, `git_message_brief.txt` is zero bytes, generated book/cache/native artifacts are
+  absent, and ahead is 239. Exact dual-ABI admission `.9.1.7.6` activates task-tree-first; root admission
+  `.9.1.1.2.5.3` remains untouched.
 - `2026-07-19`: Lua public/global cursor option removal `.9.1.7.5` removes every high-level dynamic/CLI/trace
   owner on both ABIs, preserves low-level matcher primitives, and locks exact pre-effect migration diagnostics.
   Exact 75/96x2 RED becomes 96/96x2; package 177/177x2, primary 65/65x4, corpus 105/105x2, governance 68/5+3/44,

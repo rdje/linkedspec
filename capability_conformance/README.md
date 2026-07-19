@@ -38,7 +38,7 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 67-file migration inventory and rejects 44 representative semantic, topology,
+The checker currently owns an exact 69-file migration inventory and rejects 49 representative semantic, topology,
 diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
@@ -51,11 +51,13 @@ checker locks each marker, the complete Dart test command, canonical tracked inp
 registration. A separate 15-role Julia consumer composes the same normalized topology over current Julia native,
 loaded, descriptor-v1, emitted/generated-v2, trace, composition, removal, primary, and diagnostic projections.
 The checker locks its markers, complete package driver, canonical tracked input, and optional backend registration.
-`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, and `julia_backend` are complete,
-so rollout is 5 complete / 3 pending; later legs remain dependency-ordered. The shared generated-source-v1
+One Lua consumer composes the same 15 normalized roles and runs unchanged on both PUC Lua and LuaJIT. The checker
+locks its markers, both backend-driver invocations, canonical tracked input, and optional backend registration.
+`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, `julia_backend`, and
+`lua_dual_abi` are complete, so rollout is 6 complete / 2 pending; later legs remain dependency-ordered. The shared generated-source-v1
 capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, Julia, and Lua
 emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
-composed rollout still waits for `.9.1.7.6`.
+its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
@@ -98,7 +100,8 @@ structural agreement was 1/2, and descriptor/generated cursor identities were ab
 covers all 36 family spellings, all 18 edge rows, 8/8 parent-child, 2/2 structural, cursor descriptor v1, and
 generated-source v2 with contract-before-payload rejection. Public removal then deletes global engine/loader/
 corpus/primary ownership while retaining low-level matcher primitives and targeted legacy diagnostics. Package
-progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance is 67 / 5+3 / 44.
+progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance was 67 / 5+3 / 44 at
+Julia admission. Lua admission has since advanced the current ledger to 69 / 6+2 / 49.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

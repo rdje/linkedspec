@@ -13,8 +13,9 @@
 > direct/normalized/loaded byte identity, and generated-source v2 with exact
 > five-seek/five-consume derivation on both ABIs. Global-option removal is now
 > complete too: high-level legacy keys fail with the portable removal diagnostic,
-> and primary help/request trace no longer expose the retired flag. Dual-ABI
-> admission remains `.9.1.7.6`; v1 generated artifacts must be regenerated.
+> and primary help/request trace no longer expose the retired flag. One exact
+> 15-role consumer now admits the complete projection on both Lua ABIs;
+> v1 generated artifacts must be regenerated.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,

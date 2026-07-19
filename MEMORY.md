@@ -11,14 +11,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.5` — Lua/LuaJIT public/global cursor option removal is
-  fully verified, documented, and cleaned; its commit is prepared but not yet landed.
-- latest_commit: `d472c136` — `FUTURE-PARITY-BACKLOG.9.1.7.4 - emit Lua generated-source v2`
-  (ahead: 238; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.5 - remove Lua global cursor overrides`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.5` Lua public/global cursor option removal, active from clean
-  `d472c136`.
-- next_action: run the final cheap gates, commit `.9.1.7.5`, verify clean/zero-byte brief, and only then activate
-  admission `.9.1.7.6` task-tree-first.
+  fully verified, documented, cleaned, and committed.
+- latest_commit: `e96d389e` — `FUTURE-PARITY-BACKLOG.9.1.7.5 - remove Lua global cursor overrides`
+  (ahead: 239; push at threshold 300).
+- prepared_commit: none.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.6` exact dual-ABI Lua cursor admission, active task-tree-first
+  from clean `e96d389e`.
+- next_action: finish `.9.1.7.6`: regenerate/check the final Knowledge Map and mdBook projection, remove only safe
+  generated artifacts, commit, clear the brief, verify a clean handoff, then activate root admission
+  `.9.1.1.2.5.3` task-tree-first.
 - current_lua_option_removal: Exact pre-edit focused RED is 75/96 on PUC Lua and LuaJIT; shared primary is 32/65
   in all four ABI/default-POSIX legs. High-level engine, parse, loaded, corpus, generated, help, and request-trace
   override ownership is now removed. Legacy snake/camel keys fail with `prepare_options` /
@@ -27,7 +28,7 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   package 177/177x2, primary 65/65x4, corpus 105/105x2, and governance 68/5+3/44. KM is 631/4,632; complete Lua,
   mdBook build, KM, memory, and four doctrines pass. Canonical local CI passes root 7+5, cursor 288, primary
   65x2, and Phase 0 1,031/1,031 in 646 seconds. Safe cleanup removes the 11 MiB generated book and Python cache;
-  no Rust, Dart, or temporary native build tree exists. Only the commit remains.
+  no Rust, Dart, or temporary native build tree exists. The clean result is committed at `e96d389e`.
 - current_lua_generated_v2: v2/format 2 keeps only label/family rows, derives exact five-seek/five-consume policy,
   classifies compact Pipe as OR, and rejects stale v1 before payload decode. Its exact proof remains 106/106x2.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
@@ -39,10 +40,12 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Package is 3,291, ten processes, primary 65/65x2, corpus 105, generated governance 80/0/0, cursor 67/5+3/44,
   logical 8/0, root 4/7+34, and capability 80/0/0. KM is 621/4,512; mdBook/four doctrines pass. Canonical local CI
   exits 0 after root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 641 seconds.
-- current_cursor_admission: Julia now has one exact 15-role consumer; focused composition 104, package 3,291,
-  ten processes, primary 65x2, and corpus 105 pass. Only Julia advances to neutral 67/5+3/44. The complete/primary
-  drivers create only the first writable entry of a stacked depot; corrected offline proof leaves no malformed
-  colon-bearing directory.
+- current_cursor_admission: Lua now has one exact 15-role consumer run from identical source on PUC Lua and
+  LuaJIT. Exact pre-contract RED is 3/3 per ABI and green is 119/119 per ABI. The complete dual-ABI driver passes
+  package 177/177 per ABI, primary passes 65/65 in all four ABI/default-POSIX legs, and corpus passes 105/105 per
+  ABI. Only Lua advances; neutral governance is 69 files / 6 complete + 2 pending / 49 mutations. Adjacent root,
+  generated, logical, capability, memory, and doctrine checks pass. KM is 632/4,642; mdBook/four doctrines and
+  canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 647 seconds pass.
 - latest_bootstrap_read: 2026-07-19 — full roadmap/codebase/mdBook, active task, Knowledge Map, Toolbox, ADRs
   `0044`/`0046`, neutral/admitted cursor precedent, Lua architecture/root routes, and exact drivers reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -54,5 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.7.5` implementation/docs/KM/signoff are complete and prepared for
-  commit; `.6` is untouched and there is no background job.
+- blockers: none. in_flight_uncommitted: `.9.1.7.6` needs final map/book, cleanup, commit, and clean verification; no job.

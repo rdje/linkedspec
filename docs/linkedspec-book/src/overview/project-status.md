@@ -39,9 +39,11 @@ primary global ownership, returns targeted API/CLI diagnostics, omits the help/r
 adds a separate exact 15-role root-selection consumer over every neutral/native/composed/diagnostic/trace/primary
 route; authored selection fixtures return from entry lifecycle `I` so their distinct results prove which rule was
 entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/105, cursor governance remains
-67/5+3/44, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is complete.
-Lua/LuaJIT public-option removal is complete; only its composed cursor admission `.6` and the separate root
-topology admission remain. Cursor rollout is still 5 complete / 3 pending until `.6` advances the Lua row.
+67/5+3/44 at Julia admission, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is
+complete. Lua/LuaJIT public-option removal and composed cursor admission are now implemented. One exact 15-role
+consumer passes 119/119 per ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2; cursor governance is
+69/6+2/49. Canonical Phase 0 passes 1,031/1,031 in 647 seconds; the clean cursor commit and separate root topology
+admission remain.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole
@@ -106,9 +108,12 @@ override from parse, loaded, corpus, generated, primary-help, and request-trace 
 fail with `prepare_options` / `parse_mode_override_removed` before input or user code; the retired CLI spelling
 returns its exact usage exit 2; and `--top-rule` retains priority over authored `Rule::`. Its 75/96 dual-ABI RED
 becomes 96/96, the complete package passes 177/177 per ABI, and all four primary legs pass 65/65. Governance is
-68/5+3/44; composed admission remains `.6`. Descriptor canonical proof passes through Phase 0 1,031/1,031 in 621
-seconds; the subsequent generated-v2 canonical closeout passes the same 1,031 tests in 644 seconds with Knowledge
-Map 630/4,622.
+68/5+3/44 at removal. Composed admission `.6` then runs one exact 15-role consumer on each ABI: native default/AND,
+normalized, loaded, descriptor v1, emitted/generated v2 direct/trace, mixed/recursive, both structural
+replacements, static/dynamic removal, primary, and all portable diagnostics. Exact pre-contract RED is 3/3 per
+ABI and green is 119/119 per ABI; governance advances only Lua to 69/6+2/49. Descriptor canonical proof passes
+through Phase 0 1,031/1,031 in 621 seconds; the subsequent generated-v2 canonical closeout passes the same 1,031
+tests in 644 seconds with Knowledge Map 630/4,622.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted

@@ -155,8 +155,10 @@ Rust package that contains the consumer. Dart cursor admission applies the same 
 15-role consumer is a tracked canonical input, `tools/run_dart_local.sh` runs the complete Dart suite containing
 it, and `LINKEDSPEC_RUN_DART=1` invokes that registered driver. Julia now applies the same pattern: one exact
 15-role consumer is included by the complete package driver, tracked by canonical CI, and reachable through
-`LINKEDSPEC_RUN_JULIA=1`. The current cursor ledger is 5 complete / 3 pending with 68 governed migration files and
-44 rejected drift mutations.
+`LINKEDSPEC_RUN_JULIA=1`. Lua applies the same pattern with one exact 15-role consumer run under PUC Lua and
+LuaJIT by `tools/run_lua_local.sh`; canonical CI tracks it and `LINKEDSPEC_RUN_LUA=1` invokes the complete
+dual-ABI driver. The current cursor ledger is 6 complete / 2 pending with 69 governed migration files and 49
+rejected drift mutations.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is

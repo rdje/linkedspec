@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` Lua cursor-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.7.6` composes the already-current Lua
+  normalization, native/normalized/loaded execution, descriptor v1, emitted/generated v2, trace, mixed/recursive,
+  structural, removal, primary, and diagnostic owners through one exact 15-role consumer on PUC Lua and LuaJIT.
+  The consumer introduces no second semantic route. The neutral checker locks every role, both backend-driver
+  invocations, canonical optional registration, rollout state, and five new omission mutations. Exact pre-contract
+  RED is 3/3 per ABI; green is 119/119 per ABI. Complete package is 177/177x2, primary is 65/65x4, corpus is
+  105/105x2, and governance advances only Lua to 69 files / 6+2 rollout / 49 mutations. Knowledge Map 632/4,642,
+  mdBook, four doctrines, canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 647 seconds
+  pass. The cursor parent is complete; only the clean commit boundary remains before separate root admission.
 - `2026-07-19` Lua generated-source-v2 refresh: `FUTURE-PARITY-BACKLOG.9.1.7.4` advances newly emitted modules to
   `linkedspec-generated-source-v2` / format 2 while retaining only the minimal ordered `{label, family}` plan.
   Generated entry derives seek for default/OR families and consume for AND families; compact Pipe now classifies

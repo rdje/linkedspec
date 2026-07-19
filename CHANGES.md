@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.6 — admit Lua rule-local cursor contract
+
+Lua is now composed-admitted against `linkedspec-rule-local-cursor-v1` on both supported ABIs. One contract-
+declared consumer executes 15 exact roles once in neutral order: native default, native AND, normalized, loaded,
+descriptor v1, emitted v2, generated direct, generated trace, mixed parent-child, recursion, ordered landmarks,
+anchored choice, static/dynamic option removal, primary command, and portable diagnostics. It adds no new semantic
+implementation.
+
+The neutral checker locks every `role_*` marker, the consumer path, both PUC Lua and LuaJIT registrations in the
+complete backend driver, canonical tracked input and optional backend registration, rollout state, and five new
+omission mutations. Only `lua_dual_abi` advances. Governance moves from 68 files / 5 complete + 3 pending / 44
+mutations to 69 files / 6 complete + 2 pending / 49 mutations; recurring five-backend admission and public
+no-drift remain separately owned.
+
+Before the neutral admission object existed, the new consumer failed exactly 3/3 topology assertions on each ABI.
+After registration it passes 119/119 on PUC Lua and LuaJIT. The complete dual-ABI driver passes all focused suites
+and package 177/177 per ABI; the shared primary command passes 65/65 in all four ABI/default-POSIX legs, and corpus
+execution passes 105/105 per ABI. Root, logical, generated, capability, doctrine, JSON, shell, and whitespace
+governance remain green. Knowledge Map generation reaches 632 facts / 4,642 question keys; mdBook and all four
+doctrines pass. Canonical local CI closes with root consumers 7+5, cursor admission 288, reference primary 65x2,
+and Phase 0 1,031/1,031 in 647 seconds. Safe generated-artifact cleanup passes; the per-leaf commit is prepared
+before root admission may activate.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.5 — remove Lua global cursor overrides
 
 PUC Lua and LuaJIT engines no longer store or consult a caller-global cursor mode. Normal and generated-v2 rule

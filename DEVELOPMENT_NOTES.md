@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.6` — dual-ABI admission is one topology, not two semantic paths):
+  Lua normalization, runtime, descriptor, generated-v2, removal, primary, and diagnostic owners were already
+  independently green through `.1-.5`. Admission therefore adds one contract-declared orchestrator and runs that
+  same source under PUC Lua and LuaJIT. Its 15 roles execute once in contract order; a declared-role set check and
+  completed-role set check reject omissions, duplicates, invented roles, and reordering without creating another
+  compiler or runtime implementation.
+
+  The checker treats both ABI invocations as mandatory backend topology. It also requires canonical tracked input
+  plus the optional `LINKEDSPEC_RUN_LUA=1` registration, and adds five mutations for role, consumer, canonical
+  driver, backend driver, and rollout omission. The exact governance transition is 68 -> 69 migration files,
+  5+3 -> 6+2 rollout, and 44 -> 49 mutations. Only `lua_dual_abi` advances; recurring five-backend composition,
+  public no-drift, and the separate Lua root-selection admission retain their own leaves.
+
+  The pre-contract consumer fails exactly 3/3 assertions per ABI because the neutral admission object and declared
+  role list do not yet exist. After registration it passes 119/119 per ABI with no semantic repair. Complete proof
+  is package 177/177x2, shared primary 65/65x4, and corpus 105/105x2. This is the useful admission pattern: first
+  make all constituent mechanisms exact, then add one omission-sensitive consumer and governance that prove their
+  composition rather than reimplementing it.
+
+  Final signoff is Knowledge Map 632/4,642, mdBook build, all four doctrines, root consumers 7+5, cursor admission
+  288, reference primary 65x2, and Phase 0 1,031/1,031 in 647 seconds. The generated book and Python cache are
+  safe cleanup targets; tracked issue logs remain durable evidence.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.5` — removed options must fail, not disappear):
   Lua option tables make unknown keys easy to ignore accidentally. The retirement boundary therefore has one
   interpreter-owned rejection helper used by engine, parse, and corpus entrypoints. It recognizes both governed

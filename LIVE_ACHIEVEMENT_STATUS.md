@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.5` — Lua/LuaJIT public/global cursor option removal is active task-tree-first from
-  clean generated-v2 commit `d472c136` at ahead 238. The brief is zero bytes and safe generated artifacts are
-  absent. Exact 75/96 RED is now 96/96 on each ABI; package passes 177/177x2, shared primary 65/65x4, corpus
-  105/105x2, and governance 68/5+3/44. KM 631/4,632, mdBook/doctrines, and canonical root 7+5 / cursor 288 /
-  primary 65x2 / Phase 0 1,031 in 646 seconds pass. Safe cleanup is complete; only the per-leaf commit remains,
-  and admission `.6` stays untouched.
+- `FUTURE-PARITY-BACKLOG.9.1.7.6` — Exact dual-ABI Lua cursor admission is signoff-complete from clean
+  option-removal commit `e96d389e` at ahead 239. One contract-declared 15-role consumer now passes 119/119 from
+  identical source on PUC Lua and LuaJIT after exact pre-contract 3/3 failures per ABI. The complete driver passes
+  package 177/177 per ABI, primary 65/65 across all four ABI/default-POSIX legs, and corpus 105/105 per ABI.
+  Governance is 69 files / 6 complete + 2 pending / 49 mutations; adjacent gates, KM 632/4,642, mdBook/four
+  doctrines, and canonical Phase 0 1,031/1,031 in 647 seconds pass. Safe cleanup passes. The commit is prepared;
+  root admission `.9.1.1.2.5.3` stays untouched until the clean boundary.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.5 — remove Lua global cursor overrides**
+  (DONE at clean commit `e96d389e`).
+
+  **Result:** Both Lua ABIs reject retired high-level snake/camel cursor overrides before input or user code,
+  omit the retired CLI/help/request-trace field, and retain only low-level matcher primitives. `--top-rule`
+  continues to beat authored `Rule::` with lifecycle-`I` proof.
+
+  **Proof:** Focused 96/96x2, package 177/177x2, primary 65/65x4, corpus 105/105x2, governance 68/5+3/44,
+  KM 631/4,632, mdBook/four doctrines, canonical Phase 0 1,031/1,031 in 646 seconds, and cleanup pass.
+
+  **Next:** Exact dual-ABI cursor admission `.6` is active from this clean commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.4 — emit Lua generated-source v2**
   (DONE at clean commit `d472c136`).
 
@@ -29,7 +42,7 @@ Current execution status for interruption-safe batch workflow recovery.
   630/4,622. mdBook/four doctrines pass; canonical closes root 7+5, cursor 288, primary 65x2, and Phase 0
   1,031/1,031 in 644 seconds. Safe generated artifacts are removed; cited durable logs remain.
 
-  **Next:** Public option removal `.5` is active task-tree-first from the clean commit.
+  **Next:** Exact dual-ABI cursor admission `.6` is active task-tree-first from clean `e96d389e`.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.3 — project Lua cursor descriptor v1**
   (DONE at clean commit `79422858`).

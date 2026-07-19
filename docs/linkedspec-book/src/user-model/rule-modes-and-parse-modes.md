@@ -79,9 +79,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > removes the help/request-trace field, and preserves `--top-rule`.
 > Admission `.9.1.6.6` now adds one exact 15-role Julia consumer over every
 > current projection and locks its complete/canonical driver topology.
-> Rollout is 5 complete / 3 pending, with Lua, recurring five-backend, and
-> public no-drift work dependency-ordered under `.9.1.7-.9`; the current
-> governed inventory is 68 files with 44 effective mutations after Lua registers its runtime consumer.
+> At Julia admission rollout was 5 complete / 3 pending. Lua `.9.1.7.6` now advances only the dual-ABI row after
+> one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. The current governed inventory is 69 files,
+> 6 complete / 2 pending, and 49 effective mutations; recurring five-backend and public no-drift work remain
+> dependency-ordered under `.9.1.8-.9`.
 > Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
 > point: all 36 headers parse, but compact `|` accounts for the 34/36 family
 > classification; global seek makes 22/36 family executions intrinsic; valid
@@ -110,7 +111,8 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > parse, loader, corpus, generated, primary-help, and request-trace override ownership.
 > Legacy dynamic keys fail with `prepare_options` / `parse_mode_override_removed`;
 > the retired CLI flag returns the targeted usage exit 2, while `--top-rule` retains
-> priority over authored `Rule::`. Only composed dual-ABI admission remains `.6`.
+> priority over authored `Rule::`. Composed dual-ABI admission `.6` now proves all 15 declared roles exactly once
+> on each ABI without adding another semantic path.
 
 ## Current rule-label surface
 
@@ -796,7 +798,7 @@ implements typed normalization, live/loaded/normalized/recursive/traced entered-
 generated-source v2, then removes the public/primary override:
 every family and edge shape is exact in AST/validation/compiled state, every ordinary rule spends its own derived
 policy, outward descriptors project those same normalized facts, and generated artifacts derive the same policy
-from their minimal family plan. Composed admission remains staged. A
+from their minimal family plan. Composed admission is current through `.9.1.6.6`. A
 complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -865,8 +867,8 @@ normalized, recursive, and traced execution intrinsic at each entered rule; all 
 independently. Descriptor `.3` publishes cursor v1 with exact per-rule facts, and generated-source `.4` emits v2,
 derives the five seek/five consume policies, and rejects v1 before reconstruction. Public-option `.5` removes
 caller-global engine/parse/loader/corpus/generated ownership and primary help/request-trace exposure. Legacy API
-keys and the retired CLI flag receive targeted migration diagnostics rather than being accepted or ignored;
-composed admission remains `.6`.
+keys and the retired CLI flag receive targeted migration diagnostics rather than being accepted or ignored.
+Composed admission `.6` now runs one exact 15-role consumer on both ABIs and advances only Lua.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/
@@ -874,6 +876,6 @@ AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 neutral checker requires every declared role and canonical registration. Dart adds its own 15-role native/
 normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
-also requires one exact Julia consumer over the same normalized topology. It currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 68 migration files, 5 complete / 3 pending, and 44 rejected
-drift mutations.
+also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. It currently reports 36
+family spellings, 18 edge cases, eight parent/child cases, 69 migration files, 6 complete / 2 pending, and 49
+rejected drift mutations.

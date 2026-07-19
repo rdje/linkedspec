@@ -6,7 +6,7 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 5 complete / 3 pending. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 6 complete / 2 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
@@ -93,8 +93,15 @@ entry and every parse/loaded/corpus/generated/primary route; legacy snake/camel 
 `prepare_options` diagnostic; help and request trace omit the retired field; and `--parse-mode` returns its exact
 usage exit 2 while `--top-rule` keeps priority over authored `Rule::`. Identical 75/96 RED becomes 96/96 green,
 package is 177/177x2, primary is 65/65x4, corpus is 105/105x2, and governance is 68/5+3/44. Canonical signoff,
-including Phase 0 1,031/1,031 in 646 seconds, and safe cleanup now pass. Only the per-leaf commit remains before
-admission `.6` can activate.
+including Phase 0 1,031/1,031 in 646 seconds, and safe cleanup pass at clean commit `e96d389e`. Exact dual-ABI
+15-role admission `.6` then activated task-tree-first and is now signoff-complete.
+That admission is now implemented without a new semantic path. One contract-declared consumer runs the exact
+native/default-AND, normalized, loaded, descriptor-v1, emitted/generated-v2, trace, mixed/recursive, structural,
+removal, primary, and diagnostic topology once on PUC Lua and once on LuaJIT. Exact pre-contract RED is 3/3 per
+ABI and green is 119/119 per ABI. Complete package is 177/177x2, primary is 65/65x4, corpus is 105/105x2, and
+governance advances only Lua to 69 files / 6 complete + 2 pending / 49 mutations. Canonical signoff passes
+through Phase 0 1,031/1,031 in 647 seconds; the clean commit remains before the separate Lua root-selection
+admission activates.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
@@ -146,7 +153,8 @@ across native, normalized, loaded, descriptor, emitted/generated, trace, mixed/r
 primary, and portable-diagnostic projections. The complete Dart package passes 271 tests, the shared primary
 matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
 4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
-advanced the current ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations.
+advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission has since moved
+the current ledger to 69 files, 6 complete / 2 pending, and 49 rejected mutations.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

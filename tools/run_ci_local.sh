@@ -107,6 +107,7 @@ require_tracked_file t/root_rule_selection_perl_routes.t
 require_tracked_file rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs
 require_tracked_file dart/test/rule_local_cursor_contract_test.dart
 require_tracked_file julia/test/rule_local_cursor_contract_test.jl
+require_tracked_file lua/test/rule_local_cursor_contract_test.lua
 require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs
 require_tracked_file dart/test/root_rule_selection_admission_test.dart
 require_tracked_file julia/test/root_rule_selection_admission_test.jl
@@ -364,6 +365,14 @@ if [[ "${LINKEDSPEC_RUN_JULIA:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/run_julia_local.sh"
 else
  log "skipping optional Julia local gate (set LINKEDSPEC_RUN_JULIA=1 to include it when a Julia SDK is available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_LUA:-0}" == "1" ]]; then
+ log "running optional dual-ABI Lua local gate (LINKEDSPEC_RUN_LUA=1)"
+ require_tracked_file tools/run_lua_local.sh
+ bash "$REPO_ROOT/tools/run_lua_local.sh"
+else
+ log "skipping optional dual-ABI Lua local gate (set LINKEDSPEC_RUN_LUA=1 when PUC Lua and LuaJIT are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_CLI_MATRIX:-0}" == "1" ]]; then

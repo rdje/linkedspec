@@ -55,7 +55,7 @@ ROLLOUT = [
     ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.9.1.4"),
     ("dart_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.5"),
     ("julia_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.6"),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.7"),
+    ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.7"),
     ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.9.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.9"),
 ]
@@ -127,6 +127,28 @@ JULIA_BACKEND_ADMISSION = {
     "consumer_path": "julia/test/rule_local_cursor_contract_test.jl",
     "canonical_driver": "tools/run_ci_local.sh",
     "backend_driver": "tools/run_julia_local.sh",
+    "roles": [
+        "native_default_family",
+        "native_and_family",
+        "ordinary_normalized",
+        "loaded_spec",
+        "descriptor_v1",
+        "emitted_source_v2",
+        "generated_direct",
+        "generated_trace",
+        "mixed_parent_child",
+        "recursion",
+        "structural_ordered_landmarks",
+        "structural_anchored_choice",
+        "static_option_removal",
+        "primary_command",
+        "portable_diagnostics",
+    ],
+}
+LUA_DUAL_ABI_ADMISSION = {
+    "consumer_path": "lua/test/rule_local_cursor_contract_test.lua",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_lua_local.sh",
     "roles": [
         "native_default_family",
         "native_and_family",
@@ -324,6 +346,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "rust_parity_admission",
             "dart_backend_admission",
             "julia_backend_admission",
+            "lua_dual_abi_admission",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -676,6 +699,40 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if backend_invocation not in julia_canonical_text:
         fail("canonical driver omits the registered Julia backend driver")
 
+    lua_admission = require_fields(
+        contract["lua_dual_abi_admission"],
+        {"consumer_path", "canonical_driver", "backend_driver", "roles"},
+        "Lua dual-ABI admission",
+    )
+    if lua_admission != LUA_DUAL_ABI_ADMISSION:
+        fail("Lua dual-ABI admission topology drifted")
+    lua_consumer_path = ROOT / lua_admission["consumer_path"]
+    lua_canonical_path = ROOT / lua_admission["canonical_driver"]
+    lua_backend_path = ROOT / lua_admission["backend_driver"]
+    if not all(
+        path.is_file()
+        for path in (lua_consumer_path, lua_canonical_path, lua_backend_path)
+    ):
+        fail("Lua dual-ABI admission consumer or driver is missing")
+    lua_consumer_text = lua_consumer_path.read_text(encoding="utf-8")
+    for role in lua_admission["roles"]:
+        marker = re.compile(rf"^local function role_{re.escape(role)}\(", re.MULTILINE)
+        if len(marker.findall(lua_consumer_text)) != 1:
+            fail(f"Lua dual-ABI admission role marker drifted: {role}")
+    lua_canonical_text = lua_canonical_path.read_text(encoding="utf-8")
+    if f"require_tracked_file {lua_admission['consumer_path']}" not in lua_canonical_text:
+        fail("canonical driver omits the Lua dual-ABI admission consumer")
+    lua_backend_text = lua_backend_path.read_text(encoding="utf-8")
+    consumer_marker = '"$LUA_CMD" lua/test/rule_local_cursor_contract_test.lua'
+    if lua_backend_text.count(consumer_marker) != 1:
+        fail("Lua backend driver omits the PUC Lua cursor admission consumer")
+    luajit_marker = '"$LUAJIT_CMD" lua/test/rule_local_cursor_contract_test.lua'
+    if lua_backend_text.count(luajit_marker) != 1:
+        fail("Lua backend driver omits the LuaJIT cursor admission consumer")
+    backend_invocation = f'bash "$REPO_ROOT/{lua_admission["backend_driver"]}"'
+    if backend_invocation not in lua_canonical_text:
+        fail("canonical driver omits the registered Lua backend driver")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -774,6 +831,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Julia admission consumer", lambda c: c["julia_backend_admission"].__setitem__("consumer_path", "missing")),
         ("Julia admission canonical driver", lambda c: c["julia_backend_admission"].__setitem__("canonical_driver", "missing")),
         ("Julia admission driver", lambda c: c["julia_backend_admission"].__setitem__("backend_driver", "missing")),
+        ("Lua admission role", lambda c: c["lua_dual_abi_admission"]["roles"].pop()),
+        ("Lua admission consumer", lambda c: c["lua_dual_abi_admission"].__setitem__("consumer_path", "missing")),
+        ("Lua admission canonical driver", lambda c: c["lua_dual_abi_admission"].__setitem__("canonical_driver", "missing")),
+        ("Lua admission driver", lambda c: c["lua_dual_abi_admission"].__setitem__("backend_driver", "missing")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -785,6 +846,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Rust rollout admission", lambda c: c["rollout"][2].__setitem__("status", "pending")),
         ("Dart rollout admission", lambda c: c["rollout"][3].__setitem__("status", "pending")),
         ("Julia rollout admission", lambda c: c["rollout"][4].__setitem__("status", "pending")),
+        ("Lua rollout admission", lambda c: c["rollout"][5].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -806,6 +868,7 @@ def main() -> int:
         f"{len(contract['rust_parity_admission']['roles'])} Rust admission roles; "
         f"{len(contract['dart_backend_admission']['roles'])} Dart admission roles; "
         f"{len(contract['julia_backend_admission']['roles'])} Julia admission roles; "
+        f"{len(contract['lua_dual_abi_admission']['roles'])} Lua admission roles; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )
