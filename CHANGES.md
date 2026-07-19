@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors
+
+Julia normal execution now derives one immutable policy from every rule as it is entered. Exact AND-family rules
+consume and execute ordered sequence structure; OR/default-family rules seek and execute choice structure. Blind
+edges, action edges, explicit `call(...)`, and recursive re-entry pass only the current cursor to a child, so the
+child recalculates from its own compiled family instead of inheriting a parent/global policy.
+
+The same interpreter seam serves direct, loaded-default, normalized-JSON, and traced execution. Rule-entry trace
+scopes now publish both normalized family and effective cursor policy, and regex decisions report the policy they
+actually spend. Low-level `runtime_match`, `seek_match`, and `consume_match` remain unchanged. A no-option
+`LinkedSpecRuntimeEngine(...)` and `create_engine(loaded)` are intrinsic; the still-public explicit engine mode is
+retained only for outer CLI/corpus compatibility until `.9.1.6.5`.
+
+Generated-source v1 remains deliberately isolated. Its private compatibility engine preserves historical seek,
+and its validated ten-family plan still owns legacy sequence/choice interpretation, including compact-pipe v1
+behavior. The generated-source contract and format remain v1/1; descriptor v1, generated v2, public option
+retirement, and admission remain `.9.1.6.3-.6`.
+
+The new neutral JSON-driven execution suite passes 104/104 across all 36 family spellings on live and normalized
+routes, all eight mixed parent/child mechanisms, both structural replacements, loaded execution, recursive paths,
+trace attribution, and generated-v1 isolation. Focused generated-source proof passes 60/60. The complete Julia
+package passes 2,320 assertions with only the exact frozen shared-help mismatch, corpus remains 105/105, shared
+primary remains exactly 32/65 in default and POSIX with the same 33 later-owned failures, and neutral governance
+remains 67 files / 4 complete + 4 pending / 39 rejected mutations. No rollout row advances.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges
 
 Julia now consumes the complete neutral syntax-normalization boundary. Compact `|` is correctly classified as

@@ -134,7 +134,7 @@ end
 
 function create_engine(
     loaded::LoadedCompiledSpec;
-    parse_mode = SeekParseMode,
+    parse_mode = nothing,
     max_iterations::Int = 10_000,
 )
     request = loaded.loaded.resolved.request

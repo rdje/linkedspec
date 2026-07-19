@@ -1,0 +1,52 @@
+---
+id: julia-rule-local-cursor-execution
+title: "Julia normal execution derives cursor and composition policy at every entered rule"
+answers:
+  - "does Julia use rule local cursor policy"
+  - "where does Julia derive seek versus consume"
+  - "does a Julia parent propagate cursor policy to a child"
+  - "does Julia AND consume and OR seek"
+  - "does loaded Julia execution use rule local cursor policy"
+  - "does normalized Julia SpecFile JSON use rule local cursor policy"
+  - "how does Julia trace entered rule cursor policy"
+  - "does Julia generated source v1 use intrinsic cursor policy"
+  - "why does Julia keep a generated v1 compatibility engine"
+  - "does Julia still accept an explicit global parse mode"
+  - "what tests prove Julia rule local cursor execution"
+date: 2026-07-18
+status: verified normal execution; descriptor/generated/public/admission remain FUTURE-PARITY-BACKLOG.9.1.6.3-.6
+tags: [julia, runtime, cursor, rule-family, trace, generated-source, FUTURE-PARITY-BACKLOG]
+evidence: "FUTURE-PARITY-BACKLOG.9.1.6.2 derives family/cursor/sequence-choice once at every ordinary _execute_runtime_rule! entry. Live, loaded-default, normalized SpecFile JSON, recursive, and traced routes pass 104 neutral assertions over all 36 families, eight parent-child mechanisms, and two structural replacements. Generated v1 remains behind a private seek/family compatibility engine and focused emitter proof passes 60. Complete package is 2,320 pass plus the one frozen help mismatch; corpus is 105/105; shared primary remains 32/65 twice; neutral governance remains 67 files / 4 complete + 4 pending / 39 mutations."
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && python3 tools/check_rule_local_cursor_contract.py"
+---
+
+## Fact
+
+Normal Julia rule execution has one high-level authority: the family of the rule currently being entered.
+`_execute_runtime_rule!` derives one `_RuntimeRuleExecutionPolicy` before lifecycle or matching work:
+
+- exact AND family maps to consume plus ordered sequence;
+- default/OR family maps to seek plus choice;
+- every blind, action, explicit-call, and recursive child receives the current cursor but derives policy again
+  from its own compiled rule.
+
+The derived cursor value is passed into ordinary alternation and specific-slot matching. Low-level
+`runtime_match`, `seek_match`, and `consume_match` remain unchanged. No-option `LinkedSpecRuntimeEngine(compiled)`
+and loaded `create_engine(...)` are intrinsic; ordinary normalized `SpecFile` JSON reconstructs the same family
+metadata. Rule trace entries identify `family=and|or_default` and `cursor_policy=consume|seek`, and regex decisions
+record the effective policy.
+
+Two staged compatibility boundaries remain explicit. An explicitly supplied engine option is still honored for
+outer CLI/corpus callers until `.9.1.6.5`. Generated-source v1 uses a private compatibility engine with historical
+seek and derives legacy sequence/choice from its validated v1 handler-family plan. This prevents a v1 artifact
+from silently changing meaning before generated-source v2 `.9.1.6.4`. Descriptor v1, generated v2, option removal,
+and 15-role admission remain `.9.1.6.3-.6`; rollout therefore stays 4 complete / 4 pending.
+
+`julia/test/rule_local_cursor_execution_test.jl` reads the unchanged neutral JSON contract. It covers every one
+of the 36 family spellings on live and normalized routes, all eight parent-child mechanisms, both structural
+replacements, loaded execution, recursion, trace attribution, and generated-v1 isolation. Existing generated
+tests additionally lock all ten v1 families and the historical repeated-child ordering.
+
+Related: [[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-preflight]],
+[[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]],
+[[dart-rule-local-cursor-execution]], and [[rust-rule-local-cursor-execution]].

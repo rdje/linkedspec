@@ -8,12 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.1` — implementation and signoff are complete; documentation/cleanup are synchronized
-  and the prepared commit is the only remaining boundary. Runtime `.2` may activate only after the tree is clean.
+- `FUTURE-PARITY-BACKLOG.9.1.6.2` — intrinsic ordinary Julia runtime implementation/signoff is complete after
+  clean normalization `ac7010ee` at ahead 224. Its prepared commit is the only remaining boundary; descriptor-v1
+  `.9.1.6.3` may activate task-tree-first only after the tree and brief are clean.
 
 ## Latest Completed Slice
-- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges**
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors**
   (DONE and verified; clean commit pending).
+
+  **Result:** Each normal live, loaded-default, normalized, recursive, and traced rule entry derives cursor and
+  sequence/choice policy once from its own family. Children rederive independently; generated v1 and explicit
+  outer callers retain bounded compatibility. Descriptor/generated/options/admission remain `.3-.6`.
+
+  **Proof:** Focused execution 104; generated-v1 isolation 60; complete package 2,320 pass plus the exact frozen
+  one help mismatch; corpus 105; primary 32/65x2; cursor 67/4+4/39; root 4/7+34; KM 616/4,466; mdBook/four
+  doctrines; canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 611 seconds.
+
+  **Next:** Commit `.9.1.6.2`, prove clean, then activate descriptor-v1 leaf `.9.1.6.3` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges**
+  (DONE at clean commit `ac7010ee`).
 
   **Result:** Julia consumes all 36 family rows, 18 edge rows, and six ownership sets. Compact `|` is OR/default;
   typed bare AST preserves nullable indices, source form, blocks/fluents, forward declarations, and lifecycle
@@ -25,7 +39,7 @@ Current execution status for interruption-safe batch workflow recovery.
   doctrines; canonical Perl root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 614 seconds. Generated
   11 MB mdBook and Python cache are removed; the reusable Julia depot stays for `.2`.
 
-  **Next:** Commit `.9.1.6.1`, prove clean, then activate intrinsic runtime leaf `.9.1.6.2` task-tree-first.
+  **Next:** Intrinsic runtime leaf `.9.1.6.2` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.0 — map Julia rule-local cursor rollout**
   (DONE at clean commit `ee8efbfc` — behavior-free preflight signed off).

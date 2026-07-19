@@ -91,6 +91,14 @@ _generated_family_uses_blind_dispatch(family::AbstractString) = String(family) i
     "rep_and_bcode",
 )
 
+_generated_family_uses_and_execution(family::AbstractString) = String(family) in (
+    "and_single_acode",
+    "and_acode_seq",
+    "and_bcode",
+    "rep_and_acode",
+    "rep_and_bcode",
+)
+
 function classify_generated_rule_family(rule::CompiledRule)
     mode = rule.mode_metadata.name
     repetition = mode in (
@@ -210,7 +218,7 @@ function execute_generated_parser_v1(
     families = validate_generated_rule_plan_v1(compiled, plan, source_identity)
     try
         return runtime_parse(
-            LinkedSpecRuntimeEngine(compiled),
+            _generated_v1_compatibility_engine(compiled),
             input;
             top_rule = top_rule,
             trace = trace,

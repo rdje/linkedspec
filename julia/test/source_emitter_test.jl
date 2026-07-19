@@ -272,22 +272,23 @@ end
           Set(generated_rule_family_name(family) for family in instances(GeneratedRuleFamily))
     @test validate_generated_rule_plan_v1(compiled, plan, identity) == plan_by_label
 
-    native_results = Dict{String,Any}()
+    generated_v1_results = Dict{String,Any}()
     for case in _GENERATED_FAMILY_CASES
-        native = runtime_execute(
-            LinkedSpecRuntimeEngine(compiled),
+        legacy = runtime_execute(
+            LinkedSpecJulia._generated_v1_compatibility_engine(compiled),
             case.input;
             top_rule = case.label,
         ).value
-        native_results[case.label] = native
+        generated_v1_results[case.label] = legacy
         @test execute_generated_parser_v1(
             compiled,
             plan,
             case.input,
             identity;
             top_rule = case.label,
-        ) == native
+        ) == legacy
     end
+    @test generated_v1_results["RepBcode"] == Any["A", "A", "B"]
 
     mutations = [
         (plan[1:(end - 1)], GeneratedPlanRowCountMismatchCode),
@@ -326,7 +327,7 @@ end
                         "label" => case.label,
                         "family" => case.family,
                         "input" => case.input,
-                        "expected" => native_results[case.label],
+                        "expected" => generated_v1_results[case.label],
                     )
                     for case in _GENERATED_FAMILY_CASES
                 ],

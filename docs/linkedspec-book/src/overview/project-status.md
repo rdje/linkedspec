@@ -30,7 +30,9 @@ remaining failures are exclusively the pending Julia cursor migration's legacy h
 Clean commit `7aa9c578` lands that admission. Behavior-free Julia cursor preflight `.9.1.6.0` is verified, and
 normalization `.9.1.6.1` now classifies every authored family, retains every governed bare-edge shape as typed AST,
 emits the six portable edge diagnostics, and lowers family-derived ownership into compiled action/blind tables.
-Runtime through admission `.2-.6` still precedes final exact 65x2 root admission `.4.3`.
+Intrinsic runtime `.9.1.6.2` now derives cursor plus sequence/choice once at every live, loaded-default,
+normalized, recursive, and traced rule entry. Children rederive from their own family. Descriptor, generated-v2,
+public-option, and admission `.3-.6` still precede final exact 65x2 root admission `.4.3`.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
@@ -39,12 +41,14 @@ all six ownership sets. Compact `|` is OR/default; complete-line and header-rest
 versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation
 returns the exact neutral stage/code/fields for undefined, indexed/grouped AND, mixed ownership, indexed blind,
 and blockless grouped-action failures. Compiled state exposes the derived family/policy and lowers valid bare edges
-into its existing action/blind tables. The staged outer boundary is intentionally unchanged: all normal engines
-still use global seek, parent-child agreement is 5/8, structural agreement is 1/2, descriptors retain global
-`parse_mode`, generated source remains v1/format 1, package execution reaches the known 56/57 help mismatch,
-primary is 32/65 in both environments, corpus is 105/105, and neutral governance remains 67/4+4/39. Intrinsic
-normal routes, descriptor v1, generated v2, option/CLI removal, and admission follow in `.2-.6`; no rollout row
-advances at normalization.
+into its existing action/blind tables. Normal execution now passes 104 contract-driven assertions: all 36 family
+spellings on live and normalized routes, all eight mixed parent/child mechanisms, both structural replacements,
+loaded-default behavior, recursion, and trace attribution. AND consumes/sequences; OR/default seeks/chooses; each
+child rederives. Generated v1 remains on its private compatibility engine, descriptors retain global `parse_mode`,
+and public CLI/corpus compatibility remains until `.5`. Focused generated proof is 60; package execution passes
+2,320 assertions plus the known help mismatch, primary is 32/65 twice, corpus is 105/105, and governance remains
+67/4+4/39. Descriptor v1, generated v2, option/CLI removal, and admission follow in `.3-.6`; no rollout row
+advances at runtime.
 
 ## Completed phases
 

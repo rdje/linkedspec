@@ -28,18 +28,20 @@ assertions, shared primary improves from 31/65 to exactly 32/65 in both option e
 105/105; the identical 33 remaining help/usage/request-trace failures belong to cursor migration `.9.1.6`.
 Composed Julia routes `.4.2` now prove loaded/normalized and generated/emitted direct/traced reuse, low
 requested/effective/basis trace, portable loader/generated zero/unknown failures, unchanged generated v1 identity,
-and generated-plan-first rejection in a 57-assertion suite. Dart cursor admission `.9.1.5.6` is cleanly committed
-at `7aa9c578`; behavior-free Julia cursor preflight `.9.1.6.0` is verified and awaits its clean commit before
-normalization `.1`, then exact 65x2 root
-admission `.4.3` follows. Lua fallback remains blocked by
+and generated-plan-first rejection in a 57-assertion suite. Julia cursor preflight `.9.1.6.0` and typed
+normalization `.1` are cleanly committed through `ac7010ee`. Intrinsic runtime `.2` now derives AND-consume/
+sequence and OR-default-seek/choice once at every live, loaded-default, normalized, recursive, and traced rule
+entry. All 36 families, eight parent/child rows, and two structural replacements are exact in 104 focused
+assertions; generated v1 remains behind its private compatibility engine. Descriptor v1, generated v2,
+option/CLI removal, and admission remain `.3-.6`, then exact 65x2 root admission `.4.3` follows. Lua fallback remains blocked by
 validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
-Julia cursor preflight now proves all 36 headers parse but compact `|` is misclassified as AND; all 36 engines
-retain global seek. Bare-edge rows are 3 action / 3 blind / 1 lifecycle / 11 raw with none of seven portable
-edge/edge-set error cases exact and indexed blind syntax silently accepted. Mixed parent/child agreement is 5/8,
-structural agreement 1/2, descriptor state remains global-mode, and generated source remains v1. The exact
-implementation order is normalization, intrinsic normal routes, descriptor v1, generated v2, option/CLI removal,
-then 15-role admission; v1 generated semantics stay isolated until the v2 bump.
+Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
+sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
+parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
+structural replacements are exact. Descriptor state remains global-mode v0, generated source remains v1/format 1,
+and outer CLI/corpus callers retain an explicit compatibility override. The remaining order is descriptor v1,
+generated v2, option/CLI removal, then 15-role admission; v1 generated semantics stay isolated until the v2 bump.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

@@ -67,9 +67,11 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > is OR/default, complete-line/header-rest bare targets remain typed until the
 > full declared-label set is available, all six edge diagnostics carry the
 > neutral stage/code/fields, and valid ownership lowers into compiled action or
-> blind tables. Julia execution still uses the staged global mode; entered-rule
-> policy, descriptor v1, generated v2, option removal, and admission remain
-> `.9.1.6.2-.6`.
+> blind tables. Runtime `.9.1.6.2` now derives AND-consume/sequence and
+> OR-default-seek/choice once at every normal live, loaded, normalized,
+> recursive, and traced entry; children rederive from their own family.
+> Descriptor v1, generated v2, option removal, and admission remain `.3-.6`,
+> while generated v1 stays on its private compatibility path until `.4`.
 > Rollout is 4 complete / 4 pending, with Julia, Lua, recurring five-backend,
 > and public no-drift work dependency-ordered under `.9.1.6-.9`; the current
 > governed inventory is 67 files with 39 effective mutations.
@@ -681,9 +683,10 @@ The Perl reference implements both the decision's bare-edge normalization and no
 implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
 derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
 family/policy/edge facts through descriptor v1. Dart `.9.1.5.1-.5` now implements the same typed normalization,
-live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1` now
-implements the typed normalization boundary only: every family and edge shape is exact in AST/validation/compiled
-state, while runtime policy and outward artifacts remain staged. A
+live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1-.2` now
+implements typed normalization plus live/loaded/normalized/recursive/traced entered-rule policy: every family and
+edge shape is exact in AST/validation/compiled state, and every ordinary rule spends its own derived policy.
+Descriptor/generated/public artifacts remain staged. A
 complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -741,7 +744,7 @@ the six neutral normalization/validation diagnostics, live/reconstructed policy 
 projection, generated-source-v2 reconstruction, and public option/CLI removal are current and admitted.
 In Julia, authored family identity, typed bare edges, family-derived ownership, compiled action/blind lowering,
 and the same six portable diagnostics are current. Normal live/loaded/reconstructed policy spending, descriptor
-v1, generated-source v2, option/CLI removal, and composed admission remain `.9.1.6.2-.6`, so Julia does not yet
+v1, generated-source v2, option/CLI removal, and composed admission remain `.9.1.6.3-.6`, so Julia does not yet
 advance the rollout row.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,

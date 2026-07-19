@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.2` — derive at rule entry and version every compatibility seam):
+  Julia's runtime needs one policy value at the top of `_execute_runtime_rule!`, not repeated family tests inside
+  match helpers and not parent state threaded through child calls. `_RuntimeRuleExecutionPolicy` therefore binds
+  normalized family, effective seek/consume policy, and sequence/choice interpretation once. Regex and blind
+  execution consume that value explicitly; action, blind, direct-call, and recursive child dispatch re-enter the
+  same owner and derive again. This makes policy ownership visible and prevents a later helper from accidentally
+  falling back to engine-global state.
+
+  Constructor default and explicit compatibility must remain distinguishable during staged migration. A missing
+  engine option now means intrinsic rule policy, while an explicitly supplied option remains the temporary outer
+  CLI/corpus override until `.5`. Loaded-default construction passes no option and is therefore intrinsic.
+  Normalized `SpecFile` JSON compiles into the same rule metadata and needs no serialized cursor field.
+
+  Generated v1 cannot silently inherit this semantic change. Its private `_generated_v1_compatibility_engine`
+  retains historical seek, while the validated v1 family row selects legacy sequence/choice independently from
+  normalized compiled identity. That distinction is observable for repeated consume-owning children and compact
+  pipe; the focused emitter suite locks both. Generated v2 `.4` is the only leaf allowed to remove this adapter,
+  change artifact meaning, and reject v1 under a new contract identity.
+
+  The execution suite reads the unchanged neutral contract and proves all 36 families, eight parent/child rows,
+  and two structural replacements on live and normalized routes, plus loaded and trace attribution. It passes
+  104/104; generated-source tests pass 60/60; the complete package passes 2,320 plus the one frozen help failure;
+  corpus passes 105/105; shared primary remains 32/65 twice with the identical 22 help/usage and 11 request-trace
+  failures. The neutral inventory stays 67/4+4/39 because new tests and the source-emitter owner avoid adding
+  migration tokens outside the already-owned Julia runtime/loader/test seams. Descriptor/generated/public/admission
+  state is intentionally unchanged for `.3-.6`.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.1` — preserve bare provenance until compiled ownership lowering):
   Bare references cannot be rewritten into explicit `->` or `=>` syntax during parsing. Ownership depends on the
   parent family, undefined-target diagnosis needs the complete declared-label set, and the contract distinguishes

@@ -2069,9 +2069,12 @@ index long enough to fail validation instead of silently losing the suffix. Whol
 ownership for bare AND members and action ownership for bare OR/default members, rejects the six governed invalid
 forms with exact portable stage/code/fields, and compiled state lowers valid bare members into its existing typed
 blind/action tables. The contract-driven Julia suite passes 353 assertions over all 36 family rows, all 18 edge
-rows, all six ownership sets, JSON roundtrips, and physical-line boundaries. This is normalization only: Julia's
-normal runtime still uses its staged global parse mode, descriptor metadata still has global `parse_mode`,
-generated source remains v1/format 1, and the public option remains until `.9.1.6.2-.5`; admission alone advances
+rows, all six ownership sets, JSON roundtrips, and physical-line boundaries. Runtime `.9.1.6.2` now adds 104
+execution assertions across all 36 families on live/normalized routes, all eight parent-child mechanisms, both
+structural replacements, loaded-default execution, recursion, and trace attribution. Normal AND consumes and
+sequences; OR/default seeks and chooses; every child entry rederives. Generated v1 stays on a private historical
+seek/family adapter and passes 60 focused emitter assertions. Descriptor metadata still has global `parse_mode`,
+generated source remains v1/format 1, and the public option remains until `.9.1.6.3-.5`; admission alone advances
 the rollout in `.9.1.6.6`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40

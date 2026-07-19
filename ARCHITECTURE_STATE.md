@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
+- `2026-07-18` Julia cursor runtime refresh: `FUTURE-PARITY-BACKLOG.9.1.6.2` adds one entered-rule execution
+  policy in `julia/src/runtime/Interpreter.jl`. Exact AND consumes and sequences; OR/default seeks and chooses.
+  Blind, action, explicit-call, and recursive children receive only the current cursor and rederive from their own
+  compiled family. Direct, loaded-default, normalized `SpecFile` JSON, and traced routes share this owner; rule
+  trace scopes expose family plus effective policy. Missing engine option means intrinsic behavior, while an
+  explicit value remains a temporary outer CLI/corpus adapter. Generated v1 uses a private seek/family adapter so
+  its v1/format-1 meaning cannot drift before `.4`. Focused execution is 104, generated proof 60, complete package
+  2,320 plus the frozen help mismatch, corpus 105, shared primary 32/65x2, and governance 67/4+4/39. Descriptor,
+  generated-v2, option removal, admission, and rollout remain `.3-.6`.
 - `2026-07-18` root-selection decision: ADR `0046` and `linkedspec-root-rule-selection-v1` order selection as
   explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
   Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains

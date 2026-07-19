@@ -98,7 +98,7 @@ end
 
 struct LinkedSpecRuntimeEngine
     compiled_spec::CompiledSpec
-    parse_mode::LinkedSpecParseMode
+    parse_mode::Union{Nothing,LinkedSpecParseMode}
     max_iterations::Int
     spec_name::Union{Nothing,String}
     spec_path::Union{Nothing,String}
@@ -106,7 +106,7 @@ end
 
 function LinkedSpecRuntimeEngine(
     compiled_spec::CompiledSpec;
-    parse_mode = SeekParseMode,
+    parse_mode = nothing,
     max_iterations::Int = 10_000,
     spec_name = nothing,
     spec_path = nothing,
@@ -116,12 +116,15 @@ function LinkedSpecRuntimeEngine(
     end
     return LinkedSpecRuntimeEngine(
         compiled_spec,
-        _normalize_parse_mode(parse_mode),
+        parse_mode === nothing ? nothing : _normalize_parse_mode(parse_mode),
         max_iterations,
         spec_name === nothing ? nothing : String(spec_name),
         spec_path === nothing ? nothing : String(spec_path),
     )
 end
+
+_generated_v1_compatibility_engine(compiled_spec::CompiledSpec) =
+    LinkedSpecRuntimeEngine(compiled_spec; parse_mode = SeekParseMode)
 
 struct _RuntimeRuleLocalBinding
     variable_present::Bool
@@ -202,6 +205,12 @@ end
 struct _RuntimeRuleResult
     matched::Bool
     value::Any
+end
+
+struct _RuntimeRuleExecutionPolicy
+    family::String
+    cursor_policy::LinkedSpecParseMode
+    uses_and_execution::Bool
 end
 
 function _enter_runtime_trace_scope!(
@@ -519,6 +528,7 @@ function _execute_runtime_rule!(
             "generated rule plan does not contain '$label'",
         ))
     end
+    execution_policy = _runtime_rule_execution_policy(engine, rule, generated_family)
 
     recursion_key = (label, entry_regex_index, context.cursor_codeunit)
     if recursion_key in context.active_rule_entries
@@ -539,7 +549,10 @@ function _execute_runtime_rule!(
     trace_scope = _enter_runtime_trace_scope!(
         context,
         "julia_runtime:rule",
-        "rule=$label entry_regex=$entry_regex_index mode=$(rule.mode_metadata.name) cursor=$(context.cursor_codeunit)",
+        "rule=$label entry_regex=$entry_regex_index mode=$(rule.mode_metadata.name) " *
+        "family=$(execution_policy.family) " *
+        "cursor_policy=$(parse_mode_name(execution_policy.cursor_policy)) " *
+        "cursor=$(context.cursor_codeunit)",
         LinkedSpecTraceHigh,
     )
     if generated_family !== nothing && context.generated_source_identity !== nothing
@@ -570,9 +583,21 @@ function _execute_runtime_rule!(
             uses_blind_dispatch = generated_family === nothing ?
                 !isempty(rule.blind_edges) : _generated_family_uses_blind_dispatch(generated_family)
             if uses_blind_dispatch
-                return _execute_runtime_blind_rule!(engine, rule, context)
+                return _execute_runtime_blind_rule!(
+                    engine,
+                    rule,
+                    context;
+                    uses_and_execution = execution_policy.uses_and_execution,
+                )
             end
-            return _execute_runtime_regex_rule!(engine, rule, entry_regex_index, context)
+            return _execute_runtime_regex_rule!(
+                engine,
+                rule,
+                entry_regex_index,
+                context;
+                cursor_policy = execution_policy.cursor_policy,
+                uses_and_execution = execution_policy.uses_and_execution,
+            )
         catch error
             if error isa _RuntimeActionReturn
                 return _runtime_returned(error.value)
@@ -615,10 +640,37 @@ function _execute_runtime_rule!(
     end
 end
 
+function _runtime_rule_execution_policy(
+    engine::LinkedSpecRuntimeEngine,
+    rule::CompiledRule,
+    generated_family,
+)
+    family = rule_family(rule.mode_metadata)
+    if generated_family !== nothing
+        # Contract-v1 generated artifacts retain their validated handler-family
+        # interpretation and historical seek default until generated-source v2.
+        return _RuntimeRuleExecutionPolicy(
+            family,
+            something(engine.parse_mode, SeekParseMode),
+            _generated_family_uses_and_execution(generated_family),
+        )
+    end
+    return _RuntimeRuleExecutionPolicy(
+        family,
+        something(
+            engine.parse_mode,
+            rule.mode_metadata.is_and ? ConsumeParseMode : SeekParseMode,
+        ),
+        rule.mode_metadata.is_and,
+    )
+end
+
 function _execute_runtime_blind_rule!(
     engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
     context::_RuntimeExecutionContext,
+    ;
+    uses_and_execution::Bool,
 )
     minimum = rule.mode_metadata.rep_min
     if minimum === nothing
@@ -630,6 +682,7 @@ function _execute_runtime_blind_rule!(
                 engine,
                 rule,
                 context;
+                uses_and_execution = uses_and_execution,
                 implicit_and_result = implicit_and_result,
             ))
             if matched.nexted
@@ -649,7 +702,7 @@ function _execute_runtime_blind_rule!(
             if exit_return !== nothing
                 return _runtime_returned(exit_return.value)
             end
-            value = rule.mode_metadata.is_and && !isempty(implicit_and_result) ?
+            value = uses_and_execution && !isempty(implicit_and_result) ?
                 Any[implicit_and_result...] : nothing
             return _RuntimeRuleResult(matched.value || matched_any, value)
         end
@@ -661,7 +714,7 @@ function _execute_runtime_blind_rule!(
         if exit_return !== nothing
             return _runtime_returned(exit_return.value)
         end
-        value = rule.mode_metadata.is_and && !isempty(implicit_and_result) ?
+        value = uses_and_execution && !isempty(implicit_and_result) ?
             Any[implicit_and_result...] : nothing
         return _RuntimeRuleResult(matched_any, value)
     end
@@ -679,7 +732,12 @@ function _execute_runtime_blind_rule!(
             return _runtime_returned(loop_start.value)
         end
 
-        matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(engine, rule, context))
+        matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(
+            engine,
+            rule,
+            context;
+            uses_and_execution = uses_and_execution,
+        ))
         if matched.nexted
             matches += 1
             if context.cursor_codeunit == before
@@ -737,9 +795,10 @@ function _execute_runtime_blind_once!(
     engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
     context::_RuntimeExecutionContext;
+    uses_and_execution::Bool,
     implicit_and_result = nothing,
 )
-    if rule.mode_metadata.is_and
+    if uses_and_execution
         for (edge_index, edge) in enumerate(rule.blind_edges)
             cursor_before = context.cursor_codeunit
             child = _execute_runtime_rule!(
@@ -813,6 +872,9 @@ function _execute_runtime_regex_rule!(
     rule::CompiledRule,
     entry_regex_index::Int,
     context::_RuntimeExecutionContext,
+    ;
+    cursor_policy::LinkedSpecParseMode,
+    uses_and_execution::Bool,
 )
     minimum = rule.mode_metadata.rep_min
     if minimum === nothing
@@ -824,7 +886,8 @@ function _execute_runtime_regex_rule!(
                 rule,
                 context;
                 entry_regex_index = entry_regex_index,
-                and_sequence = rule.mode_metadata.is_and && length(rule.regex_patterns) > 1,
+                cursor_policy = cursor_policy,
+                and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
             ))
             if matched.nexted
                 matched_any = true
@@ -873,7 +936,8 @@ function _execute_runtime_regex_rule!(
             engine,
             rule,
             context;
-            and_sequence = rule.mode_metadata.is_and && length(rule.regex_patterns) > 1,
+            cursor_policy = cursor_policy,
+            and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
         ))
         if matched.nexted
             matches += 1
@@ -929,6 +993,7 @@ function _execute_runtime_regex_once!(
     rule::CompiledRule,
     context::_RuntimeExecutionContext;
     entry_regex_index::Int = 0,
+    cursor_policy::LinkedSpecParseMode,
     and_sequence::Bool = false,
 )
     cursor_before = context.cursor_codeunit
@@ -938,7 +1003,7 @@ function _execute_runtime_regex_once!(
             rule,
             nothing,
             cursor_before,
-            "patterns=0",
+            "cursor_policy=$(parse_mode_name(cursor_policy)) patterns=0",
         )
         return false
     end
@@ -947,17 +1012,18 @@ function _execute_runtime_regex_once!(
         for expected_index in eachindex(rule.regex_patterns)
             zero_based_index = expected_index - 1
             one_match = _match_runtime_specific(
-                engine,
                 rule.regex_patterns,
                 zero_based_index,
                 context,
+                cursor_policy,
             )
             _trace_runtime_regex_decision!(
                 context,
                 rule,
                 one_match,
                 context.cursor_codeunit,
-                "mode=AND expected_index=$zero_based_index",
+                "cursor_policy=$(parse_mode_name(cursor_policy)) mode=AND " *
+                "expected_index=$zero_based_index",
             )
             if one_match === nothing
                 return false
@@ -972,13 +1038,18 @@ function _execute_runtime_regex_once!(
     end
 
     one_match = if entry_regex_index > 0 && entry_regex_index < length(rule.regex_patterns)
-        _match_runtime_specific(engine, rule.regex_patterns, entry_regex_index, context)
+        _match_runtime_specific(
+            rule.regex_patterns,
+            entry_regex_index,
+            context,
+            cursor_policy,
+        )
     else
         runtime_match(
             RuntimeRegexAlternation(rule),
             context.input,
             context.cursor_codeunit;
-            parse_mode = engine.parse_mode,
+            parse_mode = cursor_policy,
         )
     end
     _trace_runtime_regex_decision!(
@@ -986,7 +1057,7 @@ function _execute_runtime_regex_once!(
         rule,
         one_match,
         cursor_before,
-        "entry_regex=$entry_regex_index",
+        "cursor_policy=$(parse_mode_name(cursor_policy)) entry_regex=$entry_regex_index",
     )
     if one_match === nothing
         return false
@@ -1023,16 +1094,16 @@ function _trace_runtime_regex_decision!(
 end
 
 function _match_runtime_specific(
-    engine::LinkedSpecRuntimeEngine,
     patterns::Vector{String},
     zero_based_index::Int,
     context::_RuntimeExecutionContext,
+    cursor_policy::LinkedSpecParseMode,
 )
     one_match = runtime_match(
         RuntimeRegexAlternation([patterns[zero_based_index + 1]]),
         context.input,
         context.cursor_codeunit;
-        parse_mode = engine.parse_mode,
+        parse_mode = cursor_policy,
     )
     return one_match === nothing ? nothing : reindex_runtime_regex_match(one_match, zero_based_index)
 end
