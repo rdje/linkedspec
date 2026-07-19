@@ -8,13 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` — exact Julia root-selection admission is fully signed off and staged from
-  clean cursor commit `e6b71530` at ahead 229. Only its prepared commit, brief clearing, and clean proof remain;
-  Lua `.5` cannot activate before that boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` — behavior-free PUC Lua/LuaJIT root-selection seam preflight is complete
+  from clean Julia root commit `b7b55161` at ahead 230. Its task/KM/live/book closeout, prepared commit, brief
+  clearing, and clean proof remain; core `.5.1` cannot activate before that boundary.
 
 ## Latest Completed Slice
-- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection**
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 — map Lua root selection**
   (DONE; prepared commit is the only remaining workflow step).
+
+  **Result:** PUC Lua and LuaJIT have the same ordered native/composed mechanisms. Validation alone blocks the
+  existing markerless fallback; parser empty/comment-only handling, portable failures, descriptor identity, and
+  trace decision identity also need implementation. The frozen order is core `.5.1`, routes `.5.2`, cursor
+  `.9.1.7`, then exact dual-ABI 15-role admission `.5.3`. Authored selection fixtures will use entry lifecycle
+  `I`; fixed shared request-trace source bytes retain `E`.
+
+  **Proof:** All four PUC Lua/LuaJIT default/POSIX shared-primary legs are exactly 31/65: one root-owned
+  markerless failure plus 22 cursor help/usage and 11 cursor request-trace failures. Both complete packages are
+  176 pass plus the one cursor help failure; both corpora are 105/105. Direct disposable probes cover native,
+  loaded, reconstructed, generated-v1, emitted, descriptor, trace, diagnostic, strict, empty, and zero-rule seams.
+  KM is 623/4,533; root 5/7+39, cursor 5+3/44, mdBook and all four doctrines pass. Canonical local CI exits 0
+  after root consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 609 seconds.
+
+  **Next:** Commit `.5.0`, clear the brief, prove clean, then activate Lua root core `.9.1.1.2.5.1` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection**
+  (DONE at clean commit `b7b55161`).
 
   **Result:** One exact contract-declared 15-role consumer composes every neutral, native, loaded/reconstructed,
   generated/emitted, descriptor, diagnostic, trace, and primary projection once. Authored selection fixtures use
@@ -25,7 +43,7 @@ Current execution status for interruption-safe batch workflow recovery.
   whitespace, and canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 616 seconds. Generated
   11 MiB book and 28 KiB Python cache are removed.
 
-  **Next:** Commit `.4.3`, clear the brief, prove clean, then activate Lua root `.9.1.1.2.5` task-tree-first.
+  **Next:** Lua preflight `.5.0` is complete; its clean commit precedes root core `.5.1`.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.6 — admit Julia rule-local cursor contract**
   (DONE at clean commit `e6b71530`).

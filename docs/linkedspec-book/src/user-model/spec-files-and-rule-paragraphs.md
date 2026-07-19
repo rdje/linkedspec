@@ -45,12 +45,15 @@ wins even when the source contains one or more `Rule::` markers. Without an expl
 selector, the first authored `Rule::` in definition order wins; without a marker, the first
 authored rule wins.
 
-The composed Perl, Rust, and Dart backends implement all three branches across their admitted native,
-loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command routes. Julia core plus loaded/
-normalized/generated/emitted routes now do too, but its topology admission waits for cursor migration and Lua
-still requires an entry marker. Markerless execution is therefore **not yet uniformly admitted portable
-behavior**. Until
-`FUTURE-PARITY-BACKLOG.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
+The composed Perl, Rust, Dart, and Julia backends implement all three branches across their admitted native,
+loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command routes. Their hand-authored
+selection fixtures return distinct values from entry lifecycle `I`, which directly proves which rule was entered;
+an `E` block can coincidentally return the same final value after a successful match and is weaker evidence.
+
+Lua's ordered runtime fallback already works when its current marker-required validation is bypassed, but
+validated source does not yet expose it. Exact PUC Lua/LuaJIT preflight therefore freezes core, route, cursor, and
+admission work under `.9.1.1.2.5`. Markerless execution is **not yet uniformly admitted portable behavior**.
+Until `.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 

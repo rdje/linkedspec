@@ -71,6 +71,14 @@ usage and 11 medium-or-higher request-trace failures. Julia now passes 65/65 twi
 its cursor topology requirement, and root admission `.4.3` closes the separate root topology requirement through
 137 focused assertions.
 
+Lua behavior-free preflight `.9.1.1.2.5.0` runs the same shared manifest through disposable native adapters. PUC
+Lua and LuaJIT are identical with `POSIXLY_CORRECT` unset and set: 31/65 in every leg. Only
+`success_markerless_first_authored_rule` belongs to root selection; 22 help/usage and 11 request-trace mismatches
+belong to cursor `.9.1.7`. Complete package execution is 176 passing groups plus one cursor help failure per ABI,
+and corpus execution is 105/105 per ABI. Root core `.5.1` should improve only that single root row to 32/65;
+routes `.5.2` preserve generated v1 identity, cursor `.9.1.7` owns the remaining 33, and topology admission `.5.3`
+requires both tracks. Hand-authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`.
+
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace
@@ -130,8 +138,8 @@ Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted bou
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
-Julia now passes 65/65 twice after cursor convergence, without yet claiming topology admission, and Lua remains
-`.5`. A green 5x2x65 run is the
+Julia now passes 65/65 twice and is topology-admitted. Lua preflight is exactly 31/65 twice on both PUC Lua and
+LuaJIT, with one root-owned and 33 cursor-owned mismatches. A green 5x2x65 run is the
 final rollout target rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local

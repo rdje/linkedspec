@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` — Lua already stores the ordering; validation hides it):
+  PUC Lua and LuaJIT preserve authored `definition_order` and `is_top` identically. Their existing runtime default
+  helper already selects first marker then first rule, so bypassed markerless native, normalized, and generated-v1
+  direct/traced execution returns from the first authored rule. The validator's marker requirement makes that
+  branch unreachable for validated, loaded, and emitted source. The correct repair is therefore one compiled-state
+  resolver plus marker-optional one-or-more-rule validation, not a second ordering model in each route.
+
+  Empty/comment-only text currently fails in the parser, while non-rule garbage correctly fails there. `.5.1`
+  must preserve the first two as empty `SpecFile` envelopes so typed `no_rules_defined` validation owns the
+  structural failure. Selection then runs before runtime context/user code and reports typed zero/unknown identity.
+  Descriptor state needs immutable `entry_rule_contract`; low trace needs requested/effective/basis. `.5.2`
+  composes loaded/reconstructed/generated-v1/emitted routes without changing generated v1/format-1 identity or
+  moving generated-plan validation behind selection.
+
+  The shared primary split is exact on both ABIs and in both option environments: 31 pass, one root-owned
+  markerless failure, 22 cursor-owned help/usage failures, and 11 cursor-owned request-trace failures. Complete
+  package proof is 176 pass plus the cursor help mismatch and corpus is 105/105 per ABI. Hence `.5.1` then `.5.2`
+  must precede cursor `.9.1.7`, and exact 15-role admission `.5.3` depends on both. Hand-authored selection evidence
+  uses distinct `I` returns: `I` directly proves entry, whereas `E` may return the same value only after a
+  successful match. The fixed shared request-trace fixture retains its canonical `E` bytes.
+
+  Behavior-free closeout passes root governance 5/7+39, cursor governance 5+3/44, KM 623/4,533, mdBook, all four
+  doctrines, and canonical local CI. The canonical reference boundary is root consumers 7+5, cursor admission
+  288, primary 65x2, and Phase 0 1,031/1,031 in 609 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` — entry lifecycle makes a selection test causally sharp):
   A final value returned from `E` after a successful local match can equal the value an entered rule would return
   from `I`, but it does not isolate entry as clearly. Julia's admission fixtures therefore give each candidate

@@ -42,6 +42,14 @@ entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/1
 67/5+3/44, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is complete.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout is 5/7.
 
+Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
+manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole
+root-owned failure, while 22 help/usage and 11 request-trace failures belong to cursor migration `.9.1.7`. Each
+complete package has 176 passing groups plus the one cursor help mismatch, and each corpus is 105/105. Ordered
+native/reconstructed/generated-v1 fallback already exists behind marker-required validation. Work is therefore
+frozen as core `.5.1`, composed routes `.5.2`, cursor `.9.1.7`, then exact 15-role admission `.5.3`. New authored
+selection fixtures use entry lifecycle `I`; the fixed request-trace fixture retains its canonical `E` bytes.
+
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
 versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation

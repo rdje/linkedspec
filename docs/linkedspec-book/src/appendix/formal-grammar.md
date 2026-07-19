@@ -214,8 +214,11 @@ Julia cursor implementation through `.9.1.6.5` removes the legacy help/usage/tra
 entry selection, so exact shared primary is 65/65 in both environments. Root admission `.4.3` composes all 15
 declared roles once; its authored marked/markerless selection fixtures use `I` returns to prove entered-rule
 identity directly. Focused admission is 137, package proof is 3,428, corpus is 105/105, and the checker rejects 39
-mutations. Lua still blocks markerless source at validation. Until `.5-.6` close, retain a `::` for uniform
-composed cross-backend execution and pass an explicit selector when identity matters.
+mutations. Lua still blocks markerless source at validation. Its dual-ABI preflight proves all four default/POSIX
+primary legs are exactly 31/65, with the markerless row as the sole root-owned failure and the other 33 owned by
+cursor migration. Core `.5.1`, composed routes `.5.2`, cursor `.9.1.7`, and exact admission `.5.3` are dependency-
+ordered. Until `.5-.6` close, retain a `::` for uniform composed cross-backend execution and pass an explicit
+selector when identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
@@ -1030,12 +1033,12 @@ accept bare-keyword form in addition to parenthesized form.
 A valid `.spec` file must satisfy the following current portable checks. Item 1 distinguishes implemented core
 behavior from composed admission while `.9.1.1.2.4-.6` roll out:
 
-1. At least one rule exists. Perl, Rust, and Dart validation plus composed execution accept a markerless file and
-   are admitted. Julia validation plus loaded/normalized/generated/emitted execution now do too, while its
-   topology admission waits for cursor migration; Lua still requires at least one marked rule (`::`). Use a marker
-   until the remaining rollout closes when portable cross-backend execution matters. A zero-rule executable spec
-   is always invalid. Julia loader/generated routes report portable `no_rules_defined` / `validate_spec` before
-   considering either default or explicit selection.
+1. At least one rule exists. Perl, Rust, Dart, and Julia validation plus composed execution accept a markerless
+   file and are admitted. Lua still requires at least one marked rule (`::`); its `.5.0` preflight confirms the
+   ordered runtime fallback exists behind validation and assigns marker-optional one-or-more-rule validation to
+   `.5.1`. Use a marker until the remaining rollout closes when portable cross-backend execution matters. A
+   zero-rule executable spec is always invalid. Admitted loader/generated routes report portable
+   `no_rules_defined` / `validate_spec` before considering either default or explicit selection.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
 4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.

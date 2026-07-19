@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 — map Lua root selection
+
+The behavior-free Lua root-selection preflight is complete. Real disposable PUC Lua and LuaJIT probes establish
+the same boundary across native, loaded/reconstructed, generated-v1/emitted, descriptor, trace, diagnostic,
+strict, parser, and primary routes. All four default/POSIX primary legs are exactly 31/65: the markerless-default
+case is the sole root-owned failure; 22 help/usage and 11 request-trace failures belong to cursor `.9.1.7`.
+Complete package execution is 176 pass plus one cursor help failure per ABI, and corpus is 105/105 per ABI.
+
+The safe dependency order is now frozen as root core/descriptor `.5.1`, composed routes `.5.2`, cursor `.9.1.7`,
+then exact dual-ABI 15-role admission `.5.3`. New authored selection fixtures use entry lifecycle `I`; fixed
+shared request-trace source bytes retain `E`. No Lua product source, test, fixture, neutral contract, capability,
+or rollout behavior changes in this preflight.
+
+Focused governance closes at root 5 complete / 2 pending / 39 mutations and cursor 5 complete + 3 pending / 44
+mutations. The Knowledge Map is 623 facts / 4,533 question keys; mdBook and all four doctrines pass. Canonical
+local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031
+in 609 seconds.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection
 
 Julia root-rule selection is now composed-admitted against `linkedspec-root-rule-selection-v1`. One new package
