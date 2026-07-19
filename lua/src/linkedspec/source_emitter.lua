@@ -452,6 +452,10 @@ local function execute_generated(compiled, plan, input, source_identity, options
   end
   if interpreter.is_runtime_exit_now(result) then raise(result) end
   if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil and
+      result.diagnostic.code == interpreter.PARSE_MODE_OVERRIDE_REMOVED_CODE then
+    raise(result)
+  end
+  if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil and
       (result.diagnostic.code == M.GENERATED_NO_RULES_DEFINED_CODE or
         result.diagnostic.code == M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE) then
     raise(M.generated_source_entry_rule_selection_failed(identity, result))

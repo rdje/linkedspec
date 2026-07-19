@@ -453,7 +453,6 @@ local function execute_fixture(validation, fixture, options)
     spec_validator.validate_spec(spec, { trace = emitter })
     local compiled = compiled_spec.compile_spec(spec, { validate_source = false, trace = emitter })
     local engine = interpreter.runtime_engine(compiled, {
-      parse_mode = options.parse_mode,
       spec_name = fixture.name,
       spec_path = join_path(join_path(validation.root, fixture.name), "input.spec"),
       trace = emitter,
@@ -508,11 +507,9 @@ end
 function M.execute_corpus_fixtures(root, options)
   options = options or {}
   if type(options) ~= "table" then fail("corpus execution options must be a table") end
+  interpreter.reject_removed_runtime_options(options)
   if options.trace_config ~= nil and not trace.is_trace_config(options.trace_config) then
     fail("corpus execution trace_config must be a LinkedSpecTraceConfig")
-  end
-  if options.parse_mode ~= nil and type(options.parse_mode) ~= "string" then
-    fail("corpus execution parse_mode must be a string when present")
   end
 
   local validation = M.load_corpus_fixtures(root)

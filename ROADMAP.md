@@ -70,6 +70,13 @@ stale v1 before payload decode. Identical 44/106 RED is 106/106 green on both AB
 105/105x2, and governance is 69/5+3/44. KM 630/4,622, mdBook/four doctrines, and canonical root 7+5, cursor 288,
 primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass; safe generated artifacts are removed. Public removal/
 admission remain `.5-.6`.
+Clean generated-v2 commit `d472c136` activates Lua public/global cursor option removal `.5` task-tree-first.
+The bounded removal is now green: both ABIs move from 75/96 focused RED to 96/96, high-level snake/camel keys
+return the portable pre-effect diagnostic, primary help/request trace omit global state, and the retired flag gets
+targeted usage exit 2. Package is 177/177x2, all four ABI/environment primary legs are 65/65, corpus is 105/105x2,
+and governance is 68/5+3/44. Canonical signoff now passes through Phase 0 1,031/1,031 in 646 seconds and safe
+cleanup is complete; only the
+per-leaf commit remains before `.6` admission.
 
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.

@@ -357,21 +357,6 @@ Top::AND
     json.null,
     "default normal engine derives AND consume"
   )
-  check_equal(
-    runtime_value(and_compiled, "prefix x", { parse_mode = "seek" }),
-    "hit",
-    "explicit outer seek compatibility remains"
-  )
-
-  local or_compiled = compile_source([[
-Top::|
- /x/ -> Top { return("hit") }
-]])
-  check_same_json(
-    runtime_value(or_compiled, "prefix x", { parse_mode = "consume" }),
-    json.null,
-    "explicit outer consume compatibility remains"
-  )
 
   check_equal(
     linkedspec.execute_generated_parser_v2(

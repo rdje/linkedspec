@@ -40,7 +40,8 @@ adds a separate exact 15-role root-selection consumer over every neutral/native/
 route; authored selection fixtures return from entry lifecycle `I` so their distinct results prove which rule was
 entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/105, cursor governance remains
 67/5+3/44, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is complete.
-Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout is 5/7.
+Lua/LuaJIT public-option removal is complete; only its composed cursor admission `.6` and the separate root
+topology admission remain. Cursor rollout is still 5 complete / 3 pending until `.6` advances the Lua row.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole
@@ -100,9 +101,14 @@ projects normalized family, policy, ownership, and exact ordered semantic edges.
 bytes agree, and focused proof passes 875 assertions per ABI. Generated source is now v2/format 2 as of `.4`: it
 derives cursor/structure from the minimal family plan, classifies compact pipe as OR, and rejects v1 before payload
 decoding. Its identical 44/106 RED is now 106/106 green per ABI and makes eight focused consumers total 2,027;
-governance moves only to 69/5+3/44. Public options/rollout remain unchanged for `.5-.6`. Descriptor canonical proof passes through Phase 0
-1,031/1,031 in 621 seconds; the subsequent generated-v2 canonical closeout passes the same 1,031 tests in 644
-seconds with Knowledge Map 630/4,622.
+governance moves only to 69/5+3/44. Public-option `.5` then deletes caller-global engine state and removes the
+override from parse, loaded, corpus, generated, primary-help, and request-trace routes. Snake/camel legacy keys
+fail with `prepare_options` / `parse_mode_override_removed` before input or user code; the retired CLI spelling
+returns its exact usage exit 2; and `--top-rule` retains priority over authored `Rule::`. Its 75/96 dual-ABI RED
+becomes 96/96, the complete package passes 177/177 per ABI, and all four primary legs pass 65/65. Governance is
+68/5+3/44; composed admission remains `.6`. Descriptor canonical proof passes through Phase 0 1,031/1,031 in 621
+seconds; the subsequent generated-v2 canonical closeout passes the same 1,031 tests in 644 seconds with Knowledge
+Map 630/4,622.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted

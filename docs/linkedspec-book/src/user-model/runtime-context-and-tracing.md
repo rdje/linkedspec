@@ -468,18 +468,19 @@ freshly emitted direct/traced execution on both ABIs. A low success decision has
 
 Omitted selection writes `requested=<default>` and either `basis=first_authored_marker` or
 `basis=first_authored_rule`. Failure writes `effective=<none>` followed by portable `stage` and `code`; it occurs
-before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua topology admission and cursor
-migration remain pending, so markerless behavior is implemented but not yet uniformly admitted.
-Cursor policy comes from each authored rule family. Perl, Rust, Dart, and Julia reject the retired `--parse-mode`
-flag; Lua's later rollout leaf owns removal.
+before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua topology admission remains
+pending, so markerless behavior is implemented but not yet uniformly admitted.
+Cursor policy comes from each authored rule family. All five backends reject the retired `--parse-mode` flag with
+the targeted usage diagnostic.
 
 Lua cursor preflight `.9.1.7.0` established the earlier trace limitation. Runtime leaf `.9.1.7.2` now records high
 rule-entry details such as `rule=Top entry_regex=0 mode=And family=and cursor_policy=consume cursor=0`, and every
 regex decision includes the effective policy. Normalized-AST and loaded engines enter the same owner on PUC Lua
 and LuaJIT; action, blind, direct-call, and recursive children record their independently derived family/policy.
-An explicitly supplied outer policy remains a staged compatibility adapter, so request-trace/CLI removal still
-belongs to `.9.1.7.5`. Generated-source v2 trace reports the validated family while execution derives that rule's
-seek/consume and choice/sequence behavior; v1 artifacts must be regenerated.
+Leaf `.9.1.7.5` removes the explicit outer adapter from engine, parse, loader, corpus, generated, and primary
+routes. Legacy dynamic keys fail during `prepare_options`; the canonical request trace omits global cursor state.
+Generated-source v2 trace reports the validated family while execution derives that rule's seek/consume and
+choice/sequence behavior; v1 artifacts must be regenerated.
 
 ADR `0025` requires Unicode scalar text encoded as strict UTF-8 while preserving BOM/code points/newlines and
 performing no trimming or normalization. The Perl command now enforces that boundary: invalid spec/input bytes

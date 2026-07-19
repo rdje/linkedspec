@@ -45,6 +45,13 @@ ABIs; eight focused consumers total 2,027 assertions per ABI. Package remains 17
 primary remains 32/65x4, corpus 105/105x2, and governance is 69/5+3/44. KM 630/4,622, mdBook/four doctrines, and
 canonical Phase 0 1,031/1,031 in 644 seconds pass; safe generated artifacts are removed. Public removal/admission
 remain `.5-.6`.
+Clean generated-v2 commit `d472c136` activates Lua public/global cursor option removal `.5` task-tree-first.
+Option removal is now implemented on both ABIs. Exact focused proof moves from 75/96 RED to 96/96; engine, parse,
+loaded, corpus, generated, primary-help, and request-trace ownership are removed; legacy keys and the retired flag
+receive targeted migration diagnostics; and `--top-rule` remains higher priority than authored `Rule::`. Package
+passes 177/177x2, primary 65/65x4, corpus 105/105x2, and governance 68/5+3/44. Canonical signoff now passes
+through Phase 0 1,031/1,031 in 646 seconds and safe cleanup is complete; only the
+per-leaf commit remains before `.6` may activate.
 
 This file exists to make the active plan easier to follow without replacing the fuller historical and architectural roadmap in `ROADMAP.md`.
 

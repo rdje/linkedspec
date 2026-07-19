@@ -87,6 +87,14 @@ focused consumers total 2,027 assertions per ABI, package remains 176/177x2 only
 legs remain 32/65, corpus remains 105/105x2, and governance advances only to 69/5+3/44. Public option removal and
 dual-ABI admission remain `.5-.6`. KM is 630/4,622; mdBook/four doctrines and canonical root 7+5, cursor 288,
 primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass. Safe generated artifacts are removed.
+Clean generated-v2 commit `d472c136` activates Lua public/global cursor option removal `.5` task-tree-first.
+That removal is now implemented symmetrically on PUC Lua and LuaJIT: caller-global state is gone from engine/rule
+entry and every parse/loaded/corpus/generated/primary route; legacy snake/camel keys fail with the portable
+`prepare_options` diagnostic; help and request trace omit the retired field; and `--parse-mode` returns its exact
+usage exit 2 while `--top-rule` keeps priority over authored `Rule::`. Identical 75/96 RED becomes 96/96 green,
+package is 177/177x2, primary is 65/65x4, corpus is 105/105x2, and governance is 68/5+3/44. Canonical signoff,
+including Phase 0 1,031/1,031 in 646 seconds, and safe cleanup now pass. Only the per-leaf commit remains before
+admission `.6` can activate.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

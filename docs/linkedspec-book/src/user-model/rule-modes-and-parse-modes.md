@@ -100,14 +100,17 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > direct-call, or recursive child derives again from its own family. Both ABIs
 > pass the same 110 assertions over all 36 families, eight child mechanisms, two
 > structural replacements, loaded/normalized routes, and policy-bearing trace.
-> An explicit outer policy remains a compatibility seam until `.5`. Descriptor `.9.1.7.3` is now v1 on
+> Descriptor `.9.1.7.3` is now v1 on
 > both ABIs: root metadata contains the cursor contract rather than a global
 > mode, and every rule projects normalized family, policy, ownership, and exact
 > semantic edge rows. Its focused proof passes 875 assertions per ABI. Generated
 > source `.9.1.7.4` is now v2/format 2 on both ABIs: its unchanged label/family
 > plan derives exact cursor policy, compact Pipe is OR/choice, and v1 is rejected
-> before payload reconstruction. Public option removal and rollout admission
-> remain `.5-.6`.
+> before payload reconstruction. Public-option leaf `.9.1.7.5` now removes engine,
+> parse, loader, corpus, generated, primary-help, and request-trace override ownership.
+> Legacy dynamic keys fail with `prepare_options` / `parse_mode_override_removed`;
+> the retired CLI flag returns the targeted usage exit 2, while `--top-rule` retains
+> priority over authored `Rule::`. Only composed dual-ABI admission remains `.6`.
 
 ## Current rule-label surface
 
@@ -860,8 +863,10 @@ Lua and LuaJIT now share exact authored family identity, typed bare edges, famil
 the six portable diagnostics through normalization `.9.1.7.1`. Runtime `.2` makes omitted-policy normal, loaded,
 normalized, recursive, and traced execution intrinsic at each entered rule; all eight child mechanisms rederive
 independently. Descriptor `.3` publishes cursor v1 with exact per-rule facts, and generated-source `.4` emits v2,
-derives the five seek/five consume policies, and rejects v1 before reconstruction. An explicit outer policy
-remains accepted; option removal and admission remain `.5-.6`.
+derives the five seek/five consume policies, and rejects v1 before reconstruction. Public-option `.5` removes
+caller-global engine/parse/loader/corpus/generated ownership and primary help/request-trace exposure. Legacy API
+keys and the retired CLI flag receive targeted migration diagnostics rather than being accepted or ignored;
+composed admission remains `.6`.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

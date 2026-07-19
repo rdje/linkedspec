@@ -30,7 +30,6 @@ Text encoding:
 
 Parser options:
   --top-rule NAME      Select the entry rule
-  --parse-mode MODE    MODE is seek or consume
 
 Trace options:
   --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
@@ -69,7 +68,6 @@ local VALUE_OPTIONS = {
   ["--input"] = "input",
   ["--input-file"] = "input_file",
   ["--top-rule"] = "top_rule",
-  ["--parse-mode"] = "parse_mode",
   ["--trace"] = "trace_level",
   ["--trace-file"] = "trace_file",
   ["--trace-mode"] = "trace_mode",
@@ -143,7 +141,13 @@ local function parse_arguments(arguments)
   while index <= #arguments do
     local argument = arguments[index]
     local option, inline_value = split_option(argument)
-    if option == "--help" or option == "-h" then
+    if option == "--parse-mode" then
+      errors[#errors + 1] = "--parse-mode has been removed; " ..
+        "cursor policy is derived from each rule (OR/default=seek, AND=consume)"
+      if inline_value == nil and index < #arguments and arguments[index + 1]:sub(1, 1) ~= "-" then
+        index = index + 1
+      end
+    elseif option == "--help" or option == "-h" then
       if inline_value ~= nil then
         errors[#errors + 1] = option .. " does not accept a value"
       else
@@ -183,9 +187,6 @@ local function parse_arguments(arguments)
   end
   if defined_count(options.input, options.input_file) ~= 1 then
     return nil, false, "choose exactly one input option: --input or --input-file"
-  end
-  if options.parse_mode ~= nil and options.parse_mode ~= "seek" and options.parse_mode ~= "consume" then
-    return nil, false, "--parse-mode must be 'seek' or 'consume'"
   end
   if options.trace_level ~= nil and not valid_trace_level(options.trace_level) then
     return nil, false, "--trace has an unsupported level '" .. options.trace_level .. "'"
@@ -310,12 +311,11 @@ local function load_input(options, cwd)
 end
 
 local function execute_request(prepared, options, input)
-  local engine_options = { parse_mode = options.parse_mode or "seek" }
   local engine
   if prepared.loaded ~= nil then
-    engine = prepared.loaded:create_engine(engine_options)
+    engine = prepared.loaded:create_engine()
   else
-    engine = interpreter.runtime_engine(prepared.compiled, engine_options)
+    engine = interpreter.runtime_engine(prepared.compiled)
   end
   local parse_options = {}
   if options.top_rule ~= nil then parse_options.top_rule = options.top_rule end
@@ -337,7 +337,6 @@ function M.run(arguments, context)
   local source_argument = options.spec or options.spec_file or options.inline_spec or ""
   local input_argument = options.input_file or options.input or ""
   local top_rule = options.top_rule ~= nil and trace_field(options.top_rule) or "<default>"
-  local parse_mode = options.parse_mode or "seek"
 
   local function emit(threshold, level_name, event)
     if emit_trace(trace, threshold, level_name, event) then return nil end
@@ -351,7 +350,7 @@ function M.run(arguments, context)
 
   local trace_failure = emit(100, "low", "compile:start") or
     emit(200, "medium", "request source=" .. source_kind .. " input=" .. input_kind ..
-      " top_rule=" .. top_rule .. " parse_mode=" .. parse_mode) or
+      " top_rule=" .. top_rule) or
     emit(300, "high", "arguments source_bytes=" .. #source_argument .. " input_bytes=" .. #input_argument) or
     emit(500, "debug", "protocol version=1")
   if trace_failure ~= nil then return trace_failure end

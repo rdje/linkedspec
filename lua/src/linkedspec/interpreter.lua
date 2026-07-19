@@ -31,6 +31,12 @@ local EVENT_MT = { __runtime_interpreter_type = "RuntimeLifecycleEvent" }
 local DIAGNOSTIC_OUTPUT_EVENT_MT = { __runtime_interpreter_type = "RuntimeDiagnosticOutputEvent" }
 local DIAGNOSTIC_MT = { __runtime_interpreter_type = "RuntimeDiagnostic" }
 local HELPER_REGEX_MT = { __runtime_interpreter_type = "RuntimeHelperRegex" }
+local runtime_diagnostic
+
+M.PARSE_MODE_OVERRIDE_REMOVED_CODE = "parse_mode_override_removed"
+M.PREPARE_OPTIONS_STAGE = "prepare_options"
+M.PARSE_MODE_OVERRIDE_REMOVED_DETAIL =
+  "cursor policy is derived from each rule (OR/default=seek, AND=consume)"
 
 local function fail(message, fields)
   fields = fields or {}
@@ -97,10 +103,28 @@ local function rule_result(matched, value)
   return { matched = matched, value = value }
 end
 
+function M.reject_removed_runtime_options(options, spec_name, spec_path)
+  if options.parse_mode == nil and options.parseMode == nil then return end
+  local diagnostic = runtime_diagnostic({ spec_name = spec_name, spec_path = spec_path }, {
+    stage = M.PREPARE_OPTIONS_STAGE,
+    code = M.PARSE_MODE_OVERRIDE_REMOVED_CODE,
+    summary = "Lua runtime option has been removed",
+    detail = M.PARSE_MODE_OVERRIDE_REMOVED_DETAIL,
+    option_name = "parse_mode",
+  })
+  fail(M.PARSE_MODE_OVERRIDE_REMOVED_DETAIL, {
+    stage = M.PREPARE_OPTIONS_STAGE,
+    code = M.PARSE_MODE_OVERRIDE_REMOVED_CODE,
+    option_name = "parse_mode",
+    diagnostic = diagnostic,
+  })
+end
+
 function M.runtime_engine(compiled, options)
   if compiled_spec.node_type(compiled) ~= "CompiledSpec" then fail("runtime engine expects CompiledSpec") end
   options = options or {}
   if type(options) ~= "table" then fail("runtime engine options must be a table") end
+  M.reject_removed_runtime_options(options, options.spec_name, options.spec_path)
   local max_iterations = options.max_iterations or 10000
   if type(max_iterations) ~= "number" or max_iterations % 1 ~= 0 or max_iterations <= 0 then
     fail("max_iterations must be a positive integer")
@@ -114,8 +138,6 @@ function M.runtime_engine(compiled, options)
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     fail("trace must be a LinkedSpecTraceEmitter")
   end
-  local parse_mode = nil
-  if options.parse_mode ~= nil then parse_mode = matching.parse_mode_from_name(options.parse_mode) end
   return trace_support.run(
     options.trace,
     "lua_runtime:create_engine",
@@ -125,7 +147,6 @@ function M.runtime_engine(compiled, options)
       compiled_spec.validate_no_removed_aggregate_selectors(compiled)
       return setmetatable({
         compiled_spec = compiled,
-        parse_mode = parse_mode,
         max_iterations = max_iterations,
         spec_name = options.spec_name,
         spec_path = options.spec_path,
@@ -139,7 +160,7 @@ function M.runtime_engine(compiled, options)
   )
 end
 
-local function runtime_diagnostic(engine, fields)
+runtime_diagnostic = function(engine, fields)
   local effective_rule = fields.rule_label or fields.top_rule
   local diagnostic = {
     type = "runtime_parser",
@@ -154,7 +175,14 @@ local function runtime_diagnostic(engine, fields)
     handler_source_label = fields.handler_source_label or
       (effective_rule and ("lua_runtime:rule:" .. effective_rule) or "lua_runtime"),
   }
-  for _, name in ipairs({ "code", "entry_rule", "helper_name", "actual_arity", "expected_arity" }) do
+  for _, name in ipairs({
+    "code",
+    "entry_rule",
+    "option_name",
+    "helper_name",
+    "actual_arity",
+    "expected_arity",
+  }) do
     if fields[name] ~= nil then diagnostic[name] = fields[name] end
   end
   return setmetatable(diagnostic, DIAGNOSTIC_MT)
@@ -3702,7 +3730,7 @@ execute_rule = function(engine, label, entry_index, ctx)
   if generated_family == nil then
     uses_and_execution = rule.mode_metadata.is_and
     uses_blind_dispatch = #rule.blind_edges > 0
-    cursor_policy = engine.parse_mode or (uses_and_execution and "consume" or "seek")
+    cursor_policy = uses_and_execution and "consume" or "seek"
   else
     local generated_policy = M.generated_family_execution_policy(generated_family)
     uses_and_execution = generated_policy.uses_and_execution
@@ -3874,6 +3902,7 @@ function M.runtime_parse(engine, input, options)
   if type(input) ~= "string" then fail("runtime input must be a string") end
   options = options or {}
   if type(options) ~= "table" then fail("runtime parse options must be a table") end
+  M.reject_removed_runtime_options(options, engine.spec_name, engine.spec_path)
   if options.diagnostic_sink ~= nil and type(options.diagnostic_sink) ~= "function" then
     fail("diagnostic_sink must be a function")
   end
@@ -4039,7 +4068,14 @@ function M.to_json(value)
       rule_label = value.rule_label,
       handler_source_label = value.handler_source_label,
     })
-    for _, name in ipairs({ "code", "entry_rule", "helper_name", "actual_arity", "expected_arity" }) do
+    for _, name in ipairs({
+      "code",
+      "entry_rule",
+      "option_name",
+      "helper_name",
+      "actual_arity",
+      "expected_arity",
+    }) do
       if value[name] ~= nil then diagnostic[name] = value[name] end
     end
     return diagnostic

@@ -8,19 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.4` — Lua/LuaJIT generated-source v2 is complete and prepared from clean descriptor
-  commit `79422858` at ahead 237. Authority/current-owner retrieval is complete. Identical 44/106 RED is now
-  106/106 green on both ABIs: v2/format 2, minimal label/family rows, exact five-seek/five-consume derivation,
-  compact-pipe choice, contract-first stale-v1 rejection, and deterministic direct/traced/fresh execution pass.
-  Eight focused consumers total 2,027 assertions per ABI; package remains 176/177x2 only at staged help, primary
-  remains 32/65x4, corpus 105/105x2, and governance is 69/5+3/44. KM is 630/4,622; mdBook/four doctrines and
-  canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 644 seconds pass. Cleanup removes the
-  generated 11 MiB book, Python cache, and temporary native trees while retaining cited durable logs. `.4` is
-  prepared for commit; public option removal and admission stay `.5-.6`.
+- `FUTURE-PARITY-BACKLOG.9.1.7.5` — Lua/LuaJIT public/global cursor option removal is active task-tree-first from
+  clean generated-v2 commit `d472c136` at ahead 238. The brief is zero bytes and safe generated artifacts are
+  absent. Exact 75/96 RED is now 96/96 on each ABI; package passes 177/177x2, shared primary 65/65x4, corpus
+  105/105x2, and governance 68/5+3/44. KM 631/4,632, mdBook/doctrines, and canonical root 7+5 / cursor 288 /
+  primary 65x2 / Phase 0 1,031 in 646 seconds pass. Safe cleanup is complete; only the per-leaf commit remains,
+  and admission `.6` stays untouched.
 
 ## Latest Completed Slice
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.4 — emit Lua generated-source v2**
-  (DONE and prepared for commit).
+  (DONE at clean commit `d472c136`).
 
   **Result:** New Lua artifacts identify v2/format 2, retain only ordered label/family rows, derive the exact five
   seek and five consume policies, classify compact Pipe as OR/choice, and reject stale v1 before payload decode
@@ -32,7 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   630/4,622. mdBook/four doctrines pass; canonical closes root 7+5, cursor 288, primary 65x2, and Phase 0
   1,031/1,031 in 644 seconds. Safe generated artifacts are removed; cited durable logs remain.
 
-  **Next:** Commit `.4`, verify the clean handoff, then activate public option removal `.5`.
+  **Next:** Public option removal `.5` is active task-tree-first from the clean commit.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.3 — project Lua cursor descriptor v1**
   (DONE at clean commit `79422858`).

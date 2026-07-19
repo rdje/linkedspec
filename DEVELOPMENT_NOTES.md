@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.5` — removed options must fail, not disappear):
+  Lua option tables make unknown keys easy to ignore accidentally. The retirement boundary therefore has one
+  interpreter-owned rejection helper used by engine, parse, and corpus entrypoints. It recognizes both governed
+  dynamic spellings, constructs the same typed runtime diagnostic with optional engine/load identity, and runs
+  before corpus loading, input execution, or user lifecycle code. Loader forwarding deliberately remains generic:
+  it derives identity and reaches the central engine check, so it neither duplicates token ownership nor silently
+  discards a legacy key. Generated execution rethrows this one migration diagnostic unchanged while continuing to
+  source-wrap ordinary runtime failures.
+
+  The primary command keeps a narrow tombstone for `--parse-mode`, including inline syntax, because treating it as
+  a generic unknown flag loses the actionable migration message. A separate value is consumed only to prevent a
+  misleading positional-error suffix. The flag is absent from help, execution options, and canonical request
+  trace. Entry selection remains orthogonal: `--top-rule` still wins over `Rule::`, and the focused source returns
+  from lifecycle `I` so the selected entry—not incidental exit ordering—is what the result proves.
+
+  Pre-edit evidence is exact and symmetric: 75/96 focused assertions fail on each ABI, while 33/65 shared primary
+  cases fail in each of four ABI/environment legs. Green is 96/96, package 177/177x2, primary 65/65x4, corpus
+  105/105, and neutral governance 68 files / 5 complete + 3 pending / 44 mutations. Low-level matching names and
+  authored-header parser naming remain intentionally governed; corpus and ordinary cursor-execution tests become
+  token-free. Only the composed 15-role admission leaf `.6` may advance Lua's rollout row.
+
+  Final signoff is KM 631/4,632, mdBook build, all four doctrines, root consumers 7+5, cursor admission 288,
+  reference primary 65x2, and Phase 0 1,031/1,031 in 646 seconds. The optional `mdbook test` still reports the
+  already-documented illustrative Rust/pseudocode fence baseline; the canonical `mdbook build` gate is green and
+  has no slice-owned failure. Disk-pressure cleanup removes the regenerated 11 MiB book and Python bytecode cache.
+  No Rust, Dart, or temporary native build tree exists; the roughly 109 MiB cited reproduction logs remain because
+  deleting durable evidence is not 100% safe.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.4` — versioned generated execution derives; plans stay minimal):
   Lua's existing ten-family plan already carried sufficient structural identity. Advancing generated source did
   not require a cursor field, a second compiled representation, or a generated-only parser. One runtime policy

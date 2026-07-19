@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.5 — remove Lua global cursor overrides
+
+PUC Lua and LuaJIT engines no longer store or consult a caller-global cursor mode. Normal and generated-v2 rule
+entry derives seek/consume exclusively from the entered rule's compiled or validated-plan family. High-level
+engine, parse, loaded-engine, corpus, direct-generated, and emitted-generated routes recognize both legacy
+`parse_mode` and `parseMode` table keys only to reject them before input or user code with the portable
+`prepare_options` / `parse_mode_override_removed` diagnostic, `option_name=parse_mode`, exact migration detail,
+and available spec identity. Generated execution preserves that typed removal instead of wrapping it as an
+ordinary generated execution failure. Low-level `runtime_match`, seek, consume, and mode-name matching remain.
+
+The primary Lua command removes `--parse-mode` from help, engine construction, and medium request trace. It
+recognizes separate and inline retired spellings only far enough to return the exact targeted usage exit 2 before
+compilation or input loading. `--top-rule` remains supported and retains priority over authored `Rule::`; the
+hand-authored regression proves selection from lifecycle `I`.
+
+The focused removal suite moves from the same exact 75/96 RED on both ABIs to 96/96. Cursor execution remains
+108/108, generated v2 remains 106/106, and the complete package is now 177/177 per ABI. The complete Lua local
+gate passes, corpus remains 105/105, and the shared primary projection advances from the same 32/65 boundary to
+65/65 under all four PUC/LuaJIT default/POSIX legs. Neutral inventory is 68 files / 5 complete + 3 pending / 44
+rejected mutations; composed Lua admission remains `.9.1.7.6`.
+
+Knowledge Map generation reaches 631 facts / 4,632 question keys. The mdBook, memory/task/KM checks, JSON,
+whitespace, and all four doctrines pass; canonical local CI closes with root consumers 7+5, cursor admission 288,
+reference primary 65x2, and Phase 0 1,031/1,031 in 646 seconds. Cleanup removes the regenerated 11 MiB mdBook and
+Python bytecode cache. No Rust, Dart, or temporary native build tree exists; cited durable logs remain because
+their deletion is not 100% safe.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.4 — emit Lua generated-source v2
 
 New PUC Lua and LuaJIT generated modules now identify `linkedspec-generated-source-v2` / format 2. Their ordered

@@ -152,13 +152,15 @@ export LUA_CPATH="$native_dir/?.so;;"
 
 lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
 lua/bin/linkedspec-lua \
-  --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
+  --spec-file demo.spec --input-file demo.txt --top-rule Top
 ```
 
 The checkout commands are tracked executables and locate `lua/src` themselves;
 `LUA_PATH` also enables direct `require("linkedspec")` embedding. Native PCRE2
 and filesystem modules are not installed globally, so every command needs the
 caller-built `LUA_CPATH` above. There is no LuaRocks installation dependency.
+Cursor policy is derived from each entered rule family. The retired `--parse-mode`
+flag is absent from help and returns its targeted usage migration error if supplied.
 
 Source, input, arguments, JSON, help/errors, and canonical trace are strict preserved UTF-8. Success emits one
 recursively key-sorted JSON value plus one newline and exits 0; compilation/input/invocation failures emit one

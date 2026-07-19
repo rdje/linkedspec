@@ -463,8 +463,6 @@ test("primary CLI delegates named file and inline execution to native APIs", fun
       "b",
       "--top-rule",
       "Alternate",
-      "--parse-mode",
-      "consume",
     }, context)
     assert_equal(inline.exit_code, 0, "inline status")
     assert_equal(inline.stdout, '"alternate"\n', "inline result")
@@ -683,7 +681,7 @@ test("native spec pipeline composes functions and source-identified engines", fu
     assert_equal(linkedspec.compiled_spec.node_type(loaded.compiled), "CompiledSpec", "compiled state type")
     assert_equal(#loaded.compiled:functions(), 1, "compiled top-level function")
 
-    local engine_options = { parse_mode = "seek", max_iterations = 250 }
+    local engine_options = { max_iterations = 250 }
     local engine = loaded:create_engine(engine_options)
     assert_equal(engine_options.spec_name, nil, "caller options gain no name")
     assert_equal(engine_options.spec_path, nil, "caller options gain no path")
@@ -5172,10 +5170,8 @@ test("runtime interpreter repeats default rules and preserves direct result shap
 
   local seek = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "za")
   assert_equal(seek.cursor_code_unit, 2, "seek advances to match")
-  local consume = linkedspec.runtime_parse(
-    linkedspec.runtime_engine(compiled, { parse_mode = "consume" }),
-    "za"
-  )
+  local consume_compiled = linkedspec.compile_spec(linkedspec.parse_spec("Top::AND\n /a/\n"))
+  local consume = linkedspec.runtime_parse(linkedspec.runtime_engine(consume_compiled), "za")
   assert_equal(consume.matched, false, "consume stays anchored")
   assert_equal(consume.cursor_code_unit, 0, "consume cursor")
 end)
@@ -6097,10 +6093,7 @@ Top::AND
  -> Top[1] { return(cursor_pos()) }
 ]]
   local consume = linkedspec.runtime_parse(
-    linkedspec.runtime_engine(
-      linkedspec.compile_spec(linkedspec.parse_spec(consume_source)),
-      { parse_mode = "consume" }
-    ),
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(consume_source))),
     "ab"
   )
   assert_equal(consume.value, 2, "rewound cursor controls consume continuation")
@@ -6282,10 +6275,7 @@ NextBoundary: /@b:/
 EndBoundary: /END/
 ]]
   local result = linkedspec.runtime_parse(
-    linkedspec.runtime_engine(
-      linkedspec.compile_spec(linkedspec.parse_spec(source)),
-      { parse_mode = "consume" }
-    ),
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
     "é🙂: α @b: tail END"
   ).value
   assert_equal(result.body, "α ", "earliest boundary capture")

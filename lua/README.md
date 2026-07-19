@@ -29,15 +29,16 @@ known, and explicit `->` / `=>` keeps written ownership. Valid AND bare members 
 OR/default bare members lower to action edges. Invalid governed shapes expose the neutral diagnostic code, stage,
 and fields. Normal live, loaded, normalized, recursive, and traced execution now derives one immutable policy at
 each entered rule: AND consumes/sequences and OR/default seeks/chooses, while every child re-enters the same owner
-and derives from its own family. Rule and regex trace records expose the effective family/policy. An explicitly
-supplied outer `parse_mode` remains a staged compatibility adapter until `.9.1.7.5`; generated source remains
-separately versioned. Generated-source v2/format 2 now validates its contract before payload reconstruction,
+and derives from its own family. Rule and regex trace records expose the effective family/policy. Caller-global
+cursor overrides are removed from engines, parse calls, loaded/corpus/generated routes, and the primary command;
+legacy dynamic keys fail with `prepare_options` / `parse_mode_override_removed` before input or user code.
+Generated-source v2/format 2 validates its contract before payload reconstruction,
 keeps only ordered `{label, family}` plan rows, and derives seek/consume plus choice/sequence at every entered
 generated rule. Outward descriptors use
 `linkedspec-rule-local-cursor-v1`: root metadata has no global mode, and every rule projects its authored family,
 derived policy, aggregate ownership, and ordered semantic edge rows from normalized compiled state. Direct,
 normalized, and loaded descriptor bytes agree. This descriptor projection does not remove the separately staged
-outer runtime/CLI option; that removal remains `.5`.
+root-selection and composed-admission contracts.
 
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
@@ -140,7 +141,7 @@ local loaded = linkedspec.load_and_compile_spec(request, options)
 assert(loaded.loaded.resolved.request.requested == "Demo")
 assert(loaded.loaded.source_text ~= nil)
 
-local engine = loaded:create_engine({ parse_mode = "seek", trace = emitter })
+local engine = loaded:create_engine({ trace = emitter })
 local result = linkedspec.runtime_parse(engine, "input", { trace = emitter })
 ```
 
@@ -494,7 +495,7 @@ positionals:
 ```bash
 lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
 lua/bin/linkedspec-lua \
-  --spec-file demo.spec --input-file demo.txt --top-rule Top --parse-mode consume
+  --spec-file demo.spec --input-file demo.txt --top-rule Top
 lua/bin/linkedspec-lua \
   --inline-spec $'Top::\n /x/' --input x \
   --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
@@ -505,8 +506,9 @@ removal, or newline conversion. Success prints one recursively key-sorted canoni
 exits `0`; compilation/input-load/invocation failures use one stable phase heading and exit `1`; usage exits `2`.
 The command delegates named/file compilation, staged inline compilation, engine construction, and execution to the
 same in-memory module APIs. Its canonical phase trace is intentionally separate from richer native trace. The
-unchanged shared 61-case process manifest is now a recurring focused gate in both default and POSIX environments,
-and the warmed cross-backend matrix passes 5x2x61. Public status is `runtime-corpus-primary-cli`.
+shared 65-case process manifest is a recurring focused gate in both default and POSIX environments. The retired
+`--parse-mode` spelling produces a targeted usage error; it is absent from help and request trace. Public status is
+`runtime-corpus-primary-cli`.
 
 Validate the checked-in corpus without executing it:
 
@@ -916,7 +918,7 @@ Child:
 ]]
 
 local compiled = linkedspec.compile_spec(linkedspec.parse_spec(source))
-local engine = linkedspec.runtime_engine(compiled, { parse_mode = "seek" })
+local engine = linkedspec.runtime_engine(compiled)
 local result = linkedspec.runtime_parse(engine, "ab")
 
 assert(result.matched)
