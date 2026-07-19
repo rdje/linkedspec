@@ -79,6 +79,9 @@ function CompiledRuleModeMetadata(header::RuleHeader)
     )
 end
 
+rule_family(metadata::CompiledRuleModeMetadata) = metadata.is_and ? "and" : "or_default"
+cursor_policy(metadata::CompiledRuleModeMetadata) = metadata.is_and ? "consume" : "seek"
+
 struct CompiledActionPayload
     role::String
     line::Int
@@ -792,6 +795,52 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
                     action_payload = payload,
                 ),
             )
+        elseif kind isa BareEdgeBodyElementKind
+            last_regex_line = nothing
+            role = is_and(rule.header.mode) ? "blind_edge" : "action_edge"
+            payload = _compile_optional_action_payload(
+                role = role,
+                element = element,
+                source_code = kind.code,
+                fluent_chain = kind.fluent_chain,
+                function_registry = function_registry,
+            )
+            if is_and(rule.header.mode)
+                target = only(kind.targets)
+                ref = DependencyRef(label = target.label, index = 0)
+                push!(dependency_refs, ref)
+                push!(
+                    blind_edges,
+                    CompiledBlindEdge(
+                        line = element.line,
+                        source = element.source,
+                        target = ref,
+                        code = kind.code,
+                        fluent_chain = kind.fluent_chain,
+                        action_payload = payload,
+                    ),
+                )
+            else
+                for target in kind.targets
+                    child_regex_index = something(target.index, 0)
+                    ref = DependencyRef(label = target.label, index = child_regex_index)
+                    push!(dependency_refs, ref)
+                    push!(
+                        action_edges,
+                        CompiledActionEdge(
+                            line = element.line,
+                            source = element.source,
+                            targets = [ref],
+                            regex_index = 0,
+                            child_regex_index = child_regex_index,
+                            has_parent_regex = false,
+                            code = kind.code,
+                            fluent_chain = kind.fluent_chain,
+                            action_payload = payload,
+                        ),
+                    )
+                end
+            end
         elseif kind isa CodeBlockBodyElementKind
             last_regex_line = nothing
             push!(

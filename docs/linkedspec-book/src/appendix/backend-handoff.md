@@ -2059,6 +2059,20 @@ descriptor, emitted/generated, trace, mixed/recursive, structural, removal, prim
 roles once. Complete Dart cursor proof is 271 package tests, the current 65-case primary manifest in both
 environments, and 105/105 corpus fixtures. Neutral governance is 67 files, 4 complete / 4 pending, and 39
 mutations; parent `.9.1.5` is closed and Julia follows the clean admission commit.
+
+Julia's first cursor-convergence slice is now current at the typed frontend/compiler boundary. `RuleMode("Pipe")`
+is OR/default rather than AND, while compact `&` remains AND; `rule_family(...)` and `cursor_policy(...)` expose
+the immutable derivation. The parser retains complete-line or header-rest bare references as
+`BareEdgeBodyElementKind`, including nullable authored indices, target groups, blocks, fluent chains, source text,
+and forward declarations. Lifecycle tokens keep lexical priority, and indexed explicit blind calls retain their
+index long enough to fail validation instead of silently losing the suffix. Whole-spec validation derives blind
+ownership for bare AND members and action ownership for bare OR/default members, rejects the six governed invalid
+forms with exact portable stage/code/fields, and compiled state lowers valid bare members into its existing typed
+blind/action tables. The contract-driven Julia suite passes 353 assertions over all 36 family rows, all 18 edge
+rows, all six ownership sets, JSON roundtrips, and physical-line boundaries. This is normalization only: Julia's
+normal runtime still uses its staged global parse mode, descriptor metadata still has global `parse_mode`,
+generated source remains v1/format 1, and the public option remains until `.9.1.6.2-.5`; admission alone advances
+the rollout in `.9.1.6.6`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

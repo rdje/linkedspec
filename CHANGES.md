@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges
+
+Julia now consumes the complete neutral syntax-normalization boundary. Compact `|` is correctly classified as
+OR/default rather than AND, while `&`, worded AND, and bounded AND retain consume-family identity. Public
+`rule_family(...)` and `cursor_policy(...)` projections expose that immutable derivation on parsed modes and
+compiled mode metadata without introducing a mutable cursor field.
+
+Complete bare rule references at the start of a physical body line or header rest are retained as typed
+`BareEdgeBodyElementKind` records. Nullable `BareEdgeTarget.index` preserves omitted selection versus authored
+`[0]`; grouped targets, multiline/inline blocks, fluent chains, exact source text, forward declarations, and JSON
+roundtrips remain intact. Lifecycle markers retain lexical priority, and the explicit blind parser now retains an
+authored index so `=> Child[0]` is rejected instead of silently accepted after prefix consumption.
+
+Whole-spec validation derives bare AND ownership as blind and bare OR/default ownership as action. It reports the
+neutral stage/code/exact fields for `bare_edge_target_undefined`, `bare_edge_index_requires_action`,
+`bare_edge_group_requires_action`, `mixed_edge_ownership`, `grouped_action_shared_block_required`, and
+`blind_call_index_forbidden`; portable diagnostics now round-trip through JSON. Valid normalized edges lower into
+the existing compiled blind/action tables with target order, dependency refs, blocks, fluent payloads, explicit
+ownership overrides, and source provenance preserved.
+
+The new contract-driven Julia suite passes 353/353 over all 36 family rows, all 18 edge rows, all six ownership
+sets, physical-line scoping, compiled lowering, and AST/diagnostic roundtrips. The complete package reaches only
+the exact pre-existing 56/57 shared-help mismatch owned by later option leaf `.5`; corpus remains 105/105 and
+neutral governance remains 67 files, 4 complete / 4 pending, and 39 rejected mutations. Normal runtime still uses
+the staged global mode, descriptor/generated stay v0/v1, and public options/rollout do not change; those boundaries
+remain `.9.1.6.2-.6`. Knowledge Map is 615/4,455; mdBook and all doctrines pass. Canonical CI repeats Perl root
+7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 614 seconds. Cleanup removes the generated
+11 MB mdBook and Python bytecode cache while retaining the reusable Julia depot for runtime leaf `.2`.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.0 — map Julia rule-local cursor rollout
 
 The behavior-free Julia cursor preflight freezes the complete migration seam before implementation. Contract-

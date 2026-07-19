@@ -31,6 +31,19 @@ to_json(diagnostic::SpecPortableDiagnostic) = Dict{String,Any}(
     "fields" => diagnostic.fields,
 )
 
+function from_json(::Type{SpecPortableDiagnostic}, json)
+    object = _ast_object(json, "portable spec diagnostic")
+    raw_fields = _ast_object(get(object, "fields", nothing), "fields")
+    return SpecPortableDiagnostic(
+        code = _ast_string(object, "code"),
+        stage = _ast_string(object, "stage"),
+        message = _ast_string(object, "message"),
+        fields = Dict{String,Any}(
+            String(key) => _plain_json(value) for (key, value) in raw_fields
+        ),
+    )
+end
+
 function validate_spec(
     spec::SpecFile;
     strict_syntax::Bool = false,
@@ -63,11 +76,11 @@ function validate_spec(
         _trace_validation_check!(trace, "malformed_raw_body_lines") do
             _check_malformed_raw_body_lines(spec)
         end
+        _trace_validation_check!(trace, "edge_structure") do
+            _check_edge_structure(spec)
+        end
         _trace_validation_check!(trace, "mixed_edges") do
             _check_mixed_edges(spec)
-        end
-        _trace_validation_check!(trace, "grouped_action_edges") do
-            _check_grouped_action_edges(spec)
         end
         _trace_validation_check!(trace, "edge_targets") do
             _check_edge_targets(spec)
@@ -104,8 +117,8 @@ function _validate_spec(spec::SpecFile, strict_syntax::Bool)
     _check_duplicate_function_names(spec)
     _check_function_registry(spec)
     _check_malformed_raw_body_lines(spec)
+    _check_edge_structure(spec)
     _check_mixed_edges(spec)
-    _check_grouped_action_edges(spec)
     _check_edge_targets(spec)
     _check_regex_syntax(spec)
     if strict_syntax
@@ -251,6 +264,100 @@ function _check_malformed_raw_body_lines(spec::SpecFile)
     return nothing
 end
 
+function _portable_validation_exception(; code, stage, message, fields)
+    diagnostic = SpecPortableDiagnostic(
+        code = code,
+        stage = stage,
+        message = message,
+        fields = fields,
+    )
+    return SpecValidationException(diagnostic.message; diagnostic = diagnostic)
+end
+
+function _grouped_action_exception(rule::Rule, targets)
+    labels = [target.label for target in targets]
+    return _portable_validation_exception(
+        code = "grouped_action_shared_block_required",
+        stage = "validate_rule",
+        message = "rule '$(rule.header.label)': grouped action-edge targets require a shared code block",
+        fields = Dict{String,Any}(
+            "rule_label" => rule.header.label,
+            "targets" => labels,
+        ),
+    )
+end
+
+function _check_edge_structure(spec::SpecFile)
+    declared_labels = Set(rule.header.label for rule in spec.rules)
+
+    for rule in spec.rules
+        for element in rule.body
+            kind = element.kind
+            if kind isa BareEdgeBodyElementKind
+                for target in kind.targets
+                    if !(target.label in declared_labels)
+                        throw(_portable_validation_exception(
+                            code = "bare_edge_target_undefined",
+                            stage = "normalize_edges",
+                            message = "bare edge in rule '$(rule.header.label)' targets undefined rule '$(target.label)'",
+                            fields = Dict{String,Any}(
+                                "rule_label" => rule.header.label,
+                                "target" => target.label,
+                            ),
+                        ))
+                    end
+                end
+
+                if is_and(rule.header.mode)
+                    indexed = findfirst(target -> target.index !== nothing, kind.targets)
+                    if indexed !== nothing
+                        target = kind.targets[indexed]
+                        throw(_portable_validation_exception(
+                            code = "bare_edge_index_requires_action",
+                            stage = "normalize_edges",
+                            message = "indexed bare edge in AND rule '$(rule.header.label)' requires explicit action ownership",
+                            fields = Dict{String,Any}(
+                                "rule_label" => rule.header.label,
+                                "target" => target.label,
+                                "regex_index" => target.index,
+                            ),
+                        ))
+                    end
+                    if length(kind.targets) > 1
+                        throw(_portable_validation_exception(
+                            code = "bare_edge_group_requires_action",
+                            stage = "normalize_edges",
+                            message = "grouped bare edge in AND rule '$(rule.header.label)' requires explicit action ownership",
+                            fields = Dict{String,Any}(
+                                "rule_label" => rule.header.label,
+                                "targets" => [target.label for target in kind.targets],
+                            ),
+                        ))
+                    end
+                elseif length(kind.targets) > 1 && kind.code === nothing
+                    throw(_grouped_action_exception(rule, kind.targets))
+                end
+            elseif kind isa ActionEdgeBodyElementKind
+                if length(kind.targets) > 1 && kind.code === nothing
+                    throw(_grouped_action_exception(rule, kind.targets))
+                end
+            elseif kind isa BlindEdgeBodyElementKind && kind.index !== nothing
+                throw(_portable_validation_exception(
+                    code = "blind_call_index_forbidden",
+                    stage = "validate_rule",
+                    message = "blind-call target '$(kind.target)' in rule '$(rule.header.label)' cannot select a regex index",
+                    fields = Dict{String,Any}(
+                        "rule_label" => rule.header.label,
+                        "target" => kind.target,
+                        "regex_index" => kind.index,
+                    ),
+                ))
+            end
+        end
+    end
+    return nothing
+end
+
 function _check_mixed_edges(spec::SpecFile)
     for rule in spec.rules
         has_action = false
@@ -261,26 +368,24 @@ function _check_mixed_edges(spec::SpecFile)
                 has_action = true
             elseif kind isa BlindEdgeBodyElementKind
                 has_blind = true
+            elseif kind isa BareEdgeBodyElementKind
+                if is_and(rule.header.mode)
+                    has_blind = true
+                else
+                    has_action = true
+                end
             end
         end
         if has_action && has_blind
-            throw(SpecValidationException(
-                "rule '$(rule.header.label)' mixes action (->) and blind-call (=>) edges",
+            throw(_portable_validation_exception(
+                code = "mixed_edge_ownership",
+                stage = "validate_rule",
+                message = "rule '$(rule.header.label)' mixes action and blind edge ownership",
+                fields = Dict{String,Any}(
+                    "rule_label" => rule.header.label,
+                    "ownerships" => ["action", "blind"],
+                ),
             ))
-        end
-    end
-    return nothing
-end
-
-function _check_grouped_action_edges(spec::SpecFile)
-    for rule in spec.rules
-        for element in rule.body
-            kind = element.kind
-            if kind isa ActionEdgeBodyElementKind && length(kind.targets) > 1 && kind.code === nothing
-                throw(SpecValidationException(
-                    "rule '$(rule.header.label)': grouped action-edge targets require a shared code block",
-                ))
-            end
         end
     end
     return nothing
@@ -297,6 +402,10 @@ function _check_edge_targets(spec::SpecFile)
                 end
             elseif kind isa BlindEdgeBodyElementKind
                 _check_target(rule, rules_by_label, kind.target, 0)
+            elseif kind isa BareEdgeBodyElementKind
+                for target in kind.targets
+                    _check_target(rule, rules_by_label, target.label, something(target.index, 0))
+                end
             end
         end
     end
@@ -401,6 +510,10 @@ function _check_unused_rules(spec::SpecFile)
                 end
             elseif kind isa BlindEdgeBodyElementKind
                 push!(used, kind.target)
+            elseif kind isa BareEdgeBodyElementKind
+                for target in kind.targets
+                    push!(used, target.label)
+                end
             end
         end
     end

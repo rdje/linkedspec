@@ -8,18 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.0` — verified behavior-free Julia cursor preflight/split in commit closeout after clean Dart admission
-  `7aa9c578` at ahead 222 and committed Julia root routes `42c98dfe`. Retrieval and exact seam probes are complete:
-  36 headers parse but compact `|` is misclassified; engines are globally seek; edges are 3 action / 3 blind /
-  1 lifecycle / 11 raw with no portable error matches; parent-child is 5/8; structural is 1/2; descriptor is
-  global-mode v0; generated is v1; package reaches 56/57; primary is 32/65x2; corpus is 105; governance is
-  67 / 4+4 / 39. `.1-.6` are frozen. KM 614/4,445, mdBook/four doctrines, canonical root 7+5, cursor 288,
-  primary 65x2, and Phase 0 1,031/1,031 in 613 seconds pass; cleanup removes 11 MB book plus 28 KB bytecode.
-  Only the prepared commit/clean-boundary verification remains before `.1` activation.
+- `FUTURE-PARITY-BACKLOG.9.1.6.1` — implementation and signoff are complete; documentation/cleanup are synchronized
+  and the prepared commit is the only remaining boundary. Runtime `.2` may activate only after the tree is clean.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges**
+  (DONE and verified; clean commit pending).
+
+  **Result:** Julia consumes all 36 family rows, 18 edge rows, and six ownership sets. Compact `|` is OR/default;
+  typed bare AST preserves nullable indices, source form, blocks/fluents, forward declarations, and lifecycle
+  precedence; six portable diagnostics and compiled action/blind lowering are exact. Runtime/artifacts/options and
+  rollout remain deliberately unchanged for `.2-.6`.
+
+  **Proof:** Focused 353; nested complete package 2,215 pass plus the exact one staged help mismatch; ordinary
+  package 56/57; shared Julia primary 32/65x2; corpus 105; cursor 67/4+4/39; root 4/7+34; KM 615/4,455; mdBook/
+  doctrines; canonical Perl root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 614 seconds. Generated
+  11 MB mdBook and Python cache are removed; the reusable Julia depot stays for `.2`.
+
+  **Next:** Commit `.9.1.6.1`, prove clean, then activate intrinsic runtime leaf `.9.1.6.2` task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.0 — map Julia rule-local cursor rollout**
-  (DONE verification; prepared clean commit `FUTURE-PARITY-BACKLOG.9.1.6.0 - map Julia cursor rollout`).
+  (DONE at clean commit `ee8efbfc` — behavior-free preflight signed off).
 
   **Result:** Exact read-only probes expose compact-pipe misclassification, global seek, 11 raw edge rows,
   parent-child 5/8, structural 1/2, descriptor v0, and generated v1. `.1-.6` freeze normalization through admission
@@ -29,7 +38,7 @@ Current execution status for interruption-safe batch workflow recovery.
   4/7 plus 34 mutations, KM 614/4,445, mdBook/four doctrines, canonical Perl root 7+5, cursor 288, primary 65x2,
   and Phase 0 1,031/1,031 in 613 seconds pass. Generated book/cache cleanup passes; reusable Julia depot remains.
 
-  **Next:** Commit/clean `.0`, then activate family/edge normalization `.9.1.6.1` task-tree-first.
+  **Next:** Family/edge normalization `.9.1.6.1` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.6 — admit Dart rule-local cursor contract**
   (DONE at clean commit `7aa9c578` — Dart parent closes at 4 complete / 4 pending).

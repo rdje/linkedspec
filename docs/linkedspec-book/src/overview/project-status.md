@@ -27,18 +27,24 @@ identity through 57 assertions. Shared primary is exactly 32/65 in both option e
 remaining failures are exclusively the pending Julia cursor migration's legacy help/usage/request-trace
 `parse_mode` projection. Dart composed cursor admission `.9.1.5.6` now closes its backend parent with one exact
 15-role consumer, package 271, primary 65x2, corpus 105, and neutral 67-file / 4-of-8 / 39-mutation governance.
-Clean commit `7aa9c578` lands that admission. Behavior-free Julia cursor preflight `.9.1.6.0` is verified and its
-clean commit precedes `.1-.6`, which then precede final exact 65x2 root admission `.4.3`.
+Clean commit `7aa9c578` lands that admission. Behavior-free Julia cursor preflight `.9.1.6.0` is verified, and
+normalization `.9.1.6.1` now classifies every authored family, retains every governed bare-edge shape as typed AST,
+emits the six portable edge diagnostics, and lowers family-derived ownership into compiled action/blind tables.
+Runtime through admission `.2-.6` still precedes final exact 65x2 root admission `.4.3`.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
-The Julia preflight has now measured the exact unimplemented cursor surface. All 36 headers parse, but compact
-`|` is still classified as AND and all 36 engines use global seek. Eleven of 18 neutral edge rows remain raw;
-the seven portable edge/edge-set failures have no exact Julia diagnostic, and indexed blind syntax is silently
-accepted. Current parent-child agreement is 5/8 and structural agreement 1/2. Descriptors retain global
-`parse_mode`, generated source remains v1/format 1, package execution reaches 56/57, primary is 32/65 in both
-environments, corpus is 105/105, and neutral governance remains 67/4+4/39. The frozen implementation order is
-typed normalization, intrinsic normal routes, descriptor v1, generated v2, option/CLI removal, then admission.
+Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
+all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
+versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation
+returns the exact neutral stage/code/fields for undefined, indexed/grouped AND, mixed ownership, indexed blind,
+and blockless grouped-action failures. Compiled state exposes the derived family/policy and lowers valid bare edges
+into its existing action/blind tables. The staged outer boundary is intentionally unchanged: all normal engines
+still use global seek, parent-child agreement is 5/8, structural agreement is 1/2, descriptors retain global
+`parse_mode`, generated source remains v1/format 1, package execution reaches the known 56/57 help mismatch,
+primary is 32/65 in both environments, corpus is 105/105, and neutral governance remains 67/4+4/39. Intrinsic
+normal routes, descriptor v1, generated v2, option/CLI removal, and admission follow in `.2-.6`; no rollout row
+advances at normalization.
 
 ## Completed phases
 

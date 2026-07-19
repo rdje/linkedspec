@@ -66,7 +66,8 @@ const _HEADER_PATTERN = r"^(\w+)[ \t]*(::|:)[ \t]*([^\s/]*)[ \t]*(.*)"
 const _BODY_HEADER_PATTERN = r"^\w+[ \t]*(::|:)[ \t]*\S*"
 const _REGEX_PATTERN = r"^/([^/\\]*(?:\\.[^/\\]*)*)/"
 const _ACTION_PATTERN = r"^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)"
-const _BLIND_PATTERN = r"^=>[ \t]*(\w+)"
+const _BLIND_PATTERN = r"^=>[ \t]*(\w+)(?:[ \t]*\[(\d+)\])?"
+const _BARE_EDGE_PATTERN = r"^(\w+(?:[ \t]*\|[ \t]*\w+)*)(?:[ \t]*\[(\d+)\])?"
 const _LIFECYCLE_PATTERN = r"^(I|LS|LE|LX|E|EX|IT)\b"
 const _SPLIT_PATTERN = r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))"
 const _CONDITIONAL_PATTERN = r"^-\?[ \t]+\w+"
@@ -273,7 +274,13 @@ function _parse_inline_body(rest::AbstractString, line_number::Int, lines, curso
         end
 
         before = trimmed
-        parsed = _parse_single_element(trimmed, lines, cursor, line_number)
+        parsed = _parse_single_element(
+            trimmed,
+            lines,
+            cursor,
+            line_number;
+            allow_bare_edge = isempty(elements),
+        )
         if parsed === nothing
             break
         end
@@ -358,7 +365,13 @@ function _parse_body_elements(lines, cursor::_LineCursor)
             break
         end
 
-        parsed = _parse_single_element(trimmed, lines, cursor, line_number)
+        parsed = _parse_single_element(
+            trimmed,
+            lines,
+            cursor,
+            line_number;
+            allow_bare_edge = isempty(elements),
+        )
         if parsed === nothing
             break
         end
@@ -380,7 +393,13 @@ function _parse_body_elements(lines, cursor::_LineCursor)
     return elements
 end
 
-function _parse_single_element(trimmed::AbstractString, lines, cursor::_LineCursor, line_number::Int)
+function _parse_single_element(
+    trimmed::AbstractString,
+    lines,
+    cursor::_LineCursor,
+    line_number::Int;
+    allow_bare_edge::Bool,
+)
     regex_match = match(_REGEX_PATTERN, trimmed)
     if regex_match !== nothing
         full_match = regex_match.match
@@ -433,6 +452,8 @@ function _parse_single_element(trimmed::AbstractString, lines, cursor::_LineCurs
     if blind_match !== nothing
         full_match = blind_match.match
         target = blind_match.captures[1]
+        index_text = blind_match.captures[2]
+        index = index_text === nothing ? nothing : tryparse(Int, index_text)
         rest = lstrip(_drop_prefix(trimmed, full_match))
         saved_index = cursor.index
 
@@ -452,7 +473,16 @@ function _parse_single_element(trimmed::AbstractString, lines, cursor::_LineCurs
         end
 
         return _ParsedElement(
-            BodyElement(BlindEdgeBodyElementKind(target = target, code = code, fluent_chain = fluent_chain), full_match, line_number),
+            BodyElement(
+                BlindEdgeBodyElementKind(
+                    target = target,
+                    index = index,
+                    code = code,
+                    fluent_chain = fluent_chain,
+                ),
+                full_match,
+                line_number,
+            ),
             remainder,
             cursor.index > saved_index,
         )
@@ -538,6 +568,78 @@ function _parse_single_element(trimmed::AbstractString, lines, cursor::_LineCurs
             BodyElement(PlainBlockBodyElementKind(block.code), String(trimmed), line_number),
             block.remainder,
             cursor.index > saved_index,
+        )
+    end
+
+    if allow_bare_edge
+        bare = _parse_bare_edge(trimmed, lines, cursor, line_number)
+        if bare !== nothing
+            return bare
+        end
+    end
+
+    return nothing
+end
+
+function _parse_bare_edge(trimmed::AbstractString, lines, cursor::_LineCursor, line_number::Int)
+    bare_match = match(_BARE_EDGE_PATTERN, trimmed)
+    if bare_match === nothing
+        return nothing
+    end
+
+    full_match = bare_match.match
+    labels = [
+        strip(label) for label in split(bare_match.captures[1], '|')
+        if !isempty(strip(label))
+    ]
+    if isempty(labels)
+        return nothing
+    end
+
+    index_text = bare_match.captures[2]
+    index = index_text === nothing ? nothing : tryparse(Int, index_text)
+    targets = [BareEdgeTarget(label = label, index = index) for label in labels]
+    rest = lstrip(_drop_prefix(trimmed, full_match))
+    saved_index = cursor.index
+
+    if isempty(rest) || startswith(rest, "#")
+        return _ParsedElement(
+            BodyElement(BareEdgeBodyElementKind(targets = targets), full_match, line_number),
+            rest,
+            false,
+        )
+    end
+
+    if startswith(rest, "{")
+        block = _consume_block_from_rest(lines, cursor, rest)
+        if block === nothing
+            return nothing
+        end
+        return _ParsedElement(
+            BodyElement(
+                BareEdgeBodyElementKind(targets = targets, code = block.code),
+                full_match,
+                line_number,
+            ),
+            block.remainder,
+            cursor.index > saved_index,
+        )
+    end
+
+    if startswith(rest, ".")
+        fluent = _parse_fluent_chain_with_remainder(rest)
+        remainder = strip(fluent.remainder)
+        if isempty(fluent.calls) || (!isempty(remainder) && !startswith(remainder, "#"))
+            return nothing
+        end
+        return _ParsedElement(
+            BodyElement(
+                BareEdgeBodyElementKind(targets = targets, fluent_chain = fluent.calls),
+                full_match,
+                line_number,
+            ),
+            fluent.remainder,
+            false,
         )
     end
 

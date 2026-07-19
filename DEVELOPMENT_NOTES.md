@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.1` — preserve bare provenance until compiled ownership lowering):
+  Bare references cannot be rewritten into explicit `->` or `=>` syntax during parsing. Ownership depends on the
+  parent family, undefined-target diagnosis needs the complete declared-label set, and the contract distinguishes
+  omitted selection from authored `[0]`. Julia therefore retains a dedicated `BareEdgeBodyElementKind` with
+  nullable `BareEdgeTarget.index`; whole-spec validation derives ownership and compiled lowering consumes it.
+  The AST kind itself preserves non-semantic source form without adding source-form flags to compiled runtime
+  edges. This mirrors admitted Rust/Dart structure and leaves descriptor `.3` free to project semantic resolved
+  edges from normalized compiled tables.
+
+  Bare recognition is deliberately physical-line scoped. The parser enables it only for the first member on a
+  body line or header rest and accepts only a complete plain, block, or fluent remainder. A label-like suffix after
+  another same-line member is not reinterpreted. Lifecycle parsing runs before bare recognition, so reserved
+  `I`/`LS`/`LE`/`LX`/`E`/`EX`/`IT` tokens remain lifecycle members; same-named rule calls must stay explicit.
+  Forward labels need no parser lookahead because validation owns declaration resolution after the full spec exists.
+
+  Explicit blind edges now retain an optional authored index even though no valid blind call may use it. That
+  apparently-invalid typed state is required to distinguish `=> Child` from `=> Child[0]` and emit
+  `blind_call_index_forbidden` with exact fields before target-slot validation. Likewise, the bare target index is
+  nullable rather than defaulting to zero, allowing AND bare `[0]` to fail as `bare_edge_index_requires_action`
+  while an omitted AND bare target lowers to blind slot zero.
+
+  Family identity is one predicate: `Pipe` is excluded from `is_and`, and derived family/policy functions read
+  that predicate on AST and compiled metadata. This slice does not route runtime matching through those functions.
+  The normal engine still propagates its global parse mode, descriptor/global metadata and generated v1 remain
+  frozen, and outer option/CLI behavior remains unchanged. Focused proof is 353 assertions; full package reaches
+  the known 56/57 help mismatch, corpus is 105/105, and neutral governance stays 67/4+4/39. Runtime `.2` is the
+  first legal consumer of entered-rule policy; rollout promotion remains admission `.6` only. A nested aggregate
+  package run is the correct staged-gate technique here: wrapping `runtests.jl` in one outer testset lets all later
+  suites execute despite the known inner CLI mismatch and proves 2,215 pass / one expected fail / zero errors.
+  Canonical reference proof remains independently green through Phase 0 1,031/1,031 in 614 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.0` — version boundaries must prevent silent semantic relabeling):
   Julia's normal runtime, descriptor, and generated artifacts currently share one global-seek assumption, but
   they cannot migrate in one indistinguishable step. `LinkedSpecRuntimeEngine.parse_mode` is read at both ordinary

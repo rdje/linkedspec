@@ -5062,7 +5062,9 @@ before implementation.
   Verification: Activated task-tree-first only after Dart cursor parent `.9.1.5` closed at clean commit
     `7aa9c578`, Julia root routes `.9.1.1.2.4.2` were already committed at `42c98dfe`, the brief was zero bytes,
     and tracked/untracked state was clean at ahead 222. Child `.0` owns read-only retrieval, exact current-boundary
-    reproduction, and the dependency-safe implementation split before any Julia cursor behavior edit.
+    reproduction, and the dependency-safe implementation split before any Julia cursor behavior edit. Child `.1`
+    is verified complete with exact family/bare-edge/diagnostic/compiled normalization and waits only for its clean
+    commit before intrinsic runtime leaf `.2` may activate.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.0`
@@ -5113,7 +5115,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.6.0 - map Julia cursor rollout`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.1`
-  Status: `pending`
+  Status: `done`
   Goal: Normalize Julia authored families and mode-sensitive bare-edge ownership with portable diagnostics.
   Dependencies: `.9.1.6.0`
   Acceptance: In `Ast.jl`, `Parser.jl`, `Validator.jl`, and compiled-state projection, consume all 36 neutral
@@ -5122,8 +5124,22 @@ before implementation.
     forward targets, blocks/fluents, explicit overrides, and non-semantic source provenance; reject undefined/
     index/group/mixed/blind-index/group-block cases with exact portable stage/code/fields. Add one contract-driven
     focused normalization suite and preserve a deliberately bounded runtime/artifact compatibility seam for `.2-.4`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-18.** Activated task-tree-first only after behavior-free preflight `.9.1.6.0`
+    landed at clean commit `ee8efbfc`, `git_message_brief.txt` was zero bytes, generated book/cache artifacts were
+    absent, and the tree was clean at ahead 223. `Pipe` is no longer AND; all 36 family rows expose exact immutable
+    family/policy through parsed and compiled state. Complete-line/header-rest bare plain/index/group/block/fluent
+    members retain typed source provenance and nullable authored indices; lifecycle precedence and forward labels
+    remain exact. Whole-spec validation emits all six governed edge diagnostic code/stage/field sets, and valid
+    bare ownership lowers into existing compiled blind/action tables. One neutral JSON-driven suite passes 353/353
+    over 36 families, 18 edge rows, six ownership sets, physical-line bounds, compiled lowering, and AST/diagnostic
+    roundtrips. A nested complete package sweep passes 2,215 assertions with only the exact pre-existing one help
+    mismatch; ordinary package execution remains 56/57 at that boundary. Shared Julia primary remains exactly
+    32/65 in default and POSIX, corpus remains 105/105, neutral governance remains 67 files / 4 complete + 4 pending
+    / 39 mutations, root governance remains 4/7 plus 34 mutations, and rollout does not advance. Knowledge Map is
+    615 facts / 4,455 question keys. Memory/four doctrines/JSON/whitespace/mdBook pass. Canonical CI repeats Perl
+    root 7+5, cursor admission 288, primary 65/65 twice, and Phase 0 1,031/1,031 in 614 seconds. Cleanup removes the
+    generated 11 MB mdBook and Python bytecode while retaining the 142 MB reusable Julia depot for `.2`.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.6.1 - normalize Julia cursor families and edges`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.2`
   Status: `pending`
@@ -7759,9 +7775,9 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `done` | Exact 15-role topology, 39 mutations, package 271, primary 65x2, corpus 105, and Dart-only 4/4 promotion pass. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Both dependencies are cleanly committed; `.0` maps the exact Julia boundary and freezes `.1-.6` before behavior. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight `.0` and typed normalization `.1` are verified; clean `.1` commit is the boundary before runtime `.2`. |
 | 217.0 | `FUTURE-PARITY-BACKLOG.9.1.6.0` | `done` | Exact behavior-free preflight, 614/4,445 KM, 67/4+4/39 governance, mdBook, canonical 1,031, and cleanup pass. |
-| 217.1 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `pending` | Typed Julia family/bare-edge normalization and portable diagnostics. |
+| 217.1 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `done` | Exact 36/18/6 typed normalization, six diagnostics, 353 focused, 2,215+known-one package, 105 corpus, and canonical proof pass. |
 | 217.2 | `FUTURE-PARITY-BACKLOG.9.1.6.2` | `pending` | Julia live/loaded/normalized/recursive/traced intrinsic execution. |
 | 217.3 | `FUTURE-PARITY-BACKLOG.9.1.6.3` | `pending` | Julia cursor descriptor v1. |
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `pending` | Julia generated-source v2. |
@@ -7781,7 +7797,7 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044` plus neutral, Perl, Rust, and Dart cursor admission reach 4/4; behavior-free Julia preflight `.9.1.6.0` is verified and awaits its clean commit before `.1`. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | Cursor admission remains 4/4; Julia preflight and exact typed normalization are complete, and runtime `.9.1.6.2` follows the clean `.1` commit. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -8435,8 +8451,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. Root selection is 4/7 after neutral, Perl, Rust, and Dart. Julia root preflight `.4.0`, core
-  `.4.1`, and routes `.4.2` are signed off; both cursor dependencies are clean, behavior-free cursor preflight
-  `.9.1.6.0` is verified in commit closeout, and implementation `.1-.6` precedes exact root admission `.4.3`. Identical
+  `.4.1`, and routes `.4.2` are signed off; cursor preflight `.9.1.6.0` is cleanly committed and typed normalization
+  `.9.1.6.1` is verified. Its clean commit precedes runtime `.2`; `.2-.6` precede exact root admission `.4.3`. Identical
   dependency-regex slot identity remains a non-blocking separate question
   with explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -8451,15 +8467,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Julia root routes `.9.1.1.2.4.2` and Dart admission `.9.1.5.6` are fully signed off; behavior-free cursor
-  preflight `.9.1.6.0` is verified and its clean commit is the only boundary before normalization `.1`. Julia's 33 cursor-owned
-  shared-primary failures are an exact implementation boundary, not an unresolved test surprise: cursor migration
-  precedes root admission `.4.3`.
+- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and cursor preflight `.9.1.6.0` are cleanly
+  committed; normalization `.9.1.6.1` is fully verified and awaits only its clean commit. Julia's 33 cursor-owned
+  shared-primary failures are the exact later implementation boundary, not a regression: runtime/descriptor/
+  generated/options/admission `.2-.6` precede root admission `.4.3`.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.1` | Exact 36-family/18-edge/six-ownership syntax and compiled projection; six portable diagnostics; focused 353; nested complete Julia 2,215 pass plus exact one staged help failure; ordinary package 56/57; shared Julia primary 32/65 default/POSIX; corpus 105; cursor 67/4+4/39; root 4/7 plus 34 mutations; KM 615/4,455; memory/four doctrines/JSON/whitespace/mdBook; canonical Perl root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 614s; generated 11 MB book/cache cleanup. | PASS. Julia typed normalization is exact without runtime/descriptor/generated/option/rollout promotion; clean commit precedes `.2`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.0` | ADR/KM/toolbox/admitted-precedent retrieval; exact 36-family, 18-edge, six-ownership, 8 parent-child, 2 structural, descriptor/normalized/loaded/generated/option, package, primary 65x2, corpus, inventory/rollout/mutation probes; dependency-safe `.1-.6` split; no executable/contract/fixture/capability/rollout/public semantic change; cursor 36/18/8/14+15+15/67 at 4/4 plus 39 mutations; root 8/3/3/5 at 4/3 plus 34 mutations; KM 614/4,445; memory/four doctrines/JSON/whitespace/mdBook; canonical Perl root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 613s; generated 11 MB book plus 28 KB bytecode cleanup. | PASS. Julia begins from compact-pipe drift, global seek, raw bare edges, 5/8 parent-child, 1/2 structural, descriptor v0, and generated v1; `.1-.6` are frozen without promotion. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.5.6` | ADR/KM/neutral/Perl/Rust/Dart retrieval; exact 15-role once-only consumer; native/normalized/loaded/descriptor/emitted/generated/trace/mixed/recursive/structural/removal/primary/eight-diagnostic proof; canonical and backend-driver topology; focused consumer/analyzer; Dart format 61/0, analyzer, package 271, primary 65x2, corpus 105; neutral 36/18/8/14+15+15/67 at 4/4 plus 39 mutations; public/book/capability/live lockstep; KM 613/4,432; memory/task/four doctrines/JSON/shell/whitespace/mdBook; canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613s; generated 11 MB book plus 28 KB bytecode cleanup. | PASS. Only Dart advances, parent `.9.1.5` closes, and the clean commit precedes Julia `.9.1.6`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | Loaded/normalized/generated/emitted direct/traced invocation-local reuse; portable loader/generated zero/unknown errors; plan-first ordering; unchanged descriptor/generated v1 identity; routes 57, core 79, loader 82, emitter 59; package progression through cursor 56/57; shared primary 32/65 default/POSIX; corpus 105; root governance 4/7 plus 34 mutations; public/book/live lockstep; KM 612/4,421; mdBook; memory/task/four doctrines/whitespace; canonical pre-Phase-0 stages plus retained exact Phase 0 1,031/1,031 in 611s; generated book/Python-cache cleanup. | PASS. Composed Julia mechanisms are signed off without rollout promotion; clean commit precedes cursor `.9.1.6`, then topology admission `.4.3`. |
@@ -8648,6 +8665,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.6.1` | `FUTURE-PARITY-BACKLOG.9.1.6.1 - normalize Julia cursor families and edges` | Exact typed 36/18/6 normalization, six portable diagnostics, compiled lowering, 353 focused, 2,215+known-one package, 105 corpus, and canonical signoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 - admit Dart root selection` | Exact 15-role consumer, 34 mutations, package 270, primary 65x2, Dart-only 4/7 promotion, parent closeout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection` | Exact 14-role consumer, canonical registration, 2/6 rollout, 29 mutations, parent closure, and Rust handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.5` | `FUTURE-PARITY-BACKLOG.9.1.3.5 - remove Perl cursor overrides` | Exact API/emitter/CLI removal, structural 63x2 fixture migration, 72-file inventory, Phase 0, and canonical signoff. |
@@ -8821,6 +8839,17 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Julia normalization `.9.1.6.1` makes compact `|` OR/default, retains complete bare candidates and
+  nullable authored indices as typed AST, resolves family-derived ownership against the complete declared set,
+  emits all six neutral edge diagnostics, and lowers valid edges into compiled action/blind tables. Contract-driven
+  proof is 353/353; a nested complete package sweep is 2,215 pass plus only the exact staged help mismatch, shared
+  Julia primary remains 32/65 twice, corpus 105, cursor governance 67/4+4/39, root governance 4/7+34, and KM
+  615/4,455. mdBook/four doctrines and canonical Perl root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 614
+  seconds pass. Runtime/artifact/option/admission semantics and rollout remain `.2-.6`; generated book/cache cleanup
+  passes, and only the clean `.1` commit may precede `.2` activation.
+- `2026-07-18`: Clean commit `ee8efbfc` lands behavior-free Julia cursor preflight `.9.1.6.0`; tracked/untracked
+  state is clean, the brief is zero bytes, generated book/cache artifacts are absent, and ahead is 223. Typed
+  family/bare-edge normalization `.9.1.6.1` activates task-tree-first before source or test changes.
 - `2026-07-18`: Behavior-free Julia cursor preflight `.9.1.6.0` retrieves ADR/neutral/admitted/toolbox ownership,
   measures all 36 families, 18 edges, six ownership sets, eight parent-child rows, two structural rows, and every
   descriptor/generated/option/package/primary/corpus/governance seam, then freezes `.1-.6`. The exact boundary is

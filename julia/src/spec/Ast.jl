@@ -178,8 +178,11 @@ Base.:(==)(left::RuleMode, right::RuleMode) = left.name == right.name && left.mi
 Base.hash(mode::RuleMode, h::UInt) = hash((mode.name, mode.min, mode.max), h)
 
 function is_and(mode::RuleMode)
-    return mode.name in ("And", "AndPlus", "AndBounded", "Pipe", "Single")
+    return mode.name in ("And", "AndPlus", "AndBounded", "Single")
 end
+
+rule_family(mode::RuleMode) = is_and(mode) ? "and" : "or_default"
+cursor_policy(mode::RuleMode) = is_and(mode) ? "consume" : "seek"
 
 function is_repetition(mode::RuleMode)
     return mode.name in ("Default", "Star", "Plus", "OrPlus", "AndPlus", "Optional", "OrBounded", "AndBounded")
@@ -243,12 +246,31 @@ end
 
 struct BlindEdgeBodyElementKind <: AbstractBodyElementKind
     target::String
+    index::Union{Nothing,Int}
     code::Union{Nothing,String}
     fluent_chain::Vector{FluentCall}
 end
 
-function BlindEdgeBodyElementKind(; target, code = nothing, fluent_chain = Any[])
-    return BlindEdgeBodyElementKind(target, code, FluentCall[fluent_chain...])
+function BlindEdgeBodyElementKind(; target, index = nothing, code = nothing, fluent_chain = Any[])
+    return BlindEdgeBodyElementKind(target, index, code, FluentCall[fluent_chain...])
+end
+
+struct BareEdgeTarget
+    label::String
+    index::Union{Nothing,Int}
+end
+
+BareEdgeTarget(; label, index = nothing) = BareEdgeTarget(String(label), index)
+
+"""A rule reference whose ownership is inherited from its parent rule family."""
+struct BareEdgeBodyElementKind <: AbstractBodyElementKind
+    targets::Vector{BareEdgeTarget}
+    code::Union{Nothing,String}
+    fluent_chain::Vector{FluentCall}
+end
+
+function BareEdgeBodyElementKind(; targets, code = nothing, fluent_chain = Any[])
+    return BareEdgeBodyElementKind(BareEdgeTarget[targets...], code, FluentCall[fluent_chain...])
 end
 
 struct CodeBlockBodyElementKind <: AbstractBodyElementKind
@@ -426,9 +448,20 @@ function to_json(kind::ActionEdgeBodyElementKind)
 end
 
 function to_json(kind::BlindEdgeBodyElementKind)
-    return Dict(
+    result = Dict{String,Any}(
         "kind" => "blind_edge",
         "target" => kind.target,
+        "code" => kind.code,
+        "fluent_chain" => [to_json(call) for call in kind.fluent_chain],
+    )
+    _put_if_present!(result, "index", kind.index)
+    return result
+end
+
+function to_json(kind::BareEdgeBodyElementKind)
+    return Dict{String,Any}(
+        "kind" => "bare_edge",
+        "targets" => [to_json(target) for target in kind.targets],
         "code" => kind.code,
         "fluent_chain" => [to_json(call) for call in kind.fluent_chain],
     )
@@ -442,6 +475,11 @@ to_json(kind::FluentChainBodyElementKind) = Dict("kind" => "fluent_chain", "call
 to_json(kind::ConditionalBodyElementKind) = Dict("kind" => "conditional", "word" => kind.word)
 to_json(kind::RawBodyElementKind) = Dict("kind" => "raw", "text" => kind.text)
 to_json(target::EdgeTarget) = Dict("label" => target.label, "index" => target.index)
+function to_json(target::BareEdgeTarget)
+    result = Dict{String,Any}("label" => target.label)
+    _put_if_present!(result, "index", target.index)
+    return result
+end
 to_json(call::FluentCall) = Dict("method" => call.method, "args" => call.args)
 to_json(element::BodyElement) = Dict("kind" => to_json(element.kind), "source" => element.source, "line" => element.line)
 to_json(rule::Rule) = Dict("header" => to_json(rule.header), "body" => [to_json(element) for element in rule.body])
@@ -571,6 +609,13 @@ function from_json(::Type{AbstractBodyElementKind}, json)
     elseif kind == "blind_edge"
         return BlindEdgeBodyElementKind(
             target = _ast_string(object, "target"),
+            index = _ast_optional_int(object, "index"),
+            code = _ast_optional_string(object, "code"),
+            fluent_chain = _ast_object_list(object, "fluent_chain", item -> from_json(FluentCall, item); default = Any[]),
+        )
+    elseif kind == "bare_edge"
+        return BareEdgeBodyElementKind(
+            targets = _ast_object_list(object, "targets", item -> from_json(BareEdgeTarget, item)),
             code = _ast_optional_string(object, "code"),
             fluent_chain = _ast_object_list(object, "fluent_chain", item -> from_json(FluentCall, item); default = Any[]),
         )
@@ -595,6 +640,14 @@ end
 function from_json(::Type{EdgeTarget}, json)
     object = _ast_object(json, "edge target")
     return EdgeTarget(label = _ast_string(object, "label"), index = _ast_int(object, "index"))
+end
+
+function from_json(::Type{BareEdgeTarget}, json)
+    object = _ast_object(json, "bare edge target")
+    return BareEdgeTarget(
+        label = _ast_string(object, "label"),
+        index = _ast_optional_int(object, "index"),
+    )
 end
 
 function from_json(::Type{FluentCall}, json)
