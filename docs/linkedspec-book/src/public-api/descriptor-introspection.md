@@ -5,8 +5,8 @@
 > `.9.1.3.3`, Rust `.9.1.4.4`, Dart `.9.1.5.3`, and Julia `.9.1.6.3` expose
 > `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
-> `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2 and option/CLI removal are complete. Julia
-> composed cursor admission remains `.9.1.6.6`; Lua cursor migration, recurring five-backend admission, and public
+> `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2, option/CLI removal, and composed cursor
+> admission are complete through `.9.1.6.6`; Lua cursor migration, recurring five-backend admission, and public
 > no-drift remain dependency-ordered. Independently, Julia root core publishes root-selection identity and its
 > descriptor contains no cursor-owned legacy field.
 
@@ -536,5 +536,5 @@ cursor fields.
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
 contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrated by explicit
-variant: Perl, Rust, Dart, and Julia now consume rule-local v1; generated/public cursor admission remains separately
-staged per backend.
+variant: Perl, Rust, Dart, and Julia now consume rule-local v1 and are composed-admitted; Lua generated/public
+cursor admission remains separately staged.

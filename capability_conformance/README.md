@@ -38,7 +38,7 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 66-file migration inventory and rejects 39 representative semantic, topology,
+The checker currently owns an exact 67-file migration inventory and rejects 44 representative semantic, topology,
 diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
@@ -48,8 +48,11 @@ portable-diagnostic projections. The checker requires every role marker plus the
 Rust driver topology. A separate 15-role Dart consumer composes native default/AND, normalized, loaded, descriptor,
 emitted/generated direct/trace, mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 checker locks each marker, the complete Dart test command, canonical tracked input, and optional backend-driver
-registration. `neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, and `dart_backend` are complete,
-so rollout is 4 complete / 4 pending; later legs remain dependency-ordered. The shared generated-source-v1
+registration. A separate 15-role Julia consumer composes the same normalized topology over current Julia native,
+loaded, descriptor-v1, emitted/generated-v2, trace, composition, removal, primary, and diagnostic projections.
+The checker locks its markers, complete package driver, canonical tracked input, and optional backend registration.
+`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, and `julia_backend` are complete,
+so rollout is 5 complete / 3 pending; later legs remain dependency-ordered. The shared generated-source-v1
 capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, and Julia emitters use
 v2 and Lua awaits its cursor rollout.
 
@@ -81,10 +84,10 @@ one-or-more-rule sources, reports portable zero/unknown failures, and publishes 
 advancing rollout; native/root-primary proof is exactly 32/65 twice with only the 33 cursor-owned cases remaining.
 Julia route `.4.2` proves loaded/normalized and generated/emitted direct/traced execution, low requested/effective/
 basis trace, portable loader/generated failures, and plan-first rejection through 57 assertions. Dart cursor
-admission is clean at `7aa9c578`; Julia cursor `.9.1.6.1-.5` now implements exact normalization, live execution,
-descriptor v1, generated-source v2, and public/CLI option removal without advancing rollout. Shared Julia primary
-is exact at 65/65 twice. Julia
-admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay explicit in the inventory until their owning leaves
+admission is clean at `7aa9c578`; Julia cursor `.9.1.6` now implements and composes exact normalization, live
+execution, descriptor v1, generated-source v2, public/CLI option removal, and one 15-role admission. Shared Julia
+primary is exact at 65/65 twice. Julia root admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6`
+remain pending. Current backend differences stay explicit in the inventory until their owning leaves
 land.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
@@ -93,7 +96,7 @@ structural agreement was 1/2, and descriptor/generated cursor identities were ab
 covers all 36 family spellings, all 18 edge rows, 8/8 parent-child, 2/2 structural, cursor descriptor v1, and
 generated-source v2 with contract-before-payload rejection. Public removal then deletes global engine/loader/
 corpus/primary ownership while retaining low-level matcher primitives and targeted legacy diagnostics. Package
-progression is 3,187, shared primary is 65/65 twice, corpus is 105/105, and governance is 66 / 4+4 / 39.
+progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance is 67 / 5+3 / 44.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

@@ -5049,7 +5049,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.6 - admit Dart rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6`
-  Status: `active`
+  Status: `done`
   Goal: Align Julia native/reconstructed/generated/primary behavior with ADR `0044`.
   Children: `.9.1.6.0` (preflight/split), `.9.1.6.1` (family/edge normalization), `.9.1.6.2`
     (live/loaded/reconstructed execution), `.9.1.6.3` (descriptor v1), `.9.1.6.4` (generated-source v2),
@@ -5064,8 +5064,11 @@ before implementation.
     and tracked/untracked state was clean at ahead 222. Child `.0` owns read-only retrieval, exact current-boundary
     reproduction, and the dependency-safe implementation split before any Julia cursor behavior edit. Child `.1`
     is committed at `ac7010ee` with exact family/bare-edge/diagnostic/compiled normalization. Runtime leaf `.2`
-    is committed at `290cb731`; descriptor-v1 leaf `.3` is active task-tree-first from that clean boundary.
-  Commit: `pending`
+    is committed at `290cb731`; descriptor `.3`, generated v2 `.4`, public removal `.5`, and composed admission
+    `.6` are complete. The parent closes with one exact 15-role Julia consumer, package 3,291, primary 65x2,
+    corpus 105, and neutral governance 67/5+3/44. Root admission `.9.1.1.2.4.3` follows only after the clean `.6`
+    commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.6.6 - admit Julia rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.0`
   Status: `done`
@@ -5331,7 +5334,7 @@ before implementation.
     activating `.9.1.6.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit and close the complete Julia projection of the neutral rule-local cursor contract.
   Dependencies: `.9.1.6.5`
   Acceptance: Add one omission-sensitive contract-declared 15-role Julia consumer mirroring Dart's normalized
@@ -5340,8 +5343,38 @@ before implementation.
     consumer, complete Julia driver, canonical tracked input/optional registration, roles, and mutations; advance
     only Julia; pass complete Julia/65x2/corpus/neutral/canonical proof; synchronize live/public/KM docs; close
     `.9.1.6`; and hand off root admission `.9.1.1.2.4.3` only after a clean commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-18 only after public-option removal `.9.1.6.5` landed at
+    clean commit `ecc03c59`, `git_message_brief.txt` was zero bytes, tracked/untracked state was clean at ahead 228,
+    and generated mdBook/Python-cache artifacts were absent. Exact neutral, Dart-admission, Julia constituent,
+    checker-topology, canonical-driver, rollout, and mutation retrieval precedes implementation. Retrieval confirms
+    no behavior repair: one Julia 15-role consumer plus package/canonical topology, inventory 66 -> 67, rollout
+    4+4 -> 5+3, and five omission mutations 39 -> 44 are the exact slice. The new contract-declared consumer passes
+    104/104 directly. The complete Julia driver passes 3,291 assertions, ten real-process families, and corpus
+    105/105; shared primary passes 65/65 in default and POSIX environments. The stacked-depot proof exposed and
+    repaired two gate owners that created the whole path list rather than its first writable entry; corrected
+    offline proof passes and the malformed regenerable directory is absent. Cursor/generated/logical/root/
+    capability governance, JSON, shell, Knowledge Map 621/4,512, mdBook, whitespace, memory, and all four doctrines
+    pass. Canonical local CI exits 0 after root 7+5, Perl cursor admission 288, reference primary 65x2, and Phase 0
+    1,031/1,031 in 641 seconds. Only Julia advances; no executable semantic or shared-fixture byte changes exist.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.6.6 - admit Julia rule-local cursor contract`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / AUDIT** — Follow the Knowledge Map to ADR `0044`, the neutral contract/checker, exact Dart
+    15-role admission precedent, all Julia `.1-.5` constituent owners, current driver/canonical registration,
+    rollout/inventory state, and mutation families before editing executable behavior or governance.
+  - [x] **ADD ONE COMPOSED CONSUMER** — Add one omission-sensitive Julia consumer whose exact 15 declared roles run
+    once in contract order over native default/AND, normalized, loaded, descriptor v1, emitted/generated v2
+    direct/trace, mixed, recursive, both structural replacements, static removal, primary, and eight diagnostics.
+  - [x] **REGISTER / ADVANCE JULIA ONLY** — Lock the consumer path/markers/order, complete Julia driver, canonical
+    tracked input/optional registration, governed migration inventory, and effective topology/rollout mutations;
+    promote only Julia while Lua and composed/public closeout remain pending.
+  - [x] **PROVE COMPOSITION / NO REGRESSION** — Pass the focused consumer and all constituent suites, complete Julia
+    package/process/65x2/corpus proof, neutral checker with every mutation rejected, adjacent generated/logical/root/
+    capability governance, and canonical local CI without changing executable semantics or shared fixture bytes.
+  - [x] **LOCKSTEP / CLOSEOUT** — Synchronize task/index/roadmaps/architecture/live/memory, Knowledge Map, Julia and
+    public mdBook status, changes/notes, and cleanup; close `.9.1.6` and commit before activating root admission
+    `.9.1.1.2.4.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7`
   Status: `pending`
@@ -7929,7 +7962,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 217.3 | `FUTURE-PARITY-BACKLOG.9.1.6.3` | `done` | Cursor v1, 809 focused, package 3,129+known-one, corpus 105, primary 32/65x2, governance/KM/mdBook/canonical signoff pass. |
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
-| 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `pending` | Exact composed Julia admission, rollout promotion, and parent closeout. |
+| 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `active` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
@@ -8598,8 +8631,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. Root selection is 4/7 after neutral, Perl, Rust, and Dart. Julia root preflight `.4.0`, core
-  `.4.1`, and routes `.4.2` are signed off; cursor preflight through generated v2 `.9.1.6.0-.4` are complete,
-  with `.4` awaiting only its clean commit. Option removal/admission `.5-.6` precede exact root admission `.4.3`.
+  `.4.1`, and routes `.4.2` are signed off; cursor implementation `.9.1.6.0-.5` is cleanly committed at
+  `ecc03c59`. Active composed admission `.6` precedes exact root admission `.4.3`.
   Identical
   dependency-regex slot identity remains a non-blocking separate question
   with explicit post-admission owner `.9.1.8.1`.
@@ -8615,9 +8648,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.4` are cleanly
-  committed. Public/global option removal `.5` is fully verified and awaits its prepared clean commit with no
-  shared-primary failures. Admission `.6` then precedes root admission `.4.3`.
+- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.5` are cleanly
+  committed with no shared-primary failures. Active composed admission `.6` then precedes root admission `.4.3`.
 
 ## Verification Log
 
@@ -8992,6 +9024,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Clean commit `ecc03c59` lands Julia global cursor-option removal `.9.1.6.5`; tracked/untracked state
+  is clean, the brief is zero bytes, generated book/cache artifacts are absent, and ahead is 228. Composed
+  15-role Julia cursor admission `.9.1.6.6` activates task-tree-first before exact contract/topology retrieval;
+  root admission `.9.1.1.2.4.3`, Lua, shared fixtures, and non-Julia rollout rows remain untouched.
 - `2026-07-18`: Julia public-option removal `.9.1.6.5` deletes caller-global cursor ownership from engine, loader,
   corpus, primary execution, help, and request trace while retaining exact targeted API/CLI migration failures and
   the low-level matcher primitives. The corrected two-rule selection regression uses `I` to prove selected entry;

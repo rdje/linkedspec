@@ -22,10 +22,12 @@ answers:
   - "why is the rule local cursor migration inventory 67 files"
   - "how many Dart cursor admission roles exist"
   - "what is the rule local cursor rollout after Dart admission"
+  - "how many Julia cursor admission roles exist"
+  - "what is the rule local cursor rollout after Julia admission"
 date: 2026-07-18
-status: accepted neutral contract; Perl, Rust, and Dart admitted at 4 complete / 4 pending
+status: accepted neutral contract; Perl, Rust, Dart, and Julia admitted at 5 complete / 3 pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust .9.1.4.7 adds a 15-role consumer and advances only rust_parity. Dart public removal .9.1.5.5 contracts inventory to 66 files at 3 complete / 5 pending; admission .9.1.5.6 adds a governed 15-role consumer, advances only dart_backend, and reaches 67 files, 4 complete / 4 pending, and 39 effective mutations."
+evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust .9.1.4.7 adds a 15-role consumer and advances only rust_parity. Dart .9.1.5.6 adds a governed 15-role consumer and reaches 67 files, 4 complete / 4 pending, and 39 mutations. Julia .9.1.6.6 adds its governed 15-role consumer, advances only julia_backend, retains 67 files, and reaches 5 complete / 3 pending with 44 effective mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -61,7 +63,8 @@ CLI/documentation migration reaches 68 files during `.9.1.4.5-.6`; composed admi
 count. Dart public removal `.9.1.5.5` then retires four former option-owner paths and adds its governed source-
 removal test plus the now-explicit public Dart migration guidance, producing a 66-file boundary. Dart admission
 then adds its governed consumer because that executable proof itself names the retired diagnostic surface, producing
-the current 67-file inventory. Files are partitioned
+the 67-file inventory. Julia admission retains that count because its new consumer is the governed proof path
+added by the promotion. Files are partitioned
 once, in dependency order, among `.9.1.2-.9`. An unowned
 new file or a listed file that loses every migration token fails the checker,
 so backend leaves must deliberately update the inventory as they migrate.
@@ -73,12 +76,15 @@ with Perl `.9.1.3.5`, because the mandatory local gate runs that reference suite
 twice. Shared CLI documentation and final symmetric admission remain `.9.1.8`-
 owned. See [[perl-rule-local-cursor-rollout-boundaries]].
 
-`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, and `dart_backend` are admitted in the composed rollout ledger.
+`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, and `julia_backend` are
+admitted in the composed rollout ledger.
 The Perl consumer declares 14 exact roles; the Rust consumer declares 15 native/serialized/loaded/descriptor/
 emitted/generated/trace/composition/removal/primary/diagnostic roles. Dart separately declares 15 native/normalized/
 loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic roles. The checker requires every
-marker plus each canonical/backend registration seam, and its 39 mutations reject topology, role, driver,
-inventory, or rollout drift. Julia, dual-ABI Lua, recurring five-backend admission, and public no-drift follow. Generated-
+marker plus each canonical/backend registration seam. Julia separately declares the same exact 15-role topology;
+the checker locks its complete package driver and optional canonical registration too. Its 44 mutations reject
+topology, role, driver, inventory, or rollout drift. Dual-ABI Lua, recurring five-backend admission, and public
+no-drift follow. Generated-
 source v1 remains the unmigrated-backend baseline, while the 63-case primary interface is current on Perl, Rust,
 and Dart through the current 65-case command projection.
 

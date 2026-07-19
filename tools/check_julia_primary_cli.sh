@@ -8,6 +8,11 @@ DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
 JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}"
 PRIMARY_CLI="$REPO_ROOT/julia/bin/linkedspec_julia.jl"
 
+case "$(uname -s)" in
+ MINGW*|MSYS*|CYGWIN*) WRITABLE_JULIA_DEPOT="${JULIA_DEPOT%%;*}" ;;
+ *) WRITABLE_JULIA_DEPOT="${JULIA_DEPOT%%:*}" ;;
+esac
+
 fail() {
  printf '[julia-primary] ERROR: %s\n' "$*" >&2
  exit 1
@@ -15,9 +20,10 @@ fail() {
 
 command -v "$JULIA_CMD" >/dev/null 2>&1 || fail "required command not found: $JULIA_CMD"
 command -v rg >/dev/null 2>&1 || fail "required command not found: rg"
+[[ -n "$WRITABLE_JULIA_DEPOT" ]] || fail "first Julia depot entry must not be empty"
 
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
-mkdir -p "$JULIA_DEPOT_PATH"
+mkdir -p "$WRITABLE_JULIA_DEPOT"
 
 TEMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-julia-primary.XXXXXX")
 cleanup() {

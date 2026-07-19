@@ -54,7 +54,7 @@ ROLLOUT = [
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.3"),
     ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.9.1.4"),
     ("dart_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.5"),
-    ("julia_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.6"),
+    ("julia_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.6"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.7"),
     ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.9.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.9"),
@@ -105,6 +105,28 @@ DART_BACKEND_ADMISSION = {
     "consumer_path": "dart/test/rule_local_cursor_contract_test.dart",
     "canonical_driver": "tools/run_ci_local.sh",
     "backend_driver": "tools/run_dart_local.sh",
+    "roles": [
+        "native_default_family",
+        "native_and_family",
+        "ordinary_normalized",
+        "loaded_spec",
+        "descriptor_v1",
+        "emitted_source_v2",
+        "generated_direct",
+        "generated_trace",
+        "mixed_parent_child",
+        "recursion",
+        "structural_ordered_landmarks",
+        "structural_anchored_choice",
+        "static_option_removal",
+        "primary_command",
+        "portable_diagnostics",
+    ],
+}
+JULIA_BACKEND_ADMISSION = {
+    "consumer_path": "julia/test/rule_local_cursor_contract_test.jl",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_julia_local.sh",
     "roles": [
         "native_default_family",
         "native_and_family",
@@ -301,6 +323,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "perl_reference_admission",
             "rust_parity_admission",
             "dart_backend_admission",
+            "julia_backend_admission",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -614,6 +637,45 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if backend_invocation not in dart_canonical_text:
         fail("canonical driver omits the registered Dart backend driver")
 
+    julia_admission = require_fields(
+        contract["julia_backend_admission"],
+        {"consumer_path", "canonical_driver", "backend_driver", "roles"},
+        "Julia backend admission",
+    )
+    if julia_admission != JULIA_BACKEND_ADMISSION:
+        fail("Julia backend admission topology drifted")
+    julia_consumer_path = ROOT / julia_admission["consumer_path"]
+    julia_canonical_path = ROOT / julia_admission["canonical_driver"]
+    julia_backend_path = ROOT / julia_admission["backend_driver"]
+    julia_test_driver_path = ROOT / "julia/test/runtests.jl"
+    if not all(
+        path.is_file()
+        for path in (
+            julia_consumer_path,
+            julia_canonical_path,
+            julia_backend_path,
+            julia_test_driver_path,
+        )
+    ):
+        fail("Julia backend admission consumer or driver is missing")
+    julia_consumer_text = julia_consumer_path.read_text(encoding="utf-8")
+    for role in julia_admission["roles"]:
+        marker = re.compile(rf"^function role_{re.escape(role)}\(", re.MULTILINE)
+        if len(marker.findall(julia_consumer_text)) != 1:
+            fail(f"Julia backend admission role marker drifted: {role}")
+    julia_canonical_text = julia_canonical_path.read_text(encoding="utf-8")
+    if f"require_tracked_file {julia_admission['consumer_path']}" not in julia_canonical_text:
+        fail("canonical driver omits the Julia backend admission consumer")
+    julia_backend_text = julia_backend_path.read_text(encoding="utf-8")
+    if "Pkg.test()" not in julia_backend_text:
+        fail("Julia backend driver omits the package test suite containing cursor admission")
+    julia_test_driver_text = julia_test_driver_path.read_text(encoding="utf-8")
+    if 'include("rule_local_cursor_contract_test.jl")' not in julia_test_driver_text:
+        fail("Julia package test driver omits the cursor admission consumer")
+    backend_invocation = f'bash "$REPO_ROOT/{julia_admission["backend_driver"]}"'
+    if backend_invocation not in julia_canonical_text:
+        fail("canonical driver omits the registered Julia backend driver")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -708,6 +770,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Dart admission consumer", lambda c: c["dart_backend_admission"].__setitem__("consumer_path", "missing")),
         ("Dart admission canonical driver", lambda c: c["dart_backend_admission"].__setitem__("canonical_driver", "missing")),
         ("Dart admission driver", lambda c: c["dart_backend_admission"].__setitem__("backend_driver", "missing")),
+        ("Julia admission role", lambda c: c["julia_backend_admission"]["roles"].pop()),
+        ("Julia admission consumer", lambda c: c["julia_backend_admission"].__setitem__("consumer_path", "missing")),
+        ("Julia admission canonical driver", lambda c: c["julia_backend_admission"].__setitem__("canonical_driver", "missing")),
+        ("Julia admission driver", lambda c: c["julia_backend_admission"].__setitem__("backend_driver", "missing")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -718,6 +784,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("rollout_admission", lambda c: c["rollout"][1].__setitem__("status", "pending")),
         ("Rust rollout admission", lambda c: c["rollout"][2].__setitem__("status", "pending")),
         ("Dart rollout admission", lambda c: c["rollout"][3].__setitem__("status", "pending")),
+        ("Julia rollout admission", lambda c: c["rollout"][4].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -738,6 +805,7 @@ def main() -> int:
         f"{len(contract['perl_reference_admission']['roles'])} Perl admission roles; "
         f"{len(contract['rust_parity_admission']['roles'])} Rust admission roles; "
         f"{len(contract['dart_backend_admission']['roles'])} Dart admission roles; "
+        f"{len(contract['julia_backend_admission']['roles'])} Julia admission roles; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )

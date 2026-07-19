@@ -6,7 +6,7 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 4 complete / 4 pending. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 5 complete / 3 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
@@ -37,8 +37,9 @@ contract/format 2, derive five seek and five consume policies from minimal label
 payload reconstruction with regeneration guidance. Public option removal `.5` now deletes engine state and every
 high-level engine/loader/corpus/primary override, rejects legacy API keys during `prepare_options`, removes the
 help/request-trace field, and preserves `--top-rule` while the retired flag returns targeted usage exit 2.
-Complete Julia passes 3,187 assertions, exact shared primary 65/65 in both environments, corpus 105/105, and
-neutral governance 66/4+4/39. Composed cursor admission `.6` remains before exact root admission `.4.3`. Lua fallback remains blocked by
+Complete Julia passes 3,291 assertions, exact shared primary 65/65 in both environments, corpus 105/105, and
+neutral governance 67/5+3/44. One exact 15-role consumer admits Julia and closes cursor parent `.9.1.6`; exact root
+admission `.4.3` is next. Lua fallback remains blocked by
 validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
@@ -49,7 +50,10 @@ derived policy, ownership, and ordered semantic edges with no global mode. Direc
 descriptor bytes agree. Generated source now emits v2/format 2 and executes direct, traced, and freshly loaded
 modules from family-derived policy without a serialized cursor field; old v1 artifacts are legacy and must be
 regenerated from `.spec`. Normal engine, loaded-engine, corpus, and primary callers expose no global cursor option;
-legacy dynamic keys fail deliberately rather than being accepted or ignored. Only 15-role admission remains.
+legacy dynamic keys fail deliberately rather than being accepted or ignored. One exact 15-role consumer now
+composes native, normalized, loaded, descriptor, emitted/generated, trace, mixed/recursive, structural, removal,
+primary, and diagnostic roles once; the checker locks it, the complete driver, canonical registration, and five
+new omission mutations.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization
@@ -88,7 +92,8 @@ usage error for `--parse-mode`. Composed admission `.9.1.5.6` adds one exact con
 across native, normalized, loaded, descriptor, emitted/generated, trace, mixed/recursive, structural, removal,
 primary, and portable-diagnostic projections. The complete Dart package passes 271 tests, the shared primary
 matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
-4 complete / 4 pending, and 39 rejected mutations.
+4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
+advanced the current ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

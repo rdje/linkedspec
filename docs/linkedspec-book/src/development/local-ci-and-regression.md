@@ -67,13 +67,13 @@ implicit inputs.
 
 Julia core `.9.1.1.2.4.1` improved the expanded manifest from its 31/65 preflight to 32/65 in each environment by
 closing the sole root-owned markerless compilation case. Cursor `.9.1.6.5` then removes the identical 22 help/
-usage and 11 medium-or-higher request-trace failures. Julia now passes 65/65 twice; cursor admission `.6` and root
-admission `.4.3` retain separate topology requirements rather than weakening the standard around implementation.
+usage and 11 medium-or-higher request-trace failures. Julia now passes 65/65 twice; cursor admission `.6` closes
+its separate topology requirement, while root admission `.4.3` remains next.
 
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
-not advance Julia's rollout row. Cursor implementation has since removed the 33 option/trace mismatches, but
-cursor admission `.9.1.6.6` and root topology admission `.4.3` still own their separate promotions.
+not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace
+mismatches and locked the complete cursor topology; root topology admission `.4.3` retains its separate promotion.
 
 Task dependencies preserve backend order around that root work. Dart's composed cursor admission `.9.1.5.6`
 locks one exact 15-role consumer, advances only Dart from 3/5 to 4/4, and closes `.9.1.5` after package 271,
@@ -101,8 +101,10 @@ command in `tools/run_rust_local.sh`, and that optional Rust driver's registrati
 The default canonical gate remains toolchain-independent; setting `LINKEDSPEC_RUN_RUST=1` executes the same complete
 Rust package that contains the consumer. Dart cursor admission applies the same omission-sensitive pattern: its
 15-role consumer is a tracked canonical input, `tools/run_dart_local.sh` runs the complete Dart suite containing
-it, and `LINKEDSPEC_RUN_DART=1` invokes that registered driver. The current cursor ledger is 4 complete / 4 pending
-with 67 governed migration files and 39 rejected drift mutations.
+it, and `LINKEDSPEC_RUN_DART=1` invokes that registered driver. Julia now applies the same pattern: one exact
+15-role consumer is included by the complete package driver, tracked by canonical CI, and reachable through
+`LINKEDSPEC_RUN_JULIA=1`. The current cursor ledger is 5 complete / 3 pending with 67 governed migration files and
+44 rejected drift mutations.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
@@ -276,10 +278,10 @@ accumulators/returns, recursion/progress guards, registered user functions, diag
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
 stable primary failure/trace routing, and unbounded full-manifest CLI execution. The complete package now passes
-3,187 assertions. Cursor-option removal eliminates the former 1/57 help mismatch and all 33 shared help/usage/
+3,291 assertions. Cursor-option removal eliminates the former 1/57 help mismatch and all 33 shared help/usage/
 request-trace mismatches; the independent runner passes 65/65 twice. The neutral-consuming core suite passes 79
-assertions, route proof passes 57, and the standalone complete corpus remains 105/105. This is a green Julia local
-gate claim, but not cursor/root rollout admission: their composed consumers remain separately required.
+assertions, route proof passes 57, composed cursor admission passes 104, and the standalone complete corpus remains
+105/105. Cursor rollout is admitted for Julia; root rollout still requires its separate `.4.3` topology consumer.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

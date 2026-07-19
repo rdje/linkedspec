@@ -77,10 +77,11 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > cursor override. Julia `.9.1.6.5` now removes engine/loader/corpus/primary
 > global options, rejects the retired API/CLI spellings before execution,
 > removes the help/request-trace field, and preserves `--top-rule`.
-> Admission alone remains `.9.1.6.6`.
-> Rollout is 4 complete / 4 pending, with Julia, Lua, recurring five-backend,
-> and public no-drift work dependency-ordered under `.9.1.6-.9`; the current
-> governed inventory is 66 files with 39 effective mutations.
+> Admission `.9.1.6.6` now adds one exact 15-role Julia consumer over every
+> current projection and locks its complete/canonical driver topology.
+> Rollout is 5 complete / 3 pending, with Lua, recurring five-backend, and
+> public no-drift work dependency-ordered under `.9.1.7-.9`; the current
+> governed inventory is 67 files with 44 effective mutations.
 
 ## Current rule-label surface
 
@@ -777,8 +778,8 @@ the same six portable diagnostics, normal live/loaded/reconstructed policy spend
 current. Descriptor root metadata has no global cursor field; each rule publishes family, derived policy,
 ownership, and exact semantic edge rows, and direct/normalized/loaded bytes agree. Generated-source v2 emits
 format 2 with no cursor field, derives five seek/five consume policies, rejects v1 before reconstruction, and
-requires regeneration of legacy v1 files. Option/CLI removal and composed admission remain `.9.1.6.5-.6`, so
-Julia does not yet advance the rollout row.
+requires regeneration of legacy v1 files. Option/CLI removal and one exact composed 15-role admission are current
+through `.9.1.6.6`, so Julia now advances the rollout row.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/
@@ -786,5 +787,6 @@ AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 neutral checker requires every declared role and canonical registration. Dart adds its own 15-role native/
 normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
-currently reports 36 family spellings, 18 edge cases, eight parent/child cases,
-67 migration files, 4 complete / 4 pending, and 39 rejected drift mutations.
+also requires one exact Julia consumer over the same normalized topology. It currently reports 36 family
+spellings, 18 edge cases, eight parent/child cases, 67 migration files, 5 complete / 3 pending, and 44 rejected
+drift mutations.

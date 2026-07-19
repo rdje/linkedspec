@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.6` — composition is a topology proof, not another implementation):
+  Julia's normalization, execution, descriptor, generated-v2, removal, primary, and diagnostic owners were
+  already independently green through `.1-.5`. Admission therefore adds one contract-declared orchestrator whose
+  15 role functions run exactly once in neutral order. The neutral checker validates markers, role equality,
+  tracked input, complete package reachability, optional canonical registration, and five omission mutations. A
+  missing projection can no longer hide behind package-wide green tests, while the consumer introduces no second
+  semantic path.
+
+  Complete proof discovered a driver defect only when `JULIA_DEPOT_PATH` contained a writable temporary depot
+  followed by the installed source-bearing depot. Both `tools/run_julia_local.sh` and
+  `tools/check_julia_primary_cli.sh` ran `mkdir -p` on the entire path list, so POSIX created one malformed
+  colon-bearing directory. The correct boundary is to split by the platform separator, reject an empty first
+  entry, and create only that first writable depot. After both owners were fixed and the malformed regenerable
+  directory removed, stacked offline package/process proof passes and the artifact does not recur. The durable
+  causal record is `julia-stacked-depot-driver-boundary`.
+
+  One POSIX primary probe was initially invoked with synthetic display command `linkedspec_julia-posix`; help
+  fixtures deliberately expect the public command name `linkedspec_julia`, so those byte mismatches were an
+  operator invocation error, not product drift. The invalid run was interrupted and excluded. The corrected
+  unchanged display command passes all 65 cases and is the admitted evidence.
+
+  Focused composition passes 104; complete Julia passes 3,291; ten processes, primary 65x2, and corpus 105 pass.
+  Neutral governance reaches 67/5+3/44 while only Julia advances. Root admission `.9.1.1.2.4.3` remains a separate
+  topology leaf and becomes next only after the clean cursor-admission commit.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.5` — reject compatibility; preserve only the primitive):
   Julia's high-level keyword APIs are dynamic, so deleting a named keyword alone would turn a deliberate migration
   boundary into a generic host-language error. The engine, loader, and corpus adapters instead collect remaining

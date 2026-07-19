@@ -35,8 +35,9 @@ publishes cursor v1 plus per-rule family/policy/ownership/edge facts with direct
 Generated-source `.9.1.6.4` now emits v2/format 2, derives the exact family policy, rejects v1 before payload
 reconstruction, and removes the private v1 engine. Public-option `.9.1.6.5` now removes engine/loader/corpus/
 primary global ownership, returns targeted API/CLI diagnostics, omits the help/request-trace field, and preserves
-`--top-rule`. Complete Julia is 3,187, shared primary is 65/65 twice, corpus is 105/105, and neutral governance is
-66/4+4/39. Cursor admission `.6` still precedes final root admission `.4.3`.
+`--top-rule`. Admission `.6` composes one exact 15-role Julia consumer. Complete Julia is 3,291, shared primary is
+65/65 twice, corpus is 105/105, and neutral governance is 67/5+3/44. Cursor parent `.9.1.6` is closed; final root
+admission `.4.3` is next.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
@@ -52,8 +53,9 @@ child rederives. Descriptor v1 has no descriptor-global field and projects exact
 suite passes 809. Generated v2 retains only ordered label/family rows, derives five seek and five consume policies,
 and passes focused assertions across direct, traced, accepted-subset, and fresh-loaded routes. Public removal
 leaves only low-level seek/consume matcher primitives and deliberately rejects legacy high-level options before
-execution. Package execution passes 3,187 assertions, primary is 65/65 twice, corpus is 105/105, and governance is
-66/4+4/39. Admission follows in `.6`; no rollout row advances before that composed consumer.
+execution. One exact consumer now composes all 15 governed roles. Package execution passes 3,291 assertions,
+primary is 65/65 twice, corpus is 105/105, and governance is 67/5+3/44. Julia alone advances at admission; Lua,
+recurring admission, and public no-drift remain pending.
 
 ## Completed phases
 

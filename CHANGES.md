@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.6 — admit Julia rule-local cursor contract
+
+Julia is now composed-admitted against `linkedspec-rule-local-cursor-v1`. One contract-declared consumer executes
+15 exact roles once in neutral order: native default, native AND, normalized, loaded, descriptor v1, emitted v2,
+generated direct, generated trace, mixed parent-child, recursion, ordered landmarks, anchored choice, static
+option removal, primary command, and portable diagnostics. It adds no new semantic implementation.
+
+The neutral checker locks every Julia role marker, the tracked consumer, complete Julia package driver, optional
+canonical registration, rollout row, and five new omission mutations. Only `julia_backend` advances. The migration
+ledger moves from 66 files / 4 complete + 4 pending / 39 mutations to 67 files / 5 complete + 3 pending / 44
+mutations; Lua, recurring five-backend admission, and public no-drift remain pending.
+
+Focused composition passes 104/104. The complete Julia package passes 3,291 assertions, all ten real-process
+families pass, the shared primary command passes 65/65 in default and POSIX environments, and corpus execution
+passes 105/105. Generated, capability, logical, root, doctrine, JSON, and shell governance remain green. Canonical
+local CI exits 0 after root 7+5, Perl cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 641
+seconds.
+
+Complete-driver proof also exposed a gate-only stacked-depot defect: two scripts passed an ordered
+`JULIA_DEPOT_PATH` wholesale to `mkdir -p`, creating a malformed colon-bearing directory. Both now extract and
+validate only the first writable entry (`:` on POSIX, `;` on Windows-like shells). The malformed regenerable
+artifact was removed, stacked offline proof passes, and no product semantics or shared fixture bytes changed.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.5 — remove Julia global cursor overrides
 
 Julia's public execution boundary is now rule-local. `LinkedSpecRuntimeEngine` no longer stores or accepts a

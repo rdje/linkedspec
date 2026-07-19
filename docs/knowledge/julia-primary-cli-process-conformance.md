@@ -16,7 +16,8 @@ tags: [julia, cli, process, conformance, verification, status, JULIA-BACKEND-PAR
 evidence: "JULIA-BACKEND-PARITY.7.3.2.5 adds nine real-process families; FUTURE-PARITY-BACKLOG.1.5.4.1 updates exact shared help and phase-only failures while 1,019 package assertions pass."
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 retains the nine process families while the current Julia gate reaches 1,036 package assertions and 105/105 exact corpus fixtures."
 evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 adds a tenth real-process family that proves retired --parse-mode fails at usage exit 2 before invalid source/missing input, while the former function case runs intrinsically. The complete package is 3,187, shared primary is 65x2, and corpus is 105/105."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/check_julia_primary_cli.sh && LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh"
+evidence_update_2026_07_18_cursor_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 retains all ten real-process families while the exact composed consumer advances the package to 3,291 assertions. Both Julia drivers now create only the first writable entry of a stacked depot path."
+reverify: "JULIA_PKG_OFFLINE=true LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/check_julia_primary_cli.sh && JULIA_PKG_OFFLINE=true LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh"
 ---
 
 `tools/check_julia_primary_cli.sh` is the standalone Julia primary-process
@@ -40,7 +41,7 @@ Its ten process families cover:
    remaining suffix is exact JSON including its one newline.
 
 `tools/run_julia_local.sh` delegates primary checking to this script, then runs
-the current 3,187-assertion package suite, separate corpus-runner checks, and all 105
+the current 3,291-assertion package suite, separate corpus-runner checks, and all 105
 corpus fixtures. `runtime-corpus-primary-cli` names that Julia-local surface. It
 does not claim current Perl/Rust/Dart CLI fixture identity, complete public
 capability parity, or generated-source parity; those remain global `.1.5`,
@@ -56,5 +57,6 @@ Related facts: [[julia-primary-cli-failure-trace-routing]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-local-verification-gate]], [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[julia-scoped-parity-no-drift]],
+[[julia-stacked-depot-driver-boundary]],
 [[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]],
 [[julia-global-cursor-option-removal]].

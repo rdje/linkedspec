@@ -8,14 +8,38 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.5` — Julia global cursor-option removal is complete and verified from clean
-  generated-v2 commit `20a37cd2` at ahead 227. Engine/loader/corpus/primary removal and exact API/CLI diagnostics
-  are implemented; focused 53, complete package 3,187, ten processes, shared primary 65x2, corpus 105, neutral
-  66/4+4/39, capability/KM/mdBook/doctrines all pass. Canonical local CI also passes root 7+5, cursor 288,
-  primary 65x2, and Phase 0 1,031/1,031 in 637 seconds. Generated book/cache cleanup is complete; only the
-  per-leaf commit remains, and composed admission `.6` stays excluded until the repository is clean.
+- `FUTURE-PARITY-BACKLOG.9.1.6.6` — composed Julia rule-local cursor admission is fully verified and staged for
+  the prepared clean commit from `ecc03c59` at ahead 228. No pivot occurs until commit/clean verification; root
+  admission `.9.1.1.2.4.3` is the next task-tree activation afterward.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.6 — admit Julia rule-local cursor contract**
+  (VERIFIED; prepared commit pending).
+
+  **Result:** One exact contract-declared 15-role consumer composes native, normalized, loaded, descriptor,
+  emitted/generated, trace, mixed/recursive, structural, removal, primary, and diagnostic projections once. Only
+  Julia advances; the cursor parent closes at neutral 67 files / 5 complete + 3 pending / 44 mutations.
+
+  **Proof:** Focused 104, package 3,291, ten real-process families, primary 65x2, corpus 105, generated/capability
+  80/0/0, logical 8/0, root 4/7+34, KM 621/4,512, mdBook/four doctrines, and canonical root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 641 seconds. Stacked-depot gate repair is verified offline with no
+  malformed artifact recurrence.
+
+  **Next:** Commit and verify clean, then activate exact Julia root admission `.9.1.1.2.4.3` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.5 — remove Julia global cursor overrides**
+  (DONE at clean commit `ecc03c59`).
+
+  **Result:** Engine, loaded-engine, corpus, and primary construction expose no caller-global cursor policy.
+  Retired snake/camel API keys fail during `prepare_options`; retired `--parse-mode` returns targeted usage exit 2
+  and is absent from help/request trace. Low-level matcher primitives and `--top-rule` precedence remain exact.
+
+  **Proof:** Focused removal 53, package 3,187, ten real-process families, shared primary 65x2, corpus 105,
+  neutral 66/4+4/39, generated/capability 80/0/0, KM 619/4,498, mdBook/four doctrines, and canonical root 7+5,
+  cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 637 seconds. Generated book/cache cleanup passes.
+
+  **Next:** Composed 15-role Julia cursor admission `.9.1.6.6` is active task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.4 — emit Julia generated-source v2**
   (DONE at clean commit `20a37cd2`).
 

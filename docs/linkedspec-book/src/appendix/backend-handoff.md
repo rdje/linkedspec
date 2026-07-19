@@ -2058,8 +2058,8 @@ primary command omits the option and request-trace field, while retired `--parse
 exact structural-migration usage error. One exact 15-role consumer now composes native, normalized, loaded,
 descriptor, emitted/generated, trace, mixed/recursive, structural, removal, primary, and all portable diagnostic
 roles once. Complete Dart cursor proof is 271 package tests, the current 65-case primary manifest in both
-environments, and 105/105 corpus fixtures. Neutral governance is 67 files, 4 complete / 4 pending, and 39
-mutations; parent `.9.1.5` is closed and Julia follows the clean admission commit.
+environments, and 105/105 corpus fixtures. Neutral governance was 67 files, 4 complete / 4 pending, and 39
+mutations at Dart admission; parent `.9.1.5` is closed.
 
 Julia's first cursor-convergence slice is now current at the typed frontend/compiler boundary. `RuleMode("Pipe")`
 is OR/default rather than AND, while compact `&` remains AND; `rule_family(...)` and `cursor_policy(...)` expose
@@ -2082,9 +2082,11 @@ policies, rejects v1 before payload reconstruction, and removes the private v1 a
 `.9.1.6.5` now removes engine state plus engine/loader/corpus/primary overrides. Legacy dynamic API spellings fail
 before input/user code with `prepare_options/parse_mode_override_removed`; the primary flag fails at usage exit 2,
 help and request trace omit the field, and `--top-rule` remains independent. Low-level seek/consume matcher
-primitives remain. Complete Julia passes 3,187 package assertions, the ten-family real-process checker, the shared
-65-case primary manifest twice, and 105/105 corpus fixtures. Neutral governance is 66 files, 4 complete / 4
-pending, and 39 mutations. Admission alone advances the rollout in `.9.1.6.6`.
+primitives remain. One exact 15-role consumer now composes native, normalized, loaded, descriptor, emitted/
+generated, trace, mixed/recursive, structural, removal, primary, and diagnostic roles once. Complete Julia passes
+3,291 package assertions, the ten-family real-process checker, the shared 65-case primary manifest twice, and
+105/105 corpus fixtures. Neutral governance is 67 files, 5 complete / 3 pending, and 44 mutations. Cursor parent
+`.9.1.6` is closed.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

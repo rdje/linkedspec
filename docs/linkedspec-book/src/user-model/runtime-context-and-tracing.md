@@ -458,8 +458,8 @@ selector, effective rule, and basis; one exact 15-role consumer admits the compl
 Julia native, loaded, normalized-JSON, generated, and independently emitted routes reuse one resolver too. Low
 `julia_runtime:entry_rule_selection` decisions record requested selector, effective rule, and basis; failures use
 `<none>` effective/basis plus portable stage/code. Loader and generated wrappers preserve zero/unknown identities
-after generated-plan validation. Julia cursor-option removal is current through `.9.1.6.5`, while topology
-admission waits for `.9.1.6.6`; Lua still requires a marker, so markerless behavior is not yet uniformly admitted.
+after generated-plan validation. Julia cursor-option removal and its exact 15-role topology admission are current
+through `.9.1.6.6`; Lua still requires a marker, so markerless behavior is not yet uniformly admitted.
 Cursor policy comes from each authored rule family. Perl, Rust, Dart, and Julia reject the retired `--parse-mode`
 flag; Lua's later rollout leaf owns removal.
 

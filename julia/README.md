@@ -18,8 +18,9 @@ Current global rollout is intentionally ahead of this historical local milestone
 the first authored marker, or the first authored rule from one compiled-state owner before runtime context or user
 code. Portable zero/unknown failures, strict authored-edge behavior, and immutable descriptor root identity are
 locked by a neutral-consuming focused suite. The root-core leaf initially reached 32/65 in both environments with
-33 cursor-owned failures; cursor option removal has since advanced the unchanged manifest to 65/65 twice and the
-complete package to 3,187/3,187. Standalone corpus execution remains 105/105. Composed root routes `.4.2`
+33 cursor-owned failures; cursor option removal has since advanced the unchanged manifest to 65/65 twice.
+Composed cursor admission advances the complete package to 3,291/3,291. Standalone corpus execution remains
+105/105. Composed root routes `.4.2`
 now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
 same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
 zero/unknown identities, and plan validation remains first. Cursor generated-source `.9.1.6.4` now emits
@@ -27,15 +28,17 @@ contract-v2/format 2 with the same minimal label/family plan, derives the exact 
 rejects v1 before payload reconstruction, and removes the private v1 forced-seek engine. Dart cursor admission is
 cleanly committed at `7aa9c578`, satisfying Julia's final cursor dependency. Public cursor-option removal `.5`
 now removes engine/loader/corpus/primary global state, rejects legacy API/CLI spellings before execution, omits the
-help/request-trace field, and preserves `--top-rule`. Complete Julia is 3,187, shared primary is 65/65 twice, and
-corpus is 105/105. Composed cursor admission `.6` and exact root admission `.4.3` remain, so rollout stays 4/7.
+help/request-trace field, and preserves `--top-rule`. Admission `.6` adds one exact contract-declared 15-role
+consumer and locks the complete/canonical driver topology. Complete Julia is 3,291, shared primary is 65/65 twice,
+corpus is 105/105, and neutral cursor rollout is 5 complete / 3 pending with 67 files and 44 mutations. Exact root
+admission `.4.3` is next, while root rollout stays 4/7.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
 was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal
-execution `.2`, descriptor v1 `.3`, generated v2 `.4`, and public option removal `.5` have now corrected their
-owned seams. Shared primary is 65/65 twice, the package passes all 3,187 assertions, and corpus stays 105/105;
-composed admission remains `.6`.
+execution `.2`, descriptor v1 `.3`, generated v2 `.4`, and public option removal `.5` corrected their owned seams.
+One exact 15-role consumer closes composed admission `.6`. Shared primary is 65/65 twice, the package passes all
+3,291 assertions, and corpus stays 105/105.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -75,9 +78,9 @@ core gate includes it only when explicitly requested:
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
-The complete driver is now expected to pass. Use the exact shared runner to verify 65/65 in both environments and
-the standalone corpus command to verify 105/105; cursor/root rollout still waits for their separate topology
-admission leaves. The focused route suite is:
+The complete driver is expected to pass. Use the exact shared runner to verify 65/65 in both environments and the
+standalone corpus command to verify 105/105. Cursor topology is admitted; root topology still waits for `.4.3`.
+The focused route suite is:
 
 ```bash
 JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
@@ -88,8 +91,10 @@ JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
 It passes 57 assertions, including a fresh isolated generated module.
 
 Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
-`LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot. Without a depot override, the script
-respects `JULIA_DEPOT_PATH` or uses a platform temp directory outside the repository.
+`LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot or ordered depot list. Without a depot
+override, the script respects `JULIA_DEPOT_PATH` or uses a platform temp directory outside the repository. For a
+stacked path, both repository drivers create only the first entry (`:` separator on POSIX, `;` on Windows-like
+shells); that first entry must be nonempty and writable.
 The focused gate prints the resolved depot. Under disk pressure, remove only that depot's regenerable `compiled/`
 subdirectory after confirming no Julia process is using it; preserve packages, registries, environments, and
 artifacts.
@@ -104,7 +109,9 @@ JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
 ```
 
 The first entry owns new cache writes; the second supplies already-installed package sources. Do not use a lone
-compiled-only depot and do not delete the source-bearing package depot as cache cleanup.
+compiled-only depot and do not delete the source-bearing package depot as cache cleanup. Add
+`JULIA_PKG_OFFLINE=true` when the installed depot already contains every dependency and network access must not be
+attempted.
 
 Direct commands from the repository root:
 
